@@ -1,8 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 
-const Home: React.FC = () => {
-  return (
+const Home: React.FC = () => (
     <div>
       <Head>
         <title>Kassandra</title>
@@ -13,6 +12,5 @@ const Home: React.FC = () => {
       </main>
     </div>
   )
-}
 
 export default Home
