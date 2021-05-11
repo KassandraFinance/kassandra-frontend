@@ -41,6 +41,10 @@ body {
   -webkit-font-smoothing: antialiased !important;
 }
 
+img {
+  max-width: 100%;
+}
+
 ul,
 ol {
   list-style: none;

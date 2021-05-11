@@ -14,6 +14,14 @@ const Home = () => (
     </Head>
     <main className={styles.container}>
       <Header />
+      <section className={styles.hero}>
+        <div>
+          <h1>Kassandra DAO</h1>
+          <h3>The decentralized autonomous organization that governs tokenized data-driven investment funds.</h3>
+          <button type="button">View The $HEIM Index</button>
+        </div>
+        <img src="assets/kassandra.png" alt="" />
+      </section>
     </main>
   </div>
   )
