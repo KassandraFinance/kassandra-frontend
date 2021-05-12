@@ -17,10 +17,16 @@ const Home = () => (
       <section className={styles.hero}>
         <div>
           <h1>Kassandra DAO</h1>
+          <div className={styles['h3-desktop']}>
+            <h3>The decentralized autonomous organization that governs tokenized data-driven investment funds.</h3>
+            <button type="button">View The $HEIM Index</button>
+          </div>
+        </div>
+        <img src="assets/kassandra-500.svg" alt="" />
+        <div className={styles['h3-mobile']}>
           <h3>The decentralized autonomous organization that governs tokenized data-driven investment funds.</h3>
           <button type="button">View The $HEIM Index</button>
         </div>
-        <img src="assets/kassandra.png" alt="" />
       </section>
     </main>
   </div>
