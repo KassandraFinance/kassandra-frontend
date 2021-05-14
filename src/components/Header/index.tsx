@@ -5,7 +5,8 @@ import styles from './header.module.scss'
 
 const Header = () => (
   <header className={styles.header}>
-    <img src="assets/logo-header.svg" alt="" />
+    <img src="assets/logo-header.svg" alt="" className={styles['logo-header']} />
+    <img src="assets/logo-64.svg" alt="" className={styles['logo-64']} />
     <ul>
       <li><Link href="products" >Products</Link></li>
       <li><Link href="farm" >Farm</Link></li>

@@ -4,10 +4,24 @@
   align-items: center;
 
   padding: 32px 0;
+  .logo-header {
+    @media (max-width: 600px) {
+      display: none;
+    }
+  }
+  .logo-64 {
+    width: 50px;
+    @media (min-width: 601px) {
+      display: none;
+    }
+  }
   ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media (max-width: 770px) {
+      display: none;
+    }
     a {
       color: #fff;
       font-size: 16px;
