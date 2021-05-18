@@ -78,6 +78,16 @@ const Home = () => (
           </div>
         </div>
       </section>
+      <section className={styles.supporters}>
+        <h1>Meet our partners and supporters</h1>
+        <p>Kassandra is built from a collaborative effort</p>
+        <div className={styles['grid-supporters']}>
+          <img src="assets/heimdall.svg" alt="" />
+          <img src="assets/lemonade.svg" alt="" />
+          <img src="assets/jigstack.svg" alt="" />
+          <img src="assets/api3.svg" alt="" />
+        </div>
+      </section>
     </main>
   </div>
   )
