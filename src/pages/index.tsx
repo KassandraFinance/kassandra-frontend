@@ -43,6 +43,26 @@ const Home = () => (
         <img className={styles['more-icon']} src="assets/more-icon.svg" alt="" />
         <p className={styles['more-text']}>More coming soon</p>
       </section>
+      <section className={styles.token}>
+        <h1>Be part of the Kassandra ecosystem with $KACY </h1>
+        <p>Take the lead and join the first decentralized fund manager through our decentralized governance protocol</p>
+        <div className={styles['grid-details']}>
+          <img className={styles['img-token']} src="assets/token.svg" alt="" />
+          <img className={styles['img-token-96']} src="assets/token-96.svg" alt="" />
+          <div>
+            <h3>The $KACY Token</h3>
+            <p>The protocol governance token responsible for:</p>
+            {/* <p>It is the protocol governance token, and is responsible for:</p> */}
+            <ul>
+              <li>Approving code changes and updates </li>
+              <li>Deploying new investment products</li>
+              <li>Curating whitelists for investable assets</li>
+              <li>Adjusting parameters and fees</li>
+            </ul>
+            <button type="button">Join the $KACY community</button>
+          </div>
+        </div>
+      </section>
     </main>
   </div>
   )
