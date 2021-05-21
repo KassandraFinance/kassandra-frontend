@@ -129,10 +129,64 @@
   .heim-container {
     border: none;
     border-radius: 50px;
-    box-shadow: 0px 0px 30px 8px rgba(255,255,255,0.72) inset;
-    // box-shadow: -60px 57px 46px -26px rgba(255,255,255,0.72) inset;
+    box-shadow:
+      inset 0px 48.9702px 70.3162px -45.2033px rgba(255, 255, 255, 0.7),
+      inset 0px 8.78952px 13.8121px -5.02258px rgba(255, 255, 255, 0.5),
+      inset 0px -102.963px 85.3839px -80.3614px rgba(96, 68, 145, 0.3),
+      inset 0px 123.053px 125.565px -60.271px rgba(202, 172, 255, 0.3), inset 0px 5.02258px 22.6016px rgba(154, 146, 210, 0.3),
+      inset 0px 1.25565px 50.2258px rgba(227, 222, 255, 0.2);
+
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 380px auto;
+    justify-items: center;
+
+    padding: 40px 16px;
+    @media (max-width: 880px) {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+  .heim-grid-left {
+    text-align: left;
+    h3 {
+      font-size: 36px;
+      font-weight: 400;
+    }
+    p {
+      font-size: 24px;
+      margin: 16px 0;
+      text-align: left;
+    }
+    .first-paragraph {
+      font-weight: 300;
+    }
+    .second-paragraph {
+      font-weight: 400;
+    }
+    @media (max-width: 960px) {
+      h3 {
+        font-size: 28px;
+      }
+      p {
+        font-size: 18px;
+      }
+    }
+    @media (max-width: 880px) {
+      h3 {
+        font-size: 32px;
+      }
+      p {
+        font-size: 22px;
+      }
+    }
+    @media (max-width: 540px) {
+      h3 {
+        font-size: 20px;
+      }
+      p {
+        font-size: 16px;
+      }
+    }
   }
   .more-icon {
     display: block;

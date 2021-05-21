@@ -34,11 +34,11 @@ const Home = () => (
         <h1>Products</h1>
         <p>Tokens backed by a basket of assets, managed by autonomous strategies withdata from external data providers</p>
         <div className={styles['heim-container']}>
-          <div>gráfico</div>
-          <div >
+          <img src="assets/logo-heim.svg" alt="" />
+          <div className={styles['heim-grid-left']}>
             <h3>$HEIM Socal Score</h3>
-            <p>The Social Index $HEIM reflects the performance of a portfolio selected from the most socially active cryptocurrencies in the past 30 days, using Heimdall Social Score data.</p>
-            <p>$HEIM offers an easy exposure to the hottest cryptocurrencies in the market.</p>
+            <p className={styles['first-paragraph']}>The Social Index $HEIM reflects the performance of a portfolio selected from the most socially active cryptocurrencies in the past 30 days, using Heimdall Social Score data.</p>
+            <p className={styles['second-paragraph']}>$HEIM offers an easy exposure to the hottest cryptocurrencies in the market.</p>
           </div>
         </div>
         <img className={styles['more-icon']} src="assets/more-icon.svg" alt="" />
