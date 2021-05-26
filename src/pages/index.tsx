@@ -21,13 +21,13 @@ const Home = () => (
           <h1>Kassandra DAO</h1>
           <div className={styles['h3-desktop']}>
             <h3>The decentralized autonomous organization that governs tokenized data-driven investment funds.</h3>
-            <button type="button">View The $HEIM Index</button>
+            <a href="https://twitter.com/kassandra_dao" target="_blank" rel="noopener noreferrer">Coming soon...</a>
           </div>
         </div>
         <img src="assets/kassandra-600.svg" alt=""/>
         <div className={styles['h3-mobile']}>
           <h3>The decentralized autonomous organization that governs tokenized data-driven investment funds.</h3>
-          <button type="button">View The $HEIM Index</button>
+          <a href="https://twitter.com/kassandra_dao" target="_blank" rel="noopener noreferrer">Coming soon...</a>
         </div>
       </section>
       <section className={styles.products}>
@@ -81,7 +81,7 @@ const Home = () => (
               <li>Curating whitelists for investable assets</li>
               <li>Adjusting parameters and fees</li>
             </ul>
-            <button type="button">Join the $KACY community</button>
+            <a href="https://twitter.com/kassandra_dao" target="_blank" rel="noopener noreferrer">Coming soon...</a>
           </div>
         </div>
       </section>

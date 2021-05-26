@@ -37,7 +37,7 @@
     height: calc(100vh - 120px);
   }
   @media (max-width: 370px) {
-    height: calc(100vh - 70px);
+    height: calc(100vh - 160px);
   }
   h1 {
     font-size: 104px;
@@ -60,6 +60,7 @@
     }
     @media (max-width: 420px) {
       font-size: 36px;
+      margin-bottom: 0;
     }
   }
   h3 {
@@ -79,7 +80,6 @@
     @media (max-width: 420px) {
       font-size: 20px;
       max-width: 360px;
-      margin: 16px 0;
     }
   }
   .h3-desktop {
@@ -90,6 +90,10 @@
   .h3-mobile {
     text-align: center;
     margin: 0 auto;
+    h3 {
+      margin: 8px 0 32px;
+      font-size: 18px;
+    }
     @media (min-width: 771px) {
       display: none;
     }
@@ -110,14 +114,16 @@
       max-width: 300px;
     }
   }
-  button {
+  a {
     background: linear-gradient(264.12deg, #020887 -197.65%, #26DBDB 272.42%);
     border: none;
     border-radius: 6px;
-    color: #fff;
+    color: #fcfcfc;
+    text-decoration: none;
+    font-size: 20px;
 
-    height: 48px;
-    padding: 8px 32px;
+    height: 52px;
+    padding: 12px 32px;
     cursor: pointer;
   }
 }
@@ -435,14 +441,16 @@
           font-size: 15px;
         }
       }
-      button {
-        background: linear-gradient(86.18deg, #26DBDB -88.4%, #020887 145%);
+      a {
+        background: linear-gradient(264.12deg, #020887 -197.65%, #26DBDB 272.42%);
         border: none;
         border-radius: 6px;
-        color: #fff;
+        color: #fcfcfc;
+        text-decoration: none;
+        font-size: 20px;
 
-        height: 48px;
-        padding: 8px 32px;
+        height: 52px;
+        padding: 12px 32px;
         cursor: pointer;
         @media (max-width: 1160px) {
           display: block;
