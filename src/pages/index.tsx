@@ -32,7 +32,7 @@ const Home = () => (
       </section>
       <section className={styles.products}>
         <h1>Products</h1>
-        <p>Tokens backed by a basket of assets, managed by autonomous strategies withdata from external data providers</p>
+        <p>Tokens backed by a basket of assets, managed by autonomous strategies with data from external data providers</p>
         <div className={styles['heim-container']}>
           <img src="assets/logo-heim.svg" alt="" />
           <div className={styles['heim-grid-left']}>
