@@ -28,9 +28,6 @@
   grid-template-columns: 1fr 1fr;
   justify-content: space-between;
   align-items: center;
-  @media (max-width: 960px) {
-    // height: 440px;
-  }
   @media (max-width: 770px) {
     display: flex;
     flex-direction: column;
@@ -461,9 +458,15 @@
 }
 
 .kassandra-success {
-  padding: 80px 0 160px;
+  padding: 80px 0 200px;
   @media (max-width: 1000px) {
     padding: 80px 0;
+  }
+  @media (min-width: 1880px) {
+    padding: 80px 0 240px;
+  }
+  @media (min-width: 2200px) {
+    padding: 80px 0 320px;
   }
   h1 {
     font-size: 44px;
@@ -492,7 +495,6 @@
   ul {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    // gap: 40px;
     text-align: center;
     justify-items: center;
     li {
@@ -510,6 +512,8 @@
     }
   }
   .group-success-desktop {
+    display: block;
+    margin: 0 auto;
     @media (max-width: 1100px) {
       display: none;
     }
@@ -531,8 +535,17 @@
     height: 200px;
     position: absolute;
     left: 0;
-    @media (min-width: 1600px) {
+    @media (min-width: 1400px) {
+      margin-top: -80px;
       height: 280px;
+    }
+    @media (min-width: 1880px) {
+      margin-top: -60px;
+      height: 340px;
+    }
+    @media (min-width: 2200px) {
+      margin-top: -100px;
+      height: 400px;
     }
     @media (max-width: 1000px) {
       height: 160px;

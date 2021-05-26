@@ -91,20 +91,6 @@ const Home = () => (
           benefit directly and indirectly from the investment products
           deployed on Kassandra Protocol</p>
         <img className={styles['group-success-desktop']} src="assets/group-success.svg" alt="" />
-        <ul className={styles['group-success-desktop']}>
-          <li>
-            <h3>$KACY Holding Rule</h3>
-            <p>To flow value to the $KACY token holders, every Kassandra investment product must hold at least 5% of the $KACY token as part of the portfolio. This ensures that the success of the products will result in the growth of the $KACY token value.</p>
-          </li>
-          <li>
-            <h3>Redeem Fee</h3>
-            <p>A 3% fee is charged whenever investment tokens are redeemed. The fees collected this way are under total governance control and can be used for the purchase and subsequent burn of the $KACY token.</p>
-          </li>
-          <li>
-            <h3>Vote Lock</h3>
-            <p>When voting in governance proposals $KACY holders may choose to lock their token for different time periods and earn more voting power, thus making $KACY more scarce.</p>
-          </li>
-        </ul>
         <img className={styles['group-success-mobile']} src="assets/group-success-mobile.svg" alt="" />
       </section>
       <section className={styles['kassandra-architecture']}>
