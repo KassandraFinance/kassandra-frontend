@@ -29,5 +29,36 @@
 
       margin: 0 16px;
     }
+    button {
+      border: none;
+      background-color: transparent;
+      color: #666;
+      font-size: 16px;
+      text-decoration: none;
+
+      margin: 0 16px;
+      cursor: pointer;
+      position: relative;
+      outline: none;
+      &:hover {
+        &::after {
+          content: 'Coming soon...';
+          position: absolute;
+          background-color: #eee;
+          color: #6C3167;
+          margin-top: -36px;
+          margin-left: -50px;
+          width: 140px;
+          padding: 4px;
+          border-radius: 4px;
+          box-shadow:
+            inset 0px 48.9702px 70.3162px -.1px rgba(255, 255, 255, 0.7),
+            inset 0px 8.78952px 13.8121px -.1px rgba(255, 255, 255, 0.5),
+            inset 0px -102.963px 85.3839px -.1px rgba(96, 68, 145, 0.3),
+            inset 0px 123.053px 125.565px -.5px rgba(202, 172, 255, 0.3), inset 0px 5.02258px 22.6016px rgba(154, 146, 210, 0.3),
+            inset 0px 1.25565px 50.2258px rgba(227, 222, 255, 0.2);
+        }
+      }
+    }
   }
 }

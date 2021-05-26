@@ -9,10 +9,26 @@ const Footer = () => (
         <div className={styles['grid-left']}>
           <img src="assets/kassandra-footer.svg" alt="" />
           <ul>
-            <li><Link href="/#"><img src="assets/discord-icon.svg" alt="" /></Link></li>
-            <li><Link href="/#"><img src="assets/telegram-icon.svg" alt="" /></Link></li>
-            <li><Link href="/#"><img src="assets/github-icon.svg" alt="" /></Link></li>
-            <li><Link href="/#"><img src="assets/twitter-icon.svg" alt="" /></Link></li>
+            <li>
+              <a href="https://twitter.com/kassandra_dao" target="_blank" rel="noopener noreferrer">
+                <img src="assets/discord-icon.svg" alt="" />
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/kassandra_dao" target="_blank" rel="noopener noreferrer">
+                <img src="assets/telegram-icon.svg" alt="" />
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/KassandraFinance" target="_blank" rel="noopener noreferrer">
+                <img src="assets/github-icon.svg" alt="" />
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/kassandra_dao" target="_blank" rel="noopener noreferrer">
+                <img src="assets/twitter-icon.svg" alt="" />
+              </a>
+            </li>
           </ul>
           <span>© 2021-2021 Kassandra.</span>
         </div>
