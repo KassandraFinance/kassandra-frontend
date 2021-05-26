@@ -112,10 +112,18 @@ const Home = () => (
         <h1>Meet our partners and supporters</h1>
         <p>Kassandra is built from a collaborative effort</p>
         <div className={styles['grid-supporters']}>
-          <img src="assets/heimdall.svg" alt="" />
-          <img src="assets/lemonade.svg" alt="" />
-          <img src="assets/jigstack.svg" alt="" />
-          <img src="assets/api3.svg" alt="" />
+          <a href="http://heimdall.land" target="_blank" rel="noopener noreferrer">
+            <img src="assets/heimdall.svg" alt="" />
+          </a>
+          <a href="https://api3.org/" target="_blank" rel="noopener noreferrer">
+            <img src="assets/api3.webp" alt="" style={{maxWidth: '100px'}} />
+          </a>
+          <a href="https://lemonade.finance/" target="_blank" rel="noopener noreferrer">
+            <img src="assets/lemonade.svg" alt="" />
+          </a>
+          <a href="https://jigstack.org/" target="_blank" rel="noopener noreferrer">
+            <img src="assets/jigstack.svg" alt="" />
+          </a>
         </div>
       </section>
     </main>
