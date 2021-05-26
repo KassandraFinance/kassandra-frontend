@@ -24,7 +24,7 @@ const Home = () => (
             <button type="button">View The $HEIM Index</button>
           </div>
         </div>
-        <img src="assets/kassandra-500.svg" alt="" />
+        <img src="assets/kassandra-600.svg" alt=""/>
         <div className={styles['h3-mobile']}>
           <h3>The decentralized autonomous organization that governs tokenized data-driven investment funds.</h3>
           <button type="button">View The $HEIM Index</button>
