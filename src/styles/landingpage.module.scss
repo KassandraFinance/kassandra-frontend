@@ -467,9 +467,6 @@
 
 .kassandra-success {
   padding: 80px 0 200px;
-  @media (max-width: 1000px) {
-    padding: 80px 0;
-  }
   @media (min-width: 1880px) {
     padding: 80px 0 240px;
   }
@@ -541,22 +538,27 @@
     max-width: 100%;
     width: 100vw;
     height: 200px;
+    margin-top: 60px;
+
     position: absolute;
     left: 0;
     @media (min-width: 1400px) {
-      margin-top: -80px;
+      margin-top: 20px;
       height: 280px;
     }
     @media (min-width: 1880px) {
-      margin-top: -60px;
-      height: 340px;
+      margin-top: 60px;
     }
     @media (min-width: 2200px) {
-      margin-top: -100px;
-      height: 400px;
+      margin-top: 120px;
+      height: 320px;
+    }
+    @media (min-width: 2400px) {
+      margin-top: 100px;
+      height: 360px;
     }
     @media (max-width: 1000px) {
-      height: 160px;
+      height: 200px;
     }
     @media (max-width: 540px) {
       height: 120px;
