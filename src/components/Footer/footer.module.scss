@@ -2,17 +2,20 @@
   background-color: #2F2333;
   color: #fcfcfc;
   padding: 40px 0;
-  @media (max-width: 1200px) {
-    padding: 40px;
-  }
 }
 
 .container {
   display: flex;
   justify-content: space-between;
-
-  max-width: 1216px;
+  
   margin: 0 auto;
+  padding: 0 32px;
+  @media (min-width: 1600px) {
+    max-width: 1580px;
+  }
+  @media (min-width: 1440px) {
+    padding: 0 80px;
+  }
   @media (max-width: 660px) {
     flex-direction: column-reverse;
   }
