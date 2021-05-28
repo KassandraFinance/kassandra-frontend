@@ -36,7 +36,7 @@ const Home = () => (
         <div className={styles['heim-container']}>
           <img src="assets/logo-heim.svg" alt="" />
           <div className={styles['heim-grid-left']}>
-            <h3>$HEIM Socal Score</h3>
+            <h3>Top Social Index</h3>
             <p className={styles['first-paragraph']}>The Social Index $HEIM reflects the performance of a portfolio selected from the most socially active cryptocurrencies in the past 30 days, using Heimdall Social Score data.</p>
             <p className={styles['second-paragraph']}>$HEIM offers an easy exposure to the hottest cryptocurrencies in the market.</p>
           </div>
