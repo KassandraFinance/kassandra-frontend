@@ -1,0 +1,13 @@
+.background-page {
+  background: linear-gradient(90deg, #200A1B 0%, #000000 50%);
+}
+
+.container {
+  color: #FCFCFC;
+
+  margin: 0 auto;
+  padding: 0 32px;
+  @media (min-width: 1600px) {
+    max-width: 1520px;
+  }
+}
