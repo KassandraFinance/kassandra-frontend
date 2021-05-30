@@ -33,7 +33,7 @@ const DropdownProducts = () => {
             top: `${positionBtnProducts['y']}px`
           }}
         >
-          <li>
+          <li className={styles['anime-top']}>
             <a href="products/heim">Heim Index</a>
           </li>
         </ul>
