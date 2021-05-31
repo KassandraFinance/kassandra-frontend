@@ -1,10 +1,13 @@
 import React from "react"
+import { useRouter } from 'next/router'
 
 import styles from './dropdown.module.scss'
 
 const DropdownProducts = () => {
   const [showProducts, setShowProducts] = React.useState(false);
   const [positionBtnProducts, setPositionBtnProducts] = React.useState({})
+
+  const { route } = useRouter()
 
   function handleProductsPosition(e) {
     const position = e.target.getClientRects()
@@ -16,7 +19,10 @@ const DropdownProducts = () => {
 
   return (
     <>
-      <div className={styles['btn-products']} onClick={(e) => {
+      <div 
+        id={route === '/products' && styles['link-selected']}
+        className={styles['btn-products']} 
+        onClick={(e) => {
           setShowProducts(!showProducts)
           handleProductsPosition(e)
         }
@@ -34,7 +40,7 @@ const DropdownProducts = () => {
           }}
         >
           <li className={styles['anime-top']}>
-            <a href="products/heim">Heim Index</a>
+            <a href="products">Heim Index</a>
           </li>
         </ul>
       </div>

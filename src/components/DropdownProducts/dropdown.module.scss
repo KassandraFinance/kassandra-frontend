@@ -23,9 +23,25 @@
   font-size: 16px;
   text-decoration: none;
   cursor: pointer;
+  margin: 0 16px;
 
   img {
-    margin-left: 8px;
+    margin-left: 16px;
+  }
+}
+
+#link-selected {
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    margin-top: 24px;
+    margin-left: -8px;
+    width: 108px;
+    height: 2px;
+    background-color: #26DBDB;
+    border-radius: 1px;
+    box-shadow: 1px 1px 4px #26DBDB;
   }
 }
 
