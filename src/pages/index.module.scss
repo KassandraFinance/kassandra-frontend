@@ -8,10 +8,10 @@
   @media (max-width: 770px) {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: calc(100vh - 180px);
   }
   @media (max-width: 600px) {
-    height: calc(100vh - 120px);
+    height: calc(100vh - 140px);
   }
   @media (max-width: 370px) {
     height: calc(100vh - 160px);
@@ -76,9 +76,10 @@
     }
   }
   img {
+    max-width: 560px;
+
     @media (min-width: 1440px) {
-      margin-left: auto;
-      text-align: right;
+      max-width: 100%;
     }
     @media (max-width: 1240px) {
       max-width: 100%;
