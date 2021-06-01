@@ -1,0 +1,44 @@
+.select-operator {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  input {
+    display: none;
+  }
+
+  label {
+    border: 1px solid #26DBDB;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    text-transform: capitalize;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // padding: 8px 20px;
+    cursor: pointer;
+
+    height: 40px;
+    @media (max-width: 375px) {
+      font-size: 13px;
+      padding: 10px 18px;
+    }
+    @media (max-width: 330px) {
+      font-size: 12px;
+      padding: 8px 14px;
+    }
+  }
+
+  input[type="radio"] + label {
+    border: 1px solid #26DBDB;
+    color: #fff;
+  }
+
+  input[type="radio"]:checked + label {
+    background-color: #26DBDB;
+    border: 2px solid #26DBDB;
+    color: #fff;
+  }
+}
