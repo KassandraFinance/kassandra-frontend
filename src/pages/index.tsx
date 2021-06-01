@@ -114,7 +114,7 @@ const Home = () => (
           <a href="https://api3.org/" target="_blank" rel="noopener noreferrer">
             <img src="assets/api3.webp" alt="" style={{maxWidth: '100px'}} />
           </a>
-          <a href="https://lemonade.finance/" target="_blank" rel="noopener noreferrer">
+          <a href="https://lemonadefi.com/" target="_blank" rel="noopener noreferrer">
             <img src="assets/lemonade.svg" alt="" />
           </a>
           <a href="https://jigstack.org/" target="_blank" rel="noopener noreferrer">
