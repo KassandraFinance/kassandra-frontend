@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import DropdownProducts from '../DropdownProducts'
 
 import styles from './header.module.scss'
@@ -6,13 +7,17 @@ import styles from './header.module.scss'
 const Header = () => {
   return (
     <header className={styles.header}>
-      <img src="assets/logo-header.svg" alt="" className={styles['logo-header']} />
-      <img src="assets/logo-64.svg" alt="" className={styles['logo-64']} />
+      <Link href="/">
+        <a><img src="assets/logo-header.svg" alt="" className={styles['logo-header']} /></a>
+      </Link>
+      <Link href="/">
+        <a><img src="assets/logo-64.svg" alt="" className={styles['logo-64']} /></a>
+      </Link>
       <nav>
         <DropdownProducts />
-        <a href="farm" >Farm</a>
-        <a href="vote" >Vote</a>
-        <a href="about" >About</a>
+        <Link href="/farm"><a>Farm</a></Link>
+        <Link href="/vote"><a>Vote</a></Link>
+        <Link href="/about"><a>About</a></Link>
       </nav>
       {/* <ul>
         <li><button type="button">Products</button></li>
