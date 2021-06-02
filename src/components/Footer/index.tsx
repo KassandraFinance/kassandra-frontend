@@ -25,6 +25,11 @@ const Footer = () => (
               </a>
             </li>
             <li>
+              <a href="https://kassandrafoundation.medium.com/" target="_blank" rel="noopener noreferrer">
+                <img src="assets/medium-icon.svg" alt="" />
+              </a>
+            </li>
+            <li>
               <a href="https://twitter.com/dao_kassandra" target="_blank" rel="noopener noreferrer">
                 <img src="assets/twitter-icon.svg" alt="" />
               </a>
