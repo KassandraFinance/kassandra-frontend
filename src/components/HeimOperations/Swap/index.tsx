@@ -6,7 +6,7 @@ import styles from './swap.module.scss'
 const Swap = () => {
   return (
     <form className={styles.form}>
-      <InputEth />
+      <InputEth action="You give" />
       <InputDefault />
       <button type="submit">Connect Wallet</button>
     </form>

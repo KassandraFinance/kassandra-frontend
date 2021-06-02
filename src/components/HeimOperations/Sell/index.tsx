@@ -1,16 +1,16 @@
 import InputEth from '../../InputEth'
 import InputDefault from '../../InputDefault'
 
-import styles from './buy.module.scss'
+import styles from './sell.module.scss'
 
-const Buy = () => {
+const Sell = () => {
   return (
     <form className={styles.form}>
-      <InputEth action="Pay with" />
+      <InputEth action="Sell" />
       <InputDefault />
       <button type="submit">Connect Wallet</button>
     </form>
   )
 }
 
-export default Buy
+export default Sell

@@ -1,10 +1,14 @@
 import styles from './input-eth.module.scss'
 
-const InputEth = () => {
+interface IInputEthProps {
+  action: string
+}
+
+const InputEth = (props: IInputEthProps) => {
   return(
     <div className={styles['input-eth']}>
       <div className={styles['pay-with']}>
-        <span>Pay With</span>
+        <span>{props.action}</span>
         <p>ETH</p>
         <div className={styles['line']} />
       </div>
