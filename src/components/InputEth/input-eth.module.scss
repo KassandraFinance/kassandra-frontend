@@ -1,6 +1,6 @@
 .input-eth {
   display: grid;
-  grid-template-columns: 194px auto 194px;
+  grid-template-columns: 190px 60px 190px;
   justify-content: space-around;
   align-items: flex-start;
   
@@ -13,7 +13,7 @@
 }
 
 .pay-with {
-  width: 100%;
+  width: 190px;
   height: 100%;
 
   position: relative;
@@ -28,13 +28,13 @@
 }
 
 .arrow-long {
-  margin-top: 47px;
+  margin: 47px auto 0 auto;
 }
 
 .amount {
   text-align: right;
   position: relative;
-  width: 100%;
+  width: 190px;
   height: 100%;
   padding-right: 12px;
 
@@ -67,7 +67,7 @@
 .line {
   content: '';
   display: block;
-  width: 194px;
+  width: 190px;
   height: 2px;
   background-color: #26DBDB;
   box-shadow: 1px 1px 5px #26DBDB;

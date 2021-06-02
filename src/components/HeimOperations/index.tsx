@@ -1,5 +1,7 @@
 import React from 'react'
+
 import Buy from './Buy'
+import Swap from './Swap'
 
 import styles from './heim-operations.module.scss'
 
@@ -50,6 +52,7 @@ const HeimOperations = () => {
         <label htmlFor="redeem">redeem</label>
       </div>
       {inputChecked === 'buy' && <Buy />}
+      {inputChecked === 'swap' && <Swap />}
     </div>
   )
 }

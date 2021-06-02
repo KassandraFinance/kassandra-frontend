@@ -1,9 +1,9 @@
 import InputEth from '../../InputEth'
 import InputDefault from '../../InputDefault'
 
-import styles from './buy.module.scss'
+import styles from './swap.module.scss'
 
-const Buy = () => {
+const Swap = () => {
   return (
     <form className={styles.form}>
       <InputEth />
@@ -13,4 +13,4 @@ const Buy = () => {
   )
 }
 
-export default Buy
+export default Swap
