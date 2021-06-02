@@ -27,7 +27,7 @@
       display: none;
     }
   }
-  nav {
+  nav, ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -59,7 +59,8 @@
           background-color: #eee;
           color: #6C3167;
           margin-top: -36px;
-          margin-left: -50px;
+          margin-left: -140px;
+
           width: 140px;
           padding: 4px;
           border-radius: 4px;
