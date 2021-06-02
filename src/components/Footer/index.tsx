@@ -25,7 +25,7 @@ const Footer = () => (
               </a>
             </li>
             <li>
-              <a href="https://twitter.com/kassandra_dao" target="_blank" rel="noopener noreferrer">
+              <a href="https://twitter.com/dao_kassandra" target="_blank" rel="noopener noreferrer">
                 <img src="assets/twitter-icon.svg" alt="" />
               </a>
             </li>
