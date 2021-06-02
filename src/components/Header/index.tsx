@@ -15,7 +15,7 @@ const Header = () => {
       </Link>
       <nav>
         <DropdownProducts />
-        <Link href="/farm"><a>Farm</a></Link>
+        <Link href="/farm"><a>Stake/Farm</a></Link>
         <Link href="/vote"><a>Vote</a></Link>
         <Link href="/about"><a>About</a></Link>
       </nav>
