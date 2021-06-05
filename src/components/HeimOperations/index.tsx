@@ -3,6 +3,7 @@ import React from 'react'
 import Buy from './Buy'
 import Swap from './Swap'
 import Sell from './Sell'
+import Mint from './Mint'
 
 import styles from './heim-operations.module.scss'
 
@@ -55,6 +56,7 @@ const HeimOperations = () => {
       {inputChecked === 'buy' && <Buy />}
       {inputChecked === 'sell' && <Sell />}
       {inputChecked === 'swap' && <Swap />}
+      {inputChecked === 'mint' && <Mint />}
     </div>
   )
 }
