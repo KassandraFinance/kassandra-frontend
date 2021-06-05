@@ -4,6 +4,7 @@ import Buy from './Buy'
 import Swap from './Swap'
 import Sell from './Sell'
 import Mint from './Mint'
+import Redeem from './Redeem'
 
 import styles from './heim-operations.module.scss'
 
@@ -57,6 +58,7 @@ const HeimOperations = () => {
       {inputChecked === 'sell' && <Sell />}
       {inputChecked === 'swap' && <Swap />}
       {inputChecked === 'mint' && <Mint />}
+      {inputChecked === 'redeem' && <Redeem />}
     </div>
   )
 }
