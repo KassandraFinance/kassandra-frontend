@@ -1,10 +1,19 @@
 .main-products {
-  height: 100vh;
+  min-height: 100vh;
   display: grid;
   grid-template-columns: auto 440px;
-  gap: 60px
-}
+  gap: 60px;
 
-.charts {
-  background-color: #fff;
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+  .coming-soon {
+    max-width: 100%;
+    @media (max-width: 900px) {
+      display: none;
+    }
+  }
+  img {
+    max-width: 100%;
+  }
 }

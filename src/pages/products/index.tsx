@@ -1,16 +1,19 @@
-import { useRouter } from 'next/router'
+import React from 'react'
 import HeimOperations from '../../components/HeimOperations'
+import IndexDetails from '../../components/IndexDetails'
 
 import styles from './products.module.scss'
 
-const Products = () => {
-  const { route } = useRouter()
-  return (
+const Products = () => (
+  <>
     <section className={styles['main-products']}>
-      <div className={styles['charts']}>echarts</div>
+      <img src="assets/coming-soon.png" alt="coming-soon" className={styles['coming-soon']} />
       <HeimOperations />
     </section>
-  )
-}
+    <section>
+      <IndexDetails />
+    </section>
+  </>
+)
 
 export default Products
