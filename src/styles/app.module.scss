@@ -10,4 +10,10 @@
   @media (min-width: 1600px) {
     max-width: 1520px;
   }
+  @media (max-width: 504px) {
+    padding: 0 16px;
+  }
+  @media (max-width: 430px) {
+    padding: 0 8px;
+  }
 }
