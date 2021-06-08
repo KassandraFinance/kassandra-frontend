@@ -1,0 +1,50 @@
+.index-details {
+  width: 100%;
+
+  h1 {
+    font-size: 32px;
+    font-weight: 400;
+  }
+  table {
+    width: 100%;
+    margin: 40px 0;
+    @media (max-width: 660px) {
+      display: block;
+      overflow: auto;
+    }
+  }
+  
+  tr {
+    display: grid;
+    grid-template-columns: 1fr repeat(3, 3fr) 2fr;
+    justify-items: center;
+    height: 38px;
+    @media (max-width: 660px) {
+      grid-template-columns: 1fr repeat(4, 2fr);
+      width: 600px;
+    }
+    @media (max-width: 660px) {
+      width: 500px;
+    }
+  }
+  th {
+    font-size: 16px;
+    letter-spacing: .5px;
+    @media (max-width: 660px) {
+      font-size: 15px;
+    }
+  }
+  td {
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: .5px;
+    @media (max-width: 660px) {
+      font-size: 21px;
+    }
+  }
+  .colour {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+  }
+}

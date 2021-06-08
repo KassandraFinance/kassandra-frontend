@@ -1,3 +1,11 @@
+.heim-operations {
+  max-width: 440px;
+  @media (max-width: 900px) {
+    margin: 0 auto;
+    display: block;
+  }
+}
+
 .select-operator {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -17,7 +25,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    // padding: 8px 20px;
     cursor: pointer;
 
     height: 40px;
