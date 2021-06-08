@@ -11,9 +11,21 @@
   width: 100%;
   height: 94px;
   padding: 4px 0;
+  @media (max-width: 504px) {
+    grid-template-columns: 160px 60px 160px;
+  }
+  @media (max-width: 430px) {
+    grid-template-columns: 130px 40px 130px;
+  }
   span {
     font-size: 14px;
     height: 17px;
+    @media (max-width: 380px) {
+      font-size: 13px;
+    }
+    @media (max-width: 350px) {
+      font-size: 10.7px;
+    }
   }
 }
 
@@ -22,10 +34,22 @@
   height: 100%;
 
   position: relative;
+  @media (max-width: 504px) {
+    width: 160px;
+  }
+  // @media (max-width: 430px) {
+  //   grid-template-columns: 130px 40px 130px;
+  // }
   p {
     font-size: 24px;
     margin: 8px 0;
     padding-left: 12px;
+    @media (max-width: 380px) {
+      font-size: 22px;
+    }
+    @media (max-width: 350px) {
+      font-size: 20px;
+    }
   }
   span {
     padding-left: 12px;
@@ -36,6 +60,9 @@
   background-color: #000;
   padding: 8px 20px;
   margin: 47px auto 0 auto;
+  @media (max-width: 430px) {
+    padding: 8px;
+  }
 }
 
 .total {
@@ -44,6 +71,12 @@
   width: 190px;
   height: 100%;
   padding-right: 12px;
+  @media (max-width: 504px) {
+    width: 160px;
+  }
+  @media (max-width: 430px) {
+    width: 130px;
+  }
 
   input {
     background-color: transparent;
@@ -56,6 +89,13 @@
     margin: 8px 0;
 
     outline: none;
+
+    @media (max-width: 380px) {
+      font-size: 22px;
+    }
+    @media (max-width: 350px) {
+      font-size: 20px;
+    }
 
     &::placeholder {
       color: #fff;
@@ -80,4 +120,10 @@
   box-shadow: 1px 1px 5px #26DBDB;
   bottom: 0;
   position: absolute;
+  @media (max-width: 504px) {
+    width: 160px;
+  }
+  // @media (max-width: 430px) {
+  //   width: 130px;
+  // }
 }
