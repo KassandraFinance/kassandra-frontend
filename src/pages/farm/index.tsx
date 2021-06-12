@@ -15,6 +15,16 @@ const Farm = () => {
         <VotingPower multiplier='10'/>
         <VotingPower multiplier='30'/>
       </div>
+      <div className={styles['total-voting']}>
+        <fieldset>
+          <legend>Your voting power</legend>
+          <span>10</span>
+        </fieldset>
+        <fieldset>
+          <legend>Total voting power</legend>
+          <span>500.231.540</span>
+        </fieldset>
+      </div>
     </section>
   )
 }
