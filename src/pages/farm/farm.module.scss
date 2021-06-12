@@ -9,3 +9,12 @@
     margin: 16px 0 32px;
   }
 }
+
+.container-grid-staking {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 516px;
+  gap: 16px;
+  margin: 40px 0;
+}
+
