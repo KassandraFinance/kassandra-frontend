@@ -25,6 +25,10 @@ const Farm = () => {
           <span>500.231.540</span>
         </fieldset>
       </div>
+      <h3>Other Staking Pools</h3>
+      <div className={styles['container-grid-staking']}>
+        <OthersStakingPools />
+      </div>
     </section>
   )
 }
