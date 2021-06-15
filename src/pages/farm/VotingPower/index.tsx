@@ -1,11 +1,12 @@
 import React from 'react'
-import styles from './voting-power.module.scss'
+
+import styles from '../farm.module.scss'
 
 interface IStakingProps {
-  multiplier: string
+  days: string
 }
 
-const VotingPower = ({ multiplier }: IStakingProps) => {
+const VotingPower = ({ days }: IStakingProps) => {
   console.log('staking')
   return (
     <div className={`${styles['border-gradient']}`}>
@@ -13,9 +14,9 @@ const VotingPower = ({ multiplier }: IStakingProps) => {
         <img src="assets/logo-staking.svg" alt="" />
         <div className={styles['intro-staking']}>
           <p>Earn</p>
-          <p style={{ fontWeight: 300}}>$KACY</p>
-          <p>Vote Power</p>
-          <p style={{ fontWeight: 300}}>multiplier x{multiplier}</p>
+          <p>$KACY</p>
+          <p>1 voting power</p>
+          <p>per $KACY staked</p>
         </div>
       </div>
       <div className={styles['infos-staking']}>
@@ -27,23 +28,29 @@ const VotingPower = ({ multiplier }: IStakingProps) => {
             <span>Your stake</span>
             <span>Your voting power</span>
             <span>KACY reward</span>
-            <p>Total staking</p>
-            <p>APY</p>
+            <p className={styles['total-staking']}>Total staking</p>
+            <p style={{ position: 'relative'}}>APY</p>
           </div>
           <div className={styles.days}>
-            <p>0 Days</p>
+            <p>{days} Days</p>
             <span>02/02/2021</span>
             <span>23/03/2022</span>
             <span>$56</span>
             <span>37</span>
             <span>$12</span>
-            <p>$134,124</p>
+            <p className={styles['total-staking']}>$134,124</p>
             <p>210%</p>
           </div>
         </div>
         <div className={styles['btn-container']}>
           <button className={styles['btn-wallet']} type="button" onClick={() => alert('Connet Wallet')}>Connet Wallet</button>
-          <button className={styles['btn-details']} type="button" onClick={() => alert('Details')}>Details</button>
+          <button className={styles['btn-details']} type="button" onClick={() => alert('Details')}>Details <img src="assets/arrow-down-cyan.svg" alt=""/></button>
+          <img 
+            src="assets/info-icon.svg" 
+            alt="" 
+            className={styles['img-info']}
+            onMouseOver={() => alert('tooltip')}
+          />
         </div>
       </div>
     </div>
