@@ -26,8 +26,10 @@ const Farm = () => {
         </fieldset>
       </div>
       <h3>Other Staking Pools</h3>
-      <div className={styles['container-grid-staking']}>
-        <OthersStakingPools />
+      <div className={`${styles['container-grid-staking']} ${styles.others} ${styles['staking-pools']}`}>
+        <OthersStakingPools img="logo-heim" />
+        <OthersStakingPools img="heim-index" />
+        <OthersStakingPools img="" />
       </div>
     </section>
   )
