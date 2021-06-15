@@ -4,9 +4,10 @@ import styles from '../farm.module.scss'
 
 interface IOthersStakingPoolsProps {
   img: string
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const OthersStakingPools = ({ img }: IOthersStakingPoolsProps) => {
+const OthersStakingPools = ({ img, setModalOpen }: IOthersStakingPoolsProps) => {
   console.log('staking')
   return (
     <div className={`${styles['border-gradient']}`}>
@@ -39,7 +40,7 @@ const OthersStakingPools = ({ img }: IOthersStakingPoolsProps) => {
           </div>
         </div>
         <div className={styles['btn-container']}>
-          <button className={styles['btn-wallet']} type="button" onClick={() => alert('Connet Wallet')}>Connet Wallet</button>
+          <button className={styles['btn-wallet']} type="button" onClick={() => setModalOpen(true)}>Connet Wallet</button>
           <button className={styles['btn-details']} type="button" onClick={() => alert('Details')}>Details <img src="assets/arrow-down-cyan.svg" alt=""/></button>
           <img 
             src="assets/info-icon.svg" 

@@ -1,11 +1,14 @@
 import React from 'react'
 
-import styles from './farm.module.scss'
-import OthersStakingPools from './OthersStakingPools'
 import VotingPower from './VotingPower'
+import OthersStakingPools from './OthersStakingPools'
+import ModalStaking from '../../components/ModalStaking'
+
+import styles from './farm.module.scss'
 
 const Farm = () => {
-  console.log('farm')
+  const [modalOpen, setModalOpen] = React.useState<boolean>(false)
+
   return (
     <section className={styles.farm}>
       <h1>Staking</h1>
@@ -27,10 +30,11 @@ const Farm = () => {
       </div>
       <h3>Other Staking Pools</h3>
       <div className={`${styles['container-grid-staking']} ${styles.others} ${styles['staking-pools']}`}>
-        <OthersStakingPools img="logo-heim" />
-        <OthersStakingPools img="heim-index" />
-        <OthersStakingPools img="" />
+        <OthersStakingPools img="logo-heim" setModalOpen={setModalOpen} />
+        <OthersStakingPools img="heim-index" setModalOpen={setModalOpen} />
+        <OthersStakingPools img="" setModalOpen={setModalOpen} />
       </div>
+      <ModalStaking modalOpen={modalOpen} setModalOpen={setModalOpen} />
     </section>
   )
 }
