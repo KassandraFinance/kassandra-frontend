@@ -172,7 +172,7 @@
     background: linear-gradient(87.48deg, #FFBF00 -70.27%, #E843C4 154.78%);
     border: none;
     border-radius: 6px;
-    font-weight: 500;
+    font-weight: 400;
 
     display: flex;
     align-items: center;
@@ -180,6 +180,7 @@
     
     width: 320px;
     height: 36px;
+    outline: none;
     @media (max-width: 420px) {
       max-width: 100%;
       min-width: 200px;
