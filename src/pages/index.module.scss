@@ -134,6 +134,29 @@
     justify-items: center;
 
     padding: 40px 16px;
+    position: relative;
+    .top-social-index {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      @media (max-width: 420px) {
+        flex-direction: column;
+      }
+    }
+    .arrow-right {
+      color: #C2C2C2;
+      font-size: 16px;
+      text-decoration: none;
+      @media (max-width: 420px) {
+        margin: 20px 0;
+      }
+      &:hover {
+        text-decoration: underline;
+      }
+      img {
+        margin-left: 8px;
+      }
+    }
     @media (max-width: 880px) {
       grid-template-columns: 1fr;
       gap: 40px;

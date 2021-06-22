@@ -32,7 +32,13 @@ const Home = () => (
         <div className={styles['heim-container']}>
           <img src="assets/logo-heim.svg" alt="" />
           <div className={styles['heim-grid-left']}>
-            <h3>Top Social Index</h3>
+            <div className={styles['top-social-index']}>
+              <h3>Top Social Index</h3>
+              <a href="https://medium.com/heimdall-research-crypto/the-heimdall-social-index-9595fdfb9ddc" target="_blank" rel="noopener noreferrer" className={styles['arrow-right']}>
+                Check out Heim Index
+                <img src="assets/arrow-right.svg" alt="" /> 
+              </a>
+            </div>
             <p className={styles['first-paragraph']}>The Social Index $HEIM reflects the performance of a portfolio selected from the most socially active cryptocurrencies in the past 30 days, using Heimdall Social Score data.</p>
             <p className={styles['second-paragraph']}>$HEIM offers an easy exposure to the hottest cryptocurrencies in the market.</p>
           </div>
