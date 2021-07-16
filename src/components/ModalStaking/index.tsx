@@ -1,46 +1,69 @@
 import React from 'react'
-import styles from './modal-staking.module.scss'
 
-interface IModalStakingProps {
+import { 
+  Backdrop,
+  BorderGradient,
+  BackgroundBlack,
+  InterBackground,
+  Main,
+  Amount,
+  Line,
+  ButtonContainer,
+  ConfirmButton,
+  GetKacyButton
+ } from './styles'
+
+ interface IModalStakingProps {
   modalOpen: boolean
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+  otherStakingPools: boolean
 }
 
-const ModalStaking = ({ modalOpen, setModalOpen }: IModalStakingProps) => {
+const ModalStaking = ({ 
+  modalOpen, 
+  setModalOpen, 
+  otherStakingPools }: IModalStakingProps) => {
+
   function handleCloseModal() {
     setModalOpen(false)
   }
 
   return (
     <>
-      <div className={styles.backdrop} onClick={handleCloseModal} style={{display: modalOpen ? 'block' : 'none'}} />
-      <div 
-        className={`${styles['border-gradient']}`} 
-        style={{display: modalOpen ? 'block' : 'none'}}
+      <Backdrop onClick={handleCloseModal} style={{display: modalOpen ? 'block' : 'none'}} />
+      <BorderGradient 
+        modalOpen={modalOpen} 
+        otherStakingPools={otherStakingPools}
       >
-        <div className={styles['background-black']}>
-          <div className={styles['inter-background']}>
+        <BackgroundBlack>
+          <InterBackground otherStakingPools={otherStakingPools}>
             <span>Stake in Pool</span>
             <button type="button" onClick={() => setModalOpen(false)}><img src="assets/close.svg" alt="" /> </button>
-          </div>
-          <div className={styles['main-container']}>
-            <div className={styles.amount}>
+          </InterBackground>
+          <Main>
+            <Amount>
               <span>$KACY Amount</span>
               <input type="number" placeholder="0" />
-              <div className={styles.line} />
+              <Line />
               <h5>Balance: 1.3254876</h5>
-            </div>
-            <div className={styles['button-container']}>
+            </Amount>
+            <ButtonContainer>
               <button type="button">25%</button>
               <button type="button">50%</button>
               <button type="button">75%</button>
               <button type="button">max</button>
-            </div>
-            <button className={`${styles.btn} ${styles.confirm}`} type="button" onClick={() => setModalOpen(false)}>Confirm</button>
-            <button className={`${styles.btn} ${styles['get-kacy']}`} type="button" onClick={() => setModalOpen(false)}>Get KACY</button>
-          </div>
-        </div>
-      </div>
+            </ButtonContainer>
+            <ConfirmButton 
+              type="button" 
+              otherStakingPools={otherStakingPools}
+              onClick={() => setModalOpen(false)}
+            >
+              Confirm
+            </ConfirmButton>
+            <GetKacyButton type="button" onClick={() => setModalOpen(false)}>Get KACY</GetKacyButton>
+          </Main>
+        </BackgroundBlack>
+      </BorderGradient>
     </>
   )
 }

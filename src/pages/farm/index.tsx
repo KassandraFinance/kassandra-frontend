@@ -7,8 +7,6 @@ import ModalStaking from '../../components/ModalStaking'
 import { FarmContainer, GridStaking, TotalVoting } from './styles'
 
 const Farm = () => {
-  const [modalOpen, setModalOpen] = React.useState<boolean>(false)
-
   return (
     <FarmContainer>
       <h1>Staking</h1>
@@ -30,11 +28,10 @@ const Farm = () => {
       </TotalVoting>
       <h3>Other Staking Pools</h3>
       <GridStaking>
-        <OthersStakingPools img="logo-heim" setModalOpen={setModalOpen} />
-        <OthersStakingPools img="heim-index" setModalOpen={setModalOpen} />
-        <OthersStakingPools img="" setModalOpen={setModalOpen} />
+        <OthersStakingPools img="logo-heim" />
+        <OthersStakingPools img="heim-index" />
+        <OthersStakingPools img="" />
       </GridStaking>
-      <ModalStaking modalOpen={modalOpen} setModalOpen={setModalOpen} />
     </FarmContainer>
   )
 }
