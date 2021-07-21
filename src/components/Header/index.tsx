@@ -1,31 +1,63 @@
 import React from 'react'
 import Link from 'next/link'
-// import DropdownProducts from '../DropdownProducts'
 
-import styles from './header.module.scss'
+import web3 from '../../utils/web3'
 
-const Header = () => (
-    <header className={styles.header}>
+import DropdownProducts from '../DropdownProducts'
+
+import useConnect from '../../hooks/useConnect'
+import substr from '../../utils/substr'
+
+import { 
+  HeaderContainer, 
+  Nav, 
+  ButtonConnectWallet,
+  LinkInstallMetaMask
+} from './styles'
+
+const Header = () => {    
+  const { 
+    connect, 
+    currentAccount, 
+    isLogged 
+  } = useConnect()
+
+  return (
+    <HeaderContainer>
       <Link href="/">
-        <a><img src="assets/logo-header.svg" alt="" className={styles['logo-header']} /></a>
+        <a><img src="assets/logo-header.svg" alt="" className="logo-header" /></a>
       </Link>
       <Link href="/">
-        <a><img src="assets/logo-64.svg" alt="" className={styles['logo-64']} /></a>
+        <a><img src="assets/logo-64.svg" alt="" className="logo-64" /></a>
       </Link>
-      {/* <nav>
+      <Nav>
         <DropdownProducts />
         <Link href="/farm"><a>Stake/Farm</a></Link>
         <Link href="/vote"><a>Vote</a></Link>
         <Link href="/about"><a>About</a></Link>
-      </nav> */}
-      <ul>
-        <li><button type="button">Products</button></li>
-        <li><button type="button">Farm</button></li>
-        <li><button type="button">Vote</button></li>
-        <li><button type="button">About</button></li>
-      </ul>
-    </header>
-  ) 
-
+        {web3.currentProvider !== null ? 
+          isLogged ?
+            <ButtonConnectWallet 
+              type="button"
+              style={{ backgroundColor: '#26DBDB', color: '#211426' }}
+            >
+              {substr(currentAccount)}
+            </ButtonConnectWallet>
+            :
+            <ButtonConnectWallet type="button" onClick={() => connect()}>
+              Connect Wallet
+            </ButtonConnectWallet>
+          :
+          <LinkInstallMetaMask 
+            href="https://metamask.io/download.html" 
+            target="_blank"
+            >
+              Install MetaMask!
+          </LinkInstallMetaMask>
+        }
+      </Nav>
+    </HeaderContainer>
+  )
+}
 
 export default Header

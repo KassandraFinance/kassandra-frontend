@@ -2,7 +2,6 @@ import React from 'react'
 
 import VotingPower from './VotingPower'
 import OthersStakingPools from './OthersStakingPools'
-import ModalStaking from '../../components/ModalStaking'
 
 import { FarmContainer, GridStaking, TotalVoting } from './styles'
 
