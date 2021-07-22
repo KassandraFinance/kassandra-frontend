@@ -2,14 +2,14 @@ import React from 'react'
 import HeimOperations from '../../components/HeimOperations'
 import IndexDetails from '../../components/IndexDetails'
 
-import styles from './products.module.scss'
+import { ProductsContainer, ComingSoon } from './styles'
 
 const Products = () => (
   <>
-    <section className={styles['main-products']}>
-      <img src="assets/coming-soon.png" alt="coming-soon" className={styles['coming-soon']} />
+    <ProductsContainer>
+      <ComingSoon src="assets/coming-soon.png" alt="coming-soon" />
       <HeimOperations />
-    </section>
+    </ProductsContainer>
     <section>
       <IndexDetails />
     </section>
