@@ -4,6 +4,8 @@ import { AppProps } from 'next/app'
 import '../styles/globals.scss'
 import styles from '../styles/app.module.scss'
 
+import { storeWrapper } from "../store"
+
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
@@ -19,4 +21,4 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   )
 } 
 
-export default MyApp
+export default storeWrapper.withRedux(MyApp)
