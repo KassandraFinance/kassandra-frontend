@@ -1,0 +1,2 @@
+export const HeimCRPPOOL = "0x668ACe0F1BEa58a382e557F9319334d4DC2174e8"
+export const HeimCorePool = "0x8279ec41DD99aB7ee1c69417a109F7ef4e3f1B0e"
