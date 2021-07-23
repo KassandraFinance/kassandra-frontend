@@ -10,7 +10,7 @@ const InputHeim = ({ action, redeem }: IInputHeimProps) => (
   <div className={styles['input-heim']}>
     <div className={styles['pay-with']}>
       <span>{action}</span>
-      <p>ETH</p>
+      <p>HEIM</p>
     </div>
     <img className={styles['arrow-long']} src={`assets/arrow-long-${redeem ? 'down' : 'up'}.svg`} alt="" />
     <div className={styles.total}>
