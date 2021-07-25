@@ -51,3 +51,23 @@ export const Label = styled.label`
     padding: 8px 14px;
   }
 `
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 16px;
+  height: 100%;
+`
+
+export const Button = styled.button`
+  background: linear-gradient(87.48deg, #FFBF00 -70.27%, #E843C4 154.78%);
+  border: none;
+  border-radius: 6px;
+  color: #211426;
+  font-size: 20px;
+  padding: 16px 32px;
+  margin: 40px 0;
+  outline: none;
+  cursor: pointer;
+`

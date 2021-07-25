@@ -2,14 +2,14 @@ import React from 'react'
 import InputEth from '../../InputEth'
 import InputDefault from '../../InputDefault'
 
-import styles from './buy.module.scss'
+import { Form, Button } from '../styles'
 
 const Buy = () => (
-  <form className={styles.form}>
+  <Form>
     <InputEth action="Pay with" />
     <InputDefault />
-    <button type="submit">Connect Wallet</button>
-  </form>
+    <Button type="submit">Connect Wallet</Button>
+  </Form>
   )
 
 export default Buy

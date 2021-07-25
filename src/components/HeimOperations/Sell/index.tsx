@@ -1,15 +1,15 @@
 import InputEth from '../../InputEth'
 import InputDefault from '../../InputDefault'
 
-import styles from './sell.module.scss'
+import { Form, Button } from '../styles'
 
 const Sell = () => {
   return (
-    <form className={styles.form}>
+    <Form>
       <InputEth action="Sell" />
       <InputDefault />
-      <button type="submit">Connect Wallet</button>
-    </form>
+      <Button type="submit">Connect Wallet</Button>
+    </Form>
   )
 }
 

@@ -1,30 +1,31 @@
 import React from 'react'
-import styles from './index-details.module.scss'
+
+import { IndexDetailsContainer, Table, Tr, Th, Td, Colour } from './styles'
 
 const IndexDetails = () => (
-    <section className={styles['index-details']}>
+    <IndexDetailsContainer>
       <h1>Details</h1>
-      <table>
+      <Table>
         <thead>
-          <tr>
-            <th>Colour</th>
-            <th>Name</th>
-            <th>Value/Token</th>
-            <th>Allocation</th>
-            <th>Change 24h</th>
-          </tr>
+          <Tr>
+            <Th>Colour</Th>
+            <Th>Name</Th>
+            <Th>Value/Token</Th>
+            <Th>Allocation</Th>
+            <Th>Change 24h</Th>
+          </Tr>
         </thead>
         <tbody>
-          <tr>
-            <td className={styles.colour} style={{background: '#26DBDB'}} />
-            <td>BTC</td>
-            <td>3.789,00 BTC</td>
-            <td>40%</td>
-            <td style={{color: '#EB5757' || '#6FCF97'}} >-3.26</td>
-          </tr>
+          <Tr>
+            <Colour />
+            <Td>BTC</Td>
+            <Td>3.789,00 BTC</Td>
+            <Td>40%</Td>
+            <Td style={{color: '#EB5757' || '#6FCF97'}} >-3.26</Td>
+          </Tr>
         </tbody>
-      </table>
-    </section>
+      </Table>
+    </IndexDetailsContainer>
   )
 
 
