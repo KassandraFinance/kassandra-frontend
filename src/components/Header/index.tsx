@@ -18,7 +18,6 @@ import {
 
 const Header = () => {    
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-
   const { connect, isLogged } = useConnect()
 
   return (

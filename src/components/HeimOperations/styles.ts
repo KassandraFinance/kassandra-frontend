@@ -52,7 +52,7 @@ export const Label = styled.label`
   }
 `
 
-export const Form = styled.form`
+export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -66,7 +66,9 @@ export const Button = styled.button`
   border-radius: 6px;
   color: #211426;
   font-size: 20px;
-  padding: 16px 32px;
+
+  width: 216px;
+  height: 44px;
   margin: 40px 0;
   outline: none;
   cursor: pointer;

@@ -1,10 +1,7 @@
 import React from 'react'
+import useConnect from '../../hooks/useConnect'
 
-import Buy from './Buy'
-import Swap from './Swap'
-import Sell from './Sell'
-import Mint from './Mint'
-import Redeem from './Redeem'
+import Form from './Form'
 
 import { 
   HeimOperationsContainer, 
@@ -15,6 +12,8 @@ import {
 
 const HeimOperations = () => {
   const [inputChecked, setInputChecked] = React.useState<string>('buy')
+  const { isLogged } = useConnect()
+
   return (
     <HeimOperationsContainer>
       <SelectOperator>
@@ -59,11 +58,11 @@ const HeimOperations = () => {
         />
         <Label htmlFor="redeem">redeem</Label>
       </SelectOperator>
-      {inputChecked === 'buy' && <Buy />}
-      {inputChecked === 'sell' && <Sell />}
-      {inputChecked === 'swap' && <Swap />}
-      {inputChecked === 'mint' && <Mint />}
-      {inputChecked === 'redeem' && <Redeem />}
+      {inputChecked === 'buy' && <Form title="Buy" action="Pay with" isLogged={isLogged} />}
+      {inputChecked === 'sell' && <Form title="Sell" action="Sell" isLogged={isLogged} />}
+      {inputChecked === 'swap' && <Form title="Swap" action="You give" isLogged={isLogged} />}
+      {inputChecked === 'mint' && <Form title="Mint" action="Receive (estimative)" isLogged={isLogged} />}
+      {inputChecked === 'redeem' && <Form title="Redeem" action="Send" isLogged={isLogged} />}
     </HeimOperationsContainer>
   )
 }
