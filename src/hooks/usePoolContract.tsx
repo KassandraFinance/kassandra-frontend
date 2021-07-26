@@ -14,6 +14,11 @@ const usePoolContract = () => {
     return contract
   }
 
+  const swapFee = (addresCorePool: string) => {
+    const contract = getPoolContract(addresCorePool)
+    return contract.methods.getSwapFee().call()
+  }
+
   const balanceToken = (addresCorePool: string, address: string) => {
     const contract = getPoolContract(addresCorePool)
     return contract.methods.getBalance(address).call()
@@ -38,9 +43,10 @@ const usePoolContract = () => {
 
   return { 
     getPoolContract,
+    swapFee,
+    balanceToken,
     nameToken,
     symbolToken,
-    balanceToken,
     decimalsToken
   }
 }
