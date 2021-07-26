@@ -9,6 +9,8 @@ declare let window: any
 const useConnect = () => {
   const [currentAccount, setCurrentAccount] = React.useState('')
   const [isLogged, setIsLogged] = React.useState(false)
+  // const [isWalletPermissions, setIsWalletPermissions] = React.useState(false)
+
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const dispatch = useDispatch()
 
@@ -22,12 +24,12 @@ const useConnect = () => {
           if (permissions.length > 0) {
             //User is already connected just straight log him in
             startApp(provider)
-            setIsWalletPermissions(true)
+            // setIsWalletPermissions(true)
           }
           else {
             //User not connected initial flow
             console.log("User has no permissions")
-            setIsWalletPermissions(false)
+            // setIsWalletPermissions(false)
           }
         })
       }
