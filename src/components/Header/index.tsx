@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector, RootStateOrAny } from 'react-redux'
 import Link from 'next/link'
 
 import web3 from '../../utils/web3'
@@ -16,11 +17,9 @@ import {
 } from './styles'
 
 const Header = () => {    
-  const { 
-    connect, 
-    currentAccount, 
-    isLogged 
-  } = useConnect()
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+
+  const { connect, isLogged } = useConnect()
 
   return (
     <HeaderContainer>
@@ -41,7 +40,7 @@ const Header = () => {
               type="button"
               style={{ backgroundColor: '#26DBDB', color: '#211426' }}
             >
-              {substr(currentAccount)}
+              {substr(userWalletAddress)}
             </ButtonConnectWallet>
             :
             <ButtonConnectWallet type="button" onClick={() => connect()}>

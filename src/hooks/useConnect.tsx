@@ -1,11 +1,16 @@
 import React from 'react'
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 import detectEthereumProvider from '@metamask/detect-provider'
+
+import { actionGetUserAddressWallet } from '../store/modules/userWalletAddress/actions'
 
 declare let window: any
 
 const useConnect = () => {
   const [currentAccount, setCurrentAccount] = React.useState('')
   const [isLogged, setIsLogged] = React.useState(false)
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const dispatch = useDispatch()
 
   React.useEffect(() => {
     (async () => {
@@ -16,11 +21,13 @@ const useConnect = () => {
           console.log(permissions)
           if (permissions.length > 0) {
             //User is already connected just straight log him in
-            connectWallet()
+            startApp(provider)
+            setIsWalletPermissions(true)
           }
           else {
             //User not connected initial flow
             console.log("User has no permissions")
+            setIsWalletPermissions(false)
           }
         })
       }
@@ -37,36 +44,19 @@ const useConnect = () => {
   }, [])
 
 
-
-  const connectWallet = React.useCallback(async () => {
-    try {
-      const id = await window.ethereum.request({ method: 'eth_chainId' })
-      console.log("the id:")
-      console.log(id)
-      console.log(typeof id)
-      console.log(id !== '0x89')
-      if (id === '0x89' || id === '0x13881') {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-        setIsLogged(true)
-        setCurrentAccount(accounts[0])
-        return accounts[0]  
-      }
-      else {
-        console.log('Please change to Mumbai or Matic Mainnet as we only accept those networks.')
-        setCurrentAccount('')
-      }
-    } catch (err) {
-        if (err.code === 4001) {
-          // EIP-1193 userRejectedRequest error
-          // If this happens, the user rejected the connection request.
-          console.log('Please connect to MetaMask.')
-
-        } else if(err.code === -32002) {
-          console.log('Please unlock MetaMask.')
-        } else {
-          console.error(err)
-        }
+  const startApp = React.useCallback(async (provider) => {
+    // If the provider returned by detectEthereumProvider is not the same as
+    // window.ethereum, something is overwriting it, perhaps another wallet.
+    if (provider !== window.ethereum) {
+      console.error('Do you have multiple wallets installed?')
     }
+    // Access the decentralized web!
+    // const chainId = await window.ethereum.request({ method: 'eth_chainId' })
+
+    // handleChainChanged(chainId)
+    handleRequestAccounts()
+
+    // window.ethereum.on('chainChanged', handleChainChanged)
   }, [])
 
 
@@ -101,10 +91,9 @@ const useConnect = () => {
       // MetaMask is locked or the user has not connected any accounts
       console.log('Please connect to MetaMask.')
       setIsLogged(false)
-      setCurrentAccount('')
-      window.location.reload()
-    } else if (accounts[0] !== currentAccount) {
-      setCurrentAccount(accounts[0])
+      dispatch(actionGetUserAddressWallet(''))
+    } else if (accounts[0] !== userWalletAddress) {
+      dispatch(actionGetUserAddressWallet(accounts[0]))
       setIsLogged(true)
       // Do any other work!
     }
@@ -128,9 +117,7 @@ const useConnect = () => {
 
   return {
     connect,
-    connectWallet,
     handleRequestAccounts,
-    currentAccount,
     isLogged
   }
 }
