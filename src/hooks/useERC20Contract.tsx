@@ -33,10 +33,21 @@ const useERC20Contract = () => {
     }
   };
 
+  const getTotalSupply = async (tokenAddress: string): Promise<string> => {
+    const tokenContract = getERC20Contract(tokenAddress)
+    try {
+      const supply: string = await tokenContract.methods.totalSupply().call()
+      return supply
+    } catch (e) {
+      return "0"
+    }
+  };
+
   return { 
     getERC20Contract,
     getAllowance,
-    getBalance
+    getBalance,
+    getTotalSupply
   }
 }
 
