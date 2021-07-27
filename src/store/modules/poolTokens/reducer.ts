@@ -1,15 +1,15 @@
 import { Reducer } from 'redux'
 import { HYDRATE } from "next-redux-wrapper"
-import { Types, ICorePoolProps } from './types'
+import { Types, IPoolTokensProps } from './types'
 
-const INITIAL_STATE: Array<ICorePoolProps> = []
+const INITIAL_STATE: Array<IPoolTokensProps> = []
 
 const reducer: Reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case HYDRATE: {
       return action.payload
     }
-    case Types.GET_TOKENS_POOL: {
+    case Types.GET_POOL_TOKENS: {
       return action.payload
     }
     default: {

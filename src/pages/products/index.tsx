@@ -2,7 +2,8 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { HeimCorePool } from '../../constants/tokenAddresses'
 
-import { actionGetTokensPool } from '../../store/modules/corePool/actions'
+import { IPoolTokensProps } from '../../store/modules/poolTokens/types'
+import { actionGetPoolTokens } from '../../store/modules/poolTokens/actions'
 
 import HeimOperations from '../../components/HeimOperations'
 import IndexDetails from '../../components/IndexDetails'
@@ -26,16 +27,17 @@ const Products = () => {
       const poolContract = getPoolContract(HeimCorePool)
       const arrayTokensPool = await poolContract.methods.getCurrentTokens().call()
 
-      const tokensPool: Array<ICorePoolProps> = await Promise.all(arrayTokensPool.map(async (tokenAddress: string) => {
+      const poolTokens: Array<IPoolTokensProps> = await Promise.all(arrayTokensPool.map(async (tokenAddress: string) => {
         return {
           name: await nameToken(tokenAddress),
           symbol: await symbolToken(tokenAddress),
           balance: await balanceToken(HeimCorePool, tokenAddress),
-          decimals: await decimalsToken(tokenAddress)
+          decimals: await decimalsToken(tokenAddress),
+          address: tokenAddress
         }
       }))
       
-      dispatch(actionGetTokensPool(tokensPool))
+      dispatch(actionGetPoolTokens(poolTokens))
     })()
   }, [])
 

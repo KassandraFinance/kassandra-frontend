@@ -1,10 +1,11 @@
 export const Types = {
-  GET_TOKENS_POOL: 'GET_TOKENS_POOL'
+  GET_POOL_TOKENS: 'GET_POOL_TOKENS'
 };
 
-export interface ICorePoolProps {
+export interface IPoolTokensProps {
   name: string
   symbol: string
   balance: string
   decimals: string
+  address?: string
 }

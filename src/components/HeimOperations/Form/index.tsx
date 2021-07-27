@@ -16,12 +16,13 @@ interface IFormProps {
 }
 
 const Form = ({ action, title, isLogged }: IFormProps) => {
-  const { corePool } = useSelector((state: RootStateOrAny) => state)
+  const { poolTokens } = useSelector((state: RootStateOrAny) => state)
 
   return (
     <FormContainer>
       {title === "Mint" || title === "Redeem" ?
         <>
+          {poolTokens.map((token: any) => (
           <InputHeim action={action} redeem={title === "Redeem" ? true : false} />
           {corePool.map((token) => (
             <InputMintRedeem token={token} />

@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import corePoolReducer from './corePool/reducer'
+import poolTokensReducer from './poolTokens/reducer'
 import userWalletAddressReducer from './userWalletAddress/reducer'
 
 export default combineReducers({
-  corePool: corePoolReducer,
+  poolTokens: poolTokensReducer,
   userWalletAddress: userWalletAddressReducer
 })
