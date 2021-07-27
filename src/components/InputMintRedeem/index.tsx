@@ -3,9 +3,14 @@ import styles from './input-mint-redeem.module.scss'
 
 interface IInputMintRedeemProps {
   token?: any
+  getBalanceToken: any
 }
 
-const InputMintRedeem = ({ token }: IInputMintRedeemProps) => {
+const InputMintRedeem = ({ token, getBalanceToken }: IInputMintRedeemProps) => {
+  const array = getBalanceToken() || []
+  console.log(array)
+  const value = array.filter((balanceToken) => balanceToken.address === token.address)
+  console.log(value)
   return (
     <div className={styles['input-default']}>
       <div className={styles.info}>
@@ -15,7 +20,7 @@ const InputMintRedeem = ({ token }: IInputMintRedeemProps) => {
       </div>
       <div className={styles.amount}>
         <span>Amount</span>
-        <input type="number" value="0" />
+        <input type="number" value={value[0].balance} />
         <button type="button" className={styles['btn-max']}>Max</button>
       </div>
       <div className={styles.line} />  
