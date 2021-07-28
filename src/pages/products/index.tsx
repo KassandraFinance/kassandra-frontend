@@ -5,12 +5,12 @@ import { HeimCorePool } from '../../constants/tokenAddresses'
 import { IPoolTokensProps } from '../../store/modules/poolTokens/types'
 import { actionGetPoolTokens } from '../../store/modules/poolTokens/actions'
 
-import HeimOperations from '../../components/HeimOperations'
-import IndexDetails from '../../components/IndexDetails'
 import usePoolContract from '../../hooks/usePoolContract'
 
+import HeimOperations from '../../components/HeimOperations'
+import IndexDetails from '../../components/IndexDetails'
+
 import { ProductsContainer, ComingSoon } from './styles'
-import { ICorePoolProps } from '../../store/modules/corePool/types'
 
 const Products = () => {
   const dispatch = useDispatch()
