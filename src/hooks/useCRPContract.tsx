@@ -14,6 +14,12 @@ const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
     return contract
   }
 
+  const joinswapExternAmountIn = (addressCRP: string, tokenAmountIn) => {
+    console.log(tokenAmountIn)
+    const contract = getCRPContract(addressCRP)
+    return contract.methods.joinswapExternAmountIn(new BigNumber(tokenAmountIn).mul(new BigNumber(10).pow(new BigNumber(18))), 0).send({ from: userWalletAddress })
+  }
+
   const exitPool = (addressCRP: string, poolAmountIn, minAmountsOut: Array<BigNumber>) => {
     console.log(poolAmountIn)
     const contract = getCRPContract(addressCRP)
@@ -24,6 +30,7 @@ const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
   return { 
     getCRPContract,
+    joinswapExternAmountIn,
     exitPool
   }
 }
