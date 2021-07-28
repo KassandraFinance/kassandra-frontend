@@ -30,7 +30,7 @@ const Form = ({ action, title, isLogged }: IFormProps) => {
   const { connect } = useConnect()
 
   const { getTotalSupply } = useERC20Contract()
-  const { exitPool } = useCRPContract()
+  const { joinswapExternAmountIn, exitPool } = useCRPContract()
 
 
   React.useEffect(() => {
@@ -57,18 +57,31 @@ const Form = ({ action, title, isLogged }: IFormProps) => {
   }
 
   function handleAction(e: { preventDefault: () => void }) {
-    console.log('handleAction')
     e.preventDefault()
-    exitPool(HeimCRPPOOL, amountHeim, Array(poolTokens.length).fill(new BigNumber(0)))
+    console.log(e)
+    try {
+      switch (title) {
+        case 'Invest':
+          joinswapExternAmountIn(HeimCRPPOOL, amountHeim)
+          break;
+        case 'Withdraw':
+          exitPool(HeimCRPPOOL, amountHeim, Array(poolTokens.length).fill(new BigNumber(0)))
+          break;
+        default:
+          break;
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
     <FormContainer onSubmit={handleAction}>
-      {title === "Mint" || title === "Redeem" ?
+      {title === "Withdraw" ?
         <>
           <InputHeim 
             action={action} 
-            redeem={title === "Redeem" ? true : false} 
+            redeem={title === "Withdraw" ? true : false} 
             amountHeim={amountHeim}
             setAmountHeim={setAmountHeim}
             getBalanceToken={getBalanceToken}
