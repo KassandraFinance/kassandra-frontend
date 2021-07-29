@@ -9,7 +9,7 @@ import { LinkProducts, Backdrop, Ul, Li } from './styles'
 
 const DropdownProducts = () => {
   const [showProducts, setShowProducts] = React.useState(false);
-  const [positionBtnProducts, setPositionBtnProducts] = React.useState<object>({})
+  const [positionBtnProducts, setPositionBtnProducts] = React.useState<any>({})
 
   const { route } = useRouter()
 
