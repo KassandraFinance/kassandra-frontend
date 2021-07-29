@@ -30,8 +30,8 @@ export const Backdrop = styled.div`
 `
 
 interface IUlProps {
-  x: any
-  y: any
+  x: number
+  y: number
 }
 
 export const Ul = styled.ul<IUlProps>`

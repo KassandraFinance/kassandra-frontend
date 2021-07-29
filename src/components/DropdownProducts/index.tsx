@@ -9,7 +9,7 @@ import { LinkProducts, Backdrop, Ul, Li } from './styles'
 
 const DropdownProducts = () => {
   const [showProducts, setShowProducts] = React.useState(false);
-  const [positionBtnProducts, setPositionBtnProducts] = React.useState({})
+  const [positionBtnProducts, setPositionBtnProducts] = React.useState<object>({})
 
   const { route } = useRouter()
 
@@ -40,7 +40,7 @@ const DropdownProducts = () => {
           y={positionBtnProducts['y']}
         >
           <Li>
-            <a>Heim Index</a>
+            <a href="products">Heim Index</a>
           </Li>
         </Ul>
       </Backdrop>
