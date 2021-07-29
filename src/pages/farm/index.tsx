@@ -1,5 +1,6 @@
 import React from 'react'
 
+import VotingPower from '../../components/VotingPower'
 import OthersStakingPools from '../../components/OthersStakingPools'
 
 import styled from 'styled-components'
