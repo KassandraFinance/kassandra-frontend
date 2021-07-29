@@ -1,7 +1,11 @@
 import React from "react"
 import { useRouter } from 'next/router'
 
-import styles from './dropdown.module.scss'
+import Image from 'next/image'
+import arrowDown from '../../../public/assets/arrow-down.svg'
+
+import { LinkProducts, Backdrop, Ul, Li } from './styles'
+
 
 const DropdownProducts = () => {
   const [showProducts, setShowProducts] = React.useState(false);
@@ -9,7 +13,7 @@ const DropdownProducts = () => {
 
   const { route } = useRouter()
 
-  function handleProductsPosition(e) {
+  function handleProductsPosition(e: any) {
     const position = e.target.getClientRects()
     setPositionBtnProducts({
         x: position[0].x,
@@ -19,31 +23,27 @@ const DropdownProducts = () => {
 
   return (
     <>
-      <div 
-        id={route === '/products' && styles['link-selected']}
-        className={styles['btn-products']} 
-        onClick={(e) => {
+      <LinkProducts 
+        products={route === '/products'}
+        onClick={(e: any) => {
           setShowProducts(!showProducts)
           handleProductsPosition(e)
         }
       }>
-        Products<img src="assets/arrow-down.svg" alt=""/>
-      </div>
+        Products<img src="assets/arrow-down.svg" alt="" />
+      </LinkProducts>
       {showProducts &&
-      <div className={styles['backdrop']}  onClick={() => setShowProducts(false)}>
-        <ul 
-          className={styles['products-container']} 
-          style={{
-            position: 'absolute', 
-            left: `${positionBtnProducts['x']}px`, 
-            top: `${positionBtnProducts['y']}px`
-          }}
+      <Backdrop  onClick={() => setShowProducts(false)}>
+        <Ul 
+          className={"anime-top"}
+          x={positionBtnProducts['x']}
+          y={positionBtnProducts['y']}
         >
-          <li className={styles['anime-top']}>
-            <a href="products">Heim Index</a>
-          </li>
-        </ul>
-      </div>
+          <Li>
+            <a>Heim Index</a>
+          </Li>
+        </Ul>
+      </Backdrop>
       }
     </>
   )
