@@ -1,5 +1,6 @@
 import React from 'react'
-import { AbiItem } from "web3-utils"
+import BigNumber from 'bn.js'
+import { AbiItem } from 'web3-utils'
 
 import web3 from '../utils/web3'
 import Pool from "../constants/abi/Pool.json"
@@ -14,29 +15,32 @@ const usePoolContract = () => {
     return contract
   }
 
-  const swapFee = (addresCorePool: string) => {
-    const contract = getPoolContract(addresCorePool)
-    return contract.methods.getSwapFee().call()
+  const swapFee = async (addresCorePool: string): Promise<BigNumber> => {
+    const contract = await getPoolContract(addresCorePool)
+    const value = await contract.methods.getSwapFee().call()
+    return new BigNumber(value)
   }
 
-  const balanceToken = (addresCorePool: string, address: string) => {
-    const contract = getPoolContract(addresCorePool)
-    return contract.methods.getBalance(address).call()
+  const balanceToken = async (addresCorePool: string, address: string): Promise<BigNumber> => {
+    const contract = await getPoolContract(addresCorePool)
+    const value = await contract.methods.getBalance(address).call()
+    return new BigNumber(value)
   }
 
-  const nameToken = (address: string) => {
+  const nameToken = (address: string): string => {
     const tokenERC20Contract = getERC20Contract(address)
     return  tokenERC20Contract.methods.name().call()
   }
 
-  const symbolToken = (address: string) => {
+  const symbolToken = (address: string): string => {
     const tokenERC20Contract = getERC20Contract(address)
     return tokenERC20Contract.methods.symbol().call()
   }
 
-  const decimalsToken = (address: string) => {
-    const tokenERC20Contract = getERC20Contract(address)
-    return tokenERC20Contract.methods.decimals().call()
+  const decimalsToken = async (address: string): Promise<BigNumber> => {
+    const tokenERC20Contract = await getERC20Contract(address)
+    const value = await tokenERC20Contract.methods.decimals().call()
+    return new BigNumber(value)
   }
 
 

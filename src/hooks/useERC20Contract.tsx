@@ -1,4 +1,5 @@
 import React from 'react'
+import BigNumber from 'bn.js'
 import { AbiItem } from "web3-utils"
 
 import web3 from '../utils/web3'
@@ -13,33 +14,33 @@ const useERC20Contract = () => {
   }
 
 
-  const getAllowance = async (userAddress: string, spenderAddress: string, tokenAddress: string): Promise<string> => {
+  const getAllowance = async (userAddress: string, spenderAddress: string, tokenAddress: string): Promise<BigNumber> => {
     try {
       const tokenContract = getERC20Contract(tokenAddress)
       const allowance: string = await tokenContract.methods.allowance(userAddress, spenderAddress).call()
-      return allowance
+      return new BigNumber(allowance)
     } catch (e) {
-      return "0"
+      return new BigNumber(0)
     }
   };
   
-  const getBalance = async (tokenAddress: string, userAddress: string): Promise<string> => {
+  const getBalance = async (tokenAddress: string, userAddress: string): Promise<BigNumber> => {
     const tokenContract = getERC20Contract(tokenAddress)
     try {
       const balance: string = await tokenContract.methods.balanceOf(userAddress).call()
-      return balance
+      return new BigNumber(balance)
     } catch (e) {
-      return "0"
+      return new BigNumber(0)
     }
   };
 
-  const getTotalSupply = async (tokenAddress: string): Promise<string> => {
+  const getTotalSupply = async (tokenAddress: string): Promise<BigNumber> => {
     const tokenContract = getERC20Contract(tokenAddress)
     try {
       const supply: string = await tokenContract.methods.totalSupply().call()
-      return supply
+      return new BigNumber(supply)
     } catch (e) {
-      return "0"
+      return new BigNumber(0)
     }
   };
 

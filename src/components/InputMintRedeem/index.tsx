@@ -1,15 +1,16 @@
 import React from 'react'
+import { BNtoDecimal } from '../../utils/numerals'
 import styles from './input-mint-redeem.module.scss'
 
 interface IInputMintRedeemProps {
-  token: any
+  token: IPoolTokensProps
   getBalanceToken: any
 }
 
 const InputMintRedeem = ({ token, getBalanceToken }: IInputMintRedeemProps) => {
   const arrayBalanceToken = getBalanceToken()
 
-  const balance = arrayBalanceToken.filter((balanceToken: { address: string }) => 
+  const balance = arrayBalanceToken.filter((balanceToken: IPoolTokensProps) => 
     balanceToken.address === token.address
   )
 
@@ -22,7 +23,7 @@ const InputMintRedeem = ({ token, getBalanceToken }: IInputMintRedeemProps) => {
       </div>
       <div className={styles.amount}>
         <span>Amount</span>
-        <input type="number" value={balance[0].balance} />
+        <input type="number" readOnly value={BNtoDecimal(balance[0].balance, balance[0].decimals, 6)} />
         <button type="button" className={styles['btn-max']}>Max</button>
       </div>
       <div className={styles.line} />  

@@ -3,6 +3,7 @@ import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
 import { HeimCRPPOOL } from '../../../constants/tokenAddresses'
+import { IPoolTokensProps } from '../../../store/modules/poolTokens/types'
 
 import useConnect from '../../../hooks/useConnect'
 import useCRPContract from '../../../hooks/useCRPContract'
@@ -24,7 +25,7 @@ interface IFormProps {
 
 const Form = ({ action, title, isLogged }: IFormProps) => {
   const [amountHeim, setAmountHeim] = React.useState<BigNumber>(new BigNumber(0))
-  const [supplyHeim, setSupplyHeim] = React.useState(0)
+  const [supplyHeim, setSupplyHeim] = React.useState<BigNumber>(new BigNumber(0))
 
   const { poolTokens } = useSelector((state: RootStateOrAny) => state)
   const { connect } = useConnect()
@@ -35,25 +36,32 @@ const Form = ({ action, title, isLogged }: IFormProps) => {
 
   React.useEffect(() => {
     (async () => {
-      const supplyHeim = await getTotalSupply(HeimCRPPOOL)
-      setSupplyHeim(Number(supplyHeim))
+      const newSupplyHeim = await getTotalSupply(HeimCRPPOOL)
+      setSupplyHeim(newSupplyHeim)
     })()
   }, [])
 
 
-  const getBalanceToken = () => {
-    const arrayRedeemBalance = poolTokens.map((tokenPool: { address: string, balance: BigNumber}) => {
-      return { balance: handleInputHeim(tokenPool.balance), address: tokenPool.address }
-    })
-
-    return arrayRedeemBalance
+  function getRedeemBalance(balance: BigNumber): BigNumber {
+    if (supplyHeim.toString(10) === "0") {
+      return 0;
+    }
+    return amountHeim
+      .mul(new BigNumber(97))
+      .mul(balance)
+      .div(supplyHeim)
+      .div(new BigNumber(100))
   }
 
-  function handleInputHeim(balance) {
-    let y = (Number(amountHeim) * 0.97) / supplyHeim
-    let balanceTokenToRedeem = y * balance
+  const getBalanceToken = () => {
+    const arrayRedeemBalance = poolTokens.map((tokenPool: IPoolTokensProps) => (
+      {
+        ...tokenPool,
+        balance: getRedeemBalance(tokenPool.balance)
+      }
+    ))
 
-    return balanceTokenToRedeem
+    return arrayRedeemBalance
   }
 
   function handleAction(e: { preventDefault: () => void }) {

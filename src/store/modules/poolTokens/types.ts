@@ -1,3 +1,6 @@
+import BigNumber from 'bn.js'
+
+
 export const Types = {
   GET_POOL_TOKENS: 'GET_POOL_TOKENS'
 };
@@ -5,7 +8,7 @@ export const Types = {
 export interface IPoolTokensProps {
   name: string
   symbol: string
-  balance: string
-  decimals: string
+  balance: BigNumber
+  decimals: BigNumber
   address?: string
 }
