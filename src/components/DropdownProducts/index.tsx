@@ -25,7 +25,7 @@ const DropdownProducts = () => {
     <>
       <LinkProducts 
         products={route === '/products'}
-        onClick={(e: any) => {
+        onClick={(e: Event) => {
           setShowProducts(!showProducts)
           handleProductsPosition(e)
         }
@@ -35,9 +35,9 @@ const DropdownProducts = () => {
       {showProducts &&
       <Backdrop  onClick={() => setShowProducts(false)}>
         <Ul 
-          className={"anime-top"}
-          x={positionBtnProducts['x']}
-          y={positionBtnProducts['y']}
+          className="anime-top"
+          x={positionBtnProducts.x}
+          y={positionBtnProducts.y}
         >
           <Li>
             <a href="products">Heim Index</a>

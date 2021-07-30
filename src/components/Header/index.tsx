@@ -23,16 +23,16 @@ const Header = () => {
   return (
     <HeaderContainer>
       <Link href="/">
-        <a><img src="assets/logo-header.svg" alt="" className="logo-header" /></a>
+        <img src="assets/logo-header.svg" alt="" className="logo-header" />
       </Link>
       <Link href="/">
-        <a><img src="assets/logo-64.svg" alt="" className="logo-64" /></a>
+        <img src="assets/logo-64.svg" alt="" className="logo-64" />
       </Link>
       <Nav>
         <DropdownProducts />
-        <Link href="/farm"><a>Stake/Farm</a></Link>
-        <Link href="/vote"><a>Vote</a></Link>
-        <Link href="/about"><a>About</a></Link>
+        <Link href="/farm">Stake/Farm</Link>
+        <Link href="/vote">Vote</Link>
+        <Link href="/about">About</Link>
         {web3.currentProvider !== null ? 
           isLogged ?
             <ButtonConnectWallet 
@@ -42,7 +42,7 @@ const Header = () => {
               {substr(userWalletAddress)}
             </ButtonConnectWallet>
             :
-            <ButtonConnectWallet type="button" onClick={() => connect()}>
+            <ButtonConnectWallet type="button" onClick={connect}>
               Connect Wallet
             </ButtonConnectWallet>
           :

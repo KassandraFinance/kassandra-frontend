@@ -19,19 +19,18 @@ const useConnect = () => {
       const provider = await detectEthereumProvider()
       
       if (provider !== null) {
-        window.ethereum.request({ method: 'wallet_getPermissions' }).then((permissions) => {
-          console.log(permissions)
-          if (permissions.length > 0) {
-            //User is already connected just straight log him in
-            startApp(provider)
-            // setIsWalletPermissions(true)
-          }
-          else {
-            //User not connected initial flow
-            console.log("User has no permissions")
-            // setIsWalletPermissions(false)
-          }
-        })
+        const permissions = await window.ethereum.request({ method: 'wallet_getPermissions' });
+        console.log(permissions)
+        if (permissions.length > 0) {
+          // User is already connected just straight log him in
+          startApp(provider)
+          // setIsWalletPermissions(true)
+        }
+        else {
+          // User not connected initial flow
+          console.log("User has no permissions")
+          // setIsWalletPermissions(false)
+        }
       }
       console.log("Install MestaMask")
     })()

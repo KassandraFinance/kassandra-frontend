@@ -9,16 +9,14 @@ import { storeWrapper } from "../store"
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
-const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
-  return (
-    <div className={styles['background-page']}>
-      <Header />
-      <main className={styles.container}>
-        <Component {...pageProps} />
-      </main>
-      <Footer />
-    </div>
-  )
-} 
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
+  <div className={styles['background-page']}>
+    <Header />
+    <main className={styles.container}>
+      <Component {...pageProps} />
+    </main>
+    <Footer />
+  </div>
+)
 
 export default storeWrapper.withRedux(MyApp)

@@ -27,15 +27,15 @@ const Products = () => {
       const poolContract = getPoolContract(HeimCorePool)
       const arrayTokensPool = await poolContract.methods.getCurrentTokens().call()
 
-      const poolTokens: Array<IPoolTokensProps> = await Promise.all(arrayTokensPool.map(async (tokenAddress: string) => {
-        return {
+      const poolTokens: Array<IPoolTokensProps> = await Promise.all(arrayTokensPool.map(async (tokenAddress: string) => (
+        {
           name: await nameToken(tokenAddress),
           symbol: await symbolToken(tokenAddress),
           balance: await balanceToken(HeimCorePool, tokenAddress),
           decimals: await decimalsToken(tokenAddress),
           address: tokenAddress
         }
-      }))
+      )))
       
       dispatch(actionGetPoolTokens(poolTokens))
     })()

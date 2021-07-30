@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ModalStaking from '../../components/ModalStaking'
+import ModalStaking from '../ModalStaking'
 
 import { 
   BorderGradient,
@@ -72,7 +72,7 @@ const OthersStakingPools = ({ img }: IOthersStakingPoolsProps) => {
       <ModalStaking 
         modalOpen={modalOpen} 
         setModalOpen={setModalOpen}
-        otherStakingPools={true}
+        otherStakingPools
       />
     </>
   )

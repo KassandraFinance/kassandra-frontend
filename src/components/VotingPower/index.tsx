@@ -1,5 +1,5 @@
 import React from 'react'
-import ModalStaking from '../../components/ModalStaking'
+import ModalStaking from '../ModalStaking'
 
 import { 
   BorderGradient, 

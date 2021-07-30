@@ -10,7 +10,7 @@ const InputDefault = () => (
     </div>
     <div className={styles.amount}>
       <span>Amount</span>
-      <input type="number" value="0" />
+      <input type="number" readOnly value="0" />
       <span>U$ 10.00</span>
     </div>
     <div className={styles.line} />  

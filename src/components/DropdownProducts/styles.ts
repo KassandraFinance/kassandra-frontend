@@ -39,8 +39,8 @@ export const Ul = styled.ul<IUlProps>`
   margin-top: 20px;
   margin-left: -18px;
 
-  left: ${props => props.x + "px"};
-  top: ${props => props.y + "px"};
+  left: ${props => `${props.x}px`};
+  top: ${props => `${props.y}px`};
 
   .anime-top {
     opacity: 0;

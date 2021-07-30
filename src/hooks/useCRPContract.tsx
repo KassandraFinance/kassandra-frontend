@@ -7,7 +7,7 @@ import web3 from '../utils/web3'
 import ConfigurableRightsPool from "../constants/abi/ConfigurableRightsPool.json"
 
 const usePoolContract = () => {
-const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
   const getCRPContract = (address: string) => {
     const contract = new web3.eth.Contract((ConfigurableRightsPool as unknown) as AbiItem, address)

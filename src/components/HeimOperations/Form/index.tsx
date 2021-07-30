@@ -81,16 +81,16 @@ const Form = ({ action, title, isLogged }: IFormProps) => {
         <>
           <InputHeim 
             action={action} 
-            redeem={title === "Withdraw" ? true : false} 
+            redeem={title === "Withdraw"} 
             amountHeim={amountHeim}
             setAmountHeim={setAmountHeim}
             getBalanceToken={getBalanceToken}
           />
-          {poolTokens.map((token: any) => (
-            <InputMintRedeem token={token} getBalanceToken={getBalanceToken} />
+          {poolTokens.map((token: IPoolTokensProps) => (
+            <InputMintRedeem key={token.address} token={token} getBalanceToken={getBalanceToken} />
           ))}
         </>
-      : 
+      :
         <>
           <InputEth action={action} />
           <InputDefault />
@@ -99,7 +99,7 @@ const Form = ({ action, title, isLogged }: IFormProps) => {
       {isLogged ? 
         <Button type="submit">{title}</Button>
       :
-        <Button type="button" onClick={() => connect()}>Connect Wallet</Button>
+        <Button type="button" onClick={connect}>Connect Wallet</Button>
       }
     </FormContainer>
   )
