@@ -1,7 +1,6 @@
 import React from 'react'
+import { AbiItem } from "web3-utils"
 import BigNumber from 'bn.js'
-import { AbiItem } from 'web3-utils'
-
 import web3 from '../utils/web3'
 import Pool from "../constants/abi/Pool.json"
 import useERC20Contract from './useERC20Contract'
@@ -15,12 +14,44 @@ const usePoolContract = () => {
     return contract
   }
 
+  const denormalizedWeight = async (addresCorePool: string, tokenAddressIn: string) => {
+    const contract = await getPoolContract(addresCorePool)
+    const value = await contract.methods.getDenormalizedWeight(tokenAddressIn).call()
+    return new BigNumber(value)
+  }
+
+  const totalDenormalizedWeight = async (addresCorePool: string) => {
+    const contract = await getPoolContract(addresCorePool)
+    const value = await contract.methods.getTotalDenormalizedWeight().call()
+    return new BigNumber(value)
+  }
+
+  const calcPoolOutGivenSingleIn = async (
+    addresCorePool: string, 
+    tokenBalanceIn: BigNumber, 
+    tokenWeightIn: BigNumber, 
+    poolTotalSupply: BigNumber, 
+    totalWeightIn: BigNumber, 
+    tokenAmountIn: BigNumber, 
+    swapFee: BigNumber
+  ) => {
+    const contract = getPoolContract(addresCorePool)
+    const value = await contract.methods.calcPoolOutGivenSingleIn(
+      tokenBalanceIn, 
+      tokenWeightIn, 
+      poolTotalSupply, 
+      totalWeightIn, 
+      tokenAmountIn, 
+      swapFee
+    ).call()
+    return new BigNumber(value)
+  }
+
   const swapFee = async (addresCorePool: string): Promise<BigNumber> => {
     const contract = await getPoolContract(addresCorePool)
     const value = await contract.methods.getSwapFee().call()
     return new BigNumber(value)
   }
-
   const balanceToken = async (addresCorePool: string, address: string): Promise<BigNumber> => {
     const contract = await getPoolContract(addresCorePool)
     const value = await contract.methods.getBalance(address).call()
@@ -47,11 +78,14 @@ const usePoolContract = () => {
 
   return { 
     getPoolContract,
+    calcPoolOutGivenSingleIn,
     swapFee,
     balanceToken,
     nameToken,
     symbolToken,
-    decimalsToken
+    decimalsToken,
+    denormalizedWeight,
+    totalDenormalizedWeight
   }
 }
 

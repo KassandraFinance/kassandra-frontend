@@ -25,7 +25,10 @@ interface IFormProps {
 
 const Form = ({ action, title, isLogged }: IFormProps) => {
   const [amountHeim, setAmountHeim] = React.useState<BigNumber>(new BigNumber(0))
+  const [amountTokenPool, setAmountTokenPool] = React.useState<BigNumber>(new BigNumber(0))
   const [supplyHeim, setSupplyHeim] = React.useState<BigNumber>(new BigNumber(0))
+  const [investSelected, setInvestSelected] = React.useState<string>("0xc778417E063141139Fce010982780140Aa0cD5Ab")
+  const [investHeim, setInvestHeim] = React.useState<BigNumber>(new BigNumber(0))
 
   const { poolTokens } = useSelector((state: RootStateOrAny) => state)
   const { connect } = useConnect()
@@ -44,7 +47,7 @@ const Form = ({ action, title, isLogged }: IFormProps) => {
 
   function getRedeemBalance(balance: BigNumber): BigNumber {
     if (supplyHeim.toString(10) === "0") {
-      return 0;
+      return new BigNumber(0);
     }
     return amountHeim
       .mul(new BigNumber(97))
@@ -66,11 +69,10 @@ const Form = ({ action, title, isLogged }: IFormProps) => {
 
   function handleAction(e: { preventDefault: () => void }) {
     e.preventDefault()
-    console.log(e)
     try {
       switch (title) {
         case 'Invest':
-          joinswapExternAmountIn(HeimCRPPOOL, amountHeim)
+          joinswapExternAmountIn(HeimCRPPOOL, poolTokens[0]?.address, amountTokenPool)
           break;
         case 'Withdraw':
           exitPool(HeimCRPPOOL, amountHeim, Array(poolTokens.length).fill(new BigNumber(0)))
@@ -90,7 +92,6 @@ const Form = ({ action, title, isLogged }: IFormProps) => {
           <InputHeim 
             action={action} 
             redeem={title === "Withdraw"} 
-            amountHeim={amountHeim}
             setAmountHeim={setAmountHeim}
             getBalanceToken={getBalanceToken}
           />
@@ -100,8 +101,20 @@ const Form = ({ action, title, isLogged }: IFormProps) => {
         </>
       :
         <>
-          <InputEth action={action} />
-          <InputDefault />
+          <InputEth
+              action={action} 
+              redeem={title === "Withdraw" ? true : false} 
+              amountTokenPool={amountTokenPool}
+              setAmountTokenPool={setAmountTokenPool}
+              getBalanceToken={getBalanceToken}
+              investSelected={investSelected}
+              setInvestSelected={setInvestSelected}
+              setInvestHeim={setInvestHeim}
+              supplyHeim={supplyHeim}
+          />
+          <InputDefault
+            investHeim={investHeim}
+          />
         </>
       }
       {isLogged ? 

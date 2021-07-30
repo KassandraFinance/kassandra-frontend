@@ -16,12 +16,12 @@ const usePoolContract = () => {
 
   const joinswapExternAmountIn = (addressCRP: string, tokenAmountIn: BigNumber): BigNumber => {
     const contract = getCRPContract(addressCRP)
-    return new BigNumber(contract.methods.joinswapExternAmountIn(tokenAmountIn.mul(new BigNumber(10).pow(new BigNumber(18))), 0).send({ from: userWalletAddress }))
+    return new BigNumber(contract.methods.joinswapExternAmountIn(tokenAmountIn, 0).send({ from: userWalletAddress }))
   }
 
   const exitPool = (addressCRP: string, poolAmountIn: BigNumber, minAmountsOut: Array<BigNumber>) => {
     const contract = getCRPContract(addressCRP)
-    return contract.methods.exitPool(poolAmountIn.mul(new BigNumber(10).pow(new BigNumber(18))), minAmountsOut).send({ from: userWalletAddress })
+    return contract.methods.exitPool(poolAmountIn, minAmountsOut).send({ from: userWalletAddress })
   }
 
 
