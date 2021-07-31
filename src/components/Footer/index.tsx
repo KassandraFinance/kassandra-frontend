@@ -10,7 +10,7 @@ const Footer = () => (
           <img src="assets/kassandra-footer.svg" alt="" />
           <ul>
             <li>
-              <a href="https://discord.gg/jc94q5mm" target="_blank" rel="noopener noreferrer">
+              <a href="https://discord.gg/UjRr28Kf" target="_blank" rel="noopener noreferrer">
                 <img src="assets/discord-icon.svg" alt="" />
               </a>
             </li>
