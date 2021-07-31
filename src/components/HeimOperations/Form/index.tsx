@@ -27,7 +27,7 @@ const Form = ({ action, title, isLogged }: IFormProps) => {
   const [amountHeim, setAmountHeim] = React.useState<BigNumber>(new BigNumber(0))
   const [amountTokenPool, setAmountTokenPool] = React.useState<BigNumber>(new BigNumber(0))
   const [supplyHeim, setSupplyHeim] = React.useState<BigNumber>(new BigNumber(0))
-  const [investSelected, setInvestSelected] = React.useState<string>("0xc778417E063141139Fce010982780140Aa0cD5Ab")
+  const [investSelected, setInvestSelected] = React.useState<string>("")
   const [investHeim, setInvestHeim] = React.useState<BigNumber>(new BigNumber(0))
 
   const { poolTokens } = useSelector((state: RootStateOrAny) => state)

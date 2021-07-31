@@ -1,13 +1,27 @@
 import React from 'react'
 import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
-import web3 from '../../utils/web3'
 
+import { BNtoDecimal } from '../../utils/numerals'
+import web3 from '../../utils/web3'
 
 import { HeimCorePool } from '../../constants/tokenAddresses'
 import usePoolContract from '../../hooks/usePoolContract'
+import useERC20Contract from '../../hooks/useERC20Contract'
 
-import styles from './input-eth.module.scss'
+import { 
+  InputETHContainer, 
+  PayWith, 
+  Line, 
+  Span,
+  SpanLight,
+  ImgArrowLong,
+  Amount,
+  ButtonMax,
+  Input,
+  Select
+} from './styles'
+
 
 interface IInputEthProps {
   action: string
@@ -31,9 +45,11 @@ const InputEth = ({
   setInvestHeim,
   supplyHeim
 }: IInputEthProps) => {
-  const { poolTokens } = useSelector((state: RootStateOrAny) => state)
+  const [balanceToken, setBalanceToken] = React.useState<BigNumber>(new BigNumber(0))
+  const { poolTokens, userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   
   const { calcPoolOutGivenSingleIn, denormalizedWeight, totalDenormalizedWeight, swapFee } = usePoolContract()
+  const { getBalance } = useERC20Contract()
 
 
   const tokenSelected = poolTokens.filter((token: { address: string }) => {
@@ -48,12 +64,9 @@ const InputEth = ({
         setInvestHeim(new BigNumber(0))
         return
       }
-      console.log(tokenSelected)
       const denormalized = await denormalizedWeight(HeimCorePool, tokenSelected[0]?.address)
       const totalDenormalized = await totalDenormalizedWeight(HeimCorePool)
       const swap = await swapFee(HeimCorePool)
-
-      console.log(denormalized, totalDenormalized, swap)
 
       const invest = await calcPoolOutGivenSingleIn(
         HeimCorePool, 
@@ -65,63 +78,74 @@ const InputEth = ({
         swap
       )
 
+      const balanceTokenSelected = await getBalance(tokenSelected[0]?.address, userWalletAddress)
+      setBalanceToken(balanceTokenSelected)
       setInvestHeim(invest)
     })()
   }, [amountTokenPool, investSelected])
+
+  const handleSetTotalBalance = () => {
+    setAmountTokenPool(balanceToken)
+  }
   
   return (
-    <div className={styles['input-eth']}>
-      <div className={styles['pay-with']}>
-        <span>{action}</span>
-        <select defaultValue={investSelected} onChange={(e: any) => setInvestSelected(e.target.value)}>
-          {poolTokens.map((token: { address: string, symbol: string}) =>
-            <option key={token.address} value={token?.address}>{token?.symbol}</option>
-          )}
-        </select>
-        <div className={styles.line} />
-      </div>
-      <img className={styles['arrow-long']} src="assets/arrow-long-down.svg" alt="" />
-      <div className={styles.amount}>
-        <span>Amount</span>
-        <input
-        type="number"
-        placeholder="0"
-        step="any"
-        min="0"
-        onKeyDown={(e: Event) => {
-          // don't allow negative numbers
-          if (e.key === '-') {
-            e.preventDefault()
+    <InputETHContainer>
+      <PayWith>
+        <div style={{ paddingLeft: '12px' }} >
+          <Span>{action}</Span>
+          {poolTokens.length > 0 &&
+            <Select defaultValue={investSelected} onChange={(e: any) => setInvestSelected(e.target.value)}>
+              <option value="">- - - -</option>
+              {poolTokens.map((token: { address: string, symbol: string}) =>
+                <option key={token.address} value={token?.address}>{token?.symbol}</option>
+              )}
+            </Select>
           }
-          // Blink bug makes the value come empty if pressing the decimal symbol that is not that of the current locale
-          else if (e.key === '.' || e.key === ',') {
-            // first time value will be ok, if pressing twice it zeroes, we ignore those
-            if (e.target.value.length > 0 && e.target.value.search(/[,.]/) === -1) {
-              e.target.dataset.lastvalue = e.target.value
+          <SpanLight>Balance: {investSelected === '' ? '0.000000' : BNtoDecimal(balanceToken, new BigNumber(18), 6)}</SpanLight>
+        </div>
+        <Line />
+      </PayWith>
+      <ImgArrowLong src="assets/arrow-long-down.svg" alt="" />
+      <Amount>
+        <Span>Amount</Span>
+        <Input
+          type="number"
+          placeholder="0"
+          step="any"
+          min="0"
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+            // don't allow negative numbers
+            if (e.key === '-') {
+              e.preventDefault()
+            }
+            // Blink bug makes the value come empty if pressing the decimal symbol that is not that of the current locale
+            else if (e.key === '.' || e.key === ',') {
+              // first time value will be ok, if pressing twice it zeroes, we ignore those
+              if (e.target.value.length > 0 && e.target.value.search(/[,.]/) === -1) {
+                e.target.dataset.lastvalue = e.target.value
+              }
+            }
+            else if (e.key === 'Backspace' || e.key === 'Delete') {
+              e.target.dataset.lastvalue = 0
+            }
+          }}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              getBalanceToken()
+              let { value }: any = e.target
+
+              if (value.length === 0) {
+                value = e.target.dataset.lastvalue
+              }
+
+              setAmountTokenPool(new BigNumber(web3.utils.toWei(value)))
             }
           }
-          else if (e.key === 'Backspace' || e.key === 'Delete') {
-            e.target.dataset.lastvalue = 0
-          }
-        }}
-        onChange={
-          (e: Event) => {
-            getBalanceToken()
-            let { value } = e.target
-
-            if (value.length === 0) {
-              value = e.target.dataset.lastvalue
-            }
-
-            setAmountTokenPool(new BigNumber(web3.utils.toWei(value)))
-            // setAmountTokenPool(value)
-          }
-        }
-      />
-        <span>U$ 10.00</span>
-        <div className={styles.line} />
-      </div>
-    </div>
+          value={BNtoDecimal(amountTokenPool, new BigNumber(18), 6)}
+        />
+        <ButtonMax type="button" onClick={handleSetTotalBalance}>Max</ButtonMax>
+        <Line />
+      </Amount>
+    </InputETHContainer>
   )
 }
 

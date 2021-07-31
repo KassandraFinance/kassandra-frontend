@@ -1,4 +1,5 @@
 import React from 'react'
+import { IPoolTokensProps } from '../../store/modules/poolTokens/types'
 import { BNtoDecimal } from '../../utils/numerals'
 import styles from './input-mint-redeem.module.scss'
 

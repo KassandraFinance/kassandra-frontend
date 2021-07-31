@@ -67,7 +67,7 @@ export const Button = styled.button`
   color: #211426;
   font-size: 20px;
 
-  width: 216px;
+  width: 100%;
   height: 44px;
   margin: 40px 0;
   outline: none;

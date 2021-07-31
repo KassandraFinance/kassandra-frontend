@@ -14,6 +14,9 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased !important;
     -moz-osx-font-smoothing: grayscale !important;
   }
+  select, button, input {
+    font-family: 'Rubik', sans-serif;
+  }
   ul, ol {
     list-style: none;
   }
