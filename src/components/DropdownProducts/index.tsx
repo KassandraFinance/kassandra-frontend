@@ -25,7 +25,7 @@ const DropdownProducts = () => {
     <>
       <LinkProducts 
         products={route === '/products'}
-        onClick={(e: Event) => {
+        onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
           setShowProducts(!showProducts)
           handleProductsPosition(e)
         }
