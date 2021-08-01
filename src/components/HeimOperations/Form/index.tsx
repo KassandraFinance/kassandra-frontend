@@ -9,21 +9,21 @@ import useConnect from '../../../hooks/useConnect'
 import useCRPContract from '../../../hooks/useCRPContract'
 import useERC20Contract from '../../../hooks/useERC20Contract'
 
-import InputEth from '../../InputEth'
-import InputHeim from '../../InputHeim'
-import InputDefault from '../../InputDefault'
-import InputMintRedeem from '../../InputMintRedeem'
+import InputHeim from './InputHeim'
+import InputTokens from './InputTokens'
+import InputDefault from './InputDefault'
+import InputWithdraw from './InputWithdraw'
 
 
-import { FormContainer, Button } from '../styles'
+import { FormContainer, Button } from './styles'
 
 interface IFormProps {
-  action: string
+  typeAction: string
   title: string
   isLogged: boolean
 }
 
-const Form = ({ action, title, isLogged }: IFormProps) => {
+const Form = ({ typeAction, title, isLogged }: IFormProps) => {
   const [amountHeim, setAmountHeim] = React.useState<BigNumber>(new BigNumber(0))
   const [amountTokenPool, setAmountTokenPool] = React.useState<BigNumber>(new BigNumber(0))
   const [supplyHeim, setSupplyHeim] = React.useState<BigNumber>(new BigNumber(0))
@@ -90,19 +90,25 @@ const Form = ({ action, title, isLogged }: IFormProps) => {
       {title === "Withdraw" ?
         <>
           <InputHeim 
-            action={action} 
+            typeAction={typeAction} 
             redeem={title === "Withdraw"} 
+            amountHeim={amountHeim}
             setAmountHeim={setAmountHeim}
             getBalanceToken={getBalanceToken}
+            investSelected={investSelected}
           />
           {poolTokens.map((token: IPoolTokensProps) => (
-            <InputMintRedeem key={token.address} token={token} getBalanceToken={getBalanceToken} />
+            <InputWithdraw 
+              key={token.address} 
+              token={token} 
+              getBalanceToken={getBalanceToken} 
+            />
           ))}
         </>
       :
         <>
-          <InputEth
-              action={action} 
+          <InputTokens
+              typeAction={typeAction} 
               redeem={title === "Withdraw" ? true : false} 
               amountTokenPool={amountTokenPool}
               setAmountTokenPool={setAmountTokenPool}

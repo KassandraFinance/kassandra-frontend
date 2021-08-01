@@ -2,15 +2,15 @@ import React from 'react'
 import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import { BNtoDecimal } from '../../utils/numerals'
-import web3 from '../../utils/web3'
+import { BNtoDecimal } from '../../../utils/numerals'
+import web3 from '../../../utils/web3'
 
-import { HeimCorePool } from '../../constants/tokenAddresses'
-import usePoolContract from '../../hooks/usePoolContract'
-import useERC20Contract from '../../hooks/useERC20Contract'
+import { HeimCorePool } from '../../../constants/tokenAddresses'
+import usePoolContract from '../../../hooks/usePoolContract'
+import useERC20Contract from '../../../hooks/useERC20Contract'
 
 import { 
-  InputETHContainer, 
+  InputTokensContainer, 
   PayWith, 
   Line, 
   Span,
@@ -24,7 +24,7 @@ import {
 
 
 interface IInputEthProps {
-  action: string
+  typeAction: string
   redeem: boolean
   getBalanceToken: () => void
   investSelected: string
@@ -35,8 +35,8 @@ interface IInputEthProps {
   setInvestHeim: React.Dispatch<React.SetStateAction<BigNumber>>
 }
 
-const InputEth = ({
-  action, 
+const InputTokens = ({
+  typeAction, 
   amountTokenPool, 
   setAmountTokenPool,
   getBalanceToken,
@@ -89,20 +89,16 @@ const InputEth = ({
   }
   
   return (
-    <InputETHContainer>
+    <InputTokensContainer>
       <PayWith>
-        <div style={{ paddingLeft: '12px' }} >
-          <Span>{action}</Span>
-          {poolTokens.length > 0 &&
-            <Select defaultValue={investSelected} onChange={(e: any) => setInvestSelected(e.target.value)}>
-              <option value="">- - - -</option>
-              {poolTokens.map((token: { address: string, symbol: string}) =>
-                <option key={token.address} value={token?.address}>{token?.symbol}</option>
-              )}
-            </Select>
-          }
-          <SpanLight>Balance: {investSelected === '' ? '0.000000' : BNtoDecimal(balanceToken, new BigNumber(18), 6)}</SpanLight>
-        </div>
+        <Span>{typeAction}</Span>
+        <Select defaultValue={investSelected} onChange={(e: any) => setInvestSelected(e.target.value)}>
+          <option value="">- - - -</option>
+          {poolTokens.map((token: { address: string, symbol: string}) =>
+            <option key={token.address} value={token?.address}>{token?.symbol}</option>
+          )}
+        </Select>
+        <SpanLight>Balance: {investSelected === '' ? '0.000000' : BNtoDecimal(balanceToken, new BigNumber(18), 6)}</SpanLight>
         <Line />
       </PayWith>
       <ImgArrowLong src="assets/arrow-long-down.svg" alt="" />
@@ -131,7 +127,7 @@ const InputEth = ({
           }}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               getBalanceToken()
-              let { value }: any = e.target
+              let { value } = e.target
 
               if (value.length === 0) {
                 value = e.target.dataset.lastvalue
@@ -145,8 +141,8 @@ const InputEth = ({
         <ButtonMax type="button" onClick={handleSetTotalBalance}>Max</ButtonMax>
         <Line />
       </Amount>
-    </InputETHContainer>
+    </InputTokensContainer>
   )
 }
 
-export default InputEth
+export default InputTokens

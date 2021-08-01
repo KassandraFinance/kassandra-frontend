@@ -42,9 +42,9 @@ const HeimOperations = () => {
         />
         <Label htmlFor="swap">swap</Label>
       </SelectOperator>
-      {inputChecked === 'invest' && <Form title="Invest" action="Pay with" isLogged={isLogged} />}
-      {inputChecked === 'withdraw' && <Form title="Withdraw" action="Send" isLogged={isLogged} />}
-      {inputChecked === 'swap' && <Form title="Swap" action="You give" isLogged={isLogged} />}
+      {inputChecked === 'invest' && <Form title="Invest" typeAction="Pay with" isLogged={isLogged} />}
+      {inputChecked === 'withdraw' && <Form title="Withdraw" typeAction="Send" isLogged={isLogged} />}
+      {inputChecked === 'swap' && <Form title="Swap" typeAction="You give" isLogged={isLogged} />}
     </HeimOperationsContainer>
   )
 }
