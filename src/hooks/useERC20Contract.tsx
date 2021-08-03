@@ -4,9 +4,52 @@ import { AbiItem } from "web3-utils"
 
 import web3 from '../utils/web3'
 import ERC20ABI from "../constants/abi/ERC20.json"
+import { useSelector, RootStateOrAny } from 'react-redux'
 
 
 const useERC20Contract = () => {
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+
+  const sleep = (ms: number) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
+  
+  const waitTransaction = async (txHash: string) => {
+    let txReceipt: any = null;
+    while (txReceipt === null) {
+      const r = await web3.eth.getTransactionReceipt(txHash);
+      txReceipt = r;
+      await sleep(2000);
+    }
+    return txReceipt.status;
+  };
+  
+  const approve = async (
+    spenderAddress: string,
+    tokenAddress: string,
+  ): Promise<boolean> => {
+    try {
+      const tokenContract = getERC20Contract(tokenAddress);
+      return tokenContract.methods
+        .approve(spenderAddress, web3.utils.toTwosComplement(-1))
+        .send({ from: userWalletAddress }, async (error: any, txHash: string) => {
+          if (error) {
+            console.log("ERC20 could not be approved", error);
+            return false;
+          }
+          const status = await waitTransaction(txHash);
+          if (!status) {
+            console.log("Approval transaction failed.");
+            return false;
+          }
+          return true;
+        });
+    } catch (e) {
+      console.log("error", e);
+      return false;
+    }
+  };
+  
 
   const getERC20Contract = (address: string) => {
     const contract = new web3.eth.Contract((ERC20ABI as unknown) as AbiItem, address)
@@ -14,13 +57,13 @@ const useERC20Contract = () => {
   }
 
 
-  const getAllowance = async (userAddress: string, spenderAddress: string, tokenAddress: string): Promise<BigNumber> => {
+  const getAllowance = async (addressCRP: string, tokenAddress: string): Promise<boolean> => {
     try {
       const tokenContract = getERC20Contract(tokenAddress)
-      const allowance: string = await tokenContract.methods.allowance(userAddress, spenderAddress).call()
-      return new BigNumber(allowance)
+      const allowance: string = await tokenContract.methods.allowance(userWalletAddress, addressCRP).call()
+      return allowance !== "0"
     } catch (e) {
-      return new BigNumber(0)
+      return false
     }
   };
   
@@ -48,7 +91,8 @@ const useERC20Contract = () => {
     getERC20Contract,
     getAllowance,
     getBalance,
-    getTotalSupply
+    getTotalSupply,
+    approve
   }
 }
 
