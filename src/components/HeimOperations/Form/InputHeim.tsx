@@ -56,7 +56,7 @@ const InputHeim = ({
       <PayWith>
         <Span>{typeAction}</Span>
         <Symbol>HEIM</Symbol>
-        <SpanLight>Balance: {balanceToken.toString() === '' ? '0.000000' : BNtoDecimal(balanceToken, new BigNumber(18), 6)}</SpanLight>
+        <SpanLight>Balance: {balanceToken.toString() === '0' ? '0.000000' : BNtoDecimal(balanceToken, new BigNumber(18), 6)}</SpanLight>
       </PayWith>
       <ImgArrowLong 
         style={{ backgroundColor: '#030102', padding: '0 24px 14px', marginTop: '44px'}} 

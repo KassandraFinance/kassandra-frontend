@@ -29,11 +29,11 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
   const [supplyHeim, setSupplyHeim] = React.useState<BigNumber>(new BigNumber(0))
   const [investSelected, setInvestSelected] = React.useState<string>("")
   const [investHeim, setInvestHeim] = React.useState<BigNumber>(new BigNumber(0))
-
+  const [isApprove, setIsApprove] = React.useState(false)
   const { poolTokens } = useSelector((state: RootStateOrAny) => state)
   const { connect } = useConnect()
 
-  const { getTotalSupply } = useERC20Contract()
+  const { getTotalSupply, getAllowance, approve } = useERC20Contract()
   const { joinswapExternAmountIn, exitPool } = useCRPContract()
 
 
@@ -43,6 +43,11 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
       setSupplyHeim(newSupplyHeim)
     })()
   }, [])
+
+  React.useEffect(() => {
+    getAllowance(HeimCRPPOOL, investSelected)
+      .then((res: boolean) => setIsApprove(res))
+  }, [investSelected])
 
 
   function getRedeemBalance(balance: BigNumber): BigNumber {
@@ -70,9 +75,12 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
   function handleAction(e: { preventDefault: () => void }) {
     e.preventDefault()
     try {
+      if (!isApprove) {
+        return approve(HeimCRPPOOL, investSelected)
+      }
       switch (title) {
         case 'Invest':
-          joinswapExternAmountIn(HeimCRPPOOL, poolTokens[0]?.address, amountTokenPool)
+          joinswapExternAmountIn(HeimCRPPOOL, investSelected, amountTokenPool)
           break;
         case 'Withdraw':
           exitPool(HeimCRPPOOL, amountHeim, Array(poolTokens.length).fill(new BigNumber(0)))
@@ -124,7 +132,7 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
         </>
       }
       {isLogged ? 
-        <Button type="submit">{title}</Button>
+        <Button type="submit">{isApprove ? title : "Approve"}</Button>
       :
         <Button type="button" onClick={connect}>Connect Wallet</Button>
       }
