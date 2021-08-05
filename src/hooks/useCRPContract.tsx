@@ -6,7 +6,7 @@ import { AbiItem } from "web3-utils"
 import web3 from '../utils/web3'
 import ConfigurableRightsPool from "../constants/abi/ConfigurableRightsPool.json"
 
-const usePoolContract = () => {
+const useCRPContract = () => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
   const getCRPContract = (address: string) => {
@@ -24,12 +24,18 @@ const usePoolContract = () => {
     return contract.methods.exitPool(poolAmountIn, minAmountsOut).send({ from: userWalletAddress })
   }
 
+  const exitswapPoolAmountIn = (addressCRP: string, tokenOut: string, poolAmountIn: BigNumber) => {
+    const contract = getCRPContract(addressCRP)
+    return contract.methods.exitswapPoolAmountIn(tokenOut, poolAmountIn, 0).send({ from: userWalletAddress })
+  }
+
 
   return { 
     getCRPContract,
     joinswapExternAmountIn,
-    exitPool
+    exitPool,
+    exitswapPoolAmountIn
   }
 }
 
-export default usePoolContract
+export default useCRPContract
