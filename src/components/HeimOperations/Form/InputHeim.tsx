@@ -24,8 +24,7 @@ interface IInputHeimProps {
   redeem: boolean
   amountHeim: BigNumber
   setAmountHeim: React.Dispatch<React.SetStateAction<BigNumber>>
-  getBalanceToken: () => void
-  investSelected: string
+  getArrayTokens: () => void
 }
 
 const InputHeim = ({ 
@@ -33,8 +32,7 @@ const InputHeim = ({
   redeem,
   amountHeim,
   setAmountHeim,
-  getBalanceToken,
-  investSelected
+  getArrayTokens
 }: IInputHeimProps) => {
   const [balanceToken, setBalanceToken] = React.useState<BigNumber>(new BigNumber(0))
 
@@ -46,7 +44,7 @@ const InputHeim = ({
       const balanceTokenSelected = await getBalance(HeimCRPPOOL, userWalletAddress)
       setBalanceToken(balanceTokenSelected)
     })()
-  }, [])
+  }, [userWalletAddress])
 
   const handleSetTotalBalance = () => {
     setAmountHeim(balanceToken)
@@ -88,7 +86,7 @@ const InputHeim = ({
           }}
           onChange={
             (e: React.ChangeEvent<HTMLInputElement>) => {
-              getBalanceToken()
+              getArrayTokens()
               let { value } = e.target
 
               if (value.length === 0) {

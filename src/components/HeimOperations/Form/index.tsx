@@ -2,12 +2,13 @@ import React from 'react'
 import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import { HeimCRPPOOL } from '../../../constants/tokenAddresses'
+import { HeimCRPPOOL, HeimCorePool } from '../../../constants/tokenAddresses'
 import { IPoolTokensProps } from '../../../store/modules/poolTokens/types'
 
 import useConnect from '../../../hooks/useConnect'
 import useCRPContract from '../../../hooks/useCRPContract'
 import useERC20Contract from '../../../hooks/useERC20Contract'
+import usePoolContract from '../../../hooks/usePoolContract'
 
 import InputHeim from './InputHeim'
 import InputTokens from './InputTokens'
@@ -28,29 +29,40 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
   const [amountTokenPool, setAmountTokenPool] = React.useState<BigNumber>(new BigNumber(0))
   const [supplyHeim, setSupplyHeim] = React.useState<BigNumber>(new BigNumber(0))
   const [investSelected, setInvestSelected] = React.useState<string>("")
+  const [receiveTokenSelected, setReceiveTokenSelected] = React.useState("")
   const [investHeim, setInvestHeim] = React.useState<BigNumber>(new BigNumber(0))
   const [isApprove, setIsApprove] = React.useState(false)
+  
+  
+  const [tokenSingleWithdraw, setTokenSingleWithdraw] = React.useState<string>('')
+  const [amountSingleOut, setAmountSingleOut] = React.useState<BigNumber>(new BigNumber(0))
+  
   const { poolTokens } = useSelector((state: RootStateOrAny) => state)
   const { connect } = useConnect()
 
   const { getTotalSupply, getAllowance, approve } = useERC20Contract()
-  const { joinswapExternAmountIn, exitPool } = useCRPContract()
+  const { joinswapExternAmountIn, exitPool, exitswapPoolAmountIn } = useCRPContract()
+  const { 
+    calcSingleOutGivenPoolIn, 
+    denormalizedWeight, 
+    totalDenormalizedWeight, 
+    swapFee 
+  } = usePoolContract()
 
 
-  React.useEffect(() => {
-    (async () => {
-      const newSupplyHeim = await getTotalSupply(HeimCRPPOOL)
-      setSupplyHeim(newSupplyHeim)
-    })()
-  }, [])
+  const getArrayTokens = () => {
+    const arrayWithdraw = poolTokens.map((tokenPool: IPoolTokensProps) => (
+      {
+        ...tokenPool,
+        balance: getWithdrawBalance(tokenPool.balance)
+      }
+    ))
 
-  React.useEffect(() => {
-    getAllowance(HeimCRPPOOL, investSelected)
-      .then((res: boolean) => setIsApprove(res))
-  }, [investSelected])
+    return arrayWithdraw
+  }
 
-
-  function getRedeemBalance(balance: BigNumber): BigNumber {
+  
+  const getWithdrawBalance = (balance: BigNumber): BigNumber => {
     if (supplyHeim.toString(10) === "0") {
       return new BigNumber(0);
     }
@@ -61,18 +73,26 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
       .div(new BigNumber(100))
   }
 
-  const getBalanceToken = () => {
-    const arrayRedeemBalance = poolTokens.map((tokenPool: IPoolTokensProps) => (
-      {
-        ...tokenPool,
-        balance: getRedeemBalance(tokenPool.balance)
-      }
-    ))
 
-    return arrayRedeemBalance
-  }
+  const calcMaxSingleOut = React.useCallback(async (tokenSelected) => {
+    const denormalized = await denormalizedWeight(HeimCorePool, tokenSelected.address)
+    const totalDenormalized = await totalDenormalizedWeight(HeimCorePool)
+    const swap = await swapFee(HeimCorePool)
 
-  function handleAction(e: { preventDefault: () => void }) {
+    const response = await calcSingleOutGivenPoolIn(
+      HeimCorePool, 
+      tokenSelected.balance, 
+      denormalized, 
+      supplyHeim, 
+      totalDenormalized, 
+      amountHeim, 
+      swap
+    )
+
+    setAmountSingleOut(response)
+  }, [amountHeim])
+
+  const handleAction = (e: { preventDefault: () => void }) => {
     e.preventDefault()
     try {
       if (!isApprove) {
@@ -83,7 +103,10 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
           joinswapExternAmountIn(HeimCRPPOOL, investSelected, amountTokenPool)
           break;
         case 'Withdraw':
-          exitPool(HeimCRPPOOL, amountHeim, Array(poolTokens.length).fill(new BigNumber(0)))
+          tokenSingleWithdraw !== '' ?
+            exitswapPoolAmountIn(HeimCRPPOOL, tokenSingleWithdraw, amountHeim)
+            :
+            exitPool(HeimCRPPOOL, amountHeim, Array(poolTokens.length).fill(new BigNumber(0)))
           break;
         default:
           break;
@@ -92,6 +115,30 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
       console.log(error)
     }
   }
+
+  React.useEffect(() => {
+    (async () => {
+      const newSupplyHeim = await getTotalSupply(HeimCRPPOOL)
+      setSupplyHeim(newSupplyHeim)
+    })()
+  }, [])
+
+
+  React.useEffect(() => {
+    const tokenFound = poolTokens.find((token: { address: string }) => 
+      token.address === tokenSingleWithdraw)
+    
+    if (tokenSingleWithdraw !== '') {
+      calcMaxSingleOut(tokenFound)
+    }
+
+  }, [tokenSingleWithdraw])
+
+
+  React.useEffect(() => {
+    getAllowance(HeimCRPPOOL, investSelected)
+      .then((response: boolean) => setIsApprove(response))
+  }, [investSelected])
 
   return (
     <FormContainer onSubmit={handleAction}>
@@ -102,14 +149,15 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
             redeem={title === "Withdraw"} 
             amountHeim={amountHeim}
             setAmountHeim={setAmountHeim}
-            getBalanceToken={getBalanceToken}
-            investSelected={investSelected}
+            getArrayTokens={getArrayTokens}
           />
-          {poolTokens.map((token: IPoolTokensProps) => (
+          {getArrayTokens().map((token: IPoolTokensProps) => (
             <InputWithdraw 
               key={token.address} 
-              token={token} 
-              getBalanceToken={getBalanceToken} 
+              token={token}
+              amountSingleOut={amountSingleOut}
+              setTokenSingleWithdraw={setTokenSingleWithdraw}
+              tokenSingleWithdraw={tokenSingleWithdraw}
             />
           ))}
         </>
@@ -117,10 +165,10 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
         <>
           <InputTokens
               typeAction={typeAction} 
-              redeem={title === "Withdraw" ? true : false} 
+              redeem={title === "Withdraw"} 
               amountTokenPool={amountTokenPool}
               setAmountTokenPool={setAmountTokenPool}
-              getBalanceToken={getBalanceToken}
+              getArrayTokens={getArrayTokens}
               investSelected={investSelected}
               setInvestSelected={setInvestSelected}
               setInvestHeim={setInvestHeim}
@@ -128,11 +176,18 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
           />
           <InputDefault
             investHeim={investHeim}
+            title={title}
+            receiveTokenSelected={receiveTokenSelected}
+            setReceiveTokenSelected={setReceiveTokenSelected}
           />
         </>
       }
       {isLogged ? 
-        <Button type="submit">{isApprove ? title : "Approve"}</Button>
+        title === 'Withdraw' ?
+          <Button type="submit">Withdraw</Button>
+          :
+          <Button type="submit">{isApprove ? title : "Approve"}</Button>
+
       :
         <Button type="button" onClick={connect}>Connect Wallet</Button>
       }

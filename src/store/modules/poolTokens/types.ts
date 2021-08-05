@@ -10,5 +10,5 @@ export interface IPoolTokensProps {
   symbol: string
   balance: BigNumber
   decimals: BigNumber
-  address?: string
+  address: string
 }

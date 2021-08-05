@@ -1,4 +1,6 @@
 import React from 'react'
+import BigNumber from 'bn.js'
+
 import { IPoolTokensProps } from '../../../store/modules/poolTokens/types'
 import { BNtoDecimal } from '../../../utils/numerals'
 
@@ -15,17 +17,24 @@ import {
 } from './styles'
 
 
-interface IInputMintRedeemProps {
+interface IInputWithdrawProps {
   token: IPoolTokensProps
-  getBalanceToken: any
+  amountSingleOut: BigNumber
+  setTokenSingleWithdraw: React.Dispatch<React.SetStateAction<string>>
+  tokenSingleWithdraw: string
 }
 
-const InputWithdraw = ({ token, getBalanceToken }: IInputMintRedeemProps) => {
-  const arrayBalanceToken = getBalanceToken()
-
-  const balance = arrayBalanceToken.filter((balanceToken: IPoolTokensProps) => 
-    balanceToken.address === token.address
-  )
+const InputWithdraw = ({
+  token, 
+  amountSingleOut,
+  setTokenSingleWithdraw,
+  tokenSingleWithdraw
+}: IInputWithdrawProps) => {
+ 
+  if (tokenSingleWithdraw !== '') {
+    const res = token.address === tokenSingleWithdraw
+    token.balance = res ? amountSingleOut : new BigNumber(0)
+  }
 
   return (
     <InputWithdrawContainer>
@@ -36,8 +45,15 @@ const InputWithdraw = ({ token, getBalanceToken }: IInputMintRedeemProps) => {
       </Info>
       <AmountDefault>
         <Span>Amount</Span>
-        <Input type="number" placeholder="0" readOnly value={BNtoDecimal(balance[0].balance, balance[0].decimals, 6)} />
-        <ButtonMax type="button">Max</ButtonMax>
+          <Input 
+            type="number" 
+            placeholder="0" 
+            readOnly 
+            value={BNtoDecimal(token.balance, token.decimals, 6)} 
+          />
+        <ButtonMax type="button" onClick={() => setTokenSingleWithdraw(token.address)}>
+          Max
+        </ButtonMax>
       </AmountDefault>
       <LineDefault />  
     </InputWithdrawContainer>
