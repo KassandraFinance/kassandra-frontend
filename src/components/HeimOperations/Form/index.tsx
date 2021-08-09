@@ -31,12 +31,16 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
   const [investSelected, setInvestSelected] = React.useState<string>("")
   const [receiveTokenSelected, setReceiveTokenSelected] = React.useState("")
   const [investHeim, setInvestHeim] = React.useState<BigNumber>(new BigNumber(0))
-  const [isApprove, setIsApprove] = React.useState(false)
+  const [isApproveCore, setIsApproveCore] = React.useState(false)
+  const [isApproveCRP, setIsApproveCRP] = React.useState(false)
+
   
   
   const [tokenSingleWithdraw, setTokenSingleWithdraw] = React.useState<string>('')
   const [amountSingleOut, setAmountSingleOut] = React.useState<BigNumber>(new BigNumber(0))
   
+  const [amountSwapOut, setAmountSwapOut] = React.useState<BigNumber>(new BigNumber(0))
+
   const { poolTokens } = useSelector((state: RootStateOrAny) => state)
   const { connect } = useConnect()
 
@@ -46,7 +50,10 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
     calcSingleOutGivenPoolIn, 
     denormalizedWeight, 
     totalDenormalizedWeight, 
-    swapFee 
+    swapFee,
+    swapExactAmountIn,
+    getSpotPrice,
+    calcOutGivenIn
   } = usePoolContract()
 
 
@@ -95,11 +102,11 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
   const handleAction = (e: { preventDefault: () => void }) => {
     e.preventDefault()
     try {
-      if (!isApprove) {
-        return approve(HeimCRPPOOL, investSelected)
-      }
       switch (title) {
         case 'Invest':
+          if (!isApproveCRP) {
+            return approve(HeimCRPPOOL, investSelected)
+          }
           joinswapExternAmountIn(HeimCRPPOOL, investSelected, amountTokenPool)
           break;
         case 'Withdraw':
@@ -108,6 +115,11 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
             :
             exitPool(HeimCRPPOOL, amountHeim, Array(poolTokens.length).fill(new BigNumber(0)))
           break;
+        case 'Swap':
+          if (!isApproveCore) {
+            return approve(HeimCorePool, investSelected)
+          }
+          swapExactAmountIn(HeimCorePool, investSelected, amountTokenPool, receiveTokenSelected)
         default:
           break;
       }
@@ -115,6 +127,32 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
       console.log(error)
     }
   }
+
+  React.useEffect(() => {
+
+    (async () => {
+      if (investSelected !== "" && receiveTokenSelected !== "") {
+        const denormalizedWeightIn = await denormalizedWeight(HeimCorePool, investSelected)
+        const denormalizedWeightOut = await denormalizedWeight(HeimCorePool, receiveTokenSelected)
+        const swap = await swapFee(HeimCorePool)
+  
+        const tokenBalanceIn = poolTokens.find((token: { address: string }) => token.address === investSelected)
+        const tokenBalanceOut = poolTokens.find((token: { address: string }) => token.address === receiveTokenSelected)
+  
+        const price = await calcOutGivenIn(
+          HeimCorePool, 
+          tokenBalanceIn.balance, 
+          denormalizedWeightIn, 
+          tokenBalanceOut.balance,
+          denormalizedWeightOut,
+          amountTokenPool,
+          swap
+        )
+        setAmountSwapOut(price)
+      }
+    })()
+
+  }, [investSelected, receiveTokenSelected, amountTokenPool])
 
   React.useEffect(() => {
     (async () => {
@@ -137,7 +175,10 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
 
   React.useEffect(() => {
     getAllowance(HeimCRPPOOL, investSelected)
-      .then((response: boolean) => setIsApprove(response))
+      .then((response: boolean) => setIsApproveCRP(response))
+
+    getAllowance(HeimCorePool, investSelected)
+    .then((response: boolean) => setIsApproveCore(response))
   }, [investSelected])
 
   return (
@@ -177,6 +218,7 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
           <InputDefault
             investHeim={investHeim}
             title={title}
+            amountSwapOut={amountSwapOut}
             receiveTokenSelected={receiveTokenSelected}
             setReceiveTokenSelected={setReceiveTokenSelected}
           />
@@ -186,7 +228,10 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
         title === 'Withdraw' ?
           <Button type="submit">Withdraw</Button>
           :
-          <Button type="submit">{isApprove ? title : "Approve"}</Button>
+          <Button type="submit">{
+            (isApproveCore && title === 'Swap') || (isApproveCRP && title === 'Invest') ? 
+            title : "Approve"}
+          </Button>
 
       :
         <Button type="button" onClick={connect}>Connect Wallet</Button>

@@ -26,7 +26,7 @@ import {
 interface IInputEthProps {
   typeAction: string
   redeem: boolean
-  getBalanceToken: () => void
+  getArrayTokens: () => void
   investSelected: string
   setInvestSelected: React.Dispatch<React.SetStateAction<string>>
   amountTokenPool: BigNumber
@@ -39,7 +39,7 @@ const InputTokens = ({
   typeAction, 
   amountTokenPool, 
   setAmountTokenPool,
-  getBalanceToken,
+  getArrayTokens,
   investSelected,
   setInvestSelected,
   setInvestHeim,
@@ -126,7 +126,7 @@ const InputTokens = ({
             }
           }}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              getBalanceToken()
+              getArrayTokens()
               let { value } = e.target
 
               if (value.length === 0) {

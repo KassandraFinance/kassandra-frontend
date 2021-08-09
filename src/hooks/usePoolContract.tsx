@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector, RootStateOrAny } from 'react-redux'
 import { AbiItem } from "web3-utils"
 import BigNumber from 'bn.js'
 import web3 from '../utils/web3'
@@ -6,6 +7,8 @@ import Pool from "../constants/abi/Pool.json"
 import useERC20Contract from './useERC20Contract'
 
 const usePoolContract = () => {
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+
   const { getERC20Contract } = useERC20Contract()
 
 
@@ -68,11 +71,51 @@ const usePoolContract = () => {
     return new BigNumber(value)
   }
 
+  const calcOutGivenIn = async (
+    addresCorePool: string, 
+    tokenBalanceIn: BigNumber,
+    tokenWeightIn: BigNumber,
+    tokenBalanceOut: BigNumber,
+    tokenWeightOut: BigNumber,
+    tokenAmountIn: BigNumber,
+    swapFee: BigNumber
+  ) => {
+    const contract = getPoolContract(addresCorePool)
+    const value = await contract.methods.calcOutGivenIn(
+      tokenBalanceIn, 
+      tokenWeightIn, 
+      tokenBalanceOut, 
+      tokenWeightOut, 
+      tokenAmountIn, 
+      swapFee
+    ).call()
+    return new BigNumber(value)
+  }
+
   const swapFee = async (addresCorePool: string): Promise<BigNumber> => {
     const contract = await getPoolContract(addresCorePool)
     const value = await contract.methods.getSwapFee().call()
     return new BigNumber(value)
   }
+
+  const swapExactAmountIn = async (
+    addresCorePool: string, 
+    tokenIn: string, 
+    tokenAmountIn: BigNumber,
+    tokenOut: string
+  ) => {
+    const contract = await getPoolContract(addresCorePool)
+    const value = await contract
+      .methods.swapExactAmountIn(
+        tokenIn, 
+        tokenAmountIn, 
+        tokenOut, 
+        0, 
+        web3.utils.toTwosComplement(-1)
+      )
+      .send({ from: userWalletAddress })
+  }
+
   const balanceToken = async (addresCorePool: string, address: string): Promise<BigNumber> => {
     const contract = await getPoolContract(addresCorePool)
     const value = await contract.methods.getBalance(address).call()
@@ -107,7 +150,8 @@ const usePoolContract = () => {
     symbolToken,
     decimalsToken,
     denormalizedWeight,
-    totalDenormalizedWeight
+    swapExactAmountIn,
+    calcOutGivenIn,
   }
 }
 
