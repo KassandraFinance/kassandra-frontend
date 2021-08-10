@@ -16,7 +16,7 @@ import {
   LinkInstallMetaMask
 } from './styles'
 
-const Header = () => {    
+const Header = () => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { connect, isLogged } = useConnect()
 

@@ -15,7 +15,7 @@ const Footer = () => (
               </a>
             </li>
             <li>
-              <a href="https://twitter.com/kassandra_dao" target="_blank" rel="noopener noreferrer">
+              <a href="https://t.me/KassandraDAO" target="_blank" rel="noopener noreferrer">
                 <img src="assets/telegram-icon.svg" alt="" />
               </a>
             </li>
