@@ -35,7 +35,16 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
   const [isApproveCore, setIsApproveCore] = React.useState(false)
   const [isApproveCRP, setIsApproveCRP] = React.useState(false)
 
-  
+  const [tokenInvestSelected, setTokenInvestSelected] = React.useState<IPoolTokensProps>({
+    name: '',
+    symbol: '',
+    balance: new BigNumber(0),
+    decimals: new BigNumber(0),
+    address: '',
+    normalizedWeight: 0,
+  })
+
+  const [spotPrice, setSpotPrice] = React.useState<BigNumber>(new BigNumber(0))
   const [investRate, setInvestRate] = React.useState<BigNumber>(new BigNumber(0))
   const [tokenSingleWithdraw, setTokenSingleWithdraw] = React.useState<string>('')
   const [amountSingleOut, setAmountSingleOut] = React.useState<BigNumber>(new BigNumber(0))
@@ -151,6 +160,10 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
           amountTokenPool,
           swap
         )
+
+        const spotPriceSwap = await getSpotPrice(HeimCorePool, receiveTokenSelected, investSelected)
+
+        setSpotPrice(spotPriceSwap)
         setAmountSwapOut(price)
       }
     })()
@@ -182,6 +195,14 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
 
     getAllowance(HeimCorePool, investSelected)
     .then((response: boolean) => setIsApproveCore(response))
+
+    if (investSelected) {
+      const tokenSelected = poolTokens
+        .find((token: { address: string }) => token.address === investSelected)
+      
+      setTokenInvestSelected(tokenSelected)
+    }
+  
   }, [investSelected])
 
   return (
@@ -232,6 +253,12 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
         <ExchangeRate>
           <SpanLight>Exchange rate:</SpanLight>
           <SpanLight>{`1 ${tokenInvestSelected.symbol} = ${BNtoDecimal(investRate, new BigNumber(18), 6)} HEIM`}</SpanLight>
+        </ExchangeRate>
+      }
+      {title === 'Swap' && tokenInvestSelected.symbol &&
+        <ExchangeRate>
+          <SpanLight>Exchange rate:</SpanLight>
+          <SpanLight>{`1 ${tokenInvestSelected.symbol} = ${BNtoDecimal(spotPrice, new BigNumber(18), 6)} HEIM`}</SpanLight>
         </ExchangeRate>
       }
       {isLogged ? 
