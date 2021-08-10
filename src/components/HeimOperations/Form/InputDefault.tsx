@@ -15,8 +15,8 @@ import {
 } from './styles'
 
 interface IInputDefaultProps {
-  investHeim: any
   title: string
+  investHeim: any
   amountSwapOut: BigNumber
   receiveTokenSelected: string
   setReceiveTokenSelected: React.Dispatch<React.SetStateAction<string>>
@@ -24,6 +24,7 @@ interface IInputDefaultProps {
 
 const InputDefault = ({ 
   title,
+  investHeim,
   amountSwapOut,
   receiveTokenSelected,
   setReceiveTokenSelected
@@ -48,7 +49,7 @@ const InputDefault = ({
       </Info>
       <AmountDefault>
         <Span>Amount</Span>
-        <Input type="number" placeholder="0" value={BNtoDecimal(amountSwapOut, new BigNumber(18), 6)} readOnly />
+        <Input type="number" placeholder="0" value={BNtoDecimal(title === 'Invest' ? investHeim : amountSwapOut, new BigNumber(18), 6)} readOnly />
       </AmountDefault>
       <LineDefault />  
     </InputDefaultContainer>

@@ -49,6 +49,7 @@ const InputHeim = ({
   const handleSetTotalBalance = () => {
     setAmountHeim(balanceToken)
   }
+  
   return (
     <InputHeimContainer>
       <PayWith>

@@ -33,6 +33,7 @@ interface IInputEthProps {
   setAmountTokenPool: React.Dispatch<React.SetStateAction<BigNumber>>
   supplyHeim: BigNumber
   setInvestHeim: React.Dispatch<React.SetStateAction<BigNumber>>
+  setInvestRate: React.Dispatch<React.SetStateAction<BigNumber>>
 }
 
 const InputTokens = ({
@@ -43,7 +44,8 @@ const InputTokens = ({
   investSelected,
   setInvestSelected,
   setInvestHeim,
-  supplyHeim
+  supplyHeim,
+  setInvestRate
 }: IInputEthProps) => {
   const [balanceToken, setBalanceToken] = React.useState<BigNumber>(new BigNumber(0))
   const { poolTokens, userWalletAddress } = useSelector((state: RootStateOrAny) => state)
@@ -78,9 +80,20 @@ const InputTokens = ({
         swap
       )
 
+      const investRate = await calcPoolOutGivenSingleIn(
+        HeimCorePool, 
+        tokenSelected[0]?.balance, 
+        denormalized, 
+        supplyHeim, 
+        totalDenormalized, 
+        new BigNumber(10).pow(new BigNumber(18)), 
+        swap
+      )
+
       const balanceTokenSelected = await getBalance(tokenSelected[0]?.address, userWalletAddress)
       setBalanceToken(balanceTokenSelected)
       setInvestHeim(invest)
+      setInvestRate(investRate)
     })()
   }, [amountTokenPool, investSelected])
 

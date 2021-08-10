@@ -16,7 +16,8 @@ import InputDefault from './InputDefault'
 import InputWithdraw from './InputWithdraw'
 
 
-import { FormContainer, Button } from './styles'
+import { FormContainer, Button, SpanLight, ExchangeRate } from './styles'
+import { BNtoDecimal } from '../../../utils/numerals'
 
 interface IFormProps {
   typeAction: string
@@ -35,7 +36,7 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
   const [isApproveCRP, setIsApproveCRP] = React.useState(false)
 
   
-  
+  const [investRate, setInvestRate] = React.useState<BigNumber>(new BigNumber(0))
   const [tokenSingleWithdraw, setTokenSingleWithdraw] = React.useState<string>('')
   const [amountSingleOut, setAmountSingleOut] = React.useState<BigNumber>(new BigNumber(0))
   
@@ -123,6 +124,8 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
         default:
           break;
       }
+      setAmountHeim(new BigNumber(0))
+      setAmountTokenPool(new BigNumber(0))
     } catch (error) {
       console.log(error)
     }
@@ -214,6 +217,7 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
               setInvestSelected={setInvestSelected}
               setInvestHeim={setInvestHeim}
               supplyHeim={supplyHeim}
+              setInvestRate={setInvestRate}
           />
           <InputDefault
             investHeim={investHeim}
@@ -223,6 +227,12 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
             setReceiveTokenSelected={setReceiveTokenSelected}
           />
         </>
+      }
+      {title === 'Invest' && tokenInvestSelected.symbol &&
+        <ExchangeRate>
+          <SpanLight>Exchange rate:</SpanLight>
+          <SpanLight>{`1 ${tokenInvestSelected.symbol} = ${BNtoDecimal(investRate, new BigNumber(18), 6)} HEIM`}</SpanLight>
+        </ExchangeRate>
       }
       {isLogged ? 
         title === 'Withdraw' ?
