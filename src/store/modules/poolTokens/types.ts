@@ -11,4 +11,5 @@ export interface IPoolTokensProps {
   balance: BigNumber
   decimals: BigNumber
   address: string
+  normalizedWeight: number
 }

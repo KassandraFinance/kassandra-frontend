@@ -19,7 +19,7 @@ export const Button = styled.button`
 
   width: 100%;
   height: 44px;
-  margin: 40px 0;
+  margin: 16px 0;
   outline: none;
   cursor: pointer;
 `
@@ -301,4 +301,12 @@ export const LineDefault = styled.div`
   @media (max-width: 504px) {
     max-width: 384px;
   }
+`
+
+export const ExchangeRate = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 16px;
 `

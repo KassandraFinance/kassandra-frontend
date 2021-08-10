@@ -41,7 +41,7 @@ const InputWithdraw = ({
       <Info>
         <Span>Receive (estimative)</Span>
         <Symbol>{token.symbol}</Symbol>
-        <SpanLight>25%</SpanLight>
+        <SpanLight>{token.normalizedWeight}%</SpanLight>
       </Info>
       <AmountDefault>
         <Span>Amount</Span>
@@ -55,7 +55,7 @@ const InputWithdraw = ({
           Max
         </ButtonMax>
       </AmountDefault>
-      <LineDefault />  
+      <LineDefault /> 
     </InputWithdrawContainer>
   )
 }

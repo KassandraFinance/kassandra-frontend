@@ -19,7 +19,8 @@ const Products = () => {
     nameToken, 
     symbolToken,
     balanceToken,
-    decimalsToken
+    decimalsToken,
+    getNormalizedWeight
   } = usePoolContract()
 
   React.useEffect(() => {
@@ -33,6 +34,7 @@ const Products = () => {
           symbol: await symbolToken(tokenAddress),
           balance: await balanceToken(HeimCorePool, tokenAddress),
           decimals: await decimalsToken(tokenAddress),
+          normalizedWeight: await getNormalizedWeight(HeimCorePool, tokenAddress),
           address: tokenAddress
         }
       )))

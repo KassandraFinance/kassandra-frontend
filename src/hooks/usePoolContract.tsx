@@ -35,7 +35,7 @@ const usePoolContract = () => {
     tokenWeightOut: BigNumber, 
     poolSupply: BigNumber, 
     totalWeight: BigNumber, 
-    poolAmountIn: BigNumber, 
+    tokenAmountIn: BigNumber, 
     swapFee: BigNumber
   ) => {
     const contract = getPoolContract(addresCorePool)
@@ -44,7 +44,7 @@ const usePoolContract = () => {
       tokenWeightOut,
       poolSupply,
       totalWeight,
-      poolAmountIn,
+      tokenAmountIn,
       swapFee
     ).call()
     return new BigNumber(value)
@@ -116,6 +116,12 @@ const usePoolContract = () => {
       .send({ from: userWalletAddress })
   }
 
+  const getNormalizedWeight = async (addresCorePool: string, address: string): Promise<Number> => {
+    const contract = await getPoolContract(addresCorePool)
+    const value = await contract.methods.getNormalizedWeight(address).call()
+    return Number(new BigNumber(value).div(new BigNumber(10).pow(new BigNumber(14))))/100
+  }
+
   const balanceToken = async (addresCorePool: string, address: string): Promise<BigNumber> => {
     const contract = await getPoolContract(addresCorePool)
     const value = await contract.methods.getBalance(address).call()
@@ -150,8 +156,10 @@ const usePoolContract = () => {
     symbolToken,
     decimalsToken,
     denormalizedWeight,
+    totalDenormalizedWeight,
     swapExactAmountIn,
     calcOutGivenIn,
+    getNormalizedWeight
   }
 }
 
