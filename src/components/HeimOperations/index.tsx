@@ -44,7 +44,7 @@ const HeimOperations = () => {
       </SelectOperator>
       {inputChecked === 'invest' && <Form title="Invest" typeAction="Pay with" isLogged={isLogged} />}
       {inputChecked === 'withdraw' && <Form title="Withdraw" typeAction="Send" isLogged={isLogged} />}
-      {inputChecked === 'swap' && <Form title="Swap" typeAction="You give" isLogged={isLogged} />}
+      {inputChecked === 'swap' && <Form title="Swap" typeAction="Swap from" isLogged={isLogged} />}
     </HeimOperationsContainer>
   )
 }

@@ -2,12 +2,13 @@ import React from 'react'
 import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import { BNtoDecimal } from '../../../utils/numerals'
 import web3 from '../../../utils/web3'
 
+import { BNtoDecimal } from '../../../utils/numerals'
 import { HeimCorePool } from '../../../constants/tokenAddresses'
+
+import useBalance from '../../../hooks/useBalance'
 import usePoolContract from '../../../hooks/usePoolContract'
-import useERC20Contract from '../../../hooks/useERC20Contract'
 
 import { 
   InputTokensContainer, 
@@ -25,93 +26,107 @@ import {
 
 interface IInputEthProps {
   typeAction: string
-  redeem: boolean
+  supplyHeim: BigNumber
   getArrayTokens: () => void
   investSelected: string
   setInvestSelected: React.Dispatch<React.SetStateAction<string>>
   amountTokenPool: BigNumber
   setAmountTokenPool: React.Dispatch<React.SetStateAction<BigNumber>>
-  supplyHeim: BigNumber
   setInvestHeim: React.Dispatch<React.SetStateAction<BigNumber>>
   setInvestRate: React.Dispatch<React.SetStateAction<BigNumber>>
 }
 
 const InputTokens = ({
   typeAction, 
+  supplyHeim,
+  getArrayTokens,
   amountTokenPool, 
   setAmountTokenPool,
-  getArrayTokens,
   investSelected,
   setInvestSelected,
   setInvestHeim,
-  supplyHeim,
   setInvestRate
 }: IInputEthProps) => {
   const [balanceToken, setBalanceToken] = React.useState<BigNumber>(new BigNumber(0))
   const { poolTokens, userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   
-  const { calcPoolOutGivenSingleIn, denormalizedWeight, totalDenormalizedWeight, swapFee } = usePoolContract()
-  const { getBalance } = useERC20Contract()
+  const { getBalanceToken } = useBalance()
+  const { 
+    calcPoolOutGivenSingleIn, 
+    denormalizedWeight, 
+    totalDenormalizedWeight, 
+    swapFee 
+  } = usePoolContract()
 
 
   const tokenSelected = poolTokens.filter((token: { address: string }) => {
-    if (token.address === investSelected) {
-      return token
-    }
+    if (token.address === investSelected) return token
   })
 
-  React.useEffect(() => {
-    (async () => {
-      if (!tokenSelected[0]?.address) {
-        setInvestHeim(new BigNumber(0))
-        return
-      }
-      const denormalized = await denormalizedWeight(HeimCorePool, tokenSelected[0]?.address)
-      const totalDenormalized = await totalDenormalizedWeight(HeimCorePool)
-      const swap = await swapFee(HeimCorePool)
-
-      const invest = await calcPoolOutGivenSingleIn(
-        HeimCorePool, 
-        tokenSelected[0]?.balance, 
-        denormalized, 
-        supplyHeim, 
-        totalDenormalized, 
-        amountTokenPool, 
-        swap
-      )
-
-      const investRate = await calcPoolOutGivenSingleIn(
-        HeimCorePool, 
-        tokenSelected[0]?.balance, 
-        denormalized, 
-        supplyHeim, 
-        totalDenormalized, 
-        new BigNumber(10).pow(new BigNumber(18)), 
-        swap
-      )
-
-      const balanceTokenSelected = await getBalance(tokenSelected[0]?.address, userWalletAddress)
-      setBalanceToken(balanceTokenSelected)
-      setInvestHeim(invest)
-      setInvestRate(investRate)
-    })()
-  }, [amountTokenPool, investSelected])
-
-  const handleSetTotalBalance = () => {
-    setAmountTokenPool(balanceToken)
+  const handleBalanceToken = async () => {
+    const balance = await getBalanceToken(tokenSelected[0]?.address)
+    setBalanceToken(balance)
   }
+
+  const handleCalcPoolOut = async () => {
+    if (!tokenSelected[0]?.address) {
+      setInvestHeim(new BigNumber(0))
+      return
+    }
+    const denormalized = await denormalizedWeight(HeimCorePool, tokenSelected[0]?.address)
+    const totalDenormalized = await totalDenormalizedWeight(HeimCorePool)
+    const swap = await swapFee(HeimCorePool)
+
+    const invest = await calcPoolOutGivenSingleIn(
+      HeimCorePool, 
+      tokenSelected[0]?.balance, 
+      denormalized, 
+      supplyHeim, 
+      totalDenormalized, 
+      amountTokenPool, 
+      swap
+    )
+
+    const investRate = await calcPoolOutGivenSingleIn(
+      HeimCorePool, 
+      tokenSelected[0]?.balance, 
+      denormalized, 
+      supplyHeim, 
+      totalDenormalized, 
+      new BigNumber(10).pow(new BigNumber(18)), 
+      swap
+    )
+    
+    setInvestHeim(invest)
+    setInvestRate(investRate)
+  }
+
+  React.useEffect(() => {
+    handleBalanceToken()
+  }, [tokenSelected[0]?.address, userWalletAddress])
+
+  React.useEffect(() => {
+    handleCalcPoolOut()
+  }, [amountTokenPool, investSelected])
   
   return (
     <InputTokensContainer>
       <PayWith>
         <Span>{typeAction}</Span>
-        <Select defaultValue={investSelected} onChange={(e: any) => setInvestSelected(e.target.value)}>
+        <Select 
+          defaultValue={investSelected} 
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setInvestSelected(e.target.value)}
+        >
           <option value="">- - - -</option>
-          {poolTokens.map((token: { address: string, symbol: string}) =>
+          {poolTokens.map((token: { address: string, symbol: string }) =>
             <option key={token.address} value={token?.address}>{token?.symbol}</option>
           )}
         </Select>
-        <SpanLight>Balance: {investSelected === '' ? '0.000000' : BNtoDecimal(balanceToken, new BigNumber(18), 6)}</SpanLight>
+        <SpanLight>Balance: {investSelected === '' ? 
+          '0.000000'
+          :
+          BNtoDecimal(balanceToken, new BigNumber(18), 6)}
+        </SpanLight>
         <Line />
       </PayWith>
       <ImgArrowLong src="assets/arrow-long-down.svg" alt="" />
@@ -151,7 +166,12 @@ const InputTokens = ({
           }
           value={BNtoDecimal(amountTokenPool, new BigNumber(18), 6)}
         />
-        <ButtonMax type="button" onClick={handleSetTotalBalance}>Max</ButtonMax>
+        <ButtonMax 
+          type="button" 
+          onClick={() => setAmountTokenPool(balanceToken)}
+        >
+          Max
+        </ButtonMax>
         <Line />
       </Amount>
     </InputTokensContainer>

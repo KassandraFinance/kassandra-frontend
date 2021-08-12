@@ -44,7 +44,16 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
     normalizedWeight: 0,
   })
 
-  const [spotPrice, setSpotPrice] = React.useState<BigNumber>(new BigNumber(0))
+  const [tokenReceiveSelected, setTokenReceiveSelected] = React.useState<IPoolTokensProps>({
+    name: '',
+    symbol: '',
+    balance: new BigNumber(0),
+    decimals: new BigNumber(0),
+    address: '',
+    normalizedWeight: 0,
+  })
+
+  const [exchangeRate, setExchangeRate] = React.useState<BigNumber>(new BigNumber(0))
   const [investRate, setInvestRate] = React.useState<BigNumber>(new BigNumber(0))
   const [tokenSingleWithdraw, setTokenSingleWithdraw] = React.useState<string>('')
   const [amountSingleOut, setAmountSingleOut] = React.useState<BigNumber>(new BigNumber(0))
@@ -141,7 +150,6 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
   }
 
   React.useEffect(() => {
-
     (async () => {
       if (investSelected !== "" && receiveTokenSelected !== "") {
         const denormalizedWeightIn = await denormalizedWeight(HeimCorePool, investSelected)
@@ -161,9 +169,9 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
           swap
         )
 
-        const spotPriceSwap = await getSpotPrice(HeimCorePool, receiveTokenSelected, investSelected)
+        const priceExchangeRate = await getSpotPrice(HeimCorePool, receiveTokenSelected, investSelected)
 
-        setSpotPrice(spotPriceSwap)
+        setExchangeRate(priceExchangeRate)
         setAmountSwapOut(price)
       }
     })()
@@ -202,8 +210,14 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
       
       setTokenInvestSelected(tokenSelected)
     }
+    if (receiveTokenSelected) {
+      const tokenSelected = poolTokens
+        .find((token: { address: string }) => token.address === receiveTokenSelected)
+      
+      setTokenReceiveSelected(tokenSelected)
+    }
   
-  }, [investSelected])
+  }, [investSelected, receiveTokenSelected])
 
   return (
     <FormContainer onSubmit={handleAction}>
@@ -230,19 +244,18 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
         <>
           <InputTokens
               typeAction={typeAction} 
-              redeem={title === "Withdraw"} 
+              supplyHeim={supplyHeim}
+              getArrayTokens={getArrayTokens}
               amountTokenPool={amountTokenPool}
               setAmountTokenPool={setAmountTokenPool}
-              getArrayTokens={getArrayTokens}
               investSelected={investSelected}
               setInvestSelected={setInvestSelected}
               setInvestHeim={setInvestHeim}
-              supplyHeim={supplyHeim}
               setInvestRate={setInvestRate}
           />
           <InputDefault
-            investHeim={investHeim}
             title={title}
+            investHeim={investHeim}
             amountSwapOut={amountSwapOut}
             receiveTokenSelected={receiveTokenSelected}
             setReceiveTokenSelected={setReceiveTokenSelected}
@@ -255,10 +268,10 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
           <SpanLight>{`1 ${tokenInvestSelected.symbol} = ${BNtoDecimal(investRate, new BigNumber(18), 6)} HEIM`}</SpanLight>
         </ExchangeRate>
       }
-      {title === 'Swap' && tokenInvestSelected.symbol &&
+      {title === 'Swap' && tokenInvestSelected.symbol && tokenReceiveSelected.symbol &&
         <ExchangeRate>
           <SpanLight>Exchange rate:</SpanLight>
-          <SpanLight>{`1 ${tokenInvestSelected.symbol} = ${BNtoDecimal(spotPrice, new BigNumber(18), 6)} HEIM`}</SpanLight>
+          <SpanLight>{`1 ${tokenInvestSelected.symbol} = ${BNtoDecimal(exchangeRate, new BigNumber(18), 6)} ${tokenReceiveSelected.symbol}`}</SpanLight>
         </ExchangeRate>
       }
       {isLogged ? 

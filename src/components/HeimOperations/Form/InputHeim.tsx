@@ -1,10 +1,9 @@
 import React from 'react'
-import { useSelector, RootStateOrAny } from 'react-redux'
 import BigNumber from 'bn.js'
 import web3 from '../../../utils/web3'
 
 import { HeimCRPPOOL } from '../../../constants/tokenAddresses'
-import useERC20Contract from '../../../hooks/useERC20Contract'
+import useBalance from '../../../hooks/useBalance'
 
 import { 
   Input, 
@@ -27,7 +26,7 @@ interface IInputHeimProps {
   getArrayTokens: () => void
 }
 
-const InputHeim = ({ 
+const InputHeim = ({
   typeAction,
   redeem,
   amountHeim,
@@ -35,16 +34,16 @@ const InputHeim = ({
   getArrayTokens
 }: IInputHeimProps) => {
   const [balanceToken, setBalanceToken] = React.useState<BigNumber>(new BigNumber(0))
-
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-  const { getBalance } = useERC20Contract()
+  const { getBalanceToken } = useBalance()
 
   React.useEffect(() => {
-    (async () => {    
-      const balanceTokenSelected = await getBalance(HeimCRPPOOL, userWalletAddress)
-      setBalanceToken(balanceTokenSelected)
+    (async () => {
+      const balance = await getBalanceToken(HeimCRPPOOL)
+      setBalanceToken(balance)
+      console.log(balance.toString())
+
     })()
-  }, [userWalletAddress])
+  }, [])
 
   const handleSetTotalBalance = () => {
     setAmountHeim(balanceToken)
