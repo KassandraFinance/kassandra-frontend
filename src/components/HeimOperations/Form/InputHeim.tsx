@@ -40,8 +40,6 @@ const InputHeim = ({
     (async () => {
       const balance = await getBalanceToken(HeimCRPPOOL)
       setBalanceToken(balance)
-      console.log(balance.toString())
-
     })()
   }, [])
 
