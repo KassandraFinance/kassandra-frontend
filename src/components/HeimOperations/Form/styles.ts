@@ -148,11 +148,15 @@ export const ImgArrowLong = styled.img`
   margin: 48px auto 0 auto;
 `
 
-export const ButtonMax = styled.button`
+interface IButtonMax {
+  isMax?: boolean
+}
+
+export const ButtonMax = styled.button<IButtonMax>`
   border: 1px solid #26DBDB;
   border-radius: 16px;
-  background: transparent;
-  color: #fff;
+  background: ${ props => props.isMax ? '#26DBDB' : 'transparent' };
+  color: ${ props => props.isMax ? '#000' : '#fff' };
   font-size: 12px;
   line-height: 12px;
   font-weight: 300;
