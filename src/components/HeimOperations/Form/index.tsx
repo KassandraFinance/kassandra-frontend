@@ -196,7 +196,7 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
       calcMaxSingleOut(tokenFound)
     }
 
-  }, [tokenSingleWithdraw])
+  }, [tokenSingleWithdraw, amountHeim])
 
 
   React.useEffect(() => {
@@ -238,6 +238,7 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
               token={token}
               amountHeim={amountHeim}
               amountSingleOut={amountSingleOut}
+              setAmountSingleOut={setAmountSingleOut}
               setTokenSingleWithdraw={setTokenSingleWithdraw}
               tokenSingleWithdraw={tokenSingleWithdraw}
             />

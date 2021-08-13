@@ -21,14 +21,15 @@ interface IInputWithdrawProps {
   token: IPoolTokensProps
   amountHeim: BigNumber
   amountSingleOut: BigNumber
+  setAmountSingleOut: React.Dispatch<React.SetStateAction<BigNumber>>
   setTokenSingleWithdraw: React.Dispatch<React.SetStateAction<string>>
   tokenSingleWithdraw: string
 }
 
 const InputWithdraw = ({
   token, 
-  amountHeim,
   amountSingleOut,
+  setAmountSingleOut,
   setTokenSingleWithdraw,
   tokenSingleWithdraw
 }: IInputWithdrawProps) => {
@@ -37,7 +38,7 @@ const InputWithdraw = ({
     const res = token.address === tokenSingleWithdraw
 
     token.balance = res ? amountSingleOut : new BigNumber(0)
-    token.isMax = res ? true : false
+    token.isMax = !!res
     token.normalizedWeight = res ? 100 : 0
   }
 
@@ -59,10 +60,12 @@ const InputWithdraw = ({
         <ButtonMax 
           type="button" 
           isMax={token.isMax}
-          disabled={amountHeim.toString() === '0'}
           onClick={() => {
-            if (amountSingleOut !== new BigNumber(0)) {
+            if (token.isMax) {
+              setTokenSingleWithdraw('')
+            } else {
               setTokenSingleWithdraw(token.address)
+              setAmountSingleOut(new BigNumber(0))
             }
           }}
         >
