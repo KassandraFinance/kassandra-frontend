@@ -24,12 +24,12 @@ export const BorderGradient = styled.div`
     right:0;
     bottom:0;
     border-radius: 6px; 
-    padding: 4px; 
-    background: linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%);
+    padding: 3px; 
+    background: linear-gradient(0deg, #FFBF00 -0.2%, #E843C4 79.99%);
     -webkit-mask: 
       linear-gradient(#fff 0 0) content-box, 
       linear-gradient(#fff 0 0);
-    -webkit-mask-composite: destination-out; 
+    -webkit-mask-composite: destination-out;
     mask-composite: exclude;
   }
 `
@@ -61,6 +61,12 @@ export const InterBackground = styled.div`
 export const IntroStaking = styled.div`
   font-size: 18px;
   text-align: right;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  height: 80px;
   @media (max-width: 540px) {
     font-size: 16px;
   }
@@ -76,10 +82,34 @@ export const IntroStaking = styled.div`
   }
 `
 
+export const APR = styled.p`
+  font-size: 24px;
+  font-weight: 500;
+`
+
+export const Percentage= styled.p`
+  font-size: 40px;
+  font-weight: 300;
+`
+
 export const InfosStaking = styled.div`
-  padding: 24px 32px;
+  padding: 64px 32px 24px;
   @media (max-width: 420px) {
     padding: 20px;
+  }
+`
+
+export const KacyStaked = styled.div`
+  border-top: 2px solid #E843C4;
+  border-bottom: 2px solid #E843C4;
+  padding: 16px;
+  width: 100%;
+  position: absolute;
+  left: -0.1px;
+  p {
+    font-size: 18px;
+    font-weight: 400;
+    text-align: center;
   }
 `
 
@@ -103,9 +133,9 @@ export const Info = styled.div`
 
   span {
     font-weight: 400;
-    font-size: 14px;
-    line-height: 14px;
-    margin-bottom: 8px;
+    font-size: 16px;
+    line-height: 16px;
+    margin-bottom: 10px;
     display: block;
     @media (max-width: 540px) {
       font-size: 13px;
@@ -116,6 +146,11 @@ export const Info = styled.div`
   span:last-child {
     font-weight: 300;
   }
+
+  img {
+    z-index: 11;
+  }
+
   .total-staking {
     margin: 16px 0;
   }
@@ -157,7 +192,7 @@ export const ButtonWallet = styled.button`
   justify-content: center;
   
   width: 320px;
-  height: 36px;
+  height: 40px;
   cursor: pointer;
   outline: none;
   z-index: 10;
