@@ -1,8 +1,7 @@
 import React from "react"
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import Image from 'next/image'
-import arrowDown from '../../../public/assets/arrow-down.svg'
 
 import { LinkProducts, Backdrop, Ul, Li } from './styles'
 
@@ -40,7 +39,7 @@ const DropdownProducts = () => {
           y={positionBtnProducts.y}
         >
           <Li>
-            <a href="products">Heim Index</a>
+            <Link href="/products">Heim Index</Link>
           </Li>
         </Ul>
       </Backdrop>
