@@ -4,6 +4,7 @@ import detectEthereumProvider from '@metamask/detect-provider'
 
 import { actionGetUserAddressWallet } from '../store/modules/userWalletAddress/actions'
 
+
 declare let window: any
 
 const useConnect = () => {
