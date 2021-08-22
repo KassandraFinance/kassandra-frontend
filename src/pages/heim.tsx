@@ -1,6 +1,6 @@
 import React  from 'react';
-import Home from "../templates/Home/Index";
+import Heim from "../templates/Heim";
 
 export default function Index() {
-  return <Home />
+  return <Heim />
 }

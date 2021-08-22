@@ -1,6 +1,6 @@
 .hero {
   height: calc(100vh - 110px);
-
+  padding: 0 32px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-content: space-between;
@@ -535,7 +535,7 @@
   &::after {
     content: '';
     display: block;
-    background: url('../../public/assets/waves.svg') center no-repeat;
+    background: url('../../../public/assets/waves.svg') center no-repeat;
     background-size: cover;
     max-width: 100%;
     width: 100vw;

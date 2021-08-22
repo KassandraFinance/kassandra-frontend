@@ -1,7 +1,12 @@
 import styled from "styled-components";
+import media from "styled-media-query";
+
 
 export const Container = styled.div`
-  height: calc(100vh - 110px);
+  /* height: calc(100vh - 110px); */
+
+  position: absolute;
+  padding: 0 32px;
 
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -67,15 +72,18 @@ export const SubTitle = styled.h3`
 `
 
 export const Image = styled.div`
+    position: relative;
 
-    max-width: 660px;
-    /* display: flex;
-    justify-content: right; */
+
     img {
 
-    /* max-width: 765px; */
+     max-width: 100%;
 
-    /* @media (min-width: 1440px) {
+     ${media.lessThan('medium')`
+     display: none;
+     `}
+
+    @media (min-width: 1440px) {
       max-width: 100%;
     }
     @media (max-width: 1240px) {
@@ -88,10 +96,10 @@ export const Image = styled.div`
     @media (max-width: 600px) {
       max-width: 300px;
       display: none;
-    } */
+    }
   }
 `
-export const Link = styled.a `
+export const Link = styled.div `
     a{
     background: linear-gradient(264.12deg, #020887 -197.65%, #26DBDB 272.42%);
     border: none;
