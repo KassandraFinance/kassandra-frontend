@@ -20,6 +20,15 @@ const StyledToastContent = ({ type, title, message }: IStyledToastContentProps) 
           </MessageContainer>
         </NotificationContainer>
       }
+      {type === "warning" && 
+        <NotificationContainer>
+          <img src="assets/IconNotification/warning.svg" alt="" />
+          <MessageContainer>
+            <h3 style={{ color: "#FFBF00" }}>{title}</h3>
+            <span>{message}</span>
+          </MessageContainer>
+        </NotificationContainer>
+      }
       {type === "error" && 
         <NotificationContainer>
           <img src="assets/IconNotification/error.svg" alt="" />

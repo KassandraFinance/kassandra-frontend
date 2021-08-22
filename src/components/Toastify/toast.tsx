@@ -7,3 +7,4 @@ import ToastContent from './content'
 export const ToastError = (textContent: string) => toast.error(<ToastContent type="error" title="Error" message={textContent}/>);
 export const ToastInfo = (textContent: string) => toast.info(<ToastContent type="info" title="Info" message={textContent}/>);
 export const ToastSuccess = (textContent: string) => toast.success(<ToastContent type="success" title="Success" message={textContent}/>);
+export const ToastWarning = (textContent: string) => toast.warning(<ToastContent type="warning" title="Warning" message={textContent}/>);

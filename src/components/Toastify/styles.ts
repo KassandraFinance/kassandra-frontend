@@ -45,7 +45,18 @@ export const StyledToastContainer = styled(ToastContainer).attrs({
       background: #2CE878;
     }
   }
-
+  .Toastify__toast--warning {
+    border: 1.6px solid #FFBF00;
+    border-radius: 6px;
+    background: #211426;
+    color: #FCFCFC;
+    
+    font-size: 16px;
+    font-weight: 300;
+    .Toastify__progress-bar {
+      background: #FFBF00;
+    }
+  }
   .Toastify__toast--info {
     border: 1.6px solid #26DBDB;
     border-radius: 6px;
