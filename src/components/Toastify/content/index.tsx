@@ -10,7 +10,16 @@ interface IStyledToastContentProps {
 
 const StyledToastContent = ({ type, title, message }: IStyledToastContentProps) => {
   return (
-    <>  
+    <> 
+      {type === "success" && 
+        <NotificationContainer>
+          <img src="assets/IconNotification/success.svg" alt="" />
+          <MessageContainer>
+            <h3 style={{ color: "#2CE878" }}>{title}</h3>
+            <span>{message}</span>
+          </MessageContainer>
+        </NotificationContainer>
+      }
       {type === "error" && 
         <NotificationContainer>
           <img src="assets/error.svg" alt="" />

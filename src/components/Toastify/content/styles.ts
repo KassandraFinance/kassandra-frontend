@@ -16,10 +16,15 @@ export const MessageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  font-family: 'Rubik';
   h3 {
-    font-family: 'Rubik';
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 8px; 
+  }
+  span {
+    font-size: 16px;
+    font-weight: 300;
+    margin: auto;
   }
 `

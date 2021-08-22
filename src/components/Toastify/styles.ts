@@ -33,5 +33,17 @@ export const StyledToastContainer = styled(ToastContainer).attrs({
       background: #E8372C;
     }
   }
+  .Toastify__toast--success {
+    border: 1.6px solid #2CE878;
+    border-radius: 6px;
+    background: #211426;
+    color: #FCFCFC;
+
+    font-size: 16px;
+    font-weight: 300;
+    .Toastify__progress-bar {
+      background: #2CE878;
+    }
+  }
 
 `;
