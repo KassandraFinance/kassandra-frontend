@@ -4,6 +4,8 @@ import detectEthereumProvider from '@metamask/detect-provider'
 
 import { actionGetUserAddressWallet } from '../store/modules/userWalletAddress/actions'
 
+import { ToastError } from "../components/Toastify/toast";
+
 declare let window: any
 
 const useConnect = () => {
@@ -34,6 +36,7 @@ const useConnect = () => {
       }
       console.log("Install MestaMask")
     })()
+    ToastError("Error description")
 
     window.onbeforeunload = function() { return "Prevent reload" }
 
