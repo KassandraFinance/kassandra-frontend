@@ -1,15 +1,23 @@
 import React from 'react'
 import Head from 'next/head'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import styles from './index.module.scss'
 
-const Home = () => (
-  <>
+const Home = () => {
+  const { trackPageView } = useMatomo()
+
+  // Track page view
+  React.useEffect(() => {
+    trackPageView({})
+  }, [trackPageView])
+
+  return <>
     <Head>
       <title>Kassandra</title>
       <link rel="icon" href="/favicon.ico" />
       <link rel="preconnect" href="https://fonts.gstatic.com" />
-      <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&amp;display=swap" rel="stylesheet" />
     </Head>
     <>
       <section className={styles.hero}>
@@ -130,7 +138,7 @@ const Home = () => (
       </section>
     </>
   </>
-)
+}
 
 
 export default Home
