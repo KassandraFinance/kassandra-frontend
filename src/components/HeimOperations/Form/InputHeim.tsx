@@ -40,6 +40,8 @@ const InputHeim = ({
     (async () => {
       const balance = await getBalanceToken(HeimCRPPOOL)
       setBalanceToken(balance)
+      console.log(balance.toString())
+
     })()
   }, [])
 
@@ -48,18 +50,18 @@ const InputHeim = ({
   }
   
   return (
-    <InputHeimContainer inputHeim={true}>
-      <PayWith inputHeim={true}>
+    <InputHeimContainer>
+      <PayWith>
         <Span>{typeAction}</Span>
         <Symbol>HEIM</Symbol>
         <SpanLight>Balance: {balanceToken.toString() === '0' ? '0.000000' : BNtoDecimal(balanceToken, new BigNumber(18), 6)}</SpanLight>
       </PayWith>
       <ImgArrowLong 
-        style={{ backgroundColor: '#030102', marginTop: '54px', padding: '0 24px 16px' }} 
+        style={{ backgroundColor: '#030102', padding: '0 24px 14px', marginTop: '44px'}} 
         src={`assets/arrow-long-${redeem ? 'down' : 'up'}.svg`} 
         alt="" 
       />
-      <Amount inputHeim={true}>
+      <Amount>
         <Span>Total</Span>
         <Input
           type="number"

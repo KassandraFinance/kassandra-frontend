@@ -35,8 +35,7 @@ const Products = () => {
           balance: await balanceToken(HeimCorePool, tokenAddress),
           decimals: await decimalsToken(tokenAddress),
           normalizedWeight: await getNormalizedWeight(HeimCorePool, tokenAddress),
-          address: tokenAddress,
-          isMax: false
+          address: tokenAddress
         }
       )))
       

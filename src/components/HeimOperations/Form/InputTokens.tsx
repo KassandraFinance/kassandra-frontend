@@ -28,8 +28,8 @@ interface IInputEthProps {
   typeAction: string
   supplyHeim: BigNumber
   getArrayTokens: () => void
-  swapInSelected: string
-  setSwapInSelected: React.Dispatch<React.SetStateAction<string>>
+  investSelected: string
+  setInvestSelected: React.Dispatch<React.SetStateAction<string>>
   amountTokenPool: BigNumber
   setAmountTokenPool: React.Dispatch<React.SetStateAction<BigNumber>>
   setInvestHeim: React.Dispatch<React.SetStateAction<BigNumber>>
@@ -42,8 +42,8 @@ const InputTokens = ({
   getArrayTokens,
   amountTokenPool, 
   setAmountTokenPool,
-  swapInSelected,
-  setSwapInSelected,
+  investSelected,
+  setInvestSelected,
   setInvestHeim,
   setInvestRate
 }: IInputEthProps) => {
@@ -60,7 +60,7 @@ const InputTokens = ({
 
 
   const tokenSelected = poolTokens.filter((token: { address: string }) => {
-    if (token.address === swapInSelected) return token
+    if (token.address === investSelected) return token
   })
 
   const handleBalanceToken = async () => {
@@ -107,22 +107,22 @@ const InputTokens = ({
 
   React.useEffect(() => {
     handleCalcPoolOut()
-  }, [amountTokenPool, swapInSelected])
+  }, [amountTokenPool, investSelected])
   
   return (
     <InputTokensContainer>
       <PayWith>
         <Span>{typeAction}</Span>
         <Select 
-          defaultValue={swapInSelected} 
-          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSwapInSelected(e.target.value)}
+          defaultValue={investSelected} 
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setInvestSelected(e.target.value)}
         >
           <option value="">- - - -</option>
           {poolTokens.map((token: { address: string, symbol: string }) =>
             <option key={token.address} value={token?.address}>{token?.symbol}</option>
           )}
         </Select>
-        <SpanLight>Balance: {swapInSelected === '' ? 
+        <SpanLight>Balance: {investSelected === '' ? 
           '0.000000'
           :
           BNtoDecimal(balanceToken, new BigNumber(18), 6)}

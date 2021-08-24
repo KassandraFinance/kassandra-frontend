@@ -12,5 +12,4 @@ export interface IPoolTokensProps {
   decimals: BigNumber
   address: string
   normalizedWeight: number
-  isMax: boolean
 }

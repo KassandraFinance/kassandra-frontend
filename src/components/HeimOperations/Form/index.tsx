@@ -29,47 +29,43 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
   const [amountHeim, setAmountHeim] = React.useState<BigNumber>(new BigNumber(0))
   const [amountTokenPool, setAmountTokenPool] = React.useState<BigNumber>(new BigNumber(0))
   const [supplyHeim, setSupplyHeim] = React.useState<BigNumber>(new BigNumber(0))
-
-  const [swapInSelected, setSwapInSelected] = React.useState<string>("")
-  const [swapOutSelected, setSwapOutSelected] = React.useState("")
+  const [investSelected, setInvestSelected] = React.useState<string>("")
+  const [receiveTokenSelected, setReceiveTokenSelected] = React.useState("")
   const [investHeim, setInvestHeim] = React.useState<BigNumber>(new BigNumber(0))
   const [isApproveCore, setIsApproveCore] = React.useState(false)
   const [isApproveCRP, setIsApproveCRP] = React.useState(false)
 
+  const [tokenInvestSelected, setTokenInvestSelected] = React.useState<IPoolTokensProps>({
+    name: '',
+    symbol: '',
+    balance: new BigNumber(0),
+    decimals: new BigNumber(0),
+    address: '',
+    normalizedWeight: 0,
+  })
+
+  const [tokenReceiveSelected, setTokenReceiveSelected] = React.useState<IPoolTokensProps>({
+    name: '',
+    symbol: '',
+    balance: new BigNumber(0),
+    decimals: new BigNumber(0),
+    address: '',
+    normalizedWeight: 0,
+  })
+
   const [exchangeRate, setExchangeRate] = React.useState<BigNumber>(new BigNumber(0))
   const [investRate, setInvestRate] = React.useState<BigNumber>(new BigNumber(0))
-
   const [tokenSingleWithdraw, setTokenSingleWithdraw] = React.useState<string>('')
   const [amountSingleOut, setAmountSingleOut] = React.useState<BigNumber>(new BigNumber(0))
   
   const [amountSwapOut, setAmountSwapOut] = React.useState<BigNumber>(new BigNumber(0))
-
-
-  const [swapInToken, setSwapInToken] = React.useState<IPoolTokensProps>({
-    name: '',
-    symbol: '',
-    balance: new BigNumber(0),
-    decimals: new BigNumber(0),
-    address: '',
-    normalizedWeight: 0,
-    isMax: false
-  })
-  const [swapOutToken, setSwapOutToken] = React.useState<IPoolTokensProps>({
-    name: '',
-    symbol: '',
-    balance: new BigNumber(0),
-    decimals: new BigNumber(0),
-    address: '',
-    normalizedWeight: 0,
-    isMax: false
-  })
 
   const { poolTokens } = useSelector((state: RootStateOrAny) => state)
   const { connect } = useConnect()
 
   const { getTotalSupply, getAllowance, approve } = useERC20Contract()
   const { joinswapExternAmountIn, exitPool, exitswapPoolAmountIn } = useCRPContract()
-  const {
+  const { 
     calcSingleOutGivenPoolIn, 
     denormalizedWeight, 
     totalDenormalizedWeight, 
@@ -79,7 +75,8 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
     calcOutGivenIn
   } = usePoolContract()
 
-  const getArrayTokens = React.useCallback(() => {
+
+  const getArrayTokens = () => {
     const arrayWithdraw = poolTokens.map((tokenPool: IPoolTokensProps) => (
       {
         ...tokenPool,
@@ -88,8 +85,9 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
     ))
 
     return arrayWithdraw
-  }, [amountHeim, amountSingleOut, tokenSingleWithdraw])
+  }
 
+  
   const getWithdrawBalance = (balance: BigNumber): BigNumber => {
     if (supplyHeim.toString(10) === "0") {
       return new BigNumber(0);
@@ -126,9 +124,9 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
       switch (title) {
         case 'Invest':
           if (!isApproveCRP) {
-            return approve(HeimCRPPOOL, swapInSelected)
+            return approve(HeimCRPPOOL, investSelected)
           }
-          joinswapExternAmountIn(HeimCRPPOOL, swapInSelected, amountTokenPool)
+          joinswapExternAmountIn(HeimCRPPOOL, investSelected, amountTokenPool)
           break;
         case 'Withdraw':
           tokenSingleWithdraw !== '' ?
@@ -138,9 +136,9 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
           break;
         case 'Swap':
           if (!isApproveCore) {
-            return approve(HeimCorePool, swapInSelected)
+            return approve(HeimCorePool, investSelected)
           }
-          swapExactAmountIn(HeimCorePool, swapInSelected, amountTokenPool, swapOutSelected)
+          swapExactAmountIn(HeimCorePool, investSelected, amountTokenPool, receiveTokenSelected)
         default:
           break;
       }
@@ -153,13 +151,13 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
 
   React.useEffect(() => {
     (async () => {
-      if (swapInSelected !== "" && swapOutSelected !== "") {
-        const denormalizedWeightIn = await denormalizedWeight(HeimCorePool, swapInSelected)
-        const denormalizedWeightOut = await denormalizedWeight(HeimCorePool, swapOutSelected)
+      if (investSelected !== "" && receiveTokenSelected !== "") {
+        const denormalizedWeightIn = await denormalizedWeight(HeimCorePool, investSelected)
+        const denormalizedWeightOut = await denormalizedWeight(HeimCorePool, receiveTokenSelected)
         const swap = await swapFee(HeimCorePool)
   
-        const tokenBalanceIn = poolTokens.find((token: { address: string }) => token.address === swapInSelected)
-        const tokenBalanceOut = poolTokens.find((token: { address: string }) => token.address === swapOutSelected)
+        const tokenBalanceIn = poolTokens.find((token: { address: string }) => token.address === investSelected)
+        const tokenBalanceOut = poolTokens.find((token: { address: string }) => token.address === receiveTokenSelected)
   
         const price = await calcOutGivenIn(
           HeimCorePool, 
@@ -171,14 +169,14 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
           swap
         )
 
-        const priceExchangeRate = await getSpotPrice(HeimCorePool, swapOutSelected, swapInSelected)
+        const priceExchangeRate = await getSpotPrice(HeimCorePool, receiveTokenSelected, investSelected)
 
         setExchangeRate(priceExchangeRate)
         setAmountSwapOut(price)
       }
     })()
 
-  }, [swapInSelected, swapOutSelected, amountTokenPool])
+  }, [investSelected, receiveTokenSelected, amountTokenPool])
 
   React.useEffect(() => {
     (async () => {
@@ -196,30 +194,30 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
       calcMaxSingleOut(tokenFound)
     }
 
-  }, [tokenSingleWithdraw, amountHeim])
+  }, [tokenSingleWithdraw])
 
 
   React.useEffect(() => {
-    getAllowance(HeimCRPPOOL, swapInSelected)
+    getAllowance(HeimCRPPOOL, investSelected)
       .then((response: boolean) => setIsApproveCRP(response))
 
-    getAllowance(HeimCorePool, swapInSelected)
+    getAllowance(HeimCorePool, investSelected)
     .then((response: boolean) => setIsApproveCore(response))
 
-    if (swapInSelected) {
+    if (investSelected) {
       const tokenSelected = poolTokens
-        .find((token: { address: string }) => token.address === swapInSelected)
+        .find((token: { address: string }) => token.address === investSelected)
       
-      setSwapInToken(tokenSelected)
+      setTokenInvestSelected(tokenSelected)
     }
-    if (swapOutSelected) {
+    if (receiveTokenSelected) {
       const tokenSelected = poolTokens
-        .find((token: { address: string }) => token.address === swapOutSelected)
+        .find((token: { address: string }) => token.address === receiveTokenSelected)
       
-      setSwapOutToken(tokenSelected)
+      setTokenReceiveSelected(tokenSelected)
     }
   
-  }, [swapInSelected, swapOutSelected])
+  }, [investSelected, receiveTokenSelected])
 
   return (
     <FormContainer onSubmit={handleAction}>
@@ -236,9 +234,7 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
             <InputWithdraw 
               key={token.address} 
               token={token}
-              amountHeim={amountHeim}
               amountSingleOut={amountSingleOut}
-              setAmountSingleOut={setAmountSingleOut}
               setTokenSingleWithdraw={setTokenSingleWithdraw}
               tokenSingleWithdraw={tokenSingleWithdraw}
             />
@@ -252,8 +248,8 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
               getArrayTokens={getArrayTokens}
               amountTokenPool={amountTokenPool}
               setAmountTokenPool={setAmountTokenPool}
-              swapInSelected={swapInSelected}
-              setSwapInSelected={setSwapInSelected}
+              investSelected={investSelected}
+              setInvestSelected={setInvestSelected}
               setInvestHeim={setInvestHeim}
               setInvestRate={setInvestRate}
           />
@@ -261,21 +257,21 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
             title={title}
             investHeim={investHeim}
             amountSwapOut={amountSwapOut}
-            swapOutSelected={swapOutSelected}
-            setSwapOutSelected={setSwapOutSelected}
+            receiveTokenSelected={receiveTokenSelected}
+            setReceiveTokenSelected={setReceiveTokenSelected}
           />
         </>
       }
-      {title === 'Invest' && swapInToken.symbol &&
+      {title === 'Invest' && tokenInvestSelected.symbol &&
         <ExchangeRate>
           <SpanLight>Exchange rate:</SpanLight>
-          <SpanLight>{`1 ${swapInToken.symbol} = ${BNtoDecimal(investRate, new BigNumber(18), 6)} HEIM`}</SpanLight>
+          <SpanLight>{`1 ${tokenInvestSelected.symbol} = ${BNtoDecimal(investRate, new BigNumber(18), 6)} HEIM`}</SpanLight>
         </ExchangeRate>
       }
-      {title === 'Swap' && swapInToken.symbol && swapOutToken.symbol &&
+      {title === 'Swap' && tokenInvestSelected.symbol && tokenReceiveSelected.symbol &&
         <ExchangeRate>
           <SpanLight>Exchange rate:</SpanLight>
-          <SpanLight>{`1 ${swapInToken.symbol} = ${BNtoDecimal(exchangeRate, new BigNumber(18), 6)} ${swapOutToken.symbol}`}</SpanLight>
+          <SpanLight>{`1 ${tokenInvestSelected.symbol} = ${BNtoDecimal(exchangeRate, new BigNumber(18), 6)} ${tokenReceiveSelected.symbol}`}</SpanLight>
         </ExchangeRate>
       }
       {isLogged ? 

@@ -19,9 +19,7 @@ import {
 
 interface IInputWithdrawProps {
   token: IPoolTokensProps
-  amountHeim: BigNumber
   amountSingleOut: BigNumber
-  setAmountSingleOut: React.Dispatch<React.SetStateAction<BigNumber>>
   setTokenSingleWithdraw: React.Dispatch<React.SetStateAction<string>>
   tokenSingleWithdraw: string
 }
@@ -29,20 +27,16 @@ interface IInputWithdrawProps {
 const InputWithdraw = ({
   token, 
   amountSingleOut,
-  setAmountSingleOut,
   setTokenSingleWithdraw,
   tokenSingleWithdraw
 }: IInputWithdrawProps) => {
-
+ 
   if (tokenSingleWithdraw !== '') {
     const res = token.address === tokenSingleWithdraw
-
     token.balance = res ? amountSingleOut : new BigNumber(0)
-    token.isMax = !!res
-    token.normalizedWeight = res ? 100 : 0
   }
 
-  return (  
+  return (
     <InputWithdrawContainer>
       <Info>
         <Span>Receive (estimative)</Span>
@@ -57,18 +51,7 @@ const InputWithdraw = ({
             readOnly 
             value={BNtoDecimal(token.balance, token.decimals, 6)} 
           />
-        <ButtonMax 
-          type="button" 
-          isMax={token.isMax}
-          onClick={() => {
-            if (token.isMax) {
-              setTokenSingleWithdraw('')
-            } else {
-              setTokenSingleWithdraw(token.address)
-              setAmountSingleOut(new BigNumber(0))
-            }
-          }}
-        >
+        <ButtonMax type="button" onClick={() => setTokenSingleWithdraw(token.address)}>
           Max
         </ButtonMax>
       </AmountDefault>
