@@ -8,9 +8,11 @@ import { storeWrapper } from "../store"
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import Toastify from '../components/Toastify'
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
   <div className={styles['background-page']}>
+    <Toastify />
     <Header />
     <main className={styles.container}>
       <Component {...pageProps} />
