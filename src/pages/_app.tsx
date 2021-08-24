@@ -15,7 +15,7 @@ const matomoUrl = 'https://stats.kassandra.finance';
 const instance = createInstance({
   disabled: process.env.NODE_ENV === 'development',
   urlBase: matomoUrl,
-  siteId: 1,
+  siteId: 4,
   trackerUrl: `${matomoUrl}/api.php`,
   srcUrl: `${matomoUrl}/api.js`,
   configurations: {
