@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { forwardRef, AnchorHTMLAttributes, ButtonHTMLAttributes } from 'react'
 import * as S from './styles'
 

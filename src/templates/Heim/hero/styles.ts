@@ -1,61 +1,45 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import media from "styled-media-query";
 
 
 export const Container = styled.div`
+${media.lessThan('medium')`
+    position: relative;
+    margin-bottom: 2.5rem;
+`}
+  max-width: 1520px;
+  display: flex;
+  margin: auto;
   /* height: calc(100vh - 110px); */
 
-  position: absolute;
+  position: relative;
   padding: 0 32px;
 
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 4fr 5fr;
   justify-content: space-between;
   align-items: center;
   @media (max-width: 770px) {
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 180px);
+    display: grid;
+  grid-template-columns: 4fr 5fr;
+    /* height: calc(100vh - 180px); */
   }
   @media (max-width: 600px) {
-    height: calc(100vh - 140px);
+    /* height: calc(100vh - 140px); */
   }
   @media (max-width: 370px) {
-    height: calc(100vh - 160px);
+    /* height: calc(100vh - 160px); */
   }
-`
-
-export const Title = styled.h1 `
-
-    font-size: 56px;
-    font-weight: 400;
-    /* line-height: 94px; */
-    @media (max-width: 1200px) {
-      font-size: 44px;
-      /* line-height: 70px; */
-    }
-    @media (max-width: 960px) {
-      font-size: 36px;
-      /* line-height: 60px; */
-    }
-    @media (max-width: 770px) {
-      font-size: 36px;
-
-    }
-    @media (max-width: 600px) {
-      font-size: 36px;
-    }
-    @media (max-width: 420px) {
-      font-size: 24px;
-      margin-bottom: 0;
-
-  }
+  ${media.lessThan('small')`
+    display: flex;
+    flex-direction: column;
+  `}
 `
 export const SubTitle = styled.h3`
-    font-size: 31px;
+    font-size: 3.1rem;
     font-weight: 300;
     margin: 32px 0;
-    max-width: 510px;
+    max-width: 100%px;
     @media (max-width: 1200px) {
       font-size: 27px;
     }
@@ -73,15 +57,14 @@ export const SubTitle = styled.h3`
 
 export const Image = styled.div`
     position: relative;
-
-
+    display:flex;
+    justify-content: flex-end;
     img {
+      max-width: 100%;
+      ${media.lessThan('small')`
+      display: none;
 
-     max-width: 100%;
-
-     ${media.lessThan('medium')`
-     display: none;
-     `}
+    `}
 
     @media (min-width: 1440px) {
       max-width: 100%;
@@ -113,3 +96,43 @@ export const Link = styled.div `
     cursor: pointer;
   }
 `
+
+export const Title = styled.h1`
+  ${({theme})=>css`
+
+      font-size: ${theme.font.sizes.xxlarge};
+      font-weight: ${theme.font.normal};
+      /* line-height: 94px; */
+
+      @media (max-width: 1200px) {
+            font-size: 44px;
+            /* line-height: 70px; */
+          }
+          @media (max-width: 960px) {
+            font-size: 36px;
+            /* line-height: 60px; */
+          }
+          @media (max-width: 770px) {
+            font-size: 36px;
+
+          }
+          @media (max-width: 600px) {
+            font-size: 36px;
+          }
+          @media (max-width: 420px) {
+            font-size: 2.4rem;
+            margin-bottom: 0;
+          }
+  ` }
+`
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  max-width: 80%;
+  ${media.lessThan("medium")`
+    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
+  `  }
+`
+

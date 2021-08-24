@@ -9,9 +9,9 @@ import DropdownProducts from '../DropdownProducts'
 import useConnect from '../../hooks/useConnect'
 import substr from '../../utils/substr'
 
-import { 
-  HeaderContainer, 
-  Nav, 
+import {
+  HeaderContainer,
+  Nav,
   ButtonConnectWallet,
   LinkInstallMetaMask
 } from './styles'
@@ -33,9 +33,9 @@ const Header = () => {
         <Link href="/farm">Stake/Farm</Link>
         <Link href="/vote">Vote</Link>
         <Link href="/about">About</Link>
-        {web3.currentProvider !== null ? 
+        {web3.currentProvider !== null ?
           isLogged ?
-            <ButtonConnectWallet 
+            <ButtonConnectWallet
               type="button"
               style={{ backgroundColor: '#26DBDB', color: '#211426' }}
             >
@@ -46,8 +46,8 @@ const Header = () => {
               Connect Wallet
             </ButtonConnectWallet>
           :
-          <LinkInstallMetaMask 
-            href="https://metamask.io/download.html" 
+          <LinkInstallMetaMask
+            href="https://metamask.io/download.html"
             target="_blank"
             >
               Install MetaMask!

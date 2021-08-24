@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from 'react'
+import Feature from './feature'
 import Hero from './hero'
 
 import * as S from './styles'
@@ -10,9 +11,10 @@ const Heim = () => {
     return (
         <S.Container>
           <Hero />
-          <S.Image>
+          <Feature/>
+          {/* <S.Image>
             <img src="../../assets/crypto-funnel.svg" />
-          </S.Image>
+          </S.Image> */}
         </S.Container>
       )
     }

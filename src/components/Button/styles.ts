@@ -63,7 +63,7 @@ const wrapperModifiers = {
       border-top-color: ${darken(0.2, theme.colors.primary)};
     }
     &:hover {
-      background: linear-gradient(180deg, #E843C4 20%, #020887 70%);
+      background: linear-gradient(264.12deg, #E843C4 -140.16%, #020887 205.21%);
     }
   `,
   backgroundSecondary: (theme: DefaultTheme) => css`
@@ -115,11 +115,11 @@ export const Wrapper = styled.button<WrapperProps>`
     padding: ${theme.spacings.xxsmall};
     text-decoration: none;
 
-    &:hover {
+    /* &:hover {
       background: ${minimal
         ? 'none'
         : `linear-gradient(180deg, #e35565 0%, #d958a6 50%)`};
-    }
+    } */
 
     ${!!size && wrapperModifiers[size](theme)};
     ${!!fullWidth && wrapperModifiers.fullWidth()};
