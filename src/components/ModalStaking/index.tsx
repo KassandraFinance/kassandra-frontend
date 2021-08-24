@@ -1,10 +1,11 @@
 import React from 'react'
 import BigNumber from 'bn.js'
-import { useSelector, RootStateOrAny } from 'react-redux'
 
 import useBalance from '../../hooks/useBalance'
 
 import { Kacy } from '../../constants/tokenAddresses'
+
+import useStakingContract from '../../hooks/useStakingContract'
 
 import { 
   Backdrop,
@@ -30,18 +31,23 @@ const ModalStaking = ({
   modalOpen, 
   setModalOpen, 
   otherStakingPools }: IModalStakingProps) => {
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
   const [amountStaking, setAmountStaking] = React.useState<BigNumber>(new BigNumber(0))
   const { getBalanceToken } = useBalance()
+  const { stake } = useStakingContract()
 
 
   function handleCloseModal() {
     setModalOpen(false)
   }
 
-  function handleKacyAmount(percentage: string | number | BigNumber ) {
-    setAmountStaking(balance)
+  function handleKacyAmount(percentage: BigNumber ) {
+    const kacyAmount = percentage.mul(balance).div(new BigNumber(100))
+    setAmountStaking(kacyAmount)
+  }
+
+  function handleConfirm () {
+    stake(0, amountStaking)
   }
 
   async function get() {
@@ -73,15 +79,20 @@ const ModalStaking = ({
               <h5>Balance: {BNtoDecimal(balance, new BigNumber(18), 6)}</h5>
             </Amount>
             <ButtonContainer>
-              <button type="button" onClick={() => handleKacyAmount(25/100)}>25%</button>
-              <button type="button" onClick={() => handleKacyAmount(50/100)}>50%</button>
-              <button type="button" onClick={() => handleKacyAmount(75/100)}>75%</button>
-              <button type="button" onClick={() => handleKacyAmount(100/100)}>max</button>
+              <button type="button" onClick={() => handleKacyAmount(new BigNumber(25))}>25%</button>
+              <button type="button" onClick={() => handleKacyAmount(new BigNumber(50))}>50%</button>
+              <button type="button" onClick={() => handleKacyAmount(new BigNumber(75))}>75%</button>
+              <button type="button" onClick={() => handleKacyAmount(new BigNumber(100))}>max</button>
             </ButtonContainer>
             <ConfirmButton 
               type="button" 
               otherStakingPools={otherStakingPools}
-              onClick={() => setModalOpen(false)}
+              onClick={() => {
+                setModalOpen(false)
+                handleConfirm()
+                setAmountStaking(new BigNumber(0))
+              } 
+            }
             >
               Confirm
             </ConfirmButton>
