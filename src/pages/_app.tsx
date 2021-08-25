@@ -9,6 +9,7 @@ import { storeWrapper } from "../store"
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import Toastify from '../components/Toastify'
 
 const matomoUrl = 'https://stats.kassandra.finance';
 
@@ -27,6 +28,7 @@ const instance = createInstance({
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
   <MatomoProvider value={instance}>
     <div className={styles['background-page']}>
+      <Toastify />
       <Header />
       <main className={styles.container}>
         <Component {...pageProps} />
