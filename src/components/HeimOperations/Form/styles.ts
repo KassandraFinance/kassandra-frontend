@@ -26,11 +26,15 @@ export const Button = styled.button`
 
 // ========== DEFAULT INPUT ALL ==========
 
-export const PayWith = styled.div`
+interface IPayWithProps {
+  inputHeim?: boolean
+}
+
+export const PayWith = styled.div<IPayWithProps>`
   text-align: left;
   position: relative;
   width: 190px;
-  height: 94px;
+  height: ${ props => props.inputHeim ? '100px' : '94px' };
 
   @media (max-width: 504px) {
     width: 160px;
@@ -40,11 +44,15 @@ export const PayWith = styled.div`
   }
 `
 
-export const Amount = styled.div`
+interface IAmountProps {
+  inputHeim?: boolean
+}
+
+export const Amount = styled.div<IAmountProps>`
   text-align: right;
   position: relative;
   width: 190px;
-  height: 100%;
+  height: ${ props => props.inputHeim ? '100px' : '94px' };
   padding-right: 12px;
   
   @media (max-width: 504px) {
@@ -148,11 +156,15 @@ export const ImgArrowLong = styled.img`
   margin: 48px auto 0 auto;
 `
 
-export const ButtonMax = styled.button`
+interface IButtonMax {
+  isMax?: boolean
+}
+
+export const ButtonMax = styled.button<IButtonMax>`
   border: 1px solid #26DBDB;
   border-radius: 16px;
-  background: transparent;
-  color: #fff;
+  background: ${ props => props.isMax ? '#26DBDB' : 'transparent' };
+  color: ${ props => props.isMax ? '#000' : '#fff' };
   font-size: 12px;
   line-height: 12px;
   font-weight: 300;
@@ -181,6 +193,7 @@ export const InputTokensContainer = styled.div`
   
   width: 100%;
   height: 94px;
+  margin-top: 8px;
   @media (max-width: 504px) {
     grid-template-columns: 160px 60px 160px;
   }
@@ -217,8 +230,11 @@ export const Select = styled.select`
 
 // ========== INPUT HEIM ON WITHDRAW ==========
 
+interface IInputHeimContainerProps {
+  inputHeim?: boolean
+}
 
-export const InputHeimContainer = styled.div`
+export const InputHeimContainer = styled.div<IInputHeimContainerProps>`
   border: 2px solid #FFBF00;
   box-shadow: 1px 1px 5px #FFBF00;
 
@@ -226,11 +242,10 @@ export const InputHeimContainer = styled.div`
   display: grid;
   grid-template-columns: 190px 60px 190px;
   justify-content: space-around;
-  align-items: flex-start;
+  align-items: center;
   
   width: 100%;
-  min-height: 94px;
-  max-height: 96px;
+  height: ${ props => props.inputHeim ? '102px' : '94px' };
   padding: 0;
   @media (max-width: 504px) {
     grid-template-columns: 160px 60px 160px;

@@ -23,16 +23,16 @@ interface IInputDefaultProps {
   title: string
   investHeim: BigNumber
   amountSwapOut: BigNumber
-  receiveTokenSelected: string
-  setReceiveTokenSelected: React.Dispatch<React.SetStateAction<string>>
+  swapOutSelected: string
+  setSwapOutSelected: React.Dispatch<React.SetStateAction<string>>
 }
 
 const InputDefault = ({ 
   title,
   investHeim,
   amountSwapOut,
-  receiveTokenSelected,
-  setReceiveTokenSelected
+  swapOutSelected,
+  setSwapOutSelected
 }: IInputDefaultProps) => {
   const [balanceToken, setBalanceToken] = React.useState<BigNumber>(new BigNumber(0))
 
@@ -44,14 +44,14 @@ const InputDefault = ({
       const balance = await getBalanceToken(HeimCRPPOOL)
       setBalanceToken(balance)
     } else {
-      const balance = await getBalanceToken(receiveTokenSelected)
+      const balance = await getBalanceToken(swapOutSelected)
       setBalanceToken(balance)
     }
   }
 
   React.useEffect(() => {
     handleBalance()
-  }, [userWalletAddress, title, receiveTokenSelected])
+  }, [userWalletAddress, title, swapOutSelected])
 
   return (
     <InputDefaultContainer>
@@ -61,8 +61,8 @@ const InputDefault = ({
             <Symbol>HEIM</Symbol>
           : 
           <Select 
-            defaultValue={receiveTokenSelected} 
-            onChange={(e: any) => setReceiveTokenSelected(e.target.value)}
+            defaultValue={swapOutSelected} 
+            onChange={(e: any) => setSwapOutSelected(e.target.value)}
           >
             <option value="">- - - -</option>
             {poolTokens.map((token: { address: string, symbol: string}) =>
