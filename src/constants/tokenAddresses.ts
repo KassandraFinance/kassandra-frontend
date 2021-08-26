@@ -1,2 +1,7 @@
 export const HeimCRPPOOL = "0x668ACe0F1BEa58a382e557F9319334d4DC2174e8"
 export const HeimCorePool = "0x8279ec41DD99aB7ee1c69417a109F7ef4e3f1B0e"
+
+export const Kacy = "0xBE020da5F198921a6309b04D01EEBD46CFac25E2"
+export const Staking = "0x6CB52178d2D742FBa96Ddb8C6fCD4D75395e34dd"
+export const Timelock = "0x22bc71B8673193559f7af6096FabF6a2d046CFC7"
+export const GovernorAlpha = "0x52f47a34120B114Cd4FE265B710417B297D76384"

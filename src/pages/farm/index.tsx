@@ -9,9 +9,9 @@ const Farm = () => (
     <h1>Staking</h1>
     <h3>Stake $KACY for Voting Power</h3>
     <GridStaking>
-      <VotingPower days='0'/>
-      <VotingPower days='15'/>
-      <VotingPower days='45'/>
+      <VotingPower days='15' percentage="12" />
+      <VotingPower days='30' percentage="20" />
+      <VotingPower days='45' percentage="32" />
     </GridStaking>
     <TotalVoting>
       <fieldset>
