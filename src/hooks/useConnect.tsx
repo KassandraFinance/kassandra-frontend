@@ -1,8 +1,6 @@
 import React from 'react'
-import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 import detectEthereumProvider from '@metamask/detect-provider'
 
-import { actionGetUserAddressWallet } from '../store/modules/userWalletAddress/actions'
 
 import { ToastError, ToastInfo, ToastSuccess, ToastWarning } from '../components/Toastify/toast'
 
@@ -10,13 +8,7 @@ declare let window: any
 
 const useConnect = () => {
   const [isLogged, setIsLogged] = React.useState<boolean>(false)
-  const [currentAccount, setCurrentAccount] = React.useState('')
-  const [isLogged, setIsLogged] = React.useState(false)
-  // const [isWalletPermissions, setIsWalletPermissions] = React.useState(false)
-
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-  const dispatch = useDispatch()
-
+  const [userWalletAddress, setUserWalletAddress] = React.useState<string>('')
 
   const startApp = React.useCallback(async (provider) => {
     if (provider !== window.ethereum) {
@@ -56,13 +48,12 @@ const useConnect = () => {
   const handleAccountsChanged = React.useCallback(async (accounts) => {
     if (accounts.length === 0) {
       setIsLogged(false)
-      dispatch(actionGetUserAddressWallet(''))
+      setUserWalletAddress('')
     } else if (accounts[0] !== userWalletAddress) {
-      dispatch(actionGetUserAddressWallet(accounts[0]))
+      setUserWalletAddress(() => accounts[0])
       setIsLogged(true)
       ToastSuccess("Connected to MetaMask.")
     }
-    return
   }, [])
 
 
@@ -125,8 +116,8 @@ const useConnect = () => {
 
   return {
     connect,
-    isUnlocked,
-    isLogged
+    isLogged,
+    userWalletAddress
   }
 }
 

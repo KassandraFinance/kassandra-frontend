@@ -8,6 +8,7 @@ import { BNtoDecimal } from '../../../utils/numerals'
 import { HeimCorePool } from '../../../constants/tokenAddresses'
 
 import useBalance from '../../../hooks/useBalance'
+import useConnect from '../../../hooks/useConnect'
 import usePoolContract from '../../../hooks/usePoolContract'
 
 import { 
@@ -48,8 +49,9 @@ const InputTokens = ({
   setInvestRate
 }: IInputEthProps) => {
   const [balanceToken, setBalanceToken] = React.useState<BigNumber>(new BigNumber(0))
-  const { poolTokens, userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const { poolTokens } = useSelector((state: RootStateOrAny) => state)
   
+  const { userWalletAddress } = useConnect()
   const { getBalanceToken } = useBalance()
   const { 
     calcPoolOutGivenSingleIn, 

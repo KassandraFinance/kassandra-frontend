@@ -4,11 +4,11 @@ import { AbiItem } from "web3-utils"
 
 import web3 from '../utils/web3'
 import ERC20ABI from "../constants/abi/ERC20.json"
-import { useSelector, RootStateOrAny } from 'react-redux'
+import useConnect from './useConnect'
 
 
 const useERC20Contract = () => {
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const { userWalletAddress } = useConnect()
 
   const sleep = (ms: number) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -57,10 +57,10 @@ const useERC20Contract = () => {
   }
 
 
-  const getAllowance = async (addressCRP: string, tokenAddress: string): Promise<boolean> => {
+  const getAllowance = async (addressCRP: string, tokenAddress: string, walletAddress?: string): Promise<boolean> => {
     try {
       const tokenContract = getERC20Contract(tokenAddress)
-      const allowance: string = await tokenContract.methods.allowance(userWalletAddress, addressCRP).call()
+      const allowance: string = await tokenContract.methods.allowance(walletAddress || userWalletAddress, addressCRP).call()
       return allowance !== "0"
     } catch (e) {
       return false

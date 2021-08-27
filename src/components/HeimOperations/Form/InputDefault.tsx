@@ -6,6 +6,7 @@ import { HeimCRPPOOL } from '../../../constants/tokenAddresses'
 import { BNtoDecimal } from '../../../utils/numerals'
 
 import useBalance from '../../../hooks/useBalance'
+import useConnect from '../../../hooks/useConnect'
 
 import { 
   InputDefaultContainer, 
@@ -36,8 +37,9 @@ const InputDefault = ({
 }: IInputDefaultProps) => {
   const [balanceToken, setBalanceToken] = React.useState<BigNumber>(new BigNumber(0))
 
-  const { poolTokens, userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const { poolTokens } = useSelector((state: RootStateOrAny) => state)
   const { getBalanceToken } = useBalance()
+  const { userWalletAddress } = useConnect()
 
   async function handleBalance() {
     if (title === 'Invest') {

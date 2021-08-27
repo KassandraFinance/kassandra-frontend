@@ -1,13 +1,14 @@
 import React from 'react'
 import BigNumber from 'bn.js'
-import { useSelector, RootStateOrAny } from 'react-redux'
 import { AbiItem } from "web3-utils"
+
+import useConnect from './useConnect'
 
 import web3 from '../utils/web3'
 import ConfigurableRightsPool from "../constants/abi/ConfigurableRightsPool.json"
 
 const useCRPContract = () => {
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const { userWalletAddress } = useConnect()
 
   const getCRPContract = (address: string) => {
     const contract = new web3.eth.Contract((ConfigurableRightsPool as unknown) as AbiItem, address)

@@ -7,8 +7,10 @@ import web3 from '../utils/web3'
 import { Staking } from '../constants/tokenAddresses'
 import StakingContract from "../constants/abi/Staking.json"
 
+import useConnect from './useConnect'
+
 const useStakingContract = () => {
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const { userWalletAddress } = useConnect()
 
   const getStakingContract = (address: string) => {
     const contract = new web3.eth.Contract((StakingContract as unknown) as AbiItem, address)
