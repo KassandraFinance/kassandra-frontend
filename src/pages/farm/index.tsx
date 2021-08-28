@@ -1,26 +1,52 @@
 import React from 'react'
+import BigNumber from 'bn.js'
 import styled from 'styled-components'
+
+import useConnect from '../../hooks/useConnect'
+import useStakingContract from '../../hooks/useStakingContract'
 
 import VotingPower from '../../components/VotingPower'
 import OthersStakingPools from '../../components/OthersStakingPools'
+import { BNtoDecimal } from '../../utils/numerals'
 
-const Farm = () => (
-  <FarmContainer>
+const Farm = () => {
+  const [totalVotes, setTotalVotes] = React.useState<BigNumber>(new BigNumber(0))
+  const [yourVotingPower, setYourVotingPower] = React.useState<BigNumber>(new BigNumber(0))
+  const { userWalletAddress } = useConnect()
+  const { getTotalVotes, getCurrentVotes } = useStakingContract()
+
+
+
+
+  React.useEffect(() => {
+    (async () => {
+      const totalVotes = await getTotalVotes()
+      setTotalVotes(totalVotes)
+      if (userWalletAddress !== '') {
+        const currentVotes = await getCurrentVotes(userWalletAddress)
+        console.log(currentVotes)
+        setYourVotingPower(currentVotes)
+      }
+    })()
+  }, [])
+
+  return (
+    <FarmContainer>
     <h1>Staking</h1>
     <h3>Stake $KACY for Voting Power</h3>
     <GridStaking>
-      <VotingPower days='15' percentage="12" />
-      <VotingPower days='30' percentage="20" />
-      <VotingPower days='45' percentage="32" />
+      <VotingPower days='0' percentage="12" pid={0} />
+      <VotingPower days='30' percentage="20" pid={1} />
+      <VotingPower days='45' percentage="32" pid={2} />
     </GridStaking>
     <TotalVoting>
       <fieldset>
         <legend>Your voting power</legend>
-        <span>10</span>
+        <span>{BNtoDecimal(new BigNumber(yourVotingPower), new BigNumber(18), 6)}</span>
       </fieldset>
       <fieldset>
         <legend>Total voting power</legend>
-        <span>500.231.540</span>
+        <span>{BNtoDecimal(new BigNumber(totalVotes), new BigNumber(18), 6)}</span>
       </fieldset>
     </TotalVoting>
     <h3>Other Staking Pools</h3>
@@ -30,7 +56,8 @@ const Farm = () => (
       <OthersStakingPools img="" />
     </GridStaking>
   </FarmContainer>
-)
+  )
+}
 
 const FarmContainer = styled.section`
   h1 {
