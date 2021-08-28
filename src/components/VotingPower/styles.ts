@@ -4,7 +4,7 @@ export const BorderGradient = styled.div`
   position: relative;
   padding: 4px; 
   z-index: 1;
-  height: 100%;
+  max-height: 100%;
   min-width: 360px;
   max-width: 440px;
   @media (max-width: 800px) {
@@ -195,6 +195,8 @@ export const ButtonWallet = styled.button`
   height: 40px;
   cursor: pointer;
   outline: none;
+  margin: 8px 0;
+
   z-index: 10;
   @media (max-width: 420px) {
     max-width: 100%;
@@ -211,4 +213,70 @@ export const ButtonDetails = styled.button`
   outline: none;  
   cursor: pointer;
   z-index: 10;
+`
+
+export const StakeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-height: 300px;
+  justify-content: space-between;
+  align-items: center;
+
+  p {
+    font-size: 18px;
+    margin-top: 8px;
+  }
+`
+
+export const ButtonWithdraw = styled.button`
+  background: #4F4F4F;
+  border: none;
+  border-radius: 6px;
+  color: #BDBDBD;
+  font-size: 20px;
+  font-weight: 400;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  width: 320px;
+  height: 40px;
+  margin: 8px 0;
+  cursor: pointer;
+  outline: none;
+  z-index: 10;
+  @media (max-width: 420px) {
+    max-width: 100%;
+    min-width: 200px;
+  }
+`
+
+export const ButtonRequestStake = styled.button`
+  background: transparent;
+  border: 1px solid #26DBDB;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 400;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  width: 320px;
+  height: 40px;
+  margin: 8px 0;
+  cursor: pointer;
+  outline: none;
+  z-index: 10;
+  transition-duration: 300ms;
+  &:hover {
+    background-color: #26DBDB;
+    color: #211426;
+  }
+  @media (max-width: 420px) {
+    max-width: 100%;
+    min-width: 200px;
+  }
 `
