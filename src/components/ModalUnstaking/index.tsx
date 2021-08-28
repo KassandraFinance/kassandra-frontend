@@ -1,10 +1,7 @@
 import React from 'react'
 import BigNumber from 'bn.js'
 
-import useBalance from '../../hooks/useBalance'
-
-import { Kacy } from '../../constants/tokenAddresses'
-
+import useConnect from '../../hooks/useConnect'
 import useStakingContract from '../../hooks/useStakingContract'
 
 import { 
@@ -28,29 +25,32 @@ import { BNtoDecimal } from '../../utils/numerals'
   pid: number
 }
 
-const ModalStaking = ({ 
+const ModalUnstaking = ({ 
   modalOpen, 
   setModalOpen, 
   otherStakingPools,
   pid }: IModalStakingProps) => {
   const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
-  const [amountStaking, setAmountStaking] = React.useState<BigNumber>(new BigNumber(0))
-  const { getBalanceToken } = useBalance()
-  const { stake } = useStakingContract()
+  const [amountUnstaking, setAmountUnstaking] = React.useState<BigNumber>(new BigNumber(0))
+
+  const { userWalletAddress } = useConnect()
+  const { withdraw, balanceOf } = useStakingContract()
 
 
   function handleKacyAmount(percentage: BigNumber ) {
     const kacyAmount = percentage.mul(balance).div(new BigNumber(100))
-    setAmountStaking(kacyAmount)
+    setAmountUnstaking(kacyAmount)
   }
 
   function handleConfirm () {
-    stake(pid, amountStaking)
+    withdraw(pid, amountUnstaking)
   }
 
   async function get() {
-    const balanceKacy = await getBalanceToken(Kacy)
-    setBalance(balanceKacy)
+    if (userWalletAddress !== '') {
+      const balance: BigNumber = await balanceOf(pid, userWalletAddress)
+      setBalance(balance)
+    }
   }
 
   React.useEffect(() => {
@@ -66,13 +66,13 @@ const ModalStaking = ({
       >
         <BackgroundBlack>
           <InterBackground otherStakingPools={otherStakingPools}>
-            <span>Stake in Pool</span>
+            <span>Unstaking</span>
             <button type="button" onClick={() => setModalOpen(false)}><img src="assets/close.svg" alt="" /> </button>
           </InterBackground>
           <Main>
             <Amount>
               <span>$KACY Amount</span>
-              <input type="number" placeholder="0" value={BNtoDecimal(amountStaking, new BigNumber(18), 6)} />
+              <input type="number" placeholder="0" value={BNtoDecimal(amountUnstaking, new BigNumber(18), 6)} />
               <Line />
               <h5>Balance: {BNtoDecimal(balance, new BigNumber(18), 6)}</h5>
             </Amount>
@@ -88,7 +88,7 @@ const ModalStaking = ({
               onClick={() => {
                 setModalOpen(false)
                 handleConfirm()
-                setAmountStaking(new BigNumber(0))
+                setAmountUnstaking(new BigNumber(0))
               } 
             }
             >
@@ -102,4 +102,4 @@ const ModalStaking = ({
   )
 }
 
-export default ModalStaking
+export default ModalUnstaking
