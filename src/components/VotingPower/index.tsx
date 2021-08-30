@@ -13,6 +13,7 @@ import { Kacy, Staking } from '../../constants/tokenAddresses'
 import ModalStaking from '../ModalStaking'
 import ModalUnstaking from '../ModalUnstaking'
 import ModalRequestUnstake from '../ModalRequestUnstake'
+import ModalCancelUnstake from '../ModalCancelUnstake'
 
 import { 
   BorderGradient, 
@@ -57,6 +58,7 @@ interface IStakingProps {
 const VotingPower = ({ days, percentage, pid }: IStakingProps) => {
   const [modalOpen, setModalOpen] = React.useState<boolean>(false)
   const [isModalUnstaking, setIsModalUnstaking] = React.useState<boolean>(false)
+  const [isModalCancelUnstake, setIsModalCancelUnstake] = React.useState<boolean>(false)
   const [isModalRequestUnstake, setIsModalRequestUnstake] = React.useState<boolean>(false)
   const [infoStake, setInfoStake] = React.useState<IInfoStakeProps>({
     yourStake: new BigNumber(0),
@@ -219,11 +221,15 @@ const VotingPower = ({ days, percentage, pid }: IStakingProps) => {
               {isLogged || userWalletAddress !== '' ?
               <>
                 {isApproveKacyStaking ?
-                  <StakeContainer>              
-                    <ButtonWallet type="button" onClick={() => setModalOpen(true)}>Stake</ButtonWallet>
+                  <StakeContainer>
+                    {unstake ? 
+                      <ButtonRequestStake type="button" onClick={() => setIsModalCancelUnstake(true)}>Cancel unstake</ButtonRequestStake>
+                      :
+                      <ButtonWallet type="button" onClick={() => setModalOpen(true)}>Stake</ButtonWallet>
+                    }        
                     {infoStake.yourStake.toString() !== "0" &&
                     <>
-                      {infoStake.withdrawable ? 
+                      {infoStake.withdrawable || date === '' ? 
                         <ButtonWallet type="button" onClick={() => setIsModalUnstaking(true)}>Withdraw</ButtonWallet>
                         :
                         unstake ? 
@@ -264,6 +270,11 @@ const VotingPower = ({ days, percentage, pid }: IStakingProps) => {
         modalOpen={isModalUnstaking} 
         setModalOpen={setIsModalUnstaking} 
         otherStakingPools={false}
+        pid={pid}
+      />
+      <ModalCancelUnstake
+        modalOpen={isModalCancelUnstake} 
+        setModalOpen={setIsModalCancelUnstake} 
         pid={pid}
       />
       <ModalRequestUnstake 

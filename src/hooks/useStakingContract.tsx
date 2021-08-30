@@ -39,6 +39,11 @@ const useStakingContract = () => {
     await contract.methods.withdraw(pid, amount).send({ from: userWalletAddress })
   }
 
+  const cancelUnstake = async (pid: number) => {
+    const contract = getStakingContract(Staking)
+    await contract.methods.cancelUnstake(pid).send({ from: userWalletAddress })
+  }
+
   // ======== Read Contract ========
 
   const balanceOf = async (pid: number, walletAddress: string) => {
@@ -93,6 +98,7 @@ const useStakingContract = () => {
     stake,
     unstake,
     withdraw,
+    cancelUnstake,
     getReward,
     balanceOf,
     earned,
