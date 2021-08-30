@@ -6,6 +6,7 @@ import { getDate } from '../../utils/date'
 import useConnect from '../../hooks/useConnect'
 import useERC20Contract from '../../hooks/useERC20Contract'
 import useStakingContract from '../../hooks/useStakingContract'
+import useCountDownDate from '../../hooks/useCountDownDate'
 
 import { Kacy, Staking } from '../../constants/tokenAddresses'
 
@@ -85,6 +86,7 @@ const VotingPower = ({ days, percentage, pid }: IStakingProps) => {
     unstaking,
     stakedUntil,
   } = useStakingContract()
+  const { date, countDown } = useCountDownDate()
 
 
   async function handleApproveKacy() {
@@ -130,7 +132,11 @@ const VotingPower = ({ days, percentage, pid }: IStakingProps) => {
       const minutes = "0" + date.getMinutes()
       const seconds = "0" + date.getSeconds()
       const formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-      
+
+
+      let countDownDate = new Date(unix_timestamp * 1000).getTime();
+
+      countDown(countDownDate)
       
       setInfoStake({
         yourStake: balance,
@@ -221,7 +227,7 @@ const VotingPower = ({ days, percentage, pid }: IStakingProps) => {
                         <ButtonWallet type="button" onClick={() => setIsModalUnstaking(true)}>Withdraw</ButtonWallet>
                         :
                         unstake ? 
-                          <ButtonWithdraw type="button">Withdraw in {infoStake.time}</ButtonWithdraw>
+                          <ButtonWithdraw type="button">Withdraw in {date}</ButtonWithdraw>
                           :
                           <ButtonRequestStake 
                             type="button" 
