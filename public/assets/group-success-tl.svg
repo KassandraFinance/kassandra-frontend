@@ -1,0 +1,11 @@
+<svg width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#a)">
+<path d="M5 105V11C5 7.68654 7.68654 5 11 5H105" stroke="#FFBF00" stroke-width="2"/>
+</g>
+<path d="M5 105V11C5 7.68654 7.68654 5 11 5H105" stroke="#FFBF00"/>
+<defs>
+<filter id="a" x="0" y="0" width="110" height="110" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feGaussianBlur stdDeviation="2" result="effect1_foregroundBlur"/>
+</filter>
+</defs>
+</svg>
