@@ -57,7 +57,7 @@ const useConnect = () => {
   }, [])
 
 
-  const isUnlocked = new Promise(resolve => {
+  const isUnlocked = React.useCallback(async resolve => {
     window.ethereum?._metamask.isUnlocked().then((unlocked: boolean) => {
       if (!unlocked) {
         console.info('MetaMask is locked')
@@ -66,7 +66,7 @@ const useConnect = () => {
       }
       console.info('MetaMask is unlocked')
     })
-  })
+  }, [])
 
 
   const connect = React.useCallback(() => {

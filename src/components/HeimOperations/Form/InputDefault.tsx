@@ -64,7 +64,7 @@ const InputDefault = ({
           : 
           <Select 
             defaultValue={swapOutSelected} 
-            onChange={(e: any) => setSwapOutSelected(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSwapOutSelected(e.target.value)}
           >
             <option value="">- - - -</option>
             {poolTokens.map((token: { address: string, symbol: string}) =>

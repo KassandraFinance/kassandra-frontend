@@ -69,7 +69,8 @@ const OthersStakingPools = ({ img }: IOthersStakingPoolsProps) => {
           </ButtonContainer>
         </InfosStaking>
       </BorderGradient>
-      <ModalStaking 
+      <ModalStaking
+        pid={0}
         modalOpen={modalOpen} 
         setModalOpen={setModalOpen}
         otherStakingPools

@@ -236,7 +236,6 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
             <InputWithdraw 
               key={token.address} 
               token={token}
-              amountHeim={amountHeim}
               amountSingleOut={amountSingleOut}
               setAmountSingleOut={setAmountSingleOut}
               setTokenSingleWithdraw={setTokenSingleWithdraw}
