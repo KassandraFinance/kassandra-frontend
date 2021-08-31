@@ -2,6 +2,8 @@ import React from 'react'
 import Head from 'next/head'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
+import Image from 'next/image'
+
 import styles from './index.module.scss'
 
 const Home = () => {
@@ -28,7 +30,7 @@ const Home = () => {
             <a href="https://twitter.com/dao_kassandra" target="_blank" rel="noopener noreferrer">Coming soon...</a>
           </div>
         </div>
-        <img src="assets/kassandra-600.svg" alt=""/>
+        <img src="assets/kassandra-600.svg" alt="" width="689" height="709" />
         <div className={styles['h3-mobile']}>
           <h3>The decentralized autonomous organization that governs tokenized data-driven investment funds.</h3>
           <a href="https://twitter.com/dao_kassandra" target="_blank" rel="noopener noreferrer">Coming soon...</a>
@@ -38,20 +40,20 @@ const Home = () => {
         <h1>Products</h1>
         <p>Tokens backed by a basket of assets, managed by autonomous strategies with data from external data providers</p>
         <div className={styles['heim-container']}>
-          <img src="assets/logo-heim.svg" alt="" />
+          <img src="assets/logo-heim.svg" alt="" width="250" height="250" />
           <div className={styles['heim-grid-left']}>
             <div className={styles['top-social-index']}>
               <h3>Top Social Index</h3>
               <a href="https://medium.com/heimdall-research-crypto/the-heimdall-social-index-9595fdfb9ddc" target="_blank" rel="noopener noreferrer" className={styles['arrow-right']}>
                 Check out Heim Index
-                <img src="assets/arrow-right.svg" alt="" /> 
+                <img src="assets/arrow-right.svg" alt="" width="17" height="10" /> 
               </a>
             </div>
             <p className={styles['first-paragraph']}>The Social Index $HEIM reflects the performance of a portfolio selected from the most socially active cryptocurrencies in the past 30 days, using Heimdall Social Score data.</p>
             <p className={styles['second-paragraph']}>$HEIM offers an easy exposure to the hottest cryptocurrencies in the market.</p>
           </div>
         </div>
-        <img className={styles['more-icon']} src="assets/more-icon.svg" alt="" />
+        <img className={styles['more-icon']} src="assets/more-icon.svg" alt="" width="24" height="48" />
         <p className={styles['more-text']}>More coming soon</p>
       </section>
       <section className={styles['class-products']}>
@@ -59,17 +61,17 @@ const Home = () => {
         <p>Monetary efficient and actively managed decentralized investment baskets</p>
         <ul>
           <li>
-            <img src="assets/Icon/permissionless.svg" alt="Permissionless" />
+            <img src="assets/Icon/permissionless.svg" alt="" width="106" height="148" />
             <h3>Permissionless</h3>
             <p>Invest, transfer and redeem investment products without relying on third-parties</p>
           </li>
           <li>
-            <img src="assets/Icon/non-custodial.svg" alt="Non-custodial" />
+            <img src="assets/Icon/non-custodial.svg" alt="" width="148" height="148" />
             <h3>Non-custodial</h3>
             <p>Your funds managed by public, secure, and predictable smart-contracts</p>
           </li>
           <li>
-            <img src="assets/Icon/actively-managed.svg" alt="Actively managed" />
+            <img src="assets/Icon/actively-managed.svg" alt="" width="122" height="150" />
             <h3>Actively managed</h3>
             <p>Outsource the management of your money to data-driven quantitative models</p>
           </li>
@@ -79,8 +81,8 @@ const Home = () => {
         <h1>Be part of the Kassandra ecosystem with $KACY </h1>
         <p>Take the lead and join the first decentralized fund manager through our decentralized governance protocol</p>
         <div className={styles['grid-details']}>
-          <img className={styles['img-token']} src="assets/token.svg" alt="" />
-          <img className={styles['img-token-96']} src="assets/token-96.svg" alt="" />
+          <img className={styles['img-token']} src="assets/token.svg" alt="" width="116" height="105" />
+          <img className={styles['img-token-96']} src="assets/token-96.svg" alt="" width="556" height="501" />
           <div>
             <h3>The $KACY Token</h3>
             <p>The protocol governance token responsible for:</p>
@@ -100,13 +102,30 @@ const Home = () => {
         <p>Like traditional fund managers, the $KACY token holders
           benefit directly and indirectly from the investment products
           deployed on Kassandra Protocol</p>
-        <img className={styles['group-success-desktop']} src="assets/group-success.svg" alt="" />
-        <img className={styles['group-success-mobile']} src="assets/group-success-mobile.svg" alt="" />
+        <div className={styles.successgrid}>
+          <div className={styles.successitem}>
+            <Image src="/assets/group-success-5percent.svg" alt="5%" width={150} height={150} />
+            <h2>$KACY Holding Rule</h2>
+            <p>To flow value to $KACY token holders, every Kassandra investment product must hold at least 5% of $KACY tokens as part of the portfolio. This ensures that the success of the products will result in the growth of the $KACY token value.</p>
+          </div>
+          <div className={styles.successitem}>
+            <Image src="/assets/group-success-3percent.svg" alt="3%" width={150} height={150} />
+            <h2>Redeem Fee</h2>
+            <p>A 3% fee is charged whenever investment tokens are redeemed. The fees collected this way are under total governance control and can be used for purchasing and subsequently burn $KACY tokens.</p>
+          </div>
+          <div className={styles.successitem}>
+            <Image src="/assets/group-success-vote.svg" alt="" width={150} height={150} />
+            <h2>Vote Lock</h2>
+            <p>When voting in governance proposals $KACY holders may choose to lock their tokens for different time periods and earn more voting power, thus making $KACY more scarce and the governance more secure.</p>
+          </div>
+        </div>
       </section>
       <section className={styles['kassandra-architecture']}>
         <h1>How it works?</h1>
         <p>Our tokenized investment baskets are Automated Market Maker pools for multiple assets, with dynamically adjustable weights</p>
-        <img className={styles['img-kassandra-architecture']} src="assets/kassandra-architecture.svg" alt="" />
+        <img className={styles['img-kassandra-architecture']} src="assets/kassandra-architecture.svg" width="1262" height="494"
+          alt="A smart pool contains the assets the $HEIM token represents, users can mint and redeeem this token to invest in the strategy. Meanwhile arbitrageurs swap tokens in the pool forcing it to move towards the strategy that uses social data from Heimdall. This pool and all future pools will be governed by the Kassandra Decentralized Autonomous Organization."
+        />
         <div className={styles['grid-paragraph']}>
           <div>
             <p>A Smart Indexed Pool works essentially as an Automated Market Maker (AMM) for multiple assets, but with dynamically adjustable weights, that can be changed using external data.</p>
