@@ -65,6 +65,7 @@ export const IntroStaking = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: flex-end;
   flex: 1;
   height: 80px;
   @media (max-width: 540px) {
@@ -85,6 +86,8 @@ export const IntroStaking = styled.div`
 export const APR = styled.p`
   font-size: 24px;
   font-weight: 500;
+  margin-left: 8px;
+  margin-top: 4px;
 `
 
 export const Percentage= styled.p`
@@ -147,10 +150,6 @@ export const Info = styled.div`
     font-weight: 300;
   }
 
-  img {
-    z-index: 11;
-  }
-
   .total-staking {
     margin: 16px 0;
   }
@@ -163,21 +162,6 @@ export const ButtonContainer = styled.div`
   
   margin: 0 auto;
   width: 100%;
-  .img-info {
-    position: absolute;
-    top: 382px;
-    left: 80px;
-    z-index: 10;
-    cursor: pointer;
-    @media (max-width: 540px) {
-      top: 365px;
-      left: 75px;
-    }
-    @media (max-width: 420px) {
-      top: 360px;
-      left: 65px;
-    }
-  }
 `
 
 export const ButtonWallet = styled.button`

@@ -15,6 +15,8 @@ import ModalUnstaking from '../ModalUnstaking'
 import ModalRequestUnstake from '../ModalRequestUnstake'
 import ModalCancelUnstake from '../ModalCancelUnstake'
 
+import Tooltip from '../Tooltip'
+
 import { 
   BorderGradient, 
   InterBackground, 
@@ -163,7 +165,12 @@ const VotingPower = ({ days, percentage, pid }: IStakingProps) => {
           <InterBackground>
             <img src="assets/logo-staking.svg" alt="" />
             <IntroStaking>
-              <APR>APR</APR>
+              <div style={{ display: 'flex', alignItems: 'flex-start', margin: '0 0 8px' }}>
+                <Tooltip tooltipTop={true}>Annual Percentage Rate</Tooltip>
+                <APR>
+                  APR
+                </APR>
+              </div>
               <Percentage>{percentage}%</Percentage>
             </IntroStaking>
           </InterBackground>
@@ -203,17 +210,10 @@ const VotingPower = ({ days, percentage, pid }: IStakingProps) => {
             </Info>
             <Info>
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <p style={{ margin: '16px 0 24px' }}>
+                <p style={{ margin: '16px 4px 24px 0' }}>
                   Unstake delay
                 </p>
-                <img
-                  src="assets/info-icon.svg" 
-                  alt="" 
-                  className="img-info"
-                  onMouseOver={() => alert('tooltip')}
-                  width="20"
-                  style={{ marginBottom: '4px', marginLeft: '8px' }}
-                />
+                <Tooltip tooltipTop={false}>Time your asset will be locked before you can withdraw it.</Tooltip>
               </div>
               <p style={{ margin: '16px 0 24px'}}>{infoStakeStatic.withdrawDelay} Days</p>
             </Info>
