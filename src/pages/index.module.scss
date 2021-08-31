@@ -643,11 +643,18 @@
     }
   }
   .grid-supporters {
-    display: grid;
+    display: flex;
     justify-items: center;
     align-items: center;
-    grid-template-columns: 3fr 3fr 2fr 3fr;
     padding: 64px 0;
+    a {
+      flex: auto;
+      text-align: center;
+      img {
+        height: 50px;
+        width: 100%;
+      }
+    }
     @media (max-width: 800px) {
       grid-template-columns: repeat(2, 1fr);
       gap: 40px;
