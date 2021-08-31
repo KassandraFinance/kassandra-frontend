@@ -14,18 +14,18 @@ export const Feature = () => (
     </div>
         <S.WrapperItems>
           <S.ItemContainer>
-            <S.Image>
+            <S.ItemImage>
               <img src="assets/connectionHeim.png" alt=""/>
-            </S.Image>
+            </S.ItemImage>
             <S.ItemText>
               <S.ItemTitle>A decentralized ETF</S.ItemTitle>
               <S.ItemSubtitle>Invest by acquiring a regular ERC20 token that tracks a complex strategy while being non-custodial and permissionless.</S.ItemSubtitle>
             </S.ItemText>
           </S.ItemContainer>
           <S.ItemContainer>
-            <S.Image>
+            <S.ItemImage>
               <img src="assets/balanceHeim.png" alt=""/>
-            </S.Image>
+            </S.ItemImage>
             <S.ItemText>
               <S.ItemTitle>Constantly rebalanced</S.ItemTitle>
               <S.ItemSubtitle>The portfolio updates assets allocations towards the best socially
@@ -34,9 +34,9 @@ into the blockchain every day.</S.ItemSubtitle>
             </S.ItemText>
           </S.ItemContainer>
           <S.ItemContainer>
-            <S.Image>
+            <S.ItemImage>
               <img src="assets/compassHeim.png" alt=""/>
-            </S.Image>
+            </S.ItemImage>
             <S.ItemText>
               <S.ItemTitle>Guided by communities</S.ItemTitle>
               <S.ItemSubtitle>Intelligently measures community size by counting the quantity and quality of every social interaction with each project in real-time.</S.ItemSubtitle>
@@ -54,14 +54,14 @@ into the blockchain every day.</S.ItemSubtitle>
       <S.ButtonWrapper>
         <MediaMatch greaterThan="medium" >
             <Button backgroundPrimary size="large">
-              Get Early Access
+              Get early access
             </Button>
         </MediaMatch>
       </S.ButtonWrapper>
       <S.ButtonWrapper>
         <MediaMatch lessThan="small">
             <Button backgroundPrimary size="small">
-              Get Early Access
+              Get early access
             </Button>
         </MediaMatch>
       </S.ButtonWrapper>

@@ -2,12 +2,15 @@ import React from 'react'
 import Head from 'next/head'
 
 import styles from './index.module.scss'
+import Header from '../../components/Header'
 
 
 export const Home = () => (
   <>
 
     <>
+    <Header />
+
       <section className={styles.hero}>
         <div>
           <h1>Kassandra DAO</h1>

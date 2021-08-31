@@ -4,7 +4,7 @@ export default {
     gutter: '3.2rem'
   },
   border: {
-    radius: '0.4rem'
+    radius: '0.6rem'
   },
   font: {
     family:
@@ -28,8 +28,8 @@ export default {
     mainBg: '#2772FF',
     lightBg: '#F2F2F2',
     white: '#FAFAFA',
-    black: '#FCFCFC',
-    lightGray: '#EAEAEA',
+    black: '#030517',
+    lightGray: '#828282',
     gray: '#8F8F8F',
     darkGray: '#2E2F42',
     darkBlue: '#000B71',
@@ -54,6 +54,6 @@ export default {
   },
   transition: {
     default: '0.3s ease-in-out',
-    fast: '0.1s ease-in-out'
+    fast: '0.15s ease-in-out'
   }
 } as const

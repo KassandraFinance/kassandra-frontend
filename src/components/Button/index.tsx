@@ -7,12 +7,12 @@ type ButtonTypes =
   | ButtonHTMLAttributes<HTMLButtonElement>
 
 export type ButtonProps = {
-  size?: 'small' | 'medium' | 'large'
+  size?: 'small' | 'medium' | 'large' | 'huge'
   fullWidth?: boolean
   minimal?: boolean
   backgroundPrimary?: boolean
   backgroundSecondary?: boolean
-  backgroundGray?: boolean
+  backgroundBlack?: boolean
   icon?: JSX.Element
   as?: React.ElementType
 } & ButtonTypes
@@ -26,7 +26,7 @@ const Button: React.ForwardRefRenderFunction<S.WrapperProps, ButtonProps> = (
     minimal = false,
     backgroundPrimary = true,
     backgroundSecondary = false,
-    backgroundGray = false,
+    backgroundBlack = false,
 
     ...props
   },
@@ -40,7 +40,7 @@ const Button: React.ForwardRefRenderFunction<S.WrapperProps, ButtonProps> = (
     ref={ref}
     backgroundPrimary={backgroundPrimary}
     backgroundSecondary={backgroundSecondary}
-    backgroundGray={backgroundGray}
+    backgroundBlack={backgroundBlack}
     {...props}
   >
     {icon}

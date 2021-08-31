@@ -2,12 +2,14 @@
   background-color: #2F2333;
   color: #fcfcfc;
   padding: 40px 0;
+  position: relative;
+  width: 100%;
 }
 
 .container {
   display: flex;
   justify-content: space-between;
-  
+
   margin: 0 auto;
   padding: 0 32px;
   @media (min-width: 1600px) {

@@ -12,23 +12,33 @@ export type WrapperProps = {
   | 'minimal'
   | 'backgroundPrimary'
   | 'backgroundSecondary'
-  | 'backgroundGray'
+  | 'backgroundBlack'
 >
 
 const wrapperModifiers = {
   small: (theme: DefaultTheme) => css`
     height: 3rem;
     font-size: ${theme.font.sizes.xsmall};
+    transition-delay: ${theme.transition.fast};
   `,
   medium: (theme: DefaultTheme) => css`
     height: 4rem;
-    font-size: ${theme.font.sizes.small};
-    padding: ${theme.spacings.xxsmall} ${theme.spacings.medium};
+    font-size: ${theme.font.sizes.medium};
+    padding: ${theme.spacings.xsmall} ${theme.spacings.medium};
+    transition-delay: ${theme.transition.fast};
   `,
   large: (theme: DefaultTheme) => css`
     height: 5rem;
     font-size: ${theme.font.sizes.medium};
-    padding: ${theme.spacings.xxsmall} ${theme.spacings.xlarge};
+    padding: ${theme.spacings.xsmall} ${theme.spacings.medium};
+    transition-delay: ${theme.transition.fast};
+  `,
+  huge: (theme: DefaultTheme) => css`
+    width: 100%;
+    height:4.5rem;
+    font-size: ${theme.font.sizes.medium};
+    padding: ${theme.spacings.xsmall} ${theme.spacings.medium};
+    transition-delay: ${theme.transition.fast};
   `,
   fullWidth: () => css`
     width: 100%;
@@ -63,7 +73,8 @@ const wrapperModifiers = {
       border-top-color: ${darken(0.2, theme.colors.primary)};
     }
     &:hover {
-      background: linear-gradient(264.12deg, #E843C4 -140.16%, #020887 205.21%);
+      background: #1821D8;
+;
     }
   `,
   backgroundSecondary: (theme: DefaultTheme) => css`
@@ -76,18 +87,16 @@ const wrapperModifiers = {
       background: linear-gradient(180deg, #3cd3c1 0%, #5faed0 50%);
     }
   `,
-  backgroundGray: (theme: DefaultTheme) => css`
-    background: ${theme.colors.lightGray};
+  backgroundBlack: (theme: DefaultTheme) => css`
+    background: rgba(0,0,0,0.0);
+    border: 0.1rem solid #26DBDB;
     &::before {
-      border-left-color: ${theme.colors.lightGray};
-      border-top-color: ${theme.colors.lightGray};
+      border-left-color: #26DBDB;
+      border-top-color: #26DBDB;
     }
     &:hover {
-      background: linear-gradient(
-        180deg,
-        ${theme.colors.lightGray} 0%,
-        ${theme.colors.lightGray} 50%
-      );
+      color:black;
+      background: #26DBDB
     }
   `
 }
@@ -102,7 +111,7 @@ export const Wrapper = styled.button<WrapperProps>`
     disabled,
     backgroundPrimary,
     backgroundSecondary,
-    backgroundGray
+    backgroundBlack
   }) => css`
     display: inline-flex;
     align-items: center;
@@ -128,6 +137,6 @@ export const Wrapper = styled.button<WrapperProps>`
     ${disabled && wrapperModifiers.disabled()};
     ${!!backgroundPrimary && wrapperModifiers.backgroundPrimary(theme)};
     ${!!backgroundSecondary && wrapperModifiers.backgroundSecondary(theme)};
-    ${!!backgroundGray && wrapperModifiers.backgroundGray(theme)};
+    ${!!backgroundBlack && wrapperModifiers.backgroundBlack(theme)};
   `}
 `

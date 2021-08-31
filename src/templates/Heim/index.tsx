@@ -1,21 +1,19 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from 'react'
-import Feature from './feature'
 import Hero from './hero'
+import Feature from './feature'
+import SocialProof from './socialProof'
 
 import * as S from './styles'
+import HowItWorks from './howItWorks'
 
-const Heim = () => {
-    console.log("Teste")
+const Heim = () =>(
 
-    return (
-        <S.Container>
-          <Hero />
-          <Feature/>
-          {/* <S.Image>
-            <img src="../../assets/crypto-funnel.svg" />
-          </S.Image> */}
-        </S.Container>
-      )
-    }
+    <S.Container>
+      <Hero />
+      <Feature/>
+      <SocialProof />
+      <HowItWorks />
+    </S.Container>
+  )
   export default Heim

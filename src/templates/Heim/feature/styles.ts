@@ -13,7 +13,7 @@ ${()=>css`
     margin: auto;
     position: relative;
     padding: 8.5rem 3.2rem;
-    max-width: 122rem;
+    max-width: 132rem;
     justify-content: center;
     @media (max-width: 600px) {
       /* height: calc(100vh - 140px); */
@@ -50,7 +50,7 @@ export const Title = styled.h1`
 export const SubTitle = styled.h3`
     ${({theme})=>css`
     text-align: center;
-    font-size: 3.1rem;
+    font-size: ${theme.font.sizes.large};
     font-weight: ${theme.font.light};
     margin: 32px 0;
     max-width: 100%px;
@@ -63,6 +63,7 @@ export const SubTitle = styled.h3`
 
 export const WrapperItems = styled.div`
   ${() => css `
+    max-width: 130rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     justify-content: space-between;
@@ -103,20 +104,25 @@ export const ItemSubtitle = styled.div`
   `}
 `
 
-export const Image = styled.div`
+export const ItemImage = styled.div`
   ${({theme}) => css `
   display: flexbox;
   justify-content: center;
-
   margin-bottom:${theme.spacings.medium};
-
+  ${media.lessThan("medium")`
+      display: flex;
+      justify-content: center;
+      img{
+        max-width:70%
+      }
+    `}
   `}
 `
 export const GraphWrapper = styled.div`
   ${() => css `
   padding: 10rem 0 ;
   max-width: 100%;
-  max-height: 94.5rem;
+  /* max-height: 94.5rem; */
   background-color: #402947;
   display: flex;
   align-items: center;
@@ -129,9 +135,10 @@ export const GraphWrapper = styled.div`
   img{
     width: 100%;
     margin: 2% 0;
+    transform: scale(1);
+
     ${media.lessThan("medium")`
       transform: scale(1.1);
-
     `}
   }
   ${media.lessThan("medium")`
