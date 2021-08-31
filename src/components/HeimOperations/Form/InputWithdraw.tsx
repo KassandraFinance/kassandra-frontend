@@ -19,7 +19,6 @@ import {
 
 interface IInputWithdrawProps {
   token: IPoolTokensProps
-  amountHeim: BigNumber
   amountSingleOut: BigNumber
   setAmountSingleOut: React.Dispatch<React.SetStateAction<BigNumber>>
   setTokenSingleWithdraw: React.Dispatch<React.SetStateAction<string>>
