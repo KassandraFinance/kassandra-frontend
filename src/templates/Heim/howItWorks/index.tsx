@@ -13,18 +13,18 @@ export const HowItWorks = () => (
         <MediaMatch greaterThan='large'>
           <SingUp/>
           <S.Text>
-          Delegate the token discovery to a decentralized organization with skin in the game, and automate your money managment to a data-driven backtested model.
+          Delegate the token discovery to a decentralized organization with skin in the game, and <strong>automate your money </strong>managment to a data-driven backtested model.
           </S.Text>
           <S.Image>
-            <img src='./assets/crypto-funnel.png' alt=''/>
+            <img src='./assets/crypto-funnel.svg' alt=''/>
           </S.Image>
           </MediaMatch>
           <MediaMatch lessThan='large'>
           <S.Text>
-          Delegate the token discovery to a decentralized organization with skin in the game, and automate your money managment to a data-driven backtested model.
+          Delegate the token discovery to a decentralized organization with skin in the game, and <strong>automate your money </strong>managment to a data-driven backtested model.
           </S.Text>
           <S.Image>
-            <img src='./assets/crypto-funnel.png' alt=''/>
+            <img src='./assets/crypto-funnel.svg' alt=''/>
           </S.Image>
           <SingUp/>
         </MediaMatch>

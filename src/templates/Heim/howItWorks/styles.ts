@@ -6,7 +6,7 @@ export const Container = styled.div`
     position: relative;
     width:100%;
     align-items: center;
-    max-width:1440px;
+    /* max-width:1440px; */
     margin:auto;
 
   /* ${media.lessThan("small")`
@@ -28,17 +28,13 @@ export const SubTitle = styled.h3`
 `
 
 export const Image = styled.div`
-  position: static;
-  /* margin-top: -10%; */
-  margin-bottom: -13%;
 
   img{
     width: 100%;
     height: auto;
+    margin-bottom: -5px;
   }
   ${media.lessThan("small")`
-  margin-bottom: -13%;
-  /* margin-top: -85%; */
 
   `}
 `
@@ -68,29 +64,44 @@ export const ButtonWrapper = styled.div`
     justify-content: space-between;
   `  }
 `
-export const Text = styled.h3`
+export const Text = styled.div`
   ${({theme})=> css`
     position:absolute;
     text-align: center;
-    margin: 20rem;
-    font-size: ${theme.font.sizes.xlarge};
-
-
-    ${media.lessThan('large')`
+    margin: 30rem 40rem;
+    font-size: ${theme.font.sizes.xxlarge};
+    font-weight: ${theme.font.light};
+    line-height:150%;
+    @media (max-width: 1920px) {
+      margin: 25rem 25rem;
+    }
+    @media (max-width: 1440px){
     font-size: ${theme.font.sizes.large};
-    margin: 15rem;
-    `}
-    ${media.lessThan('medium')`
+    margin: 15rem 25rem;
+    }
+    @media (max-width: 1024px){
+    font-size: ${theme.font.sizes.large};
+    font-weight: ${theme.font.light};
+    margin: 13rem 20rem;
+    line-height:100%;
+    }
+    @media (max-width: 768px){
     font-size: ${theme.font.sizes.medium};
-    font-weight: ${theme.font.normal};
-
+    font-weight: ${theme.font.light};
     margin: 10rem;
-    `}
-    ${media.lessThan('small')`
+    line-height:100%;
+    }
+    @media (max-width: 425px){
     font-size: ${theme.font.sizes.xsmall};
-    font-weight: ${theme.font.normal};
-    margin: 4.5rem 1rem;
-    `}
+    font-weight: ${theme.font.light};
+    margin: 5rem;
+    line-height:100%;
+    }
+    @media (max-width: 375px){
+    font-size: ${theme.font.sizes.xsmall};
+    font-weight: ${theme.font.light};
+    margin: 3.8rem;
+    line-height:100%;
+    }
   `}
 `
-

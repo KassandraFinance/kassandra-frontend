@@ -50,7 +50,7 @@ into the blockchain every day.</S.ItemSubtitle>
         <S.Title>A backtested strategy</S.Title>
         <S.SubTitle>Our research team showed that investing in communities can outperform simpler strategies.</S.SubTitle>
       </S.TextWrapper>
-        <img src="assets/backtestGraph.png" alt=""/>
+        <img src="assets/backtestGraph.svg" alt=""/>
       <S.ButtonWrapper>
         <MediaMatch greaterThan="medium" >
             <Button backgroundPrimary size="large">
@@ -66,7 +66,7 @@ into the blockchain every day.</S.ItemSubtitle>
         </MediaMatch>
       </S.ButtonWrapper>
       <S.Link>
-        <a href="https://medium.com/heimdall-research-crypto/the-heimdall-social-index-9595fdfb9ddc">Check out the full research at our Medium &#8594; </a>
+        <a href="https://medium.com/heimdall-research-crypto/the-heimdall-social-index-9595fdfb9ddc">Check out the full research at our Medium  <span>&#8594;</span> </a>
       </S.Link>
     </S.GraphWrapper>
 </>

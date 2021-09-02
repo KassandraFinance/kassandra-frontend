@@ -1,60 +1,111 @@
+/* eslint-disable react/react-in-jsx-scope */
 import React from 'react'
-import { useSelector, RootStateOrAny } from 'react-redux'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
-import web3 from '../../utils/web3'
 
-import DropdownProducts from '../DropdownProducts'
+import { Menu2 as MenuIcon } from '@styled-icons/remix-fill/Menu2'
+import { Close as CloseIcon } from '@styled-icons/material-outlined/Close'
+import Image from 'next/image'
 
-import useConnect from '../../hooks/useConnect'
-import substr from '../../utils/substr'
 
-import {
-  HeaderContainer,
-  Nav,
-  ButtonConnectWallet,
-  LinkInstallMetaMask
-} from './styles'
+import MediaMatch from '../MediaMatch'
+import Button from '../Button'
+import * as S from './styles'
+
+export type MenuProps = {
+  username?: string
+}
 
 const Header = () => {
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-  const { connect, isLogged } = useConnect()
+  const [isOpen, setIsOpen] = React.useState(false)
+  const {asPath} = useRouter()
+
+  console.warn('aspath: ', asPath)
 
   return (
-    <HeaderContainer>
-      <Link href="/">
-        <img src="assets/logo-header.svg" alt="" className="logo-header" />
-      </Link>
-      <Link href="/">
-        <img src="assets/logo-64.svg" alt="" className="logo-64" />
-      </Link>
-      <Nav>
-        <DropdownProducts />
-        <Link href="/farm">Stake/Farm</Link>
-        <Link href="/vote">Vote</Link>
-        <Link href="/about">About</Link>
-        {web3.currentProvider !== null ?
-          isLogged ?
-            <ButtonConnectWallet
-              type="button"
-              style={{ backgroundColor: '#26DBDB', color: '#211426' }}
-            >
-              {substr(userWalletAddress)}
-            </ButtonConnectWallet>
-            :
-            <ButtonConnectWallet type="button" onClick={connect}>
-              Connect Wallet
-            </ButtonConnectWallet>
-          :
-          <LinkInstallMetaMask
-            href="https://metamask.io/download.html"
-            target="_blank"
-            >
-              Install MetaMask!
-          </LinkInstallMetaMask>
-        }
-      </Nav>
-    </HeaderContainer>
+    <S.Wrapper>
+      <MediaMatch lessThan="large">
+        <S.IconWrapper onClick={() => setIsOpen(true)}>
+          <MenuIcon aria-label="Open Menu" />
+        </S.IconWrapper>
+      </MediaMatch>
+
+      <S.LogoWrapper>
+        <Link href="/" passHref>
+          {asPath === '/heim'
+            ? <img src={"./assets/HeimLogoMenu.svg"} //ternario trocar img kassandra e heim
+            alt="Logo menu"
+          />
+        : <img src={"./assets/logo-header.svg"} //ternario trocar img kassandra e heim
+          alt="Logo menu"
+          />}
+        </Link>
+      </S.LogoWrapper>
+
+      <MediaMatch greaterThan="large">
+        <S.MenuNav>
+
+          <Link href="/" passHref>
+            <S.MenuLink> HEIM Index </S.MenuLink>
+          </Link>
+
+          <Link href="/" passHref>
+            <S.MenuLinkDisable>
+              Buy $Heim
+            </S.MenuLinkDisable>
+          </Link>
+
+          <Link href="/" passHref>
+            <S.MenuLinkDisable>
+              Stake/Farm
+            </S.MenuLinkDisable>
+          </Link>
+
+          <Link href="/" passHref>
+            <S.MenuLinkDisable>
+              Vote
+            </S.MenuLinkDisable>
+          </Link>
+
+          <Link href="/" passHref>
+            <S.MenuLinkDisable>
+              About
+            </S.MenuLinkDisable>
+          </Link>
+
+          <Link href="/" passHref>
+            <Button as="a" backgroundBlack size={'large'} >Connect Wallet</Button>
+          </Link>
+        </S.MenuNav>
+      </MediaMatch>
+
+
+
+      <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen}>
+        <CloseIcon aria-label="Close Menu" onClick={() => setIsOpen(false)} />
+        <S.MenuNav>
+          <Link href="/" passHref>
+            <S.MenuLink>HEIM Index</S.MenuLink>
+          </Link>
+          <Link href="/" passHref>
+            <S.MenuLinkDisable>Buy $Heim</S.MenuLinkDisable>
+          </Link>
+          <Link href="/" passHref>
+            <S.MenuLinkDisable>Stake/Farm</S.MenuLinkDisable>
+          </Link>
+          <Link href="/" passHref>
+            <S.MenuLinkDisable>Vote</S.MenuLinkDisable>
+          </Link>
+          <Link href="/" passHref>
+            <S.MenuLinkDisable>About</S.MenuLinkDisable>
+          </Link>
+          <Link href="/" passHref>
+            <Button as="a" backgroundBlack size={'large'} >Connect Wallet</Button>
+          </Link>
+        </S.MenuNav>
+      </S.MenuFull>
+    </S.Wrapper>
   )
 }
 

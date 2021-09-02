@@ -68,6 +68,9 @@ const GlobalStyles: GlobalStyleComponent<
       color: #FCFCFC;
     }
   `}
+  ul, ol {
+    list-style: none;
+  }
 `
 export default GlobalStyles
 /*
@@ -88,8 +91,6 @@ export default createGlobalStyle`
   select, button, input {
     font-family: 'Rubik', sans-serif;
   }
-  ul, ol {
-    list-style: none;
-  }
+
 `
 */

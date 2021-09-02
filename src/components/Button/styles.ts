@@ -19,26 +19,23 @@ const wrapperModifiers = {
   small: (theme: DefaultTheme) => css`
     height: 3rem;
     font-size: ${theme.font.sizes.xsmall};
-    transition-delay: ${theme.transition.fast};
   `,
   medium: (theme: DefaultTheme) => css`
     height: 4rem;
     font-size: ${theme.font.sizes.medium};
     padding: ${theme.spacings.xsmall} ${theme.spacings.medium};
-    transition-delay: ${theme.transition.fast};
   `,
   large: (theme: DefaultTheme) => css`
     height: 5rem;
     font-size: ${theme.font.sizes.medium};
     padding: ${theme.spacings.xsmall} ${theme.spacings.medium};
-    transition-delay: ${theme.transition.fast};
+
   `,
   huge: (theme: DefaultTheme) => css`
     width: 100%;
     height:4.5rem;
     font-size: ${theme.font.sizes.medium};
     padding: ${theme.spacings.xsmall} ${theme.spacings.medium};
-    transition-delay: ${theme.transition.fast};
   `,
   fullWidth: () => css`
     width: 100%;
@@ -74,6 +71,7 @@ const wrapperModifiers = {
     }
     &:hover {
       background: #1821D8;
+      transition-delay: ${theme.transition.default};
 ;
     }
   `,
@@ -85,6 +83,7 @@ const wrapperModifiers = {
     }
     &:hover {
       background: linear-gradient(180deg, #3cd3c1 0%, #5faed0 50%);
+      transition-delay: ${theme.transition.default};
     }
   `,
   backgroundBlack: (theme: DefaultTheme) => css`
@@ -96,7 +95,8 @@ const wrapperModifiers = {
     }
     &:hover {
       color:black;
-      background: #26DBDB
+      background: #26DBDB;
+      delay: 2s ease-in-out;
     }
   `
 }

@@ -4,23 +4,22 @@ import media from "styled-media-query";
 
 export const Container = styled.div`
 ${()=>css`
-
   ${media.lessThan('medium')`
       position: relative;
       margin-bottom: 2.5rem;
   `}
-
     margin: auto;
     position: relative;
     padding: 8.5rem 3.2rem;
     max-width: 132rem;
     justify-content: center;
-    @media (max-width: 600px) {
-      /* height: calc(100vh - 140px); */
+    height: calc(100vh -160px);
+    @media (min-width: 1920px) {
+      height: calc(100vh);
     }
-    @media (max-width: 370px) {
-      /* height: calc(100vh - 160px); */
-    }
+    /* @media (max-width: 370px) {
+      height: calc(100vh - 160px);
+    } */
     ${media.lessThan('large')`
       display: flex;
       flex-direction: column;
@@ -55,7 +54,7 @@ export const SubTitle = styled.h3`
     margin: 32px 0;
     max-width: 100%px;
     ${media.lessThan("medium")`
-      font-size: ${theme.font.sizes.small};
+      font-size: ${theme.font.sizes.medium};
       margin: 16px 0;
     `}
   `}
@@ -92,6 +91,7 @@ export const ItemTitle = styled.div`
   ${({theme}) => css `
     text-align: center;
     font-size: ${theme.font.sizes.large};
+    font-weight: ${theme.font.bold};
     margin-bottom: ${theme.spacings.xsmall};
   `}
 `
@@ -100,7 +100,7 @@ export const ItemSubtitle = styled.div`
   text-align: center;
   font-size: ${theme.font.sizes.medium};
   font-weight: ${theme.font.light};
-
+  line-height: 150%;
   `}
 `
 
@@ -167,7 +167,8 @@ ${({theme})=> css `
     color: #26DBDB;
     border: none;
     text-decoration: none;
-    font-size: ${theme.font.sizes.large};
+    font-size: ${theme.font.sizes.medium};
+    font-weight: ${theme.font.light};
     cursor: pointer;
     ${media.lessThan("small")`
     font-size: ${theme.font.sizes.xsmall};

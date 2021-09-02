@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@material-ui/icons": "^4.11.2",
     "@metamask/detect-provider": "^1.2.0",
     "@types/node": "^15.0.2",
     "@types/react": "^17.0.5",

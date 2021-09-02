@@ -6,9 +6,10 @@ import Link from 'next/link'
 import * as S from './styles'
 import Button from '../../../components/Button'
 import MediaMatch from '../../../components/MediaMatch'
+import ModalSocial from '../ModalSocial'
 
 export function Hero() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [modalOpen, setModalOpen] = React.useState<boolean>(false)
   return (
     <>
       <S.Container>
@@ -21,7 +22,7 @@ export function Hero() {
               <Button backgroundPrimary size="large">
                 Get early access
               </Button>
-              <Button size="large" backgroundBlack onClick={() => { setIsOpen(true)}}>
+              <Button size="large" backgroundBlack onClick={() => setModalOpen(true)}>
                 Join the community
               </Button>
             </S.ButtonWrapper>
@@ -31,19 +32,23 @@ export function Hero() {
               <Button backgroundPrimary size="medium">
                 Get early access
               </Button>
-              <Button size="medium" backgroundBlack  onClick={() => { setIsOpen(true)}}>
+              <Button size="medium" backgroundBlack  onClick={() => setModalOpen(true)}>
                 Join the community
               </Button>
             </S.ButtonWrapper>
           </MediaMatch>
         </div>
         <S.Image>
-          <img src="assets/HeimCurrency.png" alt="" />
+          <img src="assets/HeimCurrency.svg" alt="" />
         </S.Image>
         <S.FloatImage>
-          <img src="assets/Certik.png" alt="" />
+          <img src="assets/Certik.svg" alt="" />
         </S.FloatImage>
-        <S.Modal isOpen={isOpen} aria-label="modal">
+        <ModalSocial
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+      />
+        {/* <S.Modal isOpen={isOpen} aria-label="modal">
 
           <S.ModalHeading>
             <S.ModalText>
@@ -89,7 +94,7 @@ export function Hero() {
                 Twitter
             </S.WrapperIcons>
           </S.Content>
-        </S.Modal>
+        </S.Modal> */}
       </S.Container>
     </>
 

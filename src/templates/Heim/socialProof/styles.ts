@@ -5,19 +5,18 @@ import media from "styled-media-query";
 export const Container = styled.div`
   ${()=>css`
     z-index:1;
+    margin: auto;
+    position: relative;
+    margin: 10.8em;
+    /* max-width: 132rem; */
+    justify-content: center;
+    overflow:hidden;
     ${media.lessThan('medium')`
         display:flex;
         flex-direction: column;
         position: relative;
-        margin-bottom: 2.5rem;
+        margin: 2.5rem;
     `}
-    margin: auto;
-    position: relative;
-    padding: 8.5rem 0;
-    /* max-width: 132rem; */
-    justify-content: center;
-    overflow:hidden;
-
   `}
 `
 
@@ -45,7 +44,7 @@ export const Title = styled.h1`
 export const SubTitle = styled.h3`
     ${({theme})=>css`
     text-align: center;
-    font-size: ${theme.font.sizes.large};
+    font-size: ${theme.font.sizes.medium};
     font-weight: ${theme.font.light};
     margin: 32px 0;
     max-width: 100%px;
@@ -86,30 +85,37 @@ export const ItemContainer = styled.div`
 export const ItemText = styled.div`
 ${() => css `
 /* text-align: center; */
-max-width:40rem;
+max-width:42rem;
 `}
 `
 export const ItemTitle = styled.div`
   ${({theme}) => css `
-  text-align: justify;
+  text-align: left;
   font-size: ${theme.font.sizes.large};
+  font-weight: ${theme.font.bold};
+  line-height: 120%;
   margin-bottom: ${theme.spacings.small};
     ${media.lessThan("medium")`
     font-size: ${theme.font.sizes.large};
     `}
+    /* ${media.greaterThan("medium")`
+    font-size: ${theme.font.sizes.xlarge};
+    `} */
   `}
   `
 export const ItemSubtitle = styled.div`
   ${({theme}) => css `
-  text-align: justify;
+  text-align: left;
   font-size: ${theme.font.sizes.medium};
   font-weight: ${theme.font.light};
+  line-height: 150%;
   margin-bottom: ${theme.spacings.xxsmall};
     ${media.lessThan("medium")`
       font-size: ${theme.font.sizes.small};
     `}
-
-
+    /* ${media.greaterThan("medium")`
+      font-size: ${theme.font.sizes.large};
+    `} */
   `}
   `
 
@@ -205,17 +211,17 @@ ${() => css `
 `
 export const ProductTitle = styled.div`
   ${({theme}) => css `
-    text-align: justify;
+    text-align: left;
     font-size: ${theme.font.sizes.large};
     margin-bottom: ${theme.spacings.small};
   `}
 `
 export const ProductSubtitle = styled.div`
   ${({theme}) => css `
-  text-align: justify;
+  text-align: left;
   font-size: ${theme.font.sizes.medium};
   font-weight: ${theme.font.light};
-  margin-bottom: ${theme.spacings.xxsmall};
+  line-height: 150%;
 
   ${media.lessThan('small')`
     font-size: ${theme.font.sizes.small};

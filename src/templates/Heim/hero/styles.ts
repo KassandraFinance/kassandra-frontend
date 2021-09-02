@@ -6,10 +6,10 @@ import * as ButtonStyles from '../../../components/Button/styles'
 export const Container = styled.div`
 
   overflow:hidden;
-  max-width: 1440px;
+  max-width: 1530px;
   display: flex;
   margin: auto;
-  /* height: calc(100vh - 110px); */
+  height: calc(100vh - 110px);
 
   position: relative;
   padding: 0 32px;
@@ -52,7 +52,7 @@ export const Image = styled.div`
     position: relative;
     display:flex;
     justify-content: flex-end;
-    right: -5rem;
+    right: -6.5rem;
     margin-top:-2.2rem;
     ${media.lessThan('large')`
       right: -4.25rem;
@@ -63,7 +63,7 @@ export const Image = styled.div`
     `}
 
     img {
-      max-width: 80%;
+      max-width: 100%;
       ${media.lessThan('small')`
       display: none;
       visibility: hidden;
@@ -177,7 +177,7 @@ ${({theme})=> css`
   export const Modal = styled.div<ModalProps>`
   ${({ theme, isOpen }) => css`
     position: fixed;
-    /* height: max-content; */
+  /* height: max-content; */
     top: 50%;
     left: 50%;
     transform: translateX(-50%);
@@ -186,12 +186,9 @@ ${({theme})=> css`
     flex-direction: column;
     /* justify-content: center; */
     align-items: center;
-    border: 1.3px solid #E843C4;
-    filter: blur(0.2px);
     border-radius: 6px;
     z-index: ${theme.layers.modal};
     transition: opacity ${theme.transition.default};
-
     ${isOpen && modalModifiers.open()}
     ${!isOpen && modalModifiers.close()}
     ${media.lessThan('small')`
@@ -240,7 +237,7 @@ export const ModalHeading = styled.div`
     /* position: absolute; */
     top: 0;
     padding: 1.2rem;
-    border-bottom: 0.2rem solid #E843C4;
+    border-bottom: 0.1rem solid #E843C4;
     display: flex;
     `
 export const ModalText = styled.h1`

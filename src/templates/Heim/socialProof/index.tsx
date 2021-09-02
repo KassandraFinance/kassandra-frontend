@@ -16,7 +16,7 @@ export const SocialProof = () => (
 
           <S.ItemContainer>
             <S.ItemImage>
-              <img src="assets/socialInvest.png" alt=""/>
+              <img src="assets/socialInvest.svg" alt=""/>
             </S.ItemImage>
             <S.ItemText>
               <S.ItemTitle>Why to invest by communities?</S.ItemTitle>
@@ -32,7 +32,7 @@ export const SocialProof = () => (
               <S.ItemSubtitle>Heimdall Social Score values <strong>quality over quantity.</strong>  </S.ItemSubtitle>
             </S.ItemText>
               <S.ItemImage>
-                <img src="assets/socialConnection.png" alt=""/>
+                <img src="assets/socialConnection.svg" alt=""/>
               </S.ItemImage>
           </S.ItemContainer>
         </MediaMatch>
@@ -42,7 +42,7 @@ export const SocialProof = () => (
         <MediaMatch lessThan='medium'>
         <S.ItemContainer>
             <S.ItemImage>
-              <img src="assets/socialInvest.png" alt=""/>
+              <img src="assets/socialInvest.svg" alt=""/>
             </S.ItemImage>
             <S.ItemText>
               <S.ItemTitle>Why to invest by communities?</S.ItemTitle>
@@ -53,7 +53,7 @@ export const SocialProof = () => (
           <S.ItemContainer>
             <S.ItemText>
               <S.ItemImage>
-                <img src="assets/socialConnection.png" alt=""/>
+                <img src="assets/socialConnection.svg" alt=""/>
               </S.ItemImage>
               <S.ItemTitle>How to gauge community size?</S.ItemTitle>
               <S.ItemSubtitle>By using <strong>Heimdall Social Score</strong>, a key metric that calculates each user centrality in the social network by using algorithms inspired by <strong>Google PageRank™</strong> search engine, in a form that to a community have a high social score, this community must have key influencers connected to it.</S.ItemSubtitle>
