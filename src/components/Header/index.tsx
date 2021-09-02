@@ -2,6 +2,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useSelector, RootStateOrAny } from 'react-redux'
 
 
 import { Menu2 as MenuIcon } from '@styled-icons/remix-fill/Menu2'
@@ -13,11 +14,18 @@ import MediaMatch from '../MediaMatch'
 import Button from '../Button'
 import * as S from './styles'
 
+import useConnect from '../../hooks/useConnect'
+import substr from '../../utils/substr'
+import web3 from '../../utils/web3'
+
+
 export type MenuProps = {
   username?: string
 }
 
 const Header = () => {
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const { connect, isLogged } = useConnect()
   const [isOpen, setIsOpen] = React.useState(false)
   const {asPath} = useRouter()
 
@@ -45,10 +53,12 @@ const Header = () => {
 
       <MediaMatch greaterThan="large">
         <S.MenuNav>
-
-          <Link href="/" passHref>
+        {asPath === '/' ?
+          <Link href="/heim" passHref>
             <S.MenuLink> HEIM Index </S.MenuLink>
           </Link>
+        : <Link href="/" passHref><S.MenuLink> Home </S.MenuLink></Link>}
+
 
           <Link href="/" passHref>
             <S.MenuLinkDisable>
@@ -74,9 +84,19 @@ const Header = () => {
             </S.MenuLinkDisable>
           </Link>
 
-          <Link href="/" passHref>
-            <Button as="a" backgroundBlack size={'large'} >Connect Wallet</Button>
-          </Link>
+          {web3.currentProvider !== null ?
+          isLogged ?
+            <Button  backgroundBlack size={'large'} >{substr(userWalletAddress)}</Button>
+            :
+            <Button backgroundBlack size={'large'} onClick={connect}>Connect Wallet</Button>
+          :
+          <S.LinkInstallMetaMask
+            href="https://metamask.io/download.html"
+            target="_blank"
+            >
+              Install MetaMask!
+          </S.LinkInstallMetaMask>
+        }
         </S.MenuNav>
       </MediaMatch>
 
@@ -100,9 +120,19 @@ const Header = () => {
           <Link href="/" passHref>
             <S.MenuLinkDisable>About</S.MenuLinkDisable>
           </Link>
-          <Link href="/" passHref>
-            <Button as="a" backgroundBlack size={'large'} >Connect Wallet</Button>
-          </Link>
+          {web3.currentProvider !== null ?
+          isLogged ?
+            <Button  backgroundBlack size={'large'} >{substr(userWalletAddress)}</Button>
+            :
+            <Button backgroundBlack size={'large'} onClick={connect}>Connect Wallet</Button>
+          :
+          <S.LinkInstallMetaMask
+            href="https://metamask.io/download.html"
+            target="_blank"
+            >
+              Install MetaMask!
+          </S.LinkInstallMetaMask>
+        }
         </S.MenuNav>
       </S.MenuFull>
     </S.Wrapper>

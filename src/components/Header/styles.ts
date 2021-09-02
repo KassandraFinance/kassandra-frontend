@@ -178,3 +178,36 @@ export const MenuFull = styled.nav<MenuFullProps>`
 
   `}
 `
+export const LinkInstallMetaMask = styled.a`
+  background-color: transparent;
+  border: 1px solid #26DBDB;
+  border-radius: 8px;
+  color:  #26DBDB !important;
+  font-size: 16px;
+  text-transform: none;
+  text-align: center;
+
+  width: 186px;
+  height: 48px;
+  padding: 12px 0;
+  cursor: pointer;
+  &:hover {
+    background-color:  #26DBDB;
+    color: #211426 !important;
+  }
+`
+export const ButtonConnectWallet = styled.button`
+  background-color: transparent;
+  border: 1px solid #26DBDB;
+  border-radius: 8px;
+  color:  #26DBDB;
+  font-size: 16px;
+  width: 186px;
+  height: 48px;
+
+  cursor: pointer;
+  &:hover {
+    background-color:  #26DBDB;
+    color: #211426;
+  }
+`
