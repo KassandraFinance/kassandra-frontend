@@ -8,7 +8,7 @@ export const Container = styled.div`
     margin: auto;
     position: relative;
     margin-top: 10.8em;
-    margin-bottom: 15em;
+    margin-bottom: 15rem;
     /* max-width: 132rem; */
     justify-content: center;
     overflow:hidden;
@@ -17,6 +17,7 @@ export const Container = styled.div`
         flex-direction: column;
         position: relative;
         align-items: center;
+        margin-bottom: 0rem;
     `}
   `}
 `

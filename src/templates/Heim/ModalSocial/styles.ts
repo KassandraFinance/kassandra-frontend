@@ -28,24 +28,29 @@ export const BorderGradient = styled.div<IBorderGradientProps>`
     "linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%)" };
   border-radius: 6px;
 
-  /* width: 320px;
-  max-height: 100%; */
-  padding: 2px;
+  border-radius: 6px;
 
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%);
+padding: 2px;
 
-  z-index: 21;
-  ${media.lessThan('small')`
-      top: 0;
-      position: fixed;
-      /* display:flex; */
-      flex-direction: column;
-      width:100%;
-      height:100%;
-    `}
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+z-index: 21;
+
+
+@media(max-width: 440px){
+  width: 380px;
+}
+@media(max-width: 380px){
+  width: 360px;
+}
+@media(max-width: 360px){
+  width: 320px;
+}
+@media(max-width: 320px){
+  width: 300px;
+}
 `
 
 export const BackgroundBlack = styled.div`
@@ -100,10 +105,11 @@ ${({theme})=> css`
     span{
     margin-top: 5.6px;
     }
+    img{
+      max-width: 80%;
+    }
 `}
-${media.lessThan('small')`
-  margin:0;
-`}
+
 `
 export const Content = styled.div`
   display:flex;

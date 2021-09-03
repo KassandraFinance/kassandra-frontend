@@ -26,7 +26,7 @@ const Heim = () => {
       <Hero setModalOpen={setModalOpen} setModalSignupOpen={setModalSignupOpen}/>
       <Feature/>
       <SocialProof />
-      <HowItWorks />
+      <HowItWorks setModalSignupOpen={setModalSignupOpen} />
       <ModalSocial
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}

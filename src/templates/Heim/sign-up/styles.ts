@@ -19,21 +19,26 @@ export const Container = styled.div`
   align-content: center;
   transform: translateX(-50%);
   left: 50%;
-  margin-top: 140%;
+  margin-top: -45%;
   ${media.between('medium','large')`
+  /* margin-top: 100%; */
+
   /* margin-top: -45%; */
   width:58rem;
   /* position:relative; */
   padding: 3.2rem;
   `}
-  ${media.lessThan('small')`
+  @media(max-width: 800px){
+    display: none;
+  }
+  /* ${media.lessThan('small')`
     position:relative;
     margin: 0;
     max-width: 80%
     max-height: 50%;
     /* margin-top: -40%; */
     padding: 3.2rem;
-  `}
+  `} */
 `
 
 export const Image = styled.div`

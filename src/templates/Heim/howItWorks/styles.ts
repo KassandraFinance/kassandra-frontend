@@ -56,14 +56,25 @@ export const Link = styled.div `
 
 export const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
-  max-width: 80%;
-  ${media.lessThan("medium")`
-    max-width: 100%;
-    display: flex;
-    justify-content: space-between;
-  `  }
+  flex-direction: column;
+  position:absolute;
+  align-items:center;
+  height: auto;
+  transform: translateX(-50%);
+  left: 50%;
+  margin-top: -55%;
+  /* max-width: 100%; */
+  img{
+    margin-bottom: 2rem;
+    max-width: 35%;
+  }
+  @media(min-width: 700px ){
+    img{
+      max-width: 50%;
+    }
+  }
 `
+
 export const Text = styled.div`
   ${({theme})=> css`
     position:absolute;

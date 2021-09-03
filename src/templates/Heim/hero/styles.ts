@@ -18,23 +18,18 @@ export const Container = styled.div`
   align-items: center;
   ${media.lessThan('large')`
       display: flex;
-      position: relative;
-      justify-content: center;
-      margin-bottom: 2.5rem;
-      padding-left: 50px;
-      height: calc(100vh - 110px);
-
-
-  `}
-
-  ${media.lessThan("large")`
-
-      display: flex;
       flex-direction:column;
       text-align: center;
-
+      position: relative;
+      padding: 0 16px;
+      /* justify-content: center; */
+      margin-bottom: 2.5rem;
+      /* padding-left: 50px; */
+      height: calc(100vh - 200px);
   `}
-
+  @media(max-width: 380px){
+    height:auto;
+  }
 `
 export const SubTitle = styled.h3`
   ${({theme})=>css`
@@ -72,28 +67,8 @@ export const Image = styled.div`
     img {
       max-width: 100%;
       ${media.lessThan('large')`
-      max-width: 60%;
-
-
-      /* display: none;
-      visibility: hidden; */
-
+      max-width: 40%;
     `}
-
-    /* @media (min-width: 1440px) {
-      max-width: 100%;
-    }
-    @media (max-width: 1240px) {
-      max-width: 100%;
-      min-width: 230px;
-    }
-    @media (max-width: 770px) {
-      max-width: 400px;
-    }
-    @media (max-width: 600px) {
-      max-width: 300px;
-      display: none;
-    } */
   }
 `
 export const ImageDesktop = styled.div`

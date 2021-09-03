@@ -11,7 +11,7 @@ export const Backdrop = styled.div`
 
   width: 100vw;
   height: 100vh;
-  z-index: 20;
+  z-index: 9;
 `
 
 interface IBorderGradientProps {
@@ -22,10 +22,9 @@ interface IBorderGradientProps {
 export const BorderGradient = styled.div<IBorderGradientProps>`
   display: ${(props) => props.modalOpen ? "block" : "none" };
 
-  background: ${(props) => props.otherStakingPools ?
-    "linear-gradient(0deg, #26DBDB -0.02%, #E843C4 99.99%)"
-    :
-    "linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%)" };
+  background: #2CE878;
+  border-radius: 6px;
+
   border-radius: 6px;
 
   padding: 2px;
@@ -49,32 +48,25 @@ export const BorderGradient = styled.div<IBorderGradientProps>`
   @media(max-width: 320px){
     width: 300px;
   }
-
 `
 
 export const BackgroundBlack = styled.div`
-  background: #211426;
-  color: #FCFCFC;
+  background: #000;
+  color: white;
   width: 100%;
   height: 100%;
-  padding:3.2rem;
 `
 
-
 export const InterBackground = styled.div`
-  background: #211426;
-  margin-bottom: 4rem;
+  background: black;
+  border: 0.1rem solid #2CE878;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   width: 100%;
   height: 6.8rem;
   padding: 24px;
-
-  @media(max-width: 560px){
-    display: flex;
-    justify-content: center;
-    }
 
 
   button {
@@ -83,61 +75,53 @@ export const InterBackground = styled.div`
     cursor: pointer;
     width:2.4rem;
     margin-top: -0.2rem;
-  }
-  img{
-      max-width: 100%;
-    }
-`
-
-
-export const ModalText = styled.h1`
-${({theme})=> css`
-    font-size: ${theme.font.sizes.xlarge};
-    font-weight: ${theme.font.light};
-    text-align: center;
-    margin-bottom: 4rem;
-    @media(max-width: 560px){
-      /* margin-bottom: 0; */
-      font-size:2.6rem
-    }
-    @media(max-width: 320px){
-    /* width: 300px; */
-    font-size:2.2rem;
-  }
-`}
-`
-export const WrapperButton = styled.h1`
-${({theme})=> css`
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    height: 2.4rem;
-    background: #211426;
-    margin-bottom: -2rem;
-
-    button {
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      width:2.4rem;
-      margin-top: -0.2rem;
-    }
     img{
       width: 1.2rem;
       height: 1.2rem;
     }
-`}
+  }
+`
 
+
+
+export const ModalText = styled.h1`
+${({theme})=> css`
+    font-size: 2rem;
+    font-weight: ${theme.font.normal};
+`}
+`
+export const WrapperIcons = styled.h1`
+${({theme})=> css`
+    margin: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: space-between;
+    font-size: 1.4rem;
+    span{
+    margin-top: 5.6px;
+    }
+    img{
+      max-width: 80%;
+    }
+`}
 `
 export const Content = styled.div`
   display:flex;
   justify-content: space-between;
-  flex-direction: column;
-  @media(max-width: 560px){
-    display: flex;
-    margin: 0;
-    width:100%;
-    height:100%;
-    justify-content: initial;
+  margin: 0 0.8rem;
+  img{
+    cursor: pointer;
+    width: 5.6rem;
+    height: 5.6rem;
+    /* padding: 2rem; */
   }
+  ${media.lessThan('small')`
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      width:100%;
+      height:100%;
+    `}
 `
