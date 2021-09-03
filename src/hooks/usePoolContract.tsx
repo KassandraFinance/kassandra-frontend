@@ -1,14 +1,16 @@
 import React from 'react'
 import { AbiItem } from "web3-utils"
 import BigNumber from 'bn.js'
+import { useSelector, RootStateOrAny } from 'react-redux'
+
 import web3 from '../utils/web3'
 import Pool from "../constants/abi/Pool.json"
 
-import useConnect from './useConnect'
 import useERC20Contract from './useERC20Contract'
 
 const usePoolContract = () => {
-  const { userWalletAddress } = useConnect()
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+
 
   const { getERC20Contract } = useERC20Contract()
 

@@ -1,14 +1,16 @@
 import React from 'react'
 import BigNumber from 'bn.js'
+import { useSelector, RootStateOrAny } from 'react-redux'
+
 import { AbiItem } from "web3-utils"
 
 import web3 from '../utils/web3'
 import ERC20ABI from "../constants/abi/ERC20.json"
-import useConnect from './useConnect'
 
 
 const useERC20Contract = () => {
-  const { userWalletAddress } = useConnect()
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+
 
   const sleep = (ms: number) => {
     return new Promise((resolve) => setTimeout(resolve, ms));

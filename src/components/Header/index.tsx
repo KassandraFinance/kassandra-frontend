@@ -1,58 +1,150 @@
+/* eslint-disable react/react-in-jsx-scope */
 import React from 'react'
 import Link from 'next/link'
 
-import web3 from '../../utils/web3'
+import { useRouter } from 'next/router'
+import { useSelector, RootStateOrAny } from 'react-redux'
 
-import DropdownProducts from '../DropdownProducts'
+
+import { Menu2 as MenuIcon } from '@styled-icons/remix-fill/Menu2'
+import { Close as CloseIcon } from '@styled-icons/material-outlined/Close'
+
+
+import MediaMatch from '../MediaMatch'
+import Button from '../Button'
+import * as S from './styles'
 
 import useConnect from '../../hooks/useConnect'
 import substr from '../../utils/substr'
+import web3 from '../../utils/web3'
 
-import { 
-  HeaderContainer, 
-  Nav, 
-  ButtonConnectWallet,
-  LinkInstallMetaMask
-} from './styles'
+
+export type MenuProps = {
+  username?: string
+}
 
 const Header = () => {
-  const { connect, isLogged, userWalletAddress } = useConnect()
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const { connect, isLogged } = useConnect()
+  const [isOpen, setIsOpen] = React.useState(false)
+  const {asPath} = useRouter()
 
+  console.warn('aspath: ', asPath)
+  const [modalOpen, setModalOpen] = React.useState<boolean>(false)
+  // const [isLogged, setIsLogged] = React.useState<any>(null)
+
+
+  // React.useEffect(() => {
+  //   const res = connect()
+  //   setIsLogged(res)
+  // }, [])
+  // console.log(isLogged)
+  console.log(userWalletAddress)
   return (
-    <HeaderContainer>
-      <Link href="/">
-        <img src="assets/logo-header.svg" alt="" className="logo-header" />
-      </Link>
-      <Link href="/">
-        <img src="assets/logo-64.svg" alt="" className="logo-64" />
-      </Link>
-      <Nav>
-        <DropdownProducts />
-        <Link href="/farm">Stake/Farm</Link>
-        <Link href="/vote">Vote</Link>
-        <Link href="/about">About</Link>
-        {web3.currentProvider !== null ? 
-          isLogged && userWalletAddress !== '' ?
-            <ButtonConnectWallet 
-              type="button"
-              style={{ backgroundColor: '#26DBDB', color: '#211426' }}
-            >
-              {substr(userWalletAddress)}
-            </ButtonConnectWallet>
+    <S.Wrapper>
+      <MediaMatch lessThan="large">
+        <S.IconWrapper onClick={() => setIsOpen(true)}>
+          <MenuIcon aria-label="Open Menu" />
+        </S.IconWrapper>
+      </MediaMatch>
+
+      <S.LogoWrapper>
+        <Link href="/" passHref>
+          {asPath === '/heim'
+            ? <img src={"./assets/HeimLogoMenu.svg"} //ternario trocar img kassandra e heim
+            alt="Logo menu"
+          />
+        : <img src={"./assets/logo-header.svg"} //ternario trocar img kassandra e heim
+          alt="Logo menu"
+          />}
+        </Link>
+      </S.LogoWrapper>
+
+      <MediaMatch greaterThan="large">
+        <S.MenuNav>
+        {asPath === '/' ?
+          <Link href="/heim" passHref>
+            <S.MenuLink> HEIM Index </S.MenuLink>
+          </Link>
+        : <Link href="/" passHref><S.MenuLink> Home </S.MenuLink></Link>}
+
+
+          <Link href="/" passHref>
+            <S.MenuLinkDisable>
+              Buy $Heim
+            </S.MenuLinkDisable>
+          </Link>
+
+          <Link href="/" passHref>
+            <S.MenuLinkDisable>
+              Stake/Farm
+            </S.MenuLinkDisable>
+          </Link>
+
+          <Link href="/" passHref>
+            <S.MenuLinkDisable>
+              Vote
+            </S.MenuLinkDisable>
+          </Link>
+
+          <Link href="/" passHref>
+            <S.MenuLinkDisable>
+              About
+            </S.MenuLinkDisable>
+          </Link>
+
+          {web3.currentProvider !== null ?
+          isLogged ?
+            <Button  backgroundBlack size={'large'} >{substr(userWalletAddress)}</Button>
             :
-            <ButtonConnectWallet type="button" onClick={connect}>
-              Connect Wallet
-            </ButtonConnectWallet>
+            <Button backgroundBlack size={'large'} onClick={connect}>Connect Wallet</Button>
           :
-          <LinkInstallMetaMask 
-            href="https://metamask.io/download.html" 
+          <S.LinkInstallMetaMask
+            href="https://metamask.io/download.html"
             target="_blank"
             >
               Install MetaMask!
-          </LinkInstallMetaMask>
+          </S.LinkInstallMetaMask>
         }
-      </Nav>
-    </HeaderContainer>
+        </S.MenuNav>
+      </MediaMatch>
+
+
+
+      <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen}>
+        <CloseIcon aria-label="Close Menu" onClick={() => setIsOpen(false)} />
+        <S.MenuNav>
+          <Link href="/" passHref>
+            <S.MenuLink>HEIM Index</S.MenuLink>
+          </Link>
+          <Link href="/" passHref>
+            <S.MenuLinkDisable>Buy $Heim</S.MenuLinkDisable>
+          </Link>
+          <Link href="/" passHref>
+            <S.MenuLinkDisable>Stake/Farm</S.MenuLinkDisable>
+          </Link>
+          <Link href="/" passHref>
+            <S.MenuLinkDisable>Vote</S.MenuLinkDisable>
+          </Link>
+          <Link href="/" passHref>
+            <S.MenuLinkDisable>About</S.MenuLinkDisable>
+          </Link>
+          {web3.currentProvider !== null ?
+          isLogged ?
+            <Button  backgroundBlack size={'large'} >{substr(userWalletAddress)}</Button>
+            :
+            <Button backgroundBlack size={'large'} onClick={connect}>Connect Wallet</Button>
+          :
+          <S.LinkInstallMetaMask
+            href="https://metamask.io/download.html"
+            target="_blank"
+            >
+              Install MetaMask!
+          </S.LinkInstallMetaMask>
+        }
+        </S.MenuNav>
+      </S.MenuFull>
+    </S.Wrapper>
   )
 }
 

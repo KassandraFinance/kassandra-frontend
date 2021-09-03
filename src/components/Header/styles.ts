@@ -1,69 +1,183 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import media from 'styled-media-query'
 
-export const HeaderContainer = styled.header`
-  color: #fff;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  margin: 0 auto;
-  padding: 32px;
-
-  @media (min-width: 1600px) {
-    max-width: 1520px;
-  }
-
-  @media (max-width: 600px) {
-    justify-content: flex-start;
-    padding: 32px 16px;
-  }
-
-  .logo-header {
-    @media (max-width: 600px) {
-      display: none;
-    }
-  }
-  .logo-64 {
-    width: 50px;
-    @media (min-width: 601px) {
-      display: none;
-    }
-  }
+export const Wrapper = styled.menu`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: ${theme.spacings.small};
+    padding-left: 60px;
+    position: relative;
+    z-index: ${theme.layers.menu};
+    max-width: 1530px;
+    margin:auto;
+    ${media.lessThan('medium')`
+    padding-left: 3rem;
+    margin-bottom: 3rem;
+    `}
+  `}
 `
 
-export const Nav = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  @media (max-width: 770px) {
-    display: none;
-  }
-  a {
-    color: #fff;
-    font-size: 16px;
+export const LogoWrapper = styled.div`
+
+  ${media.lessThan('medium')`
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    img{
+      width: 80%;
+    }
+  `}
+`
+
+export const IconWrapper = styled.div`
+  ${({ theme }) => css`
+    color: ${theme.colors.white};
+    cursor: pointer;
+    width: 2.4rem;
+    height: 2.4rem;
+  `}
+`
+
+export const MenuGroup = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+    align-items: center;
+
+    > div {
+      margin-left: ${theme.spacings.xsmall};
+    }
+  `}
+`
+
+export const MenuNav = styled.div`
+  ${({ theme }) => css`
+    ${media.greaterThan('medium')`
+			margin-left: ${theme.spacings.small};
+		`}
+  `}
+`
+
+export const MenuLink = styled.a`
+  ${({ theme }) => css`
+    position: relative;
+    color: ${theme.colors.white};
+    font-size: ${theme.font.sizes.medium};
+    margin: 0.3rem ${theme.spacings.small} 0;
     text-decoration: none;
+    text-align: center;
 
-    margin: 0 16px;
-  }
+    &:hover {
+      &::after {
+        content: '';
+        position: absolute;
+        display: block;
+        height: 0.3rem;
+        background-color: #26DBDB;
+        animation: hoverAnimation 0.2s forwards;
+      }
+
+      @keyframes hoverAnimation {
+        from {
+          width: 0;
+          left: 50%;
+        }
+        to {
+          width: 100%;
+          left: 0;
+        }
+      }
+    }
+  `}
+`
+export const MenuLinkDisable = styled.a`
+  ${({ theme }) => css`
+    position: relative;
+    color: ${theme.colors.lightGray};
+    font-size: ${theme.font.sizes.medium};
+    margin: 0.3rem ${theme.spacings.small} 0;
+    text-decoration: none;
+    text-align: center;
+    cursor: not-allowed;
+    &:hover {
+      &::after {
+        content: '';
+        text-align: left;
+        position: absolute;
+        display: block;
+        height: 0.3rem;
+        background-color: ${theme.colors.lightGray};
+        animation: hoverAnimation 0.3s forwards;
+      }
+      @keyframes hoverAnimation {
+        from {
+          width: 0;
+          left: 50%;
+        }
+        to {
+          width: 100%;
+          left: 0;
+        }
+      }
+    }
+  `}
 `
 
-export const ButtonConnectWallet = styled.button`
-  background-color: transparent;
-  border: 1px solid #26DBDB;
-  border-radius: 8px;
-  color:  #26DBDB;
-  font-size: 16px;
-  width: 186px;
-  height: 48px;
+type MenuFullProps = {
+  isOpen: boolean
+}
 
-  cursor: pointer;
-  &:hover {
-    background-color:  #26DBDB;
-    color: #211426;
-  }
+export const MenuFull = styled.nav<MenuFullProps>`
+  ${({ theme, isOpen }) => css`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: black;
+    position: fixed;
+    z-index: ${theme.layers.menu};
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    overflow: hidden;
+    transition: opacity 0.3s ease-in-out;
+    opacity: ${isOpen ? 1 : 0};
+    pointer-events: ${isOpen ? 'all' : 'none'};
+
+    > svg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: ${theme.spacings.xsmall};
+      cursor: pointer;
+      width: 2.4rem;
+      height: 2.4rem;
+    }
+
+    ${MenuNav} {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      flex-direction: column;
+
+    }
+
+    ${MenuLink} {
+      color: ${theme.colors.white};
+      font-weight: ${theme.font.bold};
+      font-size: ${theme.font.sizes.xlarge};
+      margin-bottom: ${theme.spacings.small};
+      transform: ${isOpen ? 'translateY(0)' : 'translateY(3rem)'};
+      transition: transform 0.3s ease-in-out;
+    }
+
+  `}
 `
-
 export const LinkInstallMetaMask = styled.a`
   background-color: transparent;
   border: 1px solid #26DBDB;
@@ -82,36 +196,18 @@ export const LinkInstallMetaMask = styled.a`
     color: #211426 !important;
   }
 `
-
-export const ButtonDisabled = styled.button`
-  border: none;
+export const ButtonConnectWallet = styled.button`
   background-color: transparent;
-  color: #666;
+  border: 1px solid #26DBDB;
+  border-radius: 8px;
+  color:  #26DBDB;
   font-size: 16px;
-  text-decoration: none;
+  width: 186px;
+  height: 48px;
 
-  margin: 0 16px;
   cursor: pointer;
-  position: relative;
-  outline: none;
   &:hover {
-    &::after {
-      content: 'Coming soon...';
-      position: absolute;
-      background-color: #eee;
-      color: #6C3167;
-      margin-top: -36px;
-      margin-left: -140px;
-
-      width: 140px;
-      padding: 4px;
-      border-radius: 4px;
-      box-shadow:
-        inset 0px 48.9702px 70.3162px -.1px rgba(255, 255, 255, 0.7),
-        inset 0px 8.78952px 13.8121px -.1px rgba(255, 255, 255, 0.5),
-        inset 0px -102.963px 85.3839px -.1px rgba(96, 68, 145, 0.3),
-        inset 0px 123.053px 125.565px -.5px rgba(202, 172, 255, 0.3), inset 0px 5.02258px 22.6016px rgba(154, 146, 210, 0.3),
-        inset 0px 1.25565px 50.2258px rgba(227, 222, 255, 0.2);
-    }
+    background-color:  #26DBDB;
+    color: #211426;
   }
 `

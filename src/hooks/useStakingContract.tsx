@@ -1,5 +1,7 @@
 import React from 'react'
 import BigNumber from 'bn.js'
+import { useSelector, RootStateOrAny } from 'react-redux'
+
 import { AbiItem } from "web3-utils"
 
 import web3 from '../utils/web3'
@@ -9,7 +11,8 @@ import StakingContract from "../constants/abi/Staking.json"
 import useConnect from './useConnect'
 
 const useStakingContract = () => {
-  const { userWalletAddress } = useConnect()
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+
 
   const getStakingContract = (address: string) => {
     const contract = new web3.eth.Contract((StakingContract as unknown) as AbiItem, address)

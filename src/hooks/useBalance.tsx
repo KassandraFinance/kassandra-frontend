@@ -1,11 +1,12 @@
 import React from 'react'
+import { useSelector, RootStateOrAny } from 'react-redux'
 
-import useConnect from './useConnect'
 import useERC20Contract from "./useERC20Contract"
 
 
 const useBalance = () => {
-  const { userWalletAddress } = useConnect()
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+
   const { getBalance } = useERC20Contract()
 
 

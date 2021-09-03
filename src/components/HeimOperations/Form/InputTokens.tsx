@@ -49,9 +49,8 @@ const InputTokens = ({
   setInvestRate
 }: IInputEthProps) => {
   const [balanceToken, setBalanceToken] = React.useState<BigNumber>(new BigNumber(0))
-  const { poolTokens } = useSelector((state: RootStateOrAny) => state)
+  const { poolTokens, userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   
-  const { userWalletAddress } = useConnect()
   const { getBalanceToken } = useBalance()
   const { 
     calcPoolOutGivenSingleIn, 

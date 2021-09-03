@@ -1,7 +1,7 @@
 import React from 'react'
 import BigNumber from 'bn.js'
+import { useSelector, RootStateOrAny } from 'react-redux'
 
-import useConnect from '../../hooks/useConnect'
 import useStakingContract from '../../hooks/useStakingContract'
 
 import { 
@@ -33,7 +33,8 @@ const ModalUnstaking = ({
   const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
   const [amountUnstaking, setAmountUnstaking] = React.useState<BigNumber>(new BigNumber(0))
 
-  const { userWalletAddress } = useConnect()
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+
   const { withdraw, balanceOf } = useStakingContract()
 
 
@@ -54,7 +55,9 @@ const ModalUnstaking = ({
   }
 
   React.useEffect(() => {
-    get()
+    if (modalOpen) {
+      get()
+    }
   }, [modalOpen])
 
   return (

@@ -1,9 +1,10 @@
 import React from 'react'
 import BigNumber from 'bn.js'
+import { useSelector, RootStateOrAny } from 'react-redux'
 
 import { getDate } from '../../utils/date'
+import { connect } from '../../utils/connect'
 
-import useConnect from '../../hooks/useConnect'
 import useERC20Contract from '../../hooks/useERC20Contract'
 import useStakingContract from '../../hooks/useStakingContract'
 import useCountDownDate from '../../hooks/useCountDownDate'
@@ -57,7 +58,7 @@ interface IStakingProps {
   pid: number
 }
 
-const VotingPower = ({ days, percentage, pid }: IStakingProps) => {
+const VotingPower = ({ percentage, pid }: IStakingProps) => {
   const [modalOpen, setModalOpen] = React.useState<boolean>(false)
   const [isModalUnstaking, setIsModalUnstaking] = React.useState<boolean>(false)
   const [isModalCancelUnstake, setIsModalCancelUnstake] = React.useState<boolean>(false)
@@ -79,7 +80,8 @@ const VotingPower = ({ days, percentage, pid }: IStakingProps) => {
   const [isApproveKacyStaking, setIsApproveKacyStaking] = React.useState<boolean>(false)
   const [unstake, setUnstake] = React.useState<boolean>(false)
   
-  const { connect, isLogged, userWalletAddress } = useConnect()
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  
   const { getAllowance, approve } = useERC20Contract()
   const { 
     balanceOf, 
@@ -90,7 +92,7 @@ const VotingPower = ({ days, percentage, pid }: IStakingProps) => {
     unstaking,
     stakedUntil,
   } = useStakingContract()
-  const { date, countDown } = useCountDownDate()
+  // const { date, countDown } = useCountDownDate()
 
 
   async function handleApproveKacy() {
@@ -101,26 +103,27 @@ const VotingPower = ({ days, percentage, pid }: IStakingProps) => {
     setIsApproveKacyStaking(res)
   }
 
-  async function getInfoStake() {
+  async function getInfoStake() {    
     const poolInfoResponse = await poolInfo(pid)
 
-    const startDate = getDate(poolInfoResponse.periodFinish - poolInfoResponse.rewardsDuration)
-    const endDate = getDate(poolInfoResponse.periodFinish)
+    if (poolInfoResponse.withdrawDelay) {
+      const startDate = getDate(poolInfoResponse.periodFinish - poolInfoResponse.rewardsDuration)
+      const endDate = getDate(poolInfoResponse.periodFinish)
+  
+      const kacyRewards = new BigNumber(poolInfoResponse.rewardRate).mul(new BigNumber(86400))
+      const withdrawDelay = Number(poolInfoResponse.withdrawDelay / 86400)
+      
+      setInfoStakeStatic({
+        depositedAmount: poolInfoResponse.depositedAmount,
+        votingMultiplier: poolInfoResponse.votingMultiplier,
+        startDate,
+        endDate,
+        kacyRewards,
+        withdrawDelay: withdrawDelay > 0 ? withdrawDelay : 0
+      })
+    }
 
-    const kacyRewards = new BigNumber(poolInfoResponse.rewardRate).mul(new BigNumber(86400))
-    const withdrawDelay = Number(poolInfoResponse.withdrawDelay / 86400)
-    
-    setInfoStakeStatic({
-      depositedAmount: poolInfoResponse.depositedAmount,
-      votingMultiplier: poolInfoResponse.votingMultiplier,
-      startDate,
-      endDate,
-      kacyRewards,
-      withdrawDelay: withdrawDelay > 0 ? withdrawDelay : 0
-    })
-    
-    if (isLogged && userWalletAddress !== '') {
-
+    if (userWalletAddress) {
       const unstake = await unstaking(pid, userWalletAddress)
       setUnstake(unstake)
 
@@ -133,14 +136,14 @@ const VotingPower = ({ days, percentage, pid }: IStakingProps) => {
       const unix_timestamp = await stakedUntil(pid, userWalletAddress)
       const date = new Date(unix_timestamp * 1000)
       const hours = date.getHours()
-      const minutes = "0" + date.getMinutes()
-      const seconds = "0" + date.getSeconds()
-      const formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+      const minutes = `0${  date.getMinutes()}`
+      const seconds = `0${  date.getSeconds()}`
+      const formattedTime = `${hours  }:${  minutes.substr(-2)  }:${  seconds.substr(-2)}`;
 
 
-      let countDownDate = new Date(unix_timestamp * 1000).getTime();
+      const countDownDate = new Date(unix_timestamp * 1000).getTime();
 
-      countDown(countDownDate)
+      // countDown(countDownDate)
       
       setInfoStake({
         yourStake: balance,
@@ -156,8 +159,8 @@ const VotingPower = ({ days, percentage, pid }: IStakingProps) => {
     .then((response: boolean) => setIsApproveKacyStaking(response))
   
     getInfoStake()
-  }, [isLogged, userWalletAddress])
-
+  }, [userWalletAddress])
+  
   return (
     <>
       <div>
@@ -182,7 +185,7 @@ const VotingPower = ({ days, percentage, pid }: IStakingProps) => {
               <p className="total-staking">Total staked</p>
               <p className="total-staking">${BNtoDecimal(new BigNumber(infoStakeStatic.depositedAmount).mul(new BigNumber(3.5)), new BigNumber(18), 2)}</p>
             </Info>
-            {isLogged && userWalletAddress !== '' &&
+            {userWalletAddress &&
               <>
                 <Info>
                   <span>Your stake</span>
@@ -211,14 +214,14 @@ const VotingPower = ({ days, percentage, pid }: IStakingProps) => {
             <Info>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <p style={{ margin: '16px 4px 24px 0' }}>
-                  Unstake delay
+                  Withdraw delay
                 </p>
                 <Tooltip tooltipTop={false}>Time your asset will be locked before you can withdraw it.</Tooltip>
               </div>
               <p style={{ margin: '16px 0 24px'}}>{infoStakeStatic.withdrawDelay} Days</p>
             </Info>
             <ButtonContainer>
-              {isLogged || userWalletAddress !== '' ?
+              {userWalletAddress ?
               <>
                 {isApproveKacyStaking ?
                   <StakeContainer>
@@ -229,11 +232,11 @@ const VotingPower = ({ days, percentage, pid }: IStakingProps) => {
                     }        
                     {infoStake.yourStake.toString() !== "0" &&
                     <>
-                      {infoStake.withdrawable || date === '' ? 
+                      {infoStake.withdrawable || {/*date === ''*/} ? 
                         <ButtonWallet type="button" onClick={() => setIsModalUnstaking(true)}>Withdraw</ButtonWallet>
                         :
                         unstake ? 
-                          <ButtonWithdraw type="button">Withdraw in {date}</ButtonWithdraw>
+                          <ButtonWithdraw type="button">Withdraw in date</ButtonWithdraw>
                           :
                           <ButtonRequestStake 
                             type="button" 
@@ -253,7 +256,7 @@ const VotingPower = ({ days, percentage, pid }: IStakingProps) => {
                 }
               </>
               :
-              <ButtonWallet type="button" onClick={connect}>Connect Wallet</ButtonWallet>
+              <ButtonWallet type="button" onClick={() => connect()}>Connect Wallet</ButtonWallet>
               }
               <ButtonDetails type="button" onClick={() => alert('Details')}>Details <img src="assets/arrow-down-cyan.svg" alt=""/></ButtonDetails>
             </ButtonContainer>

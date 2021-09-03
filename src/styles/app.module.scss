@@ -1,16 +1,17 @@
 .background-page {
-  background: linear-gradient(90deg, #200A1B 0%, #000000 50%);
+  // background: linear-gradient(90deg, #200A1B 0%, #000000 50%);
+  background: black;
 }
 
 .container {
   color: #FCFCFC;
 
   margin: 0 auto;
-  padding: 0 32px;
+  // padding: 0 32px;
   @media (min-width: 1600px) {
-    max-width: 1520px;
+    max-width: 1520px
   }
   @media (max-width: 504px) {
-    padding: 0 16px;
+    // padding: 0 16px;
   }
 }

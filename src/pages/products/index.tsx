@@ -14,9 +14,9 @@ import styled from 'styled-components'
 
 const Products = () => {
   const dispatch = useDispatch()
-  const { 
-    getPoolContract, 
-    nameToken, 
+  const {
+    getPoolContract,
+    nameToken,
     symbolToken,
     balanceToken,
     decimalsToken,
@@ -39,7 +39,7 @@ const Products = () => {
           isMax: false
         }
       )))
-      
+
       dispatch(actionGetPoolTokens(poolTokens))
     })()
   }, [])

@@ -1,8 +1,9 @@
 import React from 'react'
 import BigNumber from 'bn.js'
+import { useSelector, RootStateOrAny } from 'react-redux'
+
 import styled from 'styled-components'
 
-import useConnect from '../../hooks/useConnect'
 import useStakingContract from '../../hooks/useStakingContract'
 
 import VotingPower from '../../components/VotingPower'
@@ -12,19 +13,16 @@ import { BNtoDecimal } from '../../utils/numerals'
 const Farm = () => {
   const [totalVotes, setTotalVotes] = React.useState<BigNumber>(new BigNumber(0))
   const [yourVotingPower, setYourVotingPower] = React.useState<BigNumber>(new BigNumber(0))
-  const { userWalletAddress } = useConnect()
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+
   const { getTotalVotes, getCurrentVotes } = useStakingContract()
-
-
-
 
   React.useEffect(() => {
     (async () => {
       const totalVotes = await getTotalVotes()
       setTotalVotes(totalVotes)
-      if (userWalletAddress !== '') {
+      if (userWalletAddress) {
         const currentVotes = await getCurrentVotes(userWalletAddress)
-        console.log(currentVotes)
         setYourVotingPower(currentVotes)
       }
     })()
