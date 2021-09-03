@@ -8,9 +8,7 @@ import MediaMatch from '../../../components/MediaMatch'
 import ModalSocial from '../ModalSocial'
 import ModalSignUp from '../sign-up/ModalSignUp'
 
-export function Hero() {
-  const [modalOpen, setModalOpen] = React.useState<boolean>(false)
-  const [modalSignupOpen, setModalSignupOpen] = React.useState<boolean>(false)
+export function Hero({ setModalOpen, setModalSignupOpen, }) {
   return (
       <>
       <S.Container>
@@ -56,14 +54,7 @@ export function Hero() {
         <S.FloatImage>
           <img src="assets/Certik.svg" alt="" />
         </S.FloatImage>
-        <ModalSocial
-        modalOpen={modalOpen}
-        setModalOpen={setModalOpen}
-      />
-        <ModalSignUp
-        modalSignupOpen={modalSignupOpen}
-        setModalSignupOpen={setModalSignupOpen}
-      />
+
         {/* <S.Modal isOpen={isOpen} aria-label="modal">
 
           <S.ModalHeading>
@@ -112,7 +103,6 @@ export function Hero() {
           </S.Content>
         </S.Modal> */}
             </S.Container>
-
     </>
 
   )

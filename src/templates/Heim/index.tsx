@@ -4,6 +4,8 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 import Hero from './hero'
 import Feature from './feature'
 import SocialProof from './socialProof'
+import ModalSocial from './ModalSocial'
+import ModalSignUp from './sign-up/ModalSignUp'
 
 import * as S from './styles'
 import HowItWorks from './howItWorks'
@@ -16,12 +18,23 @@ const Heim = () => {
     trackPageView({})
   }, [trackPageView])
 
+  const [modalOpen, setModalOpen] = React.useState<boolean>(false)
+  const [modalSignupOpen, setModalSignupOpen] = React.useState<boolean>(false)
+
   return (
     <S.Container>
-      <Hero />
+      <Hero setModalOpen={setModalOpen} setModalSignupOpen={setModalSignupOpen}/>
       <Feature/>
       <SocialProof />
       <HowItWorks />
+      <ModalSocial
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+      />
+        <ModalSignUp
+        modalSignupOpen={modalSignupOpen}
+        setModalSignupOpen={setModalSignupOpen}
+      />
     </S.Container>
   )
 }

@@ -11,7 +11,7 @@ export const Backdrop = styled.div`
 
   width: 100vw;
   height: 100vh;
-  z-index: 9;
+  z-index: 20;
 `
 
 interface IBorderGradientProps {
@@ -28,47 +28,36 @@ export const BorderGradient = styled.div<IBorderGradientProps>`
     "linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%)" };
   border-radius: 6px;
 
-  /* width: 320px;
-  max-height: 100%; */
   padding: 2px;
 
   position: fixed;
-  top: 30%;
+  top: 50%;
   left: 50%;
-  margin-top: 5rem;
-  transform: translateX(-50%);
-  @media(max-width: 1500px){
-    top: 20%;
-  }
-  @media(max-width: 1300px){
-    top: 10%;
-  }
-  @media(max-width: 1030px){
-    /* top:0;
-    margin-top: 0rem; */
-  }
-  z-index: 10;
-  ${media.lessThan('small')`
-      /* top: 0;
-      position: fixed;
-      /* display:flex; */
-      /* flex-direction: column; */
-      width:100%;
-      height:100%; */
+  transform: translate(-50%, -50%);
+  z-index: 21;
 
-    `}
+
+  @media(max-width: 440px){
+    width: 380px;
+  }
+  @media(max-width: 380px){
+    width: 360px;
+  }
+  @media(max-width: 360px){
+    width: 320px;
+  }
+  @media(max-width: 320px){
+    width: 300px;
+  }
+
 `
 
 export const BackgroundBlack = styled.div`
   background: #211426;
   color: #FCFCFC;
-  width: 47rem;
-  /* height: calc(100vh - 80px); */
-  padding: 4rem;
-  @media(max-width: 1030px){
   width: 100%;
   height: 100%;
-  }
+  padding:3.2rem;
 `
 
 
@@ -82,6 +71,11 @@ export const InterBackground = styled.div`
   height: 6.8rem;
   padding: 24px;
 
+  @media(max-width: 560px){
+    display: flex;
+    justify-content: center;
+    }
+
 
   button {
     background-color: transparent;
@@ -89,12 +83,10 @@ export const InterBackground = styled.div`
     cursor: pointer;
     width:2.4rem;
     margin-top: -0.2rem;
-
-    img{
-      width: 1.2rem;
-      height: 1.2rem;
-    }
   }
+  img{
+      max-width: 100%;
+    }
 `
 
 
@@ -105,8 +97,12 @@ ${({theme})=> css`
     text-align: center;
     margin-bottom: 4rem;
     @media(max-width: 560px){
-      margin-bottom: 0;
+      /* margin-bottom: 0; */
+      font-size:2.6rem
     }
+    @media(max-width: 320px){
+    width: 300px;
+  }
 `}
 `
 export const WrapperButton = styled.h1`
@@ -138,11 +134,11 @@ export const Content = styled.div`
   display:flex;
   justify-content: space-between;
   flex-direction: column;
-  ${media.lessThan('medium')`
-      display: flex;
-      margin: 0;
-      width:100%;
-      height:100%;
-      justify-content:
-    `}
+  @media(max-width: 560px){
+    display: flex;
+    margin: 0;
+    width:100%;
+    height:100%;
+    justify-content: initial;
+  }
 `

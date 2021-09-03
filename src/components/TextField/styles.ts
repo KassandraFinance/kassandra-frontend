@@ -25,6 +25,10 @@ export const InputWrapper = styled.div`
       background: black;
     }
   `}
+
+  @media(max-width: 440px){
+    max-width:100%
+  }
 `
 
 export const Input = styled.input<IconPositionProps>`
