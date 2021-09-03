@@ -24,7 +24,7 @@ const useConnect = () => {
       handleRequestAccounts()
   
       window.ethereum.on('chainChanged', handleChainChanged)
-    } catch (error) {
+    } catch (error: any) {
       console.log(error.message)
     }
   }, [])
@@ -65,7 +65,7 @@ const useConnect = () => {
         setIsLogged(true)
         ToastSuccess("Connected to MetaMask.")
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error.message)
     }
   }, [])
@@ -95,7 +95,7 @@ const useConnect = () => {
             console.error(err);
           }
         })
-    } catch (error) {
+    } catch (error: any) {
       ToastError(error.message)
     }
   }
