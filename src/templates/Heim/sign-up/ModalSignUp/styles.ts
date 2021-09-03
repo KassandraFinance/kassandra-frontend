@@ -33,18 +33,29 @@ export const BorderGradient = styled.div<IBorderGradientProps>`
   padding: 2px;
 
   position: fixed;
-  top: 5%;
+  top: 30%;
   left: 50%;
+  margin-top: 5rem;
   transform: translateX(-50%);
-
+  @media(max-width: 1500px){
+    top: 20%;
+  }
+  @media(max-width: 1300px){
+    top: 10%;
+  }
+  @media(max-width: 1030px){
+    /* top:0;
+    margin-top: 0rem; */
+  }
   z-index: 10;
   ${media.lessThan('small')`
-      top: 0;
+      /* top: 0;
       position: fixed;
       /* display:flex; */
-      flex-direction: column;
+      /* flex-direction: column; */
       width:100%;
-      height:100%;
+      height:100%; */
+
     `}
 `
 
@@ -52,9 +63,12 @@ export const BackgroundBlack = styled.div`
   background: #211426;
   color: #FCFCFC;
   width: 47rem;
-  height: auto;
+  /* height: calc(100vh - 80px); */
   padding: 4rem;
-
+  @media(max-width: 1030px){
+  width: 100%;
+  height: 100%;
+  }
 `
 
 
@@ -90,6 +104,9 @@ ${({theme})=> css`
     font-weight: ${theme.font.light};
     text-align: center;
     margin-bottom: 4rem;
+    @media(max-width: 560px){
+      margin-bottom: 0;
+    }
 `}
 `
 export const WrapperButton = styled.h1`
@@ -121,10 +138,11 @@ export const Content = styled.div`
   display:flex;
   justify-content: space-between;
   flex-direction: column;
-  ${media.lessThan('small')`
+  ${media.lessThan('medium')`
       display: flex;
       margin: 0;
       width:100%;
       height:100%;
+      justify-content:
     `}
 `
