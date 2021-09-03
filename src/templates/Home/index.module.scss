@@ -1,5 +1,4 @@
 .hero {
-
   height: calc(100vh - 110px);
   padding: 0 32px;
   display: grid;
@@ -111,7 +110,7 @@
 }
 
 .products {
-  padding: 40px 0;
+  padding: 40px 32px;
   h1 {
     font-size: 44px;
     font-weight: 500;
@@ -219,7 +218,7 @@
 }
 
 .class-products {
-  padding: 40px 0 80px;
+  padding: 40px 32px 80px;
   text-align: center;
 
   h1 {
@@ -346,7 +345,7 @@
 }
 
 .token {
-  padding: 40px 0;
+  padding: 40px 32px;
   text-align: center;
 
   h1 {
@@ -476,7 +475,7 @@
 }
 
 .kassandra-success {
-  padding: 80px 0 200px;
+  padding: 80px 32px 200px;
   @media (min-width: 1880px) {
     padding: 80px 0 240px;
   }
@@ -582,7 +581,7 @@
 
 .kassandra-architecture {
   text-align: center;
-  padding: 40px 0;
+  padding: 40px 32px;
   h1 {
     font-size: 44px;
     font-weight: 500;
@@ -633,7 +632,7 @@
 }
 
 .supporters {
-  padding: 40px 0 0;
+  padding: 40px 32px 0;
   h1 {
     font-size: 44px;
     font-weight: 500;
