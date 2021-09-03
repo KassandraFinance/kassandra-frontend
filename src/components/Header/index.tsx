@@ -27,19 +27,9 @@ const Header = () => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { connect, isLogged } = useConnect()
   const [isOpen, setIsOpen] = React.useState(false)
-  const {asPath} = useRouter()
-
-  console.warn('aspath: ', asPath)
-  const [modalOpen, setModalOpen] = React.useState<boolean>(false)
-  // const [isLogged, setIsLogged] = React.useState<any>(null)
+  const { asPath } = useRouter()
 
 
-  // React.useEffect(() => {
-  //   const res = connect()
-  //   setIsLogged(res)
-  // }, [])
-  // console.log(isLogged)
-  console.log(userWalletAddress)
   return (
     <S.Wrapper>
       <MediaMatch lessThan="large">
@@ -94,7 +84,7 @@ const Header = () => {
           </Link>
 
           {web3.currentProvider !== null ?
-          isLogged ?
+          isLogged || userWalletAddress ?
             <Button  backgroundBlack size={'large'} >{substr(userWalletAddress)}</Button>
             :
             <Button backgroundBlack size={'large'} onClick={connect}>Connect Wallet</Button>
@@ -130,7 +120,7 @@ const Header = () => {
             <S.MenuLinkDisable>About</S.MenuLinkDisable>
           </Link>
           {web3.currentProvider !== null ?
-          isLogged ?
+          isLogged || userWalletAddress ?
             <Button  backgroundBlack size={'large'} >{substr(userWalletAddress)}</Button>
             :
             <Button backgroundBlack size={'large'} onClick={connect}>Connect Wallet</Button>
