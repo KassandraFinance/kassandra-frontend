@@ -89,6 +89,7 @@ const wrapperModifiers = {
   backgroundBlack: (theme: DefaultTheme) => css`
     background: rgba(0,0,0,0.0);
     border: 0.1rem solid #26DBDB;
+    transition-duration: 300ms;
     &::before {
       border-left-color: #26DBDB;
       border-top-color: #26DBDB;

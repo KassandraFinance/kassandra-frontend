@@ -6,29 +6,35 @@ export const Wrapper = styled.menu`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: ${theme.spacings.small};
-    padding-left: 60px;
-    position: relative;
-    z-index: ${theme.layers.menu};
+
+    margin: auto;
     max-width: 1530px;
-    margin:auto;
+    padding: ${theme.spacings.small};
+    padding: 24px 32px;
+    position: relative;
+    height: 110px;
+    
     ${media.lessThan('medium')`
-    padding-left: 3rem;
     margin-bottom: 3rem;
+    padding-left: 3rem;
     `}
+
+    z-index: ${theme.layers.menu};
   `}
 `
 
 export const LogoWrapper = styled.div`
 
   ${media.lessThan('medium')`
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    img{
-      width: 80%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+    img {
+      height: 60px;
     }
   `}
+  
+  cursor: pointer;
 `
 
 export const IconWrapper = styled.div`
