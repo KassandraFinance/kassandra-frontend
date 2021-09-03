@@ -83,19 +83,9 @@ const Header = () => {
             </S.MenuLinkDisable>
           </Link>
 
-          {web3.currentProvider !== null ?
-          isLogged || userWalletAddress ?
-            <Button  backgroundBlack size={'large'} >{substr(userWalletAddress)}</Button>
-            :
-            <Button backgroundBlack size={'large'} onClick={connect}>Connect Wallet</Button>
-          :
-          <S.LinkInstallMetaMask
-            href="https://metamask.io/download.html"
-            target="_blank"
-            >
-              Install MetaMask!
-          </S.LinkInstallMetaMask>
-        }
+          <Button backgroundBlack size="large" disabled>
+            Connect Wallet
+          </Button>
         </S.MenuNav>
       </MediaMatch>
 
@@ -122,19 +112,9 @@ const Header = () => {
           <Link href="/" passHref>
             <S.MenuLinkDisable>About</S.MenuLinkDisable>
           </Link>
-          {web3.currentProvider !== null ?
-          isLogged || userWalletAddress ?
-            <Button  backgroundBlack size={'large'} >{substr(userWalletAddress)}</Button>
-            :
-            <Button backgroundBlack size={'large'} onClick={connect}>Connect Wallet</Button>
-          :
-          <S.LinkInstallMetaMask
-            href="https://metamask.io/download.html"
-            target="_blank"
-            >
-              Install MetaMask!
-          </S.LinkInstallMetaMask>
-        }
+          <Button backgroundBlack size="large" disabled>
+            Connect Wallet
+          </Button>
         </S.MenuNav>
       </S.MenuFull>
     </S.Wrapper>
