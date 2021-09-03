@@ -4,6 +4,7 @@ import { useSelector, RootStateOrAny } from 'react-redux'
 
 import styled from 'styled-components'
 
+import useConnect from '../../hooks/useConnect'
 import useStakingContract from '../../hooks/useStakingContract'
 
 import VotingPower from '../../components/VotingPower'
@@ -15,6 +16,7 @@ const Farm = () => {
   const [yourVotingPower, setYourVotingPower] = React.useState<BigNumber>(new BigNumber(0))
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
+  const { connect } = useConnect()
   const { getTotalVotes, getCurrentVotes } = useStakingContract()
 
   React.useEffect(() => {
@@ -33,9 +35,9 @@ const Farm = () => {
     <h1>Staking</h1>
     <h3>Stake $KACY for Voting Power</h3>
     <GridStaking>
-      <VotingPower days='0' percentage="12" pid={0} />
-      <VotingPower days='30' percentage="20" pid={1} />
-      <VotingPower days='45' percentage="32" pid={2} />
+      <VotingPower days='0' percentage="12" pid={0} connect={connect} />
+      <VotingPower days='30' percentage="20" pid={1} connect={connect} />
+      <VotingPower days='45' percentage="32" pid={2} connect={connect} />
     </GridStaking>
     <TotalVoting>
       <fieldset>

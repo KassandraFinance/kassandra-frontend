@@ -42,7 +42,7 @@ export const SingUp = () => {
         <iframe title="a" name="hiddenFrame" width="0" height="0" style={{display: 'none'}} />
         <form action="https://beta.heimdall.land/subscribe/heim" method="POST" target="hiddenFrame">
           <TextField
-            name="name"
+            name="user"
             placeholder="Ex: John Doe"
             type="name"
             label='Your username'

@@ -3,7 +3,6 @@ import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
 import { getDate } from '../../utils/date'
-import { connect } from '../../utils/connect'
 
 import useERC20Contract from '../../hooks/useERC20Contract'
 import useStakingContract from '../../hooks/useStakingContract'
@@ -56,9 +55,10 @@ interface IStakingProps {
   days: string
   percentage: string
   pid: number
+  connect: () => void
 }
 
-const VotingPower = ({ percentage, pid }: IStakingProps) => {
+const VotingPower = ({ percentage, pid, connect }: IStakingProps) => {
   const [modalOpen, setModalOpen] = React.useState<boolean>(false)
   const [isModalUnstaking, setIsModalUnstaking] = React.useState<boolean>(false)
   const [isModalCancelUnstake, setIsModalCancelUnstake] = React.useState<boolean>(false)
@@ -256,7 +256,7 @@ const VotingPower = ({ percentage, pid }: IStakingProps) => {
                 }
               </>
               :
-              <ButtonWallet type="button" onClick={() => connect()}>Connect Wallet</ButtonWallet>
+              <ButtonWallet type="button" onClick={connect}>Connect Wallet</ButtonWallet>
               }
               <ButtonDetails type="button" onClick={() => alert('Details')}>Details <img src="assets/arrow-down-cyan.svg" alt=""/></ButtonDetails>
             </ButtonContainer>
