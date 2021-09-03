@@ -83,9 +83,26 @@ const Header = () => {
             </S.MenuLinkDisable>
           </Link>
 
-          <Button backgroundBlack size="large" disabled>
-            Connect Wallet
-          </Button>
+          {web3.currentProvider !== null ?
+          isLogged ?
+            <S.ButtonConnectWallet
+              type="button"
+              style={{ backgroundColor: '#26DBDB', color: '#211426' }}
+            >
+              {substr(userWalletAddress)}
+            </S.ButtonConnectWallet>
+            :
+            <S.ButtonConnectWallet type="button" onClick={connect}>
+              Connect Wallet
+            </S.ButtonConnectWallet>
+          :
+          <S.LinkInstallMetaMask
+            href="https://metamask.io/download.html"
+            target="_blank"
+            >
+              Install MetaMask!
+          </S.LinkInstallMetaMask>
+        }
         </S.MenuNav>
       </MediaMatch>
 
@@ -112,9 +129,26 @@ const Header = () => {
           <Link href="/" passHref>
             <S.MenuLinkDisable>About</S.MenuLinkDisable>
           </Link>
-          <Button backgroundBlack size="large" disabled>
-            Connect Wallet
-          </Button>
+          {web3.currentProvider !== null ?
+          isLogged ?
+            <S.ButtonConnectWallet
+              type="button"
+              style={{ backgroundColor: '#26DBDB', color: '#211426' }}
+            >
+              {substr(userWalletAddress)}
+            </S.ButtonConnectWallet>
+            :
+            <S.ButtonConnectWallet type="button" onClick={connect}>
+              Connect Wallet
+            </S.ButtonConnectWallet>
+          :
+          <S.LinkInstallMetaMask
+            href="https://metamask.io/download.html"
+            target="_blank"
+            >
+              Install MetaMask!
+          </S.LinkInstallMetaMask>
+        }
         </S.MenuNav>
       </S.MenuFull>
     </S.Wrapper>
