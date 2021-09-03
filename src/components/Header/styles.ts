@@ -6,29 +6,34 @@ export const Wrapper = styled.menu`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: ${theme.spacings.small};
-    padding: 32px;
+
+    margin: auto;
+    max-width: 1530px;
+    padding: 24px 32px;
     position: relative;
-    z-index: ${theme.layers.menu};
-    max-width: 1520px;
-    margin:auto;
+    height: 110px;
+
     ${media.lessThan('medium')`
-    padding: 1.5rem;
     margin-bottom: 3rem;
+    padding-left: 3rem;
     `}
+
+    z-index: ${theme.layers.menu};
   `}
 `
 
 export const LogoWrapper = styled.div`
 
   ${media.lessThan('medium')`
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    img{
-      width: 80%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+    img {
+      height: 60px;
     }
   `}
+
+  cursor: pointer;
 `
 
 export const IconWrapper = styled.div`
@@ -176,7 +181,7 @@ export const MenuFull = styled.nav<MenuFullProps>`
       transition: transform 0.3s ease-in-out;
     }
     ${MenuLinkDisable} {
-      color: ${theme.colors.lightgray};
+      color: ${theme.colors.lightGray};
       font-weight: ${theme.font.bold};
       font-size: ${theme.font.sizes.medium};
       margin-bottom: ${theme.spacings.small};
