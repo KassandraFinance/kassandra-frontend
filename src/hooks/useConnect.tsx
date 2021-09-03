@@ -10,7 +10,7 @@ declare let window: any
 
 const useConnect = () => {
   console.log('executou')
-  const [isLogged, setIsLogged] = React.useState<boolean>(false)
+  const [isLogged, setIsLogged] = React.useState<any>(null)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const dispatch = useDispatch()
@@ -49,7 +49,7 @@ const useConnect = () => {
         console.error(err);
       });
 
-    // window.ethereum.on('accountsChanged', handleAccountsChanged);
+    window.ethereum.on('accountsChanged', handleAccountsChanged);
   }, [])
 
 
@@ -60,8 +60,6 @@ const useConnect = () => {
         setIsLogged(false)
         dispatch(actionGetUserAddressWallet(''))
       } else if (accounts[0] !== userWalletAddress) {
-        console.log(accounts[0])
-        console.log(userWalletAddress)
         console.log('executou toastfy')
         dispatch(actionGetUserAddressWallet(accounts[0]))
         setIsLogged(true)
@@ -83,9 +81,24 @@ const useConnect = () => {
     })
   }, [])
 
-
-
-
+  const connect = () => {
+    try {
+      window.ethereum
+        .request({ method: 'eth_requestAccounts' })
+        .then(handleAccountsChanged)
+        .catch((err: any) => {
+          if (err.code === 4001) {
+            // EIP-1193 userRejectedRequest error
+            ToastInfo("Please connect to MetaMask.")
+          } else {
+            ToastError(err.message)
+            console.error(err);
+          }
+        })
+    } catch (error) {
+      ToastError(error.message)
+    }
+  }
 
   const hasProvider = React.useCallback(async () => {
     const provider = await detectEthereumProvider()
@@ -115,13 +128,12 @@ const useConnect = () => {
 
 
   React.useEffect(() => {
-    console.log(hasProvider)
     hasProvider()
   }, [])
 
 
   return {
-    handleAccountsChanged,
+    connect,
     isUnlocked,
     isLogged,
     userWalletAddress
