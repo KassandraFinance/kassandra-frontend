@@ -6,7 +6,10 @@ import { actionGetUserAddressWallet } from '../store/modules/userWalletAddress/a
 
 import { ToastError, ToastInfo, ToastSuccess, ToastWarning } from '../components/Toastify/toast'
 
-declare let window: any
+declare let window: {
+  ethereum: any,
+  location: any,
+}
 
 const useConnect = () => {
   console.log('executou')
@@ -20,7 +23,7 @@ const useConnect = () => {
       if (provider !== window.ethereum) {
         ToastWarning("Do you have multiple wallets installed?")
       }
-  
+
       handleRequestAccounts()
   
       window.ethereum.on('chainChanged', handleChainChanged)
@@ -81,7 +84,7 @@ const useConnect = () => {
     })
   }, [])
 
-  const connect = () => {
+  const connect = React.useCallback(() => {
     try {
       window.ethereum
         .request({ method: 'eth_requestAccounts' })
@@ -98,7 +101,7 @@ const useConnect = () => {
     } catch (error: any) {
       ToastError(error.message)
     }
-  }
+  }, [handleAccountsChanged])
 
   const hasProvider = React.useCallback(async () => {
     const provider = await detectEthereumProvider()
