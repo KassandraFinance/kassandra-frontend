@@ -4,32 +4,28 @@ import media from "styled-media-query";
 
 export const Container = styled.div`
 ${()=>css`
-  ${media.lessThan('medium')`
-      position: relative;
-      margin-bottom: 2.5rem;
-  `}
+
     margin: auto;
     position: relative;
     padding: 8.5rem 3.2rem;
     max-width: 132rem;
     justify-content: center;
-    height: calc(100vh -160px);
-    @media (min-width: 1920px) {
-      height: calc(100vh);
-    }
-    /* @media (max-width: 370px) {
-      height: calc(100vh - 160px);
-    } */
+    height: calc(100vh);
+
     ${media.lessThan('large')`
+      position: relative;
+      margin-bottom: 2.5rem;
       display: flex;
       flex-direction: column;
+      height: 100%;
+
     `}
   `}
 `
 export const TextWrapper = styled.div `
   ${()=> css `
     max-width: 65%;
-    ${media.lessThan("medium")`
+    ${media.lessThan("large")`
       max-width: 80%;
     `}
   `}
@@ -40,7 +36,7 @@ export const Title = styled.h1`
       font-size: ${theme.font.sizes.xlarge};
       font-weight: ${theme.font.normal};
       /* line-height: 94px; */
-      ${media.lessThan("medium")`
+      ${media.lessThan("large")`
       font-size: ${theme.font.sizes.large};
     `}
   `}
@@ -53,7 +49,7 @@ export const SubTitle = styled.h3`
     font-weight: ${theme.font.light};
     margin: 32px 0;
     max-width: 100%px;
-    ${media.lessThan("medium")`
+    ${media.lessThan("large")`
       font-size: ${theme.font.sizes.medium};
       margin: 16px 0;
     `}
@@ -66,7 +62,7 @@ export const WrapperItems = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     justify-content: space-between;
-    ${media.lessThan('medium')`
+    ${media.lessThan('large')`
       display: flex;
       flex-direction: column;
       `}
@@ -127,7 +123,7 @@ export const GraphWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  ${media.lessThan("medium")`
+  ${media.lessThan("large")`
 
       overflow:hidden;
     `}
@@ -137,11 +133,11 @@ export const GraphWrapper = styled.div`
     margin: 2% 0;
     transform: scale(1);
 
-    ${media.lessThan("medium")`
+    ${media.lessThan("large")`
       transform: scale(1.1);
     `}
   }
-  ${media.lessThan("medium")`
+  ${media.lessThan("large")`
     padding: 5rem 0;
   `}
 `
@@ -149,10 +145,12 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   max-width: 80%;
-  ${media.lessThan("medium")`
+  ${media.lessThan("large")`
     max-width: 100%;
     display: flex;
     justify-content: space-between;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   `}
 `
 export const Link = styled.div `
@@ -170,8 +168,8 @@ ${({theme})=> css `
     font-size: ${theme.font.sizes.medium};
     font-weight: ${theme.font.light};
     cursor: pointer;
-    ${media.lessThan("small")`
-    font-size: ${theme.font.sizes.xsmall};
+    ${media.lessThan("large")`
+    font-size: ${theme.font.sizes.small};
 
     `}
   }

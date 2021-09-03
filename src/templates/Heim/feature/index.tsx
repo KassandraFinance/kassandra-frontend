@@ -4,8 +4,13 @@ import React from 'react'
 import * as S from './styles'
 import Button from '../../../components/Button'
 import MediaMatch from '../../../components/MediaMatch'
+import ModalSignUp from '../sign-up/ModalSignUp'
 
-export const Feature = () => (
+
+export const Feature = () => {
+  const [modalSignupOpen, setModalSignupOpen] = React.useState<boolean>(false)
+
+  return(
 <>
   <S.Container>
     <div>
@@ -52,15 +57,15 @@ into the blockchain every day.</S.ItemSubtitle>
       </S.TextWrapper>
         <img src="assets/backtestGraph.svg" alt=""/>
       <S.ButtonWrapper>
-        <MediaMatch greaterThan="medium" >
-            <Button backgroundPrimary size="large">
-              Get early access
-            </Button>
+        <MediaMatch greaterThan="large" >
+        <Button backgroundPrimary size="large" onClick={() => setModalSignupOpen(true)}>
+            Get early access
+          </Button>
         </MediaMatch>
       </S.ButtonWrapper>
       <S.ButtonWrapper>
-        <MediaMatch lessThan="small">
-            <Button backgroundPrimary size="small">
+        <MediaMatch lessThan="large">
+            <Button backgroundPrimary size="medium" onClick={() => setModalSignupOpen(true)}>
               Get early access
             </Button>
         </MediaMatch>
@@ -69,9 +74,12 @@ into the blockchain every day.</S.ItemSubtitle>
         <a href="https://medium.com/heimdall-research-crypto/the-heimdall-social-index-9595fdfb9ddc">Check out the full research at our Medium  <span>&#8594;</span> </a>
       </S.Link>
     </S.GraphWrapper>
+    <ModalSignUp
+        modalSignupOpen={modalSignupOpen}
+        setModalSignupOpen={setModalSignupOpen}
+      />
 </>
 
-)
-
-
+  )
+}
 export default Feature

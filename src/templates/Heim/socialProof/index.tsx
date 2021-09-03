@@ -8,12 +8,11 @@ import MediaMatch from '../../../components/MediaMatch'
 export const SocialProof = () => (
 <>
   <S.Container>
-    <div>
-        <S.Title>The power of investing by community</S.Title>
-    </div>
-        <S.WrapperItems>
-        <MediaMatch greaterThan='medium'>
 
+        <S.Title>The power of investing by community</S.Title>
+
+        <S.WrapperItems>
+        <MediaMatch greaterThan='large'>
           <S.ItemContainer>
             <S.ItemImage>
               <img src="assets/socialInvest.svg" alt=""/>
@@ -38,8 +37,8 @@ export const SocialProof = () => (
         </MediaMatch>
         </S.WrapperItems>
 
+        <MediaMatch lessThan='large'>
         <S.WrapperItems>
-        <MediaMatch lessThan='medium'>
         <S.ItemContainer>
             <S.ItemImage>
               <img src="assets/socialInvest.svg" alt=""/>
@@ -60,9 +59,9 @@ export const SocialProof = () => (
               <S.ItemSubtitle>Heimdall Social Score values <strong>quality over quantity.</strong>  </S.ItemSubtitle>
             </S.ItemText>
           </S.ItemContainer>
-        </MediaMatch>
 
         </S.WrapperItems>
+        </MediaMatch>
         <S.Divider>
           <img src="assets/divider.png" alt=""/>
         </S.Divider>

@@ -12,17 +12,17 @@ export const InputWrapper = styled.div`
   ${({ theme }) => css`
     display: flex;
     align-items: center;
-    background: black;
-    border-radius: 0.2rem;
+    background: #211426;
+    border-radius: 0.6rem;
     padding: 0 ${theme.spacings.xsmall};
     border: 0.2rem solid;
     border-color: #26DBDB;
     margin-bottom: 2.4rem;
-    margin-top: 1.2rem;
+    margin-top: 0.5rem;
 
     &:focus-within {
       box-shadow: 0 0 0.8rem #402947;
-;
+      background: black;
     }
   `}
 `
@@ -33,11 +33,14 @@ export const Input = styled.input<IconPositionProps>`
     font-family: ${theme.font.family};
     font-size: ${theme.font.sizes.medium};
     padding: ${theme.spacings.xxsmall} 0;
-    padding-${iconPosition}: ${theme.spacings.xsmall};
-    background: transparent;
+    /* padding-${iconPosition}: ${theme.spacings.xsmall}; */
+    background: #211426;
     border: 0;
     outline: none;
     width: ${iconPosition === 'right' ? `calc(100% - 2.2rem)` : `100%`};
+    &:focus-within {
+      background: black;
+    }
   `}
 `
 
@@ -45,7 +48,7 @@ export const Label = styled.label`
   ${({ theme }) => css`
     font-size: ${theme.font.sizes.medium};
     font-weight: ${theme.font.light};
-    color: #FCFCFC;
+    color: ${theme.colors.lightGray};
     cursor: pointer;
     ${media.lessThan('small')`
     font-size: ${theme.font.sizes.small};
@@ -103,6 +106,5 @@ export const Wrapper = styled.div<WrapperProps>`
     ${error && wrapperModifiers.error(theme)}
     ${disabled && wrapperModifiers.disabled(theme)}
     width: 100%
-
   `}
 `

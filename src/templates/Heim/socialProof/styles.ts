@@ -12,11 +12,11 @@ export const Container = styled.div`
     /* max-width: 132rem; */
     justify-content: center;
     overflow:hidden;
-    ${media.lessThan('medium')`
+    ${media.lessThan('large')`
         display:flex;
         flex-direction: column;
         position: relative;
-        margin: 2.5rem;
+        align-items: center;
     `}
   `}
 `
@@ -24,7 +24,7 @@ export const Container = styled.div`
 export const TextWrapper = styled.div `
   ${()=> css `
     max-width: 65%;
-    ${media.lessThan("medium")`
+    ${media.lessThan("large")`
       max-width: 80%;
     `}
   `}
@@ -36,8 +36,10 @@ export const Title = styled.h1`
       font-weight: ${theme.font.normal};
       margin-bottom: ${theme.spacings.xxlarge};
       /* line-height: 94px; */
-      ${media.lessThan("medium")`
+      ${media.lessThan("large")`
       font-size: ${theme.font.sizes.large};
+      margin-bottom: ${theme.spacings.small};
+
     `}
   `}
 `
@@ -48,8 +50,8 @@ export const SubTitle = styled.h3`
     font-size: ${theme.font.sizes.medium};
     font-weight: ${theme.font.light};
     /* margin: 32px 0; */
-    max-width: 100%px;
-    ${media.lessThan("medium")`
+    max-width: 100%;
+    ${media.lessThan("large")`
       font-size: ${theme.font.sizes.small};
       margin: 16px 0;
     `}
@@ -63,9 +65,11 @@ export const WrapperItems = styled.div`
     /* flex-direction: row; */
     margin:auto;
 
-    ${media.lessThan('medium')`
+    ${media.lessThan('large')`
       display: flex;
       flex-direction: column;
+      /* margin: 2.5rem; */
+
       `}
 
   `}
@@ -76,9 +80,10 @@ export const ItemContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   padding: ${theme.spacings.xsmall};
-  ${media.lessThan('medium')`
+  ${media.lessThan('large')`
     display: flex;
     flex-direction: column;
+    text-align:center;
   `}
 
   `}
@@ -96,8 +101,10 @@ export const ItemTitle = styled.div`
   font-weight: ${theme.font.bold};
   line-height: 120%;
   margin-bottom: ${theme.spacings.small};
-    ${media.lessThan("medium")`
-    font-size: ${theme.font.sizes.large};
+  text-align:center;
+
+    ${media.lessThan("large")`
+    font-size: ${theme.font.sizes.medium};
     `}
     /* ${media.greaterThan("medium")`
     font-size: ${theme.font.sizes.xlarge};
@@ -111,8 +118,10 @@ export const ItemSubtitle = styled.div`
   font-weight: ${theme.font.light};
   line-height: 150%;
   margin-bottom: ${theme.spacings.xxsmall};
-    ${media.lessThan("medium")`
+    ${media.lessThan("large")`
       font-size: ${theme.font.sizes.small};
+      text-align:center;
+
     `}
     /* ${media.greaterThan("medium")`
       font-size: ${theme.font.sizes.large};
@@ -125,7 +134,7 @@ export const ItemImage = styled.div`
   display: flexbox;
   justify-content: center;
   margin-bottom:${theme.spacings.medium};
-  ${media.lessThan("medium")`
+  ${media.lessThan("large")`
       display: flex;
       justify-content: center;
 
@@ -144,7 +153,7 @@ export const GraphWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-    ${media.lessThan("medium")`
+    ${media.lessThan("large")`
 
       overflow:hidden;
     `}
@@ -152,12 +161,12 @@ export const GraphWrapper = styled.div`
   img{
     width: 100%;
     margin: 2% 0;
-    ${media.lessThan("medium")`
+    ${media.lessThan("large")`
     transform: scale(1.1);
 
     `}
   }
-  ${media.lessThan("medium")`
+  ${media.lessThan("large")`
   padding: 5rem 0;
   `}
 `
@@ -165,7 +174,7 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   max-width: 80%;
-  ${media.lessThan("medium")`
+  ${media.lessThan("large")`
   max-width: 100%;
   display: flex;
   justify-content: space-between;
@@ -180,7 +189,7 @@ export const ButtonWrapper = styled.div`
       justify-content: space-between;
       margin:auto;
 
-      ${media.lessThan('medium')`
+      ${media.lessThan('large')`
         display: flex;
         flex-direction: column;
         padding-top: 0;
@@ -197,9 +206,11 @@ export const ProductContainer = styled.div`
     width:38rem;
     /* height: 31rem; */
     padding: ${theme.spacings.xsmall};
-    ${media.lessThan("small")`
+    ${media.lessThan("large")`
       width:auto;
       height: auto;
+      margin: 2.5rem;
+
     `}
 
     `}
@@ -226,6 +237,7 @@ export const ProductSubtitle = styled.div`
 
   ${media.lessThan('small')`
     font-size: ${theme.font.sizes.small};
+    text-align:center;
   `}
   `}
 `
@@ -242,7 +254,7 @@ export const ProductImage = styled.div`
     height: 100%;
 
   }
-  ${media.lessThan("medium")`
+  ${media.lessThan("large")`
       /* display: flex; */
       justify-content: center;
       height:auto;
@@ -270,7 +282,7 @@ ${({theme})=> css `
       text-decoration: none;
       font-size: ${theme.font.sizes.medium};
       cursor: pointer;
-      ${media.lessThan("small")`
+      ${media.lessThan("large")`
       font-size: ${theme.font.sizes.xsmall};
 
     `}

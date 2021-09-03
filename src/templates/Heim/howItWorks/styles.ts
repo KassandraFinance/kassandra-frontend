@@ -69,15 +69,15 @@ export const Text = styled.div`
     position:absolute;
     text-align: center;
     margin: 30rem 40rem;
-    font-size: ${theme.font.sizes.xxlarge};
+    font-size: ${theme.font.sizes.xlarge};
     font-weight: ${theme.font.light};
     line-height:150%;
     @media (max-width: 1920px) {
-      margin: 25rem 25rem;
+      margin: 25rem 45rem;
     }
     @media (max-width: 1440px){
-    font-size: ${theme.font.sizes.xlarge};
-    margin: 18rem 20rem;
+    font-size: ${theme.font.sizes.large};
+    margin: 18rem 30rem;
     }
     @media (max-width: 1024px){
     font-size: ${theme.font.sizes.large};
@@ -88,7 +88,13 @@ export const Text = styled.div`
     @media (max-width: 768px){
     font-size: ${theme.font.sizes.medium};
     font-weight: ${theme.font.light};
-    margin: 10rem;
+    margin: 12rem 15rem;
+    line-height:100%;
+    }
+    @media (max-width: 540px){
+    font-size: ${theme.font.sizes.small};
+    font-weight: ${theme.font.light};
+    margin: 8rem ;
     line-height:100%;
     }
     @media (max-width: 425px){
@@ -100,7 +106,7 @@ export const Text = styled.div`
     @media (max-width: 375px){
     font-size: ${theme.font.sizes.xsmall};
     font-weight: ${theme.font.light};
-    margin: 4.5rem;
+    margin: 4.9rem;
     line-height:100%;
     }
   `}

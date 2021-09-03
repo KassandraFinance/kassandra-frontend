@@ -1,33 +1,34 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 // eslint-disable-next-line import/extensions
-import { Close } from 'styled-icons/material-outlined'
-import Link from 'next/link'
+
 import * as S from './styles'
 import Button from '../../../components/Button'
 import MediaMatch from '../../../components/MediaMatch'
 import ModalSocial from '../ModalSocial'
+import ModalSignUp from '../sign-up/ModalSignUp'
 
 export function Hero() {
   const [modalOpen, setModalOpen] = React.useState<boolean>(false)
+  const [modalSignupOpen, setModalSignupOpen] = React.useState<boolean>(false)
   return (
       <>
       <S.Container>
         <MediaMatch greaterThan="large">
           {/* <a href="https://twitter.com/dao_kassandra" target="_blank" rel="noopener noreferrer">Coming soon...</a> */}
-                <div>
+
                   <S.Title>Get exposure to the hottest communities in the market.</S.Title>
                   <S.SubTitle>Introducing a single asset that tracks the performance of the cryptocurrencies with the most solid and engaged communities</S.SubTitle>
 
                   <S.ButtonWrapper>
-                    <Button backgroundPrimary size="large">
+                    <Button backgroundPrimary size="large" onClick={() => setModalSignupOpen(true)}>
                       Get early access
                     </Button>
                     <Button size="large" backgroundBlack onClick={() => setModalOpen(true)}>
                       Join the community
                     </Button>
                   </S.ButtonWrapper>
-              </div>
+
             </MediaMatch>
                 <S.ImageDesktop>
                   <img src="assets/HeimCurrency.svg" alt="" />
@@ -40,7 +41,7 @@ export function Hero() {
             </S.Image>
             <S.SubTitle>Introducing a single asset that tracks the performance of the cryptocurrencies with the most solid and engaged communities</S.SubTitle>
             <S.ButtonWrapper>
-              <Button backgroundPrimary size="huge">
+              <Button backgroundPrimary size="huge" onClick={() => setModalSignupOpen(true)}>
                 Get early access
               </Button>
               <Button size="huge" backgroundBlack  onClick={() => setModalOpen(true)}>
@@ -58,6 +59,10 @@ export function Hero() {
         <ModalSocial
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
+      />
+        <ModalSignUp
+        modalSignupOpen={modalSignupOpen}
+        setModalSignupOpen={setModalSignupOpen}
       />
         {/* <S.Modal isOpen={isOpen} aria-label="modal">
 

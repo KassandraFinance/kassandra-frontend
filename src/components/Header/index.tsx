@@ -41,10 +41,10 @@ const Header = () => {
       <S.LogoWrapper>
         <Link href="/" passHref>
           {asPath === '/heim'
-            ? <img src={"./assets/HeimLogoMenu.svg"} //ternario trocar img kassandra e heim
+            ? <img src="./assets/HeimLogoMenu.svg"
             alt="Logo menu"
           />
-        : <img src={"./assets/logo-header.svg"} //ternario trocar img kassandra e heim
+        : <img src="./assets/logo-header.svg"
           alt="Logo menu"
           />}
         </Link>

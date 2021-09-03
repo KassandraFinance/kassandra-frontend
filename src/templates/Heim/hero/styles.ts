@@ -10,24 +10,24 @@ export const Container = styled.div`
   display: flex;
   margin: auto;
   height: calc(100vh - 110px);
-
   position: relative;
   padding: 0 32px;
-  /* padding-left: 60px; */
-
   display: grid;
   grid-template-columns: 2.5fr 2.5fr;
   justify-content: space-between;
   align-items: center;
-  ${media.lessThan('medium')`
+  ${media.lessThan('large')`
       display: flex;
       position: relative;
+      justify-content: center;
       margin-bottom: 2.5rem;
       padding-left: 50px;
+      height: calc(100vh - 110px);
+
 
   `}
 
-  ${media.lessThan("small")`
+  ${media.lessThan("large")`
 
       display: flex;
       flex-direction:column;
@@ -59,19 +59,21 @@ export const Image = styled.div`
       right: -4.25rem;
       margin-top:-2rem;
     `}
-    ${media.lessThan("small")`
-    position: relative;
-    display:flex;
-    justify-content: center;
-    right: 0;
-    margin-top:0rem;
-    align-items:center;
-    `}
+    @media(max-width: 1040px){
 
+      position: relative;
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+      right: 0;
+      margin-top:0rem;
+      align-items:center;
+    }
     img {
       max-width: 100%;
-      ${media.lessThan('small')`
+      ${media.lessThan('large')`
       max-width: 60%;
+
 
       /* display: none;
       visibility: hidden; */
@@ -100,26 +102,28 @@ export const ImageDesktop = styled.div`
     justify-content: flex-end;
     right: -6.5rem;
     margin-top:-2.2rem;
+
+
     ${media.lessThan('large')`
       right: -4.25rem;
       margin-top:-2rem;
     `}
-    ${media.lessThan("small")`
+    ${media.lessThan("medium")`
     position: relative;
     display:flex;
     justify-content: center;
     right: 0;
     margin-top:0rem;
     align-items:center;
+      img{
+        max-width: 50%;
+      }
     `}
-
     img {
       max-width: 95%;
       ${media.lessThan('large')`
       display: none;
       visibility: hidden;
-
-
     `}
 
     /* @media (min-width: 1440px) {
@@ -197,16 +201,15 @@ ${({theme})=> css`
     }
 
   /* justify-content: space-between; */
-  ${media.lessThan("medium")`
-    max-width: 80%;
-    display: flex;
-  `}
-  ${media.lessThan("medium")`
+
+  ${media.lessThan("large")`
     display:flex;
     flex-direction: column;
     align-items: center;
     max-width: 100%;
     ${ButtonStyles.Wrapper}{
+      margin-right:0rem;
+
       margin-bottom: 1rem;
     }
   `}
