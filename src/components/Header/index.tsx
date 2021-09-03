@@ -103,10 +103,13 @@ const Header = () => {
 
       <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen}>
         <CloseIcon aria-label="Close Menu" onClick={() => setIsOpen(false)} />
+
         <S.MenuNav>
-          <Link href="/" passHref>
-            <S.MenuLink>HEIM Index</S.MenuLink>
-          </Link>
+          {asPath === '/' ?
+            <Link href="/heim" passHref>
+              <S.MenuLink> HEIM Index </S.MenuLink>
+            </Link>
+          : <Link href="/" passHref><S.MenuLink> Home </S.MenuLink></Link>}
           <Link href="/" passHref>
             <S.MenuLinkDisable>Buy $Heim</S.MenuLinkDisable>
           </Link>

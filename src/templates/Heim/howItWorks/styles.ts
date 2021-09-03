@@ -32,7 +32,7 @@ export const Image = styled.div`
   img{
     width: 100%;
     height: auto;
-    margin-bottom: -5px;
+    margin-bottom: -4rem;
   }
   ${media.lessThan("small")`
 
@@ -76,8 +76,8 @@ export const Text = styled.div`
       margin: 25rem 25rem;
     }
     @media (max-width: 1440px){
-    font-size: ${theme.font.sizes.large};
-    margin: 15rem 25rem;
+    font-size: ${theme.font.sizes.xlarge};
+    margin: 18rem 20rem;
     }
     @media (max-width: 1024px){
     font-size: ${theme.font.sizes.large};
@@ -100,7 +100,7 @@ export const Text = styled.div`
     @media (max-width: 375px){
     font-size: ${theme.font.sizes.xsmall};
     font-weight: ${theme.font.light};
-    margin: 3.8rem;
+    margin: 4.5rem;
     line-height:100%;
     }
   `}

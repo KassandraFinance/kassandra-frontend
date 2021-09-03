@@ -3,6 +3,8 @@ import Heim from "../templates/Heim";
 
 export default function Index() {
   return (
-    <Heim />
+    <>
+      <Heim />
+    </>
   )
 }

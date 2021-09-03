@@ -11,36 +11,47 @@ import ModalSocial from '../ModalSocial'
 export function Hero() {
   const [modalOpen, setModalOpen] = React.useState<boolean>(false)
   return (
-    <>
+      <>
       <S.Container>
-        <div>
-          <S.Title>Get exposure to the hottest communities in the market.</S.Title>
-          <S.SubTitle>Introducing a single asset that tracks the performance of the cryptocurrencies with the most solid and engaged communities</S.SubTitle>
+        <MediaMatch greaterThan="large">
           {/* <a href="https://twitter.com/dao_kassandra" target="_blank" rel="noopener noreferrer">Coming soon...</a> */}
-          <MediaMatch greaterThan="large">
+                <div>
+                  <S.Title>Get exposure to the hottest communities in the market.</S.Title>
+                  <S.SubTitle>Introducing a single asset that tracks the performance of the cryptocurrencies with the most solid and engaged communities</S.SubTitle>
+
+                  <S.ButtonWrapper>
+                    <Button backgroundPrimary size="large">
+                      Get early access
+                    </Button>
+                    <Button size="large" backgroundBlack onClick={() => setModalOpen(true)}>
+                      Join the community
+                    </Button>
+                  </S.ButtonWrapper>
+              </div>
+            </MediaMatch>
+                <S.ImageDesktop>
+                  <img src="assets/HeimCurrency.svg" alt="" />
+                </S.ImageDesktop>
+
+            <MediaMatch lessThan="large">
+            <S.Title>Get exposure to the hottest communities in the market.</S.Title>
+            <S.Image>
+              <img src="assets/HeimCurrency.svg" alt="" />
+            </S.Image>
+            <S.SubTitle>Introducing a single asset that tracks the performance of the cryptocurrencies with the most solid and engaged communities</S.SubTitle>
             <S.ButtonWrapper>
-              <Button backgroundPrimary size="large">
+              <Button backgroundPrimary size="huge">
                 Get early access
               </Button>
-              <Button size="large" backgroundBlack onClick={() => setModalOpen(true)}>
+              <Button size="huge" backgroundBlack  onClick={() => setModalOpen(true)}>
                 Join the community
               </Button>
             </S.ButtonWrapper>
+
           </MediaMatch>
-          <MediaMatch lessThan="large">
-            <S.ButtonWrapper>
-              <Button backgroundPrimary size="medium">
-                Get early access
-              </Button>
-              <Button size="medium" backgroundBlack  onClick={() => setModalOpen(true)}>
-                Join the community
-              </Button>
-            </S.ButtonWrapper>
-          </MediaMatch>
-        </div>
-        <S.Image>
+        {/* <S.Image>
           <img src="assets/HeimCurrency.svg" alt="" />
-        </S.Image>
+        </S.Image> */}
         <S.FloatImage>
           <img src="assets/Certik.svg" alt="" />
         </S.FloatImage>
@@ -95,7 +106,8 @@ export function Hero() {
             </S.WrapperIcons>
           </S.Content>
         </S.Modal> */}
-      </S.Container>
+            </S.Container>
+
     </>
 
   )

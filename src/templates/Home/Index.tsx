@@ -18,6 +18,11 @@ export const Home = () => (
         <h3>The decentralized autonomous organization that governs tokenized data-driven investment funds.</h3>
         <a href="https://twitter.com/dao_kassandra" target="_blank" rel="noopener noreferrer">Coming soon...</a>
       </div>
+    {/* <img src="assets/kassandra-600.svg" alt=""/> */}
+    <div className={styles['h3-mobile']}>
+        <h3>The decentralized autonomous organization that governs tokenized data-driven investment funds.</h3>
+        <a href="https://twitter.com/dao_kassandra" target="_blank" rel="noopener noreferrer">Coming soon...</a>
+      </div>
     </section>
     <section className={styles.products}>
       <h1>Products</h1>

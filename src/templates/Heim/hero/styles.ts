@@ -6,20 +6,21 @@ import * as ButtonStyles from '../../../components/Button/styles'
 export const Container = styled.div`
 
   overflow:hidden;
-  max-width: 1530px;
+  max-width: 1520px;
   display: flex;
   margin: auto;
   height: calc(100vh - 110px);
 
   position: relative;
   padding: 0 32px;
-  padding-left: 60px;
+  /* padding-left: 60px; */
 
   display: grid;
   grid-template-columns: 2.5fr 2.5fr;
   justify-content: space-between;
   align-items: center;
   ${media.lessThan('medium')`
+      display: flex;
       position: relative;
       margin-bottom: 2.5rem;
       padding-left: 50px;
@@ -59,14 +60,65 @@ export const Image = styled.div`
       margin-top:-2rem;
     `}
     ${media.lessThan("small")`
-      margin-top:0rem;
+    position: relative;
+    display:flex;
+    justify-content: center;
+    right: 0;
+    margin-top:0rem;
+    align-items:center;
     `}
 
     img {
       max-width: 100%;
       ${media.lessThan('small')`
+      max-width: 60%;
+
+      /* display: none;
+      visibility: hidden; */
+
+    `}
+
+    /* @media (min-width: 1440px) {
+      max-width: 100%;
+    }
+    @media (max-width: 1240px) {
+      max-width: 100%;
+      min-width: 230px;
+    }
+    @media (max-width: 770px) {
+      max-width: 400px;
+    }
+    @media (max-width: 600px) {
+      max-width: 300px;
+      display: none;
+    } */
+  }
+`
+export const ImageDesktop = styled.div`
+    position: relative;
+    display:flex;
+    justify-content: flex-end;
+    right: -6.5rem;
+    margin-top:-2.2rem;
+    ${media.lessThan('large')`
+      right: -4.25rem;
+      margin-top:-2rem;
+    `}
+    ${media.lessThan("small")`
+    position: relative;
+    display:flex;
+    justify-content: center;
+    right: 0;
+    margin-top:0rem;
+    align-items:center;
+    `}
+
+    img {
+      max-width: 95%;
+      ${media.lessThan('large')`
       display: none;
       visibility: hidden;
+
 
     `}
 

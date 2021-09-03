@@ -7,7 +7,8 @@ export const Container = styled.div`
     z-index:1;
     margin: auto;
     position: relative;
-    margin: 10.8em;
+    margin-top: 10.8em;
+    margin-bottom: 15em;
     /* max-width: 132rem; */
     justify-content: center;
     overflow:hidden;
@@ -46,7 +47,7 @@ export const SubTitle = styled.h3`
     text-align: center;
     font-size: ${theme.font.sizes.medium};
     font-weight: ${theme.font.light};
-    margin: 32px 0;
+    /* margin: 32px 0; */
     max-width: 100%px;
     ${media.lessThan("medium")`
       font-size: ${theme.font.sizes.small};
@@ -194,7 +195,7 @@ export const ProductContainer = styled.div`
     flex-direction: column;
     justify-content: space-between ;
     width:38rem;
-    height: 31rem;
+    /* height: 31rem; */
     padding: ${theme.spacings.xsmall};
     ${media.lessThan("small")`
       width:auto;

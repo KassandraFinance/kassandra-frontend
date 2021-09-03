@@ -6,6 +6,8 @@
   grid-template-columns: 1fr 1fr;
   justify-content: space-between;
   align-items: center;
+  max-width: 1520px;
+  margin:auto;
   @media (max-width: 770px) {
     display: flex;
     flex-direction: column;

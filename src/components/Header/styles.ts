@@ -7,13 +7,13 @@ export const Wrapper = styled.menu`
     align-items: center;
     justify-content: space-between;
     padding: ${theme.spacings.small};
-    padding-left: 60px;
+    padding: 32px;
     position: relative;
     z-index: ${theme.layers.menu};
-    max-width: 1530px;
+    max-width: 1520px;
     margin:auto;
     ${media.lessThan('medium')`
-    padding-left: 3rem;
+    padding: 1.5rem;
     margin-bottom: 3rem;
     `}
   `}
@@ -97,7 +97,7 @@ export const MenuLinkDisable = styled.a`
   ${({ theme }) => css`
     position: relative;
     color: ${theme.colors.lightGray};
-    font-size: ${theme.font.sizes.medium};
+    font-size: ${theme.font.sizes.small};
     margin: 0.3rem ${theme.spacings.small} 0;
     text-decoration: none;
     text-align: center;
@@ -170,7 +170,15 @@ export const MenuFull = styled.nav<MenuFullProps>`
     ${MenuLink} {
       color: ${theme.colors.white};
       font-weight: ${theme.font.bold};
-      font-size: ${theme.font.sizes.xlarge};
+      font-size: ${theme.font.sizes.medium};
+      margin-bottom: ${theme.spacings.small};
+      transform: ${isOpen ? 'translateY(0)' : 'translateY(3rem)'};
+      transition: transform 0.3s ease-in-out;
+    }
+    ${MenuLinkDisable} {
+      color: ${theme.colors.lightgray};
+      font-weight: ${theme.font.bold};
+      font-size: ${theme.font.sizes.medium};
       margin-bottom: ${theme.spacings.small};
       transform: ${isOpen ? 'translateY(0)' : 'translateY(3rem)'};
       transition: transform 0.3s ease-in-out;
