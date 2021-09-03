@@ -1,4 +1,3 @@
-import React from 'react'
 import { AbiItem } from "web3-utils"
 import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
@@ -12,12 +11,15 @@ const usePoolContract = () => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
 
-  const { getERC20Contract } = useERC20Contract()
-
-
   const getPoolContract = (address: string) => {
     const contract = new web3.eth.Contract((Pool as unknown) as AbiItem, address)
     return contract
+  }
+
+  const getCurrentTokens = async (addresCorePool: string): Promise<[string]> => {
+    const contract = await getPoolContract(addresCorePool)
+    const value = await contract.methods.getCurrentTokens().call()
+    return value
   }
 
   const denormalizedWeight = async (addresCorePool: string, tokenAddressIn: string) => {
@@ -33,42 +35,42 @@ const usePoolContract = () => {
   }
 
   const calcPoolOutGivenSingleIn = async (
-    addresCorePool: string, 
-    tokenBalanceOut: BigNumber, 
-    tokenWeightOut: BigNumber, 
-    poolSupply: BigNumber, 
-    totalWeight: BigNumber, 
-    tokenAmountIn: BigNumber, 
+    addresCorePool: string,
+    tokenBalanceIn: BigNumber,
+    tokenWeightIn: BigNumber,
+    poolSupply: BigNumber,
+    totalWeight: BigNumber,
+    tokenAmountIn: BigNumber,
     swapFee: BigNumber
   ) => {
     const contract = getPoolContract(addresCorePool)
     const value = await contract.methods.calcPoolOutGivenSingleIn(
-      tokenBalanceOut,
-      tokenWeightOut,
+      tokenBalanceIn,
+      tokenWeightIn,
       poolSupply,
       totalWeight,
       tokenAmountIn,
-      swapFee
+      swapFee,
     ).call()
     return new BigNumber(value)
   }
 
   const calcSingleOutGivenPoolIn = async (
     addresCorePool: string, 
-    tokenBalanceIn: BigNumber, 
-    tokenWeightIn: BigNumber, 
-    poolTotalSupply: BigNumber, 
-    totalWeightIn: BigNumber, 
-    tokenAmountIn: BigNumber, 
+    tokenBalanceOut: BigNumber, 
+    tokenWeightOut: BigNumber, 
+    poolSupply: BigNumber, 
+    totalWeight: BigNumber, 
+    poolAmountIn: BigNumber, 
     swapFee: BigNumber
   ) => {
     const contract = getPoolContract(addresCorePool)
     const value = await contract.methods.calcSingleOutGivenPoolIn(
-      tokenBalanceIn, 
-      tokenWeightIn, 
-      poolTotalSupply, 
-      totalWeightIn, 
-      tokenAmountIn, 
+      tokenBalanceOut, 
+      tokenWeightOut, 
+      poolSupply, 
+      totalWeight, 
+      poolAmountIn, 
       swapFee
     ).call()
     return new BigNumber(value)
@@ -137,33 +139,14 @@ const usePoolContract = () => {
     return new BigNumber(value)
   }
 
-  const nameToken = (address: string): string => {
-    const tokenERC20Contract = getERC20Contract(address)
-    return  tokenERC20Contract.methods.name().call()
-  }
-
-  const symbolToken = (address: string): string => {
-    const tokenERC20Contract = getERC20Contract(address)
-    return tokenERC20Contract.methods.symbol().call()
-  }
-
-  const decimalsToken = async (address: string): Promise<BigNumber> => {
-    const tokenERC20Contract = await getERC20Contract(address)
-    const value = await tokenERC20Contract.methods.decimals().call()
-    return new BigNumber(value)
-  }
-
-
 
   return { 
     getPoolContract,
+    getCurrentTokens,
     calcPoolOutGivenSingleIn,
     calcSingleOutGivenPoolIn,
     swapFee,
     balanceToken,
-    nameToken,
-    symbolToken,
-    decimalsToken,
     denormalizedWeight,
     totalDenormalizedWeight,
     swapExactAmountIn,

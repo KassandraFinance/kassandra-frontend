@@ -1,4 +1,3 @@
-import React from 'react'
 import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
@@ -7,45 +6,24 @@ import { AbiItem } from "web3-utils"
 import web3 from '../utils/web3'
 import ERC20ABI from "../constants/abi/ERC20.json"
 
+import waitTransaction, { CompleteCallback } from '../utils/txWait'
+
 
 const useERC20Contract = () => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
 
-  const sleep = (ms: number) => {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  };
-  
-  const waitTransaction = async (txHash: string) => {
-    let txReceipt: any = null;
-    while (txReceipt === null) {
-      const r = await web3.eth.getTransactionReceipt(txHash);
-      txReceipt = r;
-      await sleep(2000);
-    }
-    return txReceipt.status;
-  };
-  
   const approve = async (
     spenderAddress: string,
     tokenAddress: string,
+    onComplete?: CompleteCallback,
   ): Promise<boolean> => {
     try {
       const tokenContract = getERC20Contract(tokenAddress);
-      return tokenContract.methods
-        .approve(spenderAddress, web3.utils.toTwosComplement(-1))
-        .send({ from: userWalletAddress }, async (error: any, txHash: string) => {
-          if (error) {
-            console.log("ERC20 could not be approved", error);
-            return false;
-          }
-          const status = await waitTransaction(txHash);
-          if (!status) {
-            console.log("Approval transaction failed.");
-            return false;
-          }
-          return true;
-        });
+      return tokenContract.methods.approve(spenderAddress, web3.utils.toTwosComplement(-1)).send(
+        { from: userWalletAddress },
+        onComplete ? waitTransaction(onComplete) : undefined
+      );
     } catch (e) {
       console.log("error", e);
       return false;
@@ -89,12 +67,33 @@ const useERC20Contract = () => {
     }
   };
 
+  const name = async (address: string): Promise<string> => {
+    const tokenERC20Contract = await getERC20Contract(address)
+    const res = await tokenERC20Contract.methods.name().call()
+    return res
+  }
+
+  const symbol = async (address: string): Promise<string> => {
+    const tokenERC20Contract = await getERC20Contract(address)
+    const res = await tokenERC20Contract.methods.symbol().call()
+    return res
+  }
+
+  const decimals = async (address: string): Promise<BigNumber> => {
+    const tokenERC20Contract = await getERC20Contract(address)
+    const value = await tokenERC20Contract.methods.decimals().call()
+    return new BigNumber(value)
+  }
+
   return { 
     getERC20Contract,
     getAllowance,
     getBalance,
     getTotalSupply,
-    approve
+    approve,
+    name,
+    symbol,
+    decimals,
   }
 }
 
