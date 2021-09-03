@@ -11,7 +11,7 @@ export const Backdrop = styled.div`
 
   width: 100vw;
   height: 100vh;
-  z-index: 9;
+  z-index: 20;
 `
 
 interface IBorderGradientProps {
@@ -92,7 +92,11 @@ ${({theme})=> css`
     font-size: 2rem;
     font-weight: ${theme.font.normal};
 `}
+${media.lessThan('small')`
+font-size: 1.4rem;
+`}
 `
+
 export const WrapperIcons = styled.h1`
 ${({theme})=> css`
     margin: 1.6rem;
@@ -105,15 +109,24 @@ ${({theme})=> css`
     span{
     margin-top: 5.6px;
     }
-    img{
-      max-width: 80%;
-    }
 `}
-
+${media.lessThan('small')`
+  margin:0;
+  max-width:50%;
+  margin-top: 1.5rem;
+  img{
+    max-width: 80%
+  }
+  span{
+    display:none;
+  }
+`}
 `
 export const Content = styled.div`
   display:flex;
+  flex-direction: column;
   justify-content: space-between;
+  padding: 24px;
   margin: 0 0.8rem;
   img{
     cursor: pointer;

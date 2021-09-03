@@ -45,6 +45,7 @@ const ModalSocial = ({
             <button type="button" onClick={() => setModalOpen(false)}><img src="assets/close.svg" alt=""/> </button>
           </InterBackground>
           <Content>
+            <div style={{display:'flex'}}>
             <WrapperIcons>
               <a href="https://discord.gg/2uGEvqNnuq" target="_blank" rel="noopener noreferrer">
                 <img src="assets/discord-icon.svg" alt="" />
@@ -75,6 +76,7 @@ const ModalSocial = ({
               </a>
               <span>Twitter</span>
             </WrapperIcons>
+            </div>
             </Content>
           </BackgroundBlack>
       </BorderGradient>
