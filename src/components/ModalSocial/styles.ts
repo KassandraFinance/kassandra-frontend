@@ -70,7 +70,11 @@ export const InterBackground = styled.div`
 
   width: 100%;
   height: 6.8rem;
-  padding: 24px;
+  padding: 2.4rem;
+  ${media.lessThan('small')`
+  padding: 1.2rem;
+  `}
+
 
 
   button {
@@ -99,46 +103,43 @@ font-size: 1.4rem;
 
 export const WrapperIcons = styled.h1`
 ${({theme})=> css`
-    margin: 1.6rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    align-content: space-between;
-    font-size: 1.4rem;
-    span{
-    margin-top: 5.6px;
-    }
-`}
-${media.lessThan('small')`
-  margin:0;
-  max-width:50%;
-  margin-top: 1.5rem;
-  img{
-    max-width: 80%
-  }
+  margin: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: space-between;
+  font-size: 1.4rem;
   span{
-    display:none;
+  margin-top: 5.6px;
   }
+  ${media.lessThan('small')`
+    margin:0;
+    margin-top: 1.5rem;
+    max-width: 80%
+    font-size:${theme.font.sizes.xsmall};
+    font-weight: ${theme.font.light};
+  `}
 `}
 `
 export const Content = styled.div`
   display:flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 24px;
+
+
+  padding: 2.4rem;
   margin: 0 0.8rem;
   img{
     cursor: pointer;
     width: 5.6rem;
     height: 5.6rem;
-    /* padding: 2rem; */
+    padding: 0.2rem;
   }
   ${media.lessThan('small')`
-      display: flex;
-      flex-direction: column;
       margin: 0;
       width:100%;
       height:100%;
+      padding: 1.2rem;
     `}
 `

@@ -4,8 +4,7 @@ import React from 'react'
 import * as S from './styles'
 import Button from '../../../components/Button'
 import MediaMatch from '../../../components/MediaMatch'
-import ModalSignUp from '../sign-up/ModalSignUp'
-// import ModalSuccess from '../ModalSuccess'
+import ModalSignUp from '../../../components/ModalSignUp'
 
 export const Feature = () => {
   const [modalSignupOpen, setModalSignupOpen] = React.useState<boolean>(false)

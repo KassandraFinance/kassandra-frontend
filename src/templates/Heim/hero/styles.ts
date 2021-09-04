@@ -24,35 +24,42 @@ export const MobileHero = styled.div`
   display: flex;
   flex-direction:column;
   text-align: center;
+  align-content: center;
 
   position: relative;
   padding: 0 16px;
   margin-bottom: 2.5rem;
 
-  @media (max-width: 1024px){
-    margin-top:25rem;
+  @media (max-width: 1024px) and (max-height: 1366px){
+    margin-top: 15rem;
   }
-  @media (max-width: 768px){
-    margin-top:15rem;
+  @media (max-width: 768px) and (max-height: 1024px){
+    margin-top:10rem;
   }
   @media (max-width: 540px){
     margin-top:3rem;
   }
   @media (max-width: 425px){
+    /* margin-top: 10rem; */
+  }
+  @media (max-width: 375px) and (min-width: 800px){
+    margin-top:15rem;
   }
   @media (max-width: 375px){
-    margin-top:10rem;
-    height: calc(100vh - 200px);
+    /* margin-top:15rem; */
   }
   @media (max-width: 360px){
-    margin-top:2rem;
-    height: calc(100vh - 200px);
+    margin-top:1rem;
+    /* height: calc(100vh - 200px); */
   }
   @media(max-width: 380px){
     /* height:auto; */
   }
   @media(max-width: 320px){
     margin-top:-2rem;
+  }
+  @media(max-width: 280px){
+    margin-top:2rem;
   }
 `
 export const SubTitle = styled.h3`
@@ -89,10 +96,33 @@ export const Image = styled.div`
     }
     img {
       max-width: 100%;
-      @media(max-width: 1040px){
-        max-width: 40%;
+      @media (max-width: 1024px) and (max-height: 1366px){
+        max-width: 60%;
+      }
+      @media (max-width: 768px){
+      }
+      @media (max-width: 540px){
+        max-width: 45%;
+      }
+      @media (max-width: 425px){
+        max-width: 60%;
+      }
+      @media (max-width: 425px) and(min-height: 800px){
+        max-width: 80%;
+      }
+      @media (max-width: 375px) and (min-height: 735px){
+        max-width:80%;
+      }
+      @media (max-width: 360px){
+        max-width:50%
+      }
+      @media(max-width: 380px){
+      }
+      @media(max-width: 320px){
+        max-width: 40%
       }
   }
+
 `
 export const ImageDesktop = styled.div`
     position: relative;

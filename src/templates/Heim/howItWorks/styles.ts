@@ -71,7 +71,7 @@ export const Text = styled.div`
     line-height:150%;
     z-index: 10;
 
-    @media (min-width: 770px){
+    @media (min-width: 800px){
     display:none
     }
     @media (max-width: 768px){
@@ -123,7 +123,7 @@ export const SignupWrapper = styled.div`
   img{
     margin-bottom: 2rem;
     max-width: 100%;
-    @media(max-width: 1024px){
+    @media(max-width: 800px){
       display:none;
     }
   }
@@ -131,6 +131,9 @@ export const SignupWrapper = styled.div`
     margin-top:65rem;
   }
   @media(max-width: 1300px){
+    margin-top:35rem;
+  }
+  @media(max-width: 1024px){
     margin-top:25rem;
   }
 

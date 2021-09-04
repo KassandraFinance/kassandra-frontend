@@ -25,6 +25,7 @@ export const BorderGradient = styled.div<IBorderGradientProps>`
   border-radius: 6px;
 
   padding: 2px;
+  width: 528px;
 
   position: fixed;
   top: 50%;
@@ -91,6 +92,7 @@ ${({theme})=> css`
     font-size: ${theme.font.sizes.xlarge};
     font-weight: ${theme.font.light};
     text-align: center;
+    margin: 0 4rem;
     margin-bottom: 4rem;
     @media(max-width: 560px){
       /* margin-bottom: 0; */

@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-no-bind */
 import React from 'react'
-import Button from '../../../../components/Button'
-import MediaMatch from '../../../../components/MediaMatch'
-import TextField from '../../../../components/TextField'
+import Button from '../Button'
+import MediaMatch from '../MediaMatch'
+import TextField from '../TextField'
 
 import {
   Backdrop,
@@ -47,13 +47,6 @@ export const ModalSignUp = ({
 
   const [formState, setFormState] = React.useState<IFormSignUpParams>({})
 
-
-  const validForm = (formState) => {
-    if (!formState[FORM_PARAM_KEYS_ENUM.email] || !formState[FORM_PARAM_KEYS_ENUM.name]) {
-      return false;
-    }
-    return true;
-  }
 
   const validForm = (formState) => {
     if (!formState[FORM_PARAM_KEYS_ENUM.email] || !formState[FORM_PARAM_KEYS_ENUM.name]) {

@@ -5,8 +5,8 @@ import React from 'react'
 import * as S from './styles'
 import Button from '../../../components/Button'
 import MediaMatch from '../../../components/MediaMatch'
-import ModalSocial from '../ModalSocial'
-import ModalSignUp from '../sign-up/ModalSignUp'
+import ModalSocial from '../../../components/ModalSocial'
+import ModalSignUp from '../../../components/ModalSignUp'
 
 export function Hero({ setModalOpen, setModalSignupOpen }) {
   return (
