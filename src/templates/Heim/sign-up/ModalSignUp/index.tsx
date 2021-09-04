@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { useState } from 'react'
+import axios from 'axios';
 import Button from '../../../../components/Button'
 import MediaMatch from '../../../../components/MediaMatch'
 import TextField from '../../../../components/TextField'
@@ -45,6 +46,7 @@ interface IOnChangeFormParam {
 export const ModalSignUp = ({
   modalSignupOpen,
   setModalSignupOpen,
+  setModalSuccessOpen,
    }: IModalSignUp) => {
 
   function handleCloseModal() {
@@ -55,17 +57,30 @@ export const ModalSignUp = ({
   const onSubmit = async (email, name) => {
     console.warn(formState.email)
     if (formState[FORM_PARAM_KEYS_ENUM.name] && formState[FORM_PARAM_KEYS_ENUM.email]) {
-      await fetch('https://beta.heimdall.land/subscribe/heim', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email: formState[FORM_PARAM_KEYS_ENUM.email], user: formState[FORM_PARAM_KEYS_ENUM.name] })
+      // await fetch('https://beta.heimdall.land/subscribe/heim', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Accept': 'application/json',
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify({ email: formState[FORM_PARAM_KEYS_ENUM.email], user: formState[FORM_PARAM_KEYS_ENUM.name] })
+      // });
+
+      await axios.post('https://beta.heimdall.land/subscribe/heim', {
+        email: formState[FORM_PARAM_KEYS_ENUM.email],
+        user: formState[FORM_PARAM_KEYS_ENUM.name],
       });
       // handleCloseModal();
     }
   }
+
+  const validForm = (formState) => {
+    if (!formState[FORM_PARAM_KEYS_ENUM.email] || !formState[FORM_PARAM_KEYS_ENUM.name]) {
+      return false;
+    }
+    return true;
+  }
+
   const onChangeFormParam = ({ key, value }: IOnChangeFormParam) => {
   setFormState({ ...formState, [key]: value })
   }
@@ -87,6 +102,16 @@ export const ModalSignUp = ({
               </span>
             </ModalText>
             <>
+            <iframe title="a" name="hiddenFrame" width="0" height="0" style={{display: 'none'}} />
+              <form
+                action="https://beta.heimdall.land/subscribe/heim"
+                method="POST"
+                target="hiddenFrame"
+                onSubmit={() => {
+                  handleCloseModal()
+                  setModalSuccessOpen(true);
+                }}
+              >
                 <TextField
                   name="user"
                   placeholder="Ex: John Doe"
@@ -117,15 +142,16 @@ export const ModalSignUp = ({
 
               {/* <S.ButtonWrapper> */}
               <MediaMatch greaterThan='small'>
-                <Button size="huge" onClick={() => onSubmit(formState.email, formState.name)}>
+                <Button size="huge" type='submit' disabled={!validForm(formState)}>
                   Sign me up!
                 </Button>
               </MediaMatch>
               <MediaMatch lessThan='small'>
-                <Button size="medium"  onClick={() => onSubmit(formState.email, formState.name)}>
+                <Button size="medium"  type='submit'>
                   Sign me up!
                 </Button>
               </MediaMatch>
+              </form>
             </>
           </Content>
           </BackgroundBlack>

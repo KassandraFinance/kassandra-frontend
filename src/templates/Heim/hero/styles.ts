@@ -19,15 +19,15 @@ export const DesktopHero = styled.div`
   `
 export const MobileHero = styled.div`
   max-width: 1520px;
-  height: calc(100vh);
+  height: calc(100vh - 160px);
+
   display: flex;
   flex-direction:column;
   text-align: center;
+
   position: relative;
   padding: 0 16px;
   margin-bottom: 2.5rem;
-
-
 
   @media (max-width: 1024px){
     margin-top:25rem;
@@ -37,11 +37,16 @@ export const MobileHero = styled.div`
   }
   @media (max-width: 540px){
     margin-top:3rem;
-
   }
   @media (max-width: 425px){
   }
   @media (max-width: 375px){
+    margin-top:10rem;
+    height: calc(100vh - 200px);
+  }
+  @media (max-width: 360px){
+    margin-top:2rem;
+    height: calc(100vh - 200px);
   }
   @media(max-width: 380px){
     /* height:auto; */
@@ -149,11 +154,11 @@ export const FloatImage = styled.div`
   ${media.lessThan('medium')`
     display: flex;
     flex-direction:row;
-    justify-content: flex-start;
-    bottom:0rem;
-    right: 0;
+    justify-content: flex-end;
+    bottom:2rem;
+    right: 1rem;
   img{
-    max-width: 30%;
+    max-width: 40%;
   };
   `}
 `

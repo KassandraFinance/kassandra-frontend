@@ -67,10 +67,11 @@ const wrapperModifiers = {
     &::before {
       border-left-color: ${darken(0.2, theme.colors.primary)};
       border-top-color: ${darken(0.2, theme.colors.primary)};
+
     }
     &:hover {
       background: #1821D8;
-      transition-delay: ${theme.transition.default};
+      transition: 1s ease-in-out;
 ;
     }
   `,
@@ -88,7 +89,6 @@ const wrapperModifiers = {
   backgroundBlack: (theme: DefaultTheme) => css`
     background: rgba(0,0,0,0.0);
     border: 0.1rem solid #26DBDB;
-    transition-duration: 300ms;
     &::before {
       border-left-color: #26DBDB;
       border-top-color: #26DBDB;
@@ -96,7 +96,8 @@ const wrapperModifiers = {
     &:hover {
       color:black;
       background: #26DBDB;
-      delay: 2s ease-in-out;
+      transition: 0.15s ease-in-out;
+      /* transition-delay: 5s ease-in-out; */
     }
   `
 }
