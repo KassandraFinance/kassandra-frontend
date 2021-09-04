@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-bind */
-import React from 'react'
+import React, { useState } from 'react'
 import Button from '../../../../components/Button'
 import MediaMatch from '../../../../components/MediaMatch'
 import TextField from '../../../../components/TextField'
@@ -50,7 +50,22 @@ export const ModalSignUp = ({
   function handleCloseModal() {
     setModalSignupOpen(false)
   }
+
   const [formState, setFormState] = React.useState<IFormSignUpParams>({})
+  const onSubmit = async (email, name) => {
+    console.warn(formState.email)
+    if (formState[FORM_PARAM_KEYS_ENUM.name] && formState[FORM_PARAM_KEYS_ENUM.email]) {
+      await fetch('https://beta.heimdall.land/subscribe/heim', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: formState[FORM_PARAM_KEYS_ENUM.email], user: formState[FORM_PARAM_KEYS_ENUM.name] })
+      });
+      // handleCloseModal();
+    }
+  }
   const onChangeFormParam = ({ key, value }: IOnChangeFormParam) => {
   setFormState({ ...formState, [key]: value })
   }
@@ -72,8 +87,6 @@ export const ModalSignUp = ({
               </span>
             </ModalText>
             <>
-              <iframe title="a" name="hiddenFrame" width="0" height="0" style={{display: 'none'}} />
-              <form action="https://beta.heimdall.land/subscribe/heim" method="POST" target="hiddenFrame">
                 <TextField
                   name="user"
                   placeholder="Ex: John Doe"
@@ -104,16 +117,15 @@ export const ModalSignUp = ({
 
               {/* <S.ButtonWrapper> */}
               <MediaMatch greaterThan='small'>
-                <Button size="huge" type='submit'>
+                <Button size="huge" onClick={() => onSubmit(formState.email, formState.name)}>
                   Sign me up!
                 </Button>
               </MediaMatch>
               <MediaMatch lessThan='small'>
-                <Button size="medium"  type='submit'>
+                <Button size="medium"  onClick={() => onSubmit(formState.email, formState.name)}>
                   Sign me up!
                 </Button>
               </MediaMatch>
-              </form>
             </>
           </Content>
           </BackgroundBlack>

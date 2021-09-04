@@ -25,8 +25,6 @@ export const BorderGradient = styled.div<IBorderGradientProps>`
   background: #2CE878;
   border-radius: 6px;
 
-  border-radius: 6px;
-
   padding: 2px;
 
   position: fixed;
@@ -96,7 +94,9 @@ font-size: 1.4rem;
 
 export const WrapperIcons = styled.h1`
 ${({theme})=> css`
-    margin: 1.6rem;
+    margin-right: 3.2rem;
+    margin-top: 1.6rem;
+    margin-top: 1.6rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -105,6 +105,7 @@ ${({theme})=> css`
     font-size: 1.4rem;
     span{
     margin-top: 5.6px;
+    font-weight: 400;
     }
 `}
 ${media.lessThan('small')`

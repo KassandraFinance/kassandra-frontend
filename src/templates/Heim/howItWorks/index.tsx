@@ -9,29 +9,23 @@ import SingUp from '../sign-up'
 export const HowItWorks = ({ setModalSignupOpen }) => (
 
     <>
-      <S.Text>
-        Delegate the token discovery to a decentralized organization with skin in the game, and <strong>automate your money </strong>managment to a data-driven backtested model.
-      </S.Text>
-      <S.Image>
-        <img src='./assets/crypto-funnel.svg' alt=''/>
-      </S.Image>
       <S.Container>
+        <S.Image>
+          <img src='./assets/crypto-funnel.svg' alt=''/>
+        </S.Image>
         <MediaMatch greaterThan='large'>
-          {/* <S.Text>
-          Delegate the token discovery to a decentralized organization with skin in the game, and <strong>automate your money </strong>managment to a data-driven backtested model.
-          </S.Text>
-          <S.Image>
-            <img src='./assets/crypto-funnel.svg' alt=''/>
-          </S.Image> */}
-          <SingUp/>
+          <S.SignupWrapper>
+            <img src='./assets/HeimIcon.svg' alt=''/>
+            <SingUp/>
+          </S.SignupWrapper>
         </MediaMatch>
         <MediaMatch lessThan='large'>
-          <S.ButtonWrapper>
+          <S.MobileSignUp>
             <img src='./assets/HeimIcon.svg' alt=''/>
-            <Button backgroundPrimary size="huge" onClick={() => setModalSignupOpen(true)}>
+            <Button backgroundPrimary size="large" onClick={() => setModalSignupOpen(true)}>
             Get early access
           </Button>
-          </S.ButtonWrapper>
+          </S.MobileSignUp>
         </MediaMatch>
       </S.Container>
     </>

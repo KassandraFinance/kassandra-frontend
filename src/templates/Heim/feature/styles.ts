@@ -8,7 +8,7 @@ ${()=>css`
     margin: auto;
     position: relative;
     padding: 8.5rem 3.2rem;
-    max-width: 132rem;
+    max-width: 121.6rem;
     justify-content: center;
     height: calc(100vh);
 
@@ -58,7 +58,7 @@ export const SubTitle = styled.h3`
 
 export const WrapperItems = styled.div`
   ${() => css `
-    max-width: 130rem;
+    max-width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     justify-content: space-between;
@@ -166,7 +166,7 @@ ${({theme})=> css `
     border: none;
     text-decoration: none;
     font-size: ${theme.font.sizes.medium};
-    font-weight: ${theme.font.light};
+    font-weight: ${theme.font.normal};
     cursor: pointer;
     ${media.lessThan("large")`
     font-size: ${theme.font.sizes.small};

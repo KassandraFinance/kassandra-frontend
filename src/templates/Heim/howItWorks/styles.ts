@@ -5,7 +5,8 @@ import media from "styled-media-query";
 export const Container = styled.div`
     position: relative;
     width:100%;
-    align-items: center;
+    /* align-items: center; */
+    /* justify-items: center; */
     /* max-width:1440px; */
     margin:auto;
 
@@ -28,11 +29,13 @@ export const SubTitle = styled.h3`
 `
 
 export const Image = styled.div`
-
+  position: static;
+  display: relative;
   img{
+    display: block;
     width: 100%;
     height: auto;
-    margin-bottom: -4rem;
+    /* margin-bottom: -4rem; */
   }
   ${media.lessThan("small")`
 
@@ -54,7 +57,7 @@ export const Link = styled.div `
 `
 
 
-export const ButtonWrapper = styled.div`
+export const MobileSignUp = styled.div`
   display: flex;
   flex-direction: column;
   position:absolute;
@@ -62,63 +65,84 @@ export const ButtonWrapper = styled.div`
   height: auto;
   transform: translateX(-50%);
   left: 50%;
-  margin-top: -55%;
+  margin-top: -50%;
   /* max-width: 100%; */
   img{
     margin-bottom: 2rem;
     max-width: 35%;
   }
-  @media(min-width: 700px ){
+  @media(min-width: 1000px ){
     img{
       max-width: 50%;
+      margin-bottom: 5rem;
     }
   }
 `
 
 export const Text = styled.div`
   ${({theme})=> css`
-    position:absolute;
+    position:relative;
     text-align: center;
-    margin: 30rem 40rem;
-    font-size: ${theme.font.sizes.xlarge};
+    max-width:800px;
+    margin:auto;
+    font-size: 40px;
     font-weight: ${theme.font.light};
     line-height:150%;
     @media (max-width: 1920px) {
-      margin: 25rem 45rem;
+      /* margin: 250px 450px; */
     }
     @media (max-width: 1440px){
     font-size: ${theme.font.sizes.large};
-    margin: 18rem 30rem;
+    /* margin: 180px 300px; */
     }
     @media (max-width: 1024px){
     font-size: ${theme.font.sizes.large};
     font-weight: ${theme.font.light};
-    margin: 13rem 20rem;
+    /* margin: 13rem 20rem; */
     line-height:100%;
     }
     @media (max-width: 768px){
     font-size: ${theme.font.sizes.medium};
     font-weight: ${theme.font.light};
-    margin: 12rem 15rem;
+    /* margin: 12rem 15rem; */
     line-height:100%;
     }
     @media (max-width: 540px){
     font-size: ${theme.font.sizes.small};
     font-weight: ${theme.font.light};
-    margin: 8rem ;
+    /* margin: 8rem ; */
     line-height:100%;
     }
     @media (max-width: 425px){
     font-size: ${theme.font.sizes.xsmall};
     font-weight: ${theme.font.light};
-    margin: 5rem;
+    /* margin: 5rem; */
     line-height:100%;
     }
     @media (max-width: 375px){
     font-size: ${theme.font.sizes.xsmall};
     font-weight: ${theme.font.light};
-    margin: 4.9rem;
+    /* margin: 4.9rem; */
     line-height:100%;
     }
   `}
+`
+export const SignupWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  position:absolute;
+  align-items:center;
+  transform: translateX(-50%);
+  left: 48%;
+  top: 50%;
+  margin-top:45rem;
+  /* max-width: 100%; */
+  img{
+    margin-bottom: 2rem;
+    max-width: 100%;
+  }
+  @media(min-width: 1900px){
+  margin-top:65rem;
+
+  }
 `

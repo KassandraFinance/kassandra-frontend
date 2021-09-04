@@ -13,13 +13,13 @@ export const WrapperContainer = styled.div`
   `
 
 export const Container = styled.div`
-  position:absolute;
+  /* position:absolute; */
   width:auto;
   height: auto;
   align-content: center;
-  transform: translateX(-50%);
+  margin-top: 5.3rem;
   left: 50%;
-  margin-top: -45%;
+
   ${media.between('medium','large')`
   /* margin-top: 100%; */
 

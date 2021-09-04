@@ -5,12 +5,12 @@ import * as S from './styles'
 import Button from '../../../components/Button'
 import MediaMatch from '../../../components/MediaMatch'
 import ModalSignUp from '../sign-up/ModalSignUp'
-import ModalSuccess from '../ModalSuccess'
+// import ModalSuccess from '../ModalSuccess'
 
 
 export const Feature = () => {
   const [modalSignupOpen, setModalSignupOpen] = React.useState<boolean>(false)
-  const [modalSuccessOpen, setModalSuccessOpen] = React.useState<boolean>(false)
+  // const [modalSuccessOpen, setModalSuccessOpen] = React.useState<boolean>(false)
 
   return(
 <>
@@ -60,16 +60,16 @@ into the blockchain every day.</S.ItemSubtitle>
         <img src="assets/backtestGraph.svg" alt=""/>
       <S.ButtonWrapper>
         <MediaMatch greaterThan="large" >
-        <Button backgroundPrimary size="large" onClick={() => setModalSuccessOpen(true)}>
-        {/* <Button backgroundPrimary size="large" onClick={() => setModalSignupOpen(true)}> */}
+        {/* <Button backgroundPrimary size="large" onClick={() => setModalSuccessOpen(true)}> */}
+        <Button backgroundPrimary size="large" onClick={() => setModalSignupOpen(true)}>
             Get early access
           </Button>
         </MediaMatch>
       </S.ButtonWrapper>
       <S.ButtonWrapper>
         <MediaMatch lessThan="large">
-            <Button backgroundPrimary size="large" onClick={() => setModalSuccessOpen(true)}>
-            {/* <Button backgroundPrimary size="medium" onClick={() => setModalSignupOpen(true)}> */}
+            {/* <Button backgroundPrimary size="large" onClick={() => setModalSuccessOpen(true)}> */}
+            <Button backgroundPrimary size="medium" onClick={() => setModalSignupOpen(true)}>
               Get early access
             </Button>
         </MediaMatch>
@@ -78,14 +78,14 @@ into the blockchain every day.</S.ItemSubtitle>
         <a href="https://medium.com/heimdall-research-crypto/the-heimdall-social-index-9595fdfb9ddc">Check out the full research at our Medium  <span>&#8594;</span> </a>
       </S.Link>
     </S.GraphWrapper>
-    <ModalSuccess
+    {/* <ModalSuccess
         modalSuccessOpen={modalSuccessOpen}
         setModalSuccessOpen={setModalSuccessOpen}
-      />
-    {/* <ModalSignUp
+      /> */}
+    <ModalSignUp
         modalSignupOpen={modalSignupOpen}
         setModalSignupOpen={setModalSignupOpen}
-      /> */}
+      />
 </>
 
   )

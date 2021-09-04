@@ -102,10 +102,11 @@ export const ItemTitle = styled.div`
   font-weight: ${theme.font.bold};
   line-height: 120%;
   margin-bottom: ${theme.spacings.small};
-  text-align:center;
 
     ${media.lessThan("large")`
     font-size: ${theme.font.sizes.medium};
+    text-align: center;
+
     `}
     /* ${media.greaterThan("medium")`
     font-size: ${theme.font.sizes.xlarge};
@@ -303,5 +304,6 @@ export const Divider = styled.div`
 
   `}
 `
+
 
 

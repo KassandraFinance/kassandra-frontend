@@ -39,7 +39,7 @@ const ModalSuccess = ({
             <button type="button" onClick={() => setModalSuccessOpen(false)}><img src="assets/close.svg" alt=""/> </button>
           </InterBackground>
           <Content>
-          <ModalText>
+          <ModalText style={{fontWeight:"300"}}>
             <span>Keep in touch with the community:</span>
             </ModalText>
             <div style={{ display: 'flex' }}>
