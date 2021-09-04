@@ -6,6 +6,7 @@ import Feature from './feature'
 import SocialProof from './socialProof'
 import ModalSocial from './ModalSocial'
 import ModalSignUp from './sign-up/ModalSignUp'
+import ModalSuccess from './ModalSuccess'
 
 import * as S from './styles'
 import HowItWorks from './howItWorks'
@@ -20,20 +21,29 @@ const Heim = () => {
 
   const [modalOpen, setModalOpen] = React.useState<boolean>(false)
   const [modalSignupOpen, setModalSignupOpen] = React.useState<boolean>(false)
+  const [modalSuccessOpen, setModalSuccessOpen] = React.useState<boolean>(false)
 
   return (
     <S.Container>
-      <Hero setModalOpen={setModalOpen} setModalSignupOpen={setModalSignupOpen}/>
-      <Feature/>
-      <SocialProof />
-      <HowItWorks setModalSignupOpen={setModalSignupOpen} />
-      <ModalSocial
-        modalOpen={modalOpen}
+      <Hero
         setModalOpen={setModalOpen}
+        setModalSignupOpen={setModalSignupOpen}
       />
-        <ModalSignUp
+      <Feature />
+      <SocialProof />
+      <HowItWorks
+        setModalSignupOpen={setModalSignupOpen}
+        setModalSuccessOpen={setModalSuccessOpen}
+      />
+      <ModalSocial modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      <ModalSignUp
         modalSignupOpen={modalSignupOpen}
         setModalSignupOpen={setModalSignupOpen}
+        setModalSuccessOpen={setModalSuccessOpen}
+      />
+      <ModalSuccess
+        modalSuccessOpen={modalSuccessOpen}
+        setModalSuccessOpen={setModalSuccessOpen}
       />
     </S.Container>
   )

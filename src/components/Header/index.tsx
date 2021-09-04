@@ -5,10 +5,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-
 import { Menu2 as MenuIcon } from '@styled-icons/remix-fill/Menu2'
 import { Close as CloseIcon } from '@styled-icons/material-outlined/Close'
-
 
 import MediaMatch from '../MediaMatch'
 import Button from '../Button'
@@ -17,7 +15,6 @@ import * as S from './styles'
 import useConnect from '../../hooks/useConnect'
 import substr from '../../utils/substr'
 import web3 from '../../utils/web3'
-
 
 export type MenuProps = {
   username?: string
@@ -29,7 +26,6 @@ const Header = () => {
   const [isOpen, setIsOpen] = React.useState(false)
   const { asPath } = useRouter()
 
-
   return (
     <S.Wrapper>
       <MediaMatch lessThan="large">
@@ -40,83 +36,79 @@ const Header = () => {
 
       <S.LogoWrapper>
         <Link href="/" passHref>
-          {asPath === '/heim'
-            ? <img src="./assets/HeimLogoMenu.svg"
-            alt="Logo menu"
-          />
-        : <img src="./assets/logo-header.svg"
-          alt="Logo menu"
-          />}
+          {asPath === '/heim' ? (
+            <img src="./assets/HeimLogoMenu.svg" alt="Logo menu" />
+          ) : (
+            <img src="./assets/logo-header.svg" alt="Logo menu" />
+          )}
         </Link>
       </S.LogoWrapper>
 
       <MediaMatch greaterThan="large">
         <S.MenuNav>
-        {asPath === '/' ?
-          <Link href="/heim" passHref>
-            <S.MenuLink> HEIM Index </S.MenuLink>
-          </Link>
-        : <Link href="/" passHref><S.MenuLink> Home </S.MenuLink></Link>}
-
-
-          <Link href="/" passHref>
-            <S.MenuLinkDisable>
-              Buy $Heim
-            </S.MenuLinkDisable>
-          </Link>
+          {asPath === '/' ? (
+            <Link href="/heim" passHref>
+              <S.MenuLink> HEIM Index </S.MenuLink>
+            </Link>
+          ) : (
+            <Link href="/" passHref>
+              <S.MenuLink> Home </S.MenuLink>
+            </Link>
+          )}
 
           <Link href="/" passHref>
-            <S.MenuLinkDisable>
-              Stake/Farm
-            </S.MenuLinkDisable>
+            <S.MenuLinkDisable>Buy $Heim</S.MenuLinkDisable>
           </Link>
 
           <Link href="/" passHref>
-            <S.MenuLinkDisable>
-              Vote
-            </S.MenuLinkDisable>
+            <S.MenuLinkDisable>Stake/Farm</S.MenuLinkDisable>
           </Link>
 
           <Link href="/" passHref>
-            <S.MenuLinkDisable>
-              About
-            </S.MenuLinkDisable>
+            <S.MenuLinkDisable>Vote</S.MenuLinkDisable>
           </Link>
 
-          {web3.currentProvider !== null ?
-          isLogged ?
-            <S.ButtonConnectWallet
-              type="button"
-              style={{ backgroundColor: '#26DBDB', color: '#211426' }}
-            >
-              {substr(userWalletAddress)}
-            </S.ButtonConnectWallet>
-            :
-            <S.ButtonConnectWallet type="button" onClick={connect}>
-              Connect Wallet
-            </S.ButtonConnectWallet>
-          :
-          <S.LinkInstallMetaMask
-            href="https://metamask.io/download.html"
-            target="_blank"
+          <Link href="/" passHref>
+            <S.MenuLinkDisable>About</S.MenuLinkDisable>
+          </Link>
+
+          {web3.currentProvider !== null ? (
+            isLogged ? (
+              <S.ButtonConnectWallet
+                type="button"
+                style={{ backgroundColor: '#26DBDB', color: '#211426' }}
+              >
+                {substr(userWalletAddress)}
+              </S.ButtonConnectWallet>
+            ) : (
+              <S.ButtonConnectWallet type="button" onClick={connect}>
+                Connect Wallet
+              </S.ButtonConnectWallet>
+            )
+          ) : (
+            <S.LinkInstallMetaMask
+              href="https://metamask.io/download.html"
+              target="_blank"
             >
               Install MetaMask!
-          </S.LinkInstallMetaMask>
-        }
+            </S.LinkInstallMetaMask>
+          )}
         </S.MenuNav>
       </MediaMatch>
-
-
 
       <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen}>
         <CloseIcon aria-label="Close Menu" onClick={() => setIsOpen(false)} />
 
         <S.MenuNav>
-          {asPath === '/' ?
+          {asPath === '/' ? (
             <Link href="/heim" passHref>
               <S.MenuLink> HEIM Index </S.MenuLink>
             </Link>
-          : <Link href="/" passHref><S.MenuLink> Home </S.MenuLink></Link>}
+          ) : (
+            <Link href="/" passHref>
+              <S.MenuLink> Home </S.MenuLink>
+            </Link>
+          )}
           <Link href="/" passHref>
             <S.MenuLinkDisable>Buy $Heim</S.MenuLinkDisable>
           </Link>
@@ -129,26 +121,27 @@ const Header = () => {
           <Link href="/" passHref>
             <S.MenuLinkDisable>About</S.MenuLinkDisable>
           </Link>
-          {web3.currentProvider !== null ?
-          isLogged ?
-            <S.ButtonConnectWallet
-              type="button"
-              style={{ backgroundColor: '#26DBDB', color: '#211426' }}
-            >
-              {substr(userWalletAddress)}
-            </S.ButtonConnectWallet>
-            :
-            <S.ButtonConnectWallet type="button" onClick={connect}>
-              Connect Wallet
-            </S.ButtonConnectWallet>
-          :
-          <S.LinkInstallMetaMask
-            href="https://metamask.io/download.html"
-            target="_blank"
+          {web3.currentProvider !== null ? (
+            isLogged ? (
+              <S.ButtonConnectWallet
+                type="button"
+                style={{ backgroundColor: '#26DBDB', color: '#211426' }}
+              >
+                {substr(userWalletAddress)}
+              </S.ButtonConnectWallet>
+            ) : (
+              <S.ButtonConnectWallet type="button" onClick={connect}>
+                Connect Wallet
+              </S.ButtonConnectWallet>
+            )
+          ) : (
+            <S.LinkInstallMetaMask
+              href="https://metamask.io/download.html"
+              target="_blank"
             >
               Install MetaMask!
-          </S.LinkInstallMetaMask>
-        }
+            </S.LinkInstallMetaMask>
+          )}
         </S.MenuNav>
       </S.MenuFull>
     </S.Wrapper>

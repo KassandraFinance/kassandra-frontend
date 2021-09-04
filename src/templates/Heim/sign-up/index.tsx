@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import Link from 'next/link'
-
 // eslint-disable-next-line import/extensions
 import * as S from './styles'
 import Button from '../../../components/Button'
@@ -24,23 +22,31 @@ interface IOnChangeFormParam {
   key: FORM_PARAM_KEYS_ENUM
   value: string
 }
-export const SingUp = () => {
+
+export const SingUp = ({  setModalSuccessOpen}) => {
   const [formState, setFormState] = useState<IFormSignUpParams>({})
   const onChangeFormParam = ({ key, value }: IOnChangeFormParam) => {
     setFormState({ ...formState, [key]: value })
   }
+  const validForm = (formState) => {
+    if (!formState[FORM_PARAM_KEYS_ENUM.email] || !formState[FORM_PARAM_KEYS_ENUM.name]) {
+      return false;
+    }
+    return true;
+  }
   return(
-    // <S.WrapperContainer>
+
       <S.Container>
-        {/* <S.Image>
-          <img src='./assets/HeimIcon.png' alt=''/>
-        </S.Image> */}
         <S.WrapperText>
           <S.Title>Time to beat the market</S.Title>
           <S.SubTitle>Join the $KACY community</S.SubTitle>
         </S.WrapperText>
         <iframe title="a" name="hiddenFrame" width="0" height="0" style={{display: 'none'}} />
-        <form action="https://beta.heimdall.land/subscribe/heim" method="POST" target="hiddenFrame">
+        <form id='sign-up' action="https://beta.heimdall.land/subscribe/heim" method="POST" target="hiddenFrame" onSubmit={
+          (e) => {
+            setFormState({});
+            setModalSuccessOpen(true);
+          }}>
           <TextField
             name="user"
             placeholder="Ex: John Doe"
@@ -54,7 +60,6 @@ export const SingUp = () => {
               })
             }
           />
-
           <TextField
             name="email"
             placeholder="Ex: username@email.com"
@@ -71,12 +76,12 @@ export const SingUp = () => {
 
         {/* <S.ButtonWrapper> */}
         <MediaMatch greaterThan='small'>
-          <Button size="huge" type='submit' fullWidth>
+          <Button size="huge" type='submit' fullWidth disabled={!validForm(formState)}>
             Sign me up!
           </Button>
         </MediaMatch>
         <MediaMatch lessThan='small'>
-          <Button size="medium"  type='submit' fullWidth>
+          <Button size="medium"  type='submit' fullWidth disabled={!validForm(formState)}>
             Sign me up!
           </Button>
         </MediaMatch>

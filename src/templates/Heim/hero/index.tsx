@@ -8,42 +8,68 @@ import MediaMatch from '../../../components/MediaMatch'
 import ModalSocial from '../ModalSocial'
 import ModalSignUp from '../sign-up/ModalSignUp'
 
-export function Hero({ setModalOpen, setModalSignupOpen, }) {
+export function Hero({ setModalOpen, setModalSignupOpen }) {
   return (
     <>
       <S.Container>
         <MediaMatch greaterThan="large">
           <S.DesktopHero>
             <div>
-              <S.Title>Get exposure to the hottest communities in the market.</S.Title>
-              <S.SubTitle>Introducing a single asset that tracks the performance of the cryptocurrencies with the most solid and engaged communities</S.SubTitle>
+              <S.Title>
+                Get exposure to the hottest communities in the market.
+              </S.Title>
+              <S.SubTitle>
+                Introducing a single asset that tracks the performance of the
+                cryptocurrencies with the most solid and engaged communities
+              </S.SubTitle>
               <S.ButtonWrapper>
-                <Button backgroundPrimary size="large" onClick={() => setModalSignupOpen(true)}>
+                <Button
+                  backgroundPrimary
+                  size="large"
+                  onClick={() => setModalSignupOpen(true)}
+                >
                   Get early access
                 </Button>
-                <Button size="large" backgroundBlack onClick={() => setModalOpen(true)}>
+                <Button
+                  size="large"
+                  backgroundBlack
+                  onClick={() => setModalOpen(true)}
+                >
                   Join the community
                 </Button>
               </S.ButtonWrapper>
             </div>
-          <S.ImageDesktop>
-            <img src="assets/HeimCurrency.svg" alt="" />
-          </S.ImageDesktop>
+            <S.ImageDesktop>
+              <img src="assets/HeimCurrency.svg" alt="" />
+            </S.ImageDesktop>
           </S.DesktopHero>
         </MediaMatch>
 
         <MediaMatch lessThan="large">
           <S.MobileHero>
-            <S.Title>Get exposure to the hottest communities in the market.</S.Title>
+            <S.Title>
+              Get exposure to the hottest communities in the market.
+            </S.Title>
             <S.Image>
               <img src="assets/HeimCurrency.svg" alt="" />
             </S.Image>
-            <S.SubTitle>Introducing a single asset that tracks the performance of the cryptocurrencies with the most solid and engaged communities</S.SubTitle>
+            <S.SubTitle>
+              Introducing a single asset that tracks the performance of the
+              cryptocurrencies with the most solid and engaged communities
+            </S.SubTitle>
             <S.ButtonWrapper>
-              <Button backgroundPrimary size="huge" onClick={() => setModalSignupOpen(true)}>
+              <Button
+                backgroundPrimary
+                size="huge"
+                onClick={() => setModalSignupOpen(true)}
+              >
                 Get early access
               </Button>
-              <Button size="huge" backgroundBlack  onClick={() => setModalOpen(true)}>
+              <Button
+                size="huge"
+                backgroundBlack
+                onClick={() => setModalOpen(true)}
+              >
                 Join the community
               </Button>
             </S.ButtonWrapper>
@@ -54,9 +80,7 @@ export function Hero({ setModalOpen, setModalSignupOpen, }) {
         </S.FloatImage>
       </S.Container>
     </>
-
   )
 }
-
 
 export default Hero

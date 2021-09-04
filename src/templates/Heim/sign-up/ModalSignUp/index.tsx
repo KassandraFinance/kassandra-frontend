@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-bind */
-import React, { useState } from 'react'
+import React from 'react'
 import Button from '../../../../components/Button'
 import MediaMatch from '../../../../components/MediaMatch'
 import TextField from '../../../../components/TextField'
@@ -10,20 +10,13 @@ import {
   BackgroundBlack,
   Content,
   InterBackground,
-  // Main,
-  // Amount,
-  // Line,
-  // ButtonContainer,
-  // ConfirmButton,
-  // GetKacyButton,
   ModalText,
-  WrapperButton,
-  WrapperIcons
  } from './styles'
 
  interface IModalSocialProps {
-  modalSignupOpen: boolean
+  modalSignupOpen: React.Dispatch<React.SetStateAction<boolean>>
   setModalSignupOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setModalSuccessOpen: React.Dispatch<React.SetStateAction<boolean>>
 
 }
 interface IFormSignUpParams {
@@ -45,27 +38,23 @@ interface IOnChangeFormParam {
 export const ModalSignUp = ({
   modalSignupOpen,
   setModalSignupOpen,
-   }: IModalSignUp) => {
+  setModalSuccessOpen,
+   }: IModalSocialProps) => {
 
   function handleCloseModal() {
     setModalSignupOpen(false)
   }
 
   const [formState, setFormState] = React.useState<IFormSignUpParams>({})
-  const onSubmit = async (email, name) => {
-    console.warn(formState.email)
-    if (formState[FORM_PARAM_KEYS_ENUM.name] && formState[FORM_PARAM_KEYS_ENUM.email]) {
-      await fetch('https://beta.heimdall.land/subscribe/heim', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email: formState[FORM_PARAM_KEYS_ENUM.email], user: formState[FORM_PARAM_KEYS_ENUM.name] })
-      });
-      // handleCloseModal();
+
+
+  const validForm = (formState) => {
+    if (!formState[FORM_PARAM_KEYS_ENUM.email] || !formState[FORM_PARAM_KEYS_ENUM.name]) {
+      return false;
     }
+    return true;
   }
+
   const onChangeFormParam = ({ key, value }: IOnChangeFormParam) => {
   setFormState({ ...formState, [key]: value })
   }
@@ -87,6 +76,17 @@ export const ModalSignUp = ({
               </span>
             </ModalText>
             <>
+            <iframe title="a" name="hiddenFrame" width="0" height="0" style={{display: 'none'}} />
+              <form
+                action="https://beta.heimdall.land/subscribe/heim"
+                method="POST"
+                target="hiddenFrame"
+                onSubmit={() => {
+                  setFormState({});
+                  handleCloseModal();
+                  setModalSuccessOpen(true);
+                }}
+              >
                 <TextField
                   name="user"
                   placeholder="Ex: John Doe"
@@ -117,15 +117,16 @@ export const ModalSignUp = ({
 
               {/* <S.ButtonWrapper> */}
               <MediaMatch greaterThan='small'>
-                <Button size="huge" onClick={() => onSubmit(formState.email, formState.name)}>
+                <Button size="huge" type='submit' disabled={!validForm(formState)}>
                   Sign me up!
                 </Button>
               </MediaMatch>
               <MediaMatch lessThan='small'>
-                <Button size="medium"  onClick={() => onSubmit(formState.email, formState.name)}>
+                <Button size="medium"  type='submit'>
                   Sign me up!
                 </Button>
               </MediaMatch>
+              </form>
             </>
           </Content>
           </BackgroundBlack>
