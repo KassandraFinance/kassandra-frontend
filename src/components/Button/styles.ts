@@ -22,7 +22,7 @@ const wrapperModifiers = {
   `,
   medium: (theme: DefaultTheme) => css`
     height: 4rem;
-    font-size: ${theme.font.sizes.medium};
+    font-size: ${theme.font.sizes.small};
     padding: ${theme.spacings.xsmall} ${theme.spacings.medium};
   `,
   large: (theme: DefaultTheme) => css`
@@ -32,8 +32,7 @@ const wrapperModifiers = {
 
   `,
   huge: (theme: DefaultTheme) => css`
-    width: 100%;
-    height:4.5rem;
+    height:4.4rem;
     font-size: ${theme.font.sizes.medium};
     padding: ${theme.spacings.xsmall} ${theme.spacings.medium};
   `,

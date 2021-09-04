@@ -13,16 +13,16 @@ export const HowItWorks = ({ setModalSignupOpen }) => (
         <S.Image>
           <img src='./assets/crypto-funnel.svg' alt=''/>
         </S.Image>
-        <MediaMatch greaterThan='large'>
+        <MediaMatch greaterThan='medium'>
           <S.SignupWrapper>
             <img src='./assets/HeimIcon.svg' alt=''/>
             <SingUp/>
           </S.SignupWrapper>
         </MediaMatch>
-        <MediaMatch lessThan='large'>
+        <MediaMatch lessThan='medium'>
           <S.MobileSignUp>
             <img src='./assets/HeimIcon.svg' alt=''/>
-            <Button backgroundPrimary size="large" onClick={() => setModalSignupOpen(true)}>
+            <Button backgroundPrimary size="small" onClick={() => setModalSignupOpen(true)} fullWidth>
             Get early access
           </Button>
           </S.MobileSignUp>

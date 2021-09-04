@@ -3,11 +3,11 @@ import media from "styled-media-query";
 
 import * as ButtonStyles from '../../../components/Button/styles'
 
-export const Container = styled.div`
+export const Container = styled.div``
 
+export const DesktopHero = styled.div`
   overflow:hidden;
   max-width: 1520px;
-  display: flex;
   margin: auto;
   height: calc(100vh - 110px);
   position: relative;
@@ -16,19 +16,38 @@ export const Container = styled.div`
   grid-template-columns: 2.5fr 2.5fr;
   justify-content: space-between;
   align-items: center;
-  ${media.lessThan('large')`
-      display: flex;
-      flex-direction:column;
-      text-align: center;
-      position: relative;
-      padding: 0 16px;
-      /* justify-content: center; */
-      margin-bottom: 2.5rem;
-      /* padding-left: 50px; */
-      height: calc(100vh - 200px);
-  `}
+  `
+export const MobileHero = styled.div`
+  max-width: 1520px;
+  height: calc(100vh);
+  display: flex;
+  flex-direction:column;
+  text-align: center;
+  position: relative;
+  padding: 0 16px;
+  margin-bottom: 2.5rem;
+
+
+
+  @media (max-width: 1024px){
+    margin-top:25rem;
+  }
+  @media (max-width: 768px){
+    margin-top:15rem;
+  }
+  @media (max-width: 540px){
+    margin-top:3rem;
+
+  }
+  @media (max-width: 425px){
+  }
+  @media (max-width: 375px){
+  }
   @media(max-width: 380px){
-    height:auto;
+    /* height:auto; */
+  }
+  @media(max-width: 320px){
+    margin-top:-2rem;
   }
 `
 export const SubTitle = styled.h3`
@@ -50,11 +69,10 @@ export const Image = styled.div`
     justify-content: flex-end;
     right: -6.5rem;
     margin-top:-2.2rem;
-    ${media.lessThan('large')`
+
+    @media(max-width: 1040px){
       right: -4.25rem;
       margin-top:-2rem;
-    `}
-    @media(max-width: 1040px){
 
       position: relative;
       display:flex;
@@ -66,9 +84,9 @@ export const Image = styled.div`
     }
     img {
       max-width: 100%;
-      ${media.lessThan('large')`
-      max-width: 40%;
-    `}
+      @media(max-width: 1040px){
+        max-width: 40%;
+      }
   }
 `
 export const ImageDesktop = styled.div`
@@ -96,7 +114,7 @@ export const ImageDesktop = styled.div`
     `}
     img {
       max-width: 95%;
-      ${media.lessThan('large')`
+      ${media.lessThan('medium')`
       display: none;
       visibility: hidden;
     `}

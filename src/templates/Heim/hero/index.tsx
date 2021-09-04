@@ -10,29 +10,30 @@ import ModalSignUp from '../sign-up/ModalSignUp'
 
 export function Hero({ setModalOpen, setModalSignupOpen, }) {
   return (
-      <>
+    <>
       <S.Container>
         <MediaMatch greaterThan="large">
-          {/* <a href="https://twitter.com/dao_kassandra" target="_blank" rel="noopener noreferrer">Coming soon...</a> */}
+          <S.DesktopHero>
+            <div>
+              <S.Title>Get exposure to the hottest communities in the market.</S.Title>
+              <S.SubTitle>Introducing a single asset that tracks the performance of the cryptocurrencies with the most solid and engaged communities</S.SubTitle>
+              <S.ButtonWrapper>
+                <Button backgroundPrimary size="large" onClick={() => setModalSignupOpen(true)}>
+                  Get early access
+                </Button>
+                <Button size="large" backgroundBlack onClick={() => setModalOpen(true)}>
+                  Join the community
+                </Button>
+              </S.ButtonWrapper>
+            </div>
+          <S.ImageDesktop>
+            <img src="assets/HeimCurrency.svg" alt="" />
+          </S.ImageDesktop>
+          </S.DesktopHero>
+        </MediaMatch>
 
-                  <S.Title>Get exposure to the hottest communities in the market.</S.Title>
-                  <S.SubTitle>Introducing a single asset that tracks the performance of the cryptocurrencies with the most solid and engaged communities</S.SubTitle>
-
-                  <S.ButtonWrapper>
-                    <Button backgroundPrimary size="large" onClick={() => setModalSignupOpen(true)}>
-                      Get early access
-                    </Button>
-                    <Button size="large" backgroundBlack onClick={() => setModalOpen(true)}>
-                      Join the community
-                    </Button>
-                  </S.ButtonWrapper>
-
-            </MediaMatch>
-                <S.ImageDesktop>
-                  <img src="assets/HeimCurrency.svg" alt="" />
-                </S.ImageDesktop>
-
-            <MediaMatch lessThan="large">
+        <MediaMatch lessThan="large">
+          <S.MobileHero>
             <S.Title>Get exposure to the hottest communities in the market.</S.Title>
             <S.Image>
               <img src="assets/HeimCurrency.svg" alt="" />
@@ -46,63 +47,12 @@ export function Hero({ setModalOpen, setModalSignupOpen, }) {
                 Join the community
               </Button>
             </S.ButtonWrapper>
-
-          </MediaMatch>
-        {/* <S.Image>
-          <img src="assets/HeimCurrency.svg" alt="" />
-        </S.Image> */}
+          </S.MobileHero>
+        </MediaMatch>
         <S.FloatImage>
           <img src="assets/Certik.svg" alt="" />
         </S.FloatImage>
-
-        {/* <S.Modal isOpen={isOpen} aria-label="modal">
-
-          <S.ModalHeading>
-            <S.ModalText>
-              Connect with us
-            </S.ModalText>
-            <S.Close
-              role="button"
-              aria-label="close modal"
-              onClick={() => setIsOpen(false)}
-              >
-              <Close size={40} />
-            </S.Close>
-          </S.ModalHeading>
-          <S.Content>
-          <S.WrapperIcons>
-            <a href="https://discord.gg/2uGEvqNnuq" target="_blank" rel="noopener noreferrer">
-              <img src="assets/discord-icon.svg" alt="" />
-            </a>
-            Discord
-          </S.WrapperIcons>
-          <S.WrapperIcons>
-            <a href="https://t.me/KassandraDAO" target="_blank" rel="noopener noreferrer">
-                <img src="assets/telegram-icon.svg" alt="" />
-            </a>
-            Telegram
-          </S.WrapperIcons>
-          <S.WrapperIcons>
-            <a href="https://github.com/KassandraFinance" target="_blank" rel="noopener noreferrer">
-                <img src="assets/github-icon.svg" alt="" />
-            </a>
-            GitHub
-          </S.WrapperIcons>
-          <S.WrapperIcons>
-            <a href="https://kassandrafoundation.medium.com/" target="_blank" rel="noopener noreferrer">
-                <img src="assets/medium-icon.svg" alt="" />
-            </a>
-            Medium
-          </S.WrapperIcons>
-          <S.WrapperIcons>
-            <a href="https://twitter.com/dao_kassandra" target="_blank" rel="noopener noreferrer">
-                <img src="assets/twitter-icon.svg" alt="" />
-            </a>
-                Twitter
-            </S.WrapperIcons>
-          </S.Content>
-        </S.Modal> */}
-            </S.Container>
+      </S.Container>
     </>
 
   )

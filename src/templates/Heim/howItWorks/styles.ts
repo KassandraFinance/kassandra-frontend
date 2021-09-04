@@ -59,6 +59,7 @@ export const Link = styled.div `
 
 export const MobileSignUp = styled.div`
   display: flex;
+  width:20rem;
   flex-direction: column;
   position:absolute;
   align-items:center;
@@ -142,7 +143,10 @@ export const SignupWrapper = styled.div`
     max-width: 100%;
   }
   @media(min-width: 1900px){
-  margin-top:65rem;
-
+    margin-top:65rem;
   }
+  @media(max-width: 1300px){
+    margin-top:25rem;
+  }
+
 `

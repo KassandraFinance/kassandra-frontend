@@ -177,7 +177,7 @@ export const MenuFull = styled.nav<MenuFullProps>`
       transition: transform 0.3s ease-in-out;
     }
     ${MenuLinkDisable} {
-      color: ${theme.colors.lightgray};
+      color: ${theme.colors.lightGray};
       font-weight: ${theme.font.bold};
       font-size: ${theme.font.sizes.medium};
       margin-bottom: ${theme.spacings.small};

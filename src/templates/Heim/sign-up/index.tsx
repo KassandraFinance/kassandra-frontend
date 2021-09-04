@@ -71,12 +71,12 @@ export const SingUp = () => {
 
         {/* <S.ButtonWrapper> */}
         <MediaMatch greaterThan='small'>
-          <Button size="huge" type='submit'>
+          <Button size="huge" type='submit' fullWidth>
             Sign me up!
           </Button>
         </MediaMatch>
         <MediaMatch lessThan='small'>
-          <Button size="medium"  type='submit'>
+          <Button size="medium"  type='submit' fullWidth>
             Sign me up!
           </Button>
         </MediaMatch>
