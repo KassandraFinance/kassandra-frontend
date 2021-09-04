@@ -55,6 +55,13 @@ export const ModalSignUp = ({
     return true;
   }
 
+  const validForm = (formState) => {
+    if (!formState[FORM_PARAM_KEYS_ENUM.email] || !formState[FORM_PARAM_KEYS_ENUM.name]) {
+      return false;
+    }
+    return true;
+  }
+
   const onChangeFormParam = ({ key, value }: IOnChangeFormParam) => {
   setFormState({ ...formState, [key]: value })
   }
