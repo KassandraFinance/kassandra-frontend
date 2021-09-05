@@ -30,11 +30,20 @@ export const MobileHero = styled.div`
   padding: 0 16px;
   margin-bottom: 2.5rem;
 
+  @media(orientation: landscape){
+    height: calc(130vw - 160px);
+  }
   @media (max-width: 1024px) and (max-height: 1366px){
     margin-top: 15rem;
   }
+    @media (max-width: 1024px) and (max-height: 1366px) and (orientation: landscape){
+    margin-top: 5rem;
+  }
   @media (max-width: 768px) and (max-height: 1024px){
     margin-top:10rem;
+  }
+  @media (max-width: 768px) and (max-height: 1024px)and (orientation: landscape){
+    margin-top:2rem;
   }
   @media (max-width: 540px){
     margin-top:3rem;
