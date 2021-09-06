@@ -78,12 +78,12 @@ export const SingUp = ({  setModalSuccessOpen}) => {
 
         {/* <S.ButtonWrapper> */}
         <MediaMatch greaterThan='small'>
-          <Button backgroundPrimary size="huge" type='submit' fullWidth disabled={!validForm(formState)}>
+          <Button backgroundPrimary size="huge" type='submit' fullWidth disabledNoEvent={!validForm(formState)}>
             Sign me up!
           </Button>
         </MediaMatch>
         <MediaMatch lessThan='small'>
-          <Button backgroundPrimary size="medium"  type='submit' fullWidth disabled={!validForm(formState)}>
+          <Button backgroundPrimary size="medium"  type='submit' fullWidth disabledNoEvent={!validForm(formState)}>
             Sign me up!
           </Button>
         </MediaMatch>

@@ -13,6 +13,7 @@ export type WrapperProps = {
   | 'backgroundPrimary'
   | 'backgroundSecondary'
   | 'backgroundBlack'
+  | 'disabledNoEvent'
 >
 
 const wrapperModifiers = {
@@ -59,21 +60,26 @@ const wrapperModifiers = {
   disabled: () => css`
     &:disabled {
       cursor: not-allowed;
-      filter: saturate(30%);
+      filter: grayscale(150%);
     }
+  `,
+  disabledNoEvent: () => css`
+      pointer-events: none;
+      filter: grayscale(150%);
   `,
   backgroundPrimary: (theme: DefaultTheme) => css`
     background: linear-gradient(264.12deg, #E843C4 -140.16%, #020887 205.21%);
     -webkit-transition: ease-out 0.4s;
     -moz-transition: ease-out 0.4s;
-    transition: ease-out 0.4s;
-    &::before {
+    transition: all ease-out 0.4s;
+    backface-visibility: hidden;
 
+    &::before {
     }
     &:hover{
-      box-shadow: inset 400px 50px 0 0 #020887
-      /* box-shadow: inset 500px 0 0 0 #020887; */
-      /* background: linear-gradient(180deg, #e35565 0%, #d958a6 50%) */
+      box-shadow: inset 500px 0 0 0 #020887;
+      opacity: 1;
+      transition: opacity 1s;
   }
 `,
   backgroundSecondary: (theme: DefaultTheme) => css`
@@ -110,6 +116,7 @@ export const Wrapper = styled.button<WrapperProps>`
     hasIcon,
     minimal,
     disabled,
+    disabledNoEvent,
     backgroundPrimary,
     backgroundSecondary,
     backgroundBlack
@@ -128,7 +135,7 @@ export const Wrapper = styled.button<WrapperProps>`
     text-decoration: none;
 
     /* &:hover {
-      background: ${minimal
+      background: ${disabled
         ? 'none'
         : `linear-gradient(180deg, #e35565 0%, #d958a6 50%)`};
     } */
@@ -138,6 +145,7 @@ export const Wrapper = styled.button<WrapperProps>`
     ${!!hasIcon && wrapperModifiers.withIcon(theme)};
     ${!!minimal && wrapperModifiers.minimal(theme)};
     ${disabled && wrapperModifiers.disabled()};
+    ${disabledNoEvent && wrapperModifiers.disabledNoEvent()};
     ${!!backgroundPrimary && wrapperModifiers.backgroundPrimary(theme)};
     ${!!backgroundSecondary && wrapperModifiers.backgroundSecondary(theme)};
     ${!!backgroundBlack && wrapperModifiers.backgroundBlack(theme)};

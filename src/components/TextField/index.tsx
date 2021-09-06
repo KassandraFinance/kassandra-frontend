@@ -11,6 +11,7 @@ export type TextFieldProps = {
   icon?: React.ReactNode
   iconPosition?: 'left' | 'right'
   disabled?: boolean
+  disabledNoEvent?:boolean;
   error?: string
 } & Omit<InputHTMLAttributes<HTMLInputElement>, 'onInput'>
 

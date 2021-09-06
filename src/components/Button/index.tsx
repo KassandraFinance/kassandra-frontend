@@ -15,6 +15,7 @@ export type ButtonProps = {
   backgroundBlack?: boolean
   icon?: JSX.Element
   as?: React.ElementType
+  disabledNoEvent?: boolean
 } & ButtonTypes
 
 const Button: React.ForwardRefRenderFunction<S.WrapperProps, ButtonProps> = (
@@ -27,6 +28,7 @@ const Button: React.ForwardRefRenderFunction<S.WrapperProps, ButtonProps> = (
     backgroundPrimary = false,
     backgroundSecondary = false,
     backgroundBlack = false,
+    disabledNoEvent=false,
 
     ...props
   },
@@ -41,6 +43,7 @@ const Button: React.ForwardRefRenderFunction<S.WrapperProps, ButtonProps> = (
     backgroundPrimary={backgroundPrimary}
     backgroundSecondary={backgroundSecondary}
     backgroundBlack={backgroundBlack}
+    disabledNoEvent={disabledNoEvent}
     {...props}
   >
     {icon}

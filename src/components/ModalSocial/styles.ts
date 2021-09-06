@@ -110,6 +110,7 @@ ${({theme})=> css`
   align-items: center;
   align-content: space-between;
   font-size: 1.4rem;
+  font-weight: ${theme.font.normal};
   span{
   margin-top: 5.6px;
   }

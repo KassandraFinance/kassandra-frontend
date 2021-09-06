@@ -121,14 +121,14 @@ export const ModalSignUp = ({
 
               <MediaMatch greaterThan='small' >
                 <WrapperButton>
-                  <Button size="huge" type='submit' disabled={!validForm(formState)}>
+                  <Button   backgroundPrimary size="huge" type='submit' disabledNoEvent={!validForm(formState)} >
                     Sign me up!
                   </Button>
                 </WrapperButton>
               </MediaMatch>
               <MediaMatch lessThan='small' >
                 <WrapperButton>
-                  <Button size="medium" type='submit' disabled={!validForm(formState)}>
+                  <Button backgroundPrimary size="medium" type='submit' disabledNoEvent={!validForm(formState)}>
                     Sign me up!
                   </Button>
                 </WrapperButton>
