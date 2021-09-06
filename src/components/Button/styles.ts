@@ -66,14 +66,12 @@ const wrapperModifiers = {
     background: linear-gradient(264.12deg, #E843C4 -140.16%, #020887 205.21%);
     -webkit-transition: ease-out 0.4s;
     -moz-transition: ease-out 0.4s;
-    transition: ease-out 0.4s;
+    transition: all ease-out 0.4s;
+    
     &::before {
-
     }
     &:hover{
-      box-shadow: inset 400px 50px 0 0 #020887
-      /* box-shadow: inset 500px 0 0 0 #020887; */
-      /* background: linear-gradient(180deg, #e35565 0%, #d958a6 50%) */
+      box-shadow: inset 500px 0 0 0 #020887;
   }
 `,
   backgroundSecondary: (theme: DefaultTheme) => css`
