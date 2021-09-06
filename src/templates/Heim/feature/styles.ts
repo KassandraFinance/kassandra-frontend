@@ -10,7 +10,7 @@ ${()=>css`
     padding: 6.5rem 3.2rem;
     max-width: 121.6rem;
     justify-content: center;
-    height: calc(95vh);
+    height: calc(100vh);
 
     ${media.lessThan('large')`
       position: relative;

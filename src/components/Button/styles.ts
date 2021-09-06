@@ -64,27 +64,18 @@ const wrapperModifiers = {
   `,
   backgroundPrimary: (theme: DefaultTheme) => css`
     background: linear-gradient(264.12deg, #E843C4 -140.16%, #020887 205.21%);
-    overflow: hidden;
-    transition: all 3s ease;
-    &:before {
-      border-left-color: ${darken(0.2, theme.colors.primary)};
-      border-top-color: ${darken(0.2, theme.colors.primary)};
+    -webkit-transition: ease-out 0.4s;
+    -moz-transition: ease-out 0.4s;
+    transition: ease-out 0.4s;
+    &::before {
+
     }
-    &:after{
-      width: 300%;
-      height: 300%;
-      left: -300%;
-      transform: rotate(45deg);
-      background-color: #1821D8;
-      transition: all 3s ease;
-    }
-    &:hover::after{
-      left: -100%;
-    }
-    &:hover {
-    background: #1821D8
+    &:hover{
+      box-shadow: inset 400px 50px 0 0 #020887
+      /* box-shadow: inset 500px 0 0 0 #020887; */
+      /* background: linear-gradient(180deg, #e35565 0%, #d958a6 50%) */
   }
-  `,
+`,
   backgroundSecondary: (theme: DefaultTheme) => css`
     background: ${theme.colors.secondary};
     &::before {

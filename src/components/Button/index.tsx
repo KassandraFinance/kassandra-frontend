@@ -24,7 +24,7 @@ const Button: React.ForwardRefRenderFunction<S.WrapperProps, ButtonProps> = (
     size = 'medium',
     fullWidth = false,
     minimal = false,
-    backgroundPrimary = true,
+    backgroundPrimary = false,
     backgroundSecondary = false,
     backgroundBlack = false,
 
