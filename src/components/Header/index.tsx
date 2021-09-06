@@ -27,7 +27,7 @@ const Header = () => {
   const { asPath } = useRouter()
 
   return (
-    <S.Wrapper>
+    <S.Wrapper pageHeim={asPath === '/heim'}>
       <MediaMatch lessThan="large">
         <S.IconWrapper onClick={() => setIsOpen(true)}>
           <MenuIcon aria-label="Open Menu" />

@@ -1,4 +1,10 @@
-.hero {
+import styled from 'styled-components'
+
+export const Background = styled.div`
+  background: linear-gradient(90deg, #200A1B 0%, #000000 50%);
+`
+
+export const Hero = styled.section`
   height: calc(100vh - 110px);
   padding: 0 32px;
   display: grid;
@@ -6,11 +12,10 @@
   justify-content: space-between;
   align-items: center;
   max-width: 1520px;
-  margin:auto;
   @media (max-width: 770px) {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 180px);
+    height: calc(100vh - 160px);
   }
   @media (max-width: 600px) {
     height: calc(100vh - 140px);
@@ -19,7 +24,7 @@
     height: calc(100vh - 160px);
   }
   h1 {
-    font-size: 104px;
+    font-size: 112px;
     font-weight: 400;
     line-height: 94px;
     @media (max-width: 1200px) {
@@ -43,10 +48,10 @@
     }
   }
   h3 {
-    font-size: 31px;
+    font-size: 24px;
     font-weight: 300;
     margin: 32px 0;
-    max-width: 510px;
+    max-width: 600px;
     @media (max-width: 1200px) {
       font-size: 27px;
     }
@@ -61,6 +66,9 @@
       max-width: 360px;
     }
   }
+  .kassandra {
+    max-height: 700px;
+  }
   .h3-desktop {
     @media (max-width: 770px) {
       display: none;
@@ -72,9 +80,33 @@
     h3 {
       margin: 8px 0 32px;
       font-size: 18px;
+    @media (min-width: 375px) {
+      margin: 8px 0 16px;
+    }
     }
     @media (min-width: 771px) {
       display: none;
+    }
+  }
+  .withepaper {
+    background: transparent;
+    border: 1px solid #26DBDB;
+    border-radius: 6px;
+    color: #fcfcfc;
+    text-decoration: none;
+    font-size: 20px;
+
+    height: 52px;
+    padding: 12px 32px;
+    cursor: pointer;
+    transition-duration: 300ms;
+    &:hover {
+      background-color: #26DBDB;
+      color: #211426;
+    }
+    @media (max-width: 600px) {
+      font-size: 16px;
+      height: 48px;
     }
   }
   img {
@@ -95,8 +127,9 @@
       max-width: 300px;
     }
   }
+
   a {
-    background: linear-gradient(264.12deg, #020887 -197.65%, #26DBDB 272.42%);
+    background: linear-gradient(264.12deg, #E843C4 -179.71%, #020887 205.21%);
     border: none;
     border-radius: 6px;
     color: #fcfcfc;
@@ -106,10 +139,30 @@
     height: 52px;
     padding: 12px 32px;
     cursor: pointer;
+    @media (max-width: 600px) {
+      font-size: 16px;
+      height: 48px;
+    }
   }
-}
+`
 
-.products {
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  max-width: 460px;
+  @media (max-width: 770px) {
+    margin: 0 auto;
+  }
+  @media (max-width: 560px) {
+    max-width: 400px;
+  }
+  @media (max-width: 440px) {
+    flex-direction: column;
+    height: 110px;
+  }
+`
+
+export const Products = styled.section`
   padding: 40px 32px;
   h1 {
     font-size: 44px;
@@ -165,6 +218,15 @@
       gap: 40px;
     }
   }
+  @media (max-width: 375px) and (max-height: 800px) {
+    padding-top: 100px;
+  }
+  @media (max-width: 370px) {
+    padding-top: 120px;
+  }
+  @media (max-width: 320px) {
+    padding-top: 180px;
+  }
   .heim-grid-left {
     text-align: left;
     h3 {
@@ -215,9 +277,9 @@
     text-align: center;
     margin: 16px auto;
   }
-}
+`
 
-.class-products {
+export const ClassProducts = styled.section`
   padding: 40px 32px 80px;
   text-align: center;
 
@@ -342,10 +404,10 @@
       }
     }
   }
-}
+`
 
-.token {
-  padding: 40px 32px;
+export const Token = styled.section`
+    padding: 40px 32px;
   text-align: center;
 
   h1 {
@@ -472,10 +534,10 @@
       }
     }
   }
-}
+`
 
-.kassandra-success {
-  padding: 80px 32px 200px;
+export const KassandraSuccess = styled.section`
+    padding: 80px 32px 200px;
   @media (min-width: 1880px) {
     padding: 80px 0 240px;
   }
@@ -577,9 +639,9 @@
       height: 120px;
     }
   }
-}
+`
 
-.kassandra-architecture {
+export const KassandraArchitecture = styled.section`
   text-align: center;
   padding: 40px 32px;
   h1 {
@@ -629,10 +691,10 @@
       }
     }
   }
-}
+`
 
-.supporters {
-  padding: 40px 32px 0;
+export const Supporters = styled.section`
+    padding: 40px 32px 0;
   h1 {
     font-size: 44px;
     font-weight: 500;
@@ -675,4 +737,4 @@
       gap: 40px;
     }
   }
-}
+`

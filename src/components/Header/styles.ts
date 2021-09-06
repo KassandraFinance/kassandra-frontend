@@ -1,7 +1,13 @@
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
 
-export const Wrapper = styled.menu`
+interface IWrapperProps {
+  pageHeim: boolean
+}
+
+export const Wrapper = styled.menu<IWrapperProps>`
+  background: ${props => props.pageHeim ? '#000' : 'linear-gradient(90deg, #200A1B 0%, #000000 50%)'};
+
   ${({ theme }) => css`
     display: flex;
     align-items: center;
