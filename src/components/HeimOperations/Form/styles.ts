@@ -70,7 +70,7 @@ export const Input = styled.input`
   font-size: 24px;
 
   text-align: right;
-  max-width: 100%;
+  width: 100%;
   margin: 8px 0;
 
   outline: none;
@@ -153,7 +153,7 @@ export const Symbol = styled.h3`
 `
 
 export const ImgArrowLong = styled.img`
-  margin: 48px auto 0 auto;
+  margin: 76px auto 0 auto;
 `
 
 interface IButtonMax {
@@ -187,7 +187,7 @@ export const ButtonMax = styled.button<IButtonMax>`
 
 export const InputTokensContainer = styled.div`
   display: grid;
-  grid-template-columns: 190px 60px 190px;
+  grid-template-columns: 1fr 60px 1fr;
   justify-content: space-around;
   align-items: flex-start;
   
@@ -195,10 +195,10 @@ export const InputTokensContainer = styled.div`
   height: 94px;
   margin-top: 8px;
   @media (max-width: 504px) {
-    grid-template-columns: 160px 60px 160px;
+    grid-template-columns: 1fr 60px 1fr;
   }
   @media (max-width: 430px) {
-    grid-template-columns: 130px 40px 130px;
+    grid-template-columns: 1fr 40px 1fr;
   }
 `
 
@@ -210,10 +210,9 @@ export const Select = styled.select`
   font-size: 24px;
   text-transform: uppercase;
 
-  height: 28px;
-  margin: 8px 0;
+  margin: 5px 0;
   padding-right: 4px;
-  padding-left: 12px;
+  padding-left: 8px;
   outline: none;
   option {
     background-color: #030102;
@@ -281,9 +280,9 @@ export const Info = styled.div`
 
 export const InputDefaultContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto 1fr;
   justify-content: space-between;
-  
+
   width: 100%;
   height: 94px;
   margin-top: 16px;

@@ -1,15 +1,11 @@
 import React from 'react'
 import BigNumber from 'bn.js'
-import { useSelector, RootStateOrAny } from 'react-redux'
 
 import web3 from '../../../utils/web3'
 
-import { BNtoDecimal } from '../../../utils/numerals'
-import { HeimCorePool } from '../../../constants/tokenAddresses'
+import { BNtoDecimal, wei } from '../../../utils/numerals'
 
-import useBalance from '../../../hooks/useBalance'
-import useConnect from '../../../hooks/useConnect'
-import usePoolContract from '../../../hooks/usePoolContract'
+import { TokenDetails } from './index'
 
 import { 
   InputTokensContainer, 
@@ -17,6 +13,7 @@ import {
   Line, 
   Span,
   SpanLight,
+  Symbol,
   ImgArrowLong,
   Amount,
   ButtonMax,
@@ -26,118 +23,73 @@ import {
 
 
 interface IInputEthProps {
-  typeAction: string
-  supplyHeim: BigNumber
-  getArrayTokens: () => void
-  swapInSelected: string
-  setSwapInSelected: React.Dispatch<React.SetStateAction<string>>
-  amountTokenPool: BigNumber
-  setAmountTokenPool: React.Dispatch<React.SetStateAction<BigNumber>>
-  setInvestHeim: React.Dispatch<React.SetStateAction<BigNumber>>
-  setInvestRate: React.Dispatch<React.SetStateAction<BigNumber>>
+  actionString: string
+  poolTokens: TokenDetails[]
+  swapInBalance: BigNumber
+  setSwapInAddress: React.Dispatch<React.SetStateAction<string>>
+  setSwapInAmount: React.Dispatch<React.SetStateAction<BigNumber>>
 }
 
 const InputTokens = ({
-  typeAction, 
-  supplyHeim,
-  getArrayTokens,
-  amountTokenPool, 
-  setAmountTokenPool,
-  swapInSelected,
-  setSwapInSelected,
-  setInvestHeim,
-  setInvestRate
+  actionString,
+  poolTokens,
+  swapInBalance,
+  setSwapInAddress,
+  setSwapInAmount,
 }: IInputEthProps) => {
-  const [balanceToken, setBalanceToken] = React.useState<BigNumber>(new BigNumber(0))
-  const { poolTokens, userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-  
-  const { getBalanceToken } = useBalance()
-  const { 
-    calcPoolOutGivenSingleIn, 
-    denormalizedWeight, 
-    totalDenormalizedWeight, 
-    swapFee 
-  } = usePoolContract()
+  const inputRef = React.useRef<HTMLInputElement>(null)
 
-
-  const tokenSelected = poolTokens.filter((token: { address: string }) => {
-    if (token.address === swapInSelected) return token
-  })
-
-  const handleBalanceToken = async () => {
-    const balance = await getBalanceToken(tokenSelected[0]?.address)
-    setBalanceToken(balance)
-  }
-
-  const handleCalcPoolOut = async () => {
-    if (!tokenSelected[0]?.address) {
-      setInvestHeim(new BigNumber(0))
-      return
+  const tokensList = React.useMemo(() => {
+    if (poolTokens.length > 1) {
+      return (
+        <Select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSwapInAddress(e.target.value)}>
+          {poolTokens.map(
+            (token: TokenDetails) =>
+              <option key={token.address} value={token.address} title={token.name}>{token.symbol}</option>
+          )}
+        </Select>
+      )
     }
-    const denormalized = await denormalizedWeight(HeimCorePool, tokenSelected[0]?.address)
-    const totalDenormalized = await totalDenormalizedWeight(HeimCorePool)
-    const swap = await swapFee(HeimCorePool)
 
-    const invest = await calcPoolOutGivenSingleIn(
-      HeimCorePool, 
-      tokenSelected[0]?.balance, 
-      denormalized, 
-      supplyHeim, 
-      totalDenormalized, 
-      amountTokenPool, 
-      swap
-    )
+    return <Symbol>{poolTokens.length > 0 ? poolTokens[0].symbol : '...'}</Symbol>
+  }, [poolTokens])
 
-    const investRate = await calcPoolOutGivenSingleIn(
-      HeimCorePool, 
-      tokenSelected[0]?.balance, 
-      denormalized, 
-      supplyHeim, 
-      totalDenormalized, 
-      new BigNumber(10).pow(new BigNumber(18)), 
-      swap
-    )
-    
-    setInvestHeim(invest)
-    setInvestRate(investRate)
+  const wei2String = (input: BigNumber) => {
+    const decimal = input.mod(wei).toString()
+
+    return `${
+      input.div(wei).toString()
+    }${
+      decimal === '0' ? '' : `.${decimal}`
+    }`
   }
 
-  React.useEffect(() => {
-    handleBalanceToken()
-  }, [tokenSelected[0]?.address, userWalletAddress])
+  const setMax = () => {
+    setSwapInAmount(swapInBalance)
 
-  React.useEffect(() => {
-    handleCalcPoolOut()
-  }, [amountTokenPool, swapInSelected])
+    if (inputRef.current !== null) {
+      inputRef.current.value = wei2String(swapInBalance)
+    }
+  }
   
   return (
     <InputTokensContainer>
       <PayWith>
-        <Span>{typeAction}</Span>
-        <Select 
-          defaultValue={swapInSelected} 
-          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSwapInSelected(e.target.value)}
-        >
-          <option value="">- - - -</option>
-          {poolTokens.map((token: { address: string, symbol: string }) =>
-            <option key={token.address} value={token?.address}>{token?.symbol}</option>
-          )}
-        </Select>
-        <SpanLight>Balance: {swapInSelected === '' ? 
-          '0.000000'
-          :
-          BNtoDecimal(balanceToken, new BigNumber(18), 6)}
-        </SpanLight>
+        <Span>{actionString}</Span>
+        {tokensList}
+        <SpanLight>Balance: {swapInBalance > new BigNumber(-1) ? BNtoDecimal(swapInBalance, new BigNumber(18)) : '...'}</SpanLight>
         <Line />
       </PayWith>
-      <ImgArrowLong src="assets/arrow-long-down.svg" alt="" />
+      <ImgArrowLong src="assets/arrow-long-down.svg" alt="" width={12} height={41} />
       <Amount>
         <Span>Amount</Span>
         <Input
+          ref={inputRef}
           type="number"
           placeholder="0"
           step="any"
           min="0"
+          max={wei2String(swapInBalance)}
           onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
             const target = e.target as HTMLInputElement
             // don't allow negative numbers
@@ -157,24 +109,17 @@ const InputTokens = ({
           }}
           onChange={
             (e: React.ChangeEvent<HTMLInputElement>) => {
-              getArrayTokens()
               let { value } = e.target
 
               if (value.length === 0) {
                 value = e.target.dataset.lastvalue as string
               }
 
-              setAmountTokenPool(new BigNumber(web3.utils.toWei(value)))
+              setSwapInAmount(new BigNumber(web3.utils.toWei(value)))
             }
           }
-          value={BNtoDecimal(amountTokenPool, new BigNumber(18), 6)}
         />
-        <ButtonMax 
-          type="button" 
-          onClick={() => setAmountTokenPool(balanceToken)}
-        >
-          Max
-        </ButtonMax>
+        <ButtonMax type="button" onClick={setMax}>Max</ButtonMax>
         <Line />
       </Amount>
     </InputTokensContainer>

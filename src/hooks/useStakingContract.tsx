@@ -1,4 +1,3 @@
-import React from 'react'
 import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
@@ -9,6 +8,8 @@ import { Staking } from '../constants/tokenAddresses'
 import StakingContract from "../constants/abi/Staking.json"
 
 import useConnect from './useConnect'
+
+import waitTransaction, { CompleteCallback } from '../utils/txWait'
 
 const useStakingContract = () => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)

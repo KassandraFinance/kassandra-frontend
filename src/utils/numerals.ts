@@ -1,9 +1,10 @@
 import BigNumber from 'bn.js'
 
 
-export function BNtoDecimal(number: BigNumber, decimalsBN: BigNumber, maxPrecision: number): string {
+export function BNtoDecimal(number: BigNumber, decimalsBN: BigNumber, maximumPrecision?: number): string {
   const numString = number.toString(10)
   const decimals = Number(decimalsBN)
+  const maxPrecision = maximumPrecision || 6;
 
   // start assuming number below decimal point
   let integer = '0'
@@ -24,3 +25,5 @@ export function BNtoDecimal(number: BigNumber, decimalsBN: BigNumber, maxPrecisi
 
   return `${integer}${decimalPoint.length > 0 ? '.' : ''}${decimalPoint}`
 }
+
+export const wei = new BigNumber('10').pow(new BigNumber('18'))

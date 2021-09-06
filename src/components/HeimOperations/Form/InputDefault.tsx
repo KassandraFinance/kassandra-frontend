@@ -1,13 +1,12 @@
 import React from 'react'
 import BigNumber from 'bn.js'
-import { useSelector, RootStateOrAny } from 'react-redux'
 
-import { HeimCRPPOOL } from '../../../constants/tokenAddresses'
 import { BNtoDecimal } from '../../../utils/numerals'
 
-import useBalance from '../../../hooks/useBalance'
+import { TokenDetails } from './index'
 
 import { 
+  ButtonMax,
   InputDefaultContainer, 
   Info, 
   Span, 
@@ -20,74 +19,63 @@ import {
 } from './styles'
 
 interface IInputDefaultProps {
-  title: string
-  investHeim: BigNumber
-  amountSwapOut: BigNumber
-  swapOutSelected: string
-  setSwapOutSelected: React.Dispatch<React.SetStateAction<string>>
+  poolTokens: TokenDetails[]
+  isMax: boolean | null
+  swapOutAmount: BigNumber
+  swapOutBalance: BigNumber
+  setSwapOutAddress: React.Dispatch<React.SetStateAction<string>>
 }
 
 const InputDefault = ({ 
-  title,
-  investHeim,
-  amountSwapOut,
-  swapOutSelected,
-  setSwapOutSelected
+  poolTokens,
+  isMax,
+  swapOutAmount,
+  swapOutBalance,
+  setSwapOutAddress
 }: IInputDefaultProps) => {
-  const [balanceToken, setBalanceToken] = React.useState<BigNumber>(new BigNumber(0))
-
-  const { poolTokens, userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-  const { getBalanceToken } = useBalance()
-
-  async function handleBalance() {
-    if (title === 'Invest') {
-      const balance = await getBalanceToken(HeimCRPPOOL)
-      setBalanceToken(balance)
-    } else {
-      const balance = await getBalanceToken(swapOutSelected)
-      setBalanceToken(balance)
+  const tokensList = React.useMemo(() => {
+    if (poolTokens.length > 1) {
+      return (
+        <Select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSwapOutAddress(e.target.value)}>
+          {poolTokens.map(
+            (token: TokenDetails) =>
+              <option key={token.address} value={token.address} title={token.name}>{token.symbol}</option>
+          )}
+        </Select>
+      )
     }
-  }
 
-  React.useEffect(() => {
-    handleBalance()
-  }, [userWalletAddress, title, swapOutSelected])
+    return <Symbol>{poolTokens.length > 0 ? poolTokens[0].symbol : '...'}</Symbol>
+  }, [poolTokens])
 
   return (
     <InputDefaultContainer>
       <Info>
         <Span>Swap to (estimative)</Span>
-        {title === 'Invest' ?
-            <Symbol>HEIM</Symbol>
-          : 
-          <Select 
-            defaultValue={swapOutSelected} 
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSwapOutSelected(e.target.value)}
-          >
-            <option value="">- - - -</option>
-            {poolTokens.map((token: { address: string, symbol: string}) =>
-              <option key={token.address} value={token?.address}>{token?.symbol}</option>
-            )}
-          </Select>
-        }
-        <SpanLight>
-          Balance: {balanceToken.toString() === '0' ? 
-          '0.000000' 
-          : 
-          BNtoDecimal(balanceToken, new BigNumber(18), 6)}
-        </SpanLight>
+        {tokensList}
+        <SpanLight>Balance: {swapOutBalance > new BigNumber(-1) ? BNtoDecimal(swapOutBalance, new BigNumber(18)) : '...'}</SpanLight>
       </Info>
       <AmountDefault>
         <Span>Amount</Span>
-        <Input 
+        <Input
+          readOnly
           type="number" 
-          placeholder="0" 
-          value={BNtoDecimal(title === 'Invest' ? 
-            investHeim 
-            : 
-            amountSwapOut, new BigNumber(18), 6)} 
-          readOnly 
+          placeholder="0"
+          value={BNtoDecimal(swapOutAmount, new BigNumber(18))}
         />
+        {isMax !== null && <ButtonMax
+          type="button"
+          isMax={isMax}
+          onClick={() => {
+            if (isMax) {
+              setSwapOutAddress('')
+              return
+            }
+            setSwapOutAddress(poolTokens[0].address)
+          }}
+        >
+          Max
+        </ButtonMax>}
       </AmountDefault>
       <LineDefault />  
     </InputDefaultContainer>
