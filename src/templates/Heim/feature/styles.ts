@@ -10,16 +10,23 @@ ${()=>css`
     padding: 6.5rem 3.2rem;
     max-width: 121.6rem;
     justify-content: center;
-    height: calc(100vh - 110px);
     margin-bottom: 5.8rem;
+    height: calc(100vh);
 
-    ${media.lessThan('large')`
+    @media(min-width: 1400px){
+    height: calc(100vh - 110px);
+    margin-bottom: 0rem;
+    }
+    @media(min-width: 1900px){
+    height: calc(100vh - 160px);
+    margin-bottom: 0rem;
+    }
+    ${media.lessThan('medium')`
       position: relative;
       margin-bottom: 2.5rem;
       display: flex;
       flex-direction: column;
       height: 100%;
-
     `}
   `}
 `

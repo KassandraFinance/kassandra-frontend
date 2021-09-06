@@ -61,25 +61,27 @@ const wrapperModifiers = {
     &:disabled {
       cursor: not-allowed;
       filter: grayscale(150%);
+      color:  #BDBDBD;
+
     }
   `,
   disabledNoEvent: () => css`
+      cursor: not-allowed;
       pointer-events: none;
       filter: grayscale(150%);
+      color:  #BDBDBD;
   `,
+
   backgroundPrimary: (theme: DefaultTheme) => css`
     background: linear-gradient(264.12deg, #E843C4 -140.16%, #020887 205.21%);
-    -webkit-transition: ease-out 0.4s;
-    -moz-transition: ease-out 0.4s;
-    transition: all ease-out 0.4s;
+    transition: ease-in-out 0.15s;
     backface-visibility: hidden;
-
     &::before {
     }
     &:hover{
       box-shadow: inset 500px 0 0 0 #020887;
-      opacity: 1;
-      transition: opacity 1s;
+      /* opacity: 0.5; */
+      transition: 0.15s;
   }
 `,
   backgroundSecondary: (theme: DefaultTheme) => css`
@@ -123,7 +125,6 @@ export const Wrapper = styled.button<WrapperProps>`
   }) => css`
     display: inline-flex;
     overflow: hidden;
-
     align-items: center;
     justify-content: center;
     color: ${theme.colors.white};
