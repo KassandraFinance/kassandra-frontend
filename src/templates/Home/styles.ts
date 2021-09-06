@@ -8,6 +8,7 @@ export const Hero = styled.section`
   height: calc(100vh - 110px);
   padding: 0 32px;
   display: grid;
+  margin: 0 auto;
   grid-template-columns: 1fr 1fr;
   justify-content: space-between;
   align-items: center;
