@@ -7,10 +7,10 @@ ${()=>css`
 
     margin: auto;
     position: relative;
-    padding: 8.5rem 3.2rem;
+    padding: 6.5rem 3.2rem;
     max-width: 121.6rem;
     justify-content: center;
-    height: calc(100vh);
+    height: calc(95vh);
 
     ${media.lessThan('large')`
       position: relative;
@@ -34,7 +34,7 @@ export const Title = styled.h1`
   ${({theme})=>css`
       text-align: center;
       font-size: ${theme.font.sizes.xlarge};
-      font-weight: ${theme.font.normal};
+      font-weight: ${theme.font.medium};
       /* line-height: 94px; */
       ${media.lessThan("large")`
       font-size: ${theme.font.sizes.large};
@@ -87,8 +87,9 @@ export const ItemTitle = styled.div`
   ${({theme}) => css `
     text-align: center;
     font-size: ${theme.font.sizes.large};
-    font-weight: ${theme.font.bold};
+    font-weight: ${theme.font.medium};
     margin-bottom: ${theme.spacings.xsmall};
+
   `}
 `
 export const ItemSubtitle = styled.div`
@@ -102,7 +103,7 @@ export const ItemSubtitle = styled.div`
 
 export const ItemImage = styled.div`
   ${({theme}) => css `
-  display: flexbox;
+  display: flex;
   justify-content: center;
   margin-bottom:${theme.spacings.medium};
   ${media.lessThan("medium")`
@@ -163,11 +164,34 @@ ${({theme})=> css `
 
     a{
     color: #26DBDB;
+    position:relative;
     border: none;
     text-decoration: none;
     font-size: ${theme.font.sizes.medium};
     font-weight: ${theme.font.normal};
     cursor: pointer;
+    &:hover {
+      &::after {
+        content: '';
+        max-width: 100%;
+        text-align: left;
+        position: absolute;
+        display: block;
+        height: 0.1rem;
+        background-color: #26DBDB;
+        animation: hoverAnimation 0.3s forwards;
+      }
+      @keyframes hoverAnimation {
+        from {
+          width: 0;
+          left: 50%;
+        }
+        to {
+          width: 100%;
+          left: 0;
+        }
+      }
+    }
     ${media.lessThan("large")`
     font-size: ${theme.font.sizes.small};
 

@@ -64,16 +64,26 @@ const wrapperModifiers = {
   `,
   backgroundPrimary: (theme: DefaultTheme) => css`
     background: linear-gradient(264.12deg, #E843C4 -140.16%, #020887 205.21%);
-    &::before {
+    overflow: hidden;
+    transition: all 3s ease;
+    &:before {
       border-left-color: ${darken(0.2, theme.colors.primary)};
       border-top-color: ${darken(0.2, theme.colors.primary)};
-      transition: all 0.15s ease-in-out;
-
+    }
+    &:after{
+      width: 300%;
+      height: 300%;
+      left: -300%;
+      transform: rotate(45deg);
+      background-color: #1821D8;
+      transition: all 3s ease;
+    }
+    &:hover::after{
+      left: -100%;
     }
     &:hover {
-      background: #1821D8;
-;
-    }
+    background: #1821D8
+  }
   `,
   backgroundSecondary: (theme: DefaultTheme) => css`
     background: ${theme.colors.secondary};
@@ -89,7 +99,7 @@ const wrapperModifiers = {
   backgroundBlack: (theme: DefaultTheme) => css`
     background: rgba(0,0,0,0.0);
     border: 0.1rem solid #26DBDB;
-    transition: all 0.15s ease-in-out;
+    transition: all .15s ease-in-out;
     &::before {
       border-left-color: #26DBDB;
       border-top-color: #26DBDB;
@@ -114,6 +124,8 @@ export const Wrapper = styled.button<WrapperProps>`
     backgroundBlack
   }) => css`
     display: inline-flex;
+    overflow: hidden;
+
     align-items: center;
     justify-content: center;
     color: ${theme.colors.white};

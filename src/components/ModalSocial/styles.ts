@@ -128,7 +128,7 @@ export const Content = styled.div`
   justify-content: space-between;
 
 
-  padding: 2.4rem;
+  padding: 0.6rem;
   margin: 0 0.8rem;
   img{
     cursor: pointer;

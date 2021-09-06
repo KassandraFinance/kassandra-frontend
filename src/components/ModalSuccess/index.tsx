@@ -45,31 +45,31 @@ const ModalSuccess = ({
             <div style={{ display: 'flex' }}>
             <WrapperIcons>
               <a href="https://discord.gg/2uGEvqNnuq" target="_blank" rel="noopener noreferrer">
-                <img src="assets/discord-icon.svg" alt="" />
+                <img src="assets/Discord.svg" alt="" />
               </a>
               <span>Discord</span>
             </WrapperIcons>
             <WrapperIcons>
               <a href="https://t.me/KassandraDAO" target="_blank" rel="noopener noreferrer">
-                  <img src="assets/telegram-icon.svg" alt="" />
+                  <img src="assets/Telegram.svg" alt="" />
               </a>
               <span>Telegram</span>
             </WrapperIcons>
             <WrapperIcons>
               <a href="https://github.com/KassandraFinance" target="_blank" rel="noopener noreferrer">
-                  <img src="assets/github-icon.svg" alt="" />
+                  <img src="assets/Github.svg" alt="" />
               </a>
               <span>GitHub</span>
             </WrapperIcons>
             <WrapperIcons>
               <a href="https://kassandrafoundation.medium.com/" target="_blank" rel="noopener noreferrer">
-                  <img src="assets/medium-icon.svg" alt="" />
+                  <img src="assets/Medium.svg" alt="" />
               </a>
               <span>Medium</span>
             </WrapperIcons>
             <WrapperIcons>
               <a href="https://twitter.com/dao_kassandra" target="_blank" rel="noopener noreferrer">
-                  <img src="assets/twitter-icon.svg" alt="" />
+                  <img src="assets/Twitter.svg" alt="" />
               </a>
               <span>Twitter</span>
             </WrapperIcons>

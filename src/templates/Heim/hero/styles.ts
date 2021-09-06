@@ -27,7 +27,7 @@ export const MobileHero = styled.div`
   align-content: center;
 
   position: relative;
-  padding: 0 16px;
+  padding: 0 24px;
   margin-bottom: 2.5rem;
 
   @media(orientation: landscape){
@@ -84,7 +84,7 @@ export const SubTitle = styled.h3`
   `}
 `
 
-export const Image = styled.div`
+export const ImageMobile = styled.div`
     position: relative;
     display:flex;
     justify-content: flex-end;
@@ -138,7 +138,7 @@ export const ImageDesktop = styled.div`
     display:flex;
     justify-content: flex-end;
     right: -6.5rem;
-    margin-top:-2.2rem;
+    margin-top: -5rem;
 
 
     ${media.lessThan('large')`
@@ -231,7 +231,7 @@ export const Title = styled.h1`
 export const ButtonWrapper = styled.div`
 ${({theme})=> css`
 
-  display: flex;
+  display: block;;
   max-width: 90%;
   ${ButtonStyles.Wrapper}{
     margin-right:2.4rem;
@@ -246,8 +246,7 @@ ${({theme})=> css`
     max-width: 100%;
     ${ButtonStyles.Wrapper}{
       margin-right:0rem;
-
-      margin-bottom: 1rem;
+      margin-bottom: 2.4rem;
     }
   `}
 ` }

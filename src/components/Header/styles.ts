@@ -20,13 +20,14 @@ export const Wrapper = styled.menu`
 
 export const LogoWrapper = styled.div`
 
-  ${media.lessThan('medium')`
+  ${media.lessThan('large')`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
     img {
-      width: 80%;
-      height: 60px;
+      position:relative;
+      max-width: 100%;
+      /* height: 48px; */
     }
   `}
   cursor: pointer;
@@ -170,7 +171,7 @@ export const MenuFull = styled.nav<MenuFullProps>`
 
     ${MenuLink} {
       color: ${theme.colors.white};
-      font-weight: ${theme.font.bold};
+      font-weight: ${theme.font.normal};
       font-size: ${theme.font.sizes.medium};
       margin-bottom: ${theme.spacings.small};
       transform: ${isOpen ? 'translateY(0)' : 'translateY(3rem)'};
@@ -178,7 +179,7 @@ export const MenuFull = styled.nav<MenuFullProps>`
     }
     ${MenuLinkDisable} {
       color: ${theme.colors.lightGray};
-      font-weight: ${theme.font.bold};
+      font-weight: ${theme.font.normal};
       font-size: ${theme.font.sizes.medium};
       margin-bottom: ${theme.spacings.small};
       transform: ${isOpen ? 'translateY(0)' : 'translateY(3rem)'};

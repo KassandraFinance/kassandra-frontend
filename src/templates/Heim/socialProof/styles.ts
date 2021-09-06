@@ -34,7 +34,7 @@ export const Title = styled.h1`
   ${({theme})=>css`
       text-align: center;
       font-size: ${theme.font.sizes.xlarge};
-      font-weight: ${theme.font.normal};
+      font-weight: ${theme.font.medium};
       margin-bottom: ${theme.spacings.xxlarge};
       /* line-height: 94px; */
       ${media.lessThan("large")`
@@ -99,7 +99,7 @@ export const ItemTitle = styled.div`
   ${({theme}) => css `
   text-align: left;
   font-size: ${theme.font.sizes.large};
-  font-weight: ${theme.font.bold};
+  font-weight: ${theme.font.medium};
   line-height: 120%;
   margin-bottom: ${theme.spacings.small};
 
@@ -232,7 +232,7 @@ export const ProductTitle = styled.div`
 `
 export const ProductSubtitle = styled.div`
   ${({theme}) => css `
-  text-align: left;
+  text-align: center;
   font-size: ${theme.font.sizes.medium};
   font-weight: ${theme.font.light};
   line-height: 150%;
@@ -271,23 +271,51 @@ export const ProductImage = styled.div`
 export const Link = styled.div `
 ${({theme})=> css `
 
-    margin:2% 0 ;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin:2% 0 ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
 
 
-    a{
-      color: #26DBDB;
-      border: none;
-      text-decoration: none;
-      font-size: ${theme.font.sizes.medium};
-      cursor: pointer;
-      ${media.lessThan("large")`
-      font-size: ${theme.font.sizes.xsmall};
-
-    `}
+a{
+  color: #26DBDB;
+  border: none;
+  text-decoration: none;
+  font-size: ${theme.font.sizes.medium};
+  cursor: pointer;
+  color: #26DBDB;
+  position:relative;
+  border: none;
+  text-decoration: none;
+  font-size: ${theme.font.sizes.medium};
+  font-weight: ${theme.font.normal};
+  cursor: pointer;
+  &:hover {
+    &::after {
+      content: '';
+      max-width: 100%;
+      text-align: left;
+      position: absolute;
+      display: block;
+      height: 0.1rem;
+      background-color: #26DBDB;
+      animation: hoverAnimation 0.3s forwards;
+    }
+    @keyframes hoverAnimation {
+      from {
+        width: 0;
+        left: 50%;
+      }
+      to {
+        width: 100%;
+        left: 0;
+      }
+    }
+  }
+  ${media.lessThan("large")`
+  font-size: ${theme.font.sizes.xsmall};
+  `}
   }
 `}
 `

@@ -11,6 +11,7 @@ export default {
       "Rubik, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
     light: 300,
     normal: 400,
+    medium: 500,
     bold: 600,
     sizes: {
       xsmall: '1.2rem',
@@ -27,7 +28,7 @@ export default {
     secondary: '#3CD3C1',
     mainBg: '#2772FF',
     lightBg: '#F2F2F2',
-    white: '#FAFAFA',
+    white: '#FCFCFC',
     black: '#030517',
     lightGray: '#828282',
     gray: '#8F8F8F',

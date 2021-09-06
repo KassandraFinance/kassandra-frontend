@@ -52,7 +52,7 @@ export const Label = styled.label`
   ${({ theme }) => css`
     font-size: ${theme.font.sizes.medium};
     font-weight: ${theme.font.light};
-    color: ${theme.colors.lightGray};
+    color: ${theme.colors.white};
     cursor: pointer;
     ${media.lessThan('small')`
     font-size: ${theme.font.sizes.small};

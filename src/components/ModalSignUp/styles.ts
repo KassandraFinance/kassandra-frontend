@@ -1,5 +1,6 @@
 import styled, {css} from 'styled-components'
 import media from "styled-media-query";
+import { Close } from "../ModalRequestUnstake/styles";
 
 
 export const Backdrop = styled.div`
@@ -54,19 +55,25 @@ export const BackgroundBlack = styled.div`
   color: #FCFCFC;
   width: 100%;
   height: 100%;
-  padding:3.2rem;
+  padding-top:0rem;
 `
 
 
 export const InterBackground = styled.div`
   background: #211426;
   margin-bottom: 4rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
-  height: 6.8rem;
-  padding: 24px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  padding: 0 4rem;
+
+
+  /* height: 6.8rem; */
+  /* padding: 24px; */
+  img{
+    max-width: 100%;
+  }
 
   @media(max-width: 560px){
     display: flex;
@@ -89,10 +96,16 @@ export const InterBackground = styled.div`
 
 export const ModalText = styled.h1`
 ${({theme})=> css`
-    font-size: ${theme.font.sizes.xlarge};
+    display: block;
+    position:relative;
+
+    font-size:${theme.font.sizes.xlarge};
     font-weight: ${theme.font.light};
     text-align: center;
-    margin: 0 4rem;
+    letter-spacing: 0.4rem;
+    line-height: 110%;
+
+    padding:0 4rem;
     margin-bottom: 4rem;
     @media(max-width: 560px){
       /* margin-bottom: 0; */
@@ -104,14 +117,17 @@ ${({theme})=> css`
   }
 `}
 `
-export const WrapperButton = styled.h1`
+export const WrapperClose = styled.h1`
 ${({theme})=> css`
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    height: 2.4rem;
+    height: 4.6rem;
+    padding-top: 2.2rem;
+    padding-right: 2.4rem;
     background: #211426;
-    margin-bottom: -2rem;
+    /* margin-bottom: 1.6rem; */
+    /* margin-right: -2rem; */
 
     button {
       background-color: transparent;
@@ -138,4 +154,13 @@ export const Content = styled.div`
     height:100%;
     justify-content: initial;
   }
+`
+export const WrapperButton = styled.div`
+  display:flex;
+  flex-direction: column;
+
+
+`
+export const WrapperInput = styled.div`
+  padding: 0 4rem 4rem;
 `

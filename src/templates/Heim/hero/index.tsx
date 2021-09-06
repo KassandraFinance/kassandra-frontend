@@ -50,9 +50,9 @@ export function Hero({ setModalOpen, setModalSignupOpen }) {
             <S.Title>
               Get exposure to the hottest communities in the market.
             </S.Title>
-            <S.Image>
+            <S.ImageMobile>
               <img src="assets/HeimCurrency.svg" alt="" />
-            </S.Image>
+            </S.ImageMobile>
             <S.SubTitle>
               Introducing a single asset that tracks the performance of the
               cryptocurrencies with the most solid and engaged communities

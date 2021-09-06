@@ -22,8 +22,8 @@ export const Feature = () => {
         </div>
         <S.WrapperItems>
           <S.ItemContainer>
-            <S.ItemImage>
-              <img src="assets/connectionHeim.png" alt="" />
+            <S.ItemImage style={{ marginTop: '-24px' }}>
+              <img src="assets/connectionHeim.svg" alt="" />
             </S.ItemImage>
             <S.ItemText>
               <S.ItemTitle>A decentralized ETF</S.ItemTitle>
@@ -35,7 +35,7 @@ export const Feature = () => {
           </S.ItemContainer>
           <S.ItemContainer>
             <S.ItemImage>
-              <img src="assets/balanceHeim.png" alt="" />
+              <img src="assets/balanceHeim.svg" alt="" />
             </S.ItemImage>
             <S.ItemText>
               <S.ItemTitle>Constantly rebalanced</S.ItemTitle>
@@ -48,7 +48,7 @@ export const Feature = () => {
           </S.ItemContainer>
           <S.ItemContainer>
             <S.ItemImage>
-              <img src="assets/compassHeim.png" alt="" />
+              <img src="assets/compassHeim.svg" alt="" />
             </S.ItemImage>
             <S.ItemText>
               <S.ItemTitle>Guided by communities</S.ItemTitle>

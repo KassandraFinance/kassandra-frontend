@@ -11,6 +11,10 @@ import {
   Content,
   InterBackground,
   ModalText,
+  WrapperButton,
+  WrapperClose,
+  WrapperInput,
+
  } from './styles'
 
  interface IModalSocialProps {
@@ -65,17 +69,17 @@ export const ModalSignUp = ({
         modalOpen={modalSignupOpen}
       >
         <BackgroundBlack>
+          <WrapperClose>
+            <button type="button" onClick={() => setModalSignupOpen(false)}><img src="assets/close.svg" alt=""/> </button>
+          </WrapperClose>
           <InterBackground >
             <img src='./assets/logo-header.svg' alt=''/>
-            <button type="button" onClick={() => setModalSignupOpen(false)}><img src="assets/close.svg" alt=""/> </button>
           </InterBackground>
           <Content>
             <ModalText>
-              <span>
                 Subscribe to HEIM Social Index updates and launch
-              </span>
             </ModalText>
-            <>
+            <WrapperInput>
             <iframe title="a" name="hiddenFrame" width="0" height="0" style={{display: 'none'}} />
               <form
                 action="https://beta.heimdall.land/subscribe/heim"
@@ -115,19 +119,22 @@ export const ModalSignUp = ({
                   }
                 />
 
-              {/* <S.ButtonWrapper> */}
-              <MediaMatch greaterThan='small'>
-                <Button size="huge" type='submit' disabled={!validForm(formState)}>
-                  Sign me up!
-                </Button>
+              <MediaMatch greaterThan='small' >
+                <WrapperButton>
+                  <Button size="huge" type='submit' disabled={!validForm(formState)}>
+                    Sign me up!
+                  </Button>
+                </WrapperButton>
               </MediaMatch>
-              <MediaMatch lessThan='small'>
-                <Button size="medium"  type='submit'>
-                  Sign me up!
-                </Button>
+              <MediaMatch lessThan='small' >
+                <WrapperButton>
+                  <Button size="medium" type='submit' disabled={!validForm(formState)}>
+                    Sign me up!
+                  </Button>
+                </WrapperButton>
               </MediaMatch>
               </form>
-            </>
+            </WrapperInput>
           </Content>
           </BackgroundBlack>
       </BorderGradient>
