@@ -31,7 +31,7 @@ export const HowItWorks = ({ setModalSignupOpen, setModalSuccessOpen }) => (
           <img src="./assets/HeimIcon.svg" alt="" />
           <Button
             backgroundPrimary
-            size="small"
+            size="medium"
             onClick={() => setModalSignupOpen(true)}
             fullWidth
           >

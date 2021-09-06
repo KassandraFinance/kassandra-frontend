@@ -21,12 +21,17 @@ ${()=>css`
     height: calc(100vh - 160px);
     margin-bottom: 0rem;
     }
+    @media(max-width: 1000px){
+    height: 100%;
+    margin-bottom: 0rem;
+    }
     ${media.lessThan('medium')`
       position: relative;
       margin-bottom: 2.5rem;
       display: flex;
       flex-direction: column;
-      height: 100%;
+
+
     `}
   `}
 `
