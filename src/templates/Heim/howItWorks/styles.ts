@@ -116,7 +116,7 @@ export const SignupWrapper = styled.div`
   position:absolute;
   align-items:center;
   transform: translateX(-50%);
-  left: 48%;
+  left: 50%;
   top: 50%;
   margin-top:45rem;
   /* max-width: 100%; */

@@ -3,42 +3,42 @@
 <rect width="1503" height="266.899" transform="matrix(-0.553198 0.83305 0.83305 0.553198 457.457 1257)" fill="url(#paint1_linear)"/>
 <path d="M1478.79 2101.49L-45.2085 2101.49L547.792 1285.49L874.792 1285.49L1478.79 2101.49Z" fill="url(#paint2_linear)"/>
 <rect x="982.34" y="1277" width="1503" height="268.899" transform="rotate(56.4133 982.34 1277)" fill="url(#paint3_linear)"/>
-<path d="M381.361 33.0039C-7.5317 33.0039 -124 166.697 -124 257.257L446.843 1233H1036.68L1685 175.308C1119.66 264.38 812.926 33.0039 381.361 33.0039Z" fill="url(#paint4_linear)"/>
+<path d="M361.361 33.0039C-27.5317 33.0039 -144 166.697 -144 257.257L426.843 1233H1016.68L1665 175.308C1099.66 264.38 792.926 33.0039 361.361 33.0039Z" fill="url(#paint4_linear)"/>
 <rect x="457.454" y="1401.72" width="1503" height="268.899" transform="rotate(-123.587 457.454 1401.72)" fill="url(#paint5_linear)"/>
 <rect width="1503" height="266.899" transform="matrix(0.553198 -0.83305 -0.83305 -0.553198 982.338 1421.72)" fill="url(#paint6_linear)"/>
-<rect x="697.858" y="1084.08" width="88" height="87.0984" fill="url(#pattern0)"/>
-<rect x="551.999" y="1084.08" width="89.8589" height="87.0984" fill="url(#pattern1)"/>
-<rect x="841.858" y="1092.98" width="56.7742" height="87.0984" fill="url(#pattern2)"/>
-<rect x="982.304" y="846.535" width="87.9203" height="87.0984" fill="url(#pattern3)"/>
-<rect x="547.919" y="846.535" width="87.9203" height="87.0984" fill="url(#pattern4)"/>
-<rect width="89.7774" height="87.0985" transform="matrix(0.999961 0.00885293 -0.0088369 0.999961 692.609 845.545)" fill="url(#pattern5)"/>
-<rect x="838.383" y="846.535" width="87.9203" height="87.0984" fill="url(#pattern6)"/>
-<rect x="403.999" y="846.535" width="87.9203" height="87.0984" fill="url(#pattern7)"/>
-<rect x="327.999" y="726.775" width="88.0146" height="87.0984" fill="url(#pattern8)"/>
-<rect x="760.043" y="726.775" width="88.0146" height="87.0984" fill="url(#pattern9)"/>
-<rect x="616.028" y="726.775" width="88.0146" height="87.0984" fill="url(#pattern10)"/>
-<rect x="904.058" y="726.775" width="88.0146" height="87.0984" fill="url(#pattern11)"/>
-<rect x="1048.07" y="726.775" width="89.8738" height="87.0984" rx="43.5492" fill="url(#pattern12)"/>
-<rect x="472.014" y="726.775" width="88.0146" height="87.0984" fill="url(#pattern13)"/>
-<rect x="1113" y="608.004" width="88" height="87.0984" fill="url(#pattern14)"/>
-<rect x="680.999" y="608.004" width="88" height="87.0984" fill="url(#pattern15)"/>
-<rect x="824.999" y="608.004" width="88" height="87.0984" fill="url(#pattern16)"/>
-<rect x="536.999" y="608.004" width="88" height="87.0984" fill="url(#pattern17)"/>
-<rect x="256.999" y="608.004" width="88" height="87.0984" fill="url(#pattern18)"/>
-<rect x="400.999" y="608.004" width="80" height="87.0984" fill="url(#pattern19)"/>
-<rect x="968.999" y="608.004" width="88" height="87.0984" fill="url(#pattern20)"/>
-<rect x="892.999" y="965.307" width="88" height="87.0984" fill="url(#pattern21)"/>
-<rect x="604.999" y="965.307" width="88" height="87.0984" fill="url(#pattern22)"/>
-<rect x="748.999" y="965.307" width="88" height="87.0984" fill="url(#pattern23)"/>
-<rect x="460.999" y="965.307" width="88" height="87.0984" fill="url(#pattern24)"/>
-<rect x="1073" y="489.236" width="88" height="87.0984" fill="url(#pattern25)"/>
-<rect x="928.999" y="489.236" width="88" height="87.0984" fill="url(#pattern26)"/>
-<rect x="474.999" y="489.236" width="88" height="87.0984" fill="url(#pattern27)"/>
-<rect x="618.999" y="489.236" width="110" height="87.0984" fill="url(#pattern28)"/>
-<rect x="784.999" y="489.236" width="88" height="87.0984" fill="url(#pattern29)"/>
-<rect x="1217" y="489.236" width="88" height="87.0984" fill="url(#pattern30)"/>
-<rect x="330.999" y="489.236" width="88" height="87.0984" fill="url(#pattern31)"/>
-<rect x="186.999" y="489.004" width="88" height="88" fill="url(#pattern32)"/>
+<rect x="671.859" y="1084.08" width="88" height="87.0984" fill="url(#pattern0)"/>
+<rect x="526" y="1084.08" width="89.8589" height="87.0984" fill="url(#pattern1)"/>
+<rect x="815.859" y="1092.98" width="56.7742" height="87.0984" fill="url(#pattern2)"/>
+<rect x="956.305" y="846.535" width="87.9203" height="87.0984" fill="url(#pattern3)"/>
+<rect x="521.92" y="846.535" width="87.9203" height="87.0984" fill="url(#pattern4)"/>
+<rect width="89.7774" height="87.0985" transform="matrix(0.999961 0.00885293 -0.0088369 0.999961 666.61 845.545)" fill="url(#pattern5)"/>
+<rect x="812.384" y="846.535" width="87.9203" height="87.0984" fill="url(#pattern6)"/>
+<rect x="378" y="846.535" width="87.9203" height="87.0984" fill="url(#pattern7)"/>
+<rect x="302" y="726.775" width="88.0146" height="87.0984" fill="url(#pattern8)"/>
+<rect x="734.044" y="726.775" width="88.0146" height="87.0984" fill="url(#pattern9)"/>
+<rect x="590.029" y="726.775" width="88.0146" height="87.0984" fill="url(#pattern10)"/>
+<rect x="878.059" y="726.775" width="88.0146" height="87.0984" fill="url(#pattern11)"/>
+<rect x="1022.07" y="726.775" width="89.8738" height="87.0984" rx="43.5492" fill="url(#pattern12)"/>
+<rect x="446.015" y="726.775" width="88.0146" height="87.0984" fill="url(#pattern13)"/>
+<rect x="1087" y="608.004" width="88" height="87.0984" fill="url(#pattern14)"/>
+<rect x="655" y="608.004" width="88" height="87.0984" fill="url(#pattern15)"/>
+<rect x="799" y="608.004" width="88" height="87.0984" fill="url(#pattern16)"/>
+<rect x="511" y="608.004" width="88" height="87.0984" fill="url(#pattern17)"/>
+<rect x="231" y="608.004" width="88" height="87.0984" fill="url(#pattern18)"/>
+<rect x="375" y="608.004" width="80" height="87.0984" fill="url(#pattern19)"/>
+<rect x="943" y="608.004" width="88" height="87.0984" fill="url(#pattern20)"/>
+<rect x="867" y="965.307" width="88" height="87.0984" fill="url(#pattern21)"/>
+<rect x="579" y="965.307" width="88" height="87.0984" fill="url(#pattern22)"/>
+<rect x="723" y="965.307" width="88" height="87.0984" fill="url(#pattern23)"/>
+<rect x="435" y="965.307" width="88" height="87.0984" fill="url(#pattern24)"/>
+<rect x="1047" y="489.236" width="88" height="87.0984" fill="url(#pattern25)"/>
+<rect x="903" y="489.236" width="88" height="87.0984" fill="url(#pattern26)"/>
+<rect x="449" y="489.236" width="88" height="87.0984" fill="url(#pattern27)"/>
+<rect x="593" y="489.236" width="110" height="87.0984" fill="url(#pattern28)"/>
+<rect x="759" y="489.236" width="88" height="87.0984" fill="url(#pattern29)"/>
+<rect x="1191" y="489.236" width="88" height="87.0984" fill="url(#pattern30)"/>
+<rect x="305" y="489.236" width="88" height="87.0984" fill="url(#pattern31)"/>
+<rect x="161" y="489.004" width="88" height="88" fill="url(#pattern32)"/>
 <path d="M-39 577.234H1485L892 1393.23H565L-39 577.234Z" fill="url(#paint7_linear)"/>
 <g filter="url(#filter0_f)">
 <path d="M893 1445.17C893 1496.15 870.437 1541.91 834.73 1573.24L751.723 1501.27H832.35C838.87 1501.27 844.252 1496.05 844.252 1489.49C844.252 1483.05 838.974 1477.72 832.35 1477.72H607.651C601.131 1477.72 595.749 1482.94 595.749 1489.49C595.749 1495.94 601.027 1501.27 607.651 1501.27H698.214L608.583 1576C570.909 1544.57 547 1497.58 547 1445.07C547 1350.57 624.418 1274 719.949 1274C815.479 1274.1 893 1350.68 893 1445.17Z" stroke="url(#paint8_linear)" stroke-width="8" stroke-miterlimit="10"/>
@@ -166,7 +166,7 @@
 <stop offset="0.467988"/>
 <stop offset="1" stop-opacity="0"/>
 </linearGradient>
-<linearGradient id="paint4_linear" x1="1221.63" y1="-101.958" x2="1221.63" y2="1803.9" gradientUnits="userSpaceOnUse">
+<linearGradient id="paint4_linear" x1="1201.63" y1="-101.958" x2="1201.63" y2="1803.9" gradientUnits="userSpaceOnUse">
 <stop stop-color="#FFBF00"/>
 <stop offset="0.439963" stop-color="#EC56A5" stop-opacity="0.5"/>
 <stop offset="0.688785" stop-color="#E843C4" stop-opacity="0"/>
