@@ -21,6 +21,9 @@ export const Hero = styled.section`
   @media (max-width: 370px) {
     height: calc(100vh - 160px);
   }
+  @media (max-width: 330px) {
+    padding: 0 20px;
+  }
   h1 {
     font-size: 112px;
     font-weight: 400;

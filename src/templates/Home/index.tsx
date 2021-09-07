@@ -4,6 +4,7 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 import Hero from './Hero'
 import Products from './Products'
 import ClassProducts from './ClassProducts'
+import Token from './Token'
 
 import * as S from './styles'
 
@@ -20,26 +21,7 @@ const Home = () => {
       <Hero />
       <Products />
       <ClassProducts />
-      <S.Token>
-        <h1>Be part of the Kassandra ecosystem with $KACY </h1>
-        <p>Take the lead and join the first decentralized fund manager through our decentralized governance protocol</p>
-        <div className="grid-details">
-          <img className="img-token" src="assets/token.svg" alt="" />
-          <img className="img-token-96" src="assets/token-96.svg" alt="" />
-          <div>
-            <h3>The $KACY Token</h3>
-            <p>The protocol governance token responsible for:</p>
-            {/* <p>It is the protocol governance token, and is responsible for:</p> */}
-            <ul>
-              <li>Approving code changes and updates </li>
-              <li>Deploying new investment products</li>
-              <li>Curating whitelists for investable assets</li>
-              <li>Adjusting parameters and fees</li>
-            </ul>
-            <a href="https://twitter.com/dao_kassandra" target="_blank" rel="noopener noreferrer">Coming soon...</a>
-          </div>
-        </div>
-      </S.Token>
+      <Token />
       <S.KassandraSuccess>
         <h1>Earn with the success of the Kassandra products</h1>
         <p>Like traditional fund managers, the $KACY token holders
