@@ -55,7 +55,7 @@ export const MobileHero = styled.div`
     margin-top:15rem;
   }
   @media (max-width: 375px){
-    /* margin-top:15rem; */
+    margin-top:0rem;
   }
   @media (max-width: 360px){
     margin-top:1rem;
@@ -65,7 +65,7 @@ export const MobileHero = styled.div`
     /* height:auto; */
   }
   @media(max-width: 320px){
-    margin-top:-2rem;
+    margin-top:0rem;
   }
   @media(max-width: 280px){
     margin-top:2rem;
@@ -82,6 +82,9 @@ export const SubTitle = styled.h3`
       /* margin: ${theme.spacings.xsmall} 0 ${theme.spacings.small}  0; */
     `}
   `}
+  @media(max-width: 320px){
+    margin-bottom:2rem;
+  }
 `
 
 export const ImageMobile = styled.div`
@@ -197,7 +200,7 @@ export const FloatImage = styled.div`
     bottom:2rem;
     right: 1rem;
   img{
-    max-width: 40%;
+    max-width: 50%;
   };
   `}
 `

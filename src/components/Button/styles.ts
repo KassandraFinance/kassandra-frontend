@@ -74,24 +74,14 @@ const wrapperModifiers = {
 
   backgroundPrimary: (theme: DefaultTheme) => css`
     background: linear-gradient(264.12deg, #E843C4 -140.16%, #020887 205.21%);
-<<<<<<< HEAD
-    transition: ease-in-out 0.15s;
+    transition: all ease-in-out 0.15s;
     backface-visibility: hidden;
-=======
-    -webkit-transition: ease-out 0.4s;
-    -moz-transition: ease-out 0.4s;
-    transition: all ease-out 0.4s;
-    
->>>>>>> 099bb42f78d0fae2d127b14e2a55a77e6dccba76
     &::before {
     }
     &:hover{
       box-shadow: inset 500px 0 0 0 #020887;
-<<<<<<< HEAD
       /* opacity: 0.5; */
       transition: 0.15s;
-=======
->>>>>>> 099bb42f78d0fae2d127b14e2a55a77e6dccba76
   }
 `,
   backgroundSecondary: (theme: DefaultTheme) => css`

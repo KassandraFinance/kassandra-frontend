@@ -18,7 +18,7 @@ ${()=>css`
     margin-bottom: 0rem;
     }
     @media(min-width: 1900px){
-    height: calc(100vh - 160px);
+    height: calc(100vh - 110px);
     margin-bottom: 0rem;
     }
     @media(max-width: 1000px){
