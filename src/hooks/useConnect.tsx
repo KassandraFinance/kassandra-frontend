@@ -63,7 +63,6 @@ const useConnect = () => {
         setIsLogged(false)
         dispatch(actionGetUserAddressWallet(''))
       } else if (accounts[0] !== userWalletAddress) {
-        console.log('executou toastfy')
         dispatch(actionGetUserAddressWallet(accounts[0]))
         setIsLogged(true)
         ToastSuccess("Connected to MetaMask.")
@@ -101,7 +100,7 @@ const useConnect = () => {
     } catch (error: any) {
       ToastError(error.message)
     }
-  }, [handleAccountsChanged])
+  }, [])
 
   const hasProvider = React.useCallback(async () => {
     const provider = await detectEthereumProvider()
@@ -120,7 +119,9 @@ const useConnect = () => {
           startApp(provider)
         }
         else {
-          ToastError("User has no permissions")
+          // ToastError("User has no permissions")
+          console.log("User has no permissions")
+          return
         }
       }
     } catch (error) {
