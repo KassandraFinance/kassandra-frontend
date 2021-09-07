@@ -13,7 +13,7 @@ const Home = () => {
   }, [trackPageView])
 
   return (
-    <S.Background>
+    <>
       <S.Hero>
         <div>
           <h1>Kassandra DAO</h1>
@@ -168,7 +168,7 @@ const Home = () => {
           </a>
         </div>
       </S.Supporters>
-    </S.Background>
+    </>
   )
 }
 
