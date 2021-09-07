@@ -1,6 +1,8 @@
 import React from 'react'
-import Link from 'next/link'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
+
+import Hero from './Hero'
+import Products from './Products'
 
 import * as S from './styles'
 
@@ -14,77 +16,24 @@ const Home = () => {
 
   return (
     <>
-      <S.Hero>
-        <div>
-          <h1>Kassandra DAO</h1>
-          <div className='h3-desktop'>
-            <h3>The decentralized autonomous organization that governs tokenized data-driven investment funds.</h3>
-            <S.ButtonContainer>
-              <Link href="/heim" >View the $HEIM Index</Link>
-              <a
-                className="withepaper"
-                href="https://drive.google.com/file/d/12jxIMtBVqaY7bMbLmt52Lo0xDFUURZsb/view?usp=sharing"  
-                target="_blank" 
-                rel="noopener noreferrer"
-                >Whitepaper</a>
-            </S.ButtonContainer>
-          </div>
-        </div>
-        <img src="assets/kassandra-600.svg" alt="" className="kassandra" />
-        <div className="h3-mobile">
-          <h3>The decentralized autonomous organization that governs tokenized data-driven investment funds.</h3>
-          <S.ButtonContainer>
-            <Link href="/heim" >View the $HEIM Index</Link>
-            <a
-              className="withepaper"
-              href="https://drive.google.com/file/d/12jxIMtBVqaY7bMbLmt52Lo0xDFUURZsb/view?usp=sharing"  
-              target="_blank" 
-              rel="noopener noreferrer"
-              >Whitepaper</a>
-          </S.ButtonContainer>
-        </div>
-      </S.Hero>
-      <S.Products>
-        <h1>Products</h1>
-        <p>Tokens backed by a basket of assets, managed by autonomous strategies with data from external data providers</p>
-        <div className="heim-container">
-          <img src="assets/logo-heim.svg" alt="" width="250" height="250" />
-          <div className="heim-grid-left">
-            <div className="top-social-index">
-              <h3>Top Social Index</h3>
-              <a 
-                className="arrow-right"
-                href="https://medium.com/heimdall-research-crypto/the-heimdall-social-index-9595fdfb9ddc" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                >
-                Check out Heim Index
-                <img src="assets/arrow-right.svg" alt="" width="17" height="10" /> 
-              </a>
-            </div>
-            <p className="first-paragraph">The Social Index $HEIM reflects the performance of a portfolio selected from the most socially active cryptocurrencies in the past 30 days, using Heimdall Social Score data.</p>
-            <p className="second-paragraph">$HEIM offers an easy exposure to the hottest cryptocurrencies in the market.</p>
-          </div>
-        </div>
-        <img className="more-icon" src="assets/more-icon.svg" alt="" width="24" height="48" />
-        <p className="more-text">More coming soon</p>
-      </S.Products>
+      <Hero />
+      <Products />
       <S.ClassProducts>
         <h1>A new class of investment products in DeFi</h1>
         <p>Monetary efficient and actively managed decentralized investment baskets</p>
         <ul>
           <li>
-            <img src="assets/Icon/permissionless.svg" alt="" width="106" height="148" />
+            <img src="assets/Icon/permissionless.svg" alt="" />
             <h3>Permissionless</h3>
             <p>Invest, transfer and redeem investment products without relying on third-parties</p>
           </li>
           <li>
-            <img src="assets/Icon/non-custodial.svg" alt="" width="148" height="148" />
+            <img src="assets/Icon/non-custodial.svg" alt="" />
             <h3>Non-custodial</h3>
             <p>Your funds managed by public, secure, and predictable smart-contracts</p>
           </li>
           <li>
-            <img src="assets/Icon/actively-managed.svg" alt="" width="122" height="150" />
+            <img src="assets/Icon/actively-managed.svg" alt="" />
             <h3>Actively managed</h3>
             <p>Outsource the management of your money to data-driven quantitative models</p>
           </li>
@@ -94,8 +43,8 @@ const Home = () => {
         <h1>Be part of the Kassandra ecosystem with $KACY </h1>
         <p>Take the lead and join the first decentralized fund manager through our decentralized governance protocol</p>
         <div className="grid-details">
-          <img className="img-token" src="assets/token.svg" alt="" width="116" height="105" />
-          <img className="img-token-96" src="assets/token-96.svg" alt="" width="556" height="501" />
+          <img className="img-token" src="assets/token.svg" alt="" />
+          <img className="img-token-96" src="assets/token-96.svg" alt="" />
           <div>
             <h3>The $KACY Token</h3>
             <p>The protocol governance token responsible for:</p>
