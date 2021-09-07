@@ -1,167 +1,5 @@
 import styled from 'styled-components'
 
-export const Background = styled.div`
-  background: linear-gradient(90deg, #200A1B 0%, #000000 50%);
-`
-
-export const Hero = styled.section`
-  height: calc(100vh - 110px);
-  padding: 0 32px;
-  display: grid;
-  margin: 0 auto;
-  grid-template-columns: 1fr 1fr;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1520px;
-  @media (max-width: 770px) {
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 160px);
-  }
-  @media (max-width: 600px) {
-    height: calc(100vh - 140px);
-  }
-  @media (max-width: 370px) {
-    height: calc(100vh - 160px);
-  }
-  h1 {
-    font-size: 112px;
-    font-weight: 400;
-    line-height: 94px;
-    @media (max-width: 1200px) {
-      font-size: 80px;
-      line-height: 70px;
-    }
-    @media (max-width: 960px) {
-      font-size: 70px;
-      line-height: 60px;
-    }
-    @media (max-width: 770px) {
-      font-size: 60px;
-      margin-bottom: 32px;
-    }
-    @media (max-width: 600px) {
-      font-size: 50px;
-    }
-    @media (max-width: 420px) {
-      font-size: 36px;
-      margin-bottom: 0;
-    }
-  }
-  h3 {
-    font-size: 24px;
-    font-weight: 300;
-    margin: 32px 0;
-    max-width: 600px;
-    @media (max-width: 1200px) {
-      font-size: 27px;
-    }
-    @media (max-width: 960px) {
-      font-size: 22px;
-    }
-    @media (max-width: 600px) {
-      max-width: 440px;
-    }
-    @media (max-width: 420px) {
-      font-size: 20px;
-      max-width: 360px;
-    }
-  }
-  .kassandra {
-    max-height: 700px;
-  }
-  .h3-desktop {
-    @media (max-width: 770px) {
-      display: none;
-    }
-  }
-  .h3-mobile {
-    text-align: center;
-    margin: 0 auto;
-    h3 {
-      margin: 8px 0 32px;
-      font-size: 18px;
-    @media (min-width: 375px) {
-      margin: 8px 0 16px;
-    }
-    }
-    @media (min-width: 771px) {
-      display: none;
-    }
-  }
-  .withepaper {
-    background: transparent;
-    border: 1px solid #26DBDB;
-    border-radius: 6px;
-    color: #fcfcfc;
-    text-decoration: none;
-    font-size: 20px;
-
-    height: 52px;
-    padding: 12px 32px;
-    cursor: pointer;
-    transition-duration: 300ms;
-    &:hover {
-      background-color: #26DBDB;
-      color: #211426;
-    }
-    @media (max-width: 600px) {
-      font-size: 16px;
-      height: 48px;
-    }
-  }
-  img {
-    max-width: 560px;
-    width: 100%;
-
-    @media (min-width: 1440px) {
-      max-width: 100%;
-    }
-    @media (max-width: 1240px) {
-      max-width: 100%;
-      min-width: 230px;
-    }
-    @media (max-width: 770px) {
-      max-width: 400px;
-    }
-    @media (max-width: 600px) {
-      max-width: 300px;
-    }
-  }
-
-  a {
-    background: linear-gradient(264.12deg, #E843C4 -179.71%, #020887 205.21%);
-    border: none;
-    border-radius: 6px;
-    color: #fcfcfc;
-    text-decoration: none;
-    font-size: 20px;
-
-    height: 52px;
-    padding: 12px 32px;
-    cursor: pointer;
-    @media (max-width: 600px) {
-      font-size: 16px;
-      height: 48px;
-    }
-  }
-`
-
-export const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  max-width: 460px;
-  @media (max-width: 770px) {
-    margin: 0 auto;
-  }
-  @media (max-width: 560px) {
-    max-width: 400px;
-  }
-  @media (max-width: 440px) {
-    flex-direction: column;
-    height: 110px;
-  }
-`
 
 export const Products = styled.section`
   padding: 40px 32px;
@@ -283,7 +121,8 @@ export const Products = styled.section`
 export const ClassProducts = styled.section`
   padding: 40px 32px 80px;
   text-align: center;
-
+  max-width: 1520px;
+  margin: 0 auto;
   h1 {
     font-size: 44px;
     font-weight: 400;
@@ -408,7 +247,7 @@ export const ClassProducts = styled.section`
 `
 
 export const Token = styled.section`
-    padding: 40px 32px;
+  padding: 40px 32px;
   text-align: center;
 
   h1 {
@@ -435,13 +274,15 @@ export const Token = styled.section`
     grid-template-columns: 1fr 1fr;
     align-items: center;
     justify-items: center;
+    max-width: 1520px;
+    margin: 0 auto;
     @media (max-width: 1160px) {
       grid-template-columns: 1fr;
       justify-items: center;
     }
     .img-token {
       display: block;
-      width: 100%;
+      max-width: 100%;
       height: 100%;
       @media (max-width: 1160px) {
         margin-top: 48px;
@@ -538,7 +379,7 @@ export const Token = styled.section`
 `
 
 export const KassandraSuccess = styled.section`
-    padding: 80px 32px 200px;
+  padding: 80px 32px 80px;
   @media (min-width: 1880px) {
     padding: 80px 0 240px;
   }
@@ -570,6 +411,8 @@ export const KassandraSuccess = styled.section`
   }
   .successgrid {
     display: flex;
+    max-width: 1520px;
+    margin: 0 auto;
     @media (max-width: 1024px) {
       flex-direction: column;
       max-width: 700px;
