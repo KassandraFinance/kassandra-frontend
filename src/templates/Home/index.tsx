@@ -2,6 +2,7 @@ import React from 'react'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import Hero from './Hero'
+import Products from './Products'
 
 import * as S from './styles'
 
@@ -16,31 +17,7 @@ const Home = () => {
   return (
     <>
       <Hero />
-      <S.Products>
-        <h1>Products</h1>
-        <p>Tokens backed by a basket of assets, managed by autonomous strategies with data from external data providers</p>
-        <div className="heim-container">
-          <img src="assets/logo-heim.svg" alt="" width="250" height="250" />
-          <div className="heim-grid-left">
-            <div className="top-social-index">
-              <h3>Top Social Index</h3>
-              <a 
-                className="arrow-right"
-                href="https://medium.com/heimdall-research-crypto/the-heimdall-social-index-9595fdfb9ddc" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                >
-                Check out Heim Index
-                <img src="assets/arrow-right.svg" alt="" width="17" height="10" /> 
-              </a>
-            </div>
-            <p className="first-paragraph">The Social Index $HEIM reflects the performance of a portfolio selected from the most socially active cryptocurrencies in the past 30 days, using Heimdall Social Score data.</p>
-            <p className="second-paragraph">$HEIM offers an easy exposure to the hottest cryptocurrencies in the market.</p>
-          </div>
-        </div>
-        <img className="more-icon" src="assets/more-icon.svg" alt="" width="24" height="48" />
-        <p className="more-text">More coming soon</p>
-      </S.Products>
+      <Products />
       <S.ClassProducts>
         <h1>A new class of investment products in DeFi</h1>
         <p>Monetary efficient and actively managed decentralized investment baskets</p>
