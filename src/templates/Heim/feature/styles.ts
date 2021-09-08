@@ -14,16 +14,19 @@ ${()=>css`
     height: calc(100vh);
 
     @media(min-width: 1400px){
-    height: calc(100vh - 110px);
-    margin-bottom: 0rem;
+      height: calc(100vh - 110px);
+      margin-bottom: 0rem;
     }
     @media(min-width: 1900px){
-    height: calc(100vh - 110px);
-    margin-bottom: 0rem;
+      height: calc(100vh - 160px);
+      margin-bottom: 0rem;
     }
     @media(max-width: 1000px){
-    height: 100%;
-    margin-bottom: 0rem;
+      height: 100%;
+      margin-bottom: 0rem;
+    }
+    @media(max-height: 660px){
+      min-height: 90vh;
     }
     ${media.lessThan('medium')`
       position: relative;
