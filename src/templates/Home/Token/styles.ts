@@ -124,37 +124,37 @@ export  const Description = styled.div`
       font-size: 13px;
     }
   }
-  a {
-    background: linear-gradient(264.12deg, #E843C4 -179.71%, #020887 205.21%);
-    border: none;
-    border-radius: 6px;
-    color: #fcfcfc;
-    text-align: center;
-    text-decoration: none;
-    font-size: 20px;
-    line-height: 20px;
-
-    height: 52px;
-    padding: 16px 32px;
-    margin: 16px 0;
-    cursor: pointer;
-    transition-duration: 300ms;
-    &:hover {
-      background: #020887;
-    }
-    @media (max-width: 1160px) {
-      display: block;
-      margin: 0 auto;
-      text-align: center;
-    }
-    @media (max-width: 600px) {
-      font-size: 16px;
-      line-height: 16px;
-      height: 48px;
-    }
-    @media (max-width: 390px) {
-      width: 100%;
-    }
-  }
 `
 
+export const ButtonModalSocial = styled.button`
+  background: linear-gradient(264.12deg, #E843C4 -179.71%, #020887 205.21%);
+  border: none;
+  border-radius: 6px;
+  color: #fcfcfc;
+  text-align: center;
+  text-decoration: none;
+  font-size: 20px;
+  line-height: 20px;
+
+  height: 52px;
+  padding: 16px 32px;
+  margin: 16px 0;
+  cursor: pointer;
+  transition-duration: 300ms;
+  &:hover {
+    background: #020887;
+  }
+  @media (max-width: 1160px) {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+  }
+  @media (max-width: 600px) {
+    font-size: 16px;
+    line-height: 16px;
+    height: 48px;
+  }
+  @media (max-width: 390px) {
+    width: 100%;
+  }
+`
