@@ -36,4 +36,5 @@ yarn-error.log*
 # jest
 __snapshots__
 
+.vscode/
 ngrok.exe
