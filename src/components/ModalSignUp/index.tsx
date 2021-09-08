@@ -80,7 +80,9 @@ export const ModalSignUp = ({
                 method="POST"
                 target="hiddenFrame"
                 onSubmit={() => {
-                  setFormState({});
+                  setTimeout(() => {
+                    setFormState({name:'', email: ''})
+                  }, 2000); ;
                   handleCloseModal();
                   if (setModalSuccessOpen) setModalSuccessOpen(true);
                 }}

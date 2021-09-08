@@ -38,12 +38,14 @@ export const SingUp = ({  setModalSuccessOpen} : ISignUpProps) => {
           <S.SubTitle>Join the $KACY community</S.SubTitle>
         </S.WrapperText>
         <iframe title="a" name="hiddenFrame" width="0" height="0" style={{display: 'none'}} />
-        <form id='sign-up' action="https://beta.heimdall.land/subscribe/heim" method="POST"
-
-        target="hiddenFrame" onSubmit={
-          (e) => {
-            setTimeout(() =>setFormState({}), 2000)
-            // e.preventDefault();
+        <form
+          action="https://beta.heimdall.land/subscribe/heim"
+          method="POST"
+          target="hiddenFrame"
+          onSubmit={() => {
+            setTimeout(() => {
+              setFormState({name:'', email: ''})
+            }, 1000); ;
             setModalSuccessOpen(true);
           }}>
           <TextField
@@ -51,7 +53,7 @@ export const SingUp = ({  setModalSuccessOpen} : ISignUpProps) => {
             placeholder="Ex: John Doe"
             type="name"
             label='Your username'
-            value={formState.name || ''}
+            value={formState.name}
             onChange={(e) =>
               onChangeFormParam({
                 key: 'name',
@@ -64,7 +66,7 @@ export const SingUp = ({  setModalSuccessOpen} : ISignUpProps) => {
             placeholder="Ex: username@email.com"
             type="email"
             label='Your email address'
-            value={formState.email || ''}
+            value={formState.email}
             onChange={(e) =>
               onChangeFormParam({
                 key: 'email',
@@ -75,7 +77,7 @@ export const SingUp = ({  setModalSuccessOpen} : ISignUpProps) => {
 
         {/* <S.ButtonWrapper> */}
         <MediaMatch greaterThan='small'>
-          <Button backgroundPrimary size="huge" type='submit'  fullWidth disabledNoEvent={!validForm(formState)}  onClick={() => setFormState({})}>
+          <Button backgroundPrimary size="huge" type='submit'  fullWidth disabledNoEvent={!validForm(formState)}>
             Sign me up!
           </Button>
         </MediaMatch>
