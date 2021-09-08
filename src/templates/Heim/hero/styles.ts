@@ -6,10 +6,10 @@ import * as ButtonStyles from '../../../components/Button/styles'
 export const Container = styled.div``
 
 export const DesktopHero = styled.div`
-  overflow:hidden;
+  overflow: hidden;
   max-width: 1520px;
   margin: auto;
-  height: calc(100vh - 110px);
+  min-height: calc(100vh - 110px);
   position: relative;
   padding: 0 32px;
   display: grid;
@@ -18,17 +18,16 @@ export const DesktopHero = styled.div`
   align-items: center;
   `
 export const MobileHero = styled.div`
-  max-width: 1520px;
-  height: calc(100vh - 160px);
+  text-align: center;
 
   display: flex;
   flex-direction:column;
-  text-align: center;
-  align-content: center;
 
+  max-width: 1520px;
+  min-height: calc(100vh - 160px);
   position: relative;
   padding: 0 24px;
-  margin-bottom: 2.5rem;
+  margin-bottom: 25px;
 
   @media(orientation: landscape){
     height: calc(130vw - 160px);
