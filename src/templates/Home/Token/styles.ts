@@ -140,7 +140,6 @@ export const ButtonModalSocial = styled.button`
   padding: 16px 32px;
   margin: 16px 0;
   cursor: pointer;
-  transition-duration: 300ms;
   &:hover {
     background: #020887;
   }
