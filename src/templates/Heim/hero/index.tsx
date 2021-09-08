@@ -60,7 +60,7 @@ export function Hero({ setModalOpen, setModalSignupOpen }) {
             <S.ButtonWrapper>
               <Button
                 backgroundPrimary
-                size="medium"
+                size="huge"
                 onClick={() => setModalSignupOpen(true)}
               >
                 Get early access

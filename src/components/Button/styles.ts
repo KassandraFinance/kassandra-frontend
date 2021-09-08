@@ -35,7 +35,7 @@ const wrapperModifiers = {
   huge: (theme: DefaultTheme) => css`
     height:4.4rem;
     font-size: ${theme.font.sizes.medium};
-    padding: ${theme.spacings.xsmall} ${theme.spacings.medium};
+    padding: ${theme.spacings.small} ${theme.spacings.xlarge};
   `,
   fullWidth: () => css`
     width: 100%;
@@ -74,14 +74,14 @@ const wrapperModifiers = {
 
   backgroundPrimary: (theme: DefaultTheme) => css`
     background: linear-gradient(264.12deg, #E843C4 -140.16%, #020887 205.21%);
-    transition: all ease-in-out 0.15s;
+    transition: all 0.15s ease-in-out;
     backface-visibility: hidden;
     &::before {
     }
     &:hover{
-      box-shadow: inset 500px 0 0 0 #020887;
-      /* opacity: 0.5; */
-      transition: 0.15s;
+
+      background: #020887 ;
+      transition-delay: ${theme.transition.default};
   }
 `,
   backgroundSecondary: (theme: DefaultTheme) => css`
