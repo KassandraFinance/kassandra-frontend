@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Token = styled.section`
-  padding: 40px 32px;
+  padding: 80px 32px;
   text-align: center;
 
   @media (max-width: 330px) {
@@ -10,7 +10,7 @@ export const Token = styled.section`
 
   h1 {
     font-size: 44px;
-    font-weight: 400;
+    font-weight: 500;
     margin-bottom: 48px;
     @media (max-width: 600px) {
       font-size: 24px;

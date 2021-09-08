@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const KassandraSuccess = styled.section`
-  padding: 80px 32px 80px;
+  padding: 80px 32px 120px;
   max-width: 1220px;
   margin: 0 auto;
   @media (min-width: 1880px) {
@@ -34,41 +34,6 @@ export const KassandraSuccess = styled.section`
   img {
     margin: 0;
   }
-
-  &::after {
-    content: '';
-    display: block;
-    background: url('../../../public/assets/waves.svg') center no-repeat;
-    background-size: cover;
-    max-width: 100%;
-    width: 100vw;
-    height: 200px;
-    margin-top: 60px;
-
-    position: absolute;
-    left: 0;
-    @media (min-width: 1400px) {
-      margin-top: 20px;
-      height: 280px;
-    }
-    @media (min-width: 1880px) {
-      margin-top: 60px;
-    }
-    @media (min-width: 2200px) {
-      margin-top: 120px;
-      height: 320px;
-    }
-    @media (min-width: 2400px) {
-      margin-top: 100px;
-      height: 360px;
-    }
-    @media (max-width: 1000px) {
-      height: 200px;
-    }
-    @media (max-width: 540px) {
-      height: 120px;
-    }
-  }
 `
 
 export const Success = styled.div`
@@ -79,6 +44,48 @@ export const Success = styled.div`
     flex-direction: column;
     max-width: 500px;
     margin: auto;
+  }
+  &::after {
+    content: '';
+    display: block;
+    background: url(/assets/waves.svg) center no-repeat;
+    background-size: cover;
+    max-width: 100%;
+    width: 100vw;
+    height: 200px;
+    margin-top: 520px;
+
+    position: absolute;
+    left: 0;
+    @media (min-width: 1400px) {
+      margin-top: 530px;
+      height: 280px;
+    }
+    @media (min-width: 2200px) {
+      height: 320px;
+    }
+    @media (min-width: 2400px) {
+      height: 360px;
+    }
+    @media (max-width: 1030px) {
+      margin-top: 1340px;
+    }
+    @media (max-width: 1000px) {
+      height: 200px;
+    }
+    @media (max-width: 540px) {
+      margin-top: 1260px;
+      height: 120px;
+    }
+    @media (max-width: 500px) {
+      margin-top: 1300px;
+    }
+    @media (max-width: 420px) {
+      margin-top: 1400px;
+    }
+    @media (max-width: 370px) {
+      margin-top: 1200px;
+    }
   }
 `
 

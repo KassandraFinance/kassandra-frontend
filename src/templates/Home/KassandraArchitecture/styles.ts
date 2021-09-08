@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const KassandraArchitecture = styled.section`
   text-align: center;
-  padding: 40px 32px;
+  padding: 80px 32px;
   max-width: 1520px;
   margin: 0 auto;
   @media (max-width: 320px) {

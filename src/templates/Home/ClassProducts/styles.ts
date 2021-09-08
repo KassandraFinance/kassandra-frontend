@@ -1,14 +1,10 @@
 import styled from 'styled-components'
 
 export const ClassProducts = styled.section`
-  padding: 40px 32px 80px;
+  padding: 80px 32px;
   text-align: center;
   max-width: 1520px;
   margin: 0 auto;
-
-  @media (min-width: 900px) {
-    padding: 120px 32px;
-  }
 
   @media (max-width: 330px) {
     padding: 80px 20px;

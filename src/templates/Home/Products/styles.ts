@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Products = styled.section`
-  padding: 40px 32px;
+  padding: 80px 32px;
   margin: 0 auto;
   max-width: 1520px;
 
