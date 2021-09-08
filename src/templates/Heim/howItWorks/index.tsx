@@ -3,6 +3,7 @@ import React from 'react'
 import * as S from './styles'
 import Button from '../../../components/Button'
 import MediaMatch from '../../../components/MediaMatch'
+import media from 'styled-media-query'
 import SingUp from '../sign-up'
 
 interface IHowItWorksProps {
@@ -19,7 +20,7 @@ export const HowItWorks = ({ setModalSignupOpen, setModalSuccessOpen }: IHowItWo
       <div />
     </S.SpotRight>
     <S.Container>
-      <MediaMatch greaterThan="medium">
+      <S.DesktopContainer>
         <S.ImageDesktop>
           <img src="./assets/crypto-funnel.svg" alt="" />
         </S.ImageDesktop>
@@ -27,13 +28,13 @@ export const HowItWorks = ({ setModalSignupOpen, setModalSuccessOpen }: IHowItWo
           <img src="./assets/HeimIcon.svg" alt="" />
           <SingUp setModalSuccessOpen={setModalSuccessOpen} />
         </S.SignupWrapper>
-      </MediaMatch>
+      </S.DesktopContainer>
       <S.Text>
         Delegate the token discovery to a decentralized organization with skin
         in the game, and <strong>automate your money</strong> managment to a
         data-driven backtested model
       </S.Text>
-      <MediaMatch lessThan="medium">
+      <S.MobileContainer>
         <S.ImageMobile>
           <img src="./assets/crypto-funnelNoText.svg" alt="" />
         </S.ImageMobile>
@@ -48,7 +49,7 @@ export const HowItWorks = ({ setModalSignupOpen, setModalSuccessOpen }: IHowItWo
             Get early access
           </Button>
         </S.MobileSignUp>
-      </MediaMatch>
+        </S.MobileContainer>
     </S.Container>
   </>
 )

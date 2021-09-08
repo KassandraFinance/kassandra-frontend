@@ -32,18 +32,19 @@ export const SingUp = ({  setModalSuccessOpen} : ISignUpProps) => {
   }
 
   return(
-
       <S.Container>
         <S.WrapperText>
           <S.Title>Time to beat the market</S.Title>
           <S.SubTitle>Join the $KACY community</S.SubTitle>
         </S.WrapperText>
         <iframe title="a" name="hiddenFrame" width="0" height="0" style={{display: 'none'}} />
-        <form id='sign-up' action="https://beta.heimdall.land/subscribe/heim" method="POST" target="hiddenFrame" onSubmit={
+        <form id='sign-up' action="https://beta.heimdall.land/subscribe/heim" method="POST"
+
+        target="hiddenFrame" onSubmit={
           (e) => {
+            setTimeout(() =>setFormState({}), 2000)
             // e.preventDefault();
             setModalSuccessOpen(true);
-            setFormState({})
           }}>
           <TextField
             name="user"
@@ -74,7 +75,7 @@ export const SingUp = ({  setModalSuccessOpen} : ISignUpProps) => {
 
         {/* <S.ButtonWrapper> */}
         <MediaMatch greaterThan='small'>
-          <Button backgroundPrimary size="huge" type='submit'  fullWidth disabledNoEvent={!validForm(formState)}>
+          <Button backgroundPrimary size="huge" type='submit'  fullWidth disabledNoEvent={!validForm(formState)}  onClick={() => setFormState({})}>
             Sign me up!
           </Button>
         </MediaMatch>

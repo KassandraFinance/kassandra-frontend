@@ -6,6 +6,11 @@ export const Container = styled.div`
   width: 100%;
   margin: auto;
 `
+export const DesktopContainer = styled.div`
+  @media(max-width: 930px){
+    display: none;
+  }
+`
 export const ImageDesktop = styled.div`
   position: relative;
   display: flex;
@@ -19,6 +24,12 @@ export const ImageDesktop = styled.div`
     display:none;
   `}
 `
+export const MobileContainer = styled.div`
+  @media(min-width: 930px){
+    display: none
+  }
+`
+
 export const ImageMobile = styled.div`
   position: relative;
   display: flex;
@@ -29,7 +40,9 @@ export const ImageMobile = styled.div`
     height: auto;
     margin-bottom: -4rem;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 950px) {
+    /* margin-top: 0; */
+
   }
 `
 
@@ -120,9 +133,6 @@ export const SignupWrapper = styled.div`
   img {
     margin-bottom: 2rem;
     max-width: 100%;
-    @media (max-width: 800px) {
-      display: none;
-    }
   }
   @media (min-width: 1900px) {
     margin-top: 65rem;
@@ -130,8 +140,11 @@ export const SignupWrapper = styled.div`
   @media (max-width: 1300px) {
     margin-top: 35rem;
   }
-  @media (max-width: 1024px) {
+  @media (max-width: 1100px) {
     margin-top: 25rem;
+  }
+  @media (max-width: 945px) {
+    margin-top: 20rem;
   }
 `
 export const SpotLeft = styled.div`
