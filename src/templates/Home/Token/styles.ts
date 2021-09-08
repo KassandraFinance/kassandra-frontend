@@ -138,6 +138,10 @@ export  const Description = styled.div`
     padding: 16px 32px;
     margin: 16px 0;
     cursor: pointer;
+    transition-duration: 300ms;
+    &:hover {
+      background: #020887;
+    }
     @media (max-width: 1160px) {
       display: block;
       margin: 0 auto;
