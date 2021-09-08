@@ -75,7 +75,12 @@ export const Feature = ({ modalSignupOpen, setModalSignupOpen }: IFeatureProps) 
             outperform simpler strategies.
           </S.SubTitle>
         </S.TextWrapper>
-        <img src="assets/backtestGraph.svg" alt="" />
+        <MediaMatch greaterThan="large">
+          <img src="assets/backtestGraph.svg" alt="" />
+        </MediaMatch>
+        <MediaMatch lessThan="large">
+          <img src="assets/backtestGraphMobile.svg" alt="" />
+        </MediaMatch>
         <S.ButtonWrapper>
           <MediaMatch greaterThan="large">
             {/* <Button backgroundPrimary size="large" onClick={() => setModalSuccessOpen(true)}> */}
