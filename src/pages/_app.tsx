@@ -9,13 +9,13 @@ import '../styles/globals.scss'
 import GlobalStyles from '../styles/global'
 import theme from '../styles/theme'
 
-import { storeWrapper } from "../store"
+import { storeWrapper } from '../store'
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Toastify from '../components/Toastify'
 
-const matomoUrl = 'https://stats.kassandra.finance';
+const matomoUrl = 'https://stats.kassandra.finance'
 
 const instance = createInstance({
   disabled: process.env.NODE_ENV === 'development',
@@ -26,32 +26,34 @@ const instance = createInstance({
   configurations: {
     disableCookies: true,
     setRequestMethod: 'POST'
-  },
+  }
 })
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
   <MatomoProvider value={instance}>
     <ThemeProvider theme={theme}>
-        <Head>
-          <title>Kassandra</title>
-          <link rel="icon" href="/favicon.ico" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap" rel="stylesheet" />
-        </Head>
-        <Toastify />
-        <BackgroundLinear>
-          <Header />
-          <GlobalStyles/>
-          <Component {...pageProps} />
-        </BackgroundLinear>
+      <Head>
+        <title>Kassandra</title>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
+      <Toastify />
+      <BackgroundLinear>
+        <Header />
+        <GlobalStyles />
+        <Component {...pageProps} />
+      </BackgroundLinear>
       <Footer />
     </ThemeProvider>
   </MatomoProvider>
-
 )
 
 export default storeWrapper.withRedux(MyApp)
 
 export const BackgroundLinear = styled.div`
-  background: linear-gradient(90deg, #200A1B 0%, #000000 50%);
+  background: linear-gradient(90deg, #200a1b 0%, #000000 50%);
 `

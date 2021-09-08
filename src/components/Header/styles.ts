@@ -10,14 +10,15 @@ export const Wrapper = styled.menu<IWrapperProps>`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: auto;
-    max-width: 1530px;
-    padding: 24px 32px;
+    padding: ${theme.spacings.small};
+    padding: 32px;
     position: relative;
     height: 110px;
     z-index: ${theme.layers.menu};
 
     ${media.lessThan('medium')`
+    padding: 1.5rem;
+    margin-bottom: 3rem;
     `}
   `}
 `

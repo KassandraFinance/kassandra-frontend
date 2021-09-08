@@ -48,7 +48,6 @@ export const SingUp = ({  setModalSuccessOpen}) => {
             setModalSuccessOpen(true);
           }}>
           <TextField
-            style={{color: '#FCFCFC'}}
             name="user"
             placeholder="Ex: John Doe"
             type="name"
