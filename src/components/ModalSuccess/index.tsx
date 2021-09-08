@@ -52,7 +52,7 @@ const ModalSuccess = ({
             </WrapperIcons>
             <WrapperIcons>
               <a href="https://t.me/KassandraDAO" target="_blank" rel="noopener noreferrer">
-                  <img src="assets/Telegram.svg" alt="" />
+                  <img src="assets/telegram.svg" alt="" />
               </a>
               <span>Telegram</span>
             </WrapperIcons>
