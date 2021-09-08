@@ -12,7 +12,7 @@ const Products = () => {
       <S.Heim>
         <img src="assets/logo-heim.svg" alt="" />
         <S.HeimDescription>
-          <h3>$HEIM Social Score</h3>
+          <h3>The $HEIM Social Index</h3>
           <p className="first-paragraph">The Social Index $HEIM reflects the performance of a portfolio selected from the most socially active cryptocurrencies in the past 30 days, using Heimdall Social Score data.</p>
           <p className="second-paragraph">$HEIM offers an easy exposure to the hottest cryptocurrencies in the market.</p>
         </S.HeimDescription>
