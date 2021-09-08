@@ -1,68 +1,66 @@
-import styled, {css} from "styled-components";
-import media from "styled-media-query";
-
+import styled, { css } from 'styled-components'
+import media from 'styled-media-query'
 
 export const Container = styled.div`
-${()=>css`
-
+  ${() => css`
     margin: auto;
     position: relative;
     padding: 6.5rem 3.2rem;
     max-width: 121.6rem;
     justify-content: center;
     margin-bottom: 5.8rem;
-    height: calc(100vh);
+    /* height: calc(100vh - 110px); */
 
-    @media(min-width: 1400px){
-    height: calc(100vh - 110px);
-    margin-bottom: 0rem;
+    @media (min-width: 1400px) {
+      margin-bottom: 0rem;
     }
-    @media(min-width: 1900px){
-    height: calc(100vh - 110px);
-    margin-bottom: 0rem;
+    @media (min-width: 1900px) {
+      margin-bottom: 0rem;
     }
-    @media(max-width: 1000px){
-    height: 100%;
-    margin-bottom: 0rem;
+    @media (max-width: 1000px) {
+      /* height: 100vh; */
+      margin-bottom: 70rem;
     }
+    @media (max-height: 760px) {
+      /* min-height: 100vh; */
+    }
+
     ${media.lessThan('medium')`
       position: relative;
       margin-bottom: 2.5rem;
       display: flex;
       flex-direction: column;
-
-
     `}
   `}
 `
-export const TextWrapper = styled.div `
-  ${()=> css `
+export const TextWrapper = styled.div`
+  ${() => css`
     max-width: 65%;
-    ${media.lessThan("large")`
+    ${media.lessThan('large')`
       max-width: 80%;
     `}
   `}
 `
 export const Title = styled.h1`
-  ${({theme})=>css`
-      text-align: center;
-      font-size: ${theme.font.sizes.xlarge};
-      font-weight: ${theme.font.medium};
-      /* line-height: 94px; */
-      ${media.lessThan("large")`
+  ${({ theme }) => css`
+    text-align: center;
+    font-size: ${theme.font.sizes.xlarge};
+    font-weight: ${theme.font.medium};
+    /* line-height: 94px; */
+    ${media.lessThan('large')`
       font-size: ${theme.font.sizes.large};
     `}
   `}
 `
 
 export const SubTitle = styled.h3`
-    ${({theme})=>css`
+  ${({ theme }) => css`
     text-align: center;
     font-size: ${theme.font.sizes.large};
     font-weight: ${theme.font.light};
     margin: 32px 0;
     max-width: 100%px;
-    ${media.lessThan("large")`
+    ${media.lessThan('large')`
       font-size: ${theme.font.sizes.medium};
       margin: 16px 0;
     `}
@@ -70,7 +68,7 @@ export const SubTitle = styled.h3`
 `
 
 export const WrapperItems = styled.div`
-  ${() => css `
+  ${() => css`
     max-width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -79,47 +77,44 @@ export const WrapperItems = styled.div`
       display: flex;
       flex-direction: column;
       `}
-
   `}
 `
 export const ItemContainer = styled.div`
-  ${({theme}) => css `
+  ${({ theme }) => css`
     display: flex;
     flex-direction: column;
-    justify-content: center ;
+    justify-content: center;
     padding: ${theme.spacings.xsmall};
-
   `}
 `
 export const ItemText = styled.div`
-${() => css `
-  text-align: center;
-`}
+  ${() => css`
+    text-align: center;
+  `}
 `
 export const ItemTitle = styled.div`
-  ${({theme}) => css `
+  ${({ theme }) => css`
     text-align: center;
     font-size: ${theme.font.sizes.large};
     font-weight: ${theme.font.medium};
     margin-bottom: ${theme.spacings.xsmall};
-
   `}
 `
 export const ItemSubtitle = styled.div`
-  ${({theme}) => css `
-  text-align: center;
-  font-size: ${theme.font.sizes.medium};
-  font-weight: ${theme.font.light};
-  line-height: 150%;
+  ${({ theme }) => css`
+    text-align: center;
+    font-size: ${theme.font.sizes.medium};
+    font-weight: ${theme.font.light};
+    line-height: 150%;
   `}
 `
 
 export const ItemImage = styled.div`
-  ${({theme}) => css `
-  display: flex;
-  justify-content: center;
-  margin-bottom:${theme.spacings.medium};
-  ${media.lessThan("medium")`
+  ${({ theme }) => css`
+    display: flex;
+    justify-content: center;
+    margin-bottom: ${theme.spacings.medium};
+    ${media.lessThan('medium')`
       display: flex;
       justify-content: center;
       img{
@@ -129,29 +124,30 @@ export const ItemImage = styled.div`
   `}
 `
 export const GraphWrapper = styled.div`
-  ${() => css `
-  padding: 10rem 0 ;
-  max-width: 100%;
-  /* max-height: 94.5rem; */
-  background-color: #402947;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  ${media.lessThan("large")`
+  ${() => css`
+    padding: 10rem 0;
+    /* max-height: 94.5rem; */
+    background-color: #402947;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1;
 
+    ${media.lessThan('large')`
       overflow:hidden;
     `}
   `}
-  img{
+  img {
     width: 100%;
     margin: 2% 0;
     transform: scale(1);
 
-    ${media.lessThan("large")`
+    ${media.lessThan('large')`
       transform: scale(1.1);
     `}
   }
-  ${media.lessThan("large")`
+
+  ${media.lessThan('large')`
     padding: 5rem 0;
   `}
 `
@@ -159,7 +155,7 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   max-width: 80%;
-  ${media.lessThan("large")`
+  ${media.lessThan('large')`
     max-width: 100%;
     display: flex;
     justify-content: space-between;
@@ -167,50 +163,60 @@ export const ButtonWrapper = styled.div`
     margin-bottom: 1rem;
   `}
 `
-export const Link = styled.div `
-${({theme})=> css `
-
-    margin:2% 0 ;
+export const Link = styled.div`
+  ${({ theme }) => css`
+    margin: 2% 0;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    a{
-    color: #26DBDB;
-    position:relative;
-    border: none;
-    text-decoration: none;
-    font-size: ${theme.font.sizes.medium};
-    font-weight: ${theme.font.normal};
-    cursor: pointer;
-    &:hover {
-      &::after {
-        content: '';
-        max-width: 100%;
-        text-align: left;
-        position: absolute;
-        display: block;
-        height: 0.1rem;
-        background-color: #26DBDB;
-        animation: hoverAnimation 0.3s forwards;
-      }
-      @keyframes hoverAnimation {
-        from {
-          width: 0;
-          left: 50%;
+    a {
+      color: #26dbdb;
+      position: relative;
+      border: none;
+      text-decoration: none;
+      font-size: ${theme.font.sizes.medium};
+      font-weight: ${theme.font.normal};
+      cursor: pointer;
+      &:hover {
+        &::after {
+          content: '';
+          max-width: 100%;
+          text-align: left;
+          position: absolute;
+          display: block;
+          height: 0.1rem;
+          background-color: #26dbdb;
+          animation: hoverAnimation 0.3s forwards;
         }
-        to {
-          width: 100%;
-          left: 0;
+        @keyframes hoverAnimation {
+          from {
+            width: 0;
+            left: 50%;
+          }
+          to {
+            width: 100%;
+            left: 0;
+          }
         }
       }
-    }
-    ${media.lessThan("large")`
+      ${media.lessThan('large')`
     font-size: ${theme.font.sizes.small};
-
     `}
-  }
-`}
+    }
+  `}
 `
+export const Spot = styled.div`
+  position: absolute;
+  width: 10rem;
+  height: 20rem;
+  right: 0;
+  border-top-left-radius: 3.6rem;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 3.6rem;
+  border-bottom-right-radius: 0;
+  filter: blur(100px);
+  opacity: 0.7;
 
-
+  background-color: #e843c4;
+`

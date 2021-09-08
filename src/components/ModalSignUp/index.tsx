@@ -15,20 +15,19 @@ import {
   WrapperClose,
   WrapperInput,
 
- } from './styles'
+} from './styles';
 
- interface IModalSocialProps {
-  modalSignupOpen: React.Dispatch<React.SetStateAction<boolean>>
-  setModalSignupOpen: React.Dispatch<React.SetStateAction<boolean>>
-  setModalSuccessOpen: React.Dispatch<React.SetStateAction<boolean>>
+interface IModalSocialProps {
+  modalSignupOpen?: boolean
+  setModalSignupOpen?: React.Dispatch<React.SetStateAction<boolean>>
+  setModalSuccessOpen?: React.Dispatch<React.SetStateAction<boolean>>
 
 }
 interface IFormSignUpParams {
   name?: string
   email?: string
-}
+};
 
-// eslint-disable-next-line no-shadow
 enum FORM_PARAM_KEYS_ENUM {
   'name',
   'email',
@@ -43,7 +42,7 @@ export const ModalSignUp = ({
   modalSignupOpen,
   setModalSignupOpen,
   setModalSuccessOpen,
-   }: IModalSocialProps) => {
+  }: IModalSocialProps) => {
 
   function handleCloseModal() {
     setModalSignupOpen(false)

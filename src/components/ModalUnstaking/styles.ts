@@ -14,21 +14,17 @@ export const Backdrop = styled.div`
 
 interface IBorderGradientProps {
   modalOpen: boolean
-  otherStakingPools: boolean
 }
 
 export const BorderGradient = styled.div<IBorderGradientProps>`
   display: ${(props) => props.modalOpen ? "block" : "none" };
 
-  background: ${(props) => props.otherStakingPools ? 
-    "linear-gradient(0deg, #26DBDB -0.02%, #E843C4 99.99%)"
-    : 
-    "linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%)" };
+  background: linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%);
   border-radius: 6px;
 
   width: 320px;
   max-height: 100%;
-  padding: 4px; 
+  padding: 4px;
 
   position: fixed;
   top: 50%;
@@ -52,14 +48,14 @@ interface IInterBackgroundProps {
 }
 
 export const InterBackground = styled.div<IInterBackgroundProps>`
-  background: ${(props) => props.otherStakingPools ? 
+  background: ${(props) => props.otherStakingPools ?
     "linear-gradient(0deg, rgba(38, 219, 219, 0.2) -0.02%, rgba(232, 67, 196, 0.2) 99.99%)"
-    : 
+    :
     "linear-gradient(0deg, rgba(255, 191, 0, 0.2) -0.02%, rgba(232, 67, 196, 0.2) 99.99%)" };
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+
   width: 100%;
   height: 66px;
   padding: 0 16px;
@@ -88,7 +84,7 @@ export const Amount = styled.div`
   span {
     font-size: 14px;
     display: block;
-  } 
+  }
 
   h5 {
     font-weight: 400;
@@ -120,10 +116,10 @@ export const Amount = styled.div`
       color: #fff;
     }
 
-    &[type=number]::-webkit-inner-spin-button { 
+    &[type=number]::-webkit-inner-spin-button {
       -webkit-appearance: none;
     }
-    &[type=number] { 
+    &[type=number] {
       -moz-appearance: textfield;
       appearance: textfield;
     }
@@ -183,18 +179,18 @@ export const ConfirmButton = styled.button<IConfirmButtonProps>`
   font-size: 14px;
   line-height: 14px;
   font-weight: 400;
-  
+
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   width: 100%;
   height: 28px;
   cursor: pointer;
 
-  background: ${(props) => props.otherStakingPools ? 
+  background: ${(props) => props.otherStakingPools ?
     "linear-gradient(87.48deg, #E843C4 -47.54%, #26DBDB 154.78%)"
-    : 
+    :
     "linear-gradient(87.48deg, #FFBF00 -70.27%, #E843C4 154.78%)" };
   border: none;
   color: ${(props) => props.otherStakingPools ? "#211426" : "#211426" };
@@ -211,11 +207,11 @@ export const GetKacyButton = styled.button`
   font-size: 14px;
   line-height: 14px;
   font-weight: 400;
-  
+
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   width: 100%;
   height: 28px;
   cursor: pointer;

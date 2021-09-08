@@ -29,10 +29,15 @@
       "es2021": true
     },
     "extends": [
+      // "plugin:react/recommended",
+      // "airbnb",
+      // "plugin:@typescript-eslint/recommended",
+      // "prettier"
+      "eslint:recommended",
       "plugin:react/recommended",
-      "airbnb",
+      "plugin:@typescript-eslint/eslint-recommended",
       "plugin:@typescript-eslint/recommended",
-      "prettier"
+      "plugin:prettier/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -43,7 +48,7 @@
       "ecmaVersion": 12,
       "sourceType": "module"
     },
-    "plugins": ["react", "@typescript-eslint", "prettier", "react-hooks"],
+    "plugins": ["react", "@typescript-eslint", "prettier", "react-hooks", "import", "jsx-a11y/label-has-associated-control" ],
     "rules": {
       "jsx-a11y/label-has-associated-control": [
         2,
@@ -66,13 +71,15 @@
       "import/prefer-default-export": "off",
       "import/no-unresolved": "off",
       "import/extensions": [
-        "error",
-        "ignorePackages",
-        {
-          "ts": "never",
-          "tsx": "never"
-        }
-      ]
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]  
     },
     "settings": {
       "import/resolver": {

@@ -1,6 +1,5 @@
 import React from 'react'
 
-// eslint-disable-next-line import/extensions
 import * as S from './styles'
 import Button from '../../../components/Button'
 import MediaMatch from '../../../components/MediaMatch'
@@ -8,6 +7,12 @@ import SingUp from '../sign-up'
 
 export const HowItWorks = ({ setModalSignupOpen, setModalSuccessOpen }) => (
   <>
+    <S.SpotLeft>
+      <div />
+    </S.SpotLeft>
+    <S.SpotRight>
+      <div />
+    </S.SpotRight>
     <S.Container>
       <MediaMatch greaterThan="medium">
         <S.ImageDesktop>

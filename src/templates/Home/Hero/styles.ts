@@ -62,7 +62,7 @@ export const Hero = styled.section`
       margin: 8px 0 32px;
       font-size: 22px;
     }
-    @media (max-width: 770px) {      
+    @media (max-width: 770px) {
       font-size: 18px;
       max-width: 500px;
     }
@@ -124,7 +124,7 @@ export const ButtonContainer = styled.div`
   }
 
   a {
-    background: linear-gradient(264.12deg, #E843C4 -179.71%, #020887 205.21%);
+    background: linear-gradient(264.12deg, #e843c4 -179.71%, #020887 205.21%);
     border: none;
     border-radius: 6px;
     color: #fcfcfc;
@@ -146,7 +146,7 @@ export const ButtonContainer = styled.div`
 
 export const WithpaperButton = styled.a`
   background: transparent !important;
-  border: 1px solid #26DBDB !important;
+  border: 1px solid #26dbdb !important;
   border-radius: 6px;
   color: #fcfcfc !important;
   text-decoration: none;
@@ -157,7 +157,7 @@ export const WithpaperButton = styled.a`
   cursor: pointer;
   transition-duration: 300ms;
   &:hover {
-    background-color: #26DBDB !important;
+    background-color: #26dbdb !important;
     color: #211426 !important;
   }
   @media (max-width: 600px) {

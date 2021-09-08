@@ -78,6 +78,9 @@ export function Hero({ setModalOpen, setModalSignupOpen }) {
         <S.FloatImage>
           <img src="assets/Certik.svg" alt="" />
         </S.FloatImage>
+        <S.Spot>
+          <div />
+        </S.Spot>
       </S.Container>
     </>
   )

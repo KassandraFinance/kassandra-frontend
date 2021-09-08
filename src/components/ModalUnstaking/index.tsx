@@ -4,7 +4,7 @@ import { useSelector, RootStateOrAny } from 'react-redux'
 
 import useStakingContract from '../../hooks/useStakingContract'
 
-import { 
+import {
   Backdrop,
   BorderGradient,
   BackgroundBlack,
@@ -25,9 +25,9 @@ import { BNtoDecimal } from '../../utils/numerals'
   pid: number
 }
 
-const ModalUnstaking = ({ 
-  modalOpen, 
-  setModalOpen, 
+const ModalUnstaking = ({
+  modalOpen,
+  setModalOpen,
   otherStakingPools,
   pid }: IModalStakingProps) => {
   const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
@@ -63,8 +63,8 @@ const ModalUnstaking = ({
   return (
     <>
       <Backdrop onClick={() => setModalOpen(false)} style={{display: modalOpen ? 'block' : 'none'}} />
-      <BorderGradient 
-        modalOpen={modalOpen} 
+      <BorderGradient
+        modalOpen={modalOpen}
         otherStakingPools={otherStakingPools}
       >
         <BackgroundBlack>
@@ -85,14 +85,14 @@ const ModalUnstaking = ({
               <button type="button" onClick={() => handleKacyAmount(new BigNumber(75))}>75%</button>
               <button type="button" onClick={() => handleKacyAmount(new BigNumber(100))}>max</button>
             </ButtonContainer>
-            <ConfirmButton 
-              type="button" 
+            <ConfirmButton
+              type="button"
               otherStakingPools={otherStakingPools}
               onClick={() => {
                 setModalOpen(false)
                 handleConfirm()
                 setAmountUnstaking(new BigNumber(0))
-              } 
+              }
             }
             >
               Confirm

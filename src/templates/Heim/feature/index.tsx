@@ -1,6 +1,5 @@
 import React from 'react'
 
-// eslint-disable-next-line import/extensions
 import * as S from './styles'
 import Button from '../../../components/Button'
 import MediaMatch from '../../../components/MediaMatch'
@@ -61,7 +60,9 @@ export const Feature = () => {
           </S.ItemContainer>
         </S.WrapperItems>
       </S.Container>
-
+      <S.Spot>
+        <div />
+      </S.Spot>
       <S.GraphWrapper>
         <S.TextWrapper>
           <S.Title>A backtested strategy</S.Title>

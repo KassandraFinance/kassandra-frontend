@@ -29,6 +29,7 @@ const Heim = () => {
         setModalOpen={setModalOpen}
         setModalSignupOpen={setModalSignupOpen}
       />
+      <div className="feature-spot" />
       <Feature />
       <SocialProof />
       <HowItWorks

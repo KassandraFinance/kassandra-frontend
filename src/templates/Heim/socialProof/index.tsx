@@ -7,9 +7,11 @@ import MediaMatch from '../../../components/MediaMatch'
 
 export const SocialProof = () => (
   <>
+    <S.Spot>
+      <div />
+    </S.Spot>
     <S.Container>
       <S.Title>The power of investing by community</S.Title>
-
       <S.WrapperItems>
         <MediaMatch greaterThan="large">
           <S.ItemContainer>
