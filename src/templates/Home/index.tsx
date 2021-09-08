@@ -3,6 +3,9 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import Hero from './Hero'
 import Products from './Products'
+import ClassProducts from './ClassProducts'
+import Token from './Token'
+import KassandraSuccess from './KassandraSuccess'
 
 import * as S from './styles'
 
@@ -18,70 +21,9 @@ const Home = () => {
     <>
       <Hero />
       <Products />
-      <S.ClassProducts>
-        <h1>A new class of investment products in DeFi</h1>
-        <p>Monetary efficient and actively managed decentralized investment baskets</p>
-        <ul>
-          <li>
-            <img src="assets/Icon/permissionless.svg" alt="" />
-            <h3>Permissionless</h3>
-            <p>Invest, transfer and redeem investment products without relying on third-parties</p>
-          </li>
-          <li>
-            <img src="assets/Icon/non-custodial.svg" alt="" />
-            <h3>Non-custodial</h3>
-            <p>Your funds managed by public, secure, and predictable smart-contracts</p>
-          </li>
-          <li>
-            <img src="assets/Icon/actively-managed.svg" alt="" />
-            <h3>Actively managed</h3>
-            <p>Outsource the management of your money to data-driven quantitative models</p>
-          </li>
-        </ul>
-      </S.ClassProducts>
-      <S.Token>
-        <h1>Be part of the Kassandra ecosystem with $KACY </h1>
-        <p>Take the lead and join the first decentralized fund manager through our decentralized governance protocol</p>
-        <div className="grid-details">
-          <img className="img-token" src="assets/token.svg" alt="" />
-          <img className="img-token-96" src="assets/token-96.svg" alt="" />
-          <div>
-            <h3>The $KACY Token</h3>
-            <p>The protocol governance token responsible for:</p>
-            {/* <p>It is the protocol governance token, and is responsible for:</p> */}
-            <ul>
-              <li>Approving code changes and updates </li>
-              <li>Deploying new investment products</li>
-              <li>Curating whitelists for investable assets</li>
-              <li>Adjusting parameters and fees</li>
-            </ul>
-            <a href="https://twitter.com/dao_kassandra" target="_blank" rel="noopener noreferrer">Coming soon...</a>
-          </div>
-        </div>
-      </S.Token>
-      <S.KassandraSuccess>
-        <h1>Earn with the success of the Kassandra products</h1>
-        <p>Like traditional fund managers, the $KACY token holders
-          benefit directly and indirectly from the investment products
-          deployed on Kassandra Protocol</p>
-        <div className="successgrid">
-          <div className="successitem">
-            <img src="assets/group-success-5percent.svg" alt="5%" width={150} height={150} />
-            <h2>$KACY Holding Rule</h2>
-            <p>To flow value to $KACY token holders, every Kassandra investment product must hold at least 5% of $KACY tokens as part of the portfolio. This ensures that the success of the products will result in the growth of the $KACY token value.</p>
-          </div>
-          <div className="successitem">
-            <img src="assets/group-success-3percent.svg" alt="3%" width={150} height={150} />
-            <h2>Redeem Fee</h2>
-            <p>A 3% fee is charged whenever investment tokens are redeemed. The fees collected this way are under total governance control and can be used for purchasing and subsequently burn $KACY tokens.</p>
-          </div>
-          <div className="successitem">
-            <img src="assets/group-success-vote.svg" alt="" width={150} height={150} />
-            <h2>Vote Lock</h2>
-            <p>When voting in governance proposals $KACY holders may choose to lock their tokens for different time periods and earn more voting power, thus making $KACY more scarce and the governance more secure.</p>
-          </div>
-        </div>
-      </S.KassandraSuccess>
+      <ClassProducts />
+      <Token />
+      <KassandraSuccess />
       <S.KassandraArchitecture>
         <h1>How it works?</h1>
         <p>Our tokenized investment baskets are Automated Market Maker pools for multiple assets, with dynamically adjustable weights</p>

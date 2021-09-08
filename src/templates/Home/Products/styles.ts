@@ -6,7 +6,7 @@ export const Products = styled.section`
   max-width: 1520px;
 
   @media (min-width: 900px) {
-    height: 110vh;
+    padding: 80px 32px;
   }
   
   @media (max-width: 375px) and (max-height: 800px) {
@@ -15,8 +15,8 @@ export const Products = styled.section`
   @media (max-width: 370px) {
     padding-top: 120px;
   }
-  @media (max-width: 320px) {
-    padding-top: 180px;
+  @media (max-width: 330px) {
+    padding: 180px 20px 0;
   }
   h1 {
     font-size: 40px;
