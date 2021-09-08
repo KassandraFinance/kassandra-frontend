@@ -5,7 +5,12 @@ import Button from '../../../components/Button'
 import MediaMatch from '../../../components/MediaMatch'
 import SingUp from '../sign-up'
 
-export const HowItWorks = ({ setModalSignupOpen, setModalSuccessOpen }) => (
+interface IHowItWorksProps {
+  setModalSignupOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setModalSuccessOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export const HowItWorks = ({ setModalSignupOpen, setModalSuccessOpen }: IHowItWorksProps) => (
   <>
     <S.SpotLeft>
       <div />

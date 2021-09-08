@@ -5,9 +5,12 @@ import Button from '../../../components/Button'
 import MediaMatch from '../../../components/MediaMatch'
 import ModalSignUp from '../../../components/ModalSignUp'
 
-export const Feature = () => {
-  const [modalSignupOpen, setModalSignupOpen] = React.useState<boolean>(false)
-  // const [modalSuccessOpen, setModalSuccessOpen] = React.useState<boolean>(false)
+interface IFeatureProps {
+  modalSignupOpen: boolean
+  setModalSignupOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const Feature = ({ modalSignupOpen, setModalSignupOpen }: IFeatureProps) => {
 
   return (
     <>
@@ -102,10 +105,6 @@ export const Feature = () => {
           </a>
         </S.Link>
       </S.GraphWrapper>
-      {/* <ModalSuccess
-        modalSuccessOpen={modalSuccessOpen}
-        setModalSuccessOpen={setModalSuccessOpen}
-      /> */}
       <ModalSignUp
         modalSignupOpen={modalSignupOpen}
         setModalSignupOpen={setModalSignupOpen}

@@ -15,6 +15,11 @@ export type TextFieldProps = {
   error?: string
 } & Omit<InputHTMLAttributes<HTMLInputElement>, 'onInput'>
 
+interface ITextFieldProps {
+  value: any
+
+}
+
 const TextField = ({
   icon,
   iconPosition = 'left',

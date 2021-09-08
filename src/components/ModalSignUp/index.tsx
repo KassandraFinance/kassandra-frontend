@@ -23,9 +23,9 @@ interface IModalSocialProps {
   setModalSuccessOpen?: React.Dispatch<React.SetStateAction<boolean>>
 
 }
-interface IFormSignUpParams {
-  name?: string
-  email?: string
+interface IFormSignUpParamsProps {
+  name: string
+  email: string
 };
 
 enum FORM_PARAM_KEYS_ENUM {
@@ -48,10 +48,13 @@ export const ModalSignUp = ({
     setModalSignupOpen(false)
   }
 
-  const [formState, setFormState] = React.useState<IFormSignUpParams>({})
+  const [formState, setFormState] = React.useState<IFormSignUpParamsProps>({
+    name: '',
+    email: ''
+  })
 
 
-  const validForm = (formState) => {
+  const validForm = (formState: any[]) => {
     if (!formState[FORM_PARAM_KEYS_ENUM.email] || !formState[FORM_PARAM_KEYS_ENUM.name]) {
       return false;
     }
@@ -85,7 +88,10 @@ export const ModalSignUp = ({
                 method="POST"
                 target="hiddenFrame"
                 onSubmit={() => {
-                  setFormState({});
+                  setFormState({
+                    name: '',
+                    email: ''
+                  });
                   handleCloseModal();
                   setModalSuccessOpen(true);
                 }}
@@ -96,7 +102,7 @@ export const ModalSignUp = ({
                   type="name"
                   label='Your username'
                   value={formState[FORM_PARAM_KEYS_ENUM.name]}
-                  onChange={(e) =>
+                  onChange={(e: { target: { value: any; }; }) =>
                     onChangeFormParam({
                       key: FORM_PARAM_KEYS_ENUM.name,
                       value: e.target.value
@@ -110,7 +116,7 @@ export const ModalSignUp = ({
                   type="email"
                   label='Your email address'
                   value={formState[FORM_PARAM_KEYS_ENUM.email]}
-                  onChange={(e) =>
+                  onChange={(e: { target: { value: any; }; }) =>
                     onChangeFormParam({
                       key: FORM_PARAM_KEYS_ENUM.email,
                       value: e.target.value

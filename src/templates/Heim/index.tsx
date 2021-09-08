@@ -30,7 +30,10 @@ const Heim = () => {
         setModalSignupOpen={setModalSignupOpen}
       />
       <div className="feature-spot" />
-      <Feature />
+      <Feature
+        setModalSignupOpen={setModalSignupOpen}
+        modalSignupOpen={modalSignupOpen}
+      />
       <SocialProof />
       <HowItWorks
         setModalSignupOpen={setModalSignupOpen}
