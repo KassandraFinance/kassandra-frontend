@@ -16,13 +16,17 @@ export const Hero = styled.section`
     margin-bottom: 32px;
   }
   @media (max-width: 600px) {
-    height: calc(100vh - 140px);
+    height: calc(100vh - 120px);
   }
   @media (max-width: 370px) {
     height: calc(100vh - 160px);
   }
   @media (max-width: 330px) {
+    height: calc(100vh - 200px);
     padding: 0 20px;
+  }
+  @media (min-height: 300px) and (max-height: 420px) {
+    min-height: 600px;
   }
   h1 {
     font-size: 112px;
@@ -67,7 +71,6 @@ export const Hero = styled.section`
       max-width: 500px;
     }
     @media (max-width: 420px) {
-      font-size: 20px;
       max-width: 360px;
     }
     @media (min-width: 375px) {
@@ -92,6 +95,9 @@ export const Hero = styled.section`
     }
     @media (max-width: 600px) {
       max-width: 300px;
+    }
+    @media (max-width: 360px) {
+      max-width: 240px;
     }
   }
 `
