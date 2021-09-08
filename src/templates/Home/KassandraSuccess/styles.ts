@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const KassandraSuccess = styled.section`
   padding: 80px 32px 80px;
-  max-width: 1520px;
+  max-width: 1220px;
   margin: 0 auto;
   @media (min-width: 1880px) {
     padding: 80px 0 240px;
@@ -77,24 +77,35 @@ export const Success = styled.div`
   margin: 0 auto;
   @media (max-width: 1024px) {
     flex-direction: column;
-    max-width: 700px;
+    max-width: 500px;
     margin: auto;
   }
 `
 
 export const SuccessItem = styled.div`
   text-align: center;
-  padding: 60px;
+  padding: 32px;
   background-repeat: no-repeat;
   background-image: url(/assets/group-success-tl.svg), url(/assets/group-success-tr.svg);
   background-position: 0 0, 100% 0;
+  width: 100%;
   h2 {
-    font-size: 15px;
+    font-size: 24px;
     margin-top: 16px;
+    @media (max-width: 600px) {
+      font-size: 20px;
+    }
   }
   p {
-    font-size: 15px;
-    margin: 20px 0 48px;
+    font-size: 18px;
+    margin: 20px auto 48px;
+    max-width: 280px;
+    @media (max-width: 1024px) {
+      max-width: 380px;
+    }
+    @media (max-width: 600px) {
+      font-size: 16px;
+    }
     @media (max-width: 370px) {
       font-size: 14px;
       margin: 20px 0 32px;
@@ -125,5 +136,21 @@ export const SuccessItem = styled.div`
   }
   @media (max-width: 370px) {
     padding: 24px;
+  }
+
+  img {
+    max-width: 150px;
+    @media (max-width: 1024px) {
+      max-width: 140px;
+    }
+    @media (max-width: 700px) {
+      max-width: 130px;
+    }
+    @media (max-width: 420px) {
+      max-width: 120px;
+    }
+    @media (max-width: 330px) {
+      max-width: 110px;
+    }
   }
 `

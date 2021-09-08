@@ -11,17 +11,17 @@ const KassandraSuccess = () => {
         deployed on Kassandra Protocol</p>
       <S.Success>
         <S.SuccessItem>
-          <img src="assets/group-success-5percent.svg" alt="5%" width={150} height={150} />
+          <img src="assets/group-success-5percent.svg" alt="5%" />
           <h2>$KACY Holding Rule</h2>
           <p>To flow value to $KACY token holders, every Kassandra investment product must hold at least 5% of $KACY tokens as part of the portfolio. This ensures that the success of the products will result in the growth of the $KACY token value.</p>
         </S.SuccessItem>
         <S.SuccessItem>
-          <img src="assets/group-success-3percent.svg" alt="3%" width={150} height={150} />
+          <img src="assets/group-success-3percent.svg" alt="3%" />
           <h2>Redeem Fee</h2>
           <p>A 3% fee is charged whenever investment tokens are redeemed. The fees collected this way are under total governance control and can be used for purchasing and subsequently burn $KACY tokens.</p>
         </S.SuccessItem>
         <S.SuccessItem>
-          <img src="assets/group-success-vote.svg" alt="" width={150} height={150} />
+          <img src="assets/group-success-vote.svg" alt="" />
           <h2>Vote Lock</h2>
           <p>When voting in governance proposals $KACY holders may choose to lock their tokens for different time periods and earn more voting power, thus making $KACY more scarce and the governance more secure.</p>
         </S.SuccessItem>
