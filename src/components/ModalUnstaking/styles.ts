@@ -14,12 +14,16 @@ export const Backdrop = styled.div`
 
 interface IBorderGradientProps {
   modalOpen: boolean
+   otherStakingPools: boolean
 }
 
 export const BorderGradient = styled.div<IBorderGradientProps>`
   display: ${(props) => props.modalOpen ? "block" : "none" };
 
-  background: linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%);
+  background: ${(props) => props.otherStakingPools ?
+    "linear-gradient(0deg, #26DBDB -0.02%, #E843C4 99.99%)"
+    :
+    "linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%)" };;
   border-radius: 6px;
 
   width: 320px;

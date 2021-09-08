@@ -7,7 +7,8 @@ import ModalSignUp from '../../../components/ModalSignUp'
 
 interface IFeatureProps {
   modalSignupOpen: boolean
-  setModalSignupOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalSignupOpen: React.Dispatch<React.SetStateAction<boolean>>
+  // setModalSuccessOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const Feature = ({ modalSignupOpen, setModalSignupOpen }: IFeatureProps) => {

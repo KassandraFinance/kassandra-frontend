@@ -17,24 +17,19 @@ import {
 
 } from './styles';
 
-interface IModalSocialProps {
-  modalSignupOpen?: boolean
-  setModalSignupOpen?: React.Dispatch<React.SetStateAction<boolean>>
+interface IModalSignUp {
+  modalSignupOpen: boolean
+  setModalSignupOpen: React.Dispatch<React.SetStateAction<boolean>>
   setModalSuccessOpen?: React.Dispatch<React.SetStateAction<boolean>>
-
 }
+
 interface IFormSignUpParamsProps {
-  name: string
-  email: string
+  name?: string
+  email?: string
 };
 
-enum FORM_PARAM_KEYS_ENUM {
-  'name',
-  'email',
-}
-
 interface IOnChangeFormParam {
-  key: FORM_PARAM_KEYS_ENUM
+  key: string
   value: string
 }
 
@@ -42,28 +37,25 @@ export const ModalSignUp = ({
   modalSignupOpen,
   setModalSignupOpen,
   setModalSuccessOpen,
-  }: IModalSocialProps) => {
+  }: IModalSignUp) => {
 
   function handleCloseModal() {
     setModalSignupOpen(false)
   }
 
-  const [formState, setFormState] = React.useState<IFormSignUpParamsProps>({
-    name: '',
-    email: ''
-  })
+  const [formState, setFormState] = React.useState<IFormSignUpParamsProps>({})
+  const onChangeFormParam = ({ key, value }: IOnChangeFormParam) => {
+    setFormState({ ...formState, [key]: value })
+  }
 
 
-  const validForm = (formState: any[]) => {
-    if (!formState[FORM_PARAM_KEYS_ENUM.email] || !formState[FORM_PARAM_KEYS_ENUM.name]) {
+  const validForm = (formState: any) => {
+    if (!formState.email || !formState.name) {
       return false;
     }
     return true;
   }
 
-  const onChangeFormParam = ({ key, value }: IOnChangeFormParam) => {
-  setFormState({ ...formState, [key]: value })
-  }
   return (
     <>
       <Backdrop onClick={handleCloseModal} style={{display: modalSignupOpen ? 'block' : 'none'}} />
@@ -88,12 +80,9 @@ export const ModalSignUp = ({
                 method="POST"
                 target="hiddenFrame"
                 onSubmit={() => {
-                  setFormState({
-                    name: '',
-                    email: ''
-                  });
+                  setFormState({});
                   handleCloseModal();
-                  setModalSuccessOpen(true);
+                  if (setModalSuccessOpen) setModalSuccessOpen(true);
                 }}
               >
                 <TextField
@@ -101,10 +90,10 @@ export const ModalSignUp = ({
                   placeholder="Ex: John Doe"
                   type="name"
                   label='Your username'
-                  value={formState[FORM_PARAM_KEYS_ENUM.name]}
+                  value={formState.name}
                   onChange={(e: { target: { value: any; }; }) =>
                     onChangeFormParam({
-                      key: FORM_PARAM_KEYS_ENUM.name,
+                      key: 'name',
                       value: e.target.value
                     })
                   }
@@ -115,10 +104,10 @@ export const ModalSignUp = ({
                   placeholder="Ex: username@email.com"
                   type="email"
                   label='Your email address'
-                  value={formState[FORM_PARAM_KEYS_ENUM.email]}
+                  value={formState.email}
                   onChange={(e: { target: { value: any; }; }) =>
                     onChangeFormParam({
-                      key: FORM_PARAM_KEYS_ENUM.email,
+                      key: 'email',
                       value: e.target.value
                     })
                   }

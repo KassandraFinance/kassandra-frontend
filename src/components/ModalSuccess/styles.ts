@@ -16,7 +16,6 @@ export const Backdrop = styled.div`
 
 interface IBorderGradientProps {
   modalOpen: boolean
-  otherStakingPools: boolean
 }
 
 export const BorderGradient = styled.div<IBorderGradientProps>`
@@ -90,6 +89,15 @@ export const ModalText = styled.h1`
 ${({theme})=> css`
     font-size: 2rem;
     font-weight: ${theme.font.normal};
+`}
+${media.lessThan('small')`
+font-size: 1.4rem;
+`}
+`
+export const ModalSubText = styled.h1`
+${({theme})=> css`
+    font-size: 2rem;
+    font-weight: ${theme.font.light};
 `}
 ${media.lessThan('small')`
 font-size: 1.4rem;

@@ -7,6 +7,7 @@ import {
   Content,
   InterBackground,
   ModalText,
+  ModalSubText,
   WrapperIcons
  } from './styles'
 
@@ -39,9 +40,9 @@ const ModalSuccess = ({
             <button type="button" onClick={() => setModalSuccessOpen(false)}><img src="assets/close.svg" alt=""/> </button>
           </InterBackground>
           <Content>
-          <ModalText style={{fontWeight:"300"}}>
-            <span>Keep in touch with the community:</span>
-            </ModalText>
+            <ModalSubText>
+              <span>Keep in touch with the community:</span>
+            </ModalSubText>
             <div style={{ display: 'flex' }}>
             <WrapperIcons>
               <a href="https://discord.gg/2uGEvqNnuq" target="_blank" rel="noopener noreferrer">

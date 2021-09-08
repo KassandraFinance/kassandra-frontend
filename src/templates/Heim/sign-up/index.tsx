@@ -11,29 +11,26 @@ interface IFormSignUpParams {
   email?: string
 }
 
-
-// eslint-disable-next-line no-shadow
-enum FORM_PARAM_KEYS_ENUM {
-  'name',
-  'email',
-}
-
 interface IOnChangeFormParam {
-  key: FORM_PARAM_KEYS_ENUM
+  key: string
   value: string
 }
+interface ISignUpProps {
+  setModalSuccessOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
 
-export const SingUp = ({  setModalSuccessOpen}) => {
+export const SingUp = ({  setModalSuccessOpen} : ISignUpProps) => {
   const [formState, setFormState] = useState<IFormSignUpParams>({})
   const onChangeFormParam = ({ key, value }: IOnChangeFormParam) => {
     setFormState({ ...formState, [key]: value })
   }
-  const validForm = (formState) => {
-    if (!formState[FORM_PARAM_KEYS_ENUM.email] || !formState[FORM_PARAM_KEYS_ENUM.name]) {
+  const validForm = (formState: any) => {
+    if (!formState.email || !formState.name) {
       return false;
     }
     return true;
   }
+
   return(
 
       <S.Container>
@@ -44,32 +41,32 @@ export const SingUp = ({  setModalSuccessOpen}) => {
         <iframe title="a" name="hiddenFrame" width="0" height="0" style={{display: 'none'}} />
         <form id='sign-up' action="https://beta.heimdall.land/subscribe/heim" method="POST" target="hiddenFrame" onSubmit={
           (e) => {
-            setFormState({});
+            // e.preventDefault();
             setModalSuccessOpen(true);
+            setFormState({})
           }}>
           <TextField
             name="user"
             placeholder="Ex: John Doe"
             type="name"
             label='Your username'
-            value={formState[FORM_PARAM_KEYS_ENUM.name]}
+            value={formState.name || ''}
             onChange={(e) =>
               onChangeFormParam({
-                key: FORM_PARAM_KEYS_ENUM.name,
+                key: 'name',
                 value: e.target.value
               })
             }
           />
           <TextField
-            style={{color: '#FCFCFC'}}
             name="email"
             placeholder="Ex: username@email.com"
             type="email"
             label='Your email address'
-            value={formState[FORM_PARAM_KEYS_ENUM.email]}
+            value={formState.email || ''}
             onChange={(e) =>
               onChangeFormParam({
-                key: FORM_PARAM_KEYS_ENUM.email,
+                key: 'email',
                 value: e.target.value
               })
             }
@@ -77,7 +74,7 @@ export const SingUp = ({  setModalSuccessOpen}) => {
 
         {/* <S.ButtonWrapper> */}
         <MediaMatch greaterThan='small'>
-          <Button backgroundPrimary size="huge" type='submit' fullWidth disabledNoEvent={!validForm(formState)}>
+          <Button backgroundPrimary size="huge" type='submit'  fullWidth disabledNoEvent={!validForm(formState)}>
             Sign me up!
           </Button>
         </MediaMatch>
