@@ -106,7 +106,7 @@ export const SocialProof = () => (
           </S.ProductImage>
           <S.ProductText>
             <S.ProductSubtitle>
-              Empowered by machine learning and another powerful algorithms,
+              Empowered by machine learning and others powerful algorithms,
               Heimdall feeds data to the Heim Social Index to balance their
               holdings according to the community size and engagement of each
               project.

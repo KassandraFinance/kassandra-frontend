@@ -62,6 +62,7 @@ export const Hero = ({ setModalOpen, setModalSignupOpen } : IHeroProps)  => {
             </S.SubTitle>
             <S.ButtonWrapper>
               <Button
+                fullwidth
                 backgroundPrimary
                 size="huge"
                 onClick={() => setModalSignupOpen(true)}
@@ -69,6 +70,7 @@ export const Hero = ({ setModalOpen, setModalSignupOpen } : IHeroProps)  => {
                 Get early access
               </Button>
               <Button
+                fullwidth
                 size="medium"
                 backgroundBlack
                 onClick={() => setModalOpen(true)}

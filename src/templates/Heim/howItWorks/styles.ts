@@ -20,9 +20,6 @@ export const ImageDesktop = styled.div`
     height: auto;
     margin-bottom: -4rem;
   }
-  ${media.lessThan('medium')`
-    display:none;
-  `}
 `
 export const MobileContainer = styled.div`
   @media(min-width: 930px){
@@ -40,10 +37,6 @@ export const ImageMobile = styled.div`
     height: auto;
     margin-bottom: -4rem;
   }
-  @media (max-width: 950px) {
-    /* margin-top: 0; */
-
-  }
 `
 
 export const MobileSignUp = styled.div`
@@ -56,7 +49,7 @@ export const MobileSignUp = styled.div`
   transform: translateX(-50%);
   left: 50%;
   margin-top: -50%;
-  /* max-width: 100%; */
+
   img {
     margin-bottom: 2rem;
     max-width: 35%;
@@ -81,17 +74,24 @@ export const Text = styled.div`
     line-height: 150%;
     z-index: 10;
 
-    @media (min-width: 800px) {
+    @media (min-width: 930px) {
       display: none;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 930px) {
       font-size: ${theme.font.sizes.large};
       font-weight: ${theme.font.light};
       margin-top: 10rem;
       line-height: 100%;
       max-width: 40rem;
     }
-    @media (max-width: 540px) {
+    @media (max-width: 680px) {
+      font-size: ${theme.font.sizes.medium};
+      font-weight: ${theme.font.light};
+      margin-top: 10rem;
+      line-height: 100%;
+      max-width: 40rem;
+    }
+    @media (max-width: 570px) {
       font-size: ${theme.font.sizes.small};
       font-weight: ${theme.font.light};
       line-height: 100%;
