@@ -10,7 +10,7 @@ const Footer = () => (
           <img src="assets/kassandra-footer.svg" alt="kassandra" width="266" height="26" />
           <ul>
             <li>
-              <a href="https://discord.gg/UjRr28Kf" target="_blank" rel="noopener noreferrer">
+              <a href="https://discord.com/invite/2uGEvqNnuq" target="_blank" rel="noopener noreferrer">
                 <img src="assets/discord-icon.svg" alt="Join our Discord community" width="32" height="32" />
               </a>
             </li>
@@ -40,18 +40,18 @@ const Footer = () => (
         <div className={styles['grid-right']}>
           <ul>
             <li><h4>Company</h4></li>
-            <li><Link href="/about" >About</Link></li>
-            <li><Link href="/partners" >Partners</Link></li>
+            <li><Link href="/" >About</Link></li>
+            <li><Link href="/" >Partners</Link></li>
           </ul>
           <ul>
             <li><h4>Products</h4></li>
-            <li><Link href="/#">Kassandra DAO</Link></li>
-            <li><Link href="/#">$HEIM Index</Link></li>
+            <li><Link href="/">Kassandra DAO</Link></li>
+            <li><Link href="/heim">$HEIM Index</Link></li>
           </ul>
           <ul>
             <li><h4>Legal</h4></li>
-            <li><Link href="/#">Privacy Policy</Link></li>
-            <li><Link href="/#">Terms of Service</Link></li>
+            <li><Link href="/">Privacy Policy</Link></li>
+            <li><Link href="/">Terms of Service</Link></li>
           </ul>
         </div>
         <img src="assets/kassandra-footer.svg" alt="kassandra" width="266" height="26" />

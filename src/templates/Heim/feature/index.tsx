@@ -1,4 +1,5 @@
 import React from 'react'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import * as S from './styles'
 import Button from '../../../components/Button'
@@ -12,6 +13,15 @@ interface IFeatureProps {
 }
 
 export const Feature = ({ modalSignupOpen, setModalSignupOpen }: IFeatureProps) => {
+  const { trackEvent } = useMatomo();
+
+  function clickMatomoEvent(action: string, name: string) {
+    trackEvent({
+      category: "heim-page",
+      action: action,
+      name: name,
+    });
+  }
 
   return (
     <>
@@ -87,7 +97,11 @@ export const Feature = ({ modalSignupOpen, setModalSignupOpen }: IFeatureProps) 
             <Button
               backgroundPrimary
               size="large"
-              onClick={() => setModalSignupOpen(true)}
+              onClick={() => {
+                  setModalSignupOpen(true)
+                  clickMatomoEvent("click-to-subscribe", "chart")
+                }
+              } 
             >
               Get early access
             </Button>
@@ -99,14 +113,21 @@ export const Feature = ({ modalSignupOpen, setModalSignupOpen }: IFeatureProps) 
             <Button
               backgroundPrimary
               size="medium"
-              onClick={() => setModalSignupOpen(true)}
+              onClick={() => {
+                  setModalSignupOpen(true)
+                  clickMatomoEvent("click-to-subscribe", "chart")
+                }
+              }
             >
               Get early access
             </Button>
           </MediaMatch>
         </S.ButtonWrapper>
         <S.Link>
-          <a href="https://medium.com/heimdall-research-crypto/the-heimdall-social-index-9595fdfb9ddc">
+          <a 
+            href="https://medium.com/heimdall-research-crypto/the-heimdall-social-index-9595fdfb9ddc"
+            onClick={() => clickMatomoEvent("click-to-medium", "chart")}
+          >
             Check out the full research at our Medium <span>&#8594;</span>{' '}
           </a>
         </S.Link>

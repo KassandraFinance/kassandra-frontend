@@ -1,4 +1,5 @@
 import React from 'react'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import * as S from './styles'
 import Button from '../../../components/Button'
@@ -11,8 +12,19 @@ interface IHowItWorksProps {
   setModalSuccessOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const HowItWorks = ({ setModalSignupOpen, setModalSuccessOpen }: IHowItWorksProps) => (
-  <>
+export const HowItWorks = ({ setModalSignupOpen, setModalSuccessOpen }: IHowItWorksProps) => {
+  const { trackEvent } = useMatomo();
+
+  function clickMatomoEvent(action: string, name: string) {
+    trackEvent({
+      category: "heim-page",
+      action: action,
+      name: name,
+    });
+  }
+
+  return (
+    <>
     <S.SpotLeft>
       <div />
     </S.SpotLeft>
@@ -43,7 +55,11 @@ export const HowItWorks = ({ setModalSignupOpen, setModalSuccessOpen }: IHowItWo
           <Button
             backgroundPrimary
             size="medium"
-            onClick={() => setModalSignupOpen(true)}
+            onClick={() => {
+                setModalSignupOpen(true)
+                clickMatomoEvent("click-to-subscribe", "how-it-works")
+              }
+            } 
             fullWidth
           >
             Get early access
@@ -52,6 +68,7 @@ export const HowItWorks = ({ setModalSignupOpen, setModalSuccessOpen }: IHowItWo
         </S.MobileContainer>
     </S.Container>
   </>
-)
+  )
+}
 
 export default HowItWorks

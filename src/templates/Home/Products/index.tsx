@@ -1,10 +1,21 @@
 import React from 'react'
 import Link from 'next/link'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 
 import * as S from './styles'
 
 const Products = () => {
+  const { trackEvent } = useMatomo();
+
+  function clickMatomoEvent(action: string, name: string) {
+    trackEvent({
+      category: "kassandra-page",
+      action: action,
+      name: name,
+    });
+  }
+  
   return (
     <S.Products>
       <h1>Products</h1>
@@ -17,11 +28,12 @@ const Products = () => {
           <p className="second-paragraph">$HEIM offers an easy exposure to the hottest cryptocurrencies in the market.</p>
         </S.HeimDescription>
         <S.ButtonContainer>
-          <Link href="/heim" >Buy $HEIM</Link>
+          <Link href="/heim" ><a onClick={() => clickMatomoEvent("click-to-heim", "products")}>Buy $HEIM</a></Link>
           <S.LearnMore 
             href="https://medium.com/heimdall-research-crypto/the-heimdall-social-index-9595fdfb9ddc" 
             target="_blank" 
             rel="noopener noreferrer" 
+            onClick={() => clickMatomoEvent("click-to-learn-more", "products")}
             >
               Learn More
           </S.LearnMore>

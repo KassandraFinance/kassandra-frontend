@@ -1,4 +1,5 @@
 import React from 'react'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 // eslint-disable-next-line import/extensions
 
@@ -12,6 +13,16 @@ interface IHeroProps {
 }
 
 export const Hero = ({ setModalOpen, setModalSignupOpen } : IHeroProps)  => {
+  const { trackEvent } = useMatomo();
+
+  function clickMatomoEvent(action: string, name: string) {
+    trackEvent({
+      category: "heim-page",
+      action: action,
+      name: name,
+    });
+  }
+
   return (
     <>
       <S.Container>
@@ -29,14 +40,22 @@ export const Hero = ({ setModalOpen, setModalSignupOpen } : IHeroProps)  => {
                 <Button
                   backgroundPrimary
                   size="large"
-                  onClick={() => setModalSignupOpen(true)}
+                  onClick={() => {
+                      setModalSignupOpen(true)
+                      clickMatomoEvent("click-to-subscribe", "hero")
+                    }
+                  } 
                 >
                   Get early access
                 </Button>
                 <Button
                   size="large"
                   backgroundBlack
-                  onClick={() => setModalOpen(true)}
+                  onClick={() => {
+                    setModalOpen(true)
+                    clickMatomoEvent("click-open-modal", "modal-social")
+                    }
+                  } 
                 >
                   Join the community
                 </Button>

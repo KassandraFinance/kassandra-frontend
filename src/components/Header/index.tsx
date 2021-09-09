@@ -1,6 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import React from 'react'
 import Link from 'next/link'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import { useRouter } from 'next/router'
 import { useSelector, RootStateOrAny } from 'react-redux'
@@ -25,6 +26,15 @@ const Header = () => {
   const { connect, isLogged } = useConnect()
   const [isOpen, setIsOpen] = React.useState(false)
   const { asPath } = useRouter()
+  const { trackEvent } = useMatomo();
+
+  function clickMatomoEvent() {
+    trackEvent({
+      category: "header",
+      action: "click-on-heim",
+      name: "heim-header",
+    });
+  }
 
   return (
     <S.Wrapper pageHeim={asPath === '/heim'}>
@@ -48,7 +58,7 @@ const Header = () => {
         <S.MenuNav>
           {asPath === '/' ? (
             <Link href="/heim" passHref>
-              <S.MenuLink> HEIM Index </S.MenuLink>
+              <S.MenuLink onClick={clickMatomoEvent}> HEIM Index </S.MenuLink>
             </Link>
           ) : (
             <Link href="/" passHref>
@@ -105,7 +115,7 @@ const Header = () => {
         <S.MenuNav onClick={() => setIsOpen(false)}>
           {asPath === '/' ? (
             <Link href="/heim" passHref>
-              <S.MenuLink>HEIM Index</S.MenuLink>
+              <S.MenuLink onClick={clickMatomoEvent}>HEIM Index</S.MenuLink>
             </Link>
           ) : (
             <Link href="/" passHref>

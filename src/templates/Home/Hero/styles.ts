@@ -142,7 +142,6 @@ export const ButtonContainer = styled.div`
     height: 52px;
     padding: 16px 32px;
     cursor: pointer;
-    transition-duration: 300ms;
     &:hover {
       background: #020887;
     }

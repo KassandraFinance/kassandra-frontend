@@ -6,6 +6,8 @@ interface IWrapperProps {
 }
 
 export const Wrapper = styled.menu<IWrapperProps>`
+  max-width: 1520px;
+  margin: 0 auto;
   ${({ theme }) => css`
     display: flex;
     align-items: center;

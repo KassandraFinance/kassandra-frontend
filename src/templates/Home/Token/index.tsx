@@ -1,4 +1,5 @@
 import React from 'react'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import ModalSocial from '../../../components/ModalSocial'
 
@@ -6,6 +7,16 @@ import * as S from './styles'
 
 const Token = () => {
   const [modalOpen, setModalOpen] = React.useState(false)
+
+  const { trackEvent } = useMatomo();
+
+  function clickMatomoEvent(action: string, name: string) {
+    trackEvent({
+      category: "kassandra-page",
+      action: action,
+      name: name,
+    });
+  }
   
   return (
     <>
@@ -24,13 +35,17 @@ const Token = () => {
               <li><span>Curating</span> whitelists for investable assets</li>
               <li>Adjusting <span>parameters</span> and <span>fees</span></li>
             </ul>
-            <S.ButtonModalSocial onClick={() => setModalOpen(true)}>Join the $KACY community</S.ButtonModalSocial>
+            <S.ButtonModalSocial onClick={() => {
+                setModalOpen(true);
+                clickMatomoEvent("click-open-modal", "modal-social")
+              }
+            }>Join the $KACY community</S.ButtonModalSocial>
           </S.Description>
         </S.Details>
       </S.Token>
       <ModalSocial modalOpen={modalOpen} setModalOpen={setModalOpen} />
-      </>
-    )
-  }
+    </>
+  )
+}
 
 export default Token
