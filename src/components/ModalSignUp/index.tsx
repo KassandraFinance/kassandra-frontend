@@ -76,7 +76,7 @@ export const ModalSignUp = ({
             <WrapperInput>
             <iframe title="a" name="hiddenFrame" width="0" height="0" style={{display: 'none'}} />
               <form
-                action="https://beta.heimdall.land/subscribe/heim"
+                action="https://heimdall.land/subscribe/heim"
                 method="POST"
                 target="hiddenFrame"
                 onSubmit={() => {
