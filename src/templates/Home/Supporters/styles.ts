@@ -2,6 +2,8 @@ import styled from 'styled-components'
 
 export const Supporters = styled.section`
   padding: 80px 32px;
+  max-width: 1520px;
+  margin: 0 auto;
   h1 {
     font-size: 40px;
     font-weight: 500;
