@@ -9,7 +9,7 @@ export const Token = styled.section`
   }
 
   h1 {
-    font-size: 44px;
+    font-size: 40px;
     font-weight: 500;
     margin-bottom: 48px;
     @media (max-width: 600px) {
@@ -67,7 +67,7 @@ export const Details = styled.div`
 export  const Description = styled.div`
   text-align: left;
   h3 {
-    font-size: 40px;
+    font-size: 24px;
     font-weight: 500;
     margin-bottom: 24px;
     @media (max-width: 600px) {
