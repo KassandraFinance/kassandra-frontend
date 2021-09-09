@@ -44,7 +44,7 @@ export const Hero = ({ setModalOpen, setModalSignupOpen } : IHeroProps)  => {
                       setModalSignupOpen(true)
                       clickMatomoEvent("click-to-subscribe", "hero")
                     }
-                  } 
+                  }
                 >
                   Get early access
                 </Button>
@@ -55,7 +55,7 @@ export const Hero = ({ setModalOpen, setModalSignupOpen } : IHeroProps)  => {
                     setModalOpen(true)
                     clickMatomoEvent("click-open-modal", "modal-social")
                     }
-                  } 
+                  }
                 >
                   Join the community
                 </Button>
@@ -81,7 +81,6 @@ export const Hero = ({ setModalOpen, setModalSignupOpen } : IHeroProps)  => {
             </S.SubTitle>
             <S.ButtonWrapper>
               <Button
-                fullwidth
                 backgroundPrimary
                 size="huge"
                 onClick={() => setModalSignupOpen(true)}
@@ -89,7 +88,6 @@ export const Hero = ({ setModalOpen, setModalSignupOpen } : IHeroProps)  => {
                 Get early access
               </Button>
               <Button
-                fullwidth
                 size="medium"
                 backgroundBlack
                 onClick={() => setModalOpen(true)}
