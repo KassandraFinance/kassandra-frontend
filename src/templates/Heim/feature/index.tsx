@@ -101,7 +101,7 @@ export const Feature = ({ modalSignupOpen, setModalSignupOpen }: IFeatureProps) 
                   setModalSignupOpen(true)
                   clickMatomoEvent("click-to-subscribe", "chart")
                 }
-              } 
+              }
             >
               Get early access
             </Button>
@@ -124,7 +124,7 @@ export const Feature = ({ modalSignupOpen, setModalSignupOpen }: IFeatureProps) 
           </MediaMatch>
         </S.ButtonWrapper>
         <S.Link>
-          <a 
+          <a
             href="https://medium.com/heimdall-research-crypto/the-heimdall-social-index-9595fdfb9ddc"
             onClick={() => clickMatomoEvent("click-to-medium", "chart")}
           >
