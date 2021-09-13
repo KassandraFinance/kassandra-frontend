@@ -22,12 +22,14 @@ export const Products = styled.section`
     font-size: 40px;
     font-weight: 500;
     text-align: center;
+    
+    margin-bottom: 48px;
   }
   p {
     font-size: 24px;
     font-weight: 300;
     max-width: 700px;
-    margin: 44px auto 32px;
+    margin: 0 auto;
     text-align: center;
     @media (max-width: 600px) {
       font-size: 22px;
@@ -63,7 +65,8 @@ export const Heim = styled.div`
   gap: 40px;
   justify-items: center;
   align-items: center;
-
+  
+  margin-top: 48px;
   padding: 56px 64px;
   position: relative;
   img {

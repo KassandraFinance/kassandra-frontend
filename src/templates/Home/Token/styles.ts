@@ -35,6 +35,8 @@ export const Details = styled.div`
   grid-template-columns: 1fr 1fr;
   align-items: center;
   justify-items: center;
+
+  min-height: 500px;
   max-width: 1520px;
   margin: 0 auto;
   @media (max-width: 960px) {

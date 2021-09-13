@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import { useRouter } from 'next/router'
-import { useSelector, RootStateOrAny } from 'react-redux'
+// import { useSelector, RootStateOrAny } from 'react-redux'
 
 import { Menu2 as MenuIcon } from '@styled-icons/remix-fill/Menu2'
 import { Close as CloseIcon } from '@styled-icons/material-outlined/Close'
@@ -13,17 +13,17 @@ import MediaMatch from '../MediaMatch'
 import Button from '../Button'
 import * as S from './styles'
 
-import useConnect from '../../hooks/useConnect'
-import substr from '../../utils/substr'
-import web3 from '../../utils/web3'
+// import useConnect from '../../hooks/useConnect'
+// import substr from '../../utils/substr'
+// import web3 from '../../utils/web3'
 
 export type MenuProps = {
   username?: string
 }
 
 const Header = () => {
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-  const { connect, isLogged } = useConnect()
+  // const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  // const { connect, isLogged } = useConnect()
   const [isOpen, setIsOpen] = React.useState(false)
   const { asPath } = useRouter()
   const { trackEvent } = useMatomo();
