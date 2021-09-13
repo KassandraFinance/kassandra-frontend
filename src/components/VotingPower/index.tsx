@@ -2,22 +2,22 @@ import React from 'react'
 import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import { getDate } from '../../utils/date'
-
 import web3 from '../../utils/web3'
+import { getDate } from '../../utils/date'
+import { BNtoDecimal } from '../../utils/numerals'
+import { confirmClaim } from '../../utils/confirmTransaction'
+
+import { Kacy, Staking } from '../../constants/tokenAddresses'
 
 import useERC20Contract from '../../hooks/useERC20Contract'
 import useStakingContract from '../../hooks/useStakingContract'
 import useCountDownDate from '../../hooks/useCountDownDate'
 
-import { Kacy, Staking } from '../../constants/tokenAddresses'
-
+import Tooltip from '../Tooltip'
 import ModalStaking from '../ModalStaking'
 import ModalUnstaking from '../ModalUnstaking'
 import ModalRequestUnstake from '../ModalRequestUnstake'
 import ModalCancelUnstake from '../ModalCancelUnstake'
-
-import Tooltip from '../Tooltip'
 
 import { 
   BorderGradient, 
@@ -35,7 +35,6 @@ import {
   ButtonWithdraw,
   ButtonRequestStake
 } from './styles'
-import { BNtoDecimal } from '../../utils/numerals'
 
 interface IInfoStakeProps {
   yourStake: BigNumber
@@ -153,8 +152,6 @@ const VotingPower = ({ percentage, pid, connect }: IStakingProps) => {
     }
   }
 
-  }
-
   React.useEffect(() => {
     getAllowance(Staking, Kacy, userWalletAddress)
     .then((response: boolean) => setIsApproveKacyStaking(response))
@@ -249,6 +246,9 @@ const VotingPower = ({ percentage, pid, connect }: IStakingProps) => {
                       }           
                       <p>Unclaimed reward</p>
                       <h3>{BNtoDecimal(kacyEarned || new BigNumber(0), new BigNumber(18), 6)} KACY</h3>
+                      <ButtonWallet type="button" onClick={() => 
+                        getReward(pid, confirmClaim, "Pending reward claim")
+                      }>Claim</ButtonWallet>
                     </>
                     }
                   </StakeContainer>

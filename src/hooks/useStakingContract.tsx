@@ -1,15 +1,12 @@
 import BigNumber from 'bn.js'
+import { AbiItem } from "web3-utils"
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import { AbiItem } from "web3-utils"
-
 import web3 from '../utils/web3'
+import waitTransaction, { CompleteCallback } from '../utils/txWait'
+
 import { Staking } from '../constants/tokenAddresses'
 import StakingContract from "../constants/abi/Staking.json"
-
-import useConnect from './useConnect'
-
-import waitTransaction, { CompleteCallback } from '../utils/txWait'
 
 const useStakingContract = () => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
@@ -32,10 +29,14 @@ const useStakingContract = () => {
     await contract.methods.unstake(pid).send({ from: userWalletAddress })
   }
 
-  const getReward = async (pid: number) => {
+  const getReward = async (pid: number, onComplete?: CompleteCallback, message?: string) => {
     const contract = getStakingContract(Staking)
-      const getReward = await contract.methods.getReward(pid).send({ from: userWalletAddress })
-      return getReward
+    const getReward = await contract.methods.getReward(pid)
+      .send(
+        { from: userWalletAddress }, 
+        onComplete ? waitTransaction(onComplete, message) : undefined
+      )
+    return getReward
   }
 
   const withdraw = async (pid: number, amount: BigNumber) => {
