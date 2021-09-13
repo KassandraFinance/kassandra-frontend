@@ -57,9 +57,31 @@ interface IStakingProps {
   percentage: string
   pid: number
   connect: () => void
+  approve: (spenderAddress: string, tokenAddress: string, onComplete?: CompleteCallback | undefined) => Promise<boolean>
+  getAllowance: (addressCRP: string, tokenAddress: string, walletAddress?: string | undefined) => Promise<boolean>
+  balanceOf: (pid: number, walletAddress: string) => Promise<BigNumber>
+  earned: (pid: number, walletAddress: string) => Promise<BigNumber>
+  getReward: (pid: number, onComplete?: CompleteCallback | undefined, message?: string | undefined) => any
+  withdrawable: (pid: number, walletAddress: string) => Promise<any>
+  poolInfo: (pid: number) => Promise<any>
+  unstaking: (pid: number, walletAddress: string) => Promise<any> 
+  stakedUntil: (pid: number, walletAddress: string) => Promise<any>
 }
 
-const VotingPower = ({ percentage, pid, connect }: IStakingProps) => {
+const VotingPower = ({ 
+  percentage, 
+  pid, 
+  connect, 
+  approve, 
+  getAllowance,
+  balanceOf,
+  earned,
+  getReward,
+  withdrawable,
+  poolInfo,
+  unstaking,
+  stakedUntil
+}: IStakingProps) => {
   const [modalOpen, setModalOpen] = React.useState<boolean>(false)
   const [isModalUnstaking, setIsModalUnstaking] = React.useState<boolean>(false)
   const [isModalCancelUnstake, setIsModalCancelUnstake] = React.useState<boolean>(false)
