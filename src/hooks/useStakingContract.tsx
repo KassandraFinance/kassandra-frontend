@@ -54,9 +54,12 @@ const useStakingContract = () => {
       )
   }
 
-  const cancelUnstake = async (pid: number) => {
+  const cancelUnstake = async (pid: number, onComplete?: CompleteCallback, message?: string) => {
     const contract = getStakingContract(Staking)
-    await contract.methods.cancelUnstake(pid).send({ from: userWalletAddress })
+    await contract.methods.cancelUnstake(pid)
+      .send({ from: userWalletAddress }, 
+        onComplete ? waitTransaction(onComplete, message) : undefined
+      )
   }
 
   // ======== Read Contract ========

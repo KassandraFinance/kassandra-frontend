@@ -27,9 +27,17 @@ export function confirmWithdraw(txReceipt?: TransactionReceipt) {
 }
 
 export function confirmClaim(txReceipt?: TransactionReceipt) {
-	if (txReceipt?.status) {
-		ToastSuccess("Reward Claimed")
-		return
-	}
-	ToastError("Failed to claim reward")
+  if (txReceipt?.status) {
+    ToastSuccess("Reward Claimed")
+    return
+  }
+  ToastError("Failed to claim reward")
+}
+
+export function confirmCancelUnstake(txReceipt?: TransactionReceipt) {
+  if (txReceipt?.status) {
+    ToastSuccess("Cancel unstake confirmed")
+    return
+  }
+  ToastError("Failed to cancel unstake")
 }
