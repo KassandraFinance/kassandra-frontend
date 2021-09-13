@@ -5,7 +5,7 @@ import { useSelector, RootStateOrAny } from 'react-redux'
 import web3 from '../../utils/web3'
 import { getDate } from '../../utils/date'
 import { BNtoDecimal } from '../../utils/numerals'
-import { confirmClaim } from '../../utils/confirmTransaction'
+import { confirmClaim } from '../../utils/confirmTransactions'
 
 import { Kacy, Staking } from '../../constants/tokenAddresses'
 
