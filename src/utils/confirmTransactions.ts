@@ -9,6 +9,14 @@ export function confirmStake(txReceipt?: TransactionReceipt) {
   }
   ToastError("Failed to stake")
 }
+
+export function confirmUnstake(txReceipt?: TransactionReceipt) {
+  if (txReceipt?.status) {
+    ToastSuccess("Unstake confirmed")
+    return
+  }
+  ToastError("Failed to unstake")
+}
 export function confirmClaim(txReceipt?: TransactionReceipt) {
 	if (txReceipt?.status) {
 		ToastSuccess("Reward Claimed")
