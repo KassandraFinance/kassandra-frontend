@@ -19,14 +19,21 @@ const useStakingContract = () => {
 
   // ======== Write on Contract ========
 
-  const stake = async (pid: number, amount: BigNumber) => {
+  const stake = async (pid: number, amount: BigNumber, onComplete?: CompleteCallback, message?: string) => {
     const contract = getStakingContract(Staking)
-    await contract.methods.stake(pid, amount, userWalletAddress, userWalletAddress).send({ from: userWalletAddress })
+    await contract.methods.stake(pid, amount, userWalletAddress, userWalletAddress)
+      .send(
+        { from: userWalletAddress }, 
+        onComplete ? waitTransaction(onComplete, message) : undefined
+      )
   }
 
-  const unstake = async (pid: number) => {
+  const unstake = async (pid: number, onComplete?: CompleteCallback, message?: string) => {
     const contract = getStakingContract(Staking)
-    await contract.methods.unstake(pid).send({ from: userWalletAddress })
+    await contract.methods.unstake(pid)
+      .send({ from: userWalletAddress },
+        onComplete ? waitTransaction(onComplete, message) : undefined
+      )
   }
 
   const getReward = async (pid: number, onComplete?: CompleteCallback, message?: string) => {
@@ -39,14 +46,20 @@ const useStakingContract = () => {
     return getReward
   }
 
-  const withdraw = async (pid: number, amount: BigNumber) => {
+  const withdraw = async (pid: number, amount: BigNumber, onComplete?: CompleteCallback, message?: string) => {
     const contract = getStakingContract(Staking)
-    await contract.methods.withdraw(pid, amount).send({ from: userWalletAddress })
+    await contract.methods.withdraw(pid, amount)
+      .send({ from: userWalletAddress },
+        onComplete ? waitTransaction(onComplete, message) : undefined
+      )
   }
 
-  const cancelUnstake = async (pid: number) => {
+  const cancelUnstake = async (pid: number, onComplete?: CompleteCallback, message?: string) => {
     const contract = getStakingContract(Staking)
-    await contract.methods.cancelUnstake(pid).send({ from: userWalletAddress })
+    await contract.methods.cancelUnstake(pid)
+      .send({ from: userWalletAddress }, 
+        onComplete ? waitTransaction(onComplete, message) : undefined
+      )
   }
 
   // ======== Read Contract ========

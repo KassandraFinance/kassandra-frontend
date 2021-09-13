@@ -17,6 +17,10 @@ const Products = () => (
 )
 
 const ProductsContainer = styled.section`
+  max-width: 1520px;
+  margin: 40px auto;
+  padding: 0 32px;
+
   min-height: 100vh;
   display: grid;
   grid-template-columns: auto 440px;

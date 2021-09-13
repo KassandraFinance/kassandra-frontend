@@ -1,11 +1,13 @@
 import React from 'react'
 import BigNumber from 'bn.js'
-import web3 from '../../utils/web3'
 
-import useBalance from '../../hooks/useBalance'
+import web3 from '../../utils/web3'
+import { BNtoDecimal } from '../../utils/numerals'
+import { confirmStake } from '../../utils/confirmTransactions'
 
 import { Kacy } from '../../constants/tokenAddresses'
 
+import useBalance from '../../hooks/useBalance'
 import useStakingContract from '../../hooks/useStakingContract'
 
 import { 
@@ -20,7 +22,6 @@ import {
   ConfirmButton,
   GetKacyButton
  } from './styles'
-import { BNtoDecimal } from '../../utils/numerals'
 
  interface IModalStakingProps {
   modalOpen: boolean
@@ -39,14 +40,9 @@ const ModalStaking = ({
   const { getBalanceToken } = useBalance()
   const { stake } = useStakingContract()
 
-
   function handleKacyAmount(percentage: BigNumber ) {
     const kacyAmount = percentage.mul(balance).div(new BigNumber(100))
     setAmountStaking(kacyAmount)
-  }
-
-  function handleConfirm () {
-    stake(pid, amountStaking)
   }
 
   async function get() {
@@ -68,7 +64,11 @@ const ModalStaking = ({
         <BackgroundBlack>
           <InterBackground otherStakingPools={otherStakingPools}>
             <span>Stake in Pool</span>
-            <button type="button" onClick={() => setModalOpen(false)}><img src="assets/close.svg" alt="" /> </button>
+            <button 
+              type="button" 
+              onClick={() => setModalOpen(false)}><img src="assets/close.svg" 
+              alt="" 
+            /> </button>
           </InterBackground>
           <Main>
             <Amount>
@@ -124,7 +124,7 @@ const ModalStaking = ({
               otherStakingPools={otherStakingPools}
               onClick={() => {
                 setModalOpen(false)
-                handleConfirm()
+                stake(pid, amountStaking, confirmStake, "Pending stake")
                 setAmountStaking(new BigNumber(0))
               } 
             }

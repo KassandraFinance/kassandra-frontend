@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { confirmUnstake } from '../../utils/confirmTransactions'
+
 import useStakingContract from '../../hooks/useStakingContract'
 
 import { 
@@ -48,7 +50,7 @@ const ModalRequestUnstake = ({ modalOpen, setModalOpen, pid }: IModalRequestUnst
             <button 
               type="button" 
               onClick={() => {
-                unstake(pid)
+                unstake(pid, confirmUnstake, "Pending unstake")
                 setModalOpen(false)
               }}
             >
