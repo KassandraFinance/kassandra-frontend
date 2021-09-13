@@ -2,6 +2,7 @@ import React from 'react'
 import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
+import { confirmWithdraw } from '../../utils/confirmTransactions'
 import useStakingContract from '../../hooks/useStakingContract'
 
 import {
@@ -37,14 +38,13 @@ const ModalUnstaking = ({
 
   const { withdraw, balanceOf } = useStakingContract()
 
-
   function handleKacyAmount(percentage: BigNumber ) {
     const kacyAmount = percentage.mul(balance).div(new BigNumber(100))
     setAmountUnstaking(kacyAmount)
   }
 
   function handleConfirm () {
-    withdraw(pid, amountUnstaking)
+    withdraw(pid, amountUnstaking, confirmWithdraw, "Pending Withdraw")
   }
 
   async function get() {

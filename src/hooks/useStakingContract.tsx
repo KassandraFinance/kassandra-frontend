@@ -46,9 +46,12 @@ const useStakingContract = () => {
     return getReward
   }
 
-  const withdraw = async (pid: number, amount: BigNumber) => {
+  const withdraw = async (pid: number, amount: BigNumber, onComplete?: CompleteCallback, message?: string) => {
     const contract = getStakingContract(Staking)
-    await contract.methods.withdraw(pid, amount).send({ from: userWalletAddress })
+    await contract.methods.withdraw(pid, amount)
+      .send({ from: userWalletAddress },
+        onComplete ? waitTransaction(onComplete, message) : undefined
+      )
   }
 
   const cancelUnstake = async (pid: number) => {
