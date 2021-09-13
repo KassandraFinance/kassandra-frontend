@@ -2,6 +2,13 @@ import { TransactionReceipt } from 'web3-core'
 
 import { ToastError, ToastSuccess  } from '../components/Toastify/toast'
 
+export function confirmStake(txReceipt?: TransactionReceipt) {
+  if (txReceipt?.status) {
+    ToastSuccess("Stake confirmed")
+    return
+  }
+  ToastError("Failed to stake")
+}
 export function confirmClaim(txReceipt?: TransactionReceipt) {
 	if (txReceipt?.status) {
 		ToastSuccess("Reward Claimed")
