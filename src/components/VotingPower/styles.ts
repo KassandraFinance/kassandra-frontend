@@ -212,30 +212,6 @@ export const StakeContainer = styled.div`
   }
 `
 
-export const ButtonWithdraw = styled.button`
-  background: #4F4F4F;
-  border: none;
-  border-radius: 6px;
-  color: #BDBDBD;
-  font-size: 20px;
-  font-weight: 400;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
-  width: 320px;
-  height: 40px;
-  margin: 8px 0;
-  cursor: pointer;
-  outline: none;
-  z-index: 10;
-  @media (max-width: 420px) {
-    max-width: 100%;
-    min-width: 200px;
-  }
-`
-
 export const ButtonRequestStake = styled.button`
   background: transparent;
   border: 1px solid #26DBDB;

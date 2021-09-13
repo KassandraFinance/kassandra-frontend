@@ -5,6 +5,7 @@ import { useSelector, RootStateOrAny } from 'react-redux'
 import web3 from '../../utils/web3'
 import { getDate } from '../../utils/date'
 import { BNtoDecimal } from '../../utils/numerals'
+import { CompleteCallback } from '../../utils/txWait'
 import { confirmClaim } from '../../utils/confirmTransactions'
 
 import { Kacy, Staking } from '../../constants/tokenAddresses'
@@ -18,6 +19,9 @@ import ModalStaking from '../ModalStaking'
 import ModalUnstaking from '../ModalUnstaking'
 import ModalRequestUnstake from '../ModalRequestUnstake'
 import ModalCancelUnstake from '../ModalCancelUnstake'
+import WithdrawDate from './WithdrawDate'
+import TotalStaked from './TotalStaked'
+import KacyEarned from './KacyEarned'
 
 import { 
   BorderGradient, 
@@ -32,7 +36,6 @@ import {
   ButtonWallet,
   ButtonDetails,
   StakeContainer,
-  ButtonWithdraw,
   ButtonRequestStake
 } from './styles'
 
@@ -74,22 +77,19 @@ const VotingPower = ({ percentage, pid, connect }: IStakingProps) => {
   })
   const [isApproveKacyStaking, setIsApproveKacyStaking] = React.useState<boolean>(false)
   const [unstake, setUnstake] = React.useState<boolean>(false)
-  const [depositedAmount, setDepositedAmount] = React.useState<string>('')
-  const [kacyEarned, setKacyEarned] = React.useState<BigNumber>(new BigNumber(0))
+  const [reload, setReload] = React.useState<boolean>(false)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-  
-  const { getAllowance, approve } = useERC20Contract()
-  const { 
-    balanceOf, 
-    earned,
-    getReward, 
-    withdrawable,
-    poolInfo,
-    unstaking,
-    stakedUntil,
-  } = useStakingContract()
-  const { date, countDown } = useCountDownDate()
+
+  // const { 
+  //   balanceOf, 
+  //   earned,
+  //   getReward, 
+  //   withdrawable,
+  //   poolInfo,
+  //   unstaking,
+  //   stakedUntil
+  // } = useStakingContract()
 
   async function handleApproveKacy() {
     if (isApproveKacyStaking) {
@@ -99,7 +99,7 @@ const VotingPower = ({ percentage, pid, connect }: IStakingProps) => {
     setIsApproveKacyStaking(res)
   }
 
-  async function getInfoStake() {
+  const getInfoStake = React.useCallback(async () => {
     if (!web3.currentProvider) {
       return
     }
@@ -120,43 +120,27 @@ const VotingPower = ({ percentage, pid, connect }: IStakingProps) => {
         kacyRewards,
         withdrawDelay: withdrawDelay > 0 ? withdrawDelay : 0
       })
-
-      setInterval(async () => {
-        setDepositedAmount(poolInfoResponse.depositedAmount)
-      }, 6000)
-      setDepositedAmount(poolInfoResponse.depositedAmount)
     }
 
     if (userWalletAddress) {
       const balance: BigNumber = await balanceOf(pid, userWalletAddress)
       const withdrawableResponse = await withdrawable(pid, userWalletAddress)
-      const earnedResponse: BigNumber = await earned(pid, userWalletAddress)
-      
-      const unix_timestamp = await stakedUntil(pid, userWalletAddress)
-      const countDownDate = new Date(unix_timestamp * 1000).getTime();
 
       const unstake = await unstaking(pid, userWalletAddress)  
-
-      countDown(countDownDate)
 
       setInfoStake({
         yourStake: balance,
         withdrawable: withdrawableResponse
       })
       setUnstake(unstake)
-      setInterval(async () => {
-        const earnedResponse: BigNumber = await earned(pid, userWalletAddress)
-        setKacyEarned(earnedResponse)
-      }, 10000)
-      setKacyEarned(earnedResponse)
     }
-  }
+  }, [userWalletAddress])
 
   React.useEffect(() => {
     getAllowance(Staking, Kacy, userWalletAddress)
     .then((response: boolean) => setIsApproveKacyStaking(response))
-  
     getInfoStake()
+    setReload(!reload)
   }, [userWalletAddress])
   
   return (
@@ -176,12 +160,11 @@ const VotingPower = ({ percentage, pid, connect }: IStakingProps) => {
             </IntroStaking>
           </InterBackground>
           <KacyStaked>
-              <p>{infoStakeStatic.votingMultiplier} voting power per $KACY staked</p>
-            </KacyStaked>
+            <p>{infoStakeStatic.votingMultiplier} voting power per $KACY staked</p>
+          </KacyStaked>
           <InfosStaking>
             <Info>
-              <p className="total-staking">Total staked</p>
-              <p className="total-staking">${BNtoDecimal(new BigNumber(depositedAmount).mul(new BigNumber(3.5)), new BigNumber(18), 2)}</p>
+              <TotalStaked pid={pid} poolInfo={poolInfo} />
             </Info>
             {userWalletAddress &&
               <>
@@ -231,11 +214,11 @@ const VotingPower = ({ percentage, pid, connect }: IStakingProps) => {
                     }        
                     {infoStake.yourStake.toString() !== "0" &&
                     <>
-                      {infoStake.withdrawable || date === '' ? 
+                      {infoStake.withdrawable ? 
                         <ButtonWallet type="button" onClick={() => setIsModalUnstaking(true)}>Withdraw</ButtonWallet>
                         :
                         unstake ? 
-                          <ButtonWithdraw type="button">Withdraw in date {date}</ButtonWithdraw>
+                          <WithdrawDate pid={pid} userWalletAddress={userWalletAddress} stakedUntil={stakedUntil} />
                           :
                           <ButtonRequestStake 
                             type="button" 
@@ -245,7 +228,11 @@ const VotingPower = ({ percentage, pid, connect }: IStakingProps) => {
                           </ButtonRequestStake>
                       }           
                       <p>Unclaimed reward</p>
-                      <h3>{BNtoDecimal(kacyEarned || new BigNumber(0), new BigNumber(18), 6)} KACY</h3>
+                      <KacyEarned 
+                        pid={pid} 
+                        userWalletAddress={userWalletAddress} 
+                        earned={earned}
+                      />
                       <ButtonWallet type="button" onClick={() => 
                         getReward(pid, confirmClaim, "Pending reward claim")
                       }>Claim</ButtonWallet>
