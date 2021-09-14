@@ -10,18 +10,7 @@ import { Kacy } from '../../constants/tokenAddresses'
 import useBalance from '../../hooks/useBalance'
 import useStakingContract from '../../hooks/useStakingContract'
 
-import { 
-  Backdrop,
-  BorderGradient,
-  BackgroundBlack,
-  InterBackground,
-  Main,
-  Amount,
-  Line,
-  ButtonContainer,
-  ConfirmButton,
-  GetKacyButton
- } from './styles'
+import * as S from './styles'
 
  interface IModalStakingProps {
   modalOpen: boolean
@@ -30,9 +19,9 @@ import {
   pid: number
 }
 
-const ModalStaking = ({ 
-  modalOpen, 
-  setModalOpen, 
+const ModalStaking = ({
+  modalOpen,
+  setModalOpen,
   otherStakingPools,
   pid }: IModalStakingProps) => {
   const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
@@ -56,22 +45,22 @@ const ModalStaking = ({
 
   return (
     <>
-      <Backdrop onClick={() => setModalOpen(false)} style={{display: modalOpen ? 'block' : 'none'}} />
-      <BorderGradient 
-        modalOpen={modalOpen} 
+      <S.Backdrop onClick={() => setModalOpen(false)} style={{display: modalOpen ? 'block' : 'none'}} />
+      <S.BorderGradient
+        modalOpen={modalOpen}
         otherStakingPools={otherStakingPools}
       >
-        <BackgroundBlack>
-          <InterBackground otherStakingPools={otherStakingPools}>
+        <S.BackgroundBlack>
+          <S.InterBackground otherStakingPools={otherStakingPools}>
             <span>Stake in Pool</span>
-            <button 
-              type="button" 
-              onClick={() => setModalOpen(false)}><img src="assets/close.svg" 
-              alt="" 
+            <button
+              type="button"
+              onClick={() => setModalOpen(false)}><img src="assets/close.svg"
+              alt=""
             /> </button>
-          </InterBackground>
-          <Main>
-            <Amount>
+          </S.InterBackground>
+          <S.Main>
+            <S.Amount>
               <span>$KACY Amount</span>
               {/* <input type="number" placeholder="0" value={BNtoDecimal(amountStaking, new BigNumber(18), 6)} /> */}
               <input
@@ -110,31 +99,35 @@ const ModalStaking = ({
                 }
                 value={BNtoDecimal(amountStaking, new BigNumber(18), 6)}
               />
-              <Line />
+              <S.Line />
               <h5>Balance: {BNtoDecimal(balance, new BigNumber(18), 6)}</h5>
-            </Amount>
-            <ButtonContainer>
+            </S.Amount>
+            <S.ButtonContainer>
               <button type="button" onClick={() => handleKacyAmount(new BigNumber(25))}>25%</button>
               <button type="button" onClick={() => handleKacyAmount(new BigNumber(50))}>50%</button>
               <button type="button" onClick={() => handleKacyAmount(new BigNumber(75))}>75%</button>
               <button type="button" onClick={() => handleKacyAmount(new BigNumber(100))}>max</button>
-            </ButtonContainer>
-            <ConfirmButton 
-              type="button" 
+            </S.ButtonContainer>
+            <S.ConfirmButton
+              type="button"
+              disabled={amountStaking.toString() === '0'}
               otherStakingPools={otherStakingPools}
               onClick={() => {
                 setModalOpen(false)
                 stake(pid, amountStaking, confirmStake, "Pending stake")
                 setAmountStaking(new BigNumber(0))
-              } 
+                console.log('fasfa')
+              }
             }
             >
               Confirm
-            </ConfirmButton>
-            <GetKacyButton type="button" onClick={() => setModalOpen(false)}>Get KACY</GetKacyButton>
-          </Main>
-        </BackgroundBlack>
-      </BorderGradient>
+            </S.ConfirmButton>
+
+            <S.GetKacy href='https://app.uniswap.org' target="_blank" rel="noopener noreferrer" onClick={() => setModalOpen(false)}>Get KACY</S.GetKacy>
+
+          </S.Main>
+        </S.BackgroundBlack>
+      </S.BorderGradient>
     </>
   )
 }

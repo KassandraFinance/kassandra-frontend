@@ -87,6 +87,7 @@ const ModalUnstaking = ({
             </ButtonContainer>
             <ConfirmButton
               type="button"
+              disabled={amountUnstaking.toString() === '0'}
               otherStakingPools={otherStakingPools}
               onClick={() => {
                 setModalOpen(false)

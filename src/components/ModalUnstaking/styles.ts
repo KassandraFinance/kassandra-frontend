@@ -201,8 +201,13 @@ export const ConfirmButton = styled.button<IConfirmButtonProps>`
 
   margin-bottom: 8px;
   transition: 200ms;
-  &:hover {
+  &:hover::enabled {
     background: ${(props) => props.otherStakingPools ? "#E843C4" : "#FFBF00" };
+  }
+  &:disabled {
+    cursor: not-allowed;
+    filter: grayscale(150%);
+    color: #bdbdbd;
   }
 `
 

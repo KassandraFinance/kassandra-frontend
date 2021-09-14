@@ -201,16 +201,23 @@ export const ConfirmButton = styled.button<IConfirmButtonProps>`
 
   margin-bottom: 8px;
   transition: 200ms;
-  &:hover {
+  &:hover:enabled {
     background: ${(props) => props.otherStakingPools ? "#E843C4" : "#FFBF00" };
   }
+  &:disabled {
+    cursor: not-allowed;
+    filter: grayscale(150%);
+    color: #bdbdbd;
+  }
+
 `
 
-export const GetKacyButton = styled.button`
+export const GetKacy = styled.a`
   border-radius: 6px;
   font-size: 14px;
   line-height: 14px;
   font-weight: 400;
+  text-decoration: none;
 
   display: flex;
   align-items: center;

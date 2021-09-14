@@ -23,9 +23,9 @@ import WithdrawDate from './WithdrawDate'
 import TotalStaked from './TotalStaked'
 import KacyEarned from './KacyEarned'
 
-import { 
-  BorderGradient, 
-  InterBackground, 
+import {
+  BorderGradient,
+  InterBackground,
   IntroStaking,
   InfosStaking,
   APR,
@@ -64,15 +64,15 @@ interface IStakingProps {
   getReward: (pid: number, onComplete?: CompleteCallback | undefined, message?: string | undefined) => any
   withdrawable: (pid: number, walletAddress: string) => Promise<any>
   poolInfo: (pid: number) => Promise<any>
-  unstaking: (pid: number, walletAddress: string) => Promise<any> 
+  unstaking: (pid: number, walletAddress: string) => Promise<any>
   stakedUntil: (pid: number, walletAddress: string) => Promise<any>
 }
 
-const VotingPower = ({ 
-  percentage, 
-  pid, 
-  connect, 
-  approve, 
+const VotingPower = ({
+  percentage,
+  pid,
+  connect,
+  approve,
   getAllowance,
   balanceOf,
   earned,
@@ -103,10 +103,10 @@ const VotingPower = ({
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
-  // const { 
-  //   balanceOf, 
+  // const {
+  //   balanceOf,
   //   earned,
-  //   getReward, 
+  //   getReward,
   //   withdrawable,
   //   poolInfo,
   //   unstaking,
@@ -131,10 +131,10 @@ const VotingPower = ({
     if (poolInfoResponse.withdrawDelay) {
       const startDate = getDate(poolInfoResponse.periodFinish - poolInfoResponse.rewardsDuration)
       const endDate = getDate(poolInfoResponse.periodFinish)
-  
+
       const kacyRewards = new BigNumber(poolInfoResponse.rewardRate).mul(new BigNumber(86400))
       const withdrawDelay = Number(poolInfoResponse.withdrawDelay / 86400)
-      
+
       setInfoStakeStatic({
         votingMultiplier: poolInfoResponse.votingMultiplier,
         startDate,
@@ -148,7 +148,7 @@ const VotingPower = ({
       const balance: BigNumber = await balanceOf(pid, userWalletAddress)
       const withdrawableResponse = await withdrawable(pid, userWalletAddress)
 
-      const unstake = await unstaking(pid, userWalletAddress)  
+      const unstake = await unstaking(pid, userWalletAddress)
 
       setInfoStake({
         yourStake: balance,
@@ -164,7 +164,7 @@ const VotingPower = ({
     getInfoStake()
     setReload(!reload)
   }, [userWalletAddress])
-  
+
   return (
     <>
       <div>
@@ -229,33 +229,33 @@ const VotingPower = ({
               <>
                 {isApproveKacyStaking ?
                   <StakeContainer>
-                    {unstake ? 
+                    {unstake ?
                       <ButtonRequestStake type="button" onClick={() => setIsModalCancelUnstake(true)}>Cancel unstake</ButtonRequestStake>
                       :
                       <ButtonWallet type="button" onClick={() => setModalOpen(true)}>Stake</ButtonWallet>
-                    }        
+                    }
                     {infoStake.yourStake.toString() !== "0" &&
                     <>
-                      {infoStake.withdrawable ? 
+                      {infoStake.withdrawable ?
                         <ButtonWallet type="button" onClick={() => setIsModalUnstaking(true)}>Withdraw</ButtonWallet>
                         :
-                        unstake ? 
+                        unstake ?
                           <WithdrawDate pid={pid} userWalletAddress={userWalletAddress} stakedUntil={stakedUntil} />
                           :
-                          <ButtonRequestStake 
-                            type="button" 
+                          <ButtonRequestStake
+                            type="button"
                             onClick={() => setIsModalRequestUnstake(true)}
                           >
                             Request unstake
                           </ButtonRequestStake>
-                      }           
+                      }
                       <p>Unclaimed reward</p>
-                      <KacyEarned 
-                        pid={pid} 
-                        userWalletAddress={userWalletAddress} 
+                      <KacyEarned
+                        pid={pid}
+                        userWalletAddress={userWalletAddress}
                         earned={earned}
                       />
-                      <ButtonWallet type="button" onClick={() => 
+                      <ButtonWallet type="button" onClick={() =>
                         getReward(pid, confirmClaim, "Pending reward claim")
                       }>Claim</ButtonWallet>
                     </>
@@ -273,24 +273,24 @@ const VotingPower = ({
           </InfosStaking>
         </BorderGradient>
       </div>
-      <ModalStaking 
-        modalOpen={modalOpen} 
-        setModalOpen={setModalOpen} 
+      <ModalStaking
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
         otherStakingPools={false}
         pid={pid}
       />
       <ModalUnstaking
-        modalOpen={isModalUnstaking} 
-        setModalOpen={setIsModalUnstaking} 
+        modalOpen={isModalUnstaking}
+        setModalOpen={setIsModalUnstaking}
         otherStakingPools={false}
         pid={pid}
       />
       <ModalCancelUnstake
-        modalOpen={isModalCancelUnstake} 
-        setModalOpen={setIsModalCancelUnstake} 
+        modalOpen={isModalCancelUnstake}
+        setModalOpen={setIsModalCancelUnstake}
         pid={pid}
       />
-      <ModalRequestUnstake 
+      <ModalRequestUnstake
         modalOpen={isModalRequestUnstake}
         setModalOpen={setIsModalRequestUnstake}
         pid={pid}

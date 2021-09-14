@@ -30,10 +30,9 @@ const wrapperModifiers = {
     height: 5rem;
     font-size: ${theme.font.sizes.medium};
     padding: ${theme.spacings.xsmall} ${theme.spacings.medium};
-
   `,
   huge: (theme: DefaultTheme) => css`
-    height:4.4rem;
+    height: 4.4rem;
     font-size: ${theme.font.sizes.small};
     padding: ${theme.spacings.small} ${theme.spacings.xlarge};
   `,
@@ -61,29 +60,27 @@ const wrapperModifiers = {
     &:disabled {
       cursor: not-allowed;
       filter: grayscale(150%);
-      color:  #BDBDBD;
-
+      color: #bdbdbd;
     }
   `,
   disabledNoEvent: () => css`
-      cursor: not-allowed;
-      pointer-events: none;
-      filter: grayscale(150%);
-      color:  #BDBDBD;
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: grayscale(150%);
+    color: #bdbdbd;
   `,
 
   backgroundPrimary: (theme: DefaultTheme) => css`
-    background: linear-gradient(264.12deg, #E843C4 -140.16%, #020887 205.21%);
+    background: linear-gradient(264.12deg, #e843c4 -140.16%, #020887 205.21%);
     transition: all 0.15s ease-in-out;
     backface-visibility: hidden;
     &::before {
     }
-    &:hover{
-
-      background: #020887 ;
+    &:hover {
+      background: #020887;
       transition-delay: ${theme.transition.default};
-  }
-`,
+    }
+  `,
   backgroundSecondary: (theme: DefaultTheme) => css`
     background: ${theme.colors.secondary};
     &::before {
@@ -96,21 +93,24 @@ const wrapperModifiers = {
     }
   `,
   backgroundBlack: (theme: DefaultTheme) => css`
-    background: rgba(0,0,0,0.0);
-    border: 0.1rem solid #26DBDB;
-    transition: all .15s ease-in-out;
+    background: rgba(0, 0, 0, 0);
+    border: 0.1rem solid #26dbdb;
+    transition: all 0.15s ease-in-out;
     &::before {
-      border-left-color: #26DBDB;
-      border-top-color: #26DBDB;
+      border-left-color: #26dbdb;
+      border-top-color: #26dbdb;
     }
     &:hover {
-      color:black;
-      background: #26DBDB;
+      color: black;
+      background: #26dbdb;
     }
   `
 }
 
-export const Wrapper = styled.button<WrapperProps>`
+export const Wrapper =
+  styled.button <
+  WrapperProps >
+  `
   ${({
     theme,
     size,
@@ -137,8 +137,8 @@ export const Wrapper = styled.button<WrapperProps>`
 
     /* &:hover {
       background: ${disabled
-        ? 'none'
-        : `linear-gradient(180deg, #e35565 0%, #d958a6 50%)`};
+      ? 'none'
+      : `linear-gradient(180deg, #e35565 0%, #d958a6 50%)`};
     } */
 
     ${!!size && wrapperModifiers[size](theme)};

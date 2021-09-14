@@ -5,7 +5,6 @@ import { useSelector, RootStateOrAny } from 'react-redux'
 import web3 from '../../utils/web3'
 import { BNtoDecimal } from '../../utils/numerals'
 
-
 import useConnect from '../../hooks/useConnect'
 import useERC20Contract from '../../hooks/useERC20Contract'
 import useStakingContract from '../../hooks/useStakingContract'
@@ -17,19 +16,18 @@ import OthersStakingPools from '../../components/OthersStakingPools'
 import styled from 'styled-components'
 
 const Farm = () => {
-  
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
-  const { 
-    balanceOf, 
+  const {
+    balanceOf,
     earned,
-    getReward, 
+    getReward,
     withdrawable,
     poolInfo,
     unstaking,
     stakedUntil,
-    getTotalVotes, 
-    getCurrentVotes 
+    getTotalVotes,
+    getCurrentVotes
   } = useStakingContract()
   const { getAllowance, approve } = useERC20Contract()
   const { connect } = useConnect()
@@ -39,26 +37,11 @@ const Farm = () => {
       <h1>Staking</h1>
       <h3>Stake $KACY for Voting Power</h3>
       <GridStaking>
-        <VotingPower 
-          days='0' 
-          percentage="12" 
+        <VotingPower
+          days="0"
+          percentage="12"
           pid={0}
-          connect={connect} 
-          approve={approve}
-          getAllowance={getAllowance}
-          balanceOf={balanceOf}
-          earned={earned}
-          getReward={getReward}
-          withdrawable={withdrawable}
-          poolInfo={poolInfo}
-          unstaking={unstaking}
-          stakedUntil={stakedUntil}
-          />
-        <VotingPower 
-          days='30'
-          percentage="20"
-          pid={1}
-          connect={connect} 
+          connect={connect}
           approve={approve}
           getAllowance={getAllowance}
           balanceOf={balanceOf}
@@ -69,11 +52,26 @@ const Farm = () => {
           unstaking={unstaking}
           stakedUntil={stakedUntil}
         />
-        <VotingPower 
-          days='45'
+        <VotingPower
+          days="30"
+          percentage="20"
+          pid={1}
+          connect={connect}
+          approve={approve}
+          getAllowance={getAllowance}
+          balanceOf={balanceOf}
+          earned={earned}
+          getReward={getReward}
+          withdrawable={withdrawable}
+          poolInfo={poolInfo}
+          unstaking={unstaking}
+          stakedUntil={stakedUntil}
+        />
+        <VotingPower
+          days="45"
           percentage="32"
           pid={2}
-          connect={connect} 
+          connect={connect}
           approve={approve}
           getAllowance={getAllowance}
           balanceOf={balanceOf}
@@ -85,10 +83,10 @@ const Farm = () => {
           stakedUntil={stakedUntil}
         />
       </GridStaking>
-      <TotalVoting 
+      <TotalVoting
         getTotalVotes={getTotalVotes}
         getCurrentVotes={getCurrentVotes}
-        userWalletAddress={userWalletAddress} 
+        userWalletAddress={userWalletAddress}
       />
       <h3>Other Staking Pools</h3>
       <GridStaking>
