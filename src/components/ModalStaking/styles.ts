@@ -14,6 +14,7 @@ export const Backdrop = styled.div`
 
 interface IBorderGradientProps {
   modalOpen: boolean
+  // eslint-disable-next-line prettier/prettier
   otherStakingPools: boolean
 }
 
@@ -171,6 +172,10 @@ export const ButtonContainer = styled.div`
       background: #26DBDB;
       color: #000;
     }
+    &:active{
+      background: #26DBDB;
+      color: #000;
+    }
   }
 `
 
@@ -180,7 +185,7 @@ interface IConfirmButtonProps {
 
 export const ConfirmButton = styled.button<IConfirmButtonProps>`
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 14px;
   font-weight: 400;
 
@@ -189,7 +194,7 @@ export const ConfirmButton = styled.button<IConfirmButtonProps>`
   justify-content: center;
 
   width: 100%;
-  height: 28px;
+  height: 40px;
   cursor: pointer;
 
   background: ${(props) => props.otherStakingPools ?
@@ -206,15 +211,15 @@ export const ConfirmButton = styled.button<IConfirmButtonProps>`
   }
   &:disabled {
     cursor: not-allowed;
-    filter: grayscale(150%);
-    color: #bdbdbd;
+    background: #4F4F4F;
+    color: #BDBDBD;
   }
 
 `
 
 export const GetKacy = styled.a`
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 14px;
   font-weight: 400;
   text-decoration: none;
@@ -224,7 +229,7 @@ export const GetKacy = styled.a`
   justify-content: center;
 
   width: 100%;
-  height: 28px;
+  height: 40px;
   cursor: pointer;
 
   background: transparent;

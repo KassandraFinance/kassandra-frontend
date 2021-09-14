@@ -41,6 +41,7 @@ import {
 
 interface IInfoStakeProps {
   yourStake: BigNumber
+  // eslint-disable-next-line prettier/prettier
   withdrawable: boolean
 }
 
@@ -280,7 +281,7 @@ const VotingPower = ({
         pid={pid}
       />
       <ModalUnstaking
-        modalOpen={isModalUnstaking}
+        modalOpen={true}
         setModalOpen={setIsModalUnstaking}
         otherStakingPools={false}
         pid={pid}

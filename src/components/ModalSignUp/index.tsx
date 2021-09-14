@@ -19,6 +19,7 @@ import {
 
 interface IModalSignUp {
   modalSignupOpen: boolean
+  // eslint-disable-next-line prettier/prettier
   setModalSignupOpen: React.Dispatch<React.SetStateAction<boolean>>
   setModalSuccessOpen?: React.Dispatch<React.SetStateAction<boolean>>
 }

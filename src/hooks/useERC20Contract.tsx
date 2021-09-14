@@ -22,16 +22,17 @@ const useERC20Contract = () => {
       const tokenContract = getERC20Contract(tokenAddress);
       return tokenContract.methods.approve(spenderAddress, web3.utils.toTwosComplement(-1)).send(
         { from: userWalletAddress },
-        onComplete ? waitTransaction(onComplete) : undefined
+        onComplete && waitTransaction(onComplete)
       );
     } catch (e) {
       console.log("error", e);
       return false;
     }
   };
-  
+
 
   const getERC20Contract = (address: string) => {
+    // eslint-disable-next-line prettier/prettier
     const contract = new web3.eth.Contract((ERC20ABI as unknown) as AbiItem, address)
     return contract
   }
@@ -46,7 +47,7 @@ const useERC20Contract = () => {
       return false
     }
   };
-  
+
   const getBalance = async (tokenAddress: string, userAddress: string): Promise<BigNumber> => {
     const tokenContract = getERC20Contract(tokenAddress)
     try {
@@ -85,7 +86,7 @@ const useERC20Contract = () => {
     return new BigNumber(value)
   }
 
-  return { 
+  return {
     getERC20Contract,
     getAllowance,
     getBalance,

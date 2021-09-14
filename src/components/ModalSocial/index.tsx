@@ -6,18 +6,13 @@ import {
   BackgroundBlack,
   Content,
   InterBackground,
-  // Main,
-  // Amount,
-  // Line,
-  // ButtonContainer,
-  // ConfirmButton,
-  // GetKacyButton,
   ModalText,
   WrapperIcons
  } from './styles'
 
  interface IModalSocialProps {
   modalOpen: boolean
+  // eslint-disable-next-line prettier/prettier
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 
 }

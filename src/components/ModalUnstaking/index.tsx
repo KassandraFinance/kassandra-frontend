@@ -5,22 +5,12 @@ import { useSelector, RootStateOrAny } from 'react-redux'
 import { confirmWithdraw } from '../../utils/confirmTransactions'
 import useStakingContract from '../../hooks/useStakingContract'
 
-import {
-  Backdrop,
-  BorderGradient,
-  BackgroundBlack,
-  InterBackground,
-  Main,
-  Amount,
-  Line,
-  ButtonContainer,
-  ConfirmButton,
-  GetKacyButton
- } from './styles'
+import * as S from './styles'
 import { BNtoDecimal } from '../../utils/numerals'
 
  interface IModalStakingProps {
   modalOpen: boolean
+  // eslint-disable-next-line prettier/prettier
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
   otherStakingPools: boolean
   pid: number
@@ -33,6 +23,7 @@ const ModalUnstaking = ({
   pid }: IModalStakingProps) => {
   const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
   const [amountUnstaking, setAmountUnstaking] = React.useState<BigNumber>(new BigNumber(0))
+  const [isActive, setIsActive] = React.useState<number>(0)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
@@ -62,30 +53,56 @@ const ModalUnstaking = ({
 
   return (
     <>
-      <Backdrop onClick={() => setModalOpen(false)} style={{display: modalOpen ? 'block' : 'none'}} />
-      <BorderGradient
+      <S.Backdrop onClick={() => setModalOpen(false)} style={{display: modalOpen ? 'block' : 'none'}} />
+      <S.BorderGradient
         modalOpen={modalOpen}
         otherStakingPools={otherStakingPools}
       >
-        <BackgroundBlack>
-          <InterBackground otherStakingPools={otherStakingPools}>
+        <S.BackgroundBlack>
+          <S.InterBackground otherStakingPools={otherStakingPools}>
             <span>Unstaking</span>
             <button type="button" onClick={() => setModalOpen(false)}><img src="assets/close.svg" alt="" /> </button>
-          </InterBackground>
-          <Main>
-            <Amount>
+          </S.InterBackground>
+          <S.Main>
+            <S.Amount>
               <span>$KACY Amount</span>
               <input type="number" placeholder="0" value={BNtoDecimal(amountUnstaking, new BigNumber(18), 6)} />
-              <Line />
+              <S.Line />
               <h5>Balance: {BNtoDecimal(balance, new BigNumber(18), 6)}</h5>
-            </Amount>
-            <ButtonContainer>
-              <button type="button" onClick={() => handleKacyAmount(new BigNumber(25))}>25%</button>
-              <button type="button" onClick={() => handleKacyAmount(new BigNumber(50))}>50%</button>
-              <button type="button" onClick={() => handleKacyAmount(new BigNumber(75))}>75%</button>
-              <button type="button" onClick={() => handleKacyAmount(new BigNumber(100))}>max</button>
-            </ButtonContainer>
-            <ConfirmButton
+            </S.Amount>
+            <S.ButtonContainer>
+              <button
+                style={{background: isActive === 25 ? '#26DBDB' : 'transparent', color: isActive === 25 ? '#000' : '#fff'}}
+                type="button"
+                onClick={() => {
+                  setIsActive(25);
+                  handleKacyAmount(new BigNumber(25))}}
+                >25%</button>
+
+							<button style={{background: isActive === 50 ? '#26DBDB' : 'transparent', color: isActive === 50 ? '#000' : '#fff'}}
+                type="button"
+                onClick={() => {
+                  setIsActive(50);
+                  handleKacyAmount(new BigNumber(50))}}
+                >50%</button>
+
+							<button
+                style={{background: isActive === 75 ? '#26DBDB' : 'transparent', color: isActive === 75 ? '#000' : '#fff'}}
+                type="button"
+                onClick={() => {
+                  setIsActive(75);
+                  handleKacyAmount(new BigNumber(75))}}
+                >75%</button>
+
+							<button
+                style={{background: isActive === 100 ? '#26DBDB' : 'transparent', color: isActive === 100 ? '#000' : '#fff'}}
+                type="button"
+                onClick={() => {
+                  setIsActive(100);
+                  handleKacyAmount(new BigNumber(100))}}
+                >max</button>
+            </S.ButtonContainer>
+            <S.ConfirmButton
               type="button"
               disabled={amountUnstaking.toString() === '0'}
               otherStakingPools={otherStakingPools}
@@ -97,11 +114,11 @@ const ModalUnstaking = ({
             }
             >
               Confirm
-            </ConfirmButton>
-            <GetKacyButton type="button" onClick={() => setModalOpen(false)}>Get KACY</GetKacyButton>
-          </Main>
-        </BackgroundBlack>
-      </BorderGradient>
+            </S.ConfirmButton>
+            <S.GetKacy type="button" onClick={() => setModalOpen(false)}>Get KACY</S.GetKacy>
+          </S.Main>
+        </S.BackgroundBlack>
+      </S.BorderGradient>
     </>
   )
 }

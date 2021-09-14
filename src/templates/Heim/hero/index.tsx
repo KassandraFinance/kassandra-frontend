@@ -1,14 +1,13 @@
 import React from 'react'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
-// eslint-disable-next-line import/extensions
-
 import * as S from './styles'
 import Button from '../../../components/Button'
 import MediaMatch from '../../../components/MediaMatch'
 
 interface IHeroProps {
   setModalSignupOpen: React.Dispatch<React.SetStateAction<boolean>>
+  // eslint-disable-next-line prettier/prettier
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
