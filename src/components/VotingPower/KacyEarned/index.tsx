@@ -12,10 +12,15 @@ interface IKacyEarnedProps {
 const KacyEarned = ({ pid, userWalletAddress, earned }: IKacyEarnedProps) => {
   const [kacyEarned, setKacyEarned] = React.useState<BigNumber>(new BigNumber(0))
 
-  setInterval(async () => {
-    const earnedResponse: BigNumber = await earned(pid, userWalletAddress)
-    setKacyEarned(earnedResponse)
-  }, 6000)
+  React.useEffect(() => {
+    const interval = setInterval(async () => {
+      const earnedResponse: BigNumber = await earned(pid, userWalletAddress)
+      setKacyEarned(earnedResponse)
+    }, 6000)
+
+    return () => clearInterval(interval)
+
+  }, [])
 
   return (
     <h3>{BNtoDecimal(kacyEarned || new BigNumber(0), new BigNumber(18), 6)} KACY</h3>
