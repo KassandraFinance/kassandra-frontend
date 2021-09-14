@@ -10,20 +10,22 @@ interface ITotalStakedProps {
 
 const TotalStaked = ({ pid, poolInfo }: ITotalStakedProps) => {
   const [depositedAmount, setDepositedAmount] = React.useState<string>('')
- 
-  async function getPoolInfo() {
-    const poolInfoResponse = await poolInfo(pid)
-    
-    setInterval(async () => {
-      setDepositedAmount(poolInfoResponse.depositedAmount)
-    }, 6000)
-    setDepositedAmount(poolInfoResponse.depositedAmount)
-  }
-
-  
 
   React.useEffect(() => {
-    getPoolInfo()
+    let interval: any
+
+    (async () => {
+      const poolInfoResponse = await poolInfo(pid)
+    
+      interval = setInterval(async () => {
+        setDepositedAmount(poolInfoResponse.depositedAmount)
+      }, 6000)
+      setDepositedAmount(poolInfoResponse.depositedAmount)
+
+    })()
+
+    return () => clearInterval(interval)
+
   }, [])
 
   return (
