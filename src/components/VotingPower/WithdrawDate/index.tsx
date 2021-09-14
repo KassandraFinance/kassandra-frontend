@@ -11,17 +11,19 @@ interface IWithdrawDateProps {
 }
 
 const WithdrawDate = ({ pid, userWalletAddress, stakedUntil }: IWithdrawDateProps) => {
-  const { date, countDown } = useCountDownDate()
+  const { date, countDown, interval } = useCountDownDate()
 
-  async function withdrawDelay() {
+  const withdrawDelay = React.useCallback(async () => {
     const unix_timestamp = await stakedUntil(pid, userWalletAddress)
     const countDownDate = new Date(unix_timestamp * 1000).getTime()
 
     countDown(countDownDate)
-  }
+  }, [])
 
   React.useEffect(() => {
     withdrawDelay()
+
+    return () => clearInterval(interval)
   }, [])
 
   return (
