@@ -16,12 +16,12 @@ const TotalVoting = ({ getTotalVotes, getCurrentVotes, userWalletAddress }: ITot
   const [totalVotes, setTotalVotes] = React.useState<BigNumber>(new BigNumber(0))
   const [yourVotingPower, setYourVotingPower] = React.useState<BigNumber>(new BigNumber(0))
   
-  function getVotingPower() {
+  React.useEffect(() => {
     if (!web3.currentProvider) {
       return
     }
 
-    setInterval(async () => {
+    const interval = setInterval(async () => {
       const totalVotes = await getTotalVotes()
       setTotalVotes(totalVotes)
       if (userWalletAddress) {
@@ -29,12 +29,8 @@ const TotalVoting = ({ getTotalVotes, getCurrentVotes, userWalletAddress }: ITot
         setYourVotingPower(currentVotes)
       }
     }, 8000)
-  }
 
-  console.log('asd')
-
-  React.useEffect(() => {
-    getVotingPower()
+    return () => clearInterval(interval)
   }, [userWalletAddress])
 
   return (

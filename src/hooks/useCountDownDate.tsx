@@ -3,8 +3,10 @@ import React from 'react'
 const useCountDownDate = () => {
   const [date, setDate] = React.useState<string>('')
 
+  let interval: any
+
   function countDown(countDownDate: any) {
-    let x = setInterval(() => {
+    interval = setInterval(() => {
   
       // Get today's date and time
       let now = new Date().getTime();
@@ -24,7 +26,7 @@ const useCountDownDate = () => {
 
       // If the count down is over, write some text 
       if (distance < 0) {
-        clearInterval(x);
+        clearInterval(interval);
         setDate('')
       }
     }, 1000)
@@ -33,7 +35,8 @@ const useCountDownDate = () => {
   
   return {
     date,
-    countDown
+    countDown,
+    interval
   }
 }
 
