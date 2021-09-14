@@ -498,9 +498,9 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
           </ExchangeRate>
         </>)
       }
-      {!isLogged ?
+      {isLogged ?
         <Button type="submit">{isApproved[tokenInIndex] ? title : "Approve"}</Button>
-      :
+        :
         <Button type="button" onClick={connect}>Connect Wallet</Button>
       }
     </FormContainer>
