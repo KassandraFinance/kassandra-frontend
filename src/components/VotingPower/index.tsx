@@ -302,6 +302,7 @@ const VotingPower = ({
       <ModalWalletConnect
         modalOpen={isModalWallet}
         setModalOpen={setIsModaWallet}
+        otherStakingPools={false}
         connect={connect}
       />
     </>

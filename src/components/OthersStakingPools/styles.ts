@@ -152,7 +152,7 @@ export const ButtonWallet = styled.button`
   background: linear-gradient(87.48deg, #e843c4 -47.54%, #26dbdb 154.78%);
   border: none;
   border-radius: 6px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 400;
 
   display: flex;
@@ -160,7 +160,7 @@ export const ButtonWallet = styled.button`
   justify-content: center;
 
   width: 320px;
-  height: 36px;
+  height: 44px;
   cursor: pointer;
   outline: none;
   z-index: 10;

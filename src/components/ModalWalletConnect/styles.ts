@@ -14,15 +14,18 @@ export const Backdrop = styled.div`
 `
 
 interface IBorderGradientProps {
-  modalOpen: boolean;
+  modalOpen: boolean
+  // eslint-disable-next-line prettier/prettier
+  otherStakingPools: boolean
 }
 
-export const BorderGradient =
-  // eslint-disable-next-line prettier/prettier
-  styled.div<IBorderGradientProps >`
-  display: ${props => (props.modalOpen ? 'block' : 'none')};
+export const BorderGradient = styled.div<IBorderGradientProps>`
+  display: ${(props) => props.modalOpen ? "block" : "none" };
 
-  background: linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%) ;
+  background: ${(props) => props.otherStakingPools ?
+    "linear-gradient(0deg, #26DBDB -0.02%, #E843C4 99.99%)"
+    :
+    "linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%)" };
   border-radius: 6px;
 
   border-radius: 6px;
@@ -58,9 +61,16 @@ export const BackgroundBlack = styled.div`
   width: 100%;
   height: 100%;
 `
+interface IInterBackgroundProps {
+  otherStakingPools: boolean;
+}
 
-export const InterBackground = styled.div`
-  background: black;
+// eslint-disable-next-line prettier/prettier
+export const InterBackground = styled.div<IInterBackgroundProps>`
+  background: ${props =>
+    props.otherStakingPools
+      ? 'linear-gradient(0deg, rgba(38, 219, 219, 0.2) -0.02%, rgba(232, 67, 196, 0.2) 99.99%)'
+      : 'linear-gradient(0deg, rgba(255, 191, 0, 0.2) -0.02%, rgba(232, 67, 196, 0.2) 99.99%)'};
   border: 0.1rem solid #e843c4;
   display: flex;
   justify-content: space-between;

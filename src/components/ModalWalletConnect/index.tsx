@@ -8,7 +8,7 @@ import * as S from './styles'
   connect: () => void
   // eslint-disable-next-line prettier/prettier
   modalOpen: boolean
-  // eslint-disable-next-line prettier/prettier
+	otherStakingPools: boolean
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 
 }
@@ -17,6 +17,7 @@ const ModalWalletConnect = ({
   modalOpen,
   setModalOpen,
   connect,
+	otherStakingPools,
    }: IModalWalletConnect) => {
 
   function handleCloseModal() {
@@ -28,16 +29,20 @@ const ModalWalletConnect = ({
       <S.Backdrop onClick={handleCloseModal} style={{display: modalOpen ? 'block' : 'none'}} />
       <S.BorderGradient
         modalOpen={modalOpen}
+        otherStakingPools={otherStakingPools}
       >
         <S.BackgroundBlack>
-          <S.InterBackground >
+          <S.InterBackground otherStakingPools={otherStakingPools}>
             <S.ModalText>
             <span>Wallet connection is required</span>
             </S.ModalText>
             <button type="button" onClick={() => setModalOpen(false)}><img src="assets/close.svg" alt=""/> </button>
           </S.InterBackground>
             <S.Content>
-              <S.WrapperIcons type="button" onClick={connect}>
+              <S.WrapperIcons
+                type="button"
+                otherStakingPools={otherStakingPools}
+                onClick={connect}>
                 <img src="assets/metaMaskIcon.svg" alt="" />
                 <span>Metamask</span>
               </S.WrapperIcons>

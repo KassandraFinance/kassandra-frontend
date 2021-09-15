@@ -23,7 +23,8 @@ const ModalUnstaking = ({
   pid }: IModalStakingProps) => {
   const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
   const [amountUnstaking, setAmountUnstaking] = React.useState<BigNumber>(new BigNumber(0))
-  const [isActive, setIsActive] = React.useState<number>(0)
+  const [multiplier, setMultiplier] = React.useState<number>(0)
+
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
@@ -72,34 +73,34 @@ const ModalUnstaking = ({
             </S.Amount>
             <S.ButtonContainer>
               <button
-                style={{background: isActive === 25 ? '#26DBDB' : 'transparent', color: isActive === 25 ? '#000' : '#fff'}}
+                style={{background: multiplier === 25 ? '#26DBDB' : 'transparent', color: multiplier === 25 ? '#000' : '#fff'}}
                 type="button"
                 onClick={() => {
-                  setIsActive(25);
-                  handleKacyAmount(new BigNumber(25))}}
+                  multiplier === 25 ? setMultiplier(0) : setMultiplier(25);
+                  multiplier === 25 ? handleKacyAmount(new BigNumber(0)) : handleKacyAmount(new BigNumber(25))}}
                 >25%</button>
 
-							<button style={{background: isActive === 50 ? '#26DBDB' : 'transparent', color: isActive === 50 ? '#000' : '#fff'}}
+							<button style={{background: multiplier === 50 ? '#26DBDB' : 'transparent', color: multiplier === 50 ? '#000' : '#fff'}}
                 type="button"
                 onClick={() => {
-                  setIsActive(50);
-                  handleKacyAmount(new BigNumber(50))}}
+                  multiplier === 50 ? setMultiplier(0) : setMultiplier(50);
+                  multiplier === 50 ? handleKacyAmount(new BigNumber(0)) : handleKacyAmount(new BigNumber(50))}}
                 >50%</button>
 
 							<button
-                style={{background: isActive === 75 ? '#26DBDB' : 'transparent', color: isActive === 75 ? '#000' : '#fff'}}
+                style={{background: multiplier === 75 ? '#26DBDB' : 'transparent', color: multiplier === 75 ? '#000' : '#fff'}}
                 type="button"
                 onClick={() => {
-                  setIsActive(75);
-                  handleKacyAmount(new BigNumber(75))}}
+                  multiplier === 75 ? setMultiplier(0) : setMultiplier(75);
+                  multiplier === 75 ? handleKacyAmount(new BigNumber(0)) : handleKacyAmount(new BigNumber(75))}}
                 >75%</button>
 
 							<button
-                style={{background: isActive === 100 ? '#26DBDB' : 'transparent', color: isActive === 100 ? '#000' : '#fff'}}
+                style={{background: multiplier === 100 ? '#26DBDB' : 'transparent', color: multiplier === 100 ? '#000' : '#fff'}}
                 type="button"
                 onClick={() => {
-                  setIsActive(100);
-                  handleKacyAmount(new BigNumber(100))}}
+                  multiplier === 100 ? setMultiplier(0) : setMultiplier(100);
+                  multiplier === 100 ? handleKacyAmount(new BigNumber(0)) : handleKacyAmount(new BigNumber(100))}}
                 >max</button>
             </S.ButtonContainer>
             <S.ConfirmButton

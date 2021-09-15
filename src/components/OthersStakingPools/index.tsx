@@ -1,8 +1,10 @@
 import React from 'react'
 
+import web3 from '../../utils/web3'
 import ModalStaking from '../ModalStaking'
+import ModalWalletConnect from '../ModalWalletConnect'
 
-import { 
+import {
   BorderGradient,
   InterBackground,
   IntroStaking,
@@ -11,14 +13,16 @@ import {
   ButtonContainer,
   ButtonWallet,
   ButtonDetails
- } from './styles'
+} from './styles'
 
 interface IOthersStakingPoolsProps {
-  img: string
+  img: string;
+  connect: () => void;
 }
 
-const OthersStakingPools = ({ img }: IOthersStakingPoolsProps) => {
+const OthersStakingPools = ({ img, connect }: IOthersStakingPoolsProps) => {
   const [modalOpen, setModalOpen] = React.useState<boolean>(false)
+  const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
 
   return (
     <>
@@ -54,15 +58,19 @@ const OthersStakingPools = ({ img }: IOthersStakingPoolsProps) => {
             <p className="total-staking">$134,124</p>
           </Info>
           <Info>
-            <p style={{ position: 'relative'}}>APY</p>
+            <p style={{ position: 'relative' }}>APY</p>
             <p>210%</p>
           </Info>
           <ButtonContainer>
-            <ButtonWallet type="button" onClick={() => setModalOpen(true)}>Connet Wallet</ButtonWallet>
-            <ButtonDetails type="button" onClick={() => alert('Details')}>Details <img src="assets/arrow-down-cyan.svg" alt=""/></ButtonDetails>
+            <ButtonWallet type="button" onClick={() => setIsModaWallet(true)}>
+              Connet Wallet
+            </ButtonWallet>
+            <ButtonDetails type="button" onClick={() => alert('Details')}>
+              Details <img src="assets/arrow-down-cyan.svg" alt="" />
+            </ButtonDetails>
             <img
-              src="assets/info-icon.svg" 
-              alt="" 
+              src="assets/info-icon.svg"
+              alt=""
               className="img-info"
               onMouseOver={() => alert('tooltip')}
             />
@@ -71,8 +79,14 @@ const OthersStakingPools = ({ img }: IOthersStakingPoolsProps) => {
       </BorderGradient>
       <ModalStaking
         pid={0}
-        modalOpen={modalOpen} 
+        modalOpen={modalOpen}
         setModalOpen={setModalOpen}
+        otherStakingPools
+      />
+      <ModalWalletConnect
+        modalOpen={isModalWallet}
+        setModalOpen={setIsModaWallet}
+        connect={connect}
         otherStakingPools
       />
     </>
