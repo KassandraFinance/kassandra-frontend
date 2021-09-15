@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
 
 export const Backdrop = styled.div`
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.6);
 
   position: fixed;
   top: 0;
@@ -14,18 +14,15 @@ export const Backdrop = styled.div`
 `
 
 interface IBorderGradientProps {
-  modalOpen: boolean
-  // eslint-disable-next-line prettier/prettier
-  otherStakingPools: boolean
+  modalOpen: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const BorderGradient = styled.div<IBorderGradientProps>`
-  display: ${(props) => props.modalOpen ? "block" : "none" };
+  // eslint-disable-next-line prettier/prettier
+  display: ${props => (props.modalOpen ? 'block' : 'none')};
 
-  background: ${(props) => props.otherStakingPools ?
-    "linear-gradient(0deg, #26DBDB -0.02%, #E843C4 99.99%)"
-    :
-    "linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%)" };
+  background: black;
   border-radius: 6px;
 
   border-radius: 6px;
@@ -61,16 +58,10 @@ export const BackgroundBlack = styled.div`
   width: 100%;
   height: 100%;
 `
-interface IInterBackgroundProps {
-  otherStakingPools: boolean;
-}
 
 // eslint-disable-next-line prettier/prettier
-export const InterBackground = styled.div<IInterBackgroundProps>`
-  background: ${props =>
-    props.otherStakingPools
-      ? 'linear-gradient(0deg, rgba(38, 219, 219, 0.2) -0.02%, rgba(232, 67, 196, 0.2) 99.99%)'
-      : 'linear-gradient(0deg, rgba(255, 191, 0, 0.2) -0.02%, rgba(232, 67, 196, 0.2) 99.99%)'};
+export const InterBackground = styled.div`
+  background: black;
   border: 0.1rem solid #e843c4;
   display: flex;
   justify-content: space-between;

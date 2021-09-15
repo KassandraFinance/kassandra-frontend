@@ -63,7 +63,7 @@ const OthersStakingPools = ({ img, connect }: IOthersStakingPoolsProps) => {
           </Info>
           <ButtonContainer>
             <ButtonWallet type="button" onClick={() => setIsModaWallet(true)}>
-              Connet Wallet
+              Connect Wallet
             </ButtonWallet>
             <ButtonDetails type="button" onClick={() => alert('Details')}>
               Details <img src="assets/arrow-down-cyan.svg" alt="" />
@@ -87,7 +87,6 @@ const OthersStakingPools = ({ img, connect }: IOthersStakingPoolsProps) => {
         modalOpen={isModalWallet}
         setModalOpen={setIsModaWallet}
         connect={connect}
-        otherStakingPools
       />
     </>
   )

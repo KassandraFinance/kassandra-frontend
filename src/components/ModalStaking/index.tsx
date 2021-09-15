@@ -77,6 +77,7 @@ const ModalStaking = ({
 								step="any"
 								min="0"
 								onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                  setMultiplier(0);
 									const target = e.target as HTMLInputElement
 									// don't allow negative numbers
 									if (e.key === '-') {
@@ -110,7 +111,8 @@ const ModalStaking = ({
 							<S.Line />
 							<h5>Balance: {BNtoDecimal(balance, new BigNumber(18), 6)}</h5>
 						</S.Amount>
-						<S.ButtonContainer >
+						<S.ButtonContainer>
+
 							<button
                 style={{background: multiplier === 25 ? '#26DBDB' : 'transparent', color: multiplier === 25 ? '#000' : '#fff'}}
                 type="button"
