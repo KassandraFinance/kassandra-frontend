@@ -6,7 +6,7 @@ export const BorderGradient = styled.div`
   z-index: 1;
   max-height: 100%;
   min-width: 360px;
-  max-width: 440px;
+  max-width: 400px;
   @media (max-width: 800px) {
     margin: 0 auto;
     max-width: 400px;
@@ -42,10 +42,10 @@ export const InterBackground = styled.div`
   align-items: center;
   
   width: 100%;
-  height: 152px;
+  height: 112px;
   padding: 24px 32px;
   img {
-    max-width: 96px;
+    max-width: 72px;
     @media (max-width: 540px) {
       max-width: 84px;
     }
@@ -103,9 +103,12 @@ export const InfosStaking = styled.div`
 `
 
 export const KacyStaked = styled.div`
-  border-top: 2px solid #E843C4;
-  border-bottom: 2px solid #E843C4;
-  padding: 16px;
+  text-align: center;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+
   width: 100%;
   position: absolute;
   left: -0.1px;
@@ -113,6 +116,36 @@ export const KacyStaked = styled.div`
     font-size: 18px;
     font-weight: 400;
     text-align: center;
+  }
+
+  span {
+    font-size: 18px;
+    font-weight: 300;
+  }
+`
+
+export const VotingPower = styled.div`
+  border-top: 2px solid #E843C4;
+  border-bottom: 2px solid #E843C4;
+  border-right: 1px solid #E843C4;
+
+  padding: 8px 32px;
+`
+
+export const WithdrawDelay = styled.div`
+  border-top: 2px solid #E843C4;
+  border-bottom: 2px solid #E843C4;
+  border-left: 1px solid #E843C4;
+
+  padding: 8px 16px;
+`
+
+export const Days = styled.div`
+  display: flex;
+  justify-content: center;
+
+  p {
+    margin-right: 8px;
   }
 `
 
@@ -123,7 +156,7 @@ export const Info = styled.div`
   p {
     font-size: 18px;
     line-height: 18px;
-    margin-bottom: 24px;
+    margin: 24px 0;
     @media (max-width: 540px) {
       font-size: 16px;
       line-height: 16px;
@@ -138,7 +171,7 @@ export const Info = styled.div`
     font-weight: 400;
     font-size: 16px;
     line-height: 16px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     display: block;
     @media (max-width: 540px) {
       font-size: 13px;
@@ -155,12 +188,22 @@ export const Info = styled.div`
   }
 `
 
+export const Claim = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+  
+`
+
 export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   
-  margin: 0 auto;
+  margin: 16px auto 0;
   width: 100%;
 `
 
@@ -175,8 +218,8 @@ export const ButtonWallet = styled.button`
   align-items: center;
   justify-content: center;
   
-  width: 320px;
-  height: 40px;
+  width: 100%;
+  height: 44px;
   cursor: pointer;
   outline: none;
   margin: 8px 0;
@@ -202,6 +245,7 @@ export const ButtonDetails = styled.button`
 export const StakeContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   max-height: 300px;
   justify-content: space-between;
   align-items: center;
@@ -224,7 +268,7 @@ export const ButtonRequestStake = styled.button`
   align-items: center;
   justify-content: center;
   
-  width: 320px;
+  width: 100%;
   height: 40px;
   margin: 8px 0;
   cursor: pointer;
