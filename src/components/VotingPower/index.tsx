@@ -8,9 +8,9 @@ import { BNtoDecimal } from '../../utils/numerals'
 import { CompleteCallback } from '../../utils/txWait'
 import { confirmClaim } from '../../utils/confirmTransactions'
 
-// import useStakingContract from '../../hooks/useStakingContract'
-
 import { Kacy, Staking } from '../../constants/tokenAddresses'
+
+import { PoolInfo } from '../../hooks/useStakingContract'
 
 import Tooltip from '../Tooltip'
 import ModalStaking from '../ModalStaking'
@@ -21,9 +21,9 @@ import WithdrawDate from './WithdrawDate'
 import TotalStaked from './TotalStaked'
 import KacyEarned from './KacyEarned'
 
-import { 
-  BorderGradient, 
-  InterBackground, 
+import {
+  BorderGradient,
+  InterBackground,
   IntroStaking,
   InfosStaking,
   APR,
@@ -40,39 +40,51 @@ import {
 import * as S from './styles'
 
 interface IInfoStakeProps {
-  yourStake: BigNumber
-  withdrawable: boolean
+  yourStake: BigNumber;
+  withdrawable: boolean;
 }
 
 interface IInfoStakeStaticProps {
-  votingMultiplier: string
-  startDate: string
-  endDate: string
-  kacyRewards: BigNumber
-  withdrawDelay: any
+  votingMultiplier: string;
+  startDate: string;
+  endDate: string;
+  kacyRewards: BigNumber;
+  withdrawDelay: any;
 }
 
 interface IStakingProps {
-  days: string
-  percentage: string
-  pid: number
-  connect: () => void
-  approve: (spenderAddress: string, tokenAddress: string, onComplete?: CompleteCallback | undefined) => Promise<boolean>
-  getAllowance: (addressCRP: string, tokenAddress: string, walletAddress?: string | undefined) => Promise<boolean>
-  balanceOf: (pid: number, walletAddress: string) => Promise<BigNumber>
-  earned: (pid: number, walletAddress: string) => Promise<BigNumber>
-  getReward: (pid: number, onComplete?: CompleteCallback | undefined, message?: string | undefined) => any
-  withdrawable: (pid: number, walletAddress: string) => Promise<any>
-  poolInfo: (pid: number) => Promise<any>
-  unstaking: (pid: number, walletAddress: string) => Promise<any> 
-  stakedUntil: (pid: number, walletAddress: string) => Promise<any>
+  days: string;
+  percentage: string;
+  pid: number;
+  connect: () => void;
+  approve: (
+    spenderAddress: string,
+    userWalletAddress: string,
+    onComplete?: CompleteCallback | undefined
+  ) => Promise<boolean>;
+  getAllowance: (
+    addressCRP: string,
+    tokenAddress: string,
+    walletAddress?: string | undefined
+  ) => Promise<boolean>;
+  balanceOf: (pid: number, walletAddress: string) => Promise<BigNumber>;
+  earned: (pid: number, walletAddress: string) => Promise<BigNumber>;
+  getReward: (
+    pid: number,
+    onComplete?: CompleteCallback | undefined,
+    message?: string | undefined
+  ) => void;
+  withdrawable: (pid: number, walletAddress: string) => Promise<boolean>;
+  poolInfo: (pid: number) => Promise<PoolInfo>;
+  unstaking: (pid: number, walletAddress: string) => Promise<boolean>;
+  stakedUntil: (pid: number, walletAddress: string) => Promise<string>;
 }
 
-const VotingPower = ({ 
-  percentage, 
-  pid, 
-  connect, 
-  approve, 
+const VotingPower = ({
+  percentage,
+  pid,
+  connect,
+  approve,
   getAllowance,
   balanceOf,
   earned,
@@ -90,23 +102,25 @@ const VotingPower = ({
     yourStake: new BigNumber(0),
     withdrawable: false
   })
-  const [infoStakeStatic, setInfoStakeStatic] = React.useState<IInfoStakeStaticProps>({
-    votingMultiplier: '',
-    startDate: '',
-    endDate: '',
-    kacyRewards: new BigNumber(0),
-    withdrawDelay: ''
-  })
-  const [isApproveKacyStaking, setIsApproveKacyStaking] = React.useState<boolean>(false)
+  const [infoStakeStatic, setInfoStakeStatic] =
+    React.useState<IInfoStakeStaticProps>({
+      votingMultiplier: '',
+      startDate: '',
+      endDate: '',
+      kacyRewards: new BigNumber(0),
+      withdrawDelay: ''
+    })
+  const [isApproveKacyStaking, setIsApproveKacyStaking] =
+    React.useState<boolean>(false)
   const [unstake, setUnstake] = React.useState<boolean>(false)
   const [reload, setReload] = React.useState<boolean>(false)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
-  // const { 
-  //   balanceOf, 
+  // const {
+  //   balanceOf,
   //   earned,
-  //   getReward, 
+  //   getReward,
   //   withdrawable,
   //   poolInfo,
   //   unstaking,
@@ -117,7 +131,7 @@ const VotingPower = ({
     if (isApproveKacyStaking) {
       return
     }
-    const res = await approve(Staking, Kacy)
+    const res = await approve(Staking, userWalletAddress)
     setIsApproveKacyStaking(res)
   }
 
@@ -129,12 +143,15 @@ const VotingPower = ({
     const poolInfoResponse = await poolInfo(pid)
 
     if (poolInfoResponse.withdrawDelay) {
-      const startDate = getDate(poolInfoResponse.periodFinish - poolInfoResponse.rewardsDuration)
-      const endDate = getDate(poolInfoResponse.periodFinish)
-  
+      const startDate = getDate(
+        Number(poolInfoResponse.periodFinish) -
+        Number(poolInfoResponse.rewardsDuration)
+      )
+      const endDate = getDate(Number(poolInfoResponse.periodFinish))
+
       const kacyRewards = new BigNumber(poolInfoResponse.rewardRate).mul(new BigNumber(86400))
-      const withdrawDelay = Number(poolInfoResponse.withdrawDelay / 86400)
-      
+      const withdrawDelay = Number(poolInfoResponse.withdrawDelay) / 86400
+
       setInfoStakeStatic({
         votingMultiplier: poolInfoResponse.votingMultiplier,
         startDate,
@@ -148,7 +165,7 @@ const VotingPower = ({
       const balance: BigNumber = await balanceOf(pid, userWalletAddress)
       const withdrawableResponse = await withdrawable(pid, userWalletAddress)
 
-      const unstake = await unstaking(pid, userWalletAddress)  
+      const unstake = await unstaking(pid, userWalletAddress)
 
       setInfoStake({
         yourStake: balance,
@@ -160,11 +177,11 @@ const VotingPower = ({
 
   React.useEffect(() => {
     getAllowance(Staking, Kacy, userWalletAddress)
-    .then((response: boolean) => setIsApproveKacyStaking(response))
+      .then((response: boolean) => setIsApproveKacyStaking(response))
     getInfoStake()
     setReload(!reload)
   }, [userWalletAddress])
-  
+
   return (
     <>
       <div>
@@ -174,9 +191,7 @@ const VotingPower = ({
             <IntroStaking>
               <div style={{ display: 'flex', alignItems: 'flex-start', margin: '0 0 8px' }}>
                 <Tooltip tooltipTop={true}>Annual Percentage Rate</Tooltip>
-                <APR>
-                  APR
-                </APR>
+                <APR>APR</APR>
               </div>
               <Percentage>{percentage}%</Percentage>
             </IntroStaking>

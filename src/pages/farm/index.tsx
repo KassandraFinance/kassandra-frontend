@@ -1,10 +1,7 @@
 import React from 'react'
-import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import web3 from '../../utils/web3'
-import { BNtoDecimal } from '../../utils/numerals'
-
+import { Kacy, Staking } from '../../constants/tokenAddresses'
 
 import useConnect from '../../hooks/useConnect'
 import useERC20Contract from '../../hooks/useERC20Contract'
@@ -17,21 +14,10 @@ import OthersStakingPools from '../../components/OthersStakingPools'
 import styled from 'styled-components'
 
 const Farm = () => {
-  
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const kacyToken = useERC20Contract(Kacy)
+  const kacyStake = useStakingContract(Staking)
 
-  const { 
-    balanceOf, 
-    earned,
-    getReward, 
-    withdrawable,
-    poolInfo,
-    unstaking,
-    stakedUntil,
-    getTotalVotes, 
-    getCurrentVotes 
-  } = useStakingContract()
-  const { getAllowance, approve } = useERC20Contract()
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { connect } = useConnect()
 
   return (
@@ -39,56 +25,56 @@ const Farm = () => {
       <h1>Staking</h1>
       <h3>Stake $KACY for Voting Power</h3>
       <GridStaking>
-        <VotingPower 
-          days='0' 
-          percentage="12" 
+        <VotingPower
+          days="0"
+          percentage="12"
           pid={0}
-          connect={connect} 
-          approve={approve}
-          getAllowance={getAllowance}
-          balanceOf={balanceOf}
-          earned={earned}
-          getReward={getReward}
-          withdrawable={withdrawable}
-          poolInfo={poolInfo}
-          unstaking={unstaking}
-          stakedUntil={stakedUntil}
-          />
-        <VotingPower 
-          days='30'
+          connect={connect}
+          approve={kacyToken.approve}
+          getAllowance={kacyToken.allowance}
+          balanceOf={kacyStake.balance}
+          earned={kacyStake.earned}
+          getReward={kacyStake.getReward}
+          withdrawable={kacyStake.withdrawable}
+          poolInfo={kacyStake.poolInfo}
+          unstaking={kacyStake.unstaking}
+          stakedUntil={kacyStake.stakedUntil}
+        />
+        <VotingPower
+          days="30"
           percentage="20"
           pid={1}
-          connect={connect} 
-          approve={approve}
-          getAllowance={getAllowance}
-          balanceOf={balanceOf}
-          earned={earned}
-          getReward={getReward}
-          withdrawable={withdrawable}
-          poolInfo={poolInfo}
-          unstaking={unstaking}
-          stakedUntil={stakedUntil}
+          connect={connect}
+          approve={kacyToken.approve}
+          getAllowance={kacyToken.allowance}
+          balanceOf={kacyStake.balance}
+          earned={kacyStake.earned}
+          getReward={kacyStake.getReward}
+          withdrawable={kacyStake.withdrawable}
+          poolInfo={kacyStake.poolInfo}
+          unstaking={kacyStake.unstaking}
+          stakedUntil={kacyStake.stakedUntil}
         />
-        <VotingPower 
-          days='45'
+        <VotingPower
+          days="45"
           percentage="32"
           pid={2}
-          connect={connect} 
-          approve={approve}
-          getAllowance={getAllowance}
-          balanceOf={balanceOf}
-          earned={earned}
-          getReward={getReward}
-          withdrawable={withdrawable}
-          poolInfo={poolInfo}
-          unstaking={unstaking}
-          stakedUntil={stakedUntil}
+          connect={connect}
+          approve={kacyToken.approve}
+          getAllowance={kacyToken.allowance}
+          balanceOf={kacyStake.balance}
+          earned={kacyStake.earned}
+          getReward={kacyStake.getReward}
+          withdrawable={kacyStake.withdrawable}
+          poolInfo={kacyStake.poolInfo}
+          unstaking={kacyStake.unstaking}
+          stakedUntil={kacyStake.stakedUntil}
         />
       </GridStaking>
-      <TotalVoting 
-        getTotalVotes={getTotalVotes}
-        getCurrentVotes={getCurrentVotes}
-        userWalletAddress={userWalletAddress} 
+      <TotalVoting
+        getTotalVotes={kacyStake.totalVotes}
+        getCurrentVotes={kacyStake.currentVotes}
+        userWalletAddress={userWalletAddress}
       />
       <h3>Other Staking Pools</h3>
       <GridStaking>

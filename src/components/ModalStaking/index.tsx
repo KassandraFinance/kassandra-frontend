@@ -1,13 +1,14 @@
 import React from 'react'
 import BigNumber from 'bn.js'
+import { useSelector, RootStateOrAny } from 'react-redux'
 
 import web3 from '../../utils/web3'
 import { BNtoDecimal } from '../../utils/numerals'
 import { confirmStake } from '../../utils/confirmTransactions'
 
-import { Kacy } from '../../constants/tokenAddresses'
+import { Kacy, Staking } from '../../constants/tokenAddresses'
 
-import useBalance from '../../hooks/useBalance'
+import useERC20Contract from '../../hooks/useERC20Contract'
 import useStakingContract from '../../hooks/useStakingContract'
 
 import { 
@@ -21,24 +22,26 @@ import {
   ButtonContainer,
   ConfirmButton,
   GetKacyButton
- } from './styles'
+} from './styles'
 
- interface IModalStakingProps {
-  modalOpen: boolean
-  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
-  otherStakingPools: boolean
-  pid: number
+interface IModalStakingProps {
+  modalOpen: boolean;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  otherStakingPools: boolean;
+  pid: number;
 }
 
 const ModalStaking = ({ 
   modalOpen, 
   setModalOpen, 
   otherStakingPools,
-  pid }: IModalStakingProps) => {
+  pid
+}: IModalStakingProps) => {
   const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
   const [amountStaking, setAmountStaking] = React.useState<BigNumber>(new BigNumber(0))
-  const { getBalanceToken } = useBalance()
-  const { stake } = useStakingContract()
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const kacyToken = useERC20Contract(Kacy)
+  const kacyStake = useStakingContract(Staking)
 
   function handleKacyAmount(percentage: BigNumber ) {
     const kacyAmount = percentage.mul(balance).div(new BigNumber(100))
@@ -46,7 +49,7 @@ const ModalStaking = ({
   }
 
   async function get() {
-    const balanceKacy = await getBalanceToken(Kacy)
+    const balanceKacy = await kacyToken.balance(userWalletAddress)
     setBalance(balanceKacy)
   }
 
@@ -124,7 +127,7 @@ const ModalStaking = ({
               otherStakingPools={otherStakingPools}
               onClick={() => {
                 setModalOpen(false)
-                stake(pid, amountStaking, confirmStake, "Pending stake")
+                kacyStake.stake(pid, amountStaking, confirmStake, "Pending stake")
                 setAmountStaking(new BigNumber(0))
               } 
             }

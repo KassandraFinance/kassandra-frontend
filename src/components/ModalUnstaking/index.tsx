@@ -2,6 +2,7 @@ import React from 'react'
 import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
+import { Staking } from '../../constants/tokenAddresses'
 import { confirmWithdraw } from '../../utils/confirmTransactions'
 import useStakingContract from '../../hooks/useStakingContract'
 
@@ -20,10 +21,10 @@ import {
 import { BNtoDecimal } from '../../utils/numerals'
 
  interface IModalStakingProps {
-  modalOpen: boolean
-  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
-  otherStakingPools: boolean
-  pid: number
+  modalOpen: boolean;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  otherStakingPools: boolean;
+  pid: number;
 }
 
 const ModalUnstaking = ({
@@ -36,7 +37,7 @@ const ModalUnstaking = ({
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
-  const { withdraw, balanceOf } = useStakingContract()
+  const kacyStake = useStakingContract(Staking)
 
   function handleKacyAmount(percentage: BigNumber ) {
     const kacyAmount = percentage.mul(balance).div(new BigNumber(100))
@@ -44,12 +45,12 @@ const ModalUnstaking = ({
   }
 
   function handleConfirm () {
-    withdraw(pid, amountUnstaking, confirmWithdraw, "Pending Withdraw")
+    kacyStake.withdraw(pid, amountUnstaking, confirmWithdraw, "Pending Withdraw")
   }
 
   async function get() {
     if (userWalletAddress !== '') {
-      const balance: BigNumber = await balanceOf(pid, userWalletAddress)
+      const balance: BigNumber = await kacyStake.balance(pid, userWalletAddress)
       setBalance(balance)
     }
   }

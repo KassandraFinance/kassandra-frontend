@@ -2,6 +2,8 @@ import React from 'react'
 
 import { confirmCancelUnstake } from '../../utils/confirmTransactions'
 
+import { Staking } from '../../constants/tokenAddresses'
+
 import useStakingContract from '../../hooks/useStakingContract'
 
 import { 
@@ -15,13 +17,13 @@ import {
 } from './styles'
 
 interface IModalRequestUnstakeProps {
-  modalOpen: boolean
-  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
-  pid: number
+  modalOpen: boolean;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  pid: number;
 }
 
 const ModalCancelUnstake = ({ modalOpen, setModalOpen, pid }: IModalRequestUnstakeProps) => {
-  const { cancelUnstake } = useStakingContract()
+  const kacyStake = useStakingContract(Staking)
 
   return (
     <>
@@ -47,7 +49,7 @@ const ModalCancelUnstake = ({ modalOpen, setModalOpen, pid }: IModalRequestUnsta
             <button 
               type="button" 
               onClick={() => {
-                cancelUnstake(pid, confirmCancelUnstake, "Pending cancel unstake")
+                kacyStake.cancelUnstake(pid, confirmCancelUnstake, "Pending cancel unstake")
                 setModalOpen(false)
               }}
             >

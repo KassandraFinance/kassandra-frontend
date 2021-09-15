@@ -7,15 +7,19 @@ import { BNtoDecimal } from '../../utils/numerals'
 import * as S from './styles'
 
 interface ITotalVotingProps {
-  getTotalVotes: () => Promise<any>
-  getCurrentVotes: (walletAddres: string) => Promise<any>
-  userWalletAddress: string
+  getTotalVotes: () => Promise<BigNumber>;
+  getCurrentVotes: (walletAddres: string) => Promise<BigNumber>;
+  userWalletAddress: string;
 }
 
-const TotalVoting = ({ getTotalVotes, getCurrentVotes, userWalletAddress }: ITotalVotingProps) => {
-  const [totalVotes, setTotalVotes] = React.useState<BigNumber>(new BigNumber(0))
-  const [yourVotingPower, setYourVotingPower] = React.useState<BigNumber>(new BigNumber(0))
-  
+const TotalVoting = ({
+  getTotalVotes,
+  getCurrentVotes,
+  userWalletAddress
+}: ITotalVotingProps) => {
+  const [totalVotes, setTotalVotes] = React.useState(new BigNumber(0))
+  const [yourVotingPower, setYourVotingPower] = React.useState(new BigNumber(0))
+
   React.useEffect(() => {
     if (!web3.currentProvider) {
       return
@@ -35,15 +39,15 @@ const TotalVoting = ({ getTotalVotes, getCurrentVotes, userWalletAddress }: ITot
 
   return (
     <S.TotalVoting>
-    <fieldset>
-      <legend>Your voting power</legend>
-      <span>{BNtoDecimal(new BigNumber(yourVotingPower), new BigNumber(18), 6)}</span>
-    </fieldset>
-    <fieldset>
-      <legend>Total voting power</legend>
-      <span>{BNtoDecimal(new BigNumber(totalVotes), new BigNumber(18), 6)}</span>
-    </fieldset>
-  </S.TotalVoting>
+      <fieldset>
+        <legend>Your voting power</legend>
+        <span>{BNtoDecimal(yourVotingPower, new BigNumber(18))}</span>
+      </fieldset>
+      <fieldset>
+        <legend>Total voting power</legend>
+        <span>{BNtoDecimal(totalVotes, new BigNumber(18))}</span>
+      </fieldset>
+    </S.TotalVoting>
   )
 }
 

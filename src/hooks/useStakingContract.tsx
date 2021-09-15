@@ -2,130 +2,147 @@ import BigNumber from 'bn.js'
 import { AbiItem } from "web3-utils"
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import web3 from '../utils/web3'
+import web3, { EventSubscribe } from '../utils/web3'
 import waitTransaction, { CompleteCallback } from '../utils/txWait'
 
-import { Staking } from '../constants/tokenAddresses'
 import StakingContract from "../constants/abi/Staking.json"
 
-const useStakingContract = () => {
+interface Events {
+  MinterChanged: EventSubscribe;
+  DelegateChanged: EventSubscribe;
+  DelegateVotesChanged: EventSubscribe;
+  Transfer: EventSubscribe;
+  Approval: EventSubscribe;
+  NewPool: EventSubscribe;
+  RewardAdded: EventSubscribe;
+  Staked: EventSubscribe;
+  Unstaking: EventSubscribe;
+  Withdrawn: EventSubscribe;
+  RewardPaid: EventSubscribe;
+  RewardsDurationUpdated: EventSubscribe;
+  Recovered: EventSubscribe;
+}
+
+export interface PoolInfo {
+  stakingToken: string; // address
+  depositedAmount: string; // uint256
+  lastUpdateTime: string; // uint256
+  rewardPerTokenStored: string; // uint256
+  rewardsDuration: string; // uint256
+  rewardRate: string; // uint256
+  periodFinish: string; // uint256
+  lockPeriod: string; // uint256
+  withdrawDelay: string; // uint256
+  vestingPeriod: string; // uint256
+  votingMultiplier: string; // uint256
+}
+
+const useStakingContract = (address: string) => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const contract = new web3.eth.Contract((StakingContract as unknown) as AbiItem, address)
 
+  /* EVENT */
 
-  const getStakingContract = (address: string) => {
-    const contract = new web3.eth.Contract((StakingContract as unknown) as AbiItem, address)
-    return contract
-  }
+  const events: Events = contract.events
 
-  // ======== Write on Contract ========
+  /* SEND */
 
   const stake = async (pid: number, amount: BigNumber, onComplete?: CompleteCallback, message?: string) => {
-    const contract = getStakingContract(Staking)
     await contract.methods.stake(pid, amount, userWalletAddress, userWalletAddress)
       .send(
         { from: userWalletAddress }, 
-        onComplete ? waitTransaction(onComplete, message) : undefined
+        onComplete ? waitTransaction(onComplete, message) : false
       )
   }
 
   const unstake = async (pid: number, onComplete?: CompleteCallback, message?: string) => {
-    const contract = getStakingContract(Staking)
     await contract.methods.unstake(pid)
       .send({ from: userWalletAddress },
-        onComplete ? waitTransaction(onComplete, message) : undefined
-      )
-  }
-
-  const getReward = async (pid: number, onComplete?: CompleteCallback, message?: string) => {
-    const contract = getStakingContract(Staking)
-    const getReward = await contract.methods.getReward(pid)
-      .send(
-        { from: userWalletAddress }, 
-        onComplete ? waitTransaction(onComplete, message) : undefined
-      )
-    return getReward
-  }
-
-  const withdraw = async (pid: number, amount: BigNumber, onComplete?: CompleteCallback, message?: string) => {
-    const contract = getStakingContract(Staking)
-    await contract.methods.withdraw(pid, amount)
-      .send({ from: userWalletAddress },
-        onComplete ? waitTransaction(onComplete, message) : undefined
+        onComplete ? waitTransaction(onComplete, message) : false
       )
   }
 
   const cancelUnstake = async (pid: number, onComplete?: CompleteCallback, message?: string) => {
-    const contract = getStakingContract(Staking)
     await contract.methods.cancelUnstake(pid)
       .send({ from: userWalletAddress }, 
-        onComplete ? waitTransaction(onComplete, message) : undefined
+        onComplete ? waitTransaction(onComplete, message) : false
+      )
+  }
+
+  const getReward = async (pid: number, onComplete?: CompleteCallback, message?: string) => {
+    await contract.methods.getReward(pid)
+      .send(
+        { from: userWalletAddress }, 
+        onComplete ? waitTransaction(onComplete, message) : false
+      )
+  }
+
+  const withdraw = async (pid: number, amount: BigNumber, onComplete?: CompleteCallback, message?: string) => {
+    await contract.methods.withdraw(pid, amount)
+      .send({ from: userWalletAddress },
+        onComplete ? waitTransaction(onComplete, message) : false
       )
   }
 
   // ======== Read Contract ========
 
-  const balanceOf = async (pid: number, walletAddress: string) => {
-    const contract = getStakingContract(Staking)
-      const balance = await contract.methods.balanceOf(pid, walletAddress).call()
-      return new BigNumber(balance)
+  const balance = async (pid: number, walletAddress: string) => {
+    const value: string = await contract.methods.balanceOf(pid, walletAddress).call()
+    return new BigNumber(value)
+  }
+
+  const currentVotes = async (walletAddres: string) => {
+    const value: string = await contract.methods.getCurrentVotes(walletAddres).call()
+    return new BigNumber(value)
   }
 
   const earned = async (pid: number, walletAddress: string) => {
-    const contract = getStakingContract(Staking)
-      const earned = await contract.methods.earned(pid, walletAddress).call()
-      return new BigNumber(earned)
-  }
-
-  const withdrawable = async (pid: number, walletAddress: string) => {
-    const contract = getStakingContract(Staking)
-      const withdrawable = await contract.methods.withdrawable(pid, walletAddress).call()
-      return withdrawable
+    const value: string = await contract.methods.earned(pid, walletAddress).call()
+    return new BigNumber(value)
   }
 
   const poolInfo = async (pid: number) => {
-    const contract = getStakingContract(Staking)
-      const poolInfo = await contract.methods.poolInfo(pid).call()
-      return poolInfo
-  }
-
-  const unstaking = async (pid: number, walletAddress: string) => {
-    const contract = getStakingContract(Staking)
-      const isUnstaking = await contract.methods.unstaking(pid, walletAddress).call()
-      return isUnstaking
+    const value: PoolInfo = await contract.methods.poolInfo(pid).call()
+    return value
   }
 
   const stakedUntil = async (pid: number, walletAddress: string) => {
-    const contract = getStakingContract(Staking)
-      const isUnstaking = await contract.methods.stakedUntil(pid, walletAddress).call()
-      return isUnstaking
+    const value: string = await contract.methods.stakedUntil(pid, walletAddress).call()
+    return value
   }
 
-  const getTotalVotes = async () => {
-    const contract = getStakingContract(Staking)
-      const totalVotes = await contract.methods.getTotalVotes().call()
-      return totalVotes
+  const totalVotes = async () => {
+    const value: string = await contract.methods.getTotalVotes().call()
+    return new BigNumber(value)
   }
 
-  const getCurrentVotes = async (walletAddres: string) => {
-    const contract = getStakingContract(Staking)
-      const currentVotes = await contract.methods.getCurrentVotes(walletAddres).call()
-      return currentVotes
+  const unstaking = async (pid: number, walletAddress: string) => {
+    const value: boolean = await contract.methods.unstaking(pid, walletAddress).call()
+    return value
   }
 
-  return { 
+  const withdrawable = async (pid: number, walletAddress: string) => {
+    const value: boolean = await contract.methods.withdrawable(pid, walletAddress).call()
+    return value
+  }
+
+  return {
+    events,
+
     stake,
     unstake,
-    withdraw,
     cancelUnstake,
     getReward,
-    balanceOf,
+    withdraw,
+
+    balance,
+    currentVotes,
     earned,
-    withdrawable,
     poolInfo,
-    unstaking,
     stakedUntil,
-    getTotalVotes,
-    getCurrentVotes
+    totalVotes,
+    unstaking,
+    withdrawable,
   }
 }
 
