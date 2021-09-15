@@ -4,60 +4,33 @@ import detectEthereumProvider from '@metamask/detect-provider'
 
 import { actionGetUserAddressWallet } from '../store/modules/userWalletAddress/actions'
 
-import { ToastError, ToastInfo, ToastSuccess, ToastWarning } from '../components/Toastify/toast'
+import {
+  ToastError,
+  ToastInfo,
+  ToastSuccess,
+  ToastWarning
+} from '../components/Toastify/toast'
 
 declare let window: {
   ethereum: any,
-  location: any,
+  location: {
+    reload: (noCache?: boolean) => void
+  }
 }
 
 const useConnect = () => {
   console.log('executou')
-  const [isLogged, setIsLogged] = React.useState<any>(null)
+  const [isLogged, setIsLogged] = React.useState(false)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const dispatch = useDispatch()
 
-  const startApp = React.useCallback(async (provider) => {
-    try {
-      if (provider !== window.ethereum) {
-        ToastWarning("Do you have multiple wallets installed?")
-      }
-
-      handleRequestAccounts()
-  
-      window.ethereum.on('chainChanged', handleChainChanged)
-    } catch (error: any) {
-      console.log(error.message)
-    }
-  }, [])
-
-
-  const handleDisconnected = React.useCallback(() => { 
-    setIsLogged(false);
-  }, [])
-
-  const handleChainChanged = React.useCallback((_chainId) => {
+  const handleChainChanged = React.useCallback(_chainId => {
     console.log(_chainId)
     window.location.reload()
   }, [])
 
-
-  const handleRequestAccounts = React.useCallback(() => {
-    window.ethereum
-      .request({ method: 'eth_accounts' })
-      .then(handleAccountsChanged)
-      .catch((err: any) => {
-        ToastError(err.message)
-        console.error(err);
-      });
-
-    window.ethereum.on('accountsChanged', handleAccountsChanged);
-  }, [])
-
-
-
-  const handleAccountsChanged = React.useCallback(async (accounts) => {
+  const handleAccountsChanged = React.useCallback(async accounts => {
     try {
       if (accounts.length === 0) {
         setIsLogged(false)
@@ -65,13 +38,42 @@ const useConnect = () => {
       } else if (accounts[0] !== userWalletAddress) {
         dispatch(actionGetUserAddressWallet(accounts[0]))
         setIsLogged(true)
-        ToastSuccess("Connected to MetaMask.")
+        ToastSuccess('Connected to MetaMask.')
       }
     } catch (error: any) {
       console.log(error.message)
     }
   }, [])
 
+  const handleRequestAccounts = React.useCallback(() => {
+    window.ethereum
+      .request({ method: 'eth_accounts' })
+      .then(handleAccountsChanged)
+      .catch((err: any) => {
+        ToastError(err.message)
+        console.error(err)
+      })
+
+    window.ethereum.on('accountsChanged', handleAccountsChanged)
+  }, [])
+
+  const startApp = React.useCallback(async provider => {
+    try {
+      if (provider !== window.ethereum) {
+        ToastWarning('Do you have multiple wallets installed?')
+      }
+
+      handleRequestAccounts()
+
+      window.ethereum.on('chainChanged', handleChainChanged)
+    } catch (error: any) {
+      console.log(error.message)
+    }
+  }, [])
+
+  const handleDisconnected = React.useCallback(() => {
+    setIsLogged(false)
+  }, [])
 
   const isUnlocked = React.useCallback(async () => {
     window.ethereum?._metamask.isUnlocked().then((unlocked: boolean) => {
@@ -91,10 +93,10 @@ const useConnect = () => {
         .catch((err: any) => {
           if (err.code === 4001) {
             // EIP-1193 userRejectedRequest error
-            ToastInfo("Please connect to MetaMask.")
+            ToastInfo('Please connect to MetaMask.')
           } else {
             ToastError(err.message)
-            console.error(err);
+            console.error(err)
           }
         })
     } catch (error: any) {
@@ -108,33 +110,31 @@ const useConnect = () => {
     try {
       if (provider !== null) {
         // window.onbeforeunload = function() { return "Prevent reload" }
-  
-        window.ethereum.on('disconnect',  handleDisconnected)
+
+        window.ethereum.on('disconnect', handleDisconnected)
         window.ethereum.on('accountsChanged', handleAccountsChanged)
         window.ethereum.on('chainChanged', handleChainChanged)
-  
-        const permissions = await window.ethereum.request({ method: 'wallet_getPermissions' });
-  
+
+        const permissions = await window.ethereum.request({
+          method: 'wallet_getPermissions'
+        })
+
         if (permissions.length > 0) {
           startApp(provider)
-        }
-        else {
+        } else {
           // ToastError("User has no permissions")
-          console.log("User has no permissions")
+          console.log('User has no permissions')
           return
         }
       }
     } catch (error) {
       console.log(error)
     }
-      
   }, [])
-
 
   React.useEffect(() => {
     hasProvider()
   }, [])
-
 
   return {
     connect,
