@@ -46,9 +46,14 @@ const ModalStaking = ({
 		get()
 	}, [modalOpen])
 
+  React.useEffect(()=>{
+    setMultiplier(0);
+    handleKacyAmount(new BigNumber(0))
+  }, [modalOpen])
+
 	return (
 		<>
-			<S.Backdrop onClick={() => setModalOpen(false)} style={{display: modalOpen ? 'block' : 'none'}} />
+			<S.Backdrop onClick={() =>  setModalOpen(false)} style={{display: modalOpen ? 'block' : 'none'}} />
 			<S.BorderGradient
 				modalOpen={modalOpen}
 				otherStakingPools={otherStakingPools}

@@ -52,6 +52,11 @@ const ModalUnstaking = ({
     }
   }, [modalOpen])
 
+  React.useEffect(()=>{
+    setMultiplier(0);
+    handleKacyAmount(new BigNumber(0))
+  }, [handleKacyAmount, modalOpen])
+
   return (
     <>
       <S.Backdrop onClick={() => setModalOpen(false)} style={{display: modalOpen ? 'block' : 'none'}} />
@@ -62,7 +67,7 @@ const ModalUnstaking = ({
         <S.BackgroundBlack>
           <S.InterBackground otherStakingPools={otherStakingPools}>
             <span>Unstaking</span>
-            <button type="button" onClick={() => setModalOpen(false)}><img src="assets/close.svg" alt="" /> </button>
+            <button type="button" onClick={() => {setMultiplier(0); setModalOpen(false)}}><img src="assets/close.svg" alt="" /> </button>
           </S.InterBackground>
           <S.Main>
             <S.Amount>

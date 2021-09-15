@@ -41,8 +41,10 @@ const ModalWalletConnect = ({
             <S.Content>
               <S.WrapperIcons
                 type="button"
-                otherStakingPools={otherStakingPools}
-                onClick={connect}>
+                onClick={() => {
+                  setModalOpen(false)
+                  connect()}}
+                otherStakingPools={otherStakingPools}>
                 <img src="assets/metaMaskIcon.svg" alt="" />
                 <span>Metamask</span>
               </S.WrapperIcons>
