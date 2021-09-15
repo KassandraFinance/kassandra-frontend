@@ -2,10 +2,16 @@ import React from 'react';
 
 import { TooltipIcon, TooltipBox, TooltipCard } from './styles';
 
-const Tooltip = ({ children, tooltipTop }: any) => (
+interface ITooltipProps {
+  children: React.ReactChild
+  tooltipTop: boolean
+  widthIcon?: number
+}
+
+const Tooltip = ({ children, tooltipTop, widthIcon }: ITooltipProps) => (
   <TooltipCard tooltipTop={tooltipTop}>
     <TooltipIcon>
-      <img src="assets/IconNotification/info.svg" alt="Descrição" />
+      <img src="assets/IconNotification/info.svg" alt="Descrição" width={widthIcon} />
     </TooltipIcon>
     <TooltipBox>
       {children}

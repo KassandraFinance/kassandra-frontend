@@ -42,7 +42,7 @@ export const TooltipCard = styled.div<ITooltipCardProps>`
     padding: 6px;
     z-index: 22;
 
-    margin: ${props => props.tooltipTop ? '-60px 0 0 -60px' : '-76px 0 0 -20px'};
+    margin: ${props => props.tooltipTop ? '-60px 0 0 -60px' : '-84px 0 0 -60px'};
     @media (max-width: 800px) {
       margin-left: -30px;
     }
