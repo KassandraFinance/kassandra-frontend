@@ -146,7 +146,6 @@ const ModalStaking = ({
 								setModalOpen(false)
 								stake(pid, amountStaking, confirmStake, "Pending stake")
 								setAmountStaking(new BigNumber(0))
-								console.log('fasfa')
 							}
 						}
 						>

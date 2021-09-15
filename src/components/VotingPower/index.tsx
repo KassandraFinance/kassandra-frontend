@@ -19,6 +19,7 @@ import ModalStaking from '../ModalStaking'
 import ModalUnstaking from '../ModalUnstaking'
 import ModalRequestUnstake from '../ModalRequestUnstake'
 import ModalCancelUnstake from '../ModalCancelUnstake'
+import ModalWalletConnect from '../ModalWalletConnect'
 import WithdrawDate from './WithdrawDate'
 import TotalStaked from './TotalStaked'
 import KacyEarned from './KacyEarned'
@@ -87,6 +88,7 @@ const VotingPower = ({
   const [isModalUnstaking, setIsModalUnstaking] = React.useState<boolean>(false)
   const [isModalCancelUnstake, setIsModalCancelUnstake] = React.useState<boolean>(false)
   const [isModalRequestUnstake, setIsModalRequestUnstake] = React.useState<boolean>(false)
+  const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
   const [infoStake, setInfoStake] = React.useState<IInfoStakeProps>({
     yourStake: new BigNumber(0),
     withdrawable: false
@@ -118,7 +120,8 @@ const VotingPower = ({
     if (isApproveKacyStaking) {
       return
     }
-    const res = await approve(Staking, Kacy)
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    const res = await approve(Staking, Kacy, () => {})
     setIsApproveKacyStaking(res)
   }
 
@@ -267,7 +270,7 @@ const VotingPower = ({
                 }
               </>
               :
-              <ButtonWallet type="button" onClick={connect}>Connect Wallet</ButtonWallet>
+              <ButtonWallet type="button" onClick={() => setIsModaWallet(true)}>Connect Wallet</ButtonWallet>
               }
               <ButtonDetails type="button" onClick={() => alert('Details')}>Details <img src="assets/arrow-down-cyan.svg" alt=""/></ButtonDetails>
             </ButtonContainer>
@@ -281,7 +284,7 @@ const VotingPower = ({
         pid={pid}
       />
       <ModalUnstaking
-        modalOpen={true}
+        modalOpen={isModalUnstaking}
         setModalOpen={setIsModalUnstaking}
         otherStakingPools={false}
         pid={pid}
@@ -295,6 +298,11 @@ const VotingPower = ({
         modalOpen={isModalRequestUnstake}
         setModalOpen={setIsModalRequestUnstake}
         pid={pid}
+      />
+      <ModalWalletConnect
+        modalOpen={isModalWallet}
+        setModalOpen={setIsModaWallet}
+        connect={connect}
       />
     </>
   )

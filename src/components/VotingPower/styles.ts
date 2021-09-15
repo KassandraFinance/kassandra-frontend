@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const BorderGradient = styled.div`
   position: relative;
-  padding: 4px; 
+  padding: 4px;
   z-index: 1;
   max-height: 100%;
   min-width: 360px;
@@ -17,17 +17,16 @@ export const BorderGradient = styled.div`
   }
 
   &::after {
-    content:"";
+    content: '';
     position: absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    border-radius: 6px; 
-    padding: 3px; 
-    background: linear-gradient(0deg, #FFBF00 -0.2%, #E843C4 79.99%);
-    -webkit-mask: 
-      linear-gradient(#fff 0 0) content-box, 
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 6px;
+    padding: 3px;
+    background: linear-gradient(0deg, #ffbf00 -0.2%, #e843c4 79.99%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: destination-out;
     mask-composite: exclude;
@@ -35,12 +34,16 @@ export const BorderGradient = styled.div`
 `
 
 export const InterBackground = styled.div`
-  background: linear-gradient(0deg, rgba(255, 191, 0, 0.2) -0.02%, rgba(232, 67, 196, 0.2) 99.99%);
-  
+  background: linear-gradient(
+    0deg,
+    rgba(255, 191, 0, 0.2) -0.02%,
+    rgba(232, 67, 196, 0.2) 99.99%
+  );
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+
   width: 100%;
   height: 152px;
   padding: 24px 32px;
@@ -90,7 +93,7 @@ export const APR = styled.p`
   margin-top: 4px;
 `
 
-export const Percentage= styled.p`
+export const Percentage = styled.p`
   font-size: 40px;
   font-weight: 300;
 `
@@ -103,8 +106,8 @@ export const InfosStaking = styled.div`
 `
 
 export const KacyStaked = styled.div`
-  border-top: 2px solid #E843C4;
-  border-bottom: 2px solid #E843C4;
+  border-top: 2px solid #e843c4;
+  border-bottom: 2px solid #e843c4;
   padding: 16px;
   width: 100%;
   position: absolute;
@@ -159,13 +162,13 @@ export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+
   margin: 0 auto;
   width: 100%;
 `
 
 export const ButtonWallet = styled.button`
-  background: linear-gradient(87.48deg, #FFBF00 -70.27%, #E843C4 154.78%);
+  background: linear-gradient(87.48deg, #ffbf00 -70.27%, #e843c4 154.78%);
   border: none;
   border-radius: 6px;
   font-size: 20px;
@@ -174,7 +177,7 @@ export const ButtonWallet = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   width: 320px;
   height: 40px;
   cursor: pointer;
@@ -194,7 +197,7 @@ export const ButtonDetails = styled.button`
   color: turquoise;
   margin-top: 16px;
 
-  outline: none;  
+  outline: none;
   cursor: pointer;
   z-index: 10;
 `
@@ -214,7 +217,7 @@ export const StakeContainer = styled.div`
 
 export const ButtonRequestStake = styled.button`
   background: transparent;
-  border: 1px solid #26DBDB;
+  border: 1px solid #26dbdb;
   border-radius: 6px;
   color: #fff;
   font-size: 20px;
@@ -223,7 +226,7 @@ export const ButtonRequestStake = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   width: 320px;
   height: 40px;
   margin: 8px 0;
@@ -232,7 +235,7 @@ export const ButtonRequestStake = styled.button`
   z-index: 10;
   transition-duration: 300ms;
   &:hover {
-    background-color: #26DBDB;
+    background-color: #26dbdb;
     color: #211426;
   }
   @media (max-width: 420px) {
