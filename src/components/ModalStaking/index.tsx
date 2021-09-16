@@ -1,13 +1,14 @@
 import React from 'react'
 import BigNumber from 'bn.js'
+import { useSelector, RootStateOrAny } from 'react-redux'
 
 import web3 from '../../utils/web3'
 import { BNtoDecimal } from '../../utils/numerals'
 import { confirmStake } from '../../utils/confirmTransactions'
 
-import { Kacy } from '../../constants/tokenAddresses'
+import { Kacy, Staking } from '../../constants/tokenAddresses'
 
-import useBalance from '../../hooks/useBalance'
+import useERC20Contract from '../../hooks/useERC20Contract'
 import useStakingContract from '../../hooks/useStakingContract'
 
 import * as S from './styles'
@@ -28,7 +29,7 @@ const ModalStaking = ({
 	const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
 	const [amountStaking, setAmountStaking] = React.useState<BigNumber>(new BigNumber(0))
   const [multiplier, setMultiplier] = React.useState<number>(0)
-	const { getBalanceToken } = useBalance()
+	const { getBalanceToken } = setBalance()
 	const { stake } = useStakingContract()
 
 

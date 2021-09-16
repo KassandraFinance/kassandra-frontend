@@ -6,7 +6,7 @@ export const BorderGradient = styled.div`
   z-index: 1;
   max-height: 100%;
   min-width: 360px;
-  max-width: 440px;
+  max-width: 400px;
   @media (max-width: 800px) {
     margin: 0 auto;
     max-width: 400px;
@@ -45,10 +45,10 @@ export const InterBackground = styled.div`
   align-items: center;
 
   width: 100%;
-  height: 152px;
-  padding: 24px 32px;
+  height: 112px;
+  padding: 20px 32px;
   img {
-    max-width: 96px;
+    max-width: 72px;
     @media (max-width: 540px) {
       max-width: 84px;
     }
@@ -67,33 +67,28 @@ export const IntroStaking = styled.div`
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: flex-end;
   flex: 1;
-  height: 80px;
+  max-height: 100%;
   @media (max-width: 540px) {
     font-size: 16px;
   }
-  p {
-    margin-bottom: 8px;
-    line-height: 18px;
-    &:nth-child(2) {
-      margin-bottom: 16px;
-    }
-    &:nth-child(2n) {
-      font-weight: 300;
-    }
+`
+
+export const APR = styled.div`
+  display: flex;
+  align-items: center;
+
+  h4 {
+    font-size: 24px !important;
+    line-height: 24px !important;
+    font-weight: 500 !important;
+    margin: 0 0 4px 6px;
   }
 `
 
-export const APR = styled.p`
-  font-size: 24px;
-  font-weight: 500;
-  margin-left: 8px;
-  margin-top: 4px;
-`
-
 export const Percentage = styled.p`
+  line-height: 40px;
   font-size: 40px;
   font-weight: 300;
 `
@@ -106,9 +101,11 @@ export const InfosStaking = styled.div`
 `
 
 export const KacyStaked = styled.div`
-  border-top: 2px solid #e843c4;
-  border-bottom: 2px solid #e843c4;
-  padding: 16px;
+  text-align: center;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
   width: 100%;
   position: absolute;
   left: -0.1px;
@@ -116,6 +113,36 @@ export const KacyStaked = styled.div`
     font-size: 18px;
     font-weight: 400;
     text-align: center;
+  }
+
+  span {
+    font-size: 18px;
+    font-weight: 300;
+  }
+`
+
+export const VotingPower = styled.div`
+  border-top: 2px solid #e843c4;
+  border-bottom: 2px solid #e843c4;
+  border-right: 1px solid #e843c4;
+
+  padding: 8px 32px;
+`
+
+export const WithdrawDelay = styled.div`
+  border-top: 2px solid #e843c4;
+  border-bottom: 2px solid #e843c4;
+  border-left: 1px solid #e843c4;
+
+  padding: 8px 16px;
+`
+
+export const Days = styled.div`
+  display: flex;
+  justify-content: center;
+
+  p {
+    margin-right: 8px;
   }
 `
 
@@ -126,7 +153,7 @@ export const Info = styled.div`
   p {
     font-size: 18px;
     line-height: 18px;
-    margin-bottom: 24px;
+    margin: 24px 0;
     @media (max-width: 540px) {
       font-size: 16px;
       line-height: 16px;
@@ -141,7 +168,7 @@ export const Info = styled.div`
     font-weight: 400;
     font-size: 16px;
     line-height: 16px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     display: block;
     @media (max-width: 540px) {
       font-size: 13px;
@@ -152,10 +179,36 @@ export const Info = styled.div`
   span:last-child {
     font-weight: 300;
   }
+`
 
-  .total-staking {
-    margin: 16px 0;
+export const Stake = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  font-weight: 300;
+  p {
+    font-size: 18px;
+    line-height: 18px;
+    margin: 24px 0 4px;
+    @media (max-width: 540px) {
+      font-size: 16px;
+      line-height: 16px;
+    }
   }
+
+  span {
+    font-size: 13px;
+  }
+`
+
+export const Claim = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
 `
 
 export const ButtonContainer = styled.div`
@@ -163,15 +216,22 @@ export const ButtonContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
-  margin: 0 auto;
+  margin: 16px auto 0;
   width: 100%;
 `
 
-export const ButtonWallet = styled.button`
-  background: linear-gradient(87.48deg, #ffbf00 -70.27%, #e843c4 154.78%);
+interface IButtonProps {
+  buttonRequest?: boolean;
+}
+
+export const Button =
+  styled.button <
+  IButtonProps >
+  `
+  background: linear-gradient(87.48deg, #FFBF00 -70.27%, #E843C4 154.78%);
   border: none;
   border-radius: 6px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 400;
 
   display: flex;
@@ -189,9 +249,28 @@ export const ButtonWallet = styled.button`
     max-width: 100%;
     min-width: 200px;
   }
+
+  ${props =>
+    props.buttonRequest && {
+      background: 'transparent',
+      border: '1px solid #26DBDB',
+      color: '#fff',
+      transitionDuration: '300ms'
+    }}
+  &:hover {
+    background-color: ${props => (props.buttonRequest ? '#26DBDB' : null)};
+    color: ${props => (props.buttonRequest ? '#211426' : null)};
+  }
 `
 
-export const ButtonDetails = styled.button`
+interface IButtonDetailsProps {
+  isDetails: boolean;
+}
+
+export const ButtonDetails =
+  styled.button <
+  IButtonDetailsProps >
+  `
   background-color: transparent;
   border: none;
   color: turquoise;
@@ -200,11 +279,18 @@ export const ButtonDetails = styled.button`
   outline: none;
   cursor: pointer;
   z-index: 10;
+
+  img {
+    transform: ${props => (props.isDetails ? 'rotate(180deg)' : null)};
+    margin-left: 8px;
+    transition-duration: 200ms;
+  }
 `
 
 export const StakeContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   max-height: 300px;
   justify-content: space-between;
   align-items: center;

@@ -1,4 +1,4 @@
-export function getDate(date: any): string {
+export function getDate(date: number): string {
   const thisDate = new Date(date * 1000)
   const dd = thisDate.getDate()
   const mm = thisDate.getMonth()

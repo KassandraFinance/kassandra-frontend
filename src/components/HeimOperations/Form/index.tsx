@@ -1,12 +1,13 @@
 import React from 'react'
 import BigNumber from 'bn.js'
 import { TransactionReceipt } from 'web3-core'
+import { EventData } from 'web3-eth-contract'
 
 import { HeimCRPPOOL, HeimCorePool } from '../../../constants/tokenAddresses'
 
 import useConnect from '../../../hooks/useConnect'
 import useCRPContract from '../../../hooks/useCRPContract'
-import useERC20Contract from '../../../hooks/useERC20Contract'
+import useERC20Contract, { ERC20 } from '../../../hooks/useERC20Contract'
 import usePoolContract from '../../../hooks/usePoolContract'
 
 import InputTokens from './InputTokens'
@@ -18,53 +19,31 @@ import { FormContainer, Button, SpanLight, ExchangeRate } from './styles'
 import { BNtoDecimal, wei } from '../../../utils/numerals'
 
 interface IFormProps {
-  typeAction: string
-  title: string
-  isLogged: boolean
+  typeAction: string;
+  title: string;
+  isLogged: boolean;
 }
 
 interface Address2Index {
-  [key: string]: number
+  [key: string]: number;
 }
 
 export interface TokenDetails {
-  address: string
-  name: string
-  symbol: string
-  decimals: BigNumber
+  address: string;
+  name: string;
+  symbol: string;
+  decimals: BigNumber;
 }
 
 const Form = ({ typeAction, title, isLogged }: IFormProps) => {
-  const {
-    approve,
-    decimals,
-    getAllowance,
-    getBalance,
-    getTotalSupply,
-    name,
-    symbol,
-  } = useERC20Contract()
-  const {
-    balanceToken,
-    calcOutGivenIn,
-    calcPoolOutGivenSingleIn,
-    calcSingleOutGivenPoolIn,
-    denormalizedWeight,
-    getCurrentTokens,
-    getSpotPrice,
-    swapExactAmountIn,
-    swapFee,
-    totalDenormalizedWeight,
-  } = usePoolContract()
+  const corePoolToken = useERC20Contract(HeimCorePool)
+  const crpPoolToken = useERC20Contract(HeimCRPPOOL)
+  const corePool = usePoolContract(HeimCorePool)
+  const crpPool = useCRPContract(HeimCRPPOOL)
   const {
     connect,
     userWalletAddress,
   } = useConnect()
-  const {
-    exitPool,
-    exitswapPoolAmountIn,
-    joinswapExternAmountIn,
-  } = useCRPContract()
 
   const [poolTokens, setPoolTokens] = React.useState<string[]>([])
   const [poolTokenDetails, setPoolTokensDetails] = React.useState<TokenDetails[]>([])
@@ -83,7 +62,7 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
 
   // get tokens
   React.useEffect(() => {
-    getCurrentTokens(HeimCorePool)
+    corePool.currentTokens()
       .then((newPoolTokens) => {
         setPoolTokens(newPoolTokens)
         setTokenAddress2Index(newPoolTokens.reduce((acc, cur, i) => ({[cur]: i, ...acc}), {
@@ -130,7 +109,7 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
       const newApprovals = []
 
       for (let i = 0; i < poolTokens.length; i += 1) {
-        newApprovals.push(getAllowance(title === 'Invest' ? HeimCRPPOOL : HeimCorePool, poolTokens[i]))
+        newApprovals.push((title === 'Invest' ? crpPoolToken : corePoolToken).allowance(poolTokens[i], userWalletAddress))
       }
 
       setIsApproved(await Promise.all(newApprovals))
@@ -138,7 +117,7 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
 
     setIsApproved([])
     calc()
-  }, [title, poolTokens, approvalCheck])
+  }, [title, poolTokens, approvalCheck, userWalletAddress])
 
   // get details of tokens
   React.useEffect(() => {
@@ -149,16 +128,17 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
       const newDecimals: Promise<BigNumber>[] = []
 
       for (let i = 0; i < poolTokens.length; i += 1) {
+        const token = ERC20(poolTokens[i])
         newAddresses.push(poolTokens[i])
-        newNames.push(name(poolTokens[i]))
-        newSymbols.push(symbol(poolTokens[i]))
-        newDecimals.push(decimals(poolTokens[i]))
+        newNames.push(token.name())
+        newSymbols.push(token.symbol())
+        newDecimals.push(token.decimals())
       }
 
       newAddresses.push(HeimCRPPOOL)
-      newNames.push(name(HeimCRPPOOL))
-      newSymbols.push(symbol(HeimCRPPOOL))
-      newDecimals.push(decimals(HeimCRPPOOL))
+      newNames.push(crpPoolToken.name())
+      newSymbols.push(crpPoolToken.symbol())
+      newDecimals.push(crpPoolToken.decimals())
 
       setPoolTokensDetails(
         await Promise.all(Array(poolTokens.length + 1).fill(0).map(async (_, i) => ({
@@ -176,9 +156,34 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
 
   // get balance of swap in token
   React.useEffect(() => {
+    if (swapInAddress.length === 0 || userWalletAddress.length === 0) {
+      return
+    }
+
     setSwapInBalance(new BigNumber(-1))
-    getBalance(swapInAddress, userWalletAddress)
+
+    const token = ERC20(swapInAddress)
+    token.balance(userWalletAddress)
       .then((newBalance) => setSwapInBalance(newBalance))
+
+    const balanceSub = token.events.Transfer(
+      (error: Error, event: EventData) => {
+        const spender = event.returnValues[0]
+        const receiver = event.returnValues[1]
+        const value = new BigNumber(event.returnValues[2])
+
+        if (spender === userWalletAddress) {
+          setSwapInBalance(cur => cur.sub(value))
+        }
+        else if (receiver === userWalletAddress) {
+          setSwapInBalance(cur => cur.add(value))
+        }
+      }
+    )
+
+    return () => {
+      balanceSub.unsubscribe()
+    }
   }, [swapInAddress, userWalletAddress])
 
   // get balance of swap out token
@@ -189,21 +194,44 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
 
     setSwapOutBalance([new BigNumber(-1)])
 
-    if (swapOutAddress === '' && title === 'Withdraw') {
+    if (title === 'Withdraw') {
       (async () => {
         const newSwapOutBalance = await Promise.all(
-          poolTokens.map(async (tokenAddress) =>
-            getBalance(tokenAddress, userWalletAddress)
-          )
+          poolTokens.map(async (tokenAddress) => {
+            const token = ERC20(tokenAddress);
+            return token.balance(userWalletAddress)
+          })
         )
 
         setSwapOutBalance(newSwapOutBalance)
       })()
+
       return
     }
 
-    getBalance(swapOutAddress, userWalletAddress)
+    const token = ERC20(swapOutAddress)
+
+    token.balance(userWalletAddress)
       .then((newBalance) => setSwapOutBalance([newBalance]))
+
+    const balanceSub = token.events.Transfer(
+      (error: Error, event: EventData) => {
+        const spender = event.returnValues[0]
+        const receiver = event.returnValues[1]
+        const value = new BigNumber(event.returnValues[2])
+
+        if (spender === userWalletAddress) {
+          setSwapOutBalance(cur => [cur[0].sub(value)])
+        }
+        else if (receiver === userWalletAddress) {
+          setSwapOutBalance(cur => [cur[0].add(value)])
+        }
+      }
+    )
+
+    return () => {
+      balanceSub.unsubscribe()
+    }
   }, [title, swapOutAddress, userWalletAddress])
 
   // calculate investment
@@ -220,16 +248,15 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
         poolTotalDenormalizedWeight,
         poolSwapFee,
       ] = await Promise.all([
-        balanceToken(HeimCorePool, swapInAddress),
-        denormalizedWeight(HeimCorePool, swapInAddress),
-        getTotalSupply(HeimCRPPOOL),
-        totalDenormalizedWeight(HeimCorePool),
-        swapFee(HeimCorePool),
+        corePool.balance(swapInAddress),
+        corePool.denormalizedWeight(swapInAddress),
+        crpPoolToken.totalSupply(),
+        corePool.totalDenormalizedWeight(),
+        corePool.swapFee(),
       ])
 
       const [newSwapOutAmount, newSwapOutPrice] = await Promise.all([
-        calcPoolOutGivenSingleIn(
-          HeimCorePool,
+        corePool.calcPoolOutGivenSingleIn(
           swapInTotalPoolBalance,
           swapInDenormalizedWeight,
           poolSupply,
@@ -237,8 +264,7 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
           swapInAmount,
           poolSwapFee,
         ),
-        calcPoolOutGivenSingleIn(
-          HeimCorePool,
+        corePool.calcPoolOutGivenSingleIn(
           swapInTotalPoolBalance,
           swapInDenormalizedWeight,
           poolSupply,
@@ -271,17 +297,16 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
         swapOutDenormalizedWeight,
         poolSwapFee,
       ] = await Promise.all([
-        balanceToken(HeimCorePool, swapInAddress),
-        balanceToken(HeimCorePool, swapOutAddress),
-        denormalizedWeight(HeimCorePool, swapInAddress),
-        denormalizedWeight(HeimCorePool, swapOutAddress),
-        swapFee(HeimCorePool),
+        corePool.balance(swapInAddress),
+        corePool.balance(swapOutAddress),
+        corePool.denormalizedWeight(swapInAddress),
+        corePool.denormalizedWeight(swapOutAddress),
+        corePool.swapFee(),
       ])
 
       const [newSwapOutPrice, newSwapOutAmount] = await Promise.all([
-        getSpotPrice(HeimCorePool, swapOutAddress, swapInAddress),
-        calcOutGivenIn(
-          HeimCorePool, 
+        corePool.spotPrice(swapOutAddress, swapInAddress),
+        corePool.calcOutGivenIn(
           swapInTotalPoolBalance,
           swapInDenormalizedWeight,
           swapOutTotalPoolBalance,
@@ -319,12 +344,12 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
     }
 
     const calc = async () => {
-      const poolSupply = await getTotalSupply(HeimCRPPOOL)
+      const poolSupply = await crpPoolToken.totalSupply()
 
       if (swapOutAddress === '') {
         const newSwapOutAmount = await Promise.all(
           poolTokens.map(async (tokenAddress) => {
-            const swapOutTotalPoolBalance = await balanceToken(HeimCorePool, tokenAddress)
+            const swapOutTotalPoolBalance = await corePool.balance(tokenAddress)
             return getWithdrawAmount(poolSupply, swapInAmount, swapOutTotalPoolBalance)
           })
         )
@@ -338,14 +363,13 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
         poolTotalDenormalizedWeight,
         poolSwapFee,
       ] = await Promise.all([
-        balanceToken(HeimCorePool, swapOutAddress),
-        denormalizedWeight(HeimCorePool, swapOutAddress),
-        totalDenormalizedWeight(HeimCorePool),
-        swapFee(HeimCorePool),
+        corePool.balance(swapOutAddress),
+        corePool.denormalizedWeight(swapOutAddress),
+        corePool.totalDenormalizedWeight(),
+        corePool.swapFee(),
       ])
 
-      const SingleSwapOutAmount = await calcSingleOutGivenPoolIn(
-        HeimCorePool,
+      const SingleSwapOutAmount = await corePool.calcSingleOutGivenPoolIn(
         swapOutTotalPoolBalance,
         swapOutDenormalizedWeight,
         poolSupply,
@@ -391,12 +415,14 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
         swapInAmountInput,
         swapInAddressInput,
         swapOutAddressInput,
+        walletAddress,
       } = e.target as HTMLFormElement & {
         approved: HTMLInputElement
         category: HTMLInputElement
         swapInAmountInput: HTMLInputElement
         swapInAddressInput: HTMLInputElement
         swapOutAddressInput: HTMLInputElement
+        walletAddress: HTMLInputElement
       }
 
       const swapInAmountVal = new BigNumber(swapInAmountInput.value)
@@ -407,35 +433,35 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
         switch (category.value) {
           case 'Invest':
             if (approved.value === '0') {
-              approve(HeimCRPPOOL, swapInAddressVal, asyncExecute(
+              crpPoolToken.approve(swapInAddressVal, walletAddress.value, asyncExecute(
                 'Contract approval complete!',
                 () => setApprovalCheck((cur) => cur + 1)
               ))
               return
             }
 
-            joinswapExternAmountIn(HeimCRPPOOL, swapInAddressVal, swapInAmountVal)
+            crpPool.joinswapExternAmountIn(swapInAddressVal, swapInAmountVal)
             return
 
           case 'Withdraw':
             if (swapOutAddressVal !== '') {
-              exitswapPoolAmountIn(HeimCRPPOOL, swapOutAddressVal, swapInAmountVal)
+              crpPool.exitswapPoolAmountIn(swapOutAddressVal, swapInAmountVal)
               return
             }
 
-            exitPool(HeimCRPPOOL, swapInAmountVal, Array(poolTokens.length).fill(new BigNumber(0)))
+            crpPool.exitPool(swapInAmountVal, Array(poolTokens.length).fill(new BigNumber(0)))
             return
 
           case 'Swap':
             if (approved.value === '0') {
-              approve(HeimCorePool, swapInAddressVal, asyncExecute(
+              corePoolToken.approve(swapInAddressVal, walletAddress.value, asyncExecute(
                 'Contract approval complete!',
                 () => setApprovalCheck((cur) => cur + 1)
               ))
               return
             }
 
-            swapExactAmountIn(HeimCorePool, swapInAddressVal, swapInAmountVal, swapOutAddressVal)
+            corePool.swapExactAmountIn(swapInAddressVal, swapInAmountVal, swapOutAddressVal)
             return
 
           default:
@@ -448,11 +474,12 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
 
   return (
     <FormContainer onSubmit={submitAction}>
-      <input type="hidden" name="approved" value={Number(isApproved[tokenInIndex])} />
+      <input type="hidden" name="approved" value={Number(isApproved[tokenInIndex] || 0)} />
       <input type="hidden" name="category" value={title} />
       <input type="hidden" name="swapInAmountInput" value={swapInAmount.toString()} />
       <input type="hidden" name="swapInAddressInput" value={swapInAddress} />
       <input type="hidden" name="swapOutAddressInput" value={swapOutAddress} />
+      <input type="hidden" name="walletAddress" value={userWalletAddress} />
       <InputTokens
         actionString={typeAction}
         poolTokens={
@@ -467,6 +494,7 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
       {title === 'Withdraw'
         ? poolTokens.map((tokenOutAddress, i) =>
           <InputDefault
+            key={`output_${tokenOutAddress}`}
             poolTokens={poolTokenDetails.filter((token) => token.address === tokenOutAddress)}
             isMax={swapOutAddress === tokenOutAddress}
             swapOutAmount={swapOutAmount[i] || new BigNumber(0)}

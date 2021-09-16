@@ -3,7 +3,6 @@ import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
 import web3 from '../../utils/web3'
 
-
 import { Staking } from '../../constants/tokenAddresses'
 import { confirmWithdraw } from '../../utils/confirmTransactions'
 import useStakingContract from '../../hooks/useStakingContract'
@@ -61,7 +60,7 @@ const ModalUnstaking = ({
 
   async function get() {
     if (userWalletAddress !== '') {
-      const balance: BigNumber = await kacyStake.balanceOf(
+      const balance: BigNumber = await kacyStake.balance(
         pid,
         userWalletAddress
       )
