@@ -12,7 +12,7 @@ import useStakingContract from '../../hooks/useStakingContract'
 
 import * as S from './styles'
 
- interface IModalStakingProps {
+interface IModalStakingProps {
 	modalOpen: boolean
 	// eslint-disable-next-line prettier/prettier
 	setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -24,7 +24,7 @@ const ModalStaking = ({
 	modalOpen,
 	setModalOpen,
 	otherStakingPools,
-	pid }: IModalStakingProps) => {
+  pid }: IModalStakingProps) => {
 	const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
 	const [amountStaking, setAmountStaking] = React.useState<BigNumber>(new BigNumber(0))
   const [multiplier, setMultiplier] = React.useState<number>(0)

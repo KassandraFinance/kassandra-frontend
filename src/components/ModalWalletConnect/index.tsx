@@ -4,7 +4,7 @@ import React from 'react'
 import * as S from './styles'
 
 
- interface IModalWalletConnect {
+interface IModalWalletConnect {
   connect: () => void
   // eslint-disable-next-line prettier/prettier
   modalOpen: boolean
@@ -16,7 +16,7 @@ const ModalWalletConnect = ({
   modalOpen,
   setModalOpen,
   connect,
-   }: IModalWalletConnect) => {
+  }: IModalWalletConnect) => {
 
   function handleCloseModal() {
     setModalOpen(false)

@@ -19,10 +19,9 @@ interface IBorderGradientProps {
 
 // eslint-disable-next-line prettier/prettier
 export const BorderGradient = styled.div<IBorderGradientProps>`
-  // eslint-disable-next-line prettier/prettier
   display: ${props => (props.modalOpen ? 'block' : 'none')};
 
-  background: black;
+  background: linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%);
   border-radius: 6px;
 
   border-radius: 6px;
@@ -133,11 +132,13 @@ export const WrapperIcons = styled.button`
   `}
     &:hover {
       background: #ffbf00;
+      border: 1px solid #ffbf00;
     }
   `}
 `
 export const Content = styled.div`
   display: flex;
+  flex-direction: column;
 
   ${media.lessThan('small')`
       margin: 0;
