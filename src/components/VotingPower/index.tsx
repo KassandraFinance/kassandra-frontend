@@ -106,7 +106,7 @@ const VotingPower = ({
     if (isApproveKacyStaking) {
       return
     }
-    const res = await approve(Staking, userWalletAddress)
+    const res = await approve(Staking, userWalletAddress, () => {})
     setIsApproveKacyStaking(res)
   }
 
@@ -207,13 +207,13 @@ const VotingPower = ({
               <>
                 {infoStake.yourStake.toString() !== "0" &&
                   <S.Claim>
-                    <KacyEarned 
-                      pid={pid} 
-                      userWalletAddress={userWalletAddress} 
+                    <KacyEarned
+                      pid={pid}
+                      userWalletAddress={userWalletAddress}
                       earned={earned}
                     />
-                    <S.Button 
-                      type="button" 
+                    <S.Button
+                      type="button"
                       style={{ width: '110px' }}
                       onClick={() => getReward(pid, confirmClaim, "Pending reward claim")}
                     >
@@ -223,8 +223,8 @@ const VotingPower = ({
                 }
                 {isApproveKacyStaking ?
                   <S.StakeContainer>
-                    {unstake ? 
-                      <S.Button 
+                    {unstake ?
+                      <S.Button
                         type="button"
                         buttonRequest={true}
                         onClick={() => setIsModalCancelUnstake(true)}
@@ -232,24 +232,24 @@ const VotingPower = ({
                         Cancel withdraw
                       </S.Button>
                       :
-                      <S.Button 
-                        type="button" 
+                      <S.Button
+                        type="button"
                         onClick={() => setIsModalStaking(true)}
                       >
                         Stake KACY
                       </S.Button>
-                    }        
+                    }
                     {infoStake.yourStake.toString() !== "0" &&
                     <>
-                      {infoStake.withdrawable ? 
-                        <S.Button 
-                          type="button" 
+                      {infoStake.withdrawable ?
+                        <S.Button
+                          type="button"
                           onClick={() => setIsModalUnstaking(true)}
                         >
                           Withdraw
                         </S.Button>
                         :
-                        unstake ? 
+                        unstake ?
                           <WithdrawDate pid={pid} userWalletAddress={userWalletAddress} stakedUntil={stakedUntil} />
                           :
                           <S.Button
@@ -259,13 +259,13 @@ const VotingPower = ({
                           >
                             Request withdraw
                           </S.Button>
-                      }           
+                      }
                     </>
                     }
                   </S.StakeContainer>
                   :
-                  <S.Button 
-                    type="button" 
+                  <S.Button
+                    type="button"
                     onClick={handleApproveKacy}
                   >
                     Approve Contract
@@ -273,24 +273,24 @@ const VotingPower = ({
                 }
               </>
               :
-              <S.Button 
-                type="button" 
+              <S.Button
+                type="button"
                 onClick={connect}
               >
                 Connect Wallet
               </S.Button>
               }
-              <S.ButtonDetails 
-                type="button" 
+              <S.ButtonDetails
+                type="button"
                 isDetails={isDetails}
                 onClick={() => setIsDetails(!isDetails)}
               >
-                Details 
+                Details
                 <img src="assets/arrow-down-cyan.svg" alt="" />
               </S.ButtonDetails>
-              {isDetails && 
-                <Details 
-                  pid={pid} 
+              {isDetails &&
+                <Details
+                  pid={pid}
                   poolInfo={poolInfo}
                   infoStakeStatic={infoStakeStatic}
                 />
@@ -299,24 +299,24 @@ const VotingPower = ({
           </S.InfosStaking>
         </S.BorderGradient>
       </div>
-      <ModalStaking 
-        modalOpen={isModalStaking} 
-        setModalOpen={setIsModalStaking} 
+      <ModalStaking
+        modalOpen={isModalStaking}
+        setModalOpen={setIsModalStaking}
         otherStakingPools={false}
         pid={pid}
       />
       <ModalUnstaking
-        modalOpen={isModalUnstaking} 
-        setModalOpen={setIsModalUnstaking} 
+        modalOpen={isModalUnstaking}
+        setModalOpen={setIsModalUnstaking}
         otherStakingPools={false}
         pid={pid}
       />
       <ModalCancelUnstake
-        modalOpen={isModalCancelUnstake} 
-        setModalOpen={setIsModalCancelUnstake} 
+        modalOpen={isModalCancelUnstake}
+        setModalOpen={setIsModalCancelUnstake}
         pid={pid}
       />
-      <ModalRequestUnstake 
+      <ModalRequestUnstake
         modalOpen={isModalRequestUnstake}
         setModalOpen={setIsModalRequestUnstake}
         pid={pid}
