@@ -1,3 +1,4 @@
+import React from 'react'
 import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
@@ -19,57 +20,63 @@ interface Events {
 
 const useCRPContract = (address: string) => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-  const contract = new web3.eth.Contract((ConfigurableRightsPool as unknown) as AbiItem, address)
+  const [contract, setContract] = React.useState(new web3.eth.Contract((ConfigurableRightsPool as unknown) as AbiItem, address))
 
-  /* EVENT */
+  React.useEffect(() => {
+    setContract(new web3.eth.Contract((ConfigurableRightsPool as unknown) as AbiItem, address))
+  }, [address])
 
-  const events: Events = contract.events
+  return React.useMemo(() => {
+    /* EVENT */
 
-  /* SEND */
+    const events: Events = contract.events
 
-  const joinswapExternAmountIn = (
-    tokenIn: string,
-    tokenAmountIn: BigNumber,
-    onComplete?: CompleteCallback,
-  ): BigNumber => {
-    return new BigNumber(
-      contract.methods.joinswapExternAmountIn(tokenIn, tokenAmountIn, 0).send(
+    /* SEND */
+
+    const joinswapExternAmountIn = (
+      tokenIn: string,
+      tokenAmountIn: BigNumber,
+      onComplete?: CompleteCallback,
+    ): BigNumber => {
+      return new BigNumber(
+        contract.methods.joinswapExternAmountIn(tokenIn, tokenAmountIn, 0).send(
+          { from: userWalletAddress },
+          onComplete ? waitTransaction(onComplete) : false
+        )
+      )
+    }
+
+    const exitPool = (
+      poolAmountIn: BigNumber,
+      minAmountsOut: Array<BigNumber>,
+      onComplete?: CompleteCallback,
+    ) => {
+      return contract.methods.exitPool(poolAmountIn, minAmountsOut).send(
         { from: userWalletAddress },
         onComplete ? waitTransaction(onComplete) : false
       )
-    )
-  }
+    }
 
-  const exitPool = (
-    poolAmountIn: BigNumber,
-    minAmountsOut: Array<BigNumber>,
-    onComplete?: CompleteCallback,
-  ) => {
-    return contract.methods.exitPool(poolAmountIn, minAmountsOut).send(
-      { from: userWalletAddress },
-      onComplete ? waitTransaction(onComplete) : false
-    )
-  }
-
-  const exitswapPoolAmountIn = (
-    tokenOut: string,
-    poolAmountIn: BigNumber,
-    onComplete?: CompleteCallback,
-  ) => {
-    return contract.methods.exitswapPoolAmountIn(tokenOut, poolAmountIn, 0).send(
-      { from: userWalletAddress },
-      onComplete ? waitTransaction(onComplete) : false
-    )
-  }
+    const exitswapPoolAmountIn = (
+      tokenOut: string,
+      poolAmountIn: BigNumber,
+      onComplete?: CompleteCallback,
+    ) => {
+      return contract.methods.exitswapPoolAmountIn(tokenOut, poolAmountIn, 0).send(
+        { from: userWalletAddress },
+        onComplete ? waitTransaction(onComplete) : false
+      )
+    }
 
 
-  return {
-    events,
+    return {
+      events,
 
-    exitPool,
-    exitswapPoolAmountIn,
-    joinswapExternAmountIn,
-  }
+      exitPool,
+      exitswapPoolAmountIn,
+      joinswapExternAmountIn,
+    }
+  }, [contract, userWalletAddress])
 }
 
 export default useCRPContract
