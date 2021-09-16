@@ -75,6 +75,11 @@ const ModalUnstaking = ({
     }
   }, [modalOpen])
 
+  React.useEffect(()=>{
+    setMultiplier(0);
+    handleKacyAmount(new BigNumber(0))
+  }, [modalOpen])
+
   return (
     <>
       <Backdrop
@@ -202,6 +207,7 @@ const ModalUnstaking = ({
             </ButtonContainer>
             <ConfirmButton
               type="button"
+							disabled={amountUnstaking.toString() === '0'}
               otherStakingPools={otherStakingPools}
               onClick={() => {
                 setModalOpen(false)

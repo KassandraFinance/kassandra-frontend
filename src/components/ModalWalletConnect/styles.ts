@@ -18,7 +18,10 @@ interface IBorderGradientProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const BorderGradient = styled.div<IBorderGradientProps>`
+export const BorderGradient =
+  styled.div <
+  IBorderGradientProps >
+  `
   display: ${props => (props.modalOpen ? 'block' : 'none')};
 
   background: linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%);
@@ -108,6 +111,7 @@ export const WrapperIcons = styled.button`
     padding-top: 1.8rem;
     padding-bottom: 1.8rem;
     padding-left: 2.4rem;
+    border: none;
 
     background-color: #010001;
     img {
