@@ -257,7 +257,11 @@ export const Button = styled.button<IButtonProps>`
   }
 `
 
-export const ButtonDetails = styled.button`
+interface IButtonDetailsProps {
+  isDetails: boolean
+}
+
+export const ButtonDetails = styled.button<IButtonDetailsProps>`
   background-color: transparent;
   border: none;
   color: turquoise;
@@ -266,6 +270,12 @@ export const ButtonDetails = styled.button`
   outline: none;  
   cursor: pointer;
   z-index: 10;
+
+  img {
+    transform: ${props => props.isDetails ? 'rotate(180deg)' : null};
+    margin-left: 8px;
+    transition-duration: 200ms;
+  }
 `
 
 export const StakeContainer = styled.div`
