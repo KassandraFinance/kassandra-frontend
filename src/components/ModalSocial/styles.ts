@@ -123,12 +123,10 @@ export const Content = styled.div`
   display:flex;
   flex-direction: column;
   justify-content: space-between;
+
+
   padding: 0.6rem;
   margin: 0 0.8rem;
-  div{
-    display: flex;
-    justify-content: space-between;
-  }
   img{
     cursor: pointer;
     width: 5.6rem;

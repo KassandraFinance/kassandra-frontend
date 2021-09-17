@@ -1,6 +1,7 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 import media from 'styled-media-query'
 
+
 import { TextFieldProps } from '.'
 
 type IconPositionProps = Pick<TextFieldProps, 'iconPosition'>
@@ -15,7 +16,7 @@ export const InputWrapper = styled.div`
     border-radius: 0.6rem;
     padding: 0 ${theme.spacings.xsmall};
     border: 0.2rem solid;
-    border-color: #26dbdb;
+    border-color: #26DBDB;
     margin-bottom: 2.4rem;
     margin-top: 0.5rem;
 
@@ -25,15 +26,12 @@ export const InputWrapper = styled.div`
     }
   `}
 
-  @media(max-width: 440px) {
-    max-width: 100%;
+  @media(max-width: 440px){
+    max-width:100%
   }
 `
 
-export const Input =
-  styled.input <
-  IconPositionProps >
-  `
+export const Input = styled.input<IconPositionProps>`
   ${({ theme, iconPosition }) => css`
     color: ${theme.colors.white};
     font-family: ${theme.font.family};
@@ -59,13 +57,11 @@ export const Label = styled.label`
     ${media.lessThan('small')`
     font-size: ${theme.font.sizes.small};
     `}
+
   `}
 `
 
-export const Icon =
-  styled.div <
-  IconPositionProps >
-  `
+export const Icon = styled.div<IconPositionProps>`
   ${({ theme, iconPosition }) => css`
     display: flex;
     color: ${theme.colors.gray};
@@ -109,10 +105,7 @@ const wrapperModifiers = {
   `
 }
 
-export const Wrapper =
-  styled.div <
-  WrapperProps >
-  `
+export const Wrapper = styled.div<WrapperProps>`
   ${({ theme, error, disabled }) => css`
     ${error && wrapperModifiers.error(theme)}
     ${disabled && wrapperModifiers.disabled(theme)}

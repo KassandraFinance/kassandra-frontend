@@ -2,10 +2,9 @@ import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
 
 interface IWrapperProps {
-  pageHeim: boolean;
+  pageHeim: boolean
 }
 
-// eslint-disable-next-line prettier/prettier
 export const Wrapper = styled.menu<IWrapperProps>`
   max-width: 1520px;
   margin: 0 auto;
@@ -27,6 +26,7 @@ export const Wrapper = styled.menu<IWrapperProps>`
 `
 
 export const LogoWrapper = styled.div`
+
   ${media.lessThan('large')`
   position: absolute;
   left: 50%;
@@ -85,7 +85,7 @@ export const MenuLink = styled.a`
         position: absolute;
         display: block;
         height: 0.3rem;
-        background-color: #26dbdb;
+        background-color: #26DBDB;
         animation: hoverAnimation 0.2s forwards;
       }
 
@@ -139,10 +139,7 @@ type MenuFullProps = {
   isOpen: boolean
 }
 
-export const MenuFull =
-  styled.nav <
-  MenuFullProps >
-  `
+export const MenuFull = styled.nav<MenuFullProps>`
   ${({ theme, isOpen }) => css`
     display: flex;
     flex-direction: column;
@@ -176,6 +173,7 @@ export const MenuFull =
       justify-content: center;
       flex: 1;
       flex-direction: column;
+
     }
 
     ${MenuLink} {
@@ -194,13 +192,14 @@ export const MenuFull =
       transform: ${isOpen ? 'translateY(0)' : 'translateY(3rem)'};
       transition: transform 0.3s ease-in-out;
     }
+
   `}
 `
 export const LinkInstallMetaMask = styled.a`
   background-color: transparent;
-  border: 1px solid #26dbdb;
+  border: 1px solid #26DBDB;
   border-radius: 8px;
-  color: #26dbdb !important;
+  color:  #26DBDB !important;
   font-size: 16px;
   text-transform: none;
   text-align: center;
@@ -210,22 +209,22 @@ export const LinkInstallMetaMask = styled.a`
   padding: 12px 0;
   cursor: pointer;
   &:hover {
-    background-color: #26dbdb;
+    background-color:  #26DBDB;
     color: #211426 !important;
   }
 `
 export const ButtonConnectWallet = styled.button`
   background-color: transparent;
-  border: 1px solid #26dbdb;
+  border: 1px solid #26DBDB;
   border-radius: 8px;
-  color: #26dbdb;
+  color:  #26DBDB;
   font-size: 16px;
   width: 186px;
   height: 48px;
 
   cursor: pointer;
   &:hover {
-    background-color: #26dbdb;
+    background-color:  #26DBDB;
     color: #211426;
   }
 `

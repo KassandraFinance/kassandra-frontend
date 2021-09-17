@@ -14,7 +14,6 @@ export const Backdrop = styled.div`
 
 interface IBorderGradientProps {
   modalOpen: boolean
-  // eslint-disable-next-line prettier/prettier
   otherStakingPools: boolean
 }
 
@@ -24,7 +23,7 @@ export const BorderGradient = styled.div<IBorderGradientProps>`
   background: ${(props) => props.otherStakingPools ?
     "linear-gradient(0deg, #26DBDB -0.02%, #E843C4 99.99%)"
     :
-    "linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%)" };
+    "linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%)" };;
   border-radius: 6px;
 
   width: 320px;
@@ -172,10 +171,6 @@ export const ButtonContainer = styled.div`
       background: #26DBDB;
       color: #000;
     }
-    &:active{
-      background: #26DBDB;
-      color: #000;
-    }
   }
 `
 
@@ -185,7 +180,7 @@ interface IConfirmButtonProps {
 
 export const ConfirmButton = styled.button<IConfirmButtonProps>`
   border-radius: 6px;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 14px;
   font-weight: 400;
 
@@ -194,7 +189,7 @@ export const ConfirmButton = styled.button<IConfirmButtonProps>`
   justify-content: center;
 
   width: 100%;
-  height: 40px;
+  height: 28px;
   cursor: pointer;
 
   background: ${(props) => props.otherStakingPools ?
@@ -206,30 +201,23 @@ export const ConfirmButton = styled.button<IConfirmButtonProps>`
 
   margin-bottom: 8px;
   transition: 200ms;
-  &:hover:enabled {
+  &:hover {
     background: ${(props) => props.otherStakingPools ? "#E843C4" : "#FFBF00" };
   }
-  &:disabled {
-    cursor: not-allowed;
-    background: #4F4F4F;
-    color: #BDBDBD;
-  }
-
 `
 
-export const GetKacy = styled.a`
+export const GetKacyButton = styled.button`
   border-radius: 6px;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 14px;
   font-weight: 400;
-  text-decoration: none;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   width: 100%;
-  height: 40px;
+  height: 28px;
   cursor: pointer;
 
   background: transparent;
