@@ -35,6 +35,7 @@ interface IInfoStakeStaticProps {
   startDate: string;
   endDate: string;
   kacyRewards: BigNumber;
+  yourDailyKacyReward: BigNumber;
   withdrawDelay: any;
 }
 
@@ -102,6 +103,7 @@ const VotingPower = ({
       startDate: '',
       endDate: '',
       kacyRewards: new BigNumber(0),
+    yourDailyKacyReward: new BigNumber(0),
       withdrawDelay: ''
     })
 
@@ -134,12 +136,15 @@ const VotingPower = ({
         new BigNumber(86400)
       )
       const withdrawDelay = Number(poolInfoResponse.withdrawDelay) / 86400
+      
+      const yourDailyKacyReward = infoStakeStatic.kacyRewards.mul(infoStake.yourStake ? infoStake.yourStake : new BigNumber(0)).div(new BigNumber(poolInfoResponse.depositedAmount))
 
       setInfoStakeStatic({
         votingMultiplier: poolInfoResponse.votingMultiplier,
         startDate,
         endDate,
         kacyRewards,
+        yourDailyKacyReward,
         withdrawDelay: withdrawDelay > 0 ? withdrawDelay : 0
       })
     }
@@ -232,11 +237,8 @@ const VotingPower = ({
               </span>
             </S.Info>
             <S.Info>
-              <span>KACY rewards</span>
-              <span>
-                {BNtoDecimal(infoStakeStatic.kacyRewards, new BigNumber(18), 2)}
-                /day
-              </span>
+              <span>Your daily KACY reward</span>
+              <span>{BNtoDecimal(infoStakeStatic.yourDailyKacyReward, new BigNumber(18), 2)}/day</span>
             </S.Info>
             <S.ButtonContainer>
               {userWalletAddress ? (

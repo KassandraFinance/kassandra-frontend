@@ -273,7 +273,7 @@ export const ButtonDetails =
   `
   background-color: transparent;
   border: none;
-  color: turquoise;
+  color: #26DBDB;
   margin-top: 16px;
 
   outline: none;

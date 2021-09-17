@@ -14,12 +14,6 @@ const Supporters = () => {
         <a href="https://api3.org/" target="_blank" rel="noopener noreferrer">
           <img src="assets/api3.svg" alt="API3" width="116" height="36" />
         </a>
-        <a href="https://lemonadefi.com/" target="_blank" rel="noopener noreferrer">
-          <img src="assets/lemonade.svg" alt="Lemonade" width="174" height="48" />
-        </a>
-        <a href="https://jigstack.org/" target="_blank" rel="noopener noreferrer">
-          <img src="assets/jigstack.svg" alt="Jigstack" width="286" height="74" />
-        </a>
       </S.AllSupporters>
     </S.Supporters>
   )
