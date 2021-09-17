@@ -311,7 +311,7 @@ const VotingPower = ({
                   )}
                 </>
               ) : (
-                <S.Button type="button" onClick={connect}>
+                <S.Button type="button" onClick={() => setIsModaWallet(true)}>
                   Connect Wallet
                 </S.Button>
               )}
