@@ -14,11 +14,10 @@ import useStakingContract from '../../hooks/useStakingContract'
 import * as S from './styles'
 
 interface IModalStakingProps {
-	modalOpen: boolean
-	// eslint-disable-next-line prettier/prettier
-	setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
-	otherStakingPools: boolean
-	pid: number
+	modalOpen: boolean;
+	setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	otherStakingPools: boolean;
+	pid: number;
 }
 
 const ModalStaking = ({
@@ -29,9 +28,9 @@ const ModalStaking = ({
 	const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
 	const [amountStaking, setAmountStaking] = React.useState<BigNumber>(new BigNumber(0))
   const [multiplier, setMultiplier] = React.useState<number>(0)
-	const { getBalanceToken } = setBalance()
-	const { stake } = useStakingContract()
-
+  const {userWalletAddress} = useSelector((state: RootStateOrAny) => state)
+  const kacyToken = useERC20Contract(Kacy)
+  const kacyStake = useStakingContract(Staking)
 
 	function handleKacyAmount(percentage: BigNumber ) {
 		const kacyAmount = percentage.mul(balance).div(new BigNumber(100))
@@ -39,7 +38,7 @@ const ModalStaking = ({
 	}
 
 	async function get() {
-		const balanceKacy = await getBalanceToken(Kacy)
+		const balanceKacy = await kacyToken.balance(userWalletAddress)
 		setBalance(balanceKacy)
 	}
 
@@ -152,7 +151,7 @@ const ModalStaking = ({
 							otherStakingPools={otherStakingPools}
 							onClick={() => {
 								setModalOpen(false)
-								stake(pid, amountStaking, confirmStake, "Pending stake")
+								kacyStake.stake(pid, amountStaking, confirmStake, "Pending stake")
 								setAmountStaking(new BigNumber(0))
 							}
 						}
