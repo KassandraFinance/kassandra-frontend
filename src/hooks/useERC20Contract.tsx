@@ -1,6 +1,8 @@
+import React from 'react'
 import BigNumber from 'bn.js'
 
 import { AbiItem } from "web3-utils"
+import { Contract } from "web3-eth-contract"
 
 import web3, { EventSubscribe } from '../utils/web3'
 import ERC20ABI from "../constants/abi/ERC20.json"
@@ -12,9 +14,7 @@ interface Events {
   Approval: EventSubscribe;
 }
 
-const useERC20Contract = (address: string) => {
-  const contract = new web3.eth.Contract((ERC20ABI as unknown) as AbiItem, address)
-
+function ERC20Contract(contract: Contract) {
   /* EVENT */
 
   const events: Events = contract.events
@@ -95,5 +95,21 @@ const useERC20Contract = (address: string) => {
   }
 }
 
-export const ERC20 = useERC20Contract
+const useERC20Contract = (address: string) => {
+  const [contract, setContract] = React.useState(new web3.eth.Contract((ERC20ABI as unknown) as AbiItem, address))
+
+  React.useEffect(() => {
+    setContract(new web3.eth.Contract((ERC20ABI as unknown) as AbiItem, address))
+  }, [address])
+
+  return React.useMemo(() => {
+    return ERC20Contract(contract)
+  }, [contract])
+}
+
+export const ERC20 = (address: string) => {
+  const contract = new web3.eth.Contract((ERC20ABI as unknown) as AbiItem, address)
+  return ERC20Contract(contract)
+}
+
 export default useERC20Contract
