@@ -62,7 +62,7 @@ function ERC20Contract(contract: Contract) {
       return false
     }
   };
-  
+
   const balance = async (userAddress: string): Promise<BigNumber> => {
     try {
       const balance: string = await contract.methods.balanceOf(userAddress).call()

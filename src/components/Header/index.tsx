@@ -26,14 +26,14 @@ const Header = () => {
   // const { connect, isLogged } = useConnect()
   const [isOpen, setIsOpen] = React.useState(false)
   const { asPath } = useRouter()
-  const { trackEvent } = useMatomo();
+  const { trackEvent } = useMatomo()
 
   function clickMatomoEvent() {
     trackEvent({
-      category: "header",
-      action: "click-on-heim",
-      name: "heim-header",
-    });
+      category: 'header',
+      action: 'click-on-heim',
+      name: 'heim-header'
+    })
   }
 
   return (
@@ -112,14 +112,21 @@ const Header = () => {
       <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen}>
         <CloseIcon aria-label="Close Menu" onClick={() => setIsOpen(false)} />
 
-        <S.MenuNav onClick={() => setIsOpen(false)}>
+        <S.MenuNav>
           {asPath === '/' ? (
             <Link href="/heim" passHref>
-              <S.MenuLink onClick={clickMatomoEvent}>HEIM Index</S.MenuLink>
+              <S.MenuLink
+                onClick={() => {
+                  setIsOpen(false)
+                  clickMatomoEvent()
+                }}
+              >
+                HEIM Index
+              </S.MenuLink>
             </Link>
           ) : (
             <Link href="/" passHref>
-              <S.MenuLink> Home </S.MenuLink>
+              <S.MenuLink onClick={() => setIsOpen(false)}> Home </S.MenuLink>
             </Link>
           )}
           <Link href="/" passHref>
