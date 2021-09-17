@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import BigNumber from 'bn.js'
 
 import { BNtoDecimal } from '../../utils/numerals'
@@ -42,10 +43,25 @@ const Details = ({ pid, poolInfo, infoStakeStatic }: IDetailsProps) => {
   }, [])
 
   return (
-    <>
+    <S.Details>
       <S.Info>
-        <p className="total-staking">Total staked</p>
-        <p className="total-staking">${BNtoDecimal(new BigNumber(depositedAmount).mul(new BigNumber(3.5)), new BigNumber(18), 2)}</p>
+        <span>Total staked</span>
+        <S.KacyUSD>
+          <span>
+            ${BNtoDecimal(new BigNumber(depositedAmount).mul(new BigNumber(3.5)), new BigNumber(18), 2)}
+          </span>
+          <span className="usd">~ 0 USD</span>
+        </S.KacyUSD>
+      </S.Info>
+      <S.Info>
+        <span>Pool Reward</span>
+        <S.KacyUSD>
+          <span>
+            {BNtoDecimal(infoStakeStatic.kacyRewards, new BigNumber(18), 2)}/day
+          </span>
+          <span className="usd">~ 0 USD</span>
+        </S.KacyUSD>
+
       </S.Info>
       <S.Info>
         <span>Start date</span>
@@ -56,15 +72,29 @@ const Details = ({ pid, poolInfo, infoStakeStatic }: IDetailsProps) => {
         <span>{infoStakeStatic.endDate}</span>
       </S.Info>
       <S.Info>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <p style={{ margin: '16px 4px 24px 0' }}>
-            Withdraw delay
-          </p>
-          <Tooltip tooltipTop={false}>Time your asset will be locked before you can withdraw it.</Tooltip>
-        </div>
-        <p style={{ margin: '16px 0 24px'}}>{infoStakeStatic.withdrawDelay} Days</p>
+        <S.Link>
+          <Link href="/">View project site</Link>
+          <img src="assets/GoToSite.svg" alt="" />   
+        </S.Link>
+        <S.Link>
+          <a href="https://app.uniswap.org/" target="_blank" rel="noopener noreferrer">
+            Buy $Kacy
+          </a>
+          <img src="assets/arrow-right.svg" alt="" />
+        </S.Link>
       </S.Info>
-    </>
+      <S.Info>
+      <S.Link>
+        <a href="https://app.uniswap.org/" target="_blank" rel="noopener noreferrer">
+          View contract
+        </a>
+        <img src="assets/GoToSite.svg" alt="" />   
+      </S.Link>
+
+        <span>Add to Metamask</span>
+
+      </S.Info>
+    </S.Details>
   )
 }
 

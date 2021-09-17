@@ -106,12 +106,20 @@ const FarmContainer = styled.section`
       padding: 0 10px;
     }
   }
+
+  @media (min-width: 1400px) {
+    max-width: 1320px;
+  }
 `
 
 const GridStaking = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 16px;
+  grid-template-columns: repeat(3, minmax(360px, 400px));
+  gap: 24px;
+  justify-content: space-between;
+  
+  margin: 0 auto;
+  max-width: 1520px;
   @media (max-width: 1160px) {
     grid-template-columns: 1fr 1fr;
     gap: 32px;
