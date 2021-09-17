@@ -17,11 +17,7 @@ interface IBorderGradientProps {
   modalOpen: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
-export const BorderGradient =
-  styled.div <
-  IBorderGradientProps >
-  `
+export const BorderGradient = styled.div<IBorderGradientProps>`
   display: ${props => (props.modalOpen ? 'block' : 'none')};
 
   background: linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%);
@@ -39,19 +35,18 @@ export const BorderGradient =
   transform: translate(-50%, -50%);
   z-index: 21;
 
-
-@media(max-width: 440px){
-  width: 380px;
-}
-@media(max-width: 380px){
-  width: 360px;
-}
-@media(max-width: 360px){
-  width: 320px;
-}
-@media(max-width: 320px){
-  width: 300px;
-}
+  @media(max-width: 440px){
+    width: 380px;
+  }
+  @media(max-width: 380px){
+    width: 360px;
+  }
+  @media(max-width: 360px){
+    width: 320px;
+  }
+  @media(max-width: 320px){
+    width: 300px;
+  }
 `
 
 export const BackgroundBlack = styled.div`
@@ -61,10 +56,9 @@ export const BackgroundBlack = styled.div`
   height: 100%;
 `
 
-// eslint-disable-next-line prettier/prettier
 export const InterBackground = styled.div`
   background: black;
-  border: 0.1rem solid #e843c4;
+  border-bottom: 0.2rem solid #e843c4;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -125,6 +119,7 @@ export const WrapperIcons = styled.button`
       color: #fcfcfc;
       font-size: 1.6rem;
       font-weight: ${theme.font.normal};
+      font-family: 'Rubik'
     }
 
     ${media.lessThan('small')`
@@ -136,7 +131,6 @@ export const WrapperIcons = styled.button`
   `}
     &:hover {
       background: #ffbf00;
-      border: 1px solid #ffbf00;
     }
   `}
 `
