@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
 
 export const Backdrop = styled.div`
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.6);
 
   position: fixed;
   top: 0;
@@ -18,13 +18,20 @@ interface IBorderGradientProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const BorderGradient = styled.div<IBorderGradientProps>`
+export const BorderGradient =
+  styled.div <
+  IBorderGradientProps >
+  `
   display: ${props => (props.modalOpen ? 'block' : 'none')};
 
-  background: #2CE878;
+  background: linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%);
+  border-radius: 6px;
+
   border-radius: 6px;
 
   padding: 2px;
+  width: 411px;
+  height: auto;
 
   position: fixed;
   top: 50%;
@@ -33,18 +40,18 @@ export const BorderGradient = styled.div<IBorderGradientProps>`
   z-index: 21;
 
 
-  @media(max-width: 440px){
-    width: 380px;
-  }
-  @media(max-width: 380px){
-    width: 360px;
-  }
-  @media(max-width: 360px){
-    width: 320px;
-  }
-  @media(max-width: 320px){
-    width: 300px;
-  }
+@media(max-width: 440px){
+  width: 380px;
+}
+@media(max-width: 380px){
+  width: 360px;
+}
+@media(max-width: 360px){
+  width: 320px;
+}
+@media(max-width: 320px){
+  width: 300px;
+}
 `
 
 export const BackgroundBlack = styled.div`
@@ -54,9 +61,10 @@ export const BackgroundBlack = styled.div`
   height: 100%;
 `
 
+// eslint-disable-next-line prettier/prettier
 export const InterBackground = styled.div`
   background: black;
-  border: 0.1rem solid #2ce878;
+  border: 0.1rem solid #e843c4;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -81,37 +89,44 @@ export const InterBackground = styled.div`
   }
 `
 
-export const ModalText = styled.h1`
+export const ModalText = styled.div`
   ${({ theme }) => css`
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: ${theme.font.normal};
   `}
   ${media.lessThan('small')`
 font-size: 1.4rem;
 `}
 `
-export const ModalSubText = styled.h1`
-  ${({ theme }) => css`
-    font-size: 2rem;
-    font-weight: ${theme.font.light};
-  `}
-  ${media.lessThan('small')`
-font-size: 1.4rem;
-`}
-`
 
-export const WrapperIcons = styled.h1`
+export const WrapperIcons = styled.button`
   ${({ theme }) => css`
-    margin: 1.6rem;
+    /* margin: 1.6rem; */
+    cursor: pointer;
+
+    width: 100%;
+    height: auto;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    align-content: space-between;
-    font-size: 1.4rem;
-    span {
-      margin-top: 5.6px;
+    padding-top: 1.8rem;
+    padding-bottom: 1.8rem;
+    padding-left: 2.4rem;
+    border: none;
+
+    background-color: #010001;
+    img {
+      display: flex;
+      margin-right: 2.4rem;
+      width: 4rem;
+      height: 3.56rem;
+      padding: 0.2rem;
     }
+    span {
+      color: #fcfcfc;
+      font-size: 1.6rem;
+      font-weight: ${theme.font.normal};
+    }
+
     ${media.lessThan('small')`
     margin:0;
     margin-top: 1.5rem;
@@ -119,24 +134,16 @@ export const WrapperIcons = styled.h1`
     font-size:${theme.font.sizes.xsmall};
     font-weight: ${theme.font.light};
   `}
+    &:hover {
+      background: #ffbf00;
+      border: 1px solid #ffbf00;
+    }
   `}
 `
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 2.4rem;
-  margin: 0 0.8rem;
-  div {
-    display: flex;
-    justify-content: space-between;
-  }
-  img {
-    cursor: pointer;
-    width: 5.6rem;
-    height: 5.6rem;
-    padding: 0.2rem;
-  }
+
   ${media.lessThan('small')`
       margin: 0;
       width:100%;

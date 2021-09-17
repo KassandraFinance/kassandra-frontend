@@ -78,9 +78,9 @@ const Farm = () => {
       />
       <h3>Other Staking Pools</h3>
       <GridStaking>
-        <OthersStakingPools img="logo-heim" />
-        <OthersStakingPools img="heim-index" />
-        <OthersStakingPools img="" />
+        <OthersStakingPools connect={connect} img="logo-heim" />
+        <OthersStakingPools connect={connect} img="heim-index" />
+        <OthersStakingPools connect={connect} img="" />
       </GridStaking>
     </FarmContainer>
   )

@@ -180,7 +180,7 @@ interface IConfirmButtonProps {
 
 export const ConfirmButton = styled.button<IConfirmButtonProps>`
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 14px;
   font-weight: 400;
 
@@ -189,7 +189,7 @@ export const ConfirmButton = styled.button<IConfirmButtonProps>`
   justify-content: center;
 
   width: 100%;
-  height: 28px;
+  height: 40px;
   cursor: pointer;
 
   background: ${(props) => props.otherStakingPools ?
@@ -201,14 +201,19 @@ export const ConfirmButton = styled.button<IConfirmButtonProps>`
 
   margin-bottom: 8px;
   transition: 200ms;
-  &:hover {
+  &:hover:enabled {
     background: ${(props) => props.otherStakingPools ? "#E843C4" : "#FFBF00" };
+  }
+  &:disabled {
+    cursor: not-allowed;
+    background: #4F4F4F;
+    color: #bdbdbd;
   }
 `
 
-export const GetKacyButton = styled.button`
+export const GetKacy = styled.button`
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 14px;
   font-weight: 400;
 
@@ -217,7 +222,7 @@ export const GetKacyButton = styled.button`
   justify-content: center;
 
   width: 100%;
-  height: 28px;
+  height: 40px;
   cursor: pointer;
 
   background: transparent;

@@ -6,18 +6,13 @@ import {
   BackgroundBlack,
   Content,
   InterBackground,
-  // Main,
-  // Amount,
-  // Line,
-  // ButtonContainer,
-  // ConfirmButton,
-  // GetKacyButton,
   ModalText,
   WrapperIcons
  } from './styles'
 
  interface IModalSocialProps {
   modalOpen: boolean
+  // eslint-disable-next-line prettier/prettier
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 
 }
@@ -45,7 +40,7 @@ const ModalSocial = ({
             <button type="button" onClick={() => setModalOpen(false)}><img src="assets/close.svg" alt=""/> </button>
           </InterBackground>
           <Content>
-            <div style={{display:'flex'}} >
+            <div>
             <WrapperIcons>
               <a href="https://discord.gg/2uGEvqNnuq" target="_blank" rel="noopener noreferrer">
                 <img src="assets/Discord.svg" alt="" />

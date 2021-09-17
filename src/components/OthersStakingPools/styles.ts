@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const BorderGradient = styled.div`
   position: relative;
-  padding: 4px; 
+  padding: 4px;
   z-index: 1;
   height: 100%;
   min-width: 360px;
@@ -17,30 +17,33 @@ export const BorderGradient = styled.div`
   }
 
   &::after {
-    content:"";
+    content: '';
     position: absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    border-radius: 6px; 
-    padding: 4px; 
-    background: linear-gradient(0deg, #26DBDB -0.02%, #E843C4 99.99%);
-    -webkit-mask: 
-        linear-gradient(#fff 0 0) content-box, 
-        linear-gradient(#fff 0 0);
-    -webkit-mask-composite: destination-out; 
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 6px;
+    padding: 4px;
+    background: linear-gradient(0deg, #26dbdb -0.02%, #e843c4 99.99%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
     mask-composite: exclude;
   }
 `
 
 export const InterBackground = styled.div`
-  background: linear-gradient(0deg, rgba(38, 219, 219, 0.2) -0.02%, rgba(232, 67, 196, 0.2) 99.99%);
-  
+  background: linear-gradient(
+    0deg,
+    rgba(38, 219, 219, 0.2) -0.02%,
+    rgba(232, 67, 196, 0.2) 99.99%
+  );
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+
   width: 100%;
   height: 152px;
   padding: 24px 32px;
@@ -125,7 +128,7 @@ export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+
   margin: 0 auto;
   width: 100%;
   .img-info {
@@ -146,18 +149,18 @@ export const ButtonContainer = styled.div`
 `
 
 export const ButtonWallet = styled.button`
-  background: linear-gradient(87.48deg, #E843C4 -47.54%, #26DBDB 154.78%);
+  background: linear-gradient(87.48deg, #e843c4 -47.54%, #26dbdb 154.78%);
   border: none;
   border-radius: 6px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 400;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   width: 320px;
-  height: 36px;
+  height: 44px;
   cursor: pointer;
   outline: none;
   z-index: 10;
@@ -173,7 +176,7 @@ export const ButtonDetails = styled.button`
   color: turquoise;
   margin-top: 16px;
 
-  outline: none;  
+  outline: none;
   cursor: pointer;
   z-index: 10;
 `

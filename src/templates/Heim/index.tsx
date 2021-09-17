@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import React from 'react'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import Hero from './hero'
