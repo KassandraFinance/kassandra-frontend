@@ -103,7 +103,7 @@ const VotingPower = ({
       startDate: '',
       endDate: '',
       kacyRewards: new BigNumber(0),
-    yourDailyKacyReward: new BigNumber(0),
+      yourDailyKacyReward: new BigNumber(0),
       withdrawDelay: ''
     })
 
@@ -113,7 +113,6 @@ const VotingPower = ({
     if (isApproveKacyStaking) {
       return
     }
-
     const res = await approve(Staking, userWalletAddress, () => {})
     setIsApproveKacyStaking(res)
   }
@@ -136,8 +135,10 @@ const VotingPower = ({
         new BigNumber(86400)
       )
       const withdrawDelay = Number(poolInfoResponse.withdrawDelay) / 86400
-      
-      const yourDailyKacyReward = infoStakeStatic.kacyRewards.mul(infoStake.yourStake ? infoStake.yourStake : new BigNumber(0)).div(new BigNumber(poolInfoResponse.depositedAmount))
+
+      const yourDailyKacyReward = infoStakeStatic.kacyRewards
+        .mul(infoStake.yourStake ? infoStake.yourStake : new BigNumber(0))
+        .div(new BigNumber(poolInfoResponse.depositedAmount))
 
       setInfoStakeStatic({
         votingMultiplier: poolInfoResponse.votingMultiplier,
@@ -238,7 +239,14 @@ const VotingPower = ({
             </S.Info>
             <S.Info>
               <span>Your daily KACY reward</span>
-              <span>{BNtoDecimal(infoStakeStatic.yourDailyKacyReward, new BigNumber(18), 2)}/day</span>
+              <span>
+                {BNtoDecimal(
+                  infoStakeStatic.yourDailyKacyReward,
+                  new BigNumber(18),
+                  2
+                )}
+                /day
+              </span>
             </S.Info>
             <S.ButtonContainer>
               {userWalletAddress ? (

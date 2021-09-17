@@ -1,6 +1,6 @@
-import React  from 'react';
+import React  from 'react'
 import Head from 'next/head'
-import Heim from "../templates/Heim";
+import Heim from "../templates/Heim"
 
 export default function Index() {
   return (
