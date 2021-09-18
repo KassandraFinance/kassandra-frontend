@@ -1,4 +1,5 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import theme from '../../styles/theme'
 
 export const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
@@ -132,19 +133,21 @@ export const Amount = styled.div`
 `
 
 export const Line = styled.div`
-  content: '';
-  display: block;
-  width: 190px;
-  height: 2px;
-  background-color: #26DBDB;
-  box-shadow: 1px 1px 5px #26DBDB;
-  margin-left: auto;
-  @media (max-width: 504px) {
-    width: 160px;
-  }
-  @media (max-width: 430px) {
-    width: 130px;
-  }
+  ${({theme}) => css`
+    content: '';
+    display: block;
+    width: 190px;
+    height: 2px;
+    background-color: ${theme.colors.cyan};
+    box-shadow: 1px 1px 5px ${theme.colors.cyan};
+    margin-left: auto;
+    @media (max-width: 504px) {
+      width: 160px;
+    }
+    @media (max-width: 430px) {
+      width: 130px;
+    }
+  `}
 `
 
 export const ButtonContainer = styled.div`
@@ -155,7 +158,7 @@ export const ButtonContainer = styled.div`
 
   margin: 36px 0 24px;
   button {
-    border: 1px solid #26DBDB;
+    border: 1px solid ${theme.colors.cyan};
     border-radius: 16px;
     background: transparent;
     color: #fff;
@@ -169,11 +172,11 @@ export const ButtonContainer = styled.div`
     cursor: pointer;
     transition: 100ms;
     &:hover {
-      background: #26DBDB;
+      background: ${theme.colors.cyan};
       color: #000;
     }
     &:active{
-      background: #26DBDB;
+      background: ${theme.colors.cyan};
       color: #000;
     }
   }
@@ -198,7 +201,7 @@ export const ConfirmButton = styled.button<IConfirmButtonProps>`
   cursor: pointer;
 
   background: ${(props) => props.otherStakingPools ?
-    "linear-gradient(87.48deg, #E843C4 -47.54%, #26DBDB 154.78%)"
+    "linear-gradient(87.48deg, #E843C4 -47.54%, ${theme.colors.cyan} 154.78%)"
     :
     "linear-gradient(87.48deg, #FFBF00 -70.27%, #E843C4 154.78%)" };
   border: none;
@@ -233,12 +236,12 @@ export const GetKacy = styled.a`
   cursor: pointer;
 
   background: transparent;
-  border: 1px solid #26DBDB;
+  border: 1px solid ${theme.colors.cyan};
 
   color: #fff;
   transition: 200ms;
   &:hover {
-    background: #26DBDB;
+    background: ${theme.colors.cyan};
     color: #000;
   }
 `

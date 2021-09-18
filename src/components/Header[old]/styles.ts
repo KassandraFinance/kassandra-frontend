@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const HeaderContainer = styled.header`
   color: #fff;
@@ -49,38 +49,42 @@ export const Nav = styled.div`
 `
 
 export const ButtonConnectWallet = styled.button`
-  background-color: transparent;
-  border: 1px solid #26DBDB;
-  border-radius: 8px;
-  color:  #26DBDB;
-  font-size: 16px;
-  width: 186px;
-  height: 48px;
+${({theme})=> css`
+    background-color: transparent;
+    border: 1px solid ${theme.colors.cyan};
+    border-radius: 8px;
+    color:  ${theme.colors.cyan};
+    font-size: 16px;
+    width: 186px;
+    height: 48px;
 
-  cursor: pointer;
-  &:hover {
-    background-color:  #26DBDB;
-    color: #211426;
-  }
+    cursor: pointer;
+    &:hover {
+      background-color:  ${theme.colors.cyan};
+      color: #211426;
+    }
+  `}
 `
 
 export const LinkInstallMetaMask = styled.a`
-  background-color: transparent;
-  border: 1px solid #26DBDB;
-  border-radius: 8px;
-  color:  #26DBDB !important;
-  font-size: 16px;
-  text-transform: none;
-  text-align: center;
+  ${({theme})=> css`
+    background-color: transparent;
+    border: 1px solid ${theme.colors.cyan};
+    border-radius: 8px;
+    color:  ${theme.colors.cyan} !important;
+    font-size: 16px;
+    text-transform: none;
+    text-align: center;
 
-  width: 186px;
-  height: 48px;
-  padding: 12px 0;
-  cursor: pointer;
-  &:hover {
-    background-color:  #26DBDB;
-    color: #211426 !important;
-  }
+    width: 186px;
+    height: 48px;
+    padding: 12px 0;
+    cursor: pointer;
+    &:hover {
+      background-color:  ${theme.colors.cyan};
+      color: #211426 !important;
+    }
+  `}
 `
 
 export const ButtonDisabled = styled.button`

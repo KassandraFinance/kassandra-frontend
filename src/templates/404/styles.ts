@@ -52,8 +52,8 @@ export const Wrapper = styled.div`
   @media(max-width: 32rem){
     max-width: 25rem;
     p{
-      font-size: 1.4rem;
-      margin-bottom: 1.4rem;
+      font-size: ${theme.font.sizes.font14};
+      margin-bottom: ${theme.font.sizes.font14};
     }
   }
 `
@@ -65,15 +65,15 @@ export const Image = styled.img`
 export const Title = styled.h2`
   ${({ theme }) => css`
     color: ${theme.colors.primary};
-    font-size: ${theme.font.sizes.xxlarge};
+    font-size: ${theme.font.sizes.font56};
   `}
 `
 
 export const Description = styled.p`
   ${({ theme }) => css`
-    color: ${theme.colors.white};
-    font-size: ${theme.font.sizes.large};
-    font-weight: ${theme.font.light};
-    margin-bottom: ${theme.spacings.medium};
+    color: ${theme.colors.snow};
+    font-size: ${theme.font.sizes.font24};
+    font-weight: ${theme.font.weight.light};
+    margin-bottom: ${theme.spacings.space32};
   `}
 `

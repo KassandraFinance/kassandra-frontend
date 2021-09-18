@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface ITooltipCardProps {
   tooltipTop?: boolean
@@ -6,7 +6,7 @@ interface ITooltipCardProps {
 
 export const TooltipIcon = styled.div<ITooltipCardProps>`
   padding: 1px;
-  
+
   position: relative;
   cursor: pointer;
   z-index: 99;
@@ -17,13 +17,14 @@ export const TooltipBox = styled.div`
 `;
 
 export const TooltipCard = styled.div<ITooltipCardProps>`
+
   p {
     font-weight: 700;
     font-size: 10px;
     line-height: 12px;
     text-align: justify;
   }
-   & ${TooltipIcon}:hover + ${TooltipBox} {
+  & ${TooltipIcon}:hover + ${TooltipBox} {
     background-color: #26DBDB;
     border: 1px solid #211426;
     border-radius: 8px;
@@ -38,7 +39,7 @@ export const TooltipCard = styled.div<ITooltipCardProps>`
     position: absolute;
     min-width: 150px;
     max-width: 180px;
-    
+
     padding: 6px;
     z-index: 22;
 
@@ -47,4 +48,5 @@ export const TooltipCard = styled.div<ITooltipCardProps>`
       margin-left: -30px;
     }
   }
+
 `;

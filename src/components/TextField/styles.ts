@@ -13,9 +13,9 @@ export const InputWrapper = styled.div`
     align-items: center;
     background: #211426;
     border-radius: 0.6rem;
-    padding: 0 ${theme.spacings.xsmall};
+    padding: 0 ${theme.spacings.space8};
     border: 0.2rem solid;
-    border-color: #26dbdb;
+    border-color: ${theme.colors.cyan};
     margin-bottom: 2.4rem;
     margin-top: 0.5rem;
 
@@ -30,16 +30,13 @@ export const InputWrapper = styled.div`
   }
 `
 
-export const Input =
-  styled.input <
-  IconPositionProps >
-  `
+export const Input = styled.input<IconPositionProps>`
   ${({ theme, iconPosition }) => css`
-    color: ${theme.colors.white};
+    color: ${theme.colors.snow};
     font-family: ${theme.font.family};
-    font-size: ${theme.font.sizes.medium};
-    padding: ${theme.spacings.xxsmall} 0;
-    /* padding-${iconPosition}: ${theme.spacings.xsmall}; */
+    font-size: ${theme.font.sizes.font18};
+    padding: ${theme.spacings.space8} 0;
+    /* padding-${iconPosition}: ${theme.spacings.space8}; */
     background: #211426;
     border: 0;
     outline: none;
@@ -52,12 +49,12 @@ export const Input =
 
 export const Label = styled.label`
   ${({ theme }) => css`
-    font-size: ${theme.font.sizes.medium};
-    font-weight: ${theme.font.light};
-    color: ${theme.colors.white};
+    font-size: ${theme.font.sizes.font18};
+    font-weight: ${theme.font.weight.light};
+    color: ${theme.colors.snow};
     cursor: pointer;
     ${media.lessThan('small')`
-    font-size: ${theme.font.sizes.small};
+    font-size: ${theme.font.sizes.font16};
     `}
   `}
 `
@@ -79,20 +76,20 @@ export const Icon =
 
 export const Error = styled.p`
   ${({ theme }) => css`
-    color: ${theme.colors.red};
-    font-size: ${theme.font.sizes.xsmall};
+    color: red;
+    font-size: ${theme.font.sizes.font12};
   `}
 `
 
 const wrapperModifiers = {
   error: (theme: DefaultTheme) => css`
     ${InputWrapper} {
-      border-color: ${theme.colors.red};
+      border-color: red;
     }
 
     ${Icon},
     ${Label} {
-      color: ${theme.colors.red};
+      color: red;
     }
   `,
   disabled: (theme: DefaultTheme) => css`

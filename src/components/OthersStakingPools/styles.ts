@@ -25,7 +25,7 @@ export const BorderGradient = styled.div`
     bottom: 0;
     border-radius: 6px;
     padding: 4px;
-    background: linear-gradient(0deg, #26dbdb -0.02%, #e843c4 99.99%);
+    background: linear-gradient(0deg, #26DBDB -0.02%, #e843c4 99.99%);
     -webkit-mask: linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: destination-out;
@@ -149,7 +149,7 @@ export const ButtonContainer = styled.div`
 `
 
 export const ButtonWallet = styled.button`
-  background: linear-gradient(87.48deg, #e843c4 -47.54%, #26dbdb 154.78%);
+  background: linear-gradient(87.48deg, #e843c4 -47.54%, #26DBDB 154.78%);
   border: none;
   border-radius: 6px;
   font-size: 18px;

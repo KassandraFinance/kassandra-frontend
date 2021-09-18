@@ -1,4 +1,6 @@
+/* eslint-disable prettier/prettier */
 import styled, { css } from 'styled-components'
+import theme from '../../styles/theme'
 import media from 'styled-media-query'
 
 export const Backdrop = styled.div`
@@ -66,6 +68,7 @@ export const InterBackground = styled.div`
   width: 100%;
   height: 6.8rem;
   padding: 2.4rem;
+
   ${media.lessThan('small')`
   padding: 1.2rem;
   `}
@@ -86,28 +89,29 @@ export const InterBackground = styled.div`
 export const ModalText = styled.div`
   ${({ theme }) => css`
     font-size: 1.8rem;
-    font-weight: ${theme.font.normal};
+    font-weight: ${theme.font.weight.normal};
   `}
   ${media.lessThan('small')`
-font-size: 1.4rem;
+    font-size: ${theme.font.sizes.font14};
 `}
 `
 
 export const WrapperIcons = styled.button`
   ${({ theme }) => css`
-    /* margin: 1.6rem; */
-    cursor: pointer;
+    background-color: #010001;
+    border: none;
+
+
+    display: flex;
+    align-items: center;
 
     width: 100%;
     height: auto;
-    display: flex;
-    align-items: center;
     padding-top: 1.8rem;
     padding-bottom: 1.8rem;
     padding-left: 2.4rem;
-    border: none;
 
-    background-color: #010001;
+    cursor: pointer;
     img {
       display: flex;
       margin-right: 2.4rem;
@@ -118,16 +122,16 @@ export const WrapperIcons = styled.button`
     span {
       color: #fcfcfc;
       font-size: 1.6rem;
-      font-weight: ${theme.font.normal};
-      font-family: 'Rubik'
+      font-weight: ${theme.font.weight.normal};
+      font-family: 'Rubik';
     }
 
     ${media.lessThan('small')`
     margin:0;
     margin-top: 1.5rem;
     max-width: 80%
-    font-size:${theme.font.sizes.xsmall};
-    font-weight: ${theme.font.light};
+    font-size:${theme.font.sizes.font12};
+    font-weight: ${theme.font.weight.light};
   `}
     &:hover {
       background: #ffbf00;

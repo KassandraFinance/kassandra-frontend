@@ -1,4 +1,5 @@
-import styled from 'styled-components'
+import styled, {css} from 'styled-components'
+import theme from '../../../styles/theme'
 
 export const Hero = styled.section`
   height: calc(100vh - 110px);
@@ -154,23 +155,25 @@ export const ButtonContainer = styled.div`
 `
 
 export const WithpaperButton = styled.a`
-  background: transparent !important;
-  border: 1px solid #26dbdb !important;
-  border-radius: 6px;
-  color: #fcfcfc !important;
-  text-decoration: none;
-  font-size: 20px;
+  ${({theme})=> css`
+    background: transparent !important;
+    border: 1px solid ${theme.colors.cyan} !important;
+    border-radius: 6px;
+    color: #fcfcfc !important;
+    text-decoration: none;
+    font-size: ${theme.font.sizes.font20};
 
-  height: 52px;
-  padding: 12px 32px;
-  cursor: pointer;
-  transition-duration: 300ms;
-  &:hover {
-    background-color: #26dbdb !important;
-    color: #211426 !important;
-  }
-  @media (max-width: 600px) {
-    font-size: 16px;
-    height: 48px;
-  }
+    height: 52px;
+    padding: 12px 32px;
+    cursor: pointer;
+    transition-duration: 300ms;
+    &:hover {
+      background-color: ${theme.colors.cyan} !important;
+      color: #211426 !important;
+    }
+    @media (max-width: 600px) {
+      font-size: 16px;
+      height: 48px;
+    }
+  `}
 `

@@ -72,13 +72,13 @@ export const MobileHero = styled.div`
 `
 export const SubTitle = styled.h3`
   ${({ theme }) => css`
-    font-size: ${theme.font.sizes.large};
+    font-size: ${theme.font.sizes.font24};
     font-weight: 300;
-    margin: ${theme.spacings.small} 0 ${theme.spacings.xlarge} 0;
+    margin: ${theme.spacings.space24} 0 ${theme.spacings.space48} 0;
     max-width: 100%px;
     ${media.lessThan('medium')`
-      font-size: ${theme.font.sizes.medium};
-      /* margin: ${theme.spacings.xsmall} 0 ${theme.spacings.small}  0; */
+      font-size: ${theme.font.sizes.font18};
+      /* margin: ${theme.spacings.space8} 0 ${theme.spacings.space24}  0; */
     `}
   `}
   @media(max-width: 320px) {
@@ -200,28 +200,30 @@ export const FloatImage = styled.div`
   `}
 `
 export const Link = styled.div`
-  a {
-    background: linear-gradient(264.12deg, #020887 -197.65%, #26dbdb 272.42%);
-    border: none;
-    border-radius: 6px;
-    color: #fcfcfc;
-    text-decoration: none;
-    font-size: 20px;
+${({theme})=> css`
+    a {
+      background: linear-gradient(264.12deg, #020887 -197.65%, ${theme.colors.cyan} 272.42%);
+      border: none;
+      border-radius: 6px;
+      color: #fcfcfc;
+      text-decoration: none;
+      font-size: 20px;
 
-    height: 52px;
-    padding: 12px 32px;
-    cursor: pointer;
-  }
+      height: 52px;
+      padding: 12px 32px;
+      cursor: pointer;
+    }
+  `}
 `
 
 export const Title = styled.h1`
   ${({ theme }) => css`
-    font-size: ${theme.font.sizes.xxlarge};
-    font-weight: ${theme.font.normal};
+    font-size: ${theme.font.sizes.font56};
+    font-weight: ${theme.font.weight.normal};
     line-height: 61.6px;
     ${media.lessThan('medium')`
     line-height: 30px;
-    font-size: ${theme.font.sizes.large};
+    font-size: ${theme.font.sizes.font24};
     `}
   `}
 `
@@ -294,7 +296,7 @@ export const Modal =
 
 export const Close = styled.div`
   ${({ theme }) => css`
-    color: ${theme.colors.white};
+    color: ${theme.colors.snow};
     right: 0;
     top: 0;
     cursor: pointer;
@@ -332,7 +334,7 @@ export const ModalHeading = styled.div`
 `
 export const ModalText = styled.h1`
   ${({ theme }) => css`
-    margin-left: ${theme.spacings.small};
+    margin-left: ${theme.spacings.space24};
   `}
 `
 export const WrapperIcons = styled.h1`
@@ -343,7 +345,7 @@ export const WrapperIcons = styled.h1`
     justify-content: center;
     align-items: center;
     align-content: space-between;
-    font-size: ${theme.font.sizes.small};
+    font-size: ${theme.font.sizes.font16};
   `}
   ${media.lessThan('small')`
   margin:0;

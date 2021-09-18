@@ -65,7 +65,7 @@ export const InterBackground = styled.div`
   height: 6.8rem;
   padding: 2.4rem;
   ${media.lessThan('small')`
-  padding: 1.2rem;
+    padding: 1.2rem;
   `}
 
   button {
@@ -84,20 +84,21 @@ export const InterBackground = styled.div`
 export const ModalText = styled.h1`
   ${({ theme }) => css`
     font-size: 2rem;
-    font-weight: ${theme.font.normal};
+    font-weight: ${theme.font.weight.normal};
+
+    ${media.lessThan('small')`
+      font-size: ${theme.font.sizes.font14};
+    `}
   `}
-  ${media.lessThan('small')`
-font-size: 1.4rem;
-`}
 `
 export const ModalSubText = styled.h1`
   ${({ theme }) => css`
     font-size: 2rem;
-    font-weight: ${theme.font.light};
+    font-weight: ${theme.font.weight.light};
+    ${media.lessThan('small')`
+      font-size: ${theme.font.sizes.font14};
+    `}
   `}
-  ${media.lessThan('small')`
-font-size: 1.4rem;
-`}
 `
 
 export const WrapperIcons = styled.h1`
@@ -108,23 +109,24 @@ export const WrapperIcons = styled.h1`
     justify-content: center;
     align-items: center;
     align-content: space-between;
-    font-size: 1.4rem;
+    font-size: ${theme.font.sizes.font14};
     span {
       margin-top: 5.6px;
     }
     ${media.lessThan('small')`
-    margin:0;
-    margin-top: 1.5rem;
-    max-width: 80%
-    font-size:${theme.font.sizes.xsmall};
-    font-weight: ${theme.font.light};
-  `}
+      margin:0;
+      margin-top: 1.5rem;
+      max-width: 80%
+      font-size:${theme.font.sizes.font12};
+      font-weight: ${theme.font.weight.light};
+    `}
   `}
 `
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   padding: 2.4rem;
   margin: 0 0.8rem;
   div {

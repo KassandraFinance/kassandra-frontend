@@ -44,41 +44,43 @@ export const Image = styled.div`
 
 
 export const Link = styled.div `
+  ${({theme})=> css`
     a{
-    background: linear-gradient(264.12deg, #020887 -197.65%, #26DBDB 272.42%);
-    border: none;
-    border-radius: 6px;
-    color: #fcfcfc;
-    text-decoration: none;
-    font-size: 20px;
+      background: linear-gradient(264.12deg, #020887 -197.65%, ${theme.colors.cyan} 272.42%);
+      border: none;
+      border-radius: 6px;
+      color: #fcfcfc;
+      text-decoration: none;
+      font-size: 20px;
 
-    height: 52px;
-    padding: 12px 32px;
-    cursor: pointer;
-  }
+      height: 52px;
+      padding: 12px 32px;
+      cursor: pointer;
+    }
+  `}
 `
 
 export const Title = styled.h1`
   ${({theme})=>css`
-    font-size: ${theme.font.sizes.xlarge};
-    font-weight: ${theme.font.bold};
+    font-size: ${theme.font.sizes.font40};
+    font-weight: ${theme.font.weight.semibold};
     line-height: 120%;
     ${media.lessThan('small')`
-      font-size: ${theme.font.sizes.large};
+      font-size: ${theme.font.sizes.font24};
     `}
     @media (max-width: 1024px) {
-      font-size: ${theme.font.sizes.large};
+      font-size: ${theme.font.sizes.font24};
     }
   `}
 `
 export const SubTitle = styled.h3`
   ${({theme})=>css`
-  font-size: ${theme.font.sizes.large};
-  font-weight: ${theme.font.light};
+  font-size: ${theme.font.sizes.font24};
+  font-weight: ${theme.font.weight.light};
   line-height: 120%;
   margin: 32px 0;
     ${media.lessThan("medium")`
-      font-size: ${theme.font.sizes.small};
+      font-size: ${theme.font.sizes.font16};
       margin: 16px 0;
     `}
   `}

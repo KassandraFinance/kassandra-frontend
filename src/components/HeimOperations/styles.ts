@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const HeimOperationsContainer = styled.div`
   max-width: 440px;
@@ -15,39 +15,43 @@ export const SelectOperator = styled.div`
 `
 
 export const Input = styled.input`
-  display: none;
-  &[type="radio"] + label {
-    border: 1px solid #26DBDB;
-    color: #fff;
-  }
+  ${({theme})=> css`
+    display: none;
+    &[type="radio"] + label {
+      border: 1px solid ${theme.colors.cyan};
+      color: #fff;
+    }
 
-  &[type="radio"]:checked + label {
-    background-color: #26DBDB;
-    border: 2px solid #26DBDB;
-    color: #fff;
-  }
+    &[type="radio"]:checked + label {
+      background-color: ${theme.colors.cyan};
+      border: 2px solid ${theme.colors.cyan};
+      color: #fff;
+    }
+  `}
 `
 
 export const Label = styled.label`
-  border: 1px solid #26DBDB;
-  border-radius: 6px;
-  color: #fff;
-  font-size: 20px;
-  text-align: center;
-  text-transform: capitalize;
+  ${({theme})=> css`
+    border: 1px solid ${theme.colors.cyan};
+    border-radius: 6px;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    text-transform: capitalize;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 
-  height: 40px;
-  @media (max-width: 375px) {
-    font-size: 13px;
-    padding: 10px 18px;
-  }
-  @media (max-width: 330px) {
-    font-size: 12px;
-    padding: 8px 14px;
-  }
+    height: 40px;
+    @media (max-width: 375px) {
+      font-size: 13px;
+      padding: 10px 18px;
+    }
+    @media (max-width: 330px) {
+      font-size: 12px;
+      padding: 8px 14px;
+    }
+  `}
 `
