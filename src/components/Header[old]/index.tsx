@@ -37,7 +37,7 @@ const Header = () => {
           isLogged ?
             <ButtonConnectWallet
               type="button"
-              style={{ backgroundColor: '#26DBDB', color: '#211426' }}
+              style={{ backgroundColor: '${theme.colors.cyan}', color: '#211426' }}
             >
               {substr(userWalletAddress)}
             </ButtonConnectWallet>
