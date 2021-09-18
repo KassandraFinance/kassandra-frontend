@@ -88,13 +88,6 @@ const wrapperModifiers = {
     color: ${theme.colors.snow};
     transition: all 300ms;
 
-    &:after {
-      background-color: transparent;
-    }
-    &:before {
-      background-color: #26dbdb;
-      color: #bdbdbd;
-    }
     &:hover {
       color: ${theme.colors.darkPurple};
       background-color: #26dbdb;
@@ -162,6 +155,6 @@ export const Wrapper = styled.button<WrapperProps>`
     ${!!backgroundPrimary && wrapperModifiers.backgroundPrimary(theme)};
     ${!!backgroundSecondary && wrapperModifiers.backgroundSecondary(theme)};
     ${!!backgroundBlack && wrapperModifiers.backgroundBlack(theme)};
-    ${disabledNoEvent && wrapperModifiers.disabledNoEvent(theme)};
+    ${disabledNoEvent && wrapperModifiers.disabledNoEvent()};
   `}
 `
