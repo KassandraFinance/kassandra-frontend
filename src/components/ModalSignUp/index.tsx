@@ -125,7 +125,12 @@ export const ModalSignUp = ({
               </MediaMatch>
               <MediaMatch lessThan='small' >
                 <WrapperButton>
-                  <Button backgroundPrimary size="medium" type='submit' disabledNoEvent={!validForm(formState)}>
+                  <Button 
+                    backgroundPrimary 
+                    size="medium" 
+                    type='submit' 
+                    disabledNoEvent={!validForm(formState)}
+                  >
                     Sign me up!
                   </Button>
                 </WrapperButton>

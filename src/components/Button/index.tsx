@@ -35,6 +35,7 @@ const Button: React.ForwardRefRenderFunction<S.WrapperProps, ButtonProps> = (
     backgroundSecondary={backgroundSecondary}
     backgroundBlack={backgroundBlack}
     disabledNoEvent={disabledNoEvent}
+    disabled={disabledNoEvent}
     {...props}
   >
     {text || children}

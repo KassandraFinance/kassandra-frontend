@@ -1,5 +1,4 @@
 import styled, { css, DefaultTheme } from 'styled-components'
-import { darken } from 'polished'
 
 import { ButtonProps } from './index'
 
@@ -43,14 +42,14 @@ const wrapperModifiers = {
     color: #bdbdbd;
     outline: none;
     &:after {
-      background: transparent;
+      background-color: transparent;
     }
     &:before {
-      background: transparent;
+      background-color: transparent;
       color: #bdbdbd;
     }
     &:hover {
-      background: transparent;
+      background-color: transparent;
       color: #bdbdbd;
     }
   `,
@@ -65,15 +64,10 @@ const wrapperModifiers = {
     &:before {
       background-color: #020899;
     }
-    &:hover {
-      &:before {
-        width: 100%;
-      }
-    }
   `,
 
   backgroundSecondary: (theme: DefaultTheme) => css`
-    background: linear-gradient(0deg, #ffbf00 -0.2%, #e843c4 79.99%);
+    background: ${`linear-gradient(0deg, ${theme.colors.amber} -0.2%, ${theme.colors.magenta} 79.99%)`};
 
     &:after {
       background: linear-gradient(0deg, #ffbf00 -0.2%, #e843c4 79.99%);
@@ -94,13 +88,16 @@ const wrapperModifiers = {
     color: ${theme.colors.snow};
     transition: all 300ms;
 
-    &:hover {
-      color: black;
+    &:after {
+      background-color: transparent;
+    }
+    &:before {
       background-color: #26dbdb;
-
-      &:before {
-        width: 100%;
-      }
+      color: #bdbdbd;
+    }
+    &:hover {
+      color: ${theme.colors.darkPurple};
+      background-color: #26dbdb;
     }
   `
 }
@@ -165,6 +162,6 @@ export const Wrapper = styled.button<WrapperProps>`
     ${!!backgroundPrimary && wrapperModifiers.backgroundPrimary(theme)};
     ${!!backgroundSecondary && wrapperModifiers.backgroundSecondary(theme)};
     ${!!backgroundBlack && wrapperModifiers.backgroundBlack(theme)};
-    ${disabledNoEvent && wrapperModifiers.disabledNoEvent()};
+    ${disabledNoEvent && wrapperModifiers.disabledNoEvent(theme)};
   `}
 `
