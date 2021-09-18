@@ -1,50 +1,61 @@
+/* eslint-disable prettier/prettier */
 export default {
-  grid: {
-    container: '132rem',
-    gutter: '3.2rem'
-  },
   border: {
     radius: '0.6rem'
   },
   font: {
-    family:
-      "Rubik, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
-    light: 300,
-    normal: 400,
-    medium: 500,
-    bold: 600,
+    family: "Rubik, -apple-system, Roboto, 'Open Sans', sans-serif",
+    weight: {
+      light: 300,
+      normal: 400,
+      medium: 500,
+      semibold: 600,
+    },
     sizes: {
-      xsmall: '1.2rem',
-      small: '1.6rem',
-      medium: '1.8rem',
-      large: '2.4rem',
-      xlarge: '4.0rem',
-      xxlarge: '5.6rem',
-      huge: '11.2rem'
+      font12: '1.2rem',
+      font14: '1.4rem',
+      font16: '1.6rem',
+      font18: '1.8rem',
+      font20: '2.0rem',
+      font24: '2.4rem',
+      font40: '4.0rem',
+      font56: '5.6rem',
+      font112: '11.2rem'
     }
   },
   colors: {
-    primary: '#F231A5',
-    secondary: '#3CD3C1',
-    mainBg: '#2772FF',
-    lightBg: '#F2F2F2',
-    white: '#FCFCFC',
-    black: '#030517',
+    // magenta: '#E843C4',
+    // amber: '#FFBF00',
+    // mainBg: '#2772FF',
+    // lightBg: '#F2F2F2',
+    // white: '#FCFCFC',
+    // black: '#030517',
+    // lightGray: '#828282',
+    // gray: '#8F8F8F',
+    // darkGray: '#2E2F42',
+    // darkBlue: '#000B71',
+    // red: '#FF6347',
+    // blue: '#2772FF'
+    darkPurple: '#211426',
+    magenta: '#E843C4',
+    darkBlue: '#020887',
+    blue: '#0C3DDC',
+    cyan: '#26DBDB',
+    darkGray: '#2E2F42',
     lightGray: '#828282',
     gray: '#8F8F8F',
-    darkGray: '#2E2F42',
-    darkBlue: '#000B71',
-    red: '#FF6347',
-    blue: '#2772FF'
+    amber: '#FFBF00',
+    snow: '#FCFCFC',
   },
   spacings: {
-    xxsmall: '0.8rem',
-    xsmall: '1.6rem',
-    small: '2.4rem',
-    medium: '3.2rem',
-    large: '4.0rem',
-    xlarge: '4.8rem',
-    xxlarge: '5.6rem'
+    space8: '0.8rem',
+    space16: '1.6rem',
+    space24: '2.4rem',
+    space32: '3.2rem',
+    space40: '4.0rem',
+    space48: '4.8rem',
+    space56: '5.6rem'
+
   },
   layers: {
     base: 10,

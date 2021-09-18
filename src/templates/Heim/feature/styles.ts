@@ -44,11 +44,11 @@ export const TextWrapper = styled.div`
 export const Title = styled.h1`
   ${({ theme }) => css`
     text-align: center;
-    font-size: ${theme.font.sizes.xlarge};
-    font-weight: ${theme.font.medium};
+    font-size: ${theme.font.sizes.font40};
+    font-weight: ${theme.font.weight.medium};
     /* line-height: 94px; */
     ${media.lessThan('large')`
-      font-size: ${theme.font.sizes.large};
+      font-size: ${theme.font.sizes.font24};
     `}
   `}
 `
@@ -56,12 +56,12 @@ export const Title = styled.h1`
 export const SubTitle = styled.h3`
   ${({ theme }) => css`
     text-align: center;
-    font-size: ${theme.font.sizes.large};
-    font-weight: ${theme.font.light};
+    font-size: ${theme.font.sizes.font24};
+    font-weight: ${theme.font.weight.light};
     margin: 32px 0;
     max-width: 100%px;
     ${media.lessThan('large')`
-      font-size: ${theme.font.sizes.medium};
+      font-size: ${theme.font.sizes.font18};
       margin: 16px 0;
     `}
   `}
@@ -84,7 +84,7 @@ export const ItemContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: ${theme.spacings.xsmall};
+    padding: ${theme.spacings.space8};
   `}
 `
 export const ItemText = styled.div`
@@ -95,16 +95,16 @@ export const ItemText = styled.div`
 export const ItemTitle = styled.div`
   ${({ theme }) => css`
     text-align: center;
-    font-size: ${theme.font.sizes.large};
-    font-weight: ${theme.font.medium};
-    margin-bottom: ${theme.spacings.xsmall};
+    font-size: ${theme.font.sizes.font24};
+    font-weight: ${theme.font.weight.medium};
+    margin-bottom: ${theme.spacings.space8};
   `}
 `
 export const ItemSubtitle = styled.div`
   ${({ theme }) => css`
     text-align: center;
-    font-size: ${theme.font.sizes.medium};
-    font-weight: ${theme.font.light};
+    font-size: ${theme.font.sizes.font18};
+    font-weight: ${theme.font.weight.light};
     line-height: 150%;
   `}
 `
@@ -113,7 +113,7 @@ export const ItemImage = styled.div`
   ${({ theme }) => css`
     display: flex;
     justify-content: center;
-    margin-bottom: ${theme.spacings.medium};
+    margin-bottom: ${theme.spacings.space32};
     ${media.lessThan('medium')`
       display: flex;
       justify-content: center;
@@ -171,12 +171,12 @@ export const Link = styled.div`
     align-items: center;
 
     a {
-      color: #26dbdb;
+      color: ${theme.colors.cyan};
       position: relative;
       border: none;
       text-decoration: none;
-      font-size: ${theme.font.sizes.medium};
-      font-weight: ${theme.font.normal};
+      font-size: ${theme.font.sizes.font18};
+      font-weight: ${theme.font.weight.normal};
       cursor: pointer;
       &:hover {
         &::after {
@@ -186,7 +186,7 @@ export const Link = styled.div`
           position: absolute;
           display: block;
           height: 0.1rem;
-          background-color: #26dbdb;
+          background-color: ${theme.colors.cyan};
           animation: hoverAnimation 0.3s forwards;
         }
         @keyframes hoverAnimation {
@@ -201,7 +201,7 @@ export const Link = styled.div`
         }
       }
       ${media.lessThan('large')`
-    font-size: ${theme.font.sizes.small};
+    font-size: ${theme.font.sizes.font16};
     `}
     }
   `}

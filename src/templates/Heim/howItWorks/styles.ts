@@ -69,8 +69,8 @@ export const Text = styled.div`
     max-width: 30rem;
     text-align: center;
     margin: auto;
-    font-size: ${theme.font.sizes.large};
-    font-weight: ${theme.font.light};
+    font-size: ${theme.font.sizes.font24};
+    font-weight: ${theme.font.weight.light};
     line-height: 150%;
     z-index: 10;
 
@@ -78,41 +78,41 @@ export const Text = styled.div`
       display: none;
     }
     @media (max-width: 930px) {
-      font-size: ${theme.font.sizes.large};
-      font-weight: ${theme.font.light};
+      font-size: ${theme.font.sizes.font24};
+      font-weight: ${theme.font.weight.light};
       margin-top: 10rem;
       line-height: 100%;
       max-width: 40rem;
     }
     @media (max-width: 680px) {
-      font-size: ${theme.font.sizes.medium};
-      font-weight: ${theme.font.light};
+      font-size: ${theme.font.sizes.font18};
+      font-weight: ${theme.font.weight.light};
       margin-top: 10rem;
       line-height: 100%;
       max-width: 40rem;
     }
     @media (max-width: 570px) {
-      font-size: ${theme.font.sizes.small};
-      font-weight: ${theme.font.light};
+      font-size: ${theme.font.sizes.font16};
+      font-weight: ${theme.font.weight.light};
       line-height: 100%;
     }
     @media (max-width: 425px) {
-      font-size: 1.4rem;
-      font-weight: ${theme.font.light};
+      font-size: ${theme.font.sizes.font14};
+      font-weight: ${theme.font.weight.light};
       margin-top: 7rem;
       max-width: 25rem;
     }
     @media (max-width: 375px) {
-      font-size: ${theme.font.sizes.xsmall};
-      font-weight: ${theme.font.light};
+      font-size: ${theme.font.sizes.font12};
+      font-weight: ${theme.font.weight.light};
       margin: auto;
       margin-top: 5rem;
       line-height: 100%;
       max-width: 20rem;
     }
     @media (max-width: 280px) {
-      font-size: ${theme.font.sizes.xsmall};
-      font-weight: ${theme.font.light};
+      font-size: ${theme.font.sizes.font12};
+      font-weight: ${theme.font.weight.light};
       margin: auto;
       margin-top: 3rem;
       line-height: 100%;

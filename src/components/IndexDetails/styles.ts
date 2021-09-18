@@ -58,7 +58,7 @@ export const Td = styled.td`
 `
 
 export const Colour = styled.td`
-  background-color: #26DBDB;
+  background-color: ${theme.colors.cyan};
   border-radius: 8px;
 
   width: 30px;

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 // ========== FORM ==========
 
@@ -54,7 +54,7 @@ export const Amount = styled.div<IAmountProps>`
   width: 190px;
   height: ${ props => props.inputHeim ? '100px' : '94px' };
   padding-right: 12px;
-  
+
   @media (max-width: 504px) {
     width: 160px;
   }
@@ -86,30 +86,32 @@ export const Input = styled.input`
     color: #fff;
   }
 
-  &[type=number]::-webkit-inner-spin-button { 
+  &[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }
-  &[type=number] { 
+  &[type=number] {
     -moz-appearance: textfield;
     appearance: textfield;
   }
 `
 
 export const Line = styled.div`
-  content: '';
-  display: block;
-  width: 190px;
-  height: 2px;
-  background-color: #26DBDB;
-  box-shadow: 1px 1px 5px #26DBDB;
-  bottom: 0;
-  position: absolute;
-  @media (max-width: 504px) {
-    width: 160px;
-  }
-  @media (max-width: 430px) {
-    width: 130px;
-  }
+  ${({theme})=> css`
+    content: '';
+    display: block;
+    width: 190px;
+    height: 2px;
+    background-color: ${theme.colors.cyan};
+    box-shadow: 1px 1px 5px ${theme.colors.cyan};
+    bottom: 0;
+    position: absolute;
+    @media (max-width: 504px) {
+      width: 160px;
+    }
+    @media (max-width: 430px) {
+      width: 130px;
+    }
+  `}
 `
 
 export const Span = styled.span`
@@ -161,36 +163,37 @@ interface IButtonMax {
 }
 
 export const ButtonMax = styled.button<IButtonMax>`
-  border: 1px solid #26DBDB;
-  border-radius: 16px;
-  background: ${ props => props.isMax ? '#26DBDB' : 'transparent' };
-  color: ${ props => props.isMax ? '#000' : '#fff' };
-  font-size: 12px;
-  line-height: 12px;
-  font-weight: 300;
-  letter-spacing: .7px;
 
-  width: 56px;
-  height: 20px;
-  padding: 4px 16px;
+    border: 1px solid #26DBDB;
+    border-radius: 16px;
+    background: ${ props => props.isMax ? '#26DBDB' : 'transparent' };
+    color: ${ props => props.isMax ? '#000' : '#fff' };
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: 300;
+    letter-spacing: .7px;
 
-  cursor: pointer;
-  transition: 100ms;
-  &:hover {
-    background: #26DBDB;
-    color: #000;
-  }
+    width: 56px;
+    height: 20px;
+    padding: 4px 16px;
+
+    cursor: pointer;
+    transition: 100ms;
+    &:hover {
+      background: #26DBDB;
+      color: #000;
+    }
 `
 
 
-// ========== INPUT TOKENS ==========
+  // ========== INPUT TOKENS ==========
 
 export const InputTokensContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 60px 1fr;
   justify-content: space-around;
   align-items: flex-start;
-  
+
   width: 100%;
   height: 94px;
   margin-top: 8px;
@@ -242,7 +245,7 @@ export const InputHeimContainer = styled.div<IInputHeimContainerProps>`
   grid-template-columns: 190px 60px 190px;
   justify-content: space-around;
   align-items: center;
-  
+
   width: 100%;
   height: ${ props => props.inputHeim ? '102px' : '94px' };
   padding: 0;
@@ -261,7 +264,7 @@ export const InputWithdrawContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-content: space-between;
-  
+
   width: 100%;
   height: 94px;
   margin-top: 16px;
@@ -298,23 +301,25 @@ export const AmountDefault = styled.div`
   position: relative;
   width: 100%;
   height: 94px;
-  
+
   padding-right: 12px;
 `
 
 export const LineDefault = styled.div`
-  content: '';
-  display: block;
-  min-width: 100%;
-  max-width: 100%;
-  height: 2px;
-  background-color: #26DBDB;
-  box-shadow: 1px 1px 5px #26DBDB;
-  bottom: 0;
-  position: absolute;
-  @media (max-width: 504px) {
-    max-width: 384px;
-  }
+  ${({theme})=> css`
+    content: '';
+    display: block;
+    min-width: 100%;
+    max-width: 100%;
+    height: 2px;
+    background-color: ${theme.colors.cyan};
+    box-shadow: 1px 1px 5px ${theme.colors.cyan};
+    bottom: 0;
+    position: absolute;
+    @media (max-width: 504px) {
+      max-width: 384px;
+    }
+  `}
 `
 
 export const ExchangeRate = styled.div`

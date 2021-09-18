@@ -3,7 +3,6 @@ import {
   css,
   DefaultTheme,
   GlobalStyleComponent
-
 } from 'styled-components'
 
 type GlobalStylesProps = {
@@ -13,7 +12,7 @@ type GlobalStylesProps = {
 const GlobalStyles: GlobalStyleComponent<
   GlobalStylesProps,
   DefaultTheme
->= createGlobalStyle`
+> = createGlobalStyle`
   @font-face{
   font-family: 'Rubik';
     font-style: normal;
@@ -65,15 +64,15 @@ const GlobalStyles: GlobalStyleComponent<
     min-height: 100%;
   }
 
-  ${({theme})=>css`
-    html{
-      font-size: 62.5%
+  ${({ theme }) => css`
+    html {
+      font-size: 62.5%;
     }
 
-    body{
+    body {
       background-color: black;
       font-family: 'Rubik', sans-serif;
-      color: #FCFCFC;
+      color: #fcfcfc;
     }
   `}
   ul, ol {

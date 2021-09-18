@@ -99,8 +99,8 @@ ${({theme})=> css`
     display: block;
     position:relative;
 
-    font-size:${theme.font.sizes.xlarge};
-    font-weight: ${theme.font.light};
+    font-size:${theme.font.sizes.font40};
+    font-weight: ${theme.font.weight.light};
     text-align: center;
     letter-spacing: 0.4rem;
     line-height: 110%;

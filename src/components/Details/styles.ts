@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Details = styled.div`
   margin-top: 24px;
@@ -7,36 +7,38 @@ export const Details = styled.div`
 `
 
 export const Info = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  span {
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 14px;
-    margin-bottom: 8px;
-  }
-
-  .total-staked {
-    margin-bottom: 16px;
-  }
-
-  a {
-    color: #26DBDB;
-    font-size: 14px;
-    text-decoration: none;
-
-    cursor: pointer;
-    z-index: 111;
-    &::after {
-      display: block;
-      content: '';
-      background-color: #26DBDB;
-      width: 100%;
-      height: 0.8px;
-      box-shadow: 1px 1px 4px #26DBDB;
+  ${({theme}) => css`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span {
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 14px;
+      margin-bottom: 8px;
     }
-  }
+
+    .total-staked {
+      margin-bottom: 16px;
+    }
+
+    a {
+      color: ${theme.colors.cyan};
+      font-size: 14px;
+      text-decoration: none;
+
+      cursor: pointer;
+      z-index: 111;
+      &::after {
+        display: block;
+        content: '';
+        background-color: ${theme.colors.cyan};
+        width: 100%;
+        height: 0.8px;
+        box-shadow: 1px 1px 4px ${theme.colors.cyan};
+      }
+    }
+  `}
 `
 
 export const KacyUSD = styled.div`

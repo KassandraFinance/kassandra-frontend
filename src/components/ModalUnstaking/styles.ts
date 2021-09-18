@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
@@ -21,7 +21,7 @@ export const BorderGradient = styled.div<IBorderGradientProps>`
   display: ${(props) => props.modalOpen ? "block" : "none" };
 
   background: ${(props) => props.otherStakingPools ?
-    "linear-gradient(0deg, #26DBDB -0.02%, #E843C4 99.99%)"
+    "linear-gradient(0deg, ${theme.colors.cyan} -0.02%, #E843C4 99.99%)"
     :
     "linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%)" };;
   border-radius: 6px;
@@ -131,47 +131,51 @@ export const Amount = styled.div`
 `
 
 export const Line = styled.div`
-  content: '';
-  display: block;
-  width: 190px;
-  height: 2px;
-  background-color: #26DBDB;
-  box-shadow: 1px 1px 5px #26DBDB;
-  margin-left: auto;
-  @media (max-width: 504px) {
-    width: 160px;
-  }
-  @media (max-width: 430px) {
-    width: 130px;
-  }
+  ${({theme})=> css`
+    content: '';
+    display: block;
+    width: 190px;
+    height: 2px;
+    background-color: ${theme.colors.cyan};
+    box-shadow: 1px 1px 5px ${theme.colors.cyan};
+    margin-left: auto;
+    @media (max-width: 504px) {
+      width: 160px;
+    }
+    @media (max-width: 430px) {
+      width: 130px;
+    }
+  `}
 `
 
 export const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
+  ${({theme})=> css`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 
-  margin: 36px 0 24px;
-  button {
-    border: 1px solid #26DBDB;
-    border-radius: 16px;
-    background: transparent;
-    color: #fff;
-    font-size: 12px;
-    line-height: 12px;
-    font-weight: 400;
+    margin: 36px 0 24px;
+    button {
+      border: 1px solid ${theme.colors.cyan};
+      border-radius: 16px;
+      background: transparent;
+      color: #fff;
+      font-size: 12px;
+      line-height: 12px;
+      font-weight: 400;
 
-    width: 63px;
-    padding: 3px;
+      width: 63px;
+      padding: 3px;
 
-    cursor: pointer;
-    transition: 100ms;
-    &:hover {
-      background: #26DBDB;
-      color: #000;
+      cursor: pointer;
+      transition: 100ms;
+      &:hover {
+        background: ${theme.colors.cyan};
+        color: #000;
+      }
     }
-  }
+  `}
 `
 
 interface IConfirmButtonProps {
@@ -193,7 +197,7 @@ export const ConfirmButton = styled.button<IConfirmButtonProps>`
   cursor: pointer;
 
   background: ${(props) => props.otherStakingPools ?
-    "linear-gradient(87.48deg, #E843C4 -47.54%, #26DBDB 154.78%)"
+    "linear-gradient(87.48deg, #E843C4 -47.54%, ${theme.colors.cyan} 154.78%)"
     :
     "linear-gradient(87.48deg, #FFBF00 -70.27%, #E843C4 154.78%)" };
   border: none;
@@ -212,26 +216,28 @@ export const ConfirmButton = styled.button<IConfirmButtonProps>`
 `
 
 export const GetKacy = styled.button`
-  border-radius: 6px;
-  font-size: 16px;
-  line-height: 14px;
-  font-weight: 400;
+  ${({theme})=> css`
+    border-radius: 6px;
+    font-size: 16px;
+    line-height: 14px;
+    font-weight: 400;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  width: 100%;
-  height: 40px;
-  cursor: pointer;
+    width: 100%;
+    height: 40px;
+    cursor: pointer;
 
-  background: transparent;
-  border: 1px solid #26DBDB;
+    background: transparent;
+    border: 1px solid ${theme.colors.cyan};
 
-  color: #fff;
-  transition: 200ms;
-  &:hover {
-    background: #26DBDB;
-    color: #000;
-  }
+    color: #fff;
+    transition: 200ms;
+    &:hover {
+      background: ${theme.colors.cyan};
+      color: #000;
+    }
+  `}
 `

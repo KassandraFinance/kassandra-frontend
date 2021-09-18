@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
@@ -97,21 +97,23 @@ export const Content = styled.div`
 `
 
 export const ButtonContainer = styled.div`
-  button {
-    background-color: transparent;
-    border: 1px solid #26DBDB;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 18px;
+  ${({theme})=> css`
+    button {
+      background-color: transparent;
+      border: 1px solid ${theme.colors.cyan};
+      border-radius: 6px;
+      color: #fff;
+      font-size: 18px;
 
-    width: 136px;
-    height: 40px;
-    margin: 0 8px;
-    transition-duration: 300ms;
-    cursor: pointer;
-    &:hover {
-      background-color: #26DBDB;
-      color: #211426;
+      width: 136px;
+      height: 40px;
+      margin: 0 8px;
+      transition-duration: 300ms;
+      cursor: pointer;
+      &:hover {
+        background-color: ${theme.colors.cyan};
+        color: #211426;
+      }
     }
-  }
+  `}
 `

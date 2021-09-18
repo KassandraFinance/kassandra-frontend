@@ -32,13 +32,13 @@ export const TextWrapper = styled.div`
 export const Title = styled.h1`
   ${({ theme }) => css`
     text-align: center;
-    font-size: ${theme.font.sizes.xlarge};
-    font-weight: ${theme.font.medium};
-    margin-bottom: ${theme.spacings.xxlarge};
+    font-size: ${theme.font.sizes.font40};
+    font-weight: ${theme.font.weight.medium};
+    margin-bottom: ${theme.spacings.space56};
     /* line-height: 94px; */
     ${media.lessThan('large')`
-      font-size: ${theme.font.sizes.large};
-      margin-bottom: ${theme.spacings.small};
+      font-size: ${theme.font.sizes.font24};
+      margin-bottom: ${theme.spacings.space24};
 
     `}
   `}
@@ -47,12 +47,12 @@ export const Title = styled.h1`
 export const SubTitle = styled.h3`
   ${({ theme }) => css`
     text-align: center;
-    font-size: ${theme.font.sizes.medium};
-    font-weight: ${theme.font.light};
+    font-size: ${theme.font.sizes.font18};
+    font-weight: ${theme.font.weight.light};
     /* margin: 32px 0; */
     max-width: 100%;
     ${media.lessThan('large')`
-      font-size: ${theme.font.sizes.small};
+      font-size: ${theme.font.sizes.font16};
       margin: 16px 0;
     `}
   `}
@@ -78,7 +78,7 @@ export const ItemContainer = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: ${theme.spacings.xsmall};
+    padding: ${theme.spacings.space8};
     ${media.lessThan('large')`
     display: flex;
     flex-direction: column;
@@ -95,33 +95,33 @@ export const ItemText = styled.div`
 export const ItemTitle = styled.div`
   ${({ theme }) => css`
     text-align: left;
-    font-size: ${theme.font.sizes.large};
-    font-weight: ${theme.font.medium};
+    font-size: ${theme.font.sizes.font24};
+    font-weight: ${theme.font.weight.medium};
     line-height: 120%;
-    margin-bottom: ${theme.spacings.small};
+    margin-bottom: ${theme.spacings.space24};
 
     ${media.lessThan('large')`
-    font-size: ${theme.font.sizes.medium};
+    font-size: ${theme.font.sizes.font18};
     text-align: center;
 
     `}/* ${media.greaterThan('medium')`
-    font-size: ${theme.font.sizes.xlarge};
+    font-size: ${theme.font.sizes.font40};
     `} */
   `}
 `
 export const ItemSubtitle = styled.div`
   ${({ theme }) => css`
     text-align: left;
-    font-size: ${theme.font.sizes.medium};
-    font-weight: ${theme.font.light};
+    font-size: ${theme.font.sizes.font18};
+    font-weight: ${theme.font.weight.light};
     line-height: 150%;
-    margin-bottom: ${theme.spacings.xxsmall};
+    margin-bottom: ${theme.spacings.space8};
     ${media.lessThan('large')`
-      font-size: ${theme.font.sizes.small};
+      font-size: ${theme.font.sizes.font16};
       text-align:center;
 
     `}/* ${media.greaterThan('medium')`
-      font-size: ${theme.font.sizes.large};
+      font-size: ${theme.font.sizes.font24};
     `} */
   `}
 `
@@ -130,7 +130,7 @@ export const ItemImage = styled.div`
   ${({ theme }) => css`
     display: flexbox;
     justify-content: center;
-    margin-bottom: ${theme.spacings.medium};
+    margin-bottom: ${theme.spacings.space32};
     ${media.lessThan('large')`
       display: flex;
       justify-content: center;
@@ -201,7 +201,7 @@ export const ProductContainer = styled.div`
     justify-content: space-between;
     width: 38rem;
     /* height: 31rem; */
-    padding: ${theme.spacings.xsmall};
+    padding: ${theme.spacings.space8};
     ${media.lessThan('large')`
       width:auto;
       height: auto;
@@ -219,19 +219,19 @@ export const ProductText = styled.div`
 export const ProductTitle = styled.div`
   ${({ theme }) => css`
     text-align: left;
-    font-size: ${theme.font.sizes.large};
-    margin-bottom: ${theme.spacings.small};
+    font-size: ${theme.font.sizes.font24};
+    margin-bottom: ${theme.spacings.space24};
   `}
 `
 export const ProductSubtitle = styled.div`
   ${({ theme }) => css`
     text-align: center;
-    font-size: ${theme.font.sizes.medium};
-    font-weight: ${theme.font.light};
+    font-size: ${theme.font.sizes.font18};
+    font-weight: ${theme.font.weight.light};
     line-height: 150%;
 
     ${media.lessThan('small')`
-    font-size: ${theme.font.sizes.small};
+    font-size: ${theme.font.sizes.font16};
     text-align:center;
   `}
   `}
@@ -242,7 +242,7 @@ export const ProductImage = styled.div`
     display: flex;
     position: relative;
     justify-content: center;
-    margin-bottom: ${theme.spacings.medium};
+    margin-bottom: ${theme.spacings.space32};
     height: auto;
     img {
       width: 100%;
@@ -268,17 +268,17 @@ export const Link = styled.div`
     align-items: center;
 
     a {
-      color: #26dbdb;
+      color: ${theme.colors.cyan};
       border: none;
       text-decoration: none;
-      font-size: ${theme.font.sizes.medium};
+      font-size: ${theme.font.sizes.font18};
       cursor: pointer;
-      color: #26dbdb;
+      color: ${theme.colors.cyan};
       position: relative;
       border: none;
       text-decoration: none;
-      font-size: ${theme.font.sizes.medium};
-      font-weight: ${theme.font.normal};
+      font-size: ${theme.font.sizes.font18};
+      font-weight: ${theme.font.weight.normal};
       cursor: pointer;
       &:hover {
         &::after {
@@ -288,7 +288,7 @@ export const Link = styled.div`
           position: absolute;
           display: block;
           height: 0.1rem;
-          background-color: #26dbdb;
+          background-color: ${theme.colors.cyan};
           animation: hoverAnimation 0.3s forwards;
         }
         @keyframes hoverAnimation {
@@ -303,7 +303,7 @@ export const Link = styled.div`
         }
       }
       ${media.lessThan('large')`
-  font-size: ${theme.font.sizes.xsmall};
+  font-size: ${theme.font.sizes.font12};
   `}
     }
   `}

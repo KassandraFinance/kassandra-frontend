@@ -267,10 +267,7 @@ interface IButtonDetailsProps {
   isDetails: boolean;
 }
 
-export const ButtonDetails =
-  styled.button <
-  IButtonDetailsProps >
-  `
+export const ButtonDetails = styled.button<IButtonDetailsProps>`
   background-color: transparent;
   border: none;
   color: #26DBDB;
@@ -303,7 +300,7 @@ export const StakeContainer = styled.div`
 
 export const ButtonRequestStake = styled.button`
   background: transparent;
-  border: 1px solid #26dbdb;
+  border: 1px solid #26DBDB;
   border-radius: 6px;
   color: #fff;
   font-size: 20px;
@@ -321,7 +318,7 @@ export const ButtonRequestStake = styled.button`
   z-index: 10;
   transition-duration: 300ms;
   &:hover {
-    background-color: #26dbdb;
+    background-color: #26DBDB;
     color: #211426;
   }
   @media (max-width: 420px) {
