@@ -1,7 +1,7 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 import { darken } from 'polished'
 
-import { ButtonProps } from '.'
+import { ButtonProps } from './index'
 
 export type WrapperProps = Pick<
   ButtonProps,
@@ -36,77 +36,135 @@ const wrapperModifiers = {
   fullWidth: () => css`
     width: 100%;
   `,
-  withIcon: (theme: DefaultTheme) => css`
-    svg {
-      width: 1.5rem;
 
-      & + span {
-        margin-left: ${theme.spacings.space8};
-      }
-    }
-  `,
   disabledNoEvent: () => css`
-    &:disabled{
-      cursor: not-allowed;
-      pointer-events: none;
-      filter: grayscale(150%);
+    cursor: not-allowed;
+    filter: grayscale(150%);
+    color: #bdbdbd;
+    outline: none;
+    &:after {
+      background: transparent;
+    }
+    &:before {
+      background: transparent;
+      color: #bdbdbd;
+    }
+    &:hover {
+      background: transparent;
       color: #bdbdbd;
     }
   `,
 
   backgroundPrimary: (theme: DefaultTheme) => css`
     background: linear-gradient(264.12deg, #e843c4 -140.16%, #020887 205.21%);
-    transition: all 0.15s ease-in-out;
-    backface-visibility: hidden;
-    &::before {
+    color: ${theme.colors.snow};
+
+    &:after {
+      background: linear-gradient(264.12deg, #e843c4 -179.71%, #020887 205.21%);
+    }
+    &:before {
+      background-color: #020899;
     }
     &:hover {
-      background: #020887;
-      transition-delay: ${theme.transition.default};
+      &:before {
+        width: 100%;
+      }
     }
   `,
-  backgroundBlack: (theme: DefaultTheme) => css`
-    background: rgba(0, 0, 0, 0);
-    border: 0.1rem solid ${theme.colors.cyan};
-    transition: all 0.15s ease-in-out;
-    &::before {
-      border-left-color: ${theme.colors.cyan};
-      border-top-color: ${theme.colors.cyan};
+
+  backgroundSecondary: (theme: DefaultTheme) => css`
+    background: linear-gradient(0deg, #ffbf00 -0.2%, #e843c4 79.99%);
+
+    &:after {
+      background: linear-gradient(0deg, #ffbf00 -0.2%, #e843c4 79.99%);
+    }
+    &:before {
+      background-color: #ffbf00;
     }
     &:hover {
+      &:before {
+        width: 100%;
+      }
+    }
+  `,
+  
+  backgroundBlack: (theme: DefaultTheme) => css`
+    background: transparent;
+    border: 0.1rem solid #26dbdb;
+    color: ${theme.colors.snow};
+    transition: all 300ms;
+
+    &:hover {
       color: black;
-      background: ${theme.colors.cyan};
+      background-color: #26dbdb;
+
+      &:before {
+        width: 100%;
+      }
     }
   `
 }
 
-// eslint-disable-next-line prettier/prettier
-export const Wrapper = styled.button<WrapperProps >`
+export const Wrapper = styled.button<WrapperProps>`
   ${({
     theme,
     size,
     fullWidth,
-    disabled,
     disabledNoEvent,
     backgroundPrimary,
+    backgroundSecondary,
     backgroundBlack
   }) => css`
-    display: inline-flex;
-    overflow: hidden;
-    align-items: center;
-    justify-content: center;
-    color: ${theme.colors.snow};
-    font-family: ${theme.font.family};
-    border: 0;
-    cursor: pointer;
+    border: none;
     border-radius: ${theme.border.radius};
-    padding: ${theme.spacings.space8};
+    font-family: ${theme.font.family};
     text-decoration: none;
+    
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    padding: ${theme.spacings.space8};
+    
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 1;
+    &:after {
+      content: '';
+      border-radius: ${theme.border.radius};
+
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      z-index: -2;
+    }
+    &:before {
+      content: '';
+      border-radius: ${theme.border.radius};
+
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      transition: all 300ms ease-in-out;
+      z-index: -1;
+    }
+    &:hover {
+      &:before {
+        width: 100%;
+      }
+    }
 
     ${!!size && wrapperModifiers[size](theme)};
     ${!!fullWidth && wrapperModifiers.fullWidth()};
-    ${disabledNoEvent && wrapperModifiers.disabledNoEvent()};
     ${!!backgroundPrimary && wrapperModifiers.backgroundPrimary(theme)};
+    ${!!backgroundSecondary && wrapperModifiers.backgroundSecondary(theme)};
     ${!!backgroundBlack && wrapperModifiers.backgroundBlack(theme)};
+    ${disabledNoEvent && wrapperModifiers.disabledNoEvent()};
   `}
 `
