@@ -88,6 +88,12 @@ const wrapperModifiers = {
     color: ${theme.colors.snow};
     transition: all 300ms;
 
+    &:after {
+      background-color: transparent;
+    }
+    &:before {
+      background-color: #26dbdb;
+    }
     &:hover {
       color: ${theme.colors.darkPurple};
       background-color: #26dbdb;
