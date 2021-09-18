@@ -103,7 +103,7 @@ const Header = () => {
               Install MetaMask!
             </S.LinkInstallMetaMask>
           )} */}
-          <Button backgroundBlack size="large" disabled>
+          <Button backgroundBlack size="large" disabledNoEvent>
             Connect Wallet
           </Button>
         </S.MenuNav>
@@ -141,7 +141,7 @@ const Header = () => {
           <Link href="/" passHref>
             <S.MenuLinkDisable>About</S.MenuLinkDisable>
           </Link>
-          <Button backgroundBlack size="large" disabled>
+          <Button backgroundBlack size="large" disabledNoEvent>
             Connect Wallet
           </Button>
         </S.MenuNav>

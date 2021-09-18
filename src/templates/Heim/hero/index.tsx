@@ -50,14 +50,13 @@ export const Hero = ({ setModalOpen, setModalSignupOpen } : IHeroProps)  => {
                 <Button
                   size="large"
                   backgroundBlack
+                  text="Join the community"
                   onClick={() => {
                     setModalOpen(true)
                     clickMatomoEvent("click-open-modal", "modal-social")
                     }
                   }
-                >
-                  Join the community
-                </Button>
+                />
               </S.ButtonWrapper>
             </div>
             <S.ImageDesktop>
