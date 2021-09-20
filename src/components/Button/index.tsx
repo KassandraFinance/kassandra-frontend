@@ -1,8 +1,10 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { ButtonHTMLAttributes } from 'react'
+import { ButtonHTMLAttributes, AnchorHTMLAttributes } from 'react'
 import * as S from './styles'
 
-type ButtonTypes = ButtonHTMLAttributes<HTMLButtonElement>
+type ButtonTypes =
+  | AnchorHTMLAttributes<HTMLAnchorElement>
+  | ButtonHTMLAttributes<HTMLButtonElement>
 
 export type ButtonProps = {
   size?: 'small' | 'medium' | 'large' | 'huge'
@@ -11,7 +13,8 @@ export type ButtonProps = {
   backgroundSecondary?: boolean
   backgroundBlack?: boolean
   disabledNoEvent?: boolean
-  text?: string 
+  as?: React.ElementType
+  text?: string
 } & ButtonTypes
 
 const Button: React.ForwardRefRenderFunction<S.WrapperProps, ButtonProps> = (
@@ -36,6 +39,7 @@ const Button: React.ForwardRefRenderFunction<S.WrapperProps, ButtonProps> = (
     backgroundBlack={backgroundBlack}
     disabledNoEvent={disabledNoEvent}
     disabled={disabledNoEvent}
+
     {...props}
   >
     {text || children}
