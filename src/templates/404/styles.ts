@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import theme from './../../styles/theme'
 
 export const Wrapper = styled.div`
   display: flex;
@@ -19,7 +20,7 @@ export const Wrapper = styled.div`
 
   p{
     font-size: 3.2rem;
-    font-weight: 300;
+    font-weight: ${theme.font.weight.light};
     margin-bottom: 3.6rem;
   }
 
@@ -53,27 +54,7 @@ export const Wrapper = styled.div`
     max-width: 25rem;
     p{
       font-size: ${theme.font.sizes.font14};
-      margin-bottom: ${theme.font.sizes.font14};
+      margin-bottom: 14px;
     }
   }
-`
-
-export const Image = styled.img`
-  max-width: 100%;
-`
-
-export const Title = styled.h2`
-  ${({ theme }) => css`
-    color: ${theme.colors.primary};
-    font-size: ${theme.font.sizes.font56};
-  `}
-`
-
-export const Description = styled.p`
-  ${({ theme }) => css`
-    color: ${theme.colors.snow};
-    font-size: ${theme.font.sizes.font24};
-    font-weight: ${theme.font.weight.light};
-    margin-bottom: ${theme.spacings.space32};
-  `}
 `
