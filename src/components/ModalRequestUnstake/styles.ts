@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import theme from '../../styles/theme'
 
 export const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
@@ -17,7 +18,7 @@ interface IModalContainerProps {
 }
 
 export const ModalContainer = styled.div<IModalContainerProps>`
-  display: ${(props) => props.modalOpen ? "block" : "none" };
+  display: ${(props) => props.modalOpen ? "block" : "none"};
 
   border: 2px solid #FFBF00;
   background-color: #000;
@@ -57,7 +58,7 @@ export const Attention = styled.div`
   }
 
   p {
-    font-size: 24px;
+    font-size: ${theme.font.sizes.font24};
     margin-left: 16px;
   }
 `
@@ -67,7 +68,7 @@ export const Close = styled.button`
   border: none;
 
   color: #fff;
-  font-size: 20px;
+  font-size: ${theme.font.sizes.font20};
   padding: 2px;
 
   cursor: pointer;
@@ -84,26 +85,26 @@ export const Content = styled.div`
   padding: 24px 0;
   p {
     text-align: center;
-    font-size: 18px;
-    font-weight: 300;
+    font-size: ${theme.font.sizes.font18};
+    font-weight: ${theme.font.weight.light};
     max-width: 340px;
     margin-bottom: 12px;
   }
 
   span {
-    font-size: 20px;
+    font-size: ${theme.font.sizes.font20};
     margin-bottom: 12px;
   }
 `
 
 export const ButtonContainer = styled.div`
-  ${({theme})=> css`
+  ${({ theme }) => css`
     button {
       background-color: transparent;
       border: 1px solid ${theme.colors.cyan};
-      border-radius: 6px;
+      border-radius: ${theme.border.radius};
       color: #fff;
-      font-size: 18px;
+      font-size: ${theme.font.sizes.font18};
 
       width: 136px;
       height: 40px;
@@ -112,7 +113,8 @@ export const ButtonContainer = styled.div`
       cursor: pointer;
       &:hover {
         background-color: ${theme.colors.cyan};
-        color: #211426;
+        color: ${theme.colors.darkPurple}
+;
       }
     }
   `}
