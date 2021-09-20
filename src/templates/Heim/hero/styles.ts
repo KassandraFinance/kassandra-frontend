@@ -73,9 +73,9 @@ export const MobileHero = styled.div`
 export const SubTitle = styled.h3`
   ${({ theme }) => css`
     font-size: ${theme.font.sizes.font24};
-    font-weight: 300;
+    font-weight: ${theme.font.weight.light};
     margin: ${theme.spacings.space24} 0 ${theme.spacings.space48} 0;
-    max-width: 100%px;
+    max-width: 100%;
     ${media.lessThan('medium')`
       font-size: ${theme.font.sizes.font18};
       /* margin: ${theme.spacings.space8} 0 ${theme.spacings.space24}  0; */
@@ -200,14 +200,14 @@ export const FloatImage = styled.div`
   `}
 `
 export const Link = styled.div`
-${({theme})=> css`
+${({ theme }) => css`
     a {
       background: linear-gradient(264.12deg, #020887 -197.65%, ${theme.colors.cyan} 272.42%);
       border: none;
-      border-radius: 6px;
-      color: #fcfcfc;
+      border-radius: ${theme.border.radius};
+      color: ${theme.colors.snow};
       text-decoration: none;
-      font-size: 20px;
+      font-size: ${theme.font.sizes.font20};
 
       height: 52px;
       padding: 12px 32px;
@@ -265,8 +265,8 @@ const modalModifiers = {
 }
 export const Modal =
   styled.div <
-  ModalProps >
-  `
+    ModalProps >
+    `
   ${({ theme, isOpen }) => css`
     position: fixed;
     /* height: max-content; */
