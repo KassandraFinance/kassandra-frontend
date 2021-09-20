@@ -36,33 +36,33 @@ const wrapperModifiers = {
     width: 100%;
   `,
 
-  disabledNoEvent: () => css`
+  disabledNoEvent: (theme: DefaultTheme) => css`
     cursor: not-allowed;
     filter: grayscale(150%);
-    color: #bdbdbd;
+    color: ${theme.colors.grayDisabled};
     outline: none;
     &:after {
       background-color: transparent;
     }
     &:before {
       background-color: transparent;
-      color: #bdbdbd;
+      color: ${theme.colors.grayDisabled};
     }
     &:hover {
       background-color: transparent;
-      color: #bdbdbd;
+      color: ${theme.colors.grayDisabled};
     }
   `,
 
   backgroundPrimary: (theme: DefaultTheme) => css`
-    background: linear-gradient(264.12deg, #e843c4 -140.16%, #020887 205.21%);
+    background: ${`linear-gradient(264.12deg, ${theme.colors.magenta} -140.16%, ${theme.colors.darkBlue} 205.21%)`};
     color: ${theme.colors.snow};
 
     &:after {
-      background: linear-gradient(264.12deg, #e843c4 -179.71%, #020887 205.21%);
+      background:${`linear-gradient(264.12deg, ${theme.colors.magenta} -179.71%, ${theme.colors.darkBlue} 205.21%)`};
     }
     &:before {
-      background-color: #020899;
+      background-color: ${theme.colors.darkBlue};
     }
   `,
 
@@ -70,10 +70,10 @@ const wrapperModifiers = {
     background: ${`linear-gradient(0deg, ${theme.colors.amber} -0.2%, ${theme.colors.magenta} 79.99%)`};
 
     &:after {
-      background: linear-gradient(0deg, #ffbf00 -0.2%, #e843c4 79.99%);
+      background: ${`linear-gradient(0deg, ${theme.colors.amber} -0.2%, ${theme.colors.magenta} 79.99%)`};
     }
     &:before {
-      background-color: #ffbf00;
+      background-color: ${theme.colors.amber};
     }
     &:hover {
       &:before {
@@ -81,10 +81,10 @@ const wrapperModifiers = {
       }
     }
   `,
-  
+
   backgroundBlack: (theme: DefaultTheme) => css`
     background: transparent;
-    border: 0.1rem solid #26dbdb;
+    border: ${`0.1rem solid ${theme.colors.cyan}`};
     color: ${theme.colors.snow};
     transition: all 300ms;
 
@@ -92,37 +92,37 @@ const wrapperModifiers = {
       background-color: transparent;
     }
     &:before {
-      background-color: #26dbdb;
+      background-color: ${theme.colors.cyan};
     }
     &:hover {
       color: ${theme.colors.darkPurple};
-      background-color: #26dbdb;
+      background-color: ${theme.colors.cyan};
     }
   `
 }
 
 export const Wrapper = styled.button<WrapperProps>`
   ${({
-    theme,
-    size,
-    fullWidth,
-    disabledNoEvent,
-    backgroundPrimary,
-    backgroundSecondary,
-    backgroundBlack
-  }) => css`
+  theme,
+  size,
+  fullWidth,
+  disabledNoEvent,
+  backgroundPrimary,
+  backgroundSecondary,
+  backgroundBlack
+}) => css`
     border: none;
     border-radius: ${theme.border.radius};
     font-family: ${theme.font.family};
     text-decoration: none;
-    
+
     display: inline-flex;
     justify-content: center;
     align-items: center;
 
     position: relative;
     padding: ${theme.spacings.space8};
-    
+
     overflow: hidden;
     cursor: pointer;
     z-index: 1;
@@ -161,6 +161,6 @@ export const Wrapper = styled.button<WrapperProps>`
     ${!!backgroundPrimary && wrapperModifiers.backgroundPrimary(theme)};
     ${!!backgroundSecondary && wrapperModifiers.backgroundSecondary(theme)};
     ${!!backgroundBlack && wrapperModifiers.backgroundBlack(theme)};
-    ${disabledNoEvent && wrapperModifiers.disabledNoEvent()};
+    ${disabledNoEvent && wrapperModifiers.disabledNoEvent(theme)};
   `}
 `
