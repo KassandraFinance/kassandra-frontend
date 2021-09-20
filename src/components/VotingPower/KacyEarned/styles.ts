@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import theme from '../../../styles/theme'
+
 
 export const KacyEarned = styled.div`
   display: flex;
@@ -6,17 +8,17 @@ export const KacyEarned = styled.div`
 
   p {
     font-size: 14px;
-    font-weight: 500;
+    font-weight: ${theme.font.weight.medium};
   }
 
   h3 {
-    font-size: 16px;
-    font-weight: 500;
+    font-size: ${theme.font.sizes.font16};
+    font-weight: ${theme.font.weight.medium};
     margin: 2px 0;
   }
 
   span {
-    font-size: 12px;
-    font-weight: 300;
+    font-size: ${theme.font.sizes.font12};
+    font-weight: ${theme.font.weight.light};
   }
 `

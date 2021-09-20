@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import theme from '../../styles/theme'
+
 
 export const BorderGradient = styled.div`
   position: relative;
@@ -23,7 +25,7 @@ export const BorderGradient = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 6px;
+    border-radius: ${theme.border.radius};
     padding: 3px;
     background: linear-gradient(0deg, #ffbf00 -0.2%, #e843c4 79.99%);
     -webkit-mask: linear-gradient(#fff 0 0) content-box,
@@ -62,7 +64,7 @@ export const InterBackground = styled.div`
 `
 
 export const IntroStaking = styled.div`
-  font-size: 18px;
+  font-size: ${theme.font.sizes.font18};
   text-align: right;
 
   display: flex;
@@ -71,7 +73,7 @@ export const IntroStaking = styled.div`
   flex: 1;
   max-height: 100%;
   @media (max-width: 540px) {
-    font-size: 16px;
+    font-size: ${theme.font.sizes.font16};
   }
 `
 
@@ -80,17 +82,17 @@ export const APR = styled.div`
   align-items: center;
 
   h4 {
-    font-size: 24px !important;
+    font-size: ${theme.font.sizes.font24} !important;
     line-height: 24px !important;
-    font-weight: 500 !important;
+    font-weight: ${theme.font.weight.medium} !important;
     margin: 0 0 4px 6px;
   }
 `
 
 export const Percentage = styled.p`
   line-height: 40px;
-  font-size: 40px;
-  font-weight: 300;
+  font-size: ${theme.font.sizes.font40};
+  font-weight: ${theme.font.weight.light};
 `
 
 export const InfosStaking = styled.div`
@@ -110,14 +112,15 @@ export const KacyStaked = styled.div`
   position: absolute;
   left: -0.1px;
   p {
-    font-size: 18px;
-    font-weight: 400;
+    font-size: ${theme.font.sizes.font18};
+    font-weight: ${theme.font.weight.normal};
+
     text-align: center;
   }
 
   span {
-    font-size: 18px;
-    font-weight: 300;
+    font-size: ${theme.font.sizes.font18};
+    font-weight: ${theme.font.weight.light};
   }
 `
 
@@ -151,22 +154,23 @@ export const Info = styled.div`
   justify-content: space-between;
 
   p {
-    font-size: 18px;
+    font-size: ${theme.font.sizes.font18};
     line-height: 18px;
     margin: 24px 0;
     @media (max-width: 540px) {
-      font-size: 16px;
+      font-size: ${theme.font.sizes.font16};
       line-height: 16px;
     }
   }
 
   p:last-child {
-    font-weight: 300;
+    font-weight: ${theme.font.weight.light};
   }
 
   span {
-    font-weight: 400;
-    font-size: 16px;
+    font-weight: ${theme.font.weight.normal};
+
+    font-size: ${theme.font.sizes.font16};
     line-height: 16px;
     margin-bottom: 8px;
     display: block;
@@ -177,7 +181,7 @@ export const Info = styled.div`
   }
 
   span:last-child {
-    font-weight: 300;
+    font-weight: ${theme.font.weight.light};
   }
 `
 
@@ -186,13 +190,13 @@ export const Stake = styled.div`
   flex-direction: column;
   align-items: flex-end;
 
-  font-weight: 300;
+  font-weight: ${theme.font.weight.light};
   p {
-    font-size: 18px;
+    font-size: ${theme.font.sizes.font18};
     line-height: 18px;
     margin: 24px 0 4px;
     @media (max-width: 540px) {
-      font-size: 16px;
+      font-size: ${theme.font.sizes.font16};
       line-height: 16px;
     }
   }
@@ -216,7 +220,7 @@ export const ButtonContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
-  margin: 16px auto 0;
+  margin: ${theme.spacings.space16} auto 0;
   width: 100%;
 `
 
@@ -226,13 +230,14 @@ interface IButtonProps {
 
 export const Button =
   styled.button <
-  IButtonProps >
-  `
+    IButtonProps >
+    `
   background: linear-gradient(87.48deg, #FFBF00 -70.27%, #E843C4 154.78%);
   border: none;
-  border-radius: 6px;
-  font-size: 18px;
-  font-weight: 400;
+  border-radius: ${theme.border.radius};
+  font-size: ${theme.font.sizes.font18};
+  font-weight: ${theme.font.weight.normal};
+
 
   display: flex;
   align-items: center;
@@ -251,12 +256,12 @@ export const Button =
   }
 
   ${props =>
-    props.buttonRequest && {
-      background: 'transparent',
-      border: '1px solid #26DBDB',
-      color: '#fff',
-      transitionDuration: '300ms'
-    }}
+      props.buttonRequest && {
+        background: 'transparent',
+        border: '1px solid #26DBDB',
+        color: '#fff',
+        transitionDuration: '300ms'
+      }}
   &:hover {
     background-color: ${props => (props.buttonRequest ? '#26DBDB' : null)};
     color: ${props => (props.buttonRequest ? '#211426' : null)};
@@ -293,7 +298,7 @@ export const StakeContainer = styled.div`
   align-items: center;
 
   p {
-    font-size: 18px;
+    font-size: ${theme.font.sizes.font18};
     margin-top: 8px;
   }
 `
@@ -301,10 +306,11 @@ export const StakeContainer = styled.div`
 export const ButtonRequestStake = styled.button`
   background: transparent;
   border: 1px solid #26DBDB;
-  border-radius: 6px;
+  border-radius: ${theme.border.radius};
   color: #fff;
-  font-size: 20px;
-  font-weight: 400;
+  font-size: ${theme.font.sizes.font20};
+  font-weight: ${theme.font.weight.normal};
+
 
   display: flex;
   align-items: center;
