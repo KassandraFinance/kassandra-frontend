@@ -21,11 +21,16 @@ const wrapperModifiers = {
     height: 4rem;
     font-size: ${theme.font.sizes.font16};
     padding: ${theme.spacings.space16} ${theme.spacings.space32};
+
   `,
   large: (theme: DefaultTheme) => css`
     height: 5rem;
-    font-size: ${theme.font.sizes.font18};
+    font-size: ${theme.font.sizes.font20};
     padding: ${theme.spacings.space16} ${theme.spacings.space32};
+    @media (max-width: 600px) {
+      font-size: ${theme.font.sizes.font16};
+      height: 4.8rem;
+    }
   `,
   huge: (theme: DefaultTheme) => css`
     height: 4.4rem;
@@ -67,10 +72,10 @@ const wrapperModifiers = {
   `,
 
   backgroundSecondary: (theme: DefaultTheme) => css`
-    background: ${`linear-gradient(0deg, ${theme.colors.amber} -0.2%, ${theme.colors.magenta} 79.99%)`};
+    background: ${`linear-gradient(87.48deg, ${theme.colors.amber} -70.27%,  ${theme.colors.magenta} 154.78%)`};
 
     &:after {
-      background: ${`linear-gradient(0deg, ${theme.colors.amber} -0.2%, ${theme.colors.magenta} 79.99%)`};
+      background: ${`linear-gradient(87.48deg, ${theme.colors.amber} -70.27%,  ${theme.colors.magenta} 154.78%)`};
     }
     &:before {
       background-color: ${theme.colors.amber};
