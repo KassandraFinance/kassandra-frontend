@@ -25,6 +25,7 @@ const GlobalStyles: GlobalStyleComponent<
     font-family: 'Rubik';
     font-style: normal;
     font-weight: 400;
+
     src: local(''),
     url('../fonts/rubik-v14-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
   }
