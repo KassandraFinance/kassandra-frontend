@@ -98,7 +98,6 @@ export const Content = styled.div`
 `
 
 export const ButtonContainer = styled.div`
-  ${({ theme }) => css`
     margin-top: 16px;
     button {
       background-color: transparent;
@@ -118,5 +117,4 @@ export const ButtonContainer = styled.div`
 ;
       }
     }
-  `}
 `
