@@ -11,7 +11,7 @@ interface IHeroProps {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const Hero = ({ setModalOpen, setModalSignupOpen } : IHeroProps)  => {
+export const Hero = ({ setModalOpen, setModalSignupOpen }: IHeroProps) => {
   const { trackEvent } = useMatomo();
 
   function clickMatomoEvent(action: string, name: string) {
@@ -39,14 +39,13 @@ export const Hero = ({ setModalOpen, setModalSignupOpen } : IHeroProps)  => {
                 <Button
                   backgroundPrimary
                   size="large"
+                  text='Get early access'
                   onClick={() => {
-                      setModalSignupOpen(true)
-                      clickMatomoEvent("click-to-subscribe", "hero")
-                    }
+                    setModalSignupOpen(true)
+                    clickMatomoEvent("click-to-subscribe", "hero")
                   }
-                >
-                  Get early access
-                </Button>
+                  }
+                />
                 <Button
                   size="large"
                   backgroundBlack
@@ -54,7 +53,7 @@ export const Hero = ({ setModalOpen, setModalSignupOpen } : IHeroProps)  => {
                   onClick={() => {
                     setModalOpen(true)
                     clickMatomoEvent("click-open-modal", "modal-social")
-                    }
+                  }
                   }
                 />
               </S.ButtonWrapper>
@@ -81,17 +80,16 @@ export const Hero = ({ setModalOpen, setModalSignupOpen } : IHeroProps)  => {
               <Button
                 backgroundPrimary
                 size="huge"
+                text='Get early access'
                 onClick={() => setModalSignupOpen(true)}
-              >
-                Get early access
-              </Button>
+              />
               <Button
                 size="medium"
                 backgroundBlack
+                text='Join the community'
+
                 onClick={() => setModalOpen(true)}
-              >
-                Join the community
-              </Button>
+              />
             </S.ButtonWrapper>
           </S.MobileHero>
         </MediaMatch>

@@ -25,49 +25,48 @@ export const HowItWorks = ({ setModalSignupOpen, setModalSuccessOpen }: IHowItWo
 
   return (
     <>
-    <S.SpotLeft>
-      <div />
-    </S.SpotLeft>
-    <S.SpotRight>
-      <div />
-    </S.SpotRight>
-    <S.Container>
-      <S.DesktopContainer>
-        <S.ImageDesktop>
-          <img src="./assets/crypto-funnel.svg" alt="" />
-        </S.ImageDesktop>
-        <S.SignupWrapper>
-          <img src="./assets/HeimIcon.svg" alt="" />
-          <SingUp setModalSuccessOpen={setModalSuccessOpen} />
-        </S.SignupWrapper>
-      </S.DesktopContainer>
-      <S.Text>
-        Delegate the token discovery to a decentralized organization with skin
-        in the game, and <strong>automate your money</strong> managment to a
-        data-driven backtested model
-      </S.Text>
-      <S.MobileContainer>
-        <S.ImageMobile>
-          <img src="./assets/crypto-funnelNoText.svg" alt="" />
-        </S.ImageMobile>
-        <S.MobileSignUp>
-          <img src="./assets/HeimIcon.svg" alt="" />
-          <Button
-            backgroundPrimary
-            size="medium"
-            onClick={() => {
+      <S.SpotLeft>
+        <div />
+      </S.SpotLeft>
+      <S.SpotRight>
+        <div />
+      </S.SpotRight>
+      <S.Container>
+        <S.DesktopContainer>
+          <S.ImageDesktop>
+            <img src="./assets/crypto-funnel.svg" alt="" />
+          </S.ImageDesktop>
+          <S.SignupWrapper>
+            <img src="./assets/HeimIcon.svg" alt="" />
+            <SingUp setModalSuccessOpen={setModalSuccessOpen} />
+          </S.SignupWrapper>
+        </S.DesktopContainer>
+        <S.Text>
+          Delegate the token discovery to a decentralized organization with skin
+          in the game, and <strong>automate your money</strong> managment to a
+          data-driven backtested model
+        </S.Text>
+        <S.MobileContainer>
+          <S.ImageMobile>
+            <img src="./assets/crypto-funnelNoText.svg" alt="" />
+          </S.ImageMobile>
+          <S.MobileSignUp>
+            <img src="./assets/HeimIcon.svg" alt="" />
+            <Button
+              backgroundPrimary
+              size="medium"
+              text='Get early access'
+              onClick={() => {
                 setModalSignupOpen(true)
                 clickMatomoEvent("click-to-subscribe", "how-it-works")
               }
-            } 
-            fullWidth
-          >
-            Get early access
-          </Button>
-        </S.MobileSignUp>
+              }
+              fullWidth
+            />
+          </S.MobileSignUp>
         </S.MobileContainer>
-    </S.Container>
-  </>
+      </S.Container>
+    </>
   )
 }
 

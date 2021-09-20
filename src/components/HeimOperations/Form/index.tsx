@@ -572,9 +572,9 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
               {swapOutPrice < new BigNumber(0)
                 ? '...'
                 : `1 ${poolTokenDetails[tokenInIndex].symbol} = ${BNtoDecimal(
-                    swapOutPrice,
-                    poolTokenDetails[tokenOutIndex]?.decimals
-                  )} ${poolTokenDetails[tokenOutIndex]?.symbol}`}
+                  swapOutPrice,
+                  poolTokenDetails[tokenOutIndex]?.decimals
+                )} ${poolTokenDetails[tokenOutIndex]?.symbol}`}
             </SpanLight>
           </ExchangeRate>
         </>
@@ -583,15 +583,15 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
         <Button
           backgroundSecondary
           fullWidth
-          type="submit">
-          {isApproved[tokenInIndex] ? title : 'Approve'}
-        </Button>
+          type="submit"
+          text={isApproved[tokenInIndex] ? title : 'Approve'}
+        />
       ) : (
         <Button
           backgroundSecondary
-          fullWidth type="button" onClick={connect}>
-          Connect Wallet
-        </Button>
+          fullWidth type="button" onClick={connect}
+          text='Connect Wallet'
+        />
       )}
     </FormContainer>
   )

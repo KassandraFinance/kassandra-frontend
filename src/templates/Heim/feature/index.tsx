@@ -97,14 +97,13 @@ export const Feature = ({ modalSignupOpen, setModalSignupOpen }: IFeatureProps) 
             <Button
               backgroundPrimary
               size="large"
+              text='Get early access'
               onClick={() => {
-                  setModalSignupOpen(true)
-                  clickMatomoEvent("click-to-subscribe", "chart")
-                }
+                setModalSignupOpen(true)
+                clickMatomoEvent("click-to-subscribe", "chart")
               }
-            >
-              Get early access
-            </Button>
+              }
+            />
           </MediaMatch>
         </S.ButtonWrapper>
         <S.ButtonWrapper>
@@ -113,14 +112,13 @@ export const Feature = ({ modalSignupOpen, setModalSignupOpen }: IFeatureProps) 
             <Button
               backgroundPrimary
               size="medium"
+              text='Get early access'
               onClick={() => {
-                  setModalSignupOpen(true)
-                  clickMatomoEvent("click-to-subscribe", "chart")
-                }
+                setModalSignupOpen(true)
+                clickMatomoEvent("click-to-subscribe", "chart")
               }
-            >
-              Get early access
-            </Button>
+              }
+            />
           </MediaMatch>
         </S.ButtonWrapper>
         <S.Link>

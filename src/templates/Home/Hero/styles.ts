@@ -146,9 +146,7 @@ export const ButtonContainer = styled.div`
       height: 52px;
       padding: ${theme.spacings.space16} 32px;
       cursor: pointer;
-      &:hover {
-        background: #020887;
-      }
+
       @media (max-width: 600px) {
         font-size: ${theme.font.sizes.font16};
         line-height: 16px;

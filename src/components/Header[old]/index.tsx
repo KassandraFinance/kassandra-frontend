@@ -49,8 +49,8 @@ const Header = () => {
           <LinkInstallMetaMask
             href="https://metamask.io/download.html"
             target="_blank"
-            >
-              Install MetaMask!
+          >
+            Install MetaMask!
           </LinkInstallMetaMask>
         }
       </Nav>

@@ -30,10 +30,9 @@ const Hero = () => {
               <Button
                 backgroundPrimary
                 size='large'
+                text='View the $HEIM Index'
                 onClick={() => clickMatomoEvent("click-to-heim", "heim-hero")}
-              >
-                View the $HEIM Index
-              </Button>
+              />
             </Link>
             <Button
               size='large'
@@ -59,10 +58,11 @@ const Hero = () => {
         <S.ButtonContainer>
           <Button
             backgroundPrimary
+            text='View the $HEIM Index'
             size='large'
             onClick={() => clickMatomoEvent("click-to-heim", "heim-hero")}
           >
-            View the $HEIM Index
+
           </Button>
           <Button
             size='large'

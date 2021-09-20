@@ -38,7 +38,7 @@ export const ModalSignUp = ({
   modalSignupOpen,
   setModalSignupOpen,
   setModalSuccessOpen,
-  }: IModalSignUp) => {
+}: IModalSignUp) => {
 
   function handleCloseModal() {
     setModalSignupOpen(false)
@@ -59,31 +59,31 @@ export const ModalSignUp = ({
 
   return (
     <>
-      <Backdrop onClick={handleCloseModal} style={{display: modalSignupOpen ? 'block' : 'none'}} />
+      <Backdrop onClick={handleCloseModal} style={{ display: modalSignupOpen ? 'block' : 'none' }} />
       <BorderGradient
         modalOpen={modalSignupOpen}
       >
         <BackgroundBlack>
           <WrapperClose>
-            <button type="button" onClick={() => setModalSignupOpen(false)}><img src="assets/close.svg" alt=""/> </button>
+            <button type="button" onClick={() => setModalSignupOpen(false)}><img src="assets/close.svg" alt="" /> </button>
           </WrapperClose>
           <InterBackground >
-            <img src='./assets/logo-header.svg' alt=''/>
+            <img src='./assets/logo-header.svg' alt='' />
           </InterBackground>
           <Content>
             <ModalText>
-                Subscribe to HEIM Social Index updates and launch
+              Subscribe to HEIM Social Index updates and launch
             </ModalText>
             <WrapperInput>
-            <iframe title="a" name="hiddenFrame" width="0" height="0" style={{display: 'none'}} />
+              <iframe title="a" name="hiddenFrame" width="0" height="0" style={{ display: 'none' }} />
               <form
                 action="https://heimdall.land/subscribe/heim"
                 method="POST"
                 target="hiddenFrame"
                 onSubmit={() => {
                   setTimeout(() => {
-                    setFormState({name:'', email: ''})
-                  }, 2000); ;
+                    setFormState({ name: '', email: '' })
+                  }, 2000);;
                   handleCloseModal();
                   if (setModalSuccessOpen) setModalSuccessOpen(true);
                 }}
@@ -116,29 +116,32 @@ export const ModalSignUp = ({
                   }
                 />
 
-              <MediaMatch greaterThan='small' >
-                <WrapperButton>
-                  <Button   backgroundPrimary size="huge" type='submit' disabledNoEvent={!validForm(formState)} >
-                    Sign me up!
-                  </Button>
-                </WrapperButton>
-              </MediaMatch>
-              <MediaMatch lessThan='small' >
-                <WrapperButton>
-                  <Button 
-                    backgroundPrimary 
-                    size="medium" 
-                    type='submit' 
-                    disabledNoEvent={!validForm(formState)}
-                  >
-                    Sign me up!
-                  </Button>
-                </WrapperButton>
-              </MediaMatch>
+                <MediaMatch greaterThan='small' >
+                  <WrapperButton>
+                    <Button
+                      backgroundPrimary
+                      size="huge"
+                      text='Sign me up!'
+                      type='submit'
+                      disabledNoEvent={!validForm(formState)}
+                    />
+                  </WrapperButton>
+                </MediaMatch>
+                <MediaMatch lessThan='small' >
+                  <WrapperButton>
+                    <Button
+                      backgroundPrimary
+                      size="huge"
+                      text='Sign me up!'
+                      type='submit'
+                      disabledNoEvent={!validForm(formState)}
+                    />
+                  </WrapperButton>
+                </MediaMatch>
               </form>
             </WrapperInput>
           </Content>
-          </BackgroundBlack>
+        </BackgroundBlack>
       </BorderGradient>
     </>
   )

@@ -42,7 +42,7 @@ const Button: React.ForwardRefRenderFunction<S.WrapperProps, ButtonProps> = (
 
     {...props}
   >
-    {text || children}
+    {text}
   </S.Wrapper>
 )
 
