@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
+import theme from '../../styles/theme'
 
 export const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.7);
@@ -22,7 +23,7 @@ export const BorderGradient = styled.div<IBorderGradientProps>`
   display: ${props => (props.modalOpen ? 'block' : 'none')};
 
   background: #2CE878;
-  border-radius: 6px;
+  border-radius: ${theme.border.radius};
 
   padding: 2px;
 
