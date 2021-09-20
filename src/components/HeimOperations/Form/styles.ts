@@ -3,25 +3,30 @@ import styled, { css } from "styled-components";
 // ========== FORM ==========
 
 export const FormContainer = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 16px;
-  height: 100%;
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 16px;
+    height: 100%;
+  `}
 `
 
 export const Button = styled.button`
-  background: linear-gradient(87.48deg, #FFBF00 -70.27%, #E843C4 154.78%);
-  border: none;
-  border-radius: 6px;
-  color: #211426;
-  font-size: 20px;
+  ${({ theme }) => css`
+    background: linear-gradient(87.48deg, #FFBF00 -70.27%, #E843C4 154.78%);
+    border: none;
+    border-radius: ${theme.border.radius};
+    color: ${theme.colors.darkPurple}
+;
+    font-size: ${theme.font.sizes.font20};
 
-  width: 100%;
-  height: 44px;
-  margin: 16px 0;
-  outline: none;
-  cursor: pointer;
+    width: 100%;
+    height: 44px;
+    margin: ${theme.spacings.space16} 0;
+    outline: none;
+    cursor: pointer;
+  `}
 `
 
 // ========== DEFAULT INPUT ALL ==========
@@ -31,72 +36,74 @@ interface IPayWithProps {
 }
 
 export const PayWith = styled.div<IPayWithProps>`
-  text-align: left;
-  position: relative;
-  width: 190px;
-  height: ${ props => props.inputHeim ? '100px' : '94px' };
+    text-align: left;
+    position: relative;
+    width: 190px;
+    height: ${props => props.inputHeim ? '100px' : '94px'};
 
-  @media (max-width: 504px) {
-    width: 160px;
-  }
-  @media (max-width: 430px) {
-    width: 130px;
-  }
-`
+    @media (max-width: 504px) {
+      width: 160px;
+    }
+    @media (max-width: 430px) {
+      width: 130px;
+    }
+  `
 
 interface IAmountProps {
   inputHeim?: boolean
 }
 
 export const Amount = styled.div<IAmountProps>`
-  text-align: right;
-  position: relative;
-  width: 190px;
-  height: ${ props => props.inputHeim ? '100px' : '94px' };
-  padding-right: 12px;
+    text-align: right;
+    position: relative;
+    width: 190px;
+    height: ${props => props.inputHeim ? '100px' : '94px'};
+    padding-right: 12px;
 
-  @media (max-width: 504px) {
-    width: 160px;
-  }
-  @media (max-width: 430px) {
-    width: 130px;
-  }
+    @media (max-width: 504px) {
+      width: 160px;
+    }
+    @media (max-width: 430px) {
+      width: 130px;
+    }
 `
 
 export const Input = styled.input`
-  background-color: transparent;
-  border: none;
-  color: #fff;
-  font-size: 24px;
-
-  text-align: right;
-  width: 100%;
-  margin: 8px 0;
-
-  outline: none;
-
-  @media (max-width: 380px) {
-    font-size: 22px;
-  }
-  @media (max-width: 350px) {
-    font-size: 20px;
-  }
-
-  &::placeholder {
+  ${({ theme }) => css`
+    background-color: transparent;
+    border: none;
     color: #fff;
-  }
+    font-size: ${theme.font.sizes.font24};
 
-  &[type=number]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-  }
-  &[type=number] {
-    -moz-appearance: textfield;
-    appearance: textfield;
-  }
+    text-align: right;
+    width: 100 %;
+    margin: 8px 0;
+
+    outline: none;
+
+    @media(max-width: 380px) {
+      font-size: 22px;
+    }
+    @media(max-width: 350px) {
+      font-size: ${theme.font.sizes.font20};
+    }
+
+      &::placeholder {
+      color: #fff;
+    }
+
+      & [type = number]:: -webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+      & [type = number] {
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+  `}
 `
 
 export const Line = styled.div`
-  ${({theme})=> css`
+  ${({ theme }) => css`
     content: '';
     display: block;
     width: 190px;
@@ -115,47 +122,54 @@ export const Line = styled.div`
 `
 
 export const Span = styled.span`
-  font-size: 14px;
-  height: 17px;
-  padding-left: 12px;
-  @media (max-width: 380px) {
-    font-size: 13px;
-  }
-  @media (max-width: 350px) {
-    font-size: 10.7px;
+  ${({ theme }) => css`
+    font-size: 14px;
+    height: 17px;
     padding-left: 12px;
-  }
+    @media(max-width: 380px) {
+      font-size: 13px;
+    }
+    @media(max-width: 350px) {
+      font-size: 10.7px;
+      padding-left: 12px;
+    }
+  `}
 `
 
 export const SpanLight = styled.span`
+ ${({ theme }) => css`
   font-size: 14px;
   height: 17px;
-  font-weight: 300;
+  font-weight: ${theme.font.weight.light};
   letter-spacing: .3px;
   padding-left: 12px;
-  @media (max-width: 380px) {
+  @media(max-width: 380px) {
     font-size: 13px;
   }
-  @media (max-width: 350px) {
+  @media(max-width: 350px) {
     font-size: 10.7px;
   }
+`}
 `
 
 export const Symbol = styled.h3`
-  font-size: 24px;
-  font-weight: 400;
-  margin: 8px 0;
-  padding-left: 12px;
-  @media (max-width: 380px) {
-    font-size: 22px;
-  }
-  @media (max-width: 350px) {
-    font-size: 20px;
-  }
+  ${({ theme }) => css`
+    font-size: ${theme.font.sizes.font24};
+    font-weight: ${theme.font.weight.normal};
+
+    margin: 8px 0;
+    padding-left: 12px;
+    @media(max-width: 380px) {
+      font-size: 22px;
+    }
+    @media(max-width: 350px) {
+      font-size: ${theme.font.sizes.font20};
+    }
+  `}
 `
 
 export const ImgArrowLong = styled.img`
-  margin: 76px auto 0 auto;
+margin: 76px auto 0 auto;
 `
 
 interface IButtonMax {
@@ -166,8 +180,8 @@ export const ButtonMax = styled.button<IButtonMax>`
 
     border: 1px solid #26DBDB;
     border-radius: 16px;
-    background: ${ props => props.isMax ? '#26DBDB' : 'transparent' };
-    color: ${ props => props.isMax ? '#000' : '#fff' };
+    background: ${props => props.isMax ? '#26DBDB' : 'transparent'};
+    color: ${props => props.isMax ? '#000' : '#fff'};
     font-size: 12px;
     line-height: 12px;
     font-weight: 300;
@@ -179,54 +193,54 @@ export const ButtonMax = styled.button<IButtonMax>`
 
     cursor: pointer;
     transition: 100ms;
-    &:hover {
+        &:hover {
       background: #26DBDB;
       color: #000;
     }
 `
 
 
-  // ========== INPUT TOKENS ==========
+// ========== INPUT TOKENS ==========
 
 export const InputTokensContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 60px 1fr;
-  justify-content: space-around;
-  align-items: flex-start;
+display: grid;
+grid-template-columns: 1fr 60px 1fr;
+justify-content: space-around;
+align-items: flex-start;
 
-  width: 100%;
-  height: 94px;
-  margin-top: 8px;
-  @media (max-width: 504px) {
-    grid-template-columns: 1fr 60px 1fr;
-  }
-  @media (max-width: 430px) {
-    grid-template-columns: 1fr 40px 1fr;
-  }
+width: 100%;
+height: 94px;
+margin-top: 8px;
+@media(max-width: 504px) {
+  grid-template-columns: 1fr 60px 1fr;
+}
+@media(max-width: 430px) {
+  grid-template-columns: 1fr 40px 1fr;
+}
 `
 
 export const Select = styled.select`
-  background-color: transparent;
-  border: none;
+background-color: transparent;
+border: none;
+color: #fff;
+display: block;
+font-size: 24px;
+text-transform: uppercase;
+
+margin: 5px 0;
+padding-right: 4px;
+padding-left: 8px;
+outline: none;
+  option {
+  background-color: #030102;
   color: #fff;
-  display: block;
+  font-family: 'Rubik', sans-serif;
   font-size: 24px;
   text-transform: uppercase;
+  letter-spacing: .3px;
 
-  margin: 5px 0;
-  padding-right: 4px;
-  padding-left: 8px;
-  outline: none;
-  option {
-    background-color: #030102;
-    color: #fff;
-    font-family: 'Rubik', sans-serif;
-    font-size: 24px;
-    text-transform: uppercase;
-    letter-spacing: .3px;
-
-    height: 40px;
-  }
+  height: 40px;
+}
 `
 
 
@@ -237,76 +251,76 @@ interface IInputHeimContainerProps {
 }
 
 export const InputHeimContainer = styled.div<IInputHeimContainerProps>`
-  border: 2px solid #FFBF00;
-  box-shadow: 1px 1px 5px #FFBF00;
+border: 2px solid #FFBF00;
+box-shadow: 1px 1px 5px #FFBF00;
 
-  border-radius: 6px;
-  display: grid;
-  grid-template-columns: 190px 60px 190px;
-  justify-content: space-around;
-  align-items: center;
+border-radius: 6px;
+display: grid;
+grid-template-columns: 190px 60px 190px;
+justify-content: space-around;
+align-items: center;
 
-  width: 100%;
-  height: ${ props => props.inputHeim ? '102px' : '94px' };
-  padding: 0;
-  @media (max-width: 504px) {
-    grid-template-columns: 160px 60px 160px;
-  }
-  @media (max-width: 430px) {
-    grid-template-columns: 130px 40px 130px;
-  }
+width: 100%;
+height: ${props => props.inputHeim ? '102px' : '94px'};
+padding: 0;
+@media(max-width: 504px) {
+  grid-template-columns: 160px 60px 160px;
+}
+@media(max-width: 430px) {
+  grid-template-columns: 130px 40px 130px;
+}
 `
 
 // ========== INPUT WITHDRAW ==========
 
 
 export const InputWithdrawContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-content: space-between;
+display: grid;
+grid-template-columns: 1fr 1fr;
+justify-content: space-between;
 
-  width: 100%;
-  height: 94px;
-  margin-top: 16px;
-  position: relative;
+width: 100%;
+height: 94px;
+margin-top: 16px;
+position: relative;
 `
 
 export const Info = styled.div`
-  width: 100%;
-  height: 100%;
+width: 100%;
+height: 100%;
 
-  position: relative;
+position: relative;
 `
 
 
 // ========== INPUT DEFAULT ==========
 
 export const InputDefaultContainer = styled.div`
-  display: grid;
-  grid-template-columns: auto 1fr;
-  justify-content: space-between;
+display: grid;
+grid-template-columns: auto 1fr;
+justify-content: space-between;
 
-  width: 100%;
-  height: 94px;
-  margin-top: 16px;
-  position: relative;
+width: 100%;
+height: 94px;
+margin-top: 16px;
+position: relative;
 `
 
 
 export const AmountDefault = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  text-align: right;
-  position: relative;
-  width: 100%;
-  height: 94px;
+display: flex;
+flex-direction: column;
+align-items: flex-end;
+text-align: right;
+position: relative;
+width: 100%;
+height: 94px;
 
-  padding-right: 12px;
+padding-right: 12px;
 `
 
 export const LineDefault = styled.div`
-  ${({theme})=> css`
+  ${({ theme }) => css`
     content: '';
     display: block;
     min-width: 100%;
@@ -323,9 +337,9 @@ export const LineDefault = styled.div`
 `
 
 export const ExchangeRate = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin-top: 16px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+width: 100%;
+margin-top: 16px;
 `
