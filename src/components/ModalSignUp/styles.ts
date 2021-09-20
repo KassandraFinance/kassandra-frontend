@@ -1,7 +1,5 @@
-import styled, {css} from 'styled-components'
-import media from "styled-media-query";
-import { Close } from "../ModalRequestUnstake/styles";
-
+import styled, { css } from 'styled-components'
+import theme from '../../styles/theme'
 
 export const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.7);
@@ -20,10 +18,10 @@ interface IBorderGradientProps {
 }
 
 export const BorderGradient = styled.div<IBorderGradientProps>`
-  display: ${(props) => props.modalOpen ? "block" : "none" };
+  display: ${(props) => props.modalOpen ? "block" : "none"};
 
   background: linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%);
-  border-radius: 6px;
+  border-radius: ${theme.border.radius};
 
   padding: 2px;
   width: 528px;
@@ -51,8 +49,8 @@ export const BorderGradient = styled.div<IBorderGradientProps>`
 `
 
 export const BackgroundBlack = styled.div`
-  background: #211426;
-  color: #FCFCFC;
+  background: ${theme.colors.darkPurple};
+  color: ${theme.colors.snow};
   width: 100%;
   height: 100%;
   padding-top:0rem;
@@ -60,7 +58,8 @@ export const BackgroundBlack = styled.div`
 
 
 export const InterBackground = styled.div`
-  background: #211426;
+  background: ${theme.colors.darkPurple}
+;
   margin-bottom: 4rem;
   width: 100%;
   justify-content: center;
@@ -95,7 +94,7 @@ export const InterBackground = styled.div`
 
 
 export const ModalText = styled.h1`
-${({theme})=> css`
+${({ theme }) => css`
     display: block;
     position:relative;
 
@@ -118,14 +117,15 @@ ${({theme})=> css`
 `}
 `
 export const WrapperClose = styled.h1`
-${({theme})=> css`
+${({ theme }) => css`
     display: flex;
     justify-content: flex-end;
     width: 100%;
     height: 4.6rem;
     padding-top: 2.2rem;
     padding-right: 2.4rem;
-    background: #211426;
+    background: ${theme.colors.darkPurple}
+;
     /* margin-bottom: 1.6rem; */
     /* margin-right: -2rem; */
 
