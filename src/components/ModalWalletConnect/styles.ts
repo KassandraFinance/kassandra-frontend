@@ -23,9 +23,9 @@ export const BorderGradient = styled.div<IBorderGradientProps>`
   display: ${props => (props.modalOpen ? 'block' : 'none')};
 
   background: linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%);
-  border-radius: 6px;
+  border-radius: ${theme.border.radius};
 
-  border-radius: 6px;
+  border-radius: ${theme.border.radius};
 
   padding: 2px;
   width: 411px;
@@ -120,7 +120,7 @@ export const WrapperIcons = styled.button`
       padding: 0.2rem;
     }
     span {
-      color: #fcfcfc;
+      color: ${theme.colors.snow};
       font-size: 1.6rem;
       font-weight: ${theme.font.weight.normal};
       font-family: 'Rubik';
