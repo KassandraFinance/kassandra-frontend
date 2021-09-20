@@ -1,18 +1,23 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import theme from '../../styles/theme'
+
 
 export const IndexDetailsContainer = styled.section`
-  width: 100%;
+ ${({ theme }) => css`
+    width: 100%;
 
-  h1 {
-    font-size: 32px;
-    font-weight: 400;
-  }
+    h1 {
+      font-size: ${theme.font.sizes.font32};
+      font-weight: ${theme.font.weight.normal};
 
-  .colour {
-    width: 30px;
-    height: 30px;
-    border-radius: 8px;
-  }
+    }
+
+    .colour {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+    }
+  `}
 `
 
 export const Table = styled.table`
@@ -40,27 +45,33 @@ export const Tr = styled.tr`
 `
 
 export const Th = styled.th`
-  font-size: 16px;
-  letter-spacing: .5px;
-  font-weight: 400;
-  @media (max-width: 660px) {
-    font-size: 15px;
-  }
+    ${({ theme }) => css`
+    font-size: ${theme.font.sizes.font16};
+    font-weight: ${theme.font.weight.normal};
+    letter-spacing: .5px;
+    @media (max-width: 660px) {
+      font-size: 15px;
+    }
+  `}
 `
 
 export const Td = styled.td`
-  font-size: 24px;
-  font-weight: 300;
-  letter-spacing: .5px;
-  @media (max-width: 660px) {
-    font-size: 21px;
-  }
+  ${({ theme }) => css`
+    font-size: ${theme.font.sizes.font24};
+    font-weight: ${theme.font.weight.light};
+    letter-spacing: .5px;
+    @media (max-width: 660px) {
+      font-size: 21px;
+    }
+  `}
 `
 
 export const Colour = styled.td`
-  background-color: ${theme.colors.cyan};
-  border-radius: 8px;
+  ${({ theme }) => css`
+    background-color: ${theme.colors.cyan};
+    border-radius: 8px;
 
-  width: 30px;
-  height: 30px;
+    width: 30px;
+    height: 30px;
+  `}
 `
