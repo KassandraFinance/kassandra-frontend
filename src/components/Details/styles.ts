@@ -35,7 +35,7 @@ export const Info = styled.div`
         content: '';
         background-color: ${theme.colors.cyan};
         width: 100%;
-        height: ${theme.spacings.space8};
+        height: 0.1px;
         box-shadow: 1px 1px 4px ${theme.colors.cyan};
       }
     }
