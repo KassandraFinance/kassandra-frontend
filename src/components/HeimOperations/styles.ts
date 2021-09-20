@@ -15,7 +15,7 @@ export const SelectOperator = styled.div`
 `
 
 export const Input = styled.input`
-  ${({theme})=> css`
+  ${({ theme }) => css`
     display: none;
     &[type="radio"] + label {
       border: 1px solid ${theme.colors.cyan};
@@ -31,11 +31,11 @@ export const Input = styled.input`
 `
 
 export const Label = styled.label`
-  ${({theme})=> css`
+  ${({ theme }) => css`
     border: 1px solid ${theme.colors.cyan};
-    border-radius: 6px;
+    border-radius: ${theme.border.radius};
     color: #fff;
-    font-size: 20px;
+    font-size: ${theme.font.sizes.font20};
     text-align: center;
     text-transform: capitalize;
 
@@ -50,7 +50,7 @@ export const Label = styled.label`
       padding: 10px 18px;
     }
     @media (max-width: 330px) {
-      font-size: 12px;
+      font-size: ${theme.font.sizes.font12};
       padding: 8px 14px;
     }
   `}
