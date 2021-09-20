@@ -15,7 +15,7 @@ export const Wrapper = styled.menu<IWrapperProps>`
     align-items: center;
     justify-content: space-between;
     padding: ${theme.spacings.space24};
-    padding: 32px;
+    padding: ${theme.spacings.space32};
     position: relative;
     height: 110px;
     z-index: ${theme.layers.menu};
@@ -195,12 +195,12 @@ export const MenuFull = styled.nav <MenuFullProps >`
   `}
 `
 export const LinkInstallMetaMask = styled.a`
-  ${({theme})=> css`
+  ${({ theme }) => css`
     background-color: transparent;
     border: 1px solid ${theme.colors.cyan};
     border-radius: 8px;
     color: ${theme.colors.cyan} !important;
-    font-size: 16px;
+    font-size: ${theme.font.sizes.font16};
     text-transform: none;
     text-align: center;
 
@@ -210,24 +210,26 @@ export const LinkInstallMetaMask = styled.a`
     cursor: pointer;
     &:hover {
       background-color: ${theme.colors.cyan};
-      color: #211426 !important;
+      color: ${theme.colors.darkPurple}
+ !important;
     }
   `}
 `
 export const ButtonConnectWallet = styled.button`
-  ${({theme})=> css`
+  ${({ theme }) => css`
     background-color: transparent;
     border: 1px solid ${theme.colors.cyan};
     border-radius: 8px;
     color: ${theme.colors.cyan};
-    font-size: 16px;
+    font-size: ${theme.font.sizes.font16};
     width: 186px;
     height: 48px;
 
     cursor: pointer;
     &:hover {
       background-color: ${theme.colors.cyan};
-      color: #211426;
+      color: ${theme.colors.darkPurple}
+;
     }
   `}
 `
