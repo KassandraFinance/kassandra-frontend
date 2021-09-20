@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import styled, { css } from 'styled-components'
+import theme from '../../styles/theme'
 import media from 'styled-media-query'
 
 export const Backdrop = styled.div`
@@ -22,7 +23,7 @@ export const BorderGradient = styled.div<IBorderGradientProps>`
   display: ${props => (props.modalOpen ? 'block' : 'none')};
 
   background: linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%) ;
-  border-radius: 6px;
+  border-radius: ${theme.border.radius};
 
   padding: 2px;
 
@@ -55,7 +56,7 @@ export const BackgroundBlack = styled.div`
 `
 
 export const InterBackground = styled.div`
-  ${({theme}) => css`
+  ${({ theme }) => css`
   background: black;
   border: 0.1rem solid #e843c4;
 
