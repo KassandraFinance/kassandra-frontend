@@ -18,6 +18,7 @@ export default {
       font18: '1.8rem',
       font20: '2.0rem',
       font24: '2.4rem',
+      font32: '3.2rem',
       font40: '4.0rem',
       font56: '5.6rem',
       font112: '11.2rem'
@@ -44,6 +45,7 @@ export default {
     darkGray: '#2E2F42',
     lightGray: '#828282',
     gray: '#8F8F8F',
+    grayDisabled: '#bdbdbd',
     amber: '#FFBF00',
     snow: '#FCFCFC',
   },
