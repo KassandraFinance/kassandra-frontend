@@ -1,31 +1,33 @@
 import styled from 'styled-components'
+import theme from '../../../styles/theme'
 
 export const Token = styled.section`
   padding: 80px 32px;
   text-align: center;
 
   @media (max-width: 330px) {
-    padding: 32px 20px;
+    padding: ${theme.spacings.space32} 20px;
   }
 
   h1 {
-    font-size: 40px;
-    font-weight: 500;
-    margin-bottom: 48px;
+    font-size: ${theme.font.sizes.font40};
+    font-weight: ${theme.font.weight.medium};
+    margin-bottom: ${theme.spacings.space48}
+;
     @media (max-width: 600px) {
-      font-size: 24px;
-      font-weight: 500;
+      font-size: ${theme.font.sizes.font24};
+      font-weight: ${theme.font.weight.medium};
       margin-bottom: 16px;
     }
   }
   p {
-    font-size: 24px;
-    font-weight: 300;
+    font-size: ${theme.font.sizes.font24};
+    font-weight: ${theme.font.weight.light};
     max-width: 760px;
     text-align: center;
     margin: 0 auto;
     @media (max-width: 600px) {
-      font-size: 16px;
+      font-size: ${theme.font.sizes.font16};
     }
   }
 `
@@ -66,44 +68,45 @@ export const Details = styled.div`
   }
 `
 
-export  const Description = styled.div`
+export const Description = styled.div`
   text-align: left;
   h3 {
-    font-size: 24px;
-    font-weight: 500;
+    font-size: ${theme.font.sizes.font24};
+    font-weight: ${theme.font.weight.medium};
     margin-bottom: 24px;
     @media (max-width: 600px) {
-      font-size: 18px;
+      font-size: ${theme.font.sizes.font18};
       text-align: center;
       margin-bottom: 16px;
     }
   }
   p {
-    font-size: 18px;
-    font-weight: 300;
+    font-size: ${theme.font.sizes.font18};
+    font-weight: ${theme.font.weight.light};
     text-align: left;
     margin-bottom: 24px;
     @media (max-width: 600px) {
-      font-size: 18px;
-      font-weight: 300;
+      font-size: ${theme.font.sizes.font18};
+      font-weight: ${theme.font.weight.light};
       text-align: center;
       margin-bottom: 16px;
     }
   }
   ul {
-    margin-bottom: 48px;
+    margin-bottom: ${theme.spacings.space48}
+;
   }
   li {
-    font-size: 18px;
-    font-weight: 300;
+    font-size: ${theme.font.sizes.font18};
+    font-weight: ${theme.font.weight.light};
     margin: 8px 0;
     span {
-      font-weight: 500;
+      font-weight: ${theme.font.weight.medium};
     }
     &::before {
       content: '';
       display: inline-block;
-      background-color: #FCFCFC;
+      background-color: ${theme.colors.snow};
       width: 6px;
       height: 6px;
       border-radius: 3px;
@@ -116,8 +119,8 @@ export  const Description = styled.div`
       }
     }
     @media (max-width: 600px) {
-      font-size: 16px;
-      font-weight: 300;
+      font-size: ${theme.font.sizes.font16};
+      font-weight: ${theme.font.weight.light};
     }
     @media (max-width: 390px) {
       font-size: 15px;
@@ -129,18 +132,18 @@ export  const Description = styled.div`
 `
 
 export const ButtonModalSocial = styled.button`
-  background: linear-gradient(264.12deg, #E843C4 -179.71%, #020887 205.21%);
+  background: ${`linear-gradient(264.12deg, ${theme.colors.magenta} -179.71%, ${theme.colors.darkBlue} 205.21%)`};
   border: none;
-  border-radius: 6px;
-  color: #fcfcfc;
+  border-radius: ${theme.border.radius};
+  color: ${theme.colors.snow};
   text-align: center;
   text-decoration: none;
-  font-size: 20px;
+  font-size: ${theme.font.sizes.font20};
   line-height: 20px;
 
   height: 52px;
-  padding: 16px 32px;
-  margin: 16px 0;
+  padding: ${theme.spacings.space16} 32px;
+  margin: ${theme.spacings.space16} 0;
   cursor: pointer;
   &:hover {
     background: #020887;
@@ -151,7 +154,7 @@ export const ButtonModalSocial = styled.button`
     text-align: center;
   }
   @media (max-width: 600px) {
-    font-size: 16px;
+    font-size: ${theme.font.sizes.font16};
     line-height: 16px;
     height: 48px;
   }
