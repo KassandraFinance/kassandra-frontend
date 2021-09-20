@@ -1,30 +1,31 @@
 import styled, { css } from 'styled-components'
 
 export const Details = styled.div`
-  margin-top: 24px;
-  width: 100%;
-
+  ${({ theme }) => css`
+    margin-top: ${theme.spacings.space24};
+    width: 100%;
+  `}
 `
 
 export const Info = styled.div`
-  ${({theme}) => css`
+  ${({ theme }) => css`
     display: flex;
     justify-content: space-between;
     align-items: center;
     span {
-      font-weight: 300;
-      font-size: 14px;
+      font-weight: ${theme.font.weight.light};
+      font-size: ${theme.font.sizes.font14};
       line-height: 14px;
-      margin-bottom: 8px;
+      margin-bottom: ${theme.spacings.space8};
     }
 
     .total-staked {
-      margin-bottom: 16px;
+      margin-bottom: ${theme.spacings.space16};
     }
 
     a {
       color: ${theme.colors.cyan};
-      font-size: 14px;
+      font-size: ${theme.font.sizes.font14};;
       text-decoration: none;
 
       cursor: pointer;
@@ -34,7 +35,7 @@ export const Info = styled.div`
         content: '';
         background-color: ${theme.colors.cyan};
         width: 100%;
-        height: 0.8px;
+        height: ${theme.spacings.space8};
         box-shadow: 1px 1px 4px ${theme.colors.cyan};
       }
     }
@@ -42,27 +43,31 @@ export const Info = styled.div`
 `
 
 export const KacyUSD = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 
-  span {
-    margin: 0;
-  }
+    span {
+      margin: 0;
+    }
 
-  .usd {
-    font-size: 13px;
-    line-height: 13px;
-    margin: 4px 0 8px;
-  }
+    .usd {
+      font-size: 13px;
+      line-height: 13px;
+      margin: 4px 0 8px;
+    }
+  `}
 `
 
 export const Link = styled.div`
+${({ theme }) => css`
   display: flex;
   align-items: center;
 
-  margin-bottom: 8px;
-  img {
-    margin-left: 6px;
-  }
+  margin-bottom: ${theme.spacings.space8};
+    img {
+      margin-left: 6px;
+    }
+  `}
 `
