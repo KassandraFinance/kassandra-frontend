@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import theme from '../../styles/theme'
 
 export const BorderGradient = styled.div`
   position: relative;
@@ -23,7 +24,7 @@ export const BorderGradient = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 6px;
+    border-radius: ${theme.border.radius};
     padding: 4px;
     background: linear-gradient(0deg, #26DBDB -0.02%, #e843c4 99.99%);
     -webkit-mask: linear-gradient(#fff 0 0) content-box,
@@ -62,10 +63,10 @@ export const InterBackground = styled.div`
 `
 
 export const IntroStaking = styled.div`
-  font-size: 18px;
+  font-size: ${theme.font.sizes.font18};
   text-align: right;
   @media (max-width: 540px) {
-    font-size: 16px;
+    font-size: ${theme.font.sizes.font16};
   }
   p {
     margin-bottom: 8px;
@@ -74,7 +75,7 @@ export const IntroStaking = styled.div`
       margin-bottom: 16px;
     }
     &:nth-child(2n) {
-      font-weight: 300;
+      font-weight: ${theme.font.weight.light};
     }
   }
 `
@@ -91,21 +92,22 @@ export const Info = styled.div`
   justify-content: space-between;
 
   p {
-    font-size: 18px;
+    font-size: ${theme.font.sizes.font18};
     line-height: 18px;
     margin-bottom: 24px;
     @media (max-width: 540px) {
-      font-size: 16px;
+      font-size: ${theme.font.sizes.font16};
       line-height: 16px;
     }
   }
 
   p:last-child {
-    font-weight: 300;
+    font-weight: ${theme.font.weight.light};
   }
 
   span {
-    font-weight: 400;
+    font-weight: ${theme.font.weight.normal};
+
     font-size: 14px;
     line-height: 14px;
     margin-bottom: 8px;
@@ -117,10 +119,10 @@ export const Info = styled.div`
   }
 
   span:last-child {
-    font-weight: 300;
+    font-weight: ${theme.font.weight.light};
   }
   .total-staking {
-    margin: 16px 0;
+    margin: ${theme.spacings.space16} 0;
   }
 `
 
@@ -151,9 +153,10 @@ export const ButtonContainer = styled.div`
 export const ButtonWallet = styled.button`
   background: linear-gradient(87.48deg, #e843c4 -47.54%, #26DBDB 154.78%);
   border: none;
-  border-radius: 6px;
-  font-size: 18px;
-  font-weight: 400;
+  border-radius: ${theme.border.radius};
+  font-size: ${theme.font.sizes.font18};
+  font-weight: ${theme.font.weight.normal};
+
 
   display: flex;
   align-items: center;
