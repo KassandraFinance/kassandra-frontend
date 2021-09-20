@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import theme from '../../styles/theme'
 
 import HeimOperations from '../../components/HeimOperations'
 import IndexDetails from '../../components/IndexDetails'
@@ -19,7 +20,8 @@ const Products = () => (
 const ProductsContainer = styled.section`
   max-width: 1520px;
   margin: 40px auto;
-  padding: 0 32px;
+  padding: 0 ${theme.spacings.space32};
+;
 
   min-height: 100vh;
   display: grid;
