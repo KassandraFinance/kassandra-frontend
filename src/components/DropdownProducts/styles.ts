@@ -1,26 +1,28 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 interface ILinkProductsProps {
   products: boolean
 }
 
 export const LinkProducts = styled.button<ILinkProductsProps>`
-  background-color: transparent;
-  border: none;
-  color: #fff;
-  font-size: 16px;
-  text-decoration: none;
-  cursor: pointer;
-  margin: 0 16px;
+  ${({ theme }) => css`
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: ${theme.font.sizes.font16};
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0 16px;
 
-  img {
-    margin-left: 16px;
-  }
+    img {
+      margin-left: 16px;
+    }
+  `}
 `
 
 export const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.01);
-  
+
   position: absolute;
 
   top: 0;
