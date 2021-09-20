@@ -11,7 +11,8 @@ export const InputWrapper = styled.div`
   ${({ theme }) => css`
     display: flex;
     align-items: center;
-    background: #211426;
+    background: ${theme.colors.darkPurple}
+;
     border-radius: 0.6rem;
     padding: 0 ${theme.spacings.space8};
     border: 0.2rem solid;
@@ -37,7 +38,8 @@ export const Input = styled.input<IconPositionProps>`
     font-size: ${theme.font.sizes.font18};
     padding: ${theme.spacings.space8} 0;
     /* padding-${iconPosition}: ${theme.spacings.space8}; */
-    background: #211426;
+    background: ${theme.colors.darkPurple}
+;
     border: 0;
     outline: none;
     width: ${iconPosition === 'right' ? `calc(100% - 2.2rem)` : `100%`};
@@ -61,8 +63,8 @@ export const Label = styled.label`
 
 export const Icon =
   styled.div <
-  IconPositionProps >
-  `
+    IconPositionProps >
+    `
   ${({ theme, iconPosition }) => css`
     display: flex;
     color: ${theme.colors.gray};
@@ -108,8 +110,8 @@ const wrapperModifiers = {
 
 export const Wrapper =
   styled.div <
-  WrapperProps >
-  `
+    WrapperProps >
+    `
   ${({ theme, error, disabled }) => css`
     ${error && wrapperModifiers.error(theme)}
     ${disabled && wrapperModifiers.disabled(theme)}
