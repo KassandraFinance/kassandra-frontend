@@ -1,6 +1,9 @@
 import React from 'react'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
+import styled, { css } from 'styled-components'
+import theme from '../../styles/theme'
+
 import { Kacy, Staking } from '../../constants/tokenAddresses'
 
 import useConnect from '../../hooks/useConnect'
@@ -10,8 +13,6 @@ import useStakingContract from '../../hooks/useStakingContract'
 import TotalVoting from '../../components/TotalVoting'
 import VotingPower from '../../components/VotingPower'
 import OthersStakingPools from '../../components/OthersStakingPools'
-
-import styled from 'styled-components'
 
 const Farm = () => {
   const kacyToken = useERC20Contract(Kacy)
@@ -87,21 +88,23 @@ const Farm = () => {
 }
 
 const FarmContainer = styled.section`
+${({ theme }) => css`
   max-width: 1520px;
   margin: 40px auto 64px;
-  padding: 0 32px;
+  padding: 0 ${theme.spacings.space32};
 
   h1 {
-    font-size: 24px;
-    font-weight: 400;
+    font-size: ${theme.font.sizes.font24};
+    font-weight: ${theme.font.weight.normal};
+
     @media (max-width: 420px) {
       padding: 0 10px;
     }
   }
   h3 {
-    font-size: 20px;
-    font-weight: 400;
-    margin: 16px 0 32px;
+    font-size: ${theme.font.sizes.font20};
+    font-weight: ${theme.font.weight.normal};
+    margin: ${theme.spacings.space16} 0 32px;
     @media (max-width: 420px) {
       padding: 0 10px;
     }
@@ -110,6 +113,7 @@ const FarmContainer = styled.section`
   @media (min-width: 1400px) {
     max-width: 1320px;
   }
+  `}
 `
 
 const GridStaking = styled.div`
@@ -117,7 +121,7 @@ const GridStaking = styled.div`
   grid-template-columns: repeat(3, minmax(360px, 400px));
   gap: 24px;
   justify-content: space-between;
-  
+
   margin: 0 auto;
   max-width: 1520px;
   @media (max-width: 1160px) {
