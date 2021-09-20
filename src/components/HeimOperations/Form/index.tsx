@@ -572,8 +572,8 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
                 ? '...'
                 : `1 ${poolTokenDetails[tokenInIndex].symbol} = ${BNtoDecimal(
                     swapOutPrice,
-                    poolTokenDetails[tokenOutIndex].decimals
-                  )} ${poolTokenDetails[tokenOutIndex].symbol}`}
+                    poolTokenDetails[tokenOutIndex]?.decimals
+                  )} ${poolTokenDetails[tokenOutIndex]?.symbol}`}
             </SpanLight>
           </ExchangeRate>
         </>

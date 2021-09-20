@@ -1,5 +1,6 @@
 import React from 'react'
 import BigNumber from 'bn.js'
+import { EventData } from 'web3-eth-contract'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
 import web3 from '../../utils/web3'
@@ -10,7 +11,7 @@ import { confirmClaim } from '../../utils/confirmTransactions'
 
 import { Staking } from '../../constants/tokenAddresses'
 
-import { PoolInfo } from '../../hooks/useStakingContract'
+import useStakingContract, { PoolInfo } from '../../hooks/useStakingContract'
 
 import Details from '../Details'
 import Tooltip from '../Tooltip'
@@ -83,15 +84,12 @@ const VotingPower = ({
 }: IStakingProps) => {
   const [isModalStaking, setIsModalStaking] = React.useState<boolean>(false)
   const [isModalUnstaking, setIsModalUnstaking] = React.useState<boolean>(false)
-  const [isModalCancelUnstake, setIsModalCancelUnstake] =
-    React.useState<boolean>(false)
-  const [isModalRequestUnstake, setIsModalRequestUnstake] =
-    React.useState<boolean>(false)
+  const [isModalCancelUnstake, setIsModalCancelUnstake] = React.useState<boolean>(false)
+  const [isModalRequestUnstake, setIsModalRequestUnstake] = React.useState<boolean>(false)
   const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
   const [isDetails, setIsDetails] = React.useState<boolean>(false)
 
-  const [isApproveKacyStaking, setIsApproveKacyStaking] =
-    React.useState<boolean>(false)
+  const [isApproveKacyStaking, setIsApproveKacyStaking] = React.useState<boolean>(false)
   const [unstake, setUnstake] = React.useState<boolean>(false)
   const [infoStake, setInfoStake] = React.useState<IInfoStakeProps>({
     yourStake: new BigNumber(0),
@@ -108,6 +106,7 @@ const VotingPower = ({
     })
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const token = useStakingContract(Staking)
 
   async function handleApproveKacy() {
     if (isApproveKacyStaking) {
@@ -136,9 +135,13 @@ const VotingPower = ({
       )
       const withdrawDelay = Number(poolInfoResponse.withdrawDelay) / 86400
 
-      const yourDailyKacyReward = infoStakeStatic.kacyRewards
-        .mul(infoStake.yourStake ? infoStake.yourStake : new BigNumber(0))
-        .div(new BigNumber(poolInfoResponse.depositedAmount))
+      let yourDailyKacyReward: BigNumber = new BigNumber(0)
+
+      if (infoStake.yourStake.toString() !== "0") {
+        yourDailyKacyReward = infoStakeStatic.kacyRewards
+          .mul(infoStake.yourStake ? infoStake.yourStake : new BigNumber(0))
+          .div(new BigNumber(poolInfoResponse.depositedAmount))
+      }
 
       setInfoStakeStatic({
         votingMultiplier: poolInfoResponse.votingMultiplier,
@@ -171,6 +174,61 @@ const VotingPower = ({
 
     getInfoStake()
   }, [userWalletAddress])
+  
+  React.useEffect(() => {
+
+    let transaction: string = ''
+    const stakeEvent = token.events.Staked({
+      filter: {
+        pid,
+        user: userWalletAddress
+      },
+    }, (error: Error, event: EventData) => {
+      const amount = event.returnValues.amount
+      if (event.transactionHash !== transaction) {
+        transaction = event.transactionHash
+        console.log(event.transactionHash)
+        console.log(amount)
+        console.log(event.returnValues)
+  
+        setInfoStake(prevState => ({
+          yourStake: prevState.yourStake.add(new BigNumber(amount)),
+          withdrawable: prevState.withdrawable
+        }))
+      }
+    })
+
+    console.log(pid)
+    
+    const withdrawnEvent = token.events.Withdrawn({
+      filter: {
+        pid,
+        user: userWalletAddress
+      },
+    },(error: Error, event: EventData) => {
+      const amount = event.returnValues.amount
+      if (event.transactionHash !== transaction) {
+        transaction = event.transactionHash
+        console.log(pid)
+        console.log(amount)
+        console.log(event.returnValues)
+        
+        setInfoStake(prevState => ({
+          yourStake: prevState.yourStake.sub(new BigNumber(amount)),
+          withdrawable: prevState.withdrawable
+        }))
+      }
+    })
+    
+
+    console.log(stakeEvent)
+    console.log(withdrawnEvent)
+    
+    return () => {
+      stakeEvent.unsubscribe()
+      withdrawnEvent.unsubscribe()
+    }
+  }, [])
 
   return (
     <>
