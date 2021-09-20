@@ -1,43 +1,48 @@
 import styled, { css } from 'styled-components'
+import theme from '../../styles/theme'
 
 export const Backdrop = styled.div`
-  background-color: rgba(0, 0, 0, 0.4);
+  ${({ theme }) => css`
+    background-color: rgba(0, 0, 0, 0.4);
 
-  position: fixed;
-  top: 0;
-  left: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
 
-  width: 100vw;
-  height: 100vh;
-  z-index: 9;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9;
+  `}
 `
 
 interface IBorderGradientProps {
   modalOpen: boolean
-   otherStakingPools: boolean
+  otherStakingPools: boolean
 }
 
 export const BorderGradient = styled.div<IBorderGradientProps>`
-  display: ${(props) => props.modalOpen ? "block" : "none" };
 
-  background: ${(props) => props.otherStakingPools ?
+    display: ${(props) => props.modalOpen ? "block" : "none"};
+
+    background: ${(props) => props.otherStakingPools ?
     "linear-gradient(0deg, ${theme.colors.cyan} -0.02%, #E843C4 99.99%)"
     :
-    "linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%)" };;
-  border-radius: 6px;
+    "linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%)"};
+    border-radius: 6px;
 
-  width: 320px;
-  max-height: 100%;
-  padding: 4px;
+    width: 320px;
+    max-height: 100%;
+    padding: 4px;
 
-  position: fixed;
-  top: 50%;
-  left: 50%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
 
-  margin-left: -160px;
-  margin-top: -165px;
+    margin-left: -160px;
+    margin-top: -165px;
 
-  z-index: 10;
+    z-index: 10;
+
 `
 
 export const BackgroundBlack = styled.div`
@@ -55,7 +60,7 @@ export const InterBackground = styled.div<IInterBackgroundProps>`
   background: ${(props) => props.otherStakingPools ?
     "linear-gradient(0deg, rgba(38, 219, 219, 0.2) -0.02%, rgba(232, 67, 196, 0.2) 99.99%)"
     :
-    "linear-gradient(0deg, rgba(255, 191, 0, 0.2) -0.02%, rgba(232, 67, 196, 0.2) 99.99%)" };
+    "linear-gradient(0deg, rgba(255, 191, 0, 0.2) -0.02%, rgba(232, 67, 196, 0.2) 99.99%)"};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -92,7 +97,7 @@ export const Amount = styled.div`
 
   h5 {
     font-weight: 400;
-    font-size: 12px;
+    font-size: ${theme.font.sizes.font12};
     line-height: 12px;
     margin-top: 6px;
   }
@@ -101,7 +106,7 @@ export const Amount = styled.div`
     background-color: transparent;
     border: none;
     color: #fff;
-    font-size: 20px;
+    font-size: ${theme.font.sizes.font20};
 
     text-align: right;
     max-width: 100%;
@@ -113,7 +118,7 @@ export const Amount = styled.div`
       font-size: 22px;
     }
     @media (max-width: 350px) {
-      font-size: 20px;
+      font-size: ${theme.font.sizes.font20};
     }
 
     &::placeholder {
@@ -128,16 +133,17 @@ export const Amount = styled.div`
       appearance: textfield;
     }
   }
+
 `
 
 export const Line = styled.div`
-  ${({theme})=> css`
+  ${(props) => css`
     content: '';
     display: block;
     width: 190px;
     height: 2px;
-    background-color: ${theme.colors.cyan};
-    box-shadow: 1px 1px 5px ${theme.colors.cyan};
+    background-color: ${props.theme.colors.cyan};
+    box-shadow: 1px 1px 5px ${props.theme.colors.cyan};
     margin-left: auto;
     @media (max-width: 504px) {
       width: 160px;
@@ -146,10 +152,11 @@ export const Line = styled.div`
       width: 130px;
     }
   `}
+
 `
 
 export const ButtonContainer = styled.div`
-  ${({theme})=> css`
+  ${({ theme }) => css`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -161,7 +168,7 @@ export const ButtonContainer = styled.div`
       border-radius: 16px;
       background: transparent;
       color: #fff;
-      font-size: 12px;
+      font-size: ${theme.font.sizes.font12};
       line-height: 12px;
       font-weight: 400;
 
@@ -183,8 +190,8 @@ interface IConfirmButtonProps {
 }
 
 export const ConfirmButton = styled.button<IConfirmButtonProps>`
-  border-radius: 6px;
-  font-size: 16px;
+  border-radius: ${theme.border.radius};
+  font-size: ${theme.font.sizes.font16};
   line-height: 14px;
   font-weight: 400;
 
@@ -197,16 +204,16 @@ export const ConfirmButton = styled.button<IConfirmButtonProps>`
   cursor: pointer;
 
   background: ${(props) => props.otherStakingPools ?
-    "linear-gradient(87.48deg, #E843C4 -47.54%, ${theme.colors.cyan} 154.78%)"
+    "linear-gradient(87.48deg, #E843C4 -47.54%, #26DBDB 154.78%)"
     :
-    "linear-gradient(87.48deg, #FFBF00 -70.27%, #E843C4 154.78%)" };
+    "linear-gradient(87.48deg, #FFBF00 -70.27%, #E843C4 154.78%)"};
   border: none;
-  color: ${(props) => props.otherStakingPools ? "#211426" : "#211426" };
+  color: ${(props) => props.otherStakingPools ? "#211426" : "#211426"};
 
   margin-bottom: 8px;
   transition: 200ms;
   &:hover:enabled {
-    background: ${(props) => props.otherStakingPools ? "#E843C4" : "#FFBF00" };
+    background: ${(props) => props.otherStakingPools ? "#E843C4" : "#FFBF00"};
   }
   &:disabled {
     cursor: not-allowed;
@@ -216,9 +223,9 @@ export const ConfirmButton = styled.button<IConfirmButtonProps>`
 `
 
 export const GetKacy = styled.button`
-  ${({theme})=> css`
-    border-radius: 6px;
-    font-size: 16px;
+  ${({ theme }) => css`
+    border-radius: ${theme.border.radius};
+    font-size: ${theme.font.sizes.font16};
     line-height: 14px;
     font-weight: 400;
 
