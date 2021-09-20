@@ -59,7 +59,7 @@ export const SubTitle = styled.h3`
     font-size: ${theme.font.sizes.font24};
     font-weight: ${theme.font.weight.light};
     margin: 32px 0;
-    max-width: 100%px;
+    max-width: 100%;
     ${media.lessThan('large')`
       font-size: ${theme.font.sizes.font18};
       margin: ${theme.spacings.space16} 0;

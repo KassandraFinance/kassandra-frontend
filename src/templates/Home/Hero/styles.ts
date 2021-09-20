@@ -135,8 +135,7 @@ export const ButtonContainer = styled.div`
     }
 
     a {
-      background ${`linear-gradient(264.12deg, ${theme.colors.magenta} -179.71%, ${theme.colors.darkBlue} 205.21%)`};
-      border: none;
+      border-color: ${theme.colors.cyan};
       border-radius: ${theme.border.radius};
       color: ${theme.colors.snow};
       text-align: center;
@@ -161,6 +160,21 @@ export const ButtonContainer = styled.div`
 
 export const WithpaperButton = styled.a`
   ${({ theme }) => css`
+    border: none;
+    border-radius: ${theme.border.radius};
+    font-family: ${theme.font.family};
+    text-decoration: none;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    padding: ${theme.spacings.space8};
+
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 1;
     background: transparent !important;
     border: 1px solid ${theme.colors.cyan} !important;
     border-radius: ${theme.border.radius};
@@ -172,6 +186,18 @@ export const WithpaperButton = styled.a`
     padding: 12px 32px;
     cursor: pointer;
     transition-duration: 300ms;
+    &:after {
+      content: '';
+      border-radius: ${theme.border.radius};
+
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      z-index: -2;
+    }
     &:hover {
       background-color: ${theme.colors.cyan} !important;
       color: ${theme.colors.darkPurple} !important;

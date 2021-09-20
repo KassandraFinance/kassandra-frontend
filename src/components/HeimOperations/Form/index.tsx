@@ -2,6 +2,7 @@ import React from 'react'
 import BigNumber from 'bn.js'
 import { TransactionReceipt } from 'web3-core'
 import { EventData } from 'web3-eth-contract'
+import Button from '../../Button'
 
 import { HeimCRPPOOL, HeimCorePool } from '../../../constants/tokenAddresses'
 
@@ -15,7 +16,7 @@ import InputDefault from './InputDefault'
 
 import { ToastSuccess, ToastError } from '../../Toastify/toast'
 
-import { FormContainer, Button, SpanLight, ExchangeRate } from './styles'
+import { FormContainer, SpanLight, ExchangeRate } from './styles'
 import { BNtoDecimal, wei } from '../../../utils/numerals'
 
 interface IFormProps {
@@ -528,8 +529,8 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
           title === 'Withdraw'
             ? poolTokenDetails.filter(token => token.address === swapInAddress)
             : poolTokenDetails
-                .slice(0, -1)
-                .filter(token => token.address !== swapOutAddress)
+              .slice(0, -1)
+              .filter(token => token.address !== swapOutAddress)
         }
         swapInBalance={swapInBalance}
         setSwapInAmount={setSwapInAmount}
@@ -554,11 +555,11 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
             poolTokens={
               title === 'Invest'
                 ? poolTokenDetails.filter(
-                    token => token.address === swapOutAddress
-                  )
+                  token => token.address === swapOutAddress
+                )
                 : poolTokenDetails
-                    .slice(0, -1)
-                    .filter(token => token.address !== swapInAddress)
+                  .slice(0, -1)
+                  .filter(token => token.address !== swapInAddress)
             }
             isMax={null}
             swapOutAmount={swapOutAmount[0]}
@@ -579,11 +580,16 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
         </>
       )}
       {isLogged ? (
-        <Button type="submit">
+        <Button
+          backgroundSecondary
+          fullWidth
+          type="submit">
           {isApproved[tokenInIndex] ? title : 'Approve'}
         </Button>
       ) : (
-        <Button type="button" onClick={connect}>
+        <Button
+          backgroundSecondary
+          fullWidth type="button" onClick={connect}>
           Connect Wallet
         </Button>
       )}

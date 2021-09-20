@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 import { Kacy, Staking } from '../../constants/tokenAddresses'
@@ -88,7 +88,6 @@ const Farm = () => {
 }
 
 const FarmContainer = styled.section`
-${({ theme }) => css`
   max-width: 1520px;
   margin: 40px auto 64px;
   padding: 0 ${theme.spacings.space32};
@@ -113,7 +112,6 @@ ${({ theme }) => css`
   @media (min-width: 1400px) {
     max-width: 1320px;
   }
-  `}
 `
 
 const GridStaking = styled.div`

@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 export const Backdrop = styled.div`
@@ -98,7 +98,6 @@ export const Content = styled.div`
 `
 
 export const ButtonContainer = styled.div`
-  ${({ theme }) => css`
     margin-top: 16px;
     button {
       background-color: transparent;
@@ -118,5 +117,4 @@ export const ButtonContainer = styled.div`
 ;
       }
     }
-  `}
 `
