@@ -1,4 +1,4 @@
-import styled, {css} from "styled-components";
+import styled, { css } from "styled-components";
 import media from "styled-media-query";
 
 import * as TextFieldStyles from '../../../components/TextField/styles'
@@ -20,7 +20,7 @@ export const Container = styled.div`
   margin-top: 5.3rem;
   left: 50%;
 
-  ${media.between('medium','large')`
+  ${media.between('medium', 'large')`
     width:58rem;
     padding: 3.2rem;
   `}
@@ -43,15 +43,15 @@ export const Image = styled.div`
 
 
 
-export const Link = styled.div `
-  ${({theme})=> css`
+export const Link = styled.div`
+  ${({ theme }) => css`
     a{
       background: linear-gradient(264.12deg, #020887 -197.65%, ${theme.colors.cyan} 272.42%);
       border: none;
-      border-radius: 6px;
-      color: #fcfcfc;
+      border-radius: ${theme.border.radius};
+      color: ${theme.colors.snow};
       text-decoration: none;
-      font-size: 20px;
+      font-size: ${theme.font.sizes.font20};
 
       height: 52px;
       padding: 12px 32px;
@@ -61,7 +61,7 @@ export const Link = styled.div `
 `
 
 export const Title = styled.h1`
-  ${({theme})=>css`
+  ${({ theme }) => css`
     font-size: ${theme.font.sizes.font40};
     font-weight: ${theme.font.weight.semibold};
     line-height: 120%;
@@ -74,14 +74,14 @@ export const Title = styled.h1`
   `}
 `
 export const SubTitle = styled.h3`
-  ${({theme})=>css`
+  ${({ theme }) => css`
   font-size: ${theme.font.sizes.font24};
   font-weight: ${theme.font.weight.light};
   line-height: 120%;
   margin: 32px 0;
     ${media.lessThan("medium")`
       font-size: ${theme.font.sizes.font16};
-      margin: 16px 0;
+      margin: ${theme.spacings.space16} 0;
     `}
   `}
 `
