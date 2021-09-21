@@ -14,10 +14,11 @@ import usePoolContract from '../../../hooks/usePoolContract'
 import InputTokens from './InputTokens'
 import InputDefault from './InputDefault'
 
-import { ToastSuccess, ToastError } from '../../Toastify/toast'
+import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
 import { FormContainer, SpanLight, ExchangeRate } from './styles'
 import { BNtoDecimal, wei } from '../../../utils/numerals'
+import { confirmWithdraw } from '../../../utils/confirmTransactions'
 
 interface IFormProps {
   typeAction: string;
@@ -100,7 +101,7 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
   // get contract approval of tokens
   React.useEffect(() => {
     if (title === 'Withdraw') {
-      setIsApproved(Array(poolTokens.length).fill(true))
+      setIsApproved(Array(poolTokens.length + 1).fill(true))
       return
     }
 
@@ -249,46 +250,55 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
 
   // calculate investment
   React.useEffect(() => {
-    if (title !== 'Invest' || swapInAddress.length === 0) {
+    if (
+      title !== 'Invest' ||
+      swapInAddress.length === 0 ||
+      swapOutAddress.length === 0 ||
+      swapInAddress === HeimCRPPOOL
+    ) {
       return
     }
 
     const calc = async () => {
-      const [
-        swapInTotalPoolBalance,
-        swapInDenormalizedWeight,
-        poolSupply,
-        poolTotalDenormalizedWeight,
-        poolSwapFee
-      ] = await Promise.all([
-        corePool.balance(swapInAddress),
-        corePool.denormalizedWeight(swapInAddress),
-        crpPoolToken.totalSupply(),
-        corePool.totalDenormalizedWeight(),
-        corePool.swapFee()
-      ])
-
-      const [newSwapOutAmount, newSwapOutPrice] = await Promise.all([
-        corePool.calcPoolOutGivenSingleIn(
+      try {
+        const [
           swapInTotalPoolBalance,
           swapInDenormalizedWeight,
           poolSupply,
           poolTotalDenormalizedWeight,
-          swapInAmount,
           poolSwapFee
-        ),
-        corePool.calcPoolOutGivenSingleIn(
-          swapInTotalPoolBalance,
-          swapInDenormalizedWeight,
-          poolSupply,
-          poolTotalDenormalizedWeight,
-          wei,
-          poolSwapFee
-        )
-      ])
+        ] = await Promise.all([
+          corePool.balance(swapInAddress),
+          corePool.denormalizedWeight(swapInAddress),
+          crpPoolToken.totalSupply(),
+          corePool.totalDenormalizedWeight(),
+          corePool.swapFee()
+        ])
+  
+        const [newSwapOutAmount, newSwapOutPrice] = await Promise.all([
+          corePool.calcPoolOutGivenSingleIn(
+            swapInTotalPoolBalance,
+            swapInDenormalizedWeight,
+            poolSupply,
+            poolTotalDenormalizedWeight,
+            swapInAmount,
+            poolSwapFee
+          ),
+          corePool.calcPoolOutGivenSingleIn(
+            swapInTotalPoolBalance,
+            swapInDenormalizedWeight,
+            poolSupply,
+            poolTotalDenormalizedWeight,
+            wei,
+            poolSwapFee
+          )
+        ])
 
-      setSwapOutAmount([newSwapOutAmount])
-      setSwapOutPrice(newSwapOutPrice)
+        setSwapOutAmount([newSwapOutAmount])
+        setSwapOutPrice(newSwapOutPrice)
+      } catch (error) {
+        ToastWarning("This amount is too large for the pool!")
+      }
     }
 
     setSwapOutAmount([new BigNumber(0)])
@@ -483,7 +493,10 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
 
             crpPool.exitPool(
               swapInAmountVal,
-              Array(poolTokens.length).fill(new BigNumber(0))
+              Array(poolTokens.length).fill(new BigNumber(0)),
+              walletAddress.value,
+              confirmWithdraw,
+              "Pending withdraw"
             )
             return
 
@@ -511,9 +524,7 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
       } catch (error) {
         ToastError('Could not connect with the Blockchain!')
       }
-    },
-    []
-  )
+    }, [poolTokens])
 
   return (
     <FormContainer onSubmit={submitAction}>
@@ -571,7 +582,7 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
             <SpanLight>
               {swapOutPrice < new BigNumber(0)
                 ? '...'
-                : `1 ${poolTokenDetails[tokenInIndex].symbol} = ${BNtoDecimal(
+                : `1 ${poolTokenDetails[tokenInIndex]?.symbol} = ${BNtoDecimal(
                   swapOutPrice,
                   poolTokenDetails[tokenOutIndex]?.decimals
                 )} ${poolTokenDetails[tokenOutIndex]?.symbol}`}
@@ -582,6 +593,7 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
       {isLogged ? (
         <Button
           backgroundSecondary
+          disabledNoEvent={swapInAmount.toString() === "0"}
           fullWidth
           type="submit"
           text={isApproved[tokenInIndex] ? title : 'Approve'}

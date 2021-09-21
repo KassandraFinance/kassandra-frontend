@@ -49,18 +49,20 @@ const useCRPContract = (address: string) => {
     const exitPool = (
       poolAmountIn: BigNumber,
       minAmountsOut: Array<BigNumber>,
+      walletAddress: string,
       onComplete?: CompleteCallback,
+      message?: string
     ) => {
       return contract.methods.exitPool(poolAmountIn, minAmountsOut).send(
-        { from: userWalletAddress },
-        onComplete ? waitTransaction(onComplete) : false
+        { from: walletAddress },
+        onComplete ? waitTransaction(onComplete, message) : null
       )
     }
 
     const exitswapPoolAmountIn = (
       tokenOut: string,
       poolAmountIn: BigNumber,
-      onComplete?: CompleteCallback,
+      onComplete?: CompleteCallback
     ) => {
       return contract.methods.exitswapPoolAmountIn(tokenOut, poolAmountIn, 0).send(
         { from: userWalletAddress },
