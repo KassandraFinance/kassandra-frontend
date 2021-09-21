@@ -1,6 +1,5 @@
 import React from 'react'
 import BigNumber from 'bn.js'
-import { useSelector, RootStateOrAny } from 'react-redux'
 
 import { AbiItem } from "web3-utils"
 
@@ -19,7 +18,6 @@ interface Events {
 }
 
 const useCRPContract = (address: string) => {
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const [contract, setContract] = React.useState(new web3.eth.Contract((ConfigurableRightsPool as unknown) as AbiItem, address))
 
   React.useEffect(() => {
@@ -36,12 +34,14 @@ const useCRPContract = (address: string) => {
     const joinswapExternAmountIn = (
       tokenIn: string,
       tokenAmountIn: BigNumber,
-      onComplete?: CompleteCallback,
+      walletAddress: string,
+      message?: string,
+      onComplete?: CompleteCallback
     ): BigNumber => {
       return new BigNumber(
         contract.methods.joinswapExternAmountIn(tokenIn, tokenAmountIn, 0).send(
-          { from: userWalletAddress },
-          onComplete ? waitTransaction(onComplete) : false
+          { from: walletAddress },
+          waitTransaction(onComplete ? onComplete : () => {}, message)
         )
       )
     }
@@ -50,23 +50,25 @@ const useCRPContract = (address: string) => {
       poolAmountIn: BigNumber,
       minAmountsOut: Array<BigNumber>,
       walletAddress: string,
-      onComplete?: CompleteCallback,
-      message?: string
+      message?: string,
+      onComplete?: CompleteCallback
     ) => {
       return contract.methods.exitPool(poolAmountIn, minAmountsOut).send(
         { from: walletAddress },
-        onComplete ? waitTransaction(onComplete, message) : null
+        waitTransaction(onComplete ? onComplete : () => {}, message)
       )
     }
 
     const exitswapPoolAmountIn = (
       tokenOut: string,
       poolAmountIn: BigNumber,
+      walletAddress: string,
+      message?: string,
       onComplete?: CompleteCallback
     ) => {
       return contract.methods.exitswapPoolAmountIn(tokenOut, poolAmountIn, 0).send(
-        { from: userWalletAddress },
-        onComplete ? waitTransaction(onComplete) : false
+        { from: walletAddress },
+        waitTransaction(onComplete ? onComplete : () => {}, message)
       )
     }
 
@@ -78,7 +80,7 @@ const useCRPContract = (address: string) => {
       exitswapPoolAmountIn,
       joinswapExternAmountIn,
     }
-  }, [contract, userWalletAddress])
+  }, [contract])
 }
 
 export default useCRPContract

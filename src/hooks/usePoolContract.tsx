@@ -18,7 +18,6 @@ interface Events {
 }
 
 const usePoolContract = (address: string) => {
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const [contract, setContract] = React.useState(new web3.eth.Contract((Pool as unknown) as AbiItem, address))
 
   React.useEffect(() => {
@@ -36,7 +35,9 @@ const usePoolContract = (address: string) => {
       tokenIn: string, 
       tokenAmountIn: BigNumber,
       tokenOut: string,
-      onComplete?: CompleteCallback,
+      walletAddress: string,
+      message?: string,
+      onComplete?: CompleteCallback
     ) => {
       await contract
         .methods.swapExactAmountIn(
@@ -47,8 +48,8 @@ const usePoolContract = (address: string) => {
           web3.utils.toTwosComplement(-1)
         )
         .send(
-          { from: userWalletAddress },
-          onComplete ? waitTransaction(onComplete) : undefined
+          { from: walletAddress },
+          waitTransaction(onComplete ? onComplete : () => {}, message)
         )
     }
 
@@ -162,7 +163,7 @@ const usePoolContract = (address: string) => {
       swapFee,
       totalDenormalizedWeight,
     }
-  }, [contract, userWalletAddress])
+  }, [contract])
 }
 
 export default usePoolContract

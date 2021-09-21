@@ -57,21 +57,21 @@ const useStakingContract = (address: string) => {
       await contract.methods.stake(pid, amount, userWalletAddress, userWalletAddress)
         .send(
           { from: userWalletAddress }, 
-          onComplete ? waitTransaction(onComplete, message) : false
+          waitTransaction(onComplete ? onComplete : () => {}, message)
         )
     }
 
     const unstake = async (pid: number, onComplete?: CompleteCallback, message?: string) => {
       await contract.methods.unstake(pid)
         .send({ from: userWalletAddress },
-          onComplete ? waitTransaction(onComplete, message) : false
+          waitTransaction(onComplete ? onComplete : () => {}, message)
         )
     }
 
     const cancelUnstake = async (pid: number, onComplete?: CompleteCallback, message?: string) => {
       await contract.methods.cancelUnstake(pid)
         .send({ from: userWalletAddress }, 
-          onComplete ? waitTransaction(onComplete, message) : false
+          waitTransaction(onComplete ? onComplete : () => {}, message)
         )
     }
 
@@ -79,14 +79,14 @@ const useStakingContract = (address: string) => {
       await contract.methods.getReward(pid)
         .send(
           { from: userWalletAddress }, 
-          onComplete ? waitTransaction(onComplete, message) : false
+          waitTransaction(onComplete ? onComplete : () => {}, message)
         )
     }
 
     const withdraw = async (pid: number, amount: BigNumber, onComplete?: CompleteCallback, message?: string) => {
       await contract.methods.withdraw(pid, amount)
         .send({ from: userWalletAddress },
-          onComplete ? waitTransaction(onComplete, message) : false
+          waitTransaction(onComplete ? onComplete : () => {}, message)
         )
     }
 

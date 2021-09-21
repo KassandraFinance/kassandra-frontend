@@ -472,9 +472,10 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
         switch (category.value) {
           case 'Invest':
             if (approved.value === '0') {
-              crpPoolToken.approve(
-                swapInAddressVal,
+              ERC20(swapInAddressVal).approve(
+                HeimCRPPOOL,
                 walletAddress.value,
+                "Waiting for approval",
                 asyncExecute('Contract approval complete!', () =>
                   setApprovalCheck(cur => cur + 1)
                 )
@@ -482,12 +483,22 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
               return
             }
 
-            crpPool.joinswapExternAmountIn(swapInAddressVal, swapInAmountVal)
+            crpPool.joinswapExternAmountIn(
+              swapInAddressVal,
+              swapInAmountVal,
+              walletAddress.value,
+              "Pending investment"
+            )
             return
 
           case 'Withdraw':
             if (swapOutAddressVal !== '') {
-              crpPool.exitswapPoolAmountIn(swapOutAddressVal, swapInAmountVal)
+              crpPool.exitswapPoolAmountIn(
+                swapOutAddressVal,
+                swapInAmountVal,
+                walletAddress.value,
+                "Pending withdraw of a single token"
+              )
               return
             }
 
@@ -495,16 +506,17 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
               swapInAmountVal,
               Array(poolTokens.length).fill(new BigNumber(0)),
               walletAddress.value,
-              confirmWithdraw,
-              "Pending withdraw"
+              "Pending withdraw",
+              confirmWithdraw
             )
             return
 
           case 'Swap':
             if (approved.value === '0') {
-              corePoolToken.approve(
-                swapInAddressVal,
+              ERC20(swapInAddressVal).approve(
+                HeimCorePool,
                 walletAddress.value,
+                "Waiting for approval",
                 asyncExecute('Contract approval complete!', () =>
                   setApprovalCheck(cur => cur + 1)
                 )
@@ -515,7 +527,9 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
             corePool.swapExactAmountIn(
               swapInAddressVal,
               swapInAmountVal,
-              swapOutAddressVal
+              swapOutAddressVal,
+              walletAddress.value,
+              "Pending Swap"
             )
             return
 

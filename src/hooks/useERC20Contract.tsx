@@ -24,12 +24,13 @@ function ERC20Contract(contract: Contract) {
   const approve = async (
     spenderAddress: string,
     userWalletAddress: string,
-    onComplete?: CompleteCallback,
+    message?: string,
+    onComplete?: CompleteCallback
   ): Promise<boolean> => {
     try {
       return contract.methods.approve(spenderAddress, web3.utils.toTwosComplement(-1)).send(
         { from: userWalletAddress },
-        onComplete ? waitTransaction(onComplete) : false
+        waitTransaction(onComplete ? onComplete : () => {}, message)
       );
     } catch (e) {
       console.log("error", e);
