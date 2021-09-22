@@ -66,12 +66,12 @@ const Header = () => {
             </Link>
           )}
 
-          <Link href="/" passHref>
-            <S.MenuLinkDisable>Buy $Heim</S.MenuLinkDisable>
+          <Link href="/products" passHref>
+            <S.MenuLink>Buy $Heim</S.MenuLink>
           </Link>
 
-          <Link href="/" passHref>
-            <S.MenuLinkDisable>Stake/Farm</S.MenuLinkDisable>
+          <Link href="/farm" passHref>
+            <S.MenuLink>Stake/Farm</S.MenuLink>
           </Link>
 
           <Link href="/" passHref>
@@ -131,11 +131,11 @@ const Header = () => {
               <S.MenuLink onClick={() => setIsOpen(false)}> Home </S.MenuLink>
             </Link>
           )}
-          <Link href="/" passHref>
-            <S.MenuLinkDisable>Buy $Heim</S.MenuLinkDisable>
+          <Link href="/products" passHref>
+            <S.MenuLink>Buy $Heim</S.MenuLink>
           </Link>
-          <Link href="/" passHref>
-            <S.MenuLinkDisable>Stake/Farm</S.MenuLinkDisable>
+          <Link href="/farm" passHref>
+            <S.MenuLink>Stake/Farm</S.MenuLink>
           </Link>
           <Link href="/" passHref>
             <S.MenuLinkDisable>Vote</S.MenuLinkDisable>
