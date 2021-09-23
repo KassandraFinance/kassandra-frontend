@@ -17,7 +17,6 @@
     "bn.js": "^5.2.0",
     "next": "^11.0.1",
     "next-redux-wrapper": "^7.0.2",
-    "polished": "^3.6.6",
     "react": "^17.0.2",
     "react-copy-to-clipboard": "^5.0.4",
     "react-dom": "^17.0.2",
