@@ -1,16 +1,24 @@
 import React from 'react'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import * as S from './styles'
+import web3 from '../../utils/web3'
 
 import HeimOperations from '../../components/HeimOperations'
 import IndexDetails from '../../components/IndexDetails'
+import Web3Disabled from '../../components/Web3Disabled'
 
+import * as S from './styles'
+
+declare let window: {
+  ethereum: any,
+}
 
 const Products = () => {
   const [coinInfoList, setCoinInfoList] = React.useState<Array<any>>([])
+  const [chainId, setChainId] = React.useState<string>('')
 
-  const { poolTokensArray } = useSelector((state: RootStateOrAny) => state)
+  const { poolTokensArray, userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  
 
   async function getCoinList() {
     const URL = 'https://api.coingecko.com/api/v3/coins/list'
@@ -57,46 +65,64 @@ const Products = () => {
     setCoinInfoList([])
   }, [poolTokensArray])
 
+  async function getChainId() {
+    if (web3.currentProvider === null) {
+      return
+    }
+
+    const id = await window.ethereum.request({ method: 'eth_chainId' })
+    setChainId(id)
+    if (id !== '0x3') {
+
+    }
+  }
+
+  React.useEffect(() => {
+    getChainId()
+  }, [userWalletAddress])
+
   return (
     <>
-      <S.Intro>
-        <div style={{ display: 'flex' }}>
-          <img src='assets/logo-heim.svg ' alt='logo-heim' />
-          <div>
-            <h1>Heim Social Index</h1>
-            <span>Heim</span>
+      {web3.currentProvider !== null && userWalletAddress && chainId === "0x3" ?
+      <>
+        <S.Intro>
+          <div style={{ display: 'flex' }}>
+            <img src='assets/logo-heim.svg ' alt='logo-heim' />
+            <div>
+              <h1>Heim Social Index</h1>
+              <span>Heim</span>
+            </div>
           </div>
-        </div>
-        <S.IntroValues>
-          <S.IntroPrice>
-            <h3>
-              Price
-            </h3>
-            <div />
-            <span>
-              $1,235.124
-            </span>
-          </S.IntroPrice>
-          <S.IntroTVL>
-            <h3>
-              TVL
-            </h3>
-            <div />
-            <span>
-              $785,345.67
-            </span>
-          </S.IntroTVL>
-        </S.IntroValues>
-      </S.Intro>
-      <S.ProductsContainer>
-        <S.ComingSoon src="assets/coming-soon.png" alt="coming-soon" />
+          <S.IntroValues>
+            <S.IntroPrice>
+              <h3>
+                Price
+              </h3>
+              <div />
+              <span>
+                $1,235.124
+              </span>
+            </S.IntroPrice>
+            <S.IntroTVL>
+              <h3>
+                TVL
+              </h3>
+              <div />
+              <span>
+                $785,345.67
+              </span>
+            </S.IntroTVL>
+          </S.IntroValues>
+        </S.Intro>
+        <S.ProductsContainer>
+          <S.ComingSoon src="assets/coming-soon.png" alt="coming-soon" />
 
-        <HeimOperations />
-      </S.ProductsContainer>
-      <section>
-        <IndexDetails coinInfoList={coinInfoList} />
-      </section>
-      <S.Text>
+          <HeimOperations />
+        </S.ProductsContainer>
+        <section>
+          <IndexDetails coinInfoList={coinInfoList} />
+        </section>
+        <S.Text>
         <h2>The Heimdall Social Index</h2>
         <span>The Heimdall Social Index (HEIM) tracks the performance of a portfolio composed by selecting the most socially active cryptocurrencies in the last 30 days. This portfolio is weighted according to the values of social score made available by Heimdall and the technology provided by the Kassandra Protocol. The portfolio is a SIP (Smart Index Pool) and is rebalanced by arbitrageurs just like an usual liquidity pool. The index is accompanied by its own token $HEIM, allowing investors to buy the index by purchasing the token, just like an ETF.</span>
 
@@ -149,6 +175,35 @@ const Products = () => {
         </S.Link>
 
       </S.Text>
+      </>
+      :
+      <>
+        {web3.currentProvider === null && (
+          <Web3Disabled 
+            textButton="Install Metamask"
+            textHeader="Wallet connection to ETH mainnet is required"
+            bodyText="To have access to all our staking pools, please connect your wallet"
+            type="install"
+          />
+        )}
+        {!userWalletAddress && chainId === "0x3" && (
+          <Web3Disabled 
+            textButton="Connect Wallet"
+            textHeader="Wallet connection to ETH mainnet is required"
+            bodyText="To have access to all our staking pools, please connect your wallet"
+            type="connect"
+          />
+        )}
+        {web3.currentProvider !== null && chainId !== "0x3" && (
+          <Web3Disabled 
+            textButton="Connect to Ropsten"
+            textHeader="Your wallet is set to the wrong network. Please switch to the test Ropsten network." 
+            bodyText="To have access to all our staking pools, please switch the network."
+            type="changeChain"
+          />
+        )}
+      </>
+      }
     </>
   )
 }

@@ -38,7 +38,7 @@ const useConnect = () => {
       } else if (accounts[0] !== userWalletAddress) {
         dispatch(actionGetUserAddressWallet(accounts[0]))
         setIsLogged(true)
-        ToastSuccess('Connected to MetaMask.')
+        // ToastSuccess('Connected to MetaMask.')
       }
     } catch (error: any) {
       console.log(error.message)
