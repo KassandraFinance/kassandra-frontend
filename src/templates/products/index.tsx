@@ -1,8 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import theme from '../../styles/theme'
+import * as S from './styles'
 
 import HeimOperations from '../../components/HeimOperations'
 import IndexDetails from '../../components/IndexDetails'
@@ -10,7 +9,7 @@ import IndexDetails from '../../components/IndexDetails'
 
 const Products = () => {
   const [coinInfoList, setCoinInfoList] = React.useState<Array<any>>([])
-  
+
   const { poolTokensArray } = useSelector((state: RootStateOrAny) => state)
 
   async function getCoinList() {
@@ -46,7 +45,7 @@ const Products = () => {
       method: 'get'
     })
       .then(res => res.json())
-      .then(res => setCoinInfoList(prevState => [...prevState, {...res, allocation}]))
+      .then(res => setCoinInfoList(prevState => [...prevState, { ...res, allocation }]))
       .catch(err => err)
   }
 
@@ -60,38 +59,45 @@ const Products = () => {
 
   return (
     <>
-      <ProductsContainer>
-        <ComingSoon src="assets/coming-soon.png" alt="coming-soon" />
+      <S.Intro>
+        <div style={{ display: 'flex' }}>
+          <img src='assets/logo-heim.svg ' alt='logo-heim' />
+          <div>
+            <h1>Heim Social Index</h1>
+            <span>Heim</span>
+          </div>
+        </div>
+        <S.IntroValues>
+          <S.IntroPrice>
+            <h3>
+              Price
+            </h3>
+            <div />
+            <span>
+              $1,235.124
+            </span>
+          </S.IntroPrice>
+          <S.IntroTVL>
+            <h3>
+              TVL
+            </h3>
+            <div />
+            <span>
+              $785,345.67
+            </span>
+          </S.IntroTVL>
+        </S.IntroValues>
+      </S.Intro>
+      <S.ProductsContainer>
+        <S.ComingSoon src="assets/coming-soon.png" alt="coming-soon" />
+
         <HeimOperations />
-      </ProductsContainer>
+      </S.ProductsContainer>
       <section>
         <IndexDetails coinInfoList={coinInfoList} />
       </section>
     </>
   )
 }
-
-const ProductsContainer = styled.section`
-  max-width: 1520px;
-  margin: 40px auto;
-  padding: 0 ${theme.spacings.space32};
-;
-
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: auto 440px;
-  gap: 60px;
-
-  @media (max-width: 900px) {
-    grid-template-columns: 1fr;
-  }
-`
-
-const ComingSoon = styled.img`
-  max-width: 100%;
-  @media (max-width: 900px) {
-    display: none;
-  }
-`
 
 export default Products
