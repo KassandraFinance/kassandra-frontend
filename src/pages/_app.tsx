@@ -5,7 +5,6 @@ import { MatomoProvider, createInstance } from '@datapunt/matomo-tracker-react'
 import Head from 'next/head'
 import { ThemeProvider } from 'styled-components'
 
-import '../styles/globals.scss'
 import GlobalStyles from '../styles/global'
 import theme from '../styles/theme'
 
