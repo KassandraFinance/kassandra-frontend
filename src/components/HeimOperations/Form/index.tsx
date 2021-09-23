@@ -24,6 +24,7 @@ import { FormContainer, SpanLight, ExchangeRate } from './styles'
 import { BNtoDecimal, wei } from '../../../utils/numerals'
 import { confirmWithdraw } from '../../../utils/confirmTransactions'
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
+import ModalWalletConnect from '../../ModalWalletConnect'
 
 interface IFormProps {
   typeAction: string;
@@ -56,6 +57,9 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
   const [swapOutPrice, setSwapOutPrice] = React.useState(new BigNumber(-1))
   const [swapOutAmount, setSwapOutAmount] = React.useState([new BigNumber(0)])
   const [swapOutBalance, setSwapOutBalance] = React.useState([new BigNumber(-1)])
+
+  const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
+
 
   const dispatch = useDispatch()
 
@@ -282,7 +286,7 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
           corePool.totalDenormalizedWeight(),
           corePool.swapFee()
         ])
-  
+
         const [newSwapOutAmount, newSwapOutPrice] = await Promise.all([
           corePool.calcPoolOutGivenSingleIn(
             swapInTotalPoolBalance,
@@ -623,10 +627,17 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
       ) : (
         <Button
           backgroundSecondary
-          fullWidth type="button" onClick={connect}
+          fullWidth
+          type="button"
+          onClick={() => setIsModaWallet(true)}
           text='Connect Wallet'
         />
       )}
+      <ModalWalletConnect
+        modalOpen={isModalWallet}
+        setModalOpen={setIsModaWallet}
+        connect={connect}
+      />
     </FormContainer>
   )
 }
