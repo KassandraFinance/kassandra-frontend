@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import { useRouter } from 'next/router'
-// import { useSelector, RootStateOrAny } from 'react-redux'
+import { useSelector, RootStateOrAny, connect } from 'react-redux'
 
 import { Menu2 as MenuIcon } from '@styled-icons/remix-fill/Menu2'
 import { Close as CloseIcon } from '@styled-icons/material-outlined/Close'
@@ -13,22 +13,25 @@ import MediaMatch from '../MediaMatch'
 import Button from '../Button'
 import * as S from './styles'
 
-// import useConnect from '../../hooks/useConnect'
-// import substr from '../../utils/substr'
-// import web3 from '../../utils/web3'
+import useConnect from '../../hooks/useConnect'
+import substr from '../../utils/substr'
+import web3 from '../../utils/web3'
+import ModalWalletConnect from '../ModalWalletConnect'
 
 export type MenuProps = {
   username?: string
 }
 
 const Header = () => {
-  // const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-  // const { connect, isLogged } = useConnect()
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
+  const { connect, isLogged } = useConnect()
   const [isOpen, setIsOpen] = React.useState(false)
   const { asPath } = useRouter()
   const { trackEvent } = useMatomo()
 
   function clickMatomoEvent() {
+
     trackEvent({
       category: 'header',
       action: 'click-on-heim',
@@ -82,32 +85,47 @@ const Header = () => {
             <S.MenuLinkDisable>About</S.MenuLinkDisable>
           </Link>
 
-          {/* {web3.currentProvider !== null ? (
+          {web3.currentProvider !== null ? (
             isLogged ? (
-              <S.ButtonConnectWallet
-                type="button"
-                style={{ backgroundColor: '${theme.colors.cyan}', color: '#211426' }}
-              >
-                {substr(userWalletAddress)}
-              </S.ButtonConnectWallet>
+              <Button
+                backgroundBlack
+                size="large"
+                text={substr(userWalletAddress)} />
+              // <S.ButtonConnectWallet
+              //   type="button"
+              //   style={{ backgroundColor: '${theme.colors.cyan}', color: '#211426' }}
+              // >
+              //   {substr(userWalletAddress)}
+              // </S.ButtonConnectWallet>
             ) : (
-              <S.ButtonConnectWallet type="button" onClick={connect}>
-                Connect Wallet
-              </S.ButtonConnectWallet>
+              <Button
+                as='button'
+                backgroundBlack
+                size="large"
+                onClick={() => setIsModaWallet(true)}
+                text='Connect Wallet' />
+
             )
           ) : (
-            <S.LinkInstallMetaMask
+            <Button
+              as='a'
+              backgroundBlack
+              size="large"
               href="https://metamask.io/download.html"
               target="_blank"
-            >
-              Install MetaMask!
-            </S.LinkInstallMetaMask>
-          )} */}
-          <Button
+              text='Install MetaMask!' />
+            // <S.LinkInstallMetaMask
+            //   href="https://metamask.io/download.html"
+            //   target="_blank"
+            // >
+            //   Install MetaMask!
+            // </S.LinkInstallMetaMask>
+          )}
+          {/* <Button
             backgroundBlack
             size="large"
             disabledNoEvent
-            text='Connect Wallet' />
+            text='Connect Wallet' /> */}
         </S.MenuNav>
       </MediaMatch>
 
@@ -143,9 +161,19 @@ const Header = () => {
           <Link href="/" passHref>
             <S.MenuLinkDisable>About</S.MenuLinkDisable>
           </Link>
-          <Button backgroundBlack text='Connect Wallet' size="large" disabledNoEvent />
+          <Button
+            backgroundBlack
+            text='Connect Wallet'
+            size="large"
+            onClick={() => setIsModaWallet(true)}
+          />
         </S.MenuNav>
       </S.MenuFull>
+      <ModalWalletConnect
+        modalOpen={isModalWallet}
+        setModalOpen={setIsModaWallet}
+        connect={connect}
+      />
     </S.Wrapper>
   )
 }
