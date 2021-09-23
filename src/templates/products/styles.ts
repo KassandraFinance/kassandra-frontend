@@ -93,10 +93,9 @@ export const IntroTVL = styled.section`
 
 `
 export const Text = styled.section`
-  padding: 0 32px;
+  padding: 32px;
   max-width: 800px;
   margin: auto;
-  margin-bottom: 110px ;
   h2{
     font-size: 28px ;
     font-weight: ${theme.font.weight.normal};
