@@ -5,7 +5,7 @@ import web3 from '../../../utils/web3'
 
 import { BNtoDecimal, wei } from '../../../utils/numerals'
 
-import { TokenDetails } from './index'
+import { TokenDetails } from '../../../store/modules/poolTokens/types'
 
 import { 
   InputTokensContainer, 

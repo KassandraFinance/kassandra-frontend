@@ -3,7 +3,7 @@ import BigNumber from 'bn.js'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 
-import { TokenDetails } from './index'
+import { TokenDetails } from '../../../store/modules/poolTokens/types'
 
 import { 
   ButtonMax,

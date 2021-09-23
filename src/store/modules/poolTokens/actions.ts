@@ -1,8 +1,8 @@
-import { Types, IPoolTokensProps } from './types'
+import { Types, TokenDetails } from './types'
 
-export const actionGetPoolTokens = (poolTokens: Array<IPoolTokensProps>) => {
+export const actionGetPoolTokens = (poolTokensArray: Array<TokenDetails>) => {
   return {
     type: Types.GET_POOL_TOKENS, 
-    payload: poolTokens
+    payload: poolTokensArray
   }
 }

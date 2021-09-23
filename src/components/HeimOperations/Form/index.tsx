@@ -1,7 +1,11 @@
 import React from 'react'
 import BigNumber from 'bn.js'
+import { useDispatch } from 'react-redux'
 import { TransactionReceipt } from 'web3-core'
 import { EventData } from 'web3-eth-contract'
+
+import { actionGetPoolTokens } from '../../../store/modules/poolTokens/actions'
+
 import Button from '../../Button'
 
 import { HeimCRPPOOL, HeimCorePool } from '../../../constants/tokenAddresses'
@@ -19,6 +23,7 @@ import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 import { FormContainer, SpanLight, ExchangeRate } from './styles'
 import { BNtoDecimal, wei } from '../../../utils/numerals'
 import { confirmWithdraw } from '../../../utils/confirmTransactions'
+import { TokenDetails } from '../../../store/modules/poolTokens/types'
 
 interface IFormProps {
   typeAction: string;
@@ -28,13 +33,6 @@ interface IFormProps {
 
 interface Address2Index {
   [key: string]: number;
-}
-
-export interface TokenDetails {
-  address: string;
-  name: string;
-  symbol: string;
-  decimals: BigNumber;
 }
 
 const Form = ({ typeAction, title, isLogged }: IFormProps) => {
@@ -58,6 +56,12 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
   const [swapOutPrice, setSwapOutPrice] = React.useState(new BigNumber(-1))
   const [swapOutAmount, setSwapOutAmount] = React.useState([new BigNumber(0)])
   const [swapOutBalance, setSwapOutBalance] = React.useState([new BigNumber(-1)])
+
+  const dispatch = useDispatch()
+
+  React.useEffect(() => {
+    dispatch(actionGetPoolTokens(poolTokenDetails))
+  }, [poolTokenDetails])
 
   // get tokens
   React.useEffect(() => {
@@ -131,6 +135,8 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
       const newNames: Promise<string>[] = []
       const newSymbols: Promise<string>[] = []
       const newDecimals: Promise<BigNumber>[] = []
+      const newAllocation: Promise<Number>[] = []
+
 
       for (let i = 0; i < poolTokens.length; i += 1) {
         const token = ERC20(poolTokens[i])
@@ -138,6 +144,7 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
         newNames.push(token.name())
         newSymbols.push(token.symbol())
         newDecimals.push(token.decimals())
+        newAllocation.push(corePool.normalizedWeight(poolTokens[i]))
       }
 
       newAddresses.push(HeimCRPPOOL)
@@ -153,7 +160,8 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
               address: newAddresses[i],
               name: await newNames[i],
               symbol: await newSymbols[i],
-              decimals: await newDecimals[i]
+              decimals: await newDecimals[i],
+              allocation: await newAllocation[i]
             }))
         )
       )
