@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import theme from '../../styles/theme'
+import media from 'styled-media-query'
 
 
 export const ProductsContainer = styled.section`
@@ -91,5 +92,80 @@ export const IntroPrice = styled.section`
 export const IntroTVL = styled.section`
 
 `
+export const Text = styled.section`
+  padding: 0 32px;
+  max-width: 800px;
+  margin: auto;
+  margin-bottom: 110px ;
+  h2{
+    font-size: 28px ;
+    font-weight: ${theme.font.weight.normal};
+    margin-bottom:24px;
+  }
+  span{
+    display:inline-block;
+    font-size: ${theme.font.sizes.font16} ;
+    font-weight: ${theme.font.weight.light};
+    margin-bottom:16px;
+  }
+  ol {
+    display:inline-block;
+    font-size: ${theme.font.sizes.font16} ;
+    font-weight: ${theme.font.weight.light};
+    list-style: decimal;
+    padding-left:35px;
+    margin-bottom: 32px;
+    li{
+    margin-bottom: 16px;
+    }
+  }
+  img{
+    max-width: 70%;
+    margin: 0 32px;
+  }
+`
+export const Link = styled.div`
+    margin: 32px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-
+    a {
+      color: ${theme.colors.cyan};
+      border: none;
+      text-decoration: none;
+      font-size: ${theme.font.sizes.font18};
+      cursor: pointer;
+      position: relative;
+      border: none;
+      text-decoration: none;
+      font-size: ${theme.font.sizes.font18};
+      font-weight: ${theme.font.weight.normal};
+      cursor: pointer;
+      &:hover {
+        &::after {
+          content: '';
+          max-width: 100%;
+          text-align: left;
+          position: absolute;
+          display: block;
+          height: 0.1rem;
+          background-color: ${theme.colors.cyan};
+          animation: hoverAnimation 0.3s forwards;
+        }
+        @keyframes hoverAnimation {
+          from {
+            width: 0;
+            left: 50%;
+          }
+          to {
+            width: 100%;
+            left: 0;
+          }
+        }
+      }
+      ${media.lessThan('large')`
+  font-size: ${theme.font.sizes.font12};
+  `}
+    }
+`
