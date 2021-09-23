@@ -32,8 +32,8 @@ export const Intro = styled.div`
   grid-template-columns: auto 440px;
   gap: 60px;
   position: relative;
-  margin: 0 40px;
   align-items: center;
+  margin: 0 40px;
   margin-top: 70px;
 
   img{
@@ -65,6 +65,7 @@ export const Intro = styled.div`
     grid-template-columns: 1fr;
     max-width: 440px;
     margin: auto;
+    margin-top: 35px;
     padding: 0 32px;
   }
 `
@@ -79,6 +80,9 @@ h3{
 div{
   margin: 12px 0;
   border-bottom: 2px solid ${theme.colors.magenta};
+}
+@media(max-width: 900px) {
+  max-width: 100%;
 }
 `
 export const IntroPrice = styled.section`

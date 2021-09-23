@@ -9,7 +9,7 @@ interface ICoinInfoList {
   allocation: number
 }
 interface IIndexDetailsProps {
- coinInfoList: Array<ICoinInfoList>
+  coinInfoList: Array<ICoinInfoList>
 }
 
 const IndexDetails = ({ coinInfoList }: IIndexDetailsProps) => {
@@ -57,7 +57,7 @@ const IndexDetails = ({ coinInfoList }: IIndexDetailsProps) => {
                     {`${coin.allocation}%`}
                   </S.Coin>
                 </S.Td>
-                <S.Td 
+                <S.Td
                   negative={coin.market_data.price_change_percentage_24h < 0}
                   change24h={true}
                 >

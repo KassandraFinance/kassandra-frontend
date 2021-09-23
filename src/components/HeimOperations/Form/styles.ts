@@ -273,6 +273,7 @@ export const InputDefaultContainer = styled.div`
   width: 100%;
   height: 94px;
   margin-top: 16px;
+  margin-bottom: 16px;
   position: relative;
   `
 
