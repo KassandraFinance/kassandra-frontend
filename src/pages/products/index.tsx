@@ -65,10 +65,7 @@ const Products = () => {
         <HeimOperations />
       </ProductsContainer>
       <section>
-      <IndexDetails />
-    </section>
-  </>
-)
+        <IndexDetails coinInfoList={coinInfoList} />
       </section>
     </>
   )

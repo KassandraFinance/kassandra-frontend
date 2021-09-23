@@ -2,31 +2,77 @@ import React from 'react'
 
 import * as S from './styles'
 
-const IndexDetails = () => (
-  <S.IndexDetailsContainer>
-    <h1>Details</h1>
-    <S.Table>
-      <thead>
-        <S.Tr>
-          <S.Th>Colour</S.Th>
-          <S.Th>Name</S.Th>
-          <S.Th>Value/Token</S.Th>
-          <S.Th>Allocation</S.Th>
-          <S.Th>Change 24h</S.Th>
-        </S.Tr>
-      </thead>
-      <tbody>
-        <S.Tr>
-          <S.Colour />
-          <S.Td>BTC</S.Td>
-          <S.Td>3.789,00 BTC</S.Td>
-          <S.Td>40%</S.Td>
-          <S.Td style={{ color: '#EB5757' || '#6FCF97' }} >-3.26</S.Td>
-        </S.Tr>
-      </tbody>
-    </S.Table>
-  </S.IndexDetailsContainer>
-)
+interface ICoinInfoList {
+  symbol: string
+  image: any
+  market_data: any
+  allocation: number
+}
+interface IIndexDetailsProps {
+ coinInfoList: Array<ICoinInfoList>
+}
+
+const IndexDetails = ({ coinInfoList }: IIndexDetailsProps) => {
+  function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+  coinInfoList.sort((a, b) => {
+    return b.allocation - a.allocation;
+  });
+
+  return (
+    <S.IndexDetailsContainer>
+      <h1>Details</h1>
+      <S.Table>
+        <thead>
+          <S.Tr>
+            <S.Th>Colour</S.Th>
+            <S.Th>Name</S.Th>
+            <S.Th>Price</S.Th>
+            <S.Th>Allocation</S.Th>
+            <S.Th>Change 24h</S.Th>
+          </S.Tr>
+        </thead>
+        <tbody>
+          {
+            coinInfoList.map((coin) => (
+              <S.Tr>
+                <S.Colour style={{ background: getRandomColor() }} />
+                <S.Td change24h={false}>
+                  <S.Coin width={110}>
+                    <img src={coin.image.small} alt="" /> {coin.symbol.toLocaleUpperCase()}
+                  </S.Coin>
+                </S.Td>
+                <S.Td change24h={false}>
+                  {`${coin.market_data.current_price.usd.toFixed(2)} USD`}
+                </S.Td>
+                <S.Td change24h={false}>
+                  <S.Coin width={60}>
+                    {`${coin.allocation}%`}
+                  </S.Coin>
+                </S.Td>
+                <S.Td 
+                  negative={coin.market_data.price_change_percentage_24h < 0}
+                  change24h={true}
+                >
+                  <S.Coin width={60}>
+                    {`${coin.market_data.price_change_percentage_24h.toFixed(2)}%`}
+                  </S.Coin>
+                </S.Td>
+              </S.Tr>
+            ))
+          }
+        </tbody>
+      </S.Table>
+    </S.IndexDetailsContainer>
+  )
+}
 
 
 export default IndexDetails
