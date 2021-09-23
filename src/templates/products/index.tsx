@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
+import useConnect from '../../hooks/useConnect'
 
 import HeimOperations from '../../components/HeimOperations'
 import IndexDetails from '../../components/IndexDetails'
@@ -16,9 +17,10 @@ declare let window: {
 const Products = () => {
   const [coinInfoList, setCoinInfoList] = React.useState<Array<any>>([])
   const [chainId, setChainId] = React.useState<string>('')
+  const [state, setState] = React.useState<boolean>(false)
 
-  const { poolTokensArray, userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-
+  const { poolTokensArray } = useSelector((state: RootStateOrAny) => state)
+  const { userWalletAddress } = useConnect()
 
   async function getCoinList() {
     const URL = 'https://api.coingecko.com/api/v3/coins/list'
@@ -53,7 +55,9 @@ const Products = () => {
       method: 'get'
     })
       .then(res => res.json())
-      .then(res => setCoinInfoList(prevState => [...prevState, { ...res, allocation }]))
+      .then(res => {
+        setCoinInfoList(prevState => [...prevState, { ...res, allocation }])
+      })
       .catch(err => err)
   }
 
@@ -81,9 +85,28 @@ const Products = () => {
     getChainId()
   }, [userWalletAddress])
 
+  React.useEffect(() => {
+    setTimeout(() => {
+      setState(true)
+    }, 800)
+  }, [])
+
   return (
     <>
-      {web3.currentProvider !== null && userWalletAddress && chainId === "0x3" ?
+      {!state && 
+        <h1 
+          style={{ 
+            height: '90vh', 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center',
+            fontWeight: 500 
+          }}
+        >
+          Loading...
+        </h1>
+      }
+      {web3.currentProvider !== null && userWalletAddress && chainId === "0x3" && state ?
         <>
           <S.Intro>
             <div style={{ display: 'flex' }}>
@@ -180,7 +203,7 @@ const Products = () => {
         </>
         :
         <>
-          {web3.currentProvider === null && (
+          {web3.currentProvider === null && state && (
             <Web3Disabled
               textButton="Install Metamask"
               textHeader="Wallet connection to ETH mainnet is required"
@@ -188,7 +211,7 @@ const Products = () => {
               type="install"
             />
           )}
-          {!userWalletAddress && chainId === "0x3" && (
+          {!userWalletAddress && chainId === "0x3" && state && (
             <Web3Disabled
               textButton="Connect Wallet"
               textHeader="Wallet connection to ETH mainnet is required"
@@ -196,7 +219,7 @@ const Products = () => {
               type="connect"
             />
           )}
-          {web3.currentProvider !== null && chainId !== "0x3" && (
+          {web3.currentProvider !== null && chainId !== "0x3" && state && (
             <Web3Disabled
               textButton="Connect to Ropsten"
               textHeader="Your wallet is set to the wrong network. Please switch to the test Ropsten network."
