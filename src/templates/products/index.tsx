@@ -170,9 +170,9 @@ const Products = () => {
               <a
                 target="_blank"
                 rel="noopener noreferrer"
-                href="https://drive.google.com/file/d/12jxIMtBVqaY7bMbLmt52Lo0xDFUURZsb/view?usp=sharing"
+                href="https://medium.com/heimdall-research-crypto/the-heimdall-social-index-9595fdfb9ddc"
               >
-                Download the full document <b>here</b>.
+                Check full document on <b>Medium</b>.
               </a>
             </S.Link>
 
