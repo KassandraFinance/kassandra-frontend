@@ -89,6 +89,7 @@ const Products = () => {
         </S.IntroValues>
       </S.Intro>
       <S.ProductsContainer>
+
         <S.ComingSoon src="assets/coming-soon.png" alt="coming-soon" />
 
         <HeimOperations />
@@ -125,7 +126,7 @@ const Products = () => {
         </span>
         <h2>Index Maintenance</h2>
         <span>
-          At first, the Heimdall Social Index will have a whitelist already determined by the Kassandra Foundation.However, as mentioned before, the $KACY token holders will be able to alter the whitelist if they managed to reach a consensus.It is required that any token to be added to the whitelist must be available on the Ethereum blockchain and meet other conditions such as:
+          At first, the Heimdall Social Index will have a whitelist already determined by the Kassandra Foundation. However, as mentioned before, the $KACY token holders will be able to alter the whitelist if they managed to reach a consensus.It is required that any token to be added to the whitelist must be available on the Ethereum blockchain and meet other conditions such as:
         </span>
         <ol>
           <li>Accurate market data.Price, market cap and circulating supply</li>
@@ -142,9 +143,11 @@ const Products = () => {
         <img src="assets/image 24.svg" alt="index value calc" />
         <S.Link>
           <a
-            href="https://heimdall.land/"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://drive.google.com/file/d/12jxIMtBVqaY7bMbLmt52Lo0xDFUURZsb/view?usp=sharing"
           >
-            Download the full document here.
+            Download the full document <b>here</b>.
           </a>
         </S.Link>
 

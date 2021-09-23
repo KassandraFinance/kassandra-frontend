@@ -26,7 +26,7 @@ export const ComingSoon = styled.img`
 `
 export const Intro = styled.div`
   max-width: 1520px;
-
+  margin: auto;
   display: grid;
   position: absolute;
   top: 0;
@@ -34,7 +34,7 @@ export const Intro = styled.div`
   gap: 60px;
   position: relative;
   align-items: center;
-  margin: 0 40px;
+  padding: 0 40px;
   margin-top: 70px;
 
   img{
@@ -120,7 +120,8 @@ export const Text = styled.section`
     }
   }
   img{
-    max-width: 70%;
+
+    max-width: 100%;
     margin: 0 32px;
   }
 `
