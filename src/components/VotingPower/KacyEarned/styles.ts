@@ -14,7 +14,7 @@ export const KacyEarned = styled.div`
   h3 {
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.medium};
-    margin: 2px 0;
+    margin: 2px 0 !important;
   }
 
   span {

@@ -3,9 +3,11 @@ import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 export const Web3Disabled = styled.section`
+	max-width: 1520px;
 	height: calc(100vh - 100px);
-  max-width: 1520px;
+	margin: 0 auto;
 	padding: 32px;
+
 	display: flex;
 	align-items: center;
 	justify-content: center;

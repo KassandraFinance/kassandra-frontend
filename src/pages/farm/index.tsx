@@ -6,84 +6,158 @@ import theme from '../../styles/theme'
 
 import { Kacy, Staking } from '../../constants/tokenAddresses'
 
+import web3 from '../../utils/web3'
+
 import useConnect from '../../hooks/useConnect'
 import useERC20Contract from '../../hooks/useERC20Contract'
 import useStakingContract from '../../hooks/useStakingContract'
 
+import Web3Disabled from '../../components/Web3Disabled'
 import TotalVoting from '../../components/TotalVoting'
 import VotingPower from '../../components/VotingPower'
 import OthersStakingPools from '../../components/OthersStakingPools'
 
+declare let window: {
+  ethereum: any,
+}
+
 const Farm = () => {
+  const [chainId, setChainId] = React.useState<string>('')
+  const [loading, setLoading] = React.useState<boolean>(true)
+
   const kacyToken = useERC20Contract(Kacy)
   const kacyStake = useStakingContract(Staking)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { connect } = useConnect()
 
+  async function getChainId() {
+    if (web3.currentProvider === null) {
+      return
+    }
+
+    const id = await window.ethereum.request({ method: 'eth_chainId' })
+    setChainId(id)
+  }
+
+  React.useEffect(() => {
+    getChainId()
+  }, [userWalletAddress])
+  
+  
+  React.useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 800)
+  }, [])
+
   return (
-    <FarmContainer>
-      <h1>Staking</h1>
-      <h3>Stake $KACY for Voting Power</h3>
-      <GridStaking>
-        <VotingPower
-          days="0"
-          percentage="12"
-          pid={0}
-          connect={connect}
-          approve={kacyToken.approve}
-          getAllowance={kacyToken.allowance}
-          balanceOf={kacyStake.balance}
-          earned={kacyStake.earned}
-          getReward={kacyStake.getReward}
-          withdrawable={kacyStake.withdrawable}
-          poolInfo={kacyStake.poolInfo}
-          unstaking={kacyStake.unstaking}
-          stakedUntil={kacyStake.stakedUntil}
-        />
-        <VotingPower
-          days="30"
-          percentage="20"
-          pid={1}
-          connect={connect}
-          approve={kacyToken.approve}
-          getAllowance={kacyToken.allowance}
-          balanceOf={kacyStake.balance}
-          earned={kacyStake.earned}
-          getReward={kacyStake.getReward}
-          withdrawable={kacyStake.withdrawable}
-          poolInfo={kacyStake.poolInfo}
-          unstaking={kacyStake.unstaking}
-          stakedUntil={kacyStake.stakedUntil}
-        />
-        <VotingPower
-          days="45"
-          percentage="32"
-          pid={2}
-          connect={connect}
-          approve={kacyToken.approve}
-          getAllowance={kacyToken.allowance}
-          balanceOf={kacyStake.balance}
-          earned={kacyStake.earned}
-          getReward={kacyStake.getReward}
-          withdrawable={kacyStake.withdrawable}
-          poolInfo={kacyStake.poolInfo}
-          unstaking={kacyStake.unstaking}
-          stakedUntil={kacyStake.stakedUntil}
-        />
-      </GridStaking>
-      <TotalVoting
-        getTotalVotes={kacyStake.totalVotes}
-        getCurrentVotes={kacyStake.currentVotes}
-        userWalletAddress={userWalletAddress}
-      />
-      <h3>Other Staking Pools</h3>
-      <GridStaking>
-        <OthersStakingPools connect={connect} img="logo-heim" />
-        <OthersStakingPools connect={connect} img="heim-index" />
-        <OthersStakingPools connect={connect} img="" />
-      </GridStaking>
-    </FarmContainer>
+    <>
+      {loading && 
+        <h1 
+          style={{ 
+            height: '90vh', 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center',
+            fontWeight: 500 
+          }}
+        >
+          Loading...
+        </h1>
+      }
+      {web3.currentProvider !== null && userWalletAddress && chainId === "0x3" && !loading ?
+        <FarmContainer>
+          <h1>Staking</h1>
+          <h3>Stake $KACY for Voting Power</h3>
+          <GridStaking>
+            <VotingPower
+              days="0"
+              percentage="12"
+              pid={0}
+              connect={connect}
+              approve={kacyToken.approve}
+              getAllowance={kacyToken.allowance}
+              balanceOf={kacyStake.balance}
+              earned={kacyStake.earned}
+              getReward={kacyStake.getReward}
+              withdrawable={kacyStake.withdrawable}
+              poolInfo={kacyStake.poolInfo}
+              unstaking={kacyStake.unstaking}
+              stakedUntil={kacyStake.stakedUntil}
+            />
+            <VotingPower
+              days="30"
+              percentage="20"
+              pid={1}
+              connect={connect}
+              approve={kacyToken.approve}
+              getAllowance={kacyToken.allowance}
+              balanceOf={kacyStake.balance}
+              earned={kacyStake.earned}
+              getReward={kacyStake.getReward}
+              withdrawable={kacyStake.withdrawable}
+              poolInfo={kacyStake.poolInfo}
+              unstaking={kacyStake.unstaking}
+              stakedUntil={kacyStake.stakedUntil}
+            />
+            <VotingPower
+              days="45"
+              percentage="32"
+              pid={2}
+              connect={connect}
+              approve={kacyToken.approve}
+              getAllowance={kacyToken.allowance}
+              balanceOf={kacyStake.balance}
+              earned={kacyStake.earned}
+              getReward={kacyStake.getReward}
+              withdrawable={kacyStake.withdrawable}
+              poolInfo={kacyStake.poolInfo}
+              unstaking={kacyStake.unstaking}
+              stakedUntil={kacyStake.stakedUntil}
+            />
+          </GridStaking>
+          <TotalVoting
+            getTotalVotes={kacyStake.totalVotes}
+            getCurrentVotes={kacyStake.currentVotes}
+            userWalletAddress={userWalletAddress}
+          />
+          <h3>Other Staking Pools</h3>
+          <GridStaking>
+            <OthersStakingPools connect={connect} img="logo-heim" />
+            <OthersStakingPools connect={connect} img="heim-index" />
+            <OthersStakingPools connect={connect} img="" />
+          </GridStaking>
+        </FarmContainer>
+      :
+        <>
+          {web3.currentProvider === null && !loading && (
+            <Web3Disabled
+              textButton="Install Metamask"
+              textHeader="Wallet connection to ETH mainnet is required"
+              bodyText="To have access to all our staking pools, please connect your wallet"
+              type="install"
+            />
+          )}
+          {!userWalletAddress && chainId === "0x3" && !loading && (
+            <Web3Disabled
+              textButton="Connect Wallet"
+              textHeader="Wallet connection to ETH mainnet is required"
+              bodyText="To have access to all our staking pools, please connect your wallet"
+              type="connect"
+            />
+          )}
+          {web3.currentProvider !== null && chainId !== "0x3" && !loading && (
+            <Web3Disabled
+              textButton="Connect to Ropsten"
+              textHeader="Your wallet is set to the wrong network. Please switch to the test Ropsten network."
+              bodyText="To have access to all our staking pools, please switch the network."
+              type="changeChain"
+            />
+          )}
+        </>
+      }
+    </>
   )
 }
 

@@ -270,7 +270,7 @@ const VotingPower = ({
               <S.Stake>
                 <p>
                   {BNtoDecimal(
-                    infoStake.yourStake || new BigNumber(0),
+                    infoStake.yourStake,
                     new BigNumber(18),
                     6
                   )}{' '}

@@ -17,7 +17,7 @@ declare let window: {
 const Products = () => {
   const [coinInfoList, setCoinInfoList] = React.useState<Array<any>>([])
   const [chainId, setChainId] = React.useState<string>('')
-  const [state, setState] = React.useState<boolean>(false)
+  const [loading, setLoading] = React.useState<boolean>(true)
 
   const { poolTokensArray } = useSelector((state: RootStateOrAny) => state)
   const { userWalletAddress } = useConnect()
@@ -76,9 +76,6 @@ const Products = () => {
 
     const id = await window.ethereum.request({ method: 'eth_chainId' })
     setChainId(id)
-    if (id !== '0x3') {
-
-    }
   }
 
   React.useEffect(() => {
@@ -87,13 +84,13 @@ const Products = () => {
 
   React.useEffect(() => {
     setTimeout(() => {
-      setState(true)
+      setLoading(false)
     }, 800)
   }, [])
 
   return (
     <>
-      {!state && 
+      {loading && 
         <h1 
           style={{ 
             height: '90vh', 
@@ -106,7 +103,7 @@ const Products = () => {
           Loading...
         </h1>
       }
-      {web3.currentProvider !== null && userWalletAddress && chainId === "0x3" && state ?
+      {web3.currentProvider !== null && userWalletAddress && chainId === "0x3" && !loading ?
         <>
           <S.Intro>
             <div style={{ display: 'flex' }}>
@@ -203,7 +200,7 @@ const Products = () => {
         </>
         :
         <>
-          {web3.currentProvider === null && state && (
+          {web3.currentProvider === null && !loading && (
             <Web3Disabled
               textButton="Install Metamask"
               textHeader="Wallet connection to ETH mainnet is required"
@@ -211,7 +208,7 @@ const Products = () => {
               type="install"
             />
           )}
-          {!userWalletAddress && chainId === "0x3" && state && (
+          {!userWalletAddress && chainId === "0x3" && !loading && (
             <Web3Disabled
               textButton="Connect Wallet"
               textHeader="Wallet connection to ETH mainnet is required"
@@ -219,7 +216,7 @@ const Products = () => {
               type="connect"
             />
           )}
-          {web3.currentProvider !== null && chainId !== "0x3" && state && (
+          {web3.currentProvider !== null && chainId !== "0x3" && !loading && (
             <Web3Disabled
               textButton="Connect to Ropsten"
               textHeader="Your wallet is set to the wrong network. Please switch to the test Ropsten network."
