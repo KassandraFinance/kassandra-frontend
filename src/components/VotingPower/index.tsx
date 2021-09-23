@@ -38,6 +38,7 @@ interface IInfoStakeStaticProps {
   kacyRewards: BigNumber;
   yourDailyKacyReward: BigNumber;
   withdrawDelay: any;
+  totalStaked: BigNumber;
 }
 
 interface IStakingProps {
@@ -48,6 +49,7 @@ interface IStakingProps {
   approve: (
     spenderAddress: string,
     userWalletAddress: string,
+    message?: string,
     onComplete?: CompleteCallback | undefined
   ) => Promise<boolean>;
   getAllowance: (
@@ -102,7 +104,8 @@ const VotingPower = ({
       endDate: '',
       kacyRewards: new BigNumber(0),
       yourDailyKacyReward: new BigNumber(0),
-      withdrawDelay: ''
+      withdrawDelay: '',
+      totalStaked: new BigNumber(0)
     })
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
@@ -112,7 +115,7 @@ const VotingPower = ({
     if (isApproveKacyStaking) {
       return
     }
-    const res = await approve(Staking, userWalletAddress, () => {})
+    const res = await approve(Staking, userWalletAddress)
     setIsApproveKacyStaking(res)
   }
 
@@ -135,21 +138,14 @@ const VotingPower = ({
       )
       const withdrawDelay = Number(poolInfoResponse.withdrawDelay) / 86400
 
-      let yourDailyKacyReward: BigNumber = new BigNumber(0)
-
-      if (infoStake.yourStake.toString() !== "0") {
-        yourDailyKacyReward = infoStakeStatic.kacyRewards
-          .mul(infoStake.yourStake ? infoStake.yourStake : new BigNumber(0))
-          .div(new BigNumber(poolInfoResponse.depositedAmount))
-      }
-
       setInfoStakeStatic({
         votingMultiplier: poolInfoResponse.votingMultiplier,
         startDate,
         endDate,
         kacyRewards,
-        yourDailyKacyReward,
-        withdrawDelay: withdrawDelay > 0 ? withdrawDelay : 0
+        yourDailyKacyReward: new BigNumber(0),
+        withdrawDelay: withdrawDelay > 0 ? withdrawDelay : 0,
+        totalStaked: new BigNumber(poolInfoResponse.depositedAmount)
       })
     }
 
@@ -166,6 +162,21 @@ const VotingPower = ({
       setUnstake(unstake)
     }
   }, [userWalletAddress])
+
+  React.useEffect(() => {
+    let yourDailyKacyReward: BigNumber = new BigNumber(0)
+
+    if (infoStake.yourStake.toString() !== "0") {
+      yourDailyKacyReward = infoStakeStatic.kacyRewards
+        .mul(infoStake.yourStake ? infoStake.yourStake : new BigNumber(0))
+        .div(new BigNumber(infoStakeStatic.totalStaked))
+
+      setInfoStakeStatic((prevState) => ({
+        ...prevState,
+        yourDailyKacyReward
+      }))
+    }
+  }, [infoStake.yourStake, infoStakeStatic.kacyRewards, infoStakeStatic.totalStaked])
 
   React.useEffect(() => {
     getAllowance(Staking, userWalletAddress).then((response: boolean) =>
@@ -187,10 +198,6 @@ const VotingPower = ({
       const amount = event.returnValues.amount
       if (event.transactionHash !== transaction) {
         transaction = event.transactionHash
-        console.log(event.transactionHash)
-        console.log(amount)
-        console.log(event.returnValues)
-  
         setInfoStake(prevState => ({
           yourStake: prevState.yourStake.add(new BigNumber(amount)),
           withdrawable: prevState.withdrawable
@@ -198,8 +205,6 @@ const VotingPower = ({
       }
     })
 
-    console.log(pid)
-    
     const withdrawnEvent = token.events.Withdrawn({
       filter: {
         pid,
@@ -209,10 +214,6 @@ const VotingPower = ({
       const amount = event.returnValues.amount
       if (event.transactionHash !== transaction) {
         transaction = event.transactionHash
-        console.log(pid)
-        console.log(amount)
-        console.log(event.returnValues)
-        
         setInfoStake(prevState => ({
           yourStake: prevState.yourStake.sub(new BigNumber(amount)),
           withdrawable: prevState.withdrawable
@@ -221,9 +222,6 @@ const VotingPower = ({
     })
     
 
-    console.log(stakeEvent)
-    console.log(withdrawnEvent)
-    
     return () => {
       stakeEvent.unsubscribe()
       withdrawnEvent.unsubscribe()

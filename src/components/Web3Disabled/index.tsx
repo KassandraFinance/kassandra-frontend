@@ -17,7 +17,7 @@ interface IWeb3DisabledProps {
 }
 
 const Web3Disabled = ({ textButton, textHeader, bodyText, type }: IWeb3DisabledProps) => {
-  const { connect, isLogged } = useConnect()
+  const { connect } = useConnect()
 
   async function changeChainId() {
     try {
@@ -26,18 +26,19 @@ const Web3Disabled = ({ textButton, textHeader, bodyText, type }: IWeb3DisabledP
         params: [{ chainId: '0x3' }], //0x89
       });
     } catch (error) {
-      // This error code indicates that the chain has not been added to MetaMask.
-      if (error.code === 4902) {
-        try {
-          await window.ethereum.request({
-            method: 'wallet_addEthereumChain', 
-            params:[{ chainId: '0x3', chainName: 'Ropsten Mainnet', nativeCurrency: { name: 'Matic', symbol: 'MATIC', decimals: 18 }, rpcUrls: ['https://rpc-mainnet.matic.network/'], blockExplorerUrls: ['https://polygonscan.com/'] }],
-          }); //0x89
-        } catch (addError) {
-          // handle "add" error
-        }
-      }
-      // handle other "switch" errors
+      // // This error code indicates that the chain has not been added to MetaMask.
+      // if (error.code === 4902) {
+      //   try {
+      //     await window.ethereum.request({
+      //       method: 'wallet_addEthereumChain', 
+      //       params:[{ chainId: '0x3', chainName: 'Ropsten Mainnet', nativeCurrency: { name: 'Matic', symbol: 'MATIC', decimals: 18 }, rpcUrls: ['https://rpc-mainnet.matic.network/'], blockExplorerUrls: ['https://polygonscan.com/'] }],
+      //     }); //0x89
+      //   } catch (addError) {
+      //     // handle "add" error
+      //   }
+      // }
+      // // handle other "switch" errors
+      console.log(error)
     }
   }
 
