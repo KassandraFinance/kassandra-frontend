@@ -7,7 +7,7 @@ const NotFound = () => (
     <img src="assets/404.svg" alt="" />
     <p>Sorry, this issue could not have been foreseen.</p>
     <p>Learn more about Kassandra</p>
-    <Link href="#">
+    <Link href="https://kassandrafoundation.medium.com/">
       <Button backgroundPrimary text="About" />
     </Link>
   </S.Wrapper>
