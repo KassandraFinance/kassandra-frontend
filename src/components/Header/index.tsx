@@ -99,12 +99,6 @@ const Header = () => {
                 backgroundBlack
                 size="large"
                 text={substr(userWalletAddress)} />
-              // <S.ButtonConnectWallet
-              //   type="button"
-              //   style={{ backgroundColor: '${theme.colors.cyan}', color: '#211426' }}
-              // >
-              //   {substr(userWalletAddress)}
-              // </S.ButtonConnectWallet>
             ) : (
               <Button
                 as='button'
@@ -122,18 +116,8 @@ const Header = () => {
               href="https://metamask.io/download.html"
               target="_blank"
               text='Install MetaMask!' />
-            // <S.LinkInstallMetaMask
-            //   href="https://metamask.io/download.html"
-            //   target="_blank"
-            // >
-            //   Install MetaMask!
-            // </S.LinkInstallMetaMask>
           )}
-          {/* <Button
-            backgroundBlack
-            size="large"
-            disabledNoEvent
-            text='Connect Wallet' /> */}
+
         </S.MenuNav>
       </MediaMatch>
 
@@ -170,12 +154,30 @@ const Header = () => {
           <Link href="/" passHref>
             <S.MenuLinkDisable>About</S.MenuLinkDisable>
           </Link>
-          <Button
-            backgroundBlack
-            text='Connect Wallet'
-            size="large"
-            onClick={() => setIsModaWallet(true)}
-          />
+          {web3.currentProvider !== null ? (
+            isLogged ? (
+              <Button
+                backgroundBlack
+                size="large"
+                text={substr(userWalletAddress)} />
+            ) : (
+              <Button
+                as='button'
+                backgroundBlack
+                size="large"
+                onClick={() => setIsModaWallet(true)}
+                text='Connect Wallet' />
+
+            )
+          ) : (
+            <Button
+              as='a'
+              backgroundBlack
+              size="large"
+              href="https://metamask.io/download.html"
+              target="_blank"
+              text='Install MetaMask!' />
+          )}
         </S.MenuNav>
       </S.MenuFull>
       <ModalWalletConnect
