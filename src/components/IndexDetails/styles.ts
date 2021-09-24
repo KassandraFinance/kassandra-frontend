@@ -2,7 +2,8 @@ import styled, { css } from 'styled-components'
 
 export const IndexDetailsContainer = styled.section`
  ${({ theme }) => css`
-    width: 100%;
+    max-width: 1520px;
+    margin: 0 auto;
     padding: 32px;
     h1 {
       font-size: ${theme.font.sizes.font32};
