@@ -150,10 +150,10 @@ const Header = () => {
             </Link>
           )}
           <Link href="/products" passHref>
-            <S.MenuLink>Buy $Heim</S.MenuLink>
+            <S.MenuLink onClick={() => setIsOpen(false)}>Buy $Heim</S.MenuLink>
           </Link>
           <Link href="/farm" passHref>
-            <S.MenuLink>Stake/Farm</S.MenuLink>
+            <S.MenuLink onClick={() => setIsOpen(false)}>Stake/Farm</S.MenuLink>
           </Link>
           <Link href="/" passHref>
             <S.MenuLinkDisable>Vote</S.MenuLinkDisable>
