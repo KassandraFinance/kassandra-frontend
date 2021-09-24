@@ -1,6 +1,6 @@
 import Products from "./../templates/products";
 
-export default function Page404() {
+export default function Index() {
   return (
     <Products />
   )
