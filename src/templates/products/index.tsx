@@ -1,8 +1,6 @@
 import React from 'react'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import useConnect from '../../hooks/useConnect'
-
 import HeimOperations from '../../components/HeimOperations'
 import IndexDetails from '../../components/IndexDetails'
 import Web3Disabled from '../../components/Web3Disabled'
@@ -19,8 +17,7 @@ const Products = () => {
   const [chainId, setChainId] = React.useState<string>('')
   const [loading, setLoading] = React.useState<boolean>(true)
 
-  const { poolTokensArray } = useSelector((state: RootStateOrAny) => state)
-  const { userWalletAddress } = useConnect()
+  const { poolTokensArray, userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
   async function getCoinList() {
     const URL = 'https://api.coingecko.com/api/v3/coins/list'
@@ -85,7 +82,7 @@ const Products = () => {
   React.useEffect(() => {
     setTimeout(() => {
       setLoading(false)
-    }, 800)
+    }, 600)
   }, [])
 
   return (

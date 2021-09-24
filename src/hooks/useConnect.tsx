@@ -19,25 +19,19 @@ declare let window: {
 }
 
 const useConnect = () => {
-  console.log('executou')
-  const [isLogged, setIsLogged] = React.useState(false)
-
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const dispatch = useDispatch()
 
   const handleChainChanged = React.useCallback(_chainId => {
-    console.log(_chainId)
     window.location.reload()
   }, [])
 
   const handleAccountsChanged = React.useCallback(async accounts => {
     try {
-      if (accounts.length === 0) {
-        setIsLogged(false)
+      if (accounts.length === 0 || accounts[0] === undefined) {
         dispatch(actionGetUserAddressWallet(''))
       } else if (accounts[0] !== userWalletAddress) {
-        dispatch(actionGetUserAddressWallet(accounts[0]))
-        setIsLogged(true)
+          dispatch(actionGetUserAddressWallet(accounts[0]))
         // ToastSuccess('Connected to MetaMask.')
       }
     } catch (error: any) {
@@ -72,17 +66,7 @@ const useConnect = () => {
   }, [])
 
   const handleDisconnected = React.useCallback(() => {
-    setIsLogged(false)
-  }, [])
-
-  const isUnlocked = React.useCallback(async () => {
-    window.ethereum?._metamask.isUnlocked().then((unlocked: boolean) => {
-      if (!unlocked) {
-        console.info('MetaMask is locked')
-        delete localStorage.currentAddress
-      }
-      console.info('MetaMask is unlocked')
-    })
+    dispatch(actionGetUserAddressWallet(''))
   }, [])
 
   const connect = React.useCallback(() => {
@@ -137,10 +121,7 @@ const useConnect = () => {
   }, [])
 
   return {
-    connect,
-    isUnlocked,
-    isLogged,
-    userWalletAddress
+    connect
   }
 }
 
