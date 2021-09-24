@@ -48,7 +48,6 @@ const Header = () => {
     })
   }
 
-  
   React.useEffect(() => {
 
     const loginInt = setInterval(async () => {
@@ -64,6 +63,13 @@ const Header = () => {
 
   }, [])
 
+  React.useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : 'unset'
+
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isOpen])
 
   return (
     <S.Wrapper pageHeim={asPath === '/heim'}>
@@ -117,12 +123,6 @@ const Header = () => {
                 backgroundBlack
                 size="large"
                 text={substr(userWalletAddress)} />
-              // <S.ButtonConnectWallet
-              //   type="button"
-              //   style={{ backgroundColor: '${theme.colors.cyan}', color: '#211426' }}
-              // >
-              //   {substr(userWalletAddress)}
-              // </S.ButtonConnectWallet>
             ) : (
               <Button
                 as='button'
@@ -140,22 +140,13 @@ const Header = () => {
               href="https://metamask.io/download.html"
               target="_blank"
               text='Install MetaMask!' />
-            // <S.LinkInstallMetaMask
-            //   href="https://metamask.io/download.html"
-            //   target="_blank"
-            // >
-            //   Install MetaMask!
-            // </S.LinkInstallMetaMask>
           )}
-          {/* <Button
-            backgroundBlack
-            size="large"
-            disabledNoEvent
-            text='Connect Wallet' /> */}
+
         </S.MenuNav>
       </MediaMatch>
 
       <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen}>
+
         <CloseIcon aria-label="Close Menu" onClick={() => setIsOpen(false)} />
 
         <S.MenuNav>
@@ -176,10 +167,10 @@ const Header = () => {
             </Link>
           )}
           <Link href="/products" passHref>
-            <S.MenuLink>Buy $Heim</S.MenuLink>
+            <S.MenuLink onClick={() => setIsOpen(false)}>Buy $Heim</S.MenuLink>
           </Link>
           <Link href="/farm" passHref>
-            <S.MenuLink>Stake/Farm</S.MenuLink>
+            <S.MenuLink onClick={() => setIsOpen(false)}>Stake/Farm</S.MenuLink>
           </Link>
           <Link href="/" passHref>
             <S.MenuLinkDisable>Vote</S.MenuLinkDisable>
@@ -187,12 +178,30 @@ const Header = () => {
           <Link href="/" passHref>
             <S.MenuLinkDisable>About</S.MenuLinkDisable>
           </Link>
-          <Button
-            backgroundBlack
-            text='Connect Wallet'
-            size="large"
-            onClick={() => setIsModaWallet(true)}
-          />
+          {web3.currentProvider !== null ? (
+            userWalletAddress ? (
+              <Button
+                backgroundBlack
+                size="large"
+                text={substr(userWalletAddress)} />
+            ) : (
+              <Button
+                as='button'
+                backgroundBlack
+                size="large"
+                onClick={() => setIsModaWallet(true)}
+                text='Connect Wallet' />
+
+            )
+          ) : (
+            <Button
+              as='a'
+              backgroundBlack
+              size="large"
+              href="https://metamask.io/download.html"
+              target="_blank"
+              text='Install MetaMask!' />
+          )}
         </S.MenuNav>
       </S.MenuFull>
       <ModalWalletConnect

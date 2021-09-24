@@ -3,8 +3,6 @@ import React from 'react'
 
 import * as S from './styles'
 
-import styles from './footer.module.scss'
-
 const Footer = () => (
   <S.Footer>
     <S.Container>

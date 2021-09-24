@@ -69,8 +69,46 @@ const Form = ({ typeAction, title }: IFormProps) => {
 
   // get tokens
   React.useEffect(() => {
+    const calc = async (newPoolTokens: string[]) => {
+      const newAddresses: string[] = []
+      const newNames: Promise<string>[] = []
+      const newSymbols: Promise<string>[] = []
+      const newDecimals: Promise<BigNumber>[] = []
+      const newAllocation: Promise<number>[] = []
+
+
+      for (let i = 0; i < newPoolTokens.length; i += 1) {
+        const token = ERC20(newPoolTokens[i])
+        newAddresses.push(newPoolTokens[i])
+        newNames.push(token.name())
+        newSymbols.push(token.symbol())
+        newDecimals.push(token.decimals())
+        newAllocation.push(corePool.normalizedWeight(newPoolTokens[i]))
+      }
+
+      newAddresses.push(HeimCRPPOOL)
+      newNames.push(crpPoolToken.name())
+      newSymbols.push(crpPoolToken.symbol())
+      newDecimals.push(crpPoolToken.decimals())
+
+      setPoolTokensDetails(
+        await Promise.all(
+          Array(newPoolTokens.length + 1)
+            .fill(0)
+            .map(async (_, i) => ({
+              address: newAddresses[i],
+              name: await newNames[i],
+              symbol: await newSymbols[i],
+              decimals: await newDecimals[i],
+              allocation: await newAllocation[i]
+            }))
+        )
+      )
+    }
+
     corePool.currentTokens().then(newPoolTokens => {
       setPoolTokens(newPoolTokens)
+      calc(newPoolTokens)
       setTokenAddress2Index(
         newPoolTokens.reduce((acc, cur, i) => ({ [cur]: i, ...acc }), {
           [HeimCRPPOOL]: newPoolTokens.length
@@ -131,49 +169,6 @@ const Form = ({ typeAction, title }: IFormProps) => {
     setIsApproved([])
     calc()
   }, [title, poolTokens, approvalCheck, userWalletAddress])
-
-  // get details of tokens
-  React.useEffect(() => {
-    const calc = async () => {
-      const newAddresses: string[] = []
-      const newNames: Promise<string>[] = []
-      const newSymbols: Promise<string>[] = []
-      const newDecimals: Promise<BigNumber>[] = []
-      const newAllocation: Promise<Number>[] = []
-
-
-      for (let i = 0; i < poolTokens.length; i += 1) {
-        const token = ERC20(poolTokens[i])
-        newAddresses.push(poolTokens[i])
-        newNames.push(token.name())
-        newSymbols.push(token.symbol())
-        newDecimals.push(token.decimals())
-        newAllocation.push(corePool.normalizedWeight(poolTokens[i]))
-      }
-
-      newAddresses.push(HeimCRPPOOL)
-      newNames.push(crpPoolToken.name())
-      newSymbols.push(crpPoolToken.symbol())
-      newDecimals.push(crpPoolToken.decimals())
-
-      setPoolTokensDetails(
-        await Promise.all(
-          Array(poolTokens.length + 1)
-            .fill(0)
-            .map(async (_, i) => ({
-              address: newAddresses[i],
-              name: await newNames[i],
-              symbol: await newSymbols[i],
-              decimals: await newDecimals[i],
-              allocation: await newAllocation[i]
-            }))
-        )
-      )
-    }
-
-    setPoolTokensDetails([])
-    calc()
-  }, [poolTokens])
 
   // get balance of swap in token
   React.useEffect(() => {
@@ -260,6 +255,12 @@ const Form = ({ typeAction, title }: IFormProps) => {
     }
   }, [title, swapOutAddress, userWalletAddress, poolTokens])
 
+  React.useEffect(() => {
+    const tokens = title === "Withdraw" ? poolTokens.length : 1
+    setSwapOutPrice(new BigNumber(-1))
+    setSwapOutAmount(Array(tokens).fill(new BigNumber(0)))
+  }, [title, swapInAddress, swapOutAddress, poolTokens.length])
+
   // calculate investment
   React.useEffect(() => {
     if (
@@ -313,8 +314,6 @@ const Form = ({ typeAction, title }: IFormProps) => {
       }
     }
 
-    setSwapOutAmount([new BigNumber(0)])
-    setSwapOutPrice(new BigNumber(-1))
     calc()
   }, [title, swapInAmount, swapInAddress])
 
@@ -361,10 +360,8 @@ const Form = ({ typeAction, title }: IFormProps) => {
       setSwapOutPrice(newSwapOutPrice)
     }
 
-    setSwapOutAmount([new BigNumber(0)])
-    setSwapOutPrice(new BigNumber(-1))
     calc()
-  }, [title, swapOutAddress, swapInAddress, swapInAmount])
+  }, [title, swapInAmount, swapInAddress, swapOutAddress])
 
   // calculate withdraw
   React.useEffect(() => {
@@ -433,7 +430,6 @@ const Form = ({ typeAction, title }: IFormProps) => {
     }
 
     calc()
-    setSwapOutAmount(Array(poolTokens.length).fill(new BigNumber(0)))
   }, [title, swapInAmount, swapOutAddress, tokenAddress2Index, poolTokens])
 
   const tokenInIndex = tokenAddress2Index[swapInAddress]
@@ -466,7 +462,8 @@ const Form = ({ typeAction, title }: IFormProps) => {
         swapInAmountInput,
         swapInAddressInput,
         swapOutAddressInput,
-        walletAddress
+        walletAddress,
+        tokensLength
       } = e.target as HTMLFormElement & {
         approved: HTMLInputElement
         category: HTMLInputElement
@@ -474,6 +471,7 @@ const Form = ({ typeAction, title }: IFormProps) => {
         swapInAddressInput: HTMLInputElement
         swapOutAddressInput: HTMLInputElement
         walletAddress: HTMLInputElement
+        tokensLength: HTMLInputElement
       }
 
       const swapInAmountVal = new BigNumber(swapInAmountInput.value)
@@ -516,7 +514,7 @@ const Form = ({ typeAction, title }: IFormProps) => {
 
             crpPool.exitPool(
               swapInAmountVal,
-              Array(poolTokens.length).fill(new BigNumber(0)),
+              Array(parseInt(tokensLength.value)).fill(new BigNumber(0)),
               walletAddress.value,
               "Pending withdraw",
               confirmWithdraw
@@ -550,7 +548,7 @@ const Form = ({ typeAction, title }: IFormProps) => {
       } catch (error) {
         ToastError('Could not connect with the Blockchain!')
       }
-    }, [poolTokens])
+    }, [])
 
   return (
     <FormContainer onSubmit={submitAction}>
@@ -560,6 +558,7 @@ const Form = ({ typeAction, title }: IFormProps) => {
       <input type="hidden" name="swapInAddressInput" value={swapInAddress} />
       <input type="hidden" name="swapOutAddressInput" value={swapOutAddress} />
       <input type="hidden" name="walletAddress" value={userWalletAddress} />
+      <input type="hidden" name="tokensLength" value={poolTokens.length} />
       <InputTokens
         actionString={typeAction}
         poolTokens={
