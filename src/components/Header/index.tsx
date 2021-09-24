@@ -39,6 +39,14 @@ const Header = () => {
     })
   }
 
+  React.useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : 'unset'
+
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isOpen])
+
   return (
     <S.Wrapper pageHeim={asPath === '/heim'}>
       <MediaMatch lessThan="large">
@@ -130,6 +138,7 @@ const Header = () => {
       </MediaMatch>
 
       <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen}>
+
         <CloseIcon aria-label="Close Menu" onClick={() => setIsOpen(false)} />
 
         <S.MenuNav>
