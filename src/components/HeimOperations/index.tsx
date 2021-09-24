@@ -1,5 +1,4 @@
 import React from 'react'
-import useConnect from '../../hooks/useConnect'
 
 import Form from './Form'
 
@@ -13,7 +12,6 @@ const HeimOperations = () => {
   }
 
   const [inputChecked, setInputChecked] = React.useState<keyof typeof messages>('Invest')
-  const { isLogged } = useConnect()
 
   return (
     <HeimOperationsContainer>
@@ -46,7 +44,6 @@ const HeimOperations = () => {
       <Form
         title={inputChecked}
         typeAction={messages[inputChecked]}
-        isLogged={isLogged}
       />
     </HeimOperationsContainer>
   )

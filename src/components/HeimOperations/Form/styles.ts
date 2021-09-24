@@ -72,10 +72,10 @@ export const Input = styled.input`
     color: #fff;
   }
 
-  & [type = number]:-webkit-inner-spin-button {
+  &[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }
-  & [type = number] {
+  &[type=number] {
     -moz-appearance: textfield;
     appearance: textfield;
   }

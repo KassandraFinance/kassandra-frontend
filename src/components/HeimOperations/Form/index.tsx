@@ -1,6 +1,6 @@
 import React from 'react'
 import BigNumber from 'bn.js'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 import { TransactionReceipt } from 'web3-core'
 import { EventData } from 'web3-eth-contract'
 
@@ -29,19 +29,19 @@ import ModalWalletConnect from '../../ModalWalletConnect'
 interface IFormProps {
   typeAction: string;
   title: string;
-  isLogged: boolean;
 }
 
 interface Address2Index {
   [key: string]: number;
 }
 
-const Form = ({ typeAction, title, isLogged }: IFormProps) => {
+const Form = ({ typeAction, title }: IFormProps) => {
   const corePoolToken = useERC20Contract(HeimCorePool)
   const crpPoolToken = useERC20Contract(HeimCRPPOOL)
   const corePool = usePoolContract(HeimCorePool)
   const crpPool = useCRPContract(HeimCRPPOOL)
-  const { connect, userWalletAddress } = useConnect()
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const { connect } = useConnect()
 
   const [poolTokens, setPoolTokens] = React.useState<string[]>([])
   const [poolTokenDetails, setPoolTokensDetails] = React.useState<TokenDetails[]>([])
@@ -616,7 +616,7 @@ const Form = ({ typeAction, title, isLogged }: IFormProps) => {
           </ExchangeRate>
         </>
       )}
-      {isLogged ? (
+      {userWalletAddress ? (
         <Button
           backgroundSecondary
           disabledNoEvent={swapInAmount.toString() === "0"}
