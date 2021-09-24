@@ -1,43 +1,69 @@
 /* eslint-disable react/react-in-jsx-scope */
 import React from 'react'
 import Link from 'next/link'
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-
 import { useRouter } from 'next/router'
-import { useSelector, RootStateOrAny, connect } from 'react-redux'
 
 import { Menu2 as MenuIcon } from '@styled-icons/remix-fill/Menu2'
 import { Close as CloseIcon } from '@styled-icons/material-outlined/Close'
 
-import MediaMatch from '../MediaMatch'
-import Button from '../Button'
-import * as S from './styles'
+import { actionGetUserAddressWallet } from '../../store/modules/userWalletAddress/actions'
 
-import useConnect from '../../hooks/useConnect'
 import substr from '../../utils/substr'
 import web3 from '../../utils/web3'
+import useConnect from '../../hooks/useConnect'
+
+import Button from '../Button'
+import MediaMatch from '../MediaMatch'
 import ModalWalletConnect from '../ModalWalletConnect'
+
+import * as S from './styles'
+
+declare let window: {
+  ethereum: any,
+}
 
 export type MenuProps = {
   username?: string
 }
 
 const Header = () => {
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
-  const { connect, isLogged } = useConnect()
   const [isOpen, setIsOpen] = React.useState(false)
+
+  const dispatch = useDispatch()
   const { asPath } = useRouter()
+  const { connect } = useConnect()
   const { trackEvent } = useMatomo()
 
-  function clickMatomoEvent() {
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
+
+  function clickMatomoEvent() {
     trackEvent({
       category: 'header',
       action: 'click-on-heim',
       name: 'heim-header'
     })
   }
+
+  
+  React.useEffect(() => {
+
+    const loginInt = setInterval(async () => {
+      window.ethereum.request({ method: 'eth_accounts' })
+        .then((result: string[]) => {
+          if (!result[0]) {
+            dispatch(actionGetUserAddressWallet(''))
+          }
+      })
+    }, 5000)
+
+    return () => clearInterval(loginInt)
+
+  }, [])
+
 
   return (
     <S.Wrapper pageHeim={asPath === '/heim'}>
@@ -86,7 +112,7 @@ const Header = () => {
           </Link>
 
           {web3.currentProvider !== null ? (
-            isLogged ? (
+            userWalletAddress ? (
               <Button
                 backgroundBlack
                 size="large"
