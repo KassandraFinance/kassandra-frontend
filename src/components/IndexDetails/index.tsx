@@ -27,7 +27,7 @@ const IndexDetails = ({ coinInfoList }: IIndexDetailsProps) => {
     return b.allocation - a.allocation;
   });
 
-  const [showMore, setShowMore] = React.useState<boolean>(false);
+  const [showMore, setShowMore] = React.useState<boolean>(true);
 
   return (
     <>
