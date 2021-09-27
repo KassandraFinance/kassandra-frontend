@@ -1,10 +1,18 @@
 import styled, { css } from 'styled-components'
+import theme from '../../styles/theme'
+
+
+interface IToggleList {
+  showMore: boolean
+}
 
 export const IndexDetailsContainer = styled.section`
- ${({ theme }) => css`
+
     max-width: 1520px;
+    max-height: 100%;
     margin: 0 auto;
     padding: 32px;
+
     h1 {
       font-size: ${theme.font.sizes.font32};
       font-weight: ${theme.font.weight.normal};
@@ -15,12 +23,14 @@ export const IndexDetailsContainer = styled.section`
       height: 30px;
       border-radius: 8px;
     }
-  `}
-`
+  `
 
 export const Table = styled.table`
   width: 100%;
   margin: 40px 0;
+  tbody{
+    max-height: 100%;
+  }
   @media (max-width: 660px) {
     display: block;
     overflow: auto;
@@ -28,7 +38,7 @@ export const Table = styled.table`
 `
 
 
-export const Tr = styled.tr`
+export const Tr = styled.tr<IToggleList>`
   display: grid;
   grid-template-columns: .5fr repeat(3, 3fr) 2fr;
   justify-items: center;
@@ -41,6 +51,9 @@ export const Tr = styled.tr`
   }
   @media (max-width: 660px) {
     width: 500px;
+  }
+  &:nth-child(n+6){
+    display:  ${(props) => props.showMore ? 'none' : 'grid'};
   }
 `
 
@@ -61,7 +74,7 @@ interface ITdProps {
 
 export const Td = styled.td<ITdProps>`
   ${props => props.change24h && {
-    color: `${props.negative ? '#EB5757': '#6FCF97'}`
+    color: `${props.negative ? '#EB5757' : '#6FCF97'}`
   }};
   ${({ theme }) => css`
     font-size: ${theme.font.sizes.font24};
@@ -94,5 +107,19 @@ export const Colour = styled.td`
 
     width: 36px;
     height: 36px;
+  `}
+`
+export const WrapperToggle = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
+export const ToggleList = styled.a`
+  ${({ theme }) => css`
+  position: relative;
+  font-size:${theme.font.sizes.font16};
+  color ${theme.colors.cyan};
+  cursor: pointer;
+  align-content: center;
   `}
 `
