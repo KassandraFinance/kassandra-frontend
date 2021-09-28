@@ -126,4 +126,26 @@ export const ToggleList = styled.a<IToggleList>`
     margin-left: 8px;
     transition-duration: 200ms;
   }
+      &:hover {
+      &::after {
+        content: '';
+        max-width: 100%;
+        text-align: left;
+        position: absolute;
+        display: block;
+        height: 0.1rem;
+        background-color: ${theme.colors.cyan};
+        animation: hoverAnimation 0.3s forwards;
+      }
+      @keyframes hoverAnimation {
+        from {
+          width: 0;
+          left: 50%;
+        }
+        to {
+          width: 100%;
+          left: 0;
+        }
+      }
+    }
 `
