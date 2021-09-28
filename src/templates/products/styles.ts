@@ -74,17 +74,17 @@ export const IntroValues = styled.div`
   max-width: 80%;
   display: flex;
   justify-content:space-between;
-h3{
-  font-size: 24px;
-  font-weight: ${theme.font.weight.normal};
-}
-div{
-  margin: 12px 0;
-  border-bottom: 2px solid ${theme.colors.magenta};
-}
-@media(max-width: 900px) {
-  max-width: 100%;
-}
+  h3 {
+    font-size: 24px;
+    font-weight: ${theme.font.weight.normal};
+  }
+  div {
+    margin: 12px 0;
+    border-bottom: 2px solid ${theme.colors.magenta};
+  }
+  @media(max-width: 900px) {
+    max-width: 100%;
+  }
 `
 export const IntroPrice = styled.section`
 
@@ -125,47 +125,47 @@ export const Text = styled.section`
   }
 `
 export const Link = styled.div`
-    margin: 32px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin: 32px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    a {
-      color: ${theme.colors.cyan};
-      border: none;
-      text-decoration: none;
-      font-size: ${theme.font.sizes.font18};
-      cursor: pointer;
-      position: relative;
-      border: none;
-      text-decoration: none;
-      font-size: ${theme.font.sizes.font18};
-      font-weight: ${theme.font.weight.normal};
-      cursor: pointer;
-      &:hover {
-        &::after {
-          content: '';
-          max-width: 100%;
-          text-align: left;
-          position: absolute;
-          display: block;
-          height: 0.1rem;
-          background-color: ${theme.colors.cyan};
-          animation: hoverAnimation 0.3s forwards;
+  a {
+    color: ${theme.colors.cyan};
+    border: none;
+    text-decoration: none;
+    font-size: ${theme.font.sizes.font18};
+    cursor: pointer;
+    position: relative;
+    border: none;
+    text-decoration: none;
+    font-size: ${theme.font.sizes.font18};
+    font-weight: ${theme.font.weight.normal};
+    cursor: pointer;
+    &:hover {
+      &::after {
+        content: '';
+        max-width: 100%;
+        text-align: left;
+        position: absolute;
+        display: block;
+        height: 0.1rem;
+        background-color: ${theme.colors.cyan};
+        animation: hoverAnimation 0.3s forwards;
+      }
+      @keyframes hoverAnimation {
+        from {
+          width: 0;
+          left: 50%;
         }
-        @keyframes hoverAnimation {
-          from {
-            width: 0;
-            left: 50%;
-          }
-          to {
-            width: 100%;
-            left: 0;
-          }
+        to {
+          width: 100%;
+          left: 0;
         }
       }
-      ${media.lessThan('large')`
-  font-size: ${theme.font.sizes.font12};
-  `}
     }
+    ${media.lessThan('large')`
+      font-size: ${theme.font.sizes.font12};
+    `}
+  }
 `

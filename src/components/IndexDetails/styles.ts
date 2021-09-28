@@ -116,10 +116,32 @@ export const WrapperToggle = styled.div`
 
 export const ToggleList = styled.a`
   ${({ theme }) => css`
-  position: relative;
-  font-size:${theme.font.sizes.font16};
-  color ${theme.colors.cyan};
-  cursor: pointer;
-  align-content: center;
+    position: relative;
+    font-size:${theme.font.sizes.font16};
+    color ${theme.colors.cyan};
+    cursor: pointer;
+    align-content: center;
+    &:hover {
+      &::after {
+        content: '';
+        max-width: 100%;
+        text-align: left;
+        position: absolute;
+        display: block;
+        height: 0.1rem;
+        background-color: ${theme.colors.cyan};
+        animation: hoverAnimation 0.3s forwards;
+      }
+      @keyframes hoverAnimation {
+        from {
+          width: 0;
+          left: 50%;
+        }
+        to {
+          width: 100%;
+          left: 0;
+        }
+      }
+    }
   `}
 `

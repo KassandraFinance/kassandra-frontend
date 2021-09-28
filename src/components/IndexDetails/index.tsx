@@ -81,7 +81,6 @@ const IndexDetails = ({ coinInfoList }: IIndexDetailsProps) => {
             <S.ToggleList
               onClick={() => setShowMore(!showMore)}
             >
-
               {showMore ? 'Show More' : 'Show Less'}
             </S.ToggleList>
           </S.WrapperToggle>
