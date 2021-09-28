@@ -16,6 +16,7 @@ interface IPayWithProps {
   inputHeim?: boolean
 }
 
+
 export const PayWith = styled.div<IPayWithProps>`
   text-align: left;
   position: relative;
@@ -264,8 +265,10 @@ export const Info = styled.div`
 
 
 // ========== INPUT DEFAULT ==========
-
-export const InputDefaultContainer = styled.div`
+interface IInputDefaultContainerProps {
+  showMore: boolean;
+}
+export const InputDefaultContainer = styled.div<IInputDefaultContainerProps>`
   display: grid;
   grid-template-columns: auto 1fr;
   justify-content: space-between;
@@ -275,6 +278,10 @@ export const InputDefaultContainer = styled.div`
   margin-top: 16px;
   margin-bottom: 16px;
   position: relative;
+
+  &:nth-child(n+5){
+    display: ${(props) => props.showMore ? 'none' : 'grid'};
+  }
   `
 
 
@@ -313,3 +320,19 @@ export const ExchangeRate = styled.div`
   margin-top: 16px;
   margin-bottom: 16px;
 `
+
+export const ToggleList = styled.a<IInputDefaultContainerProps>`
+
+  position: relative;
+  font-size:${theme.font.sizes.font16};
+  color: ${theme.colors.cyan};
+  cursor: pointer;
+  align-content: center;
+  padding-bottom: 16px;
+  img {
+    transform: ${props => (props.showMore ? null : 'rotate(180deg)')};
+    margin-left: 8px;
+    transition-duration: 200ms;
+  }
+`
+

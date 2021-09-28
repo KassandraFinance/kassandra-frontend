@@ -114,12 +114,16 @@ export const WrapperToggle = styled.div`
   justify-content: center;
 `
 
-export const ToggleList = styled.a`
-  ${({ theme }) => css`
+export const ToggleList = styled.a<IToggleList>`
+
   position: relative;
   font-size:${theme.font.sizes.font16};
-  color ${theme.colors.cyan};
+  color: ${theme.colors.cyan};
   cursor: pointer;
   align-content: center;
-  `}
+  img {
+    transform: ${props => (props.showMore ? null : 'rotate(180deg)')};
+    margin-left: 8px;
+    transition-duration: 200ms;
+  }
 `

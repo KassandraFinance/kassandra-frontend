@@ -20,7 +20,7 @@ import InputDefault from './InputDefault'
 
 import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
-import { FormContainer, SpanLight, ExchangeRate } from './styles'
+import * as S from './styles'
 import { BNtoDecimal, wei } from '../../../utils/numerals'
 import { confirmWithdraw } from '../../../utils/confirmTransactions'
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
@@ -59,6 +59,7 @@ const Form = ({ typeAction, title }: IFormProps) => {
   const [swapOutBalance, setSwapOutBalance] = React.useState([new BigNumber(-1)])
 
   const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
+  const [showMore, setShowMore] = React.useState<boolean>(true);
 
 
   const dispatch = useDispatch()
@@ -551,7 +552,7 @@ const Form = ({ typeAction, title }: IFormProps) => {
     }, [])
 
   return (
-    <FormContainer onSubmit={submitAction}>
+    <S.FormContainer onSubmit={submitAction}>
       <input type="hidden" name="approved" value={Number(isApproved[tokenInIndex] || 0)} />
       <input type="hidden" name="category" value={title} />
       <input type="hidden" name="swapInAmountInput" value={swapInAmount.toString()} />
@@ -572,72 +573,88 @@ const Form = ({ typeAction, title }: IFormProps) => {
         setSwapInAmount={setSwapInAmount}
         setSwapInAddress={setSwapInAddress}
       />
+
       {title === 'Withdraw' ? (
-        poolTokens.map((tokenOutAddress, i) => (
-          <InputDefault
-            key={`output_${tokenOutAddress}`}
-            poolTokens={poolTokenDetails.filter(
-              token => token.address === tokenOutAddress
-            )}
-            isMax={swapOutAddress === tokenOutAddress}
-            swapOutAmount={swapOutAmount[i] || new BigNumber(0)}
-            swapOutBalance={swapOutBalance[i] || new BigNumber(-1)}
-            setSwapOutAddress={setSwapOutAddress}
-          />
-        ))
+        <>
+          {
+            poolTokens.map((tokenOutAddress, i) => (
+              <InputDefault
+                showMore={i > 3 && showMore}
+                key={`output_${tokenOutAddress}`}
+                poolTokens={poolTokenDetails.filter(
+                  token => token.address === tokenOutAddress
+                )}
+                isMax={swapOutAddress === tokenOutAddress}
+                swapOutAmount={swapOutAmount[i] || new BigNumber(0)}
+                swapOutBalance={swapOutBalance[i] || new BigNumber(-1)}
+                setSwapOutAddress={setSwapOutAddress} />
+            ))
+          }
+          <S.ToggleList
+            onClick={() => setShowMore(!showMore)}
+            showMore={showMore}
+          >
+            {showMore ? 'Show More' : 'Show Less'}
+            <img src="assets/arrow-down-cyan.svg" alt="" />
+
+          </S.ToggleList>
+        </>
+
       ) : (
         <>
           <InputDefault
-            poolTokens={
-              title === 'Invest'
-                ? poolTokenDetails.filter(
-                  token => token.address === swapOutAddress
-                )
-                : poolTokenDetails
-                  .slice(0, -1)
-                  .filter(token => token.address !== swapInAddress)
-            }
+            poolTokens={title === 'Invest'
+              ? poolTokenDetails.filter(
+                token => token.address === swapOutAddress
+              )
+              : poolTokenDetails
+                .slice(0, -1)
+                .filter(token => token.address !== swapInAddress)}
             isMax={null}
             swapOutAmount={swapOutAmount[0]}
             swapOutBalance={swapOutBalance[0]}
             setSwapOutAddress={setSwapOutAddress}
+            showMore={false}
           />
-          <ExchangeRate>
-            <SpanLight>Exchange rate:</SpanLight>
-            <SpanLight>
+          <S.ExchangeRate>
+            <S.SpanLight>Exchange rate:</S.SpanLight>
+            <S.SpanLight>
               {swapOutPrice < new BigNumber(0)
                 ? '...'
                 : `1 ${poolTokenDetails[tokenInIndex]?.symbol} = ${BNtoDecimal(
                   swapOutPrice,
                   poolTokenDetails[tokenOutIndex]?.decimals
                 )} ${poolTokenDetails[tokenOutIndex]?.symbol}`}
-            </SpanLight>
-          </ExchangeRate>
+            </S.SpanLight>
+          </S.ExchangeRate>
         </>
-      )}
-      {userWalletAddress ? (
-        <Button
-          backgroundSecondary
-          disabledNoEvent={swapInAmount.toString() === "0"}
-          fullWidth
-          type="submit"
-          text={isApproved[tokenInIndex] ? title : 'Approve'}
-        />
-      ) : (
-        <Button
-          backgroundSecondary
-          fullWidth
-          type="button"
-          onClick={() => setIsModaWallet(true)}
-          text='Connect Wallet'
-        />
-      )}
+      )
+      }
+      {
+        userWalletAddress ? (
+          <Button
+            backgroundSecondary
+            disabledNoEvent={swapInAmount.toString() === "0"}
+            fullWidth
+            type="submit"
+            text={isApproved[tokenInIndex] ? title : 'Approve'}
+          />
+        ) : (
+          <Button
+            backgroundSecondary
+            fullWidth
+            type="button"
+            onClick={() => setIsModaWallet(true)}
+            text='Connect Wallet'
+          />
+        )
+      }
       <ModalWalletConnect
         modalOpen={isModalWallet}
         setModalOpen={setIsModaWallet}
         connect={connect}
       />
-    </FormContainer>
+    </S.FormContainer >
   )
 }
 
