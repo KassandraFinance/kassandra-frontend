@@ -5,7 +5,8 @@ import media from 'styled-media-query'
 
 export const ProductsContainer = styled.section`
   max-width: 1520px;
-  margin: 40px auto;
+  margin-top: 40px;
+  margin-inline: auto;
   padding: 0 ${theme.spacings.space32};
 
   min-height: 100vh;
@@ -17,6 +18,11 @@ export const ProductsContainer = styled.section`
     grid-template-columns: 1fr;
   }
 `
+export const InfoSection = styled.section`
+  display: flex;
+  flex-direction: column;
+`
+
 
 export const ComingSoon = styled.img`
   max-width: 100%;
@@ -26,19 +32,12 @@ export const ComingSoon = styled.img`
 `
 export const Intro = styled.div`
   max-width: 1520px;
-  margin: auto;
-  display: grid;
-  position: absolute;
-  top: 0;
-  grid-template-columns: auto 440px;
-  gap: 60px;
-  position: relative;
-  align-items: center;
-  padding: 0 40px;
-  margin-top: 70px;
+  /* position: relative; */
+  margin-bottom: 70px;
+  /* margin-left: 70px; */
 
   img{
-    width: 80px;
+    width: 64px;
     margin-right: 21px;
     @media (max-width: 900px) {
       width: 50px;
@@ -46,7 +45,7 @@ export const Intro = styled.div`
     }
   }
   h1{
-    font-size: 40px;
+    font-size: ${theme.font.sizes.font32};
     font-weight: ${theme.font.weight.normal};
     @media (max-width: 1024px) {
       font-size: 24px;
@@ -73,7 +72,7 @@ export const Intro = styled.div`
 export const IntroValues = styled.div`
   max-width: 80%;
   display: flex;
-  justify-content:space-between;
+  margin-top: 33px;
   h3 {
     font-size: 24px;
     font-weight: ${theme.font.weight.normal};
@@ -87,15 +86,15 @@ export const IntroValues = styled.div`
   }
 `
 export const IntroPrice = styled.section`
-
+  margin-right: 40px;
 `
 export const IntroTVL = styled.section`
 
 `
 export const Text = styled.section`
-  padding: 32px;
+  padding-top: 100px;
   max-width: 800px;
-  margin: auto;
+  /* margin: auto; */
   h2{
     font-size: 28px ;
     font-weight: ${theme.font.weight.normal};

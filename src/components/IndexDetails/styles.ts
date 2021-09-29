@@ -10,8 +10,8 @@ export const IndexDetailsContainer = styled.section`
 
     max-width: 1520px;
     max-height: 100%;
-    margin: 0 auto;
-    padding: 32px;
+    /* margin: 0 auto; */
+    padding-top: 100px;
 
     h1 {
       font-size: ${theme.font.sizes.font32};
@@ -114,14 +114,19 @@ export const WrapperToggle = styled.div`
   justify-content: center;
 `
 
-export const ToggleList = styled.a`
-  ${({ theme }) => css`
-    position: relative;
-    font-size:${theme.font.sizes.font16};
-    color ${theme.colors.cyan};
-    cursor: pointer;
-    align-content: center;
-    &:hover {
+export const ToggleList = styled.a<IToggleList>`
+
+  position: relative;
+  font-size:${theme.font.sizes.font16};
+  color: ${theme.colors.cyan};
+  cursor: pointer;
+  align-content: center;
+  img {
+    transform: ${props => (props.showMore ? null : 'rotate(180deg)')};
+    margin-left: 8px;
+    transition-duration: 200ms;
+  }
+      &:hover {
       &::after {
         content: '';
         max-width: 100%;
@@ -143,5 +148,4 @@ export const ToggleList = styled.a`
         }
       }
     }
-  `}
 `

@@ -5,14 +5,14 @@ import { BNtoDecimal } from '../../../utils/numerals'
 
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
 
-import { 
+import {
   ButtonMax,
-  InputDefaultContainer, 
-  Info, 
-  Span, 
+  InputDefaultContainer,
+  Info,
+  Span,
   SpanLight,
   Select,
-  Symbol, 
+  Symbol,
   Input,
   AmountDefault,
   LineDefault
@@ -24,14 +24,16 @@ interface IInputDefaultProps {
   swapOutAmount: BigNumber
   swapOutBalance: BigNumber
   setSwapOutAddress: React.Dispatch<React.SetStateAction<string>>
+  showMore: boolean
 }
 
-const InputDefault = ({ 
+const InputDefault = ({
   poolTokens,
   isMax,
   swapOutAmount,
   swapOutBalance,
-  setSwapOutAddress
+  setSwapOutAddress,
+  showMore
 }: IInputDefaultProps) => {
   const tokensList = React.useMemo(() => {
     if (poolTokens.length > 1) {
@@ -49,7 +51,7 @@ const InputDefault = ({
   }, [poolTokens])
 
   return (
-    <InputDefaultContainer>
+    <InputDefaultContainer showMore={showMore}>
       <Info>
         <Span>Swap to (estimative)</Span>
         {tokensList}
@@ -59,7 +61,7 @@ const InputDefault = ({
         <Span>Amount</Span>
         <Input
           readOnly
-          type="number" 
+          type="number"
           placeholder="0"
           value={BNtoDecimal(swapOutAmount, new BigNumber(18))}
         />
@@ -77,7 +79,7 @@ const InputDefault = ({
           Max
         </ButtonMax>}
       </AmountDefault>
-      <LineDefault />  
+      <LineDefault />
     </InputDefaultContainer>
   )
 }

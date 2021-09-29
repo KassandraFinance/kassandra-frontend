@@ -92,8 +92,10 @@ const IndexDetails = ({ coinInfoList }: IIndexDetailsProps) => {
           <S.WrapperToggle>
             <S.ToggleList
               onClick={() => setShowMore(!showMore)}
+              showMore={showMore}
             >
               {showMore ? 'Show More' : 'Show Less'}
+              <img src="assets/arrow-down-cyan.svg" alt="" />
             </S.ToggleList>
           </S.WrapperToggle>
         </>
