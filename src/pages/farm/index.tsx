@@ -73,7 +73,6 @@ const Farm = () => {
           <GridStaking>
             <VotingPower
               days="0"
-              percentage="12"
               pid={0}
               connect={connect}
               approve={kacyToken.approve}
@@ -88,7 +87,6 @@ const Farm = () => {
             />
             <VotingPower
               days="30"
-              percentage="20"
               pid={1}
               connect={connect}
               approve={kacyToken.approve}
@@ -103,7 +101,6 @@ const Farm = () => {
             />
             <VotingPower
               days="45"
-              percentage="32"
               pid={2}
               connect={connect}
               approve={kacyToken.approve}

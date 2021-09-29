@@ -39,11 +39,11 @@ interface IInfoStakeStaticProps {
   yourDailyKacyReward: BigNumber;
   withdrawDelay: any;
   totalStaked: BigNumber;
+  apr: BigNumber
 }
 
 interface IStakingProps {
   days: string;
-  percentage: string;
   pid: number;
   connect: () => void;
   approve: (
@@ -71,7 +71,6 @@ interface IStakingProps {
 }
 
 const VotingPower = ({
-  percentage,
   pid,
   connect,
   approve,
@@ -105,7 +104,8 @@ const VotingPower = ({
       kacyRewards: new BigNumber(0),
       yourDailyKacyReward: new BigNumber(0),
       withdrawDelay: '',
-      totalStaked: new BigNumber(0)
+      totalStaked: new BigNumber(0),
+      apr: new BigNumber(0)
     })
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
@@ -136,6 +136,8 @@ const VotingPower = ({
       const kacyRewards = new BigNumber(poolInfoResponse.rewardRate).mul(
         new BigNumber(86400)
       )
+
+      const apr = kacyRewards.mul(new BigNumber(365)).mul(new BigNumber(100)).div(new BigNumber(poolInfoResponse.depositedAmount))
       const withdrawDelay = Number(poolInfoResponse.withdrawDelay) / 86400
 
       setInfoStakeStatic({
@@ -145,7 +147,8 @@ const VotingPower = ({
         kacyRewards,
         yourDailyKacyReward: new BigNumber(0),
         withdrawDelay: withdrawDelay > 0 ? withdrawDelay : 0,
-        totalStaked: new BigNumber(poolInfoResponse.depositedAmount)
+        totalStaked: new BigNumber(poolInfoResponse.depositedAmount),
+        apr
       })
     }
 
@@ -236,10 +239,10 @@ const VotingPower = ({
             <img src="assets/logo-staking.svg" alt="" />
             <S.IntroStaking>
               <S.APR>
-                <Tooltip tooltipTop={true}>Annual Percentage Rate</Tooltip>
+                <Tooltip tooltipTop={true}>Annual Percentage Return</Tooltip>
                 <h4>APR</h4>
               </S.APR>
-              <S.Percentage>{percentage}%</S.Percentage>
+              <S.Percentage>{Number(infoStakeStatic.apr)/100} %</S.Percentage>
             </S.IntroStaking>
           </S.InterBackground>
           <S.KacyStaked>
