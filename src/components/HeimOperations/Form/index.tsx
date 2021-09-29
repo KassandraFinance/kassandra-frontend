@@ -49,6 +49,8 @@ const Form = ({ typeAction, title }: IFormProps) => {
   const [isApproved, setIsApproved] = React.useState<boolean[]>([])
   const [approvalCheck, setApprovalCheck] = React.useState(0)
 
+  const [isReload, setIsReload] = React.useState<boolean>(false)
+
   const [swapInAddress, setSwapInAddress] = React.useState('')
   const [swapInAmount, setSwapInAmount] = React.useState(new BigNumber(0))
   const [swapInBalance, setSwapInBalance] = React.useState(new BigNumber(-1))
@@ -156,8 +158,8 @@ const Form = ({ typeAction, title }: IFormProps) => {
 
       for (let i = 0; i < poolTokens.length; i += 1) {
         newApprovals.push(
-          (title === 'Invest' ? crpPoolToken : corePoolToken).allowance(
-            poolTokens[i],
+          ERC20(poolTokens[i]).allowance(
+            title === 'Invest' ? HeimCRPPOOL : HeimCorePool,
             userWalletAddress
           )
         )
@@ -165,7 +167,8 @@ const Form = ({ typeAction, title }: IFormProps) => {
 
       setIsApproved(await Promise.all(newApprovals))
     }
-
+    
+    setIsReload(!isReload)
     setIsApproved([])
     calc()
   }, [title, poolTokens, approvalCheck, userWalletAddress])

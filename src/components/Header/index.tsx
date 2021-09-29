@@ -51,7 +51,10 @@ const Header = () => {
   React.useEffect(() => {
 
     const loginInt = setInterval(async () => {
-      window.ethereum.request({ method: 'eth_accounts' })
+      if (!window.ethereum) {
+        return
+      }
+      window.ethereum?.request({ method: 'eth_accounts' })
         .then((result: string[]) => {
           if (!result[0]) {
             dispatch(actionGetUserAddressWallet(''))
