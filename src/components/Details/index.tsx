@@ -4,8 +4,6 @@ import BigNumber from 'bn.js'
 
 import { BNtoDecimal } from '../../utils/numerals'
 
-import Tooltip from '../Tooltip'
-
 import * as S from './styles'
 
 interface IInfoStakeStaticProps {
@@ -48,9 +46,9 @@ const Details = ({ pid, poolInfo, infoStakeStatic }: IDetailsProps) => {
         <span>Total staked</span>
         <S.KacyUSD>
           <span>
-            ${BNtoDecimal(new BigNumber(depositedAmount).mul(new BigNumber(3.5)), new BigNumber(18), 2)}
+            {BNtoDecimal(new BigNumber(depositedAmount), new BigNumber(18), 2)} KACY
           </span>
-          <span className="usd">~ 0 USD</span>
+          <span className="usd">~ {BNtoDecimal(new BigNumber(depositedAmount).mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
         </S.KacyUSD>
       </S.Info>
       <S.Info>
@@ -59,7 +57,7 @@ const Details = ({ pid, poolInfo, infoStakeStatic }: IDetailsProps) => {
           <span>
             {BNtoDecimal(infoStakeStatic.kacyRewards, new BigNumber(18), 2)}/day
           </span>
-          <span className="usd">~ 0 USD</span>
+          <span className="usd">~ {BNtoDecimal(infoStakeStatic.kacyRewards.mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
         </S.KacyUSD>
 
       </S.Info>
