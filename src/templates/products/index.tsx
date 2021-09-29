@@ -58,14 +58,6 @@ const Products = () => {
       .catch(err => err)
   }
 
-  React.useEffect(() => {
-    if (poolTokensArray.length < 1) {
-      return
-    }
-    getCoinList()
-    setCoinInfoList([])
-  }, [poolTokensArray])
-
   async function getChainId() {
     if (web3.currentProvider === null) {
       return
@@ -74,6 +66,22 @@ const Products = () => {
     const id = await window.ethereum.request({ method: 'eth_chainId' })
     setChainId(id)
   }
+
+  React.useEffect(() => {
+    if (coinInfoList.length) {
+      localStorage.setItem('listCoinPool', JSON.stringify(coinInfoList))
+    }
+  }, [coinInfoList])
+
+
+  React.useEffect(() => {
+    if (poolTokensArray.length < 1) {
+      return
+    }
+
+    getCoinList()
+    setCoinInfoList([])
+  }, [poolTokensArray])
 
   React.useEffect(() => {
     getChainId()
@@ -226,4 +234,5 @@ const Products = () => {
     </>
   )
 }
+
 export default Products

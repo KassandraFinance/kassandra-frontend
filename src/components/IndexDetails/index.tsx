@@ -27,7 +27,19 @@ const IndexDetails = ({ coinInfoList }: IIndexDetailsProps) => {
     return b.allocation - a.allocation;
   });
 
+
   const [showMore, setShowMore] = React.useState<boolean>(false);
+  const [coins, setCoins] = React.useState<any[]>([])
+
+  const res = localStorage.getItem("listCoinPool")
+  const listCoinPool = res && JSON.parse(res)
+
+  React.useEffect(() => {
+    if (!coinInfoList.length) {
+      setCoins(listCoinPool)
+    }
+    setCoins(coinInfoList)
+  }, [coinInfoList])
 
   return (
     <>
@@ -46,7 +58,7 @@ const IndexDetails = ({ coinInfoList }: IIndexDetailsProps) => {
             </thead>
             <tbody>
               {
-                coinInfoList.map((coin) => (
+                coins.map((coin) => (
                   <S.Tr showMore={showMore}>
                     <S.Colour style={{ background: getRandomColor() }} />
                     <S.Td change24h={false}>
