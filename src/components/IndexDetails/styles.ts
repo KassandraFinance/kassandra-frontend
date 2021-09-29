@@ -10,8 +10,8 @@ export const IndexDetailsContainer = styled.section`
 
     max-width: 1520px;
     max-height: 100%;
-    margin: 0 auto;
-    padding: 32px;
+    /* margin: 0 auto; */
+    padding-top: 100px;
 
     h1 {
       font-size: ${theme.font.sizes.font32};
