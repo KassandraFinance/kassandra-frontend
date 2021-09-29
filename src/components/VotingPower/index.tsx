@@ -1,6 +1,6 @@
 import React from 'react'
 import BigNumber from 'bn.js'
-import { EventData } from 'web3-eth-contract'
+// import { EventData } from 'web3-eth-contract'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
 import web3 from '../../utils/web3'
@@ -186,47 +186,47 @@ const VotingPower = ({
     getInfoStake()
   }, [userWalletAddress])
   
-  React.useEffect(() => {
+  // React.useEffect(() => {
 
-    let transaction: string = ''
-    const stakeEvent = token.events.Staked({
-      filter: {
-        pid,
-        user: userWalletAddress
-      },
-    }, (error: Error, event: EventData) => {
-      const amount = event.returnValues.amount
-      if (event.transactionHash !== transaction) {
-        transaction = event.transactionHash
-        setInfoStake(prevState => ({
-          yourStake: prevState.yourStake.add(new BigNumber(amount)),
-          withdrawable: prevState.withdrawable
-        }))
-      }
-    })
+  //   let transaction: string = ''
+  //   const stakeEvent = token.events.Staked({
+  //     filter: {
+  //       pid,
+  //       user: userWalletAddress
+  //     },
+  //   }, (error: Error, event: EventData) => {
+  //     const amount = event.returnValues.amount
+  //     if (event.transactionHash !== transaction) {
+  //       transaction = event.transactionHash
+  //       setInfoStake(prevState => ({
+  //         yourStake: prevState.yourStake.add(new BigNumber(amount)),
+  //         withdrawable: prevState.withdrawable
+  //       }))
+  //     }
+  //   })
 
-    const withdrawnEvent = token.events.Withdrawn({
-      filter: {
-        pid,
-        user: userWalletAddress
-      },
-    },(error: Error, event: EventData) => {
-      const amount = event.returnValues.amount
-      if (event.transactionHash !== transaction) {
-        transaction = event.transactionHash
-        setInfoStake(prevState => ({
-          yourStake: prevState.yourStake.sub(new BigNumber(amount)),
-          withdrawable: prevState.withdrawable
-        }))
-      }
-    })
+  //   const withdrawnEvent = token.events.Withdrawn({
+  //     filter: {
+  //       pid,
+  //       user: userWalletAddress
+  //     },
+  //   },(error: Error, event: EventData) => {
+  //     const amount = event.returnValues.amount
+  //     if (event.transactionHash !== transaction) {
+  //       transaction = event.transactionHash
+  //       setInfoStake(prevState => ({
+  //         yourStake: prevState.yourStake.sub(new BigNumber(amount)),
+  //         withdrawable: prevState.withdrawable
+  //       }))
+  //     }
+  //   })
     
 
-    return () => {
-      stakeEvent.unsubscribe()
-      withdrawnEvent.unsubscribe()
-    }
-  }, [])
+  //   return () => {
+  //     stakeEvent.unsubscribe()
+  //     withdrawnEvent.unsubscribe()
+  //   }
+  // }, [])
 
   return (
     <>
