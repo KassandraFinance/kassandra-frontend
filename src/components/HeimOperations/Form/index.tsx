@@ -572,8 +572,11 @@ const Form = ({ typeAction, title }: IFormProps) => {
               .slice(0, -1)
               .filter(token => token.address !== swapOutAddress)
         }
+        title={title}
         swapInBalance={swapInBalance}
         setSwapInAmount={setSwapInAmount}
+        setSwapOutAmount={setSwapOutAmount}
+        swapInAddress={swapInAddress}
         setSwapInAddress={setSwapInAddress}
       />
 

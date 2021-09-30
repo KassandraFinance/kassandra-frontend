@@ -25,24 +25,36 @@ import {
 interface IInputEthProps {
   actionString: string
   poolTokens: TokenDetails[]
+  title: string
   swapInBalance: BigNumber
+  swapInAddress: string
   setSwapInAddress: React.Dispatch<React.SetStateAction<string>>
   setSwapInAmount: React.Dispatch<React.SetStateAction<BigNumber>>
+  setSwapOutAmount: React.Dispatch<React.SetStateAction<BigNumber[]>>
 }
 
 const InputTokens = ({
   actionString,
   poolTokens,
+  title,
   swapInBalance,
+  swapInAddress,
   setSwapInAddress,
   setSwapInAmount,
+  setSwapOutAmount
 }: IInputEthProps) => {
   const inputRef = React.useRef<HTMLInputElement>(null)
 
   const tokensList = React.useMemo(() => {
     if (poolTokens.length > 1) {
       return (
-        <Select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSwapInAddress(e.target.value)}>
+        <Select 
+          value={swapInAddress}
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+            setSwapInAddress(e.target.value)
+            clearInput()
+          }}
+        >
           {poolTokens.map(
             (token: TokenDetails) =>
               <option key={token.address} value={token.address} title={token.name}>{token.symbol}</option>
@@ -52,7 +64,7 @@ const InputTokens = ({
     }
 
     return <Symbol>{poolTokens.length > 0 ? poolTokens[0].symbol : '...'}</Symbol>
-  }, [poolTokens])
+  }, [poolTokens, title])
 
   const wei2String = (input: BigNumber) => {
     const decimal = input.mod(wei).toString()
@@ -71,7 +83,19 @@ const InputTokens = ({
       inputRef.current.value = wei2String(swapInBalance)
     }
   }
-  
+
+  const clearInput = () => {
+    setSwapInAmount(new BigNumber(0))
+    if (inputRef.current !== null) {
+      inputRef.current.value = "0"
+    }
+  }
+
+  React.useEffect(() => {    
+    clearInput()
+    setSwapOutAmount([new BigNumber(0)])
+  }, [title])
+
   return (
     <InputTokensContainer>
       <PayWith>
