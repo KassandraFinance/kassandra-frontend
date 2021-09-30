@@ -22,7 +22,7 @@ import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
 import * as S from './styles'
 import { BNtoDecimal, wei } from '../../../utils/numerals'
-import { confirmWithdraw } from '../../../utils/confirmTransactions'
+import { confirmWithdraw, confirmSwap, confirmInvest } from '../../../utils/confirmTransactions'
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
 import ModalWalletConnect from '../../ModalWalletConnect'
 
@@ -501,7 +501,8 @@ const Form = ({ typeAction, title }: IFormProps) => {
               swapInAddressVal,
               swapInAmountVal,
               walletAddress.value,
-              "Pending investment"
+              "Pending investment",
+              confirmInvest
             )
             return
 

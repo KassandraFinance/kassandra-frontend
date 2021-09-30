@@ -41,3 +41,11 @@ export function confirmCancelUnstake(txReceipt?: TransactionReceipt) {
   }
   ToastError("Failed to cancel unstake")
 }
+
+export function confirmInvest(txReceipt?: TransactionReceipt) {
+  if (txReceipt?.status) {
+    ToastSuccess("Invest confirmed")
+    return
+  }
+  ToastError("Failed to invest")
+}
