@@ -16,11 +16,12 @@ interface IInfoStakeStaticProps {
 
 interface IDetailsProps {
   pid: number
+  hasExpired: boolean
   poolInfo: (pid: number) => Promise<any>
   infoStakeStatic: IInfoStakeStaticProps
 }
 
-const Details = ({ pid, poolInfo, infoStakeStatic }: IDetailsProps) => {
+const Details = ({ pid, hasExpired, poolInfo, infoStakeStatic }: IDetailsProps) => {
   const [depositedAmount, setDepositedAmount] = React.useState<string>('')
 
   React.useEffect(() => {
@@ -55,9 +56,9 @@ const Details = ({ pid, poolInfo, infoStakeStatic }: IDetailsProps) => {
         <span>Pool Reward</span>
         <S.KacyUSD>
           <span>
-            {BNtoDecimal(infoStakeStatic.kacyRewards, new BigNumber(18), 2)}/day
+            {hasExpired ? "0" : BNtoDecimal(infoStakeStatic.kacyRewards, new BigNumber(18), 2)}/day
           </span>
-          <span className="usd">~ {BNtoDecimal(infoStakeStatic.kacyRewards.mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
+          <span className="usd">~ {hasExpired ? "0" : BNtoDecimal(infoStakeStatic.kacyRewards.mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
         </S.KacyUSD>
 
       </S.Info>
