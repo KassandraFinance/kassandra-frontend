@@ -544,7 +544,8 @@ const Form = ({ typeAction, title }: IFormProps) => {
               swapInAmountVal,
               swapOutAddressVal,
               walletAddress.value,
-              "Pending Swap"
+              "Pending Swap",
+              confirmSwap
             )
             return
 

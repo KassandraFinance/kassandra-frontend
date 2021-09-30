@@ -20,12 +20,15 @@ export const Input = styled.input`
     &[type="radio"] + label {
       border: 1px solid ${theme.colors.cyan};
       color: #fff;
+      &:hover {
+        color: ${theme.colors.cyan};
+      }
     }
 
     &[type="radio"]:checked + label {
       background-color: ${theme.colors.cyan};
       border: 2px solid ${theme.colors.cyan};
-      color: #fff;
+      color: ${theme.colors.darkPurple};
     }
   `}
 `

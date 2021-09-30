@@ -49,3 +49,11 @@ export function confirmInvest(txReceipt?: TransactionReceipt) {
   }
   ToastError("Failed to invest")
 }
+
+export function confirmSwap(txReceipt?: TransactionReceipt) {
+  if (txReceipt?.status) {
+    ToastSuccess("Swap confirmed")
+    return
+  }
+  ToastError("Failed to swap")
+}
