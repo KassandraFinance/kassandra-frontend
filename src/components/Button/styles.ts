@@ -34,7 +34,7 @@ const wrapperModifiers = {
   `,
   huge: (theme: DefaultTheme) => css`
     height: 4.4rem;
-    font-size: ${theme.font.sizes.font16};
+    font-size: ${theme.font.sizes.font18};
     padding: ${theme.spacings.space24} ${theme.spacings.space48};
   `,
   fullWidth: () => css`
@@ -72,7 +72,9 @@ const wrapperModifiers = {
   `,
 
   backgroundSecondary: (theme: DefaultTheme) => css`
+
     background: ${`linear-gradient(87.48deg, ${theme.colors.amber} -70.27%,  ${theme.colors.magenta} 154.78%)`};
+    margin-bottom: 16px ;
 
     &:after {
       background: ${`linear-gradient(87.48deg, ${theme.colors.amber} -70.27%,  ${theme.colors.magenta} 154.78%)`};
@@ -89,6 +91,7 @@ const wrapperModifiers = {
 
   backgroundBlack: (theme: DefaultTheme) => css`
     background: transparent;
+    margin-bottom: 16px;
     border: ${`0.1rem solid ${theme.colors.cyan}`};
     color: ${theme.colors.snow};
     transition: all 300ms;
@@ -114,7 +117,7 @@ export const Wrapper = styled.button<WrapperProps>`
   disabledNoEvent,
   backgroundPrimary,
   backgroundSecondary,
-  backgroundBlack
+  backgroundBlack,
 }) => css`
     border: none;
     border-radius: ${theme.border.radius};

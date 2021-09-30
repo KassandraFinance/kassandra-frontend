@@ -211,6 +211,8 @@ export const Claim = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  margin-bottom: 16px;
+
   width: 100%;
   height: 100%;
 `
@@ -224,14 +226,11 @@ export const ButtonContainer = styled.div`
   width: 100%;
 `
 
-interface IButtonProps {
-  buttonRequest?: boolean;
-}
+// interface IButtonProps {
+//   buttonRequest?: boolean;
+// }
 
-export const Button =
-  styled.button <
-    IButtonProps >
-    `
+export const Button = styled.button`
   background: linear-gradient(87.48deg, #FFBF00 -70.27%, #E843C4 154.78%);
   border: none;
   border-radius: ${theme.border.radius};
@@ -253,18 +252,6 @@ export const Button =
   @media (max-width: 420px) {
     max-width: 100%;
     min-width: 200px;
-  }
-
-  ${props =>
-      props.buttonRequest && {
-        background: 'transparent',
-        border: '1px solid #26DBDB',
-        color: '#fff',
-        transitionDuration: '300ms'
-      }}
-  &:hover {
-    background-color: ${props => (props.buttonRequest ? '#26DBDB' : null)};
-    color: ${props => (props.buttonRequest ? '#211426' : null)};
   }
 `
 

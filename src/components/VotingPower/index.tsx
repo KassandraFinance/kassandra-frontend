@@ -25,6 +25,7 @@ import WithdrawDate from './WithdrawDate'
 import KacyEarned from './KacyEarned'
 
 import * as S from './styles'
+import Button from '../Button'
 
 interface IInfoStakeProps {
   yourStake: BigNumber;
@@ -134,10 +135,10 @@ const VotingPower = ({
 
       const timestampNow = new Date().getTime()
       const periodFinish: any = new Date(Number(poolInfoResponse.periodFinish) * 1000)
-      
+
       const startDate = getDate(
         Number(poolInfoResponse.periodFinish) -
-          Number(poolInfoResponse.rewardsDuration)
+        Number(poolInfoResponse.rewardsDuration)
       )
       const endDate = getDate(Number(poolInfoResponse.periodFinish))
 
@@ -197,7 +198,7 @@ const VotingPower = ({
 
 
   // const token = useStakingContract(Staking)
-  
+
   // React.useEffect(() => {
 
   //   let transaction: string = ''
@@ -232,7 +233,7 @@ const VotingPower = ({
   //       }))
   //     }
   //   })
-    
+
 
   //   return () => {
   //     stakeEvent.unsubscribe()
@@ -251,7 +252,7 @@ const VotingPower = ({
                 <Tooltip tooltipTop={true}>Annual Percentage Return</Tooltip>
                 <h4>APR</h4>
               </S.APR>
-              <S.Percentage>{Number(infoStakeStatic.apr)/100} %</S.Percentage>
+              <S.Percentage>{Number(infoStakeStatic.apr) / 100} %</S.Percentage>
             </S.IntroStaking>
           </S.InterBackground>
           <S.KacyStaked>
@@ -277,7 +278,7 @@ const VotingPower = ({
             </S.WithdrawDelay>
           </S.KacyStaked>
           <S.InfosStaking>
-            <YourStake 
+            <YourStake
               pid={pid}
               balanceOf={balanceOf}
               poolInfo={poolInfo}
@@ -299,44 +300,53 @@ const VotingPower = ({
                         userWalletAddress={userWalletAddress}
                         earned={earned}
                       />
-                      <S.Button
+                      <Button
+                        size='medium'
+                        backgroundSecondary
                         type="button"
-                        style={{ width: '110px' }}
+                        text='Claim'
+                        // fullWidth
                         onClick={() =>
                           getReward(pid, confirmClaim, 'Pending reward claim')
                         }
-                      >
-                        Claim
-                      </S.Button>
+                      />
+
+
                     </S.Claim>
                   )}
                   {isApproveKacyStaking ? (
                     <S.StakeContainer>
                       {unstake ? (
-                        <S.Button
+                        <Button
+                          size='huge'
+                          backgroundBlack
                           type="button"
-                          buttonRequest={true}
+                          text='Cancel withdraw'
+                          fullWidth
                           onClick={() => setIsModalCancelUnstake(true)}
-                        >
-                          Cancel withdraw
-                        </S.Button>
+                        />
                       ) : (
-                        <S.Button
+                        <Button
+                          size='huge'
+                          backgroundSecondary
                           type="button"
+                          text='Stake KACY'
+                          fullWidth
                           onClick={() => setIsModalStaking(true)}
-                        >
-                          Stake KACY
-                        </S.Button>
+                        />
                       )}
                       {hasStake && (
                         <>
                           {isWithdrawable ? (
-                            <S.Button
+                            <Button
+                              size='huge'
+                              backgroundSecondary
                               type="button"
+                              text='Withdraw'
+                              fullWidth
                               onClick={() => setIsModalUnstaking(true)}
-                            >
-                              Withdraw
-                            </S.Button>
+                            />
+
                           ) : unstake ? (
                             <WithdrawDate
                               pid={pid}
@@ -345,27 +355,41 @@ const VotingPower = ({
                               setWithdrawDelay={setWithdrawDelay}
                             />
                           ) : (
-                            <S.Button
+                            <Button
+                              size='huge'
+                              backgroundBlack
                               type="button"
-                              buttonRequest={true}
+                              text='Request withdraw'
+                              fullWidth
                               onClick={() => setIsModalRequestUnstake(true)}
-                            >
-                              Request withdraw
-                            </S.Button>
+                            />
                           )}
                         </>
                       )}
                     </S.StakeContainer>
                   ) : (
-                    <S.Button type="button" onClick={handleApproveKacy}>
-                      Approve Contract
-                    </S.Button>
+                    <Button
+                      size='huge'
+                      backgroundSecondary
+                      type="button"
+                      text='Approve Contract'
+                      fullWidth
+                      onClick={handleApproveKacy}
+                    />
+
+
                   )}
                 </>
               ) : (
-                <S.Button type="button" onClick={() => setIsModaWallet(true)}>
-                  Connect Wallet
-                </S.Button>
+                <Button size='huge'
+                  backgroundSecondary
+                  type="button"
+                  text='Connect Wallet'
+                  fullWidth
+                  onClick={() => setIsModaWallet(true)}
+                />
+
+
               )}
               <S.ButtonDetails
                 type="button"

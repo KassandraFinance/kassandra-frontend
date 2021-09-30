@@ -29,7 +29,7 @@ const WithdrawDate = ({ pid, userWalletAddress, stakedUntil, setWithdrawDelay }:
   }, [])
 
   return (
-    <S.WithdrawDate>Withdraw in date {date}</S.WithdrawDate>
+    <S.WithdrawDate>Withdraw in {date}</S.WithdrawDate>
   )
 }
 

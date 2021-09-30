@@ -20,6 +20,7 @@ import {
   GetKacy
 } from './styles'
 import { BNtoDecimal } from '../../utils/numerals'
+import Button from '../Button'
 
 interface IModalStakingProps {
   modalOpen: boolean;
@@ -74,7 +75,7 @@ const ModalUnstaking = ({
     }
   }, [modalOpen])
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     setMultiplier(0);
     handleKacyAmount(new BigNumber(0))
   }, [modalOpen])
@@ -103,37 +104,37 @@ const ModalUnstaking = ({
                 type="number"
                 placeholder="0"
                 step="any"
-								min="0"
-								onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                min="0"
+                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
                   setMultiplier(0);
-									const target = e.target as HTMLInputElement
-									// don't allow negative numbers
-									if (e.key === '-') {
-										e.preventDefault()
-									}
-									// Blink bug makes the value come empty if pressing the decimal symbol that is not that of the current locale
-									else if (e.key === '.' || e.key === ',') {
-										// first time value will be ok, if pressing twice it zeroes, we ignore those
-										if (target.value.length > 0 && target.value.search(/[,.]/) === -1) {
-											target.dataset.lastvalue = target.value
-										}
-									}
-									else if (e.key === 'Backspace' || e.key === 'Delete') {
-										target.dataset.lastvalue = '0'
-									}
-								}}
-								onChange={
-									(e: React.ChangeEvent<HTMLInputElement>) => {
-										// getArrayTokens()
-										let { value } = e.target
+                  const target = e.target as HTMLInputElement
+                  // don't allow negative numbers
+                  if (e.key === '-') {
+                    e.preventDefault()
+                  }
+                  // Blink bug makes the value come empty if pressing the decimal symbol that is not that of the current locale
+                  else if (e.key === '.' || e.key === ',') {
+                    // first time value will be ok, if pressing twice it zeroes, we ignore those
+                    if (target.value.length > 0 && target.value.search(/[,.]/) === -1) {
+                      target.dataset.lastvalue = target.value
+                    }
+                  }
+                  else if (e.key === 'Backspace' || e.key === 'Delete') {
+                    target.dataset.lastvalue = '0'
+                  }
+                }}
+                onChange={
+                  (e: React.ChangeEvent<HTMLInputElement>) => {
+                    // getArrayTokens()
+                    let { value } = e.target
 
-										if (value.length === 0) {
-											value = e.target.dataset.lastvalue as string
-										}
+                    if (value.length === 0) {
+                      value = e.target.dataset.lastvalue as string
+                    }
 
-										setAmountUnstaking(new BigNumber(web3.utils.toWei(value)))
-									}
-								}
+                    setAmountUnstaking(new BigNumber(web3.utils.toWei(value)))
+                  }
+                }
                 value={BNtoDecimal(amountUnstaking, new BigNumber(18), 6)}
               />
               <Line />
@@ -206,7 +207,7 @@ const ModalUnstaking = ({
             </ButtonContainer>
             <ConfirmButton
               type="button"
-							disabled={amountUnstaking.toString() === '0'}
+              disabled={amountUnstaking.toString() === '0'}
               otherStakingPools={otherStakingPools}
               onClick={() => {
                 setModalOpen(false)
@@ -216,9 +217,13 @@ const ModalUnstaking = ({
             >
               Confirm
             </ConfirmButton>
-            <GetKacy type="button" onClick={() => setModalOpen(false)}>
-              Get KACY
-            </GetKacy>
+            <Button
+              backgroundBlack
+              fullWidth
+              text='Get KACY'
+              type="button"
+              onClick={() => setModalOpen(false)}
+            />
           </Main>
         </BackgroundBlack>
       </BorderGradient>
