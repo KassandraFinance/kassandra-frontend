@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const HeimOperationsContainer = styled.div`
   max-width: 440px;
-  @media (max-width: 900px) {
+  @media (max-width: 1200px) {
     margin: 0 auto;
     display: block;
   }

@@ -14,7 +14,7 @@ export const ProductsContainer = styled.section`
   grid-template-columns: auto 440px;
   gap: 60px;
 
-  @media (max-width: 900px) {
+  @media (max-width: 1200px) {
     grid-template-columns: 1fr;
   }
 `
@@ -32,9 +32,7 @@ export const ComingSoon = styled.img`
 `
 export const Intro = styled.div`
   max-width: 1520px;
-  /* position: relative; */
-  margin-bottom: 70px;
-  /* margin-left: 70px; */
+  margin-bottom: 26px;
 
   img{
     width: 64px;
@@ -62,6 +60,7 @@ export const Intro = styled.div`
     }
   }
   @media (max-width: 900px) {
+    display: none;
     grid-template-columns: 1fr;
     max-width: 440px;
     margin: auto;
@@ -73,6 +72,7 @@ export const IntroValues = styled.div`
   max-width: 80%;
   display: flex;
   margin-top: 33px;
+  margin-left: 90px;
   h3 {
     font-size: 24px;
     font-weight: ${theme.font.weight.normal};
@@ -92,13 +92,18 @@ export const IntroTVL = styled.section`
 
 `
 export const Text = styled.section`
+  max-width: 100%;
   padding-top: 100px;
   max-width: 800px;
+  text-align: center;
   /* margin: auto; */
   h2{
     font-size: 28px ;
     font-weight: ${theme.font.weight.normal};
     margin-bottom:24px;
+    @media(max-width: 1200px){
+      font-size: ${theme.font.sizes.font24};
+    }
   }
   span{
     display:inline-block;
@@ -118,9 +123,11 @@ export const Text = styled.section`
     }
   }
   img{
-
     max-width: 100%;
     margin: 0 32px;
+    @media(max-width: 1200px){
+      max-width: 80%;
+    }
   }
 `
 export const Link = styled.div`
