@@ -8,9 +8,10 @@ interface IWithdrawDateProps {
   pid: number
   userWalletAddress: string
   stakedUntil: (pid: number, walletAddress: string) => Promise<string>
+  setWithdrawDelay: React.Dispatch<React.SetStateAction<number>>
 }
 
-const WithdrawDate = ({ pid, userWalletAddress, stakedUntil }: IWithdrawDateProps) => {
+const WithdrawDate = ({ pid, userWalletAddress, stakedUntil, setWithdrawDelay }: IWithdrawDateProps) => {
   const { date, countDown, interval } = useCountDownDate()
 
   const withdrawDelay = React.useCallback(async () => {
@@ -18,6 +19,7 @@ const WithdrawDate = ({ pid, userWalletAddress, stakedUntil }: IWithdrawDateProp
     const countDownDate = new Date(Number(unix_timestamp) * 1000).getTime()
 
     countDown(countDownDate)
+    setWithdrawDelay(countDownDate)
   }, [])
 
   React.useEffect(() => {
