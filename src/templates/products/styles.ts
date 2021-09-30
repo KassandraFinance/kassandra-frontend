@@ -95,7 +95,7 @@ export const Text = styled.section`
   max-width: 100%;
   padding-top: 100px;
   max-width: 800px;
-  text-align: center;
+  /* text-align: center; */
   /* margin: auto; */
   h2{
     font-size: 28px ;
