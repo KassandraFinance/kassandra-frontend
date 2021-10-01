@@ -28,7 +28,7 @@ const IndexDetails = ({ coinInfoList }: IIndexDetailsProps) => {
   });
 
 
-  const [showMore, setShowMore] = React.useState<boolean>(false);
+  const [showMore, setShowMore] = React.useState<boolean>(true);
   const [coins, setCoins] = React.useState<any[]>([])
 
   const res = localStorage.getItem("listCoinPool")
