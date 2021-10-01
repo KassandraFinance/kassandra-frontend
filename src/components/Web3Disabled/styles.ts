@@ -20,11 +20,17 @@ export const Web3Disabled = styled.section`
 export const Header = styled.div`
 	border: 1px solid ${theme.colors.amber};
 
-	text-align: center;
+  display: flex;
+	align-items: center;
+	justify-content: center;
+
 	padding: 24px;
 
-	p {
-		font-size: ${theme.font.sizes.font24};
+  img {
+    margin-right: ${theme.spacings.space16};
+  }
+  p {
+	  font-size: ${theme.font.sizes.font24};
 	}
 `
 
