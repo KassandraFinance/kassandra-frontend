@@ -60,6 +60,7 @@ const Web3Disabled = ({ textButton, textHeader, bodyText, type }: IWeb3DisabledP
     <S.Web3Disabled>
       <div>
         <S.Header>
+          <img src="assets/IconNotification/warning.svg" alt="" />
           <p>{textHeader}</p>
         </S.Header>
         <S.Body>

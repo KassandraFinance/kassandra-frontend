@@ -9,9 +9,10 @@ interface IKacyEarnedProps {
   pid: number
   userWalletAddress: string
   earned: (pid: number, walletAddress: string) => Promise<BigNumber>
+  yourStakeValue: BigNumber
 }
 
-const KacyEarned = ({ pid, userWalletAddress, earned }: IKacyEarnedProps) => {
+const KacyEarned = ({ pid, userWalletAddress, earned, yourStakeValue }: IKacyEarnedProps) => {
   const [kacyEarned, setKacyEarned] = React.useState<BigNumber>(new BigNumber(0))
 
   React.useEffect(() => {
@@ -28,7 +29,7 @@ const KacyEarned = ({ pid, userWalletAddress, earned }: IKacyEarnedProps) => {
     <S.KacyEarned>
       <p>Kacy earned</p>
       <h3>{BNtoDecimal(kacyEarned || new BigNumber(0), new BigNumber(18), 2)} KACY</h3>
-      <span>~ 0 USD</span>
+      <span>~ {BNtoDecimal(new BigNumber(yourStakeValue).mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
     </S.KacyEarned>
   )
 }

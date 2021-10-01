@@ -98,7 +98,7 @@ export const Percentage = styled.p`
 `
 
 export const InfosStaking = styled.div`
-  padding: 64px 32px 24px;
+  padding: 0 32px 24px;
   @media (max-width: 420px) {
     padding: 20px;
   }
@@ -111,8 +111,6 @@ export const KacyStaked = styled.div`
   grid-template-columns: 1fr 1fr;
 
   width: 100%;
-  position: absolute;
-  left: -0.1px;
   p {
     font-size: ${theme.font.sizes.font18};
     font-weight: ${theme.font.weight.normal};
@@ -131,7 +129,7 @@ export const VotingPower = styled.div`
   border-bottom: 2px solid #e843c4;
   border-right: 1px solid #e843c4;
 
-  padding: 8px 32px;
+  padding: 8px 24px;
 `
 
 export const WithdrawDelay = styled.div`

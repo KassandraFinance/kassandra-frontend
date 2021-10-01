@@ -204,7 +204,7 @@ const Form = ({ typeAction, title }: IFormProps) => {
     return () => {
       balanceSub.unsubscribe()
     }
-  }, [swapInAddress, userWalletAddress])
+  }, [swapInAddress, userWalletAddress, title, poolTokens])
 
   // get balance of swap out token
   React.useEffect(() => {

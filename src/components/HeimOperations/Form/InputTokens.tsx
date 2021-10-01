@@ -64,7 +64,7 @@ const InputTokens = ({
     }
 
     return <Symbol>{poolTokens.length > 0 ? poolTokens[0].symbol : '...'}</Symbol>
-  }, [poolTokens, title])
+  }, [poolTokens])
 
   const wei2String = (input: BigNumber) => {
     const decimal = input.mod(wei).toString()
@@ -86,6 +86,8 @@ const InputTokens = ({
 
   const clearInput = () => {
     setSwapInAmount(new BigNumber(0))
+    setSwapOutAmount([new BigNumber(0)])
+
     if (inputRef.current !== null) {
       inputRef.current.value = "0"
     }
@@ -93,7 +95,6 @@ const InputTokens = ({
 
   React.useEffect(() => {    
     clearInput()
-    setSwapOutAmount([new BigNumber(0)])
   }, [title])
 
   return (

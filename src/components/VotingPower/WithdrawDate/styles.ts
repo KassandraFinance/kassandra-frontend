@@ -10,7 +10,7 @@ export const WithdrawDate = styled.div`
   font-size: ${theme.font.sizes.font18};
   font-weight: ${theme.font.weight.normal};
 
-  padding: ${theme.spacings.space24} ${theme.spacings.space48};
+  padding: ${theme.spacings.space24} ${theme.spacings.space40};
 
   display: flex;
   align-items: center;
