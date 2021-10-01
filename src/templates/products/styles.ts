@@ -4,19 +4,7 @@ import media from 'styled-media-query'
 
 
 export const ProductsContainer = styled.section`
-  max-width: 1520px;
-  margin-top: 40px;
-  margin-inline: auto;
-  padding: 0 ${theme.spacings.space32};
 
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: auto 440px;
-  gap: 60px;
-
-  @media (max-width: 1200px) {
-    grid-template-columns: 1fr;
-  }
 `
 export const InfoSection = styled.section`
   display: flex;
@@ -26,11 +14,11 @@ export const InfoSection = styled.section`
 
 export const ComingSoon = styled.img`
   max-width: 100%;
-  @media (max-width: 900px) {
+  @media (max-width: 960px) {
     display: none;
   }
 `
-export const Intro = styled.div`
+export const DataIntro = styled.div`
   max-width: 1520px;
   margin-bottom: 26px;
 
@@ -59,7 +47,7 @@ export const Intro = styled.div`
       font-size: 20px;
     }
   }
-  @media (max-width: 900px) {
+  @media (max-width: 960px) {
     display: none;
     grid-template-columns: 1fr;
     max-width: 440px;
@@ -173,5 +161,21 @@ export const Link = styled.div`
     ${media.lessThan('large')`
       font-size: ${theme.font.sizes.font12};
     `}
+  }
+`
+export const DesktopContainer = styled.div`
+ max-width: 1520px;
+  margin-top: 40px;
+  margin-inline: auto;
+  padding: 0 ${theme.spacings.space32};
+
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: auto 440px;
+  gap: 60px;
+
+  @media (max-width: 960px) {
+    display: flex;
+    flex-direction: column-reverse;
   }
 `

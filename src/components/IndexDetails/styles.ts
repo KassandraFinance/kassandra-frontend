@@ -77,7 +77,7 @@ export const Td = styled.td<ITdProps>`
     color: `${props.negative ? '#EB5757' : '#6FCF97'}`
   }};
   ${({ theme }) => css`
-    font-size: ${theme.font.sizes.font24};
+    font-size: ${theme.font.sizes.font20};
     font-weight: ${theme.font.weight.light};
     letter-spacing: .5px;
     @media (max-width: 660px) {
