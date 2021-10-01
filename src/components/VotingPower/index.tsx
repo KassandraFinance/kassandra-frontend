@@ -40,7 +40,6 @@ interface IInfoStakeStaticProps {
   yourDailyKacyReward: BigNumber;
   withdrawDelay: any;
   totalStaked: BigNumber;
-  apr: BigNumber
 }
 
 interface IStakingProps {
@@ -91,6 +90,7 @@ const VotingPower = ({
   const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
   const [isDetails, setIsDetails] = React.useState<boolean>(false)
 
+  const [apr, setApr] = React.useState<BigNumber>(new BigNumber(0))
   const [hasExpired, setHasExpired] = React.useState<boolean>(false)
   const [hasStake, setHasStake] = React.useState<boolean>(false)
   const [isWithdrawable, setIsWithdrawable] = React.useState<boolean>(false)
@@ -111,7 +111,6 @@ const VotingPower = ({
       yourDailyKacyReward: new BigNumber(0),
       withdrawDelay: '',
       totalStaked: new BigNumber(0),
-      apr: new BigNumber(0)
     })
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
@@ -146,7 +145,6 @@ const VotingPower = ({
         new BigNumber(86400)
       )
 
-      const apr = kacyRewards.mul(new BigNumber(365)).mul(new BigNumber(100)).div(new BigNumber(poolInfoResponse.depositedAmount))
       const withdrawDelay = Number(poolInfoResponse.withdrawDelay) / 86400
 
       setInfoStakeStatic({
@@ -157,7 +155,6 @@ const VotingPower = ({
         yourDailyKacyReward: new BigNumber(0),
         withdrawDelay: withdrawDelay > 0 ? withdrawDelay : 0,
         totalStaked: new BigNumber(poolInfoResponse.depositedAmount),
-        apr
       })
       setHasExpired(periodFinish < timestampNow)
     }
@@ -252,7 +249,7 @@ const VotingPower = ({
                 <Tooltip tooltipTop={true}>Annual Percentage Return</Tooltip>
                 <h4>APR</h4>
               </S.APR>
-              <S.Percentage>{Number(infoStakeStatic.apr) / 100} %</S.Percentage>
+              <S.Percentage>{Number(apr)/100}%</S.Percentage>
             </S.IntroStaking>
           </S.InterBackground>
           <S.KacyStaked>
@@ -289,6 +286,7 @@ const VotingPower = ({
               userWalletAddress={userWalletAddress}
               setIsWithdrawable={setIsWithdrawable}
               setHasStake={setHasStake}
+              setApr={setApr}
             />
             <S.ButtonContainer>
               {userWalletAddress ? (
