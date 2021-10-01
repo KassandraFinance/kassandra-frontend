@@ -16,9 +16,9 @@ export const WithdrawDate = styled.div`
   align-items: center;
   justify-content: center;
 
-  width: 320px;
+  width: 100%;
   height: 44px;
-  margin: 8px 0;
+  margin-bottom: 16px;
   outline: none;
   z-index: 10;
   @media (max-width: 420px) {

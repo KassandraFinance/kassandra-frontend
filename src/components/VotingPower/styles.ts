@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import theme from '../../styles/theme'
 
+import * as ButtonStyles from '../Button/styles'
+
 
 export const BorderGradient = styled.div`
   position: relative;
@@ -263,7 +265,7 @@ export const ButtonDetails = styled.button<IButtonDetailsProps>`
   background-color: transparent;
   border: none;
   color: #26DBDB;
-  margin-top: 16px;
+  margin-top: 8px;
 
   outline: none;
   cursor: pointer;
@@ -277,6 +279,9 @@ export const ButtonDetails = styled.button<IButtonDetailsProps>`
 `
 
 export const StakeContainer = styled.div`
+  ${ButtonStyles.Wrapper} {
+    margin-bottom: 16px;
+  }
   display: flex;
   flex-direction: column;
   width: 100%;
