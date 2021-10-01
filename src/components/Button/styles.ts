@@ -74,7 +74,6 @@ const wrapperModifiers = {
   backgroundSecondary: (theme: DefaultTheme) => css`
 
     background: ${`linear-gradient(87.48deg, ${theme.colors.amber} -70.27%,  ${theme.colors.magenta} 154.78%)`};
-    margin-bottom: 16px ;
 
     &:after {
       background: ${`linear-gradient(87.48deg, ${theme.colors.amber} -70.27%,  ${theme.colors.magenta} 154.78%)`};
@@ -91,7 +90,7 @@ const wrapperModifiers = {
 
   backgroundBlack: (theme: DefaultTheme) => css`
     background: transparent;
-    margin-bottom: 16px;
+    /* margin-bottom: 16px; */
     border: ${`0.1rem solid ${theme.colors.cyan}`};
     color: ${theme.colors.snow};
     transition: all 300ms;

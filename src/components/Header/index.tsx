@@ -59,7 +59,7 @@ const Header = () => {
           if (!result[0]) {
             dispatch(actionGetUserAddressWallet(''))
           }
-      })
+        })
     }, 5000)
 
     return () => clearInterval(loginInt)
@@ -76,11 +76,11 @@ const Header = () => {
 
   return (
     <S.Wrapper pageHeim={asPath === '/heim'}>
-      <MediaMatch lessThan="large">
+      <S.MenuIconContainer>
         <S.IconWrapper onClick={() => setIsOpen(true)}>
           <MenuIcon aria-label="Open Menu" />
         </S.IconWrapper>
-      </MediaMatch>
+      </S.MenuIconContainer>
 
       <S.LogoWrapper>
         <Link href="/" passHref>
@@ -92,7 +92,7 @@ const Header = () => {
         </Link>
       </S.LogoWrapper>
 
-      <MediaMatch greaterThan="large">
+      <S.MenuDesktop>
         <S.MenuNav>
           {asPath === '/' ? (
             <Link href="/heim" passHref>
@@ -146,7 +146,7 @@ const Header = () => {
           )}
 
         </S.MenuNav>
-      </MediaMatch>
+      </S.MenuDesktop>
 
       <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen}>
 
@@ -189,15 +189,20 @@ const Header = () => {
                 text={substr(userWalletAddress)} />
             ) : (
               <Button
+
                 as='button'
                 backgroundBlack
                 size="large"
-                onClick={() => setIsModaWallet(true)}
+                onClick={() => {
+                  setIsModaWallet(true)
+                  setIsOpen(false)
+                }}
                 text='Connect Wallet' />
 
             )
           ) : (
             <Button
+              onClick={() => setIsOpen(false)}
               as='a'
               backgroundBlack
               size="large"

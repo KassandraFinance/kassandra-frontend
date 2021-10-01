@@ -2,6 +2,7 @@
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
 
+
 interface IWrapperProps {
   pageHeim: boolean;
 }
@@ -28,17 +29,17 @@ export const Wrapper = styled.menu<IWrapperProps>`
 `
 
 export const LogoWrapper = styled.div`
-  ${media.lessThan('large')`
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  cursor: pointer;
+
+  @media(max-width: 1190px) {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     img {
       position:relative;
       max-width: 100%;
-      /* height: 48px; */
     }
-  `}
-  cursor: pointer;
+  }
 `
 
 export const IconWrapper = styled.div`
@@ -232,4 +233,14 @@ export const ButtonConnectWallet = styled.button`
 ;
     }
   `}
+`
+export const MenuIconContainer = styled.div`
+  @media(min-width: 1190px) {
+    display: none;
+  }
+`
+export const MenuDesktop = styled.div`
+  @media(max-width: 1190px) {
+    display: none;
+  }
 `
