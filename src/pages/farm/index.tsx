@@ -131,15 +131,15 @@ const Farm = () => {
           {web3.currentProvider === null && !loading && (
             <Web3Disabled
               textButton="Install Metamask"
-              textHeader="Wallet connection to ETH mainnet is required"
-              bodyText="To have access to all our staking pools, please connect your wallet"
+              textHeader="Looks like you don't have the metamask wallet installed"
+              bodyText="Please install the metamask wallet to access our pools "
               type="install"
             />
           )}
           {!userWalletAddress && chainId === "0x3" && !loading && (
             <Web3Disabled
               textButton="Connect Wallet"
-              textHeader="Wallet connection to ETH mainnet is required"
+              textHeader="Wallet connection to the Ropsten network is required"
               bodyText="To have access to all our staking pools, please connect your wallet"
               type="connect"
             />
@@ -147,8 +147,8 @@ const Farm = () => {
           {web3.currentProvider !== null && chainId !== "0x3" && !loading && (
             <Web3Disabled
               textButton="Connect to Ropsten"
-              textHeader="Your wallet is set to the wrong network. Please switch to the test Ropsten network."
-              bodyText="To have access to all our staking pools, please switch the network."
+              textHeader="Your wallet is set to the wrong network."
+              bodyText="Please switch to the Ropsten network to have access to all our staking pools"
               type="changeChain"
             />
           )}
