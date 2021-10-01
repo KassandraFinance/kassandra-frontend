@@ -18,6 +18,7 @@ interface IYourStakeProps {
   setIsWithdrawable: React.Dispatch<React.SetStateAction<boolean>>
   setHasStake: React.Dispatch<React.SetStateAction<boolean>>
   setApr: React.Dispatch<React.SetStateAction<BigNumber>>
+  setYourStakeValue: React.Dispatch<React.SetStateAction<BigNumber>>
 }
 
 const YourStake = ({ 
@@ -31,7 +32,8 @@ const YourStake = ({
   userWalletAddress,
   setIsWithdrawable,
   setHasStake,
-  setApr
+  setApr,
+  setYourStakeValue
 }: IYourStakeProps) => {
   const [hasExpired, setHasExpired] = React.useState(false)
   const [infoStaked, setInfoStaked] = React.useState({
@@ -111,6 +113,7 @@ const YourStake = ({
           setIsWithdrawable(withdrawableResponse)
           setHasStake(hasStake)
           setApr(apr)
+          setYourStakeValue(balance)
         }
 
       }, 6000)

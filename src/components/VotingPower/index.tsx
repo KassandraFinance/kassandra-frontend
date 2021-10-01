@@ -95,6 +95,7 @@ const VotingPower = ({
   const [hasStake, setHasStake] = React.useState<boolean>(false)
   const [isWithdrawable, setIsWithdrawable] = React.useState<boolean>(false)
   const [withdrawDelay, setWithdrawDelay] = React.useState<number>(0)
+  const [yourStakeValue, setYourStakeValue] = React.useState<BigNumber>(new BigNumber(0))
 
   const [isApproveKacyStaking, setIsApproveKacyStaking] = React.useState<boolean>(false)
   const [unstake, setUnstake] = React.useState<boolean>(false)
@@ -287,6 +288,7 @@ const VotingPower = ({
               setIsWithdrawable={setIsWithdrawable}
               setHasStake={setHasStake}
               setApr={setApr}
+              setYourStakeValue={setYourStakeValue}
             />
             <S.ButtonContainer>
               {userWalletAddress ? (
@@ -297,6 +299,7 @@ const VotingPower = ({
                         pid={pid}
                         userWalletAddress={userWalletAddress}
                         earned={earned}
+                        yourStakeValue={yourStakeValue}
                       />
                       <Button
                         size='medium'
