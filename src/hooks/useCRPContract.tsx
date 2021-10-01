@@ -37,12 +37,10 @@ const useCRPContract = (address: string) => {
       walletAddress: string,
       message?: string,
       onComplete?: CompleteCallback
-    ): BigNumber => {
-      return new BigNumber(
-        contract.methods.joinswapExternAmountIn(tokenIn, tokenAmountIn, 0).send(
-          { from: walletAddress },
-          waitTransaction(onComplete ? onComplete : () => {}, message)
-        )
+    ) => {
+      return contract.methods.joinswapExternAmountIn(tokenIn, tokenAmountIn, 0).send(
+        { from: walletAddress },
+        waitTransaction(onComplete ? onComplete : () => {}, message)
       )
     }
 
