@@ -1,8 +1,7 @@
 import React from 'react'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import styled from 'styled-components'
-import theme from '../../styles/theme'
+import * as S from './styles'
 
 import { Kacy, Staking } from '../../constants/tokenAddresses'
 
@@ -43,8 +42,8 @@ const Farm = () => {
   React.useEffect(() => {
     getChainId()
   }, [userWalletAddress])
-  
-  
+
+
   React.useEffect(() => {
     setTimeout(() => {
       setLoading(false)
@@ -53,24 +52,30 @@ const Farm = () => {
 
   return (
     <>
-      {loading && 
-        <h1 
-          style={{ 
-            height: '90vh', 
-            display: 'flex', 
-            justifyContent: 'center', 
+      {loading &&
+        <h1
+          style={{
+            height: '90vh',
+            display: 'flex',
+            justifyContent: 'center',
             alignItems: 'center',
-            fontWeight: 500 
+            fontWeight: 500
           }}
         >
           Loading...
         </h1>
       }
       {web3.currentProvider !== null && userWalletAddress && chainId === "0x3" && !loading ?
-        <FarmContainer>
-          <h1>Staking</h1>
-          <h3>Stake $KACY for Voting Power</h3>
-          <GridStaking>
+        <S.FarmContainer>
+          <S.IntroWrapper>
+            <h1>Voting Power Pools</h1>
+            <h3><b>Stake</b> $KACY to <b>earn</b> $KACY + Voting Power</h3>
+            <S.Link>
+              <a href="">Active</a>
+              <a href="">Ended</a>
+            </S.Link>
+          </S.IntroWrapper>
+          <S.GridStaking>
             <VotingPower
               days="0"
               pid={0}
@@ -113,20 +118,20 @@ const Farm = () => {
               unstaking={kacyStake.unstaking}
               stakedUntil={kacyStake.stakedUntil}
             />
-          </GridStaking>
+          </S.GridStaking>
           <TotalVoting
             getTotalVotes={kacyStake.totalVotes}
             getCurrentVotes={kacyStake.currentVotes}
             userWalletAddress={userWalletAddress}
           />
           <h3>Other Staking Pools</h3>
-          <GridStaking>
+          <S.GridStaking>
             <OthersStakingPools connect={connect} img="logo-heim" />
             <OthersStakingPools connect={connect} img="heim-index" />
             <OthersStakingPools connect={connect} img="" />
-          </GridStaking>
-        </FarmContainer>
-      :
+          </S.GridStaking>
+        </S.FarmContainer>
+        :
         <>
           {web3.currentProvider === null && !loading && (
             <Web3Disabled
@@ -158,52 +163,5 @@ const Farm = () => {
   )
 }
 
-const FarmContainer = styled.section`
-  max-width: 1520px;
-  margin: 40px auto 64px;
-  padding: 0 ${theme.spacings.space32};
-
-  h1 {
-    font-size: ${theme.font.sizes.font24};
-    font-weight: ${theme.font.weight.normal};
-
-    @media (max-width: 420px) {
-      padding: 0 10px;
-    }
-  }
-  h3 {
-    font-size: ${theme.font.sizes.font20};
-    font-weight: ${theme.font.weight.normal};
-    margin: ${theme.spacings.space16} 0 32px;
-    @media (max-width: 420px) {
-      padding: 0 10px;
-    }
-  }
-
-  @media (min-width: 1400px) {
-    max-width: 1320px;
-  }
-`
-
-const GridStaking = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, minmax(360px, 400px));
-  gap: 24px;
-  justify-content: space-between;
-
-  margin: 0 auto;
-  max-width: 1520px;
-  @media (max-width: 1160px) {
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-    height: 100%;
-  }
-  @media (max-width: 800px) {
-    grid-template-columns: 1fr;
-  }
-  @media (max-width: 420px) {
-    gap: 32px;
-  }
-`
-
 export default Farm
+
