@@ -90,7 +90,6 @@ const wrapperModifiers = {
 
   backgroundBlack: (theme: DefaultTheme) => css`
     background: transparent;
-    /* margin-bottom: 16px; */
     border: ${`0.1rem solid ${theme.colors.cyan}`};
     color: ${theme.colors.snow};
     transition: all 300ms;
@@ -103,7 +102,7 @@ const wrapperModifiers = {
     }
     &:hover {
       color: ${theme.colors.darkPurple};
-      background-color: ${theme.colors.cyan};
+      /* background-color: ${theme.colors.cyan}; */
     }
   `
 }
