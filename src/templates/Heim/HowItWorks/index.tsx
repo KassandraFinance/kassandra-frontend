@@ -1,11 +1,10 @@
 import React from 'react'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
-import * as S from './styles'
+import SingUp from '../SignUp'
 import Button from '../../../components/Button'
-import MediaMatch from '../../../components/MediaMatch'
-import media from 'styled-media-query'
-import SingUp from '../sign-up'
+
+import * as S from './styles'
 
 interface IHowItWorksProps {
   setModalSignupOpen: React.Dispatch<React.SetStateAction<boolean>>
