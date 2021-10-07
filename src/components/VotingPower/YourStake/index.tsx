@@ -2,9 +2,11 @@ import React from 'react'
 import BigNumber from 'bn.js'
 import { PoolInfo } from '../../../hooks/useStakingContract'
 
+import { getDate } from '../../../utils/date'
 import { BNtoDecimal } from '../../../utils/numerals'
 
 import * as S from './styles'
+import { IInfoStaked } from '..'
 
 interface IYourStakeProps {
   pid: number
@@ -12,13 +14,9 @@ interface IYourStakeProps {
   poolInfo: (pid: number) => Promise<PoolInfo>
   withdrawable: (pid: number, walletAddress: string) => Promise<boolean>
   unstaking: (pid: number, walletAddress: string) => Promise<boolean>
-  unstake: boolean
-  setUnstake: React.Dispatch<React.SetStateAction<boolean>>
   userWalletAddress: string
-  setIsWithdrawable: React.Dispatch<React.SetStateAction<boolean>>
-  setHasStake: React.Dispatch<React.SetStateAction<boolean>>
-  setApr: React.Dispatch<React.SetStateAction<BigNumber>>
-  setYourStakeValue: React.Dispatch<React.SetStateAction<BigNumber>>
+  infoStaked: IInfoStaked
+  setInfoStaked: React.Dispatch<React.SetStateAction<IInfoStaked>>
 }
 
 const YourStake = ({ 
@@ -27,24 +25,11 @@ const YourStake = ({
   poolInfo,
   withdrawable,
   unstaking,
-  unstake,
-  setUnstake,
   userWalletAddress,
-  setIsWithdrawable,
-  setHasStake,
-  setApr,
-  setYourStakeValue
+  infoStaked,
+  setInfoStaked
 }: IYourStakeProps) => {
-  const [hasExpired, setHasExpired] = React.useState(false)
-  const [infoStaked, setInfoStaked] = React.useState({
-    yourStake: new BigNumber(0),
-    withdrawable: false,
-    votingMultiplier: '',
-    kacyRewards: new BigNumber(0),
-    totalStaked: new BigNumber(0),
-    yourDailyKacyReward: new BigNumber(0)
-  })
-  
+
   let interval: any
 
   const getYourStake = React.useCallback(async () => {
@@ -58,27 +43,33 @@ const YourStake = ({
       )
       const unstakeResponse = await unstaking(pid, userWalletAddress)
 
-      const timestampNow = new Date().getTime()
-      const periodFinish: any = new Date(Number(poolInfoResponse.periodFinish) * 1000)
-      const hasStake = balance.toString() !== '0'
       const apr = kacyRewards.mul(new BigNumber(365)).mul(new BigNumber(100)).div(new BigNumber(poolInfoResponse.depositedAmount))
 
+      const startDate = getDate(
+        Number(poolInfoResponse.periodFinish) -
+        Number(poolInfoResponse.rewardsDuration)
+      )
+      const endDate = getDate(Number(poolInfoResponse.periodFinish))
 
+      const timestampNow = new Date().getTime()
+      const periodFinish: any = new Date(Number(poolInfoResponse.periodFinish) * 1000)
 
-      setInfoStaked({
+      
+      setInfoStaked((prevState) => ({
+        ...prevState,
         yourStake: balance,
         withdrawable: withdrawableResponse,
         votingMultiplier: poolInfoResponse.votingMultiplier,
-        totalStaked: new BigNumber(poolInfoResponse.depositedAmount),
+        startDate,
+        endDate,
+        withdrawDelay: poolInfoResponse.withdrawDelay,
         kacyRewards,
-        yourDailyKacyReward: new BigNumber(0),      
-      })
-
-      setUnstake(unstakeResponse)
-      setHasExpired(periodFinish < timestampNow)
-      setIsWithdrawable(withdrawableResponse)
-      setHasStake(hasStake)
-      setApr(apr)
+        totalStaked: new BigNumber(poolInfoResponse.depositedAmount),
+        yourDailyKacyReward: new BigNumber(0),
+        hasExpired: periodFinish < timestampNow,
+        unstake: unstakeResponse,
+        apr
+      }))
 
       // interval
       interval = setInterval(async () => {
@@ -95,25 +86,19 @@ const YourStake = ({
   
           const timestampNow = new Date().getTime()
           const periodFinish: any = new Date(Number(poolInfoResponse.periodFinish) * 1000)
-          const hasStake = balance.toString() !== '0'
-          const apr = kacyRewards.mul(new BigNumber(365)).mul(new BigNumber(100)).div(new BigNumber(poolInfoResponse.depositedAmount))
   
   
-          setInfoStaked({
+          setInfoStaked((prevState) => ({
+            ...prevState,
             yourStake: balance,
             withdrawable: withdrawableResponse,
             votingMultiplier: poolInfoResponse.votingMultiplier,
             totalStaked: new BigNumber(poolInfoResponse.depositedAmount),
             kacyRewards,
-            yourDailyKacyReward: new BigNumber(0),      
-          })
-  
-          setUnstake(unstakeResponse)
-          setHasExpired(periodFinish < timestampNow)
-          setIsWithdrawable(withdrawableResponse)
-          setHasStake(hasStake)
-          setApr(apr)
-          setYourStakeValue(balance)
+            yourDailyKacyReward: new BigNumber(0),
+            hasExpired: periodFinish < timestampNow,
+            unstake: unstakeResponse
+          }))
         }
 
       }, 6000)
@@ -164,7 +149,7 @@ const YourStake = ({
         <span>
           {BNtoDecimal(
             new BigNumber(
-              infoStaked.withdrawable || unstake
+              infoStaked.withdrawable || infoStaked.unstake
                 ? 1
                 : infoStaked.votingMultiplier
             ).mul(infoStaked.yourStake),
@@ -176,7 +161,7 @@ const YourStake = ({
       <S.Info>
         <span>Your daily KACY reward</span>
         <span>
-          {hasExpired ? '0' : BNtoDecimal(
+          {infoStaked.hasExpired ? '0' : BNtoDecimal(
             infoStaked.yourDailyKacyReward,
             new BigNumber(18),
             2

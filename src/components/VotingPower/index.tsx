@@ -4,13 +4,12 @@ import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
 import web3 from '../../utils/web3'
-import { getDate } from '../../utils/date'
 import { CompleteCallback } from '../../utils/txWait'
 import { confirmClaim } from '../../utils/confirmTransactions'
 
 import { Staking } from '../../constants/tokenAddresses'
 
-import useStakingContract, { PoolInfo } from '../../hooks/useStakingContract'
+import { PoolInfo } from '../../hooks/useStakingContract'
 
 import Details from '../Details'
 import Tooltip from '../Tooltip'
@@ -27,12 +26,9 @@ import KacyEarned from './KacyEarned'
 import * as S from './styles'
 import Button from '../Button'
 
-interface IInfoStakeProps {
+export interface IInfoStaked {
   yourStake: BigNumber;
   withdrawable: boolean;
-}
-
-interface IInfoStakeStaticProps {
   votingMultiplier: string;
   startDate: string;
   endDate: string;
@@ -40,6 +36,9 @@ interface IInfoStakeStaticProps {
   yourDailyKacyReward: BigNumber;
   withdrawDelay: any;
   totalStaked: BigNumber;
+  hasExpired: boolean;
+  unstake: boolean;
+  apr: BigNumber;
 }
 
 interface IStakingProps {
@@ -90,28 +89,24 @@ const VotingPower = ({
   const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
   const [isDetails, setIsDetails] = React.useState<boolean>(false)
 
-  const [apr, setApr] = React.useState<BigNumber>(new BigNumber(0))
-  const [hasExpired, setHasExpired] = React.useState<boolean>(false)
-  const [hasStake, setHasStake] = React.useState<boolean>(false)
-  const [isWithdrawable, setIsWithdrawable] = React.useState<boolean>(false)
   const [withdrawDelay, setWithdrawDelay] = React.useState<number>(0)
   const [yourStakeValue, setYourStakeValue] = React.useState<BigNumber>(new BigNumber(0))
 
   const [isApproveKacyStaking, setIsApproveKacyStaking] = React.useState<boolean>(false)
-  const [unstake, setUnstake] = React.useState<boolean>(false)
-  const [infoStake, setInfoStake] = React.useState<IInfoStakeProps>({
-    yourStake: new BigNumber(0),
-    withdrawable: false
-  })
-  const [infoStakeStatic, setInfoStakeStatic] =
-    React.useState<IInfoStakeStaticProps>({
+
+  const [infoStaked, setInfoStaked] = React.useState<IInfoStaked>({
+      yourStake: new BigNumber(0),
+      withdrawable: false,
       votingMultiplier: '',
       startDate: '',
       endDate: '',
-      kacyRewards: new BigNumber(0),
-      yourDailyKacyReward: new BigNumber(0),
       withdrawDelay: '',
+      kacyRewards: new BigNumber(0),
       totalStaked: new BigNumber(0),
+      yourDailyKacyReward: new BigNumber(0),
+      hasExpired: false,
+      unstake: false,
+      apr: new BigNumber(0)
     })
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
@@ -124,74 +119,15 @@ const VotingPower = ({
     setIsApproveKacyStaking(res)
   }
 
-  const getInfoStake = React.useCallback(async () => {
+  React.useEffect(() => {
     if (!web3.currentProvider) {
       return
     }
-
-    const poolInfoResponse = await poolInfo(pid)
-
-    if (poolInfoResponse.withdrawDelay) {
-
-      const timestampNow = new Date().getTime()
-      const periodFinish: any = new Date(Number(poolInfoResponse.periodFinish) * 1000)
-
-      const startDate = getDate(
-        Number(poolInfoResponse.periodFinish) -
-        Number(poolInfoResponse.rewardsDuration)
-      )
-      const endDate = getDate(Number(poolInfoResponse.periodFinish))
-
-      const kacyRewards = new BigNumber(poolInfoResponse.rewardRate).mul(
-        new BigNumber(86400)
-      )
-
-      const withdrawDelay = Number(poolInfoResponse.withdrawDelay) / 86400
-
-      setInfoStakeStatic({
-        votingMultiplier: poolInfoResponse.votingMultiplier,
-        startDate,
-        endDate,
-        kacyRewards,
-        yourDailyKacyReward: new BigNumber(0),
-        withdrawDelay: withdrawDelay > 0 ? withdrawDelay : 0,
-        totalStaked: new BigNumber(poolInfoResponse.depositedAmount),
-      })
-      setHasExpired(periodFinish < timestampNow)
-    }
-
-    if (userWalletAddress) {
-      const balance: BigNumber = await balanceOf(pid, userWalletAddress)
-      const withdrawableResponse = await withdrawable(pid, userWalletAddress)
-
-      setInfoStake({
-        yourStake: balance,
-        withdrawable: withdrawableResponse
-      })
-    }
-  }, [userWalletAddress])
-
-  React.useEffect(() => {
-    let yourDailyKacyReward: BigNumber = new BigNumber(0)
-
-    if (infoStake.yourStake.toString() !== "0") {
-      yourDailyKacyReward = infoStakeStatic.kacyRewards
-        .mul(infoStake.yourStake ? infoStake.yourStake : new BigNumber(0))
-        .div(new BigNumber(infoStakeStatic.totalStaked))
-
-      setInfoStakeStatic((prevState) => ({
-        ...prevState,
-        yourDailyKacyReward
-      }))
-    }
-  }, [infoStake.yourStake, infoStakeStatic.kacyRewards, infoStakeStatic.totalStaked])
-
-  React.useEffect(() => {
+    
     getAllowance(Staking, userWalletAddress).then((response: boolean) =>
       setIsApproveKacyStaking(response)
     )
 
-    getInfoStake()
   }, [userWalletAddress])
 
 
@@ -250,22 +186,22 @@ const VotingPower = ({
                 <Tooltip tooltipTop={true}>Annual Percentage Return</Tooltip>
                 <h4>APR</h4>
               </S.APR>
-              <S.Percentage>{Number(apr)/100}%</S.Percentage>
+              <S.Percentage>{Number(infoStaked.apr)/100}%</S.Percentage>
             </S.IntroStaking>
           </S.InterBackground>
           <S.KacyStaked>
             <S.VotingPower>
               <p>
-                {infoStakeStatic.votingMultiplier} Voting Power{' '}
+                {infoStaked.votingMultiplier} Voting Power{' '}
                 <span>per KACY</span>
               </p>
             </S.VotingPower>
             <S.WithdrawDelay>
               <S.Days>
                 <p>
-                  {infoStakeStatic.withdrawDelay > 0
+                  {infoStaked.withdrawDelay > 0
                     ? 1
-                    : infoStakeStatic.withdrawDelay}{' '}
+                    : infoStaked.withdrawDelay}{' '}
                   days{' '}
                 </p>
                 <Tooltip tooltipTop={false} widthIcon={20}>
@@ -282,24 +218,20 @@ const VotingPower = ({
               poolInfo={poolInfo}
               withdrawable={withdrawable}
               unstaking={unstaking}
-              unstake={unstake}
-              setUnstake={setUnstake}
               userWalletAddress={userWalletAddress}
-              setIsWithdrawable={setIsWithdrawable}
-              setHasStake={setHasStake}
-              setApr={setApr}
-              setYourStakeValue={setYourStakeValue}
+              infoStaked={infoStaked}
+              setInfoStaked={setInfoStaked}
             />
             <S.ButtonContainer>
               {userWalletAddress ? (
                 <>
-                  {!hasExpired && hasStake && (
+                  {!infoStaked.hasExpired && 
+                    infoStaked.yourStake.toString() !== '0' && (
                     <S.Claim>
                       <KacyEarned
                         pid={pid}
                         userWalletAddress={userWalletAddress}
                         earned={earned}
-                        yourStakeValue={yourStakeValue}
                       />
                       <Button
                         size='medium'
@@ -311,13 +243,11 @@ const VotingPower = ({
                           getReward(pid, confirmClaim, 'Pending reward claim')
                         }
                       />
-
-
                     </S.Claim>
                   )}
                   {isApproveKacyStaking ? (
                     <S.StakeContainer>
-                      {unstake ? (
+                      {infoStaked.unstake ? (
                         <Button
                           size='huge'
                           backgroundBlack
@@ -336,9 +266,9 @@ const VotingPower = ({
                           onClick={() => setIsModalStaking(true)}
                         />
                       )}
-                      {hasStake && (
+                      {infoStaked.yourStake.toString() !== '0' && (
                         <>
-                          {isWithdrawable ? (
+                          {infoStaked.withdrawable ? (
                             <Button
                               size='huge'
                               backgroundSecondary
@@ -348,7 +278,7 @@ const VotingPower = ({
                               onClick={() => setIsModalUnstaking(true)}
                             />
 
-                          ) : unstake ? (
+                          ) : infoStaked.unstake ? (
                             <WithdrawDate
                               pid={pid}
                               userWalletAddress={userWalletAddress}
@@ -377,8 +307,6 @@ const VotingPower = ({
                       fullWidth
                       onClick={handleApproveKacy}
                     />
-
-
                   )}
                 </>
               ) : (
@@ -403,9 +331,9 @@ const VotingPower = ({
               {isDetails && (
                 <Details
                   pid={pid}
-                  hasExpired={hasExpired}
+                  hasExpired={infoStaked.hasExpired}
                   poolInfo={poolInfo}
-                  infoStakeStatic={infoStakeStatic}
+                  infoStakeStatic={infoStaked}
                 />
               )}
             </S.ButtonContainer>
@@ -434,7 +362,7 @@ const VotingPower = ({
         setModalOpen={setIsModalRequestUnstake}
         pid={pid}
         withdrawDelay={withdrawDelay}
-        votingMultiplier={infoStakeStatic.votingMultiplier}
+        votingMultiplier={infoStaked.votingMultiplier}
       />
       <ModalWalletConnect
         modalOpen={isModalWallet}
