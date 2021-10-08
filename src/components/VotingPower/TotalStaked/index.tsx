@@ -31,7 +31,7 @@ const TotalStaked = ({ pid, poolInfo }: ITotalStakedProps) => {
   return (
     <>
       <p className="total-staking">Total staked</p>
-      <p className="total-staking">${BNtoDecimal(new BigNumber(depositedAmount).mul(new BigNumber(3.5)), new BigNumber(18), 2)}</p>
+      <p className="total-staking">{BNtoDecimal(new BigNumber(depositedAmount).mul(new BigNumber(3.5)), new BigNumber(18), 2)}</p>
     </>
   )
 }

@@ -141,7 +141,7 @@ const YourStake = ({
             )}{' '}
             KACY
           </p>
-          <span>~ {BNtoDecimal(new BigNumber(infoStaked.yourStake).mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
+          <span>&#8776; {BNtoDecimal(new BigNumber(infoStaked.yourStake).mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
         </S.Stake>
       </S.Info>
       <S.Info>

@@ -186,7 +186,7 @@ const VotingPower = ({
                 <Tooltip tooltipTop={true}>Annual Percentage Return</Tooltip>
                 <h4>APR</h4>
               </S.APR>
-              <S.Percentage>{Number(infoStaked.apr)/100}%</S.Percentage>
+              <S.Percentage>{infoStaked.hasExpired ? 0 : Number(infoStaked.apr)/100}%</S.Percentage>
             </S.IntroStaking>
           </S.InterBackground>
           <S.KacyStaked>
@@ -363,6 +363,7 @@ const VotingPower = ({
         pid={pid}
         withdrawDelay={withdrawDelay}
         votingMultiplier={infoStaked.votingMultiplier}
+        yourStake={infoStaked.yourStake}
       />
       <ModalWalletConnect
         modalOpen={isModalWallet}

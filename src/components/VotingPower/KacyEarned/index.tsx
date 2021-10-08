@@ -28,7 +28,7 @@ const KacyEarned = ({ pid, userWalletAddress, earned }: IKacyEarnedProps) => {
     <S.KacyEarned>
       <p>Kacy earned</p>
       <h3>{BNtoDecimal(kacyEarned || new BigNumber(0), new BigNumber(18), 2)} KACY</h3>
-      <span>~ {BNtoDecimal(new BigNumber(kacyEarned).mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
+      <span>&#8776; {BNtoDecimal(new BigNumber(kacyEarned).mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
     </S.KacyEarned>
   )
 }

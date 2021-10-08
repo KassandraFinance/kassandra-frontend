@@ -22,7 +22,9 @@ const useCountDownDate = () => {
         
       // Output the result in an element with id="demo"
 
-      setDate(`${days}d ${hours}h ${minutes}m ${seconds}s`)
+      let day = days + "d"
+      let date = days > 0 ? `${day} ${hours}h ${minutes}m` : `${hours}h ${minutes}m ${seconds}s`
+      setDate(date)
 
       // If the count down is over, write some text 
       if (distance < 0) {

@@ -24,3 +24,22 @@ export function getDate(date: number): string {
 
   return `${dd} ${allMonth[mm]}, ${yyyy}`
 }
+
+
+export function dateRequestUnstake(withdrawDelay: number) {
+  let now = new Date().getTime();
+
+  if (withdrawDelay === 0) {
+    const day = new Date(withdrawDelay + now).getDate()
+    const month = new Date(withdrawDelay + now).getMonth()
+    const year = new Date(withdrawDelay + now).getFullYear()
+  
+    return `${day} / ${allMonth[month]} / ${year}`
+  }
+
+  const day = new Date(withdrawDelay).getDate()
+  const month = new Date(withdrawDelay).getMonth()
+  const year = new Date(withdrawDelay).getFullYear()
+
+  return `${day} / ${allMonth[month]} / ${year}`
+}
