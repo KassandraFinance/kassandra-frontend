@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import BigNumber from 'bn.js'
 
-import { BNtoDecimal } from '../../utils/numerals'
+import { BNtoDecimal, wei } from '../../utils/numerals'
 
 import * as S from './styles'
 
@@ -47,18 +47,18 @@ const Details = ({ pid, hasExpired, poolInfo, infoStakeStatic }: IDetailsProps) 
         <span>Total staked</span>
         <S.KacyUSD>
           <span>
-            {BNtoDecimal(new BigNumber(depositedAmount), new BigNumber(18), 2)} KACY
+            {BNtoDecimal(new BigNumber(depositedAmount), wei, 2)} KACY
           </span>
-          <span className="usd">&#8776; {BNtoDecimal(new BigNumber(depositedAmount).mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
+          <span className="usd">&#8776; {BNtoDecimal(new BigNumber(depositedAmount).mul(new BigNumber(2)), wei, 2)} USD</span>
         </S.KacyUSD>
       </S.Info>
       <S.Info>
         <span>Pool Reward</span>
         <S.KacyUSD>
           <span>
-            {hasExpired ? "0" : BNtoDecimal(infoStakeStatic.kacyRewards, new BigNumber(18), 2)}/day
+            {hasExpired ? "0" : BNtoDecimal(infoStakeStatic.kacyRewards, wei, 2)}/day
           </span>
-          <span className="usd">&#8776; {hasExpired ? "0" : BNtoDecimal(infoStakeStatic.kacyRewards.mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
+          <span className="usd">&#8776; {hasExpired ? "0" : BNtoDecimal(infoStakeStatic.kacyRewards.mul(new BigNumber(2)), wei, 2)} USD</span>
         </S.KacyUSD>
 
       </S.Info>

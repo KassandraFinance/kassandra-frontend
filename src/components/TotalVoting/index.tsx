@@ -2,7 +2,7 @@ import React from 'react'
 import BigNumber from 'bn.js'
 
 import web3 from '../../utils/web3'
-import { BNtoDecimal } from '../../utils/numerals'
+import { BNtoDecimal, wei } from '../../utils/numerals'
 
 import * as S from './styles'
 
@@ -41,11 +41,11 @@ const TotalVoting = ({
     <S.TotalVoting>
       <fieldset>
         <legend>Your voting power</legend>
-        <span>{BNtoDecimal(yourVotingPower, new BigNumber(18))}</span>
+        <span>{BNtoDecimal(yourVotingPower, wei)}</span>
       </fieldset>
       <fieldset>
         <legend>Total voting power</legend>
-        <span>{BNtoDecimal(totalVotes, new BigNumber(18))}</span>
+        <span>{BNtoDecimal(totalVotes, wei)}</span>
       </fieldset>
     </S.TotalVoting>
   )
