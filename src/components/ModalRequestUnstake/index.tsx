@@ -1,5 +1,8 @@
 import React from 'react'
+import BigNumber from 'bn.js'
 
+import { BNtoDecimal } from '../../utils/numerals'
+import { dateRequestUnstake } from '../../utils/date'
 import { confirmUnstake } from '../../utils/confirmTransactions'
 
 import { Staking } from '../../constants/tokenAddresses'
@@ -21,6 +24,7 @@ interface IModalRequestUnstakeProps {
   pid: number;
   withdrawDelay: number
   votingMultiplier: string
+  yourStake: BigNumber
 }
 
 const ModalRequestUnstake = ({ 
@@ -28,17 +32,11 @@ const ModalRequestUnstake = ({
   setModalOpen, 
   pid,
   withdrawDelay,
-  votingMultiplier
+  votingMultiplier,
+  yourStake
 }: IModalRequestUnstakeProps) => {
+
   const kacyStake = useStakingContract(Staking)
-
-  let now = new Date().getTime();
-
-  const day = new Date(withdrawDelay + now).getDate()
-  const month = new Date(withdrawDelay + now).getMonth()
-  const year = new Date(withdrawDelay + now).getFullYear()
-
-  const date = `${day} / ${month} / ${year}`
 
   return (
     <>
@@ -53,9 +51,13 @@ const ModalRequestUnstake = ({
         </Top>
         <Content>
           <p>Withdrawal will be available on:</p>
-          <span>{date}</span>
+          <span>{dateRequestUnstake(withdrawDelay)}</span>
           <p>During the withdrawal delay period your voting power will be reduced from:</p>
-          <span>{votingMultiplier}x to 1x</span>
+          <span>
+            {BNtoDecimal(new BigNumber(votingMultiplier).mul(yourStake), new BigNumber(18))}
+              {' '} to {' '}
+            {BNtoDecimal(new BigNumber(yourStake), new BigNumber(18))}
+          </span>
           <p>Do you want to proceed?</p>
           <ButtonContainer>
             <button 

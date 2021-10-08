@@ -49,7 +49,7 @@ const Details = ({ pid, hasExpired, poolInfo, infoStakeStatic }: IDetailsProps) 
           <span>
             {BNtoDecimal(new BigNumber(depositedAmount), new BigNumber(18), 2)} KACY
           </span>
-          <span className="usd">~ {BNtoDecimal(new BigNumber(depositedAmount).mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
+          <span className="usd">&#8776; {BNtoDecimal(new BigNumber(depositedAmount).mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
         </S.KacyUSD>
       </S.Info>
       <S.Info>
@@ -58,7 +58,7 @@ const Details = ({ pid, hasExpired, poolInfo, infoStakeStatic }: IDetailsProps) 
           <span>
             {hasExpired ? "0" : BNtoDecimal(infoStakeStatic.kacyRewards, new BigNumber(18), 2)}/day
           </span>
-          <span className="usd">~ {hasExpired ? "0" : BNtoDecimal(infoStakeStatic.kacyRewards.mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
+          <span className="usd">&#8776; {hasExpired ? "0" : BNtoDecimal(infoStakeStatic.kacyRewards.mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
         </S.KacyUSD>
 
       </S.Info>

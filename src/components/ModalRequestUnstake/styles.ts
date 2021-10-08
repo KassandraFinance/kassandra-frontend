@@ -24,15 +24,14 @@ export const ModalContainer = styled.div<IModalContainerProps>`
   background-color: #000;
 
   width: 500px;
-  height: 370px;
-
+  height: 380px;
 
   position: fixed;
   top: 50%;
   left: 50%;
 
   margin-left: -250px;
-  margin-top: -185px;
+  margin-top: -180px;
 
   z-index: 10;
 `
@@ -88,7 +87,7 @@ export const Content = styled.div`
     font-size: ${theme.font.sizes.font18};
     font-weight: ${theme.font.weight.light};
     max-width: 340px;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
   }
 
   span {
