@@ -3,13 +3,15 @@ import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
 import web3 from '../../utils/web3'
-import { BNtoDecimal } from '../../utils/numerals'
+import { BNtoDecimal, wei } from '../../utils/numerals'
 import { confirmStake } from '../../utils/confirmTransactions'
 
 import { Kacy, Staking } from '../../constants/tokenAddresses'
 
 import useERC20Contract from '../../hooks/useERC20Contract'
 import useStakingContract from '../../hooks/useStakingContract'
+
+import InputTokenValue from '../InputTokenValue'
 
 import * as S from './styles'
 import Button from '../Button'
@@ -25,11 +27,13 @@ const ModalStaking = ({
   modalOpen,
   setModalOpen,
   otherStakingPools,
-  pid }: IModalStakingProps) => {
+  pid
+}: IModalStakingProps) => {
   const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
   const [amountStaking, setAmountStaking] = React.useState<BigNumber>(new BigNumber(0))
   const [multiplier, setMultiplier] = React.useState<number>(0)
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const inputRef = React.useRef<HTMLInputElement>(null)
   const kacyToken = useERC20Contract(Kacy)
   const kacyStake = useStakingContract(Staking)
 
@@ -41,6 +45,9 @@ const ModalStaking = ({
   async function get() {
     const balanceKacy = await kacyToken.balance(userWalletAddress)
     setBalance(balanceKacy)
+    if (inputRef.current !== null) {
+      inputRef.current.value = web3.utils.toWei(balanceKacy).toString(10)
+    }
   }
 
   React.useEffect(() => {
@@ -48,7 +55,7 @@ const ModalStaking = ({
   }, [modalOpen])
 
   React.useEffect(() => {
-    setMultiplier(0);
+    setMultiplier(0)
     handleKacyAmount(new BigNumber(0))
   }, [modalOpen])
 
@@ -62,55 +69,21 @@ const ModalStaking = ({
         <S.BackgroundBlack>
           <S.InterBackground otherStakingPools={otherStakingPools}>
             <span>Stake in Pool</span>
-            <button
-              type="button"
-              onClick={() => setModalOpen(false)}><img src="assets/close.svg"
-                alt=""
-              /> </button>
+            <button type="button" onClick={() => setModalOpen(false)}>
+              <img src="assets/close.svg" alt="" />
+            </button>
           </S.InterBackground>
           <S.Main>
             <S.Amount>
               <span>$KACY Amount</span>
-              {/* <input type="number" placeholder="0" value={BNtoDecimal(amountStaking, new BigNumber(18), 6)} /> */}
-              <input
-                type="number"
-                placeholder="0"
-                step="any"
-                min="0"
-                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-                  setMultiplier(0);
-                  const target = e.target as HTMLInputElement
-                  // don't allow negative numbers
-                  if (e.key === '-') {
-                    e.preventDefault()
-                  }
-                  // Blink bug makes the value come empty if pressing the decimal symbol that is not that of the current locale
-                  else if (e.key === '.' || e.key === ',') {
-                    // first time value will be ok, if pressing twice it zeroes, we ignore those
-                    if (target.value.length > 0 && target.value.search(/[,.]/) === -1) {
-                      target.dataset.lastvalue = target.value
-                    }
-                  }
-                  else if (e.key === 'Backspace' || e.key === 'Delete') {
-                    target.dataset.lastvalue = '0'
-                  }
-                }}
-                onChange={
-                  (e: React.ChangeEvent<HTMLInputElement>) => {
-                    // getArrayTokens()
-                    let { value } = e.target
-
-                    if (value.length === 0) {
-                      value = e.target.dataset.lastvalue as string
-                    }
-
-                    setAmountStaking(new BigNumber(web3.utils.toWei(value)))
-                  }
-                }
-                value={BNtoDecimal(amountStaking, new BigNumber(18), 6)}
+              <InputTokenValue
+                inputRef={inputRef}
+                max={balance.toString(10)}
+                decimals={wei}
+                setInputValue={setAmountStaking}
               />
               <S.Line />
-              <h5>Balance: {BNtoDecimal(balance, new BigNumber(18), 6)}</h5>
+              <h5>Balance: {BNtoDecimal(balance, wei, 6)}</h5>
             </S.Amount>
             <S.ButtonContainer>
 
@@ -118,7 +91,7 @@ const ModalStaking = ({
                 style={{ background: multiplier === 25 ? '#26DBDB' : 'transparent', color: multiplier === 25 ? '#000' : '#fff' }}
                 type="button"
                 onClick={() => {
-                  multiplier === 25 ? setMultiplier(0) : setMultiplier(25);
+                  multiplier === 25 ? setMultiplier(0) : setMultiplier(25)
                   multiplier === 25 ? handleKacyAmount(new BigNumber(0)) : handleKacyAmount(new BigNumber(25))
                 }}
               >25%</button>
@@ -126,7 +99,7 @@ const ModalStaking = ({
               <button style={{ background: multiplier === 50 ? '#26DBDB' : 'transparent', color: multiplier === 50 ? '#000' : '#fff' }}
                 type="button"
                 onClick={() => {
-                  multiplier === 50 ? setMultiplier(0) : setMultiplier(50);
+                  multiplier === 50 ? setMultiplier(0) : setMultiplier(50)
                   multiplier === 50 ? handleKacyAmount(new BigNumber(0)) : handleKacyAmount(new BigNumber(50))
                 }}
               >50%</button>
@@ -135,7 +108,7 @@ const ModalStaking = ({
                 style={{ background: multiplier === 75 ? '#26DBDB' : 'transparent', color: multiplier === 75 ? '#000' : '#fff' }}
                 type="button"
                 onClick={() => {
-                  multiplier === 75 ? setMultiplier(0) : setMultiplier(75);
+                  multiplier === 75 ? setMultiplier(0) : setMultiplier(75)
                   multiplier === 75 ? handleKacyAmount(new BigNumber(0)) : handleKacyAmount(new BigNumber(75))
                 }}
               >75%</button>
@@ -144,7 +117,7 @@ const ModalStaking = ({
                 style={{ background: multiplier === 100 ? '#26DBDB' : 'transparent', color: multiplier === 100 ? '#000' : '#fff' }}
                 type="button"
                 onClick={() => {
-                  multiplier === 100 ? setMultiplier(0) : setMultiplier(100);
+                  multiplier === 100 ? setMultiplier(0) : setMultiplier(100)
                   multiplier === 100 ? handleKacyAmount(new BigNumber(0)) : handleKacyAmount(new BigNumber(100))
                 }}
               >max</button>
@@ -156,10 +129,9 @@ const ModalStaking = ({
               otherStakingPools={otherStakingPools}
               onClick={() => {
                 setModalOpen(false)
-                kacyStake.stake(pid, amountStaking, confirmStake, "Pending stake")
+                kacyStake.stake(pid, amountStaking, confirmStake, 'Pending stake')
                 setAmountStaking(new BigNumber(0))
-              }
-              }
+              }}
             >
               Confirm
             </S.ConfirmButton>
@@ -167,12 +139,12 @@ const ModalStaking = ({
             <Button
               backgroundBlack
               fullWidth
-              text='Get Kacy'
-              href='https://app.uniswap.org'
-              target="_blank" rel="noopener noreferrer"
+              text="Get Kacy"
+              href="https://app.uniswap.org"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setModalOpen(false)}
             />
-
           </S.Main>
         </S.BackgroundBlack>
       </S.BorderGradient>

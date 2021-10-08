@@ -575,6 +575,7 @@ const Form = ({ typeAction, title }: IFormProps) => {
               .filter(token => token.address !== swapOutAddress)
         }
         title={title}
+        decimals={poolTokenDetails[tokenInIndex] ? poolTokenDetails[tokenInIndex].decimals : wei}
         swapInBalance={swapInBalance}
         setSwapInAmount={setSwapInAmount}
         setSwapOutAmount={setSwapOutAmount}
@@ -587,6 +588,7 @@ const Form = ({ typeAction, title }: IFormProps) => {
           {
             poolTokens.map((tokenOutAddress, i) => (
               <InputDefault
+                decimals={poolTokenDetails[tokenAddress2Index[tokenOutAddress]]?.decimals}
                 showMore={i > 3 && showMore}
                 key={`output_${tokenOutAddress}`}
                 poolTokens={poolTokenDetails.filter(
@@ -611,6 +613,7 @@ const Form = ({ typeAction, title }: IFormProps) => {
       ) : (
         <>
           <InputDefault
+            decimals={poolTokenDetails[tokenAddress2Index[swapOutAddress]]?.decimals}
             poolTokens={title === 'Invest'
               ? poolTokenDetails.filter(
                 token => token.address === swapOutAddress

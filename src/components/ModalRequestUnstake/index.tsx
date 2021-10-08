@@ -1,7 +1,7 @@
 import React from 'react'
 import BigNumber from 'bn.js'
 
-import { BNtoDecimal } from '../../utils/numerals'
+import { BNtoDecimal, wei } from '../../utils/numerals'
 import { dateRequestUnstake } from '../../utils/date'
 import { confirmUnstake } from '../../utils/confirmTransactions'
 
@@ -54,9 +54,9 @@ const ModalRequestUnstake = ({
           <span>{dateRequestUnstake(withdrawDelay)}</span>
           <p>During the withdrawal delay period your voting power will be reduced from:</p>
           <span>
-            {BNtoDecimal(new BigNumber(votingMultiplier).mul(yourStake), new BigNumber(18))}
+            {BNtoDecimal(new BigNumber(votingMultiplier).mul(yourStake), wei)}
               {' '} to {' '}
-            {BNtoDecimal(new BigNumber(yourStake), new BigNumber(18))}
+            {BNtoDecimal(new BigNumber(yourStake), wei)}
           </span>
           <p>Do you want to proceed?</p>
           <ButtonContainer>

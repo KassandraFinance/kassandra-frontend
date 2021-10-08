@@ -23,6 +23,8 @@ export function BNtoDecimal(number: BigNumber, decimalsBN: BigNumber, maximumPre
   // cutoff lower numbers as user will hardly receive the precise number
   decimalPoint = decimalPoint.substring(0, maxPrecision + nonZeros)
 
+  integer = integer.replace(/(\d)(?=(\d{3})+\b)/g, '$1 ')
+
   return `${integer}${decimalPoint.length > 0 ? '.' : ''}${decimalPoint}`
 }
 

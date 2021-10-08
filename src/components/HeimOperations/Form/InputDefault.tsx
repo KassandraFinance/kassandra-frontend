@@ -19,6 +19,7 @@ import {
 } from './styles'
 
 interface IInputDefaultProps {
+  decimals: BigNumber
   poolTokens: TokenDetails[]
   isMax: boolean | null
   swapOutAmount: BigNumber
@@ -28,6 +29,7 @@ interface IInputDefaultProps {
 }
 
 const InputDefault = ({
+  decimals,
   poolTokens,
   isMax,
   swapOutAmount,
@@ -55,15 +57,15 @@ const InputDefault = ({
       <Info>
         <Span>Swap to (estimative)</Span>
         {tokensList}
-        <SpanLight>Balance: {swapOutBalance > new BigNumber(-1) ? BNtoDecimal(swapOutBalance, new BigNumber(18)) : '...'}</SpanLight>
+        <SpanLight>Balance: {swapOutBalance > new BigNumber(-1) ? BNtoDecimal(swapOutBalance, decimals) : '...'}</SpanLight>
       </Info>
       <AmountDefault>
         <Span>Amount</Span>
         <Input
           readOnly
-          type="number"
+          type="text"
           placeholder="0"
-          value={BNtoDecimal(swapOutAmount, new BigNumber(18))}
+          value={BNtoDecimal(swapOutAmount, decimals)}
         />
         {isMax !== null && <ButtonMax
           type="button"
