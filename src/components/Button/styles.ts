@@ -2,7 +2,9 @@ import styled, { css, DefaultTheme } from 'styled-components'
 
 import { ButtonProps } from './index'
 
-export type WrapperProps = Pick<
+export type WrapperProps = {
+  hasIcon: boolean
+} & Pick<
   ButtonProps,
   | 'size'
   | 'fullWidth'
@@ -39,6 +41,16 @@ const wrapperModifiers = {
   `,
   fullWidth: () => css`
     width: 100%;
+  `,
+  withIcon: (theme: DefaultTheme) => css`
+    svg {
+      width: 1.4rem;
+      margin-right: ${theme.spacings.space8};
+
+      & + span {
+        margin-left: ${theme.spacings.space16};
+      }
+    }
   `,
 
   disabledNoEvent: (theme: DefaultTheme) => css`
@@ -112,6 +124,7 @@ export const Wrapper = styled.button<WrapperProps>`
   theme,
   size,
   fullWidth,
+  hasIcon,
   disabledNoEvent,
   backgroundPrimary,
   backgroundSecondary,
@@ -164,6 +177,7 @@ export const Wrapper = styled.button<WrapperProps>`
 
     ${!!size && wrapperModifiers[size](theme)};
     ${!!fullWidth && wrapperModifiers.fullWidth()};
+    ${!!hasIcon && wrapperModifiers.withIcon(theme)};
     ${!!backgroundPrimary && wrapperModifiers.backgroundPrimary(theme)};
     ${!!backgroundSecondary && wrapperModifiers.backgroundSecondary(theme)};
     ${!!backgroundBlack && wrapperModifiers.backgroundBlack(theme)};
