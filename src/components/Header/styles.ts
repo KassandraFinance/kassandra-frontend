@@ -46,7 +46,11 @@ export const Wrapper = styled.menu<IWrapperProps>`
     display: flex;
     justify-content: flex-end;
     padding: 1.5rem;
+    margin-inline: 30px;
     margin-bottom: 3rem;
+    }
+    @media(max-width: 400px ) {
+      margin-inline: 15px;
     }
   `}
 `
@@ -58,9 +62,11 @@ export const LogoWrapper = styled.div`
     /* height: 20px; */
   }
   @media(max-width: 960px) {
+    display: flex;
+    left: 0;
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    /* left: 50%; */
+    /* transform: translateX(-50%); */
     img {
       position:relative;
       max-width: 100%;
