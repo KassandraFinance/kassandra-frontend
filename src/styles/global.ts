@@ -45,6 +45,13 @@ const GlobalStyles: GlobalStyleComponent<
     src: local(''),
     url('../fonts/rubik-v14-latin-600.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
   }
+  @font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 900;
+    src: local(''),
+    url('../fonts/rubik-v14-latin-900.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+  }
    * {
     margin: 0;
     padding: 0;

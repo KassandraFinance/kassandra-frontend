@@ -3,14 +3,15 @@ import styled, { css } from 'styled-components'
 export const Hero = styled.section`
   ${({ theme }) => css`
     height: calc(100vh - 110px);
-    padding: 0 ${theme.spacings.space32}
-;
-    display: grid;
-    margin: 0 auto;
-    grid-template-columns: 1fr 1fr;
-    justify-content: space-between;
+    padding: 0 ${theme.spacings.space32};
+    display: flex;
+    flex-direction:column;
     align-items: center;
-    max-width: 1520px;
+    margin: 0 auto;
+    margin-top: 166px;
+    max-width: 925px;
+
+    background-image: 'assets/home-hero-background.svg';
     @media (max-width: 959px) {
       display: flex;
       flex-direction: column;
@@ -31,10 +32,10 @@ export const Hero = styled.section`
       min-height: 600px;
     }
     h1 {
-      font-size: 112px;
-      font-weight: ${theme.font.weight.normal};
-
-      line-height: 94px;
+      font-size: 72px;
+      font-weight: ${theme.font.weight.black};
+      text-align: center;
+      line-height: 72px;
       @media (max-width: 1200px) {
         font-size: 80px;
         line-height: 70px;
@@ -56,9 +57,9 @@ export const Hero = styled.section`
       }
     }
     h3 {
-      font-size: ${theme.font.sizes.font24};
+      font-size: ${theme.font.sizes.font18};
       font-weight: ${theme.font.weight.light};
-      margin: 32px 0;
+      margin-bottom: 30px;
       max-width: 600px;
       @media (max-width: 1200px) {
         font-size: 27px;
@@ -76,7 +77,7 @@ export const Hero = styled.section`
       @media (max-width: 420px) {
         max-width: 360px;
       }
-      @media (min-width: 375px) {
+      @media (max-width: 375px) {
         margin: 8px 0 16px;
       }
     }

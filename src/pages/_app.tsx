@@ -41,11 +41,11 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
         />
       </Head>
       <Toastify />
-      <BackgroundLinear>
-        <Header />
-        <GlobalStyles />
-        <Component {...pageProps} />
-      </BackgroundLinear>
+      {/* <BackgroundLinear> */}
+      <Header />
+      <GlobalStyles />
+      <Component {...pageProps} />
+      {/* </BackgroundLinear> */}
       <Footer />
     </ThemeProvider>
   </MatomoProvider>
@@ -53,6 +53,6 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
 
 export default storeWrapper.withRedux(MyApp)
 
-export const BackgroundLinear = styled.div`
-  background: linear-gradient(90deg, #200a1b 0%, #000000 50%);
-`
+// export const BackgroundLinear = styled.div`
+//   background: linear-gradient(90deg, #200a1b 0%, #000000 50%);
+// `
