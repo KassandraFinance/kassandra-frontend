@@ -44,7 +44,7 @@ const wrapperModifiers = {
   `,
   withIcon: (theme: DefaultTheme) => css`
     svg {
-      width: 1.2rem;
+      width: 1.4rem;
       margin-right: ${theme.spacings.space8};
 
       & + span {

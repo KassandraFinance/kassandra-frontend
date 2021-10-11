@@ -22,7 +22,7 @@ export const Wrapper = styled.menu<IWrapperProps>`
     z-index: ${theme.layers.menu};
 
     ${ButtonStyles.Wrapper} {
-      font-size: ${theme.font.sizes.font12};
+      font-size: ${theme.font.sizes.font14};
       font-weight: ${theme.font.weight.light};
       padding: 12.5px;
       border-radius: 9px;
@@ -57,10 +57,7 @@ export const Wrapper = styled.menu<IWrapperProps>`
 
 export const LogoWrapper = styled.div`
   cursor: pointer;
-  img{
-    width: 160px;
-    /* height: 20px; */
-  }
+
   @media(max-width: 960px) {
     display: flex;
     left: 0;
@@ -109,7 +106,7 @@ export const MenuLink = styled.a`
   ${({ theme }) => css`
     position: relative;
     color: ${theme.colors.snow};
-    font-size: ${theme.font.sizes.font12};
+    font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.light};
     margin: 0.3rem ${theme.spacings.space24} 0;
     text-decoration: none;
@@ -142,7 +139,7 @@ export const MenuLinkDisable = styled.a`
   ${({ theme }) => css`
     position: relative;
     color: ${theme.colors.lightGray};
-    font-size: ${theme.font.sizes.font12};
+    font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.light};
     margin: 0.3rem ${theme.spacings.space24} 0;
     text-decoration: none;
