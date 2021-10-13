@@ -3,7 +3,9 @@ import Link from 'next/link'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 
+
 import * as S from './styles'
+import Button from '../../../components/Button'
 
 const Products = () => {
   const { trackEvent } = useMatomo();
@@ -15,32 +17,53 @@ const Products = () => {
       name: name,
     });
   }
-  
+
   return (
     <S.Products>
-      <h1>Products</h1>
-      <p>Tokens backed by a basket of assets, managed by autonomous strategies with data from external data providers</p>
-      <S.Heim>
-        <img src="assets/logo-heim.svg" alt="" />
-        <S.HeimDescription>
-          <h3>The $HEIM Social Index</h3>
-          <p className="first-paragraph">The Social Index $HEIM reflects the performance of a portfolio selected from the most socially active cryptocurrencies in the past 30 days, using Heimdall Social Score data.</p>
-          <p className="second-paragraph">$HEIM offers an easy exposure to the hottest cryptocurrencies in the market.</p>
-        </S.HeimDescription>
-        <S.ButtonContainer>
-          <Link href="/heim" ><a onClick={() => clickMatomoEvent("click-to-heim", "products")}>Buy $HEIM</a></Link>
-          <S.LearnMore 
-            href="https://medium.com/heimdall-research-crypto/the-heimdall-social-index-9595fdfb9ddc" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            onClick={() => clickMatomoEvent("click-to-learn-more", "products")}
-            >
-              Learn More
-          </S.LearnMore>
-        </S.ButtonContainer>
-      </S.Heim>
-      <img className="more-icon" src="assets/more-icon.svg" alt="" width="24" height="48" />
-      <p className="more-text">More coming soon</p>
+      <S.TextWrapper>
+        <p>WHAT IS KASSANDRA DAO?</p>
+        <h1>a smart method to ensure value for your money</h1>
+        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, quaerat reiciendis illum excepturi commodi dolorem repellat voluptatum consequatur, quis id doloremque dicta vitae perferendis officiis. Quod molestias animi corrupti nihil.</span>
+        <S.Divider />
+        <S.Link>
+          <span>How it Works</span>
+          <img src="assets/arrow-circle.png" alt="" />
+        </S.Link>
+        <S.Link>
+          <span>Read the Whitepaper</span>
+          <img src="assets/arrow-circle.png" alt="" />
+        </S.Link>
+      </S.TextWrapper>
+      <S.CardContainer>
+        <S.Card>
+          <S.IconWrapper>
+            <img src="assets/home-products-locker.png" alt="" />
+          </S.IconWrapper>
+          <p>NON-CUSTODIAL</p>
+          <span>Your funds managed by public, secure, and predictable smart-contracts</span>
+        </S.Card>
+        <S.Card>
+          <S.IconWrapper>
+            <img src="assets/home-products-graph.png" alt="" />
+          </S.IconWrapper>
+          <p>PERFORMANCE</p>
+          <span>Invest, transfer and redeem investment products without relying on third-parties</span>
+        </S.Card>
+        <S.Card>
+          <S.IconWrapper>
+            <img src="assets/home-products-gift.png" alt="" />
+          </S.IconWrapper>
+          <p>REWARD</p>
+          <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+        </S.Card>
+        <S.Card>
+          <S.IconWrapper>
+            <img src="assets/home-products-check.png" alt="" />
+          </S.IconWrapper>
+          <p>ACTIVELY MANAGED</p>
+          <span>Outsource the management of your money to data-driven quantitative models</span>
+        </S.Card>
+      </S.CardContainer>
     </S.Products>
   )
 }

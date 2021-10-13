@@ -5,10 +5,11 @@ import * as ButtonStyles from '../../../components/Button/styles'
 
 export const Hero = styled.section`
 
-    height: 100vh;
-    padding: 0 ${theme.spacings.space32};
+    height: 170vh;
+    /* padding: 0 ${theme.spacings.space32}; */
+    margin-bottom: -20vh;
 
-    background: url('assets/home-hero-background.png');
+    background: url('assets/home-hero-background.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center top;
@@ -19,11 +20,11 @@ export const IntroHero = styled.div`
     flex-direction:column;
     align-items: center;
     margin: 0 auto;
+    margin-top: 300px;
     max-width: 925px;
-    margin-top: 120px;
 
-    @media(min-width: 1920px) {
-      margin-top: 415px;
+    @media(min-width: 2350px) {
+      margin-top: 360px;
     }
 
     h1 {
@@ -54,7 +55,7 @@ export const IntroHero = styled.div`
     h3 {
       font-size: ${theme.font.sizes.font18};
       font-weight: ${theme.font.weight.light};
-      margin-bottom: 30px;
+      margin-bottom: 85px;
       max-width: 600px;
       @media (max-width: 1200px) {
         font-size: 27px;

@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import Button from '../../../components/Button'
 
@@ -30,6 +29,7 @@ const Hero = () => {
           as="a"
           href="#"
           text="Explore Our Projects"
+          onClick={() => clickMatomoEvent("click-to-projects", "hero")}
         />
       </S.ButtonWrapper>
     </S.Hero>
