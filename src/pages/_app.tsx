@@ -42,7 +42,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
       </Head>
       <Toastify />
       {/* <BackgroundLinear> */}
-      <Header />
+      {/* <Header /> */}
       <GlobalStyles />
       <Component {...pageProps} />
       {/* </BackgroundLinear> */}

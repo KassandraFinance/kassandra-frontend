@@ -1,36 +1,31 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
+import theme from '../../../styles/theme'
+
+import * as ButtonStyles from '../../../components/Button/styles'
 
 export const Hero = styled.section`
-  ${({ theme }) => css`
-    height: calc(100vh - 110px);
+
+    height: 100vh;
     padding: 0 ${theme.spacings.space32};
+
+    background: url('assets/home-hero-background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+
+`
+export const IntroHero = styled.div`
     display: flex;
     flex-direction:column;
     align-items: center;
     margin: 0 auto;
-    margin-top: 166px;
     max-width: 925px;
+    margin-top: 120px;
 
-    background-image: 'assets/home-hero-background.svg';
-    @media (max-width: 959px) {
-      display: flex;
-      flex-direction: column;
-      height: calc(100vh - 160px);
-      margin-bottom: 32px;
+    @media(min-width: 1920px) {
+      margin-top: 415px;
     }
-    @media (max-width: 600px) {
-      height: calc(100vh - 120px);
-    }
-    @media (max-width: 370px) {
-      height: calc(100vh - 160px);
-    }
-    @media (max-width: 330px) {
-      height: calc(100vh - 200px);
-      padding: 0 20px;
-    }
-    @media (min-height: 300px) and (max-height: 420px) {
-      min-height: 600px;
-    }
+
     h1 {
       font-size: 72px;
       font-weight: ${theme.font.weight.black};
@@ -81,31 +76,20 @@ export const Hero = styled.section`
         margin: 8px 0 16px;
       }
     }
-    .kassandra {
-      max-width: 500px;
-      max-height: 700px;
+    `
+export const ButtonWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 72px;
+    ${ButtonStyles.Wrapper} {
+      padding: 16px 24px;
+      font-size: ${theme.font.sizes.font18};
+      font-weight: ${theme.font.weight.medium};
+      height: 50px;
 
-      width: 100%;
-
-      @media (min-width: 1440px) {
-        max-width: 100%;
-      }
-      @media (max-width: 1240px) {
-        max-width: 100%;
-        min-width: 230px;
-      }
-      @media (max-width: 959px) {
-        max-width: 400px;
-      }
-      @media (max-width: 600px) {
-        max-width: 300px;
-      }
-      @media (max-width: 360px) {
-        max-width: 240px;
-      }
     }
-  `}
 `
+
 
 export const DesktopScreen = styled.div`
   @media (max-width: 959px) {
@@ -119,91 +103,4 @@ export const MobileScreen = styled.div`
   }
 `
 
-export const ButtonContainer = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    justify-content: space-between;
-    max-width: 460px;
-    @media (max-width: 960px) {
-      margin: 0 auto;
-    }
-    @media (max-width: 560px) {
-      max-width: 400px;
-    }
-    @media (max-width: 440px) {
-      flex-direction: column;
-      height: 110px;
-    }
 
-    a {
-      border-color: ${theme.colors.cyan};
-      border-radius: ${theme.border.radius};
-      color: ${theme.colors.snow};
-      text-align: center;
-      text-decoration: none;
-      font-size: ${theme.font.sizes.font20};
-      line-height: 20px;
-
-      height: 52px;
-      padding: ${theme.spacings.space16} 32px;
-      cursor: pointer;
-
-      @media (max-width: 600px) {
-        font-size: ${theme.font.sizes.font16};
-        line-height: 16px;
-        height: 48px;
-      }
-    }
-  `}
-`
-
-export const WithpaperButton = styled.a`
-  ${({ theme }) => css`
-    border: none;
-    border-radius: ${theme.border.radius};
-    font-family: ${theme.font.family};
-    text-decoration: none;
-
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-
-    position: relative;
-    padding: ${theme.spacings.space8};
-
-    overflow: hidden;
-    cursor: pointer;
-    z-index: 1;
-    background: transparent !important;
-    border: 1px solid ${theme.colors.cyan} !important;
-    border-radius: ${theme.border.radius};
-    color: ${theme.colors.snow} !important;
-    text-decoration: none;
-    font-size: ${theme.font.sizes.font20};
-
-    height: 52px;
-    padding: 12px 32px;
-    cursor: pointer;
-    transition-duration: 300ms;
-    &:after {
-      content: '';
-      border-radius: ${theme.border.radius};
-
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-
-      z-index: -2;
-    }
-    &:hover {
-      background-color: ${theme.colors.cyan} !important;
-      color: ${theme.colors.darkPurple} !important;
-    }
-    @media (max-width: 600px) {
-      font-size: ${theme.font.sizes.font16};
-      height: 48px;
-    }
-  `}
-`

@@ -4,6 +4,7 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 import Button from '../../../components/Button'
 
 import * as S from './styles'
+import Header from '../../../components/Header'
 
 const Hero = () => {
   const { trackEvent } = useMatomo();
@@ -18,8 +19,19 @@ const Hero = () => {
 
   return (
     <S.Hero>
-      <h3>WELCOME TO KASSANDRA DAO</h3>
-      <h1>tokenized data-driven investment funds</h1>
+      <Header />
+      <S.IntroHero>
+        <h3>WELCOME TO <b>KASSANDRA DAO</b></h3>
+        <h1>tokenized data-driven investment funds</h1>
+      </S.IntroHero>
+      <S.ButtonWrapper>
+        <Button
+          backgroundPrimary
+          as="a"
+          href="#"
+          text="Explore Our Projects"
+        />
+      </S.ButtonWrapper>
     </S.Hero>
   )
 }
