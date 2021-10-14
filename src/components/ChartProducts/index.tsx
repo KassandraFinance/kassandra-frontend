@@ -1,4 +1,5 @@
 import React from 'react'
+import Chart from './Chart'
 
 import * as S from './styles'
 
@@ -33,6 +34,9 @@ const ChartProducts = () => {
         />
         <S.Label htmlFor="Volume">Volume</S.Label>
       </S.SelectChart>
+      {inputChecked === 'Price' && <Chart data={data} color="#E843C4" />}
+      {inputChecked === 'TVL' && <Chart data={data} color="#26DBDB" />}
+      {inputChecked === 'Volume' && <Chart data={data} color="#0C3DDC" />}
     </S.ChartProduct>
   )
 }
