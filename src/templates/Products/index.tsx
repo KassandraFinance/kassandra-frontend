@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector, RootStateOrAny } from 'react-redux'
+import ChartProducts from '../../components/ChartProducts'
 import Header from '../../components/Header'
 
 
@@ -147,6 +148,7 @@ const Products = () => {
                 <h2>40%</h2>
               </S.IndexData>
             </S.IntroCharts>
+            <ChartProducts />
           </S.ProductDetails>
           {/* <HeimOperations /> */}
           <div style={{ background: '#333', width: '100%' }}></div>

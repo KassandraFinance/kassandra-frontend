@@ -20,6 +20,7 @@ export const Product = styled.section`
 `
 
 export const ProductDetails = styled.div`
+  margin-bottom: 120px;
 `
 
 export const Intro = styled.div`
@@ -68,13 +69,13 @@ export const Line = styled.div`
 
 export const IntroCharts = styled.div`
   display: grid;
-  grid-template-columns: 3fr 97px 1fr 2fr 1fr;
-  gap: 50px;
+  grid-template-columns: 3fr 4fr 1fr 2fr 1fr;
+  gap: 44px;
 `
 
 export const IndexData = styled.div`
   span {
-    font-family: ${theme.font.sizes.font12};
+    font-size: ${theme.font.sizes.font12};
     text-transform: uppercase;
 
     display: flex;
