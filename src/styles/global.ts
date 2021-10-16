@@ -78,7 +78,7 @@ const GlobalStyles: GlobalStyleComponent<
     }
 
     body {
-      background-color: black;
+      background-color: #151117;
       font-family: 'Rubik', sans-serif;
       color: #fcfcfc;
     }
