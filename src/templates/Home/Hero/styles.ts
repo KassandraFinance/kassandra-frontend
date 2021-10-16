@@ -13,7 +13,6 @@ export const Hero = styled.section`
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center top;
-
 `
 export const IntroHero = styled.div`
     display: flex;
@@ -23,7 +22,8 @@ export const IntroHero = styled.div`
     margin-top: 300px;
     max-width: 925px;
 
-    @media(min-width: 2350px) {
+
+    @media (min-width: 2350px) {
       margin-top: 360px;
     }
 
