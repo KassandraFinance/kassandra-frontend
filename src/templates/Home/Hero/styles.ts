@@ -13,13 +13,14 @@ export const Hero = styled.section`
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center top;
+    background-clip: text;
 `
 export const IntroHero = styled.div`
     display: flex;
     flex-direction:column;
     align-items: center;
     margin: 0 auto;
-    margin-top: 300px;
+    margin-top: 210px;
     max-width: 925px;
 
 

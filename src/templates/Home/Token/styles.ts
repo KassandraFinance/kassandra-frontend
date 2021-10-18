@@ -161,7 +161,7 @@ export const CardFooter = styled.div`
     }
   a{
     justify-items: center;
-    display: block;
+    /* display: block; */
     text-decoration: none;
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.light};
@@ -263,4 +263,83 @@ export const KasasndraCardHeader = styled.div`
   background-position: right 20% bottom 60%;
   background-size: 65%;
   border-radius: 12px;
+`
+export const Responsabilities = styled.section`
+  display: flex;
+  max-width: 1000px;
+  margin: 0 auto;
+`
+export const ResponsabilitiesTitle = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-right: 80px;
+  h1{
+    font-size: 36px;
+    line-height: 104%;
+    font-weight: ${theme.font.weight.semibold};
+  }
+`
+
+export const ResponsabilitiesDivider = styled.div`
+  max-width: 100px;
+  border: 1px solid ${theme.colors.cyan};
+  margin-block: 18px ;
+  `
+
+export const ResponsabilitiesCards = styled.div`
+  margin-right: 40px;
+  span{
+    display: inline-block;
+    margin-top: 26px;
+    font-size: ${theme.font.sizes.font16};
+    font-weight: ${theme.font.weight.light};
+    line-height: 104%;
+  }
+`
+export const IconWrapper = styled.div`
+  background-color: rgba(255, 255, 255, .1);
+  max-width: auto;
+  width: 78px;
+  height: 73px;
+  border-radius: 12px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+`
+export const KassandraCardWrapper = styled.section`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 auto;
+  margin-top: 75px;
+  max-width: 890px;
+`
+export const KassandraCard = styled.div`
+  display: flex;
+  height: max-content;
+  flex-direction: column;
+  max-width: 390px;
+  background-color:rgba(33, 20, 38, 0.33);
+  border-radius: 12px;
+  border: 1px solid #FFFFFF0D;
+  text-align: left;
+  padding: 31px;
+  img{
+    max-width: min-content;
+  }
+  p{
+    text-align: left;
+    display: inline-block;
+    color: ${theme.colors.amber};
+    letter-spacing: 0.22em;
+    margin: 0;
+    margin-top:30px;
+  }
+  h1{
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 32px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
 `
