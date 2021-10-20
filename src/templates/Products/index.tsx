@@ -8,7 +8,8 @@ import web3 from '../../utils/web3'
 import Header from '../../components/Header'
 import ChartProducts from '../../components/ChartProducts'
 import Web3Disabled from '../../components/Web3Disabled'
-import web3 from '../../utils/web3'
+
+import Change from './Change'
 
 import * as S from './styles'
 
@@ -150,6 +151,7 @@ const Products = () => {
               </S.IndexData>
             </S.IntroCharts>
             <ChartProducts />
+            <Change />
           </S.ProductDetails>
           {/* <HeimOperations /> */}
           <div style={{ background: '#333', width: '100%' }}></div>

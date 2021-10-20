@@ -11,8 +11,8 @@ export const BackgroundProducts = styled.div`
 
 export const Product = styled.section`
   display: grid;
-  grid-template-columns: 584px 448px;
-  gap: 108px;
+  grid-template-columns: minmax(300px, 584px) 448px;
+  gap: 0 108px;
   
   margin: 0 auto;
   max-width: 1140px;
@@ -68,9 +68,13 @@ export const Line = styled.div`
 `
 
 export const IntroCharts = styled.div`
-  display: grid;
-  grid-template-columns: 3fr 4fr 1fr 2fr 1fr;
-  gap: 44px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 22px;
+  
+  max-width: 100%;
 `
 
 export const IndexData = styled.div`
