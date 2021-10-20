@@ -1,7 +1,7 @@
 import React from 'react'
 import BigNumber from 'bn.js'
 
-import { BNtoDecimal, wei } from '../../../utils/numerals'
+import { BNtoDecimal } from '../../../utils/numerals'
 
 import * as S from './styles'
 
@@ -27,8 +27,8 @@ const KacyEarned = ({ pid, userWalletAddress, earned }: IKacyEarnedProps) => {
   return (
     <S.KacyEarned>
       <p>Kacy earned</p>
-      <h3>{BNtoDecimal(kacyEarned || new BigNumber(0), wei, 2)} KACY</h3>
-      <span>&#8776; {BNtoDecimal(new BigNumber(kacyEarned).mul(new BigNumber(2)), wei, 2)} USD</span>
+      <h3>{BNtoDecimal(kacyEarned || new BigNumber(0), new BigNumber(18), 2)} KACY</h3>
+      <span>&#8776; {BNtoDecimal(new BigNumber(kacyEarned).mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
     </S.KacyEarned>
   )
 }

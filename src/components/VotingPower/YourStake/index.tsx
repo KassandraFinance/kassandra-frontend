@@ -3,7 +3,7 @@ import BigNumber from 'bn.js'
 import { PoolInfo } from '../../../hooks/useStakingContract'
 
 import { getDate } from '../../../utils/date'
-import { BNtoDecimal, wei } from '../../../utils/numerals'
+import { BNtoDecimal } from '../../../utils/numerals'
 
 import * as S from './styles'
 import { IInfoStaked } from '..'
@@ -136,12 +136,12 @@ const YourStake = ({
           <p>
             {BNtoDecimal(
               infoStaked.yourStake,
-              wei,
+              new BigNumber(18),
               6
             )}{' '}
             KACY
           </p>
-          <span>&#8776; {BNtoDecimal(new BigNumber(infoStaked.yourStake).mul(new BigNumber(2)), wei, 2)} USD</span>
+          <span>&#8776; {BNtoDecimal(new BigNumber(infoStaked.yourStake).mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
         </S.Stake>
       </S.Info>
       <S.Info>
@@ -153,7 +153,7 @@ const YourStake = ({
                 ? 1
                 : infoStaked.votingMultiplier
             ).mul(infoStaked.yourStake),
-            wei,
+            new BigNumber(18),
             6
           )}
         </span>
@@ -163,7 +163,7 @@ const YourStake = ({
         <span>
           {infoStaked.hasExpired ? '0' : BNtoDecimal(
             infoStaked.yourDailyKacyReward,
-            wei,
+            new BigNumber(18),
             2
           )}
           /day
