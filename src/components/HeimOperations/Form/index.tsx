@@ -575,7 +575,7 @@ const Form = ({ typeAction, title }: IFormProps) => {
               .filter(token => token.address !== swapOutAddress)
         }
         title={title}
-        decimals={poolTokenDetails[tokenInIndex] ? poolTokenDetails[tokenInIndex].decimals : wei}
+        decimals={poolTokenDetails[tokenInIndex] ? poolTokenDetails[tokenInIndex].decimals : new BigNumber(18)}
         swapInBalance={swapInBalance}
         setSwapInAmount={setSwapInAmount}
         setSwapOutAmount={setSwapOutAmount}

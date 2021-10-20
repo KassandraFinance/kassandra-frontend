@@ -3,9 +3,10 @@ import { useSelector, RootStateOrAny } from 'react-redux'
 import ChartProducts from '../../components/ChartProducts'
 import Header from '../../components/Header'
 
+import web3 from '../../utils/web3'
 
-// import HeimOperations from '../../components/HeimOperations'
-// import IndexDetails from '../../components/IndexDetails'
+import Header from '../../components/Header'
+import ChartProducts from '../../components/ChartProducts'
 import Web3Disabled from '../../components/Web3Disabled'
 import web3 from '../../utils/web3'
 
