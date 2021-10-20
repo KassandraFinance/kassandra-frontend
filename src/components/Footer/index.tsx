@@ -6,8 +6,32 @@ import * as S from './styles'
 const Footer = () => (
   <S.Footer>
     <S.Container>
-      <S.GridLeft className='grid-left'>
-        <img src="assets/kassandra-footer.svg" alt="kassandra" width="266" height="26" />
+      <S.Divider />
+      <S.UpperContainer>
+
+        <ul>
+          <li><h4>Company</h4></li>
+          <li><Link href="/" >About</Link></li>
+          <li><Link href="/" >Partners</Link></li>
+        </ul>
+        <ul>
+          <li><h4>Products</h4></li>
+          <li><Link href="/">Kassandra DAO</Link></li>
+          <li><Link href="/heim">$HEIM Index</Link></li>
+        </ul>
+        <ul>
+          <li><h4>Legal</h4></li>
+          <li><Link href="/">Privacy Policy</Link></li>
+          <li><Link href="/">Terms of Service</Link></li>
+        </ul>
+      </S.UpperContainer>
+      <S.Divider />
+
+      <S.LowerContainer>
+        <S.LowerLeft>
+          <img src="assets/kassandra-footer.svg" alt="kassandra" width="266" height="26" />
+          <span>© 2021-{new Date().getFullYear()} Kassandra.</span>
+        </S.LowerLeft>
         <ul>
           <li>
             <a href="https://discord.com/invite/2uGEvqNnuq" target="_blank" rel="noopener noreferrer">
@@ -35,25 +59,10 @@ const Footer = () => (
             </a>
           </li>
         </ul>
-        <span>© {new Date().getFullYear()} Kassandra.</span>
-      </S.GridLeft>
-      <S.GridRight className='grid-right'>
-        <ul>
-          <li><h4>Company</h4></li>
-          <li><Link href="/" >About</Link></li>
-          <li><Link href="/" >Partners</Link></li>
-        </ul>
-        <ul>
-          <li><h4>Products</h4></li>
-          <li><Link href="/">Kassandra DAO</Link></li>
-          <li><Link href="/heim">$HEIM Index</Link></li>
-        </ul>
-        <ul>
-          <li><h4>Legal</h4></li>
-          <li><Link href="/">Privacy Policy</Link></li>
-          <li><Link href="/">Terms of Service</Link></li>
-        </ul>
-      </S.GridRight>
+      </S.LowerContainer>
+
+
+
       <img src="assets/kassandra-footer.svg" alt="kassandra" width="266" height="26" />
     </S.Container>
   </S.Footer>
