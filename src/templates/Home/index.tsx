@@ -5,9 +5,10 @@ import Hero from './Hero'
 import Products from './Products'
 import ClassProducts from './ClassProducts'
 import Token from './Token'
-import KassandraSuccess from './KassandraSuccess'
+import KassandraToken from './KassandraToken'
 import KassandraArchitecture from './KassandraArchitecture'
-import Supporters from './Supporters'
+import TokenDistribution from './TokenDistribution'
+import SubscribeBanner from '../../components/SubscribeBanner'
 
 const Home = () => {
   const { trackPageView } = useMatomo()
@@ -23,9 +24,10 @@ const Home = () => {
       <Products />
       <ClassProducts />
       <Token />
-      <KassandraSuccess />
+      <KassandraToken />
       <KassandraArchitecture />
-      <Supporters />
+      <TokenDistribution />
+      <SubscribeBanner />
     </>
   )
 }

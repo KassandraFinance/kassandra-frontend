@@ -8,14 +8,13 @@ export const Hero = styled.section`
     height: 170vh;
     /* padding: 0 ${theme.spacings.space32}; */
     margin-bottom: -20vh;
-
     background: url('assets/home-hero-background.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center top;
-    background-clip: text;
 `
 export const IntroHero = styled.div`
+
     display: flex;
     flex-direction:column;
     align-items: center;
@@ -92,13 +91,11 @@ export const ButtonWrapper = styled.div`
     }
 `
 
-
 export const DesktopScreen = styled.div`
   @media (max-width: 959px) {
     display: none;
   }
 `
-
 export const MobileScreen = styled.div`
   @media (min-width: 960px) {
     display: none;

@@ -10,7 +10,6 @@ export const Container = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center top;
-
 `
 export const Token = styled.section`
 
