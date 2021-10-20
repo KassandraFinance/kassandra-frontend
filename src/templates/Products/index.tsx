@@ -1,7 +1,5 @@
 import React from 'react'
 import { useSelector, RootStateOrAny } from 'react-redux'
-import ChartProducts from '../../components/ChartProducts'
-import Header from '../../components/Header'
 
 import web3 from '../../utils/web3'
 
@@ -12,6 +10,7 @@ import Web3Disabled from '../../components/Web3Disabled'
 import Change from './Change'
 import Summary from './Summary'
 import Distribution from './Distribution'
+import TokenDescription from './TokenDescription'
 
 import * as S from './styles'
 
@@ -156,6 +155,7 @@ const Products = () => {
             <Change />
             <Summary />
             <Distribution coinInfoList={coinInfoList} />
+            <TokenDescription />
           </S.ProductDetails>
           {/* <HeimOperations /> */}
           <div style={{ background: '#333', width: '100%' }}></div>
