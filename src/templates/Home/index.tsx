@@ -9,6 +9,7 @@ import KassandraToken from './KassandraToken'
 import KassandraArchitecture from './KassandraArchitecture'
 import TokenDistribution from './TokenDistribution'
 import SubscribeBanner from '../../components/SubscribeBanner'
+import BannerCTA from '../../components/BannerCTA'
 
 const Home = () => {
   const { trackPageView } = useMatomo()
@@ -27,6 +28,7 @@ const Home = () => {
       <KassandraToken />
       <KassandraArchitecture />
       <TokenDistribution />
+      <BannerCTA />
       <SubscribeBanner />
     </>
   )
