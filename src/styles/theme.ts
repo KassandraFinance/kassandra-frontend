@@ -20,6 +20,7 @@ export default {
       font20: '2.0rem',
       font24: '2.4rem',
       font32: '3.2rem',
+      font36: '3.6rem',
       font40: '4.0rem',
       font48: '4.8rem',
       font56: '5.6rem',
