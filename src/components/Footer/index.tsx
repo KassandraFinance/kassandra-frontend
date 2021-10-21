@@ -60,10 +60,6 @@ const Footer = () => (
           </li>
         </ul>
       </S.LowerContainer>
-
-
-
-      <img src="assets/kassandra-footer.svg" alt="kassandra" width="266" height="26" />
     </S.Container>
   </S.Footer>
 )
