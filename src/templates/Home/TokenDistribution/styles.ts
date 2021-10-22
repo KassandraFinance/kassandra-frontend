@@ -132,7 +132,7 @@ export const Values = styled.div`
 export const Link = styled.div`
   display: flex;
   max-width: 290px;
-  margin: auto;
+  margin:  2.4rem auto;
   p{
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.light};

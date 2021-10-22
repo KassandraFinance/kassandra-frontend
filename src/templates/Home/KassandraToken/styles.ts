@@ -229,6 +229,7 @@ export const Card = styled.div`
   @media(max-width: 960px) {
     margin: 0 auto;
     margin-top: 30px;
+    width: 100%;
   }
 
 `
@@ -265,7 +266,7 @@ export const CardFooter = styled.div`
       padding: 16px 24px;
       font-size: ${theme.font.sizes.font18};
       font-weight: ${theme.font.weight.medium};
-      height: 50px;
+      height: 4.4rem;
       @media(max-width: 960px) {
         margin-bottom: 16px;
         width: 100%;
