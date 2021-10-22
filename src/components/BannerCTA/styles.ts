@@ -14,11 +14,23 @@ export const Container = styled.section`
   border-radius: 1rem;
   border: 0.1rem solid #FFFFFF0A;
   background: #2114261F;
+
+  @media(max-width: 700px) {
+    padding: 0 3.2rem;
+    margin-block: 6rem 2.75rem;
+    grid-template-columns: 1fr;
+     text-align: center;
+
+
+  }
 `
 export const ImageWrapper = styled.div`
   max-width: 80%;
   img{
     width: 100%;
+    @media(max-width: 700px) {
+      display: none;
+    }
   }
 `
 
@@ -42,19 +54,27 @@ export const TextWrapper = styled.div`
   }
 `
 export const BannerFooter = styled.div`
-  max-width: 36rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 6rem ;
+max-width: 36rem;
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-top: 6rem ;
+@media(max-width: 700px) {
+  max-width: 100%;
+  flex-direction: column;
+  align-content: center;
+}
 
-  ${ButtonStyles.Wrapper} {
-      width: 65%;
-      padding: 1.6rem 2.4rem;
-      font-size: ${theme.font.sizes.font18};
-      font-weight: ${theme.font.weight.medium};
-      height: 5rem;
-    }
+${ButtonStyles.Wrapper} {
+  width: 65%;
+  padding: 1.6rem 2.4rem;
+  font-size: ${theme.font.sizes.font18};
+  font-weight: ${theme.font.weight.medium};
+  height: 5rem;
+  @media(max-width: 700px) {
+    margin-bottom: 1.6rem;
+  }
+}
   a{
     justify-items: center;
     text-decoration: none;

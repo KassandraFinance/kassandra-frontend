@@ -64,10 +64,11 @@ const KassandraToken = () => {
             <Button
               backgroundPrimary
               as="a"
+              href="/products"
               text="Buy $KACY"
             />
             <div>
-              <a href="#">Learn More </a>
+              <a href="https://kassandrafoundation.medium.com/kassandra-dao-token-8bc046d55a00?source=user_profile---------0----------------------------">Learn More </a>
               <img src="assets/arrow-circle.png" alt="" />
             </div>
 
@@ -79,34 +80,38 @@ const KassandraToken = () => {
           <S.ResponsabilitiesDivider />
           <h1>What will you build?</h1>
         </S.ResponsabilitiesTitle>
-        <S.ResponsabilitiesCards>
-          <S.IconWrapper>
-            <img src="assets/adjustIcon.png" alt="" />
-          </S.IconWrapper>
 
-          <span>Adjusting <b>parameters</b> and <b>fees</b></span>
-        </S.ResponsabilitiesCards>
-        <S.ResponsabilitiesCards>
-          <S.IconWrapper>
-            <img src="assets/deployInvest.png" alt="" />
-          </S.IconWrapper>
+        <S.MobileCards>
+          <S.ResponsabilitiesCards>
+            <S.IconWrapper>
+              <img src="assets/adjustIcon.png" alt="" />
+            </S.IconWrapper>
+            <span>Adjusting <b>parameters</b> and <b>fees</b></span>
+          </S.ResponsabilitiesCards>
 
-          <span>Deploying <b>new</b> investment products</span>
-        </S.ResponsabilitiesCards>
-        <S.ResponsabilitiesCards>
-          <S.IconWrapper>
-            <img src="assets/curatingIcon.png" alt="" />
-          </S.IconWrapper>
+          <S.ResponsabilitiesCards>
+            <S.IconWrapper>
+              <img src="assets/deployInvest.png" alt="" />
+            </S.IconWrapper>
 
-          <span><b>Curating</b> whitelists for investable assets</span>
-        </S.ResponsabilitiesCards>
-        <S.ResponsabilitiesCards>
-          <S.IconWrapper>
-            <img src="assets/approvingIcon.png" alt="" />
-          </S.IconWrapper>
+            <span>Deploying <b>new</b> investment products</span>
+          </S.ResponsabilitiesCards>
 
-          <span><b>Approving</b> code changes and updates</span>
-        </S.ResponsabilitiesCards>
+          <S.ResponsabilitiesCards>
+            <S.IconWrapper>
+              <img src="assets/curatingIcon.png" alt="" />
+            </S.IconWrapper>
+            <span><b>Curating</b> whitelists for investable assets</span>
+          </S.ResponsabilitiesCards>
+
+          <S.ResponsabilitiesCards>
+            <S.IconWrapper>
+              <img src="assets/approvingIcon.png" alt="" />
+            </S.IconWrapper>
+            <span><b>Approving</b> code changes and updates</span>
+          </S.ResponsabilitiesCards>
+        </S.MobileCards>
+
       </S.Responsabilities>
     </>
   )

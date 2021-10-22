@@ -17,13 +17,13 @@ const KassandraArchitecture = () => {
             <h1>Each launching values $KACY</h1>
             <span>Every new investment product created on Kassandra must hold at least 5% of $KACY tokens as part of its portfolio. This ensures that the success of the products will result in the growth of the $KACY token value.</span>
           </S.KassandraCard>
-          <S.KassandraCard style={{ marginTop: '170px' }}>
+          <S.KassandraCard className='secondCard'>
             <img src="assets/feeIcon.png" alt="" />
             <p>3% REDEEM FEE</p>
             <h1>Each launching values $KACY</h1>
             <span>A 3% fee is charged whenever investment tokens are redeemed. The fees collected this way are under total governance control and can be used for purchasing and subsequently burn $KACY tokens.</span>
           </S.KassandraCard>
-          <S.KassandraCard style={{ marginTop: '-120px' }}>
+          <S.KassandraCard className="thirdCard">
             <img src="assets/voteIcon.png" alt="" />
             <p>VOTE LOCK</p>
             <h1>Each launching values $KACY</h1>

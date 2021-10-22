@@ -45,7 +45,7 @@ export const SingUp = ({ setModalSuccessOpen }: ISignUpProps) => {
         onSubmit={() => {
           setTimeout(() => {
             setFormState({ name: '', email: '' })
-          }, 1000);;
+          }, 1000);
           setModalSuccessOpen(true);
         }}>
         <TextField

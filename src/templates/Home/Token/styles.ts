@@ -15,7 +15,9 @@ export const Token = styled.section`
 
   padding: 80px 32px;
   text-align: center;
-
+  @media(max-width: 960px){
+  padding: 0 32px;
+  }
   span{
     display: flex;
     font-size: ${theme.font.sizes.font16};
@@ -30,7 +32,13 @@ export const Token = styled.section`
     line-height: 104%;
     margin: auto;
     margin-bottom: ${theme.spacings.space24};
-  }
+    @media(max-width: 960px) {
+      font-size: ${theme.font.sizes.font36};
+    }
+    @media(max-width: 450px) {
+      font-size: ${theme.font.sizes.font24};
+    }
+   }
   p {
     font-size: ${theme.font.sizes.font14};
     letter-spacing: 4px;
@@ -38,7 +46,6 @@ export const Token = styled.section`
     text-align: center;
     margin: 0 auto;
   }
-
 `
 export const Divider = styled.div`
   max-width: 100px;
@@ -51,10 +58,9 @@ export const CardWrapper = styled.div`
   margin: 75px auto;
   max-width: 1000px;
   gap: 24px;
-  @media(max-width: 1100px) {
+  @media(max-width: 960px) {
     display: flex;
     flex-direction: column;
-    justify-content: center;
   }
 `
 export const Card = styled.div`
@@ -63,6 +69,12 @@ export const Card = styled.div`
   border-radius: 12px;
   background: rgba(31, 31, 31, 0.72);
   box-shadow: 0px 4px 69px -17px rgba(0, 0, 0, 0,51);
+  @media(max-width: 960px) {
+    margin: auto;
+  }
+  img{
+    max-width: 90%;
+  }
 
 `
 export const CardHeader = styled.div`
@@ -87,11 +99,21 @@ export const TextWrapper = styled.div`
   text-align: left;
   margin: 55px auto;
   max-width: 360px;
+  @media(max-width: 960px) {
+    padding: 0 32px;
+    margin: 40px auto;
+  }
   h1{
     font-size: ${theme.font.sizes.font48};
     font-weight: ${theme.font.weight.light};
     line-height: 104%;
     margin: 0;
+    @media(max-width: 960px) {
+      font-size: ${theme.font.sizes.font36};
+    }
+    @media(max-width: 450px) {
+      font-size: ${theme.font.sizes.font32};
+    }
   }
   p{
     text-align: left;
@@ -114,13 +136,17 @@ export const TokenInfo = styled.div`
   margin: auto;
   max-width: 360px;
   margin-bottom: 14px;
+  @media(max-width: 960px) {
+    padding: 0 32px;
+  }
 
 `
 export const Price = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-
-
+  @media(max-width: 960px) {
+    grid-template-columns: 1fr;
+    }
   > div{
     display: flex;
     margin-left: 6px;
@@ -140,9 +166,20 @@ export const TokensSymbols = styled.div`
     font-size: ${theme.font.sizes.font12};
     font-weight: ${theme.font.weight.light};
     margin-left: 6px;
+    @media(max-width: 960px) {
+      margin-left: 0;
+    }
+  }
+  @media(max-width: 960px) {
+    flex-direction: column;
+    align-content: center;
+
   }
   img{
     max-height: 80%;
+    @media(max-width: 960px) {
+      max-height: 50%;
+    }
   }
 `
 export const CardFooter = styled.div`
@@ -151,12 +188,19 @@ export const CardFooter = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media(max-width: 960px) {
+    padding: 0 32px;
+    flex-direction: column;
+  }
   ${ButtonStyles.Wrapper} {
       width: 65%;
       padding: 16px 24px;
       font-size: ${theme.font.sizes.font18};
       font-weight: ${theme.font.weight.medium};
       height: 50px;
+      @media(max-width: 960px) {
+        margin-bottom: 16px;
+      }
     }
   a{
     justify-items: center;
@@ -171,6 +215,7 @@ export const CardFooter = styled.div`
     display: flex;
     justify-content: space-between;
   }
+
 `
 export const ComingSoon = styled.div`
   position: relative;
@@ -179,6 +224,9 @@ export const ComingSoon = styled.div`
   border-radius: 12px;
   background: rgba(31, 31, 31, 0.72);
   box-shadow: 0px 4px 69px -17px rgba(0, 0, 0, 0,51);
+  @media(max-width: 960px) {
+      display: none;
+    }
 
 `
 export const ComingSoonContent = styled.div`

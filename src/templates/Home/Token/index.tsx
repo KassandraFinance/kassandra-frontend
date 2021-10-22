@@ -55,6 +55,7 @@ const Token = () => {
               <Button
                 backgroundPrimary
                 as="a"
+                href='/products'
                 text="Buy $HEIM"
               />
               <div>

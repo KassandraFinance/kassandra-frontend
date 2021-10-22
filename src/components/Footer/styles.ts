@@ -38,12 +38,19 @@ export const UpperContainer = styled.div`
   padding: 80px 100px ;
   max-width: 690px;
 
-  @media(max-width: 710px) {
-    width: 100%;
-  }
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 16px;
+
+  @media(max-width: 710px) {
+    width: 100%;
+    padding: 40px 50px;
+  }
+  @media(max-width: 400px) {
+    width: 100%;
+    padding:0;
+  }
+
   li {
     @media(max-width: 710px) {
       text-align: top;
@@ -54,12 +61,18 @@ export const UpperContainer = styled.div`
   margin-bottom: 8px;
   font-size: 20px;
   font-weight: 500;
+    @media(max-width: 710px) {
+      font-size: ${theme.font.sizes.font16};
+    }
   }
   a {
   color: #fcfcfc;
   font-size: 16px;
   font-weight: 300;
   text-decoration: none;
+    @media(max-width: 710px) {
+      font-size: ${theme.font.sizes.font12};
+    }
   }
 `
 export const LowerContainer = styled.div`
@@ -67,24 +80,38 @@ export const LowerContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  @media (max-width: 710px) {
+  @media (max-width: 760px) {
+    flex-direction: column;
     margin-top: 30px;
+    padding: 35px 50px ;
     width: 100%;
     text-align: center;
     & > img {
       display: none;
     }
   }
+  @media (max-width: 400px) {
+    padding: 0;
+  }
   span{
     font-size: 1.6rem;
     font-weight: 300;
   }
   ul {
-    display: flex;
-    li {
-      flex: 1 0 48px;
-    }
+  display: flex;
+  @media (max-width: 760px) {
+    margin-top: 12px;
+    justify-content: center;
   }
+  @media (max-width: 400px) {
+    padding: 10px;
+    justify-content: center;
+    margin: auto;
+  }
+  li {
+    flex: 1 0 48px;
+  }
+}
 `
 export const LowerLeft = styled.div`
   display: flex;

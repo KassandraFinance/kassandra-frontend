@@ -6,12 +6,14 @@ import * as ButtonStyles from '../../../components/Button/styles'
 export const Hero = styled.section`
 
     height: 170vh;
-    /* padding: 0 ${theme.spacings.space32}; */
     margin-bottom: -20vh;
     background: url('assets/home-hero-background.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center top;
+    @media(max-width: 960px) {
+      margin-bottom: -50vh;
+    }
 `
 export const IntroHero = styled.div`
 
@@ -19,12 +21,26 @@ export const IntroHero = styled.div`
     flex-direction:column;
     align-items: center;
     margin: 0 auto;
-    margin-top: 210px;
+    margin-top: 280px;
     max-width: 925px;
-
 
     @media (min-width: 2350px) {
       margin-top: 360px;
+    }
+    @media (max-width: 960px) {
+      margin-top: 170px;
+    }
+    @media (max-width: 780px) {
+      margin-top: 230px;
+    }
+    @media (max-width: 360px) {
+      margin-top: 130px;
+      @media (min-height: 800px ) {
+        margin-top: 200px;
+      }
+    }
+    @media (max-width: 330px) {
+      margin-top: 90px;
     }
 
     h1 {
@@ -37,19 +53,24 @@ export const IntroHero = styled.div`
         line-height: 70px;
       }
       @media (max-width: 959px) {
-        font-size: 70px;
+        font-size: 60px;
         line-height: 60px;
       }
       @media (max-width: 770px) {
-        font-size: 60px;
-        margin-bottom: 32px;
+        font-size: 50px;
+        margin-bottom: 40px;
       }
       @media (max-width: 600px) {
-        font-size: 50px;
-      }
-      @media (max-width: 420px) {
         font-size: 36px;
+      }
+
+      @media (max-width: 375px) {
+        font-size: ${theme.font.sizes.font24};
         margin-bottom: 0;
+        line-height: 20px;
+      }
+      @media (max-width: 350px) {
+        font-size: ${theme.font.sizes.font20};
       }
     }
     h3 {
@@ -63,7 +84,7 @@ export const IntroHero = styled.div`
       @media (max-width: 959px) {
         text-align: center;
         margin: 0 auto;
-        margin: 8px 0 32px;
+        margin: 8px 0 85px;
         font-size: 22px;
       }
       @media (max-width: 770px) {
@@ -71,10 +92,17 @@ export const IntroHero = styled.div`
         max-width: 500px;
       }
       @media (max-width: 420px) {
+        font-size: ${theme.font.sizes.font14};
         max-width: 360px;
+        margin-bottom: 35px;
+        @media (min-height: 800px ) {
+          margin-bottom: 100px;
+        }
       }
-      @media (max-width: 375px) {
+      @media (max-width: 330px) {
         margin: 8px 0 16px;
+        font-size: ${theme.font.sizes.font14};
+        margin-bottom: 75px;
       }
     }
     `

@@ -28,6 +28,12 @@ export const Token = styled.section`
     line-height: 104%;
     margin: auto;
     margin-bottom: ${theme.spacings.space24};
+    @media(max-width: 960px) {
+      font-size: ${theme.font.sizes.font36};
+    }
+    @media(max-width: 450px) {
+      font-size: ${theme.font.sizes.font24};
+    }
   }
   p {
     font-size: ${theme.font.sizes.font14};
@@ -46,9 +52,15 @@ export const Divider = styled.div`
 export const KassandraCardWrapper = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  /* gap:3.2rem; */
   margin: 0 auto;
   margin-top: 75px;
   max-width: 890px;
+  @media(max-width: 960px) {
+    display: flex;
+    flex-direction: column;
+  }
 `
 export const KassandraCard = styled.div`
   display: flex;
@@ -60,6 +72,21 @@ export const KassandraCard = styled.div`
   border: 1px solid #FFFFFF0D;
   text-align: left;
   padding: 31px;
+  @media(max-width: 960px) {
+      margin: auto;
+   }
+  &.secondCard {
+    margin-top: 170px;
+    @media(max-width: 960px) {
+      margin-top: 1.6rem;
+   }
+  }
+  &.thirdCard {
+    margin-top: -120px;
+    @media(max-width: 960px) {
+      margin-top: 1.6rem;
+    }
+  }
   img{
     max-width: min-content;
   }

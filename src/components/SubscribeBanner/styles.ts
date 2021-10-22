@@ -8,6 +8,10 @@ export const Container = styled.section`
   grid-template-columns: 1fr 1fr;
   max-width: 760px;
   margin: 40px auto;
+  @media(max-width: 960px) {
+    grid-template-columns: 1fr;
+    padding: 0 32px;
+  }
 `
 export const TextWrapper = styled.div`
   max-width: 260px;
