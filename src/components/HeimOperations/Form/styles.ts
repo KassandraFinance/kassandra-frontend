@@ -223,7 +223,7 @@ export const Select = styled.select`
   outline: none;
   max-width: 110px;
   height: 30px;
-    option {
+  option {
     background-color: #030102;
     color: #fff;
     font-family: 'Rubik', sans-serif;
@@ -337,18 +337,47 @@ export const ExchangeRate = styled.div`
   margin-bottom: 16px;
 `
 
-export const ToggleList = styled.a<IInputDefaultContainerProps>`
+export const InputBestValue = styled.div`
+  background: rgba(31, 31, 31, 0.72);
+  border-radius: 10px;
 
-  position: relative;
-  font-size:${theme.font.sizes.font16};
-  color: ${theme.colors.cyan};
-  cursor: pointer;
-  align-content: center;
+  width: 100%;
+  padding: 16px 8px 16px 16px;
+  margin-bottom: 40px;
+
+`
+
+export const IntroBestValue = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding-right: 8px;
   padding-bottom: 16px;
-  img {
-    transform: ${props => (props.showMore ? null : 'rotate(180deg)')};
-    margin-left: 8px;
-    transition-duration: 200ms;
+`
+
+export const AllInput = styled.div`
+  max-height: 230px;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
   }
 `
 
+export const InputBestValueGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+  align-items: flex-start;
+`
+
+export const BestValueItem = styled.div`
+  width: 100%;
+  height: 74px;
+`
