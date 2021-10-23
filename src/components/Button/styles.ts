@@ -20,7 +20,7 @@ const wrapperModifiers = {
     font-size: ${theme.font.sizes.font14};
   `,
   medium: (theme: DefaultTheme) => css`
-    height: 4rem;
+    height: 4.8rem;
     font-size: ${theme.font.sizes.font16};
     padding: ${theme.spacings.space16} ${theme.spacings.space32};
 
@@ -85,13 +85,19 @@ const wrapperModifiers = {
 
   backgroundSecondary: (theme: DefaultTheme) => css`
 
-    background: ${`linear-gradient(87.48deg, ${theme.colors.amber} -70.27%,  ${theme.colors.magenta} 154.78%)`};
+    /* background: ${`linear-gradient(87.48deg, ${theme.colors.amber} -70.27%,  ${theme.colors.magenta} 154.78%)`}; */
+    background: ${`linear-gradient(92.08deg, ${theme.colors.magenta} 0%, ${theme.colors.darkBlue} 100%)`};
+    color: ${theme.colors.snow};
 
     &:after {
-      background: ${`linear-gradient(87.48deg, ${theme.colors.amber} -70.27%,  ${theme.colors.magenta} 154.78%)`};
+      
+      background: ${`linear-gradient(87.48deg, ${theme.colors.magenta} -70.27%,  ${theme.colors.darkBlue} 154.78%)`};
+      /* background: ${`linear-gradient(92.08deg, ${theme.colors.magenta} 0%, ${theme.colors.darkBlue} 100%)`}; */
     }
     &:before {
-      background-color: ${theme.colors.amber};
+      /* background-color: ${theme.colors.darkBlue}; */
+      /* background: ${`linear-gradient(87.48deg, ${theme.colors.darkBlue} -70.27%,  ${theme.colors.magenta} 154.78%)`}; */
+
     }
     &:hover {
       &:before {

@@ -1,7 +1,7 @@
 import BigNumber from 'bn.js'
+import Big from 'big.js'
 
-
-export function BNtoDecimal(number: BigNumber, decimalsBN: BigNumber, maximumPrecision?: number): string {
+export function BNtoDecimal(number: BigNumber | Big, decimalsBN: BigNumber | Big, maximumPrecision?: number): string {
   const numString = number.toString(10)
   const decimals = Number(decimalsBN)
   const maxPrecision = maximumPrecision || 6;

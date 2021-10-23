@@ -15,7 +15,6 @@ import {
   Symbol,
   Input,
   AmountDefault,
-  LineDefault
 } from './styles'
 
 interface IInputDefaultProps {
@@ -25,7 +24,6 @@ interface IInputDefaultProps {
   swapOutAmount: BigNumber
   swapOutBalance: BigNumber
   setSwapOutAddress: React.Dispatch<React.SetStateAction<string>>
-  showMore: boolean
 }
 
 const InputDefault = ({
@@ -35,7 +33,6 @@ const InputDefault = ({
   swapOutAmount,
   swapOutBalance,
   setSwapOutAddress,
-  showMore
 }: IInputDefaultProps) => {
   const tokensList = React.useMemo(() => {
     if (poolTokens.length > 1) {
@@ -49,18 +46,18 @@ const InputDefault = ({
       )
     }
 
-    return <Symbol>{poolTokens.length > 0 ? poolTokens[0].symbol : '...'}</Symbol>
+    return <Symbol>{poolTokens.length > 0 && poolTokens[0] !== undefined ? poolTokens[0].symbol : '...'}</Symbol>
   }, [poolTokens])
 
   return (
-    <InputDefaultContainer showMore={showMore}>
+    <InputDefaultContainer>
       <Info>
         <Span>Swap to (estimative)</Span>
         {tokensList}
         <SpanLight>Balance: {swapOutBalance > new BigNumber(-1) ? BNtoDecimal(swapOutBalance, decimals) : '...'}</SpanLight>
       </Info>
       <AmountDefault>
-        <Span>Amount</Span>
+        <Span total>Total</Span>
         <Input
           readOnly
           type="text"
@@ -81,7 +78,6 @@ const InputDefault = ({
           Max
         </ButtonMax>}
       </AmountDefault>
-      <LineDefault />
     </InputDefaultContainer>
   )
 }
