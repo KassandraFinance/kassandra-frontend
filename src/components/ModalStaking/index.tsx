@@ -83,7 +83,7 @@ const ModalStaking = ({
                 setInputValue={setAmountStaking}
               />
               <S.Line />
-              <h5>Balance: {BNtoDecimal(balance, wei, 6)}</h5>
+              <h5>Balance: {BNtoDecimal(balance, new BigNumber(18), 6)}</h5>
             </S.Amount>
             <S.ButtonContainer>
 
