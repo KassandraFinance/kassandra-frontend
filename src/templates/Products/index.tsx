@@ -5,6 +5,7 @@ import web3 from '../../utils/web3'
 
 import Header from '../../components/Header'
 import ChartProducts from '../../components/ChartProducts'
+import HeimOperations from '../../components/HeimOperations'
 import Web3Disabled from '../../components/Web3Disabled'
 
 import Change from './Change'
@@ -19,50 +20,11 @@ declare let window: {
 }
 
 const Products = () => {
-  const [coinInfoList, setCoinInfoList] = React.useState<Array<any>>([])
   const [chainId, setChainId] = React.useState<string>('')
   const [loading, setLoading] = React.useState<boolean>(true)
 
-  const { poolTokensArray, userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
-  async function getCoinList() {
-    const URL = 'https://api.coingecko.com/api/v3/coins/list'
-    await fetch(URL, {
-      method: 'get'
-    })
-      .then(res => res.json())
-      .then(res => res.forEach((item: any) => isTokenPool(item)))
-      .catch(err => err)
-  }
-
-  function isTokenPool(value: any) {
-    for (let i = 0; i < poolTokensArray.length; i++) {
-      let element = poolTokensArray[i];
-      // let newName = element.name.replace("Kassandra Test ", "")
-
-      if (value.symbol === element.symbol.toLowerCase()) {
-        if (value.symbol === "uni" && value.name !== "Uniswap") {
-          continue
-        }
-        if (value.symbol === "grt" && value.name !== "The Graph") {
-          continue
-        }
-        getCoin(value.id, element.allocation)
-      }
-    }
-  }
-
-  async function getCoin(id: string, allocation: number) {
-    const URL = `https://api.coingecko.com/api/v3/coins/${id}`
-    await fetch(URL, {
-      method: 'get'
-    })
-      .then(res => res.json())
-      .then(res => {
-        setCoinInfoList(prevState => [...prevState, { ...res, allocation }])
-      })
-      .catch(err => err)
-  }
 
   async function getChainId() {
     if (web3.currentProvider === null) {
@@ -72,22 +34,6 @@ const Products = () => {
     const id = await window.ethereum.request({ method: 'eth_chainId' })
     setChainId(id)
   }
-
-  React.useEffect(() => {
-    if (coinInfoList.length) {
-      localStorage.setItem('listCoinPool', JSON.stringify(coinInfoList))
-    }
-  }, [coinInfoList])
-
-
-  React.useEffect(() => {
-    if (poolTokensArray.length < 1) {
-      return
-    }
-
-    getCoinList()
-    setCoinInfoList([])
-  }, [poolTokensArray])
 
   React.useEffect(() => {
     getChainId()
@@ -154,11 +100,10 @@ const Products = () => {
             <ChartProducts />
             <Change />
             <Summary />
-            <Distribution coinInfoList={coinInfoList} />
+            <Distribution />
             <TokenDescription />
           </S.ProductDetails>
-          {/* <HeimOperations /> */}
-          <div style={{ background: '#333', width: '100%' }}></div>
+          <HeimOperations />
         </S.Product>
         :
         <>

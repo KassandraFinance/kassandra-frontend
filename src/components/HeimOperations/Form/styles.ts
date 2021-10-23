@@ -6,8 +6,9 @@ export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 16px;
-  height: 100%;
+
+  padding: 40px;
+  max-height: 100%;
 `
 
 // ========== DEFAULT INPUT ALL ==========
@@ -18,10 +19,13 @@ interface IPayWithProps {
 
 
 export const PayWith = styled.div<IPayWithProps>`
-  text-align: left;
-  position: relative;
-  width: 190px;
-  height: ${props => props.inputHeim ? '100px' : '94px'};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  width: 100%;
+  height: 100%;
 
   @media (max-width: 504px) {
     width: 160px;
@@ -36,11 +40,13 @@ interface IAmountProps {
 }
 
 export const Amount = styled.div<IAmountProps>`
-  text-align: right;
-  position: relative;
-  width: 190px;
-  height: ${props => props.inputHeim ? '100px' : '94px'};
-  padding-right: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  width: 100%;
+  height: 100%;
 
   @media (max-width: 504px) {
     width: 160px;
@@ -54,7 +60,8 @@ export const Input = styled.input`
   background-color: transparent;
   border: none;
   color: #fff;
-  font-size: ${theme.font.sizes.font24};
+  font-size: ${theme.font.sizes.font20};
+  font-weight: ${theme.font.weight.medium};
 
   text-align: right;
   width: 100%;
@@ -98,10 +105,14 @@ export const Line = styled.div`
   }
 `
 
-export const Span = styled.span`
+interface ISpanProps {
+  total?: boolean
+}
+
+export const Span = styled.span<ISpanProps>`
+  color: ${props => props.total ? theme.colors.amber : "#fff" };
   font-size: 14px;
   height: 17px;
-  padding-left: 12px;
   @media(max-width: 380px) {
     font-size: 13px;
   }
@@ -112,11 +123,11 @@ export const Span = styled.span`
 `
 
 export const SpanLight = styled.span`
+  color: ${theme.colors.gray};
   font-size: ${theme.font.sizes.font14};
-  height: 17px;
   font-weight: ${theme.font.weight.light};
   letter-spacing: .3px;
-  padding-left: 12px;
+  height: 17px;
   @media(max-width: 380px) {
     font-size: 13px;
   }
@@ -126,12 +137,16 @@ export const SpanLight = styled.span`
 
 `
 
-export const Symbol = styled.h3`
-  font-size: ${theme.font.sizes.font24};
+interface ISymbolProps {
+  bestValue?: boolean
+}
+
+export const Symbol = styled.h3<ISymbolProps>`
+  font-size: ${props => props.bestValue ? 
+    theme.font.sizes.font16 : theme.font.sizes.font20};
   font-weight: ${theme.font.weight.normal};
 
-  margin: 8px 0;
-  padding-left: 12px;
+  margin: ${props => props.bestValue ? '16px 0 8px' : '8px 0'};
   @media(max-width: 380px) {
     font-size: 22px;
   }
@@ -149,8 +164,8 @@ interface IButtonMax {
 }
 
 export const ButtonMax = styled.button<IButtonMax>`
-  border: 1px solid #26DBDB;
-  border-radius: 16px;
+  border: 1px solid ${theme.colors.gray};
+  border-radius: 3px;
   background: ${props => props.isMax ? '#26DBDB' : 'transparent'};
   color: ${props => props.isMax ? '#000' : '#fff'};
   font-size: 12px;
@@ -158,14 +173,15 @@ export const ButtonMax = styled.button<IButtonMax>`
   font-weight: 300;
   letter-spacing: .7px;
 
-  width: 56px;
+  width: 40px;
   height: 20px;
-  padding: 4px 16px;
+  padding: 4px 8px;
 
   cursor: pointer;
   transition: 100ms;
   &:hover {
     background: #26DBDB;
+    border: 1px solid ${theme.colors.cyan};
     color: #000;
   }
 `
@@ -174,14 +190,17 @@ export const ButtonMax = styled.button<IButtonMax>`
 // ========== INPUT TOKENS ==========
 
 export const InputTokensContainer = styled.div`
+  background: rgba(31, 31, 31, 0.72);
+  border-radius: 16px;
+
   display: grid;
-  grid-template-columns: 1fr 60px 1fr;
+  grid-template-columns: 1fr 1fr;
   justify-content: space-around;
   align-items: flex-start;
 
   width: 100%;
-  height: 94px;
-  margin-top: 8px;
+  height: 104px;
+  padding: 10px 16px;
   @media(max-width: 504px) {
     grid-template-columns: 1fr 60px 1fr;
   }
@@ -191,29 +210,30 @@ export const InputTokensContainer = styled.div`
 `
 
 export const Select = styled.select`
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.15);
   border: none;
+  border-radius: 4px;
   color: #fff;
   display: block;
-  font-size: ${theme.font.sizes.font24};
+  font-size: ${theme.font.sizes.font20};
   text-transform: uppercase;
 
   margin: 5px 0;
   padding-right: 4px;
-  padding-left: 8px;
   outline: none;
+  max-width: 110px;
+  height: 30px;
     option {
     background-color: #030102;
     color: #fff;
     font-family: 'Rubik', sans-serif;
-    font-size: ${theme.font.sizes.font24};
+    font-size: ${theme.font.sizes.font20};
     text-transform: uppercase;
     letter-spacing: .3px;
 
     height: 40px;
   }
 `
-
 
 // ========== INPUT HEIM ON WITHDRAW ==========
 
@@ -265,23 +285,19 @@ export const Info = styled.div`
 
 
 // ========== INPUT DEFAULT ==========
-interface IInputDefaultContainerProps {
-  showMore: boolean;
-}
-export const InputDefaultContainer = styled.div<IInputDefaultContainerProps>`
+
+export const InputDefaultContainer = styled.div`
+  background: rgba(31, 31, 31, 0.72);
+  border-radius: 16px;
+
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 1fr 1fr;
   justify-content: space-between;
+  align-items: flex-start;
 
   width: 100%;
   height: 94px;
-  margin-top: 16px;
-  margin-bottom: 16px;
-  position: relative;
-
-  &:nth-child(n+5){
-    display: ${(props) => props.showMore ? 'none' : 'grid'};
-  }
+  padding: 10px 16px;
   `
 
 

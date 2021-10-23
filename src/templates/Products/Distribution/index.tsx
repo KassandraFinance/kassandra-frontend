@@ -1,36 +1,14 @@
 import React from 'react'
+import { useSelector, RootStateOrAny } from 'react-redux'
 
 import * as S from './styles'
 
-interface ICoinInfoList {
-  symbol: string
-  image: any
-  market_data: any
-  allocation: number
-}
+const Distribution = () => {
+  const { poolTokensArray } = useSelector((state: RootStateOrAny) => state)
 
-interface IIndexDetailsProps {
-  coinInfoList: Array<ICoinInfoList>
-}
-
-const Distribution = ({ coinInfoList }: IIndexDetailsProps) => {
-  const [coins, setCoins] = React.useState<any[]>([])
-
-  coinInfoList.sort((a, b) => {
+  poolTokensArray.sort((a: { allocation: number }, b: { allocation: number }) => {
     return b.allocation - a.allocation;
   });
-
-
-  const res = localStorage.getItem("listCoinPool")
-  const listCoinPool = res && JSON.parse(res)
-
-
-  React.useEffect(() => {
-    if (!coinInfoList.length) {
-      setCoins(listCoinPool)
-    }
-    setCoins(coinInfoList)
-  }, [coinInfoList])
 
   return (
     <S.Distribution>
@@ -50,11 +28,11 @@ const Distribution = ({ coinInfoList }: IIndexDetailsProps) => {
         </thead>
         <tbody>
           {
-            coins.map((coin) => (
-              <S.Tr>
+            poolTokensArray.map((coin: { name: any; image: string | undefined; symbol: string; allocation: any; market_data: { current_price: { usd: number }; price_change_percentage_24h: number } }) => (
+              <S.Tr key={`key_${coin.name}`}>
                 <S.Td change24h={false}>
                   <S.Coin width={110}>
-                    <img src={coin.image.small} alt="" />
+                    <img src={coin.image} alt="" />
                     <span>{coin.symbol.toLocaleUpperCase()}</span>
                   </S.Coin>
                 </S.Td>
