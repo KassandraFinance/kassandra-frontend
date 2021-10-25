@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 import { AppProps } from 'next/app'
 import { MatomoProvider, createInstance } from '@datapunt/matomo-tracker-react'
 import Head from 'next/head'
@@ -10,7 +9,6 @@ import theme from '../styles/theme'
 
 import { storeWrapper } from '../store'
 
-import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Toastify from '../components/Toastify'
 
@@ -41,11 +39,8 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
         />
       </Head>
       <Toastify />
-      <BackgroundLinear>
-        <Header />
         <GlobalStyles />
         <Component {...pageProps} />
-      </BackgroundLinear>
       <Footer />
     </ThemeProvider>
   </MatomoProvider>
@@ -53,6 +48,3 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
 
 export default storeWrapper.withRedux(MyApp)
 
-export const BackgroundLinear = styled.div`
-  background: linear-gradient(90deg, #200a1b 0%, #000000 50%);
-`

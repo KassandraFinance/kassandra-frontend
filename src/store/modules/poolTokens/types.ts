@@ -10,5 +10,7 @@ export interface TokenDetails {
   name: string;
   symbol: string;
   decimals: BigNumber;
-  allocation: Number;
+  allocation: number;
+  image?: string;
+  market_data?: any;
 }

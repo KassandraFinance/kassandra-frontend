@@ -2,7 +2,9 @@ import styled, { css, DefaultTheme } from 'styled-components'
 
 import { ButtonProps } from './index'
 
-export type WrapperProps = Pick<
+export type WrapperProps = {
+  hasIcon: boolean
+} & Pick<
   ButtonProps,
   | 'size'
   | 'fullWidth'
@@ -18,7 +20,7 @@ const wrapperModifiers = {
     font-size: ${theme.font.sizes.font14};
   `,
   medium: (theme: DefaultTheme) => css`
-    height: 4rem;
+    height: 4.8rem;
     font-size: ${theme.font.sizes.font16};
     padding: ${theme.spacings.space16} ${theme.spacings.space32};
 
@@ -39,6 +41,16 @@ const wrapperModifiers = {
   `,
   fullWidth: () => css`
     width: 100%;
+  `,
+  withIcon: (theme: DefaultTheme) => css`
+    svg {
+      width: 1.4rem;
+      margin-right: ${theme.spacings.space8};
+
+      & + span {
+        margin-left: ${theme.spacings.space16};
+      }
+    }
   `,
 
   disabledNoEvent: (theme: DefaultTheme) => css`
@@ -73,13 +85,19 @@ const wrapperModifiers = {
 
   backgroundSecondary: (theme: DefaultTheme) => css`
 
-    background: ${`linear-gradient(87.48deg, ${theme.colors.amber} -70.27%,  ${theme.colors.magenta} 154.78%)`};
+    /* background: ${`linear-gradient(87.48deg, ${theme.colors.amber} -70.27%,  ${theme.colors.magenta} 154.78%)`}; */
+    background: ${`linear-gradient(92.08deg, ${theme.colors.magenta} 0%, ${theme.colors.darkBlue} 100%)`};
+    color: ${theme.colors.snow};
 
     &:after {
-      background: ${`linear-gradient(87.48deg, ${theme.colors.amber} -70.27%,  ${theme.colors.magenta} 154.78%)`};
+      
+      background: ${`linear-gradient(87.48deg, ${theme.colors.magenta} -70.27%,  ${theme.colors.darkBlue} 154.78%)`};
+      /* background: ${`linear-gradient(92.08deg, ${theme.colors.magenta} 0%, ${theme.colors.darkBlue} 100%)`}; */
     }
     &:before {
-      background-color: ${theme.colors.amber};
+      /* background-color: ${theme.colors.darkBlue}; */
+      /* background: ${`linear-gradient(87.48deg, ${theme.colors.darkBlue} -70.27%,  ${theme.colors.magenta} 154.78%)`}; */
+
     }
     &:hover {
       &:before {
@@ -112,6 +130,7 @@ export const Wrapper = styled.button<WrapperProps>`
   theme,
   size,
   fullWidth,
+  hasIcon,
   disabledNoEvent,
   backgroundPrimary,
   backgroundSecondary,
@@ -164,6 +183,7 @@ export const Wrapper = styled.button<WrapperProps>`
 
     ${!!size && wrapperModifiers[size](theme)};
     ${!!fullWidth && wrapperModifiers.fullWidth()};
+    ${!!hasIcon && wrapperModifiers.withIcon(theme)};
     ${!!backgroundPrimary && wrapperModifiers.backgroundPrimary(theme)};
     ${!!backgroundSecondary && wrapperModifiers.backgroundSecondary(theme)};
     ${!!backgroundBlack && wrapperModifiers.backgroundBlack(theme)};

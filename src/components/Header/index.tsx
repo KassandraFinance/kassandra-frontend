@@ -6,6 +6,7 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { useRouter } from 'next/router'
 
 import { Menu2 as MenuIcon } from '@styled-icons/remix-fill/Menu2'
+import { Wallet3 as WalletIcon } from '@styled-icons/remix-fill/Wallet3'
 import { Close as CloseIcon } from '@styled-icons/material-outlined/Close'
 
 import { actionGetUserAddressWallet } from '../../store/modules/userWalletAddress/actions'
@@ -87,7 +88,7 @@ const Header = () => {
           {asPath === '/heim' ? (
             <img src="./assets/HeimLogoMenu.svg" alt="Logo menu" />
           ) : (
-            <img src="./assets/logo-header.svg" alt="Logo menu" />
+            <img src="./assets/new-kassandra-logo-header.svg" alt="Logo menu" />
           )}
         </Link>
       </S.LogoWrapper>
@@ -123,14 +124,16 @@ const Header = () => {
           {web3.currentProvider !== null ? (
             userWalletAddress ? (
               <Button
+                icon={<WalletIcon />}
                 backgroundBlack
-                size="large"
+                size="medium"
                 text={substr(userWalletAddress)} />
             ) : (
               <Button
+                icon={<WalletIcon />}
                 as='button'
                 backgroundBlack
-                size="large"
+                size="medium"
                 onClick={() => setIsModaWallet(true)}
                 text='Connect Wallet' />
 
@@ -139,7 +142,7 @@ const Header = () => {
             <Button
               as='a'
               backgroundBlack
-              size="large"
+              size="medium"
               href="https://metamask.io/download.html"
               target="_blank"
               text='Install MetaMask!' />

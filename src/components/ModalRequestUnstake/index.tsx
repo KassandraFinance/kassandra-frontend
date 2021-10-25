@@ -54,9 +54,9 @@ const ModalRequestUnstake = ({
           <span>{dateRequestUnstake(withdrawDelay)}</span>
           <p>During the withdrawal delay period your voting power will be reduced from:</p>
           <span>
-            {BNtoDecimal(new BigNumber(votingMultiplier).mul(yourStake), wei)}
+            {BNtoDecimal(new BigNumber(votingMultiplier).mul(yourStake), new BigNumber(18))}
               {' '} to {' '}
-            {BNtoDecimal(new BigNumber(yourStake), wei)}
+            {BNtoDecimal(new BigNumber(yourStake), new BigNumber(18))}
           </span>
           <p>Do you want to proceed?</p>
           <ButtonContainer>

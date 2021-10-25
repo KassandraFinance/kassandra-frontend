@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
-
+import * as ButtonStyles from '../Button/styles'
 
 interface IWrapperProps {
   pageHeim: boolean;
@@ -9,37 +9,67 @@ interface IWrapperProps {
 
 // eslint-disable-next-line prettier/prettier
 export const Wrapper = styled.menu<IWrapperProps>`
-  max-width: 1520px;
+  max-width: 1140px;
   margin: 0 auto;
   ${({ theme }) => css`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: ${theme.spacings.space24};
-    padding: ${theme.spacings.space32};
+    /* padding: ${theme.spacings.space24}; */
+    /* padding: ${theme.spacings.space32}; */
     position: relative;
     height: 110px;
     z-index: ${theme.layers.menu};
 
-    ${media.lessThan('medium')`
+    ${ButtonStyles.Wrapper} {
+      font-size: ${theme.font.sizes.font14};
+      font-weight: ${theme.font.weight.light};
+      padding: 12.5px;
+      border-radius: 9px;
+      border: ${`0.1rem solid ${theme.colors.snow}`};
+      color: ${theme.colors.snow};
+      background-color: transparent;
+      &:after {
+      background-color: transparent;
+    }
+    &:before {
+      background-color: ${theme.colors.snow};
+    }
+    &:hover {
+      color: ${theme.colors.darkPurple};
+      /* background-color: ${theme.colors.cyan}; */
+    }
+
+    }
+
+    @media(max-width: 960px ) {
+    display: flex;
+    justify-content: flex-end;
     padding: 1.5rem;
+    margin-inline: 30px;
     margin-bottom: 3rem;
-    `}
+    }
+    @media(max-width: 400px ) {
+      margin-inline: 15px;
+    }
   `}
 `
 
 export const LogoWrapper = styled.div`
   cursor: pointer;
 
-  @media(max-width: 1190px) {
+  @media(max-width: 960px) {
+    display: flex;
+    left: 0;
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    /* left: 50%; */
+    /* transform: translateX(-50%); */
     img {
       position:relative;
       max-width: 100%;
     }
   }
+
 `
 
 export const IconWrapper = styled.div`
@@ -66,9 +96,9 @@ export const MenuGroup = styled.div`
 
 export const MenuNav = styled.div`
   ${({ theme }) => css`
-    ${media.greaterThan('medium')`
+    @media(max-width: 960px) {
 			margin-left: ${theme.spacings.space24};
-		`}
+		}
   `}
 `
 
@@ -76,7 +106,8 @@ export const MenuLink = styled.a`
   ${({ theme }) => css`
     position: relative;
     color: ${theme.colors.snow};
-    font-size: ${theme.font.sizes.font18};
+    font-size: ${theme.font.sizes.font14};
+    font-weight: ${theme.font.weight.light};
     margin: 0.3rem ${theme.spacings.space24} 0;
     text-decoration: none;
     text-align: center;
@@ -108,7 +139,8 @@ export const MenuLinkDisable = styled.a`
   ${({ theme }) => css`
     position: relative;
     color: ${theme.colors.lightGray};
-    font-size: ${theme.font.sizes.font16};
+    font-size: ${theme.font.sizes.font14};
+    font-weight: ${theme.font.weight.light};
     margin: 0.3rem ${theme.spacings.space24} 0;
     text-decoration: none;
     text-align: center;
@@ -179,7 +211,7 @@ export const MenuFull = styled.nav <MenuFullProps >`
 
     ${MenuLink} {
       color: ${theme.colors.snow};
-      font-weight: ${theme.font.weight.normal};
+      font-weight: ${theme.font.weight.light};
       font-size: ${theme.font.sizes.font18};
       margin-bottom: ${theme.spacings.space24};
       transform: ${isOpen ? 'translateY(0)' : 'translateY(3rem)'};
@@ -187,7 +219,7 @@ export const MenuFull = styled.nav <MenuFullProps >`
     }
     ${MenuLinkDisable} {
       color: ${theme.colors.lightGray};
-      font-weight: ${theme.font.weight.normal};
+      font-weight: ${theme.font.weight.light};
       font-size: ${theme.font.sizes.font18};
       margin-bottom: ${theme.spacings.space24};
       transform: ${isOpen ? 'translateY(0)' : 'translateY(3rem)'};
@@ -195,52 +227,14 @@ export const MenuFull = styled.nav <MenuFullProps >`
     }
   `}
 `
-export const LinkInstallMetaMask = styled.a`
-  ${({ theme }) => css`
-    background-color: transparent;
-    border: 1px solid ${theme.colors.cyan};
-    border-radius: 8px;
-    color: ${theme.colors.cyan} !important;
-    font-size: ${theme.font.sizes.font16};
-    text-transform: none;
-    text-align: center;
 
-    width: 186px;
-    height: 48px;
-    padding: 12px 0;
-    cursor: pointer;
-    &:hover {
-      background-color: ${theme.colors.cyan};
-      color: ${theme.colors.darkPurple}
- !important;
-    }
-  `}
-`
-export const ButtonConnectWallet = styled.button`
-  ${({ theme }) => css`
-    background-color: transparent;
-    border: 1px solid ${theme.colors.cyan};
-    border-radius: 8px;
-    color: ${theme.colors.cyan};
-    font-size: ${theme.font.sizes.font16};
-    width: 186px;
-    height: 48px;
-
-    cursor: pointer;
-    &:hover {
-      background-color: ${theme.colors.cyan};
-      color: ${theme.colors.darkPurple}
-;
-    }
-  `}
-`
 export const MenuIconContainer = styled.div`
-  @media(min-width: 1190px) {
+  @media(min-width: 960px) {
     display: none;
   }
 `
 export const MenuDesktop = styled.div`
-  @media(max-width: 1190px) {
+  @media(max-width: 960px) {
     display: none;
   }
 `

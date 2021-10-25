@@ -13,6 +13,7 @@ export type ButtonProps = {
   backgroundSecondary?: boolean
   backgroundBlack?: boolean
   disabledNoEvent?: boolean
+  icon?: JSX.Element
   as?: React.ElementType
   text?: string
 } & ButtonTypes
@@ -20,6 +21,7 @@ export type ButtonProps = {
 const Button: React.ForwardRefRenderFunction<S.WrapperProps, ButtonProps> = (
   {
     children,
+    icon,
     size = 'medium',
     fullWidth = false,
     backgroundPrimary = false,
@@ -34,6 +36,7 @@ const Button: React.ForwardRefRenderFunction<S.WrapperProps, ButtonProps> = (
   <S.Wrapper
     size={size}
     fullWidth={fullWidth}
+    hasIcon={!!icon}
     backgroundPrimary={backgroundPrimary}
     backgroundSecondary={backgroundSecondary}
     backgroundBlack={backgroundBlack}
@@ -41,6 +44,7 @@ const Button: React.ForwardRefRenderFunction<S.WrapperProps, ButtonProps> = (
     disabled={disabledNoEvent}
     {...props}
   >
+    {icon}
     {text}
   </S.Wrapper>
 )
