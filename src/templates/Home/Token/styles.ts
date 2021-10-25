@@ -6,7 +6,7 @@ import * as ButtonStyles from '../../../components/Button/styles'
 
 export const Container = styled.div`
   max-width: 100%;
-  background: url('assets/backgroundTokensPage.png');
+  /* background: url('assets/backgroundTokensPage.png'); */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center top;
@@ -200,6 +200,7 @@ export const CardFooter = styled.div`
       height: 4.4rem;
       @media(max-width: 960px) {
         margin-bottom: 16px;
+        width: 100%;
       }
     }
   a{
