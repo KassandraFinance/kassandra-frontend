@@ -1,6 +1,19 @@
 import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
+
+export const Container = styled.div`
+  background-image: url('assets/backgroundProduct.svg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 365px 0;
+  margin: -200px 0;
+  @media (max-width: 600px) {
+    padding: 0 0 180px;
+    margin: -100px 0;
+  }
+`
 export const Products = styled.section`
 margin-top: -50vh;
 display: grid;
@@ -16,7 +29,7 @@ padding: 0 ${theme.spacings.space32};
   grid-template-columns: 1fr;
 }
 
-@media (max-width: 375px) and (max-height: 800px) {
+/* @media (max-width: 375px) and (max-height: 800px) {
   padding-top: 100px;
 }
 @media (max-width: 370px) {
@@ -24,7 +37,7 @@ padding: 0 ${theme.spacings.space32};
 }
 @media (max-width: 330px) {
   padding: 180px 20px 0;
-}
+} */
 `
 export const TextWrapper = styled.div`
 h1 {
