@@ -5,14 +5,21 @@ import * as ButtonStyles from '../../../components/Button/styles'
 
 export const Hero = styled.section`
 
-    height: 170vh;
-    margin-bottom: -20vh;
+    min-height: 170vh;
+    margin-bottom: -600px;
     background: url('assets/home-hero-background.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center top;
+    @media(max-height: 600px) {
+      margin-bottom: 0px ;
+    }
     @media(max-width: 960px) {
       margin-bottom: -50vh;
+    }
+    @media(max-width: 600px) {
+      height: 130vh;
+      margin-bottom: 0vh;
     }
 `
 export const IntroHero = styled.div`
@@ -115,7 +122,6 @@ export const ButtonWrapper = styled.div`
       font-size: ${theme.font.sizes.font18};
       font-weight: ${theme.font.weight.medium};
       height: 4.4rem;
-
     }
 `
 
