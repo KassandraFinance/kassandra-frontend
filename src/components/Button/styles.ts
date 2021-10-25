@@ -79,7 +79,7 @@ const wrapperModifiers = {
       background:${`linear-gradient(93.84deg, #E843C4 0.12%, #0C3DDC 100%)`};
     }
     &:before {
-      background-color: ${theme.colors.darkBlue};
+      background:${`linear-gradient(93.84deg, #0C3DDC 0.12%, #E843C4 100%)`};
     }
   `,
 
