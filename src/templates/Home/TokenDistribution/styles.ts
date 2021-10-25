@@ -6,15 +6,17 @@ import * as ButtonStyles from '../../../components/Button/styles'
 
 export const Container = styled.div`
   max-width: 100%;
-  background: url('assets/backgroundTokensPage.png');
+  background: url('assets/backgroundTokenDistribution1.svg');
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center top;
+  background-position: 50%;
+  padding: 380px 0 0;
+  margin: -380px auto 0;
 `
 export const Intro = styled.section`
   max-width: 950px;
-  margin: 0 auto;
-  padding: 80px 32px;
+  margin: 0 auto ;
+  /* padding: 80px 32px; */
   text-align: center;
   justify-content: center;
   @media(max-width: 960px) {
