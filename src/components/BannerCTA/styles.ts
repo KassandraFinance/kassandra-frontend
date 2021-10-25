@@ -3,6 +3,14 @@ import theme from "../../styles/theme";
 
 import * as ButtonStyles from '../Button/styles'
 
+export const Background = styled.div`
+  background-image: url('assets/backgroundBanner.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  padding: 380px 0;
+  margin: -380px 0
+`
 export const Container = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -34,7 +42,6 @@ export const ImageWrapper = styled.div`
     }
   }
 `
-
 export const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
