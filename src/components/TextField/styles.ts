@@ -62,13 +62,12 @@ export const Label = styled.label`
 `
 
 export const Icon =
-  styled.div <
-    IconPositionProps >
-    `
-  ${({ theme, iconPosition }) => css`
+  styled.button <IconPositionProps>`${({ theme, iconPosition }) => css`
     display: flex;
-    color: ${theme.colors.gray};
+    color: black;
     order: ${iconPosition === 'right' ? 1 : 0};
+    background-color: transparent;
+    border-color: transparent;
 
     & > svg {
       width: 2.2rem;
