@@ -52,7 +52,7 @@ const InputTokenValue = ({
             e.target.value = value.replace(/^0+/, '')
           }
 
-          const decimalsNum = decimals.toNumber() - 1
+          const decimalsNum = decimals.toNumber()
           const values = value.split('.')
           const paddedRight = `${values[0]}${
             `${values[1] || 0}${'0'.repeat(decimalsNum)}`.slice(0, decimalsNum)

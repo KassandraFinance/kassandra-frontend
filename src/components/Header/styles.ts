@@ -15,8 +15,8 @@ export const Wrapper = styled.menu<IWrapperProps>`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: ${theme.spacings.space24};
-    padding: ${theme.spacings.space32};
+    /* padding: ${theme.spacings.space24}; */
+    /* padding: ${theme.spacings.space32}; */
     position: relative;
     height: 110px;
     z-index: ${theme.layers.menu};

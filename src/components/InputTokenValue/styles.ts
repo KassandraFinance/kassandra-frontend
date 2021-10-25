@@ -5,7 +5,7 @@ export const Input = styled.input`
   background-color: transparent;
   border: none;
   color: #fff;
-  font-size: ${theme.font.sizes.font24};
+  font-size: ${theme.font.sizes.font20};
 
   text-align: right;
   width: 100%;

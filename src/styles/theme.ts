@@ -10,7 +10,8 @@ export default {
       normal: 400,
       medium: 500,
       semibold: 600,
-      black: 900,
+      bold: 700,
+      black: 900
     },
     sizes: {
       font12: '1.2rem',

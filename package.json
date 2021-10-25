@@ -15,6 +15,7 @@
     "@types/node": "^15.0.2",
     "@types/react": "^17.0.5",
     "@types/styled-components": "^5.1.11",
+    "big.js": "^6.1.1",
     "bn.js": "^5.2.0",
     "next": "^11.0.1",
     "next-redux-wrapper": "^7.0.2",
@@ -23,6 +24,7 @@
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
     "react-toastify": "^7.0.4",
+    "recharts": "^2.1.4",
     "redux": "^4.1.0",
     "styled-components": "^5.3.0",
     "styled-media-query": "^2.1.2",
@@ -32,6 +34,7 @@
     "web3-utils": "^1.5.0"
   },
   "devDependencies": {
+    "@types/big.js": "^6.1.2",
     "@types/react-copy-to-clipboard": "^5.0.1",
     "@typescript-eslint/parser": "^4.23.0",
     "babel-plugin-styled-components": "^1.13.2",

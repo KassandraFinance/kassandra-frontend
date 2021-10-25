@@ -1,8 +1,6 @@
 import React from 'react'
 import BigNumber from 'bn.js'
 
-import web3 from '../../../utils/web3'
-
 import { BNtoDecimal, wei } from '../../../utils/numerals'
 
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
@@ -11,11 +9,9 @@ import InputTokenValue from '../../InputTokenValue'
 import { 
   InputTokensContainer, 
   PayWith, 
-  Line, 
   Span,
   SpanLight,
   Symbol,
-  ImgArrowLong,
   Amount,
   ButtonMax,
   Select
@@ -59,13 +55,15 @@ const InputTokens = ({
         >
           {poolTokens.map(
             (token: TokenDetails) =>
-              <option key={token.address} value={token.address} title={token.name}>{token.symbol}</option>
+              <option key={token.address} value={token.address} title={token.name}>
+                {token.symbol}
+              </option>
           )}
         </Select>
       )
     }
 
-    return <Symbol>{poolTokens.length > 0 ? poolTokens[0].symbol : '...'}</Symbol>
+    return <Symbol>{poolTokens.length > 0 && poolTokens[0] !== undefined ? poolTokens[0].symbol : '...'}</Symbol>
   }, [poolTokens])
 
   const wei2String = (input: BigNumber) => {
@@ -105,11 +103,9 @@ const InputTokens = ({
         <Span>{actionString}</Span>
         {tokensList}
         <SpanLight>Balance: {swapInBalance > new BigNumber(-1) ? BNtoDecimal(swapInBalance, decimals) : '...'}</SpanLight>
-        <Line />
       </PayWith>
-      <ImgArrowLong src="assets/arrow-long-down.svg" alt="" width={12} height={41} />
       <Amount>
-        <Span>Amount</Span>
+        <Span total>Total</Span>
         <InputTokenValue
           inputRef={inputRef}
           max={wei2String(swapInBalance)}
@@ -117,7 +113,6 @@ const InputTokens = ({
           setInputValue={setSwapInAmount}
         />
         <ButtonMax type="button" onClick={setMax}>Max</ButtonMax>
-        <Line />
       </Amount>
     </InputTokensContainer>
   )
