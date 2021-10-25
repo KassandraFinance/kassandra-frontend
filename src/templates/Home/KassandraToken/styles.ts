@@ -6,16 +6,24 @@ import * as ButtonStyles from '../../../components/Button/styles'
 
 export const Container = styled.div`
   max-width: 100%;
-  background: url('assets/backgroundTokensPage.png');
+  background: url('assets/backgroundKassandraToken.svg');
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center top;
+  background-position: center;
+  padding: 335px 0 0;
+  margin: -200px 0 0;
 `
 export const KassandraToken = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
   max-width: 1000px;
   margin: 150px auto;
+  /* background: url('assets/backgroundKassandraToken.svg'); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center -100px;
+
+
   @media(max-width: 960px) {
     display: flex;
     flex-direction: column;

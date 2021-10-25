@@ -5,7 +5,7 @@ import * as S from './styles'
 
 const KassandraToken = () => {
   return (
-    <>
+    <S.Container>
       <S.KassandraToken>
         <S.KassandraInfo>
           <p>KASSANDRA TOKEN</p>
@@ -48,7 +48,7 @@ const KassandraToken = () => {
             </S.ImageWrapper>
           </S.KasasndraCardHeader>
           <S.TextWrapper>
-            <h1>KASSANDRA</h1>
+            <h1>Kassandra</h1>
             <p>BY KASSANDRA.FINANCE</p>
           </S.TextWrapper>
           <S.TokenInfo>
@@ -113,7 +113,7 @@ const KassandraToken = () => {
         </S.MobileCards>
 
       </S.Responsabilities>
-    </>
+    </S.Container>
   )
 }
 
