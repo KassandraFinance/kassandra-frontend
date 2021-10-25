@@ -47,3 +47,9 @@ export const Supporters = styled.section`
     }
   `}
 `
+export const Background = styled.div`
+  background: url('assets/backgroundClassProduct.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+`

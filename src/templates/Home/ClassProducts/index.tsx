@@ -5,25 +5,27 @@ import * as S from './styles'
 const ClassProducts = () => {
   return (
     <S.ClassProducts>
-      <h1>A new class of investment products in DeFi</h1>
-      <p>Monetary efficient and actively managed decentralized investment baskets</p>
-      <ul>
-        <li>
-          <img src="assets/Icon/permissionless.svg" alt="" />
-          <h3>Permissionless</h3>
-          <p>Invest, transfer and redeem investment products without relying on third-parties</p>
-        </li>
-        <li>
-          <img src="assets/Icon/non-custodial.svg" alt="" />
-          <h3>Non-custodial</h3>
-          <p>Your funds managed by public, secure, and predictable smart-contracts</p>
-        </li>
-        <li>
-          <img src="assets/Icon/actively-managed.svg" alt="" />
-          <h3>Actively managed</h3>
-          <p>Outsource the management of your money to data-driven quantitative models</p>
-        </li>
-      </ul>
+      <p>DYNAMICALLY REBALANCED</p>
+      <S.Divider />
+      <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h1>
+      <span>Iaculis at elementum aliquam ut tincidunt turpis congue orci. Blandit ut vulputate ut massa diam risus. Elit morbi velit, morbi id risus, tellus nisi. Arcu, consectetur tristique velit dolor. </span>
+      <S.Image>
+        <img src="assets/classProductImage.png" alt="" />
+      </S.Image>
+      <S.ImageDescription>
+        <S.DescriptionContainer>
+          <p>SMART DATA BASE</p>
+          <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+        </S.DescriptionContainer>
+        <S.DescriptionContainer>
+          <p>MANAGED BY KASSANDRA</p>
+          <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+        </S.DescriptionContainer>
+        <S.DescriptionContainer>
+          <p>PORTFOLIO</p>
+          <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+        </S.DescriptionContainer>
+      </S.ImageDescription>
     </S.ClassProducts>
   )
 }

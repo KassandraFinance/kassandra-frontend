@@ -30,15 +30,16 @@ export const Wrapper = styled.menu<IWrapperProps>`
       color: ${theme.colors.snow};
       background-color: transparent;
       &:after {
-      background-color: transparent;
-    }
-    &:before {
-      background-color: ${theme.colors.snow};
-    }
-    &:hover {
-      color: ${theme.colors.darkPurple};
-      /* background-color: ${theme.colors.cyan}; */
-    }
+        background-color: transparent;
+      }
+      &:before {
+        background-color: transparent;
+      }
+      &:hover {
+        color: ${theme.colors.cyan};
+        border: ${`0.1rem solid ${theme.colors.cyan}`};
+        background-color: transparent;
+      }
 
     }
 
@@ -67,6 +68,7 @@ export const LogoWrapper = styled.div`
     img {
       position:relative;
       max-width: 100%;
+
     }
   }
 

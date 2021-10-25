@@ -2,20 +2,19 @@ import styled from 'styled-components';
 import theme from '../../styles/theme'
 
 export const Footer = styled.footer`
-background-color: #2F2333;
   color: #fcfcfc;
   padding: 40px 0;
   position: relative;
   width: 100%;
+
 `
 export const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
-
+  align-content: space-between;
   margin: 0 auto;
   padding: 0 32px;
+
   @media (min-width: 1600px) {
-    max-width: 1580px;
+    max-width: 1140px;
   }
   @media (min-width: 1440px) {
     padding: 0 80px;
@@ -34,51 +33,120 @@ export const Container = styled.div`
     }
   }
   `
-export const GridLeft = styled.div`
-  @media (max-width: 710px) {
+
+export const UpperContainer = styled.div`
+  padding: 80px 100px ;
+  max-width: 690px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+
+  @media(max-width: 710px) {
+    width: 100%;
+    padding: 40px 50px;
+  }
+  @media(max-width: 400px) {
+    width: 100%;
+    padding:0;
+  }
+
+  li {
+    @media(max-width: 710px) {
+      text-align: top;
+    }
+  margin: 15px 0;
+  }
+    h4 {
+  margin-bottom: 8px;
+  font-size: 20px;
+  font-weight: 500;
+    @media(max-width: 710px) {
+      font-size: ${theme.font.sizes.font16};
+    }
+  }
+  a {
+  color: #fcfcfc;
+  font-size: 16px;
+  font-weight: 300;
+  text-decoration: none;
+    @media(max-width: 710px) {
+      font-size: ${theme.font.sizes.font12};
+    }
+  }
+`
+export const LowerContainerMobile = styled.div`
+  padding: 70px 100px ;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  @media (min-width: 760px) {
+      display: none;
+  }
+  @media (max-width: 760px) {
+    flex-direction: column;
+    align-items: center;
     margin-top: 30px;
+    padding: 35px 50px ;
     width: 100%;
     text-align: center;
     & > img {
       display: none;
     }
   }
+  @media (max-width: 400px) {
+    padding: 0;
+  }
   span{
     font-size: 1.6rem;
     font-weight: 300;
   }
   ul {
-    display: flex;
-    margin: 24px 0;
-    li {
-      flex: 1 0 38px;
-    }
+  display: flex;
+  @media (max-width: 760px) {
+    margin-bottom: 16px;
+    justify-content: center;
   }
+  @media (max-width: 400px) {
+    padding: 10px;
+    justify-content: center;
+    margin: auto;
+  }
+  li {
+    flex: 1 0 48px;
+  }
+}
 `
-export const GridRight = styled.div`
-@media(max-width: 710px) {
-  width: 100%;
-}
-display: grid;
-grid-template-columns: 1fr 1fr 1fr;
-gap: 16px;
-    li {
-  @media(max-width: 710px) {
-    text-align: center;
+export const LowerContainer = styled.div`
+  padding: 70px 100px ;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  @media (max-width: 760px) {
+    display: none;
   }
-  margin: 8px 0;
+  span{
+    font-size: 1.6rem;
+    font-weight: 300;
+  }
+  ul {
+  display: flex;
+  li {
+    flex: 1 0 48px;
+  }
 }
-    h4 {
-  margin-bottom: 8px;
-  font-size: 1.8rem;
-  font-weight: 500;
-}
-    a {
-  color: #fcfcfc;
-  font-size: 16px;
-  font-weight: 300;
-  text-decoration: none;
-  padding: 4px 0;
-    }
+`
+export const LowerLeft = styled.div`
+  display: flex;
+  flex-direction: column;
+  img{
+    width: 100%;
+    margin-bottom: 28px;
+  }
 `
 
+export const Divider = styled.div`
+  background-color: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+`

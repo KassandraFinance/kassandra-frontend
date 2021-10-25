@@ -72,14 +72,14 @@ const wrapperModifiers = {
   `,
 
   backgroundPrimary: (theme: DefaultTheme) => css`
-    background: ${`linear-gradient(264.12deg, ${theme.colors.magenta} -140.16%, ${theme.colors.darkBlue} 205.21%)`};
+    background: ${`linear-gradient(93.84deg, #E843C4 0.12%, #0C3DDC 100%)`};
     color: ${theme.colors.snow};
 
     &:after {
-      background:${`linear-gradient(264.12deg, ${theme.colors.magenta} -179.71%, ${theme.colors.darkBlue} 205.21%)`};
+      background:${`linear-gradient(93.84deg, #E843C4 0.12%, #0C3DDC 100%)`};
     }
     &:before {
-      background-color: ${theme.colors.darkBlue};
+      background:${`linear-gradient(93.84deg, #0C3DDC 0.12%, #E843C4 100%)`};
     }
   `,
 

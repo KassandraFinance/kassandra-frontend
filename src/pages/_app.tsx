@@ -47,4 +47,3 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
 )
 
 export default storeWrapper.withRedux(MyApp)
-
