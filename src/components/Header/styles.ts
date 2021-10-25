@@ -33,11 +33,12 @@ export const Wrapper = styled.menu<IWrapperProps>`
         background-color: transparent;
       }
       &:before {
-        background-color: ${theme.colors.snow};
+        background-color: transparent;
       }
       &:hover {
-        color: ${theme.colors.darkPurple};
-        /* background-color: ${theme.colors.cyan}; */
+        color: ${theme.colors.cyan};
+        border: ${`0.1rem solid ${theme.colors.cyan}`};
+        background-color: transparent;
       }
 
     }
