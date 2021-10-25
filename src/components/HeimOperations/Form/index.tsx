@@ -71,6 +71,7 @@ const Form = ({
   const [swapOutBalance, setSwapOutBalance] = React.useState([new BigNumber(-1)])
 
   const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
+  const [priceInDollarOnWithdraw, setPriceInDollarOnWithdraw] = React.useState<string>('')
 
   const res = localStorage.getItem("listCoinPool")
   const listCoinPool = res && JSON.parse(res)
@@ -671,9 +672,10 @@ const Form = ({
               poolTokensArray={poolTokensArray}
             swapOutAmount={swapOutAmount}
             swapOutBalance={swapOutBalance}
+            setPriceInDollarOnWithdraw={setPriceInDollarOnWithdraw}
           />
           :
-          <div>
+          <>
             <InputDefault
               decimals={poolTokenDetails[tokenAddress2Index[swapOutAddress]]?.decimals}
               poolTokens={poolTokenDetails
@@ -695,7 +697,7 @@ const Form = ({
                   )} ${poolTokenDetails[tokenOutIndex]?.symbol}`}
               </S.SpanLight>
             </S.ExchangeRate>
-          </div>
+          </>
         ) : (
         <>
           <InputDefault
@@ -732,6 +734,12 @@ const Form = ({
           text={
             isApproved[tokenInIndex] ?
             swapInAmount.toString() !== '0' ?
+              title === "Withdraw" ?
+              typeWithdrawChecked === "Best_value" ?
+                `${title} ${'$' + priceInDollarOnWithdraw}` 
+                :
+                `${title} ${'$' + BNtoDecimal(Big((swapOutAmount || 0).toString()).mul(Big(priceDollar(swapOutAddress, poolTokensArray))).div(Big(10).pow(18)), Big(0))}` 
+              :
               `${title} ${'$' + BNtoDecimal(Big((swapInAmount || 0).toString()).mul(Big(priceDollar(swapInAddress, poolTokensArray))).div(Big(10).pow(18)), Big(0))}` 
               :
               `${title}`
