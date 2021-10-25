@@ -11,6 +11,8 @@ import TokenDistribution from './TokenDistribution'
 import SubscribeBanner from '../../components/SubscribeBanner'
 import BannerCTA from '../../components/BannerCTA'
 
+import * as S from './styles'
+
 const Home = () => {
   const { trackPageView } = useMatomo()
 
@@ -23,8 +25,10 @@ const Home = () => {
     <>
       <Hero />
       <Products />
-      <ClassProducts />
-      <Token />
+      <S.Background>
+        <ClassProducts />
+        <Token />
+      </S.Background>
       <KassandraToken />
       <KassandraArchitecture />
       <TokenDistribution />
