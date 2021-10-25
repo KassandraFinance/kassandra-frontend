@@ -3,16 +3,18 @@ import theme from '../../../styles/theme'
 
 export const Container = styled.div`
   max-width: 100%;
-  background: url('assets/backgroundTokensPage.png');
+  max-height:200vh;
+  background-image: url('assets/backgroundProduct.svg');
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center top;
+  background-position: top;
+  padding: 150px 0 0px;
 `
 
 export const Token = styled.section`
-
-  padding: 80px 32px;
+  padding: 0 32px;
   text-align: center;
+  /* margin: -80px 0 0; */
 
   span{
     display: flex;
@@ -52,8 +54,6 @@ export const Divider = styled.div`
 export const KassandraCardWrapper = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  /* gap:3.2rem; */
   margin: 0 auto;
   margin-top: 75px;
   max-width: 890px;
