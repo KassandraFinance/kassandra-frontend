@@ -12,7 +12,9 @@
     "@metamask/detect-provider": "^1.2.0",
     "@styled-icons/material-outlined": "^10.34.0",
     "@styled-icons/remix-fill": "^10.18.0",
+    "@types/big.js": "^6.1.2",
     "@types/node": "^15.0.2",
+    "@types/react-copy-to-clipboard": "^5.0.1",
     "@types/react": "^17.0.5",
     "@types/styled-components": "^5.1.11",
     "big.js": "^6.1.1",
@@ -24,7 +26,7 @@
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
     "react-toastify": "^7.0.4",
-    "recharts": "^2.1.4",
+    "recharts": "^2.1.6",
     "redux": "^4.1.0",
     "styled-components": "^5.3.0",
     "styled-media-query": "^2.1.2",
@@ -34,8 +36,6 @@
     "web3-utils": "^1.5.0"
   },
   "devDependencies": {
-    "@types/big.js": "^6.1.2",
-    "@types/react-copy-to-clipboard": "^5.0.1",
     "@typescript-eslint/parser": "^4.23.0",
     "babel-plugin-styled-components": "^1.13.2",
     "eslint": "^7.31.0",
