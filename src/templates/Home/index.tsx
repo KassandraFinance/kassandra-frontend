@@ -24,16 +24,16 @@ const Home = () => {
   return (
     <>
       <Hero />
-      <Products />
       <S.Background>
+        <Products />
         <ClassProducts />
         <Token />
+        <KassandraToken />
+        <KassandraArchitecture />
+        <TokenDistribution />
+        <BannerCTA />
+        <SubscribeBanner />
       </S.Background>
-      <KassandraToken />
-      <KassandraArchitecture />
-      <TokenDistribution />
-      <BannerCTA />
-      <SubscribeBanner />
     </>
   )
 }
