@@ -6,19 +6,20 @@ import * as ButtonStyles from '../../../components/Button/styles'
 
 export const Container = styled.div`
   max-width: 100%;
-  background: url('assets/backgroundKassandraToken.svg');
+  margin: 0 auto 160px;
+  background: url('assets/BlurDivisor.svg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  padding: 335px 0 0;
-  margin: -200px 0 0;
+  padding: 100px 0 0;
 `
 export const KassandraToken = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
   max-width: 1000px;
-  margin: 150px auto;
-  /* background: url('assets/backgroundKassandraToken.svg'); */
+  margin: 0 auto 140px;
+  gap: 32px;
+  /* background: url('assets/BlurDivisor.svg'); */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center -100px;
@@ -36,16 +37,11 @@ export const KassandraInfo = styled.div`
   @media(max-width: 960px) {
     margin: 0 auto;
   }
-  p{
-    color: #E843C4;
-    font-size: ${theme.font.sizes.font14};
-    letter-spacing: 4px;
-  }
   h1{
     font-size: ${theme.font.sizes.font48};
-    font-weight: ${theme.font.weight.black};
+    font-weight: ${theme.font.weight.bold};
     line-height: 104%;
-    margin-top: 20px;
+    margin: 0;
     @media(max-width: 960px) {
       font-size: ${theme.font.sizes.font36};
     }
@@ -53,9 +49,16 @@ export const KassandraInfo = styled.div`
       font-size: ${theme.font.sizes.font32};
     }
   }
+  p{
+    color: #E843C4;
+    font-size: ${theme.font.sizes.font14};
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+  }
   span{
     display: inline-block;
     font-weight: ${theme.font.weight.light};
+    color: #C4C4C4;
     font-size: ${theme.font.sizes.font16};
     line-height: 155%;
     margin-top: 40px;
@@ -63,6 +66,7 @@ export const KassandraInfo = styled.div`
 `
 export const Content = styled.div`
   display: flex;
+  align-items: flex-start;
   @media(max-width: 960px) {
     margin: 0 auto;
     justify-content: center;
@@ -85,6 +89,10 @@ export const WrapperIcons = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  img{
+    max-width: 48px;
+    margin-right: 16px;
+  }
 `
 export const KasasndraCardHeader = styled.div`
   width: 100%;
@@ -110,6 +118,7 @@ export const ResponsabilitiesTitle = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: 80px;
+  max-width: 220px;
   h1{
     font-size: 36px;
     line-height: 104%;
@@ -127,17 +136,18 @@ export const ResponsabilitiesDivider = styled.div`
   `
 export const ResponsabilitiesCards = styled.div`
   margin-right: 40px;
+  max-width: 140px;
   span{
-  display: inline-block;
-  margin-top: 26px;
-  font-size: ${theme.font.sizes.font16};
-  font-weight: ${theme.font.weight.light};
-  line-height: 104%;
-  @media(max-width: 960px) {
-    margin-bottom: 24px;
-    max-width: 100px;
+    display: inline-block;
+    margin-top: 26px;
+    font-size: ${theme.font.sizes.font16};
+    font-weight: ${theme.font.weight.light};
+    line-height: 104%;
+    @media(max-width: 960px) {
+      margin-bottom: 24px;
+      max-width: 100px;
+    }
   }
-}
 
 `
 export const MobileCards = styled.div`
@@ -159,16 +169,7 @@ export const IconWrapper = styled.div`
   display: table-cell;
   vertical-align: middle;
   text-align: center;
-
 `
-export const KassandraCardWrapper = styled.section`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin: 0 auto;
-  margin-top: 75px;
-  max-width: 890px;
-`
-
 export const ImageWrapper = styled.div`
   background: rgba(33, 20, 38, 1);
   max-width: 96px;
@@ -179,8 +180,8 @@ export const ImageWrapper = styled.div`
   margin-top: 36px;
   margin-left: 57px;
   @media(max-width: 960px) {
-  margin-top: 36px;
-  margin-left: 12px;
+    margin-top: 36px;
+    margin-left: 12px;
   }
 `
 export const TextWrapper = styled.div`
@@ -191,6 +192,25 @@ export const TextWrapper = styled.div`
     padding: 0 32px;
     margin: 40px auto;
   }
+
+  p{
+    text-align: left;
+    font-size: ${theme.font.sizes.font12};
+    color: #C4C4C4;
+    letter-spacing: 0px;
+    margin: 8px 0;
+  }
+  span{
+    font-size: ${theme.font.sizes.font14};
+    font-weight: ${theme.font.weight.light};
+    line-height: 180%;
+    margin-top: 30px;
+  }
+`
+export const NameAndSymbol = styled.div`
+  display: flex;
+  align-items: center;
+
   h1{
     font-size: ${theme.font.sizes.font48};
     font-weight: ${theme.font.weight.light};
@@ -203,17 +223,15 @@ export const TextWrapper = styled.div`
       font-size: ${theme.font.sizes.font32};
     }
   }
-  p{
-    text-align: left;
+
+  h3 {
+    background-color: rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
     font-size: ${theme.font.sizes.font12};
-    color: ${theme.colors.snow};
-    letter-spacing: 0px;
-  }
-  span{
-    font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.light};
-    line-height: 180%;
-    margin-top: 30px;
+
+    margin-left: ${theme.spacings.space16};
+    padding: 8px 12px;
   }
 `
 export const TokenInfo = styled.div`
@@ -244,8 +262,6 @@ export const Card = styled.div`
 export const Price = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-
-
   > div{
     display: flex;
     margin-left: 6px;
@@ -270,27 +286,37 @@ export const CardFooter = styled.div`
     flex-direction: column;
   }
   ${ButtonStyles.Wrapper} {
-      width: 65%;
-      padding: 16px 24px;
-      font-size: ${theme.font.sizes.font18};
-      font-weight: ${theme.font.weight.medium};
-      height: 4.4rem;
-      @media(max-width: 960px) {
-        margin-bottom: 16px;
-        width: 100%;
+    width: 65%;
+    padding: 16px 24px;
+    font-size: ${theme.font.sizes.font18};
+    font-weight: ${theme.font.weight.medium};
+    height: 4.4rem;
+    @media(max-width: 960px) {
+      margin-bottom: 16px;
+      width: 100%;
+    }
+  }
+  a {
+  display: flex;
+  align-items: space-between;
+  text-decoration: none;
+  justify-items: center;
+  text-decoration: none;
+  font-size: ${theme.font.sizes.font14};
+  font-weight: ${theme.font.weight.light};
+  color: ${theme.colors.snow};
+  margin-right: ${theme.spacings.space8};
+  transition: 0.15s;
+    svg{
+      margin-left: ${theme.spacings.space8};
+    }
+  &:hover {
+      color: ${theme.colors.cyan};
+      >svg {
+        path{
+          stroke: ${theme.colors.cyan};
+        }
       }
     }
-  a{
-    justify-items: center;
-    /* display: block; */
-    text-decoration: none;
-    font-size: ${theme.font.sizes.font14};
-    font-weight: ${theme.font.weight.light};
-    color: ${theme.colors.snow};
-    margin-right: 8px;
-  }
-  div {
-    display: flex;
-    justify-content: space-between;
   }
 `

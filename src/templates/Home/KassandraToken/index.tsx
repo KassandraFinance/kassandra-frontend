@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import Button from '../../../components/Button'
 
 import * as S from './styles'
@@ -48,7 +49,10 @@ const KassandraToken = () => {
             </S.ImageWrapper>
           </S.KasasndraCardHeader>
           <S.TextWrapper>
-            <h1>Kassandra</h1>
+            <S.NameAndSymbol>
+              <h1>Kassandra</h1>
+              <h3>$KACY</h3>
+            </S.NameAndSymbol>
             <p>BY KASSANDRA.FINANCE</p>
           </S.TextWrapper>
           <S.TokenInfo>
@@ -61,17 +65,20 @@ const KassandraToken = () => {
             </S.Price>
           </S.TokenInfo>
           <S.CardFooter>
-            <Button
-              backgroundPrimary
-              as="a"
-              href="/products"
-              text="Buy $KACY"
-            />
-            <div>
-              <a href="https://kassandrafoundation.medium.com/kassandra-dao-token-8bc046d55a00?source=user_profile---------0----------------------------">Learn More </a>
-              <img src="assets/arrow-circle.png" alt="" />
-            </div>
+            <Link href='#'>
+              <Button
+                backgroundPrimary
+                text="Buy $KACY"
+              />
+            </Link>
 
+            <a href="https://kassandrafoundation.medium.com/kassandra-dao-token-8bc046d55a00?source=user_profile---------0----------------------------">Learn More
+              <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg" >
+                <path d="M8.5 16C12.6421 16 16 12.6421 16 8.5C16 4.35786 12.6421 1 8.5 1C4.35786 1 1 4.35786 1 8.5C1 12.6421 4.35786 16 8.5 16Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M8.5 11.5L11.5 8.5L8.5 5.5" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M5.5 8.5H11.5" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
           </S.CardFooter>
         </S.Card>
       </S.KassandraToken>
