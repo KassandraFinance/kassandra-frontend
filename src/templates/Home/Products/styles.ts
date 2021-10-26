@@ -2,42 +2,19 @@ import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
 
-export const Container = styled.div`
-  background-image: url('assets/backgroundProduct.svg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  padding: 365px 0;
-  margin: -200px 0;
-  @media (max-width: 600px) {
-    padding: 0 0 180px;
-    margin: -100px 0;
-  }
-`
 export const Products = styled.section`
-margin-top: -50vh;
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 100px;
-margin: 0 auto;
-max-width: 960px;
-padding: 0 ${theme.spacings.space32};
-
-@media (max-width: 800px) {
-  display: flex;
   display: grid;
-  grid-template-columns: 1fr;
-}
+  grid-template-columns: 1fr 1fr;
+  gap:  100px;
+  margin: 0 auto 160px;
+  max-width: 960px;
+  padding: 0 ${theme.spacings.space32};
 
-/* @media (max-width: 375px) and (max-height: 800px) {
-  padding-top: 100px;
-}
-@media (max-width: 370px) {
-  padding-top: 120px;
-}
-@media (max-width: 330px) {
-  padding: 180px 20px 0;
-} */
+  @media (max-width: 800px) {
+    display: flex;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 `
 export const TextWrapper = styled.div`
 h1 {
@@ -58,6 +35,7 @@ h1 {
 }
 p {
   font-size: ${theme.font.sizes.font14};
+  line-height: 155%;
   color: ${theme.colors.amber};
   text-align: left;
   letter-spacing: 5.6px;
@@ -84,25 +62,36 @@ export const Divider = styled.div`
   max-width: 100px;
   margin-block: 40px;
   border-bottom: 3px solid #FFBF00;
+  border-radius: 4px;
 `
-
 export const Link = styled.a`
   max-width: max-content;
   display: flex;
   align-items: center;
   cursor: pointer;
   margin-bottom: 20px;
+  transition: 0.15s;
   span{
+    display: flex;
     margin-right: 20px;
   }
-
+  svg{
+    margin-left: ${theme.spacings.space8};
+  }
+  &:hover {
+    color: ${theme.colors.cyan};
+    >svg {
+      path{
+        stroke: ${theme.colors.cyan};
+      }
+    }
+  }
 `
-
 export const CardContainer = styled.div`
 display: grid;
 grid-template-columns: 1fr 1fr;
 justify-content: center;
-row-gap: 63px;
+column-gap: 32px;
 p {
   font-size: ${theme.font.sizes.font14};
   color: ${theme.colors.amber};
@@ -117,9 +106,9 @@ p {
   }
 }
 span {
-  font-size: ${theme.font.sizes.font16};
+  font-size: ${theme.font.sizes.font14};
   font-weight: ${theme.font.weight.light};
-  line-height: 155%;
+  line-height: 122.5%;
   text-align: left;
   @media(max-width: 450px) {
     font-size: ${theme.font.sizes.font14};
@@ -147,8 +136,4 @@ export const IconWrapper = styled.div`
   vertical-align: middle;
   text-align: center;
   margin-bottom: 26px;
-
-  img {
-
-}
 `

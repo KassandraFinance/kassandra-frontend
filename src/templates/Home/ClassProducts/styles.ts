@@ -2,19 +2,19 @@ import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
 export const ClassProducts = styled.section`
-
-display: flex;
-flex-direction: column;
-padding: 130px 32px;
-text-align: center;
-max-width: 960px;
-margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0 32px;
+  text-align: center;
+  max-width: 960px;
+  margin: 0 auto 160px;
 
 h1 {
   font-size: ${theme.font.sizes.font48};
   font-weight: ${theme.font.weight.black};
   line-height: 104%;
   margin-bottom: ${theme.spacings.space24};
+
   @media(max-width: 960px) {
     font-size: ${theme.font.sizes.font36};
   }
@@ -31,7 +31,6 @@ p {
   font-weight: ${theme.font.weight.normal};
   letter-spacing: 4px;
   color:#F79640;
-
 }
 span{
   font-size: ${theme.font.sizes.font16};
@@ -40,35 +39,32 @@ span{
   max-width: 750px;
   margin: 0 auto;
 }
-@media (max-width: 800px) {
+  @media (max-width: 800px) {
     padding: 80px 20px;
-
   }
 `
-
 export const Divider = styled.div`
 width: 98px;
 border: 1px solid #F79640;
 margin: 25px auto;
 `
 export const Image = styled.div`
-text-align: center;
-margin-top: 150px;
-@media(max-width: 680px){
+  text-align: center;
+  margin-top: 150px;
+  @media(max-width: 680px){
     display: none;
   }
-img{
+  img{
     max-width: 100%;
-}
+  }
 `
 export const ImageDescription = styled.div`
-display: flex;
-margin-top: 35px;
-justify-content: space-between;
-@media(max-width: 680px){
-  display: none;
-}
-
+  display: flex;
+  margin-top: 35px;
+  justify-content: space-between;
+  @media(max-width: 680px){
+    display: none;
+  }
 `
 export const DescriptionContainer = styled.div`
 max-width: 160px;
@@ -89,6 +85,6 @@ span{
 
   span{
   font-size: ${theme.font.sizes.font12};
-}
+  }
 }
 `

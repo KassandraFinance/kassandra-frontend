@@ -7,7 +7,7 @@ export const Container = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
   max-width: 760px;
-  margin: 40px auto;
+  margin: 0 auto 60px;
   @media(max-width: 960px) {
     grid-template-columns: 1fr;
     padding: 0 32px;
@@ -49,4 +49,4 @@ export const Input = styled.div`
    button{
     border: 'none';
   }
-  `
+`
