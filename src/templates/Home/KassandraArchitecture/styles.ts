@@ -1,24 +1,19 @@
 import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
-export const Container = styled.div`
-  max-width: 100%;
-  max-height:200vh;
-  background-image: url('assets/backgroundProduct.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: top;
-  padding: 150px 0 0px;
-`
+
 
 export const Token = styled.section`
   padding: 0 32px;
+  margin: 0 auto 160px;
   text-align: center;
   /* margin: -80px 0 0; */
 
   span{
     display: flex;
     font-size: ${theme.font.sizes.font16};
+    font-weight: ${theme.font.weight.light};
+
     line-height: 155%;
     max-width: 500px;
     margin: 0 auto;
@@ -75,6 +70,11 @@ export const KassandraCard = styled.div`
   @media(max-width: 960px) {
       margin: auto;
    }
+  &.firstCard {
+    p{
+      color: ${theme.colors.magenta}
+    }
+  }
   &.secondCard {
     margin-top: 170px;
     @media(max-width: 960px) {
@@ -93,10 +93,11 @@ export const KassandraCard = styled.div`
   p{
     text-align: left;
     display: inline-block;
-    color: ${theme.colors.amber};
+    color: #F79640;
     letter-spacing: 0.22em;
     margin: 0;
     margin-top:30px;
+    margin-bottom: 8px;
   }
   h1{
     font-size: 24px;

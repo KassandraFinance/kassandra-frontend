@@ -2,17 +2,7 @@ import { HowItWorks } from './../../Heim/HowItWorks/index';
 import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
-import * as ButtonStyles from '../../../components/Button/styles'
 
-export const Container = styled.div`
-  max-width: 100%;
-  background: url('assets/backgroundTokenDistribution1.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 50%;
-  padding: 380px 0 0;
-  margin: -380px auto 0;
-`
 export const Intro = styled.section`
   max-width: 950px;
   margin: 0 auto ;
@@ -131,13 +121,33 @@ export const Values = styled.div`
     }
   }
 `
-export const Link = styled.div`
+export const Link = styled.a`
   display: flex;
+  text-decoration: none;
   max-width: 290px;
   margin:  2.4rem auto;
-  p{
-    font-size: ${theme.font.sizes.font14};
-    font-weight: ${theme.font.weight.light};
-    margin-right: 16px;
+  cursor: pointer;
+  a {
+  display: flex;
+  align-items: space-between;
+  text-decoration: none;
+  justify-items: center;
+  text-decoration: none;
+  font-size: ${theme.font.sizes.font14};
+  font-weight: ${theme.font.weight.light};
+  color: ${theme.colors.snow};
+  margin-right: ${theme.spacings.space8};
+  transition: 0.15s;
+  svg{
+    margin-left: ${theme.spacings.space8};
+  }
+  &:hover {
+      color: ${theme.colors.cyan};
+      >svg {
+        path{
+          stroke: ${theme.colors.cyan};
+        }
+      }
+    }
   }
 `

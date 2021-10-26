@@ -38,3 +38,4 @@ __snapshots__
 
 .vscode/
 ngrok.exe
+*:Zone.Identifier
