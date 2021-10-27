@@ -29,21 +29,9 @@ export default {
     }
   },
   colors: {
-    // magenta: '#E843C4',
-    // amber: '#FFBF00',
-    // mainBg: '#2772FF',
-    // lightBg: '#F2F2F2',
-    // white: '#FCFCFC',
-    // black: '#030517',
-    // lightGray: '#828282',
-    // gray: '#8F8F8F',
-    // darkGray: '#2E2F42',
-    // darkBlue: '#000B71',
-    // red: '#FF6347',
-    // blue: '#2772FF'
     darkPurple: '#211426',
     magenta: '#E843C4',
-    darkBlue: '#020887',
+    darkBlue: '#11319A',
     blue: '#0C3DDC',
     cyan: '#26DBDB',
     darkGray: '#2E2F42',

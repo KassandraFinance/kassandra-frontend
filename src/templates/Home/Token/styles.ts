@@ -198,22 +198,13 @@ export const CardFooter = styled.div`
   }
   ${ButtonStyles.Wrapper} {
       width: 65%;
-      padding: 16px 24px;
-      font-size: ${theme.font.sizes.font18};
-      font-weight: ${theme.font.weight.medium};
-      height: 4.4rem;
       @media(max-width: 960px) {
         margin-bottom: 16px;
         width: 100%;
       }
     }
   a{
-    justify-items: center;
-    /* display: block; */
-    text-decoration: none;
-    font-size: ${theme.font.sizes.font14};
-    font-weight: ${theme.font.weight.light};
-    color: ${theme.colors.snow};
+
     margin-right: 8px;
   }
 

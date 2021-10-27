@@ -15,32 +15,9 @@ export const Wrapper = styled.menu<IWrapperProps>`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* padding: ${theme.spacings.space24}; */
-    /* padding: ${theme.spacings.space32}; */
     position: relative;
     height: 110px;
     z-index: ${theme.layers.menu};
-
-    ${ButtonStyles.Wrapper} {
-      font-size: ${theme.font.sizes.font14};
-      font-weight: ${theme.font.weight.light};
-      padding: 12.5px;
-      border-radius: 9px;
-      border: ${`0.1rem solid ${theme.colors.snow}`};
-      color: ${theme.colors.snow};
-      background-color: transparent;
-      &:after {
-        background-color: transparent;
-      }
-      &:before {
-        background-color: transparent;
-      }
-      &:hover {
-        color: ${theme.colors.cyan};
-        border: ${`0.1rem solid ${theme.colors.cyan}`};
-        background-color: transparent;
-      }
-
     }
 
     @media(max-width: 960px ) {
