@@ -65,14 +65,15 @@ const KassandraToken = () => {
             </S.Price>
           </S.TokenInfo>
           <S.CardFooter>
-            <Link href='#'>
+            <Link href='https://app.uniswap.org/#/swap'>
               <Button
+                size='large'
                 backgroundPrimary
                 text="Buy $KACY"
               />
             </Link>
 
-            <a href="https://kassandrafoundation.medium.com/kassandra-dao-token-8bc046d55a00?source=user_profile---------0----------------------------">Learn More
+            <a href="https://kassandrafoundation.medium.com/kassandra-dao-token-8bc046d55a00" target="_blank" rel="noopener noreferrer">Learn More
               <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg" >
                 <path d="M8.5 16C12.6421 16 16 12.6421 16 8.5C16 4.35786 12.6421 1 8.5 1C4.35786 1 1 4.35786 1 8.5C1 12.6421 4.35786 16 8.5 16Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M8.5 11.5L11.5 8.5L8.5 5.5" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
@@ -93,7 +94,7 @@ const KassandraToken = () => {
             <S.IconWrapper>
               <img src="assets/adjustIcon.png" alt="" />
             </S.IconWrapper>
-            <span>Adjusting <b>parameters</b> and <b>fees</b></span>
+            <span> <b>Adjust</b> parameters and fees</span>
           </S.ResponsabilitiesCards>
 
           <S.ResponsabilitiesCards>
@@ -101,21 +102,21 @@ const KassandraToken = () => {
               <img src="assets/deployInvest.png" alt="" />
             </S.IconWrapper>
 
-            <span>Deploying <b>new</b> investment products</span>
+            <span> <b>Deploy</b> new investment products</span>
           </S.ResponsabilitiesCards>
 
           <S.ResponsabilitiesCards>
             <S.IconWrapper>
               <img src="assets/curatingIcon.png" alt="" />
             </S.IconWrapper>
-            <span><b>Curating</b> whitelists for investable assets</span>
+            <span><b>Curate</b> whitelists for investable assets</span>
           </S.ResponsabilitiesCards>
 
           <S.ResponsabilitiesCards>
             <S.IconWrapper>
               <img src="assets/approvingIcon.png" alt="" />
             </S.IconWrapper>
-            <span><b>Approving</b> code changes and updates</span>
+            <span><b>Approve</b> code changes and updates</span>
           </S.ResponsabilitiesCards>
         </S.MobileCards>
 
