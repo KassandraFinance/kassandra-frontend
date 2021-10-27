@@ -32,8 +32,8 @@ const TokenDistribution = () => {
       <S.Grid>
         <img src="assets/TokenChart.svg" alt="" />
         <S.TextWrapper>
-          <h1>Lorem ipsum dolor sit amet</h1>
-          <span>The distribution will occur in a fragmented way, subject to various locks and vesting periods, to assert the decentralization of the organization and community growth.</span>
+          <h1>Fair and community driven token distribuition</h1>
+          <span>To create a fully decentralized organization, with a well-distributed token, we chose to have a big part of the total supply (50%) slowly available through rewards to people that engage and help Kassandra in the early stages.</span>
         </S.TextWrapper>
       </S.Grid>
       <S.TokenInfoWrapper>
@@ -56,7 +56,7 @@ const TokenDistribution = () => {
           </S.Values>
         </S.TokenInfo>
       </S.TokenInfoWrapper>
-      <S.Link href='#'>
+      <S.Link href='https://medium.com/heimdall-research-crypto/the-heimdall-social-index-9595fdfb9ddc' target='_blank' rel="noopener noreferrer">
         <a>Check more info about the $KACY token
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg" >
             <path d="M8.5 16C12.6421 16 16 12.6421 16 8.5C16 4.35786 12.6421 1 8.5 1C4.35786 1 1 4.35786 1 8.5C1 12.6421 4.35786 16 8.5 16Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" />

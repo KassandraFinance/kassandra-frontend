@@ -23,8 +23,8 @@ const Products = () => {
     <S.Products>
       <S.TextWrapper>
         <p>WHAT IS KASSANDRA DAO?</p>
-        <h1>a smart method to ensure value for your money</h1>
-        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, quaerat reiciendis illum excepturi commodi dolorem repellat voluptatum consequatur, quis id doloremque dicta vitae perferendis officiis. Quod molestias animi corrupti nihil.</span>
+        <h1>a decentralized quantitative fund manager</h1>
+        <span>Kassandra is a decentralized autonomous organization that governs a set of tokenized data-driven investment funds, bringing pragmatic but yet efficient ways to let your money work for you.</span>
         <S.Divider />
         <S.Link>
           <span>How it Works
@@ -55,9 +55,9 @@ const Products = () => {
         </S.Card>
         <S.Card>
           <S.IconWrapper>
-            <img src="assets/home-products-graph.png" alt="" />
+            <img src="assets/home-products-check.png" alt="" />
           </S.IconWrapper>
-          <p>PERFORMANCE</p>
+          <p>PERMISSIONLESS</p>
           <span>Invest, transfer and redeem investment products without relying on third-parties</span>
         </S.Card>
         <S.Card>
@@ -65,14 +65,14 @@ const Products = () => {
             <img src="assets/home-products-gift.png" alt="" />
           </S.IconWrapper>
           <p>REWARD</p>
-          <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+          <span>Earn governance token rewards while investing in smart strategies</span>
         </S.Card>
         <S.Card>
           <S.IconWrapper>
-            <img src="assets/home-products-check.png" alt="" />
+            <img src="assets/home-products-graph.png" alt="" />
           </S.IconWrapper>
           <p>ACTIVELY MANAGED</p>
-          <span>Outsource the management of your money to data-driven quantitative models</span>
+          <span>Outsource your money management to data models</span>
         </S.Card>
       </S.CardContainer>
     </S.Products>

@@ -20,7 +20,7 @@ const Token = () => {
   }
 
   return (
-    <S.Token>
+    <S.Token id='Token'>
       <p>OUR PROJECTS</p>
       <S.Divider />
       <h1>the world of data-driven investment funds</h1>
@@ -57,7 +57,8 @@ const Token = () => {
           <S.CardFooter>
             <Link href='/products'>
               <Button
-                backgroundPrimary
+                backgroundSecondary
+                size='medium'
                 text="Buy $HEIM"
               />
             </Link>

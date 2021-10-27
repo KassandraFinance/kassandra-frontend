@@ -19,7 +19,7 @@ export const Container = styled.section`
 
   border-radius: 1rem;
   border: 0.1rem solid #FFFFFF0A;
-  background: #2114261F;
+  background: rgba(33, 20, 38, 0.4);
 
   @media(max-width: 700px) {
     grid-template-columns: 1fr;

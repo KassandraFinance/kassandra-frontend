@@ -13,13 +13,14 @@ const BannerCTA = () => {
         </S.ImageWrapper>
 
         <S.TextWrapper>
-          <p>Circulating Supply</p>
-          <h1>Adipiscing volutpat arcu, viverra quis sed at.</h1>
-          <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in massa euismod, elementum massa id, cursus dui. Cras sem sem, auctor et nibh in, feugiat tincidunt diam. Vestibulum nec lectus sit amet enim varius consequat quis sit amet urna.</span>
+          <p>Kassandra products</p>
+          <h1>Exposure to the hottest assets on Avalanche</h1>
+          <span>A single asset that tracks the performance of the cryptocurrencies with the most solid and engaged communities running on Avalanche eoossystem.</span>
           <S.BannerFooter>
             <Link href='/products'>
               <Button
-                backgroundPrimary
+                backgroundSecondary
+                size='medium'
                 text='Buy $HEIM'
               />
             </Link>

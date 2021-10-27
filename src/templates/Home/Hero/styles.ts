@@ -116,13 +116,7 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 72px;
-  ${ButtonStyles.Wrapper} {
-    padding: 16px 24px;
-    font-size: ${theme.font.sizes.font18};
-    font-weight: ${theme.font.weight.medium};
-    height: 4.4rem;
-  }
-`
+  `
 export const DesktopScreen = styled.div`
   @media (max-width: 959px) {
     display: none;
