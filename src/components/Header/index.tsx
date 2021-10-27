@@ -95,15 +95,15 @@ const Header = () => {
 
       <S.MenuDesktop>
         <S.MenuNav>
-          {asPath === '/' ? (
+          {/* {asPath === '/' ? (
             <Link href="/heim" passHref>
               <S.MenuLink onClick={clickMatomoEvent}> HEIM Index </S.MenuLink>
             </Link>
-          ) : (
-            <Link href="/" passHref>
-              <S.MenuLink> Home </S.MenuLink>
-            </Link>
-          )}
+          ) : ( */}
+          <Link href="/" passHref>
+            <S.MenuLink> Home </S.MenuLink>
+          </Link>
+
 
           <Link href="/products" passHref>
             <S.MenuLink>Buy $Heim</S.MenuLink>
@@ -156,8 +156,8 @@ const Header = () => {
         <CloseIcon aria-label="Close Menu" onClick={() => setIsOpen(false)} />
 
         <S.MenuNav>
-          {asPath === '/' ? (
-            <Link href="/heim" passHref>
+
+          {/* <Link href="/heim" passHref>
               <S.MenuLink
                 onClick={() => {
                   setIsOpen(false)
@@ -166,12 +166,12 @@ const Header = () => {
               >
                 HEIM Index
               </S.MenuLink>
-            </Link>
-          ) : (
-            <Link href="/" passHref>
-              <S.MenuLink onClick={() => setIsOpen(false)}> Home </S.MenuLink>
-            </Link>
-          )}
+            </Link> */}
+
+          <Link href="/" passHref>
+            <S.MenuLink onClick={() => setIsOpen(false)}> Home </S.MenuLink>
+          </Link>
+
           <Link href="/products" passHref>
             <S.MenuLink onClick={() => setIsOpen(false)}>Buy $Heim</S.MenuLink>
           </Link>
