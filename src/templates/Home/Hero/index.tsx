@@ -26,6 +26,7 @@ const Hero = () => {
       <S.ButtonWrapper>
         <Button
           backgroundPrimary
+          size='large'
           as="a"
           href="#"
           text="Explore Our Projects"
