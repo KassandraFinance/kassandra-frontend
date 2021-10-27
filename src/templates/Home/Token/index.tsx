@@ -57,7 +57,8 @@ const Token = () => {
           <S.CardFooter>
             <Link href='/products'>
               <Button
-                backgroundPrimary
+                backgroundSecondary
+                size='medium'
                 text="Buy $HEIM"
               />
             </Link>
