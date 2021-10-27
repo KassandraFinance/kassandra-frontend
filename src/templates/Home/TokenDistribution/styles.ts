@@ -88,6 +88,7 @@ export const TokenInfoWrapper = styled.section`
   padding: 1px;
   border-top: 1px solid #282828;
   border-bottom: 1px solid #282828;
+  display: none;
 `
 export const TokenInfo = styled.div`
   display: grid;
