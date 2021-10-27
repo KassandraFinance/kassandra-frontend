@@ -20,23 +20,20 @@ const wrapperModifiers = {
     font-size: ${theme.font.sizes.font14};
   `,
   medium: (theme: DefaultTheme) => css`
-    height: 4.8rem;
+    height: 4.4rem;
     font-size: ${theme.font.sizes.font16};
-    padding: ${theme.spacings.space16} ${theme.spacings.space32};
-
+    font-weight: ${theme.font.weight.light};
+    padding: 14px ${theme.spacings.space24};
   `,
   large: (theme: DefaultTheme) => css`
-    height: 5rem;
-    font-size: ${theme.font.sizes.font20};
-    padding: ${theme.spacings.space16} ${theme.spacings.space32};
-    @media (max-width: 600px) {
-      font-size: ${theme.font.sizes.font16};
-      height: 4.8rem;
-    }
+    height: 4.4rem;
+    font-size: ${theme.font.sizes.font16};
+    font-weight: ${theme.font.weight.medium};
+    padding: 14px ${theme.spacings.space24};
   `,
   huge: (theme: DefaultTheme) => css`
-    height: 4.4rem;
-    font-size: ${theme.font.sizes.font18};
+    height: 5rem;
+    font-size: ${theme.font.sizes.font16};
     padding: ${theme.spacings.space24} ${theme.spacings.space48};
   `,
   fullWidth: () => css`
@@ -72,55 +69,35 @@ const wrapperModifiers = {
   `,
 
   backgroundPrimary: (theme: DefaultTheme) => css`
-    background: ${`linear-gradient(93.84deg, #E843C4 0.12%, #0C3DDC 100%)`};
+    background: ${`linear-gradient(93.84deg, ${theme.colors.magenta} 0.12%, ${theme.colors.blue} 100%)`};
     color: ${theme.colors.snow};
-
-    &:after {
-      background:${`linear-gradient(93.84deg, #E843C4 0.12%, #0C3DDC 100%)`};
-    }
-    &:before {
-      background:${`linear-gradient(93.84deg, #0C3DDC 0.12%, #E843C4 100%)`};
-    }
+    transition-duration: 800ms;
+   &:hover{
+    background: ${`linear-gradient(93.84deg, ${theme.colors.blue} 0.12%, ${theme.colors.magenta} 100%)`};
+   }
   `,
 
   backgroundSecondary: (theme: DefaultTheme) => css`
-
-    /* background: ${`linear-gradient(87.48deg, ${theme.colors.amber} -70.27%,  ${theme.colors.magenta} 154.78%)`}; */
-    background: ${`linear-gradient(92.08deg, ${theme.colors.magenta} 0%, ${theme.colors.darkBlue} 100%)`};
+    background: ${theme.colors.blue};
     color: ${theme.colors.snow};
-
-    &:after {
-      
-      background: ${`linear-gradient(87.48deg, ${theme.colors.magenta} -70.27%,  ${theme.colors.darkBlue} 154.78%)`};
-      /* background: ${`linear-gradient(92.08deg, ${theme.colors.magenta} 0%, ${theme.colors.darkBlue} 100%)`}; */
-    }
-    &:before {
-      /* background-color: ${theme.colors.darkBlue}; */
-      /* background: ${`linear-gradient(87.48deg, ${theme.colors.darkBlue} -70.27%,  ${theme.colors.magenta} 154.78%)`}; */
-
-    }
     &:hover {
-      &:before {
-        width: 100%;
-      }
+      background: ${theme.colors.darkBlue}
     }
   `,
 
   backgroundBlack: (theme: DefaultTheme) => css`
-    background: transparent;
-    border: ${`0.1rem solid ${theme.colors.cyan}`};
+    font-size: ${theme.font.sizes.font14};
+    font-weight: ${theme.font.weight.light};
+    padding: 12.5px;
+    border-radius: 9px;
+    border: ${`0.1rem solid ${theme.colors.snow}`};
     color: ${theme.colors.snow};
+    background-color: transparent;
     transition: all 300ms;
-
-    &:after {
-      background-color: transparent;
-    }
-    &:before {
-      background-color: ${theme.colors.cyan};
-    }
     &:hover {
-      color: ${theme.colors.darkPurple};
-      /* background-color: ${theme.colors.cyan}; */
+      color: ${theme.colors.cyan};
+      border: ${`0.1rem solid ${theme.colors.cyan}`};
+      background-color: transparent;
     }
   `
 }
@@ -151,35 +128,6 @@ export const Wrapper = styled.button<WrapperProps>`
     overflow: hidden;
     cursor: pointer;
     z-index: 1;
-    &:after {
-      content: '';
-      border-radius: ${theme.border.radius};
-
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-
-      z-index: -2;
-    }
-    &:before {
-      content: '';
-      border-radius: ${theme.border.radius};
-
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0%;
-      height: 100%;
-      transition: all 300ms ease-in-out;
-      z-index: -1;
-    }
-    &:hover {
-      &:before {
-        width: 100%;
-      }
-    }
 
     ${!!size && wrapperModifiers[size](theme)};
     ${!!fullWidth && wrapperModifiers.fullWidth()};
