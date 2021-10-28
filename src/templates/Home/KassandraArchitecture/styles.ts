@@ -23,6 +23,7 @@ export const Token = styled.section`
     font-size: ${theme.font.sizes.font48};
     font-weight: ${theme.font.weight.black};
     line-height: 104%;
+    margin: auto;
     margin-bottom: ${theme.spacings.space24};
     @media(max-width: 960px) {
       font-size: ${theme.font.sizes.font36};
@@ -105,5 +106,6 @@ export const KassandraCard = styled.div`
     line-height: 32px;
     letter-spacing: 0em;
     text-align: left;
+    margin-inline: 0 ;
   }
 `
