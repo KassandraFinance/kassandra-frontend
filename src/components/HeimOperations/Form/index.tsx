@@ -738,9 +738,9 @@ const Form = ({
               typeWithdrawChecked === "Best_value" ?
                 `${title} ${'$' + priceInDollarOnWithdraw}` 
                 :
-                `${title} ${'$' + BNtoDecimal(Big((swapOutAmount || 0).toString()).mul(Big(priceDollar(swapOutAddress, poolTokensArray))), Big(poolTokenDetails[tokenOutIndex]?.decimals.toString(10), 2))}` 
+                `${title} ${'$' + BNtoDecimal(Big((swapOutAmount || 0).toString()).mul(Big(priceDollar(swapOutAddress, poolTokensArray))), Big(poolTokenDetails[tokenOutIndex]?.decimals.toString(10)), 2)}`
               :
-              `${title} ${'$' + BNtoDecimal(Big((swapInAmount || 0).toString()).mul(Big(priceDollar(swapInAddress, poolTokensArray))), Big(poolTokenDetails[tokenInIndex]?.decimals.toString(10), 2))}` 
+              `${title} ${'$' + BNtoDecimal(Big((swapInAmount || 0).toString()).mul(Big(priceDollar(swapInAddress, poolTokensArray))), Big(poolTokenDetails[tokenInIndex]?.decimals.toString(10)), 2)}`
               :
               `${title}`
             : 
