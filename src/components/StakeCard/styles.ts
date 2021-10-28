@@ -3,9 +3,13 @@ import theme from '../../styles/theme'
 
 import * as ButtonStyles from '../Button/styles'
 
-export const KacyStakeCard = styled.div``
+export const StakeCard = styled.div``
 
-export const BorderGradient = styled.div`
+interface IBorderGradientProps {
+  stakeWithVotingPower: boolean
+}
+
+export const BorderGradient = styled.div<IBorderGradientProps>`
   background: rgba(31, 31, 31, 0.72);
   border-radius: 6px;
 
@@ -28,7 +32,11 @@ export const BorderGradient = styled.div`
     bottom: 0;
     border-radius: ${theme.border.radius};
     padding: 1px;
-    background: linear-gradient(-45deg, #E843C4 0%, #F79640 100%);
+    background: ${props => props.stakeWithVotingPower ? 
+      `linear-gradient(-45deg, ${theme.colors.blue} 0%, ${theme.colors.cyan} 100%)` 
+      : 
+      'linear-gradient(-45deg, #E843C4 0%, #F79640 100%)'
+    };
     -webkit-mask: linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: destination-out;
@@ -36,8 +44,16 @@ export const BorderGradient = styled.div`
   }
 `
 
-export const InterBackground = styled.div`
-  background: linear-gradient(95.32deg, rgba(232, 67, 196, 0.23) 0%, rgba(247, 150, 64, 0.23) 100%);
+interface IInterBackgroundProps {
+  stakeWithVotingPower: boolean
+}
+
+export const InterBackground = styled.div<IInterBackgroundProps>`
+  background: ${props => props.stakeWithVotingPower ? 
+    'linear-gradient(95.32deg, rgba(38, 219, 219, 0.23) 0%, rgba(12, 61, 220, 0.23) 100%)'
+    :
+    'linear-gradient(95.32deg, rgba(232, 67, 196, 0.23) 0%, rgba(247, 150, 64, 0.23) 100%)'
+  };
   border-radius: 6px 6px 0 0;
 
   display: flex;

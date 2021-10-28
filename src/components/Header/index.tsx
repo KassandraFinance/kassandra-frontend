@@ -99,11 +99,11 @@ const Header = () => {
             <Link href="/heim" passHref>
               <S.MenuLink onClick={clickMatomoEvent}> HEIM Index </S.MenuLink>
             </Link>
-          ) : ( */}
-          <Link href="/" passHref>
-            <S.MenuLink> Home </S.MenuLink>
-          </Link>
-
+          ) : (
+            <Link href="/" passHref>
+              <S.MenuLink> Home </S.MenuLink>
+            </Link>
+          )} */}
 
           <Link href="/products" passHref>
             <S.MenuLink>Buy $Heim</S.MenuLink>

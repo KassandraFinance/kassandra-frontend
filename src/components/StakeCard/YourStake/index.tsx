@@ -17,6 +17,7 @@ interface IYourStakeProps {
   userWalletAddress: string
   infoStaked: IInfoStaked
   setInfoStaked: React.Dispatch<React.SetStateAction<IInfoStaked>>
+  stakeWithVotingPower: boolean
 }
 
 const YourStake = ({ 
@@ -27,15 +28,53 @@ const YourStake = ({
   unstaking,
   userWalletAddress,
   infoStaked,
-  setInfoStaked
+  setInfoStaked,
+  stakeWithVotingPower
 }: IYourStakeProps) => {
 
   let interval: any
 
   const getYourStake = React.useCallback(async () => {
     const poolInfoResponse = await poolInfo(pid)
+    console.log(poolInfoResponse)
 
     if (poolInfoResponse.withdrawDelay) {
+      if (userWalletAddress === '') {
+        const kacyRewards = new BigNumber(poolInfoResponse.rewardRate).mul(
+          new BigNumber(86400)
+        )
+  
+        const apr = poolInfoResponse.depositedAmount.toString() !== '0' ? 
+        kacyRewards.mul(new BigNumber(365)).mul(new BigNumber(100)).div(new BigNumber(poolInfoResponse.depositedAmount))
+        :
+        new BigNumber(0)
+  
+        const startDate = getDate(
+          Number(poolInfoResponse.periodFinish) -
+          Number(poolInfoResponse.rewardsDuration)
+        )
+        const endDate = getDate(Number(poolInfoResponse.periodFinish))
+  
+        const timestampNow = new Date().getTime()
+        const periodFinish: any = new Date(Number(poolInfoResponse.periodFinish) * 1000)
+  
+        setInfoStaked((prevState) => ({
+          ...prevState,
+          votingMultiplier: poolInfoResponse.votingMultiplier,
+          startDate,
+          endDate,
+          withdrawDelay: poolInfoResponse.withdrawDelay,
+          kacyRewards,
+          totalStaked: new BigNumber(poolInfoResponse.depositedAmount),
+          yourDailyKacyReward: new BigNumber(0),
+          hasExpired: periodFinish < timestampNow,
+          apr,
+          stakingToken: poolInfoResponse.stakingToken
+        }))
+
+        return
+      }
+
       const balance: BigNumber = await balanceOf(pid, userWalletAddress)
       const withdrawableResponse = await withdrawable(pid, userWalletAddress)
       const kacyRewards = new BigNumber(poolInfoResponse.rewardRate).mul(
@@ -43,8 +82,11 @@ const YourStake = ({
       )
       const unstakeResponse = await unstaking(pid, userWalletAddress)
 
-      const apr = kacyRewards.mul(new BigNumber(365)).mul(new BigNumber(100)).div(new BigNumber(poolInfoResponse.depositedAmount))
-
+      const apr = poolInfoResponse.depositedAmount.toString() !== '0' ? 
+        kacyRewards.mul(new BigNumber(365)).mul(new BigNumber(100)).div(new BigNumber(poolInfoResponse.depositedAmount))
+        :
+        new BigNumber(0)
+      
       const startDate = getDate(
         Number(poolInfoResponse.periodFinish) -
         Number(poolInfoResponse.rewardsDuration)
@@ -68,7 +110,8 @@ const YourStake = ({
         yourDailyKacyReward: new BigNumber(0),
         hasExpired: periodFinish < timestampNow,
         unstake: unstakeResponse,
-        apr
+        apr,
+        stakingToken: poolInfoResponse.stakingToken
       }))
 
       // interval
@@ -83,6 +126,11 @@ const YourStake = ({
           )
   
           const unstakeResponse = await unstaking(pid, userWalletAddress)
+
+          const apr = poolInfoResponse.depositedAmount.toString() !== '0' ? 
+          kacyRewards.mul(new BigNumber(365)).mul(new BigNumber(100)).div(new BigNumber(poolInfoResponse.depositedAmount))
+          :
+          new BigNumber(0)
   
           const timestampNow = new Date().getTime()
           const periodFinish: any = new Date(Number(poolInfoResponse.periodFinish) * 1000)
@@ -97,14 +145,14 @@ const YourStake = ({
             kacyRewards,
             yourDailyKacyReward: new BigNumber(0),
             hasExpired: periodFinish < timestampNow,
-            unstake: unstakeResponse
+            unstake: unstakeResponse,
+            apr
           }))
         }
-
       }, 6000)
     }
 
-  }, [])
+  }, [userWalletAddress])
 
   React.useEffect(() => {
     let yourDailyKacyReward: BigNumber = new BigNumber(0)
@@ -126,50 +174,57 @@ const YourStake = ({
     getYourStake()
 
     return () => clearInterval(interval)
-  }, [])
+  }, [userWalletAddress])
   
   return (
-    <>
-      <S.Info>
-        <p>Your stake</p>
-        <S.Stake>
-          <p>
-            {BNtoDecimal(
-              infoStaked.yourStake,
-              new BigNumber(18),
-              6
-            )}{' '}
-            KACY
-          </p>
-          <span>&#8776; {BNtoDecimal(new BigNumber(infoStaked.yourStake).mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
-        </S.Stake>
-      </S.Info>
-      <S.Info>
-        <span>Your voting power</span>
-        <span>
-          {BNtoDecimal(
-            new BigNumber(
-              infoStaked.withdrawable || infoStaked.unstake
-                ? 1
-                : infoStaked.votingMultiplier
-            ).mul(infoStaked.yourStake),
-            new BigNumber(18),
-            6
-          )}
-        </span>
-      </S.Info> 
-      <S.Info>
-        <span>Your daily KACY reward</span>
-        <span>
-          {infoStaked.hasExpired ? '0' : BNtoDecimal(
-            infoStaked.yourDailyKacyReward,
-            new BigNumber(18),
-            2
-          )}
-          /day
-        </span>
-      </S.Info>
-    </>
+    userWalletAddress ?
+      <>
+        <S.Info>
+          <p>Your stake</p>
+          <S.Stake>
+            <p>
+              {BNtoDecimal(
+                infoStaked.yourStake,
+                new BigNumber(18),
+                6
+              )}{' '}
+              KACY
+            </p>
+            <span>&#8776; {BNtoDecimal(new BigNumber(infoStaked.yourStake).mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
+          </S.Stake>
+        </S.Info>
+        {!stakeWithVotingPower &&
+          <>
+            <S.Info>
+              <span>Your voting power</span>
+              <span>
+                {BNtoDecimal(
+                  new BigNumber(
+                    infoStaked.withdrawable || infoStaked.unstake
+                      ? 1
+                      : infoStaked.votingMultiplier
+                  ).mul(infoStaked.yourStake),
+                  new BigNumber(18),
+                  6
+                )}
+              </span>
+            </S.Info> 
+            <S.Info>
+              <span>Your daily KACY reward</span>
+              <span>
+                {infoStaked.hasExpired ? '0' : BNtoDecimal(
+                  infoStaked.yourDailyKacyReward,
+                  new BigNumber(18),
+                  2
+                )}
+                /day
+              </span>
+            </S.Info>
+          </>
+        }
+      </>
+      :
+      null
   )
 }
 

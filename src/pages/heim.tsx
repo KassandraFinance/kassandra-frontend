@@ -38,7 +38,7 @@ export default function Index() {
         <meta property="og:image:height" content="300" />
         <meta property="og:image:alt" content="$HEIM" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@HeimdallLand" />
+        <meta name="twitter:site" content="@dao_kassandra" />
         <meta name="twitter:title" content="Kassandra $HEIM Index" />
         <meta
           name="twitter:image"
