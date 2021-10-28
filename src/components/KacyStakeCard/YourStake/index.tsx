@@ -37,7 +37,7 @@ const YourStake = ({
     console.log(poolInfoResponse)
 
     if (poolInfoResponse.withdrawDelay) {
-      if (!userWalletAddress) {
+      if (userWalletAddress === '') {
         const kacyRewards = new BigNumber(poolInfoResponse.rewardRate).mul(
           new BigNumber(86400)
         )
@@ -69,7 +69,10 @@ const YourStake = ({
           apr,
           stakingToken: poolInfoResponse.stakingToken
         }))
+
+        return
       }
+
       const balance: BigNumber = await balanceOf(pid, userWalletAddress)
       const withdrawableResponse = await withdrawable(pid, userWalletAddress)
       const kacyRewards = new BigNumber(poolInfoResponse.rewardRate).mul(
@@ -144,7 +147,6 @@ const YourStake = ({
             apr
           }))
         }
-
       }, 6000)
     }
 
@@ -170,7 +172,7 @@ const YourStake = ({
     getYourStake()
 
     return () => clearInterval(interval)
-  }, [])
+  }, [userWalletAddress])
   
   return (
     userWalletAddress ?
