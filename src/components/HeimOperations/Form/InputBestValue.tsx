@@ -29,7 +29,7 @@ const InputBestValue = ({
     const res: Big = poolTokenDetails.reduce((accumulator, current, index) => {
       return Big((swapOutAmount[index] || 0).toString())
         .mul(Big(priceDollar(current.address, poolTokensArray)))
-        .div(Big(10).pow(18)).add(accumulator)
+        .div(current.decimals).add(accumulator)
     }, Big(0))
 
     setPriceInDollarOnWithdraw(res.toFixed(2))
@@ -56,7 +56,7 @@ const InputBestValue = ({
                 readOnly
                 type="text"
                 placeholder="0"
-                value={'$' + Big((swapOutAmount[index] || 0).toString()).mul(Big(priceDollar(token.address, poolTokensArray))).div(Big(10).pow(18)).toFixed(6)}
+                value={'$' + BNtoDecimal(Big((swapOutAmount[index] || 0).toString()).mul(Big(priceDollar(token.address, poolTokensArray))), Big(poolTokenDetails[index].decimals.toString(10)), 2)}
                 />
               <S.SpanLight style={{ textAlign: 'right', float: 'right' }}>{token.allocation}%</S.SpanLight>
             </S.BestValueItem>
