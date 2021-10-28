@@ -13,9 +13,8 @@ import useStakingContract from '../../hooks/useStakingContract'
 
 import Web3Disabled from '../../components/Web3Disabled'
 import TotalVoting from '../../components/TotalVoting'
-import VotingPower from '../../components/VotingPower'
-import KacyStakeCard from '../../components/KacyStakeCard'
-import OthersStakingPools from '../../components/OthersStakingPools'
+import StakeCard from '../../components/StakeCard'
+
 import Header from '../../components/Header'
 import BannerCTA from '../../components/BannerCTA'
 
@@ -81,7 +80,7 @@ const StakeFarm = () => {
               </S.Link>
             </S.IntroWrapper> */}
             <S.GridStaking>
-              <KacyStakeCard
+              <StakeCard
                 pid={0}
                 connect={connect}
                 approve={kacyToken.approve}
@@ -93,8 +92,9 @@ const StakeFarm = () => {
                 poolInfo={kacyStake.poolInfo}
                 unstaking={kacyStake.unstaking}
                 stakedUntil={kacyStake.stakedUntil}
+                stakeWithVotingPower={false}
               />
-              <KacyStakeCard
+              <StakeCard
                 pid={1}
                 connect={connect}
                 approve={kacyToken.approve}
@@ -106,8 +106,9 @@ const StakeFarm = () => {
                 poolInfo={kacyStake.poolInfo}
                 unstaking={kacyStake.unstaking}
                 stakedUntil={kacyStake.stakedUntil}
+                stakeWithVotingPower={false}
               />
-              <KacyStakeCard
+              <StakeCard
                 pid={2}
                 connect={connect}
                 approve={kacyToken.approve}
@@ -119,6 +120,7 @@ const StakeFarm = () => {
                 poolInfo={kacyStake.poolInfo}
                 unstaking={kacyStake.unstaking}
                 stakedUntil={kacyStake.stakedUntil}
+                stakeWithVotingPower={false}
               />
             </S.GridStaking>
             <TotalVoting
@@ -126,6 +128,37 @@ const StakeFarm = () => {
               getCurrentVotes={kacyStake.currentVotes}
               userWalletAddress={userWalletAddress}
             />
+            <S.GridStaking>
+              <StakeCard
+                pid={3}
+                connect={connect}
+                approve={kacyToken.approve}
+                getAllowance={kacyToken.allowance}
+                balanceOf={kacyStake.balance}
+                earned={kacyStake.earned}
+                getReward={kacyStake.getReward}
+                withdrawable={kacyStake.withdrawable}
+                poolInfo={kacyStake.poolInfo}
+                unstaking={kacyStake.unstaking}
+                stakedUntil={kacyStake.stakedUntil}
+                stakeWithVotingPower={true}
+              />
+              <StakeCard
+                pid={4}
+                connect={connect}
+                approve={kacyToken.approve}
+                getAllowance={kacyToken.allowance}
+                balanceOf={kacyStake.balance}
+                earned={kacyStake.earned}
+                getReward={kacyStake.getReward}
+                withdrawable={kacyStake.withdrawable}
+                poolInfo={kacyStake.poolInfo}
+                unstaking={kacyStake.unstaking}
+                stakedUntil={kacyStake.stakedUntil}
+                stakeWithVotingPower={true}
+              />
+              <h1>Coming soon</h1>
+            </S.GridStaking>
           </S.StakeFarm>
           <BannerCTA />
         </>

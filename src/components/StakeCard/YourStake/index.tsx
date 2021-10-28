@@ -17,6 +17,7 @@ interface IYourStakeProps {
   userWalletAddress: string
   infoStaked: IInfoStaked
   setInfoStaked: React.Dispatch<React.SetStateAction<IInfoStaked>>
+  stakeWithVotingPower: boolean
 }
 
 const YourStake = ({ 
@@ -27,7 +28,8 @@ const YourStake = ({
   unstaking,
   userWalletAddress,
   infoStaked,
-  setInfoStaked
+  setInfoStaked,
+  stakeWithVotingPower
 }: IYourStakeProps) => {
 
   let interval: any
@@ -191,31 +193,35 @@ const YourStake = ({
             <span>&#8776; {BNtoDecimal(new BigNumber(infoStaked.yourStake).mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
           </S.Stake>
         </S.Info>
-        <S.Info>
-          <span>Your voting power</span>
-          <span>
-            {BNtoDecimal(
-              new BigNumber(
-                infoStaked.withdrawable || infoStaked.unstake
-                  ? 1
-                  : infoStaked.votingMultiplier
-              ).mul(infoStaked.yourStake),
-              new BigNumber(18),
-              6
-            )}
-          </span>
-        </S.Info> 
-        <S.Info>
-          <span>Your daily KACY reward</span>
-          <span>
-            {infoStaked.hasExpired ? '0' : BNtoDecimal(
-              infoStaked.yourDailyKacyReward,
-              new BigNumber(18),
-              2
-            )}
-            /day
-          </span>
-        </S.Info>
+        {!stakeWithVotingPower &&
+          <>
+            <S.Info>
+              <span>Your voting power</span>
+              <span>
+                {BNtoDecimal(
+                  new BigNumber(
+                    infoStaked.withdrawable || infoStaked.unstake
+                      ? 1
+                      : infoStaked.votingMultiplier
+                  ).mul(infoStaked.yourStake),
+                  new BigNumber(18),
+                  6
+                )}
+              </span>
+            </S.Info> 
+            <S.Info>
+              <span>Your daily KACY reward</span>
+              <span>
+                {infoStaked.hasExpired ? '0' : BNtoDecimal(
+                  infoStaked.yourDailyKacyReward,
+                  new BigNumber(18),
+                  2
+                )}
+                /day
+              </span>
+            </S.Info>
+          </>
+        }
       </>
       :
       null
