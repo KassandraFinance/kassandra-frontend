@@ -6,12 +6,17 @@ interface ITooltipProps {
   children: React.ReactChild
   tooltipTop: boolean
   widthIcon?: number
+  infoGray?: boolean
 }
 
-const Tooltip = ({ children, tooltipTop, widthIcon }: ITooltipProps) => (
+const Tooltip = ({ children, tooltipTop, widthIcon, infoGray }: ITooltipProps) => (
   <TooltipCard tooltipTop={tooltipTop}>
     <TooltipIcon>
-      <img src="assets/IconNotification/info.svg" alt="Descrição" width={widthIcon} />
+      {infoGray ?
+        <img src="assets/info-gray.svg" alt="Descrição" width={widthIcon} />
+        :
+        <img src="assets/info-icon.svg" alt="Descrição" width={widthIcon} />
+      }
     </TooltipIcon>
     <TooltipBox>
       {children}
