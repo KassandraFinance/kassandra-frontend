@@ -29,7 +29,7 @@ const InputBestValue = ({
     const res: Big = poolTokenDetails.reduce((accumulator, current, index) => {
       return Big((swapOutAmount[index] || 0).toString())
         .mul(Big(priceDollar(current.address, poolTokensArray)))
-        .div(current.decimals).add(accumulator)
+        .div(current.decimals.toString(10)).add(accumulator)
     }, Big(0))
 
     setPriceInDollarOnWithdraw(res.toFixed(2))
