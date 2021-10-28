@@ -68,9 +68,10 @@ interface IStakingProps {
   poolInfo: (pid: number) => Promise<PoolInfo>;
   unstaking: (pid: number, walletAddress: string) => Promise<boolean>;
   stakedUntil: (pid: number, walletAddress: string) => Promise<string>;
+  stakeWithVotingPower: boolean;
 }
 
-const KacyStakeCard = ({
+const StakeCard = ({
   pid,
   connect,
   approve,
@@ -81,7 +82,8 @@ const KacyStakeCard = ({
   withdrawable,
   poolInfo,
   unstaking,
-  stakedUntil
+  stakedUntil,
+  stakeWithVotingPower
 }: IStakingProps) => {
   const [isModalStaking, setIsModalStaking] = React.useState<boolean>(false)
   const [isModalUnstaking, setIsModalUnstaking] = React.useState<boolean>(false)
@@ -184,9 +186,9 @@ const KacyStakeCard = ({
 
   return (
     <>
-      <div>
-        <S.BorderGradient>
-          <S.InterBackground>
+      <S.StakeCard>
+        <S.BorderGradient stakeWithVotingPower={stakeWithVotingPower}>
+          <S.InterBackground stakeWithVotingPower={stakeWithVotingPower}>
             <img src="assets/logo-kacy-stake.svg" alt="" />
             <S.IntroStaking>
               <S.APR>
@@ -196,35 +198,40 @@ const KacyStakeCard = ({
               <S.Percentage>{infoStaked.hasExpired ? 0 : Number(infoStaked.apr)/100}%</S.Percentage>
             </S.IntroStaking>
           </S.InterBackground>
-          <S.VotingPowerAndWithdrawDelay>
-            <S.InfoPool>
-              <h3>
-                Voting Power
-              </h3>
-              <p>{infoStaked.votingMultiplier || 1}<span>/$KACY</span></p>
-            </S.InfoPool>
-            <S.InfoPool>
-              <h3>
-                Withdraw delay
-              </h3>
-              <S.Days>
-                <p>
-                  {infoStaked.withdrawDelay/60/60/24 < 1 ?
-                    infoStaked.withdrawDelay/60
-                    :
-                    infoStaked.withdrawDelay/60/60/24
-                  }
-                  <span>
-                    {infoStaked.withdrawDelay/60/60/24 < 1 ? ' min' : ' days'}
-                  </span>
-                </p>
-                <Tooltip tooltipTop={false} widthIcon={18} infoGray={true}>
-                  Time your asset will be locked before you can withdraw it.
-                </Tooltip>
-              </S.Days>
-            </S.InfoPool>
-          </S.VotingPowerAndWithdrawDelay>
+          {stakeWithVotingPower ?
+            <h1>stakeWithVotingPower</h1>
+            :
+            <S.VotingPowerAndWithdrawDelay>
+              <S.InfoPool>
+                <h3>
+                  Voting Power
+                </h3>
+                <p>{infoStaked.votingMultiplier || 1}<span>/$KACY</span></p>
+              </S.InfoPool>
+              <S.InfoPool>
+                <h3>
+                  Withdraw delay
+                </h3>
+                <S.Days>
+                  <p>
+                    {infoStaked.withdrawDelay/60/60/24 < 1 ?
+                      infoStaked.withdrawDelay/60
+                      :
+                      infoStaked.withdrawDelay/60/60/24
+                    }
+                    <span>
+                      {infoStaked.withdrawDelay/60/60/24 < 1 ? ' min' : ' days'}
+                    </span>
+                  </p>
+                  <Tooltip tooltipTop={false} widthIcon={18} infoGray={true}>
+                    Time your asset will be locked before you can withdraw it.
+                  </Tooltip>
+                </S.Days>
+              </S.InfoPool>
+            </S.VotingPowerAndWithdrawDelay>
+          }
           {userWalletAddress && <S.Line />}
+
           <S.InfosStaking>
             <YourStake
               pid={pid}
@@ -235,6 +242,7 @@ const KacyStakeCard = ({
               userWalletAddress={userWalletAddress}
               infoStaked={infoStaked}
               setInfoStaked={setInfoStaked}
+              stakeWithVotingPower={stakeWithVotingPower}
             />
             <S.ButtonContainer>
               {userWalletAddress ? (
@@ -351,7 +359,7 @@ const KacyStakeCard = ({
             </S.ButtonContainer>
           </S.InfosStaking>
         </S.BorderGradient>
-      </div>
+      </S.StakeCard>
       <ModalStaking
         modalOpen={isModalStaking}
         setModalOpen={setIsModalStaking}
@@ -388,4 +396,4 @@ const KacyStakeCard = ({
   )
 }
 
-export default KacyStakeCard
+export default StakeCard
