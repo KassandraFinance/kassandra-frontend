@@ -14,13 +14,16 @@ import useStakingContract from '../../hooks/useStakingContract'
 import Web3Disabled from '../../components/Web3Disabled'
 import TotalVoting from '../../components/TotalVoting'
 import VotingPower from '../../components/VotingPower'
+import KacyStakeCard from '../../components/KacyStakeCard'
 import OthersStakingPools from '../../components/OthersStakingPools'
+import Header from '../../components/Header'
+import BannerCTA from '../../components/BannerCTA'
 
 declare let window: {
   ethereum: any,
 }
 
-const Farm = () => {
+const StakeFarm = () => {
   const [chainId, setChainId] = React.useState<string>('')
   const [loading, setLoading] = React.useState<boolean>(true)
 
@@ -51,7 +54,8 @@ const Farm = () => {
   }, [])
 
   return (
-    <>
+    <S.BackgroundStakeFarm>
+      <Header />
       {loading &&
         <h1
           style={{
@@ -65,72 +69,66 @@ const Farm = () => {
           Loading...
         </h1>
       }
-      {web3.currentProvider !== null && userWalletAddress && chainId === "0x3" && !loading ?
-        <S.FarmContainer>
-          <S.IntroWrapper>
-            <h1>Voting Power Pools</h1>
-            <h3><b>Stake</b> $KACY to <b>earn</b> $KACY + Voting Power</h3>
-            <S.Link>
-              <a href="">Active</a>
-              <a href="">Ended</a>
-            </S.Link>
-          </S.IntroWrapper>
-          <S.GridStaking>
-            <VotingPower
-              days="0"
-              pid={0}
-              connect={connect}
-              approve={kacyToken.approve}
-              getAllowance={kacyToken.allowance}
-              balanceOf={kacyStake.balance}
-              earned={kacyStake.earned}
-              getReward={kacyStake.getReward}
-              withdrawable={kacyStake.withdrawable}
-              poolInfo={kacyStake.poolInfo}
-              unstaking={kacyStake.unstaking}
-              stakedUntil={kacyStake.stakedUntil}
+      {web3.currentProvider !== null && chainId === "0x3" && !loading ?
+        <>
+          <S.StakeFarm>
+            {/* <S.IntroWrapper>
+              <h1>Voting Power Pools</h1>
+              <h3><b>Stake</b> $KACY to <b>earn</b> $KACY + Voting Power</h3>
+              <S.Link>
+                <a href="">Active</a>
+                <a href="">Ended</a>
+              </S.Link>
+            </S.IntroWrapper> */}
+            <S.GridStaking>
+              <KacyStakeCard
+                pid={0}
+                connect={connect}
+                approve={kacyToken.approve}
+                getAllowance={kacyToken.allowance}
+                balanceOf={kacyStake.balance}
+                earned={kacyStake.earned}
+                getReward={kacyStake.getReward}
+                withdrawable={kacyStake.withdrawable}
+                poolInfo={kacyStake.poolInfo}
+                unstaking={kacyStake.unstaking}
+                stakedUntil={kacyStake.stakedUntil}
+              />
+              <KacyStakeCard
+                pid={1}
+                connect={connect}
+                approve={kacyToken.approve}
+                getAllowance={kacyToken.allowance}
+                balanceOf={kacyStake.balance}
+                earned={kacyStake.earned}
+                getReward={kacyStake.getReward}
+                withdrawable={kacyStake.withdrawable}
+                poolInfo={kacyStake.poolInfo}
+                unstaking={kacyStake.unstaking}
+                stakedUntil={kacyStake.stakedUntil}
+              />
+              <KacyStakeCard
+                pid={2}
+                connect={connect}
+                approve={kacyToken.approve}
+                getAllowance={kacyToken.allowance}
+                balanceOf={kacyStake.balance}
+                earned={kacyStake.earned}
+                getReward={kacyStake.getReward}
+                withdrawable={kacyStake.withdrawable}
+                poolInfo={kacyStake.poolInfo}
+                unstaking={kacyStake.unstaking}
+                stakedUntil={kacyStake.stakedUntil}
+              />
+            </S.GridStaking>
+            <TotalVoting
+              getTotalVotes={kacyStake.totalVotes}
+              getCurrentVotes={kacyStake.currentVotes}
+              userWalletAddress={userWalletAddress}
             />
-            <VotingPower
-              days="30"
-              pid={1}
-              connect={connect}
-              approve={kacyToken.approve}
-              getAllowance={kacyToken.allowance}
-              balanceOf={kacyStake.balance}
-              earned={kacyStake.earned}
-              getReward={kacyStake.getReward}
-              withdrawable={kacyStake.withdrawable}
-              poolInfo={kacyStake.poolInfo}
-              unstaking={kacyStake.unstaking}
-              stakedUntil={kacyStake.stakedUntil}
-            />
-            <VotingPower
-              days="45"
-              pid={2}
-              connect={connect}
-              approve={kacyToken.approve}
-              getAllowance={kacyToken.allowance}
-              balanceOf={kacyStake.balance}
-              earned={kacyStake.earned}
-              getReward={kacyStake.getReward}
-              withdrawable={kacyStake.withdrawable}
-              poolInfo={kacyStake.poolInfo}
-              unstaking={kacyStake.unstaking}
-              stakedUntil={kacyStake.stakedUntil}
-            />
-          </S.GridStaking>
-          <TotalVoting
-            getTotalVotes={kacyStake.totalVotes}
-            getCurrentVotes={kacyStake.currentVotes}
-            userWalletAddress={userWalletAddress}
-          />
-          <h3>Other Staking Pools</h3>
-          <S.GridStaking>
-            <OthersStakingPools connect={connect} img="logo-heim" />
-            <OthersStakingPools connect={connect} img="heim-index" />
-            <OthersStakingPools connect={connect} img="" />
-          </S.GridStaking>
-        </S.FarmContainer>
+          </S.StakeFarm>
+          <BannerCTA />
+        </>
         :
         <>
           {web3.currentProvider === null && !loading && (
@@ -139,14 +137,6 @@ const Farm = () => {
               textHeader="Looks like you don't have the metamask wallet installed"
               bodyText="Please install the metamask wallet to access our pools "
               type="install"
-            />
-          )}
-          {!userWalletAddress && chainId === "0x3" && !loading && (
-            <Web3Disabled
-              textButton="Connect Wallet"
-              textHeader="Wallet connection to the Ropsten network is required"
-              bodyText="To have access to all our staking pools, please connect your wallet"
-              type="connect"
             />
           )}
           {web3.currentProvider !== null && chainId !== "0x3" && !loading && (
@@ -159,9 +149,9 @@ const Farm = () => {
           )}
         </>
       }
-    </>
+    </S.BackgroundStakeFarm>
   )
 }
 
-export default Farm
+export default StakeFarm
 

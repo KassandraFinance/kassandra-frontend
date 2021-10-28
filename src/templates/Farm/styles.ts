@@ -2,13 +2,17 @@ import styled from 'styled-components'
 import media from 'styled-media-query'
 import theme from '../../styles/theme'
 
+export const BackgroundStakeFarm = styled.div`
+  background: url('assets/backgroundStakeFarm.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+`
 
-export const FarmContainer = styled.section`
-  max-width: 1520px;
-  margin: 40px auto 64px;
-  padding: 0 ${theme.spacings.space32};
-
-  h1 {
+export const StakeFarm = styled.section`
+  max-width: 945px;
+  margin: 0 auto;
+  /* h1 {
     font-size: ${theme.font.sizes.font24};
     font-weight: ${theme.font.weight.normal};
 
@@ -23,11 +27,7 @@ export const FarmContainer = styled.section`
     @media (max-width: 420px) {
       padding: 0 10px;
     }
-  }
-
-  @media (min-width: 1400px) {
-    max-width: 1320px;
-  }
+  } */
 `
 
 export const IntroWrapper = styled.div`
@@ -53,7 +53,6 @@ export const IntroWrapper = styled.div`
     @media(max-width: 960px) {
       font-size: ${theme.font.sizes.font12};
     }
-
   }
   @media(max-width: 960px) {
     width: 100%
@@ -112,22 +111,18 @@ export const Link = styled.div`
 
 export const GridStaking = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, minmax(360px, 400px));
-  gap: 24px;
+  grid-template-columns: repeat(3, minmax(280px, 295px));
   justify-content: space-between;
-
-  margin: 0 auto;
-  max-width: 1520px;
-  @media (max-width: 1160px) {
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-    height: 100%;
+  @media (max-width: 960px) {
+    grid-template-columns: repeat(2, minmax(280px, 295px));
+    padding: 0 30px;
+    gap: 30px;
+    max-width: 700px;
+    margin: 0 auto;
   }
-  @media (max-width: 800px) {
-    grid-template-columns: 1fr;
-  }
-  @media (max-width: 420px) {
-    gap: 32px;
+  @media (max-width: 680px) {
+    grid-template-columns: repeat(1, minmax(280px, 295px));
+    justify-content: center;
   }
 `
 
