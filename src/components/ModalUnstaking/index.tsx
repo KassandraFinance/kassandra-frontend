@@ -19,8 +19,7 @@ import {
   Amount,
   Line,
   ButtonContainer,
-  ConfirmButton,
-  GetKacy
+  ConfirmButton
 } from './styles'
 import Button from '../Button'
 
@@ -29,19 +28,23 @@ interface IModalStakingProps {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   otherStakingPools: boolean;
   pid: number;
+  decimals: string;
 }
 
 const ModalUnstaking = ({
   modalOpen,
   setModalOpen,
   otherStakingPools,
-  pid
+  pid,
+  decimals
 }: IModalStakingProps) => {
   const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
   const [multiplier, setMultiplier] = React.useState<number>(0)
   const [amountUnstaking, setAmountUnstaking] = React.useState<BigNumber>(
     new BigNumber(0)
   )
+  const [isAmount, setIsAmount] = React.useState<boolean>(false)
+
   const inputRef = React.useRef<HTMLInputElement>(null)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
@@ -50,10 +53,12 @@ const ModalUnstaking = ({
 
   function handleKacyAmount(percentage: BigNumber) {
     const kacyAmount = percentage.mul(balance).div(new BigNumber(100))
-    setAmountUnstaking(kacyAmount)
+    
     if (inputRef.current !== null) {
-      inputRef.current.value = web3.utils.toWei(kacyAmount).toString(10)
+      inputRef.current.value = BNtoDecimal(kacyAmount, new BigNumber(18), 2).replace(' ', '')
     }
+    setAmountUnstaking(kacyAmount)
+    setIsAmount(true)
   }
 
   function handleConfirm() {
@@ -74,6 +79,13 @@ const ModalUnstaking = ({
       setBalance(balance)
     }
   }
+
+  React.useEffect(() => {
+    if (!isAmount) {
+      setMultiplier(0)
+    }
+    setIsAmount(false)
+  }, [amountUnstaking])
 
   React.useEffect(() => {
     if (modalOpen) {
@@ -108,7 +120,7 @@ const ModalUnstaking = ({
               <span>$KACY Amount</span>
               <InputTokenValue
                 max={balance.toString(10)}
-                decimals={wei}
+                decimals={new BigNumber(decimals)}
                 inputRef={inputRef}
                 setInputValue={setAmountUnstaking}
               />

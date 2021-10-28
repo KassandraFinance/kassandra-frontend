@@ -58,7 +58,6 @@ const InputTokenValue = ({
             `${values[1] || 0}${'0'.repeat(decimalsNum)}`.slice(0, decimalsNum)
           }`
 
-console.log(paddedRight)
           setInputValue(new BigNumber(paddedRight))
         }
       }

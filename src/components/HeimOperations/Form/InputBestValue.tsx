@@ -24,14 +24,16 @@ const InputBestValue = ({
   swapOutBalance,
   setPriceInDollarOnWithdraw
 }: IInputBestValueProps) => {
-  const newArray: any[] = Array(poolTokenDetails.length).fill('')
 
   React.useEffect(() => {
-    const res = newArray.reduce((accumulator, current) => {
-      return Big(accumulator).add(Big(current))
-    })
-    setPriceInDollarOnWithdraw(res.toString())
-  }, [newArray])
+    const res: Big = poolTokenDetails.reduce((accumulator, current, index) => {
+      return Big((swapOutAmount[index] || 0).toString())
+        .mul(Big(priceDollar(current.address, poolTokensArray)))
+        .div(Big(10).pow(18)).add(accumulator)
+    }, Big(0))
+
+    setPriceInDollarOnWithdraw(res.toFixed(2))
+  }, [swapOutAmount])
   
   return (
     <S.InputBestValue>
@@ -50,7 +52,6 @@ const InputBestValue = ({
               <S.SpanLight>Balance: {swapOutBalance[index] > new BigNumber(-1) ? BNtoDecimal(swapOutBalance[index], token.decimals) : '...'}</S.SpanLight>
             </S.BestValueItem>
             <S.BestValueItem style={{ paddingRight: '10px' }}>
-              {newArray.splice(index, 1, Big((swapOutAmount[index] || 0).toString()).mul(Big(priceDollar(token.address, poolTokensArray))).div(Big(10).pow(18)).toFixed(6)).toString()}
               <S.Input
                 readOnly
                 type="text"

@@ -727,7 +727,7 @@ const Form = ({
       )}
       {userWalletAddress ? (
         <Button
-          backgroundSecondary
+          backgroundPrimary
           disabledNoEvent={swapInAmount.toString() === "0"}
           fullWidth
           type="submit"
@@ -749,7 +749,7 @@ const Form = ({
         />
         ) : (
         <Button
-          backgroundSecondary
+          backgroundPrimary
           fullWidth
           type="button"
           onClick={() => setIsModaWallet(true)}

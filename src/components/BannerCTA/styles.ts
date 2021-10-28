@@ -85,7 +85,6 @@ export const BannerFooter = styled.div`
     width: 65%;
     padding: 1.6rem 2.4rem;
     font-size: ${theme.font.sizes.font18};
-    font-weight: ${theme.font.weight.medium};
     height: 4.4rem;
     @media(max-width: 700px) {
       margin-bottom: 1.6rem;
