@@ -106,5 +106,6 @@ export const KassandraCard = styled.div`
     line-height: 32px;
     letter-spacing: 0em;
     text-align: left;
+    margin-inline: 0 ;
   }
 `

@@ -12,11 +12,11 @@ export const HeimOperationsContainer = styled.div<IHeimOperationsContainerProps>
 
   max-width: 448px;
   max-height: ${props => props.inputChecked === "Withdraw" ? 
-    props.typeWithdrawChecked === 'Best_value' ? 'calc(100vh - 160px)' : '600px' : '500px' };
+    props.typeWithdrawChecked === 'Best_value' ? 'calc(100vh - 40px)' : '600px' : '500px' };
 
   position: -webkit-sticky;
   position: sticky; 
-  top: 142px;
+  top: 20px;
   
   @media (max-width: 1200px) {
     margin: 0 auto;

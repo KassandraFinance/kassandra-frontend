@@ -19,9 +19,16 @@ interface IDetailsProps {
   hasExpired: boolean
   poolInfo: (pid: number) => Promise<any>
   infoStakeStatic: IInfoStakeStaticProps
+  stakingToken: string
 }
 
-const Details = ({ pid, hasExpired, poolInfo, infoStakeStatic }: IDetailsProps) => {
+const Details = ({ 
+  pid, 
+  hasExpired, 
+  poolInfo, 
+  infoStakeStatic,
+  stakingToken
+}: IDetailsProps) => {
   const [depositedAmount, setDepositedAmount] = React.useState<string>('')
 
   React.useEffect(() => {
@@ -43,7 +50,7 @@ const Details = ({ pid, hasExpired, poolInfo, infoStakeStatic }: IDetailsProps) 
 
   return (
     <S.Details>
-      <S.Info>
+      <S.ValuesKacy>
         <span>Total staked</span>
         <S.KacyUSD>
           <span>
@@ -51,8 +58,8 @@ const Details = ({ pid, hasExpired, poolInfo, infoStakeStatic }: IDetailsProps) 
           </span>
           <span className="usd">&#8776; {BNtoDecimal(new BigNumber(depositedAmount).mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
         </S.KacyUSD>
-      </S.Info>
-      <S.Info>
+      </S.ValuesKacy>
+      <S.ValuesKacy>
         <span>Pool Reward</span>
         <S.KacyUSD>
           <span>
@@ -61,7 +68,7 @@ const Details = ({ pid, hasExpired, poolInfo, infoStakeStatic }: IDetailsProps) 
           <span className="usd">&#8776; {hasExpired ? "0" : BNtoDecimal(infoStakeStatic.kacyRewards.mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
         </S.KacyUSD>
 
-      </S.Info>
+      </S.ValuesKacy>
       <S.Info>
         <span>Start date</span>
         <span>{infoStakeStatic.startDate}</span>
@@ -72,24 +79,23 @@ const Details = ({ pid, hasExpired, poolInfo, infoStakeStatic }: IDetailsProps) 
       </S.Info>
       <S.Info>
         <S.Link>
-          <Link href="/">View project site</Link>
+          <a href={`https://ropsten.etherscan.io/address/${stakingToken}`} target="_blank" rel="noopener noreferrer">
+            See contract
+          </a>
           <img src="assets/GoToSite.svg" alt="" />   
         </S.Link>
         <S.Link>
           <a href="https://app.uniswap.org/" target="_blank" rel="noopener noreferrer">
             Buy $Kacy
           </a>
-          <img src="assets/arrow-right.svg" alt="" />
+          <img src="assets/iconBuyKacy.svg" alt="" />
         </S.Link>
       </S.Info>
       <S.Info>
-      <S.Link>
-        <a href="https://app.uniswap.org/" target="_blank" rel="noopener noreferrer">
-          View contract
-        </a>
-        <img src="assets/GoToSite.svg" alt="" />   
-      </S.Link>
-
+        <S.Link>
+          <Link href="/">Project site</Link>
+          <img src="assets/GoToSite.svg" alt="" />   
+        </S.Link>
         <span>Add to Metamask</span>
 
       </S.Info>

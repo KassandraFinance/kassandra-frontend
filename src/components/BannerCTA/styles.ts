@@ -19,7 +19,7 @@ export const Container = styled.section`
 
   border-radius: 1rem;
   border: 0.1rem solid #FFFFFF0A;
-  background: #2114261F;
+  background: rgba(33, 20, 38, 0.4);
 
   @media(max-width: 700px) {
     grid-template-columns: 1fr;
@@ -85,7 +85,6 @@ export const BannerFooter = styled.div`
     width: 65%;
     padding: 1.6rem 2.4rem;
     font-size: ${theme.font.sizes.font18};
-    font-weight: ${theme.font.weight.medium};
     height: 4.4rem;
     @media(max-width: 700px) {
       margin-bottom: 1.6rem;

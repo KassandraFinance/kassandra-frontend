@@ -26,8 +26,9 @@ const Hero = () => {
       <S.ButtonWrapper>
         <Button
           backgroundPrimary
+          size='large'
           as="a"
-          href="#"
+          href="#Token"
           text="Explore Our Projects"
           onClick={() => clickMatomoEvent("click-to-projects", "hero")}
         />

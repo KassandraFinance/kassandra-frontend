@@ -27,15 +27,15 @@ export const TooltipCard = styled.div<ITooltipCardProps>`
   }
   & ${TooltipIcon}:hover + ${TooltipBox} {
     background-color: #26DBDB;
-    border: 1px solid ${theme.colors.darkPurple}
-;
+    border: 1px solid ${theme.colors.darkPurple};
+
     border-radius: 8px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     -moz-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     font-size: 12px;
-    color: ${theme.colors.darkPurple}
-;
+    color: ${theme.colors.darkPurple};
+    
     display: block;
     text-align-last: start;
 
