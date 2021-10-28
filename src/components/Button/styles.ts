@@ -22,13 +22,11 @@ const wrapperModifiers = {
   medium: (theme: DefaultTheme) => css`
     height: 4.4rem;
     font-size: ${theme.font.sizes.font16};
-    font-weight: ${theme.font.weight.light};
     padding: 14px ${theme.spacings.space24};
   `,
   large: (theme: DefaultTheme) => css`
     height: 4.4rem;
     font-size: ${theme.font.sizes.font16};
-    font-weight: ${theme.font.weight.medium};
     padding: 14px ${theme.spacings.space24};
   `,
   huge: (theme: DefaultTheme) => css`
@@ -51,53 +49,49 @@ const wrapperModifiers = {
   `,
 
   disabledNoEvent: (theme: DefaultTheme) => css`
+    background: #343434;
+    border: 1px solid #343434;
+    color: #8b8b8b;
+
     cursor: not-allowed;
     filter: grayscale(150%);
-    color: ${theme.colors.grayDisabled};
     outline: none;
-    &:after {
-      background-color: transparent;
-    }
-    &:before {
-      background-color: transparent;
-      color: ${theme.colors.grayDisabled};
-    }
+
     &:hover {
-      background-color: transparent;
-      color: ${theme.colors.grayDisabled};
+      background: #343434;
+      color: #8b8b8b;
     }
   `,
 
   backgroundPrimary: (theme: DefaultTheme) => css`
     background: ${`linear-gradient(93.84deg, ${theme.colors.magenta} 0.12%, ${theme.colors.blue} 100%)`};
-    color: ${theme.colors.snow};
-    transition-duration: 800ms;
-   &:hover{
-    background: ${`linear-gradient(93.84deg, ${theme.colors.blue} 0.12%, ${theme.colors.magenta} 100%)`};
-   }
+    font-weight: ${theme.font.weight.medium};
+
+    &:hover {
+      background: ${`linear-gradient(93.84deg, ${theme.colors.blue} 0.12%, ${theme.colors.magenta} 100%)`};
+    }
   `,
 
   backgroundSecondary: (theme: DefaultTheme) => css`
     background: ${theme.colors.blue};
-    color: ${theme.colors.snow};
+    font-weight: ${theme.font.weight.light};
+
+    transition: all 300ms;
     &:hover {
       background: ${theme.colors.darkBlue}
     }
   `,
 
   backgroundBlack: (theme: DefaultTheme) => css`
-    font-size: ${theme.font.sizes.font14};
+    border: ${`0.1rem solid ${theme.colors.cyan}`};
+    background: transparent;
     font-weight: ${theme.font.weight.light};
+
     padding: 12.5px;
-    border-radius: 9px;
-    border: ${`0.1rem solid ${theme.colors.snow}`};
-    color: ${theme.colors.snow};
-    background-color: transparent;
+
     transition: all 300ms;
     &:hover {
       color: ${theme.colors.cyan};
-      border: ${`0.1rem solid ${theme.colors.cyan}`};
-      background-color: transparent;
     }
   `
 }
@@ -115,6 +109,8 @@ export const Wrapper = styled.button<WrapperProps>`
 }) => css`
     border: none;
     border-radius: ${theme.border.radius};
+    color: ${theme.colors.snow};
+
     font-family: ${theme.font.family};
     text-decoration: none;
 
@@ -126,6 +122,7 @@ export const Wrapper = styled.button<WrapperProps>`
     padding: ${theme.spacings.space8};
 
     overflow: hidden;
+    outline: none;
     cursor: pointer;
     z-index: 1;
 
