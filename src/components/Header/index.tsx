@@ -95,7 +95,7 @@ const Header = () => {
 
       <S.MenuDesktop>
         <S.MenuNav>
-          {asPath === '/' ? (
+          {/* {asPath === '/' ? (
             <Link href="/heim" passHref>
               <S.MenuLink onClick={clickMatomoEvent}> HEIM Index </S.MenuLink>
             </Link>
@@ -103,7 +103,7 @@ const Header = () => {
             <Link href="/" passHref>
               <S.MenuLink> Home </S.MenuLink>
             </Link>
-          )}
+          )} */}
 
           <Link href="/products" passHref>
             <S.MenuLink>Buy $Heim</S.MenuLink>
