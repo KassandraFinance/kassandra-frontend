@@ -2,8 +2,7 @@ import React from 'react'
 import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import web3 from '../../utils/web3'
-import { BNtoDecimal, wei } from '../../utils/numerals'
+import { BNtoDecimal } from '../../utils/numerals'
 import { confirmStake } from '../../utils/confirmTransactions'
 
 import { Kacy, Staking } from '../../constants/tokenAddresses'
@@ -21,17 +20,21 @@ interface IModalStakingProps {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   otherStakingPools: boolean;
   pid: number;
+  decimals: string;
 }
 
 const ModalStaking = ({
   modalOpen,
   setModalOpen,
   otherStakingPools,
-  pid
+  pid,
+  decimals
 }: IModalStakingProps) => {
   const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
   const [amountStaking, setAmountStaking] = React.useState<BigNumber>(new BigNumber(0))
   const [multiplier, setMultiplier] = React.useState<number>(0)
+  const [isAmount, setIsAmount] = React.useState<boolean>(false)
+ 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const inputRef = React.useRef<HTMLInputElement>(null)
   const kacyToken = useERC20Contract(Kacy)
@@ -39,16 +42,26 @@ const ModalStaking = ({
 
   function handleKacyAmount(percentage: BigNumber) {
     const kacyAmount = percentage.mul(balance).div(new BigNumber(100))
+    
+    if (inputRef.current !== null) {
+      inputRef.current.value = BNtoDecimal(kacyAmount, new BigNumber(18), 2).replace(' ', '')
+    }
+    
     setAmountStaking(kacyAmount)
+    setIsAmount(true)
   }
 
   async function get() {
     const balanceKacy = await kacyToken.balance(userWalletAddress)
     setBalance(balanceKacy)
-    if (inputRef.current !== null) {
-      inputRef.current.value = web3.utils.toWei(balanceKacy).toString(10)
-    }
   }
+
+  React.useEffect(() => {
+    if (!isAmount) {
+      setMultiplier(0)
+    }
+    setIsAmount(false)
+  }, [amountStaking])
 
   React.useEffect(() => {
     get()
@@ -79,7 +92,7 @@ const ModalStaking = ({
               <InputTokenValue
                 inputRef={inputRef}
                 max={balance.toString(10)}
-                decimals={wei}
+                decimals={new BigNumber(decimals)}
                 setInputValue={setAmountStaking}
               />
               <S.Line />
