@@ -46,17 +46,6 @@ export interface IInfoStaked {
 interface IStakingProps {
   pid: number;
   connect: () => void;
-  approve: (
-    spenderAddress: string,
-    userWalletAddress: string,
-    message?: string,
-    onComplete?: CompleteCallback | undefined
-  ) => Promise<boolean>;
-  getAllowance: (
-    addressCRP: string,
-    tokenAddress: string,
-    walletAddress?: string | undefined
-  ) => Promise<boolean>;
   balanceOf: (pid: number, walletAddress: string) => Promise<BigNumber>;
   earned: (pid: number, walletAddress: string) => Promise<BigNumber>;
   getReward: (
@@ -74,8 +63,6 @@ interface IStakingProps {
 const StakeCard = ({
   pid,
   connect,
-  approve,
-  getAllowance,
   balanceOf,
   earned,
   getReward,
@@ -118,14 +105,17 @@ const StakeCard = ({
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
   async function handleApproveKacy() {
+    const token = ERC20(infoStaked.stakingToken)
     if (isApproveKacyStaking) {
-      const infoStakingToken = await ERC20(infoStaked.stakingToken).decimals()
-      setDecimals((infoStakingToken.toString()))
-
+      const decimals = await token.decimals()
+      setDecimals((decimals.toString()))
+      
       return
     }
-    const res = await approve(Staking, userWalletAddress)
+
+    const res = await token.approve(Staking, userWalletAddress)
     setIsApproveKacyStaking(res)
+
   }
 
   React.useEffect(() => {
@@ -133,12 +123,12 @@ const StakeCard = ({
       return
     }
     
-    getAllowance(Staking, userWalletAddress)
+    const token = ERC20(infoStaked.stakingToken)
+    token.allowance(Staking, userWalletAddress)
       .then((response: boolean) =>
         setIsApproveKacyStaking(response)
       )
-  }, [userWalletAddress])
-
+  }, [userWalletAddress, infoStaked.stakingToken])
 
   // const token = useStakingContract(Staking)
 
@@ -199,36 +189,45 @@ const StakeCard = ({
             </S.IntroStaking>
           </S.InterBackground>
           {stakeWithVotingPower ?
-            <h1>stakeWithVotingPower</h1>
-            :
-            <S.VotingPowerAndWithdrawDelay>
-              <S.InfoPool>
-                <h3>
-                  Voting Power
-                </h3>
-                <p>{infoStaked.votingMultiplier || 1}<span>/$KACY</span></p>
-              </S.InfoPool>
-              <S.InfoPool>
-                <h3>
-                  Withdraw delay
-                </h3>
-                <S.Days>
-                  <p>
-                    {infoStaked.withdrawDelay/60/60/24 < 1 ?
-                      infoStaked.withdrawDelay/60
-                      :
-                      infoStaked.withdrawDelay/60/60/24
-                    }
-                    <span>
-                      {infoStaked.withdrawDelay/60/60/24 < 1 ? ' min' : ' days'}
-                    </span>
-                  </p>
-                  <Tooltip tooltipTop={false} widthIcon={18} infoGray={true}>
-                    Time your asset will be locked before you can withdraw it.
-                  </Tooltip>
-                </S.Days>
-              </S.InfoPool>
-            </S.VotingPowerAndWithdrawDelay>
+              <S.PoolName>
+                <S.StakeAndEarn>
+                  <p>STAKE</p>
+                  <p>$HEIM</p>
+                </S.StakeAndEarn>
+                <S.StakeAndEarn>
+                  <p>EARN</p>
+                  <p>$Kacy</p>
+                </S.StakeAndEarn>
+              </S.PoolName>
+              :
+              <S.VotingPowerAndWithdrawDelay>
+                <S.InfoPool>
+                  <h3>
+                    Voting Power
+                  </h3>
+                  <p>{infoStaked.votingMultiplier || 1}<span>/$KACY</span></p>
+                </S.InfoPool>
+                <S.InfoPool>
+                  <h3>
+                    Withdraw delay
+                  </h3>
+                  <S.Days>
+                    <p>
+                      {infoStaked.withdrawDelay/60/60/24 < 1 ?
+                        infoStaked.withdrawDelay/60
+                        :
+                        infoStaked.withdrawDelay/60/60/24
+                      }
+                      <span>
+                        {infoStaked.withdrawDelay/60/60/24 < 1 ? ' min' : ' days'}
+                      </span>
+                    </p>
+                    <Tooltip tooltipTop={false} widthIcon={18} infoGray={true}>
+                      Time your asset will be locked before you can withdraw it.
+                    </Tooltip>
+                  </S.Days>
+                </S.InfoPool>
+              </S.VotingPowerAndWithdrawDelay>
           }
           {userWalletAddress && <S.Line />}
 
@@ -244,7 +243,7 @@ const StakeCard = ({
               setInfoStaked={setInfoStaked}
               stakeWithVotingPower={stakeWithVotingPower}
             />
-            <S.ButtonContainer>
+            <S.ButtonContainer stakeWithVotingPower={stakeWithVotingPower}>
               {userWalletAddress ? (
                 <>
                   <S.Claim>
@@ -267,67 +266,78 @@ const StakeCard = ({
                       }
                     />
                   </S.Claim>
-                  {isApproveKacyStaking ? (
-                    <S.StakeContainer>
-                      {infoStaked.unstake ? (
-                        <>
-                          <Button
-                            size='huge'
-                            backgroundBlack
-                            type="button"
-                            text='Cancel withdraw'
-                            fullWidth
-                            onClick={() => setIsModalCancelUnstake(true)}
-                          />
-                          <WithdrawDate
-                            pid={pid}
-                            userWalletAddress={userWalletAddress}
-                            stakedUntil={stakedUntil}
-                            setWithdrawDelay={setWithdrawDelay}
-                          />
-                        </>
-                      ) : (
-                        <>
-                          <Button
-                            size='huge'
-                            backgroundSecondary
-                            type="button"
-                            text='Stake KACY'
-                            fullWidth
-                            onClick={() => setIsModalStaking(true)}
-                          />
-                          {infoStaked.yourStake.toString() !== '0' && infoStaked.withdrawable ?
+                  <S.StakeContainer>
+                    {infoStaked.unstake ? (
+                      <>
+                        <Button
+                          size='huge'
+                          backgroundBlack
+                          type="button"
+                          text='Cancel withdraw'
+                          fullWidth
+                          onClick={() => setIsModalCancelUnstake(true)}
+                        />
+                        <WithdrawDate
+                          pid={pid}
+                          userWalletAddress={userWalletAddress}
+                          stakedUntil={stakedUntil}
+                          setWithdrawDelay={setWithdrawDelay}
+                        />
+                      </>
+                    ) : (
+                      <>
+                        {isApproveKacyStaking ?
+                          infoStaked.withdrawDelay !== '0' && infoStaked.withdrawable ?
+                            <Button
+                              size='huge'
+                              backgroundBlack
+                              type="button"
+                              text='Stake KACY'
+                              fullWidth
+                              onClick={() => setIsModalCancelUnstake(true)}
+                            />
+                            : 
                             <Button
                               size='huge'
                               backgroundSecondary
                               type="button"
-                              text='Withdraw'
+                              text='Stake KACY'
                               fullWidth
-                              onClick={() => setIsModalUnstaking(true)}
+                              onClick={() => setIsModalStaking(true)}
                             />
-                            :
-                             <Button
-                              size='huge'
-                              backgroundBlack
-                              disabledNoEvent={infoStaked.yourStake.toString() === '0'}
-                              type="button"
-                              text='Request withdraw'
-                              fullWidth
-                              onClick={() => setIsModalRequestUnstake(true)}
-                            />}
-                        </>
-                      )}
-                    </S.StakeContainer>
-                  ) : (
-                    <Button
-                      size='huge'
-                      backgroundSecondary
-                      type="button"
-                      text='Approve Contract'
-                      fullWidth
-                      onClick={handleApproveKacy}
-                    />
-                  )}
+                          :
+                          <Button
+                            size='huge'
+                            backgroundSecondary
+                            type="button"
+                            text='Approve Contract'
+                            fullWidth
+                            onClick={handleApproveKacy}
+                          />
+                        }
+                        {infoStaked.yourStake.toString() !== '0' && infoStaked.withdrawable ?
+                          <Button
+                            size='huge'
+                            backgroundSecondary
+                            type="button"
+                            text='Withdraw'
+                            fullWidth
+                            onClick={() => setIsModalUnstaking(true)}
+                          />
+                          :
+                          <Button
+                            size='huge'
+                            backgroundBlack
+                            disabledNoEvent={infoStaked.yourStake.toString() === '0'}
+                            type="button"
+                            text='Request withdraw'
+                            fullWidth
+                            onClick={() => setIsModalRequestUnstake(true)}
+                          />
+                        }
+                      </>
+                    )}
+                  </S.StakeContainer>
                 </>
               ) : (
                 <Button size='huge'

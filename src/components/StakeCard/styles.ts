@@ -98,6 +98,21 @@ export const Percentage = styled.p`
   font-weight: ${theme.font.weight.medium};
 `
 
+export const PoolName = styled.div`
+  padding: 20px;
+`
+
+export const StakeAndEarn = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 4px 0;
+  p {
+    color: #c4c4c4;
+    font-size: ${theme.font.sizes.font14};
+  }
+`
 
 export const VotingPowerAndWithdrawDelay = styled.div`
   display: grid;
@@ -153,12 +168,16 @@ export const InfosStaking = styled.div`
   margin: 0 20px;
 `
 
-export const ButtonContainer = styled.div`
+interface IButtonContainerProps {
+  stakeWithVotingPower: boolean
+}
+
+export const ButtonContainer = styled.div<IButtonContainerProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  margin: ${theme.spacings.space16} auto 0;
+  margin: ${props => props.stakeWithVotingPower ? '-8px' : '16px'} auto 0;
   width: 100%;
 `
 
