@@ -46,7 +46,6 @@ const InputBestValue = ({
           <S.InputBestValueGrid key={`best_value_${token.address}`}>
             <S.BestValueItem>
               <S.Symbol bestValue>
-              {console.log(token.symbol, swapOutAmount[index].toString())}
                 {BNtoDecimal(swapOutAmount[index] || new BigNumber(0), token.decimals)}{" "}
                 {poolTokenDetails.length > 0 ? token.symbol : '...'}
               </S.Symbol>
