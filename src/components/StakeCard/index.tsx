@@ -256,7 +256,7 @@ const StakeCard = ({
                       setKacyEarned={setKacyEarned}
                     />
                     <Button
-                      size='medium'
+                      size='claim'
                       backgroundSecondary
                       disabledNoEvent={kacyEarned.toString() === '0'}
                       type="button"
