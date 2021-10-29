@@ -13,6 +13,7 @@ import Web3Disabled from '../../components/Web3Disabled'
 import VotingPower from '../../components/VotingPower'
 import StakeCard from '../../components/StakeCard'
 
+import ComingSoon from './ComingSoon'
 import Header from '../../components/Header'
 import BannerCTA from '../../components/BannerCTA'
 
@@ -165,7 +166,7 @@ const StakeFarm = () => {
                 stakedUntil={kacyStake.stakedUntil}
                 stakeWithVotingPower={true}
               />
-              <h1>Coming soon</h1>
+              <ComingSoon />
             </S.GridStaking>
           </S.StakeFarm>
           <BannerCTA />
