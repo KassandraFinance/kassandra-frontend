@@ -188,9 +188,11 @@ const YourStake = ({
                 new BigNumber(18),
                 6
               )}{' '}
-              KACY
+              <S.Symbol>{!stakeWithVotingPower ? 'KACY' : 'USD'}</S.Symbol>
             </p>
-            <span>&#8776; {BNtoDecimal(new BigNumber(infoStaked.yourStake).mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
+            {!stakeWithVotingPower &&
+              <span>&#8776; {BNtoDecimal(new BigNumber(infoStaked.yourStake).mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
+            }
           </S.Stake>
         </S.Info>
         {!stakeWithVotingPower &&
