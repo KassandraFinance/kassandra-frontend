@@ -14,8 +14,8 @@
     "@styled-icons/remix-fill": "^10.18.0",
     "@types/big.js": "^6.1.2",
     "@types/node": "^15.0.2",
-    "@types/react-copy-to-clipboard": "^5.0.1",
     "@types/react": "^17.0.5",
+    "@types/react-copy-to-clipboard": "^5.0.1",
     "@types/styled-components": "^5.1.11",
     "big.js": "^6.1.1",
     "bn.js": "^5.2.0",
@@ -36,6 +36,7 @@
     "web3-utils": "^1.5.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.2.0",
     "@typescript-eslint/parser": "^4.23.0",
     "babel-plugin-styled-components": "^1.13.2",
     "eslint": "^7.31.0",
