@@ -20,8 +20,9 @@ interface IModalContainerProps {
 export const ModalContainer = styled.div<IModalContainerProps>`
   display: ${(props) => props.modalOpen ? "block" : "none"};
 
+  background-color: rgba(20, 20, 20, 0.9);
   border: 2px solid #FFBF00;
-  background-color: #000;
+  border-radius: 10px;
 
   width: 500px;
   height: 380px;
@@ -37,7 +38,9 @@ export const ModalContainer = styled.div<IModalContainerProps>`
 `
 
 export const Top = styled.div`
+  background-color: rgba(10, 10, 10, 0.9);
   border-bottom: 2px solid #FFBF00;
+  border-radius: 10px 10px 0 0; 
 
   display: flex;
   justify-content: space-between;
