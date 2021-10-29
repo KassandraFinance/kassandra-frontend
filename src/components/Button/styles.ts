@@ -19,6 +19,11 @@ const wrapperModifiers = {
     height: 3rem;
     font-size: ${theme.font.sizes.font14};
   `,
+  claim: (theme: DefaultTheme) => css`
+    height: 5.4rem;
+    font-size: ${theme.font.sizes.font16};
+    padding: 19px 28px;
+  `,
   medium: (theme: DefaultTheme) => css`
     height: 4.4rem;
     font-size: ${theme.font.sizes.font16};

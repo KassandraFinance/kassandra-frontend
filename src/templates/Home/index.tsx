@@ -4,6 +4,7 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 import Hero from './Hero'
 import Products from './Products'
 import ClassProducts from './ClassProducts'
+import CountdownBanner from '../../components/CountdownBanner'
 import Token from './Token'
 import KassandraToken from './KassandraToken'
 import KassandraArchitecture from './KassandraArchitecture'
@@ -24,6 +25,12 @@ const Home = () => {
   return (
     <>
       <Hero />
+      <S.BackgoundCountDown>
+        <CountdownBanner />
+        <S.BackgroundSubscribe>
+          <SubscribeBanner />
+        </S.BackgroundSubscribe>
+      </S.BackgoundCountDown>
       <S.Background>
         <Products />
         <ClassProducts />

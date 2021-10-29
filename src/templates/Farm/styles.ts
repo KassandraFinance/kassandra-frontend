@@ -1,111 +1,83 @@
 import styled from 'styled-components'
-import media from 'styled-media-query'
 import theme from '../../styles/theme'
 
 export const BackgroundStakeFarm = styled.div`
-  background: url('assets/backgroundStakeFarm.svg');
+  background: url('assets/newbg4.svg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
 `
 
 export const StakeFarm = styled.section`
   max-width: 945px;
   margin: 0 auto;
-  /* h1 {
-    font-size: ${theme.font.sizes.font24};
-    font-weight: ${theme.font.weight.normal};
-
-    @media (max-width: 420px) {
-      padding: 0 10px;
-    }
-  }
-  h3 {
-    font-size: ${theme.font.sizes.font20};
-    font-weight: ${theme.font.weight.normal};
-    margin: ${theme.spacings.space16} 0 32px;
-    @media (max-width: 420px) {
-      padding: 0 10px;
-    }
-  } */
 `
 
-export const IntroWrapper = styled.div`
+export const StakeWithPowerVote = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
-  margin: auto ;
-  margin-bottom: 50px;
-  width: 50%;
+  justify-content: space-between;
 
-  > h1{
-    font-size: ${theme.font.sizes.font40};
-    font-weight: ${theme.font.weight.medium};
-    margin-bottom: ${theme.spacings.space24};
-    @media(max-width: 960px) {
-      font-size: ${theme.font.sizes.font24};
-    }
-  }
-  > h3 {
-    font-size: ${theme.font.sizes.font24};
-    font-weight: ${theme.font.weight.light};
-    margin-block:  0 ${theme.spacings.space24};
-    @media(max-width: 960px) {
-      font-size: ${theme.font.sizes.font12};
-    }
-  }
-  @media(max-width: 960px) {
-    width: 100%
+  margin: 50px 0 50px;
+`
+
+export const NameStake = styled.div`
+  p {
+    color: #c4c4c4;
+    font-size: ${theme.font.sizes.font18};
+    text-transform: uppercase;
+
+    margin-left: 32px;
   }
 `
 
-export const Link = styled.div`
+export const Name = styled.div`
   display: flex;
-  margin: auto;
-  width: 50%;
-  justify-content: space-evenly;
-  @media(max-width: 960px){
-    width: 30%
+  align-items: center;
+  max-width: 100%;
+
+  h1 {
+    line-height: ${theme.font.sizes.font32};
+    font-size: ${theme.font.sizes.font32};
+    font-weight: ${theme.font.weight.bold};
+    margin-bottom: 12px;
+    margin-left: 10px;
   }
-  @media(max-width: 600px){
-    width: 50%
+
+  img {
+    margin-bottom: 14px;
   }
-  > a {
-    border: none;
-    text-decoration: none;
-    font-size: ${theme.font.sizes.font18};
-    cursor: pointer;
-    color: ${theme.colors.snow};
-    position: relative;
-    border: none;
-    text-decoration: none;
-    font-weight: ${theme.font.weight.normal};
-    cursor: pointer;
-    &:hover {
-      &::after {
-        content: '';
-        max-width: 100%;
-        text-align: left;
-        position: absolute;
-        display: block;
-        height: 0.1rem;
-        background-color: ${theme.colors.cyan};
-        animation: hoverAnimation 0.3s forwards;
-      }
-      @keyframes hoverAnimation {
-        from {
-          width: 0;
-          left: 50%;
-        }
-        to {
-          width: 100%;
-          left: 0;
-        }
-      }
-    }
-    ${media.lessThan('large')`
-      font-size: ${theme.font.sizes.font12};
-    `}
+`
+
+export const VotingPower = styled.div`
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: ${theme.border.radius};
+  padding: 16px;
+  width: 260px;
+`
+
+export const YourVotingPower = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  span {
+    font-size: ${theme.font.sizes.font12};
+    font-weight: ${theme.font.weight.medium};
+    text-transform: uppercase;
+  }
+`
+
+export const TotalVotingPower = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  span {
+    font-size: ${theme.font.sizes.font12};
+    font-weight: ${theme.font.weight.light};
+    text-transform: uppercase;
   }
 `
 

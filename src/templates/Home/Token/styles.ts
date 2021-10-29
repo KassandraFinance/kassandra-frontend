@@ -1,4 +1,3 @@
-import { HowItWorks } from './../../Heim/HowItWorks/index';
 import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
@@ -62,6 +61,9 @@ export const Card = styled.div`
   border-radius: 12px;
   background: rgba(31, 31, 31, 0.72);
   box-shadow: 0px 4px 69px -17px rgba(0, 0, 0, 0,51);
+  img{
+    max-width: 80%;
+}
   @media(max-width: 960px) {
     margin: auto;
   }

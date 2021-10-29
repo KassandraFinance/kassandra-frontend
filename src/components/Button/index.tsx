@@ -7,7 +7,7 @@ type ButtonTypes =
   | ButtonHTMLAttributes<HTMLButtonElement>
 
 export type ButtonProps = {
-  size?: 'small' | 'medium' | 'large' | 'huge'
+  size?: 'small' | 'claim' |'medium' | 'large' | 'huge'
   fullWidth?: boolean
   backgroundPrimary?: boolean
   backgroundSecondary?: boolean
