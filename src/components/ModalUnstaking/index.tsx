@@ -1,7 +1,6 @@
 import React from 'react'
 import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
-import web3 from '../../utils/web3'
 
 import { Staking } from '../../constants/tokenAddresses'
 import { confirmWithdraw } from '../../utils/confirmTransactions'
@@ -10,23 +9,13 @@ import useStakingContract from '../../hooks/useStakingContract'
 
 import InputTokenValue from '../InputTokenValue'
 
-import {
-  Backdrop,
-  BorderGradient,
-  BackgroundBlack,
-  InterBackground,
-  Main,
-  Amount,
-  Line,
-  ButtonContainer,
-  ConfirmButton
-} from './styles'
+import * as S from './styles'
+
 import Button from '../Button'
 
 interface IModalStakingProps {
   modalOpen: boolean;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  otherStakingPools: boolean;
   pid: number;
   decimals: string;
 }
@@ -34,7 +23,6 @@ interface IModalStakingProps {
 const ModalUnstaking = ({
   modalOpen,
   setModalOpen,
-  otherStakingPools,
   pid,
   decimals
 }: IModalStakingProps) => {
@@ -100,23 +88,19 @@ const ModalUnstaking = ({
 
   return (
     <>
-      <Backdrop
+      <S.Backdrop
         onClick={() => setModalOpen(false)}
         style={{ display: modalOpen ? 'block' : 'none' }}
       />
-      <BorderGradient
-        modalOpen={modalOpen}
-        otherStakingPools={otherStakingPools}
-      >
-        <BackgroundBlack>
-          <InterBackground otherStakingPools={otherStakingPools}>
+        <S.Modal modalOpen={modalOpen}>
+          <S.InterBackground>
             <span>Unstaking</span>
             <button type="button" onClick={() => setModalOpen(false)}>
-              <img src="assets/close.svg" alt="" />{' '}
+              <img src="assets/close.svg" alt="" />
             </button>
-          </InterBackground>
-          <Main>
-            <Amount>
+          </S.InterBackground>
+          <S.Main>
+            <S.Amount>
               <span>$KACY Amount</span>
               <InputTokenValue
                 max={balance.toString(10)}
@@ -124,13 +108,12 @@ const ModalUnstaking = ({
                 inputRef={inputRef}
                 setInputValue={setAmountUnstaking}
               />
-              <Line />
               <h5>Balance: {BNtoDecimal(balance, new BigNumber(18), 6)}</h5>
-            </Amount>
-            <ButtonContainer>
+            </S.Amount>
+            <S.ButtonContainer>
               <button
                 style={{
-                  background: multiplier === 25 ? '#26DBDB' : 'transparent',
+                  background: multiplier === 25 ? '#fff' : 'transparent',
                   color: multiplier === 25 ? '#000' : '#fff'
                 }}
                 type="button"
@@ -146,7 +129,7 @@ const ModalUnstaking = ({
 
               <button
                 style={{
-                  background: multiplier === 50 ? '#26DBDB' : 'transparent',
+                  background: multiplier === 50 ? '#fff' : 'transparent',
                   color: multiplier === 50 ? '#000' : '#fff'
                 }}
                 type="button"
@@ -162,7 +145,7 @@ const ModalUnstaking = ({
 
               <button
                 style={{
-                  background: multiplier === 75 ? '#26DBDB' : 'transparent',
+                  background: multiplier === 75 ? '#fff' : 'transparent',
                   color: multiplier === 75 ? '#000' : '#fff'
                 }}
                 type="button"
@@ -178,7 +161,7 @@ const ModalUnstaking = ({
 
               <button
                 style={{
-                  background: multiplier === 100 ? '#26DBDB' : 'transparent',
+                  background: multiplier === 100 ? '#fff' : 'transparent',
                   color: multiplier === 100 ? '#000' : '#fff'
                 }}
                 type="button"
@@ -191,11 +174,10 @@ const ModalUnstaking = ({
               >
                 max
               </button>
-            </ButtonContainer>
-            <ConfirmButton
+            </S.ButtonContainer>
+            <S.ConfirmButton
               type="button"
               disabled={amountUnstaking.toString() === '0'}
-              otherStakingPools={otherStakingPools}
               onClick={() => {
                 setModalOpen(false)
                 handleConfirm()
@@ -203,7 +185,7 @@ const ModalUnstaking = ({
               }}
             >
               Confirm
-            </ConfirmButton>
+            </S.ConfirmButton>
             <Button
               backgroundBlack
               fullWidth
@@ -211,9 +193,8 @@ const ModalUnstaking = ({
               type="button"
               onClick={() => setModalOpen(false)}
             />
-          </Main>
-        </BackgroundBlack>
-      </BorderGradient>
+          </S.Main>
+      </S.Modal>
     </>
   )
 }

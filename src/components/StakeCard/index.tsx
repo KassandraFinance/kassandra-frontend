@@ -363,14 +363,12 @@ const StakeCard = ({
       <ModalStaking
         modalOpen={isModalStaking}
         setModalOpen={setIsModalStaking}
-        otherStakingPools={false}
         pid={pid}
         decimals={decimals}
       />
       <ModalUnstaking
         modalOpen={isModalUnstaking}
         setModalOpen={setIsModalUnstaking}
-        otherStakingPools={false}
         pid={pid}
         decimals={decimals}
       />

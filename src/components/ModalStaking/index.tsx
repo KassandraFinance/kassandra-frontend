@@ -18,7 +18,6 @@ import Button from '../Button'
 interface IModalStakingProps {
   modalOpen: boolean;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  otherStakingPools: boolean;
   pid: number;
   decimals: string;
 }
@@ -26,7 +25,6 @@ interface IModalStakingProps {
 const ModalStaking = ({
   modalOpen,
   setModalOpen,
-  otherStakingPools,
   pid,
   decimals
 }: IModalStakingProps) => {
@@ -74,13 +72,12 @@ const ModalStaking = ({
 
   return (
     <>
-      <S.Backdrop onClick={() => setModalOpen(false)} style={{ display: modalOpen ? 'block' : 'none' }} />
-      <S.BorderGradient
-        modalOpen={modalOpen}
-        otherStakingPools={otherStakingPools}
-      >
-        <S.BackgroundBlack>
-          <S.InterBackground otherStakingPools={otherStakingPools}>
+      <S.Backdrop 
+        onClick={() => setModalOpen(false)} 
+        style={{ display: modalOpen ? 'block' : 'none' }}
+      />
+        <S.Modal modalOpen={modalOpen}>
+          <S.InterBackground>
             <span>Stake in Pool</span>
             <button type="button" onClick={() => setModalOpen(false)}>
               <img src="assets/close.svg" alt="" />
@@ -95,13 +92,12 @@ const ModalStaking = ({
                 decimals={new BigNumber(decimals)}
                 setInputValue={setAmountStaking}
               />
-              <S.Line />
               <h5>Balance: {BNtoDecimal(balance, new BigNumber(18), 6)}</h5>
             </S.Amount>
             <S.ButtonContainer>
 
               <button
-                style={{ background: multiplier === 25 ? '#26DBDB' : 'transparent', color: multiplier === 25 ? '#000' : '#fff' }}
+                style={{ background: multiplier === 25 ? '#fff' : 'transparent', color: multiplier === 25 ? '#000' : '#fff' }}
                 type="button"
                 onClick={() => {
                   multiplier === 25 ? setMultiplier(0) : setMultiplier(25)
@@ -109,7 +105,7 @@ const ModalStaking = ({
                 }}
               >25%</button>
 
-              <button style={{ background: multiplier === 50 ? '#26DBDB' : 'transparent', color: multiplier === 50 ? '#000' : '#fff' }}
+              <button style={{ background: multiplier === 50 ? '#fff' : 'transparent', color: multiplier === 50 ? '#000' : '#fff' }}
                 type="button"
                 onClick={() => {
                   multiplier === 50 ? setMultiplier(0) : setMultiplier(50)
@@ -118,7 +114,7 @@ const ModalStaking = ({
               >50%</button>
 
               <button
-                style={{ background: multiplier === 75 ? '#26DBDB' : 'transparent', color: multiplier === 75 ? '#000' : '#fff' }}
+                style={{ background: multiplier === 75 ? '#fff' : 'transparent', color: multiplier === 75 ? '#000' : '#fff' }}
                 type="button"
                 onClick={() => {
                   multiplier === 75 ? setMultiplier(0) : setMultiplier(75)
@@ -127,7 +123,7 @@ const ModalStaking = ({
               >75%</button>
 
               <button
-                style={{ background: multiplier === 100 ? '#26DBDB' : 'transparent', color: multiplier === 100 ? '#000' : '#fff' }}
+                style={{ background: multiplier === 100 ? '#fff' : 'transparent', color: multiplier === 100 ? '#000' : '#fff' }}
                 type="button"
                 onClick={() => {
                   multiplier === 100 ? setMultiplier(0) : setMultiplier(100)
@@ -139,7 +135,6 @@ const ModalStaking = ({
             <S.ConfirmButton
               type="button"
               disabled={amountStaking.toString() === '0'}
-              otherStakingPools={otherStakingPools}
               onClick={() => {
                 setModalOpen(false)
                 kacyStake.stake(pid, amountStaking, confirmStake, 'Pending stake')
@@ -152,6 +147,7 @@ const ModalStaking = ({
             <Button
               backgroundBlack
               fullWidth
+              size="huge"
               text="Get Kacy"
               href="https://app.uniswap.org"
               target="_blank"
@@ -159,8 +155,7 @@ const ModalStaking = ({
               onClick={() => setModalOpen(false)}
             />
           </S.Main>
-        </S.BackgroundBlack>
-      </S.BorderGradient>
+        </S.Modal>
     </>
   )
 }
