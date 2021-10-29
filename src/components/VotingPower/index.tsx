@@ -5,18 +5,19 @@ import web3 from '../../utils/web3'
 import { BNtoDecimal } from '../../utils/numerals'
 
 import * as S from './styles'
+import Tooltip from '../Tooltip'
 
-interface ITotalVotingProps {
+interface IVotingPowerProps {
   getTotalVotes: () => Promise<BigNumber>;
   getCurrentVotes: (walletAddres: string) => Promise<BigNumber>;
   userWalletAddress: string;
 }
 
-const TotalVoting = ({
+const VotingPower = ({
   getTotalVotes,
   getCurrentVotes,
   userWalletAddress
-}: ITotalVotingProps) => {
+}: IVotingPowerProps) => {
   const [totalVotes, setTotalVotes] = React.useState(new BigNumber(0))
   const [yourVotingPower, setYourVotingPower] = React.useState(new BigNumber(0))
 
@@ -38,17 +39,21 @@ const TotalVoting = ({
   }, [userWalletAddress])
 
   return (
-    <S.TotalVoting>
-      <fieldset>
-        <legend>Your voting power</legend>
-        <span>{BNtoDecimal(yourVotingPower, new BigNumber(18))}</span>
-      </fieldset>
-      <fieldset>
-        <legend>Total voting power</legend>
+    <S.VotingPower>
+      <S.YourVotingPower>
+        <span>your voting power 
+          <Tooltip tooltipTop={true} infoGray={true} widthIcon={14} >
+            about voting power
+          </Tooltip>
+        </span>
+        <span style={{ fontSize: '14px' }}>{BNtoDecimal(yourVotingPower, new BigNumber(18))}</span>
+      </S.YourVotingPower>  
+      <S.TotalVotingPower>
+        <span>total voting power</span>
         <span>{BNtoDecimal(totalVotes, new BigNumber(18))}</span>
-      </fieldset>
-    </S.TotalVoting>
+      </S.TotalVotingPower>
+    </S.VotingPower>
   )
 }
 
-export default TotalVoting
+export default VotingPower

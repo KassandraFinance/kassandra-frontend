@@ -96,7 +96,7 @@ const Details = ({
           <Link href="/">Project site</Link>
           <img src="assets/GoToSite.svg" alt="" />   
         </S.Link>
-        <span>Add to Metamask</span>
+        {/* <span>Add to Metamask</span> */}
 
       </S.Info>
     </S.Details>

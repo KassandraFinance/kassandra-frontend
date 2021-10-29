@@ -42,9 +42,11 @@ export const Stake = styled.div`
   font-weight: ${theme.font.weight.light};
   text-transform: uppercase;
   p {
+    color: #fff;
+    display: flex;
     line-height: ${theme.font.sizes.font14};
     font-size: ${theme.font.sizes.font14};
-    font-weight: ${theme.font.weight.medium};
+    font-weight: ${theme.font.weight.medium} !important;
     margin: 24px 0 4px;
     @media (max-width: 540px) {
       font-size: ${theme.font.sizes.font16};
@@ -56,4 +58,11 @@ export const Stake = styled.div`
     font-size: ${theme.font.sizes.font12};
     font-weight: ${theme.font.weight.normal} !important;
   }
+`
+
+export const Symbol = styled.h4`
+  color: #c4c4c4 !important;
+  font-size: ${theme.font.sizes.font14} !important;
+  font-weight: ${theme.font.weight.medium} !important;
+  margin-left: 4px;
 `
