@@ -365,6 +365,7 @@ const StakeCard = ({
         setModalOpen={setIsModalStaking}
         pid={pid}
         decimals={decimals}
+        stakingToken={infoStaked.stakingToken}
       />
       <ModalUnstaking
         modalOpen={isModalUnstaking}

@@ -20,13 +20,15 @@ interface IModalStakingProps {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   pid: number;
   decimals: string;
+  stakingToken: string;
 }
 
 const ModalStaking = ({
   modalOpen,
   setModalOpen,
   pid,
-  decimals
+  decimals,
+  stakingToken
 }: IModalStakingProps) => {
   const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
   const [amountStaking, setAmountStaking] = React.useState<BigNumber>(new BigNumber(0))
@@ -35,7 +37,7 @@ const ModalStaking = ({
  
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const inputRef = React.useRef<HTMLInputElement>(null)
-  const kacyToken = useERC20Contract(Kacy)
+  const kacyToken = useERC20Contract(stakingToken)
   const kacyStake = useStakingContract(Staking)
 
   function handleKacyAmount(percentage: BigNumber) {
