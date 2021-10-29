@@ -19,10 +19,18 @@ import {
 interface IModalRequestUnstakeProps {
   modalOpen: boolean;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsModalStaking: React.Dispatch<React.SetStateAction<boolean>>;
   pid: number;
+  staking: boolean;
 }
 
-const ModalCancelUnstake = ({ modalOpen, setModalOpen, pid }: IModalRequestUnstakeProps) => {
+const ModalCancelUnstake = ({ 
+  modalOpen, 
+  setModalOpen, 
+  setIsModalStaking,
+  pid,
+  staking
+ }: IModalRequestUnstakeProps) => {
   const kacyStake = useStakingContract(Staking)
 
   return (
@@ -37,7 +45,11 @@ const ModalCancelUnstake = ({ modalOpen, setModalOpen, pid }: IModalRequestUnsta
           <Close type="button" onClick={() => setModalOpen(false)} ><img src="assets/close.svg" alt="" /></Close>
         </Top>
         <Content>
-          <p>By staking you will reset your withdraw time.</p>
+          {staking ? 
+            <p>By staking you will reset your withdraw time.</p>
+            :
+            <p>By canceling the withdraw you will reset your withdrawal time.</p>
+          }
           <p>Do you want to proceed ?</p>
           <ButtonContainer>
             <button 
@@ -49,7 +61,11 @@ const ModalCancelUnstake = ({ modalOpen, setModalOpen, pid }: IModalRequestUnsta
             <button 
               type="button" 
               onClick={() => {
-                kacyStake.cancelUnstake(pid, confirmCancelUnstake, "Pending cancel unstake")
+                if (staking) {
+                  setIsModalStaking(true)
+                } else {
+                  kacyStake.cancelUnstake(pid, confirmCancelUnstake, "Pending cancel withdraw")
+                }
                 setModalOpen(false)
               }}
             >

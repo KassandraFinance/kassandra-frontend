@@ -386,7 +386,9 @@ const StakeCard = ({
       <ModalCancelUnstake
         modalOpen={isModalCancelUnstake}
         setModalOpen={setIsModalCancelUnstake}
+        setIsModalStaking={setIsModalStaking}
         pid={pid}
+        staking={infoStaked.withdrawDelay !== '0' && infoStaked.withdrawable}
       />
       <ModalRequestUnstake
         modalOpen={isModalRequestUnstake}
