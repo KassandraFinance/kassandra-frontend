@@ -39,14 +39,16 @@ const Summary = () => {
       <p style={{ margin: '20px 0 10px' }}>CONTRACT</p>
       <S.CopyContract>
         <S.Blockchain>
-          <img src="assets/avalanche.svg" alt="" />
+          <img
+            src="assets/avalancheIcon.svg"
+            alt=""
+            width="1503"
+            height="1504"
+          />
           <span>Avalanche C-Chain</span>
         </S.Blockchain>
         <CopyToClipboard text={HeimCorePool}>
-          <button
-            type="button"
-            onClick={handleCopyLink}
-          >
+          <button type="button" onClick={handleCopyLink}>
             {substr(HeimCorePool)}
             <img src="assets/copy.svg" alt="" style={{ marginLeft: '16px' }} />
           </button>
