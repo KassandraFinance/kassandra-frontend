@@ -7,7 +7,7 @@ export const BorderGradient = styled.div`
 
   position: relative;
   width: 295px;
-  max-height: 430px;
+  max-height: 474px;
   z-index: 1;
 
   @media (max-width: 420px) {

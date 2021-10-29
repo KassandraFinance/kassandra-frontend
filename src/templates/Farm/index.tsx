@@ -90,8 +90,6 @@ const StakeFarm = () => {
               <StakeCard
                 pid={0}
                 connect={connect}
-                approve={kacyToken.approve}
-                getAllowance={kacyToken.allowance}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
                 getReward={kacyStake.getReward}
@@ -104,8 +102,6 @@ const StakeFarm = () => {
               <StakeCard
                 pid={1}
                 connect={connect}
-                approve={kacyToken.approve}
-                getAllowance={kacyToken.allowance}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
                 getReward={kacyStake.getReward}
@@ -118,8 +114,6 @@ const StakeFarm = () => {
               <StakeCard
                 pid={2}
                 connect={connect}
-                approve={kacyToken.approve}
-                getAllowance={kacyToken.allowance}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
                 getReward={kacyStake.getReward}
@@ -141,8 +135,6 @@ const StakeFarm = () => {
               <StakeCard
                 pid={3}
                 connect={connect}
-                approve={kacyToken.approve}
-                getAllowance={kacyToken.allowance}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
                 getReward={kacyStake.getReward}
@@ -155,8 +147,6 @@ const StakeFarm = () => {
               <StakeCard
                 pid={4}
                 connect={connect}
-                approve={kacyToken.approve}
-                getAllowance={kacyToken.allowance}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
                 getReward={kacyStake.getReward}
@@ -169,7 +159,9 @@ const StakeFarm = () => {
               <ComingSoon />
             </S.GridStaking>
           </S.StakeFarm>
-          <BannerCTA />
+          <div style={{ marginTop: '160px', paddingBottom: '200px' }}>
+            <BannerCTA />
+          </div>
         </>
         :
         <>

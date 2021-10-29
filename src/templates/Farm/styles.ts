@@ -1,12 +1,12 @@
 import styled from 'styled-components'
-import media from 'styled-media-query'
 import theme from '../../styles/theme'
 
 export const BackgroundStakeFarm = styled.div`
-  background: url('assets/backgroundStakeFarm.svg');
+  background: url('assets/newbg4.svg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
 `
 
 export const StakeFarm = styled.section`
