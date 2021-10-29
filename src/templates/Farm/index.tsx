@@ -1,8 +1,6 @@
 import React from 'react'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import * as S from './styles'
-
 import { Kacy, Staking } from '../../constants/tokenAddresses'
 
 import web3 from '../../utils/web3'
@@ -12,11 +10,13 @@ import useERC20Contract from '../../hooks/useERC20Contract'
 import useStakingContract from '../../hooks/useStakingContract'
 
 import Web3Disabled from '../../components/Web3Disabled'
-import TotalVoting from '../../components/TotalVoting'
+import VotingPower from '../../components/VotingPower'
 import StakeCard from '../../components/StakeCard'
 
 import Header from '../../components/Header'
 import BannerCTA from '../../components/BannerCTA'
+
+import * as S from './styles'
 
 declare let window: {
   ethereum: any,
@@ -71,14 +71,20 @@ const StakeFarm = () => {
       {web3.currentProvider !== null && chainId === "0x3" && !loading ?
         <>
           <S.StakeFarm>
-            {/* <S.IntroWrapper>
-              <h1>Voting Power Pools</h1>
-              <h3><b>Stake</b> $KACY to <b>earn</b> $KACY + Voting Power</h3>
-              <S.Link>
-                <a href="">Active</a>
-                <a href="">Ended</a>
-              </S.Link>
-            </S.IntroWrapper> */}
+            <S.StakeWithPowerVote>
+              <S.NameStake>
+                <S.Name>
+                  <img src="assets/stake-with-vote.svg" alt="" />
+                  <h1>Stake With Power Vote</h1>
+                </S.Name>
+                <p>Stake $KACY to earn $KACY + Voting Power</p>
+              </S.NameStake>
+              <VotingPower
+                getTotalVotes={kacyStake.totalVotes}
+                getCurrentVotes={kacyStake.currentVotes}
+                userWalletAddress={userWalletAddress}
+              />
+            </S.StakeWithPowerVote>
             <S.GridStaking>
               <StakeCard
                 pid={0}
@@ -123,11 +129,13 @@ const StakeFarm = () => {
                 stakeWithVotingPower={false}
               />
             </S.GridStaking>
-            <TotalVoting
-              getTotalVotes={kacyStake.totalVotes}
-              getCurrentVotes={kacyStake.currentVotes}
-              userWalletAddress={userWalletAddress}
-            />
+            <S.NameStake style={{ margin: '100px 0 50px' }} >
+              <S.Name>
+                <img src="assets/stake-money-withdraw.svg" alt="" />
+                <h1>Other Staking Pools</h1>
+              </S.Name>
+              <p>Stake $KACY to earn $KACY + Voting Power</p>
+            </S.NameStake>
             <S.GridStaking>
               <StakeCard
                 pid={3}
@@ -187,4 +195,3 @@ const StakeFarm = () => {
 }
 
 export default StakeFarm
-
