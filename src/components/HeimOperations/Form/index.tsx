@@ -733,18 +733,28 @@ const Form = ({
           type="submit"
           text={
             isApproved[tokenInIndex] ?
-            swapInAmount.toString() !== '0' ?
-              title === "Withdraw" ?
-              typeWithdrawChecked === "Best_value" ?
-                `${title} ${'$' + priceInDollarOnWithdraw}` 
+              swapInAmount.toString() !== '0' ?
+                title === "Withdraw" ?
+                  typeWithdrawChecked === "Best_value" ?
+                    `${title} ${'$' + priceInDollarOnWithdraw}`
+                  :
+                    `${title} ${'$' + BNtoDecimal(
+                      Big((swapOutAmount[0] || 0).toString())
+                        .mul(Big(priceDollar(swapOutAddress, poolTokensArray))),
+                      Big(poolTokenDetails[tokenOutIndex]?.decimals.toString(10)),
+                      2, 2
+                    )}`
                 :
-                `${title} ${'$' + BNtoDecimal(Big((swapOutAmount || 0).toString()).mul(Big(priceDollar(swapOutAddress, poolTokensArray))), Big(poolTokenDetails[tokenOutIndex]?.decimals.toString(10)), 2)}`
+                  `${title} ${'$' + BNtoDecimal(
+                    Big((swapInAmount || 0).toString())
+                      .mul(Big(priceDollar(swapInAddress, poolTokensArray))),
+                    Big(poolTokenDetails[tokenInIndex]?.decimals.toString(10)),
+                    2, 2
+                  )}`
               :
-              `${title} ${'$' + BNtoDecimal(Big((swapInAmount || 0).toString()).mul(Big(priceDollar(swapInAddress, poolTokensArray))), Big(poolTokenDetails[tokenInIndex]?.decimals.toString(10)), 2)}`
-              :
-              `${title}`
+                `${title}`
             : 
-            'Approve'
+              'Approve'
           }
         />
         ) : (

@@ -29,10 +29,10 @@ const InputBestValue = ({
     const res: Big = poolTokenDetails.reduce((accumulator, current, index) => {
       return Big((swapOutAmount[index] || 0).toString())
         .mul(Big(priceDollar(current.address, poolTokensArray)))
-        .div(current.decimals.toString(10)).add(accumulator)
+        .div(Big(10).pow(current.decimals.toNumber())).add(accumulator)
     }, Big(0))
 
-    setPriceInDollarOnWithdraw(res.toFixed(2))
+    setPriceInDollarOnWithdraw(BNtoDecimal(res.mul(Big(10).pow(18)), Big(18), 2, 2))
   }, [swapOutAmount])
   
   return (
@@ -43,10 +43,11 @@ const InputBestValue = ({
       </S.IntroBestValue>
       <S.AllInput>
         {poolTokenDetails.map((token, index) => 
-          <S.InputBestValueGrid>
+          <S.InputBestValueGrid key={`best_value_${token.address}`}>
             <S.BestValueItem>
               <S.Symbol bestValue>
-                {BNtoDecimal(swapOutAmount[index] || new BigNumber(0), token.decimals, )}{" "}
+              {console.log(token.symbol, swapOutAmount[index].toString())}
+                {BNtoDecimal(swapOutAmount[index] || new BigNumber(0), token.decimals)}{" "}
                 {poolTokenDetails.length > 0 ? token.symbol : '...'}
               </S.Symbol>
               <S.SpanLight>Balance: {swapOutBalance[index] > new BigNumber(-1) ? BNtoDecimal(swapOutBalance[index], token.decimals) : '...'}</S.SpanLight>
@@ -56,7 +57,7 @@ const InputBestValue = ({
                 readOnly
                 type="text"
                 placeholder="0"
-                value={'$' + BNtoDecimal(Big((swapOutAmount[index] || 0).toString()).mul(Big(priceDollar(token.address, poolTokensArray))), Big(poolTokenDetails[index].decimals.toString(10)), 2)}
+                value={'$' + BNtoDecimal(Big((swapOutAmount[index] || 0).toString()).mul(Big(priceDollar(token.address, poolTokensArray))), Big(token.decimals.toString(10)), 2)}
                 />
               <S.SpanLight style={{ textAlign: 'right', float: 'right' }}>{token.allocation}%</S.SpanLight>
             </S.BestValueItem>
