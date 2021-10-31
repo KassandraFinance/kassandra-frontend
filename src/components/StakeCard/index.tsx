@@ -179,7 +179,20 @@ const StakeCard = ({
       <S.StakeCard>
         <S.BorderGradient stakeWithVotingPower={stakeWithVotingPower}>
           <S.InterBackground stakeWithVotingPower={stakeWithVotingPower}>
-            <img src="assets/logo-kacy-stake.svg" alt="" />
+            {pid !== 3 && pid !== 4 ? <img src="assets/logo-kacy-stake.svg" alt="" /> 
+            : 
+              null
+            }
+            {pid === 3 ? 
+              <img src="assets/stake-heim.svg" alt="" style={{ marginLeft: '-20px' }} />
+            :
+              null
+            }
+            {pid === 4 ? 
+              <img src="assets/stake-kacy-eth-uni.png" alt="" />
+            :
+              null
+            }
             <S.IntroStaking>
               <S.APR>
                 <Tooltip widthIcon={16} tooltipTop={true}>Annual Percentage Return</Tooltip>
@@ -192,11 +205,11 @@ const StakeCard = ({
               <S.PoolName>
                 <S.StakeAndEarn>
                   <p>STAKE</p>
-                  <p>$HEIM</p>
+                  {pid === 3 ? <p>$HEIM</p> : <p>$KACY-ETH UNIV LP</p>}
                 </S.StakeAndEarn>
                 <S.StakeAndEarn>
                   <p>EARN</p>
-                  <p>$Kacy</p>
+                  <p>$KACY</p>
                 </S.StakeAndEarn>
               </S.PoolName>
               :
