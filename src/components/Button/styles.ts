@@ -96,7 +96,8 @@ const wrapperModifiers = {
 
     transition: all 300ms;
     &:hover {
-      color: ${theme.colors.cyan};
+      color: ${theme.colors.darkPurple};
+      background: ${theme.colors.cyan};
     }
   `
 }

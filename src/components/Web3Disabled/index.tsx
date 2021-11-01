@@ -77,7 +77,7 @@ const Web3Disabled = ({ textButton, textHeader, bodyText, type }: IWeb3DisabledP
             :
             <Button 
               backgroundBlack
-              size="large"
+              size="huge"
               text={textButton}
               onClick={() => getFunction(type)}
             />
