@@ -22,6 +22,10 @@ export const HeimOperationsContainer = styled.div<IHeimOperationsContainerProps>
     margin: 0 auto;
     display: block;
   }
+  @media (max-width: 960px) {
+    max-width: 100%;
+    margin: 0 0 80px;
+  }
 `
 
 export const SelectOperator = styled.div`

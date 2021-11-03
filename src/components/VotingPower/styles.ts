@@ -6,6 +6,10 @@ export const VotingPower = styled.div`
   border-radius: ${theme.border.radius};
   padding: 16px;
   width: 260px;
+
+  @media (max-width: 960px) {
+    margin-top: 20px;
+  }
 `
 
 export const YourVotingPower = styled.div`
