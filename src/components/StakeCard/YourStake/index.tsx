@@ -186,7 +186,7 @@ const YourStake = ({
               {BNtoDecimal(
                 infoStaked.yourStake,
                 new BigNumber(18),
-                6
+                2
               )}{' '}
               <S.Symbol>{!stakeWithVotingPower ? 'KACY' : 'USD'}</S.Symbol>
             </p>
@@ -207,7 +207,7 @@ const YourStake = ({
                       : infoStaked.votingMultiplier
                   ).mul(infoStaked.yourStake),
                   new BigNumber(18),
-                  6
+                  2
                 )}
               </span>
             </S.Info> 

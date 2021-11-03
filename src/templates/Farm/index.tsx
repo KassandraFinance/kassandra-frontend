@@ -1,12 +1,11 @@
 import React from 'react'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import { Kacy, Staking } from '../../constants/tokenAddresses'
+import { Staking } from '../../constants/tokenAddresses'
 
 import web3 from '../../utils/web3'
 
 import useConnect from '../../hooks/useConnect'
-import useERC20Contract from '../../hooks/useERC20Contract'
 import useStakingContract from '../../hooks/useStakingContract'
 
 import Web3Disabled from '../../components/Web3Disabled'
@@ -26,8 +25,6 @@ declare let window: {
 const StakeFarm = () => {
   const [chainId, setChainId] = React.useState<string>('')
   const [loading, setLoading] = React.useState<boolean>(true)
-
-  const kacyToken = useERC20Contract(Kacy)
   const kacyStake = useStakingContract(Staking)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
@@ -89,6 +86,7 @@ const StakeFarm = () => {
             <S.GridStaking>
               <StakeCard
                 pid={0}
+                symbol="kacy"
                 connect={connect}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
@@ -101,6 +99,7 @@ const StakeFarm = () => {
               />
               <StakeCard
                 pid={1}
+                symbol="kacy"
                 connect={connect}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
@@ -113,6 +112,7 @@ const StakeFarm = () => {
               />
               <StakeCard
                 pid={2}
+                symbol="kacy"
                 connect={connect}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
@@ -124,7 +124,7 @@ const StakeFarm = () => {
                 stakeWithVotingPower={false}
               />
             </S.GridStaking>
-            <S.NameStake style={{ margin: '100px 0 50px' }} >
+            <S.NameStake left={true} style={{ margin: '100px 0 50px' }}>
               <S.Name>
                 <img src="assets/stake-money-withdraw.svg" alt="" />
                 <h1>Other Staking Pools</h1>
@@ -134,6 +134,7 @@ const StakeFarm = () => {
             <S.GridStaking>
               <StakeCard
                 pid={3}
+                symbol="heim"
                 connect={connect}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
@@ -146,6 +147,7 @@ const StakeFarm = () => {
               />
               <StakeCard
                 pid={4}
+                symbol="keu"
                 connect={connect}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
@@ -159,9 +161,7 @@ const StakeFarm = () => {
               <ComingSoon />
             </S.GridStaking>
           </S.StakeFarm>
-          <div style={{ marginTop: '160px', paddingBottom: '200px' }}>
-            <BannerCTA />
-          </div>
+          <BannerCTA />
         </>
         :
         <>
