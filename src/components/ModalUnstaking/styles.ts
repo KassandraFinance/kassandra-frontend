@@ -1,4 +1,5 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import theme from '../../styles/theme'
 
 export const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
@@ -11,61 +12,47 @@ export const Backdrop = styled.div`
   height: 100vh;
   z-index: 9;
 `
-
-interface IBorderGradientProps {
+interface IModalProps {
   modalOpen: boolean
-   otherStakingPools: boolean
 }
 
-export const BorderGradient = styled.div<IBorderGradientProps>`
-  display: ${(props) => props.modalOpen ? "block" : "none" };
+export const Modal = styled.div<IModalProps>`
+  display: ${(props) => props.modalOpen ? "block" : "none"};
 
-  background: ${(props) => props.otherStakingPools ?
-    "linear-gradient(0deg, #26DBDB -0.02%, #E843C4 99.99%)"
-    :
-    "linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%)" };;
-  border-radius: 6px;
+  /* background: url('assets/blur1.svg'); */
 
-  width: 320px;
+  background-color: rgba(31, 31, 31, 0.95);
+  border-radius: ${theme.border.radius};
+  border: 1px solid rgba(255, 255, 255, 0.4);
+
+  width: 300px;
   max-height: 100%;
-  padding: 4px;
 
   position: fixed;
   top: 50%;
   left: 50%;
 
-  margin-left: -160px;
+  margin-left: -150px;
   margin-top: -165px;
 
   z-index: 10;
 `
 
-export const BackgroundBlack = styled.div`
-  background: #000;
-  color: white;
-  width: 100%;
-  height: 100%;
-`
+export const InterBackground = styled.div`
+  background: rgb(20, 20, 20);
+  border-radius: 6px 6px 0 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 
-interface IInterBackgroundProps {
-  otherStakingPools: boolean
-}
-
-export const InterBackground = styled.div<IInterBackgroundProps>`
-  background: ${(props) => props.otherStakingPools ?
-    "linear-gradient(0deg, rgba(38, 219, 219, 0.2) -0.02%, rgba(232, 67, 196, 0.2) 99.99%)"
-    :
-    "linear-gradient(0deg, rgba(255, 191, 0, 0.2) -0.02%, rgba(232, 67, 196, 0.2) 99.99%)" };
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   width: 100%;
-  height: 66px;
+  height: 72px;
   padding: 0 16px;
 
   span {
-    font-size: 18px;
+    font-size: ${theme.font.sizes.font18};
     line-height: 18px;
   }
 
@@ -78,34 +65,38 @@ export const InterBackground = styled.div<IInterBackgroundProps>`
 `
 
 export const Main = styled.div`
-  padding: 24px;
+  padding: 20px;
 `
 
 export const Amount = styled.div`
+  background: #565656;
+  border-radius: 10px;
   text-align: right;
+
+  padding: 16px;
   position: relative;
 
   span {
     font-size: 14px;
     display: block;
+    margin: 0 0 -4px;
   }
 
   h5 {
-    font-weight: 400;
-    font-size: 12px;
+    font-weight: ${theme.font.weight.normal};
+
+    font-size: ${theme.font.sizes.font12};
     line-height: 12px;
-    margin-top: 6px;
   }
 
   input {
     background-color: transparent;
     border: none;
     color: #fff;
-    font-size: 20px;
+    font-size: ${theme.font.sizes.font20};
 
     text-align: right;
     max-width: 100%;
-    margin: 8px 0;
 
     outline: none;
 
@@ -113,7 +104,7 @@ export const Amount = styled.div`
       font-size: 22px;
     }
     @media (max-width: 350px) {
-      font-size: 20px;
+      font-size: ${theme.font.sizes.font20};
     }
 
     &::placeholder {
@@ -130,21 +121,6 @@ export const Amount = styled.div`
   }
 `
 
-export const Line = styled.div`
-  content: '';
-  display: block;
-  width: 190px;
-  height: 2px;
-  background-color: #26DBDB;
-  box-shadow: 1px 1px 5px #26DBDB;
-  margin-left: auto;
-  @media (max-width: 504px) {
-    width: 160px;
-  }
-  @media (max-width: 430px) {
-    width: 130px;
-  }
-`
 
 export const ButtonContainer = styled.div`
   display: flex;
@@ -152,81 +128,88 @@ export const ButtonContainer = styled.div`
   align-items: center;
   width: 100%;
 
-  margin: 36px 0 24px;
+  margin: 20px 0 24px;
   button {
-    border: 1px solid #26DBDB;
-    border-radius: 16px;
+    border: 1px solid ${theme.colors.snow};
+    border-radius: 3px;
     background: transparent;
     color: #fff;
-    font-size: 12px;
     line-height: 12px;
-    font-weight: 400;
+    font-size: ${theme.font.sizes.font12};
+    font-weight: ${theme.font.weight.normal};
+    text-transform: uppercase;
 
-    width: 63px;
+    width: 56px;
     padding: 3px;
 
     cursor: pointer;
     transition: 100ms;
     &:hover {
-      background: #26DBDB;
+      background: ${theme.colors.snow};
+      color: #000;
+    }
+    &:active{
+      background: ${theme.colors.snow};
       color: #000;
     }
   }
 `
 
-interface IConfirmButtonProps {
-  otherStakingPools: boolean
-}
 
-export const ConfirmButton = styled.button<IConfirmButtonProps>`
-  border-radius: 6px;
-  font-size: 14px;
+export const ConfirmButton = styled.button`
+  border-radius: ${theme.border.radius};
+  font-size: ${theme.font.sizes.font16};
   line-height: 14px;
-  font-weight: 400;
+  font-weight: ${theme.font.weight.light};
+
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   width: 100%;
-  height: 28px;
+  height: 46px;
   cursor: pointer;
 
-  background: ${(props) => props.otherStakingPools ?
-    "linear-gradient(87.48deg, #E843C4 -47.54%, #26DBDB 154.78%)"
-    :
-    "linear-gradient(87.48deg, #FFBF00 -70.27%, #E843C4 154.78%)" };
   border: none;
-  color: ${(props) => props.otherStakingPools ? "#211426" : "#211426" };
+  background: ${theme.colors.blue};
+  color: ${theme.colors.snow};
 
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   transition: 200ms;
-  &:hover {
-    background: ${(props) => props.otherStakingPools ? "#E843C4" : "#FFBF00" };
+  &:hover:enabled {
+    background: ${theme.colors.darkBlue};
+  }
+  &:disabled {
+    cursor: not-allowed;
+    background: #4F4F4F;
+    color: #BDBDBD;
   }
 `
 
-export const GetKacyButton = styled.button`
-  border-radius: 6px;
-  font-size: 14px;
-  line-height: 14px;
-  font-weight: 400;
+export const GetKacy = styled.button`
+  ${({ theme }) => css`
+    border-radius: ${theme.border.radius};
+    font-size: ${theme.font.sizes.font16};
+    line-height: 14px;
+    font-weight: 400;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  width: 100%;
-  height: 28px;
-  cursor: pointer;
+    width: 100%;
+    height: 40px;
+    cursor: pointer;
 
-  background: transparent;
-  border: 1px solid #26DBDB;
+    background: transparent;
+    border: 1px solid ${theme.colors.cyan};
 
-  color: #fff;
-  transition: 200ms;
-  &:hover {
-    background: #26DBDB;
-    color: #000;
-  }
+    color: #fff;
+    transition: 200ms;
+    &:hover {
+      background: ${theme.colors.cyan};
+      color: #000;
+    }
+  `}
 `

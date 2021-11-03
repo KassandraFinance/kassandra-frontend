@@ -1,15 +1,16 @@
-/* eslint-disable jsx-a11y/alt-text */
 import React from 'react'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import Hero from './hero'
-import Feature from './feature'
-import SocialProof from './socialProof'
+
+import Hero from './Hero'
+import Feature from './Feature'
+import HowItWorks from './HowItWorks'
+import SocialProof from './SocialProof'
+
 import ModalSocial from '../../components/ModalSocial'
 import ModalSignUp from '../../components/ModalSignUp'
 import ModalSuccess from '../../components/ModalSuccess'
 
 import * as S from './styles'
-import HowItWorks from './howItWorks'
 
 const Heim = () => {
   const { trackPageView } = useMatomo()

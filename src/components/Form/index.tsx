@@ -6,11 +6,11 @@ import * as ButtonStyles from '../Button/styles'
 export const FormWrapper = styled.div`
   ${({ theme }) => css`
     ${TextFieldStyles.Wrapper} {
-      margin: ${theme.spacings.xxsmall} 0;
+      margin: ${theme.spacings.space8} 0;
     }
 
     ${ButtonStyles.Wrapper} {
-      /* margin: ${theme.spacings.medium} auto ${theme.spacings.xsmall}; */
+      /* margin: ${theme.spacings.space32} auto ${theme.spacings.space8}; */
     }
   `}
 `

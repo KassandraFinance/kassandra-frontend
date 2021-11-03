@@ -3,7 +3,9 @@ import Link from 'next/link'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 
+
 import * as S from './styles'
+import Button from '../../../components/Button'
 
 const Products = () => {
   const { trackEvent } = useMatomo();
@@ -15,33 +17,67 @@ const Products = () => {
       name: name,
     });
   }
-  
+
   return (
+
     <S.Products>
-      <h1>Products</h1>
-      <p>Tokens backed by a basket of assets, managed by autonomous strategies with data from external data providers</p>
-      <S.Heim>
-        <img src="assets/logo-heim.svg" alt="" />
-        <S.HeimDescription>
-          <h3>The $HEIM Social Index</h3>
-          <p className="first-paragraph">The Social Index $HEIM reflects the performance of a portfolio selected from the most socially active cryptocurrencies in the past 30 days, using Heimdall Social Score data.</p>
-          <p className="second-paragraph">$HEIM offers an easy exposure to the hottest cryptocurrencies in the market.</p>
-        </S.HeimDescription>
-        <S.ButtonContainer>
-          <Link href="/heim" ><a onClick={() => clickMatomoEvent("click-to-heim", "products")}>Buy $HEIM</a></Link>
-          <S.LearnMore 
-            href="https://medium.com/heimdall-research-crypto/the-heimdall-social-index-9595fdfb9ddc" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            onClick={() => clickMatomoEvent("click-to-learn-more", "products")}
-            >
-              Learn More
-          </S.LearnMore>
-        </S.ButtonContainer>
-      </S.Heim>
-      <img className="more-icon" src="assets/more-icon.svg" alt="" width="24" height="48" />
-      <p className="more-text">More coming soon</p>
+      <S.TextWrapper>
+        <p>WHAT IS KASSANDRA DAO?</p>
+        <h1>a decentralized quantitative fund manager</h1>
+        <span>Kassandra is a decentralized autonomous organization that governs a set of tokenized data-driven investment funds, bringing pragmatic but yet efficient ways to let your money work for you.</span>
+        <S.Divider />
+        <S.Link href='https://drive.google.com/file/d/12jxIMtBVqaY7bMbLmt52Lo0xDFUURZsb/view?usp=sharing' target='_blank' rel='noopener noreferral'>
+          <span>Read the Whitepaper</span>
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg" >
+            <path d="M8.5 16C12.6421 16 16 12.6421 16 8.5C16 4.35786 12.6421 1 8.5 1C4.35786 1 1 4.35786 1 8.5C1 12.6421 4.35786 16 8.5 16Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M8.5 11.5L11.5 8.5L8.5 5.5" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M5.5 8.5H11.5" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </S.Link>
+        <S.Link>
+          {/* <span>How it Works
+          </span>
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg" >
+            <path d="M8.5 16C12.6421 16 16 12.6421 16 8.5C16 4.35786 12.6421 1 8.5 1C4.35786 1 1 4.35786 1 8.5C1 12.6421 4.35786 16 8.5 16Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M8.5 11.5L11.5 8.5L8.5 5.5" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M5.5 8.5H11.5" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+          </svg> */}
+
+        </S.Link>
+
+      </S.TextWrapper>
+      <S.CardContainer>
+        <S.Card>
+          <S.IconWrapper>
+            <img src="assets/home-products-locker.png" alt="" />
+          </S.IconWrapper>
+          <p>NON-CUSTODIAL</p>
+          <span>Your funds managed by public, secure, and predictable smart-contracts</span>
+        </S.Card>
+        <S.Card>
+          <S.IconWrapper>
+            <img src="assets/home-products-check.png" alt="" />
+          </S.IconWrapper>
+          <p>PERMISSIONLESS</p>
+          <span>Invest, transfer and redeem investment products without relying on third-parties</span>
+        </S.Card>
+        <S.Card>
+          <S.IconWrapper>
+            <img src="assets/home-products-gift.png" alt="" />
+          </S.IconWrapper>
+          <p>REWARD</p>
+          <span>Earn governance token rewards while investing in smart strategies</span>
+        </S.Card>
+        <S.Card>
+          <S.IconWrapper>
+            <img src="assets/home-products-graph.png" alt="" />
+          </S.IconWrapper>
+          <p>ACTIVELY MANAGED</p>
+          <span>Outsource your money management to data models</span>
+        </S.Card>
+      </S.CardContainer>
     </S.Products>
+
   )
 }
 

@@ -1,7 +1,6 @@
 import styled, { css, DefaultTheme } from 'styled-components'
-import { darken } from 'polished'
 
-import { ButtonProps } from '.'
+import { ButtonProps } from './index'
 
 export type WrapperProps = {
   hasIcon: boolean
@@ -9,7 +8,6 @@ export type WrapperProps = {
   ButtonProps,
   | 'size'
   | 'fullWidth'
-  | 'minimal'
   | 'backgroundPrimary'
   | 'backgroundSecondary'
   | 'backgroundBlack'
@@ -19,136 +17,134 @@ export type WrapperProps = {
 const wrapperModifiers = {
   small: (theme: DefaultTheme) => css`
     height: 3rem;
-    font-size: ${theme.font.sizes.xsmall};
+    font-size: ${theme.font.sizes.font14};
+  `,
+  claim: (theme: DefaultTheme) => css`
+    height: 5.4rem;
+    font-size: ${theme.font.sizes.font16};
+    padding: 19px 28px;
   `,
   medium: (theme: DefaultTheme) => css`
-    height: 4rem;
-    font-size: ${theme.font.sizes.small};
-    padding: ${theme.spacings.xsmall} ${theme.spacings.medium};
+    height: 4.4rem;
+    font-size: ${theme.font.sizes.font16};
+    padding: 14px ${theme.spacings.space24};
   `,
   large: (theme: DefaultTheme) => css`
-    height: 5rem;
-    font-size: ${theme.font.sizes.medium};
-    padding: ${theme.spacings.xsmall} ${theme.spacings.medium};
-
+    height: 4.4rem;
+    font-size: ${theme.font.sizes.font16};
+    padding: 14px ${theme.spacings.space24};
   `,
   huge: (theme: DefaultTheme) => css`
-    height:4.4rem;
-    font-size: ${theme.font.sizes.medium};
-    padding: ${theme.spacings.small} ${theme.spacings.xlarge};
+    height: 5rem;
+    font-size: ${theme.font.sizes.font16};
+    padding: ${theme.spacings.space24} ${theme.spacings.space48};
   `,
   fullWidth: () => css`
     width: 100%;
   `,
   withIcon: (theme: DefaultTheme) => css`
+    img{
+      width: 1.6rem;
+      margin-left: ${theme.spacings.space8};
+      order: 1;
+      & + span{
+        margin-right: ${theme.spacings.space16};
+      }
+    }
     svg {
-      width: 1.5rem;
-
-      & + span {
-        margin-left: ${theme.spacings.xxsmall};
+      width: 1.6rem;
+      margin-right: ${theme.spacings.space8};
+      & + span{
+        margin-left: ${theme.spacings.space16};
       }
     }
   `,
-  minimal: (theme: DefaultTheme) => css`
-    background: none;
-    color: ${theme.colors.primary};
+
+  disabledNoEvent: (theme: DefaultTheme) => css`
+    background: #343434;
+    border: 1px solid #343434;
+    color: #8b8b8b;
+
+    cursor: not-allowed;
+    filter: grayscale(150%);
+    outline: none;
 
     &:hover {
-      color: ${darken(0.1, theme.colors.primary)};
+      background: #343434;
+      color: #8b8b8b;
     }
-  `,
-  disabled: () => css`
-    &:disabled {
-      cursor: not-allowed;
-      filter: grayscale(150%);
-      color:  #BDBDBD;
-
-    }
-  `,
-  disabledNoEvent: () => css`
-      cursor: not-allowed;
-      pointer-events: none;
-      filter: grayscale(150%);
-      color:  #BDBDBD;
   `,
 
   backgroundPrimary: (theme: DefaultTheme) => css`
-    background: linear-gradient(264.12deg, #E843C4 -140.16%, #020887 205.21%);
-    transition: all 0.15s ease-in-out;
-    backface-visibility: hidden;
-    &::before {
-    }
-    &:hover{
+    background: ${`linear-gradient(93.84deg, ${theme.colors.magenta} 0.12%, ${theme.colors.blue} 100%)`};
+    font-weight: ${theme.font.weight.medium};
 
-      background: #020887 ;
-      transition-delay: ${theme.transition.default};
-  }
-`,
-  backgroundSecondary: (theme: DefaultTheme) => css`
-    background: ${theme.colors.secondary};
-    &::before {
-      border-left-color: ${darken(0.2, theme.colors.secondary)};
-      border-top-color: ${darken(0.2, theme.colors.secondary)};
-    }
     &:hover {
-      background: linear-gradient(180deg, #3cd3c1 0%, #5faed0 50%);
-      transition-delay: ${theme.transition.default};
+      background: ${`linear-gradient(93.84deg, ${theme.colors.blue} 0.12%, ${theme.colors.magenta} 100%)`};
     }
   `,
-  backgroundBlack: (theme: DefaultTheme) => css`
-    background: rgba(0,0,0,0.0);
-    border: 0.1rem solid #26DBDB;
-    transition: all .15s ease-in-out;
-    &::before {
-      border-left-color: #26DBDB;
-      border-top-color: #26DBDB;
-    }
+
+  backgroundSecondary: (theme: DefaultTheme) => css`
+    background: ${theme.colors.blue};
+    font-weight: ${theme.font.weight.light};
+
+    transition: all 300ms;
     &:hover {
-      color:black;
-      background: #26DBDB;
+      background: ${theme.colors.darkBlue}
+    }
+  `,
+
+  backgroundBlack: (theme: DefaultTheme) => css`
+    border: ${`0.1rem solid ${theme.colors.cyan}`};
+    background: transparent;
+    font-weight: ${theme.font.weight.light};
+
+    padding: 12.5px;
+
+    transition: all 300ms;
+    &:hover {
+      color: ${theme.colors.darkPurple};
+      background: ${theme.colors.cyan};
     }
   `
 }
 
 export const Wrapper = styled.button<WrapperProps>`
   ${({
-    theme,
-    size,
-    fullWidth,
-    hasIcon,
-    minimal,
-    disabled,
-    disabledNoEvent,
-    backgroundPrimary,
-    backgroundSecondary,
-    backgroundBlack
-  }) => css`
-    display: inline-flex;
-    overflow: hidden;
-    align-items: center;
-    justify-content: center;
-    color: ${theme.colors.white};
-    font-family: ${theme.font.family};
-    border: 0;
-    cursor: pointer;
+  theme,
+  size,
+  fullWidth,
+  hasIcon,
+  disabledNoEvent,
+  backgroundPrimary,
+  backgroundSecondary,
+  backgroundBlack,
+}) => css`
+    border: none;
     border-radius: ${theme.border.radius};
-    padding: ${theme.spacings.xxsmall};
+    color: ${theme.colors.snow};
+
+    font-family: ${theme.font.family};
     text-decoration: none;
 
-    /* &:hover {
-      background: ${disabled
-        ? 'none'
-        : `linear-gradient(180deg, #e35565 0%, #d958a6 50%)`};
-    } */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    padding: ${theme.spacings.space8};
+
+    overflow: hidden;
+    outline: none;
+    cursor: pointer;
+    z-index: 1;
 
     ${!!size && wrapperModifiers[size](theme)};
     ${!!fullWidth && wrapperModifiers.fullWidth()};
     ${!!hasIcon && wrapperModifiers.withIcon(theme)};
-    ${!!minimal && wrapperModifiers.minimal(theme)};
-    ${disabled && wrapperModifiers.disabled()};
-    ${disabledNoEvent && wrapperModifiers.disabledNoEvent()};
     ${!!backgroundPrimary && wrapperModifiers.backgroundPrimary(theme)};
     ${!!backgroundSecondary && wrapperModifiers.backgroundSecondary(theme)};
     ${!!backgroundBlack && wrapperModifiers.backgroundBlack(theme)};
+    ${disabledNoEvent && wrapperModifiers.disabledNoEvent(theme)};
   `}
 `

@@ -1,62 +1,101 @@
 /* eslint-disable react/react-in-jsx-scope */
 import React from 'react'
 import Link from 'next/link'
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-
 import { useRouter } from 'next/router'
-import { useSelector, RootStateOrAny } from 'react-redux'
 
 import { Menu2 as MenuIcon } from '@styled-icons/remix-fill/Menu2'
+import { Wallet3 as WalletIcon } from '@styled-icons/remix-fill/Wallet3'
 import { Close as CloseIcon } from '@styled-icons/material-outlined/Close'
 
-import MediaMatch from '../MediaMatch'
-import Button from '../Button'
-import * as S from './styles'
+import { actionGetUserAddressWallet } from '../../store/modules/userWalletAddress/actions'
 
-import useConnect from '../../hooks/useConnect'
 import substr from '../../utils/substr'
 import web3 from '../../utils/web3'
+import useConnect from '../../hooks/useConnect'
+
+import Button from '../Button'
+import MediaMatch from '../MediaMatch'
+import ModalWalletConnect from '../ModalWalletConnect'
+
+import * as S from './styles'
+
+declare let window: {
+  ethereum: any,
+}
 
 export type MenuProps = {
   username?: string
 }
 
 const Header = () => {
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-  const { connect, isLogged } = useConnect()
+  const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
   const [isOpen, setIsOpen] = React.useState(false)
+
+  const dispatch = useDispatch()
   const { asPath } = useRouter()
-  const { trackEvent } = useMatomo();
+  const { connect } = useConnect()
+  const { trackEvent } = useMatomo()
+
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+
 
   function clickMatomoEvent() {
     trackEvent({
-      category: "header",
-      action: "click-on-heim",
-      name: "heim-header",
-    });
+      category: 'header',
+      action: 'click-on-heim',
+      name: 'heim-header'
+    })
   }
+
+  React.useEffect(() => {
+
+    const loginInt = setInterval(async () => {
+      if (!window.ethereum) {
+        return
+      }
+      window.ethereum?.request({ method: 'eth_accounts' })
+        .then((result: string[]) => {
+          if (!result[0]) {
+            dispatch(actionGetUserAddressWallet(''))
+          }
+        })
+    }, 5000)
+
+    return () => clearInterval(loginInt)
+
+  }, [])
+
+  React.useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : 'unset'
+
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isOpen])
 
   return (
     <S.Wrapper pageHeim={asPath === '/heim'}>
-      <MediaMatch lessThan="large">
+      <S.MenuIconContainer>
         <S.IconWrapper onClick={() => setIsOpen(true)}>
           <MenuIcon aria-label="Open Menu" />
         </S.IconWrapper>
-      </MediaMatch>
+      </S.MenuIconContainer>
 
       <S.LogoWrapper>
         <Link href="/" passHref>
           {asPath === '/heim' ? (
             <img src="./assets/HeimLogoMenu.svg" alt="Logo menu" />
           ) : (
-            <img src="./assets/logo-header.svg" alt="Logo menu" />
+            <img src="./assets/new-kassandra-logo-header.svg" alt="Logo menu" />
           )}
         </Link>
       </S.LogoWrapper>
 
-      <MediaMatch greaterThan="large">
+      <S.MenuDesktop>
         <S.MenuNav>
-          {asPath === '/' ? (
+          {/* {asPath === '/' ? (
             <Link href="/heim" passHref>
               <S.MenuLink onClick={clickMatomoEvent}> HEIM Index </S.MenuLink>
             </Link>
@@ -64,13 +103,13 @@ const Header = () => {
             <Link href="/" passHref>
               <S.MenuLink> Home </S.MenuLink>
             </Link>
-          )}
+          )} */}
 
-          <Link href="/" passHref>
+          <Link href="/products" passHref>
             <S.MenuLinkDisable>Buy $Heim</S.MenuLinkDisable>
           </Link>
 
-          <Link href="/" passHref>
+          <Link href="/farm" passHref>
             <S.MenuLinkDisable>Stake/Farm</S.MenuLinkDisable>
           </Link>
 
@@ -82,51 +121,62 @@ const Header = () => {
             <S.MenuLinkDisable>About</S.MenuLinkDisable>
           </Link>
 
-          {/* {web3.currentProvider !== null ? (
-            isLogged ? (
-              <S.ButtonConnectWallet
-                type="button"
-                style={{ backgroundColor: '#26DBDB', color: '#211426' }}
-              >
-                {substr(userWalletAddress)}
-              </S.ButtonConnectWallet>
+          {web3.currentProvider !== null ? (
+            userWalletAddress ? (
+              <Button
+                icon={<WalletIcon />}
+                backgroundBlack
+                size="medium"
+                text={substr(userWalletAddress)} />
             ) : (
-              <S.ButtonConnectWallet type="button" onClick={connect}>
-                Connect Wallet
-              </S.ButtonConnectWallet>
+              <Button
+                icon={<WalletIcon />}
+                as='button'
+                backgroundBlack
+                size="medium"
+                onClick={() => setIsModaWallet(true)}
+                text='Connect Wallet' />
+
             )
           ) : (
-            <S.LinkInstallMetaMask
+            <Button
+              as='a'
+              backgroundBlack
+              size="medium"
               href="https://metamask.io/download.html"
               target="_blank"
-            >
-              Install MetaMask!
-            </S.LinkInstallMetaMask>
-          )} */}
-          <Button backgroundBlack size="large" disabled>
-            Connect Wallet
-          </Button>
+              text='Install MetaMask!' />
+          )}
+
         </S.MenuNav>
-      </MediaMatch>
+      </S.MenuDesktop>
 
       <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen}>
+
         <CloseIcon aria-label="Close Menu" onClick={() => setIsOpen(false)} />
 
-        <S.MenuNav onClick={() => setIsOpen(false)}>
-          {asPath === '/' ? (
-            <Link href="/heim" passHref>
-              <S.MenuLink onClick={clickMatomoEvent}>HEIM Index</S.MenuLink>
-            </Link>
-          ) : (
-            <Link href="/" passHref>
-              <S.MenuLink> Home </S.MenuLink>
-            </Link>
-          )}
-          <Link href="/" passHref>
-            <S.MenuLinkDisable>Buy $Heim</S.MenuLinkDisable>
+        <S.MenuNav>
+
+          <Link href="/heim" passHref>
+            <S.MenuLink
+              onClick={() => {
+                setIsOpen(false)
+                clickMatomoEvent()
+              }}
+            >
+              HEIM Index
+            </S.MenuLink>
           </Link>
+
           <Link href="/" passHref>
-            <S.MenuLinkDisable>Stake/Farm</S.MenuLinkDisable>
+            <S.MenuLink onClick={() => setIsOpen(false)}> Home </S.MenuLink>
+          </Link>
+
+          <Link href="/products" passHref>
+            <S.MenuLinkDisable onClick={() => setIsOpen(false)}>Buy $Heim</S.MenuLinkDisable>
+          </Link>
+          <Link href="/farm" passHref>
+            <S.MenuLinkDisable onClick={() => setIsOpen(false)}>Stake/Farm</S.MenuLinkDisable>
           </Link>
           <Link href="/" passHref>
             <S.MenuLinkDisable>Vote</S.MenuLinkDisable>
@@ -134,11 +184,42 @@ const Header = () => {
           <Link href="/" passHref>
             <S.MenuLinkDisable>About</S.MenuLinkDisable>
           </Link>
-          <Button backgroundBlack size="large" disabled>
-            Connect Wallet
-          </Button>
+          {web3.currentProvider !== null ? (
+            userWalletAddress ? (
+              <Button
+                backgroundBlack
+                size="large"
+                text={substr(userWalletAddress)} />
+            ) : (
+              <Button
+
+                as='button'
+                backgroundBlack
+                size="large"
+                onClick={() => {
+                  setIsModaWallet(true)
+                  setIsOpen(false)
+                }}
+                text='Connect Wallet' />
+
+            )
+          ) : (
+            <Button
+              onClick={() => setIsOpen(false)}
+              as='a'
+              backgroundBlack
+              size="large"
+              href="https://metamask.io/download.html"
+              target="_blank"
+              text='Install MetaMask!' />
+          )}
         </S.MenuNav>
       </S.MenuFull>
+      <ModalWalletConnect
+        modalOpen={isModalWallet}
+        setModalOpen={setIsModaWallet}
+        connect={connect}
+      />
     </S.Wrapper>
   )
 }

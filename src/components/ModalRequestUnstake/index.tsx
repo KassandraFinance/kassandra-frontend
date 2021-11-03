@@ -1,5 +1,11 @@
 import React from 'react'
+import BigNumber from 'bn.js'
 
+import { BNtoDecimal } from '../../utils/numerals'
+import { dateRequestUnstake } from '../../utils/date'
+import { confirmUnstake } from '../../utils/confirmTransactions'
+
+import { Staking } from '../../constants/tokenAddresses'
 import useStakingContract from '../../hooks/useStakingContract'
 
 import { 
@@ -13,13 +19,24 @@ import {
 } from './styles'
 
 interface IModalRequestUnstakeProps {
-  modalOpen: boolean
-  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
-  pid: number
+  modalOpen: boolean;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  pid: number;
+  withdrawDelay: number
+  votingMultiplier: string
+  yourStake: BigNumber
 }
 
-const ModalRequestUnstake = ({ modalOpen, setModalOpen, pid }: IModalRequestUnstakeProps) => {
-  const { unstake } = useStakingContract()
+const ModalRequestUnstake = ({ 
+  modalOpen, 
+  setModalOpen, 
+  pid,
+  withdrawDelay,
+  votingMultiplier,
+  yourStake
+}: IModalRequestUnstakeProps) => {
+
+  const kacyStake = useStakingContract(Staking)
 
   return (
     <>
@@ -34,9 +51,13 @@ const ModalRequestUnstake = ({ modalOpen, setModalOpen, pid }: IModalRequestUnst
         </Top>
         <Content>
           <p>Withdrawal will be available on:</p>
-          <span>nn / nn / nnnn</span>
+          <span>{dateRequestUnstake(withdrawDelay)}</span>
           <p>During the withdrawal delay period your voting power will be reduced from:</p>
-          <span>X to Y</span>
+          <span>
+            {BNtoDecimal(new BigNumber(votingMultiplier).mul(yourStake), new BigNumber(18))}
+              {' '} to {' '}
+            {BNtoDecimal(new BigNumber(yourStake), new BigNumber(18))}
+          </span>
           <p>Do you want to proceed?</p>
           <ButtonContainer>
             <button 
@@ -48,7 +69,7 @@ const ModalRequestUnstake = ({ modalOpen, setModalOpen, pid }: IModalRequestUnst
             <button 
               type="button" 
               onClick={() => {
-                unstake(pid)
+                kacyStake.unstake(pid, confirmUnstake, "Pending unstake")
                 setModalOpen(false)
               }}
             >

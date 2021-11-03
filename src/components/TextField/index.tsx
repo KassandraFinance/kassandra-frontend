@@ -11,8 +11,9 @@ export type TextFieldProps = {
   icon?: React.ReactNode
   iconPosition?: 'left' | 'right'
   disabled?: boolean
-  disabledNoEvent?:boolean;
+  disabledNoEvent?: boolean;
   error?: string
+
 } & Omit<InputHTMLAttributes<HTMLInputElement>, 'onInput'>
 
 interface ITextFieldProps {
@@ -40,11 +41,25 @@ const TextField = ({
     !!onInput && onInput(newValue)
   }
 
+  if (props.hidden) {
+    return <S.Input
+      type="text"
+      hidden={props.hidden}
+      onChange={onChange}
+      value={value}
+      iconPosition={iconPosition}
+      disabled={disabled}
+      name={name}
+      {...(label ? { id: name } : {})}
+      {...props}
+    />
+  }
+
   return (
     <S.Wrapper disabled={disabled} error={!!error}>
       {!!label && <S.Label htmlFor={name}>{label}</S.Label>}
       <S.InputWrapper>
-        {!!icon && <S.Icon iconPosition={iconPosition}>{icon}</S.Icon>}
+        {!!icon && <S.Icon type='submit' iconPosition={iconPosition}>{icon}</S.Icon>}
         <S.Input
           type="text"
           onChange={onChange}

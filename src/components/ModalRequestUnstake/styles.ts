@@ -1,7 +1,8 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import theme from '../../styles/theme'
 
 export const Backdrop = styled.div`
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.7);
 
   position: fixed;
   top: 0;
@@ -9,7 +10,7 @@ export const Backdrop = styled.div`
 
   width: 100vw;
   height: 100vh;
-  z-index: 9;
+  z-index: 20;
 `
 
 interface IModalContainerProps {
@@ -17,34 +18,35 @@ interface IModalContainerProps {
 }
 
 export const ModalContainer = styled.div<IModalContainerProps>`
-  display: ${(props) => props.modalOpen ? "block" : "none" };
+  display: ${(props) => props.modalOpen ? "block" : "none"};
 
-  border: 2px solid #FFBF00;
-  background-color: #000;
+  background-color: rgba(31, 31, 31, 0.8);
+  border: 1px solid #FFBF00;
+  border-radius: 10px;
 
   width: 500px;
-  height: 370px;
-
 
   position: fixed;
   top: 50%;
   left: 50%;
 
   margin-left: -250px;
-  margin-top: -185px;
+  margin-top: -130px;
 
-  z-index: 10;
+  z-index: 21;
 `
 
 export const Top = styled.div`
-  border-bottom: 2px solid #FFBF00;
+  background-color: rgba(20, 20, 20, 0.9);
+
+  border-bottom: 1px solid #FFBF00;
+  border-radius: 10px 10px 0 0; 
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   padding: 24px;
-
 `
 
 export const Attention = styled.div`
@@ -57,7 +59,8 @@ export const Attention = styled.div`
   }
 
   p {
-    font-size: 24px;
+    font-size: ${theme.font.sizes.font18};
+    font-weight: ${theme.font.weight.bold};
     margin-left: 16px;
   }
 `
@@ -67,7 +70,7 @@ export const Close = styled.button`
   border: none;
 
   color: #fff;
-  font-size: 20px;
+  font-size: ${theme.font.sizes.font20};
   padding: 2px;
 
   cursor: pointer;
@@ -79,39 +82,39 @@ export const Content = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  /* height: 280px; */
-
   padding: 24px 0;
   p {
     text-align: center;
-    font-size: 18px;
-    font-weight: 300;
+    font-size: ${theme.font.sizes.font16};
+    font-weight: ${theme.font.weight.light};
     max-width: 340px;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
   }
 
   span {
-    font-size: 20px;
+    font-size: ${theme.font.sizes.font20};
+    font-weight: ${theme.font.weight.bold};
     margin-bottom: 12px;
   }
 `
 
 export const ButtonContainer = styled.div`
+  margin-top: 8px;
   button {
     background-color: transparent;
-    border: 1px solid #26DBDB;
-    border-radius: 6px;
+    border: 1px solid ${theme.colors.cyan};
+    border-radius: ${theme.border.radius};
     color: #fff;
-    font-size: 18px;
+    font-size: ${theme.font.sizes.font18};
 
     width: 136px;
     height: 40px;
-    margin: 0 8px;
+    margin: 0 20px;
     transition-duration: 300ms;
     cursor: pointer;
     &:hover {
-      background-color: #26DBDB;
-      color: #211426;
+      background-color: ${theme.colors.cyan};
+      color: ${theme.colors.darkPurple};
     }
   }
 `

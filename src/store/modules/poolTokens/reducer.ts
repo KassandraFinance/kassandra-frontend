@@ -1,8 +1,8 @@
 import { Reducer } from 'redux'
 import { HYDRATE } from "next-redux-wrapper"
-import { Types, IPoolTokensProps } from './types'
+import { Types, TokenDetails } from './types'
 
-const INITIAL_STATE: Array<IPoolTokensProps> = []
+const INITIAL_STATE: Array<TokenDetails> = []
 
 const reducer: Reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import theme from '../../styles/theme'
 import { ToastContainer } from "react-toastify";
 import toastConfig from "../../config/toastConfig";
 
@@ -8,13 +9,14 @@ export const StyledToastContainer = styled(ToastContainer).attrs({
 })`
   .Toastify__toast {
     font-family: 'Rubik';
-    font-weight: 300;
+    font-weight: ${theme.font.weight.light};
     width: 352px;
     min-height: 68px;
     padding: 0;
-    margin-right: 20px;
+    margin-left: 20px;
     position: absolute;
-    right: 0;
+    left: 0;
+    bottom: 0px;
   }
   .Toastify__close-button {
     position: absolute;
@@ -22,51 +24,47 @@ export const StyledToastContainer = styled(ToastContainer).attrs({
     top: 12px;
   }
   .Toastify__toast--error {
-    border: 1.6px solid #E8372C;
-    border-radius: 6px;
-    background: #211426;
-    color: #FCFCFC;
+    border-radius: 4px;
+    background: rgba(31, 31, 31, 0.82);
+    color: ${theme.colors.snow};
 
-    font-size: 16px;
-    font-weight: 300;
+    font-size: ${theme.font.sizes.font16};
+    font-weight: ${theme.font.weight.light};
     .Toastify__progress-bar {
       background: #E8372C;
     }
   }
   .Toastify__toast--success {
-    border: 1.6px solid #2CE878;
-    border-radius: 6px;
-    background: #211426;
-    color: #FCFCFC;
+    border-radius: 4px;
+    background: rgba(31, 31, 31, 0.82);
+    color: ${theme.colors.snow};
 
-    font-size: 16px;
-    font-weight: 300;
+    font-size: ${theme.font.sizes.font16};
+    font-weight: ${theme.font.weight.light};
     .Toastify__progress-bar {
       background: #2CE878;
     }
   }
   .Toastify__toast--warning {
-    border: 1.6px solid #FFBF00;
-    border-radius: 6px;
-    background: #211426;
-    color: #FCFCFC;
-    
-    font-size: 16px;
-    font-weight: 300;
+    border-radius: 4px;
+    background: rgba(31, 31, 31, 0.82);
+    color: ${theme.colors.snow};
+
+    font-size: ${theme.font.sizes.font16};
+    font-weight: ${theme.font.weight.light};
     .Toastify__progress-bar {
       background: #FFBF00;
     }
   }
   .Toastify__toast--info {
-    border: 1.6px solid #26DBDB;
-    border-radius: 6px;
-    background: #211426;
-    color: #FCFCFC;
+    border-radius: 4px;
+    background: rgba(31, 31, 31, 0.82);
+    color: ${theme.colors.snow};
 
-    font-size: 16px;
-    font-weight: 300;
+    font-size: ${theme.font.sizes.font16};
+    font-weight: ${theme.font.weight.light};
     .Toastify__progress-bar {
-      background: #26DBDB;
+      background: ${theme.colors.cyan};
     }
   }
 `;

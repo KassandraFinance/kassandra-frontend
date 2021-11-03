@@ -3,22 +3,22 @@ import BigNumber from 'bn.js'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 
-import { TokenDetails } from './index'
+import { TokenDetails } from '../../../store/modules/poolTokens/types'
 
-import { 
+import {
   ButtonMax,
-  InputDefaultContainer, 
-  Info, 
-  Span, 
+  InputDefaultContainer,
+  Info,
+  Span,
   SpanLight,
   Select,
-  Symbol, 
+  Symbol,
   Input,
   AmountDefault,
-  LineDefault
 } from './styles'
 
 interface IInputDefaultProps {
+  decimals: BigNumber
   poolTokens: TokenDetails[]
   isMax: boolean | null
   swapOutAmount: BigNumber
@@ -26,12 +26,13 @@ interface IInputDefaultProps {
   setSwapOutAddress: React.Dispatch<React.SetStateAction<string>>
 }
 
-const InputDefault = ({ 
+const InputDefault = ({
+  decimals,
   poolTokens,
   isMax,
   swapOutAmount,
   swapOutBalance,
-  setSwapOutAddress
+  setSwapOutAddress,
 }: IInputDefaultProps) => {
   const tokensList = React.useMemo(() => {
     if (poolTokens.length > 1) {
@@ -45,7 +46,7 @@ const InputDefault = ({
       )
     }
 
-    return <Symbol>{poolTokens.length > 0 ? poolTokens[0].symbol : '...'}</Symbol>
+    return <Symbol>{poolTokens.length > 0 && poolTokens[0] !== undefined ? poolTokens[0].symbol : '...'}</Symbol>
   }, [poolTokens])
 
   return (
@@ -53,15 +54,15 @@ const InputDefault = ({
       <Info>
         <Span>Swap to (estimative)</Span>
         {tokensList}
-        <SpanLight>Balance: {swapOutBalance > new BigNumber(-1) ? BNtoDecimal(swapOutBalance, new BigNumber(18)) : '...'}</SpanLight>
+        <SpanLight>Balance: {swapOutBalance > new BigNumber(-1) ? BNtoDecimal(swapOutBalance, decimals) : '...'}</SpanLight>
       </Info>
       <AmountDefault>
-        <Span>Amount</Span>
+        <Span total>Total</Span>
         <Input
           readOnly
-          type="number" 
+          type="text"
           placeholder="0"
-          value={BNtoDecimal(swapOutAmount, new BigNumber(18))}
+          value={BNtoDecimal(swapOutAmount, decimals)}
         />
         {isMax !== null && <ButtonMax
           type="button"
@@ -77,7 +78,6 @@ const InputDefault = ({
           Max
         </ButtonMax>}
       </AmountDefault>
-      <LineDefault />  
     </InputDefaultContainer>
   )
 }

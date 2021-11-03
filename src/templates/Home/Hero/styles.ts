@@ -1,61 +1,88 @@
 import styled from 'styled-components'
+import theme from '../../../styles/theme'
+
+import * as ButtonStyles from '../../../components/Button/styles'
 
 export const Hero = styled.section`
-  height: calc(100vh - 110px);
-  padding: 0 32px;
-  display: grid;
-  margin: 0 auto;
-  grid-template-columns: 1fr 1fr;
-  justify-content: space-between;
+  min-height: 170vh;
+  margin-bottom: -50vh;
+  background: url('assets/home-hero-background.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+  @media(max-height: 600px) {
+    margin-bottom: 0px ;
+    @media(max-width: 960px) {
+      margin-bottom: -50vh;
+    }
+  }
+  @media(max-width: 600px) {
+    height: 130vh;
+  }
+`
+export const IntroHero = styled.div`
+  display: flex;
+  flex-direction:column;
   align-items: center;
-  max-width: 1520px;
-  @media (max-width: 959px) {
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 160px);
-    margin-bottom: 32px;
+  margin: 0 auto;
+  margin-top: 280px;
+  max-width: 925px;
+
+  @media (min-width: 2350px) {
+    margin-top: 360px;
   }
-  @media (max-width: 600px) {
-    height: calc(100vh - 120px);
+  @media (max-width: 960px) {
+    margin-top: 170px;
   }
-  @media (max-width: 370px) {
-    height: calc(100vh - 160px);
+  @media (max-width: 780px) {
+    margin-top: 230px;
+  }
+  @media (max-width: 360px) {
+    margin-top: 130px;
+    @media (min-height: 800px ) {
+      margin-top: 200px;
+    }
   }
   @media (max-width: 330px) {
-    height: calc(100vh - 200px);
-    padding: 0 20px;
+    margin-top: 90px;
   }
-  @media (min-height: 300px) and (max-height: 420px) {
-    min-height: 600px;
-  }
+
   h1 {
-    font-size: 112px;
-    font-weight: 400;
-    line-height: 94px;
+    font-size: 72px;
+    font-weight: ${theme.font.weight.black};
+    text-align: center;
+    line-height: 72px;
     @media (max-width: 1200px) {
       font-size: 80px;
       line-height: 70px;
     }
     @media (max-width: 959px) {
-      font-size: 70px;
+      font-size: 60px;
       line-height: 60px;
     }
     @media (max-width: 770px) {
-      font-size: 60px;
-      margin-bottom: 32px;
+      font-size: 50px;
+      margin-bottom: 40px;
     }
     @media (max-width: 600px) {
-      font-size: 50px;
-    }
-    @media (max-width: 420px) {
       font-size: 36px;
+    }
+    @media (max-width: 450px) {
+      font-size: 32px;
+    }
+    @media (max-width: 375px) {
+      font-size: ${theme.font.sizes.font24};
       margin-bottom: 0;
+      line-height: 20px;
+    }
+    @media (max-width: 350px) {
+      font-size: ${theme.font.sizes.font20};
     }
   }
   h3 {
-    font-size: 24px;
-    font-weight: 300;
-    margin: 32px 0;
+    font-size: ${theme.font.sizes.font18};
+    font-weight: ${theme.font.weight.light};
+    margin-bottom: 85px;
     max-width: 600px;
     @media (max-width: 1200px) {
       font-size: 27px;
@@ -63,114 +90,42 @@ export const Hero = styled.section`
     @media (max-width: 959px) {
       text-align: center;
       margin: 0 auto;
-      margin: 8px 0 32px;
+      margin: 8px 0 85px;
       font-size: 22px;
     }
     @media (max-width: 770px) {
-      font-size: 18px;
+      font-size: ${theme.font.sizes.font18};
       max-width: 500px;
     }
     @media (max-width: 420px) {
+      font-size: ${theme.font.sizes.font14};
       max-width: 360px;
+      margin-bottom: 35px;
+      @media (min-height: 800px ) {
+        margin-bottom: 100px;
+      }
     }
-    @media (min-width: 375px) {
+    @media (max-width: 330px) {
       margin: 8px 0 16px;
-    }
-  }
-  .kassandra {
-    max-width: 500px;
-    max-height: 700px;
-
-    width: 100%;
-
-    @media (min-width: 1440px) {
-      max-width: 100%;
-    }
-    @media (max-width: 1240px) {
-      max-width: 100%;
-      min-width: 230px;
-    }
-    @media (max-width: 959px) {
-      max-width: 400px;
-    }
-    @media (max-width: 600px) {
-      max-width: 300px;
-    }
-    @media (max-width: 360px) {
-      max-width: 240px;
+      font-size: ${theme.font.sizes.font14};
+      margin-bottom: 75px;
     }
   }
 `
-
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 72px;
+  `
 export const DesktopScreen = styled.div`
   @media (max-width: 959px) {
     display: none;
   }
 `
-
 export const MobileScreen = styled.div`
   @media (min-width: 960px) {
     display: none;
   }
 `
 
-export const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  max-width: 460px;
-  @media (max-width: 960px) {
-    margin: 0 auto;
-  }
-  @media (max-width: 560px) {
-    max-width: 400px;
-  }
-  @media (max-width: 440px) {
-    flex-direction: column;
-    height: 110px;
-  }
 
-  a {
-    background: linear-gradient(264.12deg, #e843c4 -179.71%, #020887 205.21%);
-    border: none;
-    border-radius: 6px;
-    color: #fcfcfc;
-    text-align: center;
-    text-decoration: none;
-    font-size: 20px;
-    line-height: 20px;
-
-    height: 52px;
-    padding: 16px 32px;
-    cursor: pointer;
-    &:hover {
-      background: #020887;
-    }
-    @media (max-width: 600px) {
-      font-size: 16px;
-      line-height: 16px;
-      height: 48px;
-    }
-  }
-`
-
-export const WithpaperButton = styled.a`
-  background: transparent !important;
-  border: 1px solid #26dbdb !important;
-  border-radius: 6px;
-  color: #fcfcfc !important;
-  text-decoration: none;
-  font-size: 20px;
-
-  height: 52px;
-  padding: 12px 32px;
-  cursor: pointer;
-  transition-duration: 300ms;
-  &:hover {
-    background-color: #26dbdb !important;
-    color: #211426 !important;
-  }
-  @media (max-width: 600px) {
-    font-size: 16px;
-    height: 48px;
-  }
-`

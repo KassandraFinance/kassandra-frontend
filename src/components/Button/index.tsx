@@ -1,5 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { forwardRef, AnchorHTMLAttributes, ButtonHTMLAttributes } from 'react'
+import { ButtonHTMLAttributes, AnchorHTMLAttributes } from 'react'
 import * as S from './styles'
 
 type ButtonTypes =
@@ -7,15 +7,15 @@ type ButtonTypes =
   | ButtonHTMLAttributes<HTMLButtonElement>
 
 export type ButtonProps = {
-  size?: 'small' | 'medium' | 'large' | 'huge'
+  size?: 'small' | 'claim' | 'medium' | 'large' | 'huge'
   fullWidth?: boolean
-  minimal?: boolean
   backgroundPrimary?: boolean
   backgroundSecondary?: boolean
   backgroundBlack?: boolean
+  disabledNoEvent?: boolean
   icon?: JSX.Element
   as?: React.ElementType
-  disabledNoEvent?: boolean
+  text?: string
 } & ButtonTypes
 
 const Button: React.ForwardRefRenderFunction<S.WrapperProps, ButtonProps> = (
@@ -24,31 +24,29 @@ const Button: React.ForwardRefRenderFunction<S.WrapperProps, ButtonProps> = (
     icon,
     size = 'medium',
     fullWidth = false,
-    minimal = false,
     backgroundPrimary = false,
     backgroundSecondary = false,
     backgroundBlack = false,
-    disabledNoEvent=false,
+    disabledNoEvent = false,
+    text,
 
     ...props
-  },
-  ref
+  }
 ) => (
   <S.Wrapper
     size={size}
     fullWidth={fullWidth}
     hasIcon={!!icon}
-    minimal={minimal}
-    ref={ref}
     backgroundPrimary={backgroundPrimary}
     backgroundSecondary={backgroundSecondary}
     backgroundBlack={backgroundBlack}
     disabledNoEvent={disabledNoEvent}
+    disabled={disabledNoEvent}
     {...props}
   >
     {icon}
-    {!!children && <span>{children}</span>}
+    {text}
   </S.Wrapper>
 )
 
-export default forwardRef(Button)
+export default Button

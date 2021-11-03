@@ -1,10 +1,15 @@
 import React from 'react'
-import Link from 'next/link'
+
 import { useMatomo } from '@datapunt/matomo-tracker-react'
+import { Link } from "react-scroll";
+
+
+import Button from '../../../components/Button'
+import Header from '../../../components/Header'
 
 import * as S from './styles'
 
-const Hero = () => {
+const Hero = ({ ref }: any) => {
   const { trackEvent } = useMatomo();
 
   function clickMatomoEvent(action: string, name: string) {
@@ -16,60 +21,32 @@ const Hero = () => {
   }
 
   return (
-    <S.Hero>
-      <div>
-        <h1>Kassandra DAO</h1>
-        <S.DesktopScreen>
-          <h3>
-            The decentralized autonomous organization that governs tokenized
-            data-driven investment funds.
-          </h3>
-          <S.ButtonContainer>
-            <Link href="/heim" >
-              <a 
-                onClick={() => clickMatomoEvent("click-to-heim", "heim-hero")}
-                >
-                  View the $HEIM Index
-                </a>
-            </Link>
-            <S.WithpaperButton
-              className="withepaper"
-              href="https://drive.google.com/file/d/12jxIMtBVqaY7bMbLmt52Lo0xDFUURZsb/view?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => clickMatomoEvent("click-to-whitepaper", "whitepaper-hero")}
-            >
-              Whitepaper
-            </S.WithpaperButton>
-          </S.ButtonContainer>
-        </S.DesktopScreen>
-      </div>
-      <img src="assets/kassandra-600.svg" alt="" className="kassandra" />
-      <S.MobileScreen>
-        <h3>
-          The decentralized autonomous organization that governs tokenized
-          data-driven investment funds.
-        </h3>
-        <S.ButtonContainer>
-          <Link href="/heim" >
-              <a 
-                onClick={() => clickMatomoEvent("click-to-heim", "heim-hero")}
-                >
-                  View the $HEIM Index
-                </a>
-            </Link>
-          <S.WithpaperButton
-            href="https://drive.google.com/file/d/12jxIMtBVqaY7bMbLmt52Lo0xDFUURZsb/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => clickMatomoEvent("click-to-whitepaper", "whitepaper-hero")}
-          >
-            Whitepaper
-          </S.WithpaperButton>
-        </S.ButtonContainer>
-      </S.MobileScreen>
+    <S.Hero id='hero'>
+
+      <Header />
+      <S.IntroHero>
+        <h3>WELCOME TO <b>KASSANDRA DAO</b></h3>
+        <h1>tokenized data-driven investment funds</h1>
+      </S.IntroHero>
+      <S.ButtonWrapper>
+        <Link
+          activeClass="active"
+          to="launching-banner"
+          smooth={true}
+          offset={-70}
+          duration={3000}
+        >
+          <Button
+            backgroundPrimary
+            size='large'
+            as="a"
+            text="Upcoming IDO"
+            icon={<img src="/assets/avalancheIcon.svg" alt="" />}
+            onClick={() => clickMatomoEvent("click-to-projects", "hero")}
+          />
+        </Link>
+      </S.ButtonWrapper>
     </S.Hero>
   )
 }
-
 export default Hero

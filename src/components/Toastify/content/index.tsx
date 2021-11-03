@@ -10,39 +10,39 @@ interface IStyledToastContentProps {
 
 const StyledToastContent = ({ type, title, message }: IStyledToastContentProps) => {
   return (
-    <> 
-      {type === "success" && 
+    <>
+      {type === "success" &&
         <NotificationContainer>
           <img src="assets/IconNotification/success.svg" alt="" />
           <MessageContainer>
-            <h3 style={{ color: "#2CE878" }}>{title}</h3>
+            <h3>{title}</h3>
             <span>{message}</span>
           </MessageContainer>
         </NotificationContainer>
       }
-      {type === "warning" && 
+      {type === "warning" &&
         <NotificationContainer>
           <img src="assets/IconNotification/warning.svg" alt="" />
           <MessageContainer>
-            <h3 style={{ color: "#FFBF00" }}>{title}</h3>
+            <h3>{title}</h3>
             <span>{message}</span>
           </MessageContainer>
         </NotificationContainer>
       }
-      {type === "error" && 
+      {type === "error" &&
         <NotificationContainer>
           <img src="assets/IconNotification/error.svg" alt="" />
           <MessageContainer>
-            <h3 style={{ color: "#E8372C" }}>{title}</h3>
+            <h3>{title}</h3>
             <span>{message}</span>
           </MessageContainer>
         </NotificationContainer>
       }
-      {type === "info" && 
+      {type === "info" &&
         <NotificationContainer>
           <img src="assets/IconNotification/info.svg" alt="" />
           <MessageContainer>
-            <h3 style={{ color: "#26DBDB" }}>{title}</h3>
+            <h3>{title}</h3>
             <span>{message}</span>
           </MessageContainer>
         </NotificationContainer>

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import theme from '../../../styles/theme'
 
 export const NotificationContainer = styled.div`
   display: flex;
@@ -10,7 +11,7 @@ export const NotificationContainer = styled.div`
   img {
     margin-right: 12px;
   }
-` 
+`
 
 export const MessageContainer = styled.div`
   display: flex;
@@ -18,13 +19,13 @@ export const MessageContainer = styled.div`
   align-items: flex-start;
   font-family: 'Rubik';
   h3 {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 8px; 
+    font-size: ${theme.font.sizes.font16};
+    font-weight: ${theme.font.weight.bold};
+    margin-bottom: 8px;
   }
   span {
-    font-size: 16px;
-    font-weight: 300;
+    font-size: 15px;
+    font-weight: ${theme.font.weight.light};
     margin: auto;
   }
 `

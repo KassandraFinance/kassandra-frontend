@@ -1,159 +1,272 @@
 import styled from 'styled-components'
+import theme from '../../../styles/theme'
+
+import * as ButtonStyles from '../../../components/Button/styles'
 
 export const Token = styled.section`
-  padding: 80px 32px;
+  margin: 0 auto 160px;
+  padding: 0 32px;
   text-align: center;
-
-  @media (max-width: 330px) {
-    padding: 32px 20px;
+  @media(max-width: 960px){
+  padding: 0 32px;
   }
-
+  span{
+    display: flex;
+    font-size: ${theme.font.sizes.font16};
+    line-height: 155%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
   h1 {
-    font-size: 44px;
-    font-weight: 500;
-    margin-bottom: 48px;
-    @media (max-width: 600px) {
-      font-size: 24px;
-      font-weight: 500;
-      margin-bottom: 16px;
+    max-width: 620px;
+    font-size: ${theme.font.sizes.font48};
+    font-weight: ${theme.font.weight.black};
+    line-height: 104%;
+    margin: auto;
+    margin-bottom: ${theme.spacings.space24};
+    @media(max-width: 960px) {
+      font-size: ${theme.font.sizes.font36};
     }
-  }
+    @media(max-width: 450px) {
+      font-size: ${theme.font.sizes.font24};
+    }
+   }
   p {
-    font-size: 24px;
-    font-weight: 300;
-    max-width: 760px;
+    font-size: ${theme.font.sizes.font14};
+    letter-spacing: 4px;
+    color: ${theme.colors.cyan};
     text-align: center;
     margin: 0 auto;
-    @media (max-width: 600px) {
-      font-size: 16px;
-    }
   }
 `
-
-export const Details = styled.div`
+export const Divider = styled.div`
+  max-width: 100px;
+  border: 1px solid ${theme.colors.cyan};
+  margin: 25px auto;
+`
+export const CardWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin: 75px auto;
+  max-width: 1000px;
+  gap: 32px;
+  @media(max-width: 960px) {
+    display: flex;
+    flex-direction: column;
+  }
+`
+export const Card = styled.div`
+  max-width: 490px;
+  max-height: max-content;
+  border-radius: 12px;
+  background: rgba(31, 31, 31, 0.72);
+  box-shadow: 0px 4px 69px -17px rgba(0, 0, 0, 0,51);
+  img{
+    max-width: 80%;
+}
+  @media(max-width: 960px) {
+    margin: auto;
+  }
+`
+export const CardHeader = styled.div`
+  max-width: 100%;
+  height: 100px;
+  background:#190E1D url('assets/backgroundHeimToken.png') no-repeat;
+  background-position: right 20% center;
+  border-radius: 12px;
+`
+export const ImageWrapper = styled.div`
+  background: rgba(33, 20, 38, 1);
+  max-width: 96px;
+  height: 96px;
+  border-radius: 100px;
+  display: flex;
+  position: absolute;
+  margin-top: 36px;
+  margin-left: 57px;
+`
+export const TextWrapper = styled.div`
+  text-align: left;
+  margin: 55px auto;
+  max-width: 360px;
+  @media(max-width: 960px) {
+    padding: 0 32px;
+    margin: 40px auto;
+  }
+  p{
+    text-align: left;
+    font-size: ${theme.font.sizes.font12};
+    color: #C4C4C4;
+    letter-spacing: 0px;
+    margin: 8px 0;
+  }
+  span{
+    font-size: ${theme.font.sizes.font14};
+    font-weight: ${theme.font.weight.light};
+    line-height: 180%;
+    margin-top: 30px;
+  }
+`
+export const NameAndSymbol = styled.div`
+  display: flex;
   align-items: center;
+
+  h1{
+    font-size: ${theme.font.sizes.font48};
+    font-weight: ${theme.font.weight.light};
+    line-height: 104%;
+    margin: 0;
+    @media(max-width: 960px) {
+      font-size: ${theme.font.sizes.font36};
+    }
+    @media(max-width: 450px) {
+      font-size: ${theme.font.sizes.font32};
+    }
+  }
+
+  h3 {
+    background-color: rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+    font-size: ${theme.font.sizes.font12};
+    font-weight: ${theme.font.weight.light};
+
+    margin-left: ${theme.spacings.space16};
+    padding: 8px 12px;
+  }
+`
+export const TokenInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
   justify-items: center;
-  max-width: 1520px;
-  margin: 0 auto;
-  @media (max-width: 960px) {
+  gap: 50px;
+  margin: auto;
+  max-width: 360px;
+  margin-bottom: 14px;
+  @media(max-width: 960px) {
+    padding: 0 32px;
+  }
+
+`
+export const Price = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  @media(max-width: 960px) {
     grid-template-columns: 1fr;
-    justify-items: center;
-  }
-  .img-token {
-    display: block;
-    max-width: 390px;
-    height: 100%;
-    @media (max-width: 960px) {
-      margin: 0;
-      max-width: 400px;
     }
-    @media (max-width: 600px) {
-      display: none;
+  > div{
+    display: flex;
+    margin-left: 6px;
+    align-items: center;
+    p{
+      color:#5EE56B;
     }
   }
-  .img-token-96 {
-    display: none;
-    max-width: 100%;
-    @media (max-width: 600px) {
-      display: block;
-      margin-top: 24px;
-      margin-bottom: 24px;
+  span {
+    font-size: ${theme.font.sizes.font14};
+    font-weight: ${theme.font.weight.light};
+  }
+`
+export const TokensSymbols = styled.div`
+  display: flex;
+  span{
+    font-size: ${theme.font.sizes.font12};
+    font-weight: ${theme.font.weight.light};
+    margin-left: 6px;
+    @media(max-width: 960px) {
+      margin-left: 0;
+    }
+  }
+  @media(max-width: 960px) {
+    flex-direction: column;
+    align-content: center;
+
+  }
+  img{
+    max-height: 80%;
+    @media(max-width: 960px) {
+      max-height: 50%;
     }
   }
 `
-
-export  const Description = styled.div`
-  text-align: left;
-  h3 {
-    font-size: 40px;
-    font-weight: 500;
-    margin-bottom: 24px;
-    @media (max-width: 600px) {
-      font-size: 18px;
-      text-align: center;
-      margin-bottom: 16px;
-    }
+export const CardFooter = styled.div`
+  margin: 28px auto;
+  max-width: 360px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @media(max-width: 960px) {
+    padding: 0 32px;
+    flex-direction: column;
   }
-  p {
-    font-size: 18px;
-    font-weight: 300;
-    text-align: left;
-    margin-bottom: 24px;
-    @media (max-width: 600px) {
-      font-size: 18px;
-      font-weight: 300;
-      text-align: center;
-      margin-bottom: 16px;
-    }
-  }
-  ul {
-    margin-bottom: 48px;
-  }
-  li {
-    font-size: 18px;
-    font-weight: 300;
-    margin: 8px 0;
-    span {
-      font-weight: 500;
-    }
-    &::before {
-      content: '';
-      display: inline-block;
-      background-color: #FCFCFC;
-      width: 6px;
-      height: 6px;
-      border-radius: 3px;
-      margin: 0 20px 4px 16px;
-      @media (max-width: 390px) {
-        width: 4px;
-        height: 4px;
-        border-radius: 2px;
-        margin: 0 8px 2px 8px;
+  ${ButtonStyles.Wrapper} {
+      width: 65%;
+      @media(max-width: 960px) {
+        margin-bottom: 16px;
+        width: 100%;
       }
     }
-    @media (max-width: 600px) {
-      font-size: 16px;
-      font-weight: 300;
-    }
-    @media (max-width: 390px) {
-      font-size: 15px;
-    }
-    @media (max-width: 330px) {
-      font-size: 13px;
-    }
+  a{
+
+    margin-right: 8px;
   }
+
+  a {
+    display: flex;
+    align-items: space-between;
+    text-decoration: none;
+    justify-items: center;
+    text-decoration: none;
+    font-size: ${theme.font.sizes.font14};
+    font-weight: ${theme.font.weight.light};
+    color: ${theme.colors.snow};
+    margin-right: ${theme.spacings.space8};
+    transition: 0.15s;
+    svg{
+    margin-left: ${theme.spacings.space8};
+    }
+    &:hover {
+        color: ${theme.colors.cyan};
+        >svg {
+          path{
+            stroke: ${theme.colors.cyan};
+          }
+        }
+      }
+    }
 `
+export const ComingSoon = styled.div`
+  position: relative;
+  max-width: 490px;
+  height: 100%;
+  border-radius: 12px;
+  background: rgba(31, 31, 31, 0.72);
+  box-shadow: 0px 4px 69px -17px rgba(0, 0, 0, 0,51);
+  @media(max-width: 960px) {
+      display: none;
+    }
 
-export const ButtonModalSocial = styled.button`
-  background: linear-gradient(264.12deg, #E843C4 -179.71%, #020887 205.21%);
-  border: none;
-  border-radius: 6px;
-  color: #fcfcfc;
-  text-align: center;
-  text-decoration: none;
-  font-size: 20px;
-  line-height: 20px;
-
-  height: 52px;
-  padding: 16px 32px;
-  margin: 16px 0;
-  cursor: pointer;
-  &:hover {
-    background: #020887;
+`
+export const ComingSoonContent = styled.div`
+  background: linear-gradient(0deg, #FFBF00 -0.2%, #E843C4 30%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  img{
+    max-width: 96px;
   }
-  @media (max-width: 1160px) {
-    display: block;
-    margin: 0 auto;
-    text-align: center;
-  }
-  @media (max-width: 600px) {
-    font-size: 16px;
-    line-height: 16px;
-    height: 48px;
-  }
-  @media (max-width: 390px) {
-    width: 100%;
+  span{
+    height: 60px;
+    font-size: ${theme.font.sizes.font48};
+    font-weight: ${theme.font.weight.light};
+    line-height: 104%;
+    margin-top:18px;
   }
 `
