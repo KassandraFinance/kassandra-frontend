@@ -56,7 +56,7 @@ const TokenDistribution = () => {
           </S.Values>
         </S.TokenInfo>
       </S.TokenInfoWrapper>
-      <S.Link href='https://medium.com/heimdall-research-crypto/the-heimdall-social-index-9595fdfb9ddc' target='_blank' rel="noopener noreferrer">
+      <S.Link href='https://kassandrafoundation.medium.com/kassandra-dao-token-8bc046d55a00' target='_blank' rel="noopener noreferrer">
         <a>Check more info about the $KACY token
           <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg" >
             <path d="M8.5 16C12.6421 16 16 12.6421 16 8.5C16 4.35786 12.6421 1 8.5 1C4.35786 1 1 4.35786 1 8.5C1 12.6421 4.35786 16 8.5 16Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" />

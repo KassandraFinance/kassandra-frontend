@@ -186,7 +186,8 @@ export const ImageWrapper = styled.div`
 `
 export const TextWrapper = styled.div`
   text-align: left;
-  margin: 55px auto;
+  /* margin: 55px auto; */
+  margin: 55px auto 24px;
   max-width: 360px;
   @media(max-width: 960px) {
     padding: 0 32px;
@@ -279,11 +280,12 @@ export const CardFooter = styled.div`
  margin: 28px auto;
   max-width: 360px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
+  align-items: left;
   @media(max-width: 960px) {
     padding: 0 32px;
-    flex-direction: column;
   }
   ${ButtonStyles.Wrapper} {
     width: 65%;
@@ -314,5 +316,9 @@ export const CardFooter = styled.div`
         }
       }
     }
+  }
+  div{
+    display: flex;
+    flex-direction: row
   }
 `

@@ -4,7 +4,7 @@ import theme from '../../styles/theme'
 export const Footer = styled.footer`
   color: #fcfcfc;
   padding: 40px 0;
-  position: relative;
+  /* position: relative; */
   width: 100%;
 
 `

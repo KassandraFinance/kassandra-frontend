@@ -65,10 +65,12 @@ export const Divider = styled.div`
   border-radius: 4px;
 `
 export const Link = styled.a`
+  text-decoration: none;
   max-width: max-content;
   display: flex;
   align-items: center;
   cursor: pointer;
+  color: ${theme.colors.snow};
   margin-bottom: 20px;
   transition: 0.15s;
   span{

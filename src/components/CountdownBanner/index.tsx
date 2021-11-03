@@ -37,7 +37,7 @@ const CountdownBanner = () => {
 
   return (
     <S.Background>
-      <S.Container>
+      <S.Container id='launching-banner'>
         <S.TextWrapper>
           <p>UPCOMING IDO</p>
           <S.TitleAndImage>
@@ -45,9 +45,9 @@ const CountdownBanner = () => {
               <img src="assets/avalancheIcon.svg" alt="" />
             </h1>
           </S.TitleAndImage>
-          <span>STARTS IN:</span>
+          {/* <span>STARTS IN:</span> */}
         </S.TextWrapper>
-        <S.TimerContainer>
+        {/* <S.TimerContainer>
           <S.TimerWrapper>
             <span>{timeRemaining.dayss}</span>
             <p>Days</p>
@@ -64,7 +64,7 @@ const CountdownBanner = () => {
             <span>{timeRemaining.seconds}</span>
             <p>Secs</p>
           </S.TimerWrapper>
-        </S.TimerContainer>
+        </S.TimerContainer> */}
       </S.Container>
     </S.Background>
   );
