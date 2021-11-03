@@ -8,6 +8,10 @@ export const ClassProducts = styled.section`
   text-align: center;
   max-width: 960px;
   margin: 0 auto 160px;
+  @media (max-width: 800px) {
+    margin: 0 auto 80px;
+
+  }
 
 h1 {
   font-size: ${theme.font.sizes.font48};
@@ -39,9 +43,6 @@ span{
   max-width: 750px;
   margin: 0 auto;
 }
-  @media (max-width: 800px) {
-    padding: 80px 20px;
-  }
 `
 export const Divider = styled.div`
 width: 98px;

@@ -11,6 +11,7 @@ export const Container = styled.section`
   @media(max-width: 960px) {
     grid-template-columns: 1fr;
     padding: 0 32px;
+    margin: 0 auto 32px;
   }
 `
 export const TextWrapper = styled.div`
