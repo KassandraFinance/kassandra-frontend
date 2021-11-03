@@ -46,6 +46,12 @@ const SubscribeBanner = () => {
           onSubmit={handleSubmit}
         >
           <TextField
+            hidden
+            name="user"
+            value="Gem Hunter"
+          />
+
+          <TextField
             icon={<ArrowForward />}
             iconPosition='right'
             name="email"
