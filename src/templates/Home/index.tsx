@@ -1,5 +1,9 @@
 import React from 'react'
+
 import { useMatomo } from '@datapunt/matomo-tracker-react'
+import { Link } from 'react-scroll'
+
+
 
 import Hero from './Hero'
 import Products from './Products'
@@ -16,6 +20,8 @@ import * as S from './styles'
 
 const Home = () => {
   const { trackPageView } = useMatomo()
+  const heroRef = React.useRef<HTMLElement>(null)
+
 
   // Track page view
   React.useEffect(() => {
@@ -25,20 +31,26 @@ const Home = () => {
   return (
     <>
       <Hero />
-      <S.BackgoundCountDown>
-        <CountdownBanner />
-        <S.BackgroundSubscribe>
-          <SubscribeBanner />
-        </S.BackgroundSubscribe>
-      </S.BackgoundCountDown>
       <S.Background>
+        <Link
+          activeClass="active"
+          to="hero"
+          smooth={true}
+          offset={-70}
+          duration={800}
+        >
+          <S.ScrollUpButton>
+            <S.ScrollUpIcon />
+          </S.ScrollUpButton>
+        </Link>
         <Products />
         <ClassProducts />
-        <Token />
+        {/* <Token /> */}
         <KassandraToken />
         <KassandraArchitecture />
-        <TokenDistribution />
-        <BannerCTA />
+        {/* <TokenDistribution /> */}
+        {/* <BannerCTA /> */}
+        <CountdownBanner />
         <SubscribeBanner />
       </S.Background>
     </>

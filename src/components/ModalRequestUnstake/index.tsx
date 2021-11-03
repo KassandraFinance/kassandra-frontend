@@ -1,7 +1,7 @@
 import React from 'react'
 import BigNumber from 'bn.js'
 
-import { BNtoDecimal, wei } from '../../utils/numerals'
+import { BNtoDecimal } from '../../utils/numerals'
 import { dateRequestUnstake } from '../../utils/date'
 import { confirmUnstake } from '../../utils/confirmTransactions'
 

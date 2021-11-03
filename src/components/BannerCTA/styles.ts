@@ -8,7 +8,7 @@ export const Background = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: 50%;
-  margin: 0 auto 160px;
+  padding: 100px 30px;
 `
 export const Container = styled.section`
   display: grid;
@@ -20,6 +20,10 @@ export const Container = styled.section`
   border-radius: 1rem;
   border: 0.1rem solid #FFFFFF0A;
   background: rgba(33, 20, 38, 0.4);
+
+  @media (max-width: 900px) {
+    padding: 6rem 4rem;
+  }
 
   @media(max-width: 700px) {
     grid-template-columns: 1fr;
@@ -74,11 +78,15 @@ export const BannerFooter = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 6rem;
+  @media (max-width: 900px) {
+    flex-direction: column;
+    height: 100%;
+  }
   @media(max-width: 700px) {
-  max-width: 100%;
-  flex-direction: column;
-  align-content: center;
-  margin-top: 3.2rem;
+    max-width: 100%;
+    flex-direction: column;
+    align-content: center;
+    margin-top: 3.2rem;
   }
 
   ${ButtonStyles.Wrapper} {
@@ -86,7 +94,7 @@ export const BannerFooter = styled.div`
     padding: 1.6rem 2.4rem;
     font-size: ${theme.font.sizes.font18};
     height: 4.4rem;
-    @media(max-width: 700px) {
+    @media(max-width: 900px) {
       margin-bottom: 1.6rem;
       width: 100%;
     }
@@ -107,13 +115,16 @@ export const BannerFooter = styled.div`
     margin-left: ${theme.spacings.space8};
     }
     &:hover {
-        color: ${theme.colors.cyan};
-        >svg {
-          path{
-            stroke: ${theme.colors.cyan};
-          }
+      color: ${theme.colors.cyan};
+      >svg {
+        path{
+          stroke: ${theme.colors.cyan};
         }
       }
     }
+    @media(max-width: 900px) {
+      margin-top: 1.6rem;
+    }
+  }
 `
 

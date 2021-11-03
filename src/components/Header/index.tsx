@@ -106,11 +106,11 @@ const Header = () => {
           )} */}
 
           <Link href="/products" passHref>
-            <S.MenuLink>Buy $Heim</S.MenuLink>
+            <S.MenuLinkDisable>Buy $Heim</S.MenuLinkDisable>
           </Link>
 
           <Link href="/farm" passHref>
-            <S.MenuLink>Stake/Farm</S.MenuLink>
+            <S.MenuLinkDisable>Stake/Farm</S.MenuLinkDisable>
           </Link>
 
           <Link href="/" passHref>
@@ -157,26 +157,26 @@ const Header = () => {
 
         <S.MenuNav>
 
-          {/* <Link href="/heim" passHref>
-              <S.MenuLink
-                onClick={() => {
-                  setIsOpen(false)
-                  clickMatomoEvent()
-                }}
-              >
-                HEIM Index
-              </S.MenuLink>
-            </Link> */}
+          <Link href="/heim" passHref>
+            <S.MenuLink
+              onClick={() => {
+                setIsOpen(false)
+                clickMatomoEvent()
+              }}
+            >
+              HEIM Index
+            </S.MenuLink>
+          </Link>
 
           <Link href="/" passHref>
             <S.MenuLink onClick={() => setIsOpen(false)}> Home </S.MenuLink>
           </Link>
 
           <Link href="/products" passHref>
-            <S.MenuLink onClick={() => setIsOpen(false)}>Buy $Heim</S.MenuLink>
+            <S.MenuLinkDisable onClick={() => setIsOpen(false)}>Buy $Heim</S.MenuLinkDisable>
           </Link>
           <Link href="/farm" passHref>
-            <S.MenuLink onClick={() => setIsOpen(false)}>Stake/Farm</S.MenuLink>
+            <S.MenuLinkDisable onClick={() => setIsOpen(false)}>Stake/Farm</S.MenuLinkDisable>
           </Link>
           <Link href="/" passHref>
             <S.MenuLinkDisable>Vote</S.MenuLinkDisable>

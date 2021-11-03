@@ -41,6 +41,20 @@ const TextField = ({
     !!onInput && onInput(newValue)
   }
 
+  if (props.hidden) {
+    return <S.Input
+      type="text"
+      hidden={props.hidden}
+      onChange={onChange}
+      value={value}
+      iconPosition={iconPosition}
+      disabled={disabled}
+      name={name}
+      {...(label ? { id: name } : {})}
+      {...props}
+    />
+  }
+
   return (
     <S.Wrapper disabled={disabled} error={!!error}>
       {!!label && <S.Label htmlFor={name}>{label}</S.Label>}

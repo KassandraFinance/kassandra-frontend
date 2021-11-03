@@ -14,9 +14,9 @@ export const Container = styled.section`
   display: flex;
   flex-direction: column;
   text-align: center;
-  max-width: 96.5rem;
+  max-width: 81.5rem;
   margin: auto;
-  padding: 7.5rem 12rem 4rem;
+  padding: 4rem;
 
   border: 1px solid rgba(255, 255, 255, 0.13);
   border-radius: 1rem;
@@ -25,7 +25,7 @@ export const Container = styled.section`
 
   @media(max-width: 100rem) {
     text-align: center;
-    padding: 1.6rem 1.6rem;
+    /* padding: 1.6rem 1.6rem; */
   }
 `
 

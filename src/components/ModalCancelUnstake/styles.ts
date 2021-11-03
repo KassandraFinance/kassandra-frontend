@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 export const Backdrop = styled.div`
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.7);
 
   position: fixed;
   top: 0;
@@ -10,7 +10,7 @@ export const Backdrop = styled.div`
 
   width: 100vw;
   height: 100vh;
-  z-index: 9;
+  z-index: 20;
 `
 
 interface IModalContainerProps {
@@ -20,14 +20,12 @@ interface IModalContainerProps {
 export const ModalContainer = styled.div<IModalContainerProps>`
   display: ${(props) => props.modalOpen ? "block" : "none"};
 
-  background-color: rgba(20, 20, 20, 0.9);
-  border: 2px solid #E8372C;
+  background-color: rgba(31, 31, 31, 0.8);
+  border: 1px solid #E8372C;
   border-radius: 10px;
 
 
   width: 500px;
-  height: 280px;
-
 
   position: fixed;
   top: 50%;
@@ -36,12 +34,13 @@ export const ModalContainer = styled.div<IModalContainerProps>`
   margin-left: -250px;
   margin-top: -140px;
 
-  z-index: 10;
+  z-index: 21;
 `
 
 export const Top = styled.div`
-  background-color: rgba(10, 10, 10, 0.9);
-  border-bottom: 2px solid #E8372C;
+  background-color: rgba(20, 20, 20, 0.9);
+
+  border-bottom: 1px solid #E8372C;
   border-radius: 10px 10px 0 0; 
 
 
@@ -63,7 +62,8 @@ export const Attention = styled.div`
   }
 
   p {
-    font-size: ${theme.font.sizes.font24};
+    font-size: ${theme.font.sizes.font18};
+    font-weight: ${theme.font.weight.bold};
     margin-left: 16px;
   }
 `
@@ -115,7 +115,7 @@ export const ButtonContainer = styled.div`
 
       width: 136px;
       height: 40px;
-      margin: 0 8px;
+      margin: 0 20px;
       transition-duration: 300ms;
       cursor: pointer;
       &:hover {
