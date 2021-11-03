@@ -17,7 +17,6 @@ export const Summary = styled.div`
     font-weight: ${theme.font.weight.light};
     text-decoration: none;
 
-
     display: flex;
     align-items: center;
 
@@ -27,7 +26,7 @@ export const Summary = styled.div`
     &:hover {
       text-decoration: underline;
     }
-    
+
     img {
       margin-left: 8px;
     }
@@ -69,7 +68,6 @@ export const CopyContract = styled.div`
   font-size: ${theme.font.sizes.font14};
   text-decoration: none;
 
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -95,6 +93,7 @@ export const Blockchain = styled.div`
   align-items: flex-end;
   img {
     height: 18px;
+    width: 18px;
     margin-right: 16px;
   }
   span {
