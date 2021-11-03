@@ -16,7 +16,6 @@ import web3 from '../../utils/web3'
 import useConnect from '../../hooks/useConnect'
 
 import Button from '../Button'
-import MediaMatch from '../MediaMatch'
 import ModalWalletConnect from '../ModalWalletConnect'
 
 import * as S from './styles'
