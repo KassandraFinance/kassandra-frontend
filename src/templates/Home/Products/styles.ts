@@ -10,10 +10,12 @@ export const Products = styled.section`
   max-width: 960px;
   padding: 0 ${theme.spacings.space32};
 
-  @media (max-width: 800px) {
-    display: flex;
+  @media (max-width: 960px) {
     display: grid;
+    gap:  50px;
     grid-template-columns: 1fr;
+    margin: 0 auto 80px;
+
   }
 `
 export const TextWrapper = styled.div`
@@ -94,6 +96,9 @@ display: grid;
 grid-template-columns: 1fr 1fr;
 justify-content: center;
 column-gap: 32px;
+@media(max-width: 960px) {
+  row-gap: 24px;
+}
 p {
   font-size: ${theme.font.sizes.font14};
   color: ${theme.colors.amber};

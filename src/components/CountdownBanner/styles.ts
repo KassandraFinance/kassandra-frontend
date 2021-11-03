@@ -4,10 +4,11 @@ import theme from "../../styles/theme";
 
 export const Background = styled.div`
 
-  margin: 0 auto 5rem;
+  margin: 0 auto 5.4rem;
   @media(max-width: 100rem) {
     text-align: center;
     padding: 1.6rem 1.6rem;
+    margin: 0 auto 2.4rem;
   }
 `
 export const Container = styled.section`
