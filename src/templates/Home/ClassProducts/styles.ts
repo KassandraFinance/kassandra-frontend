@@ -21,6 +21,7 @@ h1 {
 
   @media(max-width: 960px) {
     font-size: ${theme.font.sizes.font36};
+    text-align: left;
   }
   @media(max-width: 760px) {
     font-size: ${theme.font.sizes.font32};
@@ -42,6 +43,9 @@ span{
   line-height: 155%;
   max-width: 750px;
   margin: 0 auto;
+  @media(max-width: 960px) {
+    text-align: left;
+  }
 }
 `
 export const Divider = styled.div`
