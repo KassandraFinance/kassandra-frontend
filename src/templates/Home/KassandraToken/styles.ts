@@ -12,6 +12,10 @@ export const Container = styled.div`
   background-size: cover;
   background-position: center;
   padding: 100px 0 0;
+  @media(max-width: 960px) {
+    margin: 0 auto;
+    padding: 0 32px;
+  }
 `
 export const KassandraToken = styled.section`
   display: grid;
@@ -28,7 +32,6 @@ export const KassandraToken = styled.section`
   @media(max-width: 960px) {
     display: flex;
     flex-direction: column;
-    padding: 50px 32px;
     margin: 0 auto;
   }
 `
@@ -111,7 +114,8 @@ export const Responsabilities = styled.section`
   margin: 0 auto;
   @media(max-width: 960px) {
     flex-direction: column;
-    margin: 0 32px;
+    padding: 0 32px;
+    margin: 24px 0;
   }
 `
 export const ResponsabilitiesTitle = styled.div`

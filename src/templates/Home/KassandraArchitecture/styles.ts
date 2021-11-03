@@ -7,6 +7,9 @@ export const Token = styled.section`
   padding: 0 32px;
   margin: 0 auto 160px;
   text-align: center;
+  @media(max-width: 960px) {
+    margin: 0 auto 80px;
+  }
   /* margin: -80px 0 0; */
 
   span{
