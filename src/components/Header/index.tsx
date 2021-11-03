@@ -105,11 +105,11 @@ const Header = () => {
           )} */}
 
           <Link href="/products" passHref>
-            <S.MenuLinkDisable>Buy $Heim</S.MenuLinkDisable>
+            <S.MenuLink>Buy $Heim</S.MenuLink>
           </Link>
 
           <Link href="/farm" passHref>
-            <S.MenuLinkDisable>Stake/Farm</S.MenuLinkDisable>
+            <S.MenuLink>Stake/Farm</S.MenuLink>
           </Link>
 
           <Link href="/" passHref>

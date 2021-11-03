@@ -49,7 +49,7 @@ const Form = ({
   const crpPoolToken = useERC20Contract(HeimCRPPOOL)
   const corePool = usePoolContract(HeimCorePool)
   const crpPool = useCRPContract(HeimCRPPOOL)
-  const { poolTokensArray ,userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const { poolTokensArray, userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { connect } = useConnect()
   const dispatch = useDispatch()
 
@@ -669,7 +669,7 @@ const Form = ({
             poolTokenDetails={poolTokenDetails
               .slice(0, -1)
               .filter((token: { address: string }) => token.address !== swapInAddress)}
-              poolTokensArray={poolTokensArray}
+            poolTokensArray={poolTokensArray}
             swapOutAmount={swapOutAmount}
             swapOutBalance={swapOutBalance}
             setPriceInDollarOnWithdraw={setPriceInDollarOnWithdraw}
@@ -708,6 +708,11 @@ const Form = ({
                 .slice(0, -1)
                 .filter((token: { address: string }) => token.address !== swapInAddress)}
             isMax={null}
+            poolTokensArray={title === 'Invest'
+            ? [poolTokensArray[poolTokensArray.length - 1]]
+            : poolTokensArray
+              .slice(0, -1)
+              .filter((token: { address: string }) => token.address !== swapInAddress)}
             swapOutAmount={swapOutAmount[0]}
             swapOutBalance={swapOutBalance[0]}
             setSwapOutAddress={setSwapOutAddress}

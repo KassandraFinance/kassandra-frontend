@@ -16,10 +16,12 @@ import {
   Input,
   AmountDefault,
 } from './styles'
+import SelectToken from '../../SelectToken'
 
 interface IInputDefaultProps {
   decimals: BigNumber
   poolTokens: TokenDetails[]
+  poolTokensArray?: TokenDetails[]
   isMax: boolean | null
   swapOutAmount: BigNumber
   swapOutBalance: BigNumber
@@ -29,20 +31,27 @@ interface IInputDefaultProps {
 const InputDefault = ({
   decimals,
   poolTokens,
+  poolTokensArray,
   isMax,
   swapOutAmount,
   swapOutBalance,
   setSwapOutAddress,
 }: IInputDefaultProps) => {
+  console.log(poolTokens)
   const tokensList = React.useMemo(() => {
     if (poolTokens.length > 1) {
       return (
-        <Select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSwapOutAddress(e.target.value)}>
-          {poolTokens.map(
-            (token: TokenDetails) =>
-              <option key={token.address} value={token.address} title={token.name}>{token.symbol}</option>
-          )}
-        </Select>
+        <SelectToken 
+          poolTokens={poolTokens} 
+          poolTokensArray={poolTokensArray} 
+          setSwapOutAddress={setSwapOutAddress} 
+        />
+        // <Select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSwapOutAddress(e.target.value)}>
+        //   {poolTokens.map(
+        //     (token: TokenDetails) =>
+        //       <option key={token.address} value={token.address} title={token.name}>{token.symbol}</option>
+        //   )}
+        // </Select>
       )
     }
 
