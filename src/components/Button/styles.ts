@@ -43,11 +43,18 @@ const wrapperModifiers = {
     width: 100%;
   `,
   withIcon: (theme: DefaultTheme) => css`
+    img{
+      width: 1.6rem;
+      margin-left: ${theme.spacings.space8};
+      order: 1;
+      & + span{
+        margin-right: ${theme.spacings.space16};
+      }
+    }
     svg {
-      width: 1.4rem;
+      width: 1.6rem;
       margin-right: ${theme.spacings.space8};
-
-      & + span {
+      & + span{
         margin-left: ${theme.spacings.space16};
       }
     }
