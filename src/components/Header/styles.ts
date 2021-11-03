@@ -35,7 +35,9 @@ export const Wrapper = styled.menu<IWrapperProps>`
 
 export const LogoWrapper = styled.div`
   cursor: pointer;
-
+  img {
+      max-height: 40px;
+    }
   @media(max-width: 960px) {
     display: flex;
     left: 0;
@@ -43,9 +45,8 @@ export const LogoWrapper = styled.div`
     /* left: 50%; */
     /* transform: translateX(-50%); */
     img {
-      position:relative;
+      position: relative;
       max-width: 100%;
-
     }
   }
 
