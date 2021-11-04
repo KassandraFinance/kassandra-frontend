@@ -21,12 +21,10 @@ export const SelectToken = styled.div<ISelectedProps>`
   background-color: #4A4348;
   border-radius: ${props => props.openOptions ? '4px 4px 0 0px' : '4px'};
 
-
   font-size: ${theme.font.sizes.font20};
 
   max-width: 128px;
-
-  font-size: ${theme.font.sizes.font20};
+  margin: 8px 0;
 `
 
 export const Selected = styled.div<ISelectedProps>`
@@ -36,11 +34,10 @@ export const Selected = styled.div<ISelectedProps>`
   justify-content: space-between;
 
   cursor: pointer;
-  padding: 6px 8px;
+  padding: 3px 8px;
 
   img {
     max-width: 21px;
-    /* margin: 0 10px; */
   }
 `
 
@@ -70,4 +67,3 @@ export const Option = styled.div`
     background-color: #000;
   }
 `
-

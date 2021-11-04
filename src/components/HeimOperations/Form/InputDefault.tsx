@@ -5,23 +5,24 @@ import { BNtoDecimal } from '../../../utils/numerals'
 
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
 
+import SelectInputDefault from '../../SelectInputDefault'
+
 import {
   ButtonMax,
   InputDefaultContainer,
   Info,
   Span,
   SpanLight,
-  Select,
   Symbol,
   Input,
   AmountDefault,
 } from './styles'
-import SelectToken from '../../SelectToken'
 
 interface IInputDefaultProps {
   decimals: BigNumber
   poolTokens: TokenDetails[]
-  poolTokensArray?: TokenDetails[]
+  poolTokensArray: TokenDetails[]
+  title: string
   isMax: boolean | null
   swapOutAmount: BigNumber
   swapOutBalance: BigNumber
@@ -32,26 +33,20 @@ const InputDefault = ({
   decimals,
   poolTokens,
   poolTokensArray,
+  title,
   isMax,
   swapOutAmount,
   swapOutBalance,
   setSwapOutAddress,
 }: IInputDefaultProps) => {
-  console.log(poolTokens)
   const tokensList = React.useMemo(() => {
     if (poolTokens.length > 1) {
       return (
-        <SelectToken 
-          poolTokens={poolTokens} 
+        <SelectInputDefault 
           poolTokensArray={poolTokensArray} 
           setSwapOutAddress={setSwapOutAddress} 
+          title={title}
         />
-        // <Select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSwapOutAddress(e.target.value)}>
-        //   {poolTokens.map(
-        //     (token: TokenDetails) =>
-        //       <option key={token.address} value={token.address} title={token.name}>{token.symbol}</option>
-        //   )}
-        // </Select>
       )
     }
 

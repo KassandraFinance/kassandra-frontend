@@ -1,23 +1,26 @@
 import React from 'react'
-import { useSelector, RootStateOrAny } from 'react-redux'
 
 import { TokenDetails } from '../../store/modules/poolTokens/types'
 
 import * as S from './styles'
 
-interface ISelectTokenProps {
-  poolTokens: TokenDetails[]
-  poolTokensArray?: TokenDetails[] | undefined
+interface ISelectInputDefaultProps {
+  poolTokensArray: TokenDetails[]
   setSwapOutAddress: React.Dispatch<React.SetStateAction<string>>
+  title: string
 }
 
-const SelectToken = ({ poolTokens, poolTokensArray, setSwapOutAddress }: ISelectTokenProps) => {
-  const [tokenSelected, setTokenSelected] = React.useState<TokenDetails | undefined>(poolTokensArray[0])
+const SelectInputDefault = ({ 
+  poolTokensArray, 
+  setSwapOutAddress,
+  title
+}: ISelectInputDefaultProps) => {
+  const [tokenSelected, setTokenSelected] = React.useState<TokenDetails | undefined>(poolTokensArray && poolTokensArray[0])
   const [openOptions, setOpenOptions] = React.useState<boolean>(false)
-  
-  // React.useEffect(() => {
-  //   setTokenSelected(poolTokensArray[0])
-  // }, [poolTokensArray])
+
+  React.useEffect(() => {
+    setTokenSelected(poolTokensArray[0])
+  }, [title])
 
   return (
     <S.SelectToken openOptions={openOptions}>
@@ -25,8 +28,8 @@ const SelectToken = ({ poolTokens, poolTokensArray, setSwapOutAddress }: ISelect
         openOptions={openOptions} 
         onClick={() => setOpenOptions(!openOptions)}
       >
-        <img src={tokenSelected?.image || poolTokens[0].image} alt="" />
-        {tokenSelected?.symbol || poolTokens[0].symbol}
+        <img src={tokenSelected?.image || poolTokensArray[0].image} alt="" />
+        {tokenSelected?.symbol || poolTokensArray[0].symbol}
         <img src="assets/arrow-select.svg" alt="" />
       </S.Selected>
       {openOptions &&
@@ -51,4 +54,4 @@ const SelectToken = ({ poolTokens, poolTokensArray, setSwapOutAddress }: ISelect
   )
 }
 
-export default SelectToken
+export default SelectInputDefault

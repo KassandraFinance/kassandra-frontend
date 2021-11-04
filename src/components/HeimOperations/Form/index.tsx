@@ -683,6 +683,8 @@ const Form = ({
               poolTokens={poolTokenDetails
                 .slice(0, -1)
                 .filter((token: { address: string }) => token.address !== swapInAddress)}
+              poolTokensArray={poolTokensArray}
+              title={title}
               isMax={null}
               swapOutAmount={swapOutAmount[0]}
               swapOutBalance={swapOutBalance[0]}
@@ -709,12 +711,10 @@ const Form = ({
               : poolTokenDetails
                 .slice(0, -1)
                 .filter((token: { address: string }) => token.address !== swapInAddress)}
-            isMax={null}
-            poolTokensArray={title === 'Invest'
-            ? [poolTokensArray[poolTokensArray.length - 1]]
-            : poolTokensArray
-              .slice(0, -1)
+            poolTokensArray={poolTokensArray
               .filter((token: { address: string }) => token.address !== swapInAddress)}
+            title={title}
+            isMax={null}
             swapOutAmount={swapOutAmount[0]}
             swapOutBalance={swapOutBalance[0]}
             setSwapOutAddress={setSwapOutAddress}
