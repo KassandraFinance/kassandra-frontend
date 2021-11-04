@@ -28,8 +28,8 @@ const SelectInputDefault = ({
         openOptions={openOptions} 
         onClick={() => setOpenOptions(!openOptions)}
       >
-        <img src={tokenSelected?.image || poolTokensArray[0].image} alt="" />
-        {tokenSelected?.symbol || poolTokensArray[0].symbol}
+        <img src={tokenSelected?.image} alt="" />
+        {tokenSelected?.symbol}
         <img src="assets/arrow-select.svg" alt="" />
       </S.Selected>
       {openOptions &&
