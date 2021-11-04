@@ -49,7 +49,7 @@ const Form = ({
   const crpPoolToken = useERC20Contract(HeimCRPPOOL)
   const corePool = usePoolContract(HeimCorePool)
   const crpPool = useCRPContract(HeimCRPPOOL)
-  const { poolTokensArray ,userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const { poolTokensArray, userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { connect } = useConnect()
   const dispatch = useDispatch()
 
@@ -652,12 +652,14 @@ const Form = ({
               .slice(0, -1)
               .filter((token: { address: string }) => token.address !== swapOutAddress)
         }
+        poolTokensArray={poolTokensArray
+          .filter((token: { address: string }) => token.address !== swapOutAddress)
+        }
         title={title}
         decimals={poolTokenDetails[tokenInIndex] ? poolTokenDetails[tokenInIndex].decimals : new BigNumber(18)}
         swapInBalance={swapInBalance}
         setSwapInAmount={setSwapInAmount}
         setSwapOutAmount={setSwapOutAmount}
-        swapInAddress={swapInAddress}
         setSwapInAddress={setSwapInAddress}
       />
 
@@ -669,7 +671,7 @@ const Form = ({
             poolTokenDetails={poolTokenDetails
               .slice(0, -1)
               .filter((token: { address: string }) => token.address !== swapInAddress)}
-              poolTokensArray={poolTokensArray}
+            poolTokensArray={poolTokensArray}
             swapOutAmount={swapOutAmount}
             swapOutBalance={swapOutBalance}
             setPriceInDollarOnWithdraw={setPriceInDollarOnWithdraw}
@@ -681,6 +683,8 @@ const Form = ({
               poolTokens={poolTokenDetails
                 .slice(0, -1)
                 .filter((token: { address: string }) => token.address !== swapInAddress)}
+              poolTokensArray={poolTokensArray}
+              title={title}
               isMax={null}
               swapOutAmount={swapOutAmount[0]}
               swapOutBalance={swapOutBalance[0]}
@@ -707,6 +711,9 @@ const Form = ({
               : poolTokenDetails
                 .slice(0, -1)
                 .filter((token: { address: string }) => token.address !== swapInAddress)}
+            poolTokensArray={poolTokensArray
+              .filter((token: { address: string }) => token.address !== swapInAddress)}
+            title={title}
             isMax={null}
             swapOutAmount={swapOutAmount[0]}
             swapOutBalance={swapOutBalance[0]}

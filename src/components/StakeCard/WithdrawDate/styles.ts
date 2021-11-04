@@ -7,7 +7,7 @@ export const WithdrawDate = styled.div`
   border: none;
   border-radius: ${theme.border.radius};
   color: ${theme.colors.grayDisabled};
-  font-size: ${theme.font.sizes.font16};
+  font-size: ${theme.font.sizes.font14};
   font-weight: ${theme.font.weight.light};
 
   padding: ${theme.spacings.space24} ${theme.spacings.space40};

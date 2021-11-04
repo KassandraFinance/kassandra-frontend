@@ -180,8 +180,8 @@ export const ButtonMax = styled.button<IButtonMax>`
   cursor: pointer;
   transition: 100ms;
   &:hover {
-    background: #26DBDB;
-    border: 1px solid ${theme.colors.cyan};
+    background: ${theme.colors.snow};
+    border: 1px solid ${theme.colors.snow};
     color: #000;
   }
 `

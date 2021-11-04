@@ -45,6 +45,7 @@ export interface IInfoStaked {
 
 interface IStakingProps {
   pid: number;
+  symbol: string;
   connect: () => void;
   balanceOf: (pid: number, walletAddress: string) => Promise<BigNumber>;
   earned: (pid: number, walletAddress: string) => Promise<BigNumber>;
@@ -62,6 +63,7 @@ interface IStakingProps {
 
 const StakeCard = ({
   pid,
+  symbol,
   connect,
   balanceOf,
   earned,
@@ -377,6 +379,8 @@ const StakeCard = ({
                   poolInfo={poolInfo}
                   infoStakeStatic={infoStaked}
                   stakingToken={infoStaked.stakingToken}
+                  decimals={decimals}
+                  symbol={symbol}
                 />
               )}
             </S.ButtonContainer>

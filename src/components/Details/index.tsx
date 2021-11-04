@@ -5,6 +5,7 @@ import BigNumber from 'bn.js'
 import { BNtoDecimal } from '../../utils/numerals'
 
 import * as S from './styles'
+import { registerToken } from '../../utils/registerToken'
 
 interface IInfoStakeStaticProps {
   votingMultiplier: string;
@@ -20,6 +21,8 @@ interface IDetailsProps {
   poolInfo: (pid: number) => Promise<any>
   infoStakeStatic: IInfoStakeStaticProps
   stakingToken: string
+  decimals: string
+  symbol: string
 }
 
 const Details = ({ 
@@ -27,7 +30,9 @@ const Details = ({
   hasExpired, 
   poolInfo, 
   infoStakeStatic,
-  stakingToken
+  stakingToken,
+  decimals,
+  symbol
 }: IDetailsProps) => {
   const [depositedAmount, setDepositedAmount] = React.useState<string>('')
 
@@ -97,7 +102,12 @@ const Details = ({
           <img src="assets/GoToSite.svg" alt="" />   
         </S.Link>
         {/* <span>Add to Metamask</span> */}
-
+        <S.AddToken 
+          type="button" 
+          onClick={() => registerToken(stakingToken, symbol.toLocaleUpperCase(), Number(decimals))} 
+        >
+          <img src="assets/metaMaskIcon.svg" alt="" /> Add to Metamask
+        </S.AddToken>
       </S.Info>
     </S.Details>
   )

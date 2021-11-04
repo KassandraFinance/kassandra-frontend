@@ -6,13 +6,15 @@ export const Details = styled.div`
 
   margin-bottom: 12px;
   width: 100%;
+  z-index: 111;
+
 `
 
 export const Info = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  z-index: 111;
   span {
     font-size: ${theme.font.sizes.font14};
     line-height: ${theme.font.sizes.font14};
@@ -76,5 +78,28 @@ export const Link = styled.div`
   margin-bottom: ${theme.spacings.space8};
   img {
     margin-left: 6px;
+  }
+`
+
+export const AddToken = styled.button`
+  background-color: transparent;
+  border: none;
+  color: ${theme.colors.snow};
+
+  display: flex;
+  align-items: center;
+
+  font-family: ${theme.font.family};
+  font-size: ${theme.font.sizes.font14};
+  font-weight: ${theme.font.weight.light};
+  cursor: pointer;
+  outline: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+  img {
+    max-width: 14px;
+    margin-right: 4px;
   }
 `

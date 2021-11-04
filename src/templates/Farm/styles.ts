@@ -20,15 +20,28 @@ export const StakeWithPowerVote = styled.div`
   justify-content: space-between;
 
   margin: 50px 0 50px;
+  @media (max-width: 960px) {
+    flex-wrap: wrap;
+    margin: 50px 30px;
+  }
 `
 
-export const NameStake = styled.div`
+interface INameStakeProps {
+  left?: boolean
+}
+
+export const NameStake = styled.div<INameStakeProps>`
   p {
     color: #c4c4c4;
     font-size: ${theme.font.sizes.font18};
     text-transform: uppercase;
 
     margin-left: 32px;
+  }
+  @media (max-width: 960px) {
+    ${props => props.left && `
+      padding-left: 30px;
+    `}
   }
 `
 

@@ -1,7 +1,5 @@
-/* eslint-disable prettier/prettier */
 import styled, { css } from 'styled-components'
-import media from 'styled-media-query'
-import * as ButtonStyles from '../Button/styles'
+import theme from '../../styles/theme'
 
 interface IWrapperProps {
   pageHeim: boolean;
@@ -9,28 +7,33 @@ interface IWrapperProps {
 
 // eslint-disable-next-line prettier/prettier
 export const Wrapper = styled.menu<IWrapperProps>`
-  max-width: 1140px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
   margin: 0 auto;
-  ${({ theme }) => css`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    height: 110px;
-    z-index: ${theme.layers.menu};
-    }
+  max-width: 1140px;
+  height: 110px;
+  
+  position: relative;
+  z-index: ${theme.layers.menu};
 
-    @media(max-width: 960px ) {
+  @media(max-width: 1200px ) {
+    padding: 0 30px;
+  }
+
+  @media(max-width: 960px ) {
     display: flex;
     justify-content: flex-end;
-    padding: 1.5rem;
-    margin-inline: 30px;
+
+    padding: 0;
     margin-bottom: 3rem;
-    }
-    @media(max-width: 400px ) {
-      margin-inline: 15px;
-    }
-  `}
+    padding: 0 0 30px;
+    margin: 0 30px;
+  }
+  @media(max-width: 400px ) {
+    margin-inline: 15px;
+  }
 `
 
 export const LogoWrapper = styled.div`

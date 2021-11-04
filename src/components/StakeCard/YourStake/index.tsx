@@ -36,7 +36,6 @@ const YourStake = ({
 
   const getYourStake = React.useCallback(async () => {
     const poolInfoResponse = await poolInfo(pid)
-    console.log(poolInfoResponse)
 
     if (poolInfoResponse.withdrawDelay) {
       if (userWalletAddress === '') {
@@ -186,7 +185,7 @@ const YourStake = ({
               {BNtoDecimal(
                 infoStaked.yourStake,
                 new BigNumber(18),
-                6
+                2
               )}{' '}
               <S.Symbol>{!stakeWithVotingPower ? 'KACY' : 'USD'}</S.Symbol>
             </p>
@@ -207,7 +206,7 @@ const YourStake = ({
                       : infoStaked.votingMultiplier
                   ).mul(infoStaked.yourStake),
                   new BigNumber(18),
-                  6
+                  2
                 )}
               </span>
             </S.Info> 

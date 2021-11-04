@@ -17,6 +17,14 @@ export const Product = styled.section`
   max-width: 1140px;
   max-height: 100%;
   margin-top: ${theme.spacings.space32};
+
+  @media (max-width: 1200px) {
+    padding: 0 30px;
+  }
+  @media (max-width: 960px) {
+    display: flex;
+    flex-direction: column-reverse;
+  }
 `
 
 export const ProductDetails = styled.div`

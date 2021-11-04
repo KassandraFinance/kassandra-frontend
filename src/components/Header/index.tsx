@@ -16,7 +16,6 @@ import web3 from '../../utils/web3'
 import useConnect from '../../hooks/useConnect'
 
 import Button from '../Button'
-import MediaMatch from '../MediaMatch'
 import ModalWalletConnect from '../ModalWalletConnect'
 
 import * as S from './styles'
@@ -106,11 +105,11 @@ const Header = () => {
           )} */}
 
           <Link href="/products" passHref>
-            <S.MenuLinkDisable>Buy $Heim</S.MenuLinkDisable>
+            <S.MenuLink>Buy $Heim</S.MenuLink>
           </Link>
 
           <Link href="/farm" passHref>
-            <S.MenuLinkDisable>Stake/Farm</S.MenuLinkDisable>
+            <S.MenuLink>Stake/Farm</S.MenuLink>
           </Link>
 
           <Link href="/" passHref>
