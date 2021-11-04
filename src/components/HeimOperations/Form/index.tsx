@@ -652,12 +652,14 @@ const Form = ({
               .slice(0, -1)
               .filter((token: { address: string }) => token.address !== swapOutAddress)
         }
+        poolTokensArray={poolTokensArray
+          .filter((token: { address: string }) => token.address !== swapOutAddress)
+        }
         title={title}
         decimals={poolTokenDetails[tokenInIndex] ? poolTokenDetails[tokenInIndex].decimals : new BigNumber(18)}
         swapInBalance={swapInBalance}
         setSwapInAmount={setSwapInAmount}
         setSwapOutAmount={setSwapOutAmount}
-        swapInAddress={swapInAddress}
         setSwapInAddress={setSwapInAddress}
       />
 

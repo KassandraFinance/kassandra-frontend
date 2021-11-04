@@ -6,6 +6,8 @@ import { BNtoDecimal, wei } from '../../../utils/numerals'
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
 import InputTokenValue from '../../InputTokenValue'
 
+import SelectInputTokens from '../../SelectInputTokens'
+
 import { 
   InputTokensContainer, 
   PayWith, 
@@ -21,10 +23,10 @@ import {
 interface IInputEthProps {
   actionString: string
   poolTokens: TokenDetails[]
+  poolTokensArray: TokenDetails[]
   title: string
   decimals: BigNumber
   swapInBalance: BigNumber
-  swapInAddress: string
   setSwapInAddress: React.Dispatch<React.SetStateAction<string>>
   setSwapInAmount: React.Dispatch<React.SetStateAction<BigNumber>>
   setSwapOutAmount: React.Dispatch<React.SetStateAction<BigNumber[]>>
@@ -33,10 +35,10 @@ interface IInputEthProps {
 const InputTokens = ({
   actionString,
   poolTokens,
+  poolTokensArray,
   title,
   decimals,
   swapInBalance,
-  swapInAddress,
   setSwapInAddress,
   setSwapInAmount,
   setSwapOutAmount
@@ -46,20 +48,11 @@ const InputTokens = ({
   const tokensList = React.useMemo(() => {
     if (poolTokens.length > 1) {
       return (
-        <Select 
-          value={swapInAddress}
-          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-            setSwapInAddress(e.target.value)
-            clearInput()
-          }}
-        >
-          {poolTokens.map(
-            (token: TokenDetails) =>
-              <option key={token.address} value={token.address} title={token.name}>
-                {token.symbol}
-              </option>
-          )}
-        </Select>
+        <SelectInputTokens
+          poolTokensArray={poolTokensArray}
+          setSwapInAddress={setSwapInAddress}
+          title={title}
+        />
       )
     }
 
