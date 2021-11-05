@@ -76,11 +76,14 @@ const wrapperModifiers = {
   `,
 
   backgroundPrimary: (theme: DefaultTheme) => css`
-    background: ${`linear-gradient(93.84deg, ${theme.colors.magenta} 0.12%, ${theme.colors.blue} 100%)`};
+    background: ${`linear-gradient(93.84deg, ${theme.colors.blue} 0%, ${theme.colors.magenta} 50.12%, ${theme.colors.blue} 100%)`};
+    background-position-x: 100%;
+    background-size: 200%;
+    transition: background-position-x 0.5s ease-out;
     font-weight: ${theme.font.weight.medium};
 
     &:hover {
-      background: ${`linear-gradient(93.84deg, ${theme.colors.blue} 0.12%, ${theme.colors.magenta} 100%)`};
+      background-position-x: 0%;
     }
   `,
 
