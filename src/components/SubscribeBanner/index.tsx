@@ -1,6 +1,4 @@
-import { ArrowForward, KeyboardArrowRight } from '@styled-icons/material-outlined'
 import React from 'react'
-import Link from 'next/link'
 import TextField from '../TextField'
 
 import * as S from './styles'
@@ -52,7 +50,7 @@ const SubscribeBanner = () => {
           />
 
           <TextField
-            icon={<ArrowForward />}
+            icon={<img src="/assets/fowardArrow.svg" alt="" />}
             iconPosition='right'
             name="email"
             placeholder="Email"

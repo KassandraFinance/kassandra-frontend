@@ -53,6 +53,7 @@ const wrapperModifiers = {
     }
     svg {
       width: 1.6rem;
+      order: 0;
       margin-right: ${theme.spacings.space8};
       & + span{
         margin-left: ${theme.spacings.space16};
