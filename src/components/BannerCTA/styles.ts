@@ -10,6 +10,7 @@ export const Background = styled.div`
   background-position: 50%;
   padding: 100px 30px;
 `
+
 export const Container = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -336,7 +336,7 @@ const StakeCard = ({
                       <>
                         <Button
                           size='huge'
-                          backgroundBlack
+                          backgroundSecondary
                           type="button"
                           text='Cancel withdraw'
                           fullWidth
@@ -355,7 +355,7 @@ const StakeCard = ({
                           infoStaked.withdrawDelay !== '0' && infoStaked.withdrawable ?
                             <Button
                               size='huge'
-                              backgroundBlack
+                              backgroundSecondary
                               type="button"
                               text={`Stake ${staked[pid]}`}
                               fullWidth
@@ -383,7 +383,7 @@ const StakeCard = ({
                         {infoStaked.yourStake.toString() !== '0' && infoStaked.withdrawable ?
                           <Button
                             size='huge'
-                            backgroundSecondary
+                            backgroundBlack
                             type="button"
                             text='Withdraw'
                             fullWidth
