@@ -10,8 +10,6 @@
   "dependencies": {
     "@datapunt/matomo-tracker-react": "^0.5.1",
     "@metamask/detect-provider": "^1.2.0",
-    "@styled-icons/material-outlined": "^10.34.0",
-    "@styled-icons/remix-fill": "^10.18.0",
     "@types/big.js": "^6.1.2",
     "@types/node": "^15.0.2",
     "@types/react": "^17.0.5",

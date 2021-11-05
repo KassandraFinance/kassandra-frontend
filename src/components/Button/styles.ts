@@ -53,6 +53,7 @@ const wrapperModifiers = {
     }
     svg {
       width: 1.6rem;
+      order: 0;
       margin-right: ${theme.spacings.space8};
       & + span{
         margin-left: ${theme.spacings.space16};
@@ -76,11 +77,13 @@ const wrapperModifiers = {
   `,
 
   backgroundPrimary: (theme: DefaultTheme) => css`
-    background: ${`linear-gradient(93.84deg, ${theme.colors.magenta} 0.12%, ${theme.colors.blue} 100%)`};
+    background: ${`linear-gradient(93.84deg, ${theme.colors.blue} 0%, ${theme.colors.magenta} 50.12%, ${theme.colors.blue} 100%)`};
+    background-position-x: 100%;
+    background-size: 200%;
+    transition: background-position-x 0.5s ease-out;
     font-weight: ${theme.font.weight.medium};
-
     &:hover {
-      background: ${`linear-gradient(93.84deg, ${theme.colors.blue} 0.12%, ${theme.colors.magenta} 100%)`};
+      background-position-x: 0%;
     }
   `,
 
@@ -90,7 +93,7 @@ const wrapperModifiers = {
 
     transition: all 300ms;
     &:hover {
-      background: ${theme.colors.darkBlue}
+      background: ${theme.colors.darkBlue};
     }
   `,
 
@@ -101,10 +104,15 @@ const wrapperModifiers = {
 
     padding: 12.5px;
 
-    transition: all 300ms;
+    transition: all 300ms ease-in-out;
     &:hover {
       color: ${theme.colors.darkPurple};
       background: ${theme.colors.cyan};
+      svg{
+        path{
+          fill: ${theme.colors.darkPurple};
+        }
+      }
     }
   `
 }
