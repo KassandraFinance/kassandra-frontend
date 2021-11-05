@@ -53,6 +53,7 @@ const wrapperModifiers = {
     }
     svg {
       width: 1.6rem;
+      order: 0;
       margin-right: ${theme.spacings.space8};
       & + span{
         margin-left: ${theme.spacings.space16};
@@ -81,7 +82,6 @@ const wrapperModifiers = {
     background-size: 200%;
     transition: background-position-x 0.5s ease-out;
     font-weight: ${theme.font.weight.medium};
-
     &:hover {
       background-position-x: 0%;
     }
@@ -93,7 +93,7 @@ const wrapperModifiers = {
 
     transition: all 300ms;
     &:hover {
-      background: ${theme.colors.darkBlue}
+      background: ${theme.colors.darkBlue};
     }
   `,
 
@@ -104,10 +104,15 @@ const wrapperModifiers = {
 
     padding: 12.5px;
 
-    transition: all 300ms;
+    transition: all 300ms ease-in-out;
     &:hover {
       color: ${theme.colors.darkPurple};
       background: ${theme.colors.cyan};
+      svg{
+        path{
+          fill: ${theme.colors.darkPurple};
+        }
+      }
     }
   `
 }

@@ -8,7 +8,7 @@ export type TextFieldProps = {
   onInput?: (value: string) => void
   label?: string
   initialValue?: string
-  icon?: React.ReactNode
+  icon?: JSX.Element
   iconPosition?: 'left' | 'right'
   disabled?: boolean
   disabledNoEvent?: boolean;

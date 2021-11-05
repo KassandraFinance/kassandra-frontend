@@ -43,6 +43,7 @@ export const Input = styled.div`
     border-color:#ffff;
     border-radius: 12px;
     height: 60px;
+    margin: 0;
   }
   ${TextFieldStyles.Icon} {
     cursor: pointer;

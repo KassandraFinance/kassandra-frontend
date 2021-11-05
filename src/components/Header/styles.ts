@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import theme from '../../styles/theme'
 
+import * as ButtonStyles from '../Button/styles'
 interface IWrapperProps {
   pageHeim: boolean;
 }
@@ -10,11 +11,11 @@ export const Wrapper = styled.menu<IWrapperProps>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  
+
   margin: 0 auto;
   max-width: 1140px;
   height: 110px;
-  
+
   position: relative;
   z-index: ${theme.layers.menu};
 
@@ -221,3 +222,17 @@ export const MenuDesktop = styled.div`
     display: none;
   }
 `
+//create a component to wrap close menu icon
+export const CloseMenuIcon = styled.div`
+  ${({ theme }) => css`
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: ${theme.spacings.space24};
+    cursor: pointer;
+    width: 2.4rem;
+    height: 2.4rem;
+  `}
+`
+
+
