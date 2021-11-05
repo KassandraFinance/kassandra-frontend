@@ -1,4 +1,5 @@
 import React from 'react'
+import Big from 'big.js'
 import BigNumber from 'bn.js'
 // import { EventData } from 'web3-eth-contract'
 import { useSelector, RootStateOrAny } from 'react-redux'
@@ -9,8 +10,9 @@ import { confirmClaim } from '../../utils/confirmTransactions'
 
 import { Staking } from '../../constants/tokenAddresses'
 
+import usePriceLP from '../../hooks/usePriceLP'
 import { PoolInfo } from '../../hooks/useStakingContract'
-import { ERC20 } from '../../hooks/useERC20Contract'
+import useERC20Contract, { ERC20 } from '../../hooks/useERC20Contract'
 
 import Details from '../Details'
 import Tooltip from '../Tooltip'
@@ -26,6 +28,11 @@ import KacyEarned from './KacyEarned'
 
 import * as S from './styles'
 import Button from '../Button'
+
+export interface IPriceLPToken {
+  priceLP: Big
+  kacy: Big
+}
 
 export interface IInfoStaked {
   yourStake: BigNumber;
@@ -61,6 +68,14 @@ interface IStakingProps {
   stakeWithVotingPower: boolean;
 }
 
+const staked = {
+  0: 'KACY',
+  1: 'KACY',
+  2: 'KACY',
+  3: 'HEIM',
+  4: 'KEU',
+}
+
 const StakeCard = ({
   pid,
   symbol,
@@ -82,6 +97,10 @@ const StakeCard = ({
   const [isDetails, setIsDetails] = React.useState<boolean>(false)
 
   const [isApproveKacyStaking, setIsApproveKacyStaking] = React.useState<boolean>(false)
+  const [priceLPToken, setPriceLPToken] = React.useState<IPriceLPToken>({
+    priceLP: Big(0),
+    kacy: Big(0)
+  })
 
   const [withdrawDelay, setWithdrawDelay] = React.useState<number>(0)
   const [kacyEarned, setKacyEarned] = React.useState<BigNumber>(new BigNumber(0))
@@ -106,6 +125,32 @@ const StakeCard = ({
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
+  const { viewgetReserves } = usePriceLP()
+  const lpToken = useERC20Contract('0xaCb1C18A8238955d123450d02bdD19b74ED7903f')
+
+  async function handleLPtoUSD() {
+    const reservesKacyETH = await viewgetReserves('0xaCb1C18A8238955d123450d02bdD19b74ED7903f')
+    const reservesDaiETH = await viewgetReserves('0x1c5DEe94a34D795f9EEeF830B68B80e44868d316')
+    
+    const ethInDollar = Big(reservesDaiETH._reserve0).div(Big(reservesDaiETH._reserve1))
+    const kacyInDollar = ethInDollar.div(Big(reservesKacyETH._reserve0))
+    
+    const allETHDollar = Big(reservesKacyETH._reserve1).mul(ethInDollar)
+    const supplyLPToken = await lpToken.totalSupply()
+
+    if (supplyLPToken.toString() !== '0') {
+      const priceLP = allETHDollar.mul(2).div(Big(supplyLPToken.toString()))
+      setPriceLPToken(prevState => ({
+        ...prevState,
+        priceLP
+      }))
+    }
+    setPriceLPToken(prevState => ({
+      ...prevState,
+      kacy: kacyInDollar
+    }))
+  }
+
   async function handleApproveKacy() {
     const token = ERC20(infoStaked.stakingToken)
     if (isApproveKacyStaking) {
@@ -119,6 +164,10 @@ const StakeCard = ({
     setIsApproveKacyStaking(res)
 
   }
+
+  React.useEffect(() => {
+    handleLPtoUSD()
+  }, [infoStaked.stakingToken, pid])
 
   React.useEffect(() => {
     if (!web3.currentProvider) {
@@ -191,7 +240,7 @@ const StakeCard = ({
               null
             }
             {pid === 4 ? 
-              <img src="assets/stake-kacy-eth-uni.png" alt="" />
+              <img src="assets/stake-kacy-eth-uni.png" alt="" width={144} />
             :
               null
             }
@@ -257,6 +306,7 @@ const StakeCard = ({
               infoStaked={infoStaked}
               setInfoStaked={setInfoStaked}
               stakeWithVotingPower={stakeWithVotingPower}
+              priceLPToken={priceLPToken}
             />
             <S.ButtonContainer stakeWithVotingPower={stakeWithVotingPower}>
               {userWalletAddress ? (
@@ -307,7 +357,7 @@ const StakeCard = ({
                               size='huge'
                               backgroundBlack
                               type="button"
-                              text='Stake KACY'
+                              text={`Stake ${staked[pid]}`}
                               fullWidth
                               onClick={() => setIsModalCancelUnstake(true)}
                             />
@@ -316,7 +366,7 @@ const StakeCard = ({
                               size='huge'
                               backgroundSecondary
                               type="button"
-                              text='Stake KACY'
+                              text={`Stake ${staked[pid]}`}
                               fullWidth
                               onClick={() => setIsModalStaking(true)}
                             />
@@ -381,6 +431,7 @@ const StakeCard = ({
                   stakingToken={infoStaked.stakingToken}
                   decimals={decimals}
                   symbol={symbol}
+                  priceLPToken={priceLPToken}
                 />
               )}
             </S.ButtonContainer>
