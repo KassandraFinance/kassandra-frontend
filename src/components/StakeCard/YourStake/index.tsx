@@ -1,12 +1,14 @@
 import React from 'react'
 import BigNumber from 'bn.js'
+import Big from 'big.js'
+
 import { PoolInfo } from '../../../hooks/useStakingContract'
 
 import { getDate } from '../../../utils/date'
 import { BNtoDecimal } from '../../../utils/numerals'
 
 import * as S from './styles'
-import { IInfoStaked } from '..'
+import { IInfoStaked, IPriceLPToken } from '..'
 
 interface IYourStakeProps {
   pid: number
@@ -18,6 +20,7 @@ interface IYourStakeProps {
   infoStaked: IInfoStaked
   setInfoStaked: React.Dispatch<React.SetStateAction<IInfoStaked>>
   stakeWithVotingPower: boolean
+  priceLPToken: IPriceLPToken
 }
 
 const YourStake = ({ 
@@ -29,7 +32,8 @@ const YourStake = ({
   userWalletAddress,
   infoStaked,
   setInfoStaked,
-  stakeWithVotingPower
+  stakeWithVotingPower,
+  priceLPToken,
 }: IYourStakeProps) => {
 
   let interval: any
@@ -161,7 +165,7 @@ const YourStake = ({
         .mul(infoStaked.yourStake ? infoStaked.yourStake : new BigNumber(0))
         .div(new BigNumber(infoStaked.totalStaked))
 
-        setInfoStaked((prevState) => ({
+      setInfoStaked((prevState) => ({
         ...prevState,
         yourDailyKacyReward
       }))
@@ -174,7 +178,7 @@ const YourStake = ({
 
     return () => clearInterval(interval)
   }, [userWalletAddress])
-  
+
   return (
     userWalletAddress ?
       <>
@@ -182,15 +186,17 @@ const YourStake = ({
           <p>Your stake</p>
           <S.Stake>
             <p>
-              {BNtoDecimal(
-                infoStaked.yourStake,
-                new BigNumber(18),
-                2
-              )}{' '}
+              {pid === 4 ?
+                Big(infoStaked.yourStake.toString()).mul(priceLPToken.priceLP).div(Big(10).pow(18)).toFixed(2)
+                :
+                BNtoDecimal(infoStaked.yourStake, new BigNumber(18), 2)
+              }{' '}
               <S.Symbol>{!stakeWithVotingPower ? 'KACY' : 'USD'}</S.Symbol>
             </p>
             {!stakeWithVotingPower &&
-              <span>&#8776; {BNtoDecimal(new BigNumber(infoStaked.yourStake).mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
+              <span>
+                &#8776; {Big(infoStaked.yourStake.toString()).mul(priceLPToken.priceLP).div(Big(10).pow(18)).toFixed(2)} USD
+              </span>
             }
           </S.Stake>
         </S.Info>
