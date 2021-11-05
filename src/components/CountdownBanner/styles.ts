@@ -19,7 +19,7 @@ export const Container = styled.section`
   margin: auto;
   padding: 4rem;
 
-  border: 1px solid rgba(255, 255, 255, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 1rem;
   backdrop-filter: blur(10px);
   background: rgba(33, 20, 38, 0.12);
