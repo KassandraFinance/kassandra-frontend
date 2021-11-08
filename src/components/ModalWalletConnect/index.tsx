@@ -16,7 +16,7 @@ const ModalWalletConnect = ({
   modalOpen,
   setModalOpen,
   connect,
-  }: IModalWalletConnect) => {
+}: IModalWalletConnect) => {
 
   function handleCloseModal() {
     setModalOpen(false)
@@ -24,30 +24,30 @@ const ModalWalletConnect = ({
 
   return (
     <>
-      <S.Backdrop onClick={handleCloseModal} style={{display: modalOpen ? 'block' : 'none'}} />
-      <S.BorderGradient
+      <S.Backdrop onClick={handleCloseModal} style={{ display: modalOpen ? 'block' : 'none' }} />
+      <S.Container
         modalOpen={modalOpen}
       >
         <S.BackgroundBlack>
-          <S.InterBackground >
-            <S.ModalText>
+          <S.ModalText>
             <span>Wallet connection is required</span>
-            </S.ModalText>
-            <button type="button" onClick={() => setModalOpen(false)}><img src="assets/close.svg" alt=""/> </button>
-          </S.InterBackground>
-            <S.Content>
-              <S.WrapperIcons
-                type="button"
-                onClick={() => {
-                  setModalOpen(false)
-                  connect()}}
-                >
-                <img src="assets/metaMaskIcon.svg" alt="" />
-                <span>Metamask</span>
-              </S.WrapperIcons>
-            </S.Content>
-          </S.BackgroundBlack>
-      </S.BorderGradient>
+            <button type="button" onClick={() => setModalOpen(false)}><img src="assets/close.svg" alt="" /> </button>
+          </S.ModalText>
+
+          <S.Content>
+            <S.WrapperIcons
+              type="button"
+              onClick={() => {
+                setModalOpen(false)
+                connect()
+              }}
+            >
+              <img src="assets/metaMaskIcon.svg" alt="" />
+              <span>Metamask</span>
+            </S.WrapperIcons>
+          </S.Content>
+        </S.BackgroundBlack>
+      </S.Container>
     </>
   )
 }

@@ -19,15 +19,13 @@ interface IBorderGradientProps {
   modalOpen: boolean;
 }
 
-export const BorderGradient = styled.div<IBorderGradientProps>`
+export const Container = styled.div<IBorderGradientProps>`
   display: ${props => (props.modalOpen ? 'block' : 'none')};
+  background: #1F2937;
 
-  background: linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%);
-  border-radius: ${theme.border.radius};
+  border: 1px solid #FFFFFF40;
+  border-radius: 10px;
 
-  border-radius: ${theme.border.radius};
-
-  padding: 2px;
   width: 411px;
   height: auto;
 
@@ -53,14 +51,19 @@ export const BorderGradient = styled.div<IBorderGradientProps>`
 
 export const BackgroundBlack = styled.div`
   background: #000;
+  border-radius: 10px;
+
   color: white;
   width: 100%;
   height: 100%;
 `
 
-export const InterBackground = styled.div`
-  background: black;
-  border-bottom: 0.2rem solid #e843c4;
+export const ModalText = styled.div`
+  ${({ theme }) => css`
+  background: #1F1F1FB8;
+  border-bottom: 1px solid #FFFFFF40;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -84,13 +87,12 @@ export const InterBackground = styled.div`
       height: 1.2rem;
     }
   }
-`
 
-export const ModalText = styled.div`
-  ${({ theme }) => css`
-    font-size: 1.8rem;
-    font-weight: ${theme.font.weight.normal};
-  `}
+  font-size: 1.8rem;
+  font-weight: ${theme.font.weight.bold};
+
+  letter-spacing: 0.09rem;
+`}
   ${media.lessThan('small')`
     font-size: ${theme.font.sizes.font14};
 `}
@@ -98,49 +100,71 @@ export const ModalText = styled.div`
 
 export const WrapperIcons = styled.button`
   ${({ theme }) => css`
-    background-color: #010001;
-    border: none;
+    background: #1F1F1FB8;
 
+    border: none;
+    border-radius: 10px;
+    padding: ${theme.spacings.space24};
 
     display: flex;
     align-items: center;
+    z-index: 0;
 
     width: 100%;
     height: auto;
     padding-top: 1.8rem;
     padding-bottom: 1.8rem;
     padding-left: 2.4rem;
-
     cursor: pointer;
+    position: relative;
     img {
       display: flex;
       margin-right: 2.4rem;
       width: 4rem;
       height: 3.56rem;
       padding: 0.2rem;
+      z-index: 1;
     }
     span {
       color: ${theme.colors.snow};
       font-size: 1.6rem;
       font-weight: ${theme.font.weight.normal};
       font-family: 'Rubik';
+      z-index: 1;
     }
-
-    ${media.lessThan('small')`
-    margin:0;
-    margin-top: 1.5rem;
-    max-width: 80%
-    font-size:${theme.font.sizes.font12};
-    font-weight: ${theme.font.weight.light};
-  `}
-    &:hover {
-      background: #ffbf00;
+    &:before {
+      content: '';
+      position: absolute;
+      border-radius: 10px;
+      top: 1px;
+      left: 1px;
+      right: 1px;
+      bottom: 1px;
+      border: 3px solid;
+      border-image: linear-gradient(-45deg, #E843C4 0%, #F79640 100%) 1;
+      -webkit-mask: /*4*/
+     linear-gradient(#fff  0 0) content-box,
+     linear-gradient(#fff  0 0);
+      -webkit-mask-composite: destination-out; /*5'*/
+      mask-composite: exclude; /*5*/
+      background-size: 300% 100%;
+      transition: all .4s ease-in-out;
+      display: none;
+    }
+    &:hover:before {
+      display: block;
     }
   `}
 `
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  max-width: 100%;
+
+  padding: ${theme.spacings.space24};
+  background: #1F2937;
 
   ${media.lessThan('small')`
       margin: 0;
