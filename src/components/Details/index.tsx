@@ -1,11 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
+import Big from 'big.js'
 import BigNumber from 'bn.js'
 
 import { BNtoDecimal } from '../../utils/numerals'
 
 import * as S from './styles'
 import { registerToken } from '../../utils/registerToken'
+import { IPriceLPToken } from '../StakeCard'
 
 interface IInfoStakeStaticProps {
   votingMultiplier: string;
@@ -23,6 +25,7 @@ interface IDetailsProps {
   stakingToken: string
   decimals: string
   symbol: string
+  priceLPToken: IPriceLPToken
 }
 
 const Details = ({ 
@@ -32,9 +35,18 @@ const Details = ({
   infoStakeStatic,
   stakingToken,
   decimals,
-  symbol
+  symbol,
+  priceLPToken
 }: IDetailsProps) => {
   const [depositedAmount, setDepositedAmount] = React.useState<string>('')
+
+  const staked = {
+    0: 'kacy',
+    1: 'kacy',
+    2: 'kacy',
+    3: 'heim',
+    4: 'keu',
+  }
 
   React.useEffect(() => {
     let interval: any
@@ -59,9 +71,14 @@ const Details = ({
         <span>Total staked</span>
         <S.KacyUSD>
           <span>
-            {BNtoDecimal(new BigNumber(depositedAmount), new BigNumber(18), 2)} KACY
+            {BNtoDecimal(new BigNumber(depositedAmount), new BigNumber(18), 2)}{' '}
+            {staked[pid]}
           </span>
-          <span className="usd">&#8776; {BNtoDecimal(new BigNumber(depositedAmount).mul(new BigNumber(2)), new BigNumber(18), 2)} USD</span>
+          {pid === 4 ?
+            <span className="usd">&#8776; {BNtoDecimal(Big(`0${depositedAmount}`).mul(priceLPToken.priceLP), Big(18), 2)} USD</span>
+            :
+            <span className="usd">&#8776; {BNtoDecimal(Big(`0${depositedAmount}`).mul(1.44), Big(18), 2)} USD</span>
+          }
         </S.KacyUSD>
       </S.ValuesKacy>
       <S.ValuesKacy>
