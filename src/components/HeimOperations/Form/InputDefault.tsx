@@ -7,16 +7,7 @@ import { TokenDetails } from '../../../store/modules/poolTokens/types'
 
 import SelectInputDefault from '../../SelectInputDefault'
 
-import {
-  ButtonMax,
-  InputDefaultContainer,
-  Info,
-  Span,
-  SpanLight,
-  Symbol,
-  Input,
-  AmountDefault,
-} from './styles'
+import * as S from './styles'
 
 interface IInputDefaultProps {
   decimals: BigNumber
@@ -26,6 +17,7 @@ interface IInputDefaultProps {
   isMax: boolean | null
   swapOutAmount: BigNumber
   swapOutBalance: BigNumber
+  swapInAddress: string
   setSwapOutAddress: React.Dispatch<React.SetStateAction<string>>
 }
 
@@ -37,6 +29,7 @@ const InputDefault = ({
   isMax,
   swapOutAmount,
   swapOutBalance,
+  swapInAddress,
   setSwapOutAddress,
 }: IInputDefaultProps) => {
   const tokensList = React.useMemo(() => {
@@ -46,29 +39,32 @@ const InputDefault = ({
           poolTokensArray={poolTokensArray} 
           setSwapOutAddress={setSwapOutAddress} 
           title={title}
+          swapInAddress={swapInAddress}
         />
       )
     }
 
-    return <Symbol>{poolTokens.length > 0 && poolTokens[0] !== undefined ? poolTokens[0].symbol : '...'}</Symbol>
+    return <S.Symbol>{poolTokens.length > 0 && poolTokens[0] !== undefined ? poolTokens[0].symbol : '...'}</S.Symbol>
   }, [poolTokens])
 
   return (
-    <InputDefaultContainer>
-      <Info>
-        <Span>Swap to (estimative)</Span>
+    <S.InputDefaultContainer>
+      <S.Info>
+        <S.Span>Swap to (estimative)</S.Span>
         {tokensList}
-        <SpanLight>Balance: {swapOutBalance > new BigNumber(-1) ? BNtoDecimal(swapOutBalance, decimals) : '...'}</SpanLight>
-      </Info>
-      <AmountDefault>
-        <Span total>Total</Span>
-        <Input
+        <S.SpanLight>
+          Balance: {swapOutBalance > new BigNumber(-1) ? BNtoDecimal(swapOutBalance, decimals) : '...'}
+        </S.SpanLight>
+      </S.Info>
+      <S.AmountDefault>
+        <S.Span total>Total</S.Span>
+        <S.Input
           readOnly
           type="text"
           placeholder="0"
           value={BNtoDecimal(swapOutAmount, decimals)}
         />
-        {isMax !== null && <ButtonMax
+        {isMax !== null && <S.ButtonMax
           type="button"
           isMax={isMax}
           onClick={() => {
@@ -80,9 +76,9 @@ const InputDefault = ({
           }}
         >
           Max
-        </ButtonMax>}
-      </AmountDefault>
-    </InputDefaultContainer>
+        </S.ButtonMax>}
+      </S.AmountDefault>
+    </S.InputDefaultContainer>
   )
 }
 

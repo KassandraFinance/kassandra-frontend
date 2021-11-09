@@ -19,15 +19,13 @@ interface IBorderGradientProps {
   modalOpen: boolean;
 }
 
-export const BorderGradient = styled.div<IBorderGradientProps>`
+export const Container = styled.div<IBorderGradientProps>`
   display: ${props => (props.modalOpen ? 'block' : 'none')};
+  /* background: #1F2937; */
 
-  background: linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%);
-  border-radius: ${theme.border.radius};
+  border: 2px solid rgba(255, 255, 255, 0.25);;
+  border-radius: 10px;
 
-  border-radius: ${theme.border.radius};
-
-  padding: 2px;
   width: 411px;
   height: auto;
 
@@ -52,15 +50,19 @@ export const BorderGradient = styled.div<IBorderGradientProps>`
 `
 
 export const BackgroundBlack = styled.div`
-  background: #000;
+  /* background: #000; */
+  border-radius: 10px;
+
   color: white;
   width: 100%;
   height: 100%;
 `
 
-export const InterBackground = styled.div`
-  background: black;
-  border-bottom: 0.2rem solid #e843c4;
+export const ModalText = styled.div`
+  ${({ theme }) => css`
+  background: rgba(31, 31, 31, 0.96);
+  border-radius: 6px 6px 0 0;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -84,34 +86,48 @@ export const InterBackground = styled.div`
       height: 1.2rem;
     }
   }
-`
 
-export const ModalText = styled.div`
-  ${({ theme }) => css`
-    font-size: 1.8rem;
-    font-weight: ${theme.font.weight.normal};
-  `}
+  font-size: 1.8rem;
+  font-weight: ${theme.font.weight.bold};
+
+  letter-spacing: 0.09rem;
+`}
   ${media.lessThan('small')`
     font-size: ${theme.font.sizes.font14};
 `}
 `
 
-export const WrapperIcons = styled.button`
+export const WrapperIconsBackGround = styled.button`
+  display: flex;
+  align-items: center;
+  background: #1F1F1F;
+  border-radius: 1rem;
+  border: none;
+
+  padding: 0.1rem;
+
+  &:hover {
+    background: linear-gradient(
+      -45deg,
+      #E843C4 0%,
+      #F79640 100%
+    );
+  }
+`
+
+export const WrapperIcons = styled.div`
   ${({ theme }) => css`
-    background-color: #010001;
-    border: none;
-
-
+    background: #1F1F1F;
     display: flex;
     align-items: center;
-
-    width: 100%;
-    height: auto;
-    padding-top: 1.8rem;
-    padding-bottom: 1.8rem;
-    padding-left: 2.4rem;
-
+    z-index: 1;
+    border-radius: 1rem;
+    border: none;
+    width: 40rem;
+    height: 7rem;
+    padding: 1.8rem 2.4rem;
     cursor: pointer;
+    position: relative;
     img {
       display: flex;
       margin-right: 2.4rem;
@@ -119,28 +135,44 @@ export const WrapperIcons = styled.button`
       height: 3.56rem;
       padding: 0.2rem;
     }
-    span {
-      color: ${theme.colors.snow};
-      font-size: 1.6rem;
-      font-weight: ${theme.font.weight.normal};
-      font-family: 'Rubik';
-    }
+  span {
+    color: ${theme.colors.snow};
+    font-size: 1.6rem;
+    font-weight: ${theme.font.weight.normal};
+  }
+    //create gradient linear border with 10px border radius on hover
 
-    ${media.lessThan('small')`
-    margin:0;
-    margin-top: 1.5rem;
-    max-width: 80%
-    font-size:${theme.font.sizes.font12};
-    font-weight: ${theme.font.weight.light};
-  `}
-    &:hover {
-      background: #ffbf00;
+
+    /* &:before {
+      content: '';
+      position: absolute;
+      border-radius: inherit;
+      top: 1px;
+      left: 1px;
+      right: 1px;
+      bottom: 1px;
+      border: 1px solid;
+      background: linear-gradient(-45deg, #E843C4 0%, #F79640 100%);
+
+      background-size: 300% 100%;
+      transition: all .4s ease-in-out;
+      display: none;
     }
+    &:hover:before {
+      display: block;
+      border-radius: inherit;
+    } */
+  }
   `}
 `
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
+  border-radius: 0 0 6px 6px;
+  max-width: 100%;
+  z-index: -2;
+  padding: ${theme.spacings.space24};
+  background: rgba(31, 41, 55, .96);
 
   ${media.lessThan('small')`
       margin: 0;

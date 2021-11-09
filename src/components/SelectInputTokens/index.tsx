@@ -15,8 +15,14 @@ const SelectInputTokens = ({
   setSwapInAddress,
   title
 }: ISelectInputTokensProps) => {
-  const [tokenSelected, setTokenSelected] = React.useState<TokenDetails | undefined>(poolTokensArray && poolTokensArray[0])
+  const [tokenSelected, setTokenSelected] = React.useState<TokenDetails | undefined>(poolTokensArray[0])
   const [openOptions, setOpenOptions] = React.useState<boolean>(false)
+
+  React.useEffect(() => {
+    if (tokenSelected?.address) {
+      setSwapInAddress(tokenSelected?.address)
+    }
+  }, [tokenSelected])
 
   React.useEffect(() => {
     setTokenSelected(poolTokensArray[0])

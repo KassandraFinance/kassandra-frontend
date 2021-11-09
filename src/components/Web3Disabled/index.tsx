@@ -25,19 +25,19 @@ const Web3Disabled = ({ textButton, textHeader, bodyText, type }: IWeb3DisabledP
         method: 'wallet_switchEthereumChain',
         params: [{ chainId: '0x3' }], //0x89
       });
-    } catch (error) {
-      // // This error code indicates that the chain has not been added to MetaMask.
-      // if (error.code === 4902) {
-      //   try {
-      //     await window.ethereum.request({
-      //       method: 'wallet_addEthereumChain', 
-      //       params:[{ chainId: '0x3', chainName: 'Ropsten Mainnet', nativeCurrency: { name: 'Matic', symbol: 'MATIC', decimals: 18 }, rpcUrls: ['https://rpc-mainnet.matic.network/'], blockExplorerUrls: ['https://polygonscan.com/'] }],
-      //     }); //0x89
-      //   } catch (addError) {
-      //     // handle "add" error
-      //   }
-      // }
-      // // handle other "switch" errors
+    } catch (error: any) {
+      // This error code indicates that the chain has not been added to MetaMask.
+      if (error.code === 4902) {
+        try {
+          await window.ethereum.request({
+            method: 'wallet_addEthereumChain', 
+            params:[{ chainId: '0x3', chainName: 'Ropsten Mainnet', nativeCurrency: { name: 'Matic', symbol: 'MATIC', decimals: 18 }, rpcUrls: ['https://rpc-mainnet.matic.network/'], blockExplorerUrls: ['https://polygonscan.com/'] }],
+          }); //0x89
+        } catch (addError) {
+          // handle "add" error
+        }
+      }
+      // handle other "switch" errors
       console.log(error)
     }
   }
@@ -65,22 +65,25 @@ const Web3Disabled = ({ textButton, textHeader, bodyText, type }: IWeb3DisabledP
         </S.Header>
         <S.Body>
           <p>{bodyText}</p>
-          {type === "install" ? 
-            <Button
-              as='a'
-              backgroundBlack
-              size="large"
-              href="https://metamask.io/download.html"
-              target="_blank"
-              text='Install MetaMask!'
-            />
+          {type === 'isMobile' ?
+            null
             :
-            <Button 
-              backgroundBlack
-              size="huge"
-              text={textButton}
-              onClick={() => getFunction(type)}
-            />
+            type === "install" ? 
+              <Button
+                as='a'
+                backgroundBlack
+                size="large"
+                href="https://metamask.io/download.html"
+                target="_blank"
+                text='Install MetaMask!'
+              />
+              :
+              <Button 
+                backgroundBlack
+                size="huge"
+                text={textButton}
+                onClick={() => getFunction(type)}
+              />
           }
         </S.Body>
       </div>

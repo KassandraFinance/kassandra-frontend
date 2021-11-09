@@ -8,16 +8,7 @@ import InputTokenValue from '../../InputTokenValue'
 
 import SelectInputTokens from '../../SelectInputTokens'
 
-import { 
-  InputTokensContainer, 
-  PayWith, 
-  Span,
-  SpanLight,
-  Symbol,
-  Amount,
-  ButtonMax,
-  Select
-} from './styles'
+import * as S from './styles'
 
 
 interface IInputEthProps {
@@ -56,7 +47,7 @@ const InputTokens = ({
       )
     }
 
-    return <Symbol>{poolTokens.length > 0 && poolTokens[0] !== undefined ? poolTokens[0].symbol : '...'}</Symbol>
+    return <S.Symbol>{poolTokens.length > 0 && poolTokens[0] !== undefined ? poolTokens[0].symbol : '...'}</S.Symbol>
   }, [poolTokens])
 
   const wei2String = (input: BigNumber) => {
@@ -91,23 +82,25 @@ const InputTokens = ({
   }, [title])
 
   return (
-    <InputTokensContainer>
-      <PayWith>
-        <Span>{actionString}</Span>
+    <S.InputTokensContainer>
+      <S.PayWith>
+        <S.Span>{actionString}</S.Span>
         {tokensList}
-        <SpanLight>Balance: {swapInBalance > new BigNumber(-1) ? BNtoDecimal(swapInBalance, decimals) : '...'}</SpanLight>
-      </PayWith>
-      <Amount>
-        <Span total>Total</Span>
+        <S.SpanLight>
+          Balance: {swapInBalance > new BigNumber(-1) ? BNtoDecimal(swapInBalance, decimals) : '...'}
+        </S.SpanLight>
+      </S.PayWith>
+      <S.Amount>
+        <S.Span total>Total</S.Span>
         <InputTokenValue
           inputRef={inputRef}
           max={wei2String(swapInBalance)}
           decimals={decimals}
           setInputValue={setSwapInAmount}
         />
-        <ButtonMax type="button" onClick={setMax}>Max</ButtonMax>
-      </Amount>
-    </InputTokensContainer>
+        <S.ButtonMax type="button" onClick={setMax}>Max</S.ButtonMax>
+      </S.Amount>
+    </S.InputTokensContainer>
   )
 }
 
