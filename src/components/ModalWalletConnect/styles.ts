@@ -61,9 +61,8 @@ export const BackgroundBlack = styled.div`
 export const ModalText = styled.div`
   ${({ theme }) => css`
   background: rgba(31, 31, 31, 0.96);
-  border-bottom: 1.5px solid #FFFFFF40;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-radius: 6px 6px 0 0;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -169,8 +168,7 @@ export const WrapperIcons = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-radius: 0 0 6px 6px;
   max-width: 100%;
   z-index: -2;
   padding: ${theme.spacings.space24};
