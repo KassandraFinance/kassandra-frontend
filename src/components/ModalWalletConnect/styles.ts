@@ -21,9 +21,9 @@ interface IBorderGradientProps {
 
 export const Container = styled.div<IBorderGradientProps>`
   display: ${props => (props.modalOpen ? 'block' : 'none')};
-  background: #1F2937;
+  /* background: #1F2937; */
 
-  border: 1px solid #FFFFFF40;
+  border: 2px solid rgba(255, 255, 255, 0.25);;
   border-radius: 10px;
 
   width: 411px;
@@ -50,7 +50,7 @@ export const Container = styled.div<IBorderGradientProps>`
 `
 
 export const BackgroundBlack = styled.div`
-  background: #000;
+  /* background: #000; */
   border-radius: 10px;
 
   color: white;
@@ -60,8 +60,8 @@ export const BackgroundBlack = styled.div`
 
 export const ModalText = styled.div`
   ${({ theme }) => css`
-  background: #1F1F1FB8;
-  border-bottom: 1px solid #FFFFFF40;
+  background: rgba(31, 31, 31, 0.96);
+  border-bottom: 1.5px solid #FFFFFF40;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   display: flex;
@@ -98,23 +98,35 @@ export const ModalText = styled.div`
 `}
 `
 
-export const WrapperIcons = styled.button`
+export const WrapperIconsBackGround = styled.button`
+  display: flex;
+  align-items: center;
+  background: #1F1F1F;
+  border-radius: 1rem;
+  border: none;
+
+  padding: 0.1rem;
+
+  &:hover {
+    background: linear-gradient(
+      -45deg,
+      #E843C4 0%,
+      #F79640 100%
+    );
+  }
+`
+
+export const WrapperIcons = styled.div`
   ${({ theme }) => css`
-    background: #1F1F1FB8;
-
-    border: none;
-    border-radius: 10px;
-    padding: ${theme.spacings.space24};
-
+    background: #1F1F1F;
     display: flex;
     align-items: center;
-    z-index: 0;
-
-    width: 100%;
-    height: auto;
-    padding-top: 1.8rem;
-    padding-bottom: 1.8rem;
-    padding-left: 2.4rem;
+    z-index: 1;
+    border-radius: 1rem;
+    border: none;
+    width: 40rem;
+    height: 7rem;
+    padding: 1.8rem 2.4rem;
     cursor: pointer;
     position: relative;
     img {
@@ -123,37 +135,35 @@ export const WrapperIcons = styled.button`
       width: 4rem;
       height: 3.56rem;
       padding: 0.2rem;
-      z-index: 1;
     }
-    span {
-      color: ${theme.colors.snow};
-      font-size: 1.6rem;
-      font-weight: ${theme.font.weight.normal};
-      font-family: 'Rubik';
-      z-index: 1;
-    }
-    &:before {
+  span {
+    color: ${theme.colors.snow};
+    font-size: 1.6rem;
+    font-weight: ${theme.font.weight.normal};
+  }
+    //create gradient linear border with 10px border radius on hover
+
+
+    /* &:before {
       content: '';
       position: absolute;
-      border-radius: 10px;
+      border-radius: inherit;
       top: 1px;
       left: 1px;
       right: 1px;
       bottom: 1px;
-      border: 3px solid;
-      border-image: linear-gradient(-45deg, #E843C4 0%, #F79640 100%) 1;
-      -webkit-mask: /*4*/
-     linear-gradient(#fff  0 0) content-box,
-     linear-gradient(#fff  0 0);
-      -webkit-mask-composite: destination-out; /*5'*/
-      mask-composite: exclude; /*5*/
+      border: 1px solid;
+      background: linear-gradient(-45deg, #E843C4 0%, #F79640 100%);
+
       background-size: 300% 100%;
       transition: all .4s ease-in-out;
       display: none;
     }
     &:hover:before {
       display: block;
-    }
+      border-radius: inherit;
+    } */
+  }
   `}
 `
 export const Content = styled.div`
@@ -162,9 +172,9 @@ export const Content = styled.div`
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   max-width: 100%;
-
+  z-index: -2;
   padding: ${theme.spacings.space24};
-  background: #1F2937;
+  background: rgba(31, 41, 55, .96);
 
   ${media.lessThan('small')`
       margin: 0;
