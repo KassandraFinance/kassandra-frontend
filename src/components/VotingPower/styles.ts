@@ -27,6 +27,7 @@ export const YourVotingPower = styled.div`
     div {
       margin-top: 2px;
       margin-left: 2px;
+      z-index: 19;
     }
   }
 `

@@ -36,7 +36,13 @@ export const Header = styled.div`
   p {
 	  font-size: ${theme.font.sizes.font18};
 	  font-weight: ${theme.font.weight.normal};
-	}
+    @media (max-width: 700px) {
+  	  font-size: ${theme.font.sizes.font16};
+    }
+  }
+  @media (max-width: 700px) {
+  	height: 56px;
+  }
 `
 
 export const Body = styled.div`
@@ -53,10 +59,16 @@ export const Body = styled.div`
 	align-items: center;
 	justify-content: space-around;
 	height: 200px;
+  @media (max-width: 700px) {
+  	height: 140px;
+  }
 
 	p {
 		font-size: ${theme.font.sizes.font16};
 		font-weight: ${theme.font.weight.light};
+    @media (max-width: 700px) {
+  	  font-size: ${theme.font.sizes.font14};
+    }
 	}
   button {
     height: 48px;

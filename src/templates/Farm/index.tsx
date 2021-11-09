@@ -25,6 +25,8 @@ declare let window: {
 const StakeFarm = () => {
   const [chainId, setChainId] = React.useState<string>('')
   const [loading, setLoading] = React.useState<boolean>(true)
+  const [isMobile, setIsMobile] = React.useState<boolean>(false)
+  
   const kacyStake = useStakingContract(Staking)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
@@ -45,6 +47,9 @@ const StakeFarm = () => {
 
 
   React.useEffect(() => {
+    const device = localStorage.getItem('device')
+    setIsMobile(device === 'isMobile')
+
     setTimeout(() => {
       setLoading(false)
     }, 600)
@@ -66,7 +71,7 @@ const StakeFarm = () => {
           Loading...
         </h1>
       }
-      {web3.currentProvider !== null && chainId === "0x3" && !loading ?
+      {web3.currentProvider !== null && chainId === "0x3" && !loading && !isMobile ?
         <>
           <S.StakeFarm>
             <S.StakeWithPowerVote>
@@ -165,7 +170,15 @@ const StakeFarm = () => {
         </>
         :
         <>
-          {web3.currentProvider === null && !loading && (
+          {isMobile && (
+            <Web3Disabled
+              textButton="asd"
+              textHeader="You are on a mobile device"
+              bodyText="To access the Stake/Farm and Products page, go to a computer."
+              type="isMobile"
+            />
+          )}
+          {web3.currentProvider === null && !loading && !isMobile && (
             <Web3Disabled
               textButton="Install Metamask"
               textHeader="Looks like you don't have the metamask wallet installed"
@@ -173,7 +186,7 @@ const StakeFarm = () => {
               type="install"
             />
           )}
-          {web3.currentProvider !== null && chainId !== "0x3" && !loading && (
+          {web3.currentProvider !== null && chainId !== "0x3" && !loading && !isMobile && (
             <Web3Disabled
               textButton="Connect to Ropsten"
               textHeader="Your wallet is set to the wrong network."
