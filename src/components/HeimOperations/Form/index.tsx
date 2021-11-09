@@ -688,6 +688,7 @@ const Form = ({
               isMax={null}
               swapOutAmount={swapOutAmount[0]}
               swapOutBalance={swapOutBalance[0]}
+              swapInAddress={swapInAddress}
               setSwapOutAddress={setSwapOutAddress}
             />
             <S.ExchangeRate>
@@ -717,6 +718,7 @@ const Form = ({
             isMax={null}
             swapOutAmount={swapOutAmount[0]}
             swapOutBalance={swapOutBalance[0]}
+            swapInAddress={swapInAddress}
             setSwapOutAddress={setSwapOutAddress}
           />
           <S.ExchangeRate>

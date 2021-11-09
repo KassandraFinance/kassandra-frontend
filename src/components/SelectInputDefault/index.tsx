@@ -8,19 +8,20 @@ interface ISelectInputDefaultProps {
   poolTokensArray: TokenDetails[]
   setSwapOutAddress: React.Dispatch<React.SetStateAction<string>>
   title: string
+  swapInAddress: string
 }
 
 const SelectInputDefault = ({ 
   poolTokensArray, 
   setSwapOutAddress,
-  title
+  swapInAddress
 }: ISelectInputDefaultProps) => {
-  const [tokenSelected, setTokenSelected] = React.useState<TokenDetails | undefined>(poolTokensArray && poolTokensArray[0])
+  const [tokenSelected, setTokenSelected] = React.useState<TokenDetails | undefined>(poolTokensArray[0])
   const [openOptions, setOpenOptions] = React.useState<boolean>(false)
 
   React.useEffect(() => {
     setTokenSelected(poolTokensArray[0])
-  }, [title])
+  }, [swapInAddress])
 
   return (
     <S.SelectToken openOptions={openOptions}>
