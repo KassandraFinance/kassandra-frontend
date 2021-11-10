@@ -42,11 +42,11 @@ const Header = () => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
 
-  function clickMatomoEvent() {
+  function clickMatomoEvent(action: string, name: string) {
     trackEvent({
       category: 'header',
-      action: 'click-on-heim',
-      name: 'heim-header'
+      action,
+      name
     })
   }
 
@@ -108,7 +108,7 @@ const Header = () => {
         <S.MenuNav>
           {/* {asPath === '/' ? (
             <Link href="/heim" passHref>
-              <S.MenuLink onClick={clickMatomoEvent}> HEIM Index </S.MenuLink>
+              <S.MenuLink onClick={clickMatomoEvent('click-on-heim', 'heim-header')}> HEIM Index </S.MenuLink>
             </Link>
           ) : (
             <Link href="/" passHref>
@@ -117,20 +117,20 @@ const Header = () => {
           )} */}
 
           <Link href="/products" passHref>
-            <S.MenuLinkDisable>Buy $Heim</S.MenuLinkDisable>
+            <S.MenuLink onClick={() => clickMatomoEvent('click-on-link', 'buy-heim')}>Buy $Heim</S.MenuLink>
           </Link>
 
           <Link href="/farm" passHref>
-            <S.MenuLinkDisable>Stake/Farm</S.MenuLinkDisable>
+            <S.MenuLink onClick={() => clickMatomoEvent('click-on-link', 'stake-farm')}>Stake/Farm</S.MenuLink>
           </Link>
 
-          <Link href="/" passHref>
-            <S.MenuLinkDisable>Vote</S.MenuLinkDisable>
-          </Link>
+          {/* <Link href="/" passHref> */}
+            <S.MenuLinkDisable onClick={() => clickMatomoEvent('click-on-link', 'vote')} >Vote</S.MenuLinkDisable>
+          {/* </Link> */}
 
-          <Link href="/" passHref>
-            <S.MenuLinkDisable>About</S.MenuLinkDisable>
-          </Link>
+          {/* <Link href="/" passHref> */}
+            <S.MenuLinkDisable onClick={() => clickMatomoEvent('click-on-link', 'about')}>About</S.MenuLinkDisable>
+          {/* </Link> */}
 
           {web3.currentProvider !== null ? (
             userWalletAddress ? (
@@ -142,7 +142,10 @@ const Header = () => {
                 }
                 backgroundBlack
                 size="medium"
-                onClick={() => setIsModalLogout(true)}
+                onClick={() => {
+                  clickMatomoEvent('open-modal', 'your-wallet')
+                  setIsModalLogout(true)
+                }}
                 text={substr(userWalletAddress)} />
             ) : (
               <Button
@@ -154,7 +157,10 @@ const Header = () => {
                 as='button'
                 backgroundBlack
                 size="medium"
-                onClick={() => setIsModalWallet(true)}
+                onClick={() => {
+                  clickMatomoEvent('open-metamask', 'connect-wallet')
+                  setIsModalWallet(true)
+                }}
                 text='Connect Wallet' />
             )
           ) : (
@@ -164,6 +170,9 @@ const Header = () => {
               size="medium"
               href="https://metamask.io/download.html"
               target="_blank"
+              onClick={() => {
+                clickMatomoEvent('open-site-metamask', 'install-metamask')
+              }}
               text='Install MetaMask!' />
           )}
 
@@ -176,7 +185,7 @@ const Header = () => {
           </S.CloseMenuIcon>
           <S.MenuNav>
 
-            <Link href="/heim" passHref>
+            {/* <Link href="/heim" passHref>
               <S.MenuLink
                 onClick={() => {
                   setIsOpen(false)
@@ -185,24 +194,37 @@ const Header = () => {
               >
                 HEIM Index
               </S.MenuLink>
-            </Link>
+            </Link> */}
+
+            {/* <Link href="/" passHref>
+              <S.MenuLink onClick={() => setIsOpen(false)}> Home </S.MenuLink>
+            </Link> */}
 
             <Link href="/" passHref>
-              <S.MenuLink onClick={() => setIsOpen(false)}> Home </S.MenuLink>
+              <S.MenuLink> Home </S.MenuLink>
             </Link>
 
             <Link href="/products" passHref>
-              <S.MenuLinkDisable onClick={() => setIsOpen(false)}>Buy $Heim</S.MenuLinkDisable>
+              <S.MenuLink 
+                onClick={() => {
+                  clickMatomoEvent('click-on-link', 'buy-heim')
+                  setIsOpen(false)
+                }}>Buy $Heim</S.MenuLink>
             </Link>
+
             <Link href="/farm" passHref>
-              <S.MenuLinkDisable onClick={() => setIsOpen(false)}>Stake/Farm</S.MenuLinkDisable>
+              <S.MenuLink onClick={() => {
+                clickMatomoEvent('click-on-link', 'stake-farm')
+                setIsOpen(false)
+              }}>Stake/Farm</S.MenuLink>
             </Link>
-            <Link href="/" passHref>
+            
+            {/* <Link href="/" passHref> */}
               <S.MenuLinkDisable>Vote</S.MenuLinkDisable>
-            </Link>
-            <Link href="/" passHref>
+            {/* </Link> */}
+            {/* <Link href="/" passHref> */}
               <S.MenuLinkDisable>About</S.MenuLinkDisable>
-            </Link>
+            {/* </Link> */}
             {web3.currentProvider !== null ? (
               userWalletAddress ? (
                 <Button
