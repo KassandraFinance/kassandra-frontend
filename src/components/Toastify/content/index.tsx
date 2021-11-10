@@ -1,17 +1,21 @@
-import React from 'react';
+import React from 'react'
 
 import { NotificationContainer, MessageContainer } from './styles'
 
 interface IStyledToastContentProps {
-  type: string
-  title: string
-  message: string
+  type: string;
+  title: string;
+  message: string;
 }
 
-const StyledToastContent = ({ type, title, message }: IStyledToastContentProps) => {
+const StyledToastContent = ({
+  type,
+  title,
+  message
+}: IStyledToastContentProps) => {
   return (
     <>
-      {type === "success" &&
+      {type === 'success' && (
         <NotificationContainer>
           <img src="assets/IconNotification/success.svg" alt="" />
           <MessageContainer>
@@ -19,8 +23,8 @@ const StyledToastContent = ({ type, title, message }: IStyledToastContentProps) 
             <span>{message}</span>
           </MessageContainer>
         </NotificationContainer>
-      }
-      {type === "warning" &&
+      )}
+      {type === 'warning' && (
         <NotificationContainer>
           <img src="assets/IconNotification/warning.svg" alt="" />
           <MessageContainer>
@@ -28,8 +32,8 @@ const StyledToastContent = ({ type, title, message }: IStyledToastContentProps) 
             <span>{message}</span>
           </MessageContainer>
         </NotificationContainer>
-      }
-      {type === "error" &&
+      )}
+      {type === 'error' && (
         <NotificationContainer>
           <img src="assets/IconNotification/error.svg" alt="" />
           <MessageContainer>
@@ -37,8 +41,8 @@ const StyledToastContent = ({ type, title, message }: IStyledToastContentProps) 
             <span>{message}</span>
           </MessageContainer>
         </NotificationContainer>
-      }
-      {type === "info" &&
+      )}
+      {type === 'info' && (
         <NotificationContainer>
           <img src="assets/IconNotification/info.svg" alt="" />
           <MessageContainer>
@@ -46,9 +50,9 @@ const StyledToastContent = ({ type, title, message }: IStyledToastContentProps) 
             <span>{message}</span>
           </MessageContainer>
         </NotificationContainer>
-      }
+      )}
     </>
   )
 }
 
-export default StyledToastContent;
+export default StyledToastContent

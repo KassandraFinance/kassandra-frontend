@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import useConnect from '../../hooks/useConnect'
 
@@ -10,10 +12,10 @@ declare let window: {
 }
 
 interface IWeb3DisabledProps {
-  textButton: string
-  textHeader: string
-  bodyText: string
-  type: string
+  textButton: string;
+  textHeader: string;
+  bodyText: string;
+  type: string;
 }
 
 const Web3Disabled = ({ textButton, textHeader, bodyText, type }: IWeb3DisabledProps) => {

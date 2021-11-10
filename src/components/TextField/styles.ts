@@ -11,8 +11,7 @@ export const InputWrapper = styled.div`
   ${({ theme }) => css`
     display: flex;
     align-items: center;
-    background: ${theme.colors.darkPurple}
-;
+    background: ${theme.colors.darkPurple};
     border-radius: 0.6rem;
     padding: 0 ${theme.spacings.space8};
     border: 0.2rem solid;
@@ -31,15 +30,14 @@ export const InputWrapper = styled.div`
   }
 `
 
+// eslint-disable-next-line prettier/prettier
 export const Input = styled.input<IconPositionProps>`
   ${({ theme, iconPosition }) => css`
     color: ${theme.colors.snow};
     font-family: ${theme.font.family};
     font-size: ${theme.font.sizes.font18};
     padding: ${theme.spacings.space8} 0;
-    /* padding-${iconPosition}: ${theme.spacings.space8}; */
-    background: ${theme.colors.darkPurple}
-;
+    background: ${theme.colors.darkPurple};
     border: 0;
     outline: none;
     width: ${iconPosition === 'right' ? `calc(100% - 2.2rem)` : `100%`};
@@ -61,8 +59,9 @@ export const Label = styled.label`
   `}
 `
 
-export const Icon =
-  styled.button <IconPositionProps>`${({ theme, iconPosition }) => css`
+// eslint-disable-next-line prettier/prettier
+export const Icon = styled.button<IconPositionProps>`
+  ${({ iconPosition }) => css`
     display: flex;
     color: black;
     order: ${iconPosition === 'right' ? 1 : 0};
@@ -83,7 +82,7 @@ export const Error = styled.p`
 `
 
 const wrapperModifiers = {
-  error: (theme: DefaultTheme) => css`
+  error: () => css`
     ${InputWrapper} {
       border-color: red;
     }
@@ -109,10 +108,10 @@ const wrapperModifiers = {
 
 export const Wrapper =
   styled.div <
-    WrapperProps >
-    `
+  WrapperProps >
+  `
   ${({ theme, error, disabled }) => css`
-    ${error && wrapperModifiers.error(theme)}
+    ${error && wrapperModifiers.error()}
     ${disabled && wrapperModifiers.disabled(theme)}
     width: 100%
   `}

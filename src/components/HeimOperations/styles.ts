@@ -2,17 +2,22 @@ import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 interface IHeimOperationsContainerProps {
-  inputChecked: string
-  typeWithdrawChecked: string
+  inputChecked: string;
+  typeWithdrawChecked: string;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const HeimOperationsContainer = styled.div<IHeimOperationsContainerProps>`
   background-color: rgba(255, 255, 255, 0.04);
   border-radius: 12px;
 
   max-width: 448px;
-  max-height: ${props => props.inputChecked === "Withdraw" ? 
-    props.typeWithdrawChecked === 'Best_value' ? 'calc(100vh - 40px)' : '600px' : '500px' };
+  max-height: ${props =>
+    props.inputChecked === 'Withdraw'
+      ? props.typeWithdrawChecked === 'Best_value'
+        ? 'calc(100vh - 40px)'
+        : '600px'
+      : '500px'};
 
   position: -webkit-sticky;
   position: sticky; 
@@ -41,13 +46,16 @@ export const Input = styled.input`
 `
 
 interface ILabelProps {
-  selected: boolean
+  selected: boolean;
 }
 
-export const Label = styled.label<ILabelProps>`
-  border-bottom: 2px solid ${props => 
+export const Label =
+  styled.label <
+  ILabelProps >
+  `
+  border-bottom: 2px solid ${props =>
     props.selected ? theme.colors.cyan : 'rgba(255, 255, 255, 0.15)'};
-  color: ${props => props.selected ? '#fff' : theme.colors.gray};
+  color: ${props => (props.selected ? '#fff' : theme.colors.gray)};
   font-size: ${theme.font.sizes.font18};
   font-weight: ${theme.font.weight.medium};
   text-align: center;
@@ -90,7 +98,7 @@ export const TypeRadio = styled.div`
     display: block;
     text-align: left;
 
-    cursor: pointer; 
+    cursor: pointer;
     user-select: none;
     & + .radio {
       margin-top: 7px;
@@ -105,41 +113,41 @@ export const TypeRadio = styled.div`
         padding-left: 24px;
         &:before {
           content: '';
-          display: block; 
-          
+          display: block;
+
           border: 1px solid ${theme.colors.darkGray};
           border-radius: 50%;
           background: ${theme.colors.darkGray};
-          
+
           width: 16px;
           height: 16px;
           margin-right: 10px;
-          
+
           position: absolute;
           top: 0px;
           left: 0px;
         }
         &:after {
           content: '';
-          display: block; 
+          display: block;
 
           background: ${theme.colors.cyan};
           border-radius: 50%;
 
           width: 10px;
           height: 10px;
-          
+
           position: absolute;
           top: 3px;
           left: 3px;
           opacity: 0;
-          transform: scale(0,0); 
-          transition: all .2s cubic-bezier(0.64, 0.57, 0.67, 1.53);
+          transform: scale(0, 0);
+          transition: all 0.2s cubic-bezier(0.64, 0.57, 0.67, 1.53);
         }
       }
-      &:checked+span:after {
+      &:checked + span:after {
         opacity: 1;
-        transform: scale(1,1);
+        transform: scale(1, 1);
       }
     }
   }

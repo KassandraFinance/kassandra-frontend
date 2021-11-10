@@ -7,7 +7,6 @@ export const Details = styled.div`
   margin-bottom: 12px;
   width: 100%;
   z-index: 111;
-
 `
 
 export const Info = styled.div`
@@ -23,7 +22,7 @@ export const Info = styled.div`
 
   a {
     color: ${theme.colors.cyan};
-    font-size: ${theme.font.sizes.font14};;
+    font-size: ${theme.font.sizes.font14};
     text-decoration: none;
 
     cursor: pointer;

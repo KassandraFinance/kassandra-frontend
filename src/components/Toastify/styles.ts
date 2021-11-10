@@ -1,11 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 import theme from '../../styles/theme'
-import { ToastContainer } from "react-toastify";
-import toastConfig from "../../config/toastConfig";
-
+import { ToastContainer } from 'react-toastify'
+import toastConfig from '../../config/toastConfig'
 
 export const StyledToastContainer = styled(ToastContainer).attrs({
-  ...toastConfig,
+  ...toastConfig
 })`
   .Toastify__toast {
     font-family: 'Rubik';
@@ -31,7 +30,7 @@ export const StyledToastContainer = styled(ToastContainer).attrs({
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.light};
     .Toastify__progress-bar {
-      background: #E8372C;
+      background: #e8372c;
     }
   }
   .Toastify__toast--success {
@@ -42,7 +41,7 @@ export const StyledToastContainer = styled(ToastContainer).attrs({
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.light};
     .Toastify__progress-bar {
-      background: #2CE878;
+      background: #2ce878;
     }
   }
   .Toastify__toast--warning {
@@ -53,7 +52,7 @@ export const StyledToastContainer = styled(ToastContainer).attrs({
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.light};
     .Toastify__progress-bar {
-      background: #FFBF00;
+      background: #ffbf00;
     }
   }
   .Toastify__toast--info {
@@ -67,4 +66,4 @@ export const StyledToastContainer = styled(ToastContainer).attrs({
       background: ${theme.colors.cyan};
     }
   }
-`;
+`

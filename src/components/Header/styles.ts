@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components'
 import theme from '../../styles/theme'
 
-import * as ButtonStyles from '../Button/styles'
 interface IWrapperProps {
   pageHeim: boolean;
 }
@@ -40,9 +39,9 @@ export const Wrapper = styled.menu<IWrapperProps>`
 export const LogoWrapper = styled.div`
   cursor: pointer;
   img {
-      max-height: 40px;
-    }
-  @media(max-width: 960px) {
+    max-height: 40px;
+  }
+  @media (max-width: 960px) {
     display: flex;
     left: 0;
     position: absolute;
@@ -53,7 +52,6 @@ export const LogoWrapper = styled.div`
       max-width: 100%;
     }
   }
-
 `
 
 export const IconWrapper = styled.div`
@@ -80,9 +78,9 @@ export const MenuGroup = styled.div`
 
 export const MenuNav = styled.div`
   ${({ theme }) => css`
-    @media(max-width: 960px) {
-			margin-left: ${theme.spacings.space24};
-		}
+    @media (max-width: 960px) {
+      margin-left: ${theme.spacings.space24};
+    }
   `}
 `
 
@@ -157,7 +155,8 @@ type MenuFullProps = {
   isOpen: boolean
 }
 
-export const MenuFull = styled.nav <MenuFullProps >`
+// eslint-disable-next-line prettier/prettier
+export const MenuFull = styled.nav<MenuFullProps>`
   ${({ theme, isOpen }) => css`
     display: flex;
     flex-direction: column;
@@ -213,12 +212,12 @@ export const MenuFull = styled.nav <MenuFullProps >`
 `
 
 export const MenuIconContainer = styled.div`
-  @media(min-width: 960px) {
+  @media (min-width: 960px) {
     display: none;
   }
 `
 export const MenuDesktop = styled.div`
-  @media(max-width: 960px) {
+  @media (max-width: 960px) {
     display: none;
   }
 `
@@ -234,5 +233,3 @@ export const CloseMenuIcon = styled.div`
     height: 2.4rem;
   `}
 `
-
-

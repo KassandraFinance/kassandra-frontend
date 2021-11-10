@@ -43,11 +43,11 @@ const wrapperModifiers = {
     width: 100%;
   `,
   withIcon: (theme: DefaultTheme) => css`
-    img{
+    img {
       width: 1.6rem;
       margin-left: ${theme.spacings.space8};
       order: 1;
-      & + span{
+      & + span {
         margin-right: ${theme.spacings.space16};
       }
     }
@@ -55,13 +55,13 @@ const wrapperModifiers = {
       width: 1.6rem;
       order: 0;
       margin-right: ${theme.spacings.space8};
-      & + span{
+      & + span {
         margin-left: ${theme.spacings.space16};
       }
     }
   `,
 
-  disabledNoEvent: (theme: DefaultTheme) => css`
+  disabledNoEvent: () => css`
     background: #343434;
     border: 1px solid #343434;
     color: #8b8b8b;
@@ -108,8 +108,8 @@ const wrapperModifiers = {
     &:hover {
       color: ${theme.colors.darkPurple};
       background: ${theme.colors.cyan};
-      svg{
-        path{
+      svg {
+        path {
           fill: ${theme.colors.darkPurple};
         }
       }
@@ -117,17 +117,20 @@ const wrapperModifiers = {
   `
 }
 
-export const Wrapper = styled.button<WrapperProps>`
+export const Wrapper =
+  styled.button <
+  WrapperProps >
+  `
   ${({
-  theme,
-  size,
-  fullWidth,
-  hasIcon,
-  disabledNoEvent,
-  backgroundPrimary,
-  backgroundSecondary,
-  backgroundBlack,
-}) => css`
+    theme,
+    size,
+    fullWidth,
+    hasIcon,
+    disabledNoEvent,
+    backgroundPrimary,
+    backgroundSecondary,
+    backgroundBlack
+  }) => css`
     border: none;
     border-radius: ${theme.border.radius};
     color: ${theme.colors.snow};
@@ -153,6 +156,6 @@ export const Wrapper = styled.button<WrapperProps>`
     ${!!backgroundPrimary && wrapperModifiers.backgroundPrimary(theme)};
     ${!!backgroundSecondary && wrapperModifiers.backgroundSecondary(theme)};
     ${!!backgroundBlack && wrapperModifiers.backgroundBlack(theme)};
-    ${disabledNoEvent && wrapperModifiers.disabledNoEvent(theme)};
+    ${disabledNoEvent && wrapperModifiers.disabledNoEvent()};
   `}
 `

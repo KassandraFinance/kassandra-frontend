@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface TokenDetails {
-  address: string
-  symbol: string
-  decimals: number
-  image: string
+  address: string;
+  symbol: string;
+  decimals: number;
+  image: string;
 }
 
 function token2Wallet(provider: any, tokens: TokenDetails[]) {
@@ -16,16 +17,15 @@ function token2Wallet(provider: any, tokens: TokenDetails[]) {
             address: tokens[i].address,
             symbol: tokens[i].symbol,
             decimals: tokens[i].decimals,
-            image: tokens[i].image,
-          },
-        },
-      });
+            image: tokens[i].image
+          }
+        }
+      })
     }
-  }
-  catch (e) {
+  } catch (e) {
     // console.error(e);
     // throw e;
   }
 }
 
-export default token2Wallet;
+export default token2Wallet

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import { XAxis, Tooltip, AreaChart, Area, ResponsiveContainer } from 'recharts'
 
@@ -8,9 +9,9 @@ const Chart = ({ data, color }: any) => {
     <ResponsiveContainer width="100%" height={360}>
       <AreaChart
         data={data}
-        style={{ 
-          backgroundColor: "rgba(255, 255, 255, 0.04)",
-          border: '1px solid rgba(255, 255, 255, 0.04)', 
+        style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.04)',
+          border: '1px solid rgba(255, 255, 255, 0.04)',
           borderRadius: '25px',
           margin: '25px 0'
         }}
@@ -18,15 +19,15 @@ const Chart = ({ data, color }: any) => {
       >
         <defs>
           <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor={color} stopOpacity={0.3}/>
-            <stop offset="100%" stopColor={color} stopOpacity={0}/>
+            <stop offset="0%" stopColor={color} stopOpacity={0.3} />
+            <stop offset="100%" stopColor={color} stopOpacity={0} />
           </linearGradient>
         </defs>
         <XAxis
           dataKey="time"
           axisLine={false}
           tickLine={false}
-          tickFormatter={(time) => time}
+          tickFormatter={time => time}
           minTickGap={6}
         />
         <Tooltip
@@ -37,8 +38,14 @@ const Chart = ({ data, color }: any) => {
           // }}
           content={TooltipCustomized}
         />
-        <Area type="monotone" dataKey="value" stroke={color} fillOpacity={1} fill="url(#colorUv)" />
-      </AreaChart>    
+        <Area
+          type="monotone"
+          dataKey="value"
+          stroke={color}
+          fillOpacity={1}
+          fill="url(#colorUv)"
+        />
+      </AreaChart>
     </ResponsiveContainer>
   )
 }

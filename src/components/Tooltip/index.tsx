@@ -1,27 +1,30 @@
-import React from 'react';
+import React from 'react'
 
-import { TooltipIcon, TooltipBox, TooltipCard } from './styles';
+import { TooltipIcon, TooltipBox, TooltipCard } from './styles'
 
 interface ITooltipProps {
-  children: React.ReactChild
-  tooltipTop: boolean
-  widthIcon?: number
-  infoGray?: boolean
+  children: React.ReactChild;
+  tooltipTop: boolean;
+  widthIcon?: number;
+  infoGray?: boolean;
 }
 
-const Tooltip = ({ children, tooltipTop, widthIcon, infoGray }: ITooltipProps) => (
+const Tooltip = ({
+  children,
+  tooltipTop,
+  widthIcon,
+  infoGray
+}: ITooltipProps) => (
   <TooltipCard tooltipTop={tooltipTop}>
     <TooltipIcon>
-      {infoGray ?
+      {infoGray ? (
         <img src="assets/info-gray.svg" alt="Descrição" width={widthIcon} />
-        :
+      ) : (
         <img src="assets/info-icon.svg" alt="Descrição" width={widthIcon} />
-      }
+      )}
     </TooltipIcon>
-    <TooltipBox>
-      {children}
-    </TooltipBox>
+    <TooltipBox>{children}</TooltipBox>
   </TooltipCard>
-);
+)
 
-export default Tooltip;
+export default Tooltip

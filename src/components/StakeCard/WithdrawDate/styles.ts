@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
-
 export const WithdrawDate = styled.div`
   background: #343434;
   border: none;

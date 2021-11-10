@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
@@ -7,20 +8,23 @@ import MediaMatch from '../../../components/MediaMatch'
 import ModalSignUp from '../../../components/ModalSignUp'
 
 interface IFeatureProps {
-  modalSignupOpen: boolean
-  setModalSignupOpen: React.Dispatch<React.SetStateAction<boolean>>
+  modalSignupOpen: boolean;
+  setModalSignupOpen: React.Dispatch<React.SetStateAction<boolean>>;
   // setModalSuccessOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const Feature = ({ modalSignupOpen, setModalSignupOpen }: IFeatureProps) => {
-  const { trackEvent } = useMatomo();
+export const Feature = ({
+  modalSignupOpen,
+  setModalSignupOpen
+}: IFeatureProps) => {
+  const { trackEvent } = useMatomo()
 
   function clickMatomoEvent(action: string, name: string) {
     trackEvent({
-      category: "heim-page",
+      category: 'heim-page',
       action: action,
-      name: name,
-    });
+      name: name
+    })
   }
 
   return (
@@ -97,12 +101,11 @@ export const Feature = ({ modalSignupOpen, setModalSignupOpen }: IFeatureProps) 
             <Button
               backgroundPrimary
               size="large"
-              text='Get early access'
+              text="Get early access"
               onClick={() => {
                 setModalSignupOpen(true)
-                clickMatomoEvent("click-to-subscribe", "chart")
-              }
-              }
+                clickMatomoEvent('click-to-subscribe', 'chart')
+              }}
             />
           </MediaMatch>
         </S.ButtonWrapper>
@@ -112,19 +115,18 @@ export const Feature = ({ modalSignupOpen, setModalSignupOpen }: IFeatureProps) 
             <Button
               backgroundPrimary
               size="medium"
-              text='Get early access'
+              text="Get early access"
               onClick={() => {
                 setModalSignupOpen(true)
-                clickMatomoEvent("click-to-subscribe", "chart")
-              }
-              }
+                clickMatomoEvent('click-to-subscribe', 'chart')
+              }}
             />
           </MediaMatch>
         </S.ButtonWrapper>
         <S.Link>
           <a
             href="https://medium.com/heimdall-research-crypto/the-heimdall-social-index-9595fdfb9ddc"
-            onClick={() => clickMatomoEvent("click-to-medium", "chart")}
+            onClick={() => clickMatomoEvent('click-to-medium', 'chart')}
           >
             Check out the full research at our Medium <span>&#8594;</span>{' '}
           </a>

@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable prettier/prettier */
 import React from 'react'
 import { AbiItem } from "web3-utils"
 import BigNumber from 'bn.js'
-import { useSelector, RootStateOrAny } from 'react-redux'
 
 import web3, { EventSubscribe } from '../utils/web3'
 import Pool from "../constants/abi/Pool.json"

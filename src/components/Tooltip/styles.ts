@@ -1,22 +1,24 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 interface ITooltipCardProps {
-  tooltipTop?: boolean
+  tooltipTop?: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const TooltipIcon = styled.div<ITooltipCardProps>`
   padding: 1px;
 
   position: relative;
   cursor: pointer;
   z-index: 99;
-`;
+`
 
 export const TooltipBox = styled.div`
   display: none;
-`;
+`
 
+// eslint-disable-next-line prettier/prettier
 export const TooltipCard = styled.div<ITooltipCardProps>`
 
   p {
@@ -46,10 +48,10 @@ export const TooltipCard = styled.div<ITooltipCardProps>`
     padding: 6px;
     z-index: 22;
 
-    margin: ${props => props.tooltipTop ? '-60px 0 0 -60px' : '-84px 0 0 -60px'};
+    margin: ${props =>
+      props.tooltipTop ? '-60px 0 0 -60px' : '-84px 0 0 -60px'};
     @media (max-width: 800px) {
       margin-left: -30px;
     }
   }
-
-`;
+`

@@ -28,7 +28,7 @@ export const Table = styled.table`
   border-radius: 20px;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
-  
+
   overflow: hidden;
   text-indent: initial;
 
@@ -52,7 +52,6 @@ export const Table = styled.table`
   }
 `
 
-
 export const Tr = styled.tr`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -61,7 +60,7 @@ export const Tr = styled.tr`
   height: 38px;
   margin: 16px 0;
   @media (max-width: 660px) {
-    grid-template-columns: .5fr 3fr 4fr repeat(2, 2fr);
+    grid-template-columns: 0.5fr 3fr 4fr repeat(2, 2fr);
     gap: 16px;
     width: 600px;
   }
@@ -72,21 +71,23 @@ export const Tr = styled.tr`
 
 export const Th = styled.th`
   font-weight: 400;
-  letter-spacing: .5px;
+  letter-spacing: 0.5px;
 
   @media (max-width: 660px) {
     font-size: 15px;
   }
 `
 interface ITdProps {
-  change24h: boolean
-  negative?: boolean
+  change24h: boolean;
+  negative?: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const Td = styled.td<ITdProps>`
-  ${props => props.change24h && {
-    color: `${props.negative ? '#EB5757' : '#6FCF97'}`
-  }};
+  ${props =>
+    props.change24h && {
+      color: `${props.negative ? '#EB5757' : '#6FCF97'}`
+    }};
   font-weight: ${theme.font.weight.light};
   letter-spacing: .5px;
   @media (max-width: 660px) {
@@ -95,9 +96,10 @@ export const Td = styled.td<ITdProps>`
 `
 
 interface ICoinProps {
-  width: number
+  width: number;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const Coin = styled.div<ICoinProps>`
   display: flex;
   align-items: center;

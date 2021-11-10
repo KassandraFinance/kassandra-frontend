@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
@@ -7,19 +8,22 @@ import Button from '../../../components/Button'
 import * as S from './styles'
 
 interface IHowItWorksProps {
-  setModalSignupOpen: React.Dispatch<React.SetStateAction<boolean>>
-  setModalSuccessOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setModalSignupOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalSuccessOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const HowItWorks = ({ setModalSignupOpen, setModalSuccessOpen }: IHowItWorksProps) => {
-  const { trackEvent } = useMatomo();
+export const HowItWorks = ({
+  setModalSignupOpen,
+  setModalSuccessOpen
+}: IHowItWorksProps) => {
+  const { trackEvent } = useMatomo()
 
   function clickMatomoEvent(action: string, name: string) {
     trackEvent({
-      category: "heim-page",
+      category: 'heim-page',
       action: action,
-      name: name,
-    });
+      name: name
+    })
   }
 
   return (
@@ -54,12 +58,11 @@ export const HowItWorks = ({ setModalSignupOpen, setModalSuccessOpen }: IHowItWo
             <Button
               backgroundPrimary
               size="medium"
-              text='Get early access'
+              text="Get early access"
               onClick={() => {
                 setModalSignupOpen(true)
-                clickMatomoEvent("click-to-subscribe", "how-it-works")
-              }
-              }
+                clickMatomoEvent('click-to-subscribe', 'how-it-works')
+              }}
               fullWidth
             />
           </S.MobileSignUp>

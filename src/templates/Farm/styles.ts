@@ -29,9 +29,10 @@ export const StakeWithPowerVote = styled.div`
 `
 
 interface INameStakeProps {
-  left?: boolean
+  left?: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const NameStake = styled.div<INameStakeProps>`
   p {
     color: #c4c4c4;
@@ -41,7 +42,9 @@ export const NameStake = styled.div<INameStakeProps>`
     margin-left: 32px;
   }
   @media (max-width: 960px) {
-    ${props => props.left && `
+    ${props =>
+      props.left &&
+      `
       padding-left: 30px;
     `}
   }
@@ -112,4 +115,3 @@ export const GridStaking = styled.div`
     justify-content: center;
   }
 `
-

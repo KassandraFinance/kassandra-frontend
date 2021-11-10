@@ -14,11 +14,12 @@ export const Backdrop = styled.div`
 `
 
 interface IBorderGradientProps {
-  modalOpen: boolean
+  modalOpen: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const BorderGradient = styled.div<IBorderGradientProps>`
-  display: ${(props) => props.modalOpen ? "block" : "none"};
+  display: ${props => (props.modalOpen ? 'block' : 'none')};
 
   background: linear-gradient(0deg, #FFBF00 -0.02%, #E843C4 99.99%);
   border-radius: ${theme.border.radius};
@@ -53,13 +54,11 @@ export const BackgroundBlack = styled.div`
   color: ${theme.colors.snow};
   width: 100%;
   height: 100%;
-  padding-top:0rem;
+  padding-top: 0rem;
 `
 
-
 export const InterBackground = styled.div`
-  background: ${theme.colors.darkPurple}
-;
+  background: ${theme.colors.darkPurple};
   margin-bottom: 4rem;
   width: 100%;
   justify-content: center;
@@ -67,65 +66,61 @@ export const InterBackground = styled.div`
   flex-direction: column;
   padding: 0 4rem;
 
-
   /* height: 6.8rem; */
   /* padding: 24px; */
-  img{
+  img {
     max-width: 100%;
   }
 
-  @media(max-width: 560px){
+  @media (max-width: 560px) {
     display: flex;
     justify-content: center;
-    }
-
+  }
 
   button {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    width:2.4rem;
+    width: 2.4rem;
     margin-top: -0.2rem;
   }
-  img{
-      max-width: 100%;
-    }
+  img {
+    max-width: 100%;
+  }
 `
 
-
 export const ModalText = styled.h1`
-${({ theme }) => css`
+  ${({ theme }) => css`
     display: block;
-    position:relative;
+    position: relative;
 
-    font-size:${theme.font.sizes.font40};
+    font-size: ${theme.font.sizes.font40};
     font-weight: ${theme.font.weight.light};
     text-align: center;
     letter-spacing: 0.4rem;
     line-height: 110%;
 
-    padding:0 4rem;
+    padding: 0 4rem;
     margin-bottom: 4rem;
-    @media(max-width: 560px){
+    @media (max-width: 560px) {
       /* margin-bottom: 0; */
-      font-size:2.6rem
+      font-size: 2.6rem;
     }
-    @media(max-width: 320px){
-    /* width: 300px; */
-    font-size:2.2rem;
-  }
-`}
+    @media (max-width: 320px) {
+      /* width: 300px; */
+      font-size: 2.2rem;
+    }
+  `}
 `
 export const WrapperClose = styled.h1`
-${({ theme }) => css`
+  ${({ theme }) => css`
     display: flex;
     justify-content: flex-end;
     width: 100%;
     height: 4.6rem;
     padding-top: 2.2rem;
     padding-right: 2.4rem;
-    background: ${theme.colors.darkPurple}
-;
+    background: ${theme.colors.darkPurple};
     /* margin-bottom: 1.6rem; */
     /* margin-right: -2rem; */
 
@@ -133,33 +128,30 @@ ${({ theme }) => css`
       background-color: transparent;
       border: none;
       cursor: pointer;
-      width:2.4rem;
+      width: 2.4rem;
       margin-top: -0.2rem;
     }
-    img{
+    img {
       width: 1.2rem;
       height: 1.2rem;
     }
-`}
-
+  `}
 `
 export const Content = styled.div`
-  display:flex;
+  display: flex;
   justify-content: space-between;
   flex-direction: column;
-  @media(max-width: 560px){
+  @media (max-width: 560px) {
     display: flex;
     margin: 0;
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
     justify-content: initial;
   }
 `
 export const WrapperButton = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: column;
-
-
 `
 export const WrapperInput = styled.div`
   padding: 0 4rem 4rem;

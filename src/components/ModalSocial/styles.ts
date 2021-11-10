@@ -56,7 +56,6 @@ export const BackgroundBlack = styled.div`
 `
 
 export const InterBackground = styled.div`
-  ${({ theme }) => css`
   background: black;
   border: 0.1rem solid #e843c4;
 
@@ -70,7 +69,6 @@ export const InterBackground = styled.div`
   ${media.lessThan('small')`
     padding: 1.2rem;
   `}
-`}
 
   button {
     background-color: transparent;

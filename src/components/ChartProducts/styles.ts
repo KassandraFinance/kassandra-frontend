@@ -18,12 +18,12 @@ export const SelectChart = styled.div`
 export const Input = styled.input`
   display: none;
 
-  &[type="radio"] + label {
+  &[type='radio'] + label {
     color: #fff;
     padding: 2px;
   }
 
-  &[type="radio"]:checked + label {
+  &[type='radio']:checked + label {
     border-bottom: 1px solid ${theme.colors.cyan};
     font-weight: ${theme.font.weight.medium};
   }

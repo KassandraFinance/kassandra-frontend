@@ -6,9 +6,10 @@ import * as ButtonStyles from '../Button/styles'
 export const StakeCard = styled.div``
 
 interface IBorderGradientProps {
-  stakeWithVotingPower: boolean
+  stakeWithVotingPower: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const BorderGradient = styled.div<IBorderGradientProps>`
   background: rgba(31, 31, 31, 0.72);
   border-radius: 6px;
@@ -32,11 +33,10 @@ export const BorderGradient = styled.div<IBorderGradientProps>`
     bottom: 0;
     border-radius: ${theme.border.radius};
     padding: 1px;
-    background: ${props => props.stakeWithVotingPower ? 
-      `linear-gradient(-45deg, ${theme.colors.blue} 0%, ${theme.colors.cyan} 100%)` 
-      : 
-      'linear-gradient(-45deg, #E843C4 0%, #F79640 100%)'
-    };
+    background: ${props =>
+      props.stakeWithVotingPower
+        ? `linear-gradient(-45deg, ${theme.colors.blue} 0%, ${theme.colors.cyan} 100%)`
+        : 'linear-gradient(-45deg, #E843C4 0%, #F79640 100%)'};
     -webkit-mask: linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: destination-out;
@@ -45,15 +45,15 @@ export const BorderGradient = styled.div<IBorderGradientProps>`
 `
 
 interface IInterBackgroundProps {
-  stakeWithVotingPower: boolean
+  stakeWithVotingPower: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const InterBackground = styled.div<IInterBackgroundProps>`
-  background: ${props => props.stakeWithVotingPower ? 
-    'linear-gradient(95.32deg, rgba(38, 219, 219, 0.23) 0%, rgba(12, 61, 220, 0.23) 100%)'
-    :
-    'linear-gradient(95.32deg, rgba(232, 67, 196, 0.23) 0%, rgba(247, 150, 64, 0.23) 100%)'
-  };
+  background: ${props =>
+    props.stakeWithVotingPower
+      ? 'linear-gradient(95.32deg, rgba(38, 219, 219, 0.23) 0%, rgba(12, 61, 220, 0.23) 100%)'
+      : 'linear-gradient(95.32deg, rgba(232, 67, 196, 0.23) 0%, rgba(247, 150, 64, 0.23) 100%)'};
   border-radius: 6px 6px 0 0;
 
   display: flex;
@@ -136,7 +136,7 @@ export const InfoPool = styled.div`
 
     margin-bottom: 4px;
   }
-  
+
   p {
     color: #fff;
     font-size: ${theme.font.sizes.font18};
@@ -169,15 +169,16 @@ export const InfosStaking = styled.div`
 `
 
 interface IButtonContainerProps {
-  stakeWithVotingPower: boolean
+  stakeWithVotingPower: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const ButtonContainer = styled.div<IButtonContainerProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  margin: ${props => props.stakeWithVotingPower ? '-8px' : '16px'} auto 0;
+  margin: ${props => (props.stakeWithVotingPower ? '-8px' : '16px')} auto 0;
   width: 100%;
 `
 
@@ -214,6 +215,7 @@ interface IButtonDetailsProps {
   isConnect: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const ButtonDetails = styled.button<IButtonDetailsProps>`
   background-color: transparent;
   border: none;
@@ -222,7 +224,7 @@ export const ButtonDetails = styled.button<IButtonDetailsProps>`
   font-family: ${theme.font.family};
   font-weight: ${theme.font.weight.light};
 
-  margin-top: ${props => props.isConnect ? '0px' : '20px'};
+  margin-top: ${props => (props.isConnect ? '0px' : '20px')};
   margin-bottom: 20px;
   outline: none;
   cursor: pointer;

@@ -1,34 +1,32 @@
 import styled, { css } from 'styled-components'
 import theme from '../../styles/theme'
 
-
 interface IToggleList {
-  showMore: boolean
+  showMore: boolean;
 }
 
 export const IndexDetailsContainer = styled.section`
+  max-width: 1520px;
+  max-height: 100%;
+  /* margin: 0 auto; */
+  padding-top: 100px;
 
-    max-width: 1520px;
-    max-height: 100%;
-    /* margin: 0 auto; */
-    padding-top: 100px;
+  h1 {
+    font-size: ${theme.font.sizes.font32};
+    font-weight: ${theme.font.weight.normal};
+  }
 
-    h1 {
-      font-size: ${theme.font.sizes.font32};
-      font-weight: ${theme.font.weight.normal};
-    }
-
-    .colour {
-      width: 30px;
-      height: 30px;
-      border-radius: 8px;
-    }
-  `
+  .colour {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+  }
+`
 
 export const Table = styled.table`
   width: 100%;
   margin: 40px 0;
-  tbody{
+  tbody {
     max-height: 100%;
   }
   @media (max-width: 660px) {
@@ -37,7 +35,7 @@ export const Table = styled.table`
   }
 `
 
-
+// eslint-disable-next-line prettier/prettier
 export const Tr = styled.tr<IToggleList>`
   display: grid;
   grid-template-columns: .5fr repeat(3, 3fr) 2fr;
@@ -53,7 +51,7 @@ export const Tr = styled.tr<IToggleList>`
     width: 500px;
   }
   &:nth-child(n+6){
-    display:  ${(props) => props.showMore ? 'none' : 'grid'};
+    display:  ${props => (props.showMore ? 'none' : 'grid')};
   }
 `
 
@@ -61,25 +59,27 @@ export const Th = styled.th`
   ${({ theme }) => css`
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.normal};
-    letter-spacing: .5px;
+    letter-spacing: 0.5px;
     @media (max-width: 660px) {
       font-size: 15px;
     }
   `}
 `
 interface ITdProps {
-  change24h: boolean
-  negative?: boolean
+  change24h: boolean;
+  negative?: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const Td = styled.td<ITdProps>`
-  ${props => props.change24h && {
-    color: `${props.negative ? '#EB5757' : '#6FCF97'}`
-  }};
+  ${props =>
+    props.change24h && {
+      color: `${props.negative ? '#EB5757' : '#6FCF97'}`
+    }};
   ${({ theme }) => css`
     font-size: ${theme.font.sizes.font20};
     font-weight: ${theme.font.weight.light};
-    letter-spacing: .5px;
+    letter-spacing: 0.5px;
     @media (max-width: 660px) {
       font-size: 21px;
     }
@@ -87,9 +87,10 @@ export const Td = styled.td<ITdProps>`
 `
 
 interface ICoinProps {
-  width: number
+  width: number;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const Coin = styled.div<ICoinProps>`
   display: flex;
   align-items: flex-start;
@@ -114,8 +115,8 @@ export const WrapperToggle = styled.div`
   justify-content: center;
 `
 
+// eslint-disable-next-line prettier/prettier
 export const ToggleList = styled.a<IToggleList>`
-
   position: relative;
   font-size:${theme.font.sizes.font16};
   color: ${theme.colors.cyan};

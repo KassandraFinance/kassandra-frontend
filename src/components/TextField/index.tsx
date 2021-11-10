@@ -5,21 +5,15 @@ import { useState, InputHTMLAttributes } from 'react'
 import * as S from './styles'
 
 export type TextFieldProps = {
-  onInput?: (value: string) => void
-  label?: string
-  initialValue?: string
-  icon?: JSX.Element
-  iconPosition?: 'left' | 'right'
-  disabled?: boolean
-  disabledNoEvent?: boolean;
+  onInput?: (value: string) => void,
+  label?: string,
+  initialValue?: string,
+  icon?: JSX.Element,
+  iconPosition?: 'left' | 'right',
+  disabled?: boolean,
+  disabledNoEvent?: boolean,
   error?: string
-
 } & Omit<InputHTMLAttributes<HTMLInputElement>, 'onInput'>
-
-interface ITextFieldProps {
-  value: any
-
-}
 
 const TextField = ({
   icon,
@@ -42,24 +36,30 @@ const TextField = ({
   }
 
   if (props.hidden) {
-    return <S.Input
-      type="text"
-      hidden={props.hidden}
-      onChange={onChange}
-      value={value}
-      iconPosition={iconPosition}
-      disabled={disabled}
-      name={name}
-      {...(label ? { id: name } : {})}
-      {...props}
-    />
+    return (
+      <S.Input
+        type="text"
+        hidden={props.hidden}
+        onChange={onChange}
+        value={value}
+        iconPosition={iconPosition}
+        disabled={disabled}
+        name={name}
+        {...(label ? { id: name } : {})}
+        {...props}
+      />
+    )
   }
 
   return (
     <S.Wrapper disabled={disabled} error={!!error}>
       {!!label && <S.Label htmlFor={name}>{label}</S.Label>}
       <S.InputWrapper>
-        {!!icon && <S.Icon type='submit' iconPosition={iconPosition}>{icon}</S.Icon>}
+        {!!icon && (
+          <S.Icon type="submit" iconPosition={iconPosition}>
+            {icon}
+          </S.Icon>
+        )}
         <S.Input
           type="text"
           onChange={onChange}

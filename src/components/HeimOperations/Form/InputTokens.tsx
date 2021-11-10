@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import BigNumber from 'bn.js'
 
@@ -10,17 +11,16 @@ import SelectInputTokens from '../../SelectInputTokens'
 
 import * as S from './styles'
 
-
 interface IInputEthProps {
-  actionString: string
-  poolTokens: TokenDetails[]
-  poolTokensArray: TokenDetails[]
-  title: string
-  decimals: BigNumber
-  swapInBalance: BigNumber
-  setSwapInAddress: React.Dispatch<React.SetStateAction<string>>
-  setSwapInAmount: React.Dispatch<React.SetStateAction<BigNumber>>
-  setSwapOutAmount: React.Dispatch<React.SetStateAction<BigNumber[]>>
+  actionString: string;
+  poolTokens: TokenDetails[];
+  poolTokensArray: TokenDetails[];
+  title: string;
+  decimals: BigNumber;
+  swapInBalance: BigNumber;
+  setSwapInAddress: React.Dispatch<React.SetStateAction<string>>;
+  setSwapInAmount: React.Dispatch<React.SetStateAction<BigNumber>>;
+  setSwapOutAmount: React.Dispatch<React.SetStateAction<BigNumber[]>>;
 }
 
 const InputTokens = ({
@@ -47,17 +47,19 @@ const InputTokens = ({
       )
     }
 
-    return <S.Symbol>{poolTokens.length > 0 && poolTokens[0] !== undefined ? poolTokens[0].symbol : '...'}</S.Symbol>
+    return (
+      <S.Symbol>
+        {poolTokens.length > 0 && poolTokens[0] !== undefined
+          ? poolTokens[0].symbol
+          : '...'}
+      </S.Symbol>
+    )
   }, [poolTokens])
 
   const wei2String = (input: BigNumber) => {
     const decimal = input.mod(wei).toString()
 
-    return `${
-      input.div(wei).toString()
-    }${
-      decimal === '0' ? '' : `.${decimal}`
-    }`
+    return `${input.div(wei).toString()}${decimal === '0' ? '' : `.${decimal}`}`
   }
 
   const setMax = () => {
@@ -73,11 +75,11 @@ const InputTokens = ({
     setSwapOutAmount([new BigNumber(0)])
 
     if (inputRef.current !== null) {
-      inputRef.current.value = "0"
+      inputRef.current.value = '0'
     }
   }
 
-  React.useEffect(() => {    
+  React.useEffect(() => {
     clearInput()
   }, [title])
 
@@ -87,7 +89,10 @@ const InputTokens = ({
         <S.Span>{actionString}</S.Span>
         {tokensList}
         <S.SpanLight>
-          Balance: {swapInBalance > new BigNumber(-1) ? BNtoDecimal(swapInBalance, decimals) : '...'}
+          Balance:{' '}
+          {swapInBalance > new BigNumber(-1)
+            ? BNtoDecimal(swapInBalance, decimals)
+            : '...'}
         </S.SpanLight>
       </S.PayWith>
       <S.Amount>
@@ -98,7 +103,9 @@ const InputTokens = ({
           decimals={decimals}
           setInputValue={setSwapInAmount}
         />
-        <S.ButtonMax type="button" onClick={setMax}>Max</S.ButtonMax>
+        <S.ButtonMax type="button" onClick={setMax}>
+          Max
+        </S.ButtonMax>
       </S.Amount>
     </S.InputTokensContainer>
   )
