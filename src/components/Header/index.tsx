@@ -5,18 +5,18 @@ import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { useRouter } from 'next/router'
 
-import { Menu2 as MenuIcon } from '@styled-icons/remix-fill/Menu2'
-import { Wallet3 as WalletIcon } from '@styled-icons/remix-fill/Wallet3'
-import { Close as CloseIcon } from '@styled-icons/material-outlined/Close'
+// import { Menu2 as MenuIcon } from '@styled-icons/remix-fill/Menu2'
+// import { Wallet3 as WalletIcon } from '@styled-icons/remix-fill/Wallet3'
+// import { Close as CloseIcon } from '@styled-icons/material-outlined/Close'
 
 import { actionGetUserAddressWallet } from '../../store/modules/userWalletAddress/actions'
 
-import substr from '../../utils/substr'
-import web3 from '../../utils/web3'
+// import substr from '../../utils/substr'
+// import web3 from '../../utils/web3'
 import useConnect from '../../hooks/useConnect'
 
-import Button from '../Button'
-import MediaMatch from '../MediaMatch'
+// import Button from '../Button'
+// import MediaMatch from '../MediaMatch'
 import ModalWalletConnect from '../ModalWalletConnect'
 
 import * as S from './styles'
@@ -77,11 +77,11 @@ const Header = () => {
 
   return (
     <S.Wrapper pageHeim={asPath === '/heim'}>
-      <S.MenuIconContainer>
+      {/* <S.MenuIconContainer>
         <S.IconWrapper onClick={() => setIsOpen(true)}>
           <MenuIcon aria-label="Open Menu" />
         </S.IconWrapper>
-      </S.MenuIconContainer>
+      </S.MenuIconContainer> */}
 
       <S.LogoWrapper>
         <Link href="/" passHref>
@@ -105,23 +105,23 @@ const Header = () => {
             </Link>
           )} */}
 
-          <Link href="/products" passHref>
-            <S.MenuLinkDisable>Buy $Heim</S.MenuLinkDisable>
-          </Link>
+          {/* <Link href="/products" passHref> */}
+            <S.MenuLinkDisable >Buy $Heim</S.MenuLinkDisable>
+          {/* </Link> */}
 
-          <Link href="/farm" passHref>
+          {/* <Link href="/farm" passHref> */}
             <S.MenuLinkDisable>Stake/Farm</S.MenuLinkDisable>
-          </Link>
+          {/* </Link> */}
 
-          <Link href="/" passHref>
+          {/* <Link href="/" passHref> */}
             <S.MenuLinkDisable>Vote</S.MenuLinkDisable>
-          </Link>
+          {/* </Link> */}
 
-          <Link href="/" passHref>
+          {/* <Link href="/" passHref> */}
             <S.MenuLinkDisable>About</S.MenuLinkDisable>
-          </Link>
+          {/* </Link> */}
 
-          {web3.currentProvider !== null ? (
+          {/* {web3.currentProvider !== null ? (
             userWalletAddress ? (
               <Button
                 icon={<WalletIcon />}
@@ -146,12 +146,12 @@ const Header = () => {
               href="https://metamask.io/download.html"
               target="_blank"
               text='Install MetaMask!' />
-          )}
+          )} */}
 
         </S.MenuNav>
       </S.MenuDesktop>
 
-      <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen}>
+      {/* <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen}>
 
         <CloseIcon aria-label="Close Menu" onClick={() => setIsOpen(false)} />
 
@@ -214,7 +214,7 @@ const Header = () => {
               text='Install MetaMask!' />
           )}
         </S.MenuNav>
-      </S.MenuFull>
+      </S.MenuFull> */}
       <ModalWalletConnect
         modalOpen={isModalWallet}
         setModalOpen={setIsModaWallet}

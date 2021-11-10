@@ -86,7 +86,7 @@ export const MenuLink = styled.a`
   ${({ theme }) => css`
     position: relative;
     color: ${theme.colors.snow};
-    font-size: ${theme.font.sizes.font14};
+    font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.light};
     margin: 0.3rem ${theme.spacings.space24} 0;
     text-decoration: none;
@@ -119,7 +119,7 @@ export const MenuLinkDisable = styled.a`
   ${({ theme }) => css`
     position: relative;
     color: ${theme.colors.lightGray};
-    font-size: ${theme.font.sizes.font14};
+    font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.light};
     margin: 0.3rem ${theme.spacings.space24} 0;
     text-decoration: none;
