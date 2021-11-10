@@ -1,4 +1,6 @@
-/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable prettier/prettier */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import Link from 'next/link'
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'

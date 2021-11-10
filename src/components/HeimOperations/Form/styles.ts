@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
 // ========== FORM ==========
@@ -14,10 +14,10 @@ export const FormContainer = styled.form`
 // ========== DEFAULT INPUT ALL ==========
 
 interface IPayWithProps {
-  inputHeim?: boolean
+  inputHeim?: boolean;
 }
 
-
+// eslint-disable-next-line prettier/prettier
 export const PayWith = styled.div<IPayWithProps>`
   display: flex;
   flex-direction: column;
@@ -36,9 +36,10 @@ export const PayWith = styled.div<IPayWithProps>`
 `
 
 interface IAmountProps {
-  inputHeim?: boolean
+  inputHeim?: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const Amount = styled.div<IAmountProps>`
   display: flex;
   flex-direction: column;
@@ -69,10 +70,10 @@ export const Input = styled.input`
 
   outline: none;
 
-  @media(max-width: 380px) {
+  @media (max-width: 380px) {
     font-size: 22px;
   }
-  @media(max-width: 350px) {
+  @media (max-width: 350px) {
     font-size: ${theme.font.sizes.font20};
   }
 
@@ -80,10 +81,10 @@ export const Input = styled.input`
     color: #fff;
   }
 
-  &[type=number]::-webkit-inner-spin-button {
+  &[type='number']::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }
-  &[type=number] {
+  &[type='number'] {
     -moz-appearance: textfield;
     appearance: textfield;
   }
@@ -106,11 +107,12 @@ export const Line = styled.div`
 `
 
 interface ISpanProps {
-  total?: boolean
+  total?: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const Span = styled.span<ISpanProps>`
-  color: ${props => props.total ? theme.colors.amber : "#fff" };
+  color: ${props => (props.total ? theme.colors.amber : '#fff')};
   font-size: 14px;
   height: 17px;
   @media(max-width: 380px) {
@@ -126,27 +128,27 @@ export const SpanLight = styled.span`
   color: ${theme.colors.gray};
   font-size: ${theme.font.sizes.font14};
   font-weight: ${theme.font.weight.light};
-  letter-spacing: .3px;
+  letter-spacing: 0.3px;
   height: 17px;
-  @media(max-width: 380px) {
+  @media (max-width: 380px) {
     font-size: 13px;
   }
-  @media(max-width: 350px) {
+  @media (max-width: 350px) {
     font-size: 10.7px;
   }
-
 `
 
 interface ISymbolProps {
-  bestValue?: boolean
+  bestValue?: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const Symbol = styled.h3<ISymbolProps>`
-  font-size: ${props => props.bestValue ? 
-    theme.font.sizes.font16 : theme.font.sizes.font20};
+  font-size: ${props =>
+    props.bestValue ? theme.font.sizes.font16 : theme.font.sizes.font20};
   font-weight: ${theme.font.weight.normal};
 
-  margin: ${props => props.bestValue ? '16px 0 8px' : '8px 0'};
+  margin: ${props => (props.bestValue ? '16px 0 8px' : '8px 0')};
   @media(max-width: 380px) {
     font-size: 22px;
   }
@@ -160,14 +162,15 @@ export const ImgArrowLong = styled.img`
 `
 
 interface IButtonMax {
-  isMax?: boolean
+  isMax?: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const ButtonMax = styled.button<IButtonMax>`
   border: 1px solid ${theme.colors.gray};
   border-radius: 3px;
-  background: ${props => props.isMax ? '#26DBDB' : 'transparent'};
-  color: ${props => props.isMax ? '#000' : '#fff'};
+  background: ${props => (props.isMax ? '#26DBDB' : 'transparent')};
+  color: ${props => (props.isMax ? '#000' : '#fff')};
   font-size: 12px;
   line-height: 12px;
   font-weight: 300;
@@ -186,7 +189,6 @@ export const ButtonMax = styled.button<IButtonMax>`
   }
 `
 
-
 // ========== INPUT TOKENS ==========
 
 export const InputTokensContainer = styled.div`
@@ -201,10 +203,10 @@ export const InputTokensContainer = styled.div`
   width: 100%;
   height: 104px;
   padding: 10px 16px;
-  @media(max-width: 504px) {
+  @media (max-width: 504px) {
     grid-template-columns: 1fr 60px 1fr;
   }
-  @media(max-width: 430px) {
+  @media (max-width: 430px) {
     grid-template-columns: 1fr 40px 1fr;
   }
 `
@@ -229,7 +231,7 @@ export const Select = styled.select`
     font-family: 'Rubik', sans-serif;
     font-size: ${theme.font.sizes.font20};
     text-transform: uppercase;
-    letter-spacing: .3px;
+    letter-spacing: 0.3px;
 
     height: 40px;
   }
@@ -238,9 +240,10 @@ export const Select = styled.select`
 // ========== INPUT HEIM ON WITHDRAW ==========
 
 interface IInputHeimContainerProps {
-  inputHeim?: boolean
+  inputHeim?: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const InputHeimContainer = styled.div<IInputHeimContainerProps>`
   border: 2px solid #FFBF00;
   box-shadow: 1px 1px 5px #FFBF00;
@@ -252,7 +255,7 @@ export const InputHeimContainer = styled.div<IInputHeimContainerProps>`
   align-items: center;
 
   width: 100%;
-  height: ${props => props.inputHeim ? '102px' : '94px'};
+  height: ${props => (props.inputHeim ? '102px' : '94px')};
   padding: 0;
   @media(max-width: 504px) {
     grid-template-columns: 160px 60px 160px;
@@ -264,7 +267,6 @@ export const InputHeimContainer = styled.div<IInputHeimContainerProps>`
 
 // ========== INPUT WITHDRAW ==========
 
-
 export const InputWithdrawContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -274,7 +276,7 @@ export const InputWithdrawContainer = styled.div`
   height: 94px;
   margin-top: 16px;
   position: relative;
-  `
+`
 
 export const Info = styled.div`
   width: 100%;
@@ -282,7 +284,6 @@ export const Info = styled.div`
 
   position: relative;
 `
-
 
 // ========== INPUT DEFAULT ==========
 
@@ -298,8 +299,7 @@ export const InputDefaultContainer = styled.div`
   width: 100%;
   height: 94px;
   padding: 10px 16px;
-  `
-
+`
 
 export const AmountDefault = styled.div`
   display: flex;
@@ -344,7 +344,6 @@ export const InputBestValue = styled.div`
   width: 100%;
   padding: 16px 8px 16px 16px;
   margin-bottom: 40px;
-
 `
 
 export const IntroBestValue = styled.div`

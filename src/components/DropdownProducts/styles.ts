@@ -1,7 +1,8 @@
+/* eslint-disable prettier/prettier */
 import styled, { css } from 'styled-components'
 
 interface ILinkProductsProps {
-  products: boolean
+  products: boolean;
 }
 
 export const LinkProducts = styled.button<ILinkProductsProps>`
@@ -32,8 +33,8 @@ export const Backdrop = styled.div`
 `
 
 interface IUlProps {
-  x: number
-  y: number
+  x: number;
+  y: number;
 }
 
 export const Ul = styled.ul<IUlProps>`

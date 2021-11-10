@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-no-bind */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import Button from '../Button'
 import MediaMatch from '../MediaMatch'
@@ -13,33 +13,30 @@ import {
   ModalText,
   WrapperButton,
   WrapperClose,
-  WrapperInput,
-
-} from './styles';
+  WrapperInput
+} from './styles'
 
 interface IModalSignUp {
-  modalSignupOpen: boolean
-  // eslint-disable-next-line prettier/prettier
-  setModalSignupOpen: React.Dispatch<React.SetStateAction<boolean>>
-  setModalSuccessOpen?: React.Dispatch<React.SetStateAction<boolean>>
+  modalSignupOpen: boolean;
+  setModalSignupOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalSuccessOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface IFormSignUpParamsProps {
-  name?: string
-  email?: string
-};
+  name?: string;
+  email?: string;
+}
 
 interface IOnChangeFormParam {
-  key: string
-  value: string
+  key: string;
+  value: string;
 }
 
 export const ModalSignUp = ({
   modalSignupOpen,
   setModalSignupOpen,
-  setModalSuccessOpen,
+  setModalSuccessOpen
 }: IModalSignUp) => {
-
   function handleCloseModal() {
     setModalSignupOpen(false)
   }
@@ -49,33 +46,41 @@ export const ModalSignUp = ({
     setFormState({ ...formState, [key]: value })
   }
 
-
   const validForm = (formState: any) => {
     if (!formState.email || !formState.name) {
-      return false;
+      return false
     }
-    return true;
+    return true
   }
 
   return (
     <>
-      <Backdrop onClick={handleCloseModal} style={{ display: modalSignupOpen ? 'block' : 'none' }} />
-      <BorderGradient
-        modalOpen={modalSignupOpen}
-      >
+      <Backdrop
+        onClick={handleCloseModal}
+        style={{ display: modalSignupOpen ? 'block' : 'none' }}
+      />
+      <BorderGradient modalOpen={modalSignupOpen}>
         <BackgroundBlack>
           <WrapperClose>
-            <button type="button" onClick={() => setModalSignupOpen(false)}><img src="assets/close.svg" alt="" /> </button>
+            <button type="button" onClick={() => setModalSignupOpen(false)}>
+              <img src="assets/close.svg" alt="" />{' '}
+            </button>
           </WrapperClose>
-          <InterBackground >
-            <img src='./assets/logo-header.svg' alt='' />
+          <InterBackground>
+            <img src="./assets/logo-header.svg" alt="" />
           </InterBackground>
           <Content>
             <ModalText>
               Subscribe to HEIM Social Index updates and launch
             </ModalText>
             <WrapperInput>
-              <iframe title="a" name="hiddenFrame" width="0" height="0" style={{ display: 'none' }} />
+              <iframe
+                title="a"
+                name="hiddenFrame"
+                width="0"
+                height="0"
+                style={{ display: 'none' }}
+              />
               <form
                 action="https://heimdall.land/subscribe/heim"
                 method="POST"
@@ -83,18 +88,18 @@ export const ModalSignUp = ({
                 onSubmit={() => {
                   setTimeout(() => {
                     setFormState({ name: '', email: '' })
-                  }, 2000);;
-                  handleCloseModal();
-                  if (setModalSuccessOpen) setModalSuccessOpen(true);
+                  }, 2000)
+                  handleCloseModal()
+                  if (setModalSuccessOpen) setModalSuccessOpen(true)
                 }}
               >
                 <TextField
                   name="user"
                   placeholder="Ex: John Doe"
                   type="name"
-                  label='Your username'
+                  label="Your username"
                   value={formState.name}
-                  onChange={(e: { target: { value: any; }; }) =>
+                  onChange={(e: { target: { value: any } }) =>
                     onChangeFormParam({
                       key: 'name',
                       value: e.target.value
@@ -106,9 +111,9 @@ export const ModalSignUp = ({
                   name="email"
                   placeholder="Ex: username@email.com"
                   type="email"
-                  label='Your email address'
+                  label="Your email address"
                   value={formState.email}
-                  onChange={(e: { target: { value: any; }; }) =>
+                  onChange={(e: { target: { value: any } }) =>
                     onChangeFormParam({
                       key: 'email',
                       value: e.target.value
@@ -116,24 +121,24 @@ export const ModalSignUp = ({
                   }
                 />
 
-                <MediaMatch greaterThan='small' >
+                <MediaMatch greaterThan="small">
                   <WrapperButton>
                     <Button
                       backgroundPrimary
                       size="huge"
-                      text='Sign me up!'
-                      type='submit'
+                      text="Sign me up!"
+                      type="submit"
                       disabledNoEvent={!validForm(formState)}
                     />
                   </WrapperButton>
                 </MediaMatch>
-                <MediaMatch lessThan='small' >
+                <MediaMatch lessThan="small">
                   <WrapperButton>
                     <Button
                       backgroundPrimary
                       size="huge"
-                      text='Sign me up!'
-                      type='submit'
+                      text="Sign me up!"
+                      type="submit"
                       disabledNoEvent={!validForm(formState)}
                     />
                   </WrapperButton>

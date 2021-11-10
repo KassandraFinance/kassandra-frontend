@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 export const Backdrop = styled.div`
@@ -14,11 +14,12 @@ export const Backdrop = styled.div`
 `
 
 interface IModalProps {
-  modalOpen: boolean
+  modalOpen: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const Modal = styled.div<IModalProps>`
-  display: ${(props) => props.modalOpen ? "block" : "none"};
+  display: ${props => (props.modalOpen ? 'block' : 'none')};
 
   /* background: url('assets/blur1.svg'); */
 
@@ -112,10 +113,10 @@ export const Amount = styled.div`
       color: #fff;
     }
 
-    &[type=number]::-webkit-inner-spin-button {
+    &[type='number']::-webkit-inner-spin-button {
       -webkit-appearance: none;
     }
-    &[type=number] {
+    &[type='number'] {
       -moz-appearance: textfield;
       appearance: textfield;
     }
@@ -148,7 +149,7 @@ export const ButtonContainer = styled.div`
       background: ${theme.colors.snow};
       color: #000;
     }
-    &:active{
+    &:active {
       background: ${theme.colors.snow};
       color: #000;
     }
@@ -160,7 +161,6 @@ export const ConfirmButton = styled.button`
   font-size: ${theme.font.sizes.font16};
   line-height: 14px;
   font-weight: ${theme.font.weight.light};
-
 
   display: flex;
   align-items: center;
@@ -181,8 +181,8 @@ export const ConfirmButton = styled.button`
   }
   &:disabled {
     cursor: not-allowed;
-    background: #4F4F4F;
-    color: #BDBDBD;
+    background: #4f4f4f;
+    color: #bdbdbd;
   }
 `
 

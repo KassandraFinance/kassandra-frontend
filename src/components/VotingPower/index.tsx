@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import BigNumber from 'bn.js'
 
@@ -41,13 +42,16 @@ const VotingPower = ({
   return (
     <S.VotingPower>
       <S.YourVotingPower>
-        <span>your voting power 
-          <Tooltip tooltipTop={true} infoGray={true} widthIcon={14} >
+        <span>
+          your voting power
+          <Tooltip tooltipTop={true} infoGray={true} widthIcon={14}>
             about voting power
           </Tooltip>
         </span>
-        <span style={{ fontSize: '14px' }}>{BNtoDecimal(yourVotingPower, new BigNumber(18))}</span>
-      </S.YourVotingPower>  
+        <span style={{ fontSize: '14px' }}>
+          {BNtoDecimal(yourVotingPower, new BigNumber(18))}
+        </span>
+      </S.YourVotingPower>
       <S.TotalVotingPower>
         <span>total voting power</span>
         <span>{BNtoDecimal(totalVotes, new BigNumber(18))}</span>

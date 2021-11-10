@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
@@ -45,7 +48,6 @@ const Form = ({
   title, 
   typeWithdrawChecked,
 }: IFormProps) => {
-  const corePoolToken = useERC20Contract(HeimCorePool)
   const crpPoolToken = useERC20Contract(HeimCRPPOOL)
   const corePool = usePoolContract(HeimCorePool)
   const crpPool = useCRPContract(HeimCRPPOOL)
@@ -92,7 +94,7 @@ const Form = ({
 
   function isTokenPool(value: any) {
     for (let i = 0; i < poolTokenDetails.length; i++) {
-      let element = poolTokenDetails[i];
+      const element = poolTokenDetails[i];
       // let newName = element.name.replace("Kassandra Test ", "")
 
       if (value.symbol === element.symbol.toLowerCase()) {

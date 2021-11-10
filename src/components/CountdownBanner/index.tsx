@@ -1,8 +1,9 @@
-import React from "react";
-import useCountDownDate from "../../hooks/useCountDownDate";
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React from 'react'
+import useCountDownDate from '../../hooks/useCountDownDate'
 
 import * as S from './styles'
-
 
 interface ICountdownCallbackParams {
   days: string;
@@ -12,17 +13,16 @@ interface ICountdownCallbackParams {
 }
 
 const CountdownBanner = () => {
-
   const { countDown, interval, timeRemaining } = useCountDownDate()
 
   const withdrawDelay = React.useCallback(async () => {
-    const year = 2021;
-    const month = 11;
-    const day = 1;
-    const hour = 0;
-    const minute = 0;
-    const second = 0;
-    const d = new Date(year, month - 1, day, hour, minute, second);
+    const year = 2021
+    const month = 11
+    const day = 1
+    const hour = 0
+    const minute = 0
+    const second = 0
+    const d = new Date(year, month - 1, day, hour, minute, second)
     const unix_timestamp = d.getTime()
 
     countDown(unix_timestamp)
@@ -32,16 +32,16 @@ const CountdownBanner = () => {
     withdrawDelay()
 
     return () => clearInterval(interval)
-  }, []);
-
+  }, [])
 
   return (
     <S.Background>
-      <S.Container id='launching-banner'>
+      <S.Container id="launching-banner">
         <S.TextWrapper>
           <p>UPCOMING IDO</p>
           <S.TitleAndImage>
-            <h1>A multi-chain protocol launching first on Avalanche
+            <h1>
+              A multi-chain protocol launching first on Avalanche
               <img src="assets/avalancheIcon.svg" alt="" />
             </h1>
           </S.TitleAndImage>
@@ -67,6 +67,6 @@ const CountdownBanner = () => {
         </S.TimerContainer> */}
       </S.Container>
     </S.Background>
-  );
+  )
 }
 export default CountdownBanner

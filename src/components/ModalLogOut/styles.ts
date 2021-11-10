@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 export const Backdrop = styled.div`
@@ -14,11 +14,12 @@ export const Backdrop = styled.div`
 `
 
 interface IModalContainerProps {
-  modalOpen: boolean
+  modalOpen: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const ModalContainer = styled.div<IModalContainerProps>`
-  display: ${(props) => props.modalOpen ? "block" : "none"};
+  display: ${props => (props.modalOpen ? 'block' : 'none')};
 
   background-color: rgba(31, 31, 31, 0.8);
   border: 1.5px solid ${theme.colors.magenta};
@@ -38,7 +39,7 @@ export const Top = styled.div`
   background-color: rgba(20, 20, 20, 0.9);
 
   border-bottom: 1px solid ${theme.colors.magenta};
-  border-radius: 10px 10px 0 0; 
+  border-radius: 10px 10px 0 0;
 
   display: flex;
   justify-content: space-between;
@@ -88,7 +89,8 @@ export const Content = styled.div`
 export const ButtonContainer = styled.div`
   margin-top: 12px;
 
-  button, a {
+  button,
+  a {
     background-color: transparent;
     border: none;
     color: ${theme.colors.cyan};
@@ -96,7 +98,7 @@ export const ButtonContainer = styled.div`
     text-decoration: none;
 
     margin-right: 20px;
-    
+
     cursor: pointer;
     svg {
       margin-left: 8px;

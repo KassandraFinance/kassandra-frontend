@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 export const Backdrop = styled.div`
@@ -14,11 +14,12 @@ export const Backdrop = styled.div`
 `
 
 interface IModalContainerProps {
-  modalOpen: boolean
+  modalOpen: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const ModalContainer = styled.div<IModalContainerProps>`
-  display: ${(props) => props.modalOpen ? "block" : "none"};
+  display: ${props => (props.modalOpen ? 'block' : 'none')};
 
   background-color: rgba(31, 31, 31, 0.8);
   border: 1px solid #FFBF00;
@@ -39,8 +40,8 @@ export const ModalContainer = styled.div<IModalContainerProps>`
 export const Top = styled.div`
   background-color: rgba(20, 20, 20, 0.9);
 
-  border-bottom: 1px solid #FFBF00;
-  border-radius: 10px 10px 0 0; 
+  border-bottom: 1px solid #ffbf00;
+  border-radius: 10px 10px 0 0;
 
   display: flex;
   justify-content: space-between;

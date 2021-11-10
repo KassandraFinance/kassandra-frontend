@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable prettier/prettier */
 import React from 'react'
 import BigNumber from 'bn.js'
 import { AbiItem } from "web3-utils"

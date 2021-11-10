@@ -14,11 +14,12 @@ export const Backdrop = styled.div`
 `
 
 interface IModalContainerProps {
-  modalOpen: boolean
+  modalOpen: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const ModalContainer = styled.div<IModalContainerProps>`
-  display: ${(props) => props.modalOpen ? "block" : "none"};
+  display: ${props => (props.modalOpen ? 'block' : 'none')};
 
   background-color: rgba(31, 31, 31, 0.8);
   border: 1px solid #E8372C;
@@ -39,17 +40,14 @@ export const ModalContainer = styled.div<IModalContainerProps>`
 
 export const Top = styled.div`
   background-color: rgba(20, 20, 20, 0.9);
-
-  border-bottom: 1px solid #E8372C;
-  border-radius: 10px 10px 0 0; 
-
+  border-bottom: 1px solid #e8372c;
+  border-radius: 10px 10px 0 0;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   padding: 24px;
-
 `
 
 export const Attention = styled.div`
@@ -105,23 +103,22 @@ export const Content = styled.div`
 `
 
 export const ButtonContainer = styled.div`
-    margin-top: 16px;
-    button {
-      background-color: transparent;
-      border: 1px solid ${theme.colors.cyan};
-      border-radius: ${theme.border.radius};
-      color: #fff;
-      font-size: ${theme.font.sizes.font18};
+  margin-top: 16px;
+  button {
+    background-color: transparent;
+    border: 1px solid ${theme.colors.cyan};
+    border-radius: ${theme.border.radius};
+    color: #fff;
+    font-size: ${theme.font.sizes.font18};
 
-      width: 136px;
-      height: 40px;
-      margin: 0 20px;
-      transition-duration: 300ms;
-      cursor: pointer;
-      &:hover {
-        background-color: ${theme.colors.cyan};
-        color: ${theme.colors.darkPurple}
-;
-      }
+    width: 136px;
+    height: 40px;
+    margin: 0 20px;
+    transition-duration: 300ms;
+    cursor: pointer;
+    &:hover {
+      background-color: ${theme.colors.cyan};
+      color: ${theme.colors.darkPurple};
     }
+  }
 `

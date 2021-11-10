@@ -1,5 +1,5 @@
-import styled from "styled-components"
-import theme from "../../styles/theme"
+import styled from 'styled-components'
+import theme from '../../styles/theme'
 
 export const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0);
@@ -14,12 +14,13 @@ export const Backdrop = styled.div`
 `
 
 interface ISelectedProps {
-  openOptions: boolean
+  openOptions: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const SelectToken = styled.div<ISelectedProps>`
   background-color: #4A4348;
-  border-radius: ${props => props.openOptions ? '4px 4px 0 0px' : '4px'};
+  border-radius: ${props => (props.openOptions ? '4px 4px 0 0px' : '4px')};
 
   font-size: ${theme.font.sizes.font20};
 
@@ -27,8 +28,9 @@ export const SelectToken = styled.div<ISelectedProps>`
   margin: 8px 0;
 `
 
+// eslint-disable-next-line prettier/prettier
 export const Selected = styled.div<ISelectedProps>`
-  border-radius: ${props => props.openOptions ? '4px 0px' : '4px'};
+  border-radius: ${props => (props.openOptions ? '4px 0px' : '4px')};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -42,12 +44,12 @@ export const Selected = styled.div<ISelectedProps>`
 `
 
 export const OptionsContent = styled.div`
-  background-color: #4A4348;
+  background-color: #4a4348;
   border-radius: 0 0 4px 4px;
 
   width: 128px;
   position: absolute;
-  
+
   z-index: 101;
 `
 

@@ -1,37 +1,37 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 
 import * as S from './styles'
 
 interface ICoinInfoList {
-  symbol: string
-  image: any
-  market_data: any
-  allocation: number
+  symbol: string;
+  image: any;
+  market_data: any;
+  allocation: number;
 }
 interface IIndexDetailsProps {
-  coinInfoList: Array<ICoinInfoList>
+  coinInfoList: Array<ICoinInfoList>;
 }
-
 
 const IndexDetails = ({ coinInfoList }: IIndexDetailsProps) => {
   function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
+    const letters = '0123456789ABCDEF'
+    let color = '#'
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)]
     }
-    return color;
+    return color
   }
 
   coinInfoList.sort((a, b) => {
-    return b.allocation - a.allocation;
-  });
+    return b.allocation - a.allocation
+  })
 
-
-  const [showMore, setShowMore] = React.useState<boolean>(true);
+  const [showMore, setShowMore] = React.useState<boolean>(true)
   const [coins, setCoins] = React.useState<any[]>([])
 
-  const res = localStorage.getItem("listCoinPool")
+  const res = localStorage.getItem('listCoinPool')
   const listCoinPool = res && JSON.parse(res)
 
   React.useEffect(() => {
@@ -46,7 +46,7 @@ const IndexDetails = ({ coinInfoList }: IIndexDetailsProps) => {
       <S.IndexDetailsContainer>
         <h1>Details</h1>
         <>
-          <S.Table >
+          <S.Table>
             <thead>
               <S.Tr showMore={showMore}>
                 <S.Th>Colour</S.Th>
@@ -57,36 +57,33 @@ const IndexDetails = ({ coinInfoList }: IIndexDetailsProps) => {
               </S.Tr>
             </thead>
             <tbody>
-              {
-                coins.map((coin) => (
-                  <S.Tr showMore={showMore}>
-                    <S.Colour style={{ background: getRandomColor() }} />
-                    <S.Td change24h={false}>
-                      <S.Coin width={110}>
-                        <img src={coin.image.small} alt="" /> {coin.symbol.toLocaleUpperCase()}
-                      </S.Coin>
-                    </S.Td>
-                    <S.Td change24h={false}>
-                      {`${coin.market_data.current_price.usd.toFixed(2)} USD`}
-                    </S.Td>
-                    <S.Td change24h={false}>
-                      <S.Coin width={60}>
-                        {`${coin.allocation}%`}
-                      </S.Coin>
-                    </S.Td>
-                    <S.Td
-                      negative={coin.market_data.price_change_percentage_24h < 0}
-                      change24h={true}
-                    >
-                      <S.Coin width={60}>
-                        {`${coin.market_data.price_change_percentage_24h.toFixed(2)}%`}
-                      </S.Coin>
-                    </S.Td>
-                  </S.Tr>
-
-
-                ))
-              }
+              {coins.map((coin, index) => (
+                <S.Tr showMore={showMore} key={`${index}-${coin.symbol}`}>
+                  <S.Colour style={{ background: getRandomColor() }} />
+                  <S.Td change24h={false}>
+                    <S.Coin width={110}>
+                      <img src={coin.image.small} alt="" />{' '}
+                      {coin.symbol.toLocaleUpperCase()}
+                    </S.Coin>
+                  </S.Td>
+                  <S.Td change24h={false}>
+                    {`${coin.market_data.current_price.usd.toFixed(2)} USD`}
+                  </S.Td>
+                  <S.Td change24h={false}>
+                    <S.Coin width={60}>{`${coin.allocation}%`}</S.Coin>
+                  </S.Td>
+                  <S.Td
+                    negative={coin.market_data.price_change_percentage_24h < 0}
+                    change24h={true}
+                  >
+                    <S.Coin width={60}>
+                      {`${coin.market_data.price_change_percentage_24h.toFixed(
+                        2
+                      )}%`}
+                    </S.Coin>
+                  </S.Td>
+                </S.Tr>
+              ))}
             </tbody>
           </S.Table>
           <S.WrapperToggle>
@@ -103,6 +100,5 @@ const IndexDetails = ({ coinInfoList }: IIndexDetailsProps) => {
     </>
   )
 }
-
 
 export default IndexDetails

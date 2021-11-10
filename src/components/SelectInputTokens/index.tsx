@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 
 import { TokenDetails } from '../../store/modules/poolTokens/types'
@@ -5,17 +6,19 @@ import { TokenDetails } from '../../store/modules/poolTokens/types'
 import * as S from './styles'
 
 interface ISelectInputTokensProps {
-  poolTokensArray: TokenDetails[]
-  setSwapInAddress: React.Dispatch<React.SetStateAction<string>>
-  title: string
+  poolTokensArray: TokenDetails[];
+  setSwapInAddress: React.Dispatch<React.SetStateAction<string>>;
+  title: string;
 }
 
-const SelectInputTokens = ({ 
-  poolTokensArray, 
+const SelectInputTokens = ({
+  poolTokensArray,
   setSwapInAddress,
   title
 }: ISelectInputTokensProps) => {
-  const [tokenSelected, setTokenSelected] = React.useState<TokenDetails | undefined>(poolTokensArray[0])
+  const [tokenSelected, setTokenSelected] = React.useState<
+    TokenDetails | undefined
+  >(poolTokensArray[0])
   const [openOptions, setOpenOptions] = React.useState<boolean>(false)
 
   React.useEffect(() => {
@@ -30,32 +33,35 @@ const SelectInputTokens = ({
 
   return (
     <S.SelectToken openOptions={openOptions}>
-      <S.Selected 
-        openOptions={openOptions} 
+      <S.Selected
+        openOptions={openOptions}
         onClick={() => setOpenOptions(!openOptions)}
       >
         <img src={tokenSelected?.image} alt="" />
         {tokenSelected?.symbol}
         <img src="assets/arrow-select.svg" alt="" />
       </S.Selected>
-      {openOptions &&
+      {openOptions && (
         <>
           <S.Backdrop onClick={() => setOpenOptions(false)} />
           <S.OptionsContent>
-            {poolTokensArray && poolTokensArray.map((token: TokenDetails) => 
-              <S.Option onClick={() => {
-                setTokenSelected(token)
-                setSwapInAddress(token.address)
-                setOpenOptions(false)
-                }
-              }>
-                <img src={token.image} alt="" />
-                {token.symbol}
-              </S.Option>
-            )}
+            {poolTokensArray &&
+              poolTokensArray.map((token: TokenDetails) => (
+                <S.Option
+                  key={token.symbol}
+                  onClick={() => {
+                    setTokenSelected(token)
+                    setSwapInAddress(token.address)
+                    setOpenOptions(false)
+                  }}
+                >
+                  <img src={token.image} alt="" />
+                  {token.symbol}
+                </S.Option>
+              ))}
           </S.OptionsContent>
         </>
-      }
+      )}
     </S.SelectToken>
   )
 }

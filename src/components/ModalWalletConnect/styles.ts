@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import styled, { css } from 'styled-components'
 import theme from '../../styles/theme'
 import media from 'styled-media-query'
@@ -19,6 +18,7 @@ interface IBorderGradientProps {
   modalOpen: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const Container = styled.div<IBorderGradientProps>`
   display: ${props => (props.modalOpen ? 'block' : 'none')};
   /* background: #1F2937; */
@@ -60,38 +60,38 @@ export const BackgroundBlack = styled.div`
 
 export const ModalText = styled.div`
   ${({ theme }) => css`
-  background: rgba(31, 31, 31, 0.96);
-  border-radius: 6px 6px 0 0;
+    background: rgba(31, 31, 31, 0.96);
+    border-radius: 6px 6px 0 0;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-  width: 100%;
-  height: 6.8rem;
-  padding: 2.4rem;
+    width: 100%;
+    height: 6.8rem;
+    padding: 2.4rem;
 
-  ${media.lessThan('small')`
+    ${media.lessThan('small')`
   padding: 1.2rem;
   `}
 
-  button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    width: 2.4rem;
-    margin-top: -0.2rem;
-    img {
-      width: 1.2rem;
-      height: 1.2rem;
+    button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      width: 2.4rem;
+      margin-top: -0.2rem;
+      img {
+        width: 1.2rem;
+        height: 1.2rem;
+      }
     }
-  }
 
-  font-size: 1.8rem;
-  font-weight: ${theme.font.weight.bold};
+    font-size: 1.8rem;
+    font-weight: ${theme.font.weight.bold};
 
-  letter-spacing: 0.09rem;
-`}
+    letter-spacing: 0.09rem;
+  `}
   ${media.lessThan('small')`
     font-size: ${theme.font.sizes.font14};
 `}
@@ -100,18 +100,14 @@ export const ModalText = styled.div`
 export const WrapperIconsBackGround = styled.button`
   display: flex;
   align-items: center;
-  background: #1F1F1F;
+  background: #1f1f1f;
   border-radius: 1rem;
   border: none;
 
   padding: 0.1rem;
 
   &:hover {
-    background: linear-gradient(
-      -45deg,
-      #E843C4 0%,
-      #F79640 100%
-    );
+    background: linear-gradient(-45deg, #e843c4 0%, #f79640 100%);
   }
 `
 
@@ -172,12 +168,12 @@ export const Content = styled.div`
   max-width: 100%;
   z-index: -2;
   padding: ${theme.spacings.space24};
-  background: rgba(31, 41, 55, .96);
+  background: rgba(31, 41, 55, 0.96);
 
   ${media.lessThan('small')`
-      margin: 0;
-      width:100%;
-      height:100%;
-      padding: 1.2rem;
-    `}
+    margin: 0;
+    width:100%;
+    height:100%;
+    padding: 1.2rem;
+  `}
 `

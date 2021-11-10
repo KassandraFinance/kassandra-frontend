@@ -1,4 +1,5 @@
-/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ButtonHTMLAttributes, AnchorHTMLAttributes } from 'react'
 import * as S from './styles'
 
@@ -8,14 +9,14 @@ type ButtonTypes =
 
 export type ButtonProps = {
   size?: 'small' | 'claim' | 'medium' | 'large' | 'huge'
-  fullWidth?: boolean
-  backgroundPrimary?: boolean
-  backgroundSecondary?: boolean
-  backgroundBlack?: boolean
-  disabledNoEvent?: boolean
-  icon?: JSX.Element
-  as?: React.ElementType
-  text?: string
+  fullWidth?: boolean;
+  backgroundPrimary?: boolean;
+  backgroundSecondary?: boolean;
+  backgroundBlack?: boolean;
+  disabledNoEvent?: boolean;
+  icon?: JSX.Element;
+  as?: React.ElementType;
+  text?: string;
 } & ButtonTypes
 
 const Button: React.ForwardRefRenderFunction<S.WrapperProps, ButtonProps> = (

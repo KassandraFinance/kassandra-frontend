@@ -1,11 +1,9 @@
-import styled from "styled-components";
-import theme from "../../styles/theme";
-
+import styled from 'styled-components'
+import theme from '../../styles/theme'
 
 export const Background = styled.div`
-
   margin: 0 auto 5.4rem;
-  @media(max-width: 100rem) {
+  @media (max-width: 100rem) {
     text-align: center;
     padding: 1.6rem 1.6rem;
     margin: 0 auto 2.4rem;
@@ -24,7 +22,7 @@ export const Container = styled.section`
   backdrop-filter: blur(10px);
   background: rgba(33, 20, 38, 0.12);
 
-  @media(max-width: 100rem) {
+  @media (max-width: 100rem) {
     text-align: center;
     /* padding: 1.6rem 1.6rem; */
   }
@@ -33,31 +31,31 @@ export const Container = styled.section`
 export const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  p{
+  p {
     font-size: ${theme.font.sizes.font12};
     letter-spacing: 0.4rem;
     color: ${theme.colors.amber};
     margin-bottom: 2.4rem;
   }
-  span{
+  span {
     font-size: ${theme.font.sizes.font16};
     letter-spacing: 0.56rem;
     font-weight: ${theme.font.weight.light};
     color: ${theme.colors.amber};
     margin: 3.8rem 0 2.4rem;
-}
+  }
 `
 export const TitleAndImage = styled.div`
   display: flex;
   align-items: flex-end;
   text-align: center;
   margin: 0 auto;
-  h1{
+  h1 {
     font-size: ${theme.font.sizes.font36};
     font-weight: ${theme.font.weight.black};
     line-height: 110%;
     max-width: 70rem;
-    @media(max-width: 44rem) {
+    @media (max-width: 44rem) {
       font-size: 2.4rem;
     }
   }
@@ -79,11 +77,11 @@ export const TimerWrapper = styled.div`
     font-size: 6.4rem;
     letter-spacing: 0.32rem;
     font-weight: ${theme.font.weight.light};
-    @media(max-width: 44rem) {
+    @media (max-width: 44rem) {
       font-size: 3.6rem;
     }
   }
-  p{
+  p {
     font-size: ${theme.font.sizes.font18};
   }
 `

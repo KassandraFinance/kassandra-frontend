@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
-
 export const Info = styled.div`
   color: #c4c4c4;
   display: flex;
