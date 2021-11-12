@@ -144,11 +144,18 @@ interface ISymbolProps {
 
 // eslint-disable-next-line prettier/prettier
 export const Symbol = styled.h3<ISymbolProps>`
+  display: flex;
+  align-items: center;
   font-size: ${props =>
     props.bestValue ? theme.font.sizes.font16 : theme.font.sizes.font20};
   font-weight: ${theme.font.weight.normal};
 
   margin: ${props => (props.bestValue ? '16px 0 8px' : '8px 0')};
+  img {
+    width: 22px;
+    margin: 8px;
+  }
+  
   @media(max-width: 380px) {
     font-size: 22px;
   }
