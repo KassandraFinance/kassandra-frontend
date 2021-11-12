@@ -89,6 +89,7 @@ const InputDefault = ({
             Max
           </S.ButtonMax>
         )}
+        {isMax === null && <div style={{ height: '17px' }} />}
       </S.AmountDefault>
     </S.InputDefaultContainer>
   )

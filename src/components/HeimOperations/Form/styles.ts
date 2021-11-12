@@ -163,14 +163,17 @@ export const ImgArrowLong = styled.img`
 
 interface IButtonMax {
   isMax?: boolean;
+  maxActive?: boolean;
 }
 
 // eslint-disable-next-line prettier/prettier
 export const ButtonMax = styled.button<IButtonMax>`
   border: 1px solid ${theme.colors.gray};
   border-radius: 3px;
-  background: ${props => (props.isMax ? '#26DBDB' : 'transparent')};
-  color: ${props => (props.isMax ? '#000' : '#fff')};
+  /* background: ${props => (props.isMax ? '#26DBDB' : 'transparent')}; */
+  /* color: ${props => (props.isMax ? '#000' : '#fff')}; */
+  background: ${props => (props.maxActive ? '#fff' : 'transparent')};
+  color: ${props => (props.maxActive ? '#000' : '#fff')};
   font-size: 12px;
   line-height: 12px;
   font-weight: 300;
@@ -178,7 +181,7 @@ export const ButtonMax = styled.button<IButtonMax>`
 
   width: 40px;
   height: 20px;
-  padding: 4px 8px;
+  padding: 3px 8px;
 
   cursor: pointer;
   transition: 100ms;
@@ -279,8 +282,12 @@ export const InputWithdrawContainer = styled.div`
 `
 
 export const Info = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   width: 100%;
-  height: 100%;
+  height: 84px;
 
   position: relative;
 `
@@ -297,7 +304,6 @@ export const InputDefaultContainer = styled.div`
   align-items: flex-start;
 
   width: 100%;
-  height: 94px;
   padding: 10px 16px;
 `
 
@@ -305,12 +311,12 @@ export const AmountDefault = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  justify-content: space-between;
+
   text-align: right;
   position: relative;
   width: 100%;
-  height: 94px;
-
-  padding-right: 12px;
+  height: 100%;
 `
 
 export const LineDefault = styled.div`

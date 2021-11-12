@@ -8,13 +8,13 @@ import * as S from './styles'
 interface ISelectInputTokensProps {
   poolTokensArray: TokenDetails[];
   setSwapInAddress: React.Dispatch<React.SetStateAction<string>>;
-  title: string;
+  swapOutAddress: string;
 }
 
 const SelectInputTokens = ({
   poolTokensArray,
   setSwapInAddress,
-  title
+  swapOutAddress
 }: ISelectInputTokensProps) => {
   const [tokenSelected, setTokenSelected] = React.useState<
     TokenDetails | undefined
@@ -29,7 +29,7 @@ const SelectInputTokens = ({
 
   React.useEffect(() => {
     setTokenSelected(poolTokensArray[0])
-  }, [title])
+  }, [swapOutAddress])
 
   return (
     <S.SelectToken openOptions={openOptions}>
