@@ -37,9 +37,9 @@ const SelectInputTokens = ({
         openOptions={openOptions}
         onClick={() => setOpenOptions(!openOptions)}
       >
-        <img src={tokenSelected?.image} alt="" />
+        <img src={tokenSelected?.image} alt="" id="img-token-selected" />
         {tokenSelected?.symbol}
-        <img src="assets/arrow-select.svg" alt="" />
+        <img src="assets/arrow-select.svg" alt="" id="arrow-down" />
       </S.Selected>
       {openOptions && (
         <>

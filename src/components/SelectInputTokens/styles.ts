@@ -33,13 +33,19 @@ export const Selected = styled.div<ISelectedProps>`
   border-radius: ${props => (props.openOptions ? '4px 0px' : '4px')};
   display: flex;
   align-items: center;
-  justify-content: space-between;
 
   cursor: pointer;
   padding: 3px 8px;
 
   img {
     max-width: 21px;
+  }
+
+  #img-token-selected {
+    margin-right: 8px;
+  }
+  #arrow-down {
+    margin-left: auto;
   }
 `
 

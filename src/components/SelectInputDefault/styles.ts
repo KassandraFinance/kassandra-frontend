@@ -62,7 +62,7 @@ export const Option = styled.div`
 
   img {
     max-width: 21px;
-    margin: 0 10px;
+    margin: 0 8px;
   }
 
   &:hover {
