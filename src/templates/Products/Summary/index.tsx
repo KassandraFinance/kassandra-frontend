@@ -17,7 +17,7 @@ const Summary = () => {
   return (
     <S.Summary>
       <S.Title>
-        <img src="assets/iconbar.svg" alt="-" />
+        <img src="/assets/iconbar.svg" alt="-" />
         <h2>Summary</h2>
       </S.Title>
       <S.Line />
@@ -68,7 +68,7 @@ const Summary = () => {
       <S.CopyContract>
         <S.Blockchain>
           <img
-            src="assets/avalancheIcon.svg"
+            src="/assets/avalancheIcon.svg"
             alt=""
             width="1503"
             height="1504"
@@ -78,7 +78,7 @@ const Summary = () => {
         <CopyToClipboard text={HeimCorePool}>
           <button type="button" onClick={handleCopyLink}>
             {substr(HeimCorePool)}
-            <img src="assets/copy.svg" alt="" style={{ marginLeft: '16px' }} />
+            <img src="/assets/copy.svg" alt="" style={{ marginLeft: '16px' }} />
           </button>
         </CopyToClipboard>
       </S.CopyContract>

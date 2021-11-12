@@ -6,7 +6,7 @@ const TokenDescription = () => {
   return (
     <>
       <S.Title>
-        <img src="assets/iconbar.svg" alt="-" />
+        <img src="/assets/iconbar.svg" alt="-" />
         <h2>Token Description</h2>
       </S.Title>
       <S.Line />
@@ -55,7 +55,7 @@ const TokenDescription = () => {
         </ol>
         <h2>Index Value</h2>
         <p>The value of the index is given by:</p>
-        <img src="assets/image 24.svg" alt="index value calc" />
+        <img src="/assets/image 24.svg" alt="index value calc" />
         <S.ToDocumention>
           <p>
             View full{" "}
@@ -67,7 +67,7 @@ const TokenDescription = () => {
               Heim
             </a>
             {" "}Documention
-            <img src="assets/externalLink.svg" alt="" />
+            <img src="/assets/externalLink.svg" alt="" />
           </p>
         </S.ToDocumention>
       </S.Text>

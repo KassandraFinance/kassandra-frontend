@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 export const BackgroundProducts = styled.div`
-  background-image: url('assets/bg-products.png');
+  background-image: url("/assets/bg-products.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position-x: 50%;

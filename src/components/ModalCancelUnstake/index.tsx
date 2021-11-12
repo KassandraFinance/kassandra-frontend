@@ -1,6 +1,10 @@
 import React from 'react'
+import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
 
-import { confirmCancelUnstake } from '../../utils/confirmTransactions'
+import waitTransaction, {
+  MetamaskError,
+  TransactionCallback
+} from '../../utils/txWait'
 
 import { Staking } from '../../constants/tokenAddresses'
 
@@ -22,6 +26,7 @@ interface IModalRequestUnstakeProps {
   setIsModalStaking: React.Dispatch<React.SetStateAction<boolean>>;
   pid: number;
   staking: boolean;
+  symbol: string;
 }
 
 const ModalCancelUnstake = ({
@@ -29,9 +34,32 @@ const ModalCancelUnstake = ({
   setModalOpen,
   setIsModalStaking,
   pid,
-  staking
+  staking,
+  symbol
 }: IModalRequestUnstakeProps) => {
   const kacyStake = useStakingContract(Staking)
+
+  const cancelUnstakeCallback = React.useCallback((): TransactionCallback => {
+    return async (error: MetamaskError, txHash: string) => {
+      if (error) {
+        if (error.code === 4001) {
+          ToastError(`Request for cancelling unstaking ${symbol} cancelled`)
+          return
+        }
+
+        ToastError(`Failed to cancel unstaking of ${symbol}. Please try again later.`)
+        return
+      }
+
+      ToastWarning(`Confirming cancelling of unstaking ${symbol}...`)
+      const txReceipt = await waitTransaction(txHash)
+
+      if (txReceipt.status) {
+        ToastSuccess(`Cancelling of unstaking ${symbol} completed`)
+        return
+      }
+    }
+  }, [symbol])
 
   return (
     <>
@@ -68,11 +96,7 @@ const ModalCancelUnstake = ({
                 if (staking) {
                   setIsModalStaking(true)
                 } else {
-                  kacyStake.cancelUnstake(
-                    pid,
-                    confirmCancelUnstake,
-                    'Pending cancel withdraw'
-                  )
+                  kacyStake.cancelUnstake(pid, cancelUnstakeCallback())
                 }
                 setModalOpen(false)
               }}

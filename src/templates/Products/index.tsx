@@ -3,6 +3,8 @@ import { useSelector, RootStateOrAny } from 'react-redux'
 
 import web3 from '../../utils/web3'
 
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce';
+
 import Header from '../../components/Header'
 import ChartProducts from '../../components/ChartProducts'
 import HeimOperations from '../../components/HeimOperations'
@@ -19,13 +21,20 @@ declare let window: {
   ethereum: any,
 }
 
-const Products = () => {
+interface IProductsProps {
+  crpPool: string;
+  corePool: string;
+  productName: string;
+  productCategories: string | string[];
+}
+
+const Products = ({ crpPool, corePool, productName, productCategories }: IProductsProps) => {
   const [chainId, setChainId] = React.useState<string>('')
   const [loading, setLoading] = React.useState<boolean>(true)
   const [isMobile, setIsMobile] = React.useState<boolean>(false)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-
+  const { trackProductPageView } = useMatomoEcommerce();
 
   async function getChainId() {
     if (web3.currentProvider === null) {
@@ -41,6 +50,8 @@ const Products = () => {
   }, [userWalletAddress])
 
   React.useEffect(() => {
+    trackProductPageView(crpPool, productName, productCategories)
+
     const device = localStorage.getItem('device')
     setIsMobile(device === 'isMobile')
 
@@ -69,7 +80,7 @@ const Products = () => {
         <S.Product>
           <S.ProductDetails>
             <S.Intro>
-              <img src="assets/avalanche_social_index_logo.svg" width={75}  alt="" />
+              <img src="/assets/avalanche_social_index_logo.svg" width={75}  alt="" />
               <S.NameIndex>
                 <S.NameAndSymbol>
                   <h1>Avalanche Social Index</h1>
@@ -81,23 +92,23 @@ const Products = () => {
             <S.Line />
             <S.IntroCharts>
               <S.IndexData>
-                <span>TVL <img src="assets/info-gray.svg" alt="" /></span>
+                <span>TVL <img src="/assets/info-gray.svg" alt="" /></span>
                 <h2>$785,345.67</h2>
               </S.IndexData>
               <S.IndexData>
-                <span>VOLUME (24h) <img src="assets/info-gray.svg" alt="" /></span>
+                <span>VOLUME (24h) <img src="/assets/info-gray.svg" alt="" /></span>
                 <h2>$868.4M</h2>
               </S.IndexData>
               <S.IndexData>
-                <span>APY <img src="assets/info-gray.svg" alt="" /></span>
+                <span>APY <img src="/assets/info-gray.svg" alt="" /></span>
                 <h2>12%</h2>
               </S.IndexData>
               <S.IndexData>
-                <span>fees <img src="assets/info-gray.svg" alt="" /></span>
+                <span>fees <img src="/assets/info-gray.svg" alt="" /></span>
                 <h2>$345.65</h2>
               </S.IndexData>
               <S.IndexData>
-                <span>rewards <img src="assets/info-gray.svg" alt="" /></span>
+                <span>rewards <img src="/assets/info-gray.svg" alt="" /></span>
                 <h2>40%</h2>
               </S.IndexData>
             </S.IntroCharts>
@@ -107,7 +118,7 @@ const Products = () => {
             <Distribution />
             <TokenDescription />
           </S.ProductDetails>
-          <HeimOperations />
+          <HeimOperations crpPool={crpPool} corePool={corePool} poolName={productName} productCategories={productCategories} />
         </S.Product>
         :
         <>

@@ -2,14 +2,19 @@
 import React from 'react'
 import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
+import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
 
 import { BNtoDecimal } from '../../utils/numerals'
-import { confirmStake } from '../../utils/confirmTransactions'
+import waitTransaction, {
+  MetamaskError,
+  TransactionCallback
+} from '../../utils/txWait'
 
 import { Staking } from '../../constants/tokenAddresses'
 
 import useERC20Contract from '../../hooks/useERC20Contract'
 import useStakingContract from '../../hooks/useStakingContract'
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
 import InputTokenValue from '../InputTokenValue'
 
@@ -22,6 +27,7 @@ interface IModalStakingProps {
   pid: number;
   decimals: string;
   stakingToken: string;
+  productCategories: string | string[];
 }
 
 const ModalStaking = ({
@@ -29,7 +35,8 @@ const ModalStaking = ({
   setModalOpen,
   pid,
   decimals,
-  stakingToken
+  stakingToken,
+  productCategories
 }: IModalStakingProps) => {
   const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
   const [amountStaking, setAmountStaking] = React.useState<BigNumber>(
@@ -38,10 +45,12 @@ const ModalStaking = ({
   const [multiplier, setMultiplier] = React.useState<number>(0)
   const [isAmount, setIsAmount] = React.useState<boolean>(false)
 
+  const { trackProductPageView, trackBuying, trackCancelBuying, trackBought } = useMatomoEcommerce()
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const inputRef = React.useRef<HTMLInputElement>(null)
   const kacyToken = useERC20Contract(stakingToken)
   const kacyStake = useStakingContract(Staking)
+  const productSKU = `${Staking}_${pid}`
 
   function handleKacyAmount(percentage: BigNumber) {
     const kacyAmount = percentage.mul(balance).div(new BigNumber(100))
@@ -64,6 +73,18 @@ const ModalStaking = ({
   }
 
   React.useEffect(() => {
+    if (!modalOpen) {
+      return
+    }
+
+    const track = async () => {
+      const tokenName = await kacyToken.name()
+      trackProductPageView(productSKU, tokenName, productCategories)
+    }
+    track()
+  }, [modalOpen, stakingToken])
+
+  React.useEffect(() => {
     if (!isAmount) {
       setMultiplier(0)
     }
@@ -78,6 +99,35 @@ const ModalStaking = ({
     setMultiplier(0)
     handleKacyAmount(new BigNumber(0))
   }, [modalOpen])
+
+  const stakeCallback = React.useCallback((): TransactionCallback => {
+    return async (error: MetamaskError, txHash: string) => {
+      const tokenName = await kacyToken.name()
+      trackBuying(productSKU, tokenName, 0, productCategories)
+      const tokenSymbol = await kacyToken.symbol()
+
+      if (error) {
+        trackCancelBuying()
+
+        if (error.code === 4001) {
+          ToastError(`Staking of ${tokenSymbol} cancelled`)
+          return
+        }
+
+        ToastError(`Failed to stake ${tokenSymbol}. Please try again later.`)
+        return
+      }
+
+      trackBought(productSKU, 0, 0)
+      ToastWarning(`Confirming stake of ${tokenSymbol}...`)
+      const txReceipt = await waitTransaction(txHash)
+
+      if (txReceipt.status) {
+        ToastSuccess(`Stake of ${tokenSymbol} confirmed`)
+        return
+      }
+    }
+  }, [stakingToken])
 
   return (
     <>
@@ -173,7 +223,7 @@ const ModalStaking = ({
             disabled={amountStaking.toString() === '0'}
             onClick={() => {
               setModalOpen(false)
-              kacyStake.stake(pid, amountStaking, confirmStake, 'Pending stake')
+              kacyStake.stake(pid, amountStaking, stakeCallback())
               setAmountStaking(new BigNumber(0))
             }}
           >

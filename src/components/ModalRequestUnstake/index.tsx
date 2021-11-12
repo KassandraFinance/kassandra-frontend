@@ -1,9 +1,13 @@
 import React from 'react'
 import BigNumber from 'bn.js'
+import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
 
 import { BNtoDecimal } from '../../utils/numerals'
 import { dateRequestUnstake } from '../../utils/date'
-import { confirmUnstake } from '../../utils/confirmTransactions'
+import waitTransaction, {
+  MetamaskError,
+  TransactionCallback
+} from '../../utils/txWait'
 
 import { Staking } from '../../constants/tokenAddresses'
 import useStakingContract from '../../hooks/useStakingContract'
@@ -17,6 +21,7 @@ interface IModalRequestUnstakeProps {
   withdrawDelay: number;
   votingMultiplier: string;
   yourStake: BigNumber;
+  symbol: string;
 }
 
 const ModalRequestUnstake = ({
@@ -25,9 +30,32 @@ const ModalRequestUnstake = ({
   pid,
   withdrawDelay,
   votingMultiplier,
-  yourStake
+  yourStake,
+  symbol
 }: IModalRequestUnstakeProps) => {
   const kacyStake = useStakingContract(Staking)
+
+  const requestsUnstakeCallback = React.useCallback((): TransactionCallback => {
+    return async (error: MetamaskError, txHash: string) => {
+      if (error) {
+        if (error.code === 4001) {
+          ToastError(`Request for unstaking ${symbol} cancelled`)
+          return
+        }
+
+        ToastError(`Failed to request unstaking of ${symbol}. Please try again later.`)
+        return
+      }
+
+      ToastWarning(`Confirming request for unstaking of ${symbol}...`)
+      const txReceipt = await waitTransaction(txHash)
+
+      if (txReceipt.status) {
+        ToastSuccess(`Request for unstaking of ${symbol} confirmed`)
+        return
+      }
+    }
+  }, [symbol])
 
   return (
     <>
@@ -72,7 +100,7 @@ const ModalRequestUnstake = ({
             <button
               type="button"
               onClick={() => {
-                kacyStake.unstake(pid, confirmUnstake, 'Pending unstake')
+                kacyStake.unstake(pid, requestsUnstakeCallback())
                 setModalOpen(false)
               }}
             >

@@ -6,7 +6,7 @@ const Change = () => {
   return (
     <S.Change>
       <S.Title>
-        <img src="assets/iconbar.svg" alt="-" />
+        <img src="/assets/iconbar.svg" alt="-" />
         <h2>Change</h2>
       </S.Title>
       <table>

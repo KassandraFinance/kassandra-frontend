@@ -47,7 +47,7 @@ const Footer = () => (
       <S.LowerContainer>
         <S.LowerLeft>
           <img
-            src="assets/kassandra-footer.svg"
+            src="/assets/kassandra-footer.svg"
             alt="kassandra"
             width="266"
             height="26"
@@ -62,7 +62,7 @@ const Footer = () => (
               rel="noopener noreferrer"
             >
               <img
-                src="assets/discord-icon.svg"
+                src="/assets/discord-icon.svg"
                 alt="Join our Discord community"
                 width="32"
                 height="32"
@@ -76,7 +76,7 @@ const Footer = () => (
               rel="noopener noreferrer"
             >
               <img
-                src="assets/telegram-icon.svg"
+                src="/assets/telegram-icon.svg"
                 alt="Join our Telegram group"
                 width="32"
                 height="32"
@@ -90,7 +90,7 @@ const Footer = () => (
               rel="noopener noreferrer"
             >
               <img
-                src="assets/github-icon.svg"
+                src="/assets/github-icon.svg"
                 alt="Access our GitHub repository"
                 width="32"
                 height="32"
@@ -104,7 +104,7 @@ const Footer = () => (
               rel="noopener noreferrer"
             >
               <img
-                src="assets/medium-icon.svg"
+                src="/assets/medium-icon.svg"
                 alt="Read our Medium blog"
                 width="32"
                 height="32"
@@ -118,7 +118,7 @@ const Footer = () => (
               rel="noopener noreferrer"
             >
               <img
-                src="assets/twitter-icon.svg"
+                src="/assets/twitter-icon.svg"
                 alt="Follow our Twitter feed"
                 width="32"
                 height="32"
@@ -136,7 +136,7 @@ const Footer = () => (
               rel="noopener noreferrer"
             >
               <img
-                src="assets/discord-icon.svg"
+                src="/assets/discord-icon.svg"
                 alt="Join our Discord community"
                 width="32"
                 height="32"
@@ -150,7 +150,7 @@ const Footer = () => (
               rel="noopener noreferrer"
             >
               <img
-                src="assets/telegram-icon.svg"
+                src="/assets/telegram-icon.svg"
                 alt="Join our Telegram group"
                 width="32"
                 height="32"
@@ -164,7 +164,7 @@ const Footer = () => (
               rel="noopener noreferrer"
             >
               <img
-                src="assets/github-icon.svg"
+                src="/assets/github-icon.svg"
                 alt="Access our GitHub repository"
                 width="32"
                 height="32"
@@ -178,7 +178,7 @@ const Footer = () => (
               rel="noopener noreferrer"
             >
               <img
-                src="assets/medium-icon.svg"
+                src="/assets/medium-icon.svg"
                 alt="Read our Medium blog"
                 width="32"
                 height="32"
@@ -192,7 +192,7 @@ const Footer = () => (
               rel="noopener noreferrer"
             >
               <img
-                src="assets/twitter-icon.svg"
+                src="/assets/twitter-icon.svg"
                 alt="Follow our Twitter feed"
                 width="32"
                 height="32"
@@ -202,7 +202,7 @@ const Footer = () => (
         </ul>
         <S.LowerLeft>
           <img
-            src="assets/kassandra-footer.svg"
+            src="/assets/kassandra-footer.svg"
             alt="kassandra"
             width="266"
             height="26"
