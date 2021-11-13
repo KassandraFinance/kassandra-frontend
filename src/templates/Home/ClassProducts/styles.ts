@@ -39,7 +39,7 @@ p {
 }
 span{
   font-size: ${theme.font.sizes.font16};
-  font-weight: ${theme.font.weight.normal};
+  font-weight: ${theme.font.weight.light};
   line-height: 155%;
   max-width: 750px;
   margin: 0 auto;
@@ -83,6 +83,7 @@ p{
 }
 span{
   font-size: ${theme.font.sizes.font14};
+  font-weight: ${theme.font.weight.light};
   line-height: 122.5%;
 }
 @media(max-width: 960px) {
