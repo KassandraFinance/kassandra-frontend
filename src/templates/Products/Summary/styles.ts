@@ -12,6 +12,7 @@ export const Summary = styled.div`
     border: none;
     border-radius: 12px;
     color: #fff;
+    color: ${theme.colors.snow};
     font-family: ${theme.font.family};
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.light};
@@ -23,12 +24,17 @@ export const Summary = styled.div`
     max-width: 100%;
     padding: 16px 24px;
     outline: none;
-    &:hover {
-      text-decoration: underline;
+    transition: 0.15s;
+    svg {
+      margin-left: ${theme.spacings.space8};
     }
-
-    img {
-      margin-left: 8px;
+    &:hover {
+      color: ${theme.colors.cyan};
+      > svg {
+        path {
+          fill: ${theme.colors.cyan};
+        }
+      }
     }
   }
 `
