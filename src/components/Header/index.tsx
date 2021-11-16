@@ -117,7 +117,7 @@ const Header = () => {
           )} */}
 
           <Link href="/products" passHref>
-            <S.MenuLink onClick={() => clickMatomoEvent('click-on-link', 'buy-heim')}>Buy $Heim</S.MenuLink>
+            <S.MenuLink onClick={() => clickMatomoEvent('click-on-link', 'invest')}>Invest</S.MenuLink>
           </Link>
 
           <Link href="/farm" passHref>

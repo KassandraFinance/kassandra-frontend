@@ -47,9 +47,8 @@ const InputDefault = ({
 
     return (
       <S.Symbol>
-        {poolTokens.length > 0 && poolTokens[0] !== undefined
-          ? poolTokens[0].symbol
-          : '...'}
+        <img src="assets/avalanche_social_index_logo.svg" alt="" />
+        {poolTokens.length > 0 && poolTokens[0] !== undefined ? 'aHYPE' : '...'}
       </S.Symbol>
     )
   }, [poolTokens])
@@ -89,6 +88,7 @@ const InputDefault = ({
             Max
           </S.ButtonMax>
         )}
+        {isMax === null && <div style={{ height: '17px' }} />}
       </S.AmountDefault>
     </S.InputDefaultContainer>
   )

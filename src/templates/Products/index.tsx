@@ -69,11 +69,11 @@ const Products = () => {
         <S.Product>
           <S.ProductDetails>
             <S.Intro>
-              <img src="assets/heim-75.svg" alt="" />
+              <img src="assets/avalanche_social_index_logo.svg" width={75}  alt="" />
               <S.NameIndex>
                 <S.NameAndSymbol>
-                  <h1>Heim Social Index</h1>
-                  <h3>$HEIM</h3>
+                  <h1>Avalanche Social Index</h1>
+                  <h3>$aHYPE</h3>
                 </S.NameAndSymbol>
                 <p>by HEIMDALL.land</p>
               </S.NameIndex>

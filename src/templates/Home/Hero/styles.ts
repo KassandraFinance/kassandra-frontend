@@ -10,19 +10,19 @@ export const Hero = styled.section`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center top;
-  @media(max-height: 600px) {
-    margin-bottom: 0px ;
-    @media(max-width: 960px) {
+  @media (max-height: 600px) {
+    margin-bottom: 0px;
+    @media (max-width: 960px) {
       margin-bottom: -50vh;
     }
   }
-  @media(max-width: 600px) {
+  @media (max-width: 600px) {
     height: 130vh;
   }
 `
 export const IntroHero = styled.div`
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   align-items: center;
   margin: 0 auto;
   margin-top: 280px;
@@ -39,12 +39,24 @@ export const IntroHero = styled.div`
   }
   @media (max-width: 360px) {
     margin-top: 130px;
-    @media (min-height: 800px ) {
+    @media (min-height: 800px) {
       margin-top: 200px;
     }
   }
   @media (max-width: 330px) {
     margin-top: 90px;
+  }
+  @media (max-height: 940px) {
+    margin-top: 190px;
+  }
+  @media (max-height: 760px) {
+    margin-top: 170px;
+  }
+  @media (max-height: 645px) {
+    margin-top: 120px;
+  }
+  @media (max-height: 595px) {
+    margin-top: 50px;
   }
 
   h1 {
@@ -101,7 +113,7 @@ export const IntroHero = styled.div`
       font-size: ${theme.font.sizes.font14};
       max-width: 360px;
       margin-bottom: 35px;
-      @media (min-height: 800px ) {
+      @media (min-height: 800px) {
         margin-bottom: 100px;
       }
     }
@@ -116,7 +128,7 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 72px;
-  `
+`
 export const DesktopScreen = styled.div`
   @media (max-width: 959px) {
     display: none;
@@ -127,5 +139,3 @@ export const MobileScreen = styled.div`
     display: none;
   }
 `
-
-

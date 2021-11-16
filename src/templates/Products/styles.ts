@@ -2,17 +2,17 @@ import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 export const BackgroundProducts = styled.div`
-  background-image: url("assets/bg-products.png");
+  background-image: url('assets/bg-products.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position-x: 50%;
-  `
+`
 
 export const Product = styled.section`
   display: grid;
   grid-template-columns: minmax(300px, 584px) 448px;
   gap: 0 108px;
-  
+
   margin: 0 auto;
   max-width: 1140px;
   max-height: 100%;
@@ -36,8 +36,8 @@ export const Intro = styled.div`
   grid-template-columns: auto auto;
   align-items: center;
   gap: 20px;
-  
-  max-width: 390px;
+
+  max-width: 440px;
 `
 
 export const NameIndex = styled.div`
@@ -50,7 +50,7 @@ export const NameIndex = styled.div`
 export const NameAndSymbol = styled.div`
   display: flex;
   align-items: flex-start;
-  
+
   h1 {
     font-size: ${theme.font.sizes.font24};
     font-weight: ${theme.font.weight.light};
@@ -81,7 +81,7 @@ export const IntroCharts = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 22px;
-  
+
   max-width: 100%;
 `
 
