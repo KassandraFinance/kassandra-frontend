@@ -661,6 +661,7 @@ const Form = ({
         decimals={poolTokenDetails[tokenInIndex] ? poolTokenDetails[tokenInIndex].decimals : new BigNumber(18)}
         swapInBalance={swapInBalance}
         swapInAmount={swapInAmount}
+        swapInAddress={swapInAddress}
         swapOutAddress={swapOutAddress}
         setSwapInAmount={setSwapInAmount}
         setSwapOutAmount={setSwapOutAmount}

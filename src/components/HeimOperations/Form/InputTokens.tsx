@@ -20,6 +20,7 @@ interface IInputEthProps {
   swapInBalance: BigNumber;
   swapInAmount: BigNumber;
   swapOutAddress: string;
+  swapInAddress: string;
   setSwapInAddress: React.Dispatch<React.SetStateAction<string>>;
   setSwapInAmount: React.Dispatch<React.SetStateAction<BigNumber>>;
   setSwapOutAmount: React.Dispatch<React.SetStateAction<BigNumber[]>>;
@@ -33,6 +34,7 @@ const InputTokens = ({
   decimals,
   swapInBalance,
   swapInAmount,
+  swapInAddress,
   swapOutAddress,
   setSwapInAddress,
   setSwapInAmount,
@@ -95,7 +97,7 @@ const InputTokens = ({
 
   React.useEffect(() => {
     clearInput()
-  }, [title])
+  }, [title, swapInAddress])
 
   return (
     <S.InputTokensContainer>
