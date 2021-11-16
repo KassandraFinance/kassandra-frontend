@@ -47,8 +47,6 @@ const SubscribeBanner = () => {
     }, 1000)
   }
 
-  // function using fetch that sends a post request to https://heimdall.land/subscribe/heim with email and user fields, and return a success message if the request is returns a 200 or a failure message if the request returns a 400
-
   return (
     <S.Container>
       <S.TextWrapper>
