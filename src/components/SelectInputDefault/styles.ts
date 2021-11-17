@@ -33,7 +33,6 @@ export const Selected = styled.div<ISelectedProps>`
   border-radius: ${props => (props.openOptions ? '4px 0px' : '4px')};
   display: flex;
   align-items: center;
-  justify-content: space-between;
 
   cursor: pointer;
   padding: 3px 8px;
@@ -41,16 +40,35 @@ export const Selected = styled.div<ISelectedProps>`
   img {
     max-width: 21px;
   }
+  
+  #img-token-selected {
+    margin-right: 8px;
+  }
+  #arrow-down {
+    margin-left: auto;
+  }
 `
 
 export const OptionsContent = styled.div`
   background-color: #4a4348;
   border-radius: 0 0 4px 4px;
+  /* box-shadow: inset 0px -14px 6px -3px rgba(200, 200, 255, 0.5); */
 
   width: 128px;
+  max-height: 162px;
+  overflow: auto;
+
   position: absolute;
 
   z-index: 101;
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+  }
 `
 
 export const Option = styled.div`
