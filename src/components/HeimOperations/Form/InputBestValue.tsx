@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
+import Image from 'next/image'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 
@@ -7,12 +8,14 @@ import { TokenDetails } from '../../../store/modules/poolTokens/types'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 import { priceDollar } from '../../../utils/priceDollar'
+import none from '../../../../public/assets/coming-soon.svg'
 
 import * as S from './styles'
 
 interface IInputBestValueProps {
   poolTokenDetails: TokenDetails[];
   poolTokensArray: TokenDetails[];
+  tokensArray: TokenDetails[];
   swapOutAmount: BigNumber[];
   swapOutBalance: BigNumber[];
   setPriceInDollarOnWithdraw: React.Dispatch<React.SetStateAction<string>>;
@@ -21,6 +24,7 @@ interface IInputBestValueProps {
 const InputBestValue = ({
   poolTokenDetails,
   poolTokensArray,
+  tokensArray,
   swapOutAmount,
   swapOutBalance,
   setPriceInDollarOnWithdraw
@@ -45,15 +49,23 @@ const InputBestValue = ({
         <S.Span total>Receive(est.) </S.Span>
       </S.IntroBestValue>
       <S.AllInput>
-        {poolTokenDetails.map((token, index) => (
+        {tokensArray.map((token, index) => (
           <S.InputBestValueGrid key={`best_value_${token.address}`}>
             <S.BestValueItem>
               <S.Symbol bestValue>
-                {BNtoDecimal(
-                  swapOutAmount[index] || new BigNumber(0),
-                  token.decimals
-                )}{' '}
-                {poolTokenDetails.length > 0 ? token.symbol : '...'}
+                <Image
+                  src={token.image || none}
+                  alt={`Imagem on ${token.symbol}`}
+                  width={22}
+                  height={22}
+                />
+                <span>
+                  {BNtoDecimal(
+                    swapOutAmount[index] || new BigNumber(0),
+                    token.decimals
+                  )}{' '}
+                  {tokensArray.length > 0 ? token.symbol : '...'}
+                </span>
               </S.Symbol>
               <S.SpanLight>
                 Balance:{' '}

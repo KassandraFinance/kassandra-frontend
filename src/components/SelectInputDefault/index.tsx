@@ -15,7 +15,8 @@ interface ISelectInputDefaultProps {
 const SelectInputDefault = ({
   poolTokensArray,
   setSwapOutAddress,
-  swapInAddress
+  swapInAddress,
+  title
 }: ISelectInputDefaultProps) => {
   const [tokenSelected, setTokenSelected] = React.useState<
     TokenDetails | undefined
@@ -23,6 +24,15 @@ const SelectInputDefault = ({
   const [openOptions, setOpenOptions] = React.useState<boolean>(false)
 
   React.useEffect(() => {
+    if (poolTokensArray[0].symbol === 'WBTC') {
+      setTokenSelected(poolTokensArray[1])
+    }
+  }, [title])
+
+  React.useEffect(() => {
+    if (title === 'Swap') {
+      return
+    }
     setTokenSelected(poolTokensArray[0])
   }, [swapInAddress])
 

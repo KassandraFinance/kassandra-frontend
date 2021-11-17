@@ -56,9 +56,8 @@ const InputTokens = ({
 
     return (
       <S.Symbol>
-        {poolTokens.length > 0 && poolTokens[0] !== undefined
-          ? poolTokens[0].symbol
-          : '...'}
+        <img src="assets/avalanche_social_index_logo.svg" alt="" />
+        {poolTokens.length > 0 && poolTokens[0] !== undefined ? 'aHYPE' : '...'}
       </S.Symbol>
     )
   }, [poolTokens])

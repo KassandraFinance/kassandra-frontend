@@ -57,6 +57,7 @@ const Form = ({
 
   const [poolTokenDetails, setPoolTokensDetails] = React.useState<TokenDetails[]>([])
   const [poolTokens, setPoolTokens] = React.useState<string[]>([])
+  const [tokensArray, setTokensArray] = React.useState<TokenDetails[]>([])
   const [tokenAddress2Index, setTokenAddress2Index] = React.useState<Address2Index>({})
   const [isApproved, setIsApproved] = React.useState<boolean[]>([])
   const [approvalCheck, setApprovalCheck] = React.useState(0)
@@ -636,6 +637,18 @@ const Form = ({
       }
     }, [])
 
+    React.useEffect(() => {
+      const res = poolTokensArray.map((token: { address: string }) => {
+        for (let i = 0; i < poolTokensArray.length; i++) {
+          if (poolTokenDetails[i]?.address !== token.address) {
+            return token
+          }
+        }
+      })
+
+      setTokensArray(res)
+    }, [poolTokensArray, poolTokenDetails])
+
   return (
     <S.FormContainer onSubmit={submitAction}>
       <input type="hidden" name="approved" value={Number(isApproved[tokenInIndex] || 0)} />
@@ -684,6 +697,7 @@ const Form = ({
               .slice(0, -1)
               .filter((token: { address: string }) => token.address !== swapInAddress)}
             poolTokensArray={poolTokensArray}
+            tokensArray={tokensArray}
             swapOutAmount={swapOutAmount}
             swapOutBalance={swapOutBalance}
             setPriceInDollarOnWithdraw={setPriceInDollarOnWithdraw}
@@ -708,7 +722,10 @@ const Form = ({
               <S.SpanLight>
                 {swapOutPrice < new BigNumber(0)
                   ? '...'
-                  : `1 ${poolTokenDetails[tokenInIndex]?.symbol} = ${BNtoDecimal(
+                  : `1 ${poolTokenDetails[tokenInIndex]?.symbol === 'HEIM' ? 
+                    'aHYPE' 
+                    : 
+                    poolTokenDetails[tokenInIndex]?.symbol} = ${BNtoDecimal(
                     swapOutPrice,
                     poolTokenDetails[tokenOutIndex]?.decimals
                   )} ${poolTokenDetails[tokenOutIndex]?.symbol}`}
@@ -741,7 +758,13 @@ const Form = ({
                 : `1 ${poolTokenDetails[tokenInIndex]?.symbol} = ${BNtoDecimal(
                   swapOutPrice,
                   poolTokenDetails[tokenOutIndex]?.decimals
-                )} ${poolTokenDetails[tokenOutIndex]?.symbol}`}
+                )} 
+                  ${poolTokenDetails[tokenOutIndex]?.symbol === 'HEIM' ? 
+                    'aHYPE' 
+                    :
+                    poolTokenDetails[tokenOutIndex]?.symbol
+                    }`
+              }
             </S.SpanLight>
           </S.ExchangeRate>
         </>
