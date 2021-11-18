@@ -7,10 +7,11 @@ import Big from 'big.js'
 
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 import { EventData } from 'web3-eth-contract'
+import { useQuery } from '@apollo/client'
 
+import { TOKENS_QUERY } from './graphql'
+import { TokenDetails } from '../../../store/modules/poolTokens/types'
 import { actionGetPoolTokens } from '../../../store/modules/poolTokens/actions'
-
-import Button from '../../Button'
 
 import useConnect from '../../../hooks/useConnect'
 import useCRPContract from '../../../hooks/useCRPContract'
@@ -18,18 +19,20 @@ import useERC20Contract, { ERC20 } from '../../../hooks/useERC20Contract'
 import usePoolContract from '../../../hooks/usePoolContract'
 import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
+import Button from '../../Button'
+import ModalWalletConnect from '../../ModalWalletConnect'
+
 import InputTokens from './InputTokens'
 import InputDefault from './InputDefault'
 import InputBestValue from './InputBestValue'
 
 import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
-import * as S from './styles'
+import { priceDollar } from '../../../utils/priceDollar'
 import { BNtoDecimal, wei } from '../../../utils/numerals'
 import waitTransaction, { MetamaskError, TransactionCallback } from '../../../utils/txWait'
-import { TokenDetails } from '../../../store/modules/poolTokens/types'
-import ModalWalletConnect from '../../ModalWalletConnect'
-import { priceDollar } from '../../../utils/priceDollar'
+
+import * as S from './styles'
 
 interface IFormProps {
   typeAction: string;
@@ -87,9 +90,13 @@ const Form = ({
   const listCoinPool = res && JSON.parse(res)
 
   const [coinInfoList, setCoinInfoList] = React.useState<TokenDetails[]>(listCoinPool || [])
+
+  const { data, loading, error } = useQuery(TOKENS_QUERY);
+  console.log(data)
+  console.log(loading)
+  console.log(error)
+
   // get data coinGecko
-
-
   async function getCoinList() {
     const URL = 'https://api.coingecko.com/api/v3/coins/list'
     await fetch(URL, {
