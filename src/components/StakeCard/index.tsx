@@ -61,11 +61,7 @@ interface IStakingProps {
   connect: () => void;
   balanceOf: (pid: number, walletAddress: string) => Promise<BigNumber>;
   earned: (pid: number, walletAddress: string) => Promise<BigNumber>;
-  getReward: (
-    pid: number,
-    onComplete?: CompleteCallback | undefined,
-    message?: string | undefined
-  ) => void;
+  getReward: (pid: number, callback: TransactionCallback) => void;
   withdrawable: (pid: number, walletAddress: string) => Promise<boolean>;
   poolInfo: (pid: number) => Promise<PoolInfo>;
   unstaking: (pid: number, walletAddress: string) => Promise<boolean>;
@@ -194,6 +190,28 @@ const StakeCard = ({
       }
     }
   }, [symbol])
+
+  const rewardClaimCallback = React.useCallback((): TransactionCallback => {
+    return async (error: MetamaskError, txHash: string) => {
+      if (error) {
+        if (error.code === 4001) {
+          ToastError(`Cancelled reward claim`)
+          return
+        }
+
+        ToastError(`Failed to claim your rewards. Please try again later.`)
+        return
+      }
+
+      ToastWarning(`Waiting for the blockchain to claim your rewards...`)
+      const txReceipt = await waitTransaction(txHash)
+
+      if (txReceipt.status) {
+        ToastSuccess(`Rewards claimed sucessfully`)
+        return
+      }
+    }
+  }, [])
 
   async function handleApproveKacy() {
     const token = ERC20(infoStaked.stakingToken)
@@ -373,9 +391,7 @@ const StakeCard = ({
                       type="button"
                       text="Claim"
                       // fullWidth
-                      onClick={() =>
-                        getReward(pid, confirmClaim, 'Pending reward claim')
-                      }
+                      onClick={() => getReward(pid, rewardClaimCallback)}
                     />
                   </S.Claim>
                   <S.StakeContainer>
