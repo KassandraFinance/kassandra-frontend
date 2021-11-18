@@ -6,9 +6,10 @@ import * as S from './styles'
 const Products = () => {
   return (
     <S.Container>
-      <img src="assets/kassandra-products-about.svg" alt="Kassandra products" />
+      <img src="assets/about-products.png" alt="Kassandra products" />
       <S.CardWrapper>
         <S.Card>
+          <img src="assets/about-products-icon.svg" alt="" />
           <h3>PROTOCOL</h3>
           <p>
             A cursus quis maecenas mi. Porttitor et, a, adipiscing arcu amet
@@ -51,6 +52,8 @@ const Products = () => {
           </S.Link>
         </S.Card>
         <S.Card>
+          <img src="assets/about-products-icon.svg" alt="" />
+
           <h3>DAO</h3>
           <p>
             A cursus quis maecenas mi. Porttitor et, a, adipiscing arcu amet
@@ -93,6 +96,7 @@ const Products = () => {
           </S.Link>
         </S.Card>
         <S.Card>
+          <img src="assets/about-products-icon.svg" alt="" />
           <h3>FOUNDATION</h3>
           <p>
             A cursus quis maecenas mi. Porttitor et, a, adipiscing arcu amet
@@ -105,7 +109,7 @@ const Products = () => {
             target="_blank"
             rel="noopener noreferral"
           >
-            <span>Conect With Us</span>
+            <span>Connect With Us</span>
             <svg
               width="17"
               height="17"

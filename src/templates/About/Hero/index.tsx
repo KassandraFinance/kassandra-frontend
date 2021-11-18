@@ -14,13 +14,17 @@ const Hero = () => {
           <h1>Curated tokenized data-driven investiment strategies </h1>
         </S.IntroHero>
         <img src="assets/kassandra-about.svg" alt="" className="kassandra" />
-        <p>
+        <S.IntroTextWrapper>
           <S.Divider />
-          Kassandra is a decentralized autonomous organization that governs a
-          set of tokenized data-driven investment funds, bringing a new class of
-          investment products to the DeFi ecosystem: actively managed investment
-          baskets without compromising the pillars of decentralization.
-        </p>
+          <p>
+            Kassandra is a decentralized autonomous organization that governs a
+            set of tokenized data-driven investment funds, bringing a new class
+            of investment products to the DeFi ecosystem: actively managed
+            investment investment baskets without compromising the pillars of
+            decentralization.
+          </p>
+        </S.IntroTextWrapper>
+
         <S.CardContainer>
           <S.Card>
             <S.IconWrapper>

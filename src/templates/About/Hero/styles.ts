@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
 export const Hero = styled.section`
-  min-height: 100vh;
   display: grid;
   align-content: center;
   grid-template-columns: 1fr 1fr;
@@ -18,11 +17,17 @@ export const Hero = styled.section`
     font-weight: ${theme.font.weight.light};
     line-height: 180%;
   }
+  @media (max-width: 960px) {
+    grid-template-columns: 1fr;
+    img {
+      display: none;
+    }
+  }
 `
 export const Divider = styled.div`
   max-width: 10rem;
-  height: 0.1rem;
-  background-color: #f79640;
+
+  border: 1px solid #f79640;
   margin-top: 2.4rem;
   margin-bottom: 2.4rem;
 `
@@ -71,11 +76,12 @@ export const IntroHero = styled.div`
     margin-top: 10rem;
   }
 `
-export const ButtonWrapper = styled.div`
+//IntroTextWrapper
+export const IntroTextWrapper = styled.div`
   display: flex;
-  justify-content: center;
-  margin-top: 72px;
+  flex-direction: column;
 `
+
 export const DesktopScreen = styled.div`
   @media (max-width: 959px) {
     display: none;
@@ -90,6 +96,12 @@ export const CardContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  @media (max-width: 960px) {
+    margin-top: 5rem;
+    img {
+      display: block;
+    }
+  }
 `
 export const Card = styled.div`
   margin: 0 auto;

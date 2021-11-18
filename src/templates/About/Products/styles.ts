@@ -10,6 +10,9 @@ export const Container = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  img {
+    width: 70%;
+  }
 `
 export const CardWrapper = styled.div`
   display: flex;
@@ -39,6 +42,12 @@ export const Card = styled.div`
     font-weight: ${theme.font.weight.light};
     line-height: 180%;
     margin-bottom: 2.2rem;
+  }
+  img {
+    position: relative;
+    align-self: center;
+    transform: translateY(-80%);
+    max-width: 30%;
   }
 `
 export const Link = styled.a`
