@@ -51,6 +51,24 @@ const Hero = () => {
           </S.Card>
         </S.CardContainer>
       </S.Hero>
+      <S.CardRectangleWrapper>
+        <S.CardRectangle>
+          <span>VISION</span>
+          <p>
+            Donec pulvinar congue fusce massa arcu est enim sed. Morbi odio
+            viverra maecenas eget mattis. Velit erat cras vulputate diam nunc
+            consequat lorem ullamcorper.
+          </p>
+        </S.CardRectangle>
+        <S.CardRectangle>
+          <span>MISSION</span>
+          <p>
+            Donec pulvinar congue fusce massa arcu est enim sed. Morbi odio
+            viverra maecenas eget mattis. Velit erat cras vulputate diam nunc
+            consequat lorem ullamcorper.
+          </p>
+        </S.CardRectangle>
+      </S.CardRectangleWrapper>
     </>
   )
 }

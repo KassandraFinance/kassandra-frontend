@@ -4,10 +4,11 @@ import theme from '../../../styles/theme'
 export const Hero = styled.section`
   min-height: 100vh;
   display: grid;
+  align-content: center;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 6rem;
-  margin: 0 auto;
-  margin-top: 5.6rem;
+  margin: 5.6rem auto 10rem;
+
   max-width: 104.2rem;
   align-items: center;
   padding: 0 3.2rem;
@@ -87,23 +88,8 @@ export const MobileScreen = styled.div`
 `
 export const CardContainer = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
-
-  p {
-    font-size: ${theme.font.sizes.font14};
-    color: ${theme.colors.amber};
-    text-align: left;
-    letter-spacing: 5.6px;
-    letter-spacing: 4px;
-    margin-top: 26px;
-    margin-bottom: 12px;
-  }
-  span {
-    font-size: ${theme.font.sizes.font14};
-    font-weight: ${theme.font.weight.light};
-    line-height: 122.5%;
-    text-align: left;
-  }
 `
 export const Card = styled.div`
   margin: 0 auto;
@@ -141,4 +127,34 @@ export const GradienteDivider = styled.div`
   max-width: 3.5rem;
   height: 0.1rem;
   background: linear-gradient(90deg, #e843c4 0%, #ffbf00 100%);
+`
+//create a card retangle transparent
+export const CardRectangle = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  max-width: 46rem;
+  height: 100%;
+  background: #ffffff0a;
+  border-radius: 1.2rem;
+  padding: 2.4rem;
+  margin: 0 auto 10rem;
+  span {
+    font-size: ${theme.font.sizes.font14};
+    letter-spacing: 0.4rem;
+    margin-bottom: 1rem;
+  }
+  p {
+    font-size: ${theme.font.sizes.font16};
+    font-weight: ${theme.font.weight.light};
+    line-height: 180%;
+  }
+`
+export const CardRectangleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  max-width: 104.2rem;
+  margin: 0 auto;
+  justify-content: space-around;
 `
