@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@apollo/client": "^3.4.17",
     "@datapunt/matomo-tracker-react": "^0.5.1",
     "@metamask/detect-provider": "^1.2.0",
     "@types/big.js": "^6.1.2",
@@ -18,6 +19,7 @@
     "@types/styled-components": "^5.1.11",
     "big.js": "^6.1.1",
     "bn.js": "^5.2.0",
+    "graphql": "^16.0.1",
     "next": "^11.0.1",
     "next-redux-wrapper": "^7.0.2",
     "react": "^17.0.2",
