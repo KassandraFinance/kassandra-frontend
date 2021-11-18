@@ -27,7 +27,10 @@ const SelectInputDefault = ({
     if (poolTokensArray[0].symbol === 'WBTC') {
       setTokenSelected(poolTokensArray[1])
     }
-  }, [title])
+    if (poolTokensArray[0].symbol === 'WETH') {
+      setTokenSelected(poolTokensArray[0])
+    }
+  }, [title, poolTokensArray])
 
   React.useEffect(() => {
     if (title === 'Swap') {
