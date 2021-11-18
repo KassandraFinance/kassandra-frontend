@@ -797,7 +797,7 @@ const Form = ({
         swapInBalance={swapInBalance}
         swapInAmount={swapInAmount}
         swapInAddress={swapInAddress}
-        swapOutAddress={swapOutAddress}
+        tokenDetails={poolTokensArray[tokenInIndex]}
         setSwapInAmount={setSwapInAmount}
         setSwapOutAmount={setSwapOutAmount}
         setSwapInAddress={setSwapInAddress}
@@ -832,11 +832,10 @@ const Form = ({
                 .slice(0, -1)
                 .filter((token: { address: string }) => token.address !== swapInAddress)}
               poolTokensArray={poolTokensArray}
-              title={title}
+              tokenDetails={poolTokensArray[tokenOutIndex]}
               isMax={null}
               swapOutAmount={swapOutAmount[0]}
               swapOutBalance={swapOutBalance[0]}
-              swapInAddress={swapInAddress}
               setSwapOutAddress={setSwapOutAddress}
             />
             <S.ExchangeRate>
@@ -844,10 +843,7 @@ const Form = ({
               <S.SpanLight>
                 {swapOutPrice < new BigNumber(0)
                   ? '...'
-                  : `1 ${poolTokenDetails[tokenInIndex]?.symbol === 'HEIM' ? 
-                    'aHYPE' 
-                    : 
-                    poolTokenDetails[tokenInIndex]?.symbol} = ${BNtoDecimal(
+                  : `1 ${poolTokenDetails[tokenInIndex]?.symbol} = ${BNtoDecimal(
                     swapOutPrice,
                     poolTokenDetails[tokenOutIndex]?.decimals
                   )} ${poolTokenDetails[tokenOutIndex]?.symbol}`}
@@ -865,11 +861,10 @@ const Form = ({
                 .filter((token: { address: string }) => token.address !== swapInAddress)}
             poolTokensArray={poolTokensArray
               .filter((token: { address: string }) => token.address !== swapInAddress)}
-            title={title}
+            tokenDetails={poolTokensArray[tokenOutIndex]}
             isMax={null}
             swapOutAmount={swapOutAmount[0]}
             swapOutBalance={swapOutBalance[0]}
-            swapInAddress={swapInAddress}
             setSwapOutAddress={setSwapOutAddress}
           />
           <S.ExchangeRate>
@@ -880,13 +875,7 @@ const Form = ({
                 : `1 ${poolTokenDetails[tokenInIndex]?.symbol} = ${BNtoDecimal(
                   swapOutPrice,
                   poolTokenDetails[tokenOutIndex]?.decimals
-                )} 
-                  ${poolTokenDetails[tokenOutIndex]?.symbol === 'HEIM' ? 
-                    'aHYPE' 
-                    :
-                    poolTokenDetails[tokenOutIndex]?.symbol
-                    }`
-              }
+                )} ${poolTokenDetails[tokenOutIndex]?.symbol}`}
             </S.SpanLight>
           </S.ExchangeRate>
         </>

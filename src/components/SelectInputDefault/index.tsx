@@ -8,36 +8,15 @@ import * as S from './styles'
 interface ISelectInputDefaultProps {
   poolTokensArray: TokenDetails[];
   setSwapOutAddress: React.Dispatch<React.SetStateAction<string>>;
-  title: string;
-  swapInAddress: string;
+  tokenDetails: TokenDetails;
 }
 
 const SelectInputDefault = ({
   poolTokensArray,
   setSwapOutAddress,
-  swapInAddress,
-  title
+  tokenDetails
 }: ISelectInputDefaultProps) => {
-  const [tokenSelected, setTokenSelected] = React.useState<
-    TokenDetails | undefined
-  >(poolTokensArray[0])
   const [openOptions, setOpenOptions] = React.useState<boolean>(false)
-
-  React.useEffect(() => {
-    if (poolTokensArray[0].symbol === 'WBTC') {
-      setTokenSelected(poolTokensArray[1])
-    }
-    if (poolTokensArray[0].symbol === 'WETH') {
-      setTokenSelected(poolTokensArray[0])
-    }
-  }, [title, poolTokensArray])
-
-  React.useEffect(() => {
-    if (title === 'Swap') {
-      return
-    }
-    setTokenSelected(poolTokensArray[0])
-  }, [swapInAddress])
 
   return (
     <S.SelectToken openOptions={openOptions}>
@@ -45,8 +24,8 @@ const SelectInputDefault = ({
         openOptions={openOptions}
         onClick={() => setOpenOptions(!openOptions)}
       >
-        <img src={tokenSelected?.image} alt="" id="img-token-selected" />
-        {tokenSelected?.symbol}
+        <img src={tokenDetails?.image} alt="" id="img-token-selected" />
+        {tokenDetails?.symbol}
         <img src="assets/arrow-select.svg" alt="" id="arrow-down" />
       </S.Selected>
       {openOptions && (
@@ -58,7 +37,6 @@ const SelectInputDefault = ({
                 <S.Option
                   key={token.symbol}
                   onClick={() => {
-                    setTokenSelected(token)
                     setOpenOptions(false)
                     setSwapOutAddress(token.address)
                   }}

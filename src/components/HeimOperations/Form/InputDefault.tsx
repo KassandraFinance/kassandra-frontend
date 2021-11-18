@@ -14,11 +14,10 @@ interface IInputDefaultProps {
   decimals: BigNumber;
   poolTokens: TokenDetails[];
   poolTokensArray: TokenDetails[];
-  title: string;
+  tokenDetails: TokenDetails;
   isMax: boolean | null;
   swapOutAmount: BigNumber;
   swapOutBalance: BigNumber;
-  swapInAddress: string;
   setSwapOutAddress: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -26,11 +25,10 @@ const InputDefault = ({
   decimals,
   poolTokens,
   poolTokensArray,
-  title,
+  tokenDetails,
   isMax,
   swapOutAmount,
   swapOutBalance,
-  swapInAddress,
   setSwapOutAddress
 }: IInputDefaultProps) => {
   const tokensList = React.useMemo(() => {
@@ -39,8 +37,7 @@ const InputDefault = ({
         <SelectInputDefault
           poolTokensArray={poolTokensArray}
           setSwapOutAddress={setSwapOutAddress}
-          title={title}
-          swapInAddress={swapInAddress}
+          tokenDetails={tokenDetails}
         />
       )
     }
