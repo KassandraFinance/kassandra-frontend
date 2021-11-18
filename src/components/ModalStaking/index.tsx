@@ -45,7 +45,8 @@ const ModalStaking = ({
   const [multiplier, setMultiplier] = React.useState<number>(0)
   const [isAmount, setIsAmount] = React.useState<boolean>(false)
 
-  const { trackProductPageView, trackBuying, trackCancelBuying, trackBought } = useMatomoEcommerce()
+  const { trackProductPageView, trackBuying, trackCancelBuying, trackBought } =
+    useMatomoEcommerce()
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const inputRef = React.useRef<HTMLInputElement>(null)
   const kacyToken = useERC20Contract(stakingToken)

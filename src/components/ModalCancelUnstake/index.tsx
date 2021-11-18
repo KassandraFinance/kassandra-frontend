@@ -47,7 +47,9 @@ const ModalCancelUnstake = ({
           return
         }
 
-        ToastError(`Failed to cancel unstaking of ${symbol}. Please try again later.`)
+        ToastError(
+          `Failed to cancel unstaking of ${symbol}. Please try again later.`
+        )
         return
       }
 
