@@ -5,7 +5,14 @@ import Form from './Form'
 
 import * as S from './styles'
 
-const HeimOperations = () => {
+interface IOperationsProps {
+  crpPoolAddress: string;
+  corePoolAddress: string;
+  poolName: string;
+  productCategories: string | string[];
+}
+
+const HeimOperations = ({ crpPoolAddress, corePoolAddress, poolName, productCategories }: IOperationsProps) => {
   const messages = {
     Invest: 'Pay with',
     Withdraw: 'Send',
@@ -101,6 +108,10 @@ const HeimOperations = () => {
           </S.TypeWithdraw>
         }
           <Form
+            crpPoolAddress={crpPoolAddress}
+            corePoolAddress={corePoolAddress}
+            poolName={poolName}
+            productCategories={productCategories}
             title={inputChecked}
             typeWithdrawChecked={typeWithdrawChecked}
             typeAction={messages[inputChecked]}

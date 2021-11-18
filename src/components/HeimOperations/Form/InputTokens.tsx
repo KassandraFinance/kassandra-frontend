@@ -15,11 +15,11 @@ interface IInputEthProps {
   actionString: string;
   poolTokens: TokenDetails[];
   poolTokensArray: TokenDetails[];
+  tokenDetails: TokenDetails;
   title: string;
   decimals: BigNumber;
   swapInBalance: BigNumber;
   swapInAmount: BigNumber;
-  swapOutAddress: string;
   swapInAddress: string;
   setSwapInAddress: React.Dispatch<React.SetStateAction<string>>;
   setSwapInAmount: React.Dispatch<React.SetStateAction<BigNumber>>;
@@ -30,12 +30,12 @@ const InputTokens = ({
   actionString,
   poolTokens,
   poolTokensArray,
+  tokenDetails,
   title,
   decimals,
   swapInBalance,
   swapInAmount,
   swapInAddress,
-  swapOutAddress,
   setSwapInAddress,
   setSwapInAmount,
   setSwapOutAmount
@@ -49,7 +49,7 @@ const InputTokens = ({
         <SelectInputTokens
           poolTokensArray={poolTokensArray}
           setSwapInAddress={setSwapInAddress}
-          swapOutAddress={swapOutAddress}
+          tokenDetails={tokenDetails}
         />
       )
     }
@@ -57,7 +57,9 @@ const InputTokens = ({
     return (
       <S.Symbol>
         <img src="assets/avalanche_social_index_logo.svg" alt="" />
-        {poolTokens.length > 0 && poolTokens[0] !== undefined ? 'aHYPE' : '...'}
+        {poolTokens.length > 0 && poolTokens[0] !== undefined
+          ? poolTokens[0].symbol
+          : '...'}
       </S.Symbol>
     )
   }, [poolTokens])

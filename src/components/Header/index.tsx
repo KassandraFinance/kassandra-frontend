@@ -90,16 +90,16 @@ const Header = () => {
       <S.Wrapper pageHeim={asPath === '/heim'}>
         <S.MenuIconContainer>
           <S.IconWrapper onClick={() => setIsOpen(true)}>
-            <img src="assets/menuIcon.svg" alt="" />
+            <img src="/assets/menuIcon.svg" alt="" />
           </S.IconWrapper>
         </S.MenuIconContainer>
 
         <S.LogoWrapper>
           <Link href="/" passHref>
             {asPath === '/heim' ? (
-              <img src="./assets/HeimLogoMenu.svg" alt="Logo menu" />
+              <img src="/assets/HeimLogoMenu.svg" alt="Logo menu" />
             ) : (
-              <img src="./assets/new-kassandra-logo-header.svg" alt="Logo menu" />
+              <img src="/assets/new-kassandra-logo-header.svg" alt="Logo menu" />
             )}
           </Link>
         </S.LogoWrapper>
@@ -181,7 +181,7 @@ const Header = () => {
 
         <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen}>
           <S.CloseMenuIcon onClick={() => setIsOpen(false)}>
-            <img src="assets/closeMenuIcon.svg" alt="" />
+            <img src="/assets/closeMenuIcon.svg" alt="" />
           </S.CloseMenuIcon>
           <S.MenuNav>
 

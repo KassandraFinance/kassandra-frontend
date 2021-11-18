@@ -2,11 +2,18 @@
 import React from 'react'
 import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
+import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
 
 import { Staking } from '../../constants/tokenAddresses'
-import { confirmWithdraw } from '../../utils/confirmTransactions'
 import { BNtoDecimal } from '../../utils/numerals'
+import waitTransaction, {
+  MetamaskError,
+  TransactionCallback
+} from '../../utils/txWait'
+
+import useERC20Contract from '../../hooks/useERC20Contract'
 import useStakingContract from '../../hooks/useStakingContract'
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
 import InputTokenValue from '../InputTokenValue'
 
@@ -19,13 +26,17 @@ interface IModalStakingProps {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   pid: number;
   decimals: string;
+  stakingToken: string;
+  productCategories: string | string[];
 }
 
 const ModalUnstaking = ({
   modalOpen,
   setModalOpen,
   pid,
-  decimals
+  decimals,
+  stakingToken,
+  productCategories
 }: IModalStakingProps) => {
   const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
   const [multiplier, setMultiplier] = React.useState<number>(0)
@@ -38,7 +49,9 @@ const ModalUnstaking = ({
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
+  const { trackBuying, trackCancelBuying, trackBought } = useMatomoEcommerce()
   const kacyStake = useStakingContract(Staking)
+  const tokenContract = useERC20Contract(stakingToken)
 
   function handleKacyAmount(percentage: BigNumber) {
     const kacyAmount = percentage.mul(balance).div(new BigNumber(100))
@@ -55,12 +68,7 @@ const ModalUnstaking = ({
   }
 
   function handleConfirm() {
-    kacyStake.withdraw(
-      pid,
-      amountUnstaking,
-      confirmWithdraw,
-      'Pending Withdraw'
-    )
+    kacyStake.withdraw(pid, amountUnstaking, withdrawCallback)
   }
 
   async function get() {
@@ -87,6 +95,37 @@ const ModalUnstaking = ({
     setMultiplier(0)
     handleKacyAmount(new BigNumber(0))
   }, [modalOpen])
+
+  const withdrawCallback = React.useCallback((): TransactionCallback => {
+    const productSKU = `${Staking}_${pid}`
+
+    return async (error: MetamaskError, txHash: string) => {
+      const tokenName = await tokenContract.name()
+      trackBuying(productSKU, tokenName, 0, productCategories)
+      const tokenSymbol = await tokenContract.symbol()
+
+      if (error) {
+        trackCancelBuying()
+
+        if (error.code === 4001) {
+          ToastError(`Unstaking of ${tokenSymbol} cancelled`)
+          return
+        }
+
+        ToastError(`Failed to unstake ${tokenSymbol}. Please try again later.`)
+        return
+      }
+
+      trackBought(productSKU, 0, 0)
+      ToastWarning(`Confirming unstake of ${tokenSymbol}...`)
+      const txReceipt = await waitTransaction(txHash)
+
+      if (txReceipt.status) {
+        ToastSuccess(`Unstake of ${tokenSymbol} completed`)
+        return
+      }
+    }
+  }, [stakingToken])
 
   return (
     <>

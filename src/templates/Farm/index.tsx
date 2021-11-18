@@ -6,6 +6,7 @@ import { Staking } from '../../constants/tokenAddresses'
 import web3 from '../../utils/web3'
 
 import useConnect from '../../hooks/useConnect'
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 import useStakingContract from '../../hooks/useStakingContract'
 
 import Web3Disabled from '../../components/Web3Disabled'
@@ -27,6 +28,7 @@ const StakeFarm = () => {
   const [loading, setLoading] = React.useState<boolean>(true)
   const [isMobile, setIsMobile] = React.useState<boolean>(false)
   
+  const { trackCategoryPageView } = useMatomoEcommerce()
   const kacyStake = useStakingContract(Staking)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
@@ -47,6 +49,8 @@ const StakeFarm = () => {
 
 
   React.useEffect(() => {
+    trackCategoryPageView(['Stake', 'Ropsten'])
+
     const device = localStorage.getItem('device')
     setIsMobile(device === 'isMobile')
 

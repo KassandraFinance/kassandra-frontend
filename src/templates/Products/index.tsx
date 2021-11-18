@@ -3,6 +3,8 @@ import { useSelector, RootStateOrAny } from 'react-redux'
 
 import web3 from '../../utils/web3'
 
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce';
+
 import Header from '../../components/Header'
 import ChartProducts from '../../components/ChartProducts'
 import HeimOperations from '../../components/HeimOperations'
@@ -19,13 +21,27 @@ declare let window: {
   ethereum: any,
 }
 
-const Products = () => {
+interface IProductsProps {
+  crpPoolAddress: string;
+  corePoolAddress: string;
+  productName: string;
+  productSymbol: string;
+  productCategories: string | string[];
+}
+
+const Products = ({
+  crpPoolAddress,
+  corePoolAddress,
+  productName,
+  productSymbol,
+  productCategories
+}: IProductsProps) => {
   const [chainId, setChainId] = React.useState<string>('')
   const [loading, setLoading] = React.useState<boolean>(true)
   const [isMobile, setIsMobile] = React.useState<boolean>(false)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-
+  const { trackProductPageView } = useMatomoEcommerce()
 
   async function getChainId() {
     if (web3.currentProvider === null) {
@@ -41,6 +57,8 @@ const Products = () => {
   }, [userWalletAddress])
 
   React.useEffect(() => {
+    trackProductPageView(crpPoolAddress, productName, productCategories)
+
     const device = localStorage.getItem('device')
     setIsMobile(device === 'isMobile')
 
@@ -52,7 +70,7 @@ const Products = () => {
   return (
     <S.BackgroundProducts>
       <Header />
-      {loading &&
+      {loading && (
         <h1
           style={{
             height: '90vh',
@@ -64,16 +82,24 @@ const Products = () => {
         >
           Loading...
         </h1>
-      }
-       {web3.currentProvider !== null && userWalletAddress && chainId === "0x3" && !loading && !isMobile ?
+      )}
+      {web3.currentProvider !== null &&
+      userWalletAddress &&
+      chainId === '0x3' &&
+      !loading &&
+      !isMobile ? (
         <S.Product>
           <S.ProductDetails>
             <S.Intro>
-              <img src="assets/avalanche_social_index_logo.svg" width={75}  alt="" />
+              <img
+                src="/assets/avalanche_social_index_logo.svg"
+                width={75}
+                alt=""
+              />
               <S.NameIndex>
                 <S.NameAndSymbol>
-                  <h1>Avalanche Social Index</h1>
-                  <h3>$aHYPE</h3>
+                  <h1>{productName}</h1>
+                  <h3>${productSymbol}</h3>
                 </S.NameAndSymbol>
                 <p>by HEIMDALL.land</p>
               </S.NameIndex>
@@ -81,23 +107,33 @@ const Products = () => {
             <S.Line />
             <S.IntroCharts>
               <S.IndexData>
-                <span>TVL <img src="assets/info-gray.svg" alt="" /></span>
+                <span>
+                  TVL <img src="/assets/info-gray.svg" alt="" />
+                </span>
                 <h2>$785,345.67</h2>
               </S.IndexData>
               <S.IndexData>
-                <span>VOLUME (24h) <img src="assets/info-gray.svg" alt="" /></span>
+                <span>
+                  VOLUME (24h) <img src="/assets/info-gray.svg" alt="" />
+                </span>
                 <h2>$868.4M</h2>
               </S.IndexData>
               <S.IndexData>
-                <span>APY <img src="assets/info-gray.svg" alt="" /></span>
+                <span>
+                  APY <img src="/assets/info-gray.svg" alt="" />
+                </span>
                 <h2>12%</h2>
               </S.IndexData>
               <S.IndexData>
-                <span>fees <img src="assets/info-gray.svg" alt="" /></span>
+                <span>
+                  fees <img src="/assets/info-gray.svg" alt="" />
+                </span>
                 <h2>$345.65</h2>
               </S.IndexData>
               <S.IndexData>
-                <span>rewards <img src="assets/info-gray.svg" alt="" /></span>
+                <span>
+                  rewards <img src="/assets/info-gray.svg" alt="" />
+                </span>
                 <h2>40%</h2>
               </S.IndexData>
             </S.IntroCharts>
@@ -107,9 +143,14 @@ const Products = () => {
             <Distribution />
             <TokenDescription />
           </S.ProductDetails>
-          <HeimOperations />
+          <HeimOperations
+            crpPoolAddress={crpPoolAddress}
+            corePoolAddress={corePoolAddress}
+            poolName={productName}
+            productCategories={productCategories}
+          />
         </S.Product>
-        :
+      ) : (
         <>
           {isMobile && (
             <Web3Disabled
@@ -127,7 +168,7 @@ const Products = () => {
               type="install"
             />
           )}
-          {!userWalletAddress && chainId === "0x3" && !loading && !isMobile && (
+          {!userWalletAddress && chainId === '0x3' && !loading && !isMobile && (
             <Web3Disabled
               textButton="Connect Wallet"
               textHeader="Wallet connection to the Ropsten network is required"
@@ -135,16 +176,19 @@ const Products = () => {
               type="connect"
             />
           )}
-          {web3.currentProvider !== null && chainId !== "0x3" && !loading && !isMobile && (
-            <Web3Disabled
-              textButton="Connect to Ropsten"
-              textHeader="Your wallet is set to the wrong network."
-              bodyText="Please switch to the Ropsten network to have access to all our staking pools"
-              type="changeChain"
-            />
-          )}
+          {web3.currentProvider !== null &&
+            chainId !== '0x3' &&
+            !loading &&
+            !isMobile && (
+              <Web3Disabled
+                textButton="Connect to Ropsten"
+                textHeader="Your wallet is set to the wrong network."
+                bodyText="Please switch to the Ropsten network to have access to all our staking pools"
+                type="changeChain"
+              />
+            )}
         </>
-      }
+      )}
     </S.BackgroundProducts>
   )
 }
