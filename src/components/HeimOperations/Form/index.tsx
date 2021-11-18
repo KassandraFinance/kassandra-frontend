@@ -35,8 +35,8 @@ interface IFormProps {
   typeAction: string;
   title: string;
   typeWithdrawChecked: string;
-  crpPoolContract: string
-  corePoolContract: string
+  crpPoolAddress: string
+  corePoolAddress: string
   poolName: string
   productCategories: string | string[]
 }
@@ -46,17 +46,17 @@ interface Address2Index {
 }
 
 const Form = ({ 
-  crpPoolContract,
-  corePoolContract,
+  crpPoolAddress,
+  corePoolAddress,
   poolName,
   productCategories,
   typeAction, 
   title, 
   typeWithdrawChecked,
 }: IFormProps) => {
-  const crpPoolToken = useERC20Contract(crpPoolContract)
-  const corePool = usePoolContract(corePoolContract)
-  const crpPool = useCRPContract(crpPoolContract)
+  const crpPoolToken = useERC20Contract(crpPoolAddress)
+  const corePool = usePoolContract(corePoolAddress)
+  const crpPool = useCRPContract(crpPoolAddress)
   const { poolTokensArray, userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { connect } = useConnect()
   const dispatch = useDispatch()
@@ -168,7 +168,7 @@ const Form = ({
         newAllocation.push(corePool.normalizedWeight(newPoolTokens[i]))
       }
 
-      newAddresses.push(crpPoolContract)
+      newAddresses.push(crpPoolAddress)
       newNames.push(crpPoolToken.name())
       newSymbols.push(crpPoolToken.symbol())
       newDecimals.push(crpPoolToken.decimals())
@@ -193,7 +193,7 @@ const Form = ({
       calc(newPoolTokens)
       setTokenAddress2Index(
         newPoolTokens.reduce((acc, cur, i) => ({ [cur]: i, ...acc }), {
-          [crpPoolContract]: newPoolTokens.length
+          [crpPoolAddress]: newPoolTokens.length
         })
       )
     })
@@ -208,10 +208,10 @@ const Form = ({
     switch (title) {
       case 'Invest':
         newSwapInAddress = poolTokens[0] || ''
-        newSwapOutAddress = crpPoolContract
+        newSwapOutAddress = crpPoolAddress
         break
       case 'Withdraw':
-        newSwapInAddress = crpPoolContract
+        newSwapInAddress = crpPoolAddress
         newSwapOutAddress = typeWithdrawChecked === "Single_asset" ? poolTokens[0] : ''
         break
       case 'Swap':
@@ -239,7 +239,7 @@ const Form = ({
       for (let i = 0; i < poolTokens.length; i += 1) {
         newApprovals.push(
           ERC20(poolTokens[i]).allowance(
-            title === 'Invest' ? crpPoolContract : corePoolContract,
+            title === 'Invest' ? crpPoolAddress : corePoolAddress,
             userWalletAddress
           )
         )
@@ -350,7 +350,7 @@ const Form = ({
       title !== 'Invest' ||
       swapInAddress.length === 0 ||
       swapOutAddress.length === 0 ||
-      swapInAddress === crpPoolContract
+      swapInAddress === crpPoolAddress
     ) {
       return
     }
@@ -406,8 +406,8 @@ const Form = ({
       title !== 'Swap' ||
       swapInAddress.length === 0 ||
       swapOutAddress.length === 0 ||
-      swapInAddress === crpPoolContract ||
-      swapOutAddress === crpPoolContract
+      swapInAddress === crpPoolAddress ||
+      swapOutAddress === crpPoolAddress
     ) {
       return
     }
@@ -448,7 +448,7 @@ const Form = ({
 
   // calculate withdraw
   React.useEffect(() => {
-    if (title !== 'Withdraw' || swapOutAddress === crpPoolContract) {
+    if (title !== 'Withdraw' || swapOutAddress === crpPoolAddress) {
       return
     }
 
@@ -612,7 +612,7 @@ const Form = ({
         }
       }
     },
-    [crpPoolContract]
+    [crpPoolAddress]
   )
 
   const swapCallback = React.useCallback(
@@ -677,14 +677,14 @@ const Form = ({
           case 'Invest':
             if (approved.value === '0') {
               ERC20(swapInAddressVal).approve(
-                crpPoolContract,
+                crpPoolAddress,
                 walletAddress.value,
                 approvalCallback()
               )
               return
             }
 
-            trackBuying(crpPoolContract, poolName, amountInUSD, productCategories)
+            trackBuying(crpPoolAddress, poolName, amountInUSD, productCategories)
             crpPool.joinswapExternAmountIn(
               swapInAddressVal,
               swapInAmountVal,
@@ -694,7 +694,7 @@ const Form = ({
             return
 
           case 'Withdraw':
-            trackBuying(crpPoolContract, poolName, -1 * amountInUSD, productCategories)
+            trackBuying(crpPoolAddress, poolName, -1 * amountInUSD, productCategories)
 
             if (swapOutAddressVal !== '') {
               crpPool.exitswapPoolAmountIn(
@@ -717,7 +717,7 @@ const Form = ({
           case 'Swap':
             if (approved.value === '0') {
               ERC20(swapInAddressVal).approve(
-                corePoolContract,
+                corePoolAddress,
                 walletAddress.value,
                 approvalCallback()
               )

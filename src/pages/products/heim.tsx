@@ -5,10 +5,11 @@ import { HeimCRPPOOL, HeimCorePool } from '../../constants/tokenAddresses'
 export default function Index() {
   return (
     <Products
-      productName="Heimdall Social Index"
+      productName="Avalanche Social Index"
+      productSymbol="aHYPE"
       productCategories={['Ropsten', 'Pool']}
-      crpPool={HeimCRPPOOL}
-      corePool={HeimCorePool}
+      crpPoolAddress={HeimCRPPOOL}
+      corePoolAddress={HeimCorePool}
     />
   )
 }
