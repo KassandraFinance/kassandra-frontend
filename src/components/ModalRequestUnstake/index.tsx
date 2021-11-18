@@ -8,15 +8,7 @@ import { confirmUnstake } from '../../utils/confirmTransactions'
 import { Staking } from '../../constants/tokenAddresses'
 import useStakingContract from '../../hooks/useStakingContract'
 
-import {
-  Backdrop,
-  ModalContainer,
-  Top,
-  Attention,
-  Close,
-  ButtonContainer,
-  Content
-} from './styles'
+import * as S from './styles'
 
 interface IModalRequestUnstakeProps {
   modalOpen: boolean;
@@ -39,36 +31,41 @@ const ModalRequestUnstake = ({
 
   return (
     <>
-      <Backdrop
+      <S.Backdrop
         onClick={() => setModalOpen(false)}
         style={{ display: modalOpen ? 'block' : 'none' }}
       />
-      <ModalContainer modalOpen={modalOpen}>
-        <Top>
-          <Attention>
+      <S.ModalContainer modalOpen={modalOpen}>
+        <S.Top>
+          <S.Attention>
             <img src="assets/IconNotification/warning.svg" alt="" />
             <p>Attention!</p>
-          </Attention>
-          <Close type="button" onClick={() => setModalOpen(false)}>
+          </S.Attention>
+          <S.Close type="button" onClick={() => setModalOpen(false)}>
             <img src="assets/close.svg" alt="" />
-          </Close>
-        </Top>
-        <Content>
+          </S.Close>
+        </S.Top>
+        <S.Content>
           <p>Withdrawal will be available on:</p>
           <span>{dateRequestUnstake(withdrawDelay)}</span>
           <p>
             During the withdrawal delay period your voting power will be reduced
             from:
           </p>
-          <span>
-            {BNtoDecimal(
-              new BigNumber(votingMultiplier).mul(yourStake),
-              new BigNumber(18)
-            )}{' '}
-            to {BNtoDecimal(new BigNumber(yourStake), new BigNumber(18))}
-          </span>
+          <S.Values>
+            <span>
+              {BNtoDecimal(
+                new BigNumber(votingMultiplier).mul(yourStake),
+                new BigNumber(18)
+              )}
+            </span>
+            <span style={{ fontWeight: 300, margin: '0 8px' }}>to</span>
+            <span>
+              {BNtoDecimal(new BigNumber(yourStake), new BigNumber(18))}
+            </span>
+          </S.Values>
           <p>Do you want to proceed?</p>
-          <ButtonContainer>
+          <S.ButtonContainer>
             <button type="button" onClick={() => setModalOpen(false)}>
               No
             </button>
@@ -81,9 +78,9 @@ const ModalRequestUnstake = ({
             >
               Yes
             </button>
-          </ButtonContainer>
-        </Content>
-      </ModalContainer>
+          </S.ButtonContainer>
+        </S.Content>
+      </S.ModalContainer>
     </>
   )
 }
