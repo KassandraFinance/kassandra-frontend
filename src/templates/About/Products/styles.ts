@@ -287,3 +287,71 @@ export const KassandraCard = styled.div`
     width: 100%;
   }
 `
+export const Responsabilities = styled.section`
+  display: flex;
+  max-width: 1000px;
+  margin: 0 auto;
+  @media (max-width: 960px) {
+    flex-direction: column;
+    padding: 0 32px;
+    margin: 24px 0;
+  }
+`
+export const ResponsabilitiesTitle = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-right: 80px;
+  max-width: 220px;
+  h1 {
+    font-size: 36px;
+    line-height: 104%;
+    font-weight: ${theme.font.weight.semibold};
+  }
+  @media (max-width: 960px) {
+    margin: 0 auto;
+    margin-bottom: 30px;
+  }
+`
+export const ResponsabilitiesDivider = styled.div`
+  max-width: 100px;
+  border: 1px solid ${theme.colors.cyan};
+  margin-block: 18px;
+`
+export const ResponsabilitiesCards = styled.div`
+  margin-right: 40px;
+  max-width: 140px;
+  span {
+    display: inline-block;
+    margin-top: 26px;
+    font-size: ${theme.font.sizes.font16};
+    font-weight: ${theme.font.weight.light};
+    line-height: 104%;
+    @media (max-width: 960px) {
+      margin-bottom: 24px;
+      max-width: 100px;
+    }
+  }
+`
+export const MobileCards = styled.div`
+  @media (min-width: 961px) {
+    display: flex;
+  }
+  @media (max-width: 960px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0 auto;
+  }
+`
+export const IconWrapper = styled.div`
+  background-color: rgba(255, 255, 255, 0.1);
+  max-width: auto;
+  width: 78px;
+  height: 73px;
+  border-radius: 12px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  img {
+    max-width: 28px;
+  }
+`
