@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
+import { useRouter } from 'next/router'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
 import web3 from '../../utils/web3'
@@ -15,6 +16,7 @@ import Change from './Change'
 import Summary from './Summary'
 import Distribution from './Distribution'
 import TokenDescription from './TokenDescription'
+import { selectProduct } from './product'
 
 import * as S from './styles'
 
@@ -30,19 +32,16 @@ interface IProductsProps {
   productCategories: string | string[];
 }
 
-const Products = ({
-  crpPoolAddress,
-  corePoolAddress,
-  productName,
-  productSymbol,
-  productCategories
-}: IProductsProps) => {
+const Products = () => {
   const [chainId, setChainId] = React.useState<string>('')
   const [loading, setLoading] = React.useState<boolean>(true)
   const [isMobile, setIsMobile] = React.useState<boolean>(false)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { trackProductPageView } = useMatomoEcommerce()
+  const { asPath } = useRouter()
+
+  const product: IProductsProps = selectProduct(asPath)
 
   async function getChainId() {
     if (web3.currentProvider === null) {
@@ -58,7 +57,11 @@ const Products = ({
   }, [userWalletAddress])
 
   React.useEffect(() => {
-    trackProductPageView(crpPoolAddress, productName, productCategories)
+    trackProductPageView(
+      product.crpPoolAddress, 
+      product.productName, 
+      product.productCategories
+    )
 
     const device = localStorage.getItem('device')
     setIsMobile(device === 'isMobile')
@@ -99,8 +102,8 @@ const Products = ({
               />
               <S.NameIndex>
                 <S.NameAndSymbol>
-                  <h1>{productName}</h1>
-                  <h3>${productSymbol}</h3>
+                  <h1>{product.productName}</h1>
+                  <h3>${product.productSymbol}</h3>
                 </S.NameAndSymbol>
                 <p>by HEIMDALL.land</p>
               </S.NameIndex>
@@ -145,10 +148,10 @@ const Products = ({
             <TokenDescription />
           </S.ProductDetails>
           <HeimOperations
-            crpPoolAddress={crpPoolAddress}
-            corePoolAddress={corePoolAddress}
-            poolName={productName}
-            productCategories={productCategories}
+            crpPoolAddress={product.crpPoolAddress}
+            corePoolAddress={product.corePoolAddress}
+            poolName={product.productName}
+            productCategories={product.productCategories}
           />
         </S.Product>
       ) : (
