@@ -85,6 +85,9 @@ export const KassandraToken = styled.section`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center -100px;
+  img {
+    width: 100%;
+  }
 
   @media (max-width: 960px) {
     display: flex;

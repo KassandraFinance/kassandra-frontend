@@ -4,6 +4,9 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import Hero from './Hero'
 import Products from './Products'
+import HowItWorks from './HowItWorks'
+import TokenPriceComponent from '../../components/TokenPrice/indes'
+import Team from './Team'
 
 import * as S from './styles'
 
@@ -18,6 +21,9 @@ const About = () => {
     <>
       <Hero />
       <Products />
+      <HowItWorks />
+      <TokenPriceComponent />
+      <Team />
     </>
   )
 }
