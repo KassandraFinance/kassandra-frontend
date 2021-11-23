@@ -64,7 +64,7 @@ export const Link = styled.a`
   display: flex;
   text-decoration: none;
   max-width: 290px;
-  margin: 2.4rem auto;
+  margin: 2.4rem auto 15rem;
   cursor: pointer;
   a {
     display: flex;
