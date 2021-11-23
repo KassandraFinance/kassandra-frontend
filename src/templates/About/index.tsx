@@ -10,6 +10,7 @@ import Team from './Team'
 import Partners from './Partners'
 
 import * as S from './styles'
+import FAQ from './FAQ'
 
 const About = () => {
   const { trackPageView } = useMatomo()
@@ -26,6 +27,7 @@ const About = () => {
       <TokenPriceComponent />
       <Team />
       <Partners />
+      <FAQ />
     </>
   )
 }

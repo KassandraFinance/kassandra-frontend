@@ -6,7 +6,7 @@ export const Container = styled.section`
   justify-content: space-between;
   align-items: center;
   max-width: 94.3rem;
-  margin: 0 auto;
+  margin: 0 auto 9rem;
   border-bottom: 1px solid #ffffff24;
 `
 

@@ -26,7 +26,6 @@ export const Hero = styled.section`
 `
 export const Divider = styled.div`
   max-width: 10rem;
-
   border: 1px solid #f79640;
   margin-top: 2.4rem;
   margin-bottom: 2.4rem;
