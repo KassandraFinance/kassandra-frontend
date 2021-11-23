@@ -7,6 +7,7 @@ import Products from './Products'
 import HowItWorks from './HowItWorks'
 import TokenPriceComponent from '../../components/TokenPrice/indes'
 import Team from './Team'
+import Partners from './Partners'
 
 import * as S from './styles'
 
@@ -24,6 +25,7 @@ const About = () => {
       <HowItWorks />
       <TokenPriceComponent />
       <Team />
+      <Partners />
     </>
   )
 }
