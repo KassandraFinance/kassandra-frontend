@@ -92,8 +92,45 @@ export const CardContainer = styled.div`
   justify-content: center;
   column-gap: 32px;
   @media (max-width: 960px) {
-    row-gap: 32px;
-    column-gap: 24px;
+    row-gap: 40px;
+    max-width: 100%;
+  }
+
+  @media (max-width: 500px) {
+    grid-template-columns: 1fr;
+  }
+`
+export const Card = styled.div`
+  margin: 0 auto;
+  @media (max-width: 500px) {
+    display: inline-table;
+    max-width: 100%;
+    margin: 0;
+  }
+`
+export const IconWrapper = styled.div`
+  background-color: rgba(255, 255, 255, 0.1);
+  max-width: auto;
+  margin: auto;
+  width: 75px;
+  height: 75px;
+  border-radius: 12px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  margin-bottom: 26px;
+`
+export const CardTextWrapper = styled.div`
+  @media (max-width: 960px) {
+    max-width: 195px;
+  }
+  @media (max-width: 500px) {
+    max-width: 195px;
+    margin-left: 24px;
+  }
+  @media (max-width: 320px) {
+    max-width: 195px;
+    margin-left: 24px;
   }
   p {
     font-size: ${theme.font.sizes.font14};
@@ -103,9 +140,10 @@ export const CardContainer = styled.div`
     letter-spacing: 4px;
     margin-top: 26px;
     margin-bottom: 12px;
-    @media (max-width: 450px) {
+    @media (max-width: 500px) {
       font-size: ${theme.font.sizes.font12};
       letter-spacing: 0.95px;
+      margin-top: 0;
     }
   }
   span {
@@ -113,30 +151,8 @@ export const CardContainer = styled.div`
     font-weight: ${theme.font.weight.light};
     line-height: 122.5%;
     text-align: left;
-    @media (max-width: 450px) {
-      font-size: ${theme.font.sizes.font14};
+    @media (max-width: 320px) {
+      font-size: ${theme.font.sizes.font12};
     }
   }
-`
-export const Card = styled.div`
-  margin: 0 auto;
-  @media (max-width: 800px) {
-    max-width: 100%;
-    margin: 0;
-  }
-  @media (max-width: 450px) {
-    max-width: 130px;
-  }
-`
-export const IconWrapper = styled.div`
-  background-color: rgba(255, 255, 255, 0.1);
-  max-width: auto;
-  margin: auto;
-  width: 78px;
-  height: 73px;
-  border-radius: 12px;
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-  margin-bottom: 26px;
 `

@@ -51,31 +51,37 @@ const Products = () => {
           <S.IconWrapper>
             <img src="assets/home-products-locker.png" alt="" />
           </S.IconWrapper>
-          <>
+          <S.CardTextWrapper>
             <p>NON-CUSTODIAL</p>
             <span>Your funds managed by public, secure, and predictable smart-contracts</span>
-          </>
+          </S.CardTextWrapper >
         </S.Card>
         <S.Card>
           <S.IconWrapper>
             <img src="assets/home-products-check.png" alt="" />
           </S.IconWrapper>
-          <p>PERMISSIONLESS</p>
-          <span>Invest, transfer and redeem investment products without relying on third-parties</span>
+          <S.CardTextWrapper>
+            <p>PERMISSIONLESS</p>
+            <span>Invest, transfer and redeem investment products without relying on third-parties</span>
+          </S.CardTextWrapper >
         </S.Card>
         <S.Card>
           <S.IconWrapper>
             <img src="assets/home-products-gift.png" alt="" />
           </S.IconWrapper>
-          <p>REWARD</p>
-          <span>Earn governance token rewards while investing in smart strategies</span>
+          <S.CardTextWrapper>
+            <p>REWARD</p>
+            <span>Earn governance token rewards while investing in smart strategies</span>
+          </S.CardTextWrapper >
         </S.Card>
         <S.Card>
           <S.IconWrapper>
             <img src="assets/home-products-graph.png" alt="" />
           </S.IconWrapper>
-          <p>ACTIVELY MANAGED</p>
-          <span>Outsource your money management to data models</span>
+          <S.CardTextWrapper>
+            <p>ACTIVELY MANAGED</p>
+            <span>Outsource your money management to data models</span>
+          </S.CardTextWrapper >
         </S.Card>
       </S.CardContainer>
     </S.Products>
