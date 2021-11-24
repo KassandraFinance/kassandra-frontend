@@ -51,8 +51,10 @@ const Products = () => {
           <S.IconWrapper>
             <img src="assets/home-products-locker.png" alt="" />
           </S.IconWrapper>
-          <p>NON-CUSTODIAL</p>
-          <span>Your funds managed by public, secure, and predictable smart-contracts</span>
+          <>
+            <p>NON-CUSTODIAL</p>
+            <span>Your funds managed by public, secure, and predictable smart-contracts</span>
+          </>
         </S.Card>
         <S.Card>
           <S.IconWrapper>
