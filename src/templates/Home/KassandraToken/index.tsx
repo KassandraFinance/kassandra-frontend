@@ -10,7 +10,7 @@ const KassandraToken = () => {
       <S.KassandraToken>
         <S.KassandraInfo>
           <p>KASSANDRA TOKEN</p>
-          <h1>Be part of the Kassandra ecosystem with $KACY</h1>
+          <h1>be part of the Kassandra ecosystem with $KACY</h1>
           <span>Take the lead and join the first decentralized fund manager through our decentralized governance protocol</span>
           <S.Content>
             {/* <div>
