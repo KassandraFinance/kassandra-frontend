@@ -8,7 +8,8 @@ export const Background = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: 50%;
-  padding: 100px 30px;
+  padding: 0 32px;
+  margin: 0 0 40px;
 `
 
 export const Container = styled.section`
