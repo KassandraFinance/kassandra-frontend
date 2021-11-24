@@ -5,7 +5,7 @@ export const Background = styled.div`
   margin: 0 auto 5.4rem;
   @media (max-width: 100rem) {
     text-align: center;
-    padding: 1.6rem 1.6rem;
+    padding: 0 1.6rem;
     margin: 0 auto 2.4rem;
   }
 `
@@ -24,6 +24,8 @@ export const Container = styled.section`
 
   @media (max-width: 100rem) {
     text-align: center;
+    padding: 2.4rem;
+
     /* padding: 1.6rem 1.6rem; */
   }
 `
@@ -62,6 +64,10 @@ export const TitleAndImage = styled.div`
   img {
     max-width: 3rem;
     margin-left: 0.6rem;
+    @media (max-width: 44rem) {
+      transform: translateY(10%);
+      max-width: 2rem;
+    }
   }
 `
 export const TimerContainer = styled.div`
