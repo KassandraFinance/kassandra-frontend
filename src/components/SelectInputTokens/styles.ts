@@ -43,9 +43,11 @@ export const Selected = styled.div<ISelectedProps>`
 
   #img-token-selected {
     margin-right: 8px;
+    margin-bottom: -4px;
   }
   #arrow-down {
     margin-left: auto;
+    margin-bottom: 4px;
   }
 `
 
@@ -77,8 +79,7 @@ export const Option = styled.div`
   padding: 3px 0;
   cursor: pointer;
 
-  img {
-    max-width: 21px;
+  .img {
     margin: 0 8px;
   }
 

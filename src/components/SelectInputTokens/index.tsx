@@ -1,7 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
+import Image from 'next/image'
 
 import { TokenDetails } from '../../store/modules/poolTokens/types'
+
+import arrow from '../../../public/assets/arrow-select.svg'
+import none from '../../../public/assets/coming-soon.svg'
 
 import * as S from './styles'
 
@@ -24,9 +28,18 @@ const SelectInputTokens = ({
         openOptions={openOptions}
         onClick={() => setOpenOptions(!openOptions)}
       >
-        <img src={tokenDetails?.image} alt="" id="img-token-selected" />
+        <div id="img-token-selected">
+          <Image
+            src={tokenDetails?.image || none}
+            alt="arrow"
+            width={22}
+            height={22}
+          />
+        </div>
         {tokenDetails?.symbol}
-        <img src="assets/arrow-select.svg" alt="" id="arrow-down" />
+        <div id="arrow-down">
+          <Image src={arrow} alt="arrow" />
+        </div>
       </S.Selected>
       {openOptions && (
         <>
@@ -41,7 +54,15 @@ const SelectInputTokens = ({
                     setOpenOptions(false)
                   }}
                 >
-                  <img src={token.image} alt="" />
+                  <div className="img">
+                    <Image
+                      src={token.image || none}
+                      alt="arrow"
+                      className="img"
+                      width={22}
+                      height={22}
+                    />
+                  </div>
                   {token.symbol}
                 </S.Option>
               ))}
