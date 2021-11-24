@@ -21,11 +21,17 @@ export const TextWrapper = styled.div`
     font-weight: ${theme.font.weight.black};
     line-height: 110%;
     margin-bottom: 16px;
+    @media (max-width: 960px) {
+      margin-bottom: 24px;
+    }
   }
   span {
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.light};
     line-height: 155%;
+  }
+  @media (max-width: 960px) {
+    margin-bottom: 16px;
   }
 `
 export const Input = styled.div`
