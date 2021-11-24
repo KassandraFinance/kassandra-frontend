@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
+import useSWR from 'swr'
 import { useRouter } from 'next/router'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
@@ -11,6 +12,8 @@ import Header from '../../components/Header'
 import ChartProducts from '../../components/ChartProducts'
 import HeimOperations from '../../components/HeimOperations'
 import Web3Disabled from '../../components/Web3Disabled'
+
+import { TOKENS_QUERY } from './graphql'
 
 import Change from './Change'
 import Summary from './Summary'
@@ -36,10 +39,12 @@ const Products = () => {
   const [chainId, setChainId] = React.useState<string>('')
   const [loading, setLoading] = React.useState<boolean>(true)
   const [isMobile, setIsMobile] = React.useState<boolean>(false)
+  const [poolInfo, setPoolInfo] = React.useState<any>({})
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { trackProductPageView } = useMatomoEcommerce()
   const { asPath } = useRouter()
+  const { data } = useSWR(TOKENS_QUERY)
 
   const product: IProductsProps = selectProduct(asPath)
 
@@ -51,6 +56,12 @@ const Products = () => {
     const id = await window.ethereum.request({ method: 'eth_chainId' })
     setChainId(id)
   }
+
+  React.useEffect(() => {
+    if (data) {
+      setPoolInfo(data.pool)
+    }
+  }, [data])
 
   React.useEffect(() => {
     getChainId()
@@ -102,8 +113,8 @@ const Products = () => {
               />
               <S.NameIndex>
                 <S.NameAndSymbol>
-                  <h1>{product.productName}</h1>
-                  <h3>${product.productSymbol}</h3>
+                  <h1>{poolInfo.name}</h1>
+                  <h3>${poolInfo.symbol}</h3>
                 </S.NameAndSymbol>
                 <p>by HEIMDALL.land</p>
               </S.NameIndex>
@@ -114,7 +125,10 @@ const Products = () => {
                 <span>
                   TVL <img src="/assets/info-gray.svg" alt="" />
                 </span>
-                <h2>$785,345.67</h2>
+                <h2>{Number(poolInfo.total_value_locked_usd).toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: 'USD',
+                  })}</h2>
               </S.IndexData>
               <S.IndexData>
                 <span>

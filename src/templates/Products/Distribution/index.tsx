@@ -22,15 +22,20 @@ import * as S from './styles'
 // }
 
 const Distribution = () => {
-  const { pool } = useSWR(TOKENS_IN_POOL).data
+  const [tokensInPool, setTokensInPool] = React.useState([])
+  const { data } = useSWR(TOKENS_IN_POOL)
 
-  pool.weights[0].weights.sort(
-    (a: { weight_normalized: string }, b: { weight_normalized: string }) => {
-      return (
-        Number(b.weight_normalized) * 100 - Number(a.weight_normalized) * 100
-      )
-    }
-  )
+  React.useEffect(() => {
+    const filterWithwWightNormalized = data?.pool.weights[0].weights.sort(
+      (a: { weight_normalized: string }, b: { weight_normalized: string }) => {
+        return (
+          Number(b.weight_normalized) * 100 - Number(a.weight_normalized) * 100
+        )
+      }
+    )
+
+    setTokensInPool(filterWithwWightNormalized)
+  }, [data])
 
   return (
     <S.Distribution>
@@ -49,7 +54,7 @@ const Distribution = () => {
           </S.Tr>
         </thead>
         <tbody>
-          {pool.weights[0].weights.map((item: any, index: any) => (
+          {tokensInPool?.map((item: any, index: any) => (
             <S.Tr key={`distribution_${item.token.id}`}>
               <S.Td change24h={false}>
                 <S.Coin width={110}>
