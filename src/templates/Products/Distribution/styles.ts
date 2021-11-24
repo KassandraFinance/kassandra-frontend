@@ -111,5 +111,6 @@ export const Coin = styled.div<ICoinProps>`
 
   span {
     font-weight: 400;
+    margin-left: 8px;
   }
 `

@@ -7,9 +7,7 @@ import Big from 'big.js'
 
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 import { EventData } from 'web3-eth-contract'
-import { useQuery } from '@apollo/client'
 
-import { TOKENS_QUERY } from './graphql'
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
 import { actionGetPoolTokens } from '../../../store/modules/poolTokens/actions'
 
@@ -90,11 +88,6 @@ const Form = ({
   const listCoinPool = res && JSON.parse(res)
 
   const [coinInfoList, setCoinInfoList] = React.useState<TokenDetails[]>(listCoinPool || [])
-
-  const { data, loading, error } = useQuery(TOKENS_QUERY);
-  console.log(data)
-  console.log(loading)
-  console.log(error)
 
   // get data coinGecko
   async function getCoinList() {

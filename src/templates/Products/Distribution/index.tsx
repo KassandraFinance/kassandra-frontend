@@ -1,27 +1,34 @@
 import React from 'react'
-import { useSelector, RootStateOrAny } from 'react-redux'
+import useSWR from 'swr'
+import Image from 'next/image'
+
+import { TOKENS_IN_POOL } from '../graphql'
+
+import none from '../../../../public/assets/coming-soon.svg'
 
 import * as S from './styles'
 
-interface ICoin {
-  image: string | undefined;
-  symbol: string;
-  allocation: number;
-  market_data: {
-    current_price: {
-      usd: number;
-    };
-    price_change_percentage_24h: number;
-  };
-  address: string;
-}
+// interface ICoin {
+//   image: string | undefined;
+//   symbol: string;
+//   allocation: number;
+//   market_data: {
+//     current_price: {
+//       usd: number
+//     },
+//     price_change_percentage_24h: number
+//   };
+//   address: string;
+// }
 
 const Distribution = () => {
-  const { poolTokensArray } = useSelector((state: RootStateOrAny) => state)
+  const { pool } = useSWR(TOKENS_IN_POOL).data
 
-  poolTokensArray.sort(
-    (a: { allocation: number }, b: { allocation: number }) => {
-      return b.allocation - a.allocation
+  pool.weights[0].weights.sort(
+    (a: { weight_normalized: string }, b: { weight_normalized: string }) => {
+      return (
+        Number(b.weight_normalized) * 100 - Number(a.weight_normalized) * 100
+      )
     }
   )
 
@@ -41,28 +48,26 @@ const Distribution = () => {
             <S.Th>Change 24h</S.Th>
           </S.Tr>
         </thead>
-        {console.log(poolTokensArray)}
         <tbody>
-          {poolTokensArray.map((coin: ICoin) => (
-            <S.Tr key={`distribution_${coin.address}`}>
+          {pool.weights[0].weights.map((item: any, index: any) => (
+            <S.Tr key={`distribution_${item.token.id}`}>
               <S.Td change24h={false}>
                 <S.Coin width={110}>
-                  <img src={coin.image} alt="" />
-                  <span>{coin.symbol.toLocaleUpperCase()}</span>
+                  <Image src={none} alt="none" width={28} height={28} />
+                  <span>{item.token.symbol.toLocaleUpperCase()}</span>
                 </S.Coin>
               </S.Td>
               <S.Td change24h={false}>
-                <S.Coin width={60}>{`${coin.allocation}%`}</S.Coin>
+                <S.Coin width={60}>{`${Number(
+                  item.weight_normalized * 100
+                ).toFixed(2)}%`}</S.Coin>
               </S.Td>
-              <S.Td change24h={false}>
-                {`${coin.market_data.current_price.usd.toFixed(2)} USD`}
-              </S.Td>
-              <S.Td
-                negative={coin.market_data.price_change_percentage_24h < 0}
-                change24h={true}
-              >
+              <S.Td change24h={false}>{`${Number(item.token.price_usd).toFixed(
+                2
+              )} USD`}</S.Td>
+              <S.Td negative={index % 2 !== 0} change24h={true}>
                 <S.Coin width={50}>
-                  {`${coin.market_data.price_change_percentage_24h.toFixed(2)}%`}
+                  {index % 2 === 0 ? '2.76%' : '-0.53'}
                 </S.Coin>
               </S.Td>
             </S.Tr>
