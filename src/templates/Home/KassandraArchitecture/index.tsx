@@ -7,7 +7,7 @@ const KassandraArchitecture = () => {
     <S.Token>
       <p>DAO MEMBER BENEFITS</p>
       <S.Divider />
-      <h1>Earn with Kassandra management</h1>
+      <h1>earn with Kassandra management</h1>
       <span>Joining a decentralized organization shouldn't be about responsibilities, but about earning money with it</span>
       <S.KassandraCardWrapper>
         <S.KassandraCard className="firstCard">
