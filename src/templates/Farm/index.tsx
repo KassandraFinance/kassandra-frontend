@@ -82,9 +82,9 @@ const StakeFarm = () => {
               <S.NameStake>
                 <S.Name>
                   <img src="assets/stake-with-vote.svg" alt="" />
-                  <h1>Stake With Power Vote</h1>
+                  <h1>Stake KACY</h1>
                 </S.Name>
-                <p>Stake $KACY to earn $KACY + Voting Power</p>
+                <p>EARN REWARDS AND VOTING POWER</p>
               </S.NameStake>
               <VotingPower
                 getTotalVotes={kacyStake.totalVotes}
@@ -136,9 +136,9 @@ const StakeFarm = () => {
             <S.NameStake left={true} style={{ margin: '100px 0 50px' }}>
               <S.Name>
                 <img src="assets/stake-money-withdraw.svg" alt="" />
-                <h1>Other Staking Pools</h1>
+                <h1>FARM KACY</h1>
               </S.Name>
-              <p>Stake $KACY to earn $KACY + Voting Power</p>
+              <p>EARN KACY BY STAKING OTHER ASSETS</p>
             </S.NameStake>
             <S.GridStaking>
               <StakeCard

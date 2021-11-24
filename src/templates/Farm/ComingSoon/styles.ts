@@ -24,7 +24,11 @@ export const BorderGradient = styled.div`
     bottom: 0;
     border-radius: ${theme.border.radius};
     padding: 1px;
-    background: linear-gradient(-45deg, ${theme.colors.blue} 0%, ${theme.colors.cyan} 100%);
+    background: linear-gradient(
+      -45deg,
+      ${theme.colors.blue} 0%,
+      ${theme.colors.cyan} 100%
+    );
     -webkit-mask: linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: destination-out;
@@ -33,19 +37,23 @@ export const BorderGradient = styled.div`
 `
 
 export const ComingSoon = styled.div`
-	background: linear-gradient(95.32deg, rgba(38, 219, 219, 0.18) 0%, rgba(12, 61, 220, 0.18) 100%);
+  background: linear-gradient(
+    95.32deg,
+    rgba(38, 219, 219, 0.18) 0%,
+    rgba(12, 61, 220, 0.18) 100%
+  );
   border-radius: 6px;
 
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	
-	width: 100%;
-	height: 100%;
-	h2 {
-		font-size: ${theme.font.sizes.font24};
-		font-weight: ${theme.font.weight.normal};
-		text-transform: uppercase;
-	}
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+  h2 {
+    font-size: ${theme.font.sizes.font24};
+    font-weight: ${theme.font.weight.normal};
+    text-transform: uppercase;
+  }
 `
