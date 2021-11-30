@@ -1,14 +1,17 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import { XAxis, Tooltip, AreaChart, Area, ResponsiveContainer } from 'recharts'
 
+import { getDate } from '../../utils/date'
+
 import TooltipCustomized from './TooltipCustomized'
 
-const Chart = ({ data, color }: any) => {
+const ChartPrice = (props: any) => {
   return (
     <ResponsiveContainer width="100%" height={360}>
       <AreaChart
-        data={data}
+        data={props.data}
         style={{
           backgroundColor: 'rgba(255, 255, 255, 0.04)',
           border: '1px solid rgba(255, 255, 255, 0.04)',
@@ -19,19 +22,19 @@ const Chart = ({ data, color }: any) => {
       >
         <defs>
           <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor={color} stopOpacity={0.3} />
-            <stop offset="100%" stopColor={color} stopOpacity={0} />
+            <stop offset="0%" stopColor={props.color} stopOpacity={0.3} />
+            <stop offset="100%" stopColor={props.color} stopOpacity={0} />
           </linearGradient>
         </defs>
         <XAxis
-          dataKey="time"
+          dataKey="timestamp"
           axisLine={false}
           tickLine={false}
-          tickFormatter={time => time}
+          tickFormatter={time => getDate(time)}
           minTickGap={6}
         />
         <Tooltip
-          cursor={{ stroke: color }}
+          cursor={{ stroke: props.color }}
           contentStyle={{ display: 'none' }}
           position={{ x: 20, y: 60 }}
           // formatter={(props: { payload: { time: string; value: number } }) => {
@@ -40,8 +43,8 @@ const Chart = ({ data, color }: any) => {
         />
         <Area
           type="monotone"
-          dataKey="value"
-          stroke={color}
+          dataKey="close"
+          stroke={props.color}
           fillOpacity={1}
           fill="url(#colorUv)"
         />
@@ -50,4 +53,4 @@ const Chart = ({ data, color }: any) => {
   )
 }
 
-export default Chart
+export default ChartPrice
