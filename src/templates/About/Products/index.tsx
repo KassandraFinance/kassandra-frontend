@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
 
 import * as S from './styles'
 
@@ -245,6 +244,53 @@ const Products = () => {
           </S.CardFooter>
         </S.KassandraCard>
       </S.KassandraToken>
+      <S.Responsabilities>
+        <S.ResponsabilitiesTitle>
+          <S.ResponsabilitiesDivider />
+          <h1>What will you build?</h1>
+        </S.ResponsabilitiesTitle>
+
+        <S.MobileCards>
+          <S.ResponsabilitiesCards>
+            <S.IconWrapper>
+              <img src="assets/adjustIcon.png" alt="" />
+            </S.IconWrapper>
+            <span>
+              {' '}
+              <b>Adjust</b> parameters and fees
+            </span>
+          </S.ResponsabilitiesCards>
+
+          <S.ResponsabilitiesCards>
+            <S.IconWrapper>
+              <img src="assets/deployInvest.png" alt="" />
+            </S.IconWrapper>
+
+            <span>
+              {' '}
+              <b>Deploy</b> new investment products
+            </span>
+          </S.ResponsabilitiesCards>
+
+          <S.ResponsabilitiesCards>
+            <S.IconWrapper>
+              <img src="assets/curatingIcon.png" alt="" />
+            </S.IconWrapper>
+            <span>
+              <b>Curate</b> whitelists for investable assets
+            </span>
+          </S.ResponsabilitiesCards>
+
+          <S.ResponsabilitiesCards>
+            <S.IconWrapper>
+              <img src="assets/approvingIcon.png" alt="" />
+            </S.IconWrapper>
+            <span>
+              <b>Approve</b> code changes and updates
+            </span>
+          </S.ResponsabilitiesCards>
+        </S.MobileCards>
+      </S.Responsabilities>
     </S.Container>
   )
 }

@@ -45,7 +45,7 @@ export const Text = styled.section`
     margin-bottom: ${theme.spacings.space16};
   }
   ol {
-    display:inline-block;
+    display: inline-block;
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.light};
     list-style: decimal;

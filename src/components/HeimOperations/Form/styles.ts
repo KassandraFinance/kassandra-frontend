@@ -150,10 +150,18 @@ export const Symbol = styled.h3<ISymbolProps>`
     props.bestValue ? theme.font.sizes.font16 : theme.font.sizes.font20};
   font-weight: ${theme.font.weight.normal};
 
-  margin: ${props => (props.bestValue ? '16px 0 8px' : '8px 0')};
+  margin: ${props => (props.bestValue ? '16px 8px 8px 0' : '8px 0')};
   img {
     width: 22px;
-    margin: 8px;
+    margin: 0 8px 0 0;
+  }
+
+  .img {
+    margin-right: 8px;
+  }
+
+  span {
+    margin-left: 8px;
   }
   
   @media(max-width: 380px) {
@@ -395,4 +403,7 @@ export const InputBestValueGrid = styled.div`
 export const BestValueItem = styled.div`
   width: 100%;
   height: 74px;
+  .image {
+    margin-right: 8px !important;
+  }
 `

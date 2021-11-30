@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
+import Image from 'next/image'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 
@@ -7,6 +8,8 @@ import { TokenDetails } from '../../../store/modules/poolTokens/types'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 import { priceDollar } from '../../../utils/priceDollar'
+
+import none from '../../../../public/assets/coming-soon.svg'
 
 import * as S from './styles'
 
@@ -49,6 +52,15 @@ const InputBestValue = ({
           <S.InputBestValueGrid key={`best_value_${token.address}`}>
             <S.BestValueItem>
               <S.Symbol bestValue>
+                {console.log(token.image)}
+                <div className="image">
+                  <Image
+                    src={token.image || none}
+                    alt={`Imagem on ${token.symbol}`}
+                    width={22}
+                    height={22}
+                  />
+                </div>
                 {BNtoDecimal(
                   swapOutAmount[index] || new BigNumber(0),
                   token.decimals

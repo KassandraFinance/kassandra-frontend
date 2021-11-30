@@ -1,4 +1,7 @@
 import React from 'react'
+import Image from 'next/image'
+
+import iconBar from '../../../../public/assets/iconbar.svg'
 
 import * as S from './styles'
 
@@ -6,7 +9,7 @@ const Change = () => {
   return (
     <S.Change>
       <S.Title>
-        <img src="assets/iconbar.svg" alt="-" />
+        <Image src={iconBar} alt="Icon Bar" />
         <h2>Change</h2>
       </S.Title>
       <table>

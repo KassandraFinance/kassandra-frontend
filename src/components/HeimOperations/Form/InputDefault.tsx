@@ -1,6 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import BigNumber from 'bn.js'
+import Image from 'next/image'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 
@@ -8,13 +8,14 @@ import { TokenDetails } from '../../../store/modules/poolTokens/types'
 
 import SelectInputDefault from '../../SelectInputDefault'
 
+import avaxSocial from '../../../../public/assets/avalanche_social_index_logo.svg'
+
 import * as S from './styles'
 
 interface IInputDefaultProps {
   decimals: BigNumber;
   poolTokens: TokenDetails[];
   poolTokensArray: TokenDetails[];
-  title: string;
   isMax: boolean | null;
   swapOutAmount: BigNumber;
   swapOutBalance: BigNumber;
@@ -26,7 +27,6 @@ const InputDefault = ({
   decimals,
   poolTokens,
   poolTokensArray,
-  title,
   isMax,
   swapOutAmount,
   swapOutBalance,
@@ -39,7 +39,6 @@ const InputDefault = ({
         <SelectInputDefault
           poolTokensArray={poolTokensArray}
           setSwapOutAddress={setSwapOutAddress}
-          title={title}
           swapInAddress={swapInAddress}
         />
       )
@@ -47,8 +46,12 @@ const InputDefault = ({
 
     return (
       <S.Symbol>
-        <img src="assets/avalanche_social_index_logo.svg" alt="" />
-        {poolTokens.length > 0 && poolTokens[0] !== undefined ? 'aHYPE' : '...'}
+        <div className="img">
+          <Image src={avaxSocial} alt="avax-social" width={22} height={22} />
+        </div>
+        {poolTokens.length > 0 && poolTokens[0] !== undefined
+          ? poolTokens[0].symbol
+          : '...'}
       </S.Symbol>
     )
   }, [poolTokens])
@@ -88,7 +91,6 @@ const InputDefault = ({
             Max
           </S.ButtonMax>
         )}
-        {isMax === null && <div style={{ height: '17px' }} />}
       </S.AmountDefault>
     </S.InputDefaultContainer>
   )

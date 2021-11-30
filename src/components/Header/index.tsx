@@ -16,6 +16,7 @@ import useConnect from '../../hooks/useConnect'
 
 import Button from '../Button'
 import ModalLogOut from '../ModalLogOut'
+import DropdownInvest from '../DropdownInvest'
 import ModalWalletConnect from '../ModalWalletConnect'
 
 import * as S from './styles'
@@ -90,16 +91,16 @@ const Header = () => {
       <S.Wrapper pageHeim={asPath === '/heim'}>
         <S.MenuIconContainer>
           <S.IconWrapper onClick={() => setIsOpen(true)}>
-            <img src="assets/menuIcon.svg" alt="" />
+            <img src="/assets/menuIcon.svg" alt="" />
           </S.IconWrapper>
         </S.MenuIconContainer>
 
         <S.LogoWrapper>
           <Link href="/" passHref>
             {asPath === '/heim' ? (
-              <img src="./assets/HeimLogoMenu.svg" alt="Logo menu" />
+              <img src="/assets/HeimLogoMenu.svg" alt="Logo menu" />
             ) : (
-              <img src="./assets/new-kassandra-logo-header.svg" alt="Logo menu" />
+              <img src="/assets/new-kassandra-logo-header.svg" alt="Logo menu" />
             )}
           </Link>
         </S.LogoWrapper>
@@ -116,9 +117,7 @@ const Header = () => {
             </Link>
           )} */}
 
-          <Link href="/products" passHref>
-            <S.MenuLink onClick={() => clickMatomoEvent('click-on-link', 'invest')}>Invest</S.MenuLink>
-          </Link>
+          <DropdownInvest />
 
           <Link href="/farm" passHref>
             <S.MenuLink onClick={() => clickMatomoEvent('click-on-link', 'stake-farm')}>Stake/Farm</S.MenuLink>
@@ -128,9 +127,9 @@ const Header = () => {
             <S.MenuLinkDisable onClick={() => clickMatomoEvent('click-on-link', 'vote')} >Vote</S.MenuLinkDisable>
           {/* </Link> */}
 
-          {/* <Link href="/" passHref> */}
-            <S.MenuLinkDisable onClick={() => clickMatomoEvent('click-on-link', 'about')}>About</S.MenuLinkDisable>
-          {/* </Link> */}
+          <Link href="/about" passHref>
+            <S.MenuLink onClick={() => clickMatomoEvent('click-on-link', 'about')}>About</S.MenuLink>
+          </Link>
 
           {web3.currentProvider !== null ? (
             userWalletAddress ? (
@@ -181,7 +180,7 @@ const Header = () => {
 
         <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen}>
           <S.CloseMenuIcon onClick={() => setIsOpen(false)}>
-            <img src="assets/closeMenuIcon.svg" alt="" />
+            <img src="/assets/closeMenuIcon.svg" alt="" />
           </S.CloseMenuIcon>
           <S.MenuNav>
 

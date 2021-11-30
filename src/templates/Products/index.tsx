@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
 import web3 from '../../utils/web3'
@@ -8,6 +9,11 @@ import ChartProducts from '../../components/ChartProducts'
 import HeimOperations from '../../components/HeimOperations'
 import Web3Disabled from '../../components/Web3Disabled'
 
+import avaxSocial from '../../../public/assets/avalanche_social_index_logo.svg'
+import infoGray from '../../../public/assets/info-gray.svg'
+
+
+
 import Change from './Change'
 import Summary from './Summary'
 import Distribution from './Distribution'
@@ -15,6 +21,7 @@ import TokenDescription from './TokenDescription'
 
 import * as S from './styles'
 
+// eslint-disable-next-line prettier/prettier
 declare let window: {
   ethereum: any,
 }
@@ -69,7 +76,7 @@ const Products = () => {
         <S.Product>
           <S.ProductDetails>
             <S.Intro>
-              <img src="assets/avalanche_social_index_logo.svg" width={75}  alt="" />
+              <Image src={avaxSocial} alt="tooltip" width={75} height={75} />
               <S.NameIndex>
                 <S.NameAndSymbol>
                   <h1>Avalanche Social Index</h1>
@@ -81,23 +88,23 @@ const Products = () => {
             <S.Line />
             <S.IntroCharts>
               <S.IndexData>
-                <span>TVL <img src="assets/info-gray.svg" alt="" /></span>
+                <span>TVL <Image src={infoGray} alt="tooltip" /></span>
                 <h2>$785,345.67</h2>
               </S.IndexData>
               <S.IndexData>
-                <span>VOLUME (24h) <img src="assets/info-gray.svg" alt="" /></span>
+                <span>VOLUME (24h) <Image src={infoGray} alt="tooltip" /></span>
                 <h2>$868.4M</h2>
               </S.IndexData>
               <S.IndexData>
-                <span>APY <img src="assets/info-gray.svg" alt="" /></span>
+                <span>APY <Image src={infoGray} alt="tooltip" /></span>
                 <h2>12%</h2>
               </S.IndexData>
               <S.IndexData>
-                <span>fees <img src="assets/info-gray.svg" alt="" /></span>
+                <span>fees <Image src={infoGray} alt="tooltip" /></span>
                 <h2>$345.65</h2>
               </S.IndexData>
               <S.IndexData>
-                <span>rewards <img src="assets/info-gray.svg" alt="" /></span>
+                <span>rewards <Image src={infoGray} alt="tooltip" /></span>
                 <h2>40%</h2>
               </S.IndexData>
             </S.IntroCharts>

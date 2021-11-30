@@ -1,6 +1,10 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import CopyToClipboard from 'react-copy-to-clipboard'
+
+import iconBar from '../../../../public/assets/iconbar.svg'
+import avalancheIcon from '../../../../public/assets/avalancheIcon.svg'
 
 import { HeimCorePool } from '../../../constants/tokenAddresses'
 import substr from '../../../utils/substr'
@@ -15,42 +19,43 @@ const Summary = () => {
     //   title: '',
     //   description: 'Link copiado!',
     // });
-    alert("Link copiado!")
-  };
+    alert('Link copiado!')
+  }
 
   return (
     <S.Summary>
       <S.Title>
-        <img src="assets/iconbar.svg" alt="-" />
+        <Image src={iconBar} alt="Icon Bar" />
         <h2>Summary</h2>
       </S.Title>
       <S.Line />
       <p>
-        The Social Index $HEIM reflects the performance of a portfolio 
-        selected from the most socially active cryptocurrencies in the 
-        past 30 days, using Heimdall Social Score data.
+        The Social Index $HEIM reflects the performance of a portfolio selected
+        from the most socially active cryptocurrencies in the past 30 days,
+        using Heimdall Social Score data.
       </p>
       <S.LinkContent>
-        <a  href="https://coinmarketcap.com/">View In CoinMarketCap <img src="assets/externalLink.svg" alt="" /></a>
+        <a href="https://coinmarketcap.com/">
+          View In CoinMarketCap <img src="assets/externalLink.svg" alt="" />
+        </a>
         <Link href="/heim">
-          <a>Discover Heim <img src="assets/externalLink.svg" alt="" /></a> 
+          <a>
+            Discover Heim <img src="assets/externalLink.svg" alt="" />
+          </a>
         </Link>
       </S.LinkContent>
       <p style={{ margin: '20px 0 10px' }}>CONTRACT</p>
       <S.CopyContract>
         <S.Blockchain>
-          <img
-            src="assets/avalancheIcon.svg"
-            alt=""
-            width="1503"
-            height="1504"
-          />
+          <div className="image">
+            <Image src={avalancheIcon} alt="Icon Bar" />
+          </div>
           <span>Avalanche C-Chain</span>
         </S.Blockchain>
         <CopyToClipboard text={HeimCorePool}>
           <button type="button" onClick={handleCopyLink}>
             {substr(HeimCorePool)}
-            <img src="assets/copy.svg" alt="" style={{ marginLeft: '16px' }} />
+            <img src="/assets/copy.svg" alt="" style={{ marginLeft: '16px' }} />
           </button>
         </CopyToClipboard>
       </S.CopyContract>

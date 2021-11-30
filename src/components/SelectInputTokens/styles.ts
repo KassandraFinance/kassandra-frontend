@@ -24,7 +24,7 @@ export const SelectToken = styled.div<ISelectedProps>`
 
   font-size: ${theme.font.sizes.font20};
 
-  width: 128px;
+  max-width: 128px;
   margin: 8px 0;
 `
 
@@ -34,6 +34,7 @@ export const Selected = styled.div<ISelectedProps>`
   display: flex;
   align-items: center;
 
+  width: 128px;
   cursor: pointer;
   padding: 3px 8px;
 
@@ -46,6 +47,7 @@ export const Selected = styled.div<ISelectedProps>`
   }
   #arrow-down {
     margin-left: auto;
+    margin-bottom: 4px;
   }
 `
 

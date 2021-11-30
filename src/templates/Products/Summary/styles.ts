@@ -91,7 +91,7 @@ export const CopyContract = styled.div`
 export const Blockchain = styled.div`
   display: flex;
   align-items: flex-end;
-  img {
+  .image {
     height: 18px;
     width: 18px;
     margin-right: 16px;

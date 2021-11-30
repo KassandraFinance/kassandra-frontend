@@ -1,6 +1,6 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable prettier/prettier */
 import React from 'react'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
@@ -661,7 +661,6 @@ const Form = ({
         decimals={poolTokenDetails[tokenInIndex] ? poolTokenDetails[tokenInIndex].decimals : new BigNumber(18)}
         swapInBalance={swapInBalance}
         swapInAmount={swapInAmount}
-        swapOutAddress={swapOutAddress}
         setSwapInAmount={setSwapInAmount}
         setSwapOutAmount={setSwapOutAmount}
         setSwapInAddress={setSwapInAddress}
@@ -688,7 +687,6 @@ const Form = ({
                 .slice(0, -1)
                 .filter((token: { address: string }) => token.address !== swapInAddress)}
               poolTokensArray={poolTokensArray}
-              title={title}
               isMax={null}
               swapOutAmount={swapOutAmount[0]}
               swapOutBalance={swapOutBalance[0]}
@@ -718,7 +716,6 @@ const Form = ({
                 .filter((token: { address: string }) => token.address !== swapInAddress)}
             poolTokensArray={poolTokensArray
               .filter((token: { address: string }) => token.address !== swapInAddress)}
-            title={title}
             isMax={null}
             swapOutAmount={swapOutAmount[0]}
             swapOutBalance={swapOutBalance[0]}

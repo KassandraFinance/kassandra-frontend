@@ -1,23 +1,29 @@
 import React from 'react'
+import Image from 'next/image'
+
 import { useSelector, RootStateOrAny } from 'react-redux'
+
+import iconBar from '../../../../public/assets/iconbar.svg'
 
 import * as S from './styles'
 
 const Distribution = () => {
   const { poolTokensArray } = useSelector((state: RootStateOrAny) => state)
 
-  poolTokensArray.sort((a: { allocation: number }, b: { allocation: number }) => {
-    return b.allocation - a.allocation;
-  });
+  poolTokensArray.sort(
+    (a: { allocation: number }, b: { allocation: number }) => {
+      return b.allocation - a.allocation
+    }
+  )
 
   return (
     <S.Distribution>
       <S.Title>
-        <img src="assets/iconbar.svg" alt="-" />
+        <Image src={iconBar} alt="Icon Bar" />
         <h2>Distribution</h2>
       </S.Title>
       <S.Line />
-      <S.Table >
+      <S.Table>
         <thead>
           <S.Tr>
             <S.Th>Coin</S.Th>
@@ -27,8 +33,17 @@ const Distribution = () => {
           </S.Tr>
         </thead>
         <tbody>
-          {
-            poolTokensArray.map((coin: { name: any; image: string | undefined; symbol: string; allocation: any; market_data: { current_price: { usd: number }; price_change_percentage_24h: number } }) => (
+          {poolTokensArray.map(
+            (coin: {
+              name: any,
+              image: string | undefined,
+              symbol: string,
+              allocation: any,
+              market_data: {
+                current_price: { usd: number },
+                price_change_percentage_24h: number
+              }
+            }) => (
               <S.Tr key={`key_${coin.name}`}>
                 <S.Td change24h={false}>
                   <S.Coin width={110}>
@@ -37,9 +52,7 @@ const Distribution = () => {
                   </S.Coin>
                 </S.Td>
                 <S.Td change24h={false}>
-                  <S.Coin width={60}>
-                    {`${coin.allocation}%`}
-                  </S.Coin>
+                  <S.Coin width={60}>{`${coin.allocation}%`}</S.Coin>
                 </S.Td>
                 <S.Td change24h={false}>
                   {`${coin.market_data.current_price.usd.toFixed(2)} USD`}
@@ -49,12 +62,14 @@ const Distribution = () => {
                   change24h={true}
                 >
                   <S.Coin width={50}>
-                    {`${coin.market_data.price_change_percentage_24h.toFixed(2)}%`}
+                    {`${coin.market_data.price_change_percentage_24h.toFixed(
+                      2
+                    )}%`}
                   </S.Coin>
                 </S.Td>
               </S.Tr>
-            ))
-          }
+            )
+          )}
         </tbody>
       </S.Table>
     </S.Distribution>

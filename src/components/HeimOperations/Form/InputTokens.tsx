@@ -1,13 +1,15 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import BigNumber from 'bn.js'
+import Image from 'next/image'
 
-import { BNtoDecimal } from '../../../utils/numerals'
+import { BNtoDecimal, wei } from '../../../utils/numerals'
 
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
 import InputTokenValue from '../../InputTokenValue'
 
 import SelectInputTokens from '../../SelectInputTokens'
+
+import avaxSocial from '../../../../public/assets/avalanche_social_index_logo.svg'
 
 import * as S from './styles'
 
@@ -19,7 +21,6 @@ interface IInputEthProps {
   decimals: BigNumber;
   swapInBalance: BigNumber;
   swapInAmount: BigNumber;
-  swapOutAddress: string;
   setSwapInAddress: React.Dispatch<React.SetStateAction<string>>;
   setSwapInAmount: React.Dispatch<React.SetStateAction<BigNumber>>;
   setSwapOutAmount: React.Dispatch<React.SetStateAction<BigNumber[]>>;
@@ -33,13 +34,13 @@ const InputTokens = ({
   decimals,
   swapInBalance,
   swapInAmount,
-  swapOutAddress,
   setSwapInAddress,
   setSwapInAmount,
   setSwapOutAmount
 }: IInputEthProps) => {
-  const inputRef = React.useRef<HTMLInputElement>(null)
   const [maxActive, setMaxActive] = React.useState<boolean>(false)
+
+  const inputRef = React.useRef<HTMLInputElement>(null)
 
   const tokensList = React.useMemo(() => {
     if (poolTokens.length > 1) {
@@ -47,13 +48,16 @@ const InputTokens = ({
         <SelectInputTokens
           poolTokensArray={poolTokensArray}
           setSwapInAddress={setSwapInAddress}
-          swapOutAddress={swapOutAddress}
+          title={title}
         />
       )
     }
 
     return (
       <S.Symbol>
+        <div className="img">
+          <Image src={avaxSocial} alt="avax-social" width={22} height={22} />
+        </div>
         {poolTokens.length > 0 && poolTokens[0] !== undefined
           ? poolTokens[0].symbol
           : '...'}
@@ -62,7 +66,9 @@ const InputTokens = ({
   }, [poolTokens])
 
   const wei2String = (input: BigNumber) => {
-    return BNtoDecimal(input, decimals).replace(/ /g, '')
+    const decimal = input.mod(wei).toString()
+
+    return `${input.div(wei).toString()}${decimal === '0' ? '' : `.${decimal}`}`
   }
 
   const setMax = () => {
@@ -86,7 +92,6 @@ const InputTokens = ({
   const clearInput = () => {
     setSwapInAmount(new BigNumber(0))
     setSwapOutAmount([new BigNumber(0)])
-    setMaxActive(false)
 
     if (inputRef.current !== null) {
       inputRef.current.value = '0'

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
@@ -14,7 +15,7 @@ import StakeCard from '../../components/StakeCard'
 
 import ComingSoon from './ComingSoon'
 import Header from '../../components/Header'
-import BannerCTA from '../../components/BannerCTA'
+// import BannerCTA from '../../components/BannerCTA'
 
 import * as S from './styles'
 
@@ -166,7 +167,7 @@ const StakeFarm = () => {
               <ComingSoon />
             </S.GridStaking>
           </S.StakeFarm>
-          <BannerCTA />
+          {/* <BannerCTA /> */}
         </>
         :
         <>

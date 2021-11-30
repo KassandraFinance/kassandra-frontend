@@ -1,24 +1,26 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable prettier/prettier */
 import React from 'react'
+import Image from 'next/image'
 
 import { TokenDetails } from '../../store/modules/poolTokens/types'
+
+import arrow from '../../../public/assets/arrow-select.svg'
+import none from '../../../public/assets/coming-soon.svg'
 
 import * as S from './styles'
 
 interface ISelectInputTokensProps {
   poolTokensArray: TokenDetails[];
   setSwapInAddress: React.Dispatch<React.SetStateAction<string>>;
-  swapOutAddress: string;
+  title: string;
 }
 
 const SelectInputTokens = ({
   poolTokensArray,
   setSwapInAddress,
-  swapOutAddress
+  title
 }: ISelectInputTokensProps) => {
-  const [tokenSelected, setTokenSelected] = React.useState<
-    TokenDetails | undefined
-  >(poolTokensArray[0])
+  const [tokenSelected, setTokenSelected] = React.useState<TokenDetails | undefined>(poolTokensArray[0])
   const [openOptions, setOpenOptions] = React.useState<boolean>(false)
 
   React.useEffect(() => {
@@ -29,7 +31,7 @@ const SelectInputTokens = ({
 
   React.useEffect(() => {
     setTokenSelected(poolTokensArray[0])
-  }, [swapOutAddress])
+  }, [title])
 
   return (
     <S.SelectToken openOptions={openOptions}>
@@ -37,9 +39,18 @@ const SelectInputTokens = ({
         openOptions={openOptions}
         onClick={() => setOpenOptions(!openOptions)}
       >
-        <img src={tokenSelected?.image} alt="" id="img-token-selected" />
+        <div className="img" id="img-token-selected">
+          <Image
+            src={tokenSelected?.image || none}
+            alt={`${tokenSelected?.symbol}-image`}
+            width={22}
+            height={22}
+          />
+        </div>
         {tokenSelected?.symbol}
-        <img src="assets/arrow-select.svg" alt="" id="arrow-down" />
+        <div id="arrow-down">
+          <Image src={arrow} alt="arrow"  />
+        </div>
       </S.Selected>
       {openOptions && (
         <>

@@ -9,6 +9,7 @@ export const BackgroundStakeFarm = styled.div`
   background-attachment: fixed;
 
   box-shadow: inset 0px -20px 20px 0px #151117;
+  padding: 0 0 80px;
 `
 
 export const StakeFarm = styled.section`
