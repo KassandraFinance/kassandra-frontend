@@ -56,9 +56,20 @@ export const OptionsContent = styled.div`
   border-radius: 0 0 4px 4px;
 
   width: 128px;
+  max-height: 162px;
+  overflow: auto;
+
   position: absolute;
 
   z-index: 101;
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+  }
 `
 
 export const Option = styled.div`
