@@ -130,11 +130,29 @@ export const LowerContainer = styled.div`
   }
   ul {
     display: flex;
+    justify-content: flex-end;
     li {
       flex: 1 0 48px;
     }
   }
 `
+export const Certified = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  max-width: 100%;
+  margin: 1.6rem auto 0;
+  span {
+    font-size: ${theme.font.sizes.font14};
+    font-weight: ${theme.font.weight.bold};
+    letter-spacing: 0.07rem;
+    margin-right: 0.6rem;
+  }
+  img{
+    margin-right: 1.6rem;
+  }
+`
+
 export const LowerLeft = styled.div`
   display: flex;
   flex-direction: column;
@@ -142,6 +160,10 @@ export const LowerLeft = styled.div`
     width: 100%;
     margin-bottom: 28px;
   }
+`
+export const LowerRight = styled.div`
+  display: flex;
+  flex-direction: column;
 `
 
 export const Divider = styled.div`
