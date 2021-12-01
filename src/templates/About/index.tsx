@@ -10,6 +10,8 @@ import HowItWorks from './HowItWorks'
 import Team from './Team'
 import Partners from './Partners'
 import FAQ from './FAQ'
+import Community from './Community'
+import SubscribeBanner from '../../components/SubscribeBanner'
 
 const About = () => {
   const { trackPageView } = useMatomo()
@@ -27,6 +29,8 @@ const About = () => {
       <Team />
       <Partners />
       <FAQ />
+      <Community />
+      <SubscribeBanner />
     </>
   )
 }
