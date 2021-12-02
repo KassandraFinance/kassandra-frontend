@@ -8,7 +8,9 @@ export const Container = styled.section`
   justify-content: center;
   max-width: 96.4rem;
   margin: 0 auto;
-  padding: 0 3.2rem;
+  @media (max-width: 920px) {
+    padding: 0 3.2rem;
+  }
 `
 export const Divider = styled.div`
   width: 10rem;
@@ -25,11 +27,14 @@ export const Title = styled.h2`
   margin: 0 auto 9.4rem;
 `
 export const ScheduleGraphWrapper = styled.div`
-  width: 94rem;
+  max-width: 94rem;
   margin-bottom: 10rem;
 `
 export const ScheduleGraph = styled.div`
   max-width: 100%;
+  img {
+    max-width: 100%;
+  }
 `
 export const ScheduleTitle = styled.div`
   max-width: 100%;
@@ -38,6 +43,10 @@ export const ScheduleTitle = styled.div`
   justify-content: space-between;
   align-items: stretch;
   margin-bottom: 5rem;
+  //flex direction column on media max-width: 920px
+  @media (max-width: 920px) {
+    flex-direction: column;
+  }
 `
 
 export const TitleandIcon = styled.div`
@@ -83,7 +92,7 @@ export const Link = styled.a`
 `
 
 export const DistributionGraphWrapper = styled.div`
-  width: 94rem;
+  width: 100%;
 `
 
 export const DistributionTitle = styled.div`
@@ -93,18 +102,24 @@ export const DistributionTitle = styled.div`
   justify-content: space-between;
   align-items: stretch;
   margin-bottom: 5rem;
+  @media (max-width: 920px) {
+    flex-direction: column;
+  }
 `
 export const DistributionChart = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
-  grid-column-gap: 14rem;
+  grid-column-gap: 13rem;
   max-width: 100%;
   @media (max-width: 96rem) {
     grid-template-columns: 1fr;
   }
+  img {
+    max-width: 100%;
+  }
 `
 export const DistributionText = styled.div`
-  max-width: 26rem;
+  max-width: 28rem;
   display: flex;
   flex-direction: column;
   @media (max-width: 96rem) {
@@ -115,11 +130,11 @@ export const DistributionText = styled.div`
     font-size: ${theme.font.sizes.font24};
     font-weight: ${theme.font.weight.black};
     line-height: 110%;
-    margin-bottom: 2.4rem;
+    margin-bottom: 1.6rem;
   }
   p {
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.light};
-    line-height: 180%;
+    line-height: 155%;
   }
 `
