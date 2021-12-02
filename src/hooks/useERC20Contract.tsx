@@ -9,7 +9,7 @@ import { Contract } from "web3-eth-contract"
 import web3, { EventSubscribe } from '../utils/web3'
 import ERC20ABI from "../constants/abi/ERC20.json"
 
-import waitTransaction, { CompleteCallback } from '../utils/txWait'
+import { TransactionCallback } from '../utils/txWait'
 
 interface Events {
   Transfer: EventSubscribe;
@@ -26,13 +26,12 @@ function ERC20Contract(contract: Contract) {
   const approve = async (
     spenderAddress: string,
     userWalletAddress: string,
-    message?: string,
-    onComplete?: CompleteCallback
+    callback: TransactionCallback
   ): Promise<boolean> => {
     try {
       return contract.methods.approve(spenderAddress, web3.utils.toTwosComplement(-1)).send(
         { from: userWalletAddress },
-        waitTransaction(onComplete ? onComplete : () => {}, message)
+        callback
       );
     } catch (e) {
       console.log("error", e);

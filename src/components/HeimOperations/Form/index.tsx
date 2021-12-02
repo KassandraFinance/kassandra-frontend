@@ -19,6 +19,8 @@ import useConnect from '../../../hooks/useConnect'
 import useCRPContract from '../../../hooks/useCRPContract'
 import useERC20Contract, { ERC20 } from '../../../hooks/useERC20Contract'
 import usePoolContract from '../../../hooks/usePoolContract'
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+
 
 import InputTokens from './InputTokens'
 import InputDefault from './InputDefault'
@@ -28,15 +30,16 @@ import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
 import * as S from './styles'
 import { BNtoDecimal, wei } from '../../../utils/numerals'
-import { confirmWithdraw, confirmSwap, confirmInvest } from '../../../utils/confirmTransactions'
-import { TokenDetails } from '../../../store/modules/poolTokens/types'
-import ModalWalletConnect from '../../ModalWalletConnect'
-import { priceDollar } from '../../../utils/priceDollar'
+import waitTransaction, { MetamaskError, TransactionCallback } from '../../../utils/txWait'
+
 
 interface IFormProps {
   typeAction: string;
   title: string;
   typeWithdrawChecked: string;
+  crpPoolAddress: string
+  corePoolAddress: string
+  productCategories: string | string[]
 }
 
 interface Address2Index {
@@ -44,16 +47,19 @@ interface Address2Index {
 }
 
 const Form = ({ 
+  crpPoolAddress,
+  corePoolAddress,
+  productCategories,
   typeAction, 
   title, 
   typeWithdrawChecked,
 }: IFormProps) => {
-  const crpPoolToken = useERC20Contract(HeimCRPPOOL)
-  const corePool = usePoolContract(HeimCorePool)
-  const crpPool = useCRPContract(HeimCRPPOOL)
-  const { poolTokensArray, userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const crpPoolToken = useERC20Contract(crpPoolAddress)
+  const corePool = usePoolContract(corePoolAddress)
+  const crpPool = useCRPContract(crpPoolAddress)
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { connect } = useConnect()
-  const dispatch = useDispatch()
+  const { trackBuying, trackBought, trackCancelBuying } = useMatomoEcommerce();
 
   const [poolTokenDetails, setPoolTokensDetails] = React.useState<TokenDetails[]>([])
   const [poolTokens, setPoolTokens] = React.useState<string[]>([])
@@ -160,7 +166,7 @@ const Form = ({
         newAllocation.push(corePool.normalizedWeight(newPoolTokens[i]))
       }
 
-      newAddresses.push(HeimCRPPOOL)
+      newAddresses.push(crpPoolAddress)
       newNames.push(crpPoolToken.name())
       newSymbols.push(crpPoolToken.symbol())
       newDecimals.push(crpPoolToken.decimals())
@@ -185,7 +191,7 @@ const Form = ({
       calc(newPoolTokens)
       setTokenAddress2Index(
         newPoolTokens.reduce((acc, cur, i) => ({ [cur]: i, ...acc }), {
-          [HeimCRPPOOL]: newPoolTokens.length
+          [crpPoolAddress]: newPoolTokens.length
         })
       )
     })
@@ -200,10 +206,10 @@ const Form = ({
     switch (title) {
       case 'Invest':
         newSwapInAddress = poolTokens[0] || ''
-        newSwapOutAddress = HeimCRPPOOL
+        newSwapOutAddress = crpPoolAddress
         break
       case 'Withdraw':
-        newSwapInAddress = HeimCRPPOOL
+        newSwapInAddress = crpPoolAddress
         newSwapOutAddress = typeWithdrawChecked === "Single_asset" ? poolTokens[0] : ''
         break
       case 'Swap':
@@ -231,7 +237,7 @@ const Form = ({
       for (let i = 0; i < poolTokens.length; i += 1) {
         newApprovals.push(
           ERC20(poolTokens[i]).allowance(
-            title === 'Invest' ? HeimCRPPOOL : HeimCorePool,
+            title === 'Invest' ? crpPoolAddress : corePoolAddress,
             userWalletAddress
           )
         )
@@ -342,7 +348,7 @@ const Form = ({
       title !== 'Invest' ||
       swapInAddress.length === 0 ||
       swapOutAddress.length === 0 ||
-      swapInAddress === HeimCRPPOOL
+      swapInAddress === crpPoolAddress
     ) {
       return
     }
@@ -398,8 +404,8 @@ const Form = ({
       title !== 'Swap' ||
       swapInAddress.length === 0 ||
       swapOutAddress.length === 0 ||
-      swapInAddress === HeimCRPPOOL ||
-      swapOutAddress === HeimCRPPOOL
+      swapInAddress === crpPoolAddress ||
+      swapOutAddress === crpPoolAddress
     ) {
       return
     }
@@ -440,7 +446,7 @@ const Form = ({
 
   // calculate withdraw
   React.useEffect(() => {
-    if (title !== 'Withdraw' || swapOutAddress === HeimCRPPOOL) {
+    if (title !== 'Withdraw' || swapOutAddress === crpPoolAddress) {
       return
     }
 
@@ -519,21 +525,120 @@ const Form = ({
   const tokenInIndex = tokenAddress2Index[swapInAddress]
   const tokenOutIndex = tokenAddress2Index[swapOutAddress]
 
-  const asyncExecute = React.useCallback(
-    (msg: string, set: () => void) =>
-      (txReceipt?: TransactionReceipt, error?: Error) => {
-        if (error || !txReceipt) {
-          ToastError('Could not approve contract, try again.')
+  const approvalCallback = React.useCallback(
+    (): TransactionCallback => {
+      const tokenSymbol = poolTokenDetails[tokenInIndex].symbol
+
+      return async (error: MetamaskError, txHash: string) => {
+        if (error) {
+          if (error.code === 4001) {
+            ToastError(`Approval of ${tokenSymbol} cancelled`)
+            return
+          }
+
+          ToastError(`Failed to approve ${tokenSymbol}. Please try again later.`)
           return
         }
-        if (!txReceipt.status) {
-          ToastError('Transaction failed!')
+
+        ToastWarning(`Waiting approval of ${tokenSymbol}...`)
+        const txReceipt = await waitTransaction(txHash)
+
+        if (txReceipt.status) {
+          ToastSuccess(`Approval of ${tokenSymbol} confirmed`)
+          setApprovalCheck(cur => cur + 1)
           return
         }
-        ToastSuccess(msg)
-        set()
-      },
-    []
+      }
+    },
+    [tokenInIndex]
+  )
+
+  const investCallback = React.useCallback(
+    (amountInUSD: number): TransactionCallback => {
+      const tokenSymbol = poolTokenDetails[poolTokenDetails.length - 1].symbol
+
+      return async (error: MetamaskError, txHash: string) => {
+        if (error) {
+          trackCancelBuying()
+
+          if (error.code === 4001) {
+            ToastError(`Investment in ${tokenSymbol} cancelled`)
+            return
+          }
+
+          ToastError(`Failed to invest in ${tokenSymbol}. Please try again later.`)
+          return
+        }
+
+        trackBought(txHash, amountInUSD, 0)
+        ToastWarning(`Confirming investment in ${tokenSymbol}...`)
+        const txReceipt = await waitTransaction(txHash)
+
+        if (txReceipt.status) {
+          ToastSuccess(`Investment in ${tokenSymbol} confirmed`)
+          return
+        }
+      }
+    },
+    [poolTokenDetails]
+  )
+
+  const withdrawCallback = React.useCallback(
+    (amountInUSD: number): TransactionCallback => {
+      const tokenSymbol = poolTokenDetails[poolTokenDetails.length - 1].symbol
+
+      return async (error: MetamaskError, txHash: string) => {
+        if (error) {
+          trackCancelBuying()
+
+          if (error.code === 4001) {
+            ToastError(`Withdrawal of ${tokenSymbol} cancelled`)
+            return
+          }
+
+          ToastError(`Failed to withdraw ${tokenSymbol}. Please try again later.`)
+          return
+        }
+
+        trackBought(txHash, amountInUSD, 0)
+        ToastWarning(`Confirming withdrawal of ${tokenSymbol}...`)
+        const txReceipt = await waitTransaction(txHash)
+
+        if (txReceipt.status) {
+          ToastSuccess(`Withdrawal of ${tokenSymbol} confirmed`)
+          return
+        }
+      }
+    },
+    [crpPoolAddress]
+  )
+
+  const swapCallback = React.useCallback(
+    (): TransactionCallback => {
+      const tokenInSymbol = poolTokenDetails[tokenInIndex].symbol
+      const tokenOutSymbol = poolTokenDetails[tokenOutIndex].symbol
+
+      return async (error: MetamaskError, txHash: string) => {
+        if (error) {
+          if (error.code === 4001) {
+            ToastError(`Swap of ${tokenInSymbol} to ${tokenOutSymbol} cancelled`)
+            return
+          }
+
+          ToastError(`Failed to swap ${tokenInSymbol} to ${tokenOutSymbol}. Please try again later.`)
+          return
+        }
+
+        ToastWarning(`Confirming swap of ${tokenInSymbol} to ${tokenOutSymbol}...`)
+        const txReceipt = await waitTransaction(txHash)
+
+        if (txReceipt.status) {
+          ToastSuccess(`Swap of ${tokenInSymbol} to ${tokenOutSymbol} confirmed`)
+          return
+        }
+      }
+    },
+    [tokenInIndex, tokenOutIndex]
   )
 
   const submitAction = React.useCallback(
@@ -547,7 +652,8 @@ const Form = ({
         swapInAddressInput,
         swapOutAddressInput,
         walletAddress,
-        tokensLength
+        tokensLength,
+        amountUSD
       } = e.target as HTMLFormElement & {
         approved: HTMLInputElement
         category: HTMLInputElement
@@ -556,8 +662,10 @@ const Form = ({
         swapOutAddressInput: HTMLInputElement
         walletAddress: HTMLInputElement
         tokensLength: HTMLInputElement
+        amountUSD: HTMLInputElement
       }
 
+      const amountInUSD = parseFloat(amountUSD.value)
       const swapInAmountVal = new BigNumber(swapInAmountInput.value)
       const swapInAddressVal = swapInAddressInput.value
       const swapOutAddressVal = swapOutAddressInput.value
@@ -567,32 +675,31 @@ const Form = ({
           case 'Invest':
             if (approved.value === '0') {
               ERC20(swapInAddressVal).approve(
-                HeimCRPPOOL,
+                crpPoolAddress,
                 walletAddress.value,
-                "Waiting for approval",
-                asyncExecute('Contract approval complete!', () =>
-                  setApprovalCheck(cur => cur + 1)
-                )
+                approvalCallback()
               )
               return
             }
 
+            trackBuying(crpPoolAddress, 'aHYPE', amountInUSD, productCategories)
             crpPool.joinswapExternAmountIn(
               swapInAddressVal,
               swapInAmountVal,
               walletAddress.value,
-              "Pending investment",
-              confirmInvest
+              investCallback(amountInUSD)
             )
             return
 
           case 'Withdraw':
+            trackBuying(crpPoolAddress, 'aHYPE', -1 * amountInUSD, productCategories)
+
             if (swapOutAddressVal !== '') {
               crpPool.exitswapPoolAmountIn(
                 swapOutAddressVal,
                 swapInAmountVal,
                 walletAddress.value,
-                "Pending withdraw of a single token"
+                withdrawCallback(-1 * amountInUSD)
               )
               return
             }
@@ -601,20 +708,16 @@ const Form = ({
               swapInAmountVal,
               Array(parseInt(tokensLength.value)).fill(new BigNumber(0)),
               walletAddress.value,
-              "Pending withdraw",
-              confirmWithdraw
+              withdrawCallback(-1 * amountInUSD)
             )
             return
 
           case 'Swap':
             if (approved.value === '0') {
               ERC20(swapInAddressVal).approve(
-                HeimCorePool,
+                corePoolAddress,
                 walletAddress.value,
-                "Waiting for approval",
-                asyncExecute('Contract approval complete!', () =>
-                  setApprovalCheck(cur => cur + 1)
-                )
+                approvalCallback()
               )
               return
             }
@@ -624,8 +727,7 @@ const Form = ({
               swapInAmountVal,
               swapOutAddressVal,
               walletAddress.value,
-              "Pending Swap",
-              confirmSwap
+              swapCallback()
             )
             return
 

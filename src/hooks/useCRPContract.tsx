@@ -8,7 +8,7 @@ import { AbiItem } from "web3-utils"
 import web3, { EventSubscribe } from '../utils/web3'
 import ConfigurableRightsPool from "../constants/abi/ConfigurableRightsPool.json"
 
-import waitTransaction, { CompleteCallback } from '../utils/txWait'
+import { TransactionCallback } from '../utils/txWait'
 
 interface Events {
   CapChanged: EventSubscribe;
@@ -37,12 +37,11 @@ const useCRPContract = (address: string) => {
       tokenIn: string,
       tokenAmountIn: BigNumber,
       walletAddress: string,
-      message?: string,
-      onComplete?: CompleteCallback
+      callback: TransactionCallback
     ) => {
       return contract.methods.joinswapExternAmountIn(tokenIn, tokenAmountIn, 0).send(
         { from: walletAddress },
-        waitTransaction(onComplete ? onComplete : () => {}, message)
+        callback
       )
     }
 
@@ -50,12 +49,11 @@ const useCRPContract = (address: string) => {
       poolAmountIn: BigNumber,
       minAmountsOut: Array<BigNumber>,
       walletAddress: string,
-      message?: string,
-      onComplete?: CompleteCallback
+      callback: TransactionCallback
     ) => {
       return contract.methods.exitPool(poolAmountIn, minAmountsOut).send(
         { from: walletAddress },
-        waitTransaction(onComplete ? onComplete : () => {}, message)
+        callback
       )
     }
 
@@ -63,12 +61,11 @@ const useCRPContract = (address: string) => {
       tokenOut: string,
       poolAmountIn: BigNumber,
       walletAddress: string,
-      message?: string,
-      onComplete?: CompleteCallback
+      callback: TransactionCallback
     ) => {
       return contract.methods.exitswapPoolAmountIn(tokenOut, poolAmountIn, 0).send(
         { from: walletAddress },
-        waitTransaction(onComplete ? onComplete : () => {}, message)
+        callback
       )
     }
 

@@ -7,7 +7,7 @@ import BigNumber from 'bn.js'
 import web3, { EventSubscribe } from '../utils/web3'
 import Pool from "../constants/abi/Pool.json"
 
-import waitTransaction, { CompleteCallback } from '../utils/txWait'
+import { TransactionCallback } from '../utils/txWait'
 
 interface Events {
   NewSwapFee: EventSubscribe;
@@ -37,8 +37,7 @@ const usePoolContract = (address: string) => {
       tokenAmountIn: BigNumber,
       tokenOut: string,
       walletAddress: string,
-      message?: string,
-      onComplete?: CompleteCallback
+      callback: TransactionCallback
     ) => {
       await contract
         .methods.swapExactAmountIn(
@@ -50,7 +49,7 @@ const usePoolContract = (address: string) => {
         )
         .send(
           { from: walletAddress },
-          waitTransaction(onComplete ? onComplete : () => {}, message)
+          callback
         )
     }
 
