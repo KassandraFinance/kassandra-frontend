@@ -685,7 +685,7 @@ const Form = ({
       <input type="hidden" name="swapInSymbol" value={infoAHYPE[tokenInIndex]?.symbol || ''} />
       <input type="hidden" name="swapOutSymbol" value={infoAHYPE[tokenOutIndex]?.symbol || ''} />
       <input type="hidden" name="walletAddress" value={userWalletAddress} />
-      <input type="hidden" name="tokensLength" value={infoAHYPE.length} />
+      <input type="hidden" name="tokensLength" value={infoAHYPE.length - 1} />
       <input type="hidden" name="amountUSD" value={
         title === "Invest"
           ? Big((swapOutAmount[0] || 0).toString())
