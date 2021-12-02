@@ -11,6 +11,32 @@ export const FormContainer = styled.form`
   max-height: 100%;
 `
 
+export const SwapButton = styled.button`
+  background: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+
+  img {
+    transition: transform 300ms;
+    margin: 12px 0;
+  }
+  img:last-child {
+    transform: rotate(180deg);
+    margin: 12px 0 12px 8px;
+  }
+
+  :hover {
+    img:first-child {
+      transform: rotate(-180deg);
+    }
+    img:last-child {
+      transform: rotate(0deg);
+    }
+  }
+`
+
 // ========== DEFAULT INPUT ALL ==========
 
 interface IPayWithProps {
