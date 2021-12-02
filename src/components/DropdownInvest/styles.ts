@@ -20,6 +20,7 @@ export const DropButton = styled.button`
       position: absolute;
       display: block;
       height: 0.3rem;
+      border-radius: 0.15rem;
       background-color: ${theme.colors.cyan};
       animation: hoverAnimation 0.2s forwards;
     }
