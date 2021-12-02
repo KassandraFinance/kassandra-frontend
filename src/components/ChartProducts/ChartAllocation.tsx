@@ -81,7 +81,6 @@ const ChartAllocation = ({ data }: IChartAllocationProps) => {
   }, [])
 
   const toPercent = (decimal: number, fixed = 0) => {
-    console.log(decimal, fixed)
     return `${(decimal * 100).toFixed(fixed)}%`
   }
 

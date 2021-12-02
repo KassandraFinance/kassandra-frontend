@@ -128,7 +128,6 @@ const ModalUnstaking = ({
       }
     }
   }, [stakingToken])
-  console.log(nameToken)
 
   return (
     <>

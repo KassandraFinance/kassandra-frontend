@@ -15,7 +15,7 @@ import * as S from './styles'
 
 interface IInputBestValueProps {
   poolTokenDetails: TokenDetails[];
-  poolTokensArray: TokenDetails[];
+  infoAHYPE: TokenDetails[];
   swapOutAmount: BigNumber[];
   swapOutBalance: BigNumber[];
   setPriceInDollarOnWithdraw: React.Dispatch<React.SetStateAction<string>>;
@@ -23,7 +23,7 @@ interface IInputBestValueProps {
 
 const InputBestValue = ({
   poolTokenDetails,
-  poolTokensArray,
+  infoAHYPE,
   swapOutAmount,
   swapOutBalance,
   setPriceInDollarOnWithdraw
@@ -31,7 +31,7 @@ const InputBestValue = ({
   React.useEffect(() => {
     const res: Big = poolTokenDetails.reduce((accumulator, current, index) => {
       return Big((swapOutAmount[index] || 0).toString())
-        .mul(Big(priceDollar(current.address, poolTokensArray)))
+        .mul(Big(priceDollar(current.address, infoAHYPE)))
         .div(Big(10).pow(current.decimals.toNumber()))
         .add(accumulator)
     }, Big(0))
@@ -52,7 +52,6 @@ const InputBestValue = ({
           <S.InputBestValueGrid key={`best_value_${token.address}`}>
             <S.BestValueItem>
               <S.Symbol bestValue>
-                {console.log(token.image)}
                 <div className="image">
                   <Image
                     src={token.image || none}
@@ -83,7 +82,7 @@ const InputBestValue = ({
                   '$' +
                   BNtoDecimal(
                     Big((swapOutAmount[index] || 0).toString()).mul(
-                      Big(priceDollar(token.address, poolTokensArray))
+                      Big(priceDollar(token.address, infoAHYPE))
                     ),
                     Big(token.decimals.toString(10)),
                     2

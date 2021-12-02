@@ -15,7 +15,8 @@ import * as S from './styles'
 interface IInputDefaultProps {
   decimals: BigNumber;
   poolTokens: TokenDetails[];
-  poolTokensArray: TokenDetails[];
+  infoAHYPE: TokenDetails[];
+  tokenDetails: TokenDetails;
   isMax: boolean | null;
   swapOutAmount: BigNumber;
   swapOutBalance: BigNumber;
@@ -26,7 +27,8 @@ interface IInputDefaultProps {
 const InputDefault = ({
   decimals,
   poolTokens,
-  poolTokensArray,
+  infoAHYPE,
+  tokenDetails,
   isMax,
   swapOutAmount,
   swapOutBalance,
@@ -37,9 +39,9 @@ const InputDefault = ({
     if (poolTokens.length > 1) {
       return (
         <SelectInputDefault
-          poolTokensArray={poolTokensArray}
+          poolTokensArray={infoAHYPE}
           setSwapOutAddress={setSwapOutAddress}
-          swapInAddress={swapInAddress}
+          tokenDetails={tokenDetails}
         />
       )
     }
@@ -74,7 +76,7 @@ const InputDefault = ({
           readOnly
           type="text"
           placeholder="0"
-          value={BNtoDecimal(swapOutAmount, decimals)}
+          value={BNtoDecimal(swapOutAmount || new BigNumber(0), decimals)}
         />
         {isMax !== null && (
           <S.ButtonMax
