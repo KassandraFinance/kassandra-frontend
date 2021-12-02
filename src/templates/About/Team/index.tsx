@@ -31,8 +31,7 @@ const Team = () => {
           role="CFO"
           image="assets/hamilton-photo.svg"
           social={{
-            linkedin: 'linkedin.com/in/hamilton-haskel-3585b477',
-            twitter: 'https://twitter.com/kevinvoigt'
+            linkedin: 'linkedin.com/in/hamilton-haskel-3585b477'
           }}
         />
         <TeamCard
@@ -41,8 +40,7 @@ const Team = () => {
           image="assets/andre-photo.svg"
           social={{
             github: 'https://github.com/an-dz',
-            linkedin: 'https://www.linkedin.com/in/kevin-voigt-b6a7b2b1/',
-            twitter: 'https://twitter.com/kevinvoigt'
+            linkedin: 'https://www.linkedin.com/in/zanghelini/'
           }}
         />
         <TeamCard
@@ -51,11 +49,18 @@ const Team = () => {
           image="assets/anthony-photo.svg"
           social={{
             github: 'github.com/AnthonyAposta',
-            linkedin: 'linkedin.com/in/anthony-joão-bet',
-            twitter: 'https://twitter.com/kevinvoigt'
+            linkedin: 'linkedin.com/in/anthony-joão-bet'
           }}
         />
-        <img src="assets/kassandra-team-logo.svg" alt="" />
+        <TeamCard
+          name="Jorge Filho"
+          role="BUSINESS DEVELOPMENT AGENT"
+          image="assets/jorge-photo.svg"
+          social={{
+            linkedin: 'https://www.linkedin.com/in/jorge-filho-35020018b/',
+            twitter: 'https://twitter.com/AkademiaHash'
+          }}
+        />
         <TeamCard
           name="Jony Reis"
           role="FRONT-END DEVELOPER"
@@ -70,8 +75,7 @@ const Team = () => {
           role="UX/UI DESIGNER"
           image="assets/arthur-photo.svg"
           social={{
-            linkedin: 'linkedin.com/in/arthurstofella',
-            twitter: 'https://twitter.com/kevinvoigt'
+            linkedin: 'linkedin.com/in/arthurstofella'
           }}
         />
         <TeamCard
@@ -79,8 +83,7 @@ const Team = () => {
           role="QUANTITATIVE ANALYST"
           image="assets/pedro-photo.svg"
           social={{
-            linkedin: 'https://www.linkedin.com/in/kevin-voigt-b6a7b2b1/',
-            twitter: 'https://twitter.com/kevinvoigt'
+            linkedin: 'https://www.linkedin.com/in/pedro-jung-tavares-b53021a4/'
           }}
         />
         <TeamCard
@@ -88,8 +91,8 @@ const Team = () => {
           role="FRONT-END DEVELOPER"
           image="assets/fernando-photo.svg"
           social={{
-            linkedin: 'https://www.linkedin.com/in/kevin-voigt-b6a7b2b1/',
-            twitter: 'https://twitter.com/kevinvoigt'
+            github: 'https://github.com/F-rigo',
+            linkedin: 'linkedin.com/in/fernandorigo'
           }}
         />
       </S.Grid>
