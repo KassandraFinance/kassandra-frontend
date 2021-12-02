@@ -5,8 +5,8 @@ export const TokenInfoWrapper = styled.section`
   max-width: 946px;
   margin: 95px auto 50px;
   background-color: transparent;
-  padding: 1px;
-  border-bottom: 1px solid #282828;
+  padding: 0 32px;
+  border-bottom: 1px solid #282828;;
 `
 
 export const TitleandIcon = styled.div`
