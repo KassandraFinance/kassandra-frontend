@@ -28,12 +28,11 @@ export const Title = styled.h1`
   font-size: ${theme.font.sizes.font40};
   font-weight: ${theme.font.weight.black};
   line-height: 114%;
-  margin-bottom: 2.4rem;
 `
 
 export const Divider = styled.div`
   max-width: 10rem;
   height: 0.3rem;
   background: linear-gradient(99.25deg, #e843c4 0%, #ffbf00 100%, #ffbf00 100%);
-  margin: 0 auto;
+  margin: 3.2rem auto;
 `

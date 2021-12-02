@@ -25,11 +25,11 @@ export const Title = styled.h2`
   margin: 0 auto 9.4rem;
 `
 export const ScheduleGraphWrapper = styled.div`
-  max-width: 100%;
+  width: 94rem;
   margin-bottom: 10rem;
 `
 export const ScheduleGraph = styled.div`
-  width: 100%;
+  max-width: 100%;
 `
 export const ScheduleTitle = styled.div`
   max-width: 100%;
@@ -98,12 +98,19 @@ export const DistributionChart = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-column-gap: 14rem;
-  width: 100%;
+  max-width: 100%;
+  @media (max-width: 96rem) {
+    grid-template-columns: 1fr;
+  }
 `
 export const DistributionText = styled.div`
   max-width: 26rem;
   display: flex;
   flex-direction: column;
+  @media (max-width: 96rem) {
+    max-width: 32rem;
+    margin: 2.4rem auto 0;
+  }
   h1 {
     font-size: ${theme.font.sizes.font24};
     font-weight: ${theme.font.weight.black};

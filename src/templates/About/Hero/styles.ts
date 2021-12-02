@@ -101,6 +101,11 @@ export const CardContainer = styled.div`
       display: block;
     }
   }
+  @media (max-width: 580px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-row-gap: 2.4rem;
+  }
 `
 export const Card = styled.div`
   margin: 0 auto;
@@ -139,7 +144,17 @@ export const GradienteDivider = styled.div`
   height: 0.1rem;
   background: linear-gradient(90deg, #e843c4 0%, #ffbf00 100%);
 `
-//create a card retangle transparent
+export const CardRectangleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  max-width: 104.2rem;
+  margin: 0 auto;
+  justify-content: space-around;
+  @media (max-width: 960px) {
+    flex-direction: column;
+  }
+`
+
 export const CardRectangle = styled.div`
   display: flex;
   flex-direction: column;
@@ -161,11 +176,8 @@ export const CardRectangle = styled.div`
     font-weight: ${theme.font.weight.light};
     line-height: 180%;
   }
-`
-export const CardRectangleWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  max-width: 104.2rem;
-  margin: 0 auto;
-  justify-content: space-around;
+  @media (max-width: 960px) {
+    flex-direction: column;
+    margin-bottom: 4rem;
+  }
 `

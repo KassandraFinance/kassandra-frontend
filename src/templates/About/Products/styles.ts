@@ -11,15 +11,34 @@ export const Container = styled.section`
   align-items: center;
   justify-content: center;
   img {
-    width: 70%;
+    max-width: 70%;
   }
 `
+export const ImageKassandra = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media (max-width: 960px) {
+    img {
+      display: none;
+    }
+  }
+`
+
 export const CardWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
   margin: 0 auto 15rem;
+  @media (max-width: 920px) {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 3.2rem;
+  }
+  @media (max-width: 560px) {
+    margin: 0 auto 7.5rem;
+  }
 `
 export const Card = styled.div`
   display: flex;
@@ -48,6 +67,17 @@ export const Card = styled.div`
     align-self: center;
     transform: translateY(-80%);
     max-width: 30%;
+  }
+  @media (max-width: 920px) {
+    max-width: 100%;
+    margin: 2.4rem auto;
+    img {
+      display: flex;
+      position: relative;
+      align-self: center;
+      transform: translateY(-80%);
+      max-width: 20%;
+    }
   }
 `
 export const Link = styled.a`
@@ -80,15 +110,16 @@ export const KassandraToken = styled.section`
   grid-template-columns: 1fr 1fr;
   max-width: 1000px;
   margin: 0 auto 140px;
+  padding: 0 3.2rem;
   gap: 32px;
   /* background: url('assets/BlurDivisor.svg'); */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center -100px;
   img {
+    display: block;
     width: 100%;
   }
-
   @media (max-width: 960px) {
     display: flex;
     flex-direction: column;
