@@ -10,8 +10,10 @@ const Products = () => {
       </S.ImageKassandra>
       <S.CardWrapper>
         <S.Card>
-          <img src="assets/about-products-icon.svg" alt="" />
-          <h3>PROTOCOL</h3>
+          <S.MobileCardTitle>
+            <img src="assets/about-products-icon.svg" alt="" />
+            <h3>PROTOCOL</h3>
+          </S.MobileCardTitle>
           <p>
             A cursus quis maecenas mi. Porttitor et, a, adipiscing arcu amet
             eleifend sed. Eget sed libero vitae id facilisi lacus, risus.
@@ -53,8 +55,11 @@ const Products = () => {
           </S.Link>
         </S.Card>
         <S.Card>
-          <img src="assets/about-products-icon.svg" alt="" />
-          <h3>DAO</h3>
+          <S.MobileCardTitle>
+
+            <img src="assets/about-products-icon.svg" alt="" />
+            <h3>DAO</h3>
+          </S.MobileCardTitle>
           <p>
             A cursus quis maecenas mi. Porttitor et, a, adipiscing arcu amet
             eleifend sed. Eget sed libero vitae id facilisi lacus, risus.
@@ -96,8 +101,10 @@ const Products = () => {
           </S.Link>
         </S.Card>
         <S.Card>
-          <img src="assets/about-products-icon.svg" alt="" />
-          <h3>FOUNDATION</h3>
+          <S.MobileCardTitle>
+            <img src="assets/about-products-icon.svg" alt="" />
+            <h3>FOUNDATION</h3>
+          </S.MobileCardTitle>
           <p>
             A cursus quis maecenas mi. Porttitor et, a, adipiscing arcu amet
             eleifend sed. Eget sed libero vitae id facilisi lacus, risus.

@@ -64,22 +64,26 @@ export const Card = styled.div`
   }
   img {
     position: relative;
-    align-self: center;
-    transform: translateY(-80%);
+    transform: translate(200%, -100%);
     max-width: 30%;
   }
   @media (max-width: 920px) {
     max-width: 100%;
     margin: 2.4rem auto;
+  }
+`
+export const MobileCardTitle = styled.div`
+  @media (max-width: 920px) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     img {
-      display: flex;
-      position: relative;
-      align-self: center;
-      transform: translateY(-80%);
-      max-width: 20%;
+      transform: translateY(0);
+      margin: 0 1.6rem 1.6rem 0;
     }
   }
 `
+
 export const Link = styled.a`
   text-decoration: none;
   display: flex;
@@ -118,9 +122,10 @@ export const KassandraToken = styled.section`
   background-position: center -100px;
   img {
     display: block;
-    width: 100%;
+    max-width: 100%;
   }
   @media (max-width: 960px) {
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     margin: 0 auto;
