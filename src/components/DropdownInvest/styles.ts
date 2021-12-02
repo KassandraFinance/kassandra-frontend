@@ -5,17 +5,9 @@ import theme from '../../styles/theme'
 export const Dropdown = styled.div`
   display: inline-block;
   position: relative;
-`
 
-export const DropButton = styled.button`
-  border: none;
-  background-color: transparent;
-  color: white;
-  font-size: 16px;
-
-  padding: 8px 4px;
   &:hover {
-    &::after {
+    button::after {
       content: '';
       position: absolute;
       display: block;
@@ -23,6 +15,7 @@ export const DropButton = styled.button`
       border-radius: 0.15rem;
       background-color: ${theme.colors.cyan};
       animation: hoverAnimation 0.2s forwards;
+      margin-top: 12px;
     }
 
     @keyframes hoverAnimation {
@@ -38,6 +31,17 @@ export const DropButton = styled.button`
   }
 `
 
+export const DropButton = styled.button`
+  position: relative;
+  border: none;
+  background-color: transparent;
+  display: inline-block;
+  color: ${theme.colors.snow};
+  font-size: 16px;
+  margin: 0.3rem ${theme.spacings.space24} 0;
+  padding: 12px;
+`
+
 interface IDropdownContentProps {
   isDropdown: boolean
 }
@@ -47,6 +51,7 @@ export const DropdownContent = styled.div<IDropdownContentProps>`
 
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   background-color: #15161C;
+  margin-top: 0.3rem;
 
   position: absolute;
 
