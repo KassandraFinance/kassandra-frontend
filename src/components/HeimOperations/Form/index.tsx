@@ -339,7 +339,7 @@ const Form = ({
     }
 
     calc()
-  }, [title, swapInAmount, swapInAddress])
+  }, [swapInAmount, swapInAddress])
 
   // calculate swap
   React.useEffect(() => {
@@ -385,7 +385,7 @@ const Form = ({
     }
 
     calc()
-  }, [title, swapInAmount, swapInAddress, swapOutAddress])
+  }, [swapInAmount, swapInAddress, swapOutAddress])
 
   // calculate withdraw
   React.useEffect(() => {
@@ -462,15 +462,13 @@ const Form = ({
     }
 
     calc()
-  }, [title, swapInAmount, swapOutAddress, tokenAddress2Index, infoAHYPE])
+  }, [swapInAmount, swapOutAddress, infoAHYPE])
 
   const tokenInIndex = tokenAddress2Index[swapInAddress]
   const tokenOutIndex = tokenAddress2Index[swapOutAddress]
   
   const approvalCallback = React.useCallback(
-    (): TransactionCallback => {
-      const tokenSymbol = infoAHYPE[tokenInIndex].symbol
-
+    (tokenSymbol: string): TransactionCallback => {
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
@@ -492,13 +490,11 @@ const Form = ({
         }
       }
     },
-    [tokenInIndex]
+    []
   )
 
   const investCallback = React.useCallback(
-    (amountInUSD: number): TransactionCallback => {
-      const tokenSymbol = infoAHYPE[infoAHYPE.length - 1].symbol
-
+    (tokenSymbol: string, amountInUSD: number): TransactionCallback => {
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           trackCancelBuying()
@@ -526,9 +522,7 @@ const Form = ({
   )
 
   const withdrawCallback = React.useCallback(
-    (amountInUSD: number): TransactionCallback => {
-      const tokenSymbol = infoAHYPE[infoAHYPE.length - 1].symbol
-
+    (tokenSymbol: string, amountInUSD: number): TransactionCallback => {
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           trackCancelBuying()
@@ -556,10 +550,7 @@ const Form = ({
   )
 
   const swapCallback = React.useCallback(
-    (): TransactionCallback => {
-      const tokenInSymbol = infoAHYPE[tokenInIndex].symbol
-      const tokenOutSymbol = infoAHYPE[tokenOutIndex].symbol
-
+    (tokenInSymbol: string, tokenOutSymbol: string): TransactionCallback => {
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
@@ -593,6 +584,8 @@ const Form = ({
         swapInAmountInput,
         swapInAddressInput,
         swapOutAddressInput,
+        swapInSymbol,
+        swapOutSymbol,
         walletAddress,
         tokensLength,
         amountUSD
@@ -602,6 +595,8 @@ const Form = ({
         swapInAmountInput: HTMLInputElement
         swapInAddressInput: HTMLInputElement
         swapOutAddressInput: HTMLInputElement
+        swapInSymbol: HTMLInputElement
+        swapOutSymbol: HTMLInputElement
         walletAddress: HTMLInputElement
         tokensLength: HTMLInputElement
         amountUSD: HTMLInputElement
@@ -619,7 +614,7 @@ const Form = ({
               ERC20(swapInAddressVal).approve(
                 crpPoolAddress,
                 walletAddress.value,
-                approvalCallback()
+                approvalCallback(swapInSymbol.value)
               )
               return
             }
@@ -629,7 +624,7 @@ const Form = ({
               swapInAddressVal,
               swapInAmountVal,
               walletAddress.value,
-              investCallback(amountInUSD)
+              investCallback(swapOutSymbol.value, amountInUSD)
             )
             return
 
@@ -641,7 +636,7 @@ const Form = ({
                 swapOutAddressVal,
                 swapInAmountVal,
                 walletAddress.value,
-                withdrawCallback(-1 * amountInUSD)
+                withdrawCallback(swapInSymbol.value, -1 * amountInUSD)
               )
               return
             }
@@ -650,7 +645,7 @@ const Form = ({
               swapInAmountVal,
               Array(parseInt(tokensLength.value)).fill(new BigNumber(0)),
               walletAddress.value,
-              withdrawCallback(-1 * amountInUSD)
+              withdrawCallback(swapInSymbol.value, -1 * amountInUSD)
             )
             return
 
@@ -659,7 +654,7 @@ const Form = ({
               ERC20(swapInAddressVal).approve(
                 corePoolAddress,
                 walletAddress.value,
-                approvalCallback()
+                approvalCallback(swapInSymbol.value)
               )
               return
             }
@@ -669,7 +664,7 @@ const Form = ({
               swapInAmountVal,
               swapOutAddressVal,
               walletAddress.value,
-              swapCallback()
+              swapCallback(swapInSymbol.value, swapOutSymbol.value)
             )
             return
 
@@ -687,6 +682,8 @@ const Form = ({
       <input type="hidden" name="swapInAmountInput" value={swapInAmount.toString()} />
       <input type="hidden" name="swapInAddressInput" value={swapInAddress} />
       <input type="hidden" name="swapOutAddressInput" value={swapOutAddress} />
+      <input type="hidden" name="swapInSymbol" value={infoAHYPE[tokenInIndex]?.symbol || ''} />
+      <input type="hidden" name="swapOutSymbol" value={infoAHYPE[tokenOutIndex]?.symbol || ''} />
       <input type="hidden" name="walletAddress" value={userWalletAddress} />
       <input type="hidden" name="tokensLength" value={infoAHYPE.length} />
       <input type="hidden" name="amountUSD" value={
