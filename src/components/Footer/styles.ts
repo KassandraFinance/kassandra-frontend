@@ -142,7 +142,7 @@ export const Certified = styled.div`
     letter-spacing: 0.07rem;
     margin-right: 0.6rem;
   }
-  img{
+  img {
     margin-right: 1.6rem;
   }
 `
