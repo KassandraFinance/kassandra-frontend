@@ -2,7 +2,11 @@ import React from 'react'
 import Image from 'next/image'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
+import { HeimCRPPOOL, HeimCorePool } from '../../constants/tokenAddresses'
+
 import web3 from '../../utils/web3'
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce';
+
 
 import Header from '../../components/Header'
 import ChartProducts from '../../components/ChartProducts'
@@ -32,7 +36,7 @@ const Products = () => {
   const [isMobile, setIsMobile] = React.useState<boolean>(false)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-
+  const { trackProductPageView } = useMatomoEcommerce()
 
   async function getChainId() {
     if (web3.currentProvider === null) {
@@ -48,6 +52,8 @@ const Products = () => {
   }, [userWalletAddress])
 
   React.useEffect(() => {
+    trackProductPageView(HeimCRPPOOL, 'aHYPE', ['Ropsten', 'Pool'])
+
     const device = localStorage.getItem('device')
     setIsMobile(device === 'isMobile')
 
@@ -114,7 +120,11 @@ const Products = () => {
             <Distribution />
             <TokenDescription />
           </S.ProductDetails>
-          <HeimOperations />
+          <HeimOperations
+            crpPoolAddress={HeimCRPPOOL}
+            corePoolAddress={HeimCorePool}
+            productCategories={['Ropsten', 'Pool']}
+          />
         </S.Product>
         :
         <>

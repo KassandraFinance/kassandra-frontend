@@ -16,11 +16,13 @@ import * as S from './styles'
 interface IInputEthProps {
   actionString: string;
   poolTokens: TokenDetails[];
-  poolTokensArray: TokenDetails[];
+  infoAHYPE: TokenDetails[];
+  tokenDetails: TokenDetails;
   title: string;
   decimals: BigNumber;
   swapInBalance: BigNumber;
   swapInAmount: BigNumber;
+  swapInAddress: string;
   setSwapInAddress: React.Dispatch<React.SetStateAction<string>>;
   setSwapInAmount: React.Dispatch<React.SetStateAction<BigNumber>>;
   setSwapOutAmount: React.Dispatch<React.SetStateAction<BigNumber[]>>;
@@ -29,7 +31,8 @@ interface IInputEthProps {
 const InputTokens = ({
   actionString,
   poolTokens,
-  poolTokensArray,
+  infoAHYPE,
+  tokenDetails,
   title,
   decimals,
   swapInBalance,
@@ -46,9 +49,9 @@ const InputTokens = ({
     if (poolTokens.length > 1) {
       return (
         <SelectInputTokens
-          poolTokensArray={poolTokensArray}
+          poolTokensArray={infoAHYPE}
           setSwapInAddress={setSwapInAddress}
-          title={title}
+          tokenDetails={tokenDetails}
         />
       )
     }
@@ -68,7 +71,9 @@ const InputTokens = ({
   const wei2String = (input: BigNumber) => {
     const decimal = input.mod(wei).toString()
 
-    return `${input.div(wei).toString()}${decimal === '0' ? '' : `.${decimal}`}`
+    return `${input.div(wei).toString()}${
+      decimal === '0' ? '' : `.${decimal.padStart(Number(decimals), '0')}`
+    }`
   }
 
   const setMax = () => {

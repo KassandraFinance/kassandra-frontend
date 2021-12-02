@@ -11,22 +11,15 @@ import * as S from './styles'
 interface ISelectInputDefaultProps {
   poolTokensArray: TokenDetails[];
   setSwapOutAddress: React.Dispatch<React.SetStateAction<string>>;
-  swapInAddress: string;
+  tokenDetails: TokenDetails;
 }
 
 const SelectInputDefault = ({
   poolTokensArray,
   setSwapOutAddress,
-  swapInAddress
+  tokenDetails
 }: ISelectInputDefaultProps) => {
-  // eslint-disable-next-line prettier/prettier
-  const [tokenSelected, setTokenSelected] = React.useState<TokenDetails | undefined>(poolTokensArray[0])
   const [openOptions, setOpenOptions] = React.useState<boolean>(false)
-
-  React.useEffect(() => {
-    setTokenSelected(poolTokensArray[0])
-    setSwapOutAddress(poolTokensArray[0].address)
-  }, [swapInAddress])
 
   return (
     <S.SelectToken openOptions={openOptions}>
@@ -36,13 +29,13 @@ const SelectInputDefault = ({
       >
         <div className="img" id="img-token-selected">
           <Image
-            src={tokenSelected?.image || none}
-            alt={`${tokenSelected?.symbol}-image`}
+            src={tokenDetails?.image || none}
+            alt={`${tokenDetails?.symbol}-image`}
             width={22}
             height={22}
           />
         </div>
-        {tokenSelected?.symbol}
+        {tokenDetails?.symbol}
         <div id="arrow-down">
           <Image src={arrow} alt="arrow" />
         </div>
@@ -56,7 +49,6 @@ const SelectInputDefault = ({
                 <S.Option
                   key={token.symbol}
                   onClick={() => {
-                    setTokenSelected(token)
                     setOpenOptions(false)
                     setSwapOutAddress(token.address)
                   }}

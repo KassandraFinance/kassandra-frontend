@@ -14,7 +14,6 @@ export default function Index() {
         value={{
           refreshInterval: 5000,
           fetcher: async (query: RequestDocument) => {
-            console.log(await request(URL, query))
             return await request(URL, query)
           }
         }}
