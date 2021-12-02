@@ -7,6 +7,7 @@ import { Staking } from '../../constants/tokenAddresses'
 import web3 from '../../utils/web3'
 
 import useConnect from '../../hooks/useConnect'
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 import useStakingContract from '../../hooks/useStakingContract'
 
 import Web3Disabled from '../../components/Web3Disabled'
@@ -15,7 +16,6 @@ import StakeCard from '../../components/StakeCard'
 
 import ComingSoon from './ComingSoon'
 import Header from '../../components/Header'
-// import BannerCTA from '../../components/BannerCTA'
 
 import * as S from './styles'
 
@@ -28,6 +28,7 @@ const StakeFarm = () => {
   const [loading, setLoading] = React.useState<boolean>(true)
   const [isMobile, setIsMobile] = React.useState<boolean>(false)
   
+  const { trackCategoryPageView } = useMatomoEcommerce()
   const kacyStake = useStakingContract(Staking)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
@@ -48,6 +49,8 @@ const StakeFarm = () => {
 
 
   React.useEffect(() => {
+    trackCategoryPageView(['Stake', 'Ropsten'])
+
     const device = localStorage.getItem('device')
     setIsMobile(device === 'isMobile')
 
@@ -79,9 +82,9 @@ const StakeFarm = () => {
               <S.NameStake>
                 <S.Name>
                   <img src="assets/stake-with-vote.svg" alt="" />
-                  <h1>Stake With Power Vote</h1>
+                  <h1>Stake KACY</h1>
                 </S.Name>
-                <p>Stake $KACY to earn $KACY + Voting Power</p>
+                <p>EARN REWARDS AND VOTING POWER</p>
               </S.NameStake>
               <VotingPower
                 getTotalVotes={kacyStake.totalVotes}
@@ -133,9 +136,9 @@ const StakeFarm = () => {
             <S.NameStake left={true} style={{ margin: '100px 0 50px' }}>
               <S.Name>
                 <img src="assets/stake-money-withdraw.svg" alt="" />
-                <h1>Other Staking Pools</h1>
+                <h1>FARM KACY</h1>
               </S.Name>
-              <p>Stake $KACY to earn $KACY + Voting Power</p>
+              <p>EARN KACY BY STAKING OTHER ASSETS</p>
             </S.NameStake>
             <S.GridStaking>
               <StakeCard
@@ -167,7 +170,6 @@ const StakeFarm = () => {
               <ComingSoon />
             </S.GridStaking>
           </S.StakeFarm>
-          {/* <BannerCTA /> */}
         </>
         :
         <>
