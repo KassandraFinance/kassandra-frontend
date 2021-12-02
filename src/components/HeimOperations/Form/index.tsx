@@ -732,10 +732,13 @@ const Form = ({
       />
 
       {title === 'Swap' ?
-        <div>
-          <img src="/assets/arrowDown.svg" alt="" style={{ margin: '12px 0' }} />
-          <img src="/assets/arrowDown.svg" alt="" style={{ transform: 'rotate(180deg)', margin: '12px 0 12px 8px' }} />
-        </div>
+        <S.SwapButton type="button" onClick={() => {
+          setSwapInAddress(swapOutAddress)
+          setSwapOutAddress(swapInAddress)
+        }} >
+          <img src="/assets/arrowDown.svg" alt="" />
+          <img src="/assets/arrowDown.svg" alt="" />
+        </S.SwapButton>
         :
         <img src="/assets/arrowDown.svg" alt="" style={{ margin: '12px 0' }} />
       }
