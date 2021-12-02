@@ -339,7 +339,7 @@ const Form = ({
     }
 
     calc()
-  }, [title, swapInAmount, swapInAddress])
+  }, [swapInAmount, swapInAddress])
 
   // calculate swap
   React.useEffect(() => {
@@ -385,7 +385,7 @@ const Form = ({
     }
 
     calc()
-  }, [title, swapInAmount, swapInAddress, swapOutAddress])
+  }, [swapInAmount, swapInAddress, swapOutAddress])
 
   // calculate withdraw
   React.useEffect(() => {
@@ -462,7 +462,7 @@ const Form = ({
     }
 
     calc()
-  }, [title, swapInAmount, swapOutAddress, tokenAddress2Index, infoAHYPE])
+  }, [swapInAmount, swapOutAddress, infoAHYPE])
 
   const tokenInIndex = tokenAddress2Index[swapInAddress]
   const tokenOutIndex = tokenAddress2Index[swapOutAddress]
