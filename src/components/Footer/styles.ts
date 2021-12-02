@@ -3,20 +3,14 @@ import theme from '../../styles/theme'
 
 export const Footer = styled.footer`
   color: #fcfcfc;
-  padding: 40px 0;
-  /* position: relative; */
   width: 100%;
+  padding: 40px 32px;
 `
 export const Container = styled.div`
   align-content: space-between;
   margin: 0 auto;
-  padding: 0 32px;
-
   @media (min-width: 1600px) {
     max-width: 1140px;
-  }
-  @media (min-width: 1440px) {
-    padding: 0 80px;
   }
   @media (max-width: 710px) {
     flex-direction: column-reverse;
