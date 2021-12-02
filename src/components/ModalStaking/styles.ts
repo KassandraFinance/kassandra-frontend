@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 export const Backdrop = styled.div`
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
 
   position: fixed;
   top: 0;
@@ -13,35 +13,41 @@ export const Backdrop = styled.div`
   z-index: 9;
 `
 
-interface IModalProps {
+interface IBorderGradientProps {
   modalOpen: boolean;
+  stakeInKacy: boolean;
 }
 
 // eslint-disable-next-line prettier/prettier
-export const Modal = styled.div<IModalProps>`
+export const BorderGradient = styled.div<IBorderGradientProps>`
   display: ${props => (props.modalOpen ? 'block' : 'none')};
-
-  /* background: url('assets/blur1.svg'); */
-
-  background-color: rgba(31, 31, 31, 0.95);
+  background: ${props =>
+    props.stakeInKacy
+      ? 'linear-gradient(-45deg, #E843C4 0%, #F79640 100%)'
+      : `linear-gradient(-45deg, ${theme.colors.blue} 0%, ${theme.colors.cyan} 100%)`};
   border-radius: ${theme.border.radius};
-  border: 1px solid rgba(255, 255, 255, 0.4);
-
+  
   width: 300px;
   max-height: 100%;
+  padding: 1px;
 
   position: fixed;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
 
-  margin-left: -150px;
-  margin-top: -165px;
+  z-index: 20;
+`
 
-  z-index: 10;
+export const BackgroundBlack = styled.div`
+  background-color: #1f2937;
+  border-radius: ${theme.border.radius};
+  width: 100%;
+  height: 100%;
 `
 
 export const InterBackground = styled.div`
-  background: rgb(20, 20, 20);
+  background-color: rgba(31, 31, 31, 0.72);
   border-radius: 6px 6px 0 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 
@@ -71,22 +77,24 @@ export const Main = styled.div`
 `
 
 export const Amount = styled.div`
-  background: #565656;
+  background-color: rgba(31, 31, 31, 0.72);
   border-radius: 10px;
+
   text-align: right;
 
   padding: 16px;
   position: relative;
 
   span {
+    color: ${theme.colors.amber};
     font-size: 14px;
     display: block;
     margin: 0 0 -4px;
   }
 
   h5 {
+    color: #c4c4c4;
     font-weight: ${theme.font.weight.normal};
-
     font-size: ${theme.font.sizes.font12};
     line-height: 12px;
   }
@@ -96,8 +104,9 @@ export const Amount = styled.div`
     border: none;
     color: #fff;
     font-size: ${theme.font.sizes.font20};
-
+    font-weight: 500;
     text-align: right;
+
     max-width: 100%;
 
     outline: none;
