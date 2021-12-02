@@ -8,6 +8,11 @@ export const Container = styled.section`
   max-width: 94.3rem;
   margin: 0 auto 9rem;
   border-bottom: 1px solid #ffffff24;
+  @media (max-width: 920px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 3.2rem;
+  }
 `
 
 export const TitleAndIcon = styled.div`
@@ -42,6 +47,15 @@ export const Partners = styled.div`
   display: flex;
   justify-content: space-evenly;
   padding-top: 5rem;
+  @media (max-width: 920px) {
+    margin-bottom: 1.6rem;
+    max-width: 100%;
+    justify-content: start;
+     padding-top: 2rem;
+    img {
+      margin-right: 2.4rem;
+    }
+  }
   img {
     max-width: 100%;
     max-height: 2.9rem;
