@@ -69,11 +69,7 @@ const InputTokens = ({
   }, [poolTokens])
 
   const wei2String = (input: BigNumber) => {
-    const decimal = input.mod(wei).toString()
-
-    return `${input.div(wei).toString()}${
-      decimal === '0' ? '' : `.${decimal.padStart(Number(decimals), '0')}`
-    }`
+    return BNtoDecimal(input, decimals).replace(/ /g, '')
   }
 
   const setMax = () => {
