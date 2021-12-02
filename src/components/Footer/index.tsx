@@ -125,7 +125,6 @@ const Footer = () => (
                   height="32"
                 />
               </a>
-
             </li>
           </ul>
           <S.Certified>
