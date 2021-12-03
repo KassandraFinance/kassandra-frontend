@@ -89,11 +89,11 @@ const Header = () => {
   return (
     <>
       <S.Wrapper pageHeim={asPath === '/heim'}>
-        <S.MenuIconContainer>
+        {/* <S.MenuIconContainer>
           <S.IconWrapper onClick={() => setIsOpen(true)}>
             <img src="/assets/menuIcon.svg" alt="" />
           </S.IconWrapper>
-        </S.MenuIconContainer>
+        </S.MenuIconContainer> */}
 
         <S.LogoWrapper>
           <Link href="/" passHref>
@@ -117,21 +117,25 @@ const Header = () => {
             </Link>
           )} */}
 
-          <DropdownInvest />
+          {/* <DropdownInvest /> */}
 
-          <Link href="/farm" passHref>
-            <S.MenuLink onClick={() => clickMatomoEvent('click-on-link', 'stake-farm')}>Stake/Farm</S.MenuLink>
-          </Link>
+          {/* <Link href="/products/ahype" passHref> */}
+            <S.MenuLinkDisable onClick={() => clickMatomoEvent('click-on-link', 'stake-farm')}>Invest</S.MenuLinkDisable>
+          {/* </Link> */}
+
+          {/* <Link href="/farm" passHref> */}
+            <S.MenuLinkDisable onClick={() => clickMatomoEvent('click-on-link', 'stake-farm')}>Stake/Farm</S.MenuLinkDisable>
+          {/* </Link> */}
 
           {/* <Link href="/" passHref> */}
             <S.MenuLinkDisable onClick={() => clickMatomoEvent('click-on-link', 'vote')} >Vote</S.MenuLinkDisable>
           {/* </Link> */}
 
-          <Link href="/about" passHref>
-            <S.MenuLink onClick={() => clickMatomoEvent('click-on-link', 'about')}>About</S.MenuLink>
-          </Link>
+          {/* <Link href="/about" passHref> */}
+            <S.MenuLinkDisable onClick={() => clickMatomoEvent('click-on-link', 'about')}>About</S.MenuLinkDisable>
+          {/* </Link> */}
 
-          {web3.currentProvider !== null ? (
+          {/* {web3.currentProvider !== null ? (
             userWalletAddress ? (
               <Button
                 icon={
@@ -173,7 +177,7 @@ const Header = () => {
                 clickMatomoEvent('open-site-metamask', 'install-metamask')
               }}
               text='Install MetaMask!' />
-          )}
+          )} */}
 
         </S.MenuNav>
       </S.MenuDesktop>
