@@ -127,18 +127,16 @@ const ChartAllocation = ({ data }: IChartAllocationProps) => {
           margin: '25px 0'
         }}
         stackOffset="expand"
-        margin={{ top: 80, right: 2, left: 0, bottom: 20 }}
-        // innerRadius={20}
-        // outerRadius={20}
+        margin={{ top: 90, right: 2, left: 0, bottom: 0 }}
       >
-        <XAxis dataKey="timestamp" tickFormatter={time => getDate(time)} hide />
+        <XAxis dataKey="timestamp" tickFormatter={time => getDate(time)} />
         <YAxis tickFormatter={toPercent} hide />
         {/* <Tooltip content={renderTooltipContent} /> */}
         {arrayKeys &&
           arrayKeys.map((key, index) => {
             return (
               <Area
-                key={`${key}-${Math.random() * 1000}`}
+                key={`${key}`}
                 type="monotone"
                 dataKey={key}
                 stackId="1"

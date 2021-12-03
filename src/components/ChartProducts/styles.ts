@@ -17,19 +17,16 @@ export const SelectChart = styled.div`
 
 export const Input = styled.input`
   display: none;
-
-  &[type='radio'] + label {
-    color: #fff;
-    padding: 2px;
-  }
-
-  &[type='radio']:checked + label {
-    border-bottom: 1px solid ${theme.colors.cyan};
-    font-weight: ${theme.font.weight.medium};
-  }
 `
 
-export const Label = styled.label`
+interface ILabelProps {
+  selected: boolean;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const Label = styled.label<ILabelProps>`
+  border-bottom: 2px solid ${props =>
+    props.selected ? theme.colors.cyan : 'transparent'};
   color: #fff;
   font-size: ${theme.font.sizes.font14};
   text-align: center;
@@ -41,6 +38,8 @@ export const Label = styled.label`
   cursor: pointer;
 
   height: 20px;
+  padding-bottom: 4px;
+
   @media (max-width: 375px) {
     font-size: 13px;
     padding: 10px 18px;
