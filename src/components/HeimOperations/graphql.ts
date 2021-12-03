@@ -1,8 +1,8 @@
 import { gql } from 'graphql-request'
 
 export const GET_INFO_AHYPE = gql`
-  query {
-    pool(id: "0x03c0c7b6b55a0e5c1f2fad2c45b453c56a8f866a") {
+  query ($id: ID!) {
+    pool(id: $id) {
       # information aHYPE
       id
       name

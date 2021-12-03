@@ -49,10 +49,8 @@ interface ILabelProps {
   selected: boolean;
 }
 
-export const Label =
-  styled.label <
-  ILabelProps >
-  `
+// eslint-disable-next-line prettier/prettier
+export const Label = styled.label<ILabelProps>`
   border-bottom: 2px solid ${props =>
     props.selected ? theme.colors.cyan : 'rgba(255, 255, 255, 0.15)'};
   color: ${props => (props.selected ? '#fff' : theme.colors.gray)};
