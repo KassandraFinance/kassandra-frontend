@@ -21,12 +21,10 @@ const Distribution = () => {
   // get data coinGecko
   async function getCoinList() {
     const URL = 'https://api.coingecko.com/api/v3/coins/list'
-    await fetch(URL, {
-      method: 'get'
-    })
-      .then(res => res.json())
-      .then(res => res.forEach((item: any) => isTokenPool(item)))
-      .catch(err => err)
+    const data = await fetch(URL)
+    const responseJson = await data.json()
+
+    responseJson.map((item: any) => isTokenPool(item))
   }
 
   function isTokenPool(value: any) {
@@ -48,9 +46,7 @@ const Distribution = () => {
 
   async function getCoin(id: string, element: any) {
     const URL = `https://api.coingecko.com/api/v3/coins/${id}`
-    await fetch(URL, {
-      method: 'get'
-    })
+    await fetch(URL)
       .then(res => res.json())
       .then(res => {
         setCoinInfoList(prevState => [
@@ -74,8 +70,8 @@ const Distribution = () => {
       return
     }
 
+    getCoinList()
     setCoinInfoList([])
-    setTimeout(() => getCoinList(), 200)
   }, [poolTokensArray])
 
   coinInfoList.sort((a: { allocation: number }, b: { allocation: number }) => {
