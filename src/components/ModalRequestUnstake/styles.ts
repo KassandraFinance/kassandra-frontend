@@ -99,6 +99,10 @@ export const Content = styled.div`
   }
 `
 
+export const Values = styled.div`
+  display: flex;
+`
+
 export const ButtonContainer = styled.div`
   margin-top: 8px;
   button {

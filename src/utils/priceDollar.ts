@@ -1,7 +1,7 @@
 export const priceDollar = (address: string | undefined, array: any[]) => {
-  const token = array.filter((token) => {
+  const token = array.filter(token => {
     return token.address === address
   })
 
-  return token[0]?.market_data?.current_price.usd || 0
+  return token[0]?.price || 0
 }

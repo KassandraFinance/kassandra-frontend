@@ -1,24 +1,25 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable prettier/prettier */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
+import useSWR from 'swr'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
-import { TransactionReceipt } from 'web3-core'
 import { EventData } from 'web3-eth-contract'
 
+import { TokenDetails } from '../../../store/modules/poolTokens/types'
 import { actionGetPoolTokens } from '../../../store/modules/poolTokens/actions'
-
-import Button from '../../Button'
-
-import { HeimCRPPOOL, HeimCorePool } from '../../../constants/tokenAddresses'
 
 import useConnect from '../../../hooks/useConnect'
 import useCRPContract from '../../../hooks/useCRPContract'
 import useERC20Contract, { ERC20 } from '../../../hooks/useERC20Contract'
 import usePoolContract from '../../../hooks/usePoolContract'
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+
+import Button from '../../Button'
+import ModalWalletConnect from '../../ModalWalletConnect'
 
 import InputTokens from './InputTokens'
 import InputDefault from './InputDefault'
@@ -26,17 +27,20 @@ import InputBestValue from './InputBestValue'
 
 import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
-import * as S from './styles'
-import { BNtoDecimal, wei } from '../../../utils/numerals'
-import { confirmWithdraw, confirmSwap, confirmInvest } from '../../../utils/confirmTransactions'
-import { TokenDetails } from '../../../store/modules/poolTokens/types'
-import ModalWalletConnect from '../../ModalWalletConnect'
 import { priceDollar } from '../../../utils/priceDollar'
+import { BNtoDecimal, wei } from '../../../utils/numerals'
+import waitTransaction, { MetamaskError, TransactionCallback } from '../../../utils/txWait'
+
+import * as S from './styles'
+import { GET_INFO_AHYPE } from '../graphql'
 
 interface IFormProps {
   typeAction: string;
   title: string;
   typeWithdrawChecked: string;
+  crpPoolAddress: string
+  corePoolAddress: string
+  productCategories: string | string[]
 }
 
 interface Address2Index {
@@ -44,19 +48,20 @@ interface Address2Index {
 }
 
 const Form = ({ 
+  crpPoolAddress,
+  corePoolAddress,
+  productCategories,
   typeAction, 
   title, 
   typeWithdrawChecked,
 }: IFormProps) => {
-  const crpPoolToken = useERC20Contract(HeimCRPPOOL)
-  const corePool = usePoolContract(HeimCorePool)
-  const crpPool = useCRPContract(HeimCRPPOOL)
-  const { poolTokensArray, userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const crpPoolToken = useERC20Contract(crpPoolAddress)
+  const corePool = usePoolContract(corePoolAddress)
+  const crpPool = useCRPContract(crpPoolAddress)
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { connect } = useConnect()
-  const dispatch = useDispatch()
+  const { trackBuying, trackBought, trackCancelBuying } = useMatomoEcommerce();
 
-  const [poolTokenDetails, setPoolTokensDetails] = React.useState<TokenDetails[]>([])
-  const [poolTokens, setPoolTokens] = React.useState<string[]>([])
   const [tokenAddress2Index, setTokenAddress2Index] = React.useState<Address2Index>({})
   const [isApproved, setIsApproved] = React.useState<boolean[]>([])
   const [approvalCheck, setApprovalCheck] = React.useState(0)
@@ -75,121 +80,65 @@ const Form = ({
   const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
   const [priceInDollarOnWithdraw, setPriceInDollarOnWithdraw] = React.useState<string>('')
 
-  const res = localStorage.getItem("listCoinPool")
-  const listCoinPool = res && JSON.parse(res)
+  const [infoAHYPE, setInfoAHYPE] = React.useState<TokenDetails[]>([])
 
-  const [coinInfoList, setCoinInfoList] = React.useState<TokenDetails[]>(listCoinPool || [])
-  // get data coinGecko
+  const dispatch = useDispatch()
 
+  const { data } = useSWR(GET_INFO_AHYPE)
 
-  async function getCoinList() {
-    const URL = 'https://api.coingecko.com/api/v3/coins/list'
-    await fetch(URL, {
-      method: 'get'
-    })
-      .then(res => res.json())
-      .then(res => res.forEach((item: any) => isTokenPool(item)))
-      .catch(err => err)
-  }
-
-  function isTokenPool(value: any) {
-    for (let i = 0; i < poolTokenDetails.length; i++) {
-      const element = poolTokenDetails[i];
-      // let newName = element.name.replace("Kassandra Test ", "")
-
-      if (value.symbol === element.symbol.toLowerCase()) {
-        if (value.symbol === "uni" && value.name !== "Uniswap") {
-          continue
-        }
-        if (value.symbol === "grt" && value.name !== "The Graph") {
-          continue
-        }
-        getCoin(value.id, element)
+  React.useEffect(() => {
+    if (data) {
+      const aHYPE = {
+        balance_in_pool: '',
+        address: data.pool.id,
+        decimals: new BigNumber(data.pool.decimals), 
+        price: Number(data.pool.price_usd),
+        name: data.pool.name,
+        symbol: data.pool.symbol,
+        allocation: 0
       }
-    }
-  }
-
-  async function getCoin(id: string, element: any) {
-    const URL = `https://api.coingecko.com/api/v3/coins/${id}`
-    await fetch(URL, {
-      method: 'get'
-    })
-      .then(res => res.json())
-      .then(res => {
-        setCoinInfoList(prevState => [...prevState, {
-          image: res.image.small,
-          market_data: res.market_data,
-          ...element
-        }])
+      const res: TokenDetails[] = data.pool.underlying_assets.map((item: { 
+        balance: string; 
+        token: { 
+          id: string; 
+          decimals: string | number | BigNumber; 
+          price_usd: string; 
+          name: string; 
+          symbol: string 
+        }; 
+        weight_goal_normalized: any 
+      }) => {
+        return {
+          balance_in_pool: item.balance,
+          address: item.token.id,
+          allocation: Number((Number(item.weight_goal_normalized) * 100).toFixed(2)),
+          decimals: new BigNumber(item.token.decimals),
+          price: Number(item.token.price_usd),
+          name: item.token.name,
+          symbol: item.token.symbol
+        }
       })
-      .catch(err => err)
-  }
-
-  React.useEffect(() => {
-    localStorage.setItem('listCoinPool', JSON.stringify(coinInfoList))
-    dispatch(actionGetPoolTokens(coinInfoList))
-
-  }, [coinInfoList])
 
 
-  React.useEffect(() => {
-    if (poolTokenDetails.length < 1) {
-      return
-    }
 
-    getCoinList()
-    setCoinInfoList([])
-  }, [poolTokenDetails])
+      res.sort((a: { allocation: number | string }, b: { allocation: number | string }) => {
+        return Number(b.allocation) - Number(a.allocation)
+      })
 
-  // get tokens
-  React.useEffect(() => {
-    const calc = async (newPoolTokens: string[]) => {
-      const newAddresses: string[] = []
-      const newNames: Promise<string>[] = []
-      const newSymbols: Promise<string>[] = []
-      const newDecimals: Promise<BigNumber>[] = []
-      const newAllocation: Promise<number>[] = []
+      res.push(aHYPE)
 
-
-      for (let i = 0; i < newPoolTokens.length; i += 1) {
-        const token = ERC20(newPoolTokens[i])
-        newAddresses.push(newPoolTokens[i])
-        newNames.push(token.name())
-        newSymbols.push(token.symbol())
-        newDecimals.push(token.decimals())
-        newAllocation.push(corePool.normalizedWeight(newPoolTokens[i]))
-      }
-
-      newAddresses.push(HeimCRPPOOL)
-      newNames.push(crpPoolToken.name())
-      newSymbols.push(crpPoolToken.symbol())
-      newDecimals.push(crpPoolToken.decimals())
-
-      setPoolTokensDetails(
-        await Promise.all(
-          Array(newPoolTokens.length + 1)
-            .fill(0)
-            .map(async (_, i) => ({
-              address: newAddresses[i],
-              name: await newNames[i],
-              symbol: await newSymbols[i],
-              decimals: await newDecimals[i],
-              allocation: await newAllocation[i]
-            }))
-        )
-      )
-    }
-
-    corePool.currentTokens().then(newPoolTokens => {
-      setPoolTokens(newPoolTokens)
-      calc(newPoolTokens)
       setTokenAddress2Index(
-        newPoolTokens.reduce((acc, cur, i) => ({ [cur]: i, ...acc }), {
-          [HeimCRPPOOL]: newPoolTokens.length
-        })
+        res.reduce((acc, cur, i) => ({ [cur.address]: i, ...acc }), {})
       )
-    })
-  }, [])
+
+      setInfoAHYPE(res)
+    }
+  }, [data])
+
+  React.useEffect(() => {
+    dispatch(actionGetPoolTokens(infoAHYPE))
+  }, [infoAHYPE])
+
 
   // set "swap" tokens
   React.useEffect(() => {
@@ -199,39 +148,39 @@ const Form = ({
     /* eslint-disable prefer-destructuring */
     switch (title) {
       case 'Invest':
-        newSwapInAddress = poolTokens[0] || ''
-        newSwapOutAddress = HeimCRPPOOL
+        newSwapInAddress = infoAHYPE[0]?.address || ''
+        newSwapOutAddress = crpPoolAddress
         break
       case 'Withdraw':
-        newSwapInAddress = HeimCRPPOOL
-        newSwapOutAddress = typeWithdrawChecked === "Single_asset" ? poolTokens[0] : ''
+        newSwapInAddress = crpPoolAddress
+        newSwapOutAddress = typeWithdrawChecked === "Single_asset" ? infoAHYPE[0].address : ''
         break
       case 'Swap':
-        newSwapInAddress = poolTokens[0] || ''
-        newSwapOutAddress = poolTokens[1] || ''
+        newSwapInAddress = infoAHYPE[0].address || ''
+        newSwapOutAddress = infoAHYPE[1].address || ''
         break
       default:
     }
     /* eslint-disable prefer-destructuring */
 
-    setSwapInAddress(newSwapInAddress)
-    setSwapOutAddress(newSwapOutAddress)
-  }, [title, poolTokens, typeWithdrawChecked])
+    setSwapInAddress(newSwapInAddress.toLocaleLowerCase())
+    setSwapOutAddress(newSwapOutAddress.toLocaleLowerCase())
+  }, [title, infoAHYPE, typeWithdrawChecked])
 
   // get contract approval of tokens
   React.useEffect(() => {
     if (title === 'Withdraw') {
-      setIsApproved(Array(poolTokens.length + 1).fill(true))
+      setIsApproved(Array(infoAHYPE.length + 1).fill(true))
       return
     }
 
     const calc = async () => {
       const newApprovals = []
 
-      for (let i = 0; i < poolTokens.length; i += 1) {
+      for (let i = 0; i < infoAHYPE.length; i += 1) {
         newApprovals.push(
-          ERC20(poolTokens[i]).allowance(
-            title === 'Invest' ? HeimCRPPOOL : HeimCorePool,
+          ERC20(infoAHYPE[i].address).allowance(
+            title === 'Invest' ? crpPoolAddress : corePoolAddress,
             userWalletAddress
           )
         )
@@ -243,7 +192,7 @@ const Form = ({
     setIsReload(!isReload)
     setIsApproved([])
     calc()
-  }, [title, poolTokens, approvalCheck, userWalletAddress])
+  }, [title, infoAHYPE, approvalCheck, userWalletAddress])
 
   // get balance of swap in token
   React.useEffect(() => {
@@ -275,7 +224,7 @@ const Form = ({
     return () => {
       balanceSub.unsubscribe()
     }
-  }, [swapInAddress, userWalletAddress, title, poolTokens, swapOutAddress])
+  }, [swapInAddress, userWalletAddress, title, infoAHYPE, swapOutAddress])
 
   // get balance of swap out token
   React.useEffect(() => {
@@ -288,8 +237,8 @@ const Form = ({
     if (swapOutAddress === '') {
       const calc = async () => {
         const newSwapOutBalance = await Promise.all(
-          poolTokens.map(async tokenAddress => {
-            const token = ERC20(tokenAddress)
+          infoAHYPE.map(async item => {
+            const token = ERC20(item.address)
             return token.balance(userWalletAddress)
           })
         )
@@ -328,13 +277,13 @@ const Form = ({
     return () => {
       balanceSub.unsubscribe()
     }
-  }, [userWalletAddress, poolTokens, swapInAddress, swapOutAddress])
+  }, [userWalletAddress, infoAHYPE, swapInAddress, swapOutAddress])
 
   React.useEffect(() => {
-    const tokens = title === "Withdraw" ? poolTokens.length : 1
+    const tokens = title === "Withdraw" ? infoAHYPE.length : 1
     setSwapOutPrice(new BigNumber(-1))
     setSwapOutAmount(Array(tokens).fill(new BigNumber(0)))
-  }, [title, swapInAddress, swapOutAddress, poolTokens.length])
+  }, [title, swapInAddress, swapOutAddress, infoAHYPE.length])
 
   // calculate investment
   React.useEffect(() => {
@@ -342,7 +291,7 @@ const Form = ({
       title !== 'Invest' ||
       swapInAddress.length === 0 ||
       swapOutAddress.length === 0 ||
-      swapInAddress === HeimCRPPOOL
+      swapInAddress === crpPoolAddress.toLocaleLowerCase()
     ) {
       return
     }
@@ -390,7 +339,7 @@ const Form = ({
     }
 
     calc()
-  }, [title, swapInAmount, swapInAddress])
+  }, [swapInAmount, swapInAddress])
 
   // calculate swap
   React.useEffect(() => {
@@ -398,8 +347,8 @@ const Form = ({
       title !== 'Swap' ||
       swapInAddress.length === 0 ||
       swapOutAddress.length === 0 ||
-      swapInAddress === HeimCRPPOOL ||
-      swapOutAddress === HeimCRPPOOL
+      swapInAddress === crpPoolAddress.toLocaleLowerCase() ||
+      swapOutAddress === crpPoolAddress.toLocaleLowerCase()
     ) {
       return
     }
@@ -436,11 +385,11 @@ const Form = ({
     }
 
     calc()
-  }, [title, swapInAmount, swapInAddress, swapOutAddress])
+  }, [swapInAmount, swapInAddress, swapOutAddress])
 
   // calculate withdraw
   React.useEffect(() => {
-    if (title !== 'Withdraw' || swapOutAddress === HeimCRPPOOL) {
+    if (title !== 'Withdraw' || swapOutAddress === crpPoolAddress.toLocaleLowerCase()) {
       return
     }
 
@@ -465,8 +414,8 @@ const Form = ({
 
       if (swapOutAddress === '') {
         const newSwapOutAmount = await Promise.all(
-          poolTokens.map(async tokenAddress => {
-            const swapOutTotalPoolBalance = await corePool.balance(tokenAddress)
+          infoAHYPE.slice(0, -1).map(async item => {
+            const swapOutTotalPoolBalance = await corePool.balance(item.address)
             return getWithdrawAmount(
               poolSupply,
               swapInAmount,
@@ -508,32 +457,121 @@ const Form = ({
           poolSwapFee
         )
       ])
-
       setSwapOutAmount([SingleSwapOutAmount])
       setSwapOutPrice(newSwapOutPrice)
     }
 
     calc()
-  }, [title, swapInAmount, swapOutAddress, tokenAddress2Index, poolTokens])
+  }, [swapInAmount, swapOutAddress, infoAHYPE])
 
   const tokenInIndex = tokenAddress2Index[swapInAddress]
   const tokenOutIndex = tokenAddress2Index[swapOutAddress]
+  
+  const approvalCallback = React.useCallback(
+    (tokenSymbol: string): TransactionCallback => {
+      return async (error: MetamaskError, txHash: string) => {
+        if (error) {
+          if (error.code === 4001) {
+            ToastError(`Approval of ${tokenSymbol} cancelled`)
+            return
+          }
 
-  const asyncExecute = React.useCallback(
-    (msg: string, set: () => void) =>
-      (txReceipt?: TransactionReceipt, error?: Error) => {
-        if (error || !txReceipt) {
-          ToastError('Could not approve contract, try again.')
+          ToastError(`Failed to approve ${tokenSymbol}. Please try again later.`)
           return
         }
-        if (!txReceipt.status) {
-          ToastError('Transaction failed!')
+
+        ToastWarning(`Waiting approval of ${tokenSymbol}...`)
+        const txReceipt = await waitTransaction(txHash)
+
+        if (txReceipt.status) {
+          ToastSuccess(`Approval of ${tokenSymbol} confirmed`)
+          setApprovalCheck(cur => cur + 1)
           return
         }
-        ToastSuccess(msg)
-        set()
-      },
+      }
+    },
     []
+  )
+
+  const investCallback = React.useCallback(
+    (tokenSymbol: string, amountInUSD: number): TransactionCallback => {
+      return async (error: MetamaskError, txHash: string) => {
+        if (error) {
+          trackCancelBuying()
+
+          if (error.code === 4001) {
+            ToastError(`Investment in ${tokenSymbol} cancelled`)
+            return
+          }
+
+          ToastError(`Failed to invest in ${tokenSymbol}. Please try again later.`)
+          return
+        }
+
+        trackBought(txHash, amountInUSD, 0)
+        ToastWarning(`Confirming investment in ${tokenSymbol}...`)
+        const txReceipt = await waitTransaction(txHash)
+
+        if (txReceipt.status) {
+          ToastSuccess(`Investment in ${tokenSymbol} confirmed`)
+          return
+        }
+      }
+    },
+    [infoAHYPE]
+  )
+
+  const withdrawCallback = React.useCallback(
+    (tokenSymbol: string, amountInUSD: number): TransactionCallback => {
+      return async (error: MetamaskError, txHash: string) => {
+        if (error) {
+          trackCancelBuying()
+
+          if (error.code === 4001) {
+            ToastError(`Withdrawal of ${tokenSymbol} cancelled`)
+            return
+          }
+
+          ToastError(`Failed to withdraw ${tokenSymbol}. Please try again later.`)
+          return
+        }
+
+        trackBought(txHash, amountInUSD, 0)
+        ToastWarning(`Confirming withdrawal of ${tokenSymbol}...`)
+        const txReceipt = await waitTransaction(txHash)
+
+        if (txReceipt.status) {
+          ToastSuccess(`Withdrawal of ${tokenSymbol} confirmed`)
+          return
+        }
+      }
+    },
+    [crpPoolAddress]
+  )
+
+  const swapCallback = React.useCallback(
+    (tokenInSymbol: string, tokenOutSymbol: string): TransactionCallback => {
+      return async (error: MetamaskError, txHash: string) => {
+        if (error) {
+          if (error.code === 4001) {
+            ToastError(`Swap of ${tokenInSymbol} to ${tokenOutSymbol} cancelled`)
+            return
+          }
+
+          ToastError(`Failed to swap ${tokenInSymbol} to ${tokenOutSymbol}. Please try again later.`)
+          return
+        }
+
+        ToastWarning(`Confirming swap of ${tokenInSymbol} to ${tokenOutSymbol}...`)
+        const txReceipt = await waitTransaction(txHash)
+
+        if (txReceipt.status) {
+          ToastSuccess(`Swap of ${tokenInSymbol} to ${tokenOutSymbol} confirmed`)
+          return
+        }
+      }
+    },
+    [tokenInIndex, tokenOutIndex]
   )
 
   const submitAction = React.useCallback(
@@ -546,18 +584,25 @@ const Form = ({
         swapInAmountInput,
         swapInAddressInput,
         swapOutAddressInput,
+        swapInSymbol,
+        swapOutSymbol,
         walletAddress,
-        tokensLength
+        tokensLength,
+        amountUSD
       } = e.target as HTMLFormElement & {
         approved: HTMLInputElement
         category: HTMLInputElement
         swapInAmountInput: HTMLInputElement
         swapInAddressInput: HTMLInputElement
         swapOutAddressInput: HTMLInputElement
+        swapInSymbol: HTMLInputElement
+        swapOutSymbol: HTMLInputElement
         walletAddress: HTMLInputElement
         tokensLength: HTMLInputElement
+        amountUSD: HTMLInputElement
       }
 
+      const amountInUSD = parseFloat(amountUSD.value)
       const swapInAmountVal = new BigNumber(swapInAmountInput.value)
       const swapInAddressVal = swapInAddressInput.value
       const swapOutAddressVal = swapOutAddressInput.value
@@ -567,32 +612,31 @@ const Form = ({
           case 'Invest':
             if (approved.value === '0') {
               ERC20(swapInAddressVal).approve(
-                HeimCRPPOOL,
+                crpPoolAddress,
                 walletAddress.value,
-                "Waiting for approval",
-                asyncExecute('Contract approval complete!', () =>
-                  setApprovalCheck(cur => cur + 1)
-                )
+                approvalCallback(swapInSymbol.value)
               )
               return
             }
 
+            trackBuying(crpPoolAddress, 'aHYPE', amountInUSD, productCategories)
             crpPool.joinswapExternAmountIn(
               swapInAddressVal,
               swapInAmountVal,
               walletAddress.value,
-              "Pending investment",
-              confirmInvest
+              investCallback(swapOutSymbol.value, amountInUSD)
             )
             return
 
           case 'Withdraw':
+            trackBuying(crpPoolAddress, 'aHYPE', -1 * amountInUSD, productCategories)
+
             if (swapOutAddressVal !== '') {
               crpPool.exitswapPoolAmountIn(
                 swapOutAddressVal,
                 swapInAmountVal,
                 walletAddress.value,
-                "Pending withdraw of a single token"
+                withdrawCallback(swapInSymbol.value, -1 * amountInUSD)
               )
               return
             }
@@ -601,20 +645,16 @@ const Form = ({
               swapInAmountVal,
               Array(parseInt(tokensLength.value)).fill(new BigNumber(0)),
               walletAddress.value,
-              "Pending withdraw",
-              confirmWithdraw
+              withdrawCallback(swapInSymbol.value, -1 * amountInUSD)
             )
             return
 
           case 'Swap':
             if (approved.value === '0') {
               ERC20(swapInAddressVal).approve(
-                HeimCorePool,
+                corePoolAddress,
                 walletAddress.value,
-                "Waiting for approval",
-                asyncExecute('Contract approval complete!', () =>
-                  setApprovalCheck(cur => cur + 1)
-                )
+                approvalCallback(swapInSymbol.value)
               )
               return
             }
@@ -624,8 +664,7 @@ const Form = ({
               swapInAmountVal,
               swapOutAddressVal,
               walletAddress.value,
-              "Pending Swap",
-              confirmSwap
+              swapCallback(swapInSymbol.value, swapOutSymbol.value)
             )
             return
 
@@ -643,38 +682,71 @@ const Form = ({
       <input type="hidden" name="swapInAmountInput" value={swapInAmount.toString()} />
       <input type="hidden" name="swapInAddressInput" value={swapInAddress} />
       <input type="hidden" name="swapOutAddressInput" value={swapOutAddress} />
+      <input type="hidden" name="swapInSymbol" value={infoAHYPE[tokenInIndex]?.symbol || ''} />
+      <input type="hidden" name="swapOutSymbol" value={infoAHYPE[tokenOutIndex]?.symbol || ''} />
       <input type="hidden" name="walletAddress" value={userWalletAddress} />
-      <input type="hidden" name="tokensLength" value={poolTokens.length} />
+      <input type="hidden" name="tokensLength" value={infoAHYPE.length - 1} />
+      <input type="hidden" name="amountUSD" value={
+        title === "Invest"
+          ? Big((swapOutAmount[0] || 0).toString())
+            .div(
+               Big(10).pow(infoAHYPE[tokenOutIndex]?.decimals.toNumber() || 0)
+             )
+            .mul(
+              Big(priceDollar(swapOutAddress, infoAHYPE))
+            )
+            .toString()
+          : Big((swapInAmount || 0).toString())
+            .div(
+               Big(10).pow(infoAHYPE[tokenInIndex]?.decimals.toNumber() || 0)
+             )
+            .mul(
+              Big(priceDollar(swapInAddress, infoAHYPE))
+            )
+            .toString()
+      } />
       <InputTokens
         actionString={typeAction}
         poolTokens={
           title === 'Withdraw'
-            ? [poolTokenDetails[poolTokenDetails.length - 1]]
-            : poolTokenDetails
+            ? [infoAHYPE[infoAHYPE.length - 1]]
+            : infoAHYPE
               .slice(0, -1)
               .filter((token: { address: string }) => token.address !== swapOutAddress)
         }
-        poolTokensArray={poolTokensArray
+        infoAHYPE={infoAHYPE
           .filter((token: { address: string }) => token.address !== swapOutAddress)
         }
         title={title}
-        decimals={poolTokenDetails[tokenInIndex] ? poolTokenDetails[tokenInIndex].decimals : new BigNumber(18)}
+        decimals={infoAHYPE[tokenInIndex] ? infoAHYPE[tokenInIndex].decimals : new BigNumber(18)}
         swapInBalance={swapInBalance}
         swapInAmount={swapInAmount}
+        swapInAddress={swapInAddress}
+        tokenDetails={infoAHYPE[tokenInIndex]}
         setSwapInAmount={setSwapInAmount}
         setSwapOutAmount={setSwapOutAmount}
         setSwapInAddress={setSwapInAddress}
       />
 
-      <img src="assets/arrowDown.svg" alt="" style={{ margin: '12px 0' }} />
+      {title === 'Swap' ?
+        <S.SwapButton type="button" onClick={() => {
+          setSwapInAddress(swapOutAddress)
+          setSwapOutAddress(swapInAddress)
+        }} >
+          <img src="/assets/arrowDown.svg" alt="" />
+          <img src="/assets/arrowDown.svg" alt="" />
+        </S.SwapButton>
+        :
+        <img src="/assets/arrowDown.svg" alt="" style={{ margin: '12px 0' }} />
+      }
       
       {title === 'Withdraw' ? (
         typeWithdrawChecked === 'Best_value' ?
           <InputBestValue
-            poolTokenDetails={poolTokenDetails
+            poolTokenDetails={infoAHYPE
               .slice(0, -1)
               .filter((token: { address: string }) => token.address !== swapInAddress)}
-            poolTokensArray={poolTokensArray}
+            infoAHYPE={infoAHYPE}
             swapOutAmount={swapOutAmount}
             swapOutBalance={swapOutBalance}
             setPriceInDollarOnWithdraw={setPriceInDollarOnWithdraw}
@@ -682,11 +754,12 @@ const Form = ({
           :
           <>
             <InputDefault
-              decimals={poolTokenDetails[tokenAddress2Index[swapOutAddress]]?.decimals}
-              poolTokens={poolTokenDetails
+              decimals={infoAHYPE[tokenAddress2Index[swapOutAddress]]?.decimals}
+              poolTokens={infoAHYPE
                 .slice(0, -1)
                 .filter((token: { address: string }) => token.address !== swapInAddress)}
-              poolTokensArray={poolTokensArray}
+              infoAHYPE={infoAHYPE}
+              tokenDetails={infoAHYPE[tokenOutIndex]}
               isMax={null}
               swapOutAmount={swapOutAmount[0]}
               swapOutBalance={swapOutBalance[0]}
@@ -698,24 +771,25 @@ const Form = ({
               <S.SpanLight>
                 {swapOutPrice < new BigNumber(0)
                   ? '...'
-                  : `1 ${poolTokenDetails[tokenInIndex]?.symbol} = ${BNtoDecimal(
+                  : `1 ${infoAHYPE[tokenInIndex]?.symbol} = ${BNtoDecimal(
                     swapOutPrice,
-                    poolTokenDetails[tokenOutIndex]?.decimals
-                  )} ${poolTokenDetails[tokenOutIndex]?.symbol}`}
+                    infoAHYPE[tokenOutIndex]?.decimals
+                  )} ${infoAHYPE[tokenOutIndex]?.symbol}`}
               </S.SpanLight>
             </S.ExchangeRate>
           </>
         ) : (
         <>
           <InputDefault
-            decimals={poolTokenDetails[tokenAddress2Index[swapOutAddress]]?.decimals}
+            decimals={infoAHYPE[tokenAddress2Index[swapOutAddress]]?.decimals}
             poolTokens={title === 'Invest'
-              ? [poolTokenDetails[poolTokenDetails.length - 1]]
-              : poolTokenDetails
+              ? [infoAHYPE[infoAHYPE.length - 1]]
+              : infoAHYPE
                 .slice(0, -1)
                 .filter((token: { address: string }) => token.address !== swapInAddress)}
-            poolTokensArray={poolTokensArray
+            infoAHYPE={infoAHYPE
               .filter((token: { address: string }) => token.address !== swapInAddress)}
+            tokenDetails={infoAHYPE[tokenOutIndex]}
             isMax={null}
             swapOutAmount={swapOutAmount[0]}
             swapOutBalance={swapOutBalance[0]}
@@ -727,10 +801,10 @@ const Form = ({
             <S.SpanLight>
               {swapOutPrice < new BigNumber(0)
                 ? '...'
-                : `1 ${poolTokenDetails[tokenInIndex]?.symbol} = ${BNtoDecimal(
+                : `1 ${infoAHYPE[tokenInIndex]?.symbol} = ${BNtoDecimal(
                   swapOutPrice,
-                  poolTokenDetails[tokenOutIndex]?.decimals
-                )} ${poolTokenDetails[tokenOutIndex]?.symbol}`}
+                  infoAHYPE[tokenOutIndex]?.decimals
+                )} ${infoAHYPE[tokenOutIndex]?.symbol}`}
             </S.SpanLight>
           </S.ExchangeRate>
         </>
@@ -750,15 +824,15 @@ const Form = ({
                   :
                     `${title} ${'$' + BNtoDecimal(
                       Big((swapOutAmount[0] || 0).toString())
-                        .mul(Big(priceDollar(swapOutAddress, poolTokensArray))),
-                      Big(poolTokenDetails[tokenOutIndex]?.decimals.toString(10)),
+                        .mul(Big(priceDollar(swapOutAddress, infoAHYPE))),
+                      Big(infoAHYPE[tokenOutIndex]?.decimals.toString(10)),
                       2, 2
                     )}`
                 :
                   `${title} ${'$' + BNtoDecimal(
                     Big((swapInAmount || 0).toString())
-                      .mul(Big(priceDollar(swapInAddress, poolTokensArray))),
-                    Big(poolTokenDetails[tokenInIndex]?.decimals.toString(10)),
+                      .mul(Big(priceDollar(swapInAddress, infoAHYPE))),
+                    Big(infoAHYPE[tokenInIndex]?.decimals.toString(10)),
                     2, 2
                   )}`
               :

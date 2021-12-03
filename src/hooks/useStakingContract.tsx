@@ -6,7 +6,7 @@ import { AbiItem } from "web3-utils"
 import { useSelector, RootStateOrAny } from 'react-redux'
 
 import web3, { EventSubscribe } from '../utils/web3'
-import waitTransaction, { CompleteCallback } from '../utils/txWait'
+import { TransactionCallback } from '../utils/txWait'
 
 import StakingContract from "../constants/abi/Staking.json"
 
@@ -55,40 +55,40 @@ const useStakingContract = (address: string) => {
 
     /* SEND */
 
-    const stake = async (pid: number, amount: BigNumber, onComplete?: CompleteCallback, message?: string) => {
+    const stake = async (pid: number, amount: BigNumber, callback: TransactionCallback) => {
       await contract.methods.stake(pid, amount, userWalletAddress, userWalletAddress)
         .send(
           { from: userWalletAddress }, 
-          waitTransaction(onComplete ? onComplete : () => {}, message)
+          callback
         )
     }
 
-    const unstake = async (pid: number, onComplete?: CompleteCallback, message?: string) => {
+    const unstake = async (pid: number, callback: TransactionCallback) => {
       await contract.methods.unstake(pid)
         .send({ from: userWalletAddress },
-          waitTransaction(onComplete ? onComplete : () => {}, message)
+          callback
         )
     }
 
-    const cancelUnstake = async (pid: number, onComplete?: CompleteCallback, message?: string) => {
+    const cancelUnstake = async (pid: number, callback: TransactionCallback) => {
       await contract.methods.cancelUnstake(pid)
         .send({ from: userWalletAddress }, 
-          waitTransaction(onComplete ? onComplete : () => {}, message)
+          callback
         )
     }
 
-    const getReward = async (pid: number, onComplete?: CompleteCallback, message?: string) => {
+    const getReward = async (pid: number, callback: TransactionCallback) => {
       await contract.methods.getReward(pid)
         .send(
           { from: userWalletAddress }, 
-          waitTransaction(onComplete ? onComplete : () => {}, message)
+          callback
         )
     }
 
-    const withdraw = async (pid: number, amount: BigNumber, onComplete?: CompleteCallback, message?: string) => {
+    const withdraw = async (pid: number, amount: BigNumber, callback: TransactionCallback) => {
       await contract.methods.withdraw(pid, amount)
         .send({ from: userWalletAddress },
-          waitTransaction(onComplete ? onComplete : () => {}, message)
+          callback
         )
     }
 

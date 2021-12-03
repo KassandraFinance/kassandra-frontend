@@ -54,78 +54,84 @@ const Footer = () => (
           />
           <span>© 2021-{new Date().getFullYear()} Kassandra.</span>
         </S.LowerLeft>
-        <ul>
-          <li>
-            <a
-              href="https://discord.com/invite/2uGEvqNnuq"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="/assets/discord-icon.svg"
-                alt="Join our Discord community"
-                width="32"
-                height="32"
-              />
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://t.me/KassandraDAO"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="/assets/telegram-icon.svg"
-                alt="Join our Telegram group"
-                width="32"
-                height="32"
-              />
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://github.com/KassandraFinance"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="/assets/github-icon.svg"
-                alt="Access our GitHub repository"
-                width="32"
-                height="32"
-              />
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://kassandrafoundation.medium.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="/assets/medium-icon.svg"
-                alt="Read our Medium blog"
-                width="32"
-                height="32"
-              />
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://twitter.com/dao_kassandra"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="/assets/twitter-icon.svg"
-                alt="Follow our Twitter feed"
-                width="32"
-                height="32"
-              />
-            </a>
-          </li>
-        </ul>
+        <S.LowerRight>
+          <ul>
+            <li>
+              <a
+                href="https://discord.gg/fAqpbP6tFw"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="/assets/discord-icon.svg"
+                  alt="Join our Discord community"
+                  width="32"
+                  height="32"
+                />
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://t.me/KassandraDAO"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="/assets/telegram-icon.svg"
+                  alt="Join our Telegram group"
+                  width="32"
+                  height="32"
+                />
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/KassandraFinance"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="/assets/github-icon.svg"
+                  alt="Access our GitHub repository"
+                  width="32"
+                  height="32"
+                />
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://kassandrafoundation.medium.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="/assets/medium-icon.svg"
+                  alt="Read our Medium blog"
+                  width="32"
+                  height="32"
+                />
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://twitter.com/dao_kassandra"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="/assets/twitter-icon.svg"
+                  alt="Follow our Twitter feed"
+                  width="32"
+                  height="32"
+                />
+              </a>
+            </li>
+          </ul>
+          <S.Certified>
+            <span>Audited By</span>
+            <img src="/assets/Certik.svg" alt="Certik" />
+          </S.Certified>
+        </S.LowerRight>
       </S.LowerContainer>
       <S.LowerContainerMobile>
         <ul>
@@ -209,6 +215,10 @@ const Footer = () => (
           />
           <span>© 2021-{new Date().getFullYear()} Kassandra.</span>
         </S.LowerLeft>
+        <S.Certified>
+          <span>Audited By</span>
+          <img src="/assets/Certik.svg" alt="Certik" />
+        </S.Certified>
       </S.LowerContainerMobile>
     </S.Container>
   </S.Footer>

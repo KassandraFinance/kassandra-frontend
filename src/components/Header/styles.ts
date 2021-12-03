@@ -100,6 +100,7 @@ export const MenuLink = styled.a`
         position: absolute;
         display: block;
         height: 0.3rem;
+        border-radius: 0.15rem;
         background-color: ${theme.colors.cyan};
         animation: hoverAnimation 0.2s forwards;
       }
@@ -134,6 +135,7 @@ export const MenuLinkDisable = styled.a`
         position: absolute;
         display: block;
         height: 0.3rem;
+        border-radius: 0.15rem;
         background-color: ${theme.colors.lightGray};
         animation: hoverAnimation 0.3s forwards;
       }

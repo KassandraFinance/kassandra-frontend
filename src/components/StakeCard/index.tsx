@@ -5,10 +5,13 @@ import Big from 'big.js'
 import BigNumber from 'bn.js'
 // import { EventData } from 'web3-eth-contract'
 import { useSelector, RootStateOrAny } from 'react-redux'
+import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
 
 import web3 from '../../utils/web3'
-import { CompleteCallback } from '../../utils/txWait'
-import { confirmClaim } from '../../utils/confirmTransactions'
+import waitTransaction, {
+  MetamaskError,
+  TransactionCallback
+} from '../../utils/txWait'
 
 import { Staking } from '../../constants/tokenAddresses'
 
@@ -58,11 +61,7 @@ interface IStakingProps {
   connect: () => void;
   balanceOf: (pid: number, walletAddress: string) => Promise<BigNumber>;
   earned: (pid: number, walletAddress: string) => Promise<BigNumber>;
-  getReward: (
-    pid: number,
-    onComplete?: CompleteCallback | undefined,
-    message?: string | undefined
-  ) => void;
+  getReward: (pid: number, callback: TransactionCallback) => void;
   withdrawable: (pid: number, walletAddress: string) => Promise<boolean>;
   poolInfo: (pid: number) => Promise<PoolInfo>;
   unstaking: (pid: number, walletAddress: string) => Promise<boolean>;
@@ -135,6 +134,12 @@ const StakeCard = ({
   const { viewgetReserves } = usePriceLP()
   const lpToken = useERC20Contract('0xaCb1C18A8238955d123450d02bdD19b74ED7903f')
 
+  const productCategories = [
+    'Stake',
+    'Ropsten',
+    staked[pid] === 'KACY' ? 'VotingStake' : 'OtherStake'
+  ]
+
   async function handleLPtoUSD() {
     const reservesKacyETH = await viewgetReserves(
       '0xaCb1C18A8238955d123450d02bdD19b74ED7903f'
@@ -164,6 +169,50 @@ const StakeCard = ({
     }))
   }
 
+  const approvalCallback = React.useCallback((): TransactionCallback => {
+    return async (error: MetamaskError, txHash: string) => {
+      if (error) {
+        if (error.code === 4001) {
+          ToastError(`Approval of ${symbol} cancelled`)
+          return
+        }
+
+        ToastError(`Failed to approve ${symbol}. Please try again later.`)
+        return
+      }
+
+      ToastWarning(`Waiting approval of ${symbol}...`)
+      const txReceipt = await waitTransaction(txHash)
+
+      if (txReceipt.status) {
+        ToastSuccess(`Approval of ${symbol} confirmed`)
+        return
+      }
+    }
+  }, [symbol])
+
+  const rewardClaimCallback = React.useCallback((): TransactionCallback => {
+    return async (error: MetamaskError, txHash: string) => {
+      if (error) {
+        if (error.code === 4001) {
+          ToastError(`Cancelled reward claim`)
+          return
+        }
+
+        ToastError(`Failed to claim your rewards. Please try again later.`)
+        return
+      }
+
+      ToastWarning(`Waiting for the blockchain to claim your rewards...`)
+      const txReceipt = await waitTransaction(txHash)
+
+      if (txReceipt.status) {
+        ToastSuccess(`Rewards claimed sucessfully`)
+        return
+      }
+    }
+  }, [])
+
   async function handleApproveKacy() {
     const token = ERC20(infoStaked.stakingToken)
     if (isApproveKacyStaking) {
@@ -173,7 +222,11 @@ const StakeCard = ({
       return
     }
 
-    const res = await token.approve(Staking, userWalletAddress)
+    const res = await token.approve(
+      Staking,
+      userWalletAddress,
+      approvalCallback
+    )
     setIsApproveKacyStaking(res)
   }
 
@@ -338,9 +391,7 @@ const StakeCard = ({
                       type="button"
                       text="Claim"
                       // fullWidth
-                      onClick={() =>
-                        getReward(pid, confirmClaim, 'Pending reward claim')
-                      }
+                      onClick={() => getReward(pid, rewardClaimCallback)}
                     />
                   </S.Claim>
                   <S.StakeContainer>
@@ -462,12 +513,17 @@ const StakeCard = ({
         pid={pid}
         decimals={decimals}
         stakingToken={infoStaked.stakingToken}
+        productCategories={productCategories}
+        nameToken={staked[pid]}
       />
       <ModalUnstaking
         modalOpen={isModalUnstaking}
         setModalOpen={setIsModalUnstaking}
         pid={pid}
         decimals={decimals}
+        stakingToken={infoStaked.stakingToken}
+        productCategories={productCategories}
+        nameToken={staked[pid]}
       />
       <ModalCancelUnstake
         modalOpen={isModalCancelUnstake}
@@ -475,6 +531,7 @@ const StakeCard = ({
         setIsModalStaking={setIsModalStaking}
         pid={pid}
         staking={infoStaked.withdrawDelay !== '0' && infoStaked.withdrawable}
+        symbol={symbol}
       />
       <ModalRequestUnstake
         modalOpen={isModalRequestUnstake}
@@ -483,6 +540,7 @@ const StakeCard = ({
         withdrawDelay={withdrawDelay}
         votingMultiplier={infoStaked.votingMultiplier}
         yourStake={infoStaked.yourStake}
+        symbol={symbol}
       />
       <ModalWalletConnect
         modalOpen={isModalWallet}

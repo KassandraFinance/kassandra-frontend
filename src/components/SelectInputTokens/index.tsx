@@ -12,26 +12,15 @@ import * as S from './styles'
 interface ISelectInputTokensProps {
   poolTokensArray: TokenDetails[];
   setSwapInAddress: React.Dispatch<React.SetStateAction<string>>;
-  title: string;
+  tokenDetails: TokenDetails;
 }
 
 const SelectInputTokens = ({
   poolTokensArray,
   setSwapInAddress,
-  title
+  tokenDetails
 }: ISelectInputTokensProps) => {
-  const [tokenSelected, setTokenSelected] = React.useState<TokenDetails | undefined>(poolTokensArray[0])
   const [openOptions, setOpenOptions] = React.useState<boolean>(false)
-
-  React.useEffect(() => {
-    if (tokenSelected?.address) {
-      setSwapInAddress(tokenSelected?.address)
-    }
-  }, [tokenSelected])
-
-  React.useEffect(() => {
-    setTokenSelected(poolTokensArray[0])
-  }, [title])
 
   return (
     <S.SelectToken openOptions={openOptions}>
@@ -41,13 +30,13 @@ const SelectInputTokens = ({
       >
         <div className="img" id="img-token-selected">
           <Image
-            src={tokenSelected?.image || none}
-            alt={`${tokenSelected?.symbol}-image`}
+            src={tokenDetails?.image || none}
+            alt={`${tokenDetails?.symbol}-image`}
             width={22}
             height={22}
           />
         </div>
-        {tokenSelected?.symbol}
+        {tokenDetails?.symbol}
         <div id="arrow-down">
           <Image src={arrow} alt="arrow"  />
         </div>
@@ -61,7 +50,6 @@ const SelectInputTokens = ({
                 <S.Option
                   key={token.symbol}
                   onClick={() => {
-                    setTokenSelected(token)
                     setSwapInAddress(token.address)
                     setOpenOptions(false)
                   }}
