@@ -9,9 +9,11 @@ export const Footer = styled.footer`
 export const Container = styled.div`
   align-content: space-between;
   margin: 0 auto;
-  @media (min-width: 1600px) {
-    max-width: 1140px;
+  max-width: 1140px;
+  @media (max-width: 1200px) {
+    padding: 0 30px;
   }
+
   @media (max-width: 710px) {
     flex-direction: column-reverse;
     align-items: center;
