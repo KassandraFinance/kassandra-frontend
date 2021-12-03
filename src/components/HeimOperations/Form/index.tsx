@@ -119,8 +119,6 @@ const Form = ({
         }
       })
 
-
-
       res.sort((a: { allocation: number | string }, b: { allocation: number | string }) => {
         return Number(b.allocation) - Number(a.allocation)
       })
@@ -165,7 +163,7 @@ const Form = ({
 
     setSwapInAddress(newSwapInAddress.toLocaleLowerCase())
     setSwapOutAddress(newSwapOutAddress.toLocaleLowerCase())
-  }, [title, infoAHYPE, typeWithdrawChecked])
+  }, [title, infoAHYPE.length, typeWithdrawChecked])
 
   // get contract approval of tokens
   React.useEffect(() => {
@@ -192,7 +190,7 @@ const Form = ({
     setIsReload(!isReload)
     setIsApproved([])
     calc()
-  }, [title, infoAHYPE, approvalCheck, userWalletAddress])
+  }, [title, infoAHYPE.length, approvalCheck, userWalletAddress])
 
   // get balance of swap in token
   React.useEffect(() => {
@@ -207,23 +205,6 @@ const Form = ({
       .balance(userWalletAddress)
       .then(newBalance => setSwapInBalance(newBalance))
 
-    const balanceSub = token.events.Transfer(
-      (error: Error, event: EventData) => {
-        const spender = event.returnValues[0]
-        const receiver = event.returnValues[1]
-        const value = new BigNumber(event.returnValues[2])
-
-        if (spender === userWalletAddress) {
-          setSwapInBalance(cur => cur.sub(value))
-        } else if (receiver === userWalletAddress) {
-          setSwapInBalance(cur => cur.add(value))
-        }
-      }
-    )
-
-    return () => {
-      balanceSub.unsubscribe()
-    }
   }, [swapInAddress, userWalletAddress, title, infoAHYPE, swapOutAddress])
 
   // get balance of swap out token
@@ -260,23 +241,6 @@ const Form = ({
       .balance(userWalletAddress)
       .then(newBalance => setSwapOutBalance([newBalance]))
 
-    const balanceSub = token.events.Transfer(
-      (error: Error, event: EventData) => {
-        const spender = event.returnValues[0]
-        const receiver = event.returnValues[1]
-        const value = new BigNumber(event.returnValues[2])
-
-        if (spender === userWalletAddress) {
-          setSwapOutBalance(cur => [cur[0].sub(value)])
-        } else if (receiver === userWalletAddress) {
-          setSwapOutBalance(cur => [cur[0].add(value)])
-        }
-      }
-    )
-
-    return () => {
-      balanceSub.unsubscribe()
-    }
   }, [userWalletAddress, infoAHYPE, swapInAddress, swapOutAddress])
 
   React.useEffect(() => {
@@ -714,9 +678,6 @@ const Form = ({
               .slice(0, -1)
               .filter((token: { address: string }) => token.address !== swapOutAddress)
         }
-        infoAHYPE={infoAHYPE
-          .filter((token: { address: string }) => token.address !== swapOutAddress)
-        }
         title={title}
         decimals={infoAHYPE[tokenInIndex] ? infoAHYPE[tokenInIndex].decimals : new BigNumber(18)}
         swapInBalance={swapInBalance}
@@ -758,7 +719,6 @@ const Form = ({
               poolTokens={infoAHYPE
                 .slice(0, -1)
                 .filter((token: { address: string }) => token.address !== swapInAddress)}
-              infoAHYPE={infoAHYPE}
               tokenDetails={infoAHYPE[tokenOutIndex]}
               isMax={null}
               swapOutAmount={swapOutAmount[0]}
@@ -787,8 +747,6 @@ const Form = ({
               : infoAHYPE
                 .slice(0, -1)
                 .filter((token: { address: string }) => token.address !== swapInAddress)}
-            infoAHYPE={infoAHYPE
-              .filter((token: { address: string }) => token.address !== swapInAddress)}
             tokenDetails={infoAHYPE[tokenOutIndex]}
             isMax={null}
             swapOutAmount={swapOutAmount[0]}
@@ -812,7 +770,7 @@ const Form = ({
       {userWalletAddress ? (
         <Button
           backgroundPrimary
-          disabledNoEvent={swapInAmount.toString() === "0"}
+          disabledNoEvent={swapInAmount.toString() === "0" && isApproved[tokenInIndex]}
           fullWidth
           type="submit"
           text={

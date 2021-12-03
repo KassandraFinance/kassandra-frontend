@@ -16,7 +16,6 @@ import * as S from './styles'
 interface IInputEthProps {
   actionString: string;
   poolTokens: TokenDetails[];
-  infoAHYPE: TokenDetails[];
   tokenDetails: TokenDetails;
   title: string;
   decimals: BigNumber;
@@ -31,7 +30,6 @@ interface IInputEthProps {
 const InputTokens = ({
   actionString,
   poolTokens,
-  infoAHYPE,
   tokenDetails,
   title,
   decimals,
@@ -49,7 +47,7 @@ const InputTokens = ({
     if (poolTokens.length > 1) {
       return (
         <SelectInputTokens
-          poolTokensArray={infoAHYPE}
+          poolTokens={poolTokens}
           setSwapInAddress={setSwapInAddress}
           tokenDetails={tokenDetails}
         />
