@@ -10,7 +10,7 @@ import Products from './Products'
 import ClassProducts from './ClassProducts'
 import CountdownBanner from '../../components/CountdownBanner'
 import Token from './Token'
-import KassandraToken from './KassandraToken'
+import KassandraTokenCard from '../../components/KassandraTokenCard'
 import KassandraArchitecture from './KassandraArchitecture'
 import TokenDistribution from './TokenDistribution'
 import SubscribeBanner from '../../components/SubscribeBanner'
@@ -46,7 +46,7 @@ const Home = () => {
         <Products />
         <ClassProducts />
         {/* <Token /> */}
-        <KassandraToken />
+        <KassandraTokenCard />
         <KassandraArchitecture />
         {/* <TokenDistribution /> */}
         {/* <BannerCTA /> */}
