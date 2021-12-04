@@ -8,7 +8,8 @@ export const Container = styled.section`
   justify-content: center;
   max-width: 96.4rem;
   margin: 0 auto;
-  @media (max-width: 920px) {
+  @media (max-width: 1100px) {
+    margin: 0 auto;
     padding: 0 3.2rem;
   }
 `
@@ -111,7 +112,10 @@ export const DistributionChart = styled.div`
   grid-template-columns: 2fr 1fr;
   grid-column-gap: 13rem;
   max-width: 100%;
-  @media (max-width: 96rem) {
+  @media (max-width: 960px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 760px) {
     grid-template-columns: 1fr;
   }
   img {
@@ -122,10 +126,6 @@ export const DistributionText = styled.div`
   max-width: 28rem;
   display: flex;
   flex-direction: column;
-  @media (max-width: 96rem) {
-    max-width: 32rem;
-    margin: 2.4rem auto 0;
-  }
   h1 {
     font-size: ${theme.font.sizes.font24};
     font-weight: ${theme.font.weight.black};
@@ -136,5 +136,21 @@ export const DistributionText = styled.div`
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.light};
     line-height: 155%;
+  }
+  @media (max-width: 96rem) {
+    max-width: 32rem;
+    margin: 2.4rem auto 0;
+  }
+  @media (max-width: 760px) {
+    margin: 4rem auto 0;
+    max-width: 100%;
+  }
+  @media (max-width: 450px) {
+    h1 {
+      font-size: ${theme.font.sizes.font18};
+    }
+    p {
+      font-size: ${theme.font.sizes.font14};
+    }
   }
 `

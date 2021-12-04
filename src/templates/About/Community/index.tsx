@@ -6,7 +6,7 @@ import * as S from './styles'
 const Community = () => (
   <S.Container>
     <S.Title>
-      Join in $KACY community
+      Join the $KACY community
       <S.Divider />
     </S.Title>
     <S.Icons>

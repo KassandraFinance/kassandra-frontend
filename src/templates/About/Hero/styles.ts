@@ -19,6 +19,8 @@ export const Hero = styled.section`
   }
   @media (max-width: 960px) {
     grid-template-columns: 1fr;
+    margin: 2rem auto 4rem;
+
     img {
       display: none;
     }
@@ -41,16 +43,11 @@ export const IntroHero = styled.div`
     max-width: 35.5rem;
     margin-top: 3.2rem;
 
-    @media (max-width: 1200px) {
-      font-size: 80px;
-      line-height: 70px;
+    @media (max-width: 960px) {
+      max-width: 100%;
     }
-    @media (max-width: 959px) {
-      font-size: 60px;
-      line-height: 60px;
-    }
+
     @media (max-width: 770px) {
-      font-size: 50px;
       margin-bottom: 40px;
     }
     @media (max-width: 600px) {
@@ -62,7 +59,6 @@ export const IntroHero = styled.div`
     @media (max-width: 375px) {
       font-size: ${theme.font.sizes.font24};
       margin-bottom: 0;
-      line-height: 20px;
     }
     @media (max-width: 350px) {
       font-size: ${theme.font.sizes.font20};
@@ -73,6 +69,9 @@ export const IntroHero = styled.div`
     letter-spacing: 0.04rem;
     color: ${theme.colors.amber};
     margin-top: 10rem;
+    @media (max-width: 960px) {
+      margin-top: 0;
+    }
   }
 `
 //IntroTextWrapper
@@ -148,9 +147,14 @@ export const CardRectangleWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   max-width: 104.2rem;
+
   margin: 0 auto;
   justify-content: space-around;
-  @media (max-width: 960px) {
+  @media (max-width: 1100px) {
+    padding: 0 3.2rem;
+    column-gap: 1.6rem;
+  }
+  @media (max-width: 600px) {
     flex-direction: column;
   }
 `

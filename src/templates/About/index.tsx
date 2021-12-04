@@ -2,9 +2,8 @@ import React from 'react'
 
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
-import TokenPriceComponent from '../../components/TokenPrice'
+import KacyOverView from '../../components/KacyOverView'
 import KassandraTokenCard from '../../components/KassandraTokenCard'
-
 
 import Hero from './Hero'
 import Products from './Products'
@@ -28,7 +27,7 @@ const About = () => {
       <Products />
       <KassandraTokenCard />
       <HowItWorks />
-      <TokenPriceComponent />
+      <KacyOverView />
       <Team />
       <Partners />
       <FAQ />

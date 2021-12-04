@@ -16,6 +16,15 @@ export const Title = styled.h1`
   font-weight: ${theme.font.weight.bold};
   line-height: 114%;
   margin: 0 auto 3.2rem;
+  @media (max-width: 630px) {
+    font-size: ${theme.font.sizes.font32};
+  }
+  @media (max-width: 490px) {
+    font-size: ${theme.font.sizes.font24};
+  }
+  @media (max-width: 380px) {
+    font-size: ${theme.font.sizes.font18};
+  }
 `
 export const Divider = styled.div`
   max-width: 10rem;

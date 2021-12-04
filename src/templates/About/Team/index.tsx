@@ -23,7 +23,7 @@ const Team = () => {
           image="assets/kevin-photo.svg"
           social={{
             github: 'https://github.com/Baruel',
-            linkedin: 'linkedin.com/in/kevin-voigt-221b24196'
+            linkedin: 'https://linkedin.com/in/kevin-voigt-221b24196'
           }}
         />
         <TeamCard
@@ -31,7 +31,7 @@ const Team = () => {
           role="CFO"
           image="assets/hamilton-photo.svg"
           social={{
-            linkedin: 'linkedin.com/in/hamilton-haskel-3585b477'
+            linkedin: 'https://linkedin.com/in/hamilton-haskel-3585b477'
           }}
         />
         <TeamCard
@@ -44,12 +44,12 @@ const Team = () => {
           }}
         />
         <TeamCard
-          name="Anthony João Bet"
+          name="Anthony Bet"
           role="DATA SCIENTIST"
           image="assets/anthony-photo.svg"
           social={{
             github: 'github.com/AnthonyAposta',
-            linkedin: 'linkedin.com/in/anthony-joão-bet'
+            linkedin: 'https://linkedin.com/in/anthony-joão-bet'
           }}
         />
         <TeamCard
@@ -75,7 +75,7 @@ const Team = () => {
           role="UX/UI DESIGNER"
           image="assets/arthur-photo.svg"
           social={{
-            linkedin: 'linkedin.com/in/arthurstofella'
+            linkedin: 'https://linkedin.com/in/arthurstofella'
           }}
         />
         <TeamCard
@@ -92,7 +92,7 @@ const Team = () => {
           image="assets/fernando-photo.svg"
           social={{
             github: 'https://github.com/F-rigo',
-            linkedin: 'linkedin.com/in/fernandorigo'
+            linkedin: 'https://linkedin.com/in/fernandorigo'
           }}
         />
       </S.Grid>

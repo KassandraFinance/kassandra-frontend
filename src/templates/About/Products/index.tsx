@@ -56,7 +56,6 @@ const Products = () => {
         </S.Card>
         <S.Card>
           <S.MobileCardTitle>
-
             <img src="assets/about-products-icon.svg" alt="" />
             <h3>DAO</h3>
           </S.MobileCardTitle>

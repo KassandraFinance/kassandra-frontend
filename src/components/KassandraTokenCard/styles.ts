@@ -11,9 +11,12 @@ export const Container = styled.div`
   background-size: cover;
   background-position: center;
   padding: 100px 0 0;
-  @media (max-width: 960px) {
-    margin: 0 auto;
+  @media (max-width: 1050px) {
+    margin: 0 auto 7rem;
     padding: 0 32px;
+  }
+  @media (max-width: 560px) {
+    margin: 0 auto 4rem;
   }
 `
 export const KassandraToken = styled.section`
@@ -110,9 +113,11 @@ export const Responsabilities = styled.section`
   max-width: 1000px;
   margin: 0 auto;
   @media (max-width: 960px) {
-    flex-direction: column;
     padding: 0 32px;
-    margin: 24px 0;
+    margin: 40px 0;
+  }
+  @media (max-width: 820px) {
+    flex-direction: column;
   }
 `
 export const ResponsabilitiesTitle = styled.div`
@@ -126,8 +131,10 @@ export const ResponsabilitiesTitle = styled.div`
     font-weight: ${theme.font.weight.semibold};
   }
   @media (max-width: 960px) {
-    margin: 0 auto;
-    margin-bottom: 30px;
+    margin: 0 32px 30px;
+  }
+  @media (max-width: 820px) {
+    max-width: 100%;
   }
 `
 export const ResponsabilitiesDivider = styled.div`
@@ -151,10 +158,15 @@ export const ResponsabilitiesCards = styled.div`
   }
 `
 export const MobileCards = styled.div`
-  @media (min-width: 961px) {
+  @media (min-width: 621px) {
     display: flex;
   }
-  @media (max-width: 960px) {
+
+  @media (max-width: 820px) {
+    margin: 0 auto;
+  }
+
+  @media (max-width: 620px) {
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin: 0 auto;

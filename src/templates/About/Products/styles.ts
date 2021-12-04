@@ -13,6 +13,12 @@ export const Container = styled.section`
   img {
     max-width: 70%;
   }
+  @media (max-width: 960px) {
+    margin: 0 auto 7rem;
+  }
+  @media (max-width: 560px) {
+    margin: 0 auto 4rem;
+  }
 `
 export const ImageKassandra = styled.div`
   display: flex;
@@ -36,8 +42,8 @@ export const CardWrapper = styled.div`
     align-items: center;
     padding: 0 3.2rem;
   }
-  @media (max-width: 560px) {
-    margin: 0 auto 7.5rem;
+  @media (max-width: 960px) {
+    margin: 0 auto 0rem;
   }
 `
 export const Card = styled.div`
