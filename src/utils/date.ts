@@ -25,6 +25,23 @@ export function getDate(date: number): string {
   return `${dd} ${allMonth[mm]}, ${yyyy}`
 }
 
+export function getDateInHours(date: number): string {
+  const thisDate = new Date(date * 1000)
+  const hours = thisDate.getHours()
+  const dd = thisDate.getDate()
+  const mm = thisDate.getMonth()
+  const yyyy = thisDate.getFullYear()
+
+  return `${hours}:00 - ${dd} ${allMonth[mm]}, ${yyyy}`
+}
+
+export function getHour(date: number): string {
+  const thisDate = new Date(date * 1000)
+  const hour = thisDate.getHours()
+
+  return hour ? `${hour}:00` : ''
+}
+
 export function dateRequestUnstake(withdrawDelay: number) {
   const now = new Date().getTime()
 
