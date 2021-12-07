@@ -9,6 +9,9 @@ export const Container = styled.div`
   background-size: cover;
   background-position: center;
   padding: 15rem 3.2rem;
+  -webkit-box-shadow: inset -14px 59px 197px -39px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: inset -14px 59px 197px -39px rgba(0, 0, 0, 0.75);
+  box-shadow: inset -14px 59px 197px -39px rgba(0, 0, 0, 0.75);
 `
 
 export const Title = styled.h1`

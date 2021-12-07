@@ -14,6 +14,8 @@ import FAQ from './FAQ'
 import Community from './Community'
 import SubscribeBanner from '../../components/SubscribeBanner'
 
+import * as S from './styles'
+
 const About = () => {
   const { trackPageView } = useMatomo()
 
@@ -23,12 +25,14 @@ const About = () => {
 
   return (
     <>
-      <Hero />
-      <Products />
-      <KassandraTokenCard />
-      <HowItWorks />
-      <KacyOverView />
-      <Team />
+      <S.Background>
+        <Hero />
+        <Products />
+        <KassandraTokenCard />
+        <HowItWorks />
+        <KacyOverView />
+        <Team />
+      </S.Background>
       <Partners />
       <FAQ />
       <Community />

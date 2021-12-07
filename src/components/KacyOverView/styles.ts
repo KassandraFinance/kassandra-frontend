@@ -41,16 +41,13 @@ export const Values = styled.div`
   margin: 60px auto;
   text-align: center;
   p {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     color: ${theme.colors.magenta};
     font-size: ${theme.font.sizes.font14};
     letter-spacing: 4px;
-    @media (max-width: 400px) {
-      font-size: ${theme.font.sizes.font12};
-    }
   }
   span {
-    font-size: ${theme.font.sizes.font40};
+    font-size: ${theme.font.sizes.font36};
     @media (max-width: 960px) {
       font-size: ${theme.font.sizes.font24};
     }

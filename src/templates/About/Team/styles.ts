@@ -50,9 +50,13 @@ export const Grid = styled.div`
   grid-gap: 2.4rem;
   margin: 2.4rem auto 15rem;
   @media (max-width: 920px) {
+    margin: 2.4rem auto 7rem;
     padding: 0 3.2rem;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
+  }
+  @media (max-width: 520px) {
+    margin: 2.4rem auto 4rem;
   }
   img {
     display: flex;
