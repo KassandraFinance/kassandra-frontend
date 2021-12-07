@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
 export const Container = styled.div`
+  background-image: url('assets/team-background.svg');
   max-width: 69.7rem;
   margin: 0 auto;
   padding: 0 3.2rem;
@@ -39,7 +40,7 @@ export const Divider = styled.div`
   max-width: 10rem;
   height: 0.3rem;
   background: linear-gradient(99.25deg, #e843c4 0%, #ffbf00 100%, #ffbf00 100%);
-  margin: 2.4rem auto 0;
+  margin: 2.4rem auto 4rem;
 `
 
 export const Grid = styled.div`

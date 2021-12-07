@@ -31,8 +31,8 @@ const About = () => {
         <KassandraTokenCard />
         <HowItWorks />
         <KacyOverView />
-        <Team />
       </S.Background>
+      <Team />
       <Partners />
       <FAQ />
       <Community />

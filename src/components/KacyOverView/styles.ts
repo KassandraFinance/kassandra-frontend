@@ -5,8 +5,10 @@ export const TokenInfoWrapper = styled.section`
   max-width: 946px;
   margin: 95px auto 50px;
   background-color: transparent;
-  padding: 0 32px;
   border-bottom: 1px solid #282828;
+  @media (max-width: 946px) {
+    padding: 0 32px;
+  }
 `
 export const TitleandIcon = styled.div`
   display: flex;
@@ -32,7 +34,8 @@ export const TokenInfo = styled.div`
   margin-top: 16px;
   @media (max-width: 960px) {
     grid-template-columns: 1fr 1fr;
-    padding: 0 32px;
+    align-items: end;
+    justify-content: center;
   }
 `
 export const Values = styled.div`

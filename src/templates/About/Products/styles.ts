@@ -43,7 +43,7 @@ export const CardWrapper = styled.div`
     padding: 0 3.2rem;
   }
   @media (max-width: 960px) {
-    margin: 0 auto 0rem;
+    margin: 4rem auto 0rem;
   }
 `
 export const Card = styled.div`
@@ -70,7 +70,7 @@ export const Card = styled.div`
   }
   img {
     position: relative;
-    transform: translate(200%, -100%);
+    transform: translate(138%, -100%);
     max-width: 30%;
   }
   @media (max-width: 920px) {

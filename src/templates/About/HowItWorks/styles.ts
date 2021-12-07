@@ -36,6 +36,18 @@ export const ScheduleGraph = styled.div`
   img {
     max-width: 100%;
   }
+  @media (max-width: 580px) {
+    display: none;
+  }
+`
+export const ScheduleGraphMobile = styled.div`
+  max-width: 100%;
+  img {
+    max-width: 100%;
+  }
+  @media (min-width: 580px) {
+    display: none;
+  }
 `
 export const ScheduleTitle = styled.div`
   max-width: 100%;

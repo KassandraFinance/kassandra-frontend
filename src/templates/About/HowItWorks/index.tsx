@@ -50,6 +50,9 @@ const HowItWorks = () => {
         <S.ScheduleGraph>
           <img src="assets/tokenomics-chart.svg" alt="" />
         </S.ScheduleGraph>
+        <S.ScheduleGraphMobile>
+          <img src="assets/tokenomics-chart-mobile.svg" alt="" />
+        </S.ScheduleGraphMobile>
       </S.ScheduleGraphWrapper>
       <S.DistributionGraphWrapper>
         <S.DistributionTitle>

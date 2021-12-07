@@ -9,9 +9,10 @@ export const Container = styled.section`
   margin: 0 auto 9rem;
   border-bottom: 1px solid #ffffff24;
   @media (max-width: 960px) {
-    flex-direction: column;
-    align-items: flex-start;
     padding: 0 3.2rem;
+  }
+  @media (max-width: 820px) {
+    flex-direction: column;
   }
 `
 
@@ -39,6 +40,7 @@ export const Icon = styled.div`
   justify-content: center;
   margin-bottom: 2.4rem;
   img {
+    min-height: 2.4rem;
     max-width: 100%;
   }
 `
@@ -50,11 +52,14 @@ export const Partners = styled.div`
   @media (max-width: 960px) {
     margin-bottom: 1.6rem;
     max-width: 100%;
-    justify-content: start;
-     padding-top: 2rem;
+    justify-content: end;
+    padding-top: 2rem;
     img {
       margin-right: 2.4rem;
     }
+  }
+  @media (max-width: 820px) {
+    justify-content: center;
   }
   img {
     max-width: 100%;
