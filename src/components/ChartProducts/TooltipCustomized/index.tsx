@@ -1,21 +1,38 @@
 import React from 'react'
+import BigNumber from 'bn.js'
+import Big from 'big.js'
+
 import { getDateInHours } from '../../../utils/date'
+
 import * as S from './styles'
+import { BNtoDecimal } from '../../../utils/numerals'
 
 interface ITooltipCustomizedPRops {
+  chart: string;
   payload: any[];
-  currentPrice?: { close: string, timestamp: number };
+  currentPrice?: { close?: string, timestamp: number, value?: string };
 }
 
-const TooltipCustomized = ({
-  payload,
-  currentPrice
-}: ITooltipCustomizedPRops) => {
+const TooltipCustomized = (props: ITooltipCustomizedPRops) => {
+  const { chart, payload, currentPrice } = props
+
   if (payload && payload.length) {
     return (
       <S.Content>
         <S.Price>
-          <h1>${`${Number(payload[0].value).toFixed(7)}`}</h1>
+          {chart === 'price' && (
+            <h1>${`${Number(currentPrice?.close).toFixed(2)}`}</h1>
+          )}
+          {chart === 'tvl' && (
+            <h1>
+              $
+              {`${BNtoDecimal(
+                Big(currentPrice?.value || 0),
+                new BigNumber(0),
+                2
+              )}`}
+            </h1>
+          )}
           {/* <span>0.11%</span> */}
         </S.Price>
         <p>{getDateInHours(payload[0].payload.timestamp)}</p>
@@ -27,7 +44,14 @@ const TooltipCustomized = ({
       {currentPrice && (
         <>
           <S.Price>
-            <h1>${`${Number(currentPrice?.close).toFixed(7)}`}</h1>
+            {chart === 'price' && (
+              <h1>${`${Number(currentPrice?.close).toFixed(2)}`}</h1>
+            )}
+            {chart === 'tvl' && (
+              <h1>
+                ${`${BNtoDecimal(Big(currentPrice?.value || 0), Big(0), 2)}`}
+              </h1>
+            )}
             {/* <span>0.11%</span> */}
           </S.Price>
           <p>{getDateInHours(currentPrice?.timestamp)}</p>

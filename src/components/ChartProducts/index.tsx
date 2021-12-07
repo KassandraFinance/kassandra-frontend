@@ -1,5 +1,6 @@
 import React from 'react'
 import useSWR from 'swr'
+import request from 'graphql-request'
 
 import { SUBGRAPH_URL } from '../../constants/tokenAddresses'
 
@@ -10,7 +11,6 @@ import ChartAllocation from './ChartAllocation'
 import { GET_CHART } from './graphql'
 
 import * as S from './styles'
-import request from 'graphql-request'
 
 const ChartProducts = () => {
   const [inputChecked, setInputChecked] = React.useState<string>('Price')

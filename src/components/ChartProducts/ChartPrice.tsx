@@ -3,27 +3,8 @@
 import React from 'react'
 import { XAxis, Tooltip, AreaChart, Area, ResponsiveContainer } from 'recharts'
 
-import { getHour } from '../../utils/date'
-
 import TooltipCustomized from './TooltipCustomized'
-
-export const CustomizeAxisTick = (props: any) => {
-  const { x, y, payload } = props
-  return (
-    <g transform={`translate(${x},${y})`}>
-      <text
-        x={0}
-        y={0}
-        dy={16}
-        textAnchor="end"
-        fill="#eee"
-        transform="rotate(-35)"
-      >
-        {getHour(payload.value)}
-      </text>
-    </g>
-  )
-}
+import CustomizedAxisTick from './CustomizedAxisTick'
 
 const ChartPrice = (props: any) => {
   return (
@@ -47,7 +28,7 @@ const ChartPrice = (props: any) => {
         <XAxis
           dataKey="timestamp"
           axisLine={false}
-          tick={<CustomizeAxisTick />}
+          tick={<CustomizedAxisTick chart="price" />}
           tickMargin={-4}
           tickLine={false}
           // tickFormatter={time => getHour(time)}
@@ -58,9 +39,9 @@ const ChartPrice = (props: any) => {
           }}
           cursor={{ stroke: props.color }}
           position={{ x: 20, y: 60 }}
-          active={true}
           content={
             <TooltipCustomized
+              chart="price"
               payload={[]}
               currentPrice={props.data[props.data.length - 1]}
             />

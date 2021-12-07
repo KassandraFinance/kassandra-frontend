@@ -35,6 +35,13 @@ export function getDateInHours(date: number): string {
   return `${hours}:00 - ${dd} ${allMonth[mm]}, ${yyyy}`
 }
 
+export function getDay(date: number): string {
+  const thisDate = new Date(date * 1000)
+  const dd = thisDate.getDate()
+
+  return `${dd}`
+}
+
 export function getHour(date: number): string {
   const thisDate = new Date(date * 1000)
   const hour = thisDate.getHours()
