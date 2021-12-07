@@ -9,12 +9,10 @@ export const Footer = styled.footer`
 export const Container = styled.div`
   align-content: space-between;
   margin: 0 auto;
-  max-width: 1140px;
-  @media (max-width: 1200px) {
-    padding: 0 30px;
+  @media (min-width: 1600px) {
+    max-width: 1140px;
   }
-
-  @media (max-width: 710px) {
+  @media (max-width: 8200px) {
     flex-direction: column-reverse;
     align-items: center;
   }
@@ -23,7 +21,7 @@ export const Container = styled.div`
   & > img {
     display: none;
     margin-bottom: 32px;
-    @media (max-width: 710px) {
+    @media (max-width: 8200px) {
       display: block;
     }
   }
@@ -37,7 +35,7 @@ export const UpperContainer = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   gap: 16px;
 
-  @media (max-width: 710px) {
+  @media (max-width: 8200px) {
     width: 100%;
     padding: 40px 50px;
   }
@@ -47,7 +45,7 @@ export const UpperContainer = styled.div`
   }
 
   li {
-    @media (max-width: 710px) {
+    @media (max-width: 8200px) {
       text-align: top;
     }
     margin: 15px 0;
@@ -56,7 +54,7 @@ export const UpperContainer = styled.div`
     margin-bottom: 8px;
     font-size: 20px;
     font-weight: 500;
-    @media (max-width: 710px) {
+    @media (max-width: 820px) {
       font-size: ${theme.font.sizes.font16};
     }
   }
@@ -75,10 +73,10 @@ export const LowerContainerMobile = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  @media (min-width: 760px) {
+  @media (min-width: 820px) {
     display: none;
   }
-  @media (max-width: 760px) {
+  @media (max-width: 820px) {
     flex-direction: column;
     align-items: center;
     margin-top: 30px;
@@ -98,7 +96,7 @@ export const LowerContainerMobile = styled.div`
   }
   ul {
     display: flex;
-    @media (max-width: 760px) {
+    @media (max-width: 820px) {
       margin-bottom: 16px;
       justify-content: center;
     }
@@ -117,7 +115,7 @@ export const LowerContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  @media (max-width: 760px) {
+  @media (max-width: 820px) {
     display: none;
   }
   span {
