@@ -52,6 +52,10 @@ const InputTokenValue = ({
           else if (value[0] === '0') {
             e.target.value = value.replace(/^0+/, '')
           }
+          
+          if (e.target.value[0] === '.') {
+            e.target.value = `0${e.target.value}`
+          }
 
           const decimalsNum = decimals.toNumber()
           const values = value.split('.')

@@ -5,37 +5,13 @@ import {
   Tooltip,
   AreaChart,
   Area,
-  ResponsiveContainer,
-  CartesianGrid
+  ResponsiveContainer
 } from 'recharts'
 
-import { getDate } from '../../utils/date'
+import TooltipAllocation from './TooltipAllocation'
+import CustomizedAxisTick from './CustomizedAxisTick'
 
-import TooltipCustomized from './TooltipCustomized'
-
-const dictionary: any = {
-  0: '#E8983D',
-  1: '#63698C',
-  2: '#B7372D',
-  3: '#3D6ECC',
-  4: '#E9BC50',
-  5: '#AB40E1',
-  6: '#CF498D',
-  7: '#D54F49',
-  8: '#4517AB',
-  9: '#72EEE4',
-  10: '#4B81EF',
-  11: '#e8983d65',
-  12: '#18db11',
-  13: '#cc24bef7',
-  14: '#68d410d6',
-  15: '#e9bb5067',
-  16: '#ab40e149',
-  17: '#cf498c42',
-  18: '#d5504949',
-  19: '#10e72299',
-  20: '#d4e442b0'
-}
+import { dictionary } from './styles'
 
 interface IChartAllocationProps {
   data: any[];
@@ -80,42 +56,6 @@ const ChartAllocation = ({ data }: IChartAllocationProps) => {
     }
   }, [])
 
-  const toPercent = (decimal: number, fixed = 0) => {
-    return `${(decimal * 100).toFixed(fixed)}%`
-  }
-
-  const getPercent = (value: number, total: number) => {
-    const ratio = total > 0 ? value / total : 0
-
-    return toPercent(ratio, 2)
-  }
-
-  const renderTooltipContent = (o: { payload: any, label: any }) => {
-    const { payload, label } = o
-    const total = payload.reduce(
-      (result: any, entry: { value: any }) => result + entry.value,
-      0
-    )
-
-    return (
-      <div className="customized-tooltip-content">
-        <p className="total">{`${label} (Total: ${total})`}</p>
-        <ul className="list">
-          {payload.map(
-            (entry: { color: any, name: any, value: any }, index: any) => (
-              <li key={`item-${index}`} style={{ color: entry.color }}>
-                {`${entry.name}: ${entry.value}(${getPercent(
-                  entry.value,
-                  total
-                )})`}
-              </li>
-            )
-          )}
-        </ul>
-      </div>
-    )
-  }
-
   return (
     <ResponsiveContainer width="100%" height={360}>
       <AreaChart
@@ -127,18 +67,25 @@ const ChartAllocation = ({ data }: IChartAllocationProps) => {
           margin: '25px 0'
         }}
         stackOffset="expand"
-        margin={{ top: 80, right: 2, left: 0, bottom: 20 }}
-        // innerRadius={20}
-        // outerRadius={20}
+        margin={{ top: 90, right: 2, left: 0, bottom: 0 }}
       >
-        <XAxis dataKey="timestamp" tickFormatter={time => getDate(time)} hide />
-        <YAxis tickFormatter={toPercent} hide />
-        {/* <Tooltip content={renderTooltipContent} /> */}
+        <XAxis
+          dataKey="timestamp"
+          axisLine={false}
+          tick={<CustomizedAxisTick chart="allocation" />}
+          tickMargin={-4}
+          tickLine={false}
+          // tickFormatter={time => getDate(time)}
+        />
+        <YAxis hide />
+        <Tooltip
+          content={<TooltipAllocation payload={undefined} label={undefined} />}
+        />
         {arrayKeys &&
           arrayKeys.map((key, index) => {
             return (
               <Area
-                key={`${key}-${Math.random() * 1000}`}
+                key={`${key}`}
                 type="monotone"
                 dataKey={key}
                 stackId="1"

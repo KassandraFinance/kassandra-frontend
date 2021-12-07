@@ -15,7 +15,6 @@ import * as S from './styles'
 interface IInputDefaultProps {
   decimals: BigNumber;
   poolTokens: TokenDetails[];
-  infoAHYPE: TokenDetails[];
   tokenDetails: TokenDetails;
   isMax: boolean | null;
   swapOutAmount: BigNumber;
@@ -27,19 +26,17 @@ interface IInputDefaultProps {
 const InputDefault = ({
   decimals,
   poolTokens,
-  infoAHYPE,
   tokenDetails,
   isMax,
   swapOutAmount,
   swapOutBalance,
-  swapInAddress,
   setSwapOutAddress
 }: IInputDefaultProps) => {
   const tokensList = React.useMemo(() => {
     if (poolTokens.length > 1) {
       return (
         <SelectInputDefault
-          poolTokensArray={infoAHYPE}
+          poolTokens={poolTokens}
           setSwapOutAddress={setSwapOutAddress}
           tokenDetails={tokenDetails}
         />

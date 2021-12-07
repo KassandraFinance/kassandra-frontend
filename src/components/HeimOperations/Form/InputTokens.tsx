@@ -1,8 +1,9 @@
+/* eslint-disable prettier/prettier */
 import React from 'react'
 import BigNumber from 'bn.js'
 import Image from 'next/image'
 
-import { BNtoDecimal, wei } from '../../../utils/numerals'
+import { BNtoDecimal } from '../../../utils/numerals'
 
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
 import InputTokenValue from '../../InputTokenValue'
@@ -16,7 +17,6 @@ import * as S from './styles'
 interface IInputEthProps {
   actionString: string;
   poolTokens: TokenDetails[];
-  infoAHYPE: TokenDetails[];
   tokenDetails: TokenDetails;
   title: string;
   decimals: BigNumber;
@@ -31,7 +31,6 @@ interface IInputEthProps {
 const InputTokens = ({
   actionString,
   poolTokens,
-  infoAHYPE,
   tokenDetails,
   title,
   decimals,
@@ -42,6 +41,7 @@ const InputTokens = ({
   setSwapOutAmount
 }: IInputEthProps) => {
   const [maxActive, setMaxActive] = React.useState<boolean>(false)
+  const [currentMax, setCurrentMax] = React.useState<BigNumber>(new BigNumber(0))
 
   const inputRef = React.useRef<HTMLInputElement>(null)
 
@@ -49,7 +49,7 @@ const InputTokens = ({
     if (poolTokens.length > 1) {
       return (
         <SelectInputTokens
-          poolTokensArray={infoAHYPE}
+          poolTokens={poolTokens}
           setSwapInAddress={setSwapInAddress}
           tokenDetails={tokenDetails}
         />
@@ -73,20 +73,18 @@ const InputTokens = ({
   }
 
   const setMax = () => {
-    setSwapInAmount(swapInBalance)
-    setMaxActive(true)
-
     if (inputRef.current !== null) {
-      if (
-        inputRef.current?.value !== '0' &&
-        inputRef.current.value === wei2String(swapInAmount)
-      ) {
+      inputRef.current.focus()
+      if (maxActive) {
         inputRef.current.value = ''
         setSwapInAmount(new BigNumber(0))
         setMaxActive(false)
         return
       }
       inputRef.current.value = wei2String(swapInBalance)
+      setSwapInAmount(swapInBalance)
+      setMaxActive(true)
+      setCurrentMax(swapInBalance)
     }
   }
 
@@ -98,6 +96,12 @@ const InputTokens = ({
       inputRef.current.value = '0'
     }
   }
+
+  React.useEffect(() => {
+    if (maxActive && currentMax !== swapInAmount) {
+      setMaxActive(false)
+    }
+  }, [swapInAmount])
 
   React.useEffect(() => {
     clearInput()

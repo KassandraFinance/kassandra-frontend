@@ -3,9 +3,8 @@
 import React from 'react'
 import { XAxis, Tooltip, AreaChart, Area, ResponsiveContainer } from 'recharts'
 
-import { getDate } from '../../utils/date'
-
 import TooltipCustomized from './TooltipCustomized'
+import CustomizedAxisTick from './CustomizedAxisTick'
 
 const ChartPrice = (props: any) => {
   return (
@@ -18,7 +17,7 @@ const ChartPrice = (props: any) => {
           borderRadius: '25px',
           margin: '25px 0'
         }}
-        margin={{ top: 100, right: 2, left: 3, bottom: 10 }}
+        margin={{ top: 140, right: 2, left: 3, bottom: 10 }}
       >
         <defs>
           <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -29,17 +28,24 @@ const ChartPrice = (props: any) => {
         <XAxis
           dataKey="timestamp"
           axisLine={false}
+          tick={<CustomizedAxisTick chart="price" />}
+          tickMargin={-4}
           tickLine={false}
-          tickFormatter={time => getDate(time)}
-          minTickGap={6}
+          // tickFormatter={time => getHour(time)}
         />
         <Tooltip
+          wrapperStyle={{
+            visibility: 'visible'
+          }}
           cursor={{ stroke: props.color }}
-          contentStyle={{ display: 'none' }}
           position={{ x: 20, y: 60 }}
-          // formatter={(props: { payload: { time: string; value: number } }) => {
-          // }}
-          content={TooltipCustomized}
+          content={
+            <TooltipCustomized
+              chart="price"
+              payload={[]}
+              currentPrice={props.data[props.data.length - 1]}
+            />
+          }
         />
         <Area
           type="monotone"

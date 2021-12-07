@@ -68,7 +68,7 @@ export const DropdownContent = styled.div<IDropdownContentProps>`
     padding: 12px 16px;
     transition-duration: 200ms;
     &:hover {
-      background-color: ${theme.colors.darkPurple};
+      background-color: #3F1A38;
     }
   }
 `

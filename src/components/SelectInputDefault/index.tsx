@@ -9,13 +9,13 @@ import none from '../../../public/assets/coming-soon.svg'
 import * as S from './styles'
 
 interface ISelectInputDefaultProps {
-  poolTokensArray: TokenDetails[];
+  poolTokens: TokenDetails[];
   setSwapOutAddress: React.Dispatch<React.SetStateAction<string>>;
   tokenDetails: TokenDetails;
 }
 
 const SelectInputDefault = ({
-  poolTokensArray,
+  poolTokens,
   setSwapOutAddress,
   tokenDetails
 }: ISelectInputDefaultProps) => {
@@ -44,8 +44,8 @@ const SelectInputDefault = ({
         <>
           <S.Backdrop onClick={() => setOpenOptions(false)} />
           <S.OptionsContent>
-            {poolTokensArray &&
-              poolTokensArray.map((token: TokenDetails) => (
+            {poolTokens &&
+              poolTokens.map((token: TokenDetails) => (
                 <S.Option
                   key={token.symbol}
                   onClick={() => {

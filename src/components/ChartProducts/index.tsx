@@ -1,5 +1,8 @@
 import React from 'react'
 import useSWR from 'swr'
+import request from 'graphql-request'
+
+import { SUBGRAPH_URL } from '../../constants/tokenAddresses'
 
 import ChartPrice from './ChartPrice'
 import ChartTVL from './ChartTVL'
@@ -13,15 +16,18 @@ const ChartProducts = () => {
   const [inputChecked, setInputChecked] = React.useState<string>('Price')
   const [price, setPrice] = React.useState([])
   const [tvl, setTvl] = React.useState([])
-  const [weights, setWeights] = React.useState([])
+  const [allocation, setAllocation] = React.useState([])
 
-  const { data } = useSWR(GET_CHART)
+  const { data } = useSWR(
+    [GET_CHART, '0x03c0c7b6b55a0e5c1f2fad2c45b453c56a8f866a'],
+    (query, id) => request(SUBGRAPH_URL, query, { id, price_period: 3600 })
+  )
 
   React.useEffect(() => {
     if (data) {
       setPrice(data?.pool.price_candles)
       setTvl(data?.pool.total_value_locked)
-      setWeights(data?.pool.weights)
+      setAllocation(data?.pool.weights)
     }
   }, [data])
 
@@ -35,7 +41,9 @@ const ChartProducts = () => {
           onChange={() => setInputChecked('Price')}
           checked={inputChecked === 'Price'}
         />
-        <S.Label htmlFor="Price">Price</S.Label>
+        <S.Label selected={inputChecked === 'Price'} htmlFor="Price">
+          Price
+        </S.Label>
         <S.Input
           type="radio"
           name="operator"
@@ -43,7 +51,9 @@ const ChartProducts = () => {
           onChange={() => setInputChecked('TVL')}
           checked={inputChecked === 'TVL'}
         />
-        <S.Label htmlFor="TVL">TVL</S.Label>
+        <S.Label selected={inputChecked === 'TVL'} htmlFor="TVL">
+          TVL
+        </S.Label>
         <S.Input
           type="radio"
           name="operator"
@@ -51,11 +61,13 @@ const ChartProducts = () => {
           onChange={() => setInputChecked('Allocation')}
           checked={inputChecked === 'Allocation'}
         />
-        <S.Label htmlFor="Allocation">Allocation</S.Label>
+        <S.Label selected={inputChecked === 'Allocation'} htmlFor="Allocation">
+          Allocation
+        </S.Label>
       </S.SelectChart>
       {inputChecked === 'Price' && <ChartPrice data={price} color="#E843C4" />}
       {inputChecked === 'TVL' && <ChartTVL data={tvl} color="#26DBDB" />}
-      {inputChecked === 'Allocation' && <ChartAllocation data={weights} />}
+      {inputChecked === 'Allocation' && <ChartAllocation data={allocation} />}
     </S.ChartProduct>
   )
 }
