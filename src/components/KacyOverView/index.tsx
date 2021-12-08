@@ -2,7 +2,7 @@
 import React from 'react'
 import * as S from './styles'
 
-const TokenPriceComponent = () => {
+const KacyOverView = () => {
   return (
     <>
       <S.TokenInfoWrapper>
@@ -68,4 +68,4 @@ const TokenPriceComponent = () => {
   )
 }
 
-export default TokenPriceComponent
+export default KacyOverView

@@ -34,21 +34,39 @@ export const Title = styled.h1`
   font-size: ${theme.font.sizes.font40};
   font-weight: ${theme.font.weight.bold};
   line-height: 114%;
+
+  @media (max-width: 810px) {
+    font-size: ${theme.font.sizes.font32};
+  }
 `
 export const Divider = styled.div`
   max-width: 10rem;
   height: 0.3rem;
   background: linear-gradient(99.25deg, #e843c4 0%, #ffbf00 100%, #ffbf00 100%);
-  margin: 2.4rem auto 0;
+  margin: 2.4rem auto 4rem;
 `
 
 export const Grid = styled.div`
+  background-image: url('assets/team-background.svg');
+  background-clip: content-box;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   display: grid;
   max-width: 70rem;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   grid-gap: 2.4rem;
   margin: 2.4rem auto 15rem;
+  @media (max-width: 920px) {
+    margin: 2.4rem auto 7rem;
+    padding: 0 3.2rem;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+  @media (max-width: 520px) {
+    margin: 2.4rem auto 4rem;
+  }
   img {
     display: flex;
     justify-self: center;

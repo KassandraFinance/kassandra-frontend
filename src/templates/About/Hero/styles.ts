@@ -19,6 +19,8 @@ export const Hero = styled.section`
   }
   @media (max-width: 960px) {
     grid-template-columns: 1fr;
+    margin: 2rem auto 4rem;
+
     img {
       display: none;
     }
@@ -41,16 +43,11 @@ export const IntroHero = styled.div`
     max-width: 35.5rem;
     margin-top: 3.2rem;
 
-    @media (max-width: 1200px) {
-      font-size: 80px;
-      line-height: 70px;
+    @media (max-width: 960px) {
+      max-width: 100%;
     }
-    @media (max-width: 959px) {
-      font-size: 60px;
-      line-height: 60px;
-    }
+
     @media (max-width: 770px) {
-      font-size: 50px;
       margin-bottom: 40px;
     }
     @media (max-width: 600px) {
@@ -62,7 +59,6 @@ export const IntroHero = styled.div`
     @media (max-width: 375px) {
       font-size: ${theme.font.sizes.font24};
       margin-bottom: 0;
-      line-height: 20px;
     }
     @media (max-width: 350px) {
       font-size: ${theme.font.sizes.font20};
@@ -73,6 +69,9 @@ export const IntroHero = styled.div`
     letter-spacing: 0.04rem;
     color: ${theme.colors.amber};
     margin-top: 10rem;
+    @media (max-width: 960px) {
+      margin-top: 0;
+    }
   }
 `
 //IntroTextWrapper
@@ -101,9 +100,24 @@ export const CardContainer = styled.div`
       display: block;
     }
   }
+  @media (max-width: 488px) {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-content: flex-start;
+  }
 `
 export const Card = styled.div`
   margin: 0 auto;
+  @media (max-width: 960px) {
+    margin: 0;
+  }
+  @media (max-width: 488px) {
+    display: flex;
+    flex-direction: row;
+    margin: 0 0 1.2rem;
+  }
   p {
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.bold};
@@ -111,6 +125,9 @@ export const Card = styled.div`
     color: #ffffff;
     letter-spacing: 0;
     margin: 1.6rem 0 1rem;
+    @media (max-width: 488px) {
+      margin-left: 1.6rem;
+    }
   }
 `
 export const IconWrapper = styled.div`
@@ -138,8 +155,24 @@ export const GradienteDivider = styled.div`
   max-width: 3.5rem;
   height: 0.1rem;
   background: linear-gradient(90deg, #e843c4 0%, #ffbf00 100%);
+  margin: 1.6rem 0 0;
 `
-//create a card retangle transparent
+export const CardRectangleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  max-width: 104.2rem;
+
+  margin: 0 auto;
+  justify-content: space-around;
+  @media (max-width: 1100px) {
+    padding: 0 3.2rem;
+    column-gap: 1.6rem;
+  }
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
+`
+
 export const CardRectangle = styled.div`
   display: flex;
   flex-direction: column;
@@ -161,11 +194,8 @@ export const CardRectangle = styled.div`
     font-weight: ${theme.font.weight.light};
     line-height: 180%;
   }
-`
-export const CardRectangleWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  max-width: 104.2rem;
-  margin: 0 auto;
-  justify-content: space-around;
+  @media (max-width: 960px) {
+    flex-direction: column;
+    margin-bottom: 4rem;
+  }
 `

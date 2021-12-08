@@ -6,10 +6,7 @@ const Partners = () => (
   <S.Container>
     <S.TitleAndIcon>
       <S.Icon>
-        <img
-          src="assets/about-external-link-icon.svg"
-          alt="External Link Icon"
-        />
+        <img src="assets/about-partners-icon.svg" alt="External Link Icon" />
       </S.Icon>
       <S.Title>Partners</S.Title>
     </S.TitleAndIcon>

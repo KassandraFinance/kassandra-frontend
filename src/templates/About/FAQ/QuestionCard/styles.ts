@@ -19,7 +19,7 @@ export const QuestionText = styled.p`
   background: #21142654;
   border: 1px solid #ffffff0d;
   border-radius: 1.2rem;
-  height: 7rem;
+  min-height: 7rem;
   padding: 2.4rem;
   display: flex;
   justify-content: space-between;

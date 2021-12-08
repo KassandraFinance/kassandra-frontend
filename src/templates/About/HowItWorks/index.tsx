@@ -50,6 +50,9 @@ const HowItWorks = () => {
         <S.ScheduleGraph>
           <img src="assets/tokenomics-chart.svg" alt="" />
         </S.ScheduleGraph>
+        <S.ScheduleGraphMobile>
+          <img src="assets/tokenomics-chart-mobile.svg" alt="" />
+        </S.ScheduleGraphMobile>
       </S.ScheduleGraphWrapper>
       <S.DistributionGraphWrapper>
         <S.DistributionTitle>
@@ -95,11 +98,12 @@ const HowItWorks = () => {
       <S.DistributionChart>
         <img src="assets/distribution-chart.svg" alt="" />
         <S.DistributionText>
-          <h1>Lorem ipsum dolor sit amet</h1>
+          <h1>Fair and community driven token distribuition</h1>
           <p>
-            The distribution will occur in a fragmented way, subject to various
-            locks and vesting periods, to assert the decentralization of the
-            organization and community growth.
+            To create a fully decentralized organization, with a
+            well-distributed token, we chose to have a big part of the total
+            supply (50%) slowly available through rewards to people that engage
+            and help Kassandra in the early stages.
           </p>
         </S.DistributionText>
       </S.DistributionChart>

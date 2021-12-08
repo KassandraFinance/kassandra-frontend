@@ -27,6 +27,9 @@ export const TextWrapper = styled.div`
     font-weight: ${theme.font.weight.light};
     line-height: 155%;
   }
+  @media (max-width: 960px) {
+    margin-bottom: 16px;
+  }
 `
 export const Input = styled.div`
   display: flex;

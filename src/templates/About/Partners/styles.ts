@@ -8,6 +8,12 @@ export const Container = styled.section`
   max-width: 94.3rem;
   margin: 0 auto 9rem;
   border-bottom: 1px solid #ffffff24;
+  @media (max-width: 960px) {
+    padding: 0 3.2rem;
+  }
+  @media (max-width: 820px) {
+    flex-direction: column;
+  }
 `
 
 export const TitleAndIcon = styled.div`
@@ -22,6 +28,9 @@ export const Title = styled.h1`
   font-weight: ${theme.font.weight.black};
   line-height: 114%;
   color: #ffffff;
+  @media (max-width: 810px) {
+    font-size: ${theme.font.sizes.font32};
+  }
 `
 
 export const Icon = styled.div`
@@ -29,11 +38,19 @@ export const Icon = styled.div`
   border-radius: 100%;
   width: 4.7rem;
   height: 4.4rem;
-  align-items: center;
   display: flex;
-  justify-content: center;
   margin-bottom: 2.4rem;
+  position: relative;
+  @media (max-width: 810px) {
+    margin-bottom: 1.6rem;
+  }
+
   img {
+    position: absolute;
+    left: 45%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    min-height: 2.4rem;
     max-width: 100%;
   }
 `
@@ -42,6 +59,18 @@ export const Partners = styled.div`
   display: flex;
   justify-content: space-evenly;
   padding-top: 5rem;
+  @media (max-width: 960px) {
+    margin-bottom: 1.6rem;
+    max-width: 100%;
+    justify-content: end;
+    padding-top: 2rem;
+    img {
+      margin-right: 4rem;
+    }
+  }
+  @media (max-width: 820px) {
+    justify-content: center;
+  }
   img {
     max-width: 100%;
     max-height: 2.9rem;

@@ -23,7 +23,7 @@ const Team = () => {
           image="assets/kevin-photo.svg"
           social={{
             github: 'https://github.com/Baruel',
-            linkedin: 'linkedin.com/in/kevin-voigt-221b24196'
+            linkedin: 'https://linkedin.com/in/kevin-voigt-221b24196'
           }}
         />
         <TeamCard
@@ -31,8 +31,7 @@ const Team = () => {
           role="CFO"
           image="assets/hamilton-photo.svg"
           social={{
-            linkedin: 'linkedin.com/in/hamilton-haskel-3585b477',
-            twitter: 'https://twitter.com/kevinvoigt'
+            linkedin: 'https://linkedin.com/in/hamilton-haskel-3585b477'
           }}
         />
         <TeamCard
@@ -41,21 +40,27 @@ const Team = () => {
           image="assets/andre-photo.svg"
           social={{
             github: 'https://github.com/an-dz',
-            linkedin: 'https://www.linkedin.com/in/kevin-voigt-b6a7b2b1/',
-            twitter: 'https://twitter.com/kevinvoigt'
+            linkedin: 'https://www.linkedin.com/in/zanghelini/'
           }}
         />
         <TeamCard
-          name="Anthony João Bet"
+          name="Anthony Bet"
           role="DATA SCIENTIST"
           image="assets/anthony-photo.svg"
           social={{
             github: 'github.com/AnthonyAposta',
-            linkedin: 'linkedin.com/in/anthony-joão-bet',
-            twitter: 'https://twitter.com/kevinvoigt'
+            linkedin: 'https://linkedin.com/in/anthony-joão-bet'
           }}
         />
-        <img src="assets/kassandra-team-logo.svg" alt="" />
+        <TeamCard
+          name="Jorge Filho"
+          role="BUSINESS DEVELOPMENT"
+          image="assets/jorge-photo.svg"
+          social={{
+            linkedin: 'https://www.linkedin.com/in/jorge-filho-35020018b/',
+            twitter: 'https://twitter.com/AkademiaHash'
+          }}
+        />
         <TeamCard
           name="Jony Reis"
           role="FRONT-END DEVELOPER"
@@ -67,11 +72,10 @@ const Team = () => {
         />
         <TeamCard
           name="Arthur Stofella"
-          role="UX/UI DESIGNER"
+          role="UI/UX DESIGNER"
           image="assets/arthur-photo.svg"
           social={{
-            linkedin: 'linkedin.com/in/arthurstofella',
-            twitter: 'https://twitter.com/kevinvoigt'
+            linkedin: 'https://linkedin.com/in/arthurstofella'
           }}
         />
         <TeamCard
@@ -79,8 +83,7 @@ const Team = () => {
           role="QUANTITATIVE ANALYST"
           image="assets/pedro-photo.svg"
           social={{
-            linkedin: 'https://www.linkedin.com/in/kevin-voigt-b6a7b2b1/',
-            twitter: 'https://twitter.com/kevinvoigt'
+            linkedin: 'https://www.linkedin.com/in/pedro-jung-tavares-b53021a4/'
           }}
         />
         <TeamCard
@@ -88,8 +91,8 @@ const Team = () => {
           role="FRONT-END DEVELOPER"
           image="assets/fernando-photo.svg"
           social={{
-            linkedin: 'https://www.linkedin.com/in/kevin-voigt-b6a7b2b1/',
-            twitter: 'https://twitter.com/kevinvoigt'
+            github: 'https://github.com/F-rigo',
+            linkedin: 'https://linkedin.com/in/fernandorigo'
           }}
         />
       </S.Grid>
