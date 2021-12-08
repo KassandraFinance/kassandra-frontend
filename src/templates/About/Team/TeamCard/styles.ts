@@ -42,15 +42,11 @@ export const Social = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+  width: 116px;
   margin-top: 2.4rem;
 `
 export const SocialIcon = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin-right: 1.6rem;
   img {
     max-width: 2.8rem;
   }

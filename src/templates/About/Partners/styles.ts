@@ -8,6 +8,12 @@ export const Container = styled.section`
   max-width: 94.3rem;
   margin: 0 auto 9rem;
   border-bottom: 1px solid #ffffff24;
+  @media (max-width: 960px) {
+    margin: 0 3.2rem 9rem;
+  }
+  @media (max-width: 820px) {
+    flex-direction: column;
+  }
 `
 
 export const TitleAndIcon = styled.div`
