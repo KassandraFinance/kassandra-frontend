@@ -1,8 +1,10 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
 import Image from 'next/image'
+import { useSelector, RootStateOrAny } from 'react-redux'
 
 import { TokenDetails } from '../../store/modules/poolTokens/types'
+import { TokenImages } from '../../store/modules/poolImages/types'
 
 import arrow from '../../../public/assets/arrow-select.svg'
 import none from '../../../public/assets/coming-soon.svg'
@@ -22,16 +24,20 @@ const SelectInputTokens = ({
 }: ISelectInputTokensProps) => {
   const [openOptions, setOpenOptions] = React.useState<boolean>(false)
 
+  const { poolImages }: { poolImages: TokenImages } = useSelector(
+    (state: RootStateOrAny) => state
+  )
+
   return (
     <S.SelectToken openOptions={openOptions}>
       <S.Selected
         openOptions={openOptions}
         onClick={() => setOpenOptions(!openOptions)}
       >
-        <div className="img" id="img-token-selected">
+        <div className="img">
           <Image
-            src={tokenDetails?.image || none}
-            alt={`${tokenDetails?.symbol}-image`}
+            src={poolImages[tokenDetails?.address] || none}
+            alt=""
             width={22}
             height={22}
           />
@@ -54,7 +60,14 @@ const SelectInputTokens = ({
                     setOpenOptions(false)
                   }}
                 >
-                  <img src={token.image} alt="" />
+                  <div className="img">
+                    <Image
+                      src={poolImages[token.address] || none}
+                      alt=""
+                      width={22}
+                      height={22}
+                    />
+                  </div>
                   {token.symbol}
                 </S.Option>
               ))}

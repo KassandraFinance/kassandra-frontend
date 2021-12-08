@@ -6,12 +6,11 @@ export const Types = {
 }
 
 export interface TokenDetails {
-  balance_in_pool?: string;
+  balance_in_pool: string;
   address: string;
   name: string;
   symbol: string;
   decimals: BigNumber;
   allocation: number;
-  image?: string;
-  market_data?: any;
+  price: number;
 }
