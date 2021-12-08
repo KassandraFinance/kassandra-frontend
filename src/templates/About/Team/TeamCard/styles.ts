@@ -28,6 +28,7 @@ export const Name = styled.h2`
 `
 export const Role = styled.h3`
   font-size: ${theme.font.sizes.font12};
+  font-weight: ${theme.font.weight.normal};
   line-height: 110%;
   letter-spacing: 0.04rem;
   margin-bottom: 1.6rem;

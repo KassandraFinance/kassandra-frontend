@@ -135,6 +135,7 @@ export const ResponsabilitiesTitle = styled.div`
   }
   @media (max-width: 820px) {
     max-width: 100%;
+    margin: 0 0 30px;
   }
 `
 export const ResponsabilitiesDivider = styled.div`
@@ -163,13 +164,12 @@ export const MobileCards = styled.div`
   }
 
   @media (max-width: 820px) {
-    margin: 0 auto;
+    margin: 0 0;
   }
 
   @media (max-width: 620px) {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin: 0 auto;
   }
 `
 export const IconWrapper = styled.div`

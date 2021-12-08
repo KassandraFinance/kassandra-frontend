@@ -32,8 +32,10 @@ const Hero = () => {
                 <img src="assets/transparency_icon.svg" alt="" />
               </S.BackgroundIcon>
             </S.IconWrapper>
-            <p>Transparency</p>
-            <S.GradienteDivider />
+            <p>
+              Transparency
+              <S.GradienteDivider />
+            </p>
           </S.Card>
           <S.Card>
             <S.IconWrapper>
@@ -41,8 +43,10 @@ const Hero = () => {
                 <img src="assets/decentralization_icon.svg" alt="" />
               </S.BackgroundIcon>
             </S.IconWrapper>
-            <p>Decentralization</p>
-            <S.GradienteDivider />
+            <p>
+              Decentralization
+              <S.GradienteDivider />
+            </p>
           </S.Card>
           <S.Card>
             <S.IconWrapper>
@@ -50,8 +54,10 @@ const Hero = () => {
                 <img src="assets/activeReturns_icon.svg" alt="" />
               </S.BackgroundIcon>
             </S.IconWrapper>
-            <p>Active Returns</p>
-            <S.GradienteDivider />
+            <p>
+              Active Returns
+              <S.GradienteDivider />
+            </p>
           </S.Card>
         </S.CardContainer>
       </S.Hero>

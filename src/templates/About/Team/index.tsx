@@ -54,7 +54,7 @@ const Team = () => {
         />
         <TeamCard
           name="Jorge Filho"
-          role="BUSINESS DEVELOPMENT AGENT"
+          role="BUSINESS DEVELOPMENT"
           image="assets/jorge-photo.svg"
           social={{
             linkedin: 'https://www.linkedin.com/in/jorge-filho-35020018b/',
@@ -72,7 +72,7 @@ const Team = () => {
         />
         <TeamCard
           name="Arthur Stofella"
-          role="UX/UI DESIGNER"
+          role="UI/UX DESIGNER"
           image="assets/arthur-photo.svg"
           social={{
             linkedin: 'https://linkedin.com/in/arthurstofella'

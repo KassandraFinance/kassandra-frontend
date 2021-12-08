@@ -28,6 +28,9 @@ export const Title = styled.h1`
   font-size: ${theme.font.sizes.font40};
   font-weight: ${theme.font.weight.black};
   line-height: 114%;
+  @media (max-width: 810px) {
+    font-size: ${theme.font.sizes.font32};
+  }
 `
 
 export const Divider = styled.div`

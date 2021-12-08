@@ -28,6 +28,9 @@ export const Title = styled.h1`
   font-weight: ${theme.font.weight.black};
   line-height: 114%;
   color: #ffffff;
+  @media (max-width: 810px) {
+    font-size: ${theme.font.sizes.font32};
+  }
 `
 
 export const Icon = styled.div`
@@ -35,11 +38,18 @@ export const Icon = styled.div`
   border-radius: 100%;
   width: 4.7rem;
   height: 4.4rem;
-  align-items: center;
   display: flex;
-  justify-content: center;
   margin-bottom: 2.4rem;
+  position: relative;
+  @media (max-width: 810px) {
+    margin-bottom: 1.6rem;
+  }
+
   img {
+    position: absolute;
+    left: 45%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     min-height: 2.4rem;
     max-width: 100%;
   }
@@ -55,7 +65,7 @@ export const Partners = styled.div`
     justify-content: end;
     padding-top: 2rem;
     img {
-      margin-right: 2.4rem;
+      margin-right: 4rem;
     }
   }
   @media (max-width: 820px) {

@@ -26,6 +26,10 @@ export const Title = styled.h2`
   color: #ffffff;
   line-height: 110%;
   margin: 0 auto 9.4rem;
+  @media (max-width: 810px) {
+    font-size: ${theme.font.sizes.font32};
+    margin: 0 auto 4.4rem;
+  }
 `
 export const ScheduleGraphWrapper = styled.div`
   max-width: 94rem;

@@ -100,14 +100,24 @@ export const CardContainer = styled.div`
       display: block;
     }
   }
-  @media (max-width: 580px) {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-row-gap: 2.4rem;
+  @media (max-width: 488px) {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-content: flex-start;
   }
 `
 export const Card = styled.div`
   margin: 0 auto;
+  @media (max-width: 960px) {
+    margin: 0;
+  }
+  @media (max-width: 488px) {
+    display: flex;
+    flex-direction: row;
+    margin: 0 0 1.2rem;
+  }
   p {
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.bold};
@@ -115,6 +125,9 @@ export const Card = styled.div`
     color: #ffffff;
     letter-spacing: 0;
     margin: 1.6rem 0 1rem;
+    @media (max-width: 488px) {
+      margin-left: 1.6rem;
+    }
   }
 `
 export const IconWrapper = styled.div`
@@ -142,6 +155,7 @@ export const GradienteDivider = styled.div`
   max-width: 3.5rem;
   height: 0.1rem;
   background: linear-gradient(90deg, #e843c4 0%, #ffbf00 100%);
+  margin: 1.6rem 0 0;
 `
 export const CardRectangleWrapper = styled.div`
   display: flex;

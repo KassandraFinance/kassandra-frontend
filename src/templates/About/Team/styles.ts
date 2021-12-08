@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
 export const Container = styled.div`
-  background-image: url('assets/team-background.svg');
   max-width: 69.7rem;
   margin: 0 auto;
   padding: 0 3.2rem;
@@ -35,6 +34,10 @@ export const Title = styled.h1`
   font-size: ${theme.font.sizes.font40};
   font-weight: ${theme.font.weight.bold};
   line-height: 114%;
+
+  @media (max-width: 810px) {
+    font-size: ${theme.font.sizes.font32};
+  }
 `
 export const Divider = styled.div`
   max-width: 10rem;
@@ -44,6 +47,11 @@ export const Divider = styled.div`
 `
 
 export const Grid = styled.div`
+  background-image: url('assets/team-background.svg');
+  background-clip: content-box;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   display: grid;
   max-width: 70rem;
   grid-template-columns: 1fr 1fr 1fr;

@@ -70,7 +70,7 @@ export const Card = styled.div`
   }
   img {
     position: relative;
-    transform: translate(138%, -100%);
+    transform: translate(200%, -100%);
     max-width: 30%;
   }
   @media (max-width: 920px) {

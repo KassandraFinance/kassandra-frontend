@@ -16,7 +16,7 @@ export const Title = styled.h1`
   font-weight: ${theme.font.weight.bold};
   line-height: 114%;
   margin: 0 auto 3.2rem;
-  @media (max-width: 630px) {
+  @media (max-width: 810px) {
     font-size: ${theme.font.sizes.font32};
   }
   @media (max-width: 490px) {
