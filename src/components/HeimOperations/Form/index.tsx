@@ -122,10 +122,6 @@ const Form = ({
         }
       })
 
-      res.sort((a: { allocation: number | string }, b: { allocation: number | string }) => {
-        return Number(b.allocation) - Number(a.allocation)
-      })
-
       res.push(aHYPE)
 
       setTokenAddress2Index(
