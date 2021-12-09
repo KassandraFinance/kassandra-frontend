@@ -51,12 +51,13 @@ const ChartPrice = (props: any) => {
           domain={['auto', 'auto']}
           tickLine={false}
           axisLine={false}
-          tickFormatter={item =>
-            BNtoDecimal(Big(item).mul(Big(10).pow(18)), Big(18), 3).replace(
-              / /g,
-              '\u00A0'
-            )
-          }
+          tickFormatter={item => {
+            if (item === Infinity || item === -Infinity) {
+              return ''
+            }
+
+            return BNtoDecimal(Big(item).mul(Big(10).pow(18)), Big(18), 3)
+          }}
         />
         <Tooltip
           wrapperStyle={{
