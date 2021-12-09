@@ -4,7 +4,10 @@ import Image from 'next/image'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 
+import { useSelector, RootStateOrAny } from 'react-redux'
+
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
+import { TokenImages } from '../../../store/modules/poolImages/types'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 import { priceDollar } from '../../../utils/priceDollar'
@@ -28,6 +31,10 @@ const InputBestValue = ({
   swapOutBalance,
   setPriceInDollarOnWithdraw
 }: IInputBestValueProps) => {
+  const { poolImages }: { poolImages: TokenImages } = useSelector(
+    (state: RootStateOrAny) => state
+  )
+
   React.useEffect(() => {
     const res: Big = poolTokenDetails.reduce((accumulator, current, index) => {
       return Big((swapOutAmount[index] || 0).toString())
@@ -54,7 +61,7 @@ const InputBestValue = ({
               <S.Symbol bestValue>
                 <div className="image">
                   <Image
-                    src={token.image || none}
+                    src={poolImages[token.address] || none}
                     alt={`Imagem on ${token.symbol}`}
                     width={22}
                     height={22}
