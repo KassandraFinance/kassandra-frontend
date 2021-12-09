@@ -67,7 +67,7 @@ const ChartAllocation = ({ data }: IChartAllocationProps) => {
           margin: '25px 0'
         }}
         stackOffset="expand"
-        margin={{ top: 90, right: 2, left: 0, bottom: 0 }}
+        margin={{ top: 50, right: 2, left: 0, bottom: 0 }}
       >
         <XAxis
           dataKey="timestamp"
@@ -75,9 +75,12 @@ const ChartAllocation = ({ data }: IChartAllocationProps) => {
           tick={<CustomizedAxisTick chart="allocation" />}
           tickMargin={-4}
           tickLine={false}
+          scale="time"
+          type="number"
+          domain={['auto', 'auto']}
           // tickFormatter={time => getDate(time)}
         />
-        <YAxis hide />
+        <YAxis hide domain={[0, 1]} />
         <Tooltip
           content={<TooltipAllocation payload={undefined} label={undefined} />}
         />
