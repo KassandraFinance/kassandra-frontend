@@ -56,9 +56,13 @@ const ChartTVL = ({ data, color }: IChartTVLProps) => {
           domain={['auto', 'auto']}
           tickLine={false}
           axisLine={false}
-          tickFormatter={item =>
-            `$${BNtoDecimal(item, Big(0), 0, 0).replace(/ /g, '\u00A0')}`
-          }
+          tickFormatter={item => {
+            if (item === Infinity || item === -Infinity) {
+              return ''
+            }
+
+            return BNtoDecimal(Big(item).mul(Big(10).pow(18)), Big(18), 3)
+          }}
         />
         <Tooltip
           wrapperStyle={{
