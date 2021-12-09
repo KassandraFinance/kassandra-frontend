@@ -38,6 +38,13 @@ const Products = () => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { trackProductPageView } = useMatomoEcommerce()
 
+  const poolAddress = HeimCRPPOOL
+  const poolCoreAddress = HeimCorePool
+  const poolPlatform = 'Ropsten'
+  const poolName = 'Avalanche Social Index'
+  const poolSymbol = 'aHYPE'
+  const poolCategories = [poolPlatform, 'Pool']
+
   async function getChainId() {
     if (web3.currentProvider === null) {
       return
@@ -52,7 +59,7 @@ const Products = () => {
   }, [userWalletAddress])
 
   React.useEffect(() => {
-    trackProductPageView(HeimCRPPOOL, 'aHYPE', ['Ropsten', 'Pool'])
+    trackProductPageView(poolAddress, poolSymbol, poolCategories)
 
     const device = localStorage.getItem('device')
     setIsMobile(device === 'isMobile')
@@ -85,8 +92,8 @@ const Products = () => {
               <Image src={avaxSocial} alt="tooltip" width={75} height={75} />
               <S.NameIndex>
                 <S.NameAndSymbol>
-                  <h1>Avalanche Social Index</h1>
-                  <h3>$aHYPE</h3>
+                  <h1>{poolName}</h1>
+                  <h3>${poolSymbol}</h3>
                 </S.NameAndSymbol>
                 <p>by HEIMDALL.land</p>
               </S.NameIndex>
@@ -117,13 +124,13 @@ const Products = () => {
             <ChartProducts />
             <Change />
             <Summary />
-            <Distribution />
+            <Distribution poolPlatform={poolPlatform} />
             <TokenDescription />
           </S.ProductDetails>
           <HeimOperations
-            crpPoolAddress={HeimCRPPOOL}
-            corePoolAddress={HeimCorePool}
-            productCategories={['Ropsten', 'Pool']}
+            crpPoolAddress={poolAddress}
+            corePoolAddress={poolCoreAddress}
+            productCategories={poolCategories}
           />
         </S.Product>
         :
@@ -139,24 +146,24 @@ const Products = () => {
           {web3.currentProvider === null && !loading && !isMobile && (
             <Web3Disabled
               textButton="Install Metamask"
-              textHeader="Looks like you don't have the metamask wallet installed"
-              bodyText="Please install the metamask wallet to access our pools "
+              textHeader="It looks like you don't have the Metamask wallet installed"
+              bodyText="Please install Metamask to access our products"
               type="install"
             />
           )}
           {!userWalletAddress && chainId === "0x3" && !loading && !isMobile && (
             <Web3Disabled
               textButton="Connect Wallet"
-              textHeader="Wallet connection to the Ropsten network is required"
-              bodyText="To have access to all our staking pools, please connect your wallet"
+              textHeader="Wallet not connected"
+              bodyText="Please connect your wallet with this dApp"
               type="connect"
             />
           )}
           {web3.currentProvider !== null && chainId !== "0x3" && !loading && !isMobile && (
             <Web3Disabled
-              textButton="Connect to Ropsten"
+              textButton={`Connect to ${poolPlatform}`}
               textHeader="Your wallet is set to the wrong network."
-              bodyText="Please switch to the Ropsten network to have access to all our staking pools"
+              bodyText={`Please switch to the ${poolPlatform} network to access our products`}
               type="changeChain"
             />
           )}

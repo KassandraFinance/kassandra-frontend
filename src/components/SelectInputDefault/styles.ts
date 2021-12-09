@@ -42,7 +42,7 @@ export const Selected = styled.div<ISelectedProps>`
     max-width: 21px;
   }
 
-  #img-token-selected {
+  .img {
     margin-right: 8px;
   }
   #arrow-down {
@@ -78,10 +78,14 @@ export const Option = styled.div`
 
   padding: 3px 0;
   cursor: pointer;
+  padding: 0 8px;
 
   img {
     max-width: 21px;
-    margin: 0 8px;
+  }
+
+  .img {
+    margin-right: 8px;
   }
 
   &:hover {

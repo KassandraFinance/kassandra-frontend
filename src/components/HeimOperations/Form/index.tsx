@@ -91,14 +91,14 @@ const Form = ({
 
   React.useEffect(() => {
     if (data) {
-      const aHYPE = {
+      const aHYPE: TokenDetails = {
         balance_in_pool: '',
         address: data.pool.id,
+        allocation: 0,
         decimals: new BigNumber(data.pool.decimals), 
         price: Number(data.pool.price_usd),
         name: data.pool.name,
-        symbol: data.pool.symbol,
-        allocation: 0
+        symbol: data.pool.symbol
       }
       const res: TokenDetails[] = data.pool.underlying_assets.map((item: { 
         balance: string; 
@@ -114,16 +114,12 @@ const Form = ({
         return {
           balance_in_pool: item.balance,
           address: item.token.id,
-          allocation: Number((Number(item.weight_goal_normalized) * 100).toFixed(2)),
+          allocation: ((Number(item.weight_goal_normalized) * 100).toFixed(2)),
           decimals: new BigNumber(item.token.decimals),
           price: Number(item.token.price_usd),
           name: item.token.name,
           symbol: item.token.symbol
         }
-      })
-
-      res.sort((a: { allocation: number | string }, b: { allocation: number | string }) => {
-        return Number(b.allocation) - Number(a.allocation)
       })
 
       res.push(aHYPE)
@@ -133,13 +129,9 @@ const Form = ({
       )
 
       setInfoAHYPE(res)
+      dispatch(actionGetPoolTokens(res))
     }
   }, [data])
-
-  React.useEffect(() => {
-    dispatch(actionGetPoolTokens(infoAHYPE))
-  }, [infoAHYPE])
-
 
   // set "swap" tokens
   React.useEffect(() => {
