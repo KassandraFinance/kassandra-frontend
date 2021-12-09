@@ -1,10 +1,20 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
-import { XAxis, Tooltip, AreaChart, Area, ResponsiveContainer } from 'recharts'
+import Big from 'big.js'
+import {
+  XAxis,
+  YAxis,
+  Tooltip,
+  AreaChart,
+  Area,
+  ResponsiveContainer
+} from 'recharts'
 
 import TooltipCustomized from './TooltipCustomized'
 import CustomizedAxisTick from './CustomizedAxisTick'
+
+import { BNtoDecimal } from '../../utils/numerals'
 
 interface IChartTVLProps {
   data: any[];
@@ -36,7 +46,19 @@ const ChartTVL = ({ data, color }: IChartTVLProps) => {
           tick={<CustomizedAxisTick />}
           tickMargin={-4}
           tickLine={false}
+          scale="time"
+          type="number"
+          domain={['auto', 'auto']}
           // tickFormatter={time => getDate(time)}
+        />
+        <YAxis
+          mirror
+          domain={['auto', 'auto']}
+          tickLine={false}
+          axisLine={false}
+          tickFormatter={item =>
+            `$${BNtoDecimal(item, Big(0), 0, 0).replace(/ /g, '\u00A0')}`
+          }
         />
         <Tooltip
           wrapperStyle={{
