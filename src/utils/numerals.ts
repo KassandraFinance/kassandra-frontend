@@ -32,7 +32,7 @@ export function BNtoDecimal(
     .replace(/0+$/, '')
     .padStart(minimumPrecision || 0, '0')
 
-  integer = integer.replace(/(\d)(?=(\d{3})+\b)/g, '$1 ')
+  integer = integer.replace(/(\d)(?=(\d{3})+\b)/g, '$1\u00a0')
 
   return `${integer}${decimalPoint.length > 0 ? '.' : ''}${decimalPoint}`
 }

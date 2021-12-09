@@ -27,7 +27,7 @@ const TooltipCustomized = (props: ITooltipCustomizedPRops) => {
             <h1>
               $
               {`${BNtoDecimal(
-                Big(currentPrice?.value || 0),
+                Big(payload[0].value || 0),
                 new BigNumber(0),
                 2
               )}`}
