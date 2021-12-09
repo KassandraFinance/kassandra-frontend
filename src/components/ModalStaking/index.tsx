@@ -130,7 +130,7 @@ const ModalStaking = ({
         return
       }
     }
-  }, [stakingToken])
+  }, [kacyToken])
 
   return (
     <>

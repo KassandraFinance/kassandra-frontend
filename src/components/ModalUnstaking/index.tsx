@@ -53,7 +53,7 @@ const ModalUnstaking = ({
 
   const { trackBuying, trackCancelBuying, trackBought } = useMatomoEcommerce()
   const kacyStake = useStakingContract(Staking)
-  const tokenContract = useERC20Contract(stakingToken)
+  const kacyToken = useERC20Contract(stakingToken)
 
   function handleKacyAmount(percentage: BigNumber) {
     const kacyAmount = percentage.mul(balance).div(new BigNumber(100))
@@ -70,7 +70,7 @@ const ModalUnstaking = ({
   }
 
   function handleConfirm() {
-    kacyStake.withdraw(pid, amountUnstaking, withdrawCallback)
+    kacyStake.withdraw(pid, amountUnstaking, withdrawCallback())
   }
 
   async function get() {
@@ -102,9 +102,9 @@ const ModalUnstaking = ({
     const productSKU = `${Staking}_${pid}`
 
     return async (error: MetamaskError, txHash: string) => {
-      const tokenName = await tokenContract.name()
+      const tokenName = await kacyToken.name()
       trackBuying(productSKU, tokenName, 0, productCategories)
-      const tokenSymbol = await tokenContract.symbol()
+      const tokenSymbol = await kacyToken.symbol()
 
       if (error) {
         trackCancelBuying()
@@ -127,7 +127,7 @@ const ModalUnstaking = ({
         return
       }
     }
-  }, [stakingToken])
+  }, [kacyToken])
 
   return (
     <>

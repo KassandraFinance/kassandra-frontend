@@ -1,10 +1,15 @@
 import React from 'react'
+import Big from 'big.js'
 import Image from 'next/image'
+import useSWR from 'swr'
+import { request } from 'graphql-request'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
 import { HeimCRPPOOL, HeimCorePool } from '../../constants/tokenAddresses'
+import { SUBGRAPH_URL } from '../../constants/tokenAddresses'
 
 import web3 from '../../utils/web3'
+import { BNtoDecimal } from '../../utils/numerals'
 import useMatomoEcommerce from '../../hooks/useMatomoEcommerce';
 
 
@@ -16,7 +21,7 @@ import Web3Disabled from '../../components/Web3Disabled'
 import avaxSocial from '../../../public/assets/avalanche_social_index_logo.svg'
 import infoGray from '../../../public/assets/info-gray.svg'
 
-
+import { GET_INFO_POOL } from './graphql'
 
 import Change from './Change'
 import Summary from './Summary'
@@ -34,9 +39,18 @@ const Products = () => {
   const [chainId, setChainId] = React.useState<string>('')
   const [loading, setLoading] = React.useState<boolean>(true)
   const [isMobile, setIsMobile] = React.useState<boolean>(false)
+  const [infoPool, setInfoPool] = React.useState<any>({})
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { trackProductPageView } = useMatomoEcommerce()
+  const day = Math.trunc(Date.now() / 1000 - 60 * 60 * 24 * 7)
+
+  const { data } = useSWR([GET_INFO_POOL], query =>
+    request(SUBGRAPH_URL, query, {
+      id: '0x03c0c7b6b55a0e5c1f2fad2c45b453c56a8f866a',
+      day
+    })
+  )
 
   const poolAddress = HeimCRPPOOL
   const poolCoreAddress = HeimCorePool
@@ -53,6 +67,29 @@ const Products = () => {
     const id = await window.ethereum.request({ method: 'eth_chainId' })
     setChainId(id)
   }
+
+  React.useEffect(() => {
+    if (data?.swap) {
+      const swapFees = data.swap.reduce((acc: number, current: { volume_usd: string }) => {
+        return Number(current.volume_usd) + acc
+      }, 0)
+
+      const withdrawFees = data.withdraw.reduce((acc: number, current: { volume_usd: string }) => {
+        return Number(current.volume_usd) + acc
+      }, 0)
+
+      const volume = data.volumes.reduce((acc: number, current: { volume_usd: string }) => {
+        return Number(current.volume_usd) + acc
+      }, 0)
+
+      setInfoPool({
+        swapFees: BNtoDecimal(Big(swapFees), Big(0), 2),
+        withdrawFees: BNtoDecimal(Big(withdrawFees), Big(0), 2),
+        volume: BNtoDecimal(Big(volume), Big(0), 2)
+      })
+    }
+
+  }, [data])
 
   React.useEffect(() => {
     getChainId()
@@ -102,24 +139,28 @@ const Products = () => {
             <S.IntroCharts>
               <S.IndexData>
                 <span>TVL <Image src={infoGray} alt="tooltip" /></span>
-                <h2>$785,345.67</h2>
+                <h2>${BNtoDecimal(Big(data?.pool.total_value_locked_usd || 0), Big(0), 2)}</h2>
               </S.IndexData>
               <S.IndexData>
                 <span>VOLUME (24h) <Image src={infoGray} alt="tooltip" /></span>
-                <h2>$868.4M</h2>
+                <h2>${infoPool.volume}</h2>
               </S.IndexData>
-              <S.IndexData>
+              {/* <S.IndexData>
                 <span>APY <Image src={infoGray} alt="tooltip" /></span>
                 <h2>12%</h2>
+              </S.IndexData> */}
+              <S.IndexData>
+                <span>swap fees <Image src={infoGray} alt="tooltip" /></span>
+                <h2>${infoPool.swapFees}</h2>
               </S.IndexData>
               <S.IndexData>
-                <span>fees <Image src={infoGray} alt="tooltip" /></span>
-                <h2>$345.65</h2>
+                <span>withdraw fees <Image src={infoGray} alt="tooltip" /></span>
+                <h2>${infoPool.withdrawFees}</h2>
               </S.IndexData>
-              <S.IndexData>
+              {/* <S.IndexData>
                 <span>rewards <Image src={infoGray} alt="tooltip" /></span>
                 <h2>40%</h2>
-              </S.IndexData>
+              </S.IndexData> */}
             </S.IntroCharts>
             <ChartProducts />
             <Change />
