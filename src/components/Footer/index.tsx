@@ -6,7 +6,7 @@ import * as S from './styles'
 const Footer = () => (
   <S.Footer>
     <S.Container>
-      <S.Divider />
+      {/* <S.Divider />
       <S.UpperContainer>
         <ul>
           <li>
@@ -27,7 +27,7 @@ const Footer = () => (
             <Link href="/">Kassandra DAO</Link>
           </li>
           <li>
-            <Link href="/products/ahype">$aHype</Link>
+            <Link href="/products/ahype">$aHYPE Index</Link>
           </li>
         </ul>
         <ul>
@@ -41,7 +41,7 @@ const Footer = () => (
             <Link href="/">Terms of Service</Link>
           </li>
         </ul>
-      </S.UpperContainer>
+      </S.UpperContainer> */}
       <S.Divider />
 
       <S.LowerContainer>
