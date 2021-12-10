@@ -25,6 +25,27 @@ export const dictionary: any = {
   20: '#d4e442b0'
 }
 
+// export const dictionary: any = {
+//   0: '#FBA922',
+//   1: '#3DC8D8',
+//   2: '#F58B52',
+//   3: '#A17ACC',
+//   4: '#EF6B84',
+//   5: '#EC59A0',
+//   6: '#7999D1',
+//   7: '#DE4AC5',
+//   8: '#CA5AC7',
+//   9: '#4FBAD6',
+//   10: '#E94CB5',
+//   11: '#8D89CE',
+//   12: '#F27C6A',
+//   13: '#66A8D3',
+//   14: '#F8993C',
+//   15: '#B769C9',
+//   16: '#FFBF00',
+//   17: '#26DBDB'
+// }
+
 export const ChartProduct = styled.div`
   position: relative;
 `
