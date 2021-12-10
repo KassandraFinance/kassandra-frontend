@@ -4,6 +4,7 @@ export const GET_INFO_POOL = gql`
   query ($id: ID!, $day: Int!) {
     pool(id: $id) {
       total_value_locked_usd
+      strategy
     }
     withdraw: fees(
       where: { pool: $id, period: 3600, timestamp_gt: $day, type: "exit" }

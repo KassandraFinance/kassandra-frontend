@@ -136,7 +136,7 @@ const StakeFarm = () => {
             <S.NameStake left={true} style={{ margin: '100px 0 50px' }}>
               <S.Name>
                 <img src="assets/stake-money-withdraw.svg" alt="" />
-                <h1>FARM KACY</h1>
+                <h1>Farm KACY</h1>
               </S.Name>
               <p>EARN KACY BY STAKING OTHER ASSETS</p>
             </S.NameStake>

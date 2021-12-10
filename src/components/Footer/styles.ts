@@ -131,11 +131,16 @@ export const LowerContainer = styled.div`
   }
 `
 export const Certified = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
   max-width: 100%;
   margin: 1.6rem auto 0;
+  a {
+    color: ${theme.colors.snow};
+    text-decoration: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
   span {
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.bold};

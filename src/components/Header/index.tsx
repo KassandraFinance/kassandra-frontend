@@ -203,12 +203,12 @@ const Header = () => {
               <S.MenuLink> Home </S.MenuLink>
             </Link>
 
-            <Link href="/products" passHref>
+            <Link href="/products/ahype" passHref>
               <S.MenuLink 
                 onClick={() => {
-                  clickMatomoEvent('click-on-link', 'buy-heim')
+                  clickMatomoEvent('click-on-link', 'invest')
                   setIsOpen(false)
-                }}>Buy $Heim</S.MenuLink>
+                }}>Invest</S.MenuLink>
             </Link>
 
             <Link href="/farm" passHref>
@@ -221,9 +221,12 @@ const Header = () => {
             {/* <Link href="/" passHref> */}
               <S.MenuLinkDisable>Vote</S.MenuLinkDisable>
             {/* </Link> */}
-            {/* <Link href="/" passHref> */}
-              <S.MenuLinkDisable>About</S.MenuLinkDisable>
-            {/* </Link> */}
+            <Link href="/about" passHref>
+              <S.MenuLink onClick={() => {
+                clickMatomoEvent('click-on-link', 'about')
+                setIsOpen(false)
+              }}>About</S.MenuLink>
+            </Link>
             {web3.currentProvider !== null ? (
               userWalletAddress ? (
                 <Button

@@ -55,7 +55,7 @@ export const Label = styled.label<ILabelProps>`
     props.selected ? theme.colors.cyan : 'rgba(255, 255, 255, 0.15)'};
   color: ${props => (props.selected ? '#fff' : theme.colors.gray)};
   font-size: ${theme.font.sizes.font18};
-  font-weight: ${theme.font.weight.medium};
+  font-weight: ${theme.font.weight.normal};
   text-align: center;
   text-transform: capitalize;
 

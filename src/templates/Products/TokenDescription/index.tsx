@@ -16,14 +16,15 @@ const TokenDescription = () => {
       <S.Line />
       <S.Text>
         <p>
-          The Heimdall Social Index (HEIM) tracks the performance of a portfolio
-          composed by selecting the most socially active cryptocurrencies in the
-          last 30 days. This portfolio is weighted according to the values of
-          social score made available by Heimdall and the technology provided by
-          the Kassandra Protocol. The portfolio is a SIP (Smart Index Pool) and
-          is rebalanced by arbitrageurs just like an usual liquidity pool. The
-          index is accompanied by its own token $HEIM, allowing investors to buy
-          the index by purchasing the token, just like an ETF.
+          The Avalanche Social Index (aHYPE) tracks the performance of a
+          portfolio composed by selecting the most socially active
+          cryptocurrencies in the last 30 days. This portfolio is weighted
+          according to the values of social score made available by Heimdall and
+          the technology provided by the Kassandra Protocol. The portfolio is a
+          SIP (Smart Index Pool) and is rebalanced by arbitrageurs just like an
+          usual liquidity pool. The index is accompanied by its own token $HEIM,
+          allowing investors to buy the index by purchasing the token, just like
+          an ETF.
         </p>
 
         <h2>Goal</h2>
@@ -73,15 +74,17 @@ const TokenDescription = () => {
         </p>
         <h2>Index Maintenance</h2>
         <p>
-          At first, the Heimdall Social Index will have a whitelist already
+          At first, the Avalanche Social Index will have a whitelist already
           determined by the Kassandra Foundation. However, as mentioned before,
           the $KACY token holders will be able to alter the whitelist if they
           managed to reach a consensus.It is required that any token to be added
-          to the whitelist must be available on the Ethereum blockchain and meet
-          other conditions such as:
+          to the whitelist must be available on the Avalanche blockchain and
+          meet other conditions such as:
         </p>
         <ol>
-          <li>Accurate market data.Price, market cap and circulating supply</li>
+          <li>
+            Accurate market data. Price, market cap and circulating supply.
+          </li>
           <li> The project’s protocol must have significant usage.</li>
           <li>The project’s protocol must not be insolvent.</li>
         </ol>

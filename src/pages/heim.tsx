@@ -1,6 +1,8 @@
 import React from 'react'
 import Head from 'next/head'
-import Heim from '../templates/Heim'
+// import Heim from '../templates/Heim'
+
+import NotFound from './../templates/404'
 
 export default function Index() {
   return (
@@ -49,7 +51,8 @@ export default function Index() {
           content="The HEIM Social Index - Exposure to the hottest cryptocurrencies in the market"
         />
       </Head>
-      <Heim />
+      {/* <Heim /> */}
+      <NotFound />
     </>
   )
 }

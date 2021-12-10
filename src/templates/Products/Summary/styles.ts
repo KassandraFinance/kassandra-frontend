@@ -7,28 +7,35 @@ export const Summary = styled.div`
     font-weight: ${theme.font.weight.light};
     line-height: 24px;
   }
+
   a {
     background-color: rgba(255, 255, 255, 0.04);
     border: none;
     border-radius: 12px;
-    color: #fff;
+    color: ${theme.colors.snow};
     font-family: ${theme.font.family};
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.light};
     text-decoration: none;
 
     display: flex;
-    align-items: center;
+    align-items: flex-end;
 
     max-width: 100%;
-    padding: 16px 24px;
-    outline: none;
-    &:hover {
-      text-decoration: underline;
-    }
+    padding: 24px;
 
-    img {
-      margin-left: 8px;
+    transition: 0.15s;
+    outline: none;
+    svg {
+      margin-left: ${theme.spacings.space8};
+    }
+    &:hover {
+      color: ${theme.colors.cyan};
+      > svg {
+        path {
+          fill: ${theme.colors.cyan};
+        }
+      }
     }
   }
 `
@@ -59,7 +66,17 @@ export const LinkContent = styled.div`
   margin: 20px 0;
 `
 
-export const CopyContract = styled.div`
+export const ContractsName = styled.p`
+  font-weight: ${theme.font.weight.normal} !important;
+  margin: 20px 0 10px;
+`
+
+interface ICopyContractProps {
+  width: string;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const CopyContract = styled.div<ICopyContractProps>`
   background-color: rgba(255, 255, 255, 0.04);
   border: none;
   border-radius: 12px;
@@ -70,34 +87,61 @@ export const CopyContract = styled.div`
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
 
-  max-width: 400px;
-  padding: 16px 24px;
-  position: relative;
+  max-width: ${props => props.width};
+  padding: 22px;
+  margin: 16px 0;
+
+  .metamask {
+    margin-left: 16px;
+  }
 
   button {
     background-color: transparent;
     border: none;
-    color: #fff;
+    color: ${theme.colors.snow};
     font-family: ${theme.font.family};
     font-size: ${theme.font.sizes.font14};
+    font-weight: ${theme.font.weight.light};
     text-decoration: none;
 
+    display: flex;
+    align-items: center;
+
+    max-width: 100%;
+
+    transition: 0.15s;
+    outline: none;
     cursor: pointer;
+    svg {
+      margin-left: ${theme.spacings.space8};
+    }
+    &:hover {
+      color: ${theme.colors.cyan};
+      > svg {
+        path {
+          fill: ${theme.colors.cyan};
+        }
+      }
+    }
   }
 `
 
 export const Blockchain = styled.div`
   display: flex;
-  align-items: flex-end;
+
+  max-height: 24px;
+  margin-right: 32px;
+
   .image {
-    height: 18px;
-    width: 18px;
+    max-width: 24px;
+    max-height: 24px;
     margin-right: 16px;
   }
+
   span {
-    font-weight: ${theme.font.weight.light};
+    font-size: ${theme.font.sizes.font14};
     line-height: ${theme.font.sizes.font14};
+    padding: 6px 0;
   }
 `
