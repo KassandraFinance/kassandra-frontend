@@ -62,8 +62,8 @@ export const UpperContainer = styled.div`
   }
   a {
     color: #fcfcfc;
-    font-size: 16px;
-    font-weight: 300;
+    font-size: ${theme.font.sizes.font14};
+    font-weight: ${theme.font.weight.light};
     text-decoration: none;
     @media (max-width: 710px) {
       font-size: ${theme.font.sizes.font12};
