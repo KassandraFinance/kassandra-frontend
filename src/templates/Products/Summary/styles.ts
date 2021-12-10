@@ -22,7 +22,7 @@ export const Summary = styled.div`
     align-items: flex-end;
 
     max-width: 100%;
-    padding: 16px 24px;
+    padding: 24px;
 
     transition: 0.15s;
     outline: none;
@@ -66,7 +66,17 @@ export const LinkContent = styled.div`
   margin: 20px 0;
 `
 
-export const CopyContract = styled.div`
+export const ContractsName = styled.p`
+  font-weight: ${theme.font.weight.normal} !important;
+  margin: 20px 0 10px;
+`
+
+interface ICopyContractProps {
+  width: string;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const CopyContract = styled.div<ICopyContractProps>`
   background-color: rgba(255, 255, 255, 0.04);
   border: none;
   border-radius: 12px;
@@ -77,11 +87,14 @@ export const CopyContract = styled.div`
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
 
-  max-width: 400px;
-  padding: 16px 24px;
-  position: relative;
+  max-width: ${props => props.width};
+  padding: 22px;
+  margin: 16px 0;
+
+  .metamask {
+    margin-left: 16px;
+  }
 
   button {
     background-color: transparent;
@@ -96,7 +109,6 @@ export const CopyContract = styled.div`
     align-items: center;
 
     max-width: 100%;
-    padding: 16px 24px;
 
     transition: 0.15s;
     outline: none;
@@ -117,15 +129,19 @@ export const CopyContract = styled.div`
 
 export const Blockchain = styled.div`
   display: flex;
-  align-items: center;
+
+  max-height: 24px;
+  margin-right: 32px;
 
   .image {
-    max-width: 26px;
-    max-height: 26px;
+    max-width: 24px;
+    max-height: 24px;
     margin-right: 16px;
   }
+
   span {
-    font-weight: ${theme.font.weight.light};
+    font-size: ${theme.font.sizes.font14};
     line-height: ${theme.font.sizes.font14};
+    padding: 6px 0;
   }
 `
