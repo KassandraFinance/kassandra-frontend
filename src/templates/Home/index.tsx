@@ -17,6 +17,7 @@ import SubscribeBanner from '../../components/SubscribeBanner'
 import BannerCTA from '../../components/BannerCTA'
 
 import * as S from './styles'
+import RoadMapCard from '../../components/RoadMapCards'
 
 const Home = () => {
   const { trackPageView } = useMatomo()
@@ -48,6 +49,7 @@ const Home = () => {
         {/* <Token /> */}
         <KassandraToken />
         <KassandraArchitecture />
+        <RoadMapCard />
         {/* <TokenDistribution /> */}
         {/* <BannerCTA /> */}
         <CountdownBanner />
