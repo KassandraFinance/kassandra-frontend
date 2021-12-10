@@ -13,7 +13,7 @@ const Footer = () => (
             <h4>Company</h4>
           </li>
           <li>
-            <Link href="/">About</Link>
+            <Link href="/about">About</Link>
           </li>
           <li>
             <Link href="/">Partners</Link>
@@ -27,7 +27,7 @@ const Footer = () => (
             <Link href="/">Kassandra DAO</Link>
           </li>
           <li>
-            <Link href="/heim">$HEIM Index</Link>
+            <Link href="/products/ahype">$aHype</Link>
           </li>
         </ul>
         <ul>
@@ -128,8 +128,14 @@ const Footer = () => (
             </li>
           </ul>
           <S.Certified>
-            <span>Audited By</span>
-            <img src="/assets/Certik.svg" alt="Certik" />
+            <a
+              href="https://www.certik.com/projects/kassandra-finance"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>Audited By</span>
+              <img src="/assets/Certik.svg" alt="Certik" />
+            </a>
           </S.Certified>
         </S.LowerRight>
       </S.LowerContainer>
@@ -216,8 +222,14 @@ const Footer = () => (
           <span>© 2021-{new Date().getFullYear()} Kassandra.</span>
         </S.LowerLeft>
         <S.Certified>
-          <span>Audited By</span>
-          <img src="/assets/Certik.svg" alt="Certik" />
+          <a
+            href="https://www.certik.com/projects/kassandra-finance"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>Audited By</span>
+            <img src="/assets/Certik.svg" alt="Certik" />
+          </a>
         </S.Certified>
       </S.LowerContainerMobile>
     </S.Container>
