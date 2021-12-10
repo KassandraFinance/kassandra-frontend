@@ -75,7 +75,7 @@ const InputDefault = ({
           placeholder="0"
           value={BNtoDecimal(swapOutAmount || new BigNumber(0), decimals)}
         />
-        {isMax !== null && (
+        {isMax !== null ? (
           <S.ButtonMax
             type="button"
             isMax={isMax}
@@ -89,6 +89,8 @@ const InputDefault = ({
           >
             Max
           </S.ButtonMax>
+        ) : (
+          <div style={{ width: '40px', height: '20px', padding: '3px 8px' }} />
         )}
       </S.AmountDefault>
     </S.InputDefaultContainer>
