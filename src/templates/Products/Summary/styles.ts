@@ -7,28 +7,35 @@ export const Summary = styled.div`
     font-weight: ${theme.font.weight.light};
     line-height: 24px;
   }
+
   a {
     background-color: rgba(255, 255, 255, 0.04);
     border: none;
     border-radius: 12px;
-    color: #fff;
+    color: ${theme.colors.snow};
     font-family: ${theme.font.family};
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.light};
     text-decoration: none;
 
     display: flex;
-    align-items: center;
+    align-items: flex-end;
 
     max-width: 100%;
     padding: 16px 24px;
-    outline: none;
-    &:hover {
-      text-decoration: underline;
-    }
 
-    img {
-      margin-left: 8px;
+    transition: 0.15s;
+    outline: none;
+    svg {
+      margin-left: ${theme.spacings.space8};
+    }
+    &:hover {
+      color: ${theme.colors.cyan};
+      > svg {
+        path {
+          fill: ${theme.colors.cyan};
+        }
+      }
     }
   }
 `
@@ -79,21 +86,42 @@ export const CopyContract = styled.div`
   button {
     background-color: transparent;
     border: none;
-    color: #fff;
+    color: ${theme.colors.snow};
     font-family: ${theme.font.family};
     font-size: ${theme.font.sizes.font14};
+    font-weight: ${theme.font.weight.light};
     text-decoration: none;
 
+    display: flex;
+    align-items: center;
+
+    max-width: 100%;
+    padding: 16px 24px;
+
+    transition: 0.15s;
+    outline: none;
     cursor: pointer;
+    svg {
+      margin-left: ${theme.spacings.space8};
+    }
+    &:hover {
+      color: ${theme.colors.cyan};
+      > svg {
+        path {
+          fill: ${theme.colors.cyan};
+        }
+      }
+    }
   }
 `
 
 export const Blockchain = styled.div`
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+
   .image {
-    height: 18px;
-    width: 18px;
+    max-width: 26px;
+    max-height: 26px;
     margin-right: 16px;
   }
   span {
