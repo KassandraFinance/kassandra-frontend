@@ -4,6 +4,8 @@ import Image from 'next/image'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
 import { useSelector, RootStateOrAny } from 'react-redux'
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
 
 import { HeimCRPPOOL, HeimCorePool } from '../../constants/tokenAddresses'
 import { SUBGRAPH_URL } from '../../constants/tokenAddresses'
@@ -43,7 +45,8 @@ const Products = () => {
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { trackProductPageView } = useMatomoEcommerce()
-  const day = Math.trunc(Date.now() / 1000 - 60 * 60 * 24 * 7)
+  
+  const day = Math.trunc(Date.now() / 1000 - 60 * 60 * 24)
 
   const { data } = useSWR([GET_INFO_POOL], query =>
     request(SUBGRAPH_URL, query, {
@@ -138,11 +141,23 @@ const Products = () => {
             <S.Line />
             <S.IntroCharts>
               <S.IndexData>
-                <span>TVL <Image src={infoGray} alt="tooltip" /></span>
+                <span>TVL
+                  <Tippy content="Text about TVL" >
+                    <S.Tooltip>
+                      <Image src={infoGray} alt="tooltip" />
+                    </S.Tooltip>
+                  </Tippy>
+                </span>
                 <h2>${BNtoDecimal(Big(data?.pool.total_value_locked_usd || 0), Big(0), 2)}</h2>
               </S.IndexData>
               <S.IndexData>
-                <span>VOLUME (24h) <Image src={infoGray} alt="tooltip" /></span>
+                <span>VOLUME (24h)
+                  <Tippy content="Text about Volume" >
+                    <S.Tooltip>
+                      <Image src={infoGray} alt="tooltip" />
+                    </S.Tooltip>
+                  </Tippy>
+                </span>
                 <h2>${infoPool.volume}</h2>
               </S.IndexData>
               {/* <S.IndexData>
@@ -150,11 +165,23 @@ const Products = () => {
                 <h2>12%</h2>
               </S.IndexData> */}
               <S.IndexData>
-                <span>swap fees <Image src={infoGray} alt="tooltip" /></span>
+                <span>swap fees (24h)
+                  <Tippy content="Text about Swap Fees" >
+                    <S.Tooltip>
+                      <Image src={infoGray} alt="tooltip" />
+                    </S.Tooltip>
+                  </Tippy>
+                </span>
                 <h2>${infoPool.swapFees}</h2>
               </S.IndexData>
               <S.IndexData>
-                <span>withdraw fees <Image src={infoGray} alt="tooltip" /></span>
+                <span>withdraw fees (24h)
+                  <Tippy content="Text about Withdraw Fees" >
+                    <S.Tooltip>
+                      <Image src={infoGray} alt="tooltip" />
+                    </S.Tooltip>
+                  </Tippy>
+                </span>
                 <h2>${infoPool.withdrawFees}</h2>
               </S.IndexData>
               {/* <S.IndexData>

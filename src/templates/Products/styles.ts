@@ -42,6 +42,7 @@ export const Intro = styled.div`
 
 export const NameIndex = styled.div`
   p {
+    color: ${theme.colors.gray};
     font-size: ${theme.font.sizes.font12};
     text-transform: uppercase;
   }
@@ -103,5 +104,13 @@ export const IndexData = styled.div`
     font-weight: ${theme.font.weight.medium};
 
     margin-top: ${theme.spacings.space8};
+  }
+`
+
+export const Tooltip = styled.div`
+  margin-top: 2px;
+  margin-left: 6px;
+  img {
+    width: 14px;
   }
 `
