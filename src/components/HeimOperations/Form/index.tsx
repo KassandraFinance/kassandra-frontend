@@ -685,11 +685,11 @@ const Form = ({
       />
 
       {title === 'Swap' ?
-        <S.SwapButton type="button" onClick={() => {
+        <S.SwapButton type="button" title="Trade places for swap-in and swap-out token" onClick={() => {
           setSwapInAddress(swapOutAddress)
           setSwapOutAddress(swapInAddress)
         }} >
-          <img src="/assets/arrowDown.svg" alt="" />
+          <img src="/assets/arrowDown.svg" alt="Trade places for swap-in and swap-out token" />
           <img src="/assets/arrowDown.svg" alt="" />
         </S.SwapButton>
         :

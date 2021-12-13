@@ -44,7 +44,7 @@ const SelectInputTokens = ({
         </div>
         {tokenDetails?.symbol}
         <div id="arrow-down">
-          <Image src={arrow} alt="arrow"  />
+          <Image src={arrow} alt=""  />
         </div>
       </S.Selected>
       {openOptions && (

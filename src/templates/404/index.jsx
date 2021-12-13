@@ -4,7 +4,7 @@ import Button from '../../components/Button'
 
 const NotFound = () => (
   <S.Wrapper>
-    <img src="assets/404.svg" alt="" />
+    <img src="assets/404.svg" alt="Error 404" />
     <p>Sorry, this issue could not have been foreseen.</p>
     <p>Learn more about Kassandra</p>
     <Link href="https://kassandrafoundation.medium.com/">

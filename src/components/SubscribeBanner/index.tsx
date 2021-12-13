@@ -56,7 +56,8 @@ const SubscribeBanner = () => {
             icon={
               <img
                 src="/assets/fowardArrow.svg"
-                alt=""
+                alt="Subscribe"
+                title="Subscribe"
                 onClick={handleSubmit}
               />
             }

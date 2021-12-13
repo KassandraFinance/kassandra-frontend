@@ -5,7 +5,7 @@ export const VotingPower = styled.div`
   background: rgba(255, 255, 255, 0.04);
   border-radius: ${theme.border.radius};
   padding: 16px;
-  width: 260px;
+  width: 290px;
 
   @media (max-width: 960px) {
     margin-top: 20px;
@@ -48,5 +48,13 @@ export const TotalVotingPower = styled.div`
     font-size: ${theme.font.sizes.font12};
     font-weight: ${theme.font.weight.light};
     text-transform: uppercase;
+
+    display: flex;
+    align-items: center;
+    div {
+      margin-top: 2px;
+      margin-left: 2px;
+      z-index: 19;
+    }
   }
 `

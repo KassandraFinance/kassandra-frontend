@@ -46,7 +46,7 @@ const InputDefault = ({
     return (
       <S.Symbol>
         <div className="img">
-          <Image src={avaxSocial} alt="avax-social" width={22} height={22} />
+          <Image src={avaxSocial} alt="" width={22} height={22} />
         </div>
         {poolTokens.length > 0 && poolTokens[0] !== undefined
           ? poolTokens[0].symbol

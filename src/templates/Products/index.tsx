@@ -129,7 +129,7 @@ const Products = () => {
         <S.Product>
           <S.ProductDetails>
             <S.Intro>
-              <Image src={avaxSocial} alt="tooltip" width={75} height={75} />
+              <Image src={avaxSocial} alt="" width={75} height={75} />
               <S.NameIndex>
                 <S.NameAndSymbol>
                   <h1>{poolName}</h1>
@@ -142,9 +142,9 @@ const Products = () => {
             <S.IntroCharts>
               <S.IndexData>
                 <span>TVL
-                  <Tippy content="Text about TVL" >
+                  <Tippy content="The Total Value Locked is the amount invested inside the pool, or simply the total value of all tokens inside the pool combined." >
                     <S.Tooltip>
-                      <Image src={infoGray} alt="tooltip" />
+                      <Image src={infoGray} alt="Explanation" />
                     </S.Tooltip>
                   </Tippy>
                 </span>
@@ -152,23 +152,23 @@ const Products = () => {
               </S.IndexData>
               <S.IndexData>
                 <span>VOLUME (24h)
-                  <Tippy content="Text about Volume" >
+                  <Tippy content="Total volume of transactions in the last 24 hours. This includes new investments, withdrawals, token swaps and token transfers, which include swaps in decentralized exchanges." >
                     <S.Tooltip>
-                      <Image src={infoGray} alt="tooltip" />
+                      <Image src={infoGray} alt="Explanation" />
                     </S.Tooltip>
                   </Tippy>
                 </span>
                 <h2>${infoPool.volume}</h2>
               </S.IndexData>
               {/* <S.IndexData>
-                <span>APY <Image src={infoGray} alt="tooltip" /></span>
+                <span>APY <Image src={infoGray} alt="Explanation" /></span>
                 <h2>12%</h2>
               </S.IndexData> */}
               <S.IndexData>
                 <span>swap fees (24h)
-                  <Tippy content="Text about Swap Fees" >
+                  <Tippy content="Amount of fees collected in the last 24 hours when people swap tokens inside the pool. This fee is paid to all investors of the pool." >
                     <S.Tooltip>
-                      <Image src={infoGray} alt="tooltip" />
+                      <Image src={infoGray} alt="Explanation" />
                     </S.Tooltip>
                   </Tippy>
                 </span>
@@ -176,16 +176,16 @@ const Products = () => {
               </S.IndexData>
               <S.IndexData>
                 <span>withdraw fees (24h)
-                  <Tippy content="Text about Withdraw Fees" >
+                  <Tippy content="Amount of fees collected in the last 24 hours when people withdraw from the strategy. This fee is paid to the Kassandra Decentralized Autonomous Organization." >
                     <S.Tooltip>
-                      <Image src={infoGray} alt="tooltip" />
+                      <Image src={infoGray} alt="Explanation" />
                     </S.Tooltip>
                   </Tippy>
                 </span>
                 <h2>${infoPool.withdrawFees}</h2>
               </S.IndexData>
               {/* <S.IndexData>
-                <span>rewards <Image src={infoGray} alt="tooltip" /></span>
+                <span>rewards <Image src={infoGray} alt="Explanation" /></span>
                 <h2>40%</h2>
               </S.IndexData> */}
             </S.IntroCharts>

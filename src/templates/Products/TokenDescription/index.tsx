@@ -10,7 +10,7 @@ const TokenDescription = () => {
   return (
     <>
       <S.Title>
-        <Image src={iconBar} alt="icon-bar" />
+        <Image src={iconBar} alt="" />
         <h2>Token Description</h2>
       </S.Title>
       <S.Line />
@@ -98,7 +98,10 @@ const TokenDescription = () => {
         </ol>
         <h2>Index Value</h2>
         <p>The value of the index is given by:</p>
-        <Image src={imageCalc} alt="index value calc" />
+        <Image
+          src={imageCalc}
+          alt="The sum, for each token, of the token balance times its price divided by the index divisor"
+        />
         <S.ToDocumention>
           <p>
             View full{' '}

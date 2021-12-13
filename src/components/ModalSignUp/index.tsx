@@ -63,7 +63,7 @@ export const ModalSignUp = ({
         <BackgroundBlack>
           <WrapperClose>
             <button type="button" onClick={() => setModalSignupOpen(false)}>
-              <img src="assets/close.svg" alt="" />{' '}
+              <img src="assets/close.svg" alt="Close" />{' '}
             </button>
           </WrapperClose>
           <InterBackground>

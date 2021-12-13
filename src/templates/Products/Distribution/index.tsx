@@ -117,7 +117,7 @@ const Distribution = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
   return (
     <S.Distribution>
       <S.Title>
-        <Image src={iconBar} alt="Icon Bar" />
+        <Image src={iconBar} alt="" />
         <h2>Distribution</h2>
       </S.Title>
       <S.Line />

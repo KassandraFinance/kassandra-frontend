@@ -28,7 +28,7 @@ const ModalWalletConnect = ({
           <S.ModalText>
             <span>Wallet connection is required</span>
             <button type="button" onClick={() => setModalOpen(false)}>
-              <img src="assets/close.svg" alt="" />{' '}
+              <img src="assets/close.svg" alt="Close" />{' '}
             </button>
           </S.ModalText>
 
