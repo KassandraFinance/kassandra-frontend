@@ -249,7 +249,7 @@ const ModalStaking = ({
               backgroundBlack
               fullWidth
               size="huge"
-              text="Get Kacy"
+              text="Get KACY"
               href="https://app.uniswap.org"
               target="_blank"
               rel="noopener noreferrer"

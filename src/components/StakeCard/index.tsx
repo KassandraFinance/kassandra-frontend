@@ -78,7 +78,7 @@ const staked: any = {
   0: 'KACY',
   1: 'KACY',
   2: 'KACY',
-  3: 'HEIM',
+  3: 'aHYPE',
   4: 'KEU'
 }
 
@@ -260,9 +260,9 @@ const StakeCard = ({
             ) : null}
             {pid === 3 ? (
               <img
-                src="assets/stake-heim.svg"
+                src="assets/avalanche_social_index_logo.svg"
                 alt=""
-                style={{ marginLeft: '-20px' }}
+                style={{ width: '58px' }}
               />
             ) : null}
             {pid === 4 ? (
@@ -286,7 +286,7 @@ const StakeCard = ({
             <S.PoolName>
               <S.StakeAndEarn>
                 <p>STAKE</p>
-                {pid === 3 ? <p>$HEIM</p> : <p>$KACY-ETH UNIV LP</p>}
+                {pid === 3 ? <p>$aHYPE</p> : <p>$KACY-ETH UNIV LP</p>}
               </S.StakeAndEarn>
               <S.StakeAndEarn>
                 <p>EARN</p>

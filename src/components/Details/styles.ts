@@ -59,7 +59,6 @@ export const KacyUSD = styled.div`
   justify-content: space-between;
 
   span {
-    text-transform: uppercase;
     margin: 0;
     font-weight: ${theme.font.weight.light};
     font-size: ${theme.font.sizes.font14};

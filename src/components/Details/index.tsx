@@ -43,11 +43,11 @@ const Details = ({
   const [depositedAmount, setDepositedAmount] = React.useState<string>('')
 
   const staked: any = {
-    0: 'kacy',
-    1: 'kacy',
-    2: 'kacy',
-    3: 'heim',
-    4: 'keu'
+    0: 'KACY',
+    1: 'KACY',
+    2: 'KACY',
+    3: 'aHYPE',
+    4: 'KEU'
   }
 
   React.useEffect(() => {
