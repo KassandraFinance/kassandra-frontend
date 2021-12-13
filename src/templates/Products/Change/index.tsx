@@ -59,8 +59,8 @@ const Change = () => {
   return (
     <S.Change>
       <S.Title>
-        <Image src={iconBar} alt="Icon Bar" />
-        <h2>Change</h2>
+        <Image src={iconBar} alt="" />
+        <h2>Price Change</h2>
       </S.Title>
       <table>
         <thead>

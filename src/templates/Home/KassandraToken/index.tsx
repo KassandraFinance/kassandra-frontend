@@ -121,33 +121,60 @@ const KassandraToken = () => {
             </a>
             <div>
               <S.WrapperIcons>
-                <a href="https://discord.gg/2uGEvqNnuq" target="_blank" rel="noopener noreferrer">
-                  <img src="assets/Discord.svg" alt="" />
+                <a
+                  href="https://discord.gg/2uGEvqNnuq"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="assets/Discord.svg"
+                    alt="Join our Discord community"
+                  />
                 </a>
               </S.WrapperIcons>
               <S.WrapperIcons>
-                <a href="https://t.me/KassandraDAO" target="_blank" rel="noopener noreferrer">
-                  <img src="assets/telegram.svg" alt="" />
+                <a
+                  href="https://t.me/KassandraDAO"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="assets/telegram.svg"
+                    alt="Join our Telegram group"
+                  />
                 </a>
               </S.WrapperIcons>
               <S.WrapperIcons>
-                <a href="https://github.com/KassandraFinance" target="_blank" rel="noopener noreferrer">
-                  <img src="assets/Github.svg" alt="" />
+                <a
+                  href="https://github.com/KassandraFinance"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="assets/Github.svg"
+                    alt="Access our GitHub repository"
+                  />
                 </a>
               </S.WrapperIcons>
               <S.WrapperIcons>
-                <a href="https://kassandrafoundation.medium.com/" target="_blank" rel="noopener noreferrer">
-                  <img src="assets/Medium.svg" alt="" />
+                <a
+                  href="https://kassandrafoundation.medium.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src="assets/Medium.svg" alt="Read our Medium blog" />
                 </a>
               </S.WrapperIcons>
               <S.WrapperIcons>
-                <a href="https://twitter.com/dao_kassandra" target="_blank" rel="noopener noreferrer">
-                  <img src="assets/Twitter.svg" alt="" />
+                <a
+                  href="https://twitter.com/dao_kassandra"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src="assets/Twitter.svg" alt="Follow our Twitter feed" />
                 </a>
               </S.WrapperIcons>
             </div>
-
-
           </S.CardFooter>
         </S.Card>
       </S.KassandraToken>
@@ -187,7 +214,6 @@ const KassandraToken = () => {
             <span><b>Approve</b> code changes and updates</span>
           </S.ResponsabilitiesCards>
         </S.MobileCards>
-
       </S.Responsabilities>
     </S.Container>
   )

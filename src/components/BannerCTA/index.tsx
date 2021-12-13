@@ -18,7 +18,7 @@ const BannerCTA = () => {
           <span>
             A single asset that tracks the performance of the cryptocurrencies
             with the most solid and engaged communities running on Avalanche
-            eoossystem.
+            ecosystem.
           </span>
           <S.BannerFooter>
             <Link href="/products" passHref>

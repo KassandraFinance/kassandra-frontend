@@ -17,7 +17,10 @@ const StyledToastContent = ({
     <>
       {type === 'success' && (
         <NotificationContainer>
-          <img src="assets/IconNotification/success.svg" alt="" />
+          <img
+            src="assets/IconNotification/success.svg"
+            alt="New success notification"
+          />
           <MessageContainer>
             <h3>{title}</h3>
             <span>{message}</span>
@@ -26,7 +29,10 @@ const StyledToastContent = ({
       )}
       {type === 'warning' && (
         <NotificationContainer>
-          <img src="assets/IconNotification/warning.svg" alt="" />
+          <img
+            src="assets/IconNotification/warning.svg"
+            alt="New warning notification"
+          />
           <MessageContainer>
             <h3>{title}</h3>
             <span>{message}</span>
@@ -35,7 +41,10 @@ const StyledToastContent = ({
       )}
       {type === 'error' && (
         <NotificationContainer>
-          <img src="assets/IconNotification/error.svg" alt="" />
+          <img
+            src="assets/IconNotification/error.svg"
+            alt="New error notification"
+          />
           <MessageContainer>
             <h3>{title}</h3>
             <span>{message}</span>
@@ -44,7 +53,10 @@ const StyledToastContent = ({
       )}
       {type === 'info' && (
         <NotificationContainer>
-          <img src="assets/IconNotification/info.svg" alt="" />
+          <img
+            src="assets/IconNotification/info.svg"
+            alt="New informational notification"
+          />
           <MessageContainer>
             <h3>{title}</h3>
             <span>{message}</span>

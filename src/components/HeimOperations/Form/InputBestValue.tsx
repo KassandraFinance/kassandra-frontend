@@ -62,7 +62,7 @@ const InputBestValue = ({
                 <div className="image">
                   <Image
                     src={poolImages[token.address] || none}
-                    alt={`Imagem on ${token.symbol}`}
+                    alt=""
                     width={21}
                     height={21}
                   />

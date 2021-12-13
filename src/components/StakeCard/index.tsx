@@ -270,9 +270,9 @@ const StakeCard = ({
             ) : null}
             <S.IntroStaking>
               <S.APR>
-                <Tippy content="Annual Percentage Return">
+                <Tippy content="The Annual Percentage Rate is the yearly rate earned not taking compounding into account">
                   <S.TooltipAPR>
-                    <Image src={infoCyanIcon} alt="tooltip" />
+                    <Image src={infoCyanIcon} alt="Explanation" />
                   </S.TooltipAPR>
                 </Tippy>
                 <h4>APR</h4>
@@ -319,7 +319,7 @@ const StakeCard = ({
                     <S.TooltipAPR>
                       <Image
                         src={infoGrayIcon}
-                        alt="tooltip"
+                        alt="Explanation"
                         width={16}
                         height={16}
                       />

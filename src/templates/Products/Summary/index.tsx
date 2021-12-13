@@ -35,7 +35,7 @@ const Summary = () => {
   return (
     <S.Summary>
       <S.Title>
-        <Image src={iconBar} alt="Icon Bar" />
+        <Image src={iconBar} alt="" />
         <h2>Summary</h2>
       </S.Title>
       <S.Line />
@@ -46,7 +46,7 @@ const Summary = () => {
       </p>
       <S.LinkContent>
         {/* <a href="https://coinmarketcap.com/">
-          View In CoinMarketCap <img src="assets/externalLink.svg" alt="" />
+          View On CoinMarketCap <img src="assets/externalLink.svg" alt="" />
         </a> */}
         <a
           href="https://kassandrafoundation.medium.com/avalanche-social-index-4042a823c972"
@@ -74,7 +74,7 @@ const Summary = () => {
       <S.CopyContract width="476px">
         <S.Blockchain>
           <div className="image">
-            <Image src={avalancheIcon} alt="Icon Bar" />
+            <Image src={avalancheIcon} alt="" />
           </div>
           <span>CONTROLLER/AHYPE TOKEN</span>
         </S.Blockchain>
@@ -96,13 +96,19 @@ const Summary = () => {
           </button>
         </CopyToClipboard>
         <div className="metamask">
-          <Image src={metaMaskIcon} alt="Metamask" height={20} />
+          <Image
+            src={metaMaskIcon}
+            alt="Add token to Metamask"
+            title="Add token to Metamask"
+            height={20}
+            width={20}
+          />
         </div>
       </S.CopyContract>
       <S.CopyContract width="342px">
         <S.Blockchain>
           <div className="image">
-            <Image src={avalancheIcon} alt="Icon Bar" />
+            <Image src={avalancheIcon} alt="" />
           </div>
           <span>POOL CONTRACT</span>
         </S.Blockchain>
@@ -127,7 +133,7 @@ const Summary = () => {
       <S.CopyContract width="374px">
         <S.Blockchain>
           <div className="image">
-            <Image src={avalancheIcon} alt="Icon Bar" />
+            <Image src={avalancheIcon} alt="" />
           </div>
           <span>STRATEGY CONTRACT</span>
         </S.Blockchain>

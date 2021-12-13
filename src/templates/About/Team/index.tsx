@@ -10,7 +10,7 @@ const Team = () => {
       <S.Container>
         <S.TitleAndIcon>
           <S.Icon>
-            <img src="assets/team-icon.svg" alt="Team icon" />
+            <img src="assets/team-icon.svg" alt="" />
           </S.Icon>
           <S.Title>Our Team</S.Title>
         </S.TitleAndIcon>

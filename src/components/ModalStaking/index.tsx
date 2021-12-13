@@ -154,7 +154,7 @@ const ModalStaking = ({
           <S.InterBackground>
             <span>Stake in Pool</span>
             <button type="button" onClick={() => setModalOpen(false)}>
-              <img src="assets/close.svg" alt="" />
+              <img src="assets/close.svg" alt="Close" />
             </button>
           </S.InterBackground>
           <S.Main>

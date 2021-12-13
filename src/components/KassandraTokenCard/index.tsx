@@ -153,7 +153,10 @@ const KassandraToken = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src="assets/Discord.svg" alt="" />
+                  <img
+                    src="assets/Discord.svg"
+                    alt="Join our Discord community"
+                  />
                 </a>
               </S.WrapperIcons>
               <S.WrapperIcons>
@@ -162,7 +165,10 @@ const KassandraToken = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src="assets/telegram.svg" alt="" />
+                  <img
+                    src="assets/telegram.svg"
+                    alt="Join our Telegram group"
+                  />
                 </a>
               </S.WrapperIcons>
               <S.WrapperIcons>
@@ -171,7 +177,10 @@ const KassandraToken = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src="assets/Github.svg" alt="" />
+                  <img
+                    src="assets/Github.svg"
+                    alt="Access our GitHub repository"
+                  />
                 </a>
               </S.WrapperIcons>
               <S.WrapperIcons>
@@ -180,7 +189,7 @@ const KassandraToken = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src="assets/Medium.svg" alt="" />
+                  <img src="assets/Medium.svg" alt="Read our Medium blog" />
                 </a>
               </S.WrapperIcons>
               <S.WrapperIcons>
@@ -189,7 +198,7 @@ const KassandraToken = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src="assets/Twitter.svg" alt="" />
+                  <img src="assets/Twitter.svg" alt="Follow our Twitter feed" />
                 </a>
               </S.WrapperIcons>
             </div>

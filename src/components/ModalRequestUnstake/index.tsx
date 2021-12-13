@@ -72,7 +72,7 @@ const ModalRequestUnstake = ({
             <p>Attention!</p>
           </S.Attention>
           <S.Close type="button" onClick={() => setModalOpen(false)}>
-            <img src="assets/close.svg" alt="" />
+            <img src="assets/close.svg" alt="Close" />
           </S.Close>
         </S.Top>
         <S.Content>

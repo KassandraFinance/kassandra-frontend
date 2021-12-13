@@ -6,7 +6,10 @@ const Products = () => {
   return (
     <S.Container>
       <S.ImageKassandra>
-        <img src="assets/about-products.png" alt="Kassandra products" />
+        <img
+          src="assets/about-products.png"
+          alt="Understanding the parts that make Kassandra"
+        />
       </S.ImageKassandra>
       <S.CardWrapper>
         <S.Card>

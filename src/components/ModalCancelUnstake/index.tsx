@@ -74,7 +74,7 @@ const ModalCancelUnstake = ({
             <p>Warning!</p>
           </Attention>
           <Close type="button" onClick={() => setModalOpen(false)}>
-            <img src="assets/close.svg" alt="" />
+            <img src="assets/close.svg" alt="Close" />
           </Close>
         </Top>
         <Content>

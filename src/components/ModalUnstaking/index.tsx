@@ -141,7 +141,7 @@ const ModalUnstaking = ({
           <S.InterBackground>
             <span>Withdraw</span>
             <button type="button" onClick={() => setModalOpen(false)}>
-              <img src="assets/close.svg" alt="" />
+              <img src="assets/close.svg" alt="Close" />
             </button>
           </S.InterBackground>
           <S.Main>
