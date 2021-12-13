@@ -22,7 +22,7 @@ export const ModalContainer = styled.div<IModalContainerProps>`
   display: ${props => (props.modalOpen ? 'block' : 'none')};
 
   background-color: rgba(31, 31, 31, 0.8);
-  border: 1px solid #FFBF00;
+  border: 1.5px solid #FFBF00;
   border-radius: 10px;
 
   width: 500px;
@@ -30,9 +30,7 @@ export const ModalContainer = styled.div<IModalContainerProps>`
   position: fixed;
   top: 50%;
   left: 50%;
-
-  margin-left: -250px;
-  margin-top: -130px;
+  transform: translate(-50%, -50%);
 
   z-index: 21;
 `
@@ -95,6 +93,7 @@ export const Content = styled.div`
   span {
     font-size: ${theme.font.sizes.font20};
     font-weight: ${theme.font.weight.bold};
+
     margin-bottom: 12px;
   }
 `
@@ -105,6 +104,7 @@ export const Values = styled.div`
 
 export const ButtonContainer = styled.div`
   margin-top: 8px;
+
   button {
     background-color: transparent;
     border: 1px solid ${theme.colors.cyan};

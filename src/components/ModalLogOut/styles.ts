@@ -87,8 +87,6 @@ export const Content = styled.div`
 `
 
 export const ButtonContainer = styled.div`
-  margin-top: 12px;
-
   button,
   a {
     background-color: transparent;

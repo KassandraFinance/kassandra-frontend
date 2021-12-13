@@ -22,7 +22,7 @@ export const ModalContainer = styled.div<IModalContainerProps>`
   display: ${props => (props.modalOpen ? 'block' : 'none')};
 
   background-color: rgba(31, 31, 31, 0.8);
-  border: 1px solid #E8372C;
+  border: 1.5px solid #E8372C;
   border-radius: 10px;
 
 
@@ -31,9 +31,7 @@ export const ModalContainer = styled.div<IModalContainerProps>`
   position: fixed;
   top: 50%;
   left: 50%;
-
-  margin-left: -250px;
-  margin-top: -140px;
+  transform: translate(-50%, -50%);
 
   z-index: 21;
 `
