@@ -32,6 +32,13 @@ export const YourVotingPower = styled.div`
   }
 `
 
+export const Tooltip = styled.div`
+  padding: 1px;
+
+  position: relative;
+  z-index: 99;
+`
+
 export const TotalVotingPower = styled.div`
   display: flex;
   align-items: center;

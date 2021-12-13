@@ -1,12 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import BigNumber from 'bn.js'
+import Image from 'next/image'
+
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
 
 import web3 from '../../utils/web3'
 import { BNtoDecimal } from '../../utils/numerals'
 
+import infoGrayIcon from '../../../public/assets/info-gray.svg'
+
 import * as S from './styles'
-import Tooltip from '../Tooltip'
 
 interface IVotingPowerProps {
   getTotalVotes: () => Promise<BigNumber>;
@@ -44,9 +49,11 @@ const VotingPower = ({
       <S.YourVotingPower>
         <span>
           your voting power
-          <Tooltip tooltipTop={true} infoGray={true} widthIcon={14}>
-            about voting power
-          </Tooltip>
+          <Tippy content="About voting power">
+            <S.Tooltip>
+              <Image src={infoGrayIcon} alt="tooltip" width={14} height={14} />
+            </S.Tooltip>
+          </Tippy>
         </span>
         <span style={{ fontSize: '14px' }}>
           {BNtoDecimal(yourVotingPower, new BigNumber(18))}
