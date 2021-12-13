@@ -12,7 +12,7 @@ export const Dropdown = styled.div`
       position: absolute;
       display: block;
       height: 0.3rem;
-      border-radius: 0.15rem;
+      border-radius: 0.3rem;
       background-color: ${theme.colors.cyan};
       animation: hoverAnimation 0.2s forwards;
       margin-top: 12px;
@@ -54,6 +54,7 @@ export const DropdownContent = styled.div<IDropdownContentProps>`
   margin-top: 0.3rem;
 
   position: absolute;
+  left: 24px;
 
   min-width: 160px;
   z-index: 1;

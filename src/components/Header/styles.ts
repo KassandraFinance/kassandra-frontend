@@ -100,7 +100,7 @@ export const MenuLink = styled.a`
         position: absolute;
         display: block;
         height: 0.3rem;
-        border-radius: 0.15rem;
+        border-radius: 0.3rem;
         background-color: ${theme.colors.cyan};
         animation: hoverAnimation 0.2s forwards;
       }
