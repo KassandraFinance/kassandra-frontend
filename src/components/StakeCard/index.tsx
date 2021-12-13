@@ -3,9 +3,12 @@
 import React from 'react'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
-// import { EventData } from 'web3-eth-contract'
+import Image from 'next/image'
 import { useSelector, RootStateOrAny } from 'react-redux'
 import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
+
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
 
 import web3 from '../../utils/web3'
 import waitTransaction, {
@@ -20,12 +23,14 @@ import { PoolInfo } from '../../hooks/useStakingContract'
 import useERC20Contract, { ERC20 } from '../../hooks/useERC20Contract'
 
 import Details from '../Details'
-import Tooltip from '../Tooltip'
 import ModalStaking from '../ModalStaking'
 import ModalUnstaking from '../ModalUnstaking'
 import ModalRequestUnstake from '../ModalRequestUnstake'
 import ModalCancelUnstake from '../ModalCancelUnstake'
 import ModalWalletConnect from '../ModalWalletConnect'
+
+import infoCyanIcon from '../../../public/assets/info-icon.svg'
+import infoGrayIcon from '../../../public/assets/info-gray.svg'
 
 import YourStake from './YourStake'
 import WithdrawDate from './WithdrawDate'
@@ -245,49 +250,6 @@ const StakeCard = ({
       .then((response: boolean) => setIsApproveKacyStaking(response))
   }, [userWalletAddress, infoStaked.stakingToken])
 
-  // const token = useStakingContract(Staking)
-
-  // React.useEffect(() => {
-
-  //   let transaction: string = ''
-  //   const stakeEvent = token.events.Staked({
-  //     filter: {
-  //       pid,
-  //       user: userWalletAddress
-  //     },
-  //   }, (error: Error, event: EventData) => {
-  //     const amount = event.returnValues.amount
-  //     if (event.transactionHash !== transaction) {
-  //       transaction = event.transactionHash
-  //       setInfoStake(prevState => ({
-  //         yourStake: prevState.yourStake.add(new BigNumber(amount)),
-  //         withdrawable: prevState.withdrawable
-  //       }))
-  //     }
-  //   })
-
-  //   const withdrawnEvent = token.events.Withdrawn({
-  //     filter: {
-  //       pid,
-  //       user: userWalletAddress
-  //     },
-  //   },(error: Error, event: EventData) => {
-  //     const amount = event.returnValues.amount
-  //     if (event.transactionHash !== transaction) {
-  //       transaction = event.transactionHash
-  //       setInfoStake(prevState => ({
-  //         yourStake: prevState.yourStake.sub(new BigNumber(amount)),
-  //         withdrawable: prevState.withdrawable
-  //       }))
-  //     }
-  //   })
-
-  //   return () => {
-  //     stakeEvent.unsubscribe()
-  //     withdrawnEvent.unsubscribe()
-  //   }
-  // }, [])
-
   return (
     <>
       <S.StakeCard>
@@ -308,9 +270,11 @@ const StakeCard = ({
             ) : null}
             <S.IntroStaking>
               <S.APR>
-                <Tooltip widthIcon={16} tooltipTop={true}>
-                  Annual Percentage Return
-                </Tooltip>
+                <Tippy content="Annual Percentage Return">
+                  <S.TooltipAPR>
+                    <Image src={infoCyanIcon} alt="tooltip" />
+                  </S.TooltipAPR>
+                </Tippy>
                 <h4>APR</h4>
               </S.APR>
               <S.Percentage>
@@ -351,9 +315,16 @@ const StakeCard = ({
                         : ' days'}
                     </span>
                   </p>
-                  <Tooltip tooltipTop={false} widthIcon={18} infoGray={true}>
-                    Time your asset will be locked before you can withdraw it.
-                  </Tooltip>
+                  <Tippy content="Time your asset will be locked before you can withdraw it.">
+                    <S.TooltipAPR>
+                      <Image
+                        src={infoGrayIcon}
+                        alt="tooltip"
+                        width={16}
+                        height={16}
+                      />
+                    </S.TooltipAPR>
+                  </Tippy>
                 </S.Days>
               </S.InfoPool>
             </S.VotingPowerAndWithdrawDelay>
@@ -391,7 +362,7 @@ const StakeCard = ({
                       type="button"
                       text="Claim"
                       // fullWidth
-                      onClick={() => getReward(pid, rewardClaimCallback)}
+                      onClick={() => getReward(pid, rewardClaimCallback())}
                     />
                   </S.Claim>
                   <S.StakeContainer>

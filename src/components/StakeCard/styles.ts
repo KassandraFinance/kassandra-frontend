@@ -88,8 +88,15 @@ export const APR = styled.div`
     font-size: ${theme.font.sizes.font14} !important;
     line-height: 14px !important;
     font-weight: ${theme.font.weight.normal} !important;
-    margin: 0 0 4px 6px;
+    margin: 0 0 4px 4px;
   }
+`
+
+export const TooltipAPR = styled.div`
+  padding: 1px;
+
+  position: relative;
+  z-index: 99;
 `
 
 export const Percentage = styled.p`
