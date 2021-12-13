@@ -4,22 +4,21 @@ import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
 import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
 
-import { Staking } from '../../constants/tokenAddresses'
 import { BNtoDecimal } from '../../utils/numerals'
 import waitTransaction, {
   MetamaskError,
   TransactionCallback
 } from '../../utils/txWait'
 
+import { Staking } from '../../constants/tokenAddresses'
 import useERC20Contract from '../../hooks/useERC20Contract'
 import useStakingContract from '../../hooks/useStakingContract'
 import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
+import Button from '../Button'
 import InputTokenValue from '../InputTokenValue'
 
 import * as S from './styles'
-
-import Button from '../Button'
 
 interface IModalStakingProps {
   modalOpen: boolean;
@@ -40,18 +39,19 @@ const ModalUnstaking = ({
   productCategories,
   nameToken
 }: IModalStakingProps) => {
+  const [isAmount, setIsAmount] = React.useState<boolean>(false)
+
   const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
   const [multiplier, setMultiplier] = React.useState<number>(0)
   const [amountUnstaking, setAmountUnstaking] = React.useState<BigNumber>(
     new BigNumber(0)
   )
-  const [isAmount, setIsAmount] = React.useState<boolean>(false)
 
   const inputRef = React.useRef<HTMLInputElement>(null)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-
   const { trackBuying, trackCancelBuying, trackBought } = useMatomoEcommerce()
+
   const kacyStake = useStakingContract(Staking)
   const kacyToken = useERC20Contract(stakingToken)
 
@@ -63,8 +63,9 @@ const ModalUnstaking = ({
         kacyAmount,
         new BigNumber(18),
         2
-      ).replace(' ', '')
+      ).replace('\u00A0', '')
     }
+
     setAmountUnstaking(kacyAmount)
     setIsAmount(true)
   }
@@ -147,9 +148,9 @@ const ModalUnstaking = ({
             <S.Amount>
               <span>${nameToken} Total</span>
               <InputTokenValue
+                inputRef={inputRef}
                 max={balance.toString(10)}
                 decimals={new BigNumber(decimals)}
-                inputRef={inputRef}
                 setInputValue={setAmountUnstaking}
               />
               <h5>Balance: {BNtoDecimal(balance, new BigNumber(18), 6)}</h5>

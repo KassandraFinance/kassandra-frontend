@@ -11,15 +11,14 @@ import waitTransaction, {
 } from '../../utils/txWait'
 
 import { Staking } from '../../constants/tokenAddresses'
-
 import useERC20Contract from '../../hooks/useERC20Contract'
 import useStakingContract from '../../hooks/useStakingContract'
 import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
+import Button from '../Button'
 import InputTokenValue from '../InputTokenValue'
 
 import * as S from './styles'
-import Button from '../Button'
 
 interface IModalStakingProps {
   modalOpen: boolean;
@@ -40,19 +39,22 @@ const ModalStaking = ({
   productCategories,
   nameToken
 }: IModalStakingProps) => {
+  const [isAmount, setIsAmount] = React.useState<boolean>(false)
+
   const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
+  const [multiplier, setMultiplier] = React.useState<number>(0)
   const [amountStaking, setAmountStaking] = React.useState<BigNumber>(
     new BigNumber(0)
   )
-  const [multiplier, setMultiplier] = React.useState<number>(0)
-  const [isAmount, setIsAmount] = React.useState<boolean>(false)
 
+  const inputRef = React.useRef<HTMLInputElement>(null)
+
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { trackProductPageView, trackBuying, trackCancelBuying, trackBought } =
     useMatomoEcommerce()
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-  const inputRef = React.useRef<HTMLInputElement>(null)
-  const kacyToken = useERC20Contract(stakingToken)
+
   const kacyStake = useStakingContract(Staking)
+  const kacyToken = useERC20Contract(stakingToken)
   const productSKU = `${Staking}_${pid}`
 
   function handleKacyAmount(percentage: BigNumber) {
@@ -63,11 +65,15 @@ const ModalStaking = ({
         kacyAmount,
         new BigNumber(18),
         2
-      ).replace(' ', '')
+      ).replace('\u00A0', '')
     }
 
     setAmountStaking(kacyAmount)
     setIsAmount(true)
+  }
+
+  function handleConfirm() {
+    kacyStake.stake(pid, amountStaking, stakeCallback())
   }
 
   async function get() {
@@ -95,7 +101,9 @@ const ModalStaking = ({
   }, [amountStaking])
 
   React.useEffect(() => {
-    get()
+    if (modalOpen) {
+      get()
+    }
   }, [modalOpen])
 
   React.useEffect(() => {
@@ -230,7 +238,7 @@ const ModalStaking = ({
               disabled={amountStaking.toString() === '0'}
               onClick={() => {
                 setModalOpen(false)
-                kacyStake.stake(pid, amountStaking, stakeCallback())
+                handleConfirm()
                 setAmountStaking(new BigNumber(0))
               }}
             >
