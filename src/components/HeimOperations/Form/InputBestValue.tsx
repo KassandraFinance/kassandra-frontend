@@ -63,8 +63,8 @@ const InputBestValue = ({
                   <Image
                     src={poolImages[token.address] || none}
                     alt={`Imagem on ${token.symbol}`}
-                    width={22}
-                    height={22}
+                    width={21}
+                    height={21}
                   />
                 </div>
                 {BNtoDecimal(
@@ -82,6 +82,7 @@ const InputBestValue = ({
             </S.BestValueItem>
             <S.BestValueItem style={{ paddingRight: '10px' }}>
               <S.Input
+                bestValue
                 readOnly
                 type="text"
                 placeholder="0"

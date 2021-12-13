@@ -83,12 +83,29 @@ export const Amount = styled.div<IAmountProps>`
   }
 `
 
-export const Input = styled.input`
+interface IInputProps {
+  bestValue?: boolean;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const Input = styled.input<IInputProps>`
   background-color: transparent;
   border: none;
   color: #fff;
-  font-size: ${theme.font.sizes.font20};
-  font-weight: ${theme.font.weight.medium};
+
+  font-weight: ${theme.font.weight.normal};
+  font-family: ${theme.font.family};
+
+  ${props =>
+    props.bestValue
+      ? `
+      line-height: ${theme.font.sizes.font14};
+      font-size: ${theme.font.sizes.font14};
+  `
+      : `
+      line-height: ${theme.font.sizes.font20};
+      font-size: ${theme.font.sizes.font20};
+  `}
 
   text-align: right;
   width: 100%;
@@ -173,26 +190,47 @@ export const Symbol = styled.h3<ISymbolProps>`
   display: flex;
   align-items: center;
 
-  line-height: ${theme.font.sizes.font20};
-  font-size: ${theme.font.sizes.font20};
-  font-weight: ${theme.font.weight.normal};
-
-  margin: 8px 0;
-
-  .img {
-    margin: 2px 8px 0 0;
-  }
-
-  span {
-    margin-left: 8px;
-  }
+  ${props =>
+    props.bestValue
+      ? `
+    line-height: ${theme.font.sizes.font16};
+    font-size: ${theme.font.sizes.font16};
+    font-weight: ${theme.font.weight.normal};
   
-  @media(max-width: 380px) {
-    font-size: 22px;
-  }
-  @media(max-width: 350px) {
-    font-size: ${theme.font.sizes.font20};
-  }
+    margin: 8px 0;
+
+    .image {
+      margin-right: 8px !important;
+    }
+    
+    @media(max-width: 380px) {
+      font-size: 22px;
+    }
+    @media(max-width: 350px) {
+      font-size: ${theme.font.sizes.font20};
+    }`
+      : `
+      line-height: ${theme.font.sizes.font20};
+      font-size: ${theme.font.sizes.font20};
+      font-weight: ${theme.font.weight.normal};
+
+      margin: 8px 0;
+
+      .img {
+        margin: 2px 8px 0 0;
+      }
+
+      span {
+        margin-left: 8px;
+      }
+      
+      @media(max-width: 380px) {
+        font-size: 22px;
+      }
+      @media(max-width: 350px) {
+        font-size: ${theme.font.sizes.font20};
+      }
+  `}
 `
 
 export const ImgArrowLong = styled.img`
@@ -426,7 +464,4 @@ export const InputBestValueGrid = styled.div`
 export const BestValueItem = styled.div`
   width: 100%;
   height: 74px;
-  .image {
-    margin-right: 8px !important;
-  }
 `

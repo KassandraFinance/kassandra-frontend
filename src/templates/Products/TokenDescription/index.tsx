@@ -105,9 +105,9 @@ const TokenDescription = () => {
             <a
               target="_blank"
               rel="noopener noreferrer"
-              href="https://medium.com/heimdall-research-crypto/the-heimdall-social-index-9595fdfb9ddc"
+              href="https://kassandrafoundation.medium.com/avalanche-social-index-4042a823c972"
             >
-              Heim
+              aHYPE
             </a>{' '}
             Documention
             <img src="assets/externalLink.svg" alt="" />
