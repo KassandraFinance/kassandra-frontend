@@ -63,6 +63,7 @@ const Summary = () => {
           href="https://kassandrafoundation.medium.com/avalanche-social-index-4042a823c972"
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => matomoEvent('click-on-link', 'discover-ahype')}
         >
           Discover aHYPE
           <svg
