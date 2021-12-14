@@ -3,8 +3,6 @@ import React from 'react'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { Link } from 'react-scroll'
 
-
-
 import Hero from './Hero'
 import Products from './Products'
 import ClassProducts from './ClassProducts'
@@ -18,11 +16,11 @@ import BannerCTA from '../../components/BannerCTA'
 
 import * as S from './styles'
 import RoadMapCard from '../../components/RoadMapCards'
+import RoadMapSlider from '../../components/RoadMapSlider'
 
 const Home = () => {
   const { trackPageView } = useMatomo()
   const heroRef = React.useRef<HTMLElement>(null)
-
 
   // Track page view
   React.useEffect(() => {
@@ -49,7 +47,8 @@ const Home = () => {
         {/* <Token /> */}
         <KassandraToken />
         <KassandraArchitecture />
-        <RoadMapCard />
+        {/* <RoadMapCard /> */}
+        <RoadMapSlider />
         {/* <TokenDistribution /> */}
         {/* <BannerCTA /> */}
         <CountdownBanner />
