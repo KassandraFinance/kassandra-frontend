@@ -1,8 +1,9 @@
 import React from 'react'
+import Image from 'next/image'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import { ToastInfo } from '../../components/Toastify/toast'
-
+import close from '../../../public/assets/close.svg'
 import theme from '../../styles/theme'
 import * as S from './styles'
 
@@ -27,7 +28,7 @@ const ModalLogOut = ({
         <S.Top>
           <p>Your wallet</p>
           <S.Close type="button" onClick={() => setModalOpen(false)}>
-            <img src="assets/close.svg" alt="Close" />
+            <Image src={close} alt="Close" />
           </S.Close>
         </S.Top>
         <S.Content>
