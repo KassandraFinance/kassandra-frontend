@@ -6,6 +6,7 @@ import useSWR from 'swr'
 import { request } from 'graphql-request'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 
@@ -84,11 +85,20 @@ const Form = ({
 
   const [infoAHYPE, setInfoAHYPE] = React.useState<TokenDetails[]>([])
 
+  const { trackEvent } = useMatomo()
   const dispatch = useDispatch()
 
   const { data } = useSWR([GET_INFO_AHYPE, '0x03c0c7b6b55a0e5c1f2fad2c45b453c56a8f866a'],
     (query, id) => request(SUBGRAPH_URL, query, { id }))
 
+  function matomoEvent(action: string, name: string) {
+    trackEvent({
+      category: 'operations-invest',
+      action,
+      name
+    })
+  }
+  
   React.useEffect(() => {
     if (data) {
       const aHYPE: TokenDetails = {
@@ -686,6 +696,7 @@ const Form = ({
 
       {title === 'Swap' ?
         <S.SwapButton type="button" title="Trade places for swap-in and swap-out token" onClick={() => {
+          matomoEvent('click-on-button', 'swap-token')
           setSwapInAddress(swapOutAddress)
           setSwapOutAddress(swapInAddress)
         }} >
