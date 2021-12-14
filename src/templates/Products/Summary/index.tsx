@@ -1,6 +1,7 @@
 import React from 'react'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import Image from 'next/image'
 import CopyToClipboard from 'react-copy-to-clipboard'
 
@@ -22,11 +23,21 @@ import { GET_INFO_POOL } from '../graphql'
 import * as S from './styles'
 
 const Summary = () => {
+  const { trackEvent } = useMatomo()
+
   const { data } = useSWR([GET_INFO_POOL], query =>
     request(SUBGRAPH_URL, query, {
       id: '0x03c0c7b6b55a0e5c1f2fad2c45b453c56a8f866a'
     })
   )
+
+  function matomoEvent(action: string, name: string) {
+    trackEvent({
+      category: 'summary-invest',
+      action,
+      name
+    })
+  }
 
   const handleCopyLink = () => {
     ToastInfo('Link copy!')
@@ -79,7 +90,13 @@ const Summary = () => {
           <span>CONTROLLER/AHYPE TOKEN</span>
         </S.Blockchain>
         <CopyToClipboard text={HeimCRPPOOL}>
-          <button type="button" onClick={handleCopyLink}>
+          <button
+            type="button"
+            onClick={() => {
+              handleCopyLink()
+              matomoEvent('click-to-copy', 'controller-ahype')
+            }}
+          >
             {substr(HeimCRPPOOL)}
             <svg
               width="12"
@@ -113,7 +130,13 @@ const Summary = () => {
           <span>POOL CONTRACT</span>
         </S.Blockchain>
         <CopyToClipboard text={HeimCorePool}>
-          <button type="button" onClick={handleCopyLink}>
+          <button
+            type="button"
+            onClick={() => {
+              handleCopyLink()
+              matomoEvent('click-to-copy', 'pool-contract')
+            }}
+          >
             {substr(HeimCorePool)}
             <svg
               width="12"
@@ -138,7 +161,13 @@ const Summary = () => {
           <span>STRATEGY CONTRACT</span>
         </S.Blockchain>
         <CopyToClipboard text={data?.pool && data?.pool.strategy}>
-          <button type="button" onClick={handleCopyLink}>
+          <button
+            type="button"
+            onClick={() => {
+              handleCopyLink()
+              matomoEvent('click-to-copy', 'strategy-contract')
+            }}
+          >
             {data?.pool && substr(data?.pool.strategy)}
             <svg
               width="12"
