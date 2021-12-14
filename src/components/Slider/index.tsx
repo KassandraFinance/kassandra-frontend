@@ -6,7 +6,7 @@ export type SliderSettings = Settings
 
 export type SliderProps = {
   children: React.ReactNode,
-  settings?: SliderSettings
+  settings: SliderSettings
 }
 
 const Slider = ({ children, settings }: SliderProps) => (
