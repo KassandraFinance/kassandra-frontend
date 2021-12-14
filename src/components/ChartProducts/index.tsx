@@ -1,6 +1,7 @@
 import React from 'react'
 import useSWR from 'swr'
 import request from 'graphql-request'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import { SUBGRAPH_URL } from '../../constants/tokenAddresses'
 
@@ -18,10 +19,20 @@ const ChartProducts = () => {
   const [tvl, setTvl] = React.useState([])
   const [allocation, setAllocation] = React.useState([])
 
+  const { trackEvent } = useMatomo()
+
   const { data } = useSWR(
     [GET_CHART, '0x03c0c7b6b55a0e5c1f2fad2c45b453c56a8f866a'],
     (query, id) => request(SUBGRAPH_URL, query, { id, price_period: 3600 })
   )
+
+  function matomoEvent(action: string, name: string) {
+    trackEvent({
+      category: 'chart-invest',
+      action,
+      name
+    })
+  }
 
   React.useEffect(() => {
     if (data) {
@@ -38,7 +49,10 @@ const ChartProducts = () => {
           type="radio"
           name="operator"
           id="Price"
-          onChange={() => setInputChecked('Price')}
+          onChange={() => {
+            setInputChecked('Price')
+            matomoEvent('click-on-tab', 'price')
+          }}
           checked={inputChecked === 'Price'}
         />
         <S.Label selected={inputChecked === 'Price'} htmlFor="Price">
@@ -48,7 +62,10 @@ const ChartProducts = () => {
           type="radio"
           name="operator"
           id="TVL"
-          onChange={() => setInputChecked('TVL')}
+          onChange={() => {
+            setInputChecked('TVL')
+            matomoEvent('click-on-tab', 'tvl')
+          }}
           checked={inputChecked === 'TVL'}
         />
         <S.Label selected={inputChecked === 'TVL'} htmlFor="TVL">
@@ -58,7 +75,10 @@ const ChartProducts = () => {
           type="radio"
           name="operator"
           id="Allocation"
-          onChange={() => setInputChecked('Allocation')}
+          onChange={() => {
+            setInputChecked('Allocation')
+            matomoEvent('click-on-tab', 'allocation')
+          }}
           checked={inputChecked === 'Allocation'}
         />
         <S.Label selected={inputChecked === 'Allocation'} htmlFor="Allocation">
