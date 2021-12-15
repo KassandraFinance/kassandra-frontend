@@ -1,3 +1,4 @@
+import { ST } from 'next/dist/shared/lib/utils'
 import React from 'react'
 
 import * as S from './styles'
@@ -11,15 +12,20 @@ export type RoadMapCardProps = {
   color: string,
   date: string,
   title: string,
-  items: CardItem[]
+  items: CardItem[],
+  icon: any
 }
-const RoadMapCard = ({ date, title, color, items }: RoadMapCardProps) => {
+
+const RoadMapCard = ({ date, title, color, items, icon }: RoadMapCardProps) => {
   return (
     <>
       <S.CardWrapper color={color}>
         <S.CardHeader>
           <S.DateText>{date}</S.DateText>
-          <S.CardTitle>{title}</S.CardTitle>
+          <S.TitleandIcon>
+            <S.TimerIcon>{icon}</S.TimerIcon>
+            <S.CardTitle>{title}</S.CardTitle>
+          </S.TitleandIcon>
         </S.CardHeader>
         <S.Divider />
         <S.CardBody>
@@ -27,9 +33,8 @@ const RoadMapCard = ({ date, title, color, items }: RoadMapCardProps) => {
             {items.map((item, index) => (
               <S.ListTitle key={index}>
                 {item.title}
-
-                {items.map((item, index) => (
-                  <S.ListText key={index}>{item.text}</S.ListText>
+                {item.text.map(text => (
+                  <S.ListText key={text}>{text}</S.ListText>
                 ))}
               </S.ListTitle>
             ))}
