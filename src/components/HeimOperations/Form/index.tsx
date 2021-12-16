@@ -43,7 +43,7 @@ interface IFormProps {
   typeWithdrawChecked: string;
   crpPoolAddress: string
   corePoolAddress: string
-  productCategories: string | string[]
+  productCategories: string[]
 }
 
 interface Address2Index {
@@ -628,6 +628,12 @@ const Form = ({
               return
             }
 
+            trackBuying(
+              `${crpPoolAddress}-${swapInSymbol.value}-${swapOutSymbol.value}`, 
+              `${swapInSymbol.value}-${swapOutSymbol.value}`, 
+              amountInUSD, 
+              [...productCategories, 'Swap']
+            )
             corePool.swapExactAmountIn(
               swapInAddressVal,
               swapInAmountVal,
