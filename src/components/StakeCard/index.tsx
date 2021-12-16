@@ -4,6 +4,7 @@ import React from 'react'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
 import Image from 'next/image'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { useSelector, RootStateOrAny } from 'react-redux'
 import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
 
@@ -137,6 +138,7 @@ const StakeCard = ({
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
   const { viewgetReserves } = usePriceLP()
+  const { trackEvent } = useMatomo()
   const lpToken = useERC20Contract('0xaCb1C18A8238955d123450d02bdD19b74ED7903f')
 
   const productCategories = [
@@ -144,6 +146,14 @@ const StakeCard = ({
     'Ropsten',
     staked[pid] === 'KACY' ? 'VotingStake' : 'OtherStake'
   ]
+
+  function matomoEvent(action: string, name: string) {
+    trackEvent({
+      category: 'stake-farm',
+      action,
+      name
+    })
+  }
 
   async function handleLPtoUSD() {
     const reservesKacyETH = await viewgetReserves(
@@ -190,6 +200,7 @@ const StakeCard = ({
       const txReceipt = await waitTransaction(txHash)
 
       if (txReceipt.status) {
+        matomoEvent('approve-contract', `${staked[pid]}`)
         ToastSuccess(`Approval of ${symbol} confirmed`)
         return
       }
@@ -212,6 +223,7 @@ const StakeCard = ({
       const txReceipt = await waitTransaction(txHash)
 
       if (txReceipt.status) {
+        matomoEvent('reward-claim', `${staked[pid]}`)
         ToastSuccess(`Rewards claimed sucessfully`)
         return
       }
