@@ -78,10 +78,6 @@ export const ToDocumention = styled.div`
   p {
     line-height: ${theme.font.sizes.font14};
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
     max-width: 100%;
     margin-bottom: 0;
   }

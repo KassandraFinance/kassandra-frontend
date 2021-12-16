@@ -12,6 +12,8 @@ import {
 } from '../../../constants/tokenAddresses'
 
 import substr from '../../../utils/substr'
+import { registerToken } from '../../../utils/registerToken'
+
 import { ToastInfo } from '../../../components/Toastify/toast'
 
 import iconBar from '../../../../public/assets/iconbar.svg'
@@ -113,7 +115,14 @@ const Summary = () => {
             </svg>
           </button>
         </CopyToClipboard>
-        <div className="metamask">
+        <button
+          type="button"
+          className="metamask"
+          onClick={() => {
+            registerToken(HeimCRPPOOL, 'aHYPE', 18)
+            matomoEvent('click-on-metamask', 'add-token')
+          }}
+        >
           <Image
             src={metaMaskIcon}
             alt="Add token to Metamask"
@@ -121,7 +130,7 @@ const Summary = () => {
             height={20}
             width={20}
           />
-        </div>
+        </button>
       </S.CopyContract>
       <S.CopyContract width="342px">
         <S.Blockchain>

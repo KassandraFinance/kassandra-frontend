@@ -81,7 +81,6 @@ const wrapperModifiers = {
     background-position-x: 100%;
     background-size: 200%;
     transition: background-position-x 0.5s ease-out;
-    font-weight: ${theme.font.weight.medium};
     &:hover {
       background-position-x: 0%;
     }
@@ -89,7 +88,6 @@ const wrapperModifiers = {
 
   backgroundSecondary: (theme: DefaultTheme) => css`
     background: ${theme.colors.blue};
-    font-weight: ${theme.font.weight.light};
 
     transition: all 300ms;
     &:hover {
@@ -100,7 +98,6 @@ const wrapperModifiers = {
   backgroundBlack: (theme: DefaultTheme) => css`
     border: ${`0.1rem solid ${theme.colors.cyan}`};
     background: transparent;
-    font-weight: ${theme.font.weight.light};
 
     padding: 12.5px;
 
@@ -135,6 +132,7 @@ export const Wrapper =
     border-radius: ${theme.border.radius};
     color: ${theme.colors.snow};
 
+    font-weight: ${theme.font.weight.light};
     font-family: ${theme.font.family};
     text-decoration: none;
 

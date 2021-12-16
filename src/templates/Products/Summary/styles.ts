@@ -94,6 +94,10 @@ export const CopyContract = styled.div<ICopyContractProps>`
 
   .metamask {
     margin-left: 16px;
+    @media(max-width: 1060px) {
+      margin-top: 8px;
+      margin-left: 40px;
+    }
   }
 
   button {
@@ -125,6 +129,16 @@ export const CopyContract = styled.div<ICopyContractProps>`
       }
     }
   }
+
+  @media(max-width: 1060px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+    max-width: 100%;
+    > button {
+      margin-left: 40px;
+    }
+  }
 `
 
 export const Blockchain = styled.div`
@@ -143,5 +157,9 @@ export const Blockchain = styled.div`
     font-size: ${theme.font.sizes.font14};
     line-height: ${theme.font.sizes.font14};
     padding: 6px 0;
+  }
+
+  @media (max-width: 1060px) {
+    margin-bottom: 8px;
   }
 `
