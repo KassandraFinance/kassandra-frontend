@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
+import Big from 'big.js'
 import BigNumber from 'bn.js'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { useSelector, RootStateOrAny } from 'react-redux'
 import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
 
@@ -51,9 +53,18 @@ const ModalUnstaking = ({
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { trackBuying, trackCancelBuying, trackBought } = useMatomoEcommerce()
+  const { trackEvent } = useMatomo()
 
   const kacyStake = useStakingContract(Staking)
   const kacyToken = useERC20Contract(stakingToken)
+
+  function matomoEvent(action: string, name: string) {
+    trackEvent({
+      category: 'modal-unstaking',
+      action,
+      name
+    })
+  }
 
   function handleKacyAmount(percentage: BigNumber) {
     const kacyAmount = percentage.mul(balance).div(new BigNumber(100))
@@ -66,6 +77,7 @@ const ModalUnstaking = ({
       ).replace('\u00A0', '')
     }
 
+    matomoEvent('click-value-btn', BNtoDecimal(percentage, new BigNumber(18)))
     setAmountUnstaking(kacyAmount)
     setIsAmount(true)
   }
@@ -104,7 +116,12 @@ const ModalUnstaking = ({
 
     return async (error: MetamaskError, txHash: string) => {
       const tokenName = await kacyToken.name()
-      trackBuying(productSKU, tokenName, 0, productCategories)
+      trackBuying(
+        productSKU,
+        tokenName,
+        -Big(amountUnstaking.toString()).div(Big(10).pow(18)).toNumber(),
+        productCategories
+      )
       const tokenSymbol = await kacyToken.symbol()
 
       if (error) {
