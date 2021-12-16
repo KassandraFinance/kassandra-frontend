@@ -469,7 +469,13 @@ const StakeCard = ({
                 type="button"
                 isDetails={isDetails}
                 isConnect={!!userWalletAddress}
-                onClick={() => setIsDetails(!isDetails)}
+                onClick={() => {
+                  matomoEvent(
+                    'click-details',
+                    `${isDetails ? 'details-open' : 'details-closed'}`
+                  )
+                  setIsDetails(!isDetails)
+                }}
               >
                 Details
                 <img src="assets/arrowDetails.svg" alt="" />
