@@ -1,5 +1,6 @@
 import React from 'react'
 import BigNumber from 'bn.js'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
 
 import { BNtoDecimal } from '../../utils/numerals'
@@ -34,6 +35,15 @@ const ModalRequestUnstake = ({
   symbol
 }: IModalRequestUnstakeProps) => {
   const kacyStake = useStakingContract(Staking)
+  const { trackEvent } = useMatomo()
+
+  function matomoEvent(action: string, name: string) {
+    trackEvent({
+      category: 'modal-staking',
+      action,
+      name
+    })
+  }
 
   const requestsUnstakeCallback = React.useCallback((): TransactionCallback => {
     return async (error: MetamaskError, txHash: string) => {
@@ -49,6 +59,7 @@ const ModalRequestUnstake = ({
         return
       }
 
+      matomoEvent('click-on-request-unstaking', `${symbol}`)
       ToastWarning(`Confirming request for unstaking of ${symbol}...`)
       const txReceipt = await waitTransaction(txHash)
 
