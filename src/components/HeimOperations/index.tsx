@@ -9,7 +9,7 @@ import * as S from './styles'
 interface IOperationsProps {
   crpPoolAddress: string;
   corePoolAddress: string;
-  productCategories: string | string[];
+  productCategories: string[];
 }
 
 
