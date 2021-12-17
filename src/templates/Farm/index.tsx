@@ -75,7 +75,7 @@ const StakeFarm = () => {
           Loading...
         </h1>
       }
-      {web3.currentProvider !== null && chainId === "0x3" && !loading && !isMobile ?
+      {web3.currentProvider !== null && chainId === "0xa869" && !loading && !isMobile ?
         <>
           <S.StakeFarm>
             <S.StakeWithPowerVote>
@@ -189,11 +189,11 @@ const StakeFarm = () => {
               type="install"
             />
           )}
-          {web3.currentProvider !== null && chainId !== "0x3" && !loading && !isMobile && (
+          {web3.currentProvider !== null && chainId !== "0xa869" && !loading && !isMobile && (
             <Web3Disabled
-              textButton="Connect to Ropsten"
+              textButton="Connect to Avalanche"
               textHeader="Your wallet is set to the wrong network."
-              bodyText="Please switch to the Ropsten network to have access to all our staking pools"
+              bodyText="Please switch to the Avalanche network to have access to all our staking pools"
               type="changeChain"
             />
           )}

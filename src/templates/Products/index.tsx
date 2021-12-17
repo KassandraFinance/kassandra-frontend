@@ -57,7 +57,7 @@ const Products = () => {
 
   const poolAddress = HeimCRPPOOL
   const poolCoreAddress = HeimCorePool
-  const poolPlatform = 'Ropsten'
+  const poolPlatform = 'Avalanche'
   const poolName = 'Avalanche Social Index'
   const poolSymbol = 'aHYPE'
   const poolCategories = [poolPlatform, 'Pool']
@@ -125,7 +125,7 @@ const Products = () => {
           Loading...
         </h1>
       }
-       {web3.currentProvider !== null && userWalletAddress && chainId === "0x3" && !loading && !isMobile ?
+       {web3.currentProvider !== null && userWalletAddress && chainId === "0xa869" && !loading && !isMobile ?
         <S.Product>
           <S.ProductDetails>
             <S.Intro>
@@ -219,7 +219,7 @@ const Products = () => {
               type="install"
             />
           )}
-          {!userWalletAddress && chainId === "0x3" && !loading && !isMobile && (
+          {!userWalletAddress && chainId === "0xa869" && !loading && !isMobile && (
             <Web3Disabled
               textButton="Connect Wallet"
               textHeader="Wallet not connected"
@@ -227,7 +227,7 @@ const Products = () => {
               type="connect"
             />
           )}
-          {web3.currentProvider !== null && chainId !== "0x3" && !loading && !isMobile && (
+          {web3.currentProvider !== null && chainId !== "0xa869" && !loading && !isMobile && (
             <Web3Disabled
               textButton={`Connect to ${poolPlatform}`}
               textHeader="Your wallet is set to the wrong network."
