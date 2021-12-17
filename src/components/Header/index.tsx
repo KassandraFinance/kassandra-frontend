@@ -202,7 +202,9 @@ const Header = () => {
             </Link> */}
 
             <Link href="/" passHref>
-              <S.MenuLink> Home </S.MenuLink>
+              <S.MenuLink
+                onClick={() => clickMatomoEvent('click-on-link', 'home')}
+              > Home </S.MenuLink>
             </Link>
 
             <Link href="/products/ahype" passHref>
@@ -237,11 +239,11 @@ const Header = () => {
                   text={substr(userWalletAddress)} />
               ) : (
                 <Button
-
                   as='button'
                   backgroundBlack
                   size="large"
                   onClick={() => {
+                    clickMatomoEvent('click-on-btn', 'connect-wallet')
                     setIsModalWallet(true)
                     setIsOpen(false)
                   }}
