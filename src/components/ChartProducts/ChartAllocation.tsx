@@ -54,7 +54,7 @@ const ChartAllocation = ({ data }: IChartAllocationProps) => {
       setArrayKeys(keys.splice(1, keys.length - 1))
       setAllocation(res)
     }
-  }, [])
+  }, [data])
 
   return (
     <ResponsiveContainer width="100%" height={360}>

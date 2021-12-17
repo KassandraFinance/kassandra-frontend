@@ -81,18 +81,20 @@ export const SelectPeriod = styled.ul`
   max-width: 100%;
 `
 
-export const InputPerid = styled.input`
+export const Input = styled.input`
   display: none;
 `
 
 interface ILabelPeriodProps {
   selectPeriod: boolean;
+  isPrice?: boolean;
 }
 
 // eslint-disable-next-line prettier/prettier
 export const LabelPeriod = styled.label<ILabelPeriodProps>`
   background: ${props =>
     props.selectPeriod ? 'transparent' : 'rgba(255, 255, 255, 0.1)'};
+
   color: #fff;
   font-size: ${theme.font.sizes.font12};
   text-align: center;
@@ -103,17 +105,26 @@ export const LabelPeriod = styled.label<ILabelPeriodProps>`
   justify-content: center;
   
   height: 30px;
-  min-width: 34px;
+  min-width: ${props => (props.isPrice ? '33px' : '31px')};
   padding: 10px 8px;
-  
+  position: relative;
   cursor: pointer;
+  &::after {
+    ${props =>
+      props.selectPeriod &&
+      `content: '';
+        display: block;
+        width: calc(100% - 16px);
+        height: 1.5px;
+        background: ${theme.colors.magenta};
+        border-radius: 5px;
+        box-shadow: 0px 0px 4px 0.5px #E843C4;
+        position: absolute;
+        top: 23px;`}
+  }
   @media (max-width: 1020px) {
     font-size: 10px;
   }
-`
-
-export const Input = styled.input`
-  display: none;
 `
 
 interface ILabelProps {

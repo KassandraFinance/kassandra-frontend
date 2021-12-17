@@ -13,7 +13,7 @@ import { GET_CHART } from './graphql'
 
 import * as S from './styles'
 
-const arrPeriod = ['1D', '1W', '1M', '3M', 'MAX']
+const arrPeriod: string[] = ['1W', '1M', '3M', '1Y']
 
 const ChartProducts = () => {
   const [inputChecked, setInputChecked] = React.useState<string>('Price')
@@ -21,20 +21,64 @@ const ChartProducts = () => {
   const [tvl, setTvl] = React.useState([])
   const [allocation, setAllocation] = React.useState([])
 
-  const [periodSelected, setPeriodSelected] = React.useState<string>('1D')
-  const [time, setTime] = React.useState<number>(3600)
+  const [periodSelected, setPeriodSelected] = React.useState<string>('1W')
+  const dateNow = new Date()
 
+  const [params, setParams] = React.useState({
+    id: '0x03c0c7b6b55a0e5c1f2fad2c45b453c56a8f866a',
+    price_period: 3600,
+    period_selected: Math.trunc(dateNow.getTime() / 1000 - 60 * 60 * 24 * 7)
+  })
   const { trackEvent } = useMatomo()
 
-  const { data } = useSWR(
-    [GET_CHART, '0x03c0c7b6b55a0e5c1f2fad2c45b453c56a8f866a'],
-    (query, id) =>
-      request(SUBGRAPH_URL, query, {
-        id,
-        price_period: 3600,
-        period_selected: 1612152000 //timestamp 01/01/2021
-      })
+  const { data } = useSWR([GET_CHART, params], (query, params) =>
+    request(SUBGRAPH_URL, query, params)
   )
+
+  function returnDate(period: string) {
+    switch (period) {
+      case '1D':
+        setParams(prevState => ({
+          ...prevState,
+          period_selected: Math.trunc(dateNow.getTime() / 1000 - 60 * 60 * 24)
+        }))
+        break
+      case '1W':
+        setParams(prevState => ({
+          ...prevState,
+          period_selected: Math.trunc(
+            dateNow.getTime() / 1000 - 60 * 60 * 24 * 7
+          )
+        }))
+        break
+      case '1M':
+        setParams(prevState => ({
+          ...prevState,
+          period_selected: Math.trunc(
+            dateNow.getTime() / 1000 - 60 * 60 * 24 * 30
+          )
+        }))
+        break
+      case '3M':
+        setParams(prevState => ({
+          ...prevState,
+          period_selected: Math.trunc(
+            dateNow.getTime() / 1000 - 60 * 60 * 24 * 90
+          )
+        }))
+        break
+      case '1Y':
+        setParams(prevState => ({
+          ...prevState,
+          period_selected: Math.trunc(
+            dateNow.getTime() / 1000 - 60 * 60 * 24 * 365
+          )
+        }))
+        break
+      default:
+        break
+    }
+  }
 
   function matomoEvent(action: string, name: string) {
     trackEvent({
@@ -100,14 +144,35 @@ const ChartProducts = () => {
           </S.Label>
         </S.SelectChart>
         <S.SelectPeriod>
+          {inputChecked === 'Price' && (
+            <li key="day1D">
+              <S.Input
+                id="day1D"
+                type="radio"
+                checked={periodSelected === '1D'}
+                onChange={() => {
+                  returnDate('1D')
+                  setPeriodSelected('1D')
+                }}
+              />
+              <S.LabelPeriod
+                selectPeriod={periodSelected === '1D'}
+                isPrice={inputChecked === 'Price'}
+                htmlFor="day1D"
+                title="period"
+              >
+                1D
+              </S.LabelPeriod>
+            </li>
+          )}
           {arrPeriod.map(period => (
             <li key={`day${period}`}>
-              <S.InputPerid
+              <S.Input
                 id={`day${period}`}
                 type="radio"
                 checked={periodSelected === period}
                 onChange={() => {
-                  setTime(3600)
+                  returnDate(period)
                   setPeriodSelected(period)
                 }}
               />
