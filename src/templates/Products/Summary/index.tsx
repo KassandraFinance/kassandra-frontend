@@ -1,6 +1,7 @@
 import React from 'react'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import Image from 'next/image'
 import CopyToClipboard from 'react-copy-to-clipboard'
 
@@ -11,6 +12,8 @@ import {
 } from '../../../constants/tokenAddresses'
 
 import substr from '../../../utils/substr'
+import { registerToken } from '../../../utils/registerToken'
+
 import { ToastInfo } from '../../../components/Toastify/toast'
 
 import iconBar from '../../../../public/assets/iconbar.svg'
@@ -22,11 +25,21 @@ import { GET_INFO_POOL } from '../graphql'
 import * as S from './styles'
 
 const Summary = () => {
+  const { trackEvent } = useMatomo()
+
   const { data } = useSWR([GET_INFO_POOL], query =>
     request(SUBGRAPH_URL, query, {
       id: '0x03c0c7b6b55a0e5c1f2fad2c45b453c56a8f866a'
     })
   )
+
+  function matomoEvent(action: string, name: string) {
+    trackEvent({
+      category: 'summary-invest',
+      action,
+      name
+    })
+  }
 
   const handleCopyLink = () => {
     ToastInfo('Link copy!')
@@ -52,6 +65,7 @@ const Summary = () => {
           href="https://kassandrafoundation.medium.com/avalanche-social-index-4042a823c972"
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => matomoEvent('click-on-link', 'discover-ahype')}
         >
           Discover aHYPE
           <svg
@@ -79,7 +93,13 @@ const Summary = () => {
           <span>CONTROLLER/AHYPE TOKEN</span>
         </S.Blockchain>
         <CopyToClipboard text={HeimCRPPOOL}>
-          <button type="button" onClick={handleCopyLink}>
+          <button
+            type="button"
+            onClick={() => {
+              handleCopyLink()
+              matomoEvent('click-to-copy', 'controller-ahype')
+            }}
+          >
             {substr(HeimCRPPOOL)}
             <svg
               width="12"
@@ -95,7 +115,14 @@ const Summary = () => {
             </svg>
           </button>
         </CopyToClipboard>
-        <div className="metamask">
+        <button
+          type="button"
+          className="metamask"
+          onClick={() => {
+            registerToken(HeimCRPPOOL, 'aHYPE', 18)
+            matomoEvent('click-on-metamask', 'add-token')
+          }}
+        >
           <Image
             src={metaMaskIcon}
             alt="Add token to Metamask"
@@ -103,7 +130,7 @@ const Summary = () => {
             height={20}
             width={20}
           />
-        </div>
+        </button>
       </S.CopyContract>
       <S.CopyContract width="342px">
         <S.Blockchain>
@@ -113,7 +140,13 @@ const Summary = () => {
           <span>POOL CONTRACT</span>
         </S.Blockchain>
         <CopyToClipboard text={HeimCorePool}>
-          <button type="button" onClick={handleCopyLink}>
+          <button
+            type="button"
+            onClick={() => {
+              handleCopyLink()
+              matomoEvent('click-to-copy', 'pool-contract')
+            }}
+          >
             {substr(HeimCorePool)}
             <svg
               width="12"
@@ -138,7 +171,13 @@ const Summary = () => {
           <span>STRATEGY CONTRACT</span>
         </S.Blockchain>
         <CopyToClipboard text={data?.pool && data?.pool.strategy}>
-          <button type="button" onClick={handleCopyLink}>
+          <button
+            type="button"
+            onClick={() => {
+              handleCopyLink()
+              matomoEvent('click-to-copy', 'strategy-contract')
+            }}
+          >
             {data?.pool && substr(data?.pool.strategy)}
             <svg
               width="12"

@@ -1,7 +1,7 @@
 import { gql } from 'graphql-request'
 
 export const GET_CHART = gql`
-  query ($id: ID!, $price_period: Int!) {
+  query ($id: ID!, $price_period: Int!, $period_selected: Int!) {
     pool(id: $id) {
       price_usd # pool asset price
       # price candlestick
@@ -10,7 +10,11 @@ export const GET_CHART = gql`
       # period is in seconds, 5m, 15m, 1h, 4h, 1d, 7d
       # timestamp_gt it's since when to catch
       price_candles(
-        where: { base: "usd", period: $price_period, timestamp_gt: 0 }
+        where: {
+          base: "usd"
+          period: $price_period
+          timestamp_gt: $period_selected
+        }
         orderBy: timestamp
       ) {
         timestamp
@@ -18,14 +22,14 @@ export const GET_CHART = gql`
       }
       # hourly TVL chart
       total_value_locked(
-        where: { base: "usd", timestamp_gt: 0 }
+        where: { base: "usd", timestamp_gt: $period_selected }
         orderBy: timestamp
       ) {
         value
         timestamp
       }
       # hourly allocation chart
-      weights(where: { timestamp_gt: 0 }, orderBy: timestamp) {
+      weights(where: { timestamp_gt: $period_selected }, orderBy: timestamp) {
         timestamp
         weights {
           token {

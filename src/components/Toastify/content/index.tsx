@@ -18,7 +18,7 @@ const StyledToastContent = ({
       {type === 'success' && (
         <NotificationContainer>
           <img
-            src="assets/IconNotification/success.svg"
+            src="/assets/IconNotification/success.svg"
             alt="New success notification"
           />
           <MessageContainer>
@@ -30,7 +30,7 @@ const StyledToastContent = ({
       {type === 'warning' && (
         <NotificationContainer>
           <img
-            src="assets/IconNotification/warning.svg"
+            src="/assets/IconNotification/warning.svg"
             alt="New warning notification"
           />
           <MessageContainer>
@@ -42,7 +42,7 @@ const StyledToastContent = ({
       {type === 'error' && (
         <NotificationContainer>
           <img
-            src="assets/IconNotification/error.svg"
+            src="/assets/IconNotification/error.svg"
             alt="New error notification"
           />
           <MessageContainer>
@@ -54,7 +54,7 @@ const StyledToastContent = ({
       {type === 'info' && (
         <NotificationContainer>
           <img
-            src="assets/IconNotification/info.svg"
+            src="/assets/IconNotification/info.svg"
             alt="New informational notification"
           />
           <MessageContainer>

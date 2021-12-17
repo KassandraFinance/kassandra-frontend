@@ -54,7 +54,7 @@ const ChartAllocation = ({ data }: IChartAllocationProps) => {
       setArrayKeys(keys.splice(1, keys.length - 1))
       setAllocation(res)
     }
-  }, [])
+  }, [data])
 
   return (
     <ResponsiveContainer width="100%" height={360}>
@@ -67,7 +67,7 @@ const ChartAllocation = ({ data }: IChartAllocationProps) => {
           margin: '25px 0'
         }}
         stackOffset="expand"
-        margin={{ top: 50, right: 2, left: 0, bottom: 0 }}
+        margin={{ top: 70, right: 2, left: 0, bottom: 0 }}
       >
         <XAxis
           dataKey="timestamp"

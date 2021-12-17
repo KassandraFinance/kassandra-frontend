@@ -4,6 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import { BNtoDecimal } from '../../utils/numerals'
 
@@ -30,6 +31,14 @@ interface IDetailsProps {
   priceLPToken: IPriceLPToken;
 }
 
+const staked: any = {
+  0: 'KACY',
+  1: 'KACY',
+  2: 'KACY',
+  3: 'aHYPE',
+  4: 'KEU'
+}
+
 const Details = ({
   pid,
   hasExpired,
@@ -41,13 +50,14 @@ const Details = ({
   priceLPToken
 }: IDetailsProps) => {
   const [depositedAmount, setDepositedAmount] = React.useState<string>('')
+  const { trackEvent } = useMatomo()
 
-  const staked: any = {
-    0: 'KACY',
-    1: 'KACY',
-    2: 'KACY',
-    3: 'aHYPE',
-    4: 'KEU'
+  function matomoEvent(action: string, name: string) {
+    trackEvent({
+      category: 'stake-details',
+      action,
+      name
+    })
   }
 
   React.useEffect(() => {
@@ -152,13 +162,14 @@ const Details = ({
         {/* <span>Add to Metamask</span> */}
         <S.AddToken
           type="button"
-          onClick={() =>
+          onClick={() => {
             registerToken(
               stakingToken,
               symbol.toLocaleUpperCase(),
               Number(decimals)
             )
-          }
+            matomoEvent('click-add-metamask', `add-${symbol}`)
+          }}
         >
           <img src="assets/metaMaskIcon.svg" alt="" /> Add to Metamask
         </S.AddToken>

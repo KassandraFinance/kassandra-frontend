@@ -110,7 +110,7 @@ const Products = () => {
   }, [])
 
   return (
-    <S.BackgroundProducts>
+    <S.BackgroundProducts boxShadow={web3.currentProvider !== null && userWalletAddress && chainId === "0x3" && !loading && !isMobile}>
       <Header />
       {loading &&
         <h1
