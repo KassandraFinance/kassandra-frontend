@@ -68,7 +68,7 @@ const RoadMapSlider = () => {
             date={card.date}
             items={card.items}
             icon={card.icon}
-          // invisible={card.invisible}
+            invisible={card.invisible}
           />
         ))}
       </Slider>
@@ -155,22 +155,22 @@ const arrCard = [
       }
     ]
   },
-  {
-    invisible: true,
-    date: '',
-    icon: icons.next,
-    color: colors.next,
-    title: ' ',
-    items: [
-      {
-        title: '',
-        text: [' ']
-      },
-      {
-        title: '',
-        text: ['']
-      }
-    ]
-  }
+  // {
+  //   invisible: true,
+  //   date: '',
+  //   icon: icons.next,
+  //   color: colors.next,
+  //   title: ' ',
+  //   items: [
+  //     {
+  //       title: '',
+  //       text: [' ']
+  //     },
+  //     {
+  //       title: '',
+  //       text: ['']
+  //     }
+  //   ]
+  // }
 ]
 export default RoadMapSlider
