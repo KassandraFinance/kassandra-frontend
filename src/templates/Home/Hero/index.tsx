@@ -1,48 +1,42 @@
 import React from 'react'
+import Link from 'next/link'
 
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { Link } from "react-scroll";
-
 
 import Button from '../../../components/Button'
 import Header from '../../../components/Header'
 
 import * as S from './styles'
 
-const Hero = ({ ref }: any) => {
-  const { trackEvent } = useMatomo();
+const Hero = () => {
+  const { trackEvent } = useMatomo()
 
   function clickMatomoEvent(action: string, name: string) {
     trackEvent({
-      category: "kassandra-page",
+      category: 'home',
       action: action,
-      name: name,
-    });
+      name: name
+    })
   }
 
   return (
-    <S.Hero id='hero'>
-
+    <S.Hero id="hero">
       <Header />
       <S.IntroHero>
-        <h3>WELCOME TO <b>KASSANDRA DAO</b></h3>
+        <h3>
+          WELCOME TO <b>KASSANDRA DAO</b>
+        </h3>
         <h1>tokenized data-driven investment funds</h1>
       </S.IntroHero>
       <S.ButtonWrapper>
-        <Link
-          activeClass="active"
-          to="launching-banner"
-          smooth={true}
-          offset={-70}
-          duration={3000}
-        >
+        <Link href="/products/ahype">
           <Button
             backgroundPrimary
-            size='large'
+            size="large"
             as="a"
-            text="Upcoming IDO"
+            text="See Your Funds"
             icon={<img src="/assets/avalancheIcon.svg" alt="" />}
-            onClick={() => clickMatomoEvent("click-to-projects", "hero")}
+            onClick={() => clickMatomoEvent('click-to-cta', 'hero')}
           />
         </Link>
       </S.ButtonWrapper>
