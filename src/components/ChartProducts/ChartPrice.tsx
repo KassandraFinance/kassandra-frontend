@@ -27,7 +27,7 @@ const ChartPrice = (props: any) => {
           borderRadius: '25px',
           margin: '25px 0'
         }}
-        margin={{ top: 140, right: 2, left: 2, bottom: 10 }}
+        margin={{ top: 140, right: 2, left: 2, bottom: 32 }}
       >
         <defs>
           <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -44,6 +44,7 @@ const ChartPrice = (props: any) => {
           scale="time"
           type="number"
           domain={['auto', 'auto']}
+          hide
           // tickFormatter={time => getHour(time)}
         />
         <YAxis
