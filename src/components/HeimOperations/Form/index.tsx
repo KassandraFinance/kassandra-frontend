@@ -29,6 +29,7 @@ import InputBestValue from './InputBestValue'
 
 import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
+import web3 from '../../../utils/web3'
 import { priceDollar } from '../../../utils/priceDollar'
 import { BNtoDecimal, wei } from '../../../utils/numerals'
 import waitTransaction, { MetamaskError, TransactionCallback } from '../../../utils/txWait'
@@ -795,13 +796,23 @@ const Form = ({
           }
         />
         ) : (
-        <Button
-          backgroundPrimary
-          fullWidth
-          type="button"
-          onClick={() => setIsModaWallet(true)}
-          text='Connect Wallet'
-        />
+        web3.currentProvider === null ?
+          <Button
+            as='a'
+            backgroundPrimary
+            fullWidth
+            href="https://metamask.io/download.html                          "
+            target="_blank"
+            text='Install MetaMask'
+          />
+          :
+          <Button
+            backgroundPrimary
+            fullWidth
+            type="button"
+            onClick={() => setIsModaWallet(true)}
+            text='Connect Wallet'
+          />
         )
       }
       <ModalWalletConnect

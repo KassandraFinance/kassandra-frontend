@@ -124,7 +124,7 @@ const Products = () => {
           Loading...
         </h1>
       }
-       {web3.currentProvider !== null && chainId === "0xa869" && !loading && !isMobile ?
+       {!web3.currentProvider || web3.currentProvider  && chainId === "0xa869" && !loading && !isMobile ?
         <S.Product>
           <S.ProductDetails>
             <S.Intro>
@@ -208,14 +208,6 @@ const Products = () => {
               textHeader="You are on a mobile device"
               bodyText="To access the Stake/Farm and Products page, go to a computer."
               type="isMobile"
-            />
-          )}
-          {web3.currentProvider === null && !loading && !isMobile && (
-            <Web3Disabled
-              textButton="Install Metamask"
-              textHeader="It looks like you don't have the Metamask wallet installed"
-              bodyText="Please install Metamask to access our products"
-              type="install"
             />
           )}
           {web3.currentProvider !== null && chainId !== "0xa869" && !loading && !isMobile && (
