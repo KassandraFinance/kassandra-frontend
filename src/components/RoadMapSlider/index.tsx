@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import Slider, { SliderSettings } from '../../components/Slider'
 import RoadMapCard from '../RoadMapCard'
 import * as S from './styles'
@@ -14,61 +15,66 @@ const icons: any = {
   next: <img src="/assets/RoadmapNext.svg" alt="" />
 }
 
-const settings: SliderSettings = {
-  arrows: true,
-  slidesToShow: 2.25,
-  lazyLoad: 'ondemand',
-  infinite: false,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        arrows: false,
-        slidesToShow: 2.2
+const RoadMapSlider = () => {
+  const settings: SliderSettings = {
+    arrows: true,
+    slidesToShow: 2.3,
+    lazyLoad: 'ondemand',
+    infinite: true,
+    centerMode: true,
+    centerPadding: '0',
+    className: 'center',
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          arrows: false
+        }
+      },
+      {
+        breakpoint: 570,
+        settings: {
+          arrows: false,
+          slidesToShow: 1.2
+        }
+      },
+      {
+        breakpoint: 375,
+        settings: {
+          arrows: false,
+          slidesToShow: 1.1
+        }
       }
-    },
-    {
-      breakpoint: 570,
-      settings: {
-        arrows: false,
-        slidesToShow: 1.2
-      }
-    },
-    {
-      breakpoint: 375,
-      settings: {
-        arrows: false,
-        slidesToShow: 1.1
-      }
-    }
-  ],
-  nextArrow: <img src="/assets/ArrowNext.svg" alt="" />,
-  prevArrow: <img src="/assets/ArrowPrevious.svg" alt="" />
-}
+    ],
+    nextArrow: <img src="/assets/ArrowNext.svg" alt="" />,
+    prevArrow: <img src="/assets/ArrowPrevious.svg" alt="" />
+  }
 
-const RoadMapSlider = () => (
-  <S.Wrapper>
-    <S.TitleAndIcon>
-      <S.Icon>
-        <img src="assets/RoadmapIcon.svg" alt="Roadmap Icon is a Pin" />
-      </S.Icon>
-      <S.Title>Project Roadmap</S.Title>
-    </S.TitleAndIcon>
-    <S.Divider />
-    <Slider settings={settings}>
-      {arrCard.map(card => (
-        <RoadMapCard
-          key={card.title}
-          color={card.color}
-          title={card.title}
-          date={card.date}
-          items={card.items}
-          icon={card.icon}
-        />
-      ))}
-    </Slider>
-  </S.Wrapper>
-)
+  return (
+    <S.Wrapper>
+      <S.TitleAndIcon>
+        <S.Icon>
+          <img src="assets/RoadmapIcon.svg" alt="Roadmap Icon is a Pin" />
+        </S.Icon>
+        <S.Title>Project Roadmap</S.Title>
+      </S.TitleAndIcon>
+      <S.Divider />
+      <Slider settings={settings}>
+        {arrCard.map(card => (
+          <RoadMapCard
+            key={card.title}
+            color={card.color}
+            title={card.title}
+            date={card.date}
+            items={card.items}
+            icon={card.icon}
+          // invisible={card.invisible}
+          />
+        ))}
+      </Slider>
+    </S.Wrapper>
+  )
+}
 
 const arrCard = [
   {
