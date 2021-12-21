@@ -125,7 +125,7 @@ const Products = () => {
           Loading...
         </h1>
       }
-       {web3.currentProvider !== null && userWalletAddress && chainId === "0xa869" && !loading && !isMobile ?
+       {web3.currentProvider !== null && chainId === "0xa869" && !loading && !isMobile ?
         <S.Product>
           <S.ProductDetails>
             <S.Intro>
@@ -217,14 +217,6 @@ const Products = () => {
               textHeader="It looks like you don't have the Metamask wallet installed"
               bodyText="Please install Metamask to access our products"
               type="install"
-            />
-          )}
-          {!userWalletAddress && chainId === "0xa869" && !loading && !isMobile && (
-            <Web3Disabled
-              textButton="Connect Wallet"
-              textHeader="Wallet not connected"
-              bodyText="Please connect your wallet with this dApp"
-              type="connect"
             />
           )}
           {web3.currentProvider !== null && chainId !== "0xa869" && !loading && !isMobile && (
