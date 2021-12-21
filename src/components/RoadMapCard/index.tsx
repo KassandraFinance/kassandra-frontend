@@ -13,10 +13,21 @@ export type RoadMapCardProps = {
   date: string,
   title: string,
   items: CardItem[],
-  icon: any
+  icon: string,
+  invisible?: boolean
 }
 
-const RoadMapCard = ({ date, title, color, items, icon }: RoadMapCardProps) => {
+const RoadMapCard = ({
+  date,
+  title,
+  color,
+  items,
+  icon,
+  invisible
+}: RoadMapCardProps) => {
+  if (invisible) {
+    return <div />
+  }
   return (
     <>
       <S.CardWrapper color={color}>

@@ -24,7 +24,6 @@ export const Wrapper = styled.section`
 
     display: block;
     overflow: hidden;
-
     margin: 0;
     padding: 0;
   }
@@ -49,7 +48,6 @@ export const Wrapper = styled.section`
     position: relative;
     top: 0;
     left: 0;
-
     display: block;
   }
   .slick-track:before,
@@ -58,6 +56,7 @@ export const Wrapper = styled.section`
 
     content: '';
   }
+
   .slick-track:after {
     clear: both;
   }

@@ -2,14 +2,17 @@ import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 export const CardWrapper = styled.div`
-  max-width: max-content;
-  max-height: min-content;
+  height: 51rem;
   display: flex;
   flex-direction: column;
   border: 1.5px solid ${props => props.color};
   border-radius: 0.8rem;
   padding: 3.2rem;
   margin: 0 32px 0 0;
+  background: #21142654;
+  border-radius: 16px;
+  backdrop-filter: blur(1.4px);
+  -webkit-backdrop-filter: blur(1.4px);
 `
 export const CardHeader = styled.div``
 

@@ -11,6 +11,19 @@ export const Wrapper = styled.section`
     padding: 0 3.2rem;
   }
 
+  .slick-active,
+  .slick-slide {
+    opacity: 0.5;
+    filter: blur(1px);
+    transform: scale(0.8);
+  }
+
+  .slick-current {
+    opacity: 1;
+    filter: blur(0px);
+    transform: scale(1);
+  }
+
   .slick-track {
   }
   .slick-track,
