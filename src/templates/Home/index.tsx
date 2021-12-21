@@ -13,12 +13,12 @@ import KassandraArchitecture from './KassandraArchitecture'
 import TokenDistribution from './TokenDistribution'
 import SubscribeBanner from '../../components/SubscribeBanner'
 import BannerCTA from '../../components/BannerCTA'
+import RoadMap from './RoadMap'
 
 import * as S from './styles'
 
 const Home = () => {
   const { trackPageView } = useMatomo()
-  const heroRef = React.useRef<HTMLElement>(null)
 
   // Track page view
   React.useEffect(() => {
@@ -47,6 +47,7 @@ const Home = () => {
         <KassandraArchitecture />
         {/* <TokenDistribution /> */}
         {/* <BannerCTA /> */}
+        <RoadMap />
         <CountdownBanner />
         <SubscribeBanner />
       </S.Background>
