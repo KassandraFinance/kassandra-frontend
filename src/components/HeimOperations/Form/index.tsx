@@ -12,7 +12,7 @@ import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
 import { actionGetPoolTokens } from '../../../store/modules/poolTokens/actions'
 
-import { SUBGRAPH_URL } from '../../../constants/tokenAddresses'
+import { SUBGRAPH_URL, HeimCRPPOOL } from '../../../constants/tokenAddresses'
 
 import useConnect from '../../../hooks/useConnect'
 import useCRPContract from '../../../hooks/useCRPContract'
@@ -86,7 +86,7 @@ const Form = ({
 
   const dispatch = useDispatch()
 
-  const { data } = useSWR([GET_INFO_AHYPE, '0x03c0c7b6b55a0e5c1f2fad2c45b453c56a8f866a'],
+  const { data } = useSWR([GET_INFO_AHYPE, HeimCRPPOOL],
     (query, id) => request(SUBGRAPH_URL, query, { id }))
 
   React.useEffect(() => {

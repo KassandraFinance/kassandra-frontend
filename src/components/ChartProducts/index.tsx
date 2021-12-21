@@ -2,7 +2,7 @@ import React from 'react'
 import useSWR from 'swr'
 import request from 'graphql-request'
 
-import { SUBGRAPH_URL } from '../../constants/tokenAddresses'
+import { SUBGRAPH_URL, HeimCRPPOOL } from '../../constants/tokenAddresses'
 
 import ChartPrice from './ChartPrice'
 import ChartTVL from './ChartTVL'
@@ -18,9 +18,8 @@ const ChartProducts = () => {
   const [tvl, setTvl] = React.useState([])
   const [allocation, setAllocation] = React.useState([])
 
-  const { data } = useSWR(
-    [GET_CHART, '0x03c0c7b6b55a0e5c1f2fad2c45b453c56a8f866a'],
-    (query, id) => request(SUBGRAPH_URL, query, { id, price_period: 3600 })
+  const { data } = useSWR([GET_CHART, HeimCRPPOOL], (query, id) =>
+    request(SUBGRAPH_URL, query, { id, price_period: 3600 })
   )
 
   React.useEffect(() => {

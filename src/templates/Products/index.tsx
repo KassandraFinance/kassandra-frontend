@@ -7,8 +7,7 @@ import { useSelector, RootStateOrAny } from 'react-redux'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
-import { HeimCRPPOOL, HeimCorePool } from '../../constants/tokenAddresses'
-import { SUBGRAPH_URL } from '../../constants/tokenAddresses'
+import { SUBGRAPH_URL, HeimCRPPOOL, HeimCorePool } from '../../constants/tokenAddresses'
 
 import web3 from '../../utils/web3'
 import { BNtoDecimal } from '../../utils/numerals'
@@ -50,7 +49,7 @@ const Products = () => {
 
   const { data } = useSWR([GET_INFO_POOL], query =>
     request(SUBGRAPH_URL, query, {
-      id: '0x03c0c7b6b55a0e5c1f2fad2c45b453c56a8f866a',
+      id: HeimCRPPOOL,
       day
     })
   )
