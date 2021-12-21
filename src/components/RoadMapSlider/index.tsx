@@ -154,6 +154,23 @@ const arrCard = [
         text: ['Time to go to other chains']
       }
     ]
+  },
+  {
+    invisible: true,
+    date: '',
+    icon: icons.next,
+    color: colors.next,
+    title: ' ',
+    items: [
+      {
+        title: '',
+        text: [' ']
+      },
+      {
+        title: '',
+        text: ['']
+      }
+    ]
   }
 ]
 export default RoadMapSlider
