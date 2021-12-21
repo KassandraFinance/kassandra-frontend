@@ -42,7 +42,7 @@ const Summary = () => {
   }
 
   const handleCopyLink = () => {
-    ToastInfo('Link copy!')
+    ToastInfo('Address copied to clipboad!')
   }
 
   return (
