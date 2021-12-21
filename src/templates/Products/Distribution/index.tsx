@@ -143,16 +143,22 @@ const Distribution = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
                 <S.Coin width={60}>{`${coin.allocation || 0}%`}</S.Coin>
               </S.Td>
               <S.Td change24h={false}>
-                {`${BNtoDecimal(
+                {`$ ${BNtoDecimal(
                   Big(coin.balance_in_pool || 0).times(Big(coin.price || 0)),
                   Big(0),
                   0,
                   0
-                )} USD`}
+                )}`}
+                <S.BalanceCoin>{`${BNtoDecimal(Big(coin.balance_in_pool || 0), Big(0), 2, 2)} ${coin.symbol}`}</S.BalanceCoin>
               </S.Td>
-              <S.Td negative={(changes[index] || 0) < 0} change24h={true}>
-                <S.Coin width={50}>
-                  {changes[index] ? `${changes[index].toFixed(2)}%` : '-'}
+              <S.Td>
+                <span>$ {coin.price}</span>
+                <S.Coin negative={(changes[index] || 0) < 0} change24h={true}>
+                  {changes[index] ? 
+                    `${changes[index] < 0 ? '-' : '+' } ${changes[index].toFixed(2)}%` 
+                    :
+                    '-'
+                  }
                 </S.Coin>
               </S.Td>
             </S.Tr>

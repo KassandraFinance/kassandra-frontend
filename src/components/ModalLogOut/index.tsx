@@ -27,7 +27,7 @@ const ModalLogOut = ({
         <S.Top>
           <p>Your wallet</p>
           <S.Close type="button" onClick={() => setModalOpen(false)}>
-            <img src="assets/close.svg" alt="Close" />
+            <img src="/assets/close.svg" alt="Close" />
           </S.Close>
         </S.Top>
         <S.Content>

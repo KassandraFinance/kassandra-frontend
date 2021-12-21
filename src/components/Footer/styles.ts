@@ -167,6 +167,6 @@ export const LowerRight = styled.div`
 
 export const Divider = styled.div`
   background-color: transparent;
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  /* border-top: 1px solid rgba(255, 255, 255, 0.14); */
   border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 `

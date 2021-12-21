@@ -220,7 +220,7 @@ const KassandraTokenCard = () => {
                   rel="noopener noreferrer"
                 >
                   <img
-                    src="assets/Discord.svg"
+                    src="/assets/Discord.svg"
                     alt="Join our Discord community"
                   />
                 </a>
@@ -232,7 +232,7 @@ const KassandraTokenCard = () => {
                   rel="noopener noreferrer"
                 >
                   <img
-                    src="assets/telegram.svg"
+                    src="/assets/telegram.svg"
                     alt="Join our Telegram group"
                   />
                 </a>
@@ -244,7 +244,7 @@ const KassandraTokenCard = () => {
                   rel="noopener noreferrer"
                 >
                   <img
-                    src="assets/Github.svg"
+                    src="/assets/Github.svg"
                     alt="Access our GitHub repository"
                   />
                 </a>
@@ -255,7 +255,7 @@ const KassandraTokenCard = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src="assets/Medium.svg" alt="Read our Medium blog" />
+                  <img src="/assets/Medium.svg" alt="Read our Medium blog" />
                 </a>
               </S.WrapperIcons>
               <S.WrapperIcons>
@@ -264,7 +264,10 @@ const KassandraTokenCard = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src="assets/Twitter.svg" alt="Follow our Twitter feed" />
+                  <img
+                    src="/assets/Twitter.svg"
+                    alt="Follow our Twitter feed"
+                  />
                 </a>
               </S.WrapperIcons>
             </div>
@@ -280,7 +283,7 @@ const KassandraTokenCard = () => {
         <S.MobileCards>
           <S.ResponsabilitiesCards>
             <S.IconWrapper>
-              <img src="assets/adjustIcon.png" alt="" />
+              <img src="/assets/adjustIcon.png" alt="" />
             </S.IconWrapper>
             <span>
               {' '}
@@ -290,7 +293,7 @@ const KassandraTokenCard = () => {
 
           <S.ResponsabilitiesCards>
             <S.IconWrapper>
-              <img src="assets/deployInvest.png" alt="" />
+              <img src="/assets/deployInvest.png" alt="" />
             </S.IconWrapper>
 
             <span>
@@ -301,7 +304,7 @@ const KassandraTokenCard = () => {
 
           <S.ResponsabilitiesCards>
             <S.IconWrapper>
-              <img src="assets/curatingIcon.png" alt="" />
+              <img src="/assets/curatingIcon.png" alt="" />
             </S.IconWrapper>
             <span>
               <b>Curate</b> whitelists for investable assets
@@ -310,7 +313,7 @@ const KassandraTokenCard = () => {
 
           <S.ResponsabilitiesCards>
             <S.IconWrapper>
-              <img src="assets/approvingIcon.png" alt="" />
+              <img src="/assets/approvingIcon.png" alt="" />
             </S.IconWrapper>
             <span>
               <b>Approve</b> code changes and updates

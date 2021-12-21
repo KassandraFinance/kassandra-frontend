@@ -92,7 +92,7 @@ const IndexDetails = ({ coinInfoList }: IIndexDetailsProps) => {
               showMore={showMore}
             >
               {showMore ? 'Show More' : 'Show Less'}
-              <img src="assets/arrow-down-cyan.svg" alt="" />
+              <img src="/assets/arrow-down-cyan.svg" alt="" />
             </S.ToggleList>
           </S.WrapperToggle>
         </>

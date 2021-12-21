@@ -131,7 +131,7 @@ const Details = ({
           >
             See contract
           </a>
-          <img src="assets/GoToSite.svg" alt="" />
+          <img src="/assets/GoToSite.svg" alt="" />
         </S.Link>
         <S.Link>
           <a
@@ -141,13 +141,13 @@ const Details = ({
           >
             Buy $Kacy
           </a>
-          <img src="assets/iconBuyKacy.svg" alt="" />
+          <img src="/assets/iconBuyKacy.svg" alt="" />
         </S.Link>
       </S.Info>
       <S.Info>
         <S.Link>
           <Link href="/">Project site</Link>
-          <img src="assets/GoToSite.svg" alt="" />
+          <img src="/assets/GoToSite.svg" alt="" />
         </S.Link>
         {/* <span>Add to Metamask</span> */}
         <S.AddToken
@@ -160,7 +160,7 @@ const Details = ({
             )
           }
         >
-          <img src="assets/metaMaskIcon.svg" alt="" /> Add to Metamask
+          <img src="/assets/metaMaskIcon.svg" alt="" /> Add to Metamask
         </S.AddToken>
       </S.Info>
     </S.Details>
