@@ -142,7 +142,7 @@ const StakeFarm = () => {
             </S.NameStake>
             <S.GridStaking>
               <StakeCard
-                pid={3}
+                pid={4}
                 symbol="ahype"
                 connect={connect}
                 balanceOf={kacyStake.balance}
@@ -155,8 +155,8 @@ const StakeFarm = () => {
                 stakeWithVotingPower={true}
               />
               <StakeCard
-                pid={4}
-                symbol="keu"
+                pid={5}
+                symbol="kap"
                 connect={connect}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
