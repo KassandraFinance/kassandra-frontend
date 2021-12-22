@@ -125,7 +125,7 @@ const Details = ({
       <S.Info>
         <S.Link>
           <a
-            href={`https://ropsten.etherscan.io/address/${stakingToken}`}
+            href={`https://testnet.snowtrace.io/address/${stakingToken}`}
             target="_blank"
             rel="noopener noreferrer"
           >
