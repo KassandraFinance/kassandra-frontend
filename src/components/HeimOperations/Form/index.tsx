@@ -157,8 +157,8 @@ const Form = ({
     }
     /* eslint-disable prefer-destructuring */
 
-    setSwapInAddress(newSwapInAddress.toLocaleLowerCase())
-    setSwapOutAddress(newSwapOutAddress.toLocaleLowerCase())
+    setSwapInAddress(newSwapInAddress)
+    setSwapOutAddress(newSwapOutAddress)
   }, [title, infoAHYPE.length, typeWithdrawChecked])
 
   // get contract approval of tokens
@@ -251,7 +251,7 @@ const Form = ({
       title !== 'Invest' ||
       swapInAddress.length === 0 ||
       swapOutAddress.length === 0 ||
-      swapInAddress === crpPoolAddress.toLocaleLowerCase()
+      swapInAddress === crpPoolAddress
     ) {
       return
     }
@@ -307,8 +307,8 @@ const Form = ({
       title !== 'Swap' ||
       swapInAddress.length === 0 ||
       swapOutAddress.length === 0 ||
-      swapInAddress === crpPoolAddress.toLocaleLowerCase() ||
-      swapOutAddress === crpPoolAddress.toLocaleLowerCase()
+      swapInAddress === crpPoolAddress ||
+      swapOutAddress === crpPoolAddress
     ) {
       return
     }
@@ -349,7 +349,7 @@ const Form = ({
 
   // calculate withdraw
   React.useEffect(() => {
-    if (title !== 'Withdraw' || swapOutAddress === crpPoolAddress.toLocaleLowerCase()) {
+    if (title !== 'Withdraw' || swapOutAddress === crpPoolAddress) {
       return
     }
 
