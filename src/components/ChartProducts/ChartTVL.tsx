@@ -32,7 +32,7 @@ const ChartTVL = ({ data, color }: IChartTVLProps) => {
           borderRadius: '25px',
           margin: '25px 0'
         }}
-        margin={{ top: 140, right: 2, left: 3, bottom: 10 }}
+        margin={{ top: 140, right: 2, left: 3, bottom: 32 }}
       >
         <defs>
           <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -49,6 +49,7 @@ const ChartTVL = ({ data, color }: IChartTVLProps) => {
           scale="time"
           type="number"
           domain={['auto', 'auto']}
+          hide
           // tickFormatter={time => getDate(time)}
         />
         <YAxis

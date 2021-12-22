@@ -12,5 +12,6 @@ export interface TokenDetails {
   symbol: string;
   decimals: BigNumber;
   allocation: number;
+  allocation_goal: number;
   price: number;
 }

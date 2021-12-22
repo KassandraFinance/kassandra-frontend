@@ -28,7 +28,7 @@ const ModalWalletConnect = ({
           <S.ModalText>
             <span>Wallet connection is required</span>
             <button type="button" onClick={() => setModalOpen(false)}>
-              <img src="assets/close.svg" alt="Close" />{' '}
+              <img src="/assets/close.svg" alt="Close" />{' '}
             </button>
           </S.ModalText>
 
@@ -41,7 +41,7 @@ const ModalWalletConnect = ({
               }}
             >
               <S.WrapperIcons>
-                <img src="assets/metaMaskIcon.svg" alt="" />
+                <img src="/assets/metaMaskIcon.svg" alt="" />
                 <span>Metamask</span>
               </S.WrapperIcons>
             </S.WrapperIconsBackGround>

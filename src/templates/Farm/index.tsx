@@ -49,7 +49,7 @@ const StakeFarm = () => {
 
 
   React.useEffect(() => {
-    trackCategoryPageView(['Stake', 'Ropsten'])
+    trackCategoryPageView(['Stake', 'Fuji'])
 
     const device = localStorage.getItem('device')
     setIsMobile(device === 'isMobile')
@@ -75,7 +75,7 @@ const StakeFarm = () => {
           Loading...
         </h1>
       }
-      {web3.currentProvider !== null && chainId === "0x3" && !loading && !isMobile ?
+      {web3.currentProvider !== null && chainId === "0xa869" && !loading && !isMobile ?
         <>
           <S.StakeFarm>
             <S.StakeWithPowerVote>
@@ -142,7 +142,7 @@ const StakeFarm = () => {
             </S.NameStake>
             <S.GridStaking>
               <StakeCard
-                pid={3}
+                pid={4}
                 symbol="ahype"
                 connect={connect}
                 balanceOf={kacyStake.balance}
@@ -155,8 +155,8 @@ const StakeFarm = () => {
                 stakeWithVotingPower={true}
               />
               <StakeCard
-                pid={4}
-                symbol="keu"
+                pid={5}
+                symbol="kap"
                 connect={connect}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
@@ -189,11 +189,11 @@ const StakeFarm = () => {
               type="install"
             />
           )}
-          {web3.currentProvider !== null && chainId !== "0x3" && !loading && !isMobile && (
+          {web3.currentProvider !== null && chainId !== "0xa869" && !loading && !isMobile && (
             <Web3Disabled
-              textButton="Connect to Ropsten"
+              textButton="Connect to Fuji"
               textHeader="Your wallet is set to the wrong network."
-              bodyText="Please switch to the Ropsten network to have access to all our staking pools"
+              bodyText="Please switch to the Avalanche Fuji testnet network to have access to all our staking pools"
               type="changeChain"
             />
           )}

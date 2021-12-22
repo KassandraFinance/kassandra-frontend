@@ -67,7 +67,7 @@ const ChartAllocation = ({ data }: IChartAllocationProps) => {
           margin: '25px 0'
         }}
         stackOffset="expand"
-        margin={{ top: 70, right: 2, left: 0, bottom: 0 }}
+        margin={{ top: 50, right: 2, left: 0, bottom: 16 }}
       >
         <XAxis
           dataKey="timestamp"
@@ -78,6 +78,7 @@ const ChartAllocation = ({ data }: IChartAllocationProps) => {
           scale="time"
           type="number"
           domain={['auto', 'auto']}
+          hide
           // tickFormatter={time => getDate(time)}
         />
         <YAxis hide domain={[0, 1]} />

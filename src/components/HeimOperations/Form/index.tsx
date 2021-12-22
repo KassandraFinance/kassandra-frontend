@@ -13,7 +13,7 @@ import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
 import { actionGetPoolTokens } from '../../../store/modules/poolTokens/actions'
 
-import { SUBGRAPH_URL } from '../../../constants/tokenAddresses'
+import { SUBGRAPH_URL, HeimCRPPOOL } from '../../../constants/tokenAddresses'
 
 import useConnect from '../../../hooks/useConnect'
 import useCRPContract from '../../../hooks/useCRPContract'
@@ -30,6 +30,7 @@ import InputBestValue from './InputBestValue'
 
 import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
+import web3 from '../../../utils/web3'
 import { priceDollar } from '../../../utils/priceDollar'
 import { BNtoDecimal, wei } from '../../../utils/numerals'
 import waitTransaction, { MetamaskError, TransactionCallback } from '../../../utils/txWait'
@@ -88,7 +89,7 @@ const Form = ({
   const { trackEvent } = useMatomo()
   const dispatch = useDispatch()
 
-  const { data } = useSWR([GET_INFO_AHYPE, '0x03c0c7b6b55a0e5c1f2fad2c45b453c56a8f866a'],
+  const { data } = useSWR([GET_INFO_AHYPE, HeimCRPPOOL],
     (query, id) => request(SUBGRAPH_URL, query, { id }))
 
   function matomoEvent(action: string, name: string) {
@@ -105,6 +106,7 @@ const Form = ({
         balance_in_pool: '',
         address: data.pool.id,
         allocation: 0,
+        allocation_goal: 0,
         decimals: new BigNumber(data.pool.decimals), 
         price: Number(data.pool.price_usd),
         name: data.pool.name,
@@ -119,12 +121,14 @@ const Form = ({
           name: string; 
           symbol: string 
         }; 
-        weight_goal_normalized: any 
+        weight_goal_normalized: string
+        weight_normalized: string
       }) => {
         return {
           balance_in_pool: item.balance,
           address: item.token.id,
-          allocation: ((Number(item.weight_goal_normalized) * 100).toFixed(2)),
+          allocation: ((Number(item.weight_normalized) * 100).toFixed(2)),
+          allocation_goal: ((Number(item.weight_goal_normalized) * 100).toFixed(2)),
           decimals: new BigNumber(item.token.decimals),
           price: Number(item.token.price_usd),
           name: item.token.name,
@@ -166,8 +170,8 @@ const Form = ({
     }
     /* eslint-disable prefer-destructuring */
 
-    setSwapInAddress(newSwapInAddress.toLocaleLowerCase())
-    setSwapOutAddress(newSwapOutAddress.toLocaleLowerCase())
+    setSwapInAddress(newSwapInAddress)
+    setSwapOutAddress(newSwapOutAddress)
   }, [title, infoAHYPE.length, typeWithdrawChecked])
 
   // get contract approval of tokens
@@ -260,7 +264,7 @@ const Form = ({
       title !== 'Invest' ||
       swapInAddress.length === 0 ||
       swapOutAddress.length === 0 ||
-      swapInAddress === crpPoolAddress.toLocaleLowerCase()
+      swapInAddress === crpPoolAddress
     ) {
       return
     }
@@ -316,8 +320,8 @@ const Form = ({
       title !== 'Swap' ||
       swapInAddress.length === 0 ||
       swapOutAddress.length === 0 ||
-      swapInAddress === crpPoolAddress.toLocaleLowerCase() ||
-      swapOutAddress === crpPoolAddress.toLocaleLowerCase()
+      swapInAddress === crpPoolAddress ||
+      swapOutAddress === crpPoolAddress
     ) {
       return
     }
@@ -358,7 +362,7 @@ const Form = ({
 
   // calculate withdraw
   React.useEffect(() => {
-    if (title !== 'Withdraw' || swapOutAddress === crpPoolAddress.toLocaleLowerCase()) {
+    if (title !== 'Withdraw' || swapOutAddress === crpPoolAddress) {
       return
     }
 
@@ -812,13 +816,23 @@ const Form = ({
           }
         />
         ) : (
-        <Button
-          backgroundPrimary
-          fullWidth
-          type="button"
-          onClick={() => setIsModaWallet(true)}
-          text='Connect Wallet'
-        />
+        web3.currentProvider === null ?
+          <Button
+            as='a'
+            backgroundPrimary
+            fullWidth
+            href="https://metamask.io/download.html                          "
+            target="_blank"
+            text='Install MetaMask'
+          />
+          :
+          <Button
+            backgroundPrimary
+            fullWidth
+            type="button"
+            onClick={() => setIsModaWallet(true)}
+            text='Connect Wallet'
+          />
         )
       }
       <ModalWalletConnect

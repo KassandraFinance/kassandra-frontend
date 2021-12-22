@@ -3,7 +3,7 @@ import useSWR from 'swr'
 import request from 'graphql-request'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
-import { SUBGRAPH_URL } from '../../constants/tokenAddresses'
+import { SUBGRAPH_URL, HeimCRPPOOL } from '../../constants/tokenAddresses'
 
 import ChartPrice from './ChartPrice'
 import ChartTVL from './ChartTVL'
@@ -25,7 +25,7 @@ const ChartProducts = () => {
   const dateNow = new Date()
 
   const [params, setParams] = React.useState({
-    id: '0x03c0c7b6b55a0e5c1f2fad2c45b453c56a8f866a',
+    id: HeimCRPPOOL,
     price_period: 3600,
     period_selected: Math.trunc(dateNow.getTime() / 1000 - 60 * 60 * 24 * 7)
   })

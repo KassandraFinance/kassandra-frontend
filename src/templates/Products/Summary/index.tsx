@@ -29,7 +29,7 @@ const Summary = () => {
 
   const { data } = useSWR([GET_INFO_POOL], query =>
     request(SUBGRAPH_URL, query, {
-      id: '0x03c0c7b6b55a0e5c1f2fad2c45b453c56a8f866a'
+      id: HeimCRPPOOL
     })
   )
 
@@ -85,13 +85,29 @@ const Summary = () => {
         </a>
       </S.LinkContent>
       <S.ContractsName>AVALANCHE C-CHAIN CONTRACTS</S.ContractsName>
-      <S.CopyContract width="476px">
+      <S.CopyContract>
         <S.Blockchain>
           <div className="image">
             <Image src={avalancheIcon} alt="" />
           </div>
           <span>CONTROLLER/AHYPE TOKEN</span>
         </S.Blockchain>
+        <button
+          type="button"
+          className="metamask"
+          onClick={() => {
+            registerToken(HeimCRPPOOL, 'aHYPE', 18)
+            matomoEvent('click-on-metamask', 'add-token')
+          }}
+        >
+          <Image
+            src={metaMaskIcon}
+            alt="Add token to Metamask"
+            title="Add token to Metamask"
+            height={20}
+            width={20}
+          />
+        </button>
         <CopyToClipboard text={HeimCRPPOOL}>
           <button
             type="button"
@@ -115,24 +131,8 @@ const Summary = () => {
             </svg>
           </button>
         </CopyToClipboard>
-        <button
-          type="button"
-          className="metamask"
-          onClick={() => {
-            registerToken(HeimCRPPOOL, 'aHYPE', 18)
-            matomoEvent('click-on-metamask', 'add-token')
-          }}
-        >
-          <Image
-            src={metaMaskIcon}
-            alt="Add token to Metamask"
-            title="Add token to Metamask"
-            height={20}
-            width={20}
-          />
-        </button>
       </S.CopyContract>
-      <S.CopyContract width="342px">
+      <S.CopyContract>
         <S.Blockchain>
           <div className="image">
             <Image src={avalancheIcon} alt="" />
@@ -163,7 +163,7 @@ const Summary = () => {
           </button>
         </CopyToClipboard>
       </S.CopyContract>
-      <S.CopyContract width="374px">
+      <S.CopyContract>
         <S.Blockchain>
           <div className="image">
             <Image src={avalancheIcon} alt="" />

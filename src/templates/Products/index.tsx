@@ -7,8 +7,7 @@ import { useSelector, RootStateOrAny } from 'react-redux'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
-import { HeimCRPPOOL, HeimCorePool } from '../../constants/tokenAddresses'
-import { SUBGRAPH_URL } from '../../constants/tokenAddresses'
+import { SUBGRAPH_URL, HeimCRPPOOL, HeimCorePool } from '../../constants/tokenAddresses'
 
 import web3 from '../../utils/web3'
 import { BNtoDecimal } from '../../utils/numerals'
@@ -50,14 +49,14 @@ const Products = () => {
 
   const { data } = useSWR([GET_INFO_POOL], query =>
     request(SUBGRAPH_URL, query, {
-      id: '0x03c0c7b6b55a0e5c1f2fad2c45b453c56a8f866a',
+      id: HeimCRPPOOL,
       day
     })
   )
 
   const poolAddress = HeimCRPPOOL
   const poolCoreAddress = HeimCorePool
-  const poolPlatform = 'Ropsten'
+  const poolPlatform = 'Fuji'
   const poolName = 'Avalanche Social Index'
   const poolSymbol = 'aHYPE'
   const poolCategories = [poolPlatform, 'Pool']
@@ -125,7 +124,7 @@ const Products = () => {
           Loading...
         </h1>
       }
-       {web3.currentProvider !== null && userWalletAddress && chainId === "0x3" && !loading && !isMobile ?
+       {!web3.currentProvider || web3.currentProvider  && chainId === "0xa869" && !loading && !isMobile ?
         <S.Product>
           <S.ProductDetails>
             <S.Intro>
@@ -211,23 +210,7 @@ const Products = () => {
               type="isMobile"
             />
           )}
-          {web3.currentProvider === null && !loading && !isMobile && (
-            <Web3Disabled
-              textButton="Install Metamask"
-              textHeader="It looks like you don't have the Metamask wallet installed"
-              bodyText="Please install Metamask to access our products"
-              type="install"
-            />
-          )}
-          {!userWalletAddress && chainId === "0x3" && !loading && !isMobile && (
-            <Web3Disabled
-              textButton="Connect Wallet"
-              textHeader="Wallet not connected"
-              bodyText="Please connect your wallet with this dApp"
-              type="connect"
-            />
-          )}
-          {web3.currentProvider !== null && chainId !== "0x3" && !loading && !isMobile && (
+          {web3.currentProvider !== null && chainId !== "0xa869" && !loading && !isMobile && (
             <Web3Disabled
               textButton={`Connect to ${poolPlatform}`}
               textHeader="Your wallet is set to the wrong network."

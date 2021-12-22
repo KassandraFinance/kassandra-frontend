@@ -78,34 +78,48 @@ export const Th = styled.th`
   }
 `
 interface ITdProps {
-  change24h: boolean;
-  negative?: boolean;
+  change24h?: boolean;
 }
 
 // eslint-disable-next-line prettier/prettier
 export const Td = styled.td<ITdProps>`
-  ${props =>
-    props.change24h && {
-      color: `${props.negative ? '#EB5757' : '#6FCF97'}`
-    }};
   font-weight: ${theme.font.weight.light};
   letter-spacing: .5px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   @media (max-width: 660px) {
     font-size: 21px;
   }
 `
 
+export const BalanceCoin = styled.span`
+  color: ${theme.colors.grayDisabled};
+  font-size: ${theme.font.sizes.font12};
+`
+
 interface ICoinProps {
-  width: number;
+  width?: number;
+  change24h?: boolean;
+  negative?: boolean;
 }
 
 // eslint-disable-next-line prettier/prettier
-export const Coin = styled.div<ICoinProps>`
+export const Coin = styled.span<ICoinProps>`
+  ${props =>
+    props.change24h && {
+      color: `${props.negative ? '#EB5757' : '#6FCF97'}`
+    }};
+
   display: flex;
   align-items: center;
+  text-align: center;
   width: ${props => props.width}px;
   img {
-    max-width: 30px;
+    max-width: 24px;
     margin-right: 16px;
   }
 

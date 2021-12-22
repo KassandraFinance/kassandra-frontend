@@ -70,7 +70,7 @@ const ModalLogOut = ({
               </button>
             </CopyToClipboard>
             <a
-              href={`https://ropsten.etherscan.io/address/${userWalletAddress}`}
+              href={`https://testnet.snowtrace.io/address/${userWalletAddress}`}
               onClick={() => setModalOpen(false)}
               target="_blank"
               rel="noopener noreferrer"

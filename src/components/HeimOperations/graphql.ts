@@ -10,9 +10,10 @@ export const GET_INFO_AHYPE = gql`
       symbol
       price_usd
       # pool token information
-      underlying_assets(orderBy: weight_goal_normalized, orderDirection: desc) {
+      underlying_assets(orderBy: weight_normalized, orderDirection: desc) {
         balance # token balance in pool
-        weight_goal_normalized # current allocation in the pool between 0 and 1
+        weight_normalized # current allocation in the pool between 0 and 1
+        weight_goal_normalized # expected allocation in the pool between 0 and 1
         # token information
         token {
           id

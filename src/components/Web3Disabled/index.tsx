@@ -25,7 +25,7 @@ const Web3Disabled = ({ textButton, textHeader, bodyText, type }: IWeb3DisabledP
     try {
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x3' }], //0x89
+        params: [{ chainId: '0xa869' }], //Testnet Avalanche
       });
     } catch (error: any) {
       // This error code indicates that the chain has not been added to MetaMask.
@@ -33,8 +33,18 @@ const Web3Disabled = ({ textButton, textHeader, bodyText, type }: IWeb3DisabledP
         try {
           await window.ethereum.request({
             method: 'wallet_addEthereumChain', 
-            params:[{ chainId: '0x3', chainName: 'Ropsten Mainnet', nativeCurrency: { name: 'Matic', symbol: 'MATIC', decimals: 18 }, rpcUrls: ['https://rpc-mainnet.matic.network/'], blockExplorerUrls: ['https://polygonscan.com/'] }],
-          }); //0x89
+            params:[{ 
+              chainId: '0xa869', 
+              chainName: 'Avalanche Fuji Testnet', 
+              nativeCurrency: { 
+                name: 'Avalanche', 
+                symbol: 'AVAX', 
+                decimals: 18 
+              }, 
+              rpcUrls: ['https://api.avax-test.network/ext/bc/C/rpc'], 
+              blockExplorerUrls: ['https://testnet.snowtrace.io/'] 
+            }],
+          });
         } catch (addError) {
           // handle "add" error
         }
