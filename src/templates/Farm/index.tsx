@@ -49,7 +49,7 @@ const StakeFarm = () => {
 
 
   React.useEffect(() => {
-    trackCategoryPageView(['Stake', 'Ropsten'])
+    trackCategoryPageView(['Stake', 'Fuji'])
 
     const device = localStorage.getItem('device')
     setIsMobile(device === 'isMobile')

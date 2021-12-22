@@ -17,43 +17,29 @@ import * as S from './styles'
 interface Networks {
   Ropsten: string;
   Avalanche: string;
+  Fuji: string;
 }
 
 const network2coingeckoID: Networks = {
   Ropsten: 'ethereum',
-  Avalanche: 'avalanche'
+  Avalanche: 'avalanche',
+  Fuji: 'avalanche',
 }
 
 // for development testing
 const addressChanger: { [key: string]: string | undefined } = {
-  '0x81367474e9924123bd0058a1ae8c208a977d9e74':
-    '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599', // wBTC
-  '0xa42b880e7114a515409f68416988c7d8c37dbebd':
-    '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2', // wETH
-  '0xbc6af724650dd257a1823f0eaaf9b88aaf29843a':
-    '0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0', // MATIC
-  '0x26f8ed53c80214562755e40cb370cc8437324b7e':
-    '0x26f8ed53c80214562755e40cb370cc8437324b7e', // KACY
-  '0xd4a783f76b0672afc286a64b9b12e9eb026db4ec':
-    '0x514910771af9ca656af840dff83e8264ecf986ca', // LINK
-  '0xd905453d622da190e936ac670f08df5a334c541a':
-    '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984', // UNI
-  '0x6cbbaf8731d261258fb74014a4305dc025493dab':
-    '0x3506424f91fd33084466f402d5d97f05f8e3b4af', // CHZ
-  '0xac11a73ed1e4777f8b5baf17e1feaed961c93109':
-    '0xf629cbd94d3791c9250152bd8dfbdf380e2a3b9c', // ENJ
-  '0x1590f53cb5de88943c984a70a3f9f6a213a6196d':
-    '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2', // SUSHI
-  '0x001fbd9b4ad03b8788e1af8bd93c19fd3354f843':
-    '0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9', // AAVE
-  '0xc58b1716f66e3b6aeacdc6f228636ef84bfa280f':
-    '0xc944e90c64b2c07662a292be6244bdf05cda44a7', // GRT
-  '0x3d84473fb300e661e182ce9b19ff721af0d878c9':
-    '0x967da4048cd07ab37855c090aaf366e4ce1b9f48', // OCEAN
-  '0x7b05462d91eb45f211745b2c8b8e95edf631ecea':
-    '0x8762db106b2c2a0bccb3a80d1ed41273552616e8', // RSR
-  '0x52db3ec6637e6c5da9f1694f2f40caae891bcfcf':
-    '0x52db3ec6637e6c5da9f1694f2f40caae891bcfcf' // THETA
+  '0xd00ae08403B9bbb9124bB305C09058E32C39A48c':
+    '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7', // WAVAX
+  '0xe401e9Ce0E354Ad9092a63eE1dFA3168bB83F3DA':
+    '0x8729438EB15e2C8B576fCc6AeCdA6A148776C0F5', // QI
+  '0xf22f05168508749fa42eDBddE10CB323D87c201d':
+    '0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd', // JOE
+  '0x83080D4b5fC60e22dFFA8d14AD3BB41Dde48F199':
+    '0x60781C2586D68229fde47564546784ab3fACA982', // PNG
+  '0xBA1C32241Ac77b97C8573c3dbFDe4e1e2A8fc0DF':
+    '0x59414b3089ce2AF0010e7523Dea7E2b35d776ec7', // YAK
+  '0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb':
+    '0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb', // KACY
 }
 
 // eslint-disable-next-line prettier/prettier
@@ -77,7 +63,7 @@ const Distribution = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
     ) => {
       try {
         const URL = `https://api.coingecko.com/api/v3/coins/${platform}/contract/${
-          poolPlatform !== 'Ropsten' ? token.address : addressChanger[token.address]
+          poolPlatform !== 'Fuji' ? token.address : addressChanger[token.address]
         }?localization=false&tickers=false&community_data=false&developer_data=false&sparkline=false`
         const res = await fetch(URL)
         const data = await res.json()

@@ -141,7 +141,7 @@ const StakeCard = ({
 
   const productCategories = [
     'Stake',
-    'Ropsten',
+    'Fuji',
     staked[pid] === 'KACY' ? 'VotingStake' : 'OtherStake'
   ]
 

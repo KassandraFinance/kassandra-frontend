@@ -56,7 +56,7 @@ const Products = () => {
 
   const poolAddress = HeimCRPPOOL
   const poolCoreAddress = HeimCorePool
-  const poolPlatform = 'Avalanche'
+  const poolPlatform = 'Fuji'
   const poolName = 'Avalanche Social Index'
   const poolSymbol = 'aHYPE'
   const poolCategories = [poolPlatform, 'Pool']
