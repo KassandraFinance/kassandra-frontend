@@ -96,6 +96,7 @@ const Form = ({
         balance_in_pool: '',
         address: data.pool.id,
         allocation: 0,
+        allocation_goal: 0,
         decimals: new BigNumber(data.pool.decimals), 
         price: Number(data.pool.price_usd),
         name: data.pool.name,
@@ -110,12 +111,14 @@ const Form = ({
           name: string; 
           symbol: string 
         }; 
-        weight_goal_normalized: any 
+        weight_goal_normalized: string
+        weight_normalized: string
       }) => {
         return {
           balance_in_pool: item.balance,
           address: item.token.id,
-          allocation: ((Number(item.weight_goal_normalized) * 100).toFixed(2)),
+          allocation: ((Number(item.weight_normalized) * 100).toFixed(2)),
+          allocation_goal: ((Number(item.weight_goal_normalized) * 100).toFixed(2)),
           decimals: new BigNumber(item.token.decimals),
           price: Number(item.token.price_usd),
           name: item.token.name,
