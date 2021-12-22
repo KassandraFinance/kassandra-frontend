@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Slider, { SliderSettings } from '../../components/Slider'
 import RoadMapCard from '../RoadMapCard'
 import * as S from './styles'
@@ -22,27 +22,26 @@ const RoadMapSlider = () => {
     lazyLoad: 'ondemand',
     infinite: true,
     centerMode: true,
-    centerPadding: '0',
+    centerPadding: '30px',
     className: 'center',
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1050,
         settings: {
-          arrows: false
+          dots: true,
+          arrows: false,
+          slidesToShow: 2.3,
+          centerPadding: '15px'
         }
       },
       {
         breakpoint: 570,
         settings: {
+          dots: true,
           arrows: false,
-          slidesToShow: 1.2
-        }
-      },
-      {
-        breakpoint: 375,
-        settings: {
-          arrows: false,
-          slidesToShow: 1.1
+          infinite: false,
+          slidesToShow: 1,
+          centerPadding: '15px'
         }
       }
     ],
@@ -135,42 +134,6 @@ const arrCard = [
         text: ['Time to go to other chains']
       }
     ]
-  },
-  {
-    date: '2022 - Q3',
-    icon: icons.next,
-    color: colors.next,
-    title: '4th Cycle ',
-    items: [
-      {
-        title: 'Community Products',
-        text: [
-          'Open interface to Kassandra DAO members create their own ',
-          'tokenized funds'
-        ]
-      },
-      {
-        title: 'Multichain',
-        text: ['Time to go to other chains']
-      }
-    ]
-  },
-  // {
-  //   invisible: true,
-  //   date: '',
-  //   icon: icons.next,
-  //   color: colors.next,
-  //   title: ' ',
-  //   items: [
-  //     {
-  //       title: '',
-  //       text: [' ']
-  //     },
-  //     {
-  //       title: '',
-  //       text: ['']
-  //     }
-  //   ]
-  // }
+  }
 ]
 export default RoadMapSlider

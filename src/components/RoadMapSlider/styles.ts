@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import theme from '../../styles/theme'
-import media from 'styled-media-query'
 
 export const Wrapper = styled.section`
   max-width: 100rem;
@@ -8,7 +7,7 @@ export const Wrapper = styled.section`
   margin-bottom: 15rem;
   @media (max-width: 920px) {
     overflow-x: hidden;
-    padding: 0 3.2rem;
+    max-width: 90rem;
   }
 
   .slick-active,
@@ -74,6 +73,40 @@ export const Wrapper = styled.section`
   .slick-next.slick-disabled {
     visibility: hidden;
   }
+
+  .slick-dots {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    margin: 1.6rem 0 0;
+    padding: 1rem 0;
+    list-style-type: none;
+
+    .slick-active {
+      transform: scale(1);
+    }
+
+    li {
+      margin: 0 0.5rem;
+    }
+
+    button {
+      display: block;
+      width: 1rem;
+      height: 1rem;
+      padding: 0;
+
+      border: none;
+      border-radius: 100%;
+      background-color: ${theme.colors.grayDisabled};
+
+      text-indent: -9999px;
+    }
+
+    li.slick-active button {
+      background: ${theme.colors.cyan};
+    }
+  }
 `
 export const TitleAndIcon = styled.div`
   display: flex;
@@ -101,6 +134,9 @@ export const Title = styled.h1`
   line-height: 114%;
   @media (max-width: 920px) {
     font-size: ${theme.font.sizes.font32};
+  }
+  @media (max-width: 570px) {
+    font-size: ${theme.font.sizes.font24};
   }
 `
 export const Divider = styled.div`

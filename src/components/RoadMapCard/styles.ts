@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 export const CardWrapper = styled.div`
+  max-width: 40rem;
   height: 51rem;
   display: flex;
   flex-direction: column;
@@ -13,6 +14,10 @@ export const CardWrapper = styled.div`
   border-radius: 16px;
   backdrop-filter: blur(1.4px);
   -webkit-backdrop-filter: blur(1.4px);
+  @media (max-width: 570px) {
+    margin: 0;
+    height: 45rem;
+  }
 `
 export const CardHeader = styled.div``
 
@@ -44,6 +49,9 @@ export const Divider = styled.div`
   border-bottom: 1px solid #ffffff26;
   max-width: 100%;
   margin: 1.6rem 0;
+  @media (max-width: 570px) {
+    margin: 0.8rem 0;
+  }
 `
 
 export const CardDescription = styled.div``
@@ -66,7 +74,7 @@ export const ListText = styled.li`
   line-height: 155%;
   /* margin-left: 2rem; */
   margin: 0.8rem 0 0 2rem;
-  @media (max-width: 1024px) {
+  @media (max-width: 670px) {
     font-size: ${theme.font.sizes.font14};
   }
 `
