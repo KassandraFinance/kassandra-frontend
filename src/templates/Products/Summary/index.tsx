@@ -71,7 +71,7 @@ const Summary = () => {
         </a>
       </S.LinkContent>
       <S.ContractsName>AVALANCHE C-CHAIN CONTRACTS</S.ContractsName>
-      <S.CopyContract width="476px">
+      <S.CopyContract>
         <S.Blockchain>
           <div className="image">
             <Image src={avalancheIcon} alt="" />
@@ -105,7 +105,7 @@ const Summary = () => {
           />
         </div>
       </S.CopyContract>
-      <S.CopyContract width="342px">
+      <S.CopyContract>
         <S.Blockchain>
           <div className="image">
             <Image src={avalancheIcon} alt="" />
@@ -130,7 +130,7 @@ const Summary = () => {
           </button>
         </CopyToClipboard>
       </S.CopyContract>
-      <S.CopyContract width="374px">
+      <S.CopyContract>
         <S.Blockchain>
           <div className="image">
             <Image src={avalancheIcon} alt="" />

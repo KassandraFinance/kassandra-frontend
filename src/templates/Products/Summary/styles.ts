@@ -72,7 +72,7 @@ export const ContractsName = styled.p`
 `
 
 interface ICopyContractProps {
-  width: string;
+  width?: string;
 }
 
 // eslint-disable-next-line prettier/prettier
@@ -87,8 +87,9 @@ export const CopyContract = styled.div<ICopyContractProps>`
 
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
-  max-width: ${props => props.width};
+  max-width: 460px !important;
   padding: 22px;
   margin: 16px 0;
 
@@ -108,7 +109,6 @@ export const CopyContract = styled.div<ICopyContractProps>`
     display: flex;
     align-items: center;
 
-    max-width: 100%;
 
     transition: 0.15s;
     outline: none;
