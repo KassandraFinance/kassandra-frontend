@@ -94,7 +94,7 @@ export const CopyContract = styled.div<ICopyContractProps>`
   margin: 16px 0;
 
   .metamask {
-    margin-left: 16px;
+    margin-right: 8px;
     @media(max-width: 1060px) {
       margin-top: 8px;
       margin-left: 40px;

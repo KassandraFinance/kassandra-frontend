@@ -92,6 +92,22 @@ const Summary = () => {
           </div>
           <span>CONTROLLER/AHYPE TOKEN</span>
         </S.Blockchain>
+        <button
+          type="button"
+          className="metamask"
+          onClick={() => {
+            registerToken(HeimCRPPOOL, 'aHYPE', 18)
+            matomoEvent('click-on-metamask', 'add-token')
+          }}
+        >
+          <Image
+            src={metaMaskIcon}
+            alt="Add token to Metamask"
+            title="Add token to Metamask"
+            height={20}
+            width={20}
+          />
+        </button>
         <CopyToClipboard text={HeimCRPPOOL}>
           <button
             type="button"
@@ -115,22 +131,6 @@ const Summary = () => {
             </svg>
           </button>
         </CopyToClipboard>
-        <button
-          type="button"
-          className="metamask"
-          onClick={() => {
-            registerToken(HeimCRPPOOL, 'aHYPE', 18)
-            matomoEvent('click-on-metamask', 'add-token')
-          }}
-        >
-          <Image
-            src={metaMaskIcon}
-            alt="Add token to Metamask"
-            title="Add token to Metamask"
-            height={20}
-            width={20}
-          />
-        </button>
       </S.CopyContract>
       <S.CopyContract>
         <S.Blockchain>
