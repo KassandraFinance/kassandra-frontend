@@ -35,7 +35,7 @@ const Web3Disabled = ({ textButton, textHeader, bodyText, type }: IWeb3DisabledP
             method: 'wallet_addEthereumChain', 
             params:[{ 
               chainId: '0xa869', 
-              chainName: 'Avalanche Fuji', 
+              chainName: 'Avalanche Fuji Testnet', 
               nativeCurrency: { 
                 name: 'Avalanche', 
                 symbol: 'AVAX', 

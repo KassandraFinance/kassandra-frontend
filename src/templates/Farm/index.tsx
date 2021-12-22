@@ -191,9 +191,9 @@ const StakeFarm = () => {
           )}
           {web3.currentProvider !== null && chainId !== "0xa869" && !loading && !isMobile && (
             <Web3Disabled
-              textButton="Connect to Avalanche"
+              textButton="Connect to Fuji"
               textHeader="Your wallet is set to the wrong network."
-              bodyText="Please switch to the Avalanche network to have access to all our staking pools"
+              bodyText="Please switch to the Avalanche Fuji testnet network to have access to all our staking pools"
               type="changeChain"
             />
           )}
