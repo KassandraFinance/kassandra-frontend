@@ -2,6 +2,7 @@
 import React from 'react'
 import BigNumber from 'bn.js'
 import Image from 'next/image'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 
@@ -43,7 +44,16 @@ const InputTokens = ({
   const [maxActive, setMaxActive] = React.useState<boolean>(false)
   const [currentMax, setCurrentMax] = React.useState<BigNumber>(new BigNumber(0))
 
+  const { trackEvent } = useMatomo()
   const inputRef = React.useRef<HTMLInputElement>(null)
+
+  function matomoEvent(action: string, name: string) {
+    trackEvent({
+      category: 'operations-invest',
+      action,
+      name
+    })
+  }
 
   const tokensList = React.useMemo(() => {
     if (poolTokens.length > 1) {
@@ -127,7 +137,14 @@ const InputTokens = ({
           decimals={decimals}
           setInputValue={setSwapInAmount}
         />
-        <S.ButtonMax type="button" maxActive={maxActive} onClick={setMax}>
+        <S.ButtonMax 
+          type="button" 
+          maxActive={maxActive} 
+          onClick={() => {
+            setMax()
+            matomoEvent('click-on-maxBtn', `input-in-${title}`)
+          }}
+        >
           Max
         </S.ButtonMax>
       </S.Amount>

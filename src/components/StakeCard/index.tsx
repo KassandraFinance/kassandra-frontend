@@ -4,6 +4,7 @@ import React from 'react'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
 import Image from 'next/image'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { useSelector, RootStateOrAny } from 'react-redux'
 import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
 
@@ -135,7 +136,7 @@ const StakeCard = ({
   })
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-
+  const { trackEvent } = useMatomo()
   const { viewgetReserves } = usePriceLP()
   const lpToken = useERC20Contract(LPKacyAvax)
 
@@ -144,6 +145,14 @@ const StakeCard = ({
     'Fuji',
     staked[pid] === 'KACY' ? 'VotingStake' : 'OtherStake'
   ]
+
+  function matomoEvent(action: string, name: string) {
+    trackEvent({
+      category: 'stake-farm',
+      action,
+      name
+    })
+  }
 
   async function handleLPtoUSD() {
     const reservesKacyAvax = await viewgetReserves(LPKacyAvax)
@@ -186,6 +195,7 @@ const StakeCard = ({
       const txReceipt = await waitTransaction(txHash)
 
       if (txReceipt.status) {
+        matomoEvent('approve-contract', `${staked[pid]}`)
         ToastSuccess(`Approval of ${symbol} confirmed`)
         return
       }
@@ -208,6 +218,7 @@ const StakeCard = ({
       const txReceipt = await waitTransaction(txHash)
 
       if (txReceipt.status) {
+        matomoEvent('reward-claim', `${staked[pid]}`)
         ToastSuccess(`Rewards claimed sucessfully`)
         return
       }
@@ -453,7 +464,13 @@ const StakeCard = ({
                 type="button"
                 isDetails={isDetails}
                 isConnect={!!userWalletAddress}
-                onClick={() => setIsDetails(!isDetails)}
+                onClick={() => {
+                  matomoEvent(
+                    'click-details',
+                    `${isDetails ? 'details-open' : 'details-closed'}`
+                  )
+                  setIsDetails(!isDetails)
+                }}
               >
                 Details
                 <img src="assets/arrowDetails.svg" alt="" />

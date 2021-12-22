@@ -1,8 +1,10 @@
 import React from 'react'
+import Image from 'next/image'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import { ToastInfo } from '../../components/Toastify/toast'
-
+import close from '../../../public/assets/close.svg'
 import theme from '../../styles/theme'
 import * as S from './styles'
 
@@ -17,6 +19,16 @@ const ModalLogOut = ({
   setModalOpen,
   userWalletAddress
 }: IModalLogOutProps) => {
+  const { trackEvent } = useMatomo()
+
+  function matomoEvent(action: string, name: string) {
+    trackEvent({
+      category: 'modal-logout',
+      action,
+      name
+    })
+  }
+
   return (
     <>
       <S.Backdrop
@@ -27,7 +39,7 @@ const ModalLogOut = ({
         <S.Top>
           <p>Your wallet</p>
           <S.Close type="button" onClick={() => setModalOpen(false)}>
-            <img src="/assets/close.svg" alt="Close" />
+            <Image src={close} alt="Close" />
           </S.Close>
         </S.Top>
         <S.Content>
@@ -38,6 +50,7 @@ const ModalLogOut = ({
                 type="button"
                 onClick={() => {
                   ToastInfo('Copy address')
+                  matomoEvent('click-on-copy', 'copy-address')
                   setModalOpen(false)
                 }}
               >

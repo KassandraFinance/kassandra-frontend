@@ -19,18 +19,19 @@ const TooltipAllocation = (props: { payload: any, label: any }) => {
   return (
     <S.TooltipAllocation>
       <ul>
-        {payload.map(
-          (
-            entry: { color: string, name: string, value: any, payload: any },
-            index: any
-          ) => (
-            <li key={`item-${index}`} style={{ color: entry.color }}>
-              <span>{entry.name}</span>
-              <span>-</span>
-              <span>{toPercent(entry.value)}</span>
-            </li>
-          )
-        )}
+        {payload &&
+          payload.map(
+            (
+              entry: { color: string, name: string, value: any, payload: any },
+              index: any
+            ) => (
+              <li key={`item-${index}`} style={{ color: entry.color }}>
+                <span>{entry.name}</span>
+                <span>-</span>
+                <span>{toPercent(entry.value)}</span>
+              </li>
+            )
+          )}
         <S.DateAllocation>{currentDate}</S.DateAllocation>
       </ul>
     </S.TooltipAllocation>

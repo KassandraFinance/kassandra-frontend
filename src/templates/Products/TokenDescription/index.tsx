@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import iconBar from '../../../../public/assets/iconbar.svg'
 import imageCalc from '../../../../public/assets/image-calc.svg'
@@ -7,6 +8,16 @@ import imageCalc from '../../../../public/assets/image-calc.svg'
 import * as S from './styles'
 
 const TokenDescription = () => {
+  const { trackEvent } = useMatomo()
+
+  function matomoEvent(action: string, name: string) {
+    trackEvent({
+      category: 'summary-invest',
+      action,
+      name
+    })
+  }
+
   return (
     <>
       <S.Title>
@@ -109,6 +120,7 @@ const TokenDescription = () => {
               target="_blank"
               rel="noopener noreferrer"
               href="https://kassandrafoundation.medium.com/avalanche-social-index-4042a823c972"
+              onClick={() => matomoEvent('click-on-link', 'ahype-documention')}
             >
               aHYPE
             </a>{' '}
