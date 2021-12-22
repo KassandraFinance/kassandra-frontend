@@ -16,7 +16,7 @@ import waitTransaction, {
   TransactionCallback
 } from '../../utils/txWait'
 
-import { Staking } from '../../constants/tokenAddresses'
+import { Staking, LPKacyAvax, LPDaiAvax } from '../../constants/tokenAddresses'
 
 import usePriceLP from '../../hooks/usePriceLP'
 import { PoolInfo } from '../../hooks/useStakingContract'
@@ -137,7 +137,7 @@ const StakeCard = ({
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
   const { viewgetReserves } = usePriceLP()
-  const lpToken = useERC20Contract('0xaCb1C18A8238955d123450d02bdD19b74ED7903f')
+  const lpToken = useERC20Contract(LPKacyAvax)
 
   const productCategories = [
     'Stake',
@@ -146,19 +146,15 @@ const StakeCard = ({
   ]
 
   async function handleLPtoUSD() {
-    const reservesKacyETH = await viewgetReserves(
-      '0xaCb1C18A8238955d123450d02bdD19b74ED7903f'
-    )
-    const reservesDaiETH = await viewgetReserves(
-      '0x1c5DEe94a34D795f9EEeF830B68B80e44868d316'
-    )
+    const reservesKacyAvax = await viewgetReserves(LPKacyAvax)
+    const reservesDaiAvax = await viewgetReserves(LPDaiAvax)
 
-    const ethInDollar = Big(reservesDaiETH._reserve0).div(
-      Big(reservesDaiETH._reserve1)
+    const ethInDollar = Big(reservesDaiAvax._reserve0).div(
+      Big(reservesDaiAvax._reserve1)
     )
-    const kacyInDollar = ethInDollar.div(Big(reservesKacyETH._reserve0))
+    const kacyInDollar = ethInDollar.div(Big(reservesKacyAvax._reserve0))
 
-    const allETHDollar = Big(reservesKacyETH._reserve1).mul(ethInDollar)
+    const allETHDollar = Big(reservesKacyAvax._reserve1).mul(ethInDollar)
     const supplyLPToken = await lpToken.totalSupply()
 
     if (supplyLPToken.toString() !== '0') {
