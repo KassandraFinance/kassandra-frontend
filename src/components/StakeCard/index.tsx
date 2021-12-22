@@ -79,8 +79,8 @@ const staked: any = {
   0: 'KACY',
   1: 'KACY',
   2: 'KACY',
-  3: 'aHYPE',
-  4: 'KEU'
+  4: 'aHYPE',
+  5: 'KAP'
 }
 
 const StakeCard = ({
@@ -262,17 +262,17 @@ const StakeCard = ({
       <S.StakeCard>
         <S.BorderGradient stakeWithVotingPower={stakeWithVotingPower}>
           <S.InterBackground stakeWithVotingPower={stakeWithVotingPower}>
-            {pid !== 3 && pid !== 4 ? (
+            {symbol === 'kacy' ? (
               <img src="assets/logo-kacy-stake.svg" alt="" />
             ) : null}
-            {pid === 3 ? (
+            {symbol === 'ahype' ? (
               <img
                 src="assets/avalanche_social_index_logo.svg"
                 alt=""
                 style={{ width: '58px' }}
               />
             ) : null}
-            {pid === 4 ? (
+            {symbol === 'kap' ? (
               <img src="assets/stake-kacy-eth-uni.png" alt="" width={144} />
             ) : null}
             <S.IntroStaking>
@@ -293,7 +293,7 @@ const StakeCard = ({
             <S.PoolName>
               <S.StakeAndEarn>
                 <p>STAKE</p>
-                {pid === 3 ? <p>$aHYPE</p> : <p>$KACY-ETH UNIV LP</p>}
+                {symbol === 'ahype' ? <p>$aHYPE</p> : <p>$KACY-AVAX PNG LP</p>}
               </S.StakeAndEarn>
               <S.StakeAndEarn>
                 <p>EARN</p>
