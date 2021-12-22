@@ -4,7 +4,7 @@ import useSWR from 'swr'
 import { request } from 'graphql-request'
 
 import { GET_POOL_PRICE } from './graphql'
-import { SUBGRAPH_URL } from '../../../constants/tokenAddresses'
+import { HeimCRPPOOL, SUBGRAPH_URL } from '../../../constants/tokenAddresses'
 
 import iconBar from '../../../../public/assets/iconbar.svg'
 
@@ -20,7 +20,7 @@ const Change = () => {
 
   const { data } = useSWR([GET_POOL_PRICE], query =>
     request(SUBGRAPH_URL, query, {
-      id: '0x03c0c7b6b55a0e5c1f2fad2c45b453c56a8f866a',
+      id: HeimCRPPOOL,
       day,
       week,
       month,
