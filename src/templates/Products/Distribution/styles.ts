@@ -119,7 +119,7 @@ export const Coin = styled.span<ICoinProps>`
   text-align: center;
   width: ${props => props.width}px;
   img {
-    max-width: 30px;
+    max-width: 24px;
     margin-right: 16px;
   }
 
