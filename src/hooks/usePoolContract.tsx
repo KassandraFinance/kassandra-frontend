@@ -95,7 +95,8 @@ const usePoolContract = (address: string) => {
       poolSupply: BigNumber, 
       totalWeight: BigNumber, 
       poolAmountIn: BigNumber, 
-      swapFee: BigNumber
+      swapFee: BigNumber,
+      exitFee: BigNumber
     ) => {
       const value = await contract.methods.calcSingleOutGivenPoolIn(
         tokenBalanceOut, 
@@ -103,7 +104,8 @@ const usePoolContract = (address: string) => {
         poolSupply, 
         totalWeight, 
         poolAmountIn, 
-        swapFee
+        swapFee,
+        exitFee
       ).call()
       return new BigNumber(value)
     }
@@ -129,6 +131,11 @@ const usePoolContract = (address: string) => {
 
     const swapFee = async () => {
       const value = await contract.methods.getSwapFee().call()
+      return new BigNumber(value)
+    }
+
+    const exitFee = async () => {
+      const value = await contract.methods.getExitFee().call()
       return new BigNumber(value)
     }
 
@@ -161,6 +168,7 @@ const usePoolContract = (address: string) => {
       normalizedWeight,
       spotPrice,
       swapFee,
+      exitFee,
       totalDenormalizedWeight,
     }
   }, [contract])
