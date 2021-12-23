@@ -4,7 +4,7 @@ import theme from '../../../styles/theme'
 export const Hero = styled.section`
   display: grid;
   align-content: center;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.1fr 1fr;
   grid-column-gap: 6rem;
   margin: 5.6rem auto 10rem;
 
@@ -26,6 +26,13 @@ export const Hero = styled.section`
     }
   }
 `
+
+export const HeroImage = styled.div`
+  img {
+    max-width: 100%;
+  }
+`
+
 export const Divider = styled.div`
   max-width: 10rem;
   border: 1px solid #f79640;
@@ -37,11 +44,11 @@ export const IntroHero = styled.div`
   flex-direction: column;
   justify-content: center;
   h1 {
-    font-size: 4.8rem;
+    font-size: ${theme.font.sizes.font40};
     font-weight: ${theme.font.weight.black};
     text-align: left;
-    max-width: 35.5rem;
-    margin-top: 3.2rem;
+    max-width: 45.5rem;
+    margin-top: 2.8rem;
 
     @media (max-width: 960px) {
       max-width: 100%;
@@ -66,11 +73,14 @@ export const IntroHero = styled.div`
   }
   span {
     font-size: ${theme.font.sizes.font16};
-    letter-spacing: 0.04rem;
+    letter-spacing: 0.4rem;
     color: ${theme.colors.amber};
     margin-top: 10rem;
     @media (max-width: 960px) {
       margin-top: 0;
+    }
+    @media (max-width: 570px) {
+      font-size: ${theme.font.sizes.font14};
     }
   }
 `
@@ -116,7 +126,7 @@ export const Card = styled.div`
   @media (max-width: 488px) {
     display: flex;
     flex-direction: row;
-    margin: 0 0 1.2rem;
+    margin: 0 0 2.4rem;
   }
   p {
     font-size: ${theme.font.sizes.font16};
@@ -176,10 +186,10 @@ export const CardRectangleWrapper = styled.div`
 export const CardRectangle = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: left;
   max-width: 46rem;
-  height: 100%;
+  min-height: 22rem;
   background: #ffffff0a;
   border-radius: 1.2rem;
   padding: 2.4rem;
