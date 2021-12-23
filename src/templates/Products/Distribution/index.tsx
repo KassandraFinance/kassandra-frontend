@@ -135,10 +135,12 @@ const Distribution = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
                   0,
                   0
                 )}`}
-                <S.BalanceCoin>{`${BNtoDecimal(Big(coin.balance_in_pool || 0), Big(0), 2, 2)} ${coin.symbol}`}</S.BalanceCoin>
+                <S.BalanceCoin>{`${BNtoDecimal(Big(coin.balance_in_pool || 0).times(Big(10).pow(18)), Big(18), 2, 2)} ${coin.symbol}`}</S.BalanceCoin>
               </S.Td>
               <S.Td>
-                <span>$ {coin.price.toFixed(2)}</span>
+                <span>${
+                  BNtoDecimal(Big(coin.price || 0).times(Big(10).pow(18)), Big(18), 2, 2)
+                }</span>
                 <S.Coin negative={(changes[index] || 0) < 0} change24h={true}>
                   {changes[index] ? 
                     `${changes[index] < 0 ? '' : '+' }${changes[index].toFixed(2)}%` 
