@@ -26,7 +26,7 @@ const RoadMapSlider = () => {
     className: 'center',
     responsive: [
       {
-        breakpoint: 1050,
+        breakpoint: 960,
         settings: {
           dots: true,
           arrows: false,
@@ -35,13 +35,13 @@ const RoadMapSlider = () => {
         }
       },
       {
-        breakpoint: 570,
+        breakpoint: 700,
         settings: {
           dots: true,
           arrows: false,
           infinite: false,
           slidesToShow: 1,
-          centerPadding: '15px'
+          centerMode: false
         }
       }
     ],
@@ -67,7 +67,6 @@ const RoadMapSlider = () => {
             date={card.date}
             items={card.items}
             icon={card.icon}
-            invisible={card.invisible}
           />
         ))}
       </Slider>

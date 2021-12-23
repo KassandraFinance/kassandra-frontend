@@ -2,21 +2,35 @@ import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 export const CardWrapper = styled.div`
+  border: 2px solid ${props => props.color};
+  border-radius: 16px;
+  background: #21142654;
+
   max-width: 40rem;
-  height: 51rem;
+  min-height: 48rem;
+
   display: flex;
   flex-direction: column;
-  border: 1.5px solid ${props => props.color};
-  border-radius: 0.8rem;
   padding: 3.2rem;
-  margin: 0 32px 0 0;
-  background: #21142654;
-  border-radius: 16px;
+
   backdrop-filter: blur(1.4px);
   -webkit-backdrop-filter: blur(1.4px);
-  @media (max-width: 570px) {
-    margin: 0;
-    height: 45rem;
+
+  @media (min-width: 700px) and (max-width: 800px) {
+    border: 2.5px solid ${props => props.color};
+  }
+
+  @media (max-width: 700px) {
+    margin: 0 auto;
+  }
+  @media (max-width: 440px) {
+    max-width: 38rem;
+  }
+  @media (max-width: 380px) {
+    max-width: 34rem;
+  }
+  @media (max-width: 330px) {
+    max-width: 30rem;
   }
 `
 export const CardHeader = styled.div``

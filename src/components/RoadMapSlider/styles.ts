@@ -3,11 +3,14 @@ import theme from '../../styles/theme'
 
 export const Wrapper = styled.section`
   max-width: 100rem;
-  margin: 0 auto;
-  margin-bottom: 15rem;
-  @media (max-width: 920px) {
+  margin: 0 auto 15rem;
+  padding: 8px 0;
+  @media (max-width: 1100px) {
+    max-width: 86rem;
+  }
+  @media (max-width: 960px) {
     overflow-x: hidden;
-    max-width: 90rem;
+    max-width: 88rem;
   }
 
   .slick-active,
