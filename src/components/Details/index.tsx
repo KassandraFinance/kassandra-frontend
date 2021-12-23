@@ -35,8 +35,8 @@ const staked: any = {
   0: 'KACY',
   1: 'KACY',
   2: 'KACY',
-  3: 'aHYPE',
-  4: 'KEU'
+  4: 'aHYPE',
+  5: 'KAP'
 }
 
 const Details = ({
@@ -83,7 +83,7 @@ const Details = ({
             {BNtoDecimal(new BigNumber(depositedAmount), new BigNumber(18), 2)}{' '}
             {staked[pid]}
           </span>
-          {pid === 4 ? (
+          {pid === 5 ? (
             <span className="usd">
               &#8776;{' '}
               {BNtoDecimal(
@@ -143,16 +143,29 @@ const Details = ({
           </a>
           <img src="/assets/GoToSite.svg" alt="" />
         </S.Link>
-        <S.Link>
-          <a
-            href="https://app.uniswap.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Buy $Kacy
-          </a>
-          <img src="/assets/iconBuyKacy.svg" alt="" />
-        </S.Link>
+        {symbol === 'kap' ? (
+          <S.Link>
+            <a
+              href="https://app.pangolin.exchange/#/add/AVAX/0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Get LP
+            </a>
+            <img src="/assets/iconBuyKacy.svg" alt="" />
+          </S.Link>
+        ) : (
+          <S.Link>
+            <a
+              href="https://app.pangolin.exchange/#/swap?outputCurrency=0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Buy $Kacy
+            </a>
+            <img src="/assets/iconBuyKacy.svg" alt="" />
+          </S.Link>
+        )}
       </S.Info>
       <S.Info>
         <S.Link>
