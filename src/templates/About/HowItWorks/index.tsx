@@ -102,8 +102,8 @@ const HowItWorks = () => {
           <p>
             To create a fully decentralized organization, with a
             well-distributed token, we chose to have a big part of the total
-            supply (50%) slowly available through rewards to people that engage
-            and help Kassandra in the early stages.
+            supply (46.5%) slowly available through rewards to people that
+            engage and help Kassandra in the early stages.
           </p>
         </S.DistributionText>
       </S.DistributionChart>
