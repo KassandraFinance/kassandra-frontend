@@ -29,7 +29,7 @@ interface IModalStakingProps {
   decimals: string;
   stakingToken: string;
   productCategories: string | string[];
-  nameToken: string;
+  symbol: string;
 }
 
 const ModalUnstaking = ({
@@ -39,7 +39,7 @@ const ModalUnstaking = ({
   decimals,
   stakingToken,
   productCategories,
-  nameToken
+  symbol
 }: IModalStakingProps) => {
   const [isAmount, setIsAmount] = React.useState<boolean>(false)
 
@@ -122,26 +122,25 @@ const ModalUnstaking = ({
         -Big(amountUnstaking.toString()).div(Big(10).pow(18)).toNumber(),
         productCategories
       )
-      const tokenSymbol = await kacyToken.symbol()
 
       if (error) {
         trackCancelBuying()
 
         if (error.code === 4001) {
-          ToastError(`Unstaking of ${tokenSymbol} cancelled`)
+          ToastError(`Unstaking of ${symbol} cancelled`)
           return
         }
 
-        ToastError(`Failed to unstake ${tokenSymbol}. Please try again later.`)
+        ToastError(`Failed to unstake ${symbol}. Please try again later.`)
         return
       }
 
       trackBought(productSKU, 0, 0)
-      ToastWarning(`Confirming unstake of ${tokenSymbol}...`)
+      ToastWarning(`Confirming unstake of ${symbol}...`)
       const txReceipt = await waitTransaction(txHash)
 
       if (txReceipt.status) {
-        ToastSuccess(`Unstake of ${tokenSymbol} completed`)
+        ToastSuccess(`Unstake of ${symbol} completed`)
         return
       }
     }
@@ -163,7 +162,7 @@ const ModalUnstaking = ({
           </S.InterBackground>
           <S.Main>
             <S.Amount>
-              <span>${nameToken} Total</span>
+              <span>${symbol} Total</span>
               <InputTokenValue
                 inputRef={inputRef}
                 max={balance.toString(10)}
@@ -249,10 +248,13 @@ const ModalUnstaking = ({
               Confirm
             </S.ConfirmButton>
             <Button
+              as="a"
               backgroundBlack
               fullWidth
               text="Get KACY"
-              type="button"
+              href="https://app.pangolin.exchange/#/swap?outputCurrency=0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setModalOpen(false)}
             />
           </S.Main>

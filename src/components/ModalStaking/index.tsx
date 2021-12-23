@@ -29,7 +29,7 @@ interface IModalStakingProps {
   decimals: string;
   stakingToken: string;
   productCategories: string | string[];
-  nameToken: string;
+  symbol: string;
 }
 
 const ModalStaking = ({
@@ -39,7 +39,7 @@ const ModalStaking = ({
   decimals,
   stakingToken,
   productCategories,
-  nameToken
+  symbol
 }: IModalStakingProps) => {
   const [isAmount, setIsAmount] = React.useState<boolean>(false)
 
@@ -132,26 +132,25 @@ const ModalStaking = ({
         Big(amountStaking.toString()).div(Big(10).pow(18)).toNumber(),
         productCategories
       )
-      const tokenSymbol = await kacyToken.symbol()
 
       if (error) {
         trackCancelBuying()
 
         if (error.code === 4001) {
-          ToastError(`Staking of ${tokenSymbol} cancelled`)
+          ToastError(`Staking of ${symbol} cancelled`)
           return
         }
 
-        ToastError(`Failed to stake ${tokenSymbol}. Please try again later.`)
+        ToastError(`Failed to stake ${symbol}. Please try again later.`)
         return
       }
 
       trackBought(productSKU, 0, 0)
-      ToastWarning(`Confirming stake of ${tokenSymbol}...`)
+      ToastWarning(`Confirming stake of ${symbol}...`)
       const txReceipt = await waitTransaction(txHash)
 
       if (txReceipt.status) {
-        ToastSuccess(`Stake of ${tokenSymbol} confirmed`)
+        ToastSuccess(`Stake of ${symbol} confirmed`)
         return
       }
     }
@@ -163,10 +162,7 @@ const ModalStaking = ({
         onClick={() => setModalOpen(false)}
         style={{ display: modalOpen ? 'block' : 'none' }}
       />
-      <S.BorderGradient
-        modalOpen={modalOpen}
-        stakeInKacy={nameToken === 'KACY'}
-      >
+      <S.BorderGradient modalOpen={modalOpen} stakeInKacy={symbol === 'KACY'}>
         <S.BackgroundBlack>
           <S.InterBackground>
             <span>Stake in Pool</span>
@@ -176,7 +172,7 @@ const ModalStaking = ({
           </S.InterBackground>
           <S.Main>
             <S.Amount>
-              <span>${nameToken} Total</span>
+              <span>${symbol} Total</span>
               <InputTokenValue
                 inputRef={inputRef}
                 max={balance.toString(10)}
@@ -263,11 +259,11 @@ const ModalStaking = ({
             </S.ConfirmButton>
 
             <Button
+              as="a"
               backgroundBlack
               fullWidth
-              size="huge"
               text="Get KACY"
-              href="https://app.uniswap.org"
+              href="https://app.pangolin.exchange/#/swap?outputCurrency=0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setModalOpen(false)}

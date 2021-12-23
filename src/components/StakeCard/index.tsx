@@ -498,7 +498,7 @@ const StakeCard = ({
         decimals={decimals}
         stakingToken={infoStaked.stakingToken}
         productCategories={productCategories}
-        nameToken={staked[pid]}
+        symbol={staked[pid]}
       />
       <ModalUnstaking
         modalOpen={isModalUnstaking}
@@ -507,7 +507,7 @@ const StakeCard = ({
         decimals={decimals}
         stakingToken={infoStaked.stakingToken}
         productCategories={productCategories}
-        nameToken={staked[pid]}
+        symbol={staked[pid]}
       />
       <ModalCancelUnstake
         modalOpen={isModalCancelUnstake}
