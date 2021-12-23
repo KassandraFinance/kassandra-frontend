@@ -7,9 +7,8 @@ export const Container = styled.section`
   align-items: center;
   justify-content: center;
   max-width: 96.4rem;
-  margin: 0 auto;
+  margin: 0 auto 4rem;
   @media (max-width: 1100px) {
-    margin: 0 auto;
     padding: 0 3.2rem;
   }
 `
@@ -29,6 +28,9 @@ export const Title = styled.h2`
   @media (max-width: 810px) {
     font-size: ${theme.font.sizes.font32};
     margin: 0 auto 4.4rem;
+  }
+  @media (max-width: 375px) {
+    font-size: ${theme.font.sizes.font24};
   }
 `
 export const ScheduleGraphWrapper = styled.div`
@@ -74,6 +76,9 @@ export const TitleandIcon = styled.div`
     font-weight: ${theme.font.weight.bold};
     color: #ffffff;
     line-height: 104%;
+    @media (max-width: 375px) {
+      font-size: ${theme.font.sizes.font20};
+    }
   }
 `
 export const Icon = styled.img`

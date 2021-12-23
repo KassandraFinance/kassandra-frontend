@@ -30,10 +30,10 @@ const About = () => {
         <Products />
         <KassandraTokenCard />
         <HowItWorks />
-        <KacyOverView />
+        {/* <KacyOverView /> */}
       </S.Background>
       <Team />
-      <Partners />
+      {/* <Partners /> */}
       <FAQ />
       <Community />
       <SubscribeBanner />

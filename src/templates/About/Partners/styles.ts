@@ -31,6 +31,9 @@ export const Title = styled.h1`
   @media (max-width: 810px) {
     font-size: ${theme.font.sizes.font32};
   }
+  @media (max-width: 375px) {
+    font-size: ${theme.font.sizes.font24};
+  }
 `
 
 export const Icon = styled.div`

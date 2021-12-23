@@ -5,14 +5,21 @@ import * as S from './styles'
 interface QuestionCardProps {
   question: string;
   answer: string;
+  link?: string;
+  linkText?: string;
 }
 
-const QuestionCard = ({ question, answer }: QuestionCardProps) => {
+const QuestionCard = ({
+  question,
+  answer,
+  link,
+  linkText
+}: QuestionCardProps) => {
   const [isOpen, setIsOpen] = React.useState(false)
 
   return (
-    <S.Question onClick={() => setIsOpen(!isOpen)}>
-      <S.QuestionText>
+    <S.Question>
+      <S.QuestionText onClick={() => setIsOpen(!isOpen)}>
         {question}
         {isOpen ? (
           <img src="assets/FAQ-minus-icon.svg" />
@@ -21,7 +28,14 @@ const QuestionCard = ({ question, answer }: QuestionCardProps) => {
         )}
       </S.QuestionText>
       <S.Answer isOpen={isOpen}>
-        <S.AnswerText>{answer}</S.AnswerText>
+        <S.AnswerText>
+          {answer}
+          {
+            <a href={link} target="_blank" rel="noreferrer">
+              {linkText}
+            </a>
+          }
+        </S.AnswerText>
       </S.Answer>
     </S.Question>
   )

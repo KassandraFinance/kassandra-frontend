@@ -33,14 +33,21 @@ interface IOpen {
 // eslint-disable-next-line prettier/prettier
 export const Answer = styled.div<IOpen>`
   margin: ${props => (props.isOpen ? '2.4rem 2.4rem 0' : '0 2.4rem 0')};
-  max-height: ${props => (props.isOpen ? '10rem' : '0')};
+  max-height: ${props => (props.isOpen ? 'auto' : '0')};
   overflow: hidden;
   display: flex;
   transition: all 0.3s ease-in-out;
 `
 export const AnswerText = styled.p`
+  display: block;
   font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.light};
   line-height: 180%;
   color: #ffffff;
+  a {
+    font-size: ${theme.font.sizes.font16};
+    font-weight: ${theme.font.weight.light};
+    line-height: 180%;
+    color: #ffffff;
+  }
 `
