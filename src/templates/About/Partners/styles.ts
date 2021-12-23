@@ -9,7 +9,7 @@ export const Container = styled.section`
   margin: 0 auto 9rem;
   border-bottom: 1px solid #ffffff24;
   @media (max-width: 960px) {
-    padding: 0 3.2rem;
+    margin: 0 3.2rem 9rem;
   }
   @media (max-width: 820px) {
     flex-direction: column;
@@ -30,6 +30,9 @@ export const Title = styled.h1`
   color: #ffffff;
   @media (max-width: 810px) {
     font-size: ${theme.font.sizes.font32};
+  }
+  @media (max-width: 375px) {
+    font-size: ${theme.font.sizes.font24};
   }
 `
 

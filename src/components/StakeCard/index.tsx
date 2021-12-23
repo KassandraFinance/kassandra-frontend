@@ -273,7 +273,7 @@ const StakeCard = ({
               />
             ) : null}
             {symbol === 'kap' ? (
-              <img src="assets/stake-kacy-eth-uni.png" alt="" width={144} />
+              <img src="assets/kap.svg" alt="" width={144} />
             ) : null}
             <S.IntroStaking>
               <S.APR>

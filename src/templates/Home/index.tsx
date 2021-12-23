@@ -10,12 +10,12 @@ import CountdownBanner from '../../components/CountdownBanner'
 import Token from './Token'
 import KassandraTokenCard from '../../components/KassandraTokenCard'
 import KassandraArchitecture from './KassandraArchitecture'
-import TokenDistribution from './TokenDistribution'
 import SubscribeBanner from '../../components/SubscribeBanner'
-import BannerCTA from '../../components/BannerCTA'
-import RoadMap from './RoadMap'
 
 import * as S from './styles'
+import RoadMapSlider from '../../components/RoadMapSlider'
+
+const poolPlatform = 'Fuji'
 
 const Home = () => {
   const { trackPageView } = useMatomo()
@@ -42,12 +42,10 @@ const Home = () => {
         </Link>
         <Products />
         <ClassProducts />
-        {/* <Token /> */}
+        <Token poolPlatform={poolPlatform} />
         <KassandraTokenCard />
         <KassandraArchitecture />
-        {/* <TokenDistribution /> */}
-        {/* <BannerCTA /> */}
-        <RoadMap />
+        <RoadMapSlider />
         <CountdownBanner />
         <SubscribeBanner />
       </S.Background>

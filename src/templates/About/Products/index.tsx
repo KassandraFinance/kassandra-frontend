@@ -18,13 +18,13 @@ const Products = () => {
             <h3>PROTOCOL</h3>
           </S.MobileCardTitle>
           <p>
-            A cursus quis maecenas mi. Porttitor et, a, adipiscing arcu amet
-            eleifend sed. Eget sed libero vitae id facilisi lacus, risus.
-            Consectetur bibendum in porta neque. Mi id augue massa sagittis,
-            velit mollis volutpat, pretium.{' '}
+            The Kassandra Protocol is the core technology that allows the DAO to
+            deploy investment products. It starts from the premise of building
+            tokenized investment baskets that are permissionless, non-custodial,
+            and actively managed, but yet monetary efficient.
           </p>
           <S.Link
-            href="https://drive.google.com/file/d/12jxIMtBVqaY7bMbLmt52Lo0xDFUURZsb/view?usp=sharing"
+            href="https://kassandrafoundation.medium.com/kassandra-protocol-d9cb71c02b02"
             target="_blank"
             rel="noopener noreferral"
           >
@@ -63,13 +63,12 @@ const Products = () => {
             <h3>DAO</h3>
           </S.MobileCardTitle>
           <p>
-            A cursus quis maecenas mi. Porttitor et, a, adipiscing arcu amet
-            eleifend sed. Eget sed libero vitae id facilisi lacus, risus.
-            Consectetur bibendum in porta neque. Mi id augue massa sagittis,
-            velit mollis volutpat, pretium.{' '}
+            The Kassandra DAO is the only owner of Kassandra Protocol, which is
+            represented by the KACY token holders and earns with management fees
+            over all the Kassandra investment funds.
           </p>
           <S.Link
-            href="https://drive.google.com/file/d/12jxIMtBVqaY7bMbLmt52Lo0xDFUURZsb/view?usp=sharing"
+            href="https://kassandrafoundation.medium.com/kassandra-dao-token-8bc046d55a00"
             target="_blank"
             rel="noopener noreferral"
           >
@@ -108,13 +107,13 @@ const Products = () => {
             <h3>FOUNDATION</h3>
           </S.MobileCardTitle>
           <p>
-            A cursus quis maecenas mi. Porttitor et, a, adipiscing arcu amet
-            eleifend sed. Eget sed libero vitae id facilisi lacus, risus.
-            Consectetur bibendum in porta neque. Mi id augue massa sagittis,
-            velit mollis volutpat, pretium.{' '}
+            The Kassandra Foundation is the entity funded by the token sales
+            events, that is runned by the core team of Kassandra founders, with
+            the purpose to promote and develop Kassandra in both technological
+            and marketing aspects.
           </p>
           <S.Link
-            href="https://drive.google.com/file/d/12jxIMtBVqaY7bMbLmt52Lo0xDFUURZsb/view?usp=sharing"
+            href=" https://kassandrafoundation.medium.com/kassandra-foundation-team-4f46bf13c887"
             target="_blank"
             rel="noopener noreferral"
           >

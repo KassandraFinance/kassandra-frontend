@@ -38,6 +38,9 @@ export const Title = styled.h1`
   @media (max-width: 810px) {
     font-size: ${theme.font.sizes.font32};
   }
+  @media (max-width: 375px) {
+    font-size: ${theme.font.sizes.font24};
+  }
 `
 export const Divider = styled.div`
   max-width: 10rem;
@@ -63,6 +66,7 @@ export const Grid = styled.div`
     padding: 0 3.2rem;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
+    background-image: none;
   }
   @media (max-width: 520px) {
     margin: 2.4rem auto 4rem;

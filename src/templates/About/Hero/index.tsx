@@ -11,16 +11,21 @@ const Hero = () => {
       <S.Hero>
         <S.IntroHero>
           <span>ABOUT US</span>
-          <h1>Curated tokenized data-driven investiment strategies </h1>
+          <h1>
+            An audacious project to delegate money management in a
+            decentralized, efficient, and customizable way{' '}
+          </h1>
         </S.IntroHero>
-        <img src="assets/kassandra-about.svg" alt="" className="kassandra" />
+        <S.HeroImage>
+          <img src="assets/kassandra-about.svg" alt="" className="kassandra" />
+        </S.HeroImage>
         <S.IntroTextWrapper>
           <S.Divider />
           <p>
             Kassandra is a decentralized autonomous organization that governs a
             set of tokenized data-driven investment funds, bringing a new class
             of investment products to the DeFi ecosystem: actively managed
-            investment investment baskets without compromising the pillars of
+            investment baskets without compromising the pillars of
             decentralization.
           </p>
         </S.IntroTextWrapper>
@@ -63,19 +68,19 @@ const Hero = () => {
       </S.Hero>
       <S.CardRectangleWrapper>
         <S.CardRectangle>
-          <span>VISION</span>
+          <span>For managers</span>
           <p>
-            Donec pulvinar congue fusce massa arcu est enim sed. Morbi odio
-            viverra maecenas eget mattis. Velit erat cras vulputate diam nunc
-            consequat lorem ullamcorper.
+            Kassandra is a plug-and-earn solution to port complex money
+            management strategies to decentralized ecosystems, saving time and
+            costs when compared to the traditional market, helping managers to
+            raise funds without the need for complex infrastructure.
           </p>
         </S.CardRectangle>
         <S.CardRectangle>
-          <span>MISSION</span>
+          <span>For investors</span>
           <p>
-            Donec pulvinar congue fusce massa arcu est enim sed. Morbi odio
-            viverra maecenas eget mattis. Velit erat cras vulputate diam nunc
-            consequat lorem ullamcorper.
+            Kassandra democratizes access to robust data models and quantitative
+            analysts leveraging portfolio optimization and potential gains.
           </p>
         </S.CardRectangle>
       </S.CardRectangleWrapper>
