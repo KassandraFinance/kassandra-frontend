@@ -48,7 +48,7 @@ const FAQ = () => {
       <QuestionCard
         question="How does the token distribution works?"
         answer={`You can read our full tokenomics in the following image `}
-        link="https://miro.medium.com/max/553/0*O5Jdzia5Skm7LT_T.png"
+        link="https://kassandrafoundation.medium.com/kassandra-dao-token-8bc046d55a00"
         linkText="here"
       />
     </S.Container>

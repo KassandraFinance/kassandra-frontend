@@ -55,7 +55,7 @@ export const IntroHero = styled.div`
     }
 
     @media (max-width: 770px) {
-      margin-bottom: 40px;
+      margin: 12px 0 40px;
     }
     @media (max-width: 600px) {
       font-size: 36px;

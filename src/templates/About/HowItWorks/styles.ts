@@ -9,6 +9,8 @@ export const Container = styled.section`
   max-width: 96.4rem;
   margin: 0 auto 4rem;
   @media (max-width: 1100px) {
+    align-items: flex-start;
+    justify-content: flex-start;
     padding: 0 3.2rem;
   }
 `
@@ -17,6 +19,9 @@ export const Divider = styled.div`
   height: 0.3rem;
   background-color: #e843c4;
   margin: 0 auto 2rem;
+  @media (max-width: 1100px) {
+    margin: 0 0 2rem;
+  }
 `
 
 export const Title = styled.h2`
@@ -25,9 +30,11 @@ export const Title = styled.h2`
   color: #ffffff;
   line-height: 110%;
   margin: 0 auto 9.4rem;
+  @media (max-width: 1100px) {
+    margin: 0 0 4.4rem;
+  }
   @media (max-width: 810px) {
     font-size: ${theme.font.sizes.font32};
-    margin: 0 auto 4.4rem;
   }
   @media (max-width: 375px) {
     font-size: ${theme.font.sizes.font24};
