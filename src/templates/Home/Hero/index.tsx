@@ -34,7 +34,7 @@ const Hero = () => {
             backgroundPrimary
             size="large"
             as="a"
-            text="See Your Funds"
+            text="Explore Our Products"
             icon={<img src="/assets/avalancheIcon.svg" alt="" />}
             onClick={() => clickMatomoEvent('click-to-cta', 'hero')}
           />
