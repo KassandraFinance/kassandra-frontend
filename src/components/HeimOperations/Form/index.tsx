@@ -285,30 +285,45 @@ const Form = ({
           corePool.swapFee()
         ])
 
-        const [newSwapOutAmount, newSwapOutPrice] = await Promise.all([
-          corePool.calcPoolOutGivenSingleIn(
+        try {
+          const newSwapOutAmount = await corePool.calcPoolOutGivenSingleIn(
             swapInTotalPoolBalance,
             swapInDenormalizedWeight,
             poolSupply,
             poolTotalDenormalizedWeight,
             swapInAmount,
             poolSwapFee
-          ),
-          corePool.calcPoolOutGivenSingleIn(
-            swapInTotalPoolBalance,
-            swapInDenormalizedWeight,
-            poolSupply,
-            poolTotalDenormalizedWeight,
-            wei,
-            poolSwapFee
           )
-        ])
+          setSwapOutAmount([newSwapOutAmount])
+        } catch (error) {
+          ToastWarning("This amount is too large for the pool! The transaction will revert!")
+        }
 
-        setSwapOutAmount([newSwapOutAmount])
+        let newSwapOutPrice;
+        let pow = new BigNumber(0);
+
+        while (!newSwapOutPrice) {
+          try {
+            const multiplier = new BigNumber(10).pow(pow)
+            newSwapOutPrice = await corePool.calcPoolOutGivenSingleIn(
+              swapInTotalPoolBalance,
+              swapInDenormalizedWeight,
+              poolSupply,
+              poolTotalDenormalizedWeight,
+              wei.div(multiplier),
+              poolSwapFee
+            )
+            newSwapOutPrice = newSwapOutPrice.mul(multiplier)
+          } catch(e) {
+            pow = pow.add(new BigNumber(1));
+          }
+        }
+
         setSwapOutPrice(newSwapOutPrice)
       } catch (error) {
-        ToastWarning("This amount is too large for the pool!")
+        ToastWarning("Could not connect with the blockchain to calculate prices.")
       }
+
     }
 
     calc()
@@ -327,34 +342,39 @@ const Form = ({
     }
 
     const calc = async () => {
-      const [
-        swapInTotalPoolBalance,
-        swapOutTotalPoolBalance,
-        swapInDenormalizedWeight,
-        swapOutDenormalizedWeight,
-        poolSwapFee
-      ] = await Promise.all([
-        corePool.balance(swapInAddress),
-        corePool.balance(swapOutAddress),
-        corePool.denormalizedWeight(swapInAddress),
-        corePool.denormalizedWeight(swapOutAddress),
-        corePool.swapFee()
-      ])
-
-      const [newSwapOutPrice, newSwapOutAmount] = await Promise.all([
-        corePool.spotPrice(swapOutAddress, swapInAddress),
-        corePool.calcOutGivenIn(
+      try {
+        const [
           swapInTotalPoolBalance,
-          swapInDenormalizedWeight,
           swapOutTotalPoolBalance,
+          swapInDenormalizedWeight,
           swapOutDenormalizedWeight,
-          swapInAmount,
           poolSwapFee
-        )
-      ])
+        ] = await Promise.all([
+          corePool.balance(swapInAddress),
+          corePool.balance(swapOutAddress),
+          corePool.denormalizedWeight(swapInAddress),
+          corePool.denormalizedWeight(swapOutAddress),
+          corePool.swapFee()
+        ])
 
-      setSwapOutAmount([newSwapOutAmount])
-      setSwapOutPrice(newSwapOutPrice)
+        const [newSwapOutPrice, newSwapOutAmount] = await Promise.all([
+          corePool.spotPrice(swapOutAddress, swapInAddress),
+          corePool.calcOutGivenIn(
+            swapInTotalPoolBalance,
+            swapInDenormalizedWeight,
+            swapOutTotalPoolBalance,
+            swapOutDenormalizedWeight,
+            swapInAmount,
+            poolSwapFee
+          )
+        ])
+
+        setSwapOutAmount([newSwapOutAmount])
+        setSwapOutPrice(newSwapOutPrice)
+      }
+      catch(e) {
+        ToastWarning("Could not connect with the blockchain to calculate prices.")
+      }
     }
 
     calc()
@@ -369,21 +389,25 @@ const Form = ({
     const getWithdrawAmount = (
       supplyPoolToken: BigNumber,
       amountPoolToken: BigNumber,
-      balanceOut: BigNumber
+      balanceOut: BigNumber,
+      exitFee: BigNumber
     ): BigNumber => {
       if (supplyPoolToken.toString(10) === '0') {
         return new BigNumber(0)
       }
 
       return amountPoolToken
-        .mul(new BigNumber(97))
+        .mul(wei.sub(exitFee).mul(new BigNumber(100)).div(wei))
         .mul(balanceOut)
         .div(supplyPoolToken)
         .div(new BigNumber(100))
     }
 
     const calc = async () => {
-      const poolSupply = await crpPoolToken.totalSupply()
+      const [poolSupply, poolExitFee] = await Promise.all([
+        crpPoolToken.totalSupply(),
+        corePool.exitFee()
+      ])
 
       if (swapOutAddress === '') {
         const newSwapOutAmount = await Promise.all(
@@ -392,7 +416,8 @@ const Form = ({
             return getWithdrawAmount(
               poolSupply,
               swapInAmount,
-              swapOutTotalPoolBalance
+              swapOutTotalPoolBalance,
+              poolExitFee
             )
           })
         )
@@ -400,38 +425,47 @@ const Form = ({
         return
       }
 
-      const [
-        swapOutTotalPoolBalance,
-        swapOutDenormalizedWeight,
-        poolTotalDenormalizedWeight,
-        poolSwapFee
-      ] = await Promise.all([
-        corePool.balance(swapOutAddress),
-        corePool.denormalizedWeight(swapOutAddress),
-        corePool.totalDenormalizedWeight(),
-        corePool.swapFee()
-      ])
+      try {
+        const [
+          swapOutTotalPoolBalance,
+          swapOutDenormalizedWeight,
+          poolTotalDenormalizedWeight,
+          poolSwapFee
+        ] = await Promise.all([
+          corePool.balance(swapOutAddress),
+          corePool.denormalizedWeight(swapOutAddress),
+          corePool.totalDenormalizedWeight(),
+          corePool.swapFee()
+        ])
 
-      const [SingleSwapOutAmount, newSwapOutPrice] = await Promise.all([
-        corePool.calcSingleOutGivenPoolIn(
-          swapOutTotalPoolBalance,
-          swapOutDenormalizedWeight,
-          poolSupply,
-          poolTotalDenormalizedWeight,
-          swapInAmount,
-          poolSwapFee
-        ), 
-        corePool.calcSingleOutGivenPoolIn(
-          swapOutTotalPoolBalance,
-          swapOutDenormalizedWeight,
-          poolSupply,
-          poolTotalDenormalizedWeight,
-          wei,
-          poolSwapFee
-        )
-      ])
-      setSwapOutAmount([SingleSwapOutAmount])
-      setSwapOutPrice(newSwapOutPrice)
+        const [SingleSwapOutAmount] = await Promise.all([
+          corePool.calcSingleOutGivenPoolIn(
+            swapOutTotalPoolBalance,
+            swapOutDenormalizedWeight,
+            poolSupply,
+            poolTotalDenormalizedWeight,
+            swapInAmount,
+            poolSwapFee,
+            poolExitFee
+          ),
+        ])
+        const [newSwapOutPrice] = await Promise.all([
+          corePool.calcSingleOutGivenPoolIn(
+            swapOutTotalPoolBalance,
+            swapOutDenormalizedWeight,
+            poolSupply,
+            poolTotalDenormalizedWeight,
+            wei,
+            poolSwapFee,
+            poolExitFee
+          )
+        ])
+        setSwapOutAmount([SingleSwapOutAmount])
+        setSwapOutPrice(newSwapOutPrice)
+      }
+      catch(e) {
+        ToastWarning("Could not connect with the blockchain to calculate prices.")
+      }
     }
 
     calc()
