@@ -821,7 +821,7 @@ const Form = ({
             as='a'
             backgroundPrimary
             fullWidth
-            href="https://metamask.io/download.html                          "
+            href="https://metamask.io/download.html"
             target="_blank"
             text='Install MetaMask'
           />

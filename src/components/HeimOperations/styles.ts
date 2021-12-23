@@ -22,6 +22,7 @@ export const HeimOperationsContainer = styled.div<IHeimOperationsContainerProps>
   position: -webkit-sticky;
   position: sticky; 
   top: 20px;
+  z-index: 10;
   
   @media (max-width: 1200px) {
     margin: 0 auto;
