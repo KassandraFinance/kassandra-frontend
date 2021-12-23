@@ -16,11 +16,16 @@ import CustomizedAxisTick from './CustomizedAxisTick'
 
 import { BNtoDecimal } from '../../utils/numerals'
 
-const ChartPrice = (props: any) => {
+interface IChartPriceProps {
+  data: any[];
+  color: string;
+}
+
+const ChartPrice = ({ data, color }: IChartPriceProps) => {
   return (
     <ResponsiveContainer width="100%" height={360}>
       <AreaChart
-        data={props.data}
+        data={data}
         style={{
           backgroundColor: 'rgba(255, 255, 255, 0.04)',
           border: '1px solid rgba(255, 255, 255, 0.04)',
@@ -31,8 +36,8 @@ const ChartPrice = (props: any) => {
       >
         <defs>
           <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor={props.color} stopOpacity={0.3} />
-            <stop offset="100%" stopColor={props.color} stopOpacity={0} />
+            <stop offset="0%" stopColor={color} stopOpacity={0.3} />
+            <stop offset="100%" stopColor={color} stopOpacity={0} />
           </linearGradient>
         </defs>
         <XAxis
@@ -64,20 +69,20 @@ const ChartPrice = (props: any) => {
           wrapperStyle={{
             visibility: 'visible'
           }}
-          cursor={{ stroke: props.color }}
+          cursor={{ stroke: color }}
           position={{ x: 20, y: 60 }}
           content={
             <TooltipCustomized
               chart="price"
               payload={[]}
-              currentPrice={props.data[props.data.length - 1]}
+              currentPrice={data[data.length - 1]}
             />
           }
         />
         <Area
           type="monotone"
           dataKey="close"
-          stroke={props.color}
+          stroke={color}
           fillOpacity={1}
           fill="url(#colorUv)"
         />

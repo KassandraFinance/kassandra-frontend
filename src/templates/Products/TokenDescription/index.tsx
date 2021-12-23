@@ -104,8 +104,7 @@ const TokenDescription = () => {
           cryptocurrencies:{' '}
         </span>
         <ol>
-          <li> wbtc, eth, matic,link, uni, sushi, aave,</li>
-          <li>chz, yfi, theta, rsr, grt, enj, ocean.</li>
+          <li> wavax, qi, kacy, png, joe.k, yak.k</li>
         </ol>
         <h2>Index Value</h2>
         <p>The value of the index is given by:</p>
