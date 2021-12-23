@@ -16,6 +16,8 @@ import avaxSocial from '../../../../public/assets/avalanche_social_index_logo.sv
 import * as S from './styles'
 
 interface IInputEthProps {
+  clearInput: () => void
+  inputRef: React.RefObject<HTMLInputElement>;
   actionString: string;
   poolTokens: TokenDetails[];
   tokenDetails: TokenDetails;
@@ -30,6 +32,8 @@ interface IInputEthProps {
 }
 
 const InputTokens = ({
+  clearInput,
+  inputRef,
   actionString,
   poolTokens,
   tokenDetails,
@@ -45,7 +49,6 @@ const InputTokens = ({
   const [currentMax, setCurrentMax] = React.useState<BigNumber>(new BigNumber(0))
 
   const { trackEvent } = useMatomo()
-  const inputRef = React.useRef<HTMLInputElement>(null)
 
   function matomoEvent(action: string, name: string) {
     trackEvent({
@@ -95,15 +98,6 @@ const InputTokens = ({
       setSwapInAmount(swapInBalance)
       setMaxActive(true)
       setCurrentMax(swapInBalance)
-    }
-  }
-
-  const clearInput = () => {
-    setSwapInAmount(new BigNumber(0))
-    setSwapOutAmount([new BigNumber(0)])
-
-    if (inputRef.current !== null) {
-      inputRef.current.value = '0'
     }
   }
 

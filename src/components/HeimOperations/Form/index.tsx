@@ -89,6 +89,8 @@ const Form = ({
   const { trackEvent } = useMatomo()
   const dispatch = useDispatch()
 
+  const inputTokenRef = React.useRef<HTMLInputElement>(null)
+
   const { data } = useSWR([GET_INFO_AHYPE, HeimCRPPOOL],
     (query, id) => request(SUBGRAPH_URL, query, { id }))
 
@@ -100,6 +102,15 @@ const Form = ({
     })
   }
   
+  function clearInput() {
+    setSwapInAmount(new BigNumber(0))
+    setSwapOutAmount([new BigNumber(0)])
+
+    if (inputTokenRef.current !== null) {
+      inputTokenRef.current.value = '0'
+    }
+  }
+
   React.useEffect(() => {
     if (data) {
       const aHYPE: TokenDetails = {
@@ -719,6 +730,8 @@ const Form = ({
             .toString()
       } />
       <InputTokens
+        clearInput={clearInput}
+        inputRef={inputTokenRef}
         actionString={typeAction}
         poolTokens={
           title === 'Withdraw'
@@ -819,6 +832,7 @@ const Form = ({
       )}
       {userWalletAddress ? (
         <Button
+          onClick={() => setTimeout(() => clearInput(), 2000)}
           backgroundPrimary
           disabledNoEvent={swapInAmount.toString() === "0" && isApproved[tokenInIndex]}
           fullWidth
