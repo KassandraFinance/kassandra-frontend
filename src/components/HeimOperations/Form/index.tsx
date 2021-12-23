@@ -438,13 +438,6 @@ const Form = ({
           corePool.swapFee()
         ])
 
-        console.log(swapOutTotalPoolBalance.toString())
-        console.log(swapOutDenormalizedWeight.toString())
-        console.log(poolSupply.toString())
-        console.log(poolTotalDenormalizedWeight.toString())
-        console.log(swapInAmount.toString())
-        console.log(poolSwapFee.toString())
-
         const [SingleSwapOutAmount] = await Promise.all([
           corePool.calcSingleOutGivenPoolIn(
             swapOutTotalPoolBalance,
