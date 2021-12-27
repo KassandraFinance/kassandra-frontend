@@ -77,15 +77,6 @@ const Header = () => {
     }
   }, [isOpen])
 
-  React.useEffect(() => {
-    if (screen.width < 700) {
-      localStorage.setItem('device', 'isMobile')
-      return
-    }
-    localStorage.setItem('device', 'isNotMobile')
-
-  }, [])
-
   return (
     <>
       <S.Wrapper pageHeim={asPath === '/heim'}>

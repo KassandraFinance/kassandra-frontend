@@ -98,10 +98,13 @@ const Products = () => {
   }, [userWalletAddress])
 
   React.useEffect(() => {
+    if (screen.width < 700) {
+      setIsMobile(true)
+      return
+    }
+
     trackProductPageView(poolAddress, poolSymbol, poolCategories)
 
-    const device = localStorage.getItem('device')
-    setIsMobile(device === 'isMobile')
 
     setTimeout(() => {
       setLoading(false)
