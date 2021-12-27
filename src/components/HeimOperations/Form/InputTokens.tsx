@@ -82,7 +82,7 @@ const InputTokens = ({
   }, [poolTokens])
 
   const wei2String = (input: BigNumber) => {
-    return BNtoDecimal(input, decimals).replace(/ /g, '')
+    return BNtoDecimal(input, decimals).replace(/\u00A0/g, '')
   }
 
   const setMax = () => {
