@@ -49,12 +49,12 @@ const StakeFarm = () => {
 
 
   React.useEffect(() => {
-    if (screen.width < 700) {
-      setIsMobile(true)
-      return
-    }
-
     trackCategoryPageView(['Stake', 'Fuji'])
+
+    if (screen.width < 700) {
+      setLoading(false)
+      setIsMobile(true)
+    }
 
     setTimeout(() => {
       setLoading(false)

@@ -98,13 +98,12 @@ const Products = () => {
   }, [userWalletAddress])
 
   React.useEffect(() => {
-    if (screen.width < 700) {
-      setIsMobile(true)
-      return
-    }
-
     trackProductPageView(poolAddress, poolSymbol, poolCategories)
 
+    if (screen.width < 700) {
+      setLoading(false)
+      setIsMobile(true)
+    }
 
     setTimeout(() => {
       setLoading(false)
