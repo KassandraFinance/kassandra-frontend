@@ -322,7 +322,7 @@ const StakeCard = ({
                         : ' days'}
                     </span>
                   </p>
-                  <Tippy content="Time your asset will be locked before you can withdraw it.">
+                  <Tippy content="Time your asset will remain locked after you request the withdraw.">
                     <S.TooltipAPR>
                       <Image
                         src={infoGrayIcon}

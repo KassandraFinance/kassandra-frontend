@@ -74,7 +74,7 @@ const ModalUnstaking = ({
         kacyAmount,
         new BigNumber(18),
         2
-      ).replace('\u00A0', '')
+      ).replace(/\u00A0/g, '')
     }
 
     matomoEvent('click-value-btn', BNtoDecimal(percentage, new BigNumber(18)))
