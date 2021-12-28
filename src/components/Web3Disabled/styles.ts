@@ -32,6 +32,10 @@ export const Header = styled.div`
 
   img {
     margin-right: ${theme.spacings.space16};
+    @media (max-width: 440px) {
+      width: 20px;
+      margin-right: ${theme.spacings.space8};
+    }
   }
   p {
     font-size: ${theme.font.sizes.font18};
@@ -39,9 +43,16 @@ export const Header = styled.div`
     @media (max-width: 700px) {
       font-size: ${theme.font.sizes.font16};
     }
+    @media (max-width: 440px) {
+      font-size: ${theme.font.sizes.font14};
+    }
   }
   @media (max-width: 700px) {
     height: 56px;
+  }
+  @media (max-width: 440px) {
+    padding: 12px;
+    height: 100%;
   }
 `
 
@@ -61,6 +72,7 @@ export const Body = styled.div`
   height: 200px;
   @media (max-width: 700px) {
     height: 140px;
+    padding: 24px;
   }
 
   p {
@@ -68,6 +80,9 @@ export const Body = styled.div`
     font-weight: ${theme.font.weight.light};
     @media (max-width: 700px) {
       font-size: ${theme.font.sizes.font14};
+    }
+    @media (max-width: 440px) {
+      font-size: ${theme.font.sizes.font12};
     }
   }
   button {
