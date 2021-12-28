@@ -7,11 +7,13 @@ export const Container = styled.section`
   align-items: center;
   justify-content: center;
   max-width: 96.4rem;
-  margin: 0 auto 4rem;
+  margin: 0 auto 15rem;
   @media (max-width: 1100px) {
     align-items: flex-start;
     justify-content: flex-start;
     padding: 0 3.2rem;
+    margin: 0 auto 4rem;
+
   }
 `
 export const Divider = styled.div`
