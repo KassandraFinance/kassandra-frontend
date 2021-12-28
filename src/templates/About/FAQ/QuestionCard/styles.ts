@@ -39,15 +39,19 @@ export const Answer = styled.div<IOpen>`
   transition: all 0.3s ease-in-out;
 `
 export const AnswerText = styled.p`
-  display: block;
+  position: relative;
   font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.light};
   line-height: 180%;
   color: #ffffff;
   a {
+    text-decoration: underline;
+    position: relative;
+    color: ${theme.colors.snow};
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.light};
-    line-height: 180%;
-    color: #ffffff;
+    &:hover {
+      color: ${theme.colors.cyan};
+    }
   }
 `
