@@ -52,8 +52,10 @@ const StakeFarm = () => {
     trackCategoryPageView(['Stake', 'Fuji'])
 
     if (screen.width < 700) {
-      setLoading(false)
-      setIsMobile(true)
+      setTimeout(() => {
+        setIsMobile(true)
+        setLoading(false)
+      }, 600)
     }
 
     setTimeout(() => {
@@ -175,11 +177,11 @@ const StakeFarm = () => {
         </>
         :
         <>
-          {isMobile && (
+          {!loading && isMobile && (
             <Web3Disabled
               textButton="asd"
               textHeader="You are on a mobile device"
-              bodyText="To access the Stake/Farm and Products page, go to a computer."
+              bodyText="The Stake/Farm page can only be accessed by a computer"
               type="isMobile"
             />
           )}

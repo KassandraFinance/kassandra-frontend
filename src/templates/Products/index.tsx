@@ -134,7 +134,7 @@ const Products = () => {
         <Web3Disabled
           textButton="asd"
           textHeader="You are on a mobile device"
-          bodyText="To access the Stake/Farm and Products page, go to a computer."
+          bodyText="The Invest page can only be accessed by a computer"
           type="isMobile"
         />
       )}
@@ -216,7 +216,7 @@ const Products = () => {
         </S.Product>
         :
         <>
-          {!web3.currentProvider && !loading && (
+          {!web3.currentProvider && !loading && !isMobile && (
             <Web3Disabled
               textButton="Install Metamask"
               textHeader="Looks like you don't have the metamask wallet installed"
