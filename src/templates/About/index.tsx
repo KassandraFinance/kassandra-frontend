@@ -33,8 +33,8 @@ const About = () => {
         {/* <KacyOverView /> */}
       </S.Background>
       <Team />
-      {/* <Partners /> */}
       <FAQ />
+      {/* <Partners /> */}
       <Community />
       <SubscribeBanner />
     </>
