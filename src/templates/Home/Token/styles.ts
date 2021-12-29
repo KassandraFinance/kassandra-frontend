@@ -92,16 +92,17 @@ export const CardHeader = styled.div`
 
   z-index: -9;
 `
-export const ImageWrapper = styled.img`
+export const ImageWrapper = styled.div`
+  width: 96px;
+  height: 96px;
+
   display: flex;
   justify-content: center;
   position: absolute;
 
-  margin-top: 36px;
-  margin-left: 57px;
-  img {
-    max-width: 60%;
-  }
+  margin-top: 45px;
+  margin-left: 45px;
+
   @media (max-width: 960px) {
     width: 80px;
     height: 80px;
