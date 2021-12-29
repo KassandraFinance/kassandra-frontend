@@ -4,26 +4,33 @@ import theme from '../../../styles/theme'
 import * as ButtonStyles from '../../../components/Button/styles'
 
 export const Token = styled.section`
+  text-align: center;
+
   margin: 0 auto 160px;
   padding: 0 32px;
-  text-align: center;
+
   @media (max-width: 960px) {
     padding: 0 32px;
   }
+
   span {
-    display: flex;
     font-size: ${theme.font.sizes.font16};
     line-height: 155%;
+
     max-width: 500px;
+    display: flex;
     margin: 0 auto;
   }
+
   h1 {
-    max-width: 620px;
     font-size: ${theme.font.sizes.font48};
     font-weight: ${theme.font.weight.black};
     line-height: 104%;
+
+    max-width: 620px;
     margin: auto;
     margin-bottom: ${theme.spacings.space24};
+
     @media (max-width: 960px) {
       font-size: ${theme.font.sizes.font36};
     }
@@ -36,6 +43,7 @@ export const Token = styled.section`
     letter-spacing: 4px;
     color: ${theme.colors.cyan};
     text-align: center;
+
     margin: 0 auto;
   }
 `
@@ -45,11 +53,13 @@ export const Divider = styled.div`
   margin: 25px auto;
 `
 export const CardWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   margin: 75px auto;
   max-width: 1000px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 32px;
+
   z-index: 10;
   @media (max-width: 960px) {
     display: flex;
@@ -57,47 +67,46 @@ export const CardWrapper = styled.div`
   }
 `
 export const Card = styled.div`
-  max-width: 490px;
-  max-height: max-content;
   border-radius: 12px;
   background: rgba(31, 31, 31, 0.72);
   box-shadow: 0px 4px 69px -17px rgba(0, 0, 0, 0, 51);
+
+  max-width: 490px;
+  max-height: max-content;
   img {
     max-width: 80%;
   }
   @media (max-width: 960px) {
+    width: 100%;
     margin: 0 auto;
     margin-top: 8px;
-    width: 100%;
   }
 `
 export const CardHeader = styled.div`
-  max-width: 100%;
-  height: 100px;
-  background: #190e1d url('assets/backgroundHeimToken.png') no-repeat;
+  background: #190e1d url('assets/backgroundAvaxToken.svg') no-repeat;
   background-position: right 20% center;
   border-radius: 12px;
+
+  max-width: 100%;
+  height: 100px;
+
   z-index: -9;
 `
-export const ImageWrapper = styled.div`
-  background: rgba(33, 20, 38, 1);
-  max-width: 96px;
-  height: 96px;
-  border-radius: 100px;
+export const ImageWrapper = styled.img`
   display: flex;
   justify-content: center;
   position: absolute;
+
   margin-top: 36px;
   margin-left: 57px;
   img {
     max-width: 60%;
   }
   @media (max-width: 960px) {
-    padding-top: 8px;
     width: 80px;
     height: 80px;
-    margin-top: 52px;
-    margin-left: 28px;
+    padding-top: 8px;
+    margin: 52px 0 0 28px;
     img {
       width: 66px;
       height: 64.2px;
@@ -106,34 +115,38 @@ export const ImageWrapper = styled.div`
 `
 export const TextWrapper = styled.div`
   text-align: left;
-  margin: 55px auto;
+
   max-width: 365px;
+  margin: 55px auto;
+
   @media (max-width: 960px) {
-    padding: 0 32px;
     margin: 40px auto;
+    padding: 0 32px;
   }
   p {
     text-align: left;
     font-size: ${theme.font.sizes.font12};
     color: #c4c4c4;
     letter-spacing: 0px;
+
     margin: 8px 0;
   }
   span {
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.light};
     line-height: 180%;
+
     margin-top: 30px;
   }
 `
 export const NameAndSymbol = styled.div`
   display: flex;
   align-items: center;
-
   h1 {
     font-size: ${theme.font.sizes.font32};
     font-weight: ${theme.font.weight.bold};
     line-height: 104%;
+
     margin: 0;
     @media (max-width: 960px) {
       font-size: ${theme.font.sizes.font24};
@@ -158,12 +171,17 @@ export const TokenInfo = styled.div`
     padding: 0 0;
   }
 `
-export const Price = styled.div`
-  display: flex;
+export interface IPriceProps {
+  change: number;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const Price = styled.div<IPriceProps>`
   min-width: 140px;
   max-width: 100%;
+
+  display: flex;
   align-items: center;
-  grid-template-columns: 1fr 1fr;
   @media (max-width: 960px) {
     display: grid;
     grid-template-columns: 1fr;
@@ -173,8 +191,9 @@ export const Price = styled.div`
     margin-left: 6px;
     align-items: center;
     p {
+      letter-spacing: 0;
       margin: 0 0;
-      color: #5ee56b;
+      color: ${props => (props.change >= 0 ? '#5ee56b' : '#ff5a5f')};
     }
   }
   span {
@@ -186,12 +205,13 @@ export const Price = styled.div`
 export const TokensSymbols = styled.div`
   display: flex;
   align-items: center;
+
   z-index: 10;
   span {
     font-size: 11px;
     font-weight: ${theme.font.weight.light};
-    margin-left: 16px;
     min-width: 50px;
+    margin-left: 16px;
     @media (max-width: 960px) {
       margin-left: 0;
     }
@@ -208,8 +228,9 @@ export const TokensSymbols = styled.div`
   }
 `
 export const CardFooter = styled.div`
-  margin: 28px auto;
   max-width: 360px;
+  margin: 28px auto;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -225,16 +246,18 @@ export const CardFooter = styled.div`
     }
   }
   a {
-    margin-right: 8px;
-    display: flex;
-    align-items: space-between;
-    text-decoration: none;
-    justify-items: center;
     text-decoration: none;
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.light};
     color: ${theme.colors.snow};
+
+    margin-right: 8px;
     margin-right: ${theme.spacings.space8};
+
+    display: flex;
+    align-items: space-between;
+    justify-items: center;
+
     transition: 0.15s;
     svg {
       margin-left: ${theme.spacings.space8};
@@ -250,12 +273,14 @@ export const CardFooter = styled.div`
   }
 `
 export const ComingSoon = styled.div`
-  position: relative;
-  max-width: 490px;
-  height: 100%;
   border-radius: 12px;
   background: rgba(31, 31, 31, 0.72);
   box-shadow: 0px 4px 69px -17px rgba(0, 0, 0, 0, 51);
+
+  max-width: 490px;
+  height: 100%;
+
+  position: relative;
   @media (max-width: 960px) {
     display: none;
   }
@@ -265,6 +290,7 @@ export const ComingSoonContent = styled.div`
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -281,12 +307,14 @@ export const ComingSoonContent = styled.div`
     font-size: ${theme.font.sizes.font48};
     font-weight: ${theme.font.weight.light};
     line-height: 104%;
+
     margin-top: 18px;
   }
 `
 export const BarChartWrapper = styled.div`
-  display: block;
-  margin: 0 auto;
   max-width: 100%;
+  margin: 0 auto;
+
+  display: block;
   border-radius: 12px;
 `
