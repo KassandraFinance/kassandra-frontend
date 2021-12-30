@@ -26,13 +26,15 @@ const wrapperModifiers = {
   `,
   medium: (theme: DefaultTheme) => css`
     height: 4.4rem;
-    font-size: ${theme.font.sizes.font16};
+
     padding: 14px ${theme.spacings.space24};
+    font-size: ${theme.font.sizes.font16};
   `,
   large: (theme: DefaultTheme) => css`
     height: 4.4rem;
-    font-size: ${theme.font.sizes.font16};
+
     padding: 14px ${theme.spacings.space24};
+    font-size: ${theme.font.sizes.font16};
   `,
   huge: (theme: DefaultTheme) => css`
     height: 5rem;
@@ -116,18 +118,18 @@ const wrapperModifiers = {
 
 export const Wrapper =
   styled.button <
-  WrapperProps >
-  `
+    WrapperProps >
+    `
   ${({
-    theme,
-    size,
-    fullWidth,
-    hasIcon,
-    disabledNoEvent,
-    backgroundPrimary,
-    backgroundSecondary,
-    backgroundBlack
-  }) => css`
+      theme,
+      size,
+      fullWidth,
+      hasIcon,
+      disabledNoEvent,
+      backgroundPrimary,
+      backgroundSecondary,
+      backgroundBlack
+    }) => css`
     border: none;
     border-radius: ${theme.border.radius};
     color: ${theme.colors.snow};

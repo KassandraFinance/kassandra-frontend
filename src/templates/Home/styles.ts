@@ -11,6 +11,7 @@ export const BackgroundSubscribe = styled.div`
   background: #2114261f;
   border: 1px solid #ffffff21;
   border-radius: 10px;
+
   max-width: 96rem;
   margin: 0 auto 170px;
   padding: 40px 60px 0px 60px;
@@ -23,6 +24,7 @@ export const BackgoundCountDown = styled.div`
   background-repeat: no-repeat;
   background-size: auto;
   background-position: center;
+
   padding: 100px 100px;
   @media (max-width: 768px) {
     background: none;
@@ -31,16 +33,19 @@ export const BackgoundCountDown = styled.div`
 `
 
 export const ScrollUpButton = styled.div`
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
+  background: ${theme.colors.darkPurple};
+  border-radius: 50%;
+
   width: 60px;
   padding: 16px;
   height: 60px;
+
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
   text-align: center;
   line-height: 60px;
-  background: ${theme.colors.darkPurple};
-  border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   &:hover {
@@ -53,10 +58,11 @@ export const ScrollUpButton = styled.div`
 `
 //ScrollUpIcon
 export const ScrollUpIcon = styled.div`
+  margin: auto;
   height: 100%;
+
   background: url('assets/backToTop.svg');
   background-repeat: no-repeat;
   background-size: auto;
   background-position: center;
-  margin: auto;
 `

@@ -1,11 +1,10 @@
 import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
-import * as ButtonStyles from '../../../components/Button/styles'
-
 export const Hero = styled.section`
   min-height: 170vh;
   margin-bottom: -50vh;
+
   background: url('assets/home-hero-background.svg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -21,13 +20,13 @@ export const Hero = styled.section`
   }
 `
 export const IntroHero = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin: 0 auto;
   margin-top: 280px;
   max-width: 925px;
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   @media (min-width: 2350px) {
     margin-top: 360px;
   }
@@ -84,6 +83,7 @@ export const IntroHero = styled.div`
     }
     @media (max-width: 375px) {
       font-size: ${theme.font.sizes.font24};
+
       margin-bottom: 0;
       line-height: 20px;
     }
@@ -92,42 +92,47 @@ export const IntroHero = styled.div`
     }
   }
   h3 {
+    max-width: 600px;
+    margin-bottom: 85px;
+
     font-size: ${theme.font.sizes.font18};
     font-weight: ${theme.font.weight.light};
-    margin-bottom: 85px;
-    max-width: 600px;
     @media (max-width: 1200px) {
       font-size: 27px;
     }
     @media (max-width: 959px) {
-      text-align: center;
       margin: 0 auto;
       margin: 8px 0 85px;
+
+      text-align: center;
       font-size: 22px;
     }
     @media (max-width: 770px) {
-      font-size: ${theme.font.sizes.font18};
       max-width: 500px;
+
+      font-size: ${theme.font.sizes.font18};
     }
     @media (max-width: 420px) {
-      font-size: ${theme.font.sizes.font14};
       max-width: 360px;
       margin-bottom: 35px;
+
+      font-size: ${theme.font.sizes.font14};
       @media (min-height: 800px) {
         margin-bottom: 100px;
       }
     }
     @media (max-width: 330px) {
-      margin: 8px 0 16px;
+      margin: 8px 0 75px;
+
       font-size: ${theme.font.sizes.font14};
-      margin-bottom: 75px;
     }
   }
 `
 export const ButtonWrapper = styled.div`
+  margin-top: 72px;
+
   display: flex;
   justify-content: center;
-  margin-top: 72px;
 `
 export const DesktopScreen = styled.div`
   @media (max-width: 959px) {
