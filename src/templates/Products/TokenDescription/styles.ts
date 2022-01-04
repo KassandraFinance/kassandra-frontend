@@ -64,13 +64,16 @@ export const Text = styled.section`
   }
 `
 
-export const ToDocumention = styled.div`
+export const ToDocumentation = styled.div`
   background-color: rgba(255, 255, 255, 0.05);
   border: none;
   border-radius: 12px;
   color: #fff;
   font-family: ${theme.font.family};
   font-size: ${theme.font.sizes.font14};
+
+  display: flex;
+  align-items: center;
 
   max-width: 260px;
   margin: 40px 0 0;

@@ -112,21 +112,21 @@ const TokenDescription = () => {
           src={imageCalc}
           alt="The sum, for each token, of the token balance times its price divided by the index divisor"
         />
-        <S.ToDocumention>
+        <S.ToDocumentation>
           <p>
-            View full{' '}
+            View{' '}
             <a
-              target="_blank"
-              rel="noopener noreferrer"
               href="https://kassandrafoundation.medium.com/avalanche-social-index-4042a823c972"
+              rel="noopener noreferrer"
+              target="_blank"
               onClick={() => matomoEvent('click-on-link', 'ahype-documention')}
             >
               aHYPE
             </a>{' '}
-            Documention
-            <img src="assets/externalLink.svg" alt="" />
+            Documentation
           </p>
-        </S.ToDocumention>
+          <img src="/assets/externalLink.svg" alt="" />
+        </S.ToDocumentation>
       </S.Text>
     </>
   )
