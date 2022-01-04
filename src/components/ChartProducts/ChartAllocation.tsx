@@ -22,7 +22,7 @@ const ChartAllocation = ({ data }: IChartAllocationProps) => {
   const [arrayKeys, setArrayKeys] = React.useState<string[]>([])
 
   React.useEffect(() => {
-    if (data) {
+    if (data.length) {
       const res = data.map((item: any) => {
         const weight = item.weights.map(
           (weight: {

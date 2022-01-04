@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import theme from '../../styles/theme'
 
 export const dictionary: any = {
@@ -159,4 +159,30 @@ export const Label = styled.label<ILabelProps>`
     font-size: ${theme.font.sizes.font12};
     padding: 8px 14px;
   }
+`
+
+export const Wrapper = styled.div`
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 25px;
+  margin: 25px 0;
+  width: 100%;
+  height: 360px;
+`
+
+export const ImgLoading = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 140px;
+`
+
+const pulse = keyframes`
+  0% { transform: scale(1); }
+  60% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+`
+
+export const AnimatedImg = styled.div`
+  animation: ${pulse} 900ms linear infinite;
 `

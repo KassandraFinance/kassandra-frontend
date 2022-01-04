@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 import useSWR from 'swr'
 import request from 'graphql-request'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
@@ -11,6 +12,8 @@ import ChartAllocation from './ChartAllocation'
 
 import { GET_CHART } from './graphql'
 
+import token96 from '../../../public/assets/token-96.svg'
+
 import * as S from './styles'
 
 const arrPeriod: string[] = ['1W', '1M', '3M', '1Y']
@@ -20,6 +23,7 @@ const ChartProducts = () => {
   const [price, setPrice] = React.useState([])
   const [tvl, setTvl] = React.useState([])
   const [allocation, setAllocation] = React.useState([])
+  const [loading, setLoading] = React.useState<boolean>(true)
 
   const [periodSelected, setPeriodSelected] = React.useState<string>('1W')
   const dateNow = new Date()
@@ -89,9 +93,31 @@ const ChartProducts = () => {
   }
 
   React.useEffect(() => {
+    returnDate('1W')
+    setPeriodSelected('1W')
+  }, [inputChecked])
+
+  React.useEffect(() => {
+    setLoading(true)
+
     if (data) {
+      setLoading(false)
+    }
+  }, [params, data])
+
+  React.useEffect(() => {
+    if (data) {
+      const newTVL = data?.pool.total_value_locked.map(
+        (item: { timestamp: number, value: string }) => {
+          return {
+            timestamp: item.timestamp,
+            value: Number(item.value)
+          }
+        }
+      )
+
+      setTvl(newTVL)
       setPrice(data?.pool.price_candles)
-      setTvl(data?.pool.total_value_locked)
       setAllocation(data?.pool.weights)
     }
   }, [data])
@@ -187,9 +213,24 @@ const ChartProducts = () => {
           ))}
         </S.SelectPeriod>
       </S.Selects>
-      {inputChecked === 'Price' && <ChartPrice data={price} color="#E843C4" />}
-      {inputChecked === 'TVL' && <ChartTVL data={tvl} color="#26DBDB" />}
-      {inputChecked === 'Allocation' && <ChartAllocation data={allocation} />}
+      {loading ? (
+        <S.Wrapper>
+          <S.ImgLoading>
+            <S.AnimatedImg>
+              <Image src={token96} alt="" />
+            </S.AnimatedImg>
+          </S.ImgLoading>
+        </S.Wrapper>
+      ) : null}
+      {inputChecked === 'Price' && !loading && (
+        <ChartPrice data={price} color="#E843C4" />
+      )}
+      {inputChecked === 'TVL' && !loading && (
+        <ChartTVL data={tvl} color="#26DBDB" />
+      )}
+      {inputChecked === 'Allocation' && !loading && (
+        <ChartAllocation data={allocation} />
+      )}
     </S.ChartProduct>
   )
 }
