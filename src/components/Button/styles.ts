@@ -116,20 +116,18 @@ const wrapperModifiers = {
   `
 }
 
-export const Wrapper =
-  styled.button <
-    WrapperProps >
-    `
+// eslint-disable-next-line prettier/prettier
+export const Wrapper = styled.button<WrapperProps>`
   ${({
-      theme,
-      size,
-      fullWidth,
-      hasIcon,
-      disabledNoEvent,
-      backgroundPrimary,
-      backgroundSecondary,
-      backgroundBlack
-    }) => css`
+    theme,
+    size,
+    fullWidth,
+    hasIcon,
+    disabledNoEvent,
+    backgroundPrimary,
+    backgroundSecondary,
+    backgroundBlack
+  }) => css`
     border: none;
     border-radius: ${theme.border.radius};
     color: ${theme.colors.snow};
