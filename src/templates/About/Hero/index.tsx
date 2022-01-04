@@ -19,8 +19,8 @@ const Hero = () => {
         <S.HeroImage>
           <img src="assets/kassandra-about.svg" alt="" className="kassandra" />
         </S.HeroImage>
+        <S.Divider />
         <S.IntroTextWrapper>
-          <S.Divider />
           <p>
             Kassandra is a decentralized autonomous organization that governs a
             set of tokenized data-driven investment funds, bringing a new class

@@ -126,9 +126,8 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
       images: string[][],
     ) => {
       try {
-        const URL = `https://api.coingecko.com/api/v3/coins/${platform}/contract/${
-          poolPlatform !== 'Fuji' ? token.id : addressChanger[token.id]
-        }?localization=false&tickers=false&community_data=false&developer_data=false&sparkline=false`
+        const URL = `https://api.coingecko.com/api/v3/coins/${platform}/contract/${poolPlatform !== 'Fuji' ? token.id : addressChanger[token.id]
+          }?localization=false&tickers=false&community_data=false&developer_data=false&sparkline=false`
         const res = await fetch(URL)
         const data = await res.json()
         images[index] = [token.id, data.image?.small]
@@ -214,7 +213,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
             </span>
           </S.TextWrapper>
           <S.TokenInfo>
-            <S.Price>
+            <S.Price change={Number(change)}>
               <span> USD {poolPrice}</span>
               <div>
                 {/* <img src="assets/tokenPriceArrow.png" alt="" /> */}
@@ -259,11 +258,11 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
             <Link href="/products/ahype">
               <Button onClick={() => clickMatomoEvent('click-button', 'buy-ahype')} backgroundSecondary size="medium" text="Buy $aHYPE" />
             </Link>
-            <a 
-              onClick={() => clickMatomoEvent('click-on-link', 'learn-more')} 
-              href="https://kassandrafoundation.medium.com/avalanche-social-index-4042a823c972" 
-              target="_blank" 
-              rel="noreferrer" 
+            <a
+              onClick={() => clickMatomoEvent('click-on-link', 'learn-more')}
+              href="https://kassandrafoundation.medium.com/avalanche-social-index-4042a823c972"
+              target="_blank"
+              rel="noreferrer"
             >
               Learn More
               <svg

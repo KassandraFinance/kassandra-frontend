@@ -57,7 +57,7 @@ export const KassandraInfo = styled.div`
     color: #e843c4;
     font-size: ${theme.font.sizes.font14};
     letter-spacing: 4px;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
   }
   span {
     display: inline-block;
@@ -113,7 +113,6 @@ export const Responsabilities = styled.section`
   max-width: 1000px;
   margin: 0 auto;
   @media (max-width: 960px) {
-    padding: 0 32px;
     margin: 40px 0;
   }
   @media (max-width: 820px) {
@@ -153,6 +152,7 @@ export const ResponsabilitiesCards = styled.div`
     font-weight: ${theme.font.weight.light};
     line-height: 104%;
     @media (max-width: 960px) {
+      font-size: ${theme.font.sizes.font14};
       margin-bottom: 24px;
       max-width: 100px;
     }

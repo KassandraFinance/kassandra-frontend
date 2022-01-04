@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import theme from '../../../styles/theme'
 
 import * as ButtonStyles from '../../../components/Button/styles'
@@ -158,7 +158,13 @@ export const TokenInfo = styled.div`
     padding: 0 0;
   }
 `
-export const Price = styled.div`
+export interface PriceProps {
+  change: number;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const Price = styled.div<PriceProps>`
+${({ change }) => css`
   display: flex;
   min-width: 140px;
   max-width: 100%;
@@ -174,7 +180,7 @@ export const Price = styled.div`
     align-items: center;
     p {
       margin: 0 0;
-      color: #5ee56b;
+      color: ${change >= 0 ? '#5ee56b' : '#ff5a5f'};
     }
   }
   span {
@@ -182,7 +188,9 @@ export const Price = styled.div`
     font-weight: ${theme.font.weight.light};
     margin: 0 6px;
   }
+`}
 `
+
 export const TokensSymbols = styled.div`
   display: flex;
   align-items: center;
