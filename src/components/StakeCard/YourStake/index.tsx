@@ -211,10 +211,10 @@ const YourStake = ({
           {!stakeWithVotingPower && (
             <span>
               &#8776;{' '}
-              {Big(infoStaked.yourStake.toString())
-                .mul(priceLPToken.priceLP)
-                .div(Big(10).pow(18))
-                .toFixed(2)}{' '}
+              {BNtoDecimal(
+                Big(infoStaked.yourStake.toString()).mul(priceLPToken.priceLP),
+                Big(18)
+              )}{' '}
               USD
             </span>
           )}

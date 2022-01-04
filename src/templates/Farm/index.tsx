@@ -160,7 +160,7 @@ const StakeFarm = () => {
               />
               <StakeCard
                 pid={5}
-                symbol="kap"
+                symbol="lp"
                 connect={connect}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}

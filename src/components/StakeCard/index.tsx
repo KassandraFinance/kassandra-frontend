@@ -39,6 +39,7 @@ import KacyEarned from './KacyEarned'
 
 import * as S from './styles'
 import Button from '../Button'
+import { BNtoDecimal } from '../../utils/numerals'
 
 export interface IPriceLPToken {
   priceLP: Big;
@@ -80,7 +81,7 @@ const staked: any = {
   1: 'KACY',
   2: 'KACY',
   4: 'aHYPE',
-  5: 'KAP'
+  5: 'LP'
 }
 
 const StakeCard = ({
@@ -272,7 +273,7 @@ const StakeCard = ({
                 style={{ width: '58px' }}
               />
             ) : null}
-            {symbol === 'kap' ? (
+            {symbol === 'lp' ? (
               <img src="assets/kap.svg" alt="" width={144} />
             ) : null}
             <S.IntroStaking>
@@ -285,7 +286,10 @@ const StakeCard = ({
                 <h4>APR</h4>
               </S.APR>
               <S.Percentage>
-                {infoStaked.hasExpired ? 0 : Number(infoStaked.apr) / 100}%
+                {infoStaked.hasExpired
+                  ? 0
+                  : BNtoDecimal(infoStaked.apr, new BigNumber(0))}
+                %
               </S.Percentage>
             </S.IntroStaking>
           </S.InterBackground>
