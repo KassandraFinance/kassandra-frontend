@@ -12,12 +12,7 @@ export const HeimOperationsContainer = styled.div<IHeimOperationsContainerProps>
   border-radius: 12px;
 
   max-width: 448px;
-  max-height: ${props =>
-    props.inputChecked === 'Withdraw'
-      ? props.typeWithdrawChecked === 'Best_value'
-        ? 'calc(100vh - 40px)'
-        : '600px'
-      : '500px'};
+  max-height: calc(100vh - 40px);
 
   position: -webkit-sticky;
   position: sticky; 

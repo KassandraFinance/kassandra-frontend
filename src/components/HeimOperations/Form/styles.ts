@@ -9,6 +9,10 @@ export const FormContainer = styled.form`
 
   padding: 40px;
   max-height: 100%;
+
+  .btn-submit {
+    margin-top: 40px;
+  }
 `
 
 export const SwapButton = styled.button`
@@ -381,6 +385,7 @@ export const InputDefaultContainer = styled.div`
 
   width: 100%;
   padding: 10px 16px;
+  margin-bottom: 8px;
 `
 
 export const AmountDefault = styled.div`
@@ -415,8 +420,7 @@ export const ExchangeRate = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 `
 
 export const InputBestValue = styled.div`
@@ -425,7 +429,7 @@ export const InputBestValue = styled.div`
 
   width: 100%;
   padding: 16px 8px 16px 16px;
-  margin-bottom: 40px;
+  margin-bottom: 8px;
 `
 
 export const IntroBestValue = styled.div`

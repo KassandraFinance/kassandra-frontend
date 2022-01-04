@@ -766,6 +766,7 @@ const Form = ({
       
       {title === 'Withdraw' ? (
         typeWithdrawChecked === 'Best_value' ?
+        <>
           <InputBestValue
             poolTokenDetails={infoAHYPE
               .slice(0, -1)
@@ -775,6 +776,11 @@ const Form = ({
             swapOutBalance={swapOutBalance}
             setPriceInDollarOnWithdraw={setPriceInDollarOnWithdraw}
           />
+          <S.ExchangeRate>
+            <S.SpanLight>Withdrawal fee:</S.SpanLight>
+            <S.SpanLight>3%</S.SpanLight>
+          </S.ExchangeRate>
+        </>
           :
           <>
             <InputDefault
@@ -799,6 +805,10 @@ const Form = ({
                     infoAHYPE[tokenOutIndex]?.decimals
                   )} ${infoAHYPE[tokenOutIndex]?.symbol}`}
               </S.SpanLight>
+            </S.ExchangeRate>
+            <S.ExchangeRate>
+              <S.SpanLight>Withdrawal fee:</S.SpanLight>
+              <S.SpanLight>3%</S.SpanLight>
             </S.ExchangeRate>
           </>
         ) : (
@@ -832,7 +842,8 @@ const Form = ({
       )}
       {userWalletAddress ? (
         <Button
-          onClick={() => setTimeout(() => clearInput(), 2000)}
+          className="btn-submit"
+          onClick={() => setTimeout(() => clearInput(), 3000)}
           backgroundPrimary
           disabledNoEvent={swapInAmount.toString() === "0" && isApproved[tokenInIndex]}
           fullWidth
@@ -866,6 +877,7 @@ const Form = ({
         ) : (
         web3.currentProvider === null ?
           <Button
+            className="btn-submit"
             as='a'
             backgroundPrimary
             fullWidth
@@ -875,6 +887,7 @@ const Form = ({
           />
           :
           <Button
+            className="btn-submit"
             backgroundPrimary
             fullWidth
             type="button"
