@@ -74,11 +74,11 @@ const Change = () => {
         </thead>
         <tbody>
           <tr>
-            <td>{changeWeek[0]}%</td>
-            <td>{changeWeek[1]}%</td>
-            <td>{changeWeek[2]}%</td>
-            <td>{changeWeek[3]}%</td>
-            <td>{changeWeek[4]}%</td>
+            {changeWeek.map(item => (
+              <S.Td key={item} value={Number(item)}>
+                {`${Number(item) < 0 ? '-' : ''}${item}%`}
+              </S.Td>
+            ))}
           </tr>
         </tbody>
       </table>

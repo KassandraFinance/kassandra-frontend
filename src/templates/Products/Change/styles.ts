@@ -10,7 +10,7 @@ export const Change = styled.div`
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
-    
+
     overflow: hidden;
     text-indent: initial;
 
@@ -25,6 +25,7 @@ export const Change = styled.div`
     thead {
       background-color: rgba(0, 0, 0, 0.25);
       th {
+        color: ${theme.colors.grayDisabled};
         font-weight: ${theme.font.weight.light};
         padding: 10px 0;
       }
@@ -33,12 +34,22 @@ export const Change = styled.div`
     tbody {
       background-color: rgba(255, 255, 255, 0.04);
       text-align: center;
-      font-weight: ${theme.font.weight.medium};
+      font-weight: ${theme.font.weight.light};
       td {
         padding: 12px 0;
       }
     }
   }
+`
+
+interface ITdProps {
+  value: number;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const Td = styled.td<ITdProps>`
+  color: ${props => (props.value > 0 ? theme.colors.green : theme.colors.red)};
+  color: ${props => props.value === 0 && theme.colors.snow};
 `
 
 export const Title = styled.div`

@@ -40,6 +40,8 @@ export default {
     grayDisabled: '#bdbdbd',
     amber: '#FFBF00',
     snow: '#FCFCFC',
+    red: '#EA3224',
+    green: '#5EE56B'
   },
   spacings: {
     space8: '0.8rem',
