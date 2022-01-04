@@ -198,6 +198,8 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
             <S.ImageWrapper>
               <img src="/assets/avalanche_social_index_logo.svg" alt="" />
             </S.ImageWrapper>
+
+
           </S.CardHeader>
           <S.TextWrapper>
             <S.NameAndSymbol>

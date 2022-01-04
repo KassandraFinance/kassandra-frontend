@@ -118,39 +118,40 @@ export const MenuLink = styled.a`
     }
   `}
 `
+
 export const MenuLinkDisable = styled.a`
-  ${({ theme }) => css`
-    position: relative;
-    color: ${theme.colors.lightGray};
-    font-size: ${theme.font.sizes.font16};
-    font-weight: ${theme.font.weight.light};
-    margin: 0.3rem ${theme.spacings.space24} 0;
-    text-decoration: none;
-    text-align: center;
-    cursor: not-allowed;
-    &:hover {
-      &::after {
-        content: '';
-        text-align: left;
-        position: absolute;
-        display: block;
-        height: 0.3rem;
-        border-radius: 0.15rem;
-        background-color: ${theme.colors.lightGray};
-        animation: hoverAnimation 0.3s forwards;
+  color: ${theme.colors.lightGray};
+  font-size: ${theme.font.sizes.font16};
+  font-weight: ${theme.font.weight.light};
+  text-decoration: none;
+  text-align: center;
+
+  margin: 0.3rem ${theme.spacings.space24} 0;
+  position: relative;
+
+  cursor: not-allowed;
+  &:hover {
+    &::after {
+      content: '';
+      text-align: left;
+      background-color: ${theme.colors.lightGray};
+      display: block;
+      height: 0.3rem;
+      border-radius: 0.15rem;
+      position: absolute;
+      animation: hoverAnimation 0.3s forwards;
+    }
+    @keyframes hoverAnimation {
+      from {
+        width: 0;
+        left: 50%;
       }
-      @keyframes hoverAnimation {
-        from {
-          width: 0;
-          left: 50%;
-        }
-        to {
-          width: 100%;
-          left: 0;
-        }
+      to {
+        width: 100%;
+        left: 0;
       }
     }
-  `}
+  }
 `
 
 type MenuFullProps = {
