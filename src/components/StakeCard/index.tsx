@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
+import useSWR from 'swr'
+import { request } from 'graphql-request'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
 import Image from 'next/image'
@@ -17,7 +19,13 @@ import waitTransaction, {
   TransactionCallback
 } from '../../utils/txWait'
 
-import { Staking, LPKacyAvax, LPDaiAvax } from '../../constants/tokenAddresses'
+import {
+  Staking,
+  LPKacyAvax,
+  LPDaiAvax,
+  SUBGRAPH_URL,
+  HeimCRPPOOL
+} from '../../constants/tokenAddresses'
 
 import usePriceLP from '../../hooks/usePriceLP'
 import { PoolInfo } from '../../hooks/useStakingContract'
@@ -41,9 +49,11 @@ import * as S from './styles'
 import Button from '../Button'
 import { BNtoDecimal } from '../../utils/numerals'
 
+import { GET_INFO_AHYPE } from './graphql'
 export interface IPriceLPToken {
   priceLP: Big;
   kacy: Big;
+  aHYPE: Big;
 }
 
 export interface IInfoStaked {
@@ -110,7 +120,8 @@ const StakeCard = ({
     React.useState<boolean>(false)
   const [priceLPToken, setPriceLPToken] = React.useState<IPriceLPToken>({
     priceLP: Big(0),
-    kacy: Big(0)
+    kacy: Big(0),
+    aHYPE: Big(0)
   })
 
   const [withdrawDelay, setWithdrawDelay] = React.useState<number>(0)
@@ -136,6 +147,9 @@ const StakeCard = ({
     stakingToken: ''
   })
 
+  const { data } = useSWR([GET_INFO_AHYPE, HeimCRPPOOL], (query, id) =>
+    request(SUBGRAPH_URL, query, { id })
+  )
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { trackEvent } = useMatomo()
   const { viewgetReserves } = usePriceLP()
@@ -159,19 +173,27 @@ const StakeCard = ({
     const reservesKacyAvax = await viewgetReserves(LPKacyAvax)
     const reservesDaiAvax = await viewgetReserves(LPDaiAvax)
 
-    const ethInDollar = Big(reservesDaiAvax._reserve0).div(
+    const avaxInDollar = Big(reservesDaiAvax._reserve0).div(
       Big(reservesDaiAvax._reserve1)
     )
-    const kacyInDollar = ethInDollar.div(Big(reservesKacyAvax._reserve0))
+    const kacyInDollar = avaxInDollar.mul(
+      Big(reservesKacyAvax._reserve1).div(reservesKacyAvax._reserve0)
+    )
 
-    const allETHDollar = Big(reservesKacyAvax._reserve1).mul(ethInDollar)
+    const allAVAXDollar = Big(reservesKacyAvax._reserve1).mul(avaxInDollar)
     const supplyLPToken = await lpToken.totalSupply()
 
     if (supplyLPToken.toString() !== '0') {
-      const priceLP = allETHDollar.mul(2).div(Big(supplyLPToken.toString()))
+      const priceLP = allAVAXDollar.mul(2).div(Big(supplyLPToken.toString()))
       setPriceLPToken(prevState => ({
         ...prevState,
         priceLP
+      }))
+    }
+    if (data) {
+      setPriceLPToken(prevState => ({
+        ...prevState,
+        aHYPE: data?.pool.price_usd
       }))
     }
     setPriceLPToken(prevState => ({

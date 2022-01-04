@@ -200,19 +200,26 @@ const YourStake = ({
         <p>Your stake</p>
         <S.Stake>
           <p>
-            {pid === 4
-              ? Big(infoStaked.yourStake.toString())
-                  .mul(priceLPToken.priceLP)
-                  .div(Big(10).pow(18))
-                  .toFixed(2)
-              : BNtoDecimal(infoStaked.yourStake, new BigNumber(18), 2)}{' '}
+            {pid === 5 &&
+              Big(infoStaked.yourStake.toString())
+                .mul(priceLPToken.priceLP)
+                .div(Big(10).pow(18))
+                .toFixed(2)}
+            {pid === 4 &&
+              Big(infoStaked.yourStake.toString())
+                .mul(priceLPToken.aHYPE)
+                .div(Big(10).pow(18))
+                .toFixed(2)}
+            {pid !== 4 &&
+              pid !== 5 &&
+              BNtoDecimal(infoStaked.yourStake, new BigNumber(18), 2)}
             <S.Symbol>{!stakeWithVotingPower ? 'KACY' : 'USD'}</S.Symbol>
           </p>
           {!stakeWithVotingPower && (
             <span>
               &#8776;{' '}
               {BNtoDecimal(
-                Big(infoStaked.yourStake.toString()).mul(priceLPToken.priceLP),
+                Big(infoStaked.yourStake.toString()).mul(priceLPToken.kacy),
                 Big(18)
               )}{' '}
               USD

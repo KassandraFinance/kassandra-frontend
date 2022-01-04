@@ -36,6 +36,7 @@ const Change = () => {
 
   React.useEffect(() => {
     const arrChangePrice = []
+    setChangeWeek([])
     if (data?.now[0].close) {
       const changeDay = calcChange(data.now[0].close, data.day[0]?.close)
       const changeWeek = calcChange(data.now[0].close, data.week[0]?.close)
