@@ -7,14 +7,15 @@ export function BNtoDecimal(
   maximumNonZero?: number,
   minimumPrecision?: number
 ) {
-  const fullNumber =
+  const fullNumber = (
     value instanceof Big
-      ? value.toFixed(maximumPrecision)
+      ? value
       : Big(value.toString()).div(Big(10).pow(maximumPrecision))
+  ).toFixed(maximumPrecision)
   const maxPrecision = maximumNonZero || 6
   const minPrecision = minimumPrecision || 0
 
-  let [integer, decimal] = fullNumber.toString().split('.')
+  let [integer, decimal] = fullNumber.split('.')
   decimal = decimal || ''
   const precision = Math.max(0, maxPrecision + 1 - integer.length)
   const firstNonZero = decimal.length - decimal.replace(/^0+/, '').length

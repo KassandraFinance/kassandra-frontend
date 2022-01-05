@@ -19,7 +19,7 @@ const TooltipCustomized = (props: ITooltipCustomizedPRops) => {
     return (
       <S.Content>
         <S.Price>
-          <h1>{`$${BNtoDecimal(Big(payload[0].value || 0), 3, 3, 2)}`}</h1>
+          <h1>{`$${BNtoDecimal(Big(payload[0].value || 0), 2, 2, 2)}`}</h1>
           {/* <span>0.11%</span> */}
         </S.Price>
         <p>{getDateInHours(payload[0].payload.timestamp)}</p>
@@ -33,12 +33,12 @@ const TooltipCustomized = (props: ITooltipCustomizedPRops) => {
           <S.Price>
             {chart === 'price' && (
               <h1>
-                ${`${BNtoDecimal(Big(currentPrice?.close || 0), 3, 3, 2)}`}
+                ${`${BNtoDecimal(Big(currentPrice?.close || 0), 2, 2, 2)}`}
               </h1>
             )}
             {chart === 'tvl' && (
               <h1>
-                ${`${BNtoDecimal(Big(currentPrice?.value || 0), 3, 2, 2)}`}
+                ${`${BNtoDecimal(Big(currentPrice?.value || 0), 2, 2, 2)}`}
               </h1>
             )}
             {/* <span>0.11%</span> */}

@@ -90,9 +90,9 @@ const InputBestValue = ({
                 value={
                   '$' +
                   BNtoDecimal(
-                    Big((swapOutAmount[index] || 0).toString()).mul(
-                      Big(priceDollar(token.address, infoAHYPE))
-                    ),
+                    Big((swapOutAmount[index] || 0).toString())
+                      .mul(Big(priceDollar(token.address, infoAHYPE)))
+                      .div(Big(10).pow(18)),
                     6,
                     2,
                     2

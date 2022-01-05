@@ -205,14 +205,18 @@ const YourStake = ({
                 Big(infoStaked.yourStake.toString())
                   .mul(priceLPToken.priceLP)
                   .div(Big(10).pow(18)),
-                6
+                2,
+                2,
+                2
               )}
             {pid === 4 &&
               BNtoDecimal(
                 Big(infoStaked.yourStake.toString())
                   .mul(priceLPToken.aHYPE)
                   .div(Big(10).pow(18)),
-                6
+                2,
+                2,
+                2
               )}
             {pid !== 4 && pid !== 5 && BNtoDecimal(infoStaked.yourStake, 18)}
             <S.Symbol>{!stakeWithVotingPower ? 'KACY' : 'USD'}</S.Symbol>
