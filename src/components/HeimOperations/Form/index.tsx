@@ -784,7 +784,7 @@ const Form = ({
           :
           <>
             <InputDefault
-              decimals={infoAHYPE[tokenAddress2Index[swapOutAddress]]?.decimals}
+              decimals={infoAHYPE[tokenAddress2Index[swapOutAddress]]?.decimals || new BigNumber(0)}
               poolTokens={infoAHYPE
                 .slice(0, -1)
                 .filter((token: { address: string }) => token.address !== swapInAddress)}
@@ -802,7 +802,7 @@ const Form = ({
                   ? '...'
                   : `1 ${infoAHYPE[tokenInIndex]?.symbol} = ${BNtoDecimal(
                     swapOutPrice,
-                    infoAHYPE[tokenOutIndex]?.decimals
+                    infoAHYPE[tokenOutIndex]?.decimals.toNumber()
                   )} ${infoAHYPE[tokenOutIndex]?.symbol}`}
               </S.SpanLight>
             </S.ExchangeRate>
@@ -814,7 +814,7 @@ const Form = ({
         ) : (
         <>
           <InputDefault
-            decimals={infoAHYPE[tokenAddress2Index[swapOutAddress]]?.decimals}
+            decimals={infoAHYPE[tokenAddress2Index[swapOutAddress]]?.decimals || new BigNumber(0)}
             poolTokens={title === 'Invest'
               ? [infoAHYPE[infoAHYPE.length - 1]]
               : infoAHYPE
@@ -834,7 +834,7 @@ const Form = ({
                 ? '...'
                 : `1 ${infoAHYPE[tokenInIndex]?.symbol} = ${BNtoDecimal(
                   swapOutPrice,
-                  infoAHYPE[tokenOutIndex]?.decimals
+                  infoAHYPE[tokenOutIndex]?.decimals.toNumber()
                 )} ${infoAHYPE[tokenOutIndex]?.symbol}`}
             </S.SpanLight>
           </S.ExchangeRate>
@@ -858,15 +858,17 @@ const Form = ({
                     `${title} ${'$' + BNtoDecimal(
                       Big((swapOutAmount[0] || 0).toString())
                         .mul(Big(priceDollar(swapOutAddress, infoAHYPE))),
-                      Big(infoAHYPE[tokenOutIndex]?.decimals.toString(10)),
-                      2, 2
+                      6,
+                      2,
+                      2
                     )}`
                 :
                   `${title} ${'$' + BNtoDecimal(
                     Big((swapInAmount || 0).toString())
                       .mul(Big(priceDollar(swapInAddress, infoAHYPE))),
-                    Big(infoAHYPE[tokenInIndex]?.decimals.toString(10)),
-                    2, 2
+                    6,
+                    2,
+                    2
                   )}`
               :
                 `${title}`

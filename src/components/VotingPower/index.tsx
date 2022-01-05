@@ -61,7 +61,7 @@ const VotingPower = ({
           </Tippy>
         </span>
         <span style={{ fontSize: '14px' }}>
-          {BNtoDecimal(yourVotingPower, new BigNumber(18))}
+          {BNtoDecimal(yourVotingPower, 18, 2)}
         </span>
       </S.YourVotingPower>
       <S.TotalVotingPower>
@@ -78,7 +78,7 @@ const VotingPower = ({
             </S.Tooltip>
           </Tippy>
         </span>
-        <span>{BNtoDecimal(totalVotes, new BigNumber(18))}</span>
+        <span>{BNtoDecimal(totalVotes, 18, 2)}</span>
       </S.TotalVotingPower>
     </S.VotingPower>
   )

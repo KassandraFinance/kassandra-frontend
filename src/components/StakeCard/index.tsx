@@ -308,10 +308,7 @@ const StakeCard = ({
                 <h4>APR</h4>
               </S.APR>
               <S.Percentage>
-                {infoStaked.hasExpired
-                  ? 0
-                  : BNtoDecimal(infoStaked.apr, new BigNumber(0))}
-                %
+                {infoStaked.hasExpired ? 0 : BNtoDecimal(infoStaked.apr, 0)} %
               </S.Percentage>
             </S.IntroStaking>
           </S.InterBackground>
@@ -387,6 +384,7 @@ const StakeCard = ({
                       earned={earned}
                       kacyEarned={kacyEarned}
                       setKacyEarned={setKacyEarned}
+                      kacyPrice={priceLPToken.kacy}
                     />
                     <Button
                       size="claim"

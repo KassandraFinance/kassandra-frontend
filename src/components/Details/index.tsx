@@ -49,7 +49,8 @@ const Details = ({
   symbol,
   priceLPToken
 }: IDetailsProps) => {
-  const [depositedAmount, setDepositedAmount] = React.useState<string>('')
+  // eslint-disable-next-line prettier/prettier
+  const [depositedAmount, setDepositedAmount] = React.useState<BigNumber>(new BigNumber(0))
   const { trackEvent } = useMatomo()
 
   function matomoEvent(action: string, name: string) {
@@ -66,13 +67,26 @@ const Details = ({
       const poolInfoResponse = await poolInfo(pid)
 
       interval = setInterval(async () => {
-        setDepositedAmount(poolInfoResponse.depositedAmount)
+        setDepositedAmount(new BigNumber(poolInfoResponse.depositedAmount))
       }, 6000)
-      setDepositedAmount(poolInfoResponse.depositedAmount)
+      setDepositedAmount(new BigNumber(poolInfoResponse.depositedAmount))
     })()
 
     return () => clearInterval(interval)
   }, [])
+
+  let price
+
+  switch (pid) {
+    case 4:
+      price = priceLPToken.aHYPE
+      break
+    case 5:
+      price = priceLPToken.priceLP
+      break
+    default:
+      price = priceLPToken.kacy
+  }
 
   return (
     <S.Details>
@@ -80,26 +94,18 @@ const Details = ({
         <span>Total staked</span>
         <S.KacyUSD>
           <span>
-            {BNtoDecimal(new BigNumber(depositedAmount), new BigNumber(18), 2)}{' '}
-            {staked[pid]}
+            {BNtoDecimal(depositedAmount, 18)} {staked[pid]}
           </span>
-          {pid === 5 ? (
-            <span className="usd">
-              &#8776;{' '}
-              {BNtoDecimal(
-                Big(`0${depositedAmount}`).mul(priceLPToken.priceLP),
-                Big(18),
-                2
-              )}{' '}
-              USD
-            </span>
-          ) : (
-            <span className="usd">
-              &#8776;{' '}
-              {BNtoDecimal(Big(`0${depositedAmount}`).mul(1.44), Big(18), 2)}{' '}
-              USD
-            </span>
-          )}
+          <span className="usd">
+            &#8776;{' '}
+            {BNtoDecimal(
+              Big(`0${depositedAmount}`).mul(price).div(Big(10).pow(18)),
+              6,
+              2,
+              2
+            )}{' '}
+            USD
+          </span>
         </S.KacyUSD>
       </S.ValuesKacy>
       <S.ValuesKacy>
@@ -108,7 +114,7 @@ const Details = ({
           <span>
             {hasExpired
               ? '0'
-              : BNtoDecimal(infoStakeStatic.kacyRewards, new BigNumber(18), 2)}
+              : BNtoDecimal(infoStakeStatic.kacyRewards, 18, 2, 2)}
             /day
           </span>
           <span className="usd">
@@ -116,8 +122,11 @@ const Details = ({
             {hasExpired
               ? '0'
               : BNtoDecimal(
-                  infoStakeStatic.kacyRewards.mul(new BigNumber(2)),
-                  new BigNumber(18),
+                  Big(infoStakeStatic.kacyRewards.toString())
+                    .mul(price)
+                    .div(Big(10).pow(18)),
+                  6,
+                  2,
                   2
                 )}{' '}
             USD

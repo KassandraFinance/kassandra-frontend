@@ -43,9 +43,7 @@ const InputBestValue = ({
         .add(accumulator)
     }, Big(0))
 
-    setPriceInDollarOnWithdraw(
-      BNtoDecimal(res.mul(Big(10).pow(18)), Big(18), 2, 2)
-    )
+    setPriceInDollarOnWithdraw(BNtoDecimal(res, 18, 2, 2))
   }, [swapOutAmount])
 
   return (
@@ -69,14 +67,17 @@ const InputBestValue = ({
                 </div>
                 {BNtoDecimal(
                   swapOutAmount[index] || new BigNumber(0),
-                  token.decimals
+                  token.decimals.toNumber()
                 )}{' '}
                 {poolTokenDetails.length > 0 ? token.symbol : '...'}
               </S.Symbol>
               <S.SpanLight>
                 Balance:{' '}
                 {swapOutBalance[index] > new BigNumber(-1)
-                  ? BNtoDecimal(swapOutBalance[index], token.decimals)
+                  ? BNtoDecimal(
+                      swapOutBalance[index],
+                      token.decimals.toNumber()
+                    )
                   : '...'}
               </S.SpanLight>
             </S.BestValueItem>
@@ -92,7 +93,8 @@ const InputBestValue = ({
                     Big((swapOutAmount[index] || 0).toString()).mul(
                       Big(priceDollar(token.address, infoAHYPE))
                     ),
-                    Big(token.decimals.toString(10)),
+                    6,
+                    2,
                     2
                   )
                 }
