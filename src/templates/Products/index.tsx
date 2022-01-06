@@ -19,6 +19,7 @@ import ChartProducts from '../../components/ChartProducts'
 import HeimOperations from '../../components/HeimOperations'
 import Web3Disabled from '../../components/Web3Disabled'
 import ScrollUpButton from '../../components/ScrollUpButton'
+import PoweredBy from './PoweredBy'
 
 import avaxSocial from '../../../public/assets/avalanche_social_index_logo.svg'
 import infoGray from '../../../public/assets/info-gray.svg'
@@ -199,6 +200,7 @@ const Products = () => {
             <ScrollUpButton />
             <Change />
             <Summary />
+            <PoweredBy />
             <Distribution poolPlatform={poolPlatform} />
             <TokenDescription />
           </S.ProductDetails>
