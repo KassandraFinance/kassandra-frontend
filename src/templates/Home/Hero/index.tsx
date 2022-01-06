@@ -20,7 +20,7 @@ const Hero = () => {
   }
 
   return (
-    <S.Hero id="hero">
+    <S.Hero>
       <Header />
       <S.IntroHero>
         <h3>

@@ -14,6 +14,7 @@ import SubscribeBanner from '../../components/SubscribeBanner'
 
 import * as S from './styles'
 import RoadMapSlider from '../../components/RoadMapSlider'
+import ScrollUpButton from '../../components/ScrollUpButton'
 
 const poolPlatform = 'Fuji'
 
@@ -29,17 +30,7 @@ const Home = () => {
     <>
       <Hero />
       <S.Background>
-        <Link
-          activeClass="active"
-          to="hero"
-          smooth={true}
-          offset={-70}
-          duration={800}
-        >
-          <S.ScrollUpButton>
-            <S.ScrollUpIcon />
-          </S.ScrollUpButton>
-        </Link>
+        <ScrollUpButton />
         <Products />
         <ClassProducts />
         <Token poolPlatform={poolPlatform} />

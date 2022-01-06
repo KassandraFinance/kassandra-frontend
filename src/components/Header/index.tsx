@@ -79,7 +79,7 @@ const Header = () => {
 
   return (
     <>
-      <S.Wrapper pageHeim={asPath === '/heim'}>
+      <S.Wrapper pageHeim={asPath === '/heim'} id="top">
         <S.MenuIconContainer>
           <S.IconWrapper onClick={() => setIsOpen(true)}>
             <img src="/assets/menuIcon.svg" alt="Open menu" />

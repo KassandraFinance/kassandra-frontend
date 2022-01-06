@@ -18,6 +18,7 @@ import Header from '../../components/Header'
 import ChartProducts from '../../components/ChartProducts'
 import HeimOperations from '../../components/HeimOperations'
 import Web3Disabled from '../../components/Web3Disabled'
+import ScrollUpButton from '../../components/ScrollUpButton'
 
 import avaxSocial from '../../../public/assets/avalanche_social_index_logo.svg'
 import infoGray from '../../../public/assets/info-gray.svg'
@@ -173,10 +174,6 @@ const Products = () => {
                 </span>
                 <h2>${infoPool.volume}</h2>
               </S.IndexData>
-              {/* <S.IndexData>
-                <span>APY <Image src={infoGray} alt="Explanation" /></span>
-                <h2>12%</h2>
-              </S.IndexData> */}
               <S.IndexData>
                 <span>swap fees (24h)
                   <Tippy content="Amount of fees collected in the last 24 hours when people swap tokens inside the pool. This fee is paid to all investors of the pool." >
@@ -197,12 +194,9 @@ const Products = () => {
                 </span>
                 <h2>${infoPool.withdrawFees}</h2>
               </S.IndexData>
-              {/* <S.IndexData>
-                <span>rewards <Image src={infoGray} alt="Explanation" /></span>
-                <h2>40%</h2>
-              </S.IndexData> */}
             </S.IntroCharts>
             <ChartProducts />
+            <ScrollUpButton />
             <Change />
             <Summary />
             <Distribution poolPlatform={poolPlatform} />
