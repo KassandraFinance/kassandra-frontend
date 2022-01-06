@@ -70,6 +70,10 @@ const Form = ({
   const [isApproved, setIsApproved] = React.useState<boolean[]>([])
   const [approvalCheck, setApprovalCheck] = React.useState(0)
 
+  const [fees, setFees] = React.useState({
+    exit: '...',
+    swap: '...'
+  })
   const [isReload, setIsReload] = React.useState<boolean>(false)
 
   const [swapInAddress, setSwapInAddress] = React.useState('')
@@ -154,6 +158,10 @@ const Form = ({
       )
 
       setInfoAHYPE(res)
+      setFees({
+        exit: (data.pool.fee_exit * 100).toFixed(2),
+        swap: (data.pool.fee_swap * 100).toFixed(2)
+      })
       dispatch(actionGetPoolTokens(res))
     }
   }, [data])
@@ -778,7 +786,7 @@ const Form = ({
           />
           <S.ExchangeRate>
             <S.SpanLight>Withdrawal fee:</S.SpanLight>
-            <S.SpanLight>3%</S.SpanLight>
+            <S.SpanLight>{fees.exit}%</S.SpanLight>
           </S.ExchangeRate>
         </>
           :
@@ -808,7 +816,7 @@ const Form = ({
             </S.ExchangeRate>
             <S.ExchangeRate>
               <S.SpanLight>Withdrawal fee:</S.SpanLight>
-              <S.SpanLight>3%</S.SpanLight>
+              <S.SpanLight>{fees.exit}%</S.SpanLight>
             </S.ExchangeRate>
           </>
         ) : (
@@ -837,6 +845,10 @@ const Form = ({
                   infoAHYPE[tokenOutIndex]?.decimals.toNumber()
                 )} ${infoAHYPE[tokenOutIndex]?.symbol}`}
             </S.SpanLight>
+          </S.ExchangeRate>
+          <S.ExchangeRate>
+            <S.SpanLight>{title} fee:</S.SpanLight>
+            <S.SpanLight>{title === 'Invest' ? 0 : fees.swap}%</S.SpanLight>
           </S.ExchangeRate>
         </>
       )}

@@ -11,7 +11,7 @@ export const FormContainer = styled.form`
   max-height: 100%;
 
   .btn-submit {
-    margin-top: 40px;
+    margin-top: 20px;
   }
 `
 
@@ -454,7 +454,7 @@ export const AllInput = styled.div`
     border-radius: 10px;
   }
   @media (max-height: 800px) {
-    max-height: 140px;
+    max-height: 100px;
   }
 `
 

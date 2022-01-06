@@ -9,6 +9,8 @@ export const GET_INFO_AHYPE = gql`
       decimals
       symbol
       price_usd
+      fee_exit
+      fee_swap
       # pool token information
       underlying_assets(orderBy: weight_normalized, orderDirection: desc) {
         balance # token balance in pool
