@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 export const BackgroundStakeFarm = styled.div`
-  background: url('assets/newbg4.svg');
+  background: url('/assets/newbg4.svg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

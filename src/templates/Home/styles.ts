@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 export const Background = styled.div`
-  background: url('assets/latestBackground.svg');
+  background: url('/assets/latestBackground.svg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

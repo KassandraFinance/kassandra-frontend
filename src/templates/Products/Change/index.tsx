@@ -36,7 +36,7 @@ const Change = () => {
 
   React.useEffect(() => {
     const arrChangePrice = []
-    setChangeWeek([])
+
     if (data?.now[0].close) {
       const changeDay = calcChange(data.now[0].close, data.day[0]?.close)
       const changeWeek = calcChange(data.now[0].close, data.week[0]?.close)
@@ -75,9 +75,9 @@ const Change = () => {
         </thead>
         <tbody>
           <tr>
-            {changeWeek.map(item => (
-              <S.Td key={item} value={Number(item)}>
-                {`${Number(item) < 0 ? '-' : ''}${item}%`}
+            {changeWeek.map((item: string, index: number) => (
+              <S.Td key={index} value={Number(item)}>
+                {`${item}%`}
               </S.Td>
             ))}
           </tr>
