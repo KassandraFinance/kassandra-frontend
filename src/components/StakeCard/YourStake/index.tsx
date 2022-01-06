@@ -201,26 +201,36 @@ const YourStake = ({
         <S.Stake>
           <p>
             {pid === 5 &&
-              Big(infoStaked.yourStake.toString())
-                .mul(priceLPToken.priceLP)
-                .div(Big(10).pow(18))
-                .toFixed(2)}
+              BNtoDecimal(
+                Big(infoStaked.yourStake.toString())
+                  .mul(priceLPToken.priceLP)
+                  .div(Big(10).pow(18)),
+                2,
+                2,
+                2
+              )}
             {pid === 4 &&
-              Big(infoStaked.yourStake.toString())
-                .mul(priceLPToken.aHYPE)
-                .div(Big(10).pow(18))
-                .toFixed(2)}
-            {pid !== 4 &&
-              pid !== 5 &&
-              BNtoDecimal(infoStaked.yourStake, new BigNumber(18), 2)}
+              BNtoDecimal(
+                Big(infoStaked.yourStake.toString())
+                  .mul(priceLPToken.aHYPE)
+                  .div(Big(10).pow(18)),
+                2,
+                2,
+                2
+              )}
+            {pid !== 4 && pid !== 5 && BNtoDecimal(infoStaked.yourStake, 18)}
             <S.Symbol>{!stakeWithVotingPower ? 'KACY' : 'USD'}</S.Symbol>
           </p>
           {!stakeWithVotingPower && (
             <span>
               &#8776;{' '}
               {BNtoDecimal(
-                Big(infoStaked.yourStake.toString()).mul(priceLPToken.kacy),
-                Big(18)
+                Big(infoStaked.yourStake.toString())
+                  .mul(priceLPToken.kacy)
+                  .div(Big(10).pow(18)),
+                6,
+                2,
+                2
               )}{' '}
               USD
             </span>
@@ -238,7 +248,7 @@ const YourStake = ({
                     ? 1
                     : infoStaked.votingMultiplier
                 ).mul(infoStaked.yourStake),
-                new BigNumber(18),
+                18,
                 2
               )}
             </span>
@@ -248,11 +258,7 @@ const YourStake = ({
             <span>
               {infoStaked.hasExpired
                 ? '0'
-                : BNtoDecimal(
-                    infoStaked.yourDailyKacyReward,
-                    new BigNumber(18),
-                    2
-                  )}
+                : BNtoDecimal(infoStaked.yourDailyKacyReward, 18, 2)}
               /day
             </span>
           </S.Info>

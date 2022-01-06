@@ -36,11 +36,21 @@ declare let window: {
   ethereum: any,
 }
 
+interface InfoPool {
+  swapFees: string;
+  withdrawFees: string;
+  volume: string;
+}
+
 const Products = () => {
   const [chainId, setChainId] = React.useState<string>('')
   const [loading, setLoading] = React.useState<boolean>(true)
   const [isMobile, setIsMobile] = React.useState<boolean>(false)
-  const [infoPool, setInfoPool] = React.useState<any>({})
+  const [infoPool, setInfoPool] = React.useState<InfoPool>({
+    swapFees: '...',
+    withdrawFees: '...',
+    volume: '...'
+  })
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { trackProductPageView } = useMatomoEcommerce()
@@ -72,22 +82,22 @@ const Products = () => {
 
   React.useEffect(() => {
     if (data?.swap) {
-      const swapFees = data.swap.reduce((acc: number, current: { volume_usd: string }) => {
-        return Number(current.volume_usd) + acc
+      const swapFees = data.swap.reduce((acc: Big, current: { volume_usd: string }) => {
+        return Big(current.volume_usd).add(acc)
       }, 0)
 
-      const withdrawFees = data.withdraw.reduce((acc: number, current: { volume_usd: string }) => {
-        return Number(current.volume_usd) + acc
+      const withdrawFees = data.withdraw.reduce((acc: Big, current: { volume_usd: string }) => {
+        return Big(current.volume_usd).add(acc)
       }, 0)
 
-      const volume = data.volumes.reduce((acc: number, current: { volume_usd: string }) => {
-        return Number(current.volume_usd) + acc
+      const volume = data.volumes.reduce((acc: Big, current: { volume_usd: string }) => {
+        return Big(current.volume_usd).add(acc)
       }, 0)
 
       setInfoPool({
-        swapFees: BNtoDecimal(Big(swapFees), Big(0), 2),
-        withdrawFees: BNtoDecimal(Big(withdrawFees), Big(0), 2),
-        volume: BNtoDecimal(Big(volume), Big(0), 2)
+        swapFees: BNtoDecimal(Big(swapFees), 2, 2, 2),
+        withdrawFees: BNtoDecimal(Big(withdrawFees), 2, 2, 2),
+        volume: BNtoDecimal(Big(volume), 2, 2, 2)
       })
     }
 
@@ -110,8 +120,6 @@ const Products = () => {
     setTimeout(() => {
       setLoading(false)
     }, 600)
-    
-
   }, [])
 
   return (
@@ -161,7 +169,7 @@ const Products = () => {
                     </S.Tooltip>
                   </Tippy>
                 </span>
-                <h2>${BNtoDecimal(Big(data?.pool.total_value_locked_usd || 0), Big(0), 2)}</h2>
+                <h2>${BNtoDecimal(Big(data?.pool.total_value_locked_usd || 0), 2, 2, 2)}</h2>
               </S.IndexData>
               <S.IndexData>
                 <span>VOLUME (24h)

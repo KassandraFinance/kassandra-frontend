@@ -72,14 +72,11 @@ const ModalStaking = ({
     const kacyAmount = percentage.mul(balance).div(new BigNumber(100))
 
     if (inputRef.current !== null) {
-      inputRef.current.value = BNtoDecimal(
-        kacyAmount,
-        new BigNumber(18),
-        2
-      ).replace(/\u00A0/g, '')
+      // eslint-disable-next-line prettier/prettier
+      inputRef.current.value = BNtoDecimal(kacyAmount, 18).replace(/\u00A0/g, '')
     }
 
-    matomoEvent('click-value-btn', BNtoDecimal(percentage, new BigNumber(18)))
+    matomoEvent('click-value-btn', percentage.toString())
     setAmountStaking(kacyAmount)
     setIsAmount(true)
   }
@@ -179,7 +176,7 @@ const ModalStaking = ({
                 decimals={new BigNumber(decimals)}
                 setInputValue={setAmountStaking}
               />
-              <h5>Balance: {BNtoDecimal(balance, new BigNumber(18), 6)}</h5>
+              <h5>Balance: {BNtoDecimal(balance, 18)}</h5>
             </S.Amount>
             <S.ButtonContainer>
               <button

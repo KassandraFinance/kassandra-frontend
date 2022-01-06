@@ -63,7 +63,7 @@ const InputDefault = ({
         <S.SpanLight>
           Balance:{' '}
           {swapOutBalance > new BigNumber(-1)
-            ? BNtoDecimal(swapOutBalance, decimals)
+            ? BNtoDecimal(swapOutBalance, decimals.toNumber())
             : '...'}
         </S.SpanLight>
       </S.Info>
@@ -73,7 +73,10 @@ const InputDefault = ({
           readOnly
           type="text"
           placeholder="0"
-          value={BNtoDecimal(swapOutAmount || new BigNumber(0), decimals)}
+          value={BNtoDecimal(
+            swapOutAmount || new BigNumber(0),
+            decimals.toNumber()
+          )}
         />
         {isMax !== null ? (
           <S.ButtonMax

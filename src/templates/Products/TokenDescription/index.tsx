@@ -104,7 +104,7 @@ const TokenDescription = () => {
           cryptocurrencies:{' '}
         </span>
         <ol>
-          <li> wavax, qi, kacy, png, joe.k, yak.k</li>
+          <li>wAVAX, JOE, KACY, PNG, QI, YAK</li>
         </ol>
         <h2>Index Value</h2>
         <p>The value of the index is given by:</p>
@@ -123,7 +123,7 @@ const TokenDescription = () => {
             >
               aHYPE
             </a>{' '}
-            Documentation
+            documentation
           </p>
           <img src="/assets/externalLink.svg" alt="" />
         </S.ToDocumentation>

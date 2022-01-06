@@ -82,7 +82,7 @@ const InputTokens = ({
   }, [poolTokens])
 
   const wei2String = (input: BigNumber) => {
-    return BNtoDecimal(input, decimals).replace(/\u00A0/g, '')
+    return BNtoDecimal(input, decimals.toNumber()).replace(/\u00A0/g, '')
   }
 
   const setMax = () => {
@@ -119,7 +119,7 @@ const InputTokens = ({
         <S.SpanLight>
           Balance:{' '}
           {swapInBalance > new BigNumber(-1)
-            ? BNtoDecimal(swapInBalance, decimals)
+            ? BNtoDecimal(swapInBalance, decimals.toNumber())
             : '...'}
         </S.SpanLight>
       </S.PayWith>

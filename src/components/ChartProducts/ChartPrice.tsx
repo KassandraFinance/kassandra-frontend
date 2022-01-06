@@ -62,7 +62,7 @@ const ChartPrice = ({ data, color }: IChartPriceProps) => {
               return ''
             }
 
-            return BNtoDecimal(Big(item).mul(Big(10).pow(18)), Big(18), 3)
+            return BNtoDecimal(Big(item), 18, 2, 2)
           }}
         />
         <Tooltip
