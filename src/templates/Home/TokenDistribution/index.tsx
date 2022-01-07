@@ -1,23 +1,8 @@
 import React from 'react'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
-
-import ModalSocial from '../../../components/ModalSocial'
 
 import * as S from './styles'
-import Button from '../../../components/Button'
 
 const TokenDistribution = () => {
-
-  const { trackEvent } = useMatomo();
-
-  function clickMatomoEvent(action: string, name: string) {
-    trackEvent({
-      category: "kassandra-page",
-      action: action,
-      name: name,
-    });
-  }
-
   return (
     <>
       <S.Intro>
@@ -33,7 +18,12 @@ const TokenDistribution = () => {
         <img src="assets/TokenChart.svg" alt="" />
         <S.TextWrapper>
           <h1>Fair and community driven token distribuition</h1>
-          <span>To create a fully decentralized organization, with a well-distributed token, we chose to have a big part of the total supply (50%) slowly available through rewards to people that engage and help Kassandra in the early stages.</span>
+          <span>
+            To create a fully decentralized organization, with a
+            well-distributed token, we chose to have a big part of the total
+            supply (50%) slowly available through rewards to people that engage
+            and help Kassandra in the early stages.
+          </span>
         </S.TextWrapper>
       </S.Grid>
       <S.TokenInfoWrapper>
@@ -56,12 +46,38 @@ const TokenDistribution = () => {
           </S.Values>
         </S.TokenInfo>
       </S.TokenInfoWrapper>
-      <S.Link href='https://kassandrafoundation.medium.com/kassandra-dao-token-8bc046d55a00' target='_blank' rel="noopener noreferrer">
-        <a>Check more info about the $KACY token
-          <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg" >
-            <path d="M8.5 16C12.6421 16 16 12.6421 16 8.5C16 4.35786 12.6421 1 8.5 1C4.35786 1 1 4.35786 1 8.5C1 12.6421 4.35786 16 8.5 16Z" stroke="white" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M8.5 11.5L11.5 8.5L8.5 5.5" stroke="white" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M5.5 8.5H11.5" stroke="white" strokeLinecap="round" strokeLinejoin="round" />
+      <S.Link
+        href="https://kassandrafoundation.medium.com/kassandra-dao-token-8bc046d55a00"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <a>
+          Check more info about the $KACY token
+          <svg
+            width="17"
+            height="17"
+            viewBox="0 0 17 17"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8.5 16C12.6421 16 16 12.6421 16 8.5C16 4.35786 12.6421 1 8.5 1C4.35786 1 1 4.35786 1 8.5C1 12.6421 4.35786 16 8.5 16Z"
+              stroke="white"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M8.5 11.5L11.5 8.5L8.5 5.5"
+              stroke="white"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M5.5 8.5H11.5"
+              stroke="white"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </a>
       </S.Link>

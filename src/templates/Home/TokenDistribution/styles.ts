@@ -1,4 +1,3 @@
-import { HowItWorks } from './../../Heim/HowItWorks/index'
 import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
