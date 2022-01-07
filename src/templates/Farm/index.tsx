@@ -13,6 +13,7 @@ import useStakingContract from '../../hooks/useStakingContract'
 import Web3Disabled from '../../components/Web3Disabled'
 import VotingPower from '../../components/VotingPower'
 import StakeCard from '../../components/StakeCard'
+import Loading from '../../components/Loading'
 
 import ComingSoon from './ComingSoon'
 import Header from '../../components/Header'
@@ -73,10 +74,9 @@ const StakeFarm = () => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            fontWeight: 500
           }}
         >
-          Loading...
+          <Loading />
         </h1>
       }
       {web3.currentProvider !== null && chainId === "0xa869" && !loading && !isMobile ?

@@ -1,18 +1,17 @@
 import React from 'react'
-import Image from 'next/image'
 import useSWR from 'swr'
 import request from 'graphql-request'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import { SUBGRAPH_URL, HeimCRPPOOL } from '../../constants/tokenAddresses'
 
+import Loading from '../Loading'
+
 import ChartPrice from './ChartPrice'
 import ChartTVL from './ChartTVL'
 import ChartAllocation from './ChartAllocation'
 
 import { GET_CHART } from './graphql'
-
-import token96 from '../../../public/assets/token-96.svg'
 
 import * as S from './styles'
 
@@ -215,11 +214,7 @@ const ChartProducts = () => {
       </S.Selects>
       {loading ? (
         <S.Wrapper>
-          <S.ImgLoading>
-            <S.AnimatedImg>
-              <Image src={token96} alt="" />
-            </S.AnimatedImg>
-          </S.ImgLoading>
+          <Loading />
         </S.Wrapper>
       ) : null}
       {inputChecked === 'Price' && !loading && (
