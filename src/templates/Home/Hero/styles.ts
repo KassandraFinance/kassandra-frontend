@@ -128,7 +128,7 @@ export const IntroHero = styled.div`
     }
   }
 `
-export const ButtonWrapper = styled.div`
+export const ButtonWrapper = styled.ul`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
@@ -141,6 +141,10 @@ export const ButtonWrapper = styled.div`
     gap: 12px;
 
     width: 240px;
+
+    .btn-cta {
+      width: 100%;
+    }
   }
 `
 export const DesktopScreen = styled.div`
