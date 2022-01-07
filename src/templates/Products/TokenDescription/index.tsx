@@ -28,41 +28,40 @@ const TokenDescription = () => {
       <S.Text>
         <p>
           The Avalanche Social Index (aHYPE) tracks the performance of a
-          portfolio composed by selecting the most socially active
-          cryptocurrencies in the last 30 days. This portfolio is weighted
-          according to the values of social score made available by Heimdall and
-          the technology provided by the Kassandra Protocol. The portfolio is a
-          SIP (Smart Index Pool) and is rebalanced by arbitrageurs just like an
-          usual liquidity pool. The index is accompanied by its own token $HEIM,
-          allowing investors to buy the index by purchasing the token, just like
-          an ETF.
+          portfolio composed of the most socially active cryptocurrencies in the
+          last 30 days. This portfolio is weighted according to the social score
+          made available by Heimdall and the technology provided by the
+          Kassandra Protocol. The portfolio is a SIP (Smart Index Pool) and is
+          rebalanced by arbitrageurs just like a usual liquidity pool. The index
+          is accompanied by its own token $aHYPE, allowing investors to buy the
+          index by purchasing the token, just like an ETF.
         </p>
 
         <h2>Goal</h2>
         <p>
           The index primary goal is to offer exposure to the most popular
-          cryptocurrencies in a simple and easy way. The investor needs only to
+          cryptocurrencies in a simple and easy way, the investor needs only to
           acquire the index token. With this goal in mind it is paramount to
           develop a tool which can measure the popularity of a particular
-          crytpo, this tool is the creation of Heimdall and it is the bedrock of
-          the Index.
+          crypto, this tool is the creation of Heimdall and it is the bedrock of
+          the index.
         </p>
 
         <h2>Dynamic Weights</h2>
         <span>
-          The main aspect of the SIP is that the weights are not fixed, but
-          change according to the social score dynamics in order to keep track
-          of the most active tokens.
+          The main aspect of the Configurable Rights Pool (CRP) is that weights
+          are not fixed, but change according to the social score dynamics in
+          order to keep track of the most active tokens.
         </span>
         <p>
-          The frequency and the amount in which the weights for each
-          cryptocurrency inside the SIP are updated directly affect the value of
-          the pool. Since any weight change can offer the opportunity for
-          arbitrage, therefore decreasing the value of the pool. In addition,
-          gas costs must be considered because changing weights means writing
-          new information on the blockchain. The gas costs will be covered using
-          funds from a wallet managed by the DAO and funded by the exit fees
-          collected from the users.
+          The frequency and the amount in which weights are updated for each
+          cryptocurrency inside the CRP directly correlate with the value of the
+          fund. For any weight change can offer the opportunity for arbitrage,
+          that decreases the value of the pool, and gas costs are incurred to
+          write the new weights on the blockchain. These gas costs will be
+          covered using funds from a wallet managed by the DAO and funded by the
+          exit fees collected from users. Losses in arbitrage are aleviated by
+          swap fees and the smart allocation of the assets.
         </p>
         <span>
           In general terms, the logic behind updating weights is the following:
@@ -70,18 +69,21 @@ const TokenDescription = () => {
         <ol>
           <li>Social score data is retrieved using Heimdall API.</li>
           <li>
-            Using API3 we make the weight data available in the blockchain.
+            Using API3 we make the social score data available in the
+            blockchain.
           </li>
           <li>
-            The new data is used to define the new weights in the SIP, incurring
+            The new data is used to define the new weights in the CRP, incurring
             in gas costs.
           </li>
         </ol>
         <p>
-          For the reasons above, we have determined that the weights will be
-          updated day by day.To avoid jumps and to make the changes more
-          predictable, the updates will occur at each block by called a custom
-          function called pokeWeights
+          For the reasons above, we have determined that weights are to be
+          updated every 24 hours. To avoid large jumps that could lead to large
+          impermanent loss and to make the changes more predictable, weights
+          smoothly change on each block. To make this change in the blockchain,
+          arbitrageurs call pokeWeights to take advantage of arbitrage
+          opportunities created by those weight changes.
         </p>
         <h2>Index Maintenance</h2>
         <p>
@@ -101,7 +103,7 @@ const TokenDescription = () => {
         </ol>
         <span>
           The initial whitelist will be composed of the following
-          cryptocurrencies:{' '}
+          cryptocurrencies:
         </span>
         <ol>
           <li>wAVAX, JOE, KACY, PNG, QI, YAK</li>
