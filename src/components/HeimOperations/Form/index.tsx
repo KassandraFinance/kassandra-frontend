@@ -511,12 +511,12 @@ const Form = ({
 
         if (txReceipt.status) {
           ToastSuccess(`Approval of ${tokenSymbol} confirmed`)
-          setApprovalCheck(cur => cur + 1)
+          setTimeout(() => setApprovalCheck(cur => cur + 1), 500)
           return
         }
       }
     },
-    []
+    [setApprovalCheck]
   )
 
   const investCallback = React.useCallback(
