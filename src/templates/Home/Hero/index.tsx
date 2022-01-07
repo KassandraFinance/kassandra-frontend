@@ -1,4 +1,5 @@
 import React from 'react'
+import NextLink from 'next/link'
 import { Link } from 'react-scroll'
 
 import { useMatomo } from '@datapunt/matomo-tracker-react'
@@ -45,16 +46,17 @@ const Hero = () => {
             onClick={() => clickMatomoEvent('click-to-projects', 'hero')}
           />
         </Link>
-        <Button
-          backgroundPrimary
-          size="large"
-          as="a"
-          href="https://demo.kassandra.finance"
-          target="_blank"
-          text="Explore Our Demo"
-          icon={<img src="/assets/avalancheIcon.svg" alt="" />}
-          onClick={() => clickMatomoEvent('click-to-cta', 'hero')}
-        />
+        <NextLink href="https://demo.kassandra.finance" passHref>
+          <Button
+            backgroundPrimary
+            size="large"
+            as="a"
+            target="_blank"
+            text="Explore Our Demo"
+            icon={<img src="/assets/avalancheIcon.svg" alt="" />}
+            onClick={() => clickMatomoEvent('click-to-cta', 'hero')}
+          />
+        </NextLink>
       </S.ButtonWrapper>
     </S.Hero>
   )
