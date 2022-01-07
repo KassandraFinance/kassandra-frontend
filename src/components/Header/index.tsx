@@ -89,11 +89,7 @@ const Header = () => {
         <S.LogoWrapper>
           <Link href="/" passHref>
             <a>
-              {asPath === '/heim' ? (
-                <img src="/assets/HeimLogoMenu.svg" alt="HEIM Index by Kassandra" />
-              ) : (
-                <img src="/assets/new-kassandra-logo-header.svg" alt="Kassandra" />
-              )}
+              <img src="/assets/new-kassandra-logo-header.svg" alt="Kassandra" />
             </a>
           </Link>
         </S.LogoWrapper>

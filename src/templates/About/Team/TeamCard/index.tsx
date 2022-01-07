@@ -25,14 +25,14 @@ const TeamCard = ({ name, role, image, social }: ITeamCardProps) => (
       {social.github ? (
         <S.SocialIcon>
           <a href={social.github} target="_blank" rel="noreferrer">
-            <img src="assets/github-icon.svg" alt="GitHub icon" />
+            <img src="assets/Github.svg" alt="GitHub icon" />
           </a>
         </S.SocialIcon>
       ) : null}
       {social.twitter ? (
         <S.SocialIcon>
           <a href={social.twitter} target="_blank" rel="noreferrer">
-            <img src="assets/twitter-icon.svg" alt="Twitter icon" />
+            <img src="assets/Twitter.svg" alt="Twitter icon" />
           </a>
         </S.SocialIcon>
       ) : null}

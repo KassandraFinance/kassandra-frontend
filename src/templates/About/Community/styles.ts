@@ -53,4 +53,16 @@ export const Icons = styled.div`
       flex: 1 0 48px;
     }
   }
+
+  a {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    height: 3.2rem;
+    width: 3.2rem;
+    display: block;
+  }
+
+  img {
+    padding: 5px;
+  }
 `

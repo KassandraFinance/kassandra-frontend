@@ -283,7 +283,7 @@ const KassandraTokenCard = () => {
         <S.MobileCards>
           <S.ResponsabilitiesCards>
             <S.IconWrapper>
-              <img src="/assets/adjustIcon.png" alt="" />
+              <img src="/assets/adjustIcon.svg" alt="" />
             </S.IconWrapper>
             <span>
               {' '}
@@ -293,7 +293,7 @@ const KassandraTokenCard = () => {
 
           <S.ResponsabilitiesCards>
             <S.IconWrapper>
-              <img src="/assets/deployInvest.png" alt="" />
+              <img src="/assets/deployInvest.svg" alt="" />
             </S.IconWrapper>
 
             <span>
@@ -304,7 +304,7 @@ const KassandraTokenCard = () => {
 
           <S.ResponsabilitiesCards>
             <S.IconWrapper>
-              <img src="/assets/curatingIcon.png" alt="" />
+              <img src="/assets/curatingIcon.svg" alt="" />
             </S.IconWrapper>
             <span>
               <b>Curate</b> whitelists for investable assets
@@ -313,7 +313,7 @@ const KassandraTokenCard = () => {
 
           <S.ResponsabilitiesCards>
             <S.IconWrapper>
-              <img src="/assets/approvingIcon.png" alt="" />
+              <img src="/assets/approvingIcon.svg" alt="" />
             </S.IconWrapper>
             <span>
               <b>Approve</b> code changes and updates

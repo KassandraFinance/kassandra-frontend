@@ -14,9 +14,17 @@ export const Card = styled.div`
   }
 `
 export const Image = styled.div`
+  border-radius: 50%;
+  background: linear-gradient(0deg, #e843c4, #ffbf00);
+  margin-bottom: 1.6rem;
+  max-width: 100%;
+  overflow: hidden;
+
   img {
-    margin-bottom: 1.6rem;
-    max-width: 100%;
+    padding: 2px;
+    border-radius: 50%;
+    width: 154px;
+    height: 154px;
   }
 `
 export const Name = styled.h2`
@@ -49,7 +57,13 @@ export const Social = styled.div`
   margin-top: 2.4rem;
 `
 export const SocialIcon = styled.div`
+  background: rgba(33, 20, 38, 0.33);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  width: 2.8rem;
+  height: 2.8rem;
+
   img {
-    max-width: 2.8rem;
+    padding: 5px;
   }
 `

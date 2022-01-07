@@ -67,7 +67,7 @@ export const ModalSignUp = ({
             </button>
           </WrapperClose>
           <InterBackground>
-            <img src="./assets/logo-header.svg" alt="" />
+            <img src="./assets/new-kassandra-logo-header.svg" alt="" />
           </InterBackground>
           <Content>
             <ModalText>

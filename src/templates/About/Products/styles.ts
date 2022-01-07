@@ -24,6 +24,13 @@ export const ImageKassandra = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  img {
+    max-width: 100%;
+    margin-bottom: -90px;
+    margin-top: -90px;
+  }
+
   @media (max-width: 960px) {
     img {
       display: none;
@@ -122,7 +129,7 @@ export const KassandraToken = styled.section`
   margin: 0 auto 140px;
   padding: 0 3.2rem;
   gap: 32px;
-  /* background: url('assets/BlurDivisor.svg'); */
+  /* background: url('assets/BlurDivisor.png'); */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center -100px;

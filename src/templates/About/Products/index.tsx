@@ -7,8 +7,10 @@ const Products = () => {
     <S.Container>
       <S.ImageKassandra>
         <img
-          src="assets/about-products.png"
+          src="assets/about-products.svg"
           alt="Understanding the parts that make Kassandra"
+          width="594"
+          height="568"
         />
       </S.ImageKassandra>
       <S.CardWrapper>

@@ -59,7 +59,7 @@ const Summary = () => {
       </p>
       <S.LinkContent>
         {/* <a href="https://coinmarketcap.com/">
-          View On CoinMarketCap <img src="assets/externalLink.svg" alt="" />
+          View On CoinMarketCap <img src="/assets/externalLink.svg" alt="" />
         </a> */}
         <a
           href="https://kassandrafoundation.medium.com/avalanche-social-index-4042a823c972"

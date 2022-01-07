@@ -18,7 +18,7 @@ const Community = () => (
             rel="noopener noreferrer"
           >
             <img
-              src="/assets/discord-icon.svg"
+              src="/assets/Discord.svg"
               alt="Join our Discord community"
               width="32"
               height="32"
@@ -32,7 +32,7 @@ const Community = () => (
             rel="noopener noreferrer"
           >
             <img
-              src="/assets/telegram-icon.svg"
+              src="/assets/telegram.svg"
               alt="Join our Telegram group"
               width="32"
               height="32"
@@ -46,7 +46,7 @@ const Community = () => (
             rel="noopener noreferrer"
           >
             <img
-              src="/assets/github-icon.svg"
+              src="/assets/Github.svg"
               alt="Access our GitHub repository"
               width="32"
               height="32"
@@ -60,7 +60,7 @@ const Community = () => (
             rel="noopener noreferrer"
           >
             <img
-              src="/assets/medium-icon.svg"
+              src="/assets/Medium.svg"
               alt="Read our Medium blog"
               width="32"
               height="32"
@@ -74,7 +74,7 @@ const Community = () => (
             rel="noopener noreferrer"
           >
             <img
-              src="/assets/twitter-icon.svg"
+              src="/assets/Twitter.svg"
               alt="Follow our Twitter feed"
               width="32"
               height="32"

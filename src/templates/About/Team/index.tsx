@@ -20,7 +20,7 @@ const Team = () => {
         <TeamCard
           name="Kevin Voigt"
           role="CTO"
-          image="assets/kevin-photo.svg"
+          image="assets/team/kevin-voigt.png"
           social={{
             github: 'https://github.com/Baruel',
             linkedin: 'https://linkedin.com/in/kevin-voigt-221b24196'
@@ -29,7 +29,7 @@ const Team = () => {
         <TeamCard
           name="Hamilton Haskel"
           role="CFO"
-          image="assets/hamilton-photo.svg"
+          image="assets/team/hamilton-haskel.png"
           social={{
             linkedin: 'https://linkedin.com/in/hamilton-haskel-3585b477'
           }}
@@ -37,7 +37,7 @@ const Team = () => {
         <TeamCard
           name="André Zanghelini"
           role="SOLIDITY ENGINEER"
-          image="assets/andre-photo.svg"
+          image="assets/team/andre-zanghelini.png"
           social={{
             github: 'https://github.com/an-dz',
             linkedin: 'https://www.linkedin.com/in/zanghelini/'
@@ -46,7 +46,7 @@ const Team = () => {
         <TeamCard
           name="Anthony Bet"
           role="DATA SCIENTIST"
-          image="assets/anthony-photo.svg"
+          image="assets/team/anthony-bet.png"
           social={{
             github: 'github.com/AnthonyAposta',
             linkedin: 'https://linkedin.com/in/anthony-joão-bet'
@@ -55,7 +55,7 @@ const Team = () => {
         <TeamCard
           name="Jorge Filho"
           role="BUSINESS DEVELOPMENT"
-          image="assets/jorge-photo.svg"
+          image="assets/team/jorge-filho.png"
           social={{
             linkedin: 'https://www.linkedin.com/in/jorge-filho-35020018b/',
             twitter: 'https://twitter.com/AkademiaHash'
@@ -64,7 +64,7 @@ const Team = () => {
         <TeamCard
           name="Jony Reis"
           role="FRONT-END DEVELOPER"
-          image="assets/jony-photo.svg"
+          image="assets/team/jony-reis.png"
           social={{
             github: 'https://github.com/jonyreis',
             linkedin: 'https://www.linkedin.com/in/jonyreis/'
@@ -73,7 +73,7 @@ const Team = () => {
         <TeamCard
           name="Arthur Stofella"
           role="UI/UX DESIGNER"
-          image="assets/arthur-photo.svg"
+          image="assets/team/arthur-stofella.png"
           social={{
             linkedin: 'https://linkedin.com/in/arthurstofella'
           }}
@@ -81,7 +81,7 @@ const Team = () => {
         <TeamCard
           name="Pedro Jung"
           role="QUANTITATIVE ANALYST"
-          image="assets/pedro-photo.svg"
+          image="assets/team/pedro-jung.png"
           social={{
             linkedin: 'https://www.linkedin.com/in/pedro-jung-tavares-b53021a4/'
           }}
@@ -89,7 +89,7 @@ const Team = () => {
         <TeamCard
           name="Fernando Rigo"
           role="FRONT-END DEVELOPER"
-          image="assets/fernando-photo.svg"
+          image="assets/team/fernando-rigo.png"
           social={{
             github: 'https://github.com/F-rigo',
             linkedin: 'https://linkedin.com/in/fernandorigo'
