@@ -35,7 +35,7 @@ const PoweredBy = () => {
           rel="noopener noreferrer"
           onClick={() => matomoEvent('click-on-partner', 'avalanche')}
         >
-          <Image src={avalanche} alt="" />
+          <Image src={avalanche} alt="Avalanche Blockchain" />
         </a>
         <a
           id="heimdall"
@@ -44,7 +44,7 @@ const PoweredBy = () => {
           rel="noopener noreferrer"
           onClick={() => matomoEvent('click-on-partner', 'heimdall')}
         >
-          <Image src={heimdall} alt="" />
+          <Image src={heimdall} alt="Heimdall" />
         </a>
         <a
           id="api3"
@@ -53,7 +53,7 @@ const PoweredBy = () => {
           rel="noopener noreferrer"
           onClick={() => matomoEvent('click-on-partner', 'api3')}
         >
-          <Image src={api3} alt="" />
+          <Image src={api3} alt="API3" />
         </a>
       </S.PartnersContent>
     </S.PoweredBy>
