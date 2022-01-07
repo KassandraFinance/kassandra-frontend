@@ -106,11 +106,12 @@ const Header = () => {
             </Link>
           )} */}
 
-          <DropdownInvest />
+          {/* <DropdownInvest /> */}
+          <S.MenuLinkDisable onClick={() => clickMatomoEvent('click-on-link', 'invest')}>Invest</S.MenuLinkDisable>
 
-          <Link href="/farm" passHref>
-            <S.MenuLink onClick={() => clickMatomoEvent('click-on-link', 'stake-farm')}>Stake/Farm</S.MenuLink>
-          </Link>
+          {/* <Link href="/farm" passHref> */}
+            <S.MenuLinkDisable onClick={() => clickMatomoEvent('click-on-link', 'stake-farm')}>Stake/Farm</S.MenuLinkDisable>
+          {/* </Link> */}
 
           {/* <Link href="/" passHref> */}
             <S.MenuLinkDisable onClick={() => clickMatomoEvent('click-on-link', 'vote')} >Vote</S.MenuLinkDisable>
@@ -120,7 +121,7 @@ const Header = () => {
             <S.MenuLink onClick={() => clickMatomoEvent('click-on-link', 'about')}>About</S.MenuLink>
           </Link>
 
-          {web3.currentProvider !== null ? (
+          {/* {web3.currentProvider !== null ? (
             userWalletAddress ? (
               <Button
                 icon={
@@ -162,7 +163,7 @@ const Header = () => {
                 clickMatomoEvent('open-site-metamask', 'install-metamask')
               }}
               text='Install MetaMask!' />
-          )}
+          )} */}
 
         </S.MenuNav>
       </S.MenuDesktop>
@@ -194,20 +195,20 @@ const Header = () => {
               > Home </S.MenuLink>
             </Link>
 
-            <Link href="/products/ahype" passHref>
-              <S.MenuLink 
+            {/* <Link href="/products/ahype" passHref> */}
+              <S.MenuLinkDisable 
                 onClick={() => {
                   clickMatomoEvent('click-on-link', 'invest')
                   setIsOpen(false)
-                }}>Invest</S.MenuLink>
-            </Link>
+                }}>Invest</S.MenuLinkDisable>
+            {/* </Link> */}
 
-            <Link href="/farm" passHref>
-              <S.MenuLink onClick={() => {
+            {/* <Link href="/farm" passHref> */}
+              <S.MenuLinkDisable onClick={() => {
                 clickMatomoEvent('click-on-link', 'stake-farm')
                 setIsOpen(false)
-              }}>Stake/Farm</S.MenuLink>
-            </Link>
+              }}>Stake/Farm</S.MenuLinkDisable>
+            {/* </Link> */}
             
             {/* <Link href="/" passHref> */}
               <S.MenuLinkDisable>Vote</S.MenuLinkDisable>
@@ -218,7 +219,7 @@ const Header = () => {
                 setIsOpen(false)
               }}>About</S.MenuLink>
             </Link>
-            {web3.currentProvider !== null ? (
+            {/* {web3.currentProvider !== null ? (
               userWalletAddress ? (
                 <Button
                   backgroundBlack
@@ -245,7 +246,7 @@ const Header = () => {
                 href="https://metamask.io/download.html"
                 target="_blank"
                 text='Install MetaMask!' />
-            )}
+            )} */}
           </S.MenuNav>
         </S.MenuFull>
         <ModalWalletConnect

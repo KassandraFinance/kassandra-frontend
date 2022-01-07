@@ -1,5 +1,5 @@
-import Farm from './../templates/Farm'
+import NotFound from './../templates/404'
 
 export default function Index() {
-  return <Farm />
+  return <NotFound />
 }

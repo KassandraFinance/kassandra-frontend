@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'next/link'
+import { Link } from 'react-scroll'
 
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
@@ -29,16 +29,32 @@ const Hero = () => {
         <h1>tokenized data-driven investment funds</h1>
       </S.IntroHero>
       <S.ButtonWrapper>
-        <Link href="/products/ahype">
+        <Link
+          activeClass="active"
+          to="launching-banner"
+          smooth={true}
+          offset={-70}
+          duration={3000}
+        >
           <Button
             backgroundPrimary
             size="large"
             as="a"
-            text="Explore Our Products"
+            text="Upcoming IDO"
             icon={<img src="/assets/avalancheIcon.svg" alt="" />}
-            onClick={() => clickMatomoEvent('click-to-cta', 'hero')}
+            onClick={() => clickMatomoEvent('click-to-projects', 'hero')}
           />
         </Link>
+        <Button
+          backgroundPrimary
+          size="large"
+          as="a"
+          href="https://demo.kassandra.finance"
+          target="_blank"
+          text="Explore Our Demo"
+          icon={<img src="/assets/avalancheIcon.svg" alt="" />}
+          onClick={() => clickMatomoEvent('click-to-cta', 'hero')}
+        />
       </S.ButtonWrapper>
     </S.Hero>
   )
