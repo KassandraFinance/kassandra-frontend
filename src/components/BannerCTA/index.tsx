@@ -9,7 +9,7 @@ const BannerCTA = () => {
     <S.Background>
       <S.Container>
         <S.ImageWrapper>
-          <img src="assets/heim-coin-banner.png" alt="" />
+          <img src="assets/coin-banner.png" alt="" />
         </S.ImageWrapper>
 
         <S.TextWrapper>

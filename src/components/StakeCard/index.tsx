@@ -308,7 +308,7 @@ const StakeCard = ({
                 <h4>APR</h4>
               </S.APR>
               <S.Percentage>
-                {infoStaked.hasExpired ? 0 : BNtoDecimal(infoStaked.apr, 0)} %
+                {infoStaked.hasExpired ? 0 : BNtoDecimal(infoStaked.apr, 0)}%
               </S.Percentage>
             </S.IntroStaking>
           </S.InterBackground>

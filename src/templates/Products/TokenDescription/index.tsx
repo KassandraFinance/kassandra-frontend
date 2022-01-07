@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import iconBar from '../../../../public/assets/iconbar.svg'
-import imageCalc from '../../../../public/assets/image-calc.svg'
+import imageCalc from '../../../../public/assets/image-calc.png'
 
 import * as S from './styles'
 

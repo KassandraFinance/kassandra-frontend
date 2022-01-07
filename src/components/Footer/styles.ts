@@ -165,6 +165,18 @@ export const LowerRight = styled.div`
   flex-direction: column;
 `
 
+export const SocialIcon = styled.a`
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  height: 3.2rem;
+  width: 3.2rem;
+  display: block;
+
+  img {
+    padding: 5px;
+  }
+`
+
 export const Divider = styled.div`
   background-color: transparent;
   /* border-top: 1px solid rgba(255, 255, 255, 0.14); */

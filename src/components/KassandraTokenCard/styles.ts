@@ -6,7 +6,7 @@ import * as ButtonStyles from '../Button/styles'
 export const Container = styled.div`
   max-width: 100%;
   margin: 0 auto 160px;
-  background: url('assets/BlurDivisor.svg');
+  background: url('assets/BlurDivisor.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -25,7 +25,7 @@ export const KassandraToken = styled.section`
   max-width: 1000px;
   margin: 0 auto 140px;
   gap: 32px;
-  /* background: url('assets/BlurDivisor.svg'); */
+  /* background: url('assets/BlurDivisor.png'); */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center -100px;

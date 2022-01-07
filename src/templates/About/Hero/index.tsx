@@ -17,7 +17,7 @@ const Hero = () => {
           </h1>
         </S.IntroHero>
         <S.HeroImage>
-          <img src="assets/kassandra-about.svg" alt="" className="kassandra" />
+          <img src="assets/kassandra-about.png" alt="" className="kassandra" />
         </S.HeroImage>
         <S.Divider />
         <S.IntroTextWrapper>
