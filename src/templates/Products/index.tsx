@@ -39,6 +39,7 @@ declare let window: {
 }
 
 interface InfoPool {
+  tvl: string;
   swapFees: string;
   withdrawFees: string;
   volume: string;
@@ -49,6 +50,7 @@ const Products = () => {
   const [loading, setLoading] = React.useState<boolean>(true)
   const [isMobile, setIsMobile] = React.useState<boolean>(false)
   const [infoPool, setInfoPool] = React.useState<InfoPool>({
+    tvl: '...',
     swapFees: '...',
     withdrawFees: '...',
     volume: '...'
@@ -57,12 +59,10 @@ const Products = () => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { trackProductPageView } = useMatomoEcommerce()
   
-  const day = Math.trunc(Date.now() / 1000 - 60 * 60 * 24)
-
   const { data } = useSWR([GET_INFO_POOL], query =>
     request(SUBGRAPH_URL, query, {
       id: HeimCRPPOOL,
-      day
+      day: Math.trunc(Date.now() / 1000 - 60 * 60 * 24)
     })
   )
 
@@ -83,7 +83,7 @@ const Products = () => {
   }
 
   React.useEffect(() => {
-    if (data?.swap) {
+    if (data) {
       const swapFees = data.swap.reduce((acc: Big, current: { volume_usd: string }) => {
         return Big(current.volume_usd).add(acc)
       }, 0)
@@ -97,6 +97,7 @@ const Products = () => {
       }, 0)
 
       setInfoPool({
+        tvl: BNtoDecimal(Big(data.pool.total_value_locked_usd), 2, 2, 2),
         swapFees: BNtoDecimal(Big(swapFees), 2, 2, 2),
         withdrawFees: BNtoDecimal(Big(withdrawFees), 2, 2, 2),
         volume: BNtoDecimal(Big(volume), 2, 2, 2)
@@ -171,7 +172,7 @@ const Products = () => {
                     </S.Tooltip>
                   </Tippy>
                 </span>
-                <h2>${BNtoDecimal(Big(data?.pool.total_value_locked_usd || 0), 2, 2, 2)}</h2>
+                <h2>${infoPool.tvl}</h2>
               </S.IndexData>
               <S.IndexData>
                 <span>VOLUME (24h)

@@ -89,7 +89,10 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
   const day = Math.trunc(Date.now() / 1000 - 60 * 60 * 24)
 
   const { data } = useSWR([GET_INFO_AHYPE, HeimCRPPOOL], (query, id) =>
-    request(SUBGRAPH_URL, query, { id, day })
+    request(SUBGRAPH_URL, query, { id, day }),
+    {
+      refreshInterval: 10000
+    }
   )
 
   const { trackEvent } = useMatomo()

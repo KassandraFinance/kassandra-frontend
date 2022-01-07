@@ -1,15 +1,9 @@
 import React from 'react'
-import useSWR from 'swr'
-import { request } from 'graphql-request'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import Image from 'next/image'
 import CopyToClipboard from 'react-copy-to-clipboard'
 
-import {
-  HeimCRPPOOL,
-  HeimCorePool,
-  SUBGRAPH_URL
-} from '../../../constants/tokenAddresses'
+import { HeimCRPPOOL, HeimCorePool } from '../../../constants/tokenAddresses'
 
 import substr from '../../../utils/substr'
 import { registerToken } from '../../../utils/registerToken'
@@ -20,18 +14,14 @@ import iconBar from '../../../../public/assets/iconbar.svg'
 import metaMaskIcon from '../../../../public/assets/metaMaskIcon.svg'
 import avalancheIcon from '../../../../public/assets/avalanche_social_index_logo.svg'
 
-import { GET_INFO_POOL } from '../graphql'
-
 import * as S from './styles'
 
-const Summary = () => {
-  const { trackEvent } = useMatomo()
+interface Params {
+  strategy: string;
+}
 
-  const { data } = useSWR([GET_INFO_POOL], query =>
-    request(SUBGRAPH_URL, query, {
-      id: HeimCRPPOOL
-    })
-  )
+const Summary = ({ strategy }: Params) => {
+  const { trackEvent } = useMatomo()
 
   function matomoEvent(action: string, name: string) {
     trackEvent({
@@ -170,7 +160,7 @@ const Summary = () => {
           </div>
           <span>STRATEGY CONTRACT</span>
         </S.Blockchain>
-        <CopyToClipboard text={data?.pool && data?.pool.strategy}>
+        <CopyToClipboard text={strategy}>
           <button
             type="button"
             onClick={() => {
@@ -178,7 +168,7 @@ const Summary = () => {
               matomoEvent('click-to-copy', 'strategy-contract')
             }}
           >
-            {data?.pool && substr(data?.pool.strategy)}
+            {substr(strategy)}
             <svg
               width="12"
               height="13"

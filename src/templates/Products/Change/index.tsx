@@ -11,21 +11,17 @@ import iconBar from '../../../../public/assets/iconbar.svg'
 import * as S from './styles'
 
 const Change = () => {
-  const [changeWeek, setChangeWeek] = React.useState<string[]>([])
-  const day = Math.trunc(Date.now() / 1000 - 60 * 60 * 24)
-  const week = Math.trunc(Date.now() / 1000 - 60 * 60 * 24 * 7)
-  const month = Math.trunc(Date.now() / 1000 - 60 * 60 * 24 * 30)
-  const quarterly = Math.trunc(Date.now() / 1000 - 60 * 60 * 24 * 90)
-  const year = Math.trunc(Date.now() / 1000 - 60 * 60 * 24 * 365)
+  // eslint-disable-next-line prettier/prettier
+  const [changeWeek, setChangeWeek] = React.useState<string[]>(Array(5).fill(''))
 
   const { data } = useSWR([GET_POOL_PRICE], query =>
     request(SUBGRAPH_URL, query, {
       id: HeimCRPPOOL,
-      day,
-      week,
-      month,
-      quarterly,
-      year
+      day: Math.trunc(Date.now() / 1000 - 60 * 60 * 24),
+      week: Math.trunc(Date.now() / 1000 - 60 * 60 * 24 * 7),
+      month: Math.trunc(Date.now() / 1000 - 60 * 60 * 24 * 30),
+      quarterly: Math.trunc(Date.now() / 1000 - 60 * 60 * 24 * 90),
+      year: Math.trunc(Date.now() / 1000 - 60 * 60 * 24 * 365)
     })
   )
 
@@ -76,8 +72,8 @@ const Change = () => {
         <tbody>
           <tr>
             {changeWeek.map((item: string, index: number) => (
-              <S.Td key={index} value={Number(item)}>
-                {`${item}%`}
+              <S.Td key={index} value={parseFloat(item)}>
+                {item.length === 0 ? '...' : `${item}%`}
               </S.Td>
             ))}
           </tr>

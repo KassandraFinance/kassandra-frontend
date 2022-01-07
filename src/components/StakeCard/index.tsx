@@ -147,8 +147,12 @@ const StakeCard = ({
     stakingToken: ''
   })
 
-  const { data } = useSWR([GET_INFO_AHYPE, HeimCRPPOOL], (query, id) =>
-    request(SUBGRAPH_URL, query, { id })
+  const { data } = useSWR(
+    [GET_INFO_AHYPE, HeimCRPPOOL],
+    (query, id) => request(SUBGRAPH_URL, query, { id }),
+    {
+      refreshInterval: 10000
+    }
   )
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { trackEvent } = useMatomo()
