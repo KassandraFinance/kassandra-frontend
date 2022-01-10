@@ -208,7 +208,7 @@ const Products = () => {
             <ChartProducts />
             <ScrollUpButton />
             <Change />
-            <Summary />
+            <Summary strategy={data?.pool.strategy || '...'} />
             <PoweredBy />
             <Distribution poolPlatform={poolPlatform} />
             <TokenDescription />

@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
+import Link from 'next/link'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
 import Big from 'big.js'
@@ -320,7 +321,23 @@ const StakeCard = ({
             <S.PoolName>
               <S.StakeAndEarn>
                 <p>STAKE</p>
-                {symbol === 'ahype' ? <p>$aHYPE</p> : <p>$KACY-AVAX PNG LP</p>}
+                {symbol === 'ahype' ? (
+                  <Link href="/products/ahype" passHref>
+                    <a>
+                      $aHYPE
+                      <img src="/assets/GoToSite.svg" alt="" />
+                    </a>
+                  </Link>
+                ) : (
+                  <a
+                    href="https://app.pangolin.exchange/#/add/AVAX/0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    $KACY-AVAX PNG LP
+                    <img src="/assets/GoToSite.svg" alt="" />
+                  </a>
+                )}
               </S.StakeAndEarn>
               <S.StakeAndEarn>
                 <p>EARN</p>
@@ -511,7 +528,7 @@ const StakeCard = ({
                   infoStakeStatic={infoStaked}
                   stakingToken={infoStaked.stakingToken}
                   decimals={decimals}
-                  symbol={symbol}
+                  symbol={staked[pid]}
                   priceLPToken={priceLPToken}
                 />
               )}

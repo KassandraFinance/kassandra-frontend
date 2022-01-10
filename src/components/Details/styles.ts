@@ -21,7 +21,7 @@ export const Info = styled.div`
   }
 
   a {
-    color: ${theme.colors.cyan};
+    color: ${theme.colors.snow};
     font-size: ${theme.font.sizes.font14};
     text-decoration: none;
 
@@ -91,6 +91,7 @@ export const AddToken = styled.button`
   font-family: ${theme.font.family};
   font-size: ${theme.font.sizes.font14};
   font-weight: ${theme.font.weight.light};
+
   cursor: pointer;
   outline: none;
 
@@ -99,6 +100,6 @@ export const AddToken = styled.button`
   }
   img {
     max-width: 14px;
-    margin-right: 4px;
+    margin-left: 8px;
   }
 `

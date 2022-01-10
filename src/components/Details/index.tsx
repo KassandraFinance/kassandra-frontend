@@ -60,7 +60,7 @@ const Details = ({
       name
     })
   }
-
+  console.log(symbol)
   React.useEffect(() => {
     let interval: any
     ;(async () => {
@@ -94,7 +94,7 @@ const Details = ({
         <span>Total staked</span>
         <S.KacyUSD>
           <span>
-            {BNtoDecimal(depositedAmount, 18)} {staked[pid]}
+            {BNtoDecimal(depositedAmount, 18)} {symbol}
           </span>
           <span className="usd">
             &#8776;{' '}
@@ -152,7 +152,7 @@ const Details = ({
           </a>
           <img src="/assets/GoToSite.svg" alt="" />
         </S.Link>
-        {symbol === 'kap' ? (
+        {symbol === 'LP' && (
           <S.Link>
             <a
               href="https://app.pangolin.exchange/#/add/AVAX/0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb"
@@ -163,7 +163,8 @@ const Details = ({
             </a>
             <img src="/assets/iconBuyKacy.svg" alt="" />
           </S.Link>
-        ) : (
+        )}
+        {symbol === 'KACY' && (
           <S.Link>
             <a
               href="https://app.pangolin.exchange/#/swap?outputCurrency=0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb"
@@ -175,27 +176,28 @@ const Details = ({
             <img src="/assets/iconBuyKacy.svg" alt="" />
           </S.Link>
         )}
+        {symbol === 'aHYPE' && (
+          <S.Link>
+            <Link href="/products/ahype" passHref>
+              Buy $aHYPE
+            </Link>
+            <img src="/assets/iconBuyKacy.svg" alt="" />
+          </S.Link>
+        )}
       </S.Info>
-      <S.Info>
-        <S.Link>
-          <Link href="/">Project site</Link>
-          <img src="/assets/GoToSite.svg" alt="" />
-        </S.Link>
-        {/* <span>Add to Metamask</span> */}
-        <S.AddToken
-          type="button"
-          onClick={() => {
-            registerToken(
-              stakingToken,
-              symbol.toLocaleUpperCase(),
-              Number(decimals)
-            )
-            matomoEvent('click-add-metamask', `add-${symbol}`)
-          }}
-        >
-          <img src="/assets/metaMaskIcon.svg" alt="" /> Add to Metamask
-        </S.AddToken>
-      </S.Info>
+      <S.AddToken
+        type="button"
+        onClick={() => {
+          registerToken(
+            stakingToken,
+            symbol.toLocaleUpperCase(),
+            Number(decimals)
+          )
+          matomoEvent('click-add-metamask', `add-${symbol}`)
+        }}
+      >
+        Add to Metamask <img src="/assets/metaMaskIcon.svg" alt="" />
+      </S.AddToken>
     </S.Details>
   )
 }

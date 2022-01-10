@@ -394,6 +394,15 @@ const Form = ({
       catch(e) {
         ToastWarning("Could not connect with the blockchain to calculate prices.")
       }
+
+      try {
+        if (swapInAmount.gt(new BigNumber(0))) {
+          await corePool.trySwapExactAmountIn(swapInAddress, swapInAmount, swapOutAddress, userWalletAddress)
+        }
+      } catch (error) {
+        ToastWarning("The amount can't be more than half of what's already in the pool! The transaction will revert!")
+      }
+
     }
 
     calc()
