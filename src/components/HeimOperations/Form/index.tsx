@@ -315,7 +315,7 @@ const Form = ({
           )
           setSwapOutAmount([newSwapOutAmount])
         } catch (error) {
-          ToastWarning("This amount is too large for the pool! The transaction will revert!")
+          ToastWarning("The amount can't be more than half of what's already in the pool! The transaction will revert!")
         }
 
         let newSwapOutPrice;

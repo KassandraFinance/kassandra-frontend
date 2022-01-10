@@ -19,6 +19,7 @@ import ChartProducts from '../../components/ChartProducts'
 import HeimOperations from '../../components/HeimOperations'
 import Web3Disabled from '../../components/Web3Disabled'
 import ScrollUpButton from '../../components/ScrollUpButton'
+import Loading from '../../components/Loading'
 import PoweredBy from './PoweredBy'
 
 import avaxSocial from '../../../public/assets/avalanche_social_index_logo.svg'
@@ -134,10 +135,9 @@ const Products = () => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            fontWeight: 500
           }}
         >
-          Loading...
+          <Loading />
         </h1>
       }
       {!loading && isMobile && (
@@ -236,7 +236,7 @@ const Products = () => {
               type="changeChain"
             />
           )}
-      </>
+        </>
       }
     </S.BackgroundProducts>
   )
