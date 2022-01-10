@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
+import Link from 'next/link'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
@@ -244,16 +245,36 @@ const ModalUnstaking = ({
             >
               Confirm
             </S.ConfirmButton>
-            <Button
-              as="a"
-              backgroundBlack
-              fullWidth
-              text="Get KACY"
-              href="https://app.pangolin.exchange/#/swap?outputCurrency=0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setModalOpen(false)}
-            />
+
+            {symbol === 'KACY' && (
+              <Button
+                as="a"
+                backgroundBlack
+                fullWidth
+                text="Get KACY"
+                href="https://app.pangolin.exchange/#/swap?outputCurrency=0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setModalOpen(false)}
+              />
+            )}
+            {symbol === 'aHYPE' && (
+              <Link href="/products/ahype">
+                <Button backgroundBlack fullWidth text="Get aHYPE" />
+              </Link>
+            )}
+            {symbol === 'LP' && (
+              <Button
+                as="a"
+                backgroundBlack
+                fullWidth
+                text="Get LP"
+                href="https://app.pangolin.exchange/#/add/AVAX/0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setModalOpen(false)}
+              />
+            )}
           </S.Main>
         </S.BackgroundBlack>
       </S.BorderGradient>
