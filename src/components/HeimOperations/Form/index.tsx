@@ -822,7 +822,7 @@ const Form = ({
         ) : (
         <>
           <InputDefault
-            decimals={infoAHYPE[tokenAddress2Index[swapOutAddress]]?.decimals || new BigNumber(0)}
+            decimals={infoAHYPE[tokenAddress2Index[swapOutAddress]]?.decimals || new BigNumber(-1)}
             poolTokens={title === 'Invest'
               ? [infoAHYPE[infoAHYPE.length - 1]]
               : infoAHYPE
@@ -831,7 +831,7 @@ const Form = ({
             tokenDetails={infoAHYPE[tokenOutIndex]}
             isMax={null}
             swapOutAmount={swapOutAmount[0]}
-            swapOutBalance={swapOutBalance[0]}
+            swapOutBalance={swapOutBalance[0] || new BigNumber(-1)}
             swapInAddress={swapInAddress}
             setSwapOutAddress={setSwapOutAddress}
           />

@@ -49,7 +49,8 @@ interface ITdProps {
 // eslint-disable-next-line prettier/prettier
 export const Td = styled.td<ITdProps>`
   color: ${props => (props.value > 0 ? theme.colors.green : theme.colors.red)};
-  color: ${props => props.value === 0 && theme.colors.snow};
+  color: ${props =>
+    (props.value === 0 || isNaN(props.value)) && theme.colors.snow};
 `
 
 export const Title = styled.div`
