@@ -42,7 +42,7 @@ const KassandraArchitecture = () => {
         <S.KassandraCard className="thirdCard">
           <img src="assets/voteIcon.svg" alt="" width="52" height="45" />
           <p>VOTE LOCK</p>
-          <h1>Making $KACY scarse</h1>
+          <h1>Making $KACY scarce</h1>
           <span>
             When voting in governance proposals $KACY holders may choose to lock
             their tokens for different time periods and earn more voting power,

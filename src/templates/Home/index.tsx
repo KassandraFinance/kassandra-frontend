@@ -13,6 +13,7 @@ import SubscribeBanner from '../../components/SubscribeBanner'
 import * as S from './styles'
 import RoadMapSlider from '../../components/RoadMapSlider'
 import ScrollUpButton from '../../components/ScrollUpButton'
+import KacyOverView from '../../components/KacyOverView'
 
 const poolPlatform = 'Fuji'
 
@@ -35,6 +36,7 @@ const Home = () => {
         <KassandraTokenCard />
         <KassandraArchitecture />
         <RoadMapSlider />
+        <KacyOverView />
         <CountdownBanner />
         <SubscribeBanner />
       </S.Background>
