@@ -3,6 +3,7 @@ import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 import detectEthereumProvider from '@metamask/detect-provider'
 
 import { actionGetUserAddressWallet } from '../store/modules/userWalletAddress/actions'
+import { actionSetChainId } from '../store/modules/chainId/actions'
 
 import {
   ToastError,
@@ -11,6 +12,7 @@ import {
   ToastWarning
 } from '../components/Toastify/toast'
 
+// eslint-disable-next-line prettier/prettier
 declare let window: {
   ethereum: any,
   location: {
@@ -22,8 +24,8 @@ const useConnect = () => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const dispatch = useDispatch()
 
-  const handleChainChanged = React.useCallback(_chainId => {
-    window.location.reload()
+  const handleChainChanged = React.useCallback((chainId: string) => {
+    dispatch(actionSetChainId(chainId))
   }, [])
 
   const handleAccountsChanged = React.useCallback(async accounts => {
@@ -51,6 +53,11 @@ const useConnect = () => {
     window.ethereum.on('accountsChanged', handleAccountsChanged)
   }, [])
 
+  const getChainId = React.useCallback(async () => {
+    const id = await window.ethereum.request({ method: 'eth_chainId' })
+    dispatch(actionSetChainId(id))
+  }, [])
+
   const startApp = React.useCallback(async provider => {
     try {
       if (provider !== window.ethereum) {
@@ -58,6 +65,7 @@ const useConnect = () => {
       }
 
       handleRequestAccounts()
+      getChainId()
 
       window.ethereum.on('chainChanged', handleChainChanged)
     } catch (error: any) {

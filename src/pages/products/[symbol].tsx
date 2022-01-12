@@ -1,26 +1,42 @@
-// import { request } from 'graphql-request'
-// import { RequestDocument } from 'graphql-request/dist/types'
-
 import { SWRConfig } from 'swr'
+import { GetStaticPaths, GetStaticProps } from 'next'
+
+import { products, ProductDetails } from '../../constants/tokenAddresses'
 
 import Products from '../../templates/Products'
 
-// const URL = 'https://graph.kassandra.finance/subgraphs/name/Kassandra'
+interface Input {
+  product: ProductDetails;
+}
 
-export default function Index() {
+function Product({ product }: Input) {
   return (
-    <>
-      <SWRConfig
-        value={{
-          refreshInterval: 5000
-          // fetcher: async (query: RequestDocument) => {
-          //   console.log(await request(URL, query))
-          //   return await request(URL, query)
-          // }
-        }}
-      >
-        <Products />
-      </SWRConfig>
-    </>
+    <SWRConfig
+      value={{
+        refreshInterval: 5000
+      }}
+    >
+      <Products product={product} />
+    </SWRConfig>
   )
 }
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths = Object.values(products).map(product => ({
+    params: { symbol: product.symbol.toLowerCase() }
+  }))
+
+  return { paths, fallback: false }
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  if (!params || !params.symbol || typeof params.symbol !== 'string') {
+    return {
+      notFound: true
+    }
+  }
+
+  return { props: { product: products[params.symbol] } }
+}
+
+export default Product

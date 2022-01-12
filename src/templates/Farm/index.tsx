@@ -19,33 +19,14 @@ import Header from '../../components/Header'
 
 import * as S from './styles'
 
-declare let window: {
-  ethereum: any,
-}
-
 const StakeFarm = () => {
-  const [chainId, setChainId] = React.useState<string>('')
   const [loading, setLoading] = React.useState<boolean>(true)
   const [isMobile, setIsMobile] = React.useState<boolean>(false)
   
   const { trackCategoryPageView } = useMatomoEcommerce()
   const kacyStake = useStakingContract(Staking)
 
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-
-  async function getChainId() {
-    if (web3.currentProvider === null) {
-      return
-    }
-
-    const id = await window.ethereum.request({ method: 'eth_chainId' })
-    setChainId(id)
-  }
-
-  React.useEffect(() => {
-    getChainId()
-  }, [userWalletAddress])
-
+  const { userWalletAddress, chainId } = useSelector((state: RootStateOrAny) => state)
 
   React.useEffect(() => {
     trackCategoryPageView(['Stake', 'Fuji'])
