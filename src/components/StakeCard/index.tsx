@@ -76,7 +76,6 @@ export interface IInfoStaked {
 interface IStakingProps {
   pid: number;
   symbol: string;
-  connect: () => void;
   balanceOf: (pid: number, walletAddress: string) => Promise<BigNumber>;
   earned: (pid: number, walletAddress: string) => Promise<BigNumber>;
   getReward: (pid: number, callback: TransactionCallback) => void;
@@ -98,7 +97,6 @@ const staked: any = {
 const StakeCard = ({
   pid,
   symbol,
-  connect,
   balanceOf,
   earned,
   getReward,
@@ -574,7 +572,6 @@ const StakeCard = ({
       <ModalWalletConnect
         modalOpen={isModalWallet}
         setModalOpen={setIsModaWallet}
-        connect={connect}
       />
     </>
   )

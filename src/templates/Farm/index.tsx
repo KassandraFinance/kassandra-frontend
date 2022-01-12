@@ -6,7 +6,6 @@ import { Staking } from '../../constants/tokenAddresses'
 
 import web3 from '../../utils/web3'
 
-import useConnect from '../../hooks/useConnect'
 import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 import useStakingContract from '../../hooks/useStakingContract'
 
@@ -33,7 +32,6 @@ const StakeFarm = () => {
   const kacyStake = useStakingContract(Staking)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-  const { connect } = useConnect()
 
   async function getChainId() {
     if (web3.currentProvider === null) {
@@ -100,7 +98,6 @@ const StakeFarm = () => {
               <StakeCard
                 pid={0}
                 symbol="kacy"
-                connect={connect}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
                 getReward={kacyStake.getReward}
@@ -113,7 +110,6 @@ const StakeFarm = () => {
               <StakeCard
                 pid={1}
                 symbol="kacy"
-                connect={connect}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
                 getReward={kacyStake.getReward}
@@ -126,7 +122,6 @@ const StakeFarm = () => {
               <StakeCard
                 pid={2}
                 symbol="kacy"
-                connect={connect}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
                 getReward={kacyStake.getReward}
@@ -148,7 +143,6 @@ const StakeFarm = () => {
               <StakeCard
                 pid={4}
                 symbol="ahype"
-                connect={connect}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
                 getReward={kacyStake.getReward}
@@ -161,7 +155,6 @@ const StakeFarm = () => {
               <StakeCard
                 pid={5}
                 symbol="lp"
-                connect={connect}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
                 getReward={kacyStake.getReward}

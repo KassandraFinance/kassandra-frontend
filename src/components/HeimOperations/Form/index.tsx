@@ -15,7 +15,6 @@ import { actionGetPoolTokens } from '../../../store/modules/poolTokens/actions'
 
 import { SUBGRAPH_URL, HeimCRPPOOL } from '../../../constants/tokenAddresses'
 
-import useConnect from '../../../hooks/useConnect'
 import useCRPContract from '../../../hooks/useCRPContract'
 import useERC20Contract, { ERC20 } from '../../../hooks/useERC20Contract'
 import usePoolContract from '../../../hooks/usePoolContract'
@@ -63,7 +62,6 @@ const Form = ({
   const corePool = usePoolContract(corePoolAddress)
   const crpPool = useCRPContract(crpPoolAddress)
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-  const { connect } = useConnect()
   const { trackBuying, trackBought, trackCancelBuying } = useMatomoEcommerce();
 
   const [tokenAddress2Index, setTokenAddress2Index] = React.useState<Address2Index>({})
@@ -924,7 +922,6 @@ const Form = ({
       <ModalWalletConnect
         modalOpen={isModalWallet}
         setModalOpen={setIsModaWallet}
-        connect={connect}
       />
     </S.FormContainer >
   )

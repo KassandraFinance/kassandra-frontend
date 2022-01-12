@@ -12,7 +12,6 @@ import { actionGetUserAddressWallet } from '../../store/modules/userWalletAddres
 
 import substr from '../../utils/substr'
 import web3 from '../../utils/web3'
-import useConnect from '../../hooks/useConnect'
 
 import Button from '../Button'
 import ModalLogOut from '../ModalLogOut'
@@ -37,7 +36,6 @@ const Header = () => {
 
   const dispatch = useDispatch()
   const { asPath } = useRouter()
-  const { connect } = useConnect()
   const { trackEvent } = useMatomo()
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
@@ -251,7 +249,6 @@ const Header = () => {
         <ModalWalletConnect
           modalOpen={isModalWallet}
           setModalOpen={setIsModalWallet}
-          connect={connect}
         />
       </S.Wrapper>
       <ModalLogOut
