@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components'
 import theme from '../../styles/theme'
-import media from 'styled-media-query'
 
 export const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
@@ -59,42 +58,40 @@ export const BackgroundBlack = styled.div`
 `
 
 export const ModalText = styled.div`
-  ${({ theme }) => css`
-    background: rgba(31, 31, 31, 0.96);
-    border-radius: 6px 6px 0 0;
+  background: rgba(31, 31, 31, 0.96);
+  border-radius: 6px 6px 0 0;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    width: 100%;
-    height: 6.8rem;
-    padding: 2.4rem;
+  width: 100%;
+  height: 6.8rem;
+  padding: 2.4rem;
 
-    ${media.lessThan('small')`
-  padding: 1.2rem;
-  `}
-
-    button {
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      width: 2.4rem;
-      margin-top: -0.2rem;
-      img {
-        width: 1.2rem;
-        height: 1.2rem;
-      }
+  @media (max-width: 520px) {
+    padding: 1.2rem;
+  }
+  button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    width: 2.4rem;
+    margin-top: -0.2rem;
+    img {
+      width: 1.2rem;
+      height: 1.2rem;
     }
+  }
 
-    font-size: 1.8rem;
-    font-weight: ${theme.font.weight.bold};
+  font-size: 1.8rem;
+  font-weight: ${theme.font.weight.bold};
 
-    letter-spacing: 0.09rem;
-  `}
-  ${media.lessThan('small')`
+  letter-spacing: 0.09rem;
+
+  @media (max-width: 520px) {
     font-size: ${theme.font.sizes.font14};
-`}
+  }
 `
 
 export const WrapperIconsBackGround = styled.button`
@@ -170,10 +167,10 @@ export const Content = styled.div`
   padding: ${theme.spacings.space24};
   background: rgba(31, 41, 55, 0.96);
 
-  ${media.lessThan('small')`
+  @media (max-width: 520px) {
     margin: 0;
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
     padding: 1.2rem;
-  `}
+  }
 `

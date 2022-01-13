@@ -1,4 +1,3 @@
-import { media } from 'styled-media-query';
 import styled from 'styled-components'
 import theme from '../../../styles/theme'
 

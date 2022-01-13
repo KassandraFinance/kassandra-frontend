@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 import styled, { css } from 'styled-components'
 import theme from '../../styles/theme'
-import media from 'styled-media-query'
 
 export const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.7);
@@ -66,9 +65,9 @@ export const InterBackground = styled.div`
   width: 100%;
   height: 6.8rem;
   padding: 2.4rem;
-  ${media.lessThan('small')`
+  @media (max-width: 520px) {
     padding: 1.2rem;
-  `}
+  }
 
   button {
     background-color: transparent;
@@ -88,9 +87,9 @@ export const ModalText = styled.h1`
     font-size: 2rem;
     font-weight: ${theme.font.weight.normal};
 
-    ${media.lessThan('small')`
+    @media (max-width: 520px) {
       font-size: ${theme.font.sizes.font14};
-    `}
+    }
   `}
 `
 
@@ -107,13 +106,13 @@ export const WrapperIcons = styled.h1`
     span {
       margin-top: 5.6px;
     }
-    ${media.lessThan('small')`
+    @media (max-width: 520px) {
       margin:0;
       margin-top: 1.5rem;
       max-width: 80%
       font-size:${theme.font.sizes.font12};
       font-weight: ${theme.font.weight.light};
-    `}
+    }
   `}
 `
 export const Content = styled.div`
@@ -132,10 +131,10 @@ export const Content = styled.div`
     height: 5.6rem;
     padding: 0.2rem;
   }
-  ${media.lessThan('small')`
+  @media (max-width: 520px) {
       margin: 0;
       width:100%;
       height:100%;
       padding: 1.2rem;
-    `}
+    }
 `
