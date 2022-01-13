@@ -124,13 +124,12 @@ const arrCard = [
       {
         title: 'Community Products',
         text: [
-          'Open interface to Kassandra DAO members create their own ',
-          'tokenized funds'
+          'Open interface for Kassandra DAO members create their own tokenized funds'
         ]
       },
       {
         title: 'Multichain',
-        text: ['Time to go to other chains']
+        text: ['Time to jump into other blockchains']
       }
     ]
   }

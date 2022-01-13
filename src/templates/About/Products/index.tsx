@@ -21,9 +21,9 @@ const Products = () => {
           </S.MobileCardTitle>
           <p>
             The Kassandra Protocol is the core technology that allows the DAO to
-            deploy investment products. It starts from the premise of building
-            tokenized investment baskets that are permissionless, non-custodial,
-            and actively managed, but yet monetary efficient.
+            deploy investment products. It allows building tokenized investment
+            baskets that are permissionless, non-custodial and actively managed,
+            yet monetary efficient.
           </p>
           <S.Link
             href="https://kassandrafoundation.medium.com/kassandra-protocol-d9cb71c02b02"
@@ -65,8 +65,8 @@ const Products = () => {
             <h3>DAO</h3>
           </S.MobileCardTitle>
           <p>
-            The Kassandra DAO is the only owner of Kassandra Protocol, which is
-            represented by the KACY token holders and earns with management fees
+            The Kassandra DAO is the only owner of the Kassandra Protocol,
+            represented by the KACY token holders, and earns management fees
             over all the Kassandra investment funds.
           </p>
           <S.Link
@@ -74,7 +74,7 @@ const Products = () => {
             target="_blank"
             rel="noopener noreferral"
           >
-            <span>Learn Documentation</span>
+            <span>Documentation</span>
             <svg
               width="17"
               height="17"
@@ -109,10 +109,10 @@ const Products = () => {
             <h3>FOUNDATION</h3>
           </S.MobileCardTitle>
           <p>
-            The Kassandra Foundation is the entity funded by the token sales
-            events, that is runned by the core team of Kassandra founders, with
-            the purpose to promote and develop Kassandra in both technological
-            and marketing aspects.
+            The Kassandra Foundation is the entity funded by token sale events,
+            run by the core team of Kassandra founders, with the purpose of
+            promoting and developing Kassandra in both technological and
+            marketing aspects.
           </p>
           <S.Link
             href=" https://kassandrafoundation.medium.com/kassandra-foundation-team-4f46bf13c887"

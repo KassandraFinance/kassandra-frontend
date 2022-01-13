@@ -181,8 +181,8 @@ const StakeFarm = () => {
           {web3.currentProvider === null && !loading && !isMobile && (
             <Web3Disabled
               textButton="Install Metamask"
-              textHeader="Looks like you don't have the metamask wallet installed"
-              bodyText="Please install the metamask wallet to access our pools "
+              textHeader="Looks like you don't have the Metamask wallet installed"
+              bodyText="Please install the Metamask wallet to access our pools "
               type="install"
             />
           )}
