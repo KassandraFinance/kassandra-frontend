@@ -1,5 +1,4 @@
 import styled, { css, DefaultTheme } from 'styled-components'
-import media from 'styled-media-query'
 
 import { TextFieldProps } from '.'
 
@@ -53,10 +52,10 @@ export const Label = styled.label`
     font-weight: ${theme.font.weight.light};
     color: ${theme.colors.snow};
     cursor: pointer;
-    ${media.lessThan('small')`
+    @media(max-width: 520px) {
     font-size: ${theme.font.sizes.font16};
     `}
-  `}
+  }
 `
 
 // eslint-disable-next-line prettier/prettier
@@ -106,10 +105,7 @@ const wrapperModifiers = {
   `
 }
 
-export const Wrapper =
-  styled.div <
-  WrapperProps >
-  `
+export const Wrapper = styled.div <WrapperProps>`
   ${({ theme, error, disabled }) => css`
     ${error && wrapperModifiers.error()}
     ${disabled && wrapperModifiers.disabled(theme)}
