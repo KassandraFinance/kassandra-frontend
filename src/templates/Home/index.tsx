@@ -1,19 +1,20 @@
 import React from 'react'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
-import Hero from './Hero'
-import Products from './Products'
 import ClassProducts from './ClassProducts'
-import CountdownBanner from '../../components/CountdownBanner'
-import Token from './Token'
-import KassandraTokenCard from '../../components/KassandraTokenCard'
+import Hero from './Hero'
 import KassandraArchitecture from './KassandraArchitecture'
-import SubscribeBanner from '../../components/SubscribeBanner'
+import Products from './Products'
+import Token from './Token'
 
-import * as S from './styles'
+import CountdownBanner from '../../components/CountdownBanner'
+import KassandraTokenCard from '../../components/KassandraTokenCard'
+import SubscribeBanner from '../../components/SubscribeBanner'
 import RoadMapSlider from '../../components/RoadMapSlider'
 import ScrollUpButton from '../../components/ScrollUpButton'
 import KacyOverView from '../../components/KacyOverView'
+
+import * as S from './styles'
 
 const poolPlatform = 'Fuji'
 
