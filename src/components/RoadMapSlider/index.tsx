@@ -10,9 +10,9 @@ const colors: any = {
 }
 
 const icons: any = {
-  done: <img src="/assets/RoadmapDone.svg" alt="" />,
-  soon: <img src="/assets/RoadmapSoon.svg" alt="" />,
-  next: <img src="/assets/RoadmapNext.svg" alt="" />
+  done: <img src="/assets/RoadmapDone.svg" alt="Done" />,
+  soon: <img src="/assets/RoadmapSoon.svg" alt="Soon" />,
+  next: <img src="/assets/RoadmapNext.svg" alt="Next" />
 }
 
 const RoadMapSlider = () => {
