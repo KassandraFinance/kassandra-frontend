@@ -19,7 +19,7 @@ const Team = () => {
       <S.Grid>
         <TeamCard
           name="Kevin Voigt"
-          role="CTO"
+          role="PROJECT LEAD"
           image="assets/team/kevin-voigt.png"
           social={{
             github: 'https://github.com/Baruel',
@@ -28,7 +28,7 @@ const Team = () => {
         />
         <TeamCard
           name="Hamilton Haskel"
-          role="CFO"
+          role="FINANCE LEAD"
           image="assets/team/hamilton-haskel.png"
           social={{
             linkedin: 'https://linkedin.com/in/hamilton-haskel-3585b477'
@@ -36,22 +36,14 @@ const Team = () => {
         />
         <TeamCard
           name="André Zanghelini"
-          role="SOLIDITY ENGINEER"
+          role="TECHNOLOGY LEAD"
           image="assets/team/andre-zanghelini.png"
           social={{
             github: 'https://github.com/an-dz',
             linkedin: 'https://www.linkedin.com/in/zanghelini/'
           }}
         />
-        <TeamCard
-          name="Anthony Bet"
-          role="DATA SCIENTIST"
-          image="assets/team/anthony-bet.png"
-          social={{
-            github: 'github.com/AnthonyAposta',
-            linkedin: 'https://linkedin.com/in/anthony-joão-bet'
-          }}
-        />
+
         <TeamCard
           name="Jorge Filho"
           role="BUSINESS DEVELOPMENT"
@@ -61,6 +53,15 @@ const Team = () => {
             twitter: 'https://twitter.com/AkademiaHash'
           }}
         />
+        {/* <TeamCard
+          image="assets/logo-kacy-stake.svg"
+          social={{
+            github: ''
+          }}
+        /> */}
+        <S.Image>
+          <img src="assets/kassandra-about-team.svg" alt="" />
+        </S.Image>
         <TeamCard
           name="Jony Reis"
           role="FRONT-END DEVELOPER"
