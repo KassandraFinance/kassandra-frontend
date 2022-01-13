@@ -87,6 +87,6 @@ export const Image = styled.div`
     display: none;
   }
   img {
-    width: 20rem;
+    width: 18rem;
   }
 `

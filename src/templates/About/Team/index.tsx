@@ -53,12 +53,6 @@ const Team = () => {
             twitter: 'https://twitter.com/AkademiaHash'
           }}
         />
-        {/* <TeamCard
-          image="assets/logo-kacy-stake.svg"
-          social={{
-            github: ''
-          }}
-        /> */}
         <S.Image>
           <img src="assets/kassandra-about-team.svg" alt="" />
         </S.Image>
