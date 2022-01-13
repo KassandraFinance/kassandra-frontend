@@ -1,31 +1,85 @@
 //create a new component that displays the token price
 import React from 'react'
+
+import Big from 'big.js'
+import usePriceLP from '../../hooks/usePriceLP'
+import { BNtoDecimal } from '../../utils/numerals'
+
 import * as S from './styles'
 
+import { LPKacyAvax, LPDaiAvax } from '../../constants/tokenAddresses'
+
+interface TokenInfo {
+  id: string;
+  balance_in_pool: string;
+  address: string;
+  name: string;
+  symbol: string;
+  allocation: number;
+  price: number;
+}
+
 const KacyOverView = () => {
+  const [kacyPrice, setKacyPrice] = React.useState<Big>(Big(0))
+  const [circulatingSupply, setCirculatingSupply] = React.useState<Big>(Big(0))
+
+  const { viewgetReserves } = usePriceLP()
+
+  async function handleLPtoUSD() {
+    const reservesKacyAvax = await viewgetReserves(LPKacyAvax)
+    const reservesDaiAvax = await viewgetReserves(LPDaiAvax)
+
+    const avaxInDollar = Big(reservesDaiAvax._reserve0).div(
+      Big(reservesDaiAvax._reserve1)
+    )
+    const kacyInDollar = avaxInDollar.mul(
+      Big(reservesKacyAvax._reserve1).div(reservesKacyAvax._reserve0)
+    )
+    setKacyPrice(kacyInDollar)
+  }
+  React.useEffect(() => {
+    handleLPtoUSD()
+  }, [])
+
+  const date1 = new Date('2022-01-17T00:00:00.000Z')
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      const secondsSinceInitialDate = (Date.now() - date1.getTime()) / 1000
+      if (Date.now() > date1.getTime()) {
+        setCirculatingSupply(
+          Big((400000 / (24 * 360 * 90)) * secondsSinceInitialDate + 600000)
+        )
+      }
+    }, 1000)
+    return () => clearInterval(interval)
+  }, [])
+
+  const marketCap = new Big(circulatingSupply).mul(kacyPrice)
+
   return (
     <>
       <S.TokenInfoWrapper>
         <S.TitleandIcon>
-          <S.Icon src="/assets/token-distribution-icon.svg" />
+          <S.Icon src={'/assets/token-distribution-icon.svg'} />
           <h3>$KACY Overview</h3>
         </S.TitleandIcon>
         <S.TokenInfo>
           <S.Values>
             <p>PRICE</p>
-            <span>$12,95923</span>
+            <span>${BNtoDecimal(kacyPrice, 2, 2, 2)}</span>
           </S.Values>
           <S.Values>
             <p>MARKET CAP</p>
-            <span>$12,95923</span>
+            <span>${BNtoDecimal(marketCap, 2, 100, 2)}</span>
           </S.Values>
           <S.Values>
             <p>CIRCULATING SUPPLY</p>
-            <span>$12,95923</span>
+            <span>{BNtoDecimal(circulatingSupply, 2, 100, 2)} KACY</span>
           </S.Values>
           <S.Values>
             <p>TOTAL SUPPLY</p>
-            <span>$12,95923</span>
+            <span>10 000 000</span>
           </S.Values>
         </S.TokenInfo>
       </S.TokenInfoWrapper>

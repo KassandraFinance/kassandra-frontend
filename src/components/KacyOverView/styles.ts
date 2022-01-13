@@ -50,7 +50,7 @@ export const Values = styled.div`
     letter-spacing: 4px;
   }
   span {
-    font-size: ${theme.font.sizes.font36};
+    font-size: 28px;
     @media (max-width: 960px) {
       font-size: ${theme.font.sizes.font24};
     }

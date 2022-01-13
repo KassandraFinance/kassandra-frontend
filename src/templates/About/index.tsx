@@ -34,7 +34,7 @@ const About = () => {
       </S.Background>
       <Team />
       <FAQ />
-      {/* <Partners /> */}
+      <Partners />
       <Community />
       <SubscribeBanner />
     </>
