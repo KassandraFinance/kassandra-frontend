@@ -10,6 +10,8 @@ export const Container = styled.section`
   border-bottom: 1px solid #ffffff24;
   @media (max-width: 960px) {
     margin: 0 3.2rem 9rem;
+    display: flex;
+    flex-direction: column;
   }
   @media (max-width: 820px) {
     flex-direction: column;
@@ -68,13 +70,16 @@ export const Partners = styled.div`
     justify-content: end;
     padding-top: 2rem;
     img {
+      margin-bottom: 2.4rem;
       margin-right: 4rem;
     }
   }
   @media (max-width: 820px) {
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
   img {
+    margin: 0 auto 2.4rem;
     max-width: 100%;
     max-height: 2.9rem;
   }
