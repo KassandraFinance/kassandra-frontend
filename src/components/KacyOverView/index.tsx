@@ -41,7 +41,7 @@ const KacyOverView = () => {
     handleLPtoUSD()
   }, [])
 
-  const date1 = new Date('2022-01-10T00:00:00.000Z')
+  const date1 = new Date('2022-01-17T00:00:00.000Z')
 
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -75,7 +75,7 @@ const KacyOverView = () => {
           </S.Values>
           <S.Values>
             <p>CIRCULATING SUPPLY</p>
-            <span>{BNtoDecimal(circulatingSupply, 2, 100, 2)}</span>
+            <span>{BNtoDecimal(circulatingSupply, 2, 100, 2)} KACY</span>
           </S.Values>
           <S.Values>
             <p>TOTAL SUPPLY</p>
