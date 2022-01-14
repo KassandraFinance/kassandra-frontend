@@ -13,9 +13,9 @@ export const Container = styled.section`
   display: flex;
   flex-direction: column;
   text-align: center;
-  max-width: 81.5rem;
+  max-width: 96rem;
   margin: auto;
-  padding: 4rem;
+  padding: 3.2rem;
 
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 1rem;
@@ -31,11 +31,16 @@ export const Container = styled.section`
 export const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  p {
-    font-size: ${theme.font.sizes.font12};
-    letter-spacing: 0.4rem;
-    color: ${theme.colors.amber};
-    margin-bottom: 2.4rem;
+  h1 {
+    font-size: ${theme.font.sizes.font36};
+    font-weight: ${theme.font.weight.black};
+    line-height: 110%;
+    max-width: 100%;
+
+    margin-bottom: 9.6rem;
+    @media (max-width: 44rem) {
+      font-size: 2.4rem;
+    }
   }
   span {
     font-size: ${theme.font.sizes.font16};
@@ -46,21 +51,22 @@ export const TextWrapper = styled.div`
   }
 `
 export const TitleAndImage = styled.div`
+  margin: 0 auto;
+
   display: flex;
-  align-items: flex-end;
-  text-align: center;
-  margin: 0 auto 9.6rem;
-  h1 {
-    font-size: ${theme.font.sizes.font36};
-    font-weight: ${theme.font.weight.black};
-    line-height: 110%;
-    max-width: 75rem;
-    @media (max-width: 44rem) {
-      font-size: 2.4rem;
-    }
+  align-items: flex-start;
+  p {
+    display: inline-block;
+    font-size: ${theme.font.sizes.font12};
+    letter-spacing: 0.4rem;
+    color: ${theme.colors.amber};
+    margin-bottom: 2.4rem;
+    margin-top: 0.2rem;
+    displlay: flex;
+    justify-content: center;
   }
   img {
-    max-width: 3rem;
+    max-width: 1.6rem;
     margin-left: 0.6rem;
   }
 `

@@ -41,14 +41,13 @@ const CountdownBanner = () => {
     <S.Background>
       <S.Container id="launching-banner">
         <S.TextWrapper>
-          <p>UPCOMING IDO</p>
           <S.TitleAndImage>
-            <h1>
-              A multi-chain protocol launching first with our partners on
-              Avalanche
-              <img src="assets/avalancheIcon.svg" alt="" />
-            </h1>
+            <p>UPCOMING IDO</p>
+            <img src="assets/avalancheIcon.svg" alt="" />
           </S.TitleAndImage>
+          <h1>
+            Join our public and exclusive IDO in partnership with Penguin Finance on Jan 17th
+          </h1>
           <S.Logo>
             <Image src={penguinFinance} />
           </S.Logo>
@@ -108,7 +107,7 @@ const CountdownBanner = () => {
           </S.TimerWrapper>
         </S.TimerContainer> */}
       </S.Container>
-    </S.Background>
+    </S.Background >
   )
 }
 export default CountdownBanner
