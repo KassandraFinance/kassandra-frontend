@@ -49,12 +49,12 @@ export const TitleAndImage = styled.div`
   display: flex;
   align-items: flex-end;
   text-align: center;
-  margin: 0 auto;
+  margin: 0 auto 9.6rem;
   h1 {
     font-size: ${theme.font.sizes.font36};
     font-weight: ${theme.font.weight.black};
     line-height: 110%;
-    max-width: 70rem;
+    max-width: 75rem;
     @media (max-width: 44rem) {
       font-size: 2.4rem;
     }
@@ -64,6 +64,45 @@ export const TitleAndImage = styled.div`
     margin-left: 0.6rem;
   }
 `
+export const Logo = styled.div`
+  margin: 0 auto 6.4rem;
+  max-width: 26.9rem;
+`
+export const Link = styled.a`
+  display: flex;
+  text-decoration: none;
+  max-width: 100%;
+  cursor: pointer;
+  margin: 0 auto;
+  //media max width 560px
+  @media (max-width: 560px) {
+    margin: 2.4rem auto 7rem;
+  }
+  a {
+    display: flex;
+    align-items: space-between;
+    text-decoration: none;
+    justify-items: center;
+    text-decoration: none;
+    font-size: ${theme.font.sizes.font14};
+    font-weight: ${theme.font.weight.light};
+    color: ${theme.colors.snow};
+    margin-right: ${theme.spacings.space8};
+    transition: 0.15s;
+    svg {
+      margin-left: ${theme.spacings.space8};
+    }
+    &:hover {
+      color: ${theme.colors.cyan};
+      > svg {
+        path {
+          stroke: ${theme.colors.cyan};
+        }
+      }
+    }
+  }
+`
+
 export const TimerContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
