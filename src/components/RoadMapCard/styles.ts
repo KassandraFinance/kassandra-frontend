@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import theme from '../../../styles/theme'
+import theme from '../../styles/theme'
 
 export const CardWrapper = styled.div`
   border: 2px solid ${props => props.color};

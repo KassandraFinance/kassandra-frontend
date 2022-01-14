@@ -1,6 +1,5 @@
 import React from 'react'
-import NextLink from 'next/link'
-import { Link } from 'react-scroll'
+import Link from 'next/link'
 
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
@@ -14,7 +13,7 @@ const Hero = () => {
 
   function clickMatomoEvent(action: string, name: string) {
     trackEvent({
-      category: 'home-hero',
+      category: 'home',
       action: action,
       name: name
     })
@@ -30,36 +29,16 @@ const Hero = () => {
         <h1>tokenized data-driven investment funds</h1>
       </S.IntroHero>
       <S.ButtonWrapper>
-        <li>
-          <NextLink
-            href="https://penguin-finance.medium.com/penguin-launchpad-kassandra-ido-tiers-guidelines-6cc741f11385"
-            passHref
-          >
-            <Button
-              className="btn-cta"
-              backgroundPrimary
-              size="large"
-              as="a"
-              text="Upcoming IDO"
-              target="_blank"
-              icon={<img src="/assets/penguinIcon.svg" alt="" />}
-              onClick={() => clickMatomoEvent('click-to-cta', 'up-ido')}
-            />
-          </NextLink>
-        </li>
-        <li>
-          <NextLink href="https://demo.kassandra.finance" passHref>
-            <Button
-              className="btn-cta"
-              backgroundPrimary
-              size="large"
-              as="a"
-              target="_blank"
-              text="Explore Our Demo"
-              onClick={() => clickMatomoEvent('click-to-cta', 'explore-demo')}
-            />
-          </NextLink>
-        </li>
+        <Link href="/products/ahype">
+          <Button
+            backgroundPrimary
+            size="large"
+            as="a"
+            text="Explore Our Products"
+            icon={<img src="/assets/avalancheIcon.svg" alt="" />}
+            onClick={() => clickMatomoEvent('click-to-cta', 'hero')}
+          />
+        </Link>
       </S.ButtonWrapper>
     </S.Hero>
   )
