@@ -1,25 +1,17 @@
 import React from 'react'
 import Image from 'next/image'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import iconPower from '../../../../public/assets/iconPower.svg'
-import avalanche from '../../../../public/assets/avalancheIcon.svg'
-import heimdall from '../../../../public/assets/heimdall.svg'
-import api3 from '../../../../public/assets/api3.svg'
+
+import Partner, { PartnerData } from '../../../components/Products/Partner'
 
 import * as S from './styles'
 
-const PoweredBy = () => {
-  const { trackEvent } = useMatomo()
+interface Input {
+  partners: PartnerData[];
+}
 
-  function matomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'powered-invest',
-      action,
-      name
-    })
-  }
-
+const PoweredBy = ({ partners }: Input) => {
   return (
     <S.PoweredBy>
       <S.Title>
@@ -28,33 +20,14 @@ const PoweredBy = () => {
       </S.Title>
       <S.Line />
       <S.PartnersContent>
-        <a
-          id="avalanche"
-          href="https://www.avax.network/"
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => matomoEvent('click-on-partner', 'avalanche')}
-        >
-          <Image src={avalanche} alt="Avalanche Blockchain" />
-        </a>
-        <a
-          id="heimdall"
-          href="https://heimdall.land/about"
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => matomoEvent('click-on-partner', 'heimdall')}
-        >
-          <Image src={heimdall} alt="Heimdall" />
-        </a>
-        <a
-          id="api3"
-          href="https://api3.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => matomoEvent('click-on-partner', 'api3')}
-        >
-          <Image src={api3} alt="API3" />
-        </a>
+        {partners.map(partner => (
+          <Partner
+            key={partner.name}
+            href={partner.href}
+            image={partner.image}
+            name={partner.name}
+          />
+        ))}
       </S.PartnersContent>
     </S.PoweredBy>
   )

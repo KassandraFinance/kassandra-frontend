@@ -165,7 +165,7 @@ const Products = ({ product }: Input) => {
           <ScrollUpButton />
           <Change />
           <Summary strategy={data?.pool.strategy || '...'} />
-          <PoweredBy />
+          <PoweredBy partners={product.partners} />
           <Distribution poolPlatform={product.platform} />
           <TokenDescription />
         </S.ProductDetails>

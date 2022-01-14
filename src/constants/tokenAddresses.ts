@@ -1,5 +1,8 @@
 import { ChainDetails } from '../utils/changeChain'
 
+import { PartnerData } from '../components/Products/Partner'
+import partners from '../components/Products/Partner/list'
+
 export const HeimCRPPOOL = '0xE34A2935B04e9c879f5bDd022b97D7Cf2F1Dde1d'
 export const HeimCorePool = '0xFCfB171A8a4666bc53Eac2d91Cb0b5203DDa63cD'
 
@@ -25,6 +28,7 @@ export interface ProductDetails {
   chain: ChainDetails;
   name: string;
   symbol: string;
+  partners: PartnerData[];
 }
 
 export const SUBGRAPH_URL =
@@ -52,6 +56,11 @@ export const products: { [key: string]: ProductDetails } = {
     categories: ['Fuji', 'Pool'],
     chain: chains.fuji,
     name: 'Avalanche Social Index',
-    symbol: 'aHYPE'
+    symbol: 'aHYPE',
+    partners: [
+      partners.avalanche,
+      partners.heimdall,
+      partners.api3
+    ]
   }
 }
