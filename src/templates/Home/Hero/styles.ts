@@ -128,11 +128,24 @@ export const IntroHero = styled.div`
     }
   }
 `
-export const ButtonWrapper = styled.div`
-  margin-top: 72px;
+export const ButtonWrapper = styled.ul`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
 
-  display: flex;
-  justify-content: center;
+  width: 412px;
+  margin: 72px auto 0;
+  @media (max-width: 420px) {
+    text-align: center;
+    grid-template-columns: 1fr;
+    gap: 12px;
+
+    width: 240px;
+
+    .btn-cta {
+      width: 100%;
+    }
+  }
 `
 export const DesktopScreen = styled.div`
   @media (max-width: 959px) {

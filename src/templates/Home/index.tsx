@@ -33,7 +33,7 @@ const Home = () => {
         <ScrollUpButton />
         <Products />
         <ClassProducts />
-        <Token poolPlatform={poolPlatform} />
+        {/* <Token poolPlatform={poolPlatform} /> */}
         <KassandraTokenCard />
         <KassandraArchitecture />
         <RoadMapSlider />
