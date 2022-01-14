@@ -53,6 +53,25 @@ const usePoolContract = (address: string) => {
         )
     }
 
+    const trySwapExactAmountIn = async (
+      tokenIn: string, 
+      tokenAmountIn: BigNumber,
+      tokenOut: string,
+      walletAddress: string,
+    ) => {
+      await contract
+        .methods.swapExactAmountIn(
+          tokenIn, 
+          tokenAmountIn, 
+          tokenOut, 
+          0, 
+          web3.utils.toTwosComplement(-1)
+        )
+        .call(
+          { from: walletAddress }
+        )
+    }
+
     /* VIEWS */
 
     const currentTokens = async (): Promise<string[]> => {
@@ -158,6 +177,7 @@ const usePoolContract = (address: string) => {
       events,
 
       swapExactAmountIn,
+      trySwapExactAmountIn,
 
       balance,
       calcOutGivenIn,

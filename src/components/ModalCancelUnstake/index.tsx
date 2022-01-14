@@ -93,7 +93,7 @@ const ModalCancelUnstake = ({
             <p>By staking you will reset your withdraw time.</p>
           ) : (
             <p>
-              By canceling the withdraw you will reset your withdrawal time.
+              By cancelling the withdraw you will reset your withdrawal time.
             </p>
           )}
           <p>Do you want to proceed ?</p>

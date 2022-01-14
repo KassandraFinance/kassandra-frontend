@@ -1,18 +1,20 @@
 import React from 'react'
 
+import useConnect from '../../hooks/useConnect'
+
 import * as S from './styles'
 
 interface IModalWalletConnect {
-  connect: () => void;
   modalOpen: boolean;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ModalWalletConnect = ({
   modalOpen,
-  setModalOpen,
-  connect
+  setModalOpen
 }: IModalWalletConnect) => {
+  const { connect } = useConnect()
+
   function handleCloseModal() {
     setModalOpen(false)
   }

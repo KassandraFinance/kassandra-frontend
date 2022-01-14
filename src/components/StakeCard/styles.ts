@@ -19,6 +19,7 @@ export const BorderGradient = styled.div<IBorderGradientProps>`
   position: relative;
   width: 295px;
   max-height: 100%;
+
   z-index: -1;
 
   @media (max-width: 420px) {
@@ -117,9 +118,22 @@ export const StakeAndEarn = styled.div`
   justify-content: space-between;
   width: 100%;
   margin: 4px 0;
+  z-index: -4;
   p {
     color: #c4c4c4;
     font-size: ${theme.font.sizes.font14};
+  }
+
+  a {
+    color: #c4c4c4;
+    font-size: ${theme.font.sizes.font14};
+    text-decoration: none;
+
+    z-index: 2;
+
+    img {
+      margin-left: 8px;
+    }
   }
 `
 

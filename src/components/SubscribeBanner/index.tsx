@@ -20,7 +20,7 @@ const SubscribeBanner = () => {
   }
 
   const handleSubmit = () => {
-    ToastSuccess('Subscribe succesful')
+    ToastSuccess('Successfully subscribed')
     setTimeout(() => {
       setFormState({ email: '' })
     }, 1000)

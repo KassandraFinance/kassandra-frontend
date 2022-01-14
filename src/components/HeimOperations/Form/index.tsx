@@ -15,7 +15,6 @@ import { actionGetPoolTokens } from '../../../store/modules/poolTokens/actions'
 
 import { SUBGRAPH_URL, HeimCRPPOOL } from '../../../constants/tokenAddresses'
 
-import useConnect from '../../../hooks/useConnect'
 import useCRPContract from '../../../hooks/useCRPContract'
 import useERC20Contract, { ERC20 } from '../../../hooks/useERC20Contract'
 import usePoolContract from '../../../hooks/usePoolContract'
@@ -63,7 +62,6 @@ const Form = ({
   const corePool = usePoolContract(corePoolAddress)
   const crpPool = useCRPContract(crpPoolAddress)
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-  const { connect } = useConnect()
   const { trackBuying, trackBought, trackCancelBuying } = useMatomoEcommerce();
 
   const [tokenAddress2Index, setTokenAddress2Index] = React.useState<Address2Index>({})
@@ -315,7 +313,7 @@ const Form = ({
           )
           setSwapOutAmount([newSwapOutAmount])
         } catch (error) {
-          ToastWarning("This amount is too large for the pool! The transaction will revert!")
+          ToastWarning("The amount can't be more than half of what's already in the pool! The transaction will revert!")
         }
 
         let newSwapOutPrice;
@@ -394,6 +392,15 @@ const Form = ({
       catch(e) {
         ToastWarning("Could not connect with the blockchain to calculate prices.")
       }
+
+      try {
+        if (swapInAmount.gt(new BigNumber(0))) {
+          await corePool.trySwapExactAmountIn(swapInAddress, swapInAmount, swapOutAddress, userWalletAddress)
+        }
+      } catch (error) {
+        ToastWarning("The amount can't be more than half of what's already in the pool! The transaction will revert!")
+      }
+
     }
 
     calc()
@@ -511,12 +518,12 @@ const Form = ({
 
         if (txReceipt.status) {
           ToastSuccess(`Approval of ${tokenSymbol} confirmed`)
-          setApprovalCheck(cur => cur + 1)
+          setTimeout(() => setApprovalCheck(cur => cur + 1), 500)
           return
         }
       }
     },
-    []
+    [setApprovalCheck]
   )
 
   const investCallback = React.useCallback(
@@ -822,7 +829,7 @@ const Form = ({
         ) : (
         <>
           <InputDefault
-            decimals={infoAHYPE[tokenAddress2Index[swapOutAddress]]?.decimals || new BigNumber(0)}
+            decimals={infoAHYPE[tokenAddress2Index[swapOutAddress]]?.decimals || new BigNumber(-1)}
             poolTokens={title === 'Invest'
               ? [infoAHYPE[infoAHYPE.length - 1]]
               : infoAHYPE
@@ -831,7 +838,7 @@ const Form = ({
             tokenDetails={infoAHYPE[tokenOutIndex]}
             isMax={null}
             swapOutAmount={swapOutAmount[0]}
-            swapOutBalance={swapOutBalance[0]}
+            swapOutBalance={swapOutBalance[0] || new BigNumber(-1)}
             swapInAddress={swapInAddress}
             setSwapOutAddress={setSwapOutAddress}
           />
@@ -915,7 +922,6 @@ const Form = ({
       <ModalWalletConnect
         modalOpen={isModalWallet}
         setModalOpen={setIsModaWallet}
-        connect={connect}
       />
     </S.FormContainer >
   )

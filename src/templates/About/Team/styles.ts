@@ -77,3 +77,15 @@ export const Grid = styled.div`
     justify-self: center;
   }
 `
+export const Image = styled.div`
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  @media (max-width: 920px) {
+    display: none;
+  }
+  img {
+    width: 18rem;
+  }
+`

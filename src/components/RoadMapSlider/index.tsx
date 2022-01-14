@@ -1,19 +1,13 @@
 import React from 'react'
+import Image from 'next/image'
+
 import Slider, { SliderSettings } from '../../components/Slider'
-import RoadMapCard from '../RoadMapCard'
+import RoadMapCard from './RoadMapCard'
+
+import pinIcon from '../../../public/assets/RoadmapIcon.svg'
+import { icons, colors } from './assets'
+
 import * as S from './styles'
-
-const colors: any = {
-  done: '#5ee56b',
-  soon: '#ffbf008b',
-  next: '#676767'
-}
-
-const icons: any = {
-  done: <img src="/assets/RoadmapDone.svg" alt="" />,
-  soon: <img src="/assets/RoadmapSoon.svg" alt="" />,
-  next: <img src="/assets/RoadmapNext.svg" alt="" />
-}
 
 const RoadMapSlider = () => {
   const settings: SliderSettings = {
@@ -53,7 +47,7 @@ const RoadMapSlider = () => {
     <S.Wrapper>
       <S.TitleAndIcon>
         <S.Icon>
-          <img src="assets/RoadmapIcon.svg" alt="Roadmap Icon is a Pin" />
+          <Image src={pinIcon} alt="" />
         </S.Icon>
         <S.Title>Project Roadmap</S.Title>
       </S.TitleAndIcon>
@@ -76,10 +70,10 @@ const RoadMapSlider = () => {
 
 const arrCard = [
   {
-    date: '2021 - Q4',
+    date: '2022 - Q1',
     title: '1st Cycle ',
-    icon: icons.done,
-    color: colors.done,
+    icon: icons.soon,
+    color: colors.soon,
     items: [
       {
         title: 'IDO',
@@ -98,9 +92,9 @@ const arrCard = [
     ]
   },
   {
-    date: '2022 - Q1',
-    icon: icons.soon,
-    color: colors.soon,
+    date: '2022 - Q2',
+    icon: icons.next,
+    color: colors.next,
     title: '2nd Cycle ',
     items: [
       {
@@ -116,7 +110,7 @@ const arrCard = [
     ]
   },
   {
-    date: '2022 - Q2',
+    date: '2022 - Q3',
     icon: icons.next,
     color: colors.next,
     title: '3rd Cycle ',
@@ -124,13 +118,12 @@ const arrCard = [
       {
         title: 'Community Products',
         text: [
-          'Open interface to Kassandra DAO members create their own ',
-          'tokenized funds'
+          'Open interface for Kassandra DAO members create their own tokenized funds'
         ]
       },
       {
         title: 'Multichain',
-        text: ['Time to go to other chains']
+        text: ['Time to jump into other blockchains']
       }
     ]
   }

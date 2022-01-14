@@ -19,6 +19,7 @@ import ChartProducts from '../../components/ChartProducts'
 import HeimOperations from '../../components/HeimOperations'
 import Web3Disabled from '../../components/Web3Disabled'
 import ScrollUpButton from '../../components/ScrollUpButton'
+import Loading from '../../components/Loading'
 import PoweredBy from './PoweredBy'
 
 import avaxSocial from '../../../public/assets/avalanche_social_index_logo.svg'
@@ -39,6 +40,7 @@ declare let window: {
 }
 
 interface InfoPool {
+  tvl: string;
   swapFees: string;
   withdrawFees: string;
   volume: string;
@@ -49,6 +51,7 @@ const Products = () => {
   const [loading, setLoading] = React.useState<boolean>(true)
   const [isMobile, setIsMobile] = React.useState<boolean>(false)
   const [infoPool, setInfoPool] = React.useState<InfoPool>({
+    tvl: '...',
     swapFees: '...',
     withdrawFees: '...',
     volume: '...'
@@ -57,12 +60,10 @@ const Products = () => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { trackProductPageView } = useMatomoEcommerce()
   
-  const day = Math.trunc(Date.now() / 1000 - 60 * 60 * 24)
-
   const { data } = useSWR([GET_INFO_POOL], query =>
     request(SUBGRAPH_URL, query, {
       id: HeimCRPPOOL,
-      day
+      day: Math.trunc(Date.now() / 1000 - 60 * 60 * 24)
     })
   )
 
@@ -83,7 +84,7 @@ const Products = () => {
   }
 
   React.useEffect(() => {
-    if (data?.swap) {
+    if (data) {
       const swapFees = data.swap.reduce((acc: Big, current: { volume_usd: string }) => {
         return Big(current.volume_usd).add(acc)
       }, 0)
@@ -97,6 +98,7 @@ const Products = () => {
       }, 0)
 
       setInfoPool({
+        tvl: BNtoDecimal(Big(data.pool.total_value_locked_usd), 2, 2, 2),
         swapFees: BNtoDecimal(Big(swapFees), 2, 2, 2),
         withdrawFees: BNtoDecimal(Big(withdrawFees), 2, 2, 2),
         volume: BNtoDecimal(Big(volume), 2, 2, 2)
@@ -134,10 +136,9 @@ const Products = () => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            fontWeight: 500
           }}
         >
-          Loading...
+          <Loading />
         </h1>
       }
       {!loading && isMobile && (
@@ -171,7 +172,7 @@ const Products = () => {
                     </S.Tooltip>
                   </Tippy>
                 </span>
-                <h2>${BNtoDecimal(Big(data?.pool.total_value_locked_usd || 0), 2, 2, 2)}</h2>
+                <h2>${infoPool.tvl}</h2>
               </S.IndexData>
               <S.IndexData>
                 <span>VOLUME (24h)
@@ -207,7 +208,7 @@ const Products = () => {
             <ChartProducts />
             <ScrollUpButton />
             <Change />
-            <Summary />
+            <Summary strategy={data?.pool.strategy || '...'} />
             <PoweredBy />
             <Distribution poolPlatform={poolPlatform} />
             <TokenDescription />
@@ -223,8 +224,8 @@ const Products = () => {
           {!web3.currentProvider && !loading && !isMobile && (
             <Web3Disabled
               textButton="Install Metamask"
-              textHeader="Looks like you don't have the metamask wallet installed"
-              bodyText="Please install the metamask wallet to access our pools "
+              textHeader="Looks like you don't have the Metamask wallet installed"
+              bodyText="Please install the Metamask wallet to access our pools "
               type="install"
             />
           )}
@@ -236,7 +237,7 @@ const Products = () => {
               type="changeChain"
             />
           )}
-      </>
+        </>
       }
     </S.BackgroundProducts>
   )

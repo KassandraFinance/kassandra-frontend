@@ -23,8 +23,8 @@ export const Image = styled.div`
   img {
     padding: 2px;
     border-radius: 50%;
-    width: 154px;
-    height: 154px;
+    width: 88px;
+    height: 88px;
   }
 `
 export const Name = styled.h2`
