@@ -141,15 +141,7 @@ const Products = () => {
           <Loading />
         </h1>
       }
-      {!loading && isMobile && (
-        <Web3Disabled
-          textButton="asd"
-          textHeader="You are on a mobile device"
-          bodyText="The Invest page can only be accessed by a computer"
-          type="isMobile"
-        />
-      )}
-      {web3.currentProvider !== null && chainId === "0xa869" && !loading && !isMobile ?
+      {web3.currentProvider !== null && chainId === "0xa869" && !loading ?
         <S.Product>
           <S.ProductDetails>
             <S.Intro>
@@ -221,7 +213,7 @@ const Products = () => {
         </S.Product>
         :
         <>
-          {!web3.currentProvider && !loading && !isMobile && (
+          {!web3.currentProvider && !loading && (
             <Web3Disabled
               textButton="Install Metamask"
               textHeader="Looks like you don't have the Metamask wallet installed"
@@ -229,7 +221,7 @@ const Products = () => {
               type="install"
             />
           )}
-          {web3.currentProvider && chainId !== "0xa869" && !loading && !isMobile && (
+          {web3.currentProvider && chainId !== "0xa869" && !loading && (
             <Web3Disabled
               textButton={`Connect to ${poolPlatform}`}
               textHeader="Your wallet is set to the wrong network."

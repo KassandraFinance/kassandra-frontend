@@ -13,11 +13,11 @@ export const Wrapper = styled.div`
   position: relative;
   z-index: ${theme.layers.menu};
 
-  @media(max-width: 1200px ) {
+  @media (max-width: 1200px) {
     padding: 0 30px;
   }
 
-  @media(max-width: 540px ) {
+  @media (max-width: 540px) {
     height: 80px;
 
     padding: 0 16px;
@@ -36,6 +36,9 @@ export const LogoWrapper = styled.div`
   .logo-ipad {
     img {
       width: 70px;
+    }
+    @media (min-width: 961px) {
+      display: none;
     }
     @media (max-width: 540px) {
       display: none;
@@ -81,15 +84,15 @@ export const MenuLink = styled.a`
   font-weight: ${theme.font.weight.light};
   text-decoration: none;
   text-align: center;
-  
+
   margin: 0.3rem ${theme.spacings.space24};
   position: relative;
 
   &:hover {
     &::after {
-      content: "";
+      content: '';
       display: block;
-      
+
       height: 0.3rem;
       border-radius: 0.3rem;
       background-color: ${theme.colors.cyan};
@@ -131,7 +134,7 @@ export const MenuLinkDisable = styled.a`
   cursor: not-allowed;
   &:hover {
     &::after {
-      content: "";
+      content: '';
       display: block;
 
       background-color: ${theme.colors.lightGray};
@@ -163,11 +166,28 @@ export const MenuLinkDisable = styled.a`
 
 export const MenuBottom = styled.div`
   background-color: ${theme.colors.darkPurple};
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   position: fixed;
   bottom: 0;
 
   width: 100%;
   height: 68px;
+  padding: 16px;
+
   z-index: ${theme.layers.menu};
+  @media (min-width: 769px) {
+    display: none;
+  }
+`
+
+export const ButtonOptions = styled.button`
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+
+  width: 32px;
+  height: 32px;
 `

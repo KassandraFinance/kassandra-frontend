@@ -6,8 +6,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { useRouter } from 'next/router'
-
 
 import { actionGetUserAddressWallet } from '../../store/modules/userWalletAddress/actions'
 
@@ -18,7 +16,9 @@ import Button from '../Button'
 import ModalLogOut from '../ModalLogOut'
 import DropdownInvest from '../DropdownInvest'
 import ModalWalletConnect from '../ModalWalletConnect'
+import ModalSocialMediaMobile from '../ModalSocialMediaMobile'
 
+import options from '../../../public/assets/options.svg'
 import kacy64 from '../../../public/assets/logo-64.svg'
 import logoKassandra from '../../../public/assets/new-kassandra-logo-header.svg'
 
@@ -35,6 +35,7 @@ export type MenuProps = {
 const Header = () => {
   const [isModalWallet, setIsModalWallet] = React.useState<boolean>(false)
   const [isModalLogout, setIsModalLogout] = React.useState<boolean>(false)
+  const [isModalSocialMedia, setIsModalSocialMedia] = React.useState<boolean>(false)
 
   const dispatch = useDispatch()
   const { trackEvent } = useMatomo()
@@ -177,7 +178,15 @@ const Header = () => {
               text='Connect Wallet' />
           )
         }
+        <S.ButtonOptions onClick={() => setIsModalSocialMedia(true)}>
+          <Image src={options} alt="options" />
+        </S.ButtonOptions>
       </S.MenuBottom>
+
+      <ModalSocialMediaMobile
+        modalOpen={isModalSocialMedia}
+        setModalOpen={setIsModalSocialMedia}
+      />
 
       <ModalWalletConnect
         modalOpen={isModalWallet}

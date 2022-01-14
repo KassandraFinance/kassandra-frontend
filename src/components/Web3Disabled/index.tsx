@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
-import useConnect from '../../hooks/useConnect'
 
 import Button from '../Button'
 
@@ -19,8 +18,6 @@ interface IWeb3DisabledProps {
 }
 
 const Web3Disabled = ({ textButton, textHeader, bodyText, type }: IWeb3DisabledProps) => {
-  const { connect } = useConnect()
-
   async function changeChainId() {
     try {
       await window.ethereum.request({
@@ -57,7 +54,7 @@ const Web3Disabled = ({ textButton, textHeader, bodyText, type }: IWeb3DisabledP
   function getFunction(type: string) {
     switch (type) {
       case "connect":
-        connect()
+        // connect()
         break;
       case "changeChain":
         changeChainId()
