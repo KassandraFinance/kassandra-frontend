@@ -167,7 +167,7 @@ const Products = ({ product }: Input) => {
           <Summary strategy={data?.pool.strategy || '...'} />
           <PoweredBy partners={product.partners} />
           <Distribution poolPlatform={product.platform} />
-          <TokenDescription />
+          <TokenDescription symbol={product.symbol} />
         </S.ProductDetails>
         <HeimOperations
           poolChain={product.chain}
