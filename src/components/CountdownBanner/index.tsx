@@ -46,7 +46,8 @@ const CountdownBanner = () => {
             <img src="assets/avalancheIcon.svg" alt="" />
           </S.TitleAndImage>
           <h1>
-            Join our public and exclusive IDO in partnership with Penguin Finance on Jan 17th
+            Join our public and exclusive IDO in partnership with Penguin
+            Finance on Jan 17th
           </h1>
           <S.Logo>
             <Image src={penguinFinance} />
@@ -107,7 +108,7 @@ const CountdownBanner = () => {
           </S.TimerWrapper>
         </S.TimerContainer> */}
       </S.Container>
-    </S.Background >
+    </S.Background>
   )
 }
 export default CountdownBanner
