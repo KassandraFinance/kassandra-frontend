@@ -10,9 +10,9 @@ const colors: any = {
 }
 
 const icons: any = {
-  done: <img src="/assets/RoadmapDone.svg" alt="" />,
-  soon: <img src="/assets/RoadmapSoon.svg" alt="" />,
-  next: <img src="/assets/RoadmapNext.svg" alt="" />
+  done: <img src="/assets/RoadmapDone.svg" alt="Done" />,
+  soon: <img src="/assets/RoadmapSoon.svg" alt="Soon" />,
+  next: <img src="/assets/RoadmapNext.svg" alt="Next" />
 }
 
 const RoadMapSlider = () => {
@@ -124,13 +124,12 @@ const arrCard = [
       {
         title: 'Community Products',
         text: [
-          'Open interface to Kassandra DAO members create their own ',
-          'tokenized funds'
+          'Open interface for Kassandra DAO members create their own tokenized funds'
         ]
       },
       {
         title: 'Multichain',
-        text: ['Time to go to other chains']
+        text: ['Time to jump into other blockchains']
       }
     ]
   }

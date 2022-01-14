@@ -36,7 +36,7 @@ const KassandraArchitecture = () => {
           <span>
             A 3% fee is charged whenever investment tokens are redeemed. The
             fees collected this way are under total governance control and can
-            be used for purchasing and subsequently burn $KACY tokens.
+            be used for purchasing and subsequently burning $KACY tokens.
           </span>
         </S.KassandraCard>
         <S.KassandraCard className="thirdCard">
@@ -44,9 +44,9 @@ const KassandraArchitecture = () => {
           <p>VOTE LOCK</p>
           <h1>Making $KACY scarce</h1>
           <span>
-            When voting in governance proposals $KACY holders may choose to lock
-            their tokens for different time periods and earn more voting power,
-            thus making $KACY more scarce and the governance more secure.
+            When voting in governance proposals $KACY holders must lock their
+            tokens for different time periods to earn voting power, thus making
+            $KACY scarcer and the governance more secure.
           </span>
         </S.KassandraCard>
       </S.KassandraCardWrapper>

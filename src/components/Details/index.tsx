@@ -171,7 +171,7 @@ const Details = ({
               target="_blank"
               rel="noopener noreferrer"
             >
-              Buy $Kacy
+              Buy $KACY
             </a>
             <img src="/assets/iconBuyKacy.svg" alt="" />
           </S.Link>

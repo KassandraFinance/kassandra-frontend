@@ -22,10 +22,10 @@ const Partners = () => (
         target="_blank"
         rel="noopener noreferrer"
       >
-        <Image src={heimdall} alt="" />
+        <Image src={heimdall} alt="Heimdall" />
       </a>
       <a href="https://api3.org/" target="_blank" rel="noopener noreferrer">
-        <Image src={api3} alt="" />
+        <Image src={api3} alt="API3" />
       </a>
       <a
         href="https://shinedao.finance/"
@@ -40,7 +40,7 @@ const Partners = () => (
         target="_blank"
         rel="noopener noreferrer"
       >
-        <Image src={Penguin_Finance} alt="" />
+        <Image src={Penguin_Finance} alt="Penguin Finance" />
       </a>
     </S.Partners>
   </S.Container>

@@ -32,7 +32,7 @@ const Summary = ({ strategy }: Params) => {
   }
 
   const handleCopyLink = () => {
-    ToastInfo('Address copied to clipboad!')
+    ToastInfo('Address copied to clipboard!')
   }
 
   return (

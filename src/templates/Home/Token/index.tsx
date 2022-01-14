@@ -212,14 +212,14 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
               BY HEIMDALL.LAND <b> ON AVALANCHE NETWORK </b>{' '}
             </p>
             <span>
-              The Social Index $HEIM reflects the performance of a portfolio
+              The $aHYPE Social Index reflects the performance of a portfolio
               selected from the most socially active cryptocurrencies in the
               past 30 days, using Heimdall Social Score data.
             </span>
           </S.TextWrapper>
           <S.TokenInfo>
             <S.Price change={Number(change)}>
-              <span> USD {poolPrice}</span>
+              <span>USD {poolPrice}</span>
               <div>
                 {/* <img src="assets/tokenPriceArrow.png" alt="" /> */}
                 <p>{change}%</p>

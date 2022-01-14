@@ -58,7 +58,7 @@ const InputDefault = ({
   return (
     <S.InputDefaultContainer>
       <S.Info>
-        <S.Span>Swap to (estimative)</S.Span>
+        <S.Span>Swap to (estimation)</S.Span>
         {tokensList}
         <S.SpanLight>
           Balance:{' '}

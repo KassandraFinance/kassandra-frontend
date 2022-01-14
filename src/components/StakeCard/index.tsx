@@ -245,7 +245,7 @@ const StakeCard = ({
 
       if (txReceipt.status) {
         matomoEvent('reward-claim', `${staked[pid]}`)
-        ToastSuccess(`Rewards claimed sucessfully`)
+        ToastSuccess(`Rewards claimed successfully`)
         return
       }
     }
