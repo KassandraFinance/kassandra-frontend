@@ -60,7 +60,7 @@ const TokenDescription = () => {
           that decreases the value of the pool, and gas costs are incurred to
           write the new weights on the blockchain. These gas costs will be
           covered using funds from a wallet managed by the DAO and funded by the
-          exit fees collected from users. Losses in arbitrage are aleviated by
+          exit fees collected from users. Losses in arbitrage are alleviated by
           swap fees and the smart allocation of the assets.
         </p>
         <span>
@@ -98,7 +98,7 @@ const TokenDescription = () => {
           <li>
             Accurate market data. Price, market cap and circulating supply.
           </li>
-          <li> The project’s protocol must have significant usage.</li>
+          <li>The project’s protocol must have significant usage.</li>
           <li>The project’s protocol must not be insolvent.</li>
         </ol>
         <span>

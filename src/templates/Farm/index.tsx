@@ -6,13 +6,13 @@ import { Staking } from '../../constants/tokenAddresses'
 
 import web3 from '../../utils/web3'
 
-import useConnect from '../../hooks/useConnect'
 import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 import useStakingContract from '../../hooks/useStakingContract'
 
 import Web3Disabled from '../../components/Web3Disabled'
 import VotingPower from '../../components/VotingPower'
 import StakeCard from '../../components/StakeCard'
+import Loading from '../../components/Loading'
 
 import ComingSoon from './ComingSoon'
 import Header from '../../components/Header'
@@ -32,7 +32,6 @@ const StakeFarm = () => {
   const kacyStake = useStakingContract(Staking)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-  const { connect } = useConnect()
 
   async function getChainId() {
     if (web3.currentProvider === null) {
@@ -73,10 +72,9 @@ const StakeFarm = () => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            fontWeight: 500
           }}
         >
-          Loading...
+          <Loading />
         </h1>
       }
       {web3.currentProvider !== null && chainId === "0xa869" && !loading && !isMobile ?
@@ -100,7 +98,6 @@ const StakeFarm = () => {
               <StakeCard
                 pid={0}
                 symbol="kacy"
-                connect={connect}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
                 getReward={kacyStake.getReward}
@@ -113,7 +110,6 @@ const StakeFarm = () => {
               <StakeCard
                 pid={1}
                 symbol="kacy"
-                connect={connect}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
                 getReward={kacyStake.getReward}
@@ -126,7 +122,6 @@ const StakeFarm = () => {
               <StakeCard
                 pid={2}
                 symbol="kacy"
-                connect={connect}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
                 getReward={kacyStake.getReward}
@@ -148,7 +143,6 @@ const StakeFarm = () => {
               <StakeCard
                 pid={4}
                 symbol="ahype"
-                connect={connect}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
                 getReward={kacyStake.getReward}
@@ -161,7 +155,6 @@ const StakeFarm = () => {
               <StakeCard
                 pid={5}
                 symbol="lp"
-                connect={connect}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
                 getReward={kacyStake.getReward}
@@ -188,8 +181,8 @@ const StakeFarm = () => {
           {web3.currentProvider === null && !loading && !isMobile && (
             <Web3Disabled
               textButton="Install Metamask"
-              textHeader="Looks like you don't have the metamask wallet installed"
-              bodyText="Please install the metamask wallet to access our pools "
+              textHeader="Looks like you don't have the Metamask wallet installed"
+              bodyText="Please install the Metamask wallet to access our pools "
               type="install"
             />
           )}

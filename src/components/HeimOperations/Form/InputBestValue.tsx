@@ -50,7 +50,7 @@ const InputBestValue = ({
     <S.InputBestValue>
       <S.IntroBestValue>
         <S.Span>Token</S.Span>
-        <S.Span total>Receive(est.) </S.Span>
+        <S.Span total>Receive (estimation)</S.Span>
       </S.IntroBestValue>
       <S.AllInput>
         {poolTokenDetails.map((token, index) => (

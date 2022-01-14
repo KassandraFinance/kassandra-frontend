@@ -49,7 +49,7 @@ const IndexDetails = ({ coinInfoList }: IIndexDetailsProps) => {
           <S.Table>
             <thead>
               <S.Tr showMore={showMore}>
-                <S.Th>Colour</S.Th>
+                <S.Th>Color</S.Th>
                 <S.Th>Name</S.Th>
                 <S.Th>Price</S.Th>
                 <S.Th>Allocation</S.Th>

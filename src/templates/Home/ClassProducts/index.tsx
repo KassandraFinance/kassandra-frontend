@@ -7,7 +7,7 @@ const ClassProducts = () => {
     <S.ClassProducts>
       <p>DYNAMICALLY REBALANCED</p>
       <S.Divider />
-      <h1>bringing complex investiment strategies to DeFi</h1>
+      <h1>bringing complex investment strategies to DeFi</h1>
       <span>
         Port any complex quantitative investment strategies to Web 3.0 using
         Kassandra Protocol technology

@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
+import Link from 'next/link'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
 import Big from 'big.js'
@@ -75,7 +76,6 @@ export interface IInfoStaked {
 interface IStakingProps {
   pid: number;
   symbol: string;
-  connect: () => void;
   balanceOf: (pid: number, walletAddress: string) => Promise<BigNumber>;
   earned: (pid: number, walletAddress: string) => Promise<BigNumber>;
   getReward: (pid: number, callback: TransactionCallback) => void;
@@ -97,7 +97,6 @@ const staked: any = {
 const StakeCard = ({
   pid,
   symbol,
-  connect,
   balanceOf,
   earned,
   getReward,
@@ -147,8 +146,12 @@ const StakeCard = ({
     stakingToken: ''
   })
 
-  const { data } = useSWR([GET_INFO_AHYPE, HeimCRPPOOL], (query, id) =>
-    request(SUBGRAPH_URL, query, { id })
+  const { data } = useSWR(
+    [GET_INFO_AHYPE, HeimCRPPOOL],
+    (query, id) => request(SUBGRAPH_URL, query, { id }),
+    {
+      refreshInterval: 10000
+    }
   )
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { trackEvent } = useMatomo()
@@ -242,7 +245,7 @@ const StakeCard = ({
 
       if (txReceipt.status) {
         matomoEvent('reward-claim', `${staked[pid]}`)
-        ToastSuccess(`Rewards claimed sucessfully`)
+        ToastSuccess(`Rewards claimed successfully`)
         return
       }
     }
@@ -316,7 +319,23 @@ const StakeCard = ({
             <S.PoolName>
               <S.StakeAndEarn>
                 <p>STAKE</p>
-                {symbol === 'ahype' ? <p>$aHYPE</p> : <p>$KACY-AVAX PNG LP</p>}
+                {symbol === 'ahype' ? (
+                  <Link href="/products/ahype" passHref>
+                    <a>
+                      $aHYPE
+                      <img src="/assets/GoToSite.svg" alt="" />
+                    </a>
+                  </Link>
+                ) : (
+                  <a
+                    href="https://app.pangolin.exchange/#/add/AVAX/0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    $KACY-AVAX PNG LP
+                    <img src="/assets/GoToSite.svg" alt="" />
+                  </a>
+                )}
               </S.StakeAndEarn>
               <S.StakeAndEarn>
                 <p>EARN</p>
@@ -507,7 +526,7 @@ const StakeCard = ({
                   infoStakeStatic={infoStaked}
                   stakingToken={infoStaked.stakingToken}
                   decimals={decimals}
-                  symbol={symbol}
+                  symbol={staked[pid]}
                   priceLPToken={priceLPToken}
                 />
               )}
@@ -553,7 +572,6 @@ const StakeCard = ({
       <ModalWalletConnect
         modalOpen={isModalWallet}
         setModalOpen={setIsModaWallet}
-        connect={connect}
       />
     </>
   )
