@@ -31,12 +31,9 @@ const Hero = () => {
       </S.IntroHero>
       <S.ButtonWrapper>
         <li>
-          <Link
-            activeClass="active"
-            to="launching-banner"
-            smooth={true}
-            offset={-70}
-            duration={3000}
+          <NextLink
+            href="https://penguin-finance.medium.com/penguin-launchpad-kassandra-ido-tiers-guidelines-6cc741f11385"
+            passHref
           >
             <Button
               className="btn-cta"
@@ -44,10 +41,11 @@ const Hero = () => {
               size="large"
               as="a"
               text="Upcoming IDO"
-              icon={<img src="/assets/avalancheIcon.svg" alt="" />}
+              target="_blank"
+              icon={<img src="/assets/penguinIcon.svg" alt="" />}
               onClick={() => clickMatomoEvent('click-to-cta', 'up-ido')}
             />
-          </Link>
+          </NextLink>
         </li>
         <li>
           <NextLink href="https://demo.kassandra.finance" passHref>
@@ -58,7 +56,6 @@ const Hero = () => {
               as="a"
               target="_blank"
               text="Explore Our Demo"
-              icon={<img src="/assets/avalancheIcon.svg" alt="" />}
               onClick={() => clickMatomoEvent('click-to-cta', 'explore-demo')}
             />
           </NextLink>
