@@ -2,18 +2,26 @@
 import React from 'react'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
+import { ChainDetails } from '../../utils/changeChain'
+
 import Form from './Form'
 
 import * as S from './styles'
 
 interface IOperationsProps {
+  poolChain: ChainDetails;
   crpPoolAddress: string;
   corePoolAddress: string;
   productCategories: string[];
 }
 
 
-const HeimOperations = ({ crpPoolAddress, corePoolAddress, productCategories }: IOperationsProps) => {
+const HeimOperations = ({
+  poolChain,
+  crpPoolAddress,
+  corePoolAddress,
+  productCategories
+}: IOperationsProps) => {
   const messages = {
     Invest: 'Pay with',
     Withdraw: 'Send',
@@ -134,6 +142,7 @@ const HeimOperations = ({ crpPoolAddress, corePoolAddress, productCategories }: 
           </S.TypeWithdraw>
         }
           <Form
+            poolChain={poolChain}
             crpPoolAddress={crpPoolAddress}
             corePoolAddress={corePoolAddress}
             productCategories={productCategories}
