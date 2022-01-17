@@ -67,8 +67,8 @@ const KacyOverView = () => {
         <S.TokenInfo>
           <S.Values>
             <p>PRICE</p>
-            <span>${BNtoDecimal(kacyPrice, 2, 2, 2)}</span>
-            {/* <span>$ -- </span> */}
+            <span>$0.00</span>
+<!--             <span>${BNtoDecimal(kacyPrice, 2, 2, 2)}</span> -->
           </S.Values>
           <S.Values>
             <p>MARKET CAP</p>
