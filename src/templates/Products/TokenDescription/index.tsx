@@ -3,16 +3,22 @@ import Image from 'next/image'
 
 import iconBar from '../../../../public/assets/iconbar.svg'
 
+import { ProductSymbols } from '../../../constants/tokenAddresses'
+
 import * as S from './styles'
 
 import AhypeDescription from './ahype'
 
-const descriptions = {
-  ahype: <AhypeDescription />
+interface DescriptionType {
+  [key: ProductSymbols]: JSX.Element;
 }
 
 interface Input {
   symbol: string;
+}
+
+const descriptions: DescriptionType = {
+  ahype: <AhypeDescription />
 }
 
 const TokenDescription = ({ symbol }: Input) => {
