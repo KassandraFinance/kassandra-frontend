@@ -31,6 +31,8 @@ export interface ProductDetails {
   partners: PartnerData[];
 }
 
+export type ProductSymbols = keyof typeof products;
+
 export const SUBGRAPH_URL =
   'https://graph.kassandra.finance/subgraphs/name/Kassandra'
 
