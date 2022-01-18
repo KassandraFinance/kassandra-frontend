@@ -16,7 +16,6 @@ interface IInputProps {
 }
 
 const InputTokenValue = ({
-  disabled,
   max,
   decimals,
   inputRef,
