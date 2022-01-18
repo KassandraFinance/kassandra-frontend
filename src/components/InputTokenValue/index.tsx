@@ -13,6 +13,7 @@ interface IInputProps {
   decimals: BigNumber;
   inputRef: React.RefObject<HTMLInputElement>;
   setInputValue: React.Dispatch<React.SetStateAction<BigNumber>>;
+  disabled?: string;
 }
 
 const InputTokenValue = ({
@@ -20,7 +21,8 @@ const InputTokenValue = ({
   max,
   decimals,
   inputRef,
-  setInputValue
+  setInputValue,
+  disabled
 }: IInputProps) => {
   if (!disabled) {
     disabled = ''
