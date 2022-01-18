@@ -8,7 +8,6 @@ import 'tippy.js/dist/tippy.css'
 import { Input } from './styles'
 
 interface IInputProps {
-  disabled: string | undefined;
   max: string;
   decimals: BigNumber;
   inputRef: React.RefObject<HTMLInputElement>;
