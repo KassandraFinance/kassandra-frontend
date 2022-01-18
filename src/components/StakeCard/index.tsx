@@ -118,31 +118,31 @@ const StakeCard = ({
   const [isApproveKacyStaking, setIsApproveKacyStaking] =
     React.useState<boolean>(false)
   const [priceLPToken, setPriceLPToken] = React.useState<IPriceLPToken>({
-    priceLP: Big(0),
-    kacy: Big(0),
-    aHYPE: Big(0)
+    priceLP: Big(-1),
+    kacy: Big(-1),
+    aHYPE: Big(-1)
   })
 
   const [withdrawDelay, setWithdrawDelay] = React.useState<number>(0)
   const [kacyEarned, setKacyEarned] = React.useState<BigNumber>(
-    new BigNumber(0)
+    new BigNumber(-1)
   )
 
   const [decimals, setDecimals] = React.useState<string>('18')
 
   const [infoStaked, setInfoStaked] = React.useState<IInfoStaked>({
-    yourStake: new BigNumber(0),
+    yourStake: new BigNumber(-1),
     withdrawable: false,
     votingMultiplier: '',
-    startDate: '',
-    endDate: '',
+    startDate: '...',
+    endDate: '...',
     withdrawDelay: '',
-    kacyRewards: new BigNumber(0),
-    totalStaked: new BigNumber(0),
-    yourDailyKacyReward: new BigNumber(0),
+    kacyRewards: new BigNumber(-1),
+    totalStaked: new BigNumber(-1),
+    yourDailyKacyReward: new BigNumber(-1),
     hasExpired: false,
     unstake: false,
-    apr: new BigNumber(0),
+    apr: new BigNumber(-1),
     stakingToken: ''
   })
 
@@ -311,7 +311,12 @@ const StakeCard = ({
                 <h4>APR</h4>
               </S.APR>
               <S.Percentage>
-                {infoStaked.hasExpired ? 0 : BNtoDecimal(infoStaked.apr, 0)}%
+                {infoStaked.apr.lt(new BigNumber(0))
+                  ? '...'
+                  : infoStaked.hasExpired
+                  ? 0
+                  : BNtoDecimal(infoStaked.apr, 0)}
+                %
               </S.Percentage>
             </S.IntroStaking>
           </S.InterBackground>
@@ -347,7 +352,7 @@ const StakeCard = ({
               <S.InfoPool>
                 <h3>Voting Power</h3>
                 <p>
-                  {infoStaked.votingMultiplier || 1}
+                  {infoStaked.votingMultiplier || '...'}
                   <span>/$KACY</span>
                 </p>
               </S.InfoPool>
@@ -355,7 +360,9 @@ const StakeCard = ({
                 <h3>Withdraw delay</h3>
                 <S.Days>
                   <p>
-                    {infoStaked.withdrawDelay / 60 / 60 / 24 < 1
+                    {infoStaked.withdrawDelay.length === 0
+                      ? '...'
+                      : infoStaked.withdrawDelay / 60 / 60 / 24 < 1
                       ? infoStaked.withdrawDelay / 60
                       : infoStaked.withdrawDelay / 60 / 60 / 24}
                     <span>
