@@ -1,5 +1,9 @@
 import React from 'react'
 
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
+
+import web3 from '../../utils/web3'
 import useConnect from '../../hooks/useConnect'
 
 import * as S from './styles'
@@ -28,25 +32,43 @@ const ModalWalletConnect = ({
       <S.Container modalOpen={modalOpen}>
         <S.BackgroundBlack>
           <S.ModalText>
-            <span>Wallet connection is required</span>
+            <span>Choose your wallet</span>
             <button type="button" onClick={() => setModalOpen(false)}>
               <img src="/assets/close.svg" alt="Close" />{' '}
             </button>
           </S.ModalText>
 
           <S.Content>
-            <S.WrapperIconsBackGround
-              type="button"
-              onClick={() => {
-                setModalOpen(false)
-                connect()
-              }}
+            <Tippy
+              content={
+                <S.Tooltip>
+                  <a href="https://metamask.io/">
+                    Metamask
+                    <img src="/assets/externalLink.svg" alt="" />
+                  </a>{' '}
+                  is not installed on this browser
+                </S.Tooltip>
+              }
+              disabled={web3.currentProvider !== null}
+              hideOnClick={false}
+              interactive
             >
-              <S.WrapperIcons>
-                <img src="/assets/metaMaskIcon.svg" alt="" />
-                <span>Metamask</span>
-              </S.WrapperIcons>
-            </S.WrapperIconsBackGround>
+              <S.WrapperIconsBackGround
+                className={web3.currentProvider === null ? 'disabled' : ''}
+                type="button"
+                onClick={() => {
+                  if (web3.currentProvider !== null) {
+                    setModalOpen(false)
+                    connect()
+                  }
+                }}
+              >
+                <S.WrapperIcons>
+                  <img src="/assets/metaMaskIcon.svg" alt="" />
+                  <span>Metamask</span>
+                </S.WrapperIcons>
+              </S.WrapperIconsBackGround>
+            </Tippy>
           </S.Content>
         </S.BackgroundBlack>
       </S.Container>

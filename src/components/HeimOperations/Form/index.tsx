@@ -29,7 +29,6 @@ import InputBestValue from './InputBestValue'
 
 import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
-import web3 from '../../../utils/web3'
 import { priceDollar } from '../../../utils/priceDollar'
 import changeChain, { ChainDetails } from '../../../utils/changeChain'
 import { BNtoDecimal, wei } from '../../../utils/numerals'
@@ -799,8 +798,14 @@ const Form = ({
         swapInAddress={swapInAddress}
         tokenDetails={infoAHYPE[tokenInIndex]}
         setSwapInAmount={setSwapInAmount}
-        setSwapOutAmount={setSwapOutAmount}
         setSwapInAddress={setSwapInAddress}
+        disabled={
+          userWalletAddress.length === 0
+            ? "Please connect your wallet by clicking the button below"
+            : chainId !== poolChain.chainId
+              ? `Please change to the ${poolChain.chainName} by clicking the button below`
+              : ""
+        }
       />
 
       {title === 'Swap' ?
@@ -896,75 +901,63 @@ const Form = ({
           </S.ExchangeRate>
         </>
       )}
-      {web3.currentProvider === null ? (
+      {userWalletAddress.length === 0 ? (
         <Button
           className="btn-submit"
-          as='a'
           backgroundPrimary
           fullWidth
-          href="https://metamask.io/download.html"
-          target="_blank"
-          text='Install MetaMask'
+          type="button"
+          onClick={() => setIsModaWallet(true)}
+          text='Connect Wallet'
         />
       ) : (
-        chainId !== poolChain.chainId ? (
+        chainId === poolChain.chainId ? (
           <Button
             className="btn-submit"
+            onClick={() => setTimeout(() => clearInput(), 3000)}
             backgroundPrimary
+            disabledNoEvent={swapInAmount.toString() === "0" && isApproved[tokenInIndex]}
             fullWidth
-            type="button"
-            onClick={() => changeChain(poolChain)}
-            text='Change Chain'
-          />
-        ) : (
-          userWalletAddress ? (
-            <Button
-              className="btn-submit"
-              onClick={() => setTimeout(() => clearInput(), 3000)}
-              backgroundPrimary
-              disabledNoEvent={swapInAmount.toString() === "0" && isApproved[tokenInIndex]}
-              fullWidth
-              type="submit"
-              text={
-                isApproved[tokenInIndex] ?
-                  swapInAmount.toString() !== '0' ?
-                    title === "Withdraw" ?
-                      typeWithdrawChecked === "Best_value" ?
-                        `${title} ${'$' + priceInDollarOnWithdraw}`
-                      :
-                        `${title} ${'$' + BNtoDecimal(
-                          Big((swapOutAmount[0] || 0).toString())
-                            .mul(Big(priceDollar(swapOutAddress, infoAHYPE)))
-                            .div(Big(10).pow(18)),
-                          18,
-                          2,
-                          2
-                        )}`
+            type="submit"
+            text={
+              isApproved[tokenInIndex] ?
+                swapInAmount.toString() !== '0' ?
+                  title === "Withdraw" ?
+                    typeWithdrawChecked === "Best_value" ?
+                      `${title} ${'$' + priceInDollarOnWithdraw}`
                     :
                       `${title} ${'$' + BNtoDecimal(
-                        Big((swapInAmount || 0).toString())
-                          .mul(Big(priceDollar(swapInAddress, infoAHYPE)))
+                        Big((swapOutAmount[0] || 0).toString())
+                          .mul(Big(priceDollar(swapOutAddress, infoAHYPE)))
                           .div(Big(10).pow(18)),
                         18,
                         2,
                         2
                       )}`
                   :
-                    `${title}`
-                : 
-                  'Approve'
-              }
-            />
-          ) : (
-            <Button
-              className="btn-submit"
-              backgroundPrimary
-              fullWidth
-              type="button"
-              onClick={() => setIsModaWallet(true)}
-              text='Connect Wallet'
-            />
-          )
+                    `${title} ${'$' + BNtoDecimal(
+                      Big((swapInAmount || 0).toString())
+                        .mul(Big(priceDollar(swapInAddress, infoAHYPE)))
+                        .div(Big(10).pow(18)),
+                      18,
+                      2,
+                      2
+                    )}`
+                :
+                  `${title}`
+              : 
+                'Approve'
+            }
+          />
+        ) : (
+          <Button
+            className="btn-submit"
+            backgroundPrimary
+            fullWidth
+            type="button"
+            onClick={() => changeChain(poolChain)}
+            text={`Change to ${poolChain.chainName}`}
+          />
         )
       )}
       <ModalWalletConnect
