@@ -31,6 +31,7 @@ import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
 import web3 from '../../../utils/web3'
 import { priceDollar } from '../../../utils/priceDollar'
+import changeChain, { ChainDetails } from '../../../utils/changeChain'
 import { BNtoDecimal, wei } from '../../../utils/numerals'
 import waitTransaction, { MetamaskError, TransactionCallback } from '../../../utils/txWait'
 
@@ -41,16 +42,18 @@ interface IFormProps {
   typeAction: string;
   title: string;
   typeWithdrawChecked: string;
-  crpPoolAddress: string
-  corePoolAddress: string
-  productCategories: string[]
+  poolChain: ChainDetails;
+  crpPoolAddress: string;
+  corePoolAddress: string;
+  productCategories: string[];
 }
 
 interface Address2Index {
   [key: string]: number;
 }
 
-const Form = ({ 
+const Form = ({
+  poolChain,
   crpPoolAddress,
   corePoolAddress,
   productCategories,
@@ -61,7 +64,7 @@ const Form = ({
   const crpPoolToken = useERC20Contract(crpPoolAddress)
   const corePool = usePoolContract(corePoolAddress)
   const crpPool = useCRPContract(crpPoolAddress)
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const { userWalletAddress, chainId } = useSelector((state: RootStateOrAny) => state)
   const { trackBuying, trackBought, trackCancelBuying } = useMatomoEcommerce();
 
   const [tokenAddress2Index, setTokenAddress2Index] = React.useState<Address2Index>({})
@@ -193,6 +196,10 @@ const Form = ({
 
   // get contract approval of tokens
   React.useEffect(() => {
+    if (chainId !== poolChain.chainId) {
+      return
+    }
+
     if (title === 'Withdraw') {
       setIsApproved(Array(infoAHYPE.length + 1).fill(true))
       return
@@ -216,11 +223,11 @@ const Form = ({
     setIsReload(!isReload)
     setIsApproved([])
     calc()
-  }, [title, infoAHYPE.length, approvalCheck, userWalletAddress])
+  }, [chainId, title, infoAHYPE.length, approvalCheck, userWalletAddress])
 
   // get balance of swap in token
   React.useEffect(() => {
-    if (swapInAddress.length === 0 || userWalletAddress.length === 0) {
+    if (swapInAddress.length === 0 || userWalletAddress.length === 0 || chainId.length === 0 || chainId !== poolChain.chainId) {
       return
     }
 
@@ -230,12 +237,11 @@ const Form = ({
     token
       .balance(userWalletAddress)
       .then(newBalance => setSwapInBalance(newBalance))
-
-  }, [swapInAddress, userWalletAddress, title, infoAHYPE, swapOutAddress])
+  }, [chainId, swapInAddress, userWalletAddress, title, infoAHYPE, swapOutAddress])
 
   // get balance of swap out token
   React.useEffect(() => {
-    if (userWalletAddress.length === 0) {
+    if (userWalletAddress.length === 0 || chainId.length === 0 || chainId !== poolChain.chainId) {
       return
     }
 
@@ -266,8 +272,7 @@ const Form = ({
     token
       .balance(userWalletAddress)
       .then(newBalance => setSwapOutBalance([newBalance]))
-
-  }, [userWalletAddress, infoAHYPE, swapInAddress, swapOutAddress])
+  }, [chainId, userWalletAddress, infoAHYPE, swapInAddress, swapOutAddress])
 
   React.useEffect(() => {
     const tokens = title === "Withdraw" ? infoAHYPE.length : 1
@@ -283,6 +288,12 @@ const Form = ({
       swapOutAddress.length === 0 ||
       swapInAddress === crpPoolAddress
     ) {
+      return
+    }
+
+    if (chainId !== poolChain.chainId) {
+      setSwapOutAmount([new BigNumber(0)])
+      setSwapOutPrice(new BigNumber(-1))
       return
     }
 
@@ -313,7 +324,9 @@ const Form = ({
           )
           setSwapOutAmount([newSwapOutAmount])
         } catch (error) {
-          ToastWarning("The amount can't be more than half of what's already in the pool! The transaction will revert!")
+          if (userWalletAddress.length > 0) {
+            ToastWarning("The amount can't be more than half of what's already in the pool! The transaction will revert!")
+          }
         }
 
         let newSwapOutPrice;
@@ -338,13 +351,15 @@ const Form = ({
 
         setSwapOutPrice(newSwapOutPrice)
       } catch (error) {
-        ToastWarning("Could not connect with the blockchain to calculate prices.")
+        if (userWalletAddress.length > 0) {
+          ToastWarning("Could not connect with the blockchain to calculate prices.")
+        }
       }
 
     }
 
     calc()
-  }, [swapInAmount, swapInAddress])
+  }, [chainId, swapInAmount, swapInAddress])
 
   // calculate swap
   React.useEffect(() => {
@@ -355,6 +370,12 @@ const Form = ({
       swapInAddress === crpPoolAddress ||
       swapOutAddress === crpPoolAddress
     ) {
+      return
+    }
+
+    if (chainId !== poolChain.chainId) {
+      setSwapOutAmount([new BigNumber(0)])
+      setSwapOutPrice(new BigNumber(-1))
       return
     }
 
@@ -394,7 +415,7 @@ const Form = ({
       }
 
       try {
-        if (swapInAmount.gt(new BigNumber(0))) {
+        if (userWalletAddress.length > 0 && swapInAmount.gt(new BigNumber(0))) {
           await corePool.trySwapExactAmountIn(swapInAddress, swapInAmount, swapOutAddress, userWalletAddress)
         }
       } catch (error) {
@@ -404,11 +425,25 @@ const Form = ({
     }
 
     calc()
-  }, [swapInAmount, swapInAddress, swapOutAddress])
+  }, [chainId, swapInAmount, swapInAddress, swapOutAddress])
 
   // calculate withdraw
   React.useEffect(() => {
     if (title !== 'Withdraw' || swapOutAddress === crpPoolAddress) {
+      return
+    }
+
+    if (chainId !== poolChain.chainId) {
+      setSwapOutPrice(new BigNumber(-1))
+
+      if (swapOutAddress === '') {
+        setSwapOutAmount(
+          Array(infoAHYPE.length - 1).fill(new BigNumber(0))
+        )
+        return
+      }
+
+      setSwapOutAmount([new BigNumber(0)])
       return
     }
 
@@ -490,12 +525,14 @@ const Form = ({
         setSwapOutPrice(newSwapOutPrice)
       }
       catch(e) {
-        ToastWarning("Could not connect with the blockchain to calculate prices.")
+        if (userWalletAddress.length > 0) {
+          ToastWarning("Could not connect with the blockchain to calculate prices.")
+        }
       }
     }
 
     calc()
-  }, [swapInAmount, swapOutAddress, infoAHYPE])
+  }, [chainId, swapInAmount, swapOutAddress, infoAHYPE])
 
   const tokenInIndex = tokenAddress2Index[swapInAddress]
   const tokenOutIndex = tokenAddress2Index[swapOutAddress]
@@ -859,66 +896,77 @@ const Form = ({
           </S.ExchangeRate>
         </>
       )}
-      {userWalletAddress ? (
+      {web3.currentProvider === null ? (
         <Button
           className="btn-submit"
-          onClick={() => setTimeout(() => clearInput(), 3000)}
+          as='a'
           backgroundPrimary
-          disabledNoEvent={swapInAmount.toString() === "0" && isApproved[tokenInIndex]}
           fullWidth
-          type="submit"
-          text={
-            isApproved[tokenInIndex] ?
-              swapInAmount.toString() !== '0' ?
-                title === "Withdraw" ?
-                  typeWithdrawChecked === "Best_value" ?
-                    `${title} ${'$' + priceInDollarOnWithdraw}`
-                  :
-                    `${title} ${'$' + BNtoDecimal(
-                      Big((swapOutAmount[0] || 0).toString())
-                        .mul(Big(priceDollar(swapOutAddress, infoAHYPE)))
-                        .div(Big(10).pow(18)),
-                      18,
-                      2,
-                      2
-                    )}`
-                :
-                  `${title} ${'$' + BNtoDecimal(
-                    Big((swapInAmount || 0).toString())
-                      .mul(Big(priceDollar(swapInAddress, infoAHYPE)))
-                      .div(Big(10).pow(18)),
-                    18,
-                    2,
-                    2
-                  )}`
-              :
-                `${title}`
-            : 
-              'Approve'
-          }
+          href="https://metamask.io/download.html"
+          target="_blank"
+          text='Install MetaMask'
         />
-        ) : (
-        web3.currentProvider === null ?
-          <Button
-            className="btn-submit"
-            as='a'
-            backgroundPrimary
-            fullWidth
-            href="https://metamask.io/download.html"
-            target="_blank"
-            text='Install MetaMask'
-          />
-          :
+      ) : (
+        chainId !== poolChain.chainId ? (
           <Button
             className="btn-submit"
             backgroundPrimary
             fullWidth
             type="button"
-            onClick={() => setIsModaWallet(true)}
-            text='Connect Wallet'
+            onClick={() => changeChain(poolChain)}
+            text='Change Chain'
           />
+        ) : (
+          userWalletAddress ? (
+            <Button
+              className="btn-submit"
+              onClick={() => setTimeout(() => clearInput(), 3000)}
+              backgroundPrimary
+              disabledNoEvent={swapInAmount.toString() === "0" && isApproved[tokenInIndex]}
+              fullWidth
+              type="submit"
+              text={
+                isApproved[tokenInIndex] ?
+                  swapInAmount.toString() !== '0' ?
+                    title === "Withdraw" ?
+                      typeWithdrawChecked === "Best_value" ?
+                        `${title} ${'$' + priceInDollarOnWithdraw}`
+                      :
+                        `${title} ${'$' + BNtoDecimal(
+                          Big((swapOutAmount[0] || 0).toString())
+                            .mul(Big(priceDollar(swapOutAddress, infoAHYPE)))
+                            .div(Big(10).pow(18)),
+                          18,
+                          2,
+                          2
+                        )}`
+                    :
+                      `${title} ${'$' + BNtoDecimal(
+                        Big((swapInAmount || 0).toString())
+                          .mul(Big(priceDollar(swapInAddress, infoAHYPE)))
+                          .div(Big(10).pow(18)),
+                        18,
+                        2,
+                        2
+                      )}`
+                  :
+                    `${title}`
+                : 
+                  'Approve'
+              }
+            />
+          ) : (
+            <Button
+              className="btn-submit"
+              backgroundPrimary
+              fullWidth
+              type="button"
+              onClick={() => setIsModaWallet(true)}
+              text='Connect Wallet'
+            />
+          )
         )
-      }
+      )}
       <ModalWalletConnect
         modalOpen={isModalWallet}
         setModalOpen={setIsModaWallet}
