@@ -5,6 +5,8 @@ import { request } from 'graphql-request'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
 
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 
@@ -812,14 +814,16 @@ const Form = ({
       />
 
       {title === 'Swap' ?
-        <S.SwapButton type="button" title="Trade places for swap-in and swap-out token" onClick={() => {
-          matomoEvent('click-on-button', 'swap-token')
-          setSwapInAddress(swapOutAddress)
-          setSwapOutAddress(swapInAddress)
-        }} >
-          <img src="/assets/arrowDown.svg" alt="Trade places for swap-in and swap-out token" />
-          <img src="/assets/arrowDown.svg" alt="" />
-        </S.SwapButton>
+        <Tippy content="Trade places for swap-in and swap-out token">
+          <S.SwapButton type="button" onClick={() => {
+            matomoEvent('click-on-button', 'swap-token')
+            setSwapInAddress(swapOutAddress)
+            setSwapOutAddress(swapInAddress)
+          }} >
+            <img src="/assets/arrowDown.svg" alt="" />
+            <img src="/assets/arrowDown.svg" alt="" />
+          </S.SwapButton>
+        </Tippy>
         :
         <img src="/assets/arrowDown.svg" alt="" style={{ margin: '12px 0' }} />
       }
