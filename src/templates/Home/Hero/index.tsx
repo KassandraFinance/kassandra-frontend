@@ -32,7 +32,7 @@ const Hero = () => {
       <S.ButtonWrapper>
         <li>
           <NextLink
-            href="https://penguin-finance.medium.com/penguin-launchpad-kassandra-ido-tiers-guidelines-6cc741f11385"
+            href="https://penguinfinance.org/launchpad-kassandra"
             passHref
           >
             <Button
