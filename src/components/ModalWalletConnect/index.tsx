@@ -17,7 +17,7 @@ const ModalWalletConnect = ({
   modalOpen,
   setModalOpen
 }: IModalWalletConnect) => {
-  const { connect, connectWalletConnect, handleDisconnected } = useConnect()
+  const { connect, connectWalletConnect } = useConnect()
 
   function handleCloseModal() {
     setModalOpen(false)
@@ -31,12 +31,12 @@ const ModalWalletConnect = ({
       />
       <S.Container modalOpen={modalOpen}>
         <S.BackgroundBlack>
-          <S.ModalText>
-            <span>Choose your wallet</span>
+          <S.ModalTitle>
+            <span>Wallet connection is required</span>
             <button type="button" onClick={() => setModalOpen(false)}>
               <img src="/assets/close.svg" alt="Close" />{' '}
             </button>
-          </S.ModalText>
+          </S.ModalTitle>
 
           <S.Content>
             <Tippy
@@ -77,8 +77,8 @@ const ModalWalletConnect = ({
               }}
             >
               <S.WrapperIcons>
-                <img src="/assets/metaMaskIcon.svg" alt="" />
-                <span>Wallet Connect</span>
+                <img src="/assets/connectWalletIcon.svg" alt="" />
+                <span>WalletConnect</span>
               </S.WrapperIcons>
             </S.WrapperIconsBackGround>
           </S.Content>
