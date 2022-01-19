@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import Big from 'big.js'
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
+import { Networks } from '../../../constants/tokenAddresses'
 
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
 import { TokenImages } from '../../../store/modules/poolImages/types'
@@ -13,12 +14,6 @@ import iconBar from '../../../../public/assets/iconbar.svg'
 import none from '../../../../public/assets/coming-soon.svg'
 
 import * as S from './styles'
-
-interface Networks {
-  Ropsten: string;
-  Avalanche: string;
-  Fuji: string;
-}
 
 const network2coingeckoID: Networks = {
   Ropsten: 'ethereum',

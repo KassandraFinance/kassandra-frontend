@@ -50,7 +50,7 @@ const Details = ({
   priceLPToken
 }: IDetailsProps) => {
   // eslint-disable-next-line prettier/prettier
-  const [depositedAmount, setDepositedAmount] = React.useState<BigNumber>(new BigNumber(0))
+  const [depositedAmount, setDepositedAmount] = React.useState<BigNumber>(new BigNumber(-1))
   const { trackEvent } = useMatomo()
 
   function matomoEvent(action: string, name: string) {
@@ -60,7 +60,7 @@ const Details = ({
       name
     })
   }
-  console.log(symbol)
+
   React.useEffect(() => {
     let interval: any
     ;(async () => {
@@ -94,16 +94,21 @@ const Details = ({
         <span>Total staked</span>
         <S.KacyUSD>
           <span>
-            {BNtoDecimal(depositedAmount, 18)} {symbol}
+            {depositedAmount.lt(new BigNumber('0'))
+              ? '...'
+              : BNtoDecimal(depositedAmount, 18)}{' '}
+            {symbol}
           </span>
           <span className="usd">
             &#8776;{' '}
-            {BNtoDecimal(
-              Big(`0${depositedAmount}`).mul(price).div(Big(10).pow(18)),
-              6,
-              2,
-              2
-            )}{' '}
+            {depositedAmount.lt(new BigNumber('0')) || price.lt(0)
+              ? '...'
+              : BNtoDecimal(
+                  Big(`0${depositedAmount}`).mul(price).div(Big(10).pow(18)),
+                  6,
+                  2,
+                  2
+                )}{' '}
             USD
           </span>
         </S.KacyUSD>
@@ -112,14 +117,18 @@ const Details = ({
         <span>Pool Reward</span>
         <S.KacyUSD>
           <span>
-            {hasExpired
+            {infoStakeStatic.kacyRewards.lt(new BigNumber(0))
+              ? '...'
+              : hasExpired
               ? '0'
               : BNtoDecimal(infoStakeStatic.kacyRewards, 18, 2, 2)}
             /day
           </span>
           <span className="usd">
             &#8776;{' '}
-            {hasExpired
+            {infoStakeStatic.kacyRewards.lt(new BigNumber(0)) || price.lt(0)
+              ? '...'
+              : hasExpired
               ? '0'
               : BNtoDecimal(
                   Big(infoStakeStatic.kacyRewards.toString())

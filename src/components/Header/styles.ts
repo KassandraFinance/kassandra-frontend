@@ -181,6 +181,31 @@ export const MenuBottom = styled.div`
   @media (min-width: 769px) {
     display: none;
   }
+
+  .button-mobile {
+    font-size: ${theme.font.sizes.font12};
+    max-width: 100%;
+    height: 36px;
+
+    img {
+      width: 16px;
+    }
+  }
+`
+
+export const KacyAmount = styled.div`
+  border: 1px solid ${theme.colors.snow};
+  border-radius: ${theme.border.radius};
+
+  display: flex;
+  align-items: center;
+
+  height: 36px;
+  padding: 6px;
+  max-width: 100%;
+  img {
+    width: 20px;
+  }
 `
 
 export const ButtonOptions = styled.button`

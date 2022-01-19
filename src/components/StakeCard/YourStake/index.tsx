@@ -200,38 +200,36 @@ const YourStake = ({
         <p>Your stake</p>
         <S.Stake>
           <p>
-            {pid === 5 &&
-              BNtoDecimal(
-                Big(infoStaked.yourStake.toString())
-                  .mul(priceLPToken.priceLP)
-                  .div(Big(10).pow(18)),
-                2,
-                2,
-                2
-              )}
-            {pid === 4 &&
-              BNtoDecimal(
-                Big(infoStaked.yourStake.toString())
-                  .mul(priceLPToken.aHYPE)
-                  .div(Big(10).pow(18)),
-                2,
-                2,
-                2
-              )}
-            {pid !== 4 && pid !== 5 && BNtoDecimal(infoStaked.yourStake, 18)}
+            {infoStaked.yourStake.lt(new BigNumber('0')) ||
+            (pid === 5 && priceLPToken.priceLP.lt(0)) ||
+            (pid === 4 && priceLPToken.aHYPE.lt(0))
+              ? '...'
+              : !stakeWithVotingPower
+              ? BNtoDecimal(infoStaked.yourStake, 18)
+              : BNtoDecimal(
+                  Big(infoStaked.yourStake.toString())
+                    .mul(pid === 5 ? priceLPToken.priceLP : priceLPToken.aHYPE)
+                    .div(Big(10).pow(18)),
+                  2,
+                  2,
+                  2
+                )}
             <S.Symbol>{!stakeWithVotingPower ? 'KACY' : 'USD'}</S.Symbol>
           </p>
           {!stakeWithVotingPower && (
             <span>
               &#8776;{' '}
-              {BNtoDecimal(
-                Big(infoStaked.yourStake.toString())
-                  .mul(priceLPToken.kacy)
-                  .div(Big(10).pow(18)),
-                6,
-                2,
-                2
-              )}{' '}
+              {infoStaked.yourStake.lt(new BigNumber('0')) ||
+              priceLPToken.kacy.lt(0)
+                ? '...'
+                : BNtoDecimal(
+                    Big(infoStaked.yourStake.toString())
+                      .mul(priceLPToken.kacy)
+                      .div(Big(10).pow(18)),
+                    6,
+                    2,
+                    2
+                  )}{' '}
               USD
             </span>
           )}
@@ -242,21 +240,25 @@ const YourStake = ({
           <S.Info>
             <span>Your voting power</span>
             <span>
-              {BNtoDecimal(
-                new BigNumber(
-                  infoStaked.withdrawable || infoStaked.unstake
-                    ? 1
-                    : infoStaked.votingMultiplier
-                ).mul(infoStaked.yourStake),
-                18,
-                2
-              )}
+              {infoStaked.yourStake.lt(new BigNumber(0))
+                ? '...'
+                : BNtoDecimal(
+                    new BigNumber(
+                      infoStaked.withdrawable || infoStaked.unstake
+                        ? 1
+                        : infoStaked.votingMultiplier
+                    ).mul(infoStaked.yourStake),
+                    18,
+                    2
+                  )}
             </span>
           </S.Info>
           <S.Info>
             <span>Your daily KACY reward</span>
             <span>
-              {infoStaked.hasExpired
+              {infoStaked.yourDailyKacyReward.lt(new BigNumber(0))
+                ? '...'
+                : infoStaked.hasExpired
                 ? '0'
                 : BNtoDecimal(infoStaked.yourDailyKacyReward, 18, 2)}
               /day
