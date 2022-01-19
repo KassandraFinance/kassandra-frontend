@@ -104,6 +104,7 @@ const ModalCancelUnstake = ({
               onClick={() => {
                 if (staking) {
                   setIsModalStaking(true)
+
                 } else {
                   kacyStake.cancelUnstake(pid, cancelUnstakeCallback())
                 }
@@ -111,13 +112,14 @@ const ModalCancelUnstake = ({
               }}
             />
           </S.ButtonContainer>
-          <S.Link
-            href="https://kassandrafoundation.medium.com/kassandra-dao-token-8bc046d55a00"
-            target="_blank"
-            rel="noopener noreferrer"
+          {/* <S.Link
+            onClick={() => {
+              setModalOpen(false)
+              setIsModalStaking(true)
+            }}
           >
             <a>
-              Check more info about the $KACY token
+              Cancel and stake additional KACY in one action
               <svg
                 width="17"
                 height="17"
@@ -145,7 +147,7 @@ const ModalCancelUnstake = ({
                 />
               </svg>
             </a>
-          </S.Link>
+          </S.Link> */}
         </S.Content>
       </S.ModalContainer>
     </>
