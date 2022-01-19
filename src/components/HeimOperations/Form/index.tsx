@@ -106,7 +106,7 @@ const Form = ({
       name
     })
   }
-  
+
   function clearInput() {
     setSwapInAmount(new BigNumber(0))
     setSwapOutAmount([new BigNumber(0)])
@@ -360,6 +360,7 @@ const Form = ({
     }
 
     calc()
+    setSwapOutAmount(Array(infoAHYPE.length - 1).fill(new BigNumber(0)))
   }, [chainId, swapInAmount, swapInAddress])
 
   // calculate swap
@@ -426,6 +427,7 @@ const Form = ({
     }
 
     calc()
+    setSwapOutAmount(Array(infoAHYPE.length - 1).fill(new BigNumber(0)))
   }, [chainId, swapInAmount, swapInAddress, swapOutAddress])
 
   // calculate withdraw
@@ -458,11 +460,30 @@ const Form = ({
         return new BigNumber(0)
       }
 
-      return amountPoolToken
-        .mul(wei.sub(exitFee).mul(new BigNumber(100)).div(wei))
-        .mul(balanceOut)
-        .div(supplyPoolToken)
-        .div(new BigNumber(100))
+      // 10^18
+      const one = new BigNumber('1')
+      const two = new BigNumber('2')
+      const bigOne = new BigNumber('10').pow(new BigNumber('18'))
+      const halfBigOne = bigOne.div(two)
+      // calculated fee (bmul)
+      const fee = amountPoolToken
+        .mul(exitFee)
+        .add(halfBigOne)
+        .div(bigOne);
+      const pAiAfterExitFee = amountPoolToken.sub(fee);
+      const supply = supplyPoolToken.add(one)
+      // ratio of the token (bdiv)
+      const ratio = pAiAfterExitFee
+        .mul(bigOne)
+        .add(supply.div(two))
+        .div(supply);
+      // amount of tokens (bmul)
+      const tokenAmountOut = ratio
+        .mul(balanceOut.sub(one))
+        .add(halfBigOne)
+        .div(bigOne);
+
+      return tokenAmountOut
     }
 
     const calc = async () => {
@@ -533,6 +554,7 @@ const Form = ({
     }
 
     calc()
+    setSwapOutAmount(Array(infoAHYPE.length - 1).fill(new BigNumber(0)))
   }, [chainId, swapInAmount, swapOutAddress, infoAHYPE])
 
   const tokenInIndex = tokenAddress2Index[swapInAddress]
@@ -653,31 +675,40 @@ const Form = ({
         approved,
         category,
         swapInAmountInput,
+        swapOutAmountInput,
         swapInAddressInput,
         swapOutAddressInput,
         swapInSymbol,
         swapOutSymbol,
         walletAddress,
-        tokensLength,
-        amountUSD
+        amountUSD,
+        slippageInput
       // eslint-disable-next-line prettier/prettier
       } = e.target as HTMLFormElement & {
-        approved: HTMLInputElement
-        category: HTMLInputElement
-        swapInAmountInput: HTMLInputElement
-        swapInAddressInput: HTMLInputElement
-        swapOutAddressInput: HTMLInputElement
-        swapInSymbol: HTMLInputElement
-        swapOutSymbol: HTMLInputElement
-        walletAddress: HTMLInputElement
-        tokensLength: HTMLInputElement
-        amountUSD: HTMLInputElement
+        approved: HTMLInputElement;
+        category: HTMLInputElement;
+        swapInAmountInput: HTMLInputElement;
+        swapOutAmountInput: HTMLInputElement;
+        swapInAddressInput: HTMLInputElement;
+        swapOutAddressInput: HTMLInputElement;
+        swapInSymbol: HTMLInputElement;
+        swapOutSymbol: HTMLInputElement;
+        walletAddress: HTMLInputElement;
+        amountUSD: HTMLInputElement;
+        slippageInput: HTMLInputElement;
       }
 
       const amountInUSD = parseFloat(amountUSD.value)
       const swapInAmountVal = new BigNumber(swapInAmountInput.value)
+      const swapOutAmountVal = swapOutAmountInput.value.split(',').map(
+        item => new BigNumber(item)
+      )
       const swapInAddressVal = swapInAddressInput.value
       const swapOutAddressVal = swapOutAddressInput.value
+      const slippageVal = slippageInput.value
+
+      const slippageExp = new BigNumber(10).pow(new BigNumber(2 + (slippageVal.split('.')[1]?.length || 0)))
+      const slippageBase = slippageExp.sub(new BigNumber(slippageVal.replace('.', '')))
 
       try {
         switch (category.value) {
@@ -695,6 +726,7 @@ const Form = ({
             crpPool.joinswapExternAmountIn(
               swapInAddressVal,
               swapInAmountVal,
+              swapOutAmountVal[0].mul(slippageBase).div(slippageExp),
               walletAddress.value,
               investCallback(swapOutSymbol.value, amountInUSD)
             )
@@ -707,18 +739,32 @@ const Form = ({
               crpPool.exitswapPoolAmountIn(
                 swapOutAddressVal,
                 swapInAmountVal,
+                swapOutAmountVal[0].mul(slippageBase).div(slippageExp),
                 walletAddress.value,
                 withdrawCallback(swapInSymbol.value, -1 * amountInUSD)
               )
               return
             }
 
-            crpPool.exitPool(
-              swapInAmountVal,
-              Array(parseInt(tokensLength.value)).fill(new BigNumber(0)),
-              walletAddress.value,
-              withdrawCallback(swapInSymbol.value, -1 * amountInUSD)
-            )
+            corePool.currentTokens()
+              .then(tokens => {
+                const swapOutAmounts = []
+
+                for (let i = 0; i < tokens.length; i++) {
+                  swapOutAmounts.push(
+                    swapOutAmountVal[tokenAddress2Index[tokens[i]]]
+                      .mul(slippageBase)
+                      .div(slippageExp)
+                  )
+                }
+
+                crpPool.exitPool(
+                  swapInAmountVal,
+                  swapOutAmounts,
+                  walletAddress.value,
+                  withdrawCallback(swapInSymbol.value, -1 * amountInUSD)
+                )
+              })
             return
 
           case 'Swap':
@@ -741,6 +787,7 @@ const Form = ({
               swapInAddressVal,
               swapInAmountVal,
               swapOutAddressVal,
+              swapOutAmountVal[0].mul(slippageBase).div(slippageExp),
               walletAddress.value,
               swapCallback(swapInSymbol.value, swapOutSymbol.value)
             )
@@ -751,19 +798,20 @@ const Form = ({
       } catch (error) {
         ToastError('Could not connect with the Blockchain!')
       }
-    }, [])
+    }, [tokenAddress2Index])
 
   return (
     <S.FormContainer onSubmit={submitAction}>
       <input type="hidden" name="approved" value={Number(isApproved[tokenInIndex] || 0)} />
       <input type="hidden" name="category" value={title} />
       <input type="hidden" name="swapInAmountInput" value={swapInAmount.toString()} />
+      <input type="hidden" name="swapOutAmountInput" value={swapOutAmount.toString()} />
       <input type="hidden" name="swapInAddressInput" value={swapInAddress} />
       <input type="hidden" name="swapOutAddressInput" value={swapOutAddress} />
       <input type="hidden" name="swapInSymbol" value={infoAHYPE[tokenInIndex]?.symbol || ''} />
       <input type="hidden" name="swapOutSymbol" value={infoAHYPE[tokenOutIndex]?.symbol || ''} />
       <input type="hidden" name="walletAddress" value={userWalletAddress} />
-      <input type="hidden" name="tokensLength" value={infoAHYPE.length - 1} />
+      <input type="hidden" name="slippageInput" value="0.5" />
       <input type="hidden" name="amountUSD" value={
         title === "Invest"
           ? Big((swapOutAmount[0] || 0).toString())
@@ -893,7 +941,7 @@ const Form = ({
             className="btn-submit"
             onClick={() => setTimeout(() => clearInput(), 3000)}
             backgroundPrimary
-            disabledNoEvent={swapInAmount.toString() === "0" && isApproved[tokenInIndex]}
+            disabledNoEvent={isApproved[tokenInIndex] && (swapInAmount.toString() === "0" || swapOutAmount[0].toString() === "0")}
             fullWidth
             type="submit"
             text={
