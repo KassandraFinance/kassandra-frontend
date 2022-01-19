@@ -28,10 +28,11 @@ interface IInputEthProps {
   swapInAddress: string;
   setSwapInAddress: React.Dispatch<React.SetStateAction<string>>;
   setSwapInAmount: React.Dispatch<React.SetStateAction<BigNumber>>;
-  setSwapOutAmount: React.Dispatch<React.SetStateAction<BigNumber[]>>;
+  disabled: string;
 }
 
 const InputTokens = ({
+  disabled,
   clearInput,
   inputRef,
   actionString,
@@ -43,7 +44,6 @@ const InputTokens = ({
   swapInAmount,
   setSwapInAddress,
   setSwapInAmount,
-  setSwapOutAmount
 }: IInputEthProps) => {
   const [maxActive, setMaxActive] = React.useState<boolean>(false)
   const [currentMax, setCurrentMax] = React.useState<BigNumber>(new BigNumber(0))
@@ -126,6 +126,7 @@ const InputTokens = ({
       <S.Amount>
         <S.Span total>Total</S.Span>
         <InputTokenValue
+          disabled={disabled}
           inputRef={inputRef}
           max={wei2String(swapInBalance)}
           decimals={decimals}

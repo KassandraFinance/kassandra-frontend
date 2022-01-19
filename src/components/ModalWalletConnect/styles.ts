@@ -103,6 +103,10 @@ export const WrapperIconsBackGround = styled.button`
 
   padding: 0.1rem;
 
+  &.disabled {
+    filter: grayscale(1);
+  }
+
   &:hover {
     background: linear-gradient(-45deg, #e843c4 0%, #f79640 100%);
   }
@@ -172,5 +176,12 @@ export const Content = styled.div`
     width: 100%;
     height: 100%;
     padding: 1.2rem;
+  }
+`
+
+export const Tooltip = styled.span`
+  a {
+    color: white;
+    text-decoration: none;
   }
 `

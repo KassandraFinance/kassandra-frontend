@@ -37,6 +37,17 @@ export const SUBGRAPH_URL =
   'https://graph.kassandra.finance/subgraphs/name/Kassandra'
 
 export const chains: { [key: string]: ChainDetails } = {
+  avalanche: {
+    chainId: '0xa86a',
+    chainName: 'Avalanche Mainnet',
+    nativeCurrency: {
+      name: 'Avalanche',
+      symbol: 'AVAX',
+      decimals: 18
+    },
+    rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
+    blockExplorerUrls: ['https://snowtrace.io/']
+  },
   fuji: {
     chainId: '0xa869',
     chainName: 'Avalanche Fuji Testnet',

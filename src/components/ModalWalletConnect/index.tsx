@@ -4,9 +4,11 @@ import WalletConnect from '@walletconnect/client'
 import QRCodeModal from '@walletconnect/qrcode-modal'
 import Web3 from 'web3'
 
-import useConnect from '../../hooks/useConnect'
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
 
 import web3 from '../../utils/web3'
+import useConnect from '../../hooks/useConnect'
 
 import * as S from './styles'
 
@@ -20,7 +22,7 @@ const ModalWalletConnect = ({
   setModalOpen
 }: IModalWalletConnect) => {
   const [state, setState] = React.useState<any>()
-  const { handleRequestAccounts } = useConnect()
+  const { connect } = useConnect()
 
   function handleCloseModal() {
     setModalOpen(false)
@@ -59,7 +61,7 @@ const ModalWalletConnect = ({
 
         // Get provided accounts and chainId
         const { accounts, chainId } = payload.params[0]
-        handleRequestAccounts(accounts)
+        // handleRequestAccounts(accounts)
       }
     )
 
@@ -104,48 +106,43 @@ const ModalWalletConnect = ({
       <S.Container modalOpen={modalOpen}>
         <S.BackgroundBlack>
           <S.ModalText>
-            <span>Wallet connection is required</span>
+            <span>Choose your wallet</span>
             <button type="button" onClick={() => setModalOpen(false)}>
               <img src="/assets/close.svg" alt="Close" />{' '}
             </button>
           </S.ModalText>
 
           <S.Content>
-            <S.WrapperIconsBackGround
-              type="button"
-              onClick={() => {
-                setModalOpen(false)
-              }}
+            <Tippy
+              content={
+                <S.Tooltip>
+                  <a href="https://metamask.io/">
+                    Metamask
+                    <img src="/assets/externalLink.svg" alt="" />
+                  </a>{' '}
+                  is not installed on this browser
+                </S.Tooltip>
+              }
+              disabled={web3.currentProvider !== null}
+              hideOnClick={false}
+              interactive
             >
-              <S.WrapperIcons>
-                <img src="/assets/metaMaskIcon.svg" alt="" />
-                <span>Metamask</span>
-              </S.WrapperIcons>
-            </S.WrapperIconsBackGround>
-            <S.WrapperIconsBackGround
-              type="button"
-              onClick={() => {
-                setModalOpen(false)
-                connector()
-              }}
-            >
-              <S.WrapperIcons>
-                <img src="/assets/metaMaskIcon.svg" alt="" />
-                <span>Wallet Connect</span>
-              </S.WrapperIcons>
-            </S.WrapperIconsBackGround>
-            <S.WrapperIconsBackGround
-              type="button"
-              onClick={() => {
-                setModalOpen(false)
-                state?.killSession()
-              }}
-            >
-              <S.WrapperIcons>
-                <img src="/assets/metaMaskIcon.svg" alt="" />
-                <span>Disconnect</span>
-              </S.WrapperIcons>
-            </S.WrapperIconsBackGround>
+              <S.WrapperIconsBackGround
+                className={web3.currentProvider === null ? 'disabled' : ''}
+                type="button"
+                onClick={() => {
+                  if (web3.currentProvider !== null) {
+                    setModalOpen(false)
+                    connect()
+                  }
+                }}
+              >
+                <S.WrapperIcons>
+                  <img src="/assets/metaMaskIcon.svg" alt="" />
+                  <span>Metamask</span>
+                </S.WrapperIcons>
+              </S.WrapperIconsBackGround>
+            </Tippy>
           </S.Content>
         </S.BackgroundBlack>
       </S.Container>

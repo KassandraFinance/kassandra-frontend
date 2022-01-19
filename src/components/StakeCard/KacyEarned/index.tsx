@@ -38,15 +38,21 @@ const KacyEarned = ({
       <p>
         KACY <span>Earned</span>
       </p>
-      <h3>{BNtoDecimal(kacyEarned || new BigNumber(0), 18, 2)}</h3>
+      <h3>
+        {kacyEarned.lt(new BigNumber('0'))
+          ? '...'
+          : BNtoDecimal(kacyEarned, 18, 2)}
+      </h3>
       <span>
         <b>&#8776;</b>{' '}
-        {BNtoDecimal(
-          Big(kacyEarned.toString()).mul(kacyPrice).div(Big(10).pow(18)),
-          6,
-          2,
-          2
-        )}{' '}
+        {kacyEarned.lt(new BigNumber('0')) || kacyPrice.lt(0)
+          ? '...'
+          : BNtoDecimal(
+              Big(kacyEarned.toString()).mul(kacyPrice).div(Big(10).pow(18)),
+              6,
+              2,
+              2
+            )}{' '}
         <b>USD</b>
       </span>
     </S.KacyEarned>
