@@ -60,7 +60,7 @@ const Details = ({
       name
     })
   }
-  console.log(symbol)
+
   React.useEffect(() => {
     let interval: any
     ;(async () => {
