@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import theme from '../../styles/theme'
 
+import * as ButtonStyle from '../Button/styles'
+
 export const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.7);
 
@@ -21,8 +23,8 @@ interface IModalContainerProps {
 export const ModalContainer = styled.div<IModalContainerProps>`
   display: ${props => (props.modalOpen ? 'block' : 'none')};
 
-  background-color: rgba(31, 31, 31, 0.8);
-  border: 1.5px solid ${theme.colors.magenta};
+  background-color: #1F2937;
+  border: 1.5px solid #FFFFFF40;
   border-radius: 10px;
 
   max-width: 100%;
@@ -36,9 +38,9 @@ export const ModalContainer = styled.div<IModalContainerProps>`
 `
 
 export const Top = styled.div`
-  background-color: rgba(20, 20, 20, 0.9);
+  background-color: #1f1f1fc8;
 
-  border-bottom: 1px solid ${theme.colors.magenta};
+  border-bottom: 1px solid #ffffff40;
   border-radius: 10px 10px 0 0;
 
   display: flex;
@@ -84,9 +86,13 @@ export const Content = styled.div`
 
     margin-bottom: 12px;
   }
+  ${ButtonStyle.Wrapper} {
+    margin-top: 24px;
 `
 
 export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
   button,
   a {
     background-color: transparent;
@@ -94,9 +100,6 @@ export const ButtonContainer = styled.div`
     color: ${theme.colors.cyan};
     font-size: ${theme.font.sizes.font14};
     text-decoration: none;
-
-    margin-right: 20px;
-
     cursor: pointer;
     svg {
       margin-left: 8px;
