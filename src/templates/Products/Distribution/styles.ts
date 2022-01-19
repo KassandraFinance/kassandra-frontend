@@ -59,13 +59,10 @@ export const Tr = styled.tr`
   align-items: center;
   height: 38px;
   margin: 16px 0;
+  min-width: 550px;
   @media (max-width: 660px) {
-    grid-template-columns: 0.5fr 3fr 4fr repeat(2, 2fr);
+    height: 28px;
     gap: 16px;
-    width: 600px;
-  }
-  @media (max-width: 660px) {
-    width: 500px;
   }
 `
 
@@ -91,9 +88,6 @@ export const Td = styled.td<ITdProps>`
   justify-content: center;
   align-items: center;
   text-align: center;
-  @media (max-width: 660px) {
-    font-size: 21px;
-  }
 `
 
 export const BalanceCoin = styled.span`
