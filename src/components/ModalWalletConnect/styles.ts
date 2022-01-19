@@ -102,11 +102,11 @@ export const WrapperIconsBackGround = styled.button`
   border: none;
 
   padding: 0.1rem;
-  
+
   &:last-child {
     margin-top: 16px;
   }
-  
+
   &.disabled {
     filter: grayscale(1);
   }
