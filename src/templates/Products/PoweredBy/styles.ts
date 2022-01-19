@@ -30,8 +30,17 @@ export const PartnersContent = styled.div`
 
   a {
     display: block;
-    height: 40px;
-    width: 100%;
-    position: relative;
+    padding-right: 30px;
+
+    &:last-child {
+      padding-right: 0;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      max-height: 40px;
+    }
   }
 `
