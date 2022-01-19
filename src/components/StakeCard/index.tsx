@@ -196,7 +196,7 @@ const StakeCard = ({
     if (data) {
       setPriceLPToken(prevState => ({
         ...prevState,
-        aHYPE: data?.pool.price_usd
+        Big(data?.pool.price_usd || -1)
       }))
     }
     setPriceLPToken(prevState => ({
