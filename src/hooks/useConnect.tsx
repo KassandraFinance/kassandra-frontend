@@ -107,17 +107,7 @@ const useConnect = () => {
         window.ethereum.on('accountsChanged', handleAccountsChanged)
         window.ethereum.on('chainChanged', handleChainChanged)
 
-        const permissions = await window.ethereum.request({
-          method: 'wallet_getPermissions'
-        })
-
-        if (permissions.length > 0) {
-          startApp(provider)
-        } else {
-          // ToastError("User has no permissions")
-          console.log('User has no permissions')
-          return
-        }
+        startApp(provider)
       }
     } catch (error) {
       console.log(error)

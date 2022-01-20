@@ -35,6 +35,9 @@ export const Product = styled.section`
     display: flex;
     flex-direction: column-reverse;
   }
+  @media (max-width: 400px) {
+    padding: 0 15px;
+  }
 `
 
 export const ProductDetails = styled.div`
