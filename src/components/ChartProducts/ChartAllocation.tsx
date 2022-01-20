@@ -17,6 +17,17 @@ interface IChartAllocationProps {
   data: any[];
 }
 
+const tooltipPosition = {
+  mobile: {
+    x: 20,
+    y: 96
+  },
+  desktop :{
+    x: 20,
+    y: 60
+  }
+}
+
 const ChartAllocation = ({ data }: IChartAllocationProps) => {
   const [allocation, setAllocation] = React.useState<any[]>([])
   const [arrayKeys, setArrayKeys] = React.useState<string[]>([])

@@ -31,6 +31,9 @@ export const Product = styled.section`
   @media (max-width: 1200px) {
     padding: 0 30px;
   }
+  @media (max-width: 1140px) {
+    gap: 0 60px;
+  }
   @media (max-width: 960px) {
     display: flex;
     flex-direction: column-reverse;
@@ -55,22 +58,34 @@ export const Intro = styled.div<IIntroProps>`
   align-items: center;
   gap: 20px;
 
-  max-width: 100%;
+  max-width: 440px;
 
   ${props =>
     props.introMobile
       && `
       display: none;
+      h1 {
+        font-size: 18px;
+      }
+      img {
+        width: 40px;
+      }
       @media (max-width: 960px) {
-        display: block;
+        display: grid;
+        grid-template-columns: 40px auto;
         padding: 0 30px;
+        gap: 8px;
+        max-width: 100%;
+
+      }
+      @media (max-width: 400px) {
+        padding: 0 15px;
       }
       `
   }
   ${props =>
     props.introDesktop
       && `
-      display: block;
       @media (max-width: 960px) {
         display: none;
       }
@@ -86,13 +101,22 @@ export const NameIndex = styled.div`
   }
 `
 
-export const NameAndSymbol = styled.div`
+interface INameAndSymbolProps {
+  introMobile?: boolean
+}
+
+export const NameAndSymbol = styled.div<INameAndSymbolProps>`
   display: flex;
   align-items: flex-start;
 
   h1 {
     font-size: ${theme.font.sizes.font24};
     font-weight: ${theme.font.weight.light};
+    
+    @media (max-width: 768px) {
+      font-size: ${theme.font.sizes.font18}
+    }
+
   }
 
   h3 {
@@ -103,6 +127,10 @@ export const NameAndSymbol = styled.div`
 
     margin-left: ${theme.spacings.space16};
     padding: 8px 12px;
+
+    @media (max-width: 768px) {
+      font-size: 10px;
+    }
   }
 `
 
@@ -112,6 +140,15 @@ export const Line = styled.div`
   width: 100%;
   height: 1px;
   margin: ${theme.spacings.space24} 0;
+
+  @media (max-width: 960px) {
+    width: calc(100vw - 60px);
+    margin: ${theme.spacings.space8} 0;
+  }
+
+  @media (max-width: 400px) {
+    width: calc(100vw - 30px);
+  }
 `
 
 export const IntroCharts = styled.div`

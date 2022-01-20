@@ -60,6 +60,10 @@ export const Selects = styled.div`
   left: 20px;
   width: calc(100% - 40px);
   z-index: 10;
+  @media (max-width: 375px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `
 
 export const SelectChart = styled.div`
@@ -79,6 +83,10 @@ export const SelectPeriod = styled.ul`
   display: flex;
 
   max-width: 100%;
+
+  @media (max-width: 375px) {
+    margin-top: 16px;
+  }
 `
 
 export const Input = styled.input`

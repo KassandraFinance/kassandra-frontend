@@ -162,13 +162,15 @@ const Header = () => {
           )
         }
         
-        <S.ButtonOptions onClick={() => setIsModalSocialMedia(true)}>
-          <Image src={usa} alt="usa" />
-        </S.ButtonOptions>
+        <S.OptionsContainer>
+          <S.ButtonOptions onClick={() => setIsModalSocialMedia(true)}>
+            <Image src={usa} alt="usa" />
+          </S.ButtonOptions>
 
-        <S.ButtonOptions onClick={() => setIsModalSocialMedia(true)}>
-          <Image src={options} alt="options" />
-        </S.ButtonOptions>
+          <S.ButtonOptions onClick={() => setIsModalSocialMedia(true)}>
+            <Image src={options} alt="options" />
+          </S.ButtonOptions>
+        </S.OptionsContainer>
       </S.MenuBottom>
 
       <ModalSocialMediaMobile

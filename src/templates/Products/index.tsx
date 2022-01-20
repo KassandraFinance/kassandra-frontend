@@ -105,7 +105,7 @@ const Products = ({ product }: Input) => {
       <S.Intro introMobile={true} introDesktop={false}>
         <Image src={avaxSocial} alt="" width={75} height={75} />
         <S.NameIndex>
-          <S.NameAndSymbol>
+          <S.NameAndSymbol introMobile={true}>
             <h1>{product.name}</h1>
             <h3>${product.symbol}</h3>
           </S.NameAndSymbol>
