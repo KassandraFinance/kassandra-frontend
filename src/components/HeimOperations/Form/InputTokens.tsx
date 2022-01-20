@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React from 'react'
 import BigNumber from 'bn.js'
 import Image from 'next/image'
@@ -9,44 +8,48 @@ import { BNtoDecimal } from '../../../utils/numerals'
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
 import InputTokenValue from '../../InputTokenValue'
 
-import SelectInputTokens from '../../SelectInputTokens'
+import SelectInput from '../../SelectInput'
 
 import avaxSocial from '../../../../public/assets/avalanche_social_index_logo.svg'
 
 import * as S from './styles'
 
 interface IInputEthProps {
-  clearInput: () => void
-  inputRef: React.RefObject<HTMLInputElement>;
+  title: string;
   actionString: string;
+  swapBalance: BigNumber;
+  decimals: BigNumber;
+  // optionals for input
+  clearInput?: () => void;
+  inputRef?: React.RefObject<HTMLInputElement>;
+  // Text Input
+  swapAmount: BigNumber;
+  setSwapAmount?: React.Dispatch<React.SetStateAction<BigNumber>>;
+  disabled: string;
+  // SelectInput
   poolTokens: TokenDetails[];
   tokenDetails: TokenDetails;
-  title: string;
-  decimals: BigNumber;
-  swapInBalance: BigNumber;
-  swapInAmount: BigNumber;
-  swapInAddress: string;
-  setSwapInAddress: React.Dispatch<React.SetStateAction<string>>;
-  setSwapInAmount: React.Dispatch<React.SetStateAction<BigNumber>>;
-  disabled: string;
+  setSwapAddress: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const InputTokens = ({
-  disabled,
+  title,
+  actionString,
+  swapBalance,
+  decimals,
   clearInput,
   inputRef,
-  actionString,
+  // Text Inputs
+  swapAmount,
+  setSwapAmount,
+  disabled,
+  // SelectInput
   poolTokens,
   tokenDetails,
-  title,
-  decimals,
-  swapInBalance,
-  swapInAmount,
-  setSwapInAddress,
-  setSwapInAmount,
+  setSwapAddress
 }: IInputEthProps) => {
   const [maxActive, setMaxActive] = React.useState<boolean>(false)
-  const [currentMax, setCurrentMax] = React.useState<BigNumber>(new BigNumber(0))
+  const [currentMax, setCurrentMax] = React.useState(new BigNumber(0))
 
   const { trackEvent } = useMatomo()
 
@@ -61,9 +64,9 @@ const InputTokens = ({
   const tokensList = React.useMemo(() => {
     if (poolTokens.length > 1) {
       return (
-        <SelectInputTokens
+        <SelectInput
           poolTokens={poolTokens}
-          setSwapInAddress={setSwapInAddress}
+          setSwapAddress={setSwapAddress}
           tokenDetails={tokenDetails}
         />
       )
@@ -86,62 +89,84 @@ const InputTokens = ({
   }
 
   const setMax = () => {
+    if (!inputRef || !setSwapAmount) {
+      return
+    }
+
     if (inputRef.current !== null) {
       inputRef.current.focus()
       if (maxActive) {
         inputRef.current.value = ''
-        setSwapInAmount(new BigNumber(0))
+        setSwapAmount(new BigNumber(0))
         setMaxActive(false)
         return
       }
-      inputRef.current.value = wei2String(swapInBalance)
-      setSwapInAmount(swapInBalance)
+      inputRef.current.value = wei2String(swapBalance)
+      setSwapAmount(swapBalance)
       setMaxActive(true)
-      setCurrentMax(swapInBalance)
+      setCurrentMax(swapBalance)
     }
   }
 
   React.useEffect(() => {
-    if (maxActive && currentMax !== swapInAmount) {
+    if (maxActive && currentMax !== swapAmount) {
       setMaxActive(false)
     }
-  }, [swapInAmount])
+  }, [swapAmount])
 
   React.useEffect(() => {
-    clearInput()
+    clearInput && clearInput()
   }, [title])
 
   return (
     <S.InputTokensContainer>
-      <S.PayWith>
+      <S.Info>
         <S.Span>{actionString}</S.Span>
         {tokensList}
         <S.SpanLight>
           Balance:{' '}
-          {swapInBalance > new BigNumber(-1)
-            ? BNtoDecimal(swapInBalance, decimals.toNumber())
+          {swapBalance > new BigNumber(-1)
+            ? BNtoDecimal(swapBalance, decimals.toNumber())
             : '...'}
         </S.SpanLight>
-      </S.PayWith>
+      </S.Info>
       <S.Amount>
         <S.Span total>Total</S.Span>
-        <InputTokenValue
-          disabled={disabled}
-          inputRef={inputRef}
-          max={wei2String(swapInBalance)}
-          decimals={decimals}
-          setInputValue={setSwapInAmount}
-        />
-        <S.ButtonMax 
-          type="button" 
-          maxActive={maxActive} 
-          onClick={() => {
-            setMax()
-            matomoEvent('click-on-maxBtn', `input-in-${title}`)
-          }}
-        >
-          Max
-        </S.ButtonMax>
+        {inputRef && setSwapAmount ? (
+          <InputTokenValue
+            disabled={disabled}
+            inputRef={inputRef}
+            max={wei2String(swapBalance)}
+            decimals={decimals}
+            setInputValue={setSwapAmount}
+          />
+        ) : (
+          <S.Input
+            readOnly
+            type="text"
+            placeholder="0"
+            value={
+              decimals.gt(new BigNumber(-1))
+                ? BNtoDecimal(
+                    swapAmount || new BigNumber(0),
+                    decimals.toNumber()
+                  )
+                : '0'
+            }
+          />
+        )}
+        {setSwapAmount && (
+          <S.ButtonMax
+            type="button"
+            maxActive={maxActive}
+            onClick={() => {
+              setMax()
+              matomoEvent('click-on-maxBtn', `input-in-${title}`)
+            }}
+          >
+            Max
+          </S.ButtonMax>
+        )}
       </S.Amount>
     </S.InputTokensContainer>
   )

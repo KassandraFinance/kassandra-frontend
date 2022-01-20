@@ -34,8 +34,6 @@ const InputTokenValue = ({
         type="number"
         placeholder="0"
         step="any"
-        min="0"
-        max={max}
         onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
           const target = e.target as HTMLInputElement
           // don't allow negative numbers
@@ -74,7 +72,7 @@ const InputTokenValue = ({
               `${values[1] || 0}${'0'.repeat(decimalsNum)}`.slice(0, decimalsNum)
             }`
 
-            setInputValue(new BigNumber(paddedRight))
+            setInputValue && setInputValue(new BigNumber(paddedRight))
           }
         }
       />

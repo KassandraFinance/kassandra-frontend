@@ -36,6 +36,7 @@ const usePoolContract = (address: string) => {
       tokenIn: string, 
       tokenAmountIn: BigNumber,
       tokenOut: string,
+      minAmountOut: BigNumber,
       walletAddress: string,
       callback: TransactionCallback
     ) => {
@@ -44,7 +45,7 @@ const usePoolContract = (address: string) => {
           tokenIn, 
           tokenAmountIn, 
           tokenOut, 
-          0, 
+          minAmountOut,
           web3.utils.toTwosComplement(-1)
         )
         .send(
@@ -64,7 +65,7 @@ const usePoolContract = (address: string) => {
           tokenIn, 
           tokenAmountIn, 
           tokenOut, 
-          0, 
+          0,
           web3.utils.toTwosComplement(-1)
         )
         .call(

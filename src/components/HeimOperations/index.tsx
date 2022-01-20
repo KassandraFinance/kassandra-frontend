@@ -15,6 +15,13 @@ interface IOperationsProps {
   productCategories: string[];
 }
 
+export type Titles = keyof typeof messages;
+
+const messages = {
+  Invest: 'Pay with',
+  Withdraw: 'Send',
+  Swap: 'Swap from'
+}
 
 const HeimOperations = ({
   poolChain,
@@ -22,13 +29,7 @@ const HeimOperations = ({
   corePoolAddress,
   productCategories
 }: IOperationsProps) => {
-  const messages = {
-    Invest: 'Pay with',
-    Withdraw: 'Send',
-    Swap: 'Swap from'
-  }
-
-  const [inputChecked, setInputChecked] = React.useState<keyof typeof messages>('Invest')
+  const [inputChecked, setInputChecked] = React.useState<Titles>('Invest')
   const [typeWithdrawChecked, setTypeWithdrawChecked] = React.useState<string>('Best_value')
 
   const { trackEvent } = useMatomo()
