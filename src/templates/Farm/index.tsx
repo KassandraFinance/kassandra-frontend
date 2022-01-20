@@ -49,7 +49,7 @@ const StakeFarm = () => {
             <Loading />
           </h1>
         ) : (
-          userWalletAddress.length === 0
+          userWalletAddress.length === 0 && chainId !== chains.fuji.chainId
             ? (
               <Web3Disabled
                 textButton="Connect Wallet"

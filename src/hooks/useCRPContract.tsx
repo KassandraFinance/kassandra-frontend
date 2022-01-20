@@ -36,10 +36,11 @@ const useCRPContract = (address: string) => {
     const joinswapExternAmountIn = (
       tokenIn: string,
       tokenAmountIn: BigNumber,
+      minPoolAmountOut: BigNumber,
       walletAddress: string,
       callback: TransactionCallback
     ) => {
-      return contract.methods.joinswapExternAmountIn(tokenIn, tokenAmountIn, 0).send(
+      return contract.methods.joinswapExternAmountIn(tokenIn, tokenAmountIn, minPoolAmountOut).send(
         { from: walletAddress },
         callback
       )
@@ -60,10 +61,11 @@ const useCRPContract = (address: string) => {
     const exitswapPoolAmountIn = (
       tokenOut: string,
       poolAmountIn: BigNumber,
+      minAmountOut: BigNumber,
       walletAddress: string,
       callback: TransactionCallback
     ) => {
-      return contract.methods.exitswapPoolAmountIn(tokenOut, poolAmountIn, 0).send(
+      return contract.methods.exitswapPoolAmountIn(tokenOut, poolAmountIn, minAmountOut).send(
         { from: walletAddress },
         callback
       )

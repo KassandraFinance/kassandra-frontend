@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React from 'react'
 import Image from 'next/image'
 import { useSelector, RootStateOrAny } from 'react-redux'
@@ -11,17 +10,17 @@ import none from '../../../public/assets/coming-soon.svg'
 
 import * as S from './styles'
 
-interface ISelectInputTokensProps {
+interface ISelectInputProps {
   poolTokens: TokenDetails[];
-  setSwapInAddress: React.Dispatch<React.SetStateAction<string>>;
+  setSwapAddress: React.Dispatch<React.SetStateAction<string>>;
   tokenDetails: TokenDetails;
 }
 
-const SelectInputTokens = ({
+const SelectInputDefault = ({
   poolTokens,
-  setSwapInAddress,
+  setSwapAddress,
   tokenDetails
-}: ISelectInputTokensProps) => {
+}: ISelectInputProps) => {
   const [openOptions, setOpenOptions] = React.useState<boolean>(false)
 
   const { poolImages }: { poolImages: TokenImages } = useSelector(
@@ -44,7 +43,7 @@ const SelectInputTokens = ({
         </div>
         {tokenDetails?.symbol}
         <div id="arrow-down">
-          <Image src={arrow} alt=""  />
+          <Image src={arrow} alt="" />
         </div>
       </S.Selected>
       {openOptions && (
@@ -56,8 +55,8 @@ const SelectInputTokens = ({
                 <S.Option
                   key={token.symbol}
                   onClick={() => {
-                    setSwapInAddress(token.address)
                     setOpenOptions(false)
+                    setSwapAddress(token.address)
                   }}
                 >
                   <div className="img">
@@ -78,4 +77,4 @@ const SelectInputTokens = ({
   )
 }
 
-export default SelectInputTokens
+export default SelectInputDefault
