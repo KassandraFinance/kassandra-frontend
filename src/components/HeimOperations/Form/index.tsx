@@ -889,8 +889,8 @@ const Form = ({
       ) : (
         <>
           <InputTokens
-            title="Swap"
-            actionString="Swap to (estimation)"
+            title="Output"
+            actionString="Swap to"
             swapBalance={swapOutBalance[0]}
             decimals={infoAHYPE[tokenAddress2Index[swapOutAddress]]?.decimals || new BigNumber(18)}
             swapAmount={swapOutAmount[0]}
