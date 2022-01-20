@@ -26,7 +26,7 @@ const tooltipPosition = {
     x: 20,
     y: 96
   },
-  desktop :{
+  desktop: {
     x: 20,
     y: 60
   }
