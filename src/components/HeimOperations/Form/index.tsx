@@ -181,7 +181,7 @@ const Form = ({
         break
       case 'Withdraw':
         newSwapInAddress = crpPoolAddress
-        newSwapOutAddress = typeWithdrawChecked === "Single_asset" ? infoAHYPE[0].address : ''
+        newSwapOutAddress = typeWithdrawChecked === 'Single_asset' ? infoAHYPE[0].address : ''
         break
       case 'Swap':
         newSwapInAddress = infoAHYPE[0].address || ''
@@ -276,7 +276,7 @@ const Form = ({
   }, [chainId, userWalletAddress, infoAHYPE, swapInAddress, swapOutAddress])
 
   React.useEffect(() => {
-    const tokens = title === "Withdraw" ? infoAHYPE.length : 1
+    const tokens = title === 'Withdraw' ? infoAHYPE.length : 1
     setSwapOutPrice(new BigNumber(-1))
     setSwapOutAmount(Array(tokens).fill(new BigNumber(0)))
   }, [title, swapInAddress, swapOutAddress, infoAHYPE.length])
@@ -353,7 +353,7 @@ const Form = ({
         setSwapOutPrice(newSwapOutPrice)
       } catch (error) {
         if (userWalletAddress.length > 0) {
-          ToastWarning("Could not connect with the blockchain to calculate prices.")
+          ToastWarning('Could not connect with the blockchain to calculate prices.')
         }
       }
 
