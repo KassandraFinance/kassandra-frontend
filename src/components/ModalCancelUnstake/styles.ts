@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import theme from '../../styles/theme'
 
+import * as ButtonStyles from '../Button/styles'
+
 export const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.7);
 
@@ -22,7 +24,7 @@ export const ModalContainer = styled.div<IModalContainerProps>`
   display: ${props => (props.modalOpen ? 'block' : 'none')};
 
   background-color: rgba(31, 31, 31, 0.8);
-  border: 1.5px solid #E8372C;
+  border: 1.5px solid #FFFFFF40;
   border-radius: 10px;
 
 
@@ -34,11 +36,14 @@ export const ModalContainer = styled.div<IModalContainerProps>`
   transform: translate(-50%, -50%);
 
   z-index: 21;
+  @media (max-width: 768px) {
+    width: 328px;
+  }
 `
 
 export const Top = styled.div`
-  background-color: rgba(20, 20, 20, 0.9);
-  border-bottom: 1px solid #e8372c;
+  background-color: #1f1f1fb8;
+  border-bottom: 1px solid #ffffff40;
   border-radius: 10px 10px 0 0;
 
   display: flex;
@@ -46,6 +51,9 @@ export const Top = styled.div`
   align-items: center;
 
   padding: 24px;
+  @media (max-width: 768px) {
+    padding: 18px;
+  }
 `
 
 export const Attention = styled.div`
@@ -61,6 +69,7 @@ export const Attention = styled.div`
     font-size: ${theme.font.sizes.font18};
     font-weight: ${theme.font.weight.bold};
     margin-left: 16px;
+    letter-spacing: 0.8px;
   }
 `
 
@@ -76,7 +85,7 @@ export const Close = styled.button`
 `
 
 export const Content = styled.div`
-  background-color: rgba(31, 31, 31, 0.23);
+  background-color: #1f2937;
 
   display: flex;
   flex-direction: column;
@@ -86,12 +95,21 @@ export const Content = styled.div`
   /* height: 280px; */
 
   padding: 24px 0;
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
   p {
     text-align: center;
-    font-size: ${theme.font.sizes.font18};
+    font-size: ${theme.font.sizes.font16};
+    line-height: 150%;
     font-weight: ${theme.font.weight.light};
-    max-width: 360px;
-    margin-bottom: 16px;
+    max-width: 350px;
+    margin: 0 0 16px;
+    letter-spacing: 0.8px;
+    @media (max-width: 768px) {
+      font-size: ${theme.font.sizes.font14};
+      line-height: 130%;
+    }
   }
 
   span {
@@ -102,21 +120,49 @@ export const Content = styled.div`
 
 export const ButtonContainer = styled.div`
   margin-top: 16px;
-  button {
-    background-color: transparent;
-    border: 1px solid ${theme.colors.cyan};
-    border-radius: ${theme.border.radius};
-    color: #fff;
+  ${ButtonStyles.Wrapper} {
     font-size: ${theme.font.sizes.font18};
+    width: 183px;
+    height: 44px;
+    &:first-child {
+      margin-right: 12px;
+    }
+    @media (max-width: 768px) {
+      width: 138px;
+    }
+  }
+`
+export const Link = styled.a`
+  display: flex;
+  text-decoration: none;
+  max-width: 290px;
+  margin: 18px auto 0;
+  cursor: pointer;
+  //media max width 560px
+  @media (max-width: 560px) {
+    margin: 2.4rem auto 7rem;
+  }
+  a {
+    text-decoration: none;
+    justify-items: center;
+    text-decoration: none;
+    font-size: ${theme.font.sizes.font14};
+    font-weight: ${theme.font.weight.light};
+    color: ${theme.colors.snow};
 
-    width: 136px;
-    height: 40px;
-    margin: 0 20px;
-    transition-duration: 300ms;
-    cursor: pointer;
+    display: flex;
+
+    transition: 0.15s;
+    svg {
+      margin-left: ${theme.spacings.space8};
+    }
     &:hover {
-      background-color: ${theme.colors.cyan};
-      color: ${theme.colors.darkPurple};
+      color: ${theme.colors.cyan};
+      > svg {
+        path {
+          stroke: ${theme.colors.cyan};
+        }
+      }
     }
   }
 `

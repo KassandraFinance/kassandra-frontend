@@ -2,6 +2,7 @@
 import React from 'react'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
+import Button from '../Button'
 
 import waitTransaction, { MetamaskError, TransactionCallback } from '../../utils/txWait'
 
@@ -9,15 +10,7 @@ import { Staking } from '../../constants/tokenAddresses'
 
 import useStakingContract from '../../hooks/useStakingContract'
 
-import {
-  Backdrop,
-  ModalContainer,
-  Top,
-  Attention,
-  Close,
-  ButtonContainer,
-  Content
-} from './styles'
+import * as S from './styles'
 
 interface IModalRequestUnstakeProps {
   modalOpen: boolean;
@@ -74,21 +67,21 @@ const ModalCancelUnstake = ({
 
   return (
     <>
-      <Backdrop
+      <S.Backdrop
         onClick={() => setModalOpen(false)}
         style={{ display: modalOpen ? 'block' : 'none' }}
       />
-      <ModalContainer modalOpen={modalOpen}>
-        <Top>
-          <Attention>
+      <S.ModalContainer modalOpen={modalOpen}>
+        <S.Top>
+          <S.Attention>
             <img src="assets/IconNotification/error.svg" alt="" />
             <p>Warning!</p>
-          </Attention>
-          <Close type="button" onClick={() => setModalOpen(false)}>
+          </S.Attention>
+          <S.Close type="button" onClick={() => setModalOpen(false)}>
             <img src="assets/close.svg" alt="Close" />
-          </Close>
-        </Top>
-        <Content>
+          </S.Close>
+        </S.Top>
+        <S.Content>
           {staking ? (
             <p>By staking you will reset your withdraw time.</p>
           ) : (
@@ -97,26 +90,66 @@ const ModalCancelUnstake = ({
             </p>
           )}
           <p>Do you want to proceed ?</p>
-          <ButtonContainer>
-            <button type="button" onClick={() => setModalOpen(false)}>
-              No
-            </button>
-            <button
-              type="button"
+          <S.ButtonContainer>
+            <Button
+              as="button"
+              text="No"
+              backgroundSecondary
+              onClick={() => setModalOpen(false)}
+            />
+            <Button
+              as="button"
+              text="Yes"
+              backgroundSecondary
               onClick={() => {
                 if (staking) {
                   setIsModalStaking(true)
+
                 } else {
                   kacyStake.cancelUnstake(pid, cancelUnstakeCallback())
                 }
                 setModalOpen(false)
               }}
-            >
-              Yes
-            </button>
-          </ButtonContainer>
-        </Content>
-      </ModalContainer>
+            />
+          </S.ButtonContainer>
+          {/* <S.Link
+            onClick={() => {
+              setModalOpen(false)
+              setIsModalStaking(true)
+            }}
+          >
+            <a>
+              Cancel and stake additional KACY in one action
+              <svg
+                width="17"
+                height="17"
+                viewBox="0 0 17 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.5 16C12.6421 16 16 12.6421 16 8.5C16 4.35786 12.6421 1 8.5 1C4.35786 1 1 4.35786 1 8.5C1 12.6421 4.35786 16 8.5 16Z"
+                  stroke="white"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M8.5 11.5L11.5 8.5L8.5 5.5"
+                  stroke="white"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M5.5 8.5H11.5"
+                  stroke="white"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </a>
+          </S.Link> */}
+        </S.Content>
+      </S.ModalContainer>
     </>
   )
 }

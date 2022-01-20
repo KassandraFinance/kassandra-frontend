@@ -47,15 +47,6 @@ const ModalLogOut = ({
             <Image src={close} alt="Close" />
           </S.Close>
         </S.Top>
-        <Button
-          className="connect-wallet"
-          backgroundBlack
-          size="medium"
-          onClick={() => {
-            handleDisconnected()
-          }}
-          text="Disconnect"
-        />
         <S.Content>
           <p>{userWalletAddress}</p>
           <S.ButtonContainer>
@@ -109,6 +100,13 @@ const ModalLogOut = ({
               </svg>
             </a>
           </S.ButtonContainer>
+          <Button
+            backgroundSecondary
+            onClick={() => {
+              handleDisconnected()
+            }}
+            text="Disconnect"
+          />
         </S.Content>
       </S.ModalContainer>
     </>
