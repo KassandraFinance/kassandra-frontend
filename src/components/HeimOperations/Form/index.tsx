@@ -77,6 +77,8 @@ const Form = ({
   })
   const [isReload, setIsReload] = React.useState<boolean>(false)
 
+  const [errorMsg, setErrorMsg] = React.useState('')
+
   const [swapInAddress, setSwapInAddress] = React.useState('')
   const [swapInAmount, setSwapInAmount] = React.useState(new BigNumber(0))
   const [swapInBalance, setSwapInBalance] = React.useState(new BigNumber(-1))
@@ -315,18 +317,32 @@ const Form = ({
         ])
 
         try {
-          const newSwapOutAmount = await corePool.calcPoolOutGivenSingleIn(
-            swapInTotalPoolBalance,
-            swapInDenormalizedWeight,
-            poolSupply,
-            poolTotalDenormalizedWeight,
+          const newSwapOutAmount = await crpPool.tryJoinswapExternAmountIn(
+            swapInAddress,
             swapInAmount,
-            poolSwapFee
+            new BigNumber('0'),
+            userWalletAddress
           )
           setSwapOutAmount([newSwapOutAmount])
-        } catch (error) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
           if (userWalletAddress.length > 0) {
-            ToastWarning("The amount can't be more than half of what's already in the pool! The transaction will revert!")
+            const errorStr = error.toString()
+
+            if (errorStr.search(/ERR_(BPOW_BASE_TOO_|MATH_APPROX)/) > -1) {
+              setErrorMsg('This amount is too low for the pool!')
+              return
+            }
+
+            if (errorStr.search('ERR_MAX_IN_RATIO') > -1) {
+              setErrorMsg("The amount can't be more than half of what's in the pool!")
+              return
+            }
+
+            if (swapInAmount.gt(swapInBalance)) {
+              setErrorMsg('This amount exceeds your balance!')
+              return;
+            }
           }
         }
 
@@ -360,6 +376,7 @@ const Form = ({
     }
 
     calc()
+    setErrorMsg('')
     setSwapOutAmount(Array(infoAHYPE.length - 1).fill(new BigNumber(0)))
   }, [chainId, swapInAmount, swapInAddress])
 
@@ -411,22 +428,38 @@ const Form = ({
 
         setSwapOutAmount([newSwapOutAmount])
         setSwapOutPrice(newSwapOutPrice)
+
+        try {
+          if (userWalletAddress.length > 0 && swapInAmount.gt(new BigNumber(0))) {
+            await corePool.trySwapExactAmountIn(swapInAddress, swapInAmount, swapOutAddress, userWalletAddress)
+          }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+          const errorStr = error.toString()
+
+          if (errorStr.search(/ERR_(BPOW_BASE_TOO_|MATH_APPROX)/) > -1) {
+            setErrorMsg('This amount is too low for the pool!')
+            return
+          }
+
+          if (errorStr.search('ERR_MAX_IN_RATIO') > -1) {
+            setErrorMsg("The amount can't be more than half of what's in the pool!")
+            return
+          }
+
+          if (swapInAmount.gt(swapInBalance)) {
+            setErrorMsg('This amount exceeds your balance!')
+            return;
+          }
+        }
       }
       catch(e) {
-        ToastWarning("Could not connect with the blockchain to calculate prices.")
+        ToastWarning('Could not connect with the blockchain to calculate prices.')
       }
-
-      try {
-        if (userWalletAddress.length > 0 && swapInAmount.gt(new BigNumber(0))) {
-          await corePool.trySwapExactAmountIn(swapInAddress, swapInAmount, swapOutAddress, userWalletAddress)
-        }
-      } catch (error) {
-        ToastWarning("The amount can't be more than half of what's already in the pool! The transaction will revert!")
-      }
-
     }
 
     calc()
+    setErrorMsg('')
     setSwapOutAmount(Array(infoAHYPE.length - 1).fill(new BigNumber(0)))
   }, [chainId, swapInAmount, swapInAddress, swapOutAddress])
 
@@ -505,6 +538,30 @@ const Form = ({
           })
         )
         setSwapOutAmount(newSwapOutAmount)
+
+        try {
+          if (userWalletAddress.length > 0 && swapInAmount.gt(new BigNumber('0'))) {
+            await crpPool.tryExitPool(
+              swapInAmount,
+              Array(newSwapOutAmount.length).fill(new BigNumber('0')),
+              userWalletAddress
+            )
+          }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+          const errorStr = error.toString()
+
+          if (errorStr.search(/ERR_(BPOW_BASE_TOO_|MATH_APPROX)/) > -1) {
+            setErrorMsg('This amount is too low for the pool!')
+            return
+          }
+
+          if (swapInAmount.gt(swapInBalance)) {
+            setErrorMsg('This amount exceeds your balance!')
+            return;
+          }
+        }
+
         return
       }
 
@@ -548,12 +605,42 @@ const Form = ({
       }
       catch(e) {
         if (userWalletAddress.length > 0) {
-          ToastWarning("Could not connect with the blockchain to calculate prices.")
+          ToastWarning('Could not connect with the blockchain to calculate prices.')
+        }
+      }
+
+      try {
+        if (userWalletAddress.length > 0 && swapInAmount.gt(new BigNumber('0'))) {
+          await crpPool.tryExitswapPoolAmountIn(
+            swapOutAddress,
+            swapInAmount,
+            new BigNumber('0'),
+            userWalletAddress
+          )
+        }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
+        const errorStr = error.toString()
+
+        if (errorStr.search(/ERR_(BPOW_BASE_TOO_|MATH_APPROX)/) > -1) {
+          setErrorMsg('This amount is too low for the pool!')
+          return
+        }
+
+        if (errorStr.search('ERR_MAX_OUT_RATIO') > -1) {
+          setErrorMsg("The amount you are trying to obtain can't be more than a third of what's in the pool!")
+          return
+        }
+
+        if (swapInAmount.gt(swapInBalance)) {
+          setErrorMsg('This amount exceeds your balance!')
+          return;
         }
       }
     }
 
     calc()
+    setErrorMsg('')
     setSwapOutAmount(Array(infoAHYPE.length - 1).fill(new BigNumber(0)))
   }, [chainId, swapInAmount, swapOutAddress, infoAHYPE])
 
@@ -832,6 +919,9 @@ const Form = ({
             .toString()
       } />
 
+      <S.ErrorTippy content={errorMsg} visible={errorMsg.length > 0}>
+        <span />
+      </S.ErrorTippy>
       <InputTokens
         clearInput={clearInput}
         inputRef={inputTokenRef}
@@ -941,7 +1031,13 @@ const Form = ({
             className="btn-submit"
             onClick={() => setTimeout(() => clearInput(), 3000)}
             backgroundPrimary
-            disabledNoEvent={isApproved[tokenInIndex] && (swapInAmount.toString() === "0" || swapOutAmount[0].toString() === "0")}
+            disabledNoEvent={
+              isApproved[tokenInIndex] && (
+                swapInAmount.toString() === "0" ||
+                swapOutAmount[0].toString() === "0" ||
+                errorMsg.length > 0
+              )
+            }
             fullWidth
             type="submit"
             text={
