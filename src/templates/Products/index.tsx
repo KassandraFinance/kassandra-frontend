@@ -124,8 +124,8 @@ const Products = ({ product }: Input) => {
               </S.NameAndSymbol>
               <p>by HEIMDALL.land</p>
             </S.NameIndex>
-            <S.Line />
           </S.Intro>
+          <S.Line className="second-line" />
           <S.IntroCharts>
             <S.IndexData>
               <span>

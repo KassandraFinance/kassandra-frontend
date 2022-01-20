@@ -45,6 +45,11 @@ export const Product = styled.section`
 
 export const ProductDetails = styled.div`
   margin-bottom: 120px;
+  .second-line {
+    @media (max-width: 960px) {
+      display: none;
+    }
+  }
 `
 interface IIntroProps {
   introMobile: boolean
