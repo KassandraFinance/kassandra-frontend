@@ -40,7 +40,7 @@ export const LogoWrapper = styled.div`
     @media (min-width: 961px) {
       display: none;
     }
-    @media (max-width: 540px) {
+    @media (max-width: 539px) {
       display: none;
     }
   }
@@ -57,7 +57,7 @@ export const Menu = styled.nav`
   .logo-mobile {
     width: 46px;
     margin-right: -8px;
-    @media (min-width: 540px) {
+    @media (min-width: 541px) {
       display: none;
     }
   }
@@ -206,6 +206,12 @@ export const KacyAmount = styled.div`
   img {
     width: 20px;
   }
+`
+
+export const OptionsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
 `
 
 export const ButtonOptions = styled.button`

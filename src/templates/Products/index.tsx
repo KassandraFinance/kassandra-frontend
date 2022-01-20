@@ -102,9 +102,20 @@ const Products = ({ product }: Input) => {
   return (
     <S.BackgroundProducts boxShadow={false}>
       <Header />
+      <S.Intro introMobile={true} introDesktop={false}>
+        <Image src={avaxSocial} alt="" width={75} height={75} />
+        <S.NameIndex>
+          <S.NameAndSymbol introMobile={true}>
+            <h1>{product.name}</h1>
+            <h3>${product.symbol}</h3>
+          </S.NameAndSymbol>
+          <p>by HEIMDALL.land</p>
+        </S.NameIndex>
+        <S.Line />
+      </S.Intro>
       <S.Product>
         <S.ProductDetails>
-          <S.Intro>
+          <S.Intro introMobile={false} introDesktop={true}>
             <Image src={avaxSocial} alt="" width={75} height={75} />
             <S.NameIndex>
               <S.NameAndSymbol>
@@ -114,7 +125,7 @@ const Products = ({ product }: Input) => {
               <p>by HEIMDALL.land</p>
             </S.NameIndex>
           </S.Intro>
-          <S.Line />
+          <S.Line className="second-line" />
           <S.IntroCharts>
             <S.IndexData>
               <span>

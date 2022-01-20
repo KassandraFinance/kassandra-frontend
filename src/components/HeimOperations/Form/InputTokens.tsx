@@ -131,7 +131,7 @@ const InputTokens = ({
         </S.SpanLight>
       </S.Info>
       <S.Amount>
-        <S.Span total>Total</S.Span>
+        <S.Span total>{title === 'Output' ? 'Estimate' : 'Total'}</S.Span>
         {inputRef && setSwapAmount ? (
           <InputTokenValue
             disabled={disabled}
