@@ -40,15 +40,40 @@ export const Product = styled.section`
 export const ProductDetails = styled.div`
   margin-bottom: 120px;
 `
+interface IIntroProps {
+  introMobile: boolean
+  introDesktop: boolean
 
-export const Intro = styled.div`
+}
+
+export const Intro = styled.div<IIntroProps>`
   display: grid;
   grid-template-columns: auto auto;
   align-items: center;
   gap: 20px;
 
-  max-width: 440px;
-`
+  max-width: 100%;
+
+  ${props =>
+    props.introMobile
+      && `
+      display: none;
+      @media (max-width: 960px) {
+        display: block;
+        padding: 0 30px;
+      }
+      `
+  }
+  ${props =>
+    props.introDesktop
+      && `
+      display: block;
+      @media (max-width: 960px) {
+        display: none;
+      }
+    `
+  }
+  `
 
 export const NameIndex = styled.div`
   p {
