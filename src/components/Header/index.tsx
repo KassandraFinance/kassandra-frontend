@@ -124,10 +124,10 @@ const Header = () => {
         </S.Menu>
       </S.Wrapper>
       <S.MenuBottom>
-        <S.KacyAmount>
+        {/* <S.KacyAmount>
           <Image src={kacy64} alt="kacy" />
           <span>100b KACY</span>
-        </S.KacyAmount>
+        </S.KacyAmount> */}
         {userWalletAddress ? (
           <Button
             className="connect-wallet button-mobile"
