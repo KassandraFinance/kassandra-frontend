@@ -19,6 +19,7 @@ import logoKassandra from '../../../public/assets/new-kassandra-logo-header.svg'
 
 import * as S from './styles'
 
+// eslint-disable-next-line prettier/prettier
 declare let window: {
   ethereum: any,
 }
