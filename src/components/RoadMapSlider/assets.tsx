@@ -1,9 +1,9 @@
 export const colors: any = {
-    done: '#5ee56b',
-    soon: '#ffbf008b',
-    next: '#676767'
-  }
-  
+  done: '#5ee56b',
+  soon: '#ffbf008b',
+  next: '#676767'
+}
+
 export const icons: any = {
   done: (
     <svg

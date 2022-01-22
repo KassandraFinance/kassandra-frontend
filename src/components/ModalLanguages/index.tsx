@@ -10,10 +10,7 @@ interface IModalLanguagesProps {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ModalLanguages = ({
-  modalOpen,
-  setModalOpen
-}: IModalLanguagesProps) => {
+const ModalLanguages = ({ modalOpen, setModalOpen }: IModalLanguagesProps) => {
   return (
     <>
       <S.Backdrop

@@ -44,12 +44,12 @@ const ModalSocialMediaMobile = ({
           <span>Telegram</span>
         </S.SocialIcon>
         <S.SocialIcon
-           href="https://twitter.com/dao_kassandra"
-           target="_blank"
-           rel="noopener noreferrer"
+          href="https://twitter.com/dao_kassandra"
+          target="_blank"
+          rel="noopener noreferrer"
           onClick={() => setModalOpen(false)}
-         >
-           <Image src={twitter} alt="twitter" />
+        >
+          <Image src={twitter} alt="twitter" />
           <span>Twitter</span>
         </S.SocialIcon>
         <S.SocialIcon

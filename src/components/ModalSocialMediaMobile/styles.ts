@@ -35,7 +35,7 @@ export const ModalContainer = styled.div<IModalContainerProps>`
 
 export const SocialIcon = styled.a`
   text-decoration: none;
-  
+
   display: flex;
   padding: 6px 0;
   .medium {
