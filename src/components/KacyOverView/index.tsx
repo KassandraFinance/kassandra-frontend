@@ -76,11 +76,13 @@ const KacyOverView = () => {
           </S.Values>
           <S.Values>
             <p>MARKET CAP</p>
-            <span>${BNtoDecimal(marketCap, 2, 100, 2)}</span>
+            <span>$0.00</span>
+            {/* <span>${BNtoDecimal(marketCap, 2, 100, 2)}</span> */}
           </S.Values>
           <S.Values>
             <p>CIRCULATING SUPPLY</p>
-            <span>{BNtoDecimal(circulatingSupply, 2, 100, 2)} KACY</span>
+            <span>0.00</span>
+            {/* <span>{BNtoDecimal(circulatingSupply, 2, 100, 2)} KACY</span> */}
           </S.Values>
           <S.Values>
             <p>TOTAL SUPPLY</p>
