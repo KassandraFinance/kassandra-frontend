@@ -24,6 +24,7 @@ import {
   Staking,
   LPKacyAvax,
   LPDaiAvax,
+  Kacy,
   SUBGRAPH_URL,
   HeimCRPPOOL
 } from '../../constants/tokenAddresses'
@@ -333,7 +334,7 @@ const StakeCard = ({
                   </Link>
                 ) : (
                   <a
-                    href="https://app.pangolin.exchange/#/add/AVAX/0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb"
+                    href={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
                     target="_blank"
                     rel="noreferrer"
                   >
