@@ -44,7 +44,6 @@ const KacyOverView = () => {
     if (chainId === chains.avalanche.chainId) {
       handleLPtoUSD()
     }
-  
   }, [])
 
   const date1 = new Date('2022-01-22T18:00:00.000Z')
