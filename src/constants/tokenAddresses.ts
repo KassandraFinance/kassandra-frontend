@@ -6,7 +6,11 @@ import partners from '../components/Products/Partner/list'
 export const HeimCRPPOOL = '0xE34A2935B04e9c879f5bDd022b97D7Cf2F1Dde1d'
 export const HeimCorePool = '0xFCfB171A8a4666bc53Eac2d91Cb0b5203DDa63cD'
 
-export const LPKacyAvax = '0xbaa8b0d2AA6415d5b4077C1FA06b3507577FBCd7'
+export const LPKacyAvax = process.env.MASTER === '1' ?
+  '0x1938cE0E14dD71caab96F52dF3F49b1D1DAF8861'
+  :
+  '0xbaa8b0d2AA6415d5b4077C1FA06b3507577FBCd7'
+
 export const LPDaiAvax = process.env.MASTER === '1' ?
   '0xbd918Ed441767fe7924e99F6a0E0B568ac1970D9'
   :
