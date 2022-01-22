@@ -146,13 +146,13 @@ const StakeCard = ({
     stakingToken: ''
   })
 
-  const { data } = useSWR(
-    [GET_INFO_AHYPE, HeimCRPPOOL],
-    (query, id) => request(SUBGRAPH_URL, query, { id }),
-    {
-      refreshInterval: 10000
-    }
-  )
+  // const { data } = useSWR(
+  //   [GET_INFO_AHYPE, HeimCRPPOOL],
+  //   (query, id) => request(SUBGRAPH_URL, query, { id }),
+  //   {
+  //     refreshInterval: 10000
+  //   }
+  // )
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { trackEvent } = useMatomo()
   const { viewgetReserves } = usePriceLP()
@@ -160,7 +160,7 @@ const StakeCard = ({
 
   const productCategories = [
     'Stake',
-    'Fuji',
+    process.env.MASTER === '1' ? 'Avalanche' : 'Fuji',
     staked[pid] === 'KACY' ? 'VotingStake' : 'OtherStake'
   ]
 
@@ -193,12 +193,12 @@ const StakeCard = ({
         priceLP
       }))
     }
-    if (data) {
-      setPriceLPToken(prevState => ({
-        ...prevState,
-        aHYPE: Big(data?.pool.price_usd || -1)
-      }))
-    }
+    // if (data) {
+    //   setPriceLPToken(prevState => ({
+    //     ...prevState,
+    //     aHYPE: Big(data?.pool.price_usd || -1)
+    //   }))
+    // }
     setPriceLPToken(prevState => ({
       ...prevState,
       kacy: kacyInDollar
@@ -289,17 +289,17 @@ const StakeCard = ({
         <S.BorderGradient stakeWithVotingPower={stakeWithVotingPower}>
           <S.InterBackground stakeWithVotingPower={stakeWithVotingPower}>
             {symbol === 'kacy' ? (
-              <img src="assets/logo-kacy-stake.svg" alt="" />
+              <img src="/assets/logo-kacy-stake.svg" alt="" />
             ) : null}
             {symbol === 'ahype' ? (
               <img
-                src="assets/avalanche_social_index_logo.svg"
+                src="/assets/avalanche_social_index_logo.svg"
                 alt=""
                 style={{ width: '58px' }}
               />
             ) : null}
             {symbol === 'lp' ? (
-              <img src="assets/kap.svg" alt="" width={144} />
+              <img src="/assets/kap.svg" alt="" width={144} />
             ) : null}
             <S.IntroStaking>
               <S.APR>
