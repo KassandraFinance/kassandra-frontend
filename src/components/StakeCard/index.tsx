@@ -88,10 +88,9 @@ interface IStakingProps {
 }
 
 const staked: any = {
-  0: 'KACY',
-  1: 'KACY',
   2: 'KACY',
-  4: 'aHYPE',
+  3: 'KACY',
+  4: 'KACY',
   5: 'LP'
 }
 
