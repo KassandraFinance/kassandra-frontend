@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 
 import discord from '../../../public/assets/Discord.svg'
-import telegram from '../../../public/assets/Telegram.svg'
+import telegram from '../../../public/assets/telegram.svg'
 import twitter from '../../../public/assets/Twitter.svg'
 import medium from '../../../public/assets/Medium.svg'
 import github from '../../../public/assets/Github.svg'

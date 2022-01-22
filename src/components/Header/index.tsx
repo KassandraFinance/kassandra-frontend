@@ -10,10 +10,8 @@ import Button from '../Button'
 import ModalLogOut from '../ModalLogOut'
 // import DropdownInvest from '../DropdownInvest'
 import ModalWalletConnect from '../ModalWalletConnect'
-import ModalLanguages from '../ModalLanguages'
 import ModalSocialMediaMobile from '../ModalSocialMediaMobile'
 
-import usa from '../../../public/assets/usa.svg'
 import options from '../../../public/assets/options.svg'
 import kacy64 from '../../../public/assets/logo-64.svg'
 import logoKassandra from '../../../public/assets/new-kassandra-logo-header.svg'
@@ -154,20 +152,11 @@ const Header = () => {
         }
         
         <S.OptionsContainer>
-          <S.ButtonOptions onClick={() => setIsModalLanguages(true)}>
-            <Image src={usa} alt="usa" />
-          </S.ButtonOptions>
-
           <S.ButtonOptions onClick={() => setIsModalSocialMedia(true)}>
             <Image src={options} alt="options" />
           </S.ButtonOptions>
         </S.OptionsContainer>
       </S.MenuBottom>
-
-      <ModalLanguages
-        modalOpen={isModalLanguages}
-        setModalOpen={setIsModalLanguages}
-      />
 
       <ModalSocialMediaMobile
         modalOpen={isModalSocialMedia}
