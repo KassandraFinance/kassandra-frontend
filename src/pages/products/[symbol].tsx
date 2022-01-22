@@ -1,42 +1,49 @@
-import { SWRConfig } from 'swr'
-import { GetStaticPaths, GetStaticProps } from 'next'
+import NotFound from './../../templates/404'
 
-import { products, ProductDetails } from '../../constants/tokenAddresses'
-
-import Products from '../../templates/Products'
-
-interface Input {
-  product: ProductDetails;
+export default function Index() {
+  return <NotFound />
 }
 
-function Product({ product }: Input) {
-  return (
-    <SWRConfig
-      value={{
-        refreshInterval: 5000
-      }}
-    >
-      <Products product={product} />
-    </SWRConfig>
-  )
-}
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = Object.values(products).map(product => ({
-    params: { symbol: product.symbol.toLowerCase() }
-  }))
+// import { SWRConfig } from 'swr'
+// import { GetStaticPaths, GetStaticProps } from 'next'
 
-  return { paths, fallback: false }
-}
+// import { products, ProductDetails } from '../../constants/tokenAddresses'
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  if (!params || !params.symbol || typeof params.symbol !== 'string') {
-    return {
-      notFound: true
-    }
-  }
+// import Products from '../../templates/Products'
 
-  return { props: { product: products[params.symbol] } }
-}
+// interface Input {
+//   product: ProductDetails;
+// }
 
-export default Product
+// function Product({ product }: Input) {
+//   return (
+//     <SWRConfig
+//       value={{
+//         refreshInterval: 5000
+//       }}
+//     >
+//       <Products product={product} />
+//     </SWRConfig>
+//   )
+// }
+
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   const paths = Object.values(products).map(product => ({
+//     params: { symbol: product.symbol.toLowerCase() }
+//   }))
+
+//   return { paths, fallback: false }
+// }
+
+// export const getStaticProps: GetStaticProps = async ({ params }) => {
+//   if (!params || !params.symbol || typeof params.symbol !== 'string') {
+//     return {
+//       notFound: true
+//     }
+//   }
+
+//   return { props: { product: products[params.symbol] } }
+// }
+
+// export default Product
