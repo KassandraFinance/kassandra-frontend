@@ -41,14 +41,13 @@ const KacyOverView = () => {
   }
 
   React.useEffect(() => {
-    setKacyPrice(Big('0.7'))
-
-    // if (chainId === chains.fuji.chainId) {
-    //   handleLPtoUSD()
-    // }
+    if (chainId === chains.avalanche.chainId) {
+      handleLPtoUSD()
+    }
+  
   }, [])
 
-  const date1 = new Date('2022-01-19T00:00:00.000Z')
+  const date1 = new Date('2022-01-22T18:00:00.000Z')
 
   React.useEffect(() => {
     const interval = setInterval(() => {

@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
@@ -69,7 +68,7 @@ const ModalWalletConnect = ({
                 </S.WrapperIcons>
               </S.WrapperIconsBackGround>
             </Tippy>
-            <S.WrapperIconsBackGround
+            {/* <S.WrapperIconsBackGround
               type="button"
               onClick={() => {
                 setModalOpen(false)
@@ -80,7 +79,7 @@ const ModalWalletConnect = ({
                 <img src="/assets/connectWalletIcon.svg" alt="" />
                 <span>WalletConnect</span>
               </S.WrapperIcons>
-            </S.WrapperIconsBackGround>
+            </S.WrapperIconsBackGround> */}
           </S.Content>
         </S.BackgroundBlack>
       </S.Container>
