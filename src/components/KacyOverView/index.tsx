@@ -31,11 +31,11 @@ const KacyOverView = () => {
     const reservesKacyAvax = await viewgetReserves(LPKacyAvax)
     const reservesDaiAvax = await viewgetReserves(LPDaiAvax)
 
-    const avaxInDollar = Big(reservesDaiAvax._reserve0).div(
-      Big(reservesDaiAvax._reserve1)
+    const avaxInDollar = Big(reservesDaiAvax._reserve1).div(
+      Big(reservesDaiAvax._reserve0)
     )
     const kacyInDollar = avaxInDollar.mul(
-      Big(reservesKacyAvax._reserve1).div(reservesKacyAvax._reserve0)
+      Big(reservesKacyAvax._reserve0).div(reservesKacyAvax._reserve1)
     )
     setKacyPrice(kacyInDollar)
   }
@@ -46,14 +46,14 @@ const KacyOverView = () => {
     }
   }, [])
 
-  const date1 = new Date('2022-01-22T18:00:00.000Z')
+  const date1 = new Date('2022-01-22T18:35:00.000Z')
 
   React.useEffect(() => {
     const interval = setInterval(() => {
       const secondsSinceInitialDate = (Date.now() - date1.getTime()) / 1000
       if (Date.now() > date1.getTime()) {
         setCirculatingSupply(
-          Big((400000 / (24 * 360 * 90)) * secondsSinceInitialDate + 600000)
+          Big((300000 / (24 * 360 * 90)) * secondsSinceInitialDate + 600000)
         )
       }
     }, 1000)
@@ -76,13 +76,11 @@ const KacyOverView = () => {
           </S.Values>
           <S.Values>
             <p>MARKET CAP</p>
-            <span>$0.00</span>
-            {/* <span>${BNtoDecimal(marketCap, 2, 100, 2)}</span> */}
+            <span>${BNtoDecimal(marketCap, 2, 100, 2)}</span>
           </S.Values>
           <S.Values>
             <p>CIRCULATING SUPPLY</p>
-            <span>0.00</span>
-            {/* <span>{BNtoDecimal(circulatingSupply, 2, 100, 2)} KACY</span> */}
+            <span>{BNtoDecimal(circulatingSupply, 2, 100, 2)} KACY</span>
           </S.Values>
           <S.Values>
             <p>TOTAL SUPPLY</p>
