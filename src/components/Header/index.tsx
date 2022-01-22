@@ -10,6 +10,7 @@ import Button from '../Button'
 import ModalLogOut from '../ModalLogOut'
 // import DropdownInvest from '../DropdownInvest'
 import ModalWalletConnect from '../ModalWalletConnect'
+import ModalLanguages from '../ModalLanguages'
 import ModalSocialMediaMobile from '../ModalSocialMediaMobile'
 
 import usa from '../../../public/assets/usa.svg'
@@ -31,6 +32,7 @@ export type MenuProps = {
 const Header = () => {
   const [isModalWallet, setIsModalWallet] = React.useState<boolean>(false)
   const [isModalLogout, setIsModalLogout] = React.useState<boolean>(false)
+  const [isModalLanguages, setIsModalLanguages] = React.useState<boolean>(false)
   const [isModalSocialMedia, setIsModalSocialMedia] = React.useState<boolean>(false)
 
   const { trackEvent } = useMatomo()
@@ -152,7 +154,7 @@ const Header = () => {
         }
         
         <S.OptionsContainer>
-          <S.ButtonOptions onClick={() => setIsModalSocialMedia(true)}>
+          <S.ButtonOptions onClick={() => setIsModalLanguages(true)}>
             <Image src={usa} alt="usa" />
           </S.ButtonOptions>
 
@@ -161,6 +163,11 @@ const Header = () => {
           </S.ButtonOptions>
         </S.OptionsContainer>
       </S.MenuBottom>
+
+      <ModalLanguages
+        modalOpen={isModalLanguages}
+        setModalOpen={setIsModalLanguages}
+      />
 
       <ModalSocialMediaMobile
         modalOpen={isModalSocialMedia}
