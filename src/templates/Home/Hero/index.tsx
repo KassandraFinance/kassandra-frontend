@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import NextLink from 'next/link'
 
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
@@ -29,16 +30,34 @@ const Hero = () => {
         <h1>tokenized data-driven investment funds</h1>
       </S.IntroHero>
       <S.ButtonWrapper>
-        <Link href="/products/ahype">
-          <Button
-            backgroundPrimary
-            size="large"
-            as="a"
-            text="Explore Our Products"
-            icon={<img src="/assets/avalancheIcon.svg" alt="" />}
-            onClick={() => clickMatomoEvent('click-to-cta', 'hero')}
-          />
-        </Link>
+        <li>
+          <NextLink
+            href="https://app.pangolin.exchange/#/swap?outputCurrency=0xf32398dae246C5f672B52A54e9B413dFFcAe1A44"
+            passHref
+          >
+            <Button
+              className="btn-cta"
+              backgroundPrimary
+              size="large"
+              as="a"
+              text="Buy KACY"
+              target="_blank"
+              icon={<img src="/assets/pangolin.svg" alt="" />}
+              onClick={() => clickMatomoEvent('click-to-cta', 'up-ido')}
+            />
+          </NextLink>
+        </li>
+        <li>
+          <Link href="/farm">
+            <Button
+              backgroundPrimary
+              size="large"
+              as="a"
+              text="Stake & Farm"
+              onClick={() => clickMatomoEvent('click-to-cta', 'hero')}
+            />
+          </Link>
+        </li>
       </S.ButtonWrapper>
     </S.Hero>
   )
