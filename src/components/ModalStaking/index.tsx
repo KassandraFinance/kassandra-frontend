@@ -7,6 +7,8 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { useSelector, RootStateOrAny } from 'react-redux'
 import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
 
+import { Kacy } from '../../constants/tokenAddresses'
+
 import { BNtoDecimal } from '../../utils/numerals'
 import waitTransaction, {
   MetamaskError,
@@ -262,7 +264,7 @@ const ModalStaking = ({
                 backgroundBlack
                 fullWidth
                 text="Get KACY"
-                href="https://app.pangolin.exchange/#/swap?outputCurrency=0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb"
+                href={`https://app.pangolin.exchange/#/swap?outputCurrency=${Kacy}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setModalOpen(false)}
@@ -279,7 +281,7 @@ const ModalStaking = ({
                 backgroundBlack
                 fullWidth
                 text="Get LP"
-                href="https://app.pangolin.exchange/#/add/AVAX/0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb"
+                href={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setModalOpen(false)}

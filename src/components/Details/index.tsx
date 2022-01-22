@@ -6,6 +6,8 @@ import Big from 'big.js'
 import BigNumber from 'bn.js'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
+import { Kacy } from '../../constants/tokenAddresses'
+
 import { BNtoDecimal } from '../../utils/numerals'
 
 import * as S from './styles'
@@ -156,7 +158,7 @@ const Details = ({
         {symbol === 'LP' && (
           <S.Link>
             <a
-              href="https://app.pangolin.exchange/#/add/AVAX/0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb"
+              href={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -168,7 +170,7 @@ const Details = ({
         {symbol === 'KACY' && (
           <S.Link>
             <a
-              href="https://app.pangolin.exchange/#/swap?outputCurrency=0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb"
+              href={`https://app.pangolin.exchange/#/swap?outputCurrency=${Kacy}`}
               target="_blank"
               rel="noopener noreferrer"
             >
