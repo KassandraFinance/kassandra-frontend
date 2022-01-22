@@ -3,7 +3,11 @@ import Image from 'next/image'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
+import useConnect from '../../hooks/useConnect'
+
+import Button from '../Button'
 import { ToastInfo } from '../../components/Toastify/toast'
+
 import close from '../../../public/assets/close.svg'
 import theme from '../../styles/theme'
 import * as S from './styles'
@@ -19,6 +23,7 @@ const ModalLogOut = ({
   setModalOpen,
   userWalletAddress
 }: IModalLogOutProps) => {
+  const { handleDisconnected } = useConnect()
   const { trackEvent } = useMatomo()
 
   function matomoEvent(action: string, name: string) {
@@ -95,6 +100,13 @@ const ModalLogOut = ({
               </svg>
             </a>
           </S.ButtonContainer>
+          {/* <Button
+            backgroundSecondary
+            onClick={() => {
+              handleDisconnected()
+            }}
+            text="Disconnect"
+          /> */}
         </S.Content>
       </S.ModalContainer>
     </>

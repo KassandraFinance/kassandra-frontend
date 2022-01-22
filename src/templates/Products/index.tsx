@@ -3,23 +3,18 @@ import Big from 'big.js'
 import Image from 'next/image'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
-import { useSelector, RootStateOrAny } from 'react-redux'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
-import { SUBGRAPH_URL, HeimCRPPOOL, HeimCorePool } from '../../constants/tokenAddresses'
+import { SUBGRAPH_URL, ProductDetails } from '../../constants/tokenAddresses'
 
-import web3 from '../../utils/web3'
 import { BNtoDecimal } from '../../utils/numerals'
-import useMatomoEcommerce from '../../hooks/useMatomoEcommerce';
-
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
 import Header from '../../components/Header'
 import ChartProducts from '../../components/ChartProducts'
 import HeimOperations from '../../components/HeimOperations'
-import Web3Disabled from '../../components/Web3Disabled'
 import ScrollUpButton from '../../components/ScrollUpButton'
-import Loading from '../../components/Loading'
 import PoweredBy from './PoweredBy'
 
 import avaxSocial from '../../../public/assets/avalanche_social_index_logo.svg'
@@ -34,11 +29,6 @@ import TokenDescription from './TokenDescription'
 
 import * as S from './styles'
 
-// eslint-disable-next-line prettier/prettier
-declare let window: {
-  ethereum: any,
-}
-
 interface InfoPool {
   tvl: string;
   swapFees: string;
@@ -46,10 +36,11 @@ interface InfoPool {
   volume: string;
 }
 
-const Products = () => {
-  const [chainId, setChainId] = React.useState<string>('')
-  const [loading, setLoading] = React.useState<boolean>(true)
-  const [isMobile, setIsMobile] = React.useState<boolean>(false)
+interface Input {
+  product: ProductDetails;
+}
+
+const Products = ({ product }: Input) => {
   const [infoPool, setInfoPool] = React.useState<InfoPool>({
     tvl: '...',
     swapFees: '...',
@@ -57,45 +48,37 @@ const Products = () => {
     volume: '...'
   })
 
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { trackProductPageView } = useMatomoEcommerce()
-  
+
   const { data } = useSWR([GET_INFO_POOL], query =>
     request(SUBGRAPH_URL, query, {
-      id: HeimCRPPOOL,
+      id: product.sipAddress,
       day: Math.trunc(Date.now() / 1000 - 60 * 60 * 24)
     })
   )
 
-  const poolAddress = HeimCRPPOOL
-  const poolCoreAddress = HeimCorePool
-  const poolPlatform = 'Fuji'
-  const poolName = 'Avalanche Social Index'
-  const poolSymbol = 'aHYPE'
-  const poolCategories = [poolPlatform, 'Pool']
-
-  async function getChainId() {
-    if (web3.currentProvider === null) {
-      return
-    }
-
-    const id = await window.ethereum.request({ method: 'eth_chainId' })
-    setChainId(id)
-  }
-
   React.useEffect(() => {
     if (data) {
-      const swapFees = data.swap.reduce((acc: Big, current: { volume_usd: string }) => {
-        return Big(current.volume_usd).add(acc)
-      }, 0)
+      const swapFees = data.swap.reduce(
+        (acc: Big, current: { volume_usd: string }) => {
+          return Big(current.volume_usd).add(acc)
+        },
+        0
+      )
 
-      const withdrawFees = data.withdraw.reduce((acc: Big, current: { volume_usd: string }) => {
-        return Big(current.volume_usd).add(acc)
-      }, 0)
+      const withdrawFees = data.withdraw.reduce(
+        (acc: Big, current: { volume_usd: string }) => {
+          return Big(current.volume_usd).add(acc)
+        },
+        0
+      )
 
-      const volume = data.volumes.reduce((acc: Big, current: { volume_usd: string }) => {
-        return Big(current.volume_usd).add(acc)
-      }, 0)
+      const volume = data.volumes.reduce(
+        (acc: Big, current: { volume_usd: string }) => {
+          return Big(current.volume_usd).add(acc)
+        },
+        0
+      )
 
       setInfoPool({
         tvl: BNtoDecimal(Big(data.pool.total_value_locked_usd), 2, 2, 2),
@@ -104,141 +87,106 @@ const Products = () => {
         volume: BNtoDecimal(Big(volume), 2, 2, 2)
       })
     }
-
   }, [data])
 
   React.useEffect(() => {
-    getChainId()
-  }, [userWalletAddress])
-
-  React.useEffect(() => {
-    trackProductPageView(poolAddress, poolSymbol, poolCategories)
-    
-    if (screen.width < 700) {
-      setTimeout(() => {
-        setIsMobile(true)
-        setLoading(false)
-      }, 600)
+    if (product) {
+      trackProductPageView(
+        product.sipAddress,
+        product.symbol,
+        product.categories
+      )
     }
-
-    setTimeout(() => {
-      setLoading(false)
-    }, 600)
-  }, [])
+  }, [product])
 
   return (
-    <S.BackgroundProducts boxShadow={!web3.currentProvider && userWalletAddress && chainId === "0x3" && !loading && !isMobile}>
+    <S.BackgroundProducts boxShadow={false}>
       <Header />
-      {loading &&
-        <h1
-          style={{
-            height: '90vh',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <Loading />
-        </h1>
-      }
-      {!loading && isMobile && (
-        <Web3Disabled
-          textButton="asd"
-          textHeader="You are on a mobile device"
-          bodyText="The Invest page can only be accessed by a computer"
-          type="isMobile"
+      <S.Intro introMobile={true} introDesktop={false}>
+        <Image src={avaxSocial} alt="" width={75} height={75} />
+        <S.NameIndex>
+          <S.NameAndSymbol introMobile={true}>
+            <h1>{product.name}</h1>
+            <h3>${product.symbol}</h3>
+          </S.NameAndSymbol>
+          <p>by HEIMDALL.land</p>
+        </S.NameIndex>
+        <S.Line />
+      </S.Intro>
+      <S.Product>
+        <S.ProductDetails>
+          <S.Intro introMobile={false} introDesktop={true}>
+            <Image src={avaxSocial} alt="" width={75} height={75} />
+            <S.NameIndex>
+              <S.NameAndSymbol>
+                <h1>{product.name}</h1>
+                <h3>${product.symbol}</h3>
+              </S.NameAndSymbol>
+              <p>by HEIMDALL.land</p>
+            </S.NameIndex>
+          </S.Intro>
+          <S.Line className="second-line" />
+          <S.IntroCharts>
+            <S.IndexData>
+              <span>
+                TVL
+                <Tippy content="The Total Value Locked is the amount invested inside the pool, or simply the total value of all tokens inside the pool combined.">
+                  <S.Tooltip>
+                    <Image src={infoGray} alt="Explanation" />
+                  </S.Tooltip>
+                </Tippy>
+              </span>
+              <h2>${infoPool.tvl}</h2>
+            </S.IndexData>
+            <S.IndexData>
+              <span>
+                VOLUME (24h)
+                <Tippy content="Total volume of transactions in the last 24 hours. This includes new investments, withdrawals, token swaps and token transfers, which include swaps in decentralized exchanges.">
+                  <S.Tooltip>
+                    <Image src={infoGray} alt="Explanation" />
+                  </S.Tooltip>
+                </Tippy>
+              </span>
+              <h2>${infoPool.volume}</h2>
+            </S.IndexData>
+            <S.IndexData>
+              <span>
+                Swap fees (24h)
+                <Tippy content="Amount of fees collected in the last 24 hours when people swap tokens inside the pool. This fee is paid to all investors of the pool.">
+                  <S.Tooltip>
+                    <Image src={infoGray} alt="Explanation" />
+                  </S.Tooltip>
+                </Tippy>
+              </span>
+              <h2>${infoPool.swapFees}</h2>
+            </S.IndexData>
+            <S.IndexData>
+              <span>
+                Withdraw fees (24h)
+                <Tippy content="Amount of fees collected in the last 24 hours when people withdraw from the strategy. This fee is paid to the Kassandra Decentralized Autonomous Organization.">
+                  <S.Tooltip>
+                    <Image src={infoGray} alt="Explanation" />
+                  </S.Tooltip>
+                </Tippy>
+              </span>
+              <h2>${infoPool.withdrawFees}</h2>
+            </S.IndexData>
+          </S.IntroCharts>
+          <ChartProducts />
+          <ScrollUpButton />
+          <Change />
+          <Summary strategy={data?.pool.strategy || '...'} />
+          <PoweredBy partners={product.partners} />
+          <Distribution poolPlatform={product.platform} />
+          <TokenDescription symbol={product.symbol} />
+        </S.ProductDetails>
+        <HeimOperations
+          poolChain={product.chain}
+          crpPoolAddress={product.sipAddress}
+          corePoolAddress={product.coreAddress}
+          productCategories={product.categories}
         />
-      )}
-      {web3.currentProvider !== null && chainId === "0xa869" && !loading && !isMobile ?
-        <S.Product>
-          <S.ProductDetails>
-            <S.Intro>
-              <Image src={avaxSocial} alt="" width={75} height={75} />
-              <S.NameIndex>
-                <S.NameAndSymbol>
-                  <h1>{poolName}</h1>
-                  <h3>${poolSymbol}</h3>
-                </S.NameAndSymbol>
-                <p>by HEIMDALL.land</p>
-              </S.NameIndex>
-            </S.Intro>
-            <S.Line />
-            <S.IntroCharts>
-              <S.IndexData>
-                <span>TVL
-                  <Tippy content="The Total Value Locked is the amount invested inside the pool, or simply the total value of all tokens inside the pool combined." >
-                    <S.Tooltip>
-                      <Image src={infoGray} alt="Explanation" />
-                    </S.Tooltip>
-                  </Tippy>
-                </span>
-                <h2>${infoPool.tvl}</h2>
-              </S.IndexData>
-              <S.IndexData>
-                <span>VOLUME (24h)
-                  <Tippy content="Total volume of transactions in the last 24 hours. This includes new investments, withdrawals, token swaps and token transfers, which include swaps in decentralized exchanges." >
-                    <S.Tooltip>
-                      <Image src={infoGray} alt="Explanation" />
-                    </S.Tooltip>
-                  </Tippy>
-                </span>
-                <h2>${infoPool.volume}</h2>
-              </S.IndexData>
-              <S.IndexData>
-                <span>swap fees (24h)
-                  <Tippy content="Amount of fees collected in the last 24 hours when people swap tokens inside the pool. This fee is paid to all investors of the pool." >
-                    <S.Tooltip>
-                      <Image src={infoGray} alt="Explanation" />
-                    </S.Tooltip>
-                  </Tippy>
-                </span>
-                <h2>${infoPool.swapFees}</h2>
-              </S.IndexData>
-              <S.IndexData>
-                <span>withdraw fees (24h)
-                  <Tippy content="Amount of fees collected in the last 24 hours when people withdraw from the strategy. This fee is paid to the Kassandra Decentralized Autonomous Organization." >
-                    <S.Tooltip>
-                      <Image src={infoGray} alt="Explanation" />
-                    </S.Tooltip>
-                  </Tippy>
-                </span>
-                <h2>${infoPool.withdrawFees}</h2>
-              </S.IndexData>
-            </S.IntroCharts>
-            <ChartProducts />
-            <ScrollUpButton />
-            <Change />
-            <Summary strategy={data?.pool.strategy || '...'} />
-            <PoweredBy />
-            <Distribution poolPlatform={poolPlatform} />
-            <TokenDescription />
-          </S.ProductDetails>
-          <HeimOperations
-            crpPoolAddress={poolAddress}
-            corePoolAddress={poolCoreAddress}
-            productCategories={poolCategories}
-          />
-        </S.Product>
-        :
-        <>
-          {!web3.currentProvider && !loading && !isMobile && (
-            <Web3Disabled
-              textButton="Install Metamask"
-              textHeader="Looks like you don't have the Metamask wallet installed"
-              bodyText="Please install the Metamask wallet to access our pools "
-              type="install"
-            />
-          )}
-          {web3.currentProvider && chainId !== "0xa869" && !loading && !isMobile && (
-            <Web3Disabled
-              textButton={`Connect to ${poolPlatform}`}
-              textHeader="Your wallet is set to the wrong network."
-              bodyText={`Please switch to the ${poolPlatform} network to access our products`}
-              type="changeChain"
-            />
-          )}
-        </>
-      }
+      </S.Product>
     </S.BackgroundProducts>
   )
 }

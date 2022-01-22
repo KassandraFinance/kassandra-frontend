@@ -2,25 +2,34 @@
 import React from 'react'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
+import { ChainDetails } from '../../utils/changeChain'
+
 import Form from './Form'
 
 import * as S from './styles'
 
 interface IOperationsProps {
+  poolChain: ChainDetails;
   crpPoolAddress: string;
   corePoolAddress: string;
   productCategories: string[];
 }
 
+export type Titles = keyof typeof messages;
 
-const HeimOperations = ({ crpPoolAddress, corePoolAddress, productCategories }: IOperationsProps) => {
-  const messages = {
-    Invest: 'Pay with',
-    Withdraw: 'Send',
-    Swap: 'Swap from'
-  }
+const messages = {
+  Invest: 'Pay with',
+  Withdraw: 'Send',
+  Swap: 'Swap from'
+}
 
-  const [inputChecked, setInputChecked] = React.useState<keyof typeof messages>('Invest')
+const HeimOperations = ({
+  poolChain,
+  crpPoolAddress,
+  corePoolAddress,
+  productCategories
+}: IOperationsProps) => {
+  const [inputChecked, setInputChecked] = React.useState<Titles>('Invest')
   const [typeWithdrawChecked, setTypeWithdrawChecked] = React.useState<string>('Best_value')
 
   const { trackEvent } = useMatomo()
@@ -134,6 +143,7 @@ const HeimOperations = ({ crpPoolAddress, corePoolAddress, productCategories }: 
           </S.TypeWithdraw>
         }
           <Form
+            poolChain={poolChain}
             crpPoolAddress={crpPoolAddress}
             corePoolAddress={corePoolAddress}
             productCategories={productCategories}

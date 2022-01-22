@@ -24,8 +24,8 @@ const VotingPower = ({
   getCurrentVotes,
   userWalletAddress
 }: IVotingPowerProps) => {
-  const [totalVotes, setTotalVotes] = React.useState(new BigNumber(0))
-  const [yourVotingPower, setYourVotingPower] = React.useState(new BigNumber(0))
+  const [totalVotes, setTotalVotes] = React.useState(new BigNumber(-1))
+  const [yourVotingPower, setYourVotingPower] = React.useState(new BigNumber(-1)) // eslint-disable-line prettier/prettier
 
   React.useEffect(() => {
     if (!web3.currentProvider) {
@@ -61,7 +61,9 @@ const VotingPower = ({
           </Tippy>
         </span>
         <span style={{ fontSize: '14px' }}>
-          {BNtoDecimal(yourVotingPower, 18, 2)}
+          {yourVotingPower.lt(new BigNumber('0'))
+            ? '...'
+            : BNtoDecimal(yourVotingPower, 18, 2)}
         </span>
       </S.YourVotingPower>
       <S.TotalVotingPower>
@@ -78,7 +80,11 @@ const VotingPower = ({
             </S.Tooltip>
           </Tippy>
         </span>
-        <span>{BNtoDecimal(totalVotes, 18, 2)}</span>
+        <span>
+          {totalVotes.lt(new BigNumber('0'))
+            ? '...'
+            : BNtoDecimal(totalVotes, 18, 2)}
+        </span>
       </S.TotalVotingPower>
     </S.VotingPower>
   )

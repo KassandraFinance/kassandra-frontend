@@ -89,7 +89,7 @@ export const CopyContract = styled.div<ICopyContractProps>`
   align-items: center;
   justify-content: space-between;
 
-  max-width: 460px !important;
+  max-width: 100%;
   padding: 22px;
   margin: 16px 0;
 
@@ -99,6 +99,10 @@ export const CopyContract = styled.div<ICopyContractProps>`
       margin-top: 8px;
       margin-left: 40px;
     }
+  }
+
+  & > div {
+    display: flex;
   }
 
   button {
@@ -134,10 +138,17 @@ export const CopyContract = styled.div<ICopyContractProps>`
     flex-direction: column;
     align-items: flex-start;
     padding: 16px;
-    max-width: 100%;
     > button {
       margin-left: 40px;
     }
+  }
+
+  @media(max-width: 960px) {
+    flex-direction: row;
+  }
+
+  @media(max-width: 530px) {
+    flex-direction: column;
   }
 `
 

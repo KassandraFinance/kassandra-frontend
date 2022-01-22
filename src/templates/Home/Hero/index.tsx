@@ -1,6 +1,6 @@
 import React from 'react'
+import Link from 'next/link'
 import NextLink from 'next/link'
-import { Link } from 'react-scroll'
 
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
@@ -14,7 +14,7 @@ const Hero = () => {
 
   function clickMatomoEvent(action: string, name: string) {
     trackEvent({
-      category: 'home-hero',
+      category: 'home',
       action: action,
       name: name
     })
@@ -32,7 +32,7 @@ const Hero = () => {
       <S.ButtonWrapper>
         <li>
           <NextLink
-            href="https://penguinfinance.org/launchpad-kassandra"
+            href="https://app.pangolin.exchange/#/swap?outputCurrency=0xf32398dae246C5f672B52A54e9B413dFFcAe1A44"
             passHref
           >
             <Button
@@ -40,25 +40,23 @@ const Hero = () => {
               backgroundPrimary
               size="large"
               as="a"
-              text="Upcoming IDO"
+              text="Buy KACY"
               target="_blank"
-              icon={<img src="/assets/penguinIcon.svg" alt="" />}
+              icon={<img src="/assets/pangolin.svg" alt="" />}
               onClick={() => clickMatomoEvent('click-to-cta', 'up-ido')}
             />
           </NextLink>
         </li>
         <li>
-          <NextLink href="https://demo.kassandra.finance" passHref>
+          <Link href="/farm">
             <Button
-              className="btn-cta"
               backgroundPrimary
               size="large"
               as="a"
-              target="_blank"
-              text="Explore Our Demo"
-              onClick={() => clickMatomoEvent('click-to-cta', 'explore-demo')}
+              text="Stake & Farm"
+              onClick={() => clickMatomoEvent('click-to-cta', 'hero')}
             />
-          </NextLink>
+          </Link>
         </li>
       </S.ButtonWrapper>
     </S.Hero>

@@ -72,8 +72,6 @@ export const CardDescription = styled.div``
 
 export const CardBody = styled.div``
 
-export const TopicText = styled.ul``
-
 export const ListTitle = styled.li`
   font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.medium};
@@ -92,5 +90,3 @@ export const ListText = styled.li`
     font-size: ${theme.font.sizes.font14};
   }
 `
-
-export const SubList = styled.li``

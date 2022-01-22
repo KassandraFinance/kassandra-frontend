@@ -1,13 +1,14 @@
 //create a new component that displays the token price
 import React from 'react'
-
 import Big from 'big.js'
+import { useSelector, RootStateOrAny } from 'react-redux'
+
 import usePriceLP from '../../hooks/usePriceLP'
 import { BNtoDecimal } from '../../utils/numerals'
 
 import * as S from './styles'
 
-import { LPKacyAvax, LPDaiAvax } from '../../constants/tokenAddresses'
+import { chains, LPKacyAvax, LPDaiAvax } from '../../constants/tokenAddresses'
 
 interface TokenInfo {
   id: string;
@@ -23,6 +24,7 @@ const KacyOverView = () => {
   const [kacyPrice, setKacyPrice] = React.useState<Big>(Big(0))
   const [circulatingSupply, setCirculatingSupply] = React.useState<Big>(Big(0))
 
+  const { chainId } = useSelector((state: RootStateOrAny) => state)
   const { viewgetReserves } = usePriceLP()
 
   async function handleLPtoUSD() {
@@ -37,11 +39,14 @@ const KacyOverView = () => {
     )
     setKacyPrice(kacyInDollar)
   }
+
   React.useEffect(() => {
-    handleLPtoUSD()
+    if (chainId === chains.avalanche.chainId) {
+      handleLPtoUSD()
+    }
   }, [])
 
-  const date1 = new Date('2022-01-18T00:00:00.000Z')
+  const date1 = new Date('2022-01-22T18:00:00.000Z')
 
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -67,8 +72,7 @@ const KacyOverView = () => {
         <S.TokenInfo>
           <S.Values>
             <p>PRICE</p>
-            <span>$0.00</span>
-            {/* <span>${BNtoDecimal(kacyPrice, 2, 2, 2)}</span> */}
+            <span>${BNtoDecimal(kacyPrice, 2, 2, 2)}</span>
           </S.Values>
           <S.Values>
             <p>MARKET CAP</p>

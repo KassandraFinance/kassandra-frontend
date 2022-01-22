@@ -32,14 +32,24 @@ export const Dropdown = styled.div`
 `
 
 export const DropButton = styled.button`
-  position: relative;
   border: none;
   background-color: transparent;
-  display: inline-block;
   color: ${theme.colors.snow};
   font-size: 16px;
+  
+  display: inline-block;
+  
   margin: 0.3rem ${theme.spacings.space24} 0;
-  padding: 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+
+  position: relative;
+  @media (max-width: 960px) {
+    margin: 0;
+  }
+  @media (max-width: 540px) {
+    font-size: ${theme.font.sizes.font14};
+  }
 `
 
 interface IDropdownContentProps {
@@ -51,12 +61,13 @@ export const DropdownContent = styled.div<IDropdownContentProps>`
 
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   background-color: #15161C;
+
   margin-top: 0.3rem;
+  min-width: 160px;
 
   position: absolute;
   left: 24px;
 
-  min-width: 160px;
   z-index: 1;
   a {
     color: ${theme.colors.snow};
@@ -71,5 +82,9 @@ export const DropdownContent = styled.div<IDropdownContentProps>`
     &:hover {
       background-color: #3F1A38;
     }
+  }
+
+  @media (max-width: 960px) {
+    left: 0;
   }
 `

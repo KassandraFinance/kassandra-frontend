@@ -49,8 +49,8 @@ const InputBestValue = ({
   return (
     <S.InputBestValue>
       <S.IntroBestValue>
-        <S.Span>Token</S.Span>
-        <S.Span total>Receive (estimation)</S.Span>
+        <S.Span>Receive</S.Span>
+        <S.Span total>Estimate</S.Span>
       </S.IntroBestValue>
       <S.AllInput>
         {poolTokenDetails.map((token, index) => (

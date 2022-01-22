@@ -46,7 +46,7 @@ export const Table = styled.table`
     background-color: rgba(255, 255, 255, 0.04);
     max-height: 100%;
   }
-  @media (max-width: 660px) {
+  @media (max-width: 768px) {
     display: block;
     overflow: auto;
   }
@@ -59,13 +59,15 @@ export const Tr = styled.tr`
   align-items: center;
   height: 38px;
   margin: 16px 0;
-  @media (max-width: 660px) {
-    grid-template-columns: 0.5fr 3fr 4fr repeat(2, 2fr);
+  @media (max-width: 768px) {
+    min-width: 690px;
+
+    height: 28px;
     gap: 16px;
-    width: 600px;
   }
-  @media (max-width: 660px) {
-    width: 500px;
+
+  @media (max-width: 640px) {
+    min-width: 580px;
   }
 `
 
@@ -91,9 +93,6 @@ export const Td = styled.td<ITdProps>`
   justify-content: center;
   align-items: center;
   text-align: center;
-  @media (max-width: 660px) {
-    font-size: 21px;
-  }
 `
 
 export const BalanceCoin = styled.span`
@@ -121,6 +120,7 @@ export const Coin = styled.span<ICoinProps>`
   img {
     max-width: 24px;
     margin-right: 16px;
+    margin-left: 8px;
   }
 
   span {

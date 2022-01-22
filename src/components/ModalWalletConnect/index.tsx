@@ -1,5 +1,8 @@
 import React from 'react'
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
 
+import web3 from '../../utils/web3'
 import useConnect from '../../hooks/useConnect'
 
 import * as S from './styles'
@@ -13,7 +16,7 @@ const ModalWalletConnect = ({
   modalOpen,
   setModalOpen
 }: IModalWalletConnect) => {
-  const { connect } = useConnect()
+  const { connect, connectWalletConnect } = useConnect()
 
   function handleCloseModal() {
     setModalOpen(false)
@@ -27,26 +30,56 @@ const ModalWalletConnect = ({
       />
       <S.Container modalOpen={modalOpen}>
         <S.BackgroundBlack>
-          <S.ModalText>
+          <S.ModalTitle>
             <span>Wallet connection is required</span>
             <button type="button" onClick={() => setModalOpen(false)}>
               <img src="/assets/close.svg" alt="Close" />{' '}
             </button>
-          </S.ModalText>
+          </S.ModalTitle>
 
           <S.Content>
-            <S.WrapperIconsBackGround
+            <Tippy
+              content={
+                <S.Tooltip>
+                  <a href="https://metamask.io/">
+                    Metamask
+                    <img src="/assets/externalLink.svg" alt="" />
+                  </a>{' '}
+                  is not installed on this browser
+                </S.Tooltip>
+              }
+              disabled={web3.currentProvider !== null}
+              hideOnClick={false}
+              interactive
+            >
+              <S.WrapperIconsBackGround
+                className={web3.currentProvider === null ? 'disabled' : ''}
+                type="button"
+                onClick={() => {
+                  if (web3.currentProvider !== null) {
+                    setModalOpen(false)
+                    connect()
+                  }
+                }}
+              >
+                <S.WrapperIcons>
+                  <img src="/assets/metaMaskIcon.svg" alt="" />
+                  <span>Metamask</span>
+                </S.WrapperIcons>
+              </S.WrapperIconsBackGround>
+            </Tippy>
+            {/* <S.WrapperIconsBackGround
               type="button"
               onClick={() => {
                 setModalOpen(false)
-                connect()
+                connectWalletConnect(false)
               }}
             >
               <S.WrapperIcons>
-                <img src="/assets/metaMaskIcon.svg" alt="" />
-                <span>Metamask</span>
+                <img src="/assets/connectWalletIcon.svg" alt="" />
+                <span>WalletConnect</span>
               </S.WrapperIcons>
-            </S.WrapperIconsBackGround>
+            </S.WrapperIconsBackGround> */}
           </S.Content>
         </S.BackgroundBlack>
       </S.Container>

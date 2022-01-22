@@ -65,11 +65,11 @@ export const Label = styled.label<ILabelProps>`
 
   @media (max-width: 375px) {
     font-size: 13px;
-    padding: 10px 18px;
+    padding: 18px;
   }
   @media (max-width: 330px) {
     font-size: ${theme.font.sizes.font12};
-    padding: 8px 14px;
+    padding: 16px;
   }
 `
 

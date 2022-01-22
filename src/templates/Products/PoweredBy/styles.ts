@@ -28,15 +28,19 @@ export const PartnersContent = styled.div`
   justify-content: space-around;
   align-items: center;
 
-  #avalanche {
-    max-width: 40px;
-  }
+  a {
+    display: block;
+    padding-right: 30px;
 
-  #heimdall {
-    max-width: 160px;
-  }
+    &:last-child {
+      padding-right: 0;
+    }
 
-  #api3 {
-    max-width: 100px;
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      max-height: 40px;
+    }
   }
 `

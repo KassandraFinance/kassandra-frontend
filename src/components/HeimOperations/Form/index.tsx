@@ -1,12 +1,12 @@
-/* eslint-disable prettier/prettier */
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
 
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 
@@ -24,33 +24,35 @@ import Button from '../../Button'
 import ModalWalletConnect from '../../ModalWalletConnect'
 
 import InputTokens from './InputTokens'
-import InputDefault from './InputDefault'
 import InputBestValue from './InputBestValue'
 
 import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
-import web3 from '../../../utils/web3'
 import { priceDollar } from '../../../utils/priceDollar'
+import changeChain, { ChainDetails } from '../../../utils/changeChain'
 import { BNtoDecimal, wei } from '../../../utils/numerals'
 import waitTransaction, { MetamaskError, TransactionCallback } from '../../../utils/txWait'
 
 import * as S from './styles'
+import { Titles } from '..'
 import { GET_INFO_AHYPE } from '../graphql'
 
 interface IFormProps {
   typeAction: string;
-  title: string;
+  title: Titles;
   typeWithdrawChecked: string;
-  crpPoolAddress: string
-  corePoolAddress: string
-  productCategories: string[]
+  poolChain: ChainDetails;
+  crpPoolAddress: string;
+  corePoolAddress: string;
+  productCategories: string[];
 }
 
 interface Address2Index {
   [key: string]: number;
 }
 
-const Form = ({ 
+const Form = ({
+  poolChain,
   crpPoolAddress,
   corePoolAddress,
   productCategories,
@@ -61,7 +63,7 @@ const Form = ({
   const crpPoolToken = useERC20Contract(crpPoolAddress)
   const corePool = usePoolContract(corePoolAddress)
   const crpPool = useCRPContract(crpPoolAddress)
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const { userWalletAddress, chainId } = useSelector((state: RootStateOrAny) => state)
   const { trackBuying, trackBought, trackCancelBuying } = useMatomoEcommerce();
 
   const [tokenAddress2Index, setTokenAddress2Index] = React.useState<Address2Index>({})
@@ -69,8 +71,9 @@ const Form = ({
   const [approvalCheck, setApprovalCheck] = React.useState(0)
 
   const [fees, setFees] = React.useState({
-    exit: '...',
-    swap: '...'
+    Invest: '...',
+    Withdraw: '...',
+    Swap: '...'
   })
   const [isReload, setIsReload] = React.useState<boolean>(false)
 
@@ -103,7 +106,7 @@ const Form = ({
       name
     })
   }
-  
+
   function clearInput() {
     setSwapInAmount(new BigNumber(0))
     setSwapOutAmount([new BigNumber(0)])
@@ -125,17 +128,17 @@ const Form = ({
         name: data.pool.name,
         symbol: data.pool.symbol
       }
-      const res: TokenDetails[] = data.pool.underlying_assets.map((item: { 
-        balance: string; 
-        token: { 
-          id: string; 
-          decimals: string | number | BigNumber; 
-          price_usd: string; 
-          name: string; 
-          symbol: string 
-        }; 
-        weight_goal_normalized: string
-        weight_normalized: string
+      const res: TokenDetails[] = data.pool.underlying_assets.map((item: {
+        balance: string;
+        token: {
+          id: string;
+          decimals: string | number | BigNumber;
+          price_usd: string;
+          name: string;
+          symbol: string;
+        };
+        weight_goal_normalized: string;
+        weight_normalized: string;
       }) => {
         return {
           balance_in_pool: item.balance,
@@ -157,8 +160,9 @@ const Form = ({
 
       setInfoAHYPE(res)
       setFees({
-        exit: (data.pool.fee_exit * 100).toFixed(2),
-        swap: (data.pool.fee_swap * 100).toFixed(2)
+        Invest: '0',
+        Withdraw: (data.pool.fee_exit * 100).toFixed(2),
+        Swap: (data.pool.fee_swap * 100).toFixed(2)
       })
       dispatch(actionGetPoolTokens(res))
     }
@@ -193,6 +197,10 @@ const Form = ({
 
   // get contract approval of tokens
   React.useEffect(() => {
+    if (chainId !== poolChain.chainId) {
+      return
+    }
+
     if (title === 'Withdraw') {
       setIsApproved(Array(infoAHYPE.length + 1).fill(true))
       return
@@ -216,11 +224,11 @@ const Form = ({
     setIsReload(!isReload)
     setIsApproved([])
     calc()
-  }, [title, infoAHYPE.length, approvalCheck, userWalletAddress])
+  }, [chainId, title, infoAHYPE.length, approvalCheck, userWalletAddress])
 
   // get balance of swap in token
   React.useEffect(() => {
-    if (swapInAddress.length === 0 || userWalletAddress.length === 0) {
+    if (swapInAddress.length === 0 || userWalletAddress.length === 0 || chainId.length === 0 || chainId !== poolChain.chainId) {
       return
     }
 
@@ -230,12 +238,11 @@ const Form = ({
     token
       .balance(userWalletAddress)
       .then(newBalance => setSwapInBalance(newBalance))
-
-  }, [swapInAddress, userWalletAddress, title, infoAHYPE, swapOutAddress])
+  }, [chainId, swapInAddress, userWalletAddress, title, infoAHYPE, swapOutAddress])
 
   // get balance of swap out token
   React.useEffect(() => {
-    if (userWalletAddress.length === 0) {
+    if (userWalletAddress.length === 0 || chainId.length === 0 || chainId !== poolChain.chainId) {
       return
     }
 
@@ -266,8 +273,7 @@ const Form = ({
     token
       .balance(userWalletAddress)
       .then(newBalance => setSwapOutBalance([newBalance]))
-
-  }, [userWalletAddress, infoAHYPE, swapInAddress, swapOutAddress])
+  }, [chainId, userWalletAddress, infoAHYPE, swapInAddress, swapOutAddress])
 
   React.useEffect(() => {
     const tokens = title === "Withdraw" ? infoAHYPE.length : 1
@@ -283,6 +289,12 @@ const Form = ({
       swapOutAddress.length === 0 ||
       swapInAddress === crpPoolAddress
     ) {
+      return
+    }
+
+    if (chainId !== poolChain.chainId) {
+      setSwapOutAmount([new BigNumber(0)])
+      setSwapOutPrice(new BigNumber(-1))
       return
     }
 
@@ -313,7 +325,9 @@ const Form = ({
           )
           setSwapOutAmount([newSwapOutAmount])
         } catch (error) {
-          ToastWarning("The amount can't be more than half of what's already in the pool! The transaction will revert!")
+          if (userWalletAddress.length > 0) {
+            ToastWarning("The amount can't be more than half of what's already in the pool! The transaction will revert!")
+          }
         }
 
         let newSwapOutPrice;
@@ -338,13 +352,16 @@ const Form = ({
 
         setSwapOutPrice(newSwapOutPrice)
       } catch (error) {
-        ToastWarning("Could not connect with the blockchain to calculate prices.")
+        if (userWalletAddress.length > 0) {
+          ToastWarning("Could not connect with the blockchain to calculate prices.")
+        }
       }
 
     }
 
     calc()
-  }, [swapInAmount, swapInAddress])
+    setSwapOutAmount(Array(infoAHYPE.length - 1).fill(new BigNumber(0)))
+  }, [chainId, swapInAmount, swapInAddress])
 
   // calculate swap
   React.useEffect(() => {
@@ -355,6 +372,12 @@ const Form = ({
       swapInAddress === crpPoolAddress ||
       swapOutAddress === crpPoolAddress
     ) {
+      return
+    }
+
+    if (chainId !== poolChain.chainId) {
+      setSwapOutAmount([new BigNumber(0)])
+      setSwapOutPrice(new BigNumber(-1))
       return
     }
 
@@ -394,7 +417,7 @@ const Form = ({
       }
 
       try {
-        if (swapInAmount.gt(new BigNumber(0))) {
+        if (userWalletAddress.length > 0 && swapInAmount.gt(new BigNumber(0))) {
           await corePool.trySwapExactAmountIn(swapInAddress, swapInAmount, swapOutAddress, userWalletAddress)
         }
       } catch (error) {
@@ -404,11 +427,26 @@ const Form = ({
     }
 
     calc()
-  }, [swapInAmount, swapInAddress, swapOutAddress])
+    setSwapOutAmount(Array(infoAHYPE.length - 1).fill(new BigNumber(0)))
+  }, [chainId, swapInAmount, swapInAddress, swapOutAddress])
 
   // calculate withdraw
   React.useEffect(() => {
     if (title !== 'Withdraw' || swapOutAddress === crpPoolAddress) {
+      return
+    }
+
+    if (chainId !== poolChain.chainId) {
+      setSwapOutPrice(new BigNumber(-1))
+
+      if (swapOutAddress === '') {
+        setSwapOutAmount(
+          Array(infoAHYPE.length - 1).fill(new BigNumber(0))
+        )
+        return
+      }
+
+      setSwapOutAmount([new BigNumber(0)])
       return
     }
 
@@ -422,11 +460,30 @@ const Form = ({
         return new BigNumber(0)
       }
 
-      return amountPoolToken
-        .mul(wei.sub(exitFee).mul(new BigNumber(100)).div(wei))
-        .mul(balanceOut)
-        .div(supplyPoolToken)
-        .div(new BigNumber(100))
+      // 10^18
+      const one = new BigNumber('1')
+      const two = new BigNumber('2')
+      const bigOne = new BigNumber('10').pow(new BigNumber('18'))
+      const halfBigOne = bigOne.div(two)
+      // calculated fee (bmul)
+      const fee = amountPoolToken
+        .mul(exitFee)
+        .add(halfBigOne)
+        .div(bigOne);
+      const pAiAfterExitFee = amountPoolToken.sub(fee);
+      const supply = supplyPoolToken.add(one)
+      // ratio of the token (bdiv)
+      const ratio = pAiAfterExitFee
+        .mul(bigOne)
+        .add(supply.div(two))
+        .div(supply);
+      // amount of tokens (bmul)
+      const tokenAmountOut = ratio
+        .mul(balanceOut.sub(one))
+        .add(halfBigOne)
+        .div(bigOne);
+
+      return tokenAmountOut
     }
 
     const calc = async () => {
@@ -490,12 +547,15 @@ const Form = ({
         setSwapOutPrice(newSwapOutPrice)
       }
       catch(e) {
-        ToastWarning("Could not connect with the blockchain to calculate prices.")
+        if (userWalletAddress.length > 0) {
+          ToastWarning("Could not connect with the blockchain to calculate prices.")
+        }
       }
     }
 
     calc()
-  }, [swapInAmount, swapOutAddress, infoAHYPE])
+    setSwapOutAmount(Array(infoAHYPE.length - 1).fill(new BigNumber(0)))
+  }, [chainId, swapInAmount, swapOutAddress, infoAHYPE])
 
   const tokenInIndex = tokenAddress2Index[swapInAddress]
   const tokenOutIndex = tokenAddress2Index[swapOutAddress]
@@ -615,30 +675,40 @@ const Form = ({
         approved,
         category,
         swapInAmountInput,
+        swapOutAmountInput,
         swapInAddressInput,
         swapOutAddressInput,
         swapInSymbol,
         swapOutSymbol,
         walletAddress,
-        tokensLength,
-        amountUSD
+        amountUSD,
+        slippageInput
+      // eslint-disable-next-line prettier/prettier
       } = e.target as HTMLFormElement & {
-        approved: HTMLInputElement
-        category: HTMLInputElement
-        swapInAmountInput: HTMLInputElement
-        swapInAddressInput: HTMLInputElement
-        swapOutAddressInput: HTMLInputElement
-        swapInSymbol: HTMLInputElement
-        swapOutSymbol: HTMLInputElement
-        walletAddress: HTMLInputElement
-        tokensLength: HTMLInputElement
-        amountUSD: HTMLInputElement
+        approved: HTMLInputElement;
+        category: HTMLInputElement;
+        swapInAmountInput: HTMLInputElement;
+        swapOutAmountInput: HTMLInputElement;
+        swapInAddressInput: HTMLInputElement;
+        swapOutAddressInput: HTMLInputElement;
+        swapInSymbol: HTMLInputElement;
+        swapOutSymbol: HTMLInputElement;
+        walletAddress: HTMLInputElement;
+        amountUSD: HTMLInputElement;
+        slippageInput: HTMLInputElement;
       }
 
       const amountInUSD = parseFloat(amountUSD.value)
       const swapInAmountVal = new BigNumber(swapInAmountInput.value)
+      const swapOutAmountVal = swapOutAmountInput.value.split(',').map(
+        item => new BigNumber(item)
+      )
       const swapInAddressVal = swapInAddressInput.value
       const swapOutAddressVal = swapOutAddressInput.value
+      const slippageVal = slippageInput.value
+
+      const slippageExp = new BigNumber(10).pow(new BigNumber(2 + (slippageVal.split('.')[1]?.length || 0)))
+      const slippageBase = slippageExp.sub(new BigNumber(slippageVal.replace('.', '')))
 
       try {
         switch (category.value) {
@@ -656,6 +726,7 @@ const Form = ({
             crpPool.joinswapExternAmountIn(
               swapInAddressVal,
               swapInAmountVal,
+              swapOutAmountVal[0].mul(slippageBase).div(slippageExp),
               walletAddress.value,
               investCallback(swapOutSymbol.value, amountInUSD)
             )
@@ -668,18 +739,32 @@ const Form = ({
               crpPool.exitswapPoolAmountIn(
                 swapOutAddressVal,
                 swapInAmountVal,
+                swapOutAmountVal[0].mul(slippageBase).div(slippageExp),
                 walletAddress.value,
                 withdrawCallback(swapInSymbol.value, -1 * amountInUSD)
               )
               return
             }
 
-            crpPool.exitPool(
-              swapInAmountVal,
-              Array(parseInt(tokensLength.value)).fill(new BigNumber(0)),
-              walletAddress.value,
-              withdrawCallback(swapInSymbol.value, -1 * amountInUSD)
-            )
+            corePool.currentTokens()
+              .then(tokens => {
+                const swapOutAmounts = []
+
+                for (let i = 0; i < tokens.length; i++) {
+                  swapOutAmounts.push(
+                    swapOutAmountVal[tokenAddress2Index[tokens[i]]]
+                      .mul(slippageBase)
+                      .div(slippageExp)
+                  )
+                }
+
+                crpPool.exitPool(
+                  swapInAmountVal,
+                  swapOutAmounts,
+                  walletAddress.value,
+                  withdrawCallback(swapInSymbol.value, -1 * amountInUSD)
+                )
+              })
             return
 
           case 'Swap':
@@ -702,6 +787,7 @@ const Form = ({
               swapInAddressVal,
               swapInAmountVal,
               swapOutAddressVal,
+              swapOutAmountVal[0].mul(slippageBase).div(slippageExp),
               walletAddress.value,
               swapCallback(swapInSymbol.value, swapOutSymbol.value)
             )
@@ -712,19 +798,20 @@ const Form = ({
       } catch (error) {
         ToastError('Could not connect with the Blockchain!')
       }
-    }, [])
+    }, [tokenAddress2Index])
 
   return (
     <S.FormContainer onSubmit={submitAction}>
       <input type="hidden" name="approved" value={Number(isApproved[tokenInIndex] || 0)} />
       <input type="hidden" name="category" value={title} />
       <input type="hidden" name="swapInAmountInput" value={swapInAmount.toString()} />
+      <input type="hidden" name="swapOutAmountInput" value={swapOutAmount.toString()} />
       <input type="hidden" name="swapInAddressInput" value={swapInAddress} />
       <input type="hidden" name="swapOutAddressInput" value={swapOutAddress} />
       <input type="hidden" name="swapInSymbol" value={infoAHYPE[tokenInIndex]?.symbol || ''} />
       <input type="hidden" name="swapOutSymbol" value={infoAHYPE[tokenOutIndex]?.symbol || ''} />
       <input type="hidden" name="walletAddress" value={userWalletAddress} />
-      <input type="hidden" name="tokensLength" value={infoAHYPE.length - 1} />
+      <input type="hidden" name="slippageInput" value="0.5" />
       <input type="hidden" name="amountUSD" value={
         title === "Invest"
           ? Big((swapOutAmount[0] || 0).toString())
@@ -744,10 +831,25 @@ const Form = ({
             )
             .toString()
       } />
+
       <InputTokens
         clearInput={clearInput}
         inputRef={inputTokenRef}
         actionString={typeAction}
+        title={title}
+        decimals={infoAHYPE[tokenInIndex] ? infoAHYPE[tokenInIndex].decimals : new BigNumber(18)}
+        swapBalance={swapInBalance}
+        swapAmount={swapInAmount}
+        setSwapAmount={setSwapInAmount}
+        // Text Input
+        disabled={
+          userWalletAddress.length === 0
+            ? "Please connect your wallet by clicking the button below"
+            : chainId !== poolChain.chainId
+              ? `Please change to the ${poolChain.chainName} by clicking the button below`
+              : ""
+        }
+        // Select Input
         poolTokens={
           title === 'Withdraw'
             ? [infoAHYPE[infoAHYPE.length - 1]]
@@ -755,97 +857,60 @@ const Form = ({
               .slice(0, -1)
               .filter((token: { address: string }) => token.address !== swapOutAddress)
         }
-        title={title}
-        decimals={infoAHYPE[tokenInIndex] ? infoAHYPE[tokenInIndex].decimals : new BigNumber(18)}
-        swapInBalance={swapInBalance}
-        swapInAmount={swapInAmount}
-        swapInAddress={swapInAddress}
         tokenDetails={infoAHYPE[tokenInIndex]}
-        setSwapInAmount={setSwapInAmount}
-        setSwapOutAmount={setSwapOutAmount}
-        setSwapInAddress={setSwapInAddress}
+        setSwapAddress={setSwapInAddress}
       />
 
       {title === 'Swap' ?
-        <S.SwapButton type="button" title="Trade places for swap-in and swap-out token" onClick={() => {
-          matomoEvent('click-on-button', 'swap-token')
-          setSwapInAddress(swapOutAddress)
-          setSwapOutAddress(swapInAddress)
-        }} >
-          <img src="/assets/arrowDown.svg" alt="Trade places for swap-in and swap-out token" />
-          <img src="/assets/arrowDown.svg" alt="" />
-        </S.SwapButton>
+        <Tippy content="Trade places for swap-in and swap-out token">
+          <S.SwapButton type="button" onClick={() => {
+            matomoEvent('click-on-button', 'swap-token')
+            setSwapInAddress(swapOutAddress)
+            setSwapOutAddress(swapInAddress)
+          }} >
+            <img src="/assets/arrowDown.svg" alt="" />
+            <img src="/assets/arrowDown.svg" alt="" />
+          </S.SwapButton>
+        </Tippy>
         :
         <img src="/assets/arrowDown.svg" alt="" style={{ margin: '12px 0' }} />
       }
-      
-      {title === 'Withdraw' ? (
-        typeWithdrawChecked === 'Best_value' ?
+
+      {title === 'Withdraw' && typeWithdrawChecked === 'Best_value' ? (
+        <InputBestValue
+          poolTokenDetails={infoAHYPE
+            .slice(0, -1)
+            .filter((token: { address: string }) => token.address !== swapInAddress)}
+          infoAHYPE={infoAHYPE}
+          swapOutAmount={swapOutAmount}
+          swapOutBalance={swapOutBalance}
+          setPriceInDollarOnWithdraw={setPriceInDollarOnWithdraw}
+        />
+      ) : (
         <>
-          <InputBestValue
-            poolTokenDetails={infoAHYPE
-              .slice(0, -1)
-              .filter((token: { address: string }) => token.address !== swapInAddress)}
-            infoAHYPE={infoAHYPE}
-            swapOutAmount={swapOutAmount}
-            swapOutBalance={swapOutBalance}
-            setPriceInDollarOnWithdraw={setPriceInDollarOnWithdraw}
-          />
-          <S.ExchangeRate>
-            <S.SpanLight>Withdrawal fee:</S.SpanLight>
-            <S.SpanLight>{fees.exit}%</S.SpanLight>
-          </S.ExchangeRate>
-        </>
-          :
-          <>
-            <InputDefault
-              decimals={infoAHYPE[tokenAddress2Index[swapOutAddress]]?.decimals || new BigNumber(0)}
-              poolTokens={infoAHYPE
-                .slice(0, -1)
-                .filter((token: { address: string }) => token.address !== swapInAddress)}
-              tokenDetails={infoAHYPE[tokenOutIndex]}
-              isMax={null}
-              swapOutAmount={swapOutAmount[0]}
-              swapOutBalance={swapOutBalance[0]}
-              swapInAddress={swapInAddress}
-              setSwapOutAddress={setSwapOutAddress}
-            />
-            <S.ExchangeRate>
-              <S.SpanLight>Exchange rate:</S.SpanLight>
-              <S.SpanLight>
-                {swapOutPrice < new BigNumber(0)
-                  ? '...'
-                  : `1 ${infoAHYPE[tokenInIndex]?.symbol} = ${BNtoDecimal(
-                    swapOutPrice,
-                    infoAHYPE[tokenOutIndex]?.decimals.toNumber()
-                  )} ${infoAHYPE[tokenOutIndex]?.symbol}`}
-              </S.SpanLight>
-            </S.ExchangeRate>
-            <S.ExchangeRate>
-              <S.SpanLight>Withdrawal fee:</S.SpanLight>
-              <S.SpanLight>{fees.exit}%</S.SpanLight>
-            </S.ExchangeRate>
-          </>
-        ) : (
-        <>
-          <InputDefault
-            decimals={infoAHYPE[tokenAddress2Index[swapOutAddress]]?.decimals || new BigNumber(-1)}
-            poolTokens={title === 'Invest'
-              ? [infoAHYPE[infoAHYPE.length - 1]]
-              : infoAHYPE
-                .slice(0, -1)
-                .filter((token: { address: string }) => token.address !== swapInAddress)}
+          <InputTokens
+            title="Output"
+            actionString="Swap to"
+            swapBalance={swapOutBalance[0]}
+            decimals={infoAHYPE[tokenAddress2Index[swapOutAddress]]?.decimals || new BigNumber(18)}
+            swapAmount={swapOutAmount[0]}
+            // Text Input
+            disabled="This is an estimation of how much you'll receive, it'll depend on the state of the blockchain when the order executes"
+            // Select Input
+            poolTokens={
+              title === 'Invest'
+                ? [infoAHYPE[infoAHYPE.length - 1]]
+                : infoAHYPE
+                  .slice(0, -1)
+                  .filter((token: { address: string }) => token.address !== swapInAddress)
+            }
             tokenDetails={infoAHYPE[tokenOutIndex]}
-            isMax={null}
-            swapOutAmount={swapOutAmount[0]}
-            swapOutBalance={swapOutBalance[0] || new BigNumber(-1)}
-            swapInAddress={swapInAddress}
-            setSwapOutAddress={setSwapOutAddress}
+            setSwapAddress={setSwapOutAddress}
           />
           <S.ExchangeRate>
             <S.SpanLight>Exchange rate:</S.SpanLight>
             <S.SpanLight>
-              {swapOutPrice.lt(new BigNumber(0))
+              {swapOutPrice.lt(new BigNumber(0)) || !infoAHYPE[tokenOutIndex]?.decimals
                 ? '...'
                 : `1 ${infoAHYPE[tokenInIndex]?.symbol} = ${BNtoDecimal(
                   swapOutPrice,
@@ -853,72 +918,74 @@ const Form = ({
                 )} ${infoAHYPE[tokenOutIndex]?.symbol}`}
             </S.SpanLight>
           </S.ExchangeRate>
-          <S.ExchangeRate>
-            <S.SpanLight>{title} fee:</S.SpanLight>
-            <S.SpanLight>{title === 'Invest' ? 0 : fees.swap}%</S.SpanLight>
-          </S.ExchangeRate>
         </>
       )}
-      {userWalletAddress ? (
+
+      <S.ExchangeRate>
+        <S.SpanLight>{title} fee:</S.SpanLight>
+        <S.SpanLight>{fees[title]}%</S.SpanLight>
+      </S.ExchangeRate>
+
+      {userWalletAddress.length === 0 ? (
         <Button
           className="btn-submit"
-          onClick={() => setTimeout(() => clearInput(), 3000)}
           backgroundPrimary
-          disabledNoEvent={swapInAmount.toString() === "0" && isApproved[tokenInIndex]}
           fullWidth
-          type="submit"
-          text={
-            isApproved[tokenInIndex] ?
-              swapInAmount.toString() !== '0' ?
-                title === "Withdraw" ?
-                  typeWithdrawChecked === "Best_value" ?
-                    `${title} ${'$' + priceInDollarOnWithdraw}`
+          type="button"
+          onClick={() => setIsModaWallet(true)}
+          text='Connect Wallet'
+        />
+      ) : (
+        chainId === poolChain.chainId ? (
+          <Button
+            className="btn-submit"
+            onClick={() => setTimeout(() => clearInput(), 3000)}
+            backgroundPrimary
+            disabledNoEvent={isApproved[tokenInIndex] && (swapInAmount.toString() === "0" || swapOutAmount[0].toString() === "0")}
+            fullWidth
+            type="submit"
+            text={
+              isApproved[tokenInIndex] ?
+                swapInAmount.toString() !== '0' ?
+                  title === "Withdraw" ?
+                    typeWithdrawChecked === "Best_value" ?
+                      `${title} ${'$' + priceInDollarOnWithdraw}`
+                    :
+                      `${title} ${'$' + BNtoDecimal(
+                        Big((swapOutAmount[0] || 0).toString())
+                          .mul(Big(priceDollar(swapOutAddress, infoAHYPE)))
+                          .div(Big(10).pow(18)),
+                        18,
+                        2,
+                        2
+                      )}`
                   :
                     `${title} ${'$' + BNtoDecimal(
-                      Big((swapOutAmount[0] || 0).toString())
-                        .mul(Big(priceDollar(swapOutAddress, infoAHYPE)))
+                      Big((swapInAmount || 0).toString())
+                        .mul(Big(priceDollar(swapInAddress, infoAHYPE)))
                         .div(Big(10).pow(18)),
                       18,
                       2,
                       2
                     )}`
                 :
-                  `${title} ${'$' + BNtoDecimal(
-                    Big((swapInAmount || 0).toString())
-                      .mul(Big(priceDollar(swapInAddress, infoAHYPE)))
-                      .div(Big(10).pow(18)),
-                    18,
-                    2,
-                    2
-                  )}`
-              :
-                `${title}`
-            : 
-              'Approve'
-          }
-        />
-        ) : (
-        web3.currentProvider === null ?
-          <Button
-            className="btn-submit"
-            as='a'
-            backgroundPrimary
-            fullWidth
-            href="https://metamask.io/download.html"
-            target="_blank"
-            text='Install MetaMask'
+                  `${title}`
+              : 
+                'Approve'
+            }
           />
-          :
+        ) : (
           <Button
             className="btn-submit"
             backgroundPrimary
             fullWidth
             type="button"
-            onClick={() => setIsModaWallet(true)}
-            text='Connect Wallet'
+            onClick={() => changeChain(poolChain)}
+            text={`Change to ${poolChain.chainName}`}
           />
         )
-      }
+      )}
+
       <ModalWalletConnect
         modalOpen={isModalWallet}
         setModalOpen={setIsModaWallet}

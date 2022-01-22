@@ -1,15 +1,10 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import theme from '../../styles/theme'
 
-interface IWrapperProps {
-  pageHeim: boolean;
-}
-
-// eslint-disable-next-line prettier/prettier
-export const Wrapper = styled.menu<IWrapperProps>`
+export const Wrapper = styled.div`
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 
   margin: 0 auto;
   max-width: 1140px;
@@ -18,105 +13,112 @@ export const Wrapper = styled.menu<IWrapperProps>`
   position: relative;
   z-index: ${theme.layers.menu};
 
-  @media(max-width: 1200px ) {
+  @media (max-width: 1200px) {
     padding: 0 30px;
   }
 
-  @media(max-width: 960px ) {
-    display: flex;
-    justify-content: flex-end;
+  @media (max-width: 540px) {
+    height: 80px;
 
-    padding: 0;
-    margin-bottom: 3rem;
-    padding: 0 0 30px;
-    margin: 0 30px;
-  }
-  @media(max-width: 400px ) {
-    margin-inline: 15px;
+    padding: 0 16px;
   }
 `
 
 export const LogoWrapper = styled.div`
-  cursor: pointer;
-  img {
-    max-height: 40px;
-  }
-  @media (max-width: 960px) {
-    display: flex;
-    left: 0;
-    position: absolute;
-    /* left: 50%; */
-    /* transform: translateX(-50%); */
+  .logo-desktop {
     img {
-      position: relative;
-      max-width: 100%;
+      height: 40px;
+    }
+    @media (max-width: 960px) {
+      display: none;
     }
   }
-`
-
-export const IconWrapper = styled.div`
-  ${({ theme }) => css`
-    color: ${theme.colors.snow};
-    cursor: pointer;
-    width: 2.4rem;
-    height: 2.4rem;
-  `}
-`
-
-export const MenuGroup = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    flex-grow: 1;
-    justify-content: flex-end;
-    align-items: center;
-
-    > div {
-      margin-left: ${theme.spacings.space8};
+  .logo-ipad {
+    img {
+      width: 70px;
     }
-  `}
+    @media (min-width: 961px) {
+      display: none;
+    }
+    @media (max-width: 539px) {
+      display: none;
+    }
+  }
+
+  cursor: pointer;
 `
 
-export const MenuNav = styled.div`
-  ${({ theme }) => css`
-    @media (max-width: 960px) {
-      margin-left: ${theme.spacings.space24};
+export const Menu = styled.nav`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  max-width: 580px;
+  .logo-mobile {
+    width: 46px;
+    margin-right: -8px;
+    @media (min-width: 541px) {
+      display: none;
     }
-  `}
+  }
+
+  @media (max-width: 960px) {
+    min-width: 480px;
+  }
+  @media (max-width: 768px) {
+    min-width: 300px;
+  }
+  @media (max-width: 540px) {
+    min-width: 100%;
+  }
+  .connect-wallet {
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
 `
 
 export const MenuLink = styled.a`
-  ${({ theme }) => css`
-    position: relative;
-    color: ${theme.colors.snow};
-    font-size: ${theme.font.sizes.font16};
-    font-weight: ${theme.font.weight.light};
-    margin: 0.3rem ${theme.spacings.space24} 0;
-    text-decoration: none;
-    text-align: center;
+  color: ${theme.colors.snow};
+  font-size: ${theme.font.sizes.font16};
+  font-weight: ${theme.font.weight.light};
+  text-decoration: none;
+  text-align: center;
 
-    &:hover {
-      &::after {
-        content: '';
-        position: absolute;
-        display: block;
-        height: 0.3rem;
-        border-radius: 0.3rem;
-        background-color: ${theme.colors.cyan};
-        animation: hoverAnimation 0.2s forwards;
+  margin: 0.3rem ${theme.spacings.space24};
+  position: relative;
+
+  &:hover {
+    &::after {
+      content: '';
+      display: block;
+
+      height: 0.3rem;
+      border-radius: 0.3rem;
+      background-color: ${theme.colors.cyan};
+      margin-top: 12px;
+
+      position: absolute;
+      animation: hoverAnimation 0.2s forwards;
+    }
+
+    @keyframes hoverAnimation {
+      from {
+        width: 0;
+        left: 50%;
       }
-
-      @keyframes hoverAnimation {
-        from {
-          width: 0;
-          left: 50%;
-        }
-        to {
-          width: 100%;
-          left: 0;
-        }
+      to {
+        width: 100%;
+        left: 0;
       }
     }
-  `}
+  }
+  @media (max-width: 960px) {
+    margin: 0.3rem 0;
+  }
+  @media (max-width: 540px) {
+    font-size: ${theme.font.sizes.font14};
+  }
 `
 
 export const MenuLinkDisable = styled.a`
@@ -126,18 +128,20 @@ export const MenuLinkDisable = styled.a`
   text-decoration: none;
   text-align: center;
 
-  margin: 0.3rem ${theme.spacings.space24} 0;
+  margin: 0.3rem ${theme.spacings.space24};
   position: relative;
 
   cursor: not-allowed;
   &:hover {
     &::after {
       content: '';
-      text-align: left;
-      background-color: ${theme.colors.lightGray};
       display: block;
+
+      background-color: ${theme.colors.lightGray};
       height: 0.3rem;
-      border-radius: 0.15rem;
+      border-radius: 0.3rem;
+      margin-top: 12px;
+
       position: absolute;
       animation: hoverAnimation 0.3s forwards;
     }
@@ -152,87 +156,69 @@ export const MenuLinkDisable = styled.a`
       }
     }
   }
-`
-
-type MenuFullProps = {
-  isOpen: boolean
-}
-
-// eslint-disable-next-line prettier/prettier
-export const MenuFull = styled.nav<MenuFullProps>`
-  ${({ theme, isOpen }) => css`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background: black;
-    position: fixed;
-    z-index: ${theme.layers.menu};
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100vh;
-    overflow: hidden;
-    transition: opacity 0.3s ease-in-out;
-    opacity: ${isOpen ? 1 : 0};
-    pointer-events: ${isOpen ? 'all' : 'none'};
-
-    > svg {
-      position: absolute;
-      top: 0;
-      right: 0;
-      margin: ${theme.spacings.space8};
-      cursor: pointer;
-      width: 2.4rem;
-      height: 2.4rem;
-    }
-
-    ${MenuNav} {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex: 1;
-      flex-direction: column;
-    }
-
-    ${MenuLink} {
-      color: ${theme.colors.snow};
-      font-weight: ${theme.font.weight.light};
-      font-size: ${theme.font.sizes.font18};
-      margin-bottom: ${theme.spacings.space24};
-      transform: ${isOpen ? 'translateY(0)' : 'translateY(3rem)'};
-      transition: transform 0.3s ease-in-out;
-    }
-    ${MenuLinkDisable} {
-      color: ${theme.colors.lightGray};
-      font-weight: ${theme.font.weight.light};
-      font-size: ${theme.font.sizes.font18};
-      margin-bottom: ${theme.spacings.space24};
-      transform: ${isOpen ? 'translateY(0)' : 'translateY(3rem)'};
-      transition: transform 0.3s ease-in-out;
-    }
-  `}
-`
-
-export const MenuIconContainer = styled.div`
-  @media (min-width: 960px) {
-    display: none;
-  }
-`
-export const MenuDesktop = styled.div`
   @media (max-width: 960px) {
-    display: none;
+    margin: 0.3rem 0;
+  }
+  @media (max-width: 540px) {
+    font-size: ${theme.font.sizes.font14};
   }
 `
-//create a component to wrap close menu icon
-export const CloseMenuIcon = styled.div`
-  ${({ theme }) => css`
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: ${theme.spacings.space24};
-    cursor: pointer;
-    width: 2.4rem;
-    height: 2.4rem;
-  `}
+
+export const MenuBottom = styled.div`
+  background-color: ${theme.colors.darkPurple};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  position: fixed;
+  bottom: 0;
+
+  width: 100%;
+  height: 68px;
+  padding: 16px;
+
+  z-index: ${theme.layers.menu};
+  @media (min-width: 769px) {
+    display: none;
+  }
+
+  .button-mobile {
+    font-size: ${theme.font.sizes.font12};
+    max-width: 100%;
+    height: 36px;
+
+    img {
+      width: 16px;
+    }
+  }
+`
+
+export const KacyAmount = styled.div`
+  border: 1px solid ${theme.colors.snow};
+  border-radius: ${theme.border.radius};
+
+  display: flex;
+  align-items: center;
+
+  height: 36px;
+  padding: 6px;
+  max-width: 100%;
+  img {
+    width: 20px;
+  }
+`
+
+export const OptionsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+`
+
+export const ButtonOptions = styled.button`
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+
+  width: 32px;
+  height: 32px;
 `

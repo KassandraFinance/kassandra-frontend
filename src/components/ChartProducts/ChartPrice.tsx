@@ -21,7 +21,30 @@ interface IChartPriceProps {
   color: string;
 }
 
+const tooltipPosition = {
+  mobile: {
+    x: 20,
+    y: 96
+  },
+  desktop: {
+    x: 20,
+    y: 60
+  }
+}
+
 const ChartPrice = ({ data, color }: IChartPriceProps) => {
+  const [position, setPosition] = React.useState(tooltipPosition.desktop)
+
+  React.useEffect(() => {
+    const widthDevice = window.screen.width
+
+    if (widthDevice < 375) {
+      setPosition(tooltipPosition.mobile)
+    } else {
+      setPosition(tooltipPosition.desktop)
+    }
+  }, [window.screen.width])
+
   return (
     <ResponsiveContainer width="100%" height={360}>
       <AreaChart
@@ -70,7 +93,7 @@ const ChartPrice = ({ data, color }: IChartPriceProps) => {
             visibility: 'visible'
           }}
           cursor={{ stroke: color }}
-          position={{ x: 20, y: 60 }}
+          position={position}
           content={
             <TooltipCustomized
               chart="price"
