@@ -176,14 +176,14 @@ const StakeCard = ({
     const reservesKacyAvax = await viewgetReserves(LPKacyAvax)
     const reservesDaiAvax = await viewgetReserves(LPDaiAvax)
 
-    const avaxInDollar = Big(reservesDaiAvax._reserve0).div(
-      Big(reservesDaiAvax._reserve1)
+    const avaxInDollar = Big(reservesDaiAvax._reserve1).div(
+      Big(reservesDaiAvax._reserve0)
     )
     const kacyInDollar = avaxInDollar.mul(
-      Big(reservesKacyAvax._reserve1).div(reservesKacyAvax._reserve0)
+      Big(reservesKacyAvax._reserve0).div(reservesKacyAvax._reserve1)
     )
 
-    const allAVAXDollar = Big(reservesKacyAvax._reserve1).mul(avaxInDollar)
+    const allAVAXDollar = Big(reservesKacyAvax._reserve0).mul(avaxInDollar)
     const supplyLPToken = await lpToken.totalSupply()
 
     if (supplyLPToken.toString() !== '0') {

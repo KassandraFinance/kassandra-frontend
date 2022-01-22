@@ -31,14 +31,6 @@ interface IDetailsProps {
   priceLPToken: IPriceLPToken;
 }
 
-const staked: any = {
-  0: 'KACY',
-  1: 'KACY',
-  2: 'KACY',
-  4: 'aHYPE',
-  5: 'KAP'
-}
-
 const Details = ({
   pid,
   hasExpired,

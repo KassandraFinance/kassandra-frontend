@@ -202,7 +202,7 @@ const YourStake = ({
           <p>
             {infoStaked.yourStake.lt(new BigNumber('0')) ||
             (pid === 5 && priceLPToken.priceLP.lt(0)) ||
-            (pid === 4 && priceLPToken.aHYPE.lt(0))
+            (pid === 88 && priceLPToken.aHYPE.lt(0))
               ? '...'
               : !stakeWithVotingPower
               ? BNtoDecimal(infoStaked.yourStake, 18)
