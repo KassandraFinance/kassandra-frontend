@@ -50,8 +50,10 @@ export const Top = styled.div`
   padding: 24px;
 
   p {
-    font-size: ${theme.font.sizes.font18};
     font-weight: ${theme.font.weight.bold};
+    @media (max-width: 430px) {
+      font-size: ${theme.font.sizes.font16};
+    }
   }
 `
 
@@ -78,6 +80,13 @@ export const Content = styled.div`
     font-weight: ${theme.font.weight.light};
 
     margin-bottom: 16px;
+
+    @media (max-width: 430px) {
+      font-size: 14px;
+    }
+    @media (max-width: 390px) {
+      font-size: 12px;
+    }
   }
 
   span {
@@ -88,6 +97,7 @@ export const Content = styled.div`
   }
   ${ButtonStyle.Wrapper} {
     margin-top: 24px;
+  }
 `
 
 export const ButtonContainer = styled.div`
