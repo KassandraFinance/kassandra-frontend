@@ -253,19 +253,19 @@ const YourStake = ({
                   )}
             </span>
           </S.Info>
-          <S.Info>
-            <span>Your daily KACY reward</span>
-            <span>
-              {infoStaked.yourDailyKacyReward.lt(new BigNumber(0))
-                ? '...'
-                : infoStaked.hasExpired
-                ? '0'
-                : BNtoDecimal(infoStaked.yourDailyKacyReward, 18, 2)}
-              /day
-            </span>
-          </S.Info>
         </>
       )}
+      <S.Info>
+        <span>Your daily KACY reward</span>
+        <span>
+          {infoStaked.yourDailyKacyReward.lt(new BigNumber(0))
+            ? '...'
+            : infoStaked.hasExpired
+            ? '0'
+            : BNtoDecimal(infoStaked.yourDailyKacyReward, 18, 2)}
+          /day
+        </span>
+      </S.Info>
     </>
   ) : null
 }
