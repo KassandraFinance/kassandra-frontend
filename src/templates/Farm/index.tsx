@@ -25,10 +25,10 @@ const StakeFarm = () => {
 
   const { userWalletAddress, chainId } = useSelector((state: RootStateOrAny) => state)
 
-  const chain = process.env.MASTER === '1' ? chains.avalanche : chains.fuji
+  const chain = true ? chains.avalanche : chains.fuji
 
   React.useEffect(() => {
-    trackCategoryPageView(['Stake', process.env.MASTER === '1' ? 'Avalanche' : 'Fuji'])
+    trackCategoryPageView(['Stake', true ? 'Avalanche' : 'Fuji'])
 
     setTimeout(() => {
       setLoading(false)
@@ -86,7 +86,7 @@ const StakeFarm = () => {
                       </S.StakeWithPowerVote>
                       <S.GridStaking>
                         <StakeCard
-                          pid={process.env.MASTER === '1' ? 2 : 0}
+                          pid={true ? 2 : 0}
                           symbol="kacy"
                           balanceOf={kacyStake.balance}
                           earned={kacyStake.earned}
@@ -98,7 +98,7 @@ const StakeFarm = () => {
                           stakeWithVotingPower={false}
                         />
                         <StakeCard
-                          pid={process.env.MASTER === '1' ? 3 : 1}
+                          pid={true ? 3 : 1}
                           symbol="kacy"
                           balanceOf={kacyStake.balance}
                           earned={kacyStake.earned}
@@ -110,7 +110,7 @@ const StakeFarm = () => {
                           stakeWithVotingPower={false}
                         />
                         <StakeCard
-                          pid={process.env.MASTER === '1' ? 4 : 2}
+                          pid={true ? 4 : 2}
                           symbol="kacy"
                           balanceOf={kacyStake.balance}
                           earned={kacyStake.earned}
