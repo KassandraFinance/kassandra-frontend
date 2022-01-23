@@ -60,8 +60,11 @@ const YourStake = ({
                   .mul('365')
                   .mul('100')
                   .mul(priceLPToken.kacy)
-                  .div(stakingTokenPrice)
-                  .div(Big(poolInfoResponse.depositedAmount.toString()))
+                  .div(
+                    stakingTokenPrice.mul(
+                      Big(poolInfoResponse.depositedAmount.toString())
+                    )
+                  )
                   .toFixed(0)
               )
             : new BigNumber(0)
@@ -113,8 +116,11 @@ const YourStake = ({
                 .mul('365')
                 .mul('100')
                 .mul(priceLPToken.kacy)
-                .div(stakingTokenPrice)
-                .div(Big(poolInfoResponse.depositedAmount.toString()))
+                .div(
+                  stakingTokenPrice.mul(
+                    Big(poolInfoResponse.depositedAmount.toString())
+                  )
+                )
                 .toFixed(0)
             )
           : new BigNumber(0)

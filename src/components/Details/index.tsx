@@ -126,7 +126,7 @@ const Details = ({
               ? '0'
               : BNtoDecimal(
                   Big(infoStakeStatic.kacyRewards.toString())
-                    .mul(price)
+                    .mul(priceLPToken.kacy)
                     .div(Big(10).pow(18)),
                   6,
                   2,
