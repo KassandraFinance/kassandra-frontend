@@ -169,12 +169,25 @@ const YourStake = ({
 
           const unstakeResponse = await unstaking(pid, userWalletAddress)
 
+          const stakingTokenPrice =
+            pid === 5 ? priceLPToken.priceLP : priceLPToken.kacy
+
           const apr =
-            poolInfoResponse.depositedAmount.toString() !== '0'
-              ? kacyRewards
-                  .mul(new BigNumber(365))
-                  .mul(new BigNumber(100))
-                  .div(new BigNumber(poolInfoResponse.depositedAmount))
+            poolInfoResponse.depositedAmount.toString() !== '0' &&
+            priceLPToken.kacy.gt('-1') &&
+            stakingTokenPrice.gt('-1')
+              ? new BigNumber(
+                  Big(kacyRewards.toString())
+                    .mul('365')
+                    .mul('100')
+                    .mul(priceLPToken.kacy)
+                    .div(
+                      stakingTokenPrice.mul(
+                        Big(poolInfoResponse.depositedAmount.toString())
+                      )
+                    )
+                    .toFixed(0)
+                )
               : new BigNumber(0)
 
           const timestampNow = new Date().getTime()

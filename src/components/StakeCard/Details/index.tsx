@@ -6,13 +6,13 @@ import Big from 'big.js'
 import BigNumber from 'bn.js'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
-import { Kacy } from '../../constants/tokenAddresses'
+import { Kacy } from '../../../constants/tokenAddresses'
 
-import { BNtoDecimal } from '../../utils/numerals'
+import { BNtoDecimal } from '../../../utils/numerals'
 
 import * as S from './styles'
-import { registerToken } from '../../utils/registerToken'
-import { IPriceLPToken } from '../StakeCard'
+import { registerToken } from '../../../utils/registerToken'
+import { IPriceLPToken } from '..'
 
 interface IInfoStakeStaticProps {
   votingMultiplier: string;
