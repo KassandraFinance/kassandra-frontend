@@ -8,7 +8,7 @@ import substr from '../../utils/substr'
 
 import Button from '../Button'
 import ModalLogOut from '../ModalLogOut'
-// import DropdownInvest from '../DropdownInvest'
+import DropdownInvest from '../DropdownInvest'
 import ModalWalletConnect from '../ModalWalletConnect'
 import ModalSocialMediaMobile from '../ModalSocialMediaMobile'
 
@@ -64,8 +64,7 @@ const Header = () => {
               <Image src={kacy64} alt="Kassandra" />
             </a>
           </Link>
-          {/* <DropdownInvest /> */}
-          <S.MenuLinkDisable onClick={() => clickMatomoEvent('click-on-link', 'invest')} >Invest</S.MenuLinkDisable>
+          <DropdownInvest />
           <Link href="/farm" passHref>
             <S.MenuLink onClick={() => clickMatomoEvent('click-on-link', 'stake-farm')}>Stake/Farm</S.MenuLink>
           </Link>
