@@ -49,7 +49,7 @@ const KacyOverView = () => {
       }, 5000)
       return () => clearInterval(interval)
     }
-  }, [])
+  }, [chainId])
 
   const date1 = new Date('2022-01-22T18:35:00.000Z')
 
