@@ -160,7 +160,7 @@ const StakeCard = ({
 
   const productCategories = [
     'Stake',
-    true ? 'Avalanche' : 'Fuji',
+    process.env.MASTER === '1' ? 'Avalanche' : 'Fuji',
     staked[pid] === 'KACY' ? 'VotingStake' : 'OtherStake'
   ]
 
