@@ -48,9 +48,7 @@ const KacyOverView = () => {
         getKacyInUsd()
       }, 5000)
       return () => clearInterval(interval)
-
     }
-
   }, [])
 
   const date1 = new Date('2022-01-22T18:35:00.000Z')
