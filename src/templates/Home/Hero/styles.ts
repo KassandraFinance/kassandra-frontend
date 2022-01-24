@@ -134,7 +134,7 @@ export const ButtonWrapper = styled.ul`
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 
-  width: 304px;
+  width: 312px;
   margin: 72px auto 0;
   @media (max-width: 420px) {
     text-align: center;

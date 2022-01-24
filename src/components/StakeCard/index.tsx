@@ -160,7 +160,7 @@ const StakeCard = ({
 
   const productCategories = [
     'Stake',
-    true ? 'Avalanche' : 'Fuji',
+    process.env.NEXT_PUBLIC_MASTER === '1' ? 'Avalanche' : 'Fuji',
     staked[pid] === 'KACY' ? 'VotingStake' : 'OtherStake'
   ]
 
@@ -176,14 +176,22 @@ const StakeCard = ({
     const reservesKacyAvax = await viewgetReserves(LPKacyAvax)
     const reservesDaiAvax = await viewgetReserves(LPDaiAvax)
 
-    const avaxInDollar = Big(reservesDaiAvax._reserve1).div(
-      Big(reservesDaiAvax._reserve0)
-    )
-    const kacyInDollar = avaxInDollar.mul(
-      Big(reservesKacyAvax._reserve0).div(reservesKacyAvax._reserve1)
-    )
+    let kacyReserve = reservesKacyAvax._reserve1
+    let avaxKacyReserve = reservesKacyAvax._reserve0
+    let DaiReserve = reservesDaiAvax._reserve1
+    let AvaxDaiReserve = reservesDaiAvax._reserve0
 
-    const allAVAXDollar = Big(reservesKacyAvax._reserve0).mul(avaxInDollar)
+    if (process.env.NEXT_PUBLIC_MASTER !== '1') {
+      kacyReserve = reservesKacyAvax._reserve0
+      avaxKacyReserve = reservesKacyAvax._reserve1
+      DaiReserve = reservesDaiAvax._reserve0
+      AvaxDaiReserve = reservesDaiAvax._reserve1
+    }
+
+    const avaxInDollar = Big(DaiReserve).div(Big(AvaxDaiReserve))
+    const kacyInDollar = avaxInDollar.mul(Big(avaxKacyReserve).div(kacyReserve))
+
+    const allAVAXDollar = Big(avaxKacyReserve).mul(avaxInDollar)
     const supplyLPToken = await lpToken.totalSupply()
 
     if (supplyLPToken.toString() !== '0') {
@@ -371,7 +379,7 @@ const StakeCard = ({
                         : ' days'}
                     </span>
                   </p>
-                  <Tippy content="Time your asset will remain locked after you request the withdraw.">
+                  <Tippy content="To redeem your assets you will have to first request a withdrawal and wait this amount of time to be able to redeem your assets. You will stop receiving rewards during this period and your voting power multiplier will be reduced to 1.">
                     <S.TooltipAPR>
                       <Image
                         src={infoGrayIcon}
