@@ -124,9 +124,9 @@ const useConnect = () => {
     const provider = await detectEthereumProvider()
 
     try {
-      if (await connectWalletConnect(true)) {
-        return
-      }
+      // if (await connectWalletConnect(true)) {
+      //   return
+      // }
       
       if (provider !== null) {
         // window.onbeforeunload = function() { return "Prevent reload" }

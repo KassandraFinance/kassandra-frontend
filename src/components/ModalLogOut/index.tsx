@@ -100,13 +100,13 @@ const ModalLogOut = ({
               </svg>
             </a>
           </S.ButtonContainer>
-          <Button
+          {/* <Button
             backgroundSecondary
             onClick={() => {
               handleDisconnected()
             }}
             text="Disconnect"
-          />
+          /> */}
         </S.Content>
       </S.ModalContainer>
     </>

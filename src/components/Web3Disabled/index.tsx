@@ -27,7 +27,7 @@ const Web3Disabled = ({ textButton, textHeader, bodyText, type }: IWeb3DisabledP
         setOpenWallet(true)
         break;
       case "changeChain":
-        changeChain(chains.fuji)
+        changeChain(true ? chains.avalanche : chains.fuji)
         break;
       default:
         break;

@@ -24,34 +24,30 @@ export const ModalContainer = styled.div<IModalContainerProps>`
   background-color: #372B3B;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 4px;
-  
-  
+
+
   position: fixed;
   bottom: 76px;
   right: 16px;
-  padding: 4px 8px;
+
   z-index: 20;
-  `
-
-export const SocialIcon = styled.a`
-  text-decoration: none;
-
-  display: flex;
-  padding: 6px 0;
-  .medium {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    display: block;
-  }
-  img {
-    width: 18px;
-  }
-
-  span {
+  button {
+    background-color: transparent;
+    border: none;
     color: ${theme.colors.snow};
-    font-weight: ${theme.font.weight.light};
     font-size: ${theme.font.sizes.font16};
+    font-weight: ${theme.font.weight.light};
+    text-decoration: none;
 
-    margin-left: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 8px;
+    outline: none;
+    img {
+      margin-right: 4px !important;
+      width: 18px;
+      padding: 2px;
+    }
   }
 `

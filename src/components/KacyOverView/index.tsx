@@ -41,14 +41,12 @@ const KacyOverView = () => {
   }
 
   React.useEffect(() => {
-    setKacyPrice(Big('0.7'))
-
-    // if (chainId === chains.fuji.chainId) {
-    //   handleLPtoUSD()
-    // }
+    if (chainId === chains.avalanche.chainId) {
+      handleLPtoUSD()
+    }
   }, [])
 
-  const date1 = new Date('2022-01-19T00:00:00.000Z')
+  const date1 = new Date('2022-01-22T18:00:00.000Z')
 
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -78,11 +76,13 @@ const KacyOverView = () => {
           </S.Values>
           <S.Values>
             <p>MARKET CAP</p>
-            <span>${BNtoDecimal(marketCap, 2, 100, 2)}</span>
+            <span>$0.00</span>
+            {/* <span>${BNtoDecimal(marketCap, 2, 100, 2)}</span> */}
           </S.Values>
           <S.Values>
             <p>CIRCULATING SUPPLY</p>
-            <span>{BNtoDecimal(circulatingSupply, 2, 100, 2)} KACY</span>
+            <span>0.00</span>
+            {/* <span>{BNtoDecimal(circulatingSupply, 2, 100, 2)} KACY</span> */}
           </S.Values>
           <S.Values>
             <p>TOTAL SUPPLY</p>
