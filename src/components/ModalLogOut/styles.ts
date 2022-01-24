@@ -51,6 +51,7 @@ export const Top = styled.div`
 
   p {
     font-weight: ${theme.font.weight.bold};
+    font-size: ${theme.font.sizes.font18};
     @media (max-width: 430px) {
       font-size: ${theme.font.sizes.font16};
     }

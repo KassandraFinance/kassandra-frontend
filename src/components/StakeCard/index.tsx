@@ -379,7 +379,7 @@ const StakeCard = ({
                         : ' days'}
                     </span>
                   </p>
-                  <Tippy content="Time your asset will remain locked after you request the withdraw.">
+                  <Tippy content="To redeem your assets you will have to first request a withdrawal and wait this amount of time to be able to redeem your assets. You will stop receiving rewards during this period and your voting power multiplier will be reduced to 1.">
                     <S.TooltipAPR>
                       <Image
                         src={infoGrayIcon}
