@@ -188,12 +188,8 @@ const StakeCard = ({
       AvaxDaiReserve = reservesDaiAvax._reserve1
     }
 
-    const avaxInDollar = Big(DaiReserve).div(
-      Big(AvaxDaiReserve)
-    )
-    const kacyInDollar = avaxInDollar.mul(
-      Big(avaxKacyReserve).div(kacyReserve)
-    )
+    const avaxInDollar = Big(DaiReserve).div(Big(AvaxDaiReserve))
+    const kacyInDollar = avaxInDollar.mul(Big(avaxKacyReserve).div(kacyReserve))
 
     const allAVAXDollar = Big(avaxKacyReserve).mul(avaxInDollar)
     const supplyLPToken = await lpToken.totalSupply()
