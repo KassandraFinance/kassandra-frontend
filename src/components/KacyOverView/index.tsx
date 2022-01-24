@@ -27,7 +27,7 @@ const KacyOverView = () => {
   const { chainId } = useSelector((state: RootStateOrAny) => state)
   const { viewgetReserves } = usePriceLP()
 
-  async function handleLPtoUSD() {
+  async function getKacyInUsd() {
     const reservesKacyAvax = await viewgetReserves(LPKacyAvax)
     const reservesDaiAvax = await viewgetReserves(LPDaiAvax)
 
@@ -42,8 +42,15 @@ const KacyOverView = () => {
 
   React.useEffect(() => {
     if (chainId === chains.avalanche.chainId) {
-      handleLPtoUSD()
+      getKacyInUsd()
+
+      const interval = setInterval(() => {
+        getKacyInUsd()
+      }, 5000)
+      return () => clearInterval(interval)
+
     }
+
   }, [])
 
   const date1 = new Date('2022-01-22T18:35:00.000Z')
