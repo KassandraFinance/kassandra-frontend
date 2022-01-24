@@ -54,15 +54,17 @@ const KacyOverView = () => {
   const date1 = new Date('2022-01-22T18:35:00.000Z')
 
   React.useEffect(() => {
-    const interval = setInterval(() => {
-      const secondsSinceInitialDate = (Date.now() - date1.getTime()) / 1000
-      if (Date.now() > date1.getTime()) {
-        setCirculatingSupply(
-          Big((300000 / (24 * 360 * 90)) * secondsSinceInitialDate + 600000)
-        )
-      }
-    }, 1000)
-    return () => clearInterval(interval)
+    if (chainId === chains.avalanche.chainId) {
+      const interval = setInterval(() => {
+        const secondsSinceInitialDate = (Date.now() - date1.getTime()) / 1000
+        if (Date.now() > date1.getTime()) {
+          setCirculatingSupply(
+            Big((300000 / (24 * 360 * 90)) * secondsSinceInitialDate + 600000)
+          )
+        }
+      }, 1000)
+      return () => clearInterval(interval)
+    }
   }, [])
 
   const marketCap = new Big(circulatingSupply).mul(kacyPrice)
