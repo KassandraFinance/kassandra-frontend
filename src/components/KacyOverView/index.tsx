@@ -65,7 +65,7 @@ const KacyOverView = () => {
       }, 1000)
       return () => clearInterval(interval)
     }
-  }, [])
+  }, [chainId])
 
   const marketCap = new Big(circulatingSupply).mul(kacyPrice)
 
