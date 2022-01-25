@@ -78,7 +78,7 @@ export const TypeWithdraw = styled.div`
   border-bottom: 2px solid rgba(255, 255, 255, 0.15);
 
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   gap: 16px;
 
   padding: ${theme.spacings.space24} ${theme.spacings.space40};

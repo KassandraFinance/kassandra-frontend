@@ -71,6 +71,39 @@ const useCRPContract = (address: string) => {
       )
     }
 
+    /* CALL */
+
+    const tryJoinswapExternAmountIn = (
+      tokenIn: string,
+      tokenAmountIn: BigNumber,
+      minPoolAmountOut: BigNumber,
+      walletAddress: string
+    ) => {
+      return contract.methods.joinswapExternAmountIn(tokenIn, tokenAmountIn, minPoolAmountOut).call(
+        { from: walletAddress }
+      )
+    }
+
+    const tryExitPool = (
+      poolAmountIn: BigNumber,
+      minAmountsOut: Array<BigNumber>,
+      walletAddress: string
+    ) => {
+      return contract.methods.exitPool(poolAmountIn, minAmountsOut).call(
+        { from: walletAddress }
+      )
+    }
+
+    const tryExitswapPoolAmountIn = (
+      tokenOut: string,
+      poolAmountIn: BigNumber,
+      minAmountOut: BigNumber,
+      walletAddress: string
+    ) => {
+      return contract.methods.exitswapPoolAmountIn(tokenOut, poolAmountIn, minAmountOut).call(
+        { from: walletAddress }
+      )
+    }
 
     return {
       events,
@@ -78,6 +111,10 @@ const useCRPContract = (address: string) => {
       exitPool,
       exitswapPoolAmountIn,
       joinswapExternAmountIn,
+
+      tryJoinswapExternAmountIn,
+      tryExitPool,
+      tryExitswapPoolAmountIn,
     }
   }, [contract])
 }

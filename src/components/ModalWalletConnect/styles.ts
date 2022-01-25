@@ -113,8 +113,13 @@ export const WrapperIconsBackGround = styled.button`
     filter: grayscale(1);
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     background: linear-gradient(0deg, #ffbf00 -0.02%, #e843c4 99.99%);
+  }
+
+  &:focus {
+    outline: none;
   }
 `
 

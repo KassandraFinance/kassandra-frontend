@@ -137,7 +137,7 @@ const HeimOperations = ({
                   }}
                   checked={typeWithdrawChecked === 'Best_value'}
                 />
-                <span>Best value</span>
+                <span>All assets</span>
               </label>
             </S.TypeRadio>
           </S.TypeWithdraw>

@@ -78,7 +78,7 @@ export const chains: { [key: string]: ChainDetails } = {
   }
 }
 
-export const products: { [key: string]: ProductDetails } = {
+export const products: { [key: string]: ProductDetails } = process.env.NEXT_PUBLIC_MASTER === '1' ? {} : {
   ahype: {
     sipAddress: '0xE34A2935B04e9c879f5bDd022b97D7Cf2F1Dde1d',
     coreAddress: '0xFCfB171A8a4666bc53Eac2d91Cb0b5203DDa63cD',
