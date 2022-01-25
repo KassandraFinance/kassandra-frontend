@@ -18,11 +18,6 @@ import logoKassandra from '../../../public/assets/new-kassandra-logo-header.svg'
 
 import * as S from './styles'
 
-// eslint-disable-next-line prettier/prettier
-declare let window: {
-  ethereum: any,
-}
-
 export type MenuProps = {
   username?: string
 }
@@ -31,6 +26,7 @@ const Header = () => {
   const [isModalWallet, setIsModalWallet] = React.useState<boolean>(false)
   const [isModalLogout, setIsModalLogout] = React.useState<boolean>(false)
   const [isModalLanguages, setIsModalLanguages] = React.useState<boolean>(false)
+  // eslint-disable-next-line prettier/prettier
   const [isModalSocialMedia, setIsModalSocialMedia] = React.useState<boolean>(false)
 
   const { trackEvent } = useMatomo()
@@ -64,7 +60,15 @@ const Header = () => {
               <Image src={kacy64} alt="Kassandra" />
             </a>
           </Link>
-          <DropdownInvest />
+          {process.env.NEXT_PUBLIC_MASTER === '1' ? (
+            <S.MenuLinkDisable
+              onClick={() => clickMatomoEvent('click-on-link', 'invest')}
+            >
+              Invest
+            </S.MenuLinkDisable>
+          ) : (
+            <DropdownInvest />
+          )}
           <Link href="/farm" passHref>
             <S.MenuLink onClick={() => clickMatomoEvent('click-on-link', 'stake-farm')}>Stake/Farm</S.MenuLink>
           </Link>
