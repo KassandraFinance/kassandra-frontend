@@ -107,8 +107,10 @@ const ModalUnstaking = ({
   }, [modalOpen])
 
   React.useEffect(() => {
-    setMultiplier(0)
-    handleKacyAmount(new BigNumber(0))
+    if (modalOpen) {
+      setMultiplier(0)
+      handleKacyAmount(new BigNumber(0))
+    }
   }, [modalOpen])
 
   const withdrawCallback = React.useCallback((): TransactionCallback => {
