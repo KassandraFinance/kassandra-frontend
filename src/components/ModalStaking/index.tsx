@@ -79,7 +79,7 @@ const ModalStaking = ({
       inputRef.current.value = BNtoDecimal(kacyAmount, 18).replace(/\u00A0/g, '')
     }
 
-    matomoEvent('click-value-btn', percentage.toString())
+    matomoEvent('click-value-btn', `${percentage.toString()}`)
     setAmountStaking(kacyAmount)
     setIsAmount(true)
   }
@@ -119,8 +119,10 @@ const ModalStaking = ({
   }, [modalOpen])
 
   React.useEffect(() => {
-    setMultiplier(0)
-    handleKacyAmount(new BigNumber(0))
+    if (modalOpen) {
+      setMultiplier(0)
+      handleKacyAmount(new BigNumber(0))
+    }
   }, [modalOpen])
 
   const stakeCallback = React.useCallback((): TransactionCallback => {
