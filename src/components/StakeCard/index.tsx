@@ -579,10 +579,11 @@ const StakeCard = ({
         modalOpen={isModalRequestUnstake}
         setModalOpen={setIsModalRequestUnstake}
         pid={pid}
-        withdrawDelay={withdrawDelay}
         votingMultiplier={infoStaked.votingMultiplier}
         yourStake={infoStaked.yourStake}
         symbol={symbol}
+        userWalletAddress={userWalletAddress}
+        stakedUntil={stakedUntil}
       />
       <ModalWalletConnect
         modalOpen={isModalWallet}
