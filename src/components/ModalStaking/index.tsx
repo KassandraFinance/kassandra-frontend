@@ -119,8 +119,10 @@ const ModalStaking = ({
   }, [modalOpen])
 
   React.useEffect(() => {
-    setMultiplier(0)
-    handleKacyAmount(new BigNumber(0))
+    if (modalOpen) {
+      setMultiplier(0)
+      handleKacyAmount(new BigNumber(0))
+    }
   }, [modalOpen])
 
   const stakeCallback = React.useCallback((): TransactionCallback => {
