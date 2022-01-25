@@ -6,11 +6,13 @@ import Big from 'big.js'
 import BigNumber from 'bn.js'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
-import { BNtoDecimal } from '../../utils/numerals'
+import { Kacy } from '../../../constants/tokenAddresses'
+
+import { BNtoDecimal } from '../../../utils/numerals'
 
 import * as S from './styles'
-import { registerToken } from '../../utils/registerToken'
-import { IPriceLPToken } from '../StakeCard'
+import { registerToken } from '../../../utils/registerToken'
+import { IPriceLPToken } from '..'
 
 interface IInfoStakeStaticProps {
   votingMultiplier: string;
@@ -29,14 +31,6 @@ interface IDetailsProps {
   decimals: string;
   symbol: string;
   priceLPToken: IPriceLPToken;
-}
-
-const staked: any = {
-  0: 'KACY',
-  1: 'KACY',
-  2: 'KACY',
-  4: 'aHYPE',
-  5: 'KAP'
 }
 
 const Details = ({
@@ -60,7 +54,7 @@ const Details = ({
       name
     })
   }
-  console.log(symbol)
+
   React.useEffect(() => {
     let interval: any
     ;(async () => {
@@ -78,7 +72,7 @@ const Details = ({
   let price
 
   switch (pid) {
-    case 4:
+    case 88:
       price = priceLPToken.aHYPE
       break
     case 5:
@@ -132,7 +126,7 @@ const Details = ({
               ? '0'
               : BNtoDecimal(
                   Big(infoStakeStatic.kacyRewards.toString())
-                    .mul(price)
+                    .mul(priceLPToken.kacy)
                     .div(Big(10).pow(18)),
                   6,
                   2,
@@ -164,7 +158,7 @@ const Details = ({
         {symbol === 'LP' && (
           <S.Link>
             <a
-              href="https://app.pangolin.exchange/#/add/AVAX/0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb"
+              href={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -176,7 +170,7 @@ const Details = ({
         {symbol === 'KACY' && (
           <S.Link>
             <a
-              href="https://app.pangolin.exchange/#/swap?outputCurrency=0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb"
+              href={`https://app.pangolin.exchange/#/swap?outputCurrency=${Kacy}`}
               target="_blank"
               rel="noopener noreferrer"
             >

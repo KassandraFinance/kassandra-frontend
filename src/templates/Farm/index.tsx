@@ -11,9 +11,9 @@ import Web3Disabled from '../../components/Web3Disabled'
 import VotingPower from '../../components/VotingPower'
 import StakeCard from '../../components/StakeCard'
 import Loading from '../../components/Loading'
+import Header from '../../components/Header'
 
 import ComingSoon from './ComingSoon'
-import Header from '../../components/Header'
 
 import * as S from './styles'
 
@@ -25,8 +25,10 @@ const StakeFarm = () => {
 
   const { userWalletAddress, chainId } = useSelector((state: RootStateOrAny) => state)
 
+  const chain = process.env.NEXT_PUBLIC_MASTER === '1' ? chains.avalanche : chains.fuji
+
   React.useEffect(() => {
-    trackCategoryPageView(['Stake', 'Fuji'])
+    trackCategoryPageView(['Stake', process.env.NEXT_PUBLIC_MASTER === '1' ? 'Avalanche' : 'Fuji'])
 
     setTimeout(() => {
       setLoading(false)
@@ -38,18 +40,17 @@ const StakeFarm = () => {
       <Header />
       {loading
         ? (
-          <h1
-            style={{
-              height: '90vh',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
+          <div style={{ 
+            height: 'calc(100vh - 140px)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
             }}
           >
-            <Loading />
-          </h1>
-        ) : (
-          userWalletAddress.length === 0 && chainId !== chains.fuji.chainId
+            <Loading /> 
+          </div>
+        )  : (
+          userWalletAddress.length === 0 && chainId !== chain.chainId
             ? (
               <Web3Disabled
                 textButton="Connect Wallet"
@@ -58,12 +59,12 @@ const StakeFarm = () => {
                 type="connect"
               />
             ) : (
-              chainId !== chains.fuji.chainId
+              chainId !== chain.chainId
                 ? (
                   <Web3Disabled
-                    textButton={`Connect to ${chains.fuji.chainName}`}
+                    textButton={`Connect to ${chain.chainName}`}
                     textHeader="Your wallet is set to the wrong network."
-                    bodyText={`Please switch to the ${chains.fuji.chainName} network to have access to all our staking pools`}
+                    bodyText={`Please switch to the ${chain.chainName} network to have access to all our staking pools`}
                     type="changeChain"
                   />
                 ) : (
@@ -85,7 +86,7 @@ const StakeFarm = () => {
                       </S.StakeWithPowerVote>
                       <S.GridStaking>
                         <StakeCard
-                          pid={0}
+                          pid={process.env.NEXT_PUBLIC_MASTER === '1' ? 2 : 0}
                           symbol="kacy"
                           balanceOf={kacyStake.balance}
                           earned={kacyStake.earned}
@@ -97,7 +98,7 @@ const StakeFarm = () => {
                           stakeWithVotingPower={false}
                         />
                         <StakeCard
-                          pid={1}
+                          pid={process.env.NEXT_PUBLIC_MASTER === '1' ? 3 : 1}
                           symbol="kacy"
                           balanceOf={kacyStake.balance}
                           earned={kacyStake.earned}
@@ -109,7 +110,7 @@ const StakeFarm = () => {
                           stakeWithVotingPower={false}
                         />
                         <StakeCard
-                          pid={2}
+                          pid={process.env.NEXT_PUBLIC_MASTER === '1' ? 4 : 2}
                           symbol="kacy"
                           balanceOf={kacyStake.balance}
                           earned={kacyStake.earned}
@@ -129,18 +130,6 @@ const StakeFarm = () => {
                         <p>EARN KACY BY STAKING OTHER ASSETS</p>
                       </S.NameStake>
                       <S.GridStaking>
-                        <StakeCard
-                          pid={4}
-                          symbol="ahype"
-                          balanceOf={kacyStake.balance}
-                          earned={kacyStake.earned}
-                          getReward={kacyStake.getReward}
-                          withdrawable={kacyStake.withdrawable}
-                          poolInfo={kacyStake.poolInfo}
-                          unstaking={kacyStake.unstaking}
-                          stakedUntil={kacyStake.stakedUntil}
-                          stakeWithVotingPower={true}
-                        />
                         <StakeCard
                           pid={5}
                           symbol="lp"

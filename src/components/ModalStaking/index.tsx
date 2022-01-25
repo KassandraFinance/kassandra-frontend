@@ -7,6 +7,8 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { useSelector, RootStateOrAny } from 'react-redux'
 import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
 
+import { Kacy } from '../../constants/tokenAddresses'
+
 import { BNtoDecimal } from '../../utils/numerals'
 import waitTransaction, {
   MetamaskError,
@@ -77,7 +79,7 @@ const ModalStaking = ({
       inputRef.current.value = BNtoDecimal(kacyAmount, 18).replace(/\u00A0/g, '')
     }
 
-    matomoEvent('click-value-btn', percentage.toString())
+    matomoEvent('click-value-btn', `${percentage.toString()}`)
     setAmountStaking(kacyAmount)
     setIsAmount(true)
   }
@@ -117,8 +119,10 @@ const ModalStaking = ({
   }, [modalOpen])
 
   React.useEffect(() => {
-    setMultiplier(0)
-    handleKacyAmount(new BigNumber(0))
+    if (modalOpen) {
+      setMultiplier(0)
+      handleKacyAmount(new BigNumber(0))
+    }
   }, [modalOpen])
 
   const stakeCallback = React.useCallback((): TransactionCallback => {
@@ -262,7 +266,7 @@ const ModalStaking = ({
                 backgroundBlack
                 fullWidth
                 text="Get KACY"
-                href="https://app.pangolin.exchange/#/swap?outputCurrency=0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb"
+                href={`https://app.pangolin.exchange/#/swap?outputCurrency=${Kacy}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setModalOpen(false)}
@@ -279,7 +283,7 @@ const ModalStaking = ({
                 backgroundBlack
                 fullWidth
                 text="Get LP"
-                href="https://app.pangolin.exchange/#/add/AVAX/0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb"
+                href={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setModalOpen(false)}

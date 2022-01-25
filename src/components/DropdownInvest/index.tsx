@@ -19,6 +19,7 @@ const DropdownInvest = () => {
   return (
     <S.Dropdown>
       <S.DropButton
+        onTouchStartCapture={() => setIsDropdown(true)}
         onMouseOver={() => setIsDropdown(true)}
         onMouseOut={() => setIsDropdown(false)}
       >

@@ -5,9 +5,8 @@ import ClassProducts from './ClassProducts'
 import Hero from './Hero'
 import KassandraArchitecture from './KassandraArchitecture'
 import Products from './Products'
-import Token from './Token'
 
-import CountdownBanner from '../../components/CountdownBanner'
+// import CountdownBanner from '../../components/CountdownBanner'
 import KassandraTokenCard from '../../components/KassandraTokenCard'
 import SubscribeBanner from '../../components/SubscribeBanner'
 import RoadMapSlider from '../../components/RoadMapSlider'
@@ -16,7 +15,7 @@ import KacyOverView from '../../components/KacyOverView'
 
 import * as S from './styles'
 
-const poolPlatform = 'Fuji'
+// const poolPlatform = 'Fuji'
 
 const Home = () => {
   const { trackPageView } = useMatomo()
@@ -33,12 +32,11 @@ const Home = () => {
         <ScrollUpButton />
         <Products />
         <ClassProducts />
-        <Token poolPlatform={poolPlatform} />
         <KassandraTokenCard />
         <KassandraArchitecture />
         <RoadMapSlider />
         <KacyOverView />
-        <CountdownBanner />
+        {/* <CountdownBanner /> */}
         <SubscribeBanner />
       </S.Background>
     </>

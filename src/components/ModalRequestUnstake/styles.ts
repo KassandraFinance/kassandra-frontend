@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import theme from '../../styles/theme'
 
+import * as ButtonStyles from '../Button/styles'
+
 export const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.7);
 
@@ -22,10 +24,10 @@ export const ModalContainer = styled.div<IModalContainerProps>`
   display: ${props => (props.modalOpen ? 'block' : 'none')};
 
   background-color: rgba(31, 31, 31, 0.8);
-  border: 1.5px solid #FFBF00;
+  border: 1.5px solid #FFFFFF40;
   border-radius: 10px;
 
-  width: 500px;
+  width: 430px;
 
   position: fixed;
   top: 50%;
@@ -33,12 +35,14 @@ export const ModalContainer = styled.div<IModalContainerProps>`
   transform: translate(-50%, -50%);
 
   z-index: 21;
+  @media (max-width: 768px) {
+    width: 328px;
+  }
 `
 
 export const Top = styled.div`
-  background-color: rgba(20, 20, 20, 0.9);
-
-  border-bottom: 1px solid #ffbf00;
+  background-color: #1f1f1fb8;
+  border-bottom: 1px solid #ffffff40;
   border-radius: 10px 10px 0 0;
 
   display: flex;
@@ -46,6 +50,9 @@ export const Top = styled.div`
   align-items: center;
 
   padding: 24px;
+  @media (max-width: 768px) {
+    padding: 18px;
+  }
 `
 
 export const Attention = styled.div`
@@ -61,6 +68,7 @@ export const Attention = styled.div`
     font-size: ${theme.font.sizes.font18};
     font-weight: ${theme.font.weight.bold};
     margin-left: 16px;
+    letter-spacing: 0.8px;
   }
 `
 
@@ -76,18 +84,29 @@ export const Close = styled.button`
 `
 
 export const Content = styled.div`
+  background: #1f2937;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 
   padding: 24px 0;
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
   p {
     text-align: center;
     font-size: ${theme.font.sizes.font16};
+    line-height: 150%;
     font-weight: ${theme.font.weight.light};
-    max-width: 340px;
-    margin-bottom: 16px;
+    max-width: 350px;
+    margin: 0 0 16px;
+    letter-spacing: 0.8px;
+    @media (max-width: 768px) {
+      font-size: ${theme.font.sizes.font14};
+      line-height: 130%;
+    }
   }
 
   span {
@@ -105,21 +124,14 @@ export const Values = styled.div`
 export const ButtonContainer = styled.div`
   margin-top: 8px;
 
-  button {
-    background-color: transparent;
-    border: 1px solid ${theme.colors.cyan};
-    border-radius: ${theme.border.radius};
-    color: #fff;
+  ${ButtonStyles.Wrapper} {
     font-size: ${theme.font.sizes.font18};
-
-    width: 136px;
-    height: 40px;
-    margin: 0 20px;
-    transition-duration: 300ms;
-    cursor: pointer;
-    &:hover {
-      background-color: ${theme.colors.cyan};
-      color: ${theme.colors.darkPurple};
+    width: 183px;
+    height: 44px;
+    &:first-child {
+      margin-right: 12px;
     }
+    @media (max-width: 768px) {
+      width: 138px;
   }
 `

@@ -163,7 +163,6 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
 
   React.useEffect(() => {
     if (data) {
-      console.log(data)
       setPoolInfo(data.pool.underlying_assets)
       setPoolPrice(Number(data.pool.price_usd).toFixed(2))
       setPoolName(data.pool.name)

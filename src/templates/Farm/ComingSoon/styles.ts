@@ -7,7 +7,7 @@ export const BorderGradient = styled.div`
 
   position: relative;
   width: 295px;
-  max-height: 474px;
+  max-height: 521px;
   z-index: 1;
 
   @media (max-width: 420px) {
@@ -43,6 +43,7 @@ export const ComingSoon = styled.div`
 	
 	width: 100%;
 	height: 100%;
+  padding: 32px 0;
 	h2 {
 		font-size: ${theme.font.sizes.font24};
 		font-weight: ${theme.font.weight.normal};

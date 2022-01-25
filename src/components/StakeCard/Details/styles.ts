@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import theme from '../../styles/theme'
+import theme from '../../../styles/theme'
 
 export const Details = styled.div`
   font-weight: ${theme.font.weight.light} !important;

@@ -27,40 +27,45 @@ const KacyOverView = () => {
   const { chainId } = useSelector((state: RootStateOrAny) => state)
   const { viewgetReserves } = usePriceLP()
 
-  async function handleLPtoUSD() {
+  async function getKacyInUsd() {
     const reservesKacyAvax = await viewgetReserves(LPKacyAvax)
     const reservesDaiAvax = await viewgetReserves(LPDaiAvax)
 
-    const avaxInDollar = Big(reservesDaiAvax._reserve0).div(
-      Big(reservesDaiAvax._reserve1)
+    const avaxInDollar = Big(reservesDaiAvax._reserve1).div(
+      Big(reservesDaiAvax._reserve0)
     )
     const kacyInDollar = avaxInDollar.mul(
-      Big(reservesKacyAvax._reserve1).div(reservesKacyAvax._reserve0)
+      Big(reservesKacyAvax._reserve0).div(reservesKacyAvax._reserve1)
     )
     setKacyPrice(kacyInDollar)
   }
 
   React.useEffect(() => {
-    setKacyPrice(Big('0.7'))
+    if (chainId === chains.avalanche.chainId) {
+      getKacyInUsd()
 
-    // if (chainId === chains.fuji.chainId) {
-    //   handleLPtoUSD()
-    // }
-  }, [])
+      const interval = setInterval(() => {
+        getKacyInUsd()
+      }, 5000)
+      return () => clearInterval(interval)
+    }
+  }, [chainId])
 
-  const date1 = new Date('2022-01-19T00:00:00.000Z')
+  const date1 = new Date('2022-01-22T18:35:00.000Z')
 
   React.useEffect(() => {
-    const interval = setInterval(() => {
-      const secondsSinceInitialDate = (Date.now() - date1.getTime()) / 1000
-      if (Date.now() > date1.getTime()) {
-        setCirculatingSupply(
-          Big((400000 / (24 * 360 * 90)) * secondsSinceInitialDate + 600000)
-        )
-      }
-    }, 1000)
-    return () => clearInterval(interval)
-  }, [])
+    if (chainId === chains.avalanche.chainId) {
+      const interval = setInterval(() => {
+        const secondsSinceInitialDate = (Date.now() - date1.getTime()) / 1000
+        if (Date.now() > date1.getTime()) {
+          setCirculatingSupply(
+            Big((300000 / (24 * 3600 * 90)) * secondsSinceInitialDate + 600000)
+          )
+        }
+      }, 1000)
+      return () => clearInterval(interval)
+    }
+  }, [chainId])
 
   const marketCap = new Big(circulatingSupply).mul(kacyPrice)
 

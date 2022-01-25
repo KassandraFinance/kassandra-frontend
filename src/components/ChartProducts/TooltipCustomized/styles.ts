@@ -6,6 +6,10 @@ export const Content = styled.div`
     font-size: 14px;
     font-weight: 300;
     margin-top: 8px;
+    @media (max-width: 375px) {
+      font-size: 10px;
+      margin-top: 4px;
+    }
   }
 `
 
@@ -17,6 +21,10 @@ export const Price = styled.div`
     font-weight: 500;
     font-size: 'Rubik';
     margin-right: 8px;
+
+    @media (max-width: 375px) {
+      font-size: 24px;
+    }
   }
 
   span {

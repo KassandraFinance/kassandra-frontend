@@ -65,11 +65,11 @@ export const Label = styled.label<ILabelProps>`
 
   @media (max-width: 375px) {
     font-size: 13px;
-    padding: 10px 18px;
+    padding: 18px;
   }
   @media (max-width: 330px) {
     font-size: ${theme.font.sizes.font12};
-    padding: 8px 14px;
+    padding: 16px;
   }
 `
 
@@ -78,7 +78,7 @@ export const TypeWithdraw = styled.div`
   border-bottom: 2px solid rgba(255, 255, 255, 0.15);
 
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   gap: 16px;
 
   padding: ${theme.spacings.space24} ${theme.spacings.space40};

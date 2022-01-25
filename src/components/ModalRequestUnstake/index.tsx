@@ -14,26 +14,30 @@ import { Staking } from '../../constants/tokenAddresses'
 import useStakingContract from '../../hooks/useStakingContract'
 
 import * as S from './styles'
+import Button from '../Button'
 
 interface IModalRequestUnstakeProps {
   modalOpen: boolean;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   pid: number;
-  withdrawDelay: number;
   votingMultiplier: string;
   yourStake: BigNumber;
   symbol: string;
+  userWalletAddress: string;
+  stakedUntil: (pid: number, walletAddress: string) => Promise<string>;
 }
 
 const ModalRequestUnstake = ({
   modalOpen,
   setModalOpen,
   pid,
-  withdrawDelay,
   votingMultiplier,
   yourStake,
-  symbol
+  symbol,
+  userWalletAddress,
+  stakedUntil
 }: IModalRequestUnstakeProps) => {
+  const [dateWithdraw, setDateWithdraw] = React.useState<number>(0)
   const kacyStake = useStakingContract(Staking)
   const { trackEvent } = useMatomo()
 
@@ -43,6 +47,13 @@ const ModalRequestUnstake = ({
       action,
       name
     })
+  }
+
+  async function getWithdrawDelay() {
+    const unix_timestamp = await stakedUntil(pid, userWalletAddress)
+    const date = new Date(Number(unix_timestamp) * 1000).getTime()
+
+    setDateWithdraw(date)
   }
 
   const requestsUnstakeCallback = React.useCallback((): TransactionCallback => {
@@ -70,6 +81,12 @@ const ModalRequestUnstake = ({
     }
   }, [symbol])
 
+  React.useEffect(() => {
+    if (modalOpen) {
+      getWithdrawDelay()
+    }
+  }, [modalOpen])
+
   return (
     <>
       <S.Backdrop
@@ -88,10 +105,10 @@ const ModalRequestUnstake = ({
         </S.Top>
         <S.Content>
           <p>Withdrawal will be available on:</p>
-          <span>{dateRequestUnstake(withdrawDelay)}</span>
+          <span>{dateRequestUnstake(dateWithdraw)}</span>
           <p>
-            During the withdrawal delay period your voting power will be reduced
-            from:
+            During the withdrawal delay period you won’t receive any reward from
+            the pool and your voting power will be reduced from:
           </p>
           <S.Values>
             <span>
@@ -102,18 +119,23 @@ const ModalRequestUnstake = ({
           </S.Values>
           <p>Do you want to proceed?</p>
           <S.ButtonContainer>
-            <button type="button" onClick={() => setModalOpen(false)}>
-              No
-            </button>
-            <button
-              type="button"
+            <Button
+              as="button"
+              text="No"
+              backgroundSecondary
+              onClick={() => {
+                setModalOpen(false)
+              }}
+            />
+            <Button
+              as="button"
+              text="Yes"
+              backgroundSecondary
               onClick={() => {
                 kacyStake.unstake(pid, requestsUnstakeCallback())
                 setModalOpen(false)
               }}
-            >
-              Yes
-            </button>
+            />
           </S.ButtonContainer>
         </S.Content>
       </S.ModalContainer>

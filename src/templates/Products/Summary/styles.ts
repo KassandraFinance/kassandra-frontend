@@ -142,6 +142,14 @@ export const CopyContract = styled.div<ICopyContractProps>`
       margin-left: 40px;
     }
   }
+
+  @media(max-width: 960px) {
+    flex-direction: row;
+  }
+
+  @media(max-width: 530px) {
+    flex-direction: column;
+  }
 `
 
 export const Blockchain = styled.div`

@@ -46,7 +46,7 @@ export const Table = styled.table`
     background-color: rgba(255, 255, 255, 0.04);
     max-height: 100%;
   }
-  @media (max-width: 660px) {
+  @media (max-width: 768px) {
     display: block;
     overflow: auto;
   }
@@ -59,10 +59,15 @@ export const Tr = styled.tr`
   align-items: center;
   height: 38px;
   margin: 16px 0;
-  min-width: 550px;
-  @media (max-width: 660px) {
+  @media (max-width: 768px) {
+    min-width: 690px;
+
     height: 28px;
     gap: 16px;
+  }
+
+  @media (max-width: 640px) {
+    min-width: 580px;
   }
 `
 
@@ -115,6 +120,7 @@ export const Coin = styled.span<ICoinProps>`
   img {
     max-width: 24px;
     margin-right: 16px;
+    margin-left: 8px;
   }
 
   span {

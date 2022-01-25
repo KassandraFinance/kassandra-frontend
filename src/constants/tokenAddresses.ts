@@ -6,10 +6,27 @@ import partners from '../components/Products/Partner/list'
 export const HeimCRPPOOL = '0xE34A2935B04e9c879f5bDd022b97D7Cf2F1Dde1d'
 export const HeimCorePool = '0xFCfB171A8a4666bc53Eac2d91Cb0b5203DDa63cD'
 
-export const LPKacyAvax = '0xbaa8b0d2AA6415d5b4077C1FA06b3507577FBCd7'
-export const LPDaiAvax = '0xe64b1772a9e28E694FEc27Bc7901f88855252E9F'
-export const Kacy = '0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb'
-export const Staking = '0xe08eD1e470160AF3dF917be221a6aed6284c1D2F'
+export const LPKacyAvax = process.env.NEXT_PUBLIC_MASTER === '1' ?
+  '0x1938cE0E14dD71caab96F52dF3F49b1D1DAF8861'
+  :
+  '0xbaa8b0d2AA6415d5b4077C1FA06b3507577FBCd7'
+
+export const LPDaiAvax = process.env.NEXT_PUBLIC_MASTER === '1' ?
+  '0xbA09679Ab223C6bdaf44D45Ba2d7279959289AB0'
+  :
+  '0xe64b1772a9e28E694FEc27Bc7901f88855252E9F'
+
+
+export const Kacy = process.env.NEXT_PUBLIC_MASTER === '1' ?
+  '0xf32398dae246C5f672B52A54e9B413dFFcAe1A44' 
+  : 
+  '0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb'
+
+export const Staking = process.env.NEXT_PUBLIC_MASTER === '1' ?
+  '0xfddc1956d88a34fcB0671508Fa3d5aaC73b2a031'
+  :
+  '0xe08eD1e470160AF3dF917be221a6aed6284c1D2F'
+
 export const Timelock = ''
 export const GovernorAlpha = ''
 
@@ -61,7 +78,7 @@ export const chains: { [key: string]: ChainDetails } = {
   }
 }
 
-export const products: { [key: string]: ProductDetails } = {
+export const products: { [key: string]: ProductDetails } = process.env.NEXT_PUBLIC_MASTER === '1' ? {} : {
   ahype: {
     sipAddress: '0xE34A2935B04e9c879f5bDd022b97D7Cf2F1Dde1d',
     coreAddress: '0xFCfB171A8a4666bc53Eac2d91Cb0b5203DDa63cD',
