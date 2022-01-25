@@ -1,5 +1,18 @@
 import styled from 'styled-components'
 import theme from '../../../styles/theme'
+import Tippy from '@tippyjs/react'
+
+export const ErrorTippy = styled(Tippy)`
+  margin-bottom: -15px;
+  border: 1px solid #e8372c;
+  border-bottom: 3px solid #e8372c;
+  background: rgba(31, 31, 31, 0.82);
+
+  &[data-placement^='top'] > .tippy-arrow::before {
+    margin-bottom: -1px;
+    border-top-color: #e8372c;
+  }
+`
 
 // ========== FORM ==========
 export const FormContainer = styled.form`
@@ -111,75 +124,6 @@ export const SpanLight = styled.span`
   }
 `
 
-// ========== DEFAULT INPUT ALL ==========
-
-interface IInputProps {
-  bestValue?: boolean;
-}
-
-// eslint-disable-next-line prettier/prettier
-export const Input = styled.input<IInputProps>`
-  background-color: transparent;
-  border: none;
-  color: #fff;
-
-  font-weight: ${theme.font.weight.normal};
-  font-family: ${theme.font.family};
-
-  ${props =>
-    props.bestValue
-      ? `
-      line-height: ${theme.font.sizes.font14};
-      font-size: ${theme.font.sizes.font14};
-  `
-      : `
-      line-height: ${theme.font.sizes.font20};
-      font-size: ${theme.font.sizes.font20};
-  `}
-
-  text-align: right;
-  width: 100%;
-  margin: 8px 0;
-
-  outline: none;
-
-  @media (max-width: 380px) {
-    font-size: 22px;
-  }
-  @media (max-width: 350px) {
-    font-size: ${theme.font.sizes.font20};
-  }
-
-  &::placeholder {
-    color: #fff;
-  }
-
-  &[type='number']::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-  }
-  &[type='number'] {
-    -moz-appearance: textfield;
-    appearance: textfield;
-  }
-`
-
-export const Line = styled.div`
-  content: '';
-  display: block;
-  width: 190px;
-  height: 2px;
-  background-color: ${theme.colors.cyan};
-  box-shadow: 1px 1px 5px ${theme.colors.cyan};
-  bottom: 0;
-  position: absolute;
-  @media (max-width: 504px) {
-    width: 160px;
-  }
-  @media (max-width: 430px) {
-    width: 130px;
-  }
-`
-
 interface ISymbolProps {
   bestValue?: boolean;
 }
@@ -260,6 +204,58 @@ export const ButtonMax = styled.button<IButtonMax>`
     background: ${theme.colors.snow};
     border: 1px solid ${theme.colors.snow};
     color: #000;
+  }
+`
+
+// ========== DEFAULT INPUT ALL ==========
+
+interface IInputProps {
+  bestValue?: boolean;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const Input = styled.input<IInputProps>`
+  background-color: transparent;
+  border: none;
+  color: #fff;
+
+  font-weight: ${theme.font.weight.normal};
+  font-family: ${theme.font.family};
+
+  ${props =>
+    props.bestValue
+      ? `
+      line-height: ${theme.font.sizes.font14};
+      font-size: ${theme.font.sizes.font14};
+  `
+      : `
+      line-height: ${theme.font.sizes.font20};
+      font-size: ${theme.font.sizes.font20};
+  `}
+
+  text-align: right;
+  width: 100%;
+  margin: 8px 0;
+
+  outline: none;
+
+  @media (max-width: 380px) {
+    font-size: 22px;
+  }
+  @media (max-width: 350px) {
+    font-size: ${theme.font.sizes.font20};
+  }
+
+  &::placeholder {
+    color: #fff;
+  }
+
+  &[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+  &[type='number'] {
+    -moz-appearance: textfield;
+    appearance: textfield;
   }
 `
 
