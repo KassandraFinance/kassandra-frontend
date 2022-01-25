@@ -2,8 +2,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import Link from 'next/link'
-import useSWR from 'swr'
-import { request } from 'graphql-request'
+// import useSWR from 'swr'
+// import { request } from 'graphql-request'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
 import Image from 'next/image'
@@ -24,9 +24,9 @@ import {
   Staking,
   LPKacyAvax,
   LPDaiAvax,
-  Kacy,
-  SUBGRAPH_URL,
-  HeimCRPPOOL
+  Kacy
+  // SUBGRAPH_URL,
+  // HeimCRPPOOL
 } from '../../constants/tokenAddresses'
 
 import usePriceLP from '../../hooks/usePriceLP'
@@ -51,7 +51,7 @@ import * as S from './styles'
 import Button from '../Button'
 import { BNtoDecimal } from '../../utils/numerals'
 
-import { GET_INFO_AHYPE } from './graphql'
+// import { GET_INFO_AHYPE } from './graphql'
 export interface IPriceLPToken {
   priceLP: Big;
   kacy: Big;
@@ -88,6 +88,8 @@ interface IStakingProps {
 }
 
 const staked: any = {
+  0: 'KACY',
+  1: 'KACY',
   2: 'KACY',
   3: 'KACY',
   4: 'KACY',
