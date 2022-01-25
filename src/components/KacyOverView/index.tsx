@@ -59,7 +59,7 @@ const KacyOverView = () => {
         const secondsSinceInitialDate = (Date.now() - date1.getTime()) / 1000
         if (Date.now() > date1.getTime()) {
           setCirculatingSupply(
-            Big((300000 / (24 * 360 * 90)) * secondsSinceInitialDate + 600000)
+            Big((300000 / (24 * 3600 * 90)) * secondsSinceInitialDate + 600000)
           )
         }
       }, 1000)
