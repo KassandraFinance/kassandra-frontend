@@ -46,6 +46,7 @@ export default {
   spacings: {
     space8: '0.8rem',
     space16: '1.6rem',
+    space18: '1.8rem',
     space24: '2.4rem',
     space32: '3.2rem',
     space40: '4.0rem',

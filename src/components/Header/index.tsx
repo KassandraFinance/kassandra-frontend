@@ -76,11 +76,13 @@ const Header = () => {
               Stake/Farm
             </S.MenuLink>
           </Link>
-          <S.MenuLinkDisable
-            onClick={() => clickMatomoEvent('click-on-link', 'vote')}
-          >
-            Vote
-          </S.MenuLinkDisable>
+          <Link href="/vote" passHref>
+            <S.MenuLink
+              onClick={() => clickMatomoEvent('click-on-link', 'vote')}
+            >
+              Vote
+            </S.MenuLink>
+          </Link>
           <Link href="/about" passHref>
             <S.MenuLink
               onClick={() => clickMatomoEvent('click-on-link', 'about')}
