@@ -6,7 +6,7 @@ import Big from 'big.js'
 import BigNumber from 'bn.js'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
-import { Kacy } from '../../../constants/tokenAddresses'
+import { Kacy, chains } from '../../../constants/tokenAddresses'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 
@@ -147,7 +147,11 @@ const Details = ({
       <S.Info>
         <S.Link>
           <a
-            href={`https://testnet.snowtrace.io/address/${stakingToken}`}
+            href={
+              process.env.NEXT_PUBLIC_MASTER === '1'
+                ? `${chains.avalanche.blockExplorerUrls}${stakingToken}`
+                : `${chains.fuji.blockExplorerUrls}${stakingToken}`
+            }
             target="_blank"
             rel="noopener noreferrer"
           >
