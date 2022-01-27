@@ -5,9 +5,6 @@ import Image from 'next/image'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
-import TitleSection from '../../../components/TitleSection'
-
-import overview from '../../../../public/assets/iconGradient/overview.svg'
 import tooltip from '../../../../public/assets/icons/tooltip.svg'
 
 import * as S from './styles'
@@ -15,11 +12,6 @@ import * as S from './styles'
 export const Overview = () => {
   return (
     <S.Overview>
-      <TitleSection
-        image={overview}
-        title="Overview"
-        text="texto asdsad sadsadsa"
-      />
       <S.VotginCards>
         <S.VotingDataCard>
           <S.TextVoting>

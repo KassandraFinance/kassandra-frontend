@@ -1,17 +1,19 @@
 import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
-export const Overview = styled.section``
+export const Overview = styled.section`
+  margin-top: 4rem;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 10rem;
+`
 
 export const VotginCards = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: ${theme.spacings.space32};
 
-  margin-top: ${theme.spacings.space48};
-  margin-right: auto;
-  margin-bottom: 0;
-  margin-left: auto;
+  margin: 0 auto;
 
   @media (max-width: 960px) {
     gap: ${theme.spacings.space24};

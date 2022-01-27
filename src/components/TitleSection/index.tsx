@@ -7,7 +7,7 @@ interface ITitleSectionProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   image: any;
   title: string;
-  text: string;
+  text?: string;
 }
 
 export const TitleSection = ({ image, title, text }: ITitleSectionProps) => {
