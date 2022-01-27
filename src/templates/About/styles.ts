@@ -7,6 +7,16 @@ export const Background = styled.div`
   background-size: cover;
   background-position: center;
 `
+export const TeamBackground = styled.div`
+  background-image: url('assets/about-team-background.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 100%;
+
+  @media (max-width: 920px) {
+    background-image: none;
+  }
+`
+
 export const BackgroundSubscribe = styled.div`
   background: #2114261f;
   border: 1px solid #ffffff21;

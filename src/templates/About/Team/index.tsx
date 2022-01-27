@@ -7,14 +7,14 @@ import * as S from './styles'
 const Team = () => {
   return (
     <>
-      <S.Container>
+      <S.TitleContainer>
         <S.TitleAndIcon>
           <S.Icon>
             <img src="assets/team-icon.svg" alt="" />
           </S.Icon>
           <S.Title>Our Team</S.Title>
         </S.TitleAndIcon>
-      </S.Container>
+      </S.TitleContainer>
       <S.Divider />
       <S.Grid>
         <TeamCard
