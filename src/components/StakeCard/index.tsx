@@ -2,8 +2,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import Link from 'next/link'
-import useSWR from 'swr'
-import { request } from 'graphql-request'
+// import useSWR from 'swr'
+// import { request } from 'graphql-request'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
 import Image from 'next/image'
@@ -24,15 +24,15 @@ import {
   Staking,
   LPKacyAvax,
   LPDaiAvax,
-  SUBGRAPH_URL,
-  HeimCRPPOOL
+  Kacy
+  // SUBGRAPH_URL,
+  // HeimCRPPOOL
 } from '../../constants/tokenAddresses'
 
 import usePriceLP from '../../hooks/usePriceLP'
 import { PoolInfo } from '../../hooks/useStakingContract'
 import useERC20Contract, { ERC20 } from '../../hooks/useERC20Contract'
 
-import Details from '../Details'
 import ModalStaking from '../ModalStaking'
 import ModalUnstaking from '../ModalUnstaking'
 import ModalRequestUnstake from '../ModalRequestUnstake'
@@ -42,6 +42,7 @@ import ModalWalletConnect from '../ModalWalletConnect'
 import infoCyanIcon from '../../../public/assets/info-icon.svg'
 import infoGrayIcon from '../../../public/assets/info-gray.svg'
 
+import Details from './Details'
 import YourStake from './YourStake'
 import WithdrawDate from './WithdrawDate'
 import KacyEarned from './KacyEarned'
@@ -50,7 +51,7 @@ import * as S from './styles'
 import Button from '../Button'
 import { BNtoDecimal } from '../../utils/numerals'
 
-import { GET_INFO_AHYPE } from './graphql'
+// import { GET_INFO_AHYPE } from './graphql'
 export interface IPriceLPToken {
   priceLP: Big;
   kacy: Big;
@@ -90,7 +91,8 @@ const staked: any = {
   0: 'KACY',
   1: 'KACY',
   2: 'KACY',
-  4: 'aHYPE',
+  3: 'KACY',
+  4: 'KACY',
   5: 'LP'
 }
 
@@ -160,7 +162,7 @@ const StakeCard = ({
 
   const productCategories = [
     'Stake',
-    true ? 'Avalanche' : 'Fuji',
+    process.env.NEXT_PUBLIC_MASTER === '1' ? 'Avalanche' : 'Fuji',
     staked[pid] === 'KACY' ? 'VotingStake' : 'OtherStake'
   ]
 
@@ -176,14 +178,22 @@ const StakeCard = ({
     const reservesKacyAvax = await viewgetReserves(LPKacyAvax)
     const reservesDaiAvax = await viewgetReserves(LPDaiAvax)
 
-    const avaxInDollar = Big(reservesDaiAvax._reserve0).div(
-      Big(reservesDaiAvax._reserve1)
-    )
-    const kacyInDollar = avaxInDollar.mul(
-      Big(reservesKacyAvax._reserve1).div(reservesKacyAvax._reserve0)
-    )
+    let kacyReserve = reservesKacyAvax._reserve1
+    let avaxKacyReserve = reservesKacyAvax._reserve0
+    let DaiReserve = reservesDaiAvax._reserve1
+    let AvaxDaiReserve = reservesDaiAvax._reserve0
 
-    const allAVAXDollar = Big(reservesKacyAvax._reserve1).mul(avaxInDollar)
+    if (process.env.NEXT_PUBLIC_MASTER !== '1') {
+      kacyReserve = reservesKacyAvax._reserve0
+      avaxKacyReserve = reservesKacyAvax._reserve1
+      DaiReserve = reservesDaiAvax._reserve0
+      AvaxDaiReserve = reservesDaiAvax._reserve1
+    }
+
+    const avaxInDollar = Big(DaiReserve).div(Big(AvaxDaiReserve))
+    const kacyInDollar = avaxInDollar.mul(Big(avaxKacyReserve).div(kacyReserve))
+
+    const allAVAXDollar = Big(avaxKacyReserve).mul(avaxInDollar)
     const supplyLPToken = await lpToken.totalSupply()
 
     if (supplyLPToken.toString() !== '0') {
@@ -333,7 +343,7 @@ const StakeCard = ({
                   </Link>
                 ) : (
                   <a
-                    href="https://app.pangolin.exchange/#/add/AVAX/0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb"
+                    href={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -371,7 +381,7 @@ const StakeCard = ({
                         : ' days'}
                     </span>
                   </p>
-                  <Tippy content="Time your asset will remain locked after you request the withdraw.">
+                  <Tippy content="To redeem your assets you will have to first request a withdrawal and wait this amount of time to be able to redeem your assets. You will stop receiving rewards during this period and your voting power multiplier will be reduced to 1.">
                     <S.TooltipAPR>
                       <Image
                         src={infoGrayIcon}
@@ -571,10 +581,11 @@ const StakeCard = ({
         modalOpen={isModalRequestUnstake}
         setModalOpen={setIsModalRequestUnstake}
         pid={pid}
-        withdrawDelay={withdrawDelay}
         votingMultiplier={infoStaked.votingMultiplier}
         yourStake={infoStaked.yourStake}
         symbol={symbol}
+        userWalletAddress={userWalletAddress}
+        stakedUntil={stakedUntil}
       />
       <ModalWalletConnect
         modalOpen={isModalWallet}

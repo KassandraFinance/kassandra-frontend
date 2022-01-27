@@ -201,7 +201,7 @@ export const ButtonContainer = styled.div<IButtonContainerProps>`
   flex-direction: column;
   align-items: center;
 
-  margin: ${props => (props.stakeWithVotingPower ? '-8px' : '16px')} auto 0;
+  margin: 16px auto 0;
   width: 100%;
 `
 

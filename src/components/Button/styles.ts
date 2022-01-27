@@ -71,11 +71,6 @@ const wrapperModifiers = {
     cursor: not-allowed;
     filter: grayscale(150%);
     outline: none;
-
-    &:hover {
-      background: #343434;
-      color: #8b8b8b;
-    }
   `,
 
   backgroundPrimary: (theme: DefaultTheme) => css`
@@ -83,8 +78,15 @@ const wrapperModifiers = {
     background-position-x: 100%;
     background-size: 200%;
     transition: background-position-x 0.5s ease-out;
-    &:hover {
+
+    &:hover,
+    &:focus {
       background-position-x: 0%;
+    }
+
+    &:focus {
+      outline: 2px solid ${theme.colors.magenta};
+      outline-offset: 2px;
     }
   `,
 
@@ -92,8 +94,15 @@ const wrapperModifiers = {
     background: ${theme.colors.blue};
 
     transition: all 300ms;
-    &:hover {
+
+    &:hover,
+    &:focus {
       background: ${theme.colors.darkBlue};
+    }
+
+    &:focus {
+      outline: 2px solid ${theme.colors.darkBlue};
+      outline-offset: 2px;
     }
   `,
 
@@ -104,7 +113,9 @@ const wrapperModifiers = {
     padding: 12.5px;
 
     transition: all 300ms ease-in-out;
-    &:hover {
+
+    &:hover,
+    &:focus {
       color: ${theme.colors.darkPurple};
       background: ${theme.colors.cyan};
       svg {
@@ -112,6 +123,11 @@ const wrapperModifiers = {
           fill: ${theme.colors.darkPurple};
         }
       }
+    }
+
+    &:focus {
+      outline: 2px solid ${theme.colors.cyan};
+      outline-offset: 2px;
     }
   `
 }

@@ -15,11 +15,11 @@ const Products = () => {
         </span>
         <S.Divider />
         <S.Link
-          href="https://drive.google.com/file/d/12jxIMtBVqaY7bMbLmt52Lo0xDFUURZsb/view?usp=sharing"
+          href="https://kassandrafoundation.medium.com/how-kassandra-works-ac50630601f6"
           target="_blank"
           rel="noopener noreferral"
         >
-          <span>Read the Whitepaper</span>
+          <span>Learn to more</span>
           <svg
             width="17"
             height="17"
