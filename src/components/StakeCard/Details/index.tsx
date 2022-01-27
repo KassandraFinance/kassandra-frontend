@@ -149,8 +149,8 @@ const Details = ({
           <a
             href={
               process.env.NEXT_PUBLIC_MASTER === '1'
-                ? `${chains.avalanche.blockExplorerUrls}${stakingToken}`
-                : `${chains.fuji.blockExplorerUrls}${stakingToken}`
+                ? `${chains.avalanche.blockExplorerUrls[0]}${stakingToken}`
+                : `${chains.fuji.blockExplorerUrls[0]}${stakingToken}`
             }
             target="_blank"
             rel="noopener noreferrer"
