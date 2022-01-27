@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import theme from '../../styles/theme'
 
 export const BackgroundVote = styled.div`
   background: url('/assets/background-governance-page.svg');
@@ -21,5 +22,27 @@ export const VoteContent = styled.div`
 
   @media (max-width: 540px) {
     padding: 0 16px;
+  }
+`
+
+export const TitleAndLinkContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+export const LinkForum = styled.a`
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  color: ${theme.colors.gray};
+  line-height: ${theme.font.sizes.font16};
+  font-size: ${theme.font.sizes.font16};
+  text-decoration: none;
+
+  padding: 16px 24px;
+
+  &:hover {
+    border: 1px solid rgba(255, 255, 255, 0.5);
   }
 `
