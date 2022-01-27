@@ -76,7 +76,7 @@ const Header = () => {
               Stake/Farm
             </S.MenuLink>
           </Link>
-          <Link href="/vote" passHref>
+          <Link href="/gov" passHref>
             <S.MenuLink
               onClick={() => clickMatomoEvent('click-on-link', 'vote')}
             >

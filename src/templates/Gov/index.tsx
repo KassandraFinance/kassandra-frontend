@@ -1,19 +1,21 @@
 import React from 'react'
 
 import Header from '../../components/Header'
+import ProposalTable from '../../components/Governance/ProposalTable'
+import Overview from '../../components/Governance/Overview'
 
 import * as S from './styles'
-import { VoteIntro } from './VoteIntro'
 
-const Vote = () => {
+const Gov = () => {
   return (
     <S.BackgroundVote>
       <Header />
       <S.VoteContent>
-        <VoteIntro />
+        <Overview />
+        <ProposalTable />
       </S.VoteContent>
     </S.BackgroundVote>
   )
 }
 
-export default Vote
+export default Gov
