@@ -131,10 +131,10 @@ export const IntroHero = styled.div`
 
 export const ButtonWrapper = styled.ul`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto auto;
   gap: 16px;
 
-  width: 312px;
+  width: 314px;
   margin: 72px auto 0;
   @media (max-width: 420px) {
     text-align: center;

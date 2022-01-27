@@ -96,7 +96,7 @@ const AhypeDescription = () => {
         cryptocurrencies:
       </span>
       <ol>
-        <li>wAVAX, JOE, KACY, PNG, QI, YAK</li>
+        <li>wAVAX, JOE, KACY, PNG, QI, XAVA, CRA</li>
       </ol>
       <h2>Index Value</h2>
       <p>The value of the index is given by:</p>

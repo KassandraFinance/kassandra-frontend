@@ -48,12 +48,13 @@ const Hero = () => {
           </NextLink>
         </li>
         <li>
-          <Link href="/farm">
+          <Link href="/products/ahype">
             <Button
               backgroundPrimary
               size="large"
               as="a"
-              text="Stake & Farm"
+              text="Buy aHYPE"
+              icon={<img src="/assets/ahype.svg" alt="" />}
               onClick={() => clickMatomoEvent('click-to-cta', 'hero')}
             />
           </Link>
