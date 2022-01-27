@@ -23,7 +23,7 @@ export const KacyEarned = styled.div`
   span {
     font-size: ${theme.font.sizes.font12};
     b {
-      color: #c4c4c4;
+      color: #bdbdbd;
       font-weight: ${theme.font.weight.normal};
     }
   }

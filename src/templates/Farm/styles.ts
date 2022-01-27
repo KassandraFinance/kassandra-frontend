@@ -36,7 +36,7 @@ interface INameStakeProps {
 // eslint-disable-next-line prettier/prettier
 export const NameStake = styled.div<INameStakeProps>`
   p {
-    color: #c4c4c4;
+    color: #bdbdbd;
     font-size: ${theme.font.sizes.font18};
     text-transform: uppercase;
 

@@ -49,7 +49,7 @@ export const TextWrapper = styled.div`
   p {
     font-size: ${theme.font.sizes.font12};
     letter-spacing: 0.4rem;
-    color: #c4c4c4;
+    color: #bdbdbd;
     @media (max-width: 700px) {
       color: ${theme.colors.amber};
     }

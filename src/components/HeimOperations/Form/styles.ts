@@ -111,7 +111,7 @@ export const Span = styled.span<ISpanProps>`
 `
 
 export const SpanLight = styled.span`
-  color: ${theme.colors.gray};
+  color: ${theme.colors.grayDisabled};
   font-size: ${theme.font.sizes.font14};
   font-weight: ${theme.font.weight.light};
   letter-spacing: 0.3px;

@@ -40,7 +40,7 @@ export const Role = styled.h3`
   line-height: 110%;
   letter-spacing: 0.04rem;
   margin-bottom: 1.6rem;
-  color: #c4c4c4;
+  color: #bdbdbd;
 `
 
 export const CardDivider = styled.div`

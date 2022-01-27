@@ -120,12 +120,12 @@ export const StakeAndEarn = styled.div`
   margin: 4px 0;
   z-index: -4;
   p {
-    color: #c4c4c4;
+    color: #bdbdbd;
     font-size: ${theme.font.sizes.font14};
   }
 
   a {
-    color: #c4c4c4;
+    color: #bdbdbd;
     font-size: ${theme.font.sizes.font14};
     text-decoration: none;
 
@@ -148,7 +148,7 @@ export const InfoPool = styled.div`
   align-items: center;
 
   h3 {
-    color: #c4c4c4;
+    color: #bdbdbd;
     font-size: ${theme.font.sizes.font12};
     font-weight: ${theme.font.weight.normal};
     text-transform: uppercase;
@@ -166,7 +166,7 @@ export const InfoPool = styled.div`
     font-weight: ${theme.font.weight.medium};
   }
   span {
-    color: #c4c4c4;
+    color: #bdbdbd;
     font-size: ${theme.font.sizes.font14};
     text-transform: uppercase;
   }

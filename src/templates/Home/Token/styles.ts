@@ -127,7 +127,7 @@ export const TextWrapper = styled.div`
   p {
     text-align: left;
     font-size: ${theme.font.sizes.font12};
-    color: #c4c4c4;
+    color: #bdbdbd;
     letter-spacing: 0px;
 
     margin: 8px 0;

@@ -63,9 +63,9 @@ const wrapperModifiers = {
     }
   `,
 
-  disabledNoEvent: () => css`
-    background: #343434;
-    border: 1px solid #343434;
+  disabledNoEvent: (theme: DefaultTheme) => css`
+    background: ${theme.colors.darkGray};
+    border: 1px solid ${theme.colors.darkGray};
     color: #8b8b8b;
 
     cursor: not-allowed;
@@ -170,6 +170,6 @@ export const Wrapper = styled.button<WrapperProps>`
     ${!!backgroundPrimary && wrapperModifiers.backgroundPrimary(theme)};
     ${!!backgroundSecondary && wrapperModifiers.backgroundSecondary(theme)};
     ${!!backgroundBlack && wrapperModifiers.backgroundBlack(theme)};
-    ${disabledNoEvent && wrapperModifiers.disabledNoEvent()};
+    ${disabledNoEvent && wrapperModifiers.disabledNoEvent(theme)};
   `}
 `
