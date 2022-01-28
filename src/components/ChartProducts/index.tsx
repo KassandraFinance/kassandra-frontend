@@ -115,8 +115,17 @@ const ChartProducts = () => {
         }
       )
 
+      const newPrice = data?.pool.price_candles.map(
+        (item: { timestamp: number, close: string }) => {
+          return {
+            timestamp: item.timestamp,
+            close: Number(item.close)
+          }
+        }
+      )
+
       setTvl(newTVL)
-      setPrice(data?.pool.price_candles)
+      setPrice(newPrice)
       setAllocation(data?.pool.weights)
     }
   }, [data])
