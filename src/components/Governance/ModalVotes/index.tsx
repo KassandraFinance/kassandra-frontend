@@ -1,9 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
 
-import substr from '../../utils/substr'
+import substr from '../../../utils/substr'
 
-import Button from '../Button'
+import Button from '../../Button'
 
 import * as S from './styles'
 

@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
-import theme from '../../styles/theme'
+import styled from 'styled-components'
+import theme from '../../../styles/theme'
 
 export const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
