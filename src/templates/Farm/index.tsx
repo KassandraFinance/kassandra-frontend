@@ -142,6 +142,20 @@ const StakeFarm = () => {
                           stakedUntil={kacyStake.stakedUntil}
                           stakeWithVotingPower={true}
                         />
+                        {process.env.NEXT_PUBLIC_MASTER === '1' ?  
+                          <StakeCard
+                            pid={6}
+                            symbol="ahype"
+                            balanceOf={kacyStake.balance}
+                            earned={kacyStake.earned}
+                            getReward={kacyStake.getReward}
+                            withdrawable={kacyStake.withdrawable}
+                            poolInfo={kacyStake.poolInfo}
+                            unstaking={kacyStake.unstaking}
+                            stakedUntil={kacyStake.stakedUntil}
+                            stakeWithVotingPower={true}
+                          />
+                        : ''}
                         <ComingSoon />
                       </S.GridStaking>
                     </S.StakeFarm>
