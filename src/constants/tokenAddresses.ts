@@ -4,11 +4,11 @@ import { PartnerData } from '../components/Products/Partner'
 import partners from '../components/Products/Partner/list'
 
 export const HeimCRPPOOL = process.env.NEXT_PUBLIC_MASTER === '1' ?
-  ''
+  '0x38918142779e2CD1189cBd9e932723C968363D1E'
   :
   '0xE34A2935B04e9c879f5bDd022b97D7Cf2F1Dde1d'
 export const HeimCorePool = process.env.NEXT_PUBLIC_MASTER === '1' ?
-  ''
+  '0x17C1037B17b221f2f3b53f85cebD817C941f6bC5'
   :
   '0xFCfB171A8a4666bc53Eac2d91Cb0b5203DDa63cD'
 
@@ -89,8 +89,8 @@ export const chains: { [key: string]: ChainDetails } = {
 
 export const products: { [key: string]: ProductDetails } = process.env.NEXT_PUBLIC_MASTER === '1' ? {
   ahype: {
-    sipAddress: '',
-    coreAddress: '',
+    sipAddress: '0x38918142779e2CD1189cBd9e932723C968363D1E',
+    coreAddress: '0x17C1037B17b221f2f3b53f85cebD817C941f6bC5',
     platform: 'Avalanche',
     categories: ['Avalanche', 'Pool'],
     chain: chains.avalanche,
