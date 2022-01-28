@@ -17,7 +17,7 @@ import HeimOperations from '../../components/HeimOperations'
 import ScrollUpButton from '../../components/ScrollUpButton'
 import PoweredBy from './PoweredBy'
 
-import avaxSocial from '../../../public/assets/avalanche_social_index_logo.svg'
+import ahype from '../../../public/assets/ahype.svg'
 import infoGray from '../../../public/assets/info-gray.svg'
 
 import { GET_INFO_POOL } from './graphql'
@@ -103,7 +103,7 @@ const Products = ({ product }: Input) => {
     <S.BackgroundProducts boxShadow={false}>
       <Header />
       <S.Intro introMobile={true} introDesktop={false}>
-        <Image src={avaxSocial} alt="" width={75} height={75} />
+        <Image src={ahype} alt="" width={75} height={75} />
         <S.NameIndex>
           <S.NameAndSymbol introMobile={true}>
             <h1>{product.name}</h1>
@@ -116,7 +116,7 @@ const Products = ({ product }: Input) => {
       <S.Product>
         <S.ProductDetails>
           <S.Intro introMobile={false} introDesktop={true}>
-            <Image src={avaxSocial} alt="" width={75} height={75} />
+            <Image src={ahype} alt="" width={75} height={75} />
             <S.NameIndex>
               <S.NameAndSymbol>
                 <h1>{product.name}</h1>

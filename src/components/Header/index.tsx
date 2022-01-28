@@ -60,15 +60,7 @@ const Header = () => {
               <Image src={kacy64} alt="Kassandra" />
             </a>
           </Link>
-          {process.env.NEXT_PUBLIC_MASTER === '1' ? (
-            <S.MenuLinkDisable
-              onClick={() => clickMatomoEvent('click-on-link', 'invest')}
-            >
-              Invest
-            </S.MenuLinkDisable>
-          ) : (
-            <DropdownInvest />
-          )}
+          <DropdownInvest />
           <Link href="/farm" passHref>
             <S.MenuLink
               onClick={() => clickMatomoEvent('click-on-link', 'stake-farm')}

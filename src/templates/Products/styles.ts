@@ -39,7 +39,7 @@ export const Product = styled.section`
     flex-direction: column-reverse;
   }
   @media (max-width: 400px) {
-    padding: 0 15px;
+    padding: 0 16px;
   }
 `
 
@@ -52,11 +52,11 @@ export const ProductDetails = styled.div`
   }
 `
 interface IIntroProps {
-  introMobile: boolean
-  introDesktop: boolean
-
+  introMobile: boolean;
+  introDesktop: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const Intro = styled.div<IIntroProps>`
   display: grid;
   grid-template-columns: auto auto;
@@ -66,8 +66,8 @@ export const Intro = styled.div<IIntroProps>`
   max-width: 440px;
 
   ${props =>
-    props.introMobile
-      && `
+    props.introMobile &&
+    `
       display: none;
       h1 {
         font-size: 18px;
@@ -81,21 +81,19 @@ export const Intro = styled.div<IIntroProps>`
         padding: 0 30px;
         gap: 8px;
         max-width: 100%;
-
+        margin: 32px 0;
       }
       @media (max-width: 400px) {
-        padding: 0 15px;
+        padding: 0 16px;
       }
-      `
-  }
+      `}
   ${props =>
-    props.introDesktop
-      && `
+    props.introDesktop &&
+    `
       @media (max-width: 960px) {
         display: none;
       }
-    `
-  }
+    `}
   `
 
 export const NameIndex = styled.div`
@@ -107,9 +105,10 @@ export const NameIndex = styled.div`
 `
 
 interface INameAndSymbolProps {
-  introMobile?: boolean
+  introMobile?: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const NameAndSymbol = styled.div<INameAndSymbolProps>`
   display: flex;
   align-items: flex-start;
