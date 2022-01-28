@@ -648,7 +648,7 @@ const Form = ({
   const tokenOutIndex = tokenAddress2Index[swapOutAddress]
   
   const approvalCallback = React.useCallback(
-    (tokenSymbol: string): TransactionCallback => {
+    (tokenSymbol: string, tokenAddress: string): TransactionCallback => {
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
@@ -665,12 +665,15 @@ const Form = ({
 
         if (txReceipt.status) {
           ToastSuccess(`Approval of ${tokenSymbol} confirmed`)
-          setTimeout(() => setApprovalCheck(cur => cur + 1), 500)
+          const approved = isApproved
+          approved[tokenAddress2Index[tokenAddress]] = true
+          setIsApproved(approved)
+
           return
         }
       }
     },
-    [setApprovalCheck]
+    [isApproved, tokenAddress2Index]
   )
 
   const investCallback = React.useCallback(
@@ -804,7 +807,7 @@ const Form = ({
               ERC20(swapInAddressVal).approve(
                 crpPoolAddress,
                 walletAddress.value,
-                approvalCallback(swapInSymbol.value)
+                approvalCallback(swapInSymbol.value, swapInAddressVal)
               )
               return
             }
@@ -859,7 +862,7 @@ const Form = ({
               ERC20(swapInAddressVal).approve(
                 corePoolAddress,
                 walletAddress.value,
-                approvalCallback(swapInSymbol.value)
+                approvalCallback(swapInSymbol.value, swapInAddressVal)
               )
               return
             }

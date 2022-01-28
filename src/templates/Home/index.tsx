@@ -5,6 +5,7 @@ import ClassProducts from './ClassProducts'
 import Hero from './Hero'
 import KassandraArchitecture from './KassandraArchitecture'
 import Products from './Products'
+import Token from './Token'
 
 // import CountdownBanner from '../../components/CountdownBanner'
 import KassandraTokenCard from '../../components/KassandraTokenCard'
@@ -15,7 +16,8 @@ import KacyOverView from '../../components/KacyOverView'
 
 import * as S from './styles'
 
-// const poolPlatform = 'Fuji'
+const poolPlatform =
+  process.env.NEXT_PUBLIC_MASTER === '1' ? 'Avalanche' : 'Fuji'
 
 const Home = () => {
   const { trackPageView } = useMatomo()
@@ -31,6 +33,7 @@ const Home = () => {
       <S.Background>
         <ScrollUpButton />
         <Products />
+        <Token poolPlatform={poolPlatform} />
         <ClassProducts />
         <KassandraTokenCard />
         <KassandraArchitecture />

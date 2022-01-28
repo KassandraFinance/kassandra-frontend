@@ -12,7 +12,7 @@ import { ToastInfo } from '../../../components/Toastify/toast'
 
 import iconBar from '../../../../public/assets/iconbar.svg'
 import metaMaskIcon from '../../../../public/assets/metaMaskIcon.svg'
-import avalancheIcon from '../../../../public/assets/avalanche_social_index_logo.svg'
+import ahype from '../../../../public/assets/ahype.svg'
 
 import * as S from './styles'
 
@@ -78,7 +78,7 @@ const Summary = ({ strategy }: Params) => {
       <S.CopyContract>
         <S.Blockchain>
           <div className="image">
-            <Image src={avalancheIcon} alt="" />
+            <Image src={ahype} alt="" />
           </div>
           <span>CONTROLLER/AHYPE TOKEN</span>
         </S.Blockchain>
@@ -127,7 +127,7 @@ const Summary = ({ strategy }: Params) => {
       <S.CopyContract>
         <S.Blockchain>
           <div className="image">
-            <Image src={avalancheIcon} alt="" />
+            <Image src={ahype} alt="" />
           </div>
           <span>POOL CONTRACT</span>
         </S.Blockchain>
@@ -158,7 +158,7 @@ const Summary = ({ strategy }: Params) => {
       <S.CopyContract>
         <S.Blockchain>
           <div className="image">
-            <Image src={avalancheIcon} alt="" />
+            <Image src={ahype} alt="" />
           </div>
           <span>STRATEGY CONTRACT</span>
         </S.Blockchain>

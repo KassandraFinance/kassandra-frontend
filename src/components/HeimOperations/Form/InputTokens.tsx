@@ -10,7 +10,7 @@ import InputTokenValue from '../../InputTokenValue'
 
 import SelectInput from '../../SelectInput'
 
-import avaxSocial from '../../../../public/assets/avalanche_social_index_logo.svg'
+import ahype from '../../../../public/assets/ahype.svg'
 
 import * as S from './styles'
 
@@ -75,7 +75,7 @@ const InputTokens = ({
     return (
       <S.Symbol>
         <div className="img">
-          <Image src={avaxSocial} alt="" width={22} height={22} />
+          <Image src={ahype} alt="" width={22} height={22} />
         </div>
         {poolTokens.length > 0 && poolTokens[0] !== undefined
           ? poolTokens[0].symbol
