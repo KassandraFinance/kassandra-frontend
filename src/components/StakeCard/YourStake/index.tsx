@@ -50,7 +50,11 @@ const YourStake = ({
     const totalStaked = new BigNumber(poolInfoResponse.depositedAmount)
 
     const stakingTokenPrice =
-      pid === 5 ? priceLPToken.priceLP : priceLPToken.kacy
+      pid === 5
+        ? priceLPToken.priceLP
+        : pid === 6
+        ? priceLPToken.aHYPE
+        : priceLPToken.kacy
 
     const apr =
       poolInfoResponse.depositedAmount.toString() !== '0' &&
@@ -130,7 +134,7 @@ const YourStake = ({
           <p>
             {infoStaked.yourStake.lt(new BigNumber('0')) ||
             (pid === 5 && priceLPToken.priceLP.lt(0)) ||
-            (pid === 88 && priceLPToken.aHYPE.lt(0))
+            (pid === 6 && priceLPToken.aHYPE.lt(0))
               ? '...'
               : !stakeWithVotingPower
               ? BNtoDecimal(infoStaked.yourStake, 18)

@@ -72,7 +72,7 @@ const Details = ({
   let price
 
   switch (pid) {
-    case 88:
+    case 6:
       price = priceLPToken.aHYPE
       break
     case 5:

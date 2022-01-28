@@ -2,8 +2,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import Link from 'next/link'
-// import useSWR from 'swr'
-// import { request } from 'graphql-request'
+import useSWR from 'swr'
+import { request } from 'graphql-request'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
 import Image from 'next/image'
@@ -24,9 +24,9 @@ import {
   Staking,
   LPKacyAvax,
   LPDaiAvax,
-  Kacy
-  // SUBGRAPH_URL,
-  // HeimCRPPOOL
+  Kacy,
+  SUBGRAPH_URL,
+  HeimCRPPOOL
 } from '../../constants/tokenAddresses'
 
 import usePriceLP from '../../hooks/usePriceLP'
@@ -51,7 +51,7 @@ import * as S from './styles'
 import Button from '../Button'
 import { BNtoDecimal } from '../../utils/numerals'
 
-// import { GET_INFO_AHYPE } from './graphql'
+import { GET_INFO_AHYPE } from './graphql'
 export interface IPriceLPToken {
   priceLP: Big;
   kacy: Big;
@@ -93,7 +93,8 @@ const staked: any = {
   2: 'KACY',
   3: 'KACY',
   4: 'KACY',
-  5: 'LP'
+  5: 'LP',
+  6: 'aHYPE'
 }
 
 const StakeCard = ({
@@ -148,13 +149,13 @@ const StakeCard = ({
     stakingToken: ''
   })
 
-  // const { data } = useSWR(
-  //   [GET_INFO_AHYPE, HeimCRPPOOL],
-  //   (query, id) => request(SUBGRAPH_URL, query, { id }),
-  //   {
-  //     refreshInterval: 10000
-  //   }
-  // )
+  const { data } = useSWR(
+    [GET_INFO_AHYPE, HeimCRPPOOL],
+    (query, id) => request(SUBGRAPH_URL, query, { id }),
+    {
+      refreshInterval: 10000
+    }
+  )
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { trackEvent } = useMatomo()
   const { viewgetReserves } = usePriceLP()
@@ -203,12 +204,13 @@ const StakeCard = ({
         priceLP
       }))
     }
-    // if (data) {
-    //   setPriceLPToken(prevState => ({
-    //     ...prevState,
-    //     aHYPE: Big(data?.pool.price_usd || -1)
-    //   }))
-    // }
+    if (data) {
+      console.log(data)
+      setPriceLPToken(prevState => ({
+        ...prevState,
+        aHYPE: Big(data?.pool.price_usd || -1)
+      }))
+    }
     setPriceLPToken(prevState => ({
       ...prevState,
       kacy: kacyInDollar
@@ -280,7 +282,7 @@ const StakeCard = ({
 
   React.useEffect(() => {
     handleLPtoUSD()
-  }, [infoStaked.stakingToken, pid])
+  }, [infoStaked.stakingToken, pid, data])
 
   React.useEffect(() => {
     if (!web3.currentProvider) {
