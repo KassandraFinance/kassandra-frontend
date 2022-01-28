@@ -50,7 +50,11 @@ const YourStake = ({
     const totalStaked = new BigNumber(poolInfoResponse.depositedAmount)
 
     const stakingTokenPrice =
-      pid === 5 ? priceLPToken.priceLP : priceLPToken.kacy
+      pid === 5
+        ? priceLPToken.priceLP
+        : pid === 6
+        ? priceLPToken.aHYPE
+        : priceLPToken.kacy
 
     const apr =
       poolInfoResponse.depositedAmount.toString() !== '0' &&
