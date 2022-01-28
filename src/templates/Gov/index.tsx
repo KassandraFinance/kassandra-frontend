@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 
 import Header from '../../components/Header'
 import TitleSection from '../../components/TitleSection'
@@ -9,8 +10,10 @@ import VotingPowerTable from '../../components/Governance/VotingPowerTable'
 import overview from '../../../public/assets/iconGradient/overview.svg'
 import proposals from '../../../public/assets/iconGradient/proposals.svg'
 import votingPower from '../../../public/assets/iconGradient/voting-power-rank.svg'
+import externalLink from '../../../public/assets/icons/external-link.svg'
 
 import * as S from './styles'
+import ExternalLink from '../../components/ExternalLink'
 
 const Gov = () => {
   return (
@@ -34,10 +37,12 @@ const Gov = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Discuss the proposals at the Forum
+            <span>Discuss the proposals at the Forum</span>
+            <Image src={externalLink} alt="" />
           </S.LinkForum>
         </S.TitleAndLinkContent>
         <ProposalTable />
+        <ExternalLink href="/gov/proposals" text="Check more proposals" />
         <TitleSection
           image={votingPower}
           title="Voting Power Rank"

@@ -35,14 +35,22 @@ export const LinkForum = styled.a`
   border: 1px solid rgba(255, 255, 255, 0.04);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.04);
-  color: ${theme.colors.gray};
+  color: ${theme.colors.grayDisabled};
+
   line-height: ${theme.font.sizes.font16};
   font-size: ${theme.font.sizes.font16};
   text-decoration: none;
+
+  display: flex;
+  align-items: center;
 
   padding: 16px 24px;
 
   &:hover {
     border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
+  span {
+    margin-right: ${theme.spacings.space16};
   }
 `
