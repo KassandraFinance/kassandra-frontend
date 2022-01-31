@@ -5,7 +5,6 @@ export const Overview = styled.section`
   margin-top: 4rem;
   margin-right: auto;
   margin-left: auto;
-  margin-bottom: 10rem;
 `
 
 export const VotginCards = styled.div`

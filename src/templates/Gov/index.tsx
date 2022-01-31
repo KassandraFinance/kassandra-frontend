@@ -6,6 +6,7 @@ import TitleSection from '../../components/TitleSection'
 import Overview from '../../components/Governance/Overview'
 import ProposalTable from '../../components/Governance/ProposalTable'
 import VotingPowerTable from '../../components/Governance/VotingPowerTable'
+import ExternalLink from '../../components/ExternalLink'
 
 import overview from '../../../public/assets/iconGradient/overview.svg'
 import proposals from '../../../public/assets/iconGradient/proposals.svg'
@@ -13,7 +14,6 @@ import votingPower from '../../../public/assets/iconGradient/voting-power-rank.s
 import externalLink from '../../../public/assets/icons/external-link.svg'
 
 import * as S from './styles'
-import ExternalLink from '../../components/ExternalLink'
 
 const Gov = () => {
   return (
@@ -26,6 +26,10 @@ const Gov = () => {
           text="texto asdsad sadsadsa"
         />
         <Overview />
+        <S.OverViewLinks>
+          <ExternalLink href="/farm" text="Obtain more" />
+          <ExternalLink href="/farm" text="Manage Delegation" />
+        </S.OverViewLinks>
         <S.TitleAndLinkContent>
           <TitleSection
             image={proposals}
@@ -49,6 +53,7 @@ const Gov = () => {
           text="texto asdsad sadsadsa"
         />
         <VotingPowerTable />
+        <ExternalLink href="/gov/proposals" text="Check leaderboard" />
       </S.VoteContent>
     </S.BackgroundVote>
   )

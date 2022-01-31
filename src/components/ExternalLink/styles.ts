@@ -8,8 +8,6 @@ export const Link = styled.a`
   font-weight: ${theme.font.weight.light};
   text-decoration: none;
 
-  max-width: max-content;
-
   display: flex;
   align-items: center;
 

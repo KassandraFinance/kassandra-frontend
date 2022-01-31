@@ -5,7 +5,6 @@ export const VotingPowerTable = styled.section`
   margin-top: 4rem;
   margin-right: auto;
   margin-left: auto;
-  margin-bottom: 10rem;
 
   @media (max-width: 700px) {
     margin-top: ${theme.spacings.space56};
@@ -28,7 +27,8 @@ export const Table = styled.table`
   font-size: ${theme.font.sizes.font14};
 
   width: 100%;
-  margin: 4rem 0;
+  margin-top: 4rem;
+
   thead {
     background-color: rgba(0, 0, 0, 0.25);
   }

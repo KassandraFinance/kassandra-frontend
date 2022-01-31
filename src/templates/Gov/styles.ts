@@ -9,12 +9,21 @@ export const BackgroundVote = styled.div`
   background-attachment: fixed;
 
   box-shadow: inset 0px -20px 20px 0px #151117;
-  padding: 0 0 80px;
+  padding-bottom: 4px;
 `
 
 export const VoteContent = styled.div`
   max-width: 1140px;
   margin: 0 auto;
+
+  a {
+    display: flex;
+    justify-content: center;
+    margin-top: 3.2rem;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 10rem;
+  }
 
   @media (max-width: 1200px) {
     padding: 0 30px;
@@ -25,10 +34,33 @@ export const VoteContent = styled.div`
   }
 `
 
+export const OverViewLinks = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  max-width: 36rem;
+  margin-top: 1.6rem;
+  margin-bottom: 10rem;
+
+  a {
+    margin: 0;
+  }
+
+  @media (max-width: 700px) {
+    max-width: 100%;
+  }
+`
+
 export const TitleAndLinkContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 560px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `
 
 export const LinkForum = styled.a`
@@ -44,7 +76,24 @@ export const LinkForum = styled.a`
   display: flex;
   align-items: center;
 
+  margin: 0 !important;
   padding: 16px 24px;
+
+  @media (max-width: 960px) {
+    font-size: ${theme.font.sizes.font14};
+  }
+
+  @media (max-width: 560px) {
+    margin-top: 1.6rem !important;
+  }
+
+  @media (max-width: 440px) {
+    width: 100%;
+  }
+
+  @media (max-width: 350px) {
+    font-size: 1.2rem;
+  }
 
   &:hover {
     border: 1px solid rgba(255, 255, 255, 0.5);
