@@ -2,9 +2,6 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import TitleSection from '../../../components/TitleSection'
-
-import proposals from '../../../../public/assets/iconGradient/proposals.svg'
 import approved from '../../../../public/assets/status/approved.svg'
 import cancelled from '../../../../public/assets/status/cancelled.svg'
 import executed from '../../../../public/assets/status/executed.svg'
@@ -37,11 +34,6 @@ const stateIcon: { [key: number]: any } = {
 export const ProposalTable = () => {
   return (
     <S.ProposalTable>
-      <TitleSection
-        image={proposals}
-        title="Recent Proposals"
-        text="texto asdsad sadsadsa"
-      />
       <S.Table>
         <thead>
           <S.Tr>

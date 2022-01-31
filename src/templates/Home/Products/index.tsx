@@ -64,7 +64,8 @@ const Products = () => {
           </S.IconWrapper>
           <p>NON-CUSTODIAL</p>
           <span>
-            Your funds managed by public, secure, and predictable smart-contracts
+            Your funds managed by public, secure, and predictable
+            smart-contracts
           </span>
         </S.Card>
         <S.Card>
@@ -73,7 +74,8 @@ const Products = () => {
           </S.IconWrapper>
           <p>PERMISSIONLESS</p>
           <span>
-            Invest, transfer and redeem investment products without relying on third-parties
+            Invest, transfer and redeem investment products without relying on
+            third-parties
           </span>
         </S.Card>
         <S.Card>

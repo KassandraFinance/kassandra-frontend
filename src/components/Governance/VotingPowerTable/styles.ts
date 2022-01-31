@@ -1,16 +1,13 @@
 import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
-export const ProposalTable = styled.section`
+export const VotingPowerTable = styled.section`
   margin-top: 4rem;
   margin-right: auto;
   margin-left: auto;
 
   @media (max-width: 700px) {
     margin-top: ${theme.spacings.space56};
-  }
-  @media (max-width: 560px) {
-    margin-top: 2.4rem !important;
   }
 `
 
@@ -31,10 +28,6 @@ export const Table = styled.table`
 
   width: 100%;
   margin-top: 4rem;
-
-  @media (max-width: 560px) {
-    margin-top: 2.4rem !important;
-  }
 
   thead {
     background-color: rgba(0, 0, 0, 0.25);
@@ -74,20 +67,20 @@ export const Table = styled.table`
       }
     }
   }
-  @media (max-width: 768px) {
+  /* @media (max-width: 768px) {
     display: block;
     overflow: auto;
-  }
+  } */
 `
 
 export const Tr = styled.tr`
   display: grid;
-  grid-template-columns: auto 21rem;
+  grid-template-columns: 1fr 4fr repeat(4, 2fr);
   align-items: center;
 
   margin: 0 3.2rem;
   padding: 2.4rem 0;
-  @media (max-width: 768px) {
+  /* @media (max-width: 768px) {
     grid-template-columns: auto 18rem;
   }
 
@@ -101,14 +94,60 @@ export const Tr = styled.tr`
 
   @media (max-width: 380px) {
     grid-template-columns: 21rem 12rem;
+  } */
+
+  @media (max-width: 660px) {
+    grid-template-columns: 1fr 4fr repeat(3, 2fr);
   }
 
-  .proposal {
-    text-align: left;
+  @media (max-width: 540px) {
+    grid-template-columns: 1fr 4fr repeat(2, 2fr);
+
+    margin: 0 1.6rem;
   }
 
-  .status {
-    text-align: right;
+  @media (max-width: 420px) {
+    grid-template-columns: 1fr 5fr 2fr;
+  }
+
+  .rank,
+  .vote-power,
+  .vote-weight,
+  .proposals-created,
+  .proposals-voted {
+    font-weight: ${theme.font.weight.bold};
+  }
+
+  .proposals-voted {
+    @media (max-width: 660px) {
+      display: none;
+    }
+  }
+
+  .vote-weight {
+    @media (max-width: 540px) {
+      display: none;
+    }
+  }
+
+  .proposals-created {
+    @media (max-width: 420px) {
+      display: none;
+    }
+  }
+
+  .rank {
+    @media (max-width: 420px) {
+      /* text-align: right; */
+      /* justify-content: flex-end; */
+    }
+  }
+
+  .vote-power {
+    @media (max-width: 420px) {
+      text-align: right;
+      justify-content: flex-end;
+    }
   }
 
   a {
@@ -117,7 +156,7 @@ export const Tr = styled.tr`
 `
 
 export const Th = styled.th`
-  font-weight: 300;
+  font-weight: 300 !important;
   line-height: ${theme.font.sizes.font18};
   font-size: ${theme.font.sizes.font18};
 
@@ -132,13 +171,40 @@ export const Th = styled.th`
 `
 
 export const Td = styled.td`
+  font-size: ${theme.font.sizes.font18};
   font-weight: ${theme.font.weight.light};
   letter-spacing: 0.5px;
 
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  align-items: center;
   text-align: center;
+
+  @media (max-width: 960px) {
+    line-height: ${theme.font.sizes.font16};
+    font-size: ${theme.font.sizes.font16};
+  }
+
+  @media (max-width: 768px) {
+    line-height: ${theme.font.sizes.font14};
+    font-size: ${theme.font.sizes.font14};
+  }
+
+  @media (max-width: 660px) {
+    line-height: ${theme.font.sizes.font12};
+    font-size: ${theme.font.sizes.font12};
+  }
+
+  img {
+    width: 24px;
+  }
+
+  span {
+    margin-left: 16px;
+    @media (max-width: 540px) {
+      margin-left: 8px;
+    }
+  }
 `
 
 export const TextProposal = styled.p`
