@@ -53,7 +53,7 @@ const Gov = () => {
           text="texto asdsad sadsadsa"
         />
         <VotingPowerTable />
-        <ExternalLink href="/gov/proposals" text="Check leaderboard" />
+        <ExternalLink href="/gov/leaderboard" text="Check leaderboard" />
       </S.VoteContent>
     </S.BackgroundVote>
   )
