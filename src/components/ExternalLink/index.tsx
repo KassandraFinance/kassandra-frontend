@@ -6,12 +6,13 @@ import * as S from './styles'
 interface IExternalLinkProps {
   href: string;
   text: string;
+  onClick?: React.MouseEventHandler;
 }
 
-const ExternalLink = ({ href, text }: IExternalLinkProps) => {
+const ExternalLink = ({ href, text, onClick }: IExternalLinkProps) => {
   return (
     <Link href={href}>
-      <S.Link>
+      <S.Link onClick={onClick}>
         <span>{text}</span>
         <svg
           width="17"

@@ -17,8 +17,20 @@ import { Staking } from '../../../constants/tokenAddresses'
 import * as S from './styles'
 import proposals from '../../../../public/assets/iconGradient/proposals.svg'
 import ExternalLink from '../../../components/ExternalLink'
+import ModalVotes from '../../../components/Governance/ModalVotes'
+
+export type ModalProps = {
+  voteType: string,
+  percentage: string,
+  totalVotingPower: string,
+  totalAddresses: string
+}
 
 export default function Index() {
+  const [modalVotes, setModalVotes] = React.useState<ModalProps | undefined>(
+    undefined
+  )
+
   const kacyStake = useStakingContract(Staking)
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
@@ -30,7 +42,6 @@ export default function Index() {
       <S.BackgroundVote>
         <Header />
         <S.VoteContent>
-
           <S.DesktopScreen>
             <S.TitleWrapper>
               <S.TitleAndAuthor>
@@ -90,15 +101,41 @@ export default function Index() {
               typeVote="For"
               percentage="73"
               totalVotingPower="1,723,124"
+              onClickLink={() => {
+                setModalVotes({
+                  voteType: 'For',
+                  percentage: '73',
+                  totalVotingPower: '1,723,124',
+                  totalAddresses: '1,723,124'
+                })
+              }}
             />
             <VoteCard
               typeVote="Against"
               percentage="27"
               totalVotingPower="1,723,124"
+              onClickLink={() => {
+                setModalVotes({
+                  voteType: 'Against',
+                  percentage: '27',
+                  totalVotingPower: '1,723,124',
+                  totalAddresses: '30'
+                })
+              }}
             />
           </S.VoteCardWrapper>
         </S.VoteContent>
       </S.BackgroundVote>
+      {modalVotes && (
+        <ModalVotes
+          voteType={modalVotes.voteType}
+          percentage={modalVotes.percentage}
+          totalVotingPower={modalVotes.totalVotingPower}
+          totalAddresses={modalVotes.totalAddresses}
+          modalOpen={!!modalVotes}
+          onClose={() => setModalVotes(undefined)}
+        />
+      )}
     </>
   )
 }

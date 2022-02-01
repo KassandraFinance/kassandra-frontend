@@ -10,12 +10,14 @@ interface IVoteCardProps {
   typeVote: string;
   percentage: string;
   totalVotingPower: string;
+  onClickLink: React.MouseEventHandler;
 }
 
 const VoteCard = ({
   percentage,
   totalVotingPower,
-  typeVote
+  typeVote,
+  onClickLink
 }: IVoteCardProps) => {
   return (
     <>
@@ -29,7 +31,11 @@ const VoteCard = ({
         <S.VoteBar />
         <S.ActionWrapper>
           <Button text="Vote In Favor" backgroundSecondary />
-          <ExternalLink text={'Check all voters'} href={'#'} />
+          <ExternalLink
+            text={'Check all voters'}
+            href={'#'}
+            onClick={onClickLink}
+          />
         </S.ActionWrapper>
       </S.Container>
     </>
