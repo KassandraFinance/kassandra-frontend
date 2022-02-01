@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import theme from '../../styles/theme'
+import theme from '../../../styles/theme'
 
-import * as ButtonStyles from '../Button/styles'
+import * as ButtonStyles from '../../Button/styles'
 
 export const Container = styled.div`
   background: #1f1f1fb8;
@@ -15,8 +15,8 @@ export const Container = styled.div`
   max-width: 55rem;
   height: min-content;
 
-  @media (max-width: 1200px) {
-    width: 50rem;
+  @media (max-width: 670px) {
+    max-width: 100%;
   }
 `
 export const TextWrapper = styled.div`
