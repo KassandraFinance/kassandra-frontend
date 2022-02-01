@@ -130,3 +130,8 @@ export const LinkForum = styled.a`
     margin-right: ${theme.spacings.space16};
   }
 `
+
+export const VotingPowerLeaderboard = styled.section`
+  margin-top: 1.6rem;
+  margin-bottom: 10rem;
+`
