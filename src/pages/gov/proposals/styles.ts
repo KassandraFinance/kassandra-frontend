@@ -2,6 +2,9 @@ import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
 import * as VotingPowerStyles from '../../../components/VotingPower/styles'
+import * as VoteCardStyle from '../../../components/Governance/VoteCard/styles'
+import * as ButtonStyles from '../../../components/Button/styles'
+import * as ExternalLinkStyles from '../../../components/ExternalLink/styles'
 
 export const BackgroundVote = styled.div`
   background: url('/assets/background-governance-page.svg');
@@ -19,16 +22,33 @@ export const VoteContent = styled.div`
   margin: 0 auto;
 
   @media (max-width: 1200px) {
-    padding: 0 30px;
+    padding: 0 32px;
+  }
+  @media (max-width: 768px) {
+    padding: 0 25px;
   }
 
   @media (max-width: 540px) {
     padding: 0 16px;
   }
 `
+export const DesktopScreen = styled.div`
+  @media (max-width: 768.5px) {
+    display: none;
+  }
+`
+export const MobileScreen = styled.div`
+  @media (min-width: 768.5px) {
+    display: none;
+  }
+`
+
 export const TitleWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 export const TitleAndAuthor = styled.div`
@@ -37,25 +57,50 @@ export const TitleAndAuthor = styled.div`
   align-items: flex-start;
 `
 
+export const CardTitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  column-gap: 2.4rem;
+
+  @media (max-width: 670px) {
+    flex-direction: column-reverse;
+  }
+`
 export const ProposeAuthorCard = styled.div`
   background: #ffffff0a;
   border: 1px solid #fcfcfc26;
   border-radius: 0.8rem;
 
   display: flex;
+  justify-content: center;
   align-items: center;
 
-  max-width: 39rem;
   height: 5.6rem;
   margin-top: 1.6rem;
   padding: 2rem 1.6rem;
 
+  @media (max-width: 768px) {
+    max-width: 100%;
+    padding: 2.4rem;
+  }
+  @media (max-width: 728px) {
+    padding: 1.6rem;
+  }
+  @media (max-width: 705px) {
+    padding: 0.8rem;
+  }
+  @media (max-width: 670px) {
+    max-width: 100%;
+  }
   p {
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.bold};
     letter-spacing: 0.08rem;
 
     margin-right: 1.6rem;
+    @media (max-width: 768px) {
+      font-size: ${theme.font.sizes.font14};
+    }
   }
   span {
     font-size: ${theme.font.sizes.font14};
@@ -70,37 +115,25 @@ export const VotingPowerAndLink = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  ${VotingPowerStyles.VotingPower} {
-    border: 1px solid #fcfcfc26;
-    margin-bottom: 1.2rem;
+
+  @media (max-width: 670px) {
+    align-items: flex-start;
+    max-width: 100%;
   }
-  a {
-    text-decoration: none;
+  ${VotingPowerStyles.VotingPower} {
+    margin-bottom: 1.2rem;
+    @media (max-width: 768px) {
+      width: 348px;
+      max-width: 100%;
+    }
+    @media (max-width: 670px) {
+      width: 100%;
+    }
+  }
+  ${ExternalLinkStyles.Link} {
     font-size: ${theme.font.sizes.font14};
-    font-weight: ${theme.font.weight.light};
-    color: ${theme.colors.snow};
-
-    margin-right: ${theme.spacings.space8};
-
-    display: flex;
-    align-items: space-between;
-    text-decoration: none;
-    justify-items: center;
-
-    transition: 0.15s;
-    svg {
-      margin-left: ${theme.spacings.space8};
-    }
-    &:hover {
-      color: ${theme.colors.cyan};
-      > svg {
-        path {
-          stroke: ${theme.colors.cyan};
-        }
-      }
-    }
-    @media (max-width: 900px) {
-      margin-top: 1.6rem;
+    @media (max-width: 670px) {
+      font-size: ${theme.font.sizes.font12};
     }
   }
 `
@@ -108,9 +141,22 @@ export const VotingPowerAndLink = styled.div`
 export const VoteCardWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  column-gap: 2.4rem;
 
   max-width: 100%;
   margin-top: 4rem;
-  @media (max-width: 1200px) {
+  @media (max-width: 815px) {
+    ${VoteCardStyle.ActionWrapper} {
+      flex-direction: column;
+
+      ${ButtonStyles.Wrapper} {
+        width: 100%;
+        margin-bottom: 1.6rem;
+      }
+    }
+  }
+  @media (max-width: 670px) {
+    flex-direction: column;
+    row-gap: 1.6rem;
   }
 `
