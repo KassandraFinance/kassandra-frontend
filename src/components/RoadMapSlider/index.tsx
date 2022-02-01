@@ -72,8 +72,8 @@ const arrCard = [
   {
     date: '2022 - Q1',
     title: '1st Cycle ',
-    icon: icons.soon,
-    color: colors.soon,
+    icon: icons.done,
+    color: colors.done,
     items: [
       {
         title: 'IDO',
@@ -93,8 +93,8 @@ const arrCard = [
   },
   {
     date: '2022 - Q2',
-    icon: icons.next,
-    color: colors.next,
+    icon: icons.soon,
+    color: colors.soon,
     title: '2nd Cycle ',
     items: [
       {
