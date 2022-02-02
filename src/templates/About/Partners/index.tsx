@@ -1,10 +1,12 @@
 import React from 'react'
 import Image from 'next/image'
 
+import avalanche from '../../../../public/assets/avalanche-horizontal-red.svg'
 import heimdall from '../../../../public/assets/heimdall.svg'
 import api3 from '../../../../public/assets/api3.svg'
-import ShineDAO from '../../../../public/assets/ShineDAO.svg'
-import Penguin_Finance from '../../../../public/assets/Penguin_Finance.svg'
+import transfero from '../../../../public/assets/transfero.svg'
+import shineDAO from '../../../../public/assets/ShineDAO.svg'
+import penguinFinance from '../../../../public/assets/Penguin_Finance.svg'
 
 import * as S from './styles'
 
@@ -18,6 +20,13 @@ const Partners = () => (
     </S.TitleAndIcon>
     <S.Partners>
       <a
+        href="https://www.avax.network/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Image src={avalanche} alt="Avalanche" />
+      </a>
+      <a
         href="https://heimdall.land/"
         target="_blank"
         rel="noopener noreferrer"
@@ -28,11 +37,18 @@ const Partners = () => (
         <Image src={api3} alt="API3" />
       </a>
       <a
+        href="https://transfero.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Image src={transfero} alt="Transfero" />
+      </a>
+      <a
         href="https://shinedao.finance/"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <Image src={ShineDAO} alt="" />
+        <Image src={shineDAO} alt="" />
         <span>ShineDAO</span>
       </a>
       <a
@@ -40,7 +56,7 @@ const Partners = () => (
         target="_blank"
         rel="noopener noreferrer"
       >
-        <Image src={Penguin_Finance} alt="Penguin Finance" />
+        <Image src={penguinFinance} alt="Penguin Finance" />
       </a>
     </S.Partners>
   </S.Container>

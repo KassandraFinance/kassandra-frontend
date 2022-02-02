@@ -2,17 +2,18 @@ import React from 'react'
 import Link from 'next/link'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
+import { BarChart, XAxis, YAxis, Bar } from 'recharts'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import { SUBGRAPH_URL, HeimCRPPOOL } from '../../../constants/tokenAddresses'
 import { GET_INFO_AHYPE } from '../graphql'
 
-import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { BarChart, XAxis, YAxis, Bar } from 'recharts'
+import Button from '../../../components/Button'
+import ExternalLink from '../../../components/ExternalLink'
 
 import TokenIcons from './TokenIcons'
 
 import * as S from './styles'
-import Button from '../../../components/Button'
 
 interface TokenInfo {
   id: string;
@@ -262,40 +263,11 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
             <Link href="/products/ahype">
               <Button onClick={() => clickMatomoEvent('click-button', 'buy-ahype')} backgroundSecondary size="medium" text="Buy $aHYPE" />
             </Link>
-            <a
+            <ExternalLink
               onClick={() => clickMatomoEvent('click-on-link', 'learn-more')}
-              href="https://kassandrafoundation.medium.com/avalanche-social-index-4042a823c972"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Learn More
-              <svg
-                width="17"
-                height="17"
-                viewBox="0 0 17 17"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M8.5 16C12.6421 16 16 12.6421 16 8.5C16 4.35786 12.6421 1 8.5 1C4.35786 1 1 4.35786 1 8.5C1 12.6421 4.35786 16 8.5 16Z"
-                  stroke="white"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M8.5 11.5L11.5 8.5L8.5 5.5"
-                  stroke="white"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M5.5 8.5H11.5"
-                  stroke="white"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </a>
+              hrefLink="https://kassandrafoundation.medium.com/avalanche-social-index-4042a823c972"
+              text="Learn more"
+            />
           </S.CardFooter>
         </S.Card>
         <S.ComingSoon>

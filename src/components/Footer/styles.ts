@@ -5,6 +5,14 @@ export const Footer = styled.footer`
   color: #fcfcfc;
   width: 100%;
   padding: 40px 32px;
+
+  @media (max-width: 770px) {
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: 400px) {
+    margin-bottom: 60px;
+  }
 `
 export const Container = styled.div`
   align-content: space-between;
