@@ -2,11 +2,22 @@ import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 export const Background = styled.div`
-  background: url('assets/latestBackground.svg');
+  background: url('/assets/latestBackground.svg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 `
+
+export const TeamBackground = styled.div`
+  background: url('/assets/about-team-background.svg');
+  background-repeat: no-repeat;
+  background-position: 50% 100%;
+
+  @media (max-width: 920px) {
+    background: none;
+  }
+`
+
 export const BackgroundSubscribe = styled.div`
   background: #2114261f;
   border: 1px solid #ffffff21;

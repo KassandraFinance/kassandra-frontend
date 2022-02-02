@@ -149,8 +149,8 @@ const Details = ({
         <ExternalLink
           hrefLink={
             process.env.NEXT_PUBLIC_MASTER === '1'
-              ? `${chains.avalanche.blockExplorerUrls[0]}/address/${stakingToken}`
-              : `${chains.fuji.blockExplorerUrls[0]}/address/${stakingToken}`
+              ? `${chains.avalanche.blockExplorerUrls[0]}address/${stakingToken}`
+              : `${chains.fuji.blockExplorerUrls[0]}address/${stakingToken}`
           }
           text="See contract"
         />
