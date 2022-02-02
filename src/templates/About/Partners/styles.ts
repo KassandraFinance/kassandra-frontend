@@ -9,7 +9,7 @@ export const Container = styled.section`
   align-items: center;
 
   margin: 0 auto 9rem;
-  max-width: 94.3rem;
+  max-width: 96rem;
   @media (max-width: 960px) {
     display: flex;
     flex-direction: column;
@@ -69,7 +69,7 @@ export const Icon = styled.div`
   }
 `
 export const Partners = styled.div`
-  width: 65rem;
+  width: 70rem;
   padding-top: 5rem;
 
   display: flex;
@@ -89,7 +89,7 @@ export const Partners = styled.div`
   img {
     margin: 0 auto 2.4rem;
     max-width: 100%;
-    max-height: 2.9rem;
+    max-height: 2.8rem;
   }
   a {
     text-decoration: none;

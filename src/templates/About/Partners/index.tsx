@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 
+import avalanche from '../../../../public/assets/avalancheIcon.svg'
 import heimdall from '../../../../public/assets/heimdall.svg'
 import api3 from '../../../../public/assets/api3.svg'
 import ShineDAO from '../../../../public/assets/ShineDAO.svg'
@@ -17,6 +18,13 @@ const Partners = () => (
       <S.Title>Partners</S.Title>
     </S.TitleAndIcon>
     <S.Partners>
+      <a
+        href="https://www.avax.network/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Image src={avalanche} alt="Avalanche" />
+      </a>
       <a
         href="https://heimdall.land/"
         target="_blank"
