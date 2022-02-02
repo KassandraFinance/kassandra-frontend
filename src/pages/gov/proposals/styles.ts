@@ -16,7 +16,6 @@ export const BackgroundVote = styled.div`
   box-shadow: inset 0px -20px 20px 0px #151117;
   padding: 0 0 80px;
 `
-
 export const VoteContent = styled.div`
   max-width: 1140px;
   margin: 0 auto;
@@ -25,7 +24,7 @@ export const VoteContent = styled.div`
     padding: 0 32px;
   }
   @media (max-width: 768px) {
-    padding: 0 25px;
+    padding: 0 24px;
   }
 
   @media (max-width: 540px) {
@@ -42,7 +41,6 @@ export const MobileScreen = styled.div`
     display: none;
   }
 `
-
 export const TitleWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -50,13 +48,11 @@ export const TitleWrapper = styled.div`
     grid-template-columns: 1fr;
   }
 `
-
 export const TitleAndAuthor = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 `
-
 export const CardTitleWrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -110,7 +106,6 @@ export const ProposeAuthorCard = styled.div`
     margin-left: 1.2rem;
   }
 `
-
 export const VotingPowerAndLink = styled.div`
   display: flex;
   flex-direction: column;
@@ -137,7 +132,6 @@ export const VotingPowerAndLink = styled.div`
     }
   }
 `
-
 export const VoteCardWrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -159,4 +153,169 @@ export const VoteCardWrapper = styled.div`
     flex-direction: column;
     row-gap: 1.6rem;
   }
+`
+export const ProposalInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  margin: 8rem auto 0;
+  max-width: 1140px;
+
+  @media (max-width: 1200px) {
+    padding: 0 32px;
+  }
+  @media (max-width: 768px) {
+    padding: 0 24px;
+  }
+  @media (max-width: 540px) {
+    padding: 0 16px;
+  }
+`
+export const CardWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 1024px) {
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    grid-gap: 3.2rem;
+  }
+`
+export const ProposalTitleWrapper = styled.div`
+  display: flex;
+  h1 {
+    font-size: ${theme.font.sizes.font18};
+    font-weight: ${theme.font.weight.bold};
+    margin-left: 0.8rem;
+  }
+`
+export const DescriptionTable = styled.section`
+  background: #ffffff0a;
+  border: 1px solid #ffffff3b;
+  border-radius: 1.2rem;
+
+  margin: 4rem auto 0;
+  padding: 1.6rem;
+  width: 100%;
+  @media (min-width: 1024px) {
+    margin: 4.8rem auto 0;
+  }
+`
+export const Table = styled.table`
+  width: 100%;
+`
+export const TableHead = styled.div`
+  margin-bottom: 1.6rem;
+`
+export const TableTitle = styled.th`
+  font-size: ${theme.font.sizes.font16};
+  font-weight: ${theme.font.weight.bold};
+`
+export const TableBody = styled.tbody``
+export const TableDescriptionWrapper = styled.div`
+  border-top: 1px solid #ffffff4d;
+
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem 0;
+`
+export const DescriptionSubTitle = styled.td`
+  font-size: ${theme.font.sizes.font14};
+  font-weight: ${theme.font.weight.bold};
+`
+export const DescriptionText = styled.td`
+  font-size: ${theme.font.sizes.font12};
+  font-weight: ${theme.font.weight.light};
+  line-height: 1.6rem;
+  letter-spacing: 0.06rem;
+
+  padding: 1.6rem 0;
+`
+export const InfoTable = styled.table`
+  background: #ffffff0a;
+  border: 1px solid #ffffff3b;
+  border-radius: 1.2rem;
+
+  margin: 1.6rem auto 0;
+  padding: 1.6rem;
+  width: 100%;
+  @media (min-width: 1024px) {
+    margin: 4.8rem auto 0;
+  }
+  @media (width: 768px) {
+    margin: 3.2rem auto 0;
+  }
+`
+export const TableInfoWrapper = styled.div`
+  border-top: 1px solid #ffffff4d;
+`
+export const DataWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.2rem;
+  &:first-child {
+    margin-top: 2.4rem;
+  }
+`
+export const TextKey = styled.span`
+  font-size: ${theme.font.sizes.font12};
+  font-weight: ${theme.font.weight.bold};
+`
+export const TextValue = styled.span`
+  font-size: ${theme.font.sizes.font12};
+  font-weight: ${theme.font.weight.light};
+`
+export const InfoLinkWrapper = styled.div`
+  background: #ffffff0a;
+  border: 1px solid transparent;
+  border-radius: 1.2rem;
+
+  display: flex;
+  justify-content: center;
+
+  margin-top: 1.6rem;
+  padding: 1.6rem;
+`
+export const Link = styled.a`
+  color: #c4c4c4;
+  line-height: ${theme.font.sizes.font14};
+  font-size: ${theme.font.sizes.font14};
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+  transition: 0.15s;
+  span {
+    display: flex;
+  }
+  svg {
+    margin-left: ${theme.spacings.space8};
+  }
+  &:hover {
+    color: ${theme.colors.cyan};
+    > svg {
+      path {
+        stroke: ${theme.colors.cyan};
+      }
+    }
+  }
+`
+export const ProposalDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  margin: 8rem 0 0;
+`
+export const DetailsSubTitle = styled.td`
+  font-size: ${theme.font.sizes.font14};
+  font-weight: ${theme.font.weight.bold};
+`
+export const DetailsText = styled.td`
+  font-size: ${theme.font.sizes.font12};
+  font-weight: ${theme.font.weight.light};
+  line-height: 1.6rem;
+  letter-spacing: 0.06rem;
+
+  padding: 0.8rem 6.4rem 2.4rem;
 `
