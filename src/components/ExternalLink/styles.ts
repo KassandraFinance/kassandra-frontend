@@ -19,7 +19,7 @@ export const Link = styled.a`
     display: flex;
   }
   svg {
-    margin-left: ${theme.spacings.space16};
+    margin-left: 10px;
   }
   &:hover {
     color: ${theme.colors.cyan};

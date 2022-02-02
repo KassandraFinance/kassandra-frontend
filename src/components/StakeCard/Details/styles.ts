@@ -11,13 +11,15 @@ export const Details = styled.div`
 
 export const Info = styled.div`
   display: flex;
+
+  margin-top: ${theme.spacings.space8};
+
   justify-content: space-between;
   align-items: center;
   z-index: 111;
   span {
     font-size: ${theme.font.sizes.font14};
     line-height: ${theme.font.sizes.font14};
-    margin-bottom: ${theme.spacings.space8};
   }
 
   a {
@@ -71,15 +73,6 @@ export const KacyUSD = styled.div`
   }
 `
 
-export const Link = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: ${theme.spacings.space8};
-  img {
-    margin-left: 6px;
-  }
-`
-
 export const AddToken = styled.button`
   background-color: transparent;
   border: none;
@@ -92,11 +85,14 @@ export const AddToken = styled.button`
   font-size: ${theme.font.sizes.font14};
   font-weight: ${theme.font.weight.light};
 
+  margin-top: 8px;
+
   cursor: pointer;
   outline: none;
+  transition: 0.15s;
 
   &:hover {
-    text-decoration: underline;
+    color: ${theme.colors.cyan};
   }
   img {
     max-width: 14px;
