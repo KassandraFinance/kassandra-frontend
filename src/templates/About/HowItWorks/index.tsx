@@ -13,45 +13,18 @@ const HowItWorks = () => {
             <S.Icon src="/assets/iconbar.svg" />
             <h3>Release schedule</h3>
           </S.TitleandIcon>
-          <S.Link
-            href="https://drive.google.com/file/d/12jxIMtBVqaY7bMbLmt52Lo0xDFUURZsb/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferral"
-          >
-            <span>View in Litepaper</span>
-            <svg
-              width="17"
-              height="17"
-              viewBox="0 0 17 17"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8.5 16C12.6421 16 16 12.6421 16 8.5C16 4.35786 12.6421 1 8.5 1C4.35786 1 1 4.35786 1 8.5C1 12.6421 4.35786 16 8.5 16Z"
-                stroke="white"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M8.5 11.5L11.5 8.5L8.5 5.5"
-                stroke="white"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M5.5 8.5H11.5"
-                stroke="white"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </S.Link>
         </S.ScheduleTitle>
         <S.ScheduleGraph>
-          <img src="assets/tokenomics-chart.svg" alt="We'll reach the maximum supply in 3 years. Private and seed sale investor will have their funds locked for 3 months and then will gradually receive their share in the next 9 months. The team share is also locked for 3 months but will gradually receive their share in the next 18 months." />
+          <img
+            src="assets/tokenomics-chart.svg"
+            alt="We'll reach the maximum supply in 3 years. Private and seed sale investor will have their funds locked for 3 months and then will gradually receive their share in the next 9 months. The team share is also locked for 3 months but will gradually receive their share in the next 18 months."
+          />
         </S.ScheduleGraph>
         <S.ScheduleGraphMobile>
-          <img src="assets/tokenomics-chart-mobile.svg" alt="We'll reach the maximum supply in 3 years. Private and seed sale investor will have their funds locked for 3 months and then will gradually receive their share in the next 9 months. The team share is also locked for 3 months but will gradually receive their share in the next 18 months." />
+          <img
+            src="assets/tokenomics-chart-mobile.svg"
+            alt="We'll reach the maximum supply in 3 years. Private and seed sale investor will have their funds locked for 3 months and then will gradually receive their share in the next 9 months. The team share is also locked for 3 months but will gradually receive their share in the next 18 months."
+          />
         </S.ScheduleGraphMobile>
       </S.ScheduleGraphWrapper>
       <S.DistributionGraphWrapper>
@@ -60,43 +33,13 @@ const HowItWorks = () => {
             <S.Icon src="/assets/about-distribution-icon.svg" />
             <h3>Distribuition</h3>
           </S.TitleandIcon>
-          <S.Link
-            href="https://drive.google.com/file/d/12jxIMtBVqaY7bMbLmt52Lo0xDFUURZsb/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferral"
-          >
-            <span>View in Litepaper</span>
-            <svg
-              width="17"
-              height="17"
-              viewBox="0 0 17 17"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8.5 16C12.6421 16 16 12.6421 16 8.5C16 4.35786 12.6421 1 8.5 1C4.35786 1 1 4.35786 1 8.5C1 12.6421 4.35786 16 8.5 16Z"
-                stroke="white"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M8.5 11.5L11.5 8.5L8.5 5.5"
-                stroke="white"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M5.5 8.5H11.5"
-                stroke="white"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </S.Link>
         </S.DistributionTitle>
       </S.DistributionGraphWrapper>
       <S.DistributionChart>
-        <img src="assets/distribution-chart.svg" alt="46.5% through rewards, 20% as reserves to the Kassandra Foundation, 12.5% to the development team, 10% through private sales, 5% through seed sales, 5% through public sales and 1% through an Initial Liquidity Offering (ILO)." />
+        <img
+          src="assets/distribution-chart.svg"
+          alt="46.5% through rewards, 20% as reserves to the Kassandra Foundation, 12.5% to the development team, 10% through private sales, 5% through seed sales, 5% through public sales and 1% through an Initial Liquidity Offering (ILO)."
+        />
         <S.DistributionText>
           <h1>Fair and community driven token distribution</h1>
           <p>

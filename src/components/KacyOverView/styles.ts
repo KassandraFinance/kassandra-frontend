@@ -59,37 +59,25 @@ export const Values = styled.div`
     }
   }
 `
-export const Link = styled.a`
+export const Link = styled.div`
   display: flex;
-  text-decoration: none;
-  max-width: 290px;
-  margin: 2.4rem auto 15rem;
+
+  max-width: 30rem;
+  margin-top: 0;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 12rem;
+
   cursor: pointer;
-  //media max width 560px
+
   @media (max-width: 560px) {
-    margin: 2.4rem auto 7rem;
+    margin-top: 0;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 8rem;
   }
+
   a {
-    display: flex;
-    align-items: space-between;
-    text-decoration: none;
-    justify-items: center;
-    text-decoration: none;
     font-size: ${theme.font.sizes.font14};
-    font-weight: ${theme.font.weight.light};
-    color: ${theme.colors.snow};
-    margin-right: ${theme.spacings.space8};
-    transition: 0.15s;
-    svg {
-      margin-left: ${theme.spacings.space8};
-    }
-    &:hover {
-      color: ${theme.colors.cyan};
-      > svg {
-        path {
-          stroke: ${theme.colors.cyan};
-        }
-      }
-    }
   }
 `

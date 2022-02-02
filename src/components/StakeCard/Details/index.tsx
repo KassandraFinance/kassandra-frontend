@@ -13,6 +13,7 @@ import { BNtoDecimal } from '../../../utils/numerals'
 import * as S from './styles'
 import { registerToken } from '../../../utils/registerToken'
 import { IPriceLPToken } from '..'
+import ExternalLink from '../../ExternalLink'
 
 interface IInfoStakeStaticProps {
   votingMultiplier: string;
@@ -145,51 +146,28 @@ const Details = ({
         <span>{infoStakeStatic.endDate}</span>
       </S.Info>
       <S.Info>
-        <S.Link>
-          <a
-            href={
-              process.env.NEXT_PUBLIC_MASTER === '1'
-                ? `${chains.avalanche.blockExplorerUrls[0]}/address/${stakingToken}`
-                : `${chains.fuji.blockExplorerUrls[0]}/address/${stakingToken}`
-            }
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            See contract
-          </a>
-          <img src="/assets/GoToSite.svg" alt="" />
-        </S.Link>
+        <ExternalLink
+          hrefLink={
+            process.env.NEXT_PUBLIC_MASTER === '1'
+              ? `${chains.avalanche.blockExplorerUrls[0]}address/${stakingToken}`
+              : `${chains.fuji.blockExplorerUrls[0]}address/${stakingToken}`
+          }
+          text="See contract"
+        />
         {symbol === 'LP' && (
-          <S.Link>
-            <a
-              href={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Get LP
-            </a>
-            <img src="/assets/iconBuyKacy.svg" alt="" />
-          </S.Link>
+          <ExternalLink
+            hrefLink={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
+            text="Get LP"
+          />
         )}
         {symbol === 'KACY' && (
-          <S.Link>
-            <a
-              href={`https://app.pangolin.exchange/#/swap?outputCurrency=${Kacy}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Buy $KACY
-            </a>
-            <img src="/assets/iconBuyKacy.svg" alt="" />
-          </S.Link>
+          <ExternalLink
+            hrefLink={`https://app.pangolin.exchange/#/swap?outputCurrency=${Kacy}`}
+            text="Buy $KACY"
+          />
         )}
         {symbol === 'aHYPE' && (
-          <S.Link>
-            <Link href="/products/ahype" passHref>
-              Buy $aHYPE
-            </Link>
-            <img src="/assets/iconBuyKacy.svg" alt="" />
-          </S.Link>
+          <ExternalLink hrefNext="/products/ahype" text="Buy $aHYPE" />
         )}
       </S.Info>
       <S.AddToken

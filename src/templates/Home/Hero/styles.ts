@@ -140,7 +140,7 @@ export const ButtonWrapper = styled.ul`
     text-align: center;
     grid-template-columns: 1fr;
     gap: 16px;
-    width: 144px;
+    width: 154px;
     .btn-cta {
       width: 100%;
     }
