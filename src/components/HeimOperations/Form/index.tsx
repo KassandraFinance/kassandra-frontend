@@ -25,6 +25,7 @@ import ModalWalletConnect from '../../ModalWalletConnect'
 
 import InputTokens from './InputTokens'
 import InputBestValue from './InputBestValue'
+import TransactionSettings from './TransactionSettings'
 
 import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
@@ -77,6 +78,11 @@ const Form = ({
   const [isReload, setIsReload] = React.useState<boolean>(false)
 
   const [errorMsg, setErrorMsg] = React.useState('')
+  const [slippage, setSlippage] = React.useState({
+    value: '0.5',
+    custom: '2.0',
+    isCustom: false
+  })
 
   const [swapInAddress, setSwapInAddress] = React.useState('')
   const [swapInAmount, setSwapInAmount] = React.useState(new BigNumber(0))
@@ -900,7 +906,7 @@ const Form = ({
       <input type="hidden" name="swapInSymbol" value={infoAHYPE[tokenInIndex]?.symbol || ''} />
       <input type="hidden" name="swapOutSymbol" value={infoAHYPE[tokenOutIndex]?.symbol || ''} />
       <input type="hidden" name="walletAddress" value={userWalletAddress} />
-      <input type="hidden" name="slippageInput" value="0.5" />
+      <input type="hidden" name="slippageInput" value={slippage.value} />
       <input type="hidden" name="amountUSD" value={
         title === "Invest"
           ? Big((swapOutAmount[0] || 0).toString())
@@ -920,6 +926,11 @@ const Form = ({
             )
             .toString()
       } />
+
+      <TransactionSettings
+        slippage={slippage}
+        setSlippage={setSlippage}
+      />
 
       <S.ErrorTippy content={errorMsg} visible={errorMsg.length > 0}>
         <div>
