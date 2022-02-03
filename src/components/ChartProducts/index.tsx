@@ -43,12 +43,14 @@ const ChartProducts = () => {
       case '1D':
         setParams(prevState => ({
           ...prevState,
+          price_period: 3600,
           period_selected: Math.trunc(dateNow.getTime() / 1000 - 60 * 60 * 24)
         }))
         break
       case '1W':
         setParams(prevState => ({
           ...prevState,
+          price_period: 3600,
           period_selected: Math.trunc(
             dateNow.getTime() / 1000 - 60 * 60 * 24 * 7
           )
@@ -57,6 +59,7 @@ const ChartProducts = () => {
       case '1M':
         setParams(prevState => ({
           ...prevState,
+          price_period: 86400,
           period_selected: Math.trunc(
             dateNow.getTime() / 1000 - 60 * 60 * 24 * 30
           )
@@ -65,6 +68,7 @@ const ChartProducts = () => {
       case '3M':
         setParams(prevState => ({
           ...prevState,
+          price_period: 86400,
           period_selected: Math.trunc(
             dateNow.getTime() / 1000 - 60 * 60 * 24 * 90
           )
@@ -73,6 +77,7 @@ const ChartProducts = () => {
       case '1Y':
         setParams(prevState => ({
           ...prevState,
+          price_period: 86400,
           period_selected: Math.trunc(
             dateNow.getTime() / 1000 - 60 * 60 * 24 * 365
           )

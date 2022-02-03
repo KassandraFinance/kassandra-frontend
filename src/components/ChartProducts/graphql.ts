@@ -16,6 +16,7 @@ export const GET_CHART = gql`
           timestamp_gt: $period_selected
         }
         orderBy: timestamp
+        first: 365
       ) {
         timestamp
         close
