@@ -50,7 +50,7 @@ const VotingPower = ({
         <span>
           your voting power
           <Tippy content="Voting power allows you to create and vote on proposals. To obtain voting power you need to stake your $KACY tokens.">
-            <S.Tooltip>
+            <S.Tooltip tabIndex={0}>
               <Image
                 src={infoGrayIcon}
                 alt="Explanation"
@@ -70,7 +70,7 @@ const VotingPower = ({
         <span>
           total voting power
           <Tippy content="This is the total voting power across all participants of the Kassandra Decentralized Autonomous Organization in this blockchain.">
-            <S.Tooltip>
+            <S.Tooltip tabIndex={0}>
               <Image
                 src={infoGrayIcon}
                 alt="Explanation"

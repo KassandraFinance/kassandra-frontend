@@ -922,36 +922,37 @@ const Form = ({
       } />
 
       <S.ErrorTippy content={errorMsg} visible={errorMsg.length > 0}>
-        <span />
+        <div>
+          <InputTokens
+            clearInput={clearInput}
+            inputRef={inputTokenRef}
+            actionString={typeAction}
+            title={title}
+            decimals={infoAHYPE[tokenInIndex] ? infoAHYPE[tokenInIndex].decimals : new BigNumber(18)}
+            swapBalance={swapInBalance}
+            swapAmount={swapInAmount}
+            setSwapAmount={setSwapInAmount}
+            // Text Input
+            disabled={
+              userWalletAddress.length === 0
+                ? "Please connect your wallet by clicking the button below"
+                : chainId !== poolChain.chainId
+                  ? `Please change to the ${poolChain.chainName} by clicking the button below`
+                  : ""
+            }
+            // Select Input
+            poolTokens={
+              title === 'Withdraw'
+                ? [infoAHYPE[infoAHYPE.length - 1]]
+                : infoAHYPE
+                  .slice(0, -1)
+                  .filter((token: { address: string }) => token.address !== swapOutAddress)
+            }
+            tokenDetails={infoAHYPE[tokenInIndex]}
+            setSwapAddress={setSwapInAddress}
+          />
+        </div>
       </S.ErrorTippy>
-      <InputTokens
-        clearInput={clearInput}
-        inputRef={inputTokenRef}
-        actionString={typeAction}
-        title={title}
-        decimals={infoAHYPE[tokenInIndex] ? infoAHYPE[tokenInIndex].decimals : new BigNumber(18)}
-        swapBalance={swapInBalance}
-        swapAmount={swapInAmount}
-        setSwapAmount={setSwapInAmount}
-        // Text Input
-        disabled={
-          userWalletAddress.length === 0
-            ? "Please connect your wallet by clicking the button below"
-            : chainId !== poolChain.chainId
-              ? `Please change to the ${poolChain.chainName} by clicking the button below`
-              : ""
-        }
-        // Select Input
-        poolTokens={
-          title === 'Withdraw'
-            ? [infoAHYPE[infoAHYPE.length - 1]]
-            : infoAHYPE
-              .slice(0, -1)
-              .filter((token: { address: string }) => token.address !== swapOutAddress)
-        }
-        tokenDetails={infoAHYPE[tokenInIndex]}
-        setSwapAddress={setSwapInAddress}
-      />
 
       {title === 'Swap' ?
         <Tippy content="Trade places for swap-in and swap-out token">

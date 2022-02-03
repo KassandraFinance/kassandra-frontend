@@ -48,13 +48,19 @@ export const SwapButton = styled.button`
     margin: 12px 0 12px 8px;
   }
 
-  :hover {
+  :hover,
+  :focus {
     img:first-child {
       transform: rotate(-180deg);
     }
     img:last-child {
       transform: rotate(0deg);
     }
+  }
+
+  :focus {
+    outline: 1px solid ${theme.colors.snow};
+    border-radius: 5px;
   }
 `
 

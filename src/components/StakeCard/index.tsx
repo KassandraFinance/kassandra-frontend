@@ -312,7 +312,7 @@ const StakeCard = ({
             <S.IntroStaking>
               <S.APR>
                 <Tippy content="The Annual Percentage Rate is the yearly rate earned not taking compounding into account">
-                  <S.TooltipAPR>
+                  <S.TooltipAPR tabIndex={0}>
                     <Image src={infoCyanIcon} alt="Explanation" />
                   </S.TooltipAPR>
                 </Tippy>
@@ -380,7 +380,7 @@ const StakeCard = ({
                     </span>
                   </p>
                   <Tippy content="To redeem your assets you will have to first request a withdrawal and wait this amount of time to be able to redeem your assets. You will stop receiving rewards during this period and your voting power multiplier will be reduced to 1.">
-                    <S.TooltipAPR>
+                    <S.TooltipAPR tabIndex={0}>
                       <Image
                         src={infoGrayIcon}
                         alt="Explanation"

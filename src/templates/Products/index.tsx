@@ -131,7 +131,7 @@ const Products = ({ product }: Input) => {
               <span>
                 TVL
                 <Tippy content="The Total Value Locked is the amount invested inside the pool, or simply the total value of all tokens inside the pool combined.">
-                  <S.Tooltip>
+                  <S.Tooltip tabIndex={0}>
                     <Image src={infoGray} alt="Explanation" />
                   </S.Tooltip>
                 </Tippy>
@@ -142,7 +142,7 @@ const Products = ({ product }: Input) => {
               <span>
                 VOLUME (24h)
                 <Tippy content="Total volume of transactions in the last 24 hours. This includes new investments, withdrawals, token swaps and token transfers, which include swaps in decentralized exchanges.">
-                  <S.Tooltip>
+                  <S.Tooltip tabIndex={0}>
                     <Image src={infoGray} alt="Explanation" />
                   </S.Tooltip>
                 </Tippy>
@@ -153,7 +153,7 @@ const Products = ({ product }: Input) => {
               <span>
                 Swap fees (24h)
                 <Tippy content="Amount of fees collected in the last 24 hours when people swap tokens inside the pool. This fee is paid to all investors of the pool.">
-                  <S.Tooltip>
+                  <S.Tooltip tabIndex={0}>
                     <Image src={infoGray} alt="Explanation" />
                   </S.Tooltip>
                 </Tippy>
@@ -164,7 +164,7 @@ const Products = ({ product }: Input) => {
               <span>
                 Withdraw fees (24h)
                 <Tippy content="Amount of fees collected in the last 24 hours when people withdraw from the strategy. This fee is paid to the Kassandra Decentralized Autonomous Organization.">
-                  <S.Tooltip>
+                  <S.Tooltip tabIndex={0}>
                     <Image src={infoGray} alt="Explanation" />
                   </S.Tooltip>
                 </Tippy>
