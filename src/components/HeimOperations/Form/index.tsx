@@ -68,7 +68,6 @@ const Form = ({
 
   const [tokenAddress2Index, setTokenAddress2Index] = React.useState<Address2Index>({})
   const [isApproved, setIsApproved] = React.useState<boolean[]>([])
-  const [approvalCheck, setApprovalCheck] = React.useState(0)
 
   const [fees, setFees] = React.useState({
     Invest: '...',
@@ -226,7 +225,7 @@ const Form = ({
     setIsReload(!isReload)
     setIsApproved([])
     calc()
-  }, [chainId, title, infoAHYPE.length, approvalCheck, userWalletAddress])
+  }, [chainId, title, infoAHYPE.length, userWalletAddress])
 
   // get balance of swap in token
   React.useEffect(() => {
