@@ -1,10 +1,10 @@
 import styled from 'styled-components'
-import theme from '../../../styles/theme'
+import theme from '../../../../styles/theme'
 
-import * as VotingPowerStyles from '../../../components/VotingPower/styles'
-import * as VoteCardStyle from '../../../components/Governance/VoteCard/styles'
-import * as ButtonStyles from '../../../components/Button/styles'
-import * as ExternalLinkStyles from '../../../components/ExternalLink/styles'
+import * as VotingPowerStyles from '../../../../components/VotingPower/styles'
+import * as VoteCardStyle from '../../../../components/Governance/VoteCard/styles'
+import * as ButtonStyles from '../../../../components/Button/styles'
+import * as ExternalLinkStyles from '../../../../components/ExternalLink/styles'
 
 export const BackgroundVote = styled.div`
   background: url('/assets/background-governance-page.svg');
@@ -31,12 +31,12 @@ export const VoteContent = styled.div`
     padding: 0 16px;
   }
 `
-export const DesktopScreen = styled.div`
+export const IntroDesktopScreen = styled.div`
   @media (max-width: 768.5px) {
     display: none;
   }
 `
-export const MobileScreen = styled.div`
+export const IntroMobileScreen = styled.div`
   @media (min-width: 768.5px) {
     display: none;
   }
@@ -158,13 +158,14 @@ export const ProposalInfo = styled.div`
   display: flex;
   flex-direction: column;
 
-  margin: 8rem auto 0;
+  margin: 10rem auto 0;
   max-width: 1140px;
 
   @media (max-width: 1200px) {
     padding: 0 32px;
   }
   @media (max-width: 768px) {
+    margin: 8rem auto 0;
     padding: 0 24px;
   }
   @media (max-width: 540px) {
@@ -186,6 +187,13 @@ export const ProposalTitleWrapper = styled.div`
     font-size: ${theme.font.sizes.font18};
     font-weight: ${theme.font.weight.bold};
     margin-left: 0.8rem;
+
+    @media (min-width: 768px) {
+      font-size: ${theme.font.sizes.font24};
+    }
+    @media (min-width: 1024px) {
+      font-size: ${theme.font.sizes.font32};
+    }
   }
 `
 export const DescriptionTable = styled.section`
@@ -197,6 +205,7 @@ export const DescriptionTable = styled.section`
   padding: 1.6rem;
   width: 100%;
   @media (min-width: 1024px) {
+    padding: 2.4rem;
     margin: 4.8rem auto 0;
   }
 `
@@ -204,11 +213,19 @@ export const Table = styled.table`
   width: 100%;
 `
 export const TableHead = styled.div`
-  margin-bottom: 1.6rem;
+  border-bottom: 1px solid #ffffff4d;
+  padding-bottom: 1.6rem;
 `
 export const TableTitle = styled.th`
   font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.bold};
+
+  @media (min-width: 768px) {
+    font-size: ${theme.font.sizes.font18};
+  }
+  @media (min-width: 1024px) {
+    font-size: ${theme.font.sizes.font24};
+  }
 `
 export const TableBody = styled.tbody``
 export const TableDescriptionWrapper = styled.div`
@@ -217,10 +234,23 @@ export const TableDescriptionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1.6rem 0;
+  &:first-child {
+    border-top: none;
+  }
 `
 export const DescriptionSubTitle = styled.td`
   font-size: ${theme.font.sizes.font14};
   font-weight: ${theme.font.weight.bold};
+  letter-spacing: 0.07rem;
+
+  @media (min-width: 1024px) {
+    font-size: ${theme.font.sizes.font18};
+    letter-spacing: 0.09rem;
+  }
+  @media (min-width: 768px) {
+    font-size: ${theme.font.sizes.font16};
+    letter-spacing: 0.08rem;
+  }
 `
 export const DescriptionText = styled.td`
   font-size: ${theme.font.sizes.font12};
@@ -229,6 +259,14 @@ export const DescriptionText = styled.td`
   letter-spacing: 0.06rem;
 
   padding: 1.6rem 0;
+  @media (min-width: 768px) {
+    font-size: ${theme.font.sizes.font14};
+    letter-spacing: 0.07rem;
+  }
+  @media (min-width: 1024px) {
+    font-size: ${theme.font.sizes.font16};
+    letter-spacing: 0.08rem;
+  }
 `
 export const InfoTable = styled.table`
   background: #ffffff0a;
@@ -238,15 +276,19 @@ export const InfoTable = styled.table`
   margin: 1.6rem auto 0;
   padding: 1.6rem;
   width: 100%;
-  @media (min-width: 1024px) {
-    margin: 4.8rem auto 0;
-  }
+  height: max-content;
   @media (width: 768px) {
     margin: 3.2rem auto 0;
+  }
+  @media (min-width: 1024px) {
+    margin: 4.8rem auto 0;
   }
 `
 export const TableInfoWrapper = styled.div`
   border-top: 1px solid #ffffff4d;
+  &:first-child {
+    border-top: none;
+  }
 `
 export const DataWrapper = styled.div`
   display: flex;
@@ -259,10 +301,23 @@ export const DataWrapper = styled.div`
 export const TextKey = styled.span`
   font-size: ${theme.font.sizes.font12};
   font-weight: ${theme.font.weight.bold};
+  letter-spacing: 0.06rem;
+
+  @media (min-width: 768px) {
+    font-size: ${theme.font.sizes.font14};
+    letter-spacing: 0.07rem;
+  }
 `
 export const TextValue = styled.span`
   font-size: ${theme.font.sizes.font12};
   font-weight: ${theme.font.weight.light};
+  letter-spacing: 0.06rem;
+
+  @media (min-width: 768px) {
+    font-size: ${theme.font.sizes.font14};
+    line-height: 18.2px;
+    letter-spacing: 0.07rem;
+  }
 `
 export const InfoLinkWrapper = styled.div`
   background: #ffffff0a;
@@ -271,9 +326,16 @@ export const InfoLinkWrapper = styled.div`
 
   display: flex;
   justify-content: center;
-
+  width: 100%;
   margin-top: 1.6rem;
   padding: 1.6rem;
+
+  > span {
+    font-size: ${theme.font.sizes.font14};
+    @media (min-width: 768px) {
+      font-size: ${theme.font.sizes.font16};
+    }
+  }
 `
 export const Link = styled.a`
   color: #c4c4c4;
@@ -305,11 +367,19 @@ export const ProposalDetails = styled.div`
   display: flex;
   flex-direction: column;
 
-  margin: 8rem 0 0;
+  margin: 10rem 0 0;
+  @media (max-width: 768px) {
+    margin: 8rem 0 0;
+  }
 `
 export const DetailsSubTitle = styled.td`
   font-size: ${theme.font.sizes.font14};
   font-weight: ${theme.font.weight.bold};
+
+  @media (min-width: 1024px) {
+    font-size: ${theme.font.sizes.font18};
+    letter-spacing: 0.09rem;
+  }
 `
 export const DetailsText = styled.td`
   font-size: ${theme.font.sizes.font12};
@@ -317,5 +387,26 @@ export const DetailsText = styled.td`
   line-height: 1.6rem;
   letter-spacing: 0.06rem;
 
-  padding: 0.8rem 6.4rem 2.4rem;
+  padding: 0.8rem 0 1.6rem 2.4rem;
+
+  @media (min-width: 768px) {
+    font-size: ${theme.font.sizes.font14};
+    letter-spacing: 0.07rem;
+    line-height: 1.82rem;
+    padding: 0.8rem 0 2.4rem 2.4rem;
+    @media (min-width: 1024px) {
+      padding: 0.8rem 0 2.4rem 3.6rem;
+      font-size: ${theme.font.sizes.font16};
+      line-height: 2.08rem;
+      letter-spacing: 0.08rem;
+    }
+  }
 `
+export const ProposalStatus = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 8rem 0 0;
+  max-width: 114rem;
+`
+export const ProposalRoadMap = styled.div``
+export const ProposalSchedule = styled.div``
