@@ -25,6 +25,7 @@ import ModalWalletConnect from '../../ModalWalletConnect'
 
 import InputTokens from './InputTokens'
 import InputBestValue from './InputBestValue'
+import TransactionSettings from './TransactionSettings'
 
 import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
@@ -68,7 +69,6 @@ const Form = ({
 
   const [tokenAddress2Index, setTokenAddress2Index] = React.useState<Address2Index>({})
   const [isApproved, setIsApproved] = React.useState<boolean[]>([])
-  const [approvalCheck, setApprovalCheck] = React.useState(0)
 
   const [fees, setFees] = React.useState({
     Invest: '...',
@@ -78,6 +78,11 @@ const Form = ({
   const [isReload, setIsReload] = React.useState<boolean>(false)
 
   const [errorMsg, setErrorMsg] = React.useState('')
+  const [slippage, setSlippage] = React.useState({
+    value: '0.5',
+    custom: '2.0',
+    isCustom: false
+  })
 
   const [swapInAddress, setSwapInAddress] = React.useState('')
   const [swapInAmount, setSwapInAmount] = React.useState(new BigNumber(0))
@@ -226,7 +231,7 @@ const Form = ({
     setIsReload(!isReload)
     setIsApproved([])
     calc()
-  }, [chainId, title, infoAHYPE.length, approvalCheck, userWalletAddress])
+  }, [chainId, title, infoAHYPE.length, userWalletAddress])
 
   // get balance of swap in token
   React.useEffect(() => {
@@ -901,7 +906,7 @@ const Form = ({
       <input type="hidden" name="swapInSymbol" value={infoAHYPE[tokenInIndex]?.symbol || ''} />
       <input type="hidden" name="swapOutSymbol" value={infoAHYPE[tokenOutIndex]?.symbol || ''} />
       <input type="hidden" name="walletAddress" value={userWalletAddress} />
-      <input type="hidden" name="slippageInput" value="0.5" />
+      <input type="hidden" name="slippageInput" value={slippage.value} />
       <input type="hidden" name="amountUSD" value={
         title === "Invest"
           ? Big((swapOutAmount[0] || 0).toString())
@@ -922,37 +927,43 @@ const Form = ({
             .toString()
       } />
 
-      <S.ErrorTippy content={errorMsg} visible={errorMsg.length > 0}>
-        <span />
-      </S.ErrorTippy>
-      <InputTokens
-        clearInput={clearInput}
-        inputRef={inputTokenRef}
-        actionString={typeAction}
-        title={title}
-        decimals={infoAHYPE[tokenInIndex] ? infoAHYPE[tokenInIndex].decimals : new BigNumber(18)}
-        swapBalance={swapInBalance}
-        swapAmount={swapInAmount}
-        setSwapAmount={setSwapInAmount}
-        // Text Input
-        disabled={
-          userWalletAddress.length === 0
-            ? "Please connect your wallet by clicking the button below"
-            : chainId !== poolChain.chainId
-              ? `Please change to the ${poolChain.chainName} by clicking the button below`
-              : ""
-        }
-        // Select Input
-        poolTokens={
-          title === 'Withdraw'
-            ? [infoAHYPE[infoAHYPE.length - 1]]
-            : infoAHYPE
-              .slice(0, -1)
-              .filter((token: { address: string }) => token.address !== swapOutAddress)
-        }
-        tokenDetails={infoAHYPE[tokenInIndex]}
-        setSwapAddress={setSwapInAddress}
+      <TransactionSettings
+        slippage={slippage}
+        setSlippage={setSlippage}
       />
+
+      <S.ErrorTippy content={errorMsg} visible={errorMsg.length > 0}>
+        <div>
+          <InputTokens
+            clearInput={clearInput}
+            inputRef={inputTokenRef}
+            actionString={typeAction}
+            title={title}
+            decimals={infoAHYPE[tokenInIndex] ? infoAHYPE[tokenInIndex].decimals : new BigNumber(18)}
+            swapBalance={swapInBalance}
+            swapAmount={swapInAmount}
+            setSwapAmount={setSwapInAmount}
+            // Text Input
+            disabled={
+              userWalletAddress.length === 0
+                ? "Please connect your wallet by clicking the button below"
+                : chainId !== poolChain.chainId
+                  ? `Please change to the ${poolChain.chainName} by clicking the button below`
+                  : ""
+            }
+            // Select Input
+            poolTokens={
+              title === 'Withdraw'
+                ? [infoAHYPE[infoAHYPE.length - 1]]
+                : infoAHYPE
+                  .slice(0, -1)
+                  .filter((token: { address: string }) => token.address !== swapOutAddress)
+            }
+            tokenDetails={infoAHYPE[tokenInIndex]}
+            setSwapAddress={setSwapInAddress}
+          />
+        </div>
+      </S.ErrorTippy>
 
       {title === 'Swap' ?
         <Tippy content="Trade places for swap-in and swap-out token">

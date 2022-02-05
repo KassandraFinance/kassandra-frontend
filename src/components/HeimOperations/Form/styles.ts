@@ -20,7 +20,7 @@ export const FormContainer = styled.form`
   flex-direction: column;
   align-items: center;
 
-  padding: 40px;
+  padding: 20px 40px 40px;
   max-height: 100%;
 
   .btn-submit {
@@ -48,13 +48,19 @@ export const SwapButton = styled.button`
     margin: 12px 0 12px 8px;
   }
 
-  :hover {
+  :hover,
+  :focus {
     img:first-child {
       transform: rotate(-180deg);
     }
     img:last-child {
       transform: rotate(0deg);
     }
+  }
+
+  :focus {
+    outline: 1px solid ${theme.colors.snow};
+    border-radius: 5px;
   }
 `
 
@@ -64,6 +70,154 @@ export const ExchangeRate = styled.div`
   align-items: center;
   width: 100%;
   margin-top: 8px;
+`
+
+export const TransactionSettings = styled.div`
+  font-size: ${theme.font.sizes.font14};
+  width: 100%;
+  position: relative;
+  margin-bottom: 10px;
+  text-align: center;
+
+  .settings {
+    cursor: pointer;
+    font-weight: ${theme.font.weight.light};
+    padding-right: 5px;
+  }
+
+  #settingsBox {
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+  }
+
+  #settingsBox + img {
+    transform: rotate(-180deg);
+    transition: transform 300ms ease;
+  }
+
+  #settingsBox:focus + img {
+    outline: 1px solid ${theme.colors.snow};
+  }
+
+  #settingsBox:checked + img {
+    transform: rotate(0);
+  }
+
+  #settingsBox:checked + img + fieldset {
+    display: block;
+  }
+
+  fieldset {
+    text-align: left;
+    display: none;
+    margin-top: 15px;
+    padding-bottom: 15px;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+    legend {
+      font-weight: ${theme.font.weight.light};
+      margin-bottom: 16px;
+    }
+
+    .options {
+      display: flex;
+      gap: 8px;
+    }
+
+    .option {
+      flex: 1;
+      position: relative;
+
+      span {
+        color: ${theme.colors.snow};
+        pointer-events: none;
+        position: absolute;
+        top: 10px;
+        right: 18px;
+      }
+
+      &:last-child {
+        flex: 2;
+
+        label {
+          position: absolute;
+          width: 0;
+          height: 0;
+          border: none;
+          padding: 0;
+          opacity: 0;
+          overflow: hidden;
+        }
+      }
+
+      & > input:not(.custom) {
+        opacity: 0;
+        display: block;
+        height: 0;
+        width: 0;
+      }
+    }
+
+    .custom,
+    label {
+      font-size: ${theme.font.sizes.font14};
+      cursor: pointer;
+      padding: 8px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 3px;
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+
+    .custom {
+      cursor: auto;
+      text-align: right;
+      background: rgba(255, 255, 255, 0.15);
+      color: ${theme.colors.snow};
+      height: 100%;
+      padding: 0 30px 0 18px;
+
+      &::placeholder {
+        color: ${theme.colors.snow};
+      }
+
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+
+    input:checked + label,
+    input:checked + .custom {
+      background: ${theme.colors.snow};
+      color: ${theme.colors.darkPurple};
+      border-color: ${theme.colors.snow};
+
+      &::placeholder {
+        color: #948499;
+      }
+    }
+
+    input:checked + .custom + span {
+      color: ${theme.colors.darkPurple};
+    }
+
+    input:focus + label,
+    input:focus + .custom:not(:focus) {
+      outline: 1px solid ${theme.colors.snow};
+      outline-offset: 1px;
+    }
+
+    .custom:focus {
+      outline: none;
+    }
+  }
 `
 
 // ========== DEFAULT INPUT ALL ==========
