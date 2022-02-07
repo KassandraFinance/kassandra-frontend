@@ -24,7 +24,7 @@ export const VotingPowerTable = () => {
         </thead>
         <tbody>
           {listVotingRank.map(item => (
-            <Link key={item.address} href={`/gov/address/${1}`}>
+            <Link key={item.address} href={`/gov/address/${item.address}`}>
               <S.Tr>
                 <S.Td className="rank">{item.rank}</S.Td>
                 <S.Td className="user">
