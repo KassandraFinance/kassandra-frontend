@@ -6,7 +6,7 @@ import VotingPowerTable from '../../components/Governance/VotingPowerTable'
 
 import votingPower from '../../../public/assets/iconGradient/voting-power-rank.svg'
 
-import * as S from './proposals/styles'
+import * as S from '../../templates/Gov/Proposals/styles'
 
 const Leaderboard = () => {
   return (
