@@ -27,8 +27,8 @@ const Gov = () => {
         />
         <Overview />
         <S.OverViewLinks>
-          <ExternalLink href="/farm" text="Obtain more" />
-          <ExternalLink href="/farm" text="Manage Delegation" />
+          <ExternalLink hrefNext="/farm" text="Obtain more" />
+          <ExternalLink hrefNext="/farm" text="Manage Delegation" />
         </S.OverViewLinks>
         <S.TitleAndLinkContent>
           <TitleSection
@@ -46,14 +46,14 @@ const Gov = () => {
           </S.LinkForum>
         </S.TitleAndLinkContent>
         <ProposalTable />
-        <ExternalLink href="/gov/proposals" text="Check more proposals" />
+        <ExternalLink hrefNext="/gov/proposals" text="Check more proposals" />
         <TitleSection
           image={votingPower}
           title="Voting Power Rank"
           text="texto asdsad sadsadsa"
         />
         <VotingPowerTable />
-        <ExternalLink href="/gov/leaderboard" text="Check leaderboard" />
+        <ExternalLink hrefNext="/gov/leaderboard" text="Check leaderboard" />
       </S.VoteContent>
     </S.BackgroundVote>
   )
