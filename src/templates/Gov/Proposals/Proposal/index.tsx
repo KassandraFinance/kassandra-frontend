@@ -18,7 +18,9 @@ import VotingPower from '../../../../components/VotingPower'
 
 import proposals from '../../../../../public/assets/iconGradient/proposals.svg'
 import ProposalDetailsIcon from '../../../../../public/assets/iconGradient/ProposalDetails-icon.svg'
-import ProposalInfoIcon from '../../../../../public/assets/iconGradient/ProposalInfo-icon.svg'
+import proposalInfoIcon from '../../../../../public/assets/iconGradient/ProposalInfo-icon.svg'
+import proposalCompleteIcon from '../../../../../public/assets/iconGradient/ProposalComplete-icon.svg'
+import proposalWaitingIcon from '../../../../../public/assets/iconGradient/ProposalWaiting-icon.svg'
 
 import * as S from './styles'
 
@@ -130,7 +132,7 @@ const Proposal = () => {
         </S.VoteContent>
         <S.ProposalInfo>
           <S.ProposalTitleWrapper>
-            <Image src={ProposalInfoIcon} width={24} height={24} />
+            <Image src={proposalInfoIcon} width={24} height={24} />
             <h1>Proposal Info</h1>
           </S.ProposalTitleWrapper>
           <S.CardWrapper>
@@ -215,7 +217,23 @@ const Proposal = () => {
               <Image src={ProposalDetailsIcon} width={24} height={24} />
               <h1>Proposal Status History</h1>
             </S.ProposalTitleWrapper>
-            <S.ProposalSchedule></S.ProposalSchedule>
+
+            <S.Steps>
+              {stepData.map((step, index) => (
+                <>
+                  <S.Step key={step.title}>
+                    <Image src={proposalCompleteIcon} />
+                    <S.StepTextWrapper>
+                      <S.StepTitle>{step.title}</S.StepTitle>
+                      <S.StepDate>{step.date}</S.StepDate>
+                    </S.StepTextWrapper>
+                  </S.Step>
+                  <S.LineBetweenImages
+                    isAfter={index === stepData.length - 1}
+                  />
+                </>
+              ))}
+            </S.Steps>
           </S.ProposalStatus>
         </S.ProposalInfo>
       </S.BackgroundVote>
@@ -291,5 +309,28 @@ const details = [
     id: '03',
     subTitle: 'Turpis ornare vitae sem quis sagittis. ',
     text: 'Sed libero ultricies eu accumsan. Risus lectus urna arcu aliquam velit.'
+  }
+]
+
+const stepData = [
+  {
+    title: 'Created',
+    date: '22/02/2022'
+  },
+  {
+    title: 'Active',
+    date: '22/02/2022'
+  },
+  {
+    title: 'Succeeded',
+    date: '22/02/2022'
+  },
+  {
+    title: 'Queued',
+    date: '22/02/2022'
+  },
+  {
+    title: 'Executed',
+    date: '22/02/2022'
   }
 ]

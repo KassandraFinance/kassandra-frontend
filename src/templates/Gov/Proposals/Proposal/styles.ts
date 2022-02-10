@@ -408,5 +408,80 @@ export const ProposalStatus = styled.div`
   margin: 8rem 0 0;
   max-width: 114rem;
 `
-export const ProposalRoadMap = styled.div``
-export const ProposalSchedule = styled.div``
+interface IImageProps {
+  isAfter: boolean;
+}
+// eslint-disable-next-line prettier/prettier
+export const LineBetweenImages = styled.div<IImageProps>`
+    ${props =>
+    !props.isAfter &&
+    `display: inline-block;
+    margin-top: 3.3rem ;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(0deg, #ffbf00 -0.02%, #e843c4 99.99%);
+    @media (max-width: 768px) {
+      margin-top: 2.8rem;
+    }
+    @media (max-width: 480px) {
+      width: 1px;
+      height: 100%;
+      margin-top: 0;
+      margin-left: 2rem;
+    }
+  `}
+`
+export const Steps = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 7.2rem;
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 3.6rem;
+    padding: 0 4.8rem 0 2.6rem ;
+  }
+`
+export const Step = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 79px;
+  position: relative;
+  @media (max-width: 768px) {
+    min-width: 56px;
+    min-height: 56px;
+  }
+  @media (max-width: 480px) {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    img {
+      width: 40px;
+    }
+  }
+`
+export const StepTextWrapper = styled.div`
+  /* display: flex;
+  @media (max-width: 480px) {
+  } */
+`
+
+export const StepTitle = styled.div`
+  font-size: ${theme.font.sizes.font18};
+  font-weight: ${theme.font.weight.bold};
+  margin-top: 4.4rem;
+  @media (max-width: 768px) {
+    font-size: ${theme.font.sizes.font14};
+    margin-top: 2.4rem;
+  }
+`
+export const StepDate = styled.div`
+  font-size: ${theme.font.sizes.font14};
+  font-weight: ${theme.font.weight.light};
+  letter-spacing: 0.07rem;
+  @media (max-width: 768px) {
+    font-size: ${theme.font.sizes.font12};
+  }
+`
