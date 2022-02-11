@@ -10,13 +10,7 @@ import externalLink from '../../../../public/assets/icons/external-link.svg'
 
 import * as S from './styles'
 
-import useGovernance from '../../../hooks/useGovernance'
-import { GovernorAlpha } from '../../../constants/tokenAddresses'
-
 const WalletAddress = () => {
-  const governance = useGovernance(GovernorAlpha)
-  console.log(governance)
-
   return (
     <S.BackgroundVote>
       <Header />

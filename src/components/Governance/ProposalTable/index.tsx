@@ -2,6 +2,10 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
+import { GovernorAlpha } from '../../../constants/tokenAddresses'
+
+import useGovernance from '../../../hooks/useGovernance'
+
 import approved from '../../../../public/assets/status/approved.svg'
 import cancelled from '../../../../public/assets/status/cancelled.svg'
 import executed from '../../../../public/assets/status/executed.svg'
@@ -32,6 +36,28 @@ const stateIcon: { [key: number]: any } = {
 }
 
 export const ProposalTable = () => {
+  const [proposalsAmount, setProposalsAmount] = React.useState<number>(-1)
+  const [proposalsList, setProposalsList] = React.useState<Array<object>>([])
+  const governance = useGovernance(GovernorAlpha)
+
+  async function getProposal(amount: number) {
+    for (let i = 0; i < amount; i++) {
+      const state = await governance.state(i + 1)
+      const proposal = await governance.proposals(i + 1)
+
+      setProposalsList(prevState => [...prevState, { state, proposal }])
+    }
+  }
+
+  React.useEffect(() => {
+    governance.proposalCount().then(res => setProposalsAmount(Number(res)))
+    if (proposalsAmount > 0) {
+      getProposal(proposalsAmount)
+    }
+  }, [proposalsAmount])
+
+  console.log(proposalsList)
+
   return (
     <S.ProposalTable>
       <S.Table>
