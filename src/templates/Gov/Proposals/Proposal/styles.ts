@@ -414,8 +414,8 @@ interface IImageProps {
 // eslint-disable-next-line prettier/prettier
 export const LineBetweenImages = styled.div<IImageProps>`
     ${props =>
-    !props.isAfter &&
-    `display: inline-block;
+      !props.isAfter &&
+      `display: inline-block;
     margin-top: 3.3rem ;
     width: 100%;
     height: 1px;
@@ -439,7 +439,7 @@ export const Steps = styled.div`
     flex-direction: column;
     align-items: flex-start;
     margin-top: 3.6rem;
-    padding: 0 4.8rem 0 2.6rem ;
+    padding: 0 4.8rem 0 2.6rem;
   }
 `
 export const Step = styled.div`
