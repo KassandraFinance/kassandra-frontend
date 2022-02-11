@@ -8,7 +8,7 @@ import substr from '../../utils/substr'
 
 import Button from '../Button'
 import ModalLogOut from '../ModalLogOut'
-import DropdownInvest from '../DropdownInvest'
+import DropdownInvest from '../Dropdown'
 import ModalWalletConnect from '../ModalWalletConnect'
 import ModalSocialMediaMobile from '../ModalSocialMediaMobile'
 
@@ -60,15 +60,10 @@ const Header = () => {
               <Image src={kacy64} alt="Kassandra" />
             </a>
           </Link>
-          {process.env.NEXT_PUBLIC_MASTER === '1' ? (
-            <S.MenuLinkDisable
-              onClick={() => clickMatomoEvent('click-on-link', 'invest')}
-            >
-              Invest
-            </S.MenuLinkDisable>
-          ) : (
-            <DropdownInvest />
-          )}
+          <DropdownInvest
+            nameOnHeader="invest"
+            linkPage={[{ name: 'aHYPE', href: '/products/ahype' }]}
+          />
           <Link href="/farm" passHref>
             <S.MenuLink
               onClick={() => clickMatomoEvent('click-on-link', 'stake-farm')}
@@ -76,13 +71,19 @@ const Header = () => {
               Stake/Farm
             </S.MenuLink>
           </Link>
-          <Link href="/gov" passHref>
-            <S.MenuLink
-              onClick={() => clickMatomoEvent('click-on-link', 'vote')}
-            >
-              Vote
-            </S.MenuLink>
-          </Link>
+          <DropdownInvest
+            nameOnHeader="vote"
+            linkPage={[
+              {
+                name: 'User profile',
+                href: '/gov/address/0x55bB02dF11C5d8862eb7B924f3876b8BA307bAa7'
+              },
+              {
+                name: 'Other User profile',
+                href: '/gov/address/0x55bB02dF11C5d8862eb7B924f3876b8BA307bAa7'
+              }
+            ]}
+          />
           <Link href="/about" passHref>
             <S.MenuLink
               onClick={() => clickMatomoEvent('click-on-link', 'about')}
