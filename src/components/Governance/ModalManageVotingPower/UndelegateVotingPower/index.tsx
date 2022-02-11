@@ -79,7 +79,7 @@ const UndelegateVotingPower = ({
             onClick={() => setCurrentModal('manage')}
           />
           <Button
-            size="small"
+            size="large"
             fullWidth
             backgroundSecondary
             disabledNoEvent={undelegateSelected.nameToken === ''}
