@@ -75,12 +75,12 @@ const Header = () => {
             nameOnHeader="vote"
             linkPage={[
               {
-                name: 'User profile',
-                href: '/gov/address/0x55bB02dF11C5d8862eb7B924f3876b8BA307bAa7'
+                name: 'Overview',
+                href: '/gov'
               },
               {
-                name: 'Other User profile',
-                href: '/gov/address/0x55bB02dF11C5d8862eb7B924f3876b8BA307bAa7'
+                name: 'User profile',
+                href: `/gov/address/${userWalletAddress}`
               }
             ]}
           />
