@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
 import useStakingContract from '../../../../hooks/useStakingContract'
@@ -20,7 +19,6 @@ import proposals from '../../../../../public/assets/iconGradient/proposals.svg'
 import ProposalDetailsIcon from '../../../../../public/assets/iconGradient/ProposalDetails-icon.svg'
 import proposalInfoIcon from '../../../../../public/assets/iconGradient/ProposalInfo-icon.svg'
 import proposalCompleteIcon from '../../../../../public/assets/iconGradient/ProposalComplete-icon.svg'
-import proposalWaitingIcon from '../../../../../public/assets/iconGradient/ProposalWaiting-icon.svg'
 
 import * as S from './styles'
 
@@ -38,9 +36,6 @@ const Proposal = () => {
 
   const kacyStake = useStakingContract(Staking)
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-
-  const router = useRouter()
-  const { proposal } = router.query
 
   return (
     <>
@@ -69,7 +64,7 @@ const Proposal = () => {
                   getCurrentVotes={kacyStake.currentVotes}
                   userWalletAddress={userWalletAddress}
                 />
-                <ExternalLink text={'Obtain more voting power'} href={'#'} />
+                <ExternalLink text="Obtain more voting power" hrefNext="#" />
               </S.VotingPowerAndLink>
             </S.TitleWrapper>
           </S.IntroDesktopScreen>
@@ -84,7 +79,7 @@ const Proposal = () => {
                     getCurrentVotes={kacyStake.currentVotes}
                     userWalletAddress={userWalletAddress}
                   />
-                  <ExternalLink text={'Obtain more voting power'} href={'#'} />
+                  <ExternalLink text="Obtain more voting power" hrefNext="#" />
                 </S.VotingPowerAndLink>
                 <S.ProposeAuthorCard>
                   <p>Proposed by</p>

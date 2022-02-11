@@ -2,7 +2,6 @@ import React from 'react'
 
 import Button from '../../Button'
 import ExternalLink from '../../ExternalLink'
-import ModalVotes from '../../../components/Governance/ModalVotes'
 
 import * as S from './styles'
 
@@ -32,8 +31,8 @@ const VoteCard = ({
         <S.ActionWrapper>
           <Button text="Vote In Favor" backgroundSecondary />
           <ExternalLink
-            text={'Check all voters'}
-            href={'#'}
+            text="Check all voters"
+            hrefNext="#"
             onClick={onClickLink}
           />
         </S.ActionWrapper>
