@@ -36,6 +36,7 @@ export const DropButton = styled.button`
   background-color: transparent;
   color: ${theme.colors.snow};
   font-size: 16px;
+  text-transform: capitalize;
   
   display: inline-block;
   

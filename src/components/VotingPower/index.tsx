@@ -17,12 +17,14 @@ interface IVotingPowerProps {
   getTotalVotes: () => Promise<BigNumber>;
   getCurrentVotes: (walletAddres: string) => Promise<BigNumber>;
   userWalletAddress: string;
+  isMobile?: boolean;
 }
 
 const VotingPower = ({
   getTotalVotes,
   getCurrentVotes,
-  userWalletAddress
+  userWalletAddress,
+  isMobile
 }: IVotingPowerProps) => {
   const [totalVotes, setTotalVotes] = React.useState(new BigNumber(-1))
   const [yourVotingPower, setYourVotingPower] = React.useState(new BigNumber(-1)) // eslint-disable-line prettier/prettier
@@ -45,7 +47,7 @@ const VotingPower = ({
   }, [userWalletAddress])
 
   return (
-    <S.VotingPower>
+    <S.VotingPower isMobile={isMobile}>
       <S.YourVotingPower>
         <span>
           your voting power

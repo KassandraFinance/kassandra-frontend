@@ -11,14 +11,15 @@ export const Link = styled.a`
   display: flex;
   align-items: center;
 
+  max-width: 100%;
+
   cursor: pointer;
   transition: 0.15s;
   span {
     display: flex;
-    margin-right: 12px;
   }
   svg {
-    margin-left: ${theme.spacings.space8};
+    margin-left: 10px;
   }
   &:hover {
     color: ${theme.colors.cyan};

@@ -1,7 +1,12 @@
 import styled from 'styled-components'
 import theme from '../../styles/theme'
 
-export const VotingPower = styled.div`
+interface IVotingPowerProps {
+  isMobile?: boolean;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const VotingPower = styled.div<IVotingPowerProps>`
   background: rgba(255, 255, 255, 0.04);
   border-radius: ${theme.border.radius};
   border: 1px solid #fcfcfc26;
@@ -11,6 +16,10 @@ export const VotingPower = styled.div`
 
   @media (max-width: 960px) {
     margin-top: 20px;
+  }
+
+  @media (max-width: 420px) {
+    width: ${props => (props.isMobile ? 'calc(100vw - 32px)' : '290px')};
   }
 `
 

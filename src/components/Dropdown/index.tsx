@@ -4,13 +4,23 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import * as S from './styles'
 
-const DropdownInvest = () => {
+interface ILinkPage {
+  name: string;
+  href: string;
+}
+
+interface IDropdownProps {
+  nameOnHeader: string;
+  linkPage: Array<ILinkPage>;
+}
+
+const Dropdown = ({ nameOnHeader, linkPage }: IDropdownProps) => {
   const [isDropdown, setIsDropdown] = React.useState<boolean>(false)
   const { trackEvent } = useMatomo()
 
   function clickMatomoEvent(action: string, name: string) {
     trackEvent({
-      category: 'header-invest',
+      category: `header-${nameOnHeader}`,
       action,
       name
     })
@@ -23,21 +33,25 @@ const DropdownInvest = () => {
         onMouseOver={() => setIsDropdown(true)}
         onMouseOut={() => setIsDropdown(false)}
       >
-        Invest
+        {nameOnHeader}
       </S.DropButton>
       <S.DropdownContent
         onMouseOver={() => setIsDropdown(true)}
         onMouseOut={() => setIsDropdown(false)}
         isDropdown={isDropdown}
       >
-        <Link href="/products/ahype">
-          <a onClick={() => clickMatomoEvent('click-on-link', 'ahype')}>
-            aHYPE
-          </a>
-        </Link>
+        {linkPage.map((item, index) => (
+          <Link key={index} href={item.href}>
+            <a
+              onClick={() => clickMatomoEvent('click-on-link', `${item.name}`)}
+            >
+              {item.name}
+            </a>
+          </Link>
+        ))}
       </S.DropdownContent>
     </S.Dropdown>
   )
 }
 
-export default DropdownInvest
+export default Dropdown
