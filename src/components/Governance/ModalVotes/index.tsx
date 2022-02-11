@@ -1,20 +1,31 @@
 import React from 'react'
 import Image from 'next/image'
 
-import substr from '../../utils/substr'
+import substr from '../../../utils/substr'
 
-import Button from '../Button'
+import Button from '../../Button'
 
 import * as S from './styles'
 
 interface IModalVotes {
+  voteType: string;
+  percentage: string;
+  totalVotingPower: string;
+  totalAddresses: string;
   modalOpen: boolean;
-  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onClose: () => void;
 }
 
-const ModalVotes = ({ modalOpen, setModalOpen }: IModalVotes) => {
+const ModalVotes = ({
+  modalOpen,
+  onClose,
+  voteType,
+  percentage,
+  totalVotingPower,
+  totalAddresses
+}: IModalVotes) => {
   function handleCloseModal() {
-    setModalOpen(false)
+    onClose()
   }
 
   const userList = [
@@ -64,14 +75,16 @@ const ModalVotes = ({ modalOpen, setModalOpen }: IModalVotes) => {
       <S.Container modalOpen={modalOpen}>
         <S.ModalHeaderContainer>
           <S.Close>
-            <button type="button" onClick={() => setModalOpen(false)}>
+            <button type="button" onClick={() => onClose()}>
               <img src="/assets/close.svg" alt="Close" />{' '}
             </button>
           </S.Close>
           <S.ModalHeader>
             <S.TotalPercentageAndVotes>
-              <S.TotalPercentage>For - 73%</S.TotalPercentage>
-              <S.TotalVotes>1,723,124</S.TotalVotes>
+              <S.TotalPercentage>
+                {voteType} - {percentage}
+              </S.TotalPercentage>
+              <S.TotalVotes>{totalVotingPower}</S.TotalVotes>
             </S.TotalPercentageAndVotes>
             <S.VoteBar>
               <S.VotesFavor></S.VotesFavor>
@@ -80,7 +93,7 @@ const ModalVotes = ({ modalOpen, setModalOpen }: IModalVotes) => {
           </S.ModalHeader>
         </S.ModalHeaderContainer>
         <S.Thead>
-          <S.Th>30 addresses</S.Th>
+          <S.Th>{totalAddresses} addresses</S.Th>
           <S.Th>Votes</S.Th>
         </S.Thead>
         <S.TableContainer>

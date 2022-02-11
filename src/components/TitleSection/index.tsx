@@ -2,7 +2,6 @@ import React from 'react'
 import Image from 'next/image'
 
 import * as S from './styles'
-
 interface ITitleSectionProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   image: any;

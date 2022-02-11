@@ -1,7 +1,5 @@
-import { useRouter } from 'next/router'
+import Proposal from '../../../templates/Gov/Proposals/Proposal'
 
 export default function Index() {
-  const router = useRouter()
-  const { proposal } = router.query
-  return <h1>proposal ID {proposal}</h1>
+  return <Proposal />
 }

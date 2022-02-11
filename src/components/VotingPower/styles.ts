@@ -9,7 +9,9 @@ interface IVotingPowerProps {
 export const VotingPower = styled.div<IVotingPowerProps>`
   background: rgba(255, 255, 255, 0.04);
   border-radius: ${theme.border.radius};
-  padding: 16px;
+  border: 1px solid #fcfcfc26;
+
+  padding: 16px 24px;
   width: 290px;
 
   @media (max-width: 960px) {
