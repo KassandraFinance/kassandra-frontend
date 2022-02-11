@@ -16,15 +16,6 @@ export const VoteContent = styled.div`
   max-width: 1140px;
   margin: 0 auto;
 
-  a {
-    display: flex;
-    justify-content: center;
-    margin-top: 3.2rem;
-    margin-right: auto;
-    margin-left: auto;
-    margin-bottom: 10rem;
-  }
-
   @media (max-width: 1200px) {
     padding: 0 30px;
   }
@@ -32,51 +23,6 @@ export const VoteContent = styled.div`
   @media (max-width: 540px) {
     padding: 0 16px;
   }
-`
-
-export const GovernanceProposalsContent = styled.section`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-
-  @media (max-width: 710px) {
-    flex-direction: column;
-  }
-`
-
-export const Title = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-
-  max-width: 100%;
-  a {
-    max-width: 172px;
-
-    margin: 0;
-  }
-
-  @media (max-width: 710px) {
-    margin-bottom: ${theme.spacings.space24};
-  }
-`
-export const VotingPowerContent = styled.div`
-  margin-top: 4rem;
-  margin-bottom: 1.6rem;
-
-  @media (max-width: 960px) {
-    margin-top: 0;
-  }
-
-  & > div {
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
-  }
-`
-
-export const AllProposalsContent = styled.section`
-  margin-top: 10rem;
-  margin-bottom: 10rem;
 `
 
 export const TitleAndLinkContent = styled.div`
@@ -115,6 +61,7 @@ export const LinkForum = styled.a`
   }
 
   @media (max-width: 440px) {
+    justify-content: center;
     width: 100%;
   }
 
@@ -129,9 +76,4 @@ export const LinkForum = styled.a`
   span {
     margin-right: ${theme.spacings.space16};
   }
-`
-
-export const VotingPowerLeaderboard = styled.section`
-  margin-top: 1.6rem;
-  margin-bottom: 10rem;
 `

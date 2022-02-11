@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
 import useStakingContract from '../../../../hooks/useStakingContract'
@@ -17,7 +16,7 @@ import VoteCard from '../../../../components/Governance/VoteCard'
 import VotingPower from '../../../../components/VotingPower'
 
 import proposals from '../../../../../public/assets/iconGradient/proposals.svg'
-import ProposalDetailsIcon from '../../../../../public/assets/iconGradient/proposal-details.svg'
+import proposalDetailsIcon from '../../../../../public/assets/iconGradient/proposal-details.svg'
 import proposalInfoIcon from '../../../../../public/assets/iconGradient/proposal-info.svg'
 import proposalCompleteIcon from '../../../../../public/assets/iconGradient/proposal-complete.svg'
 import proposalWaitingIcon from '../../../../../public/assets/iconGradient/proposal-waiting.svg'
@@ -38,9 +37,6 @@ const Proposal = () => {
 
   const kacyStake = useStakingContract(Staking)
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-
-  const router = useRouter()
-  const { proposal } = router.query
 
   return (
     <>
@@ -69,7 +65,7 @@ const Proposal = () => {
                   getCurrentVotes={kacyStake.currentVotes}
                   userWalletAddress={userWalletAddress}
                 />
-                <ExternalLink text={'Obtain more voting power'} href={'#'} />
+                <ExternalLink text="Obtain more voting power" hrefNext="#" />
               </S.VotingPowerAndLink>
             </S.TitleWrapper>
           </S.IntroDesktopScreen>
@@ -84,7 +80,7 @@ const Proposal = () => {
                     getCurrentVotes={kacyStake.currentVotes}
                     userWalletAddress={userWalletAddress}
                   />
-                  <ExternalLink text={'Obtain more voting power'} href={'#'} />
+                  <ExternalLink text="Obtain more voting power" hrefNext="#" />
                 </S.VotingPowerAndLink>
                 <S.ProposeAuthorCard>
                   <p>Proposed by</p>
@@ -194,7 +190,7 @@ const Proposal = () => {
           </S.CardWrapper>
           <S.ProposalDetails>
             <S.ProposalTitleWrapper>
-              <Image src={ProposalDetailsIcon} width={24} height={24} />
+              <Image src={proposalDetailsIcon} width={24} height={24} />
               <h1>Details</h1>
             </S.ProposalTitleWrapper>
             <S.DescriptionTable>
@@ -214,7 +210,7 @@ const Proposal = () => {
           </S.ProposalDetails>
           <S.ProposalStatus>
             <S.ProposalTitleWrapper>
-              <Image src={ProposalDetailsIcon} width={24} height={24} />
+              <Image src={proposalDetailsIcon} width={24} height={24} />
               <h1>Proposal Status History</h1>
             </S.ProposalTitleWrapper>
 

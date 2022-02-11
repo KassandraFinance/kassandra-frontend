@@ -33,8 +33,15 @@ export const Staking = process.env.NEXT_PUBLIC_MASTER === '1' ?
   :
   '0xe08eD1e470160AF3dF917be221a6aed6284c1D2F'
 
-export const Timelock = ''
-export const GovernorAlpha = ''
+export const Timelock = process.env.NEXT_PUBLIC_MASTER === '1' ? 
+  '0x93330E1a58CF4e5a7C83ee3f07B9456B183b2426' 
+  : 
+  '0x93330E1a58CF4e5a7C83ee3f07B9456B183b2426'
+
+  export const GovernorAlpha = process.env.NEXT_PUBLIC_MASTER === '1' ? 
+  '0x2B6C46b9552B6Fa36DD097b6527ba20fdDB3FfD5' 
+  :
+  '0x2B6C46b9552B6Fa36DD097b6527ba20fdDB3FfD5'
 
 export interface Networks {
   Ropsten: string;
