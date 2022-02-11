@@ -80,3 +80,243 @@ export const Close = styled.button`
 
   cursor: pointer;
 `
+
+// ======== Delegate and Undelegate ========
+
+export const Content = styled.div`
+  background: #1f2937;
+  border-radius: 0 0 10px 10px;
+  color: ${theme.colors.snow};
+  font-weight: ${theme.font.weight.light};
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  padding: 2.4rem;
+
+  @media (max-width: 440px) {
+    padding: 1.6rem;
+  }
+
+  p {
+    font-size: ${theme.font.sizes.font14};
+    line-height: ${theme.font.sizes.font18};
+  }
+
+  > span {
+    font-size: ${theme.font.sizes.font12};
+
+    margin-top: ${theme.spacings.space24};
+    margin-bottom: ${theme.spacings.space16};
+  }
+`
+
+interface ISelectProps {
+  optionsOpen: boolean;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const Select = styled.button<ISelectProps>`
+  background-color: #1b1d22;
+  border: 1px solid #ffffff15;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  padding: ${theme.spacings.space24} ${theme.spacings.space16};
+  cursor: pointer;
+
+  span {
+    color: ${theme.colors.snow};
+    font-size: ${theme.font.sizes.font14};
+    text-align: left;
+  }
+  
+  img {
+    transform: ${props => (props.optionsOpen ? 'rotate(180deg)' : null)};
+    transition-duration: 250ms;
+  }
+`
+
+export const Input = styled.input`
+  background-color: #ffffff15;
+  border: 1px solid #ffffff15;
+  color: ${theme.colors.snow};
+  font-weight: ${theme.font.weight.light};
+  font-size: ${theme.font.sizes.font14};
+  font-family: ${theme.font.family};
+  letter-spacing: 0.05em;
+
+  width: 100%;
+  height: 4.6rem;
+
+  padding: ${theme.spacings.space16};
+
+  @media (max-width: 440px) {
+    font-size: ${theme.font.sizes.font12};
+
+    height: 3.6rem;
+  }
+
+  &::placeholder {
+    font-weight: ${theme.font.weight.light};
+    font-size: ${theme.font.sizes.font14};
+    letter-spacing: 0.05em;
+  }
+
+  &:focus {
+    outline: 1px solid ${theme.colors.snow};
+  }
+`
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  gap: 1.6rem;
+
+  width: 100%;
+  margin-top: ${theme.spacings.space40};
+  margin-bottom: ${theme.spacings.space24};
+
+  @media (max-width: 440px) {
+    margin-top: ${theme.spacings.space32};
+    margin-bottom: ${theme.spacings.space16};
+
+    button {
+      font-size: ${theme.font.sizes.font14};
+      height: 3.8rem;
+      padding: ${theme.spacings.space8};
+    }
+  }
+`
+
+export const Link = styled.div`
+  margin: 0 auto;
+
+  @media (max-width: 440px) {
+    span {
+      font-size: ${theme.font.sizes.font12};
+    }
+  }
+`
+
+export const BackdropSelect = styled.div`
+  background-color: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+  z-index: 21;
+`
+
+export const Selected = styled.div`
+  top: 29.3rem;
+  left: 2.4rem;
+  z-index: 999;
+
+  @media (max-width: 440px) {
+    top: 28.4rem;
+    left: 1.6rem;
+  }
+`
+
+interface IModalProps {
+  isOpenOption?: boolean;
+  undelegate?: boolean;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const Modal = styled.div<IModalProps>`
+  display: ${props => (props.isOpenOption ? 'block' : 'none')};
+  position: absolute;
+  
+  top: ${props => (props.undelegate ? '25.7rem' : '29.3rem')};
+  left: 2.4rem;
+  z-index: 999;
+
+  @media (max-width: 440px) {
+    top: ${props => (props.undelegate ? '28.2rem' : '28.4rem')};
+    left: 1.6rem;
+  }
+`
+
+export const Option = styled.div`
+  background-color: #1b1d22;
+  border: 1px solid #ffffff15;
+  color: ${theme.colors.snow};
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 38.9rem;
+  padding-top: ${theme.spacings.space16};
+  padding-right: ${theme.spacings.space40};
+  padding-bottom: ${theme.spacings.space16};
+  padding-left: ${theme.spacings.space16};
+
+  cursor: pointer;
+
+  @media (max-width: 440px) {
+    width: 29.5rem;
+  }
+
+  &:hover {
+    background-color: #3f1a38;
+  }
+`
+
+export const Name = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  img {
+    width: 2.4rem;
+    @media (max-width: 440px) {
+      display: none !important;
+    }
+  }
+`
+
+export const WithdrawDelay = styled.div`
+  margin-left: 1.2rem;
+
+  @media (max-width: 440px) {
+    margin-left: 0;
+  }
+
+  p {
+    font-size: ${theme.font.sizes.font14};
+    font-weight: ${theme.font.weight.medium};
+  }
+
+  span {
+    font-size: ${theme.font.sizes.font12};
+    font-weight: ${theme.font.weight.light};
+    letter-spacing: 0.05em;
+
+    margin-top: 0.4rem;
+  }
+`
+
+export const VotingPower = styled.div`
+  text-align: right;
+  p {
+    font-size: ${theme.font.sizes.font14};
+    font-weight: ${theme.font.weight.medium};
+  }
+
+  span {
+    font-size: ${theme.font.sizes.font12};
+    font-weight: ${theme.font.weight.light};
+    letter-spacing: 0.05em;
+
+    margin-top: 0.4rem;
+  }
+`

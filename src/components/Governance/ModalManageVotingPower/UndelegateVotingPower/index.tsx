@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
-// import { useMatomo } from '@datapunt/matomo-tracker-react'
 
+// import { useMatomo } from '@datapunt/matomo-tracker-react'
 import Button from '../../../Button'
 import ExternalLink from '../../../ExternalLink'
 import Options from '../Options'
@@ -18,44 +18,45 @@ export interface IDateProps {
   votingPower: string;
 }
 
-interface IDelegateVotingPowerProps {
+interface IUndelegateVotingPowerProps {
   setCurrentModal: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const DelegateVotingPower = ({
+const UndelegateVotingPower = ({
   setCurrentModal
-}: IDelegateVotingPowerProps) => {
+}: IUndelegateVotingPowerProps) => {
   const [optionsOpen, setOptionsOpen] = React.useState<boolean>(false)
-  const [delegateSelected, setDelegateSelected] = React.useState<IDateProps>({
-    image: '',
-    nameToken: '',
-    withdrawDelay: '',
-    votingPower: ''
-  })
-
+  const [undelegateSelected, setUndelegateSelected] =
+    React.useState<IDateProps>({
+      image: '',
+      nameToken: '',
+      withdrawDelay: '',
+      votingPower: ''
+    })
   return (
     <>
       <S.Content>
         <p>
-          This option allows you to delegate your voting power to another
-          Avalanche address. Your KACY tokens will not be sent, only your voting
-          rights. This action can be undone at any time.
+          This option allows you to undelegate the voting power you have sent to
+          another Avalanche address.
         </p>
-        <span>Select the pool you wish to delegate its voting power from</span>
-        {delegateSelected.nameToken !== '' && !optionsOpen ? (
+        <span>
+          Select the pool you wish to undelegate its voting power from
+        </span>
+        {undelegateSelected.nameToken !== '' && !optionsOpen ? (
           <S.Selected onClick={() => setOptionsOpen(!optionsOpen)}>
             <S.Option>
               <S.Name>
-                <Image src={delegateSelected.image} alt="" />
+                <Image src={undelegateSelected.image} alt="" />
                 <S.WithdrawDelay>
-                  <p>{delegateSelected.nameToken}</p>
+                  <p>{undelegateSelected.nameToken}</p>
                   <span>
-                    {delegateSelected.withdrawDelay} days withdraw delay
+                    {undelegateSelected.withdrawDelay} days withdraw delay
                   </span>
                 </S.WithdrawDelay>
               </S.Name>
               <S.VotingPower>
-                <p>{delegateSelected.votingPower}</p>
+                <p>{undelegateSelected.votingPower}</p>
                 <span>Voting power</span>
               </S.VotingPower>
             </S.Option>
@@ -65,12 +66,10 @@ const DelegateVotingPower = ({
             onClick={() => setOptionsOpen(true)}
             optionsOpen={optionsOpen}
           >
-            <span>Choose the KACY pool to delegate</span>
+            <span>Choose the address you wish to undelegate</span>
             <Image src={arrowSelect} alt="" />
           </S.Select>
         )}
-        <span>Select the address you wish to delegate the voting power</span>
-        <S.Input placeholder="Enter a 0x address" />
         <S.ButtonContainer>
           <Button
             size="large"
@@ -80,11 +79,11 @@ const DelegateVotingPower = ({
             onClick={() => setCurrentModal('manage')}
           />
           <Button
-            size="large"
+            size="small"
             fullWidth
             backgroundSecondary
-            disabledNoEvent={delegateSelected.nameToken === ''}
-            text="Delegate Votes"
+            disabledNoEvent={undelegateSelected.nameToken === ''}
+            text="Undelegate Votes"
           />
         </S.ButtonContainer>
         <S.Link>
@@ -95,14 +94,15 @@ const DelegateVotingPower = ({
         optionsOpen={optionsOpen}
         setOptionsOpen={setOptionsOpen}
         data={poolData}
-        delegateSelected={delegateSelected}
-        setDelegateSelected={setDelegateSelected}
+        delegateSelected={undelegateSelected}
+        setDelegateSelected={setUndelegateSelected}
+        undelegate={true}
       />
     </>
   )
 }
 
-export default DelegateVotingPower
+export default UndelegateVotingPower
 
 const poolData = [
   {
