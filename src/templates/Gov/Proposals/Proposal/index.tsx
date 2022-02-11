@@ -16,9 +16,10 @@ import VoteCard from '../../../../components/Governance/VoteCard'
 import VotingPower from '../../../../components/VotingPower'
 
 import proposals from '../../../../../public/assets/iconGradient/proposals.svg'
-import ProposalDetailsIcon from '../../../../../public/assets/iconGradient/ProposalDetails-icon.svg'
-import proposalInfoIcon from '../../../../../public/assets/iconGradient/ProposalInfo-icon.svg'
-import proposalCompleteIcon from '../../../../../public/assets/iconGradient/ProposalComplete-icon.svg'
+import proposalDetailsIcon from '../../../../../public/assets/iconGradient/proposal-details.svg'
+import proposalInfoIcon from '../../../../../public/assets/iconGradient/proposal-info.svg'
+import proposalCompleteIcon from '../../../../../public/assets/iconGradient/proposal-complete.svg'
+import proposalWaitingIcon from '../../../../../public/assets/iconGradient/proposal-waiting.svg'
 
 import * as S from './styles'
 
@@ -189,7 +190,7 @@ const Proposal = () => {
           </S.CardWrapper>
           <S.ProposalDetails>
             <S.ProposalTitleWrapper>
-              <Image src={ProposalDetailsIcon} width={24} height={24} />
+              <Image src={proposalDetailsIcon} width={24} height={24} />
               <h1>Details</h1>
             </S.ProposalTitleWrapper>
             <S.DescriptionTable>
@@ -209,7 +210,7 @@ const Proposal = () => {
           </S.ProposalDetails>
           <S.ProposalStatus>
             <S.ProposalTitleWrapper>
-              <Image src={ProposalDetailsIcon} width={24} height={24} />
+              <Image src={proposalDetailsIcon} width={24} height={24} />
               <h1>Proposal Status History</h1>
             </S.ProposalTitleWrapper>
 
@@ -217,14 +218,20 @@ const Proposal = () => {
               {stepData.map((step, index) => (
                 <>
                   <S.Step key={step.title}>
-                    <Image src={proposalCompleteIcon} />
-                    <S.StepTextWrapper>
-                      <S.StepTitle>{step.title}</S.StepTitle>
-                      <S.StepDate>{step.date}</S.StepDate>
-                    </S.StepTextWrapper>
+                    {Date.parse(step.date) / 1000 >
+                      new Date().getTime() / 1000 ? (
+                      <Image src={proposalWaitingIcon} />
+                    ) : (
+                      <Image src={proposalCompleteIcon} />
+                    )}
+                    <S.StepTitle>{step.title}</S.StepTitle>
+                    <S.StepDate>{step.date}</S.StepDate>
                   </S.Step>
                   <S.LineBetweenImages
                     isAfter={index === stepData.length - 1}
+                    isComplete={
+                      Date.parse(step.date) / 1000 < new Date().getTime() / 1000
+                    }
                   />
                 </>
               ))}
@@ -310,22 +317,22 @@ const details = [
 const stepData = [
   {
     title: 'Created',
-    date: '22/02/2022'
+    date: '01/22/2022'
   },
   {
     title: 'Active',
-    date: '22/02/2022'
+    date: '01/22/2022'
   },
   {
     title: 'Succeeded',
-    date: '22/02/2022'
+    date: '02/22/2022'
   },
   {
     title: 'Queued',
-    date: '22/02/2022'
+    date: '02/22/2022'
   },
   {
     title: 'Executed',
-    date: '22/02/2022'
+    date: '02/22/2022'
   }
 ]

@@ -160,7 +160,6 @@ export const ProposalInfo = styled.div`
 
   margin: 10rem auto 0;
   max-width: 1140px;
-
   @media (max-width: 1200px) {
     padding: 0 32px;
   }
@@ -393,6 +392,7 @@ export const DetailsText = styled.td`
     font-size: ${theme.font.sizes.font14};
     letter-spacing: 0.07rem;
     line-height: 1.82rem;
+
     padding: 0.8rem 0 2.4rem 2.4rem;
     @media (min-width: 1024px) {
       padding: 0.8rem 0 2.4rem 3.6rem;
@@ -405,27 +405,32 @@ export const DetailsText = styled.td`
 export const ProposalStatus = styled.div`
   display: flex;
   flex-direction: column;
+
   margin: 8rem 0 0;
   max-width: 114rem;
 `
 interface IImageProps {
   isAfter: boolean;
+  isComplete: boolean;
 }
 // eslint-disable-next-line prettier/prettier
 export const LineBetweenImages = styled.div<IImageProps>`
+    background: ${props => props.isComplete
+    ? 'linear-gradient(0deg, #ffbf00 -0.02%, #e843c4 99.99%)'
+    : '#45405F'};
     ${props =>
-      !props.isAfter &&
-      `display: inline-block;
-    margin-top: 3.3rem ;
+    !props.isAfter &&
+    `display: inline-block;
+
+    margin-top: 3.95rem ;
     width: 100%;
     height: 1px;
-    background: linear-gradient(0deg, #ffbf00 -0.02%, #e843c4 99.99%);
     @media (max-width: 768px) {
       margin-top: 2.8rem;
     }
     @media (max-width: 480px) {
       width: 1px;
-      height: 100%;
+      height: 32px;
       margin-top: 0;
       margin-left: 2rem;
     }
@@ -434,6 +439,7 @@ export const LineBetweenImages = styled.div<IImageProps>`
 export const Steps = styled.div`
   display: flex;
   justify-content: space-between;
+
   margin-top: 7.2rem;
   @media (max-width: 480px) {
     flex-direction: column;
@@ -446,6 +452,7 @@ export const Step = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   min-width: 79px;
   position: relative;
   @media (max-width: 768px) {
@@ -453,28 +460,31 @@ export const Step = styled.div`
     min-height: 56px;
   }
   @media (max-width: 480px) {
-    width: 100%;
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
+
+    margin: -9px 0;
+    width: 100%;
+    height: 40px;
     img {
       width: 40px;
     }
   }
 `
-export const StepTextWrapper = styled.div`
-  /* display: flex;
-  @media (max-width: 480px) {
-  } */
-`
 
 export const StepTitle = styled.div`
   font-size: ${theme.font.sizes.font18};
   font-weight: ${theme.font.weight.bold};
+
   margin-top: 4.4rem;
   @media (max-width: 768px) {
     font-size: ${theme.font.sizes.font14};
+
     margin-top: 2.4rem;
+  }
+  @media (max-width: 480px) {
+    margin-top: 0;
   }
 `
 export const StepDate = styled.div`
