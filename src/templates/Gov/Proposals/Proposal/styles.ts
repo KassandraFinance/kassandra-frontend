@@ -189,9 +189,11 @@ export const ProposalTitleWrapper = styled.div`
 
     @media (min-width: 768px) {
       font-size: ${theme.font.sizes.font24};
+      margin-left: 1.6rem;
     }
     @media (min-width: 1024px) {
       font-size: ${theme.font.sizes.font32};
+      margin-left: 2rem;
     }
   }
 `
@@ -239,6 +241,7 @@ export const TableDescriptionWrapper = styled.div`
 `
 export const DescriptionSubTitle = styled.td`
   font-size: ${theme.font.sizes.font14};
+  line-height: 130%;
   font-weight: ${theme.font.weight.bold};
   letter-spacing: 0.07rem;
 
@@ -307,6 +310,7 @@ export const TextKey = styled.span`
     letter-spacing: 0.07rem;
   }
 `
+
 export const TextValue = styled.span`
   font-size: ${theme.font.sizes.font12};
   font-weight: ${theme.font.weight.light};
@@ -336,30 +340,34 @@ export const InfoLinkWrapper = styled.div`
     }
   }
 `
-export const Link = styled.a`
-  color: #c4c4c4;
-  line-height: ${theme.font.sizes.font14};
-  font-size: ${theme.font.sizes.font14};
+export const LinkForum = styled.a`
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  color: ${theme.colors.grayDisabled};
+
+  line-height: ${theme.font.sizes.font16};
+  font-size: ${theme.font.sizes.font16};
   text-decoration: none;
 
   display: flex;
   align-items: center;
 
-  cursor: pointer;
-  transition: 0.15s;
-  span {
-    display: flex;
-  }
-  svg {
-    margin-left: ${theme.spacings.space8};
-  }
-  &:hover {
-    color: ${theme.colors.cyan};
-    > svg {
-      path {
-        stroke: ${theme.colors.cyan};
-      }
+  margin-top: 1.6rem;
+
+  padding: 16px 24px;
+
+  > span {
+    font-size: ${theme.font.sizes.font14};
+    margin-right: ${theme.spacings.space16};
+
+    @media (min-width: 768px) {
+      font-size: ${theme.font.sizes.font16};
     }
+  }
+
+  &:hover {
+    border: 1px solid rgba(255, 255, 255, 0.5);
   }
 `
 export const ProposalDetails = styled.div`
@@ -373,6 +381,7 @@ export const ProposalDetails = styled.div`
 `
 export const DetailsSubTitle = styled.td`
   font-size: ${theme.font.sizes.font14};
+  line-height: 130%;
   font-weight: ${theme.font.weight.bold};
 
   @media (min-width: 1024px) {
@@ -383,7 +392,7 @@ export const DetailsSubTitle = styled.td`
 export const DetailsText = styled.td`
   font-size: ${theme.font.sizes.font12};
   font-weight: ${theme.font.weight.light};
-  line-height: 1.6rem;
+  line-height: 130%;
   letter-spacing: 0.06rem;
 
   padding: 0.8rem 0 1.6rem 2.4rem;
@@ -488,6 +497,7 @@ export const StepTitle = styled.div`
   }
 `
 export const StepDate = styled.div`
+
   font-size: ${theme.font.sizes.font14};
   font-weight: ${theme.font.weight.light};
   letter-spacing: 0.07rem;
