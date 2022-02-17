@@ -103,11 +103,11 @@ export const TotalVotingPower = styled.div`
 export const GridStaking = styled.div`
   display: grid;
   grid-template-columns: repeat(3, minmax(280px, 295px));
+  gap: 30px;
   justify-content: space-between;
   @media (max-width: 960px) {
     grid-template-columns: repeat(2, minmax(280px, 295px));
     padding: 0 30px;
-    gap: 30px;
     max-width: 700px;
     margin: 0 auto;
   }

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable prettier/prettier */
 import React from 'react'
+import Big from 'big.js'
 import BigNumber from 'bn.js'
 import { AbiItem } from "web3-utils"
 import { useSelector, RootStateOrAny } from 'react-redux'
@@ -94,6 +95,11 @@ const useStakingContract = (address: string) => {
 
     // ======== Read Contract ========
 
+    const availableWithdraw = async (pid: number, walletAddress: string) => {
+      const value: string = await contract.methods.availableWithdraw(pid, walletAddress).call()
+      return Big(value)
+    }
+
     const balance = async (pid: number, walletAddress: string) => {
       const value: string = await contract.methods.balanceOf(pid, walletAddress).call()
       return new BigNumber(value)
@@ -107,6 +113,11 @@ const useStakingContract = (address: string) => {
     const earned = async (pid: number, walletAddress: string) => {
       const value: string = await contract.methods.earned(pid, walletAddress).call()
       return new BigNumber(value)
+    }
+
+    const lockUntil = async (pid: number, walletAddress: string) => {
+      const value = await contract.methods.lockUntil(pid, walletAddress).call()
+      return parseInt(value)
     }
 
     const poolInfo = async (pid: number) => {
@@ -143,9 +154,11 @@ const useStakingContract = (address: string) => {
       getReward,
       withdraw,
 
+      availableWithdraw,
       balance,
       currentVotes,
       earned,
+      lockUntil,
       poolInfo,
       stakedUntil,
       totalVotes,
