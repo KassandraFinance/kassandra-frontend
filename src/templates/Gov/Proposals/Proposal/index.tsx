@@ -158,21 +158,37 @@ const Proposal = () => {
                 </S.TableHead>
                 <S.TableBody>
                   <S.TableInfoWrapper>
-                    {arrInfo.map(info => (
-                      <S.DataWrapper key={info.text}>
-                        <S.TextKey>{info.text}</S.TextKey>
-                        <S.TextValue
-                          style={{
-                            color:
-                              info.text === 'State'
-                                ? StatslibColor[arrInfo[0].value]
-                                : '#FCFCFC'
-                          }}
-                        >
-                          {info.value}
-                        </S.TextValue>
-                      </S.DataWrapper>
-                    ))}
+                    <S.DataWrapper>
+                      <S.TextKey>State</S.TextKey>
+                      <S.TextValue
+                        style={{
+                          color: statslibColor[infoProposal.state.toLowerCase()]
+                        }}
+                      >
+                        {infoProposal.state.charAt(0).toUpperCase() +
+                          infoProposal.state.slice(1)}
+                      </S.TextValue>
+                    </S.DataWrapper>
+                    <S.DataWrapper>
+                      <S.TextKey>Quorum</S.TextKey>
+                      <S.TextValue>{infoProposal.quorum}</S.TextValue>
+                    </S.DataWrapper>
+                    <S.DataWrapper>
+                      <S.TextKey>Total Voting Power</S.TextKey>
+                      <S.TextValue>{infoProposal.totalVotingPower}</S.TextValue>
+                    </S.DataWrapper>
+                    <S.DataWrapper>
+                      <S.TextKey>Created</S.TextKey>
+                      <S.TextValue>{infoProposal.created}</S.TextValue>
+                    </S.DataWrapper>
+                    <S.DataWrapper>
+                      <S.TextKey>Starting</S.TextKey>
+                      <S.TextValue>{infoProposal.starting}</S.TextValue>
+                    </S.DataWrapper>
+                    <S.DataWrapper>
+                      <S.TextKey>Execute (max)</S.TextKey>
+                      <S.TextValue>{infoProposal.executeMax}</S.TextValue>
+                    </S.DataWrapper>
                   </S.TableInfoWrapper>
                 </S.TableBody>
               </S.Table>
@@ -268,32 +284,14 @@ const descriptions = [
   }
 ]
 
-const arrInfo = [
-  {
-    text: 'State',
-    value: 'Executed'
-  },
-  {
-    text: 'Qorum',
-    value: '160.000/160.000'
-  },
-  {
-    text: 'Total Voting Power',
-    value: '324.554'
-  },
-  {
-    text: 'Created',
-    value: '22/10/2021, 1:28 PM'
-  },
-  {
-    text: 'Starting',
-    value: '22/10/2021, 1:28 PM'
-  },
-  {
-    text: 'Execute (max)',
-    value: '22/11/2021, 1:28 PM'
-  }
-]
+const infoProposal = {
+  state: 'Executed',
+  quorum: '160.000/160.000',
+  totalVotingPower: '324.554',
+  created: '22/10/2021, 1:28 PM',
+  starting: '22/10/2021, 1:28 PM',
+  executeMax: '22/11/2021, 1:28 PM'
+}
 
 const details = [
   {
@@ -336,11 +334,11 @@ const stepData = [
   }
 ]
 
-const StatslibColor: { [key: string]: string } = {
-  'Voting Open': '#E843C4',
-  Approved: '#26DBDB',
-  Queued: '#FFBF00',
-  Executed: '#2CE878',
-  Failed: '#E8372C',
-  Canceled: '#BDBDBD'
+const statslibColor: { [key: string]: string } = {
+  'voting open': '#E843C4',
+  approved: '#26DBDB',
+  queued: '#FFBF00',
+  executed: '#2CE878',
+  failed: '#E8372C',
+  canceled: '#BDBDBD'
 }
