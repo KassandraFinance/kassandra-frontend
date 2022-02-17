@@ -72,6 +72,8 @@ export interface IInfoStaked {
   unstake: boolean;
   apr: BigNumber;
   stakingToken: string;
+  vestingPeriod: string;
+  lockPeriod: string;
 }
 
 interface IStakingProps {
@@ -85,6 +87,9 @@ interface IStakingProps {
   unstaking: (pid: number, walletAddress: string) => Promise<boolean>;
   stakedUntil: (pid: number, walletAddress: string) => Promise<string>;
   stakeWithVotingPower: boolean;
+  availableWithdraw?: (pid: number, walletAddress: string) => Promise<Big>;
+  lockUntil?: (pid: number, walletAddress: string) => Promise<number>;
+  stakeWithLockPeriod?: boolean;
 }
 
 const staked: any = {
@@ -107,7 +112,10 @@ const StakeCard = ({
   poolInfo,
   unstaking,
   stakedUntil,
-  stakeWithVotingPower
+  stakeWithVotingPower,
+  availableWithdraw,
+  lockUntil,
+  stakeWithLockPeriod = false
 }: IStakingProps) => {
   const [isModalStaking, setIsModalStaking] = React.useState<boolean>(false)
   const [isModalUnstaking, setIsModalUnstaking] = React.useState<boolean>(false)
@@ -125,6 +133,10 @@ const StakeCard = ({
     kacy: Big(-1),
     aHYPE: Big(-1)
   })
+
+  const [lockPeriod, setLockPeriod] = React.useState(0)
+  // eslint-disable-next-line prettier/prettier
+  const [currentAvailableWithdraw, setCurrentAvailableWithdraw] = React.useState(Big(-1))
 
   const [withdrawDelay, setWithdrawDelay] = React.useState<number>(0)
   const [kacyEarned, setKacyEarned] = React.useState<BigNumber>(
@@ -146,7 +158,9 @@ const StakeCard = ({
     hasExpired: false,
     unstake: false,
     apr: new BigNumber(-1),
-    stakingToken: ''
+    stakingToken: '',
+    vestingPeriod: '...',
+    lockPeriod: '...'
   })
 
   const { data } = useSWR(
@@ -285,7 +299,7 @@ const StakeCard = ({
   }, [infoStaked.stakingToken, pid, data])
 
   React.useEffect(() => {
-    if (!web3.currentProvider) {
+    if (!web3.currentProvider || userWalletAddress.length === 0) {
       return
     }
 
@@ -293,6 +307,13 @@ const StakeCard = ({
     token
       .allowance(Staking, userWalletAddress)
       .then((response: boolean) => setIsApproveKacyStaking(response))
+
+    availableWithdraw &&
+      availableWithdraw(pid, userWalletAddress).then(
+        setCurrentAvailableWithdraw
+      )
+
+    lockUntil && lockUntil(pid, userWalletAddress).then(setLockPeriod)
   }, [userWalletAddress, infoStaked.stakingToken])
 
   return (
@@ -407,29 +428,34 @@ const StakeCard = ({
               setInfoStaked={setInfoStaked}
               stakeWithVotingPower={stakeWithVotingPower}
               priceLPToken={priceLPToken}
+              stakeWithLockPeriod={stakeWithLockPeriod}
+              lockPeriod={lockPeriod}
+              availableWithdraw={currentAvailableWithdraw}
             />
             <S.ButtonContainer stakeWithVotingPower={stakeWithVotingPower}>
               {userWalletAddress ? (
                 <>
-                  <S.Claim>
-                    <KacyEarned
-                      pid={pid}
-                      userWalletAddress={userWalletAddress}
-                      earned={earned}
-                      kacyEarned={kacyEarned}
-                      setKacyEarned={setKacyEarned}
-                      kacyPrice={priceLPToken.kacy}
-                    />
-                    <Button
-                      size="claim"
-                      backgroundSecondary
-                      disabledNoEvent={kacyEarned.toString() === '0'}
-                      type="button"
-                      text="Claim"
-                      // fullWidth
-                      onClick={() => getReward(pid, rewardClaimCallback())}
-                    />
-                  </S.Claim>
+                  {!stakeWithLockPeriod && (
+                    <S.Claim>
+                      <KacyEarned
+                        pid={pid}
+                        userWalletAddress={userWalletAddress}
+                        earned={earned}
+                        kacyEarned={kacyEarned}
+                        setKacyEarned={setKacyEarned}
+                        kacyPrice={priceLPToken.kacy}
+                      />
+                      <Button
+                        size="claim"
+                        backgroundSecondary
+                        disabledNoEvent={kacyEarned.toString() === '0'}
+                        type="button"
+                        text="Claim"
+                        // fullWidth
+                        onClick={() => getReward(pid, rewardClaimCallback())}
+                      />
+                    </S.Claim>
+                  )}
                   <S.StakeContainer>
                     {infoStaked.unstake ? (
                       <>
@@ -450,7 +476,7 @@ const StakeCard = ({
                       </>
                     ) : (
                       <>
-                        {isApproveKacyStaking ? (
+                        {stakeWithLockPeriod ? null : isApproveKacyStaking ? (
                           infoStaked.withdrawDelay !== '0' &&
                           infoStaked.withdrawable ? (
                             <Button
@@ -481,11 +507,16 @@ const StakeCard = ({
                             onClick={handleApproveKacy}
                           />
                         )}
-                        {infoStaked.yourStake.toString() !== '0' &&
-                        infoStaked.withdrawable ? (
+                        {stakeWithLockPeriod ||
+                        (infoStaked.yourStake.toString() !== '0' &&
+                          infoStaked.withdrawable) ? (
                           <Button
                             size="huge"
                             backgroundBlack
+                            disabledNoEvent={
+                              stakeWithLockPeriod &&
+                              currentAvailableWithdraw.lte(0)
+                            }
                             type="button"
                             text="Withdraw"
                             fullWidth
