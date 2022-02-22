@@ -60,11 +60,7 @@ const Proposal = () => {
                 </S.ProposeAuthorCard>
               </S.TitleAndAuthor>
               <S.VotingPowerAndLink>
-                <VotingPower
-                  getTotalVotes={kacyStake.totalVotes}
-                  getCurrentVotes={kacyStake.currentVotes}
-                  userWalletAddress={userWalletAddress}
-                />
+                <VotingPower userWalletAddress={userWalletAddress} />
                 <ExternalLink text="Obtain more voting power" hrefNext="#" />
               </S.VotingPowerAndLink>
             </S.TitleWrapper>
@@ -75,11 +71,7 @@ const Proposal = () => {
               <TitleSection image={proposals} title={'Proposta 01'} />
               <S.CardTitleWrapper>
                 <S.VotingPowerAndLink>
-                  <VotingPower
-                    getTotalVotes={kacyStake.totalVotes}
-                    getCurrentVotes={kacyStake.currentVotes}
-                    userWalletAddress={userWalletAddress}
-                  />
+                  <VotingPower userWalletAddress={userWalletAddress} />
                   <ExternalLink text="Obtain more voting power" hrefNext="#" />
                 </S.VotingPowerAndLink>
                 <S.ProposeAuthorCard>
@@ -219,7 +211,7 @@ const Proposal = () => {
                 <>
                   <S.Step key={step.title}>
                     {Date.parse(step.date) / 1000 >
-                      new Date().getTime() / 1000 ? (
+                    new Date().getTime() / 1000 ? (
                       <Image src={proposalWaitingIcon} />
                     ) : (
                       <Image src={proposalCompleteIcon} />

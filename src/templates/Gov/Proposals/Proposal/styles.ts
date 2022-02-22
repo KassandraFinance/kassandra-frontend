@@ -7,28 +7,29 @@ import * as ButtonStyles from '../../../../components/Button/styles'
 import * as ExternalLinkStyles from '../../../../components/ExternalLink/styles'
 
 export const BackgroundVote = styled.div`
-  background: url('/assets/background-governance-page.svg');
+  padding-bottom: 8rem;
+
+  background-image: url('/assets/background-governance-page.svg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
 
-  box-shadow: inset 0px -20px 20px 0px #151117;
-  padding: 0 0 80px;
+  box-shadow: inset 0px -2rem 2rem 0 #151117;
 `
 export const VoteContent = styled.div`
-  max-width: 1140px;
+  max-width: 114rem;
   margin: 0 auto;
 
   @media (max-width: 1200px) {
-    padding: 0 32px;
+    padding: 0 ${theme.spacings.space32};
   }
   @media (max-width: 768px) {
-    padding: 0 24px;
+    padding: 0 ${theme.spacings.space24};
   }
 
   @media (max-width: 540px) {
-    padding: 0 16px;
+    padding: 0 ${theme.spacings.space16};
   }
 `
 export const IntroDesktopScreen = styled.div`
@@ -63,17 +64,19 @@ export const CardTitleWrapper = styled.div`
   }
 `
 export const ProposeAuthorCard = styled.div`
-  background: #ffffff0a;
-  border: 1px solid #fcfcfc26;
-  border-radius: 0.8rem;
+  height: 5.6rem;
+  margin-top: 1.6rem;
+  padding: 2rem 1.6rem;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  height: 5.6rem;
-  margin-top: 1.6rem;
-  padding: 2rem 1.6rem;
+  background: #ffffff0a;
+  border-width: 0.1rem;
+  border-style: solid;
+  border-color: #fcfcfc26;
+  border-radius: 0.8rem;
 
   @media (max-width: 768px) {
     max-width: 100%;
@@ -89,21 +92,22 @@ export const ProposeAuthorCard = styled.div`
     max-width: 100%;
   }
   p {
+    margin-right: 1.6rem;
+
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.bold};
     letter-spacing: 0.08rem;
 
-    margin-right: 1.6rem;
     @media (max-width: 768px) {
       font-size: ${theme.font.sizes.font14};
     }
   }
   span {
+    margin-left: 1.2rem;
+
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.light};
     letter-spacing: 0.07rem;
-
-    margin-left: 1.2rem;
   }
 `
 export const VotingPowerAndLink = styled.div`
@@ -118,7 +122,7 @@ export const VotingPowerAndLink = styled.div`
   ${VotingPowerStyles.VotingPower} {
     margin-bottom: 1.2rem;
     @media (max-width: 768px) {
-      width: 348px;
+      width: 34.8rem;
       max-width: 100%;
     }
     @media (max-width: 670px) {
@@ -133,12 +137,13 @@ export const VotingPowerAndLink = styled.div`
   }
 `
 export const VoteCardWrapper = styled.div`
+  max-width: 100%;
+  margin-top: 4rem;
+
   display: flex;
   justify-content: space-between;
   column-gap: 2.4rem;
 
-  max-width: 100%;
-  margin-top: 4rem;
   @media (max-width: 815px) {
     ${VoteCardStyle.ActionWrapper} {
       flex-direction: column;
@@ -155,28 +160,36 @@ export const VoteCardWrapper = styled.div`
   }
 `
 export const ProposalInfo = styled.div`
+  margin-top: 10rem;
+  margin-right: auto;
+  margin-bottom: 0;
+  margin-left: auto;
+  max-width: 114rem;
+
   display: flex;
   flex-direction: column;
 
-  margin: 10rem auto 0;
-  max-width: 1140px;
   @media (max-width: 1200px) {
-    padding: 0 32px;
+    padding: 0 ${theme.spacings.space32};
   }
   @media (max-width: 768px) {
-    margin: 8rem auto 0;
-    padding: 0 24px;
+    margin-top: 8rem;
+    margin-right: auto;
+    margin-bottom: 0;
+    margin-left: auto;
+    padding: 0 ${theme.spacings.space24};
   }
   @media (max-width: 540px) {
-    padding: 0 16px;
+    padding: 0 ${theme.spacings.space16};
   }
 `
 export const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
+
   @media (min-width: 1024px) {
     display: grid;
-    grid-template-columns: 1.25fr 0.75fr;
+    grid-template-columns: 5fr 3fr;
     grid-gap: 3.2rem;
   }
 `
@@ -196,23 +209,34 @@ export const ProposalTitleWrapper = styled.div`
   }
 `
 export const DescriptionTable = styled.section`
-  background: #ffffff0a;
-  border: 1px solid #ffffff3b;
+  width: 100%;
+  margin-top: 4rem;
+  margin-right: auto;
+  margin-bottom: 0;
+  margin-left: auto;
+  padding: 1.6rem;
+
+  background-color: #ffffff0a;
+  border-width: 0.1rem;
+  border-style: solid;
+  border-color: #ffffff3b;
   border-radius: 1.2rem;
 
-  margin: 4rem auto 0;
-  padding: 1.6rem;
-  width: 100%;
   @media (min-width: 1024px) {
+    margin-top: 4.8rem;
+    margin-right: auto;
+    margin-bottom: 0;
+    margin-left: auto;
     padding: 2.4rem;
-    margin: 4.8rem auto 0;
   }
 `
 export const Table = styled.table`
   width: 100%;
 `
 export const TableHead = styled.div`
-  border-bottom: 1px solid #ffffff4d;
+  border-bottom-width: 0.1rem;
+  border-bottom-style: solid;
+  border-bottom-color: #ffffff4d;
   padding-bottom: 1.6rem;
 `
 export const TableTitle = styled.th`
@@ -228,11 +252,15 @@ export const TableTitle = styled.th`
 `
 export const TableBody = styled.tbody``
 export const TableDescriptionWrapper = styled.div`
-  border-top: 1px solid #ffffff4d;
+  padding: 1.6rem 0;
 
   display: flex;
   flex-direction: column;
-  padding: 1.6rem 0;
+
+  border-top-width: 0.1rem;
+  border-top-style: solid;
+  border-top-color: #ffffff4d;
+
   &:first-child {
     border-top: none;
   }
@@ -268,31 +296,49 @@ export const DescriptionText = styled.td`
   }
 `
 export const InfoTable = styled.table`
-  background: #ffffff0a;
-  border: 1px solid #ffffff3b;
-  border-radius: 1.2rem;
-
-  margin: 1.6rem auto 0;
-  padding: 1.6rem;
   width: 100%;
   height: max-content;
+
+  margin-top: 1.6rem;
+  margin-right: auto;
+  margin-bottom: 0;
+  margin-left: auto;
+
+  padding: 1.6rem;
+
+  background-color: #ffffff0a;
+  border-width: 0.1rem;
+  border-style: solid;
+  border-color: #ffffff3b;
+  border-radius: 1.2rem;
+
   @media (width: 768px) {
-    margin: 3.2rem auto 0;
+    margin-top: 3.2rem;
+    margin-right: auto;
+    margin-bottom: 0;
+    margin-left: auto;
   }
   @media (min-width: 1024px) {
-    margin: 4.8rem auto 0;
+    margin-top: 4.8rem;
+    margin-right: auto;
+    margin-bottom: 0;
+    margin-left: auto;
   }
 `
 export const TableInfoWrapper = styled.div`
-  border-top: 1px solid #ffffff4d;
+  border-top-width: 0.1rem;
+  border-top-style: solid;
+  border-top-color: #ffffff4d;
+
   &:first-child {
     border-top: none;
   }
 `
 export const DataWrapper = styled.div`
+  margin-top: 1.2rem;
+
   display: flex;
   justify-content: space-between;
-  margin-top: 1.2rem;
   &:first-child {
     margin-top: 2.4rem;
   }
@@ -319,15 +365,19 @@ export const TextValue = styled.span`
   }
 `
 export const InfoLinkWrapper = styled.div`
-  background: #ffffff0a;
-  border: 1px solid transparent;
-  border-radius: 1.2rem;
-
-  display: flex;
-  justify-content: center;
   width: 100%;
   margin-top: 1.6rem;
   padding: 1.6rem;
+
+  display: flex;
+  justify-content: center;
+
+  background-color: #ffffff0a;
+  border-width: 0.1rem;
+  border-style: solid;
+  border-color: transparent;
+
+  border-radius: 1.2rem;
 
   > span {
     font-size: ${theme.font.sizes.font14};
@@ -337,13 +387,13 @@ export const InfoLinkWrapper = styled.div`
   }
 `
 export const Link = styled.a`
+  display: flex;
+  align-items: center;
+
   color: #c4c4c4;
   line-height: ${theme.font.sizes.font14};
   font-size: ${theme.font.sizes.font14};
   text-decoration: none;
-
-  display: flex;
-  align-items: center;
 
   cursor: pointer;
   transition: 0.15s;
@@ -363,12 +413,13 @@ export const Link = styled.a`
   }
 `
 export const ProposalDetails = styled.div`
+  margin-top: 10rem;
+
   display: flex;
   flex-direction: column;
 
-  margin: 10rem 0 0;
   @media (max-width: 768px) {
-    margin: 8rem 0 0;
+    margin-top: 8rem;
   }
 `
 export const DetailsSubTitle = styled.td`
@@ -403,11 +454,11 @@ export const DetailsText = styled.td`
   }
 `
 export const ProposalStatus = styled.div`
+  margin-top: 8rem;
+  max-width: 114rem;
+
   display: flex;
   flex-direction: column;
-
-  margin: 8rem 0 0;
-  max-width: 114rem;
 `
 interface IImageProps {
   isAfter: boolean;
@@ -415,73 +466,86 @@ interface IImageProps {
 }
 // eslint-disable-next-line prettier/prettier
 export const LineBetweenImages = styled.div<IImageProps>`
-    background: ${props => props.isComplete
-    ? 'linear-gradient(0deg, #ffbf00 -0.02%, #e843c4 99.99%)'
-    : '#45405F'};
+    background: ${props =>
+      props.isComplete
+        ? `linear-gradient(0deg, ${theme.colors.amber} -0.02%, ${theme.colors.magenta} 99.99%)`
+        : '#45405F'};
     ${props =>
-    !props.isAfter &&
-    `display: inline-block;
+      !props.isAfter &&
+      `
+      width: 100%;
+      height: 0.1rem;
+      margin-top: 3.95rem;
+      
+      display: inline-block;
 
-    margin-top: 3.95rem ;
-    width: 100%;
-    height: 1px;
-    @media (max-width: 768px) {
-      margin-top: 2.8rem;
-    }
-    @media (max-width: 480px) {
-      width: 1px;
-      height: 32px;
-      margin-top: 0;
-      margin-left: 2rem;
-    }
+      @media (max-width: 768px) {
+        margin-top: 2.8rem;
+      }
+      @media (max-width: 480px) {
+        width: 0.1rem;
+        height: 3.2rem;
+        margin-top: 0;
+        margin-left: 2rem;
+      }
   `}
 `
 export const Steps = styled.div`
+  margin-top: 7.2rem;
+
   display: flex;
   justify-content: space-between;
 
-  margin-top: 7.2rem;
   @media (max-width: 480px) {
+    margin-top: 3.6rem;
+
+    padding-top: 0;
+    padding-right: 4.8rem;
+    padding-bottom: 0;
+    padding-left: 2.6rem;
+
     flex-direction: column;
     align-items: flex-start;
-    margin-top: 3.6rem;
-    padding: 0 4.8rem 0 2.6rem;
   }
 `
 export const Step = styled.div`
+  position: relative;
+
+  min-width: 7.9rem;
+
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  min-width: 79px;
-  position: relative;
   @media (max-width: 768px) {
-    min-width: 56px;
-    min-height: 56px;
+    min-width: ${theme.spacings.space56};
+    min-height: ${theme.spacings.space56};
   }
   @media (max-width: 480px) {
+    width: 100%;
+    height: 4rem;
+    margin: -0.9rem 0;
+
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 
-    margin: -9px 0;
-    width: 100%;
-    height: 40px;
     img {
-      width: 40px;
+      width: 4rem;
     }
   }
 `
 
 export const StepTitle = styled.div`
+  margin-top: 4.4rem;
+
   font-size: ${theme.font.sizes.font18};
   font-weight: ${theme.font.weight.bold};
 
-  margin-top: 4.4rem;
   @media (max-width: 768px) {
-    font-size: ${theme.font.sizes.font14};
-
     margin-top: 2.4rem;
+
+    font-size: ${theme.font.sizes.font14};
   }
   @media (max-width: 480px) {
     margin-top: 0;
