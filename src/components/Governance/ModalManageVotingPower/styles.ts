@@ -2,15 +2,15 @@ import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
 export const Backdrop = styled.div`
-  background-color: rgba(0, 0, 0, 0.7);
-
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 20;
 
   width: 100vw;
   height: 100vh;
-  z-index: 20;
+
+  background-color: rgba(0, 0, 0, 0.7);
 `
 
 interface IModalContainerProps {
@@ -18,24 +18,20 @@ interface IModalContainerProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const ModalContainer =
-  styled.div <
-  IModalContainerProps >
+export const ModalContainer = styled.div<IModalContainerProps>
   `
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99;
+
+  width: 44rem;
   display: ${props => (props.modalOpen ? 'block' : 'none')};
 
   background-color: rgba(31, 31, 31, 0.8);
   border: 1.5px solid #FFFFFF40;
   border-radius: 10px;
-
-  width: 44rem;
-
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  z-index: 99;
 
   @media (max-width: 440px) {
     width: 33rem;
@@ -47,15 +43,14 @@ export const ModalContainer =
 `
 
 export const Header = styled.div`
-  background-color: #1f1f1fb8;
-  border-bottom: 1px solid #ffffff40;
-  border-radius: 10px 10px 0 0;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   padding: 2.4rem;
+
+  background-color: #1f1f1fb8;
+  border-bottom: 1px solid #ffffff40;
+  border-radius: 10px 10px 0 0;
 
   @media (max-width: 440px) {
     padding: 1.6rem;
@@ -73,13 +68,13 @@ export const Header = styled.div`
 `
 
 export const Close = styled.button`
-  background-color: transparent;
-  border: none;
+  padding: 2px;
 
   color: #fff;
   font-size: ${theme.font.sizes.font20};
 
-  padding: 2px;
+  background-color: transparent;
+  border: none;
 
   cursor: pointer;
 `
@@ -87,17 +82,17 @@ export const Close = styled.button`
 // ======== Delegate and Undelegate ========
 
 export const Content = styled.div`
-  background: #1f2937;
-  border-radius: 0 0 10px 10px;
-  color: ${theme.colors.snow};
-  font-weight: ${theme.font.weight.light};
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-
   padding: 2.4rem;
+
+  color: ${theme.colors.snow};
+  font-weight: ${theme.font.weight.light};
+
+  background: #1f2937;
+  border-radius: 0 0 10px 10px;
 
   @media (max-width: 440px) {
     padding: 1.6rem;
@@ -109,10 +104,10 @@ export const Content = styled.div`
   }
 
   > span {
-    font-size: ${theme.font.sizes.font14};
-
     margin-top: ${theme.spacings.space24};
     margin-bottom: ${theme.spacings.space16};
+
+    font-size: ${theme.font.sizes.font14};
   }
 `
 
@@ -121,19 +116,17 @@ interface ISelectProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const Select =
-  styled.button <
-  ISelectProps >
+export const Select = styled.button<ISelectProps>
   `
-  background-color: #1b1d22;
-  border: 1px solid #ffffff15;
-
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  width: 100%;
   padding: ${theme.spacings.space24} ${theme.spacings.space16};
+
+  background-color: #1b1d22;
+  border: 1px solid #ffffff15;
+
   cursor: pointer;
 
   span {
@@ -149,18 +142,18 @@ export const Select =
 `
 
 export const Input = styled.input`
-  background-color: #ffffff15;
-  border: 1px solid #ffffff15;
+  width: 100%;
+  height: 4.6rem;
+  padding: ${theme.spacings.space16};
+
   color: ${theme.colors.snow};
   font-weight: ${theme.font.weight.light};
   font-size: ${theme.font.sizes.font14};
   font-family: ${theme.font.family};
   letter-spacing: 0.05em;
 
-  width: 100%;
-  height: 4.6rem;
-
-  padding: ${theme.spacings.space16};
+  background-color: #ffffff15;
+  border: 1px solid #ffffff15;
 
   @media (max-width: 440px) {
     font-size: ${theme.font.sizes.font12};
@@ -180,10 +173,9 @@ export const Input = styled.input`
 `
 
 export const ButtonContainer = styled.div`
+  width: 100%;
   display: flex;
   gap: 1.6rem;
-
-  width: 100%;
   margin-top: ${theme.spacings.space40};
   margin-bottom: ${theme.spacings.space24};
 
@@ -210,14 +202,15 @@ export const Link = styled.div`
 `
 
 export const BackdropSelect = styled.div`
-  background-color: transparent;
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 21;
 
   width: 100%;
   height: 100%;
-  z-index: 21;
+
+  background-color: transparent;
 `
 
 export const Selected = styled.div`
@@ -237,16 +230,14 @@ interface IModalProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const Modal =
-  styled.div <
-  IModalProps >
+export const Modal = styled.div<IModalProps>
   `
-  display: ${props => (props.isOpenOption ? 'block' : 'none')};
   position: absolute;
-
   top: ${props => (props.undelegate ? '25.7rem' : '29.3rem')};
   left: 2.4rem;
   z-index: 999;
+
+  display: ${props => (props.isOpenOption ? 'block' : 'none')};
 
   @media (max-width: 440px) {
     top: ${props => (props.undelegate ? '28.2rem' : '28.4rem')};
@@ -255,19 +246,19 @@ export const Modal =
 `
 
 export const Option = styled.div`
-  background-color: #1b1d22;
-  border: 1px solid #ffffff15;
-  color: ${theme.colors.snow};
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
   width: 38.9rem;
   padding-top: ${theme.spacings.space16};
   padding-right: ${theme.spacings.space40};
   padding-bottom: ${theme.spacings.space16};
   padding-left: ${theme.spacings.space16};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: ${theme.colors.snow};
+
+  background-color: #1b1d22;
+  border: 1px solid #ffffff15;
 
   cursor: pointer;
 
@@ -323,10 +314,10 @@ export const VotingPower = styled.div`
   }
 
   span {
+    margin-top: 0.4rem;
+
     font-size: ${theme.font.sizes.font12};
     font-weight: ${theme.font.weight.light};
     letter-spacing: 0.05em;
-
-    margin-top: 0.4rem;
   }
 `
