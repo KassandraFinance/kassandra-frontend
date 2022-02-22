@@ -3,8 +3,9 @@ import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 export const Dropdown = styled.div`
-  display: inline-block;
   position: relative;
+
+  display: inline-block;
 
   &:hover {
     button::after {
@@ -32,19 +33,20 @@ export const Dropdown = styled.div`
 `
 
 export const DropButton = styled.button`
-  border: none;
-  background-color: transparent;
-  color: ${theme.colors.snow};
-  font-size: 16px;
-  text-transform: capitalize;
-  
+  position: relative;
+
   display: inline-block;
-  
   margin: 0.3rem ${theme.spacings.space24} 0;
   padding-top: 12px;
   padding-bottom: 12px;
 
-  position: relative;
+  font-size: 16px;
+  text-transform: capitalize;
+
+  background-color: transparent;
+  border: none;
+  color: ${theme.colors.snow};
+
   @media (max-width: 960px) {
     margin: 0;
   }
@@ -58,27 +60,30 @@ interface IDropdownContentProps {
 }
 
 export const DropdownContent = styled.div<IDropdownContentProps>`
+  position: absolute;
+  left: 24px;
+  z-index: 1;
+
   display: ${props => props.isDropdown ? 'block': 'none'};
+  margin-top: 0.3rem;
+  min-width: 160px;
 
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   background-color: #15161C;
 
-  margin-top: 0.3rem;
-  min-width: 160px;
-
-  position: absolute;
-  left: 24px;
-
-  z-index: 1;
   a {
+    display: block;
+    padding: 12px 16px;
+
+    @media (max-width: 540px) {
+      font-size: ${theme.font.sizes.font14};
+    }
+
     color: ${theme.colors.snow};
-    font-size: ${theme.font.sizes.font14};
+    font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.light};
     text-decoration: none;
 
-    display: block;
-
-    padding: 12px 16px;
     transition-duration: 200ms;
     &:hover {
       background-color: #3F1A38;
