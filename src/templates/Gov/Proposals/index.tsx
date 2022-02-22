@@ -2,10 +2,6 @@ import React from 'react'
 import Image from 'next/image'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import { Staking } from '../../../constants/tokenAddresses'
-
-import useStakingContract from '../../../hooks/useStakingContract'
-
 import Header from '../../../components/Header'
 import TitleSection from '../../../components/TitleSection'
 import VotingPower from '../../../components/VotingPower'
@@ -19,7 +15,6 @@ import externalLink from '../../../../public/assets/icons/external-link.svg'
 import * as S from './styles'
 
 const AllProposals = () => {
-  const kacyStake = useStakingContract(Staking)
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
   return (
@@ -35,8 +30,6 @@ const AllProposals = () => {
             />
             <S.VotingPowerContent>
               <VotingPower
-                getTotalVotes={kacyStake.totalVotes}
-                getCurrentVotes={kacyStake.currentVotes}
                 userWalletAddress={userWalletAddress}
                 isMobile={true}
               />
