@@ -230,15 +230,20 @@ export const TimeFrameMobile = styled.p`
 `
 
 export const StateMutability = styled.span`
-  color: ${theme.colors.snow};
-  line-height: ${theme.font.sizes.font18};
-  font-size: ${theme.font.sizes.font18};
-  font-weight: ${theme.font.weight.bold};
-  text-transform: capitalize;
-
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
+  line-height: ${theme.font.sizes.font18};
+  font-size: ${theme.font.sizes.font18};
+  font-weight: ${theme.font.weight.bold};
+  color: ${theme.colors.snow};
+  text-transform: capitalize;
+
+  img {
+    max-width: 2.4rem;
+    max-height: 2.4rem;
+  }
 
   @media (max-width: 960px) {
     line-height: ${theme.font.sizes.font16};
