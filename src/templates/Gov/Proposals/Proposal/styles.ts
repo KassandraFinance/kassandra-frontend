@@ -368,28 +368,7 @@ export const TextValue = styled.span`
     letter-spacing: 0.07rem;
   }
 `
-export const InfoLinkWrapper = styled.div`
-  width: 100%;
-  margin-top: 1.6rem;
-  padding: 1.6rem;
 
-  display: flex;
-  justify-content: center;
-
-  background-color: #ffffff0a;
-  border-width: 0.1rem;
-  border-style: solid;
-  border-color: transparent;
-
-  border-radius: 1.2rem;
-
-  > span {
-    font-size: ${theme.font.sizes.font14};
-    @media (min-width: 768px) {
-      font-size: ${theme.font.sizes.font16};
-    }
-  }
-`
 export const LinkForum = styled.a`
   border: 1px solid rgba(255, 255, 255, 0.04);
   border-radius: 8px;

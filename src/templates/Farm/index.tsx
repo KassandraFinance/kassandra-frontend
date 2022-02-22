@@ -79,8 +79,6 @@ const StakeFarm = () => {
                           <p>EARN REWARDS AND VOTING POWER</p>
                         </S.NameStake>
                         <VotingPower
-                          getTotalVotes={kacyStake.totalVotes}
-                          getCurrentVotes={kacyStake.currentVotes}
                           userWalletAddress={userWalletAddress}
                         />
                       </S.StakeWithPowerVote>

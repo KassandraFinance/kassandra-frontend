@@ -6,6 +6,10 @@ import Image from 'next/image'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
+import { Staking } from '../../constants/tokenAddresses'
+
+import useVotingPower from '../../hooks/useVotingPower'
+
 import web3 from '../../utils/web3'
 import { BNtoDecimal } from '../../utils/numerals'
 
@@ -14,20 +18,15 @@ import infoGrayIcon from '../../../public/assets/info-gray.svg'
 import * as S from './styles'
 
 interface IVotingPowerProps {
-  getTotalVotes: () => Promise<BigNumber>;
-  getCurrentVotes: (walletAddres: string) => Promise<BigNumber>;
   userWalletAddress: string;
   isMobile?: boolean;
 }
 
-const VotingPower = ({
-  getTotalVotes,
-  getCurrentVotes,
-  userWalletAddress,
-  isMobile
-}: IVotingPowerProps) => {
+const VotingPower = ({ userWalletAddress, isMobile }: IVotingPowerProps) => {
   const [totalVotes, setTotalVotes] = React.useState(new BigNumber(-1))
   const [yourVotingPower, setYourVotingPower] = React.useState(new BigNumber(-1)) // eslint-disable-line prettier/prettier
+
+  const votingPower = useVotingPower(Staking)
 
   React.useEffect(() => {
     if (!web3.currentProvider) {
@@ -35,10 +34,10 @@ const VotingPower = ({
     }
 
     const interval = setInterval(async () => {
-      const totalVotes = await getTotalVotes()
+      const totalVotes = await votingPower.totalVotes()
       setTotalVotes(totalVotes)
       if (userWalletAddress) {
-        const currentVotes = await getCurrentVotes(userWalletAddress)
+        const currentVotes = await votingPower.currentVotes(userWalletAddress)
         setYourVotingPower(currentVotes)
       }
     }, 8000)
