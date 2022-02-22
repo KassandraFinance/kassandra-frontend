@@ -2,23 +2,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 // import useSWR from 'swr'
 // import { request } from 'graphql-request'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
-import Image from 'next/image'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { useSelector, RootStateOrAny } from 'react-redux'
-import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
 
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
-
-import web3 from '../../utils/web3'
-import waitTransaction, {
-  MetamaskError,
-  TransactionCallback
-} from '../../utils/txWait'
 
 import {
   Staking,
@@ -33,23 +26,30 @@ import usePriceLP from '../../hooks/usePriceLP'
 import { PoolInfo } from '../../hooks/useStakingContract'
 import useERC20Contract, { ERC20 } from '../../hooks/useERC20Contract'
 
+import web3 from '../../utils/web3'
+import waitTransaction, {
+  MetamaskError,
+  TransactionCallback
+} from '../../utils/txWait'
+import { BNtoDecimal } from '../../utils/numerals'
+
+import Button from '../Button'
 import ModalStaking from '../ModalStaking'
 import ModalUnstaking from '../ModalUnstaking'
 import ModalRequestUnstake from '../ModalRequestUnstake'
 import ModalCancelUnstake from '../ModalCancelUnstake'
 import ModalWalletConnect from '../ModalWalletConnect'
-
-import infoCyanIcon from '../../../public/assets/info-icon.svg'
-import infoGrayIcon from '../../../public/assets/info-gray.svg'
+import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
 
 import Details from './Details'
 import YourStake from './YourStake'
 import WithdrawDate from './WithdrawDate'
 import KacyEarned from './KacyEarned'
 
+import infoCyanIcon from '../../../public/assets/info-icon.svg'
+import infoGrayIcon from '../../../public/assets/info-gray.svg'
+
 import * as S from './styles'
-import Button from '../Button'
-import { BNtoDecimal } from '../../utils/numerals'
 
 // import { GET_INFO_AHYPE } from './graphql'
 export interface IPriceLPToken {

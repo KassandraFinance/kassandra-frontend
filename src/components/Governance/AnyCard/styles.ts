@@ -2,22 +2,25 @@ import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
 export const BackgroundCard = styled.div`
-  background: rgba(255, 255, 255, 0.04);
-  border: none;
-
-  border-radius: 0.8rem;
-  color: ${theme.colors.snow};
-  font-size: ${theme.font.sizes.font16};
-  font-weight: ${theme.font.weight.light};
+  width: 100%;
+  margin-top: ${theme.spacings.space48};
+  margin-bottom: 8rem;
+  padding-top: ${theme.spacings.space56};
+  padding-right: 0;
+  padding-bottom: ${theme.spacings.space56};
+  padding-left: 0;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  width: 100%;
-  margin-top: ${theme.spacings.space48};
-  margin-bottom: 8rem;
-  padding: 5.6rem 0;
+  font-size: ${theme.font.sizes.font16};
+  font-weight: ${theme.font.weight.light};
+
+  background-color: rgba(255, 255, 255, 0.04);
+  border: none;
+  border-radius: 0.8rem;
+  color: ${theme.colors.snow};
 
   @media (max-width: 600px) {
     margin-top: 2rem;
@@ -26,13 +29,13 @@ export const BackgroundCard = styled.div`
   }
 
   p {
-    line-height: ${theme.font.sizes.font24};
-    font-size: ${theme.font.sizes.font24};
-    font-weight: ${theme.font.weight.bold};
+    margin: 0 auto;
 
     display: block;
 
-    margin: 0 auto;
+    line-height: ${theme.font.sizes.font24};
+    font-size: ${theme.font.sizes.font24};
+    font-weight: ${theme.font.weight.bold};
 
     @media (max-width: 992px) {
       font-size: ${theme.font.sizes.font18};
