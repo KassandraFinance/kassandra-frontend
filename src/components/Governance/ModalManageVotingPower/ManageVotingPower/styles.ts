@@ -2,20 +2,16 @@ import styled from 'styled-components'
 import theme from '../../../../styles/theme'
 
 export const Content = styled.div`
-  background: #1f2937;
-  border-radius: 0 0 10px 10px;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+
+  background: #1f2937;
+  border-radius: 0 0 10px 10px;
 `
 
 export const WrapperIconsBackGround = styled.button`
-  background: #1f1f1fb8;
-  border-radius: 1rem;
-  border: none;
-
   display: flex;
   align-items: center;
 
@@ -23,6 +19,10 @@ export const WrapperIconsBackGround = styled.button`
   margin-right: 2.4rem;
   margin-left: 2.4rem;
   padding: 0.15rem;
+
+  background: #1f1f1fb8;
+  border-radius: 1rem;
+  border: none;
 
   transition: 200ms;
 
@@ -52,9 +52,8 @@ export const WrapperIconsBackGround = styled.button`
 `
 
 export const WrapperIcons = styled.div`
-  background: #1f1f1f;
-  border: none;
-  border-radius: 1rem;
+  position: relative;
+  z-index: 2;
 
   display: flex;
   align-items: center;
@@ -63,9 +62,11 @@ export const WrapperIcons = styled.div`
   padding-right: 1.6rem;
   padding-bottom: 1.6rem;
 
+  background: #1f1f1f;
+  border: none;
+  border-radius: 1rem;
+
   cursor: pointer;
-  position: relative;
-  z-index: 2;
 
   @media (max-width: 440px) {
     padding-left: 1.6rem;
@@ -86,10 +87,10 @@ export const Option = styled.div`
   letter-spacing: 0.05rem;
 
   h3 {
+    margin-bottom: ${theme.spacings.space8};
+
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.bold};
-
-    margin-bottom: ${theme.spacings.space8};
   }
   p {
     line-height: ${theme.font.sizes.font18};
