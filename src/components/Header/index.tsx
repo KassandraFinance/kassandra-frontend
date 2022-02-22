@@ -71,19 +71,7 @@ const Header = () => {
               Stake/Farm
             </S.MenuLink>
           </Link>
-          <DropdownInvest
-            nameOnHeader="vote"
-            linkPage={[
-              {
-                name: 'Overview',
-                href: '/gov'
-              },
-              {
-                name: 'User profile',
-                href: `/gov/address/${userWalletAddress}`
-              }
-            ]}
-          />
+          <S.MenuLinkDisable>Vote</S.MenuLinkDisable>
           <Link href="/about" passHref>
             <S.MenuLink
               onClick={() => clickMatomoEvent('click-on-link', 'about')}
