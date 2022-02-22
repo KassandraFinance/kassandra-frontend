@@ -18,7 +18,10 @@ interface IModalContainerProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const ModalContainer = styled.div<IModalContainerProps>`
+export const ModalContainer =
+  styled.div <
+  IModalContainerProps >
+  `
   display: ${props => (props.modalOpen ? 'block' : 'none')};
 
   background-color: rgba(31, 31, 31, 0.8);
@@ -106,7 +109,7 @@ export const Content = styled.div`
   }
 
   > span {
-    font-size: ${theme.font.sizes.font12};
+    font-size: ${theme.font.sizes.font14};
 
     margin-top: ${theme.spacings.space24};
     margin-bottom: ${theme.spacings.space16};
@@ -118,7 +121,10 @@ interface ISelectProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const Select = styled.button<ISelectProps>`
+export const Select =
+  styled.button <
+  ISelectProps >
+  `
   background-color: #1b1d22;
   border: 1px solid #ffffff15;
 
@@ -135,7 +141,7 @@ export const Select = styled.button<ISelectProps>`
     font-size: ${theme.font.sizes.font14};
     text-align: left;
   }
-  
+
   img {
     transform: ${props => (props.optionsOpen ? 'rotate(180deg)' : null)};
     transition-duration: 250ms;
@@ -231,10 +237,13 @@ interface IModalProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const Modal = styled.div<IModalProps>`
+export const Modal =
+  styled.div <
+  IModalProps >
+  `
   display: ${props => (props.isOpenOption ? 'block' : 'none')};
   position: absolute;
-  
+
   top: ${props => (props.undelegate ? '25.7rem' : '29.3rem')};
   left: 2.4rem;
   z-index: 999;
@@ -294,6 +303,7 @@ export const WithdrawDelay = styled.div`
   p {
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.medium};
+    text-transform: uppercase;
   }
 
   span {
