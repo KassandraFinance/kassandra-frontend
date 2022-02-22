@@ -105,11 +105,6 @@ const useStakingContract = (address: string) => {
       return new BigNumber(value)
     }
 
-    const currentVotes = async (walletAddres: string) => {
-      const value: string = await contract.methods.getCurrentVotes(walletAddres).call()
-      return new BigNumber(value)
-    }
-
     const earned = async (pid: number, walletAddress: string) => {
       const value: string = await contract.methods.earned(pid, walletAddress).call()
       return new BigNumber(value)
@@ -128,11 +123,6 @@ const useStakingContract = (address: string) => {
     const stakedUntil = async (pid: number, walletAddress: string) => {
       const value: string = await contract.methods.stakedUntil(pid, walletAddress).call()
       return value
-    }
-
-    const totalVotes = async () => {
-      const value: string = await contract.methods.getTotalVotes().call()
-      return new BigNumber(value)
     }
 
     const unstaking = async (pid: number, walletAddress: string) => {
@@ -156,12 +146,10 @@ const useStakingContract = (address: string) => {
 
       availableWithdraw,
       balance,
-      currentVotes,
       earned,
       lockUntil,
       poolInfo,
       stakedUntil,
-      totalVotes,
       unstaking,
       withdrawable,
     }
