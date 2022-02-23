@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import styled from 'styled-components'
 import theme from '../../styles/theme'
 
@@ -11,12 +10,14 @@ export const Dropdown = styled.div`
     button::after {
       content: '';
       position: absolute;
-      display: block;
       height: 0.3rem;
+
+      display: block;
+      margin-top: 1.2rem;
+
       border-radius: 0.3rem;
       background-color: ${theme.colors.cyan};
       animation: hoverAnimation 0.2s forwards;
-      margin-top: 12px;
     }
 
     @keyframes hoverAnimation {
@@ -37,10 +38,10 @@ export const DropButton = styled.button`
 
   display: inline-block;
   margin: 0.3rem ${theme.spacings.space24} 0;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
 
-  font-size: 16px;
+  font-size: ${theme.font.sizes.font16};
   text-transform: capitalize;
 
   background-color: transparent;
@@ -56,24 +57,25 @@ export const DropButton = styled.button`
 `
 
 interface IDropdownContentProps {
-  isDropdown: boolean
+  isDropdown: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 export const DropdownContent = styled.div<IDropdownContentProps>`
   position: absolute;
-  left: 24px;
+  left: 2.4rem;
   z-index: 1;
 
-  display: ${props => props.isDropdown ? 'block': 'none'};
+  display: ${props => (props.isDropdown ? 'block' : 'none')};
   margin-top: 0.3rem;
-  min-width: 160px;
+  min-width: 16rem;
 
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0 0.8rem 1.6rem 0 rgba(0,0,0,0.2);
   background-color: #15161C;
 
   a {
     display: block;
-    padding: 12px 16px;
+    padding: 1.2rem 1.6rem;
 
     @media (max-width: 540px) {
       font-size: ${theme.font.sizes.font14};
