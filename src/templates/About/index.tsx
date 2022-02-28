@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
-import KacyOverView from '../../components/KacyOverView'
+import KacyOverview from '../../components/KacyOverview'
 import KassandraTokenCard from '../../components/KassandraTokenCard'
 
 import Community from './Community'
@@ -32,7 +32,7 @@ const About = () => {
         <HowItWorks />
       </S.Background>
       <S.TeamBackground>
-        <KacyOverView />
+        <KacyOverview />
         <Team />
       </S.TeamBackground>
       <FAQ />

@@ -5,7 +5,7 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 import Big from 'big.js'
 import { BNtoDecimal } from '../../utils/numerals'
 
-import ExternalLink from '../../components/ExternalLink'
+import ExternalLink from '../ExternalLink'
 
 import * as S from './styles'
 
