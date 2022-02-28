@@ -2,12 +2,13 @@ import styled from 'styled-components'
 import theme from '../../../../styles/theme'
 
 export const Card = styled.div`
+  width: 100%;
+  height: 100%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
 
   text-align: center;
 
@@ -17,8 +18,8 @@ export const Card = styled.div`
 `
 
 export const Image = styled.div`
-  margin-bottom: 1.6rem;
   max-width: 100%;
+  margin-bottom: 1.6rem;
 
   background: linear-gradient(0deg, #e843c4, #ffbf00);
   border-radius: 50%;
@@ -29,6 +30,7 @@ export const Image = styled.div`
     width: 88px;
     height: 88px;
     padding: 2px;
+
     border-radius: 50%;
   }
 `
@@ -60,12 +62,13 @@ export const CardDivider = styled.div`
 `
 
 export const Social = styled.div`
+  width: 11.6rem;
+  margin-top: 1.6rem;
+
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  width: 11.6rem;
-  margin-top: 1.6rem;
 `
 
 export const SocialIcon = styled.div`
