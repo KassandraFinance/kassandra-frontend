@@ -42,11 +42,11 @@ export const DropButton = styled.button`
   padding-bottom: 1.2rem;
 
   font-size: ${theme.font.sizes.font16};
+  color: ${theme.colors.snow};
   text-transform: capitalize;
 
   background-color: transparent;
   border: none;
-  color: ${theme.colors.snow};
 
   @media (max-width: 960px) {
     margin: 0;
@@ -77,22 +77,40 @@ export const DropdownContent = styled.div<IDropdownContentProps>`
     display: block;
     padding: 1.2rem 1.6rem;
 
-    @media (max-width: 540px) {
-      font-size: ${theme.font.sizes.font14};
-    }
-
     color: ${theme.colors.snow};
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.light};
     text-decoration: none;
 
     transition-duration: 200ms;
+
     &:hover {
       background-color: #3F1A38;
+    }
+
+    @media (max-width: 540px) {
+      font-size: ${theme.font.sizes.font14};
+    }
+
+    @media (max-width: 380px) {
+      font-size: ${theme.font.sizes.font12};
     }
   }
 
   @media (max-width: 960px) {
     left: 0;
+  }
+
+  @media (max-width: 768px) {
+    left: auto;
+    right: 0;
+  }
+
+  @media (max-width: 490px) {
+    min-width: 13rem;
+  }
+
+  @media (max-width: 380px) {
+    min-width: 11rem;
   }
 `
