@@ -3,11 +3,11 @@ import { NextApiRequest, NextApiResponse } from 'next'
 export default async (request: NextApiRequest, response: NextApiResponse) => {
   try {
     const urlPriceKacyOnCoingecko =
-      'https://api.coingecko.com/api/v3/coins/kassandra?localization=false&tickers=false&community_data=false&developer_data=false&sparkline=false'
+      'https://api.coingecko.com/api/v3/simple/price?ids=kassandra&vs_currencies=usd'
 
     const responseKacyPrice = await fetch(urlPriceKacyOnCoingecko)
     const responseKacyPriceJson = await responseKacyPrice.json()
-    const kacyInDollar = responseKacyPriceJson.market_data.current_price.usd
+    const kacyInDollar = responseKacyPriceJson.kassandra.usd
 
     const urlSupplyKassandra = 'https://graph.kassandra.finance/supply'
 
