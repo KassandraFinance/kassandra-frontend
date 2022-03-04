@@ -1,5 +1,6 @@
 import React from 'react'
 import Big from 'big.js'
+import useSWR from 'swr'
 import { useSelector, RootStateOrAny } from 'react-redux'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
@@ -11,16 +12,15 @@ import * as S from './styles'
 
 const URL_API =
   process.env.NEXT_PUBLIC_MASTER === '1'
-    ? 'http://kassandra.finance/api/overview'
-    : process.env.NODE_ENV === 'development'
-    ? 'http://localhost:3000/api/overview'
-    : 'http://demo.kassandra.finance/api/overview'
+    ? 'https://alpha.kassandra.finance/api/overview'
+    : 'http://localhost:3000/api/overview'
 
 const KacyOverview = () => {
   const [kacyPrice, setKacyPrice] = React.useState<Big>(Big(0))
   const [circulatingSupply, setCirculatingSupply] = React.useState<Big>(Big(0))
 
   const { chainId } = useSelector((state: RootStateOrAny) => state)
+  const { data } = useSWR(URL_API)
   const { trackEvent } = useMatomo()
 
   function clickMatomoEvent(action: string, name: string) {
@@ -31,28 +31,12 @@ const KacyOverview = () => {
     })
   }
 
-  async function getKacyInUsd() {
-    const response = await fetch(URL_API)
-    const data = await response.json()
-
-    if (!data.kacyPrice) return
-
-    const kacyInDollar = data.kacyPrice
-    const circulatingSupply = data.supply
-
-    setKacyPrice(Big(kacyInDollar))
-    setCirculatingSupply(Big(circulatingSupply))
-  }
-
   React.useEffect(() => {
-    getKacyInUsd()
-
-    const interval = setInterval(() => {
-      getKacyInUsd()
-    }, 10000)
-
-    return () => clearInterval(interval)
-  }, [chainId])
+    if (data) {
+      setKacyPrice(Big(data.kacyPrice))
+      setCirculatingSupply(Big(data.supply))
+    }
+  }, [chainId, data])
 
   const marketCap = new Big(circulatingSupply).mul(kacyPrice)
 
