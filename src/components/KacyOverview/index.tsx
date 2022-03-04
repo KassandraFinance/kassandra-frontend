@@ -12,7 +12,7 @@ import * as S from './styles'
 
 const URL_API =
   process.env.NEXT_PUBLIC_MASTER === '1'
-    ? 'http://alpha.kassandra.finance/api/overview'
+    ? 'https://alpha.kassandra.finance/api/overview'
     : 'http://localhost:3000/api/overview'
 
 const KacyOverview = () => {
