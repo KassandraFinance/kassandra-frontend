@@ -10,17 +10,19 @@ import ExternalLink from '../ExternalLink'
 
 import * as S from './styles'
 
-const URL_API =
-  process.env.NEXT_PUBLIC_MASTER === '1'
-    ? 'https://alpha.kassandra.finance/api/overview'
-    : 'http://localhost:3000/api/overview'
+const URL_API: { [key: number | string]: string } = {
+  1: 'https://kassandra.finance/api/overview',
+  2: 'https://alpha.kassandra.finance/api/overview',
+  3: 'https://demo.kassandra.finance/api/overview',
+  4: 'http://localhost:3000/api/overview'
+}
 
 const KacyOverview = () => {
   const [kacyPrice, setKacyPrice] = React.useState<Big>(Big(0))
   const [circulatingSupply, setCirculatingSupply] = React.useState<Big>(Big(0))
 
   const { chainId } = useSelector((state: RootStateOrAny) => state)
-  const { data } = useSWR(URL_API)
+  const { data } = useSWR(URL_API[process.env.NEXT_PUBLIC_URL_API || 4])
   const { trackEvent } = useMatomo()
 
   function clickMatomoEvent(action: string, name: string) {
