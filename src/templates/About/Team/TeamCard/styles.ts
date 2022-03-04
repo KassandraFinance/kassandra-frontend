@@ -27,9 +27,9 @@ export const Image = styled.div`
   overflow: hidden;
 
   img {
-    width: 88px;
-    height: 88px;
-    padding: 2px;
+    width: 8.8rem;
+    height: 8.8rem;
+    padding: 0.2rem;
 
     border-radius: 50%;
   }
@@ -58,7 +58,9 @@ export const CardDivider = styled.div`
   width: 6.6rem;
   margin: 0 auto;
 
-  border: 0.1rem solid #ffffff24;
+  border-width: 0.1rem;
+  border-style: solid;
+  border-color: #ffffff24;
 `
 
 export const Social = styled.div`
@@ -76,7 +78,9 @@ export const SocialIcon = styled.div`
   height: 2.8rem;
 
   background-color: rgba(33, 20, 38, 0.33);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-width: 0.1rem;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.05);
   border-radius: 50%;
 
   img {
