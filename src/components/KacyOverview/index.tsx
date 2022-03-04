@@ -1,35 +1,26 @@
-//create a new component that displays the token price
 import React from 'react'
 import Big from 'big.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
-
-import usePriceLP from '../../hooks/usePriceLP'
-import { BNtoDecimal } from '../../utils/numerals'
-
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
-import ExternalLink from '../../components/ExternalLink'
+import { BNtoDecimal } from '../../utils/numerals'
+
+import ExternalLink from '../ExternalLink'
 
 import * as S from './styles'
 
-import { chains, LPKacyAvax, LPDaiAvax } from '../../constants/tokenAddresses'
+const URL_API =
+  process.env.NEXT_PUBLIC_MASTER === '1'
+    ? 'http://kassandra.finance/api/overview'
+    : process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000/api/overview'
+    : 'http://demo.kassandra.finance/api/overview'
 
-interface TokenInfo {
-  id: string;
-  balance_in_pool: string;
-  address: string;
-  name: string;
-  symbol: string;
-  allocation: number;
-  price: number;
-}
-
-const KacyOverView = () => {
+const KacyOverview = () => {
   const [kacyPrice, setKacyPrice] = React.useState<Big>(Big(0))
   const [circulatingSupply, setCirculatingSupply] = React.useState<Big>(Big(0))
 
   const { chainId } = useSelector((state: RootStateOrAny) => state)
-  const { viewgetReserves } = usePriceLP()
   const { trackEvent } = useMatomo()
 
   function clickMatomoEvent(action: string, name: string) {
@@ -41,43 +32,26 @@ const KacyOverView = () => {
   }
 
   async function getKacyInUsd() {
-    const reservesKacyAvax = await viewgetReserves(LPKacyAvax)
-    const reservesDaiAvax = await viewgetReserves(LPDaiAvax)
+    const response = await fetch(URL_API)
+    const data = await response.json()
 
-    const avaxInDollar = Big(reservesDaiAvax._reserve1).div(
-      Big(reservesDaiAvax._reserve0)
-    )
-    const kacyInDollar = avaxInDollar.mul(
-      Big(reservesKacyAvax._reserve0).div(reservesKacyAvax._reserve1)
-    )
-    setKacyPrice(kacyInDollar)
+    if (!data.kacyPrice) return
+
+    const kacyInDollar = data.kacyPrice
+    const circulatingSupply = data.supply
+
+    setKacyPrice(Big(kacyInDollar))
+    setCirculatingSupply(Big(circulatingSupply))
   }
 
   React.useEffect(() => {
-    if (chainId === chains.avalanche.chainId) {
+    getKacyInUsd()
+
+    const interval = setInterval(() => {
       getKacyInUsd()
+    }, 10000)
 
-      const interval = setInterval(() => {
-        getKacyInUsd()
-      }, 5000)
-      return () => clearInterval(interval)
-    }
-  }, [chainId])
-
-  const date1 = new Date('2022-01-22T18:35:00.000Z')
-
-  React.useEffect(() => {
-    if (chainId === chains.avalanche.chainId) {
-      const interval = setInterval(() => {
-        const secondsSinceInitialDate = (Date.now() - date1.getTime()) / 1000
-        if (Date.now() > date1.getTime()) {
-          setCirculatingSupply(
-            Big((300000 / (24 * 3600 * 90)) * secondsSinceInitialDate + 600000)
-          )
-        }
-      }, 1000)
-      return () => clearInterval(interval)
-    }
+    return () => clearInterval(interval)
   }, [chainId])
 
   const marketCap = new Big(circulatingSupply).mul(kacyPrice)
@@ -92,7 +66,7 @@ const KacyOverView = () => {
         <S.TokenInfo>
           <S.Values>
             <p>PRICE</p>
-            <span>${BNtoDecimal(kacyPrice, 2, 2, 2)}</span>
+            <span>${kacyPrice.toFixed(2)}</span>
           </S.Values>
           <S.Values>
             <p>MARKET CAP</p>
@@ -119,4 +93,4 @@ const KacyOverView = () => {
   )
 }
 
-export default KacyOverView
+export default KacyOverview

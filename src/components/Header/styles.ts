@@ -122,7 +122,7 @@ export const MenuLink = styled.a`
 `
 
 export const MenuLinkDisable = styled.a`
-  color: ${theme.colors.lightGray};
+  color: ${theme.colors.grayDisabled};
   font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.light};
   text-decoration: none;
@@ -137,7 +137,7 @@ export const MenuLinkDisable = styled.a`
       content: '';
       display: block;
 
-      background-color: ${theme.colors.lightGray};
+      background-color: ${theme.colors.grayDisabled};
       height: 0.3rem;
       border-radius: 0.3rem;
       margin-top: 12px;

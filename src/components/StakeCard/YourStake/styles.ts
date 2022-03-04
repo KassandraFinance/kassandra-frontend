@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
 export const Info = styled.div`
-  color: #c4c4c4;
+  color: #bdbdbd;
   display: flex;
   justify-content: space-between;
 
@@ -60,7 +60,7 @@ export const Stake = styled.div`
 `
 
 export const Symbol = styled.h4`
-  color: #c4c4c4 !important;
+  color: #bdbdbd !important;
   font-size: ${theme.font.sizes.font14} !important;
   font-weight: ${theme.font.weight.medium} !important;
   margin-left: 4px;
