@@ -1,8 +1,8 @@
 import React from 'react'
+import Big from 'big.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
-import Big from 'big.js'
 import { BNtoDecimal } from '../../utils/numerals'
 
 import ExternalLink from '../ExternalLink'
