@@ -25,7 +25,7 @@ export type MenuProps = {
 const Header = () => {
   const [isModalWallet, setIsModalWallet] = React.useState<boolean>(false)
   const [isModalLogout, setIsModalLogout] = React.useState<boolean>(false)
-  const [isModalLanguages, setIsModalLanguages] = React.useState<boolean>(false)
+  // const [isModalLanguages, setIsModalLanguages] = React.useState<boolean>(false)
   // eslint-disable-next-line prettier/prettier
   const [isModalSocialMedia, setIsModalSocialMedia] = React.useState<boolean>(false)
 
@@ -71,19 +71,7 @@ const Header = () => {
               Stake/Farm
             </S.MenuLink>
           </Link>
-          <DropdownInvest
-            nameOnHeader="vote"
-            linkPage={[
-              {
-                name: 'Overview',
-                href: '/gov'
-              },
-              {
-                name: 'User profile',
-                href: `/gov/address/${userWalletAddress}`
-              }
-            ]}
-          />
+          <S.MenuLinkDisable>Vote</S.MenuLinkDisable>
           <Link href="/about" passHref>
             <S.MenuLink
               onClick={() => clickMatomoEvent('click-on-link', 'about')}
