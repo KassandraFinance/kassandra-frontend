@@ -12,7 +12,7 @@ import KassandraTokenCard from '../../components/KassandraTokenCard'
 import SubscribeBanner from '../../components/SubscribeBanner'
 import RoadMapSlider from '../../components/RoadMapSlider'
 import ScrollUpButton from '../../components/ScrollUpButton'
-import KacyOverView from '../../components/KacyOverView'
+import KacyOverview from '../../components/KacyOverview'
 
 import * as S from './styles'
 
@@ -38,7 +38,7 @@ const Home = () => {
         <KassandraTokenCard />
         <KassandraArchitecture />
         <RoadMapSlider />
-        <KacyOverView />
+        <KacyOverview />
         {/* <CountdownBanner /> */}
         <SubscribeBanner />
       </S.Background>
