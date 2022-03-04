@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import * as S from './styles'

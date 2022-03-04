@@ -556,12 +556,10 @@ const StakeCard = ({
                 isConnect={!!userWalletAddress}
                 onClick={() => {
                   setIsDetails(!isDetails)
-                  setTimeout(() => {
-                    matomoEvent(
-                      'click-details',
-                      `${isDetails ? 'details-open' : 'details-closed'}`
-                    )
-                  }, 300)
+                  matomoEvent(
+                    'click-details',
+                    `${isDetails ? 'details-closed' : 'details-open'}`
+                  )
                 }}
               >
                 Details

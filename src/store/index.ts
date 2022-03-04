@@ -1,5 +1,5 @@
 import { createStore } from 'redux'
-import { createWrapper } from "next-redux-wrapper"
+import { createWrapper } from 'next-redux-wrapper'
 import reducers from './modules/rootReducer'
 
 const makeStore = () => {
@@ -8,7 +8,7 @@ const makeStore = () => {
 
   // Return store
   return store
-};
+}
 
 // export an assembled wrapper
 export const storeWrapper = createWrapper(makeStore, { debug: false })
