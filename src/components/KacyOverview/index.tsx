@@ -9,6 +9,13 @@ import ExternalLink from '../ExternalLink'
 
 import * as S from './styles'
 
+const URL_API =
+  process.env.NEXT_PUBLIC_MASTER === '1'
+    ? 'http://kassandra.finance/api/overview'
+    : process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000/api/overview'
+    : 'http://demo.kassandra.finance/api/overview'
+
 const KacyOverview = () => {
   const [kacyPrice, setKacyPrice] = React.useState<Big>(Big(0))
   const [circulatingSupply, setCirculatingSupply] = React.useState<Big>(Big(0))
@@ -25,10 +32,7 @@ const KacyOverview = () => {
   }
 
   async function getKacyInUsd() {
-    const url =
-      process.env.NEXT_PUBLIC_URL_API || 'http://localhost:3000/api/overview'
-
-    const response = await fetch(url)
+    const response = await fetch(URL_API)
     const data = await response.json()
 
     if (!data.kacyPrice) return
