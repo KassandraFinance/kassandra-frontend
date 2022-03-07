@@ -14,11 +14,19 @@ import votingPower from '../../../public/assets/iconGradient/voting-power-rank.s
 import externalLink from '../../../public/assets/icons/external-link.svg'
 
 import * as S from './styles'
+import Breadcrumb from '../../components/Breadcrumb'
+import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
 
 const Gov = () => {
   return (
     <S.BackgroundVote>
       <Header />
+      <Breadcrumb>
+        <BreadcrumbItem href="/">Home</BreadcrumbItem>
+        <BreadcrumbItem href="/gov" isLastPage>
+          Overview
+        </BreadcrumbItem>
+      </Breadcrumb>
       <S.VoteContent>
         <TitleSection
           image={overview}
