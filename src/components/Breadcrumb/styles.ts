@@ -6,8 +6,8 @@ export const Breadcrumb = styled.ul`
   gap: 2.5rem;
 
   max-width: 1140px;
-  margin-top: 2rem;
-  margin-bottom: 4.5rem;
+  margin-top: 2.4rem;
+  margin-bottom: 3.6rem;
   margin-right: auto;
   margin-left: auto;
 
