@@ -24,7 +24,7 @@ const Gov = () => {
       <Breadcrumb>
         <BreadcrumbItem href="/">Home</BreadcrumbItem>
         <BreadcrumbItem href="/gov" isLastPage>
-          Overview
+          Vote
         </BreadcrumbItem>
       </Breadcrumb>
       <S.VoteContent>

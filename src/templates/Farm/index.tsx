@@ -13,6 +13,8 @@ import VotingPower from '../../components/VotingPower'
 import StakeCard from '../../components/StakeCard'
 import Loading from '../../components/Loading'
 import Header from '../../components/Header'
+import Breadcrumb from '../../components/Breadcrumb'
+import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
 
 import ComingSoon from './ComingSoon'
 
@@ -21,7 +23,7 @@ import * as S from './styles'
 const StakeFarm = () => {
   const [loading, setLoading] = React.useState<boolean>(true)
   const [investor, setInvestor] = React.useState([false, false])
-  
+
   const { trackCategoryPageView } = useMatomoEcommerce()
   const kacyStake = useStakingContract(Staking)
 
@@ -60,16 +62,22 @@ const StakeFarm = () => {
   return (
     <S.BackgroundStakeFarm>
       <Header />
+      <Breadcrumb>
+        <BreadcrumbItem href="/">Home</BreadcrumbItem>
+        <BreadcrumbItem href="/gov" isLastPage>
+          Stake/Farm
+        </BreadcrumbItem>
+      </Breadcrumb>
       {loading
         ? (
-          <div style={{ 
+          <div style={{
             height: 'calc(100vh - 140px)',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
             }}
           >
-            <Loading /> 
+            <Loading />
           </div>
         )  : (
           userWalletAddress.length === 0 && chainId !== chain.chainId
@@ -196,7 +204,7 @@ const StakeFarm = () => {
                           stakedUntil={kacyStake.stakedUntil}
                           stakeWithVotingPower={true}
                         />
-                        {process.env.NEXT_PUBLIC_MASTER === '1' ?  
+                        {process.env.NEXT_PUBLIC_MASTER === '1' ?
                           <StakeCard
                             pid={6}
                             symbol="ahype"

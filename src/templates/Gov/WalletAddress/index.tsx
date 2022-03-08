@@ -9,11 +9,23 @@ import proposals from '../../../../public/assets/iconGradient/proposals.svg'
 import externalLink from '../../../../public/assets/icons/external-link.svg'
 
 import * as S from './styles'
+import Breadcrumb from '../../../components/Breadcrumb'
+import BreadcrumbItem from '../../../components/Breadcrumb/BreadcrumbItem'
+import { useRouter } from 'next/router'
 
 const WalletAddress = () => {
+  const router = useRouter()
+
   return (
     <S.BackgroundVote>
       <Header />
+      <Breadcrumb>
+        <BreadcrumbItem href="/">Home</BreadcrumbItem>
+        <BreadcrumbItem href="/gov">Vote</BreadcrumbItem>
+        <BreadcrumbItem href={router.asPath} isLastPage>
+          Username
+        </BreadcrumbItem>
+      </Breadcrumb>
       <S.VoteContent>
         <IntroWalletAddress />
         <TitleSection image={proposals} title="Voting Power Distribution" />

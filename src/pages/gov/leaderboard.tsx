@@ -3,6 +3,8 @@ import React from 'react'
 import Header from '../../components/Header'
 import TitleSection from '../../components/TitleSection'
 import VotingPowerTable from '../../components/Governance/VotingPowerTable'
+import Breadcrumb from '../../components/Breadcrumb'
+import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
 
 import votingPower from '../../../public/assets/iconGradient/voting-power-rank.svg'
 
@@ -12,6 +14,13 @@ const Leaderboard = () => {
   return (
     <S.BackgroundVote>
       <Header />
+      <Breadcrumb>
+        <BreadcrumbItem href="/">Home</BreadcrumbItem>
+        <BreadcrumbItem href="/gov">Vote</BreadcrumbItem>
+        <BreadcrumbItem href="/gov/leaderboard" isLastPage>
+          Voting Power Leaderboard
+        </BreadcrumbItem>
+      </Breadcrumb>
       <S.VoteContent>
         <S.VotingPowerLeaderboard>
           <TitleSection image={votingPower} title="Voting Power Leaderboard" />
