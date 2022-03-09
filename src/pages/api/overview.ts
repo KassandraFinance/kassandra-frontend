@@ -12,17 +12,18 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
       optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
     })
 
-    const urlPriceKacyOnCoingecko = `${URL_COINGECKO}/simple/price?ids=kassandra&vs_currencies=usd&include_market_cap=true`
+    const urlPriceKacyOnCoingecko = `${URL_COINGECKO}/coins/kassandra?localization=false&tickers=false&community_data=false`
 
     const responseKacyPrice = await fetch(urlPriceKacyOnCoingecko)
     const responseKacyPriceJson = await responseKacyPrice.json()
-    const kacy = responseKacyPriceJson.kassandra
+    const kacy = responseKacyPriceJson.market_data
 
     response.setHeader('Cache-Control', 's-maxage=30, stale-while-revalidate')
 
     response.json({
-      kacyPrice: kacy.usd,
-      supply: kacy.usd_market_cap
+      kacyPrice: kacy.current_price.usd,
+      supply: kacy.circulating_supply,
+      marketCap: kacy.market_cap.usd
     })
   } catch (error) {
     response.json({
