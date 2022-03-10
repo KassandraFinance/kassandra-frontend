@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 export const BackgroundVote = styled.div`
-  background: url('/assets/background-governance-page.svg');
+  background: url('/assets/newbg4.svg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
