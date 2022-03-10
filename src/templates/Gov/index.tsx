@@ -7,6 +7,8 @@ import Overview from '../../components/Governance/Overview'
 import ProposalTable from '../../components/Governance/ProposalTable'
 import VotingPowerTable from '../../components/Governance/VotingPowerTable'
 import ExternalLink from '../../components/ExternalLink'
+import Breadcrumb from '../../components/Breadcrumb'
+import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
 
 import overview from '../../../public/assets/iconGradient/overview.svg'
 import proposals from '../../../public/assets/iconGradient/proposals.svg'
@@ -14,8 +16,6 @@ import votingPower from '../../../public/assets/iconGradient/voting-power-rank.s
 import externalLink from '../../../public/assets/icons/external-link.svg'
 
 import * as S from './styles'
-import Breadcrumb from '../../components/Breadcrumb'
-import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
 
 const Gov = () => {
   return (
