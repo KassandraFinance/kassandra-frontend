@@ -7,6 +7,8 @@ import Overview from '../../components/Governance/Overview'
 import ProposalTable from '../../components/Governance/ProposalTable'
 import VotingPowerTable from '../../components/Governance/VotingPowerTable'
 import ExternalLink from '../../components/ExternalLink'
+import Breadcrumb from '../../components/Breadcrumb'
+import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
 
 import overview from '../../../public/assets/iconGradient/overview.svg'
 import proposals from '../../../public/assets/iconGradient/proposals.svg'
@@ -19,6 +21,12 @@ const Gov = () => {
   return (
     <S.BackgroundVote>
       <Header />
+      <Breadcrumb>
+        <BreadcrumbItem href="/">Home</BreadcrumbItem>
+        <BreadcrumbItem href="/gov" isLastPage>
+          Vote
+        </BreadcrumbItem>
+      </Breadcrumb>
       <S.VoteContent>
         <TitleSection
           image={overview}
