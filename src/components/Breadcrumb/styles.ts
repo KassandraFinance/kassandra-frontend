@@ -3,10 +3,9 @@ import styled from 'styled-components'
 export const Breadcrumb = styled.ul`
   display: flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: 2.4rem;
 
-  max-width: 1140px;
-  margin-top: 1.6rem;
+  max-width: 114rem;
   margin-bottom: 3.6rem;
   margin-right: auto;
   margin-left: auto;
