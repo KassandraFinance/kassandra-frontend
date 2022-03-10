@@ -1,6 +1,8 @@
 import React from 'react'
 
 import Header from '../../../components/Header'
+import Breadcrumb from '../../../components/Breadcrumb'
+import BreadcrumbItem from '../../../components/Breadcrumb/BreadcrumbItem'
 
 import * as S from './styles'
 
@@ -8,6 +10,12 @@ const Hero = () => {
   return (
     <>
       <Header />
+      <Breadcrumb>
+        <BreadcrumbItem href="/">Home</BreadcrumbItem>
+        <BreadcrumbItem href="/about" isLastPage>
+          About
+        </BreadcrumbItem>
+      </Breadcrumb>
       <S.Hero>
         <S.IntroHero>
           <span>ABOUT US</span>
