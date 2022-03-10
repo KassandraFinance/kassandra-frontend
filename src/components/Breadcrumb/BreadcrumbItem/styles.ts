@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const BreadcrumbItem = styled.li`
   span {
     display: inline-block;
-    margin-left: 2.5rem;
+    margin-left: 2.4rem;
 
     font-size: 0.9rem;
     color: rgba(196, 196, 196, 1);
@@ -17,6 +17,10 @@ export const BreadcrumbItem = styled.li`
     text-decoration: none;
 
     cursor: pointer;
+
+    &:hover {
+      color: #ffffff;
+    }
 
     &.active {
       display: block;
@@ -32,7 +36,7 @@ export const BreadcrumbItem = styled.li`
         left: 0;
 
         width: 100%;
-        height: 2px;
+        height: 0.2rem;
 
         background-color: #e843c4;
       }
