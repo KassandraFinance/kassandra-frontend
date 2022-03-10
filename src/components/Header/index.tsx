@@ -73,6 +73,7 @@ const Header = () => {
           </Link>
           <DropdownInvest
             nameOnHeader="vote"
+            adaptToResponsiveSize
             linkPage={[
               {
                 name: 'Overview',

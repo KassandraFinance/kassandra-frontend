@@ -165,6 +165,10 @@ export const TextProposal = styled.p`
   }
 `
 
+export const StatusAndTimeframe = styled.div`
+  display: flex;
+`
+
 export const StatusProposal = styled.span`
   margin-right: ${theme.spacings.space16};
 

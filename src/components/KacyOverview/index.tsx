@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react'
 import Big from 'big.js'
 import useSWR from 'swr'
@@ -17,9 +18,18 @@ const URL_API: { [key: number | string]: string } = {
   4: 'http://localhost:3000/api/overview'
 }
 
+interface IKacyMarketDataProps {
+  price: number;
+  marketCap: Big;
+  supply: Big;
+}
+
 const KacyOverview = () => {
-  const [kacyPrice, setKacyPrice] = React.useState<Big>(Big(0))
-  const [circulatingSupply, setCirculatingSupply] = React.useState<Big>(Big(0))
+  const [kacyMarketData, setKacyMarketData] = React.useState<IKacyMarketDataProps>({
+      price: 0,
+      marketCap: Big(0),
+      supply: Big(0)
+    })
 
   const { chainId } = useSelector((state: RootStateOrAny) => state)
   const { data } = useSWR(URL_API[process.env.NEXT_PUBLIC_URL_API || 4])
@@ -35,12 +45,13 @@ const KacyOverview = () => {
 
   React.useEffect(() => {
     if (data) {
-      setKacyPrice(Big(data.kacyPrice))
-      setCirculatingSupply(Big(data.supply))
+      setKacyMarketData({
+        price: data.kacyPrice,
+        marketCap: Big(data.marketCap),
+        supply: Big(data.supply)
+      })
     }
   }, [chainId, data])
-
-  const marketCap = new Big(circulatingSupply).mul(kacyPrice)
 
   return (
     <>
@@ -52,15 +63,15 @@ const KacyOverview = () => {
         <S.TokenInfo>
           <S.Values>
             <p>PRICE</p>
-            <span>${kacyPrice.toFixed(2)}</span>
+            <span>${kacyMarketData.price.toFixed(2)}</span>
           </S.Values>
           <S.Values>
             <p>MARKET CAP</p>
-            <span>${BNtoDecimal(marketCap, 2, 100, 2)}</span>
+            <span>${BNtoDecimal(kacyMarketData.marketCap, 2, 100, 2)}</span>
           </S.Values>
           <S.Values>
             <p>CIRCULATING SUPPLY</p>
-            <span>{BNtoDecimal(circulatingSupply, 2, 100, 2)} KACY</span>
+            <span>{BNtoDecimal(kacyMarketData.supply, 2, 100, 2)} KACY</span>
           </S.Values>
           <S.Values>
             <p>TOTAL SUPPLY</p>

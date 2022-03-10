@@ -9,7 +9,7 @@ import * as ExternalLinkStyles from '../../../../components/ExternalLink/styles'
 export const BackgroundVote = styled.div`
   padding-bottom: 8rem;
 
-  background-image: url('/assets/background-governance-page.svg');
+  background-image: url('/assets/newbg4.svg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -464,7 +464,7 @@ export const LineBetweenImages = styled.div<IImageProps>`
       width: 100%;
       height: 0.1rem;
       margin-top: 3.95rem;
-      
+
       display: inline-block;
 
       @media (max-width: 768px) {
