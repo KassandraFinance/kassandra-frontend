@@ -13,9 +13,14 @@ interface ILinkPage {
 interface IDropdownProps {
   nameOnHeader: string;
   linkPage: Array<ILinkPage>;
+  adaptToResponsiveSize?: boolean;
 }
 
-const Dropdown = ({ nameOnHeader, linkPage }: IDropdownProps) => {
+const Dropdown = ({
+  nameOnHeader,
+  linkPage,
+  adaptToResponsiveSize
+}: IDropdownProps) => {
   const [isDropdown, setIsDropdown] = React.useState<boolean>(false)
   const { trackEvent } = useMatomo()
 
@@ -40,6 +45,7 @@ const Dropdown = ({ nameOnHeader, linkPage }: IDropdownProps) => {
         onMouseOver={() => setIsDropdown(true)}
         onMouseOut={() => setIsDropdown(false)}
         isDropdown={isDropdown}
+        adaptToResponsiveSize={adaptToResponsiveSize}
       >
         {linkPage.map((item, index) => (
           <Link key={index} href={item.href}>
