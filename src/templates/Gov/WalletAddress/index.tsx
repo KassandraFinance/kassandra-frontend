@@ -4,13 +4,13 @@ import Header from '../../../components/Header'
 import TitleSection from '../../../components/TitleSection'
 import IntroWalletAddress from '../../../components/Governance/IntroWalletAddress'
 import AnyCard from '../../../components/Governance/AnyCard'
+import Breadcrumb from '../../../components/Breadcrumb'
+import BreadcrumbItem from '../../../components/Breadcrumb/BreadcrumbItem'
 
 import proposals from '../../../../public/assets/iconGradient/proposals.svg'
 import externalLink from '../../../../public/assets/icons/external-link.svg'
 
 import * as S from './styles'
-import Breadcrumb from '../../../components/Breadcrumb'
-import BreadcrumbItem from '../../../components/Breadcrumb/BreadcrumbItem'
 import { useRouter } from 'next/router'
 
 const WalletAddress = () => {
