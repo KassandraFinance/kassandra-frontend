@@ -453,10 +453,7 @@ interface IImageProps {
   isComplete: boolean;
 }
 // eslint-disable-next-line prettier/prettier
-export const LineBetweenImages =
-  styled.div <
-  IImageProps >
-  `
+export const LineBetweenImages = styled.div<IImageProps>`
     background: ${props =>
       props.isComplete
         ? `linear-gradient(0deg, ${theme.colors.amber} -0.02%, ${theme.colors.magenta} 99.99%)`
