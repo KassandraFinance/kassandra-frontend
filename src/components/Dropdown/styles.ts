@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import theme from '../../styles/theme'
 
 export const Dropdown = styled.div`
@@ -58,10 +58,11 @@ export const DropButton = styled.button`
 
 interface IDropdownContentProps {
   isDropdown: boolean;
+  adaptToResponsiveSize?: boolean;
 }
 
 // eslint-disable-next-line prettier/prettier
-export const DropdownContent = styled.div<IDropdownContentProps>`
+export const DropdownContent = styled.div <IDropdownContentProps>`
   position: absolute;
   left: 2.4rem;
   z-index: 1;
@@ -101,10 +102,12 @@ export const DropdownContent = styled.div<IDropdownContentProps>`
     left: 0;
   }
 
-  @media (max-width: 768px) {
-    left: auto;
-    right: 0;
-  }
+  ${({ adaptToResponsiveSize }) => css`
+    @media (max-width: 768px) {
+      left: ${adaptToResponsiveSize ? 'auto' : ''};
+      right: ${adaptToResponsiveSize ? '0' : ''};
+    }
+  `}
 
   @media (max-width: 490px) {
     min-width: 13rem;
