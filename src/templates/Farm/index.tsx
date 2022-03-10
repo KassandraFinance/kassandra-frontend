@@ -64,7 +64,7 @@ const StakeFarm = () => {
       <Header />
       <Breadcrumb>
         <BreadcrumbItem href="/">Home</BreadcrumbItem>
-        <BreadcrumbItem href="/gov" isLastPage>
+        <BreadcrumbItem href="/farm" isLastPage>
           Stake/Farm
         </BreadcrumbItem>
       </Breadcrumb>
