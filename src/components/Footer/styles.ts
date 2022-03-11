@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 export const Footer = styled.footer`
-  max-width: 114rem;
+  max-width: 120rem;
   margin: 0 auto;
   padding: 4rem 3rem;
 
