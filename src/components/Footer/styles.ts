@@ -6,7 +6,7 @@ export const Footer = styled.footer`
   margin: 0 auto;
   padding: 4rem 3rem;
 
-  color: #fcfcfc;
+  color: ${theme.colors.snow};
 
   @media (max-width: 770px) {
     margin-bottom: 4rem;
@@ -24,7 +24,7 @@ export const Container = styled.div`
     display: none;
     margin-bottom: 3.2rem;
 
-    @media (max-width: 8200px) {
+    @media (max-width: 820px) {
       display: block;
     }
   }
@@ -33,7 +33,7 @@ export const Container = styled.div`
     max-width: 114rem;
   }
 
-  @media (max-width: 8200px) {
+  @media (max-width: 820px) {
     flex-direction: column-reverse;
     align-items: center;
   }
@@ -50,7 +50,7 @@ export const UpperContainer = styled.div`
   padding: 8rem 0;
   max-width: 69rem;
 
-  @media (max-width: 8200px) {
+  @media (max-width: 820px) {
     width: 100%;
     padding: 4rem 5rem;
   }
@@ -61,7 +61,7 @@ export const UpperContainer = styled.div`
   }
 
   li {
-    @media (max-width: 8200px) {
+    @media (max-width: 820px) {
       text-align: top;
     }
     margin: 1.5rem 0;
@@ -76,7 +76,7 @@ export const UpperContainer = styled.div`
     }
   }
   a {
-    color: #fcfcfc;
+    color: ${theme.colors.snow};
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.light};
     text-decoration: none;
