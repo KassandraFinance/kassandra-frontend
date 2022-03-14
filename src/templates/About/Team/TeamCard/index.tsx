@@ -11,10 +11,13 @@ interface ITeamCardProps {
     linkedin?: string,
     twitter?: string
   };
+  isLastCard?: boolean;
 }
 
-const TeamCard = ({ name, role, image, social }: ITeamCardProps) => (
-  <S.Card>
+const TeamCard = ({ name, role, image, social, isLastCard = false }: ITeamCardProps) => (
+  <S.Card
+    isLastCard = {isLastCard}
+  >
     <S.Image>
       <img src={image} alt="" />
     </S.Image>
