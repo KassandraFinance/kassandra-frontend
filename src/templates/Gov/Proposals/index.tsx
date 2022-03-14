@@ -8,6 +8,8 @@ import VotingPower from '../../../components/VotingPower'
 import ExternalLink from '../../../components/ExternalLink'
 import ProposalTable from '../../../components/Governance/ProposalTable'
 import ProposalOverview from '../../../components/Governance/ProposalOverview'
+import Breadcrumb from '../../../components/Breadcrumb'
+import BreadcrumbItem from '../../../components/Breadcrumb/BreadcrumbItem'
 
 import proposals from '../../../../public/assets/iconGradient/proposals.svg'
 import externalLink from '../../../../public/assets/icons/external-link.svg'
@@ -20,6 +22,13 @@ const AllProposals = () => {
   return (
     <S.BackgroundVote>
       <Header />
+      <Breadcrumb>
+        <BreadcrumbItem href="/">Home</BreadcrumbItem>
+        <BreadcrumbItem href="/gov">Vote</BreadcrumbItem>
+        <BreadcrumbItem href="/gov/proposals" isLastPage>
+          Governance Proposals
+        </BreadcrumbItem>
+      </Breadcrumb>
       <S.VoteContent>
         <S.GovernanceProposalsContent>
           <S.Title>

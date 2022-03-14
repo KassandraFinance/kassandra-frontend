@@ -14,11 +14,17 @@ import { TokenDetails } from '../../../store/modules/poolTokens/types'
 import { actionGetPoolTokens } from '../../../store/modules/poolTokens/actions'
 
 import { SUBGRAPH_URL, HeimCRPPOOL } from '../../../constants/tokenAddresses'
+import { GET_INFO_AHYPE } from '../graphql'
 
 import useCRPContract from '../../../hooks/useCRPContract'
 import useERC20Contract, { ERC20 } from '../../../hooks/useERC20Contract'
 import usePoolContract from '../../../hooks/usePoolContract'
 import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+
+import { priceDollar } from '../../../utils/priceDollar'
+import changeChain, { ChainDetails } from '../../../utils/changeChain'
+import { BNtoDecimal, wei } from '../../../utils/numerals'
+import waitTransaction, { MetamaskError, TransactionCallback } from '../../../utils/txWait'
 
 import Button from '../../Button'
 import ModalWalletConnect from '../../ModalWalletConnect'
@@ -29,14 +35,8 @@ import TransactionSettings from './TransactionSettings'
 
 import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
-import { priceDollar } from '../../../utils/priceDollar'
-import changeChain, { ChainDetails } from '../../../utils/changeChain'
-import { BNtoDecimal, wei } from '../../../utils/numerals'
-import waitTransaction, { MetamaskError, TransactionCallback } from '../../../utils/txWait'
-
 import * as S from './styles'
 import { Titles } from '..'
-import { GET_INFO_AHYPE } from '../graphql'
 
 interface IFormProps {
   typeAction: string;
@@ -57,8 +57,8 @@ const Form = ({
   crpPoolAddress,
   corePoolAddress,
   productCategories,
-  typeAction, 
-  title, 
+  typeAction,
+  title,
   typeWithdrawChecked,
 }: IFormProps) => {
   const crpPoolToken = useERC20Contract(crpPoolAddress)
@@ -130,7 +130,7 @@ const Form = ({
         address: data.pool.id,
         allocation: 0,
         allocation_goal: 0,
-        decimals: new BigNumber(data.pool.decimals), 
+        decimals: new BigNumber(data.pool.decimals),
         price: Number(data.pool.price_usd),
         name: data.pool.name,
         symbol: data.pool.symbol
@@ -227,7 +227,7 @@ const Form = ({
 
       setIsApproved(await Promise.all(newApprovals))
     }
-    
+
     setIsReload(!isReload)
     setIsApproved([])
     calc()
@@ -651,7 +651,7 @@ const Form = ({
 
   const tokenInIndex = tokenAddress2Index[swapInAddress]
   const tokenOutIndex = tokenAddress2Index[swapOutAddress]
-  
+
   const approvalCallback = React.useCallback(
     (tokenSymbol: string, tokenAddress: string): TransactionCallback => {
       return async (error: MetamaskError, txHash: string) => {
@@ -873,9 +873,9 @@ const Form = ({
             }
 
             trackBuying(
-              `${crpPoolAddress}-${swapInSymbol.value}-${swapOutSymbol.value}`, 
-              `${swapInSymbol.value}-${swapOutSymbol.value}`, 
-              amountInUSD, 
+              `${crpPoolAddress}-${swapInSymbol.value}-${swapOutSymbol.value}`,
+              `${swapInSymbol.value}-${swapOutSymbol.value}`,
+              amountInUSD,
               [...productCategories, 'Swap']
             )
             corePool.swapExactAmountIn(
@@ -927,13 +927,7 @@ const Form = ({
             .toString()
       } />
 
-      <TransactionSettings
-        slippage={slippage}
-        setSlippage={setSlippage}
-      />
-
       <S.ErrorTippy content={errorMsg} visible={errorMsg.length > 0}>
-        <div>
           <InputTokens
             clearInput={clearInput}
             inputRef={inputTokenRef}
@@ -962,7 +956,6 @@ const Form = ({
             tokenDetails={infoAHYPE[tokenInIndex]}
             setSwapAddress={setSwapInAddress}
           />
-        </div>
       </S.ErrorTippy>
 
       {title === 'Swap' ?
@@ -1030,6 +1023,13 @@ const Form = ({
         <S.SpanLight>{fees[title]}%</S.SpanLight>
       </S.ExchangeRate>
 
+      <S.TransactionSettingsOptions>
+        <TransactionSettings
+          slippage={slippage}
+          setSlippage={setSlippage}
+        />
+      </S.TransactionSettingsOptions>
+
       {userWalletAddress.length === 0 ? (
         <Button
           className="btn-submit"
@@ -1080,7 +1080,7 @@ const Form = ({
                     )}`
                 :
                   `${title}`
-              : 
+              :
                 'Approve'
             }
           />

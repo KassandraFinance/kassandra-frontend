@@ -15,6 +15,8 @@ import Header from '../../components/Header'
 import ChartProducts from '../../components/ChartProducts'
 import HeimOperations from '../../components/HeimOperations'
 import ScrollUpButton from '../../components/ScrollUpButton'
+import Breadcrumb from '../../components/Breadcrumb'
+import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
 import PoweredBy from './PoweredBy'
 
 import ahype from '../../../public/assets/ahype.svg'
@@ -99,9 +101,23 @@ const Products = ({ product }: Input) => {
     }
   }, [product])
 
+  console.log(product)
+
   return (
     <S.BackgroundProducts boxShadow={false}>
       <Header />
+      <Breadcrumb>
+        <BreadcrumbItem href="/">Home</BreadcrumbItem>
+        <BreadcrumbItem href={`/products/${product.symbol.toLowerCase()}`}>
+          Products
+        </BreadcrumbItem>
+        <BreadcrumbItem
+          href={`/products/${product.symbol.toLowerCase()}`}
+          isLastPage
+        >
+          ${product.symbol}
+        </BreadcrumbItem>
+      </Breadcrumb>
       <S.Intro introMobile={true} introDesktop={false}>
         <Image src={ahype} alt="" width={75} height={75} />
         <S.NameIndex>

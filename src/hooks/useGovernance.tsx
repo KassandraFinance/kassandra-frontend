@@ -1,20 +1,27 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
 import { AbiItem } from "web3-utils"
-// import BigNumber from 'bn.js'
+import { EventData } from 'web3-eth-contract'
 
 import web3 from '../utils/web3'
 import Governance from "../constants/abi/Governance.json"
 
-const proposalState = [
-  ["Pending", "Active"],
-  ["Active", "Active"],
-  ["Canceled", "Failed"],
-  ["Defeated", "Failed"],
-  ["Succeeded", "Succeeded"],
-  ["Queued", "Succeeded"],
-  ["Expired", "Failed"],
-  ["Executed", "Succeeded"]
+import approved from '../../public/assets/status/approved.svg'
+import cancelled from '../../public/assets/status/cancelled.svg'
+import executed from '../../public/assets/status/executed.svg'
+import failed from '../../public/assets/status/failed.svg'
+import queued from '../../public/assets/status/queued.svg'
+import votingOpen from '../../public/assets/status/voting-open.svg'
+
+const valuesStateProposal = [
+  ["Active", "Pending", queued],
+  ["Active", "Voting Open", votingOpen],
+  ["Failed", "Canceled", cancelled],
+  ["Failed", "Defeated", failed],
+  ["Succeeded", "Succeeded", approved],
+  ["Succeeded", "Queued", queued],
+  ["Failed", "Expired", failed],
+  ["Succeeded", "Executed", executed]
 ]
 
 const useGovernance = (address: string) => {
@@ -35,15 +42,39 @@ const useGovernance = (address: string) => {
       return value
     }
 
-    const state = async (id: number) => {
+    const stateProposals = async (id: number) => {
       const value = await contract.methods.state(id).call()
-      return proposalState[value]
+      return valuesStateProposal[value]
+    }
+
+    const pastEvents = async (eventName: string) => {
+      const events = await contract.getPastEvents(eventName, {
+        fromBlock: 0,
+        toBlock: 'latest'
+      })
+
+      return events
+    }
+
+    const getProposal = async (events: EventData[], setProposalsList: React.Dispatch<React.SetStateAction<object[]>>) => {
+      for (let i = events.length - 1; i >= Math.max(events.length - 5, 0); i--) {
+        const state = await stateProposals(i + 1)
+        const proposal = events[i].returnValues
+        const block = await web3.eth.getBlock(proposal.endBlock)
+  
+        setProposalsList(prevState => [
+          ...prevState,
+          { state, proposal, timestamp: block.timestamp }
+        ])
+      }
     }
 
     return {
       proposalCount,
       proposals,
-      state
+      stateProposals,
+      pastEvents,
+      getProposal
     }
   }, [contract])
 }

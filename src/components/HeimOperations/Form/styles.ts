@@ -3,13 +3,14 @@ import theme from '../../../styles/theme'
 import Tippy from '@tippyjs/react'
 
 export const ErrorTippy = styled(Tippy)`
-  margin-bottom: -15px;
-  border: 1px solid #e8372c;
-  border-bottom: 3px solid #e8372c;
-  background: rgba(31, 31, 31, 0.82);
+  margin-bottom: -1.5rem;
+
+  background-color: rgba(31, 31, 31, 0.82);
+  border: 0.1rem solid #e8372c;
+  border-bottom: 0.3rem solid #e8372c;
 
   &[data-placement^='top'] > .tippy-arrow::before {
-    margin-bottom: -1px;
+    margin-bottom: -0.1rem;
     border-top-color: #e8372c;
   }
 `
@@ -20,32 +21,41 @@ export const FormContainer = styled.form`
   flex-direction: column;
   align-items: center;
 
-  padding: 20px 40px 40px;
   max-height: 100%;
+  padding-top: 2rem;
+  padding-right: 3.2rem;
+  padding-bottom: 3.2rem;
+  padding-left: 3.2rem;
 
   .btn-submit {
-    margin-top: 20px;
+    margin-top: 2rem;
   }
 
   @media (max-width: 500px) {
-    padding: 20px;
+    padding: 2rem;
   }
 `
 
 export const SwapButton = styled.button`
-  background: none;
   margin: 0;
   padding: 0;
+
+  background: none;
   border: none;
+
   cursor: pointer;
 
   img {
     transition: transform 300ms;
-    margin: 12px 0;
+    margin: 1.2rem 0;
   }
   img:last-child {
+    margin-top: 1.2rem;
+    margin-right: 0;
+    margin-bottom: 1.2rem;
+    margin-left: 0.8rem;
+
     transform: rotate(180deg);
-    margin: 12px 0 12px 8px;
   }
 
   :hover,
@@ -59,8 +69,8 @@ export const SwapButton = styled.button`
   }
 
   :focus {
-    outline: 1px solid ${theme.colors.snow};
-    border-radius: 5px;
+    border-radius: 0.5rem;
+    outline: 0.1rem solid ${theme.colors.snow};
   }
 `
 
@@ -68,180 +78,238 @@ export const ExchangeRate = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   width: 100%;
-  margin-top: 8px;
+  margin-top: 0.8rem;
 `
 
-export const TransactionSettings = styled.div`
-  font-size: ${theme.font.sizes.font14};
+export const TransactionSettingsOptions = styled.div`
+  display: flex;
+  justify-content: space-between;
+
   width: 100%;
-  position: relative;
-  margin-bottom: 10px;
+  margin-top: 0.6rem;
+`
+
+// eslint-disable-next-line prettier/prettier
+export const TransactionSettings = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  font-size: ${theme.font.sizes.font14};
   text-align: center;
 
-  .settings {
-    cursor: pointer;
-    font-weight: ${theme.font.weight.light};
-    padding-right: 5px;
-  }
+  button {
+    position: relative;
+    display: flex;
+    align-items: center;
 
-  #settingsBox {
-    cursor: pointer;
-    position: absolute;
-    z-index: 1;
-    opacity: 0;
-  }
+    margin-left: 0.4rem;
 
-  #settingsBox + img {
-    transform: rotate(-180deg);
+    border: none;
+    background-color: transparent;
+
+    cursor: pointer;
     transition: transform 300ms ease;
+
+    :hover {
+      transform: rotate(-180deg);
+    }
   }
 
-  #settingsBox:focus + img {
-    outline: 1px solid ${theme.colors.snow};
-  }
+  label {
+    display: flex;
 
-  #settingsBox:checked + img {
-    transform: rotate(0);
-  }
+    color: ${theme.colors.grayDisabled};
+    font-size: ${theme.font.sizes.font14};
+    font-weight: 300;
 
-  #settingsBox:checked + img + fieldset {
-    display: block;
+    > span {
+      margin-left: 0.4rem;
+    }
   }
 
   fieldset {
-    text-align: left;
-    display: none;
-    margin-top: 15px;
-    padding-bottom: 15px;
-    border: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    position: absolute;
+    right: 0.1rem;
+    bottom: 3rem;
 
-    legend {
-      font-weight: ${theme.font.weight.light};
-      margin-bottom: 16px;
-    }
+    padding: 2rem;
 
-    .options {
-      display: flex;
-      gap: 8px;
-    }
+    background-color: #1f2937;
+    border-radius: 1rem;
+    border: 0.1rem solid rgba(255, 255, 255, 0.3);
 
-    .option {
-      flex: 1;
-      position: relative;
-
-      span {
-        color: ${theme.colors.snow};
-        pointer-events: none;
-        position: absolute;
-        top: 10px;
-        right: 18px;
-      }
-
-      &:last-child {
-        flex: 2;
-
-        label {
-          position: absolute;
-          width: 0;
-          height: 0;
-          border: none;
-          padding: 0;
-          opacity: 0;
-          overflow: hidden;
-        }
-      }
-
-      & > input:not(.custom) {
+    z-index: 22;
+    animation: OpenModalSettings 600ms ease;
+    @keyframes OpenModalSettings {
+      from {
         opacity: 0;
-        display: block;
-        height: 0;
-        width: 0;
+      }
+      to {
+        opacity: 1;
       }
     }
+  }
+`
 
-    .custom,
+export const Backdrop = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  z-index: 20;
+`
+
+export const TransactionContentOptions = styled.div`
+  position: relative;
+
+  display: flex;
+  align-items: center;
+`
+
+export const TransactionOptions = styled.div`
+  display: flex;
+  gap: 1.1rem;
+`
+export const TransactionOption = styled.div`
+  position: relative;
+  flex: 1;
+
+  span {
+    position: absolute;
+    top: 1rem;
+    right: 1.8rem;
+
+    color: ${theme.colors.snow};
+    pointer-events: none;
+  }
+
+  &:last-child {
+    flex: 2;
+
     label {
-      font-size: ${theme.font.sizes.font14};
-      cursor: pointer;
-      padding: 8px 18px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 3px;
-      display: block;
-      width: 100%;
-      text-align: center;
-    }
+      position: absolute;
 
-    .custom {
-      cursor: auto;
-      text-align: right;
-      background: rgba(255, 255, 255, 0.15);
+      width: 0;
+      height: 0;
+      padding: 0;
+
+      border: none;
+      opacity: 0;
+      overflow: hidden;
+    }
+  }
+
+  & > input:not(.custom) {
+    display: block;
+    height: 0;
+    width: 0;
+
+    opacity: 0;
+  }
+
+  .custom,
+  label {
+    display: block;
+    width: 7.2rem;
+    padding: 0.8rem 1.8rem;
+
+    font-size: ${theme.font.sizes.font14};
+    text-align: center;
+
+    border: 0.1rem solid rgba(255, 255, 255, 0.3);
+    border-radius: 0.3rem;
+
+    cursor: pointer;
+  }
+
+  .custom {
+    width: 9.2rem;
+    height: 100%;
+
+    padding-top: 0;
+    padding-right: 3.2rem;
+    padding-bottom: 0;
+    padding-left: 1.8rem;
+
+    color: ${theme.colors.snow};
+    text-align: right;
+
+    background-color: rgba(255, 255, 255, 0.15);
+    cursor: auto;
+
+    &::placeholder {
       color: ${theme.colors.snow};
-      height: 100%;
-      padding: 0 30px 0 18px;
-
-      &::placeholder {
-        color: ${theme.colors.snow};
-      }
-
-      &::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-      }
-
-      -moz-appearance: textfield;
-      appearance: textfield;
     }
 
-    input:checked + label,
-    input:checked + .custom {
-      background: ${theme.colors.snow};
-      color: ${theme.colors.darkPurple};
-      border-color: ${theme.colors.snow};
-
-      &::placeholder {
-        color: #948499;
-      }
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
     }
 
-    input:checked + .custom + span {
-      color: ${theme.colors.darkPurple};
-    }
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
 
-    input:focus + label,
-    input:focus + .custom:not(:focus) {
-      outline: 1px solid ${theme.colors.snow};
-      outline-offset: 1px;
-    }
+  input:checked + label,
+  input:checked + .custom {
+    font-weight: 450;
+    color: ${theme.colors.darkPurple};
 
-    .custom:focus {
-      outline: none;
+    background-color: ${theme.colors.snow};
+    border-color: ${theme.colors.snow};
+
+    &::placeholder {
+      color: #948499;
     }
+  }
+
+  input:checked + .custom + span {
+    color: ${theme.colors.darkPurple};
+  }
+
+  input:focus + label,
+  input:focus + .custom:not(:focus) {
+    outline: 0.1rem solid ${theme.colors.snow};
+    outline-offset: 0.1rem;
+  }
+
+  .custom:focus {
+    outline: none;
   }
 `
 
 // ========== DEFAULT INPUT ALL ==========
 
 export const InputTokensContainer = styled.div`
-  background: rgba(31, 31, 31, 0.72);
-  border-radius: 16px;
   display: flex;
+
   width: 100%;
-  padding: 10px 16px;
+  padding: 1rem 1.6rem;
+
+  background: rgba(31, 31, 31, 0.72);
+  border-radius: 1.6rem;
 `
 
 export const Info = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   width: 100%;
 `
 
 export const Amount = styled.div`
   display: flex;
+  align-items: flex-end;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-end;
+
   width: 100%;
   height: 100%;
 `
@@ -252,27 +320,33 @@ interface ISpanProps {
 
 // eslint-disable-next-line prettier/prettier
 export const Span = styled.span<ISpanProps>`
+  height: 1.7rem;
+
   color: ${props => (props.total ? theme.colors.amber : '#fff')};
-  font-size: 14px;
-  height: 17px;
+  font-size: ${theme.font.sizes.font14};
+
   @media(max-width: 380px) {
-    font-size: 13px;
+    font-size: 1.3rem;
   }
+
   @media(max-width: 350px) {
+    padding-left: 1.2rem;
     font-size: 10.7px;
-    padding-left: 12px;
   }
 `
 
 export const SpanLight = styled.span`
+  height: 1.7rem;
+
   color: ${theme.colors.grayDisabled};
   font-size: ${theme.font.sizes.font14};
   font-weight: ${theme.font.weight.light};
-  letter-spacing: 0.3px;
-  height: 17px;
+  letter-spacing: 0.03rem;
+
   @media (max-width: 380px) {
-    font-size: 13px;
+    font-size: 1.3rem;
   }
+
   @media (max-width: 350px) {
     font-size: 10.7px;
   }
@@ -291,18 +365,19 @@ export const Symbol = styled.h3<ISymbolProps>`
     props.bestValue
       ? `
     line-height: ${theme.font.sizes.font16};
+    margin: 0.8rem 0;
+
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.normal};
-  
-    margin: 8px 0;
 
     .image {
-      margin-right: 8px !important;
+      margin-right: 0.8rem !important;
     }
-    
+
     @media(max-width: 380px) {
-      font-size: 22px;
+      font-size: 2.2rem;
     }
+
     @media(max-width: 350px) {
       font-size: ${theme.font.sizes.font20};
     }`
@@ -311,14 +386,15 @@ export const Symbol = styled.h3<ISymbolProps>`
       font-size: ${theme.font.sizes.font20};
       font-weight: ${theme.font.weight.normal};
 
-      margin: 8px 0;
+      margin: 0.8rem 0;
 
       .img {
-        margin: 2px 8px 0 0;
+        margin-top: 0.2rem;
+        margin-right: 0.8rem;
       }
 
       span {
-        margin-left: 8px;
+        margin-left: 0.8rem;
       }
 
       @media(max-width: 380px) {
@@ -337,27 +413,28 @@ interface IButtonMax {
 
 // eslint-disable-next-line prettier/prettier
 export const ButtonMax = styled.button<IButtonMax>`
-  border: 1px solid ${theme.colors.gray};
-  border-radius: 3px;
-  /* background: ${props => (props.isMax ? '#26DBDB' : 'transparent')}; */
-  /* color: ${props => (props.isMax ? '#000' : '#fff')}; */
-  background: ${props => (props.maxActive ? '#fff' : 'transparent')};
-  color: ${props => (props.maxActive ? '#000' : '#fff')};
-  font-size: 12px;
-  line-height: 12px;
-  font-weight: 300;
-  letter-spacing: .7px;
+  width: 4rem;
+  height: 2rem;
+  padding: 0.3rem 0.8rem;
 
-  width: 40px;
-  height: 20px;
-  padding: 3px 8px;
+  color: ${props => (props.maxActive ? '#000' : '#fff')};
+  font-size: ${theme.font.sizes.font12};
+  line-height: 1.2rem;
+  font-weight: 300;
+  letter-spacing: 0.07rem;
+
+  background-color: ${props => (props.maxActive ? '#fff' : 'transparent')};
+  border: 0.1rem solid ${theme.colors.gray};
+  border-radius: 0.3rem;
 
   cursor: pointer;
   transition: 100ms;
+
   &:hover {
-    background: ${theme.colors.snow};
-    border: 1px solid ${theme.colors.snow};
     color: #000;
+
+    background: ${theme.colors.snow};
+    border: 0.1rem solid ${theme.colors.snow};
   }
 `
 
@@ -369,13 +446,13 @@ interface IInputProps {
 
 // eslint-disable-next-line prettier/prettier
 export const Input = styled.input<IInputProps>`
-  background-color: transparent;
-  border: none;
-  color: #fff;
+  width: 100%;
+  margin: 0.8rem 0;
 
+  color: #fff;
   font-weight: ${theme.font.weight.normal};
   font-family: ${theme.font.family};
-
+  text-align: right;
   ${props =>
     props.bestValue
       ? `
@@ -387,15 +464,15 @@ export const Input = styled.input<IInputProps>`
       font-size: ${theme.font.sizes.font20};
   `}
 
-  text-align: right;
-  width: 100%;
-  margin: 8px 0;
+  background-color: transparent;
+  border: none;
 
   outline: none;
 
   @media (max-width: 380px) {
-    font-size: 22px;
+    font-size: 2.2rem;
   }
+
   @media (max-width: 350px) {
     font-size: ${theme.font.sizes.font20};
   }
@@ -407,6 +484,7 @@ export const Input = styled.input<IInputProps>`
   &[type='number']::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }
+
   &[type='number'] {
     -moz-appearance: textfield;
     appearance: textfield;
@@ -416,12 +494,15 @@ export const Input = styled.input<IInputProps>`
 // ========== INPUT DEFAULT ==========
 
 export const InputBestValue = styled.div`
-  background: rgba(31, 31, 31, 0.72);
-  border-radius: 10px;
-
   width: 100%;
-  padding: 16px 8px 16px 16px;
-  margin-bottom: 8px;
+  margin-bottom: 0.8rem;
+  padding-top: 1.6rem;
+  padding-right: 0.8rem;
+  padding-bottom: 1.6rem;
+  padding-left: 1.6rem;
+
+  background-color: rgba(31, 31, 31, 0.72);
+  border-radius: 1rem;
 `
 
 export const IntroBestValue = styled.div`
@@ -429,24 +510,24 @@ export const IntroBestValue = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  padding-right: 8px;
-  padding-bottom: 16px;
+  padding-right: 0.8rem;
+  padding-bottom: 1.6rem;
 `
 
 export const AllInput = styled.div`
-  max-height: 230px;
+  max-height: 23rem;
   overflow: auto;
 
   &::-webkit-scrollbar {
-    width: 4px;
+    width: 0.4rem;
   }
 
   &::-webkit-scrollbar-thumb {
     background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
+    border-radius: 1rem;
   }
   @media (max-height: 800px) {
-    max-height: 100px;
+    max-height: 10rem;
   }
 `
 
@@ -459,5 +540,5 @@ export const InputBestValueGrid = styled.div`
 
 export const BestValueItem = styled.div`
   width: 100%;
-  height: 74px;
+  height: 7.4rem;
 `

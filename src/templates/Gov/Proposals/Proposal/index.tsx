@@ -14,6 +14,8 @@ import ModalVotes from '../../../../components/Governance/ModalVotes'
 import TitleSection from '../../../../components/TitleSection'
 import VoteCard from '../../../../components/Governance/VoteCard'
 import VotingPower from '../../../../components/VotingPower'
+import Breadcrumb from '../../../../components/Breadcrumb'
+import BreadcrumbItem from '../../../../components/Breadcrumb/BreadcrumbItem'
 
 import externalLink from '../../../../../public/assets/icons/external-link.svg'
 import proposals from '../../../../../public/assets/iconGradient/proposals.svg'
@@ -24,6 +26,7 @@ import proposalWaitingIcon from '../../../../../public/assets/iconGradient/propo
 
 import * as S from './styles'
 import { InferencePriority } from 'typescript'
+import { useRouter } from 'next/router'
 
 export type ModalProps = {
   voteType: string,
@@ -37,6 +40,7 @@ const Proposal = () => {
     undefined
   )
 
+  const router = useRouter()
   const kacyStake = useStakingContract(Staking)
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
@@ -44,6 +48,13 @@ const Proposal = () => {
     <>
       <S.BackgroundVote>
         <Header />
+        <Breadcrumb>
+          <BreadcrumbItem href="/">Home</BreadcrumbItem>
+          <BreadcrumbItem href="/gov">Vote</BreadcrumbItem>
+          <BreadcrumbItem href={router.asPath} isLastPage>
+            Proposal 05
+          </BreadcrumbItem>
+        </Breadcrumb>
         <S.VoteContent>
           <S.IntroDesktopScreen>
             <S.TitleWrapper>
