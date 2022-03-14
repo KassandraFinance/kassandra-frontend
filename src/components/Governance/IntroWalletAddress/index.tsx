@@ -12,7 +12,7 @@ import ExternalLink from '../../../components/ExternalLink'
 import ModalManageVotingPower from '../ModalManageVotingPower'
 
 import tooltip from '../../../../public/assets/icons/tooltip.svg'
-import jony from '../../../../public/assets/team/jony-reis.png'
+import jony from '../../../../public/assets/team/jony.png'
 
 import * as S from './styles'
 
