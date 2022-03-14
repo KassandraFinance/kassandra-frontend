@@ -8,6 +8,10 @@ export const Footer = styled.footer`
 
   color: ${theme.colors.snow};
 
+  @media (min-width: 1600px) {
+    max-width: 114rem;
+  }
+
   @media (max-width: 770px) {
     margin-bottom: 4rem;
   }
@@ -16,31 +20,7 @@ export const Footer = styled.footer`
     margin-bottom: 6rem;
   }
 `
-export const Container = styled.div`
-  align-content: space-between;
-  margin: 0 auto;
-
-  & > img {
-    display: none;
-    margin-bottom: 3.2rem;
-
-    @media (max-width: 820px) {
-      display: block;
-    }
-  }
-
-  @media (min-width: 1600px) {
-    max-width: 114rem;
-  }
-
-  @media (max-width: 820px) {
-    flex-direction: column-reverse;
-    align-items: center;
-  }
-
-  @media (max-width: 540px) {
-  }
-`
+export const Container = styled.div``
 
 export const UpperContainer = styled.div`
   display: grid;
@@ -50,7 +30,7 @@ export const UpperContainer = styled.div`
   padding: 8rem 0;
   max-width: 69rem;
 
-  @media (max-width: 820px) {
+  @media (max-width: 740px) {
     width: 100%;
     padding: 4rem 5rem;
   }
@@ -61,7 +41,7 @@ export const UpperContainer = styled.div`
   }
 
   li {
-    @media (max-width: 820px) {
+    @media (max-width: 740px) {
       text-align: top;
     }
     margin: 1.5rem 0;
@@ -71,7 +51,7 @@ export const UpperContainer = styled.div`
 
     font-size: 2rem;
     font-weight: 500;
-    @media (max-width: 820px) {
+    @media (max-width: 740px) {
       font-size: ${theme.font.sizes.font16};
     }
   }
@@ -89,60 +69,46 @@ export const UpperContainer = styled.div`
 export const LowerContainerMobile = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  padding: 7rem 10rem;
+  flex-direction: column;
+  align-items: center;
 
-  @media (min-width: 820px) {
+  width: 100%;
+  margin-top: 3rem;
+  padding: 3.5rem 5rem;
+
+  text-align: center;
+
+  @media (min-width: 740px) {
     display: none;
   }
-  @media (max-width: 820px) {
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin-top: 3rem;
-    padding: 3.5rem 5rem;
 
-    text-align: center;
-    & > img {
-      display: none;
-    }
-  }
   @media (max-width: 400px) {
     padding: 0;
   }
-  span {
-    font-size: 1.6rem;
-    font-weight: 300;
-  }
+
   ul {
     display: flex;
-    @media (max-width: 820px) {
-      margin-bottom: 1.6rem;
-      justify-content: center;
-    }
-    @media (max-width: 400px) {
-      justify-content: center;
-      padding: 1rem;
-      margin: auto;
-    }
+    justify-content: center;
+    margin-bottom: 1.6rem;
+
     li {
       flex: 1 0 4.8rem;
+    }
+
+    @media (max-width: 400px) {
+      padding: 1rem;
+      margin: auto;
     }
   }
 `
 export const LowerContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   padding: 7rem 0;
 
-  @media (max-width: 820px) {
+  @media (max-width: 740px) {
     display: none;
-  }
-
-  span {
-    font-size: 1.6rem;
-    font-weight: 300;
   }
 
   ul {
@@ -166,6 +132,7 @@ export const Certified = styled.div`
     color: ${theme.colors.snow};
     text-decoration: none;
   }
+
   span {
     margin-right: 0.6rem;
 
@@ -173,6 +140,7 @@ export const Certified = styled.div`
     font-weight: ${theme.font.weight.bold};
     letter-spacing: 0.07rem;
   }
+
   img {
     margin-right: 1.6rem;
   }
@@ -186,7 +154,13 @@ export const LowerLeft = styled.div`
     width: 100%;
     margin-bottom: 2.8rem;
   }
+
+  span {
+    font-size: 1.6rem;
+    font-weight: 300;
+  }
 `
+
 export const LowerRight = styled.div`
   display: flex;
   flex-direction: column;
