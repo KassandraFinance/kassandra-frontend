@@ -3,7 +3,7 @@ import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
 import web3 from '../../utils/web3'
-import useConnect from '../../hooks/useConnect'
+import useConnectTest from '../../hooks/useConnectTest'
 
 import * as S from './styles'
 
@@ -16,7 +16,7 @@ const ModalWalletConnect = ({
   modalOpen,
   setModalOpen
 }: IModalWalletConnect) => {
-  const { connect, connectWalletConnect } = useConnect()
+  const { connect, connectToWalletConnect } = useConnectTest()
 
   function handleCloseModal() {
     setModalOpen(false)
@@ -68,18 +68,18 @@ const ModalWalletConnect = ({
                 </S.WrapperIcons>
               </S.WrapperIconsBackGround>
             </Tippy>
-            {/* <S.WrapperIconsBackGround
+            <S.WrapperIconsBackGround
               type="button"
               onClick={() => {
                 setModalOpen(false)
-                connectWalletConnect(false)
+                connectToWalletConnect()
               }}
             >
               <S.WrapperIcons>
                 <img src="/assets/connectWalletIcon.svg" alt="" />
                 <span>WalletConnect</span>
               </S.WrapperIcons>
-            </S.WrapperIconsBackGround> */}
+            </S.WrapperIconsBackGround>
           </S.Content>
         </S.BackgroundBlack>
       </S.Container>
