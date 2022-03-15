@@ -1,5 +1,5 @@
 import WalletConnect from '@walletconnect/client'
-import { ToastError, ToastSuccess } from '../components/Toastify/toast'
+import { ToastSuccess } from '../components/Toastify/toast'
 
 export async function subscribeToEvents(
   connector: WalletConnect,
@@ -41,8 +41,6 @@ export async function subscribeToEvents(
     if (error) {
       throw error
     }
-
-    window.location.reload()
   })
 
   connector.on(
