@@ -1,22 +1,14 @@
-import React from 'react'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import detectEthereumProvider from '@metamask/detect-provider'
 import WalletConnect from '@walletconnect/client'
 import QRCodeModal from '@walletconnect/qrcode-modal'
+import React from 'react'
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
-import detectEthereumProvider from '@metamask/detect-provider'
-
-import { actionGetUserAddressWallet } from '../store/modules/userWalletAddress/actions'
+import { ToastError, ToastSuccess } from '../components/Toastify/toast'
 import { actionSetChainId } from '../store/modules/chainId/actions'
 
+import { actionGetUserAddressWallet } from '../store/modules/userWalletAddress/actions'
 import { subscribeToEvents } from '../utils/walletConnect'
-
-import web3 from '../utils/web3'
-
-import {
-  ToastError,
-  ToastInfo,
-  ToastSuccess,
-  ToastWarning
-} from '../components/Toastify/toast'
 
 // eslint-disable-next-line prettier/prettier
 declare let window: {
@@ -26,31 +18,33 @@ declare let window: {
   }
 }
 
+const bridge = 'https://bridge.walletconnect.org'
+const connector = new WalletConnect({ bridge, qrcodeModal: QRCodeModal })
+
 const useConnect = () => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const dispatch = useDispatch()
 
-  const handleChainChanged = React.useCallback((chainId: string) => {
-    dispatch(actionSetChainId(chainId))
-  }, [])
-
-  const handleAccountsChanged = React.useCallback(async accounts => {
+  const handleAccountsChanged = React.useCallback(accounts => {
     try {
       if (accounts.length === 0 || accounts[0] === undefined) {
-        // dispatch(actionGetUserAddressWallet(''))
+        dispatch(actionGetUserAddressWallet(''))
       } else if (accounts[0] !== userWalletAddress) {
-          // dispatch(actionGetUserAddressWallet(accounts[0]))
-        // ToastSuccess('Connected to MetaMask.')
+        dispatch(actionGetUserAddressWallet(accounts[0]))
       }
     } catch (error: any) {
-      console.log(error.message)
+      console.log(error)
     }
   }, [])
 
-  const handleRequestAccounts = React.useCallback(async () => {
-    const accounts = await web3.eth.getAccounts()
+  const handleChainChanged = React.useCallback(chainId => {
+    dispatch(actionSetChainId(chainId))
+    window.location.reload()
+  }, [])
 
-    // handleAccountsChanged(accounts)
+  const getAccounts = React.useCallback(async () => {
+    const accounts = await window.ethereum.request({ method: 'eth_accounts' })
+    handleAccountsChanged(accounts)
   }, [])
 
   const getChainId = React.useCallback(async () => {
@@ -58,98 +52,78 @@ const useConnect = () => {
     dispatch(actionSetChainId(id))
   }, [])
 
-  const startApp = React.useCallback(async provider => {
-    try {
-      if (provider !== window.ethereum) {
-        ToastWarning('Do you have multiple wallets installed?')
-      }
-
-      handleRequestAccounts()
-      getChainId()
-
-      window.ethereum.on('chainChanged', handleChainChanged)
-    } catch (error: any) {
-      console.log(error.message)
-    }
-  }, [])
-
-  const handleDisconnected = React.useCallback(async () => {
-    const connector = await connectWalletConnect(true)
+  const handleDisconnected = React.useCallback(() => {
     if (connector) {
+      dispatch(actionGetUserAddressWallet(''))
       connector.killSession()
-      // dispatch(actionGetUserAddressWallet(''))
     }
   }, [])
 
-  const connect = React.useCallback(() => {
+  const connect = React.useCallback(async () => {
     try {
-      window.ethereum
-        .request({ method: 'eth_requestAccounts' })
-        .then(handleAccountsChanged)
-        .catch((err: any) => {
-          if (err.code === 4001) {
-            // EIP-1193 userRejectedRequest error
-            ToastInfo('Please connect to MetaMask.')
-          } else {
-            ToastError(err.message)
-            console.error(err)
-          }
-        })
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+
+      handleAccountsChanged(accounts)
+      ToastSuccess('Connected to MetaMask.')
     } catch (error: any) {
       ToastError(error.message)
+      console.error(error)
     }
   }, [])
 
-
-  const connectWalletConnect = React.useCallback(async (check: boolean) => {
-    const bridge = 'https://bridge.walletconnect.org'
-
-    const connector = new WalletConnect({ bridge, qrcodeModal: QRCodeModal })
-
+  const connectToWalletConnect = React.useCallback(() => {
     if (!connector.connected) {
-      if (!check) {
-        await connector.createSession()
-      } else {
-        return false
-      }
+      connector.createSession()
+      subscribeToEvents(connector, handleAccountsChanged)
+      return
     }
-
-    const { chainId, accounts } = connector
-    handleChainChanged(`0x${chainId.toString(16)}`)
-    // handleAccountsChanged(accounts)
-    // subscribeToEvents(connector, handleAccountsChanged)
-    return connector
   }, [])
 
-  const hasProvider = React.useCallback(async () => {
+  const startApp = React.useCallback(async (provider) => {
+    if (connector.connected) {
+      return
+    }
+
+    if (provider !== window.ethereum) {
+      ToastError('Do you have multiple wallets installed?')
+      return
+    }
+
+    getAccounts()
+    getChainId()
+
+    window.ethereum.on('accountsChanged', handleAccountsChanged)
+    window.ethereum.on('chainChanged', handleChainChanged)
+  }, [])
+
+  const hasEthereumProvider = React.useCallback(async () => {
     const provider = await detectEthereumProvider()
 
-    try {
-      // if (await connectWalletConnect(true)) {
-      //   return
-      // }
-
-      if (provider !== null) {
-        // window.onbeforeunload = function() { return "Prevent reload" }
-
-        window.ethereum.on('disconnect', handleDisconnected)
-        // window.ethereum.on('accountsChanged', handleAccountsChanged)
-        window.ethereum.on('chainChanged', handleChainChanged)
-
-        startApp(provider)
-      }
-    } catch (error) {
-      console.log(error)
+    if (provider) {
+      startApp(provider)
+    } else {
+      ToastError('Please install MetaMask!')
     }
   }, [])
 
   React.useEffect(() => {
-    // hasProvider()
+    const handleWallectConnect = () => {
+      const connect = localStorage.getItem('walletconnect')
+
+      if (connect) {
+        const { accounts } = JSON.parse(connect)
+        handleAccountsChanged(accounts)
+
+      }
+    }
+
+    handleWallectConnect()
+    hasEthereumProvider()
   }, [])
 
   return {
     connect,
-    connectWalletConnect,
+    connectToWalletConnect,
     handleDisconnected
   }
 }
