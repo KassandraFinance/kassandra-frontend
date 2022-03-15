@@ -37,9 +37,9 @@ const useConnect = () => {
   const handleAccountsChanged = React.useCallback(async accounts => {
     try {
       if (accounts.length === 0 || accounts[0] === undefined) {
-        dispatch(actionGetUserAddressWallet(''))
+        // dispatch(actionGetUserAddressWallet(''))
       } else if (accounts[0] !== userWalletAddress) {
-          dispatch(actionGetUserAddressWallet(accounts[0]))
+          // dispatch(actionGetUserAddressWallet(accounts[0]))
         // ToastSuccess('Connected to MetaMask.')
       }
     } catch (error: any) {
@@ -50,7 +50,7 @@ const useConnect = () => {
   const handleRequestAccounts = React.useCallback(async () => {
     const accounts = await web3.eth.getAccounts()
 
-    handleAccountsChanged(accounts)
+    // handleAccountsChanged(accounts)
   }, [])
 
   const getChainId = React.useCallback(async () => {
@@ -77,7 +77,7 @@ const useConnect = () => {
     const connector = await connectWalletConnect(true)
     if (connector) {
       connector.killSession()
-      dispatch(actionGetUserAddressWallet(''))
+      // dispatch(actionGetUserAddressWallet(''))
     }
   }, [])
 
@@ -100,11 +100,12 @@ const useConnect = () => {
     }
   }, [])
 
+
   const connectWalletConnect = React.useCallback(async (check: boolean) => {
     const bridge = 'https://bridge.walletconnect.org'
-  
+
     const connector = new WalletConnect({ bridge, qrcodeModal: QRCodeModal })
-  
+
     if (!connector.connected) {
       if (!check) {
         await connector.createSession()
@@ -112,11 +113,11 @@ const useConnect = () => {
         return false
       }
     }
-  
+
     const { chainId, accounts } = connector
     handleChainChanged(`0x${chainId.toString(16)}`)
-    handleAccountsChanged(accounts)
-    subscribeToEvents(connector, handleAccountsChanged)
+    // handleAccountsChanged(accounts)
+    // subscribeToEvents(connector, handleAccountsChanged)
     return connector
   }, [])
 
@@ -127,12 +128,12 @@ const useConnect = () => {
       // if (await connectWalletConnect(true)) {
       //   return
       // }
-      
+
       if (provider !== null) {
         // window.onbeforeunload = function() { return "Prevent reload" }
 
         window.ethereum.on('disconnect', handleDisconnected)
-        window.ethereum.on('accountsChanged', handleAccountsChanged)
+        // window.ethereum.on('accountsChanged', handleAccountsChanged)
         window.ethereum.on('chainChanged', handleChainChanged)
 
         startApp(provider)
@@ -143,7 +144,7 @@ const useConnect = () => {
   }, [])
 
   React.useEffect(() => {
-    hasProvider()
+    // hasProvider()
   }, [])
 
   return {
