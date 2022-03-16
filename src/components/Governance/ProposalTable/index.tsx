@@ -12,12 +12,26 @@ import * as S from './styles'
 
 export const ProposalTable = () => {
   const [proposalsList, setProposalsList] = React.useState<Array<object>>([])
+
   const governance = useGovernance(GovernorAlpha)
 
+  async function handleProposals() {
+    const proposalAmount = await governance.proposalCount()
+
+    for (let index = 1; index <= proposalAmount; index++) {
+      const proposal = await governance.proposals(index)
+
+      const events = await governance.pastEvents(
+        'ProposalCreated',
+        proposal.startBlock
+      )
+
+      governance.getProposal(events, setProposalsList)
+    }
+  }
+
   React.useEffect(() => {
-    governance
-      .pastEvents('ProposalCreated')
-      .then(res => governance.getProposal(res, setProposalsList))
+    handleProposals()
     setProposalsList([])
   }, [])
 
