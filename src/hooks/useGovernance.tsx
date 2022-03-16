@@ -47,10 +47,10 @@ const useGovernance = (address: string) => {
       return valuesStateProposal[value]
     }
 
-    const pastEvents = async (eventName: string) => {
+    const pastEvents = async (eventName: string, block: number) => {
       const events = await contract.getPastEvents(eventName, {
-        fromBlock: 0,
-        toBlock: 'latest'
+        fromBlock: block - 1,
+        toBlock: block
       })
 
       return events

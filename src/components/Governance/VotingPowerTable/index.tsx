@@ -1,14 +1,73 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import BigNumber from 'bn.js'
 
+import { GovernorAlpha, Staking } from '../../../constants/tokenAddresses'
+
+import useVotingPower from '../../../hooks/useVotingPower'
+import useGovernance from '../../../hooks/useGovernance'
+
+import { BNtoDecimal } from '../../../utils/numerals'
 import substr from '../../../utils/substr'
 
 import avax from '../../../../public/assets/avalanche_social_index_logo.svg'
 
 import * as S from './styles'
 
+interface IVotingPowerRankProps {
+  address: string;
+  votingPower: BigNumber;
+  proposalsCreated: number;
+}
+
 export const VotingPowerTable = () => {
+  // eslint-disable-next-line prettier/prettier
+  const [votingPowerRank, setVotingPowerRank] = React.useState<Array<IVotingPowerRankProps>>([
+    {
+      address: '',
+      votingPower: new BigNumber(0),
+      proposalsCreated: 0
+    }
+  ])
+
+  const governance = useGovernance(GovernorAlpha)
+  const votingPower = useVotingPower(Staking)
+
+  async function handleVotingPowerRank() {
+    const proposalAmount = await governance.proposalCount()
+    const arrayRank: IVotingPowerRankProps[] = []
+
+    for (let index = 1; index <= proposalAmount; index++) {
+      const proposal = await governance.proposals(index)
+      const votePower = await votingPower.currentVotes(proposal.proposer)
+
+      const filterProposer = arrayRank.findIndex(
+        (item: IVotingPowerRankProps) => item.address === proposal.proposer
+      )
+
+      if (filterProposer === -1) {
+        arrayRank.push({
+          address: proposal.proposer,
+          votingPower: votePower,
+          proposalsCreated: 1
+        })
+      } else {
+        arrayRank[filterProposer] = {
+          address: proposal.proposer,
+          votingPower: votePower,
+          proposalsCreated: arrayRank[filterProposer].proposalsCreated + 1
+        }
+      }
+    }
+    setVotingPowerRank(arrayRank)
+  }
+
+  React.useEffect(() => {
+    handleVotingPowerRank()
+    setVotingPowerRank([])
+  }, [])
+
   return (
     <S.VotingPowerTable>
       <S.Table>
@@ -23,23 +82,34 @@ export const VotingPowerTable = () => {
           </S.Tr>
         </thead>
         <tbody>
-          {listVotingRank.map(item => (
-            <Link key={item.address} href={`/gov/address/${item.address}`}>
-              <S.Tr>
-                <S.Td className="rank">{item.rank}</S.Td>
-                <S.Td className="user">
-                  <Image src={avax} alt="" />
-                  <span>{substr(item.address)}</span>
-                </S.Td>
-                <S.Td className="vote-power">{item.votingPower}</S.Td>
-                <S.Td className="vote-weight">{item.voteWeight}</S.Td>
-                <S.Td className="proposals-created">
-                  {item.proposalsCreated}
-                </S.Td>
-                <S.Td className="proposals-voted">{item.proposalsVoted}</S.Td>
-              </S.Tr>
-            </Link>
-          ))}
+          {votingPowerRank.map(
+            (
+              item: {
+                address: string,
+                votingPower: BigNumber,
+                proposalsCreated: number
+              },
+              index
+            ) => (
+              <Link key={item.address} href={`/gov/address/${item.address}`}>
+                <S.Tr>
+                  <S.Td className="rank">{index + 1}</S.Td>
+                  <S.Td className="user">
+                    <Image src={avax} alt="" />
+                    <span>{substr(item.address)}</span>
+                  </S.Td>
+                  <S.Td className="vote-power">
+                    {BNtoDecimal(item.votingPower, 18, 2)}
+                  </S.Td>
+                  <S.Td className="vote-weight">-</S.Td>
+                  <S.Td className="proposals-created">
+                    {item.proposalsCreated}
+                  </S.Td>
+                  <S.Td className="proposals-voted">-</S.Td>
+                </S.Tr>
+              </Link>
+            )
+          )}
         </tbody>
       </S.Table>
     </S.VotingPowerTable>
@@ -47,38 +117,3 @@ export const VotingPowerTable = () => {
 }
 
 export default VotingPowerTable
-
-const listVotingRank = [
-  {
-    rank: '01',
-    address: '0x55bB02dF11C5d8862eb7B924f3876b8BA307bAa7',
-    votingPower: '213,04',
-    voteWeight: '13,49',
-    proposalsCreated: '2',
-    proposalsVoted: '3'
-  },
-  {
-    rank: '02',
-    address: '0x55bB02dF11C5d8862eb7B924f3876b8BA307bAa7',
-    votingPower: '113,04',
-    voteWeight: '13,49',
-    proposalsCreated: '2',
-    proposalsVoted: '3'
-  },
-  {
-    rank: '03',
-    address: '0x55bB02dF11C5d8862eb7B924f3876b8BA307bAa7',
-    votingPower: '32,11',
-    voteWeight: '13,49',
-    proposalsCreated: '2',
-    proposalsVoted: '3'
-  },
-  {
-    rank: '04',
-    address: '0x55bB02dF11C5d8862eb7B924f3876b8BA307bAa7',
-    votingPower: '44,65',
-    voteWeight: '13,49',
-    proposalsCreated: '2',
-    proposalsVoted: '3'
-  }
-]
