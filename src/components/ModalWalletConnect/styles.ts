@@ -105,10 +105,6 @@ export const WrapperIconsBackGround = styled.button`
   border-radius: 1rem;
   border: none;
 
-  &:last-child {
-    margin-top: 16px;
-  }
-
   &.disabled {
     filter: grayscale(1);
   }
@@ -158,6 +154,7 @@ export const Content = styled.div`
   max-width: 100%;
   display: flex;
   flex-direction: column;
+  gap: 1.6rem;
   padding: ${theme.spacings.space24};
 
   border-radius: 0 0 6px 6px;
@@ -172,8 +169,12 @@ export const Content = styled.div`
 `
 
 export const Tooltip = styled.span`
+  display: flex;
+
   a {
     color: white;
     text-decoration: none;
+    display: flex;
+    align-items: center;
   }
 `

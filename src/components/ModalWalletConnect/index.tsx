@@ -56,10 +56,14 @@ const ModalWalletConnect = ({
             <Tippy
               content={
                 <S.Tooltip>
-                  <a href="https://metamask.io/">
+                  <a
+                    href="https://metamask.io/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     Metamask
                     <img src="/assets/externalLink.svg" alt="" />
-                  </a>{' '}
+                  </a>
                   is not installed on this browser
                 </S.Tooltip>
               }
