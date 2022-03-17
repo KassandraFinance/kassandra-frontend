@@ -1,8 +1,8 @@
 import React from 'react'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
+import detectEthereumProvider from '@metamask/detect-provider'
 
-import web3 from '../../utils/web3'
 import useConnect from '../../hooks/useConnect'
 
 import * as S from './styles'
@@ -17,10 +17,25 @@ const ModalWalletConnect = ({
   setModalOpen
 }: IModalWalletConnect) => {
   const { connect, connectToWalletConnect } = useConnect()
+  const [hasEthereumProvider, setHasEthereumProvider] = React.useState(false)
 
   function handleCloseModal() {
     setModalOpen(false)
   }
+
+  React.useEffect(() => {
+    const checkEthereumProvider = async () => {
+      const provider = await detectEthereumProvider()
+
+      if (provider) {
+        setHasEthereumProvider(true)
+      } else {
+        setHasEthereumProvider(false)
+      }
+    }
+
+    checkEthereumProvider()
+  }, [modalOpen])
 
   return (
     <>
@@ -48,15 +63,15 @@ const ModalWalletConnect = ({
                   is not installed on this browser
                 </S.Tooltip>
               }
-              disabled={web3.currentProvider !== null}
+              disabled={hasEthereumProvider}
               hideOnClick={false}
               interactive
             >
               <S.WrapperIconsBackGround
-                className={web3.currentProvider === null ? 'disabled' : ''}
+                className={hasEthereumProvider ? '' : 'disabled'}
                 type="button"
                 onClick={() => {
-                  if (web3.currentProvider !== null) {
+                  if (hasEthereumProvider) {
                     setModalOpen(false)
                     connect()
                   }
@@ -68,6 +83,7 @@ const ModalWalletConnect = ({
                 </S.WrapperIcons>
               </S.WrapperIconsBackGround>
             </Tippy>
+
             <S.WrapperIconsBackGround
               type="button"
               onClick={() => {
