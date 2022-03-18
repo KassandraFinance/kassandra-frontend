@@ -114,7 +114,7 @@ const StakeFarm = () => {
             textHeader="Your wallet is set to the wrong network."
             bodyText={
               walletConnect
-                ? `Please connect the Wallet Connect to the ${chain.chainName} network to have access to all our staking pools.`
+                ? `Please connect the Wallet Connect to the ${chain.chainName} network.`
                 : `Please switch to the ${chain.chainName} network to have access to all our staking pools`
             }
             type="changeChain"
