@@ -3,7 +3,8 @@ import { ToastSuccess } from '../components/Toastify/toast'
 
 export async function subscribeToEvents(
   connector: WalletConnect,
-  handleAccountsChanged: (accounts: any) => void
+  handleAccountsChanged: (accounts: any) => void,
+  handleChainChanged: (chainId: any) => void
 ) {
   if (!connector) {
     return
@@ -19,7 +20,9 @@ export async function subscribeToEvents(
 
       // Get provided accounts and chainId
       const { accounts, chainId } = payload.params[0]
+
       handleAccountsChanged(accounts)
+      handleChainChanged(chainId)
       ToastSuccess('Connected to Wallet Connect.')
     }
   )
