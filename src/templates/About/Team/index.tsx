@@ -7,20 +7,20 @@ import * as S from './styles'
 const Team = () => {
   return (
     <>
-      <S.Container>
+      <S.TitleContainer>
         <S.TitleAndIcon>
           <S.Icon>
             <img src="assets/team-icon.svg" alt="" />
           </S.Icon>
           <S.Title>Our Team</S.Title>
         </S.TitleAndIcon>
-      </S.Container>
+      </S.TitleContainer>
       <S.Divider />
       <S.Grid>
         <TeamCard
           name="Kevin Voigt"
-          role="PROJECT LEAD"
-          image="assets/team/kevin-voigt.png"
+          role="CTO"
+          image="assets/team/kevin.png"
           social={{
             github: 'https://github.com/Baruel',
             linkedin: 'https://linkedin.com/in/kevin-voigt-221b24196'
@@ -28,38 +28,43 @@ const Team = () => {
         />
         <TeamCard
           name="Hamilton Haskel"
-          role="FINANCE LEAD"
-          image="assets/team/hamilton-haskel.png"
+          role="CFO"
+          image="assets/team/hamilton.png"
           social={{
             linkedin: 'https://linkedin.com/in/hamilton-haskel-3585b477'
           }}
         />
         <TeamCard
           name="André Zanghelini"
-          role="TECHNOLOGY LEAD"
-          image="assets/team/andre-zanghelini.png"
+          role="SOLIDITY ENGINEER"
+          image="assets/team/andre.png"
           social={{
             github: 'https://github.com/an-dz',
             linkedin: 'https://www.linkedin.com/in/zanghelini/'
           }}
         />
-
+        <TeamCard
+          name="Antônio Farias"
+          role="PRODUCT MANAGER"
+          image="assets/team/tony.png"
+          social={{
+            linkedin: 'https://www.linkedin.com/in/tonifarias/',
+            twitter: 'https://twitter.com/tonifariasjr'
+          }}
+        />
         <TeamCard
           name="Jorge Filho"
           role="BUSINESS DEVELOPMENT"
-          image="assets/team/jorge-filho.png"
+          image="assets/team/jorge.png"
           social={{
             linkedin: 'https://www.linkedin.com/in/jorge-filho-35020018b/',
             twitter: 'https://twitter.com/AkademiaHash'
           }}
         />
-        <S.Image>
-          <img src="assets/kassandra-about-team.svg" alt="" />
-        </S.Image>
         <TeamCard
           name="Jony Reis"
-          role="FRONT-END DEVELOPER"
-          image="assets/team/jony-reis.png"
+          role="FRONT-END WEB3 DEVELOPER"
+          image="assets/team/jony.png"
           social={{
             github: 'https://github.com/jonyreis',
             linkedin: 'https://www.linkedin.com/in/jonyreis/'
@@ -67,28 +72,28 @@ const Team = () => {
         />
         <TeamCard
           name="Arthur Stofella"
-          role="UI/UX DESIGNER"
-          image="assets/team/arthur-stofella.png"
+          role="PRODUCT DESIGNER"
+          image="assets/team/toffa.png"
           social={{
             linkedin: 'https://linkedin.com/in/arthurstofella'
           }}
         />
         <TeamCard
-          name="Pedro Jung"
-          role="QUANTITATIVE ANALYST"
-          image="assets/team/pedro-jung.png"
+          name="Ricardo Werneck"
+          role="COMMUNITY MANAGER"
+          image="assets/team/ricardo.png"
           social={{
-            linkedin: 'https://www.linkedin.com/in/pedro-jung-tavares-b53021a4/'
+            linkedin: 'https://www.linkedin.com/in/ricardo-werneck-a94b0a15b/'
           }}
         />
         <TeamCard
-          name="Fernando Rigo"
-          role="FRONT-END DEVELOPER"
-          image="assets/team/fernando-rigo.png"
+          name="Pedro Jung"
+          role="QUANTITATIVE ANALYST"
+          image="assets/team/jung.png"
           social={{
-            github: 'https://github.com/F-rigo',
-            linkedin: 'https://linkedin.com/in/fernandorigo'
+            linkedin: 'https://www.linkedin.com/in/pedro-jung-tavares-b53021a4/'
           }}
+          isLastCard
         />
       </S.Grid>
     </>

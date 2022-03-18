@@ -8,7 +8,7 @@ import substr from '../../utils/substr'
 
 import Button from '../Button'
 import ModalLogOut from '../ModalLogOut'
-import DropdownInvest from '../DropdownInvest'
+import DropdownInvest from '../Dropdown'
 import ModalWalletConnect from '../ModalWalletConnect'
 import ModalSocialMediaMobile from '../ModalSocialMediaMobile'
 
@@ -25,7 +25,7 @@ export type MenuProps = {
 const Header = () => {
   const [isModalWallet, setIsModalWallet] = React.useState<boolean>(false)
   const [isModalLogout, setIsModalLogout] = React.useState<boolean>(false)
-  const [isModalLanguages, setIsModalLanguages] = React.useState<boolean>(false)
+  // const [isModalLanguages, setIsModalLanguages] = React.useState<boolean>(false)
   // eslint-disable-next-line prettier/prettier
   const [isModalSocialMedia, setIsModalSocialMedia] = React.useState<boolean>(false)
 
@@ -60,7 +60,10 @@ const Header = () => {
               <Image src={kacy64} alt="Kassandra" />
             </a>
           </Link>
-          <DropdownInvest />
+          <DropdownInvest
+            nameOnHeader="invest"
+            linkPage={[{ name: 'aHYPE', href: '/products/ahype' }]}
+          />
           <Link href="/farm" passHref>
             <S.MenuLink
               onClick={() => clickMatomoEvent('click-on-link', 'stake-farm')}
@@ -68,11 +71,7 @@ const Header = () => {
               Stake/Farm
             </S.MenuLink>
           </Link>
-          <S.MenuLinkDisable
-            onClick={() => clickMatomoEvent('click-on-link', 'vote')}
-          >
-            Vote
-          </S.MenuLinkDisable>
+          <S.MenuLinkDisable>Vote</S.MenuLinkDisable>
           <Link href="/about" passHref>
             <S.MenuLink
               onClick={() => clickMatomoEvent('click-on-link', 'about')}

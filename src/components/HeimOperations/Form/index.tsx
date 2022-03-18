@@ -14,28 +14,29 @@ import { TokenDetails } from '../../../store/modules/poolTokens/types'
 import { actionGetPoolTokens } from '../../../store/modules/poolTokens/actions'
 
 import { SUBGRAPH_URL, HeimCRPPOOL } from '../../../constants/tokenAddresses'
+import { GET_INFO_AHYPE } from '../graphql'
 
 import useCRPContract from '../../../hooks/useCRPContract'
 import useERC20Contract, { ERC20 } from '../../../hooks/useERC20Contract'
 import usePoolContract from '../../../hooks/usePoolContract'
 import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
-import Button from '../../Button'
-import ModalWalletConnect from '../../ModalWalletConnect'
-
-import InputTokens from './InputTokens'
-import InputBestValue from './InputBestValue'
-
-import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
-
 import { priceDollar } from '../../../utils/priceDollar'
 import changeChain, { ChainDetails } from '../../../utils/changeChain'
 import { BNtoDecimal, wei } from '../../../utils/numerals'
 import waitTransaction, { MetamaskError, TransactionCallback } from '../../../utils/txWait'
 
+import Button from '../../Button'
+import ModalWalletConnect from '../../ModalWalletConnect'
+
+import InputTokens from './InputTokens'
+import InputBestValue from './InputBestValue'
+import TransactionSettings from './TransactionSettings'
+
+import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
+
 import * as S from './styles'
 import { Titles } from '..'
-import { GET_INFO_AHYPE } from '../graphql'
 
 interface IFormProps {
   typeAction: string;
@@ -56,8 +57,8 @@ const Form = ({
   crpPoolAddress,
   corePoolAddress,
   productCategories,
-  typeAction, 
-  title, 
+  typeAction,
+  title,
   typeWithdrawChecked,
 }: IFormProps) => {
   const crpPoolToken = useERC20Contract(crpPoolAddress)
@@ -68,7 +69,6 @@ const Form = ({
 
   const [tokenAddress2Index, setTokenAddress2Index] = React.useState<Address2Index>({})
   const [isApproved, setIsApproved] = React.useState<boolean[]>([])
-  const [approvalCheck, setApprovalCheck] = React.useState(0)
 
   const [fees, setFees] = React.useState({
     Invest: '...',
@@ -78,6 +78,11 @@ const Form = ({
   const [isReload, setIsReload] = React.useState<boolean>(false)
 
   const [errorMsg, setErrorMsg] = React.useState('')
+  const [slippage, setSlippage] = React.useState({
+    value: '0.5',
+    custom: '2.0',
+    isCustom: false
+  })
 
   const [swapInAddress, setSwapInAddress] = React.useState('')
   const [swapInAmount, setSwapInAmount] = React.useState(new BigNumber(0))
@@ -125,7 +130,7 @@ const Form = ({
         address: data.pool.id,
         allocation: 0,
         allocation_goal: 0,
-        decimals: new BigNumber(data.pool.decimals), 
+        decimals: new BigNumber(data.pool.decimals),
         price: Number(data.pool.price_usd),
         name: data.pool.name,
         symbol: data.pool.symbol
@@ -222,11 +227,11 @@ const Form = ({
 
       setIsApproved(await Promise.all(newApprovals))
     }
-    
+
     setIsReload(!isReload)
     setIsApproved([])
     calc()
-  }, [chainId, title, infoAHYPE.length, approvalCheck, userWalletAddress])
+  }, [chainId, title, infoAHYPE.length, userWalletAddress])
 
   // get balance of swap in token
   React.useEffect(() => {
@@ -646,7 +651,7 @@ const Form = ({
 
   const tokenInIndex = tokenAddress2Index[swapInAddress]
   const tokenOutIndex = tokenAddress2Index[swapOutAddress]
-  
+
   const approvalCallback = React.useCallback(
     (tokenSymbol: string, tokenAddress: string): TransactionCallback => {
       return async (error: MetamaskError, txHash: string) => {
@@ -868,9 +873,9 @@ const Form = ({
             }
 
             trackBuying(
-              `${crpPoolAddress}-${swapInSymbol.value}-${swapOutSymbol.value}`, 
-              `${swapInSymbol.value}-${swapOutSymbol.value}`, 
-              amountInUSD, 
+              `${crpPoolAddress}-${swapInSymbol.value}-${swapOutSymbol.value}`,
+              `${swapInSymbol.value}-${swapOutSymbol.value}`,
+              amountInUSD,
               [...productCategories, 'Swap']
             )
             corePool.swapExactAmountIn(
@@ -901,7 +906,7 @@ const Form = ({
       <input type="hidden" name="swapInSymbol" value={infoAHYPE[tokenInIndex]?.symbol || ''} />
       <input type="hidden" name="swapOutSymbol" value={infoAHYPE[tokenOutIndex]?.symbol || ''} />
       <input type="hidden" name="walletAddress" value={userWalletAddress} />
-      <input type="hidden" name="slippageInput" value="0.5" />
+      <input type="hidden" name="slippageInput" value={slippage.value} />
       <input type="hidden" name="amountUSD" value={
         title === "Invest"
           ? Big((swapOutAmount[0] || 0).toString())
@@ -923,36 +928,35 @@ const Form = ({
       } />
 
       <S.ErrorTippy content={errorMsg} visible={errorMsg.length > 0}>
-        <span />
+          <InputTokens
+            clearInput={clearInput}
+            inputRef={inputTokenRef}
+            actionString={typeAction}
+            title={title}
+            decimals={infoAHYPE[tokenInIndex] ? infoAHYPE[tokenInIndex].decimals : new BigNumber(18)}
+            swapBalance={swapInBalance}
+            swapAmount={swapInAmount}
+            setSwapAmount={setSwapInAmount}
+            // Text Input
+            disabled={
+              userWalletAddress.length === 0
+                ? "Please connect your wallet by clicking the button below"
+                : chainId !== poolChain.chainId
+                  ? `Please change to the ${poolChain.chainName} by clicking the button below`
+                  : ""
+            }
+            // Select Input
+            poolTokens={
+              title === 'Withdraw'
+                ? [infoAHYPE[infoAHYPE.length - 1]]
+                : infoAHYPE
+                  .slice(0, -1)
+                  .filter((token: { address: string }) => token.address !== swapOutAddress)
+            }
+            tokenDetails={infoAHYPE[tokenInIndex]}
+            setSwapAddress={setSwapInAddress}
+          />
       </S.ErrorTippy>
-      <InputTokens
-        clearInput={clearInput}
-        inputRef={inputTokenRef}
-        actionString={typeAction}
-        title={title}
-        decimals={infoAHYPE[tokenInIndex] ? infoAHYPE[tokenInIndex].decimals : new BigNumber(18)}
-        swapBalance={swapInBalance}
-        swapAmount={swapInAmount}
-        setSwapAmount={setSwapInAmount}
-        // Text Input
-        disabled={
-          userWalletAddress.length === 0
-            ? "Please connect your wallet by clicking the button below"
-            : chainId !== poolChain.chainId
-              ? `Please change to the ${poolChain.chainName} by clicking the button below`
-              : ""
-        }
-        // Select Input
-        poolTokens={
-          title === 'Withdraw'
-            ? [infoAHYPE[infoAHYPE.length - 1]]
-            : infoAHYPE
-              .slice(0, -1)
-              .filter((token: { address: string }) => token.address !== swapOutAddress)
-        }
-        tokenDetails={infoAHYPE[tokenInIndex]}
-        setSwapAddress={setSwapInAddress}
-      />
 
       {title === 'Swap' ?
         <Tippy content="Trade places for swap-in and swap-out token">
@@ -1019,6 +1023,13 @@ const Form = ({
         <S.SpanLight>{fees[title]}%</S.SpanLight>
       </S.ExchangeRate>
 
+      <S.TransactionSettingsOptions>
+        <TransactionSettings
+          slippage={slippage}
+          setSlippage={setSlippage}
+        />
+      </S.TransactionSettingsOptions>
+
       {userWalletAddress.length === 0 ? (
         <Button
           className="btn-submit"
@@ -1069,7 +1080,7 @@ const Form = ({
                     )}`
                 :
                   `${title}`
-              : 
+              :
                 'Approve'
             }
           />

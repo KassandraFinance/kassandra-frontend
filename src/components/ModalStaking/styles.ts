@@ -93,7 +93,7 @@ export const Amount = styled.div`
   }
 
   h5 {
-    color: #c4c4c4;
+    color: #bdbdbd;
     font-weight: ${theme.font.weight.normal};
     font-size: ${theme.font.sizes.font12};
     line-height: 12px;

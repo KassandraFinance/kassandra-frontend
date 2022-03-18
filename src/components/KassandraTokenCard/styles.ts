@@ -62,7 +62,7 @@ export const KassandraInfo = styled.div`
   span {
     display: inline-block;
     font-weight: ${theme.font.weight.light};
-    color: #c4c4c4;
+    color: #bdbdbd;
     font-size: ${theme.font.sizes.font16};
     line-height: 155%;
     margin-top: 40px;
@@ -209,7 +209,7 @@ export const TextWrapper = styled.div`
   p {
     text-align: left;
     font-size: ${theme.font.sizes.font12};
-    color: #c4c4c4;
+    color: #bdbdbd;
     letter-spacing: 0px;
     margin: 8px 0;
   }

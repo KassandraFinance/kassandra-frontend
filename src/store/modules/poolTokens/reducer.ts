@@ -1,5 +1,5 @@
 import { Reducer } from 'redux'
-import { HYDRATE } from "next-redux-wrapper"
+import { HYDRATE } from 'next-redux-wrapper'
 import { Types, TokenDetails } from './types'
 
 const INITIAL_STATE: Array<TokenDetails> = []

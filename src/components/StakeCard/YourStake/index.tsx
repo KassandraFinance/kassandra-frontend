@@ -23,6 +23,9 @@ interface IYourStakeProps {
   setInfoStaked: React.Dispatch<React.SetStateAction<IInfoStaked>>;
   stakeWithVotingPower: boolean;
   priceLPToken: IPriceLPToken;
+  stakeWithLockPeriod: boolean;
+  lockPeriod: number;
+  availableWithdraw: Big;
 }
 
 const YourStake = ({
@@ -35,7 +38,10 @@ const YourStake = ({
   infoStaked,
   setInfoStaked,
   stakeWithVotingPower,
-  priceLPToken
+  stakeWithLockPeriod,
+  priceLPToken,
+  lockPeriod,
+  availableWithdraw
 }: IYourStakeProps) => {
   const getYourStake = React.useCallback(async () => {
     const poolInfoResponse = await poolInfo(pid)
@@ -115,7 +121,9 @@ const YourStake = ({
       hasExpired: periodFinish < timestampNow,
       unstake: unstakeResponse,
       apr,
-      stakingToken: poolInfoResponse.stakingToken
+      stakingToken: poolInfoResponse.stakingToken,
+      vestingPeriod: poolInfoResponse.vestingPeriod,
+      lockPeriod: poolInfoResponse.lockPeriod
     })
   }, [userWalletAddress, priceLPToken])
 
@@ -198,6 +206,35 @@ const YourStake = ({
           /day
         </span>
       </S.Info>
+      {stakeWithLockPeriod && (
+        <>
+          <S.Info>
+            <span>Lock period</span>
+            <span>
+              {parseInt(infoStaked.lockPeriod) / 60 / 60 / 24 / 30} months
+            </span>
+          </S.Info>
+          <S.Info>
+            <span>Vesting period</span>
+            <span>
+              {parseInt(infoStaked.vestingPeriod) / 60 / 60 / 24 / 30} months
+            </span>
+          </S.Info>
+          <S.Info>
+            <span>Locked until</span>
+            <span>{getDate(lockPeriod)}</span>
+          </S.Info>
+          <S.Info>
+            <span>Available for withdraw</span>
+            <span>
+              {availableWithdraw.gt(-1)
+                ? BNtoDecimal(availableWithdraw.div(Big(10).pow(18)), 18)
+                : '...'}{' '}
+              KACY
+            </span>
+          </S.Info>
+        </>
+      )}
     </>
   ) : null
 }

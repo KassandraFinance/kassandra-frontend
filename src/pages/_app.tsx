@@ -22,7 +22,6 @@ const instance = createInstance({
   trackerUrl: `${matomoUrl}/api.php`,
   srcUrl: `${matomoUrl}/api.js`,
   configurations: {
-    disableCookies: true,
     setRequestMethod: 'POST'
   }
 })

@@ -88,8 +88,8 @@ const ModalUnstaking = ({
 
   async function get() {
     if (userWalletAddress !== '') {
-      const balance: BigNumber = await kacyStake.balance(pid, userWalletAddress)
-      setBalance(balance)
+      const balance = await kacyStake.availableWithdraw(pid, userWalletAddress)
+      setBalance(new BigNumber(balance.toString()))
     }
   }
 

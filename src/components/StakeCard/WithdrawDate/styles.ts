@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
 export const WithdrawDate = styled.div`
-  background: #343434;
+  background: ${theme.colors.darkGray};
   border: none;
   border-radius: ${theme.border.radius};
   color: ${theme.colors.grayDisabled};

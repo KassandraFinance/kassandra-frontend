@@ -15,6 +15,8 @@ import Header from '../../components/Header'
 import ChartProducts from '../../components/ChartProducts'
 import HeimOperations from '../../components/HeimOperations'
 import ScrollUpButton from '../../components/ScrollUpButton'
+import Breadcrumb from '../../components/Breadcrumb'
+import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
 import PoweredBy from './PoweredBy'
 
 import ahype from '../../../public/assets/ahype.svg'
@@ -99,9 +101,23 @@ const Products = ({ product }: Input) => {
     }
   }, [product])
 
+  console.log(product)
+
   return (
     <S.BackgroundProducts boxShadow={false}>
       <Header />
+      <Breadcrumb>
+        <BreadcrumbItem href="/">Home</BreadcrumbItem>
+        <BreadcrumbItem href={`/products/${product.symbol.toLowerCase()}`}>
+          Products
+        </BreadcrumbItem>
+        <BreadcrumbItem
+          href={`/products/${product.symbol.toLowerCase()}`}
+          isLastPage
+        >
+          ${product.symbol}
+        </BreadcrumbItem>
+      </Breadcrumb>
       <S.Intro introMobile={true} introDesktop={false}>
         <Image src={ahype} alt="" width={75} height={75} />
         <S.NameIndex>
@@ -131,7 +147,7 @@ const Products = ({ product }: Input) => {
               <span>
                 TVL
                 <Tippy content="The Total Value Locked is the amount invested inside the pool, or simply the total value of all tokens inside the pool combined.">
-                  <S.Tooltip>
+                  <S.Tooltip tabIndex={0}>
                     <Image src={infoGray} alt="Explanation" />
                   </S.Tooltip>
                 </Tippy>
@@ -142,7 +158,7 @@ const Products = ({ product }: Input) => {
               <span>
                 VOLUME (24h)
                 <Tippy content="Total volume of transactions in the last 24 hours. This includes new investments, withdrawals, token swaps and token transfers, which include swaps in decentralized exchanges.">
-                  <S.Tooltip>
+                  <S.Tooltip tabIndex={0}>
                     <Image src={infoGray} alt="Explanation" />
                   </S.Tooltip>
                 </Tippy>
@@ -153,7 +169,7 @@ const Products = ({ product }: Input) => {
               <span>
                 Swap fees (24h)
                 <Tippy content="Amount of fees collected in the last 24 hours when people swap tokens inside the pool. This fee is paid to all investors of the pool.">
-                  <S.Tooltip>
+                  <S.Tooltip tabIndex={0}>
                     <Image src={infoGray} alt="Explanation" />
                   </S.Tooltip>
                 </Tippy>
@@ -164,7 +180,7 @@ const Products = ({ product }: Input) => {
               <span>
                 Withdraw fees (24h)
                 <Tippy content="Amount of fees collected in the last 24 hours when people withdraw from the strategy. This fee is paid to the Kassandra Decentralized Autonomous Organization.">
-                  <S.Tooltip>
+                  <S.Tooltip tabIndex={0}>
                     <Image src={infoGray} alt="Explanation" />
                   </S.Tooltip>
                 </Tippy>

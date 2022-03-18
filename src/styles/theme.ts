@@ -34,8 +34,7 @@ export default {
     darkBlue: '#11319A',
     blue: '#0C3DDC',
     cyan: '#26DBDB',
-    darkGray: '#2E2F42',
-    lightGray: '#828282',
+    darkGray: '#343434',
     gray: '#8F8F8F',
     grayDisabled: '#bdbdbd',
     amber: '#FFBF00',
@@ -46,6 +45,7 @@ export default {
   spacings: {
     space8: '0.8rem',
     space16: '1.6rem',
+    space18: '1.8rem',
     space24: '2.4rem',
     space32: '3.2rem',
     space40: '4.0rem',

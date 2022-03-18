@@ -3,12 +3,12 @@ import BigNumber from 'bn.js'
 import Image from 'next/image'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
-import { BNtoDecimal } from '../../../utils/numerals'
-
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
-import InputTokenValue from '../../InputTokenValue'
 
+import InputTokenValue from '../../InputTokenValue'
 import SelectInput from '../../SelectInput'
+
+import { BNtoDecimal } from '../../../utils/numerals'
 
 import ahype from '../../../../public/assets/ahype.svg'
 

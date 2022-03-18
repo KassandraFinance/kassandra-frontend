@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
+import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
 import { chains, Staking } from '../../constants/tokenAddresses'
@@ -12,6 +13,8 @@ import VotingPower from '../../components/VotingPower'
 import StakeCard from '../../components/StakeCard'
 import Loading from '../../components/Loading'
 import Header from '../../components/Header'
+import Breadcrumb from '../../components/Breadcrumb'
+import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
 
 import ComingSoon from './ComingSoon'
 
@@ -19,7 +22,8 @@ import * as S from './styles'
 
 const StakeFarm = () => {
   const [loading, setLoading] = React.useState<boolean>(true)
-  
+  const [investor, setInvestor] = React.useState([false, false])
+
   const { trackCategoryPageView } = useMatomoEcommerce()
   const kacyStake = useStakingContract(Staking)
 
@@ -35,19 +39,45 @@ const StakeFarm = () => {
     }, 600)
   }, [])
 
+  React.useEffect(() => {
+    if (userWalletAddress.length === 0 || chainId !== chain.chainId) {
+      return;
+    }
+
+    const calc = async () => {
+      const res = await Promise.all([
+        kacyStake.balance(0, userWalletAddress),
+        kacyStake.balance(1, userWalletAddress),
+      ])
+
+      setInvestor([
+        res[0].gt(new BigNumber('0')),
+        res[1].gt(new BigNumber('0')),
+      ])
+    }
+
+    calc()
+  }, [userWalletAddress])
+
   return (
     <S.BackgroundStakeFarm>
       <Header />
+      <Breadcrumb>
+        <BreadcrumbItem href="/">Home</BreadcrumbItem>
+        <BreadcrumbItem href="/farm" isLastPage>
+          Stake/Farm
+        </BreadcrumbItem>
+      </Breadcrumb>
       {loading
         ? (
-          <div style={{ 
+          <div style={{
             height: 'calc(100vh - 140px)',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
             }}
           >
-            <Loading /> 
+            <Loading />
           </div>
         )  : (
           userWalletAddress.length === 0 && chainId !== chain.chainId
@@ -79,8 +109,6 @@ const StakeFarm = () => {
                           <p>EARN REWARDS AND VOTING POWER</p>
                         </S.NameStake>
                         <VotingPower
-                          getTotalVotes={kacyStake.totalVotes}
-                          getCurrentVotes={kacyStake.currentVotes}
                           userWalletAddress={userWalletAddress}
                         />
                       </S.StakeWithPowerVote>
@@ -121,6 +149,40 @@ const StakeFarm = () => {
                           stakedUntil={kacyStake.stakedUntil}
                           stakeWithVotingPower={false}
                         />
+                        {process.env.NEXT_PUBLIC_MASTER === '1' && investor[0] &&
+                          <StakeCard
+                            pid={0}
+                            symbol="kacy"
+                            balanceOf={kacyStake.balance}
+                            earned={kacyStake.earned}
+                            getReward={kacyStake.getReward}
+                            withdrawable={kacyStake.withdrawable}
+                            poolInfo={kacyStake.poolInfo}
+                            unstaking={kacyStake.unstaking}
+                            stakedUntil={kacyStake.stakedUntil}
+                            stakeWithVotingPower={false}
+                            availableWithdraw={kacyStake.availableWithdraw}
+                            lockUntil={kacyStake.lockUntil}
+                            stakeWithLockPeriod={true}
+                          />
+                        }
+                        {process.env.NEXT_PUBLIC_MASTER === '1' && investor[1] &&
+                          <StakeCard
+                            pid={1}
+                            symbol="kacy"
+                            balanceOf={kacyStake.balance}
+                            earned={kacyStake.earned}
+                            getReward={kacyStake.getReward}
+                            withdrawable={kacyStake.withdrawable}
+                            poolInfo={kacyStake.poolInfo}
+                            unstaking={kacyStake.unstaking}
+                            stakedUntil={kacyStake.stakedUntil}
+                            stakeWithVotingPower={false}
+                            availableWithdraw={kacyStake.availableWithdraw}
+                            lockUntil={kacyStake.lockUntil}
+                            stakeWithLockPeriod={true}
+                          />
+                        }
                       </S.GridStaking>
                       <S.NameStake left={true} style={{ margin: '100px 0 50px' }}>
                         <S.Name>
@@ -142,7 +204,7 @@ const StakeFarm = () => {
                           stakedUntil={kacyStake.stakedUntil}
                           stakeWithVotingPower={true}
                         />
-                        {process.env.NEXT_PUBLIC_MASTER === '1' ?  
+                        {process.env.NEXT_PUBLIC_MASTER === '1' ?
                           <StakeCard
                             pid={6}
                             symbol="ahype"
