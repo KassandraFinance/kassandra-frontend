@@ -74,7 +74,7 @@ const useConnect = () => {
   const connectToWalletConnect = React.useCallback(() => {
     if (!connector.connected) {
       connector.createSession()
-      subscribeToEvents(connector, handleAccountsChanged)
+      subscribeToEvents(connector, handleAccountsChanged, handleChainChanged)
       return
     }
   }, [])
@@ -102,7 +102,7 @@ const useConnect = () => {
     if (provider) {
       startApp(provider)
     } else {
-      ToastError('Please install MetaMask!')
+      // ToastError('Please install MetaMask!')
     }
   }, [])
 
@@ -111,9 +111,9 @@ const useConnect = () => {
       const connect = localStorage.getItem('walletconnect')
 
       if (connect) {
-        const { accounts } = JSON.parse(connect)
+        const { accounts, chainId } = JSON.parse(connect)
         handleAccountsChanged(accounts)
-
+        dispatch(actionSetChainId(chainId))
       }
     }
 
@@ -124,7 +124,7 @@ const useConnect = () => {
   return {
     connect,
     connectToWalletConnect,
-    handleDisconnected
+    handleDisconnected,
   }
 }
 
