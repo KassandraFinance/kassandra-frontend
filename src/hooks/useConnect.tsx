@@ -56,6 +56,7 @@ const useConnect = () => {
     if (connector) {
       dispatch(actionGetUserAddressWallet(''))
       connector.killSession()
+      window.location.reload()
     }
   }, [])
 
