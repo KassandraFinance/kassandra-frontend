@@ -37,6 +37,7 @@ export async function subscribeToEvents(
       // Get updated accounts and chainId
       const { accounts, chainId } = payload.params[0]
       handleAccountsChanged(accounts)
+      handleChainChanged(chainId)
     }
   )
 
