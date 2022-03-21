@@ -3,8 +3,8 @@ import { ToastSuccess } from '../components/Toastify/toast'
 
 export async function subscribeToEvents(
   connector: WalletConnect,
-  handleAccountsChanged: (accounts: any) => void,
-  handleChainChanged: (chainId: any) => void
+  handleAccountsChanged: (accounts: []) => void,
+  handleChainChanged: (chainId: number) => void
 ) {
   if (!connector) {
     return
@@ -13,7 +13,10 @@ export async function subscribeToEvents(
   // Subscribe to connection events
   connector.on(
     'connect',
-    (error: any, payload: { params: { accounts: any, chainId: any }[] }) => {
+    (
+      error: unknown,
+      payload: { params: { accounts: [], chainId: number }[] }
+    ) => {
       if (error) {
         throw error
       }
@@ -29,7 +32,10 @@ export async function subscribeToEvents(
 
   connector.on(
     'session_update',
-    (error: any, payload: { params: { accounts: any, chainId: any }[] }) => {
+    (
+      error: unknown,
+      payload: { params: { accounts: [], chainId: number }[] }
+    ) => {
       if (error) {
         throw error
       }
@@ -41,7 +47,7 @@ export async function subscribeToEvents(
     }
   )
 
-  connector.on('disconnect', (error: any, payload: any) => {
+  connector.on('disconnect', (error: unknown, payload) => {
     if (error) {
       throw error
     }
@@ -49,7 +55,10 @@ export async function subscribeToEvents(
 
   connector.on(
     'wc_sessionUpdate',
-    (error: any, payload: { params: { accounts: any, chainId: any }[] }) => {
+    (
+      error: unknown,
+      payload: { params: { accounts: [], chainId: number }[] }
+    ) => {
       if (error) {
         throw error
       }
@@ -62,7 +71,10 @@ export async function subscribeToEvents(
 
   connector.on(
     'call_request',
-    (error: any, payload: { params: { accounts: any, chainId: any }[] }) => {
+    (
+      error: unknown,
+      payload: { params: { accounts: [], chainId: number }[] }
+    ) => {
       if (error) {
         throw error
       }
