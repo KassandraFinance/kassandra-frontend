@@ -3,7 +3,8 @@ import { ToastSuccess } from '../components/Toastify/toast'
 
 export async function subscribeToEvents(
   connector: WalletConnect,
-  handleAccountsChanged: (accounts: any) => void
+  handleAccountsChanged: (accounts: []) => void,
+  handleChainChanged: (chainId: number) => void
 ) {
   if (!connector) {
     return
@@ -12,21 +13,29 @@ export async function subscribeToEvents(
   // Subscribe to connection events
   connector.on(
     'connect',
-    (error: any, payload: { params: { accounts: any, chainId: any }[] }) => {
+    (
+      error: unknown,
+      payload: { params: { accounts: [], chainId: number }[] }
+    ) => {
       if (error) {
         throw error
       }
 
       // Get provided accounts and chainId
       const { accounts, chainId } = payload.params[0]
+
       handleAccountsChanged(accounts)
+      handleChainChanged(chainId)
       ToastSuccess('Connected to Wallet Connect.')
     }
   )
 
   connector.on(
     'session_update',
-    (error: any, payload: { params: { accounts: any, chainId: any }[] }) => {
+    (
+      error: unknown,
+      payload: { params: { accounts: [], chainId: number }[] }
+    ) => {
       if (error) {
         throw error
       }
@@ -34,10 +43,11 @@ export async function subscribeToEvents(
       // Get updated accounts and chainId
       const { accounts, chainId } = payload.params[0]
       handleAccountsChanged(accounts)
+      handleChainChanged(chainId)
     }
   )
 
-  connector.on('disconnect', (error: any, payload: any) => {
+  connector.on('disconnect', (error: unknown, payload) => {
     if (error) {
       throw error
     }
@@ -45,7 +55,10 @@ export async function subscribeToEvents(
 
   connector.on(
     'wc_sessionUpdate',
-    (error: any, payload: { params: { accounts: any, chainId: any }[] }) => {
+    (
+      error: unknown,
+      payload: { params: { accounts: [], chainId: number }[] }
+    ) => {
       if (error) {
         throw error
       }
@@ -58,7 +71,10 @@ export async function subscribeToEvents(
 
   connector.on(
     'call_request',
-    (error: any, payload: { params: { accounts: any, chainId: any }[] }) => {
+    (
+      error: unknown,
+      payload: { params: { accounts: [], chainId: number }[] }
+    ) => {
       if (error) {
         throw error
       }
