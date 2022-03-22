@@ -69,6 +69,7 @@ const Form = ({
 
   const [tokenAddress2Index, setTokenAddress2Index] = React.useState<Address2Index>({})
   const [isApproved, setIsApproved] = React.useState<boolean[]>([])
+  const [walletConnect, setWalletConnect] = React.useState<any>(null)
 
   const [fees, setFees] = React.useState({
     Invest: '...',
@@ -895,6 +896,20 @@ const Form = ({
       }
     }, [tokenAddress2Index])
 
+    React.useEffect(() => {
+      const handleWallectConnect = () => {
+        const connect = localStorage.getItem('walletconnect')
+
+        if (connect) {
+          setWalletConnect(connect)
+        } else {
+          setWalletConnect(null)
+        }
+      }
+
+      handleWallectConnect()
+    }, [])
+
   return (
     <S.FormContainer onSubmit={submitAction}>
       <input type="hidden" name="approved" value={Number(isApproved[tokenInIndex] || 0)} />
@@ -1030,7 +1045,7 @@ const Form = ({
         />
       </S.TransactionSettingsOptions>
 
-      {userWalletAddress.length === 0 ? (
+      {userWalletAddress.length === 0 && walletConnect === null ? (
         <Button
           className="btn-submit"
           backgroundPrimary
@@ -1040,7 +1055,7 @@ const Form = ({
           text='Connect Wallet'
         />
       ) : (
-        chainId === poolChain.chainId ? (
+        chainId === poolChain.chainId || (walletConnect && chainId === 43114) ? (
           <Button
             className="btn-submit"
             onClick={() => setTimeout(() => clearInput(), 3000)}
@@ -1091,7 +1106,8 @@ const Form = ({
             fullWidth
             type="button"
             onClick={() => changeChain(poolChain)}
-            text={`Change to ${poolChain.chainName}`}
+            disabled={walletConnect ? true : false}
+            text={walletConnect ? `Change manually to ${poolChain.chainName}` : `Change to ${poolChain.chainName}`}
           />
         )
       )}
