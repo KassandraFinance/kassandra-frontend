@@ -21,6 +21,11 @@ export const ScrollUpButton = styled.div`
     border: 1px solid ${theme.colors.darkPurple};
     background: ${theme.colors.snow};
   }
+
+  @media (max-width: 960px) {
+    bottom: 100px;
+  }
+
   @media (max-width: 768px) {
     display: none;
   }
