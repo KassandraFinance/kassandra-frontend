@@ -6,7 +6,12 @@ import { request } from 'graphql-request'
 import { useRouter } from 'next/router'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import { SUBGRAPH_URL } from '../../../../constants/tokenAddresses'
+import {
+  GovernorAlpha,
+  SUBGRAPH_URL
+} from '../../../../constants/tokenAddresses'
+
+import useGovernance from '../../../../hooks/useGovernance'
 
 import substr from '../../../../utils/substr'
 import { BNtoDecimal } from '../../../../utils/numerals'
@@ -48,6 +53,16 @@ interface IProposalProps {
   votingPower: Big;
 }
 
+const statslibColor: { [key: string]: string } = {
+  'voting open': '#E843C4',
+  approved: '#26DBDB',
+  succeeded: '#26DBDB',
+  queued: '#FFBF00',
+  executed: '#2CE878',
+  failed: '#E8372C',
+  canceled: '#BDBDBD'
+}
+
 const Proposal = () => {
   const [proposal, setProposal] = React.useState<IProposalProps>({
     forVotes: Big(0),
@@ -64,8 +79,9 @@ const Proposal = () => {
   //   for: '',
   //   against: ''
   // })
-
+  const [proposalState, setProposalState] = React.useState<any[]>([])
   const router = useRouter()
+  const governance = useGovernance(GovernorAlpha)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
@@ -75,9 +91,12 @@ const Proposal = () => {
     })
   )
 
+  async function getProposalState(number: number) {
+    governance.stateProposals(number).then(res => setProposalState(res))
+  }
+
   React.useEffect(() => {
     if (data) {
-      console.log(data.proposal[0])
       const proposalInfo: any = {
         againstVotes: data.proposal[0].againstVotes,
         forVotes: data.proposal[0].forVotes,
@@ -85,7 +104,7 @@ const Proposal = () => {
         number: data.proposal[0].number,
         quorum: data.proposal[0].quorum,
         proposer: data.proposal[0].proposer.id,
-        votingPower: data.proposal[0].votes[0].votingPower
+        votingPower: data.proposal[0].votes[0].votingPower || 0
       }
 
       // const forVotes = BNtoDecimal(
@@ -103,7 +122,7 @@ const Proposal = () => {
       //   18,
       //   2
       // )
-
+      getProposalState(data.proposal[0].number)
       setProposal(proposalInfo)
       // setPercentageVotes({ for: forVotes, against: againstVotes })
     }
@@ -234,20 +253,22 @@ const Proposal = () => {
                   <S.TableInfoWrapper>
                     <S.DataWrapper>
                       <S.TextKey>State</S.TextKey>
-                      <S.TextValue
-                        style={{
-                          color: statslibColor[infoProposal.state.toLowerCase()]
-                        }}
-                      >
-                        {infoProposal.state.charAt(0).toUpperCase() +
-                          infoProposal.state.slice(1)}
-                      </S.TextValue>
+                      {proposalState[0] ? (
+                        <S.TextValue
+                          style={{
+                            color: statslibColor[proposalState[0].toLowerCase()]
+                          }}
+                        >
+                          {proposalState[0].charAt(0).toUpperCase() +
+                            proposalState[0].slice(1)}
+                        </S.TextValue>
+                      ) : (
+                        '...'
+                      )}
                     </S.DataWrapper>
                     <S.DataWrapper>
                       <S.TextKey>Quorum</S.TextKey>
-                      <S.TextValue>
-                        {BNtoDecimal(Big(proposal.quorum), 0, 2)}
-                      </S.TextValue>
+                      <S.TextValue>{proposal.quorum}</S.TextValue>
                     </S.DataWrapper>
                     <S.DataWrapper>
                       <S.TextKey>Total Voting Power</S.TextKey>
@@ -411,12 +432,3 @@ const stepData = [
     date: '02/22/2022'
   }
 ]
-
-const statslibColor: { [key: string]: string } = {
-  'voting open': '#E843C4',
-  approved: '#26DBDB',
-  queued: '#FFBF00',
-  executed: '#2CE878',
-  failed: '#E8372C',
-  canceled: '#BDBDBD'
-}
