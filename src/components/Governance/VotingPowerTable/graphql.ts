@@ -2,7 +2,7 @@ import { gql } from 'graphql-request'
 
 export const GET_USERS = gql`
   query {
-    users(orderBy: votingPower) {
+    users(orderDirection: desc, orderBy: votingPower, first: 5) {
       id
       votingPower
       votes {

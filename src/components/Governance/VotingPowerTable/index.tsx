@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import BigNumber from 'bn.js'
+import Big from 'big.js'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
 
@@ -15,12 +15,11 @@ import { GET_USERS } from './graphql'
 import avax from '../../../../public/assets/avalanche_social_index_logo.svg'
 
 import * as S from './styles'
-import Big from 'big.js'
 
 interface IVotingPowerRankProps {
   address: string;
   votingPower: Big;
-  // voteWeight: number;
+  voteWeight: string;
   votes: number;
   proposalsCreated: number;
 }
@@ -31,13 +30,11 @@ export const VotingPowerTable = () => {
     {
       address: '',
       votingPower: Big(-1),
-      // voteWeight: 0,
+      voteWeight: '0',
       votes: 0,
       proposalsCreated: 0
     }
   ])
-  // eslint-disable-next-line prettier/prettier
-  const [totalVotingPower, setTotalVotingPower] = React.useState<Big>(Big(-1))
 
   const { data } = useSWR([GET_USERS], query => request(SUBGRAPH_URL, query))
 
@@ -46,21 +43,26 @@ export const VotingPowerTable = () => {
       const users = data.users.map(
         (user: {
           id: string,
-          votingPower: BigNumber,
+          votingPower: string,
           votes: any[],
           proposals: any[]
         }) => {
           return {
             address: user.id,
             votingPower: user.votingPower,
-            // voteWeight: user.votingPower,
+            voteWeight: BNtoDecimal(
+              Big(user.votingPower)
+                .mul(100)
+                .div(Big(data.governances[0].totalVotingPower)),
+              18,
+              2
+            ),
             votes: user.votes.length,
             proposalsCreated: user.proposals.length
           }
         }
       )
-      setTotalVotingPower(data.governances[0].totalVotingPower)
-      setVotingPowerRank(users.reverse())
+      setVotingPowerRank(users)
     }
   }, [data])
 
@@ -84,6 +86,7 @@ export const VotingPowerTable = () => {
                 item: {
                   address: string,
                   votingPower: Big,
+                  voteWeight: string,
                   votes: number,
                   proposalsCreated: number
                 },
@@ -99,17 +102,7 @@ export const VotingPowerTable = () => {
                     <S.Td className="vote-power">
                       {BNtoDecimal(item.votingPower, 0, 2)}
                     </S.Td>
-                    <S.Td className="vote-weight">
-                      {item.votingPower && totalVotingPower
-                        ? BNtoDecimal(
-                            Big(item.votingPower)
-                              .mul(100)
-                              .div(Big(totalVotingPower)),
-                            18,
-                            2
-                          ) + '%'
-                        : '-'}
-                    </S.Td>
+                    <S.Td className="vote-weight">{item.voteWeight + '%'}</S.Td>
                     <S.Td className="proposals-created">
                       {item.proposalsCreated}
                     </S.Td>
