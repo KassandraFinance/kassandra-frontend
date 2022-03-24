@@ -69,16 +69,16 @@ const Proposal = () => {
     againstVotes: Big(0),
     proposer: '',
     number: 0,
-    quorum: '',
+    quorum: '0',
     description: '',
     votingPower: Big(0)
   })
   // eslint-disable-next-line prettier/prettier
   const [modalVotes, setModalVotes] = React.useState<ModalProps | undefined>(undefined)
-  // const [percentageVotes, setPercentageVotes] = React.useState({
-  //   for: '',
-  //   against: ''
-  // })
+  const [percentageVotes, setPercentageVotes] = React.useState({
+    for: '0',
+    against: '0'
+  })
   const [proposalState, setProposalState] = React.useState<any[]>([])
   const router = useRouter()
   const governance = useGovernance(GovernorAlpha)
@@ -104,27 +104,31 @@ const Proposal = () => {
         number: data.proposal[0].number,
         quorum: data.proposal[0].quorum,
         proposer: data.proposal[0].proposer.id,
-        votingPower: data.proposal[0].votes[0].votingPower || 0
+        votingPower: Big(data.proposal[0].forVotes).add(
+          Big(data.proposal[0].againstVotes)
+        )
       }
 
-      // const forVotes = BNtoDecimal(
-      //   Big(data.proposal[0].forVotes)
-      //     .mul(100)
-      //     .div(Big(data.proposal[0].votes.votingPower)),
-      //   18,
-      //   2
-      // )
+      if (proposalInfo.votingPower.gt(0)) {
+        const forVotes = BNtoDecimal(
+          Big(data.proposal[0].forVotes).div(proposalInfo.votingPower).mul(100),
+          18,
+          2
+        )
 
-      // const againstVotes = BNtoDecimal(
-      //   Big(data.proposal[0].againstVotes)
-      //     .mul(100)
-      //     .div(Big(data.proposal[0].votes.votingPower)),
-      //   18,
-      //   2
-      // )
+        const againstVotes = BNtoDecimal(
+          Big(data.proposal[0].againstVotes)
+            .div(proposalInfo.votingPower)
+            .mul(100),
+          18,
+          2
+        )
+
+        setPercentageVotes({ for: forVotes, against: againstVotes })
+      }
+
       getProposalState(data.proposal[0].number)
       setProposal(proposalInfo)
-      // setPercentageVotes({ for: forVotes, against: againstVotes })
     }
   }, [data])
 
@@ -191,14 +195,14 @@ const Proposal = () => {
           <S.VoteCardWrapper>
             <VoteCard
               typeVote="For"
-              percentage="73"
+              percentage={percentageVotes.for}
               proposalId={router.query.proposal}
               totalVotingPower={BNtoDecimal(proposal.forVotes, 0, 2, 2)}
               userWalletAddress={userWalletAddress}
               onClickLink={() => {
                 setModalVotes({
                   voteType: 'For',
-                  percentage: '73',
+                  percentage: `${percentageVotes.for}`,
                   totalVotingPower: `${proposal.forVotes}`,
                   totalAddresses: '30'
                 })
@@ -206,14 +210,14 @@ const Proposal = () => {
             />
             <VoteCard
               typeVote="Against"
-              percentage="27"
+              percentage={percentageVotes.against}
               proposalId={router.query.proposal}
               totalVotingPower={BNtoDecimal(proposal.againstVotes, 0, 2, 2)}
               userWalletAddress={userWalletAddress}
               onClickLink={() => {
                 setModalVotes({
                   voteType: 'Against',
-                  percentage: '27',
+                  percentage: `${percentageVotes.against}`,
                   totalVotingPower: `${proposal.againstVotes}`,
                   totalAddresses: '30'
                 })
@@ -268,7 +272,12 @@ const Proposal = () => {
                     </S.DataWrapper>
                     <S.DataWrapper>
                       <S.TextKey>Quorum</S.TextKey>
-                      <S.TextValue>{proposal.quorum}</S.TextValue>
+                      <S.TextValue>
+                        {proposal.votingPower.lt(Big(proposal.quorum))
+                          ? BNtoDecimal(proposal.votingPower, 0, 2)
+                          : BNtoDecimal(Big(proposal.quorum), 0, 2)}{' '}
+                        / {BNtoDecimal(Big(proposal.quorum), 0, 2)}
+                      </S.TextValue>
                     </S.DataWrapper>
                     <S.DataWrapper>
                       <S.TextKey>Total Voting Power</S.TextKey>
