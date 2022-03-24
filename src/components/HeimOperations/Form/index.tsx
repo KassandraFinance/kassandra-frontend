@@ -59,11 +59,8 @@ enum Approval {
   Syncing,
 }
 
-interface Approvals {
-  Withdraw: Approval[];
-  Invest: Approval[];
-  Swap: Approval[];
-}
+// eslint-disable-next-line prettier/prettier
+type Approvals = {[key in Titles]: Approval[]}
 
 const Form = ({
   poolChain,
@@ -678,7 +675,7 @@ const Form = ({
   const tokenOutIndex = tokenAddress2Index[swapOutAddress]
 
   const approvalCallback = React.useCallback(
-    (tokenSymbol: string, tokenAddress: string, tabTitle: string): TransactionCallback => {
+    (tokenSymbol: string, tokenAddress: string, tabTitle: Titles): TransactionCallback => {
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
@@ -844,7 +841,7 @@ const Form = ({
         walletAddress,
         amountUSD,
         slippageInput,
-        tabTitle
+        tabTitleInput
       // eslint-disable-next-line prettier/prettier
       } = e.target as HTMLFormElement & {
         approved: HTMLInputElement;
@@ -858,9 +855,11 @@ const Form = ({
         walletAddress: HTMLInputElement;
         amountUSD: HTMLInputElement;
         slippageInput: HTMLInputElement;
-        tabTitle: HTMLInputElement;
+        tabTitleInput: HTMLInputElement;
       }
 
+      console.log(tabTitleInput.value)
+      const tabTitle = tabTitleInput.value as Titles
       const amountInUSD = parseFloat(amountUSD.value)
       const swapInAmountVal = new BigNumber(swapInAmountInput.value)
       const swapOutAmountVal = swapOutAmountInput.value.split(',').map(
@@ -880,7 +879,7 @@ const Form = ({
               ERC20(swapInAddressVal).approve(
                 crpPoolAddress,
                 walletAddress.value,
-                approvalCallback(swapInSymbol.value, swapInAddressVal, tabTitle.value)
+                approvalCallback(swapInSymbol.value, swapInAddressVal, tabTitle)
               )
               return
             }
@@ -935,7 +934,7 @@ const Form = ({
               ERC20(swapInAddressVal).approve(
                 corePoolAddress,
                 walletAddress.value,
-                approvalCallback(swapInSymbol.value, swapInAddressVal, tabTitle.value)
+                approvalCallback(swapInSymbol.value, swapInAddressVal, tabTitle)
               )
               return
             }
@@ -989,7 +988,7 @@ const Form = ({
       <input type="hidden" name="swapOutSymbol" value={infoAHYPE[tokenOutIndex]?.symbol || ''} />
       <input type="hidden" name="walletAddress" value={userWalletAddress} />
       <input type="hidden" name="slippageInput" value={slippage.value} />
-      <input type="hidden" name="tabTitle" value={title} />
+      <input type="hidden" name="tabTitleInput" value={title} />
       <input type="hidden" name="amountUSD" value={
         title === "Invest"
           ? Big((swapOutAmount[0] || 0).toString())
