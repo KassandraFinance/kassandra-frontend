@@ -90,7 +90,7 @@ export const Overview = () => {
             </Tippy>
           </S.TextVoting>
           <S.ValueVoting>
-            {BNtoDecimal(governances.totalVotingPower, 2)}
+            {BNtoDecimal(governances.totalVotingPower, 0, 2)}
           </S.ValueVoting>
         </S.VotingDataCard>
         <S.VotingDataCard>

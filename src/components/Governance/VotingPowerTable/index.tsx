@@ -2,22 +2,26 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import BigNumber from 'bn.js'
+import useSWR from 'swr'
+import { request } from 'graphql-request'
 
-import { GovernorAlpha, Staking } from '../../../constants/tokenAddresses'
-
-import useVotingPower from '../../../hooks/useVotingPower'
-import useGovernance from '../../../hooks/useGovernance'
+import { SUBGRAPH_URL } from '../../../constants/tokenAddresses'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 import substr from '../../../utils/substr'
 
+import { GET_USERS } from './graphql'
+
 import avax from '../../../../public/assets/avalanche_social_index_logo.svg'
 
 import * as S from './styles'
+import Big from 'big.js'
 
 interface IVotingPowerRankProps {
   address: string;
-  votingPower: BigNumber;
+  votingPower: Big;
+  // voteWeight: number;
+  votes: number;
   proposalsCreated: number;
 }
 
@@ -26,47 +30,39 @@ export const VotingPowerTable = () => {
   const [votingPowerRank, setVotingPowerRank] = React.useState<Array<IVotingPowerRankProps>>([
     {
       address: '',
-      votingPower: new BigNumber(0),
+      votingPower: Big(-1),
+      // voteWeight: 0,
+      votes: 0,
       proposalsCreated: 0
     }
   ])
+  // eslint-disable-next-line prettier/prettier
+  const [totalVotingPower, setTotalVotingPower] = React.useState<Big>(Big(-1))
 
-  const governance = useGovernance(GovernorAlpha)
-  const votingPower = useVotingPower(Staking)
-
-  async function handleVotingPowerRank() {
-    const proposalAmount = await governance.proposalCount()
-    const arrayRank: IVotingPowerRankProps[] = []
-
-    for (let index = 1; index <= proposalAmount; index++) {
-      const proposal = await governance.proposals(index)
-      const votePower = await votingPower.currentVotes(proposal.proposer)
-
-      const filterProposer = arrayRank.findIndex(
-        (item: IVotingPowerRankProps) => item.address === proposal.proposer
-      )
-
-      if (filterProposer === -1) {
-        arrayRank.push({
-          address: proposal.proposer,
-          votingPower: votePower,
-          proposalsCreated: 1
-        })
-      } else {
-        arrayRank[filterProposer] = {
-          address: proposal.proposer,
-          votingPower: votePower,
-          proposalsCreated: arrayRank[filterProposer].proposalsCreated + 1
-        }
-      }
-    }
-    setVotingPowerRank(arrayRank)
-  }
+  const { data } = useSWR([GET_USERS], query => request(SUBGRAPH_URL, query))
 
   React.useEffect(() => {
-    handleVotingPowerRank()
-    setVotingPowerRank([])
-  }, [])
+    if (data) {
+      const users = data.users.map(
+        (user: {
+          id: string,
+          votingPower: BigNumber,
+          votes: any[],
+          proposals: any[]
+        }) => {
+          return {
+            address: user.id,
+            votingPower: user.votingPower,
+            // voteWeight: user.votingPower,
+            votes: user.votes.length,
+            proposalsCreated: user.proposals.length
+          }
+        }
+      )
+      setTotalVotingPower(data.governances[0].totalVotingPower)
+      setVotingPowerRank(users.reverse())
+    }
+  }, [data])
 
   return (
     <S.VotingPowerTable>
@@ -82,34 +78,46 @@ export const VotingPowerTable = () => {
           </S.Tr>
         </thead>
         <tbody>
-          {votingPowerRank.map(
-            (
-              item: {
-                address: string,
-                votingPower: BigNumber,
-                proposalsCreated: number
-              },
-              index
-            ) => (
-              <Link key={item.address} href={`/gov/address/${item.address}`}>
-                <S.Tr>
-                  <S.Td className="rank">{index + 1}</S.Td>
-                  <S.Td className="user">
-                    <Image src={avax} alt="" />
-                    <span>{substr(item.address)}</span>
-                  </S.Td>
-                  <S.Td className="vote-power">
-                    {BNtoDecimal(item.votingPower, 18, 2)}
-                  </S.Td>
-                  <S.Td className="vote-weight">-</S.Td>
-                  <S.Td className="proposals-created">
-                    {item.proposalsCreated}
-                  </S.Td>
-                  <S.Td className="proposals-voted">-</S.Td>
-                </S.Tr>
-              </Link>
-            )
-          )}
+          {votingPowerRank &&
+            votingPowerRank.map(
+              (
+                item: {
+                  address: string,
+                  votingPower: Big,
+                  votes: number,
+                  proposalsCreated: number
+                },
+                index
+              ) => (
+                <Link key={item.address} href={`/gov/address/${item.address}`}>
+                  <S.Tr>
+                    <S.Td className="rank">{index + 1}</S.Td>
+                    <S.Td className="user">
+                      <Image src={avax} alt="" />
+                      <span>{substr(item.address)}</span>
+                    </S.Td>
+                    <S.Td className="vote-power">
+                      {BNtoDecimal(item.votingPower, 0, 2)}
+                    </S.Td>
+                    <S.Td className="vote-weight">
+                      {item.votingPower && totalVotingPower
+                        ? BNtoDecimal(
+                            Big(item.votingPower)
+                              .mul(100)
+                              .div(Big(totalVotingPower)),
+                            18,
+                            2
+                          ) + '%'
+                        : '-'}
+                    </S.Td>
+                    <S.Td className="proposals-created">
+                      {item.proposalsCreated}
+                    </S.Td>
+                    <S.Td className="proposals-voted">{item.votes}</S.Td>
+                  </S.Tr>
+                </Link>
+              )
+            )}
         </tbody>
       </S.Table>
     </S.VotingPowerTable>
