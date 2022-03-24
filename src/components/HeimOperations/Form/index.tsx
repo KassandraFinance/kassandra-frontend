@@ -27,7 +27,6 @@ import { BNtoDecimal, wei } from '../../../utils/numerals'
 import waitTransaction, { MetamaskError, TransactionCallback } from '../../../utils/txWait'
 
 import Button from '../../Button'
-import ModalWalletConnect from '../../ModalWalletConnect'
 
 import InputTokens from './InputTokens'
 import InputBestValue from './InputBestValue'
@@ -46,6 +45,7 @@ interface IFormProps {
   crpPoolAddress: string;
   corePoolAddress: string;
   productCategories: string[];
+  setIsModaWallet: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 interface Address2Index {
@@ -60,6 +60,7 @@ const Form = ({
   typeAction,
   title,
   typeWithdrawChecked,
+  setIsModaWallet
 }: IFormProps) => {
   const crpPoolToken = useERC20Contract(crpPoolAddress)
   const corePool = usePoolContract(corePoolAddress)
@@ -94,7 +95,6 @@ const Form = ({
   const [swapOutAmount, setSwapOutAmount] = React.useState([new BigNumber(0)])
   const [swapOutBalance, setSwapOutBalance] = React.useState([new BigNumber(-1)])
 
-  const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
   const [priceInDollarOnWithdraw, setPriceInDollarOnWithdraw] = React.useState<string>('')
 
   const [infoAHYPE, setInfoAHYPE] = React.useState<TokenDetails[]>([])
@@ -1111,11 +1111,6 @@ const Form = ({
           />
         )
       )}
-
-      <ModalWalletConnect
-        modalOpen={isModalWallet}
-        setModalOpen={setIsModaWallet}
-      />
     </S.FormContainer >
   )
 }
