@@ -26,18 +26,8 @@ interface IProposalsListProps {
 }
 
 export const ProposalTable = () => {
-  const [proposalsList, setProposalsList] = React.useState<Array<IProposalsListProps>>([ // eslint-disable-line prettier/prettier
-    {
-      id: '',
-      number: 0,
-      targets: [],
-      values: [],
-      signatures: [],
-      startBlock: '',
-      description: '',
-      state: []
-    }
-  ])
+  // eslint-disable-next-line prettier/prettier
+  const [proposalsList, setProposalsList] = React.useState<Array<IProposalsListProps>>([])
 
   const { data } = useSWR([GET_PROPOSALS], query =>
     request(SUBGRAPH_URL, query)

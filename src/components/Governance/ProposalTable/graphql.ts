@@ -2,7 +2,7 @@ import { gql } from 'graphql-request'
 
 export const GET_PROPOSALS = gql`
   query {
-    proposals(orderBy: number) {
+    proposals(orderDirection: desc, orderBy: number, first: 5) {
       id
       number
       targets
