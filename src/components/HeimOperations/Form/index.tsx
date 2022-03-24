@@ -1129,13 +1129,15 @@ const Form = ({
             backgroundPrimary
             disabledNoEvent={
               (
+                approvals[title].length === 0
+              ) || (
+                approvals[title][tokenInIndex] > Approval.Approved
+              ) || (
                 approvals[title][tokenInIndex] === Approval.Approved && (
                   swapInAmount.toString() === "0" ||
                   swapOutAmount[0].toString() === "0" ||
                   errorMsg.length > 0
                 )
-              ) || (
-                approvals[title][tokenInIndex] > Approval.Approved
               )
             }
             fullWidth
@@ -1167,9 +1169,9 @@ const Form = ({
                 :
                   `${title}`
               :
-                approvals[title][tokenInIndex] == Approval.WaitingTransaction
+                approvals[title][tokenInIndex] === Approval.WaitingTransaction
                   ? 'Approving...'
-                  : approvals[title][tokenInIndex] == Approval.Syncing
+                  : approvals[title][tokenInIndex] === undefined || approvals[title][tokenInIndex] === Approval.Syncing
                     ? 'Syncing with Blockchain...'
                     : 'Approve'
             }
