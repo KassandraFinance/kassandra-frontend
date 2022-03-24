@@ -52,6 +52,16 @@ interface Address2Index {
   [key: string]: number;
 }
 
+enum Approval {
+  Denied,
+  Approved,
+  WaitingTransaction,
+  Syncing,
+}
+
+// eslint-disable-next-line prettier/prettier
+type Approvals = {[key in Titles]: Approval[]}
+
 const Form = ({
   poolChain,
   crpPoolAddress,
@@ -69,8 +79,12 @@ const Form = ({
   const { trackBuying, trackBought, trackCancelBuying } = useMatomoEcommerce();
 
   const [tokenAddress2Index, setTokenAddress2Index] = React.useState<Address2Index>({})
-  const [isApproved, setIsApproved] = React.useState<boolean[]>([])
   const [walletConnect, setWalletConnect] = React.useState<any>(null)
+  const [approvals, setApprovals] = React.useState<Approvals>({
+    Withdraw: [],
+    Invest: [],
+    Swap: []
+  })
 
   const [fees, setFees] = React.useState({
     Invest: '...',
@@ -210,7 +224,10 @@ const Form = ({
     }
 
     if (title === 'Withdraw') {
-      setIsApproved(Array(infoAHYPE.length + 1).fill(true))
+      setApprovals((old) => ({
+        ...old,
+        Withdraw: Array(infoAHYPE.length + 1).fill(Approval.Approved)
+      }))
       return
     }
 
@@ -226,11 +243,15 @@ const Form = ({
         )
       }
 
-      setIsApproved(await Promise.all(newApprovals))
+      const results = await Promise.all(newApprovals)
+
+      setApprovals((old) => ({
+        ...old,
+        [title]: results.map((item) => item ? Approval.Approved : Approval.Denied)
+      }))
     }
 
     setIsReload(!isReload)
-    setIsApproved([])
     calc()
   }, [chainId, title, infoAHYPE.length, userWalletAddress])
 
@@ -654,7 +675,7 @@ const Form = ({
   const tokenOutIndex = tokenAddress2Index[swapOutAddress]
 
   const approvalCallback = React.useCallback(
-    (tokenSymbol: string, tokenAddress: string): TransactionCallback => {
+    (tokenSymbol: string, tokenAddress: string, tabTitle: Titles): TransactionCallback => {
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
@@ -666,20 +687,61 @@ const Form = ({
           return
         }
 
+        setApprovals((old) => {
+          const approvals = Array.from(old[tabTitle])
+          approvals[tokenAddress2Index[tokenAddress]] = Approval.WaitingTransaction
+
+          return {
+            ...old,
+            [tabTitle]: approvals
+          }
+        })
         ToastWarning(`Waiting approval of ${tokenSymbol}...`)
         const txReceipt = await waitTransaction(txHash)
+        setApprovals((old) => {
+          const approvals = Array.from(old[tabTitle])
+          approvals[tokenAddress2Index[tokenAddress]] = Approval.Syncing
+
+          return {
+            ...old,
+            [tabTitle]: approvals
+          }
+        })
 
         if (txReceipt.status) {
-          ToastSuccess(`Approval of ${tokenSymbol} confirmed`)
-          const approved = isApproved
-          approved[tokenAddress2Index[tokenAddress]] = true
-          setIsApproved(approved)
+          ToastSuccess(`Approval of ${tokenSymbol} confirmed, wait while we sync with the latest block of the blockchain.`)
+          let approved = false;
+
+          while (!approved) {
+            approved = await ERC20(tokenAddress).allowance(crpPoolAddress, userWalletAddress);
+            await new Promise(r => setTimeout(r, 200)); // sleep
+          }
+
+          setApprovals((old) => {
+            const approvals = Array.from(old[tabTitle])
+            approvals[tokenAddress2Index[tokenAddress]] = Approval.Approved
+
+            return {
+              ...old,
+              [tabTitle]: approvals
+            }
+          })
 
           return
         }
+
+        setApprovals((old) => {
+          const approvals = Array.from(old[tabTitle])
+          approvals[tokenAddress2Index[tokenAddress]] = Approval.Denied
+
+          return {
+            ...old,
+            [tabTitle]: approvals
+          }
+        })
       }
     },
-    [isApproved, tokenAddress2Index]
+    [approvals, setApprovals, tokenAddress2Index]
   )
 
   const investCallback = React.useCallback(
@@ -778,7 +840,8 @@ const Form = ({
         swapOutSymbol,
         walletAddress,
         amountUSD,
-        slippageInput
+        slippageInput,
+        tabTitleInput
       // eslint-disable-next-line prettier/prettier
       } = e.target as HTMLFormElement & {
         approved: HTMLInputElement;
@@ -792,8 +855,11 @@ const Form = ({
         walletAddress: HTMLInputElement;
         amountUSD: HTMLInputElement;
         slippageInput: HTMLInputElement;
+        tabTitleInput: HTMLInputElement;
       }
 
+      console.log(tabTitleInput.value)
+      const tabTitle = tabTitleInput.value as Titles
       const amountInUSD = parseFloat(amountUSD.value)
       const swapInAmountVal = new BigNumber(swapInAmountInput.value)
       const swapOutAmountVal = swapOutAmountInput.value.split(',').map(
@@ -813,7 +879,7 @@ const Form = ({
               ERC20(swapInAddressVal).approve(
                 crpPoolAddress,
                 walletAddress.value,
-                approvalCallback(swapInSymbol.value, swapInAddressVal)
+                approvalCallback(swapInSymbol.value, swapInAddressVal, tabTitle)
               )
               return
             }
@@ -868,7 +934,7 @@ const Form = ({
               ERC20(swapInAddressVal).approve(
                 corePoolAddress,
                 walletAddress.value,
-                approvalCallback(swapInSymbol.value, swapInAddressVal)
+                approvalCallback(swapInSymbol.value, swapInAddressVal, tabTitle)
               )
               return
             }
@@ -912,7 +978,7 @@ const Form = ({
 
   return (
     <S.FormContainer onSubmit={submitAction}>
-      <input type="hidden" name="approved" value={Number(isApproved[tokenInIndex] || 0)} />
+      <input type="hidden" name="approved" value={Number(approvals[title][tokenInIndex] === Approval.Approved || 0)} />
       <input type="hidden" name="category" value={title} />
       <input type="hidden" name="swapInAmountInput" value={swapInAmount.toString()} />
       <input type="hidden" name="swapOutAmountInput" value={swapOutAmount.toString()} />
@@ -922,6 +988,7 @@ const Form = ({
       <input type="hidden" name="swapOutSymbol" value={infoAHYPE[tokenOutIndex]?.symbol || ''} />
       <input type="hidden" name="walletAddress" value={userWalletAddress} />
       <input type="hidden" name="slippageInput" value={slippage.value} />
+      <input type="hidden" name="tabTitleInput" value={title} />
       <input type="hidden" name="amountUSD" value={
         title === "Invest"
           ? Big((swapOutAmount[0] || 0).toString())
@@ -1061,16 +1128,22 @@ const Form = ({
             onClick={() => setTimeout(() => clearInput(), 3000)}
             backgroundPrimary
             disabledNoEvent={
-              isApproved[tokenInIndex] && (
-                swapInAmount.toString() === "0" ||
-                swapOutAmount[0].toString() === "0" ||
-                errorMsg.length > 0
+              (
+                approvals[title].length === 0
+              ) || (
+                approvals[title][tokenInIndex] > Approval.Approved
+              ) || (
+                approvals[title][tokenInIndex] === Approval.Approved && (
+                  swapInAmount.toString() === "0" ||
+                  swapOutAmount[0].toString() === "0" ||
+                  errorMsg.length > 0
+                )
               )
             }
             fullWidth
             type="submit"
             text={
-              isApproved[tokenInIndex] ?
+              approvals[title][tokenInIndex] === Approval.Approved ?
                 swapInAmount.toString() !== '0' ?
                   title === "Withdraw" ?
                     typeWithdrawChecked === "Best_value" ?
@@ -1096,7 +1169,11 @@ const Form = ({
                 :
                   `${title}`
               :
-                'Approve'
+                approvals[title][tokenInIndex] === Approval.WaitingTransaction
+                  ? 'Approving...'
+                  : approvals[title][tokenInIndex] === undefined || approvals[title][tokenInIndex] === Approval.Syncing
+                    ? 'Syncing with Blockchain...'
+                    : 'Approve'
             }
           />
         ) : (
