@@ -678,7 +678,7 @@ const Form = ({
   const tokenOutIndex = tokenAddress2Index[swapOutAddress]
 
   const approvalCallback = React.useCallback(
-    (tokenSymbol: string, tokenAddress: string): TransactionCallback => {
+    (tokenSymbol: string, tokenAddress: string, tabTitle: string): TransactionCallback => {
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
@@ -691,23 +691,23 @@ const Form = ({
         }
 
         setApprovals((old) => {
-          const approvals = Array.from(old[title])
+          const approvals = Array.from(old[tabTitle])
           approvals[tokenAddress2Index[tokenAddress]] = Approval.WaitingTransaction
 
           return {
             ...old,
-            [title]: approvals
+            [tabTitle]: approvals
           }
         })
         ToastWarning(`Waiting approval of ${tokenSymbol}...`)
         const txReceipt = await waitTransaction(txHash)
         setApprovals((old) => {
-          const approvals = Array.from(old[title])
+          const approvals = Array.from(old[tabTitle])
           approvals[tokenAddress2Index[tokenAddress]] = Approval.Syncing
 
           return {
             ...old,
-            [title]: approvals
+            [tabTitle]: approvals
           }
         })
 
@@ -721,12 +721,12 @@ const Form = ({
           }
 
           setApprovals((old) => {
-            const approvals = Array.from(old[title])
+            const approvals = Array.from(old[tabTitle])
             approvals[tokenAddress2Index[tokenAddress]] = Approval.Approved
 
             return {
               ...old,
-              [title]: approvals
+              [tabTitle]: approvals
             }
           })
 
@@ -734,17 +734,17 @@ const Form = ({
         }
 
         setApprovals((old) => {
-          const approvals = Array.from(old[title])
+          const approvals = Array.from(old[tabTitle])
           approvals[tokenAddress2Index[tokenAddress]] = Approval.Denied
 
           return {
             ...old,
-            [title]: approvals
+            [tabTitle]: approvals
           }
         })
       }
     },
-    [approvals, tokenAddress2Index]
+    [approvals, setApprovals, tokenAddress2Index]
   )
 
   const investCallback = React.useCallback(
@@ -843,7 +843,8 @@ const Form = ({
         swapOutSymbol,
         walletAddress,
         amountUSD,
-        slippageInput
+        slippageInput,
+        tabTitle
       // eslint-disable-next-line prettier/prettier
       } = e.target as HTMLFormElement & {
         approved: HTMLInputElement;
@@ -857,6 +858,7 @@ const Form = ({
         walletAddress: HTMLInputElement;
         amountUSD: HTMLInputElement;
         slippageInput: HTMLInputElement;
+        tabTitle: HTMLInputElement;
       }
 
       const amountInUSD = parseFloat(amountUSD.value)
@@ -878,7 +880,7 @@ const Form = ({
               ERC20(swapInAddressVal).approve(
                 crpPoolAddress,
                 walletAddress.value,
-                approvalCallback(swapInSymbol.value, swapInAddressVal)
+                approvalCallback(swapInSymbol.value, swapInAddressVal, tabTitle.value)
               )
               return
             }
@@ -933,7 +935,7 @@ const Form = ({
               ERC20(swapInAddressVal).approve(
                 corePoolAddress,
                 walletAddress.value,
-                approvalCallback(swapInSymbol.value, swapInAddressVal)
+                approvalCallback(swapInSymbol.value, swapInAddressVal, tabTitle.value)
               )
               return
             }
@@ -987,6 +989,7 @@ const Form = ({
       <input type="hidden" name="swapOutSymbol" value={infoAHYPE[tokenOutIndex]?.symbol || ''} />
       <input type="hidden" name="walletAddress" value={userWalletAddress} />
       <input type="hidden" name="slippageInput" value={slippage.value} />
+      <input type="hidden" name="tabTitle" value={title} />
       <input type="hidden" name="amountUSD" value={
         title === "Invest"
           ? Big((swapOutAmount[0] || 0).toString())
