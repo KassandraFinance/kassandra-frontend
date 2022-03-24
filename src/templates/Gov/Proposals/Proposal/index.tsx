@@ -1,12 +1,17 @@
 import React from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
+import Big from 'big.js'
+import useSWR from 'swr'
+import { request } from 'graphql-request'
+import { useRouter } from 'next/router'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import useStakingContract from '../../../../hooks/useStakingContract'
-import { Staking } from '../../../../constants/tokenAddresses'
+import { SUBGRAPH_URL } from '../../../../constants/tokenAddresses'
 
 import substr from '../../../../utils/substr'
+import { BNtoDecimal } from '../../../../utils/numerals'
+
+import { GET_PROPOSAL } from './graphql'
 
 import ExternalLink from '../../../../components/ExternalLink'
 import Header from '../../../../components/Header'
@@ -25,8 +30,6 @@ import proposalCompleteIcon from '../../../../../public/assets/iconGradient/prop
 import proposalWaitingIcon from '../../../../../public/assets/iconGradient/proposal-waiting.svg'
 
 import * as S from './styles'
-import { InferencePriority } from 'typescript'
-import { useRouter } from 'next/router'
 
 export type ModalProps = {
   voteType: string,
@@ -35,14 +38,76 @@ export type ModalProps = {
   totalAddresses: string
 }
 
+interface IProposalProps {
+  forVotes: Big;
+  againstVotes: Big;
+  proposer: string;
+  number: number;
+  quorum: string;
+  description: string;
+  votingPower: Big;
+}
+
 const Proposal = () => {
-  const [modalVotes, setModalVotes] = React.useState<ModalProps | undefined>(
-    undefined
-  )
+  const [proposal, setProposal] = React.useState<IProposalProps>({
+    forVotes: Big(0),
+    againstVotes: Big(0),
+    proposer: '',
+    number: 0,
+    quorum: '',
+    description: '',
+    votingPower: Big(0)
+  })
+  // eslint-disable-next-line prettier/prettier
+  const [modalVotes, setModalVotes] = React.useState<ModalProps | undefined>(undefined)
+  // const [percentageVotes, setPercentageVotes] = React.useState({
+  //   for: '',
+  //   against: ''
+  // })
 
   const router = useRouter()
-  const kacyStake = useStakingContract(Staking)
+
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+
+  const { data } = useSWR([GET_PROPOSAL], query =>
+    request(SUBGRAPH_URL, query, {
+      number: Number(router.query.proposal)
+    })
+  )
+
+  React.useEffect(() => {
+    if (data) {
+      console.log(data.proposal[0])
+      const proposalInfo: any = {
+        againstVotes: data.proposal[0].againstVotes,
+        forVotes: data.proposal[0].forVotes,
+        description: data.proposal[0].description,
+        number: data.proposal[0].number,
+        quorum: data.proposal[0].quorum,
+        proposer: data.proposal[0].proposer.id,
+        votingPower: data.proposal[0].votes[0].votingPower
+      }
+
+      // const forVotes = BNtoDecimal(
+      //   Big(data.proposal[0].forVotes)
+      //     .mul(100)
+      //     .div(Big(data.proposal[0].votes.votingPower)),
+      //   18,
+      //   2
+      // )
+
+      // const againstVotes = BNtoDecimal(
+      //   Big(data.proposal[0].againstVotes)
+      //     .mul(100)
+      //     .div(Big(data.proposal[0].votes.votingPower)),
+      //   18,
+      //   2
+      // )
+
+      setProposal(proposalInfo)
+      // setPercentageVotes({ for: forVotes, against: againstVotes })
+    }
+  }, [data])
 
   return (
     <>
@@ -52,14 +117,17 @@ const Proposal = () => {
           <BreadcrumbItem href="/">Home</BreadcrumbItem>
           <BreadcrumbItem href="/gov">Vote</BreadcrumbItem>
           <BreadcrumbItem href={router.asPath} isLastPage>
-            Proposal 05
+            Proposal {router.query.proposal}
           </BreadcrumbItem>
         </Breadcrumb>
         <S.VoteContent>
           <S.IntroDesktopScreen>
             <S.TitleWrapper>
               <S.TitleAndAuthor>
-                <TitleSection image={proposals} title={'Proposta 01'} />
+                <TitleSection
+                  image={proposals}
+                  title={`Proposal ${router.query.proposal}`}
+                />
                 <S.ProposeAuthorCard>
                   <p>Proposed by</p>
                   <Image
@@ -67,9 +135,7 @@ const Proposal = () => {
                     width={32}
                     height={32}
                   />
-                  <span>
-                    {substr('0xF84Db1d1868B03EaD9e799F55B4d1529687B691f')}
-                  </span>
+                  <span>{substr(`${proposal.proposer}`)}</span>
                 </S.ProposeAuthorCard>
               </S.TitleAndAuthor>
               <S.VotingPowerAndLink>
@@ -81,7 +147,10 @@ const Proposal = () => {
 
           <S.IntroMobileScreen>
             <S.TitleWrapper>
-              <TitleSection image={proposals} title={'Proposta 01'} />
+              <TitleSection
+                image={proposals}
+                title={`Proposal ${router.query.proposal}`}
+              />
               <S.CardTitleWrapper>
                 <S.VotingPowerAndLink>
                   <VotingPower userWalletAddress={userWalletAddress} />
@@ -94,9 +163,7 @@ const Proposal = () => {
                     width={24}
                     height={24}
                   />
-                  <span>
-                    {substr('0xF84Db1d1868B03EaD9e799F55B4d1529687B691f')}
-                  </span>
+                  <span>{substr(`${proposal.proposer}`)}</span>
                 </S.ProposeAuthorCard>
               </S.CardTitleWrapper>
             </S.TitleWrapper>
@@ -106,12 +173,14 @@ const Proposal = () => {
             <VoteCard
               typeVote="For"
               percentage="73"
-              totalVotingPower="1,723,124"
+              proposalId={router.query.proposal}
+              totalVotingPower={BNtoDecimal(proposal.forVotes, 0, 2, 2)}
+              userWalletAddress={userWalletAddress}
               onClickLink={() => {
                 setModalVotes({
                   voteType: 'For',
                   percentage: '73',
-                  totalVotingPower: '1,723,124',
+                  totalVotingPower: `${proposal.forVotes}`,
                   totalAddresses: '30'
                 })
               }}
@@ -119,12 +188,14 @@ const Proposal = () => {
             <VoteCard
               typeVote="Against"
               percentage="27"
-              totalVotingPower="1,723,124"
+              proposalId={router.query.proposal}
+              totalVotingPower={BNtoDecimal(proposal.againstVotes, 0, 2, 2)}
+              userWalletAddress={userWalletAddress}
               onClickLink={() => {
                 setModalVotes({
                   voteType: 'Against',
                   percentage: '27',
-                  totalVotingPower: '1,723,124',
+                  totalVotingPower: `${proposal.againstVotes}`,
                   totalAddresses: '30'
                 })
               }}
@@ -174,11 +245,15 @@ const Proposal = () => {
                     </S.DataWrapper>
                     <S.DataWrapper>
                       <S.TextKey>Quorum</S.TextKey>
-                      <S.TextValue>{infoProposal.quorum}</S.TextValue>
+                      <S.TextValue>
+                        {BNtoDecimal(Big(proposal.quorum), 0, 2)}
+                      </S.TextValue>
                     </S.DataWrapper>
                     <S.DataWrapper>
                       <S.TextKey>Total Voting Power</S.TextKey>
-                      <S.TextValue>{infoProposal.totalVotingPower}</S.TextValue>
+                      <S.TextValue>
+                        {BNtoDecimal(proposal.votingPower, 0, 2)}
+                      </S.TextValue>
                     </S.DataWrapper>
                     <S.DataWrapper>
                       <S.TextKey>Created</S.TextKey>
