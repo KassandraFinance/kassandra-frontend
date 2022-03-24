@@ -319,8 +319,8 @@ const StakeCard = ({
 
   return (
     <>
-      <S.StakeCard>
-        <S.BorderGradient stakeWithVotingPower={stakeWithVotingPower}>
+      <S.BorderGradient stakeWithVotingPower={stakeWithVotingPower}>
+        <S.StakeCard>
           <S.InterBackground stakeWithVotingPower={stakeWithVotingPower}>
             {symbol === 'kacy' ? (
               <img src="/assets/logo-kacy-stake.svg" alt="" />
@@ -579,8 +579,8 @@ const StakeCard = ({
               )}
             </S.ButtonContainer>
           </S.InfosStaking>
-        </S.BorderGradient>
-      </S.StakeCard>
+        </S.StakeCard>
+      </S.BorderGradient>
       <ModalStaking
         modalOpen={isModalStaking}
         setModalOpen={setIsModalStaking}
