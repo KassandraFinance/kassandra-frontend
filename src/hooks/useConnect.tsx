@@ -50,12 +50,9 @@ const useConnect = () => {
   }, [])
 
   const getChainId = React.useCallback(async () => {
-    // const id = await window.ethereum.request({ method: 'eth_chainId' })
     const id = await web3.eth.getChainId()
-
     const convertedChainId = await web3.utils.numberToHex(String(id))
-    // console.log(web3.utils.numberToHex(String(chainId)))
-    // console.log('Metamask', id)
+
     dispatch(actionSetChainId(convertedChainId))
   }, [])
 
