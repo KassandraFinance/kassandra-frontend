@@ -9,12 +9,12 @@ import PieChart from './PieChart'
 
 import * as S from './styles'
 
-export interface IStateProposalOverview {
+export interface IStateProposalListProps {
   stateProposal: string;
   proposalVote: number;
 }
 
-const ProposalArray = [
+const proposalArray = [
   { stateProposal: 'Succeeded', proposalVote: 0 },
   { stateProposal: 'Active', proposalVote: 0 },
   { stateProposal: 'Failed', proposalVote: 0 }
@@ -22,7 +22,7 @@ const ProposalArray = [
 
 const ProposalOverview = () => {
   // eslint-disable-next-line prettier/prettier
-  const [stateProposalsList, setStateProposalsList] = React.useState<IStateProposalOverview[]>(ProposalArray)
+  const [stateProposalsList, setStateProposalsList] = React.useState<IStateProposalListProps[]>(proposalArray)
   const [proposalTotal, setProposalTotal] = React.useState(0)
   const [isLoadingProposal, setIsLoadingProposal] = React.useState(true)
 
@@ -35,30 +35,30 @@ const ProposalOverview = () => {
     await Promise.all(
       Array(Number(proposalAmount))
         .fill(0)
-        .map(async (Prop, index) => {
+        .map(async (item, index) => {
           const proposal = await governance.stateProposals(index + 1)
           const proposalState = proposal[0]
 
           switch (proposalState) {
             case 'Succeeded':
-              ProposalArray[0].proposalVote += 1
+              proposalArray[0].proposalVote += 1
               break
             case 'Active':
-              ProposalArray[1].proposalVote += 1
+              proposalArray[1].proposalVote += 1
               break
             case 'Failed':
-              ProposalArray[2].proposalVote += 1
+              proposalArray[2].proposalVote += 1
               break
             default:
               break
           }
         })
     )
-    setStateProposalsList(ProposalArray)
+    setStateProposalsList(proposalArray)
     setIsLoadingProposal(false)
   }
 
-  const handleVerificProposalName = (value: string) => {
+  const handleCheckProposalName = (value: string) => {
     if (value === 'Active') {
       return (value = 'Voting Open')
     } else {
@@ -75,7 +75,7 @@ const ProposalOverview = () => {
     <S.ProposalOverview>
       {isLoadingProposal ? (
         <S.ProposalOverviewIsLoading>
-          <Loading />
+          <Loading marginTop={0} />
         </S.ProposalOverviewIsLoading>
       ) : (
         <>
@@ -87,7 +87,7 @@ const ProposalOverview = () => {
                 ProposalState={ProposalState.stateProposal}
               >
                 <span>
-                  {handleVerificProposalName(ProposalState.stateProposal)}
+                  {handleCheckProposalName(ProposalState.stateProposal)}
                 </span>
                 <span>{ProposalState.proposalVote}</span>
               </S.ProposalStateList>
@@ -95,7 +95,7 @@ const ProposalOverview = () => {
           </S.Status>
           <S.ProposalOverviewGraphic>
             <PieChart
-              ProposalData={stateProposalsList}
+              proposalData={stateProposalsList}
               proposalTotal={proposalTotal}
             />
           </S.ProposalOverviewGraphic>

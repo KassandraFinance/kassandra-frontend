@@ -34,10 +34,6 @@ export const ProposalOverviewIsLoading = styled.div`
     width: 30rem;
     height: 12.8rem;
   }
-
-  div {
-    margin-top: 0;
-  }
 `
 
 export const Status = styled.ul`

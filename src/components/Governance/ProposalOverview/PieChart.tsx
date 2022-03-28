@@ -1,24 +1,26 @@
 import React from 'react'
 import { PieChart, Pie, Cell } from 'recharts'
 
-import { IStateProposalOverview } from '.'
+import { IStateProposalListProps } from '.'
 
 import * as S from './styles'
 
 interface ProposalDataProps {
-  ProposalData: IStateProposalOverview[];
+  proposalData: IStateProposalListProps[];
   proposalTotal: number;
 }
 
-const Index = ({ ProposalData, proposalTotal }: ProposalDataProps) => {
-  const width = 128
-  const innerRadius = 48
-  const outerRadius = 62
+const chartProps = {
+  width: 128,
+  innerRadius: 48,
+  outerRadius: 62
+}
 
+const Chart = ({ proposalData, proposalTotal }: ProposalDataProps) => {
   // eslint-disable-next-line prettier/prettier
   const [proposalStateData, setProposalStateData] = React.useState([{ name: '', value: 0, fill: '' }])
 
-  const handleGraphicColorCheck = (ProspData: IStateProposalOverview) => {
+  const handleCheckChartColor = (ProspData: IStateProposalListProps) => {
     switch (ProspData.stateProposal) {
       case 'Failed':
         return '#E8372C'
@@ -34,25 +36,29 @@ const Index = ({ ProposalData, proposalTotal }: ProposalDataProps) => {
   React.useEffect(() => {
     setProposalStateData([])
 
-    ProposalData.map(ProspData => {
+    proposalData.map(ProspData => {
       setProposalStateData(prevState => [
         ...prevState,
         {
           name: ProspData.stateProposal,
           value: ProspData.proposalVote,
-          fill: handleGraphicColorCheck(ProspData)
+          fill: handleCheckChartColor(ProspData)
         }
       ])
     })
-  }, [ProposalData])
+  }, [proposalData])
 
   return (
     <>
-      <PieChart className="pie-chart" width={width} height={width}>
+      <PieChart
+        className="pie-chart"
+        width={chartProps.width}
+        height={chartProps.width}
+      >
         <Pie
           data={proposalStateData}
-          innerRadius={innerRadius}
-          outerRadius={outerRadius}
+          innerRadius={chartProps.innerRadius}
+          outerRadius={chartProps.outerRadius}
           paddingAngle={0}
           stroke="null"
           dataKey="value"
@@ -70,4 +76,4 @@ const Index = ({ ProposalData, proposalTotal }: ProposalDataProps) => {
   )
 }
 
-export default Index
+export default Chart
