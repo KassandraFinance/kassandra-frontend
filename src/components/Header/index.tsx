@@ -74,7 +74,7 @@ const Header = () => {
               Stake/Farm
             </S.MenuLink>
           </Link>
-          {process.env.NEXT_PUBLIC_URL_API === '2' || process.env.NODE_ENV ? (
+          {process.env.NEXT_PUBLIC_VOTE === '1' ? (
             <DropdownInvest
               nameOnHeader="vote"
               linkPage={[
