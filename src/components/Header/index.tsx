@@ -27,7 +27,8 @@ const Header = () => {
   const [isModalLogout, setIsModalLogout] = React.useState<boolean>(false)
   // const [isModalLanguages, setIsModalLanguages] = React.useState<boolean>(false)
   // eslint-disable-next-line prettier/prettier
-  const [isModalSocialMedia, setIsModalSocialMedia] = React.useState<boolean>(false)
+  const [isModalSocialMedia, setIsModalSocialMedia] =
+    React.useState<boolean>(false)
 
   const { trackEvent } = useMatomo()
 
@@ -44,16 +45,18 @@ const Header = () => {
   return (
     <>
       <S.Wrapper id="top">
-        <Link href="/" passHref>
-          <S.LogoWrapper>
+        <S.LogoWrapper>
+          <Link href="/" passHref>
             <a className="logo-desktop">
               <Image src={logoKassandra} alt="Kassandra" />
             </a>
+          </Link>
+          <Link href="/" passHref>
             <a className="logo-ipad">
               <Image src={kacy64} alt="Kassandra" />
             </a>
-          </S.LogoWrapper>
-        </Link>
+          </Link>
+        </S.LogoWrapper>
         <S.Menu>
           <Link href="/" passHref>
             <a className="logo-mobile">
