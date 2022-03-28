@@ -71,13 +71,13 @@ const StakeFarm = () => {
       {loading
         ? (
           <div style={{
-            height: 'calc(100vh - 140px)',
+            height: '100vh',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
             }}
           >
-            <Loading />
+            <Loading marginTop={0}/>
           </div>
         )  : (
           userWalletAddress.length === 0 && chainId !== chain.chainId
