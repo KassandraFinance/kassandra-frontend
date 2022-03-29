@@ -42,8 +42,6 @@ const DelegateVotingPower = ({
   setCurrentModal,
   setModalOpen
 }: IDelegateVotingPowerProps) => {
-  const { poolInfo, balance } = useStakingContract(Staking)
-  const { delegateVote } = useVotingPower(Staking)
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const [optionsOpen, setOptionsOpen] = React.useState<boolean>(false)
   const [receiverAddress, setReceiverAddress] = React.useState<string>('')
@@ -54,6 +52,9 @@ const DelegateVotingPower = ({
     votingPower: ''
   })
   const [poolData, setPoolData] = React.useState<any>([])
+
+  const { poolInfo, balance } = useStakingContract(Staking)
+  const { delegateVote, delegateAllVotes } = useVotingPower(Staking)
 
   const handlePoolInfo = async () => {
     const [poolInfoOne, poolInfoTwo, poolInfoThree] = await Promise.all([
@@ -93,40 +94,77 @@ const DelegateVotingPower = ({
     handlePoolInfo()
   }, [setModalOpen, setCurrentModal])
 
-  const delegateCallback = React.useCallback((): TransactionCallback => {
-    return async (error: MetamaskError, txHash: string) => {
-      if (error) {
-        if (error.code === 4001) {
-          ToastError(`${error}`)
+  const delegateCallback = React.useCallback(
+    (receiverAddress: string): TransactionCallback => {
+      return async (error: MetamaskError, txHash: string) => {
+        if (error) {
+          if (error.code === 4001) {
+            ToastError(`Delegate cancelled`)
+            return
+          }
+
+          ToastError(`Error`)
           return
         }
 
-        ToastError(`Error`)
-        return
-      }
+        ToastWarning(`Confirming delegate to ${receiverAddress}...`)
+        const txReceipt = await waitTransaction(txHash)
 
-      ToastWarning(`Confirming delegate to ${receiverAddress}...`)
-      const txReceipt = await waitTransaction(txHash)
-
-      if (txReceipt.status) {
-        ToastSuccess(`Delegate confirmed to ${receiverAddress}`)
-        setCurrentModal('manage')
-        setModalOpen(false)
-        return
+        if (txReceipt.status) {
+          ToastSuccess(`Delegate confirmed to ${receiverAddress}`)
+          setCurrentModal('manage')
+          setModalOpen(false)
+          return
+        }
       }
-    }
-  }, [])
+    },
+    []
+  )
+  const delegateAllCallback = React.useCallback(
+    (receiverAddress: string): TransactionCallback => {
+      return async (error: MetamaskError, txHash: string) => {
+        if (error) {
+          if (error.code === 4001) {
+            ToastError(`Delegate cancelled`)
+            return
+          }
+
+          ToastError(`Error`)
+          return
+        }
+
+        ToastWarning(`Confirming delegate to ${receiverAddress}...`)
+        const txReceipt = await waitTransaction(txHash)
+
+        if (txReceipt.status) {
+          ToastSuccess(`Delegate confirmed to ${receiverAddress}`)
+          setCurrentModal('manage')
+          setModalOpen(false)
+          return
+        }
+      }
+    },
+    []
+  )
 
   const handleDelegateVotes = async () => {
     await delegateVote(
       delegateSelected?.pid,
       receiverAddress,
-      delegateCallback()
+      delegateCallback(receiverAddress)
     )
   }
 
   const handleDelegateAllVoting = async () => {
-    console.log('Oi')
+    if (receiverAddress === '') {
+      ToastError('Invalid address')
+      return
+    }
+
+    await delegateAllVotes(
+      receiverAddress,
+      delegateAllCallback(receiverAddress)
+    )
   }
 
   return (

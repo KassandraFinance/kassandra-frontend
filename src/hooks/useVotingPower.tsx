@@ -30,17 +30,24 @@ const useVotingPower = (address: string) => {
     }
 
     const delegateVote = async (pid: number, address: string, callback: TransactionCallback) => {
-      const test =  await contract.methods.delegate(pid, address)
+      await contract.methods.delegate(pid, address)
         .send({ from: userWalletAddress },
           callback
         )
-      console.log(test)
+    }
+
+    const delegateAllVotes = async (address: string, callback: TransactionCallback) => {
+      await contract.methods.delegateAll(address)
+        .send({ from: userWalletAddress },
+          callback
+        )
     }
 
     return {
       currentVotes,
       totalVotes,
-      delegateVote
+      delegateVote,
+      delegateAllVotes
     }
   }, [contract])
 }
