@@ -13,6 +13,10 @@ export const GET_PROPOSAL = gql`
       }
       votes {
         votingPower
+        support
+        voter {
+          id
+        }
       }
     }
   }
