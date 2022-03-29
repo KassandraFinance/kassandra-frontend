@@ -164,6 +164,11 @@ const wrapperModifiers = {
             background: ${type === 'For' ? '#2ce878' : '#e8372c'};
             color: #211426;
           }
+
+          &:focus {
+            outline: 2px solid ${theme.colors.darkBlue};
+            outline-offset: 2px;
+          }
         `
 
       default:
