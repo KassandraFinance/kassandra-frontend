@@ -13,7 +13,7 @@ export type ButtonProps = {
   backgroundPrimary?: boolean;
   backgroundSecondary?: boolean;
   backgroundBlack?: boolean;
-  backgroundVote?: 'against' | 'favor' | 'vote-open' | 'disable';
+  backgroundVote?: {voteState: 'against' | 'favor' | 'vote-open' | 'disable', type: string};
   disabledNoEvent?: boolean;
   icon?: JSX.Element;
   as?: React.ElementType;
@@ -28,7 +28,7 @@ const Button: React.ForwardRefRenderFunction<S.WrapperProps, ButtonProps> = (
     fullWidth = false,
     backgroundPrimary = false,
     backgroundSecondary = false,
-    backgroundVote = undefined,
+    backgroundVote = {voteState: undefined, type: undefined},
     backgroundBlack = false,
     disabledNoEvent = false,
     text,

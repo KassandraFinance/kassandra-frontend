@@ -81,7 +81,10 @@ const VoteCard = ({
         <S.ActionWrapper>
           <Button
             text={typeVote === 'For' ? 'Vote in Favor' : 'Vote Against'}
-            backgroundVote={checkVoteButton(userVote, proposalState, typeVote)}
+            backgroundVote={{
+              voteState: checkVoteButton(userVote, proposalState, typeVote),
+              type: typeVote
+            }}
             onClick={handleVote}
           />
           <ExternalLink

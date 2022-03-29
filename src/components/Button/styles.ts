@@ -132,7 +132,10 @@ const wrapperModifiers = {
     }
   `,
 
-  backgroundVote: (theme: DefaultTheme, voteState: string) => {
+  backgroundVote: (
+    theme: DefaultTheme,
+    { voteState, type }: { voteState: string, type: string }
+  ) => {
     switch (voteState) {
       case 'against':
         return css`
@@ -155,16 +158,11 @@ const wrapperModifiers = {
         return css`
           background: ${theme.colors.blue};
 
-          transition: all 300ms;
-
+          transition: all 500ms;
           &:hover,
           &:focus {
-            background: ${theme.colors.darkBlue};
-          }
-
-          &:focus {
-            outline: 2px solid ${theme.colors.darkBlue};
-            outline-offset: 2px;
+            background: ${type === 'For' ? '#2ce878' : '#e8372c'};
+            color: #211426;
           }
         `
 
@@ -225,7 +223,7 @@ export const Wrapper =
     ${!!backgroundSecondary && wrapperModifiers.backgroundSecondary(theme)};
     ${!!backgroundBlack && wrapperModifiers.backgroundBlack(theme)};
     ${disabledNoEvent && wrapperModifiers.disabledNoEvent(theme)};
-    ${backgroundVote !== undefined &&
+    ${backgroundVote?.type !== undefined &&
     wrapperModifiers.backgroundVote(theme, backgroundVote)};
   `}
 `
