@@ -10,8 +10,6 @@ import { actionSetChainId } from '../store/modules/chainId/actions'
 import { actionGetUserAddressWallet } from '../store/modules/userWalletAddress/actions'
 import { subscribeToEvents } from '../utils/walletConnect'
 
-import web3 from '../utils/web3'
-
 // eslint-disable-next-line prettier/prettier
 declare let window: {
   ethereum: any,
@@ -45,15 +43,13 @@ const useConnect = () => {
   }, [])
 
   const getAccounts = React.useCallback(async () => {
-    const accounts = await web3.eth.getAccounts()
+    const accounts = await window.ethereum.request({ method: 'eth_accounts' })
     handleAccountsChanged(accounts)
   }, [])
 
   const getChainId = React.useCallback(async () => {
-    const id = await web3.eth.getChainId()
-    const convertedChainId = await web3.utils.numberToHex(String(id))
-
-    dispatch(actionSetChainId(convertedChainId))
+    const id = await window.ethereum.request({ method: 'eth_chainId' })
+    dispatch(actionSetChainId(id))
   }, [])
 
   const handleDisconnected = React.useCallback(() => {
