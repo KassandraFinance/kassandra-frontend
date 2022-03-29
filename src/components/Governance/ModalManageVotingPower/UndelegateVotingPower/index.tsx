@@ -12,7 +12,7 @@ import logo from '../../../../../public/assets/logo-64.svg'
 import * as S from '../styles'
 
 export interface IDateProps {
-  image: any;
+  pid: number;
   nameToken: string;
   withdrawDelay: string;
   votingPower: string;
@@ -28,7 +28,7 @@ const UndelegateVotingPower = ({
   const [optionsOpen, setOptionsOpen] = React.useState<boolean>(false)
   const [undelegateSelected, setUndelegateSelected] =
     React.useState<IDateProps>({
-      image: '',
+      pid: 0,
       nameToken: '',
       withdrawDelay: '',
       votingPower: ''
@@ -47,7 +47,7 @@ const UndelegateVotingPower = ({
           <S.Selected onClick={() => setOptionsOpen(!optionsOpen)}>
             <S.Option>
               <S.Name>
-                <Image src={undelegateSelected.image} alt="" />
+                <Image src={logo} alt="" />
                 <S.WithdrawDelay>
                   <p>{undelegateSelected.nameToken}</p>
                   <span>

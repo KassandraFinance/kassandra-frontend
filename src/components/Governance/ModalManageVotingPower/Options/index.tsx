@@ -9,7 +9,7 @@ import logo from '../../../../../public/assets/logo-64.svg'
 interface IOptionsProps {
   optionsOpen: boolean;
   setOptionsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  data: [];
+  data: any;
   delegateSelected: IDateProps;
   setDelegateSelected: React.Dispatch<React.SetStateAction<IDateProps>>;
   undelegate?: boolean;
