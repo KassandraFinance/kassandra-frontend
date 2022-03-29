@@ -4,10 +4,12 @@ import { IDateProps } from '../DelegateVotingPower'
 
 import * as S from '../styles'
 
+import logo from '../../../../../public/assets/logo-64.svg'
+
 interface IOptionsProps {
   optionsOpen: boolean;
   setOptionsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  data: any;
+  data: [];
   delegateSelected: IDateProps;
   setDelegateSelected: React.Dispatch<React.SetStateAction<IDateProps>>;
   undelegate?: boolean;
@@ -27,7 +29,7 @@ const Options = ({
         onClick={() => {
           if (delegateSelected.nameToken !== '') {
             setDelegateSelected({
-              image: '',
+              pid: 0,
               nameToken: '',
               withdrawDelay: '',
               votingPower: ''
@@ -48,7 +50,7 @@ const Options = ({
             }}
           >
             <S.Name>
-              <Image src={item.image} alt="" />
+              <Image src={logo} alt="" />
               <S.WithdrawDelay>
                 <p>{item.nameToken}</p>
                 <span>{item.withdrawDelay} days withdraw delay</span>
