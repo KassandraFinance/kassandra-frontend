@@ -1,7 +1,7 @@
 import React from 'react'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
-import detectEthereumProvider from '@metamask/detect-provider'
+// import detectEthereumProvider from '@metamask/detect-provider'
 
 import useConnect from '../../hooks/useConnect'
 
@@ -23,19 +23,19 @@ const ModalWalletConnect = ({
     setModalOpen(false)
   }
 
-  React.useEffect(() => {
-    const checkEthereumProvider = async () => {
-      const provider = await detectEthereumProvider()
+  // React.useEffect(() => {
+  //   const checkEthereumProvider = async () => {
+  //     const provider = await detectEthereumProvider()
 
-      if (provider) {
-        setHasEthereumProvider(true)
-      } else {
-        setHasEthereumProvider(false)
-      }
-    }
+  //     if (provider) {
+  //       setHasEthereumProvider(true)
+  //     } else {
+  //       setHasEthereumProvider(false)
+  //     }
+  //   }
 
-    checkEthereumProvider()
-  }, [modalOpen])
+  //   checkEthereumProvider()
+  // }, [modalOpen])
 
   return (
     <>

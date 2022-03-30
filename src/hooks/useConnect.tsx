@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import detectEthereumProvider from '@metamask/detect-provider'
+// import detectEthereumProvider from '@metamask/detect-provider'
 import WalletConnect from '@walletconnect/client'
 import QRCodeModal from '@walletconnect/qrcode-modal'
 import React from 'react'
@@ -84,32 +84,32 @@ const useConnect = () => {
     }
   }, [])
 
-  const startApp = React.useCallback(async (provider) => {
-    if (connector.connected) {
-      return
-    }
+  // const startApp = React.useCallback(async (provider) => {
+  //   if (connector.connected) {
+  //     return
+  //   }
 
-    if (provider !== window.ethereum) {
-      ToastError('Do you have multiple wallets installed?')
-      return
-    }
+  //   if (provider !== window.ethereum) {
+  //     ToastError('Do you have multiple wallets installed?')
+  //     return
+  //   }
 
-    getAccounts()
-    getChainId()
+  //   getAccounts()
+  //   getChainId()
 
-    window.ethereum.on('accountsChanged', handleAccountsChanged)
-    window.ethereum.on('chainChanged', handleChainChanged)
-  }, [])
+  //   window.ethereum.on('accountsChanged', handleAccountsChanged)
+  //   window.ethereum.on('chainChanged', handleChainChanged)
+  // }, [])
 
-  const hasEthereumProvider = React.useCallback(async () => {
-    const provider = await detectEthereumProvider()
+  // const hasEthereumProvider = React.useCallback(async () => {
+  //   const provider = await detectEthereumProvider()
 
-    if (provider) {
-      startApp(provider)
-    } else {
-      // ToastError('Please install MetaMask!')
-    }
-  }, [])
+  //   if (provider) {
+  //     startApp(provider)
+  //   } else {
+  //     // ToastError('Please install MetaMask!')
+  //   }
+  // }, [])
 
   React.useEffect(() => {
     const handleWallectConnect = () => {
@@ -118,12 +118,13 @@ const useConnect = () => {
       if (connect) {
         const { accounts, chainId } = JSON.parse(connect)
         handleAccountsChanged(accounts)
+        // subscribeToEvents(provider, handleAccountsChanged, handleChainChanged)
         dispatch(actionSetChainId(chainId))
       }
     }
 
     handleWallectConnect()
-    hasEthereumProvider()
+    // hasEthereumProvider()
   }, [])
 
   return {
