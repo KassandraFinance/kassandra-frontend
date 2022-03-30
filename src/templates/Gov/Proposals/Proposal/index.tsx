@@ -1,9 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
-import Big from 'big.js'
-import useSWR from 'swr'
-import { request } from 'graphql-request'
-import { useRouter } from 'next/router'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
 import {
@@ -11,11 +6,16 @@ import {
   SUBGRAPH_URL
 } from '../../../../constants/tokenAddresses'
 
+import Image from 'next/image'
+import { useRouter } from 'next/router'
+import useSWR from 'swr'
 import useGovernance from '../../../../hooks/useGovernance'
 
+import Big from 'big.js'
 import substr from '../../../../utils/substr'
 import { BNtoDecimal } from '../../../../utils/numerals'
 
+import { request } from 'graphql-request'
 import { GET_PROPOSAL } from './graphql'
 
 import ExternalLink from '../../../../components/ExternalLink'
@@ -36,14 +36,50 @@ import proposalWaitingIcon from '../../../../../public/assets/iconGradient/propo
 
 import * as S from './styles'
 
-export type ModalProps = {
-  voteType: string,
-  percentage: string,
-  totalVotingPower: string,
-  totalAddresses: string
+interface IRequestDataProposal {
+  proposal: [
+    {
+      number: number,
+      description: string,
+      forVotes: Big,
+      againstVotes: Big,
+      quorum: string,
+      proposer: {
+        id: string
+      },
+      votes: [
+        {
+          votingPower: Big,
+          support: boolean,
+          voter: {
+            id: string
+          }
+        }
+      ]
+    }
+  ];
 }
 
-interface IProposalProps {
+export interface ModalProps {
+  voteType: string;
+  percentage: string;
+  totalVotingPower: string;
+  totalAddresses: string;
+}
+
+export interface IUserVotedProps {
+  voted: boolean;
+  support: boolean | null;
+}
+
+export interface IVotesProps {
+  support: boolean | null;
+  voter: {
+    id: string
+  };
+}
+
+export interface IProposalProps {
   forVotes: Big;
   againstVotes: Big;
   proposer: string;
@@ -74,18 +110,25 @@ const Proposal = () => {
     votingPower: Big(0)
   })
   // eslint-disable-next-line prettier/prettier
-  const [modalVotes, setModalVotes] = React.useState<ModalProps | undefined>(undefined)
+  const [modalVotes, setModalVotes] = React.useState<ModalProps | undefined>(
+    undefined
+  )
   const [percentageVotes, setPercentageVotes] = React.useState({
     for: '0',
     against: '0'
   })
-  const [proposalState, setProposalState] = React.useState<any[]>([])
+  const [proposalState, setProposalState] = React.useState<string[]>([])
+  const [userVoted, setUserVoted] = React.useState<IUserVotedProps>({
+    voted: false,
+    support: null
+  })
+
   const router = useRouter()
   const governance = useGovernance(GovernorAlpha)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
-  const { data } = useSWR([GET_PROPOSAL], query =>
+  const { data } = useSWR<IRequestDataProposal>([GET_PROPOSAL], query =>
     request(SUBGRAPH_URL, query, {
       number: Number(router.query.proposal)
     })
@@ -97,7 +140,7 @@ const Proposal = () => {
 
   React.useEffect(() => {
     if (data) {
-      const proposalInfo: any = {
+      const proposalInfo: IProposalProps = {
         againstVotes: data.proposal[0].againstVotes,
         forVotes: data.proposal[0].forVotes,
         description: data.proposal[0].description,
@@ -125,6 +168,17 @@ const Proposal = () => {
         )
 
         setPercentageVotes({ for: forVotes, against: againstVotes })
+      }
+
+      const userAlreadyVoted = data.proposal[0].votes.find(
+        (vote: IVotesProps) => vote.voter.id === userWalletAddress
+      )
+
+      if (userAlreadyVoted) {
+        setUserVoted({
+          voted: true,
+          support: userAlreadyVoted.support
+        })
       }
 
       getProposalState(data.proposal[0].number)
@@ -199,6 +253,8 @@ const Proposal = () => {
               proposalId={router.query.proposal}
               totalVotingPower={BNtoDecimal(proposal.forVotes, 0, 2, 2)}
               userWalletAddress={userWalletAddress}
+              proposalState={proposalState[0]}
+              userVote={userVoted}
               onClickLink={() => {
                 setModalVotes({
                   voteType: 'For',
@@ -214,6 +270,8 @@ const Proposal = () => {
               proposalId={router.query.proposal}
               totalVotingPower={BNtoDecimal(proposal.againstVotes, 0, 2, 2)}
               userWalletAddress={userWalletAddress}
+              proposalState={proposalState[0]}
+              userVote={userVoted}
               onClickLink={() => {
                 setModalVotes({
                   voteType: 'Against',
@@ -375,6 +433,7 @@ const Proposal = () => {
     </>
   )
 }
+
 export default Proposal
 
 const descriptions = [
