@@ -1,13 +1,8 @@
 import styled from 'styled-components'
 import theme from '../../styles/theme'
 
-interface IHeimOperationsContainerProps {
-  inputChecked: string;
-  typeWithdrawChecked: string;
-}
-
 // eslint-disable-next-line prettier/prettier
-export const HeimOperationsContainer = styled.div<IHeimOperationsContainerProps>`
+export const HeimOperationsContainer = styled.div`
   position: -webkit-sticky;
   position: sticky;
   top: 0.8rem;
@@ -25,14 +20,14 @@ export const HeimOperationsContainer = styled.div<IHeimOperationsContainerProps>
   }
 
   @media (max-width: 960px) {
-    max-width: 100%;
-    margin: 0 0 8rem;
+    display: none;
   }
 `
 
 export const SelectOperator = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
 
   background: rgba(31, 31, 31, 0.72);
   border-top-left-radius: 1.2rem;
@@ -71,7 +66,7 @@ export const Label = styled.label<ILabelProps>`
     font-size: 1.3rem;
   }
 
-  @media (max-width: 330px) {
+  @media (max-width: 360px) {
     padding: 1.6rem;
     font-size: ${theme.font.sizes.font12};
   }
@@ -85,6 +80,10 @@ export const TypeWithdraw = styled.div`
 
   background: rgba(31, 31, 31, 0.72);
   border-bottom: 0.2rem solid rgba(255, 255, 255, 0.15);
+
+  @media (max-width: 360px) {
+    padding: 1.5rem 2rem;
+  }
 `
 
 export const TypeRadio = styled.div`
@@ -112,6 +111,10 @@ export const TypeRadio = styled.div`
         font-size: ${theme.font.sizes.font16};
         line-height: ${theme.font.sizes.font16};
 
+        @media (max-width: 360px) {
+          font-size: ${theme.font.sizes.font12};
+        }
+
         &:before {
           content: '';
 
@@ -132,8 +135,8 @@ export const TypeRadio = styled.div`
           content: '';
 
           position: absolute;
-          top: 3px;
-          left: 3px;
+          top: 0.3rem;
+          left: 0.3rem;
 
           display: block;
           width: 1rem;
