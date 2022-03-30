@@ -4,6 +4,9 @@ import { GovernorAlpha } from '../../../constants/tokenAddresses'
 
 import useGovernance from '../../../hooks/useGovernance'
 
+import Button from '../../Button'
+import ExternalLink from '../../ExternalLink'
+
 import waitTransaction, {
   MetamaskError,
   TransactionCallback
@@ -11,8 +14,8 @@ import waitTransaction, {
 
 import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
-import Button from '../../Button'
-import ExternalLink from '../../ExternalLink'
+import { checkVoteButton } from '../../../utils/checkVoteButton'
+import { IUserVotedProps } from '../../../templates/Gov/Proposals/Proposal'
 
 import * as S from './styles'
 
@@ -22,6 +25,8 @@ interface IVoteCardProps {
   proposalId: string | string[] | undefined;
   totalVotingPower: string;
   userWalletAddress: string;
+  proposalState: string;
+  userVote: IUserVotedProps;
   onClickLink: React.MouseEventHandler;
 }
 
@@ -31,11 +36,15 @@ const VoteCard = ({
   proposalId,
   totalVotingPower,
   userWalletAddress,
+  proposalState,
+  userVote,
   onClickLink
 }: IVoteCardProps) => {
   const governance = useGovernance(GovernorAlpha)
 
   function handleVote() {
+    if (userVote.voted || proposalState !== 'Active') return
+
     governance.castVote(
       Number(proposalId),
       typeVote === 'For' ? true : false,
@@ -76,8 +85,11 @@ const VoteCard = ({
         <S.ActionWrapper>
           <Button
             text={typeVote === 'For' ? 'Vote in Favor' : 'Vote Against'}
-            backgroundSecondary
-            onClick={() => handleVote()}
+            backgroundVote={{
+              voteState: checkVoteButton(userVote, proposalState, typeVote),
+              type: typeVote
+            }}
+            onClick={handleVote}
           />
           <ExternalLink
             text="Check all voters"
