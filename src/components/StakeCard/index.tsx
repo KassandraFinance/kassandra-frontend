@@ -21,7 +21,6 @@ import {
   SUBGRAPH_URL,
   HeimCRPPOOL
 } from '../../constants/tokenAddresses'
-
 import usePriceLP from '../../hooks/usePriceLP'
 import { PoolInfo } from '../../hooks/useStakingContract'
 import useERC20Contract, { ERC20 } from '../../hooks/useERC20Contract'
@@ -36,13 +35,11 @@ import { BNtoDecimal } from '../../utils/numerals'
 import { GET_INFO_AHYPE } from './graphql'
 
 import Button from '../Button'
-import ModalStaking from '../ModalStaking'
-import ModalUnstaking from '../ModalUnstaking'
 import ModalRequestUnstake from '../ModalRequestUnstake'
 import ModalCancelUnstake from '../ModalCancelUnstake'
 import ModalWalletConnect from '../ModalWalletConnect'
 import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
-
+import ModalStakeAndWithdraw from '../modals/ModalStakeAndWithdraw'
 import Details from './Details'
 import YourStake from './YourStake'
 import WithdrawDate from './WithdrawDate'
@@ -118,8 +115,8 @@ const StakeCard = ({
   lockUntil,
   stakeWithLockPeriod = false
 }: IStakingProps) => {
-  const [isModalStaking, setIsModalStaking] = React.useState<boolean>(false)
-  const [isModalUnstaking, setIsModalUnstaking] = React.useState<boolean>(false)
+  const [isModalStake, setIsModalStake] = React.useState<boolean>(false)
+  const [stakeTransaction, setStakeTransaction] = React.useState<string>('')
   const [isModalCancelUnstake, setIsModalCancelUnstake] =
     React.useState<boolean>(false)
   const [isModalRequestUnstake, setIsModalRequestUnstake] =
@@ -137,7 +134,8 @@ const StakeCard = ({
 
   const [lockPeriod, setLockPeriod] = React.useState(0)
   // eslint-disable-next-line prettier/prettier
-  const [currentAvailableWithdraw, setCurrentAvailableWithdraw] = React.useState(Big(-1))
+  const [currentAvailableWithdraw, setCurrentAvailableWithdraw] =
+    React.useState(Big(-1))
 
   const [withdrawDelay, setWithdrawDelay] = React.useState<number>(0)
   const [kacyEarned, setKacyEarned] = React.useState<BigNumber>(
@@ -446,11 +444,11 @@ const StakeCard = ({
                         kacyPrice={priceLPToken.kacy}
                       />
                       <Button
+                        type="button"
+                        text="Claim"
                         size="claim"
                         backgroundSecondary
                         disabledNoEvent={kacyEarned.toString() === '0'}
-                        type="button"
-                        text="Claim"
                         // fullWidth
                         onClick={() => getReward(pid, rewardClaimCallback())}
                       />
@@ -460,10 +458,10 @@ const StakeCard = ({
                     {infoStaked.unstake ? (
                       <>
                         <Button
-                          size="huge"
-                          backgroundSecondary
                           type="button"
                           text="Cancel withdraw"
+                          size="huge"
+                          backgroundSecondary
                           fullWidth
                           onClick={() => setIsModalCancelUnstake(true)}
                         />
@@ -480,29 +478,32 @@ const StakeCard = ({
                           infoStaked.withdrawDelay !== '0' &&
                           infoStaked.withdrawable ? (
                             <Button
-                              size="huge"
-                              backgroundSecondary
                               type="button"
                               text={`Stake ${staked[pid]}`}
+                              size="huge"
+                              backgroundSecondary
                               fullWidth
                               onClick={() => setIsModalCancelUnstake(true)}
                             />
                           ) : (
                             <Button
-                              size="huge"
-                              backgroundSecondary
                               type="button"
                               text={`Stake ${staked[pid]}`}
+                              size="huge"
+                              backgroundSecondary
                               fullWidth
-                              onClick={() => setIsModalStaking(true)}
+                              onClick={() => {
+                                setIsModalStake(true)
+                                setStakeTransaction('staking')
+                              }}
                             />
                           )
                         ) : (
                           <Button
-                            size="huge"
-                            backgroundSecondary
                             type="button"
                             text="Approve Contract"
+                            size="huge"
+                            backgroundSecondary
                             fullWidth
                             onClick={handleApproveKacy}
                           />
@@ -511,26 +512,29 @@ const StakeCard = ({
                         (infoStaked.yourStake.toString() !== '0' &&
                           infoStaked.withdrawable) ? (
                           <Button
+                            type="button"
+                            text="Withdraw"
                             size="huge"
                             backgroundBlack
                             disabledNoEvent={
                               stakeWithLockPeriod &&
                               currentAvailableWithdraw.lte(0)
                             }
-                            type="button"
-                            text="Withdraw"
                             fullWidth
-                            onClick={() => setIsModalUnstaking(true)}
+                            onClick={() => {
+                              setIsModalStake(true)
+                              setStakeTransaction('unstaking')
+                            }}
                           />
                         ) : (
                           <Button
+                            type="button"
+                            text="Request withdraw"
                             size="huge"
                             backgroundBlack
                             disabledNoEvent={
                               infoStaked.yourStake.toString() === '0'
                             }
-                            type="button"
-                            text="Request withdraw"
                             fullWidth
                             onClick={() => setIsModalRequestUnstake(true)}
                           />
@@ -541,10 +545,10 @@ const StakeCard = ({
                 </>
               ) : (
                 <Button
-                  size="huge"
-                  backgroundSecondary
                   type="button"
                   text="Connect Wallet"
+                  size="huge"
+                  backgroundSecondary
                   fullWidth
                   onClick={() => setIsModaWallet(true)}
                 />
@@ -580,28 +584,23 @@ const StakeCard = ({
           </S.InfosStaking>
         </S.StakeCard>
       </S.BorderGradient>
-      <ModalStaking
-        modalOpen={isModalStaking}
-        setModalOpen={setIsModalStaking}
-        pid={pid}
-        decimals={decimals}
-        stakingToken={infoStaked.stakingToken}
-        productCategories={productCategories}
-        symbol={staked[pid]}
-      />
-      <ModalUnstaking
-        modalOpen={isModalUnstaking}
-        setModalOpen={setIsModalUnstaking}
-        pid={pid}
-        decimals={decimals}
-        stakingToken={infoStaked.stakingToken}
-        productCategories={productCategories}
-        symbol={staked[pid]}
-      />
+      {isModalStake && (
+        <ModalStakeAndWithdraw
+          modalOpen={isModalStake}
+          setModalOpen={setIsModalStake}
+          pid={pid}
+          decimals={decimals}
+          stakingToken={infoStaked.stakingToken}
+          productCategories={productCategories}
+          symbol={staked[pid]}
+          stakeTransaction={stakeTransaction}
+          setStakeTransaction={setStakeTransaction}
+        />
+      )}
       <ModalCancelUnstake
         modalOpen={isModalCancelUnstake}
         setModalOpen={setIsModalCancelUnstake}
-        setIsModalStaking={setIsModalStaking}
+        setIsModalStaking={setIsModalStake}
         pid={pid}
         staking={infoStaked.withdrawDelay !== '0' && infoStaked.withdrawable}
         symbol={symbol}

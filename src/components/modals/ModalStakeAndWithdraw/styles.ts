@@ -1,118 +1,128 @@
 import styled from 'styled-components'
-import theme from '../../styles/theme'
+import theme from '../../../styles/theme'
 
 export const Backdrop = styled.div`
-  background-color: rgba(0, 0, 0, 0.6);
-
   position: fixed;
   top: 0;
   left: 0;
 
   width: 100vw;
   height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.6);
+
   z-index: 9;
 `
 
 interface IBorderGradientProps {
-  modalOpen: boolean;
   stakeInKacy: boolean;
+  unstaking: string;
 }
 
 // eslint-disable-next-line prettier/prettier
-export const BorderGradient = styled.div<IBorderGradientProps>`
-  display: ${props => (props.modalOpen ? 'block' : 'none')};
-  background: ${props =>
-    props.stakeInKacy
-      ? 'linear-gradient(-45deg, #E843C4 0%, #F79640 100%)'
-      : `linear-gradient(-45deg, ${theme.colors.blue} 0%, ${theme.colors.cyan} 100%)`};
-  border-radius: ${theme.border.radius};
-  
-  width: 300px;
-  max-height: 100%;
-  padding: 1px;
-
+export const BorderGradient =
+  styled.div <
+  IBorderGradientProps >
+  `
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 
+  width: 30rem;
+  max-height: 100%;
+  padding: 0.1rem;
+
+  background: ${props =>
+    props.unstaking === 'unstaking'
+      ? 'rgba(255, 255, 255, 0.4)'
+      : props.stakeInKacy
+      ? 'linear-gradient(-45deg, #E843C4 0%, #F79640 100%)'
+      : `linear-gradient(-45deg, ${theme.colors.blue} 0%, ${theme.colors.cyan} 100%)`};
+  border-radius: ${theme.border.radius};
+
   z-index: 20;
 `
 
 export const BackgroundBlack = styled.div`
-  background-color: #1f2937;
-  border-radius: ${theme.border.radius};
   width: 100%;
   height: 100%;
+
+  background-color: #1f2937;
+  border-radius: ${theme.border.radius};
 `
 
 export const InterBackground = styled.div`
-  background-color: rgba(31, 31, 31, 0.72);
-  border-radius: 6px 6px 0 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   width: 100%;
-  height: 72px;
-  padding: 0 16px;
+  height: 7.2rem;
+  padding: 0 1.6rem;
+
+  background-color: rgba(31, 31, 31, 0.72);
+  border-top-left-radius: 0.6rem;
+  border-top-right-radius: 0.6rem;
+  border-bottom: 0.1rem solid rgba(255, 255, 255, 0.4);
 
   span {
     font-size: ${theme.font.sizes.font18};
-    line-height: 18px;
+    line-height: 1.8rem;
   }
 
   button {
+    padding: 0.2rem;
+
     background-color: transparent;
     border: none;
-    padding: 2px;
     cursor: pointer;
   }
 `
 
 export const Main = styled.div`
-  padding: 20px;
+  padding: 2rem;
 `
 
 export const Amount = styled.div`
-  background-color: rgba(31, 31, 31, 0.72);
-  border-radius: 10px;
+  position: relative;
+
+  padding: 1.6rem;
 
   text-align: right;
 
-  padding: 16px;
-  position: relative;
+  background-color: rgba(31, 31, 31, 0.72);
+  border-radius: 1rem;
 
   span {
-    color: ${theme.colors.amber};
-    font-size: 14px;
     display: block;
-    margin: 0 0 -4px;
+    margin: 0 0 -0.4rem;
+
+    color: ${theme.colors.amber};
+    font-size: 1.4rem;
   }
 
   h5 {
     color: #bdbdbd;
     font-weight: ${theme.font.weight.normal};
     font-size: ${theme.font.sizes.font12};
-    line-height: 12px;
+    line-height: 1.2rem;
   }
 
   input {
-    background-color: transparent;
-    border: none;
+    max-width: 100%;
+
     color: #fff;
     font-size: ${theme.font.sizes.font20};
     font-weight: 500;
     text-align: right;
 
-    max-width: 100%;
+    background-color: transparent;
+    border: none;
 
     outline: none;
 
     @media (max-width: 380px) {
-      font-size: 22px;
+      font-size: 2.2rem;
     }
     @media (max-width: 350px) {
       font-size: ${theme.font.sizes.font20};
@@ -137,87 +147,94 @@ export const ButtonContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  margin: 2rem 0 2.4rem;
 
-  margin: 20px 0 24px;
   button {
-    border: 1px solid ${theme.colors.snow};
-    border-radius: 3px;
-    background: transparent;
+    width: 5.6rem;
+    padding: 0.3rem;
+
     color: #fff;
-    line-height: 12px;
+    line-height: 1.2rem;
     font-size: ${theme.font.sizes.font12};
     font-weight: ${theme.font.weight.normal};
     text-transform: uppercase;
 
-    width: 56px;
-    padding: 3px;
+    border: 0.1rem solid ${theme.colors.snow};
+    border-radius: 0.3rem;
+    background: transparent;
 
     cursor: pointer;
     transition: 100ms;
+
     &:hover {
-      background: ${theme.colors.snow};
       color: #000;
+
+      background: ${theme.colors.snow};
     }
     &:active {
-      background: ${theme.colors.snow};
       color: #000;
+
+      background: ${theme.colors.snow};
     }
   }
 `
 
 export const ConfirmButton = styled.button`
-  border-radius: ${theme.border.radius};
-  font-size: ${theme.font.sizes.font16};
-  line-height: 14px;
-  font-weight: ${theme.font.weight.light};
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   width: 100%;
-  height: 46px;
-  cursor: pointer;
+  height: 4.6rem;
+  margin-bottom: 1.6rem;
 
-  border: none;
+  font-size: ${theme.font.sizes.font16};
+  line-height: 1.4rem;
+  font-weight: ${theme.font.weight.light};
+
   background: ${theme.colors.blue};
+  border: none;
+  border-radius: ${theme.border.radius};
   color: ${theme.colors.snow};
 
-  margin-bottom: 16px;
+  cursor: pointer;
   transition: 200ms;
+
   &:hover:enabled {
     background: ${theme.colors.darkBlue};
   }
+
   &:disabled {
-    cursor: not-allowed;
-    background: #4f4f4f;
     color: #bdbdbd;
+
+    background: #4f4f4f;
+
+    cursor: not-allowed;
   }
 `
 
 export const GetKacy = styled.a`
-  border-radius: ${theme.border.radius};
-  font-size: ${theme.font.sizes.font16};
-  line-height: 14px;
-  font-weight: ${theme.font.weight.normal};
-
-  text-decoration: none;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   width: 100%;
-  height: 40px;
-  cursor: pointer;
-
-  background: transparent;
-  border: 1px solid ${theme.colors.cyan};
+  height: 4rem;
 
   color: #fff;
+  font-size: ${theme.font.sizes.font16};
+  line-height: 1.4rem;
+  font-weight: ${theme.font.weight.normal};
+  text-decoration: none;
+
+  background: transparent;
+  border: 0.1rem solid ${theme.colors.cyan};
+  border-radius: ${theme.border.radius};
+
+  cursor: pointer;
   transition: 200ms;
+
   &:hover {
-    background: ${theme.colors.cyan};
     color: #000;
+
+    background: ${theme.colors.cyan};
   }
 `
