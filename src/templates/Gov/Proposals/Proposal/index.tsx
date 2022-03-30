@@ -40,7 +40,7 @@ export type ModalProps = {
   voteType: string,
   percentage: string,
   totalVotingPower: string,
-  totalAddresses: string
+  checkAllVoterModal: boolean
 }
 
 interface IProposalProps {
@@ -74,11 +74,19 @@ const Proposal = () => {
     votingPower: Big(0)
   })
   // eslint-disable-next-line prettier/prettier
-  const [modalVotes, setModalVotes] = React.useState<ModalProps | undefined>(undefined)
+  const [modalVotes, setModalVotes] = React.useState<ModalProps>({
+    voteType: '',
+    percentage: '',
+    totalVotingPower: '',
+    checkAllVoterModal: false
+  })
+  const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [percentageVotes, setPercentageVotes] = React.useState({
     for: '0',
     against: '0'
   })
+
+  console.log('percentageVotes', percentageVotes)
   const [proposalState, setProposalState] = React.useState<any[]>([])
   const router = useRouter()
   const governance = useGovernance(GovernorAlpha)
@@ -203,9 +211,11 @@ const Proposal = () => {
                 setModalVotes({
                   voteType: 'For',
                   percentage: `${percentageVotes.for}`,
-                  totalVotingPower: `${proposal.forVotes}`,
-                  totalAddresses: '30'
+                  // eslint-disable-next-line prettier/prettier
+                  totalVotingPower: `${BNtoDecimal(proposal.forVotes, 0, 2, 2)}`,
+                  checkAllVoterModal: true
                 })
+                setIsModalOpen(true)
               }}
             />
             <VoteCard
@@ -218,9 +228,11 @@ const Proposal = () => {
                 setModalVotes({
                   voteType: 'Against',
                   percentage: `${percentageVotes.against}`,
-                  totalVotingPower: `${proposal.againstVotes}`,
-                  totalAddresses: '30'
+                  // eslint-disable-next-line prettier/prettier
+                  totalVotingPower: `${BNtoDecimal(proposal.againstVotes,0, 2, 2)}`,
+                  checkAllVoterModal: false
                 })
+                setIsModalOpen(true)
               }}
             />
           </S.VoteCardWrapper>
@@ -362,14 +374,14 @@ const Proposal = () => {
           </S.ProposalStatus>
         </S.ProposalInfo>
       </S.BackgroundVote>
-      {modalVotes && (
+      {isModalOpen && (
         <ModalVotes
           voteType={modalVotes.voteType}
           percentage={modalVotes.percentage}
           totalVotingPower={modalVotes.totalVotingPower}
-          totalAddresses={modalVotes.totalAddresses}
-          modalOpen={!!modalVotes}
-          onClose={() => setModalVotes(undefined)}
+          checkAllVoterModal={modalVotes.checkAllVoterModal}
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
         />
       )}
     </>

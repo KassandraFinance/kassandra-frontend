@@ -4,6 +4,16 @@ import theme from '../../../styles/theme'
 export const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
 
+  animation: OpenModalVotes 500ms ease;
+  @keyframes OpenModalVotes {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
   position: fixed;
   top: 0;
   left: 0;
@@ -33,6 +43,16 @@ export const Container = styled.div<IBorderGradientProps>`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 21;
+
+  animation: OpenModalVotes 500ms ease;
+  @keyframes OpenModalVotes {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 
 export const Close = styled.div`
@@ -77,31 +97,11 @@ export const TotalVotes = styled.h3`
   font-weight: ${theme.font.weight.bold};
   color: ${theme.colors.snow};
 `
-export const VoteBar = styled.div`
-  background-color: #8b8b8b;
-  border-radius: 0.1rem;
-  display: block;
 
+export const VoteBar = styled.div`
   margin-top: 1.6rem;
   width: 100%;
-  min-width: 100px;
   height: 0.4rem;
-`
-export const VotesFavor = styled.div`
-  background-color: #0f0;
-  float: left;
-  padding: 0px;
-  margin: 0px;
-  width: 0px;
-  height: 10px;
-`
-export const VotesAgainst = styled.div`
-  background-color: #f00;
-  float: left;
-  padding: 0px;
-  margin: 0px;
-  width: 0px;
-  height: 10px;
 `
 
 export const TableContainer = styled.div`
@@ -157,6 +157,10 @@ export const UserName = styled.td`
   display: flex;
   align-items: flex-start;
   margin: 1.6rem 0;
+
+  img {
+    border-radius: 100%;
+  }
 `
 export const UserVote = styled.td`
   font-size: ${theme.font.sizes.font16};
@@ -169,4 +173,50 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   padding: 0 0 2.4rem;
+`
+interface IVoteBarProps {
+  VotingState: string;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const ProgressBar = styled.progress<IVoteBarProps>`
+  width: 100%;
+  height: 0.6rem;
+  border-radius: 3rem;
+  border: none;
+
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+
+  /* animation: progressBar 1.5s ease-in-out;
+  @keyframes progressBar {
+    0% { left:0; width: 0; }
+    100% { left:0; width: 100%; }
+  } */
+
+  ::-webkit-progress-bar {
+    border-radius: 2rem;
+  }
+  ::-webkit-progress-value {
+    border-radius: 3rem;
+    background: ${props => {
+      if (props.VotingState === 'For') {
+        return '#0f0'
+      } else {
+        return '#f00'
+      }
+    }};
+  }
+
+  ::-moz-progress-bar {
+    border-radius: 3rem;
+    background: ${props => {
+      if (props.VotingState === 'For') {
+        return '#0f0'
+      } else {
+        return '#f00'
+      }
+    }};
+  }
 `

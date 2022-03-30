@@ -1,7 +1,17 @@
 import React from 'react'
 import Image from 'next/image'
+import router from 'next/router'
+import useSWR from 'swr'
+import BigNumber from 'bn.js'
+import { request } from 'graphql-request'
+
+import { GET_MODALVOTES } from './graphql'
+import { SUBGRAPH_URL } from '../../../constants/tokenAddresses'
 
 import substr from '../../../utils/substr'
+import { BNtoDecimal } from '../../../utils/numerals'
+
+import ImageAddress from '../../../../public/assets/team/jony-reis.png'
 
 import Button from '../../Button'
 
@@ -11,104 +21,107 @@ interface IModalVotes {
   voteType: string;
   percentage: string;
   totalVotingPower: string;
-  totalAddresses: string;
-  modalOpen: boolean;
-  onClose: () => void;
+  checkAllVoterModal: boolean;
+  isModalOpen: boolean;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+interface IModalVotesList {
+  support: boolean;
+  voter: {
+    id: string
+  };
+  votingPower: BigNumber;
 }
 
 const ModalVotes = ({
-  modalOpen,
-  onClose,
+  isModalOpen,
+  setIsModalOpen,
   voteType,
   percentage,
   totalVotingPower,
-  totalAddresses
+  checkAllVoterModal
 }: IModalVotes) => {
+  // eslint-disable-next-line prettier/prettier
+  const [modalVotesList, setModalVotesList] = React.useState<IModalVotesList[]>([])
+
   function handleCloseModal() {
-    onClose()
+    setIsModalOpen(false)
   }
 
-  const userList = [
-    {
-      address: '0xF84Db1d1868B03EaD9e799F55B4d1529687B691f',
-      image: '/static/images/avatar-1.png',
-      votingPower: '123,458.789 '
-    },
-    {
-      address: '0xF84Db1d1868B03EaD9e799F55B4d1529687B691f',
-      image: '/static/images/avatar-1.png',
-      votingPower: '123,458.789 '
-    },
-    {
-      address: '0xF84Db1d1868B03EaD9e799F55B4d1529687B691f',
-      image: '/static/images/avatar-1.png',
-      votingPower: '123,458.789 '
-    },
-    {
-      address: '0xF84Db1d1868B03EaD9e799F55B4d1529687B691f',
-      image: '/static/images/avatar-1.png',
-      votingPower: '123,458.789 '
-    },
-    {
-      address: '0xF84Db1d1868B03EaD9e799F55B4d1529687B691f',
-      image: '/static/images/avatar-1.png',
-      votingPower: '123,458.789 '
-    },
-    {
-      address: '0xF84Db1d1868B03EaD9e799F55B4d1529687B691f',
-      image: '/static/images/avatar-1.png',
-      votingPower: '123,458.789 '
-    },
-    {
-      address: '0xF84Db1d1868B03EaD9e799F55B4d1529687B691f',
-      image: '/static/images/avatar-1.png',
-      votingPower: '123,458.789 '
+  const { data } = useSWR(
+    () => isModalOpen && [GET_MODALVOTES],
+    query =>
+      request(SUBGRAPH_URL, query, {
+        number: Number(router.query.proposal),
+        support: checkAllVoterModal
+      })
+  )
+
+  React.useEffect(() => {
+    if (data) {
+      const votes = data.proposals[0].votes.map((prop: IModalVotesList) => {
+        return {
+          support: prop.support,
+          voter: {
+            id: prop.voter.id
+          },
+          votingPower: prop.votingPower
+        }
+      })
+
+      setModalVotesList(votes)
     }
-  ]
+  }, [data])
 
   return (
     <>
-      <S.Backdrop
-        onClick={handleCloseModal}
-        style={{ display: modalOpen ? 'block' : 'none' }}
-      />
-      <S.Container modalOpen={modalOpen}>
+      <S.Backdrop onClick={handleCloseModal} />
+
+      <S.Container modalOpen={isModalOpen}>
         <S.ModalHeaderContainer>
           <S.Close>
-            <button type="button" onClick={() => onClose()}>
-              <img src="/assets/close.svg" alt="Close" />{' '}
+            <button type="button" onClick={() => handleCloseModal()}>
+              <img src="/assets/close.svg" alt="Close Modal Votes" />{' '}
             </button>
           </S.Close>
           <S.ModalHeader>
             <S.TotalPercentageAndVotes>
               <S.TotalPercentage>
-                {voteType} - {percentage}
+                {voteType} - {percentage}%
               </S.TotalPercentage>
               <S.TotalVotes>{totalVotingPower}</S.TotalVotes>
             </S.TotalPercentageAndVotes>
             <S.VoteBar>
-              <S.VotesFavor></S.VotesFavor>
-              <S.VotesAgainst></S.VotesAgainst>
+              <S.ProgressBar
+                VotingState={voteType}
+                value={percentage}
+                max="100"
+              />
             </S.VoteBar>
           </S.ModalHeader>
         </S.ModalHeaderContainer>
         <S.Thead>
-          <S.Th>{totalAddresses} addresses</S.Th>
+          <S.Th>{modalVotesList.length} addresses</S.Th>
           <S.Th>Votes</S.Th>
         </S.Thead>
         <S.TableContainer>
           <S.Table>
-            {/* <S.Divider /> */}
             <S.UserList>
-              {userList.map(user => (
-                <S.UserData key={user.address}>
+              {modalVotesList.map(user => (
+                <S.UserData key={user.voter.id}>
                   <S.UserName>
                     <S.UserAvatar>
-                      <Image src={user.image} alt="" width={18} height={18} />
+                      <Image
+                        src={ImageAddress}
+                        alt="user wallet photo Modal Votes"
+                        width={18}
+                        height={18}
+                      />
                     </S.UserAvatar>
-                    {substr(user.address)}
+                    {substr(user.voter.id)}
                   </S.UserName>
-                  <S.UserVote>{user.votingPower}</S.UserVote>
+                  <S.UserVote>{BNtoDecimal(user.votingPower, 0, 2)}</S.UserVote>
                 </S.UserData>
               ))}
             </S.UserList>
@@ -116,7 +129,7 @@ const ModalVotes = ({
         </S.TableContainer>
         <S.ButtonWrapper>
           <Button
-            text="Vote in favor"
+            text={voteType === 'For' ? 'Vote in Favor' : 'Vote Against'}
             onClick={handleCloseModal}
             backgroundSecondary
           />

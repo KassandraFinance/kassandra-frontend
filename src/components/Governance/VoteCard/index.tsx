@@ -70,7 +70,9 @@ const VoteCard = ({
           </S.TotalPercentage>
           <S.TotalVotes>{totalVotingPower}</S.TotalVotes>
         </S.TextWrapper>
-        <S.VoteBar />
+        <S.VoteBar>
+          <S.ProgressBar VotingState={typeVote} value={percentage} max="100" />
+        </S.VoteBar>
         <S.ActionWrapper>
           <Button
             text={typeVote === 'For' ? 'Vote in Favor' : 'Vote Against'}
