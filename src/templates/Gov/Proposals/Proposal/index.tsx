@@ -174,11 +174,12 @@ const Proposal = () => {
         (vote: IVotesProps) => vote.voter.id === userWalletAddress
       )
 
-      if (userAlreadyVoted)
+      if (userAlreadyVoted) {
         setUserVoted({
           voted: true,
           support: userAlreadyVoted.support
         })
+      }
 
       getProposalState(data.proposal[0].number)
       setProposal(proposalInfo)
