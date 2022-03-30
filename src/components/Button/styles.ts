@@ -186,10 +186,7 @@ const wrapperModifiers = {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const Wrapper =
-  styled.button <
-  WrapperProps >
-  `
+export const Wrapper = styled.button <WrapperProps>`
   ${({
     theme,
     size,
