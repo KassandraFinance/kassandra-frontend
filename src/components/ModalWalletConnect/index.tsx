@@ -88,7 +88,7 @@ const ModalWalletConnect = ({
               </S.WrapperIconsBackGround>
             </Tippy>
 
-            <S.WrapperIconsBackGround
+            {/* <S.WrapperIconsBackGround
               type="button"
               onClick={() => {
                 setModalOpen(false)
@@ -99,7 +99,7 @@ const ModalWalletConnect = ({
                 <img src="/assets/connectWalletIcon.svg" alt="" />
                 <span>WalletConnect</span>
               </S.WrapperIcons>
-            </S.WrapperIconsBackGround>
+            </S.WrapperIconsBackGround> */}
           </S.Content>
         </S.BackgroundBlack>
       </S.Container>
