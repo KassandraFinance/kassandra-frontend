@@ -16,11 +16,11 @@ import jony from '../../../../public/assets/team/jony-reis.png'
 
 import * as S from './styles'
 
-const WalletAddress = () => {
-  const [isModalManageVotingPower, setIsModalManageVotingPower] =
-    React.useState<boolean>(false)
+const IntroWalletAddress = () => {
+  // eslint-disable-next-line prettier/prettier
+  const [isModalManageVotingPower, setIsModalManageVotingPower] = React.useState<boolean>(false)
   const router = useRouter()
-  const { address }: any = router.query
+  const { address } = router.query
 
   return (
     <>
@@ -43,40 +43,41 @@ const WalletAddress = () => {
           </S.VoteWeightCard>
         </S.AddressAndVoteWeight>
         <S.VotingPowerContent>
+          <S.AddressTotalVotingPower>
+            <span className="address-total-voting-power">
+              TOTAL KACY STAKED
+              <Tippy content="Voting power allows you to create and vote on proposals. To obtain voting power you need to stake your $KACY tokens.">
+                <S.Tooltip>
+                  <Image src={tooltip} alt="Explanation" />
+                </S.Tooltip>
+              </Tippy>
+            </span>
+            <span className="value-total-voting-power">123,456.789</span>
+          </S.AddressTotalVotingPower>
+
           <S.AllVotingPowerCard>
-            <S.AddressTotalVotingPower>
-              <span className="address-total-voting-power">
-                Address Total Voting Power
-                <Tippy content="Voting power allows you to create and vote on proposals. To obtain voting power you need to stake your $KACY tokens.">
-                  <S.Tooltip>
-                    <Image src={tooltip} alt="Explanation" />
-                  </S.Tooltip>
-                </Tippy>
-              </span>
-              <span className="value-total-voting-power">123,456.789</span>
-            </S.AddressTotalVotingPower>
-            <S.HorizontalLine none={true} />
-            <S.VerticalLine />
             <S.ReceivedAndOwnedVotingPower>
               <S.OwnedVotingPower>
-                <span>Owned Voting Power</span>
+                <span className="gray-color">Owned Voting Power</span>
                 <span className="bold">456.789</span>
               </S.OwnedVotingPower>
               <S.ReceivedVotingPower>
-                <span>Received Voting Power</span>
+                <span className="gray-color">Received Voting Power</span>
                 <span className="bold">123,000.000</span>
               </S.ReceivedVotingPower>
             </S.ReceivedAndOwnedVotingPower>
+            <S.HorizontalLine none={true} />
+            <S.VerticalLine />
+            <S.ManageDelegation>
+              <Button
+                onClick={() => setIsModalManageVotingPower(true)}
+                size="large"
+                text="Manage Delegation"
+                backgroundSecondary
+              />
+              <ExternalLink text="Obtain Voting Power" hrefNext="#" />
+            </S.ManageDelegation>
           </S.AllVotingPowerCard>
-          <S.ManageDelegation>
-            <Button
-              onClick={() => setIsModalManageVotingPower(true)}
-              size="large"
-              text="Manage Delegation"
-              backgroundSecondary
-            />
-            <ExternalLink text="Obtain Voting Power" hrefNext="#" />
-          </S.ManageDelegation>
         </S.VotingPowerContent>
       </S.IntroWalletAddress>
       <ModalManageVotingPower
@@ -87,4 +88,4 @@ const WalletAddress = () => {
   )
 }
 
-export default WalletAddress
+export default IntroWalletAddress

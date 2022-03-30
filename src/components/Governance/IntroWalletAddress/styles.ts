@@ -176,17 +176,14 @@ export const AllVotingPowerCard = styled.div`
   border-radius: 1.2rem;
 
   display: grid;
-  grid-template-columns: 28rem 1px 1fr;
+  grid-template-columns: 28rem 0.01rem 1fr;
   gap: 24px;
 
   align-items: center;
 
   min-width: 75rem;
 
-  padding-top: ${theme.spacings.space32};
-  padding-right: ${theme.spacings.space32};
-  padding-left: ${theme.spacings.space32};
-  padding-bottom: ${theme.spacings.space24};
+  padding: 3.2rem;
   @media (max-width: 1100px) {
     grid-template-columns: 25rem 1px 1fr;
     gap: 24px;
@@ -207,6 +204,20 @@ export const AddressTotalVotingPower = styled.div`
   display: flex;
   flex-direction: column;
 
+  padding: 3.2rem;
+  width: 100%;
+
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1.2rem;
+
+  @media (max-width: 1100px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   @media (max-width: 576px) {
     flex-direction: row;
 
@@ -215,24 +226,30 @@ export const AddressTotalVotingPower = styled.div`
 
   .address-total-voting-power {
     display: flex;
+    margin-bottom: 2rem;
 
-    line-height: ${theme.font.sizes.font18};
-    font-size: ${theme.font.sizes.font18};
+    color: ${theme.colors.grayDisabled};
+    line-height: ${theme.font.sizes.font20};
+    font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.bold};
 
-    margin-bottom: 1.6rem;
     @media (max-width: 1100px) {
       font-size: ${theme.font.sizes.font16};
+      margin-bottom: 0;
     }
 
     @media (max-width: 576px) {
       font-size: ${theme.font.sizes.font12};
 
-      max-width: 11rem;
+      max-width: 16rem;
       margin-bottom: 0;
+    }
+    @media (max-width: 370px) {
+      max-width: 9.6rem;
     }
   }
   .value-total-voting-power {
+    color: ${theme.colors.grayDisabled};
     line-height: ${theme.font.sizes.font32};
     font-size: ${theme.font.sizes.font32};
     font-weight: ${theme.font.weight.bold};
@@ -258,6 +275,10 @@ export const ReceivedAndOwnedVotingPower = styled.div`
   font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.light};
 
+  .gray-color {
+    color: ${theme.colors.grayDisabled};
+  }
+
   @media (max-width: 576px) {
     font-size: ${theme.font.sizes.font12};
   }
@@ -274,28 +295,17 @@ export const OwnedVotingPower = styled.div`
   justify-content: space-between;
 
   margin-bottom: 1.2rem;
-  padding: 0 1.6rem;
 `
 
 export const ReceivedVotingPower = styled.div`
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 1.2rem;
-
   display: flex;
   justify-content: space-between;
-
-  padding: ${theme.spacings.space16};
 `
 
 export const ManageDelegation = styled.div`
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-
   border-radius: 1.2rem;
 
   width: 100%;
-
-  padding: ${theme.spacings.space32};
 
   @media (max-width: 576px) {
     padding: ${theme.spacings.space16};
