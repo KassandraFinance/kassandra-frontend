@@ -4,13 +4,12 @@ export const checkVoteButton = (
   userVote: IUserVotedProps,
   proposalState: string,
   typeVote: string
-) =>
-  userVote.voted
-    ? !userVote.support && typeVote === 'Against'
-      ? 'against'
-      : userVote.support && typeVote === 'For'
-      ? 'favor'
-      : 'disable'
-    : proposalState === 'Active'
-    ? 'vote-open'
-    : 'disable'
+): 'against' | 'favor' | 'vote-open' | 'disable' => {
+  if (userVote.voted) {
+    if (!userVote.support && typeVote === 'Against') return 'against'
+    if (userVote.support && typeVote === 'For') return 'favor'
+  }
+  if (proposalState === 'Active') return 'vote-open'
+
+  return 'disable'
+}
