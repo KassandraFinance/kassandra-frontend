@@ -23,12 +23,12 @@ export const TextWrapper = styled.div`
   justify-content: space-between;
   margin-bottom: 2.4rem;
 `
-export const TotalPercentage = styled.h3`
+export const TotalPercentage = styled.p`
   font-size: ${theme.font.sizes.font18};
   font-weight: ${theme.font.weight.bold};
   color: ${theme.colors.snow};
 `
-export const TotalVotes = styled.h3`
+export const TotalVotes = styled.p`
   font-size: ${theme.font.sizes.font18};
   letter-spacing: 0.09rem;
   font-weight: ${theme.font.weight.light};

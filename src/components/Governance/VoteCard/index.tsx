@@ -4,6 +4,9 @@ import { GovernorAlpha } from '../../../constants/tokenAddresses'
 
 import useGovernance from '../../../hooks/useGovernance'
 
+import Button from '../../Button'
+import ExternalLink from '../../ExternalLink'
+
 import waitTransaction, {
   MetamaskError,
   TransactionCallback
@@ -11,12 +14,10 @@ import waitTransaction, {
 
 import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
-import Button from '../../Button'
-import ExternalLink from '../../ExternalLink'
-
-import * as S from './styles'
 import { checkVoteButton } from '../../../utils/checkVoteButton'
 import { IUserVotedProps } from '../../../templates/Gov/Proposals/Proposal'
+
+import * as S from './styles'
 
 interface IVoteCardProps {
   typeVote: string;
@@ -43,6 +44,7 @@ const VoteCard = ({
 
   function handleVote() {
     if (userVote.voted || proposalState !== 'Active') return
+
     governance.castVote(
       Number(proposalId),
       typeVote === 'For' ? true : false,
