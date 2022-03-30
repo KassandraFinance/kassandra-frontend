@@ -10,7 +10,7 @@ import { actionSetChainId } from '../store/modules/chainId/actions'
 import { actionGetUserAddressWallet } from '../store/modules/userWalletAddress/actions'
 import { subscribeToEvents } from '../utils/walletConnect'
 
-import web3 from '../utils/web3'
+import web3, { provider } from '../utils/web3'
 
 // eslint-disable-next-line prettier/prettier
 declare let window: {
@@ -76,10 +76,18 @@ const useConnect = () => {
     }
   }, [])
 
-  const connectToWalletConnect = React.useCallback(() => {
+  const connectToWalletConnect = React.useCallback(async () => {
     if (!connector.connected) {
-      connector.createSession()
-      subscribeToEvents(connector, handleAccountsChanged, handleChainChanged)
+      await provider.enable()
+
+      const connect = localStorage.getItem('walletconnect')
+      
+      if (connect) {
+        const { accounts, chainId } = JSON.parse(connect)
+        handleAccountsChanged(accounts)
+        dispatch(actionSetChainId(chainId))
+        subscribeToEvents(provider, handleAccountsChanged, handleChainChanged)
+      }
       return
     }
   }, [])
@@ -112,11 +120,14 @@ const useConnect = () => {
   // }, [])
 
   React.useEffect(() => {
-    const handleWallectConnect = () => {
+    const handleWallectConnect = async () => {
       const connect = localStorage.getItem('walletconnect')
-
+      
       if (connect) {
         const { accounts, chainId } = JSON.parse(connect)
+
+        await provider.enable()
+
         handleAccountsChanged(accounts)
         // subscribeToEvents(provider, handleAccountsChanged, handleChainChanged)
         dispatch(actionSetChainId(chainId))
