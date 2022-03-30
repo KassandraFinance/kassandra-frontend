@@ -14,6 +14,10 @@ import useGovernance from '../../../../hooks/useGovernance'
 import Big from 'big.js'
 import substr from '../../../../utils/substr'
 import { BNtoDecimal } from '../../../../utils/numerals'
+import waitTransaction, {
+  MetamaskError,
+  TransactionCallback
+} from '../../../../utils/txWait'
 
 import { request } from 'graphql-request'
 import { GET_PROPOSAL } from './graphql'
@@ -26,6 +30,11 @@ import VoteCard from '../../../../components/Governance/VoteCard'
 import VotingPower from '../../../../components/VotingPower'
 import Breadcrumb from '../../../../components/Breadcrumb'
 import BreadcrumbItem from '../../../../components/Breadcrumb/BreadcrumbItem'
+import {
+  ToastSuccess,
+  ToastError,
+  ToastWarning
+} from '../../../../components/Toastify/toast'
 
 import externalLink from '../../../../../public/assets/icons/external-link.svg'
 import proposals from '../../../../../public/assets/iconGradient/proposals.svg'
@@ -191,6 +200,40 @@ const Proposal = () => {
     }
   }, [data])
 
+  function handleVote(voteType: string) {
+    if (userVoted.voted || proposalState[0] !== 'Active') return
+
+    governance.castVote(
+      Number(router.query.proposal),
+      voteType === 'For' ? true : false,
+      userWalletAddress,
+      voteCallback()
+    )
+
+    if (isModalOpen) {
+      setTimeout(() => {
+        setIsModalOpen(false)
+      }, 1200)
+    }
+  }
+
+  const voteCallback = React.useCallback((): TransactionCallback => {
+    return async (error: MetamaskError, txHash: string) => {
+      if (error) {
+        ToastError(`Failed vote. Please try again later.`)
+        return
+      }
+
+      ToastWarning(`Confirming vote`)
+      const txReceipt = await waitTransaction(txHash)
+
+      if (txReceipt.status) {
+        ToastSuccess(`Vote confirmed`)
+        return
+      }
+    }
+  }, [])
+
   return (
     <>
       <S.BackgroundVote>
@@ -255,11 +298,10 @@ const Proposal = () => {
             <VoteCard
               typeVote="For"
               percentage={percentageVotes.for}
-              proposalId={router.query.proposal}
               totalVotingPower={BNtoDecimal(proposal.forVotes, 0, 2, 2)}
-              userWalletAddress={userWalletAddress}
               proposalState={proposalState[0]}
               userVote={userVoted}
+              handleVote={handleVote}
               onClickLink={() => {
                 setModalVotes({
                   voteType: 'For',
@@ -274,11 +316,10 @@ const Proposal = () => {
             <VoteCard
               typeVote="Against"
               percentage={percentageVotes.against}
-              proposalId={router.query.proposal}
               totalVotingPower={BNtoDecimal(proposal.againstVotes, 0, 2, 2)}
-              userWalletAddress={userWalletAddress}
               proposalState={proposalState[0]}
               userVote={userVoted}
+              handleVote={handleVote}
               onClickLink={() => {
                 setModalVotes({
                   voteType: 'Against',
@@ -437,6 +478,9 @@ const Proposal = () => {
           checkAllVoterModal={modalVotes.checkAllVoterModal}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
+          userVote={userVoted}
+          proposalState={proposalState[0]}
+          handleVote={handleVote}
         />
       )}
     </>

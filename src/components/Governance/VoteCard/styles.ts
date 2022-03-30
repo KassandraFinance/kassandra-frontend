@@ -36,12 +36,10 @@ export const TotalVotes = styled.p`
 `
 
 export const VoteBar = styled.div`
-  display: block;
   width: 100%;
   height: 0.4rem;
   margin-bottom: 4rem;
 
-  background-color: #8b8b8b;
   border-radius: 0.1rem;
 `
 
@@ -92,18 +90,13 @@ interface IVoteBarProps {
 export const ProgressBar = styled.progress<IVoteBarProps>`
   width: 100%;
   height: 0.6rem;
+
   border-radius: 3rem;
   border: none;
 
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
-
-  /* animation: progressBar 1.5s ease-in-out;
-  @keyframes progressBar {
-    0% { left:0; width: 0; }
-    100% { left:0; width: 100%; }
-  } */
 
   ::-webkit-progress-bar {
     border-radius: 2rem;
@@ -123,9 +116,9 @@ export const ProgressBar = styled.progress<IVoteBarProps>`
     border-radius: 3rem;
     background: ${props => {
       if (props.VotingState === 'For') {
-        return '#0f0'
+        return '#2CE878'
       } else {
-        return '#f00'
+        return '#E8372C'
       }
     }};
   }

@@ -8,12 +8,15 @@ import { request } from 'graphql-request'
 import { GET_MODALVOTES } from './graphql'
 import { SUBGRAPH_URL } from '../../../constants/tokenAddresses'
 
+import Button from '../../Button'
+
 import substr from '../../../utils/substr'
 import { BNtoDecimal } from '../../../utils/numerals'
+import { checkVoteButton } from '../../../utils/checkVoteButton'
 
 import ImageAddress from '../../../../public/assets/team/jony-reis.png'
 
-import Button from '../../Button'
+import { IUserVotedProps } from '../../../templates/Gov/Proposals/Proposal'
 
 import * as S from './styles'
 
@@ -24,6 +27,9 @@ interface IModalVotes {
   checkAllVoterModal: boolean;
   isModalOpen: boolean;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  userVote: IUserVotedProps;
+  proposalState: string;
+  handleVote: (voteType: string) => void;
 }
 
 interface IModalVotesList {
@@ -40,7 +46,10 @@ const ModalVotes = ({
   voteType,
   percentage,
   totalVotingPower,
-  checkAllVoterModal
+  checkAllVoterModal,
+  proposalState,
+  userVote,
+  handleVote
 }: IModalVotes) => {
   // eslint-disable-next-line prettier/prettier
   const [modalVotesList, setModalVotesList] = React.useState<IModalVotesList[]>([])
@@ -130,8 +139,11 @@ const ModalVotes = ({
         <S.ButtonWrapper>
           <Button
             text={voteType === 'For' ? 'Vote in Favor' : 'Vote Against'}
-            onClick={handleCloseModal}
-            backgroundSecondary
+            backgroundVote={{
+              voteState: checkVoteButton(userVote, proposalState, voteType),
+              type: voteType
+            }}
+            onClick={() => handleVote(voteType)}
           />
         </S.ButtonWrapper>
       </S.Container>
