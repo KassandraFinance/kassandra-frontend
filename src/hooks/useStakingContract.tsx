@@ -136,6 +136,11 @@ const useStakingContract = (address: string) => {
       return value
     }
 
+    const userInfo = async (pid: number, walletAddress: string) => {
+      const value = await contract.methods.userInfo(pid, walletAddress).call()
+      return value
+    }
+
     return {
       events,
 
@@ -153,6 +158,8 @@ const useStakingContract = (address: string) => {
       stakedUntil,
       unstaking,
       withdrawable,
+
+      userInfo
     }
   }, [contract, userWalletAddress])
 }

@@ -1,6 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
 
+import BigNumber from 'bn.js'
+
 // import { useMatomo } from '@datapunt/matomo-tracker-react'
 import Button from '../../../Button'
 import ExternalLink from '../../../ExternalLink'
@@ -10,6 +12,16 @@ import arrowSelect from '../../../../../public/assets/icons/arrow-select.svg'
 import logo from '../../../../../public/assets/logo-64.svg'
 
 import * as S from '../styles'
+import { Staking } from '../../../../constants/tokenAddresses'
+import useStakingContract from '../../../../hooks/useStakingContract'
+import { RootStateOrAny, useSelector } from 'react-redux'
+import { BNtoDecimal } from '../../../../utils/numerals'
+import useVotingPower from '../../../../hooks/useVotingPower'
+import waitTransaction, {
+  MetamaskError,
+  TransactionCallback
+} from '../../../../utils/txWait'
+import { ToastError, ToastSuccess, ToastWarning } from '../../../Toastify/toast'
 
 export interface IDateProps {
   pid: number;
@@ -20,10 +32,12 @@ export interface IDateProps {
 
 interface IUndelegateVotingPowerProps {
   setCurrentModal: React.Dispatch<React.SetStateAction<string>>;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const UndelegateVotingPower = ({
-  setCurrentModal
+  setCurrentModal,
+  setModalOpen
 }: IUndelegateVotingPowerProps) => {
   const [optionsOpen, setOptionsOpen] = React.useState<boolean>(false)
   const [undelegateSelected, setUndelegateSelected] =
@@ -33,6 +47,82 @@ const UndelegateVotingPower = ({
       withdrawDelay: '',
       votingPower: ''
     })
+  const [userInfoData, setUserInfoData] = React.useState<any>([])
+
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+
+  const { userInfo } = useStakingContract(Staking)
+  const { delegateVote } = useVotingPower(Staking)
+
+  const callUserInfo = async () => {
+    const [userInfoOne, userInfoTwo, userInfoThree] = await Promise.all([
+      userInfo(
+        process.env.NEXT_PUBLIC_MASTER === '1' ? 2 : 0,
+        userWalletAddress
+      ),
+      userInfo(
+        process.env.NEXT_PUBLIC_MASTER === '1' ? 3 : 1,
+        userWalletAddress
+      ),
+      userInfo(
+        process.env.NEXT_PUBLIC_MASTER === '1' ? 4 : 2,
+        userWalletAddress
+      )
+    ])
+
+    userInfoOne.pid = process.env.NEXT_PUBLIC_MASTER === '1' ? 2 : 0
+    userInfoTwo.pid = process.env.NEXT_PUBLIC_MASTER === '1' ? 3 : 1
+    userInfoThree.pid = process.env.NEXT_PUBLIC_MASTER === '1' ? 4 : 2
+
+    setUserInfoData(
+      [userInfoOne, userInfoTwo, userInfoThree].map(userInfo => ({
+        votingPower: BNtoDecimal(new BigNumber(userInfo.amount), 18, 2),
+        withdrawDelay: '1000',
+        nameToken: 'KACY',
+        pid: userInfo.pid
+      }))
+    )
+  }
+
+  const undelegateCallback = React.useCallback(
+    (receiverAddress: string): TransactionCallback => {
+      return async (error: MetamaskError, txHash: string) => {
+        if (error) {
+          if (error.code === 4001) {
+            ToastError(`Delegate cancelled`)
+            return
+          }
+
+          ToastError(`Error`)
+          return
+        }
+
+        ToastWarning(`Confirming delegate to ${receiverAddress}...`)
+        const txReceipt = await waitTransaction(txHash)
+
+        if (txReceipt.status) {
+          ToastSuccess(`Delegate confirmed to ${receiverAddress}`)
+          setCurrentModal('manage')
+          setModalOpen(false)
+          return
+        }
+      }
+    },
+    []
+  )
+
+  const handleUndelegateVotes = async () => {
+    await delegateVote(
+      undelegateSelected?.pid,
+      userWalletAddress,
+      undelegateCallback(userWalletAddress)
+    )
+  }
+
+  React.useEffect(() => {
+    callUserInfo()
+  }, [])
+
   return (
     <>
       <S.Content>
@@ -84,6 +174,7 @@ const UndelegateVotingPower = ({
             backgroundSecondary
             disabledNoEvent={undelegateSelected.nameToken === ''}
             text="Undelegate Votes"
+            onClick={handleUndelegateVotes}
           />
         </S.ButtonContainer>
         <S.Link>
@@ -93,7 +184,7 @@ const UndelegateVotingPower = ({
       <Options
         optionsOpen={optionsOpen}
         setOptionsOpen={setOptionsOpen}
-        data={poolData}
+        data={userInfoData}
         delegateSelected={undelegateSelected}
         setDelegateSelected={setUndelegateSelected}
         undelegate={true}
@@ -104,23 +195,23 @@ const UndelegateVotingPower = ({
 
 export default UndelegateVotingPower
 
-const poolData = [
-  {
-    image: logo,
-    nameToken: 'kacy',
-    withdrawDelay: '0',
-    votingPower: '456,00'
-  },
-  {
-    image: logo,
-    nameToken: 'kacy',
-    withdrawDelay: '15',
-    votingPower: '789,00'
-  },
-  {
-    image: logo,
-    nameToken: 'kacy',
-    withdrawDelay: '45',
-    votingPower: '123.000,00'
-  }
-]
+// const poolData = [
+//   {
+//     image: logo,
+//     nameToken: 'kacy',
+//     withdrawDelay: '0',
+//     votingPower: '456,00'
+//   },
+//   {
+//     image: logo,
+//     nameToken: 'kacy',
+//     withdrawDelay: '15',
+//     votingPower: '789,00'
+//   },
+//   {
+//     image: logo,
+//     nameToken: 'kacy',
+//     withdrawDelay: '45',
+//     votingPower: '123.000,00'
+//   }
+// ]
