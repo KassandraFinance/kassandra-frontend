@@ -26,7 +26,6 @@ import InputTokenValue from '../../InputTokenValue'
 import * as S from './styles'
 
 interface IModalStakeProps {
-  modalOpen: boolean;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   pid: number;
   decimals: string;
@@ -38,7 +37,6 @@ interface IModalStakeProps {
 }
 
 const ModalStakeAndWithdraw = ({
-  modalOpen,
   setModalOpen,
   pid,
   decimals,
@@ -122,31 +120,23 @@ const ModalStakeAndWithdraw = ({
   }, [amountStake])
 
   React.useEffect(() => {
-    if (modalOpen) {
-      getBalance()
-    }
-  }, [modalOpen])
+    getBalance()
+  }, [])
 
   React.useEffect(() => {
-    if (modalOpen) {
-      setMultiplier(0)
-      handleKacyAmount(new BigNumber(0))
-    }
-  }, [modalOpen])
+    setMultiplier(0)
+    handleKacyAmount(new BigNumber(0))
+  }, [])
 
   React.useEffect(() => {
     if (stakeTransaction === 'staking') {
-      if (!modalOpen) {
-        return
-      }
-
       const track = async () => {
         const tokenName = await kacyToken.name()
         trackProductPageView(productSKU, tokenName, productCategories)
       }
       track()
     }
-  }, [modalOpen, stakingToken])
+  }, [stakingToken])
 
   const stakeCallback = React.useCallback((): TransactionCallback => {
     return async (error: MetamaskError, txHash: string) => {

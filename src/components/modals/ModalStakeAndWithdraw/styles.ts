@@ -19,11 +19,8 @@ interface IBorderGradientProps {
   unstaking: string;
 }
 
-// eslint-disable-next-line prettier/prettier
-export const BorderGradient =
-  styled.div <
-  IBorderGradientProps >
-  `
+// prettier-ignore
+export const BorderGradient = styled.div<IBorderGradientProps>`
   position: fixed;
   top: 50%;
   left: 50%;
