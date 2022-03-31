@@ -206,6 +206,15 @@ const ModalStakeAndWithdraw = ({
     }
   }, [kacyToken])
 
+  let title: string
+  if (stakeTransaction === 'staking') {
+    title = 'Stake in Pool'
+  } else if (stakeTransaction === 'unstaking') {
+    title = 'Withdraw'
+  } else {
+    title = 'Transaction not defined'
+  }
+
   return (
     <>
       <S.Backdrop
@@ -220,9 +229,7 @@ const ModalStakeAndWithdraw = ({
       >
         <S.BackgroundBlack>
           <S.InterBackground>
-            <span>
-              {stakeTransaction === 'staking' ? 'Stake in Pool' : 'Withdraw'}
-            </span>
+            <span>{title}</span>
             <button
               type="button"
               onClick={() => {

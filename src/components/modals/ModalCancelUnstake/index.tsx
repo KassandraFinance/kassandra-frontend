@@ -17,8 +17,8 @@ import Button from '../../Button'
 import * as S from './styles'
 
 interface IModalRequestUnstakeProps {
+  openStakeAndWithdraw: (transaction: 'staking' | 'unstaking') => void;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsModalStaking: React.Dispatch<React.SetStateAction<boolean>>;
   pid: number;
   staking: boolean;
   symbol: string;
@@ -26,7 +26,7 @@ interface IModalRequestUnstakeProps {
 
 const ModalCancelUnstake = ({
   setModalOpen,
-  setIsModalStaking,
+  openStakeAndWithdraw,
   pid,
   staking,
   symbol
@@ -102,7 +102,7 @@ const ModalCancelUnstake = ({
               backgroundSecondary
               onClick={() => {
                 if (staking) {
-                  setIsModalStaking(true)
+                  openStakeAndWithdraw('staking')
                 } else {
                   kacyStake.cancelUnstake(pid, cancelUnstakeCallback())
                 }

@@ -314,6 +314,11 @@ const StakeCard = ({
     lockUntil && lockUntil(pid, userWalletAddress).then(setLockPeriod)
   }, [userWalletAddress, infoStaked.stakingToken])
 
+  function openStakeAndWithdraw(transaction: 'staking' | 'unstaking') {
+    setIsModalStake(true)
+    setStakeTransaction(transaction)
+  }
+
   return (
     <>
       <S.BorderGradient stakeWithVotingPower={stakeWithVotingPower}>
@@ -493,8 +498,7 @@ const StakeCard = ({
                               backgroundSecondary
                               fullWidth
                               onClick={() => {
-                                setIsModalStake(true)
-                                setStakeTransaction('staking')
+                                openStakeAndWithdraw('staking')
                               }}
                             />
                           )
@@ -522,8 +526,7 @@ const StakeCard = ({
                             }
                             fullWidth
                             onClick={() => {
-                              setIsModalStake(true)
-                              setStakeTransaction('unstaking')
+                              openStakeAndWithdraw('unstaking')
                             }}
                           />
                         ) : (
@@ -599,10 +602,10 @@ const StakeCard = ({
       {isModalCancelUnstake && (
         <ModalCancelUnstake
           setModalOpen={setIsModalCancelUnstake}
-          setIsModalStaking={setIsModalStake}
           pid={pid}
           staking={infoStaked.withdrawDelay !== '0' && infoStaked.withdrawable}
           symbol={symbol}
+          openStakeAndWithdraw={openStakeAndWithdraw}
         />
       )}
       {isModalRequestUnstake && (
@@ -617,12 +620,7 @@ const StakeCard = ({
           stakedUntil={stakedUntil}
         />
       )}
-      {isModalWallet && (
-        <ModalWalletConnect
-          modalOpen={isModalWallet}
-          setModalOpen={setIsModaWallet}
-        />
-      )}
+      {isModalWallet && <ModalWalletConnect setModalOpen={setIsModaWallet} />}
     </>
   )
 }
