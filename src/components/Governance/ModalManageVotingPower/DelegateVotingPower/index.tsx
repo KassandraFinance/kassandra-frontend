@@ -1,17 +1,17 @@
 import React from 'react'
 import Image from 'next/image'
-// import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import BigNumber from 'bn.js'
 import { RootStateOrAny, useSelector } from 'react-redux'
 
 import { Staking } from '../../../../constants/tokenAddresses'
 
+// import { useMatomo } from '@datapunt/matomo-tracker-react'
 import useStakingContract from '../../../../hooks/useStakingContract'
 import useVotingPower from '../../../../hooks/useVotingPower'
 
 import { BNtoDecimal } from '../../../../utils/numerals'
-import { ToastError, ToastSuccess, ToastWarning } from '../../../Toastify/toast'
+import substr from '../../../../utils/substr'
 import waitTransaction, {
   MetamaskError,
   TransactionCallback
@@ -19,6 +19,7 @@ import waitTransaction, {
 
 import Button from '../../../Button'
 import ExternalLink from '../../../ExternalLink'
+import { ToastError, ToastSuccess, ToastWarning } from '../../../Toastify/toast'
 import Options from '../Options'
 
 import arrowSelect from '../../../../../public/assets/icons/arrow-select.svg'
@@ -52,6 +53,7 @@ const DelegateVotingPower = ({
     votingPower: ''
   })
   const [poolData, setPoolData] = React.useState<any>([])
+  const [loading, setLoading] = React.useState<boolean>(true)
 
   const { poolInfo, balance } = useStakingContract(Staking)
   const { delegateVote, delegateAllVotes } = useVotingPower(Staking)
@@ -72,7 +74,6 @@ const DelegateVotingPower = ({
 
     for (let i = 0; i < arr.length; i++) {
       const poolInfo = arr[i]
-
       const votingPower = await balance(Number(poolInfo.pid), userWalletAddress)
 
       newArr.push({
@@ -88,6 +89,7 @@ const DelegateVotingPower = ({
     }
 
     setPoolData(newArr)
+    setLoading(false)
   }
 
   React.useEffect(() => {
@@ -107,11 +109,11 @@ const DelegateVotingPower = ({
           return
         }
 
-        ToastWarning(`Confirming delegate to ${receiverAddress}...`)
+        ToastWarning(`Confirming delegate to ${substr(receiverAddress)}...`)
         const txReceipt = await waitTransaction(txHash)
 
         if (txReceipt.status) {
-          ToastSuccess(`Delegate confirmed to ${receiverAddress}`)
+          ToastSuccess(`Delegate confirmed to ${substr(receiverAddress)}`)
           setCurrentModal('manage')
           setModalOpen(false)
           return
@@ -120,6 +122,7 @@ const DelegateVotingPower = ({
     },
     []
   )
+
   const delegateAllCallback = React.useCallback(
     (receiverAddress: string): TransactionCallback => {
       return async (error: MetamaskError, txHash: string) => {
@@ -133,11 +136,11 @@ const DelegateVotingPower = ({
           return
         }
 
-        ToastWarning(`Confirming delegate to ${receiverAddress}...`)
+        ToastWarning(`Confirming delegate to ${substr(receiverAddress)}...`)
         const txReceipt = await waitTransaction(txHash)
 
         if (txReceipt.status) {
-          ToastSuccess(`Delegate confirmed to ${receiverAddress}`)
+          ToastSuccess(`Delegate confirmed to ${substr(receiverAddress)}`)
           setCurrentModal('manage')
           setModalOpen(false)
           return
@@ -199,7 +202,10 @@ const DelegateVotingPower = ({
             onClick={() => setOptionsOpen(true)}
             optionsOpen={optionsOpen}
           >
-            <span>Choose the KACY pool to delegate</span>
+            <span>
+              {' '}
+              {loading ? 'Loading...' : 'Choose the KACY pool to delegate'}
+            </span>
             <Image src={arrowSelect} alt="" />
           </S.Select>
         )}
