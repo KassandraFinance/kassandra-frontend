@@ -1,28 +1,33 @@
 import React from 'react'
 import Image from 'next/image'
 
+import { RootStateOrAny, useSelector } from 'react-redux'
 import BigNumber from 'bn.js'
 
+import { Staking } from '../../../../constants/tokenAddresses'
+
+import useStakingContract from '../../../../hooks/useStakingContract'
+import useVotingPower from '../../../../hooks/useVotingPower'
+
+import waitTransaction, {
+  MetamaskError,
+  TransactionCallback
+} from '../../../../utils/txWait'
+import substr from '../../../../utils/substr'
+
 // import { useMatomo } from '@datapunt/matomo-tracker-react'
-import Button from '../../../Button'
 import ExternalLink from '../../../ExternalLink'
+import { ToastError, ToastSuccess, ToastWarning } from '../../../Toastify/toast'
 import Options from '../Options'
+
+import { BNtoDecimal } from '../../../../utils/numerals'
+
+import Button from '../../../Button'
 
 import arrowSelect from '../../../../../public/assets/icons/arrow-select.svg'
 import logo from '../../../../../public/assets/logo-64.svg'
 
 import * as S from '../styles'
-import { Staking } from '../../../../constants/tokenAddresses'
-import useStakingContract from '../../../../hooks/useStakingContract'
-import { RootStateOrAny, useSelector } from 'react-redux'
-import { BNtoDecimal } from '../../../../utils/numerals'
-import useVotingPower from '../../../../hooks/useVotingPower'
-import waitTransaction, {
-  MetamaskError,
-  TransactionCallback
-} from '../../../../utils/txWait'
-import { ToastError, ToastSuccess, ToastWarning } from '../../../Toastify/toast'
-
 export interface IDateProps {
   pid: number;
   nameToken: string;
@@ -48,14 +53,25 @@ const UndelegateVotingPower = ({
       votingPower: ''
     })
   const [userInfoData, setUserInfoData] = React.useState<any>([])
+  const [loading, setLoading] = React.useState<boolean>(true)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
-  const { userInfo } = useStakingContract(Staking)
-  const { delegateVote } = useVotingPower(Staking)
+  const { userInfo, poolInfo } = useStakingContract(Staking)
+  const { delegateVote, delegateAllVotes } = useVotingPower(Staking)
 
   const callUserInfo = async () => {
-    const [userInfoOne, userInfoTwo, userInfoThree] = await Promise.all([
+    const [
+      poolInfoOne,
+      poolInfoTwo,
+      poolInfoThree,
+      userInfoOne,
+      userInfoTwo,
+      userInfoThree
+    ] = await Promise.all([
+      poolInfo(process.env.NEXT_PUBLIC_MASTER === '1' ? 2 : 0),
+      poolInfo(process.env.NEXT_PUBLIC_MASTER === '1' ? 3 : 1),
+      poolInfo(process.env.NEXT_PUBLIC_MASTER === '1' ? 4 : 2),
       userInfo(
         process.env.NEXT_PUBLIC_MASTER === '1' ? 2 : 0,
         userWalletAddress
@@ -74,17 +90,65 @@ const UndelegateVotingPower = ({
     userInfoTwo.pid = process.env.NEXT_PUBLIC_MASTER === '1' ? 3 : 1
     userInfoThree.pid = process.env.NEXT_PUBLIC_MASTER === '1' ? 4 : 2
 
-    setUserInfoData(
-      [userInfoOne, userInfoTwo, userInfoThree].map(userInfo => ({
-        votingPower: BNtoDecimal(new BigNumber(userInfo.amount), 18, 2),
-        withdrawDelay: '1000',
-        nameToken: 'KACY',
-        pid: userInfo.pid
-      }))
+    const poolInfoArr = [poolInfoOne, poolInfoTwo, poolInfoThree]
+
+    const userInfoArr = [userInfoOne, userInfoTwo, userInfoThree].map(
+      userInfo => {
+        const poolInfo = poolInfoArr[userInfo.pid]
+        const votingPowerWithoutMultiplier = new BigNumber(userInfo.amount)
+
+        const votingPower = BNtoDecimal(
+          new BigNumber(poolInfo.votingMultiplier).mul(
+            votingPowerWithoutMultiplier
+          ),
+          18,
+          2
+        )
+        if (userInfo.delegatee === userWalletAddress) {
+          return { msg: "Can't undelegate to your own wallet" }
+        } else {
+          return {
+            votingPower,
+            withdrawDelay: '1000',
+            nameToken: substr(userInfo.delegatee),
+            pid: userInfo.pid
+          }
+        }
+      }
     )
+
+    setUserInfoData(userInfoArr)
+    setLoading(false)
   }
 
   const undelegateCallback = React.useCallback(
+    (receiverAddress: string): TransactionCallback => {
+      return async (error: MetamaskError, txHash: string) => {
+        if (error) {
+          if (error.code === 4001) {
+            ToastError(`Undelegate cancelled`)
+            return
+          }
+
+          ToastError(`Error`)
+          return
+        }
+
+        ToastWarning(`Confirming undelegate to ${substr(receiverAddress)}...`)
+        const txReceipt = await waitTransaction(txHash)
+
+        if (txReceipt.status) {
+          ToastSuccess(`Undelegate confirmed to ${substr(receiverAddress)}`)
+          setCurrentModal('manage')
+          setModalOpen(false)
+          return
+        }
+      }
+    },
+    []
+  )
+
+  const undelegateAllCallback = React.useCallback(
     (receiverAddress: string): TransactionCallback => {
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
@@ -97,11 +161,11 @@ const UndelegateVotingPower = ({
           return
         }
 
-        ToastWarning(`Confirming delegate to ${receiverAddress}...`)
+        ToastWarning(`Confirming undelegate to ${substr(receiverAddress)}...`)
         const txReceipt = await waitTransaction(txHash)
 
         if (txReceipt.status) {
-          ToastSuccess(`Delegate confirmed to ${receiverAddress}`)
+          ToastSuccess(`Undelegate confirmed to ${substr(receiverAddress)}`)
           setCurrentModal('manage')
           setModalOpen(false)
           return
@@ -116,6 +180,13 @@ const UndelegateVotingPower = ({
       undelegateSelected?.pid,
       userWalletAddress,
       undelegateCallback(userWalletAddress)
+    )
+  }
+
+  const handleUndelegateAllVotes = async () => {
+    await delegateAllVotes(
+      userWalletAddress,
+      undelegateAllCallback(userWalletAddress)
     )
   }
 
@@ -156,7 +227,11 @@ const UndelegateVotingPower = ({
             onClick={() => setOptionsOpen(true)}
             optionsOpen={optionsOpen}
           >
-            <span>Choose the address you wish to undelegate</span>
+            <span>
+              {loading
+                ? 'Loading...'
+                : 'Choose the address you wish to undelegate'}
+            </span>
             <Image src={arrowSelect} alt="" />
           </S.Select>
         )}
@@ -178,7 +253,10 @@ const UndelegateVotingPower = ({
           />
         </S.ButtonContainer>
         <S.Link>
-          <ExternalLink text="Retrieve all delegated voting power" />
+          <ExternalLink
+            text="Retrieve all delegated voting power"
+            onClick={handleUndelegateAllVotes}
+          />
         </S.Link>
       </S.Content>
       <Options
@@ -215,3 +293,47 @@ export default UndelegateVotingPower
 //     votingPower: '123.000,00'
 //   }
 // ]
+
+//   [userInfoOne, userInfoTwo, userInfoThree].map(userInfo => ({
+//     // votingPower: BNtoDecimal(
+//     //   new BigNumber(Number(teste[`${userInfo.pid}`])).mul(userInfo.amount),
+//     //   18,
+//     //   2
+//     // ),
+//     // votingPower: BNtoDecimal(new BigNumber(userInfo.amount), 18, 2),
+//     // votingPower2:  votingPower: BNtoDecimal(
+//     //   new BigNumber(poolInfo.votingMultiplier).mul(votingPower),
+//     //   18,
+//     //   2
+//     // ),
+//     votingPower: '',
+//     withdrawDelay: '1000',
+//     nameToken: 'userInfo.delegatee',
+//     pid: userInfo.pid
+//   }))
+// )
+// votingPower: BNtoDecimal(
+//   new BigNumber(Number(teste[`${userInfo.pid}`])).mul(userInfo.amount),
+//   18,
+//   2
+// ),
+// withdrawDelay: '1000',
+// nameToken: 'userInfo.delegatee',
+// pid: userInfo.pid
+
+// [userInfoOne, userInfoTwo, userInfoThree].map(userInfo => ({
+//   votingPower: BNtoDecimal(
+//     new BigNumber(Number(teste[`${userInfo.pid}`])).mul(userInfo.amount),
+//     18,
+//     2
+//   ),
+//   // votingPower: BNtoDecimal(new BigNumber(userInfo.amount), 18, 2),
+//   // votingPower2:  votingPower: BNtoDecimal(
+//   //   new BigNumber(poolInfo.votingMultiplier).mul(votingPower),
+//   //   18,
+//   //   2
+//   // ),
+//   withdrawDelay: '1000',
+//   nameToken: 'userInfo.delegatee',
+//   pid: userInfo.pid
+// }))
