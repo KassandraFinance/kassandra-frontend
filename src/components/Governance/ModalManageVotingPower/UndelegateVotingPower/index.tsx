@@ -153,7 +153,7 @@ const UndelegateVotingPower = ({
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
-            ToastError(`Delegate cancelled`)
+            ToastError(`Undelegate cancelled`)
             return
           }
 
