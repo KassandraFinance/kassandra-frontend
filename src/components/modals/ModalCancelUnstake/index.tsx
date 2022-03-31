@@ -1,19 +1,22 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
-import Button from '../Button'
+import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
-import waitTransaction, { MetamaskError, TransactionCallback } from '../../utils/txWait'
+import useStakingContract from '../../../hooks/useStakingContract'
 
-import { Staking } from '../../constants/tokenAddresses'
+import waitTransaction, {
+  MetamaskError,
+  TransactionCallback
+} from '../../../utils/txWait'
 
-import useStakingContract from '../../hooks/useStakingContract'
+import { Staking } from '../../../constants/tokenAddresses'
+
+import Button from '../../Button'
 
 import * as S from './styles'
 
 interface IModalRequestUnstakeProps {
-  modalOpen: boolean;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsModalStaking: React.Dispatch<React.SetStateAction<boolean>>;
   pid: number;
@@ -22,7 +25,6 @@ interface IModalRequestUnstakeProps {
 }
 
 const ModalCancelUnstake = ({
-  modalOpen,
   setModalOpen,
   setIsModalStaking,
   pid,
@@ -67,11 +69,8 @@ const ModalCancelUnstake = ({
 
   return (
     <>
-      <S.Backdrop
-        onClick={() => setModalOpen(false)}
-        style={{ display: modalOpen ? 'block' : 'none' }}
-      />
-      <S.ModalContainer modalOpen={modalOpen}>
+      <S.Backdrop onClick={() => setModalOpen(false)} />
+      <S.ModalContainer>
         <S.Top>
           <S.Attention>
             <img src="assets/IconNotification/error.svg" alt="" />
@@ -104,7 +103,6 @@ const ModalCancelUnstake = ({
               onClick={() => {
                 if (staking) {
                   setIsModalStaking(true)
-
                 } else {
                   kacyStake.cancelUnstake(pid, cancelUnstakeCallback())
                 }
