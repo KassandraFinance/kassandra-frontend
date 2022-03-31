@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import theme from '../../styles/theme'
+import theme from '../../../styles/theme'
 
-import * as ButtonStyle from '../Button/styles'
+import * as ButtonStyle from '../../Button/styles'
 
 export const Backdrop = styled.div`
   position: fixed;
@@ -19,34 +19,33 @@ interface IModalContainerProps {
   modalOpen: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
-export const ModalContainer =
-  styled.div <
-  IModalContainerProps >
-  `
+// prettier-ignore
+export const ModalContainer = styled.div<IModalContainerProps>`
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 20;
 
   display: ${props => (props.modalOpen ? 'block' : 'none')};
   max-width: 100%;
 
   background-color: #1F2937;
-  border: 1.5px solid #FFFFFF40;
-  border-radius: 10px;
+  border: 0.15rem solid #FFFFFF40;
+  border-radius: 1rem;
+
+  z-index: 20;
 `
 
 export const Top = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px;
+  padding: 2.4rem;
 
   background-color: #1f1f1fc8;
-  border-bottom: 1px solid #ffffff40;
-  border-radius: 10px 10px 0 0;
+  border-bottom: 0.1rem solid #ffffff40;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 
   p {
     font-weight: ${theme.font.weight.bold};
@@ -59,7 +58,7 @@ export const Top = styled.div`
 `
 
 export const Close = styled.button`
-  padding: 2px;
+  padding: 0.2rem;
 
   color: #fff;
   font-size: ${theme.font.sizes.font20};
@@ -74,32 +73,33 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 24px;
+  padding: 2.4rem;
 
   p {
+    margin-bottom: 1.6rem;
+
     text-align: center;
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.light};
 
-    margin-bottom: 16px;
-
     @media (max-width: 430px) {
-      font-size: 14px;
+      font-size: 1.4rem;
     }
+
     @media (max-width: 390px) {
-      font-size: 12px;
+      font-size: 1.2rem;
     }
   }
 
   span {
-    margin-bottom: 12px;
+    margin-bottom: 1.2rem;
 
     font-size: ${theme.font.sizes.font20};
     font-weight: ${theme.font.weight.bold};
   }
 
   ${ButtonStyle.Wrapper} {
-    margin-top: 24px;
+    margin-top: 2.4rem;
   }
 `
 
@@ -119,8 +119,8 @@ export const ButtonContainer = styled.div`
     cursor: pointer;
 
     svg {
-      margin-left: 8px;
-      margin-bottom: -2px;
+      margin-left: 0.8rem;
+      margin-bottom: -0.2rem;
     }
   }
 `

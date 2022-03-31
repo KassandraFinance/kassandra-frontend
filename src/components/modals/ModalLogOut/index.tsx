@@ -1,16 +1,18 @@
 import React from 'react'
 import Image from 'next/image'
+
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { ToastInfo } from '../../Toastify/toast'
 
-// import Button from '../Button'
-import { ToastInfo } from '../../components/Toastify/toast'
+import useConnect from '../../../hooks/useConnect'
 
-import close from '../../../public/assets/close.svg'
-import theme from '../../styles/theme'
+import Button from '../../Button'
+
+import close from '../../../../public/assets/close.svg'
+
+import theme from '../../../styles/theme'
 import * as S from './styles'
-import Button from '../Button'
-import useConnect from '../../hooks/useConnect'
 
 interface IModalLogOutProps {
   modalOpen: boolean;
@@ -47,8 +49,8 @@ const ModalLogOut = ({
   return (
     <>
       <S.Backdrop
-        onClick={() => setModalOpen(false)}
         style={{ display: modalOpen ? 'block' : 'none' }}
+        onClick={() => setModalOpen(false)}
       />
       <S.ModalContainer modalOpen={modalOpen}>
         <S.Top>
@@ -86,9 +88,9 @@ const ModalLogOut = ({
             </CopyToClipboard>
             <a
               href={`https://testnet.snowtrace.io/address/${userWalletAddress}`}
-              onClick={() => setModalOpen(false)}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => setModalOpen(false)}
             >
               View on Explorer
               <svg
@@ -113,11 +115,11 @@ const ModalLogOut = ({
           {connectionToWalletConnect && (
             <Button
               backgroundSecondary
+              text="Disconnect"
               onClick={() => {
                 handleDisconnected()
                 setModalOpen(false)
               }}
-              text="Disconnect"
             />
           )}
         </S.Content>
