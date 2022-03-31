@@ -35,9 +35,9 @@ import { BNtoDecimal } from '../../utils/numerals'
 import { GET_INFO_AHYPE } from './graphql'
 
 import Button from '../Button'
-import ModalRequestUnstake from '../ModalRequestUnstake'
-import ModalCancelUnstake from '../ModalCancelUnstake'
-import ModalWalletConnect from '../ModalWalletConnect'
+import ModalRequestUnstake from '../modals/ModalRequestUnstake'
+import ModalCancelUnstake from '../modals/ModalCancelUnstake'
+import ModalWalletConnect from '../modals/ModalWalletConnect'
 import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
 import ModalStakeAndWithdraw from '../modals/ModalStakeAndWithdraw'
 import Details from './Details'
@@ -586,7 +586,6 @@ const StakeCard = ({
       </S.BorderGradient>
       {isModalStake && (
         <ModalStakeAndWithdraw
-          modalOpen={isModalStake}
           setModalOpen={setIsModalStake}
           pid={pid}
           decimals={decimals}
@@ -597,28 +596,33 @@ const StakeCard = ({
           setStakeTransaction={setStakeTransaction}
         />
       )}
-      <ModalCancelUnstake
-        modalOpen={isModalCancelUnstake}
-        setModalOpen={setIsModalCancelUnstake}
-        setIsModalStaking={setIsModalStake}
-        pid={pid}
-        staking={infoStaked.withdrawDelay !== '0' && infoStaked.withdrawable}
-        symbol={symbol}
-      />
-      <ModalRequestUnstake
-        modalOpen={isModalRequestUnstake}
-        setModalOpen={setIsModalRequestUnstake}
-        pid={pid}
-        votingMultiplier={infoStaked.votingMultiplier}
-        yourStake={infoStaked.yourStake}
-        symbol={symbol}
-        userWalletAddress={userWalletAddress}
-        stakedUntil={stakedUntil}
-      />
-      <ModalWalletConnect
-        modalOpen={isModalWallet}
-        setModalOpen={setIsModaWallet}
-      />
+      {isModalCancelUnstake && (
+        <ModalCancelUnstake
+          setModalOpen={setIsModalCancelUnstake}
+          setIsModalStaking={setIsModalStake}
+          pid={pid}
+          staking={infoStaked.withdrawDelay !== '0' && infoStaked.withdrawable}
+          symbol={symbol}
+        />
+      )}
+      {isModalRequestUnstake && (
+        <ModalRequestUnstake
+          modalOpen={isModalRequestUnstake}
+          setModalOpen={setIsModalRequestUnstake}
+          pid={pid}
+          votingMultiplier={infoStaked.votingMultiplier}
+          yourStake={infoStaked.yourStake}
+          symbol={symbol}
+          userWalletAddress={userWalletAddress}
+          stakedUntil={stakedUntil}
+        />
+      )}
+      {isModalWallet && (
+        <ModalWalletConnect
+          modalOpen={isModalWallet}
+          setModalOpen={setIsModaWallet}
+        />
+      )}
     </>
   )
 }

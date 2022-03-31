@@ -7,10 +7,10 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 import substr from '../../utils/substr'
 
 import Button from '../Button'
-import ModalLogOut from '../ModalLogOut'
+import ModalLogOut from '../modals/ModalLogOut'
 import DropdownInvest from '../Dropdown'
-import ModalWalletConnect from '../ModalWalletConnect'
-import ModalSocialMediaMobile from '../ModalSocialMediaMobile'
+import ModalWalletConnect from '../modals/ModalWalletConnect'
+import ModalSocialMediaMobile from '../modals/ModalSocialMediaMobile'
 
 import options from '../../../public/assets/options.svg'
 import kacy64 from '../../../public/assets/logo-64.svg'
@@ -215,16 +215,11 @@ const Header = () => {
           </S.ButtonOptions>
         </S.OptionsContainer>
       </S.MenuBottom>
+      {isModalSocialMedia && (
+        <ModalSocialMediaMobile setModalOpen={setIsModalSocialMedia} />
+      )}
 
-      <ModalSocialMediaMobile
-        modalOpen={isModalSocialMedia}
-        setModalOpen={setIsModalSocialMedia}
-      />
-
-      <ModalWalletConnect
-        modalOpen={isModalWallet}
-        setModalOpen={setIsModalWallet}
-      />
+      {isModalWallet && <ModalWalletConnect setModalOpen={setIsModalWallet} />}
 
       <ModalLogOut
         modalOpen={isModalLogout}
