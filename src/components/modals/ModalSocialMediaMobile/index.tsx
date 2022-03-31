@@ -1,30 +1,25 @@
 import React from 'react'
 import Image from 'next/image'
 
-import discord from '../../../public/assets/Discord.svg'
-import telegram from '../../../public/assets/telegram.svg'
-import twitter from '../../../public/assets/Twitter.svg'
-import medium from '../../../public/assets/Medium.svg'
-import github from '../../../public/assets/Github.svg'
+import discord from '../../../../public/assets/Discord.svg'
+import telegram from '../../../../public/assets/telegram.svg'
+import twitter from '../../../../public/assets/Twitter.svg'
+import medium from '../../../../public/assets/Medium.svg'
+import github from '../../../../public/assets/Github.svg'
 
 import * as S from './styles'
 
 interface IModalSocialMediaMobileProps {
-  modalOpen: boolean;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ModalSocialMediaMobile = ({
-  modalOpen,
   setModalOpen
 }: IModalSocialMediaMobileProps) => {
   return (
     <>
-      <S.Backdrop
-        onClick={() => setModalOpen(false)}
-        style={{ display: modalOpen ? 'block' : 'none' }}
-      />
-      <S.ModalContainer modalOpen={modalOpen}>
+      <S.Backdrop onClick={() => setModalOpen(false)} />
+      <S.ModalContainer>
         <S.SocialIcon
           href="https://discord.gg/fAqpbP6tFw"
           target="_blank"

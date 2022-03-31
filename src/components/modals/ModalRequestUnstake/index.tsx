@@ -1,20 +1,20 @@
 import React from 'react'
 import BigNumber from 'bn.js'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
+import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
-import { BNtoDecimal } from '../../utils/numerals'
-import { dateRequestUnstake } from '../../utils/date'
+import { BNtoDecimal } from '../../../utils/numerals'
+import { dateRequestUnstake } from '../../../utils/date'
 import waitTransaction, {
   MetamaskError,
   TransactionCallback
-} from '../../utils/txWait'
+} from '../../../utils/txWait'
 
-import { Staking } from '../../constants/tokenAddresses'
-import useStakingContract from '../../hooks/useStakingContract'
+import { Staking } from '../../../constants/tokenAddresses'
+import useStakingContract from '../../../hooks/useStakingContract'
 
 import * as S from './styles'
-import Button from '../Button'
+import Button from '../../Button'
 
 interface IModalRequestUnstakeProps {
   modalOpen: boolean;
@@ -89,11 +89,8 @@ const ModalRequestUnstake = ({
 
   return (
     <>
-      <S.Backdrop
-        onClick={() => setModalOpen(false)}
-        style={{ display: modalOpen ? 'block' : 'none' }}
-      />
-      <S.ModalContainer modalOpen={modalOpen}>
+      <S.Backdrop onClick={() => setModalOpen(false)} />
+      <S.ModalContainer>
         <S.Top>
           <S.Attention>
             <img src="assets/IconNotification/warning.svg" alt="" />
