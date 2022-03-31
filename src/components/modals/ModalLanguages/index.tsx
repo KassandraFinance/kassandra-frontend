@@ -14,8 +14,8 @@ const ModalLanguages = ({ modalOpen, setModalOpen }: IModalLanguagesProps) => {
   return (
     <>
       <S.Backdrop
-        onClick={() => setModalOpen(false)}
         style={{ display: modalOpen ? 'block' : 'none' }}
+        onClick={() => setModalOpen(false)}
       />
       <S.ModalContainer modalOpen={modalOpen}>
         <button onClick={() => setModalOpen(false)}>

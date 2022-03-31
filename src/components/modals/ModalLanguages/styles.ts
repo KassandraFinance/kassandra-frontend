@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import theme from '../../styles/theme'
+import theme from '../../../styles/theme'
 
 export const Backdrop = styled.div`
   background-color: transparent;
@@ -17,18 +17,18 @@ interface IModalContainerProps {
   modalOpen: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const ModalContainer = styled.div<IModalContainerProps>`
   display: ${props => (props.modalOpen ? 'block' : 'none')};
 
   background-color: #372B3B;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 4px;
+  border: 0.1rem solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.4rem;
 
 
   position: fixed;
-  bottom: 76px;
-  right: 16px;
+  bottom: 7.6rem;
+  right: 1.6rem;
 
   z-index: 20;
   button {
@@ -42,12 +42,12 @@ export const ModalContainer = styled.div<IModalContainerProps>`
     display: flex;
     align-items: center;
     justify-content: space-around;
-    padding: 8px;
+    padding: 0.8rem;
     outline: none;
     img {
-      margin-right: 4px !important;
-      width: 18px;
-      padding: 2px;
+      margin-right: 0.4rem !important;
+      width: 1.8rem;
+      padding: 0.2rem;
     }
   }
 `
