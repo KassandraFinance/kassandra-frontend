@@ -3,13 +3,17 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useSelector, RootStateOrAny } from 'react-redux'
 import Big from 'big.js'
+import BigNumber from 'bn.js'
+
 import useSWR from 'swr'
 import { request } from 'graphql-request'
 
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
-import { SUBGRAPH_URL } from '../../../constants/tokenAddresses'
+import { SUBGRAPH_URL, Staking } from '../../../constants/tokenAddresses'
+
+import useStakingContract from '../../../hooks/useStakingContract'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 import substr from '../../../utils/substr'
@@ -31,9 +35,12 @@ const IntroWalletAddress = () => {
   const [isModalManageVotingPower, setIsModalManageVotingPower] = React.useState<boolean>(false)
   // eslint-disable-next-line prettier/prettier
   const [isModalWalletConnect, setIsModalWalletConnect] = React.useState<boolean>(false)
+  // eslint-disable-next-line prettier/prettier
+  const [totalKacyStaked, setTotalKacyStaked] = React.useState<BigNumber>(new BigNumber(0))
   const [voteWeight, setVoteWeight] = React.useState<string>('')
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const { userInfo } = useStakingContract(Staking)
 
   const router = useRouter()
   const { address } = router.query
@@ -42,8 +49,32 @@ const IntroWalletAddress = () => {
     request(SUBGRAPH_URL, query, { id: address })
   )
 
+  const callUserInfo = async () => {
+    const [userInfoOne, userInfoTwo, userInfoThree] = await Promise.all([
+      userInfo(
+        process.env.NEXT_PUBLIC_MASTER === '1' ? 2 : 0,
+        userWalletAddress
+      ),
+      userInfo(
+        process.env.NEXT_PUBLIC_MASTER === '1' ? 3 : 1,
+        userWalletAddress
+      ),
+      userInfo(
+        process.env.NEXT_PUBLIC_MASTER === '1' ? 4 : 2,
+        userWalletAddress
+      )
+    ])
+
+    const totalStaked = new BigNumber(userInfoOne.amount)
+      .add(new BigNumber(userInfoTwo.amount))
+      .add(new BigNumber(userInfoThree.amount))
+
+    setTotalKacyStaked(totalStaked)
+  }
+
   React.useEffect(() => {
     if (data) {
+      callUserInfo()
       const vote = BNtoDecimal(
         Big(data.user.votingPower)
           .mul(100)
@@ -89,7 +120,9 @@ const IntroWalletAddress = () => {
               </Tippy>
             </span>
             {userWalletAddress ? (
-              <span className="value-total-voting-power">123,456.789</span>
+              <span className="value-total-voting-power">
+                {BNtoDecimal(new BigNumber(totalKacyStaked), 18, 2)}
+              </span>
             ) : (
               <Button
                 onClick={() => setIsModalWalletConnect(true)}
