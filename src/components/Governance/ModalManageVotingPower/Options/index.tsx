@@ -2,9 +2,9 @@ import Image from 'next/image'
 
 import { IDateProps } from '../DelegateVotingPower'
 
-import * as S from '../styles'
-
 import logo from '../../../../../public/assets/logo-64.svg'
+
+import * as S from '../styles'
 
 interface IOptionsProps {
   optionsOpen: boolean;
@@ -54,7 +54,7 @@ const Options = ({
                 }}
               >
                 <S.Name>
-                  <Image src={logo} alt="" />
+                  <Image src={logo} width={24} height={24} alt="" />
                   <S.WithdrawDelay>
                     <p>{item.nameToken}</p>
                     <span>{item.withdrawDelay} days withdraw delay</span>
