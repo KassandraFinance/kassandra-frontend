@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { useSelector, RootStateOrAny } from 'react-redux'
 import Big from 'big.js'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
@@ -15,6 +16,7 @@ import substr from '../../../utils/substr'
 
 import Button from '../../../components/Button'
 import ExternalLink from '../../../components/ExternalLink'
+import ModalWalletConnect from '../../ModalWalletConnect'
 import ModalManageVotingPower from '../ModalManageVotingPower'
 
 import tooltip from '../../../../public/assets/icons/tooltip.svg'
@@ -27,7 +29,12 @@ import * as S from './styles'
 const IntroWalletAddress = () => {
   // eslint-disable-next-line prettier/prettier
   const [isModalManageVotingPower, setIsModalManageVotingPower] = React.useState<boolean>(false)
+  // eslint-disable-next-line prettier/prettier
+  const [isModalWalletConnect, setIsModalWalletConnect] = React.useState<boolean>(false)
   const [voteWeight, setVoteWeight] = React.useState<string>('')
+
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+
   const router = useRouter()
   const { address } = router.query
 
@@ -46,6 +53,7 @@ const IntroWalletAddress = () => {
       )
       setVoteWeight(vote)
     }
+    setVoteWeight('')
   }, [data])
 
   return (
@@ -54,7 +62,11 @@ const IntroWalletAddress = () => {
         <S.AddressAndVoteWeight>
           <S.WalletAddress>
             <Image src={jony} alt="" />
-            <h2>{address ? substr(`${address}`) : substr('0x000000000')}</h2>
+            <h2>
+              {userWalletAddress
+                ? substr(`${userWalletAddress}`)
+                : substr('0x000000000')}
+            </h2>
           </S.WalletAddress>
           <S.VoteWeightCard>
             <S.VoteWeight>
@@ -80,7 +92,16 @@ const IntroWalletAddress = () => {
                 </S.Tooltip>
               </Tippy>
             </span>
-            <span className="value-total-voting-power">123,456.789</span>
+            {userWalletAddress ? (
+              <span className="value-total-voting-power">123,456.789</span>
+            ) : (
+              <Button
+                onClick={() => setIsModalWalletConnect(true)}
+                size="large"
+                text="Connect Wallet"
+                backgroundSecondary
+              />
+            )}
           </S.AddressTotalVotingPower>
 
           <S.AllVotingPowerCard>
@@ -112,6 +133,12 @@ const IntroWalletAddress = () => {
         <ModalManageVotingPower
           modalOpen={isModalManageVotingPower}
           setModalOpen={setIsModalManageVotingPower}
+        />
+      )}
+      {isModalWalletConnect && (
+        <ModalWalletConnect
+          modalOpen={isModalWalletConnect}
+          setModalOpen={setIsModalWalletConnect}
         />
       )}
     </>
