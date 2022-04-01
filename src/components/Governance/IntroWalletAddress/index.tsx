@@ -62,7 +62,7 @@ const IntroWalletAddress = () => {
       <S.IntroWalletAddress>
         <S.AddressAndVoteWeight>
           <S.WalletAddress>
-            <Image src={jony} alt="" />
+            <Image src={jony} width={40} height={40} alt="" />
             <h2>
               {userWalletAddress
                 ? substr(`${userWalletAddress}`)

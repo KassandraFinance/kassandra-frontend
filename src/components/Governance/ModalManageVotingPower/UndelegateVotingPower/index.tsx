@@ -47,7 +47,12 @@ const UndelegateVotingPower = ({
           <S.Selected onClick={() => setOptionsOpen(!optionsOpen)}>
             <S.Option>
               <S.Name>
-                <Image src={undelegateSelected.image} alt="" />
+                <Image
+                  src={undelegateSelected.image}
+                  width={24}
+                  height={24}
+                  alt=""
+                />
                 <S.WithdrawDelay>
                   <p>{undelegateSelected.nameToken}</p>
                   <span>

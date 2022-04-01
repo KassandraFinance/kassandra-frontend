@@ -48,7 +48,7 @@ const Options = ({
             }}
           >
             <S.Name>
-              <Image src={item.image} alt="" />
+              <Image src={item.image} width={24} height={24} alt="" />
               <S.WithdrawDelay>
                 <p>{item.nameToken}</p>
                 <span>{item.withdrawDelay} days withdraw delay</span>

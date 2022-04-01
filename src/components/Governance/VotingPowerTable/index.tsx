@@ -96,7 +96,7 @@ export const VotingPowerTable = () => {
                   <S.Tr>
                     <S.Td className="rank">{index + 1}</S.Td>
                     <S.Td className="user">
-                      <Image src={avax} alt="" />
+                      <Image src={avax} width={24} height={24} alt="" />
                       <span>{substr(item.address)}</span>
                     </S.Td>
                     <S.Td className="vote-power">
