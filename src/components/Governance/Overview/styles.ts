@@ -33,6 +33,7 @@ export const VotingDataCard = styled.div`
 
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 
   padding: ${theme.spacings.space24};
   @media (max-width: 700px) {
@@ -61,7 +62,7 @@ export const Tooltip = styled.div`
   padding: 1px;
 
   position: relative;
-  z-index: 99;
+  z-index: 19;
 `
 
 export const ValueVoting = styled.span`

@@ -15,9 +15,12 @@ import useVotingPower from '../../../hooks/useVotingPower'
 import web3 from '../../../utils/web3'
 import { BNtoDecimal } from '../../../utils/numerals'
 
-import { GET_GOVERNANCES } from './graphql'
+import Button from '../../../components/Button'
+import ModalWalletConnect from '../../ModalWalletConnect'
 
 import tooltip from '../../../../public/assets/icons/tooltip.svg'
+
+import { GET_GOVERNANCES } from './graphql'
 
 import * as S from './styles'
 
@@ -27,6 +30,8 @@ interface IGovernancesProps {
 }
 
 export const Overview = () => {
+  // eslint-disable-next-line prettier/prettier
+  const [isModalWalletConnect, setIsModalWalletConnect] = React.useState<boolean>(false)
   const [yourVotingPower, setYourVotingPower] = React.useState(new BigNumber(-1)) // eslint-disable-line prettier/prettier
   const [governances, setGovernances] = React.useState<IGovernancesProps>({
     totalVotingPower: new BigNumber(-1),
@@ -63,49 +68,66 @@ export const Overview = () => {
   }, [data])
 
   return (
-    <S.Overview>
-      <S.VotginCards>
-        <S.VotingDataCard>
-          <S.TextVoting>
-            Your Voting Power
-            <Tippy content="Voting power allows you to create and vote on proposals. To obtain voting power you need to stake your $KACY tokens.">
-              <S.Tooltip>
-                <Image src={tooltip} alt="Explanation" />
-              </S.Tooltip>
-            </Tippy>
-          </S.TextVoting>
-          <S.ValueVoting>
-            {yourVotingPower.lt(new BigNumber('0'))
-              ? '...'
-              : BNtoDecimal(yourVotingPower, 18, 2)}
-          </S.ValueVoting>
-        </S.VotingDataCard>
-        <S.VotingDataCard>
-          <S.TextVoting>
-            Total Voting Power
-            <Tippy content="Voting power allows you to create and vote on proposals. To obtain voting power you need to stake your $KACY tokens.">
-              <S.Tooltip>
-                <Image src={tooltip} alt="Explanation" />
-              </S.Tooltip>
-            </Tippy>
-          </S.TextVoting>
-          <S.ValueVoting>
-            {BNtoDecimal(governances.totalVotingPower, 0, 2)}
-          </S.ValueVoting>
-        </S.VotingDataCard>
-        <S.VotingDataCard>
-          <S.TextVoting>
-            Voting Addresses
-            <Tippy content="Voting power allows you to create and vote on proposals. To obtain voting power you need to stake your $KACY tokens.">
-              <S.Tooltip>
-                <Image src={tooltip} alt="Explanation" />
-              </S.Tooltip>
-            </Tippy>
-          </S.TextVoting>
-          <S.ValueVoting>{governances.votingAddresses}</S.ValueVoting>
-        </S.VotingDataCard>
-      </S.VotginCards>
-    </S.Overview>
+    <>
+      <S.Overview>
+        <S.VotginCards>
+          <S.VotingDataCard>
+            <S.TextVoting>
+              Your Voting Power
+              <Tippy content="Voting power allows you to create and vote on proposals. To obtain voting power you need to stake your $KACY tokens.">
+                <S.Tooltip>
+                  <Image src={tooltip} alt="Explanation" />
+                </S.Tooltip>
+              </Tippy>
+            </S.TextVoting>
+            {userWalletAddress ? (
+              <S.ValueVoting>
+                {yourVotingPower.lt(new BigNumber('0'))
+                  ? '...'
+                  : BNtoDecimal(yourVotingPower, 18, 2)}
+              </S.ValueVoting>
+            ) : (
+              <Button
+                onClick={() => setIsModalWalletConnect(true)}
+                size="large"
+                text="Connect Wallet"
+                backgroundSecondary
+              />
+            )}
+          </S.VotingDataCard>
+          <S.VotingDataCard>
+            <S.TextVoting>
+              Total Voting Power
+              <Tippy content="Voting power allows you to create and vote on proposals. To obtain voting power you need to stake your $KACY tokens.">
+                <S.Tooltip>
+                  <Image src={tooltip} alt="Explanation" />
+                </S.Tooltip>
+              </Tippy>
+            </S.TextVoting>
+            <S.ValueVoting>
+              {BNtoDecimal(governances.totalVotingPower, 0, 2)}
+            </S.ValueVoting>
+          </S.VotingDataCard>
+          <S.VotingDataCard>
+            <S.TextVoting>
+              Voting Addresses
+              <Tippy content="Voting power allows you to create and vote on proposals. To obtain voting power you need to stake your $KACY tokens.">
+                <S.Tooltip>
+                  <Image src={tooltip} alt="Explanation" />
+                </S.Tooltip>
+              </Tippy>
+            </S.TextVoting>
+            <S.ValueVoting>{governances.votingAddresses}</S.ValueVoting>
+          </S.VotingDataCard>
+        </S.VotginCards>
+      </S.Overview>
+      {isModalWalletConnect && (
+        <ModalWalletConnect
+          modalOpen={isModalWalletConnect}
+          setModalOpen={setIsModalWalletConnect}
+        />
+      )}
+    </>
   )
 }
 
