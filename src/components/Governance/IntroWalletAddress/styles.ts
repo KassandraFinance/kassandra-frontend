@@ -22,19 +22,20 @@ export const WalletAddress = styled.div`
   align-items: center;
 
   img {
-    border-radius: 50%;
     width: 4rem;
+
+    border-radius: 50%;
     @media (max-width: 992px) {
       width: 3.2rem;
     }
   }
 
   h2 {
+    margin-left: ${theme.spacings.space18};
+
     line-height: ${theme.font.sizes.font32};
     font-size: ${theme.font.sizes.font32};
     font-weight: ${theme.font.weight.normal};
-
-    margin-left: ${theme.spacings.space18};
     @media (max-width: 992px) {
       line-height: ${theme.font.sizes.font24};
       font-size: ${theme.font.sizes.font24};
@@ -43,14 +44,6 @@ export const WalletAddress = styled.div`
 `
 
 export const VoteWeightCard = styled.div`
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-
-  border-radius: 1.2rem;
-  color: ${theme.colors.snow};
-  font-size: ${theme.font.sizes.font16};
-  font-weight: ${theme.font.weight.light};
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -58,19 +51,26 @@ export const VoteWeightCard = styled.div`
   width: 21.4rem;
   padding: 1.6rem 2.4rem;
 
-  @media (max-width: 992px) {
-    font-size: ${theme.font.sizes.font12};
+  color: ${theme.colors.snow};
+  font-size: ${theme.font.sizes.font16};
+  font-weight: ${theme.font.weight.light};
 
+  background: rgba(255, 255, 255, 0.04);
+  border: 0.01rem solid rgba(255, 255, 255, 0.2);
+  border-radius: 1.2rem;
+
+  @media (max-width: 992px) {
     width: 16.4rem;
     padding: 0.8rem 1.6rem;
+
+    font-size: ${theme.font.sizes.font12};
   }
 
   @media (max-width: 576px) {
-    gap: 16px;
+    gap: 1.6rem;
 
     width: 100%;
     height: 3rem;
-
     margin-top: 1.6rem;
   }
 
@@ -79,15 +79,15 @@ export const VoteWeightCard = styled.div`
     font-weight: ${theme.font.weight.bold};
 
     @media (max-width: 992px) {
-      font-size: ${theme.font.sizes.font18};
-
       margin-top: 0.4rem;
+
+      font-size: ${theme.font.sizes.font18};
     }
 
     @media (max-width: 576px) {
-      font-size: ${theme.font.sizes.font14};
-
       margin-top: 0;
+
+      font-size: ${theme.font.sizes.font14};
     }
   }
 `
@@ -126,12 +126,13 @@ interface IHorizontalLineProps {
 export const HorizontalLine = styled.div<IHorizontalLineProps>`
   content: '';
   display: block;
-  background: rgba(255, 255, 255, 0.2);
-
+  
   width: 0.1rem;
   height: 5rem;
+  
+  background: rgba(255, 255, 255, 0.2);
 
-  @media (max-width: 760px) {
+  @media (max-width: 680px) {
     display: ${props => (props.none ? 'none' : 'block')};
   }
 
@@ -143,13 +144,14 @@ export const HorizontalLine = styled.div<IHorizontalLineProps>`
 export const VerticalLine = styled.div`
   display: none;
 
-  @media (max-width: 760px) {
+  @media (max-width: 680px) {
     content: '';
     display: block;
-    background: rgba(255, 255, 255, 0.2);
 
     width: 100%;
     height: 0.1rem;
+
+    background: rgba(255, 255, 255, 0.2);
   }
 `
 
@@ -170,28 +172,26 @@ export const VotingPowerContent = styled.div`
 `
 
 export const AllVotingPowerCard = styled.div`
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-
-  border-radius: 1.2rem;
-
   display: grid;
-  grid-template-columns: 28rem 0.01rem 1fr;
-  gap: 24px;
+  grid-template-columns: 3fr 0.1rem 2fr;
+  gap: 2.4rem;
+
+  min-width: 75rem;
+  padding: 3.2rem;
 
   align-items: center;
 
-  min-width: 75rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 0.01rem solid rgba(255, 255, 255, 0.2);
+  border-radius: 1.2rem;
 
-  padding: 3.2rem;
   @media (max-width: 1100px) {
-    grid-template-columns: 25rem 1px 1fr;
-    gap: 24px;
+    grid-template-columns: 3fr 0.01rem 2fr;
 
-    min-width: 30rem;
+    min-width: 20rem;
   }
 
-  @media (max-width: 760px) {
+  @media (max-width: 680px) {
     grid-template-columns: 1fr;
   }
 
@@ -208,7 +208,7 @@ export const AddressTotalVotingPower = styled.div`
   width: 100%;
 
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 0.01rem solid rgba(255, 255, 255, 0.2);
   border-radius: 1.2rem;
 
   @media (max-width: 1100px) {
@@ -216,6 +216,8 @@ export const AddressTotalVotingPower = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
+    padding: 2.8rem 2.4rem;
   }
 
   @media (max-width: 576px) {
@@ -249,10 +251,15 @@ export const AddressTotalVotingPower = styled.div`
     }
   }
   .value-total-voting-power {
-    color: ${theme.colors.grayDisabled};
+    color: ${theme.colors.snow};
     line-height: ${theme.font.sizes.font32};
     font-size: ${theme.font.sizes.font32};
     font-weight: ${theme.font.weight.bold};
+
+    @media (max-width: 1100px) {
+      font-size: ${theme.font.sizes.font24};
+    }
+
     @media (max-width: 576px) {
       font-size: ${theme.font.sizes.font18};
     }
@@ -260,20 +267,20 @@ export const AddressTotalVotingPower = styled.div`
 `
 
 export const Tooltip = styled.div`
-  margin-top: -1px;
-  margin-left: 8px;
-
-  padding: 1px;
-  height: 22px;
-
   position: relative;
-  z-index: 99;
+
+  margin-top: -0.01rem;
+  margin-left: 0.8rem;
+  padding: 0.01rem;
+  height: 2.2rem;
+
+  z-index: 20;
 `
 
 export const ReceivedAndOwnedVotingPower = styled.div`
   font-weight: ${theme.font.sizes.font16};
   font-size: ${theme.font.sizes.font16};
-  font-weight: ${theme.font.weight.light};
+  font-weight: ${theme.font.weight.medium};
 
   .gray-color {
     color: ${theme.colors.grayDisabled};
@@ -283,7 +290,6 @@ export const ReceivedAndOwnedVotingPower = styled.div`
     font-size: ${theme.font.sizes.font12};
   }
   .bold {
-    font-weight: ${theme.font.weight.medium};
     @media (max-width: 576px) {
       font-size: ${theme.font.sizes.font14};
     }

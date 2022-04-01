@@ -1,10 +1,16 @@
 import React from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import Big from 'big.js'
+import useSWR from 'swr'
+import { request } from 'graphql-request'
 
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
+import { SUBGRAPH_URL } from '../../../constants/tokenAddresses'
+
+import { BNtoDecimal } from '../../../utils/numerals'
 import substr from '../../../utils/substr'
 
 import Button from '../../../components/Button'
@@ -14,13 +20,33 @@ import ModalManageVotingPower from '../ModalManageVotingPower'
 import tooltip from '../../../../public/assets/icons/tooltip.svg'
 import jony from '../../../../public/assets/team/jony-reis.png'
 
+import { GET_USER } from './graphql'
+
 import * as S from './styles'
 
 const IntroWalletAddress = () => {
   // eslint-disable-next-line prettier/prettier
   const [isModalManageVotingPower, setIsModalManageVotingPower] = React.useState<boolean>(false)
+  const [voteWeight, setVoteWeight] = React.useState<string>('')
   const router = useRouter()
   const { address } = router.query
+
+  const { data } = useSWR([GET_USER], query =>
+    request(SUBGRAPH_URL, query, { id: address })
+  )
+
+  React.useEffect(() => {
+    if (data) {
+      const vote = BNtoDecimal(
+        Big(data.user.votingPower)
+          .mul(100)
+          .div(Big(data.governances[0].totalVotingPower)),
+        18,
+        2
+      )
+      setVoteWeight(vote)
+    }
+  }, [data])
 
   return (
     <>
@@ -28,12 +54,14 @@ const IntroWalletAddress = () => {
         <S.AddressAndVoteWeight>
           <S.WalletAddress>
             <Image src={jony} alt="" />
-            <h2>{substr(`${address}`)}</h2>
+            <h2>{address ? substr(`${address}`) : substr('0x000000000')}</h2>
           </S.WalletAddress>
           <S.VoteWeightCard>
             <S.VoteWeight>
               <span>Vote Weight</span>
-              <span className="font-bold">12,95%</span>
+              <span className="font-bold">
+                {voteWeight ? `${voteWeight}%` : '...'}
+              </span>
             </S.VoteWeight>
             <S.HorizontalLine />
             <S.Rank>
@@ -80,10 +108,12 @@ const IntroWalletAddress = () => {
           </S.AllVotingPowerCard>
         </S.VotingPowerContent>
       </S.IntroWalletAddress>
-      <ModalManageVotingPower
-        modalOpen={isModalManageVotingPower}
-        setModalOpen={setIsModalManageVotingPower}
-      />
+      {isModalManageVotingPower && (
+        <ModalManageVotingPower
+          modalOpen={isModalManageVotingPower}
+          setModalOpen={setIsModalManageVotingPower}
+        />
+      )}
     </>
   )
 }
