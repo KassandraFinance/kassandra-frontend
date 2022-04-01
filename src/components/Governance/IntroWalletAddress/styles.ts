@@ -48,7 +48,7 @@ export const VoteWeightCard = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  width: 21.4rem;
+  width: 16rem;
   padding: 1.6rem 2.4rem;
 
   color: ${theme.colors.snow};
@@ -60,7 +60,7 @@ export const VoteWeightCard = styled.div`
   border-radius: 1.2rem;
 
   @media (max-width: 992px) {
-    width: 16.4rem;
+    width: 12rem;
     padding: 0.8rem 1.6rem;
 
     font-size: ${theme.font.sizes.font12};

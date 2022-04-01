@@ -52,6 +52,7 @@ const IntroWalletAddress = () => {
         2
       )
       setVoteWeight(vote)
+      return
     }
     setVoteWeight('')
   }, [data])
@@ -75,11 +76,6 @@ const IntroWalletAddress = () => {
                 {voteWeight ? `${voteWeight}%` : '...'}
               </span>
             </S.VoteWeight>
-            <S.HorizontalLine />
-            <S.Rank>
-              <span>Rank</span>
-              <span className="font-bold">10</span>
-            </S.Rank>
           </S.VoteWeightCard>
         </S.AddressAndVoteWeight>
         <S.VotingPowerContent>
