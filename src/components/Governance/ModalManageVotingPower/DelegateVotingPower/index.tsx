@@ -1,9 +1,25 @@
 import React from 'react'
 import Image from 'next/image'
+
+import BigNumber from 'bn.js'
+import { RootStateOrAny, useSelector } from 'react-redux'
+
+import { Staking } from '../../../../constants/tokenAddresses'
+
 // import { useMatomo } from '@datapunt/matomo-tracker-react'
+import useStakingContract from '../../../../hooks/useStakingContract'
+import useVotingPower from '../../../../hooks/useVotingPower'
+
+import { BNtoDecimal } from '../../../../utils/numerals'
+import substr from '../../../../utils/substr'
+import waitTransaction, {
+  MetamaskError,
+  TransactionCallback
+} from '../../../../utils/txWait'
 
 import Button from '../../../Button'
 import ExternalLink from '../../../ExternalLink'
+import { ToastError, ToastSuccess, ToastWarning } from '../../../Toastify/toast'
 import Options from '../Options'
 
 import arrowSelect from '../../../../../public/assets/icons/arrow-select.svg'
@@ -12,7 +28,7 @@ import logo from '../../../../../public/assets/logo-64.svg'
 import * as S from '../styles'
 
 export interface IDateProps {
-  image: any;
+  pid: number;
   nameToken: string;
   withdrawDelay: string;
   votingPower: string;
@@ -20,18 +36,139 @@ export interface IDateProps {
 
 interface IDelegateVotingPowerProps {
   setCurrentModal: React.Dispatch<React.SetStateAction<string>>;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const DelegateVotingPower = ({
-  setCurrentModal
+  setCurrentModal,
+  setModalOpen
 }: IDelegateVotingPowerProps) => {
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const [optionsOpen, setOptionsOpen] = React.useState<boolean>(false)
+  const [receiverAddress, setReceiverAddress] = React.useState<string>('')
   const [delegateSelected, setDelegateSelected] = React.useState<IDateProps>({
-    image: '',
+    pid: 0,
     nameToken: '',
     withdrawDelay: '',
     votingPower: ''
   })
+  const [poolData, setPoolData] = React.useState<any>([])
+  const [loading, setLoading] = React.useState<boolean>(true)
+
+  const { poolInfo, balance } = useStakingContract(Staking)
+  const { delegateVote, delegateAllVotes } = useVotingPower(Staking)
+
+  const handlePoolInfo = async () => {
+    const [poolInfoOne, poolInfoTwo, poolInfoThree] = await Promise.all([
+      poolInfo(process.env.NEXT_PUBLIC_MASTER === '1' ? 2 : 0),
+      poolInfo(process.env.NEXT_PUBLIC_MASTER === '1' ? 3 : 1),
+      poolInfo(process.env.NEXT_PUBLIC_MASTER === '1' ? 4 : 2)
+    ])
+
+    poolInfoOne.pid = process.env.NEXT_PUBLIC_MASTER === '1' ? 2 : 0
+    poolInfoTwo.pid = process.env.NEXT_PUBLIC_MASTER === '1' ? 3 : 1
+    poolInfoThree.pid = process.env.NEXT_PUBLIC_MASTER === '1' ? 4 : 2
+
+    const newArr = []
+    const arr = [poolInfoOne, poolInfoTwo, poolInfoThree]
+
+    for (let i = 0; i < arr.length; i++) {
+      const poolInfo = arr[i]
+      const votingPower = await balance(Number(poolInfo.pid), userWalletAddress)
+
+      newArr.push({
+        withdrawDelay: Math.round(Number(poolInfo.withdrawDelay) / 86400),
+        votingPower: BNtoDecimal(
+          new BigNumber(poolInfo.votingMultiplier).mul(votingPower),
+          18,
+          2
+        ),
+        pid: poolInfo.pid,
+        nameToken: 'KACY'
+      })
+    }
+
+    setPoolData(newArr)
+    setLoading(false)
+  }
+
+  React.useEffect(() => {
+    handlePoolInfo()
+  }, [setModalOpen, setCurrentModal])
+
+  const delegateCallback = React.useCallback(
+    (receiverAddress: string): TransactionCallback => {
+      return async (error: MetamaskError, txHash: string) => {
+        if (error) {
+          if (error.code === 4001) {
+            ToastError(`Delegate cancelled`)
+            return
+          }
+
+          ToastError(`Error`)
+          return
+        }
+
+        ToastWarning(`Confirming delegate to ${substr(receiverAddress)}...`)
+        const txReceipt = await waitTransaction(txHash)
+
+        if (txReceipt.status) {
+          ToastSuccess(`Delegate confirmed to ${substr(receiverAddress)}`)
+          setCurrentModal('manage')
+          setModalOpen(false)
+          return
+        }
+      }
+    },
+    []
+  )
+
+  const delegateAllCallback = React.useCallback(
+    (receiverAddress: string): TransactionCallback => {
+      return async (error: MetamaskError, txHash: string) => {
+        if (error) {
+          if (error.code === 4001) {
+            ToastError(`Delegate cancelled`)
+            return
+          }
+
+          ToastError(`Error`)
+          return
+        }
+
+        ToastWarning(`Confirming delegate to ${substr(receiverAddress)}...`)
+        const txReceipt = await waitTransaction(txHash)
+
+        if (txReceipt.status) {
+          ToastSuccess(`Delegate confirmed to ${substr(receiverAddress)}`)
+          setCurrentModal('manage')
+          setModalOpen(false)
+          return
+        }
+      }
+    },
+    []
+  )
+
+  const handleDelegateVotes = async () => {
+    await delegateVote(
+      delegateSelected?.pid,
+      receiverAddress,
+      delegateCallback(receiverAddress)
+    )
+  }
+
+  const handleDelegateAllVoting = async () => {
+    if (receiverAddress === '') {
+      ToastError('Invalid address')
+      return
+    }
+
+    await delegateAllVotes(
+      receiverAddress,
+      delegateAllCallback(receiverAddress)
+    )
+  }
 
   return (
     <>
@@ -46,7 +183,7 @@ const DelegateVotingPower = ({
           <S.Selected onClick={() => setOptionsOpen(!optionsOpen)}>
             <S.Option>
               <S.Name>
-                <Image src={delegateSelected.image} alt="" />
+                <Image src={logo} alt="" />
                 <S.WithdrawDelay>
                   <p>{delegateSelected.nameToken}</p>
                   <span>
@@ -65,12 +202,19 @@ const DelegateVotingPower = ({
             onClick={() => setOptionsOpen(true)}
             optionsOpen={optionsOpen}
           >
-            <span>Choose the KACY pool to delegate</span>
+            <span>
+              {' '}
+              {loading ? 'Loading...' : 'Choose the KACY pool to delegate'}
+            </span>
             <Image src={arrowSelect} alt="" />
           </S.Select>
         )}
         <span>Select the address you wish to delegate the voting power</span>
-        <S.Input placeholder="Enter a 0x address" />
+        <S.Input
+          placeholder="Enter a 0x address"
+          value={receiverAddress}
+          onChange={event => setReceiverAddress(event.target.value)}
+        />
         <S.ButtonContainer>
           <Button
             size="large"
@@ -83,12 +227,18 @@ const DelegateVotingPower = ({
             size="large"
             fullWidth
             backgroundSecondary
-            disabledNoEvent={delegateSelected.nameToken === ''}
+            disabledNoEvent={
+              delegateSelected.nameToken === '' || receiverAddress === ''
+            }
             text="Delegate Votes"
+            onClick={handleDelegateVotes}
           />
         </S.ButtonContainer>
         <S.Link>
-          <ExternalLink text="Retrieve all delegated voting power" />
+          <ExternalLink
+            onClick={handleDelegateAllVoting}
+            text="Delegate all voting power"
+          />
         </S.Link>
       </S.Content>
       <Options
@@ -103,24 +253,3 @@ const DelegateVotingPower = ({
 }
 
 export default DelegateVotingPower
-
-const poolData = [
-  {
-    image: logo,
-    nameToken: 'kacy',
-    withdrawDelay: '0',
-    votingPower: '456,00'
-  },
-  {
-    image: logo,
-    nameToken: 'kacy',
-    withdrawDelay: '15',
-    votingPower: '789,00'
-  },
-  {
-    image: logo,
-    nameToken: 'kacy',
-    withdrawDelay: '45',
-    votingPower: '123.000,00'
-  }
-]
