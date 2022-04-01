@@ -109,7 +109,7 @@ const UndelegateVotingPower = ({
         } else {
           return {
             votingPower,
-            withdrawDelay: '1000',
+            withdrawDelay: Math.round(Number(poolInfo.withdrawDelay) / 86400),
             nameToken: substr(userInfo.delegatee),
             pid: userInfo.pid
           }
