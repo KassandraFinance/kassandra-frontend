@@ -14,7 +14,7 @@ import substr from '../../../utils/substr'
 import { BNtoDecimal } from '../../../utils/numerals'
 import { checkVoteButton } from '../../../utils/checkVoteButton'
 
-import ImageAddress from '../../../../public/assets/team/jony-reis.png'
+import ImageAddress from '../../../../public/assets/team/jony.png'
 
 import { IUserVotedProps } from '../../../templates/Gov/Proposals/Proposal'
 
