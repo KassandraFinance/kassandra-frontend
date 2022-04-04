@@ -14,6 +14,10 @@ import useGovernance from '../../../../hooks/useGovernance'
 import Big from 'big.js'
 import substr from '../../../../utils/substr'
 import { BNtoDecimal } from '../../../../utils/numerals'
+import waitTransaction, {
+  MetamaskError,
+  TransactionCallback
+} from '../../../../utils/txWait'
 
 import { request } from 'graphql-request'
 import { GET_PROPOSAL } from './graphql'
@@ -26,6 +30,11 @@ import VoteCard from '../../../../components/Governance/VoteCard'
 import VotingPower from '../../../../components/VotingPower'
 import Breadcrumb from '../../../../components/Breadcrumb'
 import BreadcrumbItem from '../../../../components/Breadcrumb/BreadcrumbItem'
+import {
+  ToastSuccess,
+  ToastError,
+  ToastWarning
+} from '../../../../components/Toastify/toast'
 
 import externalLink from '../../../../../public/assets/icons/external-link.svg'
 import proposals from '../../../../../public/assets/iconGradient/proposals.svg'
@@ -64,7 +73,7 @@ export interface ModalProps {
   voteType: string;
   percentage: string;
   totalVotingPower: string;
-  totalAddresses: string;
+  checkAllVoterModal: boolean;
 }
 
 export interface IUserVotedProps {
@@ -110,9 +119,14 @@ const Proposal = () => {
     votingPower: Big(0)
   })
   // eslint-disable-next-line prettier/prettier
-  const [modalVotes, setModalVotes] = React.useState<ModalProps | undefined>(
-    undefined
-  )
+  const [modalVotes, setModalVotes] = React.useState<ModalProps>({
+    voteType: '',
+    percentage: '',
+    totalVotingPower: '',
+    checkAllVoterModal: false
+  })
+  const [isModalOpen, setIsModalOpen] = React.useState(false)
+
   const [percentageVotes, setPercentageVotes] = React.useState({
     for: '0',
     against: '0'
@@ -186,6 +200,40 @@ const Proposal = () => {
     }
   }, [data])
 
+  function handleVote(voteType: string) {
+    if (userVoted.voted || proposalState[0] !== 'Active') return
+
+    governance.castVote(
+      Number(router.query.proposal),
+      voteType === 'For' ? true : false,
+      userWalletAddress,
+      voteCallback()
+    )
+
+    if (isModalOpen) {
+      setTimeout(() => {
+        setIsModalOpen(false)
+      }, 1200)
+    }
+  }
+
+  const voteCallback = React.useCallback((): TransactionCallback => {
+    return async (error: MetamaskError, txHash: string) => {
+      if (error) {
+        ToastError(`Failed vote. Please try again later.`)
+        return
+      }
+
+      ToastWarning(`Confirming vote`)
+      const txReceipt = await waitTransaction(txHash)
+
+      if (txReceipt.status) {
+        ToastSuccess(`Vote confirmed`)
+        return
+      }
+    }
+  }, [])
+
   return (
     <>
       <S.BackgroundVote>
@@ -250,35 +298,37 @@ const Proposal = () => {
             <VoteCard
               typeVote="For"
               percentage={percentageVotes.for}
-              proposalId={router.query.proposal}
               totalVotingPower={BNtoDecimal(proposal.forVotes, 0, 2, 2)}
-              userWalletAddress={userWalletAddress}
               proposalState={proposalState[0]}
               userVote={userVoted}
+              handleVote={handleVote}
               onClickLink={() => {
                 setModalVotes({
                   voteType: 'For',
                   percentage: `${percentageVotes.for}`,
-                  totalVotingPower: `${proposal.forVotes}`,
-                  totalAddresses: '30'
+                  // eslint-disable-next-line prettier/prettier
+                  totalVotingPower: `${BNtoDecimal(proposal.forVotes, 0, 2, 2)}`,
+                  checkAllVoterModal: true
                 })
+                setIsModalOpen(true)
               }}
             />
             <VoteCard
               typeVote="Against"
               percentage={percentageVotes.against}
-              proposalId={router.query.proposal}
               totalVotingPower={BNtoDecimal(proposal.againstVotes, 0, 2, 2)}
-              userWalletAddress={userWalletAddress}
               proposalState={proposalState[0]}
               userVote={userVoted}
+              handleVote={handleVote}
               onClickLink={() => {
                 setModalVotes({
                   voteType: 'Against',
                   percentage: `${percentageVotes.against}`,
-                  totalVotingPower: `${proposal.againstVotes}`,
-                  totalAddresses: '30'
+                  // eslint-disable-next-line prettier/prettier
+                  totalVotingPower: `${BNtoDecimal(proposal.againstVotes,0, 2, 2)}`,
+                  checkAllVoterModal: false
                 })
+                setIsModalOpen(true)
               }}
             />
           </S.VoteCardWrapper>
@@ -295,8 +345,8 @@ const Proposal = () => {
                   <S.TableTitle>Description</S.TableTitle>
                 </S.TableHead>
                 <S.TableBody>
-                  {descriptions.map(description => (
-                    <S.TableDescriptionWrapper key={description.title}>
+                  {descriptions.map((description, index) => (
+                    <S.TableDescriptionWrapper key={description.title + index}>
                       <S.DescriptionSubTitle>
                         {description.title}
                       </S.DescriptionSubTitle>
@@ -377,8 +427,8 @@ const Proposal = () => {
             <S.DescriptionTable>
               <S.Table>
                 <S.TableBody>
-                  {details.map(detail => (
-                    <S.TableDescriptionWrapper key={detail.subTitle}>
+                  {details.map((detail, index) => (
+                    <S.TableDescriptionWrapper key={detail.subTitle + index}>
                       <S.DetailsSubTitle>
                         {`${detail.id}\u00A0 ${detail.subTitle}`}
                       </S.DetailsSubTitle>
@@ -398,7 +448,7 @@ const Proposal = () => {
             <S.Steps>
               {stepData.map((step, index) => (
                 <>
-                  <S.Step key={step.title}>
+                  <S.Step key={step.title + index}>
                     {Date.parse(step.date) / 1000 >
                     new Date().getTime() / 1000 ? (
                       <Image src={proposalWaitingIcon} />
@@ -420,14 +470,17 @@ const Proposal = () => {
           </S.ProposalStatus>
         </S.ProposalInfo>
       </S.BackgroundVote>
-      {modalVotes && (
+      {isModalOpen && (
         <ModalVotes
           voteType={modalVotes.voteType}
           percentage={modalVotes.percentage}
           totalVotingPower={modalVotes.totalVotingPower}
-          totalAddresses={modalVotes.totalAddresses}
-          modalOpen={!!modalVotes}
-          onClose={() => setModalVotes(undefined)}
+          checkAllVoterModal={modalVotes.checkAllVoterModal}
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          userVote={userVoted}
+          proposalState={proposalState[0]}
+          handleVote={handleVote}
         />
       )}
     </>
