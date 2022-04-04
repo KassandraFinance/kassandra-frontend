@@ -1,10 +1,15 @@
 import styled, { keyframes } from 'styled-components'
 
-export const ImgLoading = styled.div`
+interface IImgLoadingProps {
+  marginTop: number;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const ImgLoading = styled.div<IImgLoadingProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 140px;
+  margin-top: ${props => props.marginTop}rem;
 `
 
 const pulse = keyframes`

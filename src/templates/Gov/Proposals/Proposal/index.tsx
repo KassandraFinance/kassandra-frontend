@@ -1,12 +1,26 @@
 import React from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import useStakingContract from '../../../../hooks/useStakingContract'
-import { Staking } from '../../../../constants/tokenAddresses'
+import {
+  GovernorAlpha,
+  SUBGRAPH_URL
+} from '../../../../constants/tokenAddresses'
 
+import Image from 'next/image'
+import { useRouter } from 'next/router'
+import useSWR from 'swr'
+import useGovernance from '../../../../hooks/useGovernance'
+
+import Big from 'big.js'
 import substr from '../../../../utils/substr'
+import { BNtoDecimal } from '../../../../utils/numerals'
+import waitTransaction, {
+  MetamaskError,
+  TransactionCallback
+} from '../../../../utils/txWait'
+
+import { request } from 'graphql-request'
+import { GET_PROPOSAL } from './graphql'
 
 import ExternalLink from '../../../../components/ExternalLink'
 import Header from '../../../../components/Header'
@@ -16,6 +30,11 @@ import VoteCard from '../../../../components/Governance/VoteCard'
 import VotingPower from '../../../../components/VotingPower'
 import Breadcrumb from '../../../../components/Breadcrumb'
 import BreadcrumbItem from '../../../../components/Breadcrumb/BreadcrumbItem'
+import {
+  ToastSuccess,
+  ToastError,
+  ToastWarning
+} from '../../../../components/Toastify/toast'
 
 import externalLink from '../../../../../public/assets/icons/external-link.svg'
 import proposals from '../../../../../public/assets/iconGradient/proposals.svg'
@@ -25,24 +44,195 @@ import proposalCompleteIcon from '../../../../../public/assets/iconGradient/prop
 import proposalWaitingIcon from '../../../../../public/assets/iconGradient/proposal-waiting.svg'
 
 import * as S from './styles'
-import { InferencePriority } from 'typescript'
-import { useRouter } from 'next/router'
 
-export type ModalProps = {
-  voteType: string,
-  percentage: string,
-  totalVotingPower: string,
-  totalAddresses: string
+interface IRequestDataProposal {
+  proposal: [
+    {
+      number: number,
+      description: string,
+      forVotes: Big,
+      againstVotes: Big,
+      quorum: string,
+      proposer: {
+        id: string
+      },
+      votes: [
+        {
+          votingPower: Big,
+          support: boolean,
+          voter: {
+            id: string
+          }
+        }
+      ]
+    }
+  ];
+}
+
+export interface ModalProps {
+  voteType: string;
+  percentage: string;
+  totalVotingPower: string;
+  checkAllVoterModal: boolean;
+}
+
+export interface IUserVotedProps {
+  voted: boolean;
+  support: boolean | null;
+}
+
+export interface IVotesProps {
+  support: boolean | null;
+  voter: {
+    id: string
+  };
+}
+
+export interface IProposalProps {
+  forVotes: Big;
+  againstVotes: Big;
+  proposer: string;
+  number: number;
+  quorum: string;
+  description: string;
+  votingPower: Big;
+}
+
+const statslibColor: { [key: string]: string } = {
+  'voting open': '#E843C4',
+  approved: '#26DBDB',
+  succeeded: '#26DBDB',
+  queued: '#FFBF00',
+  executed: '#2CE878',
+  failed: '#E8372C',
+  canceled: '#BDBDBD'
 }
 
 const Proposal = () => {
-  const [modalVotes, setModalVotes] = React.useState<ModalProps | undefined>(
-    undefined
-  )
+  const [proposal, setProposal] = React.useState<IProposalProps>({
+    forVotes: Big(0),
+    againstVotes: Big(0),
+    proposer: '',
+    number: 0,
+    quorum: '0',
+    description: '',
+    votingPower: Big(0)
+  })
+  // eslint-disable-next-line prettier/prettier
+  const [modalVotes, setModalVotes] = React.useState<ModalProps>({
+    voteType: '',
+    percentage: '',
+    totalVotingPower: '',
+    checkAllVoterModal: false
+  })
+  const [isModalOpen, setIsModalOpen] = React.useState(false)
+
+  const [percentageVotes, setPercentageVotes] = React.useState({
+    for: '0',
+    against: '0'
+  })
+  const [proposalState, setProposalState] = React.useState<string[]>([])
+  const [userVoted, setUserVoted] = React.useState<IUserVotedProps>({
+    voted: false,
+    support: null
+  })
 
   const router = useRouter()
-  const kacyStake = useStakingContract(Staking)
+  const governance = useGovernance(GovernorAlpha)
+
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+
+  const { data } = useSWR<IRequestDataProposal>([GET_PROPOSAL], query =>
+    request(SUBGRAPH_URL, query, {
+      number: Number(router.query.proposal)
+    })
+  )
+
+  async function getProposalState(number: number) {
+    governance.stateProposals(number).then(res => setProposalState(res))
+  }
+
+  React.useEffect(() => {
+    if (data) {
+      const proposalInfo: IProposalProps = {
+        againstVotes: data.proposal[0].againstVotes,
+        forVotes: data.proposal[0].forVotes,
+        description: data.proposal[0].description,
+        number: data.proposal[0].number,
+        quorum: data.proposal[0].quorum,
+        proposer: data.proposal[0].proposer.id,
+        votingPower: Big(data.proposal[0].forVotes).add(
+          Big(data.proposal[0].againstVotes)
+        )
+      }
+
+      if (proposalInfo.votingPower.gt(0)) {
+        const forVotes = BNtoDecimal(
+          Big(data.proposal[0].forVotes).div(proposalInfo.votingPower).mul(100),
+          18,
+          2
+        )
+
+        const againstVotes = BNtoDecimal(
+          Big(data.proposal[0].againstVotes)
+            .div(proposalInfo.votingPower)
+            .mul(100),
+          18,
+          2
+        )
+
+        setPercentageVotes({ for: forVotes, against: againstVotes })
+      }
+
+      const userAlreadyVoted = data.proposal[0].votes.find(
+        (vote: IVotesProps) => vote.voter.id === userWalletAddress
+      )
+
+      if (userAlreadyVoted) {
+        setUserVoted({
+          voted: true,
+          support: userAlreadyVoted.support
+        })
+      }
+
+      getProposalState(data.proposal[0].number)
+      setProposal(proposalInfo)
+    }
+  }, [data])
+
+  function handleVote(voteType: string) {
+    if (userVoted.voted || proposalState[0] !== 'Active') return
+
+    governance.castVote(
+      Number(router.query.proposal),
+      voteType === 'For' ? true : false,
+      userWalletAddress,
+      voteCallback()
+    )
+
+    if (isModalOpen) {
+      setTimeout(() => {
+        setIsModalOpen(false)
+      }, 1200)
+    }
+  }
+
+  const voteCallback = React.useCallback((): TransactionCallback => {
+    return async (error: MetamaskError, txHash: string) => {
+      if (error) {
+        ToastError(`Failed vote. Please try again later.`)
+        return
+      }
+
+      ToastWarning(`Confirming vote`)
+      const txReceipt = await waitTransaction(txHash)
+
+      if (txReceipt.status) {
+        ToastSuccess(`Vote confirmed`)
+        return
+      }
+    }
+  }, [])
 
   return (
     <>
@@ -52,14 +242,17 @@ const Proposal = () => {
           <BreadcrumbItem href="/">Home</BreadcrumbItem>
           <BreadcrumbItem href="/gov">Vote</BreadcrumbItem>
           <BreadcrumbItem href={router.asPath} isLastPage>
-            Proposal 05
+            Proposal {router.query.proposal}
           </BreadcrumbItem>
         </Breadcrumb>
         <S.VoteContent>
           <S.IntroDesktopScreen>
             <S.TitleWrapper>
               <S.TitleAndAuthor>
-                <TitleSection image={proposals} title={'Proposta 01'} />
+                <TitleSection
+                  image={proposals}
+                  title={`Proposal ${router.query.proposal}`}
+                />
                 <S.ProposeAuthorCard>
                   <p>Proposed by</p>
                   <Image
@@ -67,9 +260,7 @@ const Proposal = () => {
                     width={32}
                     height={32}
                   />
-                  <span>
-                    {substr('0xF84Db1d1868B03EaD9e799F55B4d1529687B691f')}
-                  </span>
+                  <span>{substr(`${proposal.proposer}`)}</span>
                 </S.ProposeAuthorCard>
               </S.TitleAndAuthor>
               <S.VotingPowerAndLink>
@@ -81,7 +272,10 @@ const Proposal = () => {
 
           <S.IntroMobileScreen>
             <S.TitleWrapper>
-              <TitleSection image={proposals} title={'Proposta 01'} />
+              <TitleSection
+                image={proposals}
+                title={`Proposal ${router.query.proposal}`}
+              />
               <S.CardTitleWrapper>
                 <S.VotingPowerAndLink>
                   <VotingPower userWalletAddress={userWalletAddress} />
@@ -94,9 +288,7 @@ const Proposal = () => {
                     width={24}
                     height={24}
                   />
-                  <span>
-                    {substr('0xF84Db1d1868B03EaD9e799F55B4d1529687B691f')}
-                  </span>
+                  <span>{substr(`${proposal.proposer}`)}</span>
                 </S.ProposeAuthorCard>
               </S.CardTitleWrapper>
             </S.TitleWrapper>
@@ -105,28 +297,38 @@ const Proposal = () => {
           <S.VoteCardWrapper>
             <VoteCard
               typeVote="For"
-              percentage="73"
-              totalVotingPower="1,723,124"
+              percentage={percentageVotes.for}
+              totalVotingPower={BNtoDecimal(proposal.forVotes, 0, 2, 2)}
+              proposalState={proposalState[0]}
+              userVote={userVoted}
+              handleVote={handleVote}
               onClickLink={() => {
                 setModalVotes({
                   voteType: 'For',
-                  percentage: '73',
-                  totalVotingPower: '1,723,124',
-                  totalAddresses: '30'
+                  percentage: `${percentageVotes.for}`,
+                  // eslint-disable-next-line prettier/prettier
+                  totalVotingPower: `${BNtoDecimal(proposal.forVotes, 0, 2, 2)}`,
+                  checkAllVoterModal: true
                 })
+                setIsModalOpen(true)
               }}
             />
             <VoteCard
               typeVote="Against"
-              percentage="27"
-              totalVotingPower="1,723,124"
+              percentage={percentageVotes.against}
+              totalVotingPower={BNtoDecimal(proposal.againstVotes, 0, 2, 2)}
+              proposalState={proposalState[0]}
+              userVote={userVoted}
+              handleVote={handleVote}
               onClickLink={() => {
                 setModalVotes({
                   voteType: 'Against',
-                  percentage: '27',
-                  totalVotingPower: '1,723,124',
-                  totalAddresses: '30'
+                  percentage: `${percentageVotes.against}`,
+                  // eslint-disable-next-line prettier/prettier
+                  totalVotingPower: `${BNtoDecimal(proposal.againstVotes,0, 2, 2)}`,
+                  checkAllVoterModal: false
                 })
+                setIsModalOpen(true)
               }}
             />
           </S.VoteCardWrapper>
@@ -143,8 +345,8 @@ const Proposal = () => {
                   <S.TableTitle>Description</S.TableTitle>
                 </S.TableHead>
                 <S.TableBody>
-                  {descriptions.map(description => (
-                    <S.TableDescriptionWrapper key={description.title}>
+                  {descriptions.map((description, index) => (
+                    <S.TableDescriptionWrapper key={description.title + index}>
                       <S.DescriptionSubTitle>
                         {description.title}
                       </S.DescriptionSubTitle>
@@ -163,22 +365,33 @@ const Proposal = () => {
                   <S.TableInfoWrapper>
                     <S.DataWrapper>
                       <S.TextKey>State</S.TextKey>
-                      <S.TextValue
-                        style={{
-                          color: statslibColor[infoProposal.state.toLowerCase()]
-                        }}
-                      >
-                        {infoProposal.state.charAt(0).toUpperCase() +
-                          infoProposal.state.slice(1)}
-                      </S.TextValue>
+                      {proposalState[0] ? (
+                        <S.TextValue
+                          style={{
+                            color: statslibColor[proposalState[0].toLowerCase()]
+                          }}
+                        >
+                          {proposalState[0].charAt(0).toUpperCase() +
+                            proposalState[0].slice(1)}
+                        </S.TextValue>
+                      ) : (
+                        '...'
+                      )}
                     </S.DataWrapper>
                     <S.DataWrapper>
                       <S.TextKey>Quorum</S.TextKey>
-                      <S.TextValue>{infoProposal.quorum}</S.TextValue>
+                      <S.TextValue>
+                        {proposal.votingPower.lt(Big(proposal.quorum))
+                          ? BNtoDecimal(proposal.votingPower, 0, 2)
+                          : BNtoDecimal(Big(proposal.quorum), 0, 2)}{' '}
+                        / {BNtoDecimal(Big(proposal.quorum), 0, 2)}
+                      </S.TextValue>
                     </S.DataWrapper>
                     <S.DataWrapper>
                       <S.TextKey>Total Voting Power</S.TextKey>
-                      <S.TextValue>{infoProposal.totalVotingPower}</S.TextValue>
+                      <S.TextValue>
+                        {BNtoDecimal(proposal.votingPower, 0, 2)}
+                      </S.TextValue>
                     </S.DataWrapper>
                     <S.DataWrapper>
                       <S.TextKey>Created</S.TextKey>
@@ -214,8 +427,8 @@ const Proposal = () => {
             <S.DescriptionTable>
               <S.Table>
                 <S.TableBody>
-                  {details.map(detail => (
-                    <S.TableDescriptionWrapper key={detail.subTitle}>
+                  {details.map((detail, index) => (
+                    <S.TableDescriptionWrapper key={detail.subTitle + index}>
                       <S.DetailsSubTitle>
                         {`${detail.id}\u00A0 ${detail.subTitle}`}
                       </S.DetailsSubTitle>
@@ -235,7 +448,7 @@ const Proposal = () => {
             <S.Steps>
               {stepData.map((step, index) => (
                 <>
-                  <S.Step key={step.title}>
+                  <S.Step key={step.title + index}>
                     {Date.parse(step.date) / 1000 >
                     new Date().getTime() / 1000 ? (
                       <Image src={proposalWaitingIcon} />
@@ -257,19 +470,23 @@ const Proposal = () => {
           </S.ProposalStatus>
         </S.ProposalInfo>
       </S.BackgroundVote>
-      {modalVotes && (
+      {isModalOpen && (
         <ModalVotes
           voteType={modalVotes.voteType}
           percentage={modalVotes.percentage}
           totalVotingPower={modalVotes.totalVotingPower}
-          totalAddresses={modalVotes.totalAddresses}
-          modalOpen={!!modalVotes}
-          onClose={() => setModalVotes(undefined)}
+          checkAllVoterModal={modalVotes.checkAllVoterModal}
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          userVote={userVoted}
+          proposalState={proposalState[0]}
+          handleVote={handleVote}
         />
       )}
     </>
   )
 }
+
 export default Proposal
 
 const descriptions = [
@@ -336,12 +553,3 @@ const stepData = [
     date: '02/22/2022'
   }
 ]
-
-const statslibColor: { [key: string]: string } = {
-  'voting open': '#E843C4',
-  approved: '#26DBDB',
-  queued: '#FFBF00',
-  executed: '#2CE878',
-  failed: '#E8372C',
-  canceled: '#BDBDBD'
-}
