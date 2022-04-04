@@ -1,6 +1,17 @@
-import NotFound from '../../templates/404'
+import { SWRConfig } from 'swr'
+
 import Gov from '../../templates/Gov'
 
-export default function Index() {
-  return process.env.NEXT_PUBLIC_VOTE === '1' ? <Gov /> : <NotFound />
+const Index = () => {
+  return (
+    <SWRConfig
+      value={{
+        refreshInterval: 30000
+      }}
+    >
+      <Gov />
+    </SWRConfig>
+  )
 }
+
+export default Index

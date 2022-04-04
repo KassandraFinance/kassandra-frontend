@@ -12,6 +12,7 @@ export type WrapperProps = {
   | 'backgroundSecondary'
   | 'backgroundBlack'
   | 'disabledNoEvent'
+  | 'backgroundVote'
 >
 
 const wrapperModifiers = {
@@ -129,11 +130,63 @@ const wrapperModifiers = {
       outline: 2px solid ${theme.colors.cyan};
       outline-offset: 2px;
     }
-  `
+  `,
+
+  backgroundVote: (
+    theme: DefaultTheme,
+    { voteState, type }: { voteState: string, type: string }
+  ) => {
+    switch (voteState) {
+      case 'against':
+        return css`
+          background: #e8372c;
+          color: #211426;
+          font-weight: 400;
+          cursor: not-allowed;
+          outline: none;
+        `
+      case 'favor':
+        return css`
+          background: #2ce878;
+          color: #211426;
+          font-weight: 400;
+          cursor: not-allowed;
+          outline: none;
+        `
+
+      case 'vote-open':
+        return css`
+          background: ${theme.colors.blue};
+
+          transition: all 500ms;
+          &:hover,
+          &:focus {
+            background: ${type === 'For' ? '#2ce878' : '#e8372c'};
+            color: #211426;
+          }
+
+          &:focus {
+            outline: 2px solid ${theme.colors.darkBlue};
+            outline-offset: 2px;
+          }
+        `
+
+      default:
+        return css`
+          background: ${theme.colors.darkGray};
+          border: 1px solid ${theme.colors.darkGray};
+          color: #8b8b8b;
+
+          cursor: not-allowed;
+          filter: grayscale(150%);
+          outline: none;
+        `
+    }
+  }
 }
 
 // eslint-disable-next-line prettier/prettier
-export const Wrapper = styled.button<WrapperProps>`
+export const Wrapper = styled.button <WrapperProps>`
   ${({
     theme,
     size,
@@ -142,7 +195,8 @@ export const Wrapper = styled.button<WrapperProps>`
     disabledNoEvent,
     backgroundPrimary,
     backgroundSecondary,
-    backgroundBlack
+    backgroundBlack,
+    backgroundVote
   }) => css`
     border: none;
     border-radius: ${theme.border.radius};
@@ -171,5 +225,7 @@ export const Wrapper = styled.button<WrapperProps>`
     ${!!backgroundSecondary && wrapperModifiers.backgroundSecondary(theme)};
     ${!!backgroundBlack && wrapperModifiers.backgroundBlack(theme)};
     ${disabledNoEvent && wrapperModifiers.disabledNoEvent(theme)};
+    ${backgroundVote?.type !== undefined &&
+    wrapperModifiers.backgroundVote(theme, backgroundVote)};
   `}
 `

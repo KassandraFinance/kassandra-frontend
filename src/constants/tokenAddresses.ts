@@ -64,10 +64,15 @@ export interface ProductDetails {
 
 export type ProductSymbols = keyof typeof products;
 
-export const SUBGRAPH_URL = 
-  `https://graph.kassandra.finance/subgraphs/name/${
-    process.env.NEXT_PUBLIC_MASTER === '1' ? 'KassandraAvalanche' : 'KassandraFuji'}`
 
+const KASSANDRA_SUBGRAPH = 
+`https://graph.kassandra.finance/subgraphs/name/${
+  process.env.NEXT_PUBLIC_MASTER === '1' ? 'KassandraAvalanche' : 'KassandraFuji'}`
+  
+export const SUBGRAPH_URL = process.env.NODE_ENV
+  ? 'http://localhost/subgraphs/name/KassandraFuji'
+  : KASSANDRA_SUBGRAPH
+  
 export const chains: { [key: string]: ChainDetails } = {
   avalanche: {
     chainId: '0xa86a',
