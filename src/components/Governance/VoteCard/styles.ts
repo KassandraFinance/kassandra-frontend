@@ -101,8 +101,16 @@ export const ProgressBar = styled.progress<IVoteBarProps>`
   ::-webkit-progress-bar {
     border-radius: 2rem;
   }
+
   ::-webkit-progress-value {
     border-radius: 3rem;
+    box-shadow: 0 0 1rem ${props => {
+      if (props.VotingState === 'For') {
+        return '#2CE878'
+      } else {
+        return '#E8372C'
+      }
+    }};;
     background: ${props => {
       if (props.VotingState === 'For') {
         return '#2CE878'
@@ -114,6 +122,13 @@ export const ProgressBar = styled.progress<IVoteBarProps>`
 
   ::-moz-progress-bar {
     border-radius: 3rem;
+    box-shadow: 0 0 1rem ${props => {
+      if (props.VotingState === 'For') {
+        return '#2CE878'
+      } else {
+        return '#E8372C'
+      }
+    }};;
     background: ${props => {
       if (props.VotingState === 'For') {
         return '#2CE878'

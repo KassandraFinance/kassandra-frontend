@@ -33,17 +33,16 @@ export const Container = styled.div<IBorderGradientProps>`
   position: fixed;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
 
   display: ${props => (props.modalOpen ? 'block' : 'none')};
   width: min(47rem, 90%);
   max-height: min-content;
-  padding-right: 2.4rem;
 
   background-color: #1A1E2C;
   border: 0.1rem solid #FFFFFF3B;
   border-radius: 1rem;
 
-  transform: translate(-50%, -50%);
   z-index: 21;
 
   animation: OpenModalVotes 500ms ease;
@@ -77,12 +76,11 @@ export const Close = styled.div`
     }
   }
 `
-export const ModalHeaderContainer = styled.div``
 export const ModalHeader = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3.2rem 2.4rem 3.2rem 3.2rem;
+  padding: 3.2rem 4.2rem 3.2rem 3.2rem;
 `
 
 export const TotalPercentageAndVotes = styled.div`
@@ -109,15 +107,123 @@ export const VoteBar = styled.div`
   margin-top: 1.6rem;
 `
 
-export const TableContainer = styled.div`
-  max-height: 30rem;
-  padding: 0 2.4rem 3.2rem 3.2rem;
+interface IVoteBarProps {
+  VotingState: string;
+}
 
+// eslint-disable-next-line prettier/prettier
+export const ProgressBar = styled.progress<IVoteBarProps>`
+  width: 100%;
+  height: 0.6rem;
+
+  border-radius: 3rem;
+  border: none;
+
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+
+  ::-webkit-progress-bar {
+    border-radius: 2rem;
+  }
+
+  ::-webkit-progress-value {
+    border-radius: 3rem;
+    box-shadow: 0 0 1rem ${props => {
+      if (props.VotingState === 'For') {
+        return '#2CE878'
+      } else {
+        return '#E8372C'
+      }
+    }};;
+    background: ${props => {
+      if (props.VotingState === 'For') {
+        return '#2CE878'
+      } else {
+        return '#E8372C'
+      }
+    }};
+  }
+
+  ::-moz-progress-bar {
+    border-radius: 3rem;
+    box-shadow: 0 0 1rem ${props => {
+      if (props.VotingState === 'For') {
+        return '#2CE878'
+      } else {
+        return '#E8372C'
+      }
+    }};;
+    background: ${props => {
+      if (props.VotingState === 'For') {
+        return '#2CE878'
+      } else {
+        return '#E8372C'
+      }
+    }};
+  }
+`
+
+interface ITableContainerProps {
+  showShadow: boolean;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const TableContainer = styled.table<ITableContainerProps>`
+  width: 100%;
+  padding: 0 3.2rem 3.2rem 3.2rem;
+  position: relative;
+
+  &::after {
+    content: '';
+    ${props =>
+      props.showShadow
+        ? `
+      position: absolute;
+      bottom: 32px;
+
+      width: calc(100% - 16%);
+      height: 90px;
+
+      background: linear-gradient(rgba(255, 255, 255, 0), #1a1e2c 60%) 0 100%,
+        radial-gradient(
+            farthest-side at 50% 100%,
+            rgba(0, 0, 0, 0.2),
+            rgba(0, 0, 0, 0)
+          )
+          0 100%;
+      background-repeat: no-repeat;
+      background-size: 100% 45px, 100% 20px;
+    `
+        : ``}
+  }
+`
+
+export const Thead = styled.thead``
+export const Tr = styled.tr`
+  display: flex;
+  justify-content: space-between;
+
+  margin-right: 1.2rem;
+  margin-bottom: 1.2rem;
+`
+
+export const Th = styled.th`
+  font-size: 1.6rem;
+  letter-spacing: 0.8px;
+`
+
+export const Tbody = styled.tbody`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  max-height: 30rem;
   overflow-y: auto;
+  padding-right: 0.8rem;
 
   ::-webkit-scrollbar {
     width: 0.5rem;
-    margin-right: 2.4rem;
   }
   ::-webkit-scrollbar-thumb {
     background-color: rgba(255, 255, 255, 0.2);
@@ -125,40 +231,19 @@ export const TableContainer = styled.div`
   }
 `
 
-export const Table = styled.table`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`
-export const Thead = styled.thead`
-  display: flex;
-  justify-content: space-between;
-
-  padding: 0 2.9rem 0 3.2rem;
-`
-export const Th = styled.th`
-  font-size: 1.6rem;
-  letter-spacing: 0.8px;
-`
-
-export const UserList = styled.tbody``
-
-export const UserData = styled.li`
+export const UserData = styled.tr`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 1.2rem 0 0;
+  height: 5rem;
 
   border-top: 0.1rem solid #ffffff4d;
 `
 
-export const UserAvatar = styled.td`
-  margin-right: 0.8rem;
-`
 export const UserName = styled.td`
   display: flex;
   align-items: flex-start;
-  margin: 1.6rem 0;
+  gap: 0.8rem;
 
   font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.light};
@@ -179,45 +264,4 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   padding: 0 0 2.4rem;
-`
-interface IVoteBarProps {
-  VotingState: string;
-}
-
-// eslint-disable-next-line prettier/prettier
-export const ProgressBar = styled.progress<IVoteBarProps>`
-  width: 100%;
-  height: 0.6rem;
-
-  border-radius: 3rem;
-  border: none;
-
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-
-  ::-webkit-progress-bar {
-    border-radius: 2rem;
-  }
-  ::-webkit-progress-value {
-    border-radius: 3rem;
-    background: ${props => {
-      if (props.VotingState === 'For') {
-        return '#2CE878'
-      } else {
-        return '#E8372C'
-      }
-    }};
-  }
-
-  ::-moz-progress-bar {
-    border-radius: 3rem;
-    background: ${props => {
-      if (props.VotingState === 'For') {
-        return '#2CE878'
-      } else {
-        return '#E8372C'
-      }
-    }};
-  }
 `

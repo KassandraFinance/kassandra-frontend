@@ -345,8 +345,8 @@ const Proposal = () => {
                   <S.TableTitle>Description</S.TableTitle>
                 </S.TableHead>
                 <S.TableBody>
-                  {descriptions.map(description => (
-                    <S.TableDescriptionWrapper key={description.title}>
+                  {descriptions.map((description, index) => (
+                    <S.TableDescriptionWrapper key={description.title + index}>
                       <S.DescriptionSubTitle>
                         {description.title}
                       </S.DescriptionSubTitle>
@@ -427,8 +427,8 @@ const Proposal = () => {
             <S.DescriptionTable>
               <S.Table>
                 <S.TableBody>
-                  {details.map(detail => (
-                    <S.TableDescriptionWrapper key={detail.subTitle}>
+                  {details.map((detail, index) => (
+                    <S.TableDescriptionWrapper key={detail.subTitle + index}>
                       <S.DetailsSubTitle>
                         {`${detail.id}\u00A0 ${detail.subTitle}`}
                       </S.DetailsSubTitle>
@@ -448,7 +448,7 @@ const Proposal = () => {
             <S.Steps>
               {stepData.map((step, index) => (
                 <>
-                  <S.Step key={step.title}>
+                  <S.Step key={step.title + index}>
                     {Date.parse(step.date) / 1000 >
                     new Date().getTime() / 1000 ? (
                       <Image src={proposalWaitingIcon} />

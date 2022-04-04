@@ -53,13 +53,35 @@ const ModalVotes = ({
 }: IModalVotes) => {
   // eslint-disable-next-line prettier/prettier
   const [modalVotesList, setModalVotesList] = React.useState<IModalVotesList[]>([])
+  const [showShadow, setShowShadow] = React.useState(false)
+
+  const handleApplyShadowList = () => {
+    const lastItemList = document
+      .getElementsByClassName('last-item')[0]
+      .getBoundingClientRect().top
+
+    const tBodyHeight = Array.from(
+      // eslint-disable-next-line prettier/prettier
+      document.getElementsByClassName('tbody-list') as HTMLCollectionOf<HTMLElement>,
+    );
+    const tableBodyHeight = tBodyHeight[0].offsetHeight
+
+    const tableBodyTopPosition = document
+      .getElementsByClassName('tbody-list')[0]
+      .getBoundingClientRect().top
+
+    if (tableBodyHeight > lastItemList - tableBodyTopPosition) {
+      setShowShadow(false)
+    } else {
+      setShowShadow(true)
+    }
+  }
 
   function handleCloseModal() {
     setIsModalOpen(false)
   }
 
-  const { data } = useSWR(
-    () => isModalOpen && [GET_MODALVOTES],
+  const { data } = useSWR(() => isModalOpen && [GET_MODALVOTES],
     query =>
       request(SUBGRAPH_URL, query, {
         number: Number(router.query.proposal),
@@ -79,6 +101,7 @@ const ModalVotes = ({
         }
       })
 
+      votes.length > 6 ? setShowShadow(true) : setShowShadow(false)
       setModalVotesList(votes)
     }
   }, [data])
@@ -88,53 +111,54 @@ const ModalVotes = ({
       <S.Backdrop onClick={handleCloseModal} />
 
       <S.Container modalOpen={isModalOpen}>
-        <S.ModalHeaderContainer>
-          <S.Close>
-            <button type="button" onClick={() => handleCloseModal()}>
-              <img src="/assets/close.svg" alt="Close Modal Votes" />{' '}
-            </button>
-          </S.Close>
-          <S.ModalHeader>
-            <S.TotalPercentageAndVotes>
-              <S.TotalPercentage>
-                {voteType} - {percentage}%
-              </S.TotalPercentage>
-              <S.TotalVotes>{totalVotingPower}</S.TotalVotes>
-            </S.TotalPercentageAndVotes>
-            <S.VoteBar>
-              <S.ProgressBar
-                VotingState={voteType}
-                value={percentage}
-                max="100"
-              />
-            </S.VoteBar>
-          </S.ModalHeader>
-        </S.ModalHeaderContainer>
-        <S.Thead>
-          <S.Th>{modalVotesList.length} addresses</S.Th>
-          <S.Th>Votes</S.Th>
-        </S.Thead>
-        <S.TableContainer>
-          <S.Table>
-            <S.UserList>
-              {modalVotesList.map(user => (
-                <S.UserData key={user.voter.id}>
+        <S.Close>
+          <button type="button" onClick={() => handleCloseModal()}>
+            <img src="/assets/close.svg" alt="Close Modal Votes" />{' '}
+          </button>
+        </S.Close>
+        <S.ModalHeader>
+          <S.TotalPercentageAndVotes>
+            <S.TotalPercentage>
+              {voteType} - {percentage}%
+            </S.TotalPercentage>
+            <S.TotalVotes>{totalVotingPower}</S.TotalVotes>
+          </S.TotalPercentageAndVotes>
+          <S.VoteBar>
+            <S.ProgressBar VotingState={voteType} value={percentage} max="100" />
+          </S.VoteBar>
+        </S.ModalHeader>
+        <S.TableContainer showShadow={showShadow}>
+          <S.Thead>
+            <S.Tr>
+              <S.Th>{modalVotesList.length} addresses</S.Th>
+              <S.Th>Votes</S.Th>
+            </S.Tr>
+          </S.Thead>
+          <S.Tbody
+            onScroll={() => handleApplyShadowList()}
+            className="tbody-list"
+          >
+            {modalVotesList.map((user, index) => {
+              const lastItem = index === modalVotesList.length - 1
+              return (
+                <S.UserData
+                  key={index + user.voter.id}
+                  className={lastItem ? `last-item` : ``}
+                >
                   <S.UserName>
-                    <S.UserAvatar>
-                      <Image
-                        src={ImageAddress}
-                        alt="user wallet photo Modal Votes"
-                        width={18}
-                        height={18}
-                      />
-                    </S.UserAvatar>
+                    <Image
+                      src={ImageAddress}
+                      alt="user wallet photo Modal Votes"
+                      width={18}
+                      height={18}
+                    />
                     {substr(user.voter.id)}
                   </S.UserName>
                   <S.UserVote>{BNtoDecimal(user.votingPower, 0, 2)}</S.UserVote>
                 </S.UserData>
-              ))}
-            </S.UserList>
-          </S.Table>
+              )
+            })}
+          </S.Tbody>
         </S.TableContainer>
         <S.ButtonWrapper>
           <Button
