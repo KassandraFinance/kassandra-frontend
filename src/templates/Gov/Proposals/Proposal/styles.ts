@@ -503,39 +503,81 @@ export const ProposalDetails = styled.div`
   }
 `
 export const DetailsSubTitle = styled.p`
-  font-size: ${theme.font.sizes.font14};
+  font-size: ${theme.font.sizes.font12};
   line-height: 130%;
   font-weight: ${theme.font.weight.bold};
 
-  @media (max-width: 500px) {
-    display: flex;
-    flex-direction: column;
+  @media (min-width: 768px) {
+    font-size: ${theme.font.sizes.font14};
+    letter-spacing: 0.07rem;
+    line-height: 1.82rem;
   }
 
   @media (min-width: 1024px) {
     font-size: ${theme.font.sizes.font18};
-    letter-spacing: 0.09rem;
+    line-height: 2.08rem;
+    letter-spacing: 0.08rem;
   }
 `
 export const DetailsText = styled.span`
   font-size: ${theme.font.sizes.font12};
-  font-weight: ${theme.font.weight.light};
   line-height: 130%;
-  letter-spacing: 0.06rem;
+  font-weight: ${theme.font.weight.light};
 
-  padding: 0.8rem 0 1.6rem 1rem;
+  margin-left: ${theme.spacings.space8};
 
   word-break: break-all;
 
   @media (min-width: 768px) {
-    padding: 0.8rem 0 2.4rem 1rem;
-
     font-size: ${theme.font.sizes.font14};
     letter-spacing: 0.07rem;
     line-height: 1.82rem;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: ${theme.font.sizes.font18};
+    line-height: 2.08rem;
+    letter-spacing: 0.08rem;
+  }
+`
+export const LinkTargetSnowTrace = styled.a`
+  display: flex;
+  align-items: center;
+
+  color: ${theme.colors.snow};
+  text-decoration: none;
+
+  &:hover {
+    span + span {
+      color: ${theme.colors.cyan};
+    }
+
+    > svg {
+      path {
+        fill: ${theme.colors.cyan};
+      }
+    }
+  }
+
+  span + span {
+    font-weight: ${theme.font.weight.light};
+    word-break: break-all;
+  }
+
+  > span {
+    line-height: 130%;
+    font-size: ${theme.font.sizes.font12};
+    font-weight: ${theme.font.weight.bold};
+    margin-right: ${theme.spacings.space8};
+
+    @media (min-width: 768px) {
+      font-size: ${theme.font.sizes.font14};
+      letter-spacing: 0.07rem;
+      line-height: 1.82rem;
+    }
 
     @media (min-width: 1024px) {
-      font-size: ${theme.font.sizes.font16};
+      font-size: ${theme.font.sizes.font18};
       line-height: 2.08rem;
       letter-spacing: 0.08rem;
     }
