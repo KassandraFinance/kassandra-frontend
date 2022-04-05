@@ -15,7 +15,7 @@ export const BackgroundVote = styled.div`
   background-position: center;
   background-attachment: fixed;
 
-  box-shadow: inset 0px -2rem 2rem 0 #151117;
+  box-shadow: inset 0 -2rem 2rem 0 #151117;
 `
 export const VoteContent = styled.div`
   max-width: 114rem;
@@ -24,6 +24,7 @@ export const VoteContent = styled.div`
   @media (max-width: 1200px) {
     padding: 0 ${theme.spacings.space32};
   }
+
   @media (max-width: 768px) {
     padding: 0 ${theme.spacings.space24};
   }
@@ -45,6 +46,7 @@ export const IntroMobileScreen = styled.div`
 export const TitleWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
@@ -82,15 +84,19 @@ export const ProposeAuthorCard = styled.div`
     max-width: 100%;
     padding: 2.4rem;
   }
+
   @media (max-width: 728px) {
     padding: 1.6rem;
   }
+
   @media (max-width: 705px) {
     padding: 0.8rem;
   }
+
   @media (max-width: 670px) {
     max-width: 100%;
   }
+
   p {
     margin-right: 1.6rem;
 
@@ -102,6 +108,7 @@ export const ProposeAuthorCard = styled.div`
       font-size: ${theme.font.sizes.font14};
     }
   }
+
   span {
     margin-left: 1.2rem;
 
@@ -116,21 +123,26 @@ export const VotingPowerAndLink = styled.div`
   align-items: flex-end;
 
   @media (max-width: 670px) {
-    align-items: flex-start;
     max-width: 100%;
+    align-items: flex-start;
   }
+
   ${VotingPowerStyles.VotingPower} {
     margin-bottom: 1.2rem;
+
     @media (max-width: 768px) {
       width: 34.8rem;
       max-width: 100%;
     }
+
     @media (max-width: 670px) {
       width: 100%;
     }
   }
+
   ${ExternalLinkStyles.Link} {
     font-size: ${theme.font.sizes.font14};
+
     @media (max-width: 670px) {
       font-size: ${theme.font.sizes.font12};
     }
@@ -154,24 +166,25 @@ export const VoteCardWrapper = styled.div`
       }
     }
   }
+
   @media (max-width: 670px) {
     flex-direction: column;
     row-gap: 1.6rem;
   }
 `
 export const ProposalInfo = styled.div`
+  display: flex;
+  flex-direction: column;
   margin-top: 10rem;
   margin-right: auto;
   margin-bottom: 0;
   margin-left: auto;
   max-width: 114rem;
 
-  display: flex;
-  flex-direction: column;
-
   @media (max-width: 1200px) {
     padding: 0 ${theme.spacings.space32};
   }
+
   @media (max-width: 768px) {
     margin-top: 8rem;
     margin-right: auto;
@@ -179,6 +192,7 @@ export const ProposalInfo = styled.div`
     margin-left: auto;
     padding: 0 ${theme.spacings.space24};
   }
+
   @media (max-width: 540px) {
     padding: 0 ${theme.spacings.space16};
   }
@@ -195,6 +209,7 @@ export const CardWrapper = styled.div`
 `
 export const ProposalTitleWrapper = styled.div`
   display: flex;
+
   h1 {
     font-size: ${theme.font.sizes.font18};
     font-weight: ${theme.font.weight.bold};
@@ -204,12 +219,14 @@ export const ProposalTitleWrapper = styled.div`
       font-size: ${theme.font.sizes.font24};
       margin-left: 1.6rem;
     }
+
     @media (min-width: 1024px) {
       font-size: ${theme.font.sizes.font32};
       margin-left: 2rem;
     }
   }
 `
+
 export const DescriptionTable = styled.section`
   width: 100%;
   margin-top: 4rem;
@@ -248,16 +265,88 @@ export const TableTitle = styled.th`
   @media (min-width: 768px) {
     font-size: ${theme.font.sizes.font18};
   }
+
   @media (min-width: 1024px) {
     font-size: ${theme.font.sizes.font24};
   }
 `
+
+export const DescriptionProposal = styled.div`
+  display: block;
+  width: 100%;
+  white-space: pre-wrap;
+  font-size: 1.6rem;
+  font-weight: 300 lighter;
+  color: #fcfcfc;
+  word-wrap: break-word;
+
+  h1 {
+    font-size: 2.4rem;
+    color: #ffffff;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    color: #fcfcfc;
+  }
+
+  a {
+    color: ${theme.colors.cyan};
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  code {
+    padding: 0.5rem;
+    overflow: auto;
+    border: none;
+    word-wrap: break-word;
+    page-break-inside: avoid;
+    max-width: 100%;
+
+    background-color: #171d24;
+    border-radius: 0.6rem;
+
+    color: #bbc4cb;
+    font-family: monospace;
+    font-size: 85%;
+    line-height: 2.5rem;
+  }
+
+  pre {
+    padding: 1.6rem;
+
+    background-color: #171d24;
+    border-radius: 1rem;
+
+    code {
+      display: block;
+      white-space: pre-wrap;
+      padding: 0;
+    }
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  hr {
+    border: solid 0.01rem;
+  }
+`
+
 export const TableBody = styled.tbody``
 export const TableDescriptionWrapper = styled.div`
-  padding: 1.6rem 0;
-
   display: flex;
   flex-direction: column;
+  padding: 1.6rem 0;
+
+  p {
+    line-height: 2.5rem;
+  }
 
   border-top-width: 0.1rem;
   border-top-style: solid;
@@ -277,22 +366,25 @@ export const DescriptionSubTitle = styled.td`
     font-size: ${theme.font.sizes.font18};
     letter-spacing: 0.09rem;
   }
+
   @media (min-width: 768px) {
     font-size: ${theme.font.sizes.font16};
     letter-spacing: 0.08rem;
   }
 `
 export const DescriptionText = styled.td`
+  padding: 1.6rem 0;
+
   font-size: ${theme.font.sizes.font12};
   font-weight: ${theme.font.weight.light};
   line-height: 1.6rem;
   letter-spacing: 0.06rem;
 
-  padding: 1.6rem 0;
   @media (min-width: 768px) {
     font-size: ${theme.font.sizes.font14};
     letter-spacing: 0.07rem;
   }
+
   @media (min-width: 1024px) {
     font-size: ${theme.font.sizes.font16};
     letter-spacing: 0.08rem;
@@ -321,6 +413,7 @@ export const InfoTable = styled.table`
     margin-bottom: 0;
     margin-left: auto;
   }
+
   @media (min-width: 1024px) {
     margin-top: 4.8rem;
     margin-right: auto;
@@ -338,10 +431,10 @@ export const TableInfoWrapper = styled.div`
   }
 `
 export const DataWrapper = styled.div`
-  margin-top: 1.2rem;
-
   display: flex;
   justify-content: space-between;
+  margin-top: 1.2rem;
+
   &:first-child {
     margin-top: 2.4rem;
   }
@@ -364,14 +457,14 @@ export const TextValue = styled.span`
 
   @media (min-width: 768px) {
     font-size: ${theme.font.sizes.font14};
-    line-height: 18.2px;
+    line-height: 1.82rem;
     letter-spacing: 0.07rem;
   }
 `
 
 export const LinkForum = styled.a`
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  border-radius: 8px;
+  border: 0.1rem solid rgba(255, 255, 255, 0.04);
+  border-radius: 0.8rem;
   background: rgba(255, 255, 255, 0.04);
   color: ${theme.colors.grayDisabled};
 
@@ -384,7 +477,7 @@ export const LinkForum = styled.a`
 
   margin-top: 1.6rem;
 
-  padding: 16px 24px;
+  padding: 1.6rem 2.4rem;
 
   > span {
     font-size: ${theme.font.sizes.font14};
@@ -396,7 +489,7 @@ export const LinkForum = styled.a`
   }
 
   &:hover {
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 0.1rem solid rgba(255, 255, 255, 0.5);
   }
 `
 export const ProposalDetails = styled.div`
@@ -409,32 +502,39 @@ export const ProposalDetails = styled.div`
     margin-top: 8rem;
   }
 `
-export const DetailsSubTitle = styled.td`
+export const DetailsSubTitle = styled.p`
   font-size: ${theme.font.sizes.font14};
   line-height: 130%;
   font-weight: ${theme.font.weight.bold};
+
+  @media (max-width: 500px) {
+    display: flex;
+    flex-direction: column;
+  }
 
   @media (min-width: 1024px) {
     font-size: ${theme.font.sizes.font18};
     letter-spacing: 0.09rem;
   }
 `
-export const DetailsText = styled.td`
+export const DetailsText = styled.span`
   font-size: ${theme.font.sizes.font12};
   font-weight: ${theme.font.weight.light};
   line-height: 130%;
   letter-spacing: 0.06rem;
 
-  padding: 0.8rem 0 1.6rem 2.4rem;
+  padding: 0.8rem 0 1.6rem 1rem;
+
+  word-break: break-all;
 
   @media (min-width: 768px) {
+    padding: 0.8rem 0 2.4rem 1rem;
+
     font-size: ${theme.font.sizes.font14};
     letter-spacing: 0.07rem;
     line-height: 1.82rem;
 
-    padding: 0.8rem 0 2.4rem 2.4rem;
     @media (min-width: 1024px) {
-      padding: 0.8rem 0 2.4rem 3.6rem;
       font-size: ${theme.font.sizes.font16};
       line-height: 2.08rem;
       letter-spacing: 0.08rem;
@@ -442,11 +542,11 @@ export const DetailsText = styled.td`
   }
 `
 export const ProposalStatus = styled.div`
-  margin-top: 8rem;
-  max-width: 114rem;
-
   display: flex;
   flex-direction: column;
+
+  margin-top: 8rem;
+  max-width: 114rem;
 `
 interface IImageProps {
   isAfter: boolean;
@@ -479,21 +579,18 @@ export const LineBetweenImages = styled.div<IImageProps>`
   `}
 `
 export const Steps = styled.div`
-  margin-top: 7.2rem;
-
   display: flex;
   justify-content: space-between;
+  margin-top: 7.2rem;
 
   @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: flex-start;
     margin-top: 3.6rem;
-
     padding-top: 0;
     padding-right: 4.8rem;
     padding-bottom: 0;
     padding-left: 2.6rem;
-
-    flex-direction: column;
-    align-items: flex-start;
   }
 `
 export const Step = styled.div`
@@ -509,6 +606,7 @@ export const Step = styled.div`
     min-width: ${theme.spacings.space56};
     min-height: ${theme.spacings.space56};
   }
+
   @media (max-width: 480px) {
     width: 100%;
     height: 4rem;
@@ -535,6 +633,7 @@ export const StepTitle = styled.div`
 
     font-size: ${theme.font.sizes.font14};
   }
+
   @media (max-width: 480px) {
     margin-top: 0;
   }
@@ -543,6 +642,7 @@ export const StepDate = styled.div`
   font-size: ${theme.font.sizes.font14};
   font-weight: ${theme.font.weight.light};
   letter-spacing: 0.07rem;
+
   @media (max-width: 768px) {
     font-size: ${theme.font.sizes.font12};
   }

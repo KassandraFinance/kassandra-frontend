@@ -35,6 +35,7 @@ import proposalCompleteIcon from '../../../../../public/assets/iconGradient/prop
 import proposalWaitingIcon from '../../../../../public/assets/iconGradient/proposal-waiting.svg'
 
 import * as S from './styles'
+import ReactMarkdown from 'react-markdown'
 
 interface IRequestDataProposal {
   proposal: [
@@ -44,6 +45,10 @@ interface IRequestDataProposal {
       forVotes: Big,
       againstVotes: Big,
       quorum: string,
+      values: [],
+      calldatas: [],
+      signatures: [],
+      targets: [],
       proposer: {
         id: string
       },
@@ -87,6 +92,10 @@ export interface IProposalProps {
   quorum: string;
   description: string;
   votingPower: Big;
+  values: string[];
+  calldatas: string[];
+  signatures: string[];
+  targets: string[];
 }
 
 const statslibColor: { [key: string]: string } = {
@@ -107,12 +116,14 @@ const Proposal = () => {
     number: 0,
     quorum: '0',
     description: '',
-    votingPower: Big(0)
+    votingPower: Big(0),
+    calldatas: [],
+    signatures: [],
+    targets: [],
+    values: []
   })
   // eslint-disable-next-line prettier/prettier
-  const [modalVotes, setModalVotes] = React.useState<ModalProps | undefined>(
-    undefined
-  )
+  const [modalVotes, setModalVotes] = React.useState<ModalProps | undefined>(undefined)
   const [percentageVotes, setPercentageVotes] = React.useState({
     for: '0',
     against: '0'
@@ -149,7 +160,11 @@ const Proposal = () => {
         proposer: data.proposal[0].proposer.id,
         votingPower: Big(data.proposal[0].forVotes).add(
           Big(data.proposal[0].againstVotes)
-        )
+        ),
+        calldatas: data.proposal[0].calldatas,
+        signatures: data.proposal[0].signatures,
+        targets: data.proposal[0].targets,
+        values: data.proposal[0].values
       }
 
       if (proposalInfo.votingPower.gt(0)) {
@@ -290,21 +305,11 @@ const Proposal = () => {
           </S.ProposalTitleWrapper>
           <S.CardWrapper>
             <S.DescriptionTable>
-              <S.Table>
-                <S.TableHead>
-                  <S.TableTitle>Description</S.TableTitle>
-                </S.TableHead>
-                <S.TableBody>
-                  {descriptions.map(description => (
-                    <S.TableDescriptionWrapper key={description.title}>
-                      <S.DescriptionSubTitle>
-                        {description.title}
-                      </S.DescriptionSubTitle>
-                      <S.DescriptionText>{description.text}</S.DescriptionText>
-                    </S.TableDescriptionWrapper>
-                  ))}
-                </S.TableBody>
-              </S.Table>
+              <S.DescriptionProposal>
+                <ReactMarkdown skipHtml={true} linkTarget={'_blank'}>
+                  {proposal.description}
+                </ReactMarkdown>
+              </S.DescriptionProposal>
             </S.DescriptionTable>
             <S.InfoTable>
               <S.Table>
@@ -377,14 +382,53 @@ const Proposal = () => {
             <S.DescriptionTable>
               <S.Table>
                 <S.TableBody>
-                  {details.map(detail => (
-                    <S.TableDescriptionWrapper key={detail.subTitle}>
-                      <S.DetailsSubTitle>
-                        {`${detail.id}\u00A0 ${detail.subTitle}`}
-                      </S.DetailsSubTitle>
-                      <S.DetailsText>{detail.text}</S.DetailsText>
-                    </S.TableDescriptionWrapper>
-                  ))}
+                  {new Array(3).fill(null).map((v, i) => {
+                    if (
+                      proposal.calldatas[i] ||
+                      proposal.signatures[i] ||
+                      proposal.targets[i] ||
+                      proposal.values[i]
+                    ) {
+                      return (
+                        <S.TableDescriptionWrapper key={`${v + i}`}>
+                          <S.DetailsSubTitle>
+                            Call Datas:
+                            <S.DetailsText>
+                              {proposal.calldatas[i]
+                                ? proposal.calldatas[i]
+                                : '-'}
+                            </S.DetailsText>
+                          </S.DetailsSubTitle>
+
+                          <S.DetailsSubTitle>
+                            Signatures:
+                            <S.DetailsText>
+                              {proposal.signatures[i]
+                                ? proposal.signatures[i]
+                                : '-'}
+                            </S.DetailsText>
+                          </S.DetailsSubTitle>
+
+                          <S.DetailsSubTitle>
+                            Targets:
+                            <S.DetailsText>
+                              {proposal.targets[i] ? proposal.targets[i] : '-'}
+                            </S.DetailsText>
+                          </S.DetailsSubTitle>
+
+                          <S.DetailsSubTitle>
+                            Values:
+                            <S.DetailsText>
+                              {proposal.values[i]
+                                ? BNtoDecimal(Big(proposal.values[i]), 18, 3, 2)
+                                : '-'}
+                            </S.DetailsText>
+                          </S.DetailsSubTitle>
+                        </S.TableDescriptionWrapper>
+                      )
+                    }
+                    return
+                  })}
                 </S.TableBody>
               </S.Table>
             </S.DescriptionTable>
@@ -436,21 +480,6 @@ const Proposal = () => {
 
 export default Proposal
 
-const descriptions = [
-  {
-    title: 'Turpis ornare vitae sem quis sagittis. ',
-    text: 'Turpis ornare vitae sem quis sagittis. Sed libero ultricies eu accumsan. Risus lectus urna arcu aliquam velit, massa. Convallis convallis posuere risus, parturient quis. Ac suspendisse ornare amet a fermentum. Vulputate sociis ac at eget proin tristique congue blandit ut. Tempor, ullamcorper enim in molestie elit malesuada. Magna enim.'
-  },
-  {
-    title: 'Turpis ornare vitae sem quis sagittis. ',
-    text: 'Sed libero ultricies eu accumsan. Risus lectus urna arcu aliquam velit.'
-  },
-  {
-    title: 'Turpis ornare vitae sem quis sagittis. ',
-    text: 'Sed libero ultricies eu accumsan. Risus lectus urna arcu aliquam velit.'
-  }
-]
-
 const infoProposal = {
   state: 'Executed',
   quorum: '160.000/160.000',
@@ -459,24 +488,6 @@ const infoProposal = {
   starting: '22/10/2021, 1:28 PM',
   executeMax: '22/11/2021, 1:28 PM'
 }
-
-const details = [
-  {
-    id: '01',
-    subTitle: 'Turpis ornare vitae sem quis sagittis. ',
-    text: 'Turpis ornare vitae sem quis sagittis. Sed libero ultricies eu accumsan. Risus lectus urna arcu aliquam velit, massa. Convallis convallis posuere risus, parturient quis. Ac suspendisse ornare amet a fermentum. Vulputate sociis ac at eget proin tristique congue blandit ut. Tempor, ullamcorper enim in molestie elit malesuada. Magna enim.'
-  },
-  {
-    id: '02',
-    subTitle: 'Turpis ornare vitae sem quis sagittis. ',
-    text: 'Sed libero ultricies eu accumsan. Risus lectus urna arcu aliquam velit.'
-  },
-  {
-    id: '03',
-    subTitle: 'Turpis ornare vitae sem quis sagittis. ',
-    text: 'Sed libero ultricies eu accumsan. Risus lectus urna arcu aliquam velit.'
-  }
-]
 
 const stepData = [
   {
