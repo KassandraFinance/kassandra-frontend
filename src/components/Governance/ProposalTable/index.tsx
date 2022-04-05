@@ -8,8 +8,6 @@ import { GovernorAlpha, SUBGRAPH_URL } from '../../../constants/tokenAddresses'
 
 import useGovernance from '../../../hooks/useGovernance'
 
-// import { dateRequestUnstake } from '../../../utils/date'
-
 import { GET_PROPOSALS } from './graphql'
 
 import * as S from './styles'
@@ -48,6 +46,24 @@ export const ProposalTable = () => {
     setProposalsList(proposalComplete)
   }
 
+  function getTitleProposal(description: string) {
+    const [titleDescription] = description.split(/[,.\n]/)
+    const formatTitleDescription = titleDescription.replace('#', '')
+
+    if (formatTitleDescription.length > 45) {
+      return (
+        formatTitleDescription.slice(0, 45).charAt(0).toUpperCase() +
+        formatTitleDescription.slice(1, 45) +
+        '...'
+      )
+    }
+
+    return (
+      formatTitleDescription.charAt(0).toUpperCase() +
+      formatTitleDescription.slice(1)
+    )
+  }
+
   React.useEffect(() => {
     if (data) {
       handleAddStateOnProposal(data.proposals)
@@ -69,7 +85,7 @@ export const ProposalTable = () => {
               <S.Tr>
                 <S.Td className="proposal">
                   <S.TextProposal>
-                    {proposal.number} {proposal.description}
+                    {proposal.number} {getTitleProposal(proposal.description)}
                   </S.TextProposal>
                   <S.StatusAndTimeframe>
                     <S.StatusProposal>{proposal.state[0]}</S.StatusProposal>
