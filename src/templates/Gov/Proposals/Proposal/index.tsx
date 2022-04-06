@@ -1,8 +1,15 @@
 import React from 'react'
 import { useSelector, RootStateOrAny } from 'react-redux'
+import BigNumber from 'bn.js'
+import Image from 'next/image'
+import { useRouter } from 'next/router'
+import useSWR from 'swr'
+import Big from 'big.js'
+import { request } from 'graphql-request'
 
 import {
   GovernorAlpha,
+  Staking,
   SUBGRAPH_URL
 } from '../../../../constants/tokenAddresses'
 
@@ -10,6 +17,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import useGovernance from '../../../../hooks/useGovernance'
+import useVotingPower from '../../../../hooks/useVotingPower'
 
 import Big from 'big.js'
 import substr from '../../../../utils/substr'
@@ -52,6 +60,7 @@ interface IRequestDataProposal {
       description: string,
       forVotes: Big,
       againstVotes: Big,
+      startBlock: string,
       quorum: string,
       proposer: {
         id: string
@@ -136,9 +145,12 @@ const Proposal = () => {
     voted: false,
     support: null
   })
+  // eslint-disable-next-line prettier/prettier
+  const [yourVotingPowerInProposal, setYourVotingPowerInProposal] = React.useState(new BigNumber(0))
 
   const router = useRouter()
   const governance = useGovernance(GovernorAlpha)
+  const votingPower = useVotingPower(Staking)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
@@ -152,6 +164,16 @@ const Proposal = () => {
     governance.stateProposals(number).then(res => setProposalState(res))
   }
 
+  async function getVotingPowerInProposal(startBlock: string) {
+    if (userWalletAddress) {
+      const votingPowerAtMoment = await votingPower.getPriorVotes(
+        userWalletAddress,
+        startBlock
+      )
+
+      setYourVotingPowerInProposal(votingPowerAtMoment)
+    }
+  }
   React.useEffect(() => {
     if (data) {
       const proposalInfo: IProposalProps = {
@@ -195,6 +217,7 @@ const Proposal = () => {
         })
       }
 
+      getVotingPowerInProposal(data.proposal[0].startBlock)
       getProposalState(data.proposal[0].number)
       setProposal(proposalInfo)
     }
