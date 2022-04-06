@@ -101,8 +101,6 @@ const Products = ({ product }: Input) => {
     }
   }, [product])
 
-  console.log(product)
-
   return (
     <S.BackgroundProducts boxShadow={false}>
       <Header />

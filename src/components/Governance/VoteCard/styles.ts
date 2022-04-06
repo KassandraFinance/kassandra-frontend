@@ -36,12 +36,10 @@ export const TotalVotes = styled.p`
 `
 
 export const VoteBar = styled.div`
-  display: block;
   width: 100%;
   height: 0.4rem;
   margin-bottom: 4rem;
 
-  background-color: #8b8b8b;
   border-radius: 0.1rem;
 `
 
@@ -82,5 +80,61 @@ export const Link = styled.a`
         stroke: ${theme.colors.cyan};
       }
     }
+  }
+`
+interface IVoteBarProps {
+  VotingState: string;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const ProgressBar = styled.progress<IVoteBarProps>`
+  width: 100%;
+  height: 0.6rem;
+
+  border-radius: 3rem;
+  border: none;
+
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+
+  ::-webkit-progress-bar {
+    border-radius: 2rem;
+  }
+
+  ::-webkit-progress-value {
+    border-radius: 3rem;
+    box-shadow: 0 0 1rem ${props => {
+      if (props.VotingState === 'For') {
+        return '#2CE878'
+      } else {
+        return '#E8372C'
+      }
+    }};;
+    background: ${props => {
+      if (props.VotingState === 'For') {
+        return '#2CE878'
+      } else {
+        return '#E8372C'
+      }
+    }};
+  }
+
+  ::-moz-progress-bar {
+    border-radius: 3rem;
+    box-shadow: 0 0 1rem ${props => {
+      if (props.VotingState === 'For') {
+        return '#2CE878'
+      } else {
+        return '#E8372C'
+      }
+    }};;
+    background: ${props => {
+      if (props.VotingState === 'For') {
+        return '#2CE878'
+      } else {
+        return '#E8372C'
+      }
+    }};
   }
 `

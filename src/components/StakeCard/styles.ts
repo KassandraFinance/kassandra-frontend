@@ -4,6 +4,7 @@ import theme from '../../styles/theme'
 import * as ButtonStyles from '../Button/styles'
 
 export const StakeCard = styled.div`
+  position: relative;
   z-index: 1;
 `
 
@@ -19,8 +20,6 @@ export const BorderGradient = styled.div<IBorderGradientProps>`
   position: relative;
   width: 295px;
   max-height: 100%;
-
-  z-index: -1;
 
   @media (max-width: 420px) {
     max-width: 100%;
