@@ -183,58 +183,6 @@ const Proposal = () => {
       setYourVotingPowerInProposal(votingPowerAtMoment)
     }
   }
-  React.useEffect(() => {
-    if (data) {
-      const proposalInfo: IProposalProps = {
-        againstVotes: data.proposal[0].againstVotes,
-        forVotes: data.proposal[0].forVotes,
-        description: data.proposal[0].description,
-        number: data.proposal[0].number,
-        quorum: data.proposal[0].quorum,
-        proposer: data.proposal[0].proposer.id,
-        votingPower: Big(data.proposal[0].forVotes).add(
-          Big(data.proposal[0].againstVotes)
-        ),
-        calldatas: data.proposal[0].calldatas,
-        signatures: data.proposal[0].signatures,
-        targets: data.proposal[0].targets,
-        values: data.proposal[0].values
-      }
-
-      if (proposalInfo.votingPower.gt(0)) {
-        const forVotes = BNtoDecimal(
-          Big(data.proposal[0].forVotes).div(proposalInfo.votingPower).mul(100),
-          18,
-          2
-        )
-
-        const againstVotes = BNtoDecimal(
-          Big(data.proposal[0].againstVotes)
-            .div(proposalInfo.votingPower)
-            .mul(100),
-          18,
-          2
-        )
-
-        setPercentageVotes({ for: forVotes, against: againstVotes })
-      }
-
-      const userAlreadyVoted = data.proposal[0].votes.find(
-        (vote: IVotesProps) => vote.voter.id === userWalletAddress
-      )
-
-      if (userAlreadyVoted) {
-        setUserVoted({
-          voted: true,
-          support: userAlreadyVoted.support
-        })
-      }
-
-      getVotingPowerInProposal(data.proposal[0].startBlock)
-      getProposalState(data.proposal[0].number)
-      setProposal(proposalInfo)
-    }
-  }, [data])
 
   function handleVote(voteType: string) {
     if (userVoted.voted || proposalState[0] !== 'Active') return
@@ -270,6 +218,58 @@ const Proposal = () => {
     }
   }, [])
 
+  React.useEffect(() => {
+    if (data) {
+      const proposalInfo: IProposalProps = {
+        againstVotes: data.proposal[0].againstVotes,
+        forVotes: data.proposal[0].forVotes,
+        description: data.proposal[0].description,
+        number: data.proposal[0].number,
+        quorum: data.proposal[0].quorum,
+        proposer: data.proposal[0].proposer.id,
+        votingPower: Big(data.proposal[0].forVotes).add(
+          Big(data.proposal[0].againstVotes)
+        ),
+        calldatas: data.proposal[0].calldatas,
+        signatures: data.proposal[0].signatures,
+        targets: data.proposal[0].targets,
+        values: data.proposal[0].values
+      }
+      if (proposalInfo.votingPower.gt(0)) {
+        const forVotes = BNtoDecimal(
+          Big(data.proposal[0].forVotes).div(proposalInfo.votingPower).mul(100),
+          18,
+          2
+        )
+
+        const againstVotes = BNtoDecimal(
+          Big(data.proposal[0].againstVotes)
+            .div(proposalInfo.votingPower)
+            .mul(100),
+          18,
+          2
+        )
+
+        setPercentageVotes({ for: forVotes, against: againstVotes })
+      }
+
+      const userAlreadyVoted = data.proposal[0].votes.find(
+        (vote: IVotesProps) => vote.voter.id === userWalletAddress
+      )
+
+      if (userAlreadyVoted) {
+        setUserVoted({
+          voted: true,
+          support: userAlreadyVoted.support
+        })
+      }
+
+      getVotingPowerInProposal(data.proposal[0].startBlock)
+      getProposalState(data.proposal[0].number)
+      setProposal(proposalInfo)
+    }
+  }, [data])
+
   return (
     <>
       <S.BackgroundVote>
@@ -300,7 +300,10 @@ const Proposal = () => {
                 </S.ProposeAuthorCard>
               </S.TitleAndAuthor>
               <S.VotingPowerAndLink>
-                <VotingPower userWalletAddress={userWalletAddress} />
+                <VotingPower
+                  userWalletAddress={userWalletAddress}
+                  yourVotingPowerInProposal={yourVotingPowerInProposal}
+                />
                 <ExternalLink text="Obtain more voting power" hrefNext="#" />
               </S.VotingPowerAndLink>
             </S.TitleWrapper>
@@ -314,7 +317,10 @@ const Proposal = () => {
               />
               <S.CardTitleWrapper>
                 <S.VotingPowerAndLink>
-                  <VotingPower userWalletAddress={userWalletAddress} />
+                  <VotingPower
+                    userWalletAddress={userWalletAddress}
+                    yourVotingPowerInProposal={yourVotingPowerInProposal}
+                  />
                   <ExternalLink text="Obtain more voting power" hrefNext="#" />
                 </S.VotingPowerAndLink>
                 <S.ProposeAuthorCard>
