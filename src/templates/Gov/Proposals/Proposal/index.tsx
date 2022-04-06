@@ -1,11 +1,12 @@
 import React from 'react'
-import { useSelector, RootStateOrAny } from 'react-redux'
-import BigNumber from 'bn.js'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { useSelector, RootStateOrAny } from 'react-redux'
 import useSWR from 'swr'
-import Big from 'big.js'
 import { request } from 'graphql-request'
+import Big from 'big.js'
+import BigNumber from 'bn.js'
+import ReactMarkdown from 'react-markdown'
 
 import {
   chains,
@@ -48,8 +49,6 @@ import proposalCompleteIcon from '../../../../../public/assets/iconGradient/prop
 import proposalWaitingIcon from '../../../../../public/assets/iconGradient/proposal-waiting.svg'
 
 import * as S from './styles'
-import ReactMarkdown from 'react-markdown'
-import BigNumber from 'bn.js'
 
 interface IRequestDataProposal {
   proposal: [
