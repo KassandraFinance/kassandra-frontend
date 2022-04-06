@@ -33,13 +33,10 @@ export const YourVotingPower = styled.div`
     display: flex;
     align-items: center;
 
-    font-size: ${theme.font.sizes.font12};
+    color: #bdbdbd;
+    font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.medium};
     text-transform: uppercase;
-
-    &:last-child {
-      font-size: ${theme.font.sizes.font14};
-    }
 
     div {
       margin-top: 0.2rem;
