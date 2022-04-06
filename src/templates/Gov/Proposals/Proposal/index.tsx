@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
 import {
+  chains,
   GovernorAlpha,
   SUBGRAPH_URL
 } from '../../../../constants/tokenAddresses'
@@ -44,6 +45,8 @@ import proposalCompleteIcon from '../../../../../public/assets/iconGradient/prop
 import proposalWaitingIcon from '../../../../../public/assets/iconGradient/proposal-waiting.svg'
 
 import * as S from './styles'
+import ReactMarkdown from 'react-markdown'
+import BigNumber from 'bn.js'
 
 interface IRequestDataProposal {
   proposal: [
@@ -53,6 +56,10 @@ interface IRequestDataProposal {
       forVotes: Big,
       againstVotes: Big,
       quorum: string,
+      values: [],
+      calldatas: [],
+      signatures: [],
+      targets: [],
       proposer: {
         id: string
       },
@@ -96,6 +103,10 @@ export interface IProposalProps {
   quorum: string;
   description: string;
   votingPower: Big;
+  values: string[];
+  calldatas: string[];
+  signatures: string[];
+  targets: string[];
 }
 
 const statslibColor: { [key: string]: string } = {
@@ -116,7 +127,11 @@ const Proposal = () => {
     number: 0,
     quorum: '0',
     description: '',
-    votingPower: Big(0)
+    votingPower: Big(0),
+    calldatas: [],
+    signatures: [],
+    targets: [],
+    values: []
   })
   // eslint-disable-next-line prettier/prettier
   const [modalVotes, setModalVotes] = React.useState<ModalProps>({
@@ -163,7 +178,11 @@ const Proposal = () => {
         proposer: data.proposal[0].proposer.id,
         votingPower: Big(data.proposal[0].forVotes).add(
           Big(data.proposal[0].againstVotes)
-        )
+        ),
+        calldatas: data.proposal[0].calldatas,
+        signatures: data.proposal[0].signatures,
+        targets: data.proposal[0].targets,
+        values: data.proposal[0].values
       }
 
       if (proposalInfo.votingPower.gt(0)) {
@@ -340,21 +359,11 @@ const Proposal = () => {
           </S.ProposalTitleWrapper>
           <S.CardWrapper>
             <S.DescriptionTable>
-              <S.Table>
-                <S.TableHead>
-                  <S.TableTitle>Description</S.TableTitle>
-                </S.TableHead>
-                <S.TableBody>
-                  {descriptions.map((description, index) => (
-                    <S.TableDescriptionWrapper key={description.title + index}>
-                      <S.DescriptionSubTitle>
-                        {description.title}
-                      </S.DescriptionSubTitle>
-                      <S.DescriptionText>{description.text}</S.DescriptionText>
-                    </S.TableDescriptionWrapper>
-                  ))}
-                </S.TableBody>
-              </S.Table>
+              <S.DescriptionProposal>
+                <ReactMarkdown skipHtml={true} linkTarget={'_blank'}>
+                  {proposal.description}
+                </ReactMarkdown>
+              </S.DescriptionProposal>
             </S.DescriptionTable>
             <S.InfoTable>
               <S.Table>
@@ -425,18 +434,81 @@ const Proposal = () => {
               <h1>Details</h1>
             </S.ProposalTitleWrapper>
             <S.DescriptionTable>
-              <S.Table>
-                <S.TableBody>
-                  {details.map((detail, index) => (
-                    <S.TableDescriptionWrapper key={detail.subTitle + index}>
+              {new Array(3).fill(null).map((_, index) => {
+                if (
+                  proposal.calldatas[index] ||
+                  proposal.signatures[index] ||
+                  proposal.targets[index] ||
+                  proposal.values[index]
+                ) {
+                  return (
+                    <S.TableDescriptionWrapper key={index}>
+                      <S.LinkTargetSnowTrace
+                        href={`${
+                          process.env.NEXT_PUBLIC_MASTER === '1'
+                            ? chains.avalanche.blockExplorerUrls
+                            : chains.fuji.blockExplorerUrls
+                        }address/${proposal.targets[index]}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <span>Target:</span>
+                        <span>
+                          {proposal.targets[index]
+                            ? proposal.targets[index]
+                            : '-'}
+                        </span>
+                        <svg
+                          width="17"
+                          height="17"
+                          viewBox="0 0 17 17"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M9.57924 2.78973C9.57924 2.44566 9.85816 2.16675 10.2022 2.16675H13.9401C14.2841 2.16675 14.5631 2.44566 14.5631 2.78973V6.52759C14.5631 6.87165 14.2841 7.15057 13.9401 7.15057C13.596 7.15057 13.3171 6.87165 13.3171 6.52759V4.41832L6.90487 10.8306C6.66158 11.0738 6.26713 11.0738 6.02385 10.8306C5.78056 10.5873 5.78056 10.1928 6.02385 9.94954L12.5607 3.4127H10.2022C9.85816 3.4127 9.57924 3.13379 9.57924 2.78973ZM3.97245 5.65542C3.80722 5.65542 3.64877 5.72106 3.53194 5.83789C3.41511 5.95472 3.34947 6.11317 3.34947 6.2784V13.1312C3.34947 13.2964 3.41511 13.4548 3.53194 13.5717C3.64877 13.6885 3.80722 13.7541 3.97245 13.7541H10.8252C10.9904 13.7541 11.1489 13.6885 11.2657 13.5717C11.3825 13.4548 11.4482 13.2964 11.4482 13.1312V9.39329C11.4482 9.04923 11.7271 8.77031 12.0712 8.77031C12.4152 8.77031 12.6941 9.04923 12.6941 9.39329V13.1312C12.6941 13.6268 12.4972 14.1022 12.1467 14.4527C11.7962 14.8032 11.3209 15.0001 10.8252 15.0001H3.97245C3.47678 15.0001 3.00141 14.8032 2.65091 14.4527C2.30042 14.1022 2.10352 13.6268 2.10352 13.1312L2.10352 6.2784C2.10352 5.78273 2.30042 5.30736 2.65091 4.95686C3.00141 4.60637 3.47678 4.40947 3.97245 4.40947H7.71031C8.05437 4.40947 8.33329 4.68838 8.33329 5.03244C8.33329 5.37651 8.05437 5.65542 7.71031 5.65542H3.97245Z"
+                            fill="white"
+                          />
+                        </svg>
+                      </S.LinkTargetSnowTrace>
+
                       <S.DetailsSubTitle>
-                        {`${detail.id}\u00A0 ${detail.subTitle}`}
+                        Value:
+                        <S.DetailsText>
+                          {proposal.values[index]
+                            ? BNtoDecimal(
+                                new BigNumber(proposal.values[index]),
+                                18,
+                                2
+                              )
+                            : '-'}
+                        </S.DetailsText>
                       </S.DetailsSubTitle>
-                      <S.DetailsText>{detail.text}</S.DetailsText>
+
+                      <S.DetailsSubTitle>
+                        Signature:
+                        <S.DetailsText>
+                          {proposal.signatures[index]
+                            ? proposal.signatures[index]
+                            : '-'}
+                        </S.DetailsText>
+                      </S.DetailsSubTitle>
+
+                      <S.DetailsSubTitle>
+                        Calldata:
+                        <S.DetailsText>
+                          {proposal.calldatas[index]
+                            ? proposal.calldatas[index]
+                            : '-'}
+                        </S.DetailsText>
+                      </S.DetailsSubTitle>
                     </S.TableDescriptionWrapper>
-                  ))}
-                </S.TableBody>
-              </S.Table>
+                  )
+                }
+                return
+              })}
             </S.DescriptionTable>
           </S.ProposalDetails>
           <S.ProposalStatus>
@@ -489,21 +561,6 @@ const Proposal = () => {
 
 export default Proposal
 
-const descriptions = [
-  {
-    title: 'Turpis ornare vitae sem quis sagittis. ',
-    text: 'Turpis ornare vitae sem quis sagittis. Sed libero ultricies eu accumsan. Risus lectus urna arcu aliquam velit, massa. Convallis convallis posuere risus, parturient quis. Ac suspendisse ornare amet a fermentum. Vulputate sociis ac at eget proin tristique congue blandit ut. Tempor, ullamcorper enim in molestie elit malesuada. Magna enim.'
-  },
-  {
-    title: 'Turpis ornare vitae sem quis sagittis. ',
-    text: 'Sed libero ultricies eu accumsan. Risus lectus urna arcu aliquam velit.'
-  },
-  {
-    title: 'Turpis ornare vitae sem quis sagittis. ',
-    text: 'Sed libero ultricies eu accumsan. Risus lectus urna arcu aliquam velit.'
-  }
-]
-
 const infoProposal = {
   state: 'Executed',
   quorum: '160.000/160.000',
@@ -512,24 +569,6 @@ const infoProposal = {
   starting: '22/10/2021, 1:28 PM',
   executeMax: '22/11/2021, 1:28 PM'
 }
-
-const details = [
-  {
-    id: '01',
-    subTitle: 'Turpis ornare vitae sem quis sagittis. ',
-    text: 'Turpis ornare vitae sem quis sagittis. Sed libero ultricies eu accumsan. Risus lectus urna arcu aliquam velit, massa. Convallis convallis posuere risus, parturient quis. Ac suspendisse ornare amet a fermentum. Vulputate sociis ac at eget proin tristique congue blandit ut. Tempor, ullamcorper enim in molestie elit malesuada. Magna enim.'
-  },
-  {
-    id: '02',
-    subTitle: 'Turpis ornare vitae sem quis sagittis. ',
-    text: 'Sed libero ultricies eu accumsan. Risus lectus urna arcu aliquam velit.'
-  },
-  {
-    id: '03',
-    subTitle: 'Turpis ornare vitae sem quis sagittis. ',
-    text: 'Sed libero ultricies eu accumsan. Risus lectus urna arcu aliquam velit.'
-  }
-]
 
 const stepData = [
   {

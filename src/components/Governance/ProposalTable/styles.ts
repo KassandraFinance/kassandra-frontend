@@ -169,10 +169,15 @@ export const StatusAndTimeframe = styled.div`
   display: flex;
 `
 
-export const StatusProposal = styled.span`
+interface IStatusProposalColor {
+  statusColor: string;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const StatusProposal = styled.span<IStatusProposalColor>`
   margin-right: ${theme.spacings.space16};
 
-  color: ${theme.colors.snow};
+  color: ${({ statusColor }) => statusColor};
   line-height: ${theme.font.sizes.font16};
   font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.bold};
@@ -238,7 +243,8 @@ export const TimeFrameMobile = styled.p`
   }
 `
 
-export const StateMutability = styled.span`
+// eslint-disable-next-line prettier/prettier
+export const StateMutability = styled.span<IStatusProposalColor>`
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -246,7 +252,7 @@ export const StateMutability = styled.span`
   line-height: ${theme.font.sizes.font18};
   font-size: ${theme.font.sizes.font18};
   font-weight: ${theme.font.weight.bold};
-  color: ${theme.colors.snow};
+  color: ${({ statusColor }) => statusColor};
   text-transform: capitalize;
 
   img {

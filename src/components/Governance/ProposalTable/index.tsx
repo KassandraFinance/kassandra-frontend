@@ -8,18 +8,33 @@ import { GovernorAlpha, SUBGRAPH_URL } from '../../../constants/tokenAddresses'
 
 import useGovernance from '../../../hooks/useGovernance'
 
-// import { dateRequestUnstake } from '../../../utils/date'
-
 import { GET_PROPOSALS } from './graphql'
 
 import * as S from './styles'
 
+const statsSecundaryProposalLibColor: { [key: string]: string } = {
+  'voting open': '#E843C4',
+  succeeded: '#26DBDB',
+  queued: '#FFBF00',
+  pending: '#FFBF00',
+  executed: '#2CE878',
+  defeated: '#E8372C',
+  expired: '#E8372C',
+  canceled: '#BDBDBD'
+}
+
+const statsPrimaryProposalLibColor: { [key: string]: string } = {
+  active: '#E843C4',
+  succeeded: '#2CE878',
+  failed: '#E8372C'
+}
+
 interface IProposalsListProps {
   id: string;
   number: number;
-  targets: any[];
-  values: any[];
-  signatures: any[];
+  targets: [];
+  values: [];
+  signatures: [];
   startBlock: string;
   description: string;
   state: any[];
@@ -48,6 +63,24 @@ export const ProposalTable = () => {
     setProposalsList(proposalComplete)
   }
 
+  function getTitleProposal(description: string) {
+    const [titleDescription] = description.split(/[,.\n]/)
+    const formatTitleDescription = titleDescription.replace('#', '')
+
+    if (formatTitleDescription.length > 45) {
+      return (
+        formatTitleDescription.slice(0, 45).charAt(0).toUpperCase() +
+        formatTitleDescription.slice(1, 45) +
+        '...'
+      )
+    }
+
+    return (
+      formatTitleDescription.charAt(0).toUpperCase() +
+      formatTitleDescription.slice(1)
+    )
+  }
+
   React.useEffect(() => {
     if (data) {
       handleAddStateOnProposal(data.proposals)
@@ -69,10 +102,18 @@ export const ProposalTable = () => {
               <S.Tr>
                 <S.Td className="proposal">
                   <S.TextProposal>
-                    {proposal.number} {proposal.description}
+                    {proposal.number} {getTitleProposal(proposal.description)}
                   </S.TextProposal>
                   <S.StatusAndTimeframe>
-                    <S.StatusProposal>{proposal.state[0]}</S.StatusProposal>
+                    <S.StatusProposal
+                      statusColor={
+                        statsPrimaryProposalLibColor[
+                          proposal.state[0].toLowerCase()
+                        ]
+                      }
+                    >
+                      {proposal.state[0]}
+                    </S.StatusProposal>
                     {/* <S.TimeFrameMobile>{item.timestamp}</S.TimeFrameMobile> */}
                   </S.StatusAndTimeframe>
                 </S.Td>
@@ -80,7 +121,13 @@ export const ProposalTable = () => {
                   <S.TimeFrame>
                     {/* End in {dateRequestUnstake(item.timestamp * 1000)} */}
                   </S.TimeFrame>
-                  <S.StateMutability>
+                  <S.StateMutability
+                    statusColor={
+                      statsSecundaryProposalLibColor[
+                        proposal.state[1].toLowerCase()
+                      ]
+                    }
+                  >
                     <span>{proposal.state[1]}</span>
                     {proposal.state[2] && (
                       <Image

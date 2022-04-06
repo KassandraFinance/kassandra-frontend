@@ -8,6 +8,10 @@ export const GET_PROPOSAL = gql`
       forVotes
       againstVotes
       quorum
+      values
+      calldatas
+      signatures
+      targets
       proposer {
         id
       }
