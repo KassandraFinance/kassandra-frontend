@@ -287,7 +287,10 @@ const Proposal = () => {
                 </S.ProposeAuthorCard>
               </S.TitleAndAuthor>
               <S.VotingPowerAndLink>
-                <VotingPower userWalletAddress={userWalletAddress} />
+                <VotingPower
+                  userWalletAddress={userWalletAddress}
+                  yourVotingPowerInProposal={yourVotingPowerInProposal}
+                />
                 <ExternalLink text="Obtain more voting power" hrefNext="#" />
               </S.VotingPowerAndLink>
             </S.TitleWrapper>
@@ -301,7 +304,10 @@ const Proposal = () => {
               />
               <S.CardTitleWrapper>
                 <S.VotingPowerAndLink>
-                  <VotingPower userWalletAddress={userWalletAddress} />
+                  <VotingPower
+                    userWalletAddress={userWalletAddress}
+                    yourVotingPowerInProposal={yourVotingPowerInProposal}
+                  />
                   <ExternalLink text="Obtain more voting power" hrefNext="#" />
                 </S.VotingPowerAndLink>
                 <S.ProposeAuthorCard>

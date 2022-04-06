@@ -39,9 +39,7 @@ const VotingPower = ({
     if (data) {
       setTotalVotes(data.governances[0].totalVotingPower)
 
-      if (data.user) {
-        setYourVotingPower(data.user.votingPower)
-      }
+      setYourVotingPower(data.user ? data.user.votingPower : 0)
     }
   }, [data])
 
