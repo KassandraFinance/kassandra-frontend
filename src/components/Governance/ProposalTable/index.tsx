@@ -12,12 +12,29 @@ import { GET_PROPOSALS } from './graphql'
 
 import * as S from './styles'
 
+const statsSecundaryProposalLibColor: { [key: string]: string } = {
+  'voting open': '#E843C4',
+  succeeded: '#26DBDB',
+  queued: '#FFBF00',
+  pending: '#FFBF00',
+  executed: '#2CE878',
+  defeated: '#E8372C',
+  expired: '#E8372C',
+  canceled: '#BDBDBD'
+}
+
+const statsPrimaryProposalLibColor: { [key: string]: string } = {
+  active: '#E843C4',
+  succeeded: '#2CE878',
+  failed: '#E8372C'
+}
+
 interface IProposalsListProps {
   id: string;
   number: number;
-  targets: any[];
-  values: any[];
-  signatures: any[];
+  targets: [];
+  values: [];
+  signatures: [];
   startBlock: string;
   description: string;
   state: any[];
@@ -88,7 +105,15 @@ export const ProposalTable = () => {
                     {proposal.number} {getTitleProposal(proposal.description)}
                   </S.TextProposal>
                   <S.StatusAndTimeframe>
-                    <S.StatusProposal>{proposal.state[0]}</S.StatusProposal>
+                    <S.StatusProposal
+                      statusColor={
+                        statsPrimaryProposalLibColor[
+                          proposal.state[0].toLowerCase()
+                        ]
+                      }
+                    >
+                      {proposal.state[0]}
+                    </S.StatusProposal>
                     {/* <S.TimeFrameMobile>{item.timestamp}</S.TimeFrameMobile> */}
                   </S.StatusAndTimeframe>
                 </S.Td>
@@ -96,7 +121,13 @@ export const ProposalTable = () => {
                   <S.TimeFrame>
                     {/* End in {dateRequestUnstake(item.timestamp * 1000)} */}
                   </S.TimeFrame>
-                  <S.StateMutability>
+                  <S.StateMutability
+                    statusColor={
+                      statsSecundaryProposalLibColor[
+                        proposal.state[1].toLowerCase()
+                      ]
+                    }
+                  >
                     <span>{proposal.state[1]}</span>
                     {proposal.state[2] && (
                       <Image
