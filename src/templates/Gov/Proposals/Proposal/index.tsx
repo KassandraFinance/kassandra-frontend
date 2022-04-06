@@ -425,7 +425,7 @@ const Proposal = () => {
                         Value:
                         <S.DetailsText>
                           {proposal.values[index]
-                            ? BNtoDecimal(Big(proposal.values[index]), 18, 3, 2)
+                            ? BNtoDecimal(Big(proposal.values[index]), 18, 2)
                             : '-'}
                         </S.DetailsText>
                       </S.DetailsSubTitle>
