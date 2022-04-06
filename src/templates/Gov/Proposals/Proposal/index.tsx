@@ -74,12 +74,15 @@ const Proposal = () => {
     votingPower: Big(0)
   })
   // eslint-disable-next-line prettier/prettier
-  const [modalVotes, setModalVotes] = React.useState<ModalProps | undefined>(undefined)
+  const [modalVotes, setModalVotes] = React.useState<ModalProps | undefined>(
+    undefined
+  )
   const [percentageVotes, setPercentageVotes] = React.useState({
     for: '0',
     against: '0'
   })
-  const [proposalState, setProposalState] = React.useState<any[]>([])
+  const [proposalState, setProposalState] = React.useState<string>('')
+  const [dataStatus, setDataStatus] = React.useState<any[]>(stepData)
   const router = useRouter()
   const governance = useGovernance(GovernorAlpha)
 
@@ -92,7 +95,7 @@ const Proposal = () => {
   )
 
   async function getProposalState(number: number) {
-    governance.stateProposals(number).then(res => setProposalState(res))
+    governance.stateProposals(number).then(res => setProposalState(res[0]))
   }
 
   React.useEffect(() => {
@@ -131,6 +134,35 @@ const Proposal = () => {
       setProposal(proposalInfo)
     }
   }, [data])
+
+  React.useEffect(() => {
+    function generateStatusHistoryArray() {
+      const arr = dataStatus.map(item =>
+        item.title.includes(proposalState)
+          ? { ...item, completed: true, title: proposalState }
+          : item
+      )
+
+      const teste2 = arr.findIndex(item => item.completed === true)
+
+      const arrTrue = arr
+        .slice(0, teste2 + 1)
+        .map(item => ({ ...item, completed: true }))
+      const arrFalse = arr.slice(teste2 + 1)
+
+      const arrModified = [...arrTrue, ...arrFalse]
+
+      setDataStatus(arrModified)
+    }
+
+    generateStatusHistoryArray()
+  }, [proposalState])
+
+  function getAllBefore(current: any) {
+    const myArr = dataStatus
+    const i = myArr.indexOf(current)
+    return i > -1 ? myArr.slice(0, i) : []
+  }
 
   return (
     <>
@@ -257,14 +289,14 @@ const Proposal = () => {
                   <S.TableInfoWrapper>
                     <S.DataWrapper>
                       <S.TextKey>State</S.TextKey>
-                      {proposalState[0] ? (
+                      {proposalState ? (
                         <S.TextValue
                           style={{
-                            color: statslibColor[proposalState[0].toLowerCase()]
+                            color: statslibColor[proposalState.toLowerCase()]
                           }}
                         >
-                          {proposalState[0].charAt(0).toUpperCase() +
-                            proposalState[0].slice(1)}
+                          {proposalState.charAt(0).toUpperCase() +
+                            proposalState.slice(1)}
                         </S.TextValue>
                       ) : (
                         '...'
@@ -338,7 +370,25 @@ const Proposal = () => {
             </S.ProposalTitleWrapper>
 
             <S.Steps>
-              {stepData.map((step, index) => (
+              {dataStatus.map((step, index) => (
+                <React.Fragment key={index}>
+                  <S.Step>
+                    {step.completed === true ? (
+                      <Image src={proposalCompleteIcon} />
+                    ) : (
+                      <Image src={proposalWaitingIcon} />
+                    )}
+
+                    <S.StepTitle>{step.title}</S.StepTitle>
+                    <S.StepDate>{step.date}</S.StepDate>
+                  </S.Step>
+                  <S.LineBetweenImages
+                    isAfter={index === dataStatus.length - 1}
+                    isComplete={step.completed === true}
+                  />
+                </React.Fragment>
+              ))}
+              {/* {stepData.map((step, index) => (
                 <>
                   <S.Step key={step.title}>
                     {Date.parse(step.date) / 1000 >
@@ -357,7 +407,7 @@ const Proposal = () => {
                     }
                   />
                 </>
-              ))}
+              ))} */}
             </S.Steps>
           </S.ProposalStatus>
         </S.ProposalInfo>
@@ -421,23 +471,28 @@ const details = [
 
 const stepData = [
   {
-    title: 'Created',
+    title: ['Created'],
+    completed: false,
     date: '01/22/2022'
   },
   {
-    title: 'Active',
+    title: ['Active'],
+    completed: false,
     date: '01/22/2022'
   },
   {
-    title: 'Succeeded',
+    title: ['Succeeded', 'Failed'],
+    completed: false,
     date: '02/22/2022'
   },
   {
-    title: 'Queued',
+    title: ['Queued'],
+    completed: false,
     date: '02/22/2022'
   },
   {
-    title: 'Executed',
-    date: '02/22/2022'
+    title: ['Executed'],
+    completed: false,
+    date: '04/22/2022'
   }
 ]
