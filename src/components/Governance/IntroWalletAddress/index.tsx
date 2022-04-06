@@ -40,6 +40,7 @@ const IntroWalletAddress = () => {
   const [voteWeight, setVoteWeight] = React.useState<string>('')
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+
   const { userInfo } = useStakingContract(Staking)
 
   const router = useRouter()
@@ -51,18 +52,9 @@ const IntroWalletAddress = () => {
 
   const callUserInfo = async () => {
     const [userInfoOne, userInfoTwo, userInfoThree] = await Promise.all([
-      userInfo(
-        process.env.NEXT_PUBLIC_MASTER === '1' ? 2 : 0,
-        userWalletAddress
-      ),
-      userInfo(
-        process.env.NEXT_PUBLIC_MASTER === '1' ? 3 : 1,
-        userWalletAddress
-      ),
-      userInfo(
-        process.env.NEXT_PUBLIC_MASTER === '1' ? 4 : 2,
-        userWalletAddress
-      )
+      userInfo(process.env.NEXT_PUBLIC_MASTER === '1' ? 2 : 0, address),
+      userInfo(process.env.NEXT_PUBLIC_MASTER === '1' ? 3 : 1, address),
+      userInfo(process.env.NEXT_PUBLIC_MASTER === '1' ? 4 : 2, address)
     ])
 
     const totalStaked = new BigNumber(userInfoOne.amount)
@@ -76,7 +68,7 @@ const IntroWalletAddress = () => {
     if (data) {
       callUserInfo()
       const vote = BNtoDecimal(
-        Big(data.user.votingPower)
+        Big(data.user !== null ? data.user.votingPower : '0')
           .mul(100)
           .div(Big(data.governances[0].totalVotingPower)),
         18,
@@ -86,7 +78,7 @@ const IntroWalletAddress = () => {
       return
     }
     setVoteWeight('')
-  }, [data])
+  }, [data, address, userWalletAddress])
 
   return (
     <>
@@ -95,8 +87,8 @@ const IntroWalletAddress = () => {
           <S.WalletAddress>
             <Image src={jony} width={40} height={40} alt="" />
             <h2>
-              {userWalletAddress
-                ? substr(`${userWalletAddress}`)
+              {address || userWalletAddress
+                ? substr(`${address || userWalletAddress}`)
                 : substr('0x000000000')}
             </h2>
           </S.WalletAddress>
@@ -119,7 +111,7 @@ const IntroWalletAddress = () => {
                 </S.Tooltip>
               </Tippy>
             </span>
-            {userWalletAddress ? (
+            {address || userWalletAddress ? (
               <span className="value-total-voting-power">
                 {BNtoDecimal(new BigNumber(totalKacyStaked), 18, 2)}
               </span>

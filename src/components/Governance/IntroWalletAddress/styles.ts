@@ -3,7 +3,6 @@ import theme from '../../../styles/theme'
 
 export const IntroWalletAddress = styled.section`
   margin-top: ${theme.spacings.space16};
-  margin-bottom: 10rem;
 `
 
 export const AddressAndVoteWeight = styled.div`
