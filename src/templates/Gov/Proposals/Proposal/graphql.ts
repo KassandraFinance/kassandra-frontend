@@ -7,6 +7,7 @@ export const GET_PROPOSAL = gql`
       description
       forVotes
       againstVotes
+      startBlock
       quorum
       values
       calldatas

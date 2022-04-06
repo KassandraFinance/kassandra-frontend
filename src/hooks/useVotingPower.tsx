@@ -43,11 +43,17 @@ const useVotingPower = (address: string) => {
         )
     }
 
+    const getPriorVotes = async (walletAddress: string, startBlockNumber: string) => {
+      const value = await contract.methods.getPriorVotes(walletAddress, startBlockNumber).call()
+      return value
+    }
+
     return {
       currentVotes,
       totalVotes,
       delegateVote,
-      delegateAllVotes
+      delegateAllVotes,
+      getPriorVotes
     }
   }, [contract])
 }
