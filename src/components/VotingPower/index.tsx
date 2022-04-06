@@ -2,15 +2,15 @@
 import React from 'react'
 import BigNumber from 'bn.js'
 import Image from 'next/image'
+import useSWR from 'swr'
+import request from 'graphql-request'
 
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
-import { Staking } from '../../constants/tokenAddresses'
+import { GET_VOTINGPOWER } from './graphql'
+import { SUBGRAPH_URL } from '../../constants/tokenAddresses'
 
-import useVotingPower from '../../hooks/useVotingPower'
-
-import web3 from '../../utils/web3'
 import { BNtoDecimal } from '../../utils/numerals'
 
 import infoGrayIcon from '../../../public/assets/info-gray.svg'
@@ -19,31 +19,31 @@ import * as S from './styles'
 
 interface IVotingPowerProps {
   userWalletAddress: string;
+  yourVotingPowerInProposal?: BigNumber;
   isMobile?: boolean;
 }
 
-const VotingPower = ({ userWalletAddress, isMobile }: IVotingPowerProps) => {
-  const [totalVotes, setTotalVotes] = React.useState(new BigNumber(-1))
-  const [yourVotingPower, setYourVotingPower] = React.useState(new BigNumber(-1)) // eslint-disable-line prettier/prettier
+const VotingPower = ({
+  userWalletAddress,
+  yourVotingPowerInProposal,
+  isMobile
+}: IVotingPowerProps) => {
+  const [totalVotes, setTotalVotes] = React.useState(new BigNumber(0))
+  const [yourVotingPower, setYourVotingPower] = React.useState(new BigNumber(0))
 
-  const votingPower = useVotingPower(Staking)
+  const { data } = useSWR([GET_VOTINGPOWER], query =>
+    request(SUBGRAPH_URL, query, { id: userWalletAddress })
+  )
 
   React.useEffect(() => {
-    if (!web3.currentProvider) {
-      return
-    }
+    if (data) {
+      setTotalVotes(data.governances[0].totalVotingPower)
 
-    const interval = setInterval(async () => {
-      const totalVotes = await votingPower.totalVotes()
-      setTotalVotes(totalVotes)
-      if (userWalletAddress) {
-        const currentVotes = await votingPower.currentVotes(userWalletAddress)
-        setYourVotingPower(currentVotes)
+      if (data.user) {
+        setYourVotingPower(data.user.votingPower)
       }
-    }, 8000)
-
-    return () => clearInterval(interval)
-  }, [userWalletAddress])
+    }
+  }, [data])
 
   return (
     <S.VotingPower isMobile={isMobile}>
@@ -61,10 +61,10 @@ const VotingPower = ({ userWalletAddress, isMobile }: IVotingPowerProps) => {
             </S.Tooltip>
           </Tippy>
         </span>
-        <span style={{ fontSize: '14px' }}>
-          {yourVotingPower.lt(new BigNumber('0'))
-            ? '...'
-            : BNtoDecimal(yourVotingPower, 18, 2)}
+        <span>
+          {yourVotingPowerInProposal === undefined
+            ? BNtoDecimal(yourVotingPower, 0, 2)
+            : BNtoDecimal(yourVotingPowerInProposal, 18, 2)}
         </span>
       </S.YourVotingPower>
       <S.TotalVotingPower>
@@ -81,11 +81,7 @@ const VotingPower = ({ userWalletAddress, isMobile }: IVotingPowerProps) => {
             </S.Tooltip>
           </Tippy>
         </span>
-        <span>
-          {totalVotes.lt(new BigNumber('0'))
-            ? '...'
-            : BNtoDecimal(totalVotes, 18, 2)}
-        </span>
+        <span>{BNtoDecimal(totalVotes, 0, 2)}</span>
       </S.TotalVotingPower>
     </S.VotingPower>
   )
