@@ -37,6 +37,7 @@ import proposalWaitingIcon from '../../../../../public/assets/iconGradient/propo
 
 import * as S from './styles'
 import ReactMarkdown from 'react-markdown'
+import BigNumber from 'bn.js'
 
 interface IRequestDataProposal {
   proposal: [
@@ -425,7 +426,11 @@ const Proposal = () => {
                         Value:
                         <S.DetailsText>
                           {proposal.values[index]
-                            ? BNtoDecimal(Big(proposal.values[index]), 18, 2)
+                            ? BNtoDecimal(
+                                new BigNumber(proposal.values[index]),
+                                18,
+                                2
+                              )
                             : '-'}
                         </S.DetailsText>
                       </S.DetailsSubTitle>
