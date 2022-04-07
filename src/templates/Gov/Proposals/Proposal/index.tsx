@@ -89,6 +89,8 @@ export interface ModalProps {
 export interface IUserVotedProps {
   voted: boolean;
   support: boolean | null;
+  userWalletAddress: string;
+  yourVotingPowerInProposal: BigNumber;
 }
 
 export interface IVotesProps {
@@ -152,7 +154,9 @@ const Proposal = () => {
   const [proposalState, setProposalState] = React.useState<string[]>([])
   const [userVoted, setUserVoted] = React.useState<IUserVotedProps>({
     voted: false,
-    support: null
+    support: null,
+    userWalletAddress: '',
+    yourVotingPowerInProposal: new BigNumber(0)
   })
   // eslint-disable-next-line prettier/prettier
   const [yourVotingPowerInProposal, setYourVotingPowerInProposal] = React.useState(new BigNumber(0))
@@ -185,7 +189,14 @@ const Proposal = () => {
   }
 
   function handleVote(voteType: string) {
-    if (userVoted.voted || proposalState[0] !== 'Active') return
+    if (
+      userVoted.voted ||
+      proposalState[0] !== 'Active' ||
+      !userWalletAddress ||
+      yourVotingPowerInProposal.eq(new BigNumber(0))
+    ) {
+      return
+    }
 
     governance.castVote(
       Number(router.query.proposal),
@@ -256,19 +267,18 @@ const Proposal = () => {
       const userAlreadyVoted = data.proposal[0].votes.find(
         (vote: IVotesProps) => vote.voter.id === userWalletAddress
       )
-
-      if (userAlreadyVoted) {
-        setUserVoted({
-          voted: true,
-          support: userAlreadyVoted.support
-        })
-      }
+      setUserVoted({
+        voted: userAlreadyVoted ? true : false,
+        support: userAlreadyVoted ? userAlreadyVoted.support : null,
+        userWalletAddress,
+        yourVotingPowerInProposal
+      })
 
       getVotingPowerInProposal(data.proposal[0].startBlock)
       getProposalState(data.proposal[0].number)
       setProposal(proposalInfo)
     }
-  }, [data])
+  }, [data, userWalletAddress])
 
   return (
     <>
@@ -367,7 +377,7 @@ const Proposal = () => {
                   voteType: 'Against',
                   percentage: `${percentageVotes.against}`,
                   // eslint-disable-next-line prettier/prettier
-                  totalVotingPower: `${BNtoDecimal(proposal.againstVotes,0, 2, 2)}`,
+                  totalVotingPower: `${BNtoDecimal(proposal.againstVotes, 0, 2, 2)}`,
                   checkAllVoterModal: false
                 })
                 setIsModalOpen(true)
