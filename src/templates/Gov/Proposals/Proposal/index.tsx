@@ -208,10 +208,9 @@ const Proposal = () => {
                 </S.VotingPowerAndLink>
                 <S.ProposeAuthorCard>
                   <p>Proposed by</p>
-                  <Image
-                    src={'/assets/avatar-author-proposal.svg'}
-                    width={24}
-                    height={24}
+                  <Jazzicon
+                    diameter={24}
+                    seed={jsNumberForAddress(proposal.proposer)}
                   />
                   <span>{substr(`${proposal.proposer}`)}</span>
                 </S.ProposeAuthorCard>
