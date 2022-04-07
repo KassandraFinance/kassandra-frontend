@@ -1,7 +1,11 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import theme from '../../../../styles/theme'
 
-export const Card = styled.div`
+interface CardProps {
+  isLastCard: boolean;
+}
+
+export const Card = styled.div<CardProps>`
   width: 100%;
   height: 100%;
 
@@ -15,13 +19,20 @@ export const Card = styled.div`
   img {
     max-width: 100%;
   }
+
+  @media (max-width: 920px) {
+    ${({isLastCard}) => isLastCard ? css`
+      grid-row: 5 / 6;
+      grid-column: 1 / 3;
+    ` : ""}
+  }
 `
 
 export const Image = styled.div`
   max-width: 100%;
   margin-bottom: 1.6rem;
 
-  background: linear-gradient(0deg, #e843c4, #ffbf00);
+  background-color: #2D292F;
   border-radius: 50%;
 
   overflow: hidden;
@@ -29,8 +40,7 @@ export const Image = styled.div`
   img {
     width: 8.8rem;
     height: 8.8rem;
-    padding: 0.2rem;
-
+    padding: 0.1rem;
     border-radius: 50%;
   }
 `
@@ -42,6 +52,10 @@ export const Name = styled.p`
   font-weight: ${theme.font.weight.bold};
   line-height: 110%;
   letter-spacing: 0.04rem;
+
+  @media (max-width: 470px) {
+    font-size: ${theme.font.sizes.font14};
+  }
 `
 
 export const Role = styled.p`
@@ -52,13 +66,17 @@ export const Role = styled.p`
   line-height: 110%;
   letter-spacing: 0.04rem;
   color: #bdbdbd;
+
+  @media (max-width: 470px) {
+    font-size: .8rem;
+  }
 `
 
 export const CardDivider = styled.div`
   width: 6.6rem;
   margin: 0 auto;
 
-  border-width: 0.1rem;
+  border-width: 0.01rem;
   border-style: solid;
   border-color: #ffffff24;
 `

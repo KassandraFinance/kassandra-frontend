@@ -7,12 +7,21 @@ export const GET_PROPOSAL = gql`
       description
       forVotes
       againstVotes
+      startBlock
       quorum
+      values
+      calldatas
+      signatures
+      targets
       proposer {
         id
       }
       votes {
         votingPower
+        support
+        voter {
+          id
+        }
       }
     }
   }

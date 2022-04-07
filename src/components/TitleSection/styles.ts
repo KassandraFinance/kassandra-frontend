@@ -1,7 +1,14 @@
 import styled from 'styled-components'
 import theme from '../../styles/theme'
 
-export const Title = styled.div`
+interface ITitleProps {
+  marginTop?: number;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const Title = styled.div<ITitleProps>`
+  margin-top: ${props => (props.marginTop ? `${props.marginTop}px` : 0)};
+
   @media (max-width: 700px) {
     img {
       width: 18px;

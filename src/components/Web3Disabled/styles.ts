@@ -19,16 +19,15 @@ export const Web3Disabled = styled.section`
 `
 
 export const Header = styled.div`
-  background-color: rgba(20, 20, 20, 0.5);
-
-  border: 1px solid ${theme.colors.amber};
-  border-radius: 12px 12px 0 0;
-
   display: flex;
   align-items: center;
   justify-content: center;
   height: 65px;
   padding: 24px;
+
+  background-color: rgba(20, 20, 20, 0.5);
+  border: 1px solid ${theme.colors.amber};
+  border-radius: 12px 12px 0 0;
 
   img {
     margin-right: ${theme.spacings.space16};
@@ -57,19 +56,19 @@ export const Header = styled.div`
 `
 
 export const Body = styled.div`
-  background-color: rgba(31, 31, 31, 0.45);
-
-  border-bottom: 1px solid ${theme.colors.amber};
-  border-right: 1px solid ${theme.colors.amber};
-  border-left: 1px solid ${theme.colors.amber};
-  border-radius: 0 0 12px 12px;
-
   padding: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   height: 200px;
+
+  background-color: rgba(31, 31, 31, 0.45);
+  border-bottom: 1px solid ${theme.colors.amber};
+  border-right: 1px solid ${theme.colors.amber};
+  border-left: 1px solid ${theme.colors.amber};
+  border-radius: 0 0 12px 12px;
+
   @media (max-width: 700px) {
     height: 140px;
     padding: 24px;

@@ -5,32 +5,35 @@ export const Summary = styled.div`
   p {
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.light};
-    line-height: 24px;
+    line-height: 1.5rem;
   }
 
   a {
-    background-color: rgba(255, 255, 255, 0.04);
-    border: none;
-    border-radius: 12px;
-    color: ${theme.colors.snow};
+    display: flex;
+    align-items: flex-end;
+    max-width: 100%;
+    padding: 1.5rem;
+
     font-family: ${theme.font.family};
+    color: ${theme.colors.snow};
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.light};
     text-decoration: none;
 
-    display: flex;
-    align-items: flex-end;
-
-    max-width: 100%;
-    padding: 24px;
+    background-color: rgba(255, 255, 255, 0.04);
+    border: none;
+    border-radius: 0.75rem;
 
     transition: 0.15s;
     outline: none;
+
     svg {
       margin-left: ${theme.spacings.space8};
     }
+
     &:hover {
       color: ${theme.colors.cyan};
+
       > svg {
         path {
           fill: ${theme.colors.cyan};
@@ -44,60 +47,58 @@ export const Line = styled.div`
   background-color: rgba(255, 255, 255, 0.1);
 
   width: 100%;
-  height: 1px;
+  height: 0.06rem;
   margin: ${theme.spacings.space24} 0;
 `
 
 export const Title = styled.div`
   display: flex;
   align-items: center;
+
   h2 {
+    margin-left: ${theme.spacings.space16};
+
     font-size: ${theme.font.sizes.font18};
     font-weight: ${theme.font.weight.bold};
-    margin-left: ${theme.spacings.space16};
   }
 `
 
 export const LinkContent = styled.div`
   display: flex;
   justify-content: space-between;
-
-  max-width: 400px;
-  margin: 20px 0;
+  max-width: 25rem;
+  margin: 1.25rem 0;
 `
 
 export const ContractsName = styled.p`
+  margin-top: 1.25rem;
+  margin-bottom: 0.63rem;
+
   font-weight: ${theme.font.weight.normal} !important;
-  margin: 20px 0 10px;
 `
 
-interface ICopyContractProps {
-  width?: string;
-}
-
-// eslint-disable-next-line prettier/prettier
-export const CopyContract = styled.div<ICopyContractProps>`
-  background-color: rgba(255, 255, 255, 0.04);
-  border: none;
-  border-radius: 12px;
-  color: #fff;
-  font-family: ${theme.font.family};
-  font-size: ${theme.font.sizes.font14};
-  text-decoration: none;
-
+export const CopyContract = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   max-width: 100%;
-  padding: 22px;
-  margin: 16px 0;
+  padding: 1.38rem;
+  margin: 1rem 0;
+
+  font-family: ${theme.font.family};
+  font-size: ${theme.font.sizes.font14};
+  color: #fff;
+  text-decoration: none;
+
+  background-color: rgba(255, 255, 255, 0.04);
+  border: none;
+  border-radius: 0.75rem;
 
   .metamask {
-    margin-right: 8px;
-    @media(max-width: 1060px) {
-      margin-top: 8px;
-      margin-left: 40px;
+    margin-right: 0.5rem;
+
+    @media (max-width: 1060px) {
+      margin-left: 1.25rem;
     }
   }
 
@@ -106,26 +107,37 @@ export const CopyContract = styled.div<ICopyContractProps>`
   }
 
   button {
-    background-color: transparent;
-    border: none;
+    display: flex;
+    align-items: center;
+
     color: ${theme.colors.snow};
     font-family: ${theme.font.family};
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.light};
     text-decoration: none;
 
-    display: flex;
-    align-items: center;
-
+    background-color: transparent;
+    border: none;
 
     transition: 0.15s;
     outline: none;
     cursor: pointer;
+
+    @media (max-width: 1060px) {
+      margin-top: 6px;
+    }
+
+    @media (max-width: 538px) {
+      display: none;
+    }
+
     svg {
       margin-left: ${theme.spacings.space8};
     }
+
     &:hover {
       color: ${theme.colors.cyan};
+
       > svg {
         path {
           fill: ${theme.colors.cyan};
@@ -134,43 +146,49 @@ export const CopyContract = styled.div<ICopyContractProps>`
     }
   }
 
-  @media(max-width: 1060px) {
-    flex-direction: column;
+  @media (max-width: 1060px) {
+    flex-wrap: wrap;
     align-items: flex-start;
-    padding: 16px;
+    padding: 1rem;
+
     > button {
-      margin-left: 40px;
+      margin-left: 2.5rem;
     }
   }
 
-  @media(max-width: 960px) {
+  @media (max-width: 950px) {
     flex-direction: row;
   }
 
-  @media(max-width: 530px) {
+  @media (max-width: 530px) {
     flex-direction: column;
   }
 `
 
 export const Blockchain = styled.div`
   display: flex;
-
-  max-height: 24px;
-  margin-right: 32px;
+  max-height: 2.4rem;
 
   .image {
-    max-width: 24px;
-    max-height: 24px;
-    margin-right: 16px;
+    max-width: 2.4rem;
+    max-height: 2.4rem;
+    margin-right: 1.6rem;
   }
 
   span {
+    padding: 0.38rem 0;
+
     font-size: ${theme.font.sizes.font14};
     line-height: ${theme.font.sizes.font14};
-    padding: 6px 0;
+  }
+
+  a {
+    align-items: center;
+
+    background-color: inherit;
   }
 
   @media (max-width: 1060px) {
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
   }
 `

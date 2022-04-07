@@ -9,7 +9,6 @@ export const Background = styled.div`
 `
 
 export const TeamBackground = styled.div`
-  background: url('/assets/about-team-background.svg');
   background-repeat: no-repeat;
   background-position: 50% 100%;
 
@@ -20,54 +19,67 @@ export const TeamBackground = styled.div`
 
 export const BackgroundSubscribe = styled.div`
   background: #2114261f;
-  border: 1px solid #ffffff21;
-  border-radius: 10px;
+  border: 0.1rem solid #ffffff21;
+  border-radius: 1rem;
   max-width: 96rem;
-  margin: 0 auto 170px;
-  padding: 40px 60px 0px 60px;
+  margin: 0 auto 17rem;
+  padding-top: 4rem;
+  padding-right: 6rem;
+  padding-bottom: 0;
+  padding-left: 6rem;
+
   @media (max-width: 768px) {
     display: none;
   }
 `
+
 export const BackgoundCountDown = styled.div`
-  background: url('assets/backgroundCountdown.svg');
+  padding: 10rem 10rem;
+
   background-repeat: no-repeat;
   background-size: auto;
   background-position: center;
-  padding: 100px 100px;
+  background: url('assets/backgroundCountdown.svg');
+
   @media (max-width: 768px) {
-    background: none;
     padding: 0;
+    background: none;
   }
 `
 
 export const ScrollUpButton = styled.div`
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 60px;
-  padding: 16px;
-  height: 60px;
+  bottom: 2rem;
+  right: 2rem;
+
+  width: 6rem;
+  height: 6rem;
+  padding: 1.6rem;
   text-align: center;
-  line-height: 60px;
-  background: ${theme.colors.darkPurple};
+  line-height: 6rem;
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+
+  background: ${theme.colors.darkPurple};
+
   &:hover {
-    border: 1px solid ${theme.colors.darkPurple};
+    border: 0.1rem solid ${theme.colors.darkPurple};
     background: ${theme.colors.snow};
   }
+
   @media (max-width: 768px) {
     display: none;
   }
 `
+
 //ScrollUpIcon
 export const ScrollUpIcon = styled.div`
   height: 100%;
+  margin: auto;
+
   background: url('assets/backToTop.svg');
   background-repeat: no-repeat;
   background-size: auto;
   background-position: center;
-  margin: auto;
 `
