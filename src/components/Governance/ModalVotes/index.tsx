@@ -1,9 +1,9 @@
 import React from 'react'
-import Image from 'next/image'
 import router from 'next/router'
 import useSWR from 'swr'
 import BigNumber from 'bn.js'
 import { request } from 'graphql-request'
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
 import { GET_MODALVOTES } from './graphql'
 import { SUBGRAPH_URL } from '../../../constants/tokenAddresses'
@@ -13,8 +13,6 @@ import Button from '../../Button'
 import substr from '../../../utils/substr'
 import { BNtoDecimal } from '../../../utils/numerals'
 import { checkVoteButton } from '../../../utils/checkVoteButton'
-
-import ImageAddress from '../../../../public/assets/team/jony.png'
 
 import { IUserVotedProps } from '../../../templates/Gov/Proposals/Proposal'
 
@@ -146,11 +144,9 @@ const ModalVotes = ({
                   className={lastItem ? `last-item` : ``}
                 >
                   <S.UserName>
-                    <Image
-                      src={ImageAddress}
-                      alt="user wallet photo Modal Votes"
-                      width={18}
-                      height={18}
+                    <Jazzicon
+                      diameter={18}
+                      seed={jsNumberForAddress(user.voter.id)}
                     />
                     {substr(user.voter.id)}
                   </S.UserName>
