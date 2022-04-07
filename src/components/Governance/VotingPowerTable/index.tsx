@@ -1,9 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import Big from 'big.js'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
 import { SUBGRAPH_URL } from '../../../constants/tokenAddresses'
 
@@ -11,8 +11,6 @@ import { BNtoDecimal } from '../../../utils/numerals'
 import substr from '../../../utils/substr'
 
 import { GET_USERS } from './graphql'
-
-import avax from '../../../../public/assets/avalanche_social_index_logo.svg'
 
 import * as S from './styles'
 
@@ -26,7 +24,9 @@ interface IVotingPowerRankProps {
 
 export const VotingPowerTable = () => {
   // eslint-disable-next-line prettier/prettier
-  const [votingPowerRank, setVotingPowerRank] = React.useState<Array<IVotingPowerRankProps>>([
+  const [votingPowerRank, setVotingPowerRank] = React.useState<
+    Array<IVotingPowerRankProps>
+  >([
     {
       address: '',
       votingPower: Big(-1),
@@ -96,7 +96,11 @@ export const VotingPowerTable = () => {
                   <S.Tr>
                     <S.Td className="rank">{index + 1}</S.Td>
                     <S.Td className="user">
-                      <Image src={avax} alt="" />
+                      <Jazzicon
+                        diameter={24}
+                        seed={jsNumberForAddress(item.address)}
+                      />
+
                       <span>{substr(item.address)}</span>
                     </S.Td>
                     <S.Td className="vote-power">

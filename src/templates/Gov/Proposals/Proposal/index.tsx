@@ -5,6 +5,7 @@ import useSWR from 'swr'
 import { request } from 'graphql-request'
 import { useRouter } from 'next/router'
 import { useSelector, RootStateOrAny } from 'react-redux'
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
 import {
   GovernorAlpha,
@@ -158,12 +159,6 @@ const Proposal = () => {
     generateStatusHistoryArray()
   }, [proposalState])
 
-  function getAllBefore(current: any) {
-    const myArr = dataStatus
-    const i = myArr.indexOf(current)
-    return i > -1 ? myArr.slice(0, i) : []
-  }
-
   return (
     <>
       <S.BackgroundVote>
@@ -185,11 +180,11 @@ const Proposal = () => {
                 />
                 <S.ProposeAuthorCard>
                   <p>Proposed by</p>
-                  <Image
-                    src={'/assets/avatar-author-proposal.svg'}
-                    width={32}
-                    height={32}
+                  <Jazzicon
+                    diameter={32}
+                    seed={jsNumberForAddress(proposal.proposer)}
                   />
+
                   <span>{substr(`${proposal.proposer}`)}</span>
                 </S.ProposeAuthorCard>
               </S.TitleAndAuthor>
