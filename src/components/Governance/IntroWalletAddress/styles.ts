@@ -21,13 +21,11 @@ export const WalletAddress = styled.div`
   display: flex;
   align-items: center;
 
-  img {
-    border-radius: 50%;
-    width: 4rem;
+  /* .paper {
     @media (max-width: 992px) {
-      width: 3.2rem;
+      width: 3.2rem !important;
     }
-  }
+  } */
 
   h2 {
     line-height: ${theme.font.sizes.font32};
@@ -123,7 +121,10 @@ interface IHorizontalLineProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const HorizontalLine = styled.div<IHorizontalLineProps>`
+export const HorizontalLine =
+  styled.div <
+  IHorizontalLineProps >
+  `
   content: '';
   display: block;
   background: rgba(255, 255, 255, 0.2);
