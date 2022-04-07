@@ -24,9 +24,11 @@ const useVotingPower = (address: string) => {
       return new BigNumber(value)
     }
 
-    const currentVotes = async (walletAddres: string) => {
-      const value: string = await contract.methods.getCurrentVotes(walletAddres).call()
-      return new BigNumber(value)
+    const currentVotes = async (walletAddres: string | string[] | undefined) => {
+      if (walletAddres) {
+        const value: string = await contract.methods.getCurrentVotes(walletAddres).call()
+        return new BigNumber(value)
+      }
     }
 
     const delegateVote = async (pid: number, address: string, callback: TransactionCallback) => {
