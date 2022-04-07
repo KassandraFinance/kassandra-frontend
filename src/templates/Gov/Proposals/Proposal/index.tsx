@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useSelector, RootStateOrAny } from 'react-redux'
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
 import Big from 'big.js'
@@ -151,7 +152,8 @@ const Proposal = () => {
     for: '0',
     against: '0'
   })
-  const [proposalState, setProposalState] = React.useState<string[]>([])
+  const [proposalState, setProposalState] = React.useState<string>('')
+  const [dataStatus, setDataStatus] = React.useState<any[]>(stepData)
   const [userVoted, setUserVoted] = React.useState<IUserVotedProps>({
     voted: false,
     support: null,
@@ -174,7 +176,7 @@ const Proposal = () => {
   )
 
   async function getProposalState(number: number) {
-    governance.stateProposals(number).then(res => setProposalState(res))
+    governance.stateProposals(number).then(res => setProposalState(res[0]))
   }
 
   async function getVotingPowerInProposal(startBlock: string) {
@@ -280,6 +282,29 @@ const Proposal = () => {
     }
   }, [data, userWalletAddress])
 
+  React.useEffect(() => {
+    function generateStatusHistoryArray() {
+      const arr = dataStatus.map(item =>
+        item.title.includes(proposalState)
+          ? { ...item, completed: true, title: proposalState }
+          : item
+      )
+
+      const teste2 = arr.findIndex(item => item.completed === true)
+
+      const arrTrue = arr
+        .slice(0, teste2 + 1)
+        .map(item => ({ ...item, completed: true }))
+      const arrFalse = arr.slice(teste2 + 1)
+
+      const arrModified = [...arrTrue, ...arrFalse]
+
+      setDataStatus(arrModified)
+    }
+
+    generateStatusHistoryArray()
+  }, [proposalState])
+
   return (
     <>
       <S.BackgroundVote>
@@ -301,11 +326,11 @@ const Proposal = () => {
                 />
                 <S.ProposeAuthorCard>
                   <p>Proposed by</p>
-                  <Image
-                    src={'/assets/avatar-author-proposal.svg'}
-                    width={32}
-                    height={32}
+                  <Jazzicon
+                    diameter={32}
+                    seed={jsNumberForAddress(proposal.proposer)}
                   />
+
                   <span>{substr(`${proposal.proposer}`)}</span>
                 </S.ProposeAuthorCard>
               </S.TitleAndAuthor>
@@ -335,10 +360,9 @@ const Proposal = () => {
                 </S.VotingPowerAndLink>
                 <S.ProposeAuthorCard>
                   <p>Proposed by</p>
-                  <Image
-                    src={'/assets/avatar-author-proposal.svg'}
-                    width={24}
-                    height={24}
+                  <Jazzicon
+                    diameter={24}
+                    seed={jsNumberForAddress(proposal.proposer)}
                   />
                   <span>{substr(`${proposal.proposer}`)}</span>
                 </S.ProposeAuthorCard>
@@ -407,14 +431,14 @@ const Proposal = () => {
                   <S.TableInfoWrapper>
                     <S.DataWrapper>
                       <S.TextKey>State</S.TextKey>
-                      {proposalState[0] ? (
+                      {proposalState ? (
                         <S.TextValue
                           style={{
-                            color: statslibColor[proposalState[0].toLowerCase()]
+                            color: statslibColor[proposalState.toLowerCase()]
                           }}
                         >
-                          {proposalState[0].charAt(0).toUpperCase() +
-                            proposalState[0].slice(1)}
+                          {proposalState.charAt(0).toUpperCase() +
+                            proposalState.slice(1)}
                         </S.TextValue>
                       ) : (
                         '...'
@@ -551,7 +575,25 @@ const Proposal = () => {
             </S.ProposalTitleWrapper>
 
             <S.Steps>
-              {stepData.map((step, index) => (
+              {dataStatus.map((step, index) => (
+                <React.Fragment key={index}>
+                  <S.Step>
+                    {step.completed === true ? (
+                      <Image src={proposalCompleteIcon} />
+                    ) : (
+                      <Image src={proposalWaitingIcon} />
+                    )}
+
+                    <S.StepTitle>{step.title}</S.StepTitle>
+                    <S.StepDate>{step.date}</S.StepDate>
+                  </S.Step>
+                  <S.LineBetweenImages
+                    isAfter={index === dataStatus.length - 1}
+                    isComplete={step.completed === true}
+                  />
+                </React.Fragment>
+              ))}
+              {/* {stepData.map((step, index) => (
                 <>
                   <S.Step key={step.title + index}>
                     {Date.parse(step.date) / 1000 >
@@ -570,7 +612,7 @@ const Proposal = () => {
                     }
                   />
                 </>
-              ))}
+              ))} */}
             </S.Steps>
           </S.ProposalStatus>
         </S.ProposalInfo>
@@ -605,23 +647,28 @@ const infoProposal = {
 
 const stepData = [
   {
-    title: 'Created',
+    title: ['Created'],
+    completed: false,
     date: '01/22/2022'
   },
   {
-    title: 'Active',
+    title: ['Active'],
+    completed: false,
     date: '01/22/2022'
   },
   {
-    title: 'Succeeded',
+    title: ['Succeeded', 'Failed'],
+    completed: false,
     date: '02/22/2022'
   },
   {
-    title: 'Queued',
+    title: ['Queued'],
+    completed: false,
     date: '02/22/2022'
   },
   {
-    title: 'Executed',
-    date: '02/22/2022'
+    title: ['Executed'],
+    completed: false,
+    date: '04/22/2022'
   }
 ]

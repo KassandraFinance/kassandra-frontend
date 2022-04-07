@@ -20,14 +20,15 @@ export const WalletAddress = styled.div`
   display: flex;
   align-items: center;
 
+  /* .paper {
   img {
     width: 4rem;
 
     border-radius: 50%;
     @media (max-width: 992px) {
-      width: 3.2rem;
+      width: 3.2rem !important;
     }
-  }
+  } */
 
   h2 {
     margin-left: ${theme.spacings.space18};
@@ -122,13 +123,16 @@ interface IHorizontalLineProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const HorizontalLine = styled.div<IHorizontalLineProps>`
+export const HorizontalLine =
+  styled.div <
+  IHorizontalLineProps >
+  `
   content: '';
   display: block;
-  
+
   width: 0.1rem;
   height: 5rem;
-  
+
   background: rgba(255, 255, 255, 0.2);
 
   @media (max-width: 680px) {

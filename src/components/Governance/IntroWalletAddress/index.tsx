@@ -10,6 +10,7 @@ import { request } from 'graphql-request'
 
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
 import { SUBGRAPH_URL, Staking } from '../../../constants/tokenAddresses'
 
@@ -32,11 +33,15 @@ import * as S from './styles'
 
 const IntroWalletAddress = () => {
   // eslint-disable-next-line prettier/prettier
-  const [isModalManageVotingPower, setIsModalManageVotingPower] = React.useState<boolean>(false)
+  const [isModalManageVotingPower, setIsModalManageVotingPower] =
+    React.useState<boolean>(false)
   // eslint-disable-next-line prettier/prettier
-  const [isModalWalletConnect, setIsModalWalletConnect] = React.useState<boolean>(false)
+  const [isModalWalletConnect, setIsModalWalletConnect] =
+    React.useState<boolean>(false)
   // eslint-disable-next-line prettier/prettier
-  const [totalKacyStaked, setTotalKacyStaked] = React.useState<BigNumber>(new BigNumber(0))
+  const [totalKacyStaked, setTotalKacyStaked] = React.useState<BigNumber>(
+    new BigNumber(0)
+  )
   const [voteWeight, setVoteWeight] = React.useState<string>('')
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
@@ -85,7 +90,12 @@ const IntroWalletAddress = () => {
       <S.IntroWalletAddress>
         <S.AddressAndVoteWeight>
           <S.WalletAddress>
-            <Image src={jony} width={40} height={40} alt="" />
+            <Jazzicon
+              diameter={40}
+              seed={jsNumberForAddress(
+                String(address) || '0x1111111111111111111111111111111111111111'
+              )}
+            />
             <h2>
               {address || userWalletAddress
                 ? substr(`${address || userWalletAddress}`)
