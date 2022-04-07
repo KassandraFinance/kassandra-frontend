@@ -183,7 +183,7 @@ const DelegateVotingPower = ({
           <S.Selected onClick={() => setOptionsOpen(!optionsOpen)}>
             <S.Option>
               <S.Name>
-                <Image src={logo} alt="" />
+                <Image width={24} height={24} src={logo} alt="" />
                 <S.WithdrawDelay>
                   <p>{delegateSelected.nameToken}</p>
                   <span>

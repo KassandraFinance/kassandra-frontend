@@ -1,4 +1,7 @@
 import Image from 'next/image'
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
+
+import substr from '../../../../utils/substr'
 
 import { IDateProps } from '../DelegateVotingPower'
 
@@ -54,9 +57,20 @@ const Options = ({
                 }}
               >
                 <S.Name>
-                  <Image src={logo} width={24} height={24} alt="" />
+                  {undelegate ? (
+                    <Jazzicon
+                      diameter={24}
+                      seed={jsNumberForAddress(item.nameToken)}
+                    />
+                  ) : (
+                    <Image src={logo} width={24} height={24} alt="" />
+                  )}
                   <S.WithdrawDelay>
-                    <p>{item.nameToken}</p>
+                    {undelegate ? (
+                      <p>{substr(item.nameToken)}</p>
+                    ) : (
+                      <p>{item.nameToken}</p>
+                    )}
                     <span>{item.withdrawDelay} days withdraw delay</span>
                   </S.WithdrawDelay>
                 </S.Name>
