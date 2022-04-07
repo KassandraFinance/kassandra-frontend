@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
 import substr from '../../../utils/substr'
 
@@ -12,7 +13,6 @@ import ExternalLink from '../../../components/ExternalLink'
 import ModalManageVotingPower from '../ModalManageVotingPower'
 
 import tooltip from '../../../../public/assets/icons/tooltip.svg'
-import jony from '../../../../public/assets/team/jony-reis.png'
 
 import * as S from './styles'
 
@@ -27,7 +27,7 @@ const WalletAddress = () => {
       <S.IntroWalletAddress>
         <S.AddressAndVoteWeight>
           <S.WalletAddress>
-            <Image src={jony} alt="" />
+            <Jazzicon diameter={40} seed={jsNumberForAddress(address)} />
             <h2>{substr(`${address}`)}</h2>
           </S.WalletAddress>
           <S.VoteWeightCard>
