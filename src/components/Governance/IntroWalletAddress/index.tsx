@@ -27,7 +27,12 @@ const WalletAddress = () => {
       <S.IntroWalletAddress>
         <S.AddressAndVoteWeight>
           <S.WalletAddress>
-            <Jazzicon diameter={40} seed={jsNumberForAddress(address)} />
+            <Jazzicon
+              diameter={40}
+              seed={jsNumberForAddress(
+                address || '0x1111111111111111111111111111111111111111'
+              )}
+            />
             <h2>{substr(`${address}`)}</h2>
           </S.WalletAddress>
           <S.VoteWeightCard>
