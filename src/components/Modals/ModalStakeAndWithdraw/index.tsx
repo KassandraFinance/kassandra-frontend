@@ -5,65 +5,69 @@ import Big from 'big.js'
 import BigNumber from 'bn.js'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { useSelector, RootStateOrAny } from 'react-redux'
-import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
+import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
-import { Kacy } from '../../constants/tokenAddresses'
+import { Kacy } from '../../../constants/tokenAddresses'
 
-import { BNtoDecimal } from '../../utils/numerals'
+import { BNtoDecimal } from '../../../utils/numerals'
 import waitTransaction, {
   MetamaskError,
   TransactionCallback
-} from '../../utils/txWait'
+} from '../../../utils/txWait'
 
-import { Staking } from '../../constants/tokenAddresses'
-import useERC20Contract from '../../hooks/useERC20Contract'
-import useStakingContract from '../../hooks/useStakingContract'
-import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
+import { Staking } from '../../../constants/tokenAddresses'
+import useERC20Contract from '../../../hooks/useERC20Contract'
+import useStakingContract from '../../../hooks/useStakingContract'
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
-import Button from '../Button'
-import InputTokenValue from '../InputTokenValue'
+import Button from '../../Button'
+import InputTokenValue from '../../InputTokenValue'
 
 import * as S from './styles'
 
-interface IModalStakingProps {
-  modalOpen: boolean;
+interface IModalStakeProps {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   pid: number;
   decimals: string;
   stakingToken: string;
   productCategories: string | string[];
   symbol: string;
+  stakeTransaction: string;
+  setStakeTransaction: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const ModalUnstaking = ({
-  modalOpen,
+const ModalStakeAndWithdraw = ({
   setModalOpen,
   pid,
   decimals,
   stakingToken,
   productCategories,
-  symbol
-}: IModalStakingProps) => {
+  symbol,
+  stakeTransaction,
+  setStakeTransaction
+}: IModalStakeProps) => {
   const [isAmount, setIsAmount] = React.useState<boolean>(false)
 
   const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
   const [multiplier, setMultiplier] = React.useState<number>(0)
-  const [amountUnstaking, setAmountUnstaking] = React.useState<BigNumber>(
+  const [amountStake, setAmountStake] = React.useState<BigNumber>(
     new BigNumber(0)
   )
 
   const inputRef = React.useRef<HTMLInputElement>(null)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-  const { trackBuying, trackCancelBuying, trackBought } = useMatomoEcommerce()
+  const { trackProductPageView, trackBuying, trackCancelBuying, trackBought } =
+    useMatomoEcommerce()
   const { trackEvent } = useMatomo()
 
   const kacyStake = useStakingContract(Staking)
   const kacyToken = useERC20Contract(stakingToken)
+  const productSKU = `${Staking}_${pid}`
 
   function matomoEvent(action: string, name: string) {
     trackEvent({
-      category: 'modal-unstaking',
+      category: `modal-${stakeTransaction}`,
       action,
       name
     })
@@ -74,22 +78,37 @@ const ModalUnstaking = ({
 
     if (inputRef.current !== null) {
       // eslint-disable-next-line prettier/prettier
-      inputRef.current.value = BNtoDecimal(kacyAmount, 18).replace(/\u00A0/g, '')
+      inputRef.current.value = BNtoDecimal(kacyAmount, 18).replace(
+        /\u00A0/g,
+        ''
+      )
     }
 
     matomoEvent('click-value-btn', `${percentage.toString()}`)
-    setAmountUnstaking(kacyAmount)
+    setAmountStake(kacyAmount)
     setIsAmount(true)
   }
 
   function handleConfirm() {
-    kacyStake.withdraw(pid, amountUnstaking, withdrawCallback())
+    if (stakeTransaction === 'staking') {
+      kacyStake.stake(pid, amountStake, stakeCallback())
+    } else if (stakeTransaction === 'unstaking') {
+      kacyStake.withdraw(pid, amountStake, withdrawCallback())
+    }
   }
 
-  async function get() {
-    if (userWalletAddress !== '') {
-      const balance = await kacyStake.availableWithdraw(pid, userWalletAddress)
-      setBalance(new BigNumber(balance.toFixed(0)))
+  async function getBalance() {
+    if (stakeTransaction === 'staking') {
+      const balanceKacy = await kacyToken.balance(userWalletAddress)
+      setBalance(balanceKacy)
+    } else if (stakeTransaction === 'unstaking') {
+      if (userWalletAddress !== '') {
+        const balance = await kacyStake.availableWithdraw(
+          pid,
+          userWalletAddress
+        )
+        setBalance(new BigNumber(balance.toFixed(0)))
+      }
     }
   }
 
@@ -98,20 +117,59 @@ const ModalUnstaking = ({
       setMultiplier(0)
     }
     setIsAmount(false)
-  }, [amountUnstaking])
+  }, [amountStake])
 
   React.useEffect(() => {
-    if (modalOpen) {
-      get()
-    }
-  }, [modalOpen])
+    getBalance()
+  }, [])
 
   React.useEffect(() => {
-    if (modalOpen) {
-      setMultiplier(0)
-      handleKacyAmount(new BigNumber(0))
+    setMultiplier(0)
+    handleKacyAmount(new BigNumber(0))
+  }, [])
+
+  React.useEffect(() => {
+    if (stakeTransaction === 'staking') {
+      const track = async () => {
+        const tokenName = await kacyToken.name()
+        trackProductPageView(productSKU, tokenName, productCategories)
+      }
+      track()
     }
-  }, [modalOpen])
+  }, [stakingToken])
+
+  const stakeCallback = React.useCallback((): TransactionCallback => {
+    return async (error: MetamaskError, txHash: string) => {
+      const tokenName = await kacyToken.name()
+      trackBuying(
+        productSKU,
+        tokenName,
+        Big(amountStake.toString()).div(Big(10).pow(18)).toNumber(),
+        productCategories
+      )
+
+      if (error) {
+        trackCancelBuying()
+
+        if (error.code === 4001) {
+          ToastError(`Staking of ${symbol} cancelled`)
+          return
+        }
+
+        ToastError(`Failed to stake ${symbol}. Please try again later.`)
+        return
+      }
+
+      trackBought(productSKU, 0, 0)
+      ToastWarning(`Confirming stake of ${symbol}...`)
+      const txReceipt = await waitTransaction(txHash)
+
+      if (txReceipt.status) {
+        ToastSuccess(`Stake of ${symbol} confirmed`)
+        return
+      }
+    }
+  }, [kacyToken])
 
   const withdrawCallback = React.useCallback((): TransactionCallback => {
     const productSKU = `${Staking}_${pid}`
@@ -121,7 +179,7 @@ const ModalUnstaking = ({
       trackBuying(
         productSKU,
         tokenName,
-        -Big(amountUnstaking.toString()).div(Big(10).pow(18)).toNumber(),
+        -Big(amountStake.toString()).div(Big(10).pow(18)).toNumber(),
         productCategories
       )
 
@@ -148,17 +206,37 @@ const ModalUnstaking = ({
     }
   }, [kacyToken])
 
+  let title: string
+  if (stakeTransaction === 'staking') {
+    title = 'Stake in Pool'
+  } else if (stakeTransaction === 'unstaking') {
+    title = 'Withdraw'
+  } else {
+    title = 'Transaction not defined'
+  }
+
   return (
     <>
       <S.Backdrop
-        onClick={() => setModalOpen(false)}
-        style={{ display: modalOpen ? 'block' : 'none' }}
+        onClick={() => {
+          setModalOpen(false)
+          setStakeTransaction('')
+        }}
       />
-      <S.BorderGradient modalOpen={modalOpen}>
+      <S.BorderGradient
+        stakeInKacy={symbol === 'KACY'}
+        unstaking={stakeTransaction}
+      >
         <S.BackgroundBlack>
           <S.InterBackground>
-            <span>Withdraw</span>
-            <button type="button" onClick={() => setModalOpen(false)}>
+            <span>{title}</span>
+            <button
+              type="button"
+              onClick={() => {
+                setModalOpen(false)
+                setStakeTransaction('')
+              }}
+            >
               <img src="assets/close.svg" alt="Close" />
             </button>
           </S.InterBackground>
@@ -169,17 +247,17 @@ const ModalUnstaking = ({
                 inputRef={inputRef}
                 max={balance.toString(10)}
                 decimals={new BigNumber(decimals)}
-                setInputValue={setAmountUnstaking}
+                setInputValue={setAmountStake}
               />
               <h5>Balance: {BNtoDecimal(balance, 18)}</h5>
             </S.Amount>
             <S.ButtonContainer>
               <button
+                type="button"
                 style={{
                   background: multiplier === 25 ? '#fff' : 'transparent',
                   color: multiplier === 25 ? '#000' : '#fff'
                 }}
-                type="button"
                 onClick={() => {
                   multiplier === 25 ? setMultiplier(0) : setMultiplier(25)
                   multiplier === 25
@@ -191,11 +269,11 @@ const ModalUnstaking = ({
               </button>
 
               <button
+                type="button"
                 style={{
                   background: multiplier === 50 ? '#fff' : 'transparent',
                   color: multiplier === 50 ? '#000' : '#fff'
                 }}
-                type="button"
                 onClick={() => {
                   multiplier === 50 ? setMultiplier(0) : setMultiplier(50)
                   multiplier === 50
@@ -207,11 +285,11 @@ const ModalUnstaking = ({
               </button>
 
               <button
+                type="button"
                 style={{
                   background: multiplier === 75 ? '#fff' : 'transparent',
                   color: multiplier === 75 ? '#000' : '#fff'
                 }}
-                type="button"
                 onClick={() => {
                   multiplier === 75 ? setMultiplier(0) : setMultiplier(75)
                   multiplier === 75
@@ -223,11 +301,11 @@ const ModalUnstaking = ({
               </button>
 
               <button
+                type="button"
                 style={{
                   background: multiplier === 100 ? '#fff' : 'transparent',
                   color: multiplier === 100 ? '#000' : '#fff'
                 }}
-                type="button"
                 onClick={() => {
                   multiplier === 100 ? setMultiplier(0) : setMultiplier(100)
                   multiplier === 100
@@ -240,11 +318,12 @@ const ModalUnstaking = ({
             </S.ButtonContainer>
             <S.ConfirmButton
               type="button"
-              disabled={amountUnstaking.toString() === '0'}
+              disabled={amountStake.toString() === '0'}
               onClick={() => {
                 setModalOpen(false)
                 handleConfirm()
-                setAmountUnstaking(new BigNumber(0))
+                setAmountStake(new BigNumber(0))
+                setStakeTransaction('')
               }}
             >
               Confirm
@@ -259,11 +338,14 @@ const ModalUnstaking = ({
                 href={`https://app.pangolin.exchange/#/swap?outputCurrency=${Kacy}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => setModalOpen(false)}
+                onClick={() => {
+                  setModalOpen(false)
+                  setStakeTransaction('')
+                }}
               />
             )}
             {symbol === 'aHYPE' && (
-              <Link href="/products/ahype">
+              <Link href="/products/ahype" passHref>
                 <Button backgroundBlack fullWidth text="Get aHYPE" />
               </Link>
             )}
@@ -276,7 +358,10 @@ const ModalUnstaking = ({
                 href={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => setModalOpen(false)}
+                onClick={() => {
+                  setModalOpen(false)
+                  setStakeTransaction('')
+                }}
               />
             )}
           </S.Main>
@@ -286,4 +371,4 @@ const ModalUnstaking = ({
   )
 }
 
-export default ModalUnstaking
+export default ModalStakeAndWithdraw

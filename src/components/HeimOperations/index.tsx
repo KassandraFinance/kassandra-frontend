@@ -3,9 +3,9 @@ import React from 'react'
 
 import { ChainDetails } from '../../utils/changeChain'
 
-import ModalWalletConnect from '../ModalWalletConnect'
+import ModalWalletConnect from '../Modals/ModalWalletConnect'
+import ModalHeimOperations from '../Modals/ModalHeimOperations'
 import SelectOperatorCart from './SelectOperatorCart'
-import ModalHeimOperations from '../ModalHeimOperations'
 import SelectOperatorMobile, { TitlesMobile } from './SelectOperatorMobile'
 
 import * as S from './styles'
@@ -79,10 +79,10 @@ const HeimOperations = ({
         setModalOpen={setIsModalHeimOperations}
       />
 
-      <ModalWalletConnect
-        modalOpen={isModalWallet}
+      {isModalWallet &&
+      (<ModalWalletConnect
         setModalOpen={setIsModaWallet}
-      />
+      />)}
     </div>
   )
 }
