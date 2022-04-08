@@ -2,16 +2,17 @@ import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
 export const Info = styled.div`
-  color: #bdbdbd;
   display: flex;
   justify-content: space-between;
 
-  p {
-    font-size: ${theme.font.sizes.font14};
-    line-height: 18px;
-    text-transform: uppercase;
+  color: #bdbdbd;
 
-    margin: 24px 0;
+  p {
+    margin: 2.4rem 0;
+
+    font-size: ${theme.font.sizes.font14};
+    line-height: 1.8rem;
+    text-transform: uppercase;
   }
 
   p:last-child {
@@ -20,12 +21,11 @@ export const Info = styled.div`
 
   span {
     display: block;
+    margin-bottom: 0.8rem;
 
     font-weight: ${theme.font.weight.normal};
-
     font-size: ${theme.font.sizes.font14};
     line-height: ${theme.font.sizes.font14};
-    margin-bottom: 8px;
   }
 
   span:last-child {
@@ -40,16 +40,19 @@ export const Stake = styled.div`
 
   font-weight: ${theme.font.weight.light};
   text-transform: uppercase;
+
   p {
-    color: #fff;
     display: flex;
+    margin: 2.4rem 0 0.4rem;
+
+    color: #fff;
     line-height: ${theme.font.sizes.font14};
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.medium} !important;
-    margin: 24px 0 4px;
+
     @media (max-width: 540px) {
       font-size: ${theme.font.sizes.font16};
-      line-height: 16px;
+      line-height: 1.6rem;
     }
   }
 
@@ -59,9 +62,10 @@ export const Stake = styled.div`
   }
 `
 
-export const Symbol = styled.h4`
+export const Symbol = styled.span`
+  margin-left: 0.4rem;
+
   color: #bdbdbd !important;
   font-size: ${theme.font.sizes.font14} !important;
   font-weight: ${theme.font.weight.medium} !important;
-  margin-left: 4px;
 `

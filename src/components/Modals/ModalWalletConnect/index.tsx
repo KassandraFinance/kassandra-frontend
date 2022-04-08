@@ -1,21 +1,19 @@
 import React from 'react'
-import Tippy from '@tippyjs/react'
-import 'tippy.js/dist/tippy.css'
+
 import detectEthereumProvider from '@metamask/detect-provider'
 
-import useConnect from '../../hooks/useConnect'
+import useConnect from '../../../hooks/useConnect'
+
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
 
 import * as S from './styles'
 
 interface IModalWalletConnect {
-  modalOpen: boolean;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ModalWalletConnect = ({
-  modalOpen,
-  setModalOpen
-}: IModalWalletConnect) => {
+const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
   const { connect, connectToWalletConnect } = useConnect()
   const [hasEthereumProvider, setHasEthereumProvider] = React.useState(false)
 
@@ -35,15 +33,12 @@ const ModalWalletConnect = ({
     }
 
     checkEthereumProvider()
-  }, [modalOpen])
+  }, [])
 
   return (
     <>
-      <S.Backdrop
-        onClick={handleCloseModal}
-        style={{ display: modalOpen ? 'block' : 'none' }}
-      />
-      <S.Container modalOpen={modalOpen}>
+      <S.Backdrop onClick={handleCloseModal} />
+      <S.Container>
         <S.BackgroundBlack>
           <S.ModalTitle>
             <span>Wallet connection is required</span>
@@ -88,7 +83,7 @@ const ModalWalletConnect = ({
               </S.WrapperIconsBackGround>
             </Tippy>
 
-            <S.WrapperIconsBackGround
+            {/* <S.WrapperIconsBackGround
               type="button"
               onClick={() => {
                 setModalOpen(false)
@@ -99,7 +94,7 @@ const ModalWalletConnect = ({
                 <img src="/assets/connectWalletIcon.svg" alt="" />
                 <span>WalletConnect</span>
               </S.WrapperIcons>
-            </S.WrapperIconsBackGround>
+            </S.WrapperIconsBackGround> */}
           </S.Content>
         </S.BackgroundBlack>
       </S.Container>

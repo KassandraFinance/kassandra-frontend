@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
-import theme from '../../styles/theme'
+import styled from 'styled-components'
+import theme from '../../../styles/theme'
 
 export const Backdrop = styled.div`
   position: fixed;
@@ -13,36 +13,34 @@ export const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
 `
 
-interface IBorderGradientProps {
-  modalOpen: boolean;
-}
-
-// eslint-disable-next-line prettier/prettier
-export const Container = styled.div<IBorderGradientProps>`
+export const Container = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 21;
 
-  display: ${props => (props.modalOpen ? 'block' : 'none')};
-  width: 411px;
+  width: 41.1rem;
   height: auto;
 
-  border: 2px solid #FFFFFF40;
-  border-radius: 10px;
+  border: 0.2rem solid #ffffff40;
+  border-radius: 1rem;
 
-  @media(max-width: 440px){
-    width: 380px;
+  z-index: 21;
+
+  @media (max-width: 440px) {
+    width: 38rem;
   }
-  @media(max-width: 380px){
-    width: 360px;
+
+  @media (max-width: 380px) {
+    width: 36rem;
   }
-  @media(max-width: 360px){
-    width: 320px;
+
+  @media (max-width: 360px) {
+    width: 32rem;
   }
-  @media(max-width: 320px){
-    width: 300px;
+
+  @media (max-width: 320px) {
+    width: 30rem;
   }
 `
 
@@ -53,7 +51,7 @@ export const BackgroundBlack = styled.div`
   color: white;
 
   /* background: #000; */
-  border-radius: 10px;
+  border-radius: 1rem;
 `
 
 export const ModalTitle = styled.div`
@@ -65,8 +63,9 @@ export const ModalTitle = styled.div`
   padding: 2.4rem;
 
   background: rgba(31, 31, 31, 0.96);
-  border-radius: 6px 6px 0 0;
-  border-bottom: 1px solid #ffffff40;
+  border-top-left-radius: 0.6rem;
+  border-top-right-radius: 0.6rem;
+  border-bottom: 0.1rem solid #ffffff40;
 
   @media (max-width: 520px) {
     padding: 1.2rem;
@@ -78,6 +77,7 @@ export const ModalTitle = styled.div`
 
     background-color: transparent;
     border: none;
+
     cursor: pointer;
 
     img {
@@ -85,6 +85,7 @@ export const ModalTitle = styled.div`
       height: 1.2rem;
     }
   }
+
   span {
     font-size: ${theme.font.sizes.font18};
     font-weight: ${theme.font.weight.bold};
@@ -121,7 +122,6 @@ export const WrapperIconsBackGround = styled.button`
 
 export const WrapperIcons = styled.div`
   position: relative;
-  z-index: 2;
 
   display: flex;
   align-items: center;
@@ -134,31 +134,35 @@ export const WrapperIcons = styled.div`
   border: none;
 
   cursor: pointer;
+  z-index: 2;
 
   img {
+    display: flex;
     width: 4rem;
     height: 3.56rem;
-    display: flex;
     margin-right: 2.4rem;
     padding: 0.2rem;
   }
+
   span {
     color: ${theme.colors.snow};
     font-size: ${theme.font.sizes.font16};
     letter-spacing: 0.08rem;
   }
 `
-export const Content = styled.div`
-  z-index: -2;
 
-  max-width: 100%;
+export const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
+  max-width: 100%;
   padding: ${theme.spacings.space24};
 
-  border-radius: 0 0 6px 6px;
+  border-bottom-right-radius: 0.6rem;
+  border-bottom-left-radius: 0.6rem;
   background: rgba(31, 41, 55, 0.96);
+
+  z-index: -2;
 
   @media (max-width: 520px) {
     width: 100%;
@@ -172,9 +176,10 @@ export const Tooltip = styled.span`
   display: flex;
 
   a {
-    color: white;
-    text-decoration: none;
     display: flex;
     align-items: center;
+
+    color: white;
+    text-decoration: none;
   }
 `

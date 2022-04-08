@@ -23,8 +23,8 @@ const ModalSocial = ({ modalOpen, setModalOpen }: IModalSocialProps) => {
   return (
     <>
       <Backdrop
-        onClick={handleCloseModal}
         style={{ display: modalOpen ? 'block' : 'none' }}
+        onClick={handleCloseModal}
       />
       <BorderGradient modalOpen={modalOpen}>
         <BackgroundBlack>
