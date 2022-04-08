@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
 
-import { ChainDetails } from '../../utils/changeChain'
+import SelectOperatorCart from '../../HeimOperations/SelectOperatorCart';
+import { TitlesMobile } from '../../HeimOperations/SelectOperatorMobile';
 
-import SelectOperatorCart from '../HeimOperations/SelectOperatorCart';
-import { TitlesMobile } from '../HeimOperations/SelectOperatorMobile';
+import { ChainDetails } from '../../../utils/changeChain'
 
 import { Backdrop, CardOperationsContainerModal } from './styles'
 
@@ -85,8 +85,8 @@ const ModalCardOperations = ({
   return (
     <>
       <Backdrop
-        onClick={() => handleCloseModalHeimOperation()}
         style={{ display: modalOpen ? 'block' : 'none' }}
+        onClick={() => handleCloseModalHeimOperation()}
       />
 
       <CardOperationsContainerModal
