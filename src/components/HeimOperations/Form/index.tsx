@@ -858,7 +858,6 @@ const Form = ({
         tabTitleInput: HTMLInputElement;
       }
 
-      console.log(tabTitleInput.value)
       const tabTitle = tabTitleInput.value as Titles
       const amountInUSD = parseFloat(amountUSD.value)
       const swapInAmountVal = new BigNumber(swapInAmountInput.value)
