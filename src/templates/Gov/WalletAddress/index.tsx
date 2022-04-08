@@ -18,7 +18,7 @@ import IntroWalletAddress from '../../../components/Governance/IntroWalletAddres
 import AnyCard from '../../../components/Governance/AnyCard'
 import Breadcrumb from '../../../components/Breadcrumb'
 import BreadcrumbItem from '../../../components/Breadcrumb/BreadcrumbItem'
-import OwnedVotingPowerTable from '../../../components/Governance/OwnedVotingPowerTable'
+import OwnAndReceivedTable from '../../../components/Governance/OwnAndReceivedTable'
 
 import proposals from '../../../../public/assets/iconGradient/proposals.svg'
 import externalLink from '../../../../public/assets/icons/external-link.svg'
@@ -69,11 +69,11 @@ const WalletAddress = () => {
         {/* Owned Voting Power */}
         <TitleSection
           image={proposals}
-          title="Owned Voting Power"
+          title="Own Voting Power"
           marginTop={64}
         />
         {hasVotingPower ? (
-          <OwnedVotingPowerTable />
+          <OwnAndReceivedTable />
         ) : userWalletAddress ? (
           <AnyCard
             text="To obtain voting power you need to have KACY staked"
@@ -94,7 +94,7 @@ const WalletAddress = () => {
           marginTop={64}
         />
         {hasVotingPower ? (
-          <OwnedVotingPowerTable />
+          <OwnAndReceivedTable />
         ) : userWalletAddress ? (
           <AnyCard
             text="To obtain voting power you need to have KACY staked"
@@ -124,7 +124,7 @@ const WalletAddress = () => {
           </S.LinkForum>
         </S.TitleAndLinkContent>
         {hasVotingPower ? (
-          <OwnedVotingPowerTable />
+          <OwnAndReceivedTable />
         ) : userWalletAddress ? (
           <AnyCard
             text="To obtain voting power you need to have KACY staked"
