@@ -35,11 +35,12 @@ import { BNtoDecimal } from '../../utils/numerals'
 import { GET_INFO_AHYPE } from './graphql'
 
 import Button from '../Button'
-import ModalRequestUnstake from '../modals/ModalRequestUnstake'
-import ModalCancelUnstake from '../modals/ModalCancelUnstake'
-import ModalWalletConnect from '../modals/ModalWalletConnect'
 import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
-import ModalStakeAndWithdraw from '../modals/ModalStakeAndWithdraw'
+import ModalRequestUnstake from '../Modals/ModalRequestUnstake'
+import ModalCancelUnstake from '../Modals/ModalCancelUnstake'
+import ModalWalletConnect from '../Modals/ModalWalletConnect'
+import ModalStakeAndWithdraw from '../Modals/ModalStakeAndWithdraw'
+
 import Details from './Details'
 import YourStake from './YourStake'
 import WithdrawDate from './WithdrawDate'
@@ -322,272 +323,275 @@ const StakeCard = ({
 
   return (
     <>
-      <S.BorderGradient stakeWithVotingPower={stakeWithVotingPower}>
-        <S.StakeCard>
-          <S.InterBackground stakeWithVotingPower={stakeWithVotingPower}>
-            {symbol === 'kacy' ? (
-              <img src="/assets/logo-kacy-stake.svg" alt="" />
-            ) : null}
-            {symbol === 'ahype' ? (
-              <img src="/assets/ahype.svg" alt="" style={{ width: '58px' }} />
-            ) : null}
-            {symbol === 'lp' ? (
-              <img src="/assets/kap.svg" alt="" width={144} />
-            ) : null}
-            <S.IntroStaking>
-              <S.APR>
-                <Tippy content="The Annual Percentage Rate is the yearly rate earned not taking compounding into account">
-                  <S.TooltipAPR tabIndex={0}>
-                    <Image src={infoCyanIcon} alt="Explanation" />
-                  </S.TooltipAPR>
-                </Tippy>
-                <h4>APR</h4>
-              </S.APR>
-              <S.Percentage>
-                {infoStaked.apr.lt(new BigNumber(0))
-                  ? '...'
-                  : infoStaked.hasExpired
-                  ? 0
-                  : BNtoDecimal(infoStaked.apr, 0)}
-                %
-              </S.Percentage>
-            </S.IntroStaking>
-          </S.InterBackground>
-          {stakeWithVotingPower ? (
-            <S.PoolName>
-              <S.StakeAndEarn>
-                <p>STAKE</p>
-                {symbol === 'ahype' ? (
-                  <Link href="/products/ahype" passHref>
-                    <a>
-                      $aHYPE
-                      <img src="/assets/GoToSite.svg" alt="" />
-                    </a>
-                  </Link>
-                ) : (
-                  <a
-                    href={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    $KACY-AVAX PNG LP
-                    <img src="/assets/GoToSite.svg" alt="" />
-                  </a>
-                )}
-              </S.StakeAndEarn>
-              <S.StakeAndEarn>
-                <p>EARN</p>
-                <p>$KACY</p>
-              </S.StakeAndEarn>
-            </S.PoolName>
-          ) : (
-            <S.VotingPowerAndWithdrawDelay>
-              <S.InfoPool>
-                <h3>Voting Power</h3>
-                <p>
-                  {infoStaked.votingMultiplier || '...'}
-                  <span>/$KACY</span>
-                </p>
-              </S.InfoPool>
-              <S.InfoPool>
-                <h3>Withdraw delay</h3>
-                <S.Days>
-                  <p>
-                    {infoStaked.withdrawDelay.length === 0
-                      ? '...'
-                      : infoStaked.withdrawDelay / 60 / 60 / 24 < 1
-                      ? infoStaked.withdrawDelay / 60
-                      : infoStaked.withdrawDelay / 60 / 60 / 24}
-                    <span>
-                      {infoStaked.withdrawDelay / 60 / 60 / 24 < 1
-                        ? ' min'
-                        : ' days'}
-                    </span>
-                  </p>
-                  <Tippy content="To redeem your assets you will have to first request a withdrawal and wait this amount of time to be able to redeem your assets. You will stop receiving rewards during this period and your voting power multiplier will be reduced to 1.">
+      <div>
+        <S.BorderGradient stakeWithVotingPower={stakeWithVotingPower}>
+          <S.StakeCard>
+            <S.InterBackground stakeWithVotingPower={stakeWithVotingPower}>
+              {symbol === 'kacy' ? (
+                <img src="/assets/logo-kacy-stake.svg" alt="" />
+              ) : null}
+              {symbol === 'ahype' ? (
+                <img src="/assets/ahype.svg" alt="" style={{ width: '58px' }} />
+              ) : null}
+              {symbol === 'lp' ? (
+                <img src="/assets/kap.svg" alt="" width={144} />
+              ) : null}
+              <S.IntroStaking>
+                <S.APR>
+                  <Tippy content="The Annual Percentage Rate is the yearly rate earned not taking compounding into account">
                     <S.TooltipAPR tabIndex={0}>
-                      <Image
-                        src={infoGrayIcon}
-                        alt="Explanation"
-                        width={16}
-                        height={16}
-                      />
+                      <Image src={infoCyanIcon} alt="Explanation" />
                     </S.TooltipAPR>
                   </Tippy>
-                </S.Days>
-              </S.InfoPool>
-            </S.VotingPowerAndWithdrawDelay>
-          )}
-          {userWalletAddress && <S.Line />}
-
-          <S.InfosStaking>
-            <YourStake
-              pid={pid}
-              balanceOf={balanceOf}
-              poolInfo={poolInfo}
-              withdrawable={withdrawable}
-              unstaking={unstaking}
-              userWalletAddress={userWalletAddress}
-              infoStaked={infoStaked}
-              setInfoStaked={setInfoStaked}
-              stakeWithVotingPower={stakeWithVotingPower}
-              priceLPToken={priceLPToken}
-              stakeWithLockPeriod={stakeWithLockPeriod}
-              lockPeriod={lockPeriod}
-              availableWithdraw={currentAvailableWithdraw}
-            />
-            <S.ButtonContainer stakeWithVotingPower={stakeWithVotingPower}>
-              {userWalletAddress ? (
-                <>
-                  {!stakeWithLockPeriod && (
-                    <S.Claim>
-                      <KacyEarned
-                        pid={pid}
-                        userWalletAddress={userWalletAddress}
-                        earned={earned}
-                        kacyEarned={kacyEarned}
-                        setKacyEarned={setKacyEarned}
-                        kacyPrice={priceLPToken.kacy}
-                      />
-                      <Button
-                        type="button"
-                        text="Claim"
-                        size="claim"
-                        backgroundSecondary
-                        disabledNoEvent={kacyEarned.toString() === '0'}
-                        // fullWidth
-                        onClick={() => getReward(pid, rewardClaimCallback())}
-                      />
-                    </S.Claim>
+                  <h4>APR</h4>
+                </S.APR>
+                <S.Percentage>
+                  {infoStaked.apr.lt(new BigNumber(0))
+                    ? '...'
+                    : infoStaked.hasExpired
+                    ? 0
+                    : BNtoDecimal(infoStaked.apr, 0)}
+                  %
+                </S.Percentage>
+              </S.IntroStaking>
+            </S.InterBackground>
+            {stakeWithVotingPower ? (
+              <S.PoolName>
+                <S.StakeAndEarn>
+                  <p>STAKE</p>
+                  {symbol === 'ahype' ? (
+                    <Link href="/products/ahype" passHref>
+                      <a>
+                        $aHYPE
+                        <img src="/assets/GoToSite.svg" alt="" />
+                      </a>
+                    </Link>
+                  ) : (
+                    <a
+                      href={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      $KACY-AVAX PNG LP
+                      <img src="/assets/GoToSite.svg" alt="" />
+                    </a>
                   )}
-                  <S.StakeContainer>
-                    {infoStaked.unstake ? (
-                      <>
-                        <Button
-                          type="button"
-                          text="Cancel withdraw"
-                          size="huge"
-                          backgroundSecondary
-                          fullWidth
-                          onClick={() => setIsModalCancelUnstake(true)}
+                </S.StakeAndEarn>
+                <S.StakeAndEarn>
+                  <p>EARN</p>
+                  <p>$KACY</p>
+                </S.StakeAndEarn>
+              </S.PoolName>
+            ) : (
+              <S.VotingPowerAndWithdrawDelay>
+                <S.InfoPool>
+                  <h3>Voting Power</h3>
+                  <p>
+                    {infoStaked.votingMultiplier || '...'}
+                    <span>/$KACY</span>
+                  </p>
+                </S.InfoPool>
+                <S.InfoPool>
+                  <h3>Withdraw delay</h3>
+                  <S.Days>
+                    <p>
+                      {infoStaked.withdrawDelay.length === 0
+                        ? '...'
+                        : infoStaked.withdrawDelay / 60 / 60 / 24 < 1
+                        ? infoStaked.withdrawDelay / 60
+                        : infoStaked.withdrawDelay / 60 / 60 / 24}
+                      <span>
+                        {infoStaked.withdrawDelay / 60 / 60 / 24 < 1
+                          ? ' min'
+                          : ' days'}
+                      </span>
+                    </p>
+                    <Tippy content="To redeem your assets you will have to first request a withdrawal and wait this amount of time to be able to redeem your assets. You will stop receiving rewards during this period and your voting power multiplier will be reduced to 1.">
+                      <S.TooltipAPR tabIndex={0}>
+                        <Image
+                          src={infoGrayIcon}
+                          alt="Explanation"
+                          width={16}
+                          height={16}
                         />
-                        <WithdrawDate
+                      </S.TooltipAPR>
+                    </Tippy>
+                  </S.Days>
+                </S.InfoPool>
+              </S.VotingPowerAndWithdrawDelay>
+            )}
+            {userWalletAddress && <S.Line />}
+
+            <S.InfosStaking>
+              <YourStake
+                pid={pid}
+                balanceOf={balanceOf}
+                poolInfo={poolInfo}
+                withdrawable={withdrawable}
+                unstaking={unstaking}
+                userWalletAddress={userWalletAddress}
+                infoStaked={infoStaked}
+                setInfoStaked={setInfoStaked}
+                stakeWithVotingPower={stakeWithVotingPower}
+                priceLPToken={priceLPToken}
+                stakeWithLockPeriod={stakeWithLockPeriod}
+                lockPeriod={lockPeriod}
+                availableWithdraw={currentAvailableWithdraw}
+              />
+              <S.ButtonContainer stakeWithVotingPower={stakeWithVotingPower}>
+                {userWalletAddress ? (
+                  <>
+                    {!stakeWithLockPeriod && (
+                      <S.Claim>
+                        <KacyEarned
                           pid={pid}
                           userWalletAddress={userWalletAddress}
-                          stakedUntil={stakedUntil}
-                          setWithdrawDelay={setWithdrawDelay}
+                          earned={earned}
+                          kacyEarned={kacyEarned}
+                          setKacyEarned={setKacyEarned}
+                          kacyPrice={priceLPToken.kacy}
                         />
-                      </>
-                    ) : (
-                      <>
-                        {stakeWithLockPeriod ? null : isApproveKacyStaking ? (
-                          infoStaked.withdrawDelay !== '0' &&
-                          infoStaked.withdrawable ? (
+                        <Button
+                          type="button"
+                          text="Claim"
+                          size="claim"
+                          backgroundSecondary
+                          disabledNoEvent={kacyEarned.toString() === '0'}
+                          // fullWidth
+                          onClick={() => getReward(pid, rewardClaimCallback())}
+                        />
+                      </S.Claim>
+                    )}
+                    <S.StakeContainer>
+                      {infoStaked.unstake ? (
+                        <>
+                          <Button
+                            type="button"
+                            text="Cancel withdraw"
+                            size="huge"
+                            backgroundSecondary
+                            fullWidth
+                            onClick={() => setIsModalCancelUnstake(true)}
+                          />
+                          <WithdrawDate
+                            pid={pid}
+                            userWalletAddress={userWalletAddress}
+                            stakedUntil={stakedUntil}
+                            setWithdrawDelay={setWithdrawDelay}
+                          />
+                        </>
+                      ) : (
+                        <>
+                          {stakeWithLockPeriod ? null : isApproveKacyStaking ? (
+                            infoStaked.withdrawDelay !== '0' &&
+                            infoStaked.withdrawable ? (
+                              <Button
+                                type="button"
+                                text={`Stake ${staked[pid]}`}
+                                size="huge"
+                                backgroundSecondary
+                                fullWidth
+                                onClick={() => setIsModalCancelUnstake(true)}
+                              />
+                            ) : (
+                              <Button
+                                type="button"
+                                text={`Stake ${staked[pid]}`}
+                                size="huge"
+                                backgroundSecondary
+                                fullWidth
+                                onClick={() => {
+                                  openStakeAndWithdraw('staking')
+                                }}
+                              />
+                            )
+                          ) : (
                             <Button
                               type="button"
-                              text={`Stake ${staked[pid]}`}
+                              text="Approve Contract"
                               size="huge"
                               backgroundSecondary
                               fullWidth
-                              onClick={() => setIsModalCancelUnstake(true)}
+                              onClick={handleApproveKacy}
+                            />
+                          )}
+                          {stakeWithLockPeriod ||
+                          (infoStaked.yourStake.toString() !== '0' &&
+                            infoStaked.withdrawable) ? (
+                            <Button
+                              type="button"
+                              text="Withdraw"
+                              size="huge"
+                              backgroundBlack
+                              disabledNoEvent={
+                                stakeWithLockPeriod &&
+                                currentAvailableWithdraw.lte(0)
+                              }
+                              fullWidth
+                              onClick={() => {
+                                openStakeAndWithdraw('unstaking')
+                              }}
                             />
                           ) : (
                             <Button
                               type="button"
-                              text={`Stake ${staked[pid]}`}
+                              text="Request withdraw"
                               size="huge"
-                              backgroundSecondary
+                              backgroundBlack
+                              disabledNoEvent={
+                                infoStaked.yourStake.toString() === '0'
+                              }
                               fullWidth
-                              onClick={() => {
-                                openStakeAndWithdraw('staking')
-                              }}
+                              onClick={() => setIsModalRequestUnstake(true)}
                             />
-                          )
-                        ) : (
-                          <Button
-                            type="button"
-                            text="Approve Contract"
-                            size="huge"
-                            backgroundSecondary
-                            fullWidth
-                            onClick={handleApproveKacy}
-                          />
-                        )}
-                        {stakeWithLockPeriod ||
-                        (infoStaked.yourStake.toString() !== '0' &&
-                          infoStaked.withdrawable) ? (
-                          <Button
-                            type="button"
-                            text="Withdraw"
-                            size="huge"
-                            backgroundBlack
-                            disabledNoEvent={
-                              stakeWithLockPeriod &&
-                              currentAvailableWithdraw.lte(0)
-                            }
-                            fullWidth
-                            onClick={() => {
-                              openStakeAndWithdraw('unstaking')
-                            }}
-                          />
-                        ) : (
-                          <Button
-                            type="button"
-                            text="Request withdraw"
-                            size="huge"
-                            backgroundBlack
-                            disabledNoEvent={
-                              infoStaked.yourStake.toString() === '0'
-                            }
-                            fullWidth
-                            onClick={() => setIsModalRequestUnstake(true)}
-                          />
-                        )}
-                      </>
-                    )}
-                  </S.StakeContainer>
-                </>
-              ) : (
-                <Button
+                          )}
+                        </>
+                      )}
+                    </S.StakeContainer>
+                  </>
+                ) : (
+                  <Button
+                    type="button"
+                    text="Connect Wallet"
+                    size="huge"
+                    backgroundSecondary
+                    fullWidth
+                    onClick={() => setIsModaWallet(true)}
+                  />
+                )}
+                <S.ButtonDetails
                   type="button"
-                  text="Connect Wallet"
-                  size="huge"
-                  backgroundSecondary
-                  fullWidth
-                  onClick={() => setIsModaWallet(true)}
-                />
-              )}
-              <S.ButtonDetails
-                type="button"
-                isDetails={isDetails}
-                isConnect={!!userWalletAddress}
-                onClick={() => {
-                  setIsDetails(!isDetails)
-                  matomoEvent(
-                    'click-details',
-                    `${isDetails ? 'details-closed' : 'details-open'}`
-                  )
-                }}
-              >
-                Details
-                <img src="assets/arrowDetails.svg" alt="" />
-              </S.ButtonDetails>
-              {isDetails && (
-                <Details
-                  pid={pid}
-                  hasExpired={infoStaked.hasExpired}
-                  poolInfo={poolInfo}
-                  infoStakeStatic={infoStaked}
-                  stakingToken={infoStaked.stakingToken}
-                  decimals={decimals}
-                  symbol={staked[pid]}
-                  priceLPToken={priceLPToken}
-                />
-              )}
-            </S.ButtonContainer>
-          </S.InfosStaking>
-        </S.StakeCard>
-      </S.BorderGradient>
+                  isDetails={isDetails}
+                  isConnect={!!userWalletAddress}
+                  onClick={() => {
+                    setIsDetails(!isDetails)
+                    matomoEvent(
+                      'click-details',
+                      `${isDetails ? 'details-closed' : 'details-open'}`
+                    )
+                  }}
+                >
+                  Details
+                  <img src="assets/arrowDetails.svg" alt="" />
+                </S.ButtonDetails>
+                {isDetails && (
+                  <Details
+                    pid={pid}
+                    hasExpired={infoStaked.hasExpired}
+                    poolInfo={poolInfo}
+                    infoStakeStatic={infoStaked}
+                    stakingToken={infoStaked.stakingToken}
+                    decimals={decimals}
+                    symbol={staked[pid]}
+                    priceLPToken={priceLPToken}
+                  />
+                )}
+              </S.ButtonContainer>
+            </S.InfosStaking>
+          </S.StakeCard>
+        </S.BorderGradient>
+      </div>
+
       {isModalStake && (
         <ModalStakeAndWithdraw
           setModalOpen={setIsModalStake}

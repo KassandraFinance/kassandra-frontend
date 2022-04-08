@@ -6,8 +6,8 @@ import { chains } from '../../constants/tokenAddresses'
 
 import changeChain from '../../utils/changeChain'
 
-import ModalWalletConnect from '../modals/ModalWalletConnect'
 import Button from '../Button'
+import ModalWalletConnect from '../Modals/ModalWalletConnect'
 
 import * as S from './styles'
 
@@ -66,7 +66,6 @@ const Web3Disabled = ({
       </S.Web3Disabled>
       {openWallet && (
         <ModalWalletConnect
-          modalOpen={openWallet}
           setModalOpen={setOpenWallet}
         />
       )}

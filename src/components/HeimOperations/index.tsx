@@ -3,9 +3,9 @@ import React from 'react'
 
 import { ChainDetails } from '../../utils/changeChain'
 
-import ModalWalletConnect from '../modals/ModalWalletConnect'
+import ModalWalletConnect from '../Modals/ModalWalletConnect'
+import ModalHeimOperations from '../Modals/ModalHeimOperations'
 import SelectOperatorCart from './SelectOperatorCart'
-import ModalHeimOperations from '../modals/ModalHeimOperations'
 import SelectOperatorMobile, { TitlesMobile } from './SelectOperatorMobile'
 
 import * as S from './styles'

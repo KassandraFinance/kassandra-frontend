@@ -7,10 +7,10 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 import substr from '../../utils/substr'
 
 import Button from '../Button'
-import ModalLogOut from '../modals/ModalLogOut'
 import DropdownInvest from '../Dropdown'
-import ModalWalletConnect from '../modals/ModalWalletConnect'
-import ModalSocialMediaMobile from '../modals/ModalSocialMediaMobile'
+import ModalLogOut from '../Modals/ModalLogOut'
+import ModalWalletConnect from '../Modals/ModalWalletConnect'
+import ModalSocialMediaMobile from '../Modals/ModalSocialMediaMobile'
 
 import options from '../../../public/assets/options.svg'
 import kacy64 from '../../../public/assets/logo-64.svg'
@@ -74,7 +74,7 @@ const Header = () => {
               Stake/Farm
             </S.MenuLink>
           </Link>
-          {process.env.NEXT_PUBLIC_VOTE === '1' ? (
+          {process.env.NEXT_PUBLIC_VOTE === '2' ? (
             <DropdownInvest
               nameOnHeader="vote"
               linkPage={[
