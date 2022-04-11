@@ -47,7 +47,7 @@ const WalletAddress = () => {
               rel="noopener noreferrer"
             >
               <span>Discuss the proposals at the Forum</span>
-              <Image src={externalLink} alt="" />
+              <Image src={externalLink} alt="" width={15} height={15} />
             </S.LinkForum>
           </S.TitleAndLinkContent>
           <AnyCard text="This address has not voted on a governance proposal yet " />

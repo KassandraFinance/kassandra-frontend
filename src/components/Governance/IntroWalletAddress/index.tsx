@@ -32,11 +32,15 @@ import * as S from './styles'
 
 const IntroWalletAddress = () => {
   // eslint-disable-next-line prettier/prettier
-  const [isModalManageVotingPower, setIsModalManageVotingPower] = React.useState<boolean>(false)
+  const [isModalManageVotingPower, setIsModalManageVotingPower] =
+    React.useState<boolean>(false)
   // eslint-disable-next-line prettier/prettier
-  const [isModalWalletConnect, setIsModalWalletConnect] = React.useState<boolean>(false)
+  const [isModalWalletConnect, setIsModalWalletConnect] =
+    React.useState<boolean>(false)
   // eslint-disable-next-line prettier/prettier
-  const [totalKacyStaked, setTotalKacyStaked] = React.useState<BigNumber>(new BigNumber(0))
+  const [totalKacyStaked, setTotalKacyStaked] = React.useState<BigNumber>(
+    new BigNumber(0)
+  )
   const [voteWeight, setVoteWeight] = React.useState<string>('')
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
@@ -115,7 +119,12 @@ const IntroWalletAddress = () => {
               TOTAL KACY STAKED
               <Tippy content="Voting power allows you to create and vote on proposals. To obtain voting power you need to stake your $KACY tokens.">
                 <S.Tooltip>
-                  <Image src={tooltip} alt="Explanation" />
+                  <Image
+                    src={tooltip}
+                    alt="Explanation"
+                    width={16}
+                    height={16}
+                  />
                 </S.Tooltip>
               </Tippy>
             </span>
