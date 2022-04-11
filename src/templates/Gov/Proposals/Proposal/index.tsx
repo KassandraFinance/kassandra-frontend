@@ -69,7 +69,6 @@ interface IRequestDataProposal {
       },
       votes: [
         {
-          votingPower: Big,
           support: boolean,
           voter: {
             id: string
@@ -171,7 +170,8 @@ const Proposal = () => {
 
   const { data } = useSWR<IRequestDataProposal>([GET_PROPOSAL], query =>
     request(SUBGRAPH_URL, query, {
-      number: Number(router.query.proposal)
+      number: Number(router.query.proposal),
+      voter: userWalletAddress
     })
   )
 
@@ -266,9 +266,7 @@ const Proposal = () => {
         setPercentageVotes({ for: forVotes, against: againstVotes })
       }
 
-      const userAlreadyVoted = data.proposal[0].votes.find(
-        (vote: IVotesProps) => vote.voter.id === userWalletAddress
-      )
+      const [userAlreadyVoted] = data.proposal[0].votes
       setUserVoted({
         voted: userAlreadyVoted ? true : false,
         support: userAlreadyVoted ? userAlreadyVoted.support : null,
