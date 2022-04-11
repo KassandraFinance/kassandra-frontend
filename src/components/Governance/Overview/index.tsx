@@ -31,8 +31,11 @@ interface IGovernancesProps {
 
 export const Overview = () => {
   // eslint-disable-next-line prettier/prettier
-  const [isModalWalletConnect, setIsModalWalletConnect] = React.useState<boolean>(false)
-  const [yourVotingPower, setYourVotingPower] = React.useState(new BigNumber(-1)) // eslint-disable-line prettier/prettier
+  const [isModalWalletConnect, setIsModalWalletConnect] =
+    React.useState<boolean>(false)
+  const [yourVotingPower, setYourVotingPower] = React.useState(
+    new BigNumber(-1)
+  ) // eslint-disable-line prettier/prettier
   const [governances, setGovernances] = React.useState<IGovernancesProps>({
     totalVotingPower: new BigNumber(-1),
     votingAddresses: 0
@@ -73,10 +76,15 @@ export const Overview = () => {
         <S.VotginCards>
           <S.VotingDataCard>
             <S.TextVoting>
-              Your Voting Power
+              YOUR VOTING POWER
               <Tippy content="Voting power allows you to create and vote on proposals. To obtain voting power you need to stake your $KACY tokens.">
                 <S.Tooltip>
-                  <Image src={tooltip} alt="Explanation" />
+                  <Image
+                    src={tooltip}
+                    alt="Explanation"
+                    width={14}
+                    height={14}
+                  />
                 </S.Tooltip>
               </Tippy>
             </S.TextVoting>
@@ -97,10 +105,15 @@ export const Overview = () => {
           </S.VotingDataCard>
           <S.VotingDataCard>
             <S.TextVoting>
-              Total Voting Power
+              TOTAL VOTING POWER
               <Tippy content="Voting power allows you to create and vote on proposals. To obtain voting power you need to stake your $KACY tokens.">
                 <S.Tooltip>
-                  <Image src={tooltip} alt="Explanation" />
+                  <Image
+                    src={tooltip}
+                    alt="Explanation"
+                    width={14}
+                    height={14}
+                  />
                 </S.Tooltip>
               </Tippy>
             </S.TextVoting>
@@ -110,10 +123,15 @@ export const Overview = () => {
           </S.VotingDataCard>
           <S.VotingDataCard>
             <S.TextVoting>
-              Voting Addresses
+              VOTING ADDRESSES
               <Tippy content="Voting power allows you to create and vote on proposals. To obtain voting power you need to stake your $KACY tokens.">
                 <S.Tooltip>
-                  <Image src={tooltip} alt="Explanation" />
+                  <Image
+                    src={tooltip}
+                    alt="Explanation"
+                    width={14}
+                    height={14}
+                  />
                 </S.Tooltip>
               </Tippy>
             </S.TextVoting>
