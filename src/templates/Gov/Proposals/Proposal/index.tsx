@@ -43,6 +43,7 @@ import proposalDetailsIcon from '../../../../../public/assets/iconGradient/propo
 import proposalInfoIcon from '../../../../../public/assets/iconGradient/proposal-info.svg'
 import proposalCompleteIcon from '../../../../../public/assets/iconGradient/proposal-complete.svg'
 import proposalWaitingIcon from '../../../../../public/assets/iconGradient/proposal-waiting.svg'
+import proposalStatusHistory from '../../../../../public/assets/iconGradient/proposal-history.svg'
 
 import * as S from './styles'
 import ReactMarkdown from 'react-markdown'
@@ -326,7 +327,12 @@ const Proposal = () => {
                   voteType: 'For',
                   percentage: `${percentageVotes.for}`,
                   // eslint-disable-next-line prettier/prettier
-                  totalVotingPower: `${BNtoDecimal(proposal.forVotes, 0, 2, 2)}`,
+                  totalVotingPower: `${BNtoDecimal(
+                    proposal.forVotes,
+                    0,
+                    2,
+                    2
+                  )}`,
                   checkAllVoterModal: true
                 })
                 setIsModalOpen(true)
@@ -344,7 +350,12 @@ const Proposal = () => {
                   voteType: 'Against',
                   percentage: `${percentageVotes.against}`,
                   // eslint-disable-next-line prettier/prettier
-                  totalVotingPower: `${BNtoDecimal(proposal.againstVotes,0, 2, 2)}`,
+                  totalVotingPower: `${BNtoDecimal(
+                    proposal.againstVotes,
+                    0,
+                    2,
+                    2
+                  )}`,
                   checkAllVoterModal: false
                 })
                 setIsModalOpen(true)
@@ -513,7 +524,7 @@ const Proposal = () => {
           </S.ProposalDetails>
           <S.ProposalStatus>
             <S.ProposalTitleWrapper>
-              <Image src={proposalDetailsIcon} width={24} height={24} />
+              <Image src={proposalStatusHistory} width={24} height={24} />
               <h1>Proposal Status History</h1>
             </S.ProposalTitleWrapper>
 

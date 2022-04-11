@@ -6,7 +6,10 @@ interface IVotingPowerProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const VotingPower = styled.div<IVotingPowerProps>`
+export const VotingPower =
+  styled.div <
+  IVotingPowerProps >
+  `
   background: rgba(255, 255, 255, 0.04);
   border-radius: ${theme.border.radius};
   border: 1px solid #fcfcfc26;
@@ -20,6 +23,7 @@ export const VotingPower = styled.div<IVotingPowerProps>`
 
   @media (max-width: 420px) {
     width: ${props => (props.isMobile ? 'calc(100vw - 32px)' : '290px')};
+    border-radius: 0.8rem;
   }
 `
 

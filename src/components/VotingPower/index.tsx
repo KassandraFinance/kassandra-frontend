@@ -24,7 +24,9 @@ interface IVotingPowerProps {
 
 const VotingPower = ({ userWalletAddress, isMobile }: IVotingPowerProps) => {
   const [totalVotes, setTotalVotes] = React.useState(new BigNumber(-1))
-  const [yourVotingPower, setYourVotingPower] = React.useState(new BigNumber(-1)) // eslint-disable-line prettier/prettier
+  const [yourVotingPower, setYourVotingPower] = React.useState(
+    new BigNumber(-1)
+  ) // eslint-disable-line prettier/prettier
 
   const votingPower = useVotingPower(Staking)
 
