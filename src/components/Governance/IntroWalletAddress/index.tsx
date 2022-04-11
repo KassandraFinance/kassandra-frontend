@@ -117,7 +117,12 @@ const IntroWalletAddress = () => {
               TOTAL KACY STAKED
               <Tippy content="Voting power allows you to create and vote on proposals. To obtain voting power you need to stake your $KACY tokens.">
                 <S.Tooltip>
-                  <Image src={tooltip} alt="Explanation" />
+                  <Image
+                    src={tooltip}
+                    alt="Explanation"
+                    width={16}
+                    height={16}
+                  />
                 </S.Tooltip>
               </Tippy>
             </span>
