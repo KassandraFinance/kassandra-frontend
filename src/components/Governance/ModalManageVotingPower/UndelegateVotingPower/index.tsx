@@ -3,6 +3,7 @@ import Image from 'next/image'
 
 import { RootStateOrAny, useSelector } from 'react-redux'
 import BigNumber from 'bn.js'
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
 import { Staking } from '../../../../constants/tokenAddresses'
 
@@ -25,7 +26,6 @@ import { BNtoDecimal } from '../../../../utils/numerals'
 import Button from '../../../Button'
 
 import arrowSelect from '../../../../../public/assets/icons/arrow-select.svg'
-import logo from '../../../../../public/assets/logo-64.svg'
 
 import * as S from '../styles'
 export interface IDateProps {
@@ -104,13 +104,16 @@ const UndelegateVotingPower = ({
           18,
           2
         )
-        if (userInfo.delegatee === userWalletAddress) {
+
+        if (
+          userInfo.delegatee.toLowerCase() === userWalletAddress.toLowerCase()
+        ) {
           return { msg: "Can't undelegate to your own wallet" }
         } else {
           return {
             votingPower,
             withdrawDelay: Math.round(Number(poolInfo.withdrawDelay) / 86400),
-            nameToken: substr(userInfo.delegatee),
+            nameToken: userInfo.delegatee,
             pid: userInfo.pid
           }
         }
@@ -208,9 +211,12 @@ const UndelegateVotingPower = ({
           <S.Selected onClick={() => setOptionsOpen(!optionsOpen)}>
             <S.Option>
               <S.Name>
-                <Image src={logo} alt="" />
+                <Jazzicon
+                  diameter={24}
+                  seed={jsNumberForAddress(undelegateSelected.nameToken)}
+                />
                 <S.WithdrawDelay>
-                  <p>{undelegateSelected.nameToken}</p>
+                  <p>{substr(undelegateSelected.nameToken)}</p>
                   <span>
                     {undelegateSelected.withdrawDelay} days withdraw delay
                   </span>
@@ -272,68 +278,3 @@ const UndelegateVotingPower = ({
 }
 
 export default UndelegateVotingPower
-
-// const poolData = [
-//   {
-//     image: logo,
-//     nameToken: 'kacy',
-//     withdrawDelay: '0',
-//     votingPower: '456,00'
-//   },
-//   {
-//     image: logo,
-//     nameToken: 'kacy',
-//     withdrawDelay: '15',
-//     votingPower: '789,00'
-//   },
-//   {
-//     image: logo,
-//     nameToken: 'kacy',
-//     withdrawDelay: '45',
-//     votingPower: '123.000,00'
-//   }
-// ]
-
-//   [userInfoOne, userInfoTwo, userInfoThree].map(userInfo => ({
-//     // votingPower: BNtoDecimal(
-//     //   new BigNumber(Number(teste[`${userInfo.pid}`])).mul(userInfo.amount),
-//     //   18,
-//     //   2
-//     // ),
-//     // votingPower: BNtoDecimal(new BigNumber(userInfo.amount), 18, 2),
-//     // votingPower2:  votingPower: BNtoDecimal(
-//     //   new BigNumber(poolInfo.votingMultiplier).mul(votingPower),
-//     //   18,
-//     //   2
-//     // ),
-//     votingPower: '',
-//     withdrawDelay: '1000',
-//     nameToken: 'userInfo.delegatee',
-//     pid: userInfo.pid
-//   }))
-// )
-// votingPower: BNtoDecimal(
-//   new BigNumber(Number(teste[`${userInfo.pid}`])).mul(userInfo.amount),
-//   18,
-//   2
-// ),
-// withdrawDelay: '1000',
-// nameToken: 'userInfo.delegatee',
-// pid: userInfo.pid
-
-// [userInfoOne, userInfoTwo, userInfoThree].map(userInfo => ({
-//   votingPower: BNtoDecimal(
-//     new BigNumber(Number(teste[`${userInfo.pid}`])).mul(userInfo.amount),
-//     18,
-//     2
-//   ),
-//   // votingPower: BNtoDecimal(new BigNumber(userInfo.amount), 18, 2),
-//   // votingPower2:  votingPower: BNtoDecimal(
-//   //   new BigNumber(poolInfo.votingMultiplier).mul(votingPower),
-//   //   18,
-//   //   2
-//   // ),
-//   withdrawDelay: '1000',
-//   nameToken: 'userInfo.delegatee',
-//   pid: userInfo.pid
-// }))

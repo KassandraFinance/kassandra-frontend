@@ -1,12 +1,13 @@
 import { gql } from 'graphql-request'
 
 export const GET_PROPOSAL = gql`
-  query ($number: Int!) {
+  query ($number: Int!, $voter: ID!) {
     proposal: proposals(where: { number: $number }) {
       number
       description
       forVotes
       againstVotes
+      startBlock
       quorum
       values
       calldatas
@@ -15,8 +16,7 @@ export const GET_PROPOSAL = gql`
       proposer {
         id
       }
-      votes {
-        votingPower
+      votes(where: { voter: $voter }) {
         support
         voter {
           id

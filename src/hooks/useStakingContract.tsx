@@ -136,7 +136,7 @@ const useStakingContract = (address: string) => {
       return value
     }
 
-    const userInfo = async (pid: number, walletAddress: string) => {
+    const userInfo = async (pid: number, walletAddress: string | string[] | undefined) => {
       const value = await contract.methods.userInfo(pid, walletAddress).call()
       return value
     }

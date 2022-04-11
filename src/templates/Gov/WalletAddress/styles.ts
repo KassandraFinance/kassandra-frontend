@@ -30,6 +30,8 @@ export const TitleAndLinkContent = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  margin-top: 6.4rem;
+
   @media (max-width: 560px) {
     flex-direction: column;
     align-items: flex-start;

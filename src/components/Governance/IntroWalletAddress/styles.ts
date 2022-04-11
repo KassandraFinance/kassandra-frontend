@@ -3,7 +3,6 @@ import theme from '../../../styles/theme'
 
 export const IntroWalletAddress = styled.section`
   margin-top: ${theme.spacings.space16};
-  margin-bottom: 10rem;
 `
 
 export const AddressAndVoteWeight = styled.div`
@@ -21,14 +20,15 @@ export const WalletAddress = styled.div`
   display: flex;
   align-items: center;
 
+  /* .paper {
   img {
     width: 4rem;
 
     border-radius: 50%;
     @media (max-width: 992px) {
-      width: 3.2rem;
+      width: 3.2rem !important;
     }
-  }
+  } */
 
   h2 {
     margin-left: ${theme.spacings.space18};

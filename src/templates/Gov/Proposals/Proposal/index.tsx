@@ -1,18 +1,24 @@
 import React from 'react'
+import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { useSelector, RootStateOrAny } from 'react-redux'
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
+import useSWR from 'swr'
+import { request } from 'graphql-request'
+import Big from 'big.js'
+import BigNumber from 'bn.js'
+import ReactMarkdown from 'react-markdown'
 
 import {
   chains,
   GovernorAlpha,
+  Staking,
   SUBGRAPH_URL
 } from '../../../../constants/tokenAddresses'
 
-import Image from 'next/image'
-import { useRouter } from 'next/router'
-import useSWR from 'swr'
 import useGovernance from '../../../../hooks/useGovernance'
+import useVotingPower from '../../../../hooks/useVotingPower'
 
-import Big from 'big.js'
 import substr from '../../../../utils/substr'
 import { BNtoDecimal } from '../../../../utils/numerals'
 import waitTransaction, {
@@ -20,7 +26,6 @@ import waitTransaction, {
   TransactionCallback
 } from '../../../../utils/txWait'
 
-import { request } from 'graphql-request'
 import { GET_PROPOSAL } from './graphql'
 
 import ExternalLink from '../../../../components/ExternalLink'
@@ -46,8 +51,6 @@ import proposalWaitingIcon from '../../../../../public/assets/iconGradient/propo
 import proposalStatusHistory from '../../../../../public/assets/iconGradient/proposal-history.svg'
 
 import * as S from './styles'
-import ReactMarkdown from 'react-markdown'
-import BigNumber from 'bn.js'
 
 interface IRequestDataProposal {
   proposal: [
@@ -56,6 +59,7 @@ interface IRequestDataProposal {
       description: string,
       forVotes: Big,
       againstVotes: Big,
+      startBlock: string,
       quorum: string,
       values: [],
       calldatas: [],
@@ -66,7 +70,6 @@ interface IRequestDataProposal {
       },
       votes: [
         {
-          votingPower: Big,
           support: boolean,
           voter: {
             id: string
@@ -87,6 +90,8 @@ export interface ModalProps {
 export interface IUserVotedProps {
   voted: boolean;
   support: boolean | null;
+  userWalletAddress: string;
+  yourVotingPowerInProposal: BigNumber;
 }
 
 export interface IVotesProps {
@@ -147,81 +152,55 @@ const Proposal = () => {
     for: '0',
     against: '0'
   })
-  const [proposalState, setProposalState] = React.useState<string[]>([])
+  const [proposalState, setProposalState] = React.useState<string>('')
+  const [dataStatus, setDataStatus] = React.useState<any[]>(stepData)
   const [userVoted, setUserVoted] = React.useState<IUserVotedProps>({
     voted: false,
-    support: null
+    support: null,
+    userWalletAddress: '',
+    yourVotingPowerInProposal: new BigNumber(0)
   })
+  // eslint-disable-next-line prettier/prettier
+  const [yourVotingPowerInProposal, setYourVotingPowerInProposal] =
+    React.useState(new BigNumber(0))
 
   const router = useRouter()
   const governance = useGovernance(GovernorAlpha)
+  const votingPower = useVotingPower(Staking)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
   const { data } = useSWR<IRequestDataProposal>([GET_PROPOSAL], query =>
     request(SUBGRAPH_URL, query, {
-      number: Number(router.query.proposal)
+      number: Number(router.query.proposal),
+      voter: userWalletAddress
     })
   )
 
   async function getProposalState(number: number) {
-    governance.stateProposals(number).then(res => setProposalState(res))
+    governance.stateProposals(number).then(res => setProposalState(res[0]))
   }
 
-  React.useEffect(() => {
-    if (data) {
-      const proposalInfo: IProposalProps = {
-        againstVotes: data.proposal[0].againstVotes,
-        forVotes: data.proposal[0].forVotes,
-        description: data.proposal[0].description,
-        number: data.proposal[0].number,
-        quorum: data.proposal[0].quorum,
-        proposer: data.proposal[0].proposer.id,
-        votingPower: Big(data.proposal[0].forVotes).add(
-          Big(data.proposal[0].againstVotes)
-        ),
-        calldatas: data.proposal[0].calldatas,
-        signatures: data.proposal[0].signatures,
-        targets: data.proposal[0].targets,
-        values: data.proposal[0].values
-      }
-
-      if (proposalInfo.votingPower.gt(0)) {
-        const forVotes = BNtoDecimal(
-          Big(data.proposal[0].forVotes).div(proposalInfo.votingPower).mul(100),
-          18,
-          2
-        )
-
-        const againstVotes = BNtoDecimal(
-          Big(data.proposal[0].againstVotes)
-            .div(proposalInfo.votingPower)
-            .mul(100),
-          18,
-          2
-        )
-
-        setPercentageVotes({ for: forVotes, against: againstVotes })
-      }
-
-      const userAlreadyVoted = data.proposal[0].votes.find(
-        (vote: IVotesProps) => vote.voter.id === userWalletAddress
+  async function getVotingPowerInProposal(startBlock: string) {
+    if (userWalletAddress) {
+      const votingPowerAtMoment = await votingPower.getPriorVotes(
+        userWalletAddress,
+        startBlock
       )
 
-      if (userAlreadyVoted) {
-        setUserVoted({
-          voted: true,
-          support: userAlreadyVoted.support
-        })
-      }
-
-      getProposalState(data.proposal[0].number)
-      setProposal(proposalInfo)
+      setYourVotingPowerInProposal(votingPowerAtMoment)
     }
-  }, [data])
+  }
 
   function handleVote(voteType: string) {
-    if (userVoted.voted || proposalState[0] !== 'Active') return
+    if (
+      userVoted.voted ||
+      proposalState[0] !== 'Active' ||
+      !userWalletAddress ||
+      yourVotingPowerInProposal.eq(new BigNumber(0))
+    ) {
+      return
+    }
 
     governance.castVote(
       Number(router.query.proposal),
@@ -254,6 +233,78 @@ const Proposal = () => {
     }
   }, [])
 
+  React.useEffect(() => {
+    if (data) {
+      const proposalInfo: IProposalProps = {
+        againstVotes: data.proposal[0].againstVotes,
+        forVotes: data.proposal[0].forVotes,
+        description: data.proposal[0].description,
+        number: data.proposal[0].number,
+        quorum: data.proposal[0].quorum,
+        proposer: data.proposal[0].proposer.id,
+        votingPower: Big(data.proposal[0].forVotes).add(
+          Big(data.proposal[0].againstVotes)
+        ),
+        calldatas: data.proposal[0].calldatas,
+        signatures: data.proposal[0].signatures,
+        targets: data.proposal[0].targets,
+        values: data.proposal[0].values
+      }
+      if (proposalInfo.votingPower.gt(0)) {
+        const forVotes = BNtoDecimal(
+          Big(data.proposal[0].forVotes).div(proposalInfo.votingPower).mul(100),
+          18,
+          2
+        )
+
+        const againstVotes = BNtoDecimal(
+          Big(data.proposal[0].againstVotes)
+            .div(proposalInfo.votingPower)
+            .mul(100),
+          18,
+          2
+        )
+
+        setPercentageVotes({ for: forVotes, against: againstVotes })
+      }
+
+      const [userAlreadyVoted] = data.proposal[0].votes
+      setUserVoted({
+        voted: userAlreadyVoted ? true : false,
+        support: userAlreadyVoted ? userAlreadyVoted.support : null,
+        userWalletAddress,
+        yourVotingPowerInProposal
+      })
+
+      getVotingPowerInProposal(data.proposal[0].startBlock)
+      getProposalState(data.proposal[0].number)
+      setProposal(proposalInfo)
+    }
+  }, [data, userWalletAddress])
+
+  React.useEffect(() => {
+    function generateStatusHistoryArray() {
+      const arr = dataStatus.map(item =>
+        item.title.includes(proposalState)
+          ? { ...item, completed: true, title: proposalState }
+          : item
+      )
+
+      const teste2 = arr.findIndex(item => item.completed === true)
+
+      const arrTrue = arr
+        .slice(0, teste2 + 1)
+        .map(item => ({ ...item, completed: true }))
+      const arrFalse = arr.slice(teste2 + 1)
+
+      const arrModified = [...arrTrue, ...arrFalse]
+
+      setDataStatus(arrModified)
+    }
+
+    generateStatusHistoryArray()
+  }, [proposalState])
+
   return (
     <>
       <S.BackgroundVote>
@@ -275,16 +326,19 @@ const Proposal = () => {
                 />
                 <S.ProposeAuthorCard>
                   <p>Proposed by</p>
-                  <Image
-                    src={'/assets/avatar-author-proposal.svg'}
-                    width={32}
-                    height={32}
+                  <Jazzicon
+                    diameter={32}
+                    seed={jsNumberForAddress(proposal.proposer)}
                   />
+
                   <span>{substr(`${proposal.proposer}`)}</span>
                 </S.ProposeAuthorCard>
               </S.TitleAndAuthor>
               <S.VotingPowerAndLink>
-                <VotingPower userWalletAddress={userWalletAddress} />
+                <VotingPower
+                  userWalletAddress={userWalletAddress}
+                  yourVotingPowerInProposal={yourVotingPowerInProposal}
+                />
                 <ExternalLink text="Obtain more voting power" hrefNext="#" />
               </S.VotingPowerAndLink>
             </S.TitleWrapper>
@@ -298,15 +352,17 @@ const Proposal = () => {
               />
               <S.CardTitleWrapper>
                 <S.VotingPowerAndLink>
-                  <VotingPower userWalletAddress={userWalletAddress} />
+                  <VotingPower
+                    userWalletAddress={userWalletAddress}
+                    yourVotingPowerInProposal={yourVotingPowerInProposal}
+                  />
                   <ExternalLink text="Obtain more voting power" hrefNext="#" />
                 </S.VotingPowerAndLink>
                 <S.ProposeAuthorCard>
                   <p>Proposed by</p>
-                  <Image
-                    src={'/assets/avatar-author-proposal.svg'}
-                    width={24}
-                    height={24}
+                  <Jazzicon
+                    diameter={24}
+                    seed={jsNumberForAddress(proposal.proposer)}
                   />
                   <span>{substr(`${proposal.proposer}`)}</span>
                 </S.ProposeAuthorCard>
@@ -385,14 +441,14 @@ const Proposal = () => {
                   <S.TableInfoWrapper>
                     <S.DataWrapper>
                       <S.TextKey>State</S.TextKey>
-                      {proposalState[0] ? (
+                      {proposalState ? (
                         <S.TextValue
                           style={{
-                            color: statslibColor[proposalState[0].toLowerCase()]
+                            color: statslibColor[proposalState.toLowerCase()]
                           }}
                         >
-                          {proposalState[0].charAt(0).toUpperCase() +
-                            proposalState[0].slice(1)}
+                          {proposalState.charAt(0).toUpperCase() +
+                            proposalState.slice(1)}
                         </S.TextValue>
                       ) : (
                         '...'
@@ -529,7 +585,25 @@ const Proposal = () => {
             </S.ProposalTitleWrapper>
 
             <S.Steps>
-              {stepData.map((step, index) => (
+              {dataStatus.map((step, index) => (
+                <React.Fragment key={index}>
+                  <S.Step>
+                    {step.completed === true ? (
+                      <Image src={proposalCompleteIcon} />
+                    ) : (
+                      <Image src={proposalWaitingIcon} />
+                    )}
+
+                    <S.StepTitle>{step.title}</S.StepTitle>
+                    <S.StepDate>{step.date}</S.StepDate>
+                  </S.Step>
+                  <S.LineBetweenImages
+                    isAfter={index === dataStatus.length - 1}
+                    isComplete={step.completed === true}
+                  />
+                </React.Fragment>
+              ))}
+              {/* {stepData.map((step, index) => (
                 <>
                   <S.Step key={step.title + index}>
                     {Date.parse(step.date) / 1000 >
@@ -548,7 +622,7 @@ const Proposal = () => {
                     }
                   />
                 </>
-              ))}
+              ))} */}
             </S.Steps>
           </S.ProposalStatus>
         </S.ProposalInfo>
@@ -583,23 +657,28 @@ const infoProposal = {
 
 const stepData = [
   {
-    title: 'Created',
+    title: ['Created'],
+    completed: false,
     date: '01/22/2022'
   },
   {
-    title: 'Active',
+    title: ['Active'],
+    completed: false,
     date: '01/22/2022'
   },
   {
-    title: 'Succeeded',
+    title: ['Succeeded', 'Failed'],
+    completed: false,
     date: '02/22/2022'
   },
   {
-    title: 'Queued',
+    title: ['Queued'],
+    completed: false,
     date: '02/22/2022'
   },
   {
-    title: 'Executed',
-    date: '02/22/2022'
+    title: ['Executed'],
+    completed: false,
+    date: '04/22/2022'
   }
 ]
