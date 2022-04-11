@@ -115,6 +115,12 @@ const wrapperModifiers = {
 
     transition: all 300ms ease-in-out;
 
+    svg {
+      path {
+        transition: fill ease-in-out 300ms;
+      }
+    }
+
     &:hover,
     &:focus {
       color: ${theme.colors.darkPurple};
@@ -186,7 +192,10 @@ const wrapperModifiers = {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const Wrapper = styled.button <WrapperProps>`
+export const Wrapper =
+  styled.button <
+  WrapperProps >
+  `
   ${({
     theme,
     size,
