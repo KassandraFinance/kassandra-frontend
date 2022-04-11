@@ -35,7 +35,7 @@ export const BackgroundCard = styled.div`
 
     line-height: ${theme.font.sizes.font24};
     font-size: ${theme.font.sizes.font24};
-    font-weight: ${theme.font.weight.bold};
+    font-weight: ${theme.font.weight.medium};
 
     @media (max-width: 992px) {
       font-size: ${theme.font.sizes.font18};
