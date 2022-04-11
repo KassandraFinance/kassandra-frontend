@@ -6,20 +6,23 @@ interface IVotingPowerProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const VotingPower = styled.div<IVotingPowerProps>`
+export const VotingPower =
+  styled.div <
+  IVotingPowerProps >
+  `
+  padding: 1.6rem 2.4rem;
+  width: 29rem;
+
   background: rgba(255, 255, 255, 0.04);
   border-radius: ${theme.border.radius};
-  border: 1px solid #fcfcfc26;
-
-  padding: 16px 24px;
-  width: 290px;
+  border: 0.1rem solid #fcfcfc26;
 
   @media (max-width: 960px) {
-    margin-top: 20px;
+    margin-top: 2rem;
   }
 
   @media (max-width: 420px) {
-    width: ${props => (props.isMobile ? 'calc(100vw - 32px)' : '290px')};
+    width: ${props => (props.isMobile ? 'calc(100vw - 3.2rem)' : '29rem')};
   }
 `
 
@@ -27,26 +30,30 @@ export const YourVotingPower = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 6px;
+  margin-bottom: 0.6rem;
+
   span {
-    font-size: ${theme.font.sizes.font12};
+    display: flex;
+    align-items: center;
+
+    color: #bdbdbd;
+    font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.medium};
     text-transform: uppercase;
 
-    display: flex;
-    align-items: center;
     div {
-      margin-top: 2px;
-      margin-left: 2px;
+      margin-top: 0.2rem;
+      margin-left: 0.2rem;
+
       z-index: 19;
     }
   }
 `
 
 export const Tooltip = styled.div`
-  padding: 1px;
-
   position: relative;
+  padding: 0.1rem;
+
   z-index: 99;
 `
 
@@ -56,15 +63,16 @@ export const TotalVotingPower = styled.div`
   justify-content: space-between;
 
   span {
+    display: flex;
+    align-items: center;
+
     font-size: ${theme.font.sizes.font12};
     font-weight: ${theme.font.weight.light};
     text-transform: uppercase;
 
-    display: flex;
-    align-items: center;
     div {
-      margin-top: 2px;
-      margin-left: 2px;
+      margin-top: 0.2rem;
+      margin-left: 0.2rem;
       z-index: 19;
     }
   }

@@ -28,6 +28,7 @@ interface Events {
 }
 
 export interface PoolInfo {
+  pid?: number
   stakingToken: string; // address
   depositedAmount: string; // uint256
   lastUpdateTime: string; // uint256
@@ -59,12 +60,12 @@ const useStakingContract = (address: string) => {
     const stake = async (pid: number, amount: BigNumber, callback: TransactionCallback) => {
       await contract.methods.stake(pid, amount, userWalletAddress, userWalletAddress)
         .send(
-          { from: userWalletAddress }, 
+          { from: userWalletAddress },
           callback
         )
     }
 
-    const unstake = async (pid: number, callback: TransactionCallback) => {
+    const unstake = async  (pid: number, callback: TransactionCallback) => {
       await contract.methods.unstake(pid)
         .send({ from: userWalletAddress },
           callback
@@ -73,7 +74,7 @@ const useStakingContract = (address: string) => {
 
     const cancelUnstake = async (pid: number, callback: TransactionCallback) => {
       await contract.methods.cancelUnstake(pid)
-        .send({ from: userWalletAddress }, 
+        .send({ from: userWalletAddress },
           callback
         )
     }
@@ -81,12 +82,12 @@ const useStakingContract = (address: string) => {
     const getReward = async (pid: number, callback: TransactionCallback) => {
       await contract.methods.getReward(pid)
         .send(
-          { from: userWalletAddress }, 
+          { from: userWalletAddress },
           callback
         )
     }
 
-    const withdraw = async (pid: number, amount: BigNumber, callback: TransactionCallback) => {
+    const withdraw = async (pid: number, amount : BigNumber, callback: TransactionCallback) => {
       await contract.methods.withdraw(pid, amount)
         .send({ from: userWalletAddress },
           callback
@@ -135,6 +136,11 @@ const useStakingContract = (address: string) => {
       return value
     }
 
+    const userInfo = async (pid: number, walletAddress: string | string[] | undefined) => {
+      const value = await contract.methods.userInfo(pid, walletAddress).call()
+      return value
+    }
+
     return {
       events,
 
@@ -152,6 +158,8 @@ const useStakingContract = (address: string) => {
       stakedUntil,
       unstaking,
       withdrawable,
+
+      userInfo
     }
   }, [contract, userWalletAddress])
 }

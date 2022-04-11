@@ -53,14 +53,14 @@ const Header = () => {
           </Link>
           <Link href="/" passHref>
             <a className="logo-ipad">
-              <Image src={kacy64} alt="Kassandra" />
+              <Image src={kacy64} width={64} height={64} alt="Kassandra" />
             </a>
           </Link>
         </S.LogoWrapper>
         <S.Menu>
           <Link href="/" passHref>
             <a className="logo-mobile">
-              <Image src={kacy64} alt="Kassandra" />
+              <Image src={kacy64} width={64} height={64} alt="Kassandra" />
             </a>
           </Link>
           <DropdownInvest

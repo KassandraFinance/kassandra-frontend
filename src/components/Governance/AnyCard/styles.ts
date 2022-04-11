@@ -11,6 +11,7 @@ export const BackgroundCard = styled.div`
   padding-left: 0;
 
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 
@@ -35,7 +36,7 @@ export const BackgroundCard = styled.div`
 
     line-height: ${theme.font.sizes.font24};
     font-size: ${theme.font.sizes.font24};
-    font-weight: ${theme.font.weight.bold};
+    font-weight: ${theme.font.weight.medium};
 
     @media (max-width: 992px) {
       font-size: ${theme.font.sizes.font18};
@@ -45,5 +46,9 @@ export const BackgroundCard = styled.div`
     @media (max-width: 600px) {
       font-size: ${theme.font.sizes.font14};
     }
+  }
+
+  a {
+    margin-top: 2.4rem;
   }
 `

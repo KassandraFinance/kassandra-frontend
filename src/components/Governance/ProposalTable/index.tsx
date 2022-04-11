@@ -1,66 +1,222 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import useSWR from 'swr'
+import { request } from 'graphql-request'
 
-import { GovernorAlpha } from '../../../constants/tokenAddresses'
+import { GovernorAlpha, SUBGRAPH_URL } from '../../../constants/tokenAddresses'
 
 import useGovernance from '../../../hooks/useGovernance'
 
-import { dateRequestUnstake } from '../../../utils/date'
+import { GET_PROPOSALS } from './graphql'
 
 import * as S from './styles'
 
+const statsSecundaryProposalLibColor: { [key: string]: string } = {
+  'voting open': '#E843C4',
+  succeeded: '#26DBDB',
+  queued: '#FFBF00',
+  pending: '#FFBF00',
+  executed: '#2CE878',
+  defeated: '#E8372C',
+  expired: '#E8372C',
+  canceled: '#BDBDBD'
+}
+
+const statsPrimaryProposalLibColor: { [key: string]: string } = {
+  active: '#E843C4',
+  succeeded: '#2CE878',
+  failed: '#E8372C'
+}
+
+interface IProposalsListProps {
+  id: string;
+  number: number;
+  targets: [];
+  values: [];
+  signatures: [];
+  startBlock: string;
+  description: string;
+  state: any[];
+}
+
 export const ProposalTable = () => {
-  const [proposalsList, setProposalsList] = React.useState<Array<object>>([])
+  // eslint-disable-next-line prettier/prettier
+  const [proposalsList, setProposalsList] = React.useState<
+    Array<IProposalsListProps>
+  >([])
+
+  const { data } = useSWR([GET_PROPOSALS], query =>
+    request(SUBGRAPH_URL, query)
+  )
+
   const governance = useGovernance(GovernorAlpha)
 
+  async function handleAddStateOnProposal(proposals: IProposalsListProps[]) {
+    const proposal = proposals.map((proposal: IProposalsListProps) =>
+      governance.stateProposals(proposal.number).then(res => {
+        proposal.state = res
+        return proposal
+      })
+    )
+
+    const proposalComplete = await Promise.all(proposal)
+
+    setProposalsList(proposalComplete)
+  }
+
+  function getTitleProposal(description: string) {
+    const [titleDescription] = description.split(/[,.\n]/)
+    const formatTitleDescription = titleDescription.replace('#', '')
+
+    if (formatTitleDescription.length > 45) {
+      return (
+        formatTitleDescription.slice(0, 45).charAt(0).toUpperCase() +
+        formatTitleDescription.slice(1, 45) +
+        '...'
+      )
+    }
+
+    return (
+      formatTitleDescription.charAt(0).toUpperCase() +
+      formatTitleDescription.slice(1)
+    )
+  }
+
   React.useEffect(() => {
-    governance
-      .pastEvents('ProposalCreated')
-      .then(res => governance.getProposal(res, setProposalsList))
-    setProposalsList([])
-  }, [])
+    if (data) {
+      handleAddStateOnProposal(data.proposals)
+    }
+  }, [data])
 
   return (
     <S.ProposalTable>
-      <S.Table>
-        <thead>
-          <S.Tr>
-            <S.Th className="proposal">Proposal</S.Th>
-            <S.Th className="status">Status/Time frame</S.Th>
-          </S.Tr>
-        </thead>
+      <table>
+        <S.Th>
+          <tr>
+            <td>Proposal</td>
+            <td>Status/Time frame</td>
+          </tr>
+        </S.Th>
         <tbody>
-          {proposalsList.map((item: any) => (
-            <Link
-              key={item.proposal.id}
-              href={`/gov/proposals/${item.proposal.id}`}
-            >
-              <S.Tr>
-                <S.Td className="proposal">
-                  <S.TextProposal>
-                    {item.proposal.id} {item.proposal.description}
-                  </S.TextProposal>
-                  <S.StatusAndTimeframe>
-                    <S.StatusProposal>{item.state[0]}</S.StatusProposal>
-                    <S.TimeFrameMobile>{item.timestamp}</S.TimeFrameMobile>
-                  </S.StatusAndTimeframe>
+          {proposalsList.map(proposal => (
+            <Link key={proposal.id} href={`/gov/proposals/${proposal.number}`}>
+              <tr>
+                <S.Td colSpan={2}>
+                  <div className="td-container">
+                    <S.TextProposal>
+                      {proposal.number.toString().padStart(2, '0')}{' '}
+                      {getTitleProposal(proposal.description)}
+                    </S.TextProposal>
+
+                    <S.StatusProposal
+                      statusColor={
+                        statsPrimaryProposalLibColor[
+                          proposal.state[0].toLowerCase()
+                        ]
+                      }
+                    >
+                      {proposal.state[0]}
+                    </S.StatusProposal>
+
+                    <S.TimeFrame>
+                      Ends in N days
+                      {/* End in {dateRequestUnstake(item.timestamp * 1000)} */}
+                    </S.TimeFrame>
+
+                    <S.StateMutability
+                      statusColor={
+                        statsSecundaryProposalLibColor[
+                          proposal.state[1].toLowerCase()
+                        ]
+                      }
+                    >
+                      <span>{proposal.state[1]}</span>
+                      {proposal.state[2] && (
+                        <div className="status-icon-container">
+                          <Image
+                            className="status-icon"
+                            src={proposal.state[2]}
+                            alt=""
+                            layout="responsive"
+                            // width={24}
+                            // height={24}
+                          />
+                        </div>
+                      )}
+                    </S.StateMutability>
+                  </div>
                 </S.Td>
-                <S.Td className="status">
-                  <S.TimeFrame>
-                    End in {dateRequestUnstake(item.timestamp * 1000)}
-                  </S.TimeFrame>
-                  <S.StateMutability>
-                    <span>{item.state[1]}</span>
-                    <Image className="status-icon" src={item.state[2]} alt="" />
-                  </S.StateMutability>
-                </S.Td>
-              </S.Tr>
+              </tr>
             </Link>
           ))}
         </tbody>
-      </S.Table>
+      </table>
     </S.ProposalTable>
+    // <S.ProposalTable>
+    //   <S.Table>
+    //     <thead>
+    //       <S.Tr>
+    //         <S.Th className="proposal">Proposal</S.Th>
+    //         <S.Th className="status">Status/Time frame</S.Th>
+    //       </S.Tr>
+    //     </thead>
+    //     <tbody>
+    //       {proposalsList.map(proposal => (
+    //         <Link key={proposal.id} href={`/gov/proposals/${proposal.number}`}>
+    //           <S.Tr>
+    //             <S.Td className="proposal">
+    //               <S.TextProposal>
+    //                 {proposal.number.toString().padStart(2, '0')}{' '}
+    //                 {getTitleProposal(proposal.description)}
+    //               </S.TextProposal>
+    //               <S.StatusAndTimeframe>
+    //                 <S.StatusProposal
+    //                   statusColor={
+    //                     statsPrimaryProposalLibColor[
+    //                       proposal.state[0].toLowerCase()
+    //                     ]
+    //                   }
+    //                 >
+    //                   {proposal.state[0]}
+    //                 </S.StatusProposal>
+    //                 <S.TimeFrameMobile>
+    //                   {/* {item.timestamp} */}
+    //                 </S.TimeFrameMobile>
+    //               </S.StatusAndTimeframe>
+    //             </S.Td>
+    //             <S.Td className="status">
+    //               <S.TimeFrame>
+    //                 {/* End in {dateRequestUnstake(item.timestamp * 1000)} */}
+    //               </S.TimeFrame>
+    //               <S.StateMutability
+    //                 statusColor={
+    //                   statsSecundaryProposalLibColor[
+    //                     proposal.state[1].toLowerCase()
+    //                   ]
+    //                 }
+    //               >
+    //                 <span>{proposal.state[1]}</span>
+    //                 {proposal.state[2] && (
+    //                   <div className="status-icon-container">
+    //                     <Image
+    //                       className="status-icon"
+    //                       src={proposal.state[2]}
+    //                       alt=""
+    //                       layout="responsive"
+    //                       // width={24}
+    //                       // height={24}
+    //                     />
+    //                   </div>
+    //                 )}
+    //               </S.StateMutability>
+    //             </S.Td>
+    //           </S.Tr>
+    //         </Link>
+    //       ))}
+    //     </tbody>
+    //   </S.Table>
+    // </S.ProposalTable>
   )
 }
 
