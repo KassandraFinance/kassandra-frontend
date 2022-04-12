@@ -13,7 +13,7 @@ import { SUBGRAPH_URL } from '../../../constants/tokenAddresses'
 import { BNtoDecimal } from '../../../utils/numerals'
 
 import Button from '../../../components/Button'
-import ModalWalletConnect from '../../ModalWalletConnect'
+import ModalWalletConnect from '../../Modals/ModalWalletConnect'
 
 import tooltip from '../../../../public/assets/icons/tooltip.svg'
 
@@ -118,10 +118,7 @@ export const Overview = () => {
         </S.VotginCards>
       </S.Overview>
       {isModalWalletConnect && (
-        <ModalWalletConnect
-          modalOpen={isModalWalletConnect}
-          setModalOpen={setIsModalWalletConnect}
-        />
+        <ModalWalletConnect setModalOpen={setIsModalWalletConnect} />
       )}
     </>
   )
