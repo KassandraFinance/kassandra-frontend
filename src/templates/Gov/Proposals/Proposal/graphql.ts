@@ -13,6 +13,12 @@ export const GET_PROPOSAL = gql`
       calldatas
       signatures
       targets
+      created
+      endBlock
+      canceled
+      queued
+      executed
+      eta
       proposer {
         id
       }
