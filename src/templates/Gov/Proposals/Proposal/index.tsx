@@ -48,6 +48,7 @@ import proposalDetailsIcon from '../../../../../public/assets/iconGradient/propo
 import proposalInfoIcon from '../../../../../public/assets/iconGradient/proposal-info.svg'
 import proposalCompleteIcon from '../../../../../public/assets/iconGradient/proposal-complete.svg'
 import proposalWaitingIcon from '../../../../../public/assets/iconGradient/proposal-waiting.svg'
+import proposalStatusHistory from '../../../../../public/assets/iconGradient/proposal-history.svg'
 
 import * as S from './styles'
 
@@ -75,7 +76,6 @@ interface IRequestDataProposal {
       },
       votes: [
         {
-          votingPower: Big,
           support: boolean,
           voter: {
             id: string
@@ -178,7 +178,8 @@ const Proposal = () => {
 
   const { data } = useSWR<IRequestDataProposal>([GET_PROPOSAL], query =>
     request(SUBGRAPH_URL, query, {
-      number: Number(router.query.proposal)
+      number: Number(router.query.proposal),
+      voter: userWalletAddress
     })
   )
 
@@ -273,9 +274,7 @@ const Proposal = () => {
         setPercentageVotes({ for: forVotes, against: againstVotes })
       }
 
-      const userAlreadyVoted = data.proposal[0].votes.find(
-        (vote: IVotesProps) => vote.voter.id === userWalletAddress
-      )
+      const [userAlreadyVoted] = data.proposal[0].votes
       setUserVoted({
         voted: userAlreadyVoted ? true : false,
         support: userAlreadyVoted ? userAlreadyVoted.support : null,
@@ -849,7 +848,7 @@ const Proposal = () => {
           </S.ProposalDetails>
           <S.ProposalStatus>
             <S.ProposalTitleWrapper>
-              <Image src={proposalDetailsIcon} width={24} height={24} />
+              <Image src={proposalStatusHistory} width={24} height={24} />
               <h1>Proposal Status History</h1>
             </S.ProposalTitleWrapper>
 

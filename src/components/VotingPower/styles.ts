@@ -6,7 +6,10 @@ interface IVotingPowerProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const VotingPower = styled.div<IVotingPowerProps>`
+export const VotingPower =
+  styled.div <
+  IVotingPowerProps >
+  `
   padding: 1.6rem 2.4rem;
   width: 29rem;
 

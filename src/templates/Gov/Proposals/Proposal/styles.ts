@@ -81,8 +81,9 @@ export const ProposeAuthorCard = styled.div`
   border-radius: 0.8rem;
 
   @media (max-width: 768px) {
+    height: 8.2rem;
     max-width: 100%;
-    padding: 2.4rem;
+    padding: 1.6rem 2.4rem;
   }
 
   @media (max-width: 728px) {
@@ -94,6 +95,7 @@ export const ProposeAuthorCard = styled.div`
   }
 
   @media (max-width: 670px) {
+    height: 5.6rem;
     max-width: 100%;
   }
 
@@ -101,7 +103,7 @@ export const ProposeAuthorCard = styled.div`
     margin-right: 1.6rem;
 
     font-size: ${theme.font.sizes.font16};
-    font-weight: ${theme.font.weight.bold};
+    font-weight: ${theme.font.weight.medium};
     letter-spacing: 0.08rem;
 
     @media (max-width: 768px) {
@@ -212,7 +214,7 @@ export const ProposalTitleWrapper = styled.div`
 
   h1 {
     font-size: ${theme.font.sizes.font18};
-    font-weight: ${theme.font.weight.bold};
+    font-weight: ${theme.font.weight.medium};
     margin-left: 0.8rem;
 
     @media (min-width: 768px) {
@@ -248,6 +250,10 @@ export const DescriptionTable = styled.section`
     margin-left: auto;
     padding: 2.4rem;
   }
+
+  @media (max-width: 540px) {
+    border-radius: 0.8rem;
+  }
 `
 export const Table = styled.table`
   width: 100%;
@@ -260,7 +266,7 @@ export const TableHead = styled.div`
 `
 export const TableTitle = styled.th`
   font-size: ${theme.font.sizes.font16};
-  font-weight: ${theme.font.weight.bold};
+  font-weight: ${theme.font.weight.medium};
 
   @media (min-width: 768px) {
     font-size: ${theme.font.sizes.font18};
@@ -359,7 +365,7 @@ export const TableDescriptionWrapper = styled.div`
 export const DescriptionSubTitle = styled.td`
   font-size: ${theme.font.sizes.font14};
   line-height: 130%;
-  font-weight: ${theme.font.weight.bold};
+  font-weight: ${theme.font.weight.medium};
   letter-spacing: 0.07rem;
 
   @media (min-width: 1024px) {
@@ -420,6 +426,10 @@ export const InfoTable = styled.table`
     margin-bottom: 0;
     margin-left: auto;
   }
+
+  @media (max-width: 540px) {
+    border-radius: 0.8rem;
+  }
 `
 export const TableInfoWrapper = styled.div`
   border-top-width: 0.1rem;
@@ -436,12 +446,12 @@ export const DataWrapper = styled.div`
   margin-top: 1.2rem;
 
   &:first-child {
-    margin-top: 2.4rem;
+    margin-top: 1.6rem;
   }
 `
 export const TextKey = styled.span`
   font-size: ${theme.font.sizes.font12};
-  font-weight: ${theme.font.weight.bold};
+  font-weight: ${theme.font.weight.medium};
   letter-spacing: 0.06rem;
 
   @media (min-width: 768px) {
@@ -474,10 +484,13 @@ export const LinkForum = styled.a`
 
   display: flex;
   align-items: center;
+  justify-content: center;
 
   margin-top: 1.6rem;
 
   padding: 1.6rem 2.4rem;
+
+  transition: border ${theme.transition.default};
 
   > span {
     font-size: ${theme.font.sizes.font14};
@@ -505,7 +518,7 @@ export const ProposalDetails = styled.div`
 export const DetailsSubTitle = styled.p`
   font-size: ${theme.font.sizes.font12};
   line-height: 130%;
-  font-weight: ${theme.font.weight.bold};
+  font-weight: ${theme.font.weight.medium};
 
   @media (min-width: 768px) {
     font-size: ${theme.font.sizes.font14};
@@ -567,7 +580,7 @@ export const LinkTargetSnowTrace = styled.a`
   > span {
     line-height: 130%;
     font-size: ${theme.font.sizes.font12};
-    font-weight: ${theme.font.weight.bold};
+    font-weight: ${theme.font.weight.medium};
     margin-right: ${theme.spacings.space8};
 
     @media (min-width: 768px) {
@@ -594,7 +607,7 @@ interface IImageProps {
   isAfter: boolean;
   isComplete: boolean;
 }
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const LineBetweenImages = styled.div<IImageProps>`
     background: ${props =>
       props.isComplete
@@ -665,10 +678,11 @@ export const Step = styled.div`
 `
 
 export const StepTitle = styled.div`
-  margin-top: 4.4rem;
+  margin-top: 2.4rem;
+  margin-bottom: 0.4rem;
 
   font-size: ${theme.font.sizes.font18};
-  font-weight: ${theme.font.weight.bold};
+  font-weight: ${theme.font.weight.medium};
 
   @media (max-width: 768px) {
     margin-top: 2.4rem;

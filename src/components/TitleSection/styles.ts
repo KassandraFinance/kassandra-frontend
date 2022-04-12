@@ -11,15 +11,16 @@ export const Title = styled.div<ITitleProps>`
 
   @media (max-width: 700px) {
     img {
-      width: 18px;
+      width: 1.8rem;
     }
   }
 
   h1 {
     line-height: ${theme.font.sizes.font32};
     font-size: ${theme.font.sizes.font32};
-    font-weight: ${theme.font.weight.bold};
-    margin-left: 20px;
+    font-weight: ${theme.font.weight.medium};
+
+    margin-left: 2rem;
 
     @media (max-width: 960px) {
       line-height: ${theme.font.sizes.font24};
@@ -29,7 +30,7 @@ export const Title = styled.div<ITitleProps>`
       line-height: ${theme.font.sizes.font18};
       font-size: ${theme.font.sizes.font18};
 
-      margin-left: 10px;
+      margin-left: 1rem;
     }
   }
 
@@ -40,16 +41,18 @@ export const Title = styled.div<ITitleProps>`
     font-weight: ${theme.font.weight.normal};
     text-transform: uppercase;
 
-    margin-top: 12px;
+    margin-top: 1.2rem;
     margin-left: ${theme.spacings.space48};
+
     @media (max-width: 960px) {
       font-size: ${theme.font.sizes.font14};
     }
+
     @media (max-width: 700px) {
       font-size: ${theme.font.sizes.font12};
 
       margin-top: ${theme.spacings.space8};
-      margin-left: 30px;
+      margin-left: 3rem;
     }
   }
 `

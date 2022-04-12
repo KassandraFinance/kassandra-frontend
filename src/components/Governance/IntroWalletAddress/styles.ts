@@ -36,6 +36,7 @@ export const WalletAddress = styled.div`
     line-height: ${theme.font.sizes.font32};
     font-size: ${theme.font.sizes.font32};
     font-weight: ${theme.font.weight.normal};
+
     @media (max-width: 992px) {
       line-height: ${theme.font.sizes.font24};
       font-size: ${theme.font.sizes.font24};
@@ -45,7 +46,7 @@ export const WalletAddress = styled.div`
 
 export const VoteWeightCard = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 
   width: 16rem;
@@ -60,8 +61,8 @@ export const VoteWeightCard = styled.div`
   border-radius: 1.2rem;
 
   @media (max-width: 992px) {
-    width: 12rem;
-    padding: 0.8rem 1.6rem;
+    width: 8.3rem;
+    padding: 0.8rem;
 
     font-size: ${theme.font.sizes.font12};
   }
@@ -72,11 +73,12 @@ export const VoteWeightCard = styled.div`
     width: 100%;
     height: 3rem;
     margin-top: 1.6rem;
+    border-radius: 0.8rem;
   }
 
   .font-bold {
     font-size: ${theme.font.sizes.font24};
-    font-weight: ${theme.font.weight.bold};
+    font-weight: ${theme.font.weight.medium};
 
     @media (max-width: 992px) {
       margin-top: 0.4rem;
@@ -95,11 +97,11 @@ export const VoteWeightCard = styled.div`
 export const VoteWeight = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   @media (max-width: 576px) {
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
 
     width: 100%;
   }
@@ -122,16 +124,13 @@ interface IHorizontalLineProps {
   none?: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
-export const HorizontalLine =
-  styled.div <
-  IHorizontalLineProps >
-  `
+// prettier-ignore
+export const HorizontalLine =styled.div<IHorizontalLineProps>`
   content: '';
   display: block;
 
   width: 0.1rem;
-  height: 5rem;
+  height: 100%;
 
   background: rgba(255, 255, 255, 0.2);
 
@@ -160,9 +159,9 @@ export const VerticalLine = styled.div`
 
 export const VotingPowerContent = styled.div`
   display: flex;
-  gap: ${theme.spacings.space32};
+  gap: ${theme.spacings.space24};
 
-  margin-top: ${theme.spacings.space32};
+  margin-top: ${theme.spacings.space24};
   @media (max-width: 1100px) {
     flex-direction: column;
   }
@@ -180,7 +179,7 @@ export const AllVotingPowerCard = styled.div`
   gap: 2.4rem;
 
   min-width: 75rem;
-  padding: 3.2rem;
+  padding: 2.3rem;
 
   align-items: center;
 
@@ -200,6 +199,7 @@ export const AllVotingPowerCard = styled.div`
 
   @media (max-width: 576px) {
     padding: 1.6rem;
+    border-radius: 0.8rem;
   }
 `
 
@@ -207,7 +207,7 @@ export const AddressTotalVotingPower = styled.div`
   display: flex;
   flex-direction: column;
 
-  padding: 3.2rem;
+  padding: 2.4rem;
   width: 100%;
 
   background: rgba(255, 255, 255, 0.04);
@@ -225,18 +225,18 @@ export const AddressTotalVotingPower = styled.div`
 
   @media (max-width: 576px) {
     flex-direction: row;
-
     justify-content: space-between;
+    border-radius: 0.8rem;
   }
 
   .address-total-voting-power {
     display: flex;
-    margin-bottom: 2rem;
+    margin-bottom: 0.7rem;
 
     color: ${theme.colors.grayDisabled};
     line-height: ${theme.font.sizes.font20};
-    font-size: ${theme.font.sizes.font16};
-    font-weight: ${theme.font.weight.bold};
+    font-size: ${theme.font.sizes.font14};
+    font-weight: ${theme.font.weight.medium};
 
     @media (max-width: 1100px) {
       font-size: ${theme.font.sizes.font16};
@@ -250,14 +250,15 @@ export const AddressTotalVotingPower = styled.div`
       margin-bottom: 0;
     }
     @media (max-width: 370px) {
-      max-width: 9.6rem;
+      max-width: 100rem;
     }
   }
+
   .value-total-voting-power {
     color: ${theme.colors.snow};
     line-height: ${theme.font.sizes.font32};
     font-size: ${theme.font.sizes.font32};
-    font-weight: ${theme.font.weight.bold};
+    font-weight: ${theme.font.weight.medium};
 
     @media (max-width: 1100px) {
       font-size: ${theme.font.sizes.font24};
@@ -281,9 +282,10 @@ export const Tooltip = styled.div`
 `
 
 export const ReceivedAndOwnedVotingPower = styled.div`
-  font-weight: ${theme.font.sizes.font16};
-  font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.medium};
+  font-size: ${theme.font.sizes.font14};
+  font-weight: ${theme.font.weight.medium};
+  text-transform: uppercase;
 
   .gray-color {
     color: ${theme.colors.grayDisabled};
@@ -324,7 +326,7 @@ export const ManageDelegation = styled.div`
     display: flex;
     justify-content: center;
 
-    margin-top: 1.2rem;
+    margin-top: 1.1rem;
     margin-bottom: 0;
   }
 

@@ -64,8 +64,8 @@ const Footer = () => (
                 <img
                   src="/assets/Discord.svg"
                   alt="Join our Discord community"
-                  width="32"
-                  height="32"
+                  width="20"
+                  height="20"
                 />
               </S.SocialIcon>
             </li>
@@ -78,8 +78,8 @@ const Footer = () => (
                 <img
                   src="/assets/telegram.svg"
                   alt="Join our Telegram group"
-                  width="32"
-                  height="32"
+                  width="20"
+                  height="20"
                 />
               </S.SocialIcon>
             </li>
@@ -92,8 +92,8 @@ const Footer = () => (
                 <img
                   src="/assets/Github.svg"
                   alt="Access our GitHub repository"
-                  width="32"
-                  height="32"
+                  width="20"
+                  height="20"
                 />
               </S.SocialIcon>
             </li>
@@ -106,8 +106,8 @@ const Footer = () => (
                 <img
                   src="/assets/Medium.svg"
                   alt="Read our Medium blog"
-                  width="32"
-                  height="32"
+                  width="20"
+                  height="20"
                 />
               </S.SocialIcon>
             </li>
@@ -120,8 +120,8 @@ const Footer = () => (
                 <img
                   src="/assets/Twitter.svg"
                   alt="Follow our Twitter feed"
-                  width="32"
-                  height="32"
+                  width="20"
+                  height="20"
                 />
               </S.SocialIcon>
             </li>
@@ -149,8 +149,8 @@ const Footer = () => (
               <img
                 src="/assets/Discord.svg"
                 alt="Join our Discord community"
-                width="32"
-                height="32"
+                width="20"
+                height="20"
               />
             </S.SocialIcon>
           </li>
@@ -163,8 +163,8 @@ const Footer = () => (
               <img
                 src="/assets/telegram.svg"
                 alt="Join our Telegram group"
-                width="32"
-                height="32"
+                width="20"
+                height="20"
               />
             </S.SocialIcon>
           </li>
@@ -177,8 +177,8 @@ const Footer = () => (
               <img
                 src="/assets/Github.svg"
                 alt="Access our GitHub repository"
-                width="32"
-                height="32"
+                width="20"
+                height="20"
               />
             </S.SocialIcon>
           </li>
@@ -191,8 +191,8 @@ const Footer = () => (
               <img
                 src="/assets/Medium.svg"
                 alt="Read our Medium blog"
-                width="32"
-                height="32"
+                width="20"
+                height="20"
               />
             </S.SocialIcon>
           </li>
@@ -205,8 +205,8 @@ const Footer = () => (
               <img
                 src="/assets/Twitter.svg"
                 alt="Follow our Twitter feed"
-                width="32"
-                height="32"
+                width="20"
+                height="20"
               />
             </S.SocialIcon>
           </li>

@@ -50,7 +50,7 @@ export const Status = styled.ul`
 
     font-size: ${theme.font.sizes.font16};
     line-height: ${theme.font.sizes.font16};
-    font-weight: ${theme.font.weight.bold};
+    font-weight: ${theme.font.weight.medium};
 
     @media (max-width: 960px) {
       font-size: ${theme.font.sizes.font14};
@@ -73,7 +73,7 @@ interface IProposalStateProps {
   ProposalState: string;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const ProposalStateList = styled.li<IProposalStateProps>`
   display: flex;
   justify-content: space-between;
@@ -84,7 +84,7 @@ export const ProposalStateList = styled.li<IProposalStateProps>`
   line-height: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.light};
 
-  border-bottom: 0.1rem solid ${theme.colors.grayDisabled};
+  border-bottom: 0.1rem solid rgba(255, 255, 255, 0.3);
 
   @media (max-width: 960px) {
     font-size: ${theme.font.sizes.font14};

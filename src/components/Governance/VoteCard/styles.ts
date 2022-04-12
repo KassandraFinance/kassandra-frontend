@@ -25,7 +25,7 @@ export const TextWrapper = styled.div`
 `
 export const TotalPercentage = styled.p`
   font-size: ${theme.font.sizes.font18};
-  font-weight: ${theme.font.weight.bold};
+  font-weight: ${theme.font.weight.medium};
   color: ${theme.colors.snow};
 `
 export const TotalVotes = styled.p`
@@ -86,7 +86,7 @@ interface IVoteBarProps {
   VotingState: string;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const ProgressBar = styled.progress<IVoteBarProps>`
   width: 100%;
   height: 0.6rem;
