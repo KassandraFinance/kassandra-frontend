@@ -867,31 +867,15 @@ const Proposal = () => {
                     <S.StepDate>{step.date}</S.StepDate>
                   </S.Step>
                   <S.LineBetweenImages
-                    isAfter={index === dataStatus.length - 1}
+                    isAfter={
+                      step.title === 'Queued' && step.completed === false
+                        ? true
+                        : index === dataStatus.length - 1
+                    }
                     isComplete={step.completed === true}
                   />
                 </React.Fragment>
               ))}
-              {/* {stepData.map((step, index) => (
-                <>
-                  <S.Step key={step.title + index}>
-                    {Date.parse(step.date) / 1000 >
-                    new Date().getTime() / 1000 ? (
-                      <Image src={proposalWaitingIcon} />
-                    ) : (
-                      <Image src={proposalCompleteIcon} />
-                    )}
-                    <S.StepTitle>{step.title}</S.StepTitle>
-                    <S.StepDate>{step.date}</S.StepDate>
-                  </S.Step>
-                  <S.LineBetweenImages
-                    isAfter={index === stepData.length - 1}
-                    isComplete={
-                      Date.parse(step.date) / 1000 < new Date().getTime() / 1000
-                    }
-                  />
-                </>
-              ))} */}
             </S.Steps>
           </S.ProposalStatus>
         </S.ProposalInfo>
@@ -923,36 +907,3 @@ const infoProposal = {
   starting: '22/10/2021, 1:28 PM',
   executeMax: '22/11/2021, 1:28 PM'
 }
-
-const stepData = [
-  {
-    title: 'Created',
-    completed: false,
-    date: '01/22/2022'
-  },
-  {
-    title: 'Active',
-    completed: false,
-    date: '01/22/2022'
-  },
-  {
-    title: 'Failed',
-    completed: false,
-    date: '02/22/2022',
-    allowChanges: true,
-    teste: {
-      Succeeded: 'Succeeded',
-      Failed: 'Failed'
-    }
-  },
-  {
-    title: 'Queued',
-    completed: false,
-    date: '02/22/2022'
-  },
-  {
-    title: 'Executed',
-    completed: false,
-    date: '04/22/2022'
-  }
-]
