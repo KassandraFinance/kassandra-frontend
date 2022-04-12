@@ -59,7 +59,13 @@ interface IRequestDataProposal {
       forVotes: Big,
       againstVotes: Big,
       startBlock: string,
+      created: string,
+      endBlock: string,
       quorum: string,
+      canceled: string,
+      queued: string,
+      executed: string,
+      eta: string,
       values: [],
       calldatas: [],
       signatures: [],
@@ -153,7 +159,7 @@ const Proposal = () => {
     against: '0'
   })
   const [proposalState, setProposalState] = React.useState<string>('')
-  const [dataStatus, setDataStatus] = React.useState<any[]>(stepData)
+  const [dataStatus, setDataStatus] = React.useState<any[]>([])
   const [userVoted, setUserVoted] = React.useState<IUserVotedProps>({
     voted: false,
     support: null,
@@ -161,7 +167,8 @@ const Proposal = () => {
     yourVotingPowerInProposal: new BigNumber(0)
   })
   // eslint-disable-next-line prettier/prettier
-  const [yourVotingPowerInProposal, setYourVotingPowerInProposal] = React.useState(new BigNumber(0))
+  const [yourVotingPowerInProposal, setYourVotingPowerInProposal] =
+    React.useState(new BigNumber(0))
 
   const router = useRouter()
   const governance = useGovernance(GovernorAlpha)
@@ -283,27 +290,289 @@ const Proposal = () => {
   }, [data, userWalletAddress])
 
   React.useEffect(() => {
-    function generateStatusHistoryArray() {
-      const arr = dataStatus.map(item =>
-        item.title.includes(proposalState)
-          ? { ...item, completed: true, title: proposalState }
-          : item
-      )
+    if (data) {
+      const { endBlock, startBlock, created, canceled, executed, queued, eta } =
+        data.proposal[0]
+      const defeated =
+        proposal.forVotes <= proposal.againstVotes ||
+        Number(proposal.forVotes) < Number(proposal.quorum)
+      const votacaoFechada =
+        (Number(endBlock) - Number(startBlock)) * 2 + Number(created)
 
-      const teste2 = arr.findIndex(item => item.completed === true)
+      const baseArray = [
+        {
+          title: 'Created',
+          completed: true,
+          date: new Date(Number(created) * 1000).toLocaleString().split(', ')[0]
+        },
+        {
+          title: 'Voting Open',
+          completed: true,
+          date: new Date(Number(created) * 1000).toLocaleString().split(', ')[0]
+        }
+      ]
 
-      const arrTrue = arr
-        .slice(0, teste2 + 1)
-        .map(item => ({ ...item, completed: true }))
-      const arrFalse = arr.slice(teste2 + 1)
+      const today = Date.now() / 1000
 
-      const arrModified = [...arrTrue, ...arrFalse]
+      const generateStatusHistoryArray = () => {
+        const isProposalASuccess = canceled === null
 
-      setDataStatus(arrModified)
+        if (!isProposalASuccess) {
+          return [
+            ...baseArray,
+            {
+              title: 'Cancelled',
+              completed: false,
+              date: new Date(Number(canceled) * 1000)
+                .toLocaleString()
+                .split(', ')[0]
+            }
+          ]
+        }
+
+        if (isProposalASuccess) {
+          if (queued !== null) {
+            if (executed !== null) {
+              return [
+                ...baseArray,
+                {
+                  title: 'Succeeded',
+                  completed: true,
+                  date: new Date(Number(data.proposal[0].created) * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                },
+                {
+                  title: 'Queued',
+                  completed: true,
+                  date: new Date(Number(queued) * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                },
+                {
+                  title: 'Executed',
+                  completed: true,
+                  date: new Date(Number(executed) * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                }
+              ]
+            }
+
+            if (Number(eta) < today) {
+              return [
+                ...baseArray,
+                {
+                  title: 'Succeeded',
+                  completed: true,
+                  date: new Date(Number(data.proposal[0].created) * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                },
+                {
+                  title: 'Queued',
+                  completed: true,
+                  date: new Date(Number(queued) * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                },
+                {
+                  title: 'Expired',
+                  completed: true,
+                  date: new Date(Number(eta) * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                }
+              ]
+            }
+
+            if (eta === null) {
+              return [
+                ...baseArray,
+                {
+                  title: 'Succeeded',
+                  completed: true,
+                  date: new Date(Number(data.proposal[0].created) * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                },
+                {
+                  title: 'Queued',
+                  completed: true,
+                  date: new Date(Number(queued) * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                },
+                {
+                  title: 'Executed',
+                  completed: false,
+                  date: ''
+                }
+              ]
+            }
+
+            return [
+              ...baseArray,
+              {
+                title: 'Succeeded',
+                completed: true,
+                date: new Date(Number(data.proposal[0].created) * 1000)
+                  .toLocaleString()
+                  .split(', ')[0]
+              },
+              {
+                title: 'Queued',
+                completed: true,
+                date: new Date(Number(queued) * 1000)
+                  .toLocaleString()
+                  .split(', ')[0]
+              },
+              {
+                title: 'Deadline',
+                completed: true,
+                date: new Date(Number(eta) * 1000)
+                  .toLocaleString()
+                  .split(', ')[0]
+              }
+            ]
+          } else {
+            if (executed !== null) {
+              return [
+                ...baseArray,
+                {
+                  title: 'Succeeded',
+                  completed: true,
+                  date: new Date(Number(data.proposal[0].created) * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                },
+                {
+                  title: 'Queued',
+                  completed: false,
+                  date: ''
+                },
+                {
+                  title: 'Executed',
+                  completed: true,
+                  date: new Date(Number(executed) * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                }
+              ]
+            }
+
+            if (Number(eta) < today) {
+              return [
+                ...baseArray,
+                {
+                  title: 'Succeeded',
+                  completed: true,
+                  date: new Date(Number(data.proposal[0].created) * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                },
+                {
+                  title: 'Queued',
+                  completed: false,
+                  date: ''
+                },
+                {
+                  title: 'Expired',
+                  completed: true,
+                  date: new Date(today - Number(eta) * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                }
+              ]
+            }
+
+            if (eta === null) {
+              return [
+                ...baseArray,
+                {
+                  title: 'Succeeded',
+                  completed: true,
+                  date: new Date(Number(data.proposal[0].created) * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                },
+                {
+                  title: 'Queued',
+                  completed: false,
+                  date: ''
+                },
+                {
+                  title: 'Executed',
+                  completed: false,
+                  date: ''
+                }
+              ]
+            }
+
+            return [
+              ...baseArray,
+              {
+                title: 'Succeeded',
+                completed: true,
+                date: new Date(Number(data.proposal[0].created) * 1000)
+                  .toLocaleString()
+                  .split(', ')[0]
+              },
+              {
+                title: 'Queued',
+                completed: false,
+                date: ''
+              }
+            ]
+          }
+        }
+
+        if (votacaoFechada < today) {
+          return [
+            ...baseArray,
+            {
+              title: 'Voting Ends',
+              completed: false,
+              date: new Date(Number(created) * 1000)
+                .toLocaleString()
+                .split(', ')[0]
+            },
+            {
+              title: 'Queued',
+              completed: true,
+              date: new Date(Number(queued) * 1000)
+                .toLocaleString()
+                .split(', ')[0]
+            },
+            {
+              title: 'Executed',
+              completed: true,
+              date: new Date(Number(executed) * 1000)
+                .toLocaleString()
+                .split(', ')[0]
+            }
+          ]
+        }
+
+        if (defeated) {
+          return [
+            ...baseArray,
+            {
+              title: 'Defeated',
+              completed: false,
+              date: ''
+            }
+          ]
+        }
+
+        return []
+      }
+
+      const array = generateStatusHistoryArray()
+
+      setDataStatus(array)
     }
-
-    generateStatusHistoryArray()
-  }, [proposalState])
+  }, [data])
 
   return (
     <>
@@ -383,7 +652,12 @@ const Proposal = () => {
                   voteType: 'For',
                   percentage: `${percentageVotes.for}`,
                   // eslint-disable-next-line prettier/prettier
-                  totalVotingPower: `${BNtoDecimal(proposal.forVotes, 0, 2, 2)}`,
+                  totalVotingPower: `${BNtoDecimal(
+                    proposal.forVotes,
+                    0,
+                    2,
+                    2
+                  )}`,
                   checkAllVoterModal: true
                 })
                 setIsModalOpen(true)
@@ -401,7 +675,12 @@ const Proposal = () => {
                   voteType: 'Against',
                   percentage: `${percentageVotes.against}`,
                   // eslint-disable-next-line prettier/prettier
-                  totalVotingPower: `${BNtoDecimal(proposal.againstVotes, 0, 2, 2)}`,
+                  totalVotingPower: `${BNtoDecimal(
+                    proposal.againstVotes,
+                    0,
+                    2,
+                    2
+                  )}`,
                   checkAllVoterModal: false
                 })
                 setIsModalOpen(true)
@@ -647,27 +926,32 @@ const infoProposal = {
 
 const stepData = [
   {
-    title: ['Created'],
+    title: 'Created',
     completed: false,
     date: '01/22/2022'
   },
   {
-    title: ['Active'],
+    title: 'Active',
     completed: false,
     date: '01/22/2022'
   },
   {
-    title: ['Succeeded', 'Failed'],
+    title: 'Failed',
+    completed: false,
+    date: '02/22/2022',
+    allowChanges: true,
+    teste: {
+      Succeeded: 'Succeeded',
+      Failed: 'Failed'
+    }
+  },
+  {
+    title: 'Queued',
     completed: false,
     date: '02/22/2022'
   },
   {
-    title: ['Queued'],
-    completed: false,
-    date: '02/22/2022'
-  },
-  {
-    title: ['Executed'],
+    title: 'Executed',
     completed: false,
     date: '04/22/2022'
   }
