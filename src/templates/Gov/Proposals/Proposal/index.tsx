@@ -867,11 +867,17 @@ const Proposal = () => {
                   </S.Step>
                   <S.LineBetweenImages
                     isAfter={
+                      index === dataStatus.length - 1
+                      // step.title === 'Queued' && step.completed === false
+                      //   ? true
+                      //   : index === dataStatus.length - 1
+                    }
+                    isComplete={
                       step.title === 'Queued' && step.completed === false
                         ? true
-                        : index === dataStatus.length - 1
+                        : step.completed === true
                     }
-                    isComplete={step.completed === true}
+                    // isComplete={step.completed === true}
                   />
                 </React.Fragment>
               ))}
