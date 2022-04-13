@@ -76,7 +76,10 @@ const ModalStaking = ({
 
     if (inputRef.current !== null) {
       // eslint-disable-next-line prettier/prettier
-      inputRef.current.value = BNtoDecimal(kacyAmount, 18).replace(/\u00A0/g, '')
+      inputRef.current.value = BNtoDecimal(kacyAmount, 18).replace(
+        /\u00A0/g,
+        ''
+      )
     }
 
     matomoEvent('click-value-btn', `${percentage.toString()}`)
@@ -84,8 +87,10 @@ const ModalStaking = ({
     setIsAmount(true)
   }
 
-  function handleConfirm() {
-    kacyStake.stake(pid, amountStaking, stakeCallback())
+  async function handleConfirm() {
+    const toDelegate = await kacyStake.userInfo(pid, userWalletAddress)
+
+    kacyStake.stake(pid, amountStaking, toDelegate.delegatee, stakeCallback())
   }
 
   async function get() {
