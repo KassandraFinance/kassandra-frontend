@@ -89,8 +89,12 @@ const ModalStaking = ({
 
   async function handleConfirm() {
     const toDelegate = await kacyStake.userInfo(pid, userWalletAddress)
+    const delegate =
+      toDelegate.delegatee === 0 ? userWalletAddress : toDelegate.delegatee
 
-    kacyStake.stake(pid, amountStaking, toDelegate.delegatee, stakeCallback())
+    console.log('Delegate: ', delegate)
+
+    kacyStake.stake(pid, amountStaking, delegate, stakeCallback())
   }
 
   async function get() {
