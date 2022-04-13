@@ -6,10 +6,7 @@ interface IVotingPowerProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const VotingPower =
-  styled.div <
-  IVotingPowerProps >
-  `
+export const VotingPower = styled.div<IVotingPowerProps>`
   padding: 1.6rem 2.4rem;
   width: 29rem;
 
@@ -36,8 +33,9 @@ export const YourVotingPower = styled.div`
     display: flex;
     align-items: center;
 
-    color: #bdbdbd;
+    color: #fcfcfc;
     font-size: ${theme.font.sizes.font14};
+    line-height: 1.6rem;
     font-weight: ${theme.font.weight.medium};
     text-transform: uppercase;
 
