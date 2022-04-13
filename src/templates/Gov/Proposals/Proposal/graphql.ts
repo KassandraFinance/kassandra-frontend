@@ -15,8 +15,10 @@ export const GET_PROPOSAL = gql`
       signatures
       targets
       created
-      eta
+      canceled
+      queued
       executed
+      eta
       proposer {
         id
       }
