@@ -4,7 +4,6 @@ import theme from '../../../../styles/theme'
 import * as VotingPowerStyles from '../../../../components/VotingPower/styles'
 import * as VoteCardStyle from '../../../../components/Governance/VoteCard/styles'
 import * as ButtonStyles from '../../../../components/Button/styles'
-import * as ExternalLinkStyles from '../../../../components/ExternalLink/styles'
 
 export const BackgroundVote = styled.div`
   padding-bottom: 8rem;
@@ -118,9 +117,10 @@ export const ProposeAuthorCard = styled.div`
     letter-spacing: 0.07rem;
   }
 `
-export const VotingPowerAndLink = styled.div`
+export const VotingPower = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: flex-end;
 
   @media (max-width: 670px) {
@@ -129,8 +129,6 @@ export const VotingPowerAndLink = styled.div`
   }
 
   ${VotingPowerStyles.VotingPower} {
-    margin-bottom: 1.2rem;
-
     @media (max-width: 768px) {
       width: 34.8rem;
       max-width: 100%;
@@ -138,14 +136,6 @@ export const VotingPowerAndLink = styled.div`
 
     @media (max-width: 670px) {
       width: 100%;
-    }
-  }
-
-  ${ExternalLinkStyles.Link} {
-    font-size: ${theme.font.sizes.font14};
-
-    @media (max-width: 670px) {
-      font-size: ${theme.font.sizes.font12};
     }
   }
 `
@@ -442,6 +432,9 @@ export const DataWrapper = styled.div`
   justify-content: space-between;
   margin-top: 1.2rem;
 
+  line-height: 1.2rem;
+  color: #c4c4c4;
+
   &:first-child {
     margin-top: 1.6rem;
   }
@@ -459,12 +452,13 @@ export const TextKey = styled.span`
 
 export const TextValue = styled.span`
   font-size: ${theme.font.sizes.font12};
-  font-weight: ${theme.font.weight.light};
+  font-weight: ${theme.font.weight.medium};
+  color: #fcfcfc;
   letter-spacing: 0.06rem;
 
   @media (min-width: 768px) {
     font-size: ${theme.font.sizes.font14};
-    line-height: 1.82rem;
+    line-height: 1.56rem;
     letter-spacing: 0.07rem;
   }
 `

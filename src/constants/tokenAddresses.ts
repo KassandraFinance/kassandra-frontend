@@ -83,7 +83,8 @@ export const chains: { [key: string]: ChainDetails } = {
       decimals: 18
     },
     rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
-    blockExplorerUrls: ['https://snowtrace.io/']
+    blockExplorerUrls: ['https://snowtrace.io/'],
+    secondsPerBlock: 2
   },
   fuji: {
     chainId: '0xa869',
@@ -94,7 +95,8 @@ export const chains: { [key: string]: ChainDetails } = {
       decimals: 18
     },
     rpcUrls: ['https://api.avax-test.network/ext/bc/C/rpc'],
-    blockExplorerUrls: ['https://testnet.snowtrace.io/']
+    blockExplorerUrls: ['https://testnet.snowtrace.io/'],
+    secondsPerBlock: 2
   }
 }
 

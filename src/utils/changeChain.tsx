@@ -10,6 +10,7 @@ export interface ChainDetails {
   nativeCurrency: CurrencyDetails;
   rpcUrls: [string];
   blockExplorerUrls: [string];
+  secondsPerBlock: number;
 }
 
 // eslint-disable-next-line prettier/prettier

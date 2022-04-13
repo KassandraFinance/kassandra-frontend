@@ -8,13 +8,13 @@ export const GET_PROPOSAL = gql`
       forVotes
       againstVotes
       startBlock
+      endBlock
       quorum
       values
       calldatas
       signatures
       targets
       created
-      endBlock
       canceled
       queued
       executed
