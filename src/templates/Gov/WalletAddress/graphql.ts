@@ -5,8 +5,27 @@ export const GET_USER = gql`
     user(id: $id) {
       votingPower
     }
-    governances {
-      totalVotingPower
+
+    delegations(where: { from: $id, votingPower_gt: 0 }) {
+      pool
+      votingPower
+      to {
+        id
+      }
+      from {
+        id
+      }
+    }
+
+    received: delegations(where: { to: $id, from_not: $id }) {
+      pool
+      votingPower
+      from {
+        id
+      }
+      to {
+        id
+      }
     }
   }
 `
