@@ -139,8 +139,6 @@ export const ProposalTable = () => {
                             src={proposal.state[2]}
                             alt=""
                             layout="responsive"
-                            // width={24}
-                            // height={24}
                           />
                         </div>
                       )}
@@ -153,70 +151,6 @@ export const ProposalTable = () => {
         </tbody>
       </table>
     </S.ProposalTable>
-    // <S.ProposalTable>
-    //   <S.Table>
-    //     <thead>
-    //       <S.Tr>
-    //         <S.Th className="proposal">Proposal</S.Th>
-    //         <S.Th className="status">Status/Time frame</S.Th>
-    //       </S.Tr>
-    //     </thead>
-    //     <tbody>
-    //       {proposalsList.map(proposal => (
-    //         <Link key={proposal.id} href={`/gov/proposals/${proposal.number}`}>
-    //           <S.Tr>
-    //             <S.Td className="proposal">
-    //               <S.TextProposal>
-    //                 {proposal.number.toString().padStart(2, '0')}{' '}
-    //                 {getTitleProposal(proposal.description)}
-    //               </S.TextProposal>
-    //               <S.StatusAndTimeframe>
-    //                 <S.StatusProposal
-    //                   statusColor={
-    //                     statsPrimaryProposalLibColor[
-    //                       proposal.state[0].toLowerCase()
-    //                     ]
-    //                   }
-    //                 >
-    //                   {proposal.state[0]}
-    //                 </S.StatusProposal>
-    //                 <S.TimeFrameMobile>
-    //                   {/* {item.timestamp} */}
-    //                 </S.TimeFrameMobile>
-    //               </S.StatusAndTimeframe>
-    //             </S.Td>
-    //             <S.Td className="status">
-    //               <S.TimeFrame>
-    //                 {/* End in {dateRequestUnstake(item.timestamp * 1000)} */}
-    //               </S.TimeFrame>
-    //               <S.StateMutability
-    //                 statusColor={
-    //                   statsSecundaryProposalLibColor[
-    //                     proposal.state[1].toLowerCase()
-    //                   ]
-    //                 }
-    //               >
-    //                 <span>{proposal.state[1]}</span>
-    //                 {proposal.state[2] && (
-    //                   <div className="status-icon-container">
-    //                     <Image
-    //                       className="status-icon"
-    //                       src={proposal.state[2]}
-    //                       alt=""
-    //                       layout="responsive"
-    //                       // width={24}
-    //                       // height={24}
-    //                     />
-    //                   </div>
-    //                 )}
-    //               </S.StateMutability>
-    //             </S.Td>
-    //           </S.Tr>
-    //         </Link>
-    //       ))}
-    //     </tbody>
-    //   </S.Table>
-    // </S.ProposalTable>
   )
 }
 
