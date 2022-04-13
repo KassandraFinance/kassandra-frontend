@@ -295,7 +295,7 @@ const Proposal = () => {
       const defeated =
         proposal.forVotes <= proposal.againstVotes ||
         Number(proposal.forVotes) < Number(proposal.quorum)
-      const votacaoFechada =
+      const votingClosed =
         (Number(endBlock) - Number(startBlock)) * 2 + Number(created)
 
       const baseArray = [
@@ -329,6 +329,40 @@ const Proposal = () => {
           ]
         }
 
+        if (defeated) {
+          return [
+            ...baseArray,
+            {
+              title: 'Defeated',
+              completed: true,
+              date: new Date(votingClosed * 1000)
+                .toLocaleString()
+                .split(', ')[0]
+            }
+          ]
+        }
+
+        if (votingClosed > today) {
+          return [
+            ...baseArray,
+            {
+              title: 'Voting Ends',
+              completed: true,
+              date: new Date(Number(created) * 1000)
+                .toLocaleString()
+                .split(', ')[0]
+            },
+            {
+              title: 'Queued',
+              completed: false
+            },
+            {
+              title: 'Executed',
+              completed: false
+            }
+          ]
+        }
+
         if (isProposalASuccess) {
           if (queued !== null) {
             if (executed !== null) {
@@ -337,7 +371,7 @@ const Proposal = () => {
                 {
                   title: 'Succeeded',
                   completed: true,
-                  date: new Date(Number(data.proposal[0].created) * 1000)
+                  date: new Date(votingClosed * 1000)
                     .toLocaleString()
                     .split(', ')[0]
                 },
@@ -364,7 +398,7 @@ const Proposal = () => {
                 {
                   title: 'Succeeded',
                   completed: true,
-                  date: new Date(Number(data.proposal[0].created) * 1000)
+                  date: new Date(votingClosed * 1000)
                     .toLocaleString()
                     .split(', ')[0]
                 },
@@ -391,7 +425,7 @@ const Proposal = () => {
                 {
                   title: 'Succeeded',
                   completed: true,
-                  date: new Date(Number(data.proposal[0].created) * 1000)
+                  date: new Date(votingClosed * 1000)
                     .toLocaleString()
                     .split(', ')[0]
                 },
@@ -415,7 +449,7 @@ const Proposal = () => {
               {
                 title: 'Succeeded',
                 completed: true,
-                date: new Date(Number(data.proposal[0].created) * 1000)
+                date: new Date(votingClosed * 1000)
                   .toLocaleString()
                   .split(', ')[0]
               },
@@ -441,7 +475,7 @@ const Proposal = () => {
                 {
                   title: 'Succeeded',
                   completed: true,
-                  date: new Date(Number(data.proposal[0].created) * 1000)
+                  date: new Date(votingClosed * 1000)
                     .toLocaleString()
                     .split(', ')[0]
                 },
@@ -460,38 +494,13 @@ const Proposal = () => {
               ]
             }
 
-            if (Number(eta) < today) {
-              return [
-                ...baseArray,
-                {
-                  title: 'Succeeded',
-                  completed: true,
-                  date: new Date(Number(data.proposal[0].created) * 1000)
-                    .toLocaleString()
-                    .split(', ')[0]
-                },
-                {
-                  title: 'Queued',
-                  completed: false,
-                  date: ''
-                },
-                {
-                  title: 'Expired',
-                  completed: true,
-                  date: new Date(today - Number(eta) * 1000)
-                    .toLocaleString()
-                    .split(', ')[0]
-                }
-              ]
-            }
-
             if (eta === null) {
               return [
                 ...baseArray,
                 {
                   title: 'Succeeded',
                   completed: true,
-                  date: new Date(Number(data.proposal[0].created) * 1000)
+                  date: new Date(votingClosed * 1000)
                     .toLocaleString()
                     .split(', ')[0]
                 },
@@ -508,12 +517,37 @@ const Proposal = () => {
               ]
             }
 
+            if (Number(eta) < today) {
+              return [
+                ...baseArray,
+                {
+                  title: 'Succeeded',
+                  completed: true,
+                  date: new Date(votingClosed * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                },
+                {
+                  title: 'Queued',
+                  completed: false,
+                  date: ''
+                },
+                {
+                  title: 'Expired',
+                  completed: true,
+                  date: new Date(Number(eta) * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                }
+              ]
+            }
+
             return [
               ...baseArray,
               {
                 title: 'Succeeded',
                 completed: true,
-                date: new Date(Number(data.proposal[0].created) * 1000)
+                date: new Date(votingClosed * 1000)
                   .toLocaleString()
                   .split(', ')[0]
               },
@@ -521,47 +555,16 @@ const Proposal = () => {
                 title: 'Queued',
                 completed: false,
                 date: ''
+              },
+              {
+                title: 'Deadline',
+                completed: true,
+                date: new Date(Number(eta) * 1000)
+                  .toLocaleString()
+                  .split(', ')[0]
               }
             ]
           }
-        }
-
-        if (votacaoFechada < today) {
-          return [
-            ...baseArray,
-            {
-              title: 'Voting Ends',
-              completed: false,
-              date: new Date(Number(created) * 1000)
-                .toLocaleString()
-                .split(', ')[0]
-            },
-            {
-              title: 'Queued',
-              completed: true,
-              date: new Date(Number(queued) * 1000)
-                .toLocaleString()
-                .split(', ')[0]
-            },
-            {
-              title: 'Executed',
-              completed: true,
-              date: new Date(Number(executed) * 1000)
-                .toLocaleString()
-                .split(', ')[0]
-            }
-          ]
-        }
-
-        if (defeated) {
-          return [
-            ...baseArray,
-            {
-              title: 'Defeated',
-              completed: false,
-              date: ''
-            }
-          ]
         }
 
         return []
@@ -571,7 +574,7 @@ const Proposal = () => {
 
       setDataStatus(array)
     }
-  }, [data])
+  }, [data, proposal.againstVotes, proposal.forVotes, proposal.quorum])
 
   return (
     <>
@@ -856,11 +859,13 @@ const Proposal = () => {
               {dataStatus.map((step, index) => (
                 <React.Fragment key={index}>
                   <S.Step>
-                    {step.completed === true ? (
-                      <Image src={proposalCompleteIcon} />
-                    ) : (
-                      <Image src={proposalWaitingIcon} />
-                    )}
+                    <S.StepImageContainer>
+                      {step.completed === true ? (
+                        <Image src={proposalCompleteIcon} layout="responsive" />
+                      ) : (
+                        <Image src={proposalWaitingIcon} layout="responsive" />
+                      )}
+                    </S.StepImageContainer>
 
                     <S.StepTitle>{step.title}</S.StepTitle>
                     <S.StepDate>{step.date}</S.StepDate>
