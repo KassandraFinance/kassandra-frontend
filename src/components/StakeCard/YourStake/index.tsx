@@ -4,10 +4,12 @@ import React from 'react'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 
-import { PoolInfo } from '../../../hooks/useStakingContract'
+import { Staking } from '../../../constants/tokenAddresses'
+import useStakingContract, { PoolInfo } from '../../../hooks/useStakingContract'
 
 import { getDate } from '../../../utils/date'
 import { BNtoDecimal } from '../../../utils/numerals'
+import substr from '../../../utils/substr'
 
 import * as S from './styles'
 import { IInfoStaked, IPriceLPToken } from '..'
@@ -43,6 +45,10 @@ const YourStake = ({
   lockPeriod,
   availableWithdraw
 }: IYourStakeProps) => {
+  const kacyStake = useStakingContract(Staking)
+
+  const [delegateTo, setDelegateTo] = React.useState<string>('')
+
   const getYourStake = React.useCallback(async () => {
     const poolInfoResponse = await poolInfo(pid)
 
@@ -134,6 +140,16 @@ const YourStake = ({
     return () => clearInterval(interval)
   }, [getYourStake])
 
+  React.useEffect(() => {
+    const delegateInfo = async () => {
+      const delegate = await kacyStake.userInfo(pid, userWalletAddress)
+      setDelegateTo(delegate.delegatee)
+    }
+    if (userWalletAddress) {
+      delegateInfo()
+    }
+  }, [])
+
   return userWalletAddress ? (
     <>
       <S.Info>
@@ -178,7 +194,7 @@ const YourStake = ({
       {!stakeWithVotingPower && (
         <>
           <S.Info>
-            <span>Your voting power</span>
+            <span>Pool Voting Power</span>
             <span>
               {infoStaked.yourStake.lt(new BigNumber(0))
                 ? '...'
@@ -191,6 +207,12 @@ const YourStake = ({
                     18,
                     2
                   )}
+            </span>
+          </S.Info>
+          <S.Info>
+            <span>Delegated To</span>
+            <span>
+              {delegateTo === userWalletAddress ? 'Self' : substr(delegateTo)}
             </span>
           </S.Info>
         </>
