@@ -140,10 +140,13 @@ const IntroWalletAddress = () => {
             <S.VerticalLine />
             <S.ManageDelegation>
               <Button
-                onClick={() => setIsModalManageVotingPower(true)}
                 size="large"
                 text="Manage Delegation"
                 backgroundSecondary
+                disabledNoEvent={
+                  address !== userWalletAddress || !userWalletAddress
+                }
+                onClick={() => setIsModalManageVotingPower(true)}
               />
               <ExternalLink text="Obtain Voting Power" hrefNext="#" />
             </S.ManageDelegation>

@@ -4,6 +4,7 @@ import WalletConnect from '@walletconnect/client'
 import QRCodeModal from '@walletconnect/qrcode-modal'
 import React from 'react'
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
+import { toChecksumAddress } from 'web3-utils'
 import { ToastError, ToastSuccess } from '../components/Toastify/toast'
 import { actionSetChainId } from '../store/modules/chainId/actions'
 
@@ -30,7 +31,7 @@ const useConnect = () => {
       if (accounts.length === 0 || accounts[0] === undefined) {
         dispatch(actionGetUserAddressWallet(''))
       } else if (accounts[0] !== userWalletAddress) {
-        dispatch(actionGetUserAddressWallet(accounts[0]))
+        dispatch(actionGetUserAddressWallet(toChecksumAddress(accounts[0])))
       }
     } catch (error: any) {
       console.log(error)
