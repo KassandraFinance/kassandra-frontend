@@ -866,18 +866,12 @@ const Proposal = () => {
                     <S.StepDate>{step.date}</S.StepDate>
                   </S.Step>
                   <S.LineBetweenImages
-                    isAfter={
-                      index === dataStatus.length - 1
-                      // step.title === 'Queued' && step.completed === false
-                      //   ? true
-                      //   : index === dataStatus.length - 1
-                    }
+                    isAfter={index === dataStatus.length - 1}
                     isComplete={
                       step.title === 'Queued' && step.completed === false
                         ? true
                         : step.completed === true
                     }
-                    // isComplete={step.completed === true}
                   />
                 </React.Fragment>
               ))}
