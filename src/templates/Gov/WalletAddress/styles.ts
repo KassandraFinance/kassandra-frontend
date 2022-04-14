@@ -15,6 +15,7 @@ export const BackgroundVote = styled.div`
 export const VoteContent = styled.div`
   max-width: 1140px;
   margin: 0 auto;
+  margin-bottom: 10rem;
 
   @media (max-width: 1200px) {
     padding: 0 30px;

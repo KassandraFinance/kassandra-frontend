@@ -21,6 +21,7 @@ import AnyCard from '../../../components/Governance/AnyCard'
 import Breadcrumb from '../../../components/Breadcrumb'
 import BreadcrumbItem from '../../../components/Breadcrumb/BreadcrumbItem'
 import OwnAndReceivedTable from '../../../components/Governance/OwnAndReceivedTable'
+import UserTableVotingHistory from '../../../components/Governance/UserTableVotingHistory'
 
 import proposals from '../../../../public/assets/iconGradient/proposals.svg'
 import votingPoweRrank from '../../../../public/assets/iconGradient/voting-power-rank.svg'
@@ -196,19 +197,11 @@ const WalletAddress = () => {
             <Image src={externalLink} alt="" />
           </S.LinkForum>
         </S.TitleAndLinkContent>
-        {hasVotingPower ? (
-          <></>
-        ) : userWalletAddress ? (
-          <AnyCard
-            text="To obtain voting power you need to have KACY staked"
-            button={true}
-          />
-        ) : (
-          <AnyCard
-            text="This address doesn’t seem to have any KACY staked"
-            button={false}
-          />
-        )}
+
+        <UserTableVotingHistory
+          userAddressUrl={address}
+          userWalletAddress={userWalletAddress}
+        />
       </S.VoteContent>
     </S.BackgroundVote>
   )
