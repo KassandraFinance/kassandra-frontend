@@ -142,7 +142,7 @@ const Details = ({
         <span>{infoStakeStatic.startDate}</span>
       </S.Info>
       <S.Info>
-        <span>End date</span>
+        <span>Rewards Update</span>
         <span>{infoStakeStatic.endDate}</span>
       </S.Info>
       <S.Info>
