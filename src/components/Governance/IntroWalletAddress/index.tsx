@@ -30,7 +30,13 @@ import { GET_USER } from './graphql'
 
 import * as S from './styles'
 
-const IntroWalletAddress = () => {
+type IIntroWalletAddressProps = {
+  userReceivedTotal: Big,
+  userDelegatingTotal: Big
+}
+
+// eslint-disable-next-line prettier/prettier
+const IntroWalletAddress = ({ userReceivedTotal, userDelegatingTotal }: IIntroWalletAddressProps) => {
   // eslint-disable-next-line prettier/prettier
   const [isModalManageVotingPower, setIsModalManageVotingPower] = React.useState<boolean>(false)
   // eslint-disable-next-line prettier/prettier
@@ -129,11 +135,19 @@ const IntroWalletAddress = () => {
             <S.ReceivedAndOwnedVotingPower>
               <S.OwnedVotingPower>
                 <span className="gray-color">Owned Voting Power</span>
-                <span className="bold">456.789</span>
+                <span className="bold">
+                  {userDelegatingTotal
+                    ? BNtoDecimal(userDelegatingTotal, 18, 2)
+                    : 0}
+                </span>
               </S.OwnedVotingPower>
               <S.ReceivedVotingPower>
                 <span className="gray-color">Received Voting Power</span>
-                <span className="bold">123,000.000</span>
+                <span className="bold">
+                  {userReceivedTotal
+                    ? BNtoDecimal(userReceivedTotal, 18, 2)
+                    : 0}
+                </span>
               </S.ReceivedVotingPower>
             </S.ReceivedAndOwnedVotingPower>
             <S.HorizontalLine none={true} />

@@ -16,7 +16,7 @@ import * as S from './styles'
 
 interface IUserVotingPowerProps {
   pool: string;
-  votingPower: BigNumber;
+  votingPower: Big;
   kacy: Big;
   from: {
     id: string

@@ -33,7 +33,7 @@ import * as S from './styles'
 
 interface IUserVotingPowerProps {
   pool: string;
-  votingPower: BigNumber;
+  votingPower: Big;
   kacy: Big;
   from: {
     id: string
@@ -45,6 +45,9 @@ interface IUserVotingPowerProps {
 
 const WalletAddress = () => {
   const [hasVotingPower, setHasVotingPower] = React.useState<boolean>(false)
+  const [totalUserReceived, setUserReceived] = React.useState(Big(0))
+  // eslint-disable-next-line prettier/prettier
+  const [totalUserDelegating, setUserDelegating] = React.useState(Big(0))
   // eslint-disable-next-line prettier/prettier
   const [userReceivedFromVP, setUserReceivedFromVP] = React.useState<IUserVotingPowerProps[]>([])
   // eslint-disable-next-line prettier/prettier
@@ -73,8 +76,10 @@ const WalletAddress = () => {
 
   async function handleFromDelegated() {
     if (data) {
+      let receivedTotal = Big(0)
       const receivedToVP = await Promise.all(
         data.received.map(async (prop: IUserVotingPowerProps) => {
+          receivedTotal = receivedTotal.add(prop.votingPower)
           return {
             pool: prop.pool,
             votingPower: prop.votingPower,
@@ -88,15 +93,17 @@ const WalletAddress = () => {
           }
         })
       )
-
+      setUserReceived(receivedTotal)
       setUserReceivedFromVP(receivedToVP)
     }
   }
 
   async function handleRereceived() {
     if (data) {
+      let delegatingToTotal = Big(0)
       const delegatingToVP = await Promise.all(
         data.delegations.map(async (prop: IUserVotingPowerProps) => {
+          delegatingToTotal = delegatingToTotal.add(prop.votingPower)
           return {
             pool: prop.pool,
             votingPower: prop.votingPower,
@@ -108,6 +115,7 @@ const WalletAddress = () => {
         })
       )
 
+      setUserDelegating(delegatingToTotal)
       setUserDelegatingToVP(delegatingToVP)
     }
   }
@@ -142,7 +150,10 @@ const WalletAddress = () => {
         </BreadcrumbItem>
       </Breadcrumb>
       <S.VoteContent>
-        <IntroWalletAddress />
+        <IntroWalletAddress
+          userDelegatingTotal={totalUserDelegating}
+          userReceivedTotal={totalUserReceived}
+        />
 
         {/* Owned Voting Power */}
         <TitleSection
