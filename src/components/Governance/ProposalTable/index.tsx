@@ -4,7 +4,11 @@ import Image from 'next/image'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
 
-import { GovernorAlpha, SUBGRAPH_URL } from '../../../constants/tokenAddresses'
+import {
+  chains,
+  GovernorAlpha,
+  SUBGRAPH_URL
+} from '../../../constants/tokenAddresses'
 
 import useGovernance from '../../../hooks/useGovernance'
 
@@ -36,8 +40,11 @@ interface IProposalsListProps {
   values: [];
   signatures: [];
   startBlock: string;
+  endBlock: string;
   description: string;
+  created: string;
   state: any[];
+  timeToEndProposal: string;
 }
 
 export const ProposalTable = () => {
@@ -45,6 +52,10 @@ export const ProposalTable = () => {
   const [proposalsList, setProposalsList] = React.useState<
     Array<IProposalsListProps>
   >([])
+
+  const secondsPerBlock =
+    chains[process.env.NEXT_PUBLIC_MASTER === '1' ? 'avalanche' : 'fuji']
+      .secondsPerBlock
 
   const { data } = useSWR([GET_PROPOSALS], query =>
     request(SUBGRAPH_URL, query)
@@ -55,6 +66,16 @@ export const ProposalTable = () => {
   async function handleAddStateOnProposal(proposals: IProposalsListProps[]) {
     const proposal = proposals.map((proposal: IProposalsListProps) =>
       governance.stateProposals(proposal.number).then(res => {
+        const createdProposal = new Date(Number(proposal.created) * 1000)
+        const secondsToEndProposal =
+          (Number(proposal.endBlock) - Number(proposal.startBlock)) *
+          secondsPerBlock
+
+        proposal.timeToEndProposal = new Date(
+          Number(createdProposal) + secondsToEndProposal * 1000
+        )
+          .toLocaleString()
+          .split(', ')[0]
         proposal.state = res
         return proposal
       })
@@ -120,8 +141,7 @@ export const ProposalTable = () => {
                     </S.StatusProposal>
 
                     <S.TimeFrame>
-                      Ends in N days
-                      {/* End in {dateRequestUnstake(item.timestamp * 1000)} */}
+                      {proposal.state[1]} ends {proposal.timeToEndProposal}
                     </S.TimeFrame>
 
                     <S.StateMutability
