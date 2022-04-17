@@ -64,10 +64,15 @@ export interface ProductDetails {
 
 export type ProductSymbols = keyof typeof products;
 
-export const SUBGRAPH_URL = 
-  `https://graph.kassandra.finance/subgraphs/name/${
-    process.env.NEXT_PUBLIC_MASTER === '1' ? 'KassandraAvalanche' : 'KassandraFuji'}`
 
+const KASSANDRA_SUBGRAPH = 
+`https://graph.kassandra.finance/subgraphs/name/${
+  process.env.NEXT_PUBLIC_MASTER === '1' ? 'KassandraAvalanche' : 'KassandraFuji'}`
+  
+export const SUBGRAPH_URL = process.env.NODE_ENV
+  ? 'http://localhost/subgraphs/name/KassandraFuji'
+  : KASSANDRA_SUBGRAPH
+  
 export const chains: { [key: string]: ChainDetails } = {
   avalanche: {
     chainId: '0xa86a',
@@ -78,7 +83,8 @@ export const chains: { [key: string]: ChainDetails } = {
       decimals: 18
     },
     rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
-    blockExplorerUrls: ['https://snowtrace.io/']
+    blockExplorerUrls: ['https://snowtrace.io/'],
+    secondsPerBlock: 2
   },
   fuji: {
     chainId: '0xa869',
@@ -89,7 +95,8 @@ export const chains: { [key: string]: ChainDetails } = {
       decimals: 18
     },
     rpcUrls: ['https://api.avax-test.network/ext/bc/C/rpc'],
-    blockExplorerUrls: ['https://testnet.snowtrace.io/']
+    blockExplorerUrls: ['https://testnet.snowtrace.io/'],
+    secondsPerBlock: 2
   }
 }
 

@@ -1,6 +1,11 @@
 import Image from 'next/image'
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
+
+import substr from '../../../../utils/substr'
 
 import { IDateProps } from '../DelegateVotingPower'
+
+import logo from '../../../../../public/assets/logo-64.svg'
 
 import * as S from '../styles'
 
@@ -27,7 +32,7 @@ const Options = ({
         onClick={() => {
           if (delegateSelected.nameToken !== '') {
             setDelegateSelected({
-              image: '',
+              pid: 0,
               nameToken: '',
               withdrawDelay: '',
               votingPower: ''
@@ -40,25 +45,42 @@ const Options = ({
       />
       <S.Modal isOpenOption={optionsOpen} undelegate={undelegate}>
         {data.map((item: any, index: number) => (
-          <S.Option
-            key={index}
-            onClick={() => {
-              setDelegateSelected(item)
-              setOptionsOpen(false)
-            }}
-          >
-            <S.Name>
-              <Image src={item.image} alt="" />
-              <S.WithdrawDelay>
-                <p>{item.nameToken}</p>
-                <span>{item.withdrawDelay} days withdraw delay</span>
-              </S.WithdrawDelay>
-            </S.Name>
-            <S.VotingPower>
-              <p>{item.votingPower}</p>
-              <span>Voting power</span>
-            </S.VotingPower>
-          </S.Option>
+          <>
+            {item.msg ? (
+              <></>
+            ) : (
+              <S.Option
+                key={index}
+                onClick={() => {
+                  setDelegateSelected(item)
+                  setOptionsOpen(false)
+                }}
+              >
+                <S.Name>
+                  {undelegate ? (
+                    <Jazzicon
+                      diameter={24}
+                      seed={jsNumberForAddress(item.nameToken)}
+                    />
+                  ) : (
+                    <Image src={logo} width={24} height={24} alt="" />
+                  )}
+                  <S.WithdrawDelay>
+                    {undelegate ? (
+                      <p>{substr(item.nameToken)}</p>
+                    ) : (
+                      <p>{item.nameToken}</p>
+                    )}
+                    <span>{item.withdrawDelay} days withdraw delay</span>
+                  </S.WithdrawDelay>
+                </S.Name>
+                <S.VotingPower>
+                  <p>{item.votingPower}</p>
+                  <span>Voting power</span>
+                </S.VotingPower>
+              </S.Option>
+            )}
+          </>
         ))}
       </S.Modal>
     </>

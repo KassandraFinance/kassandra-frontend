@@ -1,55 +1,79 @@
-import React, { PureComponent } from 'react'
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts'
+import React from 'react'
+import { PieChart, Pie, Cell } from 'recharts'
+
+import { IStateProposalListProps } from '.'
 
 import * as S from './styles'
 
-const data = [
-  { name: 'Group A', value: 55 },
-  { name: 'Group B', value: 25 },
-  { name: 'Group C', value: 10 }
-]
-const COLORS = ['#2CE878', '#E843C4', '#E8372C']
+interface ProposalDataProps {
+  proposalData: IStateProposalListProps[];
+  proposalTotal: number;
+}
 
-const Index = () => {
-  const [width, setWidth] = React.useState(128)
-  const [innerRadius, setInnerRadius] = React.useState(48)
-  const [outerRadius, setOuterRadius] = React.useState(62)
+const chartProps = {
+  width: 128,
+  innerRadius: 48,
+  outerRadius: 62
+}
+
+const Chart = ({ proposalData, proposalTotal }: ProposalDataProps) => {
+  // eslint-disable-next-line prettier/prettier
+  const [proposalStateData, setProposalStateData] = React.useState([{ name: '', value: 0, fill: '' }])
+
+  const handleCheckChartColor = (ProspData: IStateProposalListProps) => {
+    switch (ProspData.stateProposal) {
+      case 'Failed':
+        return '#E8372C'
+      case 'Active':
+        return '#E843C4'
+      case 'Succeeded':
+        return '#2CE878'
+      default:
+        return 'white'
+    }
+  }
 
   React.useEffect(() => {
-    const widthDevice = window.screen.width
+    setProposalStateData([])
 
-    if (widthDevice < 961) {
-      setWidth(104)
-      setInnerRadius(38)
-      setOuterRadius(48)
-    } else {
-      setWidth(128)
-      setInnerRadius(48)
-      setOuterRadius(62)
-    }
-  }, [])
+    proposalData.map(ProspData => {
+      setProposalStateData(prevState => [
+        ...prevState,
+        {
+          name: ProspData.stateProposal,
+          value: ProspData.proposalVote,
+          fill: handleCheckChartColor(ProspData)
+        }
+      ])
+    })
+  }, [proposalData])
 
   return (
     <>
-      <PieChart className="pie-chart" width={width} height={width}>
+      <PieChart
+        className="pie-chart"
+        width={chartProps.width}
+        height={chartProps.width}
+      >
         <Pie
-          data={data}
-          innerRadius={innerRadius}
-          outerRadius={outerRadius}
+          data={proposalStateData}
+          innerRadius={chartProps.innerRadius}
+          outerRadius={chartProps.outerRadius}
           paddingAngle={0}
+          stroke="null"
           dataKey="value"
         >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          {proposalStateData.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={entry.fill} />
           ))}
         </Pie>
       </PieChart>
       <S.Total>
         <span className="total">Total</span>
-        <span className="value">10</span>
+        <span className="value">{proposalTotal}</span>
       </S.Total>
     </>
   )
 }
 
-export default Index
+export default Chart

@@ -228,7 +228,7 @@ const ChartProducts = () => {
       </S.Selects>
       {loading ? (
         <S.Wrapper>
-          <Loading />
+          <Loading marginTop={14} />
         </S.Wrapper>
       ) : null}
       {inputChecked === 'Price' && !loading && (
