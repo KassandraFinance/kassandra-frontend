@@ -21,7 +21,7 @@ import substr from '../../../utils/substr'
 
 import Button from '../../../components/Button'
 import ExternalLink from '../../../components/ExternalLink'
-import ModalWalletConnect from '../../ModalWalletConnect'
+import ModalWalletConnect from '../../Modals/ModalWalletConnect'
 import ModalManageVotingPower from '../ModalManageVotingPower'
 
 import tooltip from '../../../../public/assets/icons/tooltip.svg'
@@ -189,10 +189,7 @@ const IntroWalletAddress = ({ userReceivedTotal, userDelegatingTotal }: IIntroWa
         />
       )}
       {isModalWalletConnect && (
-        <ModalWalletConnect
-          modalOpen={isModalWalletConnect}
-          setModalOpen={setIsModalWalletConnect}
-        />
+        <ModalWalletConnect setModalOpen={setIsModalWalletConnect} />
       )}
     </>
   )
