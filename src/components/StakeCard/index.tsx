@@ -330,7 +330,11 @@ const StakeCard = ({
                 <img src="/assets/logo-kacy-stake.svg" alt="" />
               ) : null}
               {symbol === 'ahype' ? (
-                <img src="/assets/ahype.svg" alt="" style={{ width: '58px' }} />
+                <img
+                  src="/assets/icons/ahype-stake.svg"
+                  alt=""
+                  style={{ width: '5.8rem' }}
+                />
               ) : null}
               {symbol === 'lp' ? (
                 <img src="/assets/icons/lp-icon.svg" alt="" width={144} />
