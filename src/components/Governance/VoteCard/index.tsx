@@ -27,6 +27,16 @@ const VoteCard = ({
   onClickLink,
   handleVote
 }: IVoteCardProps) => {
+  function getTextButton(typeVote: string) {
+    if (typeVote === 'For') {
+      if (userVote.voted && userVote.support) return 'Voted in Favor'
+      return 'Vote in Favor'
+    }
+    if (typeVote !== 'For') {
+      if (userVote.voted && !userVote.support) return 'Voted Against'
+      return 'Vote Against'
+    }
+  }
   return (
     <>
       <S.Container>
@@ -41,7 +51,7 @@ const VoteCard = ({
         </S.VoteBar>
         <S.ActionWrapper>
           <Button
-            text={typeVote === 'For' ? 'Vote in Favor' : 'Vote Against'}
+            text={getTextButton(typeVote)}
             backgroundVote={{
               voteState: checkVoteButton(userVote, proposalState, typeVote),
               type: typeVote
