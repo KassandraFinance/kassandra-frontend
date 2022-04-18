@@ -69,9 +69,11 @@ const WalletAddress = () => {
 
   async function getAmountKacy(pool: string, address: string | undefined) {
     const poolNumber = Number(pool)
-    const value = await userInfo(poolNumber, address)
-
-    return Big(value.amount).div(Big(10).pow(18))
+    if (userWalletAddress) {
+      const value = await userInfo(poolNumber, address)
+      return Big(value.amount).div(Big(10).pow(18))
+    }
+    return
   }
 
   async function handleFromDelegated() {
