@@ -11,8 +11,22 @@ export const Table = styled.table`
   font-size: ${theme.font.sizes.font14};
   border-radius: 2rem;
 
+  border-collapse: collapse;
   text-indent: initial;
   overflow: hidden;
+
+  ::-webkit-scrollbar {
+    height: 0.5rem;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+  }
+
+  @media (max-width: 960px) {
+    display: block;
+    overflow: auto;
+  }
 
   thead {
     width: 100%;
@@ -36,6 +50,10 @@ export const Tr = styled.tr`
   padding: 2.4rem 0;
 
   border-top: 1px solid ${theme.colors.grayDisabled};
+
+  @media (max-width: 960px) {
+    min-width: 960px;
+  }
 
   :first-child {
     border: none;
@@ -80,10 +98,6 @@ export const Tr = styled.tr`
       margin-left: 0.8rem;
       font-size: ${theme.font.sizes.font14};
       font-weight: ${theme.font.weight.light};
-
-      @media (max-width: 540px) {
-        margin-left: 8px;
-      }
     }
   }
 

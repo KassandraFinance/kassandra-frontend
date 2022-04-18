@@ -89,9 +89,15 @@ const ModalStakeAndWithdraw = ({
     setIsAmount(true)
   }
 
-  function handleConfirm() {
+  async function handleConfirm() {
     if (stakeTransaction === 'staking') {
-      kacyStake.stake(pid, amountStake, stakeCallback())
+      const toDelegate = await kacyStake.userInfo(pid, userWalletAddress)
+      const delegate =
+        toDelegate.delegatee === '0x0000000000000000000000000000000000000000'
+          ? userWalletAddress
+          : toDelegate.delegatee
+
+      kacyStake.stake(pid, amountStake, delegate, stakeCallback())
     } else if (stakeTransaction === 'unstaking') {
       kacyStake.withdraw(pid, amountStake, withdrawCallback())
     }

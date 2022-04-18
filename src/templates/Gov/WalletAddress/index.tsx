@@ -5,10 +5,12 @@ import { useSelector, RootStateOrAny } from 'react-redux'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
 import BigNumber from 'bn.js'
+import Big from 'big.js'
 
 import { SUBGRAPH_URL, Staking } from '../../../constants/tokenAddresses'
 
 import useVotingPower from '../../../hooks/useVotingPower'
+import useStakingContract from '../../../hooks/useStakingContract'
 
 import { GET_USER } from './graphql'
 
@@ -19,16 +21,42 @@ import AnyCard from '../../../components/Governance/AnyCard'
 import Breadcrumb from '../../../components/Breadcrumb'
 import BreadcrumbItem from '../../../components/Breadcrumb/BreadcrumbItem'
 import OwnAndReceivedTable from '../../../components/Governance/OwnAndReceivedTable'
+import UserTableVotingHistory from '../../../components/Governance/UserTableVotingHistory'
 
 import proposals from '../../../../public/assets/iconGradient/proposals.svg'
+import votingPoweRrank from '../../../../public/assets/iconGradient/voting-power-rank.svg'
+import stakingPools from '../../../../public/assets/iconGradient/stakingPools.svg'
+
 import externalLink from '../../../../public/assets/icons/external-link.svg'
 
 import * as S from './styles'
 
+interface IUserVotingPowerProps {
+  pool: string;
+  votingPower: Big;
+  kacy: Big;
+  from: {
+    id: string
+  };
+  to: {
+    id: string
+  };
+}
+
 const WalletAddress = () => {
   const [hasVotingPower, setHasVotingPower] = React.useState<boolean>(false)
+  const [totalUserReceived, setUserReceived] = React.useState(Big(0))
+  // eslint-disable-next-line prettier/prettier
+  const [totalUserDelegating, setUserDelegating] = React.useState(Big(0))
+  // eslint-disable-next-line prettier/prettier
+  const [userReceivedFromVP, setUserReceivedFromVP] = React.useState<IUserVotingPowerProps[]>([])
+  // eslint-disable-next-line prettier/prettier
+  const [userDelegatingToVP, setUserDelegatingToVP] = React.useState<IUserVotingPowerProps[]>([])
+
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+
   const votingPower = useVotingPower(Staking)
+  const { userInfo } = useStakingContract(Staking)
 
   const router = useRouter()
   const { address } = router.query
@@ -38,6 +66,59 @@ const WalletAddress = () => {
       id: address
     })
   )
+
+  async function getAmountKacy(pool: string, address: string | undefined) {
+    const poolNumber = Number(pool)
+    const value = await userInfo(poolNumber, address)
+
+    return Big(value.amount).div(Big(10).pow(18))
+  }
+
+  async function handleFromDelegated() {
+    if (data) {
+      let receivedTotal = Big(0)
+      const receivedToVP = await Promise.all(
+        data.received.map(async (prop: IUserVotingPowerProps) => {
+          receivedTotal = receivedTotal.add(prop.votingPower)
+          return {
+            pool: prop.pool,
+            votingPower: prop.votingPower,
+            kacy: await getAmountKacy(prop.pool, prop.from?.id),
+            from: {
+              id: prop.from?.id
+            },
+            to: {
+              id: prop.to.id
+            }
+          }
+        })
+      )
+      setUserReceived(receivedTotal)
+      setUserReceivedFromVP(receivedToVP)
+    }
+  }
+
+  async function handleRereceived() {
+    if (data) {
+      let delegatingToTotal = Big(0)
+      const delegatingToVP = await Promise.all(
+        data.delegations.map(async (prop: IUserVotingPowerProps) => {
+          delegatingToTotal = delegatingToTotal.add(prop.votingPower)
+          return {
+            pool: prop.pool,
+            votingPower: prop.votingPower,
+            kacy: await getAmountKacy(prop.pool, prop.from?.id),
+            to: {
+              id: prop.to.id
+            }
+          }
+        })
+      )
+
+      setUserDelegating(delegatingToTotal)
+      setUserDelegatingToVP(delegatingToVP)
+    }
+  }
 
   async function handleCheckVotingPower() {
     const votingPowerValue = await votingPower.currentVotes(address)
@@ -51,7 +132,12 @@ const WalletAddress = () => {
 
   React.useEffect(() => {
     handleCheckVotingPower()
-  }, [data])
+
+    if (data) {
+      handleFromDelegated()
+      handleRereceived()
+    }
+  }, [data, userWalletAddress, address])
 
   return (
     <S.BackgroundVote>
@@ -64,20 +150,21 @@ const WalletAddress = () => {
         </BreadcrumbItem>
       </Breadcrumb>
       <S.VoteContent>
-        <IntroWalletAddress />
+        <IntroWalletAddress
+          userDelegatingTotal={totalUserDelegating}
+          userReceivedTotal={totalUserReceived}
+        />
 
         {/* Owned Voting Power */}
         <TitleSection
-          image={proposals}
-          title="Own Voting Power"
+          image={stakingPools}
+          title="Staking Pools"
           marginTop={64}
         />
-        {hasVotingPower ? (
-          <OwnAndReceivedTable />
-        ) : userWalletAddress ? (
-          <AnyCard
-            text="To obtain voting power you need to have KACY staked"
-            button={true}
+        {hasVotingPower || userWalletAddress ? (
+          <OwnAndReceivedTable
+            userVotingPower={userDelegatingToVP}
+            isDelegationTable={true}
           />
         ) : (
           <AnyCard
@@ -88,17 +175,15 @@ const WalletAddress = () => {
 
         {/* Received Voting Power */}
         <TitleSection
-          image={proposals}
+          image={votingPoweRrank}
           title="Received Voting Power"
           text="Velit lacus vel porta purus"
           marginTop={64}
         />
-        {hasVotingPower ? (
-          <OwnAndReceivedTable />
-        ) : userWalletAddress ? (
-          <AnyCard
-            text="To obtain voting power you need to have KACY staked"
-            button={true}
+        {hasVotingPower || userWalletAddress ? (
+          <OwnAndReceivedTable
+            userVotingPower={userReceivedFromVP}
+            isDelegationTable={false}
           />
         ) : (
           <AnyCard
@@ -123,19 +208,11 @@ const WalletAddress = () => {
             <Image src={externalLink} alt="" />
           </S.LinkForum>
         </S.TitleAndLinkContent>
-        {hasVotingPower ? (
-          <OwnAndReceivedTable />
-        ) : userWalletAddress ? (
-          <AnyCard
-            text="To obtain voting power you need to have KACY staked"
-            button={true}
-          />
-        ) : (
-          <AnyCard
-            text="This address doesn’t seem to have any KACY staked"
-            button={false}
-          />
-        )}
+
+        <UserTableVotingHistory
+          userAddressUrl={address}
+          userWalletAddress={userWalletAddress}
+        />
       </S.VoteContent>
     </S.BackgroundVote>
   )

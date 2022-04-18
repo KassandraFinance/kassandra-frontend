@@ -4,7 +4,6 @@ import theme from '../../../../styles/theme'
 import * as VotingPowerStyles from '../../../../components/VotingPower/styles'
 import * as VoteCardStyle from '../../../../components/Governance/VoteCard/styles'
 import * as ButtonStyles from '../../../../components/Button/styles'
-import * as ExternalLinkStyles from '../../../../components/ExternalLink/styles'
 
 export const BackgroundVote = styled.div`
   padding-bottom: 8rem;
@@ -66,13 +65,12 @@ export const CardTitleWrapper = styled.div`
   }
 `
 export const ProposeAuthorCard = styled.div`
-  height: 5.6rem;
-  margin-top: 1.6rem;
-  padding: 2rem 1.6rem;
-
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 5.6rem;
+  margin-top: 1.6rem;
+  padding: 2rem 1.6rem;
 
   background: #ffffff0a;
   border-width: 0.1rem;
@@ -119,9 +117,10 @@ export const ProposeAuthorCard = styled.div`
     letter-spacing: 0.07rem;
   }
 `
-export const VotingPowerAndLink = styled.div`
+export const VotingPower = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: flex-end;
 
   @media (max-width: 670px) {
@@ -130,8 +129,6 @@ export const VotingPowerAndLink = styled.div`
   }
 
   ${VotingPowerStyles.VotingPower} {
-    margin-bottom: 1.2rem;
-
     @media (max-width: 768px) {
       width: 34.8rem;
       max-width: 100%;
@@ -141,22 +138,13 @@ export const VotingPowerAndLink = styled.div`
       width: 100%;
     }
   }
-
-  ${ExternalLinkStyles.Link} {
-    font-size: ${theme.font.sizes.font14};
-
-    @media (max-width: 670px) {
-      font-size: ${theme.font.sizes.font12};
-    }
-  }
 `
 export const VoteCardWrapper = styled.div`
-  max-width: 100%;
-  margin-top: 4rem;
-
   display: flex;
   justify-content: space-between;
   column-gap: 2.4rem;
+  max-width: 100%;
+  margin-top: 4rem;
 
   @media (max-width: 815px) {
     ${VoteCardStyle.ActionWrapper} {
@@ -280,6 +268,7 @@ export const TableTitle = styled.th`
 export const DescriptionProposal = styled.div`
   display: block;
   width: 100%;
+
   white-space: pre-wrap;
   font-size: 1.6rem;
   font-weight: 300 lighter;
@@ -307,19 +296,19 @@ export const DescriptionProposal = styled.div`
 
   code {
     padding: 0.5rem;
-    overflow: auto;
-    border: none;
-    word-wrap: break-word;
-    page-break-inside: avoid;
     max-width: 100%;
-
-    background-color: #171d24;
-    border-radius: 0.6rem;
 
     color: #bbc4cb;
     font-family: monospace;
     font-size: 85%;
     line-height: 2.5rem;
+    word-wrap: break-word;
+
+    background-color: #171d24;
+    border-radius: 0.6rem;
+    overflow: auto;
+    border: none;
+    page-break-inside: avoid;
   }
 
   pre {
@@ -350,13 +339,13 @@ export const TableDescriptionWrapper = styled.div`
   flex-direction: column;
   padding: 1.6rem 0;
 
-  p {
-    line-height: 2.5rem;
-  }
-
   border-top-width: 0.1rem;
   border-top-style: solid;
   border-top-color: #ffffff4d;
+
+  p {
+    line-height: 2.5rem;
+  }
 
   &:first-child {
     border-top: none;
@@ -399,12 +388,10 @@ export const DescriptionText = styled.td`
 export const InfoTable = styled.table`
   width: 100%;
   height: max-content;
-
   margin-top: 1.6rem;
   margin-right: auto;
   margin-bottom: 0;
   margin-left: auto;
-
   padding: 1.6rem;
 
   background-color: #ffffff0a;
@@ -445,6 +432,9 @@ export const DataWrapper = styled.div`
   justify-content: space-between;
   margin-top: 1.2rem;
 
+  line-height: 1.2rem;
+  color: #c4c4c4;
+
   &:first-child {
     margin-top: 1.6rem;
   }
@@ -462,34 +452,32 @@ export const TextKey = styled.span`
 
 export const TextValue = styled.span`
   font-size: ${theme.font.sizes.font12};
-  font-weight: ${theme.font.weight.light};
+  font-weight: ${theme.font.weight.medium};
+  color: #fcfcfc;
   letter-spacing: 0.06rem;
 
   @media (min-width: 768px) {
     font-size: ${theme.font.sizes.font14};
-    line-height: 1.82rem;
+    line-height: 1.56rem;
     letter-spacing: 0.07rem;
   }
 `
 
 export const LinkForum = styled.a`
-  border: 0.1rem solid rgba(255, 255, 255, 0.04);
-  border-radius: 0.8rem;
-  background: rgba(255, 255, 255, 0.04);
-  color: ${theme.colors.grayDisabled};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.6rem;
+  padding: 1.6rem 2.4rem;
 
+  color: ${theme.colors.grayDisabled};
   line-height: ${theme.font.sizes.font16};
   font-size: ${theme.font.sizes.font16};
   text-decoration: none;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  margin-top: 1.6rem;
-
-  padding: 1.6rem 2.4rem;
-
+  border: 0.1rem solid rgba(255, 255, 255, 0.04);
+  border-radius: 0.8rem;
+  background: rgba(255, 255, 255, 0.04);
   transition: border ${theme.transition.default};
 
   > span {
@@ -533,12 +521,11 @@ export const DetailsSubTitle = styled.p`
   }
 `
 export const DetailsText = styled.span`
+  margin-left: ${theme.spacings.space8};
+
   font-size: ${theme.font.sizes.font12};
   line-height: 130%;
   font-weight: ${theme.font.weight.light};
-
-  margin-left: ${theme.spacings.space8};
-
   word-break: break-all;
 
   @media (min-width: 768px) {
@@ -648,6 +635,7 @@ export const Steps = styled.div`
     padding-left: 2.6rem;
   }
 `
+
 export const Step = styled.div`
   position: relative;
 
@@ -667,13 +655,23 @@ export const Step = styled.div`
     height: 4rem;
     margin: -0.9rem 0;
 
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: auto 2fr 1fr;
+    gap: 1.6rem;
 
     img {
       width: 4rem;
     }
+  }
+`
+
+export const StepImageContainer = styled.div`
+  width: 7.9rem;
+  height: 7.3rem;
+
+  @media (max-width: 480px) {
+    width: 4rem;
+    height: 4rem;
   }
 `
 
@@ -683,6 +681,7 @@ export const StepTitle = styled.div`
 
   font-size: ${theme.font.sizes.font18};
   font-weight: ${theme.font.weight.medium};
+  text-align: center;
 
   @media (max-width: 768px) {
     margin-top: 2.4rem;

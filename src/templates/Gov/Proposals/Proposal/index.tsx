@@ -28,7 +28,6 @@ import waitTransaction, {
 
 import { GET_PROPOSAL } from './graphql'
 
-import ExternalLink from '../../../../components/ExternalLink'
 import Header from '../../../../components/Header'
 import ModalVotes from '../../../../components/Governance/ModalVotes'
 import TitleSection from '../../../../components/TitleSection'
@@ -60,9 +59,15 @@ interface IRequestDataProposal {
       forVotes: Big,
       againstVotes: Big,
       startBlock: string,
+      endBlock: string,
       quorum: string,
+      canceled: string,
+      queued: string,
       values: [],
       calldatas: [],
+      created: string,
+      eta: string,
+      executed: string,
       signatures: [],
       targets: [],
       proposer: {
@@ -113,6 +118,11 @@ export interface IProposalProps {
   calldatas: string[];
   signatures: string[];
   targets: string[];
+  created: string;
+  eta: string;
+  executed: string;
+  votingClose: string;
+  votingOpen: string;
 }
 
 const statslibColor: { [key: string]: string } = {
@@ -137,9 +147,14 @@ const Proposal = () => {
     calldatas: [],
     signatures: [],
     targets: [],
-    values: []
+    values: [],
+    created: '',
+    eta: '',
+    executed: '',
+    votingClose: '',
+    votingOpen: ''
   })
-  // eslint-disable-next-line prettier/prettier
+
   const [modalVotes, setModalVotes] = React.useState<ModalProps>({
     voteType: '',
     percentage: '',
@@ -147,13 +162,12 @@ const Proposal = () => {
     checkAllVoterModal: false
   })
   const [isModalOpen, setIsModalOpen] = React.useState(false)
-
   const [percentageVotes, setPercentageVotes] = React.useState({
     for: '0',
     against: '0'
   })
   const [proposalState, setProposalState] = React.useState<string>('')
-  const [dataStatus, setDataStatus] = React.useState<any[]>(stepData)
+  const [dataStatus, setDataStatus] = React.useState<any[]>([])
   const [userVoted, setUserVoted] = React.useState<IUserVotedProps>({
     voted: false,
     support: null,
@@ -161,8 +175,7 @@ const Proposal = () => {
     yourVotingPowerInProposal: new BigNumber(0)
   })
   // eslint-disable-next-line prettier/prettier
-  const [yourVotingPowerInProposal, setYourVotingPowerInProposal] =
-    React.useState(new BigNumber(0))
+  const [yourVotingPowerInProposal, setYourVotingPowerInProposal] = React.useState(new BigNumber(0))
 
   const router = useRouter()
   const governance = useGovernance(GovernorAlpha)
@@ -235,6 +248,17 @@ const Proposal = () => {
 
   React.useEffect(() => {
     if (data) {
+      const secondsPerBlock =
+        chains[process.env.NEXT_PUBLIC_MASTER === '1' ? 'avalanche' : 'fuji']
+          .secondsPerBlock
+
+      const createdProposal = new Date(Number(data.proposal[0].created) * 1000)
+
+      const secondsToEndProposal =
+        (Number(data.proposal[0].endBlock) -
+          Number(data.proposal[0].startBlock)) *
+        secondsPerBlock
+
       const proposalInfo: IProposalProps = {
         againstVotes: data.proposal[0].againstVotes,
         forVotes: data.proposal[0].forVotes,
@@ -248,8 +272,22 @@ const Proposal = () => {
         calldatas: data.proposal[0].calldatas,
         signatures: data.proposal[0].signatures,
         targets: data.proposal[0].targets,
-        values: data.proposal[0].values
+        values: data.proposal[0].values,
+        created: createdProposal.toLocaleString(),
+        eta: data.proposal[0].eta
+          ? new Date(Number(data.proposal[0].eta) * 1000).toLocaleString()
+          : data.proposal[0].eta,
+        executed: data.proposal[0].executed
+          ? new Date(Number(data.proposal[0].executed) * 1000).toLocaleString()
+          : data.proposal[0].executed,
+        votingOpen: new Date(
+          Number(createdProposal) + secondsPerBlock * 1000
+        ).toLocaleString(),
+        votingClose: new Date(
+          Number(createdProposal) + secondsToEndProposal * 1000
+        ).toLocaleString()
       }
+
       if (proposalInfo.votingPower.gt(0)) {
         const forVotes = BNtoDecimal(
           Big(data.proposal[0].forVotes).div(proposalInfo.votingPower).mul(100),
@@ -283,27 +321,292 @@ const Proposal = () => {
   }, [data, userWalletAddress])
 
   React.useEffect(() => {
-    function generateStatusHistoryArray() {
-      const arr = dataStatus.map(item =>
-        item.title.includes(proposalState)
-          ? { ...item, completed: true, title: proposalState }
-          : item
-      )
+    if (data) {
+      const { endBlock, startBlock, created, canceled, executed, queued, eta } =
+        data.proposal[0]
+      const defeated =
+        proposal.forVotes <= proposal.againstVotes ||
+        Number(proposal.forVotes) < Number(proposal.quorum)
+      const votingClosed =
+        (Number(endBlock) - Number(startBlock)) * 2 + Number(created)
 
-      const teste2 = arr.findIndex(item => item.completed === true)
+      const baseArray = [
+        {
+          title: 'Created',
+          completed: true,
+          date: new Date(Number(created) * 1000).toLocaleString().split(', ')[0]
+        },
+        {
+          title: 'Voting Open',
+          completed: true,
+          date: new Date(Number(created) * 1000).toLocaleString().split(', ')[0]
+        }
+      ]
 
-      const arrTrue = arr
-        .slice(0, teste2 + 1)
-        .map(item => ({ ...item, completed: true }))
-      const arrFalse = arr.slice(teste2 + 1)
+      const today = Date.now() / 1000
 
-      const arrModified = [...arrTrue, ...arrFalse]
+      const generateStatusHistoryArray = () => {
+        const isProposalASuccess = canceled === null
 
-      setDataStatus(arrModified)
+        if (!isProposalASuccess) {
+          return [
+            ...baseArray,
+            {
+              title: 'Cancelled',
+              completed: false,
+              date: new Date(Number(canceled) * 1000)
+                .toLocaleString()
+                .split(', ')[0]
+            }
+          ]
+        }
+
+        if (defeated) {
+          return [
+            ...baseArray,
+            {
+              title: 'Defeated',
+              completed: true,
+              date: new Date(votingClosed * 1000)
+                .toLocaleString()
+                .split(', ')[0]
+            }
+          ]
+        }
+
+        if (votingClosed > today) {
+          return [
+            ...baseArray,
+            {
+              title: 'Voting Ends',
+              completed: true,
+              date: new Date(Number(created) * 1000)
+                .toLocaleString()
+                .split(', ')[0]
+            },
+            {
+              title: 'Queued',
+              completed: false
+            },
+            {
+              title: 'Executed',
+              completed: false
+            }
+          ]
+        }
+
+        if (isProposalASuccess) {
+          if (queued !== null) {
+            if (executed !== null) {
+              return [
+                ...baseArray,
+                {
+                  title: 'Succeeded',
+                  completed: true,
+                  date: new Date(votingClosed * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                },
+                {
+                  title: 'Queued',
+                  completed: true,
+                  date: new Date(Number(queued) * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                },
+                {
+                  title: 'Executed',
+                  completed: true,
+                  date: new Date(Number(executed) * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                }
+              ]
+            }
+
+            if (Number(eta) < today) {
+              return [
+                ...baseArray,
+                {
+                  title: 'Succeeded',
+                  completed: true,
+                  date: new Date(votingClosed * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                },
+                {
+                  title: 'Queued',
+                  completed: true,
+                  date: new Date(Number(queued) * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                },
+                {
+                  title: 'Expired',
+                  completed: true,
+                  date: new Date(Number(eta) * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                }
+              ]
+            }
+
+            if (eta === null) {
+              return [
+                ...baseArray,
+                {
+                  title: 'Succeeded',
+                  completed: true,
+                  date: new Date(votingClosed * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                },
+                {
+                  title: 'Queued',
+                  completed: true,
+                  date: new Date(Number(queued) * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                },
+                {
+                  title: 'Executed',
+                  completed: false,
+                  date: ''
+                }
+              ]
+            }
+
+            return [
+              ...baseArray,
+              {
+                title: 'Succeeded',
+                completed: true,
+                date: new Date(votingClosed * 1000)
+                  .toLocaleString()
+                  .split(', ')[0]
+              },
+              {
+                title: 'Queued',
+                completed: true,
+                date: new Date(Number(queued) * 1000)
+                  .toLocaleString()
+                  .split(', ')[0]
+              },
+              {
+                title: 'Deadline',
+                completed: true,
+                date: new Date(Number(eta) * 1000)
+                  .toLocaleString()
+                  .split(', ')[0]
+              }
+            ]
+          } else {
+            if (executed !== null) {
+              return [
+                ...baseArray,
+                {
+                  title: 'Succeeded',
+                  completed: true,
+                  date: new Date(votingClosed * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                },
+                {
+                  title: 'Queued',
+                  completed: false,
+                  date: ''
+                },
+                {
+                  title: 'Executed',
+                  completed: true,
+                  date: new Date(Number(executed) * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                }
+              ]
+            }
+
+            if (eta === null) {
+              return [
+                ...baseArray,
+                {
+                  title: 'Succeeded',
+                  completed: true,
+                  date: new Date(votingClosed * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                },
+                {
+                  title: 'Queued',
+                  completed: false,
+                  date: ''
+                },
+                {
+                  title: 'Executed',
+                  completed: false,
+                  date: ''
+                }
+              ]
+            }
+
+            if (Number(eta) < today) {
+              return [
+                ...baseArray,
+                {
+                  title: 'Succeeded',
+                  completed: true,
+                  date: new Date(votingClosed * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                },
+                {
+                  title: 'Queued',
+                  completed: false,
+                  date: ''
+                },
+                {
+                  title: 'Expired',
+                  completed: true,
+                  date: new Date(Number(eta) * 1000)
+                    .toLocaleString()
+                    .split(', ')[0]
+                }
+              ]
+            }
+
+            return [
+              ...baseArray,
+              {
+                title: 'Succeeded',
+                completed: true,
+                date: new Date(votingClosed * 1000)
+                  .toLocaleString()
+                  .split(', ')[0]
+              },
+              {
+                title: 'Queued',
+                completed: false,
+                date: ''
+              },
+              {
+                title: 'Deadline',
+                completed: true,
+                date: new Date(Number(eta) * 1000)
+                  .toLocaleString()
+                  .split(', ')[0]
+              }
+            ]
+          }
+        }
+
+        return []
+      }
+
+      const array = generateStatusHistoryArray()
+
+      setDataStatus(array)
     }
-
-    generateStatusHistoryArray()
-  }, [proposalState])
+  }, [data, proposal.againstVotes, proposal.forVotes, proposal.quorum])
 
   return (
     <>
@@ -334,13 +637,12 @@ const Proposal = () => {
                   <span>{substr(`${proposal.proposer}`)}</span>
                 </S.ProposeAuthorCard>
               </S.TitleAndAuthor>
-              <S.VotingPowerAndLink>
+              <S.VotingPower>
                 <VotingPower
                   userWalletAddress={userWalletAddress}
                   yourVotingPowerInProposal={yourVotingPowerInProposal}
                 />
-                <ExternalLink text="Obtain more voting power" hrefNext="#" />
-              </S.VotingPowerAndLink>
+              </S.VotingPower>
             </S.TitleWrapper>
           </S.IntroDesktopScreen>
 
@@ -351,13 +653,12 @@ const Proposal = () => {
                 title={`Proposal ${router.query.proposal}`}
               />
               <S.CardTitleWrapper>
-                <S.VotingPowerAndLink>
+                <S.VotingPower>
                   <VotingPower
                     userWalletAddress={userWalletAddress}
                     yourVotingPowerInProposal={yourVotingPowerInProposal}
                   />
-                  <ExternalLink text="Obtain more voting power" hrefNext="#" />
-                </S.VotingPowerAndLink>
+                </S.VotingPower>
                 <S.ProposeAuthorCard>
                   <p>Proposed by</p>
                   <Jazzicon
@@ -369,7 +670,6 @@ const Proposal = () => {
               </S.CardTitleWrapper>
             </S.TitleWrapper>
           </S.IntroMobileScreen>
-
           <S.VoteCardWrapper>
             <VoteCard
               typeVote="For"
@@ -383,12 +683,7 @@ const Proposal = () => {
                   voteType: 'For',
                   percentage: `${percentageVotes.for}`,
                   // eslint-disable-next-line prettier/prettier
-                  totalVotingPower: `${BNtoDecimal(
-                    proposal.forVotes,
-                    0,
-                    2,
-                    2
-                  )}`,
+                  totalVotingPower: `${BNtoDecimal(proposal.forVotes, 0, 2, 2)}`,
                   checkAllVoterModal: true
                 })
                 setIsModalOpen(true)
@@ -406,12 +701,7 @@ const Proposal = () => {
                   voteType: 'Against',
                   percentage: `${percentageVotes.against}`,
                   // eslint-disable-next-line prettier/prettier
-                  totalVotingPower: `${BNtoDecimal(
-                    proposal.againstVotes,
-                    0,
-                    2,
-                    2
-                  )}`,
+                  totalVotingPower: `${BNtoDecimal(proposal.againstVotes, 0, 2, 2)}`,
                   checkAllVoterModal: false
                 })
                 setIsModalOpen(true)
@@ -459,27 +749,39 @@ const Proposal = () => {
                       <S.TextValue>
                         {proposal.votingPower.lt(Big(proposal.quorum))
                           ? BNtoDecimal(proposal.votingPower, 0, 2)
-                          : BNtoDecimal(Big(proposal.quorum), 0, 2)}{' '}
+                          : BNtoDecimal(Big(proposal.forVotes), 0, 2)}{' '}
                         / {BNtoDecimal(Big(proposal.quorum), 0, 2)}
                       </S.TextValue>
                     </S.DataWrapper>
                     <S.DataWrapper>
-                      <S.TextKey>Total Voting Power</S.TextKey>
+                      <S.TextKey>Total Voted</S.TextKey>
                       <S.TextValue>
                         {BNtoDecimal(proposal.votingPower, 0, 2)}
                       </S.TextValue>
                     </S.DataWrapper>
                     <S.DataWrapper>
                       <S.TextKey>Created</S.TextKey>
-                      <S.TextValue>{infoProposal.created}</S.TextValue>
+                      <S.TextValue>{proposal.created}</S.TextValue>
                     </S.DataWrapper>
                     <S.DataWrapper>
-                      <S.TextKey>Starting</S.TextKey>
-                      <S.TextValue>{infoProposal.starting}</S.TextValue>
+                      <S.TextKey>Voting Open</S.TextKey>
+                      <S.TextValue>{proposal.votingOpen}</S.TextValue>
                     </S.DataWrapper>
                     <S.DataWrapper>
-                      <S.TextKey>Execute (max)</S.TextKey>
-                      <S.TextValue>{infoProposal.executeMax}</S.TextValue>
+                      <S.TextKey>Voting Close</S.TextKey>
+                      <S.TextValue>{proposal.votingClose}</S.TextValue>
+                    </S.DataWrapper>
+                    <S.DataWrapper>
+                      <S.TextKey>
+                        {proposal.executed
+                          ? 'Executed'
+                          : proposal.eta
+                          ? 'Execution Deadline'
+                          : ''}
+                      </S.TextKey>
+                      <S.TextValue>
+                        {proposal.executed ?? proposal.eta ?? ''}
+                      </S.TextValue>
                     </S.DataWrapper>
                   </S.TableInfoWrapper>
                 </S.TableBody>
@@ -588,41 +890,27 @@ const Proposal = () => {
               {dataStatus.map((step, index) => (
                 <React.Fragment key={index}>
                   <S.Step>
-                    {step.completed === true ? (
-                      <Image src={proposalCompleteIcon} />
-                    ) : (
-                      <Image src={proposalWaitingIcon} />
-                    )}
+                    <S.StepImageContainer>
+                      {step.completed === true ? (
+                        <Image src={proposalCompleteIcon} layout="responsive" />
+                      ) : (
+                        <Image src={proposalWaitingIcon} layout="responsive" />
+                      )}
+                    </S.StepImageContainer>
 
                     <S.StepTitle>{step.title}</S.StepTitle>
                     <S.StepDate>{step.date}</S.StepDate>
                   </S.Step>
                   <S.LineBetweenImages
                     isAfter={index === dataStatus.length - 1}
-                    isComplete={step.completed === true}
+                    isComplete={
+                      step.title === 'Queued' && step.completed === false
+                        ? true
+                        : step.completed === true
+                    }
                   />
                 </React.Fragment>
               ))}
-              {/* {stepData.map((step, index) => (
-                <>
-                  <S.Step key={step.title + index}>
-                    {Date.parse(step.date) / 1000 >
-                    new Date().getTime() / 1000 ? (
-                      <Image src={proposalWaitingIcon} />
-                    ) : (
-                      <Image src={proposalCompleteIcon} />
-                    )}
-                    <S.StepTitle>{step.title}</S.StepTitle>
-                    <S.StepDate>{step.date}</S.StepDate>
-                  </S.Step>
-                  <S.LineBetweenImages
-                    isAfter={index === stepData.length - 1}
-                    isComplete={
-                      Date.parse(step.date) / 1000 < new Date().getTime() / 1000
-                    }
-                  />
-                </>
-              ))} */}
             </S.Steps>
           </S.ProposalStatus>
         </S.ProposalInfo>
@@ -645,40 +933,3 @@ const Proposal = () => {
 }
 
 export default Proposal
-
-const infoProposal = {
-  state: 'Executed',
-  quorum: '160.000/160.000',
-  totalVotingPower: '324.554',
-  created: '22/10/2021, 1:28 PM',
-  starting: '22/10/2021, 1:28 PM',
-  executeMax: '22/11/2021, 1:28 PM'
-}
-
-const stepData = [
-  {
-    title: ['Created'],
-    completed: false,
-    date: '01/22/2022'
-  },
-  {
-    title: ['Active'],
-    completed: false,
-    date: '01/22/2022'
-  },
-  {
-    title: ['Succeeded', 'Failed'],
-    completed: false,
-    date: '02/22/2022'
-  },
-  {
-    title: ['Queued'],
-    completed: false,
-    date: '02/22/2022'
-  },
-  {
-    title: ['Executed'],
-    completed: false,
-    date: '04/22/2022'
-  }
-]

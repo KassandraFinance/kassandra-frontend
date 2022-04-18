@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
-export const ProposalTable = styled.section`
+export const UserTableVotingHistory = styled.section`
   margin-top: 4rem;
   margin-right: auto;
   margin-left: auto;
@@ -171,6 +171,10 @@ export const TextProposal = styled.p`
     font-size: ${theme.font.sizes.font12};
   }
 `
+
+// export const StatusAndTimeframe = styled.div`
+//   display: flex;
+// `
 
 interface IStatusProposalColor {
   statusColor: string;

@@ -57,8 +57,8 @@ const useStakingContract = (address: string) => {
 
     /* SEND */
 
-    const stake = async (pid: number, amount: BigNumber, callback: TransactionCallback) => {
-      await contract.methods.stake(pid, amount, userWalletAddress, userWalletAddress)
+    const stake = async (pid: number, amount: BigNumber, delegatee: string , callback: TransactionCallback) => {
+      await contract.methods.stake(pid, amount, userWalletAddress, delegatee)
         .send(
           { from: userWalletAddress },
           callback
