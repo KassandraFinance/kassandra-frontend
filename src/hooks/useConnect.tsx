@@ -2,6 +2,7 @@
 import detectEthereumProvider from '@metamask/detect-provider'
 import WalletConnect from '@walletconnect/client'
 import QRCodeModal from '@walletconnect/qrcode-modal'
+import { useRouter } from 'next/router'
 import React from 'react'
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 import { toChecksumAddress } from 'web3-utils'
@@ -26,12 +27,17 @@ const useConnect = () => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const dispatch = useDispatch()
 
+  const router = useRouter()
+
   const handleAccountsChanged = React.useCallback(accounts => {
     try {
       if (accounts.length === 0 || accounts[0] === undefined) {
         dispatch(actionGetUserAddressWallet(''))
       } else if (accounts[0] !== userWalletAddress) {
         dispatch(actionGetUserAddressWallet(toChecksumAddress(accounts[0])))
+        if (router.asPath === '/gov/address') {
+          router.push(`/gov/address/${toChecksumAddress(accounts[0])}`)
+        }
       }
     } catch (error: any) {
       console.log(error)

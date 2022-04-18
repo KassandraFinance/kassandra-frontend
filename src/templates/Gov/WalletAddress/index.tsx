@@ -161,17 +161,11 @@ const WalletAddress = () => {
           title="Staking Pools"
           marginTop={64}
         />
-        {hasVotingPower || userWalletAddress ? (
-          <OwnAndReceivedTable
-            userVotingPower={userDelegatingToVP}
-            isDelegationTable={true}
-          />
-        ) : (
-          <AnyCard
-            text="This address doesn’t seem to have any KACY staked"
-            button={false}
-          />
-        )}
+
+        <OwnAndReceivedTable
+          userVotingPower={userDelegatingToVP}
+          isDelegationTable={true}
+        />
 
         {/* Received Voting Power */}
         <TitleSection
@@ -180,17 +174,11 @@ const WalletAddress = () => {
           text="Velit lacus vel porta purus"
           marginTop={64}
         />
-        {hasVotingPower || userWalletAddress ? (
-          <OwnAndReceivedTable
-            userVotingPower={userReceivedFromVP}
-            isDelegationTable={false}
-          />
-        ) : (
-          <AnyCard
-            text="This address doesn’t seem to have any KACY staked"
-            button={false}
-          />
-        )}
+
+        <OwnAndReceivedTable
+          userVotingPower={userReceivedFromVP}
+          isDelegationTable={false}
+        />
 
         {/* Voting History */}
         <S.TitleAndLinkContent>
