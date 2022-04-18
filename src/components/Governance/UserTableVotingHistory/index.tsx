@@ -97,7 +97,9 @@ export const UserTableVotingHistory = ({ userAddressUrl, userWalletAddress }: IU
 
   React.useEffect(() => {
     if (data) {
-      handleAddStateOnProposal(data.user.votes)
+      data.user === null
+        ? setProposalsList([])
+        : handleAddStateOnProposal(data.user.votes)
     }
   }, [data])
 
