@@ -333,7 +333,7 @@ const StakeCard = ({
                 <img src="/assets/ahype.svg" alt="" style={{ width: '58px' }} />
               ) : null}
               {symbol === 'lp' ? (
-                <img src="/assets/kap.svg" alt="" width={144} />
+                <img src="/assets/icons/lp-icon.svg" alt="" width={144} />
               ) : null}
               <S.IntroStaking>
                 <S.APR>
