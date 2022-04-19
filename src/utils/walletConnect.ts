@@ -1,8 +1,8 @@
-import WalletConnect from '@walletconnect/client'
+import WalletConnectProvider from '@walletconnect/web3-provider'
 import { ToastSuccess } from '../components/Toastify/toast'
 
 export async function subscribeToEvents(
-  connector: WalletConnect,
+  connector: WalletConnectProvider,
   handleAccountsChanged: (accounts: []) => void,
   handleChainChanged: (chainId: number) => void
 ) {
@@ -18,7 +18,8 @@ export async function subscribeToEvents(
       payload: { params: { accounts: [], chainId: number }[] }
     ) => {
       if (error) {
-        throw error
+        console.log(error)
+        return
       }
 
       // Get provided accounts and chainId
@@ -37,7 +38,8 @@ export async function subscribeToEvents(
       payload: { params: { accounts: [], chainId: number }[] }
     ) => {
       if (error) {
-        throw error
+        console.log(error)
+        return
       }
 
       // Get updated accounts and chainId
@@ -47,9 +49,10 @@ export async function subscribeToEvents(
     }
   )
 
-  connector.on('disconnect', (error: unknown, payload) => {
+  connector.on('disconnect', (error: unknown) => {
     if (error) {
-      throw error
+      console.log(error)
+      return
     }
   })
 
@@ -60,7 +63,8 @@ export async function subscribeToEvents(
       payload: { params: { accounts: [], chainId: number }[] }
     ) => {
       if (error) {
-        throw error
+        console.log(error)
+        return
       }
 
       // Get updated accounts and chainId
@@ -76,7 +80,8 @@ export async function subscribeToEvents(
       payload: { params: { accounts: [], chainId: number }[] }
     ) => {
       if (error) {
-        throw error
+        console.log(error)
+        return
       }
 
       // Get updated accounts and chainId

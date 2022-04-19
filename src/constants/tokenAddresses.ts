@@ -75,7 +75,7 @@ export const SUBGRAPH_URL = process.env.NODE_ENV
   
 export const chains: { [key: string]: ChainDetails } = {
   avalanche: {
-    chainId: '0xa86a',
+    chainId: 43114,
     chainName: 'Avalanche Mainnet',
     nativeCurrency: {
       name: 'Avalanche',
@@ -87,7 +87,7 @@ export const chains: { [key: string]: ChainDetails } = {
     secondsPerBlock: 2
   },
   fuji: {
-    chainId: '0xa869',
+    chainId: 43113,
     chainName: 'Avalanche Fuji Testnet',
     nativeCurrency: {
       name: 'Avalanche',
