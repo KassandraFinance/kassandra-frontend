@@ -5,7 +5,7 @@ interface CurrencyDetails {
 }
 
 export interface ChainDetails {
-  chainId: string;
+  chainId: number;
   chainName: string;
   nativeCurrency: CurrencyDetails;
   rpcUrls: [string];

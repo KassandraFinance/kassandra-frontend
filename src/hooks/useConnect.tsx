@@ -40,21 +40,21 @@ const useConnect = () => {
   }, [])
 
   const handleChainChanged = React.useCallback(chainId => {
-    dispatch(actionSetChainId(chainId))
+    dispatch(actionSetChainId(Number.parseInt(chainId, 16)))
     window.location.reload()
   }, [])
 
-  const getAccounts = React.useCallback(async () => {
-    const accounts = await web3.eth.getAccounts()
-    handleAccountsChanged(accounts)
-  }, [])
+  // const getAccounts = React.useCallback(async () => {
+  //   const accounts = await web3.eth.getAccounts()
+  //   handleAccountsChanged(accounts)
+  // }, [])
 
-  const getChainId = React.useCallback(async () => {
-    const id = await web3.eth.getChainId()
-    const convertedChainId = await web3.utils.numberToHex(String(id))
+  // const getChainId = React.useCallback(async () => {
+  //   const id = await web3.eth.getChainId()
+  //   const convertedChainId = await web3.utils.numberToHex(String(id))
 
-    dispatch(actionSetChainId(convertedChainId))
-  }, [])
+  //   dispatch(actionSetChainId(convertedChainId))
+  // }, [])
 
   const handleDisconnected = React.useCallback(() => {
     if (connector) {

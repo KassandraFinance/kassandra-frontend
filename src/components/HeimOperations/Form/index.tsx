@@ -1044,7 +1044,6 @@ const Form = ({
           setSlippage={setSlippage}
         />
       </S.TransactionSettingsOptions>
-
       {userWalletAddress.length === 0 && walletConnect === null ? (
         <Button
           className="btn-submit"
@@ -1055,7 +1054,7 @@ const Form = ({
           text='Connect Wallet'
         />
       ) : (
-        chainId === poolChain.chainId || (walletConnect && chainId === 43114) ? (
+        chainId === poolChain.chainId ? (
           <Button
             className="btn-submit"
             onClick={() => setTimeout(() => clearInput(), 3000)}
