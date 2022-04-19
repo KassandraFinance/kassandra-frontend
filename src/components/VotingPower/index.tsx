@@ -63,7 +63,7 @@ const VotingPower = ({
               </S.Tooltip>
             </Tippy>
           ) : (
-            <Tippy content="Lorem ipsum">
+            <Tippy content="Amount of voting power locked from your address to vote on this proposal. This voting power is relative to the block in which the proposal was published.">
               <S.Tooltip tabIndex={0}>
                 <Image
                   src={infoGrayIcon}
