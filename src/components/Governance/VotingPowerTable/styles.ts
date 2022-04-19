@@ -12,57 +12,72 @@ export const VotingPowerTable = styled.section`
 `
 
 export const Table = styled.table`
-  border-collapse: collapse;
-  border-radius: 20px;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
+  width: 100%;
+  margin-top: 4rem;
 
-  overflow: hidden;
+  font-size: ${theme.font.sizes.font14};
   text-indent: initial;
 
+  border-collapse: collapse;
+  border-radius: 2rem;
+  -webkit-border-radius: 2rem;
+  -moz-border-radius: 2rem;
   border-spacing: 0;
   -webkit-border-horizontal-spacing: 0;
   -webkit-border-vertical-spacing: 0;
 
-  font-size: ${theme.font.sizes.font14};
+  @media (max-width: 540px) {
+    border-radius: 1.2rem;
+    -webkit-border-radius: 1.2rem;
+    -moz-border-radius: 1.2rem;
+  }
 
-  width: 100%;
-  margin-top: 4rem;
+  overflow: hidden;
 
   thead {
     background-color: rgba(0, 0, 0, 0.25);
   }
   tbody {
-    background-color: rgba(255, 255, 255, 0.04);
     max-height: 100%;
+
+    background-color: rgba(255, 255, 255, 0.04);
 
     a {
       &:hover {
         background-color: ${theme.colors.darkPurple} !important;
+
         cursor: pointer;
       }
     }
     tr {
-      border-top: 1px solid ${theme.colors.grayDisabled};
+      margin-top: -0.1rem;
+      border-top: 0.1rem solid rgba(255, 255, 255, 0);
+      border-bottom: 0.1rem solid rgba(255, 255, 255, 0.3);
+      transition: background-color ease-in-out 0.3s, border ease-in-out 0.3s,
+        padding ease-in-out 0.3s, margin ease-in-out 0.3s;
 
       &:hover {
-        background-color: ${theme.colors.darkPurple};
-        border-top: 1px solid ${theme.colors.grayDisabled};
-        border-bottom: 1px solid ${theme.colors.grayDisabled};
-
         margin: 0;
+        margin-top: -0.1rem;
         padding: 2.4rem 3.2rem;
 
+        background-color: ${theme.colors.darkPurple};
+        border-top: 0.1rem solid ${theme.colors.grayDisabled};
+        border-bottom: 0.1rem solid ${theme.colors.grayDisabled};
+
         cursor: pointer;
+
+        @media (max-width: 540px) {
+          padding: 2rem;
+        }
       }
 
-      &:hover + tr,
-      &:first-child,
-      &:first-child:hover {
+      &:first-child {
         border-top: none;
       }
 
-      &:last-child:hover {
+      &:last-child,
+      last-child:hover {
         border-bottom: none;
       }
     }
@@ -75,11 +90,16 @@ export const Table = styled.table`
 
 export const Tr = styled.tr`
   display: grid;
-  grid-template-columns: 1fr 4fr repeat(4, 2fr);
+  grid-template-columns: 1fr 4fr repeat(4, 3fr);
   align-items: center;
 
   margin: 0 3.2rem;
   padding: 2.4rem 0;
+
+  @media (max-width: 540px) {
+    margin: 0 2rem;
+    padding: 2rem 0;
+  }
   /* @media (max-width: 768px) {
     grid-template-columns: auto 18rem;
   }
@@ -102,8 +122,6 @@ export const Tr = styled.tr`
 
   @media (max-width: 540px) {
     grid-template-columns: 1fr 4fr repeat(2, 2fr);
-
-    margin: 0 1.6rem;
   }
 
   @media (max-width: 420px) {
@@ -115,7 +133,7 @@ export const Tr = styled.tr`
   .vote-weight,
   .proposals-created,
   .proposals-voted {
-    font-weight: ${theme.font.weight.bold};
+    font-weight: ${theme.font.weight.medium};
   }
 
   .proposals-voted {
@@ -145,8 +163,9 @@ export const Tr = styled.tr`
 
   .vote-power {
     @media (max-width: 420px) {
-      text-align: right;
       justify-content: flex-end;
+
+      text-align: right;
     }
   }
 
@@ -171,14 +190,14 @@ export const Th = styled.th`
 `
 
 export const Td = styled.td`
-  font-size: ${theme.font.sizes.font18};
-  font-weight: ${theme.font.weight.light};
-  letter-spacing: 0.5px;
-
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+
+  font-size: ${theme.font.sizes.font18};
+  font-weight: ${theme.font.weight.light};
+  letter-spacing: 0.5px;
 
   @media (max-width: 960px) {
     line-height: ${theme.font.sizes.font16};
@@ -196,13 +215,13 @@ export const Td = styled.td`
   }
 
   img {
-    width: 24px;
+    width: 2.4rem;
   }
 
   span {
     margin-left: 16px;
     @media (max-width: 540px) {
-      margin-left: 8px;
+      margin-left: 0.8rem;
     }
   }
 `
@@ -230,7 +249,7 @@ export const StatusProposal = styled.span`
   color: ${theme.colors.snow};
   line-height: ${theme.font.sizes.font16};
   font-size: ${theme.font.sizes.font16};
-  font-weight: ${theme.font.weight.bold};
+  font-weight: ${theme.font.weight.medium};
   text-transform: capitalize;
 
   margin-right: ${theme.spacings.space16};
@@ -296,15 +315,15 @@ export const TimeFrameMobile = styled.p`
 `
 
 export const StateMutability = styled.span`
-  color: ${theme.colors.snow};
-  line-height: ${theme.font.sizes.font18};
-  font-size: ${theme.font.sizes.font18};
-  font-weight: ${theme.font.weight.bold};
-  text-transform: capitalize;
-
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
+  color: ${theme.colors.snow};
+  line-height: ${theme.font.sizes.font18};
+  font-size: ${theme.font.sizes.font18};
+  font-weight: ${theme.font.weight.medium};
+  text-transform: capitalize;
 
   @media (max-width: 960px) {
     line-height: ${theme.font.sizes.font16};

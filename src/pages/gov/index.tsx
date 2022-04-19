@@ -1,5 +1,17 @@
-import NotFound from '../../templates/404'
+import { SWRConfig } from 'swr'
 
-export default function Index() {
-  return <NotFound />
+import Gov from '../../templates/Gov'
+
+const Index = () => {
+  return (
+    <SWRConfig
+      value={{
+        refreshInterval: 30000
+      }}
+    >
+      <Gov />
+    </SWRConfig>
+  )
 }
+
+export default Index

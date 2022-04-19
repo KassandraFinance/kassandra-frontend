@@ -8,20 +8,21 @@ export const BackgroundVote = styled.div`
   background-position: center;
   background-attachment: fixed;
 
-  box-shadow: inset 0px -20px 20px 0px #151117;
-  padding-bottom: 4px;
+  box-shadow: inset 0px -2rem 2rem 0px #151117;
+  padding-bottom: 0.4rem;
 `
 
 export const VoteContent = styled.div`
   max-width: 1140px;
   margin: 0 auto;
+  margin-bottom: 10rem;
 
   @media (max-width: 1200px) {
-    padding: 0 30px;
+    padding: 0 3rem;
   }
 
   @media (max-width: 540px) {
-    padding: 0 16px;
+    padding: 0 1.6rem;
   }
 `
 
@@ -30,6 +31,8 @@ export const TitleAndLinkContent = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  margin-top: 6.4rem;
+
   @media (max-width: 560px) {
     flex-direction: column;
     align-items: flex-start;
@@ -37,12 +40,12 @@ export const TitleAndLinkContent = styled.div`
 `
 
 export const LinkForum = styled.a`
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border: 0.1rem solid rgba(255, 255, 255, 0.04);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.04);
   color: ${theme.colors.grayDisabled};
 
-  line-height: ${theme.font.sizes.font16};
+  line-height: 115%;
   font-size: ${theme.font.sizes.font16};
   text-decoration: none;
 
@@ -50,7 +53,9 @@ export const LinkForum = styled.a`
   align-items: center;
 
   margin: 0 !important;
-  padding: 16px 24px;
+  padding: 1.6rem 2.4rem;
+
+  transition: border ${theme.transition.default};
 
   @media (max-width: 960px) {
     font-size: ${theme.font.sizes.font14};
@@ -70,10 +75,10 @@ export const LinkForum = styled.a`
   }
 
   &:hover {
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 0.1rem solid rgba(255, 255, 255, 0.5);
   }
 
   span {
-    margin-right: ${theme.spacings.space16};
+    margin-right: ${theme.spacings.space8};
   }
 `

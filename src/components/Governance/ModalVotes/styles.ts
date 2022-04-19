@@ -2,15 +2,26 @@ import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
 export const Backdrop = styled.div`
-  background-color: rgba(0, 0, 0, 0.6);
-
   position: fixed;
   top: 0;
   left: 0;
 
   width: 100vw;
   height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.6);
+
   z-index: 20;
+
+  animation: OpenModalVotes 500ms ease;
+  @keyframes OpenModalVotes {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 
 interface IBorderGradientProps {
@@ -19,20 +30,30 @@ interface IBorderGradientProps {
 
 // eslint-disable-next-line prettier/prettier
 export const Container = styled.div<IBorderGradientProps>`
-  display: ${props => (props.modalOpen ? 'block' : 'none')};
-  background: #1A1E2C;
-  border: 1px solid #FFFFFF3B;
-  border-radius: 10px;
-
-  width: min(470px, 90%);
-  max-height: min-content;
-  padding-right: 2.4rem;
-
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  display: ${props => (props.modalOpen ? 'block' : 'none')};
+  width: min(47rem, 90%);
+  max-height: min-content;
+
+  background-color: #1A1E2C;
+  border: 0.1rem solid #FFFFFF3B;
+  border-radius: 1rem;
+
   z-index: 21;
+
+  animation: OpenModalVotes 500ms ease;
+  @keyframes OpenModalVotes {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 
 export const Close = styled.div`
@@ -42,22 +63,24 @@ export const Close = styled.div`
   padding: 1.6rem 1.6rem 0 0;
 
   button {
+    width: 1.2rem;
+
     background-color: transparent;
     border: none;
+
     cursor: pointer;
-    width: 1.2rem;
+
     img {
       width: 1.2rem;
       height: 1.2rem;
     }
   }
 `
-export const ModalHeaderContainer = styled.div``
 export const ModalHeader = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3.2rem 2.4rem 3.2rem 3.2rem;
+  padding: 3.2rem 4.2rem 3.2rem 3.2rem;
 `
 
 export const TotalPercentageAndVotes = styled.div`
@@ -67,102 +90,174 @@ export const TotalPercentageAndVotes = styled.div`
 `
 
 export const TotalPercentage = styled.h3`
+  color: ${theme.colors.snow};
   font-size: ${theme.font.sizes.font18};
   font-weight: ${theme.font.weight.bold};
-  color: ${theme.colors.snow};
 `
 export const TotalVotes = styled.h3`
-  font-size: ${theme.font.sizes.font18};
-  letter-spacing: 0.9px;
-  font-weight: ${theme.font.weight.bold};
   color: ${theme.colors.snow};
+  font-size: ${theme.font.sizes.font18};
+  font-weight: ${theme.font.weight.bold};
+  letter-spacing: 0.9px;
 `
+
 export const VoteBar = styled.div`
-  background-color: #8b8b8b;
-  border-radius: 0.1rem;
-  display: block;
-
-  margin-top: 1.6rem;
   width: 100%;
-  min-width: 100px;
   height: 0.4rem;
-`
-export const VotesFavor = styled.div`
-  background-color: #0f0;
-  float: left;
-  padding: 0px;
-  margin: 0px;
-  width: 0px;
-  height: 10px;
-`
-export const VotesAgainst = styled.div`
-  background-color: #f00;
-  float: left;
-  padding: 0px;
-  margin: 0px;
-  width: 0px;
-  height: 10px;
+  margin-top: 1.6rem;
 `
 
-export const TableContainer = styled.div`
-  padding: 0 2.4rem 3.2rem 3.2rem;
-  max-height: 30rem;
+interface IVoteBarProps {
+  VotingState: string;
+}
 
-  overflow-y: auto;
+// eslint-disable-next-line prettier/prettier
+export const ProgressBar = styled.progress<IVoteBarProps>`
+  width: 100%;
+  height: 0.6rem;
 
-  ::-webkit-scrollbar {
-    width: 0.5rem;
-    margin-right: 2.4rem;
+  border-radius: 3rem;
+  border: none;
+
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+
+  ::-webkit-progress-bar {
+    border-radius: 2rem;
   }
-  ::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
+
+  ::-webkit-progress-value {
+    border-radius: 3rem;
+    box-shadow: 0 0 1rem ${props => {
+      if (props.VotingState === 'For') {
+        return '#2CE878'
+      } else {
+        return '#E8372C'
+      }
+    }};;
+    background: ${props => {
+      if (props.VotingState === 'For') {
+        return '#2CE878'
+      } else {
+        return '#E8372C'
+      }
+    }};
+  }
+
+  ::-moz-progress-bar {
+    border-radius: 3rem;
+    box-shadow: 0 0 1rem ${props => {
+      if (props.VotingState === 'For') {
+        return '#2CE878'
+      } else {
+        return '#E8372C'
+      }
+    }};;
+    background: ${props => {
+      if (props.VotingState === 'For') {
+        return '#2CE878'
+      } else {
+        return '#E8372C'
+      }
+    }};
   }
 `
 
-export const Table = styled.table`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+interface ITableContainerProps {
+  showShadow: boolean;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const TableContainer = styled.table<ITableContainerProps>`
+  width: 100%;
+  padding: 0 3.2rem 3.2rem 3.2rem;
+  position: relative;
+
+  &::after {
+    content: '';
+    ${props =>
+      props.showShadow
+        ? `
+      position: absolute;
+      bottom: 32px;
+
+      width: calc(100% - 16%);
+      height: 90px;
+
+      background: linear-gradient(rgba(255, 255, 255, 0), #1a1e2c 60%) 0 100%,
+        radial-gradient(
+            farthest-side at 50% 100%,
+            rgba(0, 0, 0, 0.2),
+            rgba(0, 0, 0, 0)
+          )
+          0 100%;
+      background-repeat: no-repeat;
+      background-size: 100% 45px, 100% 20px;
+    `
+        : ``}
+  }
 `
-export const Thead = styled.thead`
+
+export const Thead = styled.thead``
+export const Tr = styled.tr`
   display: flex;
   justify-content: space-between;
 
-  padding: 0 2.9rem 0 3.2rem;
+  margin-right: 1.2rem;
+  margin-bottom: 1.2rem;
 `
+
 export const Th = styled.th`
-  font-size: 16px;
+  font-size: 1.6rem;
   letter-spacing: 0.8px;
 `
 
-export const UserList = styled.tbody``
+export const Tbody = styled.tbody`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
-export const UserData = styled.li`
-  border-top: 1px solid #ffffff4d;
+  max-height: 30rem;
+  overflow-y: auto;
+  padding-right: 0.8rem;
 
-  margin: 1.2rem 0 0;
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+  }
+`
 
+export const UserData = styled.tr`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 5rem;
+
+  border-top: 0.1rem solid #ffffff4d;
 `
 
-export const UserAvatar = styled.td`
-  margin-right: 0.8rem;
-`
 export const UserName = styled.td`
-  font-size: ${theme.font.sizes.font16};
-  font-weight: ${theme.font.weight.light};
   display: flex;
   align-items: flex-start;
-  margin: 1.6rem 0;
-`
-export const UserVote = styled.td`
+  gap: 0.8rem;
+
   font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.light};
+
+  img {
+    border-radius: 100%;
+  }
+`
+export const UserVote = styled.td`
   display: flex;
   margin: 1.6rem 0;
+
+  font-size: ${theme.font.sizes.font16};
+  font-weight: ${theme.font.weight.light};
 `
 
 export const ButtonWrapper = styled.div`

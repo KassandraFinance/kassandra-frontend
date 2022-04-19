@@ -7,10 +7,10 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 import substr from '../../utils/substr'
 
 import Button from '../Button'
-import ModalLogOut from '../ModalLogOut'
 import DropdownInvest from '../Dropdown'
-import ModalWalletConnect from '../ModalWalletConnect'
-import ModalSocialMediaMobile from '../ModalSocialMediaMobile'
+import ModalLogOut from '../Modals/ModalLogOut'
+import ModalWalletConnect from '../Modals/ModalWalletConnect'
+import ModalSocialMediaMobile from '../Modals/ModalSocialMediaMobile'
 
 import options from '../../../public/assets/options.svg'
 import kacy64 from '../../../public/assets/logo-64.svg'
@@ -27,7 +27,8 @@ const Header = () => {
   const [isModalLogout, setIsModalLogout] = React.useState<boolean>(false)
   // const [isModalLanguages, setIsModalLanguages] = React.useState<boolean>(false)
   // eslint-disable-next-line prettier/prettier
-  const [isModalSocialMedia, setIsModalSocialMedia] = React.useState<boolean>(false)
+  const [isModalSocialMedia, setIsModalSocialMedia] =
+    React.useState<boolean>(false)
 
   const { trackEvent } = useMatomo()
 
@@ -44,20 +45,22 @@ const Header = () => {
   return (
     <>
       <S.Wrapper id="top">
-        <Link href="/" passHref>
-          <S.LogoWrapper>
+        <S.LogoWrapper>
+          <Link href="/" passHref>
             <a className="logo-desktop">
               <Image src={logoKassandra} alt="Kassandra" />
             </a>
+          </Link>
+          <Link href="/" passHref>
             <a className="logo-ipad">
-              <Image src={kacy64} alt="Kassandra" />
+              <Image src={kacy64} width={64} height={64} alt="Kassandra" />
             </a>
-          </S.LogoWrapper>
-        </Link>
+          </Link>
+        </S.LogoWrapper>
         <S.Menu>
           <Link href="/" passHref>
             <a className="logo-mobile">
-              <Image src={kacy64} alt="Kassandra" />
+              <Image src={kacy64} width={64} height={64} alt="Kassandra" />
             </a>
           </Link>
           <DropdownInvest
@@ -71,7 +74,23 @@ const Header = () => {
               Stake/Farm
             </S.MenuLink>
           </Link>
-          <S.MenuLinkDisable>Vote</S.MenuLinkDisable>
+          {process.env.NEXT_PUBLIC_VOTE === '1' ? (
+            <DropdownInvest
+              nameOnHeader="vote"
+              linkPage={[
+                {
+                  name: 'Overview',
+                  href: '/gov'
+                },
+                {
+                  name: 'User profile',
+                  href: `/gov/address/${userWalletAddress}`
+                }
+              ]}
+            />
+          ) : (
+            <S.MenuLinkDisable>Vote</S.MenuLinkDisable>
+          )}
           <Link href="/about" passHref>
             <S.MenuLink
               onClick={() => clickMatomoEvent('click-on-link', 'about')}
@@ -196,16 +215,11 @@ const Header = () => {
           </S.ButtonOptions>
         </S.OptionsContainer>
       </S.MenuBottom>
+      {isModalSocialMedia && (
+        <ModalSocialMediaMobile setModalOpen={setIsModalSocialMedia} />
+      )}
 
-      <ModalSocialMediaMobile
-        modalOpen={isModalSocialMedia}
-        setModalOpen={setIsModalSocialMedia}
-      />
-
-      <ModalWalletConnect
-        modalOpen={isModalWallet}
-        setModalOpen={setIsModalWallet}
-      />
+      {isModalWallet && <ModalWalletConnect setModalOpen={setIsModalWallet} />}
 
       <ModalLogOut
         modalOpen={isModalLogout}

@@ -15,7 +15,7 @@ export const VotginCards = styled.div`
   margin: 0 auto;
 
   @media (max-width: 960px) {
-    gap: ${theme.spacings.space24};
+    gap: 2.3rem;
   }
 
   @media (max-width: 700px) {
@@ -27,27 +27,36 @@ export const VotginCards = styled.div`
 `
 
 export const VotingDataCard = styled.div`
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
 
-  padding: ${theme.spacings.space24};
+  background: rgba(255, 255, 255, 0.05);
+  border: 0.1rem solid rgba(255, 255, 255, 0.2);
+  border-radius: 1.2rem;
+
+  padding: 2.3rem;
   @media (max-width: 700px) {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: ${theme.spacings.space18};
+    border-radius: 0.8rem;
   }
 `
 
 export const TextVoting = styled.span`
-  font-size: ${theme.font.sizes.font16};
-  font-weight: ${theme.font.weight.light};
-
   display: flex;
+  align-items: center;
+  gap: 0.8rem;
+
+  font-size: ${theme.font.sizes.font14};
+  font-weight: ${theme.font.weight.medium};
+  line-height: 115%;
+  height: 1.6rem;
+  color: ${theme.colors.grayDisabled};
+  //text-align: center;
 
   @media (max-width: 960px) {
     font-size: ${theme.font.sizes.font14};
@@ -55,20 +64,20 @@ export const TextVoting = styled.span`
 `
 
 export const Tooltip = styled.div`
-  margin-top: -1px;
-  margin-left: 8px;
+  //margin-top: -1px;
+  //margin-left: 8px;
 
-  padding: 1px;
+  padding: 0.1rem;
 
-  position: relative;
-  z-index: 99;
+  //position: relative;
+  z-index: 19;
 `
 
 export const ValueVoting = styled.span`
   font-size: ${theme.font.sizes.font32};
   font-weight: ${theme.font.weight.medium};
 
-  margin-top: ${theme.spacings.space24};
+  //margin-top: ${theme.spacings.space24};
 
   @media (max-width: 960px) {
     font-size: ${theme.font.sizes.font24};
@@ -84,22 +93,22 @@ export const Links = styled.div`
   flex-direction: row;
   justify-content: space-between;
 
-  max-width: 360px;
-  margin-top: 16px;
+  max-width: 36rem;
+  margin-top: 1.6rem;
 
   @media (max-width: 700px) {
     max-width: 100%;
   }
 
   a {
+    display: flex;
+    align-items: center;
+    transition: 200ms;
+
     color: ${theme.colors.snow};
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.light};
     text-decoration: none;
-
-    display: flex;
-    align-items: center;
-    transition: 200ms;
 
     @media (max-width: 960px) {
       font-size: ${theme.font.sizes.font14};

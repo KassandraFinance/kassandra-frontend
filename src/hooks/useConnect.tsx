@@ -2,8 +2,10 @@
 // import detectEthereumProvider from '@metamask/detect-provider'
 import WalletConnect from '@walletconnect/client'
 import QRCodeModal from '@walletconnect/qrcode-modal'
+import { useRouter } from 'next/router'
 import React from 'react'
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
+import { toChecksumAddress } from 'web3-utils'
 import { ToastError, ToastSuccess } from '../components/Toastify/toast'
 import { actionSetChainId } from '../store/modules/chainId/actions'
 
@@ -27,12 +29,17 @@ const useConnect = () => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const dispatch = useDispatch()
 
+  const router = useRouter()
+
   const handleAccountsChanged = React.useCallback(accounts => {
     try {
       if (accounts.length === 0 || accounts[0] === undefined) {
         dispatch(actionGetUserAddressWallet(''))
       } else if (accounts[0] !== userWalletAddress) {
-        dispatch(actionGetUserAddressWallet(accounts[0]))
+        dispatch(actionGetUserAddressWallet(toChecksumAddress(accounts[0])))
+        if (router.asPath === '/gov/address') {
+          router.push(`/gov/address/${toChecksumAddress(accounts[0])}`)
+        }
       }
     } catch (error: any) {
       console.log(error)
@@ -44,17 +51,15 @@ const useConnect = () => {
     window.location.reload()
   }, [])
 
-  // const getAccounts = React.useCallback(async () => {
-  //   const accounts = await web3.eth.getAccounts()
-  //   handleAccountsChanged(accounts)
-  // }, [])
+  const getAccounts = React.useCallback(async () => {
+    const accounts = await window.ethereum.request({ method: 'eth_accounts' })
+    handleAccountsChanged(accounts)
+  }, [])
 
-  // const getChainId = React.useCallback(async () => {
-  //   const id = await web3.eth.getChainId()
-  //   const convertedChainId = await web3.utils.numberToHex(String(id))
-
-  //   dispatch(actionSetChainId(convertedChainId))
-  // }, [])
+  const getChainId = React.useCallback(async () => {
+    const id = await window.ethereum.request({ method: 'eth_chainId' })
+    dispatch(actionSetChainId(id))
+  }, [])
 
   const handleDisconnected = React.useCallback(() => {
     if (connector) {

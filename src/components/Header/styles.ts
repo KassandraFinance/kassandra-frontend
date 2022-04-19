@@ -2,44 +2,47 @@ import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 export const Wrapper = styled.div`
+  position: relative;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   margin: 0 auto;
-  max-width: 1140px;
-  height: 110px;
+  max-width: 114rem;
+  height: 11rem;
 
-  position: relative;
   z-index: ${theme.layers.menu};
-
   @media (max-width: 1200px) {
-    padding: 0 30px;
+    padding: 0 3rem;
   }
 
   @media (max-width: 540px) {
-    height: 80px;
-
-    padding: 0 16px;
+    height: 8rem;
+    padding: 0 1.6rem;
   }
 `
 
 export const LogoWrapper = styled.div`
   .logo-desktop {
     img {
-      height: 40px;
+      height: 4rem;
     }
+
     @media (max-width: 960px) {
       display: none;
     }
   }
+
   .logo-ipad {
     img {
-      width: 70px;
+      width: 7rem;
     }
+
     @media (min-width: 961px) {
       display: none;
     }
+
     @media (max-width: 539px) {
       display: none;
     }
@@ -52,25 +55,29 @@ export const Menu = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 58rem;
 
-  max-width: 580px;
   .logo-mobile {
-    width: 46px;
-    margin-right: -8px;
+    width: 4.6rem;
+    margin-right: -0.8rem;
+
     @media (min-width: 541px) {
       display: none;
     }
   }
 
   @media (max-width: 960px) {
-    min-width: 480px;
+    min-width: 48rem;
   }
+
   @media (max-width: 768px) {
-    min-width: 300px;
+    min-width: 30rem;
   }
+
   @media (max-width: 540px) {
     min-width: 100%;
   }
+
   .connect-wallet {
     @media (max-width: 768px) {
       display: none;
@@ -79,26 +86,28 @@ export const Menu = styled.nav`
 `
 
 export const MenuLink = styled.a`
+  position: relative;
+
+  margin: 0.3rem ${theme.spacings.space24};
+
   color: ${theme.colors.snow};
   font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.light};
   text-decoration: none;
   text-align: center;
 
-  margin: 0.3rem ${theme.spacings.space24};
-  position: relative;
-
   &:hover {
     &::after {
       content: '';
-      display: block;
-
-      height: 0.3rem;
-      border-radius: 0.3rem;
-      background-color: ${theme.colors.cyan};
-      margin-top: 12px;
-
       position: absolute;
+
+      display: block;
+      height: 0.3rem;
+      margin-top: 1.2rem;
+
+      background-color: ${theme.colors.cyan};
+      border-radius: 0.3rem;
+
       animation: hoverAnimation 0.2s forwards;
     }
 
@@ -113,36 +122,39 @@ export const MenuLink = styled.a`
       }
     }
   }
+
   @media (max-width: 960px) {
     margin: 0.3rem 0;
   }
+
   @media (max-width: 540px) {
     font-size: ${theme.font.sizes.font14};
   }
 `
 
 export const MenuLinkDisable = styled.a`
+  position: relative;
+  margin: 0.3rem ${theme.spacings.space24};
+
   color: ${theme.colors.grayDisabled};
   font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.light};
   text-decoration: none;
   text-align: center;
 
-  margin: 0.3rem ${theme.spacings.space24};
-  position: relative;
-
   cursor: not-allowed;
   &:hover {
     &::after {
       content: '';
+      position: absolute;
+
       display: block;
+      height: 0.3rem;
+      margin-top: 1.2rem;
 
       background-color: ${theme.colors.grayDisabled};
-      height: 0.3rem;
       border-radius: 0.3rem;
-      margin-top: 12px;
 
-      position: absolute;
       animation: hoverAnimation 0.3s forwards;
     }
     @keyframes hoverAnimation {
@@ -156,69 +168,72 @@ export const MenuLinkDisable = styled.a`
       }
     }
   }
+
   @media (max-width: 960px) {
     margin: 0.3rem 0;
   }
+
   @media (max-width: 540px) {
     font-size: ${theme.font.sizes.font14};
   }
 `
 
 export const MenuBottom = styled.div`
-  background-color: ${theme.colors.darkPurple};
+  position: fixed;
+  bottom: 0;
+  z-index: ${theme.layers.menu};
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  position: fixed;
-  bottom: 0;
-
   width: 100%;
-  height: 68px;
-  padding: 16px;
+  height: 6.8rem;
+  padding: 1.6rem;
 
-  z-index: ${theme.layers.menu};
+  background-color: ${theme.colors.darkPurple};
+
   @media (min-width: 769px) {
     display: none;
   }
 
   .button-mobile {
-    font-size: ${theme.font.sizes.font12};
     max-width: 100%;
-    height: 36px;
+    height: 3.6rem;
+
+    font-size: ${theme.font.sizes.font12};
 
     img {
-      width: 16px;
+      width: 1.6rem;
     }
   }
 `
 
 export const KacyAmount = styled.div`
-  border: 1px solid ${theme.colors.snow};
-  border-radius: ${theme.border.radius};
-
   display: flex;
   align-items: center;
-
-  height: 36px;
-  padding: 6px;
+  height: 3.6rem;
+  padding: 0.6rem;
   max-width: 100%;
+
+  border: 0.1rem solid ${theme.colors.snow};
+  border-radius: ${theme.border.radius};
+
   img {
-    width: 20px;
+    width: 2rem;
   }
 `
 
 export const OptionsContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  gap: 8px;
+  gap: 0.8rem;
 `
 
 export const ButtonOptions = styled.button`
+  width: 3.2rem;
+  height: 3.2rem;
+
   background-color: rgba(255, 255, 255, 0.1);
   border: none;
   border-radius: 50%;
-
-  width: 32px;
-  height: 32px;
 `

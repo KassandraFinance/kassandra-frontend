@@ -17,7 +17,7 @@ const Products = () => {
         <S.Divider />
         <ExternalLink
           hrefLink="https://kassandrafoundation.medium.com/how-kassandra-works-ac50630601f6"
-          text="Learn to more"
+          text="Learn more"
         />
         <S.Link>
           {/* <span>How it Works

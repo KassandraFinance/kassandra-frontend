@@ -129,6 +129,10 @@ export const TransactionSettings = styled.div`
     > span {
       margin-left: 0.4rem;
     }
+
+    @media (max-width: 360px) {
+      font-size: 10.7px;
+    }
   }
 
   fieldset {
@@ -151,6 +155,15 @@ export const TransactionSettings = styled.div`
       to {
         opacity: 1;
       }
+    }
+
+    @media (max-width: 960px) {
+      padding: 1.6rem;
+    }
+
+    @media (max-width: 360px) {
+      padding: 1.2rem;
+      right: -2rem;
     }
   }
 `
@@ -176,6 +189,10 @@ export const TransactionContentOptions = styled.div`
 export const TransactionOptions = styled.div`
   display: flex;
   gap: 1.1rem;
+
+  @media (max-width: 550px) {
+    gap: 0.8rem;
+  }
 `
 export const TransactionOption = styled.div`
   position: relative;
@@ -227,6 +244,10 @@ export const TransactionOption = styled.div`
     border-radius: 0.3rem;
 
     cursor: pointer;
+
+    @media (max-width: 550px) {
+      width: 6rem;
+    }
   }
 
   .custom {
@@ -254,6 +275,10 @@ export const TransactionOption = styled.div`
 
     -moz-appearance: textfield;
     appearance: textfield;
+
+    @media (max-width: 550px) {
+      width: 7.5rem;
+    }
   }
 
   input:checked + label,
@@ -329,7 +354,7 @@ export const Span = styled.span<ISpanProps>`
     font-size: 1.3rem;
   }
 
-  @media(max-width: 350px) {
+  @media(max-width: 360px) {
     padding-left: 1.2rem;
     font-size: 10.7px;
   }
@@ -347,7 +372,7 @@ export const SpanLight = styled.span`
     font-size: 1.3rem;
   }
 
-  @media (max-width: 350px) {
+  @media (max-width: 360px) {
     font-size: 10.7px;
   }
 `
@@ -378,8 +403,8 @@ export const Symbol = styled.h3<ISymbolProps>`
       font-size: 2.2rem;
     }
 
-    @media(max-width: 350px) {
-      font-size: ${theme.font.sizes.font20};
+    @media(max-width: 360px) {
+      font-size: ${theme.font.sizes.font16};
     }`
       : `
       line-height: ${theme.font.sizes.font20};
@@ -400,7 +425,7 @@ export const Symbol = styled.h3<ISymbolProps>`
       @media(max-width: 380px) {
         font-size: ${theme.font.sizes.font16};
       }
-      @media(max-width: 350px) {
+      @media(max-width: 360px) {
         font-size: ${theme.font.sizes.font14};
       }
   `}
@@ -473,7 +498,7 @@ export const Input = styled.input<IInputProps>`
     font-size: 2.2rem;
   }
 
-  @media (max-width: 350px) {
+  @media (max-width: 360px) {
     font-size: ${theme.font.sizes.font20};
   }
 

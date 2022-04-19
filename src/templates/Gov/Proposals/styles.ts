@@ -8,12 +8,12 @@ export const BackgroundVote = styled.div`
   background-position: center;
   background-attachment: fixed;
 
-  box-shadow: inset 0px -20px 20px 0px #151117;
-  padding-bottom: 4px;
+  box-shadow: inset 0px -2rem 2rem 0px #151117;
+  padding-bottom: 0.4rem;
 `
 
 export const VoteContent = styled.div`
-  max-width: 1140px;
+  max-width: 114rem;
   margin: 0 auto;
 
   a {
@@ -26,11 +26,11 @@ export const VoteContent = styled.div`
   }
 
   @media (max-width: 1200px) {
-    padding: 0 30px;
+    padding: 0 3rem;
   }
 
   @media (max-width: 540px) {
-    padding: 0 16px;
+    padding: 0 1.6rem;
   }
 `
 
@@ -51,7 +51,7 @@ export const Title = styled.div`
 
   max-width: 100%;
   a {
-    max-width: 172px;
+    max-width: 17.2rem;
 
     margin: 0;
   }
@@ -69,8 +69,8 @@ export const VotingPowerContent = styled.div`
   }
 
   & > div {
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
+    border: 0.1rem solid rgba(255, 255, 255, 0.2);
+    border-radius: 1.2rem;
   }
 `
 
@@ -91,8 +91,8 @@ export const TitleAndLinkContent = styled.div`
 `
 
 export const LinkForum = styled.a`
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  border-radius: 8px;
+  border: 0.1rem solid rgba(255, 255, 255, 0.04);
+  border-radius: 0.8rem;
   background: rgba(255, 255, 255, 0.04);
   color: ${theme.colors.grayDisabled};
 
@@ -104,7 +104,7 @@ export const LinkForum = styled.a`
   align-items: center;
 
   margin: 0 !important;
-  padding: 16px 24px;
+  padding: 1.6rem 2.4rem;
 
   @media (max-width: 960px) {
     font-size: ${theme.font.sizes.font14};
@@ -123,7 +123,7 @@ export const LinkForum = styled.a`
   }
 
   &:hover {
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 0.1rem solid rgba(255, 255, 255, 0.5);
   }
 
   span {
