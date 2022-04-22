@@ -160,6 +160,12 @@ const Details = ({
             text="Get LP"
           />
         )}
+        {symbol === 'LP-JOE' && (
+          <ExternalLink
+            hrefLink={`https://traderjoexyz.com/trade?outputCurrency=${Kacy}`}
+            text="Get LP-JOE"
+          />
+        )}
         {symbol === 'KACY' && (
           <ExternalLink
             hrefLink={`https://app.pangolin.exchange/#/swap?outputCurrency=${Kacy}`}
