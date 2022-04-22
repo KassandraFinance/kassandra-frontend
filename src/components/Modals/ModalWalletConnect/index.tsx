@@ -1,6 +1,5 @@
 import React from 'react'
-
-// import detectEthereumProvider from '@metamask/detect-provider'
+import detectEthereumProvider from '@metamask/detect-provider'
 
 import useConnect from '../../../hooks/useConnect'
 
@@ -21,19 +20,19 @@ const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
     setModalOpen(false)
   }
 
-  // React.useEffect(() => {
-  //   const checkEthereumProvider = async () => {
-  //     const provider = await detectEthereumProvider()
+  React.useEffect(() => {
+    const checkEthereumProvider = async () => {
+      const provider = await detectEthereumProvider()
 
-  //     if (provider) {
-  //       setHasEthereumProvider(true)
-  //     } else {
-  //       setHasEthereumProvider(false)
-  //     }
-  //   }
+      if (provider) {
+        setHasEthereumProvider(true)
+      } else {
+        setHasEthereumProvider(false)
+      }
+    }
 
-  //   checkEthereumProvider()
-  // }, [modalOpen])
+    checkEthereumProvider()
+  }, [])
 
   return (
     <>

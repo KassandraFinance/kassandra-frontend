@@ -27,6 +27,7 @@ const Web3Disabled = ({
   const [openWallet, setOpenWallet] = React.useState(false)
 
   function getFunction(type: string) {
+    console.log(type)
     switch (type) {
       case 'connect':
         setOpenWallet(true)

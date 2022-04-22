@@ -24,6 +24,8 @@ export const LPDaiAvax = process.env.NEXT_PUBLIC_MASTER === '1' ?
   '0xe64b1772a9e28E694FEc27Bc7901f88855252E9F'
 
 
+export const LPKacyAvaxJoe = '0xc45893e0ee426a643e54829ee8c697995e5980ed'
+
 export const Kacy = process.env.NEXT_PUBLIC_MASTER === '1' ?
   '0xf32398dae246C5f672B52A54e9B413dFFcAe1A44' 
   : 
@@ -76,6 +78,7 @@ export const SUBGRAPH_URL = process.env.NODE_ENV
 export const chains: { [key: string]: ChainDetails } = {
   avalanche: {
     chainId: 43114,
+    chainIdHex: '0xa86a',
     chainName: 'Avalanche Mainnet',
     nativeCurrency: {
       name: 'Avalanche',
@@ -88,6 +91,7 @@ export const chains: { [key: string]: ChainDetails } = {
   },
   fuji: {
     chainId: 43113,
+    chainIdHex: '0xa869',
     chainName: 'Avalanche Fuji Testnet',
     nativeCurrency: {
       name: 'Avalanche',

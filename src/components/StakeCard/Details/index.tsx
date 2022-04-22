@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
-import Link from 'next/link'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
@@ -158,6 +157,12 @@ const Details = ({
           <ExternalLink
             hrefLink={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
             text="Get LP"
+          />
+        )}
+        {symbol === 'LP-JOE' && (
+          <ExternalLink
+            hrefLink={`https://traderjoexyz.com/trade?outputCurrency=${Kacy}`}
+            text="Get LP-JOE"
           />
         )}
         {symbol === 'KACY' && (
