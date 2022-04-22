@@ -165,7 +165,7 @@ const Details = ({
         )}
         {symbol === 'LP-JOE' && (
           <ExternalLink
-            hrefLink={`https://traderjoexyz.com/trade?outputCurrency=${Kacy}`}
+            hrefLink={`https://traderjoexyz.com/pool/AVAX/${Kacy}`}
             text="Get LP-JOE"
           />
         )}

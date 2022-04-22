@@ -407,7 +407,7 @@ const StakeCard = ({
                   )}
                   {symbol === 'lp-joe' && (
                     <a
-                      href={`https://traderjoexyz.com/trade?outputCurrency=${Kacy}#/`}
+                      href={`https://traderjoexyz.com/pool/AVAX/${Kacy}`}
                       target="_blank"
                       rel="noreferrer"
                     >
