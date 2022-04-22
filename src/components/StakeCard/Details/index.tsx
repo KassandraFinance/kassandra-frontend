@@ -73,6 +73,9 @@ const Details = ({
   let price
 
   switch (pid) {
+    case 7:
+      price = priceLPToken.priceLPJoe
+      break
     case 6:
       price = priceLPToken.aHYPE
       break
