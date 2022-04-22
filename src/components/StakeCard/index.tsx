@@ -196,10 +196,15 @@ const StakeCard = ({
 
   async function handleLPtoUSD() {
     const reservesKacyAvax = await viewgetReserves(LPKacyAvax)
+    const reservesKacyAvaxJoe = await viewgetReserves(LPKacyAvaxJoe)
+
     const reservesDaiAvax = await viewgetReserves(LPDaiAvax)
 
     let kacyReserve = reservesKacyAvax._reserve1
     let avaxKacyReserve = reservesKacyAvax._reserve0
+
+    const avaxKacyReserveJoe = reservesKacyAvaxJoe._reserve0
+
     let DaiReserve = reservesDaiAvax._reserve1
     let AvaxDaiReserve = reservesDaiAvax._reserve0
 
@@ -211,9 +216,12 @@ const StakeCard = ({
     }
 
     const avaxInDollar = Big(DaiReserve).div(Big(AvaxDaiReserve))
+
     const kacyInDollar = avaxInDollar.mul(Big(avaxKacyReserve).div(kacyReserve))
 
     const allAVAXDollar = Big(avaxKacyReserve).mul(avaxInDollar)
+    const allAVAXDollarJoe = Big(avaxKacyReserveJoe).mul(avaxInDollar)
+
     const supplyLPToken = await lpToken.totalSupply()
     const supplyLPJoeToken = await lpJoeToken.totalSupply()
 
@@ -226,7 +234,7 @@ const StakeCard = ({
     }
     if (supplyLPJoeToken.toString() !== '0') {
       // eslint-disable-next-line prettier/prettier
-      const priceLPJoe = allAVAXDollar.mul(2).div(Big(supplyLPJoeToken.toString()))
+      const priceLPJoe = allAVAXDollarJoe.mul(2).div(Big(supplyLPJoeToken.toString()))
       setPriceLPToken(prevState => ({
         ...prevState,
         priceLPJoe
