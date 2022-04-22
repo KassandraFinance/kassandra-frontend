@@ -16,8 +16,6 @@ import Header from '../../components/Header'
 import Breadcrumb from '../../components/Breadcrumb'
 import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
 
-import ComingSoon from './ComingSoon'
-
 import * as S from './styles'
 
 const StakeFarm = () => {
@@ -223,6 +221,20 @@ const StakeFarm = () => {
                 stakedUntil={kacyStake.stakedUntil}
                 stakeWithVotingPower={true}
               />
+              {process.env.NEXT_PUBLIC_MASTER === '1' ?
+                <StakeCard
+                  pid={7}
+                  symbol="lp-joe"
+                  balanceOf={kacyStake.balance}
+                  earned={kacyStake.earned}
+                  getReward={kacyStake.getReward}
+                  withdrawable={kacyStake.withdrawable}
+                  poolInfo={kacyStake.poolInfo}
+                  unstaking={kacyStake.unstaking}
+                  stakedUntil={kacyStake.stakedUntil}
+                  stakeWithVotingPower={true}
+                />
+              : ''}
               {process.env.NEXT_PUBLIC_MASTER === '1' ? (
                 <StakeCard
                   pid={6}
@@ -239,7 +251,6 @@ const StakeFarm = () => {
               ) : (
                 ''
               )}
-              <ComingSoon />
             </S.GridStaking>
           </S.StakeFarm>
         )

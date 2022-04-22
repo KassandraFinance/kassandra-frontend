@@ -19,7 +19,8 @@ import {
   LPDaiAvax,
   Kacy,
   SUBGRAPH_URL,
-  HeimCRPPOOL
+  HeimCRPPOOL,
+  LPKacyAvaxJoe
 } from '../../constants/tokenAddresses'
 import usePriceLP from '../../hooks/usePriceLP'
 import { PoolInfo } from '../../hooks/useStakingContract'
@@ -53,6 +54,7 @@ import * as S from './styles'
 
 export interface IPriceLPToken {
   priceLP: Big;
+  priceLPJoe: Big;
   kacy: Big;
   aHYPE: Big;
 }
@@ -98,7 +100,8 @@ const staked: any = {
   3: 'KACY',
   4: 'KACY',
   5: 'LP',
-  6: 'aHYPE'
+  6: 'aHYPE',
+  7: 'LP-JOE'
 }
 
 const StakeCard = ({
@@ -129,6 +132,7 @@ const StakeCard = ({
     React.useState<boolean>(false)
   const [priceLPToken, setPriceLPToken] = React.useState<IPriceLPToken>({
     priceLP: Big(-1),
+    priceLPJoe: Big(-1),
     kacy: Big(-1),
     aHYPE: Big(-1)
   })
@@ -174,6 +178,7 @@ const StakeCard = ({
   const { trackEvent } = useMatomo()
   const { viewgetReserves } = usePriceLP()
   const lpToken = useERC20Contract(LPKacyAvax)
+  const lpJoeToken = useERC20Contract(LPKacyAvaxJoe)
 
   const productCategories = [
     'Stake',
@@ -210,12 +215,21 @@ const StakeCard = ({
 
     const allAVAXDollar = Big(avaxKacyReserve).mul(avaxInDollar)
     const supplyLPToken = await lpToken.totalSupply()
+    const supplyLPJoeToken = await lpJoeToken.totalSupply()
 
     if (supplyLPToken.toString() !== '0') {
       const priceLP = allAVAXDollar.mul(2).div(Big(supplyLPToken.toString()))
       setPriceLPToken(prevState => ({
         ...prevState,
         priceLP
+      }))
+    }
+    if (supplyLPJoeToken.toString() !== '0') {
+      // eslint-disable-next-line prettier/prettier
+      const priceLPJoe = allAVAXDollar.mul(2).div(Big(supplyLPJoeToken.toString()))
+      setPriceLPToken(prevState => ({
+        ...prevState,
+        priceLPJoe
       }))
     }
     if (data) {
@@ -336,6 +350,9 @@ const StakeCard = ({
                   style={{ width: '5.8rem' }}
                 />
               ) : null}
+              {symbol === 'lp-joe' ? (
+                <img src="/assets/icons/joe-kacy.svg" alt="" width={144} />
+              ) : null}
               {symbol === 'lp' ? (
                 <img src="/assets/icons/lp-icon.svg" alt="" width={144} />
               ) : null}
@@ -362,20 +379,31 @@ const StakeCard = ({
               <S.PoolName>
                 <S.StakeAndEarn>
                   <p>STAKE</p>
-                  {symbol === 'ahype' ? (
+                  {symbol === 'ahype' && (
                     <Link href="/products/ahype" passHref>
                       <a>
                         $aHYPE
                         <img src="/assets/GoToSite.svg" alt="" />
                       </a>
                     </Link>
-                  ) : (
+                  )}
+                  {symbol === 'lp' && (
                     <a
                       href={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
                       target="_blank"
                       rel="noreferrer"
                     >
                       $KACY-AVAX PNG LP
+                      <img src="/assets/GoToSite.svg" alt="" />
+                    </a>
+                  )}
+                  {symbol === 'lp-joe' && (
+                    <a
+                      href={`https://traderjoexyz.com/trade?outputCurrency=${Kacy}#/`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      $KACY-AVAX JOE LP
                       <img src="/assets/GoToSite.svg" alt="" />
                     </a>
                   )}
