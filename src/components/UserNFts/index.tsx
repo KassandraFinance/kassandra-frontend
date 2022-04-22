@@ -14,8 +14,7 @@ const UserNFTs = ({ address }: IUserNFTsProps) => {
       `https://deep-index.moralis.io/api/v2/${address}/nft?chain=eth&format=decimal`,
       {
         headers: {
-          'X-API-Key':
-            'fSriV6X2wo9n7ccROI4RmqkWakNl9PYJmaKFFvZNAmcIY4nbJXhNO9KyJ71A1zTj'
+          'X-API-Key': 'YOUR_API_KEY_FROM_MORALIS_ACCOUNT'
         }
       }
     )
