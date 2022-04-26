@@ -51,7 +51,6 @@ const YourStake = ({
 
   const getYourStake = React.useCallback(async () => {
     const poolInfoResponse = await poolInfo(pid)
-
     if (!poolInfoResponse.withdrawDelay) {
       return
     }

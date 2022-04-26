@@ -72,6 +72,9 @@ const Details = ({
   let price
 
   switch (pid) {
+    case 7:
+      price = priceLPToken.priceLPJoe
+      break
     case 6:
       price = priceLPToken.aHYPE
       break
@@ -141,7 +144,7 @@ const Details = ({
         <span>{infoStakeStatic.startDate}</span>
       </S.Info>
       <S.Info>
-        <span>End date</span>
+        <span>Rewards Update</span>
         <span>{infoStakeStatic.endDate}</span>
       </S.Info>
       <S.Info>
@@ -161,7 +164,7 @@ const Details = ({
         )}
         {symbol === 'LP-JOE' && (
           <ExternalLink
-            hrefLink={`https://traderjoexyz.com/trade?outputCurrency=${Kacy}`}
+            hrefLink={`https://traderjoexyz.com/pool/AVAX/${Kacy}`}
             text="Get LP-JOE"
           />
         )}

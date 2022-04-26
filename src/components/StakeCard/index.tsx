@@ -196,10 +196,15 @@ const StakeCard = ({
 
   async function handleLPtoUSD() {
     const reservesKacyAvax = await viewgetReserves(LPKacyAvax)
+    const reservesKacyAvaxJoe = await viewgetReserves(LPKacyAvaxJoe)
+
     const reservesDaiAvax = await viewgetReserves(LPDaiAvax)
 
     let kacyReserve = reservesKacyAvax._reserve1
     let avaxKacyReserve = reservesKacyAvax._reserve0
+
+    const avaxKacyReserveJoe = reservesKacyAvaxJoe._reserve0
+
     let DaiReserve = reservesDaiAvax._reserve1
     let AvaxDaiReserve = reservesDaiAvax._reserve0
 
@@ -211,9 +216,12 @@ const StakeCard = ({
     }
 
     const avaxInDollar = Big(DaiReserve).div(Big(AvaxDaiReserve))
+
     const kacyInDollar = avaxInDollar.mul(Big(avaxKacyReserve).div(kacyReserve))
 
     const allAVAXDollar = Big(avaxKacyReserve).mul(avaxInDollar)
+    const allAVAXDollarJoe = Big(avaxKacyReserveJoe).mul(avaxInDollar)
+
     const supplyLPToken = await lpToken.totalSupply()
     const supplyLPJoeToken = await lpJoeToken.totalSupply()
 
@@ -226,8 +234,8 @@ const StakeCard = ({
       }))
     }
     if (supplyLPJoeToken.toString() !== '0') {
-      const priceLPJoe = allAVAXDollar.mul(2).div(Big(supplyLPToken.toString()))
-
+      // eslint-disable-next-line prettier/prettier
+      const priceLPJoe = allAVAXDollarJoe.mul(2).div(Big(supplyLPJoeToken.toString()))
       setPriceLPToken(prevState => ({
         ...prevState,
         priceLPJoe
@@ -345,13 +353,20 @@ const StakeCard = ({
                 <img src="/assets/logo-kacy-stake.svg" alt="" />
               ) : null}
               {symbol === 'ahype' ? (
-                <img src="/assets/ahype.svg" alt="" style={{ width: '58px' }} />
+                <img
+                  src="/assets/icons/ahype-stake.svg"
+                  alt=""
+                  style={{ width: '5.8rem' }}
+                />
+              ) : null}
+              {symbol === 'lp-joe' ? (
+                <img src="/assets/icons/joe-kacy.svg" alt="" width={144} />
               ) : null}
               {symbol === 'lp-joe' ? (
                 <img src="/assets/icons/joe-kacy.svg" alt="" width={144} />
               ) : null}
               {symbol === 'lp' ? (
-                <img src="/assets/kap.svg" alt="" width={144} />
+                <img src="/assets/icons/lp-icon.svg" alt="" width={144} />
               ) : null}
               <S.IntroStaking>
                 <S.APR>
@@ -396,7 +411,7 @@ const StakeCard = ({
                   )}
                   {symbol === 'lp-joe' && (
                     <a
-                      href={`https://traderjoexyz.com/trade?outputCurrency=${Kacy}#/`}
+                      href={`https://traderjoexyz.com/pool/AVAX/${Kacy}`}
                       target="_blank"
                       rel="noreferrer"
                     >
