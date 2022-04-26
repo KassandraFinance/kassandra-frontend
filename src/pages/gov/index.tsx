@@ -2,7 +2,7 @@ import { SWRConfig } from 'swr'
 
 import Gov from '../../templates/Gov'
 
-const Index = () => {
+export default function Index() {
   return (
     <SWRConfig
       value={{
@@ -13,5 +13,3 @@ const Index = () => {
     </SWRConfig>
   )
 }
-
-export default Index
