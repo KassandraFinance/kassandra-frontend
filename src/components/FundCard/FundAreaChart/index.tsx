@@ -1,10 +1,8 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
-import Big from 'big.js'
-import { XAxis, YAxis, AreaChart, Area, ResponsiveContainer } from 'recharts'
 
-import { BNtoDecimal } from '../../../utils/numerals'
+import { XAxis, YAxis, AreaChart, Area, ResponsiveContainer } from 'recharts'
 
 interface IChartPriceProps {
   areaChartData: any[];
@@ -30,12 +28,12 @@ const FundAreaChart = ({ areaChartData, color }: IChartPriceProps) => {
             <stop offset="175.59%" stopColor={color} stopOpacity={0} />
           </linearGradient>
         </defs>
-        <XAxis dataKey="timestamp" hide />
-        <YAxis mirror axisLine={false} tick={false} />
+        <XAxis dataKey="timestamp" domain={['auto', 'auto']} hide />
+        <YAxis mirror axisLine={false} tick={false} domain={['auto', 'auto']} />
 
         <Area
           type="monotone"
-          dataKey="value"
+          dataKey="close"
           stroke={color}
           fillOpacity={1}
           fill="url(#colorUv)"

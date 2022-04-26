@@ -1,26 +1,32 @@
 import React from 'react'
+import Big from 'big.js'
 import Image from 'next/image'
+import useSWR from 'swr'
+import { request } from 'graphql-request'
+import Link from 'next/link'
 
-import arrowAscend from '../../../public/assets/arrowAscend.svg'
-import arrowDescend from '../../../public/assets/arrowDescend.svg'
+import { SUBGRAPH_URL, ProductDetails } from '../../constants/tokenAddresses'
+
+import { BNtoDecimal } from '../../utils/numerals'
 
 import FundAreaChart from './FundAreaChart'
 import FundBarChart from './FundBarChart'
 import FundTokenIcons from './FundTokenIcons'
 
+import arrowAscend from '../../../public/assets/icons/arrow-ascend.svg'
+import arrowDescend from '../../../public/assets/icons/arrow-descend.svg'
+
+import { GET_CHART } from './graphql'
+
 import * as S from './styles'
 
+interface InfoPool {
+  tvl: string;
+  price: string;
+}
+
 interface IFundCardProps {
-  image: any;
-  price: number;
-  fundName: string;
-  fundBy: string;
-  tvl: number;
-  monthly: number;
-  monthlyUp: boolean;
-  last24h: number;
-  last24hUp: boolean;
-  data: any[];
+  product: ProductDetails;
 }
 
 interface TokenInfo {
@@ -61,107 +67,89 @@ const addressChanger: { [key: string]: string | undefined } = {
     '0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb' // KACY
 }
 
-const FundCard = ({
-  image,
-  price,
-  fundName,
-  fundBy,
-  tvl,
-  monthly,
-  monthlyUp,
-  last24h,
-  last24hUp,
-  data
-}: IFundCardProps) => {
+const FundCard = ({ product }: IFundCardProps) => {
   const poolPlatform =
     process.env.NEXT_PUBLIC_MASTER === '1' ? 'Avalanche' : 'Fuji'
+
+  const dateNow = new Date()
+
+  const [infoPool, setInfoPool] = React.useState<InfoPool>({
+    tvl: '...',
+    price: '...'
+  })
+  const [poolInfo, setPoolInfo] = React.useState<any[]>([])
+  const [poolObject, setPoolObject] = React.useState<any>({})
   const [tokenImages, setTokenImages] = React.useState<string[][]>([])
 
-  console.log(tokenImages)
+  const [price, setPrice] = React.useState([])
 
-  const poolObject = {
-    '0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb': 5,
-    '0x83080D4b5fC60e22dFFA8d14AD3BB41Dde48F199': 2.33,
-    '0xBA1C32241Ac77b97C8573c3dbFDe4e1e2A8fc0DF': 0.73,
-    '0xd00ae08403B9bbb9124bB305C09058E32C39A48c': 77.98,
-    '0xe401e9Ce0E354Ad9092a63eE1dFA3168bB83F3DA': 5.3,
-    '0xf22f05168508749fa42eDBddE10CB323D87c201d': 8.66
+  const [changeWeek, setChangeWeek] = React.useState<string[]>(
+    Array(2).fill('')
+  )
+
+  const [params] = React.useState({
+    id: product.sipAddress,
+    price_period: 86400,
+    period_selected: Math.trunc(dateNow.getTime() / 1000 - 60 * 60 * 24 * 30),
+    day: Math.trunc(Date.now() / 1000 - 60 * 60 * 24),
+    month: Math.trunc(Date.now() / 1000 - 60 * 60 * 24 * 30)
+  })
+
+  const { data } = useSWR([GET_CHART, params], (query, params) =>
+    request(SUBGRAPH_URL, query, params)
+  )
+
+  const getPercentage = (weight: number) => {
+    return Number((weight * 100).toFixed(2))
   }
 
-  const poolInfo = [
-    {
-      balance: '1446.624011950834945884',
-      token: {
-        decimals: 18,
-        id: '0xd00ae08403B9bbb9124bB305C09058E32C39A48c',
-        name: 'Wrapped AVAX',
-        price_usd: '123.66',
-        symbol: 'WAVAX'
-      },
-      weight_goal_normalized: '0',
-      weight_normalized: '0.7798'
-    },
-    {
-      balance: '2879.093466055797481145',
-      token: {
-        decimals: 18,
-        id: '0xf22f05168508749fa42eDBddE10CB323D87c201d',
-        name: 'JoeToken Kassandra',
-        price_usd: '2.475573957027582703305583164868781',
-        symbol: 'JOE.k'
-      },
-      weight_goal_normalized: '0',
-      weight_normalized: '0.0866'
-    },
-    {
-      balance: '71469.488208940928823665',
-      token: {
-        decimals: 18,
-        id: '0xe401e9Ce0E354Ad9092a63eE1dFA3168bB83F3DA',
-        name: 'BENQI',
-        price_usd: '0.03948685773446185157198455169820007',
-        symbol: 'QI'
-      },
-      weight_goal_normalized: '0',
-      weight_normalized: '0.053'
-    },
-    {
-      balance: '6620.864329732853239397',
-      token: {
-        decimals: 18,
-        id: '0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb',
-        name: 'Kassandra',
-        price_usd: '0.6298612335988697897303168760491438',
-        symbol: 'KACY'
-      },
-      weight_goal_normalized: '0',
-      weight_normalized: '0.05'
-    },
-    {
-      balance: '0.397494329754643124',
-      token: {
-        decimals: 18,
-        id: '0x83080D4b5fC60e22dFFA8d14AD3BB41Dde48F199',
-        name: 'Pangolin',
-        price_usd: '505.20629661840081036875058228995',
-        symbol: 'PNG'
-      },
-      weight_goal_normalized: '0',
-      weight_normalized: '0.0233'
-    },
-    {
-      balance: '0.039627878050791018',
-      token: {
-        decimals: 18,
-        id: '0xBA1C32241Ac77b97C8573c3dbFDe4e1e2A8fc0DF',
-        name: 'Yak Token Kassandra',
-        price_usd: '3580.684789982275693276269889487879',
-        symbol: 'YAK.k'
-      },
-      weight_goal_normalized: '0',
-      weight_normalized: '0.0073'
+  function calcChange(newPrice: number, oldPrice: number) {
+    const calc = ((newPrice - oldPrice) / oldPrice) * 100
+    return calc ? calc.toFixed(2) : '0'
+  }
+
+  React.useEffect(() => {
+    const arrChangePrice = []
+
+    if (data) {
+      const newPrice = data?.pool.price_candles.map(
+        (item: { timestamp: number, close: string }) => {
+          return {
+            timestamp: item.timestamp,
+            close: Number(item.close)
+          }
+        }
+      )
+
+      const changeDay = calcChange(data.now[0].close, data.day[0]?.close)
+      const changeMonth = calcChange(data.now[0].close, data.month[0]?.close)
+
+      arrChangePrice[0] = changeDay
+      arrChangePrice[1] = changeMonth
+
+      setChangeWeek(arrChangePrice)
+
+      setInfoPool({
+        tvl: BNtoDecimal(Big(data.pool.total_value_locked_usd), 2, 2, 2),
+        price: data.pool.price_usd
+      })
+
+      setPrice(newPrice)
+      setPoolInfo(data.pool.underlying_assets)
     }
-  ]
+  }, [data])
+
+  React.useEffect(() => {
+    if (poolInfo.length > 0) {
+      const pool = poolInfo.map(item => {
+        return {
+          [item.token.id]: getPercentage(item.weight_normalized)
+        }
+      })
+      const poolData = Object.assign({}, ...pool)
+      setPoolObject(poolData)
+    }
+  }, [poolInfo])
 
   React.useEffect(() => {
     const getCoingecko = async (
@@ -203,71 +191,102 @@ const FundCard = ({
     }
 
     getExtraInfo()
-  }, [])
+  }, [poolInfo, poolPlatform])
 
   return (
     <S.CardContainer>
-      <S.CardHeader>
-        <S.ImageContainer>
-          <Image src={image} width={36} height={36} />
-        </S.ImageContainer>
-        <S.FundPrice>
-          <h3>Price</h3>
-          <span>${price}</span>
-        </S.FundPrice>
-      </S.CardHeader>
-      <S.CardBody>
-        <S.FundName>
-          <h3>{fundName}</h3>
-          <span>by {fundBy}</span>
-        </S.FundName>
-        <S.FundStatusContainer>
-          <S.FundStatus>
-            <span>${tvl}K</span>
-            <h4>Tvl</h4>
-          </S.FundStatus>
-          <S.FundStatus>
-            <div>
-              <span style={{ color: monthlyUp ? '#5EE56B' : '#E8372C' }}>
-                {monthly}%
-              </span>
-              <Image
-                src={monthlyUp ? arrowAscend : arrowDescend}
-                width={16}
-                height={16}
-              />
-            </div>
-            <h4>monthly</h4>
-          </S.FundStatus>
-          <S.FundStatus>
-            <div>
-              <span style={{ color: last24hUp ? '#5EE56B' : '#E8372C' }}>
-                {last24h}%
-              </span>
-              <Image
-                src={last24hUp ? arrowAscend : arrowDescend}
-                width={16}
-                height={16}
-              />
-            </div>
-            <h4>24h</h4>
-          </S.FundStatus>
-        </S.FundStatusContainer>
+      <Link href={`/explore/${product.symbol.toLowerCase()}`} passHref>
+        <a>
+          <>
+            <S.CardHeader>
+              <S.ImageContainer>
+                <Image src={product.fundIcon} width={36} height={36} />
+              </S.ImageContainer>
 
-        <FundAreaChart areaChartData={data} color="#E843C4" />
+              <S.FundPrice>
+                <h3>Price</h3>
+                <span>${parseFloat(infoPool.price).toFixed(2)}</span>
+              </S.FundPrice>
+            </S.CardHeader>
 
-        <S.TokenIconsContainer>
-          <FundTokenIcons tokens={tokenImages} />
-          {poolInfo.length > 3 && (
-            <p>
-              +{poolInfo.length - 3}
-              <span> more</span>
-            </p>
-          )}
-        </S.TokenIconsContainer>
+            <S.CardBody>
+              <S.FundName>
+                <h3>{product.name}</h3>
+                <span>by {product.fundBy}</span>
+              </S.FundName>
 
-        <FundBarChart poolObject={poolObject} poolInfo={poolInfo} />
-      </S.CardBody>
+              <S.FundStatusContainer>
+                <S.FundStatus>
+                  <span>${parseInt(infoPool.tvl)}K</span>
+                  <h4>Tvl</h4>
+                </S.FundStatus>
+
+                <S.FundStatus>
+                  <div>
+                    <span
+                      style={{
+                        color:
+                          parseFloat(changeWeek[1]) >= 0 ? '#5EE56B' : '#E8372C'
+                      }}
+                    >
+                      {changeWeek[1]}%
+                    </span>
+                    <Image
+                      src={
+                        parseFloat(changeWeek[1]) >= 0
+                          ? arrowAscend
+                          : arrowDescend
+                      }
+                      width={16}
+                      height={16}
+                    />
+                  </div>
+                  <h4>monthly</h4>
+                </S.FundStatus>
+
+                <S.FundStatus>
+                  <div>
+                    <span
+                      style={{
+                        color:
+                          parseFloat(changeWeek[0]) >= 0 ? '#5EE56B' : '#E8372C'
+                      }}
+                    >
+                      {changeWeek[0]}%
+                    </span>
+                    <Image
+                      src={
+                        parseFloat(changeWeek[0]) >= 0
+                          ? arrowAscend
+                          : arrowDescend
+                      }
+                      width={16}
+                      height={16}
+                    />
+                  </div>
+                  <h4>24h</h4>
+                </S.FundStatus>
+              </S.FundStatusContainer>
+
+              <FundAreaChart areaChartData={price} color="#E843C4" />
+
+              <S.TokenIconsContainer>
+                <FundTokenIcons tokens={tokenImages} poolInfo={poolInfo} />
+                {poolInfo.length > 3 && (
+                  <p>
+                    +{poolInfo.length - 3}
+                    <span> more</span>
+                  </p>
+                )}
+              </S.TokenIconsContainer>
+
+              {data && (
+                <FundBarChart poolObject={poolObject} poolInfo={poolInfo} />
+              )}
+            </S.CardBody>
+          </>
+        </a>
+      </Link>
     </S.CardContainer>
   )
 }

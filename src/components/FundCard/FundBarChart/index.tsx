@@ -2,7 +2,10 @@ import React from 'react'
 
 import { BarChart, XAxis, YAxis, Bar } from 'recharts'
 
-interface IBarChartProps {}
+interface IBarChartProps {
+  poolObject: any;
+  poolInfo: any[];
+}
 
 const FundBarChart = ({ poolObject, poolInfo }: IBarChartProps) => {
   const dictionary: any = {
@@ -29,8 +32,7 @@ const FundBarChart = ({ poolObject, poolInfo }: IBarChartProps) => {
     20: '#d4e442b0'
   }
 
-  const pool = poolInfo.length - 1
-  console.log('pool: ', pool)
+  const poolLength = poolInfo.length - 1
 
   return (
     <BarChart
@@ -61,7 +63,7 @@ const FundBarChart = ({ poolObject, poolInfo }: IBarChartProps) => {
           radius={
             index === 0
               ? [25, 0, 0, 25]
-              : index === pool
+              : index === poolLength
               ? [0, 25, 25, 0]
               : [0, 0, 0, 0]
           }
