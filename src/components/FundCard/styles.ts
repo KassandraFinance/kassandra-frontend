@@ -4,13 +4,29 @@ import theme from '../../styles/theme'
 export const CardContainer = styled.div`
   width: 32.8rem;
   height: 41rem;
-  margin-left: 1rem;
 
   background: rgba(31, 31, 31, 0.72);
   box-shadow: 0rem 0.4rem 6.9rem -1.7rem rgba(0, 0, 0, 0.51);
   -webkit-backdrop-filter: blur(14rem);
   backdrop-filter: blur(14rem);
   border-radius: 1.2rem;
+
+  transition: transform 0.3s linear;
+  cursor: pointer;
+
+  a {
+    text-decoration: none;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    //transform: translateY(-10px);
+    //transform: translateY(10px);
+    //transform: skew(10deg, 10deg);
+    //transform: rotate(5deg);
+    //transform: rotate(-5deg);
+    z-index: 1;
+  }
 `
 
 export const CardHeader = styled.div`
