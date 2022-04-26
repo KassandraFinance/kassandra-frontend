@@ -19,7 +19,6 @@ import Breadcrumb from '../../components/Breadcrumb'
 import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
 import PoweredBy from './PoweredBy'
 
-import ahype from '../../../public/assets/ahype.svg'
 import infoGray from '../../../public/assets/info-gray.svg'
 
 import { GET_INFO_POOL } from './graphql'
@@ -106,37 +105,35 @@ const Products = ({ product }: Input) => {
       <Header />
       <Breadcrumb>
         <BreadcrumbItem href="/">Home</BreadcrumbItem>
-        <BreadcrumbItem href={`/products/${product.symbol.toLowerCase()}`}>
-          Products
-        </BreadcrumbItem>
+        <BreadcrumbItem href={`/explore`}>Explore</BreadcrumbItem>
         <BreadcrumbItem
-          href={`/products/${product.symbol.toLowerCase()}`}
+          href={`/explore/${product.symbol.toLowerCase()}`}
           isLastPage
         >
           ${product.symbol}
         </BreadcrumbItem>
       </Breadcrumb>
       <S.Intro introMobile={true} introDesktop={false}>
-        <Image src={ahype} alt="" width={75} height={75} />
+        <Image src={product.fundIcon} alt="" width={75} height={75} />
         <S.NameIndex>
           <S.NameAndSymbol introMobile={true}>
             <h1>{product.name}</h1>
             <h3>${product.symbol}</h3>
           </S.NameAndSymbol>
-          <p>by HEIMDALL.land</p>
+          <p>by {product.fundBy}</p>
         </S.NameIndex>
         <S.Line />
       </S.Intro>
       <S.Product>
         <S.ProductDetails>
           <S.Intro introMobile={false} introDesktop={true}>
-            <Image src={ahype} alt="" width={75} height={75} />
+            <Image src={product.fundIcon} alt="" width={75} height={75} />
             <S.NameIndex>
               <S.NameAndSymbol>
                 <h1>{product.name}</h1>
                 <h3>${product.symbol}</h3>
               </S.NameAndSymbol>
-              <p>by HEIMDALL.land</p>
+              <p>by {product.fundBy}</p>
             </S.NameIndex>
           </S.Intro>
           <S.Line className="second-line" />
@@ -186,10 +183,16 @@ const Products = ({ product }: Input) => {
               <h2>${infoPool.withdrawFees}</h2>
             </S.IndexData>
           </S.IntroCharts>
-          <ChartProducts />
+          <ChartProducts crpPoolAddress={product.sipAddress} />
           <ScrollUpButton />
-          <Change />
-          <Summary strategy={data?.pool.strategy || '...'} />
+          <Change crpPoolAddress={product.sipAddress} />
+          <Summary
+            strategy={data?.pool.strategy || '...'}
+            summary={product.fundSummary}
+            symbol={product.symbol}
+            link={product.fundLink}
+            icon={product.fundIcon}
+          />
           <PoweredBy partners={product.partners} />
           <Distribution poolPlatform={product.platform} />
           <TokenDescription symbol={product.symbol} />

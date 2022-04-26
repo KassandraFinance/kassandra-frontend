@@ -16,15 +16,18 @@ import { ToastInfo } from '../../../components/Toastify/toast'
 
 import iconBar from '../../../../public/assets/iconbar.svg'
 import metaMaskIcon from '../../../../public/assets/metaMaskIcon.svg'
-import ahype from '../../../../public/assets/ahype.svg'
 
 import * as S from './styles'
 
 interface Params {
   strategy: string;
+  summary: string | undefined;
+  symbol: string;
+  link: string | undefined;
+  icon: any;
 }
 
-const Summary = ({ strategy }: Params) => {
+const Summary = ({ strategy, summary, symbol, link, icon }: Params) => {
   const { trackEvent } = useMatomo()
 
   function matomoEvent(action: string, name: string) {
@@ -46,22 +49,23 @@ const Summary = ({ strategy }: Params) => {
         <h2>Summary</h2>
       </S.Title>
       <S.Line />
-      <p>
-        The Social Index $aHYPE reflects the performance of a portfolio selected
-        from the most socially active cryptocurrencies in the past 30 days,
-        using Heimdall Social Score data.
-      </p>
+      <p>{summary}</p>
       <S.LinkContent>
         {/* <a href="https://coinmarketcap.com/">
           View On CoinMarketCap <img src="/assets/externalLink.svg" alt="" />
         </a> */}
         <a
-          href="https://kassandrafoundation.medium.com/avalanche-social-index-4042a823c972"
+          href={link}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={() => matomoEvent('click-on-link', 'discover-ahype')}
+          onClick={() =>
+            matomoEvent(
+              'click-on-link',
+              `discover-${symbol.toLocaleLowerCase()}`
+            )
+          }
         >
-          Discover aHYPE
+          Discover {symbol}
           <svg
             width="17"
             height="17"
@@ -82,7 +86,7 @@ const Summary = ({ strategy }: Params) => {
       <S.CopyContract>
         <S.Blockchain>
           <div className="image">
-            <Image src={ahype} alt="" />
+            <Image src={icon} alt="" />
           </div>
           <a
             href={`${
@@ -93,7 +97,7 @@ const Summary = ({ strategy }: Params) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span>CONTROLLER/AHYPE TOKEN</span>
+            <span>CONTROLLER/{symbol} TOKEN</span>
             <svg
               width="17"
               height="17"
@@ -132,7 +136,10 @@ const Summary = ({ strategy }: Params) => {
               type="button"
               onClick={() => {
                 handleCopyLink()
-                matomoEvent('click-to-copy', 'controller-ahype')
+                matomoEvent(
+                  'click-to-copy',
+                  `controller-${symbol.toLocaleLowerCase()}`
+                )
               }}
             >
               {substr(HeimCRPPOOL)}
@@ -155,7 +162,7 @@ const Summary = ({ strategy }: Params) => {
       <S.CopyContract>
         <S.Blockchain>
           <div className="image">
-            <Image src={ahype} alt="" />
+            <Image src={icon} alt="" />
           </div>
           <a
             href={`${
@@ -210,7 +217,7 @@ const Summary = ({ strategy }: Params) => {
       <S.CopyContract>
         <S.Blockchain>
           <div className="image">
-            <Image src={ahype} alt="" />
+            <Image src={icon} alt="" />
           </div>
           <a
             href={`${
