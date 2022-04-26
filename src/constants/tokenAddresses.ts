@@ -131,3 +131,4 @@ export const products: { [key: string]: ProductDetails } = process.env.NEXT_PUBL
     ]
   }
 }
+export const products = [ahype, tricrypto]
