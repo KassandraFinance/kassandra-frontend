@@ -20,11 +20,7 @@ export const CardContainer = styled.div`
 
   &:hover {
     transform: scale(1.05);
-    //transform: translateY(-10px);
-    //transform: translateY(10px);
-    //transform: skew(10deg, 10deg);
-    //transform: rotate(5deg);
-    //transform: rotate(-5deg);
+
     z-index: 1;
   }
 `
