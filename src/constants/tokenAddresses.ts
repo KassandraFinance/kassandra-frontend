@@ -71,9 +71,9 @@ const KASSANDRA_SUBGRAPH =
 `https://graph.kassandra.finance/subgraphs/name/${
   process.env.NEXT_PUBLIC_MASTER === '1' ? 'KassandraAvalanche' : 'KassandraFuji'}`
   
-export const SUBGRAPH_URL = process.env.NODE_ENV
-  ? 'http://localhost/subgraphs/name/KassandraFuji'
-  : KASSANDRA_SUBGRAPH
+export const SUBGRAPH_URL = process.env.NEXT_PUBLIC_MASTER === '1'
+  ? KASSANDRA_SUBGRAPH
+  : 'http://localhost/subgraphs/name/KassandraFuji'
   
 export const chains: { [key: string]: ChainDetails } = {
   avalanche: {
