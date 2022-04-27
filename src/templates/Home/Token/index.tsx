@@ -272,7 +272,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
           <span>
             The $K3C represents a yield-earning portfolio composed of BTC, ETH, USDC and KACY built in partnership with Yield Yak
           </span>
-          <ul>
+          <S.InfoList>
             <li>
               <Image src={arrowRight} width={20} height={20} />
               Consistent gains with blue chips;
@@ -285,7 +285,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
               <Image src={arrowRight} width={20} height={20} />
               Improve your hodl.
             </li>
-          </ul>
+          </S.InfoList>
         </S.Info>
       </S.CardWrapper>
 
@@ -295,7 +295,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
           <span>
             The $aHYPE reflects the performance of a portfolio selected from the most socially active cryptocurrencies in the past 30 days, using Heimdall Social Score data.
           </span>
-          <ul>
+          <S.InfoList>
             <li>
               <Image src={arrowRight} width={20} height={20} />
               Easy exposure to the hottest assets;
@@ -308,7 +308,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
               <Image src={arrowRight} width={20} height={20} />
               EHigh volatility.
             </li>
-          </ul>
+          </S.InfoList>
         </S.Info>
         <S.Card>
           <S.CardHeader>
