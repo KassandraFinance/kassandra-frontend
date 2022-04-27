@@ -58,9 +58,11 @@ export const CardWrapper = styled.div`
 
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 32px;
+  align-items: center;
+  /* gap: 32px; */
 
   z-index: 10;
+
   @media (max-width: 960px) {
     display: flex;
     flex-direction: column;
@@ -82,8 +84,21 @@ export const Card = styled.div`
     margin-top: 8px;
   }
 `
-export const CardHeader = styled.div`
-  background: #190e1d url('assets/backgroundAvaxToken.svg') no-repeat;
+
+interface CardHeaderProps {
+  isTricrypto?: boolean;
+}
+
+export const CardHeader =
+  styled.div <
+  CardHeaderProps >
+  `
+  background-color: #190e1d;
+  background-repeat: no-repeat;
+  background-image: ${({ isTricrypto }) =>
+    isTricrypto
+      ? css`url('assets/backgroundTricrypto.svg')`
+      : css`url('assets/backgroundAvaxToken.svg')`};
   background-position: right 20% center;
   border-radius: 12px;
 
@@ -129,6 +144,7 @@ export const TextWrapper = styled.div`
     font-size: ${theme.font.sizes.font12};
     color: #bdbdbd;
     letter-spacing: 0px;
+    text-transform: uppercase;
 
     margin: 8px 0;
   }
@@ -177,7 +193,10 @@ export interface IPriceProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const Price = styled.div<IPriceProps>`
+export const Price =
+  styled.div <
+  IPriceProps >
+  `
   min-width: 140px;
   max-width: 100%;
 
@@ -283,6 +302,7 @@ export const ComingSoon = styled.div`
   height: 100%;
 
   position: relative;
+
   @media (max-width: 960px) {
     display: none;
   }
@@ -319,4 +339,79 @@ export const BarChartWrapper = styled.div`
 
   display: block;
   border-radius: 12px;
+`
+
+export const Info = styled.div`
+  padding-left: 9rem;
+  padding-right: 2rem;
+
+  &:first-child {
+    padding-right: 9rem;
+    padding-left: 2rem;
+  }
+
+  @media (max-width: 1060px) {
+    padding-left: 4rem;
+    padding-right: 1rem;
+
+    &:first-child {
+      padding-right: 4rem;
+      padding-left: 1rem;
+    }
+  }
+
+  @media (max-width: 960px) {
+    margin: 5rem auto;
+    max-width: 49rem;
+    width: 100%;
+
+    padding: 0;
+
+    &:first-child {
+      padding: 0;
+      order: 1;
+    }
+  }
+
+  h2 {
+    font-size: 3.2rem;
+    text-align: left;
+  }
+
+  h4 {
+    color: #ffbf00;
+    font-size: 1.4rem;
+    margin-bottom: 1.6rem;
+    line-height: 1.6rem;
+    letter-spacing: 0.6rem;
+    text-transform: uppercase;
+    text-align: left;
+    font-weight: 400;
+  }
+
+  span {
+    margin-top: 2.5rem;
+    font-size: 1.6rem;
+    font-weight: 300;
+    line-height: 2.4rem;
+    text-align: left;
+  }
+
+  ul {
+    margin-top: 2.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      font-size: 1.2rem;
+      line-height: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16rem;
+    }
+  }
 `

@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
 import { BarChart, XAxis, YAxis, Bar } from 'recharts'
@@ -10,6 +11,8 @@ import { GET_INFO_AHYPE } from '../graphql'
 
 import Button from '../../../components/Button'
 import ExternalLink from '../../../components/ExternalLink'
+
+import arrowRight from '../../../../public/assets/icons/arrow-right.svg'
 
 import TokenIcons from './TokenIcons'
 
@@ -197,25 +200,18 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
       </span>
       <S.CardWrapper>
         <S.Card>
-          <S.CardHeader>
+          <S.CardHeader isTricrypto={true}>
             <S.ImageWrapper>
-              <img src="/assets/ahype.svg" alt="" />
+              <img src="/assets/tricrypto.svg" alt="" />
             </S.ImageWrapper>
-
-
           </S.CardHeader>
           <S.TextWrapper>
             <S.NameAndSymbol>
               <h1>{poolName}</h1>
             </S.NameAndSymbol>
             <p>
-              BY HEIMDALL.LAND <b> ON AVALANCHE NETWORK </b>{' '}
+              by kassandra with yield yak <b> on avalanche network </b>{' '}
             </p>
-            <span>
-              The $aHYPE Social Index reflects the performance of a portfolio
-              selected from the most socially active cryptocurrencies in the
-              past 30 days, using Heimdall Social Score data.
-            </span>
           </S.TextWrapper>
           <S.TokenInfo>
             <S.Price change={Number(change)}>
@@ -236,8 +232,8 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                margin: '0 auto',
-                maxWidth: '100%',
+                margin: '0 55px',
+                maxWidth: '365px',
                 borderRadius: '10px'
               }}
               width={400}
@@ -270,12 +266,117 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
             />
           </S.CardFooter>
         </S.Card>
-        <S.ComingSoon>
-          <S.ComingSoonContent>
-            <img src="assets/comingSoonIconTokenCard.png" alt="" />
-            <span>Coming Soon</span>
-          </S.ComingSoonContent>
-        </S.ComingSoon>
+        <S.Info>
+          <h4>New Product</h4>
+          <h2>The safest assets yield farming for you</h2>
+          <span>
+            The $K3C represents a yield-earning portfolio composed of BTC, ETH, USDC and KACY built in partnership with Yield Yak
+          </span>
+          <ul>
+            <li>
+              <Image src={arrowRight} width={20} height={20} />
+              Consistent gains with blue chips;
+            </li>
+            <li>
+              <Image src={arrowRight} width={20} height={20} />
+              Hedge your exposure;
+            </li>
+            <li>
+              <Image src={arrowRight} width={20} height={20} />
+              Improve your hodl.
+            </li>
+          </ul>
+        </S.Info>
+      </S.CardWrapper>
+
+      <S.CardWrapper>
+        <S.Info>
+          <h2>Automagically invest on strong communities</h2>
+          <span>
+            The $aHYPE reflects the performance of a portfolio selected from the most socially active cryptocurrencies in the past 30 days, using Heimdall Social Score data.
+          </span>
+          <ul>
+            <li>
+              <Image src={arrowRight} width={20} height={20} />
+              Easy exposure to the hottest assets;
+            </li>
+            <li>
+              <Image src={arrowRight} width={20} height={20} />
+              Surfing the tides of hype on Avalanche;
+            </li>
+            <li>
+              <Image src={arrowRight} width={20} height={20} />
+              EHigh volatility.
+            </li>
+          </ul>
+        </S.Info>
+        <S.Card>
+          <S.CardHeader>
+            <S.ImageWrapper>
+              <img src="/assets/ahype.svg" alt="" />
+            </S.ImageWrapper>
+          </S.CardHeader>
+          <S.TextWrapper>
+            <S.NameAndSymbol>
+              <h1>{poolName}</h1>
+            </S.NameAndSymbol>
+            <p>
+              BY HEIMDALL.LAND <b> ON AVALANCHE NETWORK </b>{' '}
+            </p>
+          </S.TextWrapper>
+          <S.TokenInfo>
+            <S.Price change={Number(change)}>
+              <span>USD {poolPrice}</span>
+              <div>
+                {/* <img src="assets/tokenPriceArrow.png" alt="" /> */}
+                <p>{change}%</p>
+              </div>
+            </S.Price>
+            <S.TokensSymbols>
+              <TokenIcons tokens={tokenImages} />
+              {poolInfo.length > 5 && <span>+{poolInfo.length - 5} MORE</span>}
+            </S.TokensSymbols>
+          </S.TokenInfo>
+          <S.BarChartWrapper>
+            <BarChart
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                margin: '0 55px',
+                maxWidth: '365px',
+                borderRadius: '10px'
+              }}
+              width={400}
+              height={10}
+              data={[{ name: 'pool', ...poolObject }]}
+              layout="vertical"
+              margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
+            >
+              <XAxis type="number" hide />
+              <YAxis type="category" hide dataKey="pool" />
+
+              {poolInfo.map((item: any, index: number) => (
+                <Bar
+                  key={item.token.id}
+                  stackId="pool"
+                  dataKey={item.token.id}
+                  fill={`${dictionary[index]}`}
+                />
+              ))}
+            </BarChart>
+          </S.BarChartWrapper>
+          <S.CardFooter>
+            <Link href="/products/ahype">
+              <Button onClick={() => clickMatomoEvent('click-button', 'buy-ahype')} backgroundSecondary size="medium" text="Buy $aHYPE" />
+            </Link>
+            <ExternalLink
+              onClick={() => clickMatomoEvent('click-on-link', 'learn-more')}
+              hrefLink="https://kassandrafoundation.medium.com/avalanche-social-index-4042a823c972"
+              text="Learn more"
+            />
+          </S.CardFooter>
+        </S.Card>
       </S.CardWrapper>
     </S.Token>
   )
