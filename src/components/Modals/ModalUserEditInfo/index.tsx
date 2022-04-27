@@ -44,7 +44,7 @@ const ModalUserEditInfo = ({
   }
 
   function handleValueTextarea(value: number) {
-    return 500 - value
+    return 0 + value
   }
 
   function handleFormChangeEditInfo(event: FormEvent) {
@@ -109,7 +109,7 @@ const ModalUserEditInfo = ({
                   height={123}
                 />
                 <span>
-                  <label htmlFor="InputFile">add Image</label>
+                  <label htmlFor="InputFile">Add Image</label>
                   <input
                     id="InputFile"
                     type="file"
@@ -257,15 +257,12 @@ const ModalUserEditInfo = ({
             <h2>MANAGER INFO</h2>
             <textarea
               placeholder="Your description..."
+              maxLength={500}
               onChange={event =>
-                setEditYourProfileInput(
-                  editYourProfileInput?.userDescription.length >= 500
-                    ? editYourProfileInput
-                    : {
-                        ...editYourProfileInput,
-                        userDescription: event.target.value
-                      }
-                )
+                setEditYourProfileInput({
+                  ...editYourProfileInput,
+                  userDescription: event.target.value
+                })
               }
               value={editYourProfileInput?.userDescription}
             />
@@ -275,12 +272,7 @@ const ModalUserEditInfo = ({
             </span>
           </S.ModalManagerInfo>
           <S.UserEditInfoButtons>
-            <button
-              id="SaveChanges"
-              disabled={editYourProfileInput?.userDescription.length > 500}
-            >
-              Save Changes
-            </button>
+            <button id="SaveChanges">Save Changes</button>
             <button
               id="CancelSaves"
               type="button"

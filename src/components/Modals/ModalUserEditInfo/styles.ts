@@ -349,10 +349,6 @@ export const UserEditInfoButtons = styled.div`
     background-color: transparent;
     border-color: #26DBDB;
   }
-
-  #SaveChanges:disabled {
-    background-color: #C4C4C4;
-  }
 `
 
 interface IUserSocialAndInfoButtonProps {
