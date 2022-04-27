@@ -8,6 +8,7 @@ import { ProductSymbols } from '../../../constants/tokenAddresses'
 import * as S from './styles'
 
 import AhypeDescription from './ahype'
+import TricryptoDescription from './tricrypto'
 
 interface DescriptionType {
   [key: ProductSymbols]: JSX.Element;
@@ -18,7 +19,8 @@ interface Input {
 }
 
 const descriptions: DescriptionType = {
-  ahype: <AhypeDescription />
+  ahype: <AhypeDescription />,
+  tricrypto: <TricryptoDescription />
 }
 
 const TokenDescription = ({ symbol }: Input) => {
