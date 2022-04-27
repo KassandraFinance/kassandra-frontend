@@ -11,8 +11,9 @@ import { getDate } from '../../../utils/date'
 import { BNtoDecimal } from '../../../utils/numerals'
 import substr from '../../../utils/substr'
 
-import * as S from './styles'
 import { IInfoStaked, IPriceLPToken } from '..'
+
+import * as S from './styles'
 
 interface IYourStakeProps {
   pid: number;
