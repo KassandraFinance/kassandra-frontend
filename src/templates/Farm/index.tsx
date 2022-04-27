@@ -38,7 +38,7 @@ const StakeFarm = () => {
   }, [])
 
   React.useEffect(() => {
-    if (userWalletAddress.length === 0 || chainId !== chain.chainId) {
+    if (userWalletAddress.length === 0 && Number(chainId) !== chain.chainId) {
       return;
     }
 
@@ -56,8 +56,6 @@ const StakeFarm = () => {
 
     calc()
   }, [userWalletAddress])
-  console.log(chain)
-  console.log(chainId)
   return (
     <S.BackgroundStakeFarm>
       <Header />
@@ -79,7 +77,7 @@ const StakeFarm = () => {
             <Loading marginTop={0}/>
           </div>
         )  : (
-          userWalletAddress.length === 0 && chainId !== chain.chainIdHex
+          userWalletAddress.length === 0 && Number(chainId) !== chain.chainId
             ? (
               <Web3Disabled
                 textButton="Connect Wallet"
@@ -88,7 +86,7 @@ const StakeFarm = () => {
                 type="connect"
               />
             ) : (
-              chainId !== chain.chainIdHex
+              Number(chainId) !== chain.chainId
                 ? (
                   <Web3Disabled
                     textButton={`Connect to ${chain.chainName}`}

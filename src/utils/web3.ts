@@ -10,7 +10,7 @@ export const provider = new WalletConnectProvider({
   }
 })
 
-const web3 = new Web3(provider as any)
+const web3 = new Web3(Web3.givenProvider)
 
 type SubscribeOptions = {
   filter?: {

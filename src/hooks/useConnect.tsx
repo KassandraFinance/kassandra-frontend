@@ -12,7 +12,7 @@ import { actionSetChainId } from '../store/modules/chainId/actions'
 import { actionGetUserAddressWallet } from '../store/modules/userWalletAddress/actions'
 import { subscribeToEvents } from '../utils/walletConnect'
 
-import { provider } from '../utils/web3'
+import web3, { provider } from '../utils/web3'
 
 // eslint-disable-next-line prettier/prettier
 declare let window: {
@@ -65,6 +65,7 @@ const useConnect = () => {
     if (connector) {
       dispatch(actionGetUserAddressWallet(''))
       connector.killSession()
+      localStorage.removeItem('walletconnect')
       window.location.reload()
     }
   }, [])
@@ -84,7 +85,9 @@ const useConnect = () => {
   const connectToWalletConnect = React.useCallback(async () => {
     if (!connector.connected) {
       await provider.enable()
-
+      
+      web3.setProvider(provider as any)
+      
       const connect = localStorage.getItem('walletconnect')
       
       if (connect) {
@@ -97,12 +100,12 @@ const useConnect = () => {
     }
   }, [])
 
-  const startApp = React.useCallback(async (provider) => {
+  const startApp = React.useCallback(async (providerMetaMask) => {
     if (connector.connected) {
       return
     }
 
-    if (provider !== window.ethereum) {
+    if (providerMetaMask !== window.ethereum) {
       ToastError('Do you have multiple wallets installed?')
       return
     }
@@ -115,19 +118,16 @@ const useConnect = () => {
   }, [])
 
   const hasEthereumProvider = React.useCallback(async () => {
-    const provider = await detectEthereumProvider()
+    const providerMetaMask = await detectEthereumProvider()
 
-    if (provider) {
-      startApp(provider)
-    } else {
-      // ToastError('Please install MetaMask!')
+    if (providerMetaMask) {
+      startApp(providerMetaMask)
     }
   }, [])
+  
+  const handleWallectConnect = React.useCallback(async ()=> {
 
-  React.useEffect(() => {
-    const handleWallectConnect = async () => {
       const connect = localStorage.getItem('walletconnect')
-      
       if (connect) {
         const { accounts, chainId } = JSON.parse(connect)
 
@@ -137,11 +137,31 @@ const useConnect = () => {
         // subscribeToEvents(provider, handleAccountsChanged, handleChainChanged)
         // dispatch(actionSetChainId(chainId))
       }
+    
+  },[])
+
+  async function verifyProvider() {
+    const providerMetaMask = await detectEthereumProvider()
+    if(providerMetaMask) {
+      hasEthereumProvider()
+    } else {
+      handleWallectConnect()
+    }
+  }
+  
+  React.useEffect(() => {
+    const connect = localStorage.getItem('walletconnect')
+    if (connect) {
+      const { accounts, chainId } = JSON.parse(connect)
+
+      // await provider.enable()
+
+      handleAccountsChanged(accounts)
+      dispatch(actionSetChainId(chainId))
     }
 
-    handleWallectConnect()
-    hasEthereumProvider()
-  }, [])
+    verifyProvider()
+  }, [web3.currentProvider])
 
   return {
     connect,
