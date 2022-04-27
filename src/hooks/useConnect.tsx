@@ -52,12 +52,12 @@ const useConnect = () => {
   }, [])
 
   const getAccounts = React.useCallback(async () => {
-    const accounts = await window.ethereum.request({ method: 'eth_accounts' })
+    const accounts = await web3.eth.getAccounts()
     handleAccountsChanged(accounts)
   }, [])
 
   const getChainId = React.useCallback(async () => {
-    const id = await window.ethereum.request({ method: 'eth_chainId' })
+    const id = await web3.eth.getChainId()
     dispatch(actionSetChainId(id))
   }, [])
 
@@ -93,8 +93,9 @@ const useConnect = () => {
       if (connect) {
         const { accounts, chainId } = JSON.parse(connect)
         handleAccountsChanged(accounts)
+        ToastSuccess('Connected to Wallet Connect.')
         dispatch(actionSetChainId(chainId))
-        subscribeToEvents(provider, handleAccountsChanged, handleChainChanged)
+        subscribeToEvents(provider, handleAccountsChanged, handleChainChanged, handleDisconnected)
       }
       return
     }
@@ -124,28 +125,11 @@ const useConnect = () => {
       startApp(providerMetaMask)
     }
   }, [])
-  
-  const handleWallectConnect = React.useCallback(async ()=> {
-
-      const connect = localStorage.getItem('walletconnect')
-      if (connect) {
-        const { accounts, chainId } = JSON.parse(connect)
-
-        await provider.enable()
-
-        handleAccountsChanged(accounts)
-        // subscribeToEvents(provider, handleAccountsChanged, handleChainChanged)
-        // dispatch(actionSetChainId(chainId))
-      }
-    
-  },[])
 
   async function verifyProvider() {
     const providerMetaMask = await detectEthereumProvider()
-    if(providerMetaMask) {
+    if (providerMetaMask) {
       hasEthereumProvider()
-    } else {
-      handleWallectConnect()
     }
   }
   
@@ -161,7 +145,7 @@ const useConnect = () => {
     }
 
     verifyProvider()
-  }, [web3.currentProvider])
+  }, [])
 
   return {
     connect,

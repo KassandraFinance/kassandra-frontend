@@ -362,9 +362,6 @@ const StakeCard = ({
               {symbol === 'lp-joe' ? (
                 <img src="/assets/icons/joe-kacy.svg" alt="" width={144} />
               ) : null}
-              {symbol === 'lp-joe' ? (
-                <img src="/assets/icons/joe-kacy.svg" alt="" width={144} />
-              ) : null}
               {symbol === 'lp' ? (
                 <img src="/assets/icons/lp-icon.svg" alt="" width={144} />
               ) : null}

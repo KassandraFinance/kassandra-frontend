@@ -1,10 +1,10 @@
 import WalletConnectProvider from '@walletconnect/web3-provider'
-import { ToastSuccess } from '../components/Toastify/toast'
 
 export async function subscribeToEvents(
   connector: WalletConnectProvider,
   handleAccountsChanged: (accounts: []) => void,
-  handleChainChanged: (chainId: number) => void
+  handleChainChanged: (chainId: number) => void,
+  handleDisconnected: () => void
 ) {
   if (!connector) {
     return
@@ -27,7 +27,6 @@ export async function subscribeToEvents(
 
       handleAccountsChanged(accounts)
       handleChainChanged(chainId)
-      ToastSuccess('Connected to Wallet Connect.')
     }
   )
 
@@ -50,6 +49,7 @@ export async function subscribeToEvents(
   )
 
   connector.on('disconnect', (error: unknown) => {
+    handleDisconnected()
     if (error) {
       console.log(error)
       return
