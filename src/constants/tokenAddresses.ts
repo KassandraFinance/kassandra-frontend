@@ -162,7 +162,7 @@ const tricrypto:  ProductDetails  =  {
     symbol: 'Tricrypto',
     fundIcon: tricryptoIcon,
     fundLink: 'https://kassandra.finance/',
-    fundSummary: 'Tricrypto',
+    fundSummary: 'Tricrypto melhor fundo do mundo',
     partners: [
       partners.avalanche,
       partners.heimdall,
