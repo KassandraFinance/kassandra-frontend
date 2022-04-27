@@ -334,11 +334,16 @@ export const ComingSoonContent = styled.div`
   }
 `
 export const BarChartWrapper = styled.div`
-  max-width: 100%;
+  width: 100%;
   margin: 0 auto;
+  max-width: 360px;
 
   display: block;
   border-radius: 12px;
+
+  @media (max-width: 960px) {
+    padding: 0 2.8rem;
+  }
 `
 
 export const Info = styled.div`
@@ -396,22 +401,22 @@ export const Info = styled.div`
     line-height: 2.4rem;
     text-align: left;
   }
+`
 
-  ul {
-    margin-top: 2.4rem;
+export const InfoList = styled.ul`
+  margin-top: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  li {
     display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    align-items: center;
+    gap: 1rem;
 
-    li {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-
-      font-size: 1.2rem;
-      line-height: 1.2rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16rem;
-    }
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16rem;
   }
 `
