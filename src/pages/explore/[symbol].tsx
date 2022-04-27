@@ -36,7 +36,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
   }
 
-  return { props: { product: products[params.symbol] } }
+  const fund = products.filter(
+    product => product.symbol.toLowerCase() === params.symbol
+  )
+
+  return { props: { product: fund[0] } }
 }
 
 export default Product
