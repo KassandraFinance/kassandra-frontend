@@ -69,7 +69,7 @@ const KASSANDRA_SUBGRAPH =
 `https://graph.kassandra.finance/subgraphs/name/${
   process.env.NEXT_PUBLIC_MASTER === '1' ? 'KassandraAvalanche' : 'KassandraFuji'}`
 
-export const SUBGRAPH_URL = `http://localhost/subgraphs/name/${process.env.NEXT_PUBLIC_MASTER === '1' ? 'KassandraAvalanche' : 'KassandraFuji'}`
+export const SUBGRAPH_URL = `https://graph.kassandra.finance/subgraphs/name/${process.env.NEXT_PUBLIC_MASTER === '1' ? 'KassandraAvalanche' : 'KassandraFuji'}`
 
 // export const SUBGRAPH_URL = process.env.NODE_ENV
 //   ? 'http://localhost/subgraphs/name/KassandraFuji'
