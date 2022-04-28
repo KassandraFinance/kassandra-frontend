@@ -25,8 +25,8 @@ export const LPDaiAvax = process.env.NEXT_PUBLIC_MASTER === '1' ?
 
 
 export const Kacy = process.env.NEXT_PUBLIC_MASTER === '1' ?
-  '0xf32398dae246C5f672B52A54e9B413dFFcAe1A44' 
-  : 
+  '0xf32398dae246C5f672B52A54e9B413dFFcAe1A44'
+  :
   '0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb'
 
 export const Staking = process.env.NEXT_PUBLIC_MASTER === '1' ?
@@ -65,14 +65,16 @@ export interface ProductDetails {
 export type ProductSymbols = keyof typeof products;
 
 
-const KASSANDRA_SUBGRAPH = 
+const KASSANDRA_SUBGRAPH =
 `https://graph.kassandra.finance/subgraphs/name/${
   process.env.NEXT_PUBLIC_MASTER === '1' ? 'KassandraAvalanche' : 'KassandraFuji'}`
-  
-export const SUBGRAPH_URL = process.env.NODE_ENV
-  ? 'http://localhost/subgraphs/name/KassandraFuji'
-  : KASSANDRA_SUBGRAPH
-  
+
+export const SUBGRAPH_URL = `http://localhost/subgraphs/name/${process.env.NEXT_PUBLIC_MASTER === '1' ? 'KassandraAvalanche' : 'KassandraFuji'}`
+
+// export const SUBGRAPH_URL = process.env.NODE_ENV
+//   ? 'http://localhost/subgraphs/name/KassandraFuji'
+//   : KASSANDRA_SUBGRAPH
+
 export const chains: { [key: string]: ChainDetails } = {
   avalanche: {
     chainId: '0xa86a',
