@@ -343,8 +343,8 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                margin: '0 55px',
-                maxWidth: '365px',
+                margin: '0 auto',
+                maxWidth: '100%',
                 borderRadius: '10px'
               }}
               width={400}

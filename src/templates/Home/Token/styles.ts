@@ -342,7 +342,7 @@ export const BarChartWrapper = styled.div`
   border-radius: 12px;
 
   @media (max-width: 960px) {
-    padding: 0 2.8rem;
+    padding: 0 2.4rem;
   }
 `
 
