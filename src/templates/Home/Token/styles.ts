@@ -4,32 +4,32 @@ import theme from '../../../styles/theme'
 import * as ButtonStyles from '../../../components/Button/styles'
 
 export const Token = styled.section`
+  margin: 0 auto 16rem;
+  padding: 0 3.2rem;
+
   text-align: center;
 
-  margin: 0 auto 160px;
-  padding: 0 32px;
-
   @media (max-width: 960px) {
-    padding: 0 32px;
+    padding: 0 3.2rem;
   }
 
   span {
-    font-size: ${theme.font.sizes.font16};
-    line-height: 155%;
-
-    max-width: 500px;
+    max-width: 50rem;
     display: flex;
     margin: 0 auto;
+
+    font-size: ${theme.font.sizes.font16};
+    line-height: 155%;
   }
 
   h1 {
+    max-width: 62rem;
+    margin: auto;
+    margin-bottom: ${theme.spacings.space24};
+
     font-size: ${theme.font.sizes.font48};
     font-weight: ${theme.font.weight.black};
     line-height: 104%;
-
-    max-width: 620px;
-    margin: auto;
-    margin-bottom: ${theme.spacings.space24};
 
     @media (max-width: 960px) {
       font-size: ${theme.font.sizes.font36};
@@ -39,22 +39,22 @@ export const Token = styled.section`
     }
   }
   p {
+    margin: 0 auto;
+
     font-size: ${theme.font.sizes.font14};
     letter-spacing: 4px;
     color: ${theme.colors.cyan};
     text-align: center;
-
-    margin: 0 auto;
   }
 `
 export const Divider = styled.div`
-  max-width: 100px;
+  max-width: 10rem;
   border: 1px solid ${theme.colors.cyan};
-  margin: 25px auto;
+  margin: 2.5rem auto;
 `
 export const CardWrapper = styled.div`
-  margin: 75px auto;
-  max-width: 1000px;
+  margin: 7.5rem auto;
+  max-width: 100rem;
 
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -69,12 +69,13 @@ export const CardWrapper = styled.div`
   }
 `
 export const Card = styled.div`
+  max-width: 490px;
+  max-height: max-content;
+
   border-radius: 12px;
   background: rgba(31, 31, 31, 0.72);
   box-shadow: 0px 4px 69px -17px rgba(0, 0, 0, 0, 51);
 
-  max-width: 490px;
-  max-height: max-content;
   img {
     max-width: 80%;
   }
@@ -93,6 +94,11 @@ export const CardHeader =
   styled.div <
   CardHeaderProps >
   `
+  max-width: 100%;
+  height: 100px;
+
+  z-index: -9;
+
   background-color: #190e1d;
   background-repeat: no-repeat;
   background-image: ${({ isTricrypto }) =>
@@ -101,26 +107,21 @@ export const CardHeader =
       : css`url('assets/backgroundAvaxToken.svg')`};
   background-position: right 20% center;
   border-radius: 12px;
-
-  max-width: 100%;
-  height: 100px;
-
-  z-index: -9;
 `
 export const ImageWrapper = styled.div`
-  width: 96px;
-  height: 96px;
+  width: 9.6rem;
+  height: 9.6rem;
 
   display: flex;
   justify-content: center;
   position: absolute;
 
-  margin-top: 45px;
-  margin-left: 45px;
+  margin-top: 4.5rem;
+  margin-left: 4.5rem;
 
   @media (max-width: 960px) {
-    width: 80px;
-    height: 80px;
+    width: 8rem;
+    height: 8rem;
     padding-top: 8px;
     margin: 52px 0 0 28px;
     img {
@@ -130,30 +131,30 @@ export const ImageWrapper = styled.div`
   }
 `
 export const TextWrapper = styled.div`
+  max-width: 36.5rem;
+  margin: 5.5rem auto;
+
   text-align: left;
 
-  max-width: 365px;
-  margin: 55px auto;
-
   @media (max-width: 960px) {
-    margin: 40px auto;
-    padding: 0 32px;
+    margin: 4rem auto;
+    padding: 0 3.2rem;
   }
   p {
+    margin: 0.8rem 0;
+
     text-align: left;
     font-size: ${theme.font.sizes.font12};
     color: #bdbdbd;
     letter-spacing: 0px;
     text-transform: uppercase;
-
-    margin: 8px 0;
   }
   span {
+    margin-top: 3rem;
+
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.light};
     line-height: 180%;
-
-    margin-top: 30px;
   }
 `
 export const NameAndSymbol = styled.div`
@@ -179,10 +180,11 @@ export const TokenInfo = styled.div`
   /* justify-items: center; */
   gap: 50px;
   margin: auto;
-  max-width: 360px;
-  margin-bottom: 14px;
+  max-width: 36rem;
+  margin-bottom: 1.4rem;
+
   @media (max-width: 960px) {
-    padding: 0 24px;
+    padding: 0 2.4rem;
   }
   @media (max-width: 340px) {
     padding: 0 0;
@@ -197,11 +199,11 @@ export const Price =
   styled.div <
   IPriceProps >
   `
-  min-width: 140px;
+  min-width: 14rem;
   max-width: 100%;
-
   display: flex;
   align-items: center;
+
   @media (max-width: 960px) {
     display: grid;
     grid-template-columns: 1fr;
@@ -224,15 +226,17 @@ export const Price =
 `
 
 export const TokensSymbols = styled.div`
+  z-index: 10;
+
   display: flex;
   align-items: center;
 
-  z-index: 10;
   span {
-    font-size: 11px;
+    min-width: 5rem;
+    margin-left: 1.6rem;
+
+    font-size: 1.1rem;
     font-weight: ${theme.font.weight.light};
-    min-width: 50px;
-    margin-left: 16px;
     @media (max-width: 960px) {
       margin-left: 0;
     }
@@ -249,9 +253,8 @@ export const TokensSymbols = styled.div`
   }
 `
 export const CardFooter = styled.div`
-  max-width: 360px;
-  margin: 28px auto;
-
+  max-width: 36rem;
+  margin: 2.8rem auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -267,17 +270,17 @@ export const CardFooter = styled.div`
     }
   }
   a {
-    text-decoration: none;
-    font-size: ${theme.font.sizes.font14};
-    font-weight: ${theme.font.weight.light};
-    color: ${theme.colors.snow};
-
     margin-right: 8px;
     margin-right: ${theme.spacings.space8};
 
     display: flex;
     align-items: space-between;
     justify-items: center;
+
+    text-decoration: none;
+    font-size: ${theme.font.sizes.font14};
+    font-weight: ${theme.font.weight.light};
+    color: ${theme.colors.snow};
 
     transition: 0.15s;
     svg {
@@ -336,9 +339,9 @@ export const ComingSoonContent = styled.div`
 export const BarChartWrapper = styled.div`
   width: 100%;
   margin: 0 auto;
-  max-width: 360px;
-
+  max-width: 36rem;
   display: block;
+
   border-radius: 12px;
 
   @media (max-width: 960px) {
@@ -418,5 +421,6 @@ export const InfoList = styled.ul`
     line-height: 1.2rem;
     text-transform: uppercase;
     letter-spacing: 0.16rem;
+    word-break: break-all;
   }
 `
