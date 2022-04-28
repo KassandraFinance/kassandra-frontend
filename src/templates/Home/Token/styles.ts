@@ -347,6 +347,10 @@ export const BarChartWrapper = styled.div`
   @media (max-width: 960px) {
     padding: 0 2.4rem;
   }
+
+  @media (max-width: 340px) {
+    padding: 0 3.2rem;
+  }
 `
 
 export const Info = styled.div`
