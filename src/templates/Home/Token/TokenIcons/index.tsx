@@ -18,7 +18,7 @@ const TokenIcons = ({ tokens }: TokenIconsProps) => {
             key={entry[0]}
             index={index}
           >
-            <Image src={entry[1] || none} alt="" width={22} height={22} />
+            <Image src={entry[1] || none} alt="" width={18} height={18} />
           </S.ImageWrapper>
         )
       })}

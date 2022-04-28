@@ -9,20 +9,23 @@ interface IWrapperProps {
   index: number;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const ImageWrapper = styled.div<IWrapperProps>`
   display: flex;
+  margin-left: -0.9rem;
+  max-width: 1.8rem;
+
   z-index: -${({ index }) => index};
-  margin-left: -9px;
-  max-width: 18px;
+
   img {
     border-radius: 50%;
     padding: 0;
     margin: 0;
-    max-width: 20px;
+    max-width: 2rem;
   }
+
   &.svg-none img {
-    min-width: 40px;
-    width: 40px !important;
+    min-width: 4rem;
+    width: 4rem !important;
   }
 `

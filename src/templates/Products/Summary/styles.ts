@@ -180,6 +180,7 @@ export const Blockchain = styled.div`
 
     font-size: ${theme.font.sizes.font14};
     line-height: ${theme.font.sizes.font14};
+    text-transform: uppercase;
   }
 
   a {
