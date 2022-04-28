@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import NextLink from 'next/link'
 
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
@@ -8,8 +7,11 @@ import Button from '../../../components/Button'
 import Header from '../../../components/Header'
 
 import * as S from './styles'
+import ModalBuyKacy from '../../../components/Modals/ModalBuyKacy'
 
 const Hero = () => {
+  const [isOpenModal, setIsOpenModal] = React.useState<boolean>(false)
+
   const { trackEvent } = useMatomo()
 
   function clickMatomoEvent(action: string, name: string) {
@@ -21,20 +23,17 @@ const Hero = () => {
   }
 
   return (
-    <S.Hero>
-      <Header />
-      <S.IntroHero>
-        <h3>
-          WELCOME TO <b>KASSANDRA DAO</b>
-        </h3>
-        <h1>tokenized data-driven investment funds</h1>
-      </S.IntroHero>
-      <S.ButtonWrapper>
-        <li>
-          <NextLink
-            href="https://app.pangolin.exchange/#/swap?outputCurrency=0xf32398dae246C5f672B52A54e9B413dFFcAe1A44"
-            passHref
-          >
+    <>
+      <S.Hero>
+        <Header />
+        <S.IntroHero>
+          <h3>
+            WELCOME TO <b>KASSANDRA DAO</b>
+          </h3>
+          <h1>tokenized data-driven investment funds</h1>
+        </S.IntroHero>
+        <S.ButtonWrapper>
+          <li>
             <Button
               className="btn-cta"
               backgroundPrimary
@@ -42,25 +41,28 @@ const Hero = () => {
               as="a"
               text="Buy KACY"
               target="_blank"
-              icon={<img src="/assets/pangolin.svg" alt="" />}
-              onClick={() => clickMatomoEvent('click-to-cta', 'up-ido')}
+              icon={<img src="/favicon-16x16.png" alt="Logo Kacy token" />}
+              onClick={() => {
+                clickMatomoEvent('click-to-cta', 'up-ido'), setIsOpenModal(true)
+              }}
             />
-          </NextLink>
-        </li>
-        <li>
-          <Link href="/products/ahype">
-            <Button
-              backgroundPrimary
-              size="large"
-              as="a"
-              text="Buy aHYPE"
-              icon={<img src="/assets/ahype.svg" alt="" />}
-              onClick={() => clickMatomoEvent('click-to-cta', 'hero')}
-            />
-          </Link>
-        </li>
-      </S.ButtonWrapper>
-    </S.Hero>
+          </li>
+          <li>
+            <Link href="/products/ahype">
+              <Button
+                backgroundPrimary
+                size="large"
+                as="a"
+                text="Buy aHYPE"
+                icon={<img src="/assets/ahype.svg" alt="" />}
+                onClick={() => clickMatomoEvent('click-to-cta', 'hero')}
+              />
+            </Link>
+          </li>
+        </S.ButtonWrapper>
+      </S.Hero>
+      <ModalBuyKacy modalOpen={isOpenModal} setModalOpen={setIsOpenModal} />
+    </>
   )
 }
 export default Hero
