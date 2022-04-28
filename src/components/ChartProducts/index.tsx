@@ -17,7 +17,11 @@ import * as S from './styles'
 
 const arrPeriod: string[] = ['1W', '1M', '3M', '1Y']
 
-const ChartProducts = () => {
+interface IChartProductsProps {
+  crpPoolAddress: string;
+}
+
+const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
   const [inputChecked, setInputChecked] = React.useState<string>('Price')
   const [price, setPrice] = React.useState([])
   const [tvl, setTvl] = React.useState([])
@@ -28,7 +32,7 @@ const ChartProducts = () => {
   const dateNow = new Date()
 
   const [params, setParams] = React.useState({
-    id: HeimCRPPOOL,
+    id: crpPoolAddress,
     price_period: 3600,
     period_selected: Math.trunc(dateNow.getTime() / 1000 - 60 * 60 * 24 * 7)
   })

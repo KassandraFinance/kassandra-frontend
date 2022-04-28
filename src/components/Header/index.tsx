@@ -65,15 +65,18 @@ const Header = () => {
           </Link>
           <DropdownInvest
             nameOnHeader="invest"
-            linkPage={[{ name: 'aHYPE', href: '/products/ahype' }]}
+            linkPage={[
+              { name: 'Explore Funds', href: '/explore' },
+              { name: 'Stake/Farm', href: '/farm' }
+            ]}
           />
-          <Link href="/farm" passHref>
+          {/* <Link href="/farm" passHref>
             <S.MenuLink
               onClick={() => clickMatomoEvent('click-on-link', 'stake-farm')}
             >
               Stake/Farm
             </S.MenuLink>
-          </Link>
+          </Link> */}
           {process.env.NEXT_PUBLIC_VOTE === '1' ? (
             <DropdownInvest
               nameOnHeader="vote"
