@@ -85,15 +85,15 @@ export const BodyModalEditInfo = styled.div`
   justify-content: space-between;
   flex-direction: column;
   padding: 2.4rem;
+`
+export const UserProfileInfoContent = styled.div`
+  display: flex;
 
-  #ProfileInfo {
-    display: flex;
-
-    @media (max-width: 768px) {
-      flex-direction: column;
-    }
+  @media (max-width: 768px) {
+    flex-direction: column;
   }
 `
+
 export const UserProfileInfo = styled.div`
   display: flex;
   align-items: center;
@@ -162,6 +162,8 @@ export const UserProfileInfo = styled.div`
   }
 `
 
+export const UserNameContent = styled.div``
+
 export const UserImageContent = styled.div`
   display: flex;
 `
@@ -188,7 +190,7 @@ export const UserSocialMidia = styled.div<IUserSocialMidiaProps>`
   }
 
 
-  h2 {
+  p {
     color: #C4C4C4;
     font-size: 1.4rem;
     font-weight: ${theme.font.weight.medium};
@@ -267,7 +269,7 @@ export const ModalManagerInfo = styled.div<IModalManagerInfoProps>`
     }
   }
 
-  h2 {
+  p {
     margin-bottom: 1.2rem;
 
     color: #C4C4C4;
@@ -325,29 +327,6 @@ export const UserEditInfoButtons = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
-  }
-
-  button {
-    height: 5.4rem;
-    width: 100%;
-
-    color: #ffffff;
-    font-size: 1.6rem;
-    font-weight: ${theme.font.weight.light};
-
-    border-radius: 0.4rem;
-
-    cursor: pointer;
-  }
-
-  #SaveChanges {
-    background: #0C3DDC;
-    border: 0;
-  }
-
-  #CancelSaves {
-    background-color: transparent;
-    border-color: #26DBDB;
   }
 `
 

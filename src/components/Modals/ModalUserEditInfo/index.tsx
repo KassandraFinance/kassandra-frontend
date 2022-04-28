@@ -1,6 +1,8 @@
 import React, { FormEvent } from 'react'
 import Image from 'next/image'
 
+import Button from '../../Button'
+
 import userProfile from '../../../../public/assets/userProfile.svg'
 
 import * as S from './styles'
@@ -95,7 +97,7 @@ const ModalUserEditInfo = ({
           </button>
         </S.HeaderModalEditInfo>
         <S.BodyModalEditInfo>
-          <div id="ProfileInfo">
+          <S.UserProfileInfoContent>
             <S.UserProfileInfo>
               <S.UserImageContent>
                 <Image
@@ -122,7 +124,7 @@ const ModalUserEditInfo = ({
                   <button type="button">Add image NFT</button>
                 </span>
               </S.UserImageContent>
-              <div>
+              <S.UserNameContent>
                 <p>NICKNAME</p>
                 <input
                   placeholder="Your Name"
@@ -134,7 +136,7 @@ const ModalUserEditInfo = ({
                   }
                   value={editYourProfileInput?.userName}
                 />
-              </div>
+              </S.UserNameContent>
             </S.UserProfileInfo>
             <S.UserSocialAndInfoButton
               type="button"
@@ -152,7 +154,7 @@ const ModalUserEditInfo = ({
               </span>
             </S.UserSocialAndInfoButton>
             <S.UserSocialMidia isStateSocialMidia={isStateSocialMidia}>
-              <h2>SOCIAL MEDIA</h2>
+              <p>SOCIAL MEDIA</p>
               <ul>
                 <S.SocialIcon>
                   <span>
@@ -236,7 +238,7 @@ const ModalUserEditInfo = ({
                 </S.SocialIcon>
               </ul>
             </S.UserSocialMidia>
-          </div>
+          </S.UserProfileInfoContent>
           <S.UserSocialAndInfoButton
             id="managerInfoButton"
             type="button"
@@ -254,7 +256,7 @@ const ModalUserEditInfo = ({
             </span>
           </S.UserSocialAndInfoButton>
           <S.ModalManagerInfo isStateManagerInfo={isStateManagerInfo}>
-            <h2>MANAGER INFO</h2>
+            <p>MANAGER INFO</p>
             <textarea
               placeholder="Your description..."
               maxLength={500}
@@ -272,14 +274,22 @@ const ModalUserEditInfo = ({
             </span>
           </S.ModalManagerInfo>
           <S.UserEditInfoButtons>
-            <button id="SaveChanges">Save Changes</button>
-            <button
-              id="CancelSaves"
+            <Button
               type="button"
+              text="Save Changes"
+              size="claim"
+              backgroundSecondary
+              fullWidth
               onClick={() => setModalOpen(false)}
-            >
-              Cancel
-            </button>
+            />
+            <Button
+              type="button"
+              text="Cancel"
+              size="claim"
+              backgroundBlack
+              fullWidth
+              onClick={() => setModalOpen(false)}
+            />
           </S.UserEditInfoButtons>
         </S.BodyModalEditInfo>
       </S.ModalEditInfo>
