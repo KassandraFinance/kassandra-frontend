@@ -72,13 +72,15 @@ export interface ProductDetails {
 export type ProductSymbols = keyof typeof products;
 
 
-const KASSANDRA_SUBGRAPH =
-`https://graph.kassandra.finance/subgraphs/name/${
-  process.env.NEXT_PUBLIC_MASTER === '1' ? 'KassandraAvalanche' : 'KassandraFuji'}`
+// const KASSANDRA_SUBGRAPH =
+// `https://graph.kassandra.finance/subgraphs/name/${
+//   process.env.NEXT_PUBLIC_MASTER === '1' ? 'KassandraAvalanche' : 'KassandraFuji'}`
 
-export const SUBGRAPH_URL = process.env.NODE_ENV
-  ? 'http://localhost/subgraphs/name/KassandraFuji'
-  : KASSANDRA_SUBGRAPH
+export const SUBGRAPH_URL = `https://graph.kassandra.finance/subgraphs/name/${process.env.NEXT_PUBLIC_MASTER === '1' ? 
+  'KassandraAvalanche'
+  :
+  'KassandraFuji'}`
+
 
 export const chains: { [key: string]: ChainDetails } = {
   avalanche: {
@@ -149,7 +151,6 @@ const ahype: ProductDetails  = process.env.NEXT_PUBLIC_MASTER === '1' ?
       partners.api3
     ]
   }
-
 
 const tricrypto:  ProductDetails  =  {
     sipAddress: '0xE34A2935B04e9c879f5bDd022b97D7Cf2F1Dde1d',

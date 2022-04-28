@@ -57,9 +57,11 @@ export const Divider = styled.div`
   border: 0.1rem solid ${theme.colors.cyan};
 `
 
+
 export const CardWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-items: center;
   gap: 3.2rem;
 
   margin: 7.5rem auto;
@@ -91,7 +93,12 @@ export const Card = styled.div`
     margin-top: 0.8rem;
   }
 `
-export const CardHeader = styled.div`
+
+interface CardHeaderProps {
+  isTricrypto?: boolean;
+}
+
+export const CardHeader = styled.div<CardHeaderProps>`
   max-width: 100%;
   height: 10rem;
 
@@ -100,14 +107,23 @@ export const CardHeader = styled.div`
   border-radius: 1.2rem;
 
   z-index: -9;
+
+  background-color: #190e1d;
+  background-repeat: no-repeat;
+  background-image: ${({ isTricrypto }) =>
+    isTricrypto
+      ? css`url('assets/backgroundTricrypto.svg')`
+      : css`url('assets/backgroundAvaxToken.svg')`};
+  background-position: right 20% center;
+  border-radius: 12px;
 `
 export const ImageWrapper = styled.div`
+  width: 9.6rem;
+  height: 9.6rem;
+
   display: flex;
   justify-content: center;
   position: absolute;
-
-  width: 9.6rem;
-  height: 9.6rem;
 
   margin-top: 4.5rem;
   margin-left: 4.5rem;
@@ -132,16 +148,17 @@ export const TextWrapper = styled.div`
 
   @media (max-width: 960px) {
     margin: 4rem auto;
-    padding: 0 3.2remx;
+    padding: 0 3.2rem;
   }
 
   p {
+    margin: 0.8rem 0;
+
     text-align: left;
     font-size: ${theme.font.sizes.font12};
     color: #bdbdbd;
     letter-spacing: 0px;
-
-    margin: 0.8rem 0;
+    text-transform: uppercase;
   }
 
   span {
@@ -198,11 +215,11 @@ export interface IPriceProps {
 
 // prettier-ignore
 export const Price = styled.div<IPriceProps>`
-  display: flex;
-  align-items: center;
-
   min-width: 14rem;
   max-width: 100%;
+
+  display: flex;
+  align-items: center;
 
   @media (max-width: 960px) {
     display: grid;
@@ -230,17 +247,19 @@ export const Price = styled.div<IPriceProps>`
 `
 
 export const TokensSymbols = styled.div`
+  z-index: 10;
+
   display: flex;
   align-items: center;
 
   z-index: 10;
 
   span {
+    min-width: 5rem;
     margin-left: 1.6rem;
 
     font-size: 1.1rem;
     font-weight: ${theme.font.weight.light};
-    //min-width: 50px;
 
     @media (max-width: 960px) {
       margin-left: 0;
@@ -361,9 +380,94 @@ export const ComingSoonContent = styled.div`
 `
 
 export const BarChartWrapper = styled.div`
-  display: block;
-  max-width: 100%;
+  width: 100%;
   margin: 0 auto;
+  max-width: 36rem;
+  display: block;
 
-  border-radius: 1.2rem;
+  border-radius: 12px;
+
+  @media (max-width: 960px) {
+    padding: 0 2.4rem;
+  }
+
+  @media (max-width: 340px) {
+    padding: 0 3.2rem;
+  }
+`
+
+export const Info = styled.div`
+  padding-left: 9rem;
+  padding-right: 2rem;
+
+  &:first-child {
+    padding-right: 9rem;
+    padding-left: 2rem;
+  }
+
+  @media (max-width: 1060px) {
+    padding-left: 4rem;
+    padding-right: 1rem;
+
+    &:first-child {
+      padding-right: 4rem;
+      padding-left: 1rem;
+    }
+  }
+
+  @media (max-width: 960px) {
+    margin: 5rem auto;
+    max-width: 49rem;
+    width: 100%;
+
+    padding: 0;
+
+    &:first-child {
+      padding: 0;
+      order: 1;
+    }
+  }
+
+  h2 {
+    font-size: 3.2rem;
+    text-align: left;
+  }
+
+  h4 {
+    color: #ffbf00;
+    font-size: 1.4rem;
+    margin-bottom: 1.6rem;
+    line-height: 1.6rem;
+    letter-spacing: 0.6rem;
+    text-transform: uppercase;
+    text-align: left;
+    font-weight: 400;
+  }
+
+  span {
+    margin-top: 2.5rem;
+    font-size: 1.6rem;
+    font-weight: 300;
+    line-height: 2.4rem;
+    text-align: left;
+  }
+`
+
+export const InfoList = styled.ul`
+  margin-top: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16rem;
+    word-break: break-all;
+  }
 `
