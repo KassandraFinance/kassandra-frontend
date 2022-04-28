@@ -180,6 +180,9 @@ interface IisSeeMoreProps {
 
 // eslint-disable-next-line prettier/prettier
 export const ButtonSeeMore = styled.button<IisSeeMoreProps>`
+  position: relative;
+
+  width: 7rem;
   margin-left: 1rem;
   border: 0;
 
@@ -190,10 +193,12 @@ export const ButtonSeeMore = styled.button<IisSeeMoreProps>`
   font-family: ${theme.font.family};
   font-weight: ${theme.font.weight.medium};
 
+  text-align: start;
   cursor: pointer;
 
   > span {
-    margin-left: 0.6rem;
+    position: absolute;
+    right: -0.1rem;
 
     img {
       ${props =>
