@@ -3,11 +3,11 @@ import Link from 'next/link'
 
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
-import Button from '../../../components/Button'
 import Header from '../../../components/Header'
+import Button from '../../../components/Button'
+import ModalBuyKacy from '../../../components/Modals/ModalBuyKacy'
 
 import * as S from './styles'
-import ModalBuyKacy from '../../../components/Modals/ModalBuyKacy'
 
 const Hero = () => {
   const [isOpenModal, setIsOpenModal] = React.useState<boolean>(false)
@@ -40,7 +40,6 @@ const Hero = () => {
               size="large"
               as="a"
               text="Buy KACY"
-              target="_blank"
               icon={<img src="/favicon-16x16.png" alt="Logo Kacy token" />}
               onClick={() => {
                 clickMatomoEvent('click-to-cta', 'up-ido'), setIsOpenModal(true)
