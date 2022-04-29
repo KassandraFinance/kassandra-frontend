@@ -7,26 +7,32 @@ export const Background = styled.div`
   background-position: center;
 `
 export const BackgroundSubscribe = styled.div`
+  max-width: 96rem;
+  margin: 0 auto 17rem;
+
+  padding-top: 4rem;
+  padding-left: 6rem;
+  padding-bottom: 0;
+  padding-right: 6rem;
+
   background: #2114261f;
   border: 1px solid #ffffff21;
-  border-radius: 10px;
+  border-radius: 1rem;
 
-  max-width: 96rem;
-  margin: 0 auto 170px;
-  padding: 40px 60px 0px 60px;
   @media (max-width: 768px) {
     display: none;
   }
 `
 export const BackgoundCountDown = styled.div`
+  padding: 10rem 10rem;
+
   background: url('/assets/backgroundCountdown.svg');
   background-repeat: no-repeat;
   background-size: auto;
   background-position: center;
 
-  padding: 100px 100px;
   @media (max-width: 768px) {
-    background: none;
     padding: 0;
+    background: none;
   }
 `
