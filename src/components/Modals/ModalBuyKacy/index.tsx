@@ -33,12 +33,14 @@ const ModalBuyKacy = ({ modalOpen, setModalOpen }: IModalBuyKacyProps) => {
             passHref
           >
             <S.ButtonModalBuyKacy target="_blank">
-              <Image
-                src="/assets/logo-traderJoe.svg"
-                alt="Close"
-                width={29}
-                height={40}
-              />
+              <span id="ImageContent">
+                <Image
+                  src="/assets/logo-traderJoe.svg"
+                  alt="TraderJoe logo"
+                  width={29}
+                  height={40}
+                />
+              </span>
               <p>TRADER JOE</p>
             </S.ButtonModalBuyKacy>
           </Link>
@@ -47,12 +49,14 @@ const ModalBuyKacy = ({ modalOpen, setModalOpen }: IModalBuyKacyProps) => {
             passHref
           >
             <S.ButtonModalBuyKacy target="_blank">
-              <Image
-                src="/assets/logo-pangolin-40x40.svg"
-                alt="Close"
-                width={40}
-                height={40}
-              />
+              <span id="ImageContent">
+                <Image
+                  src="/assets/logo-pangolin-40x40.svg"
+                  alt="Pangolin logo"
+                  width={40}
+                  height={40}
+                />
+              </span>
               <p>PANGOLIN</p>
             </S.ButtonModalBuyKacy>
           </Link>

@@ -81,37 +81,46 @@ export const HeaderModalBuyKacy = styled.div`
 
 export const BodyModalBuyKacy = styled.div`
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-  padding: 2.4rem;
-  gap: 1.6rem;
+  width: 100%;
+  gap: 7rem;
+
+  padding-top: 3.2rem;
+  padding-right: 4.8rem;
+  padding-bottom: 3.2rem;
+  padding-left: 4.8rem;
 `
 
 export const ButtonModalBuyKacy = styled.a`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: start;
-
-  width: 28rem;
-  height: 7.2rem;
-  padding-left: 2.4rem;
-
-  background: rgba(31, 31, 31, 0.72);
-  border-radius: 1rem;
+  justify-content: center;
 
   text-decoration: none;
-  transition: 300ms;
 
-  :first-child {
-    padding-left: 3.3rem;
-  }
+  #ImageContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  :hover {
-    border: 0.1rem solid rgba(255, 255, 255, 0.25);
+    width: 6.4rem;
+    height: 6.4rem;
+
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+
+    transition: border 0.3s ease-in-out;
+
+    :hover {
+      border: 0.1rem solid rgba(255, 255, 255, 0.25);
+    }
   }
 
   p {
-    margin-left: 2.4rem;
+    margin-top: 1.6rem;
 
     color: #fcfcfc;
     font-weight: ${theme.font.weight.normal};
