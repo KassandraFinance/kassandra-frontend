@@ -2,32 +2,35 @@ import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
 export const Token = styled.section`
-  padding: 0 32px;
-  margin: 0 auto 160px;
+  padding: 0 3.2rem;
+  margin: 0 auto 16rem;
 
   text-align: center;
+
   @media (max-width: 960px) {
-    margin: 0 auto 80px;
+    margin: 0 auto 8rem;
   }
-  /* margin: -80px 0 0; */
 
   span {
     display: flex;
+
+    max-width: 50rem;
+    margin: 0 auto;
+
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.light};
-
     line-height: 155%;
-    max-width: 500px;
-    margin: 0 auto;
   }
+
   h1 {
-    max-width: 620px;
+    max-width: 62rem;
     margin: auto;
     margin-bottom: ${theme.spacings.space24};
 
     font-size: ${theme.font.sizes.font48};
     font-weight: ${theme.font.weight.black};
     line-height: 104%;
+
     @media (max-width: 960px) {
       font-size: ${theme.font.sizes.font36};
     }
@@ -35,88 +38,97 @@ export const Token = styled.section`
       font-size: ${theme.font.sizes.font24};
     }
   }
+
   p {
     margin: 0 auto;
 
-    font-size: ${theme.font.sizes.font14};
-    letter-spacing: 4px;
     color: ${theme.colors.cyan};
+    font-size: ${theme.font.sizes.font14};
+    letter-spacing: 0.4rem;
     text-align: center;
   }
 `
+
 export const Divider = styled.div`
+  max-width: 10rem;
+  margin: 2.5rem auto;
+
   border: 1px solid ${theme.colors.cyan};
-
-  max-width: 100px;
-  margin: 25px auto;
 `
-export const KassandraCardWrapper = styled.section`
-  margin: 0 auto;
-  margin-top: 75px;
-  max-width: 890px;
 
+export const KassandraCardWrapper = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
+
+  margin: 0 auto;
+  margin-top: 7.5rem;
+  max-width: 89rem;
+
   @media (max-width: 960px) {
     display: flex;
     flex-direction: column;
   }
 `
 export const KassandraCard = styled.div`
-  background-color: rgba(33, 20, 38, 0.33);
-
-  border-radius: 12px;
-  border: 1px solid #ffffff0d;
-
-  max-width: 390px;
-  height: max-content;
-  padding: 31px;
-
   display: flex;
   flex-direction: column;
+  align-items: start;
+
+  max-width: 39rem;
+  height: max-content;
+  padding: 3.1rem;
+
+  background-color: rgba(33, 20, 38, 0.33);
+  border-radius: 1.2rem;
+  border: 1px solid #ffffff0d;
 
   text-align: left;
+
   @media (max-width: 960px) {
     margin: auto;
   }
+
   &.firstCard {
     p {
       color: ${theme.colors.magenta};
     }
   }
+
   &.secondCard {
-    margin-top: 170px;
+    margin-top: 17rem;
+
     @media (max-width: 960px) {
       margin-top: 1.6rem;
     }
   }
+
   &.thirdCard {
-    margin-top: -120px;
+    margin-top: -12rem;
+
     @media (max-width: 960px) {
       margin-top: 1.6rem;
     }
   }
-  img {
-    max-width: min-content;
-  }
+
   p {
-    text-align: left;
-    color: #f79640;
+    display: inline-block;
 
     margin: 0;
-    margin-top: 30px;
-    margin-bottom: 8px;
+    margin-top: 3rem;
+    margin-bottom: 0.8rem;
 
+    color: #f79640;
+    text-align: left;
     letter-spacing: 0.22em;
-    display: inline-block;
   }
+
   h1 {
     margin-inline: 0;
 
-    font-size: 24px;
+    font-size: ${theme.font.sizes.font24};
     font-style: normal;
     font-weight: 900;
-    line-height: 32px;
+    line-height: 3.2rem;
     letter-spacing: 0em;
     text-align: left;
   }

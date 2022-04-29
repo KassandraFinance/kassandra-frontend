@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 
 import * as S from './styles'
 
@@ -14,11 +15,11 @@ const KassandraArchitecture = () => {
       </span>
       <S.KassandraCardWrapper>
         <S.KassandraCard className="firstCard">
-          <img
-            src="assets/about-distribution-icon.svg"
-            alt=""
-            width="48"
-            height="57"
+          <Image
+            src="/assets/about-distribution-icon.svg"
+            alt="about distribution icon"
+            width={48}
+            height={57}
           />
           <p>5% HOLDING RULE</p>
           <h1>Growing $KACY value</h1>
@@ -30,7 +31,12 @@ const KassandraArchitecture = () => {
           </span>
         </S.KassandraCard>
         <S.KassandraCard className="secondCard">
-          <img src="assets/feeIcon.svg" alt="" />
+          <Image
+            src="/assets/feeIcon.svg"
+            alt="Revenue Stream for DAO icon"
+            width={56}
+            height={57}
+          />
           <p>3% REDEEM FEE</p>
           <h1>Flowing revenue to the DAO</h1>
           <span>
@@ -40,7 +46,12 @@ const KassandraArchitecture = () => {
           </span>
         </S.KassandraCard>
         <S.KassandraCard className="thirdCard">
-          <img src="assets/voteIcon.svg" alt="" width="52" height="45" />
+          <Image
+            src="/assets/voteIcon.svg"
+            alt="vote icon"
+            width={52}
+            height={45}
+          />
           <p>VOTE LOCK</p>
           <h1>Making $KACY scarce</h1>
           <span>
