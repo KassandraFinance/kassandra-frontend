@@ -2,24 +2,25 @@ import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
 export const ClassProducts = styled.section`
-  max-width: 960px;
-  margin: 0 auto 160px;
-  padding: 0 32px;
+  display: flex;
+  flex-direction: column;
+
+  max-width: 96rem;
+  margin: 0 auto 16rem;
+  padding: 0 3.2rem;
 
   text-align: center;
 
-  display: flex;
-  flex-direction: column;
   @media (max-width: 800px) {
-    margin: 0 auto 80px;
+    margin: 0 auto 8rem;
   }
 
   h1 {
+    margin-bottom: ${theme.spacings.space24};
+
     font-size: ${theme.font.sizes.font48};
     font-weight: ${theme.font.weight.black};
     line-height: 104%;
-
-    margin-bottom: ${theme.spacings.space24};
 
     @media (max-width: 960px) {
       font-size: ${theme.font.sizes.font36};
@@ -32,70 +33,77 @@ export const ClassProducts = styled.section`
       font-size: ${theme.font.sizes.font24};
     }
   }
+
   p {
     width: 100%;
 
+    color: #f79640;
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.normal};
-    letter-spacing: 4px;
-    color: #f79640;
+    letter-spacing: 0.4rem;
   }
   span {
-    max-width: 750px;
+    max-width: 75rem;
     margin: 0 auto;
 
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.light};
     line-height: 155%;
+
     @media (max-width: 960px) {
       text-align: left;
     }
   }
 `
 export const Divider = styled.div`
-  border: 1px solid #f79640;
+  width: 9.8rem;
+  margin: 2.5rem auto;
 
-  width: 98px;
-  margin: 25px auto;
+  border: 1px solid #f79640;
 `
 export const Image = styled.div`
+  margin-top: 15rem;
   text-align: center;
-  margin-top: 150px;
+
   @media (max-width: 680px) {
     display: none;
   }
-  img {
-    max-width: 100%;
-  }
 `
-export const ImageDescription = styled.div`
-  margin-top: 35px;
 
+export const ImageDescription = styled.div`
   display: flex;
   justify-content: space-between;
+
+  margin-top: 3.5rem;
+
   @media (max-width: 680px) {
     display: none;
   }
 `
-export const DescriptionContainer = styled.div`
-  max-width: 160px;
 
-  flex-direction: column;
+export const DescriptionContainer = styled.div`
   display: flex;
+  flex-direction: column;
+
+  max-width: 16rem;
 
   color: ${theme.colors.snow};
+
   p {
+    margin-bottom: 1.2rem;
+
     font-size: ${theme.font.sizes.font12};
-    letter-spacing: 4px;
-    margin-bottom: 12px;
+    letter-spacing: 0.4rem;
   }
+
   span {
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.light};
     line-height: 122.5%;
   }
+
   @media (max-width: 960px) {
-    max-width: 130px;
+    max-width: 13rem;
 
     span {
       font-size: ${theme.font.sizes.font12};
