@@ -24,6 +24,7 @@ import infoGray from '../../../public/assets/info-gray.svg'
 import { GET_INFO_POOL } from './graphql'
 
 import Change from './Change'
+import MyAsset from './MyAsset'
 import Summary from './Summary'
 import Distribution from './Distribution'
 import TokenDescription from './TokenDescription'
@@ -35,6 +36,7 @@ interface InfoPool {
   swapFees: string;
   withdrawFees: string;
   volume: string;
+  price: string;
 }
 
 interface Input {
@@ -46,7 +48,8 @@ const Products = ({ product }: Input) => {
     tvl: '...',
     swapFees: '...',
     withdrawFees: '...',
-    volume: '...'
+    volume: '...',
+    price: '0'
   })
 
   const { trackProductPageView } = useMatomoEcommerce()
@@ -85,7 +88,8 @@ const Products = ({ product }: Input) => {
         tvl: BNtoDecimal(Big(data.pool.total_value_locked_usd), 2, 2, 2),
         swapFees: BNtoDecimal(Big(swapFees), 2, 2, 2),
         withdrawFees: BNtoDecimal(Big(withdrawFees), 2, 2, 2),
-        volume: BNtoDecimal(Big(volume), 2, 2, 2)
+        volume: BNtoDecimal(Big(volume), 2, 2, 2),
+        price: data.pool.price_usd
       })
     }
   }, [data])
@@ -186,6 +190,13 @@ const Products = ({ product }: Input) => {
           <ChartProducts crpPoolAddress={product.sipAddress} />
           <ScrollUpButton />
           <Change crpPoolAddress={product.sipAddress} />
+          <MyAsset
+            crpPoolAddress={product.sipAddress}
+            price={infoPool.price}
+            symbol={product.symbol}
+            icon={product.fundIcon}
+            pid={product.pid}
+          />
           <Summary
             strategy={data?.pool.strategy || '...'}
             summary={product.fundSummary}
