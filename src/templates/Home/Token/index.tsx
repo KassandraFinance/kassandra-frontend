@@ -11,10 +11,9 @@ import { GET_INFO_AHYPE } from '../graphql'
 
 import Button from '../../../components/Button'
 import ExternalLink from '../../../components/ExternalLink'
+import TokenIcons from './TokenIcons'
 
 import arrowRight from '../../../../public/assets/icons/arrow-right.svg'
-
-import TokenIcons from './TokenIcons'
 
 import * as S from './styles'
 

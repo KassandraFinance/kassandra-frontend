@@ -15,6 +15,7 @@ export const Token = styled.section`
 
   span {
     display: flex;
+
     max-width: 50rem;
     margin: 0 auto;
 
@@ -61,10 +62,10 @@ export const CardWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  gap: 3.2rem;
 
-  margin: 7.5rem auto;
   max-width: 100rem;
+  margin: 7.5rem auto;
+  gap: 3.2rem;
 
   z-index: 10;
 
@@ -83,10 +84,10 @@ export const Card = styled.div`
   box-shadow: 0px 0.4rem 6.9rem -1.7rem rgba(0, 0, 0, 0, 51);
 
   @media (max-width: 960px) {
-    order: 2;
     width: 100%;
     margin: 0 auto;
     margin-top: 0.8rem;
+    order: 2;
   }
 `
 
@@ -98,26 +99,23 @@ interface CardHeaderProps {
 export const CardHeader = styled.div<CardHeaderProps>`
   max-width: 100%;
   height: 10rem;
-
-  background: #190e1d url('assets/backgroundAvaxToken.svg') no-repeat;
-  background-position: right 20% center;
-  border-top-left-radius: 1.2rem;
-  border-top-right-radius: 1.2rem;
-
   z-index: -9;
 
-  background-color: #190e1d;
-  background-repeat: no-repeat;
   background-image: ${({ isTricrypto }) =>
     isTricrypto
       ? css`url('assets/background-k3c.png')`
       : css`url('assets/background-ahype.png')`};
+  background-color: #190e1d;
+  background-repeat: no-repeat;
   background-position: right 20% bottom;
+
+  border-top-left-radius: 1.2rem;
+  border-top-right-radius: 1.2rem;
 `
 export const ImageWrapper = styled.div`
-  display: flex;
   position: absolute;
 
+  display: flex;
   margin-top: 4.5rem;
   margin-left: 5rem;
 
@@ -147,11 +145,11 @@ export const TextWrapper = styled.div`
   }
 
   p {
-    text-align: left;
     color: #c4c4c4;
     font-size: ${theme.font.sizes.font12};
     font-weight: ${theme.font.weight.normal};
-    letter-spacing: 0px;
+    letter-spacing: 0;
+    text-align: left;
     text-transform: uppercase;
   }
 
@@ -180,7 +178,7 @@ export const NameAndSymbol = styled.div`
 
     font-size: ${theme.font.sizes.font32};
     font-weight: ${theme.font.weight.bold};
-    line-height: 35.2px;
+    line-height: 3.5rem;
 
     @media (max-width: 960px) {
       font-size: ${theme.font.sizes.font24};
@@ -212,10 +210,9 @@ export interface IPriceProps {
 
 // prettier-ignore
 export const Price = styled.div<IPriceProps>`
-  max-width: 100%;
-
   display: flex;
   align-items: center;
+  max-width: 100%;
 
   > div {
     display: flex;
@@ -224,23 +221,22 @@ export const Price = styled.div<IPriceProps>`
 
     p {
       margin-left: 0.3rem;
-      letter-spacing: 0;
+
       color: ${props => (props.change >= 0 ? '#5ee56b' : '#ff5a5f')};
+      letter-spacing: 0;
     }
   }
 
   span {
     margin: 0;
-    text-align: start;
 
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.light};
+    text-align: start;
   }
 `
 
 export const TokensSymbols = styled.div`
-  z-index: 10;
-
   display: flex;
   align-items: center;
 
@@ -299,10 +295,10 @@ export const CardFooter = styled.div`
     align-items: space-between;
     justify-items: center;
 
-    text-decoration: none;
+    color: ${theme.colors.snow};
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.light};
-    color: ${theme.colors.snow};
+    text-decoration: none;
 
     transition: 0.15s;
 
@@ -324,8 +320,8 @@ export const ComingSoon = styled.div`
   max-width: 49rem;
   height: 100%;
 
-  border-radius: 1.2rem;
   background: rgba(31, 31, 31, 0.72);
+  border-radius: 1.2rem;
   box-shadow: 0px 0.4rem 6.9rem -1.7rem rgba(0, 0, 0, 0, 51);
 
   @media (max-width: 960px) {
@@ -361,13 +357,13 @@ export const ComingSoonContent = styled.div`
 `
 
 export const BarChartWrapper = styled.div`
-  width: 100%;
   display: flex;
+  width: 100%;
   padding-left: 5rem;
   padding-right: 5rem;
 
   svg {
-    border-radius: 12px;
+    border-radius: 1.2rem;
   }
 
   @media (max-width: 500px) {
@@ -419,18 +415,20 @@ export const Info = styled.div`
   }
 
   h4 {
+    margin-bottom: 1.6rem;
+
     color: #ffbf00;
     font-size: 1.4rem;
-    margin-bottom: 1.6rem;
+    font-weight: ${theme.font.weight.normal};
     line-height: 1.6rem;
     letter-spacing: 0.6rem;
-    text-transform: uppercase;
     text-align: left;
-    font-weight: 400;
+    text-transform: uppercase;
   }
 
   span {
     margin-top: 2.4rem;
+
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.light};
     line-height: 2.4rem;
@@ -443,9 +441,10 @@ export const Info = styled.div`
 `
 
 export const InfoList = styled.ul`
-  margin-top: 2.4rem;
   display: flex;
   flex-direction: column;
+
+  margin-top: 2.4rem;
   gap: 2rem;
 
   li {
@@ -454,10 +453,10 @@ export const InfoList = styled.ul`
     gap: 1rem;
 
     font-size: 1.2rem;
-    line-height: 1.2rem;
-    text-transform: uppercase;
     font-weight: ${theme.font.weight.light};
+    line-height: 1.2rem;
     letter-spacing: 0.21rem;
+    text-transform: uppercase;
     word-break: break-all;
   }
 `
