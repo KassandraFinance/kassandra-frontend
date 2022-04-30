@@ -202,7 +202,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
         <S.Card>
           <S.CardHeader isTricrypto={true}>
             <S.ImageWrapper>
-              <img src="/assets/tricrypto.svg" alt="" />
+              <Image src="/assets/tricrypto.png" alt="tricrypto token logo" width={96} height={96} />
             </S.ImageWrapper>
           </S.CardHeader>
           <S.TextWrapper>
@@ -210,14 +210,14 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
               <h1>{poolName}</h1>
             </S.NameAndSymbol>
             <p>
-              by kassandra with yield yak <b> on avalanche network </b>{' '}
+              by kassandra with yield yak <strong> on avalanche network </strong>{' '}
             </p>
           </S.TextWrapper>
           <S.TokenInfo>
             <S.Price change={Number(change)}>
               <span>USD {poolPrice}</span>
               <div>
-                {/* <img src="assets/tokenPriceArrow.png" alt="" /> */}
+                <Image src="/assets/token-price.svg" alt="token Price Arrow pool Tricryoto" width={13} height={13} />
                 <p>{change}%</p>
               </div>
             </S.Price>
@@ -236,7 +236,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
                 maxWidth: '100%',
                 borderRadius: '10px'
               }}
-              width={400}
+              width={500}
               height={10}
               data={[{ name: 'pool', ...poolObject }]}
               layout="vertical"
@@ -257,7 +257,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
           </S.BarChartWrapper>
           <S.CardFooter>
             <Link href="/products/ahype">
-              <Button onClick={() => clickMatomoEvent('click-button', 'buy-ahype')} backgroundSecondary size="medium" text="Buy $aHYPE" />
+              <Button onClick={() => clickMatomoEvent('click-button', 'buy-ahype')} backgroundPrimary size="claim" text="Buy $TRIK" />
             </Link>
             <ExternalLink
               onClick={() => clickMatomoEvent('click-on-link', 'learn-more')}
@@ -306,14 +306,14 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
             </li>
             <li>
               <Image src={arrowRight} width={20} height={20} />
-              EHigh volatility.
+              High volatility.
             </li>
           </S.InfoList>
         </S.Info>
         <S.Card>
           <S.CardHeader>
             <S.ImageWrapper>
-              <img src="/assets/ahype.svg" alt="" />
+              <Image src="/assets/ahype.svg" alt="aHype token logo" width={96} height={96} />
             </S.ImageWrapper>
           </S.CardHeader>
           <S.TextWrapper>
@@ -328,7 +328,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
             <S.Price change={Number(change)}>
               <span>USD {poolPrice}</span>
               <div>
-                {/* <img src="assets/tokenPriceArrow.png" alt="" /> */}
+                <Image src="/assets/token-price.svg" alt="token Price Arrow pool Tricryoto" width={13} height={13} />
                 <p>{change}%</p>
               </div>
             </S.Price>
@@ -347,7 +347,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
                 maxWidth: '100%',
                 borderRadius: '10px'
               }}
-              width={400}
+              width={500}
               height={10}
               data={[{ name: 'pool', ...poolObject }]}
               layout="vertical"
@@ -368,7 +368,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
           </S.BarChartWrapper>
           <S.CardFooter>
             <Link href="/products/ahype">
-              <Button onClick={() => clickMatomoEvent('click-button', 'buy-ahype')} backgroundSecondary size="medium" text="Buy $aHYPE" />
+              <Button onClick={() => clickMatomoEvent('click-button', 'buy-ahype')} backgroundPrimary size="claim" text="Buy $aHYPE" />
             </Link>
             <ExternalLink
               onClick={() => clickMatomoEvent('click-on-link', 'learn-more')}

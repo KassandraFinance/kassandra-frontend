@@ -12,16 +12,21 @@ interface IWrapperProps {
 // prettier-ignore
 export const ImageWrapper = styled.div<IWrapperProps>`
   display: flex;
-  margin-left: -0.9rem;
+  margin-left: -0.4rem;
   max-width: 1.8rem;
 
   z-index: -${({ index }) => index};
 
+  @media (max-width: 350px) {
+    margin-left: -0.9rem;
+  }
+
   img {
-    border-radius: 50%;
+    max-width: 2rem;
     padding: 0;
     margin: 0;
-    max-width: 2rem;
+
+    border-radius: 50%;
   }
 
   &.svg-none img {
