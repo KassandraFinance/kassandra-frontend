@@ -32,7 +32,14 @@ const ModalBuyKacy = ({ modalOpen, setModalOpen }: IModalBuyKacyProps) => {
             href="https://traderjoexyz.com/pool/AVAX/0xf32398dae246C5f672B52A54e9B413dFFcAe1A44"
             passHref
           >
-            <S.ButtonModalBuyKacy target="_blank">
+            <S.ButtonModalBuyKacy
+              target="_blank"
+              onClick={() =>
+                setTimeout(() => {
+                  setModalOpen(false)
+                }, 1000)
+              }
+            >
               <span id="ImageContent">
                 <Image
                   src="/assets/logo-traderJoe.svg"
@@ -48,7 +55,14 @@ const ModalBuyKacy = ({ modalOpen, setModalOpen }: IModalBuyKacyProps) => {
             href="https://app.pangolin.exchange/#/swap?outputCurrency=0xf32398dae246C5f672B52A54e9B413dFFcAe1A44"
             passHref
           >
-            <S.ButtonModalBuyKacy target="_blank">
+            <S.ButtonModalBuyKacy
+              target="_blank"
+              onClick={() =>
+                setTimeout(() => {
+                  setModalOpen(false)
+                }, 1000)
+              }
+            >
               <span id="ImageContent">
                 <Image
                   src="/assets/logo-pangolin-40x40.svg"
