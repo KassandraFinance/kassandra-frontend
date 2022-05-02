@@ -17,7 +17,7 @@ import arrowRight from '../../../../public/assets/icons/arrow-right.svg'
 
 import * as S from './styles'
 
-interface TokenInfo {
+type ITokenInfoProps = {
   id: string;
   balance_in_pool: string;
   address: string;
@@ -27,8 +27,14 @@ interface TokenInfo {
   price: number;
 }
 
+interface IPoolInfoProps {
+  balance: string;
+  token: ITokenInfoProps;
+  weight_goal_normalized: string;
+  weight_normalized: string;
+}
 
-const dictionary: any = {
+const dictionary: { [key: string]: string } = {
   0: '#E8983D',
   1: '#63698C',
   2: '#B7372D',
@@ -82,9 +88,9 @@ const addressChanger: { [key: string]: string | undefined } = {
 
 // eslint-disable-next-line prettier/prettier
 const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
-  const [poolInfo, setPoolInfo] = React.useState<any[]>([])
+  const [poolInfo, setPoolInfo] = React.useState<IPoolInfoProps[]>([])
   const [poolPrice, setPoolPrice] = React.useState<string>('')
-  const [poolObject, setPoolObject] = React.useState<any>({})
+  const [poolObject, setPoolObject] = React.useState<{[key: string]: number}>({})
   const [poolName, setPoolName] = React.useState<string>('')
   const [tokenImages, setTokenImages] = React.useState<string[][]>([])
 
@@ -127,7 +133,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
   React.useEffect(() => {
     const getCoingecko = async (
       platform: string,
-      token: TokenInfo,
+      token: ITokenInfoProps,
       index: number,
       images: string[][],
     ) => {
@@ -174,9 +180,9 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
 
   React.useEffect(() => {
     if (poolInfo.length > 0) {
-      const pool = poolInfo.map((item: any) => {
+      const pool = poolInfo.map((item) => {
         return {
-          [item.token.id]: getPercentage(item.weight_normalized)
+          [item.token.id]: getPercentage(Number(item.weight_normalized))
         }
       })
       const poolData = Object.assign({}, ...pool)
@@ -244,7 +250,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
               <XAxis type="number" hide />
               <YAxis type="category" hide dataKey="pool" />
 
-              {poolInfo.map((item: any, index: number) => (
+              {poolInfo.map((item, index) => (
                 <Bar
                   key={item.token.id}
                   stackId="pool"
@@ -355,7 +361,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
               <XAxis type="number" hide />
               <YAxis type="category" hide dataKey="pool" />
 
-              {poolInfo.map((item: any, index: number) => (
+              {poolInfo.map((item, index: number) => (
                 <Bar
                   key={item.token.id}
                   stackId="pool"
