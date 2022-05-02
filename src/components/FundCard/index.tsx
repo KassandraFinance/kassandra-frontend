@@ -112,7 +112,7 @@ const FundCard = ({ product }: IFundCardProps) => {
     const arrChangePrice = []
 
     if (data) {
-      const newPrice = data?.pool.price_candles.map(
+      const newPrice = data?.pool?.price_candles.map(
         (item: { timestamp: number, close: string }) => {
           return {
             timestamp: item.timestamp,
