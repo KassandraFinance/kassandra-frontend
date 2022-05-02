@@ -16,8 +16,6 @@ import Header from '../../components/Header'
 import Breadcrumb from '../../components/Breadcrumb'
 import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
 
-import ComingSoon from './ComingSoon'
-
 import * as S from './styles'
 
 const StakeFarm = () => {
@@ -40,7 +38,7 @@ const StakeFarm = () => {
   }, [])
 
   React.useEffect(() => {
-    if (userWalletAddress.length === 0 || chainId !== chain.chainId) {
+    if (userWalletAddress.length === 0 || Number(chainId) !== chain.chainId) {
       return;
     }
 
@@ -58,7 +56,6 @@ const StakeFarm = () => {
 
     calc()
   }, [userWalletAddress])
-
   return (
     <S.BackgroundStakeFarm>
       <Header />
@@ -80,7 +77,7 @@ const StakeFarm = () => {
             <Loading marginTop={0}/>
           </div>
         )  : (
-          userWalletAddress.length === 0 && chainId !== chain.chainId
+          userWalletAddress.length === 0 && Number(chainId) !== chain.chainId
             ? (
               <Web3Disabled
                 textButton="Connect Wallet"
@@ -89,7 +86,7 @@ const StakeFarm = () => {
                 type="connect"
               />
             ) : (
-              chainId !== chain.chainId
+              Number(chainId) !== chain.chainId
                 ? (
                   <Web3Disabled
                     textButton={`Connect to ${chain.chainName}`}
@@ -206,6 +203,20 @@ const StakeFarm = () => {
                         />
                         {process.env.NEXT_PUBLIC_MASTER === '1' ?
                           <StakeCard
+                            pid={7}
+                            symbol="lp-joe"
+                            balanceOf={kacyStake.balance}
+                            earned={kacyStake.earned}
+                            getReward={kacyStake.getReward}
+                            withdrawable={kacyStake.withdrawable}
+                            poolInfo={kacyStake.poolInfo}
+                            unstaking={kacyStake.unstaking}
+                            stakedUntil={kacyStake.stakedUntil}
+                            stakeWithVotingPower={true}
+                          />
+                        : ''}
+                        {process.env.NEXT_PUBLIC_MASTER === '1' ?
+                          <StakeCard
                             pid={6}
                             symbol="ahype"
                             balanceOf={kacyStake.balance}
@@ -218,7 +229,7 @@ const StakeFarm = () => {
                             stakeWithVotingPower={true}
                           />
                         : ''}
-                        <ComingSoon />
+                        {/* <ComingSoon /> */}
                       </S.GridStaking>
                     </S.StakeFarm>
                   </>

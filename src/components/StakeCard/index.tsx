@@ -19,7 +19,8 @@ import {
   LPDaiAvax,
   Kacy,
   SUBGRAPH_URL,
-  HeimCRPPOOL
+  HeimCRPPOOL,
+  LPKacyAvaxJoe
 } from '../../constants/tokenAddresses'
 import usePriceLP from '../../hooks/usePriceLP'
 import { PoolInfo } from '../../hooks/useStakingContract'
@@ -53,6 +54,7 @@ import * as S from './styles'
 
 export interface IPriceLPToken {
   priceLP: Big;
+  priceLPJoe: Big;
   kacy: Big;
   aHYPE: Big;
 }
@@ -98,7 +100,8 @@ const staked: any = {
   3: 'KACY',
   4: 'KACY',
   5: 'LP',
-  6: 'aHYPE'
+  6: 'aHYPE',
+  7: 'LP-JOE'
 }
 
 const StakeCard = ({
@@ -129,6 +132,7 @@ const StakeCard = ({
     React.useState<boolean>(false)
   const [priceLPToken, setPriceLPToken] = React.useState<IPriceLPToken>({
     priceLP: Big(-1),
+    priceLPJoe: Big(-1),
     kacy: Big(-1),
     aHYPE: Big(-1)
   })
@@ -174,6 +178,7 @@ const StakeCard = ({
   const { trackEvent } = useMatomo()
   const { viewgetReserves } = usePriceLP()
   const lpToken = useERC20Contract(LPKacyAvax)
+  const lpJoeToken = useERC20Contract(LPKacyAvaxJoe)
 
   const productCategories = [
     'Stake',
@@ -191,10 +196,15 @@ const StakeCard = ({
 
   async function handleLPtoUSD() {
     const reservesKacyAvax = await viewgetReserves(LPKacyAvax)
+    const reservesKacyAvaxJoe = await viewgetReserves(LPKacyAvaxJoe)
+
     const reservesDaiAvax = await viewgetReserves(LPDaiAvax)
 
     let kacyReserve = reservesKacyAvax._reserve1
     let avaxKacyReserve = reservesKacyAvax._reserve0
+
+    const avaxKacyReserveJoe = reservesKacyAvaxJoe._reserve0
+
     let DaiReserve = reservesDaiAvax._reserve1
     let AvaxDaiReserve = reservesDaiAvax._reserve0
 
@@ -206,16 +216,29 @@ const StakeCard = ({
     }
 
     const avaxInDollar = Big(DaiReserve).div(Big(AvaxDaiReserve))
+
     const kacyInDollar = avaxInDollar.mul(Big(avaxKacyReserve).div(kacyReserve))
 
     const allAVAXDollar = Big(avaxKacyReserve).mul(avaxInDollar)
+    const allAVAXDollarJoe = Big(avaxKacyReserveJoe).mul(avaxInDollar)
+
     const supplyLPToken = await lpToken.totalSupply()
+    const supplyLPJoeToken = await lpJoeToken.totalSupply()
 
     if (supplyLPToken.toString() !== '0') {
       const priceLP = allAVAXDollar.mul(2).div(Big(supplyLPToken.toString()))
+
       setPriceLPToken(prevState => ({
         ...prevState,
         priceLP
+      }))
+    }
+    if (supplyLPJoeToken.toString() !== '0') {
+      // eslint-disable-next-line prettier/prettier
+      const priceLPJoe = allAVAXDollarJoe.mul(2).div(Big(supplyLPJoeToken.toString()))
+      setPriceLPToken(prevState => ({
+        ...prevState,
+        priceLPJoe
       }))
     }
     if (data) {
@@ -330,10 +353,17 @@ const StakeCard = ({
                 <img src="/assets/logo-kacy-stake.svg" alt="" />
               ) : null}
               {symbol === 'ahype' ? (
-                <img src="/assets/ahype.svg" alt="" style={{ width: '58px' }} />
+                <img
+                  src="/assets/icons/ahype-stake.svg"
+                  alt=""
+                  style={{ width: '5.8rem' }}
+                />
+              ) : null}
+              {symbol === 'lp-joe' ? (
+                <img src="/assets/icons/joe-kacy.svg" alt="" width={144} />
               ) : null}
               {symbol === 'lp' ? (
-                <img src="/assets/kap.svg" alt="" width={144} />
+                <img src="/assets/icons/lp-icon.svg" alt="" width={144} />
               ) : null}
               <S.IntroStaking>
                 <S.APR>
@@ -358,20 +388,31 @@ const StakeCard = ({
               <S.PoolName>
                 <S.StakeAndEarn>
                   <p>STAKE</p>
-                  {symbol === 'ahype' ? (
+                  {symbol === 'ahype' && (
                     <Link href="/products/ahype" passHref>
                       <a>
                         $aHYPE
                         <img src="/assets/GoToSite.svg" alt="" />
                       </a>
                     </Link>
-                  ) : (
+                  )}
+                  {symbol === 'lp' && (
                     <a
                       href={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
                       target="_blank"
                       rel="noreferrer"
                     >
                       $KACY-AVAX PNG LP
+                      <img src="/assets/GoToSite.svg" alt="" />
+                    </a>
+                  )}
+                  {symbol === 'lp-joe' && (
+                    <a
+                      href={`https://traderjoexyz.com/pool/AVAX/${Kacy}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      $KACY-AVAX JOE LP
                       <img src="/assets/GoToSite.svg" alt="" />
                     </a>
                   )}

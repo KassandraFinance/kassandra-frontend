@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
-import Link from 'next/link'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
@@ -73,6 +72,9 @@ const Details = ({
   let price
 
   switch (pid) {
+    case 7:
+      price = priceLPToken.priceLPJoe
+      break
     case 6:
       price = priceLPToken.aHYPE
       break
@@ -142,7 +144,7 @@ const Details = ({
         <span>{infoStakeStatic.startDate}</span>
       </S.Info>
       <S.Info>
-        <span>End date</span>
+        <span>Rewards Update</span>
         <span>{infoStakeStatic.endDate}</span>
       </S.Info>
       <S.Info>
@@ -158,6 +160,12 @@ const Details = ({
           <ExternalLink
             hrefLink={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
             text="Get LP"
+          />
+        )}
+        {symbol === 'LP-JOE' && (
+          <ExternalLink
+            hrefLink={`https://traderjoexyz.com/pool/AVAX/${Kacy}`}
+            text="Get LP-JOE"
           />
         )}
         {symbol === 'KACY' && (

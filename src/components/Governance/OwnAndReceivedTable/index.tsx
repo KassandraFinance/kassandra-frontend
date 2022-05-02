@@ -5,6 +5,8 @@ import useSWR from 'swr'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 
+import { useSelector, RootStateOrAny } from 'react-redux'
+
 import { BNtoDecimal } from '../../../utils/numerals'
 import substr from '../../../utils/substr'
 
@@ -41,6 +43,8 @@ const URL_API: { [key: number | string]: string } = {
 // eslint-disable-next-line prettier/prettier
 export const OwnAndReceivedTable = ({ userVotingPower, isDelegationTable }: IOwnAndReceivedTableProps) => {
   const [kacyDolarPrice, setKacyDolarPrice] = React.useState(0)
+
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
   const router = useRouter()
   const { address } = router.query
@@ -162,7 +166,7 @@ export const OwnAndReceivedTable = ({ userVotingPower, isDelegationTable }: IOwn
             </tbody>
           </S.Table>
         </S.OwnAndReceivedTable>
-      ) : (
+      ) : userWalletAddress === address ? (
         <AnyCard
           text={
             isDelegationTable
@@ -170,6 +174,15 @@ export const OwnAndReceivedTable = ({ userVotingPower, isDelegationTable }: IOwn
               : 'This address doesn’t seem to have received any voting power'
           }
           button={isDelegationTable}
+        />
+      ) : (
+        <AnyCard
+          text={
+            isDelegationTable
+              ? 'This address doesn’t seem to have any KACY staked'
+              : 'This address doesn’t seem to have received any voting power'
+          }
+          button={false}
         />
       )}
     </>

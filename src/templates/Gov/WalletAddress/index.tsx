@@ -69,9 +69,11 @@ const WalletAddress = () => {
 
   async function getAmountKacy(pool: string, address: string | undefined) {
     const poolNumber = Number(pool)
-    const value = await userInfo(poolNumber, address)
-
-    return Big(value.amount).div(Big(10).pow(18))
+    if (userWalletAddress) {
+      const value = await userInfo(poolNumber, address)
+      return Big(value.amount).div(Big(10).pow(18))
+    }
+    return
   }
 
   async function handleFromDelegated() {
@@ -161,17 +163,11 @@ const WalletAddress = () => {
           title="Staking Pools"
           marginTop={64}
         />
-        {hasVotingPower || userWalletAddress ? (
-          <OwnAndReceivedTable
-            userVotingPower={userDelegatingToVP}
-            isDelegationTable={true}
-          />
-        ) : (
-          <AnyCard
-            text="This address doesn’t seem to have any KACY staked"
-            button={false}
-          />
-        )}
+
+        <OwnAndReceivedTable
+          userVotingPower={userDelegatingToVP}
+          isDelegationTable={true}
+        />
 
         {/* Received Voting Power */}
         <TitleSection
@@ -180,17 +176,11 @@ const WalletAddress = () => {
           text="Velit lacus vel porta purus"
           marginTop={64}
         />
-        {hasVotingPower || userWalletAddress ? (
-          <OwnAndReceivedTable
-            userVotingPower={userReceivedFromVP}
-            isDelegationTable={false}
-          />
-        ) : (
-          <AnyCard
-            text="This address doesn’t seem to have any KACY staked"
-            button={false}
-          />
-        )}
+
+        <OwnAndReceivedTable
+          userVotingPower={userReceivedFromVP}
+          isDelegationTable={false}
+        />
 
         {/* Voting History */}
         <S.TitleAndLinkContent>
