@@ -15,7 +15,6 @@ export const Token = styled.section`
 
   span {
     display: flex;
-
     max-width: 50rem;
     margin: 0 auto;
 
@@ -50,7 +49,6 @@ export const Token = styled.section`
     text-align: center;
   }
 `
-
 export const Divider = styled.div`
   max-width: 10rem;
   margin: 2.5rem auto;
@@ -237,6 +235,8 @@ export const Price = styled.div<IPriceProps>`
 `
 
 export const TokensSymbols = styled.div`
+  z-index: 10;
+
   display: flex;
   align-items: center;
 
