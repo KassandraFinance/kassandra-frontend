@@ -32,8 +32,8 @@ const Home = () => {
       <Hero />
       <S.Background>
         <ScrollUpButton />
-        <Products />
         <Token poolPlatform={poolPlatform} />
+        <Products />
         <ClassProducts />
         <KassandraTokenCard />
         <KassandraArchitecture />

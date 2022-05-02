@@ -1,4 +1,6 @@
 import React from 'react'
+import Image from 'next/image'
+
 import ExternalLink from '../../../components/ExternalLink'
 
 import * as S from './styles'
@@ -32,7 +34,12 @@ const Products = () => {
       <S.CardContainer>
         <S.Card>
           <S.IconWrapper>
-            <img src="assets/home-products-locker.svg" alt="" />
+            <Image
+              src="/assets/home-products-locker.svg"
+              alt="home products locker logo"
+              width={16}
+              height={20}
+            />
           </S.IconWrapper>
           <p>NON-CUSTODIAL</p>
           <span>
@@ -42,7 +49,12 @@ const Products = () => {
         </S.Card>
         <S.Card>
           <S.IconWrapper>
-            <img src="assets/home-products-check.svg" alt="" />
+            <Image
+              src="/assets/home-products-check.svg"
+              alt="home products check logo"
+              width={30}
+              height={16}
+            />
           </S.IconWrapper>
           <p>PERMISSIONLESS</p>
           <span>
@@ -52,7 +64,12 @@ const Products = () => {
         </S.Card>
         <S.Card>
           <S.IconWrapper>
-            <img src="assets/home-products-gift.svg" alt="" />
+            <Image
+              src="/assets/home-products-gift.svg"
+              alt="home products gift logo"
+              width={26}
+              height={28}
+            />
           </S.IconWrapper>
           <p>REWARD</p>
           <span>
@@ -61,7 +78,12 @@ const Products = () => {
         </S.Card>
         <S.Card>
           <S.IconWrapper>
-            <img src="assets/home-products-graph.svg" alt="" />
+            <Image
+              src="/assets/home-products-graph.svg"
+              alt="home products graph logo"
+              width={19}
+              height={28}
+            />
           </S.IconWrapper>
           <p>ACTIVELY MANAGED</p>
           <span>Outsource your money management to data models</span>
