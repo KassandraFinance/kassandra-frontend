@@ -131,15 +131,12 @@ const MyAsset = ({
     }))
   }
 
-  console.log(apr)
-
   async function getApr() {
     const poolInfoResponse = await poolInfo(0)
 
     if (!poolInfoResponse.withdrawDelay) {
       return
     }
-    //console.log(poolInfoResponse)
 
     const kacyRewards = new BigNumber(poolInfoResponse.rewardRate).mul(
       new BigNumber(86400)
@@ -264,21 +261,21 @@ const MyAsset = ({
       </S.Table>
 
       <S.ButtonWrapper>
-      <Button
-        backgroundSecondary
-        text={
-          userWalletAddress
-            ? `Stake ${symbol} to earn ${BNtoDecimal(apr, 0)}% APR`
-            : 'Connect Wallet'
-        }
-        fullWidth
-        size="huge"
-        onClick={
-          userWalletAddress
-            ? () => router.push('/farm#aHYPE', '', { scroll: false })
-            : () => setIsModaWallet(true)
-        }
-      />
+        <Button
+          backgroundSecondary
+          text={
+            userWalletAddress
+              ? `Stake ${symbol} to earn ${BNtoDecimal(apr, 0)}% APR`
+              : 'Connect Wallet'
+          }
+          fullWidth
+          size="huge"
+          onClick={
+            userWalletAddress
+              ? () => router.push('/farm#aHYPE', '', { scroll: false })
+              : () => setIsModaWallet(true)
+          }
+        />
       </S.ButtonWrapper>
 
       {isModalWallet && <ModalWalletConnect setModalOpen={setIsModaWallet} />}

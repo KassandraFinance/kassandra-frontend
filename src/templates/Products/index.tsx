@@ -195,7 +195,7 @@ const Products = ({ product }: Input) => {
             price={infoPool.price}
             symbol={product.symbol}
             icon={product.fundIcon}
-            pid={product.pid}
+            pid={typeof product.pid === 'undefined' ? -1 : product.pid}
           />
           <Summary
             strategy={data?.pool.strategy || '...'}
