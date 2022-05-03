@@ -128,19 +128,6 @@ export const Value = styled.span`
   }
 `
 
-export const LastInvestment = styled.div`
-  margin-bottom: 3.2rem;
-
-  color: #ffffff;
-  font-weight: ${theme.font.weight.light};
-  font-size: ${theme.font.sizes.font16};
-  line-height: 104%;
-
-  span:last-of-type {
-    font-weight: ${theme.font.weight.medium};
-  }
-`
-
 export const AddToken = styled.button`
   display: flex;
   align-items: center;
