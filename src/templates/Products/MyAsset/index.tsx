@@ -263,6 +263,7 @@ const MyAsset = ({
         </S.TBody>
       </S.Table>
 
+      <S.ButtonWrapper>
       <Button
         backgroundSecondary
         text={
@@ -278,6 +279,7 @@ const MyAsset = ({
             : () => setIsModaWallet(true)
         }
       />
+      </S.ButtonWrapper>
 
       {isModalWallet && <ModalWalletConnect setModalOpen={setIsModaWallet} />}
     </S.MyAsset>

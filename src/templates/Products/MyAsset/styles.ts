@@ -149,3 +149,11 @@ export const AddToken = styled.button`
     color: ${theme.colors.cyan};
   }
 `
+
+export const ButtonWrapper = styled.div`
+  button {
+    @media (max-width: 540px) {
+      font-size: ${theme.font.sizes.font14};
+    }
+  }
+`
