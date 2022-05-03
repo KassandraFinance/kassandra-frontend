@@ -44,7 +44,7 @@ export const Table = styled.table`
   overflow: hidden;
 
   @media (max-width: 540px) {
-    font-size: 1rem;
+    font-size: ${theme.font.sizes.font12};
   }
 
   @media (min-width: 961px) and (max-width: 1060px) {
@@ -60,7 +60,11 @@ export const TBody = styled.tbody`
   background: rgba(255, 255, 255, 0.04);
 `
 
-export const Tr = styled.tr``
+export const Tr = styled.tr`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+`
 
 export const Th = styled.th`
   color: #fcfcfc;
