@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
@@ -9,7 +10,12 @@ import { useSelector, RootStateOrAny } from 'react-redux'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 
-import { Staking } from '../../../constants/tokenAddresses'
+import {
+  Staking,
+  LPKacyAvax,
+  LPDaiAvax
+} from '../../../constants/tokenAddresses'
+import usePriceLP from '../../../hooks/usePriceLP'
 import useStakingContract from '../../../hooks/useStakingContract'
 import useERC20Contract from '../../../hooks/useERC20Contract'
 
@@ -30,6 +36,12 @@ interface IMyAssetProps {
   pid: number;
 }
 
+export interface IPriceLPToken {
+  priceLP: Big;
+  kacy: Big;
+  fund: Big;
+}
+
 const MyAsset = ({
   symbol,
   icon,
@@ -40,8 +52,10 @@ const MyAsset = ({
   const router = useRouter()
   const { trackEvent } = useMatomo()
 
-  const { userInfo } = useStakingContract(Staking)
+  const { userInfo, poolInfo } = useStakingContract(Staking)
   const tokenWallet = useERC20Contract(crpPoolAddress)
+  const lpToken = useERC20Contract(LPKacyAvax)
+  const { viewgetReserves } = usePriceLP()
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
   const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
@@ -50,6 +64,12 @@ const MyAsset = ({
   )
   const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
   const [decimals, setDecimals] = React.useState<string>('18')
+  const [priceLPToken, setPriceLPToken] = React.useState<IPriceLPToken>({
+    priceLP: Big(-1),
+    kacy: Big(-1),
+    fund: Big(-1)
+  })
+  const [apr, serApr] = React.useState<BigNumber>(new BigNumber(0))
 
   function matomoEvent(action: string, name: string) {
     trackEvent({
@@ -70,6 +90,82 @@ const MyAsset = ({
     setBalance(balanceToken)
   }
 
+  async function handleLPtoUSD() {
+    const reservesKacyAvax = await viewgetReserves(LPKacyAvax)
+    const reservesDaiAvax = await viewgetReserves(LPDaiAvax)
+
+    let kacyReserve = reservesKacyAvax._reserve1
+    let avaxKacyReserve = reservesKacyAvax._reserve0
+    let DaiReserve = reservesDaiAvax._reserve1
+    let AvaxDaiReserve = reservesDaiAvax._reserve0
+
+    if (process.env.NEXT_PUBLIC_MASTER !== '1') {
+      kacyReserve = reservesKacyAvax._reserve0
+      avaxKacyReserve = reservesKacyAvax._reserve1
+      DaiReserve = reservesDaiAvax._reserve0
+      AvaxDaiReserve = reservesDaiAvax._reserve1
+    }
+
+    const avaxInDollar = Big(DaiReserve).div(Big(AvaxDaiReserve))
+    const kacyInDollar = avaxInDollar.mul(Big(avaxKacyReserve).div(kacyReserve))
+
+    const allAVAXDollar = Big(avaxKacyReserve).mul(avaxInDollar)
+    const supplyLPToken = await lpToken.totalSupply()
+
+    if (supplyLPToken.toString() !== '0') {
+      const priceLP = allAVAXDollar.mul(2).div(Big(supplyLPToken.toString()))
+      setPriceLPToken(prevState => ({
+        ...prevState,
+        priceLP
+      }))
+    }
+
+    setPriceLPToken(prevState => ({
+      ...prevState,
+      fund: Big(price || -1)
+    }))
+
+    setPriceLPToken(prevState => ({
+      ...prevState,
+      kacy: kacyInDollar
+    }))
+  }
+
+  console.log(apr)
+
+  async function getApr() {
+    const poolInfoResponse = await poolInfo(0)
+
+    if (!poolInfoResponse.withdrawDelay) {
+      return
+    }
+    //console.log(poolInfoResponse)
+
+    const kacyRewards = new BigNumber(poolInfoResponse.rewardRate).mul(
+      new BigNumber(86400)
+    )
+
+    const aprResponse =
+      poolInfoResponse.depositedAmount.toString() !== '0' &&
+      priceLPToken.kacy.gt('-1') &&
+      priceLPToken.fund.gt('-1')
+        ? new BigNumber(
+            Big(kacyRewards.toString())
+              .mul('365')
+              .mul('100')
+              .mul(priceLPToken.kacy)
+              .div(
+                priceLPToken.fund.mul(
+                  Big(poolInfoResponse.depositedAmount.toString())
+                )
+              )
+              .toFixed(0)
+          )
+        : new BigNumber(-1)
+
+    serApr(aprResponse)
+  }
+
   React.useEffect(() => {
     if (userWalletAddress) {
       getBalance()
@@ -77,6 +173,14 @@ const MyAsset = ({
       getStakedToken()
     }
   }, [userWalletAddress])
+
+  React.useEffect(() => {
+    handleLPtoUSD()
+  }, [])
+
+  React.useEffect(() => {
+    getApr()
+  }, [priceLPToken])
 
   return (
     <S.MyAsset>
@@ -159,23 +263,18 @@ const MyAsset = ({
         </S.TBody>
       </S.Table>
 
-      <S.LastInvestment>
-        <span>Last investment price: </span>
-        <span>${userWalletAddress ? '104.00' : '...'}</span>
-      </S.LastInvestment>
-
       <Button
         backgroundSecondary
         text={
           userWalletAddress
-            ? `Stake ${symbol} to earn XXX% APR`
+            ? `Stake ${symbol} to earn ${BNtoDecimal(apr, 0)}% APR`
             : 'Connect Wallet'
         }
         fullWidth
         size="huge"
         onClick={
           userWalletAddress
-            ? () => router.push('/farm')
+            ? () => router.push('/farm#aHYPE', '', { scroll: false })
             : () => setIsModaWallet(true)
         }
       />
