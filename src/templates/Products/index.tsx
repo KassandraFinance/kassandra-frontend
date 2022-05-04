@@ -50,6 +50,7 @@ const Products = ({ product }: Input) => {
     swapFees: '...',
     withdrawFees: '...',
     volume: '...',
+    price: '0',
     decimals: 18
   })
 
@@ -90,7 +91,8 @@ const Products = ({ product }: Input) => {
         swapFees: BNtoDecimal(Big(swapFees), 2, 2, 2),
         withdrawFees: BNtoDecimal(Big(withdrawFees), 2, 2, 2),
         volume: BNtoDecimal(Big(volume), 2, 2, 2),
-        price: data.pool.price_usd
+        price: data.pool.price_usd,
+        decimals: data.pool.decimals
       })
     }
   }, [data])
@@ -197,6 +199,7 @@ const Products = ({ product }: Input) => {
             symbol={product.symbol}
             icon={product.fundIcon}
             pid={typeof product.pid === 'undefined' ? -1 : product.pid}
+            decimals={infoPool.decimals}
           />
           <Summary
             strategy={data?.pool.strategy || '...'}

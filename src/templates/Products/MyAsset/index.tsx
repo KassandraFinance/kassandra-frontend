@@ -1,6 +1,5 @@
 import React from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
@@ -34,10 +33,10 @@ interface IMyAssetProps {
   symbol: string;
   icon: any;
   pid: number;
+  decimals: number;
 }
 
 export interface IPriceLPToken {
-  priceLP: Big;
   kacy: Big;
   fund: Big;
 }
@@ -47,14 +46,15 @@ const MyAsset = ({
   icon,
   crpPoolAddress,
   price,
-  pid
+  pid,
+  decimals
 }: IMyAssetProps) => {
   const router = useRouter()
   const { trackEvent } = useMatomo()
 
   const { userInfo, poolInfo } = useStakingContract(Staking)
   const tokenWallet = useERC20Contract(crpPoolAddress)
-  const lpToken = useERC20Contract(LPKacyAvax)
+
   const { viewgetReserves } = usePriceLP()
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
@@ -63,13 +63,11 @@ const MyAsset = ({
     new BigNumber(0)
   )
   const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
-  const [decimals, setDecimals] = React.useState<string>('18')
-  const [priceLPToken, setPriceLPToken] = React.useState<IPriceLPToken>({
-    priceLP: Big(-1),
+  const [priceToken, setPriceToken] = React.useState<IPriceLPToken>({
     kacy: Big(-1),
     fund: Big(-1)
   })
-  const [apr, serApr] = React.useState<BigNumber>(new BigNumber(0))
+  const [apr, setApr] = React.useState<BigNumber>(new BigNumber(0))
 
   function matomoEvent(action: string, name: string) {
     trackEvent({
@@ -109,30 +107,19 @@ const MyAsset = ({
     const avaxInDollar = Big(DaiReserve).div(Big(AvaxDaiReserve))
     const kacyInDollar = avaxInDollar.mul(Big(avaxKacyReserve).div(kacyReserve))
 
-    const allAVAXDollar = Big(avaxKacyReserve).mul(avaxInDollar)
-    const supplyLPToken = await lpToken.totalSupply()
-
-    if (supplyLPToken.toString() !== '0') {
-      const priceLP = allAVAXDollar.mul(2).div(Big(supplyLPToken.toString()))
-      setPriceLPToken(prevState => ({
-        ...prevState,
-        priceLP
-      }))
-    }
-
-    setPriceLPToken(prevState => ({
+    setPriceToken(prevState => ({
       ...prevState,
       fund: Big(price || -1)
     }))
 
-    setPriceLPToken(prevState => ({
+    setPriceToken(prevState => ({
       ...prevState,
       kacy: kacyInDollar
     }))
   }
 
   async function getApr() {
-    const poolInfoResponse = await poolInfo(0)
+    const poolInfoResponse = await poolInfo(pid)
 
     if (!poolInfoResponse.withdrawDelay) {
       return
@@ -142,25 +129,27 @@ const MyAsset = ({
       new BigNumber(86400)
     )
 
-    const aprResponse =
-      poolInfoResponse.depositedAmount.toString() !== '0' &&
-      priceLPToken.kacy.gt('-1') &&
-      priceLPToken.fund.gt('-1')
-        ? new BigNumber(
-            Big(kacyRewards.toString())
-              .mul('365')
-              .mul('100')
-              .mul(priceLPToken.kacy)
-              .div(
-                priceLPToken.fund.mul(
-                  Big(poolInfoResponse.depositedAmount.toString())
+    if (priceToken.fund.gt('0')) {
+      const aprResponse =
+        poolInfoResponse.depositedAmount.toString() !== '0' &&
+        priceToken.kacy.gt('-1') &&
+        priceToken.fund.gt('-1')
+          ? new BigNumber(
+              Big(kacyRewards.toString())
+                .mul('365')
+                .mul('100')
+                .mul(priceToken.kacy)
+                .div(
+                  priceToken.fund.mul(
+                    Big(poolInfoResponse.depositedAmount.toString())
+                  )
                 )
-              )
-              .toFixed(0)
-          )
-        : new BigNumber(-1)
+                .toFixed(0)
+            )
+          : new BigNumber(-1)
 
-    serApr(aprResponse)
+      setApr(aprResponse)
+    }
   }
 
   React.useEffect(() => {
@@ -173,11 +162,11 @@ const MyAsset = ({
 
   React.useEffect(() => {
     handleLPtoUSD()
-  }, [])
+  }, [price])
 
   React.useEffect(() => {
     getApr()
-  }, [priceLPToken])
+  }, [priceToken])
 
   return (
     <S.MyAsset>
@@ -272,7 +261,7 @@ const MyAsset = ({
           size="huge"
           onClick={
             userWalletAddress
-              ? () => router.push('/farm#aHYPE', '', { scroll: false })
+              ? () => router.push('/farm')
               : () => setIsModaWallet(true)
           }
         />
