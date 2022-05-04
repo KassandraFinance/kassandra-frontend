@@ -559,7 +559,6 @@ const StakeCard = ({
                   />
                 )}
                 <S.ButtonDetails
-                  id={staked[pid]}
                   type="button"
                   isDetails={isDetails}
                   isConnect={!!userWalletAddress}
