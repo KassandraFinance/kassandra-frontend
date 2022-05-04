@@ -37,6 +37,7 @@ interface InfoPool {
   withdrawFees: string;
   volume: string;
   price: string;
+  decimals: number;
 }
 
 interface Input {
@@ -49,7 +50,7 @@ const Products = ({ product }: Input) => {
     swapFees: '...',
     withdrawFees: '...',
     volume: '...',
-    price: '0'
+    decimals: 18
   })
 
   const { trackProductPageView } = useMatomoEcommerce()
