@@ -156,10 +156,10 @@ const Details = ({
           }
           text="See contract"
         />
-        {symbol === 'LP' && (
+        {symbol === 'LP-PNG' && (
           <ExternalLink
             hrefLink={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
-            text="Get LP"
+            text="Get LP-PNG"
           />
         )}
         {symbol === 'LP-JOE' && (

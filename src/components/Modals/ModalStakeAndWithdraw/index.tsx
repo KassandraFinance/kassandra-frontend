@@ -355,12 +355,12 @@ const ModalStakeAndWithdraw = ({
                 <Button backgroundBlack fullWidth text="Get aHYPE" />
               </Link>
             )}
-            {symbol === 'LP' && (
+            {symbol === 'LP-PNG' && (
               <Button
                 as="a"
                 backgroundBlack
                 fullWidth
-                text="Get LP"
+                text="Get LP-PNG"
                 href={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
                 target="_blank"
                 rel="noopener noreferrer"

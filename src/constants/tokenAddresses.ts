@@ -10,6 +10,7 @@ export const HeimCRPPOOL = process.env.NEXT_PUBLIC_MASTER === '1' ?
   '0x38918142779e2CD1189cBd9e932723C968363D1E'
   :
   '0xE34A2935B04e9c879f5bDd022b97D7Cf2F1Dde1d'
+
 export const HeimCorePool = process.env.NEXT_PUBLIC_MASTER === '1' ?
   '0x17C1037B17b221f2f3b53f85cebD817C941f6bC5'
   :
@@ -144,7 +145,7 @@ const ahype: ProductDetails  = process.env.NEXT_PUBLIC_MASTER === '1' ?
     fundBy: 'HEIMDALL.land',
     symbol: 'aHYPE',
     fundIcon: ahypeIcon,
-    pid: 6,
+    pid: 4,
     fundLink: 'https://kassandrafoundation.medium.com/avalanche-social-index-4042a823c972',
     fundSummary: `The Social Index $aHYPE reflects the performance of a portfolio selected
     from the most socially active cryptocurrencies in the past 30 days,

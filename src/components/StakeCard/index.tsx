@@ -93,13 +93,13 @@ interface IStakingProps {
   stakeWithLockPeriod?: boolean;
 }
 
-const staked: any = {
+const staked: { [key: number | string]: string } = {
   0: 'KACY',
   1: 'KACY',
   2: 'KACY',
   3: 'KACY',
-  4: 'KACY',
-  5: 'LP',
+  4: process.env.NEXT_PUBLIC_MASTER === '1' ? 'KACY' : 'aHYPE',
+  5: 'LP-PNG',
   6: 'aHYPE',
   7: 'LP-JOE'
 }
@@ -362,7 +362,7 @@ const StakeCard = ({
               {symbol === 'lp-joe' ? (
                 <img src="/assets/icons/joe-kacy.svg" alt="" width={144} />
               ) : null}
-              {symbol === 'lp' ? (
+              {symbol === 'lp-png' ? (
                 <img src="/assets/icons/lp-icon.svg" alt="" width={144} />
               ) : null}
               <S.IntroStaking>
