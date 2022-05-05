@@ -3,14 +3,16 @@ import Image from 'next/image'
 
 import iconBar from '../../../../public/assets/iconbar.svg'
 
-import { ProductSymbols } from '../../../constants/tokenAddresses'
+//import { ProductSymbols } from '../../../constants/tokenAddresses'
 
 import * as S from './styles'
 
 import AhypeDescription from './ahype'
+import TricryptoDescription from './tricrypto'
 
 interface DescriptionType {
-  [key: ProductSymbols]: JSX.Element;
+  //[key: ProductSymbols]: JSX.Element;
+  [key: string]: JSX.Element;
 }
 
 interface Input {
@@ -18,7 +20,8 @@ interface Input {
 }
 
 const descriptions: DescriptionType = {
-  ahype: <AhypeDescription />
+  ahype: <AhypeDescription />,
+  tricrypto: <TricryptoDescription />
 }
 
 const TokenDescription = ({ symbol }: Input) => {

@@ -3,6 +3,9 @@ import { ChainDetails } from '../utils/changeChain'
 import { PartnerData } from '../components/Products/Partner'
 import partners from '../components/Products/Partner/list'
 
+import ahypeIcon from '../../public/assets/ahype.svg'
+import tricryptoIcon from '../../public/assets/Tricrypto.svg'
+
 export const HeimCRPPOOL = process.env.NEXT_PUBLIC_MASTER === '1' ?
   '0x38918142779e2CD1189cBd9e932723C968363D1E'
   :
@@ -23,6 +26,10 @@ export const LPDaiAvax = process.env.NEXT_PUBLIC_MASTER === '1' ?
   :
   '0xe64b1772a9e28E694FEc27Bc7901f88855252E9F'
 
+export const LPKacyAvaxJoe = process.env.NEXT_PUBLIC_MASTER === '1' ?
+  '0xc45893e0ee426a643e54829ee8c697995e5980ed'
+  :
+  ''
 
 export const Kacy = process.env.NEXT_PUBLIC_MASTER === '1' ?
   '0xf32398dae246C5f672B52A54e9B413dFFcAe1A44'
@@ -60,24 +67,24 @@ export interface ProductDetails {
   name: string;
   symbol: string;
   partners: PartnerData[];
+  fundBy?: string;
+  fundIcon?: any;
+  fundSummary?: string;
+  fundLink?: string;
 }
 
 export type ProductSymbols = keyof typeof products;
 
+export const SUBGRAPH_URL = `https://graph.kassandra.finance/subgraphs/name/${process.env.NEXT_PUBLIC_MASTER === '1' ?
+  'KassandraAvalanche'
+  :
+  'KassandraFuji'}`
 
-const KASSANDRA_SUBGRAPH =
-`https://graph.kassandra.finance/subgraphs/name/${
-  process.env.NEXT_PUBLIC_MASTER === '1' ? 'KassandraAvalanche' : 'KassandraFuji'}`
-
-export const SUBGRAPH_URL = `https://graph.kassandra.finance/subgraphs/name/${process.env.NEXT_PUBLIC_MASTER === '1' ? 'KassandraAvalanche' : 'KassandraFuji'}`
-
-// export const SUBGRAPH_URL = process.env.NODE_ENV
-//   ? 'http://localhost/subgraphs/name/KassandraFuji'
-//   : KASSANDRA_SUBGRAPH
 
 export const chains: { [key: string]: ChainDetails } = {
   avalanche: {
-    chainId: '0xa86a',
+    chainId: 43114,
+    chainIdHex: '0xa86a',
     chainName: 'Avalanche Mainnet',
     nativeCurrency: {
       name: 'Avalanche',
@@ -89,7 +96,8 @@ export const chains: { [key: string]: ChainDetails } = {
     secondsPerBlock: 2
   },
   fuji: {
-    chainId: '0xa869',
+    chainId: 43113,
+    chainIdHex: '0xa869',
     chainName: 'Avalanche Fuji Testnet',
     nativeCurrency: {
       name: 'Avalanche',
@@ -102,34 +110,66 @@ export const chains: { [key: string]: ChainDetails } = {
   }
 }
 
-export const products: { [key: string]: ProductDetails } = process.env.NEXT_PUBLIC_MASTER === '1' ? {
-  ahype: {
+const ahype: ProductDetails  = process.env.NEXT_PUBLIC_MASTER === '1' ?
+   {
     sipAddress: '0x38918142779e2CD1189cBd9e932723C968363D1E',
     coreAddress: '0x17C1037B17b221f2f3b53f85cebD817C941f6bC5',
     platform: 'Avalanche',
     categories: ['Avalanche', 'Pool'],
     chain: chains.avalanche,
     name: 'Avalanche Social Index',
+    fundBy: 'HEIMDALL.land',
     symbol: 'aHYPE',
+    fundIcon: ahypeIcon,
+    fundLink: 'https://kassandrafoundation.medium.com/avalanche-social-index-4042a823c972',
+    fundSummary: `The Social Index $aHYPE reflects the performance of a portfolio selected
+    from the most socially active cryptocurrencies in the past 30 days,
+    using Heimdall Social Score data.`,
     partners: [
       partners.avalanche,
       partners.heimdall,
       partners.api3
     ]
   }
-} : {
-  ahype: {
+ :
+   {
     sipAddress: '0xE34A2935B04e9c879f5bDd022b97D7Cf2F1Dde1d',
     coreAddress: '0xFCfB171A8a4666bc53Eac2d91Cb0b5203DDa63cD',
     platform: 'Fuji',
     categories: ['Fuji', 'Pool'],
     chain: chains.fuji,
     name: 'Avalanche Social Index',
+    fundBy: 'HEIMDALL.land',
     symbol: 'aHYPE',
+    fundIcon: ahypeIcon,
+    fundLink: 'https://kassandrafoundation.medium.com/avalanche-social-index-4042a823c972',
+    fundSummary: `The Social Index $aHYPE reflects the performance of a portfolio selected
+    from the most socially active cryptocurrencies in the past 30 days,
+    using Heimdall Social Score data.`,
     partners: [
       partners.avalanche,
       partners.heimdall,
       partners.api3
     ]
   }
+
+const tricrypto:  ProductDetails  =  {
+    sipAddress: '0xE34A2935B04e9c879f5bDd022b97D7Cf2F1Dde1d',
+    coreAddress: '0xFCfB171A8a4666bc53Eac2d91Cb0b5203DDa63cD',
+    platform: 'Fuji',
+    categories: ['Fuji', 'Pool'],
+    chain: chains.fuji,
+    name: 'Tricrypto Social Index',
+    fundBy: 'kassandra with yield yak',
+    symbol: 'Tricrypto',
+    fundIcon: tricryptoIcon,
+    fundLink: 'https://kassandra.finance/',
+    fundSummary: 'Tricrypto melhor fundo do mundo',
+    partners: [
+      partners.avalanche,
+      partners.heimdall,
+      partners.api3
+    ]
 }
+
+export const products = [ahype, tricrypto]

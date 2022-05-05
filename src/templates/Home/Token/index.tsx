@@ -11,14 +11,13 @@ import { GET_INFO_AHYPE } from '../graphql'
 
 import Button from '../../../components/Button'
 import ExternalLink from '../../../components/ExternalLink'
+import TokenIcons from './TokenIcons'
 
 import arrowRight from '../../../../public/assets/icons/arrow-right.svg'
 
-import TokenIcons from './TokenIcons'
-
 import * as S from './styles'
 
-interface TokenInfo {
+type ITokenInfoProps = {
   id: string;
   balance_in_pool: string;
   address: string;
@@ -28,8 +27,14 @@ interface TokenInfo {
   price: number;
 }
 
+interface IPoolInfoProps {
+  balance: string;
+  token: ITokenInfoProps;
+  weight_goal_normalized: string;
+  weight_normalized: string;
+}
 
-const dictionary: any = {
+const dictionary: { [key: string]: string } = {
   0: '#E8983D',
   1: '#63698C',
   2: '#B7372D',
@@ -83,9 +88,9 @@ const addressChanger: { [key: string]: string | undefined } = {
 
 // eslint-disable-next-line prettier/prettier
 const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
-  const [poolInfo, setPoolInfo] = React.useState<any[]>([])
+  const [poolInfo, setPoolInfo] = React.useState<IPoolInfoProps[]>([])
   const [poolPrice, setPoolPrice] = React.useState<string>('')
-  const [poolObject, setPoolObject] = React.useState<any>({})
+  const [poolObject, setPoolObject] = React.useState<{[key: string]: number}>({})
   const [poolName, setPoolName] = React.useState<string>('')
   const [tokenImages, setTokenImages] = React.useState<string[][]>([])
 
@@ -128,7 +133,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
   React.useEffect(() => {
     const getCoingecko = async (
       platform: string,
-      token: TokenInfo,
+      token: ITokenInfoProps,
       index: number,
       images: string[][],
     ) => {
@@ -175,9 +180,9 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
 
   React.useEffect(() => {
     if (poolInfo.length > 0) {
-      const pool = poolInfo.map((item: any) => {
+      const pool = poolInfo.map((item) => {
         return {
-          [item.token.id]: getPercentage(item.weight_normalized)
+          [item.token.id]: getPercentage(Number(item.weight_normalized))
         }
       })
       const poolData = Object.assign({}, ...pool)
@@ -202,7 +207,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
         <S.Card>
           <S.CardHeader isTricrypto={true}>
             <S.ImageWrapper>
-              <img src="/assets/tricrypto.svg" alt="" />
+              <Image src="/assets/tricrypto.png" alt="tricrypto token logo" width={96} height={96} />
             </S.ImageWrapper>
           </S.CardHeader>
           <S.TextWrapper>
@@ -210,14 +215,14 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
               <h1>{poolName}</h1>
             </S.NameAndSymbol>
             <p>
-              by kassandra with yield yak <b> on avalanche network </b>{' '}
+              by kassandra with yield yak <strong> on avalanche network </strong>{' '}
             </p>
           </S.TextWrapper>
           <S.TokenInfo>
             <S.Price change={Number(change)}>
               <span>USD {poolPrice}</span>
               <div>
-                {/* <img src="assets/tokenPriceArrow.png" alt="" /> */}
+                <Image src="/assets/token-price.svg" alt="token Price Arrow pool Tricryoto" width={13} height={13} />
                 <p>{change}%</p>
               </div>
             </S.Price>
@@ -236,7 +241,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
                 maxWidth: '100%',
                 borderRadius: '10px'
               }}
-              width={400}
+              width={500}
               height={10}
               data={[{ name: 'pool', ...poolObject }]}
               layout="vertical"
@@ -245,7 +250,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
               <XAxis type="number" hide />
               <YAxis type="category" hide dataKey="pool" />
 
-              {poolInfo.map((item: any, index: number) => (
+              {poolInfo.map((item, index) => (
                 <Bar
                   key={item.token.id}
                   stackId="pool"
@@ -257,7 +262,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
           </S.BarChartWrapper>
           <S.CardFooter>
             <Link href="/products/ahype">
-              <Button onClick={() => clickMatomoEvent('click-button', 'buy-ahype')} backgroundSecondary size="medium" text="Buy $aHYPE" />
+              <Button onClick={() => clickMatomoEvent('click-button', 'buy-ahype')} backgroundPrimary size="claim" text="Buy $TRIK" />
             </Link>
             <ExternalLink
               onClick={() => clickMatomoEvent('click-on-link', 'learn-more')}
@@ -306,14 +311,14 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
             </li>
             <li>
               <Image src={arrowRight} width={20} height={20} />
-              EHigh volatility.
+              High volatility.
             </li>
           </S.InfoList>
         </S.Info>
         <S.Card>
           <S.CardHeader>
             <S.ImageWrapper>
-              <img src="/assets/ahype.svg" alt="" />
+              <Image src="/assets/ahype.svg" alt="aHype token logo" width={96} height={96} />
             </S.ImageWrapper>
           </S.CardHeader>
           <S.TextWrapper>
@@ -328,7 +333,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
             <S.Price change={Number(change)}>
               <span>USD {poolPrice}</span>
               <div>
-                {/* <img src="assets/tokenPriceArrow.png" alt="" /> */}
+                <Image src="/assets/token-price.svg" alt="token Price Arrow pool Tricryoto" width={13} height={13} />
                 <p>{change}%</p>
               </div>
             </S.Price>
@@ -347,7 +352,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
                 maxWidth: '100%',
                 borderRadius: '10px'
               }}
-              width={400}
+              width={500}
               height={10}
               data={[{ name: 'pool', ...poolObject }]}
               layout="vertical"
@@ -356,7 +361,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
               <XAxis type="number" hide />
               <YAxis type="category" hide dataKey="pool" />
 
-              {poolInfo.map((item: any, index: number) => (
+              {poolInfo.map((item, index: number) => (
                 <Bar
                   key={item.token.id}
                   stackId="pool"
@@ -368,7 +373,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
           </S.BarChartWrapper>
           <S.CardFooter>
             <Link href="/products/ahype">
-              <Button onClick={() => clickMatomoEvent('click-button', 'buy-ahype')} backgroundSecondary size="medium" text="Buy $aHYPE" />
+              <Button onClick={() => clickMatomoEvent('click-button', 'buy-ahype')} backgroundPrimary size="claim" text="Buy $aHYPE" />
             </Link>
             <ExternalLink
               onClick={() => clickMatomoEvent('click-on-link', 'learn-more')}

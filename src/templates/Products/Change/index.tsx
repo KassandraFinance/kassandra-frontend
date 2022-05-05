@@ -10,13 +10,19 @@ import iconBar from '../../../../public/assets/iconbar.svg'
 
 import * as S from './styles'
 
-const Change = () => {
+interface IChangeProps {
+  crpPoolAddress: string;
+}
+
+const Change = ({ crpPoolAddress }: IChangeProps) => {
   // eslint-disable-next-line prettier/prettier
-  const [changeWeek, setChangeWeek] = React.useState<string[]>(Array(5).fill(''))
+  const [changeWeek, setChangeWeek] = React.useState<string[]>(
+    Array(5).fill('')
+  )
 
   const { data } = useSWR([GET_POOL_PRICE], query =>
     request(SUBGRAPH_URL, query, {
-      id: HeimCRPPOOL,
+      id: crpPoolAddress,
       day: Math.trunc(Date.now() / 1000 - 60 * 60 * 24),
       week: Math.trunc(Date.now() / 1000 - 60 * 60 * 24 * 7),
       month: Math.trunc(Date.now() / 1000 - 60 * 60 * 24 * 30),

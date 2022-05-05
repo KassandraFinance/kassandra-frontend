@@ -11,8 +11,9 @@ import { getDate } from '../../../utils/date'
 import { BNtoDecimal } from '../../../utils/numerals'
 import substr from '../../../utils/substr'
 
-import * as S from './styles'
 import { IInfoStaked, IPriceLPToken } from '..'
+
+import * as S from './styles'
 
 interface IYourStakeProps {
   pid: number;
@@ -51,7 +52,6 @@ const YourStake = ({
 
   const getYourStake = React.useCallback(async () => {
     const poolInfoResponse = await poolInfo(pid)
-
     if (!poolInfoResponse.withdrawDelay) {
       return
     }
@@ -66,6 +66,8 @@ const YourStake = ({
         ? priceLPToken.priceLP
         : pid === 6
         ? priceLPToken.aHYPE
+        : pid === 7
+        ? priceLPToken.priceLPJoe
         : priceLPToken.kacy
 
     const apr =
@@ -158,13 +160,20 @@ const YourStake = ({
           <p>
             {infoStaked.yourStake.lt(new BigNumber('0')) ||
             (pid === 5 && priceLPToken.priceLP.lt(0)) ||
-            (pid === 6 && priceLPToken.aHYPE.lt(0))
+            (pid === 6 && priceLPToken.aHYPE.lt(0)) ||
+            (pid === 7 && priceLPToken.priceLPJoe.lt(0))
               ? '...'
               : !stakeWithVotingPower
               ? BNtoDecimal(infoStaked.yourStake, 18)
               : BNtoDecimal(
                   Big(infoStaked.yourStake.toString())
-                    .mul(pid === 5 ? priceLPToken.priceLP : priceLPToken.aHYPE)
+                    .mul(
+                      pid === 5
+                        ? priceLPToken.priceLP
+                        : pid === 7
+                        ? priceLPToken.priceLPJoe
+                        : priceLPToken.aHYPE
+                    )
                     .div(Big(10).pow(18)),
                   2,
                   2,
