@@ -28,6 +28,7 @@ import Change from './Change'
 import Summary from './Summary'
 import Distribution from './Distribution'
 import TokenDescription from './TokenDescription'
+import ShareImageModal from './ShareImageModal'
 
 import * as S from './styles'
 
@@ -43,6 +44,7 @@ interface Input {
 }
 
 const Products = ({ product }: Input) => {
+  const [openModal, setOpenModal] = React.useState(false)
   const [infoPool, setInfoPool] = React.useState<InfoPool>({
     tvl: '...',
     swapFees: '...',
@@ -104,6 +106,7 @@ const Products = ({ product }: Input) => {
   return (
     <S.BackgroundProducts boxShadow={false}>
       <Header />
+      <ShareImageModal setOpenModal={setOpenModal} openModal={openModal} />
       <Breadcrumb>
         <BreadcrumbItem href="/">Home</BreadcrumbItem>
         <BreadcrumbItem href={`/products/${product.symbol.toLowerCase()}`}>
@@ -134,9 +137,14 @@ const Products = ({ product }: Input) => {
             <S.NameIndex>
               <S.NameAndSymbol>
                 <h1>{product.name}</h1>
-                <h3>${product.symbol}</h3>
+                <button onClick={() => setOpenModal(true)} className="circle">
+                  <Image src="/assets/icons/share.svg" width={16} height={16} />
+                </button>
               </S.NameAndSymbol>
-              <p>by HEIMDALL.land</p>
+              <S.SymbolAndMade>
+                <h3>${product.symbol}</h3>
+                <p>by HEIMDALL.land</p>
+              </S.SymbolAndMade>
             </S.NameIndex>
           </S.Intro>
           <S.Line className="second-line" />

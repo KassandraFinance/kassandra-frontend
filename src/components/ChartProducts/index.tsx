@@ -17,7 +17,11 @@ import * as S from './styles'
 
 const arrPeriod: string[] = ['1W', '1M', '3M', '1Y']
 
-const ChartProducts = () => {
+interface ChartProductsProps {
+  height?: number;
+}
+
+const ChartProducts = ({ height }: ChartProductsProps) => {
   const [inputChecked, setInputChecked] = React.useState<string>('Price')
   const [price, setPrice] = React.useState([])
   const [tvl, setTvl] = React.useState([])
@@ -232,13 +236,13 @@ const ChartProducts = () => {
         </S.Wrapper>
       ) : null}
       {inputChecked === 'Price' && !loading && (
-        <ChartPrice data={price} color="#E843C4" />
+        <ChartPrice height={height} data={price} color="#E843C4" />
       )}
       {inputChecked === 'TVL' && !loading && (
-        <ChartTVL data={tvl} color="#26DBDB" />
+        <ChartTVL height={height} data={tvl} color="#26DBDB" />
       )}
       {inputChecked === 'Allocation' && !loading && (
-        <ChartAllocation data={allocation} />
+        <ChartAllocation height={height} data={allocation} />
       )}
     </S.ChartProduct>
   )
