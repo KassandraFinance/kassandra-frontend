@@ -337,6 +337,14 @@ export const Amount = styled.div`
 
   width: 100%;
   height: 100%;
+
+  .price-dolar {
+    margin-top: 0.2rem;
+
+    color: #c4c4c4;
+    font-size: ${theme.font.sizes.font14};
+    font-weight: ${theme.font.weight.light};
+  }
 `
 
 interface ISpanProps {
