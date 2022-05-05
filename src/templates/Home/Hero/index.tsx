@@ -47,7 +47,7 @@ const Hero = () => {
             />
           </li>
           <li>
-            <Link href="/products/ahype">
+            <Link href="/explore/ahype">
               <Button
                 backgroundPrimary
                 size="large"
