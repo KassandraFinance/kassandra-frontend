@@ -17,7 +17,7 @@ const FundTokenIcons = ({ tokens, poolInfo }: TokenIconsProps) => {
         return (
           <S.ImageWrapper key={index}>
             <Image src={entry[1] || none} alt="" width={16} height={16} />
-            <span>{poolInfo[index].weight_normalized * 100}%</span>
+            <span>{(poolInfo[index].weight_normalized * 100).toFixed(2)}%</span>
           </S.ImageWrapper>
         )
       })}

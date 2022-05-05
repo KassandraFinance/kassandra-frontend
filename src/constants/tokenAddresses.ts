@@ -158,8 +158,8 @@ const ahype: ProductDetails  = process.env.NEXT_PUBLIC_MASTER === '1' ?
   }
 
 const tricrypto:  ProductDetails  =  {
-    sipAddress: '0xE34A2935B04e9c879f5bDd022b97D7Cf2F1Dde1d',
-    coreAddress: '0xFCfB171A8a4666bc53Eac2d91Cb0b5203DDa63cD',
+    sipAddress: '0x38918142779e2CD1189cBd9e932723C968363D1E',
+    coreAddress: '0x17C1037B17b221f2f3b53f85cebD817C941f6bC5',
     platform: 'Fuji',
     categories: ['Fuji', 'Pool'],
     chain: chains.fuji,
@@ -167,7 +167,7 @@ const tricrypto:  ProductDetails  =  {
     fundBy: 'kassandra with yield yak',
     symbol: 'Tricrypto',
     fundIcon: tricryptoIcon,
-    pid: 0,
+    pid: 6,
     fundLink: 'https://kassandra.finance/',
     fundSummary: 'Tricrypto melhor fundo do mundo',
     partners: [

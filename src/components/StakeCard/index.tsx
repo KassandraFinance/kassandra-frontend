@@ -396,7 +396,7 @@ const StakeCard = ({
                       </a>
                     </Link>
                   )}
-                  {symbol === 'lp' && (
+                  {symbol === 'lp-png' && (
                     <a
                       href={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
                       target="_blank"
