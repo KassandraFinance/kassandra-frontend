@@ -69,6 +69,7 @@ export interface ProductDetails {
   partners: PartnerData[];
   fundBy?: string;
   fundIcon?: any;
+  pid?: number;
   fundSummary?: string;
   fundLink?: string;
 }
@@ -121,6 +122,7 @@ const ahype: ProductDetails  = process.env.NEXT_PUBLIC_MASTER === '1' ?
     fundBy: 'HEIMDALL.land',
     symbol: 'aHYPE',
     fundIcon: ahypeIcon,
+    pid: 6,
     fundLink: 'https://kassandrafoundation.medium.com/avalanche-social-index-4042a823c972',
     fundSummary: `The Social Index $aHYPE reflects the performance of a portfolio selected
     from the most socially active cryptocurrencies in the past 30 days,
@@ -142,6 +144,7 @@ const ahype: ProductDetails  = process.env.NEXT_PUBLIC_MASTER === '1' ?
     fundBy: 'HEIMDALL.land',
     symbol: 'aHYPE',
     fundIcon: ahypeIcon,
+    pid: 6,
     fundLink: 'https://kassandrafoundation.medium.com/avalanche-social-index-4042a823c972',
     fundSummary: `The Social Index $aHYPE reflects the performance of a portfolio selected
     from the most socially active cryptocurrencies in the past 30 days,
@@ -163,6 +166,7 @@ const tricrypto:  ProductDetails  =  {
     fundBy: 'kassandra with yield yak',
     symbol: 'Tricrypto',
     fundIcon: tricryptoIcon,
+    pid: 0,
     fundLink: 'https://kassandra.finance/',
     fundSummary: 'Tricrypto melhor fundo do mundo',
     partners: [
