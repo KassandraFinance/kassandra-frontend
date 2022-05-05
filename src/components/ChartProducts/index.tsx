@@ -19,9 +19,13 @@ const arrPeriod: string[] = ['1W', '1M', '3M', '1Y']
 
 interface IChartProductsProps {
   crpPoolAddress: string;
+  height?: number;
 }
 
-const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
+const ChartProducts = ({
+  crpPoolAddress,
+  height = 360
+}: IChartProductsProps) => {
   const [inputChecked, setInputChecked] = React.useState<string>('Price')
   const [price, setPrice] = React.useState([])
   const [tvl, setTvl] = React.useState([])
