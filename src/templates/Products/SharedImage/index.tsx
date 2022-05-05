@@ -4,7 +4,11 @@ import ChartProducts from '../../../components/ChartProducts'
 
 import * as S from './styles'
 
-const SharedImage = () => {
+interface ISharedImageProps {
+  crpPoolAddress: string;
+}
+
+const SharedImage = ({ crpPoolAddress }: ISharedImageProps) => {
   return (
     <S.SharedImage>
       <S.Header>
@@ -53,7 +57,7 @@ const SharedImage = () => {
           </S.Assets>
         </S.InfoContainer>
         <S.ChartContainer>
-          <ChartProducts height={320} />
+          <ChartProducts crpPoolAddress={crpPoolAddress} height={320} />
         </S.ChartContainer>
       </S.Main>
 

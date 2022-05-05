@@ -10,23 +10,30 @@ import * as S from './styles'
 interface ShareImageProps {
   openModal: boolean;
   setOpenModal: (value: boolean) => void;
+  crpPoolAddress: string;
 }
 
-const ShareImageModal = ({ setOpenModal, openModal }: ShareImageProps) => {
+const ShareImageModal = ({
+  setOpenModal,
+  openModal,
+  crpPoolAddress
+}: ShareImageProps) => {
   const printRef = React.useRef<any>(0)
 
   const handleDownloadImage = async () => {
     const element = printRef.current
 
     if (element) {
-      const canvas = await html2canvas(element)
-      const data = canvas.toDataURL('image/jpg')
+      const canvas = await html2canvas(element, {
+        windowWidth: 1280
+      })
+      const data = canvas.toDataURL('image/png')
 
       const link = document.createElement('a')
 
       if (typeof link.download === 'string') {
         link.href = data
-        link.download = 'image.jpg'
+        link.download = 'image.png'
 
         document.body.appendChild(link)
         link.click()
@@ -34,6 +41,32 @@ const ShareImageModal = ({ setOpenModal, openModal }: ShareImageProps) => {
       } else {
         window.open(data)
       }
+    }
+  }
+
+  async function sendData() {
+    const formData = new FormData()
+    const element = printRef.current
+
+    if (element) {
+      // const canvas = await html2canvas(element)
+      // const file = canvas.toDataURL('image/png')
+
+      html2canvas(element, { windowWidth: 1280 }).then((canvas: any) => {
+        const file = canvas.toDataURL('image/pngs')
+        formData.append('file', file)
+
+        fetch('http://localhost:3000/api/funds/upload-image', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            // 'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+          .then(response => response.json())
+          .then(data => console.log(data))
+      })
     }
   }
 
@@ -53,7 +86,7 @@ const ShareImageModal = ({ setOpenModal, openModal }: ShareImageProps) => {
         <S.ModalBody>
           <S.ImageContainer ref={printRef}>
             <div className="teste">
-              <SharedImage />
+              <SharedImage crpPoolAddress={crpPoolAddress} />
             </div>
           </S.ImageContainer>
 
@@ -66,10 +99,7 @@ const ShareImageModal = ({ setOpenModal, openModal }: ShareImageProps) => {
               />
               Discord
             </S.SocialMedia>
-            <TwitterShareButton
-              onClick={handleDownloadImage}
-              url="https://twitter.com/"
-            >
+            <TwitterShareButton onClick={sendData} url="https://twitter.com/">
               <S.SocialMedia>
                 <Image
                   src="/assets/socialMedia/twitter-icon.svg"

@@ -105,7 +105,11 @@ const Products = ({ product }: Input) => {
   return (
     <S.BackgroundProducts boxShadow={false}>
       <Header />
-      <ShareImageModal setOpenModal={setOpenModal} openModal={openModal} />
+      <ShareImageModal
+        crpPoolAddress={product.sipAddress}
+        setOpenModal={setOpenModal}
+        openModal={openModal}
+      />
       <Breadcrumb>
         <BreadcrumbItem href="/">Home</BreadcrumbItem>
         <BreadcrumbItem href={`/explore`}>Explore</BreadcrumbItem>
@@ -142,7 +146,6 @@ const Products = ({ product }: Input) => {
                 <h3>${product.symbol}</h3>
                 <p>by HEIMDALL.land</p>
               </S.SymbolAndMade>
-              <p>by {product.fundBy}</p>
             </S.NameIndex>
           </S.Intro>
           <S.Line className="second-line" />
