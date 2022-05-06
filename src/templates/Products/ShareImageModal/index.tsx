@@ -45,24 +45,20 @@ const ShareImageModal = ({
   }
 
   async function sendData() {
-    const formData = new FormData()
     const element = printRef.current
 
     if (element) {
       // const canvas = await html2canvas(element)
       // const file = canvas.toDataURL('image/png')
-
       html2canvas(element, { windowWidth: 1280 }).then((canvas: any) => {
-        const file = canvas.toDataURL('image/pngs')
-        formData.append('file', file)
-
+        const file = canvas.toDataURL('image/png')
         fetch('http://localhost:3000/api/funds/upload-image', {
           method: 'POST',
-          body: formData,
           headers: {
-            // 'Content-Type': 'application/x-www-form-urlencoded'
-            'Content-Type': 'multipart/form-data'
-          }
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ image: file })
         })
           .then(response => response.json())
           .then(data => console.log(data))

@@ -1,37 +1,27 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import formidable from "formidable";
-
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+import { NextApiRequest, NextApiResponse } from 'next'
+import fs from 'fs'
 
 const handler = async (request: NextApiRequest, response: NextApiResponse) => {
   const { method } = request
+  const filename = 'shared-fund.png'
+
   if (method === 'POST') {
-    const data = new Promise((resolve, reject) => {
-      const form = new formidable.IncomingForm({
-        keepExtensions: true,
-        uploadDir: './public/shared',
-        filter: ({ mimetype }) => mimetype === 'image/png',
-        allowEmptyFiles: false,
-        maxFileSize: 85000,
-        filename: (_, ext) => `shared-fund${ext}`
-      })
+    const { image } = request.body
 
-      form.parse(request, (err, _, files) => {
-        if (err) return reject(err)
+    const base64String = image
 
-        // eslint-disable-next-line prettier/prettier
-        resolve(files[Object.keys(files)[0]] as formidable.File)
-      })
-    }) as Promise<formidable.File>
+    const base64Image = base64String.split(';base64,').pop()
 
-    return data.then(files =>
-      response.status(200).json({ fileName: files.newFilename })
-    ).catch(err => response.status(500).json({ err }))
+    fs.writeFile(
+      `./public/shared/${filename}`,
+      base64Image,
+      { encoding: 'base64' },
+      err => {
+        if (err) return response.status(500).json({ err })
+      }
+    )
+
+    return response.status(201).json({ filename })
   }
 
   response.setHeader('Allow', ['POST'])
