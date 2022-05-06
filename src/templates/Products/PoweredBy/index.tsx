@@ -15,7 +15,7 @@ const PoweredBy = ({ partners }: Input) => {
   return (
     <S.PoweredBy>
       <S.Title>
-        <Image src={iconPower} alt="" />
+        <Image src={iconPower} alt="Powered by Icon" />
         <h2>Powered by</h2>
       </S.Title>
       <S.Line />
