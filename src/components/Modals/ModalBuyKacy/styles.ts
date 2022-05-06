@@ -111,11 +111,12 @@ export const ButtonModalBuyKacy = styled.a`
 
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
+    border: 0.1rem solid transparent;
 
-    transition: border 0.3s ease-in-out;
+    transition: border 0.2s ease-in-out;
 
     :hover {
-      border: 0.1rem solid rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.25);
     }
   }
 
