@@ -106,9 +106,19 @@ export const InfoTitle = styled.div`
   }
 `
 
-export const InfoValue = styled.div`
+interface InfoValueProps {
+  color: 'white' | 'green';
+}
+
+const colors = {
+  green: '#5ee56b',
+  white: '#FFFFFF'
+}
+
+// eslint-disable-next-line prettier/prettier
+export const InfoValue = styled.div<InfoValueProps>`
   font-weight: 500;
-  color: #5ee56b;
+  color: ${({ color }) => colors[color]};
   font-size: 5.6rem;
 `
 
