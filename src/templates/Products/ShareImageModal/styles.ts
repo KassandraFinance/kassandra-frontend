@@ -83,7 +83,7 @@ export const SocialMedia = styled.div`
 `
 
 export const ImageContainer = styled.div`
-  @media (max-width: 1130px) {
+  @media (max-width: 1020px) {
     overflow-x: scroll;
     width: 100%;
     padding-top: 4rem;
