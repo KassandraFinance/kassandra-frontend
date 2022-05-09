@@ -52,7 +52,8 @@ const ShareImageModal = ({
       // const file = canvas.toDataURL('image/png')
       html2canvas(element, { windowWidth: 1280 }).then((canvas: any) => {
         const file = canvas.toDataURL('image/png')
-        fetch('http://localhost:3000/api/funds/upload-image', {
+
+        fetch('http://localhost:3000/api/funds/shared?id=123', {
           method: 'POST',
           headers: {
             Accept: 'application/json',
@@ -95,7 +96,10 @@ const ShareImageModal = ({
               />
               Discord
             </S.SocialMedia>
-            <TwitterShareButton onClick={sendData} url="https://twitter.com/">
+            <TwitterShareButton
+              onClick={sendData}
+              url="http://localhost:3000/api/funds/shared-fund"
+            >
               <S.SocialMedia>
                 <Image
                   src="/assets/socialMedia/twitter-icon.svg"
