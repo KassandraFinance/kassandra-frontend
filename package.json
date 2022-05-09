@@ -10,6 +10,7 @@
   "dependencies": {
     "@datapunt/matomo-tracker-react": "^0.5.1",
     "@metamask/detect-provider": "^1.2.0",
+    "@prisma/client": "3.13.0",
     "@tippyjs/react": "^4.2.6",
     "@types/big.js": "^6.1.2",
     "@types/node": "^15.0.2",
@@ -66,6 +67,7 @@
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
     "git-commit-msg-linter": "^3.1.0",
-    "prettier": "^2.3.0"
+    "prettier": "^2.3.0",
+    "prisma": "3.13.0"
   }
 }
