@@ -28,6 +28,7 @@ import Summary from './Summary'
 import Distribution from './Distribution'
 import TokenDescription from './TokenDescription'
 import ShareImageModal from './ShareImageModal'
+import SharedImage from './SharedImage'
 
 import * as S from './styles'
 
@@ -105,11 +106,13 @@ const Products = ({ product }: Input) => {
   return (
     <S.BackgroundProducts boxShadow={false}>
       <Header />
-      <ShareImageModal
-        crpPoolAddress={product.sipAddress}
-        setOpenModal={setOpenModal}
-        openModal={openModal}
-      />
+      <ShareImageModal setOpenModal={setOpenModal} openModal={openModal}>
+        <SharedImage
+          crpPoolAddress={product.sipAddress}
+          totalValueLocked={infoPool.tvl}
+          socialIndex={product.symbol}
+        />
+      </ShareImageModal>
       <Breadcrumb>
         <BreadcrumbItem href="/">Home</BreadcrumbItem>
         <BreadcrumbItem href={`/explore`}>Explore</BreadcrumbItem>
@@ -125,9 +128,14 @@ const Products = ({ product }: Input) => {
         <S.NameIndex>
           <S.NameAndSymbol introMobile={true}>
             <h1>{product.name}</h1>
-            <h3>${product.symbol}</h3>
+            <button onClick={() => setOpenModal(true)} className="circle">
+              <Image src="/assets/icons/share.svg" width={12} height={12} />
+            </button>
           </S.NameAndSymbol>
-          <p>by {product.fundBy}</p>
+          <S.SymbolAndMade>
+            <h3>${product.symbol}</h3>
+            <p>by HEIMDALL.land</p>
+          </S.SymbolAndMade>
         </S.NameIndex>
         <S.Line />
       </S.Intro>
