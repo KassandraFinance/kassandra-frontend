@@ -76,6 +76,12 @@ export const SocialMedia = styled.div`
   font-size: 1.2rem;
   text-transform: uppercase;
 
+  &.last {
+    @media (max-width: 900px) {
+      display: none;
+    }
+  }
+
   @media (max-width: 550px) {
     max-width: 4.2rem;
     min-width: 0;

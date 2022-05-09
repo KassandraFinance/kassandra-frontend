@@ -1,24 +1,27 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import Image from 'next/image'
-import { TwitterShareButton } from 'react-share'
+import {
+  FacebookShareButton,
+  LinkedinShareButton,
+  TwitterShareButton
+} from 'react-share'
 import html2canvas from 'html2canvas'
-
-import SharedImage from '../SharedImage'
 
 import * as S from './styles'
 
 interface ShareImageProps {
   openModal: boolean;
   setOpenModal: (value: boolean) => void;
-  crpPoolAddress: string;
+  children: ReactNode;
 }
 
 const ShareImageModal = ({
   setOpenModal,
   openModal,
-  crpPoolAddress
+  children
 }: ShareImageProps) => {
   const printRef = React.useRef<any>(0)
+  const [url, setUrl] = React.useState('http://localhost:3000/shared/123')
 
   const handleDownloadImage = async () => {
     const element = printRef.current
@@ -48,21 +51,18 @@ const ShareImageModal = ({
     const element = printRef.current
 
     if (element) {
-      // const canvas = await html2canvas(element)
-      // const file = canvas.toDataURL('image/png')
       html2canvas(element, { windowWidth: 1280 }).then((canvas: any) => {
         const file = canvas.toDataURL('image/png')
+        const baseURL = 'http://localhost:3000'
 
-        fetch('http://localhost:3000/api/funds/shared?id=123', {
+        fetch(`${baseURL}/api/funds/shared?id=123`, {
           method: 'POST',
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({ image: file })
-        })
-          .then(response => response.json())
-          .then(data => console.log(data))
+        }).then(() => setUrl(`${baseURL}/shared/123`))
       })
     }
   }
@@ -82,9 +82,7 @@ const ShareImageModal = ({
         </S.ModalHeader>
         <S.ModalBody>
           <S.ImageContainer ref={printRef}>
-            <div className="teste">
-              <SharedImage crpPoolAddress={crpPoolAddress} />
-            </div>
+            <div className="teste">{children}</div>
           </S.ImageContainer>
 
           <S.SocialMediaContainer>
@@ -98,7 +96,8 @@ const ShareImageModal = ({
             </S.SocialMedia>
             <TwitterShareButton
               onClick={sendData}
-              url="http://localhost:3000/api/funds/shared-fund"
+              title="Image of your stats on Kassandra Foundation"
+              url={url}
             >
               <S.SocialMedia>
                 <Image
@@ -109,14 +108,16 @@ const ShareImageModal = ({
                 Twitter
               </S.SocialMedia>
             </TwitterShareButton>
-            <S.SocialMedia>
-              <Image
-                src="/assets/socialMedia/linkedin-icon.svg"
-                width={56}
-                height={56}
-              />
-              Linkedin
-            </S.SocialMedia>
+            <LinkedinShareButton onClick={sendData} url={url}>
+              <S.SocialMedia>
+                <Image
+                  src="/assets/socialMedia/linkedin-icon.svg"
+                  width={56}
+                  height={56}
+                />
+                Linkedin
+              </S.SocialMedia>
+            </LinkedinShareButton>
             <S.SocialMedia>
               <Image
                 src="/assets/socialMedia/instagram-icon.svg"
@@ -125,13 +126,23 @@ const ShareImageModal = ({
               />
               Instagram
             </S.SocialMedia>
-            <S.SocialMedia>
+            <FacebookShareButton onClick={sendData} url={url}>
+              <S.SocialMedia>
+                <Image
+                  src="/assets/socialMedia/facebook-icon.svg"
+                  width={56}
+                  height={56}
+                />
+                Facebook
+              </S.SocialMedia>
+            </FacebookShareButton>
+            <S.SocialMedia className="last" onClick={handleDownloadImage}>
               <Image
-                src="/assets/socialMedia/facebook-icon.svg"
+                src="/assets/socialMedia/download-icon.svg"
                 width={56}
                 height={56}
               />
-              Facebook
+              Download
             </S.SocialMedia>
           </S.SocialMediaContainer>
         </S.ModalBody>
