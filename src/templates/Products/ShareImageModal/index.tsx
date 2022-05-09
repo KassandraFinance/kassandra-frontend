@@ -21,7 +21,7 @@ const ShareImageModal = ({
   children
 }: ShareImageProps) => {
   const printRef = React.useRef<any>(0)
-  const [url, setUrl] = React.useState('http://localhost:3000/shared/123')
+  const [url, setUrl] = React.useState('https://kassandra.finance/shared/123')
 
   const handleDownloadImage = async () => {
     const element = printRef.current
@@ -53,16 +53,19 @@ const ShareImageModal = ({
     if (element) {
       html2canvas(element, { windowWidth: 1280 }).then((canvas: any) => {
         const file = canvas.toDataURL('image/png')
-        const baseURL = 'http://localhost:3000'
+        const baseUrl =
+          process.env.NODE_ENV === 'production'
+            ? 'https://kassandra.finance/'
+            : 'http://localhost:3000'
 
-        fetch(`${baseURL}/api/funds/shared?id=123`, {
+        fetch(`${baseUrl}/api/funds/shared?id=123`, {
           method: 'POST',
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({ image: file })
-        }).then(() => setUrl(`${baseURL}/shared/123`))
+        }).then(() => setUrl(`${baseUrl}/shared/123`))
       })
     }
   }
