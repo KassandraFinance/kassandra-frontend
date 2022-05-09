@@ -169,11 +169,11 @@ const tricrypto:  ProductDetails  =  {
     fundIcon: tricryptoIcon,
     pid: 6,
     fundLink: 'https://kassandra.finance/',
-    fundSummary: 'Tricrypto melhor fundo do mundo',
+    fundSummary: `The #K3C represents a yield-earning portfolio composed of BTC,
+    ETH, USDC and KACY built in partnership with our friends back at Yield Yak.`,
     partners: [
       partners.avalanche,
-      partners.heimdall,
-      partners.api3
+      partners.yieldYak
     ]
 }
 
