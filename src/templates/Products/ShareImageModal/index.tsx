@@ -129,7 +129,7 @@ const ShareImageModal = ({
                   width={56}
                   height={56}
                 />
-                Instagram
+                Reddit
               </S.SocialMedia>
             </RedditShareButton>
             <FacebookShareButton onClick={sendData} url={url}>
