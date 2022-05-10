@@ -23,7 +23,7 @@ const handle = async (request: NextApiRequest, response: NextApiResponse) => {
       const user = await prisma.user.findUnique({ where: { walletAddress } })
 
       if (!user) {
-        return response.status(404).send({
+        return response.status(404).json({
           message: 'User not exist'
         })
       }
@@ -32,6 +32,13 @@ const handle = async (request: NextApiRequest, response: NextApiResponse) => {
     }
 
     if (method === 'POST') {
+      if (
+        !request.session.address ||
+        request.session.address !== walletAddress
+      ) {
+        return response.status(401).json({ message: 'Unauthorized adress' })
+      }
+
       const errors = []
       const { nickname, description } = userInput
 
@@ -59,8 +66,8 @@ const handle = async (request: NextApiRequest, response: NextApiResponse) => {
       if (!errors.length && !user && checkAddressChecksum(walletAddress)) {
         await prisma.user.create({
           data: {
-            walletAddress
-            // ...userInput
+            walletAddress,
+            ...userInput
           }
         })
 
@@ -83,9 +90,20 @@ const handle = async (request: NextApiRequest, response: NextApiResponse) => {
         !request.session.address ||
         request.session.address !== walletAddress
       ) {
-        return response.status(401).send({
+        return response.status(401).json({
           message: 'Unauthorized adress'
         })
+      }
+
+      const errors = []
+      const { nickname, description } = userInput
+
+      if (nickname && nickname.length > 18) {
+        errors.push({ message: 'Nickname cannot be greater than 18' })
+      }
+
+      if (description && description.length > 500) {
+        errors.push({ message: 'Description caannot be greater than 500' })
       }
 
       if (userInput.nickname) {
@@ -96,20 +114,22 @@ const handle = async (request: NextApiRequest, response: NextApiResponse) => {
         })
 
         if (user && user.walletAddress !== walletAddress) {
-          return response
-            .status(400)
-            .send({ message: 'Nickname already exist' })
+          errors.push({ message: 'Nickname already exist' })
         }
       }
 
-      const result = await prisma.user.update({
-        where: { walletAddress },
-        data: {
-          ...userInput
-        }
-      })
+      if (!errors.length) {
+        const result = await prisma.user.update({
+          where: { walletAddress },
+          data: {
+            ...userInput
+          }
+        })
 
-      return response.status(200).json(result)
+        return response.status(200).json(result)
+      }
+
+      return response.status(400).json(errors)
     }
 
     response.setHeader('Allow', ['GET', 'POST', 'PUT'])
