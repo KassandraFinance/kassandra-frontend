@@ -44,6 +44,7 @@ interface Input {
 }
 
 const Products = ({ product }: Input) => {
+  const [totalPerfomance, setTotalPerfomance] = React.useState<string>('')
   const [openModal, setOpenModal] = React.useState(false)
   const [infoPool, setInfoPool] = React.useState<InfoPool>({
     tvl: '...',
@@ -111,6 +112,7 @@ const Products = ({ product }: Input) => {
           crpPoolAddress={product.sipAddress}
           totalValueLocked={infoPool.tvl}
           socialIndex={product.symbol}
+          totalPerfomance={totalPerfomance}
         />
       </ShareImageModal>
       <Breadcrumb>
@@ -205,7 +207,10 @@ const Products = ({ product }: Input) => {
           </S.IntroCharts>
           <ChartProducts crpPoolAddress={product.sipAddress} />
           <ScrollUpButton />
-          <Change crpPoolAddress={product.sipAddress} />
+          <Change
+            crpPoolAddress={product.sipAddress}
+            setTotalPerfomance={setTotalPerfomance}
+          />
           <Summary
             strategy={data?.pool.strategy || '...'}
             summary={product.fundSummary}
