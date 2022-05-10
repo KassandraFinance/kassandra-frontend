@@ -3,6 +3,7 @@ import Image from 'next/image'
 import {
   FacebookShareButton,
   LinkedinShareButton,
+  RedditShareButton,
   TwitterShareButton
 } from 'react-share'
 import html2canvas from 'html2canvas'
@@ -121,14 +122,16 @@ const ShareImageModal = ({
                 Linkedin
               </S.SocialMedia>
             </LinkedinShareButton>
-            <S.SocialMedia>
-              <Image
-                src="/assets/socialMedia/instagram-icon.svg"
-                width={56}
-                height={56}
-              />
-              Instagram
-            </S.SocialMedia>
+            <RedditShareButton onClick={sendData} url={url}>
+              <S.SocialMedia>
+                <Image
+                  src="/assets/socialMedia/reddit-icon.svg"
+                  width={56}
+                  height={56}
+                />
+                Instagram
+              </S.SocialMedia>
+            </RedditShareButton>
             <FacebookShareButton onClick={sendData} url={url}>
               <S.SocialMedia>
                 <Image
