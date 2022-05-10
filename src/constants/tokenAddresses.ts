@@ -10,23 +10,25 @@ export const HeimCRPPOOL = process.env.NEXT_PUBLIC_MASTER === '1' ?
   '0x38918142779e2CD1189cBd9e932723C968363D1E'
   :
   '0xE34A2935B04e9c879f5bDd022b97D7Cf2F1Dde1d'
+
 export const HeimCorePool = process.env.NEXT_PUBLIC_MASTER === '1' ?
   '0x17C1037B17b221f2f3b53f85cebD817C941f6bC5'
   :
   '0xFCfB171A8a4666bc53Eac2d91Cb0b5203DDa63cD'
 
 
-export const LPKacyAvax = process.env.NEXT_PUBLIC_MASTER === '1' ?
-  '0x1938cE0E14dD71caab96F52dF3F49b1D1DAF8861'
-  :
-  '0xbaa8b0d2AA6415d5b4077C1FA06b3507577FBCd7'
-
 export const LPDaiAvax = process.env.NEXT_PUBLIC_MASTER === '1' ?
   '0xbA09679Ab223C6bdaf44D45Ba2d7279959289AB0'
   :
   '0xe64b1772a9e28E694FEc27Bc7901f88855252E9F'
 
-export const LPKacyAvaxJoe = process.env.NEXT_PUBLIC_MASTER === '1' ?
+export const LPKacyAvaxPNG = process.env.NEXT_PUBLIC_MASTER === '1' ?
+  '0x1938cE0E14dD71caab96F52dF3F49b1D1DAF8861'
+  :
+  '0xbaa8b0d2AA6415d5b4077C1FA06b3507577FBCd7'
+
+
+export const LPKacyAvaxJOE = process.env.NEXT_PUBLIC_MASTER === '1' ?
   '0xc45893e0ee426a643e54829ee8c697995e5980ed'
   :
   ''
@@ -69,6 +71,7 @@ export interface ProductDetails {
   partners: PartnerData[];
   fundBy?: string;
   fundIcon?: any;
+  pid?: number;
   fundSummary?: string;
   fundLink?: string;
 }
@@ -121,6 +124,7 @@ const ahype: ProductDetails  = process.env.NEXT_PUBLIC_MASTER === '1' ?
     fundBy: 'HEIMDALL.land',
     symbol: 'aHYPE',
     fundIcon: ahypeIcon,
+    pid: 6,
     fundLink: 'https://kassandrafoundation.medium.com/avalanche-social-index-4042a823c972',
     fundSummary: `The Social Index $aHYPE reflects the performance of a portfolio selected
     from the most socially active cryptocurrencies in the past 30 days,
@@ -142,6 +146,7 @@ const ahype: ProductDetails  = process.env.NEXT_PUBLIC_MASTER === '1' ?
     fundBy: 'HEIMDALL.land',
     symbol: 'aHYPE',
     fundIcon: ahypeIcon,
+    pid: 4,
     fundLink: 'https://kassandrafoundation.medium.com/avalanche-social-index-4042a823c972',
     fundSummary: `The Social Index $aHYPE reflects the performance of a portfolio selected
     from the most socially active cryptocurrencies in the past 30 days,
@@ -154,8 +159,8 @@ const ahype: ProductDetails  = process.env.NEXT_PUBLIC_MASTER === '1' ?
   }
 
 const tricrypto:  ProductDetails  =  {
-    sipAddress: '0xE34A2935B04e9c879f5bDd022b97D7Cf2F1Dde1d',
-    coreAddress: '0xFCfB171A8a4666bc53Eac2d91Cb0b5203DDa63cD',
+    sipAddress: '0x38918142779e2CD1189cBd9e932723C968363D1E',
+    coreAddress: '0x17C1037B17b221f2f3b53f85cebD817C941f6bC5',
     platform: 'Fuji',
     categories: ['Fuji', 'Pool'],
     chain: chains.fuji,
@@ -163,12 +168,13 @@ const tricrypto:  ProductDetails  =  {
     fundBy: 'kassandra with yield yak',
     symbol: 'Tricrypto',
     fundIcon: tricryptoIcon,
+    pid: 6,
     fundLink: 'https://kassandra.finance/',
-    fundSummary: 'Tricrypto melhor fundo do mundo',
+    fundSummary: `The #K3C represents a yield-earning portfolio composed of BTC,
+    ETH, USDC and KACY built in partnership with our friends back at Yield Yak.`,
     partners: [
       partners.avalanche,
-      partners.heimdall,
-      partners.api3
+      partners.yieldYak
     ]
 }
 

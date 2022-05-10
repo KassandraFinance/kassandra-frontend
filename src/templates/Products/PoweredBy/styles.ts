@@ -35,12 +35,5 @@ export const PartnersContent = styled.div`
     &:last-child {
       padding-right: 0;
     }
-
-    img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      max-height: 40px;
-    }
   }
 `

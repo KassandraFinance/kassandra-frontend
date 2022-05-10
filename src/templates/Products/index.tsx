@@ -24,10 +24,12 @@ import infoGray from '../../../public/assets/info-gray.svg'
 import { GET_INFO_POOL } from './graphql'
 
 import Change from './Change'
+import MyAsset from './MyAsset'
 import Summary from './Summary'
 import Distribution from './Distribution'
 import TokenDescription from './TokenDescription'
 import ShareImageModal from './ShareImageModal'
+import SharedImage from './SharedImage'
 
 import * as S from './styles'
 
@@ -36,6 +38,8 @@ interface InfoPool {
   swapFees: string;
   withdrawFees: string;
   volume: string;
+  price: string;
+  decimals: number;
 }
 
 interface Input {
@@ -43,12 +47,15 @@ interface Input {
 }
 
 const Products = ({ product }: Input) => {
+  const [totalPerfomance, setTotalPerfomance] = React.useState<string>('')
   const [openModal, setOpenModal] = React.useState(false)
   const [infoPool, setInfoPool] = React.useState<InfoPool>({
     tvl: '...',
     swapFees: '...',
     withdrawFees: '...',
-    volume: '...'
+    volume: '...',
+    price: '0',
+    decimals: 18
   })
 
   const { trackProductPageView } = useMatomoEcommerce()
@@ -87,7 +94,9 @@ const Products = ({ product }: Input) => {
         tvl: BNtoDecimal(Big(data.pool.total_value_locked_usd), 2, 2, 2),
         swapFees: BNtoDecimal(Big(swapFees), 2, 2, 2),
         withdrawFees: BNtoDecimal(Big(withdrawFees), 2, 2, 2),
-        volume: BNtoDecimal(Big(volume), 2, 2, 2)
+        volume: BNtoDecimal(Big(volume), 2, 2, 2),
+        price: data.pool.price_usd,
+        decimals: data.pool.decimals
       })
     }
   }, [data])
@@ -105,11 +114,14 @@ const Products = ({ product }: Input) => {
   return (
     <S.BackgroundProducts boxShadow={false}>
       <Header />
-      <ShareImageModal
-        crpPoolAddress={product.sipAddress}
-        setOpenModal={setOpenModal}
-        openModal={openModal}
-      />
+      <ShareImageModal setOpenModal={setOpenModal} openModal={openModal}>
+        <SharedImage
+          crpPoolAddress={product.sipAddress}
+          totalValueLocked={infoPool.tvl}
+          socialIndex={product.symbol}
+          totalPerfomance={totalPerfomance}
+        />
+      </ShareImageModal>
       <Breadcrumb>
         <BreadcrumbItem href="/">Home</BreadcrumbItem>
         <BreadcrumbItem href={`/explore`}>Explore</BreadcrumbItem>
@@ -125,9 +137,14 @@ const Products = ({ product }: Input) => {
         <S.NameIndex>
           <S.NameAndSymbol introMobile={true}>
             <h1>{product.name}</h1>
-            <h3>${product.symbol}</h3>
+            <button onClick={() => setOpenModal(true)} className="circle">
+              <Image src="/assets/icons/share.svg" width={12} height={12} />
+            </button>
           </S.NameAndSymbol>
-          <p>by {product.fundBy}</p>
+          <S.SymbolAndMade>
+            <h3>${product.symbol}</h3>
+            <p>by HEIMDALL.land</p>
+          </S.SymbolAndMade>
         </S.NameIndex>
         <S.Line />
       </S.Intro>
@@ -197,7 +214,10 @@ const Products = ({ product }: Input) => {
           </S.IntroCharts>
           <ChartProducts crpPoolAddress={product.sipAddress} />
           <ScrollUpButton />
-          <Change crpPoolAddress={product.sipAddress} />
+          <Change
+            crpPoolAddress={product.sipAddress}
+            setTotalPerfomance={setTotalPerfomance}
+          />
           <Summary
             strategy={data?.pool.strategy || '...'}
             summary={product.fundSummary}

@@ -76,6 +76,14 @@ export const SocialMedia = styled.div`
   font-size: 1.2rem;
   text-transform: uppercase;
 
+  cursor: pointer;
+
+  &.last {
+    @media (max-width: 900px) {
+      display: none;
+    }
+  }
+
   @media (max-width: 550px) {
     max-width: 4.2rem;
     min-width: 0;
@@ -83,7 +91,7 @@ export const SocialMedia = styled.div`
 `
 
 export const ImageContainer = styled.div`
-  @media (max-width: 1130px) {
+  @media (max-width: 1020px) {
     overflow-x: scroll;
     width: 100%;
     padding-top: 4rem;

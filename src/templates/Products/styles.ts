@@ -79,7 +79,7 @@ export const Intro = styled.div<IIntroProps>`
         display: grid;
         grid-template-columns: 40px auto;
         padding: 0 30px;
-        gap: 8px;
+        gap: 1.6rem;
         max-width: 100%;
         margin: 32px 0;
       }
@@ -132,6 +132,10 @@ export const NameAndSymbol = styled.div<INameAndSymbolProps>`
   display: flex;
   align-items: flex-start;
   gap: 1.6rem;
+
+  @media (max-width: 570px) {
+    align-items: center;
+  }
 
   h1 {
     font-size: ${theme.font.sizes.font24};

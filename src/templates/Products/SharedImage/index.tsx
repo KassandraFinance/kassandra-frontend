@@ -1,28 +1,53 @@
 import Image from 'next/image'
+import React from 'react'
+import { RootStateOrAny, useSelector } from 'react-redux'
 
 import ChartProducts from '../../../components/ChartProducts'
+import { TokenImages } from '../../../store/modules/poolImages/types'
+import { TokenDetails } from '../../../store/modules/poolTokens/types'
+import substr from '../../../utils/substr'
 
 import * as S from './styles'
 
 interface ISharedImageProps {
   crpPoolAddress: string;
+  totalValueLocked: string;
+  socialIndex: string;
+  totalPerfomance: string;
 }
 
-const SharedImage = ({ crpPoolAddress }: ISharedImageProps) => {
+const SharedImage = ({
+  crpPoolAddress,
+  totalValueLocked,
+  socialIndex,
+  totalPerfomance
+}: ISharedImageProps) => {
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const { poolTokensArray }: { poolTokensArray: TokenDetails[] } = useSelector(
+    (state: RootStateOrAny) => state
+  )
+  const { poolImages }: { poolImages: TokenImages } = useSelector(
+    (state: RootStateOrAny) => state
+  )
+
   return (
     <S.SharedImage>
       <S.Header>
         <S.Title>
           <Image src="/assets/modalShareImage.png" width={40} height={40} />
           <h1>Awesome Fund</h1>
-          <S.Detail>$AWES</S.Detail>
+          <S.Detail>${socialIndex}</S.Detail>
           <S.HorizontalLine />
         </S.Title>
         <S.UserInfo>
           <h2>Manager</h2>
           <S.Profile>
             <S.ProfileImage />
-            <S.ProfileAddress>0x3x...vue23</S.ProfileAddress>
+            <S.ProfileAddress>
+              {userWalletAddress
+                ? substr(userWalletAddress)
+                : substr('0x000000000')}
+            </S.ProfileAddress>
           </S.Profile>
         </S.UserInfo>
       </S.Header>
@@ -34,14 +59,18 @@ const SharedImage = ({ crpPoolAddress }: ISharedImageProps) => {
               <Image src="/assets/iconbar.svg" width={20} height={20} />
               <span>Total Perfomance</span>
             </S.InfoTitle>
-            <S.InfoValue>+158.27%</S.InfoValue>
+            {totalPerfomance.startsWith('-') ? (
+              <S.InfoValue color="red">{totalPerfomance}%</S.InfoValue>
+            ) : (
+              <S.InfoValue color="green">+{totalPerfomance}%</S.InfoValue>
+            )}
           </S.Info>
           <S.Info>
             <S.InfoTitle>
               <Image src="/assets/iconbar.svg" width={17.5} height={17.5} />
               <span>Total Value Locked</span>
             </S.InfoTitle>
-            <S.InfoValue>$500K%</S.InfoValue>
+            <S.InfoValue color="white">${totalValueLocked}%</S.InfoValue>
           </S.Info>
           <S.Assets>
             <S.InfoTitle>
@@ -49,10 +78,14 @@ const SharedImage = ({ crpPoolAddress }: ISharedImageProps) => {
               <span>Assets</span>
             </S.InfoTitle>
             <S.AssetsContainer>
-              <Image src="/assets/asset-1.png" width={24.5} height={24.5} />
-              <Image src="/assets/asset-2.png" width={24.5} height={24.5} />
-              <Image src="/assets/asset-3.png" width={24.5} height={24.5} />
-              <Image src="/assets/asset-4.png" width={24.5} height={24.5} />
+              {poolTokensArray.map((token, index) => (
+                <Image
+                  key={index}
+                  src={poolImages[token.address] || '/assets/coming-soon.svg'}
+                  width={25}
+                  height={25}
+                />
+              ))}
             </S.AssetsContainer>
           </S.Assets>
         </S.InfoContainer>

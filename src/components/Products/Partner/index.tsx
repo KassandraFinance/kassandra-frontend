@@ -1,9 +1,14 @@
 import React from 'react'
+import Image, { StaticImageData } from 'next/image'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 export interface PartnerData {
   href: string;
-  image: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+  image: {
+    src: StaticImageData,
+    width: number,
+    height: number
+  };
   name: string;
 }
 
@@ -25,7 +30,7 @@ const Partner = ({ href, image, name }: PartnerData) => {
       rel="noopener noreferrer"
       onClick={() => matomoEvent('click-on-partner', name)}
     >
-      <img
+      <Image
         src={image.src}
         alt={name}
         width={image.width}

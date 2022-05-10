@@ -6,7 +6,10 @@ type Props = {
 }
 
 const Page = ({ id }: Props) => {
-  const baseUrl = 'http://localhost:3000'
+  const baseUrl =
+    process.env.NODE_ENV === 'production'
+      ? 'https://kassandra.finance'
+      : 'http://localhost:3000'
   console.log(`${baseUrl}/api/funds/shared?id=${id}`)
   return (
     <>

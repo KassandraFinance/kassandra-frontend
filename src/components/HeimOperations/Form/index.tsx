@@ -1068,10 +1068,13 @@ const Form = ({
         <>
           <InputTokens
             title="Output"
+            isWithdraw={title}
             actionString="Swap to"
             swapBalance={swapOutBalance[0]}
             decimals={infoAHYPE[tokenAddress2Index[swapOutAddress]]?.decimals || new BigNumber(18)}
             swapAmount={swapOutAmount[0]}
+            swapOutAddress={swapOutAddress}
+            infoAHYPE={infoAHYPE}
             // Text Input
             disabled="This is an estimation of how much you'll receive, it'll depend on the state of the blockchain when the order executes"
             // Select Input
@@ -1083,6 +1086,8 @@ const Form = ({
                   .filter((token: { address: string }) => token.address !== swapInAddress)
             }
             tokenDetails={infoAHYPE[tokenOutIndex]}
+            swapInAmount={swapInAmount}
+            swapInAddress={swapInAddress}
             setSwapAddress={setSwapOutAddress}
           />
           <S.ExchangeRate>
