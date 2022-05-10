@@ -191,7 +191,7 @@ const StakeFarm = () => {
                       <S.GridStaking>
                         <StakeCard
                           pid={5}
-                          symbol="lp"
+                          symbol="lp-png"
                           balanceOf={kacyStake.balance}
                           earned={kacyStake.earned}
                           getReward={kacyStake.getReward}
@@ -228,7 +228,20 @@ const StakeFarm = () => {
                             stakedUntil={kacyStake.stakedUntil}
                             stakeWithVotingPower={true}
                           />
-                        : ''}
+                        :
+                          <StakeCard
+                            pid={4}
+                            symbol="ahype"
+                            balanceOf={kacyStake.balance}
+                            earned={kacyStake.earned}
+                            getReward={kacyStake.getReward}
+                            withdrawable={kacyStake.withdrawable}
+                            poolInfo={kacyStake.poolInfo}
+                            unstaking={kacyStake.unstaking}
+                            stakedUntil={kacyStake.stakedUntil}
+                            stakeWithVotingPower={true}
+                          />
+                        }
                         {/* <ComingSoon /> */}
                       </S.GridStaking>
                     </S.StakeFarm>
