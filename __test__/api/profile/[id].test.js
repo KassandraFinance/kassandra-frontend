@@ -6,7 +6,9 @@ import { createMocks } from 'node-mocks-http'
 import profile from '../../../src/pages/api/profile/[id]'
 
 describe('/api/profile/[id]', () => {
-  const prisma = new PrismaClient()
+  const prisma = new PrismaClient({
+    datasources: { db: { url: process.env.DATABASE_URL_DEV } }
+  })
 
   const walletAddress = '0xaa73f24cFe903Fc96be1F48b09601db5d5182622'
   const walletAddress2 = '0x47EF99c6B59336b78fE5aC3EdB36DfFb83cfe160'
