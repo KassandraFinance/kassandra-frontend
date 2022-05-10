@@ -56,7 +56,7 @@ const ShareImageModal = ({
         const file = canvas.toDataURL('image/png')
         const baseUrl =
           process.env.NODE_ENV === 'production'
-            ? 'https://kassandra.finance/'
+            ? 'https://kassandra.finance'
             : 'http://localhost:3000'
 
         fetch(`${baseUrl}/api/funds/shared?id=123`, {
