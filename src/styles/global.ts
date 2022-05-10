@@ -68,6 +68,25 @@ const GlobalStyles: GlobalStyleComponent<
     }
   }
 
+  ::-webkit-scrollbar {
+    width: 0.4rem;
+    height: 0.4rem;
+  }
+
+  body::-webkit-scrollbar {
+    width: 0.8rem;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+
+    transition: background-color ease-in-out 30000ms;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+  }
 
   html, body, #root {
     min-height: 100%;
