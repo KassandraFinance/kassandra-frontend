@@ -18,6 +18,7 @@ import ScrollUpButton from '../../components/ScrollUpButton'
 import Breadcrumb from '../../components/Breadcrumb'
 import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
 import PoweredBy from './PoweredBy'
+import ActivityTable from './ActivityTable'
 
 import infoGray from '../../../public/assets/info-gray.svg'
 
@@ -211,6 +212,7 @@ const Products = ({ product }: Input) => {
           <PoweredBy partners={product.partners} />
           <Distribution poolPlatform={product.platform} />
           <TokenDescription symbol={product.symbol} />
+          <ActivityTable />
         </S.ProductDetails>
         <HeimOperations
           poolChain={product.chain}
