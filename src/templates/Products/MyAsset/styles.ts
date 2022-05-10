@@ -137,6 +137,7 @@ export const AddToken = styled.button`
   align-items: center;
   gap: 0.4rem;
 
+  font-family: ${theme.font.family};
   font-size: ${theme.font.sizes.font14};
   font-weight: ${theme.font.weight.light};
   letter-spacing: 0.05em;
