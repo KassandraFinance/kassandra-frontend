@@ -12,9 +12,10 @@ import * as S from './styles'
 
 interface IChangeProps {
   crpPoolAddress: string;
+  setTotalPerfomance: (value: string) => void;
 }
 
-const Change = ({ crpPoolAddress }: IChangeProps) => {
+const Change = ({ crpPoolAddress, setTotalPerfomance }: IChangeProps) => {
   // eslint-disable-next-line prettier/prettier
   const [changeWeek, setChangeWeek] = React.useState<string[]>(
     Array(5).fill('')
@@ -55,6 +56,7 @@ const Change = ({ crpPoolAddress }: IChangeProps) => {
       arrChangePrice[3] = changeQuarterly
       arrChangePrice[4] = changeYear
 
+      setTotalPerfomance(changeYear)
       setChangeWeek(arrChangePrice)
     }
   }, [data])

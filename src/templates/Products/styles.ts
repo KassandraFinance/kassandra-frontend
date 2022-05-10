@@ -79,7 +79,7 @@ export const Intro = styled.div<IIntroProps>`
         display: grid;
         grid-template-columns: 40px auto;
         padding: 0 30px;
-        gap: 8px;
+        gap: 1.6rem;
         max-width: 100%;
         margin: 32px 0;
       }
@@ -104,6 +104,25 @@ export const NameIndex = styled.div`
   }
 `
 
+export const SymbolAndMade = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+
+  h3 {
+    padding: 8px 12px;
+
+    font-size: ${theme.font.sizes.font12};
+    font-weight: ${theme.font.weight.light};
+
+    background-color: rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+
+    @media (max-width: 768px) {
+      font-size: 10px;
+    }
+  }
+`
 interface INameAndSymbolProps {
   introMobile?: boolean;
 }
@@ -112,29 +131,32 @@ interface INameAndSymbolProps {
 export const NameAndSymbol = styled.div<INameAndSymbolProps>`
   display: flex;
   align-items: flex-start;
+  gap: 1.6rem;
+
+  @media (max-width: 570px) {
+    align-items: center;
+  }
 
   h1 {
     font-size: ${theme.font.sizes.font24};
     font-weight: ${theme.font.weight.light};
-    
+
     @media (max-width: 768px) {
       font-size: ${theme.font.sizes.font18}
     }
 
   }
 
-  h3 {
-    background-color: rgba(0, 0, 0, 0.19);
-    border-radius: 10px;
-    font-size: ${theme.font.sizes.font12};
-    font-weight: ${theme.font.weight.light};
+  .circle {
+    display: grid;
+    place-items: center;
+    padding: 0.8rem;
 
-    margin-left: ${theme.spacings.space16};
-    padding: 8px 12px;
+    background: #3C3E4A;
+    border-radius: 50%;
+    border: none;
 
-    @media (max-width: 768px) {
-      font-size: 10px;
-    }
+    cursor: pointer;
   }
 `
 

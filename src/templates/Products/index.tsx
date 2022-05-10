@@ -28,6 +28,8 @@ import MyAsset from './MyAsset'
 import Summary from './Summary'
 import Distribution from './Distribution'
 import TokenDescription from './TokenDescription'
+import ShareImageModal from './ShareImageModal'
+import SharedImage from './SharedImage'
 
 import * as S from './styles'
 
@@ -45,6 +47,8 @@ interface Input {
 }
 
 const Products = ({ product }: Input) => {
+  const [totalPerfomance, setTotalPerfomance] = React.useState<string>('')
+  const [openModal, setOpenModal] = React.useState(false)
   const [infoPool, setInfoPool] = React.useState<InfoPool>({
     tvl: '...',
     swapFees: '...',
@@ -110,6 +114,14 @@ const Products = ({ product }: Input) => {
   return (
     <S.BackgroundProducts boxShadow={false}>
       <Header />
+      <ShareImageModal setOpenModal={setOpenModal} openModal={openModal}>
+        <SharedImage
+          crpPoolAddress={product.sipAddress}
+          totalValueLocked={infoPool.tvl}
+          socialIndex={product.symbol}
+          totalPerfomance={totalPerfomance}
+        />
+      </ShareImageModal>
       <Breadcrumb>
         <BreadcrumbItem href="/">Home</BreadcrumbItem>
         <BreadcrumbItem href={`/explore`}>Explore</BreadcrumbItem>
@@ -125,9 +137,14 @@ const Products = ({ product }: Input) => {
         <S.NameIndex>
           <S.NameAndSymbol introMobile={true}>
             <h1>{product.name}</h1>
-            <h3>${product.symbol}</h3>
+            <button onClick={() => setOpenModal(true)} className="circle">
+              <Image src="/assets/icons/share.svg" width={12} height={12} />
+            </button>
           </S.NameAndSymbol>
-          <p>by {product.fundBy}</p>
+          <S.SymbolAndMade>
+            <h3>${product.symbol}</h3>
+            <p>by HEIMDALL.land</p>
+          </S.SymbolAndMade>
         </S.NameIndex>
         <S.Line />
       </S.Intro>
@@ -138,9 +155,14 @@ const Products = ({ product }: Input) => {
             <S.NameIndex>
               <S.NameAndSymbol>
                 <h1>{product.name}</h1>
-                <h3>${product.symbol}</h3>
+                <button onClick={() => setOpenModal(true)} className="circle">
+                  <Image src="/assets/icons/share.svg" width={16} height={16} />
+                </button>
               </S.NameAndSymbol>
-              <p>by {product.fundBy}</p>
+              <S.SymbolAndMade>
+                <h3>${product.symbol}</h3>
+                <p>by HEIMDALL.land</p>
+              </S.SymbolAndMade>
             </S.NameIndex>
           </S.Intro>
           <S.Line className="second-line" />
@@ -192,14 +214,9 @@ const Products = ({ product }: Input) => {
           </S.IntroCharts>
           <ChartProducts crpPoolAddress={product.sipAddress} />
           <ScrollUpButton />
-          <Change crpPoolAddress={product.sipAddress} />
-          <MyAsset
+          <Change
             crpPoolAddress={product.sipAddress}
-            price={infoPool.price}
-            symbol={product.symbol}
-            icon={product.fundIcon}
-            pid={typeof product.pid === 'undefined' ? -1 : product.pid}
-            decimals={infoPool.decimals}
+            setTotalPerfomance={setTotalPerfomance}
           />
           <Summary
             strategy={data?.pool.strategy || '...'}
