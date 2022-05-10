@@ -23,8 +23,9 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "__test__/api/profile/.test.ts", "__test__/api/profile/[id].test.js"  ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "__test__"
   ]
 }
