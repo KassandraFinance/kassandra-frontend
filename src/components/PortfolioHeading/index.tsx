@@ -52,7 +52,7 @@ const PortfolioHeading = ({
               <span>{change}%</span>
               <div>
                 <Image
-                  src={change > 0 ? arrowAscend : arrowDescend}
+                  src={change < 0 ? arrowDescend : arrowAscend}
                   layout="responsive"
                 />
               </div>

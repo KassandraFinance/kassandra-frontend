@@ -8,6 +8,10 @@ export const HeadingWrapper = styled.div`
 
   margin-top: 4.8rem;
 
+  @media (max-width: 960px) {
+    margin-top: 2.4rem;
+  }
+
   @media (max-width: 700px) {
     flex-direction: column;
     align-items: flex-start;
@@ -124,7 +128,7 @@ export const Change = styled.div<IChangeProps>`
   align-items: center;
 
   ${({ change }) => css`
-    color: ${change > 0 ? '#5ee66b' : '#E8372C'};
+    color: ${change < 0 ? '#E8372C' : ' #5ee66b'};
   `}
   font-weight: ${theme.font.weight.normal};
   font-size: ${theme.font.sizes.font16};
