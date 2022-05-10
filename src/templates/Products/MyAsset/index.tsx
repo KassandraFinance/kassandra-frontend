@@ -11,7 +11,7 @@ import { BNtoDecimal } from '../../../utils/numerals'
 
 import {
   Staking,
-  LPKacyAvax,
+  LPKacyAvaxPNG,
   LPDaiAvax
 } from '../../../constants/tokenAddresses'
 import usePriceLP from '../../../hooks/usePriceLP'
@@ -89,7 +89,7 @@ const MyAsset = ({
   }
 
   async function handleLPtoUSD() {
-    const reservesKacyAvax = await viewgetReserves(LPKacyAvax)
+    const reservesKacyAvax = await viewgetReserves(LPKacyAvaxPNG)
     const reservesDaiAvax = await viewgetReserves(LPDaiAvax)
 
     let kacyReserve = reservesKacyAvax._reserve1

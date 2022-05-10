@@ -17,17 +17,18 @@ export const HeimCorePool = process.env.NEXT_PUBLIC_MASTER === '1' ?
   '0xFCfB171A8a4666bc53Eac2d91Cb0b5203DDa63cD'
 
 
-export const LPKacyAvax = process.env.NEXT_PUBLIC_MASTER === '1' ?
-  '0x1938cE0E14dD71caab96F52dF3F49b1D1DAF8861'
-  :
-  '0xbaa8b0d2AA6415d5b4077C1FA06b3507577FBCd7'
-
 export const LPDaiAvax = process.env.NEXT_PUBLIC_MASTER === '1' ?
   '0xbA09679Ab223C6bdaf44D45Ba2d7279959289AB0'
   :
   '0xe64b1772a9e28E694FEc27Bc7901f88855252E9F'
 
-export const LPKacyAvaxJoe = process.env.NEXT_PUBLIC_MASTER === '1' ?
+export const LPKacyAvaxPNG = process.env.NEXT_PUBLIC_MASTER === '1' ?
+  '0x1938cE0E14dD71caab96F52dF3F49b1D1DAF8861'
+  :
+  '0xbaa8b0d2AA6415d5b4077C1FA06b3507577FBCd7'
+
+
+export const LPKacyAvaxJOE = process.env.NEXT_PUBLIC_MASTER === '1' ?
   '0xc45893e0ee426a643e54829ee8c697995e5980ed'
   :
   ''

@@ -25,7 +25,7 @@ interface IYourStakeProps {
   infoStaked: IInfoStaked;
   setInfoStaked: React.Dispatch<React.SetStateAction<IInfoStaked>>;
   stakeWithVotingPower: boolean;
-  priceLPToken: IPriceLPToken;
+  tokenPrice: IPriceLPToken;
   stakeWithLockPeriod: boolean;
   lockPeriod: number;
   availableWithdraw: Big;
@@ -42,7 +42,7 @@ const YourStake = ({
   setInfoStaked,
   stakeWithVotingPower,
   stakeWithLockPeriod,
-  priceLPToken,
+  tokenPrice,
   lockPeriod,
   availableWithdraw
 }: IYourStakeProps) => {
@@ -63,22 +63,22 @@ const YourStake = ({
 
     const stakingTokenPrice =
       pid === 5
-        ? priceLPToken.priceLP
+        ? tokenPrice.priceLPPng
         : pid === 6
-        ? priceLPToken.aHYPE
+        ? tokenPrice.aHYPE
         : pid === 7
-        ? priceLPToken.priceLPJoe
-        : priceLPToken.kacy
+        ? tokenPrice.priceLPJoe
+        : tokenPrice.kacy
 
     const apr =
       poolInfoResponse.depositedAmount.toString() !== '0' &&
-      priceLPToken.kacy.gt('-1') &&
+      tokenPrice.kacy.gt('-1') &&
       stakingTokenPrice.gt('-1')
         ? new BigNumber(
             Big(kacyRewards.toString())
               .mul('365')
               .mul('100')
-              .mul(priceLPToken.kacy)
+              .mul(tokenPrice.kacy)
               .div(
                 stakingTokenPrice.mul(
                   Big(poolInfoResponse.depositedAmount.toString())
@@ -133,7 +133,7 @@ const YourStake = ({
       vestingPeriod: poolInfoResponse.vestingPeriod,
       lockPeriod: poolInfoResponse.lockPeriod
     })
-  }, [userWalletAddress, priceLPToken])
+  }, [userWalletAddress, tokenPrice])
 
   React.useEffect(() => {
     getYourStake()
@@ -159,9 +159,9 @@ const YourStake = ({
         <S.Stake>
           <p>
             {infoStaked.yourStake.lt(new BigNumber('0')) ||
-            (pid === 5 && priceLPToken.priceLP.lt(0)) ||
-            (pid === 6 && priceLPToken.aHYPE.lt(0)) ||
-            (pid === 7 && priceLPToken.priceLPJoe.lt(0))
+            (pid === 5 && tokenPrice.priceLPPng.lt(0)) ||
+            (pid === 6 && tokenPrice.aHYPE.lt(0)) ||
+            (pid === 7 && tokenPrice.priceLPJoe.lt(0))
               ? '...'
               : !stakeWithVotingPower
               ? BNtoDecimal(infoStaked.yourStake, 18)
@@ -169,10 +169,10 @@ const YourStake = ({
                   Big(infoStaked.yourStake.toString())
                     .mul(
                       pid === 5
-                        ? priceLPToken.priceLP
+                        ? tokenPrice.priceLPPng
                         : pid === 7
-                        ? priceLPToken.priceLPJoe
-                        : priceLPToken.aHYPE
+                        ? tokenPrice.priceLPJoe
+                        : tokenPrice.aHYPE
                     )
                     .div(Big(10).pow(18)),
                   2,
@@ -185,11 +185,11 @@ const YourStake = ({
             <span>
               &#8776;{' '}
               {infoStaked.yourStake.lt(new BigNumber('0')) ||
-              priceLPToken.kacy.lt(0)
+              tokenPrice.kacy.lt(0)
                 ? '...'
                 : BNtoDecimal(
                     Big(infoStaked.yourStake.toString())
-                      .mul(priceLPToken.kacy)
+                      .mul(tokenPrice.kacy)
                       .div(Big(10).pow(18)),
                     6,
                     2,

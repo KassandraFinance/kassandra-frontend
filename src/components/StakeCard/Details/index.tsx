@@ -30,7 +30,7 @@ interface IDetailsProps {
   stakingToken: string;
   decimals: string;
   symbol: string;
-  priceLPToken: IPriceLPToken;
+  tokenPrice: IPriceLPToken;
 }
 
 const Details = ({
@@ -41,7 +41,7 @@ const Details = ({
   stakingToken,
   decimals,
   symbol,
-  priceLPToken
+  tokenPrice
 }: IDetailsProps) => {
   // eslint-disable-next-line prettier/prettier
   const [depositedAmount, setDepositedAmount] = React.useState<BigNumber>(new BigNumber(-1))
@@ -73,16 +73,16 @@ const Details = ({
 
   switch (pid) {
     case 7:
-      price = priceLPToken.priceLPJoe
+      price = tokenPrice.priceLPJoe
       break
     case 6:
-      price = priceLPToken.aHYPE
+      price = tokenPrice.aHYPE
       break
     case 5:
-      price = priceLPToken.priceLP
+      price = tokenPrice.priceLPPng
       break
     default:
-      price = priceLPToken.kacy
+      price = tokenPrice.kacy
   }
 
   return (
@@ -129,7 +129,7 @@ const Details = ({
               ? '0'
               : BNtoDecimal(
                   Big(infoStakeStatic.kacyRewards.toString())
-                    .mul(priceLPToken.kacy)
+                    .mul(tokenPrice.kacy)
                     .div(Big(10).pow(18)),
                   6,
                   2,
