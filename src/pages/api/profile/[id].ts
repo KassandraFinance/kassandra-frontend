@@ -40,7 +40,15 @@ const handle = async (request: NextApiRequest, response: NextApiResponse) => {
       }
 
       const errors = []
-      const { nickname, description } = userInput
+      const { nickname, description, twitter, discord, telegram } = userInput
+
+      if (
+        (twitter && twitter.length > 50) ||
+        (discord && discord.length > 50) ||
+        (telegram && telegram.length > 50)
+      ) {
+        errors.push({ message: 'Social medias caannot be greater than 50' })
+      }
 
       if (nickname && nickname.length > 18) {
         errors.push({ message: 'Nickname cannot be greater than 18' })

@@ -127,6 +127,22 @@ describe('/api/profile/[id]', () => {
     expect(res._getJSONData()).toEqual([{ message: 'User already exist' }])
   })
 
+  it('should not be able create user that social media greater than 50', async () => {
+    const { req, res } = mockRequestResponse('POST')
+
+    const twitter = 'teste-create-social-media-maior-que-5000000000000000000000000000000'
+    const telegram = 'teste-create-social-media-maior-que-500000000000000000000000000000'
+    const discord = 'teste-create-social-media-maior-que-5000000000000000000000000000000'
+    req.body = { twitter, telegram, discord }
+
+    await profile(req, res)
+
+    expect(res.statusCode).toEqual(400)
+    expect(res._getJSONData()).toEqual([
+      { message: 'Social medias caannot be greater than 50' }
+    ])
+  })
+
   it('should not be able create user that description greater than 500', async () => {
     const { req, res } = mockRequestResponse('POST')
     const description =
