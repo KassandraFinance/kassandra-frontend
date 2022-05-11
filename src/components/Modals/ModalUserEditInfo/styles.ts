@@ -96,9 +96,8 @@ export const UserProfileInfoContent = styled.div`
 
 export const UserProfileInfo = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
+  margin-top: -1rem;
   margin-right: 6rem;
 
   img {
@@ -106,19 +105,20 @@ export const UserProfileInfo = styled.div`
   }
 
   span {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    margin-left: 1rem;
+    margin-left: 1.6rem;
 
-    label, button {
-      padding: 0.6rem 0.6rem;
+    label {
+      padding: 1.6rem 1rem;
 
       background: rgba(255, 255, 255, 0.1);
       border: 1px solid rgba(255, 255, 255, 0);
       border-radius: 0.4rem;
 
-      color: #ffffff;
+      color: #FCFCFC;
       font-size: 1.6rem;
       font-weight: ${theme.font.weight.light};
 
@@ -145,7 +145,7 @@ export const UserProfileInfo = styled.div`
   }
 
   input {
-    width: 27.7rem;
+    width: 30rem;
     padding: 1.6rem;
 
     color: #C4C4C4;
@@ -166,6 +166,55 @@ export const UserNameContent = styled.div``
 
 export const UserImageContent = styled.div`
   display: flex;
+`
+interface isDropdownAddNftProps {
+  isDropdownAddNft: boolean
+}
+
+export const ButtonAddNft = styled.button<isDropdownAddNftProps>`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  gap: 1rem;
+  padding: 1.6rem 1rem;
+
+  color: #FCFCFC;
+  font-size: 1.6rem;
+  font-weight: ${theme.font.weight.light};
+
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0);
+  border-radius: 0.4rem;
+
+  text-align: center;
+  transition: 0.2s;
+  cursor: pointer;
+
+  img {
+    ${props =>
+      props.isDropdownAddNft ? `transform: rotate(180deg)` : `transform: rotate(0)`}
+  }
+`
+
+interface isDropdownAddNftProps {
+  isDropdownAddNft: boolean
+}
+
+export const UserAddNftImage = styled.div<isDropdownAddNftProps>`
+  position: absolute;
+  top: 12rem;
+
+  display: ${props => (props.isDropdownAddNft ? 'flex' : 'none')};
+
+  @media (max-width: 768px) {
+    right: 0.1rem;
+  }
+
+  img {
+    height: 5rem;
+    width: 5rem;
+  }
 `
 
 interface IUserSocialMidiaProps {
@@ -323,7 +372,7 @@ export const UserEditInfoButtons = styled.div`
   width: 100%;
   gap: 1.6rem;
 
-  padding-top: 3.6rem;
+  padding-top: 2.4rem;
 
   @media (max-width: 768px) {
     flex-direction: column;

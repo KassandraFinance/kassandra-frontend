@@ -1,7 +1,10 @@
 import React, { FormEvent } from 'react'
 import Image from 'next/image'
 
+import { RootStateOrAny, useSelector } from 'react-redux'
+
 import Button from '../../Button'
+import UserNFTs from '../../UserNFts'
 
 import userProfile from '../../../../public/assets/userProfile.svg'
 
@@ -25,10 +28,15 @@ const ModalUserEditInfo = ({
   modalOpen,
   setModalOpen
 }: IModalUserEditInfoProps) => {
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+
   const [isStateSocialMidia, setIsStateSocialMidia] = React.useState(false)
   const [isStateManagerInfo, setIsStateManagerInfo] = React.useState(false)
+  const [isDropdownAddNft, setIsDropdownAddNft] = React.useState(false)
+  // const [isNftSelected, setIsNftSelected] = React.useState('')
   // eslint-disable-next-line prettier/prettier
-  const [editYourProfileInput, setEditYourProfileInput] = React.useState<UserEditInfoFormProps>({
+  const [editYourProfileInput, setEditYourProfileInput] =
+    React.useState<UserEditInfoFormProps>({
       userName: '',
       twitter: '',
       webpage: '',
@@ -36,7 +44,7 @@ const ModalUserEditInfo = ({
       discord: '',
       userDescription: ''
     })
-  const [userImage, setUserImage] = React.useState({
+  const [userImage, setUserImage] = React.useState<any>({
     image_preview: '',
     image_file: userProfile
   })
@@ -100,11 +108,11 @@ const ModalUserEditInfo = ({
           <S.UserProfileInfoContent>
             <S.UserProfileInfo>
               <S.UserImageContent>
-                <Image
+                <img
                   src={
                     userImage.image_preview
                       ? userImage.image_preview
-                      : userProfile
+                      : '/assets/userProfile.svg'
                   }
                   alt="Image from User"
                   width={123}
@@ -116,12 +124,33 @@ const ModalUserEditInfo = ({
                     id="InputFile"
                     type="file"
                     onChange={event => {
+                      console.log('event', event)
                       if (event.target.files !== null) {
                         handleImagePreview(event.target.files)
                       }
                     }}
                   />
-                  <button type="button">Add image NFT</button>
+                  <S.ButtonAddNft
+                    type="button"
+                    isDropdownAddNft={isDropdownAddNft}
+                    onClick={() => setIsDropdownAddNft(!isDropdownAddNft)}
+                  >
+                    Add Image NFT
+                    <Image
+                      src="/assets/arrow-select.svg"
+                      alt="arrow select button"
+                      width={13}
+                      height={13}
+                    />
+                  </S.ButtonAddNft>
+                  <S.UserAddNftImage isDropdownAddNft={isDropdownAddNft}>
+                    <UserNFTs
+                      address="0xbdfa4f4492dd7b7cf211209c4791af8d52bf5c50"
+                      setUserImage={setUserImage}
+                      isDropdownAddNft={isDropdownAddNft}
+                      setIsDropdownAddNft={setIsDropdownAddNft}
+                    />
+                  </S.UserAddNftImage>
                 </span>
               </S.UserImageContent>
               <S.UserNameContent>
