@@ -12,6 +12,7 @@ export interface ChainDetails {
   rpcUrls: [string];
   blockExplorerUrls: [string];
   secondsPerBlock: number;
+  wrapped: string;
 }
 
 // eslint-disable-next-line prettier/prettier
