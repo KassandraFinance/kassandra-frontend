@@ -100,8 +100,12 @@ export const UserProfileInfo = styled.div`
   margin-top: -1rem;
   margin-right: 6rem;
 
-  img {
+  #userImageSelect {
     border-radius: 100%;
+  }
+
+  img {
+    margin-top: 1rem;
   }
 
   span {
@@ -112,10 +116,10 @@ export const UserProfileInfo = styled.div`
     margin-left: 1.6rem;
 
     label {
-      padding: 1.6rem 1rem;
+      padding: 1.6rem 1.6rem;
 
       background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0);
+      border: 1px solid transparent;
       border-radius: 0.4rem;
 
       color: #FCFCFC;
@@ -123,8 +127,12 @@ export const UserProfileInfo = styled.div`
       font-weight: ${theme.font.weight.light};
 
       text-align: center;
-      transition: 0.2s;
+      transition: 0.3s;
       cursor: pointer;
+
+      :hover {
+        border-color: rgba(255, 255, 255, 0.3);
+      }
     }
   }
 
@@ -145,7 +153,7 @@ export const UserProfileInfo = styled.div`
   }
 
   input {
-    width: 30rem;
+    width: 32rem;
     padding: 1.6rem;
 
     color: #C4C4C4;
@@ -166,6 +174,7 @@ export const UserNameContent = styled.div``
 
 export const UserImageContent = styled.div`
   display: flex;
+  justify-content: space-between;
 `
 interface isDropdownAddNftProps {
   isDropdownAddNft: boolean
@@ -177,15 +186,21 @@ export const ButtonAddNft = styled.button<isDropdownAddNftProps>`
   align-items: center;
 
   gap: 1rem;
-  padding: 1.6rem 1rem;
+  padding: 1.6rem 1.6rem;
 
   color: #FCFCFC;
   font-size: 1.6rem;
   font-weight: ${theme.font.weight.light};
 
   background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0);
+  border: 1px solid transparent;
   border-radius: 0.4rem;
+
+  transition: 0.3s;
+
+  :hover {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
 
   text-align: center;
   transition: 0.2s;
@@ -203,7 +218,7 @@ interface isDropdownAddNftProps {
 
 export const UserAddNftImage = styled.div<isDropdownAddNftProps>`
   position: absolute;
-  top: 12rem;
+  top: 12.5rem;
 
   display: ${props => (props.isDropdownAddNft ? 'flex' : 'none')};
 
@@ -225,6 +240,7 @@ export const UserSocialMidia = styled.div<IUserSocialMidiaProps>`
   display: ${props => (props.isStateSocialMidia ? 'flex' : 'none')};
   justify-content: flex-start;
   flex-direction: column;
+  margin-top: 1rem;
 
   @media (max-width: 768px) {
     animation: go-back 1s ease;
