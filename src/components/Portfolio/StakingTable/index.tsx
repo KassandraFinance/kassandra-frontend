@@ -1,6 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
+import useSWR from 'swr'
+import { request } from 'graphql-request'
 
+import { GET_INFO_AHYPE } from './graphql'
 import * as S from './styles'
 
 interface IStakingTableProps {
@@ -19,8 +22,13 @@ interface IStakingTableProps {
   }[];
 }
 
-export const StakingTable = ({ stakes }: IStakingTableProps) => {
-  const Trs = stakes.map((stake, index: number) => {
+  const { data } = useSWR(
+    [GET_INFO_AHYPE, HeimCRPPOOL],
+    (query, id) => request(SUBGRAPH_URL, query, { id }),
+    {
+      refreshInterval: 10000
+    }
+  )
     return (
       <S.Tr key={index}>
         <S.Td>
