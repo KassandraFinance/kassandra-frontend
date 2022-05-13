@@ -37,6 +37,7 @@ interface IStakingTableProps {
   }[];
 
   walletAddress: string;
+  setTotalStaked: React.Dispatch<React.SetStateAction<Big>>;
 }
 
 export interface IPriceToken {
@@ -58,6 +59,7 @@ export interface ItvlType {
 const StakingTable = ({
   stakes,
   walletAddress,
+  setTotalStaked
 }: IStakingTableProps) => {
   const { poolInfo, earned } = useStakingContract(Staking)
   const { viewgetReserves } = usePriceLP()
@@ -82,6 +84,19 @@ const StakingTable = ({
       refreshInterval: 10000
     }
   )
+
+  React.useEffect(() => {
+    let total = Big(0)
+    stakes.forEach(stake => {
+      if (priceToken[stake.symbol].gt('0')) {
+        total = total.add(
+          Big(stake.amount).mul(priceToken[stake.symbol]).div(Big(10).pow(18))
+        )
+      }
+    })
+    setTotalStaked(total)
+  }, [priceToken, stakes, setTotalStaked])
+
   async function handleLPtoUSD() {
     const reservesKacyAvax = await viewgetReserves(LPKacyAvax)
     const reservesKacyAvaxJoe = await viewgetReserves(LPKacyAvaxJoe)
@@ -221,26 +236,26 @@ const StakingTable = ({
     let arr
     if (stakes[0] && stakes[0].amount) {
       arr = stakes.map((stake, index: number) => {
-    return (
-      <S.Tr key={index}>
-        <S.Td>
-          <S.PoolWrapper>
+        return (
+          <S.Tr key={index}>
+            <S.Td>
+              <S.PoolWrapper>
                 <span>${stake?.poolName}</span>
-            <S.PoolIconWrapper>
+                <S.PoolIconWrapper>
                   {stake.icons.map((icon, index: number) => {
                     return (
                       <Image key={index} src={icon} width={24} height={24} />
                     )
-              })}
-            </S.PoolIconWrapper>
-          </S.PoolWrapper>
-        </S.Td>
-        <S.Td>
-          <S.NetworkWrapper>
-            <Image src={stake.networkIcon} width={16} height={16} />
-            <span>{stake.network}</span>
-          </S.NetworkWrapper>
-        </S.Td>
+                  })}
+                </S.PoolIconWrapper>
+              </S.PoolWrapper>
+            </S.Td>
+            <S.Td>
+              <S.NetworkWrapper>
+                <Image src={stake.networkIcon} width={16} height={16} />
+                <span>{stake.network}</span>
+              </S.NetworkWrapper>
+            </S.Td>
             <S.Td>
               {apr[stake.symbol] ? BNtoDecimal(apr[stake.symbol], 0) : 0}%
             </S.Td>
@@ -257,12 +272,12 @@ const StakingTable = ({
                   )
                 : 0}
             </S.Td>
-        <S.Td>
-          <S.FlexWrapper>
-            <div>
+            <S.Td>
+              <S.FlexWrapper>
+                <div>
                   {BNtoDecimal(Big(stake.amount).div(Big(10).pow(18)), 18)}
                   <span> {stake.symbol}</span>
-            </div>
+                </div>
                 <span>
                   $
                   {BNtoDecimal(
@@ -274,16 +289,16 @@ const StakingTable = ({
                     2
                   )}
                 </span>
-          </S.FlexWrapper>
-        </S.Td>
-        <S.Td>
-          <S.FlexWrapper>
-            <div>
+              </S.FlexWrapper>
+            </S.Td>
+            <S.Td>
+              <S.FlexWrapper>
+                <div>
                   {kacyEarned[stake.symbol]
                     ? BNtoDecimal(kacyEarned[stake.symbol], 18, 2)
                     : 0}{' '}
                   <span>{stake.symbol}</span>
-            </div>
+                </div>
                 <span>
                   $
                   {kacyEarned[stake.symbol]
@@ -297,11 +312,11 @@ const StakingTable = ({
                       )
                     : 0}
                 </span>
-          </S.FlexWrapper>
-        </S.Td>
-      </S.Tr>
-    )
-  })
+              </S.FlexWrapper>
+            </S.Td>
+          </S.Tr>
+        )
+      })
     }
 
     setTrs(arr)

@@ -1,3 +1,4 @@
+import BigNumber from 'bn.js'
 import useStakingContract from '../../hooks/useStakingContract'
 import { Staking } from '../../constants/tokenAddresses'
 
@@ -41,6 +42,7 @@ interface IStakesType {
 const Portfolio = () => {
   const { userInfo } = useStakingContract(Staking)
   const [stakes, setStakes] = useState<IStakesType[]>([])
+  const [totalStaked, setTotalStaked] = React.useState<Big>(Big(0))
   const stakedToken: IstakedTokenType = {
     0: {
       symbol: 'KACY',
@@ -152,8 +154,7 @@ const Portfolio = () => {
         <PortfolioHeading
           image={StakedPoolsIcon}
           title="Staking and Farming"
-          usd={'16,000,000.00'}
-          change={-0.11}
+          usd={BNtoDecimal(totalStaked, 6, 2, 2)}
         />
       </S.paddingWrapper>
 
