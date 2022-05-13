@@ -73,8 +73,12 @@ const GlobalStyles: GlobalStyleComponent<
     height: 0.4rem;
   }
 
+  ::-webkit-scrollbar-track {
+    margin-block: 0.3rem;
+  }
+
   body::-webkit-scrollbar {
-    width: 0.8rem;
+    width: 1rem;
   }
 
   ::-webkit-scrollbar-thumb {
