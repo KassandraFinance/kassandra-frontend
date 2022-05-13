@@ -14,15 +14,19 @@ interface ShareImageProps {
   openModal: boolean;
   setOpenModal: (value: boolean) => void;
   children: ReactNode;
+  poolId: string;
 }
+
+const baseURL = 'https://alpha.kassandra.finance'
 
 const ShareImageModal = ({
   setOpenModal,
   openModal,
-  children
+  children,
+  poolId
 }: ShareImageProps) => {
-  const printRef = React.useRef<any>(0)
-  const [url, setUrl] = React.useState('https://kassandra.finance/shared/123')
+  const printRef = React.useRef<HTMLInputElement>(null)
+  const [url, setUrl] = React.useState(`${baseURL}/shared/${poolId}`)
 
   const handleDownloadImage = async () => {
     const element = printRef.current
@@ -52,21 +56,27 @@ const ShareImageModal = ({
     const element = printRef.current
 
     if (element) {
-      html2canvas(element, { windowWidth: 1280 }).then((canvas: any) => {
+      html2canvas(element, {
+        windowWidth: 1280,
+        onclone: function (doc: any) {
+          // doc.querySelector('.image-container').style.width = 'initial'
+          // doc.querySelector('.image-container').style.height = 'initial'
+          // doc.querySelector('.image-container').style.opacity = 1
+          // doc.querySelector('.image-container').style.visibility = 'visible'
+          doc.querySelector('.image-container').style.display = 'block'
+          doc.querySelector('.bg-image-color').style.background = '#2d152b'
+        }
+      }).then((canvas: any) => {
         const file = canvas.toDataURL('image/png')
-        const baseUrl =
-          process.env.NODE_ENV === 'production'
-            ? 'https://kassandra.finance'
-            : 'http://localhost:3000'
 
-        fetch(`${baseUrl}/api/funds/shared?id=123`, {
+        fetch(`${baseURL}/api/funds/shared?id=${poolId}`, {
           method: 'POST',
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({ image: file })
-        }).then(() => setUrl(`${baseUrl}/shared/123`))
+        }).then(() => setUrl(`${baseURL}/shared/${poolId}`))
       })
     }
   }
@@ -85,16 +95,16 @@ const ShareImageModal = ({
           />
         </S.ModalHeader>
         <S.ModalBody>
-          <S.ImageContainer ref={printRef}>
-            <div className="teste">{children}</div>
+          <S.ImageContainer className="image-container" ref={printRef}>
+            <div className="scroll">{children}</div>
           </S.ImageContainer>
 
           <S.SocialMediaContainer>
             <S.SocialMedia>
               <Image
                 src="/assets/socialMedia/discord-icon.svg"
-                width={56}
-                height={56}
+                width={48}
+                height={48}
               />
               Discord
             </S.SocialMedia>
@@ -106,8 +116,8 @@ const ShareImageModal = ({
               <S.SocialMedia>
                 <Image
                   src="/assets/socialMedia/twitter-icon.svg"
-                  width={56}
-                  height={56}
+                  width={48}
+                  height={48}
                 />
                 Twitter
               </S.SocialMedia>
@@ -116,8 +126,8 @@ const ShareImageModal = ({
               <S.SocialMedia>
                 <Image
                   src="/assets/socialMedia/linkedin-icon.svg"
-                  width={56}
-                  height={56}
+                  width={48}
+                  height={48}
                 />
                 Linkedin
               </S.SocialMedia>
@@ -126,8 +136,8 @@ const ShareImageModal = ({
               <S.SocialMedia>
                 <Image
                   src="/assets/socialMedia/reddit-icon.svg"
-                  width={56}
-                  height={56}
+                  width={48}
+                  height={48}
                 />
                 Reddit
               </S.SocialMedia>
@@ -136,8 +146,8 @@ const ShareImageModal = ({
               <S.SocialMedia>
                 <Image
                   src="/assets/socialMedia/facebook-icon.svg"
-                  width={56}
-                  height={56}
+                  width={48}
+                  height={48}
                 />
                 Facebook
               </S.SocialMedia>
@@ -145,8 +155,8 @@ const ShareImageModal = ({
             <S.SocialMedia className="last" onClick={handleDownloadImage}>
               <Image
                 src="/assets/socialMedia/download-icon.svg"
-                width={56}
-                height={56}
+                width={48}
+                height={48}
               />
               Download
             </S.SocialMedia>

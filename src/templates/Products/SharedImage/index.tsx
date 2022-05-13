@@ -6,6 +6,13 @@ import ChartProducts from '../../../components/ChartProducts'
 import { TokenImages } from '../../../store/modules/poolImages/types'
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
 import substr from '../../../utils/substr'
+import {
+  Background,
+  IconBar,
+  IconBirdKassandra,
+  IconUnion,
+  IconUnionKassandra
+} from './Icons'
 
 import * as S from './styles'
 
@@ -31,7 +38,8 @@ const SharedImage = ({
   )
 
   return (
-    <S.SharedImage>
+    <S.SharedImage className="bg-image-color">
+      <Background />
       <S.Header>
         <S.Title>
           <Image src="/assets/modalShareImage.png" width={40} height={40} />
@@ -56,7 +64,7 @@ const SharedImage = ({
         <S.InfoContainer>
           <S.Info>
             <S.InfoTitle>
-              <Image src="/assets/iconbar.svg" width={20} height={20} />
+              <IconBar />
               <span>Total Perfomance</span>
             </S.InfoTitle>
             {totalPerfomance.startsWith('-') ? (
@@ -67,14 +75,14 @@ const SharedImage = ({
           </S.Info>
           <S.Info>
             <S.InfoTitle>
-              <Image src="/assets/iconbar.svg" width={17.5} height={17.5} />
+              <IconBar />
               <span>Total Value Locked</span>
             </S.InfoTitle>
-            <S.InfoValue color="white">${totalValueLocked}%</S.InfoValue>
+            <S.InfoValue color="white">${totalValueLocked}</S.InfoValue>
           </S.Info>
           <S.Assets>
             <S.InfoTitle>
-              <Image src="/assets/union.svg" width={17.5} height={17.5} />
+              <IconUnion />
               <span>Assets</span>
             </S.InfoTitle>
             <S.AssetsContainer>
@@ -96,19 +104,11 @@ const SharedImage = ({
 
       <S.Footer>
         <S.SocialMedia>
-          <Image
-            src="/assets/icons/bird-kassandra.svg"
-            width={24}
-            height={20}
-          />
+          <IconBirdKassandra />
           dao_kassandra
         </S.SocialMedia>
         <S.SocialMedia>
-          <Image
-            src="/assets/icons/union-kassandra.svg"
-            width={24}
-            height={20}
-          />
+          <IconUnionKassandra />
           kassandra.finance
         </S.SocialMedia>
       </S.Footer>
