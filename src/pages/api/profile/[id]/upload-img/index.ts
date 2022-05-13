@@ -2,6 +2,8 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import formidable from 'formidable'
 import prisma from '../../../../../libs/prisma'
 import { readFileSync } from 'fs'
+import { withIronSessionApiRoute } from 'iron-session/next'
+import { ironSessionConfig } from '../../../../../config/ironSessionConfig'
 
 export const config = {
     api: {
@@ -49,22 +51,20 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
                 })
                 // eslint-disable-next-line prettier/prettier
             }) as formidable.File
-    
-            const readFile = readFileSync(data.filepath)
-    
+            const readFile = readFileSync(data?.filepath)
             const imageBase64 = Buffer.from(readFile).toString('base64')
-    
+            const addBase64Append = `data:image/png;base64,${imageBase64}`
             await prisma.user.update({
                 where: {
                     walletAddress
                 },
                 data: {
-                    image: imageBase64
+                    image: addBase64Append
                 }
             })
     
             return response.status(200).json({
-                message: 'Upload sucess'
+                image: addBase64Append
             })
         }
 
@@ -72,8 +72,9 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
 
         return response.status(405).end(`Method ${method} Not Allowed`)
       } catch (error) {
+        console.log(error)
         return response.status(500).json(error)
       }
 }
 
-export default handler
+export default withIronSessionApiRoute(handler, ironSessionConfig)

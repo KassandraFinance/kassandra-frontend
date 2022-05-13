@@ -1,5 +1,7 @@
+import { withIronSessionApiRoute } from 'iron-session/next'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { checkAddressChecksum } from 'web3-utils'
+import { ironSessionConfig } from '../../../../config/ironSessionConfig'
 import prisma from '../../../../libs/prisma'
 
 interface UserInput {
@@ -12,10 +14,16 @@ interface UserInput {
   image?: string;
 }
 
-const handle = async (request: NextApiRequest, response: NextApiResponse) => {
+export const config = {
+  api: {
+    bodyParser: true
+  }
+}
+
+const handler = async (request: NextApiRequest, response: NextApiResponse) => {
   const { method } = request
   const { id } = request.query
-  const userInput: UserInput = request.body
+
   const walletAddress = Array.isArray(id) ? id[0] : id
 
   try {
@@ -32,6 +40,16 @@ const handle = async (request: NextApiRequest, response: NextApiResponse) => {
     }
 
     if (method === 'POST') {
+      const {
+        description,
+        discord,
+        image,
+        nickname,
+        telegram,
+        twitter,
+        website
+      }: UserInput = request.body
+
       if (
         !request.session?.address ||
         request.session?.address !== walletAddress
@@ -40,8 +58,6 @@ const handle = async (request: NextApiRequest, response: NextApiResponse) => {
       }
 
       const errors = []
-      const { nickname, description, twitter, discord, telegram } = userInput
-
       if (
         (twitter && twitter.length > 50) ||
         (discord && discord.length > 50) ||
@@ -58,24 +74,39 @@ const handle = async (request: NextApiRequest, response: NextApiResponse) => {
         errors.push({ message: 'Description caannot be greater than 500' })
       }
 
-      const user = await prisma.user.findFirst({
+      const user = await prisma.user.findUnique({
         where: {
-          OR: [
-            {
-              walletAddress
-            },
-            {
-              nickname: nickname ?? ''
-            }
-          ]
+          nickname: nickname ?? ''
         }
       })
 
-      if (!errors.length && !user && checkAddressChecksum(walletAddress)) {
-        await prisma.user.create({
-          data: {
+      if (user && user?.walletAddress !== walletAddress) {
+        errors.push({ message: 'Nickname already exist' })
+      }
+
+      if (!errors.length && checkAddressChecksum(walletAddress)) {
+        await prisma.user.upsert({
+          where: {
+            walletAddress
+          },
+          create: {
             walletAddress,
-            ...userInput
+            description,
+            discord,
+            image,
+            nickname,
+            telegram,
+            twitter,
+            website
+          },
+          update: {
+            description,
+            discord,
+            image,
+            nickname,
+            telegram,
+            twitter,
+            website
           }
         })
 
@@ -84,57 +115,6 @@ const handle = async (request: NextApiRequest, response: NextApiResponse) => {
 
       if (!checkAddressChecksum(walletAddress)) {
         errors.push({ message: 'Invalid address' })
-      }
-
-      if (user) {
-        errors.push({ message: 'User already exist' })
-      }
-
-      return response.status(400).json(errors)
-    }
-
-    if (method === 'PUT') {
-      if (
-        !request.session?.address ||
-        request.session?.address !== walletAddress
-      ) {
-        return response.status(401).json({
-          message: 'Unauthorized adress'
-        })
-      }
-
-      const errors = []
-      const { nickname, description } = userInput
-
-      if (nickname && nickname.length > 18) {
-        errors.push({ message: 'Nickname cannot be greater than 18' })
-      }
-
-      if (description && description.length > 500) {
-        errors.push({ message: 'Description caannot be greater than 500' })
-      }
-
-      if (userInput.nickname) {
-        const user = await prisma.user.findUnique({
-          where: {
-            nickname: userInput.nickname
-          }
-        })
-
-        if (user && user.walletAddress !== walletAddress) {
-          errors.push({ message: 'Nickname already exist' })
-        }
-      }
-
-      if (!errors.length) {
-        const result = await prisma.user.update({
-          where: { walletAddress },
-          data: {
-            ...userInput
-          }
-        })
-
-        return response.status(200).json(result)
       }
 
       return response.status(400).json(errors)
@@ -149,4 +129,4 @@ const handle = async (request: NextApiRequest, response: NextApiResponse) => {
   }
 }
 
-export default handle
+export default withIronSessionApiRoute(handler, ironSessionConfig)
