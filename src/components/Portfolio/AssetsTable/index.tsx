@@ -1,22 +1,39 @@
 import React from 'react'
 import Image from 'next/image'
+import useSWR from 'swr'
+import { request } from 'graphql-request'
 
+  SUBGRAPH_URL,
+import { GET_CHART } from './graphql'
 import * as S from './styles'
 
 interface IAssetsTableProps {
-  assets: {
-    name: string,
-    symbol: string,
-    network: string,
-    networkIcon: string,
-    fundIcon: string,
-    price: string,
-    tvl: string,
-    monthUp: number,
-    dayUp: number,
-    balance: string,
-    balanceUSD: string
-  }[];
+export interface IParamsType {
+  id: string[];
+  day: number;
+  month: number;
+}
+  const [params, setParams] = React.useState<IParamsType>({
+    id: [],
+    day: Math.trunc(Date.now() / 1000 - 60 * 60 * 24),
+    month: Math.trunc(Date.now() / 1000 - 60 * 60 * 24 * 30)
+  })
+
+  const { data } = useSWR([GET_CHART, params], (query, params) =>
+    request(SUBGRAPH_URL, query, params)
+  )
+
+  React.useEffect(() => {
+    const arr: string[] = []
+    assets.forEach(asset => {
+      arr.push(asset.sipAddress)
+    })
+
+    setParams(prevState => ({
+      ...prevState,
+      id: arr
+    }))
+  }, [assets])
 }
 
 export const AssetsTable = ({ assets }: IAssetsTableProps) => {
