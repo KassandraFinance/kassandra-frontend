@@ -1,5 +1,7 @@
 /* eslint-disable no-case-declarations */
 import { NextApiRequest, NextApiResponse } from 'next'
+import NextCors from 'nextjs-cors'
+
 import prisma from '../../../libs/prisma'
 
 const handler = async (request: NextApiRequest, response: NextApiResponse) => {
@@ -9,6 +11,13 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
   const { image }: { image: string } = request.body
 
   try {
+    await NextCors(request, response, {
+      // Options
+      methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+      origin: 'https://kassandra.finance',
+      optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+    })
+
     if (method === 'POST') {
       await prisma.sharedImageFund.upsert({
         where: { id: fundId },
