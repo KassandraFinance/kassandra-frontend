@@ -8,11 +8,24 @@ import { GET_CHART } from './graphql'
 import * as S from './styles'
 
 interface IAssetsTableProps {
+
+export interface IChangeType {
+  [key: string]: string;
+}
+
+export interface IPriceType {
+  [key: string]: string;
+}
 export interface IParamsType {
   id: string[];
   day: number;
   month: number;
 }
+  function calcChange(newPrice: number, oldPrice: number) {
+    const calc = ((newPrice - oldPrice) / oldPrice) * 100
+    return calc ? calc.toFixed(2) : '0'
+  }
+
   const [params, setParams] = React.useState<IParamsType>({
     id: [],
     day: Math.trunc(Date.now() / 1000 - 60 * 60 * 24),
@@ -23,6 +36,10 @@ export interface IParamsType {
     request(SUBGRAPH_URL, query, params)
   )
 
+  const [changeDay, setChangeDay] = React.useState<IChangeType>({})
+  const [changeMonth, setChangeMonth] = React.useState<IChangeType>({})
+  const [price, setPrice] = React.useState<IPriceType>({})
+  const [tvl, setTvl] = React.useState<IPriceType>({})
   React.useEffect(() => {
     const arr: string[] = []
     assets.forEach(asset => {
@@ -34,9 +51,52 @@ export interface IParamsType {
       id: arr
     }))
   }, [assets])
+  React.useEffect(() => {
+    if (typeof data === undefined) {
+      return
 }
 
-export const AssetsTable = ({ assets }: IAssetsTableProps) => {
+    data?.pools?.forEach(
+      (element: {
+        now: { close: number }[],
+        day: { close: number }[],
+        month: { close: number }[],
+        id: string,
+        price_usd: string,
+        total_value_locked_usd: string
+      }) => {
+        const changeDay = calcChange(
+          element.now[0]?.close,
+          element.day[0]?.close
+        )
+
+        const changeMonth = calcChange(
+          element.now[0]?.close,
+          element.month[0]?.close
+        )
+
+        setChangeDay(prevState => ({
+          ...prevState,
+          [element.id]: changeDay
+        }))
+
+        setChangeMonth(prevState => ({
+          ...prevState,
+          [element.id]: changeMonth
+        }))
+
+        setPrice(prevState => ({
+          ...prevState,
+          [element.id]: element.price_usd
+        }))
+
+        setTvl(prevState => ({
+          ...prevState,
+          [element.id]: element.total_value_locked_usd
+        }))
+      }
+    )
+  }, [data])
   const Trs = assets.map((asset, index: number) => {
     return (
       <S.Tr key={index}>
