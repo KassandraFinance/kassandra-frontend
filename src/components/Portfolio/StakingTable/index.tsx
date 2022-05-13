@@ -314,7 +314,7 @@ const StakingTable = ({
           <S.Tr>
             <S.Th>Pool Name</S.Th>
             <S.Th>Network</S.Th>
-            <S.Th>APY</S.Th>
+            <S.Th>APR</S.Th>
             <S.Th>TVL</S.Th>
             <S.Th>Staked</S.Th>
             <S.Th>Reward</S.Th>
