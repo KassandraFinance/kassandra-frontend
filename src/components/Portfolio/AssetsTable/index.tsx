@@ -179,7 +179,7 @@ export const AssetsTable = ({
         </S.Td>
         <S.Td>
           <S.NetworkWrapper>
-            <Image src={asset.partners[0].image || ''} width={16} height={16} />
+            <Image src={asset.partners[0].image.src} width={16} height={16} />
             <span>{asset.platform}</span>
           </S.NetworkWrapper>
         </S.Td>
