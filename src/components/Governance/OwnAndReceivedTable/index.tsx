@@ -10,7 +10,7 @@ import { useSelector, RootStateOrAny } from 'react-redux'
 import { BNtoDecimal } from '../../../utils/numerals'
 import substr from '../../../utils/substr'
 
-import AnyCard from '../AnyCard'
+import AnyCard from '../../AnyCard'
 
 import avax from '../../../../public/assets/logo-kacy-stake.svg'
 
@@ -41,7 +41,10 @@ const URL_API: { [key: number | string]: string } = {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const OwnAndReceivedTable = ({ userVotingPower, isDelegationTable }: IOwnAndReceivedTableProps) => {
+export const OwnAndReceivedTable = ({
+  userVotingPower,
+  isDelegationTable
+}: IOwnAndReceivedTableProps) => {
   const [kacyDolarPrice, setKacyDolarPrice] = React.useState(0)
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
@@ -174,6 +177,8 @@ export const OwnAndReceivedTable = ({ userVotingPower, isDelegationTable }: IOwn
               : 'This address doesn’t seem to have received any voting power'
           }
           button={isDelegationTable}
+          link="/farm"
+          buttonText="Stake/Farm"
         />
       ) : (
         <AnyCard

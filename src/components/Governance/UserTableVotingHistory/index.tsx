@@ -8,7 +8,7 @@ import { GovernorAlpha, SUBGRAPH_URL } from '../../../constants/tokenAddresses'
 
 import useGovernance from '../../../hooks/useGovernance'
 
-import AnyCard from '../AnyCard'
+import AnyCard from '../../AnyCard'
 
 import { GET_PROPOSALS } from './graphql'
 
@@ -52,9 +52,14 @@ interface IUserTableProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const UserTableVotingHistory = ({ userAddressUrl, userWalletAddress }: IUserTableProps) => {
+export const UserTableVotingHistory = ({
+  userAddressUrl,
+  userWalletAddress
+}: IUserTableProps) => {
   // eslint-disable-next-line prettier/prettier
-  const [proposalsList, setProposalsList] = React.useState<IProposalsTableProps[]>([])
+  const [proposalsList, setProposalsList] = React.useState<
+    IProposalsTableProps[]
+  >([])
 
   const { data } = useSWR([GET_PROPOSALS], query =>
     request(SUBGRAPH_URL, query, {
@@ -180,6 +185,8 @@ export const UserTableVotingHistory = ({ userAddressUrl, userWalletAddress }: IU
               : 'This address has not voted on a governance proposal yet '
           }
           button={userWalletAddress === userAddressUrl}
+          link="/farm"
+          buttonText="Stake/Farm"
         />
       )}
     </>
