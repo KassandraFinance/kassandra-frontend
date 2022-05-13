@@ -13,10 +13,10 @@ import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
 import { actionGetPoolTokens } from '../../../store/modules/poolTokens/actions'
 
-import { SUBGRAPH_URL, HeimCRPPOOL } from '../../../constants/tokenAddresses'
+import { SUBGRAPH_URL, HeimCRPPOOL, ProxyContract } from '../../../constants/tokenAddresses'
 import { GET_INFO_AHYPE } from '../graphql'
 
-import useCRPContract from '../../../hooks/useCRPContract'
+import useProxy from '../../../hooks/useProxy'
 import useERC20Contract, { ERC20 } from '../../../hooks/useERC20Contract'
 import usePoolContract from '../../../hooks/usePoolContract'
 import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
@@ -36,6 +36,7 @@ import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
 import * as S from './styles'
 import { Titles } from '..'
+import web3 from '../../../utils/web3'
 
 interface IFormProps {
   typeAction: string;
@@ -74,7 +75,7 @@ const Form = ({
 }: IFormProps) => {
   const crpPoolToken = useERC20Contract(crpPoolAddress)
   const corePool = usePoolContract(corePoolAddress)
-  const crpPool = useCRPContract(crpPoolAddress)
+  const crpPool = useProxy(ProxyContract, crpPoolAddress)
   const { userWalletAddress, chainId } = useSelector((state: RootStateOrAny) => state)
   const { trackBuying, trackBought, trackCancelBuying } = useMatomoEcommerce();
 
@@ -162,6 +163,7 @@ const Form = ({
         weight_goal_normalized: string;
         weight_normalized: string;
       }) => {
+        console.log(item.token.symbol)
         return {
           balance_in_pool: item.balance,
           address: item.token.id,
@@ -170,7 +172,7 @@ const Form = ({
           decimals: new BigNumber(item.token.decimals),
           price: Number(item.token.price_usd),
           name: item.token.name,
-          symbol: item.token.symbol
+          symbol: item.token.symbol === 'WAVAX' ? 'AVAX' : item.token.symbol
         }
       })
 
@@ -262,6 +264,12 @@ const Form = ({
     }
 
     setSwapInBalance(new BigNumber(-1))
+    if (swapInAddress === poolChain.wrapped) {
+      web3.eth.getBalance(userWalletAddress)
+        .then(newBalance => setSwapInBalance(new BigNumber(newBalance)))
+
+      return
+    }
 
     const token = ERC20(swapInAddress)
     token
@@ -281,6 +289,10 @@ const Form = ({
       const calc = async () => {
         const newSwapOutBalance = await Promise.all(
           infoAHYPE.map(async item => {
+            if (item.address === poolChain.wrapped) {
+              const balance = await web3.eth.getBalance(userWalletAddress)
+              return new BigNumber(balance)
+            }
             const token = ERC20(item.address)
             return token.balance(userWalletAddress)
           })
@@ -298,6 +310,12 @@ const Form = ({
     }
 
     const token = ERC20(swapOutAddress)
+
+    if (swapOutAddress === poolChain.wrapped) {
+      web3.eth.getBalance(userWalletAddress)
+        .then(newBalance => setSwapOutBalance([new BigNumber(newBalance)]))
+      return
+    }
 
     token
       .balance(userWalletAddress)

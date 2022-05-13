@@ -53,6 +53,11 @@ export const GovernorAlpha = process.env.NEXT_PUBLIC_MASTER === '1' ?
   :
   '0x2B6C46b9552B6Fa36DD097b6527ba20fdDB3FfD5'
 
+export const ProxyContract = process.env.NEXT_PUBLIC_MASTER === '1' ?
+  ''
+  :
+  '0x97e33051B09092C1301A90b964a74cA51C0b068B'
+
 export interface Networks {
   Ropsten: string;
   Avalanche: string;
@@ -96,7 +101,8 @@ export const chains: { [key: string]: ChainDetails } = {
     },
     rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
     blockExplorerUrls: ['https://snowtrace.io/'],
-    secondsPerBlock: 2
+    secondsPerBlock: 2,
+    wrapped: '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
   },
   fuji: {
     chainId: 43113,
@@ -109,7 +115,8 @@ export const chains: { [key: string]: ChainDetails } = {
     },
     rpcUrls: ['https://api.avax-test.network/ext/bc/C/rpc'],
     blockExplorerUrls: ['https://testnet.snowtrace.io/'],
-    secondsPerBlock: 2
+    secondsPerBlock: 2,
+    wrapped: '0xd00ae08403B9bbb9124bB305C09058E32C39A48c',
   }
 }
 
