@@ -9,18 +9,12 @@ import arrowDescend from '../../../public/assets/icons/arrow-descend.svg'
 import * as S from './styles'
 
 interface IPortfolioHeadingProps {
-  image: any;
+  image: string;
   title: string;
   usd: string;
-  change: number;
 }
 
-const PortfolioHeading = ({
-  image,
-  title,
-  usd,
-  change
-}: IPortfolioHeadingProps) => {
+const PortfolioHeading = ({ image, title, usd }: IPortfolioHeadingProps) => {
   return (
     <>
       <S.HeadingWrapper>
@@ -48,7 +42,7 @@ const PortfolioHeading = ({
               {usd} <span>USD</span>
             </S.ValueUSD>
 
-            <S.Change change={change}>
+            {/* <S.Change change={change}>
               <span>{change}%</span>
               <div>
                 <Image
@@ -56,7 +50,7 @@ const PortfolioHeading = ({
                   layout="responsive"
                 />
               </div>
-            </S.Change>
+            </S.Change> */}
           </S.Value>
         </S.TotalContainer>
       </S.HeadingWrapper>
