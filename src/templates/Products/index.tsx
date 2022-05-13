@@ -114,7 +114,11 @@ const Products = ({ product }: Input) => {
   return (
     <S.BackgroundProducts boxShadow={false}>
       <Header />
-      <ShareImageModal setOpenModal={setOpenModal} openModal={openModal}>
+      <ShareImageModal
+        poolId={product.sipAddress}
+        setOpenModal={setOpenModal}
+        openModal={openModal}
+      >
         <SharedImage
           crpPoolAddress={product.sipAddress}
           totalValueLocked={infoPool.tvl}
