@@ -11,6 +11,7 @@ import PortfolioHeading from '../../components/PortfolioHeading'
 import AssetsTable from './AssetsTable'
 import StakingTable from './StakingTable'
 import AnyCard from '../AnyCard'
+import ModalWalletConnect from '../Modals/ModalWalletConnect'
 
 import AssetsIcon from '../../../public/assets/iconGradient/section-title-Assets.svg'
 import StakedPoolsIcon from '../../../public/assets/iconGradient/section-title-Staked-pools.svg'
@@ -55,13 +56,18 @@ interface IStakesType {
   pendingRewards: string;
   rewardPerTokenPaid: string;
 }
+
 const Portfolio = () => {
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { userInfo } = useStakingContract(Staking)
   const [stakes, setStakes] = useState<IStakesType[]>([])
+
   const [totalStaked, setTotalStaked] = React.useState<Big>(Big(0))
   const [totalBalance, setTotalBalance] = React.useState<Big>(Big(0))
   const [myFunds, setMyFunds] = React.useState<ImyFundsType>({})
   const [funds, setFunds] = React.useState<ProductDetails[]>()
+  const [isModalWallet, setIsModalWallet] = React.useState<boolean>(false)
+
   const stakedToken: IstakedTokenType = {
     0: {
       symbol: 'KACY',
@@ -193,7 +199,7 @@ const Portfolio = () => {
             rewardPerTokenPaid: userInfoResponse.rewardPerTokenPaid
           })
         }
-    }
+      }
 
       const results = await Promise.all(arr)
 
@@ -213,13 +219,13 @@ const Portfolio = () => {
       </S.paddingWrapper>
 
       {funds && funds[0] ? (
-      <S.paddingLeftWrapper>
+        <S.paddingLeftWrapper>
           <AssetsTable
             assets={funds}
             walletAddress={userWalletAddress}
             setTotalBalance={setTotalBalance}
           />
-      </S.paddingLeftWrapper>
+        </S.paddingLeftWrapper>
       ) : (
         <S.paddingWrapper>
           {userWalletAddress ? (
@@ -251,13 +257,13 @@ const Portfolio = () => {
       </S.paddingWrapper>
 
       {stakes[0] && parseFloat(stakes[0].amount) > 0 ? (
-      <S.paddingLeftWrapper>
+        <S.paddingLeftWrapper>
           <StakingTable
             stakes={stakes}
             walletAddress={userWalletAddress}
             setTotalStaked={setTotalStaked}
           />
-      </S.paddingLeftWrapper>
+        </S.paddingLeftWrapper>
       ) : (
         <S.paddingWrapper>
           {userWalletAddress ? (
@@ -280,6 +286,7 @@ const Portfolio = () => {
         </S.paddingWrapper>
       )}
 
+      {isModalWallet && <ModalWalletConnect setModalOpen={setIsModalWallet} />}
     </>
   )
 }
