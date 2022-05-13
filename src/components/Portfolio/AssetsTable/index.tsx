@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import useSWR from 'swr'
 import BigNumber from 'bn.js'
+import Big from 'big.js'
 import { request } from 'graphql-request'
 
 import useERC20Contract from '../../../hooks/useERC20Contract'
@@ -45,6 +46,7 @@ export interface IParamsType {
 export const AssetsTable = ({
   assets,
   walletAddress,
+  setTotalBalance
 }: IAssetsTableProps) => {
   function calcChange(newPrice: number, oldPrice: number) {
     const calc = ((newPrice - oldPrice) / oldPrice) * 100
@@ -101,7 +103,7 @@ export const AssetsTable = ({
   React.useEffect(() => {
     if (typeof data === undefined) {
       return
-}
+    }
 
     data?.pools?.forEach(
       (element: {
@@ -144,6 +146,23 @@ export const AssetsTable = ({
       }
     )
   }, [data])
+
+  React.useEffect(() => {
+    let total = Big(0)
+    assets.forEach(asset => {
+      if (balance[asset.sipAddress] && price[asset.sipAddress]) {
+        if (balance[asset.sipAddress].gt(new BigNumber(0))) {
+          total = total.add(
+            Big(balance[asset.sipAddress].toString())
+              .div(Big(10).pow(18))
+              .mul(Big(price[asset.sipAddress]))
+          )
+        }
+      }
+    })
+    setTotalBalance(total)
+  }, [price, assets, balance, setTotalBalance])
+
   const Trs = assets.map((asset, index: number) => {
     return (
       <S.Tr key={index}>

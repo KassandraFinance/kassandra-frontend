@@ -1,6 +1,11 @@
+import React, { useState } from 'react'
+import Big from 'big.js'
 import BigNumber from 'bn.js'
+
+import { useSelector, RootStateOrAny } from 'react-redux'
 import useStakingContract from '../../hooks/useStakingContract'
 import { Staking } from '../../constants/tokenAddresses'
+import useERC20Contract from '../../hooks/useERC20Contract'
 
 import PortfolioHeading from '../../components/PortfolioHeading'
 import AssetsTable from './AssetsTable'
@@ -16,6 +21,13 @@ import iconPangolin from '../../../public/assets/logo-pangolin-40x40.svg'
 import iconTraderJoe from '../../../public/assets/logo-traderJoe.svg'
 
 import { BNtoDecimal } from '../../utils/numerals'
+
+import {
+  products,
+  HeimCRPPOOL,
+  ProductDetails
+} from '../../constants/tokenAddresses'
+
 import * as S from './styles'
 
 interface IstakedTokenType {
@@ -26,6 +38,10 @@ interface IstakedTokenType {
     network: string,
     networkIcon: string
   };
+}
+
+interface ImyFundsType {
+  [key: string]: string;
 }
 
 interface IStakesType {
@@ -43,6 +59,9 @@ const Portfolio = () => {
   const { userInfo } = useStakingContract(Staking)
   const [stakes, setStakes] = useState<IStakesType[]>([])
   const [totalStaked, setTotalStaked] = React.useState<Big>(Big(0))
+  const [totalBalance, setTotalBalance] = React.useState<Big>(Big(0))
+  const [myFunds, setMyFunds] = React.useState<ImyFundsType>({})
+  const [funds, setFunds] = React.useState<ProductDetails[]>()
   const stakedToken: IstakedTokenType = {
     0: {
       symbol: 'KACY',
@@ -101,6 +120,54 @@ const Portfolio = () => {
       networkIcon: AvalancheIcon
     }
   }
+
+  const ahypeERC20 = useERC20Contract(HeimCRPPOOL)
+  //const tricryptoERC20 = useERC20Contract(HeimCRPPOOL)
+
+  async function getBalance(id: string) {
+    if (HeimCRPPOOL === id) {
+      const balanceToken = await ahypeERC20.balance(userWalletAddress)
+
+      if (balanceToken.gt(new BigNumber(0))) {
+        setMyFunds(prevState => ({
+          ...prevState,
+          [id]: id
+        }))
+      }
+    }
+  }
+
+  React.useEffect(() => {
+    products.forEach(product => {
+      getBalance(product.sipAddress)
+    })
+  }, [products])
+
+  React.useEffect(() => {
+    if (!userWalletAddress) {
+      return
+    }
+
+    products.forEach(async product => {
+      const pid = typeof product.pid === 'undefined' ? -1 : product.pid
+      const userInfoResponse = await userInfo(pid, userWalletAddress)
+      if ((await userInfoResponse.amount) > 0) {
+        setMyFunds(prevState => ({
+          ...prevState,
+          [product.sipAddress]: product.sipAddress
+        }))
+      }
+    })
+  }, [userWalletAddress, userInfo])
+
+  React.useEffect(() => {
+    const result = products.filter(product => {
+      return product.sipAddress === myFunds[product.sipAddress]
+    })
+
+    setFunds(result)
+  }, [myFunds])
+
   React.useEffect(() => {
     if (!userWalletAddress) {
       return
@@ -141,14 +208,39 @@ const Portfolio = () => {
         <PortfolioHeading
           image={AssetsIcon}
           title="Assets"
-          usd={'16,000,000.00'}
-          change={0.11}
+          usd={BNtoDecimal(totalBalance, 6, 2, 2)}
         />
       </S.paddingWrapper>
 
+      {funds && funds[0] ? (
       <S.paddingLeftWrapper>
-        <AssetsTable assets={assetsArr} />
+          <AssetsTable
+            assets={funds}
+            walletAddress={userWalletAddress}
+            setTotalBalance={setTotalBalance}
+          />
       </S.paddingLeftWrapper>
+      ) : (
+        <S.paddingWrapper>
+          {userWalletAddress ? (
+            <AnyCard
+              text="Looks like you have not invested in anything yet"
+              button={true}
+              link="/explore"
+              buttonText="I Want To Invest"
+            />
+          ) : (
+            <AnyCard
+              text=""
+              button2={true}
+              buttonText="Connect Wallet"
+              onClick={() => {
+                setIsModalWallet(true)
+              }}
+            />
+          )}
+        </S.paddingWrapper>
+      )}
 
       <S.paddingWrapper>
         <PortfolioHeading
