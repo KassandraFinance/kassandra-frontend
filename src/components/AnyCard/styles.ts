@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import theme from '../../../styles/theme'
+import theme from '../../styles/theme'
 
 export const BackgroundCard = styled.div`
   width: 100%;
@@ -50,5 +50,6 @@ export const BackgroundCard = styled.div`
 
   a {
     margin-top: 2.4rem;
+    text-decoration: none;
   }
 `

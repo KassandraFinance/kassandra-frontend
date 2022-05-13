@@ -17,7 +17,7 @@ import { GET_USER } from './graphql'
 import Header from '../../../components/Header'
 import TitleSection from '../../../components/TitleSection'
 import IntroWalletAddress from '../../../components/Governance/IntroWalletAddress'
-import AnyCard from '../../../components/Governance/AnyCard'
+import AnyCard from '../../../components/AnyCard'
 import Breadcrumb from '../../../components/Breadcrumb'
 import BreadcrumbItem from '../../../components/Breadcrumb/BreadcrumbItem'
 import OwnAndReceivedTable from '../../../components/Governance/OwnAndReceivedTable'
@@ -49,9 +49,13 @@ const WalletAddress = () => {
   // eslint-disable-next-line prettier/prettier
   const [totalUserDelegating, setUserDelegating] = React.useState(Big(0))
   // eslint-disable-next-line prettier/prettier
-  const [userReceivedFromVP, setUserReceivedFromVP] = React.useState<IUserVotingPowerProps[]>([])
+  const [userReceivedFromVP, setUserReceivedFromVP] = React.useState<
+    IUserVotingPowerProps[]
+  >([])
   // eslint-disable-next-line prettier/prettier
-  const [userDelegatingToVP, setUserDelegatingToVP] = React.useState<IUserVotingPowerProps[]>([])
+  const [userDelegatingToVP, setUserDelegatingToVP] = React.useState<
+    IUserVotingPowerProps[]
+  >([])
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 

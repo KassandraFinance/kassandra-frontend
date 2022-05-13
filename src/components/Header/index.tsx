@@ -67,7 +67,8 @@ const Header = () => {
             nameOnHeader="invest"
             linkPage={[
               { name: 'Explore Funds', href: '/explore' },
-              { name: 'Stake/Farm', href: '/farm' }
+              { name: 'Stake/Farm', href: '/farm' },
+              { name: 'My Portfolio', href: '/profile' }
             ]}
           />
           {/* <Link href="/farm" passHref>
