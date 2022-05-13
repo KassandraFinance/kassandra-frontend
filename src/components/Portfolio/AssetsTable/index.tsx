@@ -1,13 +1,28 @@
 import React from 'react'
 import Image from 'next/image'
 import useSWR from 'swr'
+import BigNumber from 'bn.js'
 import { request } from 'graphql-request'
 
+import useERC20Contract from '../../../hooks/useERC20Contract'
+
+import {
   SUBGRAPH_URL,
+  ProductDetails,
+  HeimCRPPOOL
+} from '../../../constants/tokenAddresses'
+
 import { GET_CHART } from './graphql'
+
+import { BNtoDecimal } from '../../../utils/numerals'
+
 import * as S from './styles'
 
 interface IAssetsTableProps {
+  assets: ProductDetails[];
+  walletAddress: string;
+  setTotalBalance: React.Dispatch<React.SetStateAction<Big>>;
+}
 
 export interface IChangeType {
   [key: string]: string;
@@ -16,11 +31,21 @@ export interface IChangeType {
 export interface IPriceType {
   [key: string]: string;
 }
+
+export interface IBalanceType {
+  [key: string]: BigNumber;
+}
+
 export interface IParamsType {
   id: string[];
   day: number;
   month: number;
 }
+
+export const AssetsTable = ({
+  assets,
+  walletAddress,
+}: IAssetsTableProps) => {
   function calcChange(newPrice: number, oldPrice: number) {
     const calc = ((newPrice - oldPrice) / oldPrice) * 100
     return calc ? calc.toFixed(2) : '0'
@@ -40,6 +65,21 @@ export interface IParamsType {
   const [changeMonth, setChangeMonth] = React.useState<IChangeType>({})
   const [price, setPrice] = React.useState<IPriceType>({})
   const [tvl, setTvl] = React.useState<IPriceType>({})
+  const [balance, setBalance] = React.useState<IBalanceType>({})
+
+  const ahypeERC20 = useERC20Contract(HeimCRPPOOL)
+  //const tricryptoERC20 = useERC20Contract(HeimCRPPOOL)
+
+  async function getBalance(id: string) {
+    if (HeimCRPPOOL === id) {
+      const balanceToken = await ahypeERC20.balance(walletAddress)
+      setBalance(prevState => ({
+        ...prevState,
+        [id]: balanceToken
+      }))
+    }
+  }
+
   React.useEffect(() => {
     const arr: string[] = []
     assets.forEach(asset => {
@@ -51,6 +91,13 @@ export interface IParamsType {
       id: arr
     }))
   }, [assets])
+
+  React.useEffect(() => {
+    assets.forEach(asset => {
+      getBalance(asset.sipAddress)
+    })
+  }, [assets])
+
   React.useEffect(() => {
     if (typeof data === undefined) {
       return
@@ -113,24 +160,46 @@ export interface IParamsType {
         </S.Td>
         <S.Td>
           <S.NetworkWrapper>
-            <Image src={asset.networkIcon} width={16} height={16} />
-            <span>{asset.network}</span>
+            <Image src={asset.partners[0].image} width={16} height={16} />
+            <span>{asset.platform}</span>
           </S.NetworkWrapper>
         </S.Td>
-        <S.Td>${asset.price}</S.Td>
-        <S.Td>${asset.tvl}</S.Td>
+        <S.Td>${parseFloat(price[asset.sipAddress]).toFixed(2)}</S.Td>
+        <S.Td>${parseFloat(tvl[asset.sipAddress]).toFixed(2)}</S.Td>
         <S.Td>
-          <S.Change change={asset.monthUp}>{asset.monthUp}%</S.Change>
+          <S.Change change={parseFloat(changeMonth[asset.sipAddress])}>
+            {changeMonth[asset.sipAddress]}%
+          </S.Change>
         </S.Td>
         <S.Td>
-          <S.Change change={asset.dayUp}>{asset.dayUp}%</S.Change>
+          <S.Change change={parseFloat(changeDay[asset.sipAddress])}>
+            {changeDay[asset.sipAddress]}%
+          </S.Change>
         </S.Td>
         <S.Td>
           <S.FlexWrapper>
             <div>
-              {asset.balance} <span>{asset.symbol}</span>
+              {balance[asset.sipAddress]
+                ? BNtoDecimal(
+                    Big(balance[asset.sipAddress].toString()).div(
+                      Big(10).pow(18)
+                    ),
+                    2
+                  )
+                : 0}{' '}
+              <span>{asset.symbol}</span>
             </div>
-            <span>${asset.balanceUSD}</span>
+            <span>
+              $
+              {balance[asset.sipAddress] && price[asset.sipAddress]
+                ? BNtoDecimal(
+                    Big(balance[asset.sipAddress].toString())
+                      .div(Big(10).pow(18))
+                      .mul(Big(price[asset.sipAddress])),
+                    2
+                  )
+                : 0}
+            </span>
           </S.FlexWrapper>
         </S.Td>
       </S.Tr>
