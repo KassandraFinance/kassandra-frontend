@@ -7,9 +7,9 @@ import { request } from 'graphql-request'
 
 import {
   Staking,
-  LPKacyAvax,
+  LPKacyAvaxPNG,
   LPDaiAvax,
-  LPKacyAvaxJoe,
+  LPKacyAvaxJOE,
   HeimCRPPOOL,
   SUBGRAPH_URL
 } from '../../../constants/tokenAddresses'
@@ -63,8 +63,8 @@ const StakingTable = ({
 }: IStakingTableProps) => {
   const { poolInfo, earned } = useStakingContract(Staking)
   const { viewgetReserves } = usePriceLP()
-  const lpToken = useERC20Contract(LPKacyAvax)
-  const lpJoeToken = useERC20Contract(LPKacyAvaxJoe)
+  const lpToken = useERC20Contract(LPKacyAvaxPNG)
+  const lpJoeToken = useERC20Contract(LPKacyAvaxJOE)
 
   const [apr, setApr] = React.useState<IAprType>({})
   const [trs, setTrs] = React.useState<JSX.Element[]>()
@@ -98,8 +98,8 @@ const StakingTable = ({
   }, [priceToken, stakes, setTotalStaked])
 
   async function handleLPtoUSD() {
-    const reservesKacyAvax = await viewgetReserves(LPKacyAvax)
-    const reservesKacyAvaxJoe = await viewgetReserves(LPKacyAvaxJoe)
+    const reservesKacyAvax = await viewgetReserves(LPKacyAvaxPNG)
+    const reservesKacyAvaxJoe = await viewgetReserves(LPKacyAvaxJOE)
     const reservesDaiAvax = await viewgetReserves(LPDaiAvax)
 
     let kacyReserve = reservesKacyAvax._reserve1
