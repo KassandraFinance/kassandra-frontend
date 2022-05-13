@@ -91,7 +91,7 @@ export const Tr = styled.tr`
   padding: 2.4rem 0;
 
   @media (max-width: 540px) {
-    grid-template-columns: 1.5fr 0.5fr repeat(5, 1fr);
+    grid-template-columns: 1fr 0.5fr repeat(4, 1fr);
 
     margin: 0 2rem;
     padding: 2rem 0;
