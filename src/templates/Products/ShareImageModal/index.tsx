@@ -17,8 +17,7 @@ interface ShareImageProps {
   poolId: string;
 }
 
-const baseURL = 'http://localhost:3000'
-// const baseURL = 'https://alpha.kassandra.finance'
+const baseURL = 'https://alpha.kassandra.finance'
 
 const ShareImageModal = ({
   setOpenModal,
