@@ -1,3 +1,4 @@
+import React from 'react'
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
 import Head from 'next/head'
 
@@ -10,7 +11,14 @@ const Page = ({ id }: Props) => {
     process.env.NODE_ENV === 'production'
       ? 'https://alpha.kassandra.finance'
       : 'http://localhost:3000'
-  console.log(`${baseUrl}/api/funds/shared?id=${id}`)
+
+  React.useEffect(() => {
+    document
+      // eslint-disable-next-line prettier/prettier
+      .querySelector("meta[property='og:image']")!
+      .setAttribute('content', `${baseUrl}/api/funds/shared?id=${id}`)
+  }, [baseUrl, id])
+
   return (
     <>
       <Head>
@@ -40,10 +48,19 @@ const Page = ({ id }: Props) => {
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ): Promise<GetServerSidePropsResult<Props>> => {
+  const getUrlBasedOnParams =
+    context.params?.id === '0x38918142779e2CD1189cBd9e932723C968363D1E'
+      ? 'ahype'
+      : 'tricrypto'
+
   if (typeof context.params?.id === 'string') {
     return {
       props: {
         id: context.params?.id
+      },
+      redirect: {
+        destination: `/explore/${getUrlBasedOnParams}`,
+        permanent: false
       }
     }
   } else {

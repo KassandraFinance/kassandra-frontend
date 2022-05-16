@@ -124,6 +124,7 @@ const Products = ({ product }: Input) => {
           totalValueLocked={infoPool.tvl}
           socialIndex={product.symbol}
           totalPerfomance={totalPerfomance}
+          productName={product.name}
         />
       </ShareImageModal>
       <Breadcrumb>

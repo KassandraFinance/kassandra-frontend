@@ -111,7 +111,7 @@ export const LabelPeriod = styled.label<ILabelPeriodProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   height: 30px;
   min-width: ${props => (props.isPrice ? '33px' : '31px')};
   padding: 10px 8px;
@@ -169,11 +169,17 @@ export const Label = styled.label<ILabelProps>`
   }
 `
 
-export const Wrapper = styled.div`
+interface IWrapperProps {
+  height: number;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const Wrapper = styled.div<IWrapperProps>`
   background-color: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.04);
-  border-radius: 25px;
-  margin: 25px 0;
+  border-radius: 2.5rem;
+  // margin: 25px 0;
   width: 100%;
   height: 360px;
+  height: ${({ height }) => (height === 320 ? 320 : 360)}px;
 `

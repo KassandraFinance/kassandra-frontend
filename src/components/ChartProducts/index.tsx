@@ -235,7 +235,7 @@ const ChartProducts = ({
         </S.SelectPeriod>
       </S.Selects>
       {loading ? (
-        <S.Wrapper>
+        <S.Wrapper height={height}>
           <Loading marginTop={14} />
         </S.Wrapper>
       ) : null}
