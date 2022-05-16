@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { SWRConfig } from 'swr'
 
 import Home from '../templates/Home'
@@ -10,6 +11,14 @@ export default function Index() {
         fetcher: url => fetch(url).then(res => res.json())
       }}
     >
+      <Head>
+        <meta
+          property="og:image"
+          content="https://kassandra.finance/kacy-og.png"
+        />
+        <meta property="og:image:width" content="1012" />
+        <meta property="og:image:height" content="506" />
+      </Head>
       <Home />
     </SWRConfig>
   )
