@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 import useSWR from 'swr'
@@ -61,6 +62,7 @@ const StakingTable = ({
   profileAddress,
   setTotalStaked
 }: IStakingTableProps) => {
+  const router = useRouter()
   const { poolInfo, earned } = useStakingContract(Staking)
   const { viewgetReserves } = usePriceLP()
   const lpToken = useERC20Contract(LPKacyAvaxPNG)
@@ -237,7 +239,12 @@ const StakingTable = ({
     if (stakes[0] && stakes[0].amount) {
       arr = stakes.map((stake, index: number) => {
         return (
-          <S.Tr key={index}>
+          <S.Tr
+            key={index}
+            onClick={() => {
+              router.push('/farm')
+            }}
+          >
             <S.Td>
               <S.PoolWrapper>
                 <span>${stake?.poolName}</span>
