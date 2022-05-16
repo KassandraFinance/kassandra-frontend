@@ -50,7 +50,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
           />
           <meta property="og:site_name" content="Kassandra" />
           <meta property="og:type" content="website" />
-          <meta property="og:url" content="https://kassandra.finance/" />
+          {/* <meta property="og:url" content="https://kassandra.finance/" /> */}
           <meta property="og:title" content="Kassandra - Decentralized Funds" />
           <meta
             property="og:image:alt"
