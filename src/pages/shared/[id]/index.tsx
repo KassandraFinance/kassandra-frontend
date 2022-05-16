@@ -12,12 +12,12 @@ const Page = ({ id }: Props) => {
       ? 'https://alpha.kassandra.finance'
       : 'http://localhost:3000'
 
-  React.useEffect(() => {
-    document
-      // eslint-disable-next-line prettier/prettier
-      .querySelector("meta[property='og:image']")!
-      .setAttribute('content', `${baseUrl}/api/funds/shared?id=${id}`)
-  }, [baseUrl, id])
+//   React.useEffect(() => {
+//     document
+//       // eslint-disable-next-line prettier/prettier
+//       .querySelector("meta[property='og:image']")!
+//       .setAttribute('content', `${baseUrl}/api/funds/shared?id=${id}`)
+//   }, [baseUrl, id])
 
   return (
     <>
@@ -58,10 +58,10 @@ export const getServerSideProps = async (
       props: {
         id: context.params?.id
       },
-      redirect: {
-        destination: `/explore/${getUrlBasedOnParams}`,
-        permanent: false
-      }
+//       redirect: {
+//         destination: `/explore/${getUrlBasedOnParams}`,
+//         permanent: false
+//       }
     }
   } else {
     return {
