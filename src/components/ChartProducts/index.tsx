@@ -19,9 +19,13 @@ const arrPeriod: string[] = ['1W', '1M', '3M', '1Y']
 
 interface IChartProductsProps {
   crpPoolAddress: string;
+  height?: number;
 }
 
-const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
+const ChartProducts = ({
+  crpPoolAddress,
+  height = 360
+}: IChartProductsProps) => {
   const [inputChecked, setInputChecked] = React.useState<string>('Price')
   const [price, setPrice] = React.useState([])
   const [tvl, setTvl] = React.useState([])
@@ -236,13 +240,13 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
         </S.Wrapper>
       ) : null}
       {inputChecked === 'Price' && !loading && (
-        <ChartPrice data={price} color="#E843C4" />
+        <ChartPrice height={height} data={price} color="#E843C4" />
       )}
       {inputChecked === 'TVL' && !loading && (
-        <ChartTVL data={tvl} color="#26DBDB" />
+        <ChartTVL height={height} data={tvl} color="#26DBDB" />
       )}
       {inputChecked === 'Allocation' && !loading && (
-        <ChartAllocation data={allocation} />
+        <ChartAllocation height={height} data={allocation} />
       )}
     </S.ChartProduct>
   )
