@@ -19,7 +19,7 @@ import * as S from './styles'
 
 const Gov = () => {
   return (
-    <S.BackgroundVote>
+    <>
       <Header />
       <Breadcrumb>
         <BreadcrumbItem href="/">Home</BreadcrumbItem>
@@ -63,7 +63,7 @@ const Gov = () => {
         <VotingPowerTable />
         <ExternalLink hrefNext="/gov/leaderboard" text="Check leaderboard" />
       </S.VoteContent>
-    </S.BackgroundVote>
+    </>
   )
 }
 

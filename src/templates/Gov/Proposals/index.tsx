@@ -20,7 +20,7 @@ const AllProposals = () => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
   return (
-    <S.BackgroundVote>
+    <>
       <Header />
       <Breadcrumb>
         <BreadcrumbItem href="/">Home</BreadcrumbItem>
@@ -66,7 +66,7 @@ const AllProposals = () => {
           <ProposalTable />
         </S.AllProposalsContent>
       </S.VoteContent>
-    </S.BackgroundVote>
+    </>
   )
 }
 

@@ -146,7 +146,7 @@ const WalletAddress = () => {
   }, [data, userWalletAddress, address])
 
   return (
-    <S.BackgroundVote>
+    <>
       <Header />
       <Breadcrumb>
         <BreadcrumbItem href="/">Home</BreadcrumbItem>
@@ -208,7 +208,7 @@ const WalletAddress = () => {
           userWalletAddress={userWalletAddress}
         />
       </S.VoteContent>
-    </S.BackgroundVote>
+    </>
   )
 }
 

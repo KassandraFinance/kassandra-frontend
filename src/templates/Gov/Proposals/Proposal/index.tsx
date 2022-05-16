@@ -175,7 +175,8 @@ const Proposal = () => {
     yourVotingPowerInProposal: new BigNumber(0)
   })
   // eslint-disable-next-line prettier/prettier
-  const [yourVotingPowerInProposal, setYourVotingPowerInProposal] = React.useState(new BigNumber(0))
+  const [yourVotingPowerInProposal, setYourVotingPowerInProposal] =
+    React.useState(new BigNumber(0))
 
   const router = useRouter()
   const governance = useGovernance(GovernorAlpha)
@@ -610,7 +611,7 @@ const Proposal = () => {
 
   return (
     <>
-      <S.BackgroundVote>
+      <>
         <Header />
         <Breadcrumb>
           <BreadcrumbItem href="/">Home</BreadcrumbItem>
@@ -683,7 +684,12 @@ const Proposal = () => {
                   voteType: 'For',
                   percentage: `${percentageVotes.for}`,
                   // eslint-disable-next-line prettier/prettier
-                  totalVotingPower: `${BNtoDecimal(proposal.forVotes, 0, 2, 2)}`,
+                  totalVotingPower: `${BNtoDecimal(
+                    proposal.forVotes,
+                    0,
+                    2,
+                    2
+                  )}`,
                   checkAllVoterModal: true
                 })
                 setIsModalOpen(true)
@@ -701,7 +707,12 @@ const Proposal = () => {
                   voteType: 'Against',
                   percentage: `${percentageVotes.against}`,
                   // eslint-disable-next-line prettier/prettier
-                  totalVotingPower: `${BNtoDecimal(proposal.againstVotes, 0, 2, 2)}`,
+                  totalVotingPower: `${BNtoDecimal(
+                    proposal.againstVotes,
+                    0,
+                    2,
+                    2
+                  )}`,
                   checkAllVoterModal: false
                 })
                 setIsModalOpen(true)
@@ -914,7 +925,7 @@ const Proposal = () => {
             </S.Steps>
           </S.ProposalStatus>
         </S.ProposalInfo>
-      </S.BackgroundVote>
+      </>
       {isModalOpen && (
         <ModalVotes
           voteType={modalVotes.voteType}

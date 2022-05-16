@@ -12,7 +12,7 @@ import { products } from '../../constants/tokenAddresses'
 
 export default function Explore() {
   return (
-    <S.BackgroundProducts boxShadow={false}>
+    <>
       <Header />
 
       <Breadcrumb>
@@ -37,6 +37,6 @@ export default function Explore() {
           })}
         </S.CardContainer>
       </S.Explore>
-    </S.BackgroundProducts>
+    </>
   )
 }

@@ -12,7 +12,7 @@ import * as S from '../../templates/Gov/Proposals/styles'
 
 const Leaderboard = () => {
   return (
-    <S.BackgroundVote>
+    <>
       <Header />
       <Breadcrumb>
         <BreadcrumbItem href="/">Home</BreadcrumbItem>
@@ -27,7 +27,7 @@ const Leaderboard = () => {
           <VotingPowerTable />
         </S.VotingPowerLeaderboard>
       </S.VoteContent>
-    </S.BackgroundVote>
+    </>
   )
 }
 

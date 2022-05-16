@@ -1,17 +1,6 @@
 import styled from 'styled-components'
 import theme from '../../styles/theme'
 
-export const BackgroundStakeFarm = styled.div`
-  background: url('/assets/newbg4.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-
-  box-shadow: inset 0px -20px 20px 0px #151117;
-  padding: 0 0 80px;
-`
-
 export const StakeFarm = styled.section`
   max-width: 945px;
   margin: 0 auto;
@@ -34,7 +23,10 @@ interface INameStakeProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const NameStake = styled.div<INameStakeProps>`
+export const NameStake =
+  styled.div <
+  INameStakeProps >
+  `
   p {
     color: #bdbdbd;
     font-size: ${theme.font.sizes.font18};

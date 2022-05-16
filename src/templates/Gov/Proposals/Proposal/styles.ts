@@ -5,17 +5,6 @@ import * as VotingPowerStyles from '../../../../components/VotingPower/styles'
 import * as VoteCardStyle from '../../../../components/Governance/VoteCard/styles'
 import * as ButtonStyles from '../../../../components/Button/styles'
 
-export const BackgroundVote = styled.div`
-  padding-bottom: 8rem;
-
-  background-image: url('/assets/newbg4.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-
-  box-shadow: inset 0 -2rem 2rem 0 #151117;
-`
 export const VoteContent = styled.div`
   max-width: 114rem;
   margin: 0 auto;

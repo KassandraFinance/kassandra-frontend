@@ -1,23 +1,6 @@
 import styled from 'styled-components'
 import theme from '../../styles/theme'
 
-interface IBackgroundProductsProps {
-  boxShadow: boolean;
-}
-
-// eslint-disable-next-line prettier/prettier
-export const BackgroundProducts = styled.div<IBackgroundProductsProps>`
-  background-image: url('/assets/bg-products.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position-x: 50%;
-
-  ${props =>
-    props.boxShadow
-      ? ''
-      : 'box-shadow: inset 0px -20px 20px 0px #151117; padding: 0 0 80px;'};
-`
-
 export const Product = styled.section`
   display: grid;
   grid-template-columns: minmax(300px, 584px) 448px;
@@ -57,7 +40,10 @@ interface IIntroProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const Intro = styled.div<IIntroProps>`
+export const Intro =
+  styled.div <
+  IIntroProps >
+  `
   display: grid;
   grid-template-columns: auto auto;
   align-items: center;
@@ -128,7 +114,10 @@ interface INameAndSymbolProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const NameAndSymbol = styled.div<INameAndSymbolProps>`
+export const NameAndSymbol =
+  styled.div <
+  INameAndSymbolProps >
+  `
   display: flex;
   align-items: flex-start;
   gap: 1.6rem;

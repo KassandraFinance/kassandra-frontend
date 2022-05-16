@@ -28,6 +28,8 @@ const instance = createInstance({
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter()
+  const pathName = router.pathname
+
   return (
     <MatomoProvider value={instance}>
       <ThemeProvider theme={theme}>
@@ -82,7 +84,11 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
           />
         </Head>
         <Toastify />
-        <GlobalStyles />
+        <GlobalStyles
+          selectBackground={
+            pathName === '/' ? false : pathName === '/about' ? false : true
+          }
+        />
         <Component {...pageProps} />
         {router.pathname !== '/404' && <Footer />}
       </ThemeProvider>

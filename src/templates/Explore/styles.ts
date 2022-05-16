@@ -6,21 +6,6 @@ interface IBackgroundProductsProps {
   boxShadow: boolean;
 }
 
-// prettier-ignore
-export const BackgroundProducts = styled.div<IBackgroundProductsProps>`
-  background-image: url('/assets/bg-products.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position-x: 50%;
-
-
-  ${props =>
-    props.boxShadow
-      ? ''
-      : 'box-shadow: inset 0px -20px 20px 0px #151117; padding: 0 0 80px;'};
-
-`
-
 export const Explore = styled.section`
   margin: 0 auto;
   max-width: 1140px;
