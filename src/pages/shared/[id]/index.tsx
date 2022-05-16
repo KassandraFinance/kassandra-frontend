@@ -57,11 +57,11 @@ export const getServerSideProps = async (
     return {
       props: {
         id: context.params?.id
+      },
+      redirect: {
+        destination: `/explore/${getUrlBasedOnParams}`,
+        permanent: false
       }
-      // redirect: {
-      //   destination: `/explore/${getUrlBasedOnParams}`,
-      //   permanent: false
-      // }
     }
   } else {
     return {
