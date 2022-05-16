@@ -3,6 +3,7 @@ import Big from 'big.js'
 import BigNumber from 'bn.js'
 
 import { useSelector, RootStateOrAny } from 'react-redux'
+
 import useStakingContract from '../../hooks/useStakingContract'
 import { Staking } from '../../constants/tokenAddresses'
 import useERC20Contract from '../../hooks/useERC20Contract'
@@ -31,6 +32,10 @@ import {
 
 import * as S from './styles'
 
+interface IProfileProps {
+  profileAddress: string;
+}
+
 interface IstakedTokenType {
   [key: number]: {
     symbol: string,
@@ -57,7 +62,7 @@ interface IStakesType {
   rewardPerTokenPaid: string;
 }
 
-const Portfolio = () => {
+const Portfolio = ({ profileAddress }: IProfileProps) => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { userInfo } = useStakingContract(Staking)
   const [stakes, setStakes] = useState<IStakesType[]>([])
@@ -132,7 +137,7 @@ const Portfolio = () => {
 
   async function getBalance(id: string) {
     if (HeimCRPPOOL === id) {
-      const balanceToken = await ahypeERC20.balance(userWalletAddress)
+      const balanceToken = await ahypeERC20.balance(profileAddress)
 
       if (balanceToken.gt(new BigNumber(0))) {
         setMyFunds(prevState => ({
@@ -144,19 +149,23 @@ const Portfolio = () => {
   }
 
   React.useEffect(() => {
+    setMyFunds({})
+  }, [profileAddress])
+
+  React.useEffect(() => {
     products.forEach(product => {
       getBalance(product.sipAddress)
     })
-  }, [products])
+  }, [products, profileAddress])
 
   React.useEffect(() => {
-    if (!userWalletAddress) {
+    if (!profileAddress) {
       return
     }
 
     products.forEach(async product => {
       const pid = typeof product.pid === 'undefined' ? -1 : product.pid
-      const userInfoResponse = await userInfo(pid, userWalletAddress)
+      const userInfoResponse = await userInfo(pid, profileAddress)
       if ((await userInfoResponse.amount) > 0) {
         setMyFunds(prevState => ({
           ...prevState,
@@ -164,7 +173,7 @@ const Portfolio = () => {
         }))
       }
     })
-  }, [userWalletAddress, userInfo])
+  }, [profileAddress, userInfo])
 
   React.useEffect(() => {
     const result = products.filter(product => {
@@ -175,7 +184,7 @@ const Portfolio = () => {
   }, [myFunds])
 
   React.useEffect(() => {
-    if (!userWalletAddress) {
+    if (!profileAddress) {
       return
     }
 
@@ -184,7 +193,7 @@ const Portfolio = () => {
     const arr: IStakesType[] = []
     const asyncFunc = async () => {
       for (let pid = 0; pid < pids.length - 1; pid++) {
-        const userInfoResponse = await userInfo(pid, userWalletAddress)
+        const userInfoResponse = await userInfo(pid, profileAddress)
 
         if ((await userInfoResponse.amount) > 0) {
           arr.push({
@@ -206,7 +215,7 @@ const Portfolio = () => {
       setStakes(results)
     }
     asyncFunc()
-  }, [userWalletAddress, userInfo])
+  }, [profileAddress, userInfo])
 
   return (
     <>
@@ -222,13 +231,13 @@ const Portfolio = () => {
         <S.paddingLeftWrapper>
           <AssetsTable
             assets={funds}
-            walletAddress={userWalletAddress}
+            profileAddress={profileAddress}
             setTotalBalance={setTotalBalance}
           />
         </S.paddingLeftWrapper>
       ) : (
         <S.paddingWrapper>
-          {userWalletAddress ? (
+          {profileAddress === userWalletAddress ? (
             <AnyCard
               text="Looks like you have not invested in anything yet"
               button={true}
@@ -236,14 +245,7 @@ const Portfolio = () => {
               buttonText="I Want To Invest"
             />
           ) : (
-            <AnyCard
-              text=""
-              button2={true}
-              buttonText="Connect Wallet"
-              onClick={() => {
-                setIsModalWallet(true)
-              }}
-            />
+            <AnyCard text="This address has not yet invested in anything" />
           )}
         </S.paddingWrapper>
       )}
@@ -260,13 +262,13 @@ const Portfolio = () => {
         <S.paddingLeftWrapper>
           <StakingTable
             stakes={stakes}
-            walletAddress={userWalletAddress}
+            profileAddress={profileAddress}
             setTotalStaked={setTotalStaked}
           />
         </S.paddingLeftWrapper>
       ) : (
         <S.paddingWrapper>
-          {userWalletAddress ? (
+          {profileAddress === userWalletAddress ? (
             <AnyCard
               text="It seems you have not staked any KACY"
               button={true}
@@ -274,14 +276,7 @@ const Portfolio = () => {
               buttonText="I Want To Stake Some Tokens"
             />
           ) : (
-            <AnyCard
-              text=""
-              button2={true}
-              buttonText="Connect Wallet"
-              onClick={() => {
-                setIsModalWallet(true)
-              }}
-            />
+            <AnyCard text="This address has nothing staked" />
           )}
         </S.paddingWrapper>
       )}

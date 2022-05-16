@@ -21,7 +21,7 @@ import * as S from './styles'
 
 interface IAssetsTableProps {
   assets: ProductDetails[];
-  walletAddress: string;
+  profileAddress: string;
   setTotalBalance: React.Dispatch<React.SetStateAction<Big>>;
 }
 
@@ -45,7 +45,7 @@ export interface IParamsType {
 
 export const AssetsTable = ({
   assets,
-  walletAddress,
+  profileAddress,
   setTotalBalance
 }: IAssetsTableProps) => {
   function calcChange(newPrice: number, oldPrice: number) {
@@ -74,7 +74,7 @@ export const AssetsTable = ({
 
   async function getBalance(id: string) {
     if (HeimCRPPOOL === id) {
-      const balanceToken = await ahypeERC20.balance(walletAddress)
+      const balanceToken = await ahypeERC20.balance(profileAddress)
       setBalance(prevState => ({
         ...prevState,
         [id]: balanceToken
