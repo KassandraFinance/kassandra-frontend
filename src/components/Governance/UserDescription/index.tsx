@@ -14,22 +14,49 @@ import ModalUserEditInfo from '../../Modals/ModalUserEditInfo'
 import NftImage from '../../NftImage'
 
 import * as S from './styles'
+import { RootStateOrAny, useSelector } from 'react-redux'
+import substr from '../../../utils/substr'
 
-const userDescriptionTest =
-  'Lorem ipsum dolor sit amet. Nndae voluptate aut galisum voluptatum noncusandae voluptate aut galisum voluptatum noncusandae voluptate aut galisum voluptatum noneum esse tempora sit iusto laudantium At saepe molestiae et odit excepturi. Et laudantium repudiandae sed molestias voluptatem aut exercitationem possimus ut ducimus enim vel reiciendis dolor quo optio excepturi est minima corrupti. Aut dicta voluptatibus ea quisquam dolore sit voluptatem porro sit fugiat voluptas ad perferendis perferendis est aspernatur quae qui blanditiis magnam'
+type UserProps = {
+  nickname: string,
+  twitter: string,
+  website: string,
+  telegram: string,
+  discord: string,
+  description: string,
+  image?: string
+}
 
 const UserDescription = () => {
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const [isOpenModal, setIsOpenModal] = React.useState(false)
   const [isStateSeeMore, setIsStateSeeMore] = React.useState(false)
-  const [userDescription, setUserDescription] =
-    React.useState(userDescriptionTest)
-  const [userData, setUserData] = React.useState({
+  const [userDescription, setUserDescription] = React.useState('')
+
+  const [imageUser, setImageUser] = React.useState('')
+
+  const [userData, setUserData] = React.useState<UserProps>({
+    nickname: '',
+    twitter: '',
+    website: '',
+    telegram: '',
+    discord: '',
     description: ''
   })
 
   React.useEffect(() => {
-    setUserData({ description: userDescriptionTest })
-  }, [userDescriptionTest])
+    if (!userWalletAddress) return
+    fetch(`/api/profile/${userWalletAddress}`)
+      .then(res => res.json())
+      .then(data => {
+        const { image, ...profile } = data
+        setUserData({
+          ...profile,
+          description: profile.description ?? ''
+        }),
+          setImageUser(image)
+      })
+  }, [userWalletAddress])
 
   React.useEffect(() => {
     if (window.screen.width > 768) {
@@ -52,8 +79,8 @@ const UserDescription = () => {
       <S.UserDescription>
         <S.UserInfo>
           <S.UserInfoContent>
-            <Image
-              src={userProfile}
+            <img
+              src={imageUser ? imageUser : userProfile}
               alt="Image from User"
               width={80}
               height={80}
@@ -73,10 +100,10 @@ const UserDescription = () => {
             </button>
           </S.UserInfoContent>
           <S.UserProfileContent>
-            <p>Cool Dude</p>
+            <p>{userData.nickname}</p>
             <S.UserAddressContent>
-              0xDE...8dA1
-              <CopyToClipboard text="COLOCAR AQUI A CARTEIRA DO USUÁRIO PARA COPIAR">
+              {substr(userWalletAddress)}
+              <CopyToClipboard text={userWalletAddress}>
                 <button onClick={() => ToastInfo('Copy address')}>
                   <svg
                     width="14"
@@ -94,7 +121,7 @@ const UserDescription = () => {
               </CopyToClipboard>
               <a
                 // COLOCAR A CARTEIRA DO USUÁRIO APÓS A "...address/" \/
-                href={`https://testnet.snowtrace.io/address/`}
+                href={`https://testnet.snowtrace.io/address/${userWalletAddress}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -120,7 +147,7 @@ const UserDescription = () => {
             <ul>
               <li>
                 <S.SocialIcon
-                  href="https://twitter.com/dao_kassandra"
+                  href={`https://discord.com/${userData.discord}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -134,7 +161,7 @@ const UserDescription = () => {
               </li>
               <li>
                 <S.SocialIcon
-                  href="https://twitter.com/dao_kassandra"
+                  href={`https://twitter.com/${userData.twitter}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -148,7 +175,7 @@ const UserDescription = () => {
               </li>
               <li>
                 <S.SocialIcon
-                  href="https://twitter.com/dao_kassandra"
+                  href={`https://telegram.com/${userData.telegram}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -162,7 +189,7 @@ const UserDescription = () => {
               </li>
               <li>
                 <S.SocialIcon
-                  href="https://twitter.com/dao_kassandra"
+                  href={userData.website}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -202,7 +229,9 @@ const UserDescription = () => {
             </Tippy>
           </p>
           <S.DescriptionManagerInfo>
-            {userDescription}
+            {userDescription === ''
+              ? 'This address has not written any information yet'
+              : userDescription}
             {userData.description.length > 340 && (
               <S.ButtonSeeMore
                 isSeeMore={isStateSeeMore}
@@ -228,6 +257,10 @@ const UserDescription = () => {
         <ModalUserEditInfo
           modalOpen={isOpenModal}
           setModalOpen={setIsOpenModal}
+          userData={userData}
+          imageUser={imageUser}
+          setUserImage={setImageUser}
+          setUserData={setUserData}
         />
       )}
     </>

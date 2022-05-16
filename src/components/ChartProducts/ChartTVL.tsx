@@ -19,6 +19,7 @@ import { BNtoDecimal } from '../../utils/numerals'
 interface IChartTVLProps {
   data: any[];
   color: string;
+  height?: number;
 }
 
 const tooltipPosition = {
@@ -32,7 +33,7 @@ const tooltipPosition = {
   }
 }
 
-const ChartTVL = ({ data, color }: IChartTVLProps) => {
+const ChartTVL = ({ data, color, height = 360 }: IChartTVLProps) => {
   const [position, setPosition] = React.useState(tooltipPosition.desktop)
 
   React.useEffect(() => {
@@ -46,7 +47,7 @@ const ChartTVL = ({ data, color }: IChartTVLProps) => {
   }, [window.screen.width])
 
   return (
-    <ResponsiveContainer width="100%" height={360}>
+    <ResponsiveContainer width="100%" height={height}>
       <AreaChart
         data={data}
         style={{

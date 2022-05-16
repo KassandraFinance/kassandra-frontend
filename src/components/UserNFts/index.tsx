@@ -4,7 +4,7 @@ import * as S from './styles'
 
 interface IUserNFTsProps {
   address: string;
-  setUserImage: React.Dispatch<
+  setUserImageModal: React.Dispatch<
     React.SetStateAction<{
       image_preview: string,
       image_file?: any
@@ -17,7 +17,7 @@ interface IUserNFTsProps {
 
 const UserNFTs = ({
   address,
-  setUserImage,
+  setUserImageModal,
   isDropdownAddNft,
   setIsDropdownAddNft
 }: IUserNFTsProps) => {
@@ -35,7 +35,6 @@ const UserNFTs = ({
     )
 
     const data = await response.json()
-    console.log(data)
 
     const formattedNFTs = data.result.map((nft: any) => {
       const parsedMetadata = JSON.parse(nft.metadata)
@@ -87,7 +86,10 @@ const UserNFTs = ({
               <li
                 key={nft.key}
                 onClick={() => (
-                  setUserImage({ image_preview: nft?.metadata?.image }),
+                  setUserImageModal({
+                    image_preview: nft?.metadata?.image,
+                    image_file: null
+                  }),
                   setIsDropdownAddNft(false)
                 )}
               >
