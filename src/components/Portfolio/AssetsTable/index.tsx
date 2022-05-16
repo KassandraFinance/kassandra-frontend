@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
@@ -48,6 +49,8 @@ export const AssetsTable = ({
   profileAddress,
   setTotalBalance
 }: IAssetsTableProps) => {
+  const router = useRouter()
+
   function calcChange(newPrice: number, oldPrice: number) {
     const calc = ((newPrice - oldPrice) / oldPrice) * 100
     return calc ? calc.toFixed(2) : '0'
@@ -165,7 +168,12 @@ export const AssetsTable = ({
 
   const Trs = assets.map((asset, index: number) => {
     return (
-      <S.Tr key={index}>
+      <S.Tr
+        key={index}
+        onClick={() => {
+          router.push(`/explore/${asset.symbol.toLowerCase()}`)
+        }}
+      >
         <S.Td>
           <S.ProductWrapper>
             <S.ImageWrapper>
