@@ -11,6 +11,7 @@ import infoGrayIcon from '../../../../public/assets/info-gray.svg'
 import userProfile from '../../../../public/assets/userProfile.svg'
 
 import ModalUserEditInfo from '../../Modals/ModalUserEditInfo'
+import NftImage from '../../NftImage'
 
 import * as S from './styles'
 import { RootStateOrAny, useSelector } from 'react-redux'
@@ -81,9 +82,13 @@ const UserDescription = () => {
             <img
               src={imageUser ? imageUser : userProfile}
               alt="Image from User"
-              width={72}
-              height={72}
+              width={80}
+              height={80}
             />
+            {/* <NftImage
+                NftUrl="https://arweave.net/vOVvJJI_mVlTqIPNzalZkdaJ4cX5eFeOqJ-9R-P7Q9E"
+                imageSize="medium"
+              /> */}
             <button onClick={() => setIsOpenModal(true)}>
               Edit info
               <img

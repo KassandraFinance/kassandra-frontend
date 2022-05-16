@@ -5,6 +5,7 @@ import { RootStateOrAny, useSelector } from 'react-redux'
 
 import Button from '../../Button'
 import UserNFTs from '../../UserNFts'
+import NftImage from '../../NftImage'
 
 import * as S from './styles'
 import web3 from '../../../utils/web3'
@@ -164,16 +165,25 @@ const ModalUserEditInfo = ({
           <S.UserProfileInfoContent>
             <S.UserProfileInfo>
               <S.UserImageContent>
-                <img
-                  src={
-                    userImageModal.image_preview
-                      ? userImageModal.image_preview
-                      : '/assets/userProfile.svg'
-                  }
-                  alt="Image from User"
-                  width={123}
-                  height={123}
-                />
+                {userImageModal.image_file ? (
+                  <img
+                    src={
+                      userImageModal.image_preview
+                        ? userImageModal.image_preview
+                        : '/assets/userProfile.svg'
+                    }
+                    id="userImageSelect"
+                    alt="Image from User"
+                    width={123}
+                    height={123}
+                  />
+                ) : (
+                  <NftImage
+                    NftUrl={`${userImageModal.image_preview}`}
+                    imageSize="large"
+                  />
+                )}
+
                 <span>
                   <label htmlFor="InputFile">Add Image</label>
                   <input

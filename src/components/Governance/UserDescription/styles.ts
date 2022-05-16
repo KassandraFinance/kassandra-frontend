@@ -37,7 +37,7 @@ export const UserInfo = styled.div`
 `
 
 export const UserInfoContent = styled.div`
-  margin-top: 3.2rem;
+  margin-top: 1.2rem;
 
   @media (max-width: 650px) {
     display: flex;
