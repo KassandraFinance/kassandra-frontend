@@ -28,7 +28,9 @@ const ShareImageModal = ({
   productName
 }: ShareImageProps) => {
   const printRef = React.useRef<HTMLInputElement>(null)
-  const [url, setUrl] = React.useState(`${baseURL}/shared/${poolId}`)
+  const [url, setUrl] = React.useState(
+    `${baseURL}/shared/${poolId}-${productName.toLowerCase()}`
+  )
 
   const handleDownloadImage = async () => {
     const element = printRef.current
@@ -67,14 +69,19 @@ const ShareImageModal = ({
       }).then((canvas: any) => {
         const file = canvas.toDataURL('image/png')
 
-        fetch(`${baseURL}/api/funds/shared?id=${poolId}`, {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ image: file })
-        }).then(() => setUrl(`${baseURL}/shared/${poolId}`))
+        fetch(
+          `${baseURL}/api/funds/shared?id=${poolId}-${productName.toLowerCase()}`,
+          {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ image: file })
+          }
+        ).then(() =>
+          setUrl(`${baseURL}/shared/${poolId}-${productName.toLowerCase()}`)
+        )
       })
     }
   }

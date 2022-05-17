@@ -1,6 +1,8 @@
 import React from 'react'
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
 import Head from 'next/head'
+import { ParsedUrlQuery } from 'querystring';
+
 
 type Props = {
   id: string
@@ -49,24 +51,26 @@ const Page = ({ id }: Props) => {
   )
 }
 
+interface Fund extends ParsedUrlQuery {
+  id: string
+}
 
 export const getServerSideProps = async (
-  context: GetServerSidePropsContext
+  context: GetServerSidePropsContext<Fund>
 ): Promise<GetServerSidePropsResult<Props>> => {
-  const getUrlBasedOnParams =
-    context.params?.id === '0x38918142779e2CD1189cBd9e932723C968363D1E'
-      ? 'ahype'
-      : 'tricrypto'
+
+  const { id } = context.params!
+  const [fund_id, fund] = id.split('-')
 
   if (typeof context.params?.id === 'string') {
     return {
       props: {
         id: context.params?.id
       },
-      redirect: {
-        destination: `/explore/${getUrlBasedOnParams}`,
-        permanent: false
-      }
+      // redirect: {
+      //   destination: `/explore/${fund.toLowerCase()}`,
+      //   permanent: false
+      // }
     }
   } else {
     return {
