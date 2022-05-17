@@ -60,17 +60,17 @@ export const getServerSideProps = async (
 ): Promise<GetServerSidePropsResult<Props>> => {
 
   const { id } = context.params!
-  const [fund_id, fund] = id.split('-')
+  const fund = id.split('-').pop()
 
   if (typeof context.params?.id === 'string') {
     return {
       props: {
         id: context.params?.id
       },
-      // redirect: {
-      //   destination: `/explore/${fund.toLowerCase()}`,
-      //   permanent: false
-      // }
+      redirect: {
+        destination: `/explore/${fund}`,
+        permanent: false
+      }
     }
   } else {
     return {
