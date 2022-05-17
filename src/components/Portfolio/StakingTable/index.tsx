@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 import useSWR from 'swr'
@@ -36,7 +37,7 @@ interface IStakingTableProps {
     rewardPerTokenPaid: string
   }[];
 
-  walletAddress: string;
+  profileAddress: string;
   setTotalStaked: React.Dispatch<React.SetStateAction<Big>>;
 }
 
@@ -58,9 +59,10 @@ export interface ItvlType {
 
 const StakingTable = ({
   stakes,
-  walletAddress,
+  profileAddress,
   setTotalStaked
 }: IStakingTableProps) => {
+  const router = useRouter()
   const { poolInfo, earned } = useStakingContract(Staking)
   const { viewgetReserves } = usePriceLP()
   const lpToken = useERC20Contract(LPKacyAvaxPNG)
@@ -222,7 +224,7 @@ const StakingTable = ({
   React.useEffect(() => {
     if (stakes[0] && stakes[0].amount) {
       stakes.forEach(async stake => {
-        const earnedResponse = await earned(stake.pid, walletAddress)
+        const earnedResponse = await earned(stake.pid, profileAddress)
 
         setKacyEarned(prevState => ({
           ...prevState,
@@ -230,14 +232,19 @@ const StakingTable = ({
         }))
       })
     }
-  }, [stakes, earned, walletAddress])
+  }, [stakes, earned, profileAddress])
 
   React.useEffect(() => {
     let arr
     if (stakes[0] && stakes[0].amount) {
       arr = stakes.map((stake, index: number) => {
         return (
-          <S.Tr key={index}>
+          <S.Tr
+            key={index}
+            onClick={() => {
+              router.push('/farm')
+            }}
+          >
             <S.Td>
               <S.PoolWrapper>
                 <span>${stake?.poolName}</span>

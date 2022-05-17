@@ -13,7 +13,7 @@ import Head from 'next/head'
 
 const Leaderboard = () => {
   return (
-    <S.BackgroundVote>
+    <>
       <Head>
         <meta
           property="og:image"
@@ -37,7 +37,7 @@ const Leaderboard = () => {
           <VotingPowerTable />
         </S.VotingPowerLeaderboard>
       </S.VoteContent>
-    </S.BackgroundVote>
+    </>
   )
 }
 

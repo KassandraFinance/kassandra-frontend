@@ -1,17 +1,6 @@
 import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
-export const BackgroundVote = styled.div`
-  background: url('/assets/newbg4.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-
-  box-shadow: inset 0px -2rem 2rem 0px #151117;
-  padding-bottom: 0.4rem;
-`
-
 export const VoteContent = styled.div`
   max-width: 1140px;
   margin: 0 auto;
