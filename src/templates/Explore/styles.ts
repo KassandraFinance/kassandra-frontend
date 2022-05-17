@@ -2,10 +2,6 @@ import styled from 'styled-components'
 
 import theme from '../../styles/theme'
 
-interface IBackgroundProductsProps {
-  boxShadow: boolean;
-}
-
 export const Explore = styled.section`
   margin: 0 auto;
   max-width: 1140px;

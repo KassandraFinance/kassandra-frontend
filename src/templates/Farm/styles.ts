@@ -22,11 +22,8 @@ interface INameStakeProps {
   left?: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
-export const NameStake =
-  styled.div <
-  INameStakeProps >
-  `
+// prettier-ignore
+export const NameStake = styled.div<INameStakeProps>`
   p {
     color: #bdbdbd;
     font-size: ${theme.font.sizes.font18};
@@ -35,11 +32,10 @@ export const NameStake =
     margin-left: 32px;
   }
   @media (max-width: 960px) {
-    ${props =>
-      props.left &&
-      `
+    ${props => props.left &&`
       padding-left: 30px;
-    `}
+     `
+    }
   }
 `
 

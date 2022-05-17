@@ -39,11 +39,8 @@ interface IIntroProps {
   introDesktop: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
-export const Intro =
-  styled.div <
-  IIntroProps >
-  `
+// prettier-ignore
+export const Intro = styled.div<IIntroProps>`
   display: grid;
   grid-template-columns: auto auto;
   align-items: center;
@@ -51,36 +48,35 @@ export const Intro =
 
   max-width: 440px;
 
-  ${props =>
-    props.introMobile &&
+  ${props => props.introMobile && `
+    display: none;
+    h1 {
+      font-size: 18px;
+    }
+    img {
+      width: 40px;
+    }
+    @media (max-width: 960px) {
+      display: grid;
+      grid-template-columns: 40px auto;
+      padding: 0 30px;
+      gap: 1.6rem;
+      max-width: 100%;
+      margin: 32px 0;
+    }
+    @media (max-width: 400px) {
+      padding: 0 16px;
+    }
     `
+  }
+
+  ${props => props.introDesktop && `
+    @media (max-width: 960px) {
       display: none;
-      h1 {
-        font-size: 18px;
-      }
-      img {
-        width: 40px;
-      }
-      @media (max-width: 960px) {
-        display: grid;
-        grid-template-columns: 40px auto;
-        padding: 0 30px;
-        gap: 1.6rem;
-        max-width: 100%;
-        margin: 32px 0;
-      }
-      @media (max-width: 400px) {
-        padding: 0 16px;
-      }
-      `}
-  ${props =>
-    props.introDesktop &&
+    }
     `
-      @media (max-width: 960px) {
-        display: none;
-      }
-    `}
-  `
+  }
+`
 
 export const NameIndex = styled.div`
   p {
@@ -113,11 +109,8 @@ interface INameAndSymbolProps {
   introMobile?: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
-export const NameAndSymbol =
-  styled.div <
-  INameAndSymbolProps >
-  `
+// prettier-ignore
+export const NameAndSymbol = styled.div<INameAndSymbolProps>`
   display: flex;
   align-items: flex-start;
   gap: 1.6rem;
