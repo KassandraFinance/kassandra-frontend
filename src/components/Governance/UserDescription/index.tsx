@@ -1,21 +1,21 @@
 import React from 'react'
 import Image from 'next/image'
 import CopyToClipboard from 'react-copy-to-clipboard'
-
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
+import { RootStateOrAny, useSelector } from 'react-redux'
+
+import substr from '../../../utils/substr'
 import { ToastInfo } from '../../Toastify/toast'
 
 import infoGrayIcon from '../../../../public/assets/info-gray.svg'
-import userProfile from '../../../../public/assets/userProfile.svg'
 
 import ModalUserEditInfo from '../../Modals/ModalUserEditInfo'
 import NftImage from '../../NftImage'
 
 import * as S from './styles'
-import { RootStateOrAny, useSelector } from 'react-redux'
-import substr from '../../../utils/substr'
 
 type UserProps = {
   nickname: string,
@@ -24,16 +24,20 @@ type UserProps = {
   telegram: string,
   discord: string,
   description: string,
-  image?: string
+  image?: {
+    url: string,
+    isNFT: false
+  }
 }
 
 const UserDescription = () => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+
   const [isOpenModal, setIsOpenModal] = React.useState(false)
   const [isStateSeeMore, setIsStateSeeMore] = React.useState(false)
   const [userDescription, setUserDescription] = React.useState('')
 
-  const [imageUser, setImageUser] = React.useState('')
+  const [imageUser, setImageUser] = React.useState({ url: '', isNFT: false })
 
   const [userData, setUserData] = React.useState<UserProps>({
     nickname: '',
@@ -46,17 +50,19 @@ const UserDescription = () => {
 
   React.useEffect(() => {
     if (!userWalletAddress) return
+
     fetch(`/api/profile/${userWalletAddress}`)
       .then(res => res.json())
       .then(data => {
         const { image, ...profile } = data
+
         setUserData({
           ...profile,
           description: profile.description ?? ''
         }),
-          setImageUser(image)
+          setImageUser({ url: image, isNFT: data.isNFT })
       })
-  }, [userWalletAddress])
+  }, [userWalletAddress, isOpenModal])
 
   React.useEffect(() => {
     if (window.screen.width > 768) {
@@ -79,16 +85,20 @@ const UserDescription = () => {
       <S.UserDescription>
         <S.UserInfo>
           <S.UserInfoContent>
-            <img
-              src={imageUser ? imageUser : userProfile}
-              alt="Image from User"
-              width={80}
-              height={80}
-            />
-            {/* <NftImage
-                NftUrl="https://arweave.net/vOVvJJI_mVlTqIPNzalZkdaJ4cX5eFeOqJ-9R-P7Q9E"
-                imageSize="medium"
-              /> */}
+            {imageUser.isNFT ? (
+              <NftImage NftUrl={imageUser.url} imageSize="medium" />
+            ) : imageUser.url !== undefined && imageUser.url !== '' ? (
+              <img src={imageUser.url} alt="" width="90" height="90" />
+            ) : (
+              <Jazzicon
+                diameter={73}
+                seed={jsNumberForAddress(
+                  String(userWalletAddress) ||
+                    '0x1111111111111111111111111111111111111111'
+                )}
+              />
+            )}
+
             <button onClick={() => setIsOpenModal(true)}>
               Edit info
               <img
@@ -120,7 +130,6 @@ const UserDescription = () => {
                 </button>
               </CopyToClipboard>
               <a
-                // COLOCAR A CARTEIRA DO USUÁRIO APÓS A "...address/" \/
                 href={`https://testnet.snowtrace.io/address/${userWalletAddress}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -232,6 +241,7 @@ const UserDescription = () => {
             {userDescription === ''
               ? 'This address has not written any information yet'
               : userDescription}
+
             {userData.description.length > 340 && (
               <S.ButtonSeeMore
                 isSeeMore={isStateSeeMore}

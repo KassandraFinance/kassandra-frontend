@@ -106,6 +106,7 @@ export const UserProfileInfo = styled.div`
 
   img {
     margin-top: 1rem;
+    object-fit: cover;
   }
 
   span {
@@ -186,6 +187,7 @@ export const ButtonAddNft = styled.button<isDropdownAddNftProps>`
   align-items: center;
 
   gap: 1rem;
+  margin-top: 1rem;
   padding: 1.6rem 1.6rem;
 
   color: #FCFCFC;

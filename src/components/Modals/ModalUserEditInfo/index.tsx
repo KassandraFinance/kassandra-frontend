@@ -1,22 +1,29 @@
 import React, { FormEvent } from 'react'
 import Image from 'next/image'
+import { ToastError } from '../../Toastify/toast'
+import 'tippy.js/dist/tippy.css'
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
 import { RootStateOrAny, useSelector } from 'react-redux'
+
+import web3 from '../../../utils/web3'
 
 import Button from '../../Button'
 import UserNFTs from '../../UserNFts'
 import NftImage from '../../NftImage'
 
 import * as S from './styles'
-import web3 from '../../../utils/web3'
 
 interface IModalUserEditInfoProps {
   modalOpen: boolean;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   userData: UserEditInfoFormProps;
-  imageUser: string;
   setUserImage: React.Dispatch<React.SetStateAction<any>>;
   setUserData: React.Dispatch<React.SetStateAction<UserEditInfoFormProps>>;
+  imageUser: {
+    url: string,
+    isNFT: boolean
+  };
 }
 
 type UserEditInfoFormProps = {
@@ -37,6 +44,7 @@ const ModalUserEditInfo = ({
   setUserData
 }: IModalUserEditInfoProps) => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const inputRefModal = React.useRef<HTMLInputElement>(null)
 
   const [isStateSocialMidia, setIsStateSocialMidia] = React.useState(false)
   const [isStateManagerInfo, setIsStateManagerInfo] = React.useState(false)
@@ -46,8 +54,9 @@ const ModalUserEditInfo = ({
       ...userData
     })
   const [userImageModal, setUserImageModal] = React.useState<any>({
-    image_preview: imageUser,
-    image_file: ''
+    image_preview: imageUser.url,
+    image_file: '',
+    isNFTPreviewModal: imageUser.isNFT
   })
 
   function handleCloseModal() {
@@ -62,6 +71,7 @@ const ModalUserEditInfo = ({
     event.preventDefault()
     const { nickname, twitter, website, telegram, discord, description } =
       editYourProfileInput
+
     try {
       const response = await fetch('/api/nonce')
       const { nonce } = await response.json()
@@ -98,10 +108,14 @@ const ModalUserEditInfo = ({
             telegram,
             discord,
             description,
-            image: userImageModal.image_file ? '' : userImageModal.image_preview
+            image: userImageModal.image_file
+              ? ''
+              : userImageModal.image_preview,
+            isNFT: userImageModal.isNFTPreviewModal
           })
         })
         setUserData(editYourProfileInput)
+
         if (userImageModal.image_file) {
           const formData = new FormData()
           formData.append('image', userImageModal.image_file)
@@ -111,26 +125,29 @@ const ModalUserEditInfo = ({
             body: formData
           })
             .then(res => res.json())
-            .then(data => setUserImage(data.image))
+            .then(data => setUserImage({ url: data.image, isNFT: false }))
           setModalOpen(false)
           return
         }
-        setUserImage(userImageModal.image_preview)
         setModalOpen(false)
       }
     } catch (error) {
-      console.log(error)
+      return error
     }
   }
 
   function handleImagePreview(event: FileList) {
+    if (event[0].size > 300000)
+      return ToastError('Images should be less than 300KB')
+
     if (event) {
       const image_as_base64 = URL.createObjectURL(event[0])
       const image_as_files = event[0]
 
       setUserImageModal({
         image_preview: image_as_base64,
-        image_file: image_as_files
+        image_file: image_as_files,
+        isNFTPreviewModal: false
       })
     }
   }
@@ -167,20 +184,33 @@ const ModalUserEditInfo = ({
               <S.UserImageContent>
                 {userImageModal.image_file ? (
                   <img
-                    src={
-                      userImageModal.image_preview
-                        ? userImageModal.image_preview
-                        : '/assets/userProfile.svg'
-                    }
+                    src={userImageModal.image_preview}
                     id="userImageSelect"
-                    alt="Image from User"
+                    alt=""
+                    width={123}
+                    height={123}
+                  />
+                ) : userImageModal.isNFTPreviewModal ? (
+                  <NftImage
+                    NftUrl={`${userImageModal.image_preview}`}
+                    imageSize="large"
+                  />
+                ) : userImageModal.image_preview !== '' &&
+                  userImageModal.image_preview !== undefined ? (
+                  <img
+                    src={userImageModal.image_preview}
+                    id="userImageSelect"
+                    alt=""
                     width={123}
                     height={123}
                   />
                 ) : (
-                  <NftImage
-                    NftUrl={`${userImageModal.image_preview}`}
-                    imageSize="large"
+                  <Jazzicon
+                    diameter={100}
+                    seed={jsNumberForAddress(
+                      String(userWalletAddress) ||
+                        '0x1111111111111111111111111111111111111111'
+                    )}
                   />
                 )}
 
@@ -188,7 +218,9 @@ const ModalUserEditInfo = ({
                   <label htmlFor="InputFile">Add Image</label>
                   <input
                     id="InputFile"
+                    ref={inputRefModal}
                     type="file"
+                    accept="image/png, image/jpg, image/jpeg"
                     onChange={event => {
                       if (event.target.files !== null) {
                         handleImagePreview(event.target.files)
@@ -210,10 +242,11 @@ const ModalUserEditInfo = ({
                   </S.ButtonAddNft>
                   <S.UserAddNftImage isDropdownAddNft={isDropdownAddNft}>
                     <UserNFTs
-                      address="0x321bbc8be5307d12846bb5960dfa2a4f65659a96"
+                      address={userWalletAddress}
                       setUserImageModal={setUserImageModal}
                       isDropdownAddNft={isDropdownAddNft}
                       setIsDropdownAddNft={setIsDropdownAddNft}
+                      inputRefModal={inputRefModal}
                     />
                   </S.UserAddNftImage>
                 </span>
