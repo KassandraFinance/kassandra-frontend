@@ -27,23 +27,24 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
                 walletAddress
               }
             })
-    
+
             if (!user)
               return response.status(404).json({
                 message: 'User not exist'
               })
-    
+
             const data = await new Promise((resolve, reject) => {
-                const form = new formidable.IncomingForm({
-                    keepExtensions: true,
-                    filter: ({ mimetype }) => mimetype === 'image/png',
-                    allowEmptyFiles: false,
-                    maxFileSize: 85000
+              const form = new formidable.IncomingForm(
+                {
+                  keepExtensions: true,
+                  filter: ({ mimetype }) => mimetype === 'image/png' ||  mimetype === 'image/jpg' || mimetype === 'image/jpeg',
+                  allowEmptyFiles: false,
+                  maxFileSize: 300000
                 })
-    
+
                 form.parse(request, (err, _, files) => {
                     if (err) return reject(err)
-    
+
                     const file = Array.isArray(files)
                         ? files[0][Object.keys(files)[0]]
                         : files[Object.keys(files)[0]]
@@ -53,19 +54,20 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
             }) as formidable.File
             const readFile = readFileSync(data?.filepath)
             const imageBase64 = Buffer.from(readFile).toString('base64')
-            const addBase64Append = `data:image/png;base64,${imageBase64}`
+            const addBase64Append = `data:${data.mimetype};base64,${imageBase64}`
             await prisma.user.update({
                 where: {
                     walletAddress
                 },
                 data: {
-                    image: addBase64Append
+                    image: addBase64Append,
+                    isNFT: false
                 }
             })
-    
+
             return response.status(200).json({
                 image: addBase64Append
-            })
+              })
         }
 
         response.setHeader('Allow', ['POST'])

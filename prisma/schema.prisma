@@ -21,4 +21,5 @@ model User {
   discord       String?
   description   String?
   image         String?
+  isNFT         Boolean? @default(false) @map("is_nft")
 }
