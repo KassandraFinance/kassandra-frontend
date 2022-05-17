@@ -15,6 +15,7 @@ interface ShareImageProps {
   setOpenModal: (value: boolean) => void;
   children: ReactNode;
   poolId: string;
+  productName: string;
 }
 
 const baseURL = 'https://alpha.kassandra.finance'
@@ -23,7 +24,8 @@ const ShareImageModal = ({
   setOpenModal,
   openModal,
   children,
-  poolId
+  poolId,
+  productName
 }: ShareImageProps) => {
   const printRef = React.useRef<HTMLInputElement>(null)
   const [url, setUrl] = React.useState(`${baseURL}/shared/${poolId}`)

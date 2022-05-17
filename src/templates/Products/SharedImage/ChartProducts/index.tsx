@@ -3,9 +3,9 @@ import useSWR from 'swr'
 import request from 'graphql-request'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
-import { SUBGRAPH_URL, HeimCRPPOOL } from '../../constants/tokenAddresses'
+import { SUBGRAPH_URL, HeimCRPPOOL } from '../../../../constants/tokenAddresses'
 
-import Loading from '../Loading'
+import Loading from '../../../../components/Loading'
 
 import ChartPrice from './ChartPrice'
 import ChartTVL from './ChartTVL'
@@ -19,9 +19,10 @@ const arrPeriod: string[] = ['1W', '1M', '3M', '1Y']
 
 interface IChartProductsProps {
   crpPoolAddress: string;
+  height: number;
 }
 
-const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
+const ChartProducts = ({ crpPoolAddress, height }: IChartProductsProps) => {
   const [inputChecked, setInputChecked] = React.useState<string>('Price')
   const [price, setPrice] = React.useState([])
   const [tvl, setTvl] = React.useState([])
@@ -146,33 +147,33 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
           <S.Input
             type="radio"
             name="operator"
-            id="Price-chart"
+            id="Price"
             onChange={() => {
               setInputChecked('Price')
               matomoEvent('click-on-tab', 'price')
             }}
             checked={inputChecked === 'Price'}
           />
-          <S.Label selected={inputChecked === 'Price'} htmlFor="Price-chart">
+          <S.Label selected={inputChecked === 'Price'} htmlFor="Price">
             Price
           </S.Label>
           <S.Input
             type="radio"
             name="operator"
-            id="TVL-chart"
+            id="TVL"
             onChange={() => {
               setInputChecked('TVL')
               matomoEvent('click-on-tab', 'tvl')
             }}
             checked={inputChecked === 'TVL'}
           />
-          <S.Label selected={inputChecked === 'TVL'} htmlFor="TVL-chart">
+          <S.Label selected={inputChecked === 'TVL'} htmlFor="TVL">
             TVL
           </S.Label>
           <S.Input
             type="radio"
             name="operator"
-            id="Allocation-chart"
+            id="Allocation"
             onChange={() => {
               setInputChecked('Allocation')
               matomoEvent('click-on-tab', 'allocation')
@@ -181,16 +182,16 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
           />
           <S.Label
             selected={inputChecked === 'Allocation'}
-            htmlFor="Allocation-chart"
+            htmlFor="Allocation"
           >
             Allocation
           </S.Label>
         </S.SelectChart>
         <S.SelectPeriod>
           {inputChecked === 'Price' && (
-            <li key="day-1D">
+            <li key="day1D">
               <S.Input
-                id="day-1D"
+                id="day1D"
                 type="radio"
                 checked={periodSelected === '1D'}
                 onChange={() => {
@@ -201,7 +202,7 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
               <S.LabelPeriod
                 selectPeriod={periodSelected === '1D'}
                 isPrice={inputChecked === 'Price'}
-                htmlFor="day-1D"
+                htmlFor="day1D"
                 title="period"
               >
                 1D
@@ -209,9 +210,9 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
             </li>
           )}
           {arrPeriod.map(period => (
-            <li key={`day-${period}`}>
+            <li key={`day${period}`}>
               <S.Input
-                id={`day-${period}`}
+                id={`day${period}`}
                 type="radio"
                 checked={periodSelected === period}
                 onChange={() => {
@@ -221,7 +222,7 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
               />
               <S.LabelPeriod
                 selectPeriod={periodSelected === period}
-                htmlFor={`day-${period}`}
+                htmlFor={`day${period}`}
                 title="period"
               >
                 {period}
@@ -231,18 +232,18 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
         </S.SelectPeriod>
       </S.Selects>
       {loading ? (
-        <S.Wrapper>
+        <S.Wrapper height={height}>
           <Loading marginTop={14} />
         </S.Wrapper>
       ) : null}
       {inputChecked === 'Price' && !loading && (
-        <ChartPrice data={price} color="#E843C4" />
+        <ChartPrice height={height} data={price} color="#E843C4" />
       )}
       {inputChecked === 'TVL' && !loading && (
-        <ChartTVL data={tvl} color="#26DBDB" />
+        <ChartTVL height={height} data={tvl} color="#26DBDB" />
       )}
       {inputChecked === 'Allocation' && !loading && (
-        <ChartAllocation data={allocation} />
+        <ChartAllocation height={height} data={allocation} />
       )}
     </S.ChartProduct>
   )

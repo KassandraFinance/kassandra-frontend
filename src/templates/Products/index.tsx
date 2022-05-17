@@ -118,6 +118,7 @@ const Products = ({ product }: Input) => {
         poolId={product.sipAddress}
         setOpenModal={setOpenModal}
         openModal={openModal}
+        productName={product.symbol}
       >
         <SharedImage
           crpPoolAddress={product.sipAddress}

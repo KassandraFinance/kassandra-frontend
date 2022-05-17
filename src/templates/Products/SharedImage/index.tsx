@@ -2,10 +2,10 @@ import Image from 'next/image'
 import React from 'react'
 import { RootStateOrAny, useSelector } from 'react-redux'
 
-import ChartProducts from '../../../components/ChartProducts'
 import { TokenImages } from '../../../store/modules/poolImages/types'
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
 import substr from '../../../utils/substr'
+import ChartProducts from './ChartProducts'
 import {
   Background,
   IconBar,

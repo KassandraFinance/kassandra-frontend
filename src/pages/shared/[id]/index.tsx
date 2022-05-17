@@ -49,6 +49,7 @@ const Page = ({ id }: Props) => {
   )
 }
 
+
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ): Promise<GetServerSidePropsResult<Props>> => {

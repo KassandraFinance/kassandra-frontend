@@ -19,7 +19,6 @@ import { BNtoDecimal } from '../../utils/numerals'
 interface IChartPriceProps {
   data: any[];
   color: string;
-  height?: number;
 }
 
 const tooltipPosition = {
@@ -33,7 +32,7 @@ const tooltipPosition = {
   }
 }
 
-const ChartPrice = ({ data, color, height = 360 }: IChartPriceProps) => {
+const ChartPrice = ({ data, color }: IChartPriceProps) => {
   const [position, setPosition] = React.useState(tooltipPosition.desktop)
 
   React.useEffect(() => {
@@ -47,7 +46,7 @@ const ChartPrice = ({ data, color, height = 360 }: IChartPriceProps) => {
   }, [window.screen.width])
 
   return (
-    <ResponsiveContainer width="100%" height={height}>
+    <ResponsiveContainer width="100%" height={360}>
       <AreaChart
         data={data}
         style={{
