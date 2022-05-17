@@ -68,10 +68,10 @@ export const getServerSideProps = async (
       props: {
         id: context.params?.id
       },
-      redirect: {
-        destination: `/explore/${fund}`,
-        permanent: false
-      }
+      // redirect: {
+      //  destination: `/explore/${fund}`,
+      //  permanent: false
+      // }
     }
   } else {
     return {
