@@ -21,13 +21,15 @@ interface ISharedImageProps {
   totalValueLocked: string;
   socialIndex: string;
   totalPerfomance: string;
+  productName: string;
 }
 
 const SharedImage = ({
   crpPoolAddress,
   totalValueLocked,
   socialIndex,
-  totalPerfomance
+  totalPerfomance,
+  productName
 }: ISharedImageProps) => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { poolTokensArray }: { poolTokensArray: TokenDetails[] } = useSelector(
@@ -43,12 +45,12 @@ const SharedImage = ({
       <S.Header>
         <S.Title>
           <Image src="/assets/modalShareImage.png" width={40} height={40} />
-          <h1>Awesome Fund</h1>
+          <h1>{productName}</h1>
           <S.Detail>${socialIndex}</S.Detail>
           <S.HorizontalLine />
         </S.Title>
         <S.UserInfo>
-          <h2>Manager</h2>
+          {/* <h2>Manager</h2> */}
           <S.Profile>
             <S.ProfileImage />
             <S.ProfileAddress>
@@ -65,7 +67,7 @@ const SharedImage = ({
           <S.Info>
             <S.InfoTitle>
               <IconBar />
-              <span>Total Perfomance</span>
+              <span>Performance</span>
             </S.InfoTitle>
             {totalPerfomance.startsWith('-') ? (
               <S.InfoValue color="red">{totalPerfomance}%</S.InfoValue>

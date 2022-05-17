@@ -1,9 +1,10 @@
 import React from 'react'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import Web3Disabled from '../../components/Web3Disabled'
 import Header from '../../components/Header'
+import Web3Disabled from '../../components/Web3Disabled'
 
 export default function Index() {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
@@ -17,6 +18,15 @@ export default function Index() {
 
   return (
     <>
+      <Head>
+        <meta
+          property="og:image"
+          content="https://kassandra.finance/kacy-og.png"
+        />
+        <meta property="og:image:width" content="1012" />
+        <meta property="og:image:height" content="506" />
+        <meta property="og:url" content="https://kassandra.finance/" />
+      </Head>
       <Header />
       <Web3Disabled
         textHeader="Connect Wallet"

@@ -59,10 +59,6 @@ const ShareImageModal = ({
       html2canvas(element, {
         windowWidth: 1280,
         onclone: function (doc: any) {
-          // doc.querySelector('.image-container').style.width = 'initial'
-          // doc.querySelector('.image-container').style.height = 'initial'
-          // doc.querySelector('.image-container').style.opacity = 1
-          // doc.querySelector('.image-container').style.visibility = 'visible'
           doc.querySelector('.image-container').style.display = 'block'
           doc.querySelector('.bg-image-color').style.background = '#2d152b'
         }
