@@ -28,6 +28,8 @@ const instance = createInstance({
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter()
+  const pathName = router.pathname
+
   return (
     <MatomoProvider value={instance}>
       <ThemeProvider theme={theme}>
@@ -52,7 +54,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
           <meta property="og:type" content="website" />
           {/* <meta property="og:url" content="https://kassandra.finance/" /> */}
           <meta property="og:title" content="Kassandra - Decentralized Funds" />
-          <meta
+          {/* <meta
             property="og:image:alt"
             content="Welcome to Kassandra DAO - Tokenized data-driven investment funds"
           />
@@ -73,10 +75,14 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
           <meta
             name="twitter:image:alt"
             content="Welcome to Kassandra DAO - Tokenized data-driven investment funds"
-          />
+          /> */}
         </Head>
         <Toastify />
-        <GlobalStyles />
+        <GlobalStyles
+          selectBackground={
+            pathName === '/' ? false : pathName === '/about' ? false : true
+          }
+        />
         <Component {...pageProps} />
         {router.pathname !== '/404' && <Footer />}
       </ThemeProvider>

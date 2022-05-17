@@ -112,7 +112,7 @@ const Products = ({ product }: Input) => {
   }, [product])
 
   return (
-    <S.BackgroundProducts boxShadow={false}>
+    <>
       <Header />
       <ShareImageModal
         poolId={product.sipAddress}
@@ -242,7 +242,7 @@ const Products = ({ product }: Input) => {
           productCategories={product.categories}
         />
       </S.Product>
-    </S.BackgroundProducts>
+    </>
   )
 }
 

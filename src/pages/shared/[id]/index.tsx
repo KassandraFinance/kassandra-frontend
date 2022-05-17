@@ -1,8 +1,7 @@
 import React from 'react'
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
 import Head from 'next/head'
-import { ParsedUrlQuery } from 'querystring';
-
+import { ParsedUrlQuery } from 'querystring'
 
 type Props = {
   id: string
@@ -14,12 +13,12 @@ const Page = ({ id }: Props) => {
       ? 'https://alpha.kassandra.finance'
       : 'http://localhost:3000'
 
-  React.useEffect(() => {
-    document
-      // eslint-disable-next-line prettier/prettier
-      .querySelector("meta[property='og:image']")!
-      .setAttribute('content', `${baseUrl}/api/funds/shared?id=${id}`)
-  }, [baseUrl, id])
+  //   React.useEffect(() => {
+  //     document
+  //       // eslint-disable-next-line prettier/prettier
+  //       .querySelector("meta[property='og:image']")!
+  //       .setAttribute('content', `${baseUrl}/api/funds/shared?id=${id}`)
+  //   }, [baseUrl, id])
 
   return (
     <>
@@ -52,13 +51,12 @@ const Page = ({ id }: Props) => {
 }
 
 interface Fund extends ParsedUrlQuery {
-  id: string
+  id: string;
 }
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<Fund>
 ): Promise<GetServerSidePropsResult<Props>> => {
-
   const { id } = context.params!
   const fund = id.split('-').pop()
 

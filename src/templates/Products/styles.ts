@@ -1,23 +1,6 @@
 import styled from 'styled-components'
 import theme from '../../styles/theme'
 
-interface IBackgroundProductsProps {
-  boxShadow: boolean;
-}
-
-// eslint-disable-next-line prettier/prettier
-export const BackgroundProducts = styled.div<IBackgroundProductsProps>`
-  background-image: url('/assets/bg-products.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position-x: 50%;
-
-  ${props =>
-    props.boxShadow
-      ? ''
-      : 'box-shadow: inset 0px -20px 20px 0px #151117; padding: 0 0 80px;'};
-`
-
 export const Product = styled.section`
   display: grid;
   grid-template-columns: minmax(300px, 584px) 448px;
@@ -56,7 +39,7 @@ interface IIntroProps {
   introDesktop: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const Intro = styled.div<IIntroProps>`
   display: grid;
   grid-template-columns: auto auto;
@@ -65,36 +48,35 @@ export const Intro = styled.div<IIntroProps>`
 
   max-width: 440px;
 
-  ${props =>
-    props.introMobile &&
+  ${props => props.introMobile && `
+    display: none;
+    h1 {
+      font-size: 18px;
+    }
+    img {
+      width: 40px;
+    }
+    @media (max-width: 960px) {
+      display: grid;
+      grid-template-columns: 40px auto;
+      padding: 0 30px;
+      gap: 1.6rem;
+      max-width: 100%;
+      margin: 32px 0;
+    }
+    @media (max-width: 400px) {
+      padding: 0 16px;
+    }
     `
+  }
+
+  ${props => props.introDesktop && `
+    @media (max-width: 960px) {
       display: none;
-      h1 {
-        font-size: 18px;
-      }
-      img {
-        width: 40px;
-      }
-      @media (max-width: 960px) {
-        display: grid;
-        grid-template-columns: 40px auto;
-        padding: 0 30px;
-        gap: 1.6rem;
-        max-width: 100%;
-        margin: 32px 0;
-      }
-      @media (max-width: 400px) {
-        padding: 0 16px;
-      }
-      `}
-  ${props =>
-    props.introDesktop &&
+    }
     `
-      @media (max-width: 960px) {
-        display: none;
-      }
-    `}
-  `
+  }
+`
 
 export const NameIndex = styled.div`
   p {
@@ -127,7 +109,7 @@ interface INameAndSymbolProps {
   introMobile?: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const NameAndSymbol = styled.div<INameAndSymbolProps>`
   display: flex;
   align-items: flex-start;
