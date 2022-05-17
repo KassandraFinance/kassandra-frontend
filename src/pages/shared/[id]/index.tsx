@@ -3,6 +3,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
 import Head from 'next/head'
 import { ParsedUrlQuery } from 'querystring'
 
+
 type Props = {
   id: string
 }
@@ -57,6 +58,8 @@ interface Fund extends ParsedUrlQuery {
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<Fund>
 ): Promise<GetServerSidePropsResult<Props>> => {
+
+  // eslint-disable-next-line prettier/prettier
   const { id } = context.params!
   const fund = id.split('-').pop()
 
