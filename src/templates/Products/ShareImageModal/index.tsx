@@ -9,24 +9,28 @@ import {
 import html2canvas from 'html2canvas'
 
 import * as S from './styles'
+import { v4 } from 'uuid'
 
 interface ShareImageProps {
   openModal: boolean;
   setOpenModal: (value: boolean) => void;
   children: ReactNode;
   poolId: string;
+  productName: string;
 }
 
 const baseURL = 'https://alpha.kassandra.finance'
-
 const ShareImageModal = ({
   setOpenModal,
   openModal,
   children,
-  poolId
+  poolId,
+  productName
 }: ShareImageProps) => {
   const printRef = React.useRef<HTMLInputElement>(null)
-  const [url, setUrl] = React.useState(`${baseURL}/shared/${poolId}`)
+  const [url, setUrl] = React.useState(
+    `${baseURL}/shared/${v4()}-${productName.toLowerCase()}`
+  )
 
   const handleDownloadImage = async () => {
     const element = printRef.current
@@ -54,26 +58,29 @@ const ShareImageModal = ({
 
   async function sendData() {
     const element = printRef.current
-
     if (element) {
-      html2canvas(element, {
+      const canvas = await html2canvas(element, {
         windowWidth: 1280,
         onclone: function (doc: any) {
           doc.querySelector('.image-container').style.display = 'block'
           doc.querySelector('.bg-image-color').style.background = '#2d152b'
         }
-      }).then((canvas: any) => {
-        const file = canvas.toDataURL('image/png')
-
-        fetch(`${baseURL}/api/funds/shared?id=${poolId}`, {
+      })
+      const file = canvas.toDataURL('image/png')
+      const id = url.split('/').pop()
+      const res = await fetch(
+        `${baseURL}/api/funds/shared?id=${poolId}-${productName.toLowerCase()}`,
+        {
           method: 'POST',
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ image: file })
-        }).then(() => setUrl(`${baseURL}/shared/${poolId}`))
-      })
+          body: JSON.stringify({ image: file, id })
+        }
+      )
+      await res.json()
+      setUrl(`${baseURL}/shared/${v4()}-${productName.toLowerCase()}`)
     }
   }
 
@@ -105,7 +112,12 @@ const ShareImageModal = ({
               Discord
             </S.SocialMedia>
             <TwitterShareButton
-              onClick={sendData}
+              beforeOnClick={() =>
+                (async () => {
+                  await sendData()
+                })()
+              }
+              // onClick={sendData}
               title="Image of your stats on Kassandra Foundation"
               url={url}
             >

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import theme from '../../styles/theme'
+import theme from '../../../../styles/theme'
 
 export const dictionary: any = {
   0: '#E8983D',
@@ -169,11 +169,17 @@ export const Label = styled.label<ILabelProps>`
   }
 `
 
-export const Wrapper = styled.div`
+interface IWrapperProps {
+  height: number;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const Wrapper = styled.div<IWrapperProps>`
   background-color: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.04);
   border-radius: 2.5rem;
-  margin: 25px 0;
+  // margin: 25px 0;
   width: 100%;
   height: 360px;
+  height: ${({ height }) => (height === 320 ? 320 : 360)}px;
 `

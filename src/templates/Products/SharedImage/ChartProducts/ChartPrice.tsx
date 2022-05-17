@@ -14,11 +14,12 @@ import {
 import TooltipCustomized from './TooltipCustomized'
 import CustomizedAxisTick from './CustomizedAxisTick'
 
-import { BNtoDecimal } from '../../utils/numerals'
+import { BNtoDecimal } from '../../../../utils/numerals'
 
-interface IChartTVLProps {
+interface IChartPriceProps {
   data: any[];
   color: string;
+  height?: number;
 }
 
 const tooltipPosition = {
@@ -32,7 +33,7 @@ const tooltipPosition = {
   }
 }
 
-const ChartTVL = ({ data, color }: IChartTVLProps) => {
+const ChartPrice = ({ data, color, height = 360 }: IChartPriceProps) => {
   const [position, setPosition] = React.useState(tooltipPosition.desktop)
 
   React.useEffect(() => {
@@ -46,7 +47,7 @@ const ChartTVL = ({ data, color }: IChartTVLProps) => {
   }, [window.screen.width])
 
   return (
-    <ResponsiveContainer width="100%" height={360}>
+    <ResponsiveContainer width="100%" height={height}>
       <AreaChart
         data={data}
         style={{
@@ -55,7 +56,7 @@ const ChartTVL = ({ data, color }: IChartTVLProps) => {
           borderRadius: '25px',
           margin: '25px 0'
         }}
-        margin={{ top: 140, right: 2, left: 3, bottom: 32 }}
+        margin={{ top: 140, right: 2, left: 2, bottom: 32 }}
       >
         <defs>
           <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -66,14 +67,14 @@ const ChartTVL = ({ data, color }: IChartTVLProps) => {
         <XAxis
           dataKey="timestamp"
           axisLine={false}
-          tick={<CustomizedAxisTick />}
+          tick={<CustomizedAxisTick chart="price" />}
           tickMargin={-4}
           tickLine={false}
           scale="time"
           type="number"
           domain={['auto', 'auto']}
           hide
-          // tickFormatter={time => getDate(time)}
+          // tickFormatter={time => getHour(time)}
         />
         <YAxis
           mirror
@@ -85,7 +86,7 @@ const ChartTVL = ({ data, color }: IChartTVLProps) => {
               return ''
             }
 
-            return BNtoDecimal(Big(item), 18, 3, 2)
+            return BNtoDecimal(Big(item), 18, 2, 2)
           }}
         />
         <Tooltip
@@ -96,7 +97,7 @@ const ChartTVL = ({ data, color }: IChartTVLProps) => {
           position={position}
           content={
             <TooltipCustomized
-              chart="tvl"
+              chart="price"
               payload={[]}
               currentPrice={data[data.length - 1]}
             />
@@ -104,7 +105,7 @@ const ChartTVL = ({ data, color }: IChartTVLProps) => {
         />
         <Area
           type="monotone"
-          dataKey="value"
+          dataKey="close"
           stroke={color}
           fillOpacity={1}
           fill="url(#colorUv)"
@@ -114,4 +115,4 @@ const ChartTVL = ({ data, color }: IChartTVLProps) => {
   )
 }
 
-export default ChartTVL
+export default ChartPrice

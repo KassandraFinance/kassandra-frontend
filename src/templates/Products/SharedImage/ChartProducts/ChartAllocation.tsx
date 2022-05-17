@@ -15,9 +15,10 @@ import { dictionary } from './styles'
 
 interface IChartAllocationProps {
   data: any[];
+  height?: number;
 }
 
-const ChartAllocation = ({ data }: IChartAllocationProps) => {
+const ChartAllocation = ({ data, height = 360 }: IChartAllocationProps) => {
   const [allocation, setAllocation] = React.useState<any[]>([])
   const [arrayKeys, setArrayKeys] = React.useState<string[]>([])
 
@@ -57,7 +58,7 @@ const ChartAllocation = ({ data }: IChartAllocationProps) => {
   }, [data])
 
   return (
-    <ResponsiveContainer width="100%" height={360}>
+    <ResponsiveContainer width="100%" height={height}>
       <AreaChart
         data={allocation}
         style={{

@@ -8,7 +8,7 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
   const { method } = request
   const { id } = request.query
   const fundId = Array.isArray(id) ? id[0] : id
-  const { image }: { image: string } = request.body
+  const { image, id: param }: { image: string, id: string } = request.body
 
   try {
     await NextCors(request, response, {
@@ -19,16 +19,23 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
     })
 
     if (method === 'POST') {
-      await prisma.sharedImageFund.upsert({
-        where: { id: fundId },
-        update: { image },
+      const { id } = await prisma.sharedImageFund.upsert({
+        where: {
+          contract: fundId
+        },
         create: {
-          id: fundId,
+          id: param,
+          contract: fundId,
+          image
+        },
+        update: {
+          id: param,
           image
         }
       })
       return response.status(201).send({
-        message: 'created shared image'
+        message: 'created shared image',
+        id
       })
     }
 
@@ -36,6 +43,8 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
       const img = await prisma.sharedImageFund.findUnique({
         where: { id: fundId }
       })
+
+      console.log('im', img)
 
       if (img) {
         const decoded = img.image
