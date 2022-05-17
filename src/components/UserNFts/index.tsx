@@ -7,19 +7,22 @@ interface IUserNFTsProps {
   setUserImageModal: React.Dispatch<
     React.SetStateAction<{
       image_preview: string,
-      image_file?: any
+      image_file?: any,
+      isNFTPreviewModal: boolean
     }>
   >;
 
   isDropdownAddNft: boolean;
   setIsDropdownAddNft: React.Dispatch<React.SetStateAction<boolean>>;
+  inputRefModal: React.RefObject<HTMLInputElement>;
 }
 
 const UserNFTs = ({
   address,
   setUserImageModal,
   isDropdownAddNft,
-  setIsDropdownAddNft
+  setIsDropdownAddNft,
+  inputRefModal
 }: IUserNFTsProps) => {
   const [nfts, setNfts] = React.useState([])
 
@@ -44,7 +47,7 @@ const UserNFTs = ({
         !parsedMetadata.name ||
         parsedMetadata.name.length == 0
       ) {
-        console.log(parsedMetadata)
+        return
       }
 
       return {
@@ -80,27 +83,36 @@ const UserNFTs = ({
         onClick={() => setIsDropdownAddNft(false)}
       />
       <S.Container>
-        {nfts.map(
-          (nft: any) =>
-            nft?.metadata?.image && (
-              <li
-                key={nft.key}
-                onClick={() => (
-                  setUserImageModal({
-                    image_preview: nft?.metadata?.image,
-                    image_file: null
-                  }),
-                  setIsDropdownAddNft(false)
-                )}
-              >
-                <img
-                  src={nft?.metadata?.image}
-                  alt="NFT images"
-                  loading="lazy"
-                />
-                <span>{nft?.metadata?.name}</span>
-              </li>
-            )
+        {nfts.length > 0 ? (
+          <>
+            {nfts.map(
+              (nft: any) =>
+                nft?.metadata?.image && (
+                  <li
+                    key={nft.key}
+                    onClick={() => (
+                      setUserImageModal({
+                        image_preview: nft?.metadata?.image,
+                        image_file: null,
+                        isNFTPreviewModal: true
+                      }),
+                      setIsDropdownAddNft(false),
+                      inputRefModal.current &&
+                        (inputRefModal.current.value = '')
+                    )}
+                  >
+                    <img
+                      src={nft?.metadata?.image}
+                      alt="NFT images"
+                      loading="lazy"
+                    />
+                    <span>{nft?.metadata?.name}</span>
+                  </li>
+                )
+            )}
+          </>
+        ) : (
+          <S.noHaveNFT>You don&apos;t have NFT</S.noHaveNFT>
         )}
       </S.Container>
     </>

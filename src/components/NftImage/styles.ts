@@ -12,7 +12,7 @@ const imageSizes = {
     min-width: 9rem;
 
     img {
-      image-rendering: pixelated;
+      object-fit: cover;
       background-color: #c4c4c410;
       min-height: 9.6rem;
       min-width: 9.6rem;

@@ -12,6 +12,7 @@ interface UserInput {
   discord?: string;
   description?: string;
   image?: string;
+  isNFT?: boolean;
 }
 
 export const config = {
@@ -47,7 +48,8 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
         nickname,
         telegram,
         twitter,
-        website
+        website,
+        isNFT
       }: UserInput = request.body
 
       if (
@@ -97,7 +99,8 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
             nickname,
             telegram,
             twitter,
-            website
+            website,
+            isNFT
           },
           update: {
             description,
@@ -106,7 +109,8 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
             nickname,
             telegram,
             twitter,
-            website
+            website,
+            isNFT
           }
         })
 

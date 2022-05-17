@@ -65,3 +65,11 @@ export const Container = styled.ul`
     font-weight: 500;
   }
 `
+
+export const noHaveNFT = styled.p`
+  display: flex;
+  justify-content: center;
+
+  width: 17rem;
+  padding: 2rem;
+`
