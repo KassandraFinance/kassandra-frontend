@@ -36,10 +36,7 @@ const Page = ({ id }: Props) => {
           key="ogImage"
           content={`${baseUrl}/api/funds/shared?id=${id}`}
         />
-        <meta
-          property="og:url"
-          content={`https://alpha.kassandra.finance/shared/${id}`}
-        />
+        <meta property="og:url" content={`${baseUrl}/shared/${id}`} />
         <meta
           name="twitter:card"
           key="twitterCard"
