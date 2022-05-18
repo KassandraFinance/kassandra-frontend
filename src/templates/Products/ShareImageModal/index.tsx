@@ -104,7 +104,12 @@ const ShareImageModal = ({
 
           <S.SocialMediaContainer>
             <TwitterShareButton
-              onClick={sendData}
+              // onClick={sendData}
+              beforeOnClick={() =>
+                (async () => {
+                  await sendData()
+                })()
+              }
               title="Image of your stats on Kassandra Foundation"
               url={url}
             >
