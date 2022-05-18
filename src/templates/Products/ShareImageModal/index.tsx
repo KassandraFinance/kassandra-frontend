@@ -112,12 +112,12 @@ const ShareImageModal = ({
               Discord
             </S.SocialMedia>
             <TwitterShareButton
-              beforeOnClick={() =>
-                (async () => {
-                  await sendData()
-                })()
-              }
-              // onClick={sendData}
+              // beforeOnClick={() =>
+              //   (async () => {
+              //     await sendData()
+              //   })()
+              // }
+              onClick={sendData}
               title="Image of your stats on Kassandra Foundation"
               url={url}
             >
