@@ -2,13 +2,16 @@ import React from 'react'
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
 import Head from 'next/head'
 import { ParsedUrlQuery } from 'querystring'
-
+import { useRouter } from 'next/router'
 
 type Props = {
   id: string
 }
 
 const Page = ({ id }: Props) => {
+  const router = useRouter()
+  const fund = id.split('-').pop()
+
   const baseUrl =
     process.env.NODE_ENV === 'production'
       ? 'https://alpha.kassandra.finance'
@@ -20,6 +23,10 @@ const Page = ({ id }: Props) => {
   //       .querySelector("meta[property='og:image']")!
   //       .setAttribute('content', `${baseUrl}/api/funds/shared?id=${id}`)
   //   }, [baseUrl, id])
+
+  React.useEffect(() => {
+    router.push(`/explore/${fund}`)
+  }, [])
 
   return (
     <>
@@ -43,6 +50,8 @@ const Page = ({ id }: Props) => {
           key="twitterImage"
           content={`${baseUrl}/api/funds/shared?id=${id}`}
         />
+        <meta property="og:image:width" content="1000" />
+        <meta property="og:image:height" content="500" />
       </Head>
       <div>
         <img src={`${baseUrl}/api/funds/shared?id=${id}`} alt="" />
@@ -58,20 +67,11 @@ interface Fund extends ParsedUrlQuery {
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<Fund>
 ): Promise<GetServerSidePropsResult<Props>> => {
-
-  // eslint-disable-next-line prettier/prettier
-  const { id } = context.params!
-  const fund = id.split('-').pop()
-
   if (typeof context.params?.id === 'string') {
     return {
       props: {
         id: context.params?.id
-      },
-      // redirect: {
-      //  destination: `/explore/${fund}`,
-      //  permanent: false
-      // }
+      }
     }
   } else {
     return {
