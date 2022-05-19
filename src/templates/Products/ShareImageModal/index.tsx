@@ -28,6 +28,7 @@ const ShareImageModal = ({
   poolId,
   productName
 }: ShareImageProps) => {
+  const [loading, setLoading] = React.useState(true)
   const printRef = React.useRef<HTMLInputElement>(null)
   const [url, setUrl] = React.useState(
     `${baseURL}/shared/${v4()}-${productName.toLowerCase()}`
@@ -85,6 +86,11 @@ const ShareImageModal = ({
   //   }
   // }
 
+  function handleShareClick() {
+    setUrl(`${baseURL}/shared/${v4()}-${productName.toLowerCase()}`)
+    setOpenModal(false)
+  }
+
   useEffect(() => {
     if (!openModal) return
     setTimeout(() => {
@@ -118,6 +124,13 @@ const ShareImageModal = ({
     }, 3000)
   }, [openModal])
 
+  useEffect(() => {
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+    }, 3400)
+  }, [openModal])
+
   return (
     <>
       {openModal ? (
@@ -141,11 +154,8 @@ const ShareImageModal = ({
 
               <S.SocialMediaContainer>
                 <TwitterShareButton
-                  onClick={() =>
-                    setUrl(
-                      `${baseURL}/shared/${v4()}-${productName.toLowerCase()}`
-                    )
-                  }
+                  disabled={loading}
+                  onClick={handleShareClick}
                   // beforeOnClick={() =>
                   //   (async () => {
                   //     await () =>
@@ -167,11 +177,8 @@ const ShareImageModal = ({
                   </S.SocialMedia>
                 </TwitterShareButton>
                 <LinkedinShareButton
-                  onClick={() =>
-                    setUrl(
-                      `${baseURL}/shared/${v4()}-${productName.toLowerCase()}`
-                    )
-                  }
+                  disabled={loading}
+                  onClick={handleShareClick}
                   url={url}
                 >
                   <S.SocialMedia>
@@ -184,11 +191,8 @@ const ShareImageModal = ({
                   </S.SocialMedia>
                 </LinkedinShareButton>
                 <RedditShareButton
-                  onClick={() =>
-                    setUrl(
-                      `${baseURL}/shared/${v4()}-${productName.toLowerCase()}`
-                    )
-                  }
+                  disabled={loading}
+                  onClick={handleShareClick}
                   url={url}
                 >
                   <S.SocialMedia>
@@ -201,11 +205,8 @@ const ShareImageModal = ({
                   </S.SocialMedia>
                 </RedditShareButton>
                 <FacebookShareButton
-                  onClick={() =>
-                    setUrl(
-                      `${baseURL}/shared/${v4()}-${productName.toLowerCase()}`
-                    )
-                  }
+                  disabled={loading}
+                  onClick={handleShareClick}
                   url={url}
                 >
                   <S.SocialMedia>
