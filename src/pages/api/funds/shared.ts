@@ -44,8 +44,6 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
         where: { id: fundId }
       })
 
-      console.log('im', img)
-
       if (img) {
         const decoded = img.image
           .toString()
