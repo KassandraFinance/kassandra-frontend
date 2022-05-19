@@ -14,6 +14,7 @@ import ChartAllocation from './ChartAllocation'
 import { GET_CHART } from './graphql'
 
 import * as S from './styles'
+import { RootStateOrAny, useSelector } from 'react-redux'
 
 const arrPeriod: string[] = ['1W', '1M', '3M', '1Y']
 
@@ -23,6 +24,10 @@ interface IChartProductsProps {
 }
 
 const ChartProducts = ({ crpPoolAddress, height }: IChartProductsProps) => {
+  const {
+    periodSelected: reduxPeriodSelected,
+    chartSelected: reduxChartSelected
+  } = useSelector((state: RootStateOrAny) => state)
   const [inputChecked, setInputChecked] = React.useState<string>('Price')
   const [price, setPrice] = React.useState([])
   const [tvl, setTvl] = React.useState([])
@@ -102,9 +107,13 @@ const ChartProducts = ({ crpPoolAddress, height }: IChartProductsProps) => {
   }
 
   React.useEffect(() => {
-    returnDate('1W')
-    setPeriodSelected('1W')
-  }, [inputChecked])
+    returnDate(reduxPeriodSelected)
+    setPeriodSelected(reduxPeriodSelected)
+  }, [inputChecked, reduxPeriodSelected])
+
+  React.useEffect(() => {
+    setInputChecked(reduxChartSelected)
+  }, [reduxChartSelected])
 
   React.useEffect(() => {
     setLoading(true)
@@ -148,6 +157,7 @@ const ChartProducts = ({ crpPoolAddress, height }: IChartProductsProps) => {
             type="radio"
             name="operator"
             id="Price"
+            disabled={true}
             onChange={() => {
               setInputChecked('Price')
               matomoEvent('click-on-tab', 'price')
@@ -161,6 +171,7 @@ const ChartProducts = ({ crpPoolAddress, height }: IChartProductsProps) => {
             type="radio"
             name="operator"
             id="TVL"
+            disabled={true}
             onChange={() => {
               setInputChecked('TVL')
               matomoEvent('click-on-tab', 'tvl')
@@ -174,6 +185,7 @@ const ChartProducts = ({ crpPoolAddress, height }: IChartProductsProps) => {
             type="radio"
             name="operator"
             id="Allocation"
+            disabled={true}
             onChange={() => {
               setInputChecked('Allocation')
               matomoEvent('click-on-tab', 'allocation')
@@ -193,6 +205,7 @@ const ChartProducts = ({ crpPoolAddress, height }: IChartProductsProps) => {
               <S.Input
                 id="day1D"
                 type="radio"
+                disabled={true}
                 checked={periodSelected === '1D'}
                 onChange={() => {
                   returnDate('1D')
@@ -213,6 +226,7 @@ const ChartProducts = ({ crpPoolAddress, height }: IChartProductsProps) => {
             <li key={`day${period}`}>
               <S.Input
                 id={`day${period}`}
+                disabled={true}
                 type="radio"
                 checked={periodSelected === period}
                 onChange={() => {

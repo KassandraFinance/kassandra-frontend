@@ -116,7 +116,7 @@ export const LabelPeriod = styled.label<ILabelPeriodProps>`
   min-width: ${props => (props.isPrice ? '33px' : '31px')};
   padding: 10px 8px;
   position: relative;
-  cursor: pointer;
+  // cursor: pointer;
   &::after {
     ${props =>
       props.selectPeriod &&
@@ -151,7 +151,6 @@ export const Label = styled.label<ILabelProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
 
   height: 20px;
   padding-bottom: 4px;
