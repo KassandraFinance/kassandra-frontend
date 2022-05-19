@@ -57,35 +57,36 @@ const ShareImageModal = ({
     }
   }
 
-  async function sendData() {
-    const element = printRef.current
-    if (element) {
-      const canvas = await html2canvas(element, {
-        windowWidth: 1280,
-        onclone: function (doc: any) {
-          doc.querySelector('.image-container').style.display = 'block'
-          doc.querySelector('.bg-image-color').style.background = '#2d152b'
-        }
-      })
-      const file = canvas.toDataURL('image/png')
-      const id = url.split('/').pop()
-      const res = await fetch(
-        `${baseURL}/api/funds/shared?id=${poolId}-${productName.toLowerCase()}`,
-        {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ image: file, id })
-        }
-      )
-      await res.json()
-      setUrl(`${baseURL}/shared/${v4()}-${productName.toLowerCase()}`)
-    }
-  }
+  // async function sendData() {
+  //   const element = printRef.current
+  //   if (element) {
+  //     const canvas = await html2canvas(element, {
+  //       windowWidth: 1280,
+  //       onclone: function (doc: any) {
+  //         doc.querySelector('.image-container').style.display = 'block'
+  //         doc.querySelector('.bg-image-color').style.background = '#2d152b'
+  //       }
+  //     })
+  //     const file = canvas.toDataURL('image/png')
+  //     const id = url.split('/').pop()
+  //     const res = await fetch(
+  //       `${baseURL}/api/funds/shared?id=${poolId}-${productName.toLowerCase()}`,
+  //       {
+  //         method: 'POST',
+  //         headers: {
+  //           Accept: 'application/json',
+  //           'Content-Type': 'application/json'
+  //         },
+  //         body: JSON.stringify({ image: file, id })
+  //       }
+  //     )
+  //     await res.json()
+  //     setUrl(`${baseURL}/shared/${v4()}-${productName.toLowerCase()}`)
+  //   }
+  // }
 
   useEffect(() => {
+    if (!openModal) return
     setTimeout(() => {
       ;(async () => {
         const element = printRef.current
@@ -111,11 +112,10 @@ const ShareImageModal = ({
               },
               body: JSON.stringify({ image: file, id })
             }
-          ).then(response => console.log(response.json()))
-          setUrl(`${baseURL}/shared/${v4()}-${productName.toLowerCase()}`)
+          ).then(response => response.json())
         }
       })()
-    }, 5000)
+    }, 3000)
   }, [openModal])
 
   return (
@@ -141,12 +141,19 @@ const ShareImageModal = ({
 
               <S.SocialMediaContainer>
                 <TwitterShareButton
-                  // onClick={sendData}
-                  beforeOnClick={() =>
-                    (async () => {
-                      await sendData()
-                    })()
+                  onClick={() =>
+                    setUrl(
+                      `${baseURL}/shared/${v4()}-${productName.toLowerCase()}`
+                    )
                   }
+                  // beforeOnClick={() =>
+                  //   (async () => {
+                  //     await () =>
+                  // setUrl(
+                  //   `${baseURL}/shared/${v4()}-${productName.toLowerCase()}`
+                  // )()
+                  //   })()
+                  // }
                   title="Image of your stats on Kassandra Foundation"
                   url={url}
                 >
@@ -159,7 +166,14 @@ const ShareImageModal = ({
                     Twitter
                   </S.SocialMedia>
                 </TwitterShareButton>
-                <LinkedinShareButton onClick={sendData} url={url}>
+                <LinkedinShareButton
+                  onClick={() =>
+                    setUrl(
+                      `${baseURL}/shared/${v4()}-${productName.toLowerCase()}`
+                    )
+                  }
+                  url={url}
+                >
                   <S.SocialMedia>
                     <Image
                       src="/assets/socialMedia/linkedin-icon.svg"
@@ -169,7 +183,14 @@ const ShareImageModal = ({
                     Linkedin
                   </S.SocialMedia>
                 </LinkedinShareButton>
-                <RedditShareButton onClick={sendData} url={url}>
+                <RedditShareButton
+                  onClick={() =>
+                    setUrl(
+                      `${baseURL}/shared/${v4()}-${productName.toLowerCase()}`
+                    )
+                  }
+                  url={url}
+                >
                   <S.SocialMedia>
                     <Image
                       src="/assets/socialMedia/reddit-icon.svg"
@@ -179,7 +200,14 @@ const ShareImageModal = ({
                     Reddit
                   </S.SocialMedia>
                 </RedditShareButton>
-                <FacebookShareButton onClick={sendData} url={url}>
+                <FacebookShareButton
+                  onClick={() =>
+                    setUrl(
+                      `${baseURL}/shared/${v4()}-${productName.toLowerCase()}`
+                    )
+                  }
+                  url={url}
+                >
                   <S.SocialMedia>
                     <Image
                       src="/assets/socialMedia/facebook-icon.svg"
