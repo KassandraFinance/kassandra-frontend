@@ -13,6 +13,7 @@ import 'tippy.js/dist/tippy.css'
 import { SUBGRAPH_URL, ProductDetails } from '../../constants/tokenAddresses'
 
 import { BNtoDecimal } from '../../utils/numerals'
+import { actionSetFees } from '../../store/modules/fees/actions'
 import { actionSetTokenAddress2Index } from '../../store/modules/tokenAddress2Index/actions'
 
 import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
@@ -161,6 +162,13 @@ const Products = ({ product }: Input) => {
 
       res.push(aHYPE)
 
+      dispatch(
+        actionSetFees({
+          Invest: '0',
+          Withdraw: (data.pool.fee_exit * 100).toFixed(2),
+          Swap: (data.pool.fee_swap * 100).toFixed(2)
+        })
+      )
       dispatch(actionGetPoolTokensArray(res))
     }
   }, [data])
