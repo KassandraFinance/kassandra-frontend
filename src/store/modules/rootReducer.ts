@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 
 import feesReducer from './fees/reducer'
 import chainIdReducer from './chainId/reducer'
+import infoAHYPEReducer from './infoAHYPE/reducer'
 import poolImagesReducer from './poolImages/reducer'
 import poolTokensReducer from './poolTokens/reducer'
 import tokenAddress2IndexReducer from './tokenAddress2Index/reducer'
@@ -10,6 +11,7 @@ import userWalletAddressReducer from './userWalletAddress/reducer'
 export default combineReducers({
   fees: feesReducer,
   chainId: chainIdReducer,
+  infoAHYPE: infoAHYPEReducer,
   poolImages: poolImagesReducer,
   poolTokensArray: poolTokensReducer,
   userWalletAddress: userWalletAddressReducer,

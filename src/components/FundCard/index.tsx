@@ -121,8 +121,8 @@ const FundCard = ({ product }: IFundCardProps) => {
         }
       )
 
-      const changeDay = calcChange(data.now[0].close, data.day[0]?.close)
-      const changeMonth = calcChange(data.now[0].close, data.month[0]?.close)
+      const changeDay = calcChange(data.now[0]?.close, data.day[0]?.close)
+      const changeMonth = calcChange(data.now[0]?.close, data.month[0]?.close)
 
       arrChangePrice[0] = changeDay
       arrChangePrice[1] = changeMonth
@@ -130,7 +130,7 @@ const FundCard = ({ product }: IFundCardProps) => {
       setChangeWeek(arrChangePrice)
 
       setInfoPool({
-        tvl: BNtoDecimal(Big(data.pool.total_value_locked_usd), 2, 2, 2),
+        tvl: BNtoDecimal(Big(data.pool?.total_value_locked_usd), 2, 2, 2),
         price: data.pool.price_usd
       })
 
