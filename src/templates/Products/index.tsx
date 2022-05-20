@@ -23,7 +23,7 @@ import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
 import Header from '../../components/Header'
 import ChartProducts from '../../components/ChartProducts'
-import HeimOperations from '../../components/HeimOperations'
+import PoolOperations from '../../components/PoolOperations'
 import ScrollUpButton from '../../components/ScrollUpButton'
 import Breadcrumb from '../../components/Breadcrumb'
 import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
@@ -314,7 +314,7 @@ const Products = ({ product }: Input) => {
           <Distribution poolPlatform={product.platform} />
           <TokenDescription symbol={product.symbol} />
         </S.ProductDetails>
-        <HeimOperations
+        <PoolOperations
           poolChain={product.chain}
           crpPoolAddress={product.sipAddress}
           corePoolAddress={product.coreAddress}

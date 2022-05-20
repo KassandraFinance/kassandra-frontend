@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
 
-import SelectOperatorCart from '../../HeimOperations/SelectOperatorCart';
-import { TitlesMobile } from '../../HeimOperations/SelectOperatorMobile';
+import SelectOperatorCart from '../../PoolOperations/SelectOperatorCart';
+import { TitlesMobile } from '../../PoolOperations/SelectOperatorMobile';
 
 import { ChainDetails } from '../../../utils/changeChain'
 
