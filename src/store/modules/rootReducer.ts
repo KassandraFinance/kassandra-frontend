@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux'
-import chainId from './chainId/reducer'
-import poolImages from './poolImages/reducer'
+import chainIdReducer from './chainId/reducer'
+import poolImagesReducer from './poolImages/reducer'
 import poolTokensReducer from './poolTokens/reducer'
+import tokenAddress2IndexReducer from './tokenAddress2Index/reducer'
 import userWalletAddressReducer from './userWalletAddress/reducer'
 
 export default combineReducers({
-  chainId: chainId,
+  chainId: chainIdReducer,
+  poolImages: poolImagesReducer,
   poolTokensArray: poolTokensReducer,
   userWalletAddress: userWalletAddressReducer,
-  poolImages: poolImages
+  tokenAddress2Index: tokenAddress2IndexReducer
 })

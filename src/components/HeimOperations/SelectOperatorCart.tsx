@@ -3,8 +3,9 @@ import React from 'react'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { ChainDetails } from '../../utils/changeChain'
 
-import * as S from './styles'
 import Form from './Form';
+
+import * as S from './styles'
 
 export type Titles = keyof typeof messages;
 
