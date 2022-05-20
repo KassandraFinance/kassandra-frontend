@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from 'react'
+import React, { ReactNode } from 'react'
 import Image from 'next/image'
 import {
   FacebookShareButton,
@@ -28,6 +28,7 @@ const ShareImageModal = ({
   poolId,
   productName
 }: ShareImageProps) => {
+  const [loading, setLoading] = React.useState(true)
   const printRef = React.useRef<HTMLInputElement>(null)
   const [url, setUrl] = React.useState(
     `${baseURL}/shared/${v4()}-${productName.toLowerCase()}`
@@ -57,35 +58,12 @@ const ShareImageModal = ({
     }
   }
 
-  // async function sendData() {
-  //   const element = printRef.current
-  //   if (element) {
-  //     const canvas = await html2canvas(element, {
-  //       windowWidth: 1280,
-  //       onclone: function (doc: any) {
-  //         doc.querySelector('.image-container').style.display = 'block'
-  //         doc.querySelector('.bg-image-color').style.background = '#2d152b'
-  //       }
-  //     })
-  //     const file = canvas.toDataURL('image/png')
-  //     const id = url.split('/').pop()
-  //     const res = await fetch(
-  //       `${baseURL}/api/funds/shared?id=${poolId}-${productName.toLowerCase()}`,
-  //       {
-  //         method: 'POST',
-  //         headers: {
-  //           Accept: 'application/json',
-  //           'Content-Type': 'application/json'
-  //         },
-  //         body: JSON.stringify({ image: file, id })
-  //       }
-  //     )
-  //     await res.json()
-  //     setUrl(`${baseURL}/shared/${v4()}-${productName.toLowerCase()}`)
-  //   }
-  // }
+  function handleShareClick() {
+    setUrl(`${baseURL}/shared/${v4()}-${productName.toLowerCase()}`)
+    setOpenModal(false)
+  }
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!openModal) return
     setTimeout(() => {
       ;(async () => {
@@ -118,6 +96,14 @@ const ShareImageModal = ({
     }, 3000)
   }, [openModal])
 
+  React.useEffect(() => {
+    if (!openModal) return
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+    }, 3400)
+  }, [openModal])
+
   return (
     <>
       {openModal ? (
@@ -141,11 +127,8 @@ const ShareImageModal = ({
 
               <S.SocialMediaContainer>
                 <TwitterShareButton
-                  onClick={() =>
-                    setUrl(
-                      `${baseURL}/shared/${v4()}-${productName.toLowerCase()}`
-                    )
-                  }
+                  disabled={loading}
+                  onClick={handleShareClick}
                   // beforeOnClick={() =>
                   //   (async () => {
                   //     await () =>
@@ -167,11 +150,8 @@ const ShareImageModal = ({
                   </S.SocialMedia>
                 </TwitterShareButton>
                 <LinkedinShareButton
-                  onClick={() =>
-                    setUrl(
-                      `${baseURL}/shared/${v4()}-${productName.toLowerCase()}`
-                    )
-                  }
+                  disabled={loading}
+                  onClick={handleShareClick}
                   url={url}
                 >
                   <S.SocialMedia>
@@ -184,11 +164,8 @@ const ShareImageModal = ({
                   </S.SocialMedia>
                 </LinkedinShareButton>
                 <RedditShareButton
-                  onClick={() =>
-                    setUrl(
-                      `${baseURL}/shared/${v4()}-${productName.toLowerCase()}`
-                    )
-                  }
+                  disabled={loading}
+                  onClick={handleShareClick}
                   url={url}
                 >
                   <S.SocialMedia>
@@ -201,11 +178,8 @@ const ShareImageModal = ({
                   </S.SocialMedia>
                 </RedditShareButton>
                 <FacebookShareButton
-                  onClick={() =>
-                    setUrl(
-                      `${baseURL}/shared/${v4()}-${productName.toLowerCase()}`
-                    )
-                  }
+                  disabled={loading}
+                  onClick={handleShareClick}
                   url={url}
                 >
                   <S.SocialMedia>

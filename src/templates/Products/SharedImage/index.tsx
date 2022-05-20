@@ -31,7 +31,7 @@ const SharedImage = ({
   totalPerfomance,
   productName
 }: ISharedImageProps) => {
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  // const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { poolTokensArray }: { poolTokensArray: TokenDetails[] } = useSelector(
     (state: RootStateOrAny) => state
   )
@@ -47,10 +47,10 @@ const SharedImage = ({
           <Image src="/assets/modalShareImage.png" width={40} height={40} />
           <h1>{productName}</h1>
           <S.Detail>${socialIndex}</S.Detail>
-          <S.HorizontalLine />
+          {/* <S.HorizontalLine /> */}
         </S.Title>
-        <S.UserInfo>
-          {/* <h2>Manager</h2> */}
+        {/* <S.UserInfo>
+          <h2>Manager</h2>
           <S.Profile>
             <S.ProfileImage />
             <S.ProfileAddress>
@@ -59,7 +59,7 @@ const SharedImage = ({
                 : substr('0x000000000')}
             </S.ProfileAddress>
           </S.Profile>
-        </S.UserInfo>
+        </S.UserInfo> */}
       </S.Header>
 
       <S.Main>
