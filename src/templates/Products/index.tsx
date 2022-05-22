@@ -1,19 +1,29 @@
 import React from 'react'
-import Big from 'big.js'
-import Image from 'next/image'
 import useSWR from 'swr'
+import Image from 'next/image'
 import { request } from 'graphql-request'
+import { useDispatch } from 'react-redux'
+
+import Big from 'big.js'
+import BigNumber from 'bn.js'
+
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
 import { SUBGRAPH_URL, ProductDetails } from '../../constants/tokenAddresses'
 
 import { BNtoDecimal } from '../../utils/numerals'
+import { TokenDetails } from '../../store/modules/poolTokens/types'
+import { actionSetFees } from '../../store/modules/fees/actions'
+import { actionSetInfoAHYPE } from '../../store/modules/infoAHYPE/actions'
+import { actionGetPoolTokensArray } from '../../store/modules/poolTokens/actions'
+import { actionSetTokenAddress2Index } from '../../store/modules/tokenAddress2Index/actions'
+
 import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
 import Header from '../../components/Header'
 import ChartProducts from '../../components/ChartProducts'
-import HeimOperations from '../../components/HeimOperations'
+import PoolOperations from '../../components/PoolOperations'
 import ScrollUpButton from '../../components/ScrollUpButton'
 import Breadcrumb from '../../components/Breadcrumb'
 import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
@@ -59,6 +69,7 @@ const Products = ({ product }: Input) => {
   })
 
   const { trackProductPageView } = useMatomoEcommerce()
+  const dispatch = useDispatch()
 
   const { data } = useSWR([GET_INFO_POOL], query =>
     request(SUBGRAPH_URL, query, {
@@ -110,6 +121,66 @@ const Products = ({ product }: Input) => {
       )
     }
   }, [product])
+
+  React.useEffect(() => {
+    if (data) {
+      const aHYPE: TokenDetails = {
+        balance_in_pool: '',
+        address: data.pool.id,
+        allocation: 0,
+        allocation_goal: 0,
+        decimals: new BigNumber(data.pool.decimals),
+        price: Number(data.pool.price_usd),
+        name: data.pool.name,
+        symbol: data.pool.symbol
+      }
+      const res: TokenDetails[] = data.pool.underlying_assets.map(
+        (item: {
+          balance: string,
+          token: {
+            id: string,
+            decimals: string | number | BigNumber,
+            price_usd: string,
+            name: string,
+            symbol: string
+          },
+          weight_goal_normalized: string,
+          weight_normalized: string
+        }) => {
+          console.log(item.token.symbol)
+          return {
+            balance_in_pool: item.balance,
+            address: item.token.id,
+            allocation: (Number(item.weight_normalized) * 100).toFixed(2),
+            allocation_goal: (
+              Number(item.weight_goal_normalized) * 100
+            ).toFixed(2),
+            decimals: new BigNumber(item.token.decimals),
+            price: Number(item.token.price_usd),
+            name: item.token.name,
+            symbol: item.token.symbol === 'WAVAX' ? 'AVAX' : item.token.symbol
+          }
+        }
+      )
+
+      res.push(aHYPE)
+
+      dispatch(actionSetInfoAHYPE(res))
+      dispatch(
+        actionSetTokenAddress2Index(
+          res.reduce((acc, cur, i) => ({ [cur.address]: i, ...acc }), {})
+        )
+      )
+      dispatch(
+        actionSetFees({
+          Invest: '0',
+          Withdraw: (data.pool.fee_exit * 100).toFixed(2),
+          Swap: (data.pool.fee_swap * 100).toFixed(2)
+        })
+      )
+      dispatch(actionGetPoolTokensArray(res))
+    }
+  }, [data])
 
   return (
     <>
@@ -224,6 +295,14 @@ const Products = ({ product }: Input) => {
             crpPoolAddress={product.sipAddress}
             setTotalPerfomance={setTotalPerfomance}
           />
+          <MyAsset
+            crpPoolAddress={product.sipAddress}
+            price={infoPool.price}
+            symbol={product.symbol}
+            icon={product.fundIcon}
+            pid={typeof product.pid === 'undefined' ? -1 : product.pid}
+            decimals={infoPool.decimals}
+          />
           <Summary
             strategy={data?.pool.strategy || '...'}
             summary={product.fundSummary}
@@ -235,7 +314,7 @@ const Products = ({ product }: Input) => {
           <Distribution poolPlatform={product.platform} />
           <TokenDescription symbol={product.symbol} />
         </S.ProductDetails>
-        <HeimOperations
+        <PoolOperations
           poolChain={product.chain}
           crpPoolAddress={product.sipAddress}
           corePoolAddress={product.coreAddress}
