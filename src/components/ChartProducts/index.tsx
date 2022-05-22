@@ -5,6 +5,8 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import { SUBGRAPH_URL, HeimCRPPOOL } from '../../constants/tokenAddresses'
 
+import { actionSetPeriodSelected } from '../../store/modules/periodSelected/actions'
+
 import Loading from '../Loading'
 
 import ChartPrice from './ChartPrice'
@@ -14,6 +16,8 @@ import ChartAllocation from './ChartAllocation'
 import { GET_CHART } from './graphql'
 
 import * as S from './styles'
+import { useDispatch } from 'react-redux'
+import { actionSetChartSelected } from '../../store/modules/chartSelected/actions'
 
 const arrPeriod: string[] = ['1W', '1M', '3M', '1Y']
 
@@ -22,6 +26,7 @@ interface IChartProductsProps {
 }
 
 const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
+  const dispatch = useDispatch()
   const [inputChecked, setInputChecked] = React.useState<string>('Price')
   const [price, setPrice] = React.useState([])
   const [tvl, setTvl] = React.useState([])
@@ -101,8 +106,13 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
   }
 
   React.useEffect(() => {
+    dispatch(actionSetChartSelected('Price'))
+  }, [])
+
+  React.useEffect(() => {
     returnDate('1W')
     setPeriodSelected('1W')
+    dispatch(actionSetPeriodSelected('1W'))
   }, [inputChecked])
 
   React.useEffect(() => {
@@ -149,6 +159,7 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
             id="Price-chart"
             onChange={() => {
               setInputChecked('Price')
+              dispatch(actionSetChartSelected('Price'))
               matomoEvent('click-on-tab', 'price')
             }}
             checked={inputChecked === 'Price'}
@@ -162,6 +173,7 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
             id="TVL-chart"
             onChange={() => {
               setInputChecked('TVL')
+              dispatch(actionSetChartSelected('TVL'))
               matomoEvent('click-on-tab', 'tvl')
             }}
             checked={inputChecked === 'TVL'}
@@ -175,6 +187,7 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
             id="Allocation-chart"
             onChange={() => {
               setInputChecked('Allocation')
+              dispatch(actionSetChartSelected('Allocation'))
               matomoEvent('click-on-tab', 'allocation')
             }}
             checked={inputChecked === 'Allocation'}
@@ -196,6 +209,7 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
                 onChange={() => {
                   returnDate('1D')
                   setPeriodSelected('1D')
+                  dispatch(actionSetPeriodSelected('1D'))
                 }}
               />
               <S.LabelPeriod
@@ -217,6 +231,7 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
                 onChange={() => {
                   returnDate(period)
                   setPeriodSelected(period)
+                  dispatch(actionSetPeriodSelected(period))
                 }}
               />
               <S.LabelPeriod

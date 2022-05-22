@@ -5,8 +5,10 @@ import chainIdReducer from './chainId/reducer'
 import infoAHYPEReducer from './infoAHYPE/reducer'
 import poolImagesReducer from './poolImages/reducer'
 import poolTokensReducer from './poolTokens/reducer'
-import tokenAddress2IndexReducer from './tokenAddress2Index/reducer'
+import chartSelectedReducer from './chartSelected/reducer'
+import periodSelectedReducer from './periodSelected/reducer'
 import userWalletAddressReducer from './userWalletAddress/reducer'
+import tokenAddress2IndexReducer from './tokenAddress2Index/reducer'
 
 export default combineReducers({
   fees: feesReducer,
@@ -14,6 +16,8 @@ export default combineReducers({
   infoAHYPE: infoAHYPEReducer,
   poolImages: poolImagesReducer,
   poolTokensArray: poolTokensReducer,
+  chartSelected: chartSelectedReducer,
+  periodSelected: periodSelectedReducer,
   userWalletAddress: userWalletAddressReducer,
-  tokenAddress2Index: tokenAddress2IndexReducer
+  tokenAddress2Index: tokenAddress2IndexReducer,
 })
