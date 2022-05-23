@@ -19,8 +19,13 @@ interface ShareImageProps {
   productName: string;
 }
 
-const baseURL = 'https://alpha.kassandra.finance'
-// const baseURL = 'http://localhost:3000'
+const URL_API: { [key: number | string]: string } = {
+  1: 'https://kassandra.finance',
+  2: 'https://alpha.kassandra.finance',
+  3: 'https://demo.kassandra.finance',
+  4: 'http://localhost:3000'
+}
+
 const ShareImageModal = ({
   setOpenModal,
   openModal,
@@ -31,7 +36,9 @@ const ShareImageModal = ({
   const [loading, setLoading] = React.useState(true)
   const printRef = React.useRef<HTMLInputElement>(null)
   const [url, setUrl] = React.useState(
-    `${baseURL}/shared/${v4()}-${productName.toLowerCase()}`
+    `${
+      URL_API[process.env.NEXT_PUBLIC_URL_API || 4]
+    }/shared/${v4()}-${productName.toLowerCase()}`
   )
 
   async function handleDownloadImage() {
@@ -59,7 +66,11 @@ const ShareImageModal = ({
   }
 
   function handleShareClick() {
-    setUrl(`${baseURL}/shared/${v4()}-${productName.toLowerCase()}`)
+    setUrl(
+      `${
+        URL_API[process.env.NEXT_PUBLIC_URL_API || 4]
+      }/shared/${v4()}-${productName.toLowerCase()}`
+    )
     setOpenModal(false)
   }
 
@@ -81,7 +92,9 @@ const ShareImageModal = ({
           const id = url.split('/').pop()
           console.log(file, id)
           fetch(
-            `${baseURL}/api/funds/shared?id=${poolId}-${productName.toLowerCase()}`,
+            `${
+              URL_API[process.env.NEXT_PUBLIC_URL_API || 4]
+            }/api/funds/shared?id=${poolId}-${productName.toLowerCase()}`,
             {
               method: 'POST',
               headers: {
@@ -133,7 +146,7 @@ const ShareImageModal = ({
                   //   (async () => {
                   //     await () =>
                   // setUrl(
-                  //   `${baseURL}/shared/${v4()}-${productName.toLowerCase()}`
+                  //   `${URL_API[process.env.NEXT_PUBLIC_URL_API || 4]}/shared/${v4()}-${productName.toLowerCase()}`
                   // )()
                   //   })()
                   // }

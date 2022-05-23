@@ -124,7 +124,7 @@ const Products = ({ product }: Input) => {
 
   React.useEffect(() => {
     if (data) {
-      const aHYPE: TokenDetails = {
+      const product: TokenDetails = {
         balance_in_pool: '',
         address: data.pool.id,
         allocation: 0,
@@ -163,7 +163,7 @@ const Products = ({ product }: Input) => {
         }
       )
 
-      res.push(aHYPE)
+      res.push(product)
 
       dispatch(actionSetInfoAHYPE(res))
       dispatch(

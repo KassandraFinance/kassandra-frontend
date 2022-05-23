@@ -12,17 +12,19 @@ const Page = ({ id }: Props) => {
   const router = useRouter()
   const fund = id.split('-').pop()
 
-  const baseUrl =
-    process.env.NODE_ENV === 'production'
-      ? 'https://alpha.kassandra.finance'
-      : 'http://localhost:3000'
+  const URL_API: { [key: number | string]: string } = {
+    1: 'https://kassandra.finance',
+    2: 'https://alpha.kassandra.finance',
+    3: 'https://demo.kassandra.finance',
+    4: 'http://localhost:3000'
+  }
 
   //   React.useEffect(() => {
   //     document
   //       // eslint-disable-next-line prettier/prettier
   //       .querySelector("meta[property='og:image']")!
-  //       .setAttribute('content', `${baseUrl}/api/funds/shared?id=${id}`)
-  //   }, [baseUrl, id])
+  //       .setAttribute('content', `${URL_API[process.env.NEXT_PUBLIC_URL_API || 4]}/api/funds/shared?id=${id}`)
+  //   }, [id])
 
   React.useEffect(() => {
     router.push(`/explore/${fund}`)
@@ -34,9 +36,16 @@ const Page = ({ id }: Props) => {
         <meta
           property="og:image"
           key="ogImage"
-          content={`${baseUrl}/api/funds/shared?id=${id}`}
+          content={`${
+            URL_API[process.env.NEXT_PUBLIC_URL_API || 4]
+          }/api/funds/shared?id=${id}`}
         />
-        <meta property="og:url" content={`${baseUrl}/shared/${id}`} />
+        <meta
+          property="og:url"
+          content={`${
+            URL_API[process.env.NEXT_PUBLIC_URL_API || 4]
+          }/shared/${id}`}
+        />
         <meta
           name="twitter:card"
           key="twitterCard"
@@ -45,13 +54,20 @@ const Page = ({ id }: Props) => {
         <meta
           name="twitter:image"
           key="twitterImage"
-          content={`${baseUrl}/api/funds/shared?id=${id}`}
+          content={`${
+            URL_API[process.env.NEXT_PUBLIC_URL_API || 4]
+          }/api/funds/shared?id=${id}`}
         />
         <meta property="og:image:width" content="1000" />
         <meta property="og:image:height" content="500" />
       </Head>
       <div>
-        <img src={`${baseUrl}/api/funds/shared?id=${id}`} alt="" />
+        <img
+          src={`${
+            URL_API[process.env.NEXT_PUBLIC_URL_API || 4]
+          }/api/funds/shared?id=${id}`}
+          alt=""
+        />
       </div>
     </>
   )
