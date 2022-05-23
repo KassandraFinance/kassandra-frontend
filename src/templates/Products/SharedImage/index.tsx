@@ -4,7 +4,7 @@ import { RootStateOrAny, useSelector } from 'react-redux'
 
 import { TokenImages } from '../../../store/modules/poolImages/types'
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
-import substr from '../../../utils/substr'
+// import substr from '../../../utils/substr'
 import ChartProducts from './ChartProducts'
 import {
   Background,

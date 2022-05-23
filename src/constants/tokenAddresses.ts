@@ -16,7 +16,6 @@ export const HeimCorePool = process.env.NEXT_PUBLIC_MASTER === '1' ?
   :
   '0xFCfB171A8a4666bc53Eac2d91Cb0b5203DDa63cD'
 
-
 export const LPDaiAvax = process.env.NEXT_PUBLIC_MASTER === '1' ?
   '0xbA09679Ab223C6bdaf44D45Ba2d7279959289AB0'
   :
@@ -54,7 +53,7 @@ export const GovernorAlpha = process.env.NEXT_PUBLIC_MASTER === '1' ?
   '0x2B6C46b9552B6Fa36DD097b6527ba20fdDB3FfD5'
 
 export const ProxyContract = process.env.NEXT_PUBLIC_MASTER === '1' ?
-  ''
+  '0x1dd8b313ec6f7a744b69fc86ae47ad2a5eb45bc4'
   :
   '0x97e33051B09092C1301A90b964a74cA51C0b068B'
 
@@ -165,24 +164,24 @@ const ahype: ProductDetails  = process.env.NEXT_PUBLIC_MASTER === '1' ?
     ]
   }
 
-const tricrypto:  ProductDetails  =  {
-    sipAddress: '0x38918142779e2CD1189cBd9e932723C968363D1E',
-    coreAddress: '0x17C1037B17b221f2f3b53f85cebD817C941f6bC5',
-    platform: 'Fuji',
-    categories: ['Fuji', 'Pool'],
-    chain: chains.fuji,
-    name: 'Tricrypto Social Index',
-    fundBy: 'kassandra with yield yak',
-    symbol: 'Tricrypto',
-    fundIcon: tricryptoIcon,
-    pid: 6,
-    fundLink: 'https://kassandra.finance/',
-    fundSummary: `The #K3C represents a yield-earning portfolio composed of BTC,
-    ETH, USDC and KACY built in partnership with our friends back at Yield Yak.`,
-    partners: [
-      partners.avalanche,
-      partners.yieldYak
-    ]
+const tricrypto: ProductDetails  = {
+  sipAddress: '0xA6CAB4b1019ee22309dcA5ba62C3372a791dcB2E',
+  coreAddress: '0x440C5De429B36967E46C192f2140259e2ec22fc8',
+  platform: 'Avalanche',
+  categories: ['Avalanche', 'Pool'],
+  chain: chains.avalanche,
+  name: 'Tricrypto Social Index',
+  fundBy: 'Kassandra with Yield Yak',
+  symbol: 'Tricrypto',
+  fundIcon: tricryptoIcon,
+  pid: 6,
+  fundLink: 'https://kassandra.finance/',
+  fundSummary: `The #K3C represents a yield-earning portfolio composed of BTC,
+  ETH, USDC and KACY built in partnership with our friends back at Yield Yak.`,
+  partners: [
+    partners.avalanche,
+    partners.yieldYak
+  ]
 }
 
 export const products = [ahype, tricrypto]

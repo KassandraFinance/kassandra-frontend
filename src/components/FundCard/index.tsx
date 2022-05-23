@@ -205,7 +205,11 @@ const FundCard = ({ product }: IFundCardProps) => {
 
               <S.FundPrice>
                 <h3>Price</h3>
-                <span>${parseFloat(infoPool.price).toFixed(2)}</span>
+                <span>
+                  {data?.pool
+                    ? `$${parseFloat(infoPool.price).toFixed(2)}`
+                    : '...'}
+                </span>
               </S.FundPrice>
             </S.CardHeader>
 
