@@ -1,15 +1,19 @@
 import { Reducer } from 'redux'
 import { HYDRATE } from 'next-redux-wrapper'
-import { Types, TokenDetails } from './types'
+import { Types } from './types'
 
-const INITIAL_STATE: Array<TokenDetails> = []
+const INITIAL_STATE = {
+  Invest: '...',
+  Withdraw: '...',
+  Swap: '...'
+}
 
 const reducer: Reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case HYDRATE: {
       return action.payload
     }
-    case Types.GET_POOL_TOKENS_ARRAY: {
+    case Types.SET_TOKEN_ADDRESS_2_INDEX: {
       return action.payload
     }
     default: {

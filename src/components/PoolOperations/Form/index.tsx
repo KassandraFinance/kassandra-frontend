@@ -1,29 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
-import useSWR from 'swr'
-import { request } from 'graphql-request'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
-import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
+import { useSelector, RootStateOrAny } from 'react-redux'
 
-import { TokenDetails } from '../../../store/modules/poolTokens/types'
-import { actionGetPoolTokens } from '../../../store/modules/poolTokens/actions'
-
-import { SUBGRAPH_URL, HeimCRPPOOL, ProxyContract } from '../../../constants/tokenAddresses'
-import { GET_INFO_AHYPE } from '../graphql'
+import { ProxyContract } from '../../../constants/tokenAddresses'
 
 import useProxy from '../../../hooks/useProxy'
 import useERC20Contract, { ERC20 } from '../../../hooks/useERC20Contract'
 import usePoolContract from '../../../hooks/usePoolContract'
 import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
+import web3 from '../../../utils/web3'
 import { priceDollar } from '../../../utils/priceDollar'
-import changeChain, { ChainDetails } from '../../../utils/changeChain'
 import { BNtoDecimal, wei } from '../../../utils/numerals'
+import changeChain, { ChainDetails } from '../../../utils/changeChain'
 import waitTransaction, { MetamaskError, TransactionCallback } from '../../../utils/txWait'
 
 import Button from '../../Button'
@@ -34,9 +29,9 @@ import TransactionSettings from './TransactionSettings'
 
 import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
-import * as S from './styles'
 import { Titles } from '..'
-import web3 from '../../../utils/web3'
+
+import * as S from './styles'
 
 interface IFormProps {
   typeAction: string;
@@ -47,10 +42,6 @@ interface IFormProps {
   corePoolAddress: string;
   productCategories: string[];
   setIsModaWallet: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-interface Address2Index {
-  [key: string]: number;
 }
 
 enum Approval {
@@ -76,10 +67,10 @@ const Form = ({
   const crpPoolToken = useERC20Contract(crpPoolAddress)
   const corePool = usePoolContract(corePoolAddress)
   const crpPool = useProxy(ProxyContract, crpPoolAddress)
-  const { userWalletAddress, chainId } = useSelector((state: RootStateOrAny) => state)
+
+  const { userWalletAddress, chainId, fees, tokenAddress2Index, infoAHYPE } = useSelector((state: RootStateOrAny) => state)
   const { trackBuying, trackBought, trackCancelBuying } = useMatomoEcommerce();
 
-  const [tokenAddress2Index, setTokenAddress2Index] = React.useState<Address2Index>({})
   const [walletConnect, setWalletConnect] = React.useState<any>(null)
   const [approvals, setApprovals] = React.useState<Approvals>({
     Withdraw: [],
@@ -87,11 +78,6 @@ const Form = ({
     Swap: []
   })
 
-  const [fees, setFees] = React.useState({
-    Invest: '...',
-    Withdraw: '...',
-    Swap: '...'
-  })
   const [isReload, setIsReload] = React.useState<boolean>(false)
 
   const [errorMsg, setErrorMsg] = React.useState('')
@@ -112,15 +98,9 @@ const Form = ({
 
   const [priceInDollarOnWithdraw, setPriceInDollarOnWithdraw] = React.useState<string>('')
 
-  const [infoAHYPE, setInfoAHYPE] = React.useState<TokenDetails[]>([])
-
   const { trackEvent } = useMatomo()
-  const dispatch = useDispatch()
 
   const inputTokenRef = React.useRef<HTMLInputElement>(null)
-
-  const { data } = useSWR([GET_INFO_AHYPE, HeimCRPPOOL],
-    (query, id) => request(SUBGRAPH_URL, query, { id }))
 
   function matomoEvent(action: string, name: string) {
     trackEvent({
@@ -138,58 +118,6 @@ const Form = ({
       inputTokenRef.current.value = '0'
     }
   }
-
-  React.useEffect(() => {
-    if (data) {
-      const aHYPE: TokenDetails = {
-        balance_in_pool: '',
-        address: data.pool.id,
-        allocation: 0,
-        allocation_goal: 0,
-        decimals: new BigNumber(data.pool.decimals),
-        price: Number(data.pool.price_usd),
-        name: data.pool.name,
-        symbol: data.pool.symbol
-      }
-      const res: TokenDetails[] = data.pool.underlying_assets.map((item: {
-        balance: string;
-        token: {
-          id: string;
-          decimals: string | number | BigNumber;
-          price_usd: string;
-          name: string;
-          symbol: string;
-        };
-        weight_goal_normalized: string;
-        weight_normalized: string;
-      }) => {
-        return {
-          balance_in_pool: item.balance,
-          address: item.token.id,
-          allocation: ((Number(item.weight_normalized) * 100).toFixed(2)),
-          allocation_goal: ((Number(item.weight_goal_normalized) * 100).toFixed(2)),
-          decimals: new BigNumber(item.token.decimals),
-          price: Number(item.token.price_usd),
-          name: item.token.name,
-          symbol: item.token.symbol === 'WAVAX' ? 'AVAX' : item.token.symbol
-        }
-      })
-
-      res.push(aHYPE)
-
-      setTokenAddress2Index(
-        res.reduce((acc, cur, i) => ({ [cur.address]: i, ...acc }), {})
-      )
-
-      setInfoAHYPE(res)
-      setFees({
-        Invest: '0',
-        Withdraw: (data.pool.fee_exit * 100).toFixed(2),
-        Swap: (data.pool.fee_swap * 100).toFixed(2)
-      })
-      dispatch(actionGetPoolTokens(res))
-    }
-  }, [data])
 
   // set "swap" tokens
   React.useEffect(() => {
@@ -287,7 +215,7 @@ const Form = ({
     if (swapOutAddress === '') {
       const calc = async () => {
         const newSwapOutBalance = await Promise.all(
-          infoAHYPE.map(async item => {
+          infoAHYPE.map(async (item: { address: string }) => {
             if (item.address === poolChain.wrapped) {
               const balance = await web3.eth.getBalance(userWalletAddress)
               return new BigNumber(balance)
@@ -571,7 +499,7 @@ const Form = ({
 
       if (swapOutAddress === '') {
         const newSwapOutAmount = await Promise.all(
-          infoAHYPE.slice(0, -1).map(async item => {
+          infoAHYPE.slice(0, -1).map(async (item: { address: string }) => {
             const swapOutTotalPoolBalance = await corePool.balance(item.address)
             return getWithdrawAmount(
               poolSupply,

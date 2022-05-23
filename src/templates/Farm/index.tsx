@@ -190,6 +190,7 @@ const StakeFarm = () => {
               <p>EARN KACY BY STAKING OTHER ASSETS</p>
             </S.NameStake>
             <S.GridStaking>
+            {process.env.NEXT_PUBLIC_MASTER === '1' ? (
               <StakeCard
                 pid={5}
                 symbol="lp-png"
@@ -202,6 +203,7 @@ const StakeFarm = () => {
                 stakedUntil={kacyStake.stakedUntil}
                 stakeWithVotingPower={true}
               />
+            ): null}
               {process.env.NEXT_PUBLIC_MASTER === '1' ? (
                 <StakeCard
                   pid={7}
@@ -245,7 +247,6 @@ const StakeFarm = () => {
                   stakeWithVotingPower={true}
                 />
               )}
-              {/* <ComingSoon /> */}
             </S.GridStaking>
           </S.StakeFarm>
         </>
