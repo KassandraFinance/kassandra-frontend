@@ -78,6 +78,8 @@ const Form = ({
     Swap: []
   })
 
+  const [newTitle, setNewTitle] = React.useState(title)
+
   const [isReload, setIsReload] = React.useState<boolean>(false)
 
   const [errorMsg, setErrorMsg] = React.useState('')
@@ -184,13 +186,17 @@ const Form = ({
     calc()
   }, [chainId, title, infoAHYPE.length, userWalletAddress])
 
+  React.useEffect(() => {
+    setNewTitle(title)
+  }, [title])
+
   // get balance of swap in token
   React.useEffect(() => {
     if (swapInAddress.length === 0 || userWalletAddress.length === 0 || chainId.length === 0 || chainId !== poolChain.chainId) {
       return
     }
 
-    setSwapInBalance(new BigNumber(-1))
+    // setSwapInBalance(new BigNumber(-1))
     if (swapInAddress === poolChain.wrapped) {
       web3.eth.getBalance(userWalletAddress)
         .then(newBalance => setSwapInBalance(new BigNumber(newBalance)))
@@ -202,7 +208,7 @@ const Form = ({
     token
       .balance(userWalletAddress)
       .then(newBalance => setSwapInBalance(newBalance))
-  }, [chainId, swapInAddress, userWalletAddress, title, infoAHYPE, swapOutAddress])
+  }, [chainId, newTitle, swapInAddress, userWalletAddress, infoAHYPE, swapOutAddress])
 
   // get balance of swap out token
   React.useEffect(() => {
