@@ -163,7 +163,6 @@ const Form = ({
         weight_goal_normalized: string;
         weight_normalized: string;
       }) => {
-        console.log(item.token.symbol)
         return {
           balance_in_pool: item.balance,
           address: item.token.id,
