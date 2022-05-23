@@ -49,50 +49,20 @@ const Distribution = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
   const [changes, setChanges] = React.useState<number[]>([])
 
   React.useEffect(() => {
-    const getCoingecko = async (
-      platform: string,
-      token: TokenDetails,
-      index: number,
-      tokenImages: TokenImages,
-      tokenChanges: number[]
-    ) => {
-      try {
-        const URL = `https://api.coingecko.com/api/v3/coins/${platform}/contract/${
-          poolPlatform !== 'Fuji' ? token.address : addressChanger[token.address]
-        }?localization=false&tickers=false&community_data=false&developer_data=false&sparkline=false`
-        const res = await fetch(URL)
-        const data = await res.json()
-        tokenImages[token.address] = data.image?.small
-        tokenChanges[index] = Number(
-          data.market_data?.price_change_percentage_24h || 0
-        )
-        return
-      } catch (e) {
-        return
-      }
+    const arrayAddressPool = poolTokensArray.slice(0, -1).map(token => {
+      return poolPlatform !== 'Fuji' ? token.address : addressChanger[token.address]
+    })
+
+    const getCoingecko = async () => {
+      const URL = `/api/image-coingecko?poolinfo=${network2coingeckoID[poolPlatform]}&tokenAddress=${arrayAddressPool}`
+      const res = await fetch(URL)
+      const data = await res.json()
+
+      setChanges(data.infoToken)
+      dispatch(actionSetPoolImages(data.images))
     }
 
-    const getExtraInfo = async () => {
-      const images: TokenImages = {}
-      const change: number[] = []
-
-      await Promise.all(
-        poolTokensArray.slice(0, -1).map(async (token, index) => {
-          await getCoingecko(
-            network2coingeckoID[poolPlatform],
-            token,
-            index,
-            images,
-            change
-          )
-        })
-      )
-
-      setChanges(change)
-      dispatch(actionSetPoolImages(images))
-    }
-
-    getExtraInfo()
+    getCoingecko()
   }, [poolTokensArray])
 
   return (
@@ -112,40 +82,44 @@ const Distribution = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
           </S.Tr>
         </thead>
         <tbody>
-          {poolTokensArray.slice(0, -1).map((coin, index) => (
-            <S.Tr key={`key_${coin.name}`}>
-              <S.Td change24h={false}>
-                <S.Coin width={110}>
-                  <img src={poolImages[coin.address] || none.src} alt="" />
-                  <span>{coin.symbol}</span>
-                </S.Coin>
-              </S.Td>
-              <S.Td change24h={false}>
-                <S.Coin width={60}>{`${coin.allocation || 0}%`}</S.Coin>
-              </S.Td>
-              <S.Td change24h={false}>
-                {`$ ${BNtoDecimal(
-                  Big(coin.balance_in_pool || 0).times(Big(coin.price || 0)),
-                  2,
-                  2,
-                  2
-                )}`}
-                <S.BalanceCoin>{`${BNtoDecimal(Big(coin.balance_in_pool || 0), coin.decimals.toNumber(), 3)} ${coin.symbol}`}</S.BalanceCoin>
-              </S.Td>
-              <S.Td>
-                <span>${
-                  BNtoDecimal(Big(coin.price || 0), 18, 2, 2)
-                }</span>
-                <S.Coin negative={(changes[index] || 0) < 0} change24h={true}>
-                  {changes[index] ? 
-                    `${changes[index] < 0 ? '' : '+' }${changes[index].toFixed(2)}%` 
-                    :
-                    '-'
-                  }
-                </S.Coin>
-              </S.Td>
-            </S.Tr>
-          ))}
+          {poolTokensArray.slice(0, -1).map((coin, index) => {
+            const addressCoin = poolPlatform !== 'Fuji' ? coin.address : addressChanger[coin.address];
+
+            return (
+              <S.Tr key={`key_${coin.name}`}>
+                <S.Td change24h={false}>
+                  <S.Coin width={110}>
+                    <img src={poolImages[addressCoin ? addressCoin : ''] || none.src} alt="" />
+                    <span>{coin.symbol}</span>
+                  </S.Coin>
+                </S.Td>
+                <S.Td change24h={false}>
+                  <S.Coin width={60}>{`${coin.allocation || 0}%`}</S.Coin>
+                </S.Td>
+                <S.Td change24h={false}>
+                  {`$ ${BNtoDecimal(
+                    Big(coin.balance_in_pool || 0).times(Big(coin.price || 0)),
+                    2,
+                    2,
+                    2
+                  )}`}
+                  <S.BalanceCoin>{`${BNtoDecimal(Big(coin.balance_in_pool || 0), coin.decimals.toNumber(), 3)} ${coin.symbol}`}</S.BalanceCoin>
+                </S.Td>
+                <S.Td>
+                  <span>${
+                    BNtoDecimal(Big(coin.price || 0), 18, 2, 2)
+                  }</span>
+                  <S.Coin negative={(changes[index] || 0) < 0} change24h={true}>
+                    {changes[index] ?
+                      `${changes[index] < 0 ? '' : '+' }${changes[index].toFixed(2)}%`
+                      :
+                      '-'
+                    }
+                  </S.Coin>
+                </S.Td>
+              </S.Tr>
+            )
+          })}
         </tbody>
       </S.Table>
     </S.Distribution>

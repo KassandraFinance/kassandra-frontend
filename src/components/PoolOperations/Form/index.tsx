@@ -118,7 +118,7 @@ const Form = ({
       inputTokenRef.current.value = '0'
     }
   }
-  
+
   // set "swap" tokens
   React.useEffect(() => {
     let newSwapInAddress = ''
