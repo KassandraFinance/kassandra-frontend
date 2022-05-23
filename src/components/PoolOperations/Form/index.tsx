@@ -78,7 +78,7 @@ const Form = ({
     Swap: []
   })
 
-  const [teste, setTeste] = React.useState(title)
+  const [newTitle, setNewTitle] = React.useState(title)
 
   const [isReload, setIsReload] = React.useState<boolean>(false)
 
@@ -187,7 +187,7 @@ const Form = ({
   }, [chainId, title, infoAHYPE.length, userWalletAddress])
 
   React.useEffect(() => {
-    setTeste(title)
+    setNewTitle(title)
   }, [title])
 
   // get balance of swap in token
@@ -208,7 +208,7 @@ const Form = ({
     token
       .balance(userWalletAddress)
       .then(newBalance => setSwapInBalance(newBalance))
-  }, [chainId, teste, swapInAddress, userWalletAddress, infoAHYPE, swapOutAddress])
+  }, [chainId, newTitle, swapInAddress, userWalletAddress, infoAHYPE, swapOutAddress])
 
   // get balance of swap out token
   React.useEffect(() => {
