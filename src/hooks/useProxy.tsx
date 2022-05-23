@@ -38,11 +38,12 @@ const useProxy = (address: string, crpAddress: string) => {
 
     const exitPool = (
       poolAmountIn: BigNumber,
+      tokensOut: Array<string>,
       minAmountsOut: Array<BigNumber>,
       walletAddress: string,
       callback: TransactionCallback
     ) => {
-      return contract.methods.exitPool(crpAddress, poolAmountIn, minAmountsOut).send(
+      return contract.methods.exitPool(crpAddress, poolAmountIn, tokensOut, minAmountsOut).send(
         { from: walletAddress },
         callback
       )

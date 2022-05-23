@@ -859,7 +859,7 @@ const Form = ({
             }
 
             corePool.currentTokens()
-              .then(tokens => {
+              .then(async tokens => {
                 const swapOutAmounts = []
 
                 for (let i = 0; i < tokens.length; i++) {
@@ -872,6 +872,7 @@ const Form = ({
 
                 crpPool.exitPool(
                   swapInAmountVal,
+                  await corePool.currentTokens(),
                   swapOutAmounts,
                   walletAddress.value,
                   withdrawCallback(swapInSymbol.value, -1 * amountInUSD)
