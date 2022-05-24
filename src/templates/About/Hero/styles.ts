@@ -128,13 +128,15 @@ export const Card = styled.div`
     flex-direction: row;
     margin: 0 0 2.4rem;
   }
-  p {
+  span {
+    display: block;
+    margin: 1.6rem 0 1rem;
+
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.bold};
     line-height: 104%;
     color: #ffffff;
     letter-spacing: 0;
-    margin: 1.6rem 0 1rem;
     @media (max-width: 488px) {
       margin-left: 1.6rem;
     }
