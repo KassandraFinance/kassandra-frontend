@@ -80,7 +80,7 @@ export const ListTitle = styled.li`
     font-size: ${theme.font.sizes.font14};
   }
 `
-export const ListText = styled.li`
+export const ListText = styled.span`
   font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.light};
   line-height: 155%;
