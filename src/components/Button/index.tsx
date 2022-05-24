@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ButtonHTMLAttributes, AnchorHTMLAttributes } from 'react'
+import { ButtonHTMLAttributes, AnchorHTMLAttributes, forwardRef } from 'react'
 import * as S from './styles'
 
 type ButtonTypes =
@@ -22,20 +22,26 @@ export type ButtonProps = {
   text?: string
 } & ButtonTypes
 
-const Button: React.ForwardRefRenderFunction<S.WrapperProps, ButtonProps> = ({
-  children,
-  icon,
-  size = 'medium',
-  fullWidth = false,
-  backgroundPrimary = false,
-  backgroundSecondary = false,
-  backgroundVote = { voteState: undefined, type: undefined },
-  backgroundBlack = false,
-  disabledNoEvent = false,
-  text,
+const ButtonBase: React.ForwardRefRenderFunction<
+  S.WrapperProps,
+  ButtonProps
+> = (
+  {
+    children,
+    icon,
+    size = 'medium',
+    fullWidth = false,
+    backgroundPrimary = false,
+    backgroundSecondary = false,
+    backgroundVote = { voteState: undefined, type: undefined },
+    backgroundBlack = false,
+    disabledNoEvent = false,
+    text,
 
-  ...props
-}) => (
+    ...props
+  },
+  ref
+) => (
   <S.Wrapper
     size={size}
     fullWidth={fullWidth}
@@ -46,11 +52,14 @@ const Button: React.ForwardRefRenderFunction<S.WrapperProps, ButtonProps> = ({
     disabledNoEvent={disabledNoEvent}
     disabled={disabledNoEvent}
     backgroundVote={backgroundVote}
+    ref={ref}
     {...props}
   >
     {icon}
     {text}
   </S.Wrapper>
 )
+
+const Button = forwardRef(ButtonBase)
 
 export default Button
