@@ -51,7 +51,6 @@ const Distribution = ({ changes }: { changes: number[] }) => {
                   <S.Coin width={60}>{`${coin.allocation || 0}%`}</S.Coin>
                 </S.Td>
                 <S.Td change24h={false}>
-                  {`$ ${coin.holding}`}
                   {/* {`$ ${BNtoDecimal(
                     Big(coin.balance_in_pool || 0).times(Big(coin.price || 0)),
                     2,
