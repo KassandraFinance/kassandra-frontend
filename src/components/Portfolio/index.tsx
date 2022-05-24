@@ -192,7 +192,7 @@ const Portfolio = ({ profileAddress }: IProfileProps) => {
 
     const arr: IStakesType[] = []
     const asyncFunc = async () => {
-      for (let pid = 0; pid < pids.length - 1; pid++) {
+      for (let pid = 0; pid < pids.length; pid++) {
         const userInfoResponse = await userInfo(pid, profileAddress)
 
         if ((await userInfoResponse.amount) > 0) {
