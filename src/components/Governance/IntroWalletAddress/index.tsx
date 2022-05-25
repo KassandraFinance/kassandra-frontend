@@ -25,7 +25,6 @@ import ModalWalletConnect from '../../Modals/ModalWalletConnect'
 import ModalManageVotingPower from '../ModalManageVotingPower'
 
 import tooltip from '../../../../public/assets/icons/tooltip.svg'
-import jony from '../../../../public/assets/team/jony.png'
 
 import { GET_USER } from './graphql'
 

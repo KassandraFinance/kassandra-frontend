@@ -8,7 +8,7 @@ interface IAnyCardProps {
   text: string;
   button?: boolean;
   buttonText?: string;
-  link?: any;
+  link?: string;
   button2?: boolean;
   onClick?: () => void;
 }
@@ -17,7 +17,7 @@ const AnyCard = ({
   text,
   button,
   buttonText,
-  link,
+  link = '',
   button2,
   onClick
 }: IAnyCardProps) => {

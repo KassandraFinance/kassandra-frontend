@@ -151,3 +151,8 @@ export const Divider = styled.div`
     margin: 2.4rem auto 5.6rem;
   }
 `
+
+export const SlickArrowButton = styled.button`
+  background: transparent;
+  border: none;
+`

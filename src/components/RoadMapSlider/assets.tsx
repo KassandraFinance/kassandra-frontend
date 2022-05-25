@@ -1,10 +1,24 @@
-export const colors: any = {
+import * as S from './styles'
+
+interface Colors {
+  done: string;
+  soon: string;
+  next: string;
+}
+
+export const colors: Colors = {
   done: '#5ee56b',
   soon: '#ffbf008b',
   next: '#676767'
 }
 
-export const icons: any = {
+interface Icons {
+  done: JSX.Element;
+  soon: JSX.Element;
+  next: JSX.Element;
+}
+
+export const icons: Icons = {
   done: (
     <svg
       width="28"
@@ -147,3 +161,14 @@ export const icons: any = {
     </svg>
   )
 }
+
+export const SlickArrowLeft = ({ ...props }) => (
+  <S.SlickArrowButton {...props} aria-hidden="true" type="button">
+    <img src="/assets/ArrowPrevious.svg" alt="" />
+  </S.SlickArrowButton>
+)
+export const SlickArrowRight = ({ ...props }) => (
+  <S.SlickArrowButton {...props} aria-hidden="true" type="button">
+    <img src="/assets/ArrowNext.svg" alt="" />
+  </S.SlickArrowButton>
+)

@@ -1,6 +1,6 @@
 import React from 'react'
 import TextField from '../TextField'
-import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
+import { ToastSuccess } from '../Toastify/toast'
 
 import * as S from './styles'
 
