@@ -861,7 +861,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-slick@^0.23.7":
+"@types/react-slick@^0.23.8":
   version "0.23.8"
   resolved "https://registry.yarnpkg.com/@types/react-slick/-/react-slick-0.23.8.tgz#91654e657158da57f082c7b213e20756d3a37502"
   integrity sha512-SfzSg++/3uyftVZaCgHpW+2fnJFsyJEQ/YdsuqfOWQ5lqUYV/gY/UwAnkw4qksCj5jalto/T5rKXJ8zeFldQeA==

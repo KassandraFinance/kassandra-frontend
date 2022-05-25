@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import theme from '../../styles/theme'
 
-export const dictionary: any = {
+export const dictionary: { [key: number]: string } = {
   0: '#E8983D',
   1: '#63698C',
   2: '#B7372D',

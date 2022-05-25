@@ -16,7 +16,6 @@ interface IInputProps {
 }
 
 const InputTokenValue = ({
-  max,
   decimals,
   inputRef,
   setInputValue,
@@ -69,7 +68,7 @@ const InputTokenValue = ({
             else if (value[0] === '0') {
               e.target.value = value.replace(/^0+/, '')
             }
-            
+
             if (e.target.value[0] === '.') {
               e.target.value = `0${e.target.value}`
             }

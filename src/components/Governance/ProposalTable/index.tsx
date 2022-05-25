@@ -43,7 +43,7 @@ interface IProposalsListProps {
   endBlock: string;
   description: string;
   created: string;
-  state: any[];
+  state: string[];
   timeToEndProposal: string;
 }
 
