@@ -3,8 +3,6 @@ import Image from 'next/image'
 import Tippy from '@tippyjs/react'
 
 import infoGray from '../../../public/assets/info-gray.svg'
-import arrowAscend from '../../../public/assets/icons/arrow-ascend.svg'
-import arrowDescend from '../../../public/assets/icons/arrow-descend.svg'
 
 import * as S from './styles'
 

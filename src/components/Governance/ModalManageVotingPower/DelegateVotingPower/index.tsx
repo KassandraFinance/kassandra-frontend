@@ -39,6 +39,13 @@ interface IDelegateVotingPowerProps {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+interface PoolData {
+  withdrawDelay: number;
+  votingPower: string;
+  pid: number | undefined;
+  nameToken: string;
+}
+
 const DelegateVotingPower = ({
   setCurrentModal,
   setModalOpen
@@ -52,7 +59,7 @@ const DelegateVotingPower = ({
     withdrawDelay: '',
     votingPower: ''
   })
-  const [poolData, setPoolData] = React.useState<any>([])
+  const [poolData, setPoolData] = React.useState<PoolData[]>([])
   const [loading, setLoading] = React.useState<boolean>(true)
 
   const { poolInfo, balance } = useStakingContract(Staking)

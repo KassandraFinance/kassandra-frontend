@@ -8,7 +8,7 @@ interface IBarChartProps {
 }
 
 const FundBarChart = ({ poolObject, poolInfo }: IBarChartProps) => {
-  const dictionary: any = {
+  const dictionary: { [key: number]: string } = {
     0: '#E8983D',
     1: '#63698C',
     2: '#B7372D',

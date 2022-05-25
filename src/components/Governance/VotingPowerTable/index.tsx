@@ -44,8 +44,8 @@ export const VotingPowerTable = () => {
         (user: {
           id: string,
           votingPower: string,
-          votes: any[],
-          proposals: any[]
+          votes: [],
+          proposals: []
         }) => {
           return {
             address: user.id,

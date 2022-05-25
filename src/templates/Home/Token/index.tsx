@@ -233,6 +233,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
           </S.TokenInfo>
           <S.BarChartWrapper>
             <BarChart
+              id="token-1"
               style={{
                 display: 'flex',
                 justifyContent: 'center',
@@ -344,6 +345,7 @@ const Token = ({ poolPlatform }: { poolPlatform: keyof Networks }) => {
           </S.TokenInfo>
           <S.BarChartWrapper>
             <BarChart
+              id="token-2"
               style={{
                 display: 'flex',
                 justifyContent: 'center',

@@ -5,7 +5,7 @@ import Slider, { SliderSettings } from '../../components/Slider'
 import RoadMapCard from './RoadMapCard'
 
 import pinIcon from '../../../public/assets/RoadmapIcon.svg'
-import { icons, colors } from './assets'
+import { icons, colors, SlickArrowLeft, SlickArrowRight } from './assets'
 
 import * as S from './styles'
 
@@ -39,8 +39,8 @@ const RoadMapSlider = () => {
         }
       }
     ],
-    nextArrow: <img src="/assets/ArrowNext.svg" alt="" />,
-    prevArrow: <img src="/assets/ArrowPrevious.svg" alt="" />
+    prevArrow: <SlickArrowLeft />,
+    nextArrow: <SlickArrowRight />
   }
 
   return (
