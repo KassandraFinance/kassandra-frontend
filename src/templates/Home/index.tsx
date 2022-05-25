@@ -16,9 +16,6 @@ import KacyOverview from '../../components/KacyOverview'
 
 import * as S from './styles'
 
-const poolPlatform =
-  process.env.NEXT_PUBLIC_MASTER === '1' ? 'Avalanche' : 'Fuji'
-
 const Home = () => {
   const { trackPageView } = useMatomo()
 
@@ -32,7 +29,7 @@ const Home = () => {
       <Hero />
       <S.Background>
         <ScrollUpButton />
-        <Token poolPlatform={poolPlatform} />
+        <Token />
         <Products />
         <ClassProducts />
         <KassandraTokenCard />
