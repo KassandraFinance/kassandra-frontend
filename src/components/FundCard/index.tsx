@@ -28,17 +28,6 @@ interface InfoPool {
 interface IFundCardProps {
   product: ProductDetails;
 }
-
-interface TokenInfo {
-  id: string;
-  balance_in_pool: string;
-  address: string;
-  name: string;
-  symbol: string;
-  allocation: number;
-  price: number;
-}
-
 interface Networks {
   Ropsten: string;
   Avalanche: string;
