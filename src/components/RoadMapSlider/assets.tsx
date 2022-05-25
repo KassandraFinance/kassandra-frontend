@@ -1,3 +1,5 @@
+import * as S from './styles'
+
 export const colors: any = {
   done: '#5ee56b',
   soon: '#ffbf008b',
@@ -147,3 +149,14 @@ export const icons: any = {
     </svg>
   )
 }
+
+export const SlickArrowLeft = ({ ...props }: any) => (
+  <S.SlickArrowButton {...props} aria-hidden="true" type="button">
+    <img src="/assets/ArrowPrevious.svg" alt="" />
+  </S.SlickArrowButton>
+)
+export const SlickArrowRight = ({ ...props }: any) => (
+  <S.SlickArrowButton {...props} aria-hidden="true" type="button">
+    <img src="/assets/ArrowNext.svg" alt="" />
+  </S.SlickArrowButton>
+)
