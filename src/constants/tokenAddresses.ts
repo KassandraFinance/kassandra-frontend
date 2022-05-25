@@ -4,7 +4,7 @@ import { PartnerData } from '../components/Products/Partner'
 import partners from '../components/Products/Partner/list'
 
 import ahypeIcon from '../../public/assets/ahype.svg'
-import tricryptoIcon from '../../public/assets/Tricrypto.svg'
+import tricryptoIcon from '../../public/assets/tricrypto.svg'
 
 export const HeimCRPPOOL = process.env.NEXT_PUBLIC_MASTER === '1' ?
   '0x38918142779e2CD1189cBd9e932723C968363D1E'
@@ -172,12 +172,12 @@ const tricrypto: ProductDetails  = {
   chain: chains.avalanche,
   name: 'Tricrypto Social Index',
   fundBy: 'Kassandra with Yield Yak',
-  symbol: 'Tricrypto',
+  symbol: 'K3C',
   fundIcon: tricryptoIcon,
   pid: 6,
   fundLink: 'https://kassandra.finance/',
   fundSummary: `The #K3C represents a yield-earning portfolio composed of BTC,
-  ETH, USDC and KACY built in partnership with our friends back at Yield Yak.`,
+  ETH, USDT and KACY built in partnership with our friends back at Yield Yak.`,
   partners: [
     partners.avalanche,
     partners.yieldYak

@@ -13,6 +13,7 @@ import { BNtoDecimal } from '../../../utils/numerals'
 import { priceDollar } from '../../../utils/priceDollar'
 
 import ahype from '../../../../public/assets/ahype.svg'
+import tricrypto from '../../../../public/assets/tricrypto.svg'
 
 import * as S from './styles'
 
@@ -87,7 +88,16 @@ const InputTokens = ({
     return (
       <S.Symbol>
         <div className="img">
-          <Image src={ahype} alt="" width={22} height={22} />
+          <Image
+            src={
+              infoAHYPE && infoAHYPE[infoAHYPE.length - 1].symbol === 'aHYPE'
+                ? ahype
+                : tricrypto
+            }
+            alt=""
+            width={22}
+            height={22}
+          />
         </div>
         {poolTokens.length > 0 && poolTokens[0] !== undefined
           ? poolTokens[0].symbol

@@ -203,7 +203,6 @@ const Products = ({ product }: Input) => {
               weight_goal_normalized: string,
               weight_normalized: string
             }) => {
-              console.log(item)
               let symbol
               let balance
               if (item.token.symbol === 'YRT') {
@@ -307,7 +306,7 @@ const Products = ({ product }: Input) => {
           </S.NameAndSymbol>
           <S.SymbolAndMade>
             <h3>${product.symbol}</h3>
-            <p>by HEIMDALL.land</p>
+            <p>by {product.fundBy}</p>
           </S.SymbolAndMade>
         </S.NameIndex>
         <S.Line />
@@ -325,7 +324,7 @@ const Products = ({ product }: Input) => {
               </S.NameAndSymbol>
               <S.SymbolAndMade>
                 <h3>${product.symbol}</h3>
-                <p>by HEIMDALL.land</p>
+                <p>by {product.fundBy}</p>
               </S.SymbolAndMade>
             </S.NameIndex>
           </S.Intro>
@@ -391,7 +390,9 @@ const Products = ({ product }: Input) => {
             decimals={infoPool.decimals}
           />
           <Summary
-            strategy={data?.pool.strategy || '...'}
+            strategy={data?.pool.strategy || 'Coming soon...'}
+            poolContract={product.coreAddress}
+            poolController={product.sipAddress}
             summary={product.fundSummary}
             symbol={product.symbol}
             link={product.fundLink}
