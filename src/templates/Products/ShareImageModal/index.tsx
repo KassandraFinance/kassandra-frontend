@@ -90,7 +90,6 @@ const ShareImageModal = ({
 
           const file = canvas.toDataURL('image/png')
           const id = url.split('/').pop()
-          console.log(file, id)
           fetch(
             `${
               URL_API[process.env.NEXT_PUBLIC_URL_API || 4]

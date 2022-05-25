@@ -312,9 +312,6 @@ const StakeCard = ({
 
   React.useEffect(() => {
     handleLPtoUSD()
-    if (data) {
-      console.log(data)
-    }
   }, [infoStaked.stakingToken, pid, data])
 
   React.useEffect(() => {

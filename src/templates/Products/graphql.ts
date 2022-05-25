@@ -14,7 +14,6 @@ export const GET_INFO_POOL = gql`
       total_value_locked_usd
       strategy
       price_usd
-      decimals
       # pool token information
       underlying_assets(orderBy: weight_normalized, orderDirection: desc) {
         balance # token balance in pool
