@@ -181,22 +181,8 @@ const InputTokens = ({
               {infoAHYPE &&
                 'USD: ' +
                   BNtoDecimal(
-                    Big(
-                      (isWithdraw === 'Withdraw'
-                        ? swapAmount
-                        : swapInAmount || 0
-                      ).toString()
-                    )
-                      .mul(
-                        Big(
-                          priceDollar(
-                            isWithdraw === 'Withdraw'
-                              ? swapOutAddress
-                              : swapInAddress,
-                            infoAHYPE
-                          )
-                        )
-                      )
+                    Big(swapAmount.toString())
+                      .mul(Big(priceDollar(swapOutAddress, infoAHYPE)))
                       .div(Big(10).pow(18)),
                     18,
                     2,

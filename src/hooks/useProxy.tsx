@@ -30,10 +30,11 @@ const useProxy = (address: string, crpAddress: string) => {
       const wrapped = await contract.methods.wNativeToken().call()
 
       const avaxValue = tokenIn === wrapped ? tokenAmountIn : new BigNumber(0)
-      return contract.methods.joinswapExternAmountIn(crpAddress, tokenIn, tokenAmountIn, minPoolAmountOut).send(
-        { from: walletAddress, value: avaxValue },
-        callback
-      )
+      const res =  contract.methods
+        .joinswapExternAmountIn(crpAddress, tokenIn, tokenAmountIn, minPoolAmountOut)
+        .send({ from: walletAddress, value: avaxValue },callback)
+
+      return res
     }
 
     const exitPool = (
@@ -73,9 +74,11 @@ const useProxy = (address: string, crpAddress: string) => {
       const wrapped = await contract.methods.wNativeToken().call()
 
       const avaxValue = tokenIn === wrapped ? tokenAmountIn : new BigNumber(0)
-      return contract.methods.joinswapExternAmountIn(crpAddress, tokenIn, tokenAmountIn, minPoolAmountOut).call(
-        { from: walletAddress, value: avaxValue }
-      )
+        const res = await contract.methods
+          .joinswapExternAmountIn(crpAddress, tokenIn, tokenAmountIn, minPoolAmountOut)
+          .call({ from: walletAddress, value: avaxValue })
+  
+        return res
     }
 
     const tryExitPool = (

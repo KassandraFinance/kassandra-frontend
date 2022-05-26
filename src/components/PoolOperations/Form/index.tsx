@@ -304,6 +304,18 @@ const Form = ({
           setSwapOutAmount([newSwapOutAmount])
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
+
+          const newSwapOutPrice = await corePool.calcPoolOutGivenSingleIn(
+            swapInTotalPoolBalance,
+            swapInDenormalizedWeight,
+            poolSupply,
+            poolTotalDenormalizedWeight,
+            swapInAmount,
+            poolSwapFee
+          )
+
+          setSwapOutAmount([newSwapOutPrice])
+
           if (userWalletAddress.length > 0) {
             const errorStr = error.toString()
 
@@ -1114,8 +1126,8 @@ const Form = ({
                       )}`
                   :
                     `${title} ${'$' + BNtoDecimal(
-                      Big((swapInAmount || 0).toString())
-                        .mul(Big(priceDollar(swapInAddress, infoAHYPE)))
+                      Big((swapOutAmount[0] || 0).toString())
+                        .mul(Big(priceDollar(swapOutAddress, infoAHYPE)))
                         .div(Big(10).pow(18)),
                       18,
                       2,
