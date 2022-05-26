@@ -144,6 +144,12 @@ export const ButtonWrapper = styled.ul`
   margin: 7.2rem auto 0;
   gap: 1.6rem;
 
+  li {
+    a {
+      min-width: 16rem;
+    }
+  }
+
   @media (max-width: 420px) {
     grid-template-columns: 1fr;
 
