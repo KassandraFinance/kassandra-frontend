@@ -11,6 +11,7 @@ import arrowPositive from '../../../public/assets/icons/arrow-ascend.svg'
 import arrowNegative from '../../../public/assets/icons/arrow-descend.svg'
 
 import * as S from './styles'
+import ModalBuyKacy from '../Modals/ModalBuyKacy'
 
 interface IKacyMarketDataProps {
   price: number;
@@ -24,6 +25,8 @@ interface IKassandraTokenCardProps {
 }
 
 const KassandraTokenCard = ({ kacyMarketData }: IKassandraTokenCardProps) => {
+  const [isOpenModal, setIsOpenModal] = React.useState<boolean>(false)
+
   const { trackEvent } = useMatomo()
 
   function clickMatomoEvent(action: string, name: string) {
@@ -133,9 +136,13 @@ const KassandraTokenCard = ({ kacyMarketData }: IKassandraTokenCardProps) => {
             </S.Price>
           </S.TokenInfo>
           <S.CardFooter>
-            <Link href="/explore/ahype" passHref>
-              <Button size="large" backgroundPrimary as="a" text="Buy $KACY" />
-            </Link>
+            <Button
+              size="large"
+              backgroundPrimary
+              as="a"
+              text="Buy $KACY"
+              onClick={() => setIsOpenModal(true)}
+            />
             <ExternalLink
               onClick={() => clickMatomoEvent('click-on-link', 'learn-more')}
               hrefLink="https://kassandrafoundation.medium.com/kassandra-dao-token-8bc046d55a00"
@@ -191,6 +198,7 @@ const KassandraTokenCard = ({ kacyMarketData }: IKassandraTokenCardProps) => {
           </S.ResponsabilitiesCards>
         </S.MobileCards>
       </S.Responsabilities>
+      <ModalBuyKacy modalOpen={isOpenModal} setModalOpen={setIsOpenModal} />
     </S.Container>
   )
 }
