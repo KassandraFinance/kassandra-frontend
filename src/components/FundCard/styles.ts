@@ -11,7 +11,7 @@ export const CardContainer = styled.div`
   backdrop-filter: blur(14rem);
   border-radius: 1.2rem;
 
-  transition: transform 0.3s linear;
+  transition: transform 0.3s ease-in-out;
   cursor: pointer;
 
   a {
@@ -67,7 +67,7 @@ export const FundPrice = styled.div`
   }
 
   span {
-    font-size: 24px;
+    font-size: ${theme.font.sizes.font24};
     line-height: 104%;
     color: #ffffff;
   }
