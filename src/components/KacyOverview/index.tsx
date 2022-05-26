@@ -1,8 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
 import Big from 'big.js'
-import useSWR from 'swr'
-import { useSelector, RootStateOrAny } from 'react-redux'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import { BNtoDecimal } from '../../utils/numerals'
@@ -11,28 +9,19 @@ import ExternalLink from '../ExternalLink'
 
 import * as S from './styles'
 
-const URL_API: { [key: number | string]: string } = {
-  1: 'https://kassandra.finance/api/overview',
-  2: 'https://alpha.kassandra.finance/api/overview',
-  3: 'https://demo.kassandra.finance/api/overview',
-  4: 'http://localhost:3000/api/overview'
-}
-
 interface IKacyMarketDataProps {
   price: number;
   marketCap: Big;
   supply: Big;
+  kacyPercentage: number;
 }
 
-const KacyOverview = () => {
-  const [kacyMarketData, setKacyMarketData] = React.useState<IKacyMarketDataProps>({
-      price: 0,
-      marketCap: Big(0),
-      supply: Big(0)
-    })
+interface IKacyOverviewProps {
+  kacyMarketData: IKacyMarketDataProps
+}
 
-  const { chainId } = useSelector((state: RootStateOrAny) => state)
-  const { data } = useSWR(URL_API[process.env.NEXT_PUBLIC_URL_API || 4])
+const KacyOverview = ({ kacyMarketData }: IKacyOverviewProps) => {
+
   const { trackEvent } = useMatomo()
 
   function clickMatomoEvent(action: string, name: string) {
@@ -42,16 +31,6 @@ const KacyOverview = () => {
       name: name
     })
   }
-
-  React.useEffect(() => {
-    if (data) {
-      setKacyMarketData({
-        price: data.kacyPrice,
-        marketCap: Big(data.marketCap),
-        supply: Big(data.supply)
-      })
-    }
-  }, [chainId, data])
 
   return (
     <>
