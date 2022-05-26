@@ -258,7 +258,11 @@ export const Card = styled.div`
     width: 100%;
   }
 `
-export const Price = styled.div`
+interface IKacyPriceProps {
+  isValuePercentage: boolean;
+}
+// eslint-disable-next-line prettier/prettier
+export const Price = styled.div<IKacyPriceProps>`
   display: flex;
   align-items: center;
 
@@ -270,7 +274,7 @@ export const Price = styled.div`
     p {
       margin-left: 0.2rem;
 
-      color: #5ee56b;
+      color: ${props => (props.isValuePercentage ? '#5ee56b' : '#E8372C')};
       font-size: ${theme.font.sizes.font16};
       font-weight: ${theme.font.weight.light};
     }

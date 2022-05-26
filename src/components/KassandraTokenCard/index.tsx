@@ -2,13 +2,28 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
+import Big from 'big.js'
 
 import Button from '../Button'
 import ExternalLink from '../../components/ExternalLink'
 
+import arrowPositive from '../../../public/assets/icons/arrow-ascend.svg'
+import arrowNegative from '../../../public/assets/icons/arrow-descend.svg'
+
 import * as S from './styles'
 
-const KassandraTokenCard = () => {
+interface IKacyMarketDataProps {
+  price: number;
+  marketCap: Big;
+  supply: Big;
+  kacyPercentage: number;
+}
+
+interface IKassandraTokenCardProps {
+  kacyMarketData: IKacyMarketDataProps;
+}
+
+const KassandraTokenCard = ({ kacyMarketData }: IKassandraTokenCardProps) => {
   const { trackEvent } = useMatomo()
 
   function clickMatomoEvent(action: string, name: string) {
@@ -100,16 +115,20 @@ const KassandraTokenCard = () => {
             <p>BY KASSANDRA.FINANCE</p>
           </S.TextWrapper>
           <S.TokenInfo>
-            <S.Price>
-              <span>USD 394.34</span>
+            <S.Price isValuePercentage={kacyMarketData.kacyPercentage > 0}>
+              <span>USD {kacyMarketData.price.toFixed(2)}</span>
               <div>
                 <Image
-                  src={'/assets/token-price.svg'}
+                  src={
+                    kacyMarketData.kacyPercentage > 0
+                      ? arrowPositive
+                      : arrowNegative
+                  }
                   alt=""
                   width={14}
                   height={14}
                 />
-                <p>6.41%</p>
+                <p>{kacyMarketData.kacyPercentage.toFixed(2)}%</p>
               </div>
             </S.Price>
           </S.TokenInfo>
