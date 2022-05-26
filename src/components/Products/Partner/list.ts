@@ -1,8 +1,9 @@
 import avalanche from '../../../../public/assets/avalancheIcon.svg'
 import heimdall from '../../../../public/assets/heimdall.svg'
 import api3 from '../../../../public/assets/api3.svg'
-import yieldYak from '../../../../public/assets/yieldYak-banner.png'
-
+import yieldYak from '../../../../public/assets/yieldYak-banner.svg'
+import aave from '../../../../public/assets/aave.svg'
+import traderJoe from '../../../../public/assets/logo-traderJoe.svg'
 import { PartnerData } from './'
 
 const partners: { [key: string]: PartnerData } = {
@@ -37,10 +38,28 @@ const partners: { [key: string]: PartnerData } = {
     href: 'https://yieldyak.com/',
     image: {
       src: yieldYak,
-      height: 80,
-      width: 200
+      height: 60,
+      width: 100
     },
     name: 'YieldYak'
+  },
+  aave: {
+    href: 'https://aave.com/',
+    image: {
+      src: aave,
+      height: 40,
+      width: 40
+    },
+    name: 'Aave'
+  },
+  traderJoe: {
+    href: 'https://traderjoexyz.com/home',
+    image: {
+      src: traderJoe,
+      height: 40,
+      width: 40
+    },
+    name: 'TraderJoe'
   }
 }
 

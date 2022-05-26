@@ -180,7 +180,9 @@ const tricrypto: ProductDetails  = {
   ETH, USDT and KACY built in partnership with our friends back at Yield Yak.`,
   partners: [
     partners.avalanche,
-    partners.yieldYak
+    partners.yieldYak,
+    partners.traderJoe,
+    partners.aave
   ]
 }
 
