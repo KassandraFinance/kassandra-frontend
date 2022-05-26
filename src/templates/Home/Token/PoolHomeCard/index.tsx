@@ -11,6 +11,8 @@ import TokenIcons from '../TokenIcons'
 
 import * as S from './styles'
 import arrowRight from '../../../../../public/assets/icons/arrow-right.svg'
+import arrowAscend from '../../../../../public/assets/icons/arrow-ascend.svg'
+import arrowDescend from '../../../../../public/assets/icons/arrow-descend.svg'
 
 import {
   ProductDetails,
@@ -173,10 +175,7 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
         }
       })
       const poolData = Object.assign({}, ...pool)
-      setPoolObject({
-        ...poolData,
-        '0x964555644E067c560A4C144360507E80c1104784': 31.66
-      })
+      setPoolObject(poolData)
     }
   }, [poolInfo])
 
@@ -215,7 +214,7 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
             <span>USD {poolPrice}</span>
             <div>
               <Image
-                src="/assets/token-price.svg"
+                src={Number(change) >= 0 ? arrowAscend : arrowDescend}
                 alt="token Price Arrow pool Tricryoto"
                 width={13}
                 height={13}
@@ -245,7 +244,7 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
             width={400}
             height={10}
           >
-            <XAxis type="number" hide />
+            <XAxis type="number" domain={[0, 100]} hide />
             <YAxis type="category" hide dataKey="pool" />
 
             {poolInfo.map((item, index) => {
@@ -283,20 +282,28 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
       </S.Card>
       <S.Info>
         <h4>{pool.symbol !== 'aHYPE' ? 'New Product' : ''}</h4>
-        <h2>The safest assets yield farming for you</h2>
+        <h2>
+          {pool.symbol !== 'aHYPE'
+            ? 'The safest assets yield farming for you'
+            : 'Automagically invest on strong communities'}
+        </h2>
         <span>{pool.fundSummary}</span>
         <S.InfoList>
           <li>
             <Image src={arrowRight} width={20} height={20} />
-            Consistent gains with blue chips;
+            {pool.symbol !== 'aHYPE'
+              ? 'Consistent gains with blue chips'
+              : 'EASY EXPOSURE TO THE HOTTEST ASSETS'}
           </li>
           <li>
             <Image src={arrowRight} width={20} height={20} />
-            Hedge your exposure;
+            {pool.symbol !== 'aHYPE'
+              ? 'Hedge your exposure'
+              : 'SURFING THE TIDES OF HYPE ON AVALANCHE'}
           </li>
           <li>
             <Image src={arrowRight} width={20} height={20} />
-            Improve your hodl.
+            {pool.symbol !== 'aHYPE' ? 'Improve your hodl' : 'HIGH VOLATILITY'}
           </li>
         </S.InfoList>
       </S.Info>
