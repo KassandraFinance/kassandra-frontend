@@ -25,10 +25,6 @@ export const KassandraToken = styled.section`
   max-width: 1000px;
   margin: 0 auto 140px;
   gap: 32px;
-  /* background: url('assets/BlurDivisor.png'); */
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center -100px;
 
   @media (max-width: 960px) {
     display: flex;
@@ -44,7 +40,7 @@ export const KassandraInfo = styled.div`
   h1 {
     font-size: ${theme.font.sizes.font48};
     font-weight: ${theme.font.weight.bold};
-    line-height: 104%;
+    line-height: 50px;
     margin: 0;
     @media (max-width: 960px) {
       font-size: ${theme.font.sizes.font36};
@@ -65,39 +61,18 @@ export const KassandraInfo = styled.div`
     color: #bdbdbd;
     font-size: ${theme.font.sizes.font16};
     line-height: 155%;
-    margin-top: 40px;
+    margin-top: 3.2rem;
   }
 `
-export const Content = styled.div`
+
+export const SocialContainer = styled.div`
   display: flex;
-  align-items: flex-start;
-  @media (max-width: 960px) {
-    margin: 0 auto;
-    justify-content: center;
-  }
-  div {
-    display: flex;
-    justify-content: space-between;
-  }
-  img {
-    cursor: pointer;
-    padding: 2px;
-    @media (max-width: 450px) {
-      max-width: 80%;
-    }
-  }
+  margin-top: 3rem;
+  gap: 2.6rem;
 `
-export const WrapperIcons = styled.div`
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  img {
-    max-width: 48px;
-    margin-right: 16px;
-  }
-`
+
 export const KasasndraCardHeader = styled.div`
+  position: relative;
   width: 100%;
   height: 100px;
   -webkit-box-shadow: inset 0px -81px 61px -20px rgba(19, 9, 22, 0.75);
@@ -116,7 +91,10 @@ export const Responsabilities = styled.section`
     margin: 40px 0;
   }
   @media (max-width: 820px) {
+    width: 100%;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 `
 export const ResponsabilitiesTitle = styled.div`
@@ -145,6 +123,7 @@ export const ResponsabilitiesDivider = styled.div`
 export const ResponsabilitiesCards = styled.div`
   margin-right: 40px;
   max-width: 140px;
+  margin-left: 4rem;
   span {
     display: inline-block;
     margin-top: 26px;
@@ -183,18 +162,19 @@ export const IconWrapper = styled.div`
   text-align: center;
 `
 export const ImageWrapper = styled.div`
-  background: rgba(33, 20, 38, 1);
-  max-width: 96px;
-  height: 96px;
-  border-radius: 100px;
-  display: flex;
   position: absolute;
-  margin-top: 36px;
-  margin-left: 57px;
-  @media (max-width: 960px) {
-    margin-top: 36px;
-    margin-left: 12px;
-  }
+  left: 4.9rem;
+  top: 3.6rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 96px;
+  width: 96px;
+
+  border-radius: 50%;
+  background-color: #211426;
 `
 export const TextWrapper = styled.div`
   text-align: left;
@@ -202,8 +182,11 @@ export const TextWrapper = styled.div`
   margin: 55px auto 24px;
   max-width: 360px;
   @media (max-width: 960px) {
-    padding: 0 32px;
+    /* padding: 0 32px; */
     margin: 40px auto;
+  }
+  @media (max-width: 530px) {
+    padding: 0 32px;
   }
 
   p {
@@ -238,6 +221,8 @@ export const NameAndSymbol = styled.div`
   }
 
   h3 {
+    margin-top: 0.6rem;
+
     background-color: rgba(0, 0, 0, 0.19);
     border-radius: 10px;
     font-size: ${theme.font.sizes.font12};
@@ -255,16 +240,18 @@ export const TokenInfo = styled.div`
   margin: auto;
   max-width: 360px;
   margin-bottom: 14px;
-  @media (max-width: 960px) {
+
+  @media (max-width: 530px) {
     padding: 0 32px;
   }
 `
 export const Card = styled.div`
-  max-width: 490px;
+  max-width: 456px;
   max-height: max-content;
   border-radius: 12px;
   background: rgba(31, 31, 31, 0.72);
   box-shadow: 0px 4px 69px -17px rgba(0, 0, 0, 0, 51);
+
   @media (max-width: 960px) {
     margin: 0 auto;
     margin-top: 30px;
@@ -272,14 +259,20 @@ export const Card = styled.div`
   }
 `
 export const Price = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  align-items: center;
+
   > div {
     display: flex;
-    margin-left: 6px;
+    margin-left: 1.2rem;
     align-items: center;
+
     p {
+      margin-left: 0.2rem;
+
       color: #5ee56b;
+      font-size: ${theme.font.sizes.font16};
+      font-weight: ${theme.font.weight.light};
     }
   }
   span {
@@ -291,11 +284,13 @@ export const CardFooter = styled.div`
   margin: 28px auto;
   max-width: 360px;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  /* align-items: center; */
-  align-items: left;
+
   @media (max-width: 960px) {
+    flex-direction: column;
+    align-items: center;
+  }
+  @media (max-width: 530px) {
     padding: 0 32px;
   }
   ${ButtonStyles.Wrapper} {
@@ -306,30 +301,10 @@ export const CardFooter = styled.div`
     }
   }
   a {
-    display: flex;
-    align-items: space-between;
-    text-decoration: none;
-    justify-items: center;
     text-decoration: none;
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.light};
     color: ${theme.colors.snow};
-    margin-right: ${theme.spacings.space8};
-    transition: 0.15s;
-    svg {
-      margin-left: ${theme.spacings.space8};
-    }
-    &:hover {
-      color: ${theme.colors.cyan};
-      > svg {
-        path {
-          stroke: ${theme.colors.cyan};
-        }
-      }
-    }
-  }
-  div {
-    display: flex;
-    flex-direction: row;
+    /* transition: 0.15s; */
   }
 `
