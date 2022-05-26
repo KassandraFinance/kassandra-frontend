@@ -50,7 +50,6 @@ const Home = () => {
 
   React.useEffect(() => {
     if (data) {
-      console.log(data)
       setKacyMarketData({
         price: data.kacyPrice,
         marketCap: Big(data.marketCap),
