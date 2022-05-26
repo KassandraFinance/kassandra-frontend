@@ -1,17 +1,17 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
 import Big from 'big.js'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import Button from '../Button'
 import ExternalLink from '../../components/ExternalLink'
+import ModalBuyKacy from '../Modals/ModalBuyKacy'
 
 import arrowPositive from '../../../public/assets/icons/arrow-ascend.svg'
 import arrowNegative from '../../../public/assets/icons/arrow-descend.svg'
 
 import * as S from './styles'
-import ModalBuyKacy from '../Modals/ModalBuyKacy'
 
 interface IKacyMarketDataProps {
   price: number;
@@ -100,7 +100,7 @@ const KassandraTokenCard = ({ kacyMarketData }: IKassandraTokenCardProps) => {
           </S.SocialContainer>
         </S.KassandraInfo>
         <S.Card>
-          <S.KasasndraCardHeader>
+          <S.KassandraCardHeader>
             <S.ImageWrapper>
               <Image
                 src="/assets/token-96.svg"
@@ -109,7 +109,7 @@ const KassandraTokenCard = ({ kacyMarketData }: IKassandraTokenCardProps) => {
                 height={70}
               />
             </S.ImageWrapper>
-          </S.KasasndraCardHeader>
+          </S.KassandraCardHeader>
           <S.TextWrapper>
             <S.NameAndSymbol>
               <h1>Kassandra</h1>
