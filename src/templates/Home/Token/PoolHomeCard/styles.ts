@@ -17,6 +17,12 @@ export const CardWrapper = styled.div`
   @media (max-width: 960px) {
     flex-direction: column;
   }
+
+  @media (max-width: 960px) {
+    margin-top: 7rem;
+    margin-right: 0;
+    margin-left: 0;
+  }
 `
 
 export const Card = styled.div`
