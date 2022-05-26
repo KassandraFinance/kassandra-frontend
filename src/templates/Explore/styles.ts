@@ -4,7 +4,7 @@ import theme from '../../styles/theme'
 
 export const Explore = styled.section`
   margin: 0 auto;
-  max-width: 1140px;
+  max-width: 114rem;
   max-height: 100%;
   margin-top: ${theme.spacings.space32};
 
@@ -17,6 +17,11 @@ export const Explore = styled.section`
   }
 `
 
+export const ExploreContainer = styled.div`
+  padding-top: 3.2rem;
+  border-top: 0.1rem solid rgba(255, 255, 255, 0.1);
+`
+
 export const TitleContainer = styled.div`
   margin-bottom: 4.7rem;
 `
@@ -24,6 +29,8 @@ export const TitleContainer = styled.div`
 export const CardContainer = styled.div`
   display: flex;
   gap: 7.8rem;
+
+  margin-top: 2.4rem;
 
   @media (max-width: 960px) {
     gap: 5.4rem;
@@ -34,4 +41,8 @@ export const CardContainer = styled.div`
     align-items: center;
     gap: 3.2rem;
   }
+`
+
+export const ComunitFundsContainer = styled.section`
+  margin-top: 4.8rem;
 `

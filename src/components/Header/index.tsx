@@ -63,21 +63,28 @@ const Header = () => {
               <Image src={kacy64} width={64} height={64} alt="Kassandra" />
             </a>
           </Link>
-          <DropdownInvest
+          {/* <DropdownInvest
             nameOnHeader="invest"
             linkPage={[
               { name: 'Explore Funds', href: '/explore' },
               { name: 'Stake/Farm', href: '/farm' },
               { name: 'My Portfolio', href: `/profile/${userWalletAddress}` }
             ]}
-          />
-          {/* <Link href="/farm" passHref>
+          /> */}
+          <Link href="/explore" passHref>
+            <S.MenuLink
+              onClick={() => clickMatomoEvent('click-on-link', 'explore')}
+            >
+              Invest
+            </S.MenuLink>
+          </Link>
+          <Link href="/farm" passHref>
             <S.MenuLink
               onClick={() => clickMatomoEvent('click-on-link', 'stake-farm')}
             >
               Stake/Farm
             </S.MenuLink>
-          </Link> */}
+          </Link>
           {process.env.NEXT_PUBLIC_VOTE === '1' ? (
             <DropdownInvest
               nameOnHeader="vote"

@@ -70,7 +70,7 @@ const Home = () => {
       <Hero />
       <S.Background>
         <ScrollUpButton />
-        <Token poolPlatform={poolPlatform} />
+        <Token />
         <Products />
         <ClassProducts />
         <KacyCard kacyMarketData={kacyMarketData} />

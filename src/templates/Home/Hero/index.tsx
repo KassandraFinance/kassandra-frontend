@@ -34,6 +34,17 @@ const Hero = () => {
         </S.IntroHero>
         <S.ButtonWrapper>
           <li>
+            <Link href="/explore">
+              <Button
+                backgroundPrimary
+                size="large"
+                as="a"
+                text="Invest in Funds"
+                onClick={() => clickMatomoEvent('click-to-cta', 'hero')}
+              />
+            </Link>
+          </li>
+          <li>
             <Button
               className="btn-cta"
               backgroundPrimary
@@ -45,18 +56,6 @@ const Hero = () => {
                 clickMatomoEvent('click-to-cta', 'up-ido'), setIsOpenModal(true)
               }}
             />
-          </li>
-          <li>
-            <Link href="/explore/ahype">
-              <Button
-                backgroundPrimary
-                size="large"
-                as="a"
-                text="Buy aHYPE"
-                icon={<img src="/assets/ahype.svg" alt="" />}
-                onClick={() => clickMatomoEvent('click-to-cta', 'hero')}
-              />
-            </Link>
           </li>
         </S.ButtonWrapper>
       </S.Hero>

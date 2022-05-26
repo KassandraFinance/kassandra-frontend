@@ -21,7 +21,7 @@ interface Input {
 
 const descriptions: DescriptionType = {
   ahype: <AhypeDescription />,
-  tricrypto: <TricryptoDescription />
+  k3c: <TricryptoDescription />
 }
 
 const TokenDescription = ({ symbol }: Input) => {

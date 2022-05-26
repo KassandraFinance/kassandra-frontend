@@ -49,14 +49,15 @@ const FundBarChart = ({ poolObject, poolInfo }: IBarChartProps) => {
       layout="vertical"
       margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
       width={288}
-      height={4}
+      height={5}
     >
-      <XAxis type="number" hide />
+      <XAxis type="number" domain={[0, 100]} hide />
       <YAxis type="category" hide dataKey="pool" />
 
       {poolInfo.map((item: any, index: number) => (
         <Bar
           key={item.token.id}
+          barSize={4}
           stackId="pool"
           dataKey={item.token.id}
           fill={`${dictionary[index]}`}
