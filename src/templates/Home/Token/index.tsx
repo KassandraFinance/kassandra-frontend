@@ -8,7 +8,7 @@ import PoolHomeCard from './PoolHomeCard'
 const Token = () => {
   return (
     <S.Token id="Token">
-      <p>OUR PROJECTS</p>
+      <p>OUR PRODUCTS</p>
       <S.Divider />
       <h1>the world of data-driven investment funds</h1>
       <span>

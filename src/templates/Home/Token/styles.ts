@@ -17,7 +17,8 @@ export const Token = styled.section`
     margin: 0 auto;
 
     font-size: ${theme.font.sizes.font16};
-    line-height: 155%;
+    line-height: 2.4rem;
+    font-weight: 300;
   }
 
   h1 {
