@@ -5,7 +5,7 @@ import useSWR from 'swr'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import KacyOverview from '../../components/KacyOverview'
-import KassandraTokenCard from '../../components/KassandraTokenCard'
+import KacyCard from '../../components/KacyCard'
 
 import Community from './Community'
 import FAQ from './FAQ'
@@ -68,7 +68,7 @@ const About = () => {
       <S.Background>
         <Hero />
         <Products />
-        <KassandraTokenCard kacyMarketData={kacyMarketData} />
+        <KacyCard kacyMarketData={kacyMarketData} />
         <HowItWorks />
       </S.Background>
       <S.TeamBackground>

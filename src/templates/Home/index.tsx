@@ -10,7 +10,7 @@ import Products from './Products'
 import Token from './Token'
 
 // import CountdownBanner from '../../components/CountdownBanner'
-import KassandraTokenCard from '../../components/KassandraTokenCard'
+import KacyCard from '../../components/KacyCard'
 import SubscribeBanner from '../../components/SubscribeBanner'
 import RoadMapSlider from '../../components/RoadMapSlider'
 import ScrollUpButton from '../../components/ScrollUpButton'
@@ -73,7 +73,7 @@ const Home = () => {
         <Token poolPlatform={poolPlatform} />
         <Products />
         <ClassProducts />
-        <KassandraTokenCard kacyMarketData={kacyMarketData} />
+        <KacyCard kacyMarketData={kacyMarketData} />
         <KassandraArchitecture />
         <RoadMapSlider />
         <KacyOverview kacyMarketData={kacyMarketData} />

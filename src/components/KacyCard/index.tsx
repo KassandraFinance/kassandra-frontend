@@ -5,7 +5,7 @@ import Big from 'big.js'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import Button from '../Button'
-import ExternalLink from '../../components/ExternalLink'
+import ExternalLink from '../ExternalLink'
 import ModalBuyKacy from '../Modals/ModalBuyKacy'
 
 import arrowPositive from '../../../public/assets/icons/arrow-ascend.svg'
@@ -20,11 +20,11 @@ interface IKacyMarketDataProps {
   kacyPercentage: number;
 }
 
-interface IKassandraTokenCardProps {
+interface IKacyCardProps {
   kacyMarketData: IKacyMarketDataProps;
 }
 
-const KassandraTokenCard = ({ kacyMarketData }: IKassandraTokenCardProps) => {
+const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
   const [isOpenModal, setIsOpenModal] = React.useState<boolean>(false)
 
   const { trackEvent } = useMatomo()
@@ -203,4 +203,4 @@ const KassandraTokenCard = ({ kacyMarketData }: IKassandraTokenCardProps) => {
   )
 }
 
-export default KassandraTokenCard
+export default KacyCard
