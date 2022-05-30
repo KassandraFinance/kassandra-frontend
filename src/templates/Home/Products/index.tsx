@@ -35,7 +35,7 @@ const Products = () => {
         <S.Card>
           <S.IconWrapper>
             <Image
-              src="/assets/home-products-locker.svg"
+              src="/assets/extra/products-locker.svg"
               alt="home products locker logo"
               width={16}
               height={20}
@@ -65,7 +65,7 @@ const Products = () => {
         <S.Card>
           <S.IconWrapper>
             <Image
-              src="/assets/home-products-gift.svg"
+              src="/assets/extra/products-gift.svg"
               alt="home products gift logo"
               width={26}
               height={28}
@@ -79,7 +79,7 @@ const Products = () => {
         <S.Card>
           <S.IconWrapper>
             <Image
-              src="/assets/home-products-graph.svg"
+              src="/assets/extra/products-graph.svg"
               alt="home products graph logo"
               width={19}
               height={28}

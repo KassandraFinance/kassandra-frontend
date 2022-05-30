@@ -160,7 +160,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
         <S.MobileCards>
           <S.ResponsabilitiesCards>
             <S.IconWrapper>
-              <img src="/assets/adjustIcon.svg" alt="" />
+              <img src="/assets/extra/adjust-icon.svg" alt="" />
             </S.IconWrapper>
             <span>
               {' '}
@@ -170,7 +170,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
 
           <S.ResponsabilitiesCards>
             <S.IconWrapper>
-              <img src="/assets/deployInvest.svg" alt="" />
+              <img src="/assets/extra/deploy-invest.svg" alt="" />
             </S.IconWrapper>
 
             <span>
@@ -181,7 +181,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
 
           <S.ResponsabilitiesCards>
             <S.IconWrapper>
-              <img src="/assets/curatingIcon.svg" alt="" />
+              <img src="/assets/extra/curating-icon.svg" alt="" />
             </S.IconWrapper>
             <span>
               <b>Curate</b> whitelists for investable assets
@@ -190,7 +190,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
 
           <S.ResponsabilitiesCards>
             <S.IconWrapper>
-              <img src="/assets/approvingIcon.svg" alt="" />
+              <img src="/assets/extra/approving-icon.svg" alt="" />
             </S.IconWrapper>
             <span>
               <b>Approve</b> code changes and updates
