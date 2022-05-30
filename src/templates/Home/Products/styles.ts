@@ -72,7 +72,7 @@ export const TextWrapper = styled.div`
 
 export const Divider = styled.div`
   max-width: 10rem;
-  margin-block: 4rem;
+  margin-block: 3.2rem;
 
   border-bottom: 0.3rem;
   border-bottom-style: solid;

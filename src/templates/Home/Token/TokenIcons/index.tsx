@@ -34,8 +34,8 @@ const TokenIcons = ({ images, poolInfo }: TokenIconsProps) => {
         .slice(0, poolInfo.length >= 5 ? 5 : poolInfo.length)
         .map((asset, index) => (
           <S.ImageWrapper
+            key={index}
             className={images[asset.token.id] ? '' : 'svg-none'}
-            key={images[asset.token.id]}
             index={index}
           >
             <Image
