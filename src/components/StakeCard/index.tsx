@@ -349,10 +349,10 @@ const StakeCard = ({
                 />
               ) : null}
               {symbol === 'lp-joe' ? (
-                <img src="/assets/icons/joe-kacy.svg" alt="" width={144} />
+                <img src="/assets/logos/joe-kacy-logo.svg" alt="" width={144} />
               ) : null}
               {symbol === 'lp-png' ? (
-                <img src="/assets/icons/lp-icon.svg" alt="" width={144} />
+                <img src="/assets/logos/lp-kacy-logo.svg" alt="" width={144} />
               ) : null}
               <S.IntroStaking>
                 <S.APR>

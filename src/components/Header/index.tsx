@@ -13,8 +13,8 @@ import ModalWalletConnect from '../Modals/ModalWalletConnect'
 import ModalSocialMediaMobile from '../Modals/ModalSocialMediaMobile'
 
 import options from '../../../public/assets/options.svg'
-import kacy64 from '../../../public/assets/logo-64.svg'
-import logoKassandra from '../../../public/assets/new-kassandra-logo-header.svg'
+import kacy64 from '../../../public/assets/logos/logo-64.svg'
+import logoKassandra from '../../../public/assets/logos/new-kassandra-logo-header.svg'
 
 import * as S from './styles'
 

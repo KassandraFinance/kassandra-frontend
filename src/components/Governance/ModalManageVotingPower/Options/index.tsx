@@ -5,7 +5,7 @@ import substr from '../../../../utils/substr'
 
 import { IDateProps } from '../DelegateVotingPower'
 
-import logo from '../../../../../public/assets/logo-64.svg'
+import logo from '../../../../../public/assets/logos/logo-64.svg'
 
 import * as S from '../styles'
 

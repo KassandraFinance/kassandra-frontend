@@ -42,7 +42,7 @@ const CountdownBanner = () => {
           <S.TitleAndImage>
             <h1>
               A multi-chain protocol launching first on Avalanche
-              <img src="assets/avalancheIcon.svg" alt="" />
+              <img src="assets/logos/avalanche-logo.svg" alt="" />
             </h1>
           </S.TitleAndImage>
           {/* <span>STARTS IN:</span> */}

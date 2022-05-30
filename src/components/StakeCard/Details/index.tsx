@@ -189,7 +189,7 @@ const Details = ({
           matomoEvent('click-add-metamask', `add-${symbol}`)
         }}
       >
-        Add to Metamask <img src="/assets/metaMaskIcon.svg" alt="" />
+        Add to Metamask <img src="/assets/logos/metamask-logo.svg" alt="" />
       </S.AddToken>
     </S.Details>
   )

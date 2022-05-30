@@ -11,7 +11,7 @@ import { registerToken } from '../../../utils/registerToken'
 import { ToastInfo } from '../../../components/Toastify/toast'
 
 import iconBar from '../../../../public/assets/iconbar.svg'
-import metaMaskIcon from '../../../../public/assets/metaMaskIcon.svg'
+import metaMaskIcon from '../../../../public/assets/logos/metamask-logo.svg'
 
 import * as S from './styles'
 

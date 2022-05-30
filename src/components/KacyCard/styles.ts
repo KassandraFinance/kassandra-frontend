@@ -104,7 +104,7 @@ export const KassandraCardHeader = styled.div`
   width: 100%;
   height: 10rem;
 
-  background: #130916 url('assets/kassandra-600-cardHeader.png') no-repeat;
+  background: #130916 url('assets/images/kassandra-kacy-card.png') no-repeat;
   background-position: right 20% bottom 60%;
   background-size: 65%;
   border-radius: 1.2rem;
