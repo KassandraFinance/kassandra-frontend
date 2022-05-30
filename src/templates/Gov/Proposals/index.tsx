@@ -11,7 +11,7 @@ import ProposalOverview from '../../../components/Governance/ProposalOverview'
 import Breadcrumb from '../../../components/Breadcrumb'
 import BreadcrumbItem from '../../../components/Breadcrumb/BreadcrumbItem'
 
-import proposals from '../../../../public/assets/iconGradient/proposals.svg'
+import proposals from '../../../../public/assets/section-title/proposal-details.svg'
 import externalLink from '../../../../public/assets/icons/external-link.svg'
 
 import * as S from './styles'

@@ -18,7 +18,7 @@ import usePriceLP from '../../../hooks/usePriceLP'
 import useStakingContract from '../../../hooks/useStakingContract'
 import useERC20Contract from '../../../hooks/useERC20Contract'
 
-import iconBar from '../../../../public/assets/iconbar.svg'
+import iconBar from '../../../../public/assets/section-title/product-bar.svg'
 
 import { registerToken } from '../../../utils/registerToken'
 
@@ -172,7 +172,7 @@ const MyAsset = ({
     <S.MyAsset>
       <S.TitleWrapper>
         <S.Title>
-          <Image src={iconBar} alt="" />
+          <Image src={iconBar} alt="" width={18} height={18} />
           <h2>My asset</h2>
         </S.Title>
 

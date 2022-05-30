@@ -4,9 +4,9 @@ import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
 import TitleSection from '../../components/TitleSection'
 import FundCard from '../../components/FundCard'
 
-import sectionTitleEye from '../../../public/assets/iconGradient/section-title-eye.svg'
-import featuredFunds from '../../../public/assets/iconGradient/featured-funds.svg'
-import communityFunds from '../../../public/assets/iconGradient/community-funds.svg'
+import sectionTitleEye from '../../../public/assets/section-title/section-title-eye.svg'
+import featuredFunds from '../../../public/assets/section-title/featured-funds.svg'
+import communityFunds from '../../../public/assets/section-title/community-funds.svg'
 
 import * as S from './styles'
 

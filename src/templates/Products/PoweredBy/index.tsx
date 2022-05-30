@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-import iconPower from '../../../../public/assets/iconPower.svg'
+import iconPower from '../../../../public/assets/section-title/voting-power-rank.svg'
 
 import Partner, { PartnerData } from '../../../components/Products/Partner'
 
@@ -15,7 +15,7 @@ const PoweredBy = ({ partners }: Input) => {
   return (
     <S.PoweredBy>
       <S.Title>
-        <Image src={iconPower} alt="Powered by Icon" />
+        <Image src={iconPower} alt="Powered by Icon" width={18} height={18} />
         <h2>Powered by</h2>
       </S.Title>
       <S.Line />

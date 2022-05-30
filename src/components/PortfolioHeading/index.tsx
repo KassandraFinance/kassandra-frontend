@@ -18,7 +18,7 @@ const PortfolioHeading = ({ image, title, usd }: IPortfolioHeadingProps) => {
       <S.HeadingWrapper>
         <S.Heading>
           <S.ImageWrapper>
-            <Image src={image} />
+            <Image src={image} alt="" width={20} height={20} />
           </S.ImageWrapper>
 
           <S.H2>{title}</S.H2>

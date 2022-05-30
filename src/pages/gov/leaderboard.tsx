@@ -6,7 +6,7 @@ import VotingPowerTable from '../../components/Governance/VotingPowerTable'
 import Breadcrumb from '../../components/Breadcrumb'
 import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
 
-import votingPower from '../../../public/assets/iconGradient/voting-power-rank.svg'
+import votingPower from '../../../public/assets/section-title/voting-power-rank.svg'
 
 import * as S from '../../templates/Gov/Proposals/styles'
 import Head from 'next/head'

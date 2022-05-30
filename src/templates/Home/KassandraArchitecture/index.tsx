@@ -47,7 +47,7 @@ const KassandraArchitecture = () => {
         </S.KassandraCard>
         <S.KassandraCard className="thirdCard">
           <Image
-            src="/assets/voteIcon.svg"
+            src="/assets/section-title/vote-icon.svg"
             alt="vote icon"
             width={52}
             height={45}

@@ -10,7 +10,7 @@ import { registerToken } from '../../../utils/registerToken'
 
 import { ToastInfo } from '../../../components/Toastify/toast'
 
-import iconBar from '../../../../public/assets/iconbar.svg'
+import iconBar from '../../../../public/assets/section-title/product-bar.svg'
 import metaMaskIcon from '../../../../public/assets/logos/metamask-logo.svg'
 
 import * as S from './styles'
@@ -51,7 +51,7 @@ const Summary = ({
   return (
     <S.Summary>
       <S.Title>
-        <Image src={iconBar} alt="" />
+        <Image src={iconBar} alt="" width={18} height={18} />
         <h2>Summary</h2>
       </S.Title>
       <S.Line />

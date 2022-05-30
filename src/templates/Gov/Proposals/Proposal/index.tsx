@@ -42,12 +42,11 @@ import {
 } from '../../../../components/Toastify/toast'
 
 import externalLink from '../../../../../public/assets/icons/external-link.svg'
-import proposals from '../../../../../public/assets/iconGradient/proposals.svg'
-import proposalDetailsIcon from '../../../../../public/assets/iconGradient/proposal-details.svg'
-import proposalInfoIcon from '../../../../../public/assets/iconGradient/proposal-info.svg'
+import proposalDetailsIcon from '../../../../../public/assets/section-title/proposal-details.svg'
+import proposalInfoIcon from '../../../../../public/assets/section-title/proposal-info.svg'
 import proposalCompleteIcon from '../../../../../public/assets/iconGradient/proposal-complete.svg'
 import proposalWaitingIcon from '../../../../../public/assets/iconGradient/proposal-waiting.svg'
-import proposalStatusHistory from '../../../../../public/assets/iconGradient/proposal-history.svg'
+import proposalStatusHistory from '../../../../../public/assets/section-title/proposal-history.svg'
 
 import * as S from './styles'
 
@@ -625,7 +624,7 @@ const Proposal = () => {
             <S.TitleWrapper>
               <S.TitleAndAuthor>
                 <TitleSection
-                  image={proposals}
+                  image={proposalDetailsIcon}
                   title={`Proposal ${router.query.proposal}`}
                 />
                 <S.ProposeAuthorCard>
@@ -650,7 +649,7 @@ const Proposal = () => {
           <S.IntroMobileScreen>
             <S.TitleWrapper>
               <TitleSection
-                image={proposals}
+                image={proposalDetailsIcon}
                 title={`Proposal ${router.query.proposal}`}
               />
               <S.CardTitleWrapper>
