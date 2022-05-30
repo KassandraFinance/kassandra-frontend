@@ -3,37 +3,42 @@ import theme from '../../styles/theme'
 
 export const Product = styled.section`
   display: grid;
-  grid-template-columns: minmax(300px, 584px) 448px;
-  gap: 0 108px;
+  grid-template-columns: minmax(30rem, 58.4rem) 44.8rem;
+  gap: 0 10.8rem;
 
   margin: 0 auto;
-  max-width: 1140px;
+  max-width: 114rem;
   max-height: 100%;
   margin-top: ${theme.spacings.space32};
 
   @media (max-width: 1200px) {
-    padding: 0 30px;
+    padding: 0 3rem;
   }
+
   @media (max-width: 1140px) {
-    gap: 0 60px;
+    gap: 0 6rem;
   }
+
   @media (max-width: 960px) {
     display: flex;
     flex-direction: column-reverse;
   }
+
   @media (max-width: 400px) {
-    padding: 0 16px;
+    padding: 0 1.6rem;
   }
 `
 
 export const ProductDetails = styled.div`
-  margin-bottom: 120px;
+  margin-bottom: 12rem;
+
   .second-line {
     @media (max-width: 960px) {
       display: none;
     }
   }
 `
+
 interface IIntroProps {
   introMobile: boolean;
   introDesktop: boolean;
@@ -44,28 +49,33 @@ export const Intro = styled.div<IIntroProps>`
   display: grid;
   grid-template-columns: auto auto;
   align-items: center;
-  gap: 20px;
+  gap: 2rem;
 
-  max-width: 440px;
+  max-width: 44rem;
 
   ${props => props.introMobile && `
     display: none;
+
     h1 {
-      font-size: 18px;
+      font-size: 1.8rem;
     }
+
     img {
-      width: 40px;
+      width: 4rem;
     }
+
     @media (max-width: 960px) {
       display: grid;
-      grid-template-columns: 40px auto;
-      padding: 0 30px;
+      grid-template-columns: 4rem auto;
       gap: 1.6rem;
+
+      padding: 0 3rem;
       max-width: 100%;
-      margin: 32px 0;
+      margin: 3.2rem 0;
     }
+
     @media (max-width: 400px) {
-      padding: 0 16px;
+      padding: 0 1.6rem;
     }
     `
   }
@@ -92,19 +102,20 @@ export const SymbolAndMade = styled.div`
   gap: 0.8rem;
 
   h3 {
-    padding: 8px 12px;
+    padding: 0.8rem 1.2rem;
 
     font-size: ${theme.font.sizes.font12};
     font-weight: ${theme.font.weight.light};
 
     background-color: rgba(0, 0, 0, 0.19);
-    border-radius: 10px;
+    border-radius: 1rem;
 
     @media (max-width: 768px) {
-      font-size: 10px;
+      font-size: 1rem;
     }
   }
 `
+
 interface INameAndSymbolProps {
   introMobile?: boolean;
 }
@@ -112,12 +123,8 @@ interface INameAndSymbolProps {
 // prettier-ignore
 export const NameAndSymbol = styled.div<INameAndSymbolProps>`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 1.6rem;
-
-  @media (max-width: 570px) {
-    align-items: center;
-  }
 
   h1 {
     font-size: ${theme.font.sizes.font24};
@@ -130,11 +137,11 @@ export const NameAndSymbol = styled.div<INameAndSymbolProps>`
   }
 
   .circle {
-    display: grid;
-    place-items: center;
-    padding: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    background: #3C3E4A;
+    background: rgba(255, 255, 255, 0);
     border-radius: 50%;
     border: none;
 
@@ -143,11 +150,11 @@ export const NameAndSymbol = styled.div<INameAndSymbolProps>`
 `
 
 export const Line = styled.div`
-  background-color: rgba(255, 255, 255, 0.1);
-
   width: 100%;
-  height: 1px;
+  height: 0.1rem;
   margin: ${theme.spacings.space24} 0;
+
+  background-color: rgba(255, 255, 255, 0.1);
 
   @media (max-width: 960px) {
     width: calc(100vw - 60px);
@@ -164,22 +171,19 @@ export const IntroCharts = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 22px;
+  gap: 2.2rem;
 
   max-width: 100%;
 `
 
 export const IndexData = styled.div`
   span {
-    font-size: ${theme.font.sizes.font12};
-    text-transform: uppercase;
-
     display: flex;
     align-items: center;
+    gap: 0.6rem;
 
-    img {
-      margin-left: 6px;
-    }
+    font-size: ${theme.font.sizes.font12};
+    text-transform: uppercase;
   }
 
   h2 {
@@ -191,9 +195,6 @@ export const IndexData = styled.div`
 `
 
 export const Tooltip = styled.div`
-  margin-top: 2px;
-  margin-left: 6px;
-  img {
-    width: 14px;
-  }
+  width: 1.6rem;
+  height: 1.6rem;
 `

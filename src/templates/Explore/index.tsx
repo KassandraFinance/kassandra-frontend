@@ -36,10 +36,8 @@ export default function Explore() {
 
         <S.ExploreContainer>
           <TitleSection image={featuredFunds} title="Featured Funds" text="" />
+
           <S.CardContainer>
-            {/* <S.subTitleContainer>
-            <Image src={} />
-          </S.subTitleContainer> */}
             {products.map((product, index: number) => {
               return <FundCard key={index} product={product} />
             })}

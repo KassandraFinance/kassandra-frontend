@@ -301,7 +301,7 @@ const Products = ({ product }: Input) => {
           <S.NameAndSymbol introMobile={true}>
             <h1>{product.name}</h1>
             <button onClick={() => setOpenModal(true)} className="circle">
-              <Image src="/assets/icons/share.svg" width={12} height={12} />
+              <Image src="/assets/icons/share.svg" width={22} height={22} />
             </button>
           </S.NameAndSymbol>
           <S.SymbolAndMade>
@@ -319,7 +319,7 @@ const Products = ({ product }: Input) => {
               <S.NameAndSymbol>
                 <h1>{product.name}</h1>
                 <button onClick={() => setOpenModal(true)} className="circle">
-                  <Image src="/assets/icons/share.svg" width={16} height={16} />
+                  <Image src="/assets/icons/share.svg" width={32} height={32} />
                 </button>
               </S.NameAndSymbol>
               <S.SymbolAndMade>
@@ -335,7 +335,12 @@ const Products = ({ product }: Input) => {
                 TVL
                 <Tippy content="The Total Value Locked is the amount invested inside the pool, or simply the total value of all tokens inside the pool combined.">
                   <S.Tooltip tabIndex={0}>
-                    <Image src={infoGray} alt="Explanation" />
+                    <Image
+                      src={infoGray}
+                      alt="Explanation"
+                      height={16}
+                      width={16}
+                    />
                   </S.Tooltip>
                 </Tippy>
               </span>
@@ -346,7 +351,12 @@ const Products = ({ product }: Input) => {
                 VOLUME (24h)
                 <Tippy content="Total volume of transactions in the last 24 hours. This includes new investments, withdrawals, token swaps and token transfers, which include swaps in decentralized exchanges.">
                   <S.Tooltip tabIndex={0}>
-                    <Image src={infoGray} alt="Explanation" />
+                    <Image
+                      src={infoGray}
+                      alt="Explanation"
+                      height={16}
+                      width={16}
+                    />
                   </S.Tooltip>
                 </Tippy>
               </span>
@@ -357,7 +367,12 @@ const Products = ({ product }: Input) => {
                 Swap fees (24h)
                 <Tippy content="Amount of fees collected in the last 24 hours when people swap tokens inside the pool. This fee is paid to all investors of the pool.">
                   <S.Tooltip tabIndex={0}>
-                    <Image src={infoGray} alt="Explanation" />
+                    <Image
+                      src={infoGray}
+                      alt="Explanation"
+                      height={16}
+                      width={16}
+                    />
                   </S.Tooltip>
                 </Tippy>
               </span>
@@ -368,7 +383,12 @@ const Products = ({ product }: Input) => {
                 Withdraw fees (24h)
                 <Tippy content="Amount of fees collected in the last 24 hours when people withdraw from the strategy. This fee is paid to the Kassandra Decentralized Autonomous Organization.">
                   <S.Tooltip tabIndex={0}>
-                    <Image src={infoGray} alt="Explanation" />
+                    <Image
+                      src={infoGray}
+                      alt="Explanation"
+                      height={16}
+                      width={16}
+                    />
                   </S.Tooltip>
                 </Tippy>
               </span>

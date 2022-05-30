@@ -5,7 +5,7 @@ interface ITitleProps {
   marginTop?: number;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const Title = styled.div<ITitleProps>`
   margin-top: ${props => (props.marginTop ? `${props.marginTop}px` : 0)};
 
@@ -20,17 +20,14 @@ export const Title = styled.div<ITitleProps>`
     font-size: ${theme.font.sizes.font32};
     font-weight: ${theme.font.weight.medium};
 
-    margin-left: 2rem;
-
     @media (max-width: 960px) {
       line-height: ${theme.font.sizes.font24};
       font-size: ${theme.font.sizes.font24};
     }
+
     @media (max-width: 700px) {
       line-height: ${theme.font.sizes.font18};
       font-size: ${theme.font.sizes.font18};
-
-      margin-left: 1rem;
     }
   }
 
@@ -42,7 +39,7 @@ export const Title = styled.div<ITitleProps>`
     text-transform: uppercase;
 
     margin-top: 1.2rem;
-    margin-left: ${theme.spacings.space48};
+    margin-left: 4.3rem;
 
     @media (max-width: 960px) {
       font-size: ${theme.font.sizes.font14};
@@ -52,7 +49,7 @@ export const Title = styled.div<ITitleProps>`
       font-size: ${theme.font.sizes.font12};
 
       margin-top: ${theme.spacings.space8};
-      margin-left: 3rem;
+      margin-left: 3.3rem;
     }
   }
 `
@@ -60,5 +57,10 @@ export const Title = styled.div<ITitleProps>`
 export const TitleContent = styled.div`
   display: flex;
   align-items: center;
+  gap: 2rem;
   max-width: 100%;
+
+  @media (max-width: 700px) {
+    gap: 1rem;
+  }
 `
