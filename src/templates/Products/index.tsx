@@ -301,7 +301,7 @@ const Products = ({ product }: Input) => {
           <S.NameAndSymbol introMobile={true}>
             <h1>{product.name}</h1>
             <button onClick={() => setOpenModal(true)} className="circle">
-              <Image src="/assets/icons/share.svg" width={12} height={12} />
+              <Image src="/assets/icons/share.svg" width={22} height={22} />
             </button>
           </S.NameAndSymbol>
           <S.SymbolAndMade>
@@ -319,7 +319,7 @@ const Products = ({ product }: Input) => {
               <S.NameAndSymbol>
                 <h1>{product.name}</h1>
                 <button onClick={() => setOpenModal(true)} className="circle">
-                  <Image src="/assets/icons/share.svg" width={16} height={16} />
+                  <Image src="/assets/icons/share.svg" width={32} height={32} />
                 </button>
               </S.NameAndSymbol>
               <S.SymbolAndMade>

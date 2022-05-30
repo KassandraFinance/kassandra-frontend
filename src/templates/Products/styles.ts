@@ -112,12 +112,8 @@ interface INameAndSymbolProps {
 // prettier-ignore
 export const NameAndSymbol = styled.div<INameAndSymbolProps>`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 1.6rem;
-
-  @media (max-width: 570px) {
-    align-items: center;
-  }
 
   h1 {
     font-size: ${theme.font.sizes.font24};
@@ -130,11 +126,11 @@ export const NameAndSymbol = styled.div<INameAndSymbolProps>`
   }
 
   .circle {
-    display: grid;
-    place-items: center;
-    padding: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    background: #3C3E4A;
+    background: rgba(255, 255, 255, 0);
     border-radius: 50%;
     border: none;
 
