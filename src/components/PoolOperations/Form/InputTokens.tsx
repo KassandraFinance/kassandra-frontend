@@ -23,7 +23,7 @@ interface IInputEthProps {
   actionString: string;
   swapBalance: BigNumber;
   decimals: BigNumber;
-  infoAHYPE?: TokenDetails[];
+  poolTokensArray?: TokenDetails[];
   // optionals for input
   clearInput?: () => void;
   inputRef?: React.RefObject<HTMLInputElement>;
@@ -48,7 +48,7 @@ const InputTokens = ({
   decimals,
   clearInput,
   inputRef,
-  infoAHYPE,
+  poolTokensArray,
   // Text Inputs
   swapAmount,
   setSwapAmount,
@@ -88,16 +88,18 @@ const InputTokens = ({
     return (
       <S.Symbol>
         <div className="img">
-          <Image
-            src={
-              infoAHYPE && infoAHYPE[infoAHYPE.length - 1].symbol === 'aHYPE'
-                ? ahype
-                : tricrypto
-            }
-            alt=""
-            width={22}
-            height={22}
-          />
+          {poolTokensArray && poolTokensArray?.length > 0 && (
+            <Image
+              src={
+                poolTokensArray[poolTokensArray.length - 1]?.symbol === 'aHYPE'
+                  ? ahype
+                  : tricrypto
+              }
+              alt=""
+              width={22}
+              height={22}
+            />
+          )}
         </div>
         {poolTokens.length > 0 && poolTokens[0] !== undefined
           ? poolTokens[0].symbol
@@ -178,11 +180,11 @@ const InputTokens = ({
               }
             />
             <span className="price-dolar">
-              {infoAHYPE &&
+              {poolTokensArray &&
                 'USD: ' +
                   BNtoDecimal(
                     Big(swapAmount.toString())
-                      .mul(Big(priceDollar(swapOutAddress, infoAHYPE)))
+                      .mul(Big(priceDollar(swapOutAddress, poolTokensArray)))
                       .div(Big(10).pow(18)),
                     18,
                     2,
