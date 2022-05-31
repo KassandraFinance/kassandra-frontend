@@ -44,8 +44,8 @@ import {
 import externalLink from '../../../../../public/assets/utilities/external-link.svg'
 import proposalDetailsIcon from '../../../../../public/assets/section-title/proposal-details.svg'
 import proposalInfoIcon from '../../../../../public/assets/section-title/proposal-info.svg'
-import proposalCompleteIcon from '../../../../../public/assets/iconGradient/proposal-complete.svg'
-import proposalWaitingIcon from '../../../../../public/assets/iconGradient/proposal-waiting.svg'
+import proposalCompleteIcon from '../../../../../public/assets/statusProposal/proposal-complete.svg'
+import proposalWaitingIcon from '../../../../../public/assets/statusProposal/proposal-waiting.svg'
 import proposalStatusHistory from '../../../../../public/assets/section-title/proposal-history.svg'
 
 import * as S from './styles'

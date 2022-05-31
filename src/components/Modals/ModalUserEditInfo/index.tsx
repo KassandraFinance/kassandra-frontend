@@ -164,7 +164,7 @@ const ModalUserEditInfo = ({
                 <S.SocialIcon>
                   <span>
                     <Image
-                      src="/assets/Twitter.svg"
+                      src="/assets/socialMidia/twitter.svg"
                       alt="Follow our Twitter feed"
                       width={18}
                       height={18}
@@ -184,7 +184,7 @@ const ModalUserEditInfo = ({
                 <S.SocialIcon>
                   <span>
                     <Image
-                      src="/assets/Webpage.svg"
+                      src="/assets/socialMidia/webpage.svg"
                       alt="Follow our Twitter feed"
                       width={18}
                       height={18}
@@ -204,7 +204,7 @@ const ModalUserEditInfo = ({
                 <S.SocialIcon>
                   <span>
                     <Image
-                      src="/assets/telegram.svg"
+                      src="/assets/socialMidia/telegram.svg"
                       alt="Follow our Twitter feed"
                       width={18}
                       height={18}
@@ -224,7 +224,7 @@ const ModalUserEditInfo = ({
                 <S.SocialIcon>
                   <span>
                     <Image
-                      src="/assets/Discord.svg"
+                      src="/assets/socialMidia/discord.svg"
                       alt="Follow our Twitter feed"
                       width={18}
                       height={18}

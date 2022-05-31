@@ -30,7 +30,7 @@ const HowItWorks = () => {
       <S.DistributionGraphWrapper>
         <S.DistributionTitle>
           <S.TitleandIcon>
-            <S.Icon src="/assets/about-distribution-icon.svg" />
+            <S.Icon src="/assets/statusProposal/distribution-icon.svg" />
             <h3>Distribuition</h3>
           </S.TitleandIcon>
         </S.DistributionTitle>

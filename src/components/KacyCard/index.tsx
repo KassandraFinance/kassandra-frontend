@@ -50,7 +50,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
             <Link href="https://discord.gg/2uGEvqNnuq" passHref>
               <a target="_blank" rel="noopener noreferrer">
                 <Image
-                  src="/assets/Discord.svg"
+                  src="/assets/socialMidia/discord.svg"
                   alt="Join our Discord community"
                   width={24}
                   height={24}
@@ -60,7 +60,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
             <Link href="https://t.me/KassandraDAO" passHref>
               <a target="_blank" rel="noopener noreferrer">
                 <Image
-                  src="/assets/telegram.svg"
+                  src="/assets/socialMidia/telegram.svg"
                   alt="Join our Telegram group"
                   width={24}
                   height={24}
@@ -70,7 +70,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
             <Link href="https://github.com/KassandraFinance" passHref>
               <a target="_blank" rel="noopener noreferrer">
                 <Image
-                  src="/assets/Github.svg"
+                  src="/assets/socialMidia/github.svg"
                   alt="Access our GitHub repository"
                   width={24}
                   height={24}
@@ -80,7 +80,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
             <Link href="https://kassandrafoundation.medium.com/" passHref>
               <a target="_blank" rel="noopener noreferrer">
                 <Image
-                  src="/assets/Medium.svg"
+                  src="/assets/socialMidia/medium.svg"
                   alt="Read our Medium blog"
                   width={24}
                   height={24}
@@ -90,7 +90,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
             <Link href="https://twitter.com/dao_kassandra" passHref>
               <a target="_blank" rel="noopener noreferrer">
                 <Image
-                  src="/assets/Twitter.svg"
+                  src="/assets/socialMidia/twitter.svg"
                   alt="Follow our Twitter feed"
                   width={24}
                   height={24}
@@ -103,7 +103,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
           <S.KassandraCardHeader>
             <S.ImageWrapper>
               <Image
-                src="/assets/token-96.svg"
+                src="/assets/token/kacy-96.svg"
                 alt="kacy token"
                 width={70}
                 height={70}

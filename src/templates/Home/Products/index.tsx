@@ -50,7 +50,7 @@ const Products = () => {
         <S.Card>
           <S.IconWrapper>
             <Image
-              src="/assets/home-products-check.svg"
+              src="/assets/icons/check-gradient.svg"
               alt="home products check logo"
               width={30}
               height={16}

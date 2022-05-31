@@ -44,7 +44,7 @@ const ModalSocial = ({ modalOpen, setModalOpen }: IModalSocialProps) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src="assets/Discord.svg" alt="" />
+                  <img src="assets/socialMidia/discord.svg" alt="" />
                 </a>
                 <span>Discord</span>
               </WrapperIcons>
@@ -54,7 +54,7 @@ const ModalSocial = ({ modalOpen, setModalOpen }: IModalSocialProps) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src="assets/telegram.svg" alt="" />
+                  <img src="assets/socialMidia/telegram.svg" alt="" />
                 </a>
                 <span>Telegram</span>
               </WrapperIcons>
@@ -64,7 +64,7 @@ const ModalSocial = ({ modalOpen, setModalOpen }: IModalSocialProps) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src="assets/Github.svg" alt="" />
+                  <img src="assets/socialMidia/github.svg" alt="" />
                 </a>
                 <span>GitHub</span>
               </WrapperIcons>
@@ -74,7 +74,7 @@ const ModalSocial = ({ modalOpen, setModalOpen }: IModalSocialProps) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src="assets/Medium.svg" alt="" />
+                  <img src="assets/socialMidia/medium.svg" alt="" />
                 </a>
                 <span>Medium</span>
               </WrapperIcons>
@@ -84,7 +84,7 @@ const ModalSocial = ({ modalOpen, setModalOpen }: IModalSocialProps) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src="assets/Twitter.svg" alt="" />
+                  <img src="assets/socialMidia/twitter.svg" alt="" />
                 </a>
                 <span>Twitter</span>
               </WrapperIcons>

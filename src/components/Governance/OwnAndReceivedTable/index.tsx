@@ -11,7 +11,7 @@ import substr from '../../../utils/substr'
 
 import AnyCard from '../../AnyCard'
 
-import avax from '../../../../public/assets/logo-kacy-stake.svg'
+import avax from '../../../../public/assets/token/kacy-stake.svg'
 
 import * as S from './styles'
 

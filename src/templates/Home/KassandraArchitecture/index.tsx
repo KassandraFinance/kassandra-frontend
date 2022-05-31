@@ -16,7 +16,7 @@ const KassandraArchitecture = () => {
       <S.KassandraCardWrapper>
         <S.KassandraCard className="firstCard">
           <Image
-            src="/assets/about-distribution-icon.svg"
+            src="/assets/statusProposal/distribution-icon.svg"
             alt="about distribution icon"
             width={48}
             height={57}

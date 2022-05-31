@@ -16,9 +16,9 @@ import ModalWalletConnect from '../Modals/ModalWalletConnect'
 
 import AssetsIcon from '../../../public/assets/section-title/section-title-assets.svg'
 import StakedPoolsIcon from '../../../public/assets/section-title/staking-pools.svg'
-import aHYPE from '../../../public/assets/ahype.svg'
+import aHYPE from '../../../public/assets/token/ahype.svg'
 import AvalancheIcon from '../../../public/assets/logos/avalanche-logo.svg'
-import iconKace from '../../../public/assets/logo-kacy-stake.svg'
+import iconKace from '../../../public/assets/token/kacy-stake.svg'
 import iconPangolin from '../../../public/assets/logos/logo-pangolin-40x40.svg'
 import iconTraderJoe from '../../../public/assets/logos/logo-traderJoe.svg'
 

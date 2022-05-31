@@ -120,7 +120,7 @@ const UserDescription = () => {
                   rel="noopener noreferrer"
                 >
                   <Image
-                    src="/assets/Discord.svg"
+                    src="/assets/socialMidia/discord.svg"
                     alt="Follow our Twitter feed"
                     width={20}
                     height={20}
@@ -134,7 +134,7 @@ const UserDescription = () => {
                   rel="noopener noreferrer"
                 >
                   <Image
-                    src="/assets/Twitter.svg"
+                    src="/assets/socialMidia/twitter.svg"
                     alt="Follow our Twitter feed"
                     width={20}
                     height={20}
@@ -148,7 +148,7 @@ const UserDescription = () => {
                   rel="noopener noreferrer"
                 >
                   <Image
-                    src="/assets/telegram.svg"
+                    src="/assets/socialMidia/telegram.svg"
                     alt="Follow our Twitter feed"
                     width={20}
                     height={20}
@@ -162,7 +162,7 @@ const UserDescription = () => {
                   rel="noopener noreferrer"
                 >
                   <Image
-                    src="/assets/Webpage.svg"
+                    src="/assets/socialMidia/webpage.svg"
                     alt="Follow our Twitter feed"
                     width={20}
                     height={20}
