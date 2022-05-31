@@ -46,7 +46,7 @@ const Footer = () => (
       <S.LowerContainer>
         <S.LowerLeft>
           <img
-            src="/assets/kassandra-footer.svg"
+            src="/assets/images/kassandra-footer.svg"
             alt="kassandra"
             width="266"
             height="26"
@@ -133,7 +133,7 @@ const Footer = () => (
               rel="noopener noreferrer"
             >
               <span>Audited By</span>
-              <img src="/assets/Certik.svg" alt="Certik" />
+              <img src="/assets/logos/Certik.svg" alt="Certik" />
             </a>
           </S.Certified>
         </S.LowerRight>
@@ -213,7 +213,7 @@ const Footer = () => (
         </ul>
         <S.LowerLeft>
           <img
-            src="/assets/kassandra-footer.svg"
+            src="/assets/images/kassandra-footer.svg"
             alt="kassandra"
             width="266"
             height="26"
@@ -227,7 +227,7 @@ const Footer = () => (
             rel="noopener noreferrer"
           >
             <span>Audited By</span>
-            <img src="/assets/Certik.svg" alt="Certik" />
+            <img src="/assets/logos/Certik.svg" alt="Certik" />
           </a>
         </S.Certified>
       </S.LowerContainerMobile>

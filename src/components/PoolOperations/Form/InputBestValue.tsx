@@ -12,7 +12,7 @@ import { TokenImages } from '../../../store/modules/poolImages/types'
 import { BNtoDecimal } from '../../../utils/numerals'
 import { priceDollar } from '../../../utils/priceDollar'
 
-import none from '../../../../public/assets/coming-soon.svg'
+import none from '../../../../public/assets/icons/coming-soon.svg'
 
 import * as S from './styles'
 
