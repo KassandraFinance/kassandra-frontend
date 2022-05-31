@@ -16,7 +16,7 @@ import Toastify from '../components/Toastify'
 const matomoUrl = 'https://stats.kassandra.finance'
 
 const instance = createInstance({
-  disabled: process.env.NODE_ENV === 'development',
+  disabled: process.env.NODE_ENV === 'development' || process.env.NEXT_PUBLIC_MASTER !== '1',
   urlBase: matomoUrl,
   siteId: 4,
   trackerUrl: `${matomoUrl}/api.php`,
