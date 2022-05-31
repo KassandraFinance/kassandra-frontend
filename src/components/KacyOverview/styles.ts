@@ -34,7 +34,7 @@ export const Icon = styled.img`
 
 export const TokenInfo = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, auto);
   margin-top: 1.6rem;
 
   border-top: 0.1rem solid #ffffff24;

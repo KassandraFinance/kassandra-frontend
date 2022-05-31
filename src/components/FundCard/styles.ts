@@ -42,10 +42,6 @@ export const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
 
-  width: 4.8rem;
-  height: 4.8rem;
-
-  background: #211426;
   border-radius: 50%;
 `
 

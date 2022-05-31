@@ -137,8 +137,8 @@ const Summary = ({
               src={metaMaskIcon}
               title="Add token to Metamask"
               alt="Add token to Metamask"
-              height={20}
-              width={20}
+              height={14}
+              width={14}
             />
           </button>
           <CopyToClipboard text={poolController}>

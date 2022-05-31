@@ -70,28 +70,6 @@ const RoadMapSlider = () => {
 
 const arrCard = [
   {
-    date: '2022 - Q1',
-    title: '1st Cycle ',
-    icon: icons.done,
-    color: colors.done,
-    items: [
-      {
-        title: 'IDO',
-        text: ['Launching and bootstrapping KACY']
-      },
-      {
-        title: 'Avalanche Social Index',
-        text: [
-          'A single asset that automatically invests in the most active communities on Avalanche'
-        ]
-      },
-      {
-        title: 'Stake & Farm',
-        text: ['Earn staking KACY and other assets']
-      }
-    ]
-  },
-  {
     date: '2022 - Q2',
     icon: icons.soon,
     color: colors.soon,
@@ -124,6 +102,28 @@ const arrCard = [
       {
         title: 'Multichain',
         text: ['Time to jump into other blockchains']
+      }
+    ]
+  },
+  {
+    date: '2022 - Q1',
+    title: '1st Cycle ',
+    icon: icons.done,
+    color: colors.done,
+    items: [
+      {
+        title: 'IDO',
+        text: ['Launching and bootstrapping KACY']
+      },
+      {
+        title: 'Avalanche Social Index',
+        text: [
+          'A single asset that automatically invests in the most active communities on Avalanche'
+        ]
+      },
+      {
+        title: 'Stake & Farm',
+        text: ['Earn staking KACY and other assets']
       }
     ]
   }
