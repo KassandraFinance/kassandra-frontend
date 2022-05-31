@@ -198,3 +198,7 @@ export const Tooltip = styled.div`
   width: 1.6rem;
   height: 1.6rem;
 `
+
+export const LoadingContent = styled.div`
+  margin: 28rem 0;
+`

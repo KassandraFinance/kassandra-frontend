@@ -13,7 +13,8 @@ function Product({ product }: Input) {
   return (
     <SWRConfig
       value={{
-        refreshInterval: 5000
+        refreshInterval: 10000,
+        fetcher: url => fetch(url).then(res => res.json())
       }}
     >
       <Products product={product} />

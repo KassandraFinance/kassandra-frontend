@@ -35,7 +35,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
 
     const images: IImagesProps = {}
 
-    const infoToken: number[] = await Promise.all(
+    const infoToken: object[] = await Promise.all(
       request.query['tokenAddress'].split(',').map(async item => {
         const urlImageCoingecko = `${URL_COINGECKO}/coins/${poolinfo}/contract/${item}?localization=false&tickers=false&community_data=false&developer_data=false&sparkline=false`
         const responseImageCoingecko = await fetch(urlImageCoingecko)
@@ -46,14 +46,21 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
             responseImageCoingeckoJson.image?.small
         })
 
-        return Number(
-          responseImageCoingeckoJson.market_data?.price_change_percentage_24h ||
-            0
-        )
+        return {
+          change: Number(
+            responseImageCoingeckoJson.market_data
+              ?.price_change_percentage_24h || 0
+          ),
+          price: responseImageCoingeckoJson.market_data?.current_price.usd
+        }
       })
     )
 
-    response.setHeader('Cache-Control', 's-maxage=120, stale-while-revalidate')
+    response.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate')
+
+    if (!infoToken || !images) {
+      return response.json({})
+    }
 
     response.json({ infoToken, images })
   } catch (error) {
