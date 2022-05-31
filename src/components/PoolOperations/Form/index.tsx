@@ -66,7 +66,7 @@ const Form = ({
 }: IFormProps) => {
   const crpPoolToken = useERC20Contract(crpPoolAddress)
   const corePool = usePoolContract(corePoolAddress)
-  const crpPool = useProxy(ProxyContract, crpPoolAddress)
+  const proxy = useProxy(ProxyContract, crpPoolAddress)
 
   const { userWalletAddress, chainId, fees, tokenAddress2Index, poolTokensArray } = useSelector((state: RootStateOrAny) => state)
   const { trackBuying, trackBought, trackCancelBuying } = useMatomoEcommerce();
@@ -168,7 +168,7 @@ const Form = ({
       for (let i = 0; i < poolTokensArray.length; i += 1) {
         newApprovals.push(
           ERC20(poolTokensArray[i].address).allowance(
-            title === 'Invest' ? crpPoolAddress : corePoolAddress,
+            title === 'Invest' ? ProxyContract : corePoolAddress,
             userWalletAddress
           )
         )
@@ -839,7 +839,7 @@ const Form = ({
           case 'Invest':
             if (approved.value === '0') {
               ERC20(swapInAddressVal).approve(
-                crpPoolAddress,
+                ProxyContract,
                 walletAddress.value,
                 approvalCallback(swapInSymbol.value, swapInAddressVal, tabTitle)
               )
@@ -847,7 +847,7 @@ const Form = ({
             }
 
             trackBuying(crpPoolAddress, 'aHYPE', amountInUSD, productCategories)
-            crpPool.joinswapExternAmountIn(
+            proxy.joinswapExternAmountIn(
               swapInAddressVal,
               swapInAmountVal,
               swapOutAmountVal[0].mul(slippageBase).div(slippageExp),

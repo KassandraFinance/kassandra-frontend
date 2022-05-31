@@ -53,7 +53,7 @@ export const GovernorAlpha = process.env.NEXT_PUBLIC_MASTER === '1' ?
   '0x2B6C46b9552B6Fa36DD097b6527ba20fdDB3FfD5'
 
 export const ProxyContract = process.env.NEXT_PUBLIC_MASTER === '1' ?
-  '0x1dd8b313ec6f7a744b69fc86ae47ad2a5eb45bc4'
+  '0x2A36E9eb73eF29652c524274CC0eEa7211B32292'
   :
   '0x97e33051B09092C1301A90b964a74cA51C0b068B'
 

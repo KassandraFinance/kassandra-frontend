@@ -30,9 +30,9 @@ const useProxy = (address: string, crpAddress: string) => {
       const wrapped = await contract.methods.wNativeToken().call()
 
       const avaxValue = tokenIn === wrapped ? tokenAmountIn : new BigNumber(0)
-      const res =  contract.methods
+      const res = await contract.methods
         .joinswapExternAmountIn(crpAddress, tokenIn, tokenAmountIn, minPoolAmountOut)
-        .send({ from: walletAddress, value: avaxValue },callback)
+        .send({ from: walletAddress, value: avaxValue }, callback)
 
       return res
     }
