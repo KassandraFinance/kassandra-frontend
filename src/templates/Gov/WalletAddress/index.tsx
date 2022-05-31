@@ -27,7 +27,7 @@ import proposals from '../../../../public/assets/section-title/proposal-details.
 import votingPoweRrank from '../../../../public/assets/section-title/voting-power-rank.svg'
 import stakingPools from '../../../../public/assets/section-title/staking-pools.svg'
 
-import externalLink from '../../../../public/assets/icons/external-link.svg'
+import externalLink from '../../../../public/assets/utilities/external-link.svg'
 
 import * as S from './styles'
 

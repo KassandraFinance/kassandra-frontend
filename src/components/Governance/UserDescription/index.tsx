@@ -7,7 +7,7 @@ import 'tippy.js/dist/tippy.css'
 
 import { ToastInfo } from '../../Toastify/toast'
 
-import infoGrayIcon from '../../../../public/assets/info-gray.svg'
+import infoGrayIcon from '../../../../public/assets/utilities/info-gray.svg'
 import userProfile from '../../../../public/assets/userProfile.svg'
 
 import ModalUserEditInfo from '../../Modals/ModalUserEditInfo'
@@ -60,7 +60,7 @@ const UserDescription = () => {
             <button onClick={() => setIsOpenModal(true)}>
               Edit info
               <img
-                src="/assets/editIcon.svg"
+                src="/assets/utilities/edit-icon.svg"
                 alt="Follow our Twitter feed"
                 width="14"
                 height="14"
@@ -173,7 +173,7 @@ const UserDescription = () => {
             <S.EditInfoButton onClick={() => setIsOpenModal(true)}>
               Edit info
               <Image
-                src="/assets/editIcon.svg"
+                src="/assets/utilities/edit-icon.svg"
                 alt="Follow our Twitter feed"
                 width={14}
                 height={14}
@@ -208,7 +208,7 @@ const UserDescription = () => {
                 {isStateSeeMore ? 'SEE LESS' : 'SEE MORE'}
                 <span>
                   <Image
-                    src="/assets/arrow-select.svg"
+                    src="/assets/utilities/arrow-select-down.svg"
                     alt="arrow select button"
                     width={13}
                     height={13}

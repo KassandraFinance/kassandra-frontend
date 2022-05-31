@@ -111,7 +111,7 @@ const ModalVotes = ({
       <S.Container modalOpen={isModalOpen}>
         <S.Close>
           <button type="button" onClick={() => handleCloseModal()}>
-            <img src="/assets/close.svg" alt="Close Modal Votes" />{' '}
+            <img src="/assets/utilities/close-icon.svg" alt="Close Modal Votes" />{' '}
           </button>
         </S.Close>
         <S.ModalHeader>

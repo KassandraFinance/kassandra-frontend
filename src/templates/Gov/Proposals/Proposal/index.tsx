@@ -41,7 +41,7 @@ import {
   ToastWarning
 } from '../../../../components/Toastify/toast'
 
-import externalLink from '../../../../../public/assets/icons/external-link.svg'
+import externalLink from '../../../../../public/assets/utilities/external-link.svg'
 import proposalDetailsIcon from '../../../../../public/assets/section-title/proposal-details.svg'
 import proposalInfoIcon from '../../../../../public/assets/section-title/proposal-info.svg'
 import proposalCompleteIcon from '../../../../../public/assets/iconGradient/proposal-complete.svg'

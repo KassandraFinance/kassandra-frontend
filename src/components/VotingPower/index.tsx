@@ -13,7 +13,7 @@ import { SUBGRAPH_URL } from '../../constants/tokenAddresses'
 
 import { BNtoDecimal } from '../../utils/numerals'
 
-import infoGrayIcon from '../../../public/assets/info-gray.svg'
+import infoGrayIcon from '../../../public/assets/utilities/info-gray.svg'
 
 import * as S from './styles'
 

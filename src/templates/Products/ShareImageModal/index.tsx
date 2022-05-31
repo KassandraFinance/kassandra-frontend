@@ -127,7 +127,7 @@ const ShareImageModal = ({
               <Image
                 className="close-modal"
                 onClick={() => setOpenModal(false)}
-                src="/assets/close.svg"
+                src="/assets/utilities/close-icon.svg"
                 width={12}
                 height={12}
               />

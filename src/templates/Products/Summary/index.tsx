@@ -58,7 +58,7 @@ const Summary = ({
       <p>{summary}</p>
       <S.LinkContent>
         {/* <a href="https://coinmarketcap.com/">
-          View On CoinMarketCap <img src="/assets/externalLink.svg" alt="" />
+          View On CoinMarketCap <img src="/assets/utilities/external-link.svg" alt="" />
         </a> */}
         {symbol === 'aHYPE' ? (
           <a

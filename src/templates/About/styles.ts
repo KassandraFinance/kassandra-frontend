@@ -78,7 +78,7 @@ export const ScrollUpIcon = styled.div`
   height: 100%;
   margin: auto;
 
-  background: url('assets/backToTop.svg');
+  background: url('assets/icons/back-to-top.svg');
   background-repeat: no-repeat;
   background-size: auto;
   background-position: center;

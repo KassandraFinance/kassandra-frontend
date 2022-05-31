@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import Tippy from '@tippyjs/react'
 
-import infoGray from '../../../public/assets/info-gray.svg'
+import infoGray from '../../../public/assets/utilities/info-gray.svg'
 
 import * as S from './styles'
 

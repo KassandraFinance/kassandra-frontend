@@ -117,7 +117,7 @@ const AhypeDescription = () => {
           </a>{' '}
           documentation
         </p>
-        <img src="/assets/externalLink.svg" alt="" />
+        <img src="/assets/utilities/external-link.svg" alt="" />
       </S.ToDocumentation>
     </>
   )

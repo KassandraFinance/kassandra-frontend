@@ -13,7 +13,7 @@ import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
 import overview from '../../../public/assets/section-title/section-title-eye.svg'
 import proposals from '../../../public/assets/section-title/proposal-details.svg'
 import votingPower from '../../../public/assets/section-title/voting-power-rank.svg'
-import externalLink from '../../../public/assets/icons/external-link.svg'
+import externalLink from '../../../public/assets/utilities/external-link.svg'
 
 import * as S from './styles'
 

@@ -19,8 +19,8 @@ import StakedPoolsIcon from '../../../public/assets/section-title/staking-pools.
 import aHYPE from '../../../public/assets/ahype.svg'
 import AvalancheIcon from '../../../public/assets/logos/avalanche-logo.svg'
 import iconKace from '../../../public/assets/logo-kacy-stake.svg'
-import iconPangolin from '../../../public/assets/logo-pangolin-40x40.svg'
-import iconTraderJoe from '../../../public/assets/logo-traderJoe.svg'
+import iconPangolin from '../../../public/assets/logos/logo-pangolin-40x40.svg'
+import iconTraderJoe from '../../../public/assets/logos/logo-traderJoe.svg'
 
 import { BNtoDecimal } from '../../utils/numerals'
 

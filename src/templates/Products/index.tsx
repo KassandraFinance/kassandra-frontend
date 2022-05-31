@@ -36,7 +36,7 @@ import Breadcrumb from '../../components/Breadcrumb'
 import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
 import PoweredBy from './PoweredBy'
 
-import infoGray from '../../../public/assets/info-gray.svg'
+import infoGray from '../../../public/assets/utilities/info-gray.svg'
 
 import { GET_INFO_POOL } from './graphql'
 

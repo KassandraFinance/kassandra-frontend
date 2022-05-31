@@ -10,7 +10,7 @@ import ExternalLink from '../../../../components/ExternalLink'
 import TokenIcons from '../TokenIcons'
 
 import * as S from './styles'
-import arrowRight from '../../../../../public/assets/icons/arrow-right.svg'
+import arrowRight from '../../../../../public/assets/icons/arrow-yellow-right.svg'
 import arrowAscend from '../../../../../public/assets/icons/arrow-ascend.svg'
 import arrowDescend from '../../../../../public/assets/icons/arrow-descend.svg'
 

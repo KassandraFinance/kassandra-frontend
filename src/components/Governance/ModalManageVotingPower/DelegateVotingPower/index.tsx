@@ -22,7 +22,7 @@ import ExternalLink from '../../../ExternalLink'
 import { ToastError, ToastSuccess, ToastWarning } from '../../../Toastify/toast'
 import Options from '../Options'
 
-import arrowSelect from '../../../../../public/assets/icons/arrow-select.svg'
+import arrowSelect from '../../../../../public/assets/utilities/arrow-select-down.svg'
 import logo from '../../../../../public/assets/logos/logo-64.svg'
 
 import * as S from '../styles'

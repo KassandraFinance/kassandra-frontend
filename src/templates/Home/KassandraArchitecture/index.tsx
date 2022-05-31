@@ -32,7 +32,7 @@ const KassandraArchitecture = () => {
         </S.KassandraCard>
         <S.KassandraCard className="secondCard">
           <Image
-            src="/assets/feeIcon.svg"
+            src="/assets/icons/feeIcon.svg"
             alt="Revenue Stream for DAO icon"
             width={56}
             height={57}

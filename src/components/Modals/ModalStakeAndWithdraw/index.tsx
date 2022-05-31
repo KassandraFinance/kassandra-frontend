@@ -243,7 +243,7 @@ const ModalStakeAndWithdraw = ({
                 setStakeTransaction('')
               }}
             >
-              <img src="assets/close.svg" alt="Close" />
+              <img src="assets/utilities/close-icon.svg" alt="Close" />
             </button>
           </S.InterBackground>
           <S.Main>

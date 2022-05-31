@@ -33,7 +33,7 @@ const ModalSocial = ({ modalOpen, setModalOpen }: IModalSocialProps) => {
               <span>Connect with us</span>
             </ModalText>
             <button type="button" onClick={() => setModalOpen(false)}>
-              <img src="assets/close.svg" alt="" />{' '}
+              <img src="assets/utilities/close-icon.svg" alt="" />{' '}
             </button>
           </InterBackground>
           <Content>
