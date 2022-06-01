@@ -52,7 +52,7 @@ enum Approval {
 }
 
 // eslint-disable-next-line prettier/prettier
-type Approvals = {[key in Titles]: Approval[]}
+type Approvals = { [key in Titles]: Approval[] }
 
 const Form = ({
   poolChain,
@@ -99,6 +99,8 @@ const Form = ({
   const [swapOutBalance, setSwapOutBalance] = React.useState([new BigNumber(-1)])
 
   const [priceInDollarOnWithdraw, setPriceInDollarOnWithdraw] = React.useState<string>('')
+
+  const [priceImpact, setPriceImpact] = React.useState<Big>(Big(0))
 
   const { trackEvent } = useMatomo()
 
@@ -302,7 +304,7 @@ const Form = ({
             userWalletAddress
           )
           setSwapOutAmount([newSwapOutAmount])
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
 
           const newSwapOutPrice = await corePool.calcPoolOutGivenSingleIn(
@@ -351,7 +353,7 @@ const Form = ({
               poolSwapFee
             )
             newSwapOutPrice = newSwapOutPrice.mul(multiplier)
-          } catch(e) {
+          } catch (e) {
             pow = pow.add(new BigNumber(1));
           }
         }
@@ -423,7 +425,7 @@ const Form = ({
           if (userWalletAddress.length > 0 && swapInAmount.gt(new BigNumber(0))) {
             await corePool.trySwapExactAmountIn(swapInAddress, swapInAmount, swapOutAddress, userWalletAddress)
           }
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
           const errorStr = error.toString()
 
@@ -443,7 +445,7 @@ const Form = ({
           }
         }
       }
-      catch(e) {
+      catch (e) {
         ToastWarning('Could not connect with the blockchain to calculate prices.')
       }
     }
@@ -537,7 +539,7 @@ const Form = ({
               userWalletAddress
             )
           }
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
           const errorStr = error.toString()
 
@@ -593,7 +595,7 @@ const Form = ({
         setSwapOutAmount([SingleSwapOutAmount])
         setSwapOutPrice(newSwapOutPrice)
       }
-      catch(e) {
+      catch (e) {
         if (userWalletAddress.length > 0) {
           ToastWarning('Could not connect with the blockchain to calculate prices.')
         }
@@ -608,7 +610,7 @@ const Form = ({
             userWalletAddress
           )
         }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         const errorStr = error.toString()
 
@@ -805,7 +807,7 @@ const Form = ({
         amountUSD,
         slippageInput,
         tabTitleInput
-      // eslint-disable-next-line prettier/prettier
+        // eslint-disable-next-line prettier/prettier
       } = e.target as HTMLFormElement & {
         approved: HTMLInputElement;
         category: HTMLInputElement;
@@ -925,19 +927,39 @@ const Form = ({
       }
     }, [tokenAddress2Index])
 
-    React.useEffect(() => {
-      const handleWallectConnect = () => {
-        const connect = localStorage.getItem('walletconnect')
+  React.useEffect(() => {
+    const handleWallectConnect = () => {
+      const connect = localStorage.getItem('walletconnect')
 
-        if (connect) {
-          setWalletConnect(connect)
-        } else {
-          setWalletConnect(null)
-        }
+      if (connect) {
+        setWalletConnect(connect)
+      } else {
+        setWalletConnect(null)
       }
+    }
 
-      handleWallectConnect()
-    }, [])
+    handleWallectConnect()
+  }, [])
+
+  // Calc Price Impact
+  React.useEffect(() => {
+    if (parseFloat(swapOutAmount[0].toString()) > 0) {
+      const usdAmountIn = Big(swapInAmount.toString())
+        .mul(Big(priceDollar(swapInAddress, poolTokensArray)))
+        .div(Big(10).pow(18))
+
+      const usdAmountOut = Big(swapOutAmount[0].toString())
+        .mul(Big(priceDollar(swapOutAddress, poolTokensArray)))
+        .div(Big(10).pow(18))
+
+      const subValue = usdAmountIn.sub(usdAmountOut)
+      const valuePriceImpact = subValue.div(usdAmountOut).mul(100)
+
+      valuePriceImpact.gt(0) ? setPriceImpact(valuePriceImpact) : setPriceImpact(Big(0))
+    } else {
+      setPriceImpact(Big(0))
+    }
+  }, [swapInAmount, swapOutAmount])
 
   return (
     <S.FormContainer onSubmit={submitAction}>
@@ -956,16 +978,16 @@ const Form = ({
         title === "Invest"
           ? Big((swapOutAmount[0] || 0).toString())
             .div(
-               Big(10).pow(poolTokensArray[tokenOutIndex]?.decimals.toNumber() || 0)
-             )
+              Big(10).pow(poolTokensArray[tokenOutIndex]?.decimals.toNumber() || 0)
+            )
             .mul(
               Big(priceDollar(swapOutAddress, poolTokensArray))
             )
             .toString()
           : Big((swapInAmount || 0).toString())
             .div(
-               Big(10).pow(poolTokensArray[tokenInIndex]?.decimals.toNumber() || 0)
-             )
+              Big(10).pow(poolTokensArray[tokenInIndex]?.decimals.toNumber() || 0)
+            )
             .mul(
               Big(priceDollar(swapInAddress, poolTokensArray))
             )
@@ -973,34 +995,34 @@ const Form = ({
       } />
 
       <S.ErrorTippy content={errorMsg} visible={errorMsg.length > 0}>
-          <InputTokens
-            clearInput={clearInput}
-            inputRef={inputTokenRef}
-            actionString={typeAction}
-            title={title}
-            decimals={poolTokensArray[tokenInIndex] ? poolTokensArray[tokenInIndex].decimals : new BigNumber(18)}
-            swapBalance={swapInBalance}
-            swapAmount={swapInAmount}
-            setSwapAmount={setSwapInAmount}
-            // Text Input
-            disabled={
-              userWalletAddress.length === 0
-                ? "Please connect your wallet by clicking the button below"
-                : chainId !== poolChain.chainId
-                  ? `Please change to the ${poolChain.chainName} by clicking the button below`
-                  : ""
-            }
-            // Select Input
-            poolTokens={
-              title === 'Withdraw'
-                ? [poolTokensArray[poolTokensArray.length - 1]]
-                : poolTokensArray
-                  .slice(0, -1)
-                  .filter((token: { address: string }) => token.address !== swapOutAddress)
-            }
-            tokenDetails={poolTokensArray[tokenInIndex]}
-            setSwapAddress={setSwapInAddress}
-          />
+        <InputTokens
+          clearInput={clearInput}
+          inputRef={inputTokenRef}
+          actionString={typeAction}
+          title={title}
+          decimals={poolTokensArray[tokenInIndex] ? poolTokensArray[tokenInIndex].decimals : new BigNumber(18)}
+          swapBalance={swapInBalance}
+          swapAmount={swapInAmount}
+          setSwapAmount={setSwapInAmount}
+          // Text Input
+          disabled={
+            userWalletAddress.length === 0
+              ? "Please connect your wallet by clicking the button below"
+              : chainId !== poolChain.chainId
+                ? `Please change to the ${poolChain.chainName} by clicking the button below`
+                : ""
+          }
+          // Select Input
+          poolTokens={
+            title === 'Withdraw'
+              ? [poolTokensArray[poolTokensArray.length - 1]]
+              : poolTokensArray
+                .slice(0, -1)
+                .filter((token: { address: string }) => token.address !== swapOutAddress)
+          }
+          tokenDetails={poolTokensArray[tokenInIndex]}
+          setSwapAddress={setSwapInAddress}
+        />
       </S.ErrorTippy>
 
       {title === 'Swap' ?
@@ -1055,15 +1077,20 @@ const Form = ({
             setSwapAddress={setSwapOutAddress}
           />
           <S.ExchangeRate>
-            <S.SpanLight>Exchange rate:</S.SpanLight>
-            <S.SpanLight>
-              {swapOutPrice.lt(new BigNumber(0)) || !poolTokensArray[tokenOutIndex]?.decimals
-                ? '...'
-                : `1 ${poolTokensArray[tokenInIndex]?.symbol} = ${BNtoDecimal(
-                  swapOutPrice,
-                  poolTokensArray[tokenOutIndex]?.decimals.toNumber()
-                )} ${poolTokensArray[tokenOutIndex]?.symbol}`}
-            </S.SpanLight>
+            <S.SpanLight>Price Impact:</S.SpanLight>
+            <S.PriceImpactWrapper price={BNtoDecimal(
+              priceImpact,
+              18,
+              2,
+              2
+            )}>
+              {BNtoDecimal(
+                priceImpact,
+                18,
+                2,
+                2
+              )}%
+            </S.PriceImpactWrapper>
           </S.ExchangeRate>
         </>
       )}
@@ -1115,7 +1142,7 @@ const Form = ({
                   title === "Withdraw" ?
                     typeWithdrawChecked === "Best_value" ?
                       `${title} ${'$' + priceInDollarOnWithdraw}`
-                    :
+                      :
                       `${title} ${'$' + BNtoDecimal(
                         Big((swapOutAmount[0] || 0).toString())
                           .mul(Big(priceDollar(swapOutAddress, poolTokensArray)))
@@ -1124,7 +1151,7 @@ const Form = ({
                         2,
                         2
                       )}`
-                  :
+                    :
                     `${title} ${'$' + BNtoDecimal(
                       Big((swapOutAmount[0] || 0).toString())
                         .mul(Big(priceDollar(swapOutAddress, poolTokensArray)))
@@ -1133,9 +1160,9 @@ const Form = ({
                       2,
                       2
                     )}`
-                :
+                  :
                   `${title}`
-              :
+                :
                 approvals[title][tokenInIndex] === Approval.WaitingTransaction
                   ? 'Approving...'
                   : approvals[title][tokenInIndex] === undefined || approvals[title][tokenInIndex] === Approval.Syncing
