@@ -57,7 +57,7 @@ const Hero = () => {
           <S.Card>
             <S.IconWrapper>
               <S.BackgroundIcon>
-                <img src="assets/iconGradient/team-icon.svg" alt="" />
+                <img src="assets/iconGradient/team.svg" alt="" />
               </S.BackgroundIcon>
             </S.IconWrapper>
             <span>

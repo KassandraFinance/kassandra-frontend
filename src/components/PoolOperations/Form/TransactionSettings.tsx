@@ -4,7 +4,7 @@ import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
 import infoGray from '../../../../public/assets/utilities/info-gray.svg'
-import gearButton from '../../../../public/assets/icons/gearButton.svg'
+import gearButton from '../../../../public/assets/icons/gear-button.svg'
 
 import * as S from './styles'
 

@@ -22,9 +22,9 @@ const QuestionCard = ({
       <S.QuestionText onClick={() => setIsOpen(!isOpen)}>
         {question}
         {isOpen ? (
-          <img src="assets/iconGradient/FAQ-minus-icon.svg" />
+          <img src="assets/iconGradient/FAQ-minus.svg" />
         ) : (
-          <img src="assets/iconGradient/FAQ-more-icon.svg" />
+          <img src="assets/iconGradient/FAQ-more.svg" />
         )}
       </S.QuestionText>
       <S.Answer isOpen={isOpen}>
