@@ -5,8 +5,8 @@ import { useSelector, RootStateOrAny } from 'react-redux'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 
-import iconBar from '../../../../public/assets/iconbar.svg'
-import none from '../../../../public/assets/coming-soon.svg'
+import none from '../../../../public/assets/icons/coming-soon.svg'
+import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
 
 import * as S from './styles'
 
