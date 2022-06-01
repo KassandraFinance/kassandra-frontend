@@ -18,7 +18,7 @@ import usePriceLP from '../../../hooks/usePriceLP'
 import useStakingContract from '../../../hooks/useStakingContract'
 import useERC20Contract from '../../../hooks/useERC20Contract'
 
-import iconBar from '../../../../public/assets/iconbar.svg'
+import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
 
 import { registerToken } from '../../../utils/registerToken'
 
@@ -172,7 +172,7 @@ const MyAsset = ({
     <S.MyAsset>
       <S.TitleWrapper>
         <S.Title>
-          <Image src={iconBar} alt="" />
+          <Image src={iconBar} alt="" width={18} height={18} />
           <h2>My asset</h2>
         </S.Title>
 
@@ -187,7 +187,12 @@ const MyAsset = ({
             matomoEvent('click-add-metamask', `add-${symbol}`)
           }}
         >
-          <Image src="/assets/metaMaskIcon.svg" alt="" width={14} height={14} />
+          <Image
+            src="/assets/logos/metamask.svg"
+            alt="metamask logo"
+            width={14}
+            height={14}
+          />
           <span>Add to Metamask</span>
         </S.AddToken>
       </S.TitleWrapper>

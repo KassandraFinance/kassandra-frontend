@@ -129,7 +129,7 @@ export const KassandraToken = styled.section`
   margin: 0 auto 140px;
   padding: 0 3.2rem;
   gap: 32px;
-  /* background: url('assets/BlurDivisor.png'); */
+  /* background: url('assets/images/blur-divisor.png'); */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center -100px;

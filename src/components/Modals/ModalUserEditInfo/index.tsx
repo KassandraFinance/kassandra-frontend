@@ -93,7 +93,12 @@ const ModalUserEditInfo = ({
         <S.HeaderModalEditInfo>
           <p>Edit Your Profile</p>
           <button type="button" onClick={() => setModalOpen(false)}>
-            <Image src="/assets/close.svg" alt="Close" width={12} height={12} />
+            <Image
+              src="/assets/utilities/close-icon.svg"
+              alt="Close"
+              width={12}
+              height={12}
+            />
           </button>
         </S.HeaderModalEditInfo>
         <S.BodyModalEditInfo>
@@ -146,7 +151,7 @@ const ModalUserEditInfo = ({
               SOCIAL MEDIA
               <span id="ImageContainer">
                 <Image
-                  src="/assets/arrow-select.svg"
+                  src="/assets/utilities/arrow-select-down.svg"
                   alt="arrow select button"
                   width={13}
                   height={13}
@@ -159,7 +164,7 @@ const ModalUserEditInfo = ({
                 <S.SocialIcon>
                   <span>
                     <Image
-                      src="/assets/Twitter.svg"
+                      src="/assets/socialMidia/twitter.svg"
                       alt="Follow our Twitter feed"
                       width={18}
                       height={18}
@@ -179,7 +184,7 @@ const ModalUserEditInfo = ({
                 <S.SocialIcon>
                   <span>
                     <Image
-                      src="/assets/Webpage.svg"
+                      src="/assets/socialMidia/webpage.svg"
                       alt="Follow our Twitter feed"
                       width={18}
                       height={18}
@@ -199,7 +204,7 @@ const ModalUserEditInfo = ({
                 <S.SocialIcon>
                   <span>
                     <Image
-                      src="/assets/telegram.svg"
+                      src="/assets/socialMidia/telegram.svg"
                       alt="Follow our Twitter feed"
                       width={18}
                       height={18}
@@ -219,7 +224,7 @@ const ModalUserEditInfo = ({
                 <S.SocialIcon>
                   <span>
                     <Image
-                      src="/assets/Discord.svg"
+                      src="/assets/socialMidia/discord.svg"
                       alt="Follow our Twitter feed"
                       width={18}
                       height={18}
@@ -248,7 +253,7 @@ const ModalUserEditInfo = ({
             MANAGER INFO
             <span id="ImageContainer">
               <Image
-                src="/assets/arrow-select.svg"
+                src="/assets/utilities/arrow-select-down.svg"
                 alt="arrow select button"
                 width={13}
                 height={13}

@@ -52,8 +52,8 @@ export const CardHeader = styled.div<CardHeaderProps>`
 
   background-image: ${({ isTricrypto }) =>
     isTricrypto
-      ? css`url('assets/background-k3c.png')`
-      : css`url('assets/background-ahype.png')`};
+      ? css`url('assets/images/background-k3c.png')`
+      : css`url('assets/images/background-ahype.png')`};
   background-color: #190e1d;
   background-repeat: no-repeat;
   background-position: right 20% bottom;

@@ -36,7 +36,7 @@ const KacyOverview = ({ kacyMarketData }: IKacyOverviewProps) => {
     <>
       <S.TokenInfoWrapper>
         <S.TitleandIcon>
-          <S.Icon src={'/assets/token-distribution-icon.svg'} />
+          <S.Icon src={'/assets/iconGradient/token-distribution.svg'} />
           <h3>$KACY Overview</h3>
         </S.TitleandIcon>
         <S.TokenInfo>

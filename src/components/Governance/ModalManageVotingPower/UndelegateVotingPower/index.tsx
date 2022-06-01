@@ -25,7 +25,7 @@ import { BNtoDecimal } from '../../../../utils/numerals'
 
 import Button from '../../../Button'
 
-import arrowSelect from '../../../../../public/assets/icons/arrow-select.svg'
+import arrowSelect from '../../../../../public/assets/utilities/arrow-select-down.svg'
 
 import * as S from '../styles'
 export interface IDateProps {

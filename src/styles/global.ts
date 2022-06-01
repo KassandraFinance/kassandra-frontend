@@ -108,7 +108,7 @@ const GlobalStyles: GlobalStyleComponent<
       color: #fcfcfc;
 
       ${selectBackground
-        ? `background-image: url('/assets/Background_products.png');
+        ? `background-image: url('/assets/images/background-products.png');
         background-repeat: repeat-y;
         background-size: cover;
         background-position-x: center;`

@@ -91,7 +91,9 @@ const SharedImage = ({
               {poolTokensArray.map((token, index) => (
                 <Image
                   key={index}
-                  src={poolImages[token.address] || '/assets/coming-soon.svg'}
+                  src={
+                    poolImages[token.address] || '/assets/icons/coming-soon.svg'
+                  }
                   width={25}
                   height={25}
                 />

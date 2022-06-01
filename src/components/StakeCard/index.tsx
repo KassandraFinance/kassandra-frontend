@@ -45,8 +45,8 @@ import YourStake from './YourStake'
 import WithdrawDate from './WithdrawDate'
 import KacyEarned from './KacyEarned'
 
-import infoCyanIcon from '../../../public/assets/info-icon.svg'
-import infoGrayIcon from '../../../public/assets/info-gray.svg'
+import infoCyanIcon from '../../../public/assets/notificationStatus/info.svg'
+import infoGrayIcon from '../../../public/assets/utilities/info-gray.svg'
 
 import * as S from './styles'
 
@@ -339,20 +339,20 @@ const StakeCard = ({
           <S.StakeCard>
             <S.InterBackground stakeWithVotingPower={stakeWithVotingPower}>
               {symbol === 'kacy' ? (
-                <img src="/assets/logo-kacy-stake.svg" alt="" />
+                <img src="/assets/logos/kacy-stake.svg" alt="" />
               ) : null}
               {symbol === 'ahype' ? (
                 <img
-                  src="/assets/icons/ahype-stake.svg"
+                  src="/assets/logos/ahype-stake.svg"
                   alt=""
                   style={{ width: '5.8rem' }}
                 />
               ) : null}
               {symbol === 'lp-joe' ? (
-                <img src="/assets/icons/joe-kacy.svg" alt="" width={144} />
+                <img src="/assets/logos/joe-kacy.svg" alt="" width={144} />
               ) : null}
               {symbol === 'lp-png' ? (
-                <img src="/assets/icons/lp-icon.svg" alt="" width={144} />
+                <img src="/assets/logos/lp-kacy.svg" alt="" width={144} />
               ) : null}
               <S.IntroStaking>
                 <S.APR>
@@ -381,7 +381,7 @@ const StakeCard = ({
                     <Link href="/products/ahype" passHref>
                       <a>
                         $aHYPE
-                        <img src="/assets/GoToSite.svg" alt="" />
+                        <img src="/assets/utilities/go-to-site.svg" alt="" />
                       </a>
                     </Link>
                   )}
@@ -392,7 +392,7 @@ const StakeCard = ({
                       rel="noreferrer"
                     >
                       $KACY-AVAX PNG LP
-                      <img src="/assets/GoToSite.svg" alt="" />
+                      <img src="/assets/utilities/go-to-site.svg" alt="" />
                     </a>
                   )}
                   {symbol === 'lp-joe' && (
@@ -402,7 +402,7 @@ const StakeCard = ({
                       rel="noreferrer"
                     >
                       $KACY-AVAX JOE LP
-                      <img src="/assets/GoToSite.svg" alt="" />
+                      <img src="/assets/utilities/go-to-site.svg" alt="" />
                     </a>
                   )}
                 </S.StakeAndEarn>
@@ -600,7 +600,10 @@ const StakeCard = ({
                   }}
                 >
                   Details
-                  <img src="assets/arrowDetails.svg" alt="" />
+                  <img
+                    src="assets/notificationStatus/arrow-down-blue.svg"
+                    alt=""
+                  />
                 </S.ButtonDetails>
                 {isDetails && (
                   <Details

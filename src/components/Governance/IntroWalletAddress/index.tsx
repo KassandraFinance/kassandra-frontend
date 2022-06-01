@@ -24,7 +24,7 @@ import ExternalLink from '../../../components/ExternalLink'
 import ModalWalletConnect from '../../Modals/ModalWalletConnect'
 import ModalManageVotingPower from '../ModalManageVotingPower'
 
-import tooltip from '../../../../public/assets/icons/tooltip.svg'
+import tooltip from '../../../../public/assets/utilities/tooltip.svg'
 
 import { GET_USER } from './graphql'
 

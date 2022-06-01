@@ -10,10 +10,10 @@ import ExternalLink from '../../components/ExternalLink'
 import Breadcrumb from '../../components/Breadcrumb'
 import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
 
-import overview from '../../../public/assets/iconGradient/overview.svg'
-import proposals from '../../../public/assets/iconGradient/proposals.svg'
+import overview from '../../../public/assets/iconGradient/section-title-eye.svg'
+import proposals from '../../../public/assets/iconGradient/details.svg'
 import votingPower from '../../../public/assets/iconGradient/voting-power-rank.svg'
-import externalLink from '../../../public/assets/icons/external-link.svg'
+import externalLink from '../../../public/assets/utilities/external-link.svg'
 
 import * as S from './styles'
 

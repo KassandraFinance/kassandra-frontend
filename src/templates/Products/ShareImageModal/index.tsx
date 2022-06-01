@@ -127,7 +127,7 @@ const ShareImageModal = ({
               <Image
                 className="close-modal"
                 onClick={() => setOpenModal(false)}
-                src="/assets/close.svg"
+                src="/assets/utilities/close-icon.svg"
                 width={12}
                 height={12}
               />
@@ -154,7 +154,7 @@ const ShareImageModal = ({
                 >
                   <S.SocialMedia>
                     <Image
-                      src="/assets/socialMedia/twitter-icon.svg"
+                      src="/assets/socialMediaShare/twitter-share.svg"
                       width={48}
                       height={48}
                     />
@@ -168,7 +168,7 @@ const ShareImageModal = ({
                 >
                   <S.SocialMedia>
                     <Image
-                      src="/assets/socialMedia/linkedin-icon.svg"
+                      src="/assets/socialMediaShare/linkedin-share.svg"
                       width={48}
                       height={48}
                     />
@@ -182,7 +182,7 @@ const ShareImageModal = ({
                 >
                   <S.SocialMedia>
                     <Image
-                      src="/assets/socialMedia/reddit-icon.svg"
+                      src="/assets/socialMediaShare/reddit-share.svg"
                       width={48}
                       height={48}
                     />
@@ -196,7 +196,7 @@ const ShareImageModal = ({
                 >
                   <S.SocialMedia>
                     <Image
-                      src="/assets/socialMedia/facebook-icon.svg"
+                      src="/assets/socialMediaShare/facebook-share.svg"
                       width={48}
                       height={48}
                     />
@@ -205,7 +205,7 @@ const ShareImageModal = ({
                 </FacebookShareButton>
                 <S.SocialMedia className="last" onClick={handleDownloadImage}>
                   <Image
-                    src="/assets/socialMedia/download-icon.svg"
+                    src="/assets/socialMediaShare/download-share.svg"
                     width={48}
                     height={48}
                   />

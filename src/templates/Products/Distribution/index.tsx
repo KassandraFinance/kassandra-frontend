@@ -8,8 +8,8 @@ import { TokenImages } from '../../../store/modules/poolImages/types'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 
-import iconBar from '../../../../public/assets/iconbar.svg'
-import none from '../../../../public/assets/coming-soon.svg'
+import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
+import none from '../../../../public/assets/icons/coming-soon.svg'
 
 import * as S from './styles'
 
@@ -24,7 +24,7 @@ const Distribution = ({ changes }: { changes: number[] }) => {
   return (
     <S.Distribution>
       <S.Title>
-        <Image src={iconBar} alt="" />
+        <Image src={iconBar} alt="" width={18} height={18} />
         <h2>Distribution</h2>
       </S.Title>
       <S.Line />

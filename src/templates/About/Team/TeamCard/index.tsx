@@ -14,10 +14,9 @@ interface ITeamCardProps {
   isLastCard?: boolean;
 }
 
+// eslint-disable-next-line prettier/prettier
 const TeamCard = ({ name, role, image, social, isLastCard = false }: ITeamCardProps) => (
-  <S.Card
-    isLastCard = {isLastCard}
-  >
+  <S.Card isLastCard={isLastCard}>
     <S.Image>
       <img src={image} alt="" />
     </S.Image>
@@ -28,21 +27,21 @@ const TeamCard = ({ name, role, image, social, isLastCard = false }: ITeamCardPr
       {social.github ? (
         <S.SocialIcon>
           <a href={social.github} target="_blank" rel="noreferrer">
-            <img src="assets/Github.svg" alt="GitHub" />
+            <img src="assets/socialMidia/github.svg" alt="GitHub" />
           </a>
         </S.SocialIcon>
       ) : null}
       {social.twitter ? (
         <S.SocialIcon>
           <a href={social.twitter} target="_blank" rel="noreferrer">
-            <img src="assets/Twitter.svg" alt="Twitter" />
+            <img src="assets/socialMidia/twitter.svg" alt="Twitter" />
           </a>
         </S.SocialIcon>
       ) : null}
       {social.linkedin ? (
         <S.SocialIcon>
           <a href={social.linkedin} target="_blank" rel="noreferrer">
-            <img src="assets/linkedin-icon.svg" alt="LinkedIn" />
+            <img src="assets/socialMidia/linkedin-gray.svg" alt="LinkedIn" />
           </a>
         </S.SocialIcon>
       ) : null}

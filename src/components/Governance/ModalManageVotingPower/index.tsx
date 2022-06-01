@@ -48,7 +48,7 @@ const ModalManageVotingPower = ({
               setCurrentModal('manage')
             }}
           >
-            <img src="/assets/close.svg" alt="Close" />
+            <img src="/assets/utilities/close-icon.svg" alt="Close" />
           </S.Close>
         </S.Header>
         {currentModal === 'manage' && (

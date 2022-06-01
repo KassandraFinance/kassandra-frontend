@@ -24,7 +24,12 @@ const ModalBuyKacy = ({ modalOpen, setModalOpen }: IModalBuyKacyProps) => {
         <S.HeaderModalBuyKacy>
           <strong>Choose the exchange</strong>
           <button type="button" onClick={() => setModalOpen(false)}>
-            <Image src="/assets/close.svg" alt="Close" width={12} height={12} />
+            <Image
+              src="/assets/utilities/close-icon.svg"
+              alt="Close"
+              width={12}
+              height={12}
+            />
           </button>
         </S.HeaderModalBuyKacy>
         <S.BodyModalBuyKacy>
@@ -42,7 +47,7 @@ const ModalBuyKacy = ({ modalOpen, setModalOpen }: IModalBuyKacyProps) => {
             >
               <span id="ImageContent">
                 <Image
-                  src="/assets/logo-traderJoe.svg"
+                  src="/assets/logos/traderJoe.svg"
                   alt="TraderJoe logo"
                   width={29}
                   height={40}
@@ -65,7 +70,7 @@ const ModalBuyKacy = ({ modalOpen, setModalOpen }: IModalBuyKacyProps) => {
             >
               <span id="ImageContent">
                 <Image
-                  src="/assets/logo-pangolin-40x40.svg"
+                  src="/assets/logos/pangolin-40x40.svg"
                   alt="Pangolin logo"
                   width={40}
                   height={40}

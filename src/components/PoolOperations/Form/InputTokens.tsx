@@ -12,8 +12,8 @@ import SelectInput from '../../SelectInput'
 import { BNtoDecimal } from '../../../utils/numerals'
 import { priceDollar } from '../../../utils/priceDollar'
 
-import ahype from '../../../../public/assets/ahype.svg'
-import tricrypto from '../../../../public/assets/tricrypto.svg'
+import ahype from '../../../../public/assets/logos/ahype.svg'
+import tricrypto from '../../../../public/assets/logos/tricrypto-with-fund.svg'
 
 import * as S from './styles'
 
