@@ -88,13 +88,9 @@ const InputTokens = ({
     return (
       <S.Symbol>
         <div className="img">
-          {poolTokensArray && poolTokensArray?.length > 0 && (
+          {poolTokens && poolTokens?.length > 0 && (
             <Image
-              src={
-                poolTokensArray[poolTokensArray.length - 1]?.symbol === 'aHYPE'
-                  ? ahype
-                  : tricrypto
-              }
+              src={poolTokens[0]?.symbol === 'aHYPE' ? ahype : tricrypto}
               alt=""
               width={22}
               height={22}
@@ -185,7 +181,7 @@ const InputTokens = ({
                   BNtoDecimal(
                     Big(swapAmount.toString())
                       .mul(Big(priceDollar(swapOutAddress, poolTokensArray)))
-                      .div(Big(10).pow(18)),
+                      .div(Big(10).pow(Number(decimals.toString()))),
                     18,
                     2,
                     2

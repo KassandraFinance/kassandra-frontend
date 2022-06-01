@@ -50,6 +50,15 @@ import SharedImage from './SharedImage'
 
 import * as S from './styles'
 
+const invertToken: { [key: string]: string } = {
+  '0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E':
+    '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab', //WETH
+  '0x964555644E067c560A4C144360507E80c1104784':
+    '0xc7198437980c041c805a1edcba50c1ce5db95118', //USDT
+  '0xbbcED92AC9B958F88A501725f080c0360007e858':
+    '0x50b7545627a5162f82a992c33b87adc75187b218' //WBTC
+}
+
 export interface IInfoTokenProps {
   change: number;
   price: number;
@@ -113,7 +122,10 @@ const Products = ({ product }: Input) => {
 
   const { data: coinGeckoResponse } = useSWR(url)
 
-  async function getHoldings(token: string, balance: string) {
+  async function getHoldings(
+    token: string,
+    balance: string
+  ): Promise<{ balancePoolYY: Big, decimalsYY: BigNumber }> {
     const providerMetaMask = await detectEthereumProvider()
     const connect = localStorage.getItem('walletconnect')
 
@@ -125,8 +137,15 @@ const Products = ({ product }: Input) => {
         token
       )
 
-      return Big(tokensShares.toString()).div(Big(10).pow(Number(decimals)))
+      return {
+        balancePoolYY: Big(tokensShares.toString()).div(
+          Big(10).pow(Number(decimals))
+        ),
+        decimalsYY: new BigNumber(decimals)
+      }
     }
+
+    return { balancePoolYY: Big(balance), decimalsYY: new BigNumber(18) }
   }
 
   React.useEffect(() => {
@@ -214,22 +233,32 @@ const Products = ({ product }: Input) => {
             }) => {
               let symbol
               let balance
+              let address
+              let decimals: BigNumber
+              const { balancePoolYY, decimalsYY } = await getHoldings(
+                item.token.id,
+                item.balance
+              )
               if (item.token.symbol === 'YRT') {
                 symbol = item.token.name.split(' ').pop()
-                balance = await getHoldings(item.token.id, item.balance)
+                balance = balancePoolYY
+                address = invertToken[item.token.id]
+                decimals = decimalsYY
               } else {
                 symbol =
                   item.token.symbol === 'WAVAX' ? 'AVAX' : item.token.symbol
                 balance = item.balance
+                address = item.token.id
+                decimals = new BigNumber(item.token.decimals)
               }
               return {
                 balance_in_pool: balance,
-                address: item.token.id,
+                address,
                 allocation: (Number(item.weight_normalized) * 100).toFixed(2),
                 allocation_goal: (
                   Number(item.weight_goal_normalized) * 100
                 ).toFixed(2),
-                decimals: new BigNumber(item.token.decimals),
+                decimals,
                 price: Number(item.token.price_usd),
                 name: item.token.name,
                 symbol

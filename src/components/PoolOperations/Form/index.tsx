@@ -54,15 +54,6 @@ enum Approval {
 // eslint-disable-next-line prettier/prettier
 type Approvals = { [key in Titles]: Approval[] }
 
-const invertToken: { [key: string]: string } = {
-  '0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E':
-    '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab', //WETH
-  '0x964555644E067c560A4C144360507E80c1104784':
-    '0xc7198437980c041c805a1edcba50c1ce5db95118', //USDT
-  '0xbbcED92AC9B958F88A501725f080c0360007e858':
-    '0x50b7545627a5162f82a992c33b87adc75187b218' //WBTC
-}
-
 const Form = ({
   poolChain,
   crpPoolAddress,
@@ -200,14 +191,14 @@ const Form = ({
     }
 
     // setSwapInBalance(new BigNumber(-1))
-    if (invertToken[swapInAddress] === poolChain.wrapped || swapInAddress === poolChain.wrapped) {
+    if (swapInAddress === poolChain.wrapped) {
       web3.eth.getBalance(userWalletAddress)
         .then(newBalance => setSwapInBalance(new BigNumber(newBalance)))
 
       return
     }
 
-    const token = ERC20(invertToken[swapInAddress] ?? swapInAddress)
+    const token = ERC20(swapInAddress)
     token
       .balance(userWalletAddress)
       .then(newBalance => setSwapInBalance(newBalance))
@@ -830,8 +821,8 @@ const Form = ({
       const swapOutAmountVal = swapOutAmountInput.value.split(',').map(
         item => new BigNumber(item)
       )
-      const swapInAddressVal = invertToken[swapInAddressInput.value] ?? swapInAddressInput.value
-      const swapOutAddressVal = invertToken[swapOutAddressInput.value] ?? swapInAddressInput.value
+      const swapInAddressVal = swapInAddressInput.value
+      const swapOutAddressVal = swapInAddressInput.value
       const slippageVal = slippageInput.value
 
       const slippageExp = new BigNumber(10).pow(new BigNumber(2 + (slippageVal.split('.')[1]?.length || 0)))
