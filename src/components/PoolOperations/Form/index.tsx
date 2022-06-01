@@ -943,7 +943,7 @@ const Form = ({
 
   // Calc Price Impact
   React.useEffect(() => {
-    if (parseFloat(swapOutAmount[0].toString()) > 0) {
+    if (swapInAmount.gt(new BigNumber(0)) && parseFloat(swapOutAmount[0].toString()) > 0) {
       const usdAmountIn = Big(swapInAmount.toString())
         .mul(Big(priceDollar(swapInAddress, poolTokensArray)))
         .div(Big(10).pow(18))
@@ -953,7 +953,7 @@ const Form = ({
         .div(Big(10).pow(18))
 
       const subValue = usdAmountIn.sub(usdAmountOut)
-      const valuePriceImpact = subValue.div(usdAmountOut).mul(100)
+      const valuePriceImpact = subValue.div(usdAmountIn).mul(100)
 
       valuePriceImpact.gt(0) ? setPriceImpact(valuePriceImpact) : setPriceImpact(Big(0))
     } else {
