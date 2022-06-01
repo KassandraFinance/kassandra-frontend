@@ -8,7 +8,7 @@ export const Container = styled.div`
   margin: 0 auto 16rem;
   padding: 10rem 0 0;
 
-  background: url('assets/BlurDivisor.png');
+  background: url('assets/images/blur-divisor.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -104,7 +104,7 @@ export const KassandraCardHeader = styled.div`
   width: 100%;
   height: 10rem;
 
-  background: #130916 url('assets/kassandra-600-cardHeader.png') no-repeat;
+  background: #130916 url('assets/images/kassandra-kacy-card.png') no-repeat;
   background-position: right 20% bottom 60%;
   background-size: 65%;
   border-radius: 1.2rem;

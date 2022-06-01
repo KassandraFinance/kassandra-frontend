@@ -10,19 +10,19 @@ const HowItWorks = () => {
       <S.ScheduleGraphWrapper>
         <S.ScheduleTitle>
           <S.TitleandIcon>
-            <S.Icon src="/assets/iconbar.svg" />
+            <S.Icon src="/assets/iconGradient/product-bar.svg" />
             <h3>Release schedule</h3>
           </S.TitleandIcon>
         </S.ScheduleTitle>
         <S.ScheduleGraph>
           <img
-            src="assets/tokenomics-chart.svg"
+            src="assets/images/tokenomics-chart.svg"
             alt="We'll reach the maximum supply in 3 years. Private and seed sale investor will have their funds locked for 3 months and then will gradually receive their share in the next 9 months. The team share is also locked for 3 months but will gradually receive their share in the next 18 months."
           />
         </S.ScheduleGraph>
         <S.ScheduleGraphMobile>
           <img
-            src="assets/tokenomics-chart-mobile.svg"
+            src="assets/images/tokenomics-chart-mobile.svg"
             alt="We'll reach the maximum supply in 3 years. Private and seed sale investor will have their funds locked for 3 months and then will gradually receive their share in the next 9 months. The team share is also locked for 3 months but will gradually receive their share in the next 18 months."
           />
         </S.ScheduleGraphMobile>
@@ -30,14 +30,14 @@ const HowItWorks = () => {
       <S.DistributionGraphWrapper>
         <S.DistributionTitle>
           <S.TitleandIcon>
-            <S.Icon src="/assets/about-distribution-icon.svg" />
+            <S.Icon src="/assets/iconGradient/assets-distribution.svg" />
             <h3>Distribuition</h3>
           </S.TitleandIcon>
         </S.DistributionTitle>
       </S.DistributionGraphWrapper>
       <S.DistributionChart>
         <img
-          src="assets/distribution-chart.svg"
+          src="assets/images/distribution-chart.svg"
           alt="46.5% through rewards, 20% as reserves to the Kassandra Foundation, 12.5% to the development team, 10% through private sales, 5% through seed sales, 5% through public sales and 1% through an Initial Liquidity Offering (ILO)."
         />
         <S.DistributionText>

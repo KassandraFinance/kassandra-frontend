@@ -4,7 +4,7 @@ import theme from '../../styles/theme'
 import * as ButtonStyles from '../Button/styles'
 
 export const Background = styled.div`
-  background-image: url('assets/backgroundBanner.svg');
+  background-image: url('assets/images/background-banner.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: 50%;

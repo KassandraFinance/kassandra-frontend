@@ -5,7 +5,7 @@ export const Hero = styled.section`
   min-height: 170vh;
   margin-bottom: -50vh;
 
-  background: url('/assets/home-hero-background.svg');
+  background: url('/assets/images/home-hero-background.svg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center top;

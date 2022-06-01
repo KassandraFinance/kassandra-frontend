@@ -1,11 +1,11 @@
 import React from 'react'
 import Image from 'next/image'
 
-import discord from '../../../../public/assets/Discord.svg'
-import telegram from '../../../../public/assets/telegram.svg'
-import twitter from '../../../../public/assets/Twitter.svg'
-import medium from '../../../../public/assets/Medium.svg'
-import github from '../../../../public/assets/Github.svg'
+import discord from '../../../../public/assets/socialMidia/discord.svg'
+import telegram from '../../../../public/assets/socialMidia/telegram.svg'
+import twitter from '../../../../public/assets/socialMidia/twitter.svg'
+import medium from '../../../../public/assets/socialMidia/medium.svg'
+import github from '../../../../public/assets/socialMidia/github.svg'
 
 import * as S from './styles'
 

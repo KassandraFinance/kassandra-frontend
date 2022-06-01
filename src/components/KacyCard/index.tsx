@@ -8,8 +8,8 @@ import Button from '../Button'
 import ExternalLink from '../ExternalLink'
 import ModalBuyKacy from '../Modals/ModalBuyKacy'
 
-import arrowPositive from '../../../public/assets/icons/arrow-ascend.svg'
-import arrowNegative from '../../../public/assets/icons/arrow-descend.svg'
+import arrowPositive from '../../../public/assets/notificationStatus/arrow-ascend.svg'
+import arrowNegative from '../../../public/assets/notificationStatus/arrow-descend.svg'
 
 import * as S from './styles'
 
@@ -50,7 +50,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
             <Link href="https://discord.gg/2uGEvqNnuq" passHref>
               <a target="_blank" rel="noopener noreferrer">
                 <Image
-                  src="/assets/Discord.svg"
+                  src="/assets/socialMidia/discord.svg"
                   alt="Join our Discord community"
                   width={24}
                   height={24}
@@ -60,7 +60,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
             <Link href="https://t.me/KassandraDAO" passHref>
               <a target="_blank" rel="noopener noreferrer">
                 <Image
-                  src="/assets/telegram.svg"
+                  src="/assets/socialMidia/telegram.svg"
                   alt="Join our Telegram group"
                   width={24}
                   height={24}
@@ -70,7 +70,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
             <Link href="https://github.com/KassandraFinance" passHref>
               <a target="_blank" rel="noopener noreferrer">
                 <Image
-                  src="/assets/Github.svg"
+                  src="/assets/socialMidia/github.svg"
                   alt="Access our GitHub repository"
                   width={24}
                   height={24}
@@ -80,7 +80,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
             <Link href="https://kassandrafoundation.medium.com/" passHref>
               <a target="_blank" rel="noopener noreferrer">
                 <Image
-                  src="/assets/Medium.svg"
+                  src="/assets/socialMidia/medium.svg"
                   alt="Read our Medium blog"
                   width={24}
                   height={24}
@@ -90,7 +90,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
             <Link href="https://twitter.com/dao_kassandra" passHref>
               <a target="_blank" rel="noopener noreferrer">
                 <Image
-                  src="/assets/Twitter.svg"
+                  src="/assets/socialMidia/twitter.svg"
                   alt="Follow our Twitter feed"
                   width={24}
                   height={24}
@@ -103,7 +103,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
           <S.KassandraCardHeader>
             <S.ImageWrapper>
               <Image
-                src="/assets/token-96.svg"
+                src="/assets/logos/kacy-96.svg"
                 alt="kacy token"
                 width={70}
                 height={70}
@@ -160,7 +160,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
         <S.MobileCards>
           <S.ResponsabilitiesCards>
             <S.IconWrapper>
-              <img src="/assets/adjustIcon.svg" alt="" />
+              <img src="/assets/iconGradient/adjust.svg" alt="" />
             </S.IconWrapper>
             <span>
               {' '}
@@ -170,7 +170,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
 
           <S.ResponsabilitiesCards>
             <S.IconWrapper>
-              <img src="/assets/deployInvest.svg" alt="" />
+              <img src="/assets/iconGradient/deploy-invest.svg" alt="" />
             </S.IconWrapper>
 
             <span>
@@ -181,7 +181,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
 
           <S.ResponsabilitiesCards>
             <S.IconWrapper>
-              <img src="/assets/curatingIcon.svg" alt="" />
+              <img src="/assets/iconGradient/curating.svg" alt="" />
             </S.IconWrapper>
             <span>
               <b>Curate</b> whitelists for investable assets
@@ -190,7 +190,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
 
           <S.ResponsabilitiesCards>
             <S.IconWrapper>
-              <img src="/assets/approvingIcon.svg" alt="" />
+              <img src="/assets/iconGradient/approving.svg" alt="" />
             </S.IconWrapper>
             <span>
               <b>Approve</b> code changes and updates

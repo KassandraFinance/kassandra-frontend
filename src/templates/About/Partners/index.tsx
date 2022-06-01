@@ -1,12 +1,12 @@
 import React from 'react'
 import Image from 'next/image'
 
-import avalanche from '../../../../public/assets/avalanche-horizontal-red.svg'
-import heimdall from '../../../../public/assets/heimdall.svg'
-import api3 from '../../../../public/assets/api3.svg'
-import transfero from '../../../../public/assets/transfero.svg'
-import shineDAO from '../../../../public/assets/ShineDAO.svg'
-import penguinFinance from '../../../../public/assets/Penguin_Finance.svg'
+import avalanche from '../../../../public/assets/logos/avalanche-horizontal-red.svg'
+import heimdall from '../../../../public/assets/logos/heimdall.svg'
+import api3 from '../../../../public/assets/logos/api3.svg'
+import transfero from '../../../../public/assets/logos/transfero.svg'
+import shineDAO from '../../../../public/assets/logos/shine-dao.svg'
+import penguinFinance from '../../../../public/assets/logos/penguin-finance.svg'
 
 import * as S from './styles'
 
@@ -14,7 +14,7 @@ const Partners = () => (
   <S.Container>
     <S.TitleAndIcon>
       <S.Icon>
-        <img src="assets/about-partners-icon.svg" alt="" />
+        <img src="assets/iconGradient/about-partners.svg" alt="" />
       </S.Icon>
       <S.Title>Partners</S.Title>
     </S.TitleAndIcon>

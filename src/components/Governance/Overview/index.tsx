@@ -15,7 +15,7 @@ import { BNtoDecimal } from '../../../utils/numerals'
 import Button from '../../../components/Button'
 import ModalWalletConnect from '../../Modals/ModalWalletConnect'
 
-import tooltip from '../../../../public/assets/icons/tooltip.svg'
+import tooltip from '../../../../public/assets/utilities/tooltip.svg'
 
 import { GET_GOVERNANCES } from './graphql'
 

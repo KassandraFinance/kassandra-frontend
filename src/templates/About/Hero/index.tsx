@@ -25,7 +25,11 @@ const Hero = () => {
           </h1>
         </S.IntroHero>
         <S.HeroImage>
-          <img src="assets/kassandra-about.png" alt="" className="kassandra" />
+          <img
+            src="assets/images/kassandra-about.png"
+            alt=""
+            className="kassandra"
+          />
         </S.HeroImage>
         <S.Divider />
         <S.IntroTextWrapper>
@@ -42,7 +46,7 @@ const Hero = () => {
           <S.Card>
             <S.IconWrapper>
               <S.BackgroundIcon>
-                <img src="assets/transparency_icon.svg" alt="" />
+                <img src="assets/iconGradient/transparency.svg" alt="" />
               </S.BackgroundIcon>
             </S.IconWrapper>
             <span>
@@ -53,7 +57,7 @@ const Hero = () => {
           <S.Card>
             <S.IconWrapper>
               <S.BackgroundIcon>
-                <img src="assets/decentralization_icon.svg" alt="" />
+                <img src="assets/iconGradient/team.svg" alt="" />
               </S.BackgroundIcon>
             </S.IconWrapper>
             <span>
@@ -64,7 +68,7 @@ const Hero = () => {
           <S.Card>
             <S.IconWrapper>
               <S.BackgroundIcon>
-                <img src="assets/activeReturns_icon.svg" alt="" />
+                <img src="assets/iconGradient/active-returns.svg" alt="" />
               </S.BackgroundIcon>
             </S.IconWrapper>
             <span>

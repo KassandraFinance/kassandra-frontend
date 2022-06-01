@@ -13,8 +13,8 @@ import FundAreaChart from './FundAreaChart'
 import FundBarChart from './FundBarChart'
 import FundTokenIcons from './FundTokenIcons'
 
-import arrowAscend from '../../../public/assets/icons/arrow-ascend.svg'
-import arrowDescend from '../../../public/assets/icons/arrow-descend.svg'
+import arrowAscend from '../../../public/assets/notificationStatus/arrow-ascend.svg'
+import arrowDescend from '../../../public/assets/notificationStatus/arrow-descend.svg'
 
 import { GET_CHART } from './graphql'
 

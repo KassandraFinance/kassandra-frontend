@@ -3,8 +3,8 @@ import Image from 'next/image'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
-import infoGray from '../../../../public/assets/info-gray.svg'
-import gearButton from '../../../../public/assets/gearButton.svg'
+import infoGray from '../../../../public/assets/utilities/info-gray.svg'
+import gearButton from '../../../../public/assets/icons/gear-button.svg'
 
 import * as S from './styles'
 

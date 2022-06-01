@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-import none from '../../../../public/assets/coming-soon.svg'
+import none from '../../../../public/assets/icons/coming-soon.svg'
 
 import * as S from './styles'
 

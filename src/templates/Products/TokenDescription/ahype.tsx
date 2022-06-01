@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
-import imageCalc from '../../../../public/assets/new-image-calc.png'
+import imageCalc from '../../../../public/assets/images/image-calc.png'
 
 import * as S from './styles'
 
@@ -117,7 +117,7 @@ const AhypeDescription = () => {
           </a>{' '}
           documentation
         </p>
-        <img src="/assets/externalLink.svg" alt="" />
+        <img src="/assets/utilities/external-link.svg" alt="" />
       </S.ToDocumentation>
     </>
   )

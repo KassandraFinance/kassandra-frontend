@@ -13,7 +13,7 @@ export const SharedImage = styled.div`
 
   background-color: rgba(31, 41, 55, 1);
 
-  /* background-image: url('/assets/bg-products.png');
+  /* background-image: url('/assets/images/bg-products.png');
   background-repeat: no-repeat;
   background-size: 100rem;
   background-position-x: 50%; */

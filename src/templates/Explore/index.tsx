@@ -5,8 +5,8 @@ import TitleSection from '../../components/TitleSection'
 import FundCard from '../../components/FundCard'
 
 import sectionTitleEye from '../../../public/assets/iconGradient/section-title-eye.svg'
-import featuredFunds from '../../../public/assets/iconGradient/featured-funds.svg'
-import communityFunds from '../../../public/assets/iconGradient/community-funds.svg'
+import featuredFunds from '../../../public/assets/iconGradient/featured.svg'
+import communityFunds from '../../../public/assets/iconGradient/community.svg'
 
 import * as S from './styles'
 

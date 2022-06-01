@@ -7,12 +7,12 @@ import { TransactionCallback } from '../utils/txWait'
 
 import Governance from "../constants/abi/Governance.json"
 
-import approved from '../../public/assets/status/approved.svg'
-import cancelled from '../../public/assets/status/cancelled.svg'
-import executed from '../../public/assets/status/executed.svg'
-import failed from '../../public/assets/status/failed.svg'
-import queued from '../../public/assets/status/queued.svg'
-import votingOpen from '../../public/assets/status/voting-open.svg'
+import approved from '../../public/assets/notificationStatus/approved.svg'
+import cancelled from '../../public/assets/notificationStatus/cancelled.svg'
+import executed from '../../public/assets/notificationStatus/executed.svg'
+import failed from '../../public/assets/notificationStatus/failed.svg'
+import queued from '../../public/assets/notificationStatus/queued.svg'
+import votingOpen from '../../public/assets/notificationStatus/voting-open.svg'
 
 const valuesStateProposal = [
   ["Active", "Pending", queued],

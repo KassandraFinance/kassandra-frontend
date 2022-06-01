@@ -15,7 +15,7 @@ const ClassProducts = () => {
       </span>
       <S.Image>
         <Image
-          src="/assets/classProductImage.svg"
+          src="/assets/images/class-product.svg"
           alt="image explaining about Kassandra Dao"
           width={896}
           height={163}

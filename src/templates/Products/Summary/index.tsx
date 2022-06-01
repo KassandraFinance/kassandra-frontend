@@ -10,8 +10,8 @@ import { registerToken } from '../../../utils/registerToken'
 
 import { ToastInfo } from '../../../components/Toastify/toast'
 
-import iconBar from '../../../../public/assets/iconbar.svg'
-import metaMaskIcon from '../../../../public/assets/metaMaskIcon.svg'
+import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
+import metaMaskIcon from '../../../../public/assets/logos/metamask.svg'
 
 import * as S from './styles'
 
@@ -51,14 +51,14 @@ const Summary = ({
   return (
     <S.Summary>
       <S.Title>
-        <Image src={iconBar} alt="" />
+        <Image src={iconBar} alt="" width={18} height={18} />
         <h2>Summary</h2>
       </S.Title>
       <S.Line />
       <p>{summary}</p>
       <S.LinkContent>
         {/* <a href="https://coinmarketcap.com/">
-          View On CoinMarketCap <img src="/assets/externalLink.svg" alt="" />
+          View On CoinMarketCap <img src="/assets/utilities/external-link.svg" alt="" />
         </a> */}
         {symbol === 'aHYPE' ? (
           <a

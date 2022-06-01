@@ -1033,12 +1033,12 @@ const Form = ({
             setSwapInAddress(swapOutAddress)
             setSwapOutAddress(swapInAddress)
           }} >
-            <img src="/assets/arrowDown.svg" alt="" />
-            <img src="/assets/arrowDown.svg" alt="" />
+            <img src="/assets/icons/arrow-down.svg" alt="" />
+            <img src="/assets/icons/arrow-down.svg" alt="" />
           </S.SwapButton>
         </Tippy>
         :
-        <img src="/assets/arrowDown.svg" alt="" style={{ margin: '12px 0' }} />
+        <img src="/assets/icons/arrow-down.svg" alt="" style={{ margin: '12px 0' }} />
       }
 
       {title === 'Withdraw' && typeWithdrawChecked === 'Best_value' ? (
