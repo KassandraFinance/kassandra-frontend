@@ -188,7 +188,7 @@ const MyAsset = ({
           }}
         >
           <Image
-            src="/assets/logos/metamask-logo.svg"
+            src="/assets/logos/metamask.svg"
             alt="metamask logo"
             width={14}
             height={14}

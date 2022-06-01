@@ -1,9 +1,9 @@
-import avalanche from '../../../../public/assets/logos/avalanche-logo.svg'
+import avalanche from '../../../../public/assets/logos/avalanche.svg'
 import heimdall from '../../../../public/assets/logos/heimdall.svg'
 import api3 from '../../../../public/assets/logos/api3.svg'
-import yieldYak from '../../../../public/assets/logos/yieldYak-banner.svg'
+import yieldYak from '../../../../public/assets/logos/yield-yak.svg'
 import aave from '../../../../public/assets/logos/aave.svg'
-import traderJoe from '../../../../public/assets/logos/logo-traderJoe.svg'
+import traderJoe from '../../../../public/assets/logos/traderJoe.svg'
 import { PartnerData } from './'
 
 const partners: { [key: string]: PartnerData } = {

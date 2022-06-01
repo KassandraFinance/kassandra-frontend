@@ -5,8 +5,8 @@ import avalanche from '../../../../public/assets/logos/avalanche-horizontal-red.
 import heimdall from '../../../../public/assets/logos/heimdall.svg'
 import api3 from '../../../../public/assets/logos/api3.svg'
 import transfero from '../../../../public/assets/logos/transfero.svg'
-import shineDAO from '../../../../public/assets/logos/ShineDAO.svg'
-import penguinFinance from '../../../../public/assets/logos/Penguin_Finance.svg'
+import shineDAO from '../../../../public/assets/logos/shine-dao.svg'
+import penguinFinance from '../../../../public/assets/logos/penguin-finance.svg'
 
 import * as S from './styles'
 

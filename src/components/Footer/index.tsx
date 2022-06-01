@@ -133,7 +133,7 @@ const Footer = () => (
               rel="noopener noreferrer"
             >
               <span>Audited By</span>
-              <img src="/assets/logos/Certik.svg" alt="Certik" />
+              <img src="/assets/logos/certik.svg" alt="Certik" />
             </a>
           </S.Certified>
         </S.LowerRight>
@@ -227,7 +227,7 @@ const Footer = () => (
             rel="noopener noreferrer"
           >
             <span>Audited By</span>
-            <img src="/assets/logos/Certik.svg" alt="Certik" />
+            <img src="/assets/logos/certik.svg" alt="Certik" />
           </a>
         </S.Certified>
       </S.LowerContainerMobile>

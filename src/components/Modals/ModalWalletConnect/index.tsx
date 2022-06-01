@@ -76,7 +76,7 @@ const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
                 }}
               >
                 <S.WrapperIcons>
-                  <img src="/assets/logos/metamask-logo.svg" alt="" />
+                  <img src="/assets/logos/metamask.svg" alt="" />
                   <span>Metamask</span>
                 </S.WrapperIcons>
               </S.WrapperIconsBackGround>
@@ -90,7 +90,7 @@ const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
               }}
             >
               <S.WrapperIcons>
-                <img src="/assets/logos/connect-wallet-logo.svg" alt="" />
+                <img src="/assets/logos/connect-wallet.svg" alt="" />
                 <span>WalletConnect</span>
               </S.WrapperIcons>
             </S.WrapperIconsBackGround>

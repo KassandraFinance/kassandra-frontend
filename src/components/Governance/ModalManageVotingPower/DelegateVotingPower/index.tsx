@@ -23,7 +23,7 @@ import { ToastError, ToastSuccess, ToastWarning } from '../../../Toastify/toast'
 import Options from '../Options'
 
 import arrowSelect from '../../../../../public/assets/utilities/arrow-select-down.svg'
-import logo from '../../../../../public/assets/logos/logo-64.svg'
+import logo from '../../../../../public/assets/logos/kacy-64.svg'
 
 import * as S from '../styles'
 

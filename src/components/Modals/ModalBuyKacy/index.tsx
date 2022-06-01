@@ -47,7 +47,7 @@ const ModalBuyKacy = ({ modalOpen, setModalOpen }: IModalBuyKacyProps) => {
             >
               <span id="ImageContent">
                 <Image
-                  src="/assets/logos/logo-traderJoe.svg"
+                  src="/assets/logos/traderJoe.svg"
                   alt="TraderJoe logo"
                   width={29}
                   height={40}
@@ -70,7 +70,7 @@ const ModalBuyKacy = ({ modalOpen, setModalOpen }: IModalBuyKacyProps) => {
             >
               <span id="ImageContent">
                 <Image
-                  src="/assets/logos/logo-pangolin-40x40.svg"
+                  src="/assets/logos/pangolin-40x40.svg"
                   alt="Pangolin logo"
                   width={40}
                   height={40}

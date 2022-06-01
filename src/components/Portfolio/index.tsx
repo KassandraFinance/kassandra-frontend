@@ -17,10 +17,10 @@ import ModalWalletConnect from '../Modals/ModalWalletConnect'
 import AssetsIcon from '../../../public/assets/iconGradient/assets-distribution.svg'
 import StakedPoolsIcon from '../../../public/assets/iconGradient/staking-pools.svg'
 import aHYPE from '../../../public/assets/logos/ahype.svg'
-import AvalancheIcon from '../../../public/assets/logos/avalanche-logo.svg'
+import AvalancheIcon from '../../../public/assets/logos/avalanche.svg'
 import iconKace from '../../../public/assets/logos/kacy-stake.svg'
-import iconPangolin from '../../../public/assets/logos/logo-pangolin-40x40.svg'
-import iconTraderJoe from '../../../public/assets/logos/logo-traderJoe.svg'
+import iconPangolin from '../../../public/assets/logos/pangolin-40x40.svg'
+import iconTraderJoe from '../../../public/assets/logos/traderJoe.svg'
 
 import { BNtoDecimal } from '../../utils/numerals'
 
