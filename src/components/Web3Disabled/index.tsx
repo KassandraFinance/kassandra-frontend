@@ -48,7 +48,7 @@ const Web3Disabled = ({
       <S.Web3Disabled>
         <div>
           <S.Header>
-            <img src="/assets/notification-status/warning.svg" alt="" />
+            <img src="/assets/notificationStatus/warning.svg" alt="" />
             <p>{textHeader}</p>
           </S.Header>
           <S.Body>

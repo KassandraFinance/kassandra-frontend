@@ -8,8 +8,8 @@ import Button from '../Button'
 import ExternalLink from '../ExternalLink'
 import ModalBuyKacy from '../Modals/ModalBuyKacy'
 
-import arrowPositive from '../../../public/assets/notification-status/arrow-ascend.svg'
-import arrowNegative from '../../../public/assets/notification-status/arrow-descend.svg'
+import arrowPositive from '../../../public/assets/notificationStatus/arrow-ascend.svg'
+import arrowNegative from '../../../public/assets/notificationStatus/arrow-descend.svg'
 
 import * as S from './styles'
 

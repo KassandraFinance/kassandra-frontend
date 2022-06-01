@@ -45,7 +45,7 @@ import YourStake from './YourStake'
 import WithdrawDate from './WithdrawDate'
 import KacyEarned from './KacyEarned'
 
-import infoCyanIcon from '../../../public/assets/notification-status/info.svg'
+import infoCyanIcon from '../../../public/assets/notificationStatus/info.svg'
 import infoGrayIcon from '../../../public/assets/utilities/info-gray.svg'
 
 import * as S from './styles'
@@ -601,7 +601,7 @@ const StakeCard = ({
                 >
                   Details
                   <img
-                    src="assets/notification-status/arrow-down-blue.svg"
+                    src="assets/notificationStatus/arrow-down-blue.svg"
                     alt=""
                   />
                 </S.ButtonDetails>

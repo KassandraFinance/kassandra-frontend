@@ -16,7 +16,7 @@ const StyledToastContent = ({
   return (
     <NotificationContainer>
       <img
-        src={`/assets/notification-status/${type}.svg`}
+        src={`/assets/notificationStatus/${type}.svg`}
         alt="New notification"
       />
       <MessageContainer>
