@@ -103,7 +103,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
           <S.KassandraCardHeader>
             <S.ImageWrapper>
               <Image
-                src="/assets/token/kacy-96.svg"
+                src="/assets/logos/kacy-96.svg"
                 alt="kacy token"
                 width={70}
                 height={70}

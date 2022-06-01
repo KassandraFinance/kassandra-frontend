@@ -339,11 +339,11 @@ const StakeCard = ({
           <S.StakeCard>
             <S.InterBackground stakeWithVotingPower={stakeWithVotingPower}>
               {symbol === 'kacy' ? (
-                <img src="/assets/token/kacy-stake.svg" alt="" />
+                <img src="/assets/logos/kacy-stake.svg" alt="" />
               ) : null}
               {symbol === 'ahype' ? (
                 <img
-                  src="/assets/token/ahype-stake.svg"
+                  src="/assets/logos/ahype-stake.svg"
                   alt=""
                   style={{ width: '5.8rem' }}
                 />

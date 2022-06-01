@@ -3,8 +3,8 @@ import { ChainDetails } from '../utils/changeChain'
 import { PartnerData } from '../components/Products/Partner'
 import partners from '../components/Products/Partner/list'
 
-import ahypeIcon from '../../public/assets/token/ahype.svg'
-import tricryptoIcon from '../../public/assets/token/tricrypto.svg'
+import ahypeIcon from '../../public/assets/logos/ahype.svg'
+import tricryptoIcon from '../../public/assets/logos/tricrypto.svg'
 
 export const HeimCRPPOOL = process.env.NEXT_PUBLIC_MASTER === '1' ?
   '0x38918142779e2CD1189cBd9e932723C968363D1E'
