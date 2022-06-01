@@ -46,7 +46,7 @@ const Hero = () => {
           <S.Card>
             <S.IconWrapper>
               <S.BackgroundIcon>
-                <img src="assets/extra/transparency_icon.svg" alt="" />
+                <img src="assets/iconGradient/transparency.svg" alt="" />
               </S.BackgroundIcon>
             </S.IconWrapper>
             <span>
@@ -57,7 +57,7 @@ const Hero = () => {
           <S.Card>
             <S.IconWrapper>
               <S.BackgroundIcon>
-                <img src="assets/extra/team-icon.svg" alt="" />
+                <img src="assets/iconGradient/team-icon.svg" alt="" />
               </S.BackgroundIcon>
             </S.IconWrapper>
             <span>
@@ -68,7 +68,7 @@ const Hero = () => {
           <S.Card>
             <S.IconWrapper>
               <S.BackgroundIcon>
-                <img src="assets/extra/active-returns-icon.svg" alt="" />
+                <img src="assets/iconGradient/active-returns.svg" alt="" />
               </S.BackgroundIcon>
             </S.IconWrapper>
             <span>

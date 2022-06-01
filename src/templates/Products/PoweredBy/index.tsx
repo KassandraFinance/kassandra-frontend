@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-import iconPower from '../../../../public/assets/section-title/voting-power-rank.svg'
+import iconPower from '../../../../public/assets/iconGradient/voting-power-rank.svg'
 
 import Partner, { PartnerData } from '../../../components/Products/Partner'
 

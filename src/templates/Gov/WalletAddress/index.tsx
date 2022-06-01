@@ -23,9 +23,9 @@ import BreadcrumbItem from '../../../components/Breadcrumb/BreadcrumbItem'
 import OwnAndReceivedTable from '../../../components/Governance/OwnAndReceivedTable'
 import UserTableVotingHistory from '../../../components/Governance/UserTableVotingHistory'
 
-import proposals from '../../../../public/assets/section-title/proposal-details.svg'
-import votingPoweRrank from '../../../../public/assets/section-title/voting-power-rank.svg'
-import stakingPools from '../../../../public/assets/section-title/staking-pools.svg'
+import proposals from '../../../../public/assets/iconGradient/details.svg'
+import votingPoweRrank from '../../../../public/assets/iconGradient/voting-power-rank.svg'
+import stakingPools from '../../../../public/assets/iconGradient/staking-pools.svg'
 
 import externalLink from '../../../../public/assets/utilities/external-link.svg'
 

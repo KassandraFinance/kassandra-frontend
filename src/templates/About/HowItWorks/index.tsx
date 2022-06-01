@@ -10,7 +10,7 @@ const HowItWorks = () => {
       <S.ScheduleGraphWrapper>
         <S.ScheduleTitle>
           <S.TitleandIcon>
-            <S.Icon src="/assets/section-title/product-bar.svg" />
+            <S.Icon src="/assets/iconGradient/product-bar.svg" />
             <h3>Release schedule</h3>
           </S.TitleandIcon>
         </S.ScheduleTitle>
@@ -30,7 +30,7 @@ const HowItWorks = () => {
       <S.DistributionGraphWrapper>
         <S.DistributionTitle>
           <S.TitleandIcon>
-            <S.Icon src="/assets/statusProposal/distribution-icon.svg" />
+            <S.Icon src="/assets/iconGradient/assets-distribution.svg" />
             <h3>Distribuition</h3>
           </S.TitleandIcon>
         </S.DistributionTitle>

@@ -6,7 +6,7 @@ import { request } from 'graphql-request'
 import { GET_POOL_PRICE } from './graphql'
 import { HeimCRPPOOL, SUBGRAPH_URL } from '../../../constants/tokenAddresses'
 
-import iconBar from '../../../../public/assets/section-title/product-bar.svg'
+import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
 
 import * as S from './styles'
 

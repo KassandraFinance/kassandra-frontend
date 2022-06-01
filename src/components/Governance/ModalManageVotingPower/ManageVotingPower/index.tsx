@@ -17,7 +17,7 @@ const ManageVotingPower = ({ setCurrentModal }: IManageVotingPowerProps) => {
         }}
       >
         <S.WrapperIcons>
-          <img src="/assets/icons/delegate.svg" alt="" />
+          <img src="/assets/iconGradient/delegate.svg" alt="" />
           <S.Option>
             <h3>Delegate your voting power</h3>
             <p>
@@ -36,7 +36,7 @@ const ManageVotingPower = ({ setCurrentModal }: IManageVotingPowerProps) => {
         }}
       >
         <S.WrapperIcons>
-          <img src="/assets/icons/undelegate.svg" alt="" />
+          <img src="/assets/iconGradient/undelegate.svg" alt="" />
           <S.Option>
             <h3>Undelegate your voting power</h3>
             <p>

@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-import iconBar from '../../../../public/assets/section-title/product-bar.svg'
+import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
 
 //import { ProductSymbols } from '../../../constants/tokenAddresses'
 

@@ -13,7 +13,6 @@ export const Container = styled.section`
     justify-content: flex-start;
     padding: 0 3.2rem;
     margin: 0 auto 4rem;
-
   }
 `
 export const Divider = styled.div`
@@ -91,7 +90,8 @@ export const TitleandIcon = styled.div`
   }
 `
 export const Icon = styled.img`
-  max-width: 1.75rem;
+  height: 2.4rem;
+  width: 2.4rem;
   margin-right: 2rem;
 `
 

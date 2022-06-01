@@ -18,7 +18,7 @@ import usePriceLP from '../../../hooks/usePriceLP'
 import useStakingContract from '../../../hooks/useStakingContract'
 import useERC20Contract from '../../../hooks/useERC20Contract'
 
-import iconBar from '../../../../public/assets/section-title/product-bar.svg'
+import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
 
 import { registerToken } from '../../../utils/registerToken'
 

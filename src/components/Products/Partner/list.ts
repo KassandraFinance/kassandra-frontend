@@ -1,7 +1,7 @@
 import avalanche from '../../../../public/assets/logos/avalanche-logo.svg'
 import heimdall from '../../../../public/assets/logos/heimdall.svg'
 import api3 from '../../../../public/assets/logos/api3.svg'
-import yieldYak from '../../../../public/assets/yieldYak-banner.svg'
+import yieldYak from '../../../../public/assets/logos/yieldYak-banner.svg'
 import aave from '../../../../public/assets/images/aave.svg'
 import traderJoe from '../../../../public/assets/logos/logo-traderJoe.svg'
 import { PartnerData } from './'

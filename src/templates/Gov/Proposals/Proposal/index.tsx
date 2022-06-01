@@ -42,11 +42,11 @@ import {
 } from '../../../../components/Toastify/toast'
 
 import externalLink from '../../../../../public/assets/utilities/external-link.svg'
-import proposalDetailsIcon from '../../../../../public/assets/section-title/proposal-details.svg'
-import proposalInfoIcon from '../../../../../public/assets/section-title/proposal-info.svg'
+import proposalDetailsIcon from '../../../../../public/assets/iconGradient/details.svg'
+import proposalInfoIcon from '../../../../../public/assets/iconGradient/info-gradient.svg'
 import proposalCompleteIcon from '../../../../../public/assets/statusProposal/proposal-complete.svg'
 import proposalWaitingIcon from '../../../../../public/assets/statusProposal/proposal-waiting.svg'
-import proposalStatusHistory from '../../../../../public/assets/section-title/proposal-history.svg'
+import proposalStatusHistory from '../../../../../public/assets/iconGradient/timer-grandient.svg'
 
 import * as S from './styles'
 

@@ -8,7 +8,7 @@ export const Container = styled.div`
   margin: 0 auto 16rem;
   padding: 10rem 0 0;
 
-  background: url('assets/BlurDivisor.png');
+  background: url('assets/images/blur-divisor.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

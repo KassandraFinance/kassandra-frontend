@@ -10,7 +10,7 @@ import { registerToken } from '../../../utils/registerToken'
 
 import { ToastInfo } from '../../../components/Toastify/toast'
 
-import iconBar from '../../../../public/assets/section-title/product-bar.svg'
+import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
 import metaMaskIcon from '../../../../public/assets/logos/metamask-logo.svg'
 
 import * as S from './styles'

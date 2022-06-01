@@ -14,7 +14,7 @@ const Partners = () => (
   <S.Container>
     <S.TitleAndIcon>
       <S.Icon>
-        <img src="assets/icons/about-partners-icon.svg" alt="" />
+        <img src="assets/iconGradient/about-partners.svg" alt="" />
       </S.Icon>
       <S.Title>Partners</S.Title>
     </S.TitleAndIcon>

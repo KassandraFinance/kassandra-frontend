@@ -13,7 +13,7 @@ import { BNtoDecimal } from '../../../utils/numerals'
 import { priceDollar } from '../../../utils/priceDollar'
 
 import ahype from '../../../../public/assets/token/ahype.svg'
-import tricrypto from '../../../../public/assets/tricrypto.svg'
+import tricrypto from '../../../../public/assets/token/tricrypto-with-fund.svg'
 
 import * as S from './styles'
 

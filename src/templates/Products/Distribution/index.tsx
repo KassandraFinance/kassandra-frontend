@@ -8,7 +8,7 @@ import { TokenImages } from '../../../store/modules/poolImages/types'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 
-import iconBar from '../../../../public/assets/section-title/product-bar.svg'
+import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
 import none from '../../../../public/assets/icons/coming-soon.svg'
 
 import * as S from './styles'

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 export const Background = styled.div`
-  background: url('/assets/latestBackground.svg');
+  background: url('/assets/images/latest-background.svg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -39,7 +39,7 @@ export const BackgoundCountDown = styled.div`
   background-repeat: no-repeat;
   background-size: auto;
   background-position: center;
-  background: url('assets/backgroundCountdown.svg');
+  background: url('assets/images/background-countdown.svg');
 
   @media (max-width: 768px) {
     padding: 0;

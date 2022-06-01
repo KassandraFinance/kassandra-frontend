@@ -16,7 +16,7 @@ const KassandraArchitecture = () => {
       <S.KassandraCardWrapper>
         <S.KassandraCard className="firstCard">
           <Image
-            src="/assets/statusProposal/distribution-icon.svg"
+            src="/assets/iconGradient/assets-distribution.svg"
             alt="about distribution icon"
             width={48}
             height={57}
@@ -32,7 +32,7 @@ const KassandraArchitecture = () => {
         </S.KassandraCard>
         <S.KassandraCard className="secondCard">
           <Image
-            src="/assets/icons/feeIcon.svg"
+            src="/assets/iconGradient/fee-coin.svg"
             alt="Revenue Stream for DAO icon"
             width={56}
             height={57}
@@ -47,7 +47,7 @@ const KassandraArchitecture = () => {
         </S.KassandraCard>
         <S.KassandraCard className="thirdCard">
           <Image
-            src="/assets/section-title/vote-icon.svg"
+            src="/assets/iconGradient/vote.svg"
             alt="vote icon"
             width={52}
             height={45}

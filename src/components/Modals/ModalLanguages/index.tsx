@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-import usa from '../../../public/assets/usa.svg'
+import usa from '../../../public/assets/flags/usa.svg'
 
 import * as S from './styles'
 
