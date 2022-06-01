@@ -235,11 +235,11 @@ const Products = ({ product }: Input) => {
               let balance
               let address
               let decimals: BigNumber
-              const { balancePoolYY, decimalsYY } = await getHoldings(
-                item.token.id,
-                item.balance
-              )
               if (item.token.symbol === 'YRT') {
+                const { balancePoolYY, decimalsYY } = await getHoldings(
+                  item.token.id,
+                  item.balance
+                )
                 symbol = item.token.name.split(' ').pop()
                 balance = balancePoolYY
                 address = invertToken[item.token.id]
