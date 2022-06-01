@@ -154,21 +154,13 @@ const Form = ({
       return
     }
 
-    if (title === 'Withdraw') {
-      setApprovals((old) => ({
-        ...old,
-        Withdraw: Array(poolTokensArray.length + 1).fill(Approval.Approved)
-      }))
-      return
-    }
-
     const calc = async () => {
       const newApprovals = []
 
       for (let i = 0; i < poolTokensArray.length; i += 1) {
         newApprovals.push(
           ERC20(poolTokensArray[i].address).allowance(
-            title === 'Invest' ? ProxyContract : corePoolAddress,
+            title !== 'Swap' ? ProxyContract : corePoolAddress,
             userWalletAddress
           )
         )
@@ -295,7 +287,7 @@ const Form = ({
         ])
 
         try {
-          const newSwapOutAmount = await crpPool.tryJoinswapExternAmountIn(
+          const newSwapOutAmount = await proxy.tryJoinswapExternAmountIn(
             swapInAddress,
             swapInAmount,
             new BigNumber('0'),
@@ -531,7 +523,7 @@ const Form = ({
 
         try {
           if (userWalletAddress.length > 0 && swapInAmount.gt(new BigNumber('0'))) {
-            await crpPool.tryExitPool(
+            await proxy.tryExitPool(
               swapInAmount,
               Array(newSwapOutAmount.length).fill(new BigNumber('0')),
               userWalletAddress
@@ -601,14 +593,14 @@ const Form = ({
 
       try {
         if (userWalletAddress.length > 0 && swapInAmount.gt(new BigNumber('0'))) {
-          await crpPool.tryExitswapPoolAmountIn(
+          await proxy.tryExitswapPoolAmountIn(
             swapOutAddress,
             swapInAmount,
             new BigNumber('0'),
             userWalletAddress
           )
         }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         const errorStr = error.toString()
 
@@ -676,7 +668,7 @@ const Form = ({
           let approved = false;
 
           while (!approved) {
-            approved = await ERC20(tokenAddress).allowance(crpPoolAddress, userWalletAddress);
+            approved = await ERC20(tokenAddress).allowance(ProxyContract, userWalletAddress);
             await new Promise(r => setTimeout(r, 200)); // sleep
           }
 
@@ -760,7 +752,7 @@ const Form = ({
         }
       }
     },
-    [crpPoolAddress]
+    [crpPoolAddress, ProxyContract]
   )
 
   const swapCallback = React.useCallback(
@@ -858,9 +850,18 @@ const Form = ({
 
           case 'Withdraw':
             trackBuying(crpPoolAddress, 'aHYPE', -1 * amountInUSD, productCategories)
-
+            
             if (swapOutAddressVal !== '') {
-              crpPool.exitswapPoolAmountIn(
+              if (approved.value === '0') {
+                ERC20(crpPoolAddress).approve(
+                  ProxyContract,
+                  walletAddress.value,
+                  approvalCallback(swapInSymbol.value, swapInAddressVal, tabTitle)
+                )
+                return              
+              }
+
+              proxy.exitswapPoolAmountIn(
                 swapOutAddressVal,
                 swapInAmountVal,
                 swapOutAmountVal[0].mul(slippageBase).div(slippageExp),
@@ -882,7 +883,7 @@ const Form = ({
                   )
                 }
 
-                crpPool.exitPool(
+                proxy.exitPool(
                   swapInAmountVal,
                   await corePool.currentTokens(),
                   swapOutAmounts,
