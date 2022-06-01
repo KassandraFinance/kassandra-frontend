@@ -150,7 +150,7 @@ const useConnect = () => {
   return {
     connect,
     connectToWalletConnect,
-    handleDisconnected,
+    handleDisconnected
   }
 }
 
