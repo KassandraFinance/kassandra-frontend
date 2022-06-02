@@ -84,11 +84,6 @@ const network2coingeckoID: Networks = {
 }
 
 const Products = ({ product }: Input) => {
-<<<<<<< HEAD
-  const [changes, setChanges] = React.useState<number[]>([])
-=======
-  const [totalPerfomance, setTotalPerfomance] = React.useState<string>('')
->>>>>>> 1583cb5bb1e34b0d937ef1ac10c643ccd86e9687
   const [openModal, setOpenModal] = React.useState(false)
   const [url, setUrl] = React.useState<string>('')
   const [loading, setLoading] = React.useState<boolean>(true)
@@ -350,84 +345,6 @@ const Products = ({ product }: Input) => {
             </S.NameIndex>
             <S.Line />
           </S.Intro>
-<<<<<<< HEAD
-          <S.Line className="second-line" />
-          <S.IntroCharts>
-            <S.IndexData>
-              <span>
-                TVL
-                <Tippy content="The Total Value Locked is the amount invested inside the pool, or simply the total value of all tokens inside the pool combined.">
-                  <S.Tooltip tabIndex={0}>
-                    <Image src={infoGray} alt="Explanation" />
-                  </S.Tooltip>
-                </Tippy>
-              </span>
-              <h2>${infoPool.tvl}</h2>
-            </S.IndexData>
-            <S.IndexData>
-              <span>
-                VOLUME (24h)
-                <Tippy content="Total volume of transactions in the last 24 hours. This includes new investments, withdrawals, token swaps and token transfers, which include swaps in decentralized exchanges.">
-                  <S.Tooltip tabIndex={0}>
-                    <Image src={infoGray} alt="Explanation" />
-                  </S.Tooltip>
-                </Tippy>
-              </span>
-              <h2>${infoPool.volume}</h2>
-            </S.IndexData>
-            <S.IndexData>
-              <span>
-                Swap fees (24h)
-                <Tippy content="Amount of fees collected in the last 24 hours when people swap tokens inside the pool. This fee is paid to all investors of the pool.">
-                  <S.Tooltip tabIndex={0}>
-                    <Image src={infoGray} alt="Explanation" />
-                  </S.Tooltip>
-                </Tippy>
-              </span>
-              <h2>${infoPool.swapFees}</h2>
-            </S.IndexData>
-            <S.IndexData>
-              <span>
-                Withdraw fees (24h)
-                <Tippy content="Amount of fees collected in the last 24 hours when people withdraw from the strategy. This fee is paid to the Kassandra Decentralized Autonomous Organization.">
-                  <S.Tooltip tabIndex={0}>
-                    <Image src={infoGray} alt="Explanation" />
-                  </S.Tooltip>
-                </Tippy>
-              </span>
-              <h2>${infoPool.withdrawFees}</h2>
-            </S.IndexData>
-          </S.IntroCharts>
-          <ChartProducts crpPoolAddress={product.sipAddress} />
-          <ScrollUpButton />
-          <Change crpPoolAddress={product.sipAddress} />
-          <MyAsset
-            crpPoolAddress={product.sipAddress}
-            price={infoPool.price}
-            symbol={product.symbol}
-            icon={product.fundIcon}
-            pid={typeof product.pid === 'undefined' ? -1 : product.pid}
-            decimals={infoPool.decimals}
-          />
-          <Summary
-            strategy={data?.pool.strategy || '...'}
-            summary={product.fundSummary}
-            symbol={product.symbol}
-            link={product.fundLink}
-            icon={product.fundIcon}
-          />
-          <PoweredBy partners={product.partners} />
-          <Distribution changes={changes} />
-          <TokenDescription symbol={product.symbol} />
-        </S.ProductDetails>
-        <PoolOperations
-          poolChain={product.chain}
-          crpPoolAddress={product.sipAddress}
-          corePoolAddress={product.coreAddress}
-          productCategories={product.categories}
-        />
-      </S.Product>
-=======
           <S.Product>
             <S.ProductDetails>
               <S.Intro introMobile={false} introDesktop={true}>
@@ -523,7 +440,6 @@ const Products = ({ product }: Input) => {
               <ScrollUpButton />
               <Change
                 crpPoolAddress={product.sipAddress}
-                setTotalPerfomance={setTotalPerfomance}
               />
               <MyAsset
                 crpPoolAddress={product.sipAddress}
@@ -555,7 +471,6 @@ const Products = ({ product }: Input) => {
           </S.Product>
         </>
       )}
->>>>>>> 1583cb5bb1e34b0d937ef1ac10c643ccd86e9687
     </>
   )
 }
