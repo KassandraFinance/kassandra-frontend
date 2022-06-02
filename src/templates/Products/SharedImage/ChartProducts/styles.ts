@@ -48,6 +48,10 @@ export const dictionary: any = {
 
 export const ChartProduct = styled.div`
   position: relative;
+
+  .recharts-wrapper {
+    margin: 0 !important;
+  }
 `
 
 export const Selects = styled.div`
@@ -99,7 +103,10 @@ interface ILabelPeriodProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const LabelPeriod = styled.label<ILabelPeriodProps>`
+export const LabelPeriod =
+  styled.label <
+  ILabelPeriodProps >
+  `
   background: ${props =>
     props.selectPeriod ? 'transparent' : 'rgba(255, 255, 255, 0.1)'};
 
@@ -140,7 +147,10 @@ interface ILabelProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const Label = styled.label<ILabelProps>`
+export const Label =
+  styled.label <
+  ILabelProps >
+  `
   border-bottom: 2px solid ${props =>
     props.selected ? theme.colors.cyan : 'transparent'};
   color: #fff;
@@ -173,12 +183,15 @@ interface IWrapperProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const Wrapper = styled.div<IWrapperProps>`
+export const Wrapper =
+  styled.div <
+  IWrapperProps >
+  `
   background-color: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.04);
   border-radius: 2.5rem;
   // margin: 25px 0;
   width: 100%;
   height: 360px;
-  height: ${({ height }) => (height === 320 ? 320 : 360)}px;
+  height: ${({ height }) => height}px;
 `

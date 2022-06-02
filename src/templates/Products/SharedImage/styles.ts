@@ -5,19 +5,14 @@ export const SharedImage = styled.div`
 
   width: 100.1rem;
   height: 50.6rem;
-  padding-top: 3rem;
+  padding-top: 4rem;
   margin: 0 auto;
 
   display: grid;
   grid-template-rows: auto 1fr auto;
 
   background-color: rgba(31, 41, 55, 1);
-
-  /* background-image: url('/assets/bg-products.png');
-  background-repeat: no-repeat;
-  background-size: 100rem;
-  background-position-x: 50%; */
-  /* box-shadow: rgb(21, 17, 23) 0px -20px 20px 0px inset; */
+  border-radius: 1.2rem;
 `
 
 export const Header = styled.header`
@@ -25,7 +20,7 @@ export const Header = styled.header`
   justify-content: space-between;
   align-items: center;
 
-  padding: 0 3rem;
+  padding: 0 6rem;
 `
 
 export const Title = styled.div`
@@ -33,7 +28,7 @@ export const Title = styled.div`
   align-items: center;
 
   h1 {
-    margin-left: 1.8rem;
+    margin-left: 1.6rem;
     margin-right: 1.6rem;
 
     font-size: 4rem;
@@ -92,8 +87,8 @@ export const Main = styled.main`
   justify-content: space-between;
   align-items: center;
 
-  margin-top: 1rem;
-  padding: 0 3rem;
+  padding: 0 6rem;
+  margin: 3.5rem 0;
 `
 
 export const InfoContainer = styled.div`
@@ -154,18 +149,18 @@ export const AssetsContainer = styled.div`
 export const ChartContainer = styled.div`
   width: 100%;
   max-width: 54.7rem;
+  height: 29.6rem;
 `
 
 export const Footer = styled.footer`
   display: flex;
   gap: 1.6rem;
 
-  padding-top: 1.6rem;
-  padding-bottom: 1.6rem;
-  margin-top: 2rem;
-  padding: 1.6rem 3rem;
+  padding: 1.6rem 6rem;
+  height: 5.2rem;
 
   background-color: #2d152b;
+  border-radius: 0 0 1.2rem 1.2rem;
 `
 
 export const SocialMedia = styled.div`
@@ -184,5 +179,6 @@ export const BackgroundContainer = styled.div`
   svg {
     width: 100.1rem;
     height: 100%;
+    border-radius: 1.2rem;
   }
 `
