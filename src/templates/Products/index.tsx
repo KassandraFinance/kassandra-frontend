@@ -96,7 +96,9 @@ const Products = ({ product }: Input) => {
     decimals: 18
   })
   // eslint-disable-next-line prettier/prettier
-  const [priceAndChangeTokens, setPriceAndChangeTokens] = React.useState<IInfoTokenProps[]>([
+  const [priceAndChangeTokens, setPriceAndChangeTokens] = React.useState<
+    IInfoTokenProps[]
+  >([
     {
       change: 0,
       price: 0
@@ -438,9 +440,7 @@ const Products = ({ product }: Input) => {
               </S.IntroCharts>
               <ChartProducts crpPoolAddress={product.sipAddress} />
               <ScrollUpButton />
-              <Change
-                crpPoolAddress={product.sipAddress}
-              />
+              <Change crpPoolAddress={product.sipAddress} />
               <MyAsset
                 crpPoolAddress={product.sipAddress}
                 price={infoPool.price}

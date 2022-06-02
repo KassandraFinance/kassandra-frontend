@@ -18,10 +18,6 @@ export default combineReducers({
   chartSelected: chartSelectedReducer,
   periodSelected: periodSelectedReducer,
   userWalletAddress: userWalletAddressReducer,
-<<<<<<< HEAD
   tokenAddress2Index: tokenAddress2IndexReducer,
   performanceValues: performanceValuesReducer
-=======
-  tokenAddress2Index: tokenAddress2IndexReducer
->>>>>>> 1583cb5bb1e34b0d937ef1ac10c643ccd86e9687
 })
