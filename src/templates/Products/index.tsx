@@ -93,7 +93,6 @@ const addressChanger: { [key: string]: string | undefined } = {
 
 const Products = ({ product }: Input) => {
   const [changes, setChanges] = React.useState<number[]>([])
-  const [totalPerfomance, setTotalPerfomance] = React.useState<string>('')
   const [openModal, setOpenModal] = React.useState(false)
   const [infoPool, setInfoPool] = React.useState<InfoPool>({
     tvl: '...',
@@ -282,8 +281,8 @@ const Products = ({ product }: Input) => {
           crpPoolAddress={product.sipAddress}
           totalValueLocked={infoPool.tvl}
           socialIndex={product.symbol}
-          totalPerfomance={totalPerfomance}
           productName={product.name}
+          fundImage={product.fundIcon}
         />
       </ShareImageModal>
       <Breadcrumb>
@@ -378,10 +377,7 @@ const Products = ({ product }: Input) => {
           </S.IntroCharts>
           <ChartProducts crpPoolAddress={product.sipAddress} />
           <ScrollUpButton />
-          <Change
-            crpPoolAddress={product.sipAddress}
-            setTotalPerfomance={setTotalPerfomance}
-          />
+          <Change crpPoolAddress={product.sipAddress} />
           <MyAsset
             crpPoolAddress={product.sipAddress}
             price={infoPool.price}
