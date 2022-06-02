@@ -12,7 +12,8 @@ import SelectInput from '../../SelectInput'
 import { BNtoDecimal } from '../../../utils/numerals'
 import { priceDollar } from '../../../utils/priceDollar'
 
-import ahype from '../../../../public/assets/ahype.svg'
+import ahype from '../../../../public/assets/logos/ahype.svg'
+import tricrypto from '../../../../public/assets/logos/tricrypto-with-fund.svg'
 
 import * as S from './styles'
 
@@ -22,7 +23,7 @@ interface IInputEthProps {
   actionString: string;
   swapBalance: BigNumber;
   decimals: BigNumber;
-  infoAHYPE?: TokenDetails[];
+  poolTokensArray?: TokenDetails[];
   // optionals for input
   clearInput?: () => void;
   inputRef?: React.RefObject<HTMLInputElement>;
@@ -47,7 +48,7 @@ const InputTokens = ({
   decimals,
   clearInput,
   inputRef,
-  infoAHYPE,
+  poolTokensArray,
   // Text Inputs
   swapAmount,
   setSwapAmount,
@@ -87,7 +88,14 @@ const InputTokens = ({
     return (
       <S.Symbol>
         <div className="img">
-          <Image src={ahype} alt="" width={22} height={22} />
+          {poolTokens && poolTokens?.length > 0 && (
+            <Image
+              src={poolTokens[0]?.symbol === 'aHYPE' ? ahype : tricrypto}
+              alt=""
+              width={22}
+              height={22}
+            />
+          )}
         </div>
         {poolTokens.length > 0 && poolTokens[0] !== undefined
           ? poolTokens[0].symbol
@@ -168,26 +176,13 @@ const InputTokens = ({
               }
             />
             <span className="price-dolar">
-              {infoAHYPE &&
+              {poolTokensArray &&
                 'USD: ' +
                   BNtoDecimal(
-                    Big(
-                      (isWithdraw === 'Withdraw'
-                        ? swapAmount
-                        : swapInAmount || 0
-                      ).toString()
-                    )
-                      .mul(
-                        Big(
-                          priceDollar(
-                            isWithdraw === 'Withdraw'
-                              ? swapOutAddress
-                              : swapInAddress,
-                            infoAHYPE
-                          )
-                        )
-                      )
-                      .div(Big(10).pow(18)),
+                    Big(swapAmount.toString())
+                      .mul(Big(priceDollar(swapOutAddress, poolTokensArray)))
+                      // .div(Big(10).pow(18)),
+                      .div(Big(10).pow(Number(decimals.toString()))),
                     18,
                     2,
                     2

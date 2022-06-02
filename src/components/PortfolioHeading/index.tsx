@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import Tippy from '@tippyjs/react'
 
-import infoGray from '../../../public/assets/info-gray.svg'
+import infoGray from '../../../public/assets/utilities/info-gray.svg'
 
 import * as S from './styles'
 
@@ -18,7 +18,7 @@ const PortfolioHeading = ({ image, title, usd }: IPortfolioHeadingProps) => {
       <S.HeadingWrapper>
         <S.Heading>
           <S.ImageWrapper>
-            <Image src={image} />
+            <Image src={image} alt="" width={20} height={20} />
           </S.ImageWrapper>
 
           <S.H2>{title}</S.H2>

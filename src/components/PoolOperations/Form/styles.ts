@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import theme from '../../../styles/theme'
 import Tippy from '@tippyjs/react'
 
@@ -46,9 +46,10 @@ export const SwapButton = styled.button`
   cursor: pointer;
 
   img {
-    transition: transform 300ms;
     margin: 1.2rem 0;
+    transition: transform 300ms;
   }
+
   img:last-child {
     margin-top: 1.2rem;
     margin-right: 0;
@@ -63,6 +64,7 @@ export const SwapButton = styled.button`
     img:first-child {
       transform: rotate(-180deg);
     }
+
     img:last-child {
       transform: rotate(0deg);
     }
@@ -91,7 +93,6 @@ export const TransactionSettingsOptions = styled.div`
   margin-top: 0.6rem;
 `
 
-// eslint-disable-next-line prettier/prettier
 export const TransactionSettings = styled.div`
   display: flex;
   align-items: center;
@@ -131,7 +132,7 @@ export const TransactionSettings = styled.div`
     }
 
     @media (max-width: 360px) {
-      font-size: 10.7px;
+      font-size: 1.07rem;
     }
   }
 
@@ -146,8 +147,9 @@ export const TransactionSettings = styled.div`
     border-radius: 1rem;
     border: 0.1rem solid rgba(255, 255, 255, 0.3);
 
-    z-index: 22;
     animation: OpenModalSettings 600ms ease;
+    z-index: 22;
+
     @keyframes OpenModalSettings {
       from {
         opacity: 0;
@@ -351,7 +353,7 @@ interface ISpanProps {
   total?: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const Span = styled.span<ISpanProps>`
   height: 1.7rem;
 
@@ -364,7 +366,7 @@ export const Span = styled.span<ISpanProps>`
 
   @media(max-width: 360px) {
     padding-left: 1.2rem;
-    font-size: 10.7px;
+    font-size: 1.07rem;
   }
 `
 
@@ -381,7 +383,32 @@ export const SpanLight = styled.span`
   }
 
   @media (max-width: 360px) {
-    font-size: 10.7px;
+    font-size: 1.07rem;
+  }
+`
+
+interface IPriceImpactWrapperProps {
+  price: string | number;
+}
+
+// prettier-ignore
+export const PriceImpactWrapper = styled.span<IPriceImpactWrapperProps>`
+  height: 1.7rem;
+
+  ${( {  price }) => css`
+    color: ${price <= 1 ? '#5EE56B' : price <= 2 ? '#bdbdbd' : price <= 5 ?'orange' : '#E8372C'};
+  `}
+
+  font-size: ${theme.font.sizes.font14};
+  font-weight: ${theme.font.weight.light};
+  letter-spacing: 0.03rem;
+
+  @media (max-width: 380px) {
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 360px) {
+    font-size: 1.07rem;
   }
 `
 
@@ -389,7 +416,7 @@ interface ISymbolProps {
   bestValue?: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const Symbol = styled.h3<ISymbolProps>`
   display: flex;
   align-items: center;
@@ -444,7 +471,7 @@ interface IButtonMax {
   maxActive?: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const ButtonMax = styled.button<IButtonMax>`
   width: 4rem;
   height: 2rem;
@@ -477,7 +504,7 @@ interface IInputProps {
   bestValue?: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const Input = styled.input<IInputProps>`
   width: 100%;
   margin: 0.8rem 0;

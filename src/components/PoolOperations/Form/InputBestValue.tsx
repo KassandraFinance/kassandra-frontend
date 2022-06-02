@@ -12,13 +12,13 @@ import { TokenImages } from '../../../store/modules/poolImages/types'
 import { BNtoDecimal } from '../../../utils/numerals'
 import { priceDollar } from '../../../utils/priceDollar'
 
-import none from '../../../../public/assets/coming-soon.svg'
+import none from '../../../../public/assets/icons/coming-soon.svg'
 
 import * as S from './styles'
 
 interface IInputBestValueProps {
   poolTokenDetails: TokenDetails[];
-  infoAHYPE: TokenDetails[];
+  poolTokensArray: TokenDetails[];
   swapOutAmount: BigNumber[];
   swapOutBalance: BigNumber[];
   setPriceInDollarOnWithdraw: React.Dispatch<React.SetStateAction<string>>;
@@ -26,7 +26,7 @@ interface IInputBestValueProps {
 
 const InputBestValue = ({
   poolTokenDetails,
-  infoAHYPE,
+  poolTokensArray,
   swapOutAmount,
   swapOutBalance,
   setPriceInDollarOnWithdraw
@@ -38,7 +38,7 @@ const InputBestValue = ({
   React.useEffect(() => {
     const res: Big = poolTokenDetails.reduce((accumulator, current, index) => {
       return Big((swapOutAmount[index] || 0).toString())
-        .mul(Big(priceDollar(current.address, infoAHYPE)))
+        .mul(Big(priceDollar(current.address, poolTokensArray)))
         .div(Big(10).pow(current.decimals.toNumber()))
         .add(accumulator)
     }, Big(0))
@@ -91,7 +91,7 @@ const InputBestValue = ({
                   '$' +
                   BNtoDecimal(
                     Big((swapOutAmount[index] || 0).toString())
-                      .mul(Big(priceDollar(token.address, infoAHYPE)))
+                      .mul(Big(priceDollar(token.address, poolTokensArray)))
                       .div(Big(10).pow(18)),
                     6,
                     2,

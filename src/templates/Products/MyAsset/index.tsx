@@ -15,10 +15,10 @@ import {
   LPDaiAvax
 } from '../../../constants/tokenAddresses'
 import usePriceLP from '../../../hooks/usePriceLP'
-import useStakingContract from '../../../hooks/useStakingContract'
 import useERC20Contract from '../../../hooks/useERC20Contract'
+import useStakingContract from '../../../hooks/useStakingContract'
 
-import iconBar from '../../../../public/assets/iconbar.svg'
+import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
 
 import { registerToken } from '../../../utils/registerToken'
 
@@ -52,10 +52,10 @@ const MyAsset = ({
   const router = useRouter()
   const { trackEvent } = useMatomo()
 
-  const { userInfo, poolInfo } = useStakingContract(Staking)
-  const tokenWallet = useERC20Contract(crpPoolAddress)
-
   const { viewgetReserves } = usePriceLP()
+  const tokenWallet = useERC20Contract(crpPoolAddress)
+  const stakingContract = useStakingContract(Staking)
+
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
   const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
@@ -78,7 +78,7 @@ const MyAsset = ({
   }
 
   async function getStakedToken() {
-    const staked = await userInfo(pid, userWalletAddress)
+    const staked = await stakingContract.userInfo(pid, userWalletAddress)
     setStakedToken(staked.amount)
   }
 
@@ -119,8 +119,7 @@ const MyAsset = ({
   }
 
   async function getApr() {
-    const poolInfoResponse = await poolInfo(pid)
-
+    const poolInfoResponse = await stakingContract.poolInfo(pid)
     if (!poolInfoResponse.withdrawDelay) {
       return
     }
@@ -153,7 +152,7 @@ const MyAsset = ({
   }
 
   React.useEffect(() => {
-    if (userWalletAddress) {
+    if (userWalletAddress !== '') {
       getBalance()
 
       getStakedToken()
@@ -161,18 +160,22 @@ const MyAsset = ({
   }, [userWalletAddress])
 
   React.useEffect(() => {
-    handleLPtoUSD()
+    if (userWalletAddress !== '') {
+      handleLPtoUSD()
+    }
   }, [price])
 
   React.useEffect(() => {
-    getApr()
+    if (userWalletAddress !== '') {
+      getApr()
+    }
   }, [priceToken])
 
   return (
     <S.MyAsset>
       <S.TitleWrapper>
         <S.Title>
-          <Image src={iconBar} alt="" />
+          <Image src={iconBar} alt="" width={18} height={18} />
           <h2>My asset</h2>
         </S.Title>
 
@@ -187,7 +190,12 @@ const MyAsset = ({
             matomoEvent('click-add-metamask', `add-${symbol}`)
           }}
         >
-          <Image src="/assets/metaMaskIcon.svg" alt="" width={14} height={14} />
+          <Image
+            src="/assets/logos/metamask.svg"
+            alt="metamask logo"
+            width={14}
+            height={14}
+          />
           <span>Add to Metamask</span>
         </S.AddToken>
       </S.TitleWrapper>

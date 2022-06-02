@@ -3,8 +3,8 @@ import { ChainDetails } from '../utils/changeChain'
 import { PartnerData } from '../components/Products/Partner'
 import partners from '../components/Products/Partner/list'
 
-import ahypeIcon from '../../public/assets/ahype.svg'
-import tricryptoIcon from '../../public/assets/Tricrypto.svg'
+import ahypeIcon from '../../public/assets/logos/ahype.svg'
+import tricryptoIcon from '../../public/assets/logos/tricrypto.svg'
 
 export const HeimCRPPOOL = process.env.NEXT_PUBLIC_MASTER === '1' ?
   '0x38918142779e2CD1189cBd9e932723C968363D1E'
@@ -53,7 +53,7 @@ export const GovernorAlpha = process.env.NEXT_PUBLIC_MASTER === '1' ?
   '0x2B6C46b9552B6Fa36DD097b6527ba20fdDB3FfD5'
 
 export const ProxyContract = process.env.NEXT_PUBLIC_MASTER === '1' ?
-  '0x1dd8b313ec6f7a744b69fc86ae47ad2a5eb45bc4'
+  '0x2A36E9eb73eF29652c524274CC0eEa7211B32292'
   :
   '0x97e33051B09092C1301A90b964a74cA51C0b068B'
 
@@ -78,6 +78,7 @@ export interface ProductDetails {
   pid?: number;
   fundSummary?: string;
   fundLink?: string;
+  addresses: string[];
 }
 
 export type ProductSymbols = keyof typeof products;
@@ -139,6 +140,15 @@ const ahype: ProductDetails  = process.env.NEXT_PUBLIC_MASTER === '1' ?
       partners.avalanche,
       partners.heimdall,
       partners.api3
+    ],
+    addresses: [
+      '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
+      '0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd',
+      '0xf32398dae246C5f672B52A54e9B413dFFcAe1A44',
+      '0x8729438EB15e2C8B576fCc6AeCdA6A148776C0F5',
+      '0xA32608e873F9DdEF944B24798db69d80Bbb4d1ed',
+      '0x60781C2586D68229fde47564546784ab3fACA982',
+      '0xd1c3f94DE7e5B45fa4eDBBA472491a9f4B166FC4'
     ]
   }
  :
@@ -161,6 +171,15 @@ const ahype: ProductDetails  = process.env.NEXT_PUBLIC_MASTER === '1' ?
       partners.avalanche,
       partners.heimdall,
       partners.api3
+    ],
+    addresses: [
+      '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
+      '0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd',
+      '0xf32398dae246C5f672B52A54e9B413dFFcAe1A44',
+      '0x8729438EB15e2C8B576fCc6AeCdA6A148776C0F5',
+      '0xA32608e873F9DdEF944B24798db69d80Bbb4d1ed',
+      '0x60781C2586D68229fde47564546784ab3fACA982',
+      '0xd1c3f94DE7e5B45fa4eDBBA472491a9f4B166FC4'
     ]
   }
 
@@ -172,15 +191,23 @@ const tricrypto: ProductDetails  = {
   chain: chains.avalanche,
   name: 'Tricrypto Social Index',
   fundBy: 'Kassandra with Yield Yak',
-  symbol: 'Tricrypto',
+  symbol: 'K3C',
   fundIcon: tricryptoIcon,
   pid: 6,
   fundLink: 'https://kassandra.finance/',
   fundSummary: `The #K3C represents a yield-earning portfolio composed of BTC,
-  ETH, USDC and KACY built in partnership with our friends back at Yield Yak.`,
+  ETH, USDT and KACY built in partnership with our friends back at Yield Yak.`,
   partners: [
     partners.avalanche,
-    partners.yieldYak
+    partners.yieldYak,
+    partners.traderJoe,
+    partners.aave
+  ],
+  addresses: [
+    '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab',
+    '0x50b7545627a5162f82a992c33b87adc75187b218',
+    '0xc7198437980c041c805a1edcba50c1ce5db95118',
+    '0xf32398dae246C5f672B52A54e9B413dFFcAe1A44'
   ]
 }
 

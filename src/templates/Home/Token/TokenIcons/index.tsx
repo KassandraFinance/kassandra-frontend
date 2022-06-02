@@ -1,27 +1,51 @@
 import Image from 'next/image'
 import React from 'react'
 
-import none from '../../../../../public/assets/coming-soon.svg'
+import none from '../../../../../public/assets/icons/coming-soon.svg'
 
 import * as S from './styles'
-interface TokenIconsProps {
-  tokens: string[][];
+
+type ITokenInfoProps = {
+  id: string,
+  balance_in_pool: string,
+  address: string,
+  name: string,
+  symbol: string,
+  allocation: number,
+  price: number
 }
 
-const TokenIcons = ({ tokens }: TokenIconsProps) => {
+interface IPoolInfoProps {
+  balance: string;
+  token: ITokenInfoProps;
+  weight_goal_normalized: string;
+  weight_normalized: string;
+}
+
+interface TokenIconsProps {
+  images: { [key: string]: string };
+  poolInfo: IPoolInfoProps[];
+}
+
+const TokenIcons = ({ images, poolInfo }: TokenIconsProps) => {
   return (
     <S.Container>
-      {tokens.map((entry: string[], index: number) => {
-        return (
+      {poolInfo
+        .slice(0, poolInfo.length >= 5 ? 5 : poolInfo.length)
+        .map((asset, index) => (
           <S.ImageWrapper
-            className={entry[1] ? '' : 'svg-none'}
-            key={entry[0]}
+            key={index}
+            className={images[asset.token.id] ? '' : 'svg-none'}
             index={index}
           >
-            <Image src={entry[1] || none} alt="" width={18} height={18} />
+            <Image
+              src={images[asset.token.id] || none}
+              alt=""
+              width={18}
+              height={18}
+            />
           </S.ImageWrapper>
-        )
-      })}
+        ))}
     </S.Container>
   )
 }

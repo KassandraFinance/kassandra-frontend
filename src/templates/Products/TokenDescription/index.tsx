@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-import iconBar from '../../../../public/assets/iconbar.svg'
+import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
 
 //import { ProductSymbols } from '../../../constants/tokenAddresses'
 
@@ -21,7 +21,7 @@ interface Input {
 
 const descriptions: DescriptionType = {
   ahype: <AhypeDescription />,
-  tricrypto: <TricryptoDescription />
+  k3c: <TricryptoDescription />
 }
 
 const TokenDescription = ({ symbol }: Input) => {
@@ -30,7 +30,7 @@ const TokenDescription = ({ symbol }: Input) => {
   return (
     <>
       <S.Title>
-        <Image src={iconBar} alt="" />
+        <Image src={iconBar} alt="" height={18} width={18} />
         <h2>Token Description</h2>
       </S.Title>
       <S.Line />

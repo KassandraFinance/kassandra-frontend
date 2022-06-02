@@ -8,7 +8,7 @@ const Products = () => {
     <S.Container>
       <S.ImageKassandra>
         <img
-          src="/assets/about-products.svg"
+          src="/assets/images/about-products.svg"
           alt="Understanding the parts that make Kassandra"
           width="594"
           height="568"
@@ -17,7 +17,7 @@ const Products = () => {
       <S.CardWrapper>
         <S.Card>
           <S.MobileCardTitle>
-            <img src="/assets/about-products-icon.svg" alt="" />
+            <img src="/assets/iconGradient/about-products.svg" alt="" />
             <h3>PROTOCOL</h3>
           </S.MobileCardTitle>
           <p>
@@ -33,7 +33,7 @@ const Products = () => {
         </S.Card>
         <S.Card>
           <S.MobileCardTitle>
-            <img src="/assets/about-products-icon.svg" alt="" />
+            <img src="/assets/iconGradient/about-products.svg" alt="" />
             <h3>DAO</h3>
           </S.MobileCardTitle>
           <p>
@@ -48,7 +48,7 @@ const Products = () => {
         </S.Card>
         <S.Card>
           <S.MobileCardTitle>
-            <img src="/assets/about-products-icon.svg" alt="" />
+            <img src="/assets/iconGradient/about-products.svg" alt="" />
             <h3>FOUNDATION</h3>
           </S.MobileCardTitle>
           <p>

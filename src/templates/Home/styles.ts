@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Background = styled.div`
-  background: url('/assets/latestBackground.svg');
+  background: url('/assets/images/latest-background.svg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -26,7 +26,7 @@ export const BackgroundSubscribe = styled.div`
 export const BackgoundCountDown = styled.div`
   padding: 10rem 10rem;
 
-  background: url('/assets/backgroundCountdown.svg');
+  background: url('/assets/images/background-countdown.svg');
   background-repeat: no-repeat;
   background-size: auto;
   background-position: center;

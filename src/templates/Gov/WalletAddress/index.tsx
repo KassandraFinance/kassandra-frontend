@@ -23,11 +23,11 @@ import BreadcrumbItem from '../../../components/Breadcrumb/BreadcrumbItem'
 import OwnAndReceivedTable from '../../../components/Governance/OwnAndReceivedTable'
 import UserTableVotingHistory from '../../../components/Governance/UserTableVotingHistory'
 
-import proposals from '../../../../public/assets/iconGradient/proposals.svg'
+import proposals from '../../../../public/assets/iconGradient/details.svg'
 import votingPoweRrank from '../../../../public/assets/iconGradient/voting-power-rank.svg'
-import stakingPools from '../../../../public/assets/iconGradient/stakingPools.svg'
+import stakingPools from '../../../../public/assets/iconGradient/staking-pools.svg'
 
-import externalLink from '../../../../public/assets/icons/external-link.svg'
+import externalLink from '../../../../public/assets/utilities/external-link.svg'
 
 import * as S from './styles'
 

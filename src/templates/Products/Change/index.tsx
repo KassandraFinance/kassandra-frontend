@@ -8,7 +8,7 @@ import { GET_POOL_PRICE } from './graphql'
 import { HeimCRPPOOL, SUBGRAPH_URL } from '../../../constants/tokenAddresses'
 import { actionSetPerformanceValues } from '../../../store/modules/performanceValues/actions'
 
-import iconBar from '../../../../public/assets/iconbar.svg'
+import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
 
 import * as S from './styles'
 
@@ -68,7 +68,7 @@ const Change = ({ crpPoolAddress }: IChangeProps) => {
   return (
     <S.Change>
       <S.Title>
-        <Image src={iconBar} alt="" />
+        <Image src={iconBar} alt="" width={18} height={18} />
         <h2>Price Change</h2>
       </S.Title>
       <table>

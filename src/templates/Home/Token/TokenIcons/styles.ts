@@ -25,7 +25,7 @@ export const ImageWrapper = styled.div<IWrapperProps>`
     max-width: 2rem;
     padding: 0;
     margin: 0;
-
+    
     border-radius: 50%;
   }
 

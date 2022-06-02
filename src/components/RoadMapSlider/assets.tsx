@@ -164,11 +164,11 @@ export const icons: Icons = {
 
 export const SlickArrowLeft = ({ ...props }) => (
   <S.SlickArrowButton {...props} aria-hidden="true" type="button">
-    <img src="/assets/ArrowPrevious.svg" alt="" />
+    <img src="/assets/utilities/arrow-left-bold.svg" alt="" />
   </S.SlickArrowButton>
 )
 export const SlickArrowRight = ({ ...props }) => (
   <S.SlickArrowButton {...props} aria-hidden="true" type="button">
-    <img src="/assets/ArrowNext.svg" alt="" />
+    <img src="/assets/utilities/arrow-right-bold.svg" alt="" />
   </S.SlickArrowButton>
 )

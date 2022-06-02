@@ -13,8 +13,8 @@ import FundAreaChart from './FundAreaChart'
 import FundBarChart from './FundBarChart'
 import FundTokenIcons from './FundTokenIcons'
 
-import arrowAscend from '../../../public/assets/icons/arrow-ascend.svg'
-import arrowDescend from '../../../public/assets/icons/arrow-descend.svg'
+import arrowAscend from '../../../public/assets/notificationStatus/arrow-ascend.svg'
+import arrowDescend from '../../../public/assets/notificationStatus/arrow-descend.svg'
 
 import { GET_CHART } from './graphql'
 
@@ -28,17 +28,6 @@ interface InfoPool {
 interface IFundCardProps {
   product: ProductDetails;
 }
-
-interface TokenInfo {
-  id: string;
-  balance_in_pool: string;
-  address: string;
-  name: string;
-  symbol: string;
-  allocation: number;
-  price: number;
-}
-
 interface Networks {
   Ropsten: string;
   Avalanche: string;
@@ -51,8 +40,7 @@ const network2coingeckoID: Networks = {
   Fuji: 'avalanche'
 }
 
-// for development testing
-const addressChanger: { [key: string]: string | undefined } = {
+const addressChanger: { [key: string]: string } = {
   '0xd00ae08403B9bbb9124bB305C09058E32C39A48c':
     '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7', // WAVAX
   '0xe401e9Ce0E354Ad9092a63eE1dFA3168bB83F3DA':
@@ -64,7 +52,13 @@ const addressChanger: { [key: string]: string | undefined } = {
   '0xBA1C32241Ac77b97C8573c3dbFDe4e1e2A8fc0DF':
     '0x59414b3089ce2AF0010e7523Dea7E2b35d776ec7', // YAK
   '0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb':
-    '0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb' // KACY
+    '0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb', // KACY
+  '0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E':
+    '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab', // WETH
+  '0x964555644E067c560A4C144360507E80c1104784':
+    '0xc7198437980c041c805a1edcba50c1ce5db95118', //USDT
+  '0xbbcED92AC9B958F88A501725f080c0360007e858':
+    '0x50b7545627a5162f82a992c33b87adc75187b218' //WBTC
 }
 
 const FundCard = ({ product }: IFundCardProps) => {
@@ -79,7 +73,9 @@ const FundCard = ({ product }: IFundCardProps) => {
   })
   const [poolInfo, setPoolInfo] = React.useState<any[]>([])
   const [poolObject, setPoolObject] = React.useState<any>({})
-  const [tokenImages, setTokenImages] = React.useState<string[][]>([])
+  const [tokenImages, setTokenImages] = React.useState<{
+    [key: string]: string
+  }>({})
 
   const [price, setPrice] = React.useState([])
 
@@ -152,45 +148,20 @@ const FundCard = ({ product }: IFundCardProps) => {
   }, [poolInfo])
 
   React.useEffect(() => {
-    const getCoingecko = async (
-      platform: string,
-      token: TokenInfo,
-      index: number,
-      images: string[][]
-    ) => {
-      try {
-        const URL = `https://api.coingecko.com/api/v3/coins/${platform}/contract/${
-          poolPlatform !== 'Fuji' ? token.id : addressChanger[token.id]
-        }?localization=false&tickers=false&community_data=false&developer_data=false&sparkline=false`
-        const res = await fetch(URL)
-        const data = await res.json()
-        images[index] = [token.id, data.image?.small]
-        return
-      } catch (e) {
-        return
-      }
+    const arrayAddressPool = poolInfo
+      .slice(0, poolInfo.length >= 3 ? 3 : poolInfo.length)
+      .map(asset => addressChanger[asset.token.id] || asset.token.id)
+
+    const getCoingecko = async () => {
+      const URL = `/api/image-coingecko?poolinfo=${
+        network2coingeckoID[product.platform]
+      }&tokenAddress=${arrayAddressPool}`
+      const res = await fetch(URL)
+      const data = await res.json()
+      setTokenImages(data.images)
     }
 
-    const getExtraInfo = async () => {
-      const images: string[][] = []
-
-      await Promise.all(
-        poolInfo
-          .slice(0, poolInfo.length >= 3 ? 3 : poolInfo.length)
-          .map(async (asset, index) => {
-            await getCoingecko(
-              network2coingeckoID[poolPlatform],
-              asset.token,
-              index,
-              images
-            )
-          })
-      )
-
-      setTokenImages(images)
-    }
-
-    getExtraInfo()
+    getCoingecko()
   }, [poolInfo, poolPlatform])
 
   return (

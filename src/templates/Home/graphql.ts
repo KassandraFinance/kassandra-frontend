@@ -1,6 +1,6 @@
 import { gql } from 'graphql-request'
 
-export const GET_INFO_AHYPE = gql`
+export const GET_INFO_POOL = gql`
   query ($id: ID!, $day: Int!) {
     pool(id: $id) {
       # information aHYPE

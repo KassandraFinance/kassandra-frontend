@@ -5,7 +5,7 @@ export const Hero = styled.section`
   min-height: 170vh;
   margin-bottom: -50vh;
 
-  background: url('/assets/home-hero-background.svg');
+  background: url('/assets/images/home-hero-background.svg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center top;
@@ -143,6 +143,12 @@ export const ButtonWrapper = styled.ul`
   width: 31.4rem;
   margin: 7.2rem auto 0;
   gap: 1.6rem;
+
+  li {
+    a {
+      min-width: 16rem;
+    }
+  }
 
   @media (max-width: 420px) {
     grid-template-columns: 1fr;

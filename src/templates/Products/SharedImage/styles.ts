@@ -12,7 +12,16 @@ export const SharedImage = styled.div`
   grid-template-rows: auto 1fr auto;
 
   background-color: rgba(31, 41, 55, 1);
+<<<<<<< HEAD
   border-radius: 1.2rem;
+=======
+
+  /* background-image: url('/assets/images/bg-products.png');
+  background-repeat: no-repeat;
+  background-size: 100rem;
+  background-position-x: 50%; */
+  /* box-shadow: rgb(21, 17, 23) 0px -20px 20px 0px inset; */
+>>>>>>> 1583cb5bb1e34b0d937ef1ac10c643ccd86e9687
 `
 
 export const Header = styled.header`
