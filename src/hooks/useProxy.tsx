@@ -59,7 +59,6 @@ const useProxy = (address: string, crpAddress: string) => {
       walletAddress: string,
       callback: TransactionCallback
     ) => {
-
       const res = await contract.methods
         .exitPool(crpAddress, poolAmountIn, tokensOut, minAmountsOut)
         .send({ from: walletAddress }, callback)
@@ -67,7 +66,48 @@ const useProxy = (address: string, crpAddress: string) => {
       return res
     }
 
+    const swapExactAmountIn = async (
+      tokenIn: string, 
+      tokenAmountIn: BigNumber,
+      tokenOut: string,
+      minAmountOut: BigNumber,
+      walletAddress: string,
+      callback: TransactionCallback
+    ) => {
+      const res = await contract.methods
+        .swapExactAmountIn(
+          '0x17C1037B17b221f2f3b53f85cebD817C941f6bC5',
+          tokenIn, 
+          tokenAmountIn, 
+          tokenOut, 
+          minAmountOut,
+          web3.utils.toTwosComplement(-1)
+        )
+        .send({ from: walletAddress }, callback)
+
+      return res
+    }
+
     /* CALL */
+    const trySwapExactAmountIn = async (
+      tokenIn: string, 
+      tokenAmountIn: BigNumber,
+      tokenOut: string,
+      walletAddress: string,
+    ) => {
+      const res = await contract.methods
+        .swapExactAmountIn(
+          '0x17C1037B17b221f2f3b53f85cebD817C941f6bC5',
+          tokenIn, 
+          tokenAmountIn, 
+          tokenOut, 
+          0,
+          web3.utils.toTwosComplement(-1)
+        )
+        .call({ from: walletAddress })
+
+      return res
+    }
 
     const tryJoinswapExternAmountIn = async (
       tokenIn: string,
@@ -111,9 +151,11 @@ const useProxy = (address: string, crpAddress: string) => {
       joinswapExternAmountIn,
       exitswapPoolAmountIn,
       exitPool,
+      swapExactAmountIn,
       
       tryJoinswapExternAmountIn,
       tryExitswapPoolAmountIn,
+      trySwapExactAmountIn,
       tryExitPool,
     }
   }, [contract])
