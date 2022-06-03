@@ -257,23 +257,25 @@ const MyAsset = ({
         </S.TBody>
       </S.Table>
 
-      <S.ButtonWrapper>
-        <Button
-          backgroundSecondary
-          text={
-            userWalletAddress
-              ? `Stake ${symbol} to earn ${BNtoDecimal(apr, 0)}% APR`
-              : 'Connect Wallet'
-          }
-          fullWidth
-          size="huge"
-          onClick={
-            userWalletAddress
-              ? () => router.push('/farm')
-              : () => setIsModaWallet(true)
-          }
-        />
-      </S.ButtonWrapper>
+      {symbol === 'aHYPE' && (
+        <S.ButtonWrapper>
+          <Button
+            backgroundSecondary
+            text={
+              userWalletAddress
+                ? `Stake ${symbol} to earn ${BNtoDecimal(apr, 0)}% APR`
+                : 'Connect Wallet'
+            }
+            fullWidth
+            size="huge"
+            onClick={
+              userWalletAddress
+                ? () => router.push('/farm')
+                : () => setIsModaWallet(true)
+            }
+          />
+        </S.ButtonWrapper>
+      )}
 
       {isModalWallet && <ModalWalletConnect setModalOpen={setIsModaWallet} />}
     </S.MyAsset>
