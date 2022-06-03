@@ -119,9 +119,9 @@ const ShareImageModal = ({
   return (
     <>
       {openModal ? (
-        <S.Backdrop>
+        <S.Backdrop onClick={() => setOpenModal(false)}>
           {/* <S.Backdrop style={{ display: openModal ? 'flex' : 'none' }}> */}
-          <S.ModalContainer>
+          <S.ModalContainer onClick={event => event.stopPropagation()}>
             <S.ModalHeader>
               Share on your socials
               <Image
