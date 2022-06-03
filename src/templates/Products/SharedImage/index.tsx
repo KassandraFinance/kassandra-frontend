@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 import { RootStateOrAny, useSelector } from 'react-redux'
+import { PerformanceValues } from '../../../store/modules/performanceValues/actions'
 
 import { TokenImages } from '../../../store/modules/poolImages/types'
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
@@ -20,31 +21,38 @@ interface ISharedImageProps {
   crpPoolAddress: string;
   totalValueLocked: string;
   socialIndex: string;
-  totalPerfomance: string;
   productName: string;
+  fundImage: any;
 }
 
 const SharedImage = ({
   crpPoolAddress,
   totalValueLocked,
   socialIndex,
-  totalPerfomance,
-  productName
+  productName,
+  fundImage
 }: ISharedImageProps) => {
   // const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-  const { poolTokensArray }: { poolTokensArray: TokenDetails[] } = useSelector(
-    (state: RootStateOrAny) => state
-  )
-  const { poolImages }: { poolImages: TokenImages } = useSelector(
-    (state: RootStateOrAny) => state
-  )
+  const {
+    poolTokensArray,
+    poolImages,
+    performanceValues
+  }: {
+    poolTokensArray: TokenDetails[],
+    poolImages: TokenImages,
+    performanceValues: PerformanceValues
+  } = useSelector((state: RootStateOrAny) => state)
 
   return (
     <S.SharedImage className="bg-image-color">
       <Background />
       <S.Header>
         <S.Title>
-          <Image src="/assets/modalShareImage.png" width={40} height={40} />
+          <Image
+            src={fundImage.src || '/assets/modalShareImage.png'}
+            width={40}
+            height={40}
+          />
           <h1>{productName}</h1>
           <S.Detail>${socialIndex}</S.Detail>
           {/* <S.HorizontalLine /> */}
@@ -67,12 +75,16 @@ const SharedImage = ({
           <S.Info>
             <S.InfoTitle>
               <IconBar />
-              <span>Performance</span>
+              <span>{performanceValues.title}</span>
             </S.InfoTitle>
-            {totalPerfomance.startsWith('-') ? (
-              <S.InfoValue color="red">{totalPerfomance}%</S.InfoValue>
+            {performanceValues.performance.startsWith('-') ? (
+              <S.InfoValue color="red">
+                {performanceValues.performance}%
+              </S.InfoValue>
             ) : (
-              <S.InfoValue color="green">+{totalPerfomance}%</S.InfoValue>
+              <S.InfoValue color="green">
+                +{performanceValues.performance}%
+              </S.InfoValue>
             )}
           </S.Info>
           <S.Info>
@@ -88,7 +100,7 @@ const SharedImage = ({
               <span>Assets</span>
             </S.InfoTitle>
             <S.AssetsContainer>
-              {poolTokensArray.map((token, index) => (
+              {poolTokensArray.slice(0, -1).map((token, index) => (
                 <Image
                   key={index}
                   src={
@@ -102,7 +114,7 @@ const SharedImage = ({
           </S.Assets>
         </S.InfoContainer>
         <S.ChartContainer>
-          <ChartProducts crpPoolAddress={crpPoolAddress} height={320} />
+          <ChartProducts crpPoolAddress={crpPoolAddress} height={296} />
         </S.ChartContainer>
       </S.Main>
 

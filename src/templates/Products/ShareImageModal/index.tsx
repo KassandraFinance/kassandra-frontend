@@ -119,9 +119,8 @@ const ShareImageModal = ({
   return (
     <>
       {openModal ? (
-        <S.Backdrop>
-          {/* <S.Backdrop style={{ display: openModal ? 'flex' : 'none' }}> */}
-          <S.ModalContainer>
+        <S.Backdrop onClick={() => setOpenModal(false)}>
+          <S.ModalContainer onClick={event => event.stopPropagation()}>
             <S.ModalHeader>
               Share on your socials
               <Image
@@ -141,14 +140,6 @@ const ShareImageModal = ({
                 <TwitterShareButton
                   disabled={loading}
                   onClick={handleShareClick}
-                  // beforeOnClick={() =>
-                  //   (async () => {
-                  //     await () =>
-                  // setUrl(
-                  //   `${URL_API[process.env.NEXT_PUBLIC_URL_API || 4]}/shared/${v4()}-${productName.toLowerCase()}`
-                  // )()
-                  //   })()
-                  // }
                   title="Image of your stats on Kassandra Foundation"
                   url={url}
                 >

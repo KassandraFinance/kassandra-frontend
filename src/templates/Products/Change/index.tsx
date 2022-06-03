@@ -2,9 +2,11 @@ import React from 'react'
 import Image from 'next/image'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
 
 import { GET_POOL_PRICE } from './graphql'
 import { HeimCRPPOOL, SUBGRAPH_URL } from '../../../constants/tokenAddresses'
+import { actionSetPerformanceValues } from '../../../store/modules/performanceValues/actions'
 
 import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
 
@@ -12,14 +14,11 @@ import * as S from './styles'
 
 interface IChangeProps {
   crpPoolAddress: string;
-  setTotalPerfomance: (value: string) => void;
 }
 
-const Change = ({ crpPoolAddress, setTotalPerfomance }: IChangeProps) => {
-  // eslint-disable-next-line prettier/prettier
-  const [changeWeek, setChangeWeek] = React.useState<string[]>(
-    Array(5).fill('')
-  )
+const Change = ({ crpPoolAddress }: IChangeProps) => {
+  const dispatch = useDispatch()
+  const { performanceValues } = useSelector((state: RootStateOrAny) => state)
 
   const { data } = useSWR([GET_POOL_PRICE], query =>
     request(SUBGRAPH_URL, query, {
@@ -56,8 +55,13 @@ const Change = ({ crpPoolAddress, setTotalPerfomance }: IChangeProps) => {
       arrChangePrice[3] = changeQuarterly
       arrChangePrice[4] = changeYear
 
-      setTotalPerfomance(changeYear)
-      setChangeWeek(arrChangePrice)
+      dispatch(
+        actionSetPerformanceValues({
+          title: 'Weekly Performance',
+          performance: changeWeek,
+          changeWeek: arrChangePrice
+        })
+      )
     }
   }, [data])
 
@@ -79,11 +83,13 @@ const Change = ({ crpPoolAddress, setTotalPerfomance }: IChangeProps) => {
         </thead>
         <tbody>
           <tr>
-            {changeWeek.map((item: string, index: number) => (
-              <S.Td key={index} value={parseFloat(item)}>
-                {item.length === 0 ? '...' : `${item}%`}
-              </S.Td>
-            ))}
+            {performanceValues?.changeWeek?.map(
+              (item: string, index: number) => (
+                <S.Td key={index} value={parseFloat(item)}>
+                  {item.length === 0 ? '...' : `${item}%`}
+                </S.Td>
+              )
+            )}
           </tr>
         </tbody>
       </table>

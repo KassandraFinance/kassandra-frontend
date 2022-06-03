@@ -2,10 +2,12 @@ import React from 'react'
 import useSWR from 'swr'
 import request from 'graphql-request'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
 
 import { SUBGRAPH_URL } from '../../constants/tokenAddresses'
 
 import { actionSetPeriodSelected } from '../../store/modules/periodSelected/actions'
+import { actionSetChartSelected } from '../../store/modules/chartSelected/actions'
 
 import Loading from '../Loading'
 
@@ -16,8 +18,10 @@ import ChartAllocation from './ChartAllocation'
 import { GET_CHART } from './graphql'
 
 import * as S from './styles'
-import { useDispatch } from 'react-redux'
-import { actionSetChartSelected } from '../../store/modules/chartSelected/actions'
+import {
+  actionSetPerformanceValues,
+  PerformanceValues
+} from '../../store/modules/performanceValues/actions'
 
 const arrPeriod: string[] = ['1W', '1M', '3M', '1Y']
 
@@ -27,6 +31,8 @@ interface IChartProductsProps {
 
 const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
   const dispatch = useDispatch()
+  const { performanceValues }: { performanceValues: PerformanceValues } =
+    useSelector((state: RootStateOrAny) => state)
   const [inputChecked, setInputChecked] = React.useState<string>('Price')
   const [price, setPrice] = React.useState([])
   const [tvl, setTvl] = React.useState([])
@@ -55,6 +61,13 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
           price_period: 3600,
           period_selected: Math.trunc(dateNow.getTime() / 1000 - 60 * 60 * 24)
         }))
+        dispatch(
+          actionSetPerformanceValues({
+            title: 'Daily Performance',
+            performance: performanceValues?.changeWeek[0],
+            changeWeek: performanceValues.changeWeek
+          })
+        )
         break
       case '1W':
         setParams(prevState => ({
@@ -64,6 +77,15 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
             dateNow.getTime() / 1000 - 60 * 60 * 24 * 7
           )
         }))
+        dispatch(
+          actionSetPerformanceValues({
+            title: 'Weekly Performance',
+            performance:
+              performanceValues.changeWeek && performanceValues?.changeWeek[1],
+            changeWeek:
+              performanceValues.changeWeek && performanceValues.changeWeek
+          })
+        )
         break
       case '1M':
         setParams(prevState => ({
@@ -73,6 +95,13 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
             dateNow.getTime() / 1000 - 60 * 60 * 24 * 30
           )
         }))
+        dispatch(
+          actionSetPerformanceValues({
+            title: 'Monthly Performance',
+            performance: performanceValues?.changeWeek[2],
+            changeWeek: performanceValues.changeWeek
+          })
+        )
         break
       case '3M':
         setParams(prevState => ({
@@ -82,6 +111,13 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
             dateNow.getTime() / 1000 - 60 * 60 * 24 * 90
           )
         }))
+        dispatch(
+          actionSetPerformanceValues({
+            title: '3 Months Performance',
+            performance: performanceValues?.changeWeek[3],
+            changeWeek: performanceValues.changeWeek
+          })
+        )
         break
       case '1Y':
         setParams(prevState => ({
@@ -91,6 +127,13 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
             dateNow.getTime() / 1000 - 60 * 60 * 24 * 365
           )
         }))
+        dispatch(
+          actionSetPerformanceValues({
+            title: 'Yearly Performance',
+            performance: performanceValues?.changeWeek[4],
+            changeWeek: performanceValues.changeWeek
+          })
+        )
         break
       default:
         break

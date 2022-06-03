@@ -84,7 +84,6 @@ const network2coingeckoID: Networks = {
 }
 
 const Products = ({ product }: Input) => {
-  const [totalPerfomance, setTotalPerfomance] = React.useState<string>('')
   const [openModal, setOpenModal] = React.useState(false)
   const [url, setUrl] = React.useState<string>('')
   const [loading, setLoading] = React.useState<boolean>(true)
@@ -97,7 +96,9 @@ const Products = ({ product }: Input) => {
     decimals: 18
   })
   // eslint-disable-next-line prettier/prettier
-  const [priceAndChangeTokens, setPriceAndChangeTokens] = React.useState<IInfoTokenProps[]>([
+  const [priceAndChangeTokens, setPriceAndChangeTokens] = React.useState<
+    IInfoTokenProps[]
+  >([
     {
       change: 0,
       price: 0
@@ -310,8 +311,8 @@ const Products = ({ product }: Input) => {
           crpPoolAddress={product.sipAddress}
           totalValueLocked={infoPool.tvl}
           socialIndex={product.symbol}
-          totalPerfomance={totalPerfomance}
           productName={product.name}
+          fundImage={product.fundIcon}
         />
       </ShareImageModal>
       <Breadcrumb>
@@ -439,10 +440,7 @@ const Products = ({ product }: Input) => {
               </S.IntroCharts>
               <ChartProducts crpPoolAddress={product.sipAddress} />
               <ScrollUpButton />
-              <Change
-                crpPoolAddress={product.sipAddress}
-                setTotalPerfomance={setTotalPerfomance}
-              />
+              <Change crpPoolAddress={product.sipAddress} />
               <MyAsset
                 crpPoolAddress={product.sipAddress}
                 price={infoPool.price}

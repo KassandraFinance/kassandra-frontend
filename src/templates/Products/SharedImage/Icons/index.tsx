@@ -136,6 +136,8 @@ export const Background = () => {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="xMinYMin slice"
+        strokeWidth="0"
+        strokeLinejoin="round"
       >
         <g filter="url(#filter0_f_1462_30422)">
           <ellipse cx="230.5" cy="210.5" rx="126.5" ry="116.5" fill="#26DBDB" />

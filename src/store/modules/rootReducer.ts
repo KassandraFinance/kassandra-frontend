@@ -8,6 +8,7 @@ import chartSelectedReducer from './chartSelected/reducer'
 import periodSelectedReducer from './periodSelected/reducer'
 import userWalletAddressReducer from './userWalletAddress/reducer'
 import tokenAddress2IndexReducer from './tokenAddress2Index/reducer'
+import performanceValuesReducer from './performanceValues/reducer'
 
 export default combineReducers({
   fees: feesReducer,
@@ -17,5 +18,6 @@ export default combineReducers({
   chartSelected: chartSelectedReducer,
   periodSelected: periodSelectedReducer,
   userWalletAddress: userWalletAddressReducer,
-  tokenAddress2Index: tokenAddress2IndexReducer
+  tokenAddress2Index: tokenAddress2IndexReducer,
+  performanceValues: performanceValuesReducer
 })

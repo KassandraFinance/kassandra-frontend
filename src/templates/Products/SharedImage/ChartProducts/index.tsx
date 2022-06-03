@@ -247,7 +247,7 @@ const ChartProducts = ({ crpPoolAddress, height }: IChartProductsProps) => {
       </S.Selects>
       {loading ? (
         <S.Wrapper height={height}>
-          <Loading marginTop={14} />
+          <Loading marginTop={10} />
         </S.Wrapper>
       ) : null}
       {inputChecked === 'Price' && !loading && (
