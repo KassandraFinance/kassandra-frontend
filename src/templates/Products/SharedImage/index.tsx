@@ -100,7 +100,7 @@ const SharedImage = ({
               <span>Assets</span>
             </S.InfoTitle>
             <S.AssetsContainer>
-              {poolTokensArray.map((token, index) => (
+              {poolTokensArray.slice(0, -1).map((token, index) => (
                 <Image
                   key={index}
                   src={
