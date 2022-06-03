@@ -27,6 +27,15 @@ interface TokenIconsProps {
   poolInfo: IPoolInfoProps[];
 }
 
+const addressChanger: { [key: string]: string } = {
+  '0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E':
+    '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab', // WETH
+  '0x964555644E067c560A4C144360507E80c1104784':
+    '0xc7198437980c041c805a1edcba50c1ce5db95118', //USDT
+  '0xbbcED92AC9B958F88A501725f080c0360007e858':
+    '0x50b7545627a5162f82a992c33b87adc75187b218' //WBTC
+}
+
 const TokenIcons = ({ images, poolInfo }: TokenIconsProps) => {
   return (
     <S.Container>
@@ -35,11 +44,18 @@ const TokenIcons = ({ images, poolInfo }: TokenIconsProps) => {
         .map((asset, index) => (
           <S.ImageWrapper
             key={index}
-            className={images[asset.token.id] ? '' : 'svg-none'}
+            className={
+              images[addressChanger[asset.token.id] ?? asset.token.id]
+                ? ''
+                : 'svg-none'
+            }
             index={index}
           >
             <Image
-              src={images[asset.token.id] || none}
+              src={
+                images[addressChanger[asset.token.id] ?? asset.token.id] ||
+                none.src
+              }
               alt=""
               width={18}
               height={18}

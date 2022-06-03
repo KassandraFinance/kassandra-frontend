@@ -121,6 +121,7 @@ export const Coin = styled.span<ICoinProps>`
     max-width: 24px;
     margin-right: 16px;
     margin-left: 8px;
+    border-radius: 50%;
   }
 
   span {
