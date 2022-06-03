@@ -172,113 +172,117 @@ const MyAsset = ({
   }, [priceToken])
 
   return (
-    <S.MyAsset>
-      <S.TitleWrapper>
-        <S.Title>
-          <Image src={iconBar} alt="" width={18} height={18} />
-          <h2>My asset</h2>
-        </S.Title>
-
-        <S.AddToken
-          type="button"
-          onClick={() => {
-            registerToken(
-              crpPoolAddress,
-              symbol.toLocaleUpperCase(),
-              Number(decimals)
-            )
-            matomoEvent('click-add-metamask', `add-${symbol}`)
-          }}
-        >
-          <Image
-            src="/assets/logos/metamask.svg"
-            alt="metamask logo"
-            width={14}
-            height={14}
-          />
-          <span>Add to Metamask</span>
-        </S.AddToken>
-      </S.TitleWrapper>
-
-      <S.Table>
-        <S.THead>
-          <S.Tr>
-            <S.Th>Token Name</S.Th>
-            <S.Th>Staked</S.Th>
-            <S.Th>Balance</S.Th>
-          </S.Tr>
-        </S.THead>
-
-        <S.TBody>
-          <S.Tr>
-            <S.Td>
-              <S.TdWrapper>
-                <Image src={icon} alt="" width={20} height={20} />
-                <span>{symbol}</span>
-              </S.TdWrapper>
-            </S.Td>
-            <S.Td>
-              <S.TdWrapper>
-                <span>
-                  {userWalletAddress ? BNtoDecimal(stakedToken, 18) : '...'}{' '}
-                  {symbol}
-                </span>
-                <S.Value>
-                  $
-                  {userWalletAddress
-                    ? BNtoDecimal(
-                        Big(stakedToken.toString())
-                          .div(Big(10).pow(18))
-                          .mul(price),
-                        2
-                      )
-                    : '...'}
-                </S.Value>
-              </S.TdWrapper>
-            </S.Td>
-            <S.Td>
-              <S.TdWrapper>
-                <span>
-                  {userWalletAddress ? BNtoDecimal(balance, 18) : '...'}{' '}
-                  {symbol}
-                </span>
-                <S.Value>
-                  $
-                  {userWalletAddress
-                    ? BNtoDecimal(
-                        Big(balance.toString()).div(Big(10).pow(18)).mul(price),
-                        2
-                      )
-                    : '...'}
-                </S.Value>
-              </S.TdWrapper>
-            </S.Td>
-          </S.Tr>
-        </S.TBody>
-      </S.Table>
-
+    <>
       {symbol === 'aHYPE' && (
-        <S.ButtonWrapper>
-          <Button
-            backgroundSecondary
-            text={
-              userWalletAddress
-                ? `Stake ${symbol} to earn ${BNtoDecimal(apr, 0)}% APR`
-                : 'Connect Wallet'
-            }
-            fullWidth
-            size="huge"
-            onClick={
-              userWalletAddress
-                ? () => router.push('/farm')
-                : () => setIsModaWallet(true)
-            }
-          />
-        </S.ButtonWrapper>
-      )}
+        <S.MyAsset>
+          <S.TitleWrapper>
+            <S.Title>
+              <Image src={iconBar} alt="" width={18} height={18} />
+              <h2>My asset</h2>
+            </S.Title>
 
-      {isModalWallet && <ModalWalletConnect setModalOpen={setIsModaWallet} />}
-    </S.MyAsset>
+            <S.AddToken
+              type="button"
+              onClick={() => {
+                registerToken(
+                  crpPoolAddress,
+                  symbol.toLocaleUpperCase(),
+                  Number(decimals)
+                )
+                matomoEvent('click-add-metamask', `add-${symbol}`)
+              }}
+            >
+              <Image
+                src="/assets/logos/metamask.svg"
+                alt="metamask logo"
+                width={14}
+                height={14}
+              />
+              <span>Add to Metamask</span>
+            </S.AddToken>
+          </S.TitleWrapper>
+
+          <S.Table>
+            <S.THead>
+              <S.Tr>
+                <S.Th>Token Name</S.Th>
+                <S.Th>Staked</S.Th>
+                <S.Th>Balance</S.Th>
+              </S.Tr>
+            </S.THead>
+
+            <S.TBody>
+              <S.Tr>
+                <S.Td>
+                  <S.TdWrapper>
+                    <Image src={icon} alt="" width={20} height={20} />
+                    <span>{symbol}</span>
+                  </S.TdWrapper>
+                </S.Td>
+                <S.Td>
+                  <S.TdWrapper>
+                    <span>
+                      {userWalletAddress ? BNtoDecimal(stakedToken, 18) : '...'}{' '}
+                      {symbol}
+                    </span>
+                    <S.Value>
+                      $
+                      {userWalletAddress
+                        ? BNtoDecimal(
+                            Big(stakedToken.toString())
+                              .div(Big(10).pow(18))
+                              .mul(price),
+                            2
+                          )
+                        : '...'}
+                    </S.Value>
+                  </S.TdWrapper>
+                </S.Td>
+                <S.Td>
+                  <S.TdWrapper>
+                    <span>
+                      {userWalletAddress ? BNtoDecimal(balance, 18) : '...'}{' '}
+                      {symbol}
+                    </span>
+                    <S.Value>
+                      $
+                      {userWalletAddress
+                        ? BNtoDecimal(
+                            Big(balance.toString())
+                              .div(Big(10).pow(18))
+                              .mul(price),
+                            2
+                          )
+                        : '...'}
+                    </S.Value>
+                  </S.TdWrapper>
+                </S.Td>
+              </S.Tr>
+            </S.TBody>
+          </S.Table>
+          <S.ButtonWrapper>
+            <Button
+              backgroundSecondary
+              text={
+                userWalletAddress
+                  ? `Stake ${symbol} to earn ${BNtoDecimal(apr, 0)}% APR`
+                  : 'Connect Wallet'
+              }
+              fullWidth
+              size="huge"
+              onClick={
+                userWalletAddress
+                  ? () => router.push('/farm')
+                  : () => setIsModaWallet(true)
+              }
+            />
+          </S.ButtonWrapper>
+          {isModalWallet && (
+            <ModalWalletConnect setModalOpen={setIsModaWallet} />
+          )}
+        </S.MyAsset>
+      )}
+    </>
   )
 }
 
