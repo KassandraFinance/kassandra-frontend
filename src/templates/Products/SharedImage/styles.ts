@@ -144,6 +144,10 @@ export const AssetsContainer = styled.div`
   gap: 2.4rem;
 
   margin-top: 1.6rem;
+
+  img {
+    border-radius: 50%;
+  }
 `
 
 export const ChartContainer = styled.div`
