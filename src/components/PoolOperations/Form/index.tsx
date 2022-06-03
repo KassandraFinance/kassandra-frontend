@@ -369,8 +369,13 @@ const Form = ({
         }
 
         setSwapOutPrice(newSwapOutPrice)
-      } catch (error) {
+      } catch (error: any) {
+        const errorStr = error.toString()
         if (userWalletAddress.length > 0) {
+          if (errorStr.search('ERR_BPOW_BASE_TOO_HIGH') > -1) {
+            ToastWarning("The amount can't be more than half of what's in the pool!")
+            return
+          }
           ToastWarning('Could not connect with the blockchain to calculate prices.')
         }
       }
@@ -544,8 +549,12 @@ const Form = ({
 
         try {
           if (userWalletAddress.length > 0 && swapInAmount.gt(new BigNumber('0'))) {
+            const tokensInPool = await corePool.currentTokens()
+            const tokensWithdraw = tokensInPool.map(token => invertToken[token] ?? token)
+
             await proxy.tryExitPool(
               swapInAmount,
+              tokensWithdraw,
               Array(newSwapOutAmount.length).fill(new BigNumber('0')),
               userWalletAddress
             )
@@ -553,11 +562,16 @@ const Form = ({
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
           const errorStr = error.toString()
-
+          
           if (errorStr.search(/ERR_(BPOW_BASE_TOO_|MATH_APPROX)/) > -1) {
             setErrorMsg('This amount is too low for the pool!')
             return
           }
+
+          if (errorStr.search('below minimum') > -1) {
+            setErrorMsg("This amount is below minimum withdraw!")
+            return
+          } 
 
           if (swapInAmount.gt(swapInBalance)) {
             setErrorMsg('This amount exceeds your balance!')
@@ -634,6 +648,11 @@ const Form = ({
           setErrorMsg("The amount you are trying to obtain can't be more than a third of what's in the pool!")
           return
         }
+
+        if (errorStr.search('below minimum') > -1) {
+          setErrorMsg("This amount is below minimum withdraw!")
+          return
+        } 
 
         if (swapInAmount.gt(swapInBalance)) {
           setErrorMsg('This amount exceeds your balance!')

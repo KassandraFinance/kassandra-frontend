@@ -89,6 +89,49 @@ const useProxy = (address: string, crpAddress: string) => {
     }
 
     /* CALL */
+
+    const tryJoinswapExternAmountIn = async (
+      tokenIn: string,
+      tokenAmountIn: BigNumber,
+      minPoolAmountOut: BigNumber,
+      walletAddress: string
+    ) => {
+      const wrapped = await contract.methods.wNativeToken().call()
+
+      const avaxValue = tokenIn === wrapped ? tokenAmountIn : new BigNumber(0)
+      
+      const res = await contract.methods
+        .joinswapExternAmountIn(crpAddress, tokenIn, tokenAmountIn, minPoolAmountOut)
+        .call({ from: walletAddress, value: avaxValue })
+  
+      return res
+    }
+
+    const tryExitswapPoolAmountIn = async (
+      tokenOut: string,
+      poolAmountIn: BigNumber,
+      minAmountOut: BigNumber,
+      walletAddress: string
+    ) => {
+
+      return contract.methods.exitswapPoolAmountIn(crpAddress, tokenOut, poolAmountIn, minAmountOut).call(
+        { from: walletAddress }
+      )
+    }
+
+    const tryExitPool = async (
+      poolAmountIn: BigNumber,
+      tokensOut: Array<string>,
+      minAmountsOut: Array<BigNumber>,
+      walletAddress: string,
+    ) => {
+      const res = await contract.methods
+        .exitPool(crpAddress, poolAmountIn, tokensOut, minAmountsOut)
+        .call({ from: walletAddress })
+
+      return res
+    }
+
     const trySwapExactAmountIn = async (
       tokenIn: string, 
       tokenAmountIn: BigNumber,
@@ -109,44 +152,6 @@ const useProxy = (address: string, crpAddress: string) => {
       return res
     }
 
-    const tryJoinswapExternAmountIn = async (
-      tokenIn: string,
-      tokenAmountIn: BigNumber,
-      minPoolAmountOut: BigNumber,
-      walletAddress: string
-    ) => {
-      const wrapped = await contract.methods.wNativeToken().call()
-
-      const avaxValue = tokenIn === wrapped ? tokenAmountIn : new BigNumber(0)
-        const res = await contract.methods
-          .joinswapExternAmountIn(crpAddress, tokenIn, tokenAmountIn, minPoolAmountOut)
-          .call({ from: walletAddress, value: avaxValue })
-  
-      return res
-    }
-
-    const tryExitPool = (
-      poolAmountIn: BigNumber,
-      minAmountsOut: Array<BigNumber>,
-      walletAddress: string
-    ) => {
-      return contract.methods.exitPool(crpAddress, poolAmountIn, minAmountsOut).call(
-        { from: walletAddress }
-      )
-    }
-
-    const tryExitswapPoolAmountIn = async (
-      tokenOut: string,
-      poolAmountIn: BigNumber,
-      minAmountOut: BigNumber,
-      walletAddress: string
-    ) => {
-
-      return contract.methods.exitswapPoolAmountIn(crpAddress, tokenOut, poolAmountIn, minAmountOut).call(
-        { from: walletAddress }
-      )
-    }
-
     return {
       joinswapExternAmountIn,
       exitswapPoolAmountIn,
@@ -155,8 +160,8 @@ const useProxy = (address: string, crpAddress: string) => {
       
       tryJoinswapExternAmountIn,
       tryExitswapPoolAmountIn,
-      trySwapExactAmountIn,
       tryExitPool,
+      trySwapExactAmountIn
     }
   }, [contract])
 }
