@@ -35,7 +35,11 @@ export const TextWrapper = styled.div`
     }
 
     @media (max-width: 450px) {
+      margin-bottom: 2.4rem;
+
       font-size: ${theme.font.sizes.font24};
+      font-weight: ${theme.font.weight.bold};
+      line-height: 3.2rem;
     }
   }
 
@@ -78,6 +82,10 @@ export const Divider = styled.div`
   border-bottom-style: solid;
   border-bottom-color: #ffbf00;
   border-radius: 0.4rem;
+
+  @media (max-width: 450px) {
+    margin-block: 2.4rem;
+  }
 `
 
 export const Link = styled.a`
