@@ -21,6 +21,12 @@ export const VotingPower = styled.div<IVotingPowerProps>`
   @media (max-width: 420px) {
     width: ${props => (props.isMobile ? 'calc(100vw - 3.2rem)' : '29rem')};
   }
+
+  @media (max-width: 380px) {
+    max-width: 29.5rem;
+    width: 100%;
+    min-width: 25rem;
+  }
 `
 
 export const YourVotingPower = styled.div`
