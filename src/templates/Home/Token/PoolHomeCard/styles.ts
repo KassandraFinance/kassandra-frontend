@@ -60,6 +60,10 @@ export const CardHeader = styled.div<CardHeaderProps>`
 
   border-top-left-radius: 1.2rem;
   border-top-right-radius: 1.2rem;
+
+  @media (max-width: 500px) {
+    height: 8.2rem;
+  }
 `
 
 export const ImageWrapper = styled.div`
@@ -77,6 +81,10 @@ export const ImageWrapper = styled.div`
 
   @media (max-width: 500px) {
     margin-left: 2rem;
+
+    width: 4.8rem;
+    height: 4.8rem;
+    padding-top: 0;
   }
 `
 
@@ -151,6 +159,10 @@ export const TokenInfo = styled.div`
   @media (max-width: 500px) {
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+
+  @media (max-width: 400px) {
+    margin-bottom: 0rem;
   }
 `
 
@@ -240,6 +252,11 @@ export const CardFooter = styled.div`
     @media (max-width: 960px) {
       width: 100%;
     }
+
+    @media (max-width: 400px) {
+      font-size: 1.4rem;
+      height: 4.2rem;
+    }
   }
 
   a {
@@ -261,6 +278,12 @@ export const CardFooter = styled.div`
         path {
           stroke: ${theme.colors.cyan};
         }
+      }
+    }
+
+    span {
+      @media (max-width: 400px) {
+        font-size: 1.4rem;
       }
     }
   }
@@ -334,6 +357,11 @@ export const Info = styled.div`
     letter-spacing: 0.6rem;
     text-align: left;
     text-transform: uppercase;
+
+    @media (max-width: 400px) {
+      font-size: 1.2rem;
+      letter-spacing: 0.4rem;
+    }
   }
 
   span {
@@ -367,6 +395,23 @@ export const InfoList = styled.ul`
     line-height: 1.2rem;
     letter-spacing: 0.21rem;
     text-transform: uppercase;
-    word-break: break-all;
+    text-align: left;
+
+    /* :not(:last-child) {
+      @media (max-width: 400px) {
+        .image {
+          margin-top: -15px;
+        }
+      }
+    } */
+
+    @media (max-width: 400px) {
+      line-height: 1.6rem;
+
+      .image {
+        min-width: 2rem;
+        height: 2rem;
+      }
+    }
   }
 `

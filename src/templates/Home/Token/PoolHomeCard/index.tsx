@@ -290,19 +290,25 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
         <span>{pool.fundSummary}</span>
         <S.InfoList>
           <li>
-            <Image src={arrowRight} width={20} height={20} />
+            <div className="image">
+              <Image src={arrowRight} width={20} height={20} />
+            </div>
             {pool.symbol !== 'aHYPE'
               ? 'Consistent gains with blue chips'
               : 'EASY EXPOSURE TO THE HOTTEST ASSETS'}
           </li>
           <li>
-            <Image src={arrowRight} width={20} height={20} />
+            <div className="image">
+              <Image src={arrowRight} width={20} height={20} />
+            </div>
             {pool.symbol !== 'aHYPE'
               ? 'Hedge your exposure'
               : 'SURFING THE TIDES OF HYPE ON AVALANCHE'}
           </li>
           <li>
-            <Image src={arrowRight} width={20} height={20} />
+            <div className="image">
+              <Image src={arrowRight} width={20} height={20} />
+            </div>
             {pool.symbol !== 'aHYPE' ? 'Improve your hodl' : 'HIGH VOLATILITY'}
           </li>
         </S.InfoList>
