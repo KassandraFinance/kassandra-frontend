@@ -67,12 +67,13 @@ export const LinkContent = styled.div`
   display: flex;
   justify-content: space-between;
   max-width: 25rem;
-  margin: 1.25rem 0;
+  margin-top: 1.2rem;
+  margin-bottom: 2.4rem;
 `
 
 export const ContractsName = styled.p`
-  margin-top: 1.25rem;
-  margin-bottom: 0.63rem;
+  /* margin-top: 1.25rem; */
+  margin-bottom: 1.2rem;
 
   font-weight: ${theme.font.weight.normal} !important;
 `
