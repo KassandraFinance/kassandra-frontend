@@ -3,7 +3,7 @@ import useSWR from 'swr'
 import Image from 'next/image'
 import detectEthereumProvider from '@metamask/detect-provider'
 import { request } from 'graphql-request'
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import Big from 'big.js'
 import BigNumber from 'bn.js'
@@ -59,11 +59,6 @@ const invertToken: { [key: string]: string } = {
     '0x50b7545627a5162f82a992c33b87adc75187b218' //WBTC
 }
 
-export interface IInfoTokenProps {
-  change: number;
-  price: number;
-}
-
 interface InfoPool {
   tvl: string;
   swapFees: string;
@@ -77,6 +72,14 @@ interface Input {
   product: ProductDetails;
 }
 
+export interface IPriceAndChangeTokens {
+  [key: string]: {
+    change: number,
+    price: number,
+    image: string
+  };
+}
+
 const network2coingeckoID: Networks = {
   Ropsten: 'ethereum',
   Avalanche: 'avalanche',
@@ -85,7 +88,6 @@ const network2coingeckoID: Networks = {
 
 const Products = ({ product }: Input) => {
   const [openModal, setOpenModal] = React.useState(false)
-  const [url, setUrl] = React.useState<string>('')
   const [loading, setLoading] = React.useState<boolean>(true)
   const [infoPool, setInfoPool] = React.useState<InfoPool>({
     tvl: '...',
@@ -95,19 +97,6 @@ const Products = ({ product }: Input) => {
     price: '0',
     decimals: 18
   })
-  // eslint-disable-next-line prettier/prettier
-  const [priceAndChangeTokens, setPriceAndChangeTokens] = React.useState<
-    IInfoTokenProps[]
-  >([
-    {
-      change: 0,
-      price: 0
-    }
-  ])
-
-  const { poolTokensArray }: { poolTokensArray: TokenDetails[] } = useSelector(
-    (state: RootStateOrAny) => state
-  )
 
   const { trackProductPageView } = useMatomoEcommerce()
   const dispatch = useDispatch()
@@ -121,7 +110,11 @@ const Products = ({ product }: Input) => {
     })
   )
 
-  const { data: coinGeckoResponse } = useSWR(url)
+  const { data: coinGeckoResponse } = useSWR(
+    `/api/image-coingecko?poolinfo=${
+      network2coingeckoID[product.platform]
+    }&tokenAddress=${product.addresses}`
+  )
 
   async function getHoldings(
     token: string,
@@ -149,6 +142,98 @@ const Products = ({ product }: Input) => {
     return { balancePoolYY: Big(balance), decimalsYY: new BigNumber(18) }
   }
 
+  async function getTokenDetails() {
+    const pool: TokenDetails = {
+      balance_in_pool: '',
+      address: data.pool.id,
+      allocation: 0,
+      allocation_goal: 0,
+      decimals: new BigNumber(data.pool.decimals),
+      price: Number(data.pool.price_usd),
+      name: data.pool.name,
+      symbol: data.pool.symbol
+    }
+
+    const tokenDetails: TokenDetails[] = await Promise.all(
+      data.pool.underlying_assets.map(
+        async (item: {
+          balance: string,
+          token: {
+            id: string,
+            decimals: string | number | BigNumber,
+            price_usd: string,
+            name: string,
+            symbol: string
+          },
+          weight_goal_normalized: string,
+          weight_normalized: string
+        }) => {
+          let symbol
+          let balance
+          let address
+          let decimals: BigNumber
+          if (item.token.symbol === 'YRT') {
+            const { balancePoolYY, decimalsYY } = await getHoldings(
+              item.token.id,
+              item.balance
+            )
+            symbol = item.token.name.split(' ').pop()
+            balance = balancePoolYY
+            address = invertToken[item.token.id]
+            decimals = decimalsYY
+          } else {
+            symbol = item.token.symbol === 'WAVAX' ? 'AVAX' : item.token.symbol
+            balance = item.balance
+            address = item.token.id
+            decimals = new BigNumber(item.token.decimals)
+          }
+          return {
+            balance_in_pool: balance,
+            address,
+            allocation: (Number(item.weight_normalized) * 100).toFixed(2),
+            allocation_goal: (
+              Number(item.weight_goal_normalized) * 100
+            ).toFixed(2),
+            decimals,
+            price: Number(
+              coinGeckoResponse.infoToken[
+                invertToken[item.token.id] ?? item.token.id
+              ].price
+            ),
+            name: item.token.name,
+            symbol,
+            priceChange: Number(
+              coinGeckoResponse.infoToken[
+                invertToken[item.token.id] ?? item.token.id
+              ].change
+            ),
+            image:
+              coinGeckoResponse.images[
+                invertToken[item.token.id] ?? item.token.id
+              ]
+          }
+        }
+      )
+    )
+
+    tokenDetails.push(pool)
+
+    dispatch(
+      actionSetTokenAddress2Index(
+        tokenDetails.reduce((acc, cur, i) => ({ [cur.address]: i, ...acc }), {})
+      )
+    )
+    dispatch(
+      actionSetFees({
+        Invest: '0',
+        Withdraw: (data.pool.fee_exit * 100).toFixed(2),
+        Swap: (data.pool.fee_swap * 100).toFixed(2)
+      })
+    )
+    dispatch(actionGetPoolTokensArray(tokenDetails))
+    dispatch(actionSetPoolImages(coinGeckoResponse.images))
+  }
+
   React.useEffect(() => {
     setTimeout(() => {
       setLoading(false)
@@ -162,16 +247,13 @@ const Products = ({ product }: Input) => {
         product.symbol,
         product.categories
       )
-      setUrl(
-        `/api/image-coingecko?poolinfo=${
-          network2coingeckoID[product.platform]
-        }&tokenAddress=${product.addresses}`
-      )
     }
   }, [product])
 
   React.useEffect(() => {
-    if (data) {
+    if (data && coinGeckoResponse) {
+      getTokenDetails()
+
       const swapFees = data.swap.reduce(
         (acc: Big, current: { volume_usd: string }) => {
           return Big(current.volume_usd).add(acc)
@@ -202,101 +284,7 @@ const Products = ({ product }: Input) => {
         decimals: data.pool.decimals
       })
     }
-  }, [data])
-
-  React.useEffect(() => {
-    if (data) {
-      const product: TokenDetails = {
-        balance_in_pool: '',
-        address: data.pool.id,
-        allocation: 0,
-        allocation_goal: 0,
-        decimals: new BigNumber(data.pool.decimals),
-        price: Number(data.pool.price_usd),
-        name: data.pool.name,
-        symbol: data.pool.symbol
-      }
-      let res: TokenDetails[]
-      ;(async () => {
-        res = await Promise.all(
-          data.pool.underlying_assets.map(
-            async (item: {
-              balance: string,
-              token: {
-                id: string,
-                decimals: string | number | BigNumber,
-                price_usd: string,
-                name: string,
-                symbol: string
-              },
-              weight_goal_normalized: string,
-              weight_normalized: string
-            }) => {
-              let symbol
-              let balance
-              let address
-              let decimals: BigNumber
-              if (item.token.symbol === 'YRT') {
-                const { balancePoolYY, decimalsYY } = await getHoldings(
-                  item.token.id,
-                  item.balance
-                )
-                symbol = item.token.name.split(' ').pop()
-                balance = balancePoolYY
-                address = invertToken[item.token.id]
-                decimals = decimalsYY
-              } else {
-                symbol =
-                  item.token.symbol === 'WAVAX' ? 'AVAX' : item.token.symbol
-                balance = item.balance
-                address = item.token.id
-                decimals = new BigNumber(item.token.decimals)
-              }
-              return {
-                balance_in_pool: balance,
-                address,
-                allocation: (Number(item.weight_normalized) * 100).toFixed(2),
-                allocation_goal: (
-                  Number(item.weight_goal_normalized) * 100
-                ).toFixed(2),
-                decimals,
-                price: Number(item.token.price_usd),
-                name: item.token.name,
-                symbol
-              }
-            }
-          )
-        )
-
-        res.push(product)
-
-        dispatch(
-          actionSetTokenAddress2Index(
-            res.reduce((acc, cur, i) => ({ [cur.address]: i, ...acc }), {})
-          )
-        )
-        dispatch(
-          actionSetFees({
-            Invest: '0',
-            Withdraw: (data.pool.fee_exit * 100).toFixed(2),
-            Swap: (data.pool.fee_swap * 100).toFixed(2)
-          })
-        )
-        dispatch(actionGetPoolTokensArray(res))
-      })()
-    }
-  }, [data])
-
-  React.useEffect(() => {
-    if (
-      coinGeckoResponse &&
-      coinGeckoResponse.infoToken &&
-      coinGeckoResponse.images
-    ) {
-      setPriceAndChangeTokens(coinGeckoResponse.infoToken)
-      dispatch(actionSetPoolImages(coinGeckoResponse.images))
-    }
-  }, [poolTokensArray, product, coinGeckoResponse])
+  }, [data, coinGeckoResponse])
 
   return (
     <>
@@ -459,7 +447,7 @@ const Products = ({ product }: Input) => {
                 icon={product.fundIcon}
               />
               <PoweredBy partners={product.partners} />
-              <Distribution priceAndChange={priceAndChangeTokens} />
+              {coinGeckoResponse && <Distribution />}
               <TokenDescription symbol={product.symbol} />
             </S.ProductDetails>
             <PoolOperations
