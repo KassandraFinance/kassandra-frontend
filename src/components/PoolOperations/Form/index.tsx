@@ -459,6 +459,11 @@ const Form = ({
             return
           }
 
+          if (errorStr.search('below minimum') > -1) {
+            setErrorMsg("This amount is below minimum withdraw!")
+            return
+          } 
+
           if (swapInAmount.gt(swapInBalance)) {
             setErrorMsg('This amount exceeds your balance!')
             return;
