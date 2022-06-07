@@ -341,7 +341,7 @@ const Form = ({
               return
             }
 
-            if (swapInAmount.gt(swapInBalance)) {
+            if (swapInAmount.gt(swapInBalance) && Number(swapInAmount.toString()) > 0) {
               setErrorMsg('This amount exceeds your balance!')
               return;
             }
@@ -989,11 +989,11 @@ const Form = ({
     if (swapInAmount.gt(new BigNumber(0)) && parseFloat(swapOutAmount[0].toString()) > 0) {
       const usdAmountIn = Big(swapInAmount.toString())
         .mul(Big(priceDollar(swapInAddress, poolTokensArray)))
-        .div(Big(10).pow(18))
+        .div(Big(10).pow(Number(poolTokensArray[tokenInIndex]?.decimals || 18)))
 
       const usdAmountOut = Big(swapOutAmount[0].toString())
         .mul(Big(priceDollar(swapOutAddress, poolTokensArray)))
-        .div(Big(10).pow(18))
+        .div(Big(10).pow(Number(poolTokensArray[tokenAddress2Index[swapOutAddress]]?.decimals || 18)))
 
       const subValue = usdAmountIn.sub(usdAmountOut)
       const valuePriceImpact = subValue.div(usdAmountIn).mul(100)
@@ -1186,23 +1186,26 @@ const Form = ({
                     typeWithdrawChecked === "Best_value" ?
                       `${title} ${'$' + priceInDollarOnWithdraw}`
                       :
-                      `${title} ${'$' + BNtoDecimal(
+                      `${title} ${'$' + 
+                      BNtoDecimal(
                         Big((swapOutAmount[0] || 0).toString())
                           .mul(Big(priceDollar(swapOutAddress, poolTokensArray)))
-                          .div(Big(10).pow(18)),
+                          .div(Big(10).pow(Number(poolTokensArray[tokenAddress2Index[swapOutAddress]]?.decimals || 18))),
                         18,
                         2,
                         2
-                      )}`
+                      )
+                    }`
                     :
                     `${title} ${'$' + BNtoDecimal(
                       Big((swapOutAmount[0] || 0).toString())
                         .mul(Big(priceDollar(swapOutAddress, poolTokensArray)))
-                        .div(Big(10).pow(18)),
+                        .div(Big(10).pow(Number(poolTokensArray[tokenAddress2Index[swapOutAddress]]?.decimals || 18))),
                       18,
                       2,
                       2
-                    )}`
+                    )
+                  }`
                   :
                   `${title}`
                 :
