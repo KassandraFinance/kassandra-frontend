@@ -181,7 +181,7 @@ const InputTokens = ({
                   BNtoDecimal(
                     Big(swapAmount.toString())
                       .mul(Big(priceDollar(swapOutAddress, poolTokensArray)))
-                      .div(Big(10).pow(18)),
+                      .div(Big(10).pow(Number(decimals))),
                     18,
                     2,
                     2
