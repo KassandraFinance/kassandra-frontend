@@ -28,7 +28,7 @@ const Distribution = ({ priceAndChange }: IDistributionProps) => {
         poolTokensArray.length - 1 === priceAndChange.length && (
           <S.Distribution>
             <S.Title>
-              <Image src={iconBar} alt="" />
+              <Image src={iconBar} alt="" width={18} height={18} />
               <h2>Distribution</h2>
             </S.Title>
             <S.Line />

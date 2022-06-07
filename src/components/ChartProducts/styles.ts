@@ -48,6 +48,24 @@ export const dictionary: { [key: number]: string } = {
 
 export const ChartProduct = styled.div`
   position: relative;
+
+  .recharts-responsive-container {
+    @media (max-width: 380px) {
+      height: 400px !important;
+    }
+  }
+
+  .recharts-wrapper {
+    @media (max-width: 380px) {
+      height: 400px !important;
+    }
+  }
+
+  .recharts-surface {
+    @media (max-width: 380px) {
+      margin-top: 5rem;
+    }
+  }
 `
 
 export const Selects = styled.div`

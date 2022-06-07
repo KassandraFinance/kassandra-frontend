@@ -16,6 +16,12 @@ export const StakeWithPowerVote = styled.div`
     flex-wrap: wrap;
     margin: 50px 30px;
   }
+
+  /* @media (max-width: 380px) {
+    max-width: 29.5rem;
+    width: 100%;
+    min-width: 28rem;
+  } */
 `
 
 interface INameStakeProps {

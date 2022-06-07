@@ -25,6 +25,7 @@ export const CardWrapper = styled.div`
   }
   @media (max-width: 440px) {
     max-width: 38rem;
+    min-height: 40.1rem;
   }
   @media (max-width: 380px) {
     max-width: 34rem;

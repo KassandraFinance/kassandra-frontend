@@ -26,6 +26,10 @@ export const TitleandIcon = styled.div`
     color: #ffffff;
     line-height: 104%;
   }
+
+  @media (max-width: 450px) {
+    justify-content: center;
+  }
 `
 export const Icon = styled.img`
   max-width: 1.75rem;
@@ -43,6 +47,11 @@ export const TokenInfo = styled.div`
     grid-template-columns: 1fr 1fr;
     align-items: end;
     justify-content: center;
+  }
+
+  @media (max-width: 420px) {
+    align-items: center;
+    gap: 0 3rem;
   }
 `
 export const Values = styled.div`

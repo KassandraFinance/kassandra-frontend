@@ -1,6 +1,14 @@
 import styled from 'styled-components'
 
 export const Content = styled.div`
+  @media (max-width: 380px) {
+    margin-top: 1.5rem;
+  }
+
+  @media (max-width: 375px) {
+    margin-top: 2.4rem;
+  }
+
   p {
     color: #bdbdbd;
     font-size: 14px;

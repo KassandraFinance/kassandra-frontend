@@ -302,6 +302,10 @@ export const ResponsabilitiesTitle = styled.div`
     font-size: 3.6rem;
     line-height: 104%;
     font-weight: ${theme.font.weight.semibold};
+
+    @media (max-width: 430px) {
+      text-align: center;
+    }
   }
 
   @media (max-width: 960px) {
@@ -311,6 +315,10 @@ export const ResponsabilitiesTitle = styled.div`
     max-width: 100%;
     margin: 0 0 3rem;
   }
+
+  @media (max-width: 430px) {
+    margin-bottom: 4rem;
+  }
 `
 
 export const ResponsabilitiesDivider = styled.div`
@@ -318,6 +326,11 @@ export const ResponsabilitiesDivider = styled.div`
   margin-block: 1.8rem;
 
   border: 0.1rem solid ${theme.colors.cyan};
+
+  @media (max-width: 430px) {
+    width: 100%;
+    margin: 1.8rem auto;
+  }
 `
 
 export const MobileCards = styled.div`
@@ -347,12 +360,17 @@ export const ResponsabilitiesCards = styled.div`
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.light};
     line-height: 104%;
+    text-align: center;
 
     @media (max-width: 960px) {
       margin-bottom: 2.4rem;
       max-width: 10rem;
 
       font-size: ${theme.font.sizes.font14};
+    }
+
+    @media (max-width: 430px) {
+      font-size: 1.6rem;
     }
   }
 `
@@ -368,4 +386,11 @@ export const IconWrapper = styled.div`
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 1.2rem;
   text-align: center;
+
+  @media (max-width: 430px) {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `
