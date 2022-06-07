@@ -3,7 +3,6 @@ import theme from '../../../styles/theme'
 
 export const IntroWalletAddress = styled.section`
   margin-top: ${theme.spacings.space16};
-  margin-bottom: 10rem;
 `
 
 export const AddressAndVoteWeight = styled.div`
@@ -21,20 +20,23 @@ export const WalletAddress = styled.div`
   display: flex;
   align-items: center;
 
+  /* .paper {
   img {
-    border-radius: 50%;
     width: 4rem;
+
+    border-radius: 50%;
     @media (max-width: 992px) {
-      width: 3.2rem;
+      width: 3.2rem !important;
     }
-  }
+  } */
 
   h2 {
+    margin-left: ${theme.spacings.space18};
+
     line-height: ${theme.font.sizes.font32};
     font-size: ${theme.font.sizes.font32};
     font-weight: ${theme.font.weight.normal};
 
-    margin-left: ${theme.spacings.space18};
     @media (max-width: 992px) {
       line-height: ${theme.font.sizes.font24};
       font-size: ${theme.font.sizes.font24};
@@ -43,51 +45,51 @@ export const WalletAddress = styled.div`
 `
 
 export const VoteWeightCard = styled.div`
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  border-radius: 1.2rem;
+  width: 16rem;
+  padding: 1.6rem 2.4rem;
+
   color: ${theme.colors.snow};
   font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.light};
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  width: 21.4rem;
-  padding: 1.6rem 2.4rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 0.01rem solid rgba(255, 255, 255, 0.2);
+  border-radius: 1.2rem;
 
   @media (max-width: 992px) {
-    font-size: ${theme.font.sizes.font12};
+    width: 8.3rem;
+    padding: 0.8rem;
 
-    width: 16.4rem;
-    padding: 0.8rem 1.6rem;
+    font-size: ${theme.font.sizes.font12};
   }
 
   @media (max-width: 576px) {
-    gap: 16px;
+    gap: 1.6rem;
 
     width: 100%;
     height: 3rem;
-
     margin-top: 1.6rem;
+    border-radius: 0.8rem;
   }
 
   .font-bold {
     font-size: ${theme.font.sizes.font24};
-    font-weight: ${theme.font.weight.bold};
+    font-weight: ${theme.font.weight.medium};
 
     @media (max-width: 992px) {
-      font-size: ${theme.font.sizes.font18};
-
       margin-top: 0.4rem;
+
+      font-size: ${theme.font.sizes.font18};
     }
 
     @media (max-width: 576px) {
-      font-size: ${theme.font.sizes.font14};
-
       margin-top: 0;
+
+      font-size: ${theme.font.sizes.font14};
     }
   }
 `
@@ -95,11 +97,11 @@ export const VoteWeightCard = styled.div`
 export const VoteWeight = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   @media (max-width: 576px) {
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
 
     width: 100%;
   }
@@ -122,16 +124,17 @@ interface IHorizontalLineProps {
   none?: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
-export const HorizontalLine = styled.div<IHorizontalLineProps>`
+// prettier-ignore
+export const HorizontalLine =styled.div<IHorizontalLineProps>`
   content: '';
   display: block;
-  background: rgba(255, 255, 255, 0.2);
 
   width: 0.1rem;
-  height: 5rem;
+  height: 100%;
 
-  @media (max-width: 760px) {
+  background: rgba(255, 255, 255, 0.2);
+
+  @media (max-width: 680px) {
     display: ${props => (props.none ? 'none' : 'block')};
   }
 
@@ -143,21 +146,22 @@ export const HorizontalLine = styled.div<IHorizontalLineProps>`
 export const VerticalLine = styled.div`
   display: none;
 
-  @media (max-width: 760px) {
+  @media (max-width: 680px) {
     content: '';
     display: block;
-    background: rgba(255, 255, 255, 0.2);
 
     width: 100%;
     height: 0.1rem;
+
+    background: rgba(255, 255, 255, 0.2);
   }
 `
 
 export const VotingPowerContent = styled.div`
   display: flex;
-  gap: ${theme.spacings.space32};
+  gap: ${theme.spacings.space24};
 
-  margin-top: ${theme.spacings.space32};
+  margin-top: ${theme.spacings.space24};
   @media (max-width: 1100px) {
     flex-direction: column;
   }
@@ -170,36 +174,32 @@ export const VotingPowerContent = styled.div`
 `
 
 export const AllVotingPowerCard = styled.div`
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-
-  border-radius: 1.2rem;
-
   display: grid;
-  grid-template-columns: 28rem 1px 1fr;
-  gap: 24px;
+  grid-template-columns: 3fr 0.1rem 2fr;
+  gap: 2.4rem;
+
+  min-width: 75rem;
+  padding: 2.3rem;
 
   align-items: center;
 
-  min-width: 75rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 0.01rem solid rgba(255, 255, 255, 0.2);
+  border-radius: 1.2rem;
 
-  padding-top: ${theme.spacings.space32};
-  padding-right: ${theme.spacings.space32};
-  padding-left: ${theme.spacings.space32};
-  padding-bottom: ${theme.spacings.space24};
   @media (max-width: 1100px) {
-    grid-template-columns: 25rem 1px 1fr;
-    gap: 24px;
+    grid-template-columns: 3fr 0.01rem 2fr;
 
-    min-width: 30rem;
+    min-width: 20rem;
   }
 
-  @media (max-width: 760px) {
+  @media (max-width: 680px) {
     grid-template-columns: 1fr;
   }
 
   @media (max-width: 576px) {
     padding: 1.6rem;
+    border-radius: 0.8rem;
   }
 `
 
@@ -207,35 +207,63 @@ export const AddressTotalVotingPower = styled.div`
   display: flex;
   flex-direction: column;
 
+  padding: 2.4rem;
+  width: 100%;
+
+  background: rgba(255, 255, 255, 0.04);
+  border: 0.01rem solid rgba(255, 255, 255, 0.2);
+  border-radius: 1.2rem;
+
+  @media (max-width: 1100px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 2.8rem 2.4rem;
+  }
+
   @media (max-width: 576px) {
     flex-direction: row;
-
     justify-content: space-between;
+    border-radius: 0.8rem;
   }
 
   .address-total-voting-power {
     display: flex;
+    margin-bottom: 0.7rem;
 
-    line-height: ${theme.font.sizes.font18};
-    font-size: ${theme.font.sizes.font18};
-    font-weight: ${theme.font.weight.bold};
+    color: ${theme.colors.grayDisabled};
+    line-height: ${theme.font.sizes.font20};
+    font-size: ${theme.font.sizes.font14};
+    font-weight: ${theme.font.weight.medium};
 
-    margin-bottom: 1.6rem;
     @media (max-width: 1100px) {
       font-size: ${theme.font.sizes.font16};
+      margin-bottom: 0;
     }
 
     @media (max-width: 576px) {
       font-size: ${theme.font.sizes.font12};
 
-      max-width: 11rem;
+      max-width: 16rem;
       margin-bottom: 0;
     }
+    @media (max-width: 370px) {
+      max-width: 100rem;
+    }
   }
+
   .value-total-voting-power {
+    color: ${theme.colors.snow};
     line-height: ${theme.font.sizes.font32};
     font-size: ${theme.font.sizes.font32};
-    font-weight: ${theme.font.weight.bold};
+    font-weight: ${theme.font.weight.medium};
+
+    @media (max-width: 1100px) {
+      font-size: ${theme.font.sizes.font24};
+    }
+
     @media (max-width: 576px) {
       font-size: ${theme.font.sizes.font18};
     }
@@ -243,26 +271,30 @@ export const AddressTotalVotingPower = styled.div`
 `
 
 export const Tooltip = styled.div`
-  margin-top: -1px;
-  margin-left: 8px;
-
-  padding: 1px;
-  height: 22px;
-
   position: relative;
-  z-index: 99;
+
+  margin-top: -0.01rem;
+  margin-left: 0.8rem;
+  padding: 0.01rem;
+  height: 2.2rem;
+
+  z-index: 20;
 `
 
 export const ReceivedAndOwnedVotingPower = styled.div`
-  font-weight: ${theme.font.sizes.font16};
-  font-size: ${theme.font.sizes.font16};
-  font-weight: ${theme.font.weight.light};
+  font-weight: ${theme.font.weight.medium};
+  font-size: ${theme.font.sizes.font14};
+  font-weight: ${theme.font.weight.medium};
+  text-transform: uppercase;
+
+  .gray-color {
+    color: ${theme.colors.grayDisabled};
+  }
 
   @media (max-width: 576px) {
     font-size: ${theme.font.sizes.font12};
   }
   .bold {
-    font-weight: ${theme.font.weight.medium};
     @media (max-width: 576px) {
       font-size: ${theme.font.sizes.font14};
     }
@@ -274,28 +306,17 @@ export const OwnedVotingPower = styled.div`
   justify-content: space-between;
 
   margin-bottom: 1.2rem;
-  padding: 0 1.6rem;
 `
 
 export const ReceivedVotingPower = styled.div`
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 1.2rem;
-
   display: flex;
   justify-content: space-between;
-
-  padding: ${theme.spacings.space16};
 `
 
 export const ManageDelegation = styled.div`
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-
   border-radius: 1.2rem;
 
   width: 100%;
-
-  padding: ${theme.spacings.space32};
 
   @media (max-width: 576px) {
     padding: ${theme.spacings.space16};
@@ -305,7 +326,7 @@ export const ManageDelegation = styled.div`
     display: flex;
     justify-content: center;
 
-    margin-top: 1.2rem;
+    margin-top: 1.1rem;
     margin-bottom: 0;
   }
 

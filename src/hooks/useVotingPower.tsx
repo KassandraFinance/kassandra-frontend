@@ -5,9 +5,13 @@ import { AbiItem } from "web3-utils"
 
 import web3 from '../utils/web3'
 import StakingContract from "../constants/abi/Staking.json"
+import { RootStateOrAny, useSelector } from 'react-redux'
+
+import { TransactionCallback } from '../utils/txWait'
 
 
 const useVotingPower = (address: string) => {
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const [contract, setContract] = React.useState(new web3.eth.Contract((StakingContract as unknown) as AbiItem, address))
 
   React.useEffect(() => {
@@ -20,14 +24,38 @@ const useVotingPower = (address: string) => {
       return new BigNumber(value)
     }
 
-    const currentVotes = async (walletAddres: string) => {
-      const value: string = await contract.methods.getCurrentVotes(walletAddres).call()
-      return new BigNumber(value)
+    const currentVotes = async (walletAddres: string | string[] | undefined) => {
+      if (walletAddres) {
+        const value: string = await contract.methods.getCurrentVotes(walletAddres).call()
+        return new BigNumber(value)
+      }
+    }
+
+    const delegateVote = async (pid: number, address: string, callback: TransactionCallback) => {
+      await contract.methods.delegate(pid, address)
+        .send({ from: userWalletAddress },
+          callback
+        )
+    }
+
+    const delegateAllVotes = async (address: string, callback: TransactionCallback) => {
+      await contract.methods.delegateAll(address)
+        .send({ from: userWalletAddress },
+          callback
+        )
+    }
+
+    const getPriorVotes = async (walletAddress: string, startBlockNumber: string) => {
+      const value = await contract.methods.getPriorVotes(walletAddress, startBlockNumber).call()
+      return value
     }
 
     return {
       currentVotes,
-      totalVotes
+      totalVotes,
+      delegateVote,
+      delegateAllVotes,
+      getPriorVotes
     }
   }, [contract])
 }

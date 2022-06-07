@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
-import Link from 'next/link'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
@@ -31,7 +30,7 @@ interface IDetailsProps {
   stakingToken: string;
   decimals: string;
   symbol: string;
-  priceLPToken: IPriceLPToken;
+  tokenPrice: IPriceLPToken;
 }
 
 const Details = ({
@@ -42,7 +41,7 @@ const Details = ({
   stakingToken,
   decimals,
   symbol,
-  priceLPToken
+  tokenPrice
 }: IDetailsProps) => {
   // eslint-disable-next-line prettier/prettier
   const [depositedAmount, setDepositedAmount] = React.useState<BigNumber>(new BigNumber(-1))
@@ -73,14 +72,17 @@ const Details = ({
   let price
 
   switch (pid) {
+    case 7:
+      price = tokenPrice.priceLPJoe
+      break
     case 6:
-      price = priceLPToken.aHYPE
+      price = tokenPrice.aHYPE
       break
     case 5:
-      price = priceLPToken.priceLP
+      price = tokenPrice.priceLPPng
       break
     default:
-      price = priceLPToken.kacy
+      price = tokenPrice.kacy
   }
 
   return (
@@ -127,7 +129,7 @@ const Details = ({
               ? '0'
               : BNtoDecimal(
                   Big(infoStakeStatic.kacyRewards.toString())
-                    .mul(priceLPToken.kacy)
+                    .mul(tokenPrice.kacy)
                     .div(Big(10).pow(18)),
                   6,
                   2,
@@ -142,7 +144,7 @@ const Details = ({
         <span>{infoStakeStatic.startDate}</span>
       </S.Info>
       <S.Info>
-        <span>End date</span>
+        <span>Rewards Update</span>
         <span>{infoStakeStatic.endDate}</span>
       </S.Info>
       <S.Info>
@@ -154,10 +156,16 @@ const Details = ({
           }
           text="See contract"
         />
-        {symbol === 'LP' && (
+        {symbol === 'LP-PNG' && (
           <ExternalLink
             hrefLink={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
-            text="Get LP"
+            text="Get LP-PNG"
+          />
+        )}
+        {symbol === 'LP-JOE' && (
+          <ExternalLink
+            hrefLink={`https://traderjoexyz.com/pool/AVAX/${Kacy}`}
+            text="Get LP-JOE"
           />
         )}
         {symbol === 'KACY' && (
@@ -181,7 +189,7 @@ const Details = ({
           matomoEvent('click-add-metamask', `add-${symbol}`)
         }}
       >
-        Add to Metamask <img src="/assets/metaMaskIcon.svg" alt="" />
+        Add to Metamask <img src="/assets/logos/metamask.svg" alt="" />
       </S.AddToken>
     </S.Details>
   )

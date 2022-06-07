@@ -167,15 +167,24 @@ export const LowerRight = styled.div`
 `
 
 export const SocialIcon = styled.a`
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 3.2rem;
   width: 3.2rem;
 
   background: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0);
 
-  img {
+  transition: border ${theme.transition.default};
+
+  /* img {
     padding: 0.5rem;
+  } */
+
+  &:hover {
+    border: 1px solid rgba(255, 255, 255, 0.3);
   }
 `
 

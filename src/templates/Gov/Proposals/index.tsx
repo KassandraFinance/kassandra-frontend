@@ -11,8 +11,8 @@ import ProposalOverview from '../../../components/Governance/ProposalOverview'
 import Breadcrumb from '../../../components/Breadcrumb'
 import BreadcrumbItem from '../../../components/Breadcrumb/BreadcrumbItem'
 
-import proposals from '../../../../public/assets/iconGradient/proposals.svg'
-import externalLink from '../../../../public/assets/icons/external-link.svg'
+import proposals from '../../../../public/assets/iconGradient/details.svg'
+import externalLink from '../../../../public/assets/utilities/external-link.svg'
 
 import * as S from './styles'
 
@@ -20,7 +20,7 @@ const AllProposals = () => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
   return (
-    <S.BackgroundVote>
+    <>
       <Header />
       <Breadcrumb>
         <BreadcrumbItem href="/">Home</BreadcrumbItem>
@@ -66,7 +66,7 @@ const AllProposals = () => {
           <ProposalTable />
         </S.AllProposalsContent>
       </S.VoteContent>
-    </S.BackgroundVote>
+    </>
   )
 }
 

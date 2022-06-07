@@ -1,17 +1,6 @@
 import styled from 'styled-components'
 import theme from '../../styles/theme'
 
-export const BackgroundStakeFarm = styled.div`
-  background: url('/assets/newbg4.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-
-  box-shadow: inset 0px -20px 20px 0px #151117;
-  padding: 0 0 80px;
-`
-
 export const StakeFarm = styled.section`
   max-width: 945px;
   margin: 0 auto;
@@ -27,13 +16,19 @@ export const StakeWithPowerVote = styled.div`
     flex-wrap: wrap;
     margin: 50px 30px;
   }
+
+  /* @media (max-width: 380px) {
+    max-width: 29.5rem;
+    width: 100%;
+    min-width: 28rem;
+  } */
 `
 
 interface INameStakeProps {
   left?: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const NameStake = styled.div<INameStakeProps>`
   p {
     color: #bdbdbd;
@@ -43,11 +38,10 @@ export const NameStake = styled.div<INameStakeProps>`
     margin-left: 32px;
   }
   @media (max-width: 960px) {
-    ${props =>
-      props.left &&
-      `
+    ${props => props.left &&`
       padding-left: 30px;
-    `}
+     `
+    }
   }
 `
 

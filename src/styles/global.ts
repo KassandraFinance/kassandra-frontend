@@ -6,7 +6,8 @@ import {
 } from 'styled-components'
 
 type GlobalStylesProps = {
-  removeBg?: boolean
+  removeBg?: boolean,
+  selectBackground?: boolean
 }
 
 const GlobalStyles: GlobalStyleComponent<
@@ -68,12 +69,35 @@ const GlobalStyles: GlobalStyleComponent<
     }
   }
 
+  ::-webkit-scrollbar {
+    width: 0.4rem;
+    height: 0.4rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    margin-block: 0.3rem;
+  }
+
+  body::-webkit-scrollbar {
+    width: 1rem;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+
+    transition: background-color ease-in-out 30000ms;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+  }
 
   html, body, #root {
     min-height: 100%;
   }
 
-  ${() => css`
+  ${({ selectBackground }) => css`
     html {
       font-size: 62.5%;
     }
@@ -82,6 +106,13 @@ const GlobalStyles: GlobalStyleComponent<
       background-color: #151117;
       font-family: 'Rubik', sans-serif;
       color: #fcfcfc;
+
+      ${selectBackground
+        ? `background-image: url('/assets/images/background-products.png');
+        background-repeat: repeat-y;
+        background-size: cover;
+        background-position-x: center;`
+        : ''}
     }
   `}
   ul, ol {

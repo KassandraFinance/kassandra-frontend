@@ -1,6 +1,6 @@
 import React from 'react'
 import TextField from '../TextField'
-import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
+import { ToastSuccess } from '../Toastify/toast'
 
 import * as S from './styles'
 
@@ -55,7 +55,7 @@ const SubscribeBanner = () => {
           <TextField
             icon={
               <img
-                src="/assets/fowardArrow.svg"
+                src="/assets/utilities/foward-arrow.svg"
                 alt="Subscribe"
                 title="Subscribe"
                 onClick={handleSubmit}

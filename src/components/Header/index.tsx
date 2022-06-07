@@ -12,9 +12,9 @@ import ModalLogOut from '../Modals/ModalLogOut'
 import ModalWalletConnect from '../Modals/ModalWalletConnect'
 import ModalSocialMediaMobile from '../Modals/ModalSocialMediaMobile'
 
-import options from '../../../public/assets/options.svg'
-import kacy64 from '../../../public/assets/logo-64.svg'
-import logoKassandra from '../../../public/assets/new-kassandra-logo-header.svg'
+import options from '../../../public/assets/utilities/options.svg'
+import kacy64 from '../../../public/assets/logos/kacy-64.svg'
+import logoKassandra from '../../../public/assets/logos/kassandra-header.svg'
 
 import * as S from './styles'
 
@@ -53,20 +53,31 @@ const Header = () => {
           </Link>
           <Link href="/" passHref>
             <a className="logo-ipad">
-              <Image src={kacy64} alt="Kassandra" />
+              <Image src={kacy64} width={64} height={64} alt="Kassandra" />
             </a>
           </Link>
         </S.LogoWrapper>
         <S.Menu>
           <Link href="/" passHref>
             <a className="logo-mobile">
-              <Image src={kacy64} alt="Kassandra" />
+              <Image src={kacy64} width={64} height={64} alt="Kassandra" />
             </a>
           </Link>
-          <DropdownInvest
+          {/* <DropdownInvest
             nameOnHeader="invest"
-            linkPage={[{ name: 'aHYPE', href: '/products/ahype' }]}
-          />
+            linkPage={[
+              { name: 'Explore Funds', href: '/explore' },
+              { name: 'Stake/Farm', href: '/farm' },
+              { name: 'My Portfolio', href: `/profile/${userWalletAddress}` }
+            ]}
+          /> */}
+          <Link href="/explore" passHref>
+            <S.MenuLink
+              onClick={() => clickMatomoEvent('click-on-link', 'explore')}
+            >
+              Invest
+            </S.MenuLink>
+          </Link>
           <Link href="/farm" passHref>
             <S.MenuLink
               onClick={() => clickMatomoEvent('click-on-link', 'stake-farm')}
@@ -74,7 +85,7 @@ const Header = () => {
               Stake/Farm
             </S.MenuLink>
           </Link>
-          {process.env.NEXT_PUBLIC_VOTE === '2' ? (
+          {process.env.NEXT_PUBLIC_VOTE === '1' ? (
             <DropdownInvest
               nameOnHeader="vote"
               linkPage={[

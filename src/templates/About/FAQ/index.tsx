@@ -7,7 +7,7 @@ const FAQ = () => {
   return (
     <S.Container>
       <S.Icon>
-        <img src="assets/FAQ-icon.svg" alt="" />
+        <img src="assets/iconGradient/FAQ.svg" alt="" />
       </S.Icon>
       <S.Title>
         Frequently asked questions

@@ -1,28 +1,33 @@
 import styled from 'styled-components'
 import theme from '../../styles/theme'
 
-export const Title = styled.div`
+interface ITitleProps {
+  marginTop?: number;
+}
+
+// prettier-ignore
+export const Title = styled.div<ITitleProps>`
+  margin-top: ${props => (props.marginTop ? `${props.marginTop}px` : 0)};
+
   @media (max-width: 700px) {
     img {
-      width: 18px;
+      width: 1.8rem;
     }
   }
 
   h1 {
     line-height: ${theme.font.sizes.font32};
     font-size: ${theme.font.sizes.font32};
-    font-weight: ${theme.font.weight.bold};
-    margin-left: 20px;
+    font-weight: ${theme.font.weight.medium};
 
     @media (max-width: 960px) {
       line-height: ${theme.font.sizes.font24};
       font-size: ${theme.font.sizes.font24};
     }
+
     @media (max-width: 700px) {
       line-height: ${theme.font.sizes.font18};
       font-size: ${theme.font.sizes.font18};
-
-      margin-left: 10px;
     }
   }
 
@@ -33,16 +38,18 @@ export const Title = styled.div`
     font-weight: ${theme.font.weight.normal};
     text-transform: uppercase;
 
-    margin-top: 12px;
-    margin-left: ${theme.spacings.space48};
+    margin-top: 1.2rem;
+    margin-left: 4.3rem;
+
     @media (max-width: 960px) {
       font-size: ${theme.font.sizes.font14};
     }
+
     @media (max-width: 700px) {
       font-size: ${theme.font.sizes.font12};
 
       margin-top: ${theme.spacings.space8};
-      margin-left: 30px;
+      margin-left: 3.3rem;
     }
   }
 `
@@ -50,5 +57,10 @@ export const Title = styled.div`
 export const TitleContent = styled.div`
   display: flex;
   align-items: center;
+  gap: 2rem;
   max-width: 100%;
+
+  @media (max-width: 700px) {
+    gap: 1rem;
+  }
 `

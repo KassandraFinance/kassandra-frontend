@@ -16,14 +16,11 @@ import Header from '../../components/Header'
 import Breadcrumb from '../../components/Breadcrumb'
 import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
 
-import ComingSoon from './ComingSoon'
-
 import * as S from './styles'
 
 const StakeFarm = () => {
   const [loading, setLoading] = React.useState<boolean>(true)
   const [investor, setInvestor] = React.useState([false, false])
-  const [walletConnect, setWalletConnect] = React.useState<any>(null)
 
   const { trackCategoryPageView } = useMatomoEcommerce()
   const kacyStake = useStakingContract(Staking)
@@ -47,7 +44,7 @@ const StakeFarm = () => {
   }, [])
 
   React.useEffect(() => {
-    if (userWalletAddress.length === 0 || chainId !== chain.chainId) {
+    if (userWalletAddress.length === 0 || Number(chainId) !== chain.chainId) {
       return
     }
 
@@ -65,23 +62,8 @@ const StakeFarm = () => {
 
     calc()
   }, [userWalletAddress])
-
-  React.useEffect(() => {
-    const handleWallectConnect = () => {
-      const connect = localStorage.getItem('walletconnect')
-
-      if (connect) {
-        setWalletConnect(connect)
-      } else {
-        setWalletConnect(null)
-      }
-    }
-
-    handleWallectConnect()
-  }, [])
-
   return (
-    <S.BackgroundStakeFarm>
+    <>
       <Header />
       <Breadcrumb>
         <BreadcrumbItem href="/">Home</BreadcrumbItem>
@@ -89,42 +71,39 @@ const StakeFarm = () => {
           Stake/Farm
         </BreadcrumbItem>
       </Breadcrumb>
-      {
-        loading ? (
-          <div
-            style={{
-              height: 'calc(100vh - 140px)',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}
-          >
-            <Loading />
-          </div>
-        ) : userWalletAddress.length === 0 && walletConnect === null ? (
-          <Web3Disabled
-            textButton="Connect Wallet"
-            textHeader="Your wallet is not connected"
-            bodyText="Please connect your wallet to access our pools"
-            type="connect"
-          />
-        ) : chainId !== chain.chainId && chainId !== 43114 ? (
-          <Web3Disabled
-            textButton={walletConnect ? '' : `Connect to ${chain.chainName}`}
-            textHeader="Your wallet is set to the wrong network."
-            bodyText={
-              walletConnect
-                ? `Please connect the Wallet Connect to the ${chain.chainName} network.`
-                : `Please switch to the ${chain.chainName} network to have access to all our staking pools.`
-            }
-            type="changeChain"
-          />
-        ) : (
+      {loading ? (
+        <div
+          style={{
+            height: '100vh',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <Loading marginTop={0} />
+        </div>
+      ) : userWalletAddress.length === 0 &&
+        Number(chainId) !== chain.chainId ? (
+        <Web3Disabled
+          textButton="Connect Wallet"
+          textHeader="Your wallet is not connected"
+          bodyText="Please connect your wallet to access our pools"
+          type="connect"
+        />
+      ) : Number(chainId) !== chain.chainId ? (
+        <Web3Disabled
+          textButton={`Connect to ${chain.chainName}`}
+          textHeader="Your wallet is set to the wrong network."
+          bodyText={`Please switch to the ${chain.chainName} network to have access to all our staking pools`}
+          type="changeChain"
+        />
+      ) : (
+        <>
           <S.StakeFarm>
             <S.StakeWithPowerVote>
               <S.NameStake>
                 <S.Name>
-                  <img src="assets/stake-with-vote.svg" alt="" />
+                  <img src="assets/iconGradient/vote.svg" alt="" width={24} height={24} />
                   <h1>Stake KACY</h1>
                 </S.Name>
                 <p>EARN REWARDS AND VOTING POWER</p>
@@ -205,15 +184,16 @@ const StakeFarm = () => {
             </S.GridStaking>
             <S.NameStake left={true} style={{ margin: '100px 0 50px' }}>
               <S.Name>
-                <img src="assets/stake-money-withdraw.svg" alt="" />
+                <img src="assets/iconGradient/stake-money-withdraw.svg" alt="" />
                 <h1>Farm KACY</h1>
               </S.Name>
               <p>EARN KACY BY STAKING OTHER ASSETS</p>
             </S.NameStake>
             <S.GridStaking>
+            {process.env.NEXT_PUBLIC_MASTER === '1' ? (
               <StakeCard
                 pid={5}
-                symbol="lp"
+                symbol="lp-png"
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
                 getReward={kacyStake.getReward}
@@ -223,6 +203,23 @@ const StakeFarm = () => {
                 stakedUntil={kacyStake.stakedUntil}
                 stakeWithVotingPower={true}
               />
+            ): null}
+              {process.env.NEXT_PUBLIC_MASTER === '1' ? (
+                <StakeCard
+                  pid={7}
+                  symbol="lp-joe"
+                  balanceOf={kacyStake.balance}
+                  earned={kacyStake.earned}
+                  getReward={kacyStake.getReward}
+                  withdrawable={kacyStake.withdrawable}
+                  poolInfo={kacyStake.poolInfo}
+                  unstaking={kacyStake.unstaking}
+                  stakedUntil={kacyStake.stakedUntil}
+                  stakeWithVotingPower={true}
+                />
+              ) : (
+                ''
+              )}
               {process.env.NEXT_PUBLIC_MASTER === '1' ? (
                 <StakeCard
                   pid={6}
@@ -237,14 +234,24 @@ const StakeFarm = () => {
                   stakeWithVotingPower={true}
                 />
               ) : (
-                ''
+                <StakeCard
+                  pid={4}
+                  symbol="ahype"
+                  balanceOf={kacyStake.balance}
+                  earned={kacyStake.earned}
+                  getReward={kacyStake.getReward}
+                  withdrawable={kacyStake.withdrawable}
+                  poolInfo={kacyStake.poolInfo}
+                  unstaking={kacyStake.unstaking}
+                  stakedUntil={kacyStake.stakedUntil}
+                  stakeWithVotingPower={true}
+                />
               )}
-              <ComingSoon />
             </S.GridStaking>
           </S.StakeFarm>
-        )
-      }
-    </S.BackgroundStakeFarm>
+        </>
+      )}
+    </>
   )
 }
 

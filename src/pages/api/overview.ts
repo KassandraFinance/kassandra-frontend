@@ -23,7 +23,8 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
     response.json({
       kacyPrice: kacy.current_price.usd,
       supply: kacy.circulating_supply,
-      marketCap: kacy.market_cap.usd
+      marketCap: kacy.market_cap.usd,
+      kacyPercentage: kacy.price_change_percentage_24h
     })
   } catch (error) {
     response.json({

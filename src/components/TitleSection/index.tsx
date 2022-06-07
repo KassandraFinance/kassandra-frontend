@@ -7,11 +7,17 @@ interface ITitleSectionProps {
   image: any;
   title: string;
   text?: string;
+  marginTop?: number;
 }
 
-export const TitleSection = ({ image, title, text }: ITitleSectionProps) => {
+export const TitleSection = ({
+  image,
+  title,
+  text,
+  marginTop
+}: ITitleSectionProps) => {
   return (
-    <S.Title>
+    <S.Title marginTop={marginTop}>
       <S.TitleContent>
         <Image src={image} alt="" />
         <h1>{title}</h1>

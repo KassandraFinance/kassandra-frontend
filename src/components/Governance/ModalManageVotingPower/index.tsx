@@ -48,17 +48,23 @@ const ModalManageVotingPower = ({
               setCurrentModal('manage')
             }}
           >
-            <img src="/assets/close.svg" alt="Close" />
+            <img src="/assets/utilities/close-icon.svg" alt="Close" />
           </S.Close>
         </S.Header>
         {currentModal === 'manage' && (
           <ManageVotingPower setCurrentModal={setCurrentModal} />
         )}
         {currentModal === 'delegate' && (
-          <DelegateVotingPower setCurrentModal={setCurrentModal} />
+          <DelegateVotingPower
+            setModalOpen={setModalOpen}
+            setCurrentModal={setCurrentModal}
+          />
         )}
         {currentModal === 'undelegate' && (
-          <UndelegateVotingPower setCurrentModal={setCurrentModal} />
+          <UndelegateVotingPower
+            setModalOpen={setModalOpen}
+            setCurrentModal={setCurrentModal}
+          />
         )}
       </S.ModalContainer>
     </>

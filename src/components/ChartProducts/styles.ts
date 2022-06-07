@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import theme from '../../styles/theme'
 
-export const dictionary: any = {
+export const dictionary: { [key: number]: string } = {
   0: '#E8983D',
   1: '#63698C',
   2: '#B7372D',
@@ -48,6 +48,24 @@ export const dictionary: any = {
 
 export const ChartProduct = styled.div`
   position: relative;
+
+  .recharts-responsive-container {
+    @media (max-width: 380px) {
+      height: 400px !important;
+    }
+  }
+
+  .recharts-wrapper {
+    @media (max-width: 380px) {
+      height: 400px !important;
+    }
+  }
+
+  .recharts-surface {
+    @media (max-width: 380px) {
+      margin-top: 5rem;
+    }
+  }
 `
 
 export const Selects = styled.div`
@@ -111,7 +129,7 @@ export const LabelPeriod = styled.label<ILabelPeriodProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   height: 30px;
   min-width: ${props => (props.isPrice ? '33px' : '31px')};
   padding: 10px 8px;
@@ -172,7 +190,7 @@ export const Label = styled.label<ILabelProps>`
 export const Wrapper = styled.div`
   background-color: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.04);
-  border-radius: 25px;
+  border-radius: 2.5rem;
   margin: 25px 0;
   width: 100%;
   height: 360px;

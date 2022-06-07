@@ -8,6 +8,7 @@ const usePriceLP = () => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
   const getPriceLP = (address: string) => {
+    // eslint-disable-next-line prettier/prettier
     const contract = new web3.eth.Contract((PriceLP.abi as unknown) as AbiItem, address)
     return contract
   }

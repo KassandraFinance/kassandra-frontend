@@ -89,9 +89,15 @@ const ModalStakeAndWithdraw = ({
     setIsAmount(true)
   }
 
-  function handleConfirm() {
+  async function handleConfirm() {
     if (stakeTransaction === 'staking') {
-      kacyStake.stake(pid, amountStake, stakeCallback())
+      const toDelegate = await kacyStake.userInfo(pid, userWalletAddress)
+      const delegate =
+        toDelegate.delegatee === '0x0000000000000000000000000000000000000000'
+          ? userWalletAddress
+          : toDelegate.delegatee
+
+      kacyStake.stake(pid, amountStake, delegate, stakeCallback())
     } else if (stakeTransaction === 'unstaking') {
       kacyStake.withdraw(pid, amountStake, withdrawCallback())
     }
@@ -237,7 +243,7 @@ const ModalStakeAndWithdraw = ({
                 setStakeTransaction('')
               }}
             >
-              <img src="assets/close.svg" alt="Close" />
+              <img src="assets/utilities/close-icon.svg" alt="Close" />
             </button>
           </S.InterBackground>
           <S.Main>
@@ -349,12 +355,12 @@ const ModalStakeAndWithdraw = ({
                 <Button backgroundBlack fullWidth text="Get aHYPE" />
               </Link>
             )}
-            {symbol === 'LP' && (
+            {symbol === 'LP-PNG' && (
               <Button
                 as="a"
                 backgroundBlack
                 fullWidth
-                text="Get LP"
+                text="Get LP-PNG"
                 href={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
                 target="_blank"
                 rel="noopener noreferrer"

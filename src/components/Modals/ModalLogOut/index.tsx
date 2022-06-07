@@ -9,7 +9,7 @@ import useConnect from '../../../hooks/useConnect'
 
 import Button from '../../Button'
 
-import close from '../../../../public/assets/close.svg'
+import close from '../../../../public/assets/utilities/close-icon.svg'
 
 import theme from '../../../styles/theme'
 import * as S from './styles'

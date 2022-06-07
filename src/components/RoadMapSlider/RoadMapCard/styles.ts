@@ -25,6 +25,7 @@ export const CardWrapper = styled.div`
   }
   @media (max-width: 440px) {
     max-width: 38rem;
+    min-height: 40.1rem;
   }
   @media (max-width: 380px) {
     max-width: 34rem;
@@ -80,7 +81,7 @@ export const ListTitle = styled.li`
     font-size: ${theme.font.sizes.font14};
   }
 `
-export const ListText = styled.li`
+export const ListText = styled.p`
   font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.light};
   line-height: 155%;

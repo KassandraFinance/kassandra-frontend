@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 
 import * as S from './styles'
 
@@ -13,7 +14,12 @@ const ClassProducts = () => {
         Kassandra Protocol technology
       </span>
       <S.Image>
-        <img src="assets/classProductImage.svg" alt="" />
+        <Image
+          src="/assets/images/class-product.svg"
+          alt="image explaining about Kassandra Dao"
+          width={896}
+          height={163}
+        />
       </S.Image>
       <S.ImageDescription>
         <S.DescriptionContainer>

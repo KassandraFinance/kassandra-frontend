@@ -5,8 +5,8 @@ import { useSelector, RootStateOrAny } from 'react-redux'
 import { TokenDetails } from '../../store/modules/poolTokens/types'
 import { TokenImages } from '../../store/modules/poolImages/types'
 
-import arrow from '../../../public/assets/arrow-select.svg'
-import none from '../../../public/assets/coming-soon.svg'
+import arrow from '../../../public/assets/utilities/arrow-select-down.svg'
+import none from '../../../public/assets/icons/coming-soon.svg'
 
 import * as S from './styles'
 

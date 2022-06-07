@@ -9,7 +9,7 @@ const reducer: Reducer = (state = INITIAL_STATE, action) => {
     case HYDRATE: {
       return action.payload
     }
-    case Types.GET_POOL_TOKENS: {
+    case Types.GET_POOL_TOKENS_ARRAY: {
       return action.payload
     }
     default: {

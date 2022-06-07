@@ -2,7 +2,7 @@
 import BigNumber from 'bn.js'
 
 export const Types = {
-  GET_POOL_TOKENS: 'GET_POOL_TOKENS'
+  GET_POOL_TOKENS_ARRAY: 'GET_POOL_TOKENS_ARRAY'
 }
 
 export interface TokenDetails {
@@ -14,4 +14,6 @@ export interface TokenDetails {
   allocation: number;
   allocation_goal: number;
   price: number;
+  image?: string;
+  priceChange?: number;
 }
