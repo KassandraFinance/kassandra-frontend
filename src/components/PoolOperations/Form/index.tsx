@@ -83,7 +83,7 @@ const Form = ({
 }: IFormProps) => {
   const crpPoolToken = useERC20Contract(crpPoolAddress)
   const corePool = usePoolContract(corePoolAddress)
-  const proxy = useProxy(ProxyContract, crpPoolAddress)
+  const proxy = useProxy(ProxyContract, crpPoolAddress, corePoolAddress)
 
   const { userWalletAddress, chainId, fees, tokenAddress2Index, poolTokensArray } = useSelector((state: RootStateOrAny) => state)
   const { trackBuying, trackBought, trackCancelBuying } = useMatomoEcommerce();
@@ -422,7 +422,7 @@ const Form = ({
         ])
 
         const [newSwapOutPrice, newSwapOutAmount] = await Promise.all([
-          corePool.spotPrice(invertToken[swapOutAddress] ?? swapOutAddress, invertToken[swapInAddress] ?? swapInAddress),
+          proxy.spotPrice(corePoolAddress, swapOutAddress, swapInAddress),
           corePool.calcOutGivenIn(
             swapInTotalPoolBalance,
             swapInDenormalizedWeight,
@@ -433,7 +433,12 @@ const Form = ({
           )
         ])
 
-        setSwapOutAmount([newSwapOutAmount])
+        const exchangeRateIn = await proxy.exchangeRate(corePoolAddress, swapInAddress)
+        const exchangeRateOut = await proxy.exchangeRate(corePoolAddress, swapOutAddress)
+
+        const swapOut = newSwapOutAmount.mul(exchangeRateIn).div(exchangeRateOut)
+
+        setSwapOutAmount([swapOut])
         setSwapOutPrice(newSwapOutPrice)
 
         try {
@@ -889,16 +894,15 @@ const Form = ({
 
           case 'Withdraw':
             trackBuying(crpPoolAddress, 'aHYPE', -1 * amountInUSD, productCategories)
+            if (approved.value === '0') {
+              ERC20(crpPoolAddress).approve(
+                ProxyContract,
+                walletAddress.value,
+                approvalCallback(swapInSymbol.value, swapInAddressVal, tabTitle)
+              )
+              return              
+            }
             if (swapOutAddressVal !== '') {
-              if (approved.value === '0') {
-                ERC20(crpPoolAddress).approve(
-                  ProxyContract,
-                  walletAddress.value,
-                  approvalCallback(swapInSymbol.value, swapInAddressVal, tabTitle)
-                )
-                return              
-              }
-
               proxy.exitswapPoolAmountIn(
                 swapOutAddressVal,
                 swapInAmountVal,
