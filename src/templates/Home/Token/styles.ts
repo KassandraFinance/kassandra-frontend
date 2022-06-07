@@ -11,6 +11,10 @@ export const Token = styled.section`
     padding: 0 3.2rem;
   }
 
+  @media (max-width: 400px) {
+    padding: 0 2.4rem;
+  }
+
   span {
     display: flex;
     max-width: 50rem;

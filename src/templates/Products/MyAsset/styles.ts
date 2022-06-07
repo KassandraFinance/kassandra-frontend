@@ -29,9 +29,9 @@ export const Title = styled.div`
 export const Table = styled.table`
   width: 100%;
 
-  -webkit-border-radius: 2rem;
-  -moz-border-radius: 2rem;
-  border-radius: 2rem;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
   margin-bottom: 1.6rem;
 
   color: #ffffff;

@@ -192,6 +192,14 @@ export const IndexData = styled.div`
 
     margin-top: ${theme.spacings.space8};
   }
+
+  @media (max-width: 400px) {
+    &:nth-child(even) {
+      h2 {
+        text-align: right;
+      }
+    }
+  }
 `
 
 export const Tooltip = styled.div`

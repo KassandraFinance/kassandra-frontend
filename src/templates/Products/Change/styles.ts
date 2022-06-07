@@ -7,9 +7,9 @@ export const Change = styled.div`
   table {
     border: 1px solid rgba(255, 255, 255, 0.04);
     border-collapse: collapse;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
 
     overflow: hidden;
     text-indent: initial;
@@ -47,7 +47,10 @@ interface ITdProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const Td = styled.td<ITdProps>`
+export const Td =
+  styled.td <
+  ITdProps >
+  `
   color: ${props => (props.value > 0 ? theme.colors.green : theme.colors.red)};
   color: ${props =>
     (props.value === 0 || isNaN(props.value)) && theme.colors.snow};

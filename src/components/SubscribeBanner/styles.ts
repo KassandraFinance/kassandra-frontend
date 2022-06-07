@@ -27,8 +27,10 @@ export const TextWrapper = styled.div`
     font-weight: ${theme.font.weight.light};
     line-height: 155%;
   }
-  @media (max-width: 960px) {
-    margin-bottom: 16px;
+  @media (max-width: 768px) {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 100%;
   }
 `
 export const Input = styled.div`
@@ -53,5 +55,9 @@ export const Input = styled.div`
   }
   button {
     border: 'none';
+  }
+
+  @media (max-width: 960px) {
+    margin-top: 1.6rem;
   }
 `

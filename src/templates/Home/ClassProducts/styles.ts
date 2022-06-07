@@ -28,6 +28,7 @@ export const ClassProducts = styled.section`
     }
     @media (max-width: 760px) {
       font-size: ${theme.font.sizes.font32};
+      text-align: center;
     }
     @media (max-width: 450px) {
       font-size: ${theme.font.sizes.font24};
@@ -53,6 +54,10 @@ export const ClassProducts = styled.section`
     @media (max-width: 960px) {
       text-align: left;
     }
+
+    @media (max-width: 760px) {
+      text-align: center;
+    }
   }
 `
 export const Divider = styled.div`
@@ -64,6 +69,10 @@ export const Divider = styled.div`
 export const Image = styled.div`
   margin-top: 15rem;
   text-align: center;
+
+  @media (max-width: 768px) {
+    margin-top: 8rem;
+  }
 
   @media (max-width: 680px) {
     display: none;
@@ -100,6 +109,10 @@ export const DescriptionContainer = styled.div`
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.light};
     line-height: 122.5%;
+
+    @media (max-width: 768px) {
+      text-align: center;
+    }
   }
 
   @media (max-width: 960px) {
