@@ -121,7 +121,7 @@ export const chains: { [key: string]: ChainDetails } = {
 }
 
 const ahype: ProductDetails  = process.env.NEXT_PUBLIC_MASTER === '1' ?
-   {
+  {
     sipAddress: '0x38918142779e2CD1189cBd9e932723C968363D1E',
     coreAddress: '0x17C1037B17b221f2f3b53f85cebD817C941f6bC5',
     platform: 'Avalanche',
@@ -152,7 +152,7 @@ const ahype: ProductDetails  = process.env.NEXT_PUBLIC_MASTER === '1' ?
     ]
   }
  :
-   {
+  {
     sipAddress: '0xE34A2935B04e9c879f5bDd022b97D7Cf2F1Dde1d',
     coreAddress: '0xFCfB171A8a4666bc53Eac2d91Cb0b5203DDa63cD',
     platform: 'Fuji',
@@ -183,32 +183,64 @@ const ahype: ProductDetails  = process.env.NEXT_PUBLIC_MASTER === '1' ?
     ]
   }
 
-const tricrypto: ProductDetails  = {
-  sipAddress: '0xA6CAB4b1019ee22309dcA5ba62C3372a791dcB2E',
-  coreAddress: '0x440C5De429B36967E46C192f2140259e2ec22fc8',
-  platform: 'Avalanche',
-  categories: ['Avalanche', 'Pool'],
-  chain: chains.avalanche,
-  name: 'Tricrypto Social Index',
-  fundBy: 'Kassandra with Yield Yak',
-  symbol: 'K3C',
-  fundIcon: tricryptoIcon,
-  pid: 6,
-  fundLink: 'https://kassandra.finance/',
-  fundSummary: `The #K3C represents a yield-earning portfolio composed of BTC,
-  ETH, USDT and KACY built in partnership with our friends back at Yield Yak.`,
-  partners: [
-    partners.avalanche,
-    partners.yieldYak,
-    partners.traderJoe,
-    partners.aave
-  ],
-  addresses: [
-    '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab',
-    '0x50b7545627a5162f82a992c33b87adc75187b218',
-    '0xc7198437980c041c805a1edcba50c1ce5db95118',
-    '0xf32398dae246C5f672B52A54e9B413dFFcAe1A44'
-  ]
-}
+const tricrypto: ProductDetails  = process.env.NEXT_PUBLIC_MASTER === '1' ?
+  {
+    sipAddress: '0xA6CAB4b1019ee22309dcA5ba62C3372a791dcB2E',
+    coreAddress: '0x440C5De429B36967E46C192f2140259e2ec22fc8',
+    platform: 'Avalanche',
+    categories: ['Avalanche', 'Pool'],
+    chain: chains.avalanche,
+    name: 'Kassandra Tricrypto Index',
+    fundBy: 'Kassandra with Yield Yak',
+    symbol: 'K3C',
+    fundIcon: tricryptoIcon,
+    pid: 6,
+    fundLink: 'https://kassandra.finance/',
+    fundSummary: `The #K3C represents a yield-earning portfolio composed of BTC,
+    ETH, USDT and KACY built in partnership with our friends back at Yield Yak.`,
+    partners: [
+      partners.avalanche,
+      partners.yieldYak,
+      partners.traderJoe,
+      partners.aave
+    ],
+    addresses: [
+      '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab',
+      '0x50b7545627a5162f82a992c33b87adc75187b218',
+      '0xc7198437980c041c805a1edcba50c1ce5db95118',
+      '0xf32398dae246C5f672B52A54e9B413dFFcAe1A44'
+    ]
+  }
+:
+  {
+    sipAddress: '0xE34A2935B04e9c879f5bDd022b97D7Cf2F1Dde1d',
+    coreAddress: '0xFCfB171A8a4666bc53Eac2d91Cb0b5203DDa63cD',
+    platform: 'Fuji',
+    categories: ['Fuji', 'Pool'],
+    chain: chains.fuji,
+    name: 'Kassandra Tricrypto Index',
+    fundBy: 'Kassandra with Yield Yak',
+    symbol: 'K3C',
+    fundIcon: tricryptoIcon,
+    pid: 4,
+    fundLink: 'https://kassandra.finance/',
+    fundSummary: `The #K3C represents a yield-earning portfolio composed of BTC,
+    ETH, USDT and KACY built in partnership with our friends back at Yield Yak.`,
+    partners: [
+      partners.avalanche,
+      partners.yieldYak,
+      partners.traderJoe,
+      partners.aave
+    ],
+    addresses: [
+      '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
+      '0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd',
+      '0xf32398dae246C5f672B52A54e9B413dFFcAe1A44',
+      '0x8729438EB15e2C8B576fCc6AeCdA6A148776C0F5',
+      '0xA32608e873F9DdEF944B24798db69d80Bbb4d1ed',
+      '0x60781C2586D68229fde47564546784ab3fACA982',
+      '0xd1c3f94DE7e5B45fa4eDBBA472491a9f4B166FC4'
+    ]
+  }
 
 export const products = [ahype, tricrypto]

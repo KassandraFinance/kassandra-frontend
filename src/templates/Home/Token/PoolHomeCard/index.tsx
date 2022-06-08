@@ -202,7 +202,9 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
           </S.ImageWrapper>
         </S.CardHeader>
         <S.TextWrapper>
-          <S.NameAndSymbol>
+          <S.NameAndSymbol
+            isTricrypto={pool.name === 'Kassandra Tricrypto Index'}
+          >
             <h1>{pool.name}</h1>
           </S.NameAndSymbol>
           <p>
