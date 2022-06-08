@@ -26,6 +26,7 @@ interface IOperationsProps {
   setIsModaWallet: React.Dispatch<React.SetStateAction<boolean>>;
 
   poolChain: ChainDetails;
+  poolSymbol:string;
   crpPoolAddress: string;
   corePoolAddress: string;
   productCategories: string[];
@@ -42,6 +43,7 @@ const ModalCardOperations = ({
   setModalOpen,
 
   poolChain,
+  poolSymbol,
   crpPoolAddress,
   corePoolAddress,
   productCategories,
@@ -99,6 +101,7 @@ const ModalCardOperations = ({
           setTypeWithdrawChecked={setTypeWithdrawCheckedMobile}
 
           poolChain={poolChain}
+          poolSymbol={poolSymbol}
           crpPoolAddress={crpPoolAddress}
           corePoolAddress={corePoolAddress}
           productCategories={productCategories}

@@ -33,6 +33,8 @@ import { Titles } from '..'
 
 import * as S from './styles'
 
+const WAVAX = '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7'
+
 const invertToken: { [key: string]: string } = {
   '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab':
   '0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E', //WETH
@@ -55,6 +57,7 @@ interface IFormProps {
   title: Titles;
   typeWithdrawChecked: string;
   poolChain: ChainDetails;
+  poolSymbol: string;
   crpPoolAddress: string;
   corePoolAddress: string;
   productCategories: string[];
@@ -73,6 +76,7 @@ type Approvals = { [key in Titles]: Approval[] }
 
 const Form = ({
   poolChain,
+  poolSymbol,
   crpPoolAddress,
   corePoolAddress,
   productCategories,
@@ -94,7 +98,6 @@ const Form = ({
     Invest: [],
     Swap: []
   })
-
   const [newTitle, setNewTitle] = React.useState(title)
 
   const [isReload, setIsReload] = React.useState<boolean>(false)
@@ -177,6 +180,10 @@ const Form = ({
       const newApprovals = []
 
       for (let i = 0; i < poolTokensArray.length; i += 1) {
+        if (poolTokensArray[i].address === WAVAX) {
+          newApprovals.push(true)
+        }
+
         newApprovals.push(
           ERC20(poolTokensArray[i].address).allowance(
             ProxyContract,
@@ -878,7 +885,7 @@ const Form = ({
       try {
         switch (category.value) {
           case 'Invest':
-            if (approved.value === '0') {
+            if (approved.value === '0' && swapInAddressVal !== WAVAX) {
               ERC20(swapInAddressVal).approve(
                 ProxyContract,
                 walletAddress.value,
@@ -887,7 +894,7 @@ const Form = ({
               return
             }
 
-            trackBuying(crpPoolAddress, 'aHYPE', amountInUSD, productCategories)
+            trackBuying(crpPoolAddress, poolSymbol, amountInUSD, productCategories)
             proxy.joinswapExternAmountIn(
               swapInAddressVal,
               swapInAmountVal,
@@ -898,7 +905,7 @@ const Form = ({
             return
 
           case 'Withdraw':
-            trackBuying(crpPoolAddress, 'aHYPE', -1 * amountInUSD, productCategories)
+            trackBuying(crpPoolAddress, poolSymbol, -1 * amountInUSD, productCategories)
             if (approved.value === '0') {
               ERC20(crpPoolAddress).approve(
                 ProxyContract,
@@ -943,7 +950,7 @@ const Form = ({
             return
 
           case 'Swap':
-            if (approved.value === '0') {
+            if (approved.value === '0' && swapInAddressVal !== WAVAX) {
               ERC20(swapInAddressVal).approve(
                 ProxyContract,
                 walletAddress.value,

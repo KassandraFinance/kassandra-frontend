@@ -22,6 +22,7 @@ interface ISelectOperatorProps {
   setTypeWithdrawChecked: React.Dispatch<React.SetStateAction<string>>;
 
   poolChain: ChainDetails;
+  poolSymbol: string;
   crpPoolAddress: string;
   corePoolAddress: string;
   productCategories: string[];
@@ -36,6 +37,7 @@ const SelectOperatorCart = ({
   setIsModaWallet,
 
   poolChain,
+  poolSymbol,
   crpPoolAddress,
   corePoolAddress,
   productCategories
@@ -146,6 +148,7 @@ const SelectOperatorCart = ({
       }
       <Form
         poolChain={poolChain}
+        poolSymbol={poolSymbol}
         crpPoolAddress={crpPoolAddress}
         corePoolAddress={corePoolAddress}
         productCategories={productCategories}
