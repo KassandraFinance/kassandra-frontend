@@ -251,7 +251,7 @@ const Products = ({ product }: Input) => {
   }, [product])
 
   React.useEffect(() => {
-    if (data && coinGeckoResponse.length) {
+    if (data && coinGeckoResponse) {
       getTokenDetails()
 
       const swapFees = data.swap.reduce(

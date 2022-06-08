@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { SWRConfig } from 'swr'
 
 import Gov from '../../templates/Gov'
+import NotFound from '../../templates/404'
 
 export default function Index() {
   return (
@@ -19,7 +20,7 @@ export default function Index() {
         <meta property="og:image:height" content="506" />
         <meta property="og:url" content="https://kassandra.finance/" />
       </Head>
-      <Gov />
+      {process.env.NEXT_PUBLIC_VOTE === '1' ? <Gov /> : <NotFound />}
     </SWRConfig>
   )
 }
