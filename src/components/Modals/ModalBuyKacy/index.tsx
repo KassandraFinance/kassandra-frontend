@@ -34,7 +34,7 @@ const ModalBuyKacy = ({ modalOpen, setModalOpen }: IModalBuyKacyProps) => {
         </S.HeaderModalBuyKacy>
         <S.BodyModalBuyKacy>
           <Link
-            href="https://traderjoexyz.com/pool/AVAX/0xf32398dae246C5f672B52A54e9B413dFFcAe1A44"
+            href="https://traderjoexyz.com/trade?outputCurrency=0xf32398dae246C5f672B52A54e9B413dFFcAe1A44#/"
             passHref
           >
             <S.ButtonModalBuyKacy

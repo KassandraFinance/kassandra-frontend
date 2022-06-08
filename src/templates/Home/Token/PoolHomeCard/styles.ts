@@ -126,12 +126,20 @@ export const TextWrapper = styled.div`
     line-height: 180%;
   }
 `
-export const NameAndSymbol = styled.div`
+
+interface INameAndSymbolProps {
+  isTricrypto: boolean;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const NameAndSymbol = styled.div<INameAndSymbolProps>`
   display: flex;
   align-items: center;
   width: 100%;
 
   h1 {
+    ${({ isTricrypto }) => isTricrypto && `max-width: 32rem;`}
+
     margin: 0;
 
     font-size: ${theme.font.sizes.font32};
