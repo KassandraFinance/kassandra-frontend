@@ -452,6 +452,7 @@ const Products = ({ product }: Input) => {
             </S.ProductDetails>
             <PoolOperations
               poolChain={product.chain}
+              poolSymbol={product.symbol}
               crpPoolAddress={product.sipAddress}
               corePoolAddress={product.coreAddress}
               productCategories={product.categories}

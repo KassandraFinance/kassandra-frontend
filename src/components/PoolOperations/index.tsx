@@ -12,6 +12,7 @@ import * as S from './styles'
 
 interface IOperationsProps {
   poolChain: ChainDetails;
+  poolSymbol: string;
   crpPoolAddress: string;
   corePoolAddress: string;
   productCategories: string[];
@@ -27,6 +28,7 @@ const messages = {
 
 const HeimOperations = ({
   poolChain,
+  poolSymbol,
   crpPoolAddress,
   corePoolAddress,
   productCategories
@@ -50,6 +52,7 @@ const HeimOperations = ({
           setIsModaWallet={setIsModaWallet}
 
           poolChain={poolChain}
+          poolSymbol={poolSymbol}
           crpPoolAddress={crpPoolAddress}
           corePoolAddress={corePoolAddress}
           productCategories={productCategories}
@@ -65,6 +68,7 @@ const HeimOperations = ({
               setIsModaWallet={setIsModaWallet}
 
               poolChain={poolChain}
+              poolSymbol={poolSymbol}
               crpPoolAddress={crpPoolAddress}
               corePoolAddress={corePoolAddress}
               productCategories={productCategories}
