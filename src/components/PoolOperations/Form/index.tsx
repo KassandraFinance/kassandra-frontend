@@ -98,7 +98,6 @@ const Form = ({
     Invest: [],
     Swap: []
   })
-  console.log(poolTokensArray)
   const [newTitle, setNewTitle] = React.useState(title)
 
   const [isReload, setIsReload] = React.useState<boolean>(false)
