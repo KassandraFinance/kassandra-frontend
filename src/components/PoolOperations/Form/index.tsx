@@ -33,6 +33,8 @@ import { Titles } from '..'
 
 import * as S from './styles'
 
+const WAVAX = '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7'
+
 const invertToken: { [key: string]: string } = {
   '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab':
   '0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E', //WETH
@@ -179,6 +181,10 @@ const Form = ({
       const newApprovals = []
 
       for (let i = 0; i < poolTokensArray.length; i += 1) {
+        if (poolTokensArray[i].address === WAVAX) {
+          newApprovals.push(true)
+        }
+
         newApprovals.push(
           ERC20(poolTokensArray[i].address).allowance(
             ProxyContract,
@@ -880,7 +886,7 @@ const Form = ({
       try {
         switch (category.value) {
           case 'Invest':
-            if (approved.value === '0') {
+            if (approved.value === '0' && swapInAddressVal !== WAVAX) {
               ERC20(swapInAddressVal).approve(
                 ProxyContract,
                 walletAddress.value,
@@ -945,7 +951,7 @@ const Form = ({
             return
 
           case 'Swap':
-            if (approved.value === '0') {
+            if (approved.value === '0' && swapInAddressVal !== WAVAX) {
               ERC20(swapInAddressVal).approve(
                 ProxyContract,
                 walletAddress.value,
