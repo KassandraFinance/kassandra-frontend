@@ -55,6 +55,7 @@ interface IFormProps {
   title: Titles;
   typeWithdrawChecked: string;
   poolChain: ChainDetails;
+  poolSymbol: string;
   crpPoolAddress: string;
   corePoolAddress: string;
   productCategories: string[];
@@ -73,6 +74,7 @@ type Approvals = { [key in Titles]: Approval[] }
 
 const Form = ({
   poolChain,
+  poolSymbol,
   crpPoolAddress,
   corePoolAddress,
   productCategories,
@@ -94,7 +96,7 @@ const Form = ({
     Invest: [],
     Swap: []
   })
-
+  console.log(poolTokensArray)
   const [newTitle, setNewTitle] = React.useState(title)
 
   const [isReload, setIsReload] = React.useState<boolean>(false)
@@ -887,7 +889,7 @@ const Form = ({
               return
             }
 
-            trackBuying(crpPoolAddress, 'aHYPE', amountInUSD, productCategories)
+            trackBuying(crpPoolAddress, poolSymbol, amountInUSD, productCategories)
             proxy.joinswapExternAmountIn(
               swapInAddressVal,
               swapInAmountVal,
@@ -898,7 +900,7 @@ const Form = ({
             return
 
           case 'Withdraw':
-            trackBuying(crpPoolAddress, 'aHYPE', -1 * amountInUSD, productCategories)
+            trackBuying(crpPoolAddress, poolSymbol, -1 * amountInUSD, productCategories)
             if (approved.value === '0') {
               ERC20(crpPoolAddress).approve(
                 ProxyContract,
