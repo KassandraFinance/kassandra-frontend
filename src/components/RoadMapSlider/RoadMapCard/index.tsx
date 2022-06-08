@@ -12,7 +12,7 @@ export type RoadMapCardProps = {
   date: string,
   title: string,
   items: CardItem[],
-  icon: string,
+  icon: JSX.Element,
   invisible?: boolean
 }
 

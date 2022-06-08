@@ -1,5 +1,4 @@
 import React from 'react'
-
 import detectEthereumProvider from '@metamask/detect-provider'
 
 import useConnect from '../../../hooks/useConnect'
@@ -43,7 +42,7 @@ const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
           <S.ModalTitle>
             <span>Wallet connection is required</span>
             <button type="button" onClick={() => setModalOpen(false)}>
-              <img src="/assets/close.svg" alt="Close" />{' '}
+              <img src="/assets/utilities/close-icon.svg" alt="Close" />{' '}
             </button>
           </S.ModalTitle>
 
@@ -57,7 +56,7 @@ const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
                     rel="noopener noreferrer"
                   >
                     Metamask
-                    <img src="/assets/externalLink.svg" alt="" />
+                    <img src="/assets/utilities/external-link.svg" alt="" />
                   </a>
                   is not installed on this browser
                 </S.Tooltip>
@@ -77,13 +76,13 @@ const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
                 }}
               >
                 <S.WrapperIcons>
-                  <img src="/assets/metaMaskIcon.svg" alt="" />
+                  <img src="/assets/logos/metamask.svg" alt="" />
                   <span>Metamask</span>
                 </S.WrapperIcons>
               </S.WrapperIconsBackGround>
             </Tippy>
 
-            {/* <S.WrapperIconsBackGround
+            <S.WrapperIconsBackGround
               type="button"
               onClick={() => {
                 setModalOpen(false)
@@ -91,10 +90,10 @@ const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
               }}
             >
               <S.WrapperIcons>
-                <img src="/assets/connectWalletIcon.svg" alt="" />
+                <img src="/assets/logos/connect-wallet.svg" alt="" />
                 <span>WalletConnect</span>
               </S.WrapperIcons>
-            </S.WrapperIconsBackGround> */}
+            </S.WrapperIconsBackGround>
           </S.Content>
         </S.BackgroundBlack>
       </S.Container>

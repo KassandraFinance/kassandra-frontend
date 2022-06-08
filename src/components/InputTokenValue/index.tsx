@@ -16,7 +16,6 @@ interface IInputProps {
 }
 
 const InputTokenValue = ({
-  max,
   decimals,
   inputRef,
   setInputValue,
@@ -26,14 +25,22 @@ const InputTokenValue = ({
     disabled = ''
   }
 
+  function handleOnWheel() {
+    if (document.activeElement?.classList.contains("noscroll")) {
+      (document.activeElement as HTMLElement).blur()
+    }
+  }
+
   return (
     <Tippy content={disabled} disabled={disabled.length === 0}>
       <Input
+        className="noscroll"
         readOnly={disabled.length > 0}
         ref={inputRef}
         type="number"
         placeholder="0"
         step="any"
+        onWheel={() => handleOnWheel()}
         onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
           const target = e.target as HTMLInputElement
           // don't allow negative numbers
@@ -61,7 +68,7 @@ const InputTokenValue = ({
             else if (value[0] === '0') {
               e.target.value = value.replace(/^0+/, '')
             }
-            
+
             if (e.target.value[0] === '.') {
               e.target.value = `0${e.target.value}`
             }

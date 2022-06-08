@@ -96,6 +96,13 @@ export const ToDocumentation = styled.div`
   font-family: ${theme.font.family};
   font-size: ${theme.font.sizes.font14};
 
+  @media (max-width: 420px) {
+    justify-content: center;
+
+    max-width: 100%;
+    width: 100%;
+  }
+
   p {
     max-width: 100%;
     margin-bottom: 0;

@@ -1,10 +1,10 @@
-import WalletConnect from '@walletconnect/client'
-import { ToastSuccess } from '../components/Toastify/toast'
+import WalletConnectProvider from '@walletconnect/web3-provider'
 
 export async function subscribeToEvents(
-  connector: WalletConnect,
+  connector: WalletConnectProvider,
   handleAccountsChanged: (accounts: []) => void,
-  handleChainChanged: (chainId: number) => void
+  handleChainChanged: (chainId: number) => void,
+  handleDisconnected: () => void
 ) {
   if (!connector) {
     return
@@ -18,7 +18,8 @@ export async function subscribeToEvents(
       payload: { params: { accounts: [], chainId: number }[] }
     ) => {
       if (error) {
-        throw error
+        console.log(error)
+        return
       }
 
       // Get provided accounts and chainId
@@ -26,7 +27,6 @@ export async function subscribeToEvents(
 
       handleAccountsChanged(accounts)
       handleChainChanged(chainId)
-      ToastSuccess('Connected to Wallet Connect.')
     }
   )
 
@@ -37,7 +37,8 @@ export async function subscribeToEvents(
       payload: { params: { accounts: [], chainId: number }[] }
     ) => {
       if (error) {
-        throw error
+        console.log(error)
+        return
       }
 
       // Get updated accounts and chainId
@@ -47,9 +48,11 @@ export async function subscribeToEvents(
     }
   )
 
-  connector.on('disconnect', (error: unknown, payload) => {
+  connector.on('disconnect', (error: unknown) => {
+    handleDisconnected()
     if (error) {
-      throw error
+      console.log(error)
+      return
     }
   })
 
@@ -60,7 +63,8 @@ export async function subscribeToEvents(
       payload: { params: { accounts: [], chainId: number }[] }
     ) => {
       if (error) {
-        throw error
+        console.log(error)
+        return
       }
 
       // Get updated accounts and chainId
@@ -76,7 +80,8 @@ export async function subscribeToEvents(
       payload: { params: { accounts: [], chainId: number }[] }
     ) => {
       if (error) {
-        throw error
+        console.log(error)
+        return
       }
 
       // Get updated accounts and chainId

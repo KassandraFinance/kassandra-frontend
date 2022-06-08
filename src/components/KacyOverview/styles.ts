@@ -26,6 +26,10 @@ export const TitleandIcon = styled.div`
     color: #ffffff;
     line-height: 104%;
   }
+
+  @media (max-width: 450px) {
+    justify-content: center;
+  }
 `
 export const Icon = styled.img`
   max-width: 1.75rem;
@@ -34,7 +38,7 @@ export const Icon = styled.img`
 
 export const TokenInfo = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, auto);
   margin-top: 1.6rem;
 
   border-top: 0.1rem solid #ffffff24;
@@ -43,6 +47,11 @@ export const TokenInfo = styled.div`
     grid-template-columns: 1fr 1fr;
     align-items: end;
     justify-content: center;
+  }
+
+  @media (max-width: 420px) {
+    align-items: center;
+    gap: 0 3rem;
   }
 `
 export const Values = styled.div`

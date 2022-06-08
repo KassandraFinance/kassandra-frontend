@@ -5,11 +5,14 @@ interface CurrencyDetails {
 }
 
 export interface ChainDetails {
-  chainId: string;
+  chainId: number;
+  chainIdHex: string;
   chainName: string;
   nativeCurrency: CurrencyDetails;
   rpcUrls: [string];
   blockExplorerUrls: [string];
+  secondsPerBlock: number;
+  wrapped: string;
 }
 
 // eslint-disable-next-line prettier/prettier
@@ -24,7 +27,7 @@ export default async (chain: ChainDetails) => {
   try {
     await window.ethereum.request({
       method: 'wallet_switchEthereumChain',
-      params: [{ chainId: chain.chainId }]
+      params: [{ chainId: chain.chainIdHex }]
     })
   } catch (error: any) {
     // This error code indicates that the chain has not been added to MetaMask.

@@ -4,7 +4,7 @@ import theme from '../../../styles/theme'
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  background-image: url('/assets/about-community-background.svg');
+  background-image: url('/assets/images/about-community-background.svg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

@@ -1,12 +1,23 @@
 import { combineReducers } from 'redux'
-import chainId from './chainId/reducer'
-import poolImages from './poolImages/reducer'
+
+import feesReducer from './fees/reducer'
+import chainIdReducer from './chainId/reducer'
+import poolImagesReducer from './poolImages/reducer'
 import poolTokensReducer from './poolTokens/reducer'
+import chartSelectedReducer from './chartSelected/reducer'
+import periodSelectedReducer from './periodSelected/reducer'
 import userWalletAddressReducer from './userWalletAddress/reducer'
+import tokenAddress2IndexReducer from './tokenAddress2Index/reducer'
+import performanceValuesReducer from './performanceValues/reducer'
 
 export default combineReducers({
-  chainId: chainId,
+  fees: feesReducer,
+  chainId: chainIdReducer,
+  poolImages: poolImagesReducer,
   poolTokensArray: poolTokensReducer,
+  chartSelected: chartSelectedReducer,
+  periodSelected: periodSelectedReducer,
   userWalletAddress: userWalletAddressReducer,
-  poolImages: poolImages
+  tokenAddress2Index: tokenAddress2IndexReducer,
+  performanceValues: performanceValuesReducer
 })

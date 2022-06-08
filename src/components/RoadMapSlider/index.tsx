@@ -4,8 +4,8 @@ import Image from 'next/image'
 import Slider, { SliderSettings } from '../../components/Slider'
 import RoadMapCard from './RoadMapCard'
 
-import pinIcon from '../../../public/assets/RoadmapIcon.svg'
-import { icons, colors } from './assets'
+import pinIcon from '../../../public/assets/iconGradient/road-map.svg'
+import { icons, colors, SlickArrowLeft, SlickArrowRight } from './assets'
 
 import * as S from './styles'
 
@@ -39,8 +39,8 @@ const RoadMapSlider = () => {
         }
       }
     ],
-    nextArrow: <img src="/assets/ArrowNext.svg" alt="" />,
-    prevArrow: <img src="/assets/ArrowPrevious.svg" alt="" />
+    prevArrow: <SlickArrowLeft />,
+    nextArrow: <SlickArrowRight />
   }
 
   return (
@@ -69,28 +69,6 @@ const RoadMapSlider = () => {
 }
 
 const arrCard = [
-  {
-    date: '2022 - Q1',
-    title: '1st Cycle ',
-    icon: icons.done,
-    color: colors.done,
-    items: [
-      {
-        title: 'IDO',
-        text: ['Launching and bootstrapping KACY']
-      },
-      {
-        title: 'Avalanche Social Index',
-        text: [
-          'A single asset that automatically invests in the most active communities on Avalanche'
-        ]
-      },
-      {
-        title: 'Stake & Farm',
-        text: ['Earn staking KACY and other assets']
-      }
-    ]
-  },
   {
     date: '2022 - Q2',
     icon: icons.soon,
@@ -124,6 +102,28 @@ const arrCard = [
       {
         title: 'Multichain',
         text: ['Time to jump into other blockchains']
+      }
+    ]
+  },
+  {
+    date: '2022 - Q1',
+    title: '1st Cycle ',
+    icon: icons.done,
+    color: colors.done,
+    items: [
+      {
+        title: 'IDO',
+        text: ['Launching and bootstrapping KACY']
+      },
+      {
+        title: 'Avalanche Social Index',
+        text: [
+          'A single asset that automatically invests in the most active communities on Avalanche'
+        ]
+      },
+      {
+        title: 'Stake & Farm',
+        text: ['Earn staking KACY and other assets']
       }
     ]
   }

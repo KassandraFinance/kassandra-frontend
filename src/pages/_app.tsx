@@ -16,7 +16,9 @@ import Toastify from '../components/Toastify'
 const matomoUrl = 'https://stats.kassandra.finance'
 
 const instance = createInstance({
-  disabled: process.env.NODE_ENV === 'development',
+  disabled:
+    process.env.NODE_ENV === 'development' ||
+    process.env.NEXT_PUBLIC_MASTER !== '1',
   urlBase: matomoUrl,
   siteId: 4,
   trackerUrl: `${matomoUrl}/api.php`,
@@ -28,6 +30,8 @@ const instance = createInstance({
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter()
+  const pathName = router.pathname
+
   return (
     <MatomoProvider value={instance}>
       <ThemeProvider theme={theme}>
@@ -50,15 +54,9 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
           />
           <meta property="og:site_name" content="Kassandra" />
           <meta property="og:type" content="website" />
-          <meta property="og:url" content="https://kassandra.finance/" />
+          {/* <meta property="og:url" content="https://kassandra.finance/" /> */}
           <meta property="og:title" content="Kassandra - Decentralized Funds" />
-          <meta
-            property="og:image"
-            content="https://kassandra.finance/kacy-og.png"
-          />
-          <meta property="og:image:width" content="1012" />
-          <meta property="og:image:height" content="506" />
-          <meta
+          {/* <meta
             property="og:image:alt"
             content="Welcome to Kassandra DAO - Tokenized data-driven investment funds"
           />
@@ -79,10 +77,14 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
           <meta
             name="twitter:image:alt"
             content="Welcome to Kassandra DAO - Tokenized data-driven investment funds"
-          />
+          /> */}
         </Head>
         <Toastify />
-        <GlobalStyles />
+        <GlobalStyles
+          selectBackground={
+            pathName === '/' ? false : pathName === '/about' ? false : true
+          }
+        />
         <Component {...pageProps} />
         {router.pathname !== '/404' && <Footer />}
       </ThemeProvider>

@@ -3,16 +3,16 @@ import theme from '../../../styles/theme'
 
 export const Products = styled.section`
   display: grid;
-  gap: 10rem;
   grid-template-columns: 1fr 1fr;
+  gap: 10rem;
+
   max-width: 96rem;
   margin: 0 auto 16rem;
   padding: 0 ${theme.spacings.space32};
 
   @media (max-width: 960px) {
-    display: grid;
-    gap: 5rem;
     grid-template-columns: 1fr;
+    gap: 5rem;
     margin: 0 auto 8rem;
   }
 `
@@ -35,7 +35,11 @@ export const TextWrapper = styled.div`
     }
 
     @media (max-width: 450px) {
+      margin-bottom: 2.4rem;
+
       font-size: ${theme.font.sizes.font24};
+      font-weight: ${theme.font.weight.bold};
+      line-height: 3.2rem;
     }
   }
 
@@ -72,19 +76,24 @@ export const TextWrapper = styled.div`
 
 export const Divider = styled.div`
   max-width: 10rem;
-  margin-block: 4rem;
+  margin-block: 3.2rem;
 
   border-bottom: 0.3rem;
   border-bottom-style: solid;
   border-bottom-color: #ffbf00;
   border-radius: 0.4rem;
+
+  @media (max-width: 450px) {
+    margin-block: 2.4rem;
+  }
 `
 
 export const Link = styled.a`
   display: flex;
   align-items: center;
-  margin-bottom: 2rem;
   max-width: max-content;
+
+  margin-bottom: 2rem;
 
   text-decoration: none;
   color: ${theme.colors.snow};
@@ -128,7 +137,6 @@ export const CardContainer = styled.div`
     font-size: ${theme.font.sizes.font14};
     color: ${theme.colors.amber};
     text-align: left;
-    letter-spacing: 0.56rem;
     letter-spacing: 0.4rem;
 
     @media (max-width: 450px) {
@@ -165,12 +173,14 @@ export const Card = styled.div`
 export const IconWrapper = styled.div`
   display: table-cell;
   vertical-align: middle;
-  text-align: center;
   margin-bottom: 2.6rem;
   max-width: auto;
+
   width: 7.8rem;
   height: 7.3rem;
   margin: auto;
+
+  text-align: center;
 
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 1.2rem;

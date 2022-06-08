@@ -12,7 +12,7 @@ const Breadcrumb = ({ children }: IBreadcrumbProps) => {
   return (
     <S.Breadcrumb>
       <Image
-        src="/assets/icons/arrow-left.svg"
+        src="/assets/utilities/arrow-left.svg"
         alt="Arrow Left Icon"
         width={12}
         height={12}

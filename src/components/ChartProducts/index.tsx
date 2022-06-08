@@ -2,8 +2,12 @@ import React from 'react'
 import useSWR from 'swr'
 import request from 'graphql-request'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
 
-import { SUBGRAPH_URL, HeimCRPPOOL } from '../../constants/tokenAddresses'
+import { SUBGRAPH_URL } from '../../constants/tokenAddresses'
+
+import { actionSetPeriodSelected } from '../../store/modules/periodSelected/actions'
+import { actionSetChartSelected } from '../../store/modules/chartSelected/actions'
 
 import Loading from '../Loading'
 
@@ -14,10 +18,21 @@ import ChartAllocation from './ChartAllocation'
 import { GET_CHART } from './graphql'
 
 import * as S from './styles'
+import {
+  actionSetPerformanceValues,
+  PerformanceValues
+} from '../../store/modules/performanceValues/actions'
 
 const arrPeriod: string[] = ['1W', '1M', '3M', '1Y']
 
-const ChartProducts = () => {
+interface IChartProductsProps {
+  crpPoolAddress: string;
+}
+
+const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
+  const dispatch = useDispatch()
+  const { performanceValues }: { performanceValues: PerformanceValues } =
+    useSelector((state: RootStateOrAny) => state)
   const [inputChecked, setInputChecked] = React.useState<string>('Price')
   const [price, setPrice] = React.useState([])
   const [tvl, setTvl] = React.useState([])
@@ -28,7 +43,7 @@ const ChartProducts = () => {
   const dateNow = new Date()
 
   const [params, setParams] = React.useState({
-    id: HeimCRPPOOL,
+    id: crpPoolAddress,
     price_period: 3600,
     period_selected: Math.trunc(dateNow.getTime() / 1000 - 60 * 60 * 24 * 7)
   })
@@ -46,6 +61,13 @@ const ChartProducts = () => {
           price_period: 3600,
           period_selected: Math.trunc(dateNow.getTime() / 1000 - 60 * 60 * 24)
         }))
+        dispatch(
+          actionSetPerformanceValues({
+            title: 'Daily Performance',
+            performance: performanceValues?.changeWeek[0],
+            changeWeek: performanceValues.changeWeek
+          })
+        )
         break
       case '1W':
         setParams(prevState => ({
@@ -55,6 +77,15 @@ const ChartProducts = () => {
             dateNow.getTime() / 1000 - 60 * 60 * 24 * 7
           )
         }))
+        dispatch(
+          actionSetPerformanceValues({
+            title: 'Weekly Performance',
+            performance:
+              performanceValues.changeWeek && performanceValues?.changeWeek[1],
+            changeWeek:
+              performanceValues.changeWeek && performanceValues.changeWeek
+          })
+        )
         break
       case '1M':
         setParams(prevState => ({
@@ -64,6 +95,13 @@ const ChartProducts = () => {
             dateNow.getTime() / 1000 - 60 * 60 * 24 * 30
           )
         }))
+        dispatch(
+          actionSetPerformanceValues({
+            title: 'Monthly Performance',
+            performance: performanceValues?.changeWeek[2],
+            changeWeek: performanceValues.changeWeek
+          })
+        )
         break
       case '3M':
         setParams(prevState => ({
@@ -73,6 +111,13 @@ const ChartProducts = () => {
             dateNow.getTime() / 1000 - 60 * 60 * 24 * 90
           )
         }))
+        dispatch(
+          actionSetPerformanceValues({
+            title: '3 Months Performance',
+            performance: performanceValues?.changeWeek[3],
+            changeWeek: performanceValues.changeWeek
+          })
+        )
         break
       case '1Y':
         setParams(prevState => ({
@@ -82,6 +127,13 @@ const ChartProducts = () => {
             dateNow.getTime() / 1000 - 60 * 60 * 24 * 365
           )
         }))
+        dispatch(
+          actionSetPerformanceValues({
+            title: 'Yearly Performance',
+            performance: performanceValues?.changeWeek[4],
+            changeWeek: performanceValues.changeWeek
+          })
+        )
         break
       default:
         break
@@ -97,8 +149,13 @@ const ChartProducts = () => {
   }
 
   React.useEffect(() => {
+    dispatch(actionSetChartSelected('Price'))
+  }, [])
+
+  React.useEffect(() => {
     returnDate('1W')
     setPeriodSelected('1W')
+    dispatch(actionSetPeriodSelected('1W'))
   }, [inputChecked])
 
   React.useEffect(() => {
@@ -142,62 +199,66 @@ const ChartProducts = () => {
           <S.Input
             type="radio"
             name="operator"
-            id="Price"
+            id="Price-chart"
             onChange={() => {
               setInputChecked('Price')
+              dispatch(actionSetChartSelected('Price'))
               matomoEvent('click-on-tab', 'price')
             }}
             checked={inputChecked === 'Price'}
           />
-          <S.Label selected={inputChecked === 'Price'} htmlFor="Price">
+          <S.Label selected={inputChecked === 'Price'} htmlFor="Price-chart">
             Price
           </S.Label>
           <S.Input
             type="radio"
             name="operator"
-            id="TVL"
+            id="TVL-chart"
             onChange={() => {
               setInputChecked('TVL')
+              dispatch(actionSetChartSelected('TVL'))
               matomoEvent('click-on-tab', 'tvl')
             }}
             checked={inputChecked === 'TVL'}
           />
-          <S.Label selected={inputChecked === 'TVL'} htmlFor="TVL">
+          <S.Label selected={inputChecked === 'TVL'} htmlFor="TVL-chart">
             TVL
           </S.Label>
           <S.Input
             type="radio"
             name="operator"
-            id="Allocation"
+            id="Allocation-chart"
             onChange={() => {
               setInputChecked('Allocation')
+              dispatch(actionSetChartSelected('Allocation'))
               matomoEvent('click-on-tab', 'allocation')
             }}
             checked={inputChecked === 'Allocation'}
           />
           <S.Label
             selected={inputChecked === 'Allocation'}
-            htmlFor="Allocation"
+            htmlFor="Allocation-chart"
           >
             Allocation
           </S.Label>
         </S.SelectChart>
         <S.SelectPeriod>
           {inputChecked === 'Price' && (
-            <li key="day1D">
+            <li key="day-1D">
               <S.Input
-                id="day1D"
+                id="day-1D"
                 type="radio"
                 checked={periodSelected === '1D'}
                 onChange={() => {
                   returnDate('1D')
                   setPeriodSelected('1D')
+                  dispatch(actionSetPeriodSelected('1D'))
                 }}
               />
               <S.LabelPeriod
                 selectPeriod={periodSelected === '1D'}
                 isPrice={inputChecked === 'Price'}
-                htmlFor="day1D"
+                htmlFor="day-1D"
                 title="period"
               >
                 1D
@@ -205,19 +266,20 @@ const ChartProducts = () => {
             </li>
           )}
           {arrPeriod.map(period => (
-            <li key={`day${period}`}>
+            <li key={`day-${period}`}>
               <S.Input
-                id={`day${period}`}
+                id={`day-${period}`}
                 type="radio"
                 checked={periodSelected === period}
                 onChange={() => {
                   returnDate(period)
                   setPeriodSelected(period)
+                  dispatch(actionSetPeriodSelected(period))
                 }}
               />
               <S.LabelPeriod
                 selectPeriod={periodSelected === period}
-                htmlFor={`day${period}`}
+                htmlFor={`day-${period}`}
                 title="period"
               >
                 {period}
@@ -228,7 +290,7 @@ const ChartProducts = () => {
       </S.Selects>
       {loading ? (
         <S.Wrapper>
-          <Loading />
+          <Loading marginTop={14} />
         </S.Wrapper>
       ) : null}
       {inputChecked === 'Price' && !loading && (
