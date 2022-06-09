@@ -14,7 +14,7 @@ import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
 import * as S from './styles'
 
 interface IpoolTokensArrayProps extends TokenDetails {
-  dataYieldyak: {
+  dataInfoYY: {
     item: {
       urlFarmContract: string,
       farmName: string
@@ -70,8 +70,8 @@ const Distribution = ({ product }: IDistributionProps) => {
                               ''
                             ) : (
                               <p>
-                                {coin.dataYieldyak
-                                  ? coin.dataYieldyak.item.farmName
+                                {coin.dataInfoYY
+                                  ? coin.dataInfoYY.item.farmName
                                   : ''}
                               </p>
                             )}
@@ -115,16 +115,16 @@ const Distribution = ({ product }: IDistributionProps) => {
                         ''
                       ) : (
                         <S.Td>
-                          {coin.dataYieldyak ? (
+                          {coin.dataInfoYY ? (
                             <>
                               <p>
-                                {coin.dataYieldyak.apy
-                                  ? coin.dataYieldyak.apy
+                                {coin.dataInfoYY.apy
+                                  ? coin.dataInfoYY.apy
                                   : '0.0'}
                                 % APY
                               </p>
                               <Link
-                                href={coin.dataYieldyak.item.urlFarmContract}
+                                href={coin.dataInfoYY.item.urlFarmContract}
                                 passHref
                               >
                                 <S.yildyakContent target="_blank">
