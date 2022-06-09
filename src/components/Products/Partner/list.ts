@@ -4,6 +4,7 @@ import api3 from '../../../../public/assets/logos/api3.svg'
 import yieldYak from '../../../../public/assets/logos/yield-yak.svg'
 import aave from '../../../../public/assets/logos/aave.svg'
 import traderJoe from '../../../../public/assets/logos/traderJoe.svg'
+import benqi from '../../../../public/assets/logos/benqi.svg'
 import { PartnerData } from './'
 
 const partners: { [key: string]: PartnerData } = {
@@ -60,6 +61,15 @@ const partners: { [key: string]: PartnerData } = {
       width: 40
     },
     name: 'TraderJoe'
+  },
+  benqi: {
+    href: 'https://benqi.fi/',
+    image: {
+      src: benqi,
+      height: 40,
+      width: 40
+    },
+    name: 'Benqi'
   }
 }
 

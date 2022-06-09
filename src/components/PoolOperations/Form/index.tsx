@@ -38,17 +38,17 @@ const WAVAX = '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7'
 const invertToken: { [key: string]: string } = {
   '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab':
   '0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E', //WETH
-  '0xc7198437980c041c805a1edcba50c1ce5db95118':
-  '0x964555644E067c560A4C144360507E80c1104784', //USDT
+  '0xd586e7f844cea2f87f50152665bcbc2c279d8d70':
+  '0xFA17fb53da4c837594127b73fFd09fdb15f42C49', //DAI
   '0x50b7545627a5162f82a992c33b87adc75187b218':
   '0xbbcED92AC9B958F88A501725f080c0360007e858',  //WBTC
 
 
   '0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E': //WETH
   '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab',
-  '0x964555644E067c560A4C144360507E80c1104784': //USDT
-  '0xc7198437980c041c805a1edcba50c1ce5db95118',
-  '0xbbcED92AC9B958F88A501725f080c0360007e858': 
+  '0xFA17fb53da4c837594127b73fFd09fdb15f42C49': //DAI
+  '0xd586e7f844cea2f87f50152665bcbc2c279d8d70',
+  '0xbbcED92AC9B958F88A501725f080c0360007e858':
   '0x50b7545627a5162f82a992c33b87adc75187b218'
 }
 
@@ -98,7 +98,6 @@ const Form = ({
     Invest: [],
     Swap: []
   })
-  console.log(poolTokensArray)
   const [newTitle, setNewTitle] = React.useState(title)
 
   const [isReload, setIsReload] = React.useState<boolean>(false)
@@ -470,7 +469,7 @@ const Form = ({
           if (errorStr.search('below minimum') > -1) {
             setErrorMsg("This amount is below minimum withdraw!")
             return
-          } 
+          }
 
           if (swapInAmount.gt(swapInBalance)) {
             setErrorMsg('This amount exceeds your balance!')
@@ -562,7 +561,7 @@ const Form = ({
             )
           })
         )
-        
+
         setSwapOutAmount(newSwapOutAmount)
 
         try {
@@ -580,7 +579,7 @@ const Form = ({
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
           const errorStr = error.toString()
-          
+
           if (errorStr.search(/ERR_(BPOW_BASE_TOO_|MATH_APPROX)/) > -1) {
             setErrorMsg('This amount is too low for the pool!')
             return
@@ -589,7 +588,7 @@ const Form = ({
           if (errorStr.search('below minimum') > -1) {
             setErrorMsg("This amount is below minimum withdraw!")
             return
-          } 
+          }
 
           if (swapInAmount.gt(swapInBalance)) {
             setErrorMsg('This amount exceeds your balance!')
@@ -670,7 +669,7 @@ const Form = ({
         if (errorStr.search('below minimum') > -1) {
           setErrorMsg("This amount is below minimum withdraw!")
           return
-        } 
+        }
 
         if (swapInAmount.gt(swapInBalance)) {
           setErrorMsg('This amount exceeds your balance!')
@@ -913,7 +912,7 @@ const Form = ({
                 walletAddress.value,
                 approvalCallback(swapInSymbol.value, swapInAddressVal, tabTitle)
               )
-              return              
+              return
             }
             if (swapOutAddressVal !== '') {
               proxy.exitswapPoolAmountIn(
@@ -1199,7 +1198,7 @@ const Form = ({
                     typeWithdrawChecked === "Best_value" ?
                       `${title} ${'$' + priceInDollarOnWithdraw}`
                       :
-                      `${title} ${'$' + 
+                      `${title} ${'$' +
                       BNtoDecimal(
                         Big((swapOutAmount[0] || 0).toString())
                           .mul(Big(priceDollar(swapOutAddress, poolTokensArray)))
