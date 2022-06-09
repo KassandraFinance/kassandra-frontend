@@ -3,7 +3,13 @@ import React from 'react'
 import BigNumber from 'bn.js'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import { chains, Staking } from '../../constants/tokenAddresses'
+import {
+  chains,
+  Staking,
+  Kacy,
+  HeimCRPPOOL,
+  products
+} from '../../constants/tokenAddresses'
 
 import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 import useStakingContract from '../../hooks/useStakingContract'
@@ -103,7 +109,12 @@ const StakeFarm = () => {
             <S.StakeWithPowerVote>
               <S.NameStake>
                 <S.Name>
-                  <img src="assets/iconGradient/vote.svg" alt="" width={24} height={24} />
+                  <img
+                    src="assets/iconGradient/vote.svg"
+                    alt=""
+                    width={24}
+                    height={24}
+                  />
                   <h1>Stake KACY</h1>
                 </S.Name>
                 <p>EARN REWARDS AND VOTING POWER</p>
@@ -114,6 +125,12 @@ const StakeFarm = () => {
               <StakeCard
                 pid={process.env.NEXT_PUBLIC_MASTER === '1' ? 2 : 0}
                 symbol="kacy"
+                properties={{
+                  logo: {
+                    src: '/assets/logos/kacy-stake.svg',
+                    style: { width: '5.8rem' }
+                  }
+                }}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
                 getReward={kacyStake.getReward}
@@ -126,6 +143,12 @@ const StakeFarm = () => {
               <StakeCard
                 pid={process.env.NEXT_PUBLIC_MASTER === '1' ? 3 : 1}
                 symbol="kacy"
+                properties={{
+                  logo: {
+                    src: '/assets/logos/kacy-stake.svg',
+                    style: { width: '5.8rem' }
+                  }
+                }}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
                 getReward={kacyStake.getReward}
@@ -138,6 +161,12 @@ const StakeFarm = () => {
               <StakeCard
                 pid={process.env.NEXT_PUBLIC_MASTER === '1' ? 4 : 2}
                 symbol="kacy"
+                properties={{
+                  logo: {
+                    src: '/assets/logos/kacy-stake.svg',
+                    style: { width: '5.8rem' }
+                  }
+                }}
                 balanceOf={kacyStake.balance}
                 earned={kacyStake.earned}
                 getReward={kacyStake.getReward}
@@ -151,6 +180,12 @@ const StakeFarm = () => {
                 <StakeCard
                   pid={0}
                   symbol="kacy"
+                  properties={{
+                    logo: {
+                      src: '/assets/logos/kacy-stake.svg',
+                      style: { width: '5.8rem' }
+                    }
+                  }}
                   balanceOf={kacyStake.balance}
                   earned={kacyStake.earned}
                   getReward={kacyStake.getReward}
@@ -168,6 +203,12 @@ const StakeFarm = () => {
                 <StakeCard
                   pid={1}
                   symbol="kacy"
+                  properties={{
+                    logo: {
+                      src: '/assets/logos/kacy-stake.svg',
+                      style: { width: '5.8rem' }
+                    }
+                  }}
                   balanceOf={kacyStake.balance}
                   earned={kacyStake.earned}
                   getReward={kacyStake.getReward}
@@ -184,30 +225,49 @@ const StakeFarm = () => {
             </S.GridStaking>
             <S.NameStake left={true} style={{ margin: '100px 0 50px' }}>
               <S.Name>
-                <img src="assets/iconGradient/stake-money-withdraw.svg" alt="" />
+                <img
+                  src="assets/iconGradient/stake-money-withdraw.svg"
+                  alt=""
+                />
                 <h1>Farm KACY</h1>
               </S.Name>
               <p>EARN KACY BY STAKING OTHER ASSETS</p>
             </S.NameStake>
             <S.GridStaking>
-            {process.env.NEXT_PUBLIC_MASTER === '1' ? (
-              <StakeCard
-                pid={5}
-                symbol="lp-png"
-                balanceOf={kacyStake.balance}
-                earned={kacyStake.earned}
-                getReward={kacyStake.getReward}
-                withdrawable={kacyStake.withdrawable}
-                poolInfo={kacyStake.poolInfo}
-                unstaking={kacyStake.unstaking}
-                stakedUntil={kacyStake.stakedUntil}
-                stakeWithVotingPower={true}
-              />
-            ): null}
+              {process.env.NEXT_PUBLIC_MASTER === '1' ? (
+                <StakeCard
+                  pid={5}
+                  symbol="lp-png"
+                  properties={{
+                    logo: {
+                      src: '/assets/logos/lp-kacy.svg',
+                      style: { width: '14.4rem' }
+                    },
+                    title: '$KACY-AVAX PNG LP',
+                    link: `https://app.pangolin.exchange/#/add/AVAX/${Kacy}`
+                  }}
+                  balanceOf={kacyStake.balance}
+                  earned={kacyStake.earned}
+                  getReward={kacyStake.getReward}
+                  withdrawable={kacyStake.withdrawable}
+                  poolInfo={kacyStake.poolInfo}
+                  unstaking={kacyStake.unstaking}
+                  stakedUntil={kacyStake.stakedUntil}
+                  stakeWithVotingPower={true}
+                />
+              ) : null}
               {process.env.NEXT_PUBLIC_MASTER === '1' ? (
                 <StakeCard
                   pid={7}
                   symbol="lp-joe"
+                  properties={{
+                    logo: {
+                      src: '/assets/logos/joe-kacy.svg',
+                      style: { width: '14.4rem' }
+                    },
+                    title: '$KACY-AVAX JOE LP',
+                    link: `https://traderjoexyz.com/pool/AVAX/${Kacy}`
+                  }}
                   balanceOf={kacyStake.balance}
                   earned={kacyStake.earned}
                   getReward={kacyStake.getReward}
@@ -224,6 +284,15 @@ const StakeFarm = () => {
                 <StakeCard
                   pid={6}
                   symbol="ahype"
+                  address={HeimCRPPOOL}
+                  properties={{
+                    logo: {
+                      src: '/assets/logos/ahype-stake.svg',
+                      style: { width: '5.8rem' }
+                    },
+                    title: '$aHYPE',
+                    link: '/explore/ahype'
+                  }}
                   balanceOf={kacyStake.balance}
                   earned={kacyStake.earned}
                   getReward={kacyStake.getReward}
@@ -237,6 +306,15 @@ const StakeFarm = () => {
                 <StakeCard
                   pid={4}
                   symbol="ahype"
+                  address={HeimCRPPOOL}
+                  properties={{
+                    logo: {
+                      src: '/assets/logos/ahype-stake.svg',
+                      style: { width: '5.8rem' }
+                    },
+                    title: '$aHYPE',
+                    link: '/explore/ahype'
+                  }}
                   balanceOf={kacyStake.balance}
                   earned={kacyStake.earned}
                   getReward={kacyStake.getReward}
@@ -247,6 +325,30 @@ const StakeFarm = () => {
                   stakeWithVotingPower={true}
                 />
               )}
+              {/* {process.env.NEXT_PUBLIC_MASTER === '1' ? (
+                <StakeCard
+                  pid={8}
+                  symbol="k3c"
+                  address={products[1].sipAddress}
+                  properties={{
+                    logo: {
+                      src: '/assets/logos/tricrypto-stake.svg',
+                      style: { width: '5.8rem' }
+                    },
+                    link: '/explore/k3c'
+                  }}
+                  balanceOf={kacyStake.balance}
+                  earned={kacyStake.earned}
+                  getReward={kacyStake.getReward}
+                  withdrawable={kacyStake.withdrawable}
+                  poolInfo={kacyStake.poolInfo}
+                  unstaking={kacyStake.unstaking}
+                  stakedUntil={kacyStake.stakedUntil}
+                  stakeWithVotingPower={true}
+                />
+              ) : (
+                ''
+              )} */}
             </S.GridStaking>
           </S.StakeFarm>
         </>

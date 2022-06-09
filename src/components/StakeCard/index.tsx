@@ -18,9 +18,7 @@ import {
   LPDaiAvax,
   LPKacyAvaxPNG,
   LPKacyAvaxJOE,
-  Kacy,
-  SUBGRAPH_URL,
-  HeimCRPPOOL
+  SUBGRAPH_URL
 } from '../../constants/tokenAddresses'
 
 import usePriceLP from '../../hooks/usePriceLP'
@@ -28,10 +26,11 @@ import { PoolInfo } from '../../hooks/useStakingContract'
 import useERC20Contract, { ERC20 } from '../../hooks/useERC20Contract'
 
 import web3 from '../../utils/web3'
-import { BNtoDecimal } from '../../utils/numerals' // eslint-disable-next-line prettier/prettier
+import { BNtoDecimal } from '../../utils/numerals'
+// eslint-disable-next-line prettier/prettier
 import waitTransaction, { MetamaskError, TransactionCallback } from '../../utils/txWait'
 
-import { GET_INFO_AHYPE } from './graphql'
+import { GET_INFO_POOL } from './graphql'
 
 import Button from '../Button'
 import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
@@ -55,6 +54,7 @@ export interface IPriceLPToken {
   priceLPJoe: Big;
   kacy: Big;
   aHYPE: Big;
+  k3c: Big;
 }
 
 export interface IInfoStaked {
@@ -89,6 +89,17 @@ interface IStakingProps {
   availableWithdraw?: (pid: number, walletAddress: string) => Promise<Big>;
   lockUntil?: (pid: number, walletAddress: string) => Promise<number>;
   stakeWithLockPeriod?: boolean;
+  properties: {
+    logo: {
+      src: string,
+      style: {
+        width: string
+      }
+    },
+    title?: string,
+    link?: string
+  };
+  address?: string;
 }
 
 const staked: { [key: number | string]: string } = {
@@ -99,7 +110,8 @@ const staked: { [key: number | string]: string } = {
   4: process.env.NEXT_PUBLIC_MASTER === '1' ? 'KACY' : 'aHYPE',
   5: 'LP-PNG',
   6: 'aHYPE',
-  7: 'LP-JOE'
+  7: 'LP-JOE',
+  8: 'K3C'
 }
 
 const StakeCard = ({
@@ -115,26 +127,34 @@ const StakeCard = ({
   stakeWithVotingPower,
   availableWithdraw,
   lockUntil,
-  stakeWithLockPeriod = false
+  stakeWithLockPeriod = false,
+  properties,
+  address
 }: IStakingProps) => {
   const [isDetails, setIsDetails] = React.useState<boolean>(false)
-  const [isModalStake, setIsModalStake] = React.useState<boolean>(false) // eslint-disable-next-line prettier/prettier
-  const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false) // eslint-disable-next-line prettier/prettier
-  const [isModalCancelUnstake, setIsModalCancelUnstake] = React.useState<boolean>(false) // eslint-disable-next-line prettier/prettier
-  const [isModalRequestUnstake, setIsModalRequestUnstake] = React.useState<boolean>(false) // eslint-disable-next-line prettier/prettier
+  const [isModalStake, setIsModalStake] = React.useState<boolean>(false)
+  const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
+  // eslint-disable-next-line prettier/prettier
+  const [isModalCancelUnstake, setIsModalCancelUnstake] = React.useState<boolean>(false)
+  // eslint-disable-next-line prettier/prettier
+  const [isModalRequestUnstake, setIsModalRequestUnstake] = React.useState<boolean>(false)
+  // eslint-disable-next-line prettier/prettier
   const [isApproveKacyStaking, setIsApproveKacyStaking] = React.useState<boolean>(false)
 
   const [lockPeriod, setLockPeriod] = React.useState(0)
   const [decimals, setDecimals] = React.useState<string>('18')
-  const [stakeTransaction, setStakeTransaction] = React.useState<string>('') // eslint-disable-next-line prettier/prettier
-  const [currentAvailableWithdraw, setCurrentAvailableWithdraw] = React.useState(Big(-1)) // eslint-disable-next-line prettier/prettier
+  const [stakeTransaction, setStakeTransaction] = React.useState<string>('')
+  // eslint-disable-next-line prettier/prettier
+  const [currentAvailableWithdraw, setCurrentAvailableWithdraw] = React.useState(Big(-1)) 
+  // eslint-disable-next-line prettier/prettier
   const [kacyEarned, setKacyEarned] = React.useState<BigNumber>(new BigNumber(-1))
 
   const [tokenPrice, setTokenPrice] = React.useState<IPriceLPToken>({
     priceLPPng: Big(-1),
     priceLPJoe: Big(-1),
     kacy: Big(-1),
-    aHYPE: Big(-1)
+    aHYPE: Big(-1),
+    k3c: Big(-1)
   })
 
   const [infoStaked, setInfoStaked] = React.useState<IInfoStaked>({
@@ -162,7 +182,7 @@ const StakeCard = ({
   const kacyAvaxJoeToken = useERC20Contract(LPKacyAvaxJOE)
 
   const { data } = useSWR(
-    [GET_INFO_AHYPE, HeimCRPPOOL],
+    [GET_INFO_POOL, address],
     (query, id) => request(SUBGRAPH_URL, query, { id }),
     {
       refreshInterval: 10000
@@ -209,8 +229,10 @@ const StakeCard = ({
       AvaxDaiReserve = reservesDaiAvax._reserve1
     }
 
-    const avaxInDollar = Big(DaiReserve).div(Big(AvaxDaiReserve)) // eslint-disable-next-line prettier/prettier
-    const kacyInDollar = avaxInDollar.mul(Big(avaxKacyReservePng).div(kacyReserve))
+    const avaxInDollar = Big(DaiReserve).div(Big(AvaxDaiReserve))
+    const kacyInDollar = avaxInDollar.mul(
+      Big(avaxKacyReservePng).div(kacyReserve)
+    )
 
     const allAVAXDollarPng = Big(avaxKacyReservePng).mul(avaxInDollar)
     const allAVAXDollarJoe = Big(avaxKacyReserveJoe).mul(avaxInDollar)
@@ -220,7 +242,9 @@ const StakeCard = ({
 
     if (supplyLPPngToken.toString() !== '0') {
       // eslint-disable-next-line prettier/prettier
-      const priceLPPng = allAVAXDollarPng.mul(2).div(Big(supplyLPPngToken.toString()))
+      const priceLPPng = allAVAXDollarPng
+        .mul(2)
+        .div(Big(supplyLPPngToken.toString()))
 
       setTokenPrice(prevState => ({
         ...prevState,
@@ -229,7 +253,9 @@ const StakeCard = ({
     }
     if (supplyLPJoeToken.toString() !== '0') {
       // eslint-disable-next-line prettier/prettier
-      const priceLPJoe = allAVAXDollarJoe.mul(2).div(Big(supplyLPJoeToken.toString()))
+      const priceLPJoe = allAVAXDollarJoe
+        .mul(2)
+        .div(Big(supplyLPJoeToken.toString()))
       setTokenPrice(prevState => ({
         ...prevState,
         priceLPJoe
@@ -238,7 +264,7 @@ const StakeCard = ({
     if (data) {
       setTokenPrice(prevState => ({
         ...prevState,
-        aHYPE: Big(data?.pool.price_usd || -1)
+        [symbol === 'k3c' ? 'k3c' : 'aHYPE']: Big(data?.pool.price_usd || -1)
       }))
     }
     setTokenPrice(prevState => ({
@@ -338,22 +364,11 @@ const StakeCard = ({
         <S.BorderGradient stakeWithVotingPower={stakeWithVotingPower}>
           <S.StakeCard>
             <S.InterBackground stakeWithVotingPower={stakeWithVotingPower}>
-              {symbol === 'kacy' ? (
-                <img src="/assets/logos/kacy-stake.svg" alt="" />
-              ) : null}
-              {symbol === 'ahype' ? (
-                <img
-                  src="/assets/logos/ahype-stake.svg"
-                  alt=""
-                  style={{ width: '5.8rem' }}
-                />
-              ) : null}
-              {symbol === 'lp-joe' ? (
-                <img src="/assets/logos/joe-kacy.svg" alt="" width={144} />
-              ) : null}
-              {symbol === 'lp-png' ? (
-                <img src="/assets/logos/lp-kacy.svg" alt="" width={144} />
-              ) : null}
+              <img
+                src={properties.logo.src}
+                alt=""
+                style={properties.logo.style}
+              />
               <S.IntroStaking>
                 <S.APR>
                   <Tippy content="The Annual Percentage Rate is the yearly rate earned not taking compounding into account">
@@ -377,34 +392,12 @@ const StakeCard = ({
               <S.PoolName>
                 <S.StakeAndEarn>
                   <p>STAKE</p>
-                  {symbol === 'ahype' && (
-                    <Link href="/products/ahype" passHref>
-                      <a>
-                        $aHYPE
-                        <img src="/assets/utilities/go-to-site.svg" alt="" />
-                      </a>
-                    </Link>
-                  )}
-                  {symbol === 'lp-png' && (
-                    <a
-                      href={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      $KACY-AVAX PNG LP
+                  <Link href={properties.link || ''} passHref>
+                    <a target="_blank" rel="noreferrer">
+                      {properties.title}
                       <img src="/assets/utilities/go-to-site.svg" alt="" />
                     </a>
-                  )}
-                  {symbol === 'lp-joe' && (
-                    <a
-                      href={`https://traderjoexyz.com/pool/AVAX/${Kacy}`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      $KACY-AVAX JOE LP
-                      <img src="/assets/utilities/go-to-site.svg" alt="" />
-                    </a>
-                  )}
+                  </Link>
                 </S.StakeAndEarn>
                 <S.StakeAndEarn>
                   <p>EARN</p>
