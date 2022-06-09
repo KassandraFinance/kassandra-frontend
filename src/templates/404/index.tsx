@@ -12,10 +12,9 @@ const NotFound = ({ text, contact }: INotFoundProps) => (
   <>
     <Header />
     <S.Wrapper>
-      <img src="/assets/images/404.svg" alt="Error 404" />
       {contact ? (
         <>
-          <p>{text}</p>
+          <p style={{ fontSize: '24px', fontWeight: 500 }}>{text}</p>
           <p>{contact}</p>
           <Button
             as="a"
@@ -27,6 +26,7 @@ const NotFound = ({ text, contact }: INotFoundProps) => (
       ) : (
         <>
           {' '}
+          <img src="/assets/images/404.svg" alt="Error 404" />
           <p>Sorry, this issue could not have been foreseen.</p>
           <p>Learn more about Kassandra</p>
           <Button
