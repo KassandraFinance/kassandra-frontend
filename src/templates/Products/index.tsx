@@ -55,8 +55,8 @@ import * as S from './styles'
 const invertToken: { [key: string]: string } = {
   '0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E':
     '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab', //WETH
-  '0x964555644E067c560A4C144360507E80c1104784':
-    '0xc7198437980c041c805a1edcba50c1ce5db95118', //USDT
+  '0xFA17fb53da4c837594127b73fFd09fdb15f42C49':
+    '0xd586e7f844cea2f87f50152665bcbc2c279d8d70', //DAI
   '0xbbcED92AC9B958F88A501725f080c0360007e858':
     '0x50b7545627a5162f82a992c33b87adc75187b218' //WBTC
 }
@@ -129,7 +129,7 @@ const Products = ({ product }: Input) => {
       const decimals: string = await yieldYak.getDecimals(token)
 
       const tokensShares = await yieldYak.getDepositTokensForShares(
-        new BigNumber(Big(balance).mul(Big('10').pow(18)).toString()),
+        new BigNumber(Big(balance).mul(Big('10').pow(18)).toFixed(0, 0)),
         token
       )
 
@@ -290,184 +290,178 @@ const Products = ({ product }: Input) => {
 
   return (
     <>
-      <>
-        <Header />
-        <ShareImageModal
-          poolId={product.sipAddress}
-          setOpenModal={setOpenModal}
-          openModal={openModal}
-          productName={product.symbol}
+      <Header />
+      <ShareImageModal
+        poolId={product.sipAddress}
+        setOpenModal={setOpenModal}
+        openModal={openModal}
+        productName={product.symbol}
+      >
+        <SharedImage
+          crpPoolAddress={product.sipAddress}
+          totalValueLocked={infoPool.tvl}
+          socialIndex={product.symbol}
+          productName={product.name}
+          fundImage={product.fundIcon}
+        />
+      </ShareImageModal>
+      <Breadcrumb>
+        <BreadcrumbItem href="/">Home</BreadcrumbItem>
+        <BreadcrumbItem href={`/explore`}>Explore</BreadcrumbItem>
+        <BreadcrumbItem
+          href={`/explore/${product.symbol.toLowerCase()}`}
+          isLastPage
         >
-          <SharedImage
-            crpPoolAddress={product.sipAddress}
-            totalValueLocked={infoPool.tvl}
-            socialIndex={product.symbol}
-            productName={product.name}
-            fundImage={product.fundIcon}
-          />
-        </ShareImageModal>
-        <Breadcrumb>
-          <BreadcrumbItem href="/">Home</BreadcrumbItem>
-          <BreadcrumbItem href={`/explore`}>Explore</BreadcrumbItem>
-          <BreadcrumbItem
-            href={`/explore/${product.symbol.toLowerCase()}`}
-            isLastPage
-          >
-            ${product.symbol}
-          </BreadcrumbItem>
-        </Breadcrumb>
-        {loading ? (
-          <S.LoadingContent>
-            <Loading marginTop={0} />
-          </S.LoadingContent>
-        ) : (
-          <>
-            <S.Intro introMobile={true} introDesktop={false}>
-              <Image src={product.fundIcon} alt="" width={75} height={75} />
-              <S.NameIndex>
-                <S.NameAndSymbol introMobile={true}>
-                  <h1>{product.name}</h1>
-                  <button onClick={() => setOpenModal(true)} className="circle">
-                    <Image
-                      src="/assets/icons/share.svg"
-                      width={22}
-                      height={22}
-                    />
-                  </button>
-                </S.NameAndSymbol>
-                <S.SymbolAndMade>
-                  <h3>${product.symbol}</h3>
-                  <p>by {product.fundBy}</p>
-                </S.SymbolAndMade>
-              </S.NameIndex>
-              <S.Line />
-            </S.Intro>
-            <S.Product>
-              <S.ProductDetails>
-                <S.Intro introMobile={false} introDesktop={true}>
-                  <Image src={product.fundIcon} alt="" width={75} height={75} />
-                  <S.NameIndex>
-                    <S.NameAndSymbol>
-                      <h1>{product.name}</h1>
-                      <button
-                        onClick={() => setOpenModal(true)}
-                        className="circle"
-                      >
+          ${product.symbol}
+        </BreadcrumbItem>
+      </Breadcrumb>
+      {loading ? (
+        <S.LoadingContent>
+          <Loading marginTop={0} />
+        </S.LoadingContent>
+      ) : (
+        <>
+          <S.Intro introMobile={true} introDesktop={false}>
+            <Image src={product.fundIcon} alt="" width={75} height={75} />
+            <S.NameIndex>
+              <S.NameAndSymbol introMobile={true}>
+                <h1>{product.name}</h1>
+                <button onClick={() => setOpenModal(true)} className="circle">
+                  <Image src="/assets/icons/share.svg" width={22} height={22} />
+                </button>
+              </S.NameAndSymbol>
+              <S.SymbolAndMade>
+                <h3>${product.symbol}</h3>
+                <p>by {product.fundBy}</p>
+              </S.SymbolAndMade>
+            </S.NameIndex>
+            <S.Line />
+          </S.Intro>
+          <S.Product>
+            <S.ProductDetails>
+              <S.Intro introMobile={false} introDesktop={true}>
+                <Image src={product.fundIcon} alt="" width={75} height={75} />
+                <S.NameIndex>
+                  <S.NameAndSymbol>
+                    <h1>{product.name}</h1>
+                    <button
+                      onClick={() => setOpenModal(true)}
+                      className="circle"
+                    >
+                      <Image
+                        src="/assets/icons/share.svg"
+                        width={32}
+                        height={32}
+                      />
+                    </button>
+                  </S.NameAndSymbol>
+                  <S.SymbolAndMade>
+                    <h3>${product.symbol}</h3>
+                    <p>by {product.fundBy}</p>
+                  </S.SymbolAndMade>
+                </S.NameIndex>
+              </S.Intro>
+              <S.Line className="second-line" />
+              <S.IntroCharts>
+                <S.IndexData>
+                  <span>
+                    TVL
+                    <Tippy content="The Total Value Locked is the amount invested inside the pool, or simply the total value of all tokens inside the pool combined.">
+                      <S.Tooltip tabIndex={0}>
                         <Image
-                          src="/assets/icons/share.svg"
-                          width={32}
-                          height={32}
+                          src={infoGray}
+                          alt="Explanation"
+                          height={16}
+                          width={16}
                         />
-                      </button>
-                    </S.NameAndSymbol>
-                    <S.SymbolAndMade>
-                      <h3>${product.symbol}</h3>
-                      <p>by {product.fundBy}</p>
-                    </S.SymbolAndMade>
-                  </S.NameIndex>
-                </S.Intro>
-                <S.Line className="second-line" />
-                <S.IntroCharts>
-                  <S.IndexData>
-                    <span>
-                      TVL
-                      <Tippy content="The Total Value Locked is the amount invested inside the pool, or simply the total value of all tokens inside the pool combined.">
-                        <S.Tooltip tabIndex={0}>
-                          <Image
-                            src={infoGray}
-                            alt="Explanation"
-                            height={16}
-                            width={16}
-                          />
-                        </S.Tooltip>
-                      </Tippy>
-                    </span>
-                    <h2>${infoPool.tvl}</h2>
-                  </S.IndexData>
-                  <S.IndexData>
-                    <span>
-                      VOLUME (24h)
-                      <Tippy content="Total volume of transactions in the last 24 hours. This includes new investments, withdrawals, token swaps and token transfers, which include swaps in decentralized exchanges.">
-                        <S.Tooltip tabIndex={0}>
-                          <Image
-                            src={infoGray}
-                            alt="Explanation"
-                            height={16}
-                            width={16}
-                          />
-                        </S.Tooltip>
-                      </Tippy>
-                    </span>
-                    <h2>${infoPool.volume}</h2>
-                  </S.IndexData>
-                  <S.IndexData>
-                    <span>
-                      Swap fees (24h)
-                      <Tippy content="Amount of fees collected in the last 24 hours when people swap tokens inside the pool. This fee is paid to all investors of the pool.">
-                        <S.Tooltip tabIndex={0}>
-                          <Image
-                            src={infoGray}
-                            alt="Explanation"
-                            height={16}
-                            width={16}
-                          />
-                        </S.Tooltip>
-                      </Tippy>
-                    </span>
-                    <h2>${infoPool.swapFees}</h2>
-                  </S.IndexData>
-                  <S.IndexData>
-                    <span>
-                      Withdraw fees (24h)
-                      <Tippy content="Amount of fees collected in the last 24 hours when people withdraw from the strategy. This fee is paid to the Kassandra Decentralized Autonomous Organization.">
-                        <S.Tooltip tabIndex={0}>
-                          <Image
-                            src={infoGray}
-                            alt="Explanation"
-                            height={16}
-                            width={16}
-                          />
-                        </S.Tooltip>
-                      </Tippy>
-                    </span>
-                    <h2>${infoPool.withdrawFees}</h2>
-                  </S.IndexData>
-                </S.IntroCharts>
-                <ChartProducts crpPoolAddress={product.sipAddress} />
-                <ScrollUpButton />
-                <Change crpPoolAddress={product.sipAddress} />
-                <MyAsset
-                  crpPoolAddress={product.sipAddress}
-                  price={infoPool.price}
-                  symbol={product.symbol}
-                  icon={product.fundIcon}
-                  pid={typeof product.pid === 'undefined' ? -1 : product.pid}
-                  decimals={infoPool.decimals}
-                />
-                <Summary
-                  strategy={data?.pool.strategy || 'Coming soon...'}
-                  poolContract={product.coreAddress}
-                  poolController={product.sipAddress}
-                  summary={product.fundSummary}
-                  symbol={product.symbol}
-                  link={product.fundLink}
-                  icon={product.fundIcon}
-                />
-                <PoweredBy partners={product.partners} />
-                {coinGeckoResponse && <Distribution />}
-                <TokenDescription symbol={product.symbol} />
-              </S.ProductDetails>
-              <PoolOperations
-                poolChain={product.chain}
-                poolSymbol={product.symbol}
+                      </S.Tooltip>
+                    </Tippy>
+                  </span>
+                  <h2>${infoPool.tvl}</h2>
+                </S.IndexData>
+                <S.IndexData>
+                  <span>
+                    VOLUME (24h)
+                    <Tippy content="Total volume of transactions in the last 24 hours. This includes new investments, withdrawals, token swaps and token transfers, which include swaps in decentralized exchanges.">
+                      <S.Tooltip tabIndex={0}>
+                        <Image
+                          src={infoGray}
+                          alt="Explanation"
+                          height={16}
+                          width={16}
+                        />
+                      </S.Tooltip>
+                    </Tippy>
+                  </span>
+                  <h2>${infoPool.volume}</h2>
+                </S.IndexData>
+                <S.IndexData>
+                  <span>
+                    Swap fees (24h)
+                    <Tippy content="Amount of fees collected in the last 24 hours when people swap tokens inside the pool. This fee is paid to all investors of the pool.">
+                      <S.Tooltip tabIndex={0}>
+                        <Image
+                          src={infoGray}
+                          alt="Explanation"
+                          height={16}
+                          width={16}
+                        />
+                      </S.Tooltip>
+                    </Tippy>
+                  </span>
+                  <h2>${infoPool.swapFees}</h2>
+                </S.IndexData>
+                <S.IndexData>
+                  <span>
+                    Withdraw fees (24h)
+                    <Tippy content="Amount of fees collected in the last 24 hours when people withdraw from the strategy. This fee is paid to the Kassandra Decentralized Autonomous Organization.">
+                      <S.Tooltip tabIndex={0}>
+                        <Image
+                          src={infoGray}
+                          alt="Explanation"
+                          height={16}
+                          width={16}
+                        />
+                      </S.Tooltip>
+                    </Tippy>
+                  </span>
+                  <h2>${infoPool.withdrawFees}</h2>
+                </S.IndexData>
+              </S.IntroCharts>
+              <ChartProducts crpPoolAddress={product.sipAddress} />
+              <ScrollUpButton />
+              <Change crpPoolAddress={product.sipAddress} />
+              <MyAsset
                 crpPoolAddress={product.sipAddress}
-                corePoolAddress={product.coreAddress}
-                productCategories={product.categories}
+                price={infoPool.price}
+                symbol={product.symbol}
+                icon={product.fundIcon}
+                pid={typeof product.pid === 'undefined' ? -1 : product.pid}
+                decimals={infoPool.decimals}
               />
-            </S.Product>
-          </>
-        )}
-      </>
+              <Summary
+                strategy={data?.pool.strategy || 'Coming soon...'}
+                poolContract={product.coreAddress}
+                poolController={product.sipAddress}
+                summary={product.fundSummary}
+                symbol={product.symbol}
+                link={product.fundLink}
+                icon={product.fundIcon}
+              />
+              <PoweredBy partners={product.partners} />
+              {coinGeckoResponse && <Distribution />}
+              <TokenDescription symbol={product.symbol} />
+            </S.ProductDetails>
+            <PoolOperations
+              poolChain={product.chain}
+              poolSymbol={product.symbol}
+              crpPoolAddress={product.sipAddress}
+              corePoolAddress={product.coreAddress}
+              productCategories={product.categories}
+            />
+          </S.Product>
+        </>
+      )}
     </>
   )
 }
