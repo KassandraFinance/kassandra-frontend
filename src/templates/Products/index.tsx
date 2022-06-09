@@ -59,6 +59,31 @@ const invertToken: { [key: string]: string } = {
     '0x50b7545627a5162f82a992c33b87adc75187b218' //WBTC
 }
 
+const farmInfoYY: { [key: string]: IfarmInfoYYProps } = {
+  '0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E': {
+    farmName: 'BankerJoe',
+    urlFarmContract:
+      'https://yieldyak.com/farms/detail/0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E'
+  }, //WETH
+
+  '0x964555644E067c560A4C144360507E80c1104784': {
+    farmName: 'BankerJoe',
+    urlFarmContract:
+      'https://yieldyak.com/farms/detail/0x964555644E067c560A4C144360507E80c1104784'
+  }, //USDT
+
+  '0xbbcED92AC9B958F88A501725f080c0360007e858': {
+    farmName: 'Aave',
+    urlFarmContract:
+      'https://yieldyak.com/farms/detail/0xbbcED92AC9B958F88A501725f080c0360007e858'
+  } //WBTC
+}
+
+export interface IfarmInfoYYProps {
+  urlFarmContract: string;
+  farmName: string;
+}
+
 interface InfoPool {
   tvl: string;
   swapFees: string;
@@ -116,6 +141,19 @@ const Products = ({ product }: Input) => {
     }&tokenAddress=${product.addresses}`
   )
 
+  async function getDataYieldyak(tokenId: string) {
+    let dataYY: { [key: string]: { apy: number } } = {}
+
+    try {
+      dataYY = await fetch('https://staging-api.yieldyak.com/apys')
+        .then(response => response.json())
+        .then(data => data)
+    } catch (error) {
+      console.log(error)
+    }
+    return dataYY[tokenId]
+  }
+
   async function getHoldings(
     token: string,
     balance: string
@@ -172,6 +210,7 @@ const Products = ({ product }: Input) => {
           let balance
           let address
           let decimals: BigNumber
+          let dataYieldyak
           if (item.token.symbol === 'YRT') {
             const { balancePoolYY, decimalsYY } = await getHoldings(
               item.token.id,
@@ -181,14 +220,21 @@ const Products = ({ product }: Input) => {
             balance = balancePoolYY
             address = invertToken[item.token.id]
             decimals = decimalsYY
+            const { apy } = await getDataYieldyak(item.token.id)
+            dataYieldyak = {
+              apy: apy,
+              item: farmInfoYY[item.token.id]
+            }
           } else {
             symbol = item.token.symbol === 'WAVAX' ? 'AVAX' : item.token.symbol
             balance = item.balance
             address = item.token.id
             decimals = new BigNumber(item.token.decimals)
+            dataYieldyak = null
           }
           return {
             balance_in_pool: balance,
+            dataYieldyak,
             address,
             allocation: (Number(item.weight_normalized) * 100).toFixed(2),
             allocation_goal: (
@@ -447,7 +493,7 @@ const Products = ({ product }: Input) => {
                 icon={product.fundIcon}
               />
               <PoweredBy partners={product.partners} />
-              {coinGeckoResponse && <Distribution />}
+              {coinGeckoResponse && <Distribution product={product} />}
               <TokenDescription symbol={product.symbol} />
             </S.ProductDetails>
             <PoolOperations

@@ -46,19 +46,40 @@ export const Table = styled.table`
     background-color: rgba(255, 255, 255, 0.04);
     max-height: 100%;
   }
+
+  @media (max-width: 1100px) {
+    display: block;
+    overflow: auto;
+  }
+
+  @media (max-width: 960px) {
+    display: grid;
+    overflow: hidden;
+  }
+
   @media (max-width: 768px) {
     display: block;
     overflow: auto;
   }
 `
 
-export const Tr = styled.tr`
+interface ITableProps {
+  isOpenYield: boolean;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const Tr = styled.tr<ITableProps>`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(${props => (props.isOpenYield ? 4 : 5)}, 1fr);
   justify-items: center;
   align-items: center;
   height: 38px;
-  margin: 16px 0;
+  margin: 1.6rem 1.5rem;
+
+  @media (max-width: 1100px) {
+    min-width: 60rem;
+  }
+
   @media (max-width: 768px) {
     min-width: 690px;
 
@@ -77,6 +98,10 @@ export const Th = styled.th`
 
   @media (max-width: 660px) {
     font-size: 15px;
+  }
+
+  :first-child {
+    margin-left: -4rem;
   }
 `
 interface ITdProps {
@@ -100,6 +125,26 @@ export const BalanceCoin = styled.span`
   font-size: ${theme.font.sizes.font12};
 `
 
+export const yildyakContent = styled.a`
+  color: ${theme.colors.grayDisabled};
+  font-size: ${theme.font.sizes.font12};
+
+  display: flex;
+  gap: 0.4rem;
+
+  text-decoration: none;
+
+  p {
+    color: ${theme.colors.grayDisabled};
+  }
+`
+
+export const isThereNoYieldyak = styled.p`
+  color: ${theme.colors.grayDisabled};
+  font-size: ${theme.font.sizes.font12};
+  font-weight: 400;
+`
+
 interface ICoinProps {
   width?: number;
   change24h?: boolean;
@@ -117,6 +162,7 @@ export const Coin = styled.span<ICoinProps>`
   align-items: center;
   text-align: center;
   width: ${props => props.width}px;
+
   img {
     max-width: 24px;
     margin-right: 16px;
@@ -125,6 +171,15 @@ export const Coin = styled.span<ICoinProps>`
   }
 
   span {
+    font-weight: 400;
+  }
+
+  p {
+    display: flex;
+    align-items: flex-start;
+
+    color: #969696;
+    font-size: 1rem;
     font-weight: 400;
   }
 `
