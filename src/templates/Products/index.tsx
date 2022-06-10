@@ -154,12 +154,6 @@ const Products = ({ product }: Input) => {
     }
   }
 
-  React.useEffect(() => {
-    if (product.symbol === 'K3C') {
-      getDataYieldyak()
-    }
-  }, [data])
-
   async function getHoldings(
     token: string,
     balance: string
@@ -284,6 +278,12 @@ const Products = ({ product }: Input) => {
     dispatch(actionGetPoolTokensArray(tokenDetails))
     dispatch(actionSetPoolImages(coinGeckoResponse.images))
   }
+
+  React.useEffect(() => {
+    if (product.symbol === 'K3C') {
+      getDataYieldyak()
+    }
+  }, [data])
 
   React.useEffect(() => {
     setTimeout(() => {
