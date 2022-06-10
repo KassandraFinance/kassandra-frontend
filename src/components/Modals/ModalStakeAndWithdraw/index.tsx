@@ -351,8 +351,13 @@ const ModalStakeAndWithdraw = ({
               />
             )}
             {symbol === 'aHYPE' && (
-              <Link href="/products/ahype" passHref>
+              <Link href="/explore/ahype" passHref>
                 <Button backgroundBlack fullWidth text="Get aHYPE" />
+              </Link>
+            )}
+            {symbol === 'k3c' && (
+              <Link href="/explore/k3c" passHref>
+                <Button backgroundBlack fullWidth text="Get K3C" />
               </Link>
             )}
             {symbol === 'LP-PNG' && (

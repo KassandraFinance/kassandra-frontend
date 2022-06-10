@@ -50,6 +50,18 @@ const YourStake = ({
 
   const [delegateTo, setDelegateTo] = React.useState<string>('')
 
+  const stakingTokenPrice: { [key: number]: Big } = {
+    0: tokenPrice.kacy,
+    1: tokenPrice.kacy,
+    2: tokenPrice.kacy,
+    3: tokenPrice.kacy,
+    4: tokenPrice.kacy,
+    5: tokenPrice.priceLPPng,
+    6: tokenPrice.aHYPE,
+    7: tokenPrice.priceLPJoe,
+    8: tokenPrice.k3c
+  }
+
   const getYourStake = React.useCallback(async () => {
     const poolInfoResponse = await poolInfo(pid)
     if (!poolInfoResponse.withdrawDelay) {
@@ -60,27 +72,17 @@ const YourStake = ({
       new BigNumber(86400)
     )
     const totalStaked = new BigNumber(poolInfoResponse.depositedAmount)
-
-    const stakingTokenPrice =
-      pid === 5
-        ? tokenPrice.priceLPPng
-        : pid === 6
-        ? tokenPrice.aHYPE
-        : pid === 7
-        ? tokenPrice.priceLPJoe
-        : tokenPrice.kacy
-
     const apr =
       poolInfoResponse.depositedAmount.toString() !== '0' &&
       tokenPrice.kacy.gt('-1') &&
-      stakingTokenPrice.gt('-1')
+      (stakingTokenPrice[pid] || Big(0)).gt('-1')
         ? new BigNumber(
             Big(kacyRewards.toString())
               .mul('365')
               .mul('100')
               .mul(tokenPrice.kacy)
               .div(
-                stakingTokenPrice.mul(
+                (stakingTokenPrice[pid] || Big(1)).mul(
                   Big(poolInfoResponse.depositedAmount.toString())
                 )
               )
@@ -157,30 +159,27 @@ const YourStake = ({
       <S.Info>
         <p>Your stake</p>
         <S.Stake>
-          <p>
-            {infoStaked.yourStake.lt(new BigNumber('0')) ||
-            (pid === 5 && tokenPrice.priceLPPng.lt(0)) ||
-            (pid === 6 && tokenPrice.aHYPE.lt(0)) ||
-            (pid === 7 && tokenPrice.priceLPJoe.lt(0))
-              ? '...'
-              : !stakeWithVotingPower
-              ? BNtoDecimal(infoStaked.yourStake, 18)
-              : BNtoDecimal(
-                  Big(infoStaked.yourStake.toString())
-                    .mul(
-                      pid === 5
-                        ? tokenPrice.priceLPPng
-                        : pid === 7
-                        ? tokenPrice.priceLPJoe
-                        : tokenPrice.aHYPE
-                    )
-                    .div(Big(10).pow(18)),
-                  2,
-                  2,
-                  2
-                )}
-            <S.Symbol>{!stakeWithVotingPower ? 'KACY' : 'USD'}</S.Symbol>
-          </p>
+          {infoStaked.yourStake.lt(new BigNumber('0')) ||
+          (stakingTokenPrice[pid] || Big(0)).lt(0) ? (
+            '...'
+          ) : !stakeWithVotingPower ? (
+            <p>
+              {BNtoDecimal(infoStaked.yourStake, 18)}
+              <S.Symbol>KACY</S.Symbol>
+            </p>
+          ) : (
+            <p>
+              {BNtoDecimal(
+                Big(infoStaked.yourStake.toString())
+                  .mul(stakingTokenPrice[pid])
+                  .div(Big(10).pow(18)),
+                2,
+                2,
+                2
+              )}
+              <S.Symbol>USD</S.Symbol>
+            </p>
+          )}
           {!stakeWithVotingPower && (
             <span>
               &#8776;{' '}
