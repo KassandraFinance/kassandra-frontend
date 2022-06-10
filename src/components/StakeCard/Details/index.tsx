@@ -72,6 +72,9 @@ const Details = ({
   let price
 
   switch (pid) {
+    case 8:
+      price = tokenPrice.k3c
+      break
     case 7:
       price = tokenPrice.priceLPJoe
       break
@@ -175,7 +178,10 @@ const Details = ({
           />
         )}
         {symbol === 'aHYPE' && (
-          <ExternalLink hrefNext="/products/ahype" text="Buy $aHYPE" />
+          <ExternalLink hrefNext="/explore/ahype" text="Buy $aHYPE" />
+        )}
+        {symbol === 'k3c' && (
+          <ExternalLink hrefNext="/explore/k3c" text="Buy $K3C" />
         )}
       </S.Info>
       <S.AddToken

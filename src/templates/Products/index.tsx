@@ -27,8 +27,6 @@ import { actionSetTokenAddress2Index } from '../../store/modules/tokenAddress2In
 import useYieldYak from '../../hooks/useYieldYak'
 import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
-import NotFound from '../../templates/404'
-
 import Header from '../../components/Header'
 import Breadcrumb from '../../components/Breadcrumb'
 import Loading from '../../components/Loading'
@@ -61,6 +59,31 @@ const invertToken: { [key: string]: string } = {
     '0x50b7545627a5162f82a992c33b87adc75187b218' //WBTC
 }
 
+const farmInfoYY: { [key: string]: IfarmInfoYYProps } = {
+  '0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E': {
+    farmName: 'BankerJoe',
+    urlFarmContract:
+      'https://yieldyak.com/farms/detail/0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E'
+  }, //WETH
+
+  '0xFA17fb53da4c837594127b73fFd09fdb15f42C49': {
+    farmName: 'Benqi',
+    urlFarmContract:
+      'https://yieldyak.com/farms/detail/0xFA17fb53da4c837594127b73fFd09fdb15f42C49'
+  }, //DAI
+
+  '0xbbcED92AC9B958F88A501725f080c0360007e858': {
+    farmName: 'Aave',
+    urlFarmContract:
+      'https://yieldyak.com/farms/detail/0xbbcED92AC9B958F88A501725f080c0360007e858'
+  } //WBTC
+}
+
+export interface IfarmInfoYYProps {
+  urlFarmContract: string;
+  farmName: string;
+}
+
 interface InfoPool {
   tvl: string;
   swapFees: string;
@@ -91,6 +114,9 @@ const network2coingeckoID: Networks = {
 const Products = ({ product }: Input) => {
   const [openModal, setOpenModal] = React.useState(false)
   const [loading, setLoading] = React.useState<boolean>(true)
+  const [infoDataYY, setinfoDataYY] = React.useState<{
+    [key: string]: { apy: number }
+  }>()
   const [infoPool, setInfoPool] = React.useState<InfoPool>({
     tvl: '...',
     swapFees: '...',
@@ -117,6 +143,16 @@ const Products = ({ product }: Input) => {
       network2coingeckoID[product.platform]
     }&tokenAddress=${product.addresses}`
   )
+
+  async function getDataYieldyak() {
+    try {
+      const response = await fetch('https://staging-api.yieldyak.com/apys')
+      const dataYY = await response.json()
+      setinfoDataYY(dataYY)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   async function getHoldings(
     token: string,
@@ -174,6 +210,7 @@ const Products = ({ product }: Input) => {
           let balance
           let address
           let decimals: BigNumber
+          let dataInfoYY
           if (item.token.symbol === 'YRT') {
             const { balancePoolYY, decimalsYY } = await getHoldings(
               item.token.id,
@@ -183,14 +220,20 @@ const Products = ({ product }: Input) => {
             balance = balancePoolYY
             address = invertToken[item.token.id]
             decimals = decimalsYY
+            dataInfoYY = {
+              apy: infoDataYY && infoDataYY[item.token.id]?.apy,
+              item: farmInfoYY[item.token.id]
+            }
           } else {
             symbol = item.token.symbol === 'WAVAX' ? 'AVAX' : item.token.symbol
             balance = item.balance
             address = item.token.id
             decimals = new BigNumber(item.token.decimals)
+            dataInfoYY = null
           }
           return {
             balance_in_pool: balance,
+            dataInfoYY,
             address,
             allocation: (Number(item.weight_normalized) * 100).toFixed(2),
             allocation_goal: (
@@ -235,6 +278,12 @@ const Products = ({ product }: Input) => {
     dispatch(actionGetPoolTokensArray(tokenDetails))
     dispatch(actionSetPoolImages(coinGeckoResponse.images))
   }
+
+  React.useEffect(() => {
+    if (product.symbol === 'K3C') {
+      getDataYieldyak()
+    }
+  }, [data])
 
   React.useEffect(() => {
     setTimeout(() => {
@@ -449,7 +498,7 @@ const Products = ({ product }: Input) => {
                 icon={product.fundIcon}
               />
               <PoweredBy partners={product.partners} />
-              {coinGeckoResponse && <Distribution />}
+              {coinGeckoResponse && <Distribution product={product} />}
               <TokenDescription symbol={product.symbol} />
             </S.ProductDetails>
             <PoolOperations
