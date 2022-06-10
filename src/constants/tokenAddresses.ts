@@ -194,7 +194,7 @@ const tricrypto: ProductDetails  = process.env.NEXT_PUBLIC_MASTER === '1' ?
     fundBy: 'Kassandra with Yield Yak',
     symbol: 'K3C',
     fundIcon: tricryptoIcon,
-    pid: 6,
+    pid: 8,
     fundLink: 'https://kassandrafoundation.medium.com/kassandras-new-autocompounding-strategy-tricrypto-185eb1fca2c2',
     fundSummary: `The #K3C represents a yield-earning portfolio composed of BTC,
     ETH, DAI and KACY built in partnership with our friends back at Yield Yak.`,
