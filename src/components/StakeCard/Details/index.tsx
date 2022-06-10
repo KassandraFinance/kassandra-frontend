@@ -180,7 +180,7 @@ const Details = ({
         {symbol === 'aHYPE' && (
           <ExternalLink hrefNext="/explore/ahype" text="Buy $aHYPE" />
         )}
-        {symbol === 'k3c' && (
+        {symbol === 'K3C' && (
           <ExternalLink hrefNext="/explore/k3c" text="Buy $K3C" />
         )}
       </S.Info>
