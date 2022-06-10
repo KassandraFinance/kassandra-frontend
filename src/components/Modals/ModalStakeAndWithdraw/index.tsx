@@ -355,7 +355,7 @@ const ModalStakeAndWithdraw = ({
                 <Button backgroundBlack fullWidth text="Get aHYPE" />
               </Link>
             )}
-            {symbol === 'k3c' && (
+            {symbol === 'K3C' && (
               <Link href="/explore/k3c" passHref>
                 <Button backgroundBlack fullWidth text="Get K3C" />
               </Link>
