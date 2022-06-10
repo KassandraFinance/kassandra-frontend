@@ -51,7 +51,11 @@ const YourStake = ({
   const [delegateTo, setDelegateTo] = React.useState<string>('')
 
   const stakingTokenPrice: { [key: number]: Big } = {
-    [0 | 1 | 2 | 3 | 4]: tokenPrice.kacy,
+    0: tokenPrice.kacy,
+    1: tokenPrice.kacy,
+    2: tokenPrice.kacy,
+    3: tokenPrice.kacy,
+    4: tokenPrice.kacy,
     5: tokenPrice.priceLPPng,
     6: tokenPrice.aHYPE,
     7: tokenPrice.priceLPJoe,
@@ -68,7 +72,6 @@ const YourStake = ({
       new BigNumber(86400)
     )
     const totalStaked = new BigNumber(poolInfoResponse.depositedAmount)
-
     const apr =
       poolInfoResponse.depositedAmount.toString() !== '0' &&
       tokenPrice.kacy.gt('-1') &&

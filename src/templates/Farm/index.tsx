@@ -325,7 +325,7 @@ const StakeFarm = () => {
                   stakeWithVotingPower={true}
                 />
               )}
-              {/* {process.env.NEXT_PUBLIC_MASTER === '1' ? (
+              {process.env.NEXT_PUBLIC_MASTER === '1' ? (
                 <StakeCard
                   pid={8}
                   symbol="k3c"
@@ -335,7 +335,8 @@ const StakeFarm = () => {
                       src: '/assets/logos/tricrypto-stake.svg',
                       style: { width: '5.8rem' }
                     },
-                    link: '/explore/k3c'
+                    link: '/explore/k3c',
+                    title: '$K3C'
                   }}
                   balanceOf={kacyStake.balance}
                   earned={kacyStake.earned}
@@ -348,7 +349,7 @@ const StakeFarm = () => {
                 />
               ) : (
                 ''
-              )} */}
+              )}
             </S.GridStaking>
           </S.StakeFarm>
         </>
