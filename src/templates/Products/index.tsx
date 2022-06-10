@@ -53,8 +53,8 @@ import * as S from './styles'
 const invertToken: { [key: string]: string } = {
   '0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E':
     '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab', //WETH
-  '0x964555644E067c560A4C144360507E80c1104784':
-    '0xc7198437980c041c805a1edcba50c1ce5db95118', //USDT
+  '0xFA17fb53da4c837594127b73fFd09fdb15f42C49':
+    '0xd586e7f844cea2f87f50152665bcbc2c279d8d70', //DAI
   '0xbbcED92AC9B958F88A501725f080c0360007e858':
     '0x50b7545627a5162f82a992c33b87adc75187b218' //WBTC
 }
@@ -66,11 +66,11 @@ const farmInfoYY: { [key: string]: IfarmInfoYYProps } = {
       'https://yieldyak.com/farms/detail/0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E'
   }, //WETH
 
-  '0x964555644E067c560A4C144360507E80c1104784': {
-    farmName: 'BankerJoe',
+  '0xFA17fb53da4c837594127b73fFd09fdb15f42C49': {
+    farmName: 'Benqi',
     urlFarmContract:
-      'https://yieldyak.com/farms/detail/0x964555644E067c560A4C144360507E80c1104784'
-  }, //USDT
+      'https://yieldyak.com/farms/detail/0xFA17fb53da4c837594127b73fFd09fdb15f42C49'
+  }, //DAI
 
   '0xbbcED92AC9B958F88A501725f080c0360007e858': {
     farmName: 'Aave',
@@ -171,7 +171,7 @@ const Products = ({ product }: Input) => {
       const decimals: string = await yieldYak.getDecimals(token)
 
       const tokensShares = await yieldYak.getDepositTokensForShares(
-        new BigNumber(Big(balance).mul(Big('10').pow(18)).toString()),
+        new BigNumber(Big(balance).mul(Big('10').pow(18)).toFixed(0, 0)),
         token
       )
 

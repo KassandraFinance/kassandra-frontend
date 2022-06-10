@@ -66,14 +66,14 @@ const Distribution = ({ product }: IDistributionProps) => {
                           <img src={coin.image || none.src} alt="" />
                           <span>
                             {coin.symbol}
-                            {isOpenYield ? (
-                              ''
-                            ) : (
+                            {!isOpenYield ? (
                               <p>
                                 {coin.dataInfoYY
-                                  ? coin.dataInfoYY.item.farmName
+                                  ? coin.dataInfoYY.item?.farmName
                                   : ''}
                               </p>
+                            ) : (
+                              ''
                             )}
                           </span>
                         </S.Coin>
@@ -111,9 +111,7 @@ const Distribution = ({ product }: IDistributionProps) => {
                             : '-'}
                         </S.Coin>
                       </S.Td>
-                      {isOpenYield ? (
-                        ''
-                      ) : (
+                      {!isOpenYield ? (
                         <S.Td>
                           {coin.dataInfoYY ? (
                             <>
@@ -124,7 +122,7 @@ const Distribution = ({ product }: IDistributionProps) => {
                                 % APY
                               </p>
                               <Link
-                                href={coin.dataInfoYY.item.urlFarmContract}
+                                href={coin.dataInfoYY.item?.urlFarmContract}
                                 passHref
                               >
                                 <S.yildyakContent target="_blank">
@@ -152,6 +150,8 @@ const Distribution = ({ product }: IDistributionProps) => {
                             <S.isThereNoYieldyak>no Yield</S.isThereNoYieldyak>
                           )}
                         </S.Td>
+                      ) : (
+                        ''
                       )}
                     </S.Tr>
                   )
