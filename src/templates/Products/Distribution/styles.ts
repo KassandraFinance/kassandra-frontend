@@ -9,39 +9,43 @@ export const Line = styled.div`
   background-color: rgba(255, 255, 255, 0.1);
 
   width: 100%;
-  height: 1px;
+  height: 0.1rem;
   margin: ${theme.spacings.space24} 0;
 `
 
 export const Title = styled.div`
   display: flex;
   align-items: center;
+
   h2 {
+    margin-left: ${theme.spacings.space16};
+
     font-size: ${theme.font.sizes.font18};
     font-weight: ${theme.font.weight.bold};
-    margin-left: ${theme.spacings.space16};
   }
 `
 
 export const Table = styled.table`
+  width: 100%;
+
+  font-size: ${theme.font.sizes.font14};
+
+  border-radius: 2rem;
+  border-spacing: 0;
   border-collapse: collapse;
-  border-radius: 20px;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
+
+  -webkit-border-radius: 2rem;
+  -moz-border-radius: 2rem;
+  -webkit-border-horizontal-spacing: 0;
+  -webkit-border-vertical-spacing: 0;
 
   overflow: hidden;
   text-indent: initial;
 
-  border-spacing: 0;
-  -webkit-border-horizontal-spacing: 0;
-  -webkit-border-vertical-spacing: 0;
-
-  font-size: ${theme.font.sizes.font14};
-
-  width: 100%;
   thead {
     background-color: rgba(0, 0, 0, 0.25);
   }
+
   tbody {
     background-color: rgba(255, 255, 255, 0.04);
     max-height: 100%;
@@ -73,7 +77,7 @@ export const Tr = styled.tr<ITableProps>`
   grid-template-columns: repeat(${props => (props.isOpenYield ? 4 : 5)}, 1fr);
   justify-items: center;
   align-items: center;
-  height: 38px;
+  height: 3.8rem;
   margin: 1.6rem 1.5rem;
 
   @media (max-width: 1100px) {
@@ -81,14 +85,14 @@ export const Tr = styled.tr<ITableProps>`
   }
 
   @media (max-width: 768px) {
-    min-width: 690px;
+    min-width: 69rem;
 
-    height: 28px;
-    gap: 16px;
+    height: 2.8rem;
+    gap: 1.6rem;
   }
 
   @media (max-width: 640px) {
-    min-width: 580px;
+    min-width: 58rem;
   }
 `
 
@@ -97,7 +101,7 @@ export const Th = styled.th`
   letter-spacing: 0.5px;
 
   @media (max-width: 660px) {
-    font-size: 15px;
+    font-size: 1.5rem;
   }
 
   :first-child {
@@ -110,14 +114,14 @@ interface ITdProps {
 
 // eslint-disable-next-line prettier/prettier
 export const Td = styled.td<ITdProps>`
-  font-weight: ${theme.font.weight.light};
-  letter-spacing: .5px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+
+  font-weight: ${theme.font.weight.light};
+  letter-spacing: .5px;
 `
 
 export const BalanceCoin = styled.span`
@@ -126,11 +130,11 @@ export const BalanceCoin = styled.span`
 `
 
 export const yildyakContent = styled.a`
-  color: ${theme.colors.grayDisabled};
-  font-size: ${theme.font.sizes.font12};
-
   display: flex;
   gap: 0.4rem;
+
+  color: ${theme.colors.grayDisabled};
+  font-size: ${theme.font.sizes.font12};
 
   text-decoration: none;
 
@@ -153,20 +157,21 @@ interface ICoinProps {
 
 // eslint-disable-next-line prettier/prettier
 export const Coin = styled.span<ICoinProps>`
-  ${props =>
-    props.change24h && {
-      color: `${props.negative ? '#EB5757' : '#6FCF97'}`
-    }};
-
   display: flex;
   align-items: center;
   text-align: center;
   width: ${props => props.width}px;
 
+  ${props =>
+    props.change24h && {
+      color: `${props.negative ? '#EB5757' : '#6FCF97'}`
+    }};
+
   img {
-    max-width: 24px;
-    margin-right: 16px;
-    margin-left: 8px;
+    max-width: 2.4rem;
+    margin-right: 1.6rem;
+    margin-left: 0.8rem;
+
     border-radius: 50%;
   }
 
