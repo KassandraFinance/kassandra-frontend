@@ -37,7 +37,12 @@ export const UserInfo = styled.div`
 `
 
 export const UserInfoContent = styled.div`
-  margin-top: 3.2rem;
+  margin-top: 1.2rem;
+
+  > img {
+    border-radius: 50%;
+    object-fit: cover;
+  }
 
   @media (max-width: 650px) {
     display: flex;
@@ -151,6 +156,7 @@ export const UserAddressContent = styled.span`
 export const ManagerInfo = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   padding: 3.2rem;
 
   .titleManagerInfo {
@@ -169,6 +175,7 @@ export const ManagerInfo = styled.div`
 
 // eslint-disable-next-line prettier/prettier
 export const DescriptionManagerInfo = styled.p`
+  word-break: break-all;
   color: #ffffff;
   font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.light};
