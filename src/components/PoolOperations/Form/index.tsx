@@ -46,7 +46,7 @@ const invertToken: { [key: string]: string } = {
   '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab',
   '0x964555644E067c560A4C144360507E80c1104784': //USDT
   '0xc7198437980c041c805a1edcba50c1ce5db95118',
-  '0xbbcED92AC9B958F88A501725f080c0360007e858': 
+  '0xbbcED92AC9B958F88A501725f080c0360007e858':
   '0x50b7545627a5162f82a992c33b87adc75187b218'
 }
 
@@ -539,7 +539,7 @@ const Form = ({
             )
           })
         )
-        
+
         setSwapOutAmount(newSwapOutAmount)
 
         try {
@@ -877,7 +877,7 @@ const Form = ({
                   walletAddress.value,
                   approvalCallback(swapInSymbol.value, swapInAddressVal, tabTitle)
                 )
-                return              
+                return
               }
 
               proxy.exitswapPoolAmountIn(
@@ -1049,8 +1049,11 @@ const Form = ({
         <Tippy content="Trade places for swap-in and swap-out token">
           <S.SwapButton type="button" onClick={() => {
             matomoEvent('click-on-button', 'swap-token')
-            setSwapInAddress(swapOutAddress)
-            setSwapOutAddress(swapInAddress)
+            // setSwapInAddress(swapOutAddress)
+            // setSwapOutAddress(swapInAddress)
+
+            setSwapInAmount(swapOutAmount[0])
+            setSwapOutAmount([swapInAmount])
           }} >
             <img src="/assets/icons/arrow-down.svg" alt="" />
             <img src="/assets/icons/arrow-down.svg" alt="" />
@@ -1092,7 +1095,7 @@ const Form = ({
                   .filter((token: { address: string }) => token.address !== swapInAddress)
             }
             tokenDetails={poolTokensArray[tokenOutIndex]}
-            swapInAmount={swapInAmount}
+            // swapInAmount={swapInAmount}
             swapInAddress={swapInAddress}
             setSwapAddress={setSwapOutAddress}
           />
