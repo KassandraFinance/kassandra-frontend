@@ -67,7 +67,7 @@ const farmInfoYY: { [key: string]: IfarmInfoYYProps } = {
   }, //WETH
 
   '0xFA17fb53da4c837594127b73fFd09fdb15f42C49': {
-    farmName: 'Benqi',
+    farmName: 'BENQI',
     urlFarmContract:
       'https://yieldyak.com/farms/detail/0xFA17fb53da4c837594127b73fFd09fdb15f42C49'
   }, //DAI
