@@ -48,7 +48,7 @@ const SharedImage = ({
       <Background />
       <S.Header>
         <S.Title>
-          <Image
+          <img
             src={fundImage.src || '/assets/modalShareImage.png'}
             width={40}
             height={40}
@@ -104,7 +104,7 @@ const SharedImage = ({
                 <Image
                   key={index}
                   src={
-                    poolImages[token.address] || '/assets/icons/coming-soon.svg'
+                    poolImages[token.address] ?? '/assets/icons/coming-soon.svg'
                   }
                   width={25}
                   height={25}
