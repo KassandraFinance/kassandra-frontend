@@ -1049,8 +1049,8 @@ const Form = ({
         <Tippy content="Trade places for swap-in and swap-out token">
           <S.SwapButton type="button" onClick={() => {
             matomoEvent('click-on-button', 'swap-token')
-            // setSwapInAddress(swapOutAddress)
-            // setSwapOutAddress(swapInAddress)
+            setSwapInAddress(swapOutAddress)
+            setSwapOutAddress(swapInAddress)
 
             setSwapInAmount(swapOutAmount[0])
             setSwapOutAmount([swapInAmount])

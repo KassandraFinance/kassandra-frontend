@@ -64,18 +64,6 @@ const InputTokens = ({
   const [maxActive, setMaxActive] = React.useState<boolean>(false)
   const [currentMax, setCurrentMax] = React.useState(new BigNumber(0))
 
-  if (title !== 'Output') {
-    console.log(
-      `Swap Amount`,
-      BNtoDecimal(swapAmount || new BigNumber(0), decimals.toNumber())
-    )
-  }
-
-  // console.log(
-  //   'Swap In',
-  //   BNtoDecimal(swapInAmount || new BigNumber(0), decimals.toNumber())
-  // )
-
   const { trackEvent } = useMatomo()
 
   function matomoEvent(action: string, name: string) {

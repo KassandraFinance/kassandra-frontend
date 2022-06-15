@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useEffect } from 'react'
+import React from 'react'
 import BigNumber from 'bn.js'
 
 import Tippy from '@tippyjs/react'
@@ -36,7 +36,7 @@ const InputTokenValue = ({
     }
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (inputRef && inputRef?.current) {
       inputRef.current.value = BNtoDecimal(
           swapAmount || new BigNumber(0),
