@@ -103,10 +103,6 @@ export const Th = styled.th`
   @media (max-width: 660px) {
     font-size: 1.5rem;
   }
-
-  :first-child {
-    margin-left: -4rem;
-  }
 `
 interface ITdProps {
   change24h?: boolean;
@@ -184,7 +180,7 @@ export const Coin = styled.span<ICoinProps>`
     align-items: flex-start;
 
     color: #969696;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 400;
   }
 `
