@@ -33,19 +33,21 @@ import { Titles } from '..'
 
 import * as S from './styles'
 
+const WAVAX = '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7'
+
 const invertToken: { [key: string]: string } = {
   '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab':
   '0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E', //WETH
-  '0xc7198437980c041c805a1edcba50c1ce5db95118':
-  '0x964555644E067c560A4C144360507E80c1104784', //USDT
+  '0xd586e7f844cea2f87f50152665bcbc2c279d8d70':
+  '0xFA17fb53da4c837594127b73fFd09fdb15f42C49', //DAI
   '0x50b7545627a5162f82a992c33b87adc75187b218':
   '0xbbcED92AC9B958F88A501725f080c0360007e858',  //WBTC
 
 
   '0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E': //WETH
   '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab',
-  '0x964555644E067c560A4C144360507E80c1104784': //USDT
-  '0xc7198437980c041c805a1edcba50c1ce5db95118',
+  '0xFA17fb53da4c837594127b73fFd09fdb15f42C49': //DAI
+  '0xd586e7f844cea2f87f50152665bcbc2c279d8d70',
   '0xbbcED92AC9B958F88A501725f080c0360007e858':
   '0x50b7545627a5162f82a992c33b87adc75187b218'
 }
@@ -55,6 +57,7 @@ interface IFormProps {
   title: Titles;
   typeWithdrawChecked: string;
   poolChain: ChainDetails;
+  poolSymbol: string;
   crpPoolAddress: string;
   corePoolAddress: string;
   productCategories: string[];
@@ -73,6 +76,7 @@ type Approvals = { [key in Titles]: Approval[] }
 
 const Form = ({
   poolChain,
+  poolSymbol,
   crpPoolAddress,
   corePoolAddress,
   productCategories,
@@ -83,7 +87,7 @@ const Form = ({
 }: IFormProps) => {
   const crpPoolToken = useERC20Contract(crpPoolAddress)
   const corePool = usePoolContract(corePoolAddress)
-  const proxy = useProxy(ProxyContract, crpPoolAddress)
+  const proxy = useProxy(ProxyContract, crpPoolAddress, corePoolAddress)
 
   const { userWalletAddress, chainId, fees, tokenAddress2Index, poolTokensArray } = useSelector((state: RootStateOrAny) => state)
   const { trackBuying, trackBought, trackCancelBuying } = useMatomoEcommerce();
@@ -94,7 +98,6 @@ const Form = ({
     Invest: [],
     Swap: []
   })
-
   const [newTitle, setNewTitle] = React.useState(title)
 
   const [isReload, setIsReload] = React.useState<boolean>(false)
@@ -177,6 +180,10 @@ const Form = ({
       const newApprovals = []
 
       for (let i = 0; i < poolTokensArray.length; i += 1) {
+        if (poolTokensArray[i].address === WAVAX) {
+          newApprovals.push(true)
+        }
+
         newApprovals.push(
           ERC20(poolTokensArray[i].address).allowance(
             ProxyContract,
@@ -341,7 +348,7 @@ const Form = ({
               return
             }
 
-            if (swapInAmount.gt(swapInBalance)) {
+            if (swapInAmount.gt(swapInBalance) && Number(swapInAmount.toString()) > 0) {
               setErrorMsg('This amount exceeds your balance!')
               return;
             }
@@ -369,8 +376,13 @@ const Form = ({
         }
 
         setSwapOutPrice(newSwapOutPrice)
-      } catch (error) {
+      } catch (error: any) {
+        const errorStr = error.toString()
         if (userWalletAddress.length > 0) {
+          if (errorStr.search('ERR_BPOW_BASE_TOO_HIGH') > -1) {
+            ToastWarning("The amount can't be more than half of what's in the pool!")
+            return
+          }
           ToastWarning('Could not connect with the blockchain to calculate prices.')
         }
       }
@@ -417,7 +429,7 @@ const Form = ({
         ])
 
         const [newSwapOutPrice, newSwapOutAmount] = await Promise.all([
-          corePool.spotPrice(invertToken[swapOutAddress] ?? swapOutAddress, invertToken[swapInAddress] ?? swapInAddress),
+          proxy.spotPrice(corePoolAddress, swapOutAddress, swapInAddress),
           corePool.calcOutGivenIn(
             swapInTotalPoolBalance,
             swapInDenormalizedWeight,
@@ -428,7 +440,12 @@ const Form = ({
           )
         ])
 
-        setSwapOutAmount([newSwapOutAmount])
+        const exchangeRateIn = await proxy.exchangeRate(corePoolAddress, swapInAddress)
+        const exchangeRateOut = await proxy.exchangeRate(corePoolAddress, swapOutAddress)
+
+        const swapOut = newSwapOutAmount.mul(exchangeRateIn).div(exchangeRateOut)
+
+        setSwapOutAmount([swapOut])
         setSwapOutPrice(newSwapOutPrice)
 
         try {
@@ -446,6 +463,11 @@ const Form = ({
 
           if (errorStr.search('ERR_MAX_IN_RATIO') > -1) {
             setErrorMsg("The amount can't be more than half of what's in the pool!")
+            return
+          }
+
+          if (errorStr.search('below minimum') > -1) {
+            setErrorMsg("This amount is below minimum withdraw!")
             return
           }
 
@@ -544,8 +566,12 @@ const Form = ({
 
         try {
           if (userWalletAddress.length > 0 && swapInAmount.gt(new BigNumber('0'))) {
+            const tokensInPool = await corePool.currentTokens()
+            const tokensWithdraw = tokensInPool.map(token => invertToken[token] ?? token)
+
             await proxy.tryExitPool(
               swapInAmount,
+              tokensWithdraw,
               Array(newSwapOutAmount.length).fill(new BigNumber('0')),
               userWalletAddress
             )
@@ -556,6 +582,11 @@ const Form = ({
 
           if (errorStr.search(/ERR_(BPOW_BASE_TOO_|MATH_APPROX)/) > -1) {
             setErrorMsg('This amount is too low for the pool!')
+            return
+          }
+
+          if (errorStr.search('below minimum') > -1) {
+            setErrorMsg("This amount is below minimum withdraw!")
             return
           }
 
@@ -632,6 +663,11 @@ const Form = ({
 
         if (errorStr.search('ERR_MAX_OUT_RATIO') > -1) {
           setErrorMsg("The amount you are trying to obtain can't be more than a third of what's in the pool!")
+          return
+        }
+
+        if (errorStr.search('below minimum') > -1) {
+          setErrorMsg("This amount is below minimum withdraw!")
           return
         }
 
@@ -849,7 +885,7 @@ const Form = ({
       try {
         switch (category.value) {
           case 'Invest':
-            if (approved.value === '0') {
+            if (approved.value === '0' && swapInAddressVal !== WAVAX) {
               ERC20(swapInAddressVal).approve(
                 ProxyContract,
                 walletAddress.value,
@@ -858,7 +894,7 @@ const Form = ({
               return
             }
 
-            trackBuying(crpPoolAddress, 'aHYPE', amountInUSD, productCategories)
+            trackBuying(crpPoolAddress, poolSymbol, amountInUSD, productCategories)
             proxy.joinswapExternAmountIn(
               swapInAddressVal,
               swapInAmountVal,
@@ -869,17 +905,16 @@ const Form = ({
             return
 
           case 'Withdraw':
-            trackBuying(crpPoolAddress, 'aHYPE', -1 * amountInUSD, productCategories)
+            trackBuying(crpPoolAddress, poolSymbol, -1 * amountInUSD, productCategories)
+            if (approved.value === '0') {
+              ERC20(crpPoolAddress).approve(
+                ProxyContract,
+                walletAddress.value,
+                approvalCallback(swapInSymbol.value, swapInAddressVal, tabTitle)
+              )
+              return
+            }
             if (swapOutAddressVal !== '') {
-              if (approved.value === '0') {
-                ERC20(crpPoolAddress).approve(
-                  ProxyContract,
-                  walletAddress.value,
-                  approvalCallback(swapInSymbol.value, swapInAddressVal, tabTitle)
-                )
-                return
-              }
-
               proxy.exitswapPoolAmountIn(
                 swapOutAddressVal,
                 swapInAmountVal,
@@ -915,7 +950,7 @@ const Form = ({
             return
 
           case 'Swap':
-            if (approved.value === '0') {
+            if (approved.value === '0' && swapInAddressVal !== WAVAX) {
               ERC20(swapInAddressVal).approve(
                 ProxyContract,
                 walletAddress.value,
@@ -966,11 +1001,11 @@ const Form = ({
     if (swapInAmount.gt(new BigNumber(0)) && parseFloat(swapOutAmount[0].toString()) > 0) {
       const usdAmountIn = Big(swapInAmount.toString())
         .mul(Big(priceDollar(swapInAddress, poolTokensArray)))
-        .div(Big(10).pow(18))
+        .div(Big(10).pow(Number(poolTokensArray[tokenInIndex]?.decimals || 18)))
 
       const usdAmountOut = Big(swapOutAmount[0].toString())
         .mul(Big(priceDollar(swapOutAddress, poolTokensArray)))
-        .div(Big(10).pow(18))
+        .div(Big(10).pow(Number(poolTokensArray[tokenAddress2Index[swapOutAddress]]?.decimals || 18)))
 
       const subValue = usdAmountIn.sub(usdAmountOut)
       const valuePriceImpact = subValue.div(usdAmountIn).mul(100)
@@ -1171,23 +1206,26 @@ const Form = ({
                     typeWithdrawChecked === "Best_value" ?
                       `${title} ${'$' + priceInDollarOnWithdraw}`
                       :
-                      `${title} ${'$' + BNtoDecimal(
+                      `${title} ${'$' +
+                      BNtoDecimal(
                         Big((swapOutAmount[0] || 0).toString())
                           .mul(Big(priceDollar(swapOutAddress, poolTokensArray)))
-                          .div(Big(10).pow(18)),
+                          .div(Big(10).pow(Number(poolTokensArray[tokenAddress2Index[swapOutAddress]]?.decimals || 18))),
                         18,
                         2,
                         2
-                      )}`
+                      )
+                    }`
                     :
                     `${title} ${'$' + BNtoDecimal(
                       Big((swapOutAmount[0] || 0).toString())
                         .mul(Big(priceDollar(swapOutAddress, poolTokensArray)))
-                        .div(Big(10).pow(18)),
+                        .div(Big(10).pow(Number(poolTokensArray[tokenAddress2Index[swapOutAddress]]?.decimals || 18))),
                       18,
                       2,
                       2
-                    )}`
+                    )
+                  }`
                   :
                   `${title}`
                 :

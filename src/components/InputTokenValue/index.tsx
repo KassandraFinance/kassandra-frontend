@@ -14,8 +14,8 @@ interface IInputProps {
   inputRef: React.RefObject<HTMLInputElement>;
   setInputValue: React.Dispatch<React.SetStateAction<BigNumber>>;
   disabled?: string;
-  swapAmount: any;
-  swapInAmount: any;
+  swapAmount?: any;
+  swapInAmount?: any;
 }
 
 const InputTokenValue = ({

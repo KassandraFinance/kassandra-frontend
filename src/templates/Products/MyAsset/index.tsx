@@ -7,19 +7,19 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import { BNtoDecimal } from '../../../utils/numerals'
-
 import {
   Staking,
   LPKacyAvaxPNG,
   LPDaiAvax
 } from '../../../constants/tokenAddresses'
+
 import usePriceLP from '../../../hooks/usePriceLP'
 import useERC20Contract from '../../../hooks/useERC20Contract'
 import useStakingContract from '../../../hooks/useStakingContract'
 
 import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
 
+import { BNtoDecimal } from '../../../utils/numerals'
 import { registerToken } from '../../../utils/registerToken'
 
 import Button from '../../../components/Button'
@@ -256,7 +256,6 @@ const MyAsset = ({
           </S.Tr>
         </S.TBody>
       </S.Table>
-
       <S.ButtonWrapper>
         <Button
           backgroundSecondary
@@ -274,7 +273,6 @@ const MyAsset = ({
           }
         />
       </S.ButtonWrapper>
-
       {isModalWallet && <ModalWalletConnect setModalOpen={setIsModaWallet} />}
     </S.MyAsset>
   )

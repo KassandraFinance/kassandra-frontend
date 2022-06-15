@@ -22,11 +22,11 @@ const TricryptoDescription = () => {
       <p>
         The Kassandra 3Crypto Index (#K3C) tracks the performance of a portfolio
         composed of the most consolidated cryptocurrencies in the market,
-        namely, BTC, ETH and USDC. Its weights will remain equal, with a 5%
-        stake in $KACY. The portfolio is a SIP (Smart Index Pool) and is
-        rebalanced by arbitrageurs just like any liquidity pool. The index is by
-        its own token, #K3C, allowing investors to buy the index by purchasing
-        the token, just like an ETF.
+        namely, BTC, ETH and DAI. Its weights will remain equal, with a 5% stake
+        in $KACY. The portfolio is a SIP (Smart Index Pool) and is rebalanced by
+        arbitrageurs just like any liquidity pool. The index is by its own
+        token, #K3C, allowing investors to buy the index by purchasing the
+        token, just like an ETF.
       </p>
 
       <h2>Goal</h2>

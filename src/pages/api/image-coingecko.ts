@@ -7,6 +7,13 @@ type IImagesProps = {
   [key: string]: string
 }
 
+type IInfoTokenProps = {
+  [key: string]: {
+    image: string,
+    change: number,
+    price: number
+  }
+}
 export default async (request: NextApiRequest, response: NextApiResponse) => {
   try {
     await NextCors(request, response, {
@@ -22,8 +29,9 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
     }
 
     const images: IImagesProps = {}
+    const infoToken: IInfoTokenProps = {}
 
-    const infoToken: object[] = await Promise.all(
+    await Promise.all(
       request.query['tokenAddress'].split(',').map(async item => {
         const urlImageCoingecko = `${URL_COINGECKO}/coins/${poolinfo}/contract/${item}?localization=false&tickers=false&community_data=false&developer_data=false&sparkline=false`
         const responseImageCoingecko = await fetch(urlImageCoingecko)
@@ -32,14 +40,17 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
         Object.assign(images, {
           [item]: responseImageCoingeckoJson.image?.small
         })
-
-        return {
-          change: Number(
-            responseImageCoingeckoJson.market_data
-              ?.price_change_percentage_24h || 0
-          ),
-          price: responseImageCoingeckoJson.market_data?.current_price.usd
-        }
+        Object.assign(infoToken, {
+          [item]: {
+            change: Number(
+              responseImageCoingeckoJson.market_data
+                ?.price_change_percentage_24h || 0
+            ),
+            price: responseImageCoingeckoJson.market_data?.current_price.usd,
+            image: responseImageCoingeckoJson.image?.small
+          }
+        })
+        return
       })
     )
 
