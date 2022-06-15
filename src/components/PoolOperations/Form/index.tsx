@@ -981,6 +981,12 @@ const Form = ({
     }
   }, [swapInAmount, swapOutAmount])
 
+  React.useEffect(() => {
+    if (approvals[title][tokenInIndex] === Approval.Approved) {
+      clearInput()
+    }
+  }, [approvals])
+
   return (
     <S.FormContainer onSubmit={submitAction}>
       <input type="hidden" name="approved" value={Number(approvals[title][tokenInIndex] === Approval.Approved || 0)} />
@@ -1142,7 +1148,6 @@ const Form = ({
         chainId === poolChain.chainId ? (
           <Button
             className="btn-submit"
-            onClick={() => setTimeout(() => clearInput(), 3000)}
             backgroundPrimary
             disabledNoEvent={
               (
