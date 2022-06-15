@@ -160,7 +160,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
         <S.MobileCards>
           <S.ResponsabilitiesCards>
             <S.IconWrapper>
-              <img src="/assets/iconGradient/adjust.svg" alt="" />
+              <img src="/assets/iconGradient/adjust.png" alt="" />
             </S.IconWrapper>
             <span>
               {' '}

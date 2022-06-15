@@ -1,9 +1,7 @@
-import Image from 'next/image'
 import React from 'react'
 import { RootStateOrAny, useSelector } from 'react-redux'
 import { PerformanceValues } from '../../../store/modules/performanceValues/actions'
 
-import { TokenImages } from '../../../store/modules/poolImages/types'
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
 // import substr from '../../../utils/substr'
 import ChartProducts from './ChartProducts'
@@ -25,6 +23,20 @@ interface ISharedImageProps {
   fundImage: any;
 }
 
+const assetsImages: { [key: string]: string } = {
+  '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab': '/assets/logos/weth.png',
+  '0x50b7545627a5162f82a992c33b87adc75187b218': '/assets/logos/wbtc.png',
+  '0xd586e7f844cea2f87f50152665bcbc2c279d8d70': '/assets/logos/dai.png',
+  '0xf32398dae246C5f672B52A54e9B413dFFcAe1A44': '/assets/logos/kacy.png',
+
+  '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7': '/assets/logos/avax.png',
+  '0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd': '/assets/logos/joe.png',
+  '0x8729438EB15e2C8B576fCc6AeCdA6A148776C0F5': '/assets/logos/qi.png',
+  '0xA32608e873F9DdEF944B24798db69d80Bbb4d1ed': '/assets/logos/cra.png',
+  '0x60781C2586D68229fde47564546784ab3fACA982': '/assets/logos/png.png',
+  '0xd1c3f94DE7e5B45fa4eDBBA472491a9f4B166FC4': '/assets/logos/xava.png'
+}
+
 const SharedImage = ({
   crpPoolAddress,
   totalValueLocked,
@@ -35,11 +47,9 @@ const SharedImage = ({
   // const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const {
     poolTokensArray,
-    poolImages,
     performanceValues
   }: {
     poolTokensArray: TokenDetails[],
-    poolImages: TokenImages,
     performanceValues: PerformanceValues
   } = useSelector((state: RootStateOrAny) => state)
 
@@ -101,10 +111,11 @@ const SharedImage = ({
             </S.InfoTitle>
             <S.AssetsContainer>
               {poolTokensArray.slice(0, -1).map((token, index) => (
-                <Image
+                <img
                   key={index}
                   src={
-                    poolImages[token.address] ?? '/assets/icons/coming-soon.svg'
+                    assetsImages[token.address] ??
+                    '/assets/icons/coming-soon.svg'
                   }
                   width={25}
                   height={25}
