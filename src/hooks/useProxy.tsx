@@ -11,7 +11,7 @@ import HermesProxy from "../constants/abi/HermesProxy.json"
 import { TransactionCallback } from '../utils/txWait'
 
 
-const useProxy = (address: string, crpAddress: string) => {
+const useProxy = (address: string, sipAddress: string, coreAddress: string) => {
   const [contract, setContract] = React.useState(new web3.eth.Contract((HermesProxy as unknown) as AbiItem, address))
 
   React.useEffect(() => {
@@ -31,7 +31,7 @@ const useProxy = (address: string, crpAddress: string) => {
 
       const avaxValue = tokenIn === wrapped ? tokenAmountIn : new BigNumber(0)
       const res = await contract.methods
-        .joinswapExternAmountIn(crpAddress, tokenIn, tokenAmountIn, minPoolAmountOut)
+        .joinswapExternAmountIn(sipAddress, tokenIn, tokenAmountIn, minPoolAmountOut)
         .send({ from: walletAddress, value: avaxValue }, callback)
 
       return res
@@ -46,7 +46,7 @@ const useProxy = (address: string, crpAddress: string) => {
     ) => {
 
       const res = await contract.methods
-        .exitswapPoolAmountIn(crpAddress, tokenOut, tokenAmountIn, minPoolAmountOut)
+        .exitswapPoolAmountIn(sipAddress, tokenOut, tokenAmountIn, minPoolAmountOut)
         .send({ from: walletAddress }, callback)
       
         return res
@@ -60,7 +60,7 @@ const useProxy = (address: string, crpAddress: string) => {
       callback: TransactionCallback
     ) => {
       const res = await contract.methods
-        .exitPool(crpAddress, poolAmountIn, tokensOut, minAmountsOut)
+        .exitPool(sipAddress, poolAmountIn, tokensOut, minAmountsOut)
         .send({ from: walletAddress }, callback)
 
       return res
@@ -74,39 +74,34 @@ const useProxy = (address: string, crpAddress: string) => {
       walletAddress: string,
       callback: TransactionCallback
     ) => {
+      const wrapped = await contract.methods.wNativeToken().call()
+
+      const avaxValue = tokenIn === wrapped ? tokenAmountIn : new BigNumber(0)
       const res = await contract.methods
         .swapExactAmountIn(
-          '0x17C1037B17b221f2f3b53f85cebD817C941f6bC5',
+          coreAddress,
           tokenIn, 
           tokenAmountIn, 
           tokenOut, 
           minAmountOut,
-          web3.utils.toTwosComplement(-1)
+          new BigNumber('10').pow(new BigNumber(40))
         )
-        .send({ from: walletAddress }, callback)
-
+        .send({ from: walletAddress, value: avaxValue }, callback)
       return res
     }
 
     /* CALL */
-    const trySwapExactAmountIn = async (
-      tokenIn: string, 
-      tokenAmountIn: BigNumber,
-      tokenOut: string,
-      walletAddress: string,
-    ) => {
-      const res = await contract.methods
-        .swapExactAmountIn(
-          '0x17C1037B17b221f2f3b53f85cebD817C941f6bC5',
-          tokenIn, 
-          tokenAmountIn, 
-          tokenOut, 
-          0,
-          web3.utils.toTwosComplement(-1)
-        )
-        .call({ from: walletAddress })
 
-      return res
+    const spotPrice = async (corePoolAddress: string, swapOutAddress: string, swapInAddress: string) => {
+      const res = await contract.methods.getSpotPrice(corePoolAddress, swapOutAddress, swapInAddress).call()
+
+      return new BigNumber(res)
+    }
+
+    const exchangeRate = async (corePoolAddress: string, swapOutAddress: string) => {
+      const res = await contract.methods.exchangeRate(corePoolAddress, swapOutAddress).call()
+
+      return new BigNumber(res)
     }
 
     const tryJoinswapExternAmountIn = async (
@@ -118,21 +113,12 @@ const useProxy = (address: string, crpAddress: string) => {
       const wrapped = await contract.methods.wNativeToken().call()
 
       const avaxValue = tokenIn === wrapped ? tokenAmountIn : new BigNumber(0)
-        const res = await contract.methods
-          .joinswapExternAmountIn(crpAddress, tokenIn, tokenAmountIn, minPoolAmountOut)
-          .call({ from: walletAddress, value: avaxValue })
+      
+      const res = await contract.methods
+        .joinswapExternAmountIn(sipAddress, tokenIn, tokenAmountIn, minPoolAmountOut)
+        .call({ from: walletAddress, value: avaxValue })
   
       return res
-    }
-
-    const tryExitPool = (
-      poolAmountIn: BigNumber,
-      minAmountsOut: Array<BigNumber>,
-      walletAddress: string
-    ) => {
-      return contract.methods.exitPool(crpAddress, poolAmountIn, minAmountsOut).call(
-        { from: walletAddress }
-      )
     }
 
     const tryExitswapPoolAmountIn = async (
@@ -142,9 +128,47 @@ const useProxy = (address: string, crpAddress: string) => {
       walletAddress: string
     ) => {
 
-      return contract.methods.exitswapPoolAmountIn(crpAddress, tokenOut, poolAmountIn, minAmountOut).call(
-        { from: walletAddress }
-      )
+      const res = contract.methods
+        .exitswapPoolAmountIn(sipAddress, tokenOut, poolAmountIn, minAmountOut)
+        .call({ from: walletAddress })
+
+      return res
+    }
+
+    const tryExitPool = async (
+      poolAmountIn: BigNumber,
+      tokensOut: Array<string>,
+      minAmountsOut: Array<BigNumber>,
+      walletAddress: string,
+    ) => {
+      const res = await contract.methods
+        .exitPool(sipAddress, poolAmountIn, tokensOut, minAmountsOut)
+        .call({ from: walletAddress })
+
+      return res
+    }
+
+    const trySwapExactAmountIn = async (
+      tokenIn: string, 
+      tokenAmountIn: BigNumber,
+      tokenOut: string,
+      walletAddress: string,
+    ) => {
+      const wrapped = await contract.methods.wNativeToken().call()
+
+      const avaxValue = tokenIn === wrapped ? tokenAmountIn : new BigNumber(0)
+      const res = await contract.methods
+        .swapExactAmountIn(
+          coreAddress,
+          tokenIn, 
+          tokenAmountIn, 
+          tokenOut, 
+          new BigNumber(0),
+          new BigNumber('10').pow(new BigNumber(40))
+        )
+        .call({ from: walletAddress, value: avaxValue })
+
+      return res
     }
 
     return {
@@ -153,10 +177,12 @@ const useProxy = (address: string, crpAddress: string) => {
       exitPool,
       swapExactAmountIn,
       
+      spotPrice,
+      exchangeRate,
       tryJoinswapExternAmountIn,
       tryExitswapPoolAmountIn,
-      trySwapExactAmountIn,
       tryExitPool,
+      trySwapExactAmountIn
     }
   }, [contract])
 }

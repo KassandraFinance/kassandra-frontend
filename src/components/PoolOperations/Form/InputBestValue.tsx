@@ -39,7 +39,7 @@ const InputBestValue = ({
     const res: Big = poolTokenDetails.reduce((accumulator, current, index) => {
       return Big((swapOutAmount[index] || 0).toString())
         .mul(Big(priceDollar(current.address, poolTokensArray)))
-        .div(Big(10).pow(18))
+        .div(Big(10).pow(Number(current.decimals)))
         .add(accumulator)
     }, Big(0))
 
@@ -92,8 +92,8 @@ const InputBestValue = ({
                   BNtoDecimal(
                     Big((swapOutAmount[index] || 0).toString())
                       .mul(Big(priceDollar(token.address, poolTokensArray)))
-                      .div(Big(10).pow(18)),
-                    6,
+                      .div(Big(10).pow(Number(token.decimals))),
+                    18,
                     2,
                     2
                   )

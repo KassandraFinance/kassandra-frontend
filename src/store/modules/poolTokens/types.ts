@@ -14,4 +14,6 @@ export interface TokenDetails {
   allocation: number;
   allocation_goal: number;
   price: number;
+  image?: string;
+  priceChange?: number;
 }
