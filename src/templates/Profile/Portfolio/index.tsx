@@ -4,31 +4,31 @@ import BigNumber from 'bn.js'
 
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import useStakingContract from '../../hooks/useStakingContract'
-import { Staking } from '../../constants/tokenAddresses'
-import useERC20Contract from '../../hooks/useERC20Contract'
+import useStakingContract from '../../../hooks/useStakingContract'
+import { Staking } from '../../../constants/tokenAddresses'
+import useERC20Contract from '../../../hooks/useERC20Contract'
 
-import PortfolioHeading from '../../components/PortfolioHeading'
+import PortfolioHeading from '../../../components/PortfolioHeading'
 import AssetsTable from './AssetsTable'
 import StakingTable from './StakingTable'
-import AnyCard from '../AnyCard'
-import ModalWalletConnect from '../Modals/ModalWalletConnect'
+import AnyCard from '../../../components/AnyCard'
+import ModalWalletConnect from '../../../components/Modals/ModalWalletConnect'
 
-import AssetsIcon from '../../../public/assets/iconGradient/assets-distribution.svg'
-import StakedPoolsIcon from '../../../public/assets/iconGradient/staking-pools.svg'
-import aHYPE from '../../../public/assets/logos/ahype.svg'
-import AvalancheIcon from '../../../public/assets/logos/avalanche.svg'
-import iconKace from '../../../public/assets/logos/kacy-stake.svg'
-import iconPangolin from '../../../public/assets/logos/pangolin-40x40.svg'
-import iconTraderJoe from '../../../public/assets/logos/traderJoe.svg'
+import AssetsIcon from '../../../../public/assets/iconGradient/assets-distribution.svg'
+import StakedPoolsIcon from '../../../../public/assets/iconGradient/staking-pools.svg'
+import aHYPE from '../../../../public/assets/logos/ahype.svg'
+import AvalancheIcon from '../../../../public/assets/logos/avalanche.svg'
+import iconKace from '../../../../public/assets/logos/kacy-stake.svg'
+import iconPangolin from '../../../../public/assets/logos/pangolin-40x40.svg'
+import iconTraderJoe from '../../../../public/assets/logos/traderJoe.svg'
 
-import { BNtoDecimal } from '../../utils/numerals'
+import { BNtoDecimal } from '../../../utils/numerals'
 
 import {
   products,
   HeimCRPPOOL,
   ProductDetails
-} from '../../constants/tokenAddresses'
+} from '../../../constants/tokenAddresses'
 
 import * as S from './styles'
 

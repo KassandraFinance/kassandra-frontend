@@ -13,12 +13,12 @@ import {
   LPKacyAvaxJOE,
   HeimCRPPOOL,
   SUBGRAPH_URL
-} from '../../../constants/tokenAddresses'
-import useStakingContract from '../../../hooks/useStakingContract'
-import usePriceLP from '../../../hooks/usePriceLP'
-import useERC20Contract from '../../../hooks/useERC20Contract'
+} from '../../../../constants/tokenAddresses'
+import useStakingContract from '../../../../hooks/useStakingContract'
+import usePriceLP from '../../../../hooks/usePriceLP'
+import useERC20Contract from '../../../../hooks/useERC20Contract'
 
-import { BNtoDecimal } from '../../../utils/numerals'
+import { BNtoDecimal } from '../../../../utils/numerals'
 
 import { GET_INFO_AHYPE } from './graphql'
 

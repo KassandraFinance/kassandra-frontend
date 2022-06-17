@@ -6,17 +6,17 @@ import BigNumber from 'bn.js'
 import Big from 'big.js'
 import { request } from 'graphql-request'
 
-import useERC20Contract from '../../../hooks/useERC20Contract'
+import useERC20Contract from '../../../../hooks/useERC20Contract'
 
 import {
   SUBGRAPH_URL,
   ProductDetails,
   HeimCRPPOOL
-} from '../../../constants/tokenAddresses'
+} from '../../../../constants/tokenAddresses'
 
 import { GET_CHART } from './graphql'
 
-import { BNtoDecimal } from '../../../utils/numerals'
+import { BNtoDecimal } from '../../../../utils/numerals'
 
 import * as S from './styles'
 
