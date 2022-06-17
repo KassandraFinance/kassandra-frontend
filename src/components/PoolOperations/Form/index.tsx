@@ -1016,12 +1016,6 @@ const Form = ({
     }
   }, [swapInAmount, swapOutAmount])
 
-  React.useEffect(() => {
-    if (approvals[title][tokenInIndex] === Approval.Approved) {
-      clearInput()
-    }
-  }, [approvals])
-
   return (
     <S.FormContainer onSubmit={submitAction}>
       <input type="hidden" name="approved" value={Number(approvals[title][tokenInIndex] === Approval.Approved || 0)} />
