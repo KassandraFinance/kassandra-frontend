@@ -159,6 +159,8 @@ const InputTokens = ({
             max={wei2String(swapBalance)}
             decimals={decimals}
             setInputValue={setSwapAmount}
+            swapAmount={swapAmount}
+            swapInAmount={swapInAmount}
           />
         ) : (
           <>

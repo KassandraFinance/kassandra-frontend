@@ -243,14 +243,14 @@ const Products = ({ product }: Input) => {
             price: Number(
               coinGeckoResponse.infoToken[
                 invertToken[item.token.id] ?? item.token.id
-              ].price
+              ]?.price
             ),
             name: item.token.name,
             symbol,
             priceChange: Number(
               coinGeckoResponse.infoToken[
                 invertToken[item.token.id] ?? item.token.id
-              ].change
+              ]?.change
             ),
             image:
               coinGeckoResponse.images[
