@@ -1,23 +1,23 @@
 import React from 'react'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 import { useSelector, RootStateOrAny } from 'react-redux'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
 
-import useSWR from 'swr'
-import { request } from 'graphql-request'
+// import useSWR from 'swr'
+// import { request } from 'graphql-request'
 
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
-import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
+// import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
 import { SUBGRAPH_URL, Staking } from '../../../constants/tokenAddresses'
 
 import useStakingContract from '../../../hooks/useStakingContract'
 
 import { BNtoDecimal } from '../../../utils/numerals'
-import substr from '../../../utils/substr'
+// import substr from '../../../utils/substr'
 
 import Button from '../../../components/Button'
 import ExternalLink from '../../../components/ExternalLink'
@@ -26,39 +26,41 @@ import ModalManageVotingPower from '../ModalManageVotingPower'
 
 import tooltip from '../../../../public/assets/utilities/tooltip.svg'
 
-import { GET_USER } from './graphql'
+// import { GET_USER } from './graphql'
 
 import * as S from './styles'
 
 type IIntroWalletAddressProps = {
+  address: string | string[] | undefined,
   userReceivedTotal: Big,
   userDelegatingTotal: Big
 }
 
-// eslint-disable-next-line prettier/prettier
-const IntroWalletAddress = ({ userReceivedTotal, userDelegatingTotal }: IIntroWalletAddressProps) => {
+const IntroWalletAddress = ({
+  address,
+  userReceivedTotal,
+  userDelegatingTotal
+}: IIntroWalletAddressProps) => {
   // eslint-disable-next-line prettier/prettier
-  const [isModalManageVotingPower, setIsModalManageVotingPower] =
-    React.useState<boolean>(false)
+  const [isModalManageVotingPower, setIsModalManageVotingPower] = React.useState<boolean>(false)
   // eslint-disable-next-line prettier/prettier
-  const [isModalWalletConnect, setIsModalWalletConnect] =
-    React.useState<boolean>(false)
+  const [isModalWalletConnect, setIsModalWalletConnect] = React.useState<boolean>(false)
   // eslint-disable-next-line prettier/prettier
   const [totalKacyStaked, setTotalKacyStaked] = React.useState<BigNumber>(
     new BigNumber(0)
   )
-  const [voteWeight, setVoteWeight] = React.useState<string>('')
+  // const [voteWeight, setVoteWeight] = React.useState<string>('')
 
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
   const { userInfo } = useStakingContract(Staking)
 
-  const router = useRouter()
-  const { address } = router.query
+  // const router = useRouter()
+  // const { address } = router.query
 
-  const { data } = useSWR([GET_USER], query =>
-    request(SUBGRAPH_URL, query, { id: address })
-  )
+  // const { data } = useSWR([GET_USER], query =>
+  //   request(SUBGRAPH_URL, query, { id: address })
+  // )
 
   const callUserInfo = async () => {
     const [userInfoOne, userInfoTwo, userInfoThree] = await Promise.all([
@@ -75,25 +77,26 @@ const IntroWalletAddress = ({ userReceivedTotal, userDelegatingTotal }: IIntroWa
   }
 
   React.useEffect(() => {
-    if (data) {
-      callUserInfo()
-      const vote = BNtoDecimal(
-        Big(data.user !== null ? data.user.votingPower : '0')
-          .mul(100)
-          .div(Big(data.governances[0].totalVotingPower)),
-        18,
-        2
-      )
-      setVoteWeight(vote)
-      return
-    }
-    setVoteWeight('')
-  }, [data, address, userWalletAddress])
+    // if (data) {
+    callUserInfo()
+    //   const vote = BNtoDecimal(
+    //     Big(data.user !== null ? data.user.votingPower : '0')
+    //       .mul(100)
+    //       .div(Big(data.governances[0].totalVotingPower)),
+    //     18,
+    //     2
+    //   )
+    //   setVoteWeight(vote)
+    //   return
+    // }
+    // setVoteWeight('')
+  }, [address, userWalletAddress])
+  // }, [data, address, userWalletAddress])
 
   return (
     <>
       <S.IntroWalletAddress>
-        <S.AddressAndVoteWeight>
+        {/* <S.AddressAndVoteWeight>
           <S.WalletAddress>
             <Jazzicon
               diameter={40}
@@ -115,7 +118,7 @@ const IntroWalletAddress = ({ userReceivedTotal, userDelegatingTotal }: IIntroWa
               </span>
             </S.VoteWeight>
           </S.VoteWeightCard>
-        </S.AddressAndVoteWeight>
+        </S.AddressAndVoteWeight> */}
         <S.VotingPowerContent>
           <S.AddressTotalVotingPower>
             <span className="address-total-voting-power">

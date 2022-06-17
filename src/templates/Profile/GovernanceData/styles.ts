@@ -2,17 +2,7 @@ import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
 export const VoteContent = styled.div`
-  max-width: 1140px;
-  margin: 0 auto;
-  margin-bottom: 10rem;
-
-  @media (max-width: 1200px) {
-    padding: 0 3rem;
-  }
-
-  @media (max-width: 540px) {
-    padding: 0 1.6rem;
-  }
+  width: 100%;
 `
 
 export const TitleAndLinkContent = styled.div`

@@ -5,120 +5,120 @@ export const IntroWalletAddress = styled.section`
   margin-top: ${theme.spacings.space16};
 `
 
-export const AddressAndVoteWeight = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+// export const AddressAndVoteWeight = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
 
-  @media (max-width: 576px) {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-`
+//   @media (max-width: 576px) {
+//     flex-direction: column;
+//     align-items: flex-start;
+//   }
+// `
 
-export const WalletAddress = styled.div`
-  display: flex;
-  align-items: center;
+// export const WalletAddress = styled.div`
+//   display: flex;
+//   align-items: center;
 
-  /* .paper {
-  img {
-    width: 4rem;
+//   /* .paper {
+//   img {
+//     width: 4rem;
 
-    border-radius: 50%;
-    @media (max-width: 992px) {
-      width: 3.2rem !important;
-    }
-  } */
+//     border-radius: 50%;
+//     @media (max-width: 992px) {
+//       width: 3.2rem !important;
+//     }
+//   } */
 
-  h2 {
-    margin-left: ${theme.spacings.space18};
+//   h2 {
+//     margin-left: ${theme.spacings.space18};
 
-    line-height: ${theme.font.sizes.font32};
-    font-size: ${theme.font.sizes.font32};
-    font-weight: ${theme.font.weight.normal};
+//     line-height: ${theme.font.sizes.font32};
+//     font-size: ${theme.font.sizes.font32};
+//     font-weight: ${theme.font.weight.normal};
 
-    @media (max-width: 992px) {
-      line-height: ${theme.font.sizes.font24};
-      font-size: ${theme.font.sizes.font24};
-    }
-  }
-`
+//     @media (max-width: 992px) {
+//       line-height: ${theme.font.sizes.font24};
+//       font-size: ${theme.font.sizes.font24};
+//     }
+//   }
+// `
 
-export const VoteWeightCard = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+// export const VoteWeightCard = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
 
-  width: 16rem;
-  padding: 1.6rem 2.4rem;
+//   width: 16rem;
+//   padding: 1.6rem 2.4rem;
 
-  color: ${theme.colors.snow};
-  font-size: ${theme.font.sizes.font16};
-  font-weight: ${theme.font.weight.light};
+//   color: ${theme.colors.snow};
+//   font-size: ${theme.font.sizes.font16};
+//   font-weight: ${theme.font.weight.light};
 
-  background: rgba(255, 255, 255, 0.04);
-  border: 0.01rem solid rgba(255, 255, 255, 0.2);
-  border-radius: 1.2rem;
+//   background: rgba(255, 255, 255, 0.04);
+//   border: 0.01rem solid rgba(255, 255, 255, 0.2);
+//   border-radius: 1.2rem;
 
-  @media (max-width: 992px) {
-    width: 8.3rem;
-    padding: 0.8rem;
+//   @media (max-width: 992px) {
+//     width: 8.3rem;
+//     padding: 0.8rem;
 
-    font-size: ${theme.font.sizes.font12};
-  }
+//     font-size: ${theme.font.sizes.font12};
+//   }
 
-  @media (max-width: 576px) {
-    gap: 1.6rem;
+//   @media (max-width: 576px) {
+//     gap: 1.6rem;
 
-    width: 100%;
-    height: 3rem;
-    margin-top: 1.6rem;
-    border-radius: 0.8rem;
-  }
+//     width: 100%;
+//     height: 3rem;
+//     margin-top: 1.6rem;
+//     border-radius: 0.8rem;
+//   }
 
-  .font-bold {
-    font-size: ${theme.font.sizes.font24};
-    font-weight: ${theme.font.weight.medium};
+//   .font-bold {
+//     font-size: ${theme.font.sizes.font24};
+//     font-weight: ${theme.font.weight.medium};
 
-    @media (max-width: 992px) {
-      margin-top: 0.4rem;
+//     @media (max-width: 992px) {
+//       margin-top: 0.4rem;
 
-      font-size: ${theme.font.sizes.font18};
-    }
+//       font-size: ${theme.font.sizes.font18};
+//     }
 
-    @media (max-width: 576px) {
-      margin-top: 0;
+//     @media (max-width: 576px) {
+//       margin-top: 0;
 
-      font-size: ${theme.font.sizes.font14};
-    }
-  }
-`
+//       font-size: ${theme.font.sizes.font14};
+//     }
+//   }
+// `
 
-export const VoteWeight = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+// export const VoteWeight = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
 
-  @media (max-width: 576px) {
-    flex-direction: row;
-    justify-content: space-between;
+//   @media (max-width: 576px) {
+//     flex-direction: row;
+//     justify-content: space-between;
 
-    width: 100%;
-  }
-`
+//     width: 100%;
+//   }
+// `
 
-export const Rank = styled.div`
-  display: flex;
-  flex-direction: column;
+// export const Rank = styled.div`
+//   display: flex;
+//   flex-direction: column;
 
-  @media (max-width: 576px) {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+//   @media (max-width: 576px) {
+//     flex-direction: row;
+//     justify-content: space-between;
+//     align-items: center;
 
-    width: 100%;
-  }
-`
+//     width: 100%;
+//   }
+// `
 
 interface IHorizontalLineProps {
   none?: boolean;

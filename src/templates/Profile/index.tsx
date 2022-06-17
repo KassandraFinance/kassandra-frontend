@@ -13,6 +13,7 @@ import UserDescription from '../../components/Governance/UserDescription'
 import SelectTabs from '../../components/SelectTabs'
 import AnyCard from '../../components/AnyCard'
 import Loading from '../../components/Loading'
+import GovernanceData from './GovernanceData'
 
 import profileIcon from '../../../public/assets/iconGradient/profile.svg'
 import walletIcon from '../../../public/assets/iconGradient/wallet-gradient.svg'
@@ -126,7 +127,7 @@ const Profile = () => {
         ) : isSelectTab === 'Managed Funds' ? (
           <AnyCard text="Coming Soon…" />
         ) : isSelectTab === 'Governance Data' ? (
-          <h1>Governance Data</h1>
+          <GovernanceData address={profileAddress} />
         ) : (
           <Loading marginTop={4} />
         )}
