@@ -1086,6 +1086,9 @@ const Form = ({
             matomoEvent('click-on-button', 'swap-token')
             setSwapInAddress(swapOutAddress)
             setSwapOutAddress(swapInAddress)
+
+            setSwapInAmount(swapOutAmount[0])
+            setSwapOutAmount([swapInAmount])
           }} >
             <img src="/assets/icons/arrow-down.svg" alt="" />
             <img src="/assets/icons/arrow-down.svg" alt="" />
@@ -1127,7 +1130,7 @@ const Form = ({
                   .filter((token: { address: string }) => token.address !== swapInAddress)
             }
             tokenDetails={poolTokensArray[tokenOutIndex]}
-            swapInAmount={swapInAmount}
+            // swapInAmount={swapInAmount}
             swapInAddress={swapInAddress}
             setSwapAddress={setSwapOutAddress}
           />
@@ -1174,7 +1177,6 @@ const Form = ({
         chainId === poolChain.chainId ? (
           <Button
             className="btn-submit"
-            onClick={() => setTimeout(() => clearInput(), 3000)}
             backgroundPrimary
             disabledNoEvent={
               (
