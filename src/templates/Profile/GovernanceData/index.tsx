@@ -12,7 +12,7 @@ import { GET_USER } from './graphql'
 import useStakingContract from '../../../hooks/useStakingContract'
 
 import TitleSection from '../../../components/TitleSection'
-import IntroWalletAddress from '../../../components/Governance/IntroWalletAddress'
+import IntroGovernance from './IntroGovernance'
 import OwnAndReceivedTable from '../../../components/Governance/OwnAndReceivedTable'
 import UserTableVotingHistory from '../../../components/Governance/UserTableVotingHistory'
 
@@ -130,7 +130,7 @@ const GovernanceData = ({ address }: IGovernanceDataProps) => {
   return (
     <>
       <S.VoteContent>
-        <IntroWalletAddress
+        <IntroGovernance
           address={address}
           userDelegatingTotal={totalUserDelegating}
           userReceivedTotal={totalUserReceived}
