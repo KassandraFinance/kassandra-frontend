@@ -98,7 +98,7 @@ const Profile = () => {
       </Breadcrumb>
 
       <S.ProfileContainer>
-        <UserDescription />
+        <UserDescription userWalletUrl={profileAddress} />
         <SelectTabs
           tabs={tabs}
           isSelect={isSelectTab}

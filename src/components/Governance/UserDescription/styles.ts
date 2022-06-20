@@ -72,6 +72,8 @@ export const UserInfoContent = styled.div`
       font-size: ${theme.font.sizes.font14};
       font-weight: ${theme.font.weight.light};
 
+      cursor: pointer;
+
       > img {
         margin-left: 0.8rem;
       }
@@ -79,9 +81,16 @@ export const UserInfoContent = styled.div`
   }
 `
 
-export const UserProfileContent = styled.div`
+interface IisSelectSeeMoreProps {
+  isSelectSeeMore: boolean;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const UserProfileContent = styled.div<IisSelectSeeMoreProps>`
   display: flex;
   flex-direction: column;
+  justify-content: ${props =>
+    props.isSelectSeeMore ? 'flex-start' : 'center'};
 
   width: 100%;
   margin-left: 1.6rem;

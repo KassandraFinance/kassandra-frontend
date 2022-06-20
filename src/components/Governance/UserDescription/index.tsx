@@ -31,7 +31,11 @@ type UserProps = {
   }
 }
 
-const UserDescription = () => {
+interface IUserDescriptionProps {
+  userWalletUrl: string | string[] | undefined;
+}
+
+const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
   const [isOpenModal, setIsOpenModal] = React.useState(false)
@@ -49,10 +53,16 @@ const UserDescription = () => {
     description: ''
   })
 
-  React.useEffect(() => {
-    if (!userWalletAddress) return
+  const isConnectWallet = userWalletAddress === userWalletUrl
 
-    fetch(`/api/profile/${userWalletAddress}`)
+  const walletUserString = Array.isArray(userWalletUrl)
+    ? userWalletUrl[0]
+    : userWalletUrl
+
+  React.useEffect(() => {
+    if (!userWalletUrl) return
+
+    fetch(`/api/profile/${userWalletUrl}`)
       .then(res => res.json())
       .then(data => {
         const { image, ...profile } = data
@@ -63,7 +73,7 @@ const UserDescription = () => {
         }),
           setImageUser({ url: image, isNFT: data.isNFT })
       })
-  }, [userWalletAddress, isOpenModal])
+  }, [userWalletAddress, userWalletUrl, isOpenModal])
 
   React.useEffect(() => {
     if (window.screen.width > 768) {
@@ -94,27 +104,29 @@ const UserDescription = () => {
               <Jazzicon
                 diameter={73}
                 seed={jsNumberForAddress(
-                  String(userWalletAddress) ||
+                  String(userWalletUrl) ||
                     '0x1111111111111111111111111111111111111111'
                 )}
               />
             )}
 
-            <button onClick={() => setIsOpenModal(true)}>
-              Edit info
-              <img
-                src="/assets/utilities/edit-icon.svg"
-                alt="Follow our Twitter feed"
-                width="14"
-                height="14"
-              />
-            </button>
+            {isConnectWallet && (
+              <button onClick={() => setIsOpenModal(true)}>
+                Edit info
+                <img
+                  src="/assets/utilities/edit-icon.svg"
+                  alt="Follow our Twitter feed"
+                  width="14"
+                  height="14"
+                />
+              </button>
+            )}
           </S.UserInfoContent>
-          <S.UserProfileContent>
+          <S.UserProfileContent isSelectSeeMore={isStateSeeMore}>
             <p>{userData.nickname}</p>
             <S.UserAddressContent>
-              {substr(userWalletAddress)}
-              <CopyToClipboard text={userWalletAddress}>
+              {walletUserString && substr(walletUserString)}
+              <CopyToClipboard text={walletUserString ? walletUserString : ''}>
                 <button onClick={() => ToastInfo('Copy address')}>
                   <svg
                     width="14"
@@ -131,7 +143,7 @@ const UserDescription = () => {
                 </button>
               </CopyToClipboard>
               <a
-                href={`https://testnet.snowtrace.io/address/${userWalletAddress}`}
+                href={`https://testnet.snowtrace.io/address/${walletUserString}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -155,72 +167,82 @@ const UserDescription = () => {
               </a>
             </S.UserAddressContent>
             <ul>
-              <li>
-                <S.SocialIcon
-                  href={`https://discord.com/${userData.discord}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Image
-                    src="/assets/socialMidia/discord.svg"
-                    alt="Follow our Twitter feed"
-                    width={20}
-                    height={20}
-                  />
-                </S.SocialIcon>
-              </li>
-              <li>
-                <S.SocialIcon
-                  href={`https://twitter.com/${userData.twitter}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Image
-                    src="/assets/socialMidia/twitter.svg"
-                    alt="Follow our Twitter feed"
-                    width={20}
-                    height={20}
-                  />
-                </S.SocialIcon>
-              </li>
-              <li>
-                <S.SocialIcon
-                  href={`https://telegram.com/${userData.telegram}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Image
-                    src="/assets/socialMidia/telegram.svg"
-                    alt="Follow our Twitter feed"
-                    width={20}
-                    height={20}
-                  />
-                </S.SocialIcon>
-              </li>
-              <li>
-                <S.SocialIcon
-                  href={userData.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Image
-                    src="/assets/socialMidia/webpage.svg"
-                    alt="Follow our Twitter feed"
-                    width={20}
-                    height={20}
-                  />
-                </S.SocialIcon>
-              </li>
+              {userData.discord && (
+                <li>
+                  <S.SocialIcon
+                    href={`https://discord.com/${userData.discord}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      src="/assets/socialMidia/discord.svg"
+                      alt="Follow our Twitter feed"
+                      width={20}
+                      height={20}
+                    />
+                  </S.SocialIcon>
+                </li>
+              )}
+              {userData.twitter && (
+                <li>
+                  <S.SocialIcon
+                    href={`https://twitter.com/${userData.twitter}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      src="/assets/socialMidia/twitter.svg"
+                      alt="Follow our Twitter feed"
+                      width={20}
+                      height={20}
+                    />
+                  </S.SocialIcon>
+                </li>
+              )}
+              {userData.telegram && (
+                <li>
+                  <S.SocialIcon
+                    href={`https://telegram.com/${userData.telegram}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      src="/assets/socialMidia/telegram.svg"
+                      alt="Follow our Twitter feed"
+                      width={20}
+                      height={20}
+                    />
+                  </S.SocialIcon>
+                </li>
+              )}
+              {userData.website && (
+                <li>
+                  <S.SocialIcon
+                    href={userData.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      src="/assets/socialMidia/webpage.svg"
+                      alt="Follow our Twitter feed"
+                      width={20}
+                      height={20}
+                    />
+                  </S.SocialIcon>
+                </li>
+              )}
             </ul>
-            <S.EditInfoButton onClick={() => setIsOpenModal(true)}>
-              Edit info
-              <Image
-                src="/assets/utilities/edit-icon.svg"
-                alt="Follow our Twitter feed"
-                width={14}
-                height={14}
-              />
-            </S.EditInfoButton>
+            {isConnectWallet && (
+              <S.EditInfoButton onClick={() => setIsOpenModal(true)}>
+                Edit info
+                <Image
+                  src="/assets/utilities/edit-icon.svg"
+                  alt="Follow our Twitter feed"
+                  width={14}
+                  height={14}
+                />
+              </S.EditInfoButton>
+            )}
           </S.UserProfileContent>
         </S.UserInfo>
         <S.BarBottom />
