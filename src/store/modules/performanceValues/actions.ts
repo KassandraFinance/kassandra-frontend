@@ -1,9 +1,12 @@
 import { Types } from './types'
 
+export type AllPerformancePeriod = {
+  [key: string]: string
+}
+
 export interface PerformanceValues {
-  performance: string;
   title: string;
-  changeWeek: string[];
+  allPerformancePeriod?: AllPerformancePeriod;
 }
 
 export const actionSetPerformanceValues = (
