@@ -25,14 +25,17 @@ import * as S from './styles'
 
 const tabs = [
   {
+    asPathText: 'portfolio',
     text: 'Portfolio',
     icon: walletIcon
   },
   {
+    asPathText: 'managed-funds',
     text: 'Managed Funds',
     icon: profileIcon
   },
   {
+    asPathText: 'governance-data',
     text: 'Governance Data',
     icon: governanceIcon
   }
@@ -43,9 +46,12 @@ const Profile = () => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
   const [hasEthereumProvider, setHasEthereumProvider] = React.useState(false)
-  const [isSelectTab, setIsSelectTab] = React.useState<string>('portfolio')
+  const [isSelectTab, setIsSelectTab] = React.useState<
+    string | string[] | undefined
+  >('portfolio')
 
   const profileAddress = router.query.profileAddress
+  const isSelectQueryTab = router.query.tab
 
   React.useEffect(() => {
     const checkEthereumProvider = async () => {
@@ -62,20 +68,10 @@ const Profile = () => {
   })
 
   React.useEffect(() => {
-    const asPath = router.asPath.slice(52)
-
-    switch (asPath) {
-      case 'portfolio':
-        return setIsSelectTab('Portfolio')
-
-      case 'managed-funds':
-        return setIsSelectTab('Managed Funds')
-
-      case 'governance-data':
-        return setIsSelectTab('Governance Data')
-
-      default:
-        return setIsSelectTab('Portfolio')
+    if (isSelectQueryTab) {
+      setIsSelectTab(isSelectQueryTab)
+    } else {
+      setIsSelectTab('portfolio')
     }
   }, [router])
 
@@ -104,7 +100,7 @@ const Profile = () => {
           isSelect={isSelectTab}
           setIsSelect={setIsSelectTab}
         />
-        {isSelectTab === 'Portfolio' ? (
+        {isSelectTab === tabs[0].asPathText ? (
           <>
             {hasEthereumProvider ? (
               <Portfolio
@@ -124,9 +120,9 @@ const Profile = () => {
               />
             )}
           </>
-        ) : isSelectTab === 'Managed Funds' ? (
+        ) : isSelectTab === tabs[1].asPathText ? (
           <AnyCard text="Coming Soon…" />
-        ) : isSelectTab === 'Governance Data' ? (
+        ) : isSelectTab === tabs[2].asPathText ? (
           <GovernanceData address={profileAddress} />
         ) : (
           <Loading marginTop={4} />

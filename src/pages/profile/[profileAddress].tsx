@@ -10,7 +10,12 @@ export default function Index() {
         fetcher: url => fetch(url).then(res => res.json())
       }}
     >
-      {process.env.NEXT_PUBLIC_VOTE === '1' ? <Profile /> : <NotFound />}
+      {process.env.NEXT_PUBLIC_VOTE === '1' ||
+      process.env.NEXT_PUBLIC_VOTE === '2' ? (
+        <Profile />
+      ) : (
+        <NotFound />
+      )}
     </SWRConfig>
   )
 }

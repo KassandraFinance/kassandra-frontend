@@ -31,7 +31,8 @@ export default function Index() {
         <meta property="og:image:height" content="506" />
         <meta property="og:url" content="https://kassandra.finance/" />
       </Head>
-      {process.env.NEXT_PUBLIC_VOTE === '1' ? (
+      {process.env.NEXT_PUBLIC_VOTE === '1' ||
+      process.env.NEXT_PUBLIC_VOTE === '2' ? (
         <>
           <Header />
           <Web3Disabled
