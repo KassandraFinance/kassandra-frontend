@@ -33,7 +33,7 @@ const Distribution = ({ product }: IDistributionProps) => {
   const [isOpenYield, setIsOpenYield] = React.useState(false)
 
   React.useEffect(() => {
-    setIsOpenYield(product.symbol === 'aHYPE' ? true : false)
+    setIsOpenYield(product.symbol === 'K3C' ? true : false)
   }, [product])
 
   return (
@@ -47,12 +47,12 @@ const Distribution = ({ product }: IDistributionProps) => {
           <S.Line />
           <S.Table>
             <thead>
-              <S.Tr isOpenYield={isOpenYield}>
+              <S.Tr isOpenYield={!isOpenYield}>
                 <S.Th>Coin</S.Th>
                 <S.Th>Allocation</S.Th>
                 <S.Th>Holding</S.Th>
                 <S.Th>Price 24h</S.Th>
-                {isOpenYield ? '' : <S.Th>Yield</S.Th>}
+                {!isOpenYield ? '' : <S.Th>Yield</S.Th>}
               </S.Tr>
             </thead>
             <tbody>
@@ -60,13 +60,13 @@ const Distribution = ({ product }: IDistributionProps) => {
                 .slice(0, -1)
                 .map((coin: IpoolTokensArrayProps) => {
                   return (
-                    <S.Tr key={`key_${coin.name}`} isOpenYield={isOpenYield}>
+                    <S.Tr key={`key_${coin.name}`} isOpenYield={!isOpenYield}>
                       <S.Td change24h={false}>
                         <S.Coin width={110}>
                           <img src={coin.image || none.src} alt="" />
                           <span>
                             {coin.symbol}
-                            {!isOpenYield ? (
+                            {isOpenYield ? (
                               <p>
                                 {coin.dataInfoYY
                                   ? coin.dataInfoYY.item?.farmName
@@ -111,7 +111,7 @@ const Distribution = ({ product }: IDistributionProps) => {
                             : '-'}
                         </S.Coin>
                       </S.Td>
-                      {!isOpenYield ? (
+                      {isOpenYield ? (
                         <S.Td>
                           {coin.dataInfoYY ? (
                             <>

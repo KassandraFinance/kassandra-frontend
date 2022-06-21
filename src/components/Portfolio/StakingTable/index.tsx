@@ -11,7 +11,6 @@ import {
   LPKacyAvaxPNG,
   LPDaiAvax,
   LPKacyAvaxJOE,
-  HeimCRPPOOL,
   SUBGRAPH_URL
 } from '../../../constants/tokenAddresses'
 import useStakingContract from '../../../hooks/useStakingContract'
@@ -39,6 +38,7 @@ interface IStakingTableProps {
 
   profileAddress: string;
   setTotalStaked: React.Dispatch<React.SetStateAction<Big>>;
+  addresses: string[];
 }
 
 export interface IPriceToken {
@@ -60,7 +60,8 @@ export interface ItvlType {
 const StakingTable = ({
   stakes,
   profileAddress,
-  setTotalStaked
+  setTotalStaked,
+  addresses
 }: IStakingTableProps) => {
   const router = useRouter()
   const { poolInfo, earned } = useStakingContract(Staking)
@@ -76,11 +77,12 @@ const StakingTable = ({
     LP: Big(-1),
     'LP-JOE': Big(-1),
     KACY: Big(-1),
-    aHYPE: Big(-1)
+    aHYPE: Big(-1),
+    K3C: Big(-1)
   })
 
   const { data } = useSWR(
-    [GET_INFO_AHYPE, HeimCRPPOOL],
+    [GET_INFO_AHYPE, addresses],
     (query, id) => request(SUBGRAPH_URL, query, { id }),
     {
       refreshInterval: 10000
@@ -150,7 +152,11 @@ const StakingTable = ({
     if (data) {
       setPriceToken(prevState => ({
         ...prevState,
-        aHYPE: Big(data?.pool.price_usd || -1)
+        aHYPE: Big(data.pools[0].price_usd || -1)
+      }))
+      setPriceToken(prevState => ({
+        ...prevState,
+        K3C: Big(data.pools[1].price_usd || -1)
       }))
     }
     setPriceToken(prevState => ({
