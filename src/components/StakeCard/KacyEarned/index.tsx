@@ -1,16 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
-import BigNumber from 'bn.js'
-import Big from 'big.js'
+
+import { Staking } from '../../../constants/tokenAddresses'
+
+import useStakingContract from '../../../hooks/useStakingContract'
 
 import { BNtoDecimal } from '../../../utils/numerals'
+import Big from 'big.js'
+import BigNumber from 'bn.js'
 
 import * as S from './styles'
 
 interface IKacyEarnedProps {
   pid: number;
   userWalletAddress: string;
-  earned: (pid: number, walletAddress: string) => Promise<BigNumber>;
   kacyEarned: BigNumber;
   setKacyEarned: React.Dispatch<React.SetStateAction<BigNumber>>;
   kacyPrice: Big;
@@ -19,11 +22,12 @@ interface IKacyEarnedProps {
 const KacyEarned = ({
   pid,
   userWalletAddress,
-  earned,
   kacyEarned,
   setKacyEarned,
   kacyPrice
 }: IKacyEarnedProps) => {
+  const { earned } = useStakingContract(Staking)
+
   React.useEffect(() => {
     const interval = setInterval(async () => {
       const earnedResponse: BigNumber = await earned(pid, userWalletAddress)

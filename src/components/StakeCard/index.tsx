@@ -1,17 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
+import Tippy from '@tippyjs/react'
 import Link from 'next/link'
 import Image from 'next/image'
-import useSWR from 'swr'
-import Big from 'big.js'
-import BigNumber from 'bn.js'
-import { request } from 'graphql-request'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { useSelector, RootStateOrAny } from 'react-redux'
 
-import Tippy from '@tippyjs/react'
-import 'tippy.js/dist/tippy.css'
+import { useSelector, RootStateOrAny } from 'react-redux'
 
 import {
   Staking,
@@ -22,16 +16,24 @@ import {
 } from '../../constants/tokenAddresses'
 
 import usePriceLP from '../../hooks/usePriceLP'
-import { PoolInfo } from '../../hooks/useStakingContract'
+import useStakingContract from '../../hooks/useStakingContract'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import useERC20Contract, { ERC20 } from '../../hooks/useERC20Contract'
+import useSWR from 'swr'
+import { GET_INFO_POOL } from './graphql'
+
+import Big from 'big.js'
+import BigNumber from 'bn.js'
+import { request } from 'graphql-request'
 
 import web3 from '../../utils/web3'
 import { BNtoDecimal } from '../../utils/numerals'
-// eslint-disable-next-line prettier/prettier
-import waitTransaction, { MetamaskError, TransactionCallback } from '../../utils/txWait'
+import waitTransaction, {
+  MetamaskError,
+  TransactionCallback
+} from '../../utils/txWait'
 
-import { GET_INFO_POOL } from './graphql'
-
+import 'tippy.js/dist/tippy.css'
 import Button from '../Button'
 import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
 import ModalRequestUnstake from '../Modals/ModalRequestUnstake'
@@ -78,17 +80,6 @@ export interface IInfoStaked {
 interface IStakingProps {
   pid: number;
   symbol: string;
-  balanceOf: (pid: number, walletAddress: string) => Promise<BigNumber>;
-  earned: (pid: number, walletAddress: string) => Promise<BigNumber>;
-  getReward: (pid: number, callback: TransactionCallback) => void;
-  withdrawable: (pid: number, walletAddress: string) => Promise<boolean>;
-  poolInfo: (pid: number) => Promise<PoolInfo>;
-  unstaking: (pid: number, walletAddress: string) => Promise<boolean>;
-  stakedUntil: (pid: number, walletAddress: string) => Promise<string>;
-  stakeWithVotingPower: boolean;
-  availableWithdraw?: (pid: number, walletAddress: string) => Promise<Big>;
-  lockUntil?: (pid: number, walletAddress: string) => Promise<number>;
-  stakeWithLockPeriod?: boolean;
   properties: {
     logo: {
       src: string,
@@ -100,6 +91,8 @@ interface IStakingProps {
     link?: string
   };
   address?: string;
+  stakeWithVotingPower: boolean;
+  stakeWithLockPeriod?: boolean;
 }
 
 const staked: { [key: number | string]: string } = {
@@ -117,38 +110,29 @@ const staked: { [key: number | string]: string } = {
 const StakeCard = ({
   pid,
   symbol,
-  balanceOf,
-  earned,
-  getReward,
-  withdrawable,
-  poolInfo,
-  unstaking,
-  stakedUntil,
-  stakeWithVotingPower,
-  availableWithdraw,
-  lockUntil,
   stakeWithLockPeriod = false,
+  stakeWithVotingPower,
   properties,
   address
 }: IStakingProps) => {
+  console.log('reload')
   const [isDetails, setIsDetails] = React.useState<boolean>(false)
   const [isModalStake, setIsModalStake] = React.useState<boolean>(false)
   const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
-  // eslint-disable-next-line prettier/prettier
-  const [isModalCancelUnstake, setIsModalCancelUnstake] = React.useState<boolean>(false)
-  // eslint-disable-next-line prettier/prettier
-  const [isModalRequestUnstake, setIsModalRequestUnstake] = React.useState<boolean>(false)
-  // eslint-disable-next-line prettier/prettier
-  const [isApproveKacyStaking, setIsApproveKacyStaking] = React.useState<boolean>(false)
-
+  const [isModalCancelUnstake, setIsModalCancelUnstake] =
+    React.useState<boolean>(false)
+  const [isModalRequestUnstake, setIsModalRequestUnstake] =
+    React.useState<boolean>(false)
+  const [isApproveKacyStaking, setIsApproveKacyStaking] =
+    React.useState<boolean>(false)
   const [lockPeriod, setLockPeriod] = React.useState(0)
   const [decimals, setDecimals] = React.useState<string>('18')
   const [stakeTransaction, setStakeTransaction] = React.useState<string>('')
-  // eslint-disable-next-line prettier/prettier
-  const [currentAvailableWithdraw, setCurrentAvailableWithdraw] = React.useState(Big(-1)) 
-  // eslint-disable-next-line prettier/prettier
-  const [kacyEarned, setKacyEarned] = React.useState<BigNumber>(new BigNumber(-1))
-
+  const [currentAvailableWithdraw, setCurrentAvailableWithdraw] =
+    React.useState(Big(-1))
+  const [kacyEarned, setKacyEarned] = React.useState<BigNumber>(
+    new BigNumber(-1)
+  )
   const [tokenPrice, setTokenPrice] = React.useState<IPriceLPToken>({
     priceLPPng: Big(-1),
     priceLPJoe: Big(-1),
@@ -156,7 +140,6 @@ const StakeCard = ({
     aHYPE: Big(-1),
     k3c: Big(-1)
   })
-
   const [infoStaked, setInfoStaked] = React.useState<IInfoStaked>({
     yourStake: new BigNumber(-1),
     withdrawable: false,
@@ -174,12 +157,12 @@ const StakeCard = ({
     vestingPeriod: '...',
     lockPeriod: '...'
   })
-
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { trackEvent } = useMatomo()
   const { viewgetReserves } = usePriceLP()
   const kacyAvaxPngToken = useERC20Contract(LPKacyAvaxPNG)
   const kacyAvaxJoeToken = useERC20Contract(LPKacyAvaxJOE)
+  const stakingContract = useStakingContract(Staking)
 
   const { data } = useSWR(
     [GET_INFO_POOL, address],
@@ -241,7 +224,6 @@ const StakeCard = ({
     const supplyLPJoeToken = await kacyAvaxJoeToken.totalSupply()
 
     if (supplyLPPngToken.toString() !== '0') {
-      // eslint-disable-next-line prettier/prettier
       const priceLPPng = allAVAXDollarPng
         .mul(2)
         .div(Big(supplyLPPngToken.toString()))
@@ -252,7 +234,6 @@ const StakeCard = ({
       }))
     }
     if (supplyLPJoeToken.toString() !== '0') {
-      // eslint-disable-next-line prettier/prettier
       const priceLPJoe = allAVAXDollarJoe
         .mul(2)
         .div(Big(supplyLPJoeToken.toString()))
@@ -264,7 +245,7 @@ const StakeCard = ({
     if (data) {
       setTokenPrice(prevState => ({
         ...prevState,
-        [symbol === 'k3c' ? 'k3c' : 'aHYPE']: Big(data?.pool.price_usd || -1)
+        [symbol === 'k3c' ? 'k3c' : 'aHYPE']: Big(data?.pool?.price_usd || -1)
       }))
     }
     setTokenPrice(prevState => ({
@@ -350,20 +331,21 @@ const StakeCard = ({
       .allowance(Staking, userWalletAddress)
       .then((response: boolean) => setIsApproveKacyStaking(response))
 
-    availableWithdraw &&
-      availableWithdraw(pid, userWalletAddress).then(
-        setCurrentAvailableWithdraw
-      )
+    stakingContract.availableWithdraw &&
+      stakingContract
+        .availableWithdraw(pid, userWalletAddress)
+        .then(setCurrentAvailableWithdraw)
 
-    lockUntil && lockUntil(pid, userWalletAddress).then(setLockPeriod)
+    stakingContract.lockUntil &&
+      stakingContract.lockUntil(pid, userWalletAddress).then(setLockPeriod)
   }, [userWalletAddress, infoStaked.stakingToken])
 
   return (
     <>
       <div>
-        <S.BorderGradient stakeWithVotingPower={stakeWithVotingPower}>
+        <S.BorderGradient stakeWithVotingPower={!stakeWithVotingPower}>
           <S.StakeCard>
-            <S.InterBackground stakeWithVotingPower={stakeWithVotingPower}>
+            <S.InterBackground stakeWithVotingPower={!stakeWithVotingPower}>
               <img
                 src={properties.logo.src}
                 alt=""
@@ -388,7 +370,7 @@ const StakeCard = ({
                 </S.Percentage>
               </S.IntroStaking>
             </S.InterBackground>
-            {stakeWithVotingPower ? (
+            {!stakeWithVotingPower ? (
               <S.PoolName>
                 <S.StakeAndEarn>
                   <p>STAKE</p>
@@ -447,20 +429,16 @@ const StakeCard = ({
             <S.InfosStaking>
               <YourStake
                 pid={pid}
-                balanceOf={balanceOf}
-                poolInfo={poolInfo}
-                withdrawable={withdrawable}
-                unstaking={unstaking}
-                userWalletAddress={userWalletAddress}
                 infoStaked={infoStaked}
-                setInfoStaked={setInfoStaked}
-                stakeWithVotingPower={stakeWithVotingPower}
                 tokenPrice={tokenPrice}
-                stakeWithLockPeriod={stakeWithLockPeriod}
+                setInfoStaked={setInfoStaked}
                 lockPeriod={lockPeriod}
+                userWalletAddress={userWalletAddress}
+                stakeWithVotingPower={stakeWithVotingPower}
+                stakeWithLockPeriod={stakeWithLockPeriod}
                 availableWithdraw={currentAvailableWithdraw}
               />
-              <S.ButtonContainer stakeWithVotingPower={stakeWithVotingPower}>
+              <S.ButtonContainer stakeWithVotingPower={!stakeWithVotingPower}>
                 {userWalletAddress ? (
                   <>
                     {!stakeWithLockPeriod && (
@@ -468,7 +446,6 @@ const StakeCard = ({
                         <KacyEarned
                           pid={pid}
                           userWalletAddress={userWalletAddress}
-                          earned={earned}
                           kacyEarned={kacyEarned}
                           setKacyEarned={setKacyEarned}
                           kacyPrice={tokenPrice.kacy}
@@ -479,8 +456,12 @@ const StakeCard = ({
                           size="claim"
                           backgroundSecondary
                           disabledNoEvent={kacyEarned.toString() === '0'}
-                          // fullWidth
-                          onClick={() => getReward(pid, rewardClaimCallback())}
+                          onClick={() =>
+                            stakingContract.getReward(
+                              pid,
+                              rewardClaimCallback()
+                            )
+                          }
                         />
                       </S.Claim>
                     )}
@@ -498,7 +479,6 @@ const StakeCard = ({
                           <WithdrawDate
                             pid={pid}
                             userWalletAddress={userWalletAddress}
-                            stakedUntil={stakedUntil}
                           />
                         </>
                       ) : (
@@ -602,7 +582,6 @@ const StakeCard = ({
                   <Details
                     pid={pid}
                     hasExpired={infoStaked.hasExpired}
-                    poolInfo={poolInfo}
                     infoStakeStatic={infoStaked}
                     stakingToken={infoStaked.stakingToken}
                     decimals={decimals}
@@ -646,7 +625,7 @@ const StakeCard = ({
           yourStake={infoStaked.yourStake}
           symbol={symbol}
           userWalletAddress={userWalletAddress}
-          stakedUntil={stakedUntil}
+          stakedUntil={stakingContract.stakedUntil}
         />
       )}
       {isModalWallet && <ModalWalletConnect setModalOpen={setIsModaWallet} />}

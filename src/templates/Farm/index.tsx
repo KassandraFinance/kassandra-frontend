@@ -1,15 +1,10 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
-import BigNumber from 'bn.js'
+
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import {
-  chains,
-  Staking,
-  Kacy,
-  HeimCRPPOOL,
-  products
-} from '../../constants/tokenAddresses'
+import { chains, Staking } from '../../constants/tokenAddresses'
+import BigNumber from 'bn.js'
 
 import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 import useStakingContract from '../../hooks/useStakingContract'
@@ -23,13 +18,21 @@ import Breadcrumb from '../../components/Breadcrumb'
 import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
 
 import * as S from './styles'
+import {
+  poolsKacyFuji,
+  poolsInvestor,
+  poolsKacy,
+  poolsFunds,
+  poolsFundsFuji
+} from '../../constants/pools'
 
 const StakeFarm = () => {
+  console.log('teste')
   const [loading, setLoading] = React.useState<boolean>(true)
   const [investor, setInvestor] = React.useState([false, false])
 
   const { trackCategoryPageView } = useMatomoEcommerce()
-  const kacyStake = useStakingContract(Staking)
+  const { balance } = useStakingContract(Staking)
 
   const { userWalletAddress, chainId } = useSelector(
     (state: RootStateOrAny) => state
@@ -56,8 +59,8 @@ const StakeFarm = () => {
 
     const calc = async () => {
       const res = await Promise.all([
-        kacyStake.balance(0, userWalletAddress),
-        kacyStake.balance(1, userWalletAddress)
+        balance(0, userWalletAddress),
+        balance(1, userWalletAddress)
       ])
 
       setInvestor([
@@ -122,106 +125,42 @@ const StakeFarm = () => {
               <VotingPower userWalletAddress={userWalletAddress} />
             </S.StakeWithPowerVote>
             <S.GridStaking>
-              <StakeCard
-                pid={process.env.NEXT_PUBLIC_MASTER === '1' ? 2 : 0}
-                symbol="kacy"
-                properties={{
-                  logo: {
-                    src: '/assets/logos/kacy-stake.svg',
-                    style: { width: '5.8rem' }
+              {process.env.NEXT_PUBLIC_MASTER === '1'
+                ? poolsKacy.map(pool => (
+                    <StakeCard
+                      key={pool.pid}
+                      pid={pool.pid}
+                      symbol={pool.symbol}
+                      properties={{ ...pool.properties }}
+                      stakeWithVotingPower={pool.stakeWithVotingPower}
+                      stakeWithLockPeriod={pool.stakeWithLockPeriod}
+                    />
+                  ))
+                : poolsKacyFuji.map(pool => (
+                    <StakeCard
+                      key={pool.pid}
+                      pid={pool.pid}
+                      symbol={pool.symbol}
+                      properties={{ ...pool.properties }}
+                      stakeWithVotingPower={pool.stakeWithVotingPower}
+                      stakeWithLockPeriod={pool.stakeWithLockPeriod}
+                    />
+                  ))}
+              {process.env.NEXT_PUBLIC_MASTER === '1' &&
+                poolsInvestor.map((pool, i) => {
+                  if (investor[i] && pool.pid === i) {
+                    return (
+                      <StakeCard
+                        key={pool.pid}
+                        pid={pool.pid}
+                        symbol={pool.symbol}
+                        properties={{ ...pool.properties }}
+                        stakeWithVotingPower={pool.stakeWithVotingPower}
+                        stakeWithLockPeriod={pool.stakeWithLockPeriod}
+                      />
+                    )
                   }
-                }}
-                balanceOf={kacyStake.balance}
-                earned={kacyStake.earned}
-                getReward={kacyStake.getReward}
-                withdrawable={kacyStake.withdrawable}
-                poolInfo={kacyStake.poolInfo}
-                unstaking={kacyStake.unstaking}
-                stakedUntil={kacyStake.stakedUntil}
-                stakeWithVotingPower={false}
-              />
-              <StakeCard
-                pid={process.env.NEXT_PUBLIC_MASTER === '1' ? 3 : 1}
-                symbol="kacy"
-                properties={{
-                  logo: {
-                    src: '/assets/logos/kacy-stake.svg',
-                    style: { width: '5.8rem' }
-                  }
-                }}
-                balanceOf={kacyStake.balance}
-                earned={kacyStake.earned}
-                getReward={kacyStake.getReward}
-                withdrawable={kacyStake.withdrawable}
-                poolInfo={kacyStake.poolInfo}
-                unstaking={kacyStake.unstaking}
-                stakedUntil={kacyStake.stakedUntil}
-                stakeWithVotingPower={false}
-              />
-              <StakeCard
-                pid={process.env.NEXT_PUBLIC_MASTER === '1' ? 4 : 2}
-                symbol="kacy"
-                properties={{
-                  logo: {
-                    src: '/assets/logos/kacy-stake.svg',
-                    style: { width: '5.8rem' }
-                  }
-                }}
-                balanceOf={kacyStake.balance}
-                earned={kacyStake.earned}
-                getReward={kacyStake.getReward}
-                withdrawable={kacyStake.withdrawable}
-                poolInfo={kacyStake.poolInfo}
-                unstaking={kacyStake.unstaking}
-                stakedUntil={kacyStake.stakedUntil}
-                stakeWithVotingPower={false}
-              />
-              {process.env.NEXT_PUBLIC_MASTER === '1' && investor[0] && (
-                <StakeCard
-                  pid={0}
-                  symbol="kacy"
-                  properties={{
-                    logo: {
-                      src: '/assets/logos/kacy-stake.svg',
-                      style: { width: '5.8rem' }
-                    }
-                  }}
-                  balanceOf={kacyStake.balance}
-                  earned={kacyStake.earned}
-                  getReward={kacyStake.getReward}
-                  withdrawable={kacyStake.withdrawable}
-                  poolInfo={kacyStake.poolInfo}
-                  unstaking={kacyStake.unstaking}
-                  stakedUntil={kacyStake.stakedUntil}
-                  stakeWithVotingPower={false}
-                  availableWithdraw={kacyStake.availableWithdraw}
-                  lockUntil={kacyStake.lockUntil}
-                  stakeWithLockPeriod={true}
-                />
-              )}
-              {process.env.NEXT_PUBLIC_MASTER === '1' && investor[1] && (
-                <StakeCard
-                  pid={1}
-                  symbol="kacy"
-                  properties={{
-                    logo: {
-                      src: '/assets/logos/kacy-stake.svg',
-                      style: { width: '5.8rem' }
-                    }
-                  }}
-                  balanceOf={kacyStake.balance}
-                  earned={kacyStake.earned}
-                  getReward={kacyStake.getReward}
-                  withdrawable={kacyStake.withdrawable}
-                  poolInfo={kacyStake.poolInfo}
-                  unstaking={kacyStake.unstaking}
-                  stakedUntil={kacyStake.stakedUntil}
-                  stakeWithVotingPower={false}
-                  availableWithdraw={kacyStake.availableWithdraw}
-                  lockUntil={kacyStake.lockUntil}
-                  stakeWithLockPeriod={true}
-                />
-              )}
+                })}
             </S.GridStaking>
             <S.NameStake left={true} style={{ margin: '100px 0 50px' }}>
               <S.Name>
@@ -234,122 +173,29 @@ const StakeFarm = () => {
               <p>EARN KACY BY STAKING OTHER ASSETS</p>
             </S.NameStake>
             <S.GridStaking>
-              {process.env.NEXT_PUBLIC_MASTER === '1' ? (
-                <StakeCard
-                  pid={5}
-                  symbol="lp-png"
-                  properties={{
-                    logo: {
-                      src: '/assets/logos/lp-kacy.svg',
-                      style: { width: '14.4rem' }
-                    },
-                    title: '$KACY-AVAX PNG LP',
-                    link: `https://app.pangolin.exchange/#/add/AVAX/${Kacy}`
-                  }}
-                  balanceOf={kacyStake.balance}
-                  earned={kacyStake.earned}
-                  getReward={kacyStake.getReward}
-                  withdrawable={kacyStake.withdrawable}
-                  poolInfo={kacyStake.poolInfo}
-                  unstaking={kacyStake.unstaking}
-                  stakedUntil={kacyStake.stakedUntil}
-                  stakeWithVotingPower={true}
-                />
-              ) : null}
-              {process.env.NEXT_PUBLIC_MASTER === '1' ? (
-                <StakeCard
-                  pid={7}
-                  symbol="lp-joe"
-                  properties={{
-                    logo: {
-                      src: '/assets/logos/joe-kacy.svg',
-                      style: { width: '14.4rem' }
-                    },
-                    title: '$KACY-AVAX JOE LP',
-                    link: `https://traderjoexyz.com/pool/AVAX/${Kacy}`
-                  }}
-                  balanceOf={kacyStake.balance}
-                  earned={kacyStake.earned}
-                  getReward={kacyStake.getReward}
-                  withdrawable={kacyStake.withdrawable}
-                  poolInfo={kacyStake.poolInfo}
-                  unstaking={kacyStake.unstaking}
-                  stakedUntil={kacyStake.stakedUntil}
-                  stakeWithVotingPower={true}
-                />
-              ) : (
-                ''
-              )}
-              {process.env.NEXT_PUBLIC_MASTER === '1' ? (
-                <StakeCard
-                  pid={6}
-                  symbol="ahype"
-                  address={HeimCRPPOOL}
-                  properties={{
-                    logo: {
-                      src: '/assets/logos/ahype-stake.svg',
-                      style: { width: '5.8rem' }
-                    },
-                    title: '$aHYPE',
-                    link: '/explore/ahype'
-                  }}
-                  balanceOf={kacyStake.balance}
-                  earned={kacyStake.earned}
-                  getReward={kacyStake.getReward}
-                  withdrawable={kacyStake.withdrawable}
-                  poolInfo={kacyStake.poolInfo}
-                  unstaking={kacyStake.unstaking}
-                  stakedUntil={kacyStake.stakedUntil}
-                  stakeWithVotingPower={true}
-                />
-              ) : (
-                <StakeCard
-                  pid={4}
-                  symbol="ahype"
-                  address={HeimCRPPOOL}
-                  properties={{
-                    logo: {
-                      src: '/assets/logos/ahype-stake.svg',
-                      style: { width: '5.8rem' }
-                    },
-                    title: '$aHYPE',
-                    link: '/explore/ahype'
-                  }}
-                  balanceOf={kacyStake.balance}
-                  earned={kacyStake.earned}
-                  getReward={kacyStake.getReward}
-                  withdrawable={kacyStake.withdrawable}
-                  poolInfo={kacyStake.poolInfo}
-                  unstaking={kacyStake.unstaking}
-                  stakedUntil={kacyStake.stakedUntil}
-                  stakeWithVotingPower={true}
-                />
-              )}
-              {process.env.NEXT_PUBLIC_MASTER === '1' ? (
-                <StakeCard
-                  pid={8}
-                  symbol="k3c"
-                  address={products[1].sipAddress}
-                  properties={{
-                    logo: {
-                      src: '/assets/logos/tricrypto-stake.svg',
-                      style: { width: '5.8rem' }
-                    },
-                    link: '/explore/k3c',
-                    title: '$K3C'
-                  }}
-                  balanceOf={kacyStake.balance}
-                  earned={kacyStake.earned}
-                  getReward={kacyStake.getReward}
-                  withdrawable={kacyStake.withdrawable}
-                  poolInfo={kacyStake.poolInfo}
-                  unstaking={kacyStake.unstaking}
-                  stakedUntil={kacyStake.stakedUntil}
-                  stakeWithVotingPower={true}
-                />
-              ) : (
-                ''
-              )}
+              {process.env.NEXT_PUBLIC_MASTER === '1'
+                ? poolsFunds.map(pool => (
+                    <StakeCard
+                      key={pool.pid}
+                      pid={pool.pid}
+                      address={pool.address}
+                      symbol={pool.symbol}
+                      properties={{ ...pool.properties }}
+                      stakeWithVotingPower={pool.stakeWithVotingPower}
+                      stakeWithLockPeriod={pool.stakeWithLockPeriod}
+                    />
+                  ))
+                : poolsFundsFuji.map(pool => (
+                    <StakeCard
+                      key={pool.pid}
+                      pid={pool.pid}
+                      address={pool.address}
+                      symbol={pool.symbol}
+                      properties={{ ...pool.properties }}
+                      stakeWithVotingPower={pool.stakeWithVotingPower}
+                      stakeWithLockPeriod={pool.stakeWithLockPeriod}
+                    />
+                  ))}
             </S.GridStaking>
           </S.StakeFarm>
         </>

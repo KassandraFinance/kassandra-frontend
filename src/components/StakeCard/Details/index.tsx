@@ -1,18 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
-import Big from 'big.js'
-import BigNumber from 'bn.js'
+
+import { Kacy, chains, Staking } from '../../../constants/tokenAddresses'
+
+import useStakingContract from '../../../hooks/useStakingContract'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
-import { Kacy, chains } from '../../../constants/tokenAddresses'
+import ExternalLink from '../../ExternalLink'
 
+import BigNumber from 'bn.js'
+import Big from 'big.js'
 import { BNtoDecimal } from '../../../utils/numerals'
+import { registerToken } from '../../../utils/registerToken'
+
+import { IPriceLPToken } from '../'
 
 import * as S from './styles'
-import { registerToken } from '../../../utils/registerToken'
-import { IPriceLPToken } from '..'
-import ExternalLink from '../../ExternalLink'
 
 interface IInfoStakeStaticProps {
   votingMultiplier: string;
@@ -25,7 +29,6 @@ interface IInfoStakeStaticProps {
 interface IDetailsProps {
   pid: number;
   hasExpired: boolean;
-  poolInfo: (pid: number) => Promise<any>;
   infoStakeStatic: IInfoStakeStaticProps;
   stakingToken: string;
   decimals: string;
@@ -36,7 +39,6 @@ interface IDetailsProps {
 const Details = ({
   pid,
   hasExpired,
-  poolInfo,
   infoStakeStatic,
   stakingToken,
   decimals,
@@ -44,8 +46,11 @@ const Details = ({
   tokenPrice
 }: IDetailsProps) => {
   // eslint-disable-next-line prettier/prettier
-  const [depositedAmount, setDepositedAmount] = React.useState<BigNumber>(new BigNumber(-1))
+  const [depositedAmount, setDepositedAmount] = React.useState<BigNumber>(
+    new BigNumber(-1)
+  )
   const { trackEvent } = useMatomo()
+  const { poolInfo } = useStakingContract(Staking)
 
   function matomoEvent(action: string, name: string) {
     trackEvent({

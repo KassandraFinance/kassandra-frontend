@@ -1,26 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
+
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 
 import { Staking } from '../../../constants/tokenAddresses'
-import useStakingContract, { PoolInfo } from '../../../hooks/useStakingContract'
+import useStakingContract from '../../../hooks/useStakingContract'
 
 import { getDate } from '../../../utils/date'
 import { BNtoDecimal } from '../../../utils/numerals'
 import substr from '../../../utils/substr'
 
-import { IInfoStaked, IPriceLPToken } from '..'
+import { IInfoStaked, IPriceLPToken } from '../'
 
 import * as S from './styles'
 
 interface IYourStakeProps {
   pid: number;
-  balanceOf: (pid: number, walletAddress: string) => Promise<BigNumber>;
-  poolInfo: (pid: number) => Promise<PoolInfo>;
-  withdrawable: (pid: number, walletAddress: string) => Promise<boolean>;
-  unstaking: (pid: number, walletAddress: string) => Promise<boolean>;
   userWalletAddress: string;
   infoStaked: IInfoStaked;
   setInfoStaked: React.Dispatch<React.SetStateAction<IInfoStaked>>;
@@ -33,10 +30,6 @@ interface IYourStakeProps {
 
 const YourStake = ({
   pid,
-  balanceOf,
-  poolInfo,
-  withdrawable,
-  unstaking,
   userWalletAddress,
   infoStaked,
   setInfoStaked,
@@ -46,7 +39,7 @@ const YourStake = ({
   lockPeriod,
   availableWithdraw
 }: IYourStakeProps) => {
-  const kacyStake = useStakingContract(Staking)
+  const stakingContract = useStakingContract(Staking)
 
   const [delegateTo, setDelegateTo] = React.useState<string>('')
 
@@ -63,7 +56,7 @@ const YourStake = ({
   }
 
   const getYourStake = React.useCallback(async () => {
-    const poolInfoResponse = await poolInfo(pid)
+    const poolInfoResponse = await stakingContract.poolInfo(pid)
     if (!poolInfoResponse.withdrawDelay) {
       return
     }
@@ -107,9 +100,12 @@ const YourStake = ({
     let yourDailyKacyReward = new BigNumber(0)
 
     if (userWalletAddress.length > 0) {
-      balance = await balanceOf(pid, userWalletAddress)
-      withdrawableResponse = await withdrawable(pid, userWalletAddress)
-      unstakeResponse = await unstaking(pid, userWalletAddress)
+      balance = await stakingContract.balance(pid, userWalletAddress)
+      withdrawableResponse = await stakingContract.withdrawable(
+        pid,
+        userWalletAddress
+      )
+      unstakeResponse = await stakingContract.unstaking(pid, userWalletAddress)
 
       if (balance.gt(new BigNumber('0'))) {
         yourDailyKacyReward = kacyRewards
@@ -146,7 +142,7 @@ const YourStake = ({
 
   React.useEffect(() => {
     const delegateInfo = async () => {
-      const delegate = await kacyStake.userInfo(pid, userWalletAddress)
+      const delegate = await stakingContract.userInfo(pid, userWalletAddress)
       setDelegateTo(delegate.delegatee)
     }
     if (userWalletAddress) {
@@ -162,7 +158,7 @@ const YourStake = ({
           {infoStaked.yourStake.lt(new BigNumber('0')) ||
           (stakingTokenPrice[pid] || Big(0)).lt(0) ? (
             '...'
-          ) : !stakeWithVotingPower ? (
+          ) : stakeWithVotingPower ? (
             <p>
               {BNtoDecimal(infoStaked.yourStake, 18)}
               <S.Symbol>KACY</S.Symbol>
@@ -180,7 +176,7 @@ const YourStake = ({
               <S.Symbol>USD</S.Symbol>
             </p>
           )}
-          {!stakeWithVotingPower && (
+          {stakeWithVotingPower && (
             <span>
               &#8776;{' '}
               {infoStaked.yourStake.lt(new BigNumber('0')) ||
@@ -199,7 +195,7 @@ const YourStake = ({
           )}
         </S.Stake>
       </S.Info>
-      {!stakeWithVotingPower && (
+      {stakeWithVotingPower && (
         <>
           <S.Info>
             <span>Pool Voting Power</span>
