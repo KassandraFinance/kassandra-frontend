@@ -118,6 +118,23 @@ const Profile = () => {
 
       <S.ProfileContainer>
         <UserDescription userWalletUrl={profileAddress} />
+        <S.TotalValuesCardsContainer>
+          <AnyCardTotal
+            text="R$ 12.381,00"
+            TooltipText="Lorem"
+            textTitle="TOTAL INVESTMENTED"
+          />
+          <AnyCardTotal
+            text="0"
+            TooltipText="Lorem"
+            textTitle="TOTAL MANAGED"
+          />
+          <AnyCardTotal
+            text={String(BNtoDecimal(totalVotingPower, 0, 2) || 0)}
+            TooltipText="Lorem"
+            textTitle="USER VOTING POWER"
+          />
+        </S.TotalValuesCardsContainer>
         <SelectTabs
           tabs={tabs}
           isSelect={isSelectTab}
