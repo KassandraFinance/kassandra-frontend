@@ -3,8 +3,9 @@ import React from 'react'
 
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import { chains, Staking } from '../../constants/tokenAddresses'
 import BigNumber from 'bn.js'
+
+import { chains, Staking } from '../../constants/tokenAddresses'
 
 import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 import useStakingContract from '../../hooks/useStakingContract'
@@ -27,7 +28,6 @@ import {
 } from '../../constants/pools'
 
 const StakeFarm = () => {
-  console.log('teste')
   const [loading, setLoading] = React.useState<boolean>(true)
   const [investor, setInvestor] = React.useState([false, false])
 
@@ -134,6 +134,7 @@ const StakeFarm = () => {
                       properties={{ ...pool.properties }}
                       stakeWithVotingPower={pool.stakeWithVotingPower}
                       stakeWithLockPeriod={pool.stakeWithLockPeriod}
+                      isLP={pool.isLP}
                     />
                   ))
                 : poolsKacyFuji.map(pool => (
@@ -144,6 +145,7 @@ const StakeFarm = () => {
                       properties={{ ...pool.properties }}
                       stakeWithVotingPower={pool.stakeWithVotingPower}
                       stakeWithLockPeriod={pool.stakeWithLockPeriod}
+                      isLP={pool.isLP}
                     />
                   ))}
               {process.env.NEXT_PUBLIC_MASTER === '1' &&
@@ -157,6 +159,7 @@ const StakeFarm = () => {
                         properties={{ ...pool.properties }}
                         stakeWithVotingPower={pool.stakeWithVotingPower}
                         stakeWithLockPeriod={pool.stakeWithLockPeriod}
+                        isLP={pool.isLP}
                       />
                     )
                   }
@@ -183,6 +186,7 @@ const StakeFarm = () => {
                       properties={{ ...pool.properties }}
                       stakeWithVotingPower={pool.stakeWithVotingPower}
                       stakeWithLockPeriod={pool.stakeWithLockPeriod}
+                      isLP={pool.isLP}
                     />
                   ))
                 : poolsFundsFuji.map(pool => (
@@ -194,6 +198,7 @@ const StakeFarm = () => {
                       properties={{ ...pool.properties }}
                       stakeWithVotingPower={pool.stakeWithVotingPower}
                       stakeWithLockPeriod={pool.stakeWithLockPeriod}
+                      isLP={pool.isLP}
                     />
                   ))}
             </S.GridStaking>

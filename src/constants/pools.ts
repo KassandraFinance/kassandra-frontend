@@ -22,7 +22,7 @@ const KACY_ADDRESS =
     ? '0xf32398dae246C5f672B52A54e9B413dFFcAe1A44'
     : '0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb'
 
-const LP_KACY_AVAX_PNG = '0x1938cE0E14dD71caab96F52dF3F49b1D1DAF8861'
+export const LP_KACY_AVAX_PNG = '0x1938cE0E14dD71caab96F52dF3F49b1D1DAF8861'
 
 const LP_KACY_AVAX_JOE = '0xc45893e0ee426a643e54829ee8c697995e5980ed'
 
@@ -35,7 +35,7 @@ const TRICRYPTO_ADDRESS = '0xA6CAB4b1019ee22309dcA5ba62C3372a791dcB2E'
 
 const kacyInvestor1: PoolDetails = {
   pid: 0,
-  symbol: 'kacy',
+  symbol: 'KACY',
   properties: {
     logo: {
       src: '/assets/logos/kacy-stake.svg',
@@ -50,7 +50,7 @@ const kacyInvestor1: PoolDetails = {
 
 const kacyInvestor2: PoolDetails = {
   pid: 1,
-  symbol: 'kacy',
+  symbol: 'KACY',
   properties: {
     logo: {
       src: '/assets/logos/kacy-stake.svg',
@@ -65,7 +65,7 @@ const kacyInvestor2: PoolDetails = {
 
 const kacy1x: PoolDetails = {
   pid: process.env.NEXT_PUBLIC_MASTER === '1' ? 2 : 0,
-  symbol: 'kacy',
+  symbol: 'KACY',
   properties: {
     logo: {
       src: '/assets/logos/kacy-stake.svg',
@@ -80,7 +80,7 @@ const kacy1x: PoolDetails = {
 
 const kacy2x: PoolDetails = {
   pid: process.env.NEXT_PUBLIC_MASTER === '1' ? 3 : 1,
-  symbol: 'kacy',
+  symbol: 'KACY',
   properties: {
     logo: {
       src: '/assets/logos/kacy-stake.svg',
@@ -95,7 +95,7 @@ const kacy2x: PoolDetails = {
 
 const kacy3x: PoolDetails = {
   pid: process.env.NEXT_PUBLIC_MASTER === '1' ? 4 : 2,
-  symbol: 'kacy',
+  symbol: 'KACY',
   properties: {
     logo: {
       src: '/assets/logos/kacy-stake.svg',
@@ -110,7 +110,7 @@ const kacy3x: PoolDetails = {
 
 const lpPNG: PoolDetails = {
   pid: 5,
-  symbol: 'lp-png',
+  symbol: 'LP-PNG',
   properties: {
     logo: {
       src: '/assets/logos/lp-kacy.svg',
@@ -127,7 +127,7 @@ const lpPNG: PoolDetails = {
 
 const lpJoe: PoolDetails = {
   pid: 7,
-  symbol: 'lp-joe',
+  symbol: 'LP-JOE',
   properties: {
     logo: {
       src: '/assets/logos/joe-kacy.svg',
@@ -144,7 +144,7 @@ const lpJoe: PoolDetails = {
 
 const ahype: PoolDetails = {
   pid: process.env.NEXT_PUBLIC_MASTER === '1' ? 6 : 4,
-  symbol: 'ahype',
+  symbol: 'aHYPE',
   properties: {
     logo: {
       src: '/assets/logos/ahype-stake.svg',
@@ -161,7 +161,7 @@ const ahype: PoolDetails = {
 
 const tricrypto: PoolDetails = {
   pid: 8,
-  symbol: 'k3c',
+  symbol: 'K3C',
   properties: {
     logo: {
       src: '/assets/logos/tricrypto-stake.svg',

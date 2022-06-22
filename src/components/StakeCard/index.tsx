@@ -1,30 +1,29 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
-import Tippy from '@tippyjs/react'
 import Link from 'next/link'
 import Image from 'next/image'
 
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import {
-  Staking,
-  LPDaiAvax,
-  LPKacyAvaxPNG,
-  LPKacyAvaxJOE,
-  SUBGRAPH_URL
-} from '../../constants/tokenAddresses'
-
-import usePriceLP from '../../hooks/usePriceLP'
-import useStakingContract from '../../hooks/useStakingContract'
+import Tippy from '@tippyjs/react'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import useERC20Contract, { ERC20 } from '../../hooks/useERC20Contract'
 import useSWR from 'swr'
-import { GET_INFO_POOL } from './graphql'
-
 import Big from 'big.js'
 import BigNumber from 'bn.js'
 import { request } from 'graphql-request'
+
+import {
+  Staking,
+  LPDaiAvax,
+  SUBGRAPH_URL
+} from '../../constants/tokenAddresses'
+import { LP_KACY_AVAX_PNG } from '../../constants/pools'
+
+import usePriceLP from '../../hooks/usePriceLP'
+import useStakingContract from '../../hooks/useStakingContract'
+import { ERC20 } from '../../hooks/useERC20Contract'
+
+import { GET_INFO_POOL } from './graphql'
 
 import web3 from '../../utils/web3'
 import { BNtoDecimal } from '../../utils/numerals'
@@ -50,14 +49,6 @@ import infoCyanIcon from '../../../public/assets/notificationStatus/info.svg'
 import infoGrayIcon from '../../../public/assets/utilities/info-gray.svg'
 
 import * as S from './styles'
-
-export interface IPriceLPToken {
-  priceLPPng: Big;
-  priceLPJoe: Big;
-  kacy: Big;
-  aHYPE: Big;
-  k3c: Big;
-}
 
 export interface IInfoStaked {
   yourStake: BigNumber;
@@ -87,35 +78,25 @@ interface IStakingProps {
         width: string
       }
     },
+    addressProviderReserves?: string,
     title?: string,
     link?: string
   };
-  address?: string;
   stakeWithVotingPower: boolean;
-  stakeWithLockPeriod?: boolean;
-}
-
-const staked: { [key: number | string]: string } = {
-  0: 'KACY',
-  1: 'KACY',
-  2: 'KACY',
-  3: 'KACY',
-  4: process.env.NEXT_PUBLIC_MASTER === '1' ? 'KACY' : 'aHYPE',
-  5: 'LP-PNG',
-  6: 'aHYPE',
-  7: 'LP-JOE',
-  8: 'K3C'
+  stakeWithLockPeriod: boolean;
+  isLP: boolean;
+  address?: string;
 }
 
 const StakeCard = ({
   pid,
   symbol,
-  stakeWithLockPeriod = false,
-  stakeWithVotingPower,
   properties,
+  stakeWithVotingPower,
+  stakeWithLockPeriod,
+  isLP,
   address
 }: IStakingProps) => {
-  console.log('reload')
   const [isDetails, setIsDetails] = React.useState<boolean>(false)
   const [isModalStake, setIsModalStake] = React.useState<boolean>(false)
   const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
@@ -133,13 +114,8 @@ const StakeCard = ({
   const [kacyEarned, setKacyEarned] = React.useState<BigNumber>(
     new BigNumber(-1)
   )
-  const [tokenPrice, setTokenPrice] = React.useState<IPriceLPToken>({
-    priceLPPng: Big(-1),
-    priceLPJoe: Big(-1),
-    kacy: Big(-1),
-    aHYPE: Big(-1),
-    k3c: Big(-1)
-  })
+  const [poolPrice, setPoolPrice] = React.useState<Big>(Big(-1))
+  const [kacyPrice, setKacyPrice] = React.useState<Big>(Big(-1))
   const [infoStaked, setInfoStaked] = React.useState<IInfoStaked>({
     yourStake: new BigNumber(-1),
     withdrawable: false,
@@ -160,8 +136,6 @@ const StakeCard = ({
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { trackEvent } = useMatomo()
   const { viewgetReserves } = usePriceLP()
-  const kacyAvaxPngToken = useERC20Contract(LPKacyAvaxPNG)
-  const kacyAvaxJoeToken = useERC20Contract(LPKacyAvaxJOE)
   const stakingContract = useStakingContract(Staking)
 
   const { data } = useSWR(
@@ -175,7 +149,7 @@ const StakeCard = ({
   const productCategories = [
     'Stake',
     process.env.NEXT_PUBLIC_MASTER === '1' ? 'Avalanche' : 'Fuji',
-    staked[pid] === 'KACY' ? 'VotingStake' : 'OtherStake'
+    stakeWithVotingPower ? 'VotingStake' : 'OtherStake'
   ]
 
   function matomoEvent(action: string, name: string) {
@@ -192,66 +166,47 @@ const StakeCard = ({
   }
 
   async function handleLPtoUSD() {
-    const reservesKacyAvaxPng = await viewgetReserves(LPKacyAvaxPNG)
-    const reservesKacyAvaxJoe = await viewgetReserves(LPKacyAvaxJOE)
+    const addressProviderReserves = isLP && address ? address : LP_KACY_AVAX_PNG
+    const reservesKacyAvax = await viewgetReserves(addressProviderReserves)
 
     const reservesDaiAvax = await viewgetReserves(LPDaiAvax)
 
-    let DaiReserve = reservesDaiAvax._reserve1
-    let AvaxDaiReserve = reservesDaiAvax._reserve0
-
-    let kacyReserve = reservesKacyAvaxPng._reserve1
-    let avaxKacyReservePng = reservesKacyAvaxPng._reserve0
-
-    const avaxKacyReserveJoe = reservesKacyAvaxJoe._reserve0
+    let daiReserve = reservesDaiAvax._reserve1
+    let avaxReserve = reservesDaiAvax._reserve0
+    let kacyReserve = reservesKacyAvax._reserve1
+    let avaxKacyReserve = reservesKacyAvax._reserve0
 
     if (process.env.NEXT_PUBLIC_MASTER !== '1') {
-      kacyReserve = reservesKacyAvaxPng._reserve0
-      avaxKacyReservePng = reservesKacyAvaxPng._reserve1
-      DaiReserve = reservesDaiAvax._reserve0
-      AvaxDaiReserve = reservesDaiAvax._reserve1
+      daiReserve = reservesDaiAvax._reserve0
+      avaxReserve = reservesDaiAvax._reserve1
+      kacyReserve = reservesKacyAvax._reserve0
+      avaxKacyReserve = reservesKacyAvax._reserve1
     }
 
-    const avaxInDollar = Big(DaiReserve).div(Big(AvaxDaiReserve))
-    const kacyInDollar = avaxInDollar.mul(
-      Big(avaxKacyReservePng).div(kacyReserve)
-    )
+    const avaxInDollar = Big(daiReserve).div(Big(avaxReserve))
+    const kacyInDollar = avaxInDollar.mul(Big(avaxKacyReserve).div(kacyReserve))
 
-    const allAVAXDollarPng = Big(avaxKacyReservePng).mul(avaxInDollar)
-    const allAVAXDollarJoe = Big(avaxKacyReserveJoe).mul(avaxInDollar)
+    setKacyPrice(kacyInDollar)
 
-    const supplyLPPngToken = await kacyAvaxPngToken.totalSupply()
-    const supplyLPJoeToken = await kacyAvaxJoeToken.totalSupply()
+    if (isLP) {
+      const ERC20Contract = ERC20(addressProviderReserves)
+      const allAVAXDollar = Big(avaxKacyReserve).mul(avaxInDollar)
 
-    if (supplyLPPngToken.toString() !== '0') {
-      const priceLPPng = allAVAXDollarPng
-        .mul(2)
-        .div(Big(supplyLPPngToken.toString()))
+      const supplyLPToken = await ERC20Contract.totalSupply()
 
-      setTokenPrice(prevState => ({
-        ...prevState,
-        priceLPPng
-      }))
+      if (supplyLPToken.toString() !== '0') {
+        const priceLP = allAVAXDollar.mul(2).div(Big(supplyLPToken.toString()))
+        setPoolPrice(priceLP)
+      }
+      return
     }
-    if (supplyLPJoeToken.toString() !== '0') {
-      const priceLPJoe = allAVAXDollarJoe
-        .mul(2)
-        .div(Big(supplyLPJoeToken.toString()))
-      setTokenPrice(prevState => ({
-        ...prevState,
-        priceLPJoe
-      }))
-    }
+
     if (data) {
-      setTokenPrice(prevState => ({
-        ...prevState,
-        [symbol === 'k3c' ? 'k3c' : 'aHYPE']: Big(data?.pool?.price_usd || -1)
-      }))
+      setPoolPrice(Big(data?.pool?.price_usd || -1))
+      return
     }
-    setTokenPrice(prevState => ({
-      ...prevState,
-      kacy: kacyInDollar
-    }))
+
+    setPoolPrice(kacyInDollar)
   }
 
   async function handleApproveKacy() {
@@ -287,7 +242,7 @@ const StakeCard = ({
       const txReceipt = await waitTransaction(txHash)
 
       if (txReceipt.status) {
-        matomoEvent('approve-contract', `${staked[pid]}`)
+        matomoEvent('approve-contract', `${symbol}`)
         ToastSuccess(`Approval of ${symbol} confirmed`)
         return
       }
@@ -310,7 +265,7 @@ const StakeCard = ({
       const txReceipt = await waitTransaction(txHash)
 
       if (txReceipt.status) {
-        matomoEvent('reward-claim', `${staked[pid]}`)
+        matomoEvent('reward-claim', `${symbol}`)
         ToastSuccess(`Rewards claimed successfully`)
         return
       }
@@ -430,7 +385,8 @@ const StakeCard = ({
               <YourStake
                 pid={pid}
                 infoStaked={infoStaked}
-                tokenPrice={tokenPrice}
+                poolPrice={poolPrice}
+                kacyPrice={kacyPrice}
                 setInfoStaked={setInfoStaked}
                 lockPeriod={lockPeriod}
                 userWalletAddress={userWalletAddress}
@@ -448,7 +404,7 @@ const StakeCard = ({
                           userWalletAddress={userWalletAddress}
                           kacyEarned={kacyEarned}
                           setKacyEarned={setKacyEarned}
-                          kacyPrice={tokenPrice.kacy}
+                          kacyPrice={kacyPrice}
                         />
                         <Button
                           type="button"
@@ -488,7 +444,7 @@ const StakeCard = ({
                             infoStaked.withdrawable ? (
                               <Button
                                 type="button"
-                                text={`Stake ${staked[pid]}`}
+                                text={`Stake ${symbol}`}
                                 size="huge"
                                 backgroundSecondary
                                 fullWidth
@@ -497,7 +453,7 @@ const StakeCard = ({
                             ) : (
                               <Button
                                 type="button"
-                                text={`Stake ${staked[pid]}`}
+                                text={`Stake ${symbol}`}
                                 size="huge"
                                 backgroundSecondary
                                 fullWidth
@@ -585,8 +541,9 @@ const StakeCard = ({
                     infoStakeStatic={infoStaked}
                     stakingToken={infoStaked.stakingToken}
                     decimals={decimals}
-                    symbol={staked[pid]}
-                    tokenPrice={tokenPrice}
+                    symbol={symbol}
+                    poolPrice={poolPrice}
+                    kacyPrice={kacyPrice}
                   />
                 )}
               </S.ButtonContainer>
@@ -602,7 +559,7 @@ const StakeCard = ({
           decimals={decimals}
           stakingToken={infoStaked.stakingToken}
           productCategories={productCategories}
-          symbol={staked[pid]}
+          symbol={symbol}
           stakeTransaction={stakeTransaction}
           setStakeTransaction={setStakeTransaction}
         />

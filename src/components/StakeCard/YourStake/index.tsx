@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 
@@ -6,13 +5,14 @@ import BigNumber from 'bn.js'
 import Big from 'big.js'
 
 import { Staking } from '../../../constants/tokenAddresses'
+
 import useStakingContract from '../../../hooks/useStakingContract'
 
 import { getDate } from '../../../utils/date'
 import { BNtoDecimal } from '../../../utils/numerals'
 import substr from '../../../utils/substr'
 
-import { IInfoStaked, IPriceLPToken } from '../'
+import { IInfoStaked } from '../'
 
 import * as S from './styles'
 
@@ -22,7 +22,8 @@ interface IYourStakeProps {
   infoStaked: IInfoStaked;
   setInfoStaked: React.Dispatch<React.SetStateAction<IInfoStaked>>;
   stakeWithVotingPower: boolean;
-  tokenPrice: IPriceLPToken;
+  poolPrice: Big;
+  kacyPrice: Big;
   stakeWithLockPeriod: boolean;
   lockPeriod: number;
   availableWithdraw: Big;
@@ -35,25 +36,14 @@ const YourStake = ({
   setInfoStaked,
   stakeWithVotingPower,
   stakeWithLockPeriod,
-  tokenPrice,
+  poolPrice,
+  kacyPrice,
   lockPeriod,
   availableWithdraw
 }: IYourStakeProps) => {
   const stakingContract = useStakingContract(Staking)
 
   const [delegateTo, setDelegateTo] = React.useState<string>('')
-
-  const stakingTokenPrice: { [key: number]: Big } = {
-    0: tokenPrice.kacy,
-    1: tokenPrice.kacy,
-    2: tokenPrice.kacy,
-    3: tokenPrice.kacy,
-    4: tokenPrice.kacy,
-    5: tokenPrice.priceLPPng,
-    6: tokenPrice.aHYPE,
-    7: tokenPrice.priceLPJoe,
-    8: tokenPrice.k3c
-  }
 
   const getYourStake = React.useCallback(async () => {
     const poolInfoResponse = await stakingContract.poolInfo(pid)
@@ -67,15 +57,15 @@ const YourStake = ({
     const totalStaked = new BigNumber(poolInfoResponse.depositedAmount)
     const apr =
       poolInfoResponse.depositedAmount.toString() !== '0' &&
-      tokenPrice.kacy.gt('-1') &&
-      (stakingTokenPrice[pid] || Big(0)).gt('-1')
+      kacyPrice.gt('-1') &&
+      (poolPrice || Big(0)).gt('-1')
         ? new BigNumber(
             Big(kacyRewards.toString())
               .mul('365')
               .mul('100')
-              .mul(tokenPrice.kacy)
+              .mul(kacyPrice)
               .div(
-                (stakingTokenPrice[pid] || Big(1)).mul(
+                (poolPrice || Big(1)).mul(
                   Big(poolInfoResponse.depositedAmount.toString())
                 )
               )
@@ -131,7 +121,7 @@ const YourStake = ({
       vestingPeriod: poolInfoResponse.vestingPeriod,
       lockPeriod: poolInfoResponse.lockPeriod
     })
-  }, [userWalletAddress, tokenPrice])
+  }, [userWalletAddress, poolPrice, kacyPrice])
 
   React.useEffect(() => {
     getYourStake()
@@ -156,7 +146,7 @@ const YourStake = ({
         <p>Your stake</p>
         <S.Stake>
           {infoStaked.yourStake.lt(new BigNumber('0')) ||
-          (stakingTokenPrice[pid] || Big(0)).lt(0) ? (
+          (poolPrice || Big(0)).lt(0) ? (
             '...'
           ) : stakeWithVotingPower ? (
             <p>
@@ -167,7 +157,7 @@ const YourStake = ({
             <p>
               {BNtoDecimal(
                 Big(infoStaked.yourStake.toString())
-                  .mul(stakingTokenPrice[pid])
+                  .mul(poolPrice)
                   .div(Big(10).pow(18)),
                 2,
                 2,
@@ -179,12 +169,11 @@ const YourStake = ({
           {stakeWithVotingPower && (
             <span>
               &#8776;{' '}
-              {infoStaked.yourStake.lt(new BigNumber('0')) ||
-              tokenPrice.kacy.lt(0)
+              {infoStaked.yourStake.lt(new BigNumber('0')) || kacyPrice.lt(0)
                 ? '...'
                 : BNtoDecimal(
                     Big(infoStaked.yourStake.toString())
-                      .mul(tokenPrice.kacy)
+                      .mul(kacyPrice)
                       .div(Big(10).pow(18)),
                     6,
                     2,
