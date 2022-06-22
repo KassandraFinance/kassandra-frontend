@@ -1,8 +1,14 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import detectEthereumProvider from '@metamask/detect-provider'
+import BigNumber from 'bn.js'
+import useSWR from 'swr'
+import request from 'graphql-request'
 
 import { useSelector, RootStateOrAny } from 'react-redux'
+
+import { GET_PROFILE } from './graphql'
+import { SUBGRAPH_URL } from '../../constants/tokenAddresses'
 
 import Header from '../../components/Header'
 import Breadcrumb from '../../components/Breadcrumb'
@@ -14,12 +20,14 @@ import Web3Disabled from '../../components/Web3Disabled'
 import SelectTabs from '../../components/SelectTabs'
 import AnyCard from '../../components/AnyCard'
 import Loading from '../../components/Loading'
+import AnyCardTotal from '../../components/Governance/AnyCardTotal'
 
 import profileIcon from '../../../public/assets/iconGradient/profile.svg'
 import walletIcon from '../../../public/assets/iconGradient/wallet-gradient.svg'
 import governanceIcon from '../../../public/assets/iconGradient/vote.svg'
 
 import substr from '../../utils/substr'
+import { BNtoDecimal } from '../../utils/numerals'
 
 import * as S from './styles'
 
@@ -46,12 +54,21 @@ const Profile = () => {
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
 
   const [hasEthereumProvider, setHasEthereumProvider] = React.useState(false)
+  const [totalVotingPower, setTotalVotingPower] = React.useState(
+    new BigNumber(0)
+  )
   const [isSelectTab, setIsSelectTab] = React.useState<
     string | string[] | undefined
   >('portfolio')
 
   const profileAddress = router.query.profileAddress
   const isSelectQueryTab = router.query.tab
+
+  const { data } = useSWR([GET_PROFILE], query =>
+    request(SUBGRAPH_URL, query, {
+      id: profileAddress
+    })
+  )
 
   React.useEffect(() => {
     const checkEthereumProvider = async () => {
@@ -74,6 +91,12 @@ const Profile = () => {
       setIsSelectTab('portfolio')
     }
   }, [router])
+
+  React.useEffect(() => {
+    if (data) {
+      setTotalVotingPower(data.user.votingPower)
+    }
+  }, [data])
 
   return (
     <>
