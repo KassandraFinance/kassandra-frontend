@@ -1177,7 +1177,6 @@ const Form = ({
         chainId === poolChain.chainId ? (
           <Button
             className="btn-submit"
-            onClick={() => setTimeout(() => clearInput(), 3000)}
             backgroundPrimary
             disabledNoEvent={
               (
