@@ -11,7 +11,6 @@ import substr from '../../../utils/substr'
 import { ToastInfo } from '../../Toastify/toast'
 
 import infoGrayIcon from '../../../../public/assets/utilities/info-gray.svg'
-import userProfile from '../../../../public/assets/userProfile.svg'
 
 import ModalUserEditInfo from '../../Modals/ModalUserEditInfo'
 import NftImage from '../../NftImage'
@@ -98,8 +97,16 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
           <S.UserInfoContent>
             {imageUser.isNFT ? (
               <NftImage NftUrl={imageUser.url} imageSize="medium" />
-            ) : imageUser.url !== undefined && imageUser.url !== '' ? (
-              <img src={imageUser.url} alt="" width="90" height="90" />
+            ) : imageUser.url !== undefined &&
+              imageUser.url !== null &&
+              imageUser.url !== '' ? (
+              <img
+                src={imageUser.url}
+                alt=""
+                width="90"
+                height="90"
+                id="userImage"
+              />
             ) : (
               <Jazzicon
                 diameter={73}
@@ -167,70 +174,74 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
               </a>
             </S.UserAddressContent>
             <ul>
-              {userData.discord && (
-                <li>
-                  <S.SocialIcon
-                    href={`https://discord.com/${userData.discord}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Image
-                      src="/assets/socialMidia/discord.svg"
-                      alt="Follow our Twitter feed"
-                      width={20}
-                      height={20}
-                    />
-                  </S.SocialIcon>
-                </li>
-              )}
-              {userData.twitter && (
-                <li>
-                  <S.SocialIcon
-                    href={`https://twitter.com/${userData.twitter}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Image
-                      src="/assets/socialMidia/twitter.svg"
-                      alt="Follow our Twitter feed"
-                      width={20}
-                      height={20}
-                    />
-                  </S.SocialIcon>
-                </li>
-              )}
-              {userData.telegram && (
-                <li>
-                  <S.SocialIcon
-                    href={`https://telegram.com/${userData.telegram}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Image
-                      src="/assets/socialMidia/telegram.svg"
-                      alt="Follow our Twitter feed"
-                      width={20}
-                      height={20}
-                    />
-                  </S.SocialIcon>
-                </li>
-              )}
-              {userData.website && (
-                <li>
-                  <S.SocialIcon
-                    href={userData.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Image
-                      src="/assets/socialMidia/webpage.svg"
-                      alt="Follow our Twitter feed"
-                      width={20}
-                      height={20}
-                    />
-                  </S.SocialIcon>
-                </li>
-              )}
+              <li>
+                <S.SocialIcon
+                  href={`https://discord.com/${userData.discord}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  isActiveSocial={
+                    userData.discord !== '' && userData.discord !== undefined
+                  }
+                >
+                  <Image
+                    src="/assets/socialMidia/discord.svg"
+                    alt="Follow our Twitter feed"
+                    width={15}
+                    height={15}
+                  />
+                </S.SocialIcon>
+              </li>
+              <li>
+                <S.SocialIcon
+                  href={`https://twitter.com/${userData.twitter}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  isActiveSocial={
+                    userData.twitter !== '' && userData.twitter !== undefined
+                  }
+                >
+                  <Image
+                    src="/assets/socialMidia/twitter.svg"
+                    alt="Follow our Twitter feed"
+                    width={15}
+                    height={15}
+                  />
+                </S.SocialIcon>
+              </li>
+              <li>
+                <S.SocialIcon
+                  href={`https://telegram.com/${userData.telegram}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  isActiveSocial={
+                    userData.telegram !== '' && userData.telegram !== undefined
+                  }
+                >
+                  <Image
+                    src="/assets/socialMidia/telegram.svg"
+                    alt="Follow our Twitter feed"
+                    width={16}
+                    height={16}
+                  />
+                </S.SocialIcon>
+              </li>
+              <li>
+                <S.SocialIcon
+                  href={userData.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  isActiveSocial={
+                    userData.website !== '' && userData.website !== undefined
+                  }
+                >
+                  <Image
+                    src="/assets/socialMidia/webpage.svg"
+                    alt="Follow our Twitter feed"
+                    width={17}
+                    height={17}
+                  />
+                </S.SocialIcon>
+              </li>
             </ul>
             {isConnectWallet && (
               <S.EditInfoButton onClick={() => setIsOpenModal(true)}>

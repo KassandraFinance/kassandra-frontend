@@ -47,9 +47,17 @@ export const UserInfoContent = styled.div`
   @media (max-width: 650px) {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
     padding-right: 3rem;
     margin-top: 0;
+
+    #userImage {
+      margin-top: -0.4rem;
+      height: 65px;
+      width: 65px;
+    }
   }
 
   > span {
@@ -89,8 +97,6 @@ interface IisSelectSeeMoreProps {
 export const UserProfileContent = styled.div<IisSelectSeeMoreProps>`
   display: flex;
   flex-direction: column;
-  justify-content: ${props =>
-    props.isSelectSeeMore ? 'flex-start' : 'center'};
 
   width: 100%;
   margin-left: 1.6rem;
@@ -122,11 +128,16 @@ export const UserProfileContent = styled.div<IisSelectSeeMoreProps>`
     margin-bottom: 1.3rem;
     margin-top: 0.5rem;
     gap: 0.8rem;
+
+    @media (max-width: 650px) {
+      margin-top: 0.9rem;
+    }
   }
 `
 
 export const EditInfoButton = styled.button`
   display: flex;
+  max-width: 8rem;
   gap: 0.8rem;
 
   background-color: transparent;
@@ -223,7 +234,12 @@ export const ButtonSeeMore = styled.button<IisSeeMoreProps>`
   }
 `
 
-export const SocialIcon = styled.a`
+interface ISocialIconProps {
+  isActiveSocial?: boolean;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const SocialIcon = styled.a<ISocialIconProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -236,13 +252,11 @@ export const SocialIcon = styled.a`
   border-radius: 50%;
 
   transition: border ${theme.transition.default};
+  opacity: ${props => (props.isActiveSocial ? 'none' : '50%')};
+
+  pointer-events: ${props => (props.isActiveSocial ? 'auto' : 'none')};
 
   &:hover {
-    border: 1px solid rgba(255, 255, 255, 0.3);
-  }
-
-  img {
-    height: 1.6rem;
-    width: 1.6rem;
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
   }
 `
