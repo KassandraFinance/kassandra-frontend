@@ -239,7 +239,7 @@ const ModalUserEditInfo = ({
                   >
                     Add Image NFT
                     <Image
-                      src="/assets/arrow-select.svg"
+                      src="/assets/utilities/arrow-select-down.svg"
                       alt="arrow select button"
                       width={13}
                       height={13}
@@ -267,6 +267,7 @@ const ModalUserEditInfo = ({
                     })
                   }
                   value={editYourProfileInput?.nickname}
+                  maxLength={15}
                 />
               </S.UserNameContent>
             </S.UserProfileInfo>
