@@ -28,11 +28,15 @@ export const TabsButton = styled.button<ITabsButtonProps>`
   border: 0;
   border-top-left-radius: 0.4rem;
   border-top-right-radius: 0.4rem;
+  border: ${props =>
+    props.isActiveTab ? '0.1rem solid rgba(255, 255, 255, 0.1)' : 'none'};
+  border-bottom: none;
 
+  font-family: 'Rubik', sans-serif;
   color: ${props => (props.isActiveTab ? '#ffffff' : '#c4c4c4')};
   font-size: ${theme.font.sizes.font18};
   font-weight: ${props =>
-    props.isActiveTab ? theme.font.weight.medium : theme.font.weight.normal};
+    props.isActiveTab ? theme.font.weight.medium : theme.font.weight.light};
 
   cursor: pointer;
 
