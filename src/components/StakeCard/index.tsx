@@ -135,7 +135,7 @@ const StakeCard = ({
   })
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
   const { trackEvent } = useMatomo()
-  const { viewgetReserves } = usePriceLP()
+  const { getPriceKacyAndLP } = usePriceLP()
   const stakingContract = useStakingContract(Staking)
 
   const { data } = useSWR(
@@ -167,37 +167,16 @@ const StakeCard = ({
 
   async function handleLPtoUSD() {
     const addressProviderReserves = isLP && address ? address : LP_KACY_AVAX_PNG
-    const reservesKacyAvax = await viewgetReserves(addressProviderReserves)
 
-    const reservesDaiAvax = await viewgetReserves(LPDaiAvax)
+    const { kacyPriceInDollar, priceLP } = await getPriceKacyAndLP(
+      addressProviderReserves,
+      LPDaiAvax,
+      isLP
+    )
+    setKacyPrice(kacyPriceInDollar)
 
-    let daiReserve = reservesDaiAvax._reserve1
-    let avaxReserve = reservesDaiAvax._reserve0
-    let kacyReserve = reservesKacyAvax._reserve1
-    let avaxKacyReserve = reservesKacyAvax._reserve0
-
-    if (process.env.NEXT_PUBLIC_MASTER !== '1') {
-      daiReserve = reservesDaiAvax._reserve0
-      avaxReserve = reservesDaiAvax._reserve1
-      kacyReserve = reservesKacyAvax._reserve0
-      avaxKacyReserve = reservesKacyAvax._reserve1
-    }
-
-    const avaxInDollar = Big(daiReserve).div(Big(avaxReserve))
-    const kacyInDollar = avaxInDollar.mul(Big(avaxKacyReserve).div(kacyReserve))
-
-    setKacyPrice(kacyInDollar)
-
-    if (isLP) {
-      const ERC20Contract = ERC20(addressProviderReserves)
-      const allAVAXDollar = Big(avaxKacyReserve).mul(avaxInDollar)
-
-      const supplyLPToken = await ERC20Contract.totalSupply()
-
-      if (supplyLPToken.toString() !== '0') {
-        const priceLP = allAVAXDollar.mul(2).div(Big(supplyLPToken.toString()))
-        setPoolPrice(priceLP)
-      }
+    if (isLP && priceLP) {
+      setPoolPrice(priceLP)
       return
     }
 
@@ -206,7 +185,7 @@ const StakeCard = ({
       return
     }
 
-    setPoolPrice(kacyInDollar)
+    setPoolPrice(kacyPriceInDollar)
   }
 
   async function handleApproveKacy() {

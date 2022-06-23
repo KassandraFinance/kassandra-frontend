@@ -45,7 +45,6 @@ const Details = ({
   poolPrice,
   kacyPrice
 }: IDetailsProps) => {
-  // eslint-disable-next-line prettier/prettier
   const [depositedAmount, setDepositedAmount] = React.useState<BigNumber>(
     new BigNumber(-1)
   )

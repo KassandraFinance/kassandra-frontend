@@ -7,11 +7,7 @@ import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import {
-  Staking,
-  LPKacyAvaxPNG,
-  LPDaiAvax
-} from '../../../constants/tokenAddresses'
+import { Staking, LPDaiAvax } from '../../../constants/tokenAddresses'
 
 import usePriceLP from '../../../hooks/usePriceLP'
 import useERC20Contract from '../../../hooks/useERC20Contract'
@@ -26,6 +22,7 @@ import Button from '../../../components/Button'
 import ModalWalletConnect from '../../../components/Modals/ModalWalletConnect'
 
 import * as S from './styles'
+import { LP_KACY_AVAX_PNG } from '../../../constants/pools'
 
 interface IMyAssetProps {
   crpPoolAddress: string;
@@ -52,7 +49,7 @@ const MyAsset = ({
   const router = useRouter()
   const { trackEvent } = useMatomo()
 
-  const { viewgetReserves } = usePriceLP()
+  const { getPriceKacyAndLP } = usePriceLP()
   const tokenWallet = useERC20Contract(crpPoolAddress)
   const stakingContract = useStakingContract(Staking)
 
@@ -89,23 +86,11 @@ const MyAsset = ({
   }
 
   async function handleLPtoUSD() {
-    const reservesKacyAvax = await viewgetReserves(LPKacyAvaxPNG)
-    const reservesDaiAvax = await viewgetReserves(LPDaiAvax)
-
-    let kacyReserve = reservesKacyAvax._reserve1
-    let avaxKacyReserve = reservesKacyAvax._reserve0
-    let DaiReserve = reservesDaiAvax._reserve1
-    let AvaxDaiReserve = reservesDaiAvax._reserve0
-
-    if (process.env.NEXT_PUBLIC_MASTER !== '1') {
-      kacyReserve = reservesKacyAvax._reserve0
-      avaxKacyReserve = reservesKacyAvax._reserve1
-      DaiReserve = reservesDaiAvax._reserve0
-      AvaxDaiReserve = reservesDaiAvax._reserve1
-    }
-
-    const avaxInDollar = Big(DaiReserve).div(Big(AvaxDaiReserve))
-    const kacyInDollar = avaxInDollar.mul(Big(avaxKacyReserve).div(kacyReserve))
+    const { kacyPriceInDollar } = await getPriceKacyAndLP(
+      LP_KACY_AVAX_PNG,
+      LPDaiAvax,
+      false
+    )
 
     setPriceToken(prevState => ({
       ...prevState,
@@ -114,7 +99,7 @@ const MyAsset = ({
 
     setPriceToken(prevState => ({
       ...prevState,
-      kacy: kacyInDollar
+      kacy: kacyPriceInDollar
     }))
   }
 

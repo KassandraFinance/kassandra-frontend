@@ -22,7 +22,10 @@ const KACY_ADDRESS =
     ? '0xf32398dae246C5f672B52A54e9B413dFFcAe1A44'
     : '0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb'
 
-export const LP_KACY_AVAX_PNG = '0x1938cE0E14dD71caab96F52dF3F49b1D1DAF8861'
+export const LP_KACY_AVAX_PNG =
+  process.env.NEXT_PUBLIC_MASTER === '1'
+    ? '0x1938cE0E14dD71caab96F52dF3F49b1D1DAF8861'
+    : '0xbaa8b0d2AA6415d5b4077C1FA06b3507577FBCd7'
 
 const LP_KACY_AVAX_JOE = '0xc45893e0ee426a643e54829ee8c697995e5980ed'
 
@@ -180,4 +183,4 @@ export const poolsKacy = [kacy1x, kacy2x, kacy3x]
 export const poolsInvestor = [kacyInvestor1, kacyInvestor2]
 export const poolsFunds = [lpPNG, lpJoe, ahype, tricrypto]
 export const poolsKacyFuji = [kacy1x, kacy2x, kacy3x]
-export const poolsFundsFuji = [ahype]
+export const poolsFundsFuji = [lpPNG, ahype]

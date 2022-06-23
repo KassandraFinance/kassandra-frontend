@@ -65,7 +65,7 @@ const StakingTable = ({
 }: IStakingTableProps) => {
   const router = useRouter()
   const { poolInfo, earned } = useStakingContract(Staking)
-  const { viewgetReserves } = usePriceLP()
+  const { getReserves } = usePriceLP()
   const lpToken = useERC20Contract(LPKacyAvaxPNG)
   const lpJoeToken = useERC20Contract(LPKacyAvaxJOE)
 
@@ -102,9 +102,9 @@ const StakingTable = ({
   }, [priceToken, stakes, setTotalStaked])
 
   async function handleLPtoUSD() {
-    const reservesKacyAvax = await viewgetReserves(LPKacyAvaxPNG)
-    const reservesKacyAvaxJoe = await viewgetReserves(LPKacyAvaxJOE)
-    const reservesDaiAvax = await viewgetReserves(LPDaiAvax)
+    const reservesKacyAvax = await getReserves(LPKacyAvaxPNG)
+    const reservesKacyAvaxJoe = await getReserves(LPKacyAvaxJOE)
+    const reservesDaiAvax = await getReserves(LPDaiAvax)
 
     let kacyReserve = reservesKacyAvax._reserve1
     let avaxKacyReserve = reservesKacyAvax._reserve0
