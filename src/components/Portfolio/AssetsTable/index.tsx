@@ -6,13 +6,9 @@ import BigNumber from 'bn.js'
 import Big from 'big.js'
 import { request } from 'graphql-request'
 
-import useERC20Contract from '../../../hooks/useERC20Contract'
+import { ERC20 } from '../../../hooks/useERC20Contract'
 
-import {
-  SUBGRAPH_URL,
-  ProductDetails,
-  HeimCRPPOOL
-} from '../../../constants/tokenAddresses'
+import { SUBGRAPH_URL, ProductDetails } from '../../../constants/tokenAddresses'
 
 import { GET_CHART } from './graphql'
 
@@ -72,17 +68,13 @@ export const AssetsTable = ({
   const [tvl, setTvl] = React.useState<IPriceType>({})
   const [balance, setBalance] = React.useState<IBalanceType>({})
 
-  const ahypeERC20 = useERC20Contract(HeimCRPPOOL)
-  //const tricryptoERC20 = useERC20Contract(HeimCRPPOOL)
-
   async function getBalance(id: string) {
-    if (HeimCRPPOOL === id) {
-      const balanceToken = await ahypeERC20.balance(profileAddress)
-      setBalance(prevState => ({
-        ...prevState,
-        [id]: balanceToken
-      }))
-    }
+    const ERC20Contract = ERC20(id)
+    const balanceToken = await ERC20Contract.balance(profileAddress)
+    setBalance(prevState => ({
+      ...prevState,
+      [id]: balanceToken
+    }))
   }
 
   React.useEffect(() => {

@@ -6,7 +6,7 @@ import { useSelector, RootStateOrAny } from 'react-redux'
 
 import useStakingContract from '../../hooks/useStakingContract'
 import { Staking } from '../../constants/tokenAddresses'
-import useERC20Contract from '../../hooks/useERC20Contract'
+import { ERC20 } from '../../hooks/useERC20Contract'
 
 import PortfolioHeading from '../../components/PortfolioHeading'
 import AssetsTable from './AssetsTable'
@@ -17,6 +17,7 @@ import ModalWalletConnect from '../Modals/ModalWalletConnect'
 import AssetsIcon from '../../../public/assets/iconGradient/assets-distribution.svg'
 import StakedPoolsIcon from '../../../public/assets/iconGradient/staking-pools.svg'
 import aHYPE from '../../../public/assets/logos/ahype.svg'
+import K3C from '../../../public/assets/logos/tricrypto.svg'
 import AvalancheIcon from '../../../public/assets/logos/avalanche.svg'
 import iconKace from '../../../public/assets/logos/kacy-stake.svg'
 import iconPangolin from '../../../public/assets/logos/pangolin-40x40.svg'
@@ -24,11 +25,7 @@ import iconTraderJoe from '../../../public/assets/logos/traderJoe.svg'
 
 import { BNtoDecimal } from '../../utils/numerals'
 
-import {
-  products,
-  HeimCRPPOOL,
-  ProductDetails
-} from '../../constants/tokenAddresses'
+import { products, ProductDetails } from '../../constants/tokenAddresses'
 
 import * as S from './styles'
 
@@ -129,22 +126,24 @@ const Portfolio = ({ profileAddress }: IProfileProps) => {
       icons: [iconKace, AvalancheIcon, iconTraderJoe],
       network: 'Avalanche',
       networkIcon: AvalancheIcon
+    },
+    8: {
+      symbol: 'K3C',
+      poolName: 'K3C',
+      icons: [K3C],
+      network: 'Avalanche',
+      networkIcon: AvalancheIcon
     }
   }
 
-  const ahypeERC20 = useERC20Contract(HeimCRPPOOL)
-  //const tricryptoERC20 = useERC20Contract(HeimCRPPOOL)
-
   async function getBalance(id: string) {
-    if (HeimCRPPOOL === id) {
-      const balanceToken = await ahypeERC20.balance(profileAddress)
-
-      if (balanceToken.gt(new BigNumber(0))) {
-        setMyFunds(prevState => ({
-          ...prevState,
-          [id]: id
-        }))
-      }
+    const ERC20Contract = ERC20(id)
+    const balanceToken = await ERC20Contract.balance(profileAddress)
+    if (balanceToken.gt(new BigNumber(0))) {
+      setMyFunds(prevState => ({
+        ...prevState,
+        [id]: id
+      }))
     }
   }
 
@@ -188,13 +187,12 @@ const Portfolio = ({ profileAddress }: IProfileProps) => {
       return
     }
 
-    const pids = [0, 1, 2, 3, 4, 5, 6, 7]
+    const pids = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
     const arr: IStakesType[] = []
     const asyncFunc = async () => {
       for (let pid = 0; pid < pids.length; pid++) {
         const userInfoResponse = await userInfo(pid, profileAddress)
-
         if ((await userInfoResponse.amount) > 0) {
           arr.push({
             pid: pid,
@@ -264,6 +262,7 @@ const Portfolio = ({ profileAddress }: IProfileProps) => {
             stakes={stakes}
             profileAddress={profileAddress}
             setTotalStaked={setTotalStaked}
+            addresses={[products[0].sipAddress, products[1].sipAddress]}
           />
         </S.paddingLeftWrapper>
       ) : (

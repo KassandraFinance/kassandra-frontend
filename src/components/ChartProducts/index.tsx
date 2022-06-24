@@ -2,7 +2,7 @@ import React from 'react'
 import useSWR from 'swr'
 import request from 'graphql-request'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import { SUBGRAPH_URL } from '../../constants/tokenAddresses'
 
@@ -18,10 +18,7 @@ import ChartAllocation from './ChartAllocation'
 import { GET_CHART } from './graphql'
 
 import * as S from './styles'
-import {
-  actionSetPerformanceValues,
-  PerformanceValues
-} from '../../store/modules/performanceValues/actions'
+import { actionSetPerformanceValues } from '../../store/modules/performanceValues/actions'
 
 const arrPeriod: string[] = ['1W', '1M', '3M', '1Y']
 
@@ -31,8 +28,6 @@ interface IChartProductsProps {
 
 const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
   const dispatch = useDispatch()
-  const { performanceValues }: { performanceValues: PerformanceValues } =
-    useSelector((state: RootStateOrAny) => state)
   const [inputChecked, setInputChecked] = React.useState<string>('Price')
   const [price, setPrice] = React.useState([])
   const [tvl, setTvl] = React.useState([])
@@ -63,9 +58,7 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
         }))
         dispatch(
           actionSetPerformanceValues({
-            title: 'Daily Performance',
-            performance: performanceValues?.changeWeek[0],
-            changeWeek: performanceValues.changeWeek
+            title: 'Daily Performance'
           })
         )
         break
@@ -79,11 +72,7 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
         }))
         dispatch(
           actionSetPerformanceValues({
-            title: 'Weekly Performance',
-            performance:
-              performanceValues.changeWeek && performanceValues?.changeWeek[1],
-            changeWeek:
-              performanceValues.changeWeek && performanceValues.changeWeek
+            title: 'Weekly Performance'
           })
         )
         break
@@ -97,9 +86,7 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
         }))
         dispatch(
           actionSetPerformanceValues({
-            title: 'Monthly Performance',
-            performance: performanceValues?.changeWeek[2],
-            changeWeek: performanceValues.changeWeek
+            title: 'Monthly Performance'
           })
         )
         break
@@ -113,9 +100,7 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
         }))
         dispatch(
           actionSetPerformanceValues({
-            title: '3 Months Performance',
-            performance: performanceValues?.changeWeek[3],
-            changeWeek: performanceValues.changeWeek
+            title: '3 Months Performance'
           })
         )
         break
@@ -129,9 +114,7 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
         }))
         dispatch(
           actionSetPerformanceValues({
-            title: 'Yearly Performance',
-            performance: performanceValues?.changeWeek[4],
-            changeWeek: performanceValues.changeWeek
+            title: 'Yearly Performance'
           })
         )
         break
