@@ -24,4 +24,3 @@ export const TotalValuesCardsContainer = styled.div`
     flex-direction: column;
   }
 `
-
