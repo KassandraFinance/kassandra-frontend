@@ -37,7 +37,7 @@ const VotingPower = ({
   )
 
   React.useEffect(() => {
-    if (data) {
+    if (data?.user) {
       setTotalVotingPowerGovernance(data.governances[0].totalVotingPower)
 
       setYourVotingPower(data.user ? data.user.votingPower : 0)
