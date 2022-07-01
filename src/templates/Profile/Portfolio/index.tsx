@@ -1,238 +1,148 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
 
 import { useSelector, RootStateOrAny } from 'react-redux'
 
-import useStakingContract from '../../../hooks/useStakingContract'
-import { Staking } from '../../../constants/tokenAddresses'
-import useERC20Contract from '../../../hooks/useERC20Contract'
-
 import PortfolioHeading from '../../../components/PortfolioHeading'
 import AssetsTable from './AssetsTable'
-import StakingTable from './StakingTable'
 import AnyCard from '../../../components/AnyCard'
 import ModalWalletConnect from '../../../components/Modals/ModalWalletConnect'
+import AssetsCard, { IPriceToken } from './AssetsCard'
 
 import AssetsIcon from '../../../../public/assets/iconGradient/assets-distribution.svg'
 import StakedPoolsIcon from '../../../../public/assets/iconGradient/staking-pools.svg'
-import aHYPE from '../../../../public/assets/logos/ahype.svg'
-import AvalancheIcon from '../../../../public/assets/logos/avalanche.svg'
-import iconKace from '../../../../public/assets/logos/kacy-stake.svg'
-import iconPangolin from '../../../../public/assets/logos/pangolin-40x40.svg'
-import iconTraderJoe from '../../../../public/assets/logos/traderJoe.svg'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 
-import {
-  products,
-  HeimCRPPOOL,
-  ProductDetails
-} from '../../../constants/tokenAddresses'
+import { products, ProductDetails } from '../../../constants/tokenAddresses'
 
 import * as S from './styles'
+import { IAssetsValueWalletProps, IKacyLpPool } from '..'
+import { useRouter } from 'next/router'
 
 interface IProfileProps {
   profileAddress: string;
-}
-
-interface IstakedTokenType {
-  [key: number]: {
-    symbol: string,
-    poolName: string,
-    icons: string[],
-    network: string,
-    networkIcon: string
-  };
+  assetsValueInWallet: IAssetsValueWalletProps;
+  cardstakesPool: IKacyLpPool[];
+  priceToken: IPriceToken;
+  myFunds: ImyFundsType;
 }
 
 interface ImyFundsType {
   [key: string]: string;
 }
-
-interface IStakesType {
-  pid: number;
-  symbol: string;
-  poolName: string;
-  icons: string[];
-  network: string;
-  networkIcon: string;
-  amount: string;
-  pendingRewards: string;
-  rewardPerTokenPaid: string;
+export interface IBalanceType {
+  [key: string]: BigNumber;
 }
 
-const Portfolio = ({ profileAddress }: IProfileProps) => {
+const Portfolio = ({
+  profileAddress,
+  assetsValueInWallet,
+  cardstakesPool,
+  priceToken,
+  myFunds
+}: IProfileProps) => {
+  const router = useRouter()
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-  const { userInfo } = useStakingContract(Staking)
-  const [stakes, setStakes] = useState<IStakesType[]>([])
 
-  const [totalStaked, setTotalStaked] = React.useState<Big>(Big(0))
-  const [totalBalance, setTotalBalance] = React.useState<Big>(Big(0))
-  const [myFunds, setMyFunds] = React.useState<ImyFundsType>({})
-  const [funds, setFunds] = React.useState<ProductDetails[]>()
+  // eslint-disable-next-line prettier/prettier
+  const [tokenizedFunds, setTokenizedFunds] = React.useState<ProductDetails[]>([])
+  const [totalBalanceFunds, setTotalBalanceFunds] = React.useState<Big>(Big(0))
+  const [totalDolarInPools, setTotalDolarInPools] = React.useState(new Big(0))
+  const [balanceFunds, setBalanceFunds] = React.useState<IBalanceType>({})
+  const [amountProdInPool, setAmountProdInPool] =
+    React.useState<IAssetsValueWalletProps>({ '': new BigNumber(0) })
+  // eslint-disable-next-line prettier/prettier
+  const [cardstakesPoolNew, setCardStakesPoolNew] = React.useState<IKacyLpPool[]>([])
   const [isModalWallet, setIsModalWallet] = React.useState<boolean>(false)
 
-  const stakedToken: IstakedTokenType = {
-    0: {
-      symbol: 'KACY',
-      poolName: 'KACY',
-      icons: [iconKace],
-      network: 'Avalanche',
-      networkIcon: AvalancheIcon
-    },
-    1: {
-      symbol: 'KACY',
-      poolName: 'KACY',
-      icons: [iconKace],
-      network: 'Avalanche',
-      networkIcon: AvalancheIcon
-    },
-    2: {
-      symbol: 'KACY',
-      poolName: 'KACY',
-      icons: [iconKace],
-      network: 'Avalanche',
-      networkIcon: AvalancheIcon
-    },
-    3: {
-      symbol: 'KACY',
-      poolName: 'KACY',
-      icons: [iconKace],
-      network: 'Avalanche',
-      networkIcon: AvalancheIcon
-    },
-    4: {
-      symbol: 'KACY',
-      poolName: 'KACY',
-      icons: [iconKace],
-      network: 'Avalanche',
-      networkIcon: AvalancheIcon
-    },
-    5: {
-      symbol: 'LP',
-      poolName: 'KACY-AVAX PNG LP',
-      icons: [iconKace, AvalancheIcon, iconPangolin],
-      network: 'Avalanche',
-      networkIcon: AvalancheIcon
-    },
-    6: {
-      symbol: 'aHYPE',
-      poolName: 'aHYPE',
-      icons: [aHYPE],
-      network: 'Avalanche',
-      networkIcon: AvalancheIcon
-    },
-    7: {
-      symbol: 'LP-JOE',
-      poolName: 'KACY-AVAX JOE LP',
-      icons: [iconKace, AvalancheIcon, iconTraderJoe],
-      network: 'Avalanche',
-      networkIcon: AvalancheIcon
-    }
-  }
+  React.useEffect(() => {
+    setCardStakesPoolNew([])
 
-  const ahypeERC20 = useERC20Contract(HeimCRPPOOL)
-  //const tricryptoERC20 = useERC20Contract(HeimCRPPOOL)
-
-  async function getBalance(id: string) {
-    if (HeimCRPPOOL === id) {
-      const balanceToken = await ahypeERC20.balance(profileAddress)
-
-      if (balanceToken.gt(new BigNumber(0))) {
-        setMyFunds(prevState => ({
+    cardstakesPool.forEach(pool => {
+      if (pool.address === myFunds[pool.address]) {
+        setAmountProdInPool(prevState => ({
           ...prevState,
-          [id]: id
+          [pool.address]: pool.amount
         }))
-      }
-    }
-  }
-
-  React.useEffect(() => {
-    setMyFunds({})
-  }, [profileAddress])
-
-  React.useEffect(() => {
-    products.forEach(product => {
-      getBalance(product.sipAddress)
-    })
-  }, [products, profileAddress])
-
-  React.useEffect(() => {
-    if (!profileAddress) {
-      return
-    }
-
-    products.forEach(async product => {
-      const pid = typeof product.pid === 'undefined' ? -1 : product.pid
-      const userInfoResponse = await userInfo(pid, profileAddress)
-      if ((await userInfoResponse.amount) > 0) {
-        setMyFunds(prevState => ({
-          ...prevState,
-          [product.sipAddress]: product.sipAddress
-        }))
-      }
-    })
-  }, [profileAddress, userInfo])
-
-  React.useEffect(() => {
-    const result = products.filter(product => {
-      return product.sipAddress === myFunds[product.sipAddress]
-    })
-
-    setFunds(result)
-  }, [myFunds])
-
-  React.useEffect(() => {
-    if (!profileAddress) {
-      return
-    }
-
-    const pids = [0, 1, 2, 3, 4, 5, 6, 7]
-
-    const arr: IStakesType[] = []
-    const asyncFunc = async () => {
-      for (let pid = 0; pid < pids.length; pid++) {
-        const userInfoResponse = await userInfo(pid, profileAddress)
-
-        if ((await userInfoResponse.amount) > 0) {
-          arr.push({
-            pid: pid,
-            symbol: stakedToken[pid].symbol,
-            poolName: stakedToken[pid].poolName,
-            icons: stakedToken[pid].icons,
-            network: stakedToken[pid].network,
-            networkIcon: stakedToken[pid].networkIcon,
-            amount: userInfoResponse.amount,
-            pendingRewards: userInfoResponse.pendingRewards,
-            rewardPerTokenPaid: userInfoResponse.rewardPerTokenPaid
-          })
+      } else {
+        if (pool.amount.gt(new BigNumber(0))) {
+          setCardStakesPoolNew(prevState => [
+            ...prevState,
+            {
+              address: pool.address,
+              amount: pool.amount.add(
+                assetsValueInWallet[pool.address]
+                  ? assetsValueInWallet[pool.address]
+                  : new BigNumber(0)
+              ),
+              pid: pool.pid,
+              poolName: pool.poolName,
+              symbol: pool.symbol,
+              properties: pool.properties
+            }
+          ])
         }
       }
+    })
+  }, [cardstakesPool, router])
 
-      const results = await Promise.all(arr)
+  React.useEffect(() => {
+    setTokenizedFunds([])
 
-      setStakes(results)
+    products.forEach(prod => {
+      const balanceInWallet = assetsValueInWallet[prod.sipAddress]
+      const balanceInPool = amountProdInPool[prod.sipAddress]
+      const balanceProductAll = balanceInWallet
+        ? balanceInWallet.add(balanceInPool ? balanceInPool : new BigNumber(0))
+        : new BigNumber(0)
+
+      if (balanceProductAll.gt(new BigNumber(0))) {
+        setTokenizedFunds(prevState => [...prevState, prod])
+      }
+
+      setBalanceFunds(prevState => ({
+        ...prevState,
+        [prod.sipAddress]: balanceProductAll
+      }))
+    })
+  }, [profileAddress, assetsValueInWallet, router])
+
+  React.useEffect(() => {
+    let tokenValueOnDolar = new Big(0)
+
+    if (profileAddress && cardstakesPoolNew.length > 0) {
+      cardstakesPoolNew.forEach(pool => {
+        tokenValueOnDolar = tokenValueOnDolar.add(
+          Big(pool.amount.toString())
+            .mul(priceToken[pool.symbol])
+            .div(Big(10).pow(18))
+        )
+      })
     }
-    asyncFunc()
-  }, [profileAddress, userInfo])
+
+    if (tokenValueOnDolar.gt(0)) {
+      setTotalDolarInPools(tokenValueOnDolar)
+    }
+  }, [profileAddress, cardstakesPoolNew, priceToken])
 
   return (
     <>
       <S.paddingWrapper>
         <PortfolioHeading
           image={AssetsIcon}
-          title="Assets"
-          usd={BNtoDecimal(totalBalance, 6, 2, 2)}
+          title="Tokenized Funds"
+          usd={BNtoDecimal(totalBalanceFunds, 6, 2, 2)}
         />
       </S.paddingWrapper>
 
-      {funds && funds[0] ? (
+      {tokenizedFunds && tokenizedFunds[0] ? (
         <S.paddingLeftWrapper>
           <AssetsTable
-            assets={funds}
-            profileAddress={profileAddress}
-            setTotalBalance={setTotalBalance}
+            assets={tokenizedFunds}
+            setTotalBalance={setTotalBalanceFunds}
+            balanceFunds={balanceFunds}
           />
         </S.paddingLeftWrapper>
       ) : (
@@ -253,33 +163,18 @@ const Portfolio = ({ profileAddress }: IProfileProps) => {
       <S.paddingWrapper>
         <PortfolioHeading
           image={StakedPoolsIcon}
-          title="Staking and Farming"
-          usd={BNtoDecimal(totalStaked, 6, 2, 2)}
+          title="Assets"
+          usd={BNtoDecimal(totalDolarInPools, 6, 2, 2)}
         />
       </S.paddingWrapper>
 
-      {stakes[0] && parseFloat(stakes[0].amount) > 0 ? (
-        <S.paddingLeftWrapper>
-          <StakingTable
-            stakes={stakes}
-            profileAddress={profileAddress}
-            setTotalStaked={setTotalStaked}
-          />
-        </S.paddingLeftWrapper>
-      ) : (
-        <S.paddingWrapper>
-          {profileAddress === userWalletAddress ? (
-            <AnyCard
-              text="It seems you have not staked any KACY"
-              button={true}
-              link="/farm"
-              buttonText="I Want To Stake Some Tokens"
-            />
-          ) : (
-            <AnyCard text="This address has nothing staked" />
-          )}
-        </S.paddingWrapper>
-      )}
+      <S.paddingLeftWrapper>
+        <AssetsCard
+          profileAddress={profileAddress}
+          cardstakesPoolNew={cardstakesPoolNew}
+          priceToken={priceToken}
+        />
+      </S.paddingLeftWrapper>
 
       {isModalWallet && <ModalWalletConnect setModalOpen={setIsModalWallet} />}
     </>
