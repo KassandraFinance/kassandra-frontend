@@ -6,25 +6,15 @@ import BigNumber from 'bn.js'
 import Big from 'big.js'
 import { request } from 'graphql-request'
 
-import useERC20Contract from '../../../../hooks/useERC20Contract'
-
 import {
   SUBGRAPH_URL,
-  ProductDetails,
-  HeimCRPPOOL
+  ProductDetails
 } from '../../../../constants/tokenAddresses'
-
 import { GET_CHART } from './graphql'
 
 import { BNtoDecimal } from '../../../../utils/numerals'
 
 import * as S from './styles'
-
-interface IAssetsTableProps {
-  assets: ProductDetails[];
-  profileAddress: string;
-  setTotalBalance: React.Dispatch<React.SetStateAction<Big>>;
-}
 
 export interface IChangeType {
   [key: string]: string;
@@ -44,18 +34,20 @@ export interface IParamsType {
   month: number;
 }
 
-export const AssetsTable = ({
-  assets,
-  profileAddress,
-  setTotalBalance
-}: IAssetsTableProps) => {
+interface IAssetsTableProps {
+  assets: ProductDetails[];
+  setTotalBalance: React.Dispatch<React.SetStateAction<Big>>;
+  balanceFunds: IBalanceType;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const AssetsTable = ({ assets, setTotalBalance, balanceFunds }: IAssetsTableProps) => {
   const router = useRouter()
 
-  function calcChange(newPrice: number, oldPrice: number) {
-    const calc = ((newPrice - oldPrice) / oldPrice) * 100
-    return calc ? calc.toFixed(2) : '0'
-  }
-
+  const [changeDay, setChangeDay] = React.useState<IChangeType>({})
+  const [changeMonth, setChangeMonth] = React.useState<IChangeType>({})
+  const [price, setPrice] = React.useState<IPriceType>({})
+  const [tvl, setTvl] = React.useState<IPriceType>({})
   const [params, setParams] = React.useState<IParamsType>({
     id: [],
     day: Math.trunc(Date.now() / 1000 - 60 * 60 * 24),
@@ -66,23 +58,9 @@ export const AssetsTable = ({
     request(SUBGRAPH_URL, query, params)
   )
 
-  const [changeDay, setChangeDay] = React.useState<IChangeType>({})
-  const [changeMonth, setChangeMonth] = React.useState<IChangeType>({})
-  const [price, setPrice] = React.useState<IPriceType>({})
-  const [tvl, setTvl] = React.useState<IPriceType>({})
-  const [balance, setBalance] = React.useState<IBalanceType>({})
-
-  const ahypeERC20 = useERC20Contract(HeimCRPPOOL)
-  //const tricryptoERC20 = useERC20Contract(HeimCRPPOOL)
-
-  async function getBalance(id: string) {
-    if (HeimCRPPOOL === id) {
-      const balanceToken = await ahypeERC20.balance(profileAddress)
-      setBalance(prevState => ({
-        ...prevState,
-        [id]: balanceToken
-      }))
-    }
+  function calcChange(newPrice: number, oldPrice: number) {
+    const calc = ((newPrice - oldPrice) / oldPrice) * 100
+    return calc ? calc.toFixed(2) : '0'
   }
 
   React.useEffect(() => {
@@ -95,12 +73,6 @@ export const AssetsTable = ({
       ...prevState,
       id: arr
     }))
-  }, [assets])
-
-  React.useEffect(() => {
-    assets.forEach(asset => {
-      getBalance(asset.sipAddress)
-    })
   }, [assets])
 
   React.useEffect(() => {
@@ -152,19 +124,23 @@ export const AssetsTable = ({
 
   React.useEffect(() => {
     let total = Big(0)
+
     assets.forEach(asset => {
-      if (balance[asset.sipAddress] && price[asset.sipAddress]) {
-        if (balance[asset.sipAddress].gt(new BigNumber(0))) {
+      if (balanceFunds[asset.sipAddress] && price[asset.sipAddress]) {
+        if (balanceFunds[asset.sipAddress].gt(new BigNumber(0))) {
           total = total.add(
-            Big(balance[asset.sipAddress].toString())
+            Big(balanceFunds[asset.sipAddress].toString())
               .div(Big(10).pow(18))
               .mul(Big(price[asset.sipAddress]))
           )
         }
       }
     })
-    setTotalBalance(total)
-  }, [price, assets, balance, setTotalBalance])
+
+    if (total.gt(0)) {
+      setTotalBalance(total)
+    }
+  }, [price, assets, balanceFunds])
 
   const Trs = assets.map((asset, index: number) => {
     return (
@@ -188,7 +164,6 @@ export const AssetsTable = ({
         <S.Td>
           <S.NetworkWrapper>
             <Image src={asset.partners[0].image.src} width={16} height={16} />
-            <span>{asset.platform}</span>
           </S.NetworkWrapper>
         </S.Td>
         <S.Td>${parseFloat(price[asset.sipAddress]).toFixed(2)}</S.Td>
@@ -206,9 +181,9 @@ export const AssetsTable = ({
         <S.Td>
           <S.FlexWrapper>
             <div>
-              {balance[asset.sipAddress]
+              {balanceFunds[asset.sipAddress]
                 ? BNtoDecimal(
-                    Big(balance[asset.sipAddress].toString()).div(
+                    Big(balanceFunds[asset.sipAddress].toString()).div(
                       Big(10).pow(18)
                     ),
                     2
@@ -218,9 +193,9 @@ export const AssetsTable = ({
             </div>
             <span>
               $
-              {balance[asset.sipAddress] && price[asset.sipAddress]
+              {balanceFunds[asset.sipAddress] && price[asset.sipAddress]
                 ? BNtoDecimal(
-                    Big(balance[asset.sipAddress].toString())
+                    Big(balanceFunds[asset.sipAddress].toString())
                       .div(Big(10).pow(18))
                       .mul(Big(price[asset.sipAddress])),
                     2
@@ -244,7 +219,7 @@ export const AssetsTable = ({
             <S.Th>TVL</S.Th>
             <S.Th>This Month</S.Th>
             <S.Th>24h</S.Th>
-            <S.Th>Balance</S.Th>
+            <S.Th>balance</S.Th>
           </S.Tr>
         </S.THead>
 
