@@ -120,9 +120,10 @@ const Profile = () => {
         <UserDescription userWalletUrl={profileAddress} />
         <S.TotalValuesCardsContainer>
           <AnyCardTotal
-            text="R$ 12.381,00"
+            text={String(BNtoDecimal(totalInvestmented, 6, 2, 2) || 0)}
             TooltipText="Lorem"
             textTitle="TOTAL INVESTMENTED"
+            isDolar={true}
           />
           <AnyCardTotal
             text="0"

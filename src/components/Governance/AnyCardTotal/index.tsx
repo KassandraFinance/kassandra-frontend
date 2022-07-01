@@ -7,9 +7,11 @@ interface IAnyCardProps {
   text: string;
   textTitle: string;
   TooltipText: string;
+  isDolar?: boolean;
 }
 
-const AnyCardTotal = ({ textTitle, text, TooltipText }: IAnyCardProps) => {
+// eslint-disable-next-line prettier/prettier
+const AnyCardTotal = ({ textTitle, text, TooltipText, isDolar }: IAnyCardProps) => {
   return (
     <S.TotalValuesCards>
       <span>
@@ -25,7 +27,9 @@ const AnyCardTotal = ({ textTitle, text, TooltipText }: IAnyCardProps) => {
           </span>
         </Tippy>
       </span>
-      <p>{text}</p>
+      <p>
+        {isDolar ? '$ ' : ''} {text}
+      </p>
     </S.TotalValuesCards>
   )
 }
