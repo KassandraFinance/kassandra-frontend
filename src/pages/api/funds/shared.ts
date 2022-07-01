@@ -19,20 +19,24 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
     })
 
     if (method === 'POST') {
-      const { id } = await prisma.sharedImageFund.upsert({
-        where: {
-          contract: fundId
-        },
-        create: {
+      const { id } = await prisma.sharedImageFund.create({
+        data: {
           id: param,
           contract: fundId,
           image
-        },
-        update: {
-          id: param,
-          image
         }
       })
+
+      const dateCompare = new Date(new Date().getTime() - 60 * 60 * 6 * 1000)
+
+      await prisma.sharedImageFund.deleteMany({
+        where: {
+          createdAt: {
+            lte: dateCompare
+          }
+        }
+      })
+
       return response.status(201).send({
         message: 'created shared image',
         id

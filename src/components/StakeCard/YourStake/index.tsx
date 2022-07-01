@@ -1,31 +1,29 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
+
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 
 import { Staking } from '../../../constants/tokenAddresses'
-import useStakingContract, { PoolInfo } from '../../../hooks/useStakingContract'
+
+import useStakingContract from '../../../hooks/useStakingContract'
 
 import { getDate } from '../../../utils/date'
 import { BNtoDecimal } from '../../../utils/numerals'
 import substr from '../../../utils/substr'
 
-import { IInfoStaked, IPriceLPToken } from '..'
+import { IInfoStaked } from '../'
 
 import * as S from './styles'
 
 interface IYourStakeProps {
   pid: number;
-  balanceOf: (pid: number, walletAddress: string) => Promise<BigNumber>;
-  poolInfo: (pid: number) => Promise<PoolInfo>;
-  withdrawable: (pid: number, walletAddress: string) => Promise<boolean>;
-  unstaking: (pid: number, walletAddress: string) => Promise<boolean>;
   userWalletAddress: string;
   infoStaked: IInfoStaked;
   setInfoStaked: React.Dispatch<React.SetStateAction<IInfoStaked>>;
   stakeWithVotingPower: boolean;
-  tokenPrice: IPriceLPToken;
+  poolPrice: Big;
+  kacyPrice: Big;
   stakeWithLockPeriod: boolean;
   lockPeriod: number;
   availableWithdraw: Big;
@@ -33,37 +31,22 @@ interface IYourStakeProps {
 
 const YourStake = ({
   pid,
-  balanceOf,
-  poolInfo,
-  withdrawable,
-  unstaking,
   userWalletAddress,
   infoStaked,
   setInfoStaked,
   stakeWithVotingPower,
   stakeWithLockPeriod,
-  tokenPrice,
+  poolPrice,
+  kacyPrice,
   lockPeriod,
   availableWithdraw
 }: IYourStakeProps) => {
-  const kacyStake = useStakingContract(Staking)
+  const stakingContract = useStakingContract(Staking)
 
   const [delegateTo, setDelegateTo] = React.useState<string>('')
 
-  const stakingTokenPrice: { [key: number]: Big } = {
-    0: tokenPrice.kacy,
-    1: tokenPrice.kacy,
-    2: tokenPrice.kacy,
-    3: tokenPrice.kacy,
-    4: tokenPrice.kacy,
-    5: tokenPrice.priceLPPng,
-    6: tokenPrice.aHYPE,
-    7: tokenPrice.priceLPJoe,
-    8: tokenPrice.k3c
-  }
-
   const getYourStake = React.useCallback(async () => {
-    const poolInfoResponse = await poolInfo(pid)
+    const poolInfoResponse = await stakingContract.poolInfo(pid)
     if (!poolInfoResponse.withdrawDelay) {
       return
     }
@@ -74,15 +57,15 @@ const YourStake = ({
     const totalStaked = new BigNumber(poolInfoResponse.depositedAmount)
     const apr =
       poolInfoResponse.depositedAmount.toString() !== '0' &&
-      tokenPrice.kacy.gt('-1') &&
-      (stakingTokenPrice[pid] || Big(0)).gt('-1')
+      kacyPrice.gt('-1') &&
+      (poolPrice || Big(0)).gt('-1')
         ? new BigNumber(
             Big(kacyRewards.toString())
               .mul('365')
               .mul('100')
-              .mul(tokenPrice.kacy)
+              .mul(kacyPrice)
               .div(
-                (stakingTokenPrice[pid] || Big(1)).mul(
+                (poolPrice || Big(1)).mul(
                   Big(poolInfoResponse.depositedAmount.toString())
                 )
               )
@@ -107,9 +90,12 @@ const YourStake = ({
     let yourDailyKacyReward = new BigNumber(0)
 
     if (userWalletAddress.length > 0) {
-      balance = await balanceOf(pid, userWalletAddress)
-      withdrawableResponse = await withdrawable(pid, userWalletAddress)
-      unstakeResponse = await unstaking(pid, userWalletAddress)
+      balance = await stakingContract.balance(pid, userWalletAddress)
+      withdrawableResponse = await stakingContract.withdrawable(
+        pid,
+        userWalletAddress
+      )
+      unstakeResponse = await stakingContract.unstaking(pid, userWalletAddress)
 
       if (balance.gt(new BigNumber('0'))) {
         yourDailyKacyReward = kacyRewards
@@ -135,7 +121,7 @@ const YourStake = ({
       vestingPeriod: poolInfoResponse.vestingPeriod,
       lockPeriod: poolInfoResponse.lockPeriod
     })
-  }, [userWalletAddress, tokenPrice])
+  }, [userWalletAddress, poolPrice, kacyPrice])
 
   React.useEffect(() => {
     getYourStake()
@@ -146,7 +132,7 @@ const YourStake = ({
 
   React.useEffect(() => {
     const delegateInfo = async () => {
-      const delegate = await kacyStake.userInfo(pid, userWalletAddress)
+      const delegate = await stakingContract.userInfo(pid, userWalletAddress)
       setDelegateTo(delegate.delegatee)
     }
     if (userWalletAddress) {
@@ -160,9 +146,9 @@ const YourStake = ({
         <p>Your stake</p>
         <S.Stake>
           {infoStaked.yourStake.lt(new BigNumber('0')) ||
-          (stakingTokenPrice[pid] || Big(0)).lt(0) ? (
+          (poolPrice || Big(0)).lt(0) ? (
             '...'
-          ) : !stakeWithVotingPower ? (
+          ) : stakeWithVotingPower ? (
             <p>
               {BNtoDecimal(infoStaked.yourStake, 18)}
               <S.Symbol>KACY</S.Symbol>
@@ -171,7 +157,7 @@ const YourStake = ({
             <p>
               {BNtoDecimal(
                 Big(infoStaked.yourStake.toString())
-                  .mul(stakingTokenPrice[pid])
+                  .mul(poolPrice)
                   .div(Big(10).pow(18)),
                 2,
                 2,
@@ -180,15 +166,14 @@ const YourStake = ({
               <S.Symbol>USD</S.Symbol>
             </p>
           )}
-          {!stakeWithVotingPower && (
+          {stakeWithVotingPower && (
             <span>
               &#8776;{' '}
-              {infoStaked.yourStake.lt(new BigNumber('0')) ||
-              tokenPrice.kacy.lt(0)
+              {infoStaked.yourStake.lt(new BigNumber('0')) || kacyPrice.lt(0)
                 ? '...'
                 : BNtoDecimal(
                     Big(infoStaked.yourStake.toString())
-                      .mul(tokenPrice.kacy)
+                      .mul(kacyPrice)
                       .div(Big(10).pow(18)),
                     6,
                     2,
@@ -199,7 +184,7 @@ const YourStake = ({
           )}
         </S.Stake>
       </S.Info>
-      {!stakeWithVotingPower && (
+      {stakeWithVotingPower && (
         <>
           <S.Info>
             <span>Pool Voting Power</span>

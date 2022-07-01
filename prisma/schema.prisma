@@ -8,26 +8,15 @@ datasource db {
 }
 
 model sharedImageFund {
-  id       String @id @default(uuid())
-  contract String @unique
-  image    String
+  id        String   @id @default(uuid())
+  contract  String
+  image     String
+  createdAt DateTime @default(now()) @map("created_at")
 }
 
 model User {
-  walletAddress String  @id @map("wallet_address")
-  nickname      String? @unique
-  twitter       String?
-  website       String?
-  telegram      String?
-  discord       String?
-  description   String?
-  image         String?
-  isNFT         Boolean? @default(false) @map("is_nft")
-}
-
-model User {
-  walletAddress String  @id @map("wallet_address")
-  nickname      String? @unique
+  walletAddress String   @id @map("wallet_address")
+  nickname      String?  @unique
   twitter       String?
   website       String?
   telegram      String?

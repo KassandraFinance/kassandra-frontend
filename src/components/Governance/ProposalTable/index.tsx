@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import useSWR from 'swr'
@@ -15,6 +15,8 @@ import useGovernance from '../../../hooks/useGovernance'
 import { GET_PROPOSALS } from './graphql'
 
 import * as S from './styles'
+import { RootStateOrAny, useSelector } from 'react-redux'
+import { ToastError } from '../../Toastify/toast'
 
 const statsSecundaryProposalLibColor: { [key: string]: string } = {
   'voting open': '#E843C4',
@@ -48,10 +50,28 @@ interface IProposalsListProps {
 }
 
 export const ProposalTable = () => {
+  const { userWalletAddress, chainId } = useSelector(
+    (state: RootStateOrAny) => state
+  )
   // eslint-disable-next-line prettier/prettier
   const [proposalsList, setProposalsList] = React.useState<
     Array<IProposalsListProps>
   >([])
+
+  const networksAvailabe = [43113, 43114]
+
+  React.useEffect(() => {
+    if (
+      userWalletAddress.length > 0 &&
+      chainId &&
+      !networksAvailabe.includes(chainId)
+    ) {
+      ToastError(
+        'Change your network to Avalanche to be able to view the proposals.'
+      )
+      return
+    }
+  }, [chainId, userWalletAddress])
 
   const secondsPerBlock =
     chains[process.env.NEXT_PUBLIC_MASTER === '1' ? 'avalanche' : 'fuji']
@@ -70,7 +90,6 @@ export const ProposalTable = () => {
         const secondsToEndProposal =
           (Number(proposal.endBlock) - Number(proposal.startBlock)) *
           secondsPerBlock
-
         proposal.timeToEndProposal = new Date(
           Number(createdProposal) + secondsToEndProposal * 1000
         )
@@ -80,9 +99,7 @@ export const ProposalTable = () => {
         return proposal
       })
     )
-
     const proposalComplete = await Promise.all(proposal)
-
     setProposalsList(proposalComplete)
   }
 
@@ -120,7 +137,7 @@ export const ProposalTable = () => {
           </tr>
         </S.Th>
         <tbody>
-          {proposalsList.map(proposal => (
+          {proposalsList?.map(proposal => (
             <Link key={proposal.id} href={`/gov/proposals/${proposal.number}`}>
               <tr>
                 <S.Td colSpan={2}>

@@ -3,7 +3,7 @@ import useSWR from 'swr'
 import request from 'graphql-request'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
-import { SUBGRAPH_URL, HeimCRPPOOL } from '../../../../constants/tokenAddresses'
+import { SUBGRAPH_URL } from '../../../../constants/tokenAddresses'
 
 import Loading from '../../../../components/Loading'
 

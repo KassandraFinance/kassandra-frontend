@@ -1,18 +1,20 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
-import Big from 'big.js'
+
 import BigNumber from 'bn.js'
+import Big from 'big.js'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
-import { Kacy, chains } from '../../../constants/tokenAddresses'
+import { Kacy, chains, Staking } from '../../../constants/tokenAddresses'
+
+import useStakingContract from '../../../hooks/useStakingContract'
 
 import { BNtoDecimal } from '../../../utils/numerals'
+import { registerToken } from '../../../utils/registerToken'
+
+import ExternalLink from '../../ExternalLink'
 
 import * as S from './styles'
-import { registerToken } from '../../../utils/registerToken'
-import { IPriceLPToken } from '..'
-import ExternalLink from '../../ExternalLink'
 
 interface IInfoStakeStaticProps {
   votingMultiplier: string;
@@ -25,27 +27,29 @@ interface IInfoStakeStaticProps {
 interface IDetailsProps {
   pid: number;
   hasExpired: boolean;
-  poolInfo: (pid: number) => Promise<any>;
   infoStakeStatic: IInfoStakeStaticProps;
   stakingToken: string;
   decimals: string;
   symbol: string;
-  tokenPrice: IPriceLPToken;
+  poolPrice: Big;
+  kacyPrice: Big;
 }
 
 const Details = ({
   pid,
   hasExpired,
-  poolInfo,
   infoStakeStatic,
   stakingToken,
   decimals,
   symbol,
-  tokenPrice
+  poolPrice,
+  kacyPrice
 }: IDetailsProps) => {
-  // eslint-disable-next-line prettier/prettier
-  const [depositedAmount, setDepositedAmount] = React.useState<BigNumber>(new BigNumber(-1))
+  const [depositedAmount, setDepositedAmount] = React.useState<BigNumber>(
+    new BigNumber(-1)
+  )
   const { trackEvent } = useMatomo()
+  const { poolInfo } = useStakingContract(Staking)
 
   function matomoEvent(action: string, name: string) {
     trackEvent({
@@ -69,25 +73,6 @@ const Details = ({
     return () => clearInterval(interval)
   }, [])
 
-  let price
-
-  switch (pid) {
-    case 8:
-      price = tokenPrice.k3c
-      break
-    case 7:
-      price = tokenPrice.priceLPJoe
-      break
-    case 6:
-      price = tokenPrice.aHYPE
-      break
-    case 5:
-      price = tokenPrice.priceLPPng
-      break
-    default:
-      price = tokenPrice.kacy
-  }
-
   return (
     <S.Details>
       <S.ValuesKacy>
@@ -101,10 +86,12 @@ const Details = ({
           </span>
           <span className="usd">
             &#8776;{' '}
-            {depositedAmount.lt(new BigNumber('0')) || price.lt(0)
+            {depositedAmount.lt(new BigNumber('0')) || poolPrice.lt(0)
               ? '...'
               : BNtoDecimal(
-                  Big(`0${depositedAmount}`).mul(price).div(Big(10).pow(18)),
+                  Big(`0${depositedAmount}`)
+                    .mul(poolPrice)
+                    .div(Big(10).pow(18)),
                   6,
                   2,
                   2
@@ -126,13 +113,13 @@ const Details = ({
           </span>
           <span className="usd">
             &#8776;{' '}
-            {infoStakeStatic.kacyRewards.lt(new BigNumber(0)) || price.lt(0)
+            {infoStakeStatic.kacyRewards.lt(new BigNumber(0)) || poolPrice.lt(0)
               ? '...'
               : hasExpired
               ? '0'
               : BNtoDecimal(
                   Big(infoStakeStatic.kacyRewards.toString())
-                    .mul(tokenPrice.kacy)
+                    .mul(kacyPrice)
                     .div(Big(10).pow(18)),
                   6,
                   2,

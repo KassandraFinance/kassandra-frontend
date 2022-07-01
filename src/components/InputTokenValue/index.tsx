@@ -6,6 +6,7 @@ import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
 import { Input } from './styles'
+import { BNtoDecimal } from '../../utils/numerals'
 
 interface IInputProps {
   max: string;
@@ -13,13 +14,17 @@ interface IInputProps {
   inputRef: React.RefObject<HTMLInputElement>;
   setInputValue: React.Dispatch<React.SetStateAction<BigNumber>>;
   disabled?: string;
+  swapAmount?: any;
+  swapInAmount?: any;
 }
 
 const InputTokenValue = ({
   decimals,
   inputRef,
   setInputValue,
-  disabled
+  disabled,
+  swapAmount,
+  swapInAmount
 }: IInputProps) => {
   if (!disabled) {
     disabled = ''
@@ -31,12 +36,22 @@ const InputTokenValue = ({
     }
   }
 
+  React.useEffect(() => {
+    if (inputRef && inputRef?.current) {
+      inputRef.current.value = BNtoDecimal(
+          swapAmount || new BigNumber(0),
+          decimals.toNumber()
+        )
+    }
+  }, [swapAmount, swapInAmount])
+
   return (
     <Tippy content={disabled} disabled={disabled.length === 0}>
       <Input
         className="noscroll"
         readOnly={disabled.length > 0}
         ref={inputRef}
+        // value={inputRef?.current?.value}
         type="number"
         placeholder="0"
         step="any"
