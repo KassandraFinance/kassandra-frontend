@@ -173,6 +173,7 @@ const Form = ({
       for (let i = 0; i < poolTokensArray.length; i += 1) {
         if (poolTokensArray[i].address === WAVAX) {
           newApprovals.push(true)
+          continue
         }
 
         newApprovals.push(
