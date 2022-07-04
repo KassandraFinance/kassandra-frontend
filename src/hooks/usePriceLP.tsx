@@ -15,7 +15,7 @@ const usePriceLP = () => {
     return contract
   }
 
-//maxPriorityFeePerGas: null, maxFeePerGas: null 1,500000031  [0] some((element: string) => element === 'PurchaseExecuted')  gas: 270804, gasPrice: 1500000031 
+//maxPriorityFeePerGas: null, maxFeePerGas: null 1,500000031  [0] some((element: string) => element === 'PurchaseExecuted')  gas: 270804, gasPrice: 1500000031
   const getReserves = async (addressPriceLP: string) => {
     const contract = getContract(addressPriceLP)
     const value = await contract.methods.getReserves().call({ from: userWalletAddress })
@@ -41,7 +41,7 @@ const usePriceLP = () => {
 
     const avaxInDollar = Big(daiReserve).div(Big(avaxReserve))
     const kacyPriceInDollar = avaxInDollar.mul(Big(avaxKacyReserve).div(kacyReserve))
-    
+
     if(getPriceLP) {
       const ERC20Contract = ERC20(addressKacyAvax)
 
@@ -57,8 +57,8 @@ const usePriceLP = () => {
 
     return { kacyPriceInDollar }
   }
-  
-  return { 
+
+  return {
     getContract,
     getReserves,
     getPriceKacyAndLP

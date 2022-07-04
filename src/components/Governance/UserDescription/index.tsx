@@ -1,34 +1,78 @@
 import React from 'react'
 import Image from 'next/image'
 import CopyToClipboard from 'react-copy-to-clipboard'
-
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
+import { RootStateOrAny, useSelector } from 'react-redux'
+
+import substr from '../../../utils/substr'
 import { ToastInfo } from '../../Toastify/toast'
 
 import infoGrayIcon from '../../../../public/assets/utilities/info-gray.svg'
-import userProfile from '../../../../public/assets/userProfile.svg'
 
 import ModalUserEditInfo from '../../Modals/ModalUserEditInfo'
+import NftImage from '../../NftImage'
 
 import * as S from './styles'
 
-const userDescriptionTest =
-  'Lorem ipsum dolor sit amet. Nndae voluptate aut galisum voluptatum noncusandae voluptate aut galisum voluptatum noncusandae voluptate aut galisum voluptatum noneum esse tempora sit iusto laudantium At saepe molestiae et odit excepturi. Et laudantium repudiandae sed molestias voluptatem aut exercitationem possimus ut ducimus enim vel reiciendis dolor quo optio excepturi est minima corrupti. Aut dicta voluptatibus ea quisquam dolore sit voluptatem porro sit fugiat voluptas ad perferendis perferendis est aspernatur quae qui blanditiis magnam'
+type UserProps = {
+  nickname: string,
+  twitter: string,
+  website: string,
+  telegram: string,
+  discord: string,
+  description: string,
+  image?: {
+    url: string,
+    isNFT: false
+  }
+}
 
-const UserDescription = () => {
+interface IUserDescriptionProps {
+  userWalletUrl: string | string[] | undefined;
+}
+
+const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+
   const [isOpenModal, setIsOpenModal] = React.useState(false)
   const [isStateSeeMore, setIsStateSeeMore] = React.useState(false)
-  const [userDescription, setUserDescription] =
-    React.useState(userDescriptionTest)
-  const [userData, setUserData] = React.useState({
+  const [userDescription, setUserDescription] = React.useState('')
+
+  const [imageUser, setImageUser] = React.useState({ url: '', isNFT: false })
+
+  const [userData, setUserData] = React.useState<UserProps>({
+    nickname: '',
+    twitter: '',
+    website: '',
+    telegram: '',
+    discord: '',
     description: ''
   })
 
+  const isConnectWallet = userWalletAddress === userWalletUrl
+
+  const walletUserString = Array.isArray(userWalletUrl)
+    ? userWalletUrl[0]
+    : userWalletUrl
+
   React.useEffect(() => {
-    setUserData({ description: userDescriptionTest })
-  }, [userDescriptionTest])
+    if (!userWalletUrl) return
+
+    fetch(`/api/profile/${userWalletUrl}`)
+      .then(res => res.json())
+      .then(data => {
+        const { image, ...profile } = data
+
+        setUserData({
+          ...profile,
+          description: profile.description ?? ''
+        }),
+          setImageUser({ url: image, isNFT: data.isNFT })
+      })
+  }, [userWalletAddress, userWalletUrl, isOpenModal])
 
   React.useEffect(() => {
     if (window.screen.width > 768) {
@@ -51,27 +95,45 @@ const UserDescription = () => {
       <S.UserDescription>
         <S.UserInfo>
           <S.UserInfoContent>
-            <Image
-              src={userProfile}
-              alt="Image from User"
-              width={72}
-              height={72}
-            />
-            <button onClick={() => setIsOpenModal(true)}>
-              Edit info
+            {imageUser.isNFT ? (
+              <NftImage NftUrl={imageUser.url} imageSize="medium" />
+            ) : imageUser.url !== undefined &&
+              imageUser.url !== null &&
+              imageUser.url !== '' ? (
               <img
-                src="/assets/utilities/edit-icon.svg"
-                alt="Follow our Twitter feed"
-                width="14"
-                height="14"
+                src={imageUser.url}
+                alt=""
+                width="90"
+                height="90"
+                id="userImage"
               />
-            </button>
+            ) : (
+              <Jazzicon
+                diameter={73}
+                seed={jsNumberForAddress(
+                  String(userWalletUrl) ||
+                    '0x1111111111111111111111111111111111111111'
+                )}
+              />
+            )}
+
+            {isConnectWallet && (
+              <button onClick={() => setIsOpenModal(true)}>
+                Edit info
+                <img
+                  src="/assets/utilities/edit-icon.svg"
+                  alt="Follow our Twitter feed"
+                  width="14"
+                  height="14"
+                />
+              </button>
+            )}
           </S.UserInfoContent>
-          <S.UserProfileContent>
-            <p>Cool Dude</p>
+          <S.UserProfileContent isSelectSeeMore={isStateSeeMore}>
+            <p>{userData.nickname}</p>
             <S.UserAddressContent>
-              0xDE...8dA1
-              <CopyToClipboard text="COLOCAR AQUI A CARTEIRA DO USUÁRIO PARA COPIAR">
+              {walletUserString && substr(walletUserString)}
+              <CopyToClipboard text={walletUserString ? walletUserString : ''}>
                 <button onClick={() => ToastInfo('Copy address')}>
                   <svg
                     width="14"
@@ -88,8 +150,7 @@ const UserDescription = () => {
                 </button>
               </CopyToClipboard>
               <a
-                // COLOCAR A CARTEIRA DO USUÁRIO APÓS A "...address/" \/
-                href={`https://testnet.snowtrace.io/address/`}
+                href={`https://testnet.snowtrace.io/address/${walletUserString}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -115,70 +176,84 @@ const UserDescription = () => {
             <ul>
               <li>
                 <S.SocialIcon
-                  href="https://twitter.com/dao_kassandra"
+                  href={`https://discord.com/${userData.discord}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  isActiveSocial={
+                    userData.discord !== '' && userData.discord !== undefined
+                  }
                 >
                   <Image
                     src="/assets/socialMidia/discord.svg"
                     alt="Follow our Twitter feed"
-                    width={20}
-                    height={20}
+                    width={15}
+                    height={15}
                   />
                 </S.SocialIcon>
               </li>
               <li>
                 <S.SocialIcon
-                  href="https://twitter.com/dao_kassandra"
+                  href={`https://twitter.com/${userData.twitter}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  isActiveSocial={
+                    userData.twitter !== '' && userData.twitter !== undefined
+                  }
                 >
                   <Image
                     src="/assets/socialMidia/twitter.svg"
                     alt="Follow our Twitter feed"
-                    width={20}
-                    height={20}
+                    width={15}
+                    height={15}
                   />
                 </S.SocialIcon>
               </li>
               <li>
                 <S.SocialIcon
-                  href="https://twitter.com/dao_kassandra"
+                  href={`https://telegram.com/${userData.telegram}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  isActiveSocial={
+                    userData.telegram !== '' && userData.telegram !== undefined
+                  }
                 >
                   <Image
                     src="/assets/socialMidia/telegram.svg"
                     alt="Follow our Twitter feed"
-                    width={20}
-                    height={20}
+                    width={16}
+                    height={16}
                   />
                 </S.SocialIcon>
               </li>
               <li>
                 <S.SocialIcon
-                  href="https://twitter.com/dao_kassandra"
+                  href={userData.website}
                   target="_blank"
                   rel="noopener noreferrer"
+                  isActiveSocial={
+                    userData.website !== '' && userData.website !== undefined
+                  }
                 >
                   <Image
                     src="/assets/socialMidia/webpage.svg"
                     alt="Follow our Twitter feed"
-                    width={20}
-                    height={20}
+                    width={17}
+                    height={17}
                   />
                 </S.SocialIcon>
               </li>
             </ul>
-            <S.EditInfoButton onClick={() => setIsOpenModal(true)}>
-              Edit info
-              <Image
-                src="/assets/utilities/edit-icon.svg"
-                alt="Follow our Twitter feed"
-                width={14}
-                height={14}
-              />
-            </S.EditInfoButton>
+            {isConnectWallet && (
+              <S.EditInfoButton onClick={() => setIsOpenModal(true)}>
+                Edit info
+                <Image
+                  src="/assets/utilities/edit-icon.svg"
+                  alt="Follow our Twitter feed"
+                  width={14}
+                  height={14}
+                />
+              </S.EditInfoButton>
+            )}
           </S.UserProfileContent>
         </S.UserInfo>
         <S.BarBottom />
@@ -197,7 +272,10 @@ const UserDescription = () => {
             </Tippy>
           </p>
           <S.DescriptionManagerInfo>
-            {userDescription}
+            {userDescription === ''
+              ? 'This address has not written any information yet'
+              : userDescription}
+
             {userData.description.length > 340 && (
               <S.ButtonSeeMore
                 isSeeMore={isStateSeeMore}
@@ -223,6 +301,10 @@ const UserDescription = () => {
         <ModalUserEditInfo
           modalOpen={isOpenModal}
           setModalOpen={setIsOpenModal}
+          userData={userData}
+          imageUser={imageUser}
+          setUserImage={setImageUser}
+          setUserData={setUserData}
         />
       )}
     </>

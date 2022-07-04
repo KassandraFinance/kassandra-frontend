@@ -84,7 +84,7 @@ const useProxy = (address: string, sipAddress: string, coreAddress: string) => {
           tokenAmountIn, 
           tokenOut, 
           minAmountOut,
-          new BigNumber('10').pow(new BigNumber(40))
+          new BigNumber('10').pow(new BigNumber(36))
         )
         .send({ from: walletAddress, value: avaxValue }, callback)
       return res
@@ -164,7 +164,7 @@ const useProxy = (address: string, sipAddress: string, coreAddress: string) => {
           tokenAmountIn, 
           tokenOut, 
           new BigNumber(0),
-          new BigNumber('10').pow(new BigNumber(40))
+          new BigNumber('10').pow(new BigNumber(36))
         )
         .call({ from: walletAddress, value: avaxValue })
 

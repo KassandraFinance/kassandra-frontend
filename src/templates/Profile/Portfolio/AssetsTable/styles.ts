@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import theme from '../../../styles/theme'
+import styled, { css } from 'styled-components'
+import theme from '../../../../styles/theme'
 
 export const TableWrapper = styled.div`
   margin-top: 1.6rem;
@@ -84,14 +84,14 @@ export const TBody = styled.tbody`
 
 export const Tr = styled.tr`
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: 1.5fr repeat(6, 1fr);
   align-items: center;
 
   margin: 0 3.2rem;
   padding: 2.4rem 0;
 
   @media (max-width: 540px) {
-    grid-template-columns: 1fr 0.5fr repeat(4, 1fr);
+    grid-template-columns: 1.5fr 0.5fr repeat(5, 1fr);
 
     margin: 0 2rem;
     padding: 2rem 0;
@@ -116,10 +116,40 @@ export const Th = styled.th`
 export const Td = styled.td`
   font-weight: ${theme.font.weight.medium};
   font-size: ${theme.font.sizes.font14};
+
   text-align: center;
 
   &:first-child {
     text-align: left;
+  }
+`
+
+export const ProductWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+`
+
+export const ImageWrapper = styled.div`
+  width: 2.4rem;
+  height: 2.4rem;
+
+  @media (max-width: 540px) {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+`
+
+export const FundWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+
+  span:last-of-type {
+    color: ${theme.colors.snow};
+    font-weight: ${theme.font.weight.light};
+    font-size: ${theme.font.sizes.font14};
+    line-height: 104%;
   }
 `
 
@@ -135,6 +165,17 @@ export const NetworkWrapper = styled.div`
   }
 `
 
+interface IChangeProps {
+  change: number;
+}
+
+// prettier-ignore
+export const Change = styled.div<IChangeProps>`
+  ${({ change }) => css`
+    color: ${change < 0 ? '#E8372C' : ' #5ee66b'};
+  `}
+`
+
 export const FlexWrapper = styled.div`
   span {
     color: #d3d3d3;
@@ -147,18 +188,6 @@ export const FlexWrapper = styled.div`
       color: #fcfcfc;
       font-weight: ${theme.font.weight.light};
       font-size: ${theme.font.sizes.font12};
-      text-transform: uppercase;
     }
   }
-`
-
-export const PoolWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-`
-
-export const PoolIconWrapper = styled.div`
-  display: flex;
-  gap: 0.4rem;
 `
