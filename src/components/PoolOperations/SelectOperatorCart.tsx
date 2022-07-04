@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { ChainDetails } from '../../utils/changeChain'
+
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce';
 
 import Form from './Form';
 
@@ -42,15 +43,7 @@ const SelectOperatorCart = ({
   corePoolAddress,
   productCategories
 }: ISelectOperatorProps) => {
-  const { trackEvent } = useMatomo()
-
-  function matomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'operations-invest',
-      action,
-      name
-    })
-  }
+  const { trackEventFunction } = useMatomoEcommerce()
 
   return (
     <>
@@ -61,7 +54,7 @@ const SelectOperatorCart = ({
           id="Invest"
           onChange={() => {
             setInputChecked('Invest')
-            matomoEvent('click-on-tab', 'invest')
+            trackEventFunction('click-on-tab', 'invest', 'operations-invest')
           }}
           checked={inputChecked === 'Invest'}
         />
@@ -77,7 +70,7 @@ const SelectOperatorCart = ({
           id="Withdraw"
           onChange={() => {
             setInputChecked('Withdraw')
-            matomoEvent('click-on-tab', 'withdraw')
+            trackEventFunction('click-on-tab', 'withdraw', 'operations-invest')
           }}
           checked={inputChecked === 'Withdraw'}
         />
@@ -95,7 +88,7 @@ const SelectOperatorCart = ({
           id="Swap"
           onChange={() => {
             setInputChecked('Swap')
-            matomoEvent('click-on-tab', 'swap')
+            trackEventFunction('click-on-tab', 'swap', 'operations-invest')
           }}
           checked={inputChecked === 'Swap'}
         />
@@ -119,7 +112,7 @@ const SelectOperatorCart = ({
                 id='Single_asset'
                 onChange={() => {
                   setTypeWithdrawChecked('Single_asset')
-                  matomoEvent('click-on-check', 'single-asset')
+                  trackEventFunction('click-on-check', 'single-asset', 'operations-invest')
                 }}
                 checked={typeWithdrawChecked === 'Single_asset'}
               />
@@ -137,7 +130,7 @@ const SelectOperatorCart = ({
                 id={'Best_value'}
                 onChange={() => {
                   setTypeWithdrawChecked('Best_value')
-                  matomoEvent('click-on-check', 'best-value')
+                  trackEventFunction('click-on-check', 'best-value', 'operations-invest')
                 }}
                 checked={typeWithdrawChecked === 'Best_value'}
               />

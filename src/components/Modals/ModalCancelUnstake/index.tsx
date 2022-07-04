@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
 import useStakingContract from '../../../hooks/useStakingContract'
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
 import waitTransaction, {
   MetamaskError,
@@ -32,15 +32,8 @@ const ModalCancelUnstake = ({
   symbol
 }: IModalRequestUnstakeProps) => {
   const kacyStake = useStakingContract(Staking)
-  const { trackEvent } = useMatomo()
 
-  function matomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'modal-cancel-unstaking',
-      action,
-      name
-    })
-  }
+  const { trackEventFunction } = useMatomoEcommerce()
 
   const cancelUnstakeCallback = React.useCallback((): TransactionCallback => {
     return async (error: MetamaskError, txHash: string) => {
@@ -56,7 +49,11 @@ const ModalCancelUnstake = ({
         return
       }
 
-      matomoEvent('click-on-cancel', `${symbol}`)
+      trackEventFunction(
+        'click-on-cancel',
+        `${symbol}`,
+        'modal-cancel-unstaking'
+      )
       ToastWarning(`Confirming cancelling of unstaking ${symbol}...`)
       const txReceipt = await waitTransaction(txHash)
 

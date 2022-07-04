@@ -6,7 +6,6 @@ import Image from 'next/image'
 import { useSelector, RootStateOrAny } from 'react-redux'
 
 import Tippy from '@tippyjs/react'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
 import useSWR from 'swr'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
@@ -22,6 +21,7 @@ import { LP_KACY_AVAX_PNG } from '../../constants/pools'
 import usePriceLP from '../../hooks/usePriceLP'
 import useStakingContract from '../../hooks/useStakingContract'
 import { ERC20 } from '../../hooks/useERC20Contract'
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
 import { GET_INFO_POOL } from './graphql'
 
@@ -134,7 +134,7 @@ const StakeCard = ({
     lockPeriod: '...'
   })
   const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-  const { trackEvent } = useMatomo()
+  const { trackEventFunction } = useMatomoEcommerce()
   const { getPriceKacyAndLP } = usePriceLP()
   const stakingContract = useStakingContract(Staking)
 
@@ -151,14 +151,6 @@ const StakeCard = ({
     process.env.NEXT_PUBLIC_MASTER === '1' ? 'Avalanche' : 'Fuji',
     stakeWithVotingPower ? 'VotingStake' : 'OtherStake'
   ]
-
-  function matomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'stake-farm',
-      action,
-      name
-    })
-  }
 
   function openStakeAndWithdraw(transaction: 'staking' | 'unstaking') {
     setIsModalStake(true)
@@ -221,7 +213,7 @@ const StakeCard = ({
       const txReceipt = await waitTransaction(txHash)
 
       if (txReceipt.status) {
-        matomoEvent('approve-contract', `${symbol}`)
+        trackEventFunction('approve-contract', `${symbol}`, 'stake-farm')
         ToastSuccess(`Approval of ${symbol} confirmed`)
         return
       }
@@ -244,7 +236,7 @@ const StakeCard = ({
       const txReceipt = await waitTransaction(txHash)
 
       if (txReceipt.status) {
-        matomoEvent('reward-claim', `${symbol}`)
+        trackEventFunction('reward-claim', `${symbol}`, 'stake-farm')
         ToastSuccess(`Rewards claimed successfully`)
         return
       }
@@ -501,9 +493,10 @@ const StakeCard = ({
                   isConnect={!!userWalletAddress}
                   onClick={() => {
                     setIsDetails(!isDetails)
-                    matomoEvent(
+                    trackEventFunction(
                       'click-details',
-                      `${isDetails ? 'details-closed' : 'details-open'}`
+                      `${isDetails ? 'details-closed' : 'details-open'}`,
+                      'stake-farm'
                     )
                   }}
                 >

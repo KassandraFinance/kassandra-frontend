@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import { useSelector, RootStateOrAny } from 'react-redux'
 
@@ -12,6 +11,7 @@ import { Staking, LPDaiAvax } from '../../../constants/tokenAddresses'
 import usePriceLP from '../../../hooks/usePriceLP'
 import useERC20Contract from '../../../hooks/useERC20Contract'
 import useStakingContract from '../../../hooks/useStakingContract'
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
 import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
 
@@ -47,7 +47,7 @@ const MyAsset = ({
   decimals
 }: IMyAssetProps) => {
   const router = useRouter()
-  const { trackEvent } = useMatomo()
+  const { trackEventFunction } = useMatomoEcommerce()
 
   const { getPriceKacyAndLP } = usePriceLP()
   const tokenWallet = useERC20Contract(crpPoolAddress)
@@ -65,14 +65,6 @@ const MyAsset = ({
     fund: Big(-1)
   })
   const [apr, setApr] = React.useState<BigNumber>(new BigNumber(0))
-
-  function matomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'stake-details',
-      action,
-      name
-    })
-  }
 
   async function getStakedToken() {
     const staked = await stakingContract.userInfo(pid, userWalletAddress)
@@ -172,7 +164,11 @@ const MyAsset = ({
               symbol.toLocaleUpperCase(),
               Number(decimals)
             )
-            matomoEvent('click-add-metamask', `add-${symbol}`)
+            trackEventFunction(
+              'click-add-metamask',
+              `add-${symbol}`,
+              'my-asset'
+            )
           }}
         >
           <Image
@@ -253,7 +249,10 @@ const MyAsset = ({
           size="huge"
           onClick={
             userWalletAddress
-              ? () => router.push('/farm')
+              ? () => {
+                  trackEventFunction('click-on-button', 'stake', 'my-asset')
+                  router.push('/farm')
+                }
               : () => setIsModaWallet(true)
           }
         />

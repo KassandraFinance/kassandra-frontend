@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
+
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce';
 
 import * as S from './styles'
 
@@ -24,17 +25,8 @@ const SelectOperatorMobile = ({
   inputCheckedBarMobile,
   setInputCheckedBarMobile,
   setModalOpen
-
 }: ISelectOperatorMobileProps) => {
-  const { trackEvent } = useMatomo()
-
-  function matomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'operations-invest',
-      action,
-      name
-    })
-  }
+  const { trackEventFunction } = useMatomoEcommerce()
 
   return (
     <>
@@ -46,7 +38,7 @@ const SelectOperatorMobile = ({
             id="InvestMobile"
             onChange={() => {
               setInputCheckedBarMobile('Invest')
-              matomoEvent('click-on-tab', 'invest')
+              trackEventFunction('click-on-tab', 'invest', 'operations-invest')
             }}
             checked={inputCheckedBarMobile === 'Invest'}
           />
@@ -63,7 +55,7 @@ const SelectOperatorMobile = ({
             id="WithdrawMobile"
             onChange={() => {
               setInputCheckedBarMobile('Withdraw')
-              matomoEvent('click-on-tab', 'withdraw')
+              trackEventFunction('click-on-tab', 'withdraw','operations-invest')
             }}
             checked={inputCheckedBarMobile === 'Withdraw'}
           />
@@ -82,7 +74,7 @@ const SelectOperatorMobile = ({
             id="SwapMobile"
             onChange={() => {
               setInputCheckedBarMobile('Swap')
-              matomoEvent('click-on-tab', 'swap')
+              trackEventFunction('click-on-tab', 'swap','operations-invest')
             }}
             checked={inputCheckedBarMobile === 'Swap'}
           />

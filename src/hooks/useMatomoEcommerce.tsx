@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 function useMatomoEcommerce() {
-  const { pushInstruction, trackPageView } = useMatomo()
+  const { pushInstruction, trackPageView, trackEvent } = useMatomo()
 
   const trackProductPageView = useCallback(
     (
@@ -64,12 +64,21 @@ function useMatomoEcommerce() {
     [pushInstruction]
   )
 
+  const trackEventFunction = (
+    action: string,
+    name: string,
+    category: string
+  ) => {
+    trackEvent({ action, name, category })
+  }
+
   return {
     trackProductPageView,
     trackCategoryPageView,
     trackBuying,
     trackCancelBuying,
-    trackBought
+    trackBought,
+    trackEventFunction
   }
 }
 

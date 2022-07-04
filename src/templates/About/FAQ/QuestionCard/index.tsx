@@ -1,4 +1,5 @@
 import React from 'react'
+import useMatomoEcommerce from '../../../../hooks/useMatomoEcommerce'
 
 import * as S from './styles'
 
@@ -17,9 +18,20 @@ const QuestionCard = ({
 }: QuestionCardProps) => {
   const [isOpen, setIsOpen] = React.useState(false)
 
+  const { trackEventFunction } = useMatomoEcommerce()
+
   return (
     <S.Question>
-      <S.QuestionText onClick={() => setIsOpen(!isOpen)}>
+      <S.QuestionText
+        onClick={() => {
+          setIsOpen(!isOpen)
+          trackEventFunction(
+            'click-on-button',
+            'frequently-asked-questions',
+            'faq'
+          )
+        }}
+      >
         {question}
         {isOpen ? (
           <img src="assets/iconGradient/FAQ-minus.svg" />

@@ -1,4 +1,5 @@
 import React from 'react'
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 import TextField from '../TextField'
 import { ToastSuccess } from '../Toastify/toast'
 
@@ -14,6 +15,7 @@ interface IOnChangeFormParam {
   value: string;
 }
 const SubscribeBanner = () => {
+  const { trackEventFunction } = useMatomoEcommerce()
   const [formState, setFormState] = React.useState<IFormSignUpParams>({})
   const onChangeFormParam = ({ key, value }: IOnChangeFormParam) => {
     setFormState({ ...formState, [key]: value })
@@ -21,6 +23,7 @@ const SubscribeBanner = () => {
 
   const handleSubmit = () => {
     ToastSuccess('Successfully subscribed')
+    trackEventFunction('click-on-button', 'send-email', 'subscribe-email')
     setTimeout(() => {
       setFormState({ email: '' })
     }, 1000)
