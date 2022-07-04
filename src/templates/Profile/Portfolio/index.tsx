@@ -168,13 +168,13 @@ const Portfolio = ({
         />
       </S.paddingWrapper>
 
-      <S.paddingLeftWrapper>
+      <S.AssetsCardContainer>
         <AssetsCard
           profileAddress={profileAddress}
           cardstakesPoolNew={cardstakesPoolNew}
           priceToken={priceToken}
         />
-      </S.paddingLeftWrapper>
+      </S.AssetsCardContainer>
 
       {isModalWallet && <ModalWalletConnect setModalOpen={setIsModalWallet} />}
     </>

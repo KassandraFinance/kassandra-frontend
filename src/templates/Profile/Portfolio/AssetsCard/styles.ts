@@ -10,6 +10,10 @@ export const AssetsContainer = styled.div<IAssetsContainerProps>`
   justify-content: ${props =>
     props.isThreeCards ? 'space-between' : 'space-around'};
   flex-wrap: wrap;
+
+  @media (max-width: 640px) {
+    justify-content: center;
+  }
 `
 
 export const AssetsHeaderContent = styled.div`
@@ -59,11 +63,10 @@ export const Tooltip = styled.div`
 
 export const Balance = styled.span`
   display: flex;
-  /* align-items: center; */
 `
 
 export const AssetsValue = styled.span`
-  padding: 1rem;
+  padding: 0.8rem 1rem 0.4rem 1rem;
 
   font-size: ${theme.font.sizes.font24};
   font-weight: ${theme.font.weight.medium};
@@ -80,7 +83,7 @@ export const AssetsValue = styled.span`
 
 export const AssetsValueDollar = styled.p`
   color: #d3d3d3;
-  font-size: ${theme.font.sizes.font12};
+  font-size: ${theme.font.sizes.font14};
   font-weight: ${theme.font.weight.normal};
   letter-spacing: normal;
 `
@@ -94,7 +97,7 @@ export const LineSeperator = styled.span`
 `
 
 export const AssetsName = styled.p`
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.4rem;
 
   font-size: ${theme.font.sizes.font20};
   font-weight: ${theme.font.weight.medium};

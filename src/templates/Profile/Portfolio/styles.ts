@@ -19,3 +19,9 @@ export const paddingLeftWrapper = styled.div`
     margin-right: -1.6rem;
   }
 `
+
+export const AssetsCardContainer = styled.div`
+  display: center;
+  justify-content: center;
+  margin-top: ${theme.spacings.space32};
+`
