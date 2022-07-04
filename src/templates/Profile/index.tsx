@@ -92,14 +92,6 @@ interface ImyFundsType {
 }
 
 const Profile = () => {
-  const router = useRouter()
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-
-  const { userInfo } = useStakingContract(Staking)
-  const { getReserves } = usePriceLP()
-  const lpToken = useERC20Contract(LPKacyAvaxPNG)
-  const lpJoeToken = useERC20Contract(LPKacyAvaxJOE)
-
   const [assetsValueInWallet, setAssetsValueInWallet] =
     React.useState<IAssetsValueWalletProps>({ '': new BigNumber(-1) })
   const [cardstakesPool, setCardStakesPool] = React.useState<IKacyLpPool[]>([])
@@ -122,6 +114,15 @@ const Profile = () => {
   const [isSelectTab, setIsSelectTab] = React.useState<
     string | string[] | undefined
   >('portfolio')
+
+  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+
+  const router = useRouter()
+
+  const { userInfo } = useStakingContract(Staking)
+  const { getReserves } = usePriceLP()
+  const lpToken = useERC20Contract(LPKacyAvaxPNG)
+  const lpJoeToken = useERC20Contract(LPKacyAvaxJOE)
 
   const profileAddress = router.query.profileAddress
   const isSelectQueryTab = router.query.tab
@@ -215,7 +216,6 @@ const Profile = () => {
   }
 
   async function getAmountToken() {
-    setCardStakesPool([])
     let kacyObject: IKacyLpPool = {
       pid: 0,
       address: '',
@@ -223,6 +223,8 @@ const Profile = () => {
       poolName: '',
       amount: new BigNumber(0)
     }
+
+    setCardStakesPool([])
 
     await Promise.all(
       allPools.map(async pool => {
@@ -279,10 +281,10 @@ const Profile = () => {
   }, [products])
 
   React.useEffect(() => {
-    if (data) {
+    if (data?.pools) {
       // setTotalVotingPower(data.user.votingPower)
 
-      data?.pools?.map(
+      data.pools.map(
         (prod: { id: string, price_usd: string, symbol: string }) => {
           const prodPrice = new Big(prod.price_usd)
 
