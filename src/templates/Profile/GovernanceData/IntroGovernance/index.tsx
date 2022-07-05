@@ -1,6 +1,5 @@
 import React from 'react'
 import Image from 'next/image'
-import { useSelector, RootStateOrAny } from 'react-redux'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
 
@@ -9,6 +8,7 @@ import 'tippy.js/dist/tippy.css'
 
 import { Staking } from '../../../../constants/tokenAddresses'
 
+import { useAppSelector } from '../../../../store/hooks'
 import useStakingContract from '../../../../hooks/useStakingContract'
 
 import { BNtoDecimal } from '../../../../utils/numerals'
@@ -42,7 +42,7 @@ const IntroGovernance = ({
     new BigNumber(0)
   )
 
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   const { userInfo } = useStakingContract(Staking)
 

@@ -4,7 +4,7 @@ import { ToastError } from '../../Toastify/toast'
 import 'tippy.js/dist/tippy.css'
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
-import { RootStateOrAny, useSelector } from 'react-redux'
+import { useAppSelector } from '../../../store/hooks'
 
 import web3 from '../../../utils/web3'
 
@@ -43,7 +43,7 @@ const ModalUserEditInfo = ({
   setUserImage,
   setUserData
 }: IModalUserEditInfoProps) => {
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
   const inputRefModal = React.useRef<HTMLInputElement>(null)
 
   const [isStateSocialMidia, setIsStateSocialMidia] = React.useState(false)

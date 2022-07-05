@@ -1,13 +1,13 @@
 import { AbiItem } from "web3-utils"
-import { useSelector, RootStateOrAny } from 'react-redux'
 
 import web3 from '../utils/web3'
 import PriceLP from "../constants/abi/PriceLP.json"
 import Big from "big.js"
 import { ERC20 } from "./useERC20Contract"
+import { useAppSelector } from "../store/hooks"
 
 const usePriceLP = () => {
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   const getContract = (address: string) => {
     // eslint-disable-next-line prettier/prettier

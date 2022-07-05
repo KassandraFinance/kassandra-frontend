@@ -1,10 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useSelector, RootStateOrAny } from 'react-redux'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import substr from '../../utils/substr'
+import { useAppSelector } from '../../store/hooks'
 
 import Button from '../Button'
 import DropdownInvest from '../Dropdown'
@@ -32,7 +32,7 @@ const Header = () => {
 
   const { trackEvent } = useMatomo()
 
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   function clickMatomoEvent(action: string, name: string) {
     trackEvent({

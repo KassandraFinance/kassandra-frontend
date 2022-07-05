@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useSelector, RootStateOrAny } from 'react-redux'
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
@@ -49,6 +48,7 @@ import proposalWaitingIcon from '../../../../../public/assets/statusProposal/pro
 import proposalStatusHistory from '../../../../../public/assets/iconGradient/timer-grandient.svg'
 
 import * as S from './styles'
+import { useAppSelector } from '../../../../store/hooks'
 
 interface IRequestDataProposal {
   proposal: [
@@ -181,7 +181,7 @@ const Proposal = () => {
   const governance = useGovernance(GovernorAlpha)
   const votingPower = useVotingPower(Staking)
 
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const { userWalletAddress } = useAppSelector(state => state)
 
   const { data } = useSWR<IRequestDataProposal>([GET_PROPOSAL], query =>
     request(SUBGRAPH_URL, query, {

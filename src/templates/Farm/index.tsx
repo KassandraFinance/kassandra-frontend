@@ -1,14 +1,13 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
 
-import { useSelector, RootStateOrAny } from 'react-redux'
-
 import BigNumber from 'bn.js'
 
 import { chains, Staking } from '../../constants/tokenAddresses'
 
 import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 import useStakingContract from '../../hooks/useStakingContract'
+import { useAppSelector } from '../../store/hooks'
 
 import Web3Disabled from '../../components/Web3Disabled'
 import VotingPower from '../../components/VotingPower'
@@ -34,9 +33,7 @@ const StakeFarm = () => {
   const { trackCategoryPageView } = useMatomoEcommerce()
   const { balance } = useStakingContract(Staking)
 
-  const { userWalletAddress, chainId } = useSelector(
-    (state: RootStateOrAny) => state
-  )
+  const { userWalletAddress, chainId } = useAppSelector(state => state)
 
   const chain =
     process.env.NEXT_PUBLIC_MASTER === '1' ? chains.avalanche : chains.fuji

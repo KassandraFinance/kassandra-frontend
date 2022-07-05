@@ -2,11 +2,11 @@ import React from 'react'
 import Image from 'next/image'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
-import { useDispatch } from 'react-redux'
 
 import { GET_POOL_PRICE } from './graphql'
 import { SUBGRAPH_URL } from '../../../constants/tokenAddresses'
-import { actionSetPerformanceValues } from '../../../store/modules/performanceValues/actions'
+import { useAppDispatch } from '../../../store/hooks'
+import { setPerformanceValues } from '../../../store/reducers/performanceValues'
 
 import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
 
@@ -17,7 +17,7 @@ interface IChangeProps {
 }
 
 const Change = ({ crpPoolAddress }: IChangeProps) => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const [arrChangePrice, setArrChangePrice] = React.useState<string[]>([])
 
   const { data } = useSWR([GET_POOL_PRICE], query =>
@@ -58,7 +58,7 @@ const Change = ({ crpPoolAddress }: IChangeProps) => {
       setArrChangePrice(arrChangePrice)
 
       dispatch(
-        actionSetPerformanceValues({
+        setPerformanceValues({
           title: 'Weekly Performance',
           allPerformancePeriod: {
             'Daily Performance': changeDay,

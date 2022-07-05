@@ -4,8 +4,6 @@ import Image from 'next/image'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 
-import { useSelector, RootStateOrAny } from 'react-redux'
-
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
 import { TokenImages } from '../../../store/modules/poolImages/types'
 
@@ -15,6 +13,7 @@ import { priceDollar } from '../../../utils/priceDollar'
 import none from '../../../../public/assets/icons/coming-soon.svg'
 
 import * as S from './styles'
+import { useAppSelector } from '../../../store/hooks'
 
 interface IInputBestValueProps {
   poolTokenDetails: TokenDetails[];
@@ -31,8 +30,8 @@ const InputBestValue = ({
   swapOutBalance,
   setPriceInDollarOnWithdraw
 }: IInputBestValueProps) => {
-  const { poolImages }: { poolImages: TokenImages } = useSelector(
-    (state: RootStateOrAny) => state
+  const { poolImages }: { poolImages: TokenImages } = useAppSelector(
+    state => state
   )
 
   React.useEffect(() => {

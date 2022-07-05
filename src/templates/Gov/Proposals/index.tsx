@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { useSelector, RootStateOrAny } from 'react-redux'
+import { useAppSelector } from '../../../store/hooks'
 
 import Header from '../../../components/Header'
 import TitleSection from '../../../components/TitleSection'
@@ -17,7 +17,7 @@ import externalLink from '../../../../public/assets/utilities/external-link.svg'
 import * as S from './styles'
 
 const AllProposals = () => {
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   return (
     <>

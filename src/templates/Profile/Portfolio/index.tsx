@@ -1,8 +1,8 @@
 import React from 'react'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
-
-import { useSelector, RootStateOrAny } from 'react-redux'
+import { useRouter } from 'next/router'
+import { useAppSelector } from '../../../store/hooks'
 
 import PortfolioHeading from '../../../components/PortfolioHeading'
 import AssetsTable from './AssetsTable'
@@ -19,7 +19,6 @@ import { products, ProductDetails } from '../../../constants/tokenAddresses'
 
 import * as S from './styles'
 import { IAssetsValueWalletProps, IKacyLpPool } from '..'
-import { useRouter } from 'next/router'
 
 interface IProfileProps {
   profileAddress: string;
@@ -44,7 +43,7 @@ const Portfolio = ({
   myFunds
 }: IProfileProps) => {
   const router = useRouter()
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   // eslint-disable-next-line prettier/prettier
   const [tokenizedFunds, setTokenizedFunds] = React.useState<ProductDetails[]>([])

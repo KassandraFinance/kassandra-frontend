@@ -3,7 +3,7 @@ import Image from 'next/image'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 import Tippy from '@tippyjs/react'
-import { RootStateOrAny, useSelector } from 'react-redux'
+import { useAppSelector } from '../../../../store/hooks'
 
 import AnyCard from '../../../../components/AnyCard'
 
@@ -52,7 +52,7 @@ const namePools: { [key: string]: string } = {
 
 // eslint-disable-next-line prettier/prettier
 const AssetsCard = ({ profileAddress, priceToken, cardstakesPoolNew }: IStakingTableProps) => {
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   return (
     <>

@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useSelector, RootStateOrAny } from 'react-redux'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
 import Big from 'big.js'
@@ -9,6 +8,7 @@ import Big from 'big.js'
 import { SUBGRAPH_URL, Staking } from '../../../constants/tokenAddresses'
 import { GET_USER } from './graphql'
 
+import { useAppSelector } from '../../../store/hooks'
 import useStakingContract from '../../../hooks/useStakingContract'
 
 import TitleSection from '../../../components/TitleSection'
@@ -42,7 +42,7 @@ interface IGovernanceDataProps {
 
 const GovernanceData = ({ address }: IGovernanceDataProps) => {
   const router = useRouter()
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   const [totalUserReceived, setUserReceived] = React.useState(Big(0))
   const [totalUserDelegating, setUserDelegating] = React.useState(Big(0))

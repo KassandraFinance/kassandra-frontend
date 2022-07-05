@@ -5,13 +5,12 @@ import BigNumber from 'bn.js'
 import Big from 'big.js'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
-import { useSelector, RootStateOrAny } from 'react-redux'
-
 import { Staking, LPDaiAvax } from '../../../constants/tokenAddresses'
 
 import usePriceLP from '../../../hooks/usePriceLP'
 import useERC20Contract from '../../../hooks/useERC20Contract'
 import useStakingContract from '../../../hooks/useStakingContract'
+import { useAppSelector } from '../../../store/hooks'
 
 import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
 
@@ -53,7 +52,7 @@ const MyAsset = ({
   const tokenWallet = useERC20Contract(crpPoolAddress)
   const stakingContract = useStakingContract(Staking)
 
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
   const [stakedToken, setStakedToken] = React.useState<BigNumber>(

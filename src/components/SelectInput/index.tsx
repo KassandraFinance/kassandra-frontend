@@ -1,6 +1,5 @@
 import React from 'react'
 import Image from 'next/image'
-import { useSelector, RootStateOrAny } from 'react-redux'
 
 import { TokenDetails } from '../../store/modules/poolTokens/types'
 import { TokenImages } from '../../store/modules/poolImages/types'
@@ -9,6 +8,7 @@ import arrow from '../../../public/assets/utilities/arrow-select-down.svg'
 import none from '../../../public/assets/icons/coming-soon.svg'
 
 import * as S from './styles'
+import { useAppSelector } from '../../store/hooks'
 
 interface ISelectInputProps {
   poolTokens: TokenDetails[];
@@ -23,9 +23,7 @@ const SelectInputDefault = ({
 }: ISelectInputProps) => {
   const [openOptions, setOpenOptions] = React.useState<boolean>(false)
 
-  const { poolImages }: { poolImages: TokenImages } = useSelector(
-    (state: RootStateOrAny) => state
-  )
+  const { poolImages } = useAppSelector(state => state)
 
   return (
     <S.SelectToken openOptions={openOptions}>

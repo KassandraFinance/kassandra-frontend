@@ -6,10 +6,9 @@ import useSWR from 'swr'
 import request from 'graphql-request'
 import Big from 'big.js'
 
-import { useSelector, RootStateOrAny } from 'react-redux'
-
 import useERC20Contract, { ERC20 } from '../../hooks/useERC20Contract'
 import useStakingContract from '../../hooks/useStakingContract'
+import { useAppSelector } from '../../store/hooks'
 import usePriceLP from '../../hooks/usePriceLP'
 
 import { GET_PROFILE } from './graphql'
@@ -115,7 +114,7 @@ const Profile = () => {
     string | string[] | undefined
   >('portfolio')
 
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   const router = useRouter()
 

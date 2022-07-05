@@ -3,8 +3,6 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import { useSelector, RootStateOrAny } from 'react-redux'
-
 import Tippy from '@tippyjs/react'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 import useSWR from 'swr'
@@ -22,6 +20,7 @@ import { LP_KACY_AVAX_PNG } from '../../constants/pools'
 import usePriceLP from '../../hooks/usePriceLP'
 import useStakingContract from '../../hooks/useStakingContract'
 import { ERC20 } from '../../hooks/useERC20Contract'
+import { useAppSelector } from '../../store/hooks'
 
 import { GET_INFO_POOL } from './graphql'
 
@@ -133,7 +132,7 @@ const StakeCard = ({
     vestingPeriod: '...',
     lockPeriod: '...'
   })
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
   const { trackEvent } = useMatomo()
   const { getPriceKacyAndLP } = usePriceLP()
   const stakingContract = useStakingContract(Staking)

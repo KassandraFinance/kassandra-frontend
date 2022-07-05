@@ -2,6 +2,7 @@ import React from 'react'
 import useSWR from 'swr'
 import request from 'graphql-request'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
+import { useAppSelector } from '../../../../store/hooks'
 
 import { SUBGRAPH_URL } from '../../../../constants/tokenAddresses'
 
@@ -14,7 +15,6 @@ import ChartAllocation from './ChartAllocation'
 import { GET_CHART } from './graphql'
 
 import * as S from './styles'
-import { RootStateOrAny, useSelector } from 'react-redux'
 
 const arrPeriod: string[] = ['1W', '1M', '3M', '1Y']
 
@@ -25,9 +25,10 @@ interface IChartProductsProps {
 
 const ChartProducts = ({ crpPoolAddress, height }: IChartProductsProps) => {
   const {
-    periodSelected: reduxPeriodSelected,
-    chartSelected: reduxChartSelected
-  } = useSelector((state: RootStateOrAny) => state)
+    chartSelected: reduxChartSelected,
+    periodSelected: reduxPeriodSelected
+  } = useAppSelector(state => state)
+
   const [inputChecked, setInputChecked] = React.useState<string>('Price')
   const [price, setPrice] = React.useState([])
   const [tvl, setTvl] = React.useState([])
