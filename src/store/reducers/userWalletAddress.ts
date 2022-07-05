@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const initialState = ''
 
@@ -6,7 +6,7 @@ export const userWalletAddressSlice = createSlice({
   name: 'userWalletAddress',
   initialState,
   reducers: {
-    setUserWalletAddress: (state: any, action: any) => {
+    setUserWalletAddress: (state: any, action: PayloadAction<string>) => {
       return action.payload
     }
   }

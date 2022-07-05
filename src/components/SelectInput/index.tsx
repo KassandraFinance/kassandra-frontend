@@ -1,8 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-import { TokenDetails } from '../../store/modules/poolTokens/types'
-import { TokenImages } from '../../store/modules/poolImages/types'
+import { TokenDetails } from '../../context/PoolTokensContext'
 
 import arrow from '../../../public/assets/utilities/arrow-select-down.svg'
 import none from '../../../public/assets/icons/coming-soon.svg'

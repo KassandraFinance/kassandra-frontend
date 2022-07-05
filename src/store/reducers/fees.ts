@@ -1,6 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-const initialState = {
+interface FeesSlice {
+  Invest: string;
+  Withdraw: string;
+  Swap: string;
+}
+
+const initialState: FeesSlice = {
   Invest: '...',
   Withdraw: '...',
   Swap: '...'
@@ -10,7 +16,7 @@ export const feesSlice = createSlice({
   name: 'fees',
   initialState,
   reducers: {
-    setFees: (state: any, action: any) => {
+    setFees: (state: any, action: PayloadAction<FeesSlice>) => {
       return action.payload
     }
   }

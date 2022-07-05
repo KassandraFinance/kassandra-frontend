@@ -17,7 +17,7 @@ import {
 } from '../../constants/tokenAddresses'
 
 import { BNtoDecimal } from '../../utils/numerals'
-import { TokenDetails } from '../../store/modules/poolTokens/types'
+import { TokenDetails } from '../../context/PoolTokensContext'
 import { useAppDispatch } from '../../store/hooks'
 import { setFees } from '../../store/reducers/fees'
 

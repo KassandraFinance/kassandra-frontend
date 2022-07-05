@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const initialState = 0
 
@@ -6,7 +6,7 @@ export const chainIdSlice = createSlice({
   name: 'chainId',
   initialState,
   reducers: {
-    setChainId: (state: any, action: any) => {
+    setChainId: (state: number, action: PayloadAction<number>) => {
       return action.payload
     }
   }

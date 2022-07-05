@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export type AllPerformancePeriod = {
   [key: string]: string
@@ -17,7 +17,10 @@ export const performanceValuesSlice = createSlice({
   name: 'performanceValues',
   initialState,
   reducers: {
-    setPerformanceValues: (state: any, action: any) => {
+    setPerformanceValues: (
+      state: any,
+      action: PayloadAction<PerformanceValues>
+    ) => {
       return { ...state, ...action.payload }
     }
   }

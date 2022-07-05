@@ -4,7 +4,7 @@ import BigNumber from 'bn.js'
 import Big from 'big.js'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
-import { TokenDetails } from '../../../store/modules/poolTokens/types'
+import { TokenDetails } from '../../../context/PoolTokensContext'
 
 import InputTokenValue from '../../InputTokenValue'
 import SelectInput from '../../SelectInput'

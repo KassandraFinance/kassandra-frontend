@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const initialState = ''
 
@@ -7,7 +7,7 @@ export const periodSelectedSlice = createSlice({
   initialState,
 
   reducers: {
-    setPeriodSelected: (state: any, action: any) => {
+    setPeriodSelected: (state: any, action: PayloadAction<string>) => {
       return action.payload
     }
   }

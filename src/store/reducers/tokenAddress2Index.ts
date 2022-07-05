@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface Address2Index {
   [key: string]: number;
@@ -10,7 +10,10 @@ export const tokenAddress2IndexSlice = createSlice({
   name: 'tokenAddress2Index',
   initialState,
   reducers: {
-    setTokenAddress2Index: (state: any, action: any) => {
+    setTokenAddress2Index: (
+      state: any,
+      action: PayloadAction<Address2Index>
+    ) => {
       return action.payload
     }
   }

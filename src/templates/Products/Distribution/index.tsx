@@ -4,7 +4,7 @@ import Big from 'big.js'
 import Link from 'next/link'
 
 import { ProductDetails } from '../../../constants/tokenAddresses'
-import { TokenDetails } from '../../../store/modules/poolTokens/types'
+import { TokenDetails } from '../../../context/PoolTokensContext'
 import { BNtoDecimal } from '../../../utils/numerals'
 
 import none from '../../../../public/assets/icons/coming-soon.svg'

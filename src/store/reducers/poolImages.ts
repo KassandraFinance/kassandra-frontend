@@ -1,12 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-const initialState: any = {}
+const initialState: TokenImages = {}
+
+export interface TokenImages {
+  [key: string]: string;
+}
 
 export const poolImagesSlice = createSlice({
   name: 'poolImages',
   initialState,
   reducers: {
-    setPoolImages: (state: any, action: any) => {
+    setPoolImages: (state: any, action: PayloadAction<TokenImages>) => {
       return action.payload
     }
   }

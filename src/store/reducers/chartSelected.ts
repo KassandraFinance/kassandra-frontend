@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const initialState = ''
 
@@ -6,7 +6,8 @@ export const chartSelectedSlice = createSlice({
   name: 'chartSelected',
   initialState,
   reducers: {
-    setChartSelected: (state: any, action: any) => action.payload
+    setChartSelected: (state: any, action: PayloadAction<string>) =>
+      action.payload
   }
 })
 

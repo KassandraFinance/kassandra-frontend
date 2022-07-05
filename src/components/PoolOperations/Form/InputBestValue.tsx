@@ -4,8 +4,8 @@ import Image from 'next/image'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 
-import { TokenDetails } from '../../../store/modules/poolTokens/types'
-import { TokenImages } from '../../../store/modules/poolImages/types'
+import { TokenDetails } from '../../../context/PoolTokensContext'
+import { TokenImages } from '../../../store/reducers/poolImages'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 import { priceDollar } from '../../../utils/priceDollar'
