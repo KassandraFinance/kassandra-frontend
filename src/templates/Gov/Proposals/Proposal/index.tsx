@@ -25,6 +25,8 @@ import waitTransaction, {
   TransactionCallback
 } from '../../../../utils/txWait'
 
+import { useAppSelector } from '../../../../store/hooks'
+
 import { GET_PROPOSAL } from './graphql'
 
 import Header from '../../../../components/Header'
@@ -48,7 +50,6 @@ import proposalWaitingIcon from '../../../../../public/assets/statusProposal/pro
 import proposalStatusHistory from '../../../../../public/assets/iconGradient/timer-grandient.svg'
 
 import * as S from './styles'
-import { useAppSelector } from '../../../../store/hooks'
 
 interface IRequestDataProposal {
   proposal: [

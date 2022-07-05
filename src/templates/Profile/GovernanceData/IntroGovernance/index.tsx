@@ -8,10 +8,10 @@ import 'tippy.js/dist/tippy.css'
 
 import { Staking } from '../../../../constants/tokenAddresses'
 
-import { useAppSelector } from '../../../../store/hooks'
 import useStakingContract from '../../../../hooks/useStakingContract'
-
 import { BNtoDecimal } from '../../../../utils/numerals'
+
+import { useAppSelector } from '../../../../store/hooks'
 
 import Button from '../../../../components/Button'
 import ExternalLink from '../../../../components/ExternalLink'

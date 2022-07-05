@@ -5,6 +5,7 @@ import { request } from 'graphql-request'
 
 import { GET_POOL_PRICE } from './graphql'
 import { SUBGRAPH_URL } from '../../../constants/tokenAddresses'
+
 import { useAppDispatch } from '../../../store/hooks'
 import { setPerformanceValues } from '../../../store/reducers/performanceValues'
 

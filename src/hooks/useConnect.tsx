@@ -6,11 +6,12 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { toChecksumAddress } from 'web3-utils'
 import { ToastError, ToastSuccess } from '../components/Toastify/toast'
+
+import { subscribeToEvents } from '../utils/walletConnect'
+
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { setChainId } from '../store/reducers/chainId'
-
 import { setUserWalletAddress } from '../store/reducers/userWalletAddress'
-import { subscribeToEvents } from '../utils/walletConnect'
 
 import web3, { provider } from '../utils/web3'
 

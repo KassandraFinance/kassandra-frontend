@@ -6,11 +6,11 @@ import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
 import substr from '../../../utils/substr'
-import { ToastInfo } from '../../Toastify/toast'
 import { useAppSelector } from '../../../store/hooks'
 
 import infoGrayIcon from '../../../../public/assets/utilities/info-gray.svg'
 
+import { ToastInfo } from '../../Toastify/toast'
 import ModalUserEditInfo from '../../Modals/ModalUserEditInfo'
 import NftImage from '../../NftImage'
 

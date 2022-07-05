@@ -2,7 +2,6 @@ import React from 'react'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
 import { useRouter } from 'next/router'
-import { useAppSelector } from '../../../store/hooks'
 
 import PortfolioHeading from '../../../components/PortfolioHeading'
 import AssetsTable from './AssetsTable'
@@ -14,6 +13,8 @@ import AssetsIcon from '../../../../public/assets/iconGradient/assets-distributi
 import StakedPoolsIcon from '../../../../public/assets/iconGradient/staking-pools.svg'
 
 import { BNtoDecimal } from '../../../utils/numerals'
+
+import { useAppSelector } from '../../../store/hooks'
 
 import { products, ProductDetails } from '../../../constants/tokenAddresses'
 

@@ -5,15 +5,16 @@ import BigNumber from 'bn.js'
 import Big from 'big.js'
 
 import { TokenDetails } from '../../../context/PoolTokensContext'
-import { TokenImages } from '../../../store/reducers/poolImages'
+import { ITokenImages } from '../../../store/reducers/poolImages'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 import { priceDollar } from '../../../utils/priceDollar'
 
+import { useAppSelector } from '../../../store/hooks'
+
 import none from '../../../../public/assets/icons/coming-soon.svg'
 
 import * as S from './styles'
-import { useAppSelector } from '../../../store/hooks'
 
 interface IInputBestValueProps {
   poolTokenDetails: TokenDetails[];
@@ -30,7 +31,7 @@ const InputBestValue = ({
   swapOutBalance,
   setPriceInDollarOnWithdraw
 }: IInputBestValueProps) => {
-  const { poolImages }: { poolImages: TokenImages } = useAppSelector(
+  const { poolImages }: { poolImages: ITokenImages } = useAppSelector(
     state => state
   )
 

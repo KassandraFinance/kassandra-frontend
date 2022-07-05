@@ -6,7 +6,7 @@ export const chartSelectedSlice = createSlice({
   name: 'chartSelected',
   initialState,
   reducers: {
-    setChartSelected: (state: any, action: PayloadAction<string>) =>
+    setChartSelected: (state: string, action: PayloadAction<string>) =>
       action.payload
   }
 })

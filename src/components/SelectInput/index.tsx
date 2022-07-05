@@ -2,12 +2,12 @@ import React from 'react'
 import Image from 'next/image'
 
 import { TokenDetails } from '../../context/PoolTokensContext'
+import { useAppSelector } from '../../store/hooks'
 
 import arrow from '../../../public/assets/utilities/arrow-select-down.svg'
 import none from '../../../public/assets/icons/coming-soon.svg'
 
 import * as S from './styles'
-import { useAppSelector } from '../../store/hooks'
 
 interface ISelectInputProps {
   poolTokens: TokenDetails[];

@@ -17,9 +17,13 @@ import {
 } from '../../constants/tokenAddresses'
 
 import { BNtoDecimal } from '../../utils/numerals'
+
 import { TokenDetails } from '../../context/PoolTokensContext'
 import { useAppDispatch } from '../../store/hooks'
 import { setFees } from '../../store/reducers/fees'
+import { setPoolImages } from '../../store/reducers/poolImages'
+import { setTokenAddress2Index } from '../../store/reducers/tokenAddress2Index'
+import { usePoolTokens } from '../../context/PoolTokensContext'
 
 import useYieldYak from '../../hooks/useYieldYak'
 import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
@@ -46,9 +50,6 @@ import ShareImageModal from './ShareImageModal'
 import SharedImage from './SharedImage'
 
 import * as S from './styles'
-import { setPoolImages } from '../../store/reducers/poolImages'
-import { setTokenAddress2Index } from '../../store/reducers/tokenAddress2Index'
-import { usePoolTokens } from '../../context/PoolTokensContext'
 
 const invertToken: { [key: string]: string } = {
   '0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E':

@@ -10,12 +10,13 @@ import { Staking, LPDaiAvax } from '../../../constants/tokenAddresses'
 import usePriceLP from '../../../hooks/usePriceLP'
 import useERC20Contract from '../../../hooks/useERC20Contract'
 import useStakingContract from '../../../hooks/useStakingContract'
-import { useAppSelector } from '../../../store/hooks'
 
 import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 import { registerToken } from '../../../utils/registerToken'
+
+import { useAppSelector } from '../../../store/hooks'
 
 import Button from '../../../components/Button'
 import ModalWalletConnect from '../../../components/Modals/ModalWalletConnect'

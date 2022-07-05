@@ -5,9 +5,8 @@ const initialState = ''
 export const periodSelectedSlice = createSlice({
   name: 'periodSelected',
   initialState,
-
   reducers: {
-    setPeriodSelected: (state: any, action: PayloadAction<string>) => {
+    setPeriodSelected: (state: string, action: PayloadAction<string>) => {
       return action.payload
     }
   }

@@ -6,7 +6,7 @@ export const userWalletAddressSlice = createSlice({
   name: 'userWalletAddress',
   initialState,
   reducers: {
-    setUserWalletAddress: (state: any, action: PayloadAction<string>) => {
+    setUserWalletAddress: (state: string, action: PayloadAction<string>) => {
       return action.payload
     }
   }

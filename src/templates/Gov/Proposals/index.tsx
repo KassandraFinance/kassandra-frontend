@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+
 import { useAppSelector } from '../../../store/hooks'
 
 import Header from '../../../components/Header'

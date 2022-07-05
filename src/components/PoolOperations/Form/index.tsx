@@ -8,11 +8,12 @@ import 'tippy.js/dist/tippy.css'
 
 import { ProxyContract } from '../../../constants/tokenAddresses'
 
-import { useAppSelector } from '../../../store/hooks'
 import useProxy from '../../../hooks/useProxy'
 import useERC20Contract, { ERC20 } from '../../../hooks/useERC20Contract'
 import usePoolContract from '../../../hooks/usePoolContract'
 import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+
+import { useAppSelector } from '../../../store/hooks'
 
 import web3 from '../../../utils/web3'
 import { priceDollar } from '../../../utils/priceDollar'

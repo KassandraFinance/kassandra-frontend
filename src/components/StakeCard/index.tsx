@@ -20,7 +20,6 @@ import { LP_KACY_AVAX_PNG } from '../../constants/pools'
 import usePriceLP from '../../hooks/usePriceLP'
 import useStakingContract from '../../hooks/useStakingContract'
 import { ERC20 } from '../../hooks/useERC20Contract'
-import { useAppSelector } from '../../store/hooks'
 
 import { GET_INFO_POOL } from './graphql'
 
@@ -30,6 +29,8 @@ import waitTransaction, {
   MetamaskError,
   TransactionCallback
 } from '../../utils/txWait'
+
+import { useAppSelector } from '../../store/hooks'
 
 import 'tippy.js/dist/tippy.css'
 import Button from '../Button'

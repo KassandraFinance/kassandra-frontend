@@ -8,12 +8,13 @@ import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
 import { Kacy } from '../../../constants/tokenAddresses'
 
-import { useAppSelector } from '../../../store/hooks'
 import { BNtoDecimal } from '../../../utils/numerals'
 import waitTransaction, {
   MetamaskError,
   TransactionCallback
 } from '../../../utils/txWait'
+
+import { useAppSelector } from '../../../store/hooks'
 
 import { Staking } from '../../../constants/tokenAddresses'
 import useERC20Contract from '../../../hooks/useERC20Contract'

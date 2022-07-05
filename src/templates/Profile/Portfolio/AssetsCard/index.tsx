@@ -3,11 +3,11 @@ import Image from 'next/image'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 import Tippy from '@tippyjs/react'
-import { useAppSelector } from '../../../../store/hooks'
 
 import AnyCard from '../../../../components/AnyCard'
 
 import { BNtoDecimal } from '../../../../utils/numerals'
+import { useAppSelector } from '../../../../store/hooks'
 
 import infoGray from '../../../../../public/assets/utilities/info-gray.svg'
 

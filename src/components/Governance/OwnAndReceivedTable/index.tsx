@@ -3,10 +3,10 @@ import Image from 'next/image'
 import useSWR from 'swr'
 import Big from 'big.js'
 
-import { useAppSelector } from '../../../store/hooks'
-
 import { BNtoDecimal } from '../../../utils/numerals'
 import substr from '../../../utils/substr'
+
+import { useAppSelector } from '../../../store/hooks'
 
 import AnyCard from '../../AnyCard'
 

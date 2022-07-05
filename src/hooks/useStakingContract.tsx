@@ -8,8 +8,9 @@ import { AbiItem } from "web3-utils"
 import web3, { EventSubscribe } from '../utils/web3'
 import { TransactionCallback } from '../utils/txWait'
 
-import StakingContract from "../constants/abi/Staking.json"
 import { useAppSelector } from '../store/hooks'
+
+import StakingContract from "../constants/abi/Staking.json"
 
 interface Events {
   MinterChanged: EventSubscribe;

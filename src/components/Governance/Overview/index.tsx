@@ -8,9 +8,10 @@ import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
 import { SUBGRAPH_URL } from '../../../constants/tokenAddresses'
-import { useAppSelector } from '../../../store/hooks'
 
 import { BNtoDecimal } from '../../../utils/numerals'
+
+import { useAppSelector } from '../../../store/hooks'
 
 import Button from '../../../components/Button'
 import ModalWalletConnect from '../../Modals/ModalWalletConnect'

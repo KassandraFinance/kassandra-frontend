@@ -4,12 +4,12 @@ export type AllPerformancePeriod = {
   [key: string]: string
 }
 
-export interface PerformanceValues {
+export interface IPerformanceValues {
   title: string;
   allPerformancePeriod?: AllPerformancePeriod;
 }
 
-const initialState: PerformanceValues = {
+const initialState: IPerformanceValues = {
   title: ''
 }
 
@@ -18,8 +18,8 @@ export const performanceValuesSlice = createSlice({
   initialState,
   reducers: {
     setPerformanceValues: (
-      state: any,
-      action: PayloadAction<PerformanceValues>
+      state: IPerformanceValues,
+      action: PayloadAction<IPerformanceValues>
     ) => {
       return { ...state, ...action.payload }
     }

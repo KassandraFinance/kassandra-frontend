@@ -8,8 +8,8 @@ import Big from 'big.js'
 
 import useERC20Contract, { ERC20 } from '../../hooks/useERC20Contract'
 import useStakingContract from '../../hooks/useStakingContract'
-import { useAppSelector } from '../../store/hooks'
 import usePriceLP from '../../hooks/usePriceLP'
+import { useAppSelector } from '../../store/hooks'
 
 import { GET_PROFILE } from './graphql'
 import {

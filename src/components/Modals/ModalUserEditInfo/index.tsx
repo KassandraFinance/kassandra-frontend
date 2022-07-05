@@ -4,9 +4,9 @@ import { ToastError } from '../../Toastify/toast'
 import 'tippy.js/dist/tippy.css'
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
-import { useAppSelector } from '../../../store/hooks'
-
 import web3 from '../../../utils/web3'
+
+import { useAppSelector } from '../../../store/hooks'
 
 import Button from '../../Button'
 import UserNFTs from '../../UserNFts'
