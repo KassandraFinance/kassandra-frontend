@@ -19,6 +19,7 @@ import arrowDescend from '../../../public/assets/notificationStatus/arrow-descen
 import { GET_CHART } from './graphql'
 
 import * as S from './styles'
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
 interface InfoPool {
   tvl: string;
@@ -62,6 +63,8 @@ const addressChanger: { [key: string]: string } = {
 }
 
 const FundCard = ({ product }: IFundCardProps) => {
+  const { trackEventFunction } = useMatomoEcommerce()
+
   const poolPlatform =
     process.env.NEXT_PUBLIC_MASTER === '1' ? 'Avalanche' : 'Fuji'
 
@@ -167,7 +170,15 @@ const FundCard = ({ product }: IFundCardProps) => {
   return (
     <S.CardContainer>
       <Link href={`/explore/${product.symbol.toLowerCase()}`} passHref>
-        <a>
+        <a
+          onClick={() =>
+            trackEventFunction(
+              'click-on-link',
+              `${product.symbol.toLocaleLowerCase()}`,
+              'feature-funds'
+            )
+          }
+        >
           <>
             <S.CardHeader>
               <S.ImageContainer>

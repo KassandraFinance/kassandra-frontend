@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
 import Big from 'big.js'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import { BNtoDecimal } from '../../utils/numerals'
+
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
 import ExternalLink from '../ExternalLink'
 
@@ -17,20 +18,11 @@ interface IKacyMarketDataProps {
 }
 
 interface IKacyOverviewProps {
-  kacyMarketData: IKacyMarketDataProps
+  kacyMarketData: IKacyMarketDataProps;
 }
 
 const KacyOverview = ({ kacyMarketData }: IKacyOverviewProps) => {
-
-  const { trackEvent } = useMatomo()
-
-  function clickMatomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'kacy-overview',
-      action: action,
-      name: name
-    })
-  }
+  const { trackEventFunction } = useMatomoEcommerce()
 
   return (
     <>
@@ -60,7 +52,9 @@ const KacyOverview = ({ kacyMarketData }: IKacyOverviewProps) => {
       </S.TokenInfoWrapper>
       <S.Link>
         <ExternalLink
-          onClick={() => clickMatomoEvent('click-on-link', 'learn-more')}
+          onClick={() =>
+            trackEventFunction('click-on-link', 'learn-more', 'kacy-overview')
+          }
           hrefLink="https://kassandrafoundation.medium.com/kassandra-dao-token-8bc046d55a00"
           text="Check more info about the $KACY token"
         />

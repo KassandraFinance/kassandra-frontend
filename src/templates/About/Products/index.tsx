@@ -1,9 +1,11 @@
 import React from 'react'
 import ExternalLink from '../../../components/ExternalLink'
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
 import * as S from './styles'
 
 const Products = () => {
+  const { trackEventFunction } = useMatomoEcommerce()
   return (
     <S.Container>
       <S.ImageKassandra>
@@ -29,6 +31,13 @@ const Products = () => {
           <ExternalLink
             hrefLink="https://kassandrafoundation.medium.com/kassandra-protocol-d9cb71c02b02"
             text="How It Works"
+            onClick={() =>
+              trackEventFunction(
+                'click-on-link',
+                'how-it-works',
+                'kassandra-organization'
+              )
+            }
           />
         </S.Card>
         <S.Card>
@@ -44,6 +53,13 @@ const Products = () => {
           <ExternalLink
             hrefLink="https://kassandrafoundation.medium.com/kassandra-dao-token-8bc046d55a00"
             text="Documentation"
+            onClick={() =>
+              trackEventFunction(
+                'click-on-link',
+                'dao&token',
+                'kassandra-organization'
+              )
+            }
           />
         </S.Card>
         <S.Card>
@@ -60,6 +76,13 @@ const Products = () => {
           <ExternalLink
             hrefLink="https://kassandrafoundation.medium.com/kassandra-foundation-team-4f46bf13c887"
             text="Connect With Us"
+            onClick={() =>
+              trackEventFunction(
+                'click-on-link',
+                'foundation&team',
+                'kassandra-organization'
+              )
+            }
           />
         </S.Card>
       </S.CardWrapper>
