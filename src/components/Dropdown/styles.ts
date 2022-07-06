@@ -10,10 +10,9 @@ export const Dropdown = styled.div`
     button::after {
       content: '';
       position: absolute;
-      height: 0.3rem;
+      bottom: 0;
 
-      display: block;
-      margin-top: 1.2rem;
+      height: 0.4rem;
 
       border-radius: 0.3rem;
       background-color: ${theme.colors.cyan};
@@ -37,22 +36,29 @@ export const DropButton = styled.button`
   position: relative;
 
   display: inline-block;
-  margin: 0.3rem ${theme.spacings.space24} 0;
+  margin-right: 4.2rem;
   padding-top: 1.2rem;
-  padding-bottom: 1.2rem;
+  padding-bottom: 1.3rem;
 
+  font-family: 'Rubik', sans-serif;
   font-size: ${theme.font.sizes.font16};
+  font-weight: ${theme.font.weight.light};
   color: ${theme.colors.snow};
   text-transform: capitalize;
 
   background-color: transparent;
   border: none;
 
-  @media (max-width: 960px) {
-    margin: 0;
+  @media (max-width: 768px) {
+    margin-right: 3.2rem;
   }
-  @media (max-width: 540px) {
+  @media (max-width: 541px) {
     font-size: ${theme.font.sizes.font14};
+    margin-right: 2rem;
+  }
+  @media (max-width: 360px) {
+    font-size: ${theme.font.sizes.font12};
+    margin-right: 1.4rem;
   }
 `
 
@@ -62,13 +68,12 @@ interface IDropdownContentProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const DropdownContent = styled.div <IDropdownContentProps>`
+export const DropdownContent = styled.div<IDropdownContentProps>`
   position: absolute;
-  left: 2.4rem;
+  left: 0rem;
   z-index: 1;
 
   display: ${props => (props.isDropdown ? 'block' : 'none')};
-  margin-top: 0.3rem;
   min-width: 16rem;
 
   box-shadow: 0 0.8rem 1.6rem 0 rgba(0,0,0,0.2);

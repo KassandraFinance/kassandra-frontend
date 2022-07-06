@@ -64,7 +64,7 @@ const Header = () => {
             </a>
           </Link>
           <DropdownInvest
-            nameOnHeader="invest"
+            nameOnHeader="Investors"
             linkPage={[
               { name: 'Explore Funds', href: '/explore' },
               { name: 'Stake/Farm', href: '/farm' },
@@ -99,6 +99,7 @@ const Header = () => {
           process.env.NEXT_PUBLIC_VOTE === '2' ? (
             <DropdownInvest
               nameOnHeader="Governance"
+              adaptToResponsiveSize={true}
               linkPage={[
                 {
                   name: 'Overview',
