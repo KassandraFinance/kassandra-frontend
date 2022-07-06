@@ -4,7 +4,7 @@ import Image from 'next/image'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 
-import { TokenDetails } from '../../../context/PoolTokensContext'
+import { ITokenDetails } from '../../../context/PoolTokensContext'
 import { ITokenImages } from '../../../store/reducers/poolImages'
 
 import { BNtoDecimal } from '../../../utils/numerals'
@@ -17,8 +17,8 @@ import none from '../../../../public/assets/icons/coming-soon.svg'
 import * as S from './styles'
 
 interface IInputBestValueProps {
-  poolTokenDetails: TokenDetails[];
-  poolTokensArray: TokenDetails[];
+  poolTokenDetails: ITokenDetails[];
+  poolTokensArray: ITokenDetails[];
   swapOutAmount: BigNumber[];
   swapOutBalance: BigNumber[];
   setPriceInDollarOnWithdraw: React.Dispatch<React.SetStateAction<string>>;

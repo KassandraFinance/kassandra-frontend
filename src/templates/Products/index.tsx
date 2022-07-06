@@ -18,7 +18,7 @@ import {
 
 import { BNtoDecimal } from '../../utils/numerals'
 
-import { TokenDetails } from '../../context/PoolTokensContext'
+import { ITokenDetails } from '../../context/PoolTokensContext'
 import { useAppDispatch } from '../../store/hooks'
 import { setFees } from '../../store/reducers/fees'
 import { setPoolImages } from '../../store/reducers/poolImages'
@@ -184,7 +184,7 @@ const Products = ({ product }: Input) => {
   }
 
   async function getTokenDetails() {
-    const pool: TokenDetails = {
+    const pool: ITokenDetails = {
       balance_in_pool: '',
       address: data.pool.id,
       allocation: 0,
@@ -195,7 +195,7 @@ const Products = ({ product }: Input) => {
       symbol: data.pool.symbol
     }
 
-    const tokenDetails: TokenDetails[] = await Promise.all(
+    const tokenDetails: ITokenDetails[] = await Promise.all(
       data.pool.underlying_assets.map(
         async (item: {
           balance: string,
@@ -278,7 +278,6 @@ const Products = ({ product }: Input) => {
         Swap: (data.pool.fee_swap * 100).toFixed(2)
       })
     )
-    console.log(tokenDetails)
     setPoolTokens(tokenDetails)
     dispatch(setPoolImages(coinGeckoResponse.images))
   }
