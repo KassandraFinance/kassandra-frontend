@@ -2,7 +2,6 @@
 import React from 'react'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
@@ -125,17 +124,9 @@ const Form = ({
 
   const [priceImpact, setPriceImpact] = React.useState<Big>(Big(0))
 
-  const { trackEvent } = useMatomo()
+  const { trackEventFunction } = useMatomoEcommerce()
 
   const inputTokenRef = React.useRef<HTMLInputElement>(null)
-
-  function matomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'operations-invest',
-      action,
-      name
-    })
-  }
 
   function clearInput() {
     setSwapInAmount(new BigNumber(0))
@@ -897,7 +888,7 @@ const Form = ({
               )
               return
             }
-
+            console.log(productCategories)
             trackBuying(crpPoolAddress, poolSymbol, amountInUSD, productCategories)
             proxy.joinswapExternAmountIn(
               swapInAddressVal,
@@ -1087,7 +1078,7 @@ const Form = ({
       {title === 'Swap' ?
         <Tippy content="Trade places for swap-in and swap-out token">
           <S.SwapButton type="button" onClick={() => {
-            matomoEvent('click-on-button', 'swap-token')
+            trackEventFunction('click-on-button', 'swap-token', 'operations-invest')
             setSwapInAddress(swapOutAddress)
             setSwapOutAddress(swapInAddress)
 

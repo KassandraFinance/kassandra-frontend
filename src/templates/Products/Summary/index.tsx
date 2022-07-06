@@ -1,7 +1,8 @@
 import React from 'react'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
 import Image from 'next/image'
 import CopyToClipboard from 'react-copy-to-clipboard'
+
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
 import { chains } from '../../../constants/tokenAddresses'
 
@@ -34,15 +35,7 @@ const Summary = ({
   link,
   icon
 }: Params) => {
-  const { trackEvent } = useMatomo()
-
-  function matomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'summary-invest',
-      action,
-      name
-    })
-  }
+  const { trackEventFunction } = useMatomoEcommerce()
 
   const handleCopyLink = () => {
     ToastInfo('Address copied to clipboard!')
@@ -66,9 +59,10 @@ const Summary = ({
             target="_blank"
             rel="noopener noreferrer"
             onClick={() =>
-              matomoEvent(
+              trackEventFunction(
                 'click-on-link',
-                `discover-${symbol.toLocaleLowerCase()}`
+                `discover-${symbol.toLocaleLowerCase()}`,
+                'summary'
               )
             }
           >
@@ -130,7 +124,11 @@ const Summary = ({
             type="button"
             onClick={() => {
               registerToken(poolController, symbol, 18)
-              matomoEvent('click-on-metamask', 'add-token')
+              trackEventFunction(
+                'click-on-button',
+                `add-${symbol.toLocaleLowerCase()}-token`,
+                'summary'
+              )
             }}
           >
             <Image
@@ -146,9 +144,10 @@ const Summary = ({
               type="button"
               onClick={() => {
                 handleCopyLink()
-                matomoEvent(
-                  'click-to-copy',
-                  `controller-${symbol.toLocaleLowerCase()}`
+                trackEventFunction(
+                  'click-to-button',
+                  `copy-${symbol.toLocaleLowerCase()}-tokencontract`,
+                  'summary'
                 )
               }}
             >
@@ -205,7 +204,11 @@ const Summary = ({
             type="button"
             onClick={() => {
               handleCopyLink()
-              matomoEvent('click-to-copy', 'pool-contract')
+              trackEventFunction(
+                'click-to-button',
+                `copy-${symbol.toLocaleLowerCase()}-poolcontract`,
+                'summary'
+              )
             }}
           >
             {substr(poolContract)}
@@ -260,7 +263,11 @@ const Summary = ({
             type="button"
             onClick={() => {
               handleCopyLink()
-              matomoEvent('click-to-copy', 'strategy-contract')
+              trackEventFunction(
+                'click-to-button',
+                `copy-${symbol.toLocaleLowerCase()}-strategycontract`,
+                'summary'
+              )
             }}
           >
             {strategy === '0x0000000000000000000000000000000000000000'

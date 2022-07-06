@@ -60,19 +60,11 @@ const ModalStakeAndWithdraw = ({
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
   const { trackProductPageView, trackBuying, trackCancelBuying, trackBought } =
     useMatomoEcommerce()
-  const { trackEvent } = useMatomo()
+  const { trackEventFunction } = useMatomoEcommerce()
 
   const kacyStake = useStakingContract(Staking)
   const kacyToken = useERC20Contract(stakingToken)
   const productSKU = `${Staking}_${pid}`
-
-  function matomoEvent(action: string, name: string) {
-    trackEvent({
-      category: `modal-${stakeTransaction}`,
-      action,
-      name
-    })
-  }
 
   function handleKacyAmount(percentage: BigNumber) {
     const kacyAmount = percentage.mul(balance).div(new BigNumber(100))
@@ -85,7 +77,11 @@ const ModalStakeAndWithdraw = ({
       )
     }
 
-    matomoEvent('click-value-btn', `${percentage.toString()}`)
+    trackEventFunction(
+      'click-value-btn',
+      `${percentage.toString()}`,
+      `modal-${stakeTransaction}`
+    )
     setAmountStake(kacyAmount)
     setIsAmount(true)
   }

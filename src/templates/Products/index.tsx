@@ -129,7 +129,7 @@ const Products = ({ product }: Input) => {
 
   const { setPoolTokens } = usePoolTokens()
 
-  const { trackProductPageView } = useMatomoEcommerce()
+  const { trackProductPageView, trackEventFunction } = useMatomoEcommerce()
   const dispatch = useAppDispatch()
 
   const yieldYak = useYieldYak()
@@ -379,7 +379,17 @@ const Products = ({ product }: Input) => {
             <S.NameIndex>
               <S.NameAndSymbol introMobile={true}>
                 <h1>{product.name}</h1>
-                <button onClick={() => setOpenModal(true)} className="circle">
+                <button
+                  onClick={() => {
+                    setOpenModal(true)
+                    trackEventFunction(
+                      'click-on-button',
+                      'share-fund',
+                      'product-headline'
+                    )
+                  }}
+                  className="circle"
+                >
                   <Image src="/assets/icons/share.svg" width={22} height={22} />
                 </button>
               </S.NameAndSymbol>

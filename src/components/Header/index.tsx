@@ -17,6 +17,7 @@ import kacy64 from '../../../public/assets/logos/kacy-64.svg'
 import logoKassandra from '../../../public/assets/logos/kassandra-header.svg'
 
 import * as S from './styles'
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
 export type MenuProps = {
   username?: string
@@ -26,21 +27,12 @@ const Header = () => {
   const [isModalWallet, setIsModalWallet] = React.useState<boolean>(false)
   const [isModalLogout, setIsModalLogout] = React.useState<boolean>(false)
   // const [isModalLanguages, setIsModalLanguages] = React.useState<boolean>(false)
-  // eslint-disable-next-line prettier/prettier
   const [isModalSocialMedia, setIsModalSocialMedia] =
     React.useState<boolean>(false)
 
-  const { trackEvent } = useMatomo()
+  const { trackEventFunction } = useMatomoEcommerce()
 
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
-
-  function clickMatomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'header',
-      action,
-      name
-    })
-  }
 
   return (
     <>
@@ -83,14 +75,18 @@ const Header = () => {
           <S.MenuLinkDisable>Managers</S.MenuLinkDisable>
           {/* <Link href="/explore" passHref>
             <S.MenuLink
-              onClick={() => clickMatomoEvent('click-on-link', 'explore')}
+              onClick={() =>
+                trackEventFunction('click-on-link', 'explore', 'header')
+              }
             >
               Invest
             </S.MenuLink>
           </Link> */}
           {/* <Link href="/farm" passHref>
             <S.MenuLink
-              onClick={() => clickMatomoEvent('click-on-link', 'stake-farm')}
+              onClick={() =>
+                trackEventFunction('click-on-link', 'stake-farm', 'header')
+              }
             >
               Stake/Farm
             </S.MenuLink>
@@ -119,7 +115,9 @@ const Header = () => {
           )}
           <Link href="/about" passHref>
             <S.MenuLink
-              onClick={() => clickMatomoEvent('click-on-link', 'about')}
+              onClick={() =>
+                trackEventFunction('click-on-link', 'about', 'header')
+              }
             >
               About
             </S.MenuLink>
@@ -144,7 +142,7 @@ const Header = () => {
               backgroundBlack
               size="medium"
               onClick={() => {
-                clickMatomoEvent('open-modal', 'your-wallet')
+                trackEventFunction('open-modal', 'your-wallet', 'header')
                 setIsModalLogout(true)
               }}
               text={substr(userWalletAddress)}
@@ -170,7 +168,7 @@ const Header = () => {
               backgroundBlack
               size="medium"
               onClick={() => {
-                clickMatomoEvent('open-metamask', 'connect-wallet')
+                trackEventFunction('open-metamask', 'connect-wallet', 'header')
                 setIsModalWallet(true)
               }}
               text="Connect Wallet"
@@ -203,7 +201,7 @@ const Header = () => {
             backgroundBlack
             size="medium"
             onClick={() => {
-              clickMatomoEvent('open-modal', 'your-wallet')
+              trackEventFunction('open-modal', 'your-wallet', 'header')
               setIsModalLogout(true)
             }}
             text={substr(userWalletAddress)}
@@ -229,7 +227,7 @@ const Header = () => {
             backgroundBlack
             size="medium"
             onClick={() => {
-              clickMatomoEvent('open-metamask', 'connect-wallet')
+              trackEventFunction('open-metamask', 'connect-wallet', 'header')
               setIsModalWallet(true)
             }}
             text="Connect Wallet"

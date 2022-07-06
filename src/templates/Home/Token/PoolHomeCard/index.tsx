@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import useSWR from 'swr'
+import useMatomoEcommerce from '../../../../hooks/useMatomoEcommerce'
 
 import Button from '../../../../components/Button'
 import { BarChart, XAxis, YAxis, Bar } from 'recharts'
@@ -20,8 +21,6 @@ import {
 } from '../../../../constants/tokenAddresses'
 import request from 'graphql-request'
 import { GET_INFO_POOL } from '../../graphql'
-
-import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 const dictionary: { [key: string]: string } = {
   0: '#E8983D',
@@ -179,14 +178,7 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
     }
   }, [poolInfo])
 
-  const { trackEvent } = useMatomo()
-  function clickMatomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'home-token',
-      action: action,
-      name: name
-    })
-  }
+  const { trackEventFunction } = useMatomoEcommerce()
 
   return (
     <S.CardWrapper>
@@ -265,9 +257,10 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
           <Link href={`/explore/${pool.symbol.toLowerCase()}`}>
             <Button
               onClick={() =>
-                clickMatomoEvent(
+                trackEventFunction(
                   'click-button',
-                  `buy-${pool.symbol.toLowerCase()}`
+                  `buy-${pool.symbol.toLowerCase()}`,
+                  `${pool.symbol.toLowerCase()}-card`
                 )
               }
               backgroundPrimary
@@ -276,7 +269,13 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
             />
           </Link>
           <ExternalLink
-            onClick={() => clickMatomoEvent('click-on-link', 'learn-more')}
+            onClick={() =>
+              trackEventFunction(
+                'click-on-link',
+                'learn-more',
+                `${pool.symbol.toLowerCase()}-card`
+              )
+            }
             hrefLink={pool.fundLink}
             text="Learn more"
           />
