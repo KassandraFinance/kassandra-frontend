@@ -7,11 +7,11 @@ interface PoolTokensProviderProps {
 }
 
 interface PoolTokensContextData {
-  setPoolTokens: (value: TokenDetails[]) => void;
-  poolTokens: TokenDetails[];
+  setPoolTokens: (value: ITokenDetails[]) => void;
+  poolTokens: ITokenDetails[];
 }
 
-export interface TokenDetails {
+export interface ITokenDetails {
   balance_in_pool: string;
   address: string;
   name: string;
@@ -22,13 +22,20 @@ export interface TokenDetails {
   price: number;
   image?: string;
   priceChange?: number;
+  dataInfoYY?: {
+    item: {
+      urlFarmContract: string,
+      farmName: string
+    },
+    apy: number
+  };
 }
 
 // eslint-disable-next-line prettier/prettier
 const PoolTokensContext = React.createContext({} as PoolTokensContextData);
 
 export const PoolTokensProvider = ({ children }: PoolTokensProviderProps) => {
-  const [poolTokens, setPoolTokens] = React.useState<TokenDetails[]>([] as TokenDetails[])
+  const [poolTokens, setPoolTokens] = React.useState<ITokenDetails[]>([] as ITokenDetails[])
 
   return (
     <PoolTokensContext.Provider value={{ poolTokens, setPoolTokens }}>
