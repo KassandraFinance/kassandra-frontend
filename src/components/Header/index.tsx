@@ -122,6 +122,7 @@ const Header = () => {
           )}
           <Link href="/about" passHref>
             <S.MenuLink
+              id="aboutMobile"
               onClick={() => clickMatomoEvent('click-on-link', 'about')}
             >
               About

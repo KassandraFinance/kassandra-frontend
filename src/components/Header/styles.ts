@@ -68,6 +68,12 @@ export const Menu = styled.nav`
     }
   }
 
+  #aboutMobile {
+    @media (max-width: 540px) {
+      display: none;
+    }
+  }
+
   @media (max-width: 960px) {
     min-width: 58rem;
   }
