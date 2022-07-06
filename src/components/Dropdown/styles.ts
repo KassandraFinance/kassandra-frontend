@@ -7,6 +7,10 @@ export const Dropdown = styled.div`
   display: inline-block;
 
   &:hover {
+    img {
+      transform: rotate(180deg);
+    }
+
     button::after {
       content: '';
       position: absolute;
@@ -48,6 +52,22 @@ export const DropButton = styled.button`
 
   background-color: transparent;
   border: none;
+
+  img {
+    position: absolute;
+    right: -20px;
+    top: 18px;
+
+    transition: transform 300ms ease;
+
+    @media (max-width: 540px) {
+      right: -16px;
+      top: 17px;
+    }
+    @media (max-width: 360px) {
+      top: 16px;
+    }
+  }
 
   @media (max-width: 768px) {
     margin-right: 3.2rem;

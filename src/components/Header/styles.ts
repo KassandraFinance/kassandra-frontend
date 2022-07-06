@@ -187,8 +187,18 @@ export const MenuLinkDisable = styled.a`
     font-size: ${theme.font.sizes.font12};
   }
 
-  @media (max-width: 540px) {
-    font-size: ${theme.font.sizes.font14};
+  img {
+    position: absolute;
+    right: -20px;
+    top: 18px;
+
+    @media (max-width: 540px) {
+      right: -16px;
+      top: 17px;
+    }
+    @media (max-width: 360px) {
+      top: 16px;
+    }
   }
 `
 

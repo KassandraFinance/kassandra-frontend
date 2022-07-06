@@ -80,7 +80,9 @@ const Header = () => {
               }
             ]}
           /> */}
-          <S.MenuLinkDisable>Managers</S.MenuLinkDisable>
+          <S.MenuLinkDisable>
+            Managers <img src="/assets/utilities/arrow-down-thin.svg" />
+          </S.MenuLinkDisable>
           {/* <Link href="/explore" passHref>
             <S.MenuLink
               onClick={() => clickMatomoEvent('click-on-link', 'explore')}

@@ -40,6 +40,7 @@ const Dropdown = ({
         onMouseOut={() => setIsDropdown(false)}
       >
         {nameOnHeader}
+        <img src="/assets/utilities/arrow-down-thin.svg" />
       </S.DropButton>
       <S.DropdownContent
         onMouseOver={() => setIsDropdown(true)}
