@@ -2,9 +2,10 @@ import React from 'react'
 import Image from 'next/image'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
 
-import { TokenDetails } from '../../../store/modules/poolTokens/types'
+import { ITokenDetails } from '../../../context/PoolTokensContext'
+
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
 import InputTokenValue from '../../InputTokenValue'
 import SelectInput from '../../SelectInput'
@@ -23,7 +24,7 @@ interface IInputEthProps {
   actionString: string;
   swapBalance: BigNumber;
   decimals: BigNumber;
-  poolTokensArray?: TokenDetails[];
+  poolTokensArray?: ITokenDetails[];
   // optionals for input
   clearInput?: () => void;
   inputRef?: React.RefObject<HTMLInputElement>;
@@ -33,8 +34,8 @@ interface IInputEthProps {
   swapOutAddress?: string;
   disabled: string;
   // SelectInput
-  poolTokens: TokenDetails[];
-  tokenDetails: TokenDetails;
+  poolTokens: ITokenDetails[];
+  tokenDetails: ITokenDetails;
   swapInAmount?: BigNumber;
   swapInAddress?: string;
   setSwapAddress: React.Dispatch<React.SetStateAction<string>>;
@@ -64,15 +65,7 @@ const InputTokens = ({
   const [maxActive, setMaxActive] = React.useState<boolean>(false)
   const [currentMax, setCurrentMax] = React.useState(new BigNumber(0))
 
-  const { trackEvent } = useMatomo()
-
-  function matomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'operations-invest',
-      action,
-      name
-    })
-  }
+  const { trackEventFunction } = useMatomoEcommerce()
 
   const tokensList = React.useMemo(() => {
     if (poolTokens.length > 1) {
@@ -197,7 +190,11 @@ const InputTokens = ({
             maxActive={maxActive}
             onClick={() => {
               setMax()
-              matomoEvent('click-on-maxBtn', `input-in-${title}`)
+              trackEventFunction(
+                'click-on-maxBtn',
+                `input-in-${title}`,
+                'operations-invest'
+              )
             }}
           >
             Max

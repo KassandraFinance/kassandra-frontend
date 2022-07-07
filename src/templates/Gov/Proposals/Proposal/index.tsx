@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useSelector, RootStateOrAny } from 'react-redux'
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
@@ -25,6 +24,8 @@ import waitTransaction, {
   MetamaskError,
   TransactionCallback
 } from '../../../../utils/txWait'
+
+import { useAppSelector } from '../../../../store/hooks'
 
 import { GET_PROPOSAL } from './graphql'
 
@@ -181,7 +182,7 @@ const Proposal = () => {
   const governance = useGovernance(GovernorAlpha)
   const votingPower = useVotingPower(Staking)
 
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const { userWalletAddress } = useAppSelector(state => state)
 
   const { data } = useSWR<IRequestDataProposal>([GET_PROPOSAL], query =>
     request(SUBGRAPH_URL, query, {

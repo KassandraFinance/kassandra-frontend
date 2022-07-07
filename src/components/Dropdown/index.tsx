@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-import { useMatomo } from '@datapunt/matomo-tracker-react'
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
 import * as S from './styles'
 
@@ -22,24 +22,22 @@ const Dropdown = ({
   adaptToResponsiveSize
 }: IDropdownProps) => {
   const [isDropdown, setIsDropdown] = React.useState<boolean>(false)
-  const { trackEvent } = useMatomo()
-
-  function clickMatomoEvent(action: string, name: string) {
-    trackEvent({
-      category: `header-${nameOnHeader}`,
-      action,
-      name
-    })
-  }
+  const { trackEventFunction } = useMatomoEcommerce()
 
   return (
     <S.Dropdown>
       <S.DropButton
         onTouchStartCapture={() => setIsDropdown(true)}
         onMouseOver={() => setIsDropdown(true)}
-        onMouseOut={() => setIsDropdown(false)}
+        onMouseOut={(event: any) => {
+          setIsDropdown(false), event.target.blur()
+        }}
+        onKeyPress={event =>
+          event.key === 'Enter' && setIsDropdown(!isDropdown)
+        }
       >
         {nameOnHeader}
+        <img src="/assets/utilities/arrow-down-thin.svg" />
       </S.DropButton>
       <S.DropdownContent
         onMouseOver={() => setIsDropdown(true)}
@@ -50,7 +48,13 @@ const Dropdown = ({
         {linkPage.map((item, index) => (
           <Link key={index} href={item.href}>
             <a
-              onClick={() => clickMatomoEvent('click-on-link', `${item.name}`)}
+              onClick={() =>
+                trackEventFunction(
+                  'click-on-link',
+                  `${item.name}`,
+                  `header-${nameOnHeader}`
+                )
+              }
             >
               {item.name}
             </a>

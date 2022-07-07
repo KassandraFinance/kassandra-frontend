@@ -1,10 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useSelector, RootStateOrAny } from 'react-redux'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import substr from '../../utils/substr'
+import { useAppSelector } from '../../store/hooks'
 
 import Button from '../Button'
 import DropdownInvest from '../Dropdown'
@@ -17,6 +17,7 @@ import kacy64 from '../../../public/assets/logos/kacy-64.svg'
 import logoKassandra from '../../../public/assets/logos/kassandra-header.svg'
 
 import * as S from './styles'
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
 export type MenuProps = {
   username?: string
@@ -26,21 +27,12 @@ const Header = () => {
   const [isModalWallet, setIsModalWallet] = React.useState<boolean>(false)
   const [isModalLogout, setIsModalLogout] = React.useState<boolean>(false)
   // const [isModalLanguages, setIsModalLanguages] = React.useState<boolean>(false)
-  // eslint-disable-next-line prettier/prettier
   const [isModalSocialMedia, setIsModalSocialMedia] =
     React.useState<boolean>(false)
 
-  const { trackEvent } = useMatomo()
+  const { trackEventFunction } = useMatomoEcommerce()
 
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-
-  function clickMatomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'header',
-      action,
-      name
-    })
-  }
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   return (
     <>
@@ -63,49 +55,73 @@ const Header = () => {
               <Image src={kacy64} width={64} height={64} alt="Kassandra" />
             </a>
           </Link>
-          {/* <DropdownInvest
-            nameOnHeader="invest"
+          <DropdownInvest
+            nameOnHeader="Investors"
             linkPage={[
               { name: 'Explore Funds', href: '/explore' },
               { name: 'Stake/Farm', href: '/farm' },
               { name: 'My Portfolio', href: `/profile/${userWalletAddress}` }
             ]}
+          />
+          {/* <DropdownInvest
+            nameOnHeader="Managers"
+            linkPage={[
+              {
+                name: 'My Managed Funds',
+                href: `/profile/${userWalletAddress}?tab=managed-funds`
+              }
+            ]}
           /> */}
-          <Link href="/explore" passHref>
+          <S.MenuLinkDisable>
+            Managers <img src="/assets/utilities/arrow-down-thin.svg" />
+          </S.MenuLinkDisable>
+          {/* <Link href="/explore" passHref>
             <S.MenuLink
-              onClick={() => clickMatomoEvent('click-on-link', 'explore')}
+              onClick={() =>
+                trackEventFunction('click-on-link', 'explore', 'header')
+              }
             >
               Invest
             </S.MenuLink>
-          </Link>
-          <Link href="/farm" passHref>
+          </Link> */}
+          {/* <Link href="/farm" passHref>
             <S.MenuLink
-              onClick={() => clickMatomoEvent('click-on-link', 'stake-farm')}
+              onClick={() =>
+                trackEventFunction('click-on-link', 'stake-farm', 'header')
+              }
             >
               Stake/Farm
             </S.MenuLink>
-          </Link>
+        </Link>*/}
           {process.env.NEXT_PUBLIC_VOTE === '1' ||
           process.env.NEXT_PUBLIC_VOTE === '2' ? (
             <DropdownInvest
-              nameOnHeader="vote"
+              nameOnHeader="Governance"
+              adaptToResponsiveSize={true}
               linkPage={[
                 {
                   name: 'Overview',
                   href: '/gov'
                 },
                 {
-                  name: 'User profile',
-                  href: `/gov/address/${userWalletAddress}`
+                  name: 'Forum',
+                  href: `/`
+                },
+                {
+                  name: 'My Gov. Data',
+                  href: `/profile/${userWalletAddress}?tab=governance-data`
                 }
               ]}
             />
           ) : (
-            <S.MenuLinkDisable>Vote</S.MenuLinkDisable>
+            <S.MenuLinkDisable>Governance</S.MenuLinkDisable>
           )}
           <Link href="/about" passHref>
             <S.MenuLink
-              onClick={() => clickMatomoEvent('click-on-link', 'about')}
+              id="aboutMobile"
+              onClick={() =>
+                trackEventFunction('click-on-link', 'about', 'header')
+              }
             >
               About
             </S.MenuLink>
@@ -130,7 +146,7 @@ const Header = () => {
               backgroundBlack
               size="medium"
               onClick={() => {
-                clickMatomoEvent('open-modal', 'your-wallet')
+                trackEventFunction('open-modal', 'your-wallet', 'header')
                 setIsModalLogout(true)
               }}
               text={substr(userWalletAddress)}
@@ -156,7 +172,7 @@ const Header = () => {
               backgroundBlack
               size="medium"
               onClick={() => {
-                clickMatomoEvent('open-metamask', 'connect-wallet')
+                trackEventFunction('open-metamask', 'connect-wallet', 'header')
                 setIsModalWallet(true)
               }}
               text="Connect Wallet"
@@ -189,7 +205,7 @@ const Header = () => {
             backgroundBlack
             size="medium"
             onClick={() => {
-              clickMatomoEvent('open-modal', 'your-wallet')
+              trackEventFunction('open-modal', 'your-wallet', 'header')
               setIsModalLogout(true)
             }}
             text={substr(userWalletAddress)}
@@ -215,7 +231,7 @@ const Header = () => {
             backgroundBlack
             size="medium"
             onClick={() => {
-              clickMatomoEvent('open-metamask', 'connect-wallet')
+              trackEventFunction('open-metamask', 'connect-wallet', 'header')
               setIsModalWallet(true)
             }}
             text="Connect Wallet"

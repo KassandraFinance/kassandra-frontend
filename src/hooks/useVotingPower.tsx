@@ -5,13 +5,12 @@ import { AbiItem } from "web3-utils"
 
 import web3 from '../utils/web3'
 import StakingContract from "../constants/abi/Staking.json"
-import { RootStateOrAny, useSelector } from 'react-redux'
 
 import { TransactionCallback } from '../utils/txWait'
-
+import { useAppSelector } from '../store/hooks'
 
 const useVotingPower = (address: string) => {
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
   const [contract, setContract] = React.useState(new web3.eth.Contract((StakingContract as unknown) as AbiItem, address))
 
   React.useEffect(() => {

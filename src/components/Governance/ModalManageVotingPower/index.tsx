@@ -1,5 +1,4 @@
 import React from 'react'
-// import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import ManageVotingPower from './ManageVotingPower'
 import DelegateVotingPower from './DelegateVotingPower'
@@ -17,15 +16,6 @@ const ModalManageVotingPower = ({
   setModalOpen
 }: IModalManageVotingPowerProps) => {
   const [currentModal, setCurrentModal] = React.useState<string>('manage')
-  // const { trackEvent } = useMatomo()
-
-  // function matomoEvent(action: string, name: string) {
-  //   trackEvent({
-  //     category: 'modal-staking',
-  //     action,
-  //     name
-  //   })
-  // }
 
   return (
     <>

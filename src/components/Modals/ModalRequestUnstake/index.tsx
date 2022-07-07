@@ -1,6 +1,5 @@
 import React from 'react'
 import BigNumber from 'bn.js'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
 import { BNtoDecimal } from '../../../utils/numerals'
@@ -10,8 +9,10 @@ import waitTransaction, {
   TransactionCallback
 } from '../../../utils/txWait'
 
-import { Staking } from '../../../constants/tokenAddresses'
 import useStakingContract from '../../../hooks/useStakingContract'
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+
+import { Staking } from '../../../constants/tokenAddresses'
 
 import * as S from './styles'
 import Button from '../../Button'
@@ -39,15 +40,7 @@ const ModalRequestUnstake = ({
 }: IModalRequestUnstakeProps) => {
   const [dateWithdraw, setDateWithdraw] = React.useState<number>(0)
   const kacyStake = useStakingContract(Staking)
-  const { trackEvent } = useMatomo()
-
-  function matomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'modal-staking',
-      action,
-      name
-    })
-  }
+  const { trackEventFunction } = useMatomoEcommerce()
 
   async function getWithdrawDelay() {
     const unix_timestamp = await stakedUntil(pid, userWalletAddress)
@@ -70,7 +63,11 @@ const ModalRequestUnstake = ({
         return
       }
 
-      matomoEvent('click-on-request-unstaking', `${symbol}`)
+      trackEventFunction(
+        'click-on-request-unstaking',
+        `${symbol}`,
+        'modal-staking'
+      )
       ToastWarning(`Confirming request for unstaking of ${symbol}...`)
       const txReceipt = await waitTransaction(txHash)
 

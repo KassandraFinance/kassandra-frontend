@@ -1,14 +1,26 @@
-import { createStore } from 'redux'
-import { createWrapper } from 'next-redux-wrapper'
-import reducers from './modules/rootReducer'
+import { configureStore } from '@reduxjs/toolkit'
 
-const makeStore = () => {
-  // Create store
-  const store = createStore(reducers)
+import userWalletAddressReducer from './reducers/userWalletAddress'
+import chainIdReducer from './reducers/chainId'
+import feesReducer from './reducers/fees'
+import chartSelectedReducer from './reducers/chartSelected'
+import periodSelectedReducer from './reducers/periodSelected'
+import poolImagesReducer from './reducers/poolImages'
+import tokenAddress2IndexReducer from './reducers/tokenAddress2Index'
+import performanceValuesReducer from './reducers/performanceValues'
 
-  // Return store
-  return store
-}
+export const store = configureStore({
+  reducer: {
+    userWalletAddress: userWalletAddressReducer,
+    chainId: chainIdReducer,
+    fees: feesReducer,
+    chartSelected: chartSelectedReducer,
+    poolImages: poolImagesReducer,
+    tokenAddress2Index: tokenAddress2IndexReducer,
+    performanceValues: performanceValuesReducer,
+    periodSelected: periodSelectedReducer
+  }
+})
 
-// export an assembled wrapper
-export const storeWrapper = createWrapper(makeStore, { debug: false })
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

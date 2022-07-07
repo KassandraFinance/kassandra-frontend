@@ -3,7 +3,6 @@ import Image from 'next/image'
 import BigNumber from 'bn.js'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
-import { useSelector, RootStateOrAny } from 'react-redux'
 
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
@@ -11,6 +10,8 @@ import 'tippy.js/dist/tippy.css'
 import { SUBGRAPH_URL } from '../../../constants/tokenAddresses'
 
 import { BNtoDecimal } from '../../../utils/numerals'
+
+import { useAppSelector } from '../../../store/hooks'
 
 import Button from '../../../components/Button'
 import ModalWalletConnect from '../../Modals/ModalWalletConnect'
@@ -36,7 +37,7 @@ export const Overview = () => {
     votingAddresses: 0
   })
 
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   const { data } = useSWR([GET_GOVERNANCES], query =>
     request(SUBGRAPH_URL, query, { id: userWalletAddress })
@@ -44,9 +45,9 @@ export const Overview = () => {
 
   React.useEffect(() => {
     if (data) {
-      setGovernances(data.governances[0])
+      data.governances[0] && setGovernances(data.governances[0])
 
-      setYourVotingPower(data.user ? data.user.votingPower : 0)
+      setYourVotingPower(data.user ? data.user.votingPower : new BigNumber(0))
     }
   }, [data])
 

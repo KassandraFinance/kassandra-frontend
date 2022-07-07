@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 
-import { RootStateOrAny, useSelector } from 'react-redux'
 import BigNumber from 'bn.js'
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
@@ -15,6 +14,7 @@ import waitTransaction, {
   TransactionCallback
 } from '../../../../utils/txWait'
 import substr from '../../../../utils/substr'
+import { useAppSelector } from '../../../../store/hooks'
 
 // import { useMatomo } from '@datapunt/matomo-tracker-react'
 import ExternalLink from '../../../ExternalLink'
@@ -55,7 +55,7 @@ const UndelegateVotingPower = ({
   const [userInfoData, setUserInfoData] = React.useState<any>([])
   const [loading, setLoading] = React.useState<boolean>(true)
 
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   const { userInfo, poolInfo } = useStakingContract(Staking)
   const { delegateVote, delegateAllVotes } = useVotingPower(Staking)

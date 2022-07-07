@@ -1,22 +1,24 @@
 import React from 'react'
 import Head from 'next/head'
-// import { useRouter } from 'next/router'
-// import { useSelector, RootStateOrAny } from 'react-redux'
+import { useRouter } from 'next/router'
 
 import NotFound from '../../templates/404'
+import { useAppSelector } from '../../store/hooks'
 
 import Header from '../../components/Header'
 import Web3Disabled from '../../components/Web3Disabled'
 
 export default function Index() {
-  // const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-  // const router = useRouter()
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
+  const router = useRouter()
 
-  // React.useEffect(() => {
-  //   if (userWalletAddress.length > 0) {
-  //     router.push(`/profile/${userWalletAddress}`)
-  //   }
-  // }, [userWalletAddress])
+  React.useEffect(() => {
+    const asPathId = router.asPath.slice(8)
+
+    if (userWalletAddress.length > 0) {
+      router.push(`/profile/${userWalletAddress}${asPathId}`)
+    }
+  }, [userWalletAddress])
 
   return (
     <>

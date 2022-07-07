@@ -1,8 +1,8 @@
 import React from 'react'
-import { RootStateOrAny, useSelector } from 'react-redux'
-import { PerformanceValues } from '../../../store/modules/performanceValues/actions'
 
-import { TokenDetails } from '../../../store/modules/poolTokens/types'
+import { usePoolTokens } from '../../../context/PoolTokensContext'
+import { useAppSelector } from '../../../store/hooks'
+
 // import substr from '../../../utils/substr'
 import ChartProducts from './ChartProducts'
 import {
@@ -44,14 +44,8 @@ const SharedImage = ({
   productName,
   fundImage
 }: ISharedImageProps) => {
-  // const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-  const {
-    poolTokensArray,
-    performanceValues
-  }: {
-    poolTokensArray: TokenDetails[],
-    performanceValues: PerformanceValues
-  } = useSelector((state: RootStateOrAny) => state)
+  const { performanceValues } = useAppSelector(state => state)
+  const { poolTokens } = usePoolTokens()
 
   return (
     <S.SharedImage className="bg-image-color">
@@ -81,49 +75,64 @@ const SharedImage = ({
       </S.Header>
 
       <S.Main>
-        <S.InfoContainer>
-          <S.Info>
-            <S.InfoTitle>
-              <IconBar />
-              <span>{performanceValues.title}</span>
-            </S.InfoTitle>
-            {performanceValues.performance.startsWith('-') ? (
-              <S.InfoValue color="red">
-                {performanceValues.performance}%
-              </S.InfoValue>
-            ) : (
-              <S.InfoValue color="green">
-                +{performanceValues.performance}%
-              </S.InfoValue>
-            )}
-          </S.Info>
-          <S.Info>
-            <S.InfoTitle>
-              <IconBar />
-              <span>Total Value Locked</span>
-            </S.InfoTitle>
-            <S.InfoValue color="white">${totalValueLocked}</S.InfoValue>
-          </S.Info>
-          <S.Assets>
-            <S.InfoTitle>
-              <IconUnion />
-              <span>Assets</span>
-            </S.InfoTitle>
-            <S.AssetsContainer>
-              {poolTokensArray.slice(0, -1).map((token, index) => (
-                <img
-                  key={index}
-                  src={
-                    assetsImages[token.address] ??
-                    '/assets/icons/coming-soon.svg'
+        {performanceValues.allPerformancePeriod && (
+          <S.InfoContainer>
+            <S.Info>
+              <S.InfoTitle>
+                <IconBar />
+                <span>{performanceValues.title}</span>
+              </S.InfoTitle>
+              {performanceValues.allPerformancePeriod[
+                performanceValues.title
+              ].startsWith('-') ? (
+                <S.InfoValue color="red">
+                  {
+                    performanceValues.allPerformancePeriod[
+                      performanceValues.title
+                    ]
                   }
-                  width={25}
-                  height={25}
-                />
-              ))}
-            </S.AssetsContainer>
-          </S.Assets>
-        </S.InfoContainer>
+                  %
+                </S.InfoValue>
+              ) : (
+                <S.InfoValue color="green">
+                  +
+                  {
+                    performanceValues.allPerformancePeriod[
+                      performanceValues.title
+                    ]
+                  }
+                  %
+                </S.InfoValue>
+              )}
+            </S.Info>
+            <S.Info>
+              <S.InfoTitle>
+                <IconBar />
+                <span>Total Value Locked</span>
+              </S.InfoTitle>
+              <S.InfoValue color="white">${totalValueLocked}</S.InfoValue>
+            </S.Info>
+            <S.Assets>
+              <S.InfoTitle>
+                <IconUnion />
+                <span>Assets</span>
+              </S.InfoTitle>
+              <S.AssetsContainer>
+                {poolTokens.slice(0, -1).map((token, index) => (
+                  <img
+                    key={index}
+                    src={
+                      assetsImages[token.address] ??
+                      '/assets/icons/coming-soon.svg'
+                    }
+                    width={25}
+                    height={25}
+                  />
+                ))}
+              </S.AssetsContainer>
+            </S.Assets>
+          </S.InfoContainer>
+        )}
         <S.ChartContainer>
           <ChartProducts crpPoolAddress={crpPoolAddress} height={296} />
         </S.ChartContainer>
