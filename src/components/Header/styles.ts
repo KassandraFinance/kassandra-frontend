@@ -106,7 +106,10 @@ export const MenuLink = styled.a`
   text-decoration: none;
   text-align: center;
 
-  &:hover {
+  outline: none;
+
+  &:hover,
+  &:focus-within {
     &::after {
       content: '';
       position: absolute;

@@ -34,7 +34,7 @@ const Hero = () => {
         </S.IntroHero>
         <S.ButtonWrapper>
           <li>
-            <Link href="/explore">
+            <Link href="/explore" passHref>
               <Button
                 backgroundPrimary
                 size="large"
@@ -49,7 +49,6 @@ const Hero = () => {
               className="btn-cta"
               backgroundPrimary
               size="large"
-              as="a"
               text="Buy KACY"
               icon={<img src="/favicon-16x16.png" alt="Logo Kacy token" />}
               onClick={() => {

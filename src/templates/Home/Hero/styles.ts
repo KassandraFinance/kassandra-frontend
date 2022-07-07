@@ -138,14 +138,15 @@ export const IntroHero = styled.div`
 
 export const ButtonWrapper = styled.ul`
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 1fr 1fr;
 
-  width: 31.4rem;
+  width: fit-content;
   margin: 7.2rem auto 0;
   gap: 1.6rem;
 
   li {
-    a {
+    a,
+    button {
       min-width: 16rem;
     }
   }
