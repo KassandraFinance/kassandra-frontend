@@ -6,7 +6,8 @@ export const Dropdown = styled.div`
 
   display: inline-block;
 
-  &:hover {
+  &:hover,
+  &:focus-within {
     img {
       transform: rotate(180deg);
     }
@@ -52,6 +53,8 @@ export const DropButton = styled.button`
 
   background-color: transparent;
   border: none;
+  outline: none;
+  cursor: pointer;
 
   img {
     position: absolute;
