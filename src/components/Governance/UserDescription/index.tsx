@@ -5,13 +5,12 @@ import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
-import { RootStateOrAny, useSelector } from 'react-redux'
-
 import substr from '../../../utils/substr'
-import { ToastInfo } from '../../Toastify/toast'
+import { useAppSelector } from '../../../store/hooks'
 
 import infoGrayIcon from '../../../../public/assets/utilities/info-gray.svg'
 
+import { ToastInfo } from '../../Toastify/toast'
 import ModalUserEditInfo from '../../Modals/ModalUserEditInfo'
 import NftImage from '../../NftImage'
 
@@ -35,7 +34,7 @@ interface IUserDescriptionProps {
 }
 
 const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   const [isOpenModal, setIsOpenModal] = React.useState(false)
   const [isStateSeeMore, setIsStateSeeMore] = React.useState(false)

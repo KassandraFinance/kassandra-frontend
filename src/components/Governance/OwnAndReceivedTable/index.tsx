@@ -3,10 +3,10 @@ import Image from 'next/image'
 import useSWR from 'swr'
 import Big from 'big.js'
 
-import { useSelector, RootStateOrAny } from 'react-redux'
-
 import { BNtoDecimal } from '../../../utils/numerals'
 import substr from '../../../utils/substr'
+
+import { useAppSelector } from '../../../store/hooks'
 
 import AnyCard from '../../AnyCard'
 
@@ -47,7 +47,7 @@ export const OwnAndReceivedTable = ({
 }: IOwnAndReceivedTableProps) => {
   const [kacyDolarPrice, setKacyDolarPrice] = React.useState(0)
 
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   const { data } = useSWR(URL_API[process.env.NEXT_PUBLIC_URL_API || 4])
 

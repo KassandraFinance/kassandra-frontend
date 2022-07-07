@@ -1,15 +1,15 @@
 import React from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useSelector, RootStateOrAny } from 'react-redux'
 
 import NotFound from '../../templates/404'
+import { useAppSelector } from '../../store/hooks'
 
 import Header from '../../components/Header'
 import Web3Disabled from '../../components/Web3Disabled'
 
 export default function Index() {
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
   const router = useRouter()
 
   React.useEffect(() => {

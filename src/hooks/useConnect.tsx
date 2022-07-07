@@ -4,13 +4,14 @@ import WalletConnect from '@walletconnect/client'
 import QRCodeModal from '@walletconnect/qrcode-modal'
 import { useRouter } from 'next/router'
 import React from 'react'
-import { useDispatch, useSelector, RootStateOrAny } from 'react-redux'
 import { toChecksumAddress } from 'web3-utils'
 import { ToastError, ToastSuccess } from '../components/Toastify/toast'
-import { actionSetChainId } from '../store/modules/chainId/actions'
 
-import { actionGetUserAddressWallet } from '../store/modules/userWalletAddress/actions'
 import { subscribeToEvents } from '../utils/walletConnect'
+
+import { useAppDispatch, useAppSelector } from '../store/hooks'
+import { setChainId } from '../store/reducers/chainId'
+import { setUserWalletAddress } from '../store/reducers/userWalletAddress'
 
 import web3, { provider } from '../utils/web3'
 
@@ -26,17 +27,16 @@ const bridge = 'https://bridge.walletconnect.org'
 const connector = new WalletConnect({ bridge, qrcodeModal: QRCodeModal })
 
 const useConnect = () => {
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-  const dispatch = useDispatch()
-
+  const dispatch = useAppDispatch()
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
   const router = useRouter()
 
   const handleAccountsChanged = React.useCallback(accounts => {
     try {
       if (accounts.length === 0 || accounts[0] === undefined) {
-        dispatch(actionGetUserAddressWallet(''))
+        dispatch(setUserWalletAddress(''))
       } else if (accounts[0] !== userWalletAddress) {
-        dispatch(actionGetUserAddressWallet(toChecksumAddress(accounts[0])))
+        dispatch(setUserWalletAddress(toChecksumAddress(accounts[0])))
         if (router.asPath === '/gov/address') {
           router.push(`/gov/address/${toChecksumAddress(accounts[0])}`)
         }
@@ -47,7 +47,7 @@ const useConnect = () => {
   }, [])
 
   const handleChainChanged = React.useCallback(chainId => {
-    dispatch(actionSetChainId(Number.parseInt(chainId, 16)))
+    dispatch(setChainId(Number.parseInt(chainId, 16)))
     window.location.reload()
   }, [])
 
@@ -58,12 +58,12 @@ const useConnect = () => {
 
   const getChainId = React.useCallback(async () => {
     const id = await web3.eth.getChainId()
-    dispatch(actionSetChainId(id))
+    dispatch(setChainId(id))
   }, [])
 
   const handleDisconnected = React.useCallback(() => {
     if (connector) {
-      dispatch(actionGetUserAddressWallet(''))
+      dispatch(setUserWalletAddress(''))
       connector.killSession()
       localStorage.removeItem('walletconnect')
       window.location.reload()
@@ -85,16 +85,16 @@ const useConnect = () => {
   const connectToWalletConnect = React.useCallback(async () => {
     if (!connector.connected) {
       await provider.enable()
-      
+
       web3.setProvider(provider as any)
-      
+
       const connect = localStorage.getItem('walletconnect')
-      
+
       if (connect) {
         const { accounts, chainId } = JSON.parse(connect)
         handleAccountsChanged(accounts)
         ToastSuccess('Connected to Wallet Connect.')
-        dispatch(actionSetChainId(chainId))
+        dispatch(setChainId(chainId))
         subscribeToEvents(provider, handleAccountsChanged, handleChainChanged, handleDisconnected)
       }
       return
@@ -132,7 +132,7 @@ const useConnect = () => {
       hasEthereumProvider()
     }
   }
-  
+
   React.useEffect(() => {
     const connect = localStorage.getItem('walletconnect')
     if (connect) {
@@ -141,7 +141,7 @@ const useConnect = () => {
       // await provider.enable()
 
       handleAccountsChanged(accounts)
-      dispatch(actionSetChainId(chainId))
+      dispatch(setChainId(chainId))
     }
 
     verifyProvider()

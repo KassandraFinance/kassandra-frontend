@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import useSWR from 'swr'
@@ -11,11 +11,11 @@ import {
 } from '../../../constants/tokenAddresses'
 
 import useGovernance from '../../../hooks/useGovernance'
+import { useAppSelector } from '../../../store/hooks'
 
 import { GET_PROPOSALS } from './graphql'
 
 import * as S from './styles'
-import { RootStateOrAny, useSelector } from 'react-redux'
 import { ToastError } from '../../Toastify/toast'
 
 const statsSecundaryProposalLibColor: { [key: string]: string } = {
@@ -50,9 +50,8 @@ interface IProposalsListProps {
 }
 
 export const ProposalTable = () => {
-  const { userWalletAddress, chainId } = useSelector(
-    (state: RootStateOrAny) => state
-  )
+  const { userWalletAddress, chainId } = useAppSelector(state => state)
+
   // eslint-disable-next-line prettier/prettier
   const [proposalsList, setProposalsList] = React.useState<
     Array<IProposalsListProps>

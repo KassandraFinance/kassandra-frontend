@@ -4,11 +4,12 @@ import { MatomoProvider, createInstance } from '@datapunt/matomo-tracker-react'
 import Head from 'next/head'
 import { ThemeProvider } from 'styled-components'
 import { useRouter } from 'next/router'
+import { Provider } from 'react-redux'
 
 import GlobalStyles from '../styles/global'
 import theme from '../styles/theme'
 
-import { storeWrapper } from '../store'
+import { store } from '../store'
 
 import Footer from '../components/Footer'
 import Toastify from '../components/Toastify'
@@ -33,30 +34,34 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const pathName = router.pathname
 
   return (
-    <MatomoProvider value={instance}>
-      <ThemeProvider theme={theme}>
-        <Head>
-          <title>Kassandra</title>
-          <meta
-            name="description"
-            content="Tokenized data-driven investment funds"
-          />
-          <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&amp;display=swap"
-            rel="stylesheet"
-          />
-          <link rel="icon" href="/favicon.ico" />
-          <link
-            rel="icon"
-            href="https://kassandra.finance/favicon.svg"
-            sizes="any"
-          />
-          <meta property="og:site_name" content="Kassandra" />
-          <meta property="og:type" content="website" />
-          {/* <meta property="og:url" content="https://kassandra.finance/" /> */}
-          <meta property="og:title" content="Kassandra - Decentralized Funds" />
-          {/* <meta
+    <Provider store={store}>
+      <MatomoProvider value={instance}>
+        <ThemeProvider theme={theme}>
+          <Head>
+            <title>Kassandra</title>
+            <meta
+              name="description"
+              content="Tokenized data-driven investment funds"
+            />
+            <link rel="preconnect" href="https://fonts.gstatic.com" />
+            <link
+              href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&amp;display=swap"
+              rel="stylesheet"
+            />
+            <link rel="icon" href="/favicon.ico" />
+            <link
+              rel="icon"
+              href="https://kassandra.finance/favicon.svg"
+              sizes="any"
+            />
+            <meta property="og:site_name" content="Kassandra" />
+            <meta property="og:type" content="website" />
+            {/* <meta property="og:url" content="https://kassandra.finance/" /> */}
+            <meta
+              property="og:title"
+              content="Kassandra - Decentralized Funds"
+            />
+            {/* <meta
             property="og:image:alt"
             content="Welcome to Kassandra DAO - Tokenized data-driven investment funds"
           />
@@ -78,18 +83,19 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
             name="twitter:image:alt"
             content="Welcome to Kassandra DAO - Tokenized data-driven investment funds"
           /> */}
-        </Head>
-        <Toastify />
-        <GlobalStyles
-          selectBackground={
-            pathName === '/' ? false : pathName === '/about' ? false : true
-          }
-        />
-        <Component {...pageProps} />
-        {router.pathname !== '/404' && <Footer />}
-      </ThemeProvider>
-    </MatomoProvider>
+          </Head>
+          <Toastify />
+          <GlobalStyles
+            selectBackground={
+              pathName === '/' ? false : pathName === '/about' ? false : true
+            }
+          />
+          <Component {...pageProps} />
+          {router.pathname !== '/404' && <Footer />}
+        </ThemeProvider>
+      </MatomoProvider>
+    </Provider>
   )
 }
 
-export default storeWrapper.withRedux(MyApp)
+export default MyApp

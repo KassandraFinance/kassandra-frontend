@@ -4,6 +4,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import { products, ProductDetails } from '../../constants/tokenAddresses'
 
 import Products from '../../templates/Products'
+import { PoolTokensProvider } from '../../context/PoolTokensContext'
 
 interface Input {
   product: ProductDetails;
@@ -17,7 +18,9 @@ function Product({ product }: Input) {
         fetcher: url => fetch(url).then(res => res.json())
       }}
     >
-      <Products product={product} />
+      <PoolTokensProvider>
+        <Products product={product} />
+      </PoolTokensProvider>
     </SWRConfig>
   )
 }

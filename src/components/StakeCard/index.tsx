@@ -3,8 +3,6 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import { useSelector, RootStateOrAny } from 'react-redux'
-
 import Tippy from '@tippyjs/react'
 import useSWR from 'swr'
 import Big from 'big.js'
@@ -31,6 +29,8 @@ import waitTransaction, {
   MetamaskError,
   TransactionCallback
 } from '../../utils/txWait'
+
+import { useAppSelector } from '../../store/hooks'
 
 import 'tippy.js/dist/tippy.css'
 import Button from '../Button'
@@ -133,8 +133,9 @@ const StakeCard = ({
     vestingPeriod: '...',
     lockPeriod: '...'
   })
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const { userWalletAddress } = useAppSelector(state => state)
   const { trackEventFunction } = useMatomoEcommerce()
+
   const { getPriceKacyAndLP } = usePriceLP()
   const stakingContract = useStakingContract(Staking)
 

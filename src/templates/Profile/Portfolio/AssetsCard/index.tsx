@@ -3,11 +3,11 @@ import Image from 'next/image'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 import Tippy from '@tippyjs/react'
-import { RootStateOrAny, useSelector } from 'react-redux'
 
 import AnyCard from '../../../../components/AnyCard'
 
 import { BNtoDecimal } from '../../../../utils/numerals'
+import { useAppSelector } from '../../../../store/hooks'
 
 import infoGray from '../../../../../public/assets/utilities/info-gray.svg'
 
@@ -52,7 +52,7 @@ const namePools: { [key: string]: string } = {
 
 // eslint-disable-next-line prettier/prettier
 const AssetsCard = ({ profileAddress, priceToken, cardstakesPoolNew }: IStakingTableProps) => {
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   return (
     <>

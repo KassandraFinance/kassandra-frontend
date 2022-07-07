@@ -3,7 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
-import { useSelector, RootStateOrAny } from 'react-redux'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
 import { Kacy } from '../../../constants/tokenAddresses'
@@ -13,6 +13,8 @@ import waitTransaction, {
   MetamaskError,
   TransactionCallback
 } from '../../../utils/txWait'
+
+import { useAppSelector } from '../../../store/hooks'
 
 import { Staking } from '../../../constants/tokenAddresses'
 import useERC20Contract from '../../../hooks/useERC20Contract'
@@ -55,7 +57,7 @@ const ModalStakeAndWithdraw = ({
 
   const inputRef = React.useRef<HTMLInputElement>(null)
 
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
   const { trackProductPageView, trackBuying, trackCancelBuying, trackBought } =
     useMatomoEcommerce()
   const { trackEventFunction } = useMatomoEcommerce()

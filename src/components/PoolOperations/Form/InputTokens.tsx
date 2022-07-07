@@ -3,7 +3,7 @@ import Image from 'next/image'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 
-import { TokenDetails } from '../../../store/modules/poolTokens/types'
+import { ITokenDetails } from '../../../context/PoolTokensContext'
 
 import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
@@ -24,7 +24,7 @@ interface IInputEthProps {
   actionString: string;
   swapBalance: BigNumber;
   decimals: BigNumber;
-  poolTokensArray?: TokenDetails[];
+  poolTokensArray?: ITokenDetails[];
   // optionals for input
   clearInput?: () => void;
   inputRef?: React.RefObject<HTMLInputElement>;
@@ -34,8 +34,8 @@ interface IInputEthProps {
   swapOutAddress?: string;
   disabled: string;
   // SelectInput
-  poolTokens: TokenDetails[];
-  tokenDetails: TokenDetails;
+  poolTokens: ITokenDetails[];
+  tokenDetails: ITokenDetails;
   swapInAmount?: BigNumber;
   swapInAddress?: string;
   setSwapAddress: React.Dispatch<React.SetStateAction<string>>;
