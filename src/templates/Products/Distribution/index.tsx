@@ -12,6 +12,7 @@ import none from '../../../../public/assets/icons/coming-soon.svg'
 import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
 
 import * as S from './styles'
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
 interface IpoolTokensArrayProps extends TokenDetails {
   dataInfoYY: {
@@ -31,6 +32,8 @@ const Distribution = ({ product }: IDistributionProps) => {
   const { poolTokensArray } = useSelector((state: RootStateOrAny) => state)
 
   const [isOpenYield, setIsOpenYield] = React.useState(false)
+
+  const { trackEventFunction } = useMatomoEcommerce()
 
   React.useEffect(() => {
     setIsOpenYield(product.symbol === 'K3C' ? true : false)
@@ -125,7 +128,16 @@ const Distribution = ({ product }: IDistributionProps) => {
                                 href={coin.dataInfoYY.item?.urlFarmContract}
                                 passHref
                               >
-                                <S.yildyakContent target="_blank">
+                                <S.yildyakContent
+                                  target="_blank"
+                                  onClick={() =>
+                                    trackEventFunction(
+                                      'click-on-link',
+                                      'yield-pool',
+                                      'distribution'
+                                    )
+                                  }
+                                >
                                   Yield Yak{' '}
                                   <span>
                                     <svg

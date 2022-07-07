@@ -3,11 +3,11 @@ import React from 'react'
 
 import BigNumber from 'bn.js'
 import Big from 'big.js'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import { Kacy, chains, Staking } from '../../../constants/tokenAddresses'
 
 import useStakingContract from '../../../hooks/useStakingContract'
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 import { registerToken } from '../../../utils/registerToken'
@@ -48,16 +48,8 @@ const Details = ({
   const [depositedAmount, setDepositedAmount] = React.useState<BigNumber>(
     new BigNumber(-1)
   )
-  const { trackEvent } = useMatomo()
+  const { trackEventFunction } = useMatomoEcommerce()
   const { poolInfo } = useStakingContract(Staking)
-
-  function matomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'stake-details',
-      action,
-      name
-    })
-  }
 
   React.useEffect(() => {
     let interval: any
@@ -179,7 +171,11 @@ const Details = ({
             symbol.toLocaleUpperCase(),
             Number(decimals)
           )
-          matomoEvent('click-add-metamask', `add-${symbol}`)
+          trackEventFunction(
+            'click-add-metamask',
+            `add-${symbol}`,
+            'stake-details'
+          )
         }}
       >
         Add to Metamask <img src="/assets/logos/metamask.svg" alt="" />

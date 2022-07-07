@@ -1,7 +1,8 @@
 import React from 'react'
 import useSWR from 'swr'
 import request from 'graphql-request'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
+
+import useMatomoEcommerce from '../../../../hooks/useMatomoEcommerce'
 
 import { SUBGRAPH_URL } from '../../../../constants/tokenAddresses'
 
@@ -42,7 +43,7 @@ const ChartProducts = ({ crpPoolAddress, height }: IChartProductsProps) => {
     price_period: 3600,
     period_selected: Math.trunc(dateNow.getTime() / 1000 - 60 * 60 * 24 * 7)
   })
-  const { trackEvent } = useMatomo()
+  const { trackEventFunction } = useMatomoEcommerce()
 
   const { data } = useSWR([GET_CHART, params], (query, params) =>
     request(SUBGRAPH_URL, query, params)
@@ -96,14 +97,6 @@ const ChartProducts = ({ crpPoolAddress, height }: IChartProductsProps) => {
       default:
         break
     }
-  }
-
-  function matomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'chart-invest',
-      action,
-      name
-    })
   }
 
   React.useEffect(() => {
@@ -160,7 +153,7 @@ const ChartProducts = ({ crpPoolAddress, height }: IChartProductsProps) => {
             disabled={true}
             onChange={() => {
               setInputChecked('Price')
-              matomoEvent('click-on-tab', 'price')
+              trackEventFunction('click-on-tab', 'price', 'chart-invest')
             }}
             checked={inputChecked === 'Price'}
           />
@@ -174,7 +167,7 @@ const ChartProducts = ({ crpPoolAddress, height }: IChartProductsProps) => {
             disabled={true}
             onChange={() => {
               setInputChecked('TVL')
-              matomoEvent('click-on-tab', 'tvl')
+              trackEventFunction('click-on-tab', 'tvl', 'chart-invest')
             }}
             checked={inputChecked === 'TVL'}
           />
@@ -188,7 +181,7 @@ const ChartProducts = ({ crpPoolAddress, height }: IChartProductsProps) => {
             disabled={true}
             onChange={() => {
               setInputChecked('Allocation')
-              matomoEvent('click-on-tab', 'allocation')
+              trackEventFunction('click-on-tab', 'allocation', 'chart-invest')
             }}
             checked={inputChecked === 'Allocation'}
           />

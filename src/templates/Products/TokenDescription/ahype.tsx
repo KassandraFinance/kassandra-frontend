@@ -1,21 +1,14 @@
 import React from 'react'
 import Image from 'next/image'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
+
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
 import imageCalc from '../../../../public/assets/images/image-calc.png'
 
 import * as S from './styles'
 
 const AhypeDescription = () => {
-  const { trackEvent } = useMatomo()
-
-  function matomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'summary-invest',
-      action,
-      name
-    })
-  }
+  const { trackEventFunction } = useMatomoEcommerce()
 
   return (
     <>
@@ -111,7 +104,13 @@ const AhypeDescription = () => {
             href="https://kassandrafoundation.medium.com/avalanche-social-index-4042a823c972"
             rel="noopener noreferrer"
             target="_blank"
-            onClick={() => matomoEvent('click-on-link', 'ahype-documention')}
+            onClick={() =>
+              trackEventFunction(
+                'click-on-link',
+                'ahype-documention',
+                'token-description'
+              )
+            }
           >
             aHYPE
           </a>{' '}

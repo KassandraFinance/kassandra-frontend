@@ -2,7 +2,8 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import Big from 'big.js'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
+
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
 import Button from '../Button'
 import ExternalLink from '../ExternalLink'
@@ -27,15 +28,8 @@ interface IKacyCardProps {
 const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
   const [isOpenModal, setIsOpenModal] = React.useState<boolean>(false)
 
-  const { trackEvent } = useMatomo()
+  const { trackEventFunction } = useMatomoEcommerce()
 
-  function clickMatomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'kassandra-card',
-      action: action,
-      name: name
-    })
-  }
   return (
     <S.Container>
       <S.KassandraToken>
@@ -48,7 +42,17 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
           </span>
           <S.SocialContainer>
             <Link href="https://discord.gg/2uGEvqNnuq" passHref>
-              <a target="_blank" rel="noopener noreferrer">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackEventFunction(
+                    'click-on-link',
+                    'media-social',
+                    'kacy-card'
+                  )
+                }
+              >
                 <Image
                   src="/assets/socialMidia/discord.svg"
                   alt="Join our Discord community"
@@ -58,7 +62,17 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
               </a>
             </Link>
             <Link href="https://t.me/KassandraDAO" passHref>
-              <a target="_blank" rel="noopener noreferrer">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackEventFunction(
+                    'click-on-link',
+                    'media-social',
+                    'kacy-card'
+                  )
+                }
+              >
                 <Image
                   src="/assets/socialMidia/telegram.svg"
                   alt="Join our Telegram group"
@@ -68,7 +82,17 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
               </a>
             </Link>
             <Link href="https://github.com/KassandraFinance" passHref>
-              <a target="_blank" rel="noopener noreferrer">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackEventFunction(
+                    'click-on-link',
+                    'media-social',
+                    'kacy-card'
+                  )
+                }
+              >
                 <Image
                   src="/assets/socialMidia/github.svg"
                   alt="Access our GitHub repository"
@@ -78,7 +102,17 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
               </a>
             </Link>
             <Link href="https://kassandrafoundation.medium.com/" passHref>
-              <a target="_blank" rel="noopener noreferrer">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackEventFunction(
+                    'click-on-link',
+                    'media-social',
+                    'kacy-card'
+                  )
+                }
+              >
                 <Image
                   src="/assets/socialMidia/medium.svg"
                   alt="Read our Medium blog"
@@ -88,7 +122,17 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
               </a>
             </Link>
             <Link href="https://twitter.com/dao_kassandra" passHref>
-              <a target="_blank" rel="noopener noreferrer">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackEventFunction(
+                    'click-on-link',
+                    'media-social',
+                    'kacy-card'
+                  )
+                }
+              >
                 <Image
                   src="/assets/socialMidia/twitter.svg"
                   alt="Follow our Twitter feed"
@@ -144,7 +188,13 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
               onClick={() => setIsOpenModal(true)}
             />
             <ExternalLink
-              onClick={() => clickMatomoEvent('click-on-link', 'learn-more')}
+              onClick={() =>
+                trackEventFunction(
+                  'click-on-link',
+                  'learn-more',
+                  'kassandra-card'
+                )
+              }
               hrefLink="https://kassandrafoundation.medium.com/kassandra-dao-token-8bc046d55a00"
               text="Learn more"
             />

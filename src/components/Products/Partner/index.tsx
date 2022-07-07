@@ -1,6 +1,6 @@
 import React from 'react'
 import Image, { StaticImageData } from 'next/image'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
 export interface PartnerData {
   href: string;
@@ -13,22 +13,16 @@ export interface PartnerData {
 }
 
 const Partner = ({ href, image, name }: PartnerData) => {
-  const { trackEvent } = useMatomo()
-
-  function matomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'powered-invest',
-      action,
-      name
-    })
-  }
+  const { trackEventFunction } = useMatomoEcommerce()
 
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={() => matomoEvent('click-on-partner', name)}
+      onClick={() =>
+        trackEventFunction('click-on-partner', name, 'powered-invest')
+      }
     >
       <Image
         src={image.src}

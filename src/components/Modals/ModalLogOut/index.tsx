@@ -1,11 +1,11 @@
 import React from 'react'
 import Image from 'next/image'
 
-import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { ToastInfo } from '../../Toastify/toast'
 
 import useConnect from '../../../hooks/useConnect'
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
 import Button from '../../Button'
 
@@ -26,7 +26,7 @@ const ModalLogOut = ({
   userWalletAddress
 }: IModalLogOutProps) => {
   const { handleDisconnected } = useConnect()
-  const { trackEvent } = useMatomo()
+  const { trackEventFunction } = useMatomoEcommerce()
   const [connectionToWalletConnect, setConnectionToWalletConnect] =
     React.useState(false)
 
@@ -37,14 +37,6 @@ const ModalLogOut = ({
       setConnectionToWalletConnect(true)
     }
   }, [modalOpen])
-
-  function matomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'modal-logout',
-      action,
-      name
-    })
-  }
 
   return (
     <>
@@ -67,7 +59,11 @@ const ModalLogOut = ({
                 type="button"
                 onClick={() => {
                   ToastInfo('Copy address')
-                  matomoEvent('click-on-copy', 'copy-address')
+                  trackEventFunction(
+                    'click-on-copy',
+                    'copy-address',
+                    'modal-logout'
+                  )
                   setModalOpen(false)
                 }}
               >

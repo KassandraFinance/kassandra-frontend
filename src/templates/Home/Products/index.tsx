@@ -4,8 +4,11 @@ import Image from 'next/image'
 import ExternalLink from '../../../components/ExternalLink'
 
 import * as S from './styles'
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
 const Products = () => {
+  const { trackEventFunction } = useMatomoEcommerce()
+
   return (
     <S.Products>
       <S.TextWrapper>
@@ -20,6 +23,13 @@ const Products = () => {
         <ExternalLink
           hrefLink="https://kassandrafoundation.medium.com/how-kassandra-works-ac50630601f6"
           text="Learn more"
+          onClick={() =>
+            trackEventFunction(
+              'click-on-link',
+              'learn-more',
+              'what-is-kassandra'
+            )
+          }
         />
         <S.Link>
           {/* <span>How it Works
