@@ -44,9 +44,9 @@ export const Overview = () => {
 
   React.useEffect(() => {
     if (data) {
-      setGovernances(data.governances[0])
+      data.governances[0] && setGovernances(data.governances[0])
 
-      setYourVotingPower(data.user ? data.user.votingPower : 0)
+      setYourVotingPower(data.user ? data.user.votingPower : new BigNumber(0))
     }
   }, [data])
 

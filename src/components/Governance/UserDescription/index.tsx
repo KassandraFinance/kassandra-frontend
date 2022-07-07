@@ -180,7 +180,9 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   isActiveSocial={
-                    userData.discord !== '' && userData.discord !== undefined
+                    userData.discord !== '' &&
+                    userData.discord !== undefined &&
+                    userData.discord !== null
                   }
                 >
                   <Image
@@ -197,7 +199,9 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   isActiveSocial={
-                    userData.twitter !== '' && userData.twitter !== undefined
+                    userData.twitter !== '' &&
+                    userData.twitter !== undefined &&
+                    userData.twitter !== null
                   }
                 >
                   <Image
@@ -214,7 +218,9 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   isActiveSocial={
-                    userData.telegram !== '' && userData.telegram !== undefined
+                    userData.telegram !== '' &&
+                    userData.telegram !== undefined &&
+                    userData.telegram !== null
                   }
                 >
                   <Image
@@ -231,7 +237,9 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   isActiveSocial={
-                    userData.website !== '' && userData.website !== undefined
+                    userData.website !== '' &&
+                    userData.website !== undefined &&
+                    userData.website !== null
                   }
                 >
                   <Image

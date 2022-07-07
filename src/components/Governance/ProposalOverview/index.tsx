@@ -14,13 +14,13 @@ export interface IStateProposalListProps {
   proposalVote: number;
 }
 
-const proposalArray = [
-  { stateProposal: 'Succeeded', proposalVote: 0 },
-  { stateProposal: 'Active', proposalVote: 0 },
-  { stateProposal: 'Failed', proposalVote: 0 }
-]
-
 const ProposalOverview = () => {
+  const proposalArray = [
+    { stateProposal: 'Succeeded', proposalVote: 0 },
+    { stateProposal: 'Active', proposalVote: 0 },
+    { stateProposal: 'Failed', proposalVote: 0 }
+  ]
+
   // eslint-disable-next-line prettier/prettier
   const [stateProposalsList, setStateProposalsList] = React.useState<IStateProposalListProps[]>(proposalArray)
   const [proposalTotal, setProposalTotal] = React.useState(0)

@@ -55,7 +55,7 @@ const Header = () => {
             </a>
           </Link>
           <DropdownInvest
-            nameOnHeader="invest"
+            nameOnHeader="Investors"
             linkPage={[
               { name: 'Explore Funds', href: '/explore' },
               { name: 'Stake/Farm', href: '/farm' },
@@ -71,7 +71,9 @@ const Header = () => {
               }
             ]}
           /> */}
-          <S.MenuLinkDisable>Managers</S.MenuLinkDisable>
+          <S.MenuLinkDisable>
+            Managers <img src="/assets/utilities/arrow-down-thin.svg" />
+          </S.MenuLinkDisable>
           {/* <Link href="/explore" passHref>
             <S.MenuLink
               onClick={() =>
@@ -94,6 +96,7 @@ const Header = () => {
           process.env.NEXT_PUBLIC_VOTE === '2' ? (
             <DropdownInvest
               nameOnHeader="Governance"
+              adaptToResponsiveSize={true}
               linkPage={[
                 {
                   name: 'Overview',
@@ -114,6 +117,7 @@ const Header = () => {
           )}
           <Link href="/about" passHref>
             <S.MenuLink
+              id="aboutMobile"
               onClick={() =>
                 trackEventFunction('click-on-link', 'about', 'header')
               }
