@@ -91,7 +91,7 @@ const Form = ({
   const { userWalletAddress, chainId, fees, tokenAddress2Index, poolTokensArray } = useSelector((state: RootStateOrAny) => state)
   const { trackBuying, trackBought, trackCancelBuying } = useMatomoEcommerce();
 
-  const [walletConnect, setWalletConnect] = React.useState<any>(null)
+  const [walletConnect, setWalletConnect] = React.useState<string | null>(null)
   const [approvals, setApprovals] = React.useState<Approvals>({
     Withdraw: [],
     Invest: [],
@@ -113,7 +113,6 @@ const Form = ({
   const [swapInBalance, setSwapInBalance] = React.useState(new BigNumber(-1))
 
   const [swapOutAddress, setSwapOutAddress] = React.useState('')
-  const [swapOutPrice, setSwapOutPrice] = React.useState(new BigNumber(-1))
   const [swapOutAmount, setSwapOutAmount] = React.useState([new BigNumber(0)])
   const [swapOutBalance, setSwapOutBalance] = React.useState([new BigNumber(-1)])
 
@@ -227,8 +226,7 @@ const Form = ({
           pow = pow.add(new BigNumber(1));
         }
       }
-      setSwapOutPrice(newSwapOutPrice)
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       const errorStr = error.toString()
       if (userWalletAddress.length > 0) {
@@ -441,7 +439,6 @@ const Form = ({
 
   React.useEffect(() => {
     const tokens = title === 'Withdraw' ? poolTokensArray.length : 1
-    setSwapOutPrice(new BigNumber(-1))
     setSwapOutAmount(Array(tokens).fill(new BigNumber(0)))
   }, [title, swapInAddress, swapOutAddress, poolTokensArray.length])
 
@@ -458,7 +455,6 @@ const Form = ({
 
     if (chainId !== poolChain.chainId) {
       setSwapOutAmount([new BigNumber(0)])
-      setSwapOutPrice(new BigNumber(-1))
       return
     }
 
@@ -540,9 +536,7 @@ const Form = ({
             pow = pow.add(new BigNumber(1));
           }
         }
-
-        setSwapOutPrice(newSwapOutPrice)
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         const errorStr = error.toString()
         if (userWalletAddress.length > 0) {
@@ -574,7 +568,6 @@ const Form = ({
 
     if (chainId !== poolChain.chainId) {
       setSwapOutAmount([new BigNumber(0)])
-      setSwapOutPrice(new BigNumber(-1))
       return
     }
 
@@ -594,8 +587,7 @@ const Form = ({
           corePool.swapFee()
         ])
 
-        const [newSwapOutPrice, newSwapOutAmount] = await Promise.all([
-          proxy.spotPrice(corePoolAddress, swapOutAddress, swapInAddress),
+        const [newSwapOutAmount] = await Promise.all([
           corePool.calcOutGivenIn(
             swapInTotalPoolBalance,
             swapInDenormalizedWeight,
@@ -612,8 +604,6 @@ const Form = ({
         const swapOut = newSwapOutAmount.mul(exchangeRateIn).div(exchangeRateOut)
 
         setSwapOutAmount([swapOut])
-        setSwapOutPrice(newSwapOutPrice)
-
         try {
           if (userWalletAddress.length > 0 && swapInAmount.gt(new BigNumber(0))) {
             await proxy.trySwapExactAmountIn(swapInAddress, swapInAmount, swapOutAddress, userWalletAddress)
@@ -660,8 +650,6 @@ const Form = ({
     }
 
     if (chainId !== poolChain.chainId) {
-      setSwapOutPrice(new BigNumber(-1))
-
       if (swapOutAddress === '') {
         setSwapOutAmount(
           Array(poolTokensArray.length - 1).fill(new BigNumber(0))
@@ -789,19 +777,7 @@ const Form = ({
             poolExitFee
           ),
         ])
-        const [newSwapOutPrice] = await Promise.all([
-          corePool.calcSingleOutGivenPoolIn(
-            swapOutTotalPoolBalance,
-            swapOutDenormalizedWeight,
-            poolSupply,
-            poolTotalDenormalizedWeight,
-            wei,
-            poolSwapFee,
-            poolExitFee
-          )
-        ])
         setSwapOutAmount([SingleSwapOutAmount])
-        setSwapOutPrice(newSwapOutPrice)
       }
       catch (e) {
         if (userWalletAddress.length > 0) {
