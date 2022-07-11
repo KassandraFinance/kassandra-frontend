@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 import BigNumber from 'bn.js'
-import Big from 'big.js'
 
 import { TokenDetails } from '../../../store/modules/poolTokens/types'
 
@@ -9,9 +8,9 @@ import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
 import InputTokenValue from '../../InputTokenValue'
 import SelectInput from '../../SelectInput'
+import OutputTokenValue from '../../OutputTokenValue/OutputTokenValue'
 
 import { BNtoDecimal } from '../../../utils/numerals'
-import { priceDollar } from '../../../utils/priceDollar'
 
 import ahype from '../../../../public/assets/logos/ahype.svg'
 import tricrypto from '../../../../public/assets/logos/tricrypto-with-fund.svg'
@@ -25,20 +24,20 @@ interface IInputEthProps {
   swapBalance: BigNumber;
   decimals: BigNumber;
   poolTokensArray?: TokenDetails[];
-  // optionals for input
   clearInput?: () => void;
   inputRef?: React.RefObject<HTMLInputElement>;
-  // Text Input
   swapAmount: BigNumber;
   setSwapAmount?: React.Dispatch<React.SetStateAction<BigNumber>>;
+  setSwapOutAmount?: React.Dispatch<React.SetStateAction<BigNumber[]>>;
+  setMaxActive: React.Dispatch<React.SetStateAction<boolean>>;
+  maxActive: boolean;
   swapOutAddress?: string;
   disabled: string;
-  // SelectInput
   poolTokens: TokenDetails[];
   tokenDetails: TokenDetails;
-  swapInAmount?: BigNumber;
   swapInAddress?: string;
   setSwapAddress: React.Dispatch<React.SetStateAction<string>>;
+  calculateAmountIn?: (amoutOut: BigNumber) => Promise<void>;
 }
 
 const InputTokens = ({
@@ -50,21 +49,18 @@ const InputTokens = ({
   clearInput,
   inputRef,
   poolTokensArray,
-  // Text Inputs
   swapAmount,
   setSwapAmount,
   swapOutAddress,
   disabled,
-  // SelectInput
   poolTokens,
   tokenDetails,
-  swapInAmount,
-  swapInAddress,
-  setSwapAddress
+  setSwapAddress,
+  setSwapOutAmount,
+  setMaxActive,
+  maxActive,
+  calculateAmountIn
 }: IInputEthProps) => {
-  const [maxActive, setMaxActive] = React.useState<boolean>(false)
-  const [currentMax, setCurrentMax] = React.useState(new BigNumber(0))
-
   const { trackEventFunction } = useMatomoEcommerce()
 
   const tokensList = React.useMemo(() => {
@@ -115,17 +111,14 @@ const InputTokens = ({
         return
       }
       inputRef.current.value = wei2String(swapBalance)
-      setSwapAmount(swapBalance)
+      setSwapAmount(swapBalance.sub(new BigNumber(1)))
       setMaxActive(true)
-      setCurrentMax(swapBalance)
     }
   }
 
   React.useEffect(() => {
-    if (maxActive && currentMax !== swapAmount) {
-      setMaxActive(false)
-    }
-  }, [swapAmount])
+    setMaxActive(false)
+  }, [isWithdraw])
 
   React.useEffect(() => {
     clearInput && clearInput()
@@ -152,37 +145,20 @@ const InputTokens = ({
             max={wei2String(swapBalance)}
             decimals={decimals}
             setInputValue={setSwapAmount}
-            swapAmount={swapAmount}
-            swapInAmount={swapInAmount}
+            setMaxActive={setMaxActive}
           />
         ) : (
-          <>
-            <S.Input
-              readOnly
-              type="text"
-              placeholder="0"
-              value={
-                decimals.gt(new BigNumber(-1))
-                  ? BNtoDecimal(
-                      swapAmount || new BigNumber(0),
-                      decimals.toNumber()
-                    )
-                  : '0'
-              }
-            />
-            <span className="price-dolar">
-              {poolTokensArray &&
-                'USD: ' +
-                  BNtoDecimal(
-                    Big(swapAmount.toString())
-                      .mul(Big(priceDollar(swapOutAddress, poolTokensArray)))
-                      .div(Big(10).pow(Number(decimals))),
-                    18,
-                    2,
-                    2
-                  )}
-            </span>
-          </>
+          <OutputTokenValue
+            disabled={isWithdraw === 'Withdraw' ? '' : disabled}
+            decimals={decimals}
+            poolTokensArray={poolTokensArray}
+            swapAmount={swapAmount}
+            swapOutAddress={swapOutAddress}
+            calculateAmountIn={calculateAmountIn}
+            setSwapOutAmount={setSwapOutAmount}
+            operation={isWithdraw ?? ''}
+            setMaxActive={setMaxActive}
+          />
         )}
         {setSwapAmount && (
           <S.ButtonMax
