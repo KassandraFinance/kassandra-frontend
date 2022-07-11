@@ -4,10 +4,11 @@ import React from 'react'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
 import { AbiItem } from "web3-utils"
-import { useSelector, RootStateOrAny } from 'react-redux'
 
 import web3, { EventSubscribe } from '../utils/web3'
 import { TransactionCallback } from '../utils/txWait'
+
+import { useAppSelector } from '../store/hooks'
 
 import StakingContract from "../constants/abi/Staking.json"
 
@@ -43,7 +44,7 @@ export interface PoolInfo {
 }
 
 const useStakingContract = (address: string) => {
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
   const [contract, setContract] = React.useState(new web3.eth.Contract((StakingContract as unknown) as AbiItem, address))
 
   React.useEffect(() => {

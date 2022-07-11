@@ -4,8 +4,6 @@ import { useRouter } from 'next/router'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 
-import { useSelector, RootStateOrAny } from 'react-redux'
-
 import { Staking, LPDaiAvax } from '../../../constants/tokenAddresses'
 
 import usePriceLP from '../../../hooks/usePriceLP'
@@ -17,6 +15,8 @@ import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 import { registerToken } from '../../../utils/registerToken'
+
+import { useAppSelector } from '../../../store/hooks'
 
 import Button from '../../../components/Button'
 import ModalWalletConnect from '../../../components/Modals/ModalWalletConnect'
@@ -53,7 +53,7 @@ const MyAsset = ({
   const tokenWallet = useERC20Contract(crpPoolAddress)
   const stakingContract = useStakingContract(Staking)
 
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
   const [stakedToken, setStakedToken] = React.useState<BigNumber>(

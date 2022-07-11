@@ -1,9 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useSelector, RootStateOrAny } from 'react-redux'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import substr from '../../utils/substr'
+import { useAppSelector } from '../../store/hooks'
 
 import Button from '../Button'
 import DropdownInvest from '../Dropdown'
@@ -31,7 +32,7 @@ const Header = () => {
 
   const { trackEventFunction } = useMatomoEcommerce()
 
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   return (
     <>
@@ -55,7 +56,7 @@ const Header = () => {
             </a>
           </Link>
           <DropdownInvest
-            nameOnHeader="invest"
+            nameOnHeader="Investors"
             linkPage={[
               { name: 'Explore Funds', href: '/explore' },
               { name: 'Stake/Farm', href: '/farm' },
@@ -71,7 +72,9 @@ const Header = () => {
               }
             ]}
           /> */}
-          <S.MenuLinkDisable>Managers</S.MenuLinkDisable>
+          <S.MenuLinkDisable>
+            Managers <img src="/assets/utilities/arrow-down-thin.svg" />
+          </S.MenuLinkDisable>
           {/* <Link href="/explore" passHref>
             <S.MenuLink
               onClick={() =>
@@ -94,6 +97,7 @@ const Header = () => {
           process.env.NEXT_PUBLIC_VOTE === '2' ? (
             <DropdownInvest
               nameOnHeader="Governance"
+              adaptToResponsiveSize={true}
               linkPage={[
                 {
                   name: 'Overview',
@@ -114,6 +118,7 @@ const Header = () => {
           )}
           <Link href="/about" passHref>
             <S.MenuLink
+              id="aboutMobile"
               onClick={() =>
                 trackEventFunction('click-on-link', 'about', 'header')
               }

@@ -5,14 +5,14 @@ import Big from 'big.js'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
-import { useSelector, RootStateOrAny } from 'react-redux'
-
 import { ProxyContract } from '../../../constants/tokenAddresses'
 
 import useProxy from '../../../hooks/useProxy'
 import useERC20Contract, { ERC20 } from '../../../hooks/useERC20Contract'
 import usePoolContract from '../../../hooks/usePoolContract'
 import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+
+import { useAppSelector } from '../../../store/hooks'
 
 import web3 from '../../../utils/web3'
 import { priceDollar } from '../../../utils/priceDollar'
@@ -31,6 +31,7 @@ import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 import { Titles } from '..'
 
 import * as S from './styles'
+import { usePoolTokens } from '../../../context/PoolTokensContext'
 
 const WAVAX = '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7'
 
@@ -88,7 +89,9 @@ const Form = ({
   const corePool = usePoolContract(corePoolAddress)
   const proxy = useProxy(ProxyContract, crpPoolAddress, corePoolAddress)
 
-  const { userWalletAddress, chainId, fees, tokenAddress2Index, poolTokensArray } = useSelector((state: RootStateOrAny) => state)
+  const { chainId, fees, tokenAddress2Index, userWalletAddress } = useAppSelector(state => state)
+  const { poolTokens: poolTokensArray } = usePoolTokens()
+
   const { trackBuying, trackBought, trackCancelBuying } = useMatomoEcommerce();
 
   const [walletConnect, setWalletConnect] = React.useState<string | null>(null)
@@ -374,7 +377,7 @@ const Form = ({
 
   // get balance of swap in token
   React.useEffect(() => {
-    if (swapInAddress.length === 0 || userWalletAddress.length === 0 || chainId.length === 0 || chainId !== poolChain.chainId) {
+    if (swapInAddress.length === 0 || userWalletAddress.length === 0 || chainId.toString().length === 0 || chainId !== poolChain.chainId) {
       return
     }
 
@@ -394,7 +397,7 @@ const Form = ({
 
   // get balance of swap out token
   React.useEffect(() => {
-    if (userWalletAddress.length === 0 || chainId.length === 0 || chainId !== poolChain.chainId) {
+    if (userWalletAddress.length === 0 || chainId.toString().length === 0 || chainId !== poolChain.chainId) {
       return
     }
 

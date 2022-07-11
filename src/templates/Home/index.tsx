@@ -37,9 +37,9 @@ interface IKacyMarketDataProps {
 
 const Home = () => {
   const { trackPageView } = useMatomo()
-
   // eslint-disable-next-line prettier/prettier
-  const [kacyMarketData, setKacyMarketData] = React.useState<IKacyMarketDataProps>({
+  const [kacyMarketData, setKacyMarketData] =
+    React.useState<IKacyMarketDataProps>({
       price: 0,
       marketCap: Big(0),
       supply: Big(0),

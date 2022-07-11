@@ -3,7 +3,6 @@ import useSWR from 'swr'
 import Image from 'next/image'
 import detectEthereumProvider from '@metamask/detect-provider'
 import { request } from 'graphql-request'
-import { useDispatch } from 'react-redux'
 
 import Big from 'big.js'
 import BigNumber from 'bn.js'
@@ -18,11 +17,13 @@ import {
 } from '../../constants/tokenAddresses'
 
 import { BNtoDecimal } from '../../utils/numerals'
-import { TokenDetails } from '../../store/modules/poolTokens/types'
-import { actionSetFees } from '../../store/modules/fees/actions'
-import { actionSetPoolImages } from '../../store/modules/poolImages/actions'
-import { actionGetPoolTokensArray } from '../../store/modules/poolTokens/actions'
-import { actionSetTokenAddress2Index } from '../../store/modules/tokenAddress2Index/actions'
+
+import { ITokenDetails } from '../../context/PoolTokensContext'
+import { useAppDispatch } from '../../store/hooks'
+import { setFees } from '../../store/reducers/fees'
+import { setPoolImages } from '../../store/reducers/poolImages'
+import { setTokenAddress2Index } from '../../store/reducers/tokenAddress2Index'
+import { usePoolTokens } from '../../context/PoolTokensContext'
 
 import useYieldYak from '../../hooks/useYieldYak'
 import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
@@ -126,8 +127,10 @@ const Products = ({ product }: Input) => {
     decimals: 18
   })
 
+  const { setPoolTokens } = usePoolTokens()
+
   const { trackProductPageView, trackEventFunction } = useMatomoEcommerce()
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const yieldYak = useYieldYak()
 
@@ -181,7 +184,7 @@ const Products = ({ product }: Input) => {
   }
 
   async function getTokenDetails() {
-    const pool: TokenDetails = {
+    const pool: ITokenDetails = {
       balance_in_pool: '',
       address: data.pool.id,
       allocation: 0,
@@ -192,7 +195,7 @@ const Products = ({ product }: Input) => {
       symbol: data.pool.symbol
     }
 
-    const tokenDetails: TokenDetails[] = await Promise.all(
+    const tokenDetails: ITokenDetails[] = await Promise.all(
       data.pool.underlying_assets.map(
         async (item: {
           balance: string,
@@ -217,7 +220,7 @@ const Products = ({ product }: Input) => {
               item.balance
             )
             symbol = item.token.name.split(' ').pop()
-            balance = balancePoolYY
+            balance = Big(balancePoolYY.toString())
             address = invertToken[item.token.id]
             decimals = decimalsYY
             dataInfoYY = {
@@ -239,7 +242,7 @@ const Products = ({ product }: Input) => {
             allocation_goal: (
               Number(item.weight_goal_normalized) * 100
             ).toFixed(2),
-            decimals,
+            decimals: decimals,
             price: Number(
               coinGeckoResponse.infoToken[
                 invertToken[item.token.id] ?? item.token.id
@@ -264,19 +267,19 @@ const Products = ({ product }: Input) => {
     tokenDetails.push(pool)
 
     dispatch(
-      actionSetTokenAddress2Index(
+      setTokenAddress2Index(
         tokenDetails.reduce((acc, cur, i) => ({ [cur.address]: i, ...acc }), {})
       )
     )
     dispatch(
-      actionSetFees({
+      setFees({
         Invest: '0',
         Withdraw: (data.pool.fee_exit * 100).toFixed(2),
         Swap: (data.pool.fee_swap * 100).toFixed(2)
       })
     )
-    dispatch(actionGetPoolTokensArray(tokenDetails))
-    dispatch(actionSetPoolImages(coinGeckoResponse.images))
+    setPoolTokens(tokenDetails)
+    dispatch(setPoolImages(coinGeckoResponse.images))
   }
 
   React.useEffect(() => {

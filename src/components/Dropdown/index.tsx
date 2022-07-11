@@ -29,9 +29,15 @@ const Dropdown = ({
       <S.DropButton
         onTouchStartCapture={() => setIsDropdown(true)}
         onMouseOver={() => setIsDropdown(true)}
-        onMouseOut={() => setIsDropdown(false)}
+        onMouseOut={(event: any) => {
+          setIsDropdown(false), event.target.blur()
+        }}
+        onKeyPress={event =>
+          event.key === 'Enter' && setIsDropdown(!isDropdown)
+        }
       >
         {nameOnHeader}
+        <img src="/assets/utilities/arrow-down-thin.svg" />
       </S.DropButton>
       <S.DropdownContent
         onMouseOver={() => setIsDropdown(true)}

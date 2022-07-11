@@ -1,8 +1,8 @@
 import React from 'react'
-import { RootStateOrAny, useSelector } from 'react-redux'
-import { PerformanceValues } from '../../../store/modules/performanceValues/actions'
 
-import { TokenDetails } from '../../../store/modules/poolTokens/types'
+import { usePoolTokens } from '../../../context/PoolTokensContext'
+import { useAppSelector } from '../../../store/hooks'
+
 // import substr from '../../../utils/substr'
 import ChartProducts from './ChartProducts'
 import {
@@ -44,14 +44,8 @@ const SharedImage = ({
   productName,
   fundImage
 }: ISharedImageProps) => {
-  // const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-  const {
-    poolTokensArray,
-    performanceValues
-  }: {
-    poolTokensArray: TokenDetails[],
-    performanceValues: PerformanceValues
-  } = useSelector((state: RootStateOrAny) => state)
+  const { performanceValues } = useAppSelector(state => state)
+  const { poolTokens } = usePoolTokens()
 
   return (
     <S.SharedImage className="bg-image-color">
@@ -124,7 +118,7 @@ const SharedImage = ({
                 <span>Assets</span>
               </S.InfoTitle>
               <S.AssetsContainer>
-                {poolTokensArray.slice(0, -1).map((token, index) => (
+                {poolTokens.slice(0, -1).map((token, index) => (
                   <img
                     key={index}
                     src={

@@ -3,7 +3,7 @@ import BigNumber from 'bn.js'
 import Big from 'big.js'
 import Tippy from '@tippyjs/react'
 
-import { TokenDetails } from '../../store/modules/poolTokens/types';
+import { ITokenDetails } from '../../context/PoolTokensContext';
 
 import { BNtoDecimal } from '../../utils/numerals';
 import { priceDollar } from '../../utils/priceDollar';
@@ -16,7 +16,7 @@ interface IOutputProps {
   disabled: string;
   operation: string;
   swapOutAddress?: string;
-  poolTokensArray?: TokenDetails[];
+  poolTokensArray?: ITokenDetails[];
   calculateAmountIn?: (amoutOut: BigNumber) => Promise<void>;
   setSwapOutAmount?: React.Dispatch<React.SetStateAction<BigNumber[]>>;
   setMaxActive?: React.Dispatch<React.SetStateAction<boolean>>;
