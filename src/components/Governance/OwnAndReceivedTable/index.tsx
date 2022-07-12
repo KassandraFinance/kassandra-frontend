@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import useSWR from 'swr'
 import Big from 'big.js'
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 import substr from '../../../utils/substr'
@@ -24,6 +25,8 @@ interface IUserVotingPowerProps {
   to: {
     id: string
   };
+  image: string;
+  name: string;
 }
 
 interface IOwnAndReceivedTableProps {
@@ -134,16 +137,48 @@ export const OwnAndReceivedTable = ({
                         item.to?.id === userAddressUrl ? (
                           ''
                         ) : (
-                          <Image src={avax} width={24} height={24} alt="" />
+                          <>
+                            {item.image ? (
+                              <Image
+                                src={item.image}
+                                width={24}
+                                height={24}
+                                alt=""
+                              />
+                            ) : (
+                              <Jazzicon
+                                diameter={24}
+                                seed={jsNumberForAddress(item.to.id)}
+                              />
+                            )}
+                          </>
                         )
                       ) : (
-                        <Image src={avax} width={24} height={24} alt="" />
+                        <>
+                          {item.image ? (
+                            <Image
+                              src={item.image}
+                              width={24}
+                              height={24}
+                              alt=""
+                            />
+                          ) : (
+                            <Jazzicon
+                              diameter={24}
+                              seed={jsNumberForAddress(item.from.id)}
+                            />
+                          )}
+                        </>
                       )}
                       <span>
                         {isDelegationTable
                           ? item.to.id === userAddressUrl
                             ? 'self'
+                            : item.name
+                            ? item.name
                             : substr(item.to.id)
+                          : item.name
+                          ? item.name
                           : substr(item.from?.id)}
                       </span>
                     </S.Td>

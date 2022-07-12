@@ -215,7 +215,8 @@ export const Td = styled.td`
   }
 
   img {
-    width: 2.4rem;
+    width: 3.2rem;
+    border-radius: 50%;
   }
 
   span {
