@@ -214,7 +214,7 @@ export const Td = styled.td`
     font-size: ${theme.font.sizes.font12};
   }
 
-  img {
+  .user-image {
     width: 3.2rem;
     border-radius: 50%;
   }

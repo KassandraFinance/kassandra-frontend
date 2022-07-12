@@ -12,6 +12,7 @@ import { useAppSelector } from '../../../store/hooks'
 import AnyCard from '../../AnyCard'
 
 import avax from '../../../../public/assets/logos/kacy-stake.svg'
+import NftImage from '../../NftImage'
 
 import * as S from './styles'
 
@@ -27,6 +28,7 @@ interface IUserVotingPowerProps {
   };
   image: string;
   name: string;
+  isNFT: boolean;
 }
 
 interface IOwnAndReceivedTableProps {
@@ -139,12 +141,19 @@ export const OwnAndReceivedTable = ({
                         ) : (
                           <>
                             {item.image ? (
-                              <Image
-                                src={item.image}
-                                width={24}
-                                height={24}
-                                alt=""
-                              />
+                              item.isNFT ? (
+                                <NftImage
+                                  NftUrl={item.image}
+                                  imageSize="small"
+                                />
+                              ) : (
+                                <Image
+                                  src={item.image}
+                                  width={24}
+                                  height={24}
+                                  alt=""
+                                />
+                              )
                             ) : (
                               <Jazzicon
                                 diameter={24}
@@ -156,12 +165,16 @@ export const OwnAndReceivedTable = ({
                       ) : (
                         <>
                           {item.image ? (
-                            <Image
-                              src={item.image}
-                              width={24}
-                              height={24}
-                              alt=""
-                            />
+                            item.isNFT ? (
+                              <NftImage NftUrl={item.image} imageSize="small" />
+                            ) : (
+                              <Image
+                                src={item.image}
+                                width={24}
+                                height={24}
+                                alt=""
+                              />
+                            )
                           ) : (
                             <Jazzicon
                               diameter={24}

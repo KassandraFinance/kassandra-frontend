@@ -36,6 +36,7 @@ interface IUserVotingPowerProps {
   };
   image: string;
   name: string;
+  isNFT: boolean;
 }
 
 interface IGovernanceDataProps {
@@ -95,7 +96,8 @@ const GovernanceData = ({ address }: IGovernanceDataProps) => {
               id: prop.to.id
             },
             image: userProfile.image || '',
-            name: userProfile.name || ''
+            name: userProfile.name || '',
+            isNFT: userProfile?.isNFT || false
           }
         })
       )
@@ -123,7 +125,8 @@ const GovernanceData = ({ address }: IGovernanceDataProps) => {
               id: prop.to.id
             },
             image: userProfile.image || '',
-            name: userProfile.name || ''
+            name: userProfile.name || '',
+            isNFT: userProfile?.isNFT || false
           }
         })
       )

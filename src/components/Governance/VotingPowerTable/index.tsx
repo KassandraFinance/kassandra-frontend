@@ -13,6 +13,7 @@ import substr from '../../../utils/substr'
 import { GET_USERS } from './graphql'
 
 import * as S from './styles'
+import NftImage from '../../NftImage'
 
 interface IVotingPowerRankProps {
   address: string;
@@ -22,6 +23,7 @@ interface IVotingPowerRankProps {
   proposalsCreated: number;
   name?: string;
   image?: string;
+  isNFT?: boolean;
 }
 
 export const VotingPowerTable = () => {
@@ -69,7 +71,8 @@ export const VotingPowerTable = () => {
                 votes: user.votes.length,
                 proposalsCreated: user.proposals.length,
                 name: userProfile?.nickname || '',
-                image: userProfile?.image || ''
+                image: userProfile?.image || '',
+                isNFT: userProfile?.isNFT || false
               }
             }
 
@@ -114,7 +117,11 @@ export const VotingPowerTable = () => {
                   <S.Td className="rank">{index + 1}</S.Td>
                   <S.Td className="user">
                     {item.image ? (
-                      <img src={item.image} alt="" />
+                      item.isNFT ? (
+                        <NftImage NftUrl={item.image} imageSize="small" />
+                      ) : (
+                        <img className="user-image" src={item.image} alt="" />
+                      )
                     ) : (
                       <Jazzicon
                         diameter={24}
