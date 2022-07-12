@@ -8,6 +8,7 @@ import * as S from './styles'
 interface ILinkPage {
   name: string;
   href: string;
+  disabled?: boolean;
 }
 
 interface IDropdownProps {
@@ -46,19 +47,25 @@ const Dropdown = ({
         adaptToResponsiveSize={adaptToResponsiveSize}
       >
         {linkPage.map((item, index) => (
-          <Link key={index} href={item.href}>
-            <a
-              onClick={() =>
-                trackEventFunction(
-                  'click-on-link',
-                  `${item.name}`,
-                  `header-${nameOnHeader}`
-                )
-              }
-            >
-              {item.name}
-            </a>
-          </Link>
+          <div key={index}>
+            {!item.disabled ? (
+              <Link href={item.href}>
+                <a
+                  onClick={() =>
+                    trackEventFunction(
+                      'click-on-link',
+                      `${item.name}`,
+                      `header-${nameOnHeader}`
+                    )
+                  }
+                >
+                  {item.name}
+                </a>
+              </Link>
+            ) : (
+              <S.MenuLinkDisable>{item.name}</S.MenuLinkDisable>
+            )}
+          </div>
         ))}
       </S.DropdownContent>
     </S.Dropdown>

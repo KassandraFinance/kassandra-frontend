@@ -58,17 +58,17 @@ export const DropButton = styled.button`
 
   img {
     position: absolute;
-    right: -20px;
-    top: 18px;
+    right: -2rem;
+    top: 1.8rem;
 
     transition: transform 300ms ease;
 
     @media (max-width: 540px) {
-      right: -16px;
-      top: 17px;
+      right: -1.6rem;
+      top: 1.7rem;
     }
     @media (max-width: 360px) {
-      top: 16px;
+      top: 1.6rem;
     }
   }
 
@@ -90,7 +90,7 @@ interface IDropdownContentProps {
   adaptToResponsiveSize?: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const DropdownContent = styled.div<IDropdownContentProps>`
   position: absolute;
   left: 0rem;
@@ -144,4 +144,15 @@ export const DropdownContent = styled.div<IDropdownContentProps>`
   @media (max-width: 380px) {
     min-width: 11rem;
   }
+`
+
+export const MenuLinkDisable = styled.a`
+  display: block;
+  padding: 1.2rem 1.6rem;
+
+  color: ${theme.colors.snow};
+  font-size: ${theme.font.sizes.font16};
+  font-weight: ${theme.font.weight.light};
+  text-decoration: none;
+  cursor: not-allowed;
 `

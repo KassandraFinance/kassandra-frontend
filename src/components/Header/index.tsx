@@ -58,23 +58,39 @@ const Header = () => {
           <DropdownInvest
             nameOnHeader="Investors"
             linkPage={[
-              { name: 'Explore Funds', href: '/explore' },
-              { name: 'Stake/Farm', href: '/farm' },
-              { name: 'My Portfolio', href: `/profile/${userWalletAddress}` }
+              { name: 'Explore', href: '/explore' },
+              { name: 'Farm', href: '/farm' },
+              { name: 'Profile', href: `/profile/${userWalletAddress}` }
             ]}
           />
-          {/* <DropdownInvest
+          <DropdownInvest
             nameOnHeader="Managers"
             linkPage={[
               {
-                name: 'My Managed Funds',
-                href: `/profile/${userWalletAddress}?tab=managed-funds`
+                name: 'Explore',
+                href: ``,
+                disabled: true
+              },
+              {
+                name: 'Create',
+                href: ``,
+                disabled: true
+              },
+              {
+                name: 'Manage',
+                href: ``,
+                disabled: true
+              },
+              {
+                name: 'Profile',
+                href: ``,
+                disabled: true
               }
             ]}
-          /> */}
-          <S.MenuLinkDisable>
+          />
+          {/* <S.MenuLinkDisable>
             Managers <img src="/assets/utilities/arrow-down-thin.svg" />
-          </S.MenuLinkDisable>
+          </S.MenuLinkDisable> */}
           {/* <Link href="/explore" passHref>
             <S.MenuLink
               onClick={() =>
@@ -101,14 +117,24 @@ const Header = () => {
               linkPage={[
                 {
                   name: 'Overview',
-                  href: '/gov'
+                  href: '',
+                  disabled: true
+                },
+                {
+                  name: 'Proposals',
+                  href: '',
+                  disabled: true
+                },
+                {
+                  name: 'Stake',
+                  href: `/farm`
                 },
                 {
                   name: 'Forum',
-                  href: `/`
+                  href: `http://gov.kassandra.finance/`
                 },
                 {
-                  name: 'My Gov. Data',
+                  name: 'Profile',
                   href: `/profile/${userWalletAddress}?tab=governance-data`
                 }
               ]}
@@ -116,16 +142,21 @@ const Header = () => {
           ) : (
             <S.MenuLinkDisable>Governance</S.MenuLinkDisable>
           )}
-          <Link href="/about" passHref>
-            <S.MenuLink
-              id="aboutMobile"
-              onClick={() =>
-                trackEventFunction('click-on-link', 'about', 'header')
-              }
-            >
-              About
-            </S.MenuLink>
-          </Link>
+          <S.MenuContainer>
+            <DropdownInvest
+              nameOnHeader="Learn"
+              linkPage={[
+                {
+                  name: 'About',
+                  href: `/about`
+                },
+                {
+                  name: 'Blog',
+                  href: `https://kassandrafoundation.medium.com/`
+                }
+              ]}
+            />
+          </S.MenuContainer>
           {userWalletAddress ? (
             <Button
               className="connect-wallet"
