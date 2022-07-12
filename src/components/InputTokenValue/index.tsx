@@ -6,25 +6,22 @@ import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
 import { Input } from './styles'
-import { BNtoDecimal } from '../../utils/numerals'
 
 interface IInputProps {
   max: string;
   decimals: BigNumber;
   inputRef: React.RefObject<HTMLInputElement>;
   setInputValue: React.Dispatch<React.SetStateAction<BigNumber>>;
+  setMaxActive?: React.Dispatch<React.SetStateAction<boolean>>;
   disabled?: string;
-  swapAmount?: any;
-  swapInAmount?: any;
 }
 
 const InputTokenValue = ({
   decimals,
   inputRef,
   setInputValue,
-  disabled,
-  swapAmount,
-  swapInAmount
+  setMaxActive,
+  disabled
 }: IInputProps) => {
   if (!disabled) {
     disabled = ''
@@ -35,15 +32,6 @@ const InputTokenValue = ({
       (document.activeElement as HTMLElement).blur()
     }
   }
-
-  React.useEffect(() => {
-    if (inputRef && inputRef?.current) {
-      inputRef.current.value = BNtoDecimal(
-          swapAmount || new BigNumber(0),
-          decimals.toNumber()
-        )
-    }
-  }, [swapAmount, swapInAmount])
 
   return (
     <Tippy content={disabled} disabled={disabled.length === 0}>
@@ -93,7 +81,7 @@ const InputTokenValue = ({
             const paddedRight = `${values[0]}${
               `${values[1] || 0}${'0'.repeat(decimalsNum)}`.slice(0, decimalsNum)
             }`
-
+            setMaxActive && setMaxActive(false)
             setInputValue && setInputValue(new BigNumber(paddedRight))
           }
         }
