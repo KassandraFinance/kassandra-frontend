@@ -87,29 +87,6 @@ const Header = () => {
               }
             ]}
           />
-          {/* <S.MenuLinkDisable>
-            Managers <img src="/assets/utilities/arrow-down-thin.svg" />
-          </S.MenuLinkDisable> */}
-          {/* <Link href="/explore" passHref>
-            <S.MenuLink
-              onClick={() =>
-                trackEventFunction('click-on-link', 'explore', 'header')
-              }
-            >
-              Invest
-            </S.MenuLink>
-          </Link> */}
-          {/* <Link href="/farm" passHref>
-            <S.MenuLink
-              onClick={() =>
-                trackEventFunction('click-on-link', 'stake-farm', 'header')
-              }
-            >
-              Stake/Farm
-            </S.MenuLink>
-        </Link>*/}
-          {/* {process.env.NEXT_PUBLIC_VOTE === '1' ||
-          process.env.NEXT_PUBLIC_VOTE === '2' ? ( */}
           <DropdownInvest
             nameOnHeader="Governance"
             adaptToResponsiveSize={true}
@@ -139,9 +116,6 @@ const Header = () => {
               }
             ]}
           />
-          {/* ) : (
-            <S.MenuLinkDisable>Governance</S.MenuLinkDisable>
-          )} */}
           <S.MenuContainer>
             <DropdownInvest
               nameOnHeader="Learn"
