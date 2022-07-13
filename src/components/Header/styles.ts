@@ -25,17 +25,13 @@ export const Wrapper = styled.div`
 
 export const LogoWrapper = styled.div`
   .logo-desktop {
-    img {
-      height: 4rem;
-    }
-
     @media (max-width: 960px) {
       display: none;
     }
   }
 
   .logo-ipad {
-    img {
+    > img {
       width: 7rem;
     }
 
