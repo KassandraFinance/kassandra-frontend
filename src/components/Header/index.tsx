@@ -130,7 +130,8 @@ const Header = () => {
               },
               {
                 name: 'Forum',
-                href: `http://gov.kassandra.finance/`
+                href: `http://gov.kassandra.finance/`,
+                newTab: true
               },
               {
                 name: 'Profile',
