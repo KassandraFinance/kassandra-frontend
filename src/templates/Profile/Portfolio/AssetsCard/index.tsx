@@ -47,11 +47,15 @@ interface IStakingTableProps {
 const namePools: { [key: string]: string } = {
   KACY: 'BY KASSANDRA',
   'LP-JOE': 'by HEIMDALL.land & Trader Joe',
-  LP: 'by HEIMDALL.land & pangolin '
+  'LP-PNG': 'by HEIMDALL.land & pangolin '
 }
 
 // eslint-disable-next-line prettier/prettier
-const AssetsCard = ({ profileAddress, priceToken, cardstakesPoolNew }: IStakingTableProps) => {
+const AssetsCard = ({
+  profileAddress,
+  priceToken,
+  cardstakesPoolNew
+}: IStakingTableProps) => {
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   return (
@@ -79,7 +83,7 @@ const AssetsCard = ({ profileAddress, priceToken, cardstakesPoolNew }: IStakingT
                 <S.AssetsBodyContent>
                   <S.Balance>
                     BALANCE
-                    <Tippy content="Tippy">
+                    <Tippy content="This address total KACY balance, accounting wallet holdings, and stake.">
                       <S.Tooltip tabIndex={0}>
                         <Image
                           src={infoGray}

@@ -25,17 +25,13 @@ export const Wrapper = styled.div`
 
 export const LogoWrapper = styled.div`
   .logo-desktop {
-    img {
-      height: 4rem;
-    }
-
     @media (max-width: 960px) {
       display: none;
     }
   }
 
   .logo-ipad {
-    img {
+    > img {
       width: 7rem;
     }
 
@@ -198,15 +194,15 @@ export const MenuLinkDisable = styled.a`
 
   img {
     position: absolute;
-    right: -20px;
-    top: 18px;
+    right: -2rem;
+    top: 1.8rem;
 
     @media (max-width: 540px) {
-      right: -16px;
-      top: 17px;
+      right: -1.6rem;
+      top: 1.7rem;
     }
     @media (max-width: 360px) {
-      top: 16px;
+      top: 1.6rem;
     }
   }
 `
@@ -269,4 +265,10 @@ export const ButtonOptions = styled.button`
   background-color: rgba(255, 255, 255, 0.1);
   border: none;
   border-radius: 50%;
+`
+
+export const MenuContainer = styled.div`
+  @media (max-width: 540px) {
+    display: none;
+  }
 `

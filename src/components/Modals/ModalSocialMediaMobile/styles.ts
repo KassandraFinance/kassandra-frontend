@@ -40,6 +40,8 @@ export const SocialIcon = styled.a`
 
   text-decoration: none;
 
+  cursor: pointer;
+
   .medium {
     display: block;
 

@@ -48,7 +48,7 @@ const useProxy = (address: string, sipAddress: string, coreAddress: string) => {
       const res = await contract.methods
         .exitswapPoolAmountIn(sipAddress, tokenOut, tokenAmountIn, minPoolAmountOut)
         .send({ from: walletAddress }, callback)
-      
+
         return res
     }
 
@@ -67,7 +67,7 @@ const useProxy = (address: string, sipAddress: string, coreAddress: string) => {
     }
 
     const swapExactAmountIn = async (
-      tokenIn: string, 
+      tokenIn: string,
       tokenAmountIn: BigNumber,
       tokenOut: string,
       minAmountOut: BigNumber,
@@ -80,9 +80,9 @@ const useProxy = (address: string, sipAddress: string, coreAddress: string) => {
       const res = await contract.methods
         .swapExactAmountIn(
           coreAddress,
-          tokenIn, 
-          tokenAmountIn, 
-          tokenOut, 
+          tokenIn,
+          tokenAmountIn,
+          tokenOut,
           minAmountOut,
           new BigNumber('10').pow(new BigNumber(36))
         )
@@ -113,11 +113,28 @@ const useProxy = (address: string, sipAddress: string, coreAddress: string) => {
       const wrapped = await contract.methods.wNativeToken().call()
 
       const avaxValue = tokenIn === wrapped ? tokenAmountIn : new BigNumber(0)
-      
+
       const res = await contract.methods
         .joinswapExternAmountIn(sipAddress, tokenIn, tokenAmountIn, minPoolAmountOut)
         .call({ from: walletAddress, value: avaxValue })
-  
+
+      return res
+    }
+
+    const tryJoinswapPoolAmountOut = async (
+      tokenIn: string,
+      tokenAmountOut: BigNumber,
+      maxAmountIn: BigNumber,
+      walletAddress: string
+    ) => {
+      const wrapped = await contract.methods.wNativeToken().call()
+
+      const avaxValue = tokenIn === wrapped ? tokenAmountOut : new BigNumber(0)
+
+      const res = await contract.methods
+        .joinswapPoolAmountOut(sipAddress, tokenIn, tokenAmountOut, maxAmountIn)
+        .call({ from: walletAddress, value: avaxValue })
+
       return res
     }
 
@@ -149,7 +166,7 @@ const useProxy = (address: string, sipAddress: string, coreAddress: string) => {
     }
 
     const trySwapExactAmountIn = async (
-      tokenIn: string, 
+      tokenIn: string,
       tokenAmountIn: BigNumber,
       tokenOut: string,
       walletAddress: string,
@@ -160,9 +177,9 @@ const useProxy = (address: string, sipAddress: string, coreAddress: string) => {
       const res = await contract.methods
         .swapExactAmountIn(
           coreAddress,
-          tokenIn, 
-          tokenAmountIn, 
-          tokenOut, 
+          tokenIn,
+          tokenAmountIn,
+          tokenOut,
           new BigNumber(0),
           new BigNumber('10').pow(new BigNumber(36))
         )
@@ -176,10 +193,11 @@ const useProxy = (address: string, sipAddress: string, coreAddress: string) => {
       exitswapPoolAmountIn,
       exitPool,
       swapExactAmountIn,
-      
+
       spotPrice,
       exchangeRate,
       tryJoinswapExternAmountIn,
+      tryJoinswapPoolAmountOut,
       tryExitswapPoolAmountIn,
       tryExitPool,
       trySwapExactAmountIn

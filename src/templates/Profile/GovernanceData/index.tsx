@@ -34,6 +34,9 @@ interface IUserVotingPowerProps {
   to: {
     id: string
   };
+  image: string;
+  name: string;
+  isNFT: boolean;
 }
 
 interface IGovernanceDataProps {
@@ -79,6 +82,9 @@ const GovernanceData = ({ address }: IGovernanceDataProps) => {
         data.received.map(async (prop: IUserVotingPowerProps) => {
           receivedTotal = receivedTotal.add(prop.votingPower)
 
+          const response = await fetch(`/api/profile/${prop.from.id}`)
+          const userProfile = await response.json()
+
           return {
             pool: prop.pool,
             votingPower: prop.votingPower,
@@ -88,7 +94,10 @@ const GovernanceData = ({ address }: IGovernanceDataProps) => {
             },
             to: {
               id: prop.to.id
-            }
+            },
+            image: userProfile.image || '',
+            name: userProfile.name || '',
+            isNFT: userProfile?.isNFT || false
           }
         })
       )
@@ -105,13 +114,19 @@ const GovernanceData = ({ address }: IGovernanceDataProps) => {
         data.delegations.map(async (prop: IUserVotingPowerProps) => {
           delegatingToTotal = delegatingToTotal.add(prop.votingPower)
 
+          const response = await fetch(`/api/profile/${prop.to.id}`)
+          const userProfile = await response.json()
+
           return {
             pool: prop.pool,
             votingPower: prop.votingPower,
             kacy: await getAmountKacy(prop.pool, prop.from?.id),
             to: {
               id: prop.to.id
-            }
+            },
+            image: userProfile.image || '',
+            name: userProfile.name || '',
+            isNFT: userProfile?.isNFT || false
           }
         })
       )
@@ -153,7 +168,6 @@ const GovernanceData = ({ address }: IGovernanceDataProps) => {
         <TitleSection
           image={votingPoweRrank}
           title="Received Voting Power"
-          text="Velit lacus vel porta purus"
           marginTop={64}
         />
 
@@ -165,11 +179,7 @@ const GovernanceData = ({ address }: IGovernanceDataProps) => {
 
         {/* Voting History */}
         <S.TitleAndLinkContent>
-          <TitleSection
-            image={proposals}
-            title="Voting History"
-            text="Velit lacus vel porta purus"
-          />
+          <TitleSection image={proposals} title="Voting History" />
           <S.LinkForum
             href="https://t.me/KassandraDAO"
             target="_blank"

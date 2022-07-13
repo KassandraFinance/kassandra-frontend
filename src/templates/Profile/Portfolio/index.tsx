@@ -47,36 +47,42 @@ const Portfolio = ({
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   // eslint-disable-next-line prettier/prettier
-  const [tokenizedFunds, setTokenizedFunds] = React.useState<ProductDetails[]>([])
+  const [tokenizedFunds, setTokenizedFunds] = React.useState<ProductDetails[]>(
+    []
+  )
   const [totalBalanceFunds, setTotalBalanceFunds] = React.useState<Big>(Big(0))
   const [totalDolarInPools, setTotalDolarInPools] = React.useState(new Big(0))
   const [balanceFunds, setBalanceFunds] = React.useState<IBalanceType>({})
   const [amountProdInPool, setAmountProdInPool] =
     React.useState<IAssetsValueWalletProps>({ '': new BigNumber(0) })
   // eslint-disable-next-line prettier/prettier
-  const [cardstakesPoolNew, setCardStakesPoolNew] = React.useState<IKacyLpPool[]>([])
+  const [cardstakesPoolNew, setCardStakesPoolNew] = React.useState<
+    IKacyLpPool[]
+  >([])
   const [isModalWallet, setIsModalWallet] = React.useState<boolean>(false)
 
   React.useEffect(() => {
     setCardStakesPoolNew([])
 
     cardstakesPool.forEach(pool => {
+      const tokenAmount = pool.amount.add(
+        assetsValueInWallet[pool.address]
+          ? assetsValueInWallet[pool.address]
+          : new BigNumber(0)
+      )
+
       if (pool.address === myFunds[pool.address]) {
         setAmountProdInPool(prevState => ({
           ...prevState,
           [pool.address]: pool.amount
         }))
       } else {
-        if (pool.amount.gt(new BigNumber(0))) {
+        if (tokenAmount.gt(new BigNumber(0))) {
           setCardStakesPoolNew(prevState => [
             ...prevState,
             {
               address: pool.address,
-              amount: pool.amount.add(
-                assetsValueInWallet[pool.address]
-                  ? assetsValueInWallet[pool.address]
-                  : new BigNumber(0)
-              ),
+              amount: tokenAmount,
               pid: pool.pid,
               poolName: pool.poolName,
               symbol: pool.symbol,
@@ -86,7 +92,7 @@ const Portfolio = ({
         }
       }
     })
-  }, [cardstakesPool, router])
+  }, [cardstakesPool, router, assetsValueInWallet])
 
   React.useEffect(() => {
     setTokenizedFunds([])
@@ -134,6 +140,7 @@ const Portfolio = ({
           image={AssetsIcon}
           title="Tokenized Funds"
           usd={BNtoDecimal(totalBalanceFunds, 6, 2, 2)}
+          tippy="The amount in US Dollars that this address holds in tokenized funds."
         />
       </S.paddingWrapper>
 
@@ -165,6 +172,7 @@ const Portfolio = ({
           image={StakedPoolsIcon}
           title="Assets"
           usd={BNtoDecimal(totalDolarInPools, 6, 2, 2)}
+          tippy="The amount in US Dollars that this address holds in KACY and liquidity tokens."
         />
       </S.paddingWrapper>
 

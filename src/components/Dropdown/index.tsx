@@ -1,13 +1,18 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
+
+import pickaxe from '../../../public/assets/icons/pickaxe.svg'
 
 import * as S from './styles'
 
 interface ILinkPage {
   name: string;
   href: string;
+  disabled?: boolean;
+  newTab?: boolean;
 }
 
 interface IDropdownProps {
@@ -46,19 +51,45 @@ const Dropdown = ({
         adaptToResponsiveSize={adaptToResponsiveSize}
       >
         {linkPage.map((item, index) => (
-          <Link key={index} href={item.href}>
-            <a
-              onClick={() =>
-                trackEventFunction(
-                  'click-on-link',
-                  `${item.name}`,
-                  `header-${nameOnHeader}`
-                )
-              }
-            >
-              {item.name}
-            </a>
-          </Link>
+          <div key={index}>
+            {item.disabled ? (
+              <S.MenuLinkDisable>
+                {item.name}
+                <div>
+                  <Image src={pickaxe} />
+                </div>
+              </S.MenuLinkDisable>
+            ) : !item.newTab ? (
+              <Link href={item.href} passHref>
+                <a
+                  onClick={() =>
+                    trackEventFunction(
+                      'click-on-link',
+                      `${item.name}`,
+                      `header-${nameOnHeader}`
+                    )
+                  }
+                >
+                  {item.name}
+                </a>
+              </Link>
+            ) : (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackEventFunction(
+                    'click-on-link',
+                    `${item.name}`,
+                    `header-${nameOnHeader}`
+                  )
+                }
+              >
+                {item.name}
+              </a>
+            )}
+          </div>
         ))}
       </S.DropdownContent>
     </S.Dropdown>
