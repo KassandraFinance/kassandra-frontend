@@ -428,7 +428,7 @@ const Profile = () => {
             )}
           </>
         ) : isSelectTab === tabs[1].asPathText ? (
-          <AnyCard text="This address does not manage any tokenized fund yet…" />
+          <AnyCard text="Coming Soon..." />
         ) : isSelectTab === tabs[2].asPathText ? (
           <>
             <AnyCard text="Coming Soon..." />

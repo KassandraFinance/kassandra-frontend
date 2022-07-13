@@ -1,7 +1,10 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
+
+import pickaxe from '../../../public/assets/icons/pickaxe.svg'
 
 import * as S from './styles'
 
@@ -64,7 +67,10 @@ const Dropdown = ({
               </Link>
             ) : (
               <S.MenuLinkDisable>
-                <del>{item.name}</del>
+                <span>{item.name}</span>
+                <div>
+                  <Image src={pickaxe} />
+                </div>
               </S.MenuLinkDisable>
             )}
           </div>

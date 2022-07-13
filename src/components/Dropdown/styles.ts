@@ -97,7 +97,7 @@ export const DropdownContent = styled.div<IDropdownContentProps>`
   z-index: 1;
 
   display: ${props => (props.isDropdown ? 'block' : 'none')};
-  min-width: 16rem;
+  min-width: fit-content;
 
   box-shadow: 0 0.8rem 1.6rem 0 rgba(0,0,0,0.2);
   background-color: #15161C;
@@ -137,17 +137,19 @@ export const DropdownContent = styled.div<IDropdownContentProps>`
     }
   `}
 
-  @media (max-width: 490px) {
+  /* @media (max-width: 490px) {
     min-width: 13rem;
   }
 
   @media (max-width: 380px) {
     min-width: 11rem;
-  }
+  } */
 `
 
-export const MenuLinkDisable = styled.a`
-  display: block;
+export const MenuLinkDisable = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2rem;
   padding: 1.2rem 1.6rem;
 
   color: ${theme.colors.grayDisabled};
@@ -155,7 +157,21 @@ export const MenuLinkDisable = styled.a`
   font-weight: ${theme.font.weight.light};
   cursor: not-allowed;
 
-  > del {
-    color: ${theme.colors.grayDisabled};
+  div {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  @media (max-width: 540px) {
+    font-size: ${theme.font.sizes.font14};
+
+    div {
+      width: 1.6rem;
+      height: 1.6rem;
+    }
+  }
+
+  @media (max-width: 380px) {
+    font-size: ${theme.font.sizes.font12};
   }
 `

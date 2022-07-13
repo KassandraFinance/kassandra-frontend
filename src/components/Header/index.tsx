@@ -83,8 +83,7 @@ const Header = () => {
               },
               {
                 name: 'Profile',
-                href: ``,
-                disabled: true
+                href: `/profile/${userWalletAddress}?tab=managed-funds`
               }
             ]}
           />
