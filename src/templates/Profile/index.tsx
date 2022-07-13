@@ -10,6 +10,7 @@ import useERC20Contract, { ERC20 } from '../../hooks/useERC20Contract'
 import useStakingContract from '../../hooks/useStakingContract'
 import usePriceLP from '../../hooks/usePriceLP'
 import { useAppSelector } from '../../store/hooks'
+import useVotingPower from '../../hooks/useVotingPower'
 
 import { GET_PROFILE } from './graphql'
 import {
@@ -113,6 +114,7 @@ const Profile = () => {
   const [isSelectTab, setIsSelectTab] = React.useState<
     string | string[] | undefined
   >('portfolio')
+  const votingPower = useVotingPower(Staking)
 
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
@@ -348,6 +350,16 @@ const Profile = () => {
     }
   }, [profileAddress, priceToken, assetsValueInWallet, data])
 
+  React.useEffect(() => {
+    async function getVotingPower() {
+      const currentVotes = await votingPower.currentVotes(profileAddress)
+
+      setTotalVotingPower(currentVotes || new BigNumber(0))
+    }
+
+    getVotingPower()
+  }, [profileAddress])
+
   return (
     <>
       <Header />
@@ -381,7 +393,7 @@ const Profile = () => {
             textTitle="TOTAL MANAGED"
           />
           <AnyCardTotal
-            text={String(BNtoDecimal(totalVotingPower, 0, 2) || 0)}
+            text={String(BNtoDecimal(totalVotingPower, 18, 2) || 0)}
             TooltipText="The voting power of this address. Voting power is used to vote on governance proposals, and it can be earned by staking KACY."
             textTitle="VOTING POWER"
           />
