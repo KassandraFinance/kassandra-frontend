@@ -130,7 +130,8 @@ const Header = () => {
                 },
                 {
                   name: 'Forum',
-                  href: `http://gov.kassandra.finance/`
+                  href: `http://gov.kassandra.finance/`,
+                  newTab: true
                 },
                 {
                   name: 'Profile',
@@ -151,7 +152,8 @@ const Header = () => {
                 },
                 {
                   name: 'Blog',
-                  href: `https://kassandrafoundation.medium.com/`
+                  href: `https://kassandrafoundation.medium.com/`,
+                  newTab: true
                 }
               ]}
             />
