@@ -181,7 +181,7 @@ export const UserTableVotingHistory = ({
         <AnyCard
           text={
             userWalletAddress === userAddressUrl
-              ? 'To obtain voting power you need to have KACY staked'
+              ? 'This address hasn’t voted in any governance proposal yet.'
               : 'This address has not voted on a governance proposal yet '
           }
           button={userWalletAddress === userAddressUrl}

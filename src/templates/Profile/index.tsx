@@ -372,18 +372,18 @@ const Profile = () => {
           <AnyCardTotal
             text={String(BNtoDecimal(totalInvestmented, 6, 2, 2) || 0)}
             TooltipText="The amount in US Dollars that this address has in investments with Kassandra. This considers tokens, funds, LP, and staked assets."
-            textTitle="TOTAL INVESTMENTED"
+            textTitle="HOLDINGS"
             isDolar={true}
           />
           <AnyCardTotal
-            text="0"
+            text={`$ ${0}`}
             TooltipText="The amount in US Dollars that this address manages in tokenized funds with Kassandra."
             textTitle="TOTAL MANAGED"
           />
           <AnyCardTotal
             text={String(BNtoDecimal(totalVotingPower, 0, 2) || 0)}
             TooltipText="The voting power of this address. Voting power is used to vote on governance proposals, and it can be earned by staking KACY."
-            textTitle="USER VOTING POWER"
+            textTitle="VOTING POWER"
           />
         </S.TotalValuesCardsContainer>
         <SelectTabs
@@ -416,9 +416,12 @@ const Profile = () => {
             )}
           </>
         ) : isSelectTab === tabs[1].asPathText ? (
-          <AnyCard text="Coming Soon…" />
+          <AnyCard text="This address does not manage any tokenized fund yet…" />
         ) : isSelectTab === tabs[2].asPathText ? (
-          <GovernanceData address={profileAddress} />
+          <>
+            <AnyCard text="Coming Soon..." />
+            {/* <GovernanceData address={profileAddress} /> */}
+          </>
         ) : (
           <Loading marginTop={4} />
         )}
