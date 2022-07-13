@@ -4,10 +4,34 @@ import * as S from './styles'
 
 interface INftImageProps {
   NftUrl: string;
-  imageSize: 'medium' | 'large';
+  imageSize: 'medium' | 'large' | 'small';
 }
 
 const NftImage = ({ NftUrl, imageSize }: INftImageProps) => {
+  if (imageSize === 'small') {
+    return (
+      <S.NftImageContainer imageSize={imageSize}>
+        <>
+          <img src={NftUrl} alt="User NFT image" height="32" width="32" />
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <clipPath id="nftImageSmall">
+              <path
+                d="M0.654757 18.4417C-0.218252 16.9308 -0.218252 15.0692 0.654757 13.5583L6.21117 3.94171C7.08417 2.43078 8.69757 1.5 10.4436 1.5L21.5564 1.5C23.3024 1.5 24.9158 2.43077 25.7888 3.94171L31.3452 13.5583C32.2183 15.0692 32.2182 16.9308 31.3452 18.4417L25.7888 28.0583C24.9158 29.5692 23.3024 30.5 21.5564 30.5H10.4436C8.69757 30.5 7.08417 29.5692 6.21117 28.0583L0.654757 18.4417Z"
+                fill="#C4C4C4"
+              />
+            </clipPath>
+          </svg>
+        </>
+      </S.NftImageContainer>
+    )
+  }
+
   return (
     <>
       <S.NftImageContainer imageSize={imageSize}>
