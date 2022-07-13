@@ -153,7 +153,6 @@ const GovernanceData = ({ address }: IGovernanceDataProps) => {
         <TitleSection
           image={votingPoweRrank}
           title="Received Voting Power"
-          text="Velit lacus vel porta purus"
           marginTop={64}
         />
 
@@ -165,11 +164,7 @@ const GovernanceData = ({ address }: IGovernanceDataProps) => {
 
         {/* Voting History */}
         <S.TitleAndLinkContent>
-          <TitleSection
-            image={proposals}
-            title="Voting History"
-            text="Velit lacus vel porta purus"
-          />
+          <TitleSection image={proposals} title="Voting History" />
           <S.LinkForum
             href="https://t.me/KassandraDAO"
             target="_blank"
