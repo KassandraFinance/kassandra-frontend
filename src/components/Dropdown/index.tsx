@@ -1,13 +1,17 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
+
+import pickaxe from '../../../public/assets/icons/pickaxe.svg'
 
 import * as S from './styles'
 
 interface ILinkPage {
   name: string;
   href: string;
+  disabled?: boolean;
 }
 
 interface IDropdownProps {
@@ -46,19 +50,30 @@ const Dropdown = ({
         adaptToResponsiveSize={adaptToResponsiveSize}
       >
         {linkPage.map((item, index) => (
-          <Link key={index} href={item.href}>
-            <a
-              onClick={() =>
-                trackEventFunction(
-                  'click-on-link',
-                  `${item.name}`,
-                  `header-${nameOnHeader}`
-                )
-              }
-            >
-              {item.name}
-            </a>
-          </Link>
+          <div key={index}>
+            {!item.disabled ? (
+              <Link href={item.href}>
+                <a
+                  onClick={() =>
+                    trackEventFunction(
+                      'click-on-link',
+                      `${item.name}`,
+                      `header-${nameOnHeader}`
+                    )
+                  }
+                >
+                  {item.name}
+                </a>
+              </Link>
+            ) : (
+              <S.MenuLinkDisable>
+                <span>{item.name}</span>
+                <div>
+                  <Image src={pickaxe} />
+                </div>
+              </S.MenuLinkDisable>
+            )}
+          </div>
         ))}
       </S.DropdownContent>
     </S.Dropdown>

@@ -10,6 +10,7 @@ import useERC20Contract, { ERC20 } from '../../hooks/useERC20Contract'
 import useStakingContract from '../../hooks/useStakingContract'
 import usePriceLP from '../../hooks/usePriceLP'
 import { useAppSelector } from '../../store/hooks'
+import useVotingPower from '../../hooks/useVotingPower'
 
 import { GET_PROFILE } from './graphql'
 import {
@@ -113,6 +114,7 @@ const Profile = () => {
   const [isSelectTab, setIsSelectTab] = React.useState<
     string | string[] | undefined
   >('portfolio')
+  const votingPower = useVotingPower(Staking)
 
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
@@ -348,6 +350,16 @@ const Profile = () => {
     }
   }, [profileAddress, priceToken, assetsValueInWallet, data])
 
+  React.useEffect(() => {
+    async function getVotingPower() {
+      const currentVotes = await votingPower.currentVotes(profileAddress)
+
+      setTotalVotingPower(currentVotes || new BigNumber(0))
+    }
+
+    getVotingPower()
+  }, [profileAddress])
+
   return (
     <>
       <Header />
@@ -371,19 +383,19 @@ const Profile = () => {
         <S.TotalValuesCardsContainer>
           <AnyCardTotal
             text={String(BNtoDecimal(totalInvestmented, 6, 2, 2) || 0)}
-            TooltipText="Lorem"
-            textTitle="TOTAL INVESTMENTED"
+            TooltipText="The amount in US Dollars that this address has in investments with Kassandra. This considers tokens, funds, LP, and staked assets."
+            textTitle="HOLDINGS"
             isDolar={true}
           />
           <AnyCardTotal
-            text="0"
-            TooltipText="Lorem"
+            text={`$ ${0}`}
+            TooltipText="The amount in US Dollars that this address manages in tokenized funds with Kassandra."
             textTitle="TOTAL MANAGED"
           />
           <AnyCardTotal
-            text={String(BNtoDecimal(totalVotingPower, 0, 2) || 0)}
-            TooltipText="Lorem"
-            textTitle="USER VOTING POWER"
+            text={String(BNtoDecimal(totalVotingPower, 18, 2) || 0)}
+            TooltipText="The voting power of this address. Voting power is used to vote on governance proposals, and it can be earned by staking KACY."
+            textTitle="VOTING POWER"
           />
         </S.TotalValuesCardsContainer>
         <SelectTabs
@@ -416,9 +428,12 @@ const Profile = () => {
             )}
           </>
         ) : isSelectTab === tabs[1].asPathText ? (
-          <AnyCard text="Coming Soon…" />
+          <AnyCard text="Coming Soon..." />
         ) : isSelectTab === tabs[2].asPathText ? (
-          <GovernanceData address={profileAddress} />
+          <>
+            <AnyCard text="Coming Soon..." />
+            {/* <GovernanceData address={profileAddress} /> */}
+          </>
         ) : (
           <Loading marginTop={4} />
         )}

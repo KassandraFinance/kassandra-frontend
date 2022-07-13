@@ -299,7 +299,7 @@ const ModalUserEditInfo = ({
                     />
                   </span>
                   <input
-                    placeholder="Twitter"
+                    placeholder="Insert Username"
                     onChange={event =>
                       setEditYourProfileInput({
                         ...editYourProfileInput,
@@ -319,7 +319,7 @@ const ModalUserEditInfo = ({
                     />
                   </span>
                   <input
-                    placeholder="Website"
+                    placeholder="Insert Website"
                     onChange={event =>
                       setEditYourProfileInput({
                         ...editYourProfileInput,
@@ -339,7 +339,7 @@ const ModalUserEditInfo = ({
                     />
                   </span>
                   <input
-                    placeholder="Telegram"
+                    placeholder="Insert Username"
                     onChange={event =>
                       setEditYourProfileInput({
                         ...editYourProfileInput,
@@ -359,7 +359,7 @@ const ModalUserEditInfo = ({
                     />
                   </span>
                   <input
-                    placeholder="Discord"
+                    placeholder="Insert Username"
                     onChange={event =>
                       setEditYourProfileInput({
                         ...editYourProfileInput,
