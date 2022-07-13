@@ -51,7 +51,11 @@ const namePools: { [key: string]: string } = {
 }
 
 // eslint-disable-next-line prettier/prettier
-const AssetsCard = ({ profileAddress, priceToken, cardstakesPoolNew }: IStakingTableProps) => {
+const AssetsCard = ({
+  profileAddress,
+  priceToken,
+  cardstakesPoolNew
+}: IStakingTableProps) => {
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   return (
@@ -79,7 +83,7 @@ const AssetsCard = ({ profileAddress, priceToken, cardstakesPoolNew }: IStakingT
                 <S.AssetsBodyContent>
                   <S.Balance>
                     BALANCE
-                    <Tippy content="Tippy">
+                    <Tippy content="This address total KACY balance, accounting wallet holdings, and stake.">
                       <S.Tooltip tabIndex={0}>
                         <Image
                           src={infoGray}

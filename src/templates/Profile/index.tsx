@@ -371,18 +371,18 @@ const Profile = () => {
         <S.TotalValuesCardsContainer>
           <AnyCardTotal
             text={String(BNtoDecimal(totalInvestmented, 6, 2, 2) || 0)}
-            TooltipText="Lorem"
+            TooltipText="The amount in US Dollars that this address has in investments with Kassandra. This considers tokens, funds, LP, and staked assets."
             textTitle="TOTAL INVESTMENTED"
             isDolar={true}
           />
           <AnyCardTotal
             text="0"
-            TooltipText="Lorem"
+            TooltipText="The amount in US Dollars that this address manages in tokenized funds with Kassandra."
             textTitle="TOTAL MANAGED"
           />
           <AnyCardTotal
             text={String(BNtoDecimal(totalVotingPower, 0, 2) || 0)}
-            TooltipText="Lorem"
+            TooltipText="The voting power of this address. Voting power is used to vote on governance proposals, and it can be earned by staking KACY."
             textTitle="USER VOTING POWER"
           />
         </S.TotalValuesCardsContainer>
