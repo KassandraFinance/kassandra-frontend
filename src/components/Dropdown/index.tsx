@@ -12,6 +12,7 @@ interface ILinkPage {
   name: string;
   href: string;
   disabled?: boolean;
+  newTab?: boolean;
 }
 
 interface IDropdownProps {
@@ -51,8 +52,15 @@ const Dropdown = ({
       >
         {linkPage.map((item, index) => (
           <div key={index}>
-            {!item.disabled ? (
-              <Link href={item.href}>
+            {item.disabled ? (
+              <S.MenuLinkDisable>
+                {item.name}
+                <div>
+                  <Image src={pickaxe} />
+                </div>
+              </S.MenuLinkDisable>
+            ) : !item.newTab ? (
+              <Link href={item.href} passHref>
                 <a
                   onClick={() =>
                     trackEventFunction(
@@ -66,12 +74,20 @@ const Dropdown = ({
                 </a>
               </Link>
             ) : (
-              <S.MenuLinkDisable>
-                <span>{item.name}</span>
-                <div>
-                  <Image src={pickaxe} />
-                </div>
-              </S.MenuLinkDisable>
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackEventFunction(
+                    'click-on-link',
+                    `${item.name}`,
+                    `header-${nameOnHeader}`
+                  )
+                }
+              >
+                {item.name}
+              </a>
             )}
           </div>
         ))}
