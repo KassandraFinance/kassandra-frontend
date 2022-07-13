@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import useSWR from 'swr'
 import Big from 'big.js'
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 import substr from '../../../utils/substr'
@@ -11,6 +12,7 @@ import { useAppSelector } from '../../../store/hooks'
 import AnyCard from '../../AnyCard'
 
 import avax from '../../../../public/assets/logos/kacy-stake.svg'
+import NftImage from '../../NftImage'
 
 import * as S from './styles'
 
@@ -24,6 +26,9 @@ interface IUserVotingPowerProps {
   to: {
     id: string
   };
+  image: string;
+  name: string;
+  isNFT: boolean;
 }
 
 interface IOwnAndReceivedTableProps {
@@ -134,16 +139,59 @@ export const OwnAndReceivedTable = ({
                         item.to?.id === userAddressUrl ? (
                           ''
                         ) : (
-                          <Image src={avax} width={24} height={24} alt="" />
+                          <>
+                            {item.image ? (
+                              item.isNFT ? (
+                                <NftImage
+                                  NftUrl={item.image}
+                                  imageSize="small"
+                                />
+                              ) : (
+                                <Image
+                                  src={item.image}
+                                  width={24}
+                                  height={24}
+                                  alt=""
+                                />
+                              )
+                            ) : (
+                              <Jazzicon
+                                diameter={24}
+                                seed={jsNumberForAddress(item.to.id)}
+                              />
+                            )}
+                          </>
                         )
                       ) : (
-                        <Image src={avax} width={24} height={24} alt="" />
+                        <>
+                          {item.image ? (
+                            item.isNFT ? (
+                              <NftImage NftUrl={item.image} imageSize="small" />
+                            ) : (
+                              <Image
+                                src={item.image}
+                                width={24}
+                                height={24}
+                                alt=""
+                              />
+                            )
+                          ) : (
+                            <Jazzicon
+                              diameter={24}
+                              seed={jsNumberForAddress(item.from.id)}
+                            />
+                          )}
+                        </>
                       )}
                       <span>
                         {isDelegationTable
                           ? item.to.id === userAddressUrl
                             ? 'self'
+                            : item.name
+                            ? item.name
                             : substr(item.to.id)
+                          : item.name
+                          ? item.name
                           : substr(item.from?.id)}
                       </span>
                     </S.Td>

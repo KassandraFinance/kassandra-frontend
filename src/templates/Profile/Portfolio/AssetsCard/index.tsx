@@ -47,7 +47,7 @@ interface IStakingTableProps {
 const namePools: { [key: string]: string } = {
   KACY: 'BY KASSANDRA',
   'LP-JOE': 'by HEIMDALL.land & Trader Joe',
-  LP: 'by HEIMDALL.land & pangolin '
+  'LP-PNG': 'by HEIMDALL.land & pangolin '
 }
 
 // eslint-disable-next-line prettier/prettier
