@@ -170,7 +170,7 @@ export const OwnAndReceivedTable = ({
         <AnyCard
           text={
             isDelegationTable
-              ? 'To obtain voting power you need to have KACY staked'
+              ? 'This address doesn’t have KACY staked.'
               : 'This address doesn’t seem to have received any voting power'
           }
           button={isDelegationTable}
