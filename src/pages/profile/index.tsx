@@ -31,20 +31,20 @@ export default function Index() {
         <meta property="og:image:height" content="506" />
         <meta property="og:url" content="https://kassandra.finance/" />
       </Head>
-      {process.env.NEXT_PUBLIC_VOTE === '1' ||
-      process.env.NEXT_PUBLIC_VOTE === '2' ? (
-        <>
-          <Header />
-          <Web3Disabled
-            textHeader="Connect Wallet"
-            textButton="Connect Wallet"
-            type="connect"
-            bodyText="Please connect to see your profile"
-          />
-        </>
-      ) : (
-        <NotFound />
-      )}
+      {/* {process.env.NEXT_PUBLIC_VOTE === '1' ||
+      process.env.NEXT_PUBLIC_VOTE === '2' ? ( */}
+      <>
+        <Header />
+        <Web3Disabled
+          textHeader="Connect Wallet"
+          textButton="Connect Wallet"
+          type="connect"
+          bodyText="Please connect to see your profile"
+        />
+      </>
+      {/* ) : (
+         <NotFound />
+       )} */}
     </>
   )
 }

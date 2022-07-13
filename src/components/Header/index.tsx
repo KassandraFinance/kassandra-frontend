@@ -108,39 +108,39 @@ const Header = () => {
               Stake/Farm
             </S.MenuLink>
         </Link>*/}
-          {process.env.NEXT_PUBLIC_VOTE === '1' ||
-          process.env.NEXT_PUBLIC_VOTE === '2' ? (
-            <DropdownInvest
-              nameOnHeader="Governance"
-              adaptToResponsiveSize={true}
-              linkPage={[
-                {
-                  name: 'Overview',
-                  href: '',
-                  disabled: true
-                },
-                {
-                  name: 'Proposals',
-                  href: '',
-                  disabled: true
-                },
-                {
-                  name: 'Stake',
-                  href: `/farm`
-                },
-                {
-                  name: 'Forum',
-                  href: `http://gov.kassandra.finance/`
-                },
-                {
-                  name: 'Profile',
-                  href: `/profile/${userWalletAddress}?tab=governance-data`
-                }
-              ]}
-            />
-          ) : (
+          {/* {process.env.NEXT_PUBLIC_VOTE === '1' ||
+          process.env.NEXT_PUBLIC_VOTE === '2' ? ( */}
+          <DropdownInvest
+            nameOnHeader="Governance"
+            adaptToResponsiveSize={true}
+            linkPage={[
+              {
+                name: 'Overview',
+                href: '',
+                disabled: true
+              },
+              {
+                name: 'Proposals',
+                href: '',
+                disabled: true
+              },
+              {
+                name: 'Stake',
+                href: `/farm`
+              },
+              {
+                name: 'Forum',
+                href: `http://gov.kassandra.finance/`
+              },
+              {
+                name: 'Profile',
+                href: `/profile/${userWalletAddress}?tab=governance-data`
+              }
+            ]}
+          />
+          {/* ) : (
             <S.MenuLinkDisable>Governance</S.MenuLinkDisable>
-          )}
+          )} */}
           <S.MenuContainer>
             <DropdownInvest
               nameOnHeader="Learn"
