@@ -151,7 +151,8 @@ const Header = () => {
                 },
                 {
                   name: 'Blog',
-                  href: `https://kassandrafoundation.medium.com/`
+                  href: `https://kassandrafoundation.medium.com/`,
+                  newTab: true
                 }
               ]}
             />
