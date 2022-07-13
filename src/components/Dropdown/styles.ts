@@ -150,9 +150,12 @@ export const MenuLinkDisable = styled.a`
   display: block;
   padding: 1.2rem 1.6rem;
 
-  color: ${theme.colors.snow};
+  color: ${theme.colors.grayDisabled};
   font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.light};
-  text-decoration: none;
   cursor: not-allowed;
+
+  > del {
+    color: ${theme.colors.grayDisabled};
+  }
 `

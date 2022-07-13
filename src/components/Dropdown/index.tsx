@@ -63,7 +63,9 @@ const Dropdown = ({
                 </a>
               </Link>
             ) : (
-              <S.MenuLinkDisable>{item.name}</S.MenuLinkDisable>
+              <S.MenuLinkDisable>
+                <del>{item.name}</del>
+              </S.MenuLinkDisable>
             )}
           </div>
         ))}
