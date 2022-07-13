@@ -65,22 +65,24 @@ const Portfolio = ({
     setCardStakesPoolNew([])
 
     cardstakesPool.forEach(pool => {
+      const tokenAmount = pool.amount.add(
+        assetsValueInWallet[pool.address]
+          ? assetsValueInWallet[pool.address]
+          : new BigNumber(0)
+      )
+
       if (pool.address === myFunds[pool.address]) {
         setAmountProdInPool(prevState => ({
           ...prevState,
           [pool.address]: pool.amount
         }))
       } else {
-        if (pool.amount.gt(new BigNumber(0))) {
+        if (tokenAmount.gt(new BigNumber(0))) {
           setCardStakesPoolNew(prevState => [
             ...prevState,
             {
               address: pool.address,
-              amount: pool.amount.add(
-                assetsValueInWallet[pool.address]
-                  ? assetsValueInWallet[pool.address]
-                  : new BigNumber(0)
-              ),
+              amount: tokenAmount,
               pid: pool.pid,
               poolName: pool.poolName,
               symbol: pool.symbol,
@@ -90,7 +92,7 @@ const Portfolio = ({
         }
       }
     })
-  }, [cardstakesPool, router])
+  }, [cardstakesPool, router, assetsValueInWallet])
 
   React.useEffect(() => {
     setTokenizedFunds([])
