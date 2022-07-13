@@ -12,6 +12,7 @@ interface IInputProps {
   decimals: BigNumber;
   inputRef: React.RefObject<HTMLInputElement>;
   setInputValue: React.Dispatch<React.SetStateAction<BigNumber>>;
+  setMaxActive?: React.Dispatch<React.SetStateAction<boolean>>;
   disabled?: string;
 }
 
@@ -19,6 +20,7 @@ const InputTokenValue = ({
   decimals,
   inputRef,
   setInputValue,
+  setMaxActive,
   disabled
 }: IInputProps) => {
   if (!disabled) {
@@ -37,6 +39,7 @@ const InputTokenValue = ({
         className="noscroll"
         readOnly={disabled.length > 0}
         ref={inputRef}
+        // value={inputRef?.current?.value}
         type="number"
         placeholder="0"
         step="any"
@@ -78,7 +81,7 @@ const InputTokenValue = ({
             const paddedRight = `${values[0]}${
               `${values[1] || 0}${'0'.repeat(decimalsNum)}`.slice(0, decimalsNum)
             }`
-
+            setMaxActive && setMaxActive(false)
             setInputValue && setInputValue(new BigNumber(paddedRight))
           }
         }

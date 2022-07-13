@@ -8,8 +8,10 @@ import pinIcon from '../../../public/assets/iconGradient/road-map.svg'
 import { icons, colors, SlickArrowLeft, SlickArrowRight } from './assets'
 
 import * as S from './styles'
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
 const RoadMapSlider = () => {
+  const { trackEventFunction } = useMatomoEcommerce()
   const settings: SliderSettings = {
     arrows: true,
     slidesToShow: 2.3,
@@ -39,8 +41,20 @@ const RoadMapSlider = () => {
         }
       }
     ],
-    prevArrow: <SlickArrowLeft />,
-    nextArrow: <SlickArrowRight />
+    prevArrow: (
+      <SlickArrowLeft
+        onClick={() => {
+          trackEventFunction('click-on-button', 'view-roadmap', 'roadmap-card')
+        }}
+      />
+    ),
+    nextArrow: (
+      <SlickArrowRight
+        onClick={() => {
+          trackEventFunction('click-on-button', 'view-roadmap', 'roadmap-card')
+        }}
+      />
+    )
   }
 
   return (

@@ -1,9 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
-import { useSelector, RootStateOrAny } from 'react-redux'
 
-import { TokenDetails } from '../../store/modules/poolTokens/types'
-import { TokenImages } from '../../store/modules/poolImages/types'
+import { ITokenDetails } from '../../context/PoolTokensContext'
+import { useAppSelector } from '../../store/hooks'
 
 import arrow from '../../../public/assets/utilities/arrow-select-down.svg'
 import none from '../../../public/assets/icons/coming-soon.svg'
@@ -11,9 +10,9 @@ import none from '../../../public/assets/icons/coming-soon.svg'
 import * as S from './styles'
 
 interface ISelectInputProps {
-  poolTokens: TokenDetails[];
+  poolTokens: ITokenDetails[];
   setSwapAddress: React.Dispatch<React.SetStateAction<string>>;
-  tokenDetails: TokenDetails;
+  tokenDetails: ITokenDetails;
 }
 
 const SelectInputDefault = ({
@@ -23,9 +22,7 @@ const SelectInputDefault = ({
 }: ISelectInputProps) => {
   const [openOptions, setOpenOptions] = React.useState<boolean>(false)
 
-  const { poolImages }: { poolImages: TokenImages } = useSelector(
-    (state: RootStateOrAny) => state
-  )
+  const { poolImages } = useAppSelector(state => state)
 
   return (
     <S.SelectToken openOptions={openOptions}>
@@ -51,7 +48,7 @@ const SelectInputDefault = ({
           <S.Backdrop onClick={() => setOpenOptions(false)} />
           <S.OptionsContent>
             {poolTokens &&
-              poolTokens.map((token: TokenDetails) => (
+              poolTokens.map((token: ITokenDetails) => (
                 <S.Option
                   key={token.symbol}
                   onClick={() => {

@@ -2,11 +2,8 @@
 import React from 'react'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
-
-import { useSelector, RootStateOrAny } from 'react-redux'
 
 import { ProxyContract } from '../../../constants/tokenAddresses'
 
@@ -14,6 +11,8 @@ import useProxy from '../../../hooks/useProxy'
 import useERC20Contract, { ERC20 } from '../../../hooks/useERC20Contract'
 import usePoolContract from '../../../hooks/usePoolContract'
 import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+
+import { useAppSelector } from '../../../store/hooks'
 
 import web3 from '../../../utils/web3'
 import { priceDollar } from '../../../utils/priceDollar'
@@ -32,24 +31,25 @@ import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 import { Titles } from '..'
 
 import * as S from './styles'
+import { usePoolTokens } from '../../../context/PoolTokensContext'
 
 const WAVAX = '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7'
 
 const invertToken: { [key: string]: string } = {
   '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab':
-  '0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E', //WETH
+    '0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E', //WETH
   '0xd586e7f844cea2f87f50152665bcbc2c279d8d70':
-  '0xFA17fb53da4c837594127b73fFd09fdb15f42C49', //DAI
+    '0xFA17fb53da4c837594127b73fFd09fdb15f42C49', //DAI
   '0x50b7545627a5162f82a992c33b87adc75187b218':
-  '0xbbcED92AC9B958F88A501725f080c0360007e858',  //WBTC
+    '0xbbcED92AC9B958F88A501725f080c0360007e858',  //WBTC
 
 
   '0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E': //WETH
-  '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab',
+    '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab',
   '0xFA17fb53da4c837594127b73fFd09fdb15f42C49': //DAI
-  '0xd586e7f844cea2f87f50152665bcbc2c279d8d70',
+    '0xd586e7f844cea2f87f50152665bcbc2c279d8d70',
   '0xbbcED92AC9B958F88A501725f080c0360007e858':
-  '0x50b7545627a5162f82a992c33b87adc75187b218'
+    '0x50b7545627a5162f82a992c33b87adc75187b218'
 }
 
 interface IFormProps {
@@ -89,10 +89,12 @@ const Form = ({
   const corePool = usePoolContract(corePoolAddress)
   const proxy = useProxy(ProxyContract, crpPoolAddress, corePoolAddress)
 
-  const { userWalletAddress, chainId, fees, tokenAddress2Index, poolTokensArray } = useSelector((state: RootStateOrAny) => state)
+  const { chainId, fees, tokenAddress2Index, userWalletAddress } = useAppSelector(state => state)
+  const { poolTokens: poolTokensArray } = usePoolTokens()
+
   const { trackBuying, trackBought, trackCancelBuying } = useMatomoEcommerce();
 
-  const [walletConnect, setWalletConnect] = React.useState<any>(null)
+  const [walletConnect, setWalletConnect] = React.useState<string | null>(null)
   const [approvals, setApprovals] = React.useState<Approvals>({
     Withdraw: [],
     Invest: [],
@@ -114,7 +116,6 @@ const Form = ({
   const [swapInBalance, setSwapInBalance] = React.useState(new BigNumber(-1))
 
   const [swapOutAddress, setSwapOutAddress] = React.useState('')
-  const [swapOutPrice, setSwapOutPrice] = React.useState(new BigNumber(-1))
   const [swapOutAmount, setSwapOutAmount] = React.useState([new BigNumber(0)])
   const [swapOutBalance, setSwapOutBalance] = React.useState([new BigNumber(-1)])
 
@@ -122,17 +123,11 @@ const Form = ({
 
   const [priceImpact, setPriceImpact] = React.useState<Big>(Big(0))
 
-  const { trackEvent } = useMatomo()
+  const [maxActive, setMaxActive] = React.useState<boolean>(false)
+
+  const { trackEventFunction } = useMatomoEcommerce()
 
   const inputTokenRef = React.useRef<HTMLInputElement>(null)
-
-  function matomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'operations-invest',
-      action,
-      name
-    })
-  }
 
   function clearInput() {
     setSwapInAmount(new BigNumber(0))
@@ -140,6 +135,177 @@ const Form = ({
 
     if (inputTokenRef.current !== null) {
       inputTokenRef.current.value = '0'
+    }
+  }
+
+  // calculate invest with output
+  async function calculateInvestAmountIn(investAmoutOut: BigNumber): Promise<void> {
+    try {
+      const [
+        swapInTotalPoolBalance,
+        swapInDenormalizedWeight,
+        poolSupply,
+        poolTotalDenormalizedWeight,
+        poolSwapFee
+      ] = await Promise.all([
+        corePool.balance(invertToken[swapInAddress] ?? swapInAddress),
+        corePool.denormalizedWeight(invertToken[swapInAddress] ?? swapInAddress),
+        crpPoolToken.totalSupply(),
+        corePool.totalDenormalizedWeight(),
+        corePool.swapFee()
+      ])
+
+      try {
+        const newAmountInvestIn = await proxy.tryJoinswapPoolAmountOut(
+          swapInAddress,
+          investAmoutOut,
+          new BigNumber('10').pow(new BigNumber(36)),
+          userWalletAddress
+        )
+        if (inputTokenRef.current && newAmountInvestIn) {
+          inputTokenRef.current.value = BNtoDecimal(
+            newAmountInvestIn,
+            poolTokensArray[tokenInIndex]
+              ? poolTokensArray[tokenInIndex]?.decimals.toNumber()
+              : 18
+          ).replace(/\s/g, '')
+          setPriceImpact(Big(0))
+        }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
+        const newAmountInvestIn = await corePool.calcSingleInGivenPoolOut(
+          swapInTotalPoolBalance,
+          swapInDenormalizedWeight,
+          poolSupply,
+          poolTotalDenormalizedWeight,
+          investAmoutOut,
+          poolSwapFee
+        )
+
+        if (inputTokenRef.current && newAmountInvestIn) {
+          inputTokenRef.current.value = BNtoDecimal(
+            newAmountInvestIn,
+            poolTokensArray[tokenInIndex]
+              ? poolTokensArray[tokenInIndex]?.decimals.toNumber()
+              : 18
+          ).replace(/\s/g, '')
+          setPriceImpact(Big(0))
+        }
+
+        if (userWalletAddress.length > 0) {
+          const errorStr = error.toString()
+          if (errorStr.search(/ERR_(BPOW_BASE_TOO_|MATH_APPROX)/) > -1) {
+            setErrorMsg('This amount is too low for the pool!')
+            return
+          }
+
+          if (errorStr.search('ERR_MAX_IN_RATIO') > -1) {
+            setErrorMsg("The amount can't be more than half of what's in the pool!")
+            return
+          }
+
+          if (swapInAmount.gt(swapInBalance) && Number(swapInAmount.toString()) > 0) {
+            setErrorMsg('This amount exceeds your balance!')
+            return;
+          }
+        }
+      }
+
+      let newSwapOutPrice;
+      let pow = new BigNumber(0);
+      while (!newSwapOutPrice) {
+        try {
+          const multiplier = new BigNumber(10).pow(pow)
+          newSwapOutPrice = await corePool.calcSingleInGivenPoolOut(
+            swapInTotalPoolBalance,
+            swapInDenormalizedWeight,
+            poolSupply,
+            poolTotalDenormalizedWeight,
+            wei.div(multiplier),
+            poolSwapFee
+          )
+          newSwapOutPrice = newSwapOutPrice.mul(multiplier)
+        } catch (e) {
+          pow = pow.add(new BigNumber(1));
+        }
+      }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      const errorStr = error.toString()
+      if (userWalletAddress.length > 0) {
+        if (errorStr.search('ERR_BPOW_BASE_TOO_HIGH') > -1) {
+          ToastWarning("The amount can't be more than half of what's in the pool!")
+          return
+        }
+        ToastWarning('Could not connect with the blockchain to calculate prices.')
+      }
+    }
+  }
+
+  // calculate swap with output
+  async function calculateSwapAmountIn(swapAmountOut: BigNumber): Promise<void> {
+    try {
+      const [
+        swapInTotalPoolBalance,
+        swapOutTotalPoolBalance,
+        swapInDenormalizedWeight,
+        swapOutDenormalizedWeight,
+        poolSwapFee
+      ] = await Promise.all([
+        corePool.balance(invertToken[swapInAddress] ?? swapInAddress),
+        corePool.balance(invertToken[swapOutAddress] ?? swapOutAddress),
+        corePool.denormalizedWeight(invertToken[swapInAddress] ?? swapInAddress),
+        corePool.denormalizedWeight(invertToken[swapOutAddress] ?? swapOutAddress),
+        corePool.swapFee()
+      ])
+      const [newSwapInAmount] = await Promise.all([
+        corePool.calcInGivenOut(
+          swapInTotalPoolBalance,
+          swapInDenormalizedWeight,
+          swapOutTotalPoolBalance,
+          swapOutDenormalizedWeight,
+          swapAmountOut,
+          poolSwapFee
+        )
+      ])
+
+      const exchangeRateIn = await proxy.exchangeRate(corePoolAddress, invertToken[swapInAddress] ?? swapInAddress)
+      const exchangeRateOut = await proxy.exchangeRate(corePoolAddress, invertToken[swapOutAddress] ?? swapOutAddress)
+      const swapIn = newSwapInAmount.mul(exchangeRateOut).div(exchangeRateIn)
+      if (inputTokenRef.current && swapIn) {
+        inputTokenRef.current.value = BNtoDecimal(
+          swapIn,
+          poolTokensArray[tokenInIndex]
+            ? poolTokensArray[tokenInIndex]?.decimals.toNumber()
+            : 18
+        ).replace(/\s/g, '')
+        setPriceImpact(Big(0))
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      const errorStr = error.toString()
+
+      if (errorStr.search(/ERR_(BPOW_BASE_TOO_|MATH_APPROX)/) > -1) {
+        setErrorMsg('This amount is too low for the pool!')
+        return
+      }
+
+      if (errorStr.search('ERR_MAX_IN_RATIO') > -1) {
+        setErrorMsg("The amount can't be more than half of what's in the pool!")
+        return
+      }
+
+      if (errorStr.search('below minimum') > -1) {
+        setErrorMsg("This amount is below minimum withdraw!")
+        return
+      }
+
+      if (swapInAmount.gt(swapInBalance)) {
+        setErrorMsg('This amount exceeds your balance!')
+        return;
+      }
+
+      ToastWarning('Could not connect with the blockchain to calculate prices.')
     }
   }
 
@@ -211,7 +377,7 @@ const Form = ({
 
   // get balance of swap in token
   React.useEffect(() => {
-    if (swapInAddress.length === 0 || userWalletAddress.length === 0 || chainId.length === 0 || chainId !== poolChain.chainId) {
+    if (swapInAddress.length === 0 || userWalletAddress.length === 0 || chainId.toString().length === 0 || chainId !== poolChain.chainId) {
       return
     }
 
@@ -231,7 +397,7 @@ const Form = ({
 
   // get balance of swap out token
   React.useEffect(() => {
-    if (userWalletAddress.length === 0 || chainId.length === 0 || chainId !== poolChain.chainId) {
+    if (userWalletAddress.length === 0 || chainId.toString().length === 0 || chainId !== poolChain.chainId) {
       return
     }
 
@@ -276,7 +442,6 @@ const Form = ({
 
   React.useEffect(() => {
     const tokens = title === 'Withdraw' ? poolTokensArray.length : 1
-    setSwapOutPrice(new BigNumber(-1))
     setSwapOutAmount(Array(tokens).fill(new BigNumber(0)))
   }, [title, swapInAddress, swapOutAddress, poolTokensArray.length])
 
@@ -293,7 +458,6 @@ const Form = ({
 
     if (chainId !== poolChain.chainId) {
       setSwapOutAmount([new BigNumber(0)])
-      setSwapOutPrice(new BigNumber(-1))
       return
     }
 
@@ -375,8 +539,7 @@ const Form = ({
             pow = pow.add(new BigNumber(1));
           }
         }
-
-        setSwapOutPrice(newSwapOutPrice)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         const errorStr = error.toString()
         if (userWalletAddress.length > 0) {
@@ -387,7 +550,6 @@ const Form = ({
           ToastWarning('Could not connect with the blockchain to calculate prices.')
         }
       }
-
     }
 
     calc()
@@ -409,7 +571,6 @@ const Form = ({
 
     if (chainId !== poolChain.chainId) {
       setSwapOutAmount([new BigNumber(0)])
-      setSwapOutPrice(new BigNumber(-1))
       return
     }
 
@@ -429,8 +590,7 @@ const Form = ({
           corePool.swapFee()
         ])
 
-        const [newSwapOutPrice, newSwapOutAmount] = await Promise.all([
-          proxy.spotPrice(corePoolAddress, swapOutAddress, swapInAddress),
+        const [newSwapOutAmount] = await Promise.all([
           corePool.calcOutGivenIn(
             swapInTotalPoolBalance,
             swapInDenormalizedWeight,
@@ -441,14 +601,12 @@ const Form = ({
           )
         ])
 
-        const exchangeRateIn = await proxy.exchangeRate(corePoolAddress, swapInAddress)
-        const exchangeRateOut = await proxy.exchangeRate(corePoolAddress, swapOutAddress)
+        const exchangeRateIn = await proxy.exchangeRate(corePoolAddress, invertToken[swapInAddress] ?? swapInAddress)
+        const exchangeRateOut = await proxy.exchangeRate(corePoolAddress, invertToken[swapOutAddress] ?? swapOutAddress)
 
         const swapOut = newSwapOutAmount.mul(exchangeRateIn).div(exchangeRateOut)
 
         setSwapOutAmount([swapOut])
-        setSwapOutPrice(newSwapOutPrice)
-
         try {
           if (userWalletAddress.length > 0 && swapInAmount.gt(new BigNumber(0))) {
             await proxy.trySwapExactAmountIn(swapInAddress, swapInAmount, swapOutAddress, userWalletAddress)
@@ -495,8 +653,6 @@ const Form = ({
     }
 
     if (chainId !== poolChain.chainId) {
-      setSwapOutPrice(new BigNumber(-1))
-
       if (swapOutAddress === '') {
         setSwapOutAmount(
           Array(poolTokensArray.length - 1).fill(new BigNumber(0))
@@ -624,19 +780,7 @@ const Form = ({
             poolExitFee
           ),
         ])
-        const [newSwapOutPrice] = await Promise.all([
-          corePool.calcSingleOutGivenPoolIn(
-            swapOutTotalPoolBalance,
-            swapOutDenormalizedWeight,
-            poolSupply,
-            poolTotalDenormalizedWeight,
-            wei,
-            poolSwapFee,
-            poolExitFee
-          )
-        ])
         setSwapOutAmount([SingleSwapOutAmount])
-        setSwapOutPrice(newSwapOutPrice)
       }
       catch (e) {
         if (userWalletAddress.length > 0) {
@@ -894,7 +1038,6 @@ const Form = ({
               )
               return
             }
-
             trackBuying(crpPoolAddress, poolSymbol, amountInUSD, productCategories)
             proxy.joinswapExternAmountIn(
               swapInAddressVal,
@@ -999,23 +1142,31 @@ const Form = ({
 
   // Calc Price Impact
   React.useEffect(() => {
-    if (swapInAmount.gt(new BigNumber(0)) && parseFloat(swapOutAmount[0].toString()) > 0) {
-      const usdAmountIn = Big(swapInAmount.toString())
+    if (!inputTokenRef?.current?.value) {
+      setPriceImpact(Big(0))
+      return
+    }
+    const amountInput = Big(Number(inputTokenRef.current.value)).mul(Big(10).pow(poolTokensArray[tokenInIndex]
+      ? poolTokensArray[tokenInIndex]?.decimals.toNumber()
+      : 18))
+    if (amountInput.gt(0) && parseFloat(swapOutAmount[0].toString()) > 0) {
+      const usdAmountIn = amountInput
         .mul(Big(priceDollar(swapInAddress, poolTokensArray)))
         .div(Big(10).pow(Number(poolTokensArray[tokenInIndex]?.decimals || 18)))
-
       const usdAmountOut = Big(swapOutAmount[0].toString())
         .mul(Big(priceDollar(swapOutAddress, poolTokensArray)))
         .div(Big(10).pow(Number(poolTokensArray[tokenAddress2Index[swapOutAddress]]?.decimals || 18)))
 
       const subValue = usdAmountIn.sub(usdAmountOut)
-      const valuePriceImpact = subValue.div(usdAmountIn).mul(100)
+      if (usdAmountIn.gt(0)) {
+        const valuePriceImpact = subValue.div(usdAmountIn).mul(100)
 
-      valuePriceImpact.gt(0) ? setPriceImpact(valuePriceImpact) : setPriceImpact(Big(0))
+        valuePriceImpact.gt(0) ? setPriceImpact(valuePriceImpact) : setPriceImpact(Big(0))
+      }
     } else {
       setPriceImpact(Big(0))
     }
-  }, [swapInAmount, swapOutAmount])
+  }, [inputTokenRef.current?.value, swapInAmount, swapOutAmount])
 
   return (
     <S.FormContainer onSubmit={submitAction}>
@@ -1078,15 +1229,25 @@ const Form = ({
           }
           tokenDetails={poolTokensArray[tokenInIndex]}
           setSwapAddress={setSwapInAddress}
+          setMaxActive={setMaxActive}
+          maxActive={maxActive}
         />
       </S.ErrorTippy>
 
       {title === 'Swap' ?
         <Tippy content="Trade places for swap-in and swap-out token">
           <S.SwapButton type="button" onClick={() => {
-            matomoEvent('click-on-button', 'swap-token')
+            trackEventFunction('click-on-button', 'swap-token', 'operations-invest')
             setSwapInAddress(swapOutAddress)
             setSwapOutAddress(swapInAddress)
+            if (inputTokenRef && inputTokenRef?.current && swapOutAmount.length > 0) {
+              inputTokenRef.current.value = BNtoDecimal(
+                swapOutAmount[0],
+                Number(poolTokensArray[tokenAddress2Index[swapOutAddress]]?.decimals) || 18
+              ).replace(/\s/g, '')
+            }
+            setSwapInAmount(swapOutAmount[0])
+            setSwapOutAmount([swapInAmount])
           }} >
             <img src="/assets/icons/arrow-down.svg" alt="" />
             <img src="/assets/icons/arrow-down.svg" alt="" />
@@ -1117,8 +1278,11 @@ const Form = ({
             swapAmount={swapOutAmount[0]}
             swapOutAddress={swapOutAddress}
             poolTokensArray={poolTokensArray}
-            // Text Input
-            disabled="This is an estimation of how much you'll receive, it'll depend on the state of the blockchain when the order executes"
+            disabled={userWalletAddress.length === 0
+              ? "Please connect your wallet by clicking the button below"
+              : chainId !== poolChain.chainId
+                ? `Please change to the ${poolChain.chainName} by clicking the button below`
+                : ""}
             // Select Input
             poolTokens={
               title === 'Invest'
@@ -1128,9 +1292,13 @@ const Form = ({
                   .filter((token: { address: string }) => token.address !== swapInAddress)
             }
             tokenDetails={poolTokensArray[tokenOutIndex]}
-            swapInAmount={swapInAmount}
+            // swapInAmount={swapInAmount}
             swapInAddress={swapInAddress}
             setSwapAddress={setSwapOutAddress}
+            setSwapOutAmount={setSwapOutAmount}
+            calculateAmountIn={title === 'Swap' ? calculateSwapAmountIn : calculateInvestAmountIn}
+            setMaxActive={setMaxActive}
+            maxActive={maxActive}
           />
           <S.ExchangeRate>
             <S.SpanLight>Price Impact:</S.SpanLight>
@@ -1175,7 +1343,6 @@ const Form = ({
         chainId === poolChain.chainId ? (
           <Button
             className="btn-submit"
-            onClick={() => setTimeout(() => clearInput(), 3000)}
             backgroundPrimary
             disabledNoEvent={
               (
@@ -1194,21 +1361,21 @@ const Form = ({
             type="submit"
             text={
               approvals[title][tokenInIndex] === Approval.Approved ?
-                swapInAmount.toString() !== '0' ?
+                swapInAmount.toString() !== '0' || inputTokenRef?.current?.value !== null ?
                   title === "Withdraw" ?
                     typeWithdrawChecked === "Best_value" ?
                       `${title} ${'$' + priceInDollarOnWithdraw}`
                       :
                       `${title} ${'$' +
                       BNtoDecimal(
-                        Big((swapOutAmount[0] || 0).toString())
+                        Big((swapOutAmount[0]).toString())
                           .mul(Big(priceDollar(swapOutAddress, poolTokensArray)))
                           .div(Big(10).pow(Number(poolTokensArray[tokenAddress2Index[swapOutAddress]]?.decimals || 18))),
                         18,
                         2,
                         2
                       )
-                    }`
+                      }`
                     :
                     `${title} ${'$' + BNtoDecimal(
                       Big((swapOutAmount[0] || 0).toString())
@@ -1218,7 +1385,7 @@ const Form = ({
                       2,
                       2
                     )
-                  }`
+                    }`
                   :
                   `${title}`
                 :

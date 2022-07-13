@@ -1,11 +1,14 @@
 import React from 'react'
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
 import * as S from './styles'
 
-const Footer = () => (
-  <S.Footer>
-    <S.Container>
-      {/* <S.Divider />
+const Footer = () => {
+  const { trackEventFunction } = useMatomoEcommerce()
+  return (
+    <S.Footer>
+      <S.Container>
+        {/* <S.Divider />
       <S.UpperContainer>
         <ul>
           <li>
@@ -41,25 +44,151 @@ const Footer = () => (
           </li>
         </ul>
       </S.UpperContainer> */}
-      <S.Divider />
+        <S.Divider />
 
-      <S.LowerContainer>
-        <S.LowerLeft>
-          <img
-            src="/assets/images/kassandra-footer.svg"
-            alt="kassandra"
-            width="266"
-            height="26"
-          />
-          <span>© 2021-{new Date().getFullYear()} Kassandra.</span>
-        </S.LowerLeft>
-        <S.LowerRight>
+        <S.LowerContainer>
+          <S.LowerLeft>
+            <img
+              src="/assets/images/kassandra-footer.svg"
+              alt="kassandra"
+              width="266"
+              height="26"
+            />
+            <span>© 2021-{new Date().getFullYear()} Kassandra.</span>
+          </S.LowerLeft>
+          <S.LowerRight>
+            <ul>
+              <li>
+                <S.SocialIcon
+                  href="https://discord.gg/fAqpbP6tFw"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() =>
+                    trackEventFunction(
+                      'click-on-link',
+                      'media-social',
+                      'footer'
+                    )
+                  }
+                >
+                  <img
+                    src="/assets/socialMidia/discord.svg"
+                    alt="Join our Discord community"
+                    width="20"
+                    height="20"
+                  />
+                </S.SocialIcon>
+              </li>
+              <li>
+                <S.SocialIcon
+                  href="https://t.me/KassandraDAO"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() =>
+                    trackEventFunction(
+                      'click-on-link',
+                      'media-social',
+                      'footer'
+                    )
+                  }
+                >
+                  <img
+                    src="/assets/socialMidia/telegram.svg"
+                    alt="Join our Telegram group"
+                    width="20"
+                    height="20"
+                  />
+                </S.SocialIcon>
+              </li>
+              <li>
+                <S.SocialIcon
+                  href="https://github.com/KassandraFinance"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() =>
+                    trackEventFunction(
+                      'click-on-link',
+                      'media-social',
+                      'footer'
+                    )
+                  }
+                >
+                  <img
+                    src="/assets/socialMidia/github.svg"
+                    alt="Access our GitHub repository"
+                    width="20"
+                    height="20"
+                  />
+                </S.SocialIcon>
+              </li>
+              <li>
+                <S.SocialIcon
+                  href="https://kassandrafoundation.medium.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() =>
+                    trackEventFunction(
+                      'click-on-link',
+                      'media-social',
+                      'footer'
+                    )
+                  }
+                >
+                  <img
+                    src="/assets/socialMidia/medium.svg"
+                    alt="Read our Medium blog"
+                    width="20"
+                    height="20"
+                  />
+                </S.SocialIcon>
+              </li>
+              <li>
+                <S.SocialIcon
+                  href="https://twitter.com/dao_kassandra"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() =>
+                    trackEventFunction(
+                      'click-on-link',
+                      'media-social',
+                      'footer'
+                    )
+                  }
+                >
+                  <img
+                    src="/assets/socialMidia/twitter.svg"
+                    alt="Follow our Twitter feed"
+                    width="20"
+                    height="20"
+                  />
+                </S.SocialIcon>
+              </li>
+            </ul>
+            <S.Certified>
+              <a
+                href="https://www.certik.com/projects/kassandra-finance"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackEventFunction('click-on-link', 'certik-audit', 'footer')
+                }
+              >
+                <span>Audited By</span>
+                <img src="/assets/logos/certik.svg" alt="Certik" />
+              </a>
+            </S.Certified>
+          </S.LowerRight>
+        </S.LowerContainer>
+        <S.LowerContainerMobile>
           <ul>
             <li>
               <S.SocialIcon
-                href="https://discord.gg/fAqpbP6tFw"
+                href="https://discord.com/invite/2uGEvqNnuq"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  trackEventFunction('click-on-link', 'media-social', 'footer')
+                }
               >
                 <img
                   src="/assets/socialMidia/discord.svg"
@@ -74,6 +203,9 @@ const Footer = () => (
                 href="https://t.me/KassandraDAO"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  trackEventFunction('click-on-link', 'media-social', 'footer')
+                }
               >
                 <img
                   src="/assets/socialMidia/telegram.svg"
@@ -88,6 +220,9 @@ const Footer = () => (
                 href="https://github.com/KassandraFinance"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  trackEventFunction('click-on-link', 'media-social', 'footer')
+                }
               >
                 <img
                   src="/assets/socialMidia/github.svg"
@@ -102,6 +237,9 @@ const Footer = () => (
                 href="https://kassandrafoundation.medium.com/"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  trackEventFunction('click-on-link', 'media-social', 'footer')
+                }
               >
                 <img
                   src="/assets/socialMidia/medium.svg"
@@ -116,6 +254,9 @@ const Footer = () => (
                 href="https://twitter.com/dao_kassandra"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  trackEventFunction('click-on-link', 'media-social', 'footer')
+                }
               >
                 <img
                   src="/assets/socialMidia/twitter.svg"
@@ -126,113 +267,32 @@ const Footer = () => (
               </S.SocialIcon>
             </li>
           </ul>
+          <S.LowerLeft>
+            <img
+              src="/assets/images/kassandra-footer.svg"
+              alt="kassandra"
+              width="266"
+              height="26"
+            />
+            <span>© 2021-{new Date().getFullYear()} Kassandra.</span>
+          </S.LowerLeft>
           <S.Certified>
             <a
               href="https://www.certik.com/projects/kassandra-finance"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() =>
+                trackEventFunction('click-on-link', 'certik-audit', 'footer')
+              }
             >
               <span>Audited By</span>
               <img src="/assets/logos/certik.svg" alt="Certik" />
             </a>
           </S.Certified>
-        </S.LowerRight>
-      </S.LowerContainer>
-      <S.LowerContainerMobile>
-        <ul>
-          <li>
-            <S.SocialIcon
-              href="https://discord.com/invite/2uGEvqNnuq"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="/assets/socialMidia/discord.svg"
-                alt="Join our Discord community"
-                width="20"
-                height="20"
-              />
-            </S.SocialIcon>
-          </li>
-          <li>
-            <S.SocialIcon
-              href="https://t.me/KassandraDAO"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="/assets/socialMidia/telegram.svg"
-                alt="Join our Telegram group"
-                width="20"
-                height="20"
-              />
-            </S.SocialIcon>
-          </li>
-          <li>
-            <S.SocialIcon
-              href="https://github.com/KassandraFinance"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="/assets/socialMidia/github.svg"
-                alt="Access our GitHub repository"
-                width="20"
-                height="20"
-              />
-            </S.SocialIcon>
-          </li>
-          <li>
-            <S.SocialIcon
-              href="https://kassandrafoundation.medium.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="/assets/socialMidia/medium.svg"
-                alt="Read our Medium blog"
-                width="20"
-                height="20"
-              />
-            </S.SocialIcon>
-          </li>
-          <li>
-            <S.SocialIcon
-              href="https://twitter.com/dao_kassandra"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="/assets/socialMidia/twitter.svg"
-                alt="Follow our Twitter feed"
-                width="20"
-                height="20"
-              />
-            </S.SocialIcon>
-          </li>
-        </ul>
-        <S.LowerLeft>
-          <img
-            src="/assets/images/kassandra-footer.svg"
-            alt="kassandra"
-            width="266"
-            height="26"
-          />
-          <span>© 2021-{new Date().getFullYear()} Kassandra.</span>
-        </S.LowerLeft>
-        <S.Certified>
-          <a
-            href="https://www.certik.com/projects/kassandra-finance"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span>Audited By</span>
-            <img src="/assets/logos/certik.svg" alt="Certik" />
-          </a>
-        </S.Certified>
-      </S.LowerContainerMobile>
-    </S.Container>
-  </S.Footer>
-)
+        </S.LowerContainerMobile>
+      </S.Container>
+    </S.Footer>
+  )
+}
 
 export default Footer

@@ -25,17 +25,13 @@ export const Wrapper = styled.div`
 
 export const LogoWrapper = styled.div`
   .logo-desktop {
-    img {
-      height: 4rem;
-    }
-
     @media (max-width: 960px) {
       display: none;
     }
   }
 
   .logo-ipad {
-    img {
+    > img {
       width: 7rem;
     }
 
@@ -55,7 +51,6 @@ export const Menu = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 58rem;
 
   .logo-mobile {
     width: 4.6rem;
@@ -64,14 +59,23 @@ export const Menu = styled.nav`
     @media (min-width: 541px) {
       display: none;
     }
+    @media (max-width: 360px) {
+      width: 4.2rem;
+    }
+  }
+
+  #aboutMobile {
+    @media (max-width: 540px) {
+      display: none;
+    }
   }
 
   @media (max-width: 960px) {
-    min-width: 48rem;
+    min-width: 58rem;
   }
 
   @media (max-width: 768px) {
-    min-width: 30rem;
+    min-width: 42rem;
   }
 
   @media (max-width: 540px) {
@@ -88,7 +92,9 @@ export const Menu = styled.nav`
 export const MenuLink = styled.a`
   position: relative;
 
-  margin: 0.3rem ${theme.spacings.space24};
+  margin-right: 2.4rem;
+  padding-top: 1.2rem;
+  padding-bottom: 1.3rem;
 
   color: ${theme.colors.snow};
   font-size: ${theme.font.sizes.font16};
@@ -96,7 +102,10 @@ export const MenuLink = styled.a`
   text-decoration: none;
   text-align: center;
 
-  &:hover {
+  outline: none;
+
+  &:hover,
+  &:focus-within {
     &::after {
       content: '';
       position: absolute;
@@ -123,18 +132,18 @@ export const MenuLink = styled.a`
     }
   }
 
-  @media (max-width: 960px) {
-    margin: 0.3rem 0;
-  }
-
   @media (max-width: 540px) {
     font-size: ${theme.font.sizes.font14};
+    margin-right: 0;
   }
 `
 
 export const MenuLinkDisable = styled.a`
   position: relative;
-  margin: 0.3rem ${theme.spacings.space24};
+
+  margin-right: 4.2rem;
+  padding-top: 1.2rem;
+  padding-bottom: 1.3rem;
 
   color: ${theme.colors.grayDisabled};
   font-size: ${theme.font.sizes.font16};
@@ -169,12 +178,32 @@ export const MenuLinkDisable = styled.a`
     }
   }
 
-  @media (max-width: 960px) {
-    margin: 0.3rem 0;
+  @media (max-width: 768px) {
+    margin-right: 3.2rem;
   }
 
-  @media (max-width: 540px) {
+  @media (max-width: 541px) {
+    margin-right: 2rem;
     font-size: ${theme.font.sizes.font14};
+  }
+
+  @media (max-width: 360px) {
+    margin-right: 1.4rem;
+    font-size: ${theme.font.sizes.font12};
+  }
+
+  img {
+    position: absolute;
+    right: -2rem;
+    top: 1.8rem;
+
+    @media (max-width: 540px) {
+      right: -1.6rem;
+      top: 1.7rem;
+    }
+    @media (max-width: 360px) {
+      top: 1.6rem;
+    }
   }
 `
 
@@ -236,4 +265,10 @@ export const ButtonOptions = styled.button`
   background-color: rgba(255, 255, 255, 0.1);
   border: none;
   border-radius: 50%;
+`
+
+export const MenuContainer = styled.div`
+  @media (max-width: 540px) {
+    display: none;
+  }
 `

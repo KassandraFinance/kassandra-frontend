@@ -13,6 +13,7 @@ import substr from '../../../utils/substr'
 import { GET_USERS } from './graphql'
 
 import * as S from './styles'
+import NftImage from '../../NftImage'
 
 interface IVotingPowerRankProps {
   address: string;
@@ -20,6 +21,9 @@ interface IVotingPowerRankProps {
   voteWeight: string;
   votes: number;
   proposalsCreated: number;
+  name?: string;
+  image?: string;
+  isNFT?: boolean;
 }
 
 export const VotingPowerTable = () => {
@@ -32,38 +36,64 @@ export const VotingPowerTable = () => {
       votingPower: Big(-1),
       voteWeight: '0',
       votes: 0,
-      proposalsCreated: 0
+      proposalsCreated: 0,
+      name: '',
+      image: ''
     }
   ])
 
   const { data } = useSWR([GET_USERS], query => request(SUBGRAPH_URL, query))
 
   React.useEffect(() => {
-    if (data) {
-      const users = data.users.map(
-        (user: {
-          id: string,
-          votingPower: string,
-          votes: [],
-          proposals: []
-        }) => {
-          return {
-            address: user.id,
-            votingPower: user.votingPower,
-            voteWeight: BNtoDecimal(
-              Big(user.votingPower)
-                .mul(100)
-                .div(Big(data.governances[0].totalVotingPower)),
-              18,
-              2
-            ),
-            votes: user.votes.length,
-            proposalsCreated: user.proposals.length
+    ;(async () => {
+      if (data) {
+        const users = data.users.map(
+          async (user: {
+            id: string,
+            votingPower: string,
+            votes: [],
+            proposals: []
+          }) => {
+            const response = await fetch(`/api/profile/${user.id}`)
+            const userProfile = await response.json()
+
+            if (userProfile.nickname) {
+              return {
+                address: user.id,
+                votingPower: user.votingPower,
+                voteWeight: BNtoDecimal(
+                  Big(user.votingPower)
+                    .mul(100)
+                    .div(Big(data.governances[0].totalVotingPower)),
+                  18,
+                  2
+                ),
+                votes: user.votes.length,
+                proposalsCreated: user.proposals.length,
+                name: userProfile?.nickname || '',
+                image: userProfile?.image || '',
+                isNFT: userProfile?.isNFT || false
+              }
+            }
+
+            return {
+              address: user.id,
+              votingPower: user.votingPower,
+              voteWeight: BNtoDecimal(
+                Big(user.votingPower)
+                  .mul(100)
+                  .div(Big(data.governances[0].totalVotingPower)),
+                18,
+                2
+              ),
+              votes: user.votes.length,
+              proposalsCreated: user.proposals.length
+            }
           }
-        }
-      )
-      setVotingPowerRank(users)
-    }
+        )
+        setVotingPowerRank(await Promise.all(users))
+      }
+    })()
   }, [data])
 
   return (
@@ -81,40 +111,41 @@ export const VotingPowerTable = () => {
         </thead>
         <tbody>
           {votingPowerRank &&
-            votingPowerRank.map(
-              (
-                item: {
-                  address: string,
-                  votingPower: Big,
-                  voteWeight: string,
-                  votes: number,
-                  proposalsCreated: number
-                },
-                index
-              ) => (
-                <Link key={item.address} href={`/gov/address/${item.address}`}>
-                  <S.Tr>
-                    <S.Td className="rank">{index + 1}</S.Td>
-                    <S.Td className="user">
+            votingPowerRank.map((item, index) => (
+              <Link key={item.address} href={`/profile/${item.address}`}>
+                <S.Tr>
+                  <S.Td className="rank">{index + 1}</S.Td>
+                  <S.Td className="user">
+                    {item.image ? (
+                      item.isNFT ? (
+                        <NftImage NftUrl={item.image} imageSize="small" />
+                      ) : (
+                        <img className="user-image" src={item.image} alt="" />
+                      )
+                    ) : (
                       <Jazzicon
                         diameter={24}
                         seed={jsNumberForAddress(item.address)}
                       />
+                    )}
 
+                    {item.name ? (
+                      <span>{item.name}</span>
+                    ) : (
                       <span>{substr(item.address)}</span>
-                    </S.Td>
-                    <S.Td className="vote-power">
-                      {BNtoDecimal(item.votingPower, 0, 2)}
-                    </S.Td>
-                    <S.Td className="vote-weight">{item.voteWeight + '%'}</S.Td>
-                    <S.Td className="proposals-created">
-                      {item.proposalsCreated}
-                    </S.Td>
-                    <S.Td className="proposals-voted">{item.votes}</S.Td>
-                  </S.Tr>
-                </Link>
-              )
-            )}
+                    )}
+                  </S.Td>
+                  <S.Td className="vote-power">
+                    {BNtoDecimal(item.votingPower, 0, 2)}
+                  </S.Td>
+                  <S.Td className="vote-weight">{item.voteWeight + '%'}</S.Td>
+                  <S.Td className="proposals-created">
+                    {item.proposalsCreated}
+                  </S.Td>
+                  <S.Td className="proposals-voted">{item.votes}</S.Td>
+                </S.Tr>
+              </Link>
+            ))}
         </tbody>
       </S.Table>
     </S.VotingPowerTable>

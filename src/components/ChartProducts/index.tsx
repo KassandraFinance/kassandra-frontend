@@ -1,13 +1,15 @@
 import React from 'react'
 import useSWR from 'swr'
 import request from 'graphql-request'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
 
 import { SUBGRAPH_URL } from '../../constants/tokenAddresses'
 
-import { actionSetPeriodSelected } from '../../store/modules/periodSelected/actions'
-import { actionSetChartSelected } from '../../store/modules/chartSelected/actions'
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
+
+import { useAppDispatch } from '../../store/hooks'
+import { setChartSelected } from '../../store/reducers/chartSelected'
+import { setPerformanceValues } from '../../store/reducers/performanceValues'
+import { setPeriodSelected as reduxSetPeriodSelected } from '../../store/reducers/periodSelected'
 
 import Loading from '../Loading'
 
@@ -18,10 +20,6 @@ import ChartAllocation from './ChartAllocation'
 import { GET_CHART } from './graphql'
 
 import * as S from './styles'
-import {
-  actionSetPerformanceValues,
-  PerformanceValues
-} from '../../store/modules/performanceValues/actions'
 
 const arrPeriod: string[] = ['1W', '1M', '3M', '1Y']
 
@@ -30,9 +28,8 @@ interface IChartProductsProps {
 }
 
 const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
-  const dispatch = useDispatch()
-  const { performanceValues }: { performanceValues: PerformanceValues } =
-    useSelector((state: RootStateOrAny) => state)
+  const dispatch = useAppDispatch()
+
   const [inputChecked, setInputChecked] = React.useState<string>('Price')
   const [price, setPrice] = React.useState([])
   const [tvl, setTvl] = React.useState([])
@@ -47,7 +44,8 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
     price_period: 3600,
     period_selected: Math.trunc(dateNow.getTime() / 1000 - 60 * 60 * 24 * 7)
   })
-  const { trackEvent } = useMatomo()
+
+  const { trackEventFunction } = useMatomoEcommerce()
 
   const { data } = useSWR([GET_CHART, params], (query, params) =>
     request(SUBGRAPH_URL, query, params)
@@ -62,10 +60,8 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
           period_selected: Math.trunc(dateNow.getTime() / 1000 - 60 * 60 * 24)
         }))
         dispatch(
-          actionSetPerformanceValues({
-            title: 'Daily Performance',
-            performance: performanceValues?.changeWeek[0],
-            changeWeek: performanceValues.changeWeek
+          setPerformanceValues({
+            title: 'Daily Performance'
           })
         )
         break
@@ -78,12 +74,8 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
           )
         }))
         dispatch(
-          actionSetPerformanceValues({
-            title: 'Weekly Performance',
-            performance:
-              performanceValues.changeWeek && performanceValues?.changeWeek[1],
-            changeWeek:
-              performanceValues.changeWeek && performanceValues.changeWeek
+          setPerformanceValues({
+            title: 'Weekly Performance'
           })
         )
         break
@@ -96,10 +88,8 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
           )
         }))
         dispatch(
-          actionSetPerformanceValues({
-            title: 'Monthly Performance',
-            performance: performanceValues?.changeWeek[2],
-            changeWeek: performanceValues.changeWeek
+          setPerformanceValues({
+            title: 'Monthly Performance'
           })
         )
         break
@@ -112,10 +102,8 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
           )
         }))
         dispatch(
-          actionSetPerformanceValues({
-            title: '3 Months Performance',
-            performance: performanceValues?.changeWeek[3],
-            changeWeek: performanceValues.changeWeek
+          setPerformanceValues({
+            title: '3 Months Performance'
           })
         )
         break
@@ -128,10 +116,8 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
           )
         }))
         dispatch(
-          actionSetPerformanceValues({
-            title: 'Yearly Performance',
-            performance: performanceValues?.changeWeek[4],
-            changeWeek: performanceValues.changeWeek
+          setPerformanceValues({
+            title: 'Yearly Performance'
           })
         )
         break
@@ -140,22 +126,14 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
     }
   }
 
-  function matomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'chart-invest',
-      action,
-      name
-    })
-  }
-
   React.useEffect(() => {
-    dispatch(actionSetChartSelected('Price'))
+    dispatch(setChartSelected('Price'))
   }, [])
 
   React.useEffect(() => {
     returnDate('1W')
     setPeriodSelected('1W')
-    dispatch(actionSetPeriodSelected('1W'))
+    dispatch(reduxSetPeriodSelected('1W'))
   }, [inputChecked])
 
   React.useEffect(() => {
@@ -202,8 +180,8 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
             id="Price-chart"
             onChange={() => {
               setInputChecked('Price')
-              dispatch(actionSetChartSelected('Price'))
-              matomoEvent('click-on-tab', 'price')
+              dispatch(setChartSelected('Price'))
+              trackEventFunction('click-on-tab', 'price', 'chart-invest')
             }}
             checked={inputChecked === 'Price'}
           />
@@ -216,8 +194,8 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
             id="TVL-chart"
             onChange={() => {
               setInputChecked('TVL')
-              dispatch(actionSetChartSelected('TVL'))
-              matomoEvent('click-on-tab', 'tvl')
+              dispatch(setChartSelected('TVL'))
+              trackEventFunction('click-on-tab', 'tvl', 'chart-invest')
             }}
             checked={inputChecked === 'TVL'}
           />
@@ -230,8 +208,8 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
             id="Allocation-chart"
             onChange={() => {
               setInputChecked('Allocation')
-              dispatch(actionSetChartSelected('Allocation'))
-              matomoEvent('click-on-tab', 'allocation')
+              dispatch(setChartSelected('Allocation'))
+              trackEventFunction('click-on-tab', 'allocation', 'chart-invest')
             }}
             checked={inputChecked === 'Allocation'}
           />
@@ -252,7 +230,12 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
                 onChange={() => {
                   returnDate('1D')
                   setPeriodSelected('1D')
-                  dispatch(actionSetPeriodSelected('1D'))
+                  dispatch(reduxSetPeriodSelected('1D'))
+                  trackEventFunction(
+                    'click-on-tab',
+                    'day-1D',
+                    'chart-product-period'
+                  )
                 }}
               />
               <S.LabelPeriod
@@ -274,7 +257,12 @@ const ChartProducts = ({ crpPoolAddress }: IChartProductsProps) => {
                 onChange={() => {
                   returnDate(period)
                   setPeriodSelected(period)
-                  dispatch(actionSetPeriodSelected(period))
+                  dispatch(reduxSetPeriodSelected(period))
+                  trackEventFunction(
+                    'click-on-tab',
+                    `day-${period}`,
+                    'chart-product-period'
+                  )
                 }}
               />
               <S.LabelPeriod

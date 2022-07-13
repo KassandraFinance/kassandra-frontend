@@ -2,13 +2,13 @@ import React from 'react'
 import Image from 'next/image'
 
 import BigNumber from 'bn.js'
-import { RootStateOrAny, useSelector } from 'react-redux'
 
 import { Staking } from '../../../../constants/tokenAddresses'
 
 // import { useMatomo } from '@datapunt/matomo-tracker-react'
 import useStakingContract from '../../../../hooks/useStakingContract'
 import useVotingPower from '../../../../hooks/useVotingPower'
+import { useAppSelector } from '../../../../store/hooks'
 
 import { BNtoDecimal } from '../../../../utils/numerals'
 import substr from '../../../../utils/substr'
@@ -50,7 +50,7 @@ const DelegateVotingPower = ({
   setCurrentModal,
   setModalOpen
 }: IDelegateVotingPowerProps) => {
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
   const [optionsOpen, setOptionsOpen] = React.useState<boolean>(false)
   const [receiverAddress, setReceiverAddress] = React.useState<string>('')
   const [delegateSelected, setDelegateSelected] = React.useState<IDateProps>({

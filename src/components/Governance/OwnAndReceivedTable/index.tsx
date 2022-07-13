@@ -1,17 +1,18 @@
 import React from 'react'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import Big from 'big.js'
-
-import { useSelector, RootStateOrAny } from 'react-redux'
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 import substr from '../../../utils/substr'
 
+import { useAppSelector } from '../../../store/hooks'
+
 import AnyCard from '../../AnyCard'
 
 import avax from '../../../../public/assets/logos/kacy-stake.svg'
+import NftImage from '../../NftImage'
 
 import * as S from './styles'
 
@@ -25,9 +26,13 @@ interface IUserVotingPowerProps {
   to: {
     id: string
   };
+  image: string;
+  name: string;
+  isNFT: boolean;
 }
 
 interface IOwnAndReceivedTableProps {
+  userAddressUrl: string | string[] | undefined;
   userVotingPower: IUserVotingPowerProps[];
   isDelegationTable: boolean;
 }
@@ -41,15 +46,13 @@ const URL_API: { [key: number | string]: string } = {
 
 // eslint-disable-next-line prettier/prettier
 export const OwnAndReceivedTable = ({
+  userAddressUrl,
   userVotingPower,
   isDelegationTable
 }: IOwnAndReceivedTableProps) => {
   const [kacyDolarPrice, setKacyDolarPrice] = React.useState(0)
 
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
-
-  const router = useRouter()
-  const { address } = router.query
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   const { data } = useSWR(URL_API[process.env.NEXT_PUBLIC_URL_API || 4])
 
@@ -133,19 +136,62 @@ export const OwnAndReceivedTable = ({
                     </S.Td>
                     <S.Td className="delegating-to">
                       {isDelegationTable ? (
-                        item.to?.id === address ? (
+                        item.to?.id === userAddressUrl ? (
                           ''
                         ) : (
-                          <Image src={avax} width={24} height={24} alt="" />
+                          <>
+                            {item.image ? (
+                              item.isNFT ? (
+                                <NftImage
+                                  NftUrl={item.image}
+                                  imageSize="small"
+                                />
+                              ) : (
+                                <Image
+                                  src={item.image}
+                                  width={24}
+                                  height={24}
+                                  alt=""
+                                />
+                              )
+                            ) : (
+                              <Jazzicon
+                                diameter={24}
+                                seed={jsNumberForAddress(item.to.id)}
+                              />
+                            )}
+                          </>
                         )
                       ) : (
-                        <Image src={avax} width={24} height={24} alt="" />
+                        <>
+                          {item.image ? (
+                            item.isNFT ? (
+                              <NftImage NftUrl={item.image} imageSize="small" />
+                            ) : (
+                              <Image
+                                src={item.image}
+                                width={24}
+                                height={24}
+                                alt=""
+                              />
+                            )
+                          ) : (
+                            <Jazzicon
+                              diameter={24}
+                              seed={jsNumberForAddress(item.from.id)}
+                            />
+                          )}
+                        </>
                       )}
                       <span>
                         {isDelegationTable
-                          ? item.to.id === address
+                          ? item.to.id === userAddressUrl
                             ? 'self'
+                            : item.name
+                            ? item.name
                             : substr(item.to.id)
+                          : item.name
+                          ? item.name
                           : substr(item.from?.id)}
                       </span>
                     </S.Td>
@@ -168,11 +214,11 @@ export const OwnAndReceivedTable = ({
             </tbody>
           </S.Table>
         </S.OwnAndReceivedTable>
-      ) : userWalletAddress === address ? (
+      ) : userWalletAddress === userAddressUrl ? (
         <AnyCard
           text={
             isDelegationTable
-              ? 'To obtain voting power you need to have KACY staked'
+              ? 'This address doesn’t have KACY staked.'
               : 'This address doesn’t seem to have received any voting power'
           }
           button={isDelegationTable}

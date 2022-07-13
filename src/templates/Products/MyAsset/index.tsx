@@ -3,29 +3,26 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
 
-import { useSelector, RootStateOrAny } from 'react-redux'
-
-import {
-  Staking,
-  LPKacyAvaxPNG,
-  LPDaiAvax
-} from '../../../constants/tokenAddresses'
+import { Staking, LPDaiAvax } from '../../../constants/tokenAddresses'
 
 import usePriceLP from '../../../hooks/usePriceLP'
 import useERC20Contract from '../../../hooks/useERC20Contract'
 import useStakingContract from '../../../hooks/useStakingContract'
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
 import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 import { registerToken } from '../../../utils/registerToken'
 
+import { useAppSelector } from '../../../store/hooks'
+
 import Button from '../../../components/Button'
 import ModalWalletConnect from '../../../components/Modals/ModalWalletConnect'
 
 import * as S from './styles'
+import { LP_KACY_AVAX_PNG } from '../../../constants/pools'
 
 interface IMyAssetProps {
   crpPoolAddress: string;
@@ -50,13 +47,13 @@ const MyAsset = ({
   decimals
 }: IMyAssetProps) => {
   const router = useRouter()
-  const { trackEvent } = useMatomo()
+  const { trackEventFunction } = useMatomoEcommerce()
 
-  const { viewgetReserves } = usePriceLP()
+  const { getPriceKacyAndLP } = usePriceLP()
   const tokenWallet = useERC20Contract(crpPoolAddress)
   const stakingContract = useStakingContract(Staking)
 
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
   const [stakedToken, setStakedToken] = React.useState<BigNumber>(
@@ -68,14 +65,6 @@ const MyAsset = ({
     fund: Big(-1)
   })
   const [apr, setApr] = React.useState<BigNumber>(new BigNumber(0))
-
-  function matomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'stake-details',
-      action,
-      name
-    })
-  }
 
   async function getStakedToken() {
     const staked = await stakingContract.userInfo(pid, userWalletAddress)
@@ -89,23 +78,11 @@ const MyAsset = ({
   }
 
   async function handleLPtoUSD() {
-    const reservesKacyAvax = await viewgetReserves(LPKacyAvaxPNG)
-    const reservesDaiAvax = await viewgetReserves(LPDaiAvax)
-
-    let kacyReserve = reservesKacyAvax._reserve1
-    let avaxKacyReserve = reservesKacyAvax._reserve0
-    let DaiReserve = reservesDaiAvax._reserve1
-    let AvaxDaiReserve = reservesDaiAvax._reserve0
-
-    if (process.env.NEXT_PUBLIC_MASTER !== '1') {
-      kacyReserve = reservesKacyAvax._reserve0
-      avaxKacyReserve = reservesKacyAvax._reserve1
-      DaiReserve = reservesDaiAvax._reserve0
-      AvaxDaiReserve = reservesDaiAvax._reserve1
-    }
-
-    const avaxInDollar = Big(DaiReserve).div(Big(AvaxDaiReserve))
-    const kacyInDollar = avaxInDollar.mul(Big(avaxKacyReserve).div(kacyReserve))
+    const { kacyPriceInDollar } = await getPriceKacyAndLP(
+      LP_KACY_AVAX_PNG,
+      LPDaiAvax,
+      false
+    )
 
     setPriceToken(prevState => ({
       ...prevState,
@@ -114,7 +91,7 @@ const MyAsset = ({
 
     setPriceToken(prevState => ({
       ...prevState,
-      kacy: kacyInDollar
+      kacy: kacyPriceInDollar
     }))
   }
 
@@ -187,7 +164,11 @@ const MyAsset = ({
               symbol.toLocaleUpperCase(),
               Number(decimals)
             )
-            matomoEvent('click-add-metamask', `add-${symbol}`)
+            trackEventFunction(
+              'click-add-metamask',
+              `add-${symbol}`,
+              'my-asset'
+            )
           }}
         >
           <Image
@@ -268,7 +249,10 @@ const MyAsset = ({
           size="huge"
           onClick={
             userWalletAddress
-              ? () => router.push('/farm')
+              ? () => {
+                  trackEventFunction('click-on-button', 'stake', 'my-asset')
+                  router.push('/farm')
+                }
               : () => setIsModaWallet(true)
           }
         />

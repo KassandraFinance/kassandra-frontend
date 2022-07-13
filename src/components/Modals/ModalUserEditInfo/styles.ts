@@ -96,35 +96,44 @@ export const UserProfileInfoContent = styled.div`
 
 export const UserProfileInfo = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
+  margin-top: -1rem;
   margin-right: 6rem;
 
-  img {
+  #userImageSelect {
     border-radius: 100%;
   }
 
+  img {
+    margin-top: 1rem;
+    object-fit: cover;
+  }
+
   span {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    margin-left: 1rem;
+    margin-left: 1.6rem;
 
-    label, button {
-      padding: 0.6rem 0.6rem;
+    label {
+      padding: 1.6rem 1.6rem;
 
       background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0);
+      border: 1px solid transparent;
       border-radius: 0.4rem;
 
-      color: #ffffff;
+      color: #FCFCFC;
       font-size: 1.6rem;
       font-weight: ${theme.font.weight.light};
 
       text-align: center;
-      transition: 0.2s;
+      transition: 0.3s;
       cursor: pointer;
+
+      :hover {
+        border-color: rgba(255, 255, 255, 0.3);
+      }
     }
   }
 
@@ -145,7 +154,7 @@ export const UserProfileInfo = styled.div`
   }
 
   input {
-    width: 27.7rem;
+    width: 32rem;
     padding: 1.6rem;
 
     color: #C4C4C4;
@@ -166,6 +175,63 @@ export const UserNameContent = styled.div``
 
 export const UserImageContent = styled.div`
   display: flex;
+  justify-content: space-between;
+`
+interface isDropdownAddNftProps {
+  isDropdownAddNft: boolean
+}
+
+export const ButtonAddNft = styled.button<isDropdownAddNftProps>`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 1.6rem 1.6rem;
+
+  color: #FCFCFC;
+  font-size: 1.6rem;
+  font-weight: ${theme.font.weight.light};
+
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid transparent;
+  border-radius: 0.4rem;
+
+  transition: 0.3s;
+
+  :hover {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  text-align: center;
+  transition: 0.2s;
+  cursor: pointer;
+
+  img {
+    ${props =>
+      props.isDropdownAddNft ? `transform: rotate(180deg)` : `transform: rotate(0)`}
+  }
+`
+
+interface isDropdownAddNftProps {
+  isDropdownAddNft: boolean
+}
+
+export const UserAddNftImage = styled.div<isDropdownAddNftProps>`
+  position: absolute;
+  top: 12.5rem;
+
+  display: ${props => (props.isDropdownAddNft ? 'flex' : 'none')};
+
+  @media (max-width: 768px) {
+    right: 0.1rem;
+  }
+
+  img {
+    height: 5rem;
+    width: 5rem;
+  }
 `
 
 interface IUserSocialMidiaProps {
@@ -176,6 +242,7 @@ export const UserSocialMidia = styled.div<IUserSocialMidiaProps>`
   display: ${props => (props.isStateSocialMidia ? 'flex' : 'none')};
   justify-content: flex-start;
   flex-direction: column;
+  margin-top: 1rem;
 
   @media (max-width: 768px) {
     animation: go-back 1s ease;
@@ -323,7 +390,7 @@ export const UserEditInfoButtons = styled.div`
   width: 100%;
   gap: 1.6rem;
 
-  padding-top: 3.6rem;
+  padding-top: 2.4rem;
 
   @media (max-width: 768px) {
     flex-direction: column;

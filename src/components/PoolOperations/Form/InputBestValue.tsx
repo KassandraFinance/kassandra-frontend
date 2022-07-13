@@ -4,21 +4,21 @@ import Image from 'next/image'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 
-import { useSelector, RootStateOrAny } from 'react-redux'
-
-import { TokenDetails } from '../../../store/modules/poolTokens/types'
-import { TokenImages } from '../../../store/modules/poolImages/types'
+import { ITokenDetails } from '../../../context/PoolTokensContext'
+import { ITokenImages } from '../../../store/reducers/poolImages'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 import { priceDollar } from '../../../utils/priceDollar'
+
+import { useAppSelector } from '../../../store/hooks'
 
 import none from '../../../../public/assets/icons/coming-soon.svg'
 
 import * as S from './styles'
 
 interface IInputBestValueProps {
-  poolTokenDetails: TokenDetails[];
-  poolTokensArray: TokenDetails[];
+  poolTokenDetails: ITokenDetails[];
+  poolTokensArray: ITokenDetails[];
   swapOutAmount: BigNumber[];
   swapOutBalance: BigNumber[];
   setPriceInDollarOnWithdraw: React.Dispatch<React.SetStateAction<string>>;
@@ -31,8 +31,8 @@ const InputBestValue = ({
   swapOutBalance,
   setPriceInDollarOnWithdraw
 }: IInputBestValueProps) => {
-  const { poolImages }: { poolImages: TokenImages } = useSelector(
-    (state: RootStateOrAny) => state
+  const { poolImages }: { poolImages: ITokenImages } = useAppSelector(
+    state => state
   )
 
   React.useEffect(() => {

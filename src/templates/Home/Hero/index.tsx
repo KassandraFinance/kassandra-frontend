@@ -1,26 +1,18 @@
 import React from 'react'
 import Link from 'next/link'
 
-import { useMatomo } from '@datapunt/matomo-tracker-react'
-
 import Header from '../../../components/Header'
 import Button from '../../../components/Button'
 import ModalBuyKacy from '../../../components/Modals/ModalBuyKacy'
+
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
 import * as S from './styles'
 
 const Hero = () => {
   const [isOpenModal, setIsOpenModal] = React.useState<boolean>(false)
 
-  const { trackEvent } = useMatomo()
-
-  function clickMatomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'home',
-      action: action,
-      name: name
-    })
-  }
+  const { trackEventFunction } = useMatomoEcommerce()
 
   return (
     <>
@@ -34,13 +26,15 @@ const Hero = () => {
         </S.IntroHero>
         <S.ButtonWrapper>
           <li>
-            <Link href="/explore">
+            <Link href="/explore" passHref>
               <Button
                 backgroundPrimary
                 size="large"
                 as="a"
                 text="Invest in Funds"
-                onClick={() => clickMatomoEvent('click-to-cta', 'hero')}
+                onClick={() =>
+                  trackEventFunction('click-to-cta', 'invest-in-funds', 'home')
+                }
               />
             </Link>
           </li>
@@ -49,11 +43,11 @@ const Hero = () => {
               className="btn-cta"
               backgroundPrimary
               size="large"
-              as="a"
               text="Buy KACY"
               icon={<img src="/favicon-16x16.png" alt="Logo Kacy token" />}
               onClick={() => {
-                clickMatomoEvent('click-to-cta', 'up-ido'), setIsOpenModal(true)
+                trackEventFunction('click-to-cta', 'buy-kacy-modal', 'home')
+                setIsOpenModal(true)
               }}
             />
           </li>

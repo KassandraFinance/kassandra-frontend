@@ -1,22 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import imageCalc from '../../../../public/assets/images/image-calc.png'
 
-import * as S from './styles'
-
 const TricryptoDescription = () => {
-  const { trackEvent } = useMatomo()
-
-  function matomoEvent(action: string, name: string) {
-    trackEvent({
-      category: 'summary-invest',
-      action,
-      name
-    })
-  }
-
   return (
     <>
       <p>

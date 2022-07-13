@@ -4,7 +4,6 @@ import Link from 'next/link'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { useSelector, RootStateOrAny } from 'react-redux'
 import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 
 import { Kacy } from '../../../constants/tokenAddresses'
@@ -14,6 +13,8 @@ import waitTransaction, {
   MetamaskError,
   TransactionCallback
 } from '../../../utils/txWait'
+
+import { useAppSelector } from '../../../store/hooks'
 
 import { Staking } from '../../../constants/tokenAddresses'
 import useERC20Contract from '../../../hooks/useERC20Contract'
@@ -56,22 +57,14 @@ const ModalStakeAndWithdraw = ({
 
   const inputRef = React.useRef<HTMLInputElement>(null)
 
-  const { userWalletAddress } = useSelector((state: RootStateOrAny) => state)
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
   const { trackProductPageView, trackBuying, trackCancelBuying, trackBought } =
     useMatomoEcommerce()
-  const { trackEvent } = useMatomo()
+  const { trackEventFunction } = useMatomoEcommerce()
 
   const kacyStake = useStakingContract(Staking)
   const kacyToken = useERC20Contract(stakingToken)
   const productSKU = `${Staking}_${pid}`
-
-  function matomoEvent(action: string, name: string) {
-    trackEvent({
-      category: `modal-${stakeTransaction}`,
-      action,
-      name
-    })
-  }
 
   function handleKacyAmount(percentage: BigNumber) {
     const kacyAmount = percentage.mul(balance).div(new BigNumber(100))
@@ -84,7 +77,11 @@ const ModalStakeAndWithdraw = ({
       )
     }
 
-    matomoEvent('click-value-btn', `${percentage.toString()}`)
+    trackEventFunction(
+      'click-value-btn',
+      `${percentage.toString()}`,
+      `modal-${stakeTransaction}`
+    )
     setAmountStake(kacyAmount)
     setIsAmount(true)
   }

@@ -360,7 +360,7 @@ export const ResponsabilitiesCards = styled.div`
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.light};
     line-height: 104%;
-    text-align: center;
+    /* text-align: center; */
 
     @media (max-width: 960px) {
       margin-bottom: 2.4rem;

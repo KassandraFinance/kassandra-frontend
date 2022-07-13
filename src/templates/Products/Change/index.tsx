@@ -2,11 +2,12 @@ import React from 'react'
 import Image from 'next/image'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
 
 import { GET_POOL_PRICE } from './graphql'
-import { HeimCRPPOOL, SUBGRAPH_URL } from '../../../constants/tokenAddresses'
-import { actionSetPerformanceValues } from '../../../store/modules/performanceValues/actions'
+import { SUBGRAPH_URL } from '../../../constants/tokenAddresses'
+
+import { useAppDispatch } from '../../../store/hooks'
+import { setPerformanceValues } from '../../../store/reducers/performanceValues'
 
 import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
 
@@ -17,8 +18,8 @@ interface IChangeProps {
 }
 
 const Change = ({ crpPoolAddress }: IChangeProps) => {
-  const dispatch = useDispatch()
-  const { performanceValues } = useSelector((state: RootStateOrAny) => state)
+  const dispatch = useAppDispatch()
+  const [arrChangePrice, setArrChangePrice] = React.useState<string[]>([])
 
   const { data } = useSWR([GET_POOL_PRICE], query =>
     request(SUBGRAPH_URL, query, {
@@ -55,11 +56,18 @@ const Change = ({ crpPoolAddress }: IChangeProps) => {
       arrChangePrice[3] = changeQuarterly
       arrChangePrice[4] = changeYear
 
+      setArrChangePrice(arrChangePrice)
+
       dispatch(
-        actionSetPerformanceValues({
+        setPerformanceValues({
           title: 'Weekly Performance',
-          performance: changeWeek,
-          changeWeek: arrChangePrice
+          allPerformancePeriod: {
+            'Daily Performance': changeDay,
+            'Weekly Performance': changeWeek,
+            'Monthly Performance': changeMonth,
+            '3 Months Performance': changeQuarterly,
+            'Yearly Performance': changeYear
+          }
         })
       )
     }
@@ -83,13 +91,12 @@ const Change = ({ crpPoolAddress }: IChangeProps) => {
         </thead>
         <tbody>
           <tr>
-            {performanceValues?.changeWeek?.map(
-              (item: string, index: number) => (
+            {arrChangePrice.length > 0 &&
+              arrChangePrice.map((item: string, index: number) => (
                 <S.Td key={index} value={parseFloat(item)}>
                   {item.length === 0 ? '...' : `${item}%`}
                 </S.Td>
-              )
-            )}
+              ))}
           </tr>
         </tbody>
       </table>
