@@ -494,6 +494,7 @@ const Products = ({ product }: Input) => {
               <ScrollUpButton />
               <Change crpPoolAddress={product.sipAddress} />
               <MyAsset
+                productChain={product.chain}
                 crpPoolAddress={product.sipAddress}
                 price={infoPool.price}
                 symbol={product.symbol}
