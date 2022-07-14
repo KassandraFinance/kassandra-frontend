@@ -19,7 +19,8 @@ import {
   LPKacyAvaxPNG,
   products,
   Staking,
-  SUBGRAPH_URL
+  SUBGRAPH_URL,
+  chains
 } from '../../constants/tokenAddresses'
 import { allPools } from '../../constants/pools'
 
@@ -117,6 +118,7 @@ const Profile = () => {
   const votingPower = useVotingPower(Staking)
 
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
+  const chainId = useAppSelector(state => state.chainId)
 
   const router = useRouter()
 
@@ -141,6 +143,9 @@ const Profile = () => {
         // userVP: walletUserString
       })
   )
+
+  const chain =
+    process.env.NEXT_PUBLIC_MASTER === '1' ? chains.avalanche : chains.fuji
 
   async function getTokenAmountInPool(pid: number) {
     try {
@@ -310,7 +315,7 @@ const Profile = () => {
     }
 
     checkEthereumProvider()
-  })
+  }, [])
 
   React.useEffect(() => {
     if (isSelectQueryTab) {
@@ -321,13 +326,21 @@ const Profile = () => {
   }, [router])
 
   React.useEffect(() => {
+    if (Number(chainId) !== chain.chainId) {
+      return
+    }
+
     if (profileAddress) {
       getAmountToken()
       handleLPtoUSD()
     }
-  }, [profileAddress])
+  }, [profileAddress, chainId])
 
   React.useEffect(() => {
+    if (Number(chainId) !== chain.chainId) {
+      return
+    }
+
     let tokenValueOnDolar = new Big(0)
 
     if (profileAddress && cardstakesPool.length > 0) {
@@ -348,9 +361,13 @@ const Profile = () => {
     if (tokenValueOnDolar.gt(0)) {
       setTotalInvestmented(tokenValueOnDolar)
     }
-  }, [profileAddress, priceToken, assetsValueInWallet, data])
+  }, [profileAddress, priceToken, assetsValueInWallet, data, chainId])
 
   React.useEffect(() => {
+    if (Number(chainId) !== chain.chainId) {
+      return
+    }
+
     async function getVotingPower() {
       const currentVotes = await votingPower.currentVotes(profileAddress)
 
@@ -358,7 +375,7 @@ const Profile = () => {
     }
 
     getVotingPower()
-  }, [profileAddress])
+  }, [profileAddress, chainId])
 
   return (
     <>
@@ -380,32 +397,47 @@ const Profile = () => {
 
       <S.ProfileContainer>
         <UserDescription userWalletUrl={profileAddress} />
-        <S.TotalValuesCardsContainer>
-          <AnyCardTotal
-            text={String(BNtoDecimal(totalInvestmented, 6, 2, 2) || 0)}
-            TooltipText="The amount in US Dollars that this address has in investments with Kassandra. This considers tokens, funds, LP, and staked assets."
-            textTitle="HOLDINGS"
-            isDolar={true}
+
+        {!hasEthereumProvider ? (
+          <Web3Disabled
+            textButton="Connect Wallet"
+            textHeader="You need to have a Wallet installed"
+            bodyText="Please install any Wallet to see the users profiles"
+            type="connect"
           />
-          <AnyCardTotal
-            text={`$ ${0}`}
-            TooltipText="The amount in US Dollars that this address manages in tokenized funds with Kassandra."
-            textTitle="TOTAL MANAGED"
+        ) : Number(chainId) !== chain.chainId ? (
+          <Web3Disabled
+            textButton={`Connect to ${chain.chainName}`}
+            textHeader="Your wallet is set to the wrong network."
+            bodyText={`Please switch to the ${chain.chainName} network to have access to user profile`}
+            type="changeChain"
           />
-          <AnyCardTotal
-            text={String(BNtoDecimal(totalVotingPower, 18, 2) || 0)}
-            TooltipText="The voting power of this address. Voting power is used to vote on governance proposals, and it can be earned by staking KACY."
-            textTitle="VOTING POWER"
-          />
-        </S.TotalValuesCardsContainer>
-        <SelectTabs
-          tabs={tabs}
-          isSelect={isSelectTab}
-          setIsSelect={setIsSelectTab}
-        />
-        {isSelectTab === tabs[0].asPathText ? (
+        ) : (
           <>
-            {hasEthereumProvider ? (
+            <S.TotalValuesCardsContainer>
+              <AnyCardTotal
+                text={String(BNtoDecimal(totalInvestmented, 6, 2, 2) || 0)}
+                TooltipText="The amount in US Dollars that this address has in investments with Kassandra. This considers tokens, funds, LP, and staked assets."
+                textTitle="HOLDINGS"
+                isDolar={true}
+              />
+              <AnyCardTotal
+                text={`$ ${0}`}
+                TooltipText="The amount in US Dollars that this address manages in tokenized funds with Kassandra."
+                textTitle="TOTAL MANAGED"
+              />
+              <AnyCardTotal
+                text={String(BNtoDecimal(totalVotingPower, 18, 2) || 0)}
+                TooltipText="The voting power of this address. Voting power is used to vote on governance proposals, and it can be earned by staking KACY."
+                textTitle="VOTING POWER"
+              />
+            </S.TotalValuesCardsContainer>
+            <SelectTabs
+              tabs={tabs}
+              isSelect={isSelectTab}
+              setIsSelect={setIsSelectTab}
+            />
+            {isSelectTab === tabs[0].asPathText ? (
               <Portfolio
                 profileAddress={
                   typeof profileAddress === 'undefined'
@@ -419,23 +451,17 @@ const Profile = () => {
                 priceToken={priceToken}
                 myFunds={myFunds}
               />
+            ) : isSelectTab === tabs[1].asPathText ? (
+              <AnyCard text="Coming Soon..." />
+            ) : isSelectTab === tabs[2].asPathText ? (
+              <>
+                <AnyCard text="Coming Soon..." />
+                {/* <GovernanceData address={profileAddress} /> */}
+              </>
             ) : (
-              <Web3Disabled
-                textHeader="You need to have a Wallet installed"
-                bodyText="Please install any Wallet to see the users profiles"
-                type="connect"
-              />
+              <Loading marginTop={4} />
             )}
           </>
-        ) : isSelectTab === tabs[1].asPathText ? (
-          <AnyCard text="Coming Soon..." />
-        ) : isSelectTab === tabs[2].asPathText ? (
-          <>
-            <AnyCard text="Coming Soon..." />
-            {/* <GovernanceData address={profileAddress} /> */}
-          </>
-        ) : (
-          <Loading marginTop={4} />
         )}
       </S.ProfileContainer>
     </>
