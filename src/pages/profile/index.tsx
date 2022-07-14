@@ -2,7 +2,6 @@ import React from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-import NotFound from '../../templates/404'
 import { useAppSelector } from '../../store/hooks'
 
 import Header from '../../components/Header'
@@ -31,20 +30,16 @@ export default function Index() {
         <meta property="og:image:height" content="506" />
         <meta property="og:url" content="https://kassandra.finance/" />
       </Head>
-      {process.env.NEXT_PUBLIC_VOTE === '1' ||
-      process.env.NEXT_PUBLIC_VOTE === '2' ? (
-        <>
-          <Header />
-          <Web3Disabled
-            textHeader="Connect Wallet"
-            textButton="Connect Wallet"
-            type="connect"
-            bodyText="Please connect to see your profile"
-          />
-        </>
-      ) : (
-        <NotFound />
-      )}
+
+      <>
+        <Header />
+        <Web3Disabled
+          textHeader="Connect Wallet"
+          textButton="Connect Wallet"
+          type="connect"
+          bodyText="Please connect to see your profile"
+        />
+      </>
     </>
   )
 }

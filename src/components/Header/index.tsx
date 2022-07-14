@@ -87,61 +87,35 @@ const Header = () => {
               }
             ]}
           />
-          {/* <S.MenuLinkDisable>
-            Managers <img src="/assets/utilities/arrow-down-thin.svg" />
-          </S.MenuLinkDisable> */}
-          {/* <Link href="/explore" passHref>
-            <S.MenuLink
-              onClick={() =>
-                trackEventFunction('click-on-link', 'explore', 'header')
+          <DropdownInvest
+            nameOnHeader="Governance"
+            adaptToResponsiveSize={true}
+            linkPage={[
+              {
+                name: 'Overview',
+                href: '',
+                disabled: true
+              },
+              {
+                name: 'Proposals',
+                href: '',
+                disabled: true
+              },
+              {
+                name: 'Stake',
+                href: `/farm`
+              },
+              {
+                name: 'Forum',
+                href: `http://gov.kassandra.finance/`,
+                newTab: true
+              },
+              {
+                name: 'Profile',
+                href: `/profile/${userWalletAddress}?tab=governance-data`
               }
-            >
-              Invest
-            </S.MenuLink>
-          </Link> */}
-          {/* <Link href="/farm" passHref>
-            <S.MenuLink
-              onClick={() =>
-                trackEventFunction('click-on-link', 'stake-farm', 'header')
-              }
-            >
-              Stake/Farm
-            </S.MenuLink>
-        </Link>*/}
-          {process.env.NEXT_PUBLIC_VOTE === '1' ||
-          process.env.NEXT_PUBLIC_VOTE === '2' ? (
-            <DropdownInvest
-              nameOnHeader="Governance"
-              adaptToResponsiveSize={true}
-              linkPage={[
-                {
-                  name: 'Overview',
-                  href: '',
-                  disabled: true
-                },
-                {
-                  name: 'Proposals',
-                  href: '',
-                  disabled: true
-                },
-                {
-                  name: 'Stake',
-                  href: `/farm`
-                },
-                {
-                  name: 'Forum',
-                  href: `http://gov.kassandra.finance/`,
-                  newTab: true
-                },
-                {
-                  name: 'Profile',
-                  href: `/profile/${userWalletAddress}?tab=governance-data`
-                }
-              ]}
-            />
-          ) : (
-            <S.MenuLinkDisable>Governance</S.MenuLinkDisable>
-          )}
+            ]}
+          />
           <S.MenuContainer>
             <DropdownInvest
               nameOnHeader="Learn"
