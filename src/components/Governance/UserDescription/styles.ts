@@ -200,6 +200,8 @@ export const DescriptionManagerInfo = styled.p`
   font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.light};
   line-height: 2.1rem;
+
+  white-space: pre-wrap;
 `
 interface IisSeeMoreProps {
   isSeeMore: boolean;
