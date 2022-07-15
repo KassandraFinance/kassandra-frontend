@@ -4,7 +4,11 @@ import { useRouter } from 'next/router'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 
-import { Staking, LPDaiAvax } from '../../../constants/tokenAddresses'
+import {
+  Staking,
+  LPDaiAvax,
+  ProductDetails
+} from '../../../constants/tokenAddresses'
 import { LP_KACY_AVAX_PNG } from '../../../constants/pools'
 
 import usePriceLP from '../../../hooks/usePriceLP'
@@ -16,7 +20,7 @@ import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 import { registerToken } from '../../../utils/registerToken'
-import changeChain, { ChainDetails } from '../../../utils/changeChain'
+import changeChain from '../../../utils/changeChain'
 
 import { useAppSelector } from '../../../store/hooks'
 
@@ -26,11 +30,8 @@ import ModalWalletConnect from '../../../components/Modals/ModalWalletConnect'
 import * as S from './styles'
 
 interface IMyAssetProps {
-  productChain: ChainDetails;
-  crpPoolAddress: string;
+  product: ProductDetails;
   price: string;
-  symbol: string;
-  icon: any;
   pid: number;
   decimals: number;
 }
@@ -40,20 +41,14 @@ export interface IPriceLPToken {
   fund: Big;
 }
 
-const MyAsset = ({
-  productChain,
-  symbol,
-  icon,
-  crpPoolAddress,
-  price,
-  pid,
-  decimals
-}: IMyAssetProps) => {
+const MyAsset = ({ product, price, pid, decimals }: IMyAssetProps) => {
+  const { chain, sipAddress, symbol, fundIcon } = product
+
   const router = useRouter()
   const { trackEventFunction } = useMatomoEcommerce()
 
   const { getPriceKacyAndLP } = usePriceLP()
-  const tokenWallet = useERC20Contract(crpPoolAddress)
+  const tokenWallet = useERC20Contract(sipAddress)
   const stakingContract = useStakingContract(Staking)
 
   const { chainId, userWalletAddress } = useAppSelector(state => state)
@@ -158,13 +153,13 @@ const MyAsset = ({
     if (userWalletAddress !== '') {
       handleLPtoUSD()
     }
-  }, [price])
+  }, [price, userWalletAddress])
 
   React.useEffect(() => {
     if (userWalletAddress !== '') {
       getApr()
     }
-  }, [priceToken])
+  }, [priceToken, userWalletAddress])
 
   return (
     <S.MyAsset>
@@ -178,7 +173,7 @@ const MyAsset = ({
           type="button"
           onClick={() => {
             registerToken(
-              crpPoolAddress,
+              sipAddress,
               symbol.toLocaleUpperCase(),
               Number(decimals)
             )
@@ -212,7 +207,7 @@ const MyAsset = ({
           <S.Tr>
             <S.Td>
               <S.TdWrapper>
-                <Image src={icon} alt="" width={20} height={20} />
+                <Image src={fundIcon} alt="" width={20} height={20} />
                 <span>{symbol}</span>
               </S.TdWrapper>
             </S.Td>
@@ -256,7 +251,7 @@ const MyAsset = ({
         </S.TBody>
       </S.Table>
       <S.ButtonWrapper>
-        {productChain.chainId === chainId ? (
+        {chain.chainId === chainId ? (
           <Button
             backgroundSecondary
             text={
@@ -282,12 +277,12 @@ const MyAsset = ({
             size="huge"
             fullWidth
             type="button"
-            onClick={() => changeChain(productChain)}
+            onClick={() => changeChain(chain)}
             disabled={walletConnect ? true : false}
             text={
               walletConnect
-                ? `Change manually to ${productChain.chainName}`
-                : `Change to ${productChain.chainName}`
+                ? `Change manually to ${chain.chainName}`
+                : `Change to ${chain.chainName}`
             }
           />
         )}
