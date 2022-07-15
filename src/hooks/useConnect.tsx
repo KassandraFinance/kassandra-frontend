@@ -3,7 +3,7 @@ import detectEthereumProvider from '@metamask/detect-provider'
 import WalletConnect from '@walletconnect/client'
 import QRCodeModal from '@walletconnect/qrcode-modal'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { toChecksumAddress } from 'web3-utils'
 import { ToastError, ToastSuccess } from '../components/Toastify/toast'
 
@@ -30,6 +30,7 @@ const useConnect = () => {
   const dispatch = useAppDispatch()
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
   const router = useRouter()
+  const [isConnected, setIsConnected] = React.useState(false)
 
   const handleAccountsChanged = React.useCallback(accounts => {
     try {
@@ -75,7 +76,7 @@ const useConnect = () => {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
 
       handleAccountsChanged(accounts)
-      ToastSuccess('Connected to MetaMask.')
+      setIsConnected(true)
     } catch (error: any) {
       ToastError(error.message)
       console.error(error)
@@ -150,7 +151,8 @@ const useConnect = () => {
   return {
     connect,
     connectToWalletConnect,
-    handleDisconnected
+    handleDisconnected,
+    isConnected
   }
 }
 

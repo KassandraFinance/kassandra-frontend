@@ -6,6 +6,8 @@ import useConnect from '../../../hooks/useConnect'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
+import WalletConecting from './WalletConecting'
+
 import * as S from './styles'
 
 interface IModalWalletConnect {
@@ -13,10 +15,16 @@ interface IModalWalletConnect {
 }
 
 const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
-  const { connect, connectToWalletConnect } = useConnect()
+  const { connect, connectToWalletConnect, isConnected } = useConnect()
+
   const [hasEthereumProvider, setHasEthereumProvider] = React.useState(false)
+  const [loading, setLoading] = React.useState(false)
 
   function handleCloseModal() {
+    setModalOpen(false)
+  }
+
+  if (isConnected) {
     setModalOpen(false)
   }
 
@@ -46,55 +54,61 @@ const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
             </button>
           </S.ModalTitle>
 
-          <S.Content>
-            <Tippy
-              content={
-                <S.Tooltip>
-                  <a
-                    href="https://metamask.io/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Metamask
-                    <img src="/assets/utilities/external-link.svg" alt="" />
-                  </a>
-                  is not installed on this browser
-                </S.Tooltip>
-              }
-              disabled={hasEthereumProvider}
-              hideOnClick={false}
-              interactive
-            >
+          {!loading ? (
+            <S.Content>
+              <Tippy
+                content={
+                  <S.Tooltip>
+                    <a
+                      href="https://metamask.io/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Metamask
+                      <img src="/assets/utilities/external-link.svg" alt="" />
+                    </a>
+                    is not installed on this browser
+                  </S.Tooltip>
+                }
+                disabled={hasEthereumProvider}
+                hideOnClick={false}
+                interactive
+              >
+                <S.WrapperIconsBackGround
+                  className={hasEthereumProvider ? '' : 'disabled'}
+                  type="button"
+                  onClick={() => {
+                    if (hasEthereumProvider) {
+                      setLoading(true)
+                      connect()
+                    }
+                  }}
+                >
+                  <S.WrapperIcons>
+                    <img src="/assets/logos/metamask.svg" alt="" />
+                    <span>Metamask</span>
+                  </S.WrapperIcons>
+                </S.WrapperIconsBackGround>
+              </Tippy>
+
               <S.WrapperIconsBackGround
-                className={hasEthereumProvider ? '' : 'disabled'}
                 type="button"
                 onClick={() => {
-                  if (hasEthereumProvider) {
-                    setModalOpen(false)
-                    connect()
-                  }
+                  setModalOpen(false)
+                  connectToWalletConnect()
                 }}
               >
                 <S.WrapperIcons>
-                  <img src="/assets/logos/metamask.svg" alt="" />
-                  <span>Metamask</span>
+                  <img src="/assets/logos/connect-wallet.svg" alt="" />
+                  <span>WalletConnect</span>
                 </S.WrapperIcons>
               </S.WrapperIconsBackGround>
-            </Tippy>
-
-            <S.WrapperIconsBackGround
-              type="button"
-              onClick={() => {
-                setModalOpen(false)
-                connectToWalletConnect()
-              }}
-            >
-              <S.WrapperIcons>
-                <img src="/assets/logos/connect-wallet.svg" alt="" />
-                <span>WalletConnect</span>
-              </S.WrapperIcons>
-            </S.WrapperIconsBackGround>
-          </S.Content>
+            </S.Content>
+          ) : (
+            <S.Content>
+              <WalletConecting />
+            </S.Content>
+          )}
         </S.BackgroundBlack>
       </S.Container>
     </>
