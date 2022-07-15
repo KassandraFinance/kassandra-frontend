@@ -4,7 +4,12 @@ import { useRouter } from 'next/router'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 
-import { Staking, LPDaiAvax } from '../../../constants/tokenAddresses'
+import {
+  Staking,
+  LPDaiAvax,
+  ProductDetails
+} from '../../../constants/tokenAddresses'
+import { LP_KACY_AVAX_PNG } from '../../../constants/pools'
 
 import usePriceLP from '../../../hooks/usePriceLP'
 import useERC20Contract from '../../../hooks/useERC20Contract'
@@ -15,6 +20,7 @@ import iconBar from '../../../../public/assets/iconGradient/product-bar.svg'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 import { registerToken } from '../../../utils/registerToken'
+import changeChain from '../../../utils/changeChain'
 
 import { useAppSelector } from '../../../store/hooks'
 
@@ -22,13 +28,10 @@ import Button from '../../../components/Button'
 import ModalWalletConnect from '../../../components/Modals/ModalWalletConnect'
 
 import * as S from './styles'
-import { LP_KACY_AVAX_PNG } from '../../../constants/pools'
 
 interface IMyAssetProps {
-  crpPoolAddress: string;
+  product: ProductDetails;
   price: string;
-  symbol: string;
-  icon: any;
   pid: number;
   decimals: number;
 }
@@ -38,23 +41,19 @@ export interface IPriceLPToken {
   fund: Big;
 }
 
-const MyAsset = ({
-  symbol,
-  icon,
-  crpPoolAddress,
-  price,
-  pid,
-  decimals
-}: IMyAssetProps) => {
+const MyAsset = ({ product, price, pid, decimals }: IMyAssetProps) => {
+  const { chain, sipAddress, symbol, fundIcon } = product
+
   const router = useRouter()
   const { trackEventFunction } = useMatomoEcommerce()
 
   const { getPriceKacyAndLP } = usePriceLP()
-  const tokenWallet = useERC20Contract(crpPoolAddress)
+  const tokenWallet = useERC20Contract(sipAddress)
   const stakingContract = useStakingContract(Staking)
 
-  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
+  const { chainId, userWalletAddress } = useAppSelector(state => state)
 
+  const [walletConnect, setWalletConnect] = React.useState<string | null>(null)
   const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
   const [stakedToken, setStakedToken] = React.useState<BigNumber>(
     new BigNumber(0)
@@ -129,6 +128,20 @@ const MyAsset = ({
   }
 
   React.useEffect(() => {
+    const handleWallectConnect = () => {
+      const connect = localStorage.getItem('walletconnect')
+
+      if (connect) {
+        setWalletConnect(connect)
+      } else {
+        setWalletConnect(null)
+      }
+    }
+
+    handleWallectConnect()
+  }, [])
+
+  React.useEffect(() => {
     if (userWalletAddress !== '') {
       getBalance()
 
@@ -140,13 +153,13 @@ const MyAsset = ({
     if (userWalletAddress !== '') {
       handleLPtoUSD()
     }
-  }, [price])
+  }, [price, userWalletAddress])
 
   React.useEffect(() => {
     if (userWalletAddress !== '') {
       getApr()
     }
-  }, [priceToken])
+  }, [priceToken, userWalletAddress])
 
   return (
     <S.MyAsset>
@@ -160,7 +173,7 @@ const MyAsset = ({
           type="button"
           onClick={() => {
             registerToken(
-              crpPoolAddress,
+              sipAddress,
               symbol.toLocaleUpperCase(),
               Number(decimals)
             )
@@ -194,7 +207,7 @@ const MyAsset = ({
           <S.Tr>
             <S.Td>
               <S.TdWrapper>
-                <Image src={icon} alt="" width={20} height={20} />
+                <Image src={fundIcon} alt="" width={20} height={20} />
                 <span>{symbol}</span>
               </S.TdWrapper>
             </S.Td>
@@ -238,24 +251,41 @@ const MyAsset = ({
         </S.TBody>
       </S.Table>
       <S.ButtonWrapper>
-        <Button
-          backgroundSecondary
-          text={
-            userWalletAddress
-              ? `Stake ${symbol} to earn ${BNtoDecimal(apr, 0)}% APR`
-              : 'Connect Wallet'
-          }
-          fullWidth
-          size="huge"
-          onClick={
-            userWalletAddress
-              ? () => {
-                  trackEventFunction('click-on-button', 'stake', 'my-asset')
-                  router.push('/farm')
-                }
-              : () => setIsModaWallet(true)
-          }
-        />
+        {chain.chainId === chainId ? (
+          <Button
+            backgroundSecondary
+            text={
+              userWalletAddress
+                ? `Stake ${symbol} to earn ${BNtoDecimal(apr, 0)}% APR`
+                : 'Connect Wallet'
+            }
+            fullWidth
+            size="huge"
+            onClick={
+              userWalletAddress
+                ? () => {
+                    trackEventFunction('click-on-button', 'stake', 'my-asset')
+                    router.push('/farm')
+                  }
+                : () => setIsModaWallet(true)
+            }
+          />
+        ) : (
+          <Button
+            className="btn-submit"
+            backgroundSecondary
+            size="huge"
+            fullWidth
+            type="button"
+            onClick={() => changeChain(chain)}
+            disabled={walletConnect ? true : false}
+            text={
+              walletConnect
+                ? `Change manually to ${chain.chainName}`
+                : `Change to ${chain.chainName}`
+            }
+          />
+        )}
       </S.ButtonWrapper>
       {isModalWallet && <ModalWalletConnect setModalOpen={setIsModaWallet} />}
     </S.MyAsset>
