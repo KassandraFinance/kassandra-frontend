@@ -398,7 +398,7 @@ const Profile = () => {
       <S.ProfileContainer>
         <UserDescription userWalletUrl={profileAddress} />
 
-        {!hasEthereumProvider ? (
+        {!hasEthereumProvider && !chainId ? (
           <Web3Disabled
             textButton="Connect Wallet"
             textHeader="You need to have a Wallet installed"
