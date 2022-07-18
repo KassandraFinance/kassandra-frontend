@@ -11,6 +11,7 @@ import useProxy from '../../../hooks/useProxy'
 import useERC20Contract, { ERC20 } from '../../../hooks/useERC20Contract'
 import usePoolContract from '../../../hooks/usePoolContract'
 import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+import { usePoolTokens } from '../../../context/PoolTokensContext'
 
 import { useAppSelector } from '../../../store/hooks'
 
@@ -31,7 +32,6 @@ import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
 import { Titles } from '..'
 
 import * as S from './styles'
-import { usePoolTokens } from '../../../context/PoolTokensContext'
 
 const WAVAX = '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7'
 
@@ -104,6 +104,7 @@ const Form = ({
 
   const [isReload, setIsReload] = React.useState<boolean>(false)
 
+  const [isError, setIsError] = React.useState(false)
   const [errorMsg, setErrorMsg] = React.useState('')
   const [slippage, setSlippage] = React.useState({
     value: '0.5',
@@ -128,6 +129,13 @@ const Form = ({
   const { trackEventFunction } = useMatomoEcommerce()
 
   const inputTokenRef = React.useRef<HTMLInputElement>(null)
+
+  // React.useEffect(() => {
+  //   async function teste() {
+  //     corePool.estimatedGas(userWalletAddress, 20).then(response => console.log(response))
+  //   }
+  //   teste()
+  // }, [])
 
   function clearInput() {
     setSwapInAmount(new BigNumber(0))
@@ -515,6 +523,8 @@ const Form = ({
 
             if (swapInAmount.gt(swapInBalance) && Number(swapInAmount.toString()) > 0) {
               setErrorMsg('This amount exceeds your balance!')
+              setIsError(true)
+              // aqui
               return;
             }
           }
@@ -554,6 +564,7 @@ const Form = ({
 
     calc()
     setErrorMsg('')
+    setIsError(false)
     setSwapOutAmount(Array(poolTokensArray.length - 1).fill(new BigNumber(0)))
   }, [chainId, swapInAmount, swapInAddress])
 
@@ -1231,6 +1242,8 @@ const Form = ({
           setSwapAddress={setSwapInAddress}
           setMaxActive={setMaxActive}
           maxActive={maxActive}
+          isError={isError}
+          swapInAddress={swapInAddress}
         />
       </S.ErrorTippy>
 
@@ -1413,3 +1426,7 @@ const Form = ({
 }
 
 export default Form
+function tetwe(tetwe: any) {
+  throw new Error('Function not implemented.')
+}
+

@@ -212,6 +212,23 @@ const usePoolContract = (address: string) => {
       return new BigNumber(value)
     }
 
+    const estimatedGas = async (address: string, price: number) => {
+      // const resGasMethod = await contract.methods.myMethod().estimateGas({ from: address });
+      const estimate = await web3.eth.estimateGas({ from: address})
+
+      const latestBlock: any = await web3.eth.getBlock('latest');
+      const blockGas = latestBlock.gasLimit;
+
+      const finalGas = (blockGas * estimate);
+
+      const finalGasInEther = web3.utils.fromWei(finalGas.toString(), 'ether');
+
+      const USDResult = (Number(finalGasInEther) * price) * 100;
+
+      return USDResult
+      // return estimate
+    }
+
     return {
       events,
 
@@ -231,6 +248,8 @@ const usePoolContract = (address: string) => {
       swapFee,
       exitFee,
       totalDenormalizedWeight,
+
+      estimatedGas
     }
   }, [contract])
 }
