@@ -31,6 +31,7 @@ const WalletConnecting = ({
   setModalOpen
 }: IWalletConnectingProps) => {
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
+  const [nickname, setNickname] = React.useState()
 
   const providers: ProviderType = {
     metamask: {
@@ -42,6 +43,17 @@ const WalletConnecting = ({
       name: 'walletConnect'
     }
   }
+
+  React.useEffect(() => {
+    if (!userWalletAddress) return
+
+    fetch(`/api/profile/${userWalletAddress}`)
+      .then(res => res.json())
+      .then(data => {
+        const { nickname } = data
+        setNickname(nickname)
+      })
+  }, [userWalletAddress])
 
   return (
     <>
@@ -65,8 +77,14 @@ const WalletConnecting = ({
         </>
       ) : (
         <>
+          {nickname && (
+            <S.AddressWrapper>
+              Username: <span>{nickname}</span>
+            </S.AddressWrapper>
+          )}
+
           <S.AddressWrapper>
-            Address: {substr(userWalletAddress)}
+            Address: <span>{substr(userWalletAddress)}</span>
           </S.AddressWrapper>
 
           <S.TextConnected>
