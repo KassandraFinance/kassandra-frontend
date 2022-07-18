@@ -6,7 +6,7 @@ import useConnect from '../../../hooks/useConnect'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
-import WalletConecting from './WalletConecting'
+import WalletConnecting from './WalletConnecting'
 
 import * as S from './styles'
 
@@ -19,12 +19,9 @@ const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
 
   const [hasEthereumProvider, setHasEthereumProvider] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
+  const [provider, serProvider] = React.useState('')
 
   function handleCloseModal() {
-    setModalOpen(false)
-  }
-
-  if (isConnected) {
     setModalOpen(false)
   }
 
@@ -79,6 +76,7 @@ const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
                   type="button"
                   onClick={() => {
                     if (hasEthereumProvider) {
+                      serProvider('metamask')
                       setLoading(true)
                       connect()
                     }
@@ -94,7 +92,8 @@ const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
               <S.WrapperIconsBackGround
                 type="button"
                 onClick={() => {
-                  setModalOpen(false)
+                  serProvider('walletConnect')
+                  setLoading(true)
                   connectToWalletConnect()
                 }}
               >
@@ -106,7 +105,11 @@ const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
             </S.Content>
           ) : (
             <S.Content>
-              <WalletConecting />
+              <WalletConnecting
+                provider={provider}
+                isConnected={isConnected}
+                setModalOpen={setModalOpen}
+              />
             </S.Content>
           )}
         </S.BackgroundBlack>

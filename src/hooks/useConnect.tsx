@@ -94,7 +94,7 @@ const useConnect = () => {
       if (connect) {
         const { accounts, chainId } = JSON.parse(connect)
         handleAccountsChanged(accounts)
-        ToastSuccess('Connected to Wallet Connect.')
+        setIsConnected(true)
         dispatch(setChainId(chainId))
         subscribeToEvents(provider, handleAccountsChanged, handleChainChanged, handleDisconnected)
       }

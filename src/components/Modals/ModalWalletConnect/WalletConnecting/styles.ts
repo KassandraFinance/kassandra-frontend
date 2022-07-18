@@ -51,3 +51,33 @@ export const Text = styled.p`
   line-height: 1.8rem;
   text-align: center;
 `
+
+export const AddressWrapper = styled.div`
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+
+  height: 1.8rem;
+
+  color: ${theme.colors.snow};
+  font-weight: ${theme.font.weight.light};
+  font-size: ${theme.font.sizes.font14};
+  line-height: 1.8rem;
+`
+
+export const TextConnected = styled.span`
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+
+  height: 1.8rem;
+
+  color: #2ce878;
+  font-weight: ${theme.font.weight.medium};
+  font-size: ${theme.font.sizes.font14};
+  line-height: 1.8rem;
+`
+
+export const ButtonWrapper = styled.div``
