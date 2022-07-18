@@ -22,13 +22,13 @@ type ProviderType = {
 interface IWalletConnectingProps {
   provider: string;
   isConnected: boolean;
-  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handleCloseModal(): void;
 }
 
 const WalletConnecting = ({
   provider,
   isConnected,
-  setModalOpen
+  handleCloseModal
 }: IWalletConnectingProps) => {
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
   const [nickname, setNickname] = React.useState()
@@ -96,7 +96,7 @@ const WalletConnecting = ({
               text="Proceed"
               backgroundSecondary
               fullWidth
-              onClick={() => setModalOpen(false)}
+              onClick={handleCloseModal}
             />
           </S.ButtonWrapper>
         </>

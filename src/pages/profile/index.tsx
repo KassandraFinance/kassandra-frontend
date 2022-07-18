@@ -1,17 +1,11 @@
 import React from 'react'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import detectEthereumProvider from '@metamask/detect-provider'
-
-import { useAppSelector } from '../../store/hooks'
 
 import Header from '../../components/Header'
 import Web3Disabled from '../../components/Web3Disabled'
 
 export default function Index() {
-  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
-  const router = useRouter()
-
   const [hasEthereumProvider, setHasEthereumProvider] = React.useState(false)
 
   React.useEffect(() => {
@@ -27,14 +21,6 @@ export default function Index() {
 
     checkEthereumProvider()
   }, [])
-
-  React.useEffect(() => {
-    const asPathId = router.asPath.slice(8)
-
-    if (userWalletAddress.length > 0) {
-      router.push(`/profile/${userWalletAddress}${asPathId}`)
-    }
-  }, [userWalletAddress])
 
   return (
     <>
