@@ -5,7 +5,6 @@ import QRCodeModal from '@walletconnect/qrcode-modal'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import { toChecksumAddress } from 'web3-utils'
-import { ToastError, ToastSuccess } from '../components/Toastify/toast'
 
 import { subscribeToEvents } from '../utils/walletConnect'
 
@@ -31,6 +30,7 @@ const useConnect = () => {
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
   const router = useRouter()
   const [isConnected, setIsConnected] = React.useState(false)
+  const [error, setError] = React.useState<string | null>(null)
 
   const handleAccountsChanged = React.useCallback(accounts => {
     try {
@@ -78,7 +78,7 @@ const useConnect = () => {
       handleAccountsChanged(accounts)
       setIsConnected(true)
     } catch (error: any) {
-      ToastError(error.message)
+      setError(error.message)
       console.error(error)
     }
   }, [])
@@ -108,7 +108,7 @@ const useConnect = () => {
     }
 
     if (providerMetaMask !== window.ethereum) {
-      ToastError('Do you have multiple wallets installed?')
+      setError('Do you have multiple wallets installed?')
       return
     }
 
@@ -148,11 +148,17 @@ const useConnect = () => {
     verifyProvider()
   }, [])
 
+  function cleanError() {
+    setError(null)
+  }
+
   return {
     connect,
     connectToWalletConnect,
     handleDisconnected,
-    isConnected
+    isConnected,
+    error,
+    cleanError
   }
 }
 

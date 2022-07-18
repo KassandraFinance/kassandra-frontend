@@ -9,6 +9,7 @@ import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
 import WalletConnecting from './WalletConnecting'
+import ModalConnectError from './ModalConnectError'
 
 import * as S from './styles'
 
@@ -17,7 +18,8 @@ interface IModalWalletConnect {
 }
 
 const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
-  const { connect, connectToWalletConnect, isConnected } = useConnect()
+  const { connect, connectToWalletConnect, isConnected, error, cleanError } =
+    useConnect()
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   const router = useRouter()
@@ -33,6 +35,11 @@ const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
       router.push(`/profile/${userWalletAddress}${asPathId}`)
     }
     setModalOpen(false)
+  }
+
+  function handleConnect() {
+    setLoading(true)
+    connect()
   }
 
   React.useEffect(() => {
@@ -115,11 +122,21 @@ const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
             </S.Content>
           ) : (
             <S.Content>
-              <WalletConnecting
-                provider={provider}
-                isConnected={isConnected}
-                handleCloseModal={handleCloseModal}
-              />
+              {!error ? (
+                <WalletConnecting
+                  provider={provider}
+                  isConnected={isConnected}
+                  handleCloseModal={handleCloseModal}
+                />
+              ) : (
+                <ModalConnectError
+                  provider={provider}
+                  error={error}
+                  handleCloseModal={handleCloseModal}
+                  handleConnect={handleConnect}
+                  cleanError={cleanError}
+                />
+              )}
             </S.Content>
           )}
         </S.BackgroundBlack>
