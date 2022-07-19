@@ -307,15 +307,15 @@ const Profile = () => {
     const checkEthereumProvider = async () => {
       const provider = await detectEthereumProvider()
 
-      if (provider) {
-        setHasEthereumProvider(true)
-      } else {
+      if (!provider && !chainId) {
         setHasEthereumProvider(false)
+      } else {
+        setHasEthereumProvider(true)
       }
     }
 
     checkEthereumProvider()
-  }, [])
+  }, [chainId])
 
   React.useEffect(() => {
     if (isSelectQueryTab) {
