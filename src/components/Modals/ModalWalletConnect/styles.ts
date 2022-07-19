@@ -19,7 +19,7 @@ export const Container = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 
-  width: 41.1rem;
+  width: 44.8rem;
   height: auto;
 
   border: 0.2rem solid #ffffff40;
@@ -27,20 +27,8 @@ export const Container = styled.div`
 
   z-index: 21;
 
-  @media (max-width: 440px) {
-    width: 38rem;
-  }
-
-  @media (max-width: 380px) {
-    width: 36rem;
-  }
-
-  @media (max-width: 360px) {
-    width: 32rem;
-  }
-
-  @media (max-width: 320px) {
-    width: 30rem;
+  @media (max-width: 480px) {
+    width: 90%;
   }
 `
 

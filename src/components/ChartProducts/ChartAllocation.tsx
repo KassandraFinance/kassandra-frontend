@@ -17,6 +17,13 @@ interface IChartAllocationProps {
   data: any[];
 }
 
+const invertSymbol: { [key: string]: string } = {
+  '0xbbcED92AC9B958F88A501725f080c0360007e858': 'WBTC.e', //WBTC
+  '0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E': 'WETH.e', //WETH
+  '0xFA17fb53da4c837594127b73fFd09fdb15f42C49': 'DAI.e', //DAI
+  '0x964555644E067c560A4C144360507E80c1104784': 'USDT.e' //USDT
+}
+
 const ChartAllocation = ({ data }: IChartAllocationProps) => {
   const [allocation, setAllocation] = React.useState<any[]>([])
   const [arrayKeys, setArrayKeys] = React.useState<string[]>([])
@@ -26,11 +33,12 @@ const ChartAllocation = ({ data }: IChartAllocationProps) => {
       const res = data.map((item: any) => {
         const weight = item.weights.map(
           (weight: {
-            token: { symbol: string },
+            token: { symbol: string, id: string },
             weight_normalized: string
           }) => {
             return {
-              [weight.token.symbol]: weight.weight_normalized
+              [invertSymbol[weight.token.id] || weight.token.symbol]:
+                weight.weight_normalized
             }
           }
         )
