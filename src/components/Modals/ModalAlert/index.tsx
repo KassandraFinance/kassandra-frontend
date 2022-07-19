@@ -18,7 +18,7 @@ interface IModalAlertProps {
 const ModalAlert = ({
   setModalError,
   errorText,
-  solutionText
+  solutionText = ''
 }: IModalAlertProps) => {
   function handleCloseModal() {
     setModalError('')
@@ -48,14 +48,18 @@ const ModalAlert = ({
 
           <S.SolutionHeading>Possible solution</S.SolutionHeading>
 
-          <S.Text>Try doing something</S.Text>
+          {solutionText.length > 0 && (
+            <>
+              <S.Text>Try doing something</S.Text>
 
-          <Button
-            text="Okay"
-            backgroundSecondary
-            fullWidth
-            onClick={handleCloseModal}
-          />
+              <Button
+                text="Okay"
+                backgroundSecondary
+                fullWidth
+                onClick={handleCloseModal}
+              />
+            </>
+          )}
         </S.ModalBody>
       </S.Container>
     </>
