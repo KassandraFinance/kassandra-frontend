@@ -2,7 +2,6 @@
 import detectEthereumProvider from '@metamask/detect-provider'
 import WalletConnect from '@walletconnect/client'
 import QRCodeModal from '@walletconnect/qrcode-modal'
-import { useRouter } from 'next/router'
 import React from 'react'
 import { toChecksumAddress } from 'web3-utils'
 import { ToastError, ToastSuccess } from '../components/Toastify/toast'
@@ -29,7 +28,6 @@ const connector = new WalletConnect({ bridge, qrcodeModal: QRCodeModal })
 const useConnect = () => {
   const dispatch = useAppDispatch()
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
-  const router = useRouter()
 
   const handleAccountsChanged = React.useCallback(accounts => {
     try {
@@ -37,9 +35,6 @@ const useConnect = () => {
         dispatch(setUserWalletAddress(''))
       } else if (accounts[0] !== userWalletAddress) {
         dispatch(setUserWalletAddress(toChecksumAddress(accounts[0])))
-        if (router.asPath === '/gov/address') {
-          router.push(`/gov/address/${toChecksumAddress(accounts[0])}`)
-        }
       }
     } catch (error: any) {
       console.log(error)
