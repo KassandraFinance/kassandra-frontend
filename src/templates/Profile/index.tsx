@@ -7,7 +7,7 @@ import request from 'graphql-request'
 import Big from 'big.js'
 import { toChecksumAddress } from 'web3-utils'
 
-import useERC20Contract, { ERC20 } from '../../hooks/useERC20Contract'
+import { ERC20 } from '../../hooks/useERC20Contract'
 import useStakingContract from '../../hooks/useStakingContract'
 import usePriceLP from '../../hooks/usePriceLP'
 import { useAppSelector } from '../../store/hooks'
@@ -16,14 +16,12 @@ import useVotingPower from '../../hooks/useVotingPower'
 import { GET_PROFILE } from './graphql'
 import {
   LPDaiAvax,
-  LPKacyAvaxJOE,
-  LPKacyAvaxPNG,
   products,
   Staking,
   SUBGRAPH_URL,
   chains
 } from '../../constants/tokenAddresses'
-import { allPools } from '../../constants/pools'
+import { LP_KACY_AVAX_PNG, LP_KACY_AVAX_JOE, allPools } from '../../constants/pools'
 
 import Header from '../../components/Header'
 import Breadcrumb from '../../components/Breadcrumb'
@@ -124,16 +122,13 @@ const Profile = () => {
   const [isSelectTab, setIsSelectTab] = React.useState<
     string | string[] | undefined
   >('portfolio')
-  const votingPower = useVotingPower(Staking)
-
-  const { chainId, userWalletAddress } = useAppSelector(state => state)
 
   const router = useRouter()
+  const { chainId, userWalletAddress } = useAppSelector(state => state)
 
+  const votingPower = useVotingPower(Staking)
   const { userInfo } = useStakingContract(Staking)
-  const { getReserves } = usePriceLP()
-  const lpToken = useERC20Contract(LPKacyAvaxPNG)
-  const lpJoeToken = useERC20Contract(LPKacyAvaxJOE)
+  const { getPriceKacyAndLP } = usePriceLP()
 
   const profileAddress = router.query.profileAddress
   const isSelectQueryTab = router.query.tab
@@ -182,51 +177,18 @@ const Profile = () => {
     }
   }
 
-  async function handleLPtoUSD() {
-    const reservesKacyAvax = await getReserves(LPKacyAvaxPNG)
-    const reservesKacyAvaxJoe = await getReserves(LPKacyAvaxJOE)
-    const reservesDaiAvax = await getReserves(LPDaiAvax)
+  async function getLiquidityPoolPriceInDollar() {
+    const { kacyPriceInDollar, priceLP } = await getPriceKacyAndLP(LP_KACY_AVAX_PNG, LPDaiAvax, true)
+    const priceLPJoe = await getPriceKacyAndLP(LP_KACY_AVAX_JOE, LPDaiAvax, true)
 
-    let kacyReserve = reservesKacyAvax._reserve1
-    let avaxKacyReserve = reservesKacyAvax._reserve0
-    const avaxKacyReserveJoe = reservesKacyAvaxJoe._reserve0
-    let DaiReserve = reservesDaiAvax._reserve1
-    let AvaxDaiReserve = reservesDaiAvax._reserve0
-
-    if (process.env.NEXT_PUBLIC_MASTER !== '1') {
-      kacyReserve = reservesKacyAvax._reserve0
-      avaxKacyReserve = reservesKacyAvax._reserve1
-      DaiReserve = reservesDaiAvax._reserve0
-      AvaxDaiReserve = reservesDaiAvax._reserve1
-    }
-    const avaxInDollar = Big(DaiReserve).div(Big(AvaxDaiReserve))
-    const kacyInDollar = avaxInDollar.mul(Big(avaxKacyReserve).div(kacyReserve))
-    const allAVAXDollar = Big(avaxKacyReserve).mul(avaxInDollar)
-    const allAVAXDollarJoe = Big(avaxKacyReserveJoe).mul(avaxInDollar)
-    const supplyLPToken = await lpToken.totalSupply()
-    const supplyLPJoeToken = await lpJoeToken.totalSupply()
-
-    if (supplyLPToken.toString() !== '0') {
-      const LP = allAVAXDollar.mul(2).div(Big(supplyLPToken.toString()))
-
+    if (priceLP && priceLPJoe.priceLP) {
       setPriceToken(prevState => ({
         ...prevState,
-        'LP-PNG': LP
+        'LP-PNG': priceLP,
+        'LP-JOE': priceLPJoe.priceLP,
+        KACY: kacyPriceInDollar
       }))
     }
-    if (supplyLPJoeToken.toString() !== '0') {
-      const priceLPJoe = allAVAXDollarJoe
-        .mul(2)
-        .div(Big(supplyLPJoeToken.toString()))
-      setPriceToken(prevState => ({
-        ...prevState,
-        'LP-JOE': priceLPJoe
-      }))
-    }
-    setPriceToken(prevState => ({
-      ...prevState,
-      KACY: kacyInDollar
-    }))
   }
 
   async function getAmountToken() {
@@ -357,7 +319,7 @@ const Profile = () => {
 
     if (profileAddress) {
       getAmountToken()
-      handleLPtoUSD()
+      getLiquidityPoolPriceInDollar()
     }
   }, [profileAddress, chainId])
 
@@ -370,7 +332,7 @@ const Profile = () => {
 
     if (profileAddress && cardstakesPool.length > 0) {
       cardstakesPool.forEach(pool => {
-        tokenValueOnDolar = tokenValueOnDolar.add(
+          tokenValueOnDolar = tokenValueOnDolar.add(
           Big(
             (assetsValueInWallet[pool.address]
               ? pool.amount.add(assetsValueInWallet[pool.address])
@@ -384,7 +346,7 @@ const Profile = () => {
     }
 
     setTotalInvestmented(tokenValueOnDolar)
-  }, [profileAddress, priceToken, assetsValueInWallet, data, chainId, userWalletAddress])
+  }, [profileAddress, priceToken, assetsValueInWallet, data, chainId])
 
   React.useEffect(() => {
     if (Number(chainId) !== chain.chainId) {
