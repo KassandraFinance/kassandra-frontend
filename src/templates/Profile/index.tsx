@@ -5,6 +5,7 @@ import BigNumber from 'bn.js'
 import useSWR from 'swr'
 import request from 'graphql-request'
 import Big from 'big.js'
+import { toChecksumAddress } from 'web3-utils'
 
 import useERC20Contract, { ERC20 } from '../../hooks/useERC20Contract'
 import useStakingContract from '../../hooks/useStakingContract'
@@ -44,6 +45,14 @@ import substr from '../../utils/substr'
 import { BNtoDecimal } from '../../utils/numerals'
 
 import * as S from './styles'
+
+// eslint-disable-next-line prettier/prettier
+declare let window: {
+  ethereum: any
+  location: {
+    reload: (noCache?: boolean) => void
+  }
+}
 
 const tabs = [
   {
@@ -117,8 +126,7 @@ const Profile = () => {
   >('portfolio')
   const votingPower = useVotingPower(Staking)
 
-  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
-  const chainId = useAppSelector(state => state.chainId)
+  const { chainId, userWalletAddress } = useAppSelector(state => state)
 
   const router = useRouter()
 
@@ -269,6 +277,23 @@ const Profile = () => {
     setCardStakesPool(prevState => [...prevState, kacyObject])
   }
 
+  const handleAccountChange = ((account: string[]) => {
+    const tabSelect = isSelectQueryTab ? isSelectQueryTab : 'portfolio'
+
+    router.push(
+      {
+        pathname: `/profile/${toChecksumAddress(account[0])}`,
+        query: { tab: `${tabSelect}` }
+      },
+      undefined,
+      { scroll: false, shallow: false }
+    )
+  })
+
+  React.useEffect(() => {
+    window.ethereum.on('accountsChanged', handleAccountChange)
+  }, [])
+
   React.useEffect(() => {
     const arr: string[] = []
 
@@ -358,10 +383,8 @@ const Profile = () => {
       })
     }
 
-    if (tokenValueOnDolar.gt(0)) {
-      setTotalInvestmented(tokenValueOnDolar)
-    }
-  }, [profileAddress, priceToken, assetsValueInWallet, data, chainId])
+    setTotalInvestmented(tokenValueOnDolar)
+  }, [profileAddress, priceToken, assetsValueInWallet, data, chainId, userWalletAddress])
 
   React.useEffect(() => {
     if (Number(chainId) !== chain.chainId) {
