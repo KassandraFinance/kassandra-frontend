@@ -11,6 +11,7 @@ import DropdownInvest from '../Dropdown'
 import ModalLogOut from '../Modals/ModalLogOut'
 import ModalWalletConnect from '../Modals/ModalWalletConnect'
 import ModalSocialMediaMobile from '../Modals/ModalSocialMediaMobile'
+import ModalAlert from '../Modals/ModalAlert'
 
 import options from '../../../public/assets/utilities/options.svg'
 import kacy64 from '../../../public/assets/logos/kacy-64.svg'
@@ -26,6 +27,7 @@ export type MenuProps = {
 const Header = () => {
   const [isModalWallet, setIsModalWallet] = React.useState<boolean>(false)
   const [isModalLogout, setIsModalLogout] = React.useState<boolean>(false)
+  const [isModalError, setIsModalError] = React.useState<boolean>(true)
   // const [isModalLanguages, setIsModalLanguages] = React.useState<boolean>(false)
   const [isModalSocialMedia, setIsModalSocialMedia] =
     React.useState<boolean>(false)
@@ -260,6 +262,8 @@ const Header = () => {
         setModalOpen={setIsModalLogout}
         userWalletAddress={userWalletAddress}
       />
+
+      {isModalError && <ModalAlert setIsModalError={setIsModalError} />}
     </>
   )
 }
