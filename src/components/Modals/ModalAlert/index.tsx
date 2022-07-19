@@ -46,20 +46,20 @@ const ModalAlert = ({
 
           <S.Text>{errorText}</S.Text>
 
-          <S.SolutionHeading>Possible solution</S.SolutionHeading>
-
           {solutionText.length > 0 && (
             <>
-              <S.Text>Try doing something</S.Text>
+              <S.SolutionHeading>Possible solution</S.SolutionHeading>
 
-              <Button
-                text="Okay"
-                backgroundSecondary
-                fullWidth
-                onClick={handleCloseModal}
-              />
+              <S.Text>Try doing something</S.Text>
             </>
           )}
+
+          <Button
+            text="Okay"
+            backgroundSecondary
+            fullWidth
+            onClick={handleCloseModal}
+          />
         </S.ModalBody>
       </S.Container>
     </>
