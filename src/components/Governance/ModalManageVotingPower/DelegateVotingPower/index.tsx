@@ -19,8 +19,9 @@ import waitTransaction, {
 
 import Button from '../../../Button'
 import ExternalLink from '../../../ExternalLink'
-import { ToastError, ToastSuccess, ToastWarning } from '../../../Toastify/toast'
+import { ToastSuccess, ToastWarning } from '../../../Toastify/toast'
 import Options from '../Options'
+import ModalAlert from '../../../Modals/ModalAlert'
 
 import arrowSelect from '../../../../../public/assets/utilities/arrow-select-down.svg'
 import logo from '../../../../../public/assets/logos/kacy-64.svg'
@@ -61,6 +62,7 @@ const DelegateVotingPower = ({
   })
   const [poolData, setPoolData] = React.useState<PoolData[]>([])
   const [loading, setLoading] = React.useState<boolean>(true)
+  const [modalError, setModalError] = React.useState('')
 
   const { poolInfo, balance } = useStakingContract(Staking)
   const { delegateVote, delegateAllVotes } = useVotingPower(Staking)
@@ -108,11 +110,11 @@ const DelegateVotingPower = ({
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
-            ToastError(`Delegate cancelled`)
+            setModalError(`Delegate cancelled`)
             return
           }
 
-          ToastError(`Error`)
+          setModalError(`Error`)
           return
         }
 
@@ -135,11 +137,11 @@ const DelegateVotingPower = ({
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
-            ToastError(`Delegate cancelled`)
+            setModalError(`Delegate cancelled`)
             return
           }
 
-          ToastError(`Error`)
+          setModalError(`Error`)
           return
         }
 
@@ -167,7 +169,7 @@ const DelegateVotingPower = ({
 
   const handleDelegateAllVoting = async () => {
     if (receiverAddress === '') {
-      ToastError('Invalid address')
+      setModalError('Invalid address')
       return
     }
 
@@ -255,6 +257,10 @@ const DelegateVotingPower = ({
         delegateSelected={delegateSelected}
         setDelegateSelected={setDelegateSelected}
       />
+
+      {modalError.length > 0 && (
+        <ModalAlert errorText={modalError} setModalError={setModalError} />
+      )}
     </>
   )
 }
