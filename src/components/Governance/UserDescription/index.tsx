@@ -336,17 +336,3 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
 }
 
 export default UserDescription
-
-// fetch(`/api/profile/${walletUserString}`)
-//   .then(res => res.json())
-//   .catch(error => console.log(error))
-//   .then(data => {
-//     const { image, ...profile } = data
-
-//     setUserData({
-//       ...profile,
-//       description: profile.description ?? ''
-//     }),
-//       setImageUser({ url: image, isNFT: data.isNFT })
-//   })
-//   .catch(error => console.log(error))
