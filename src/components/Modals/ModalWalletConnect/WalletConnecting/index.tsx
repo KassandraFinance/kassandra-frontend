@@ -30,8 +30,9 @@ const WalletConnecting = ({
   isConnected,
   handleCloseModal
 }: IWalletConnectingProps) => {
-  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
   const [nickname, setNickname] = React.useState()
+
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   const providers: ProviderType = {
     metamask: {

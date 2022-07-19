@@ -18,8 +18,13 @@ interface IModalWalletConnect {
 }
 
 const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
-  const { connect, connectToWalletConnect, isConnected, error, cleanError } =
-    useConnect()
+  const {
+    connect,
+    connectToWalletConnect,
+    isConnected,
+    metaMaskError,
+    cleanError
+  } = useConnect()
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   const router = useRouter()
@@ -34,6 +39,11 @@ const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
     if (pahtName === '/profile') {
       router.push(`/profile/${userWalletAddress}${asPathId}`)
     }
+
+    if (metaMaskError) {
+      cleanError()
+    }
+
     setModalOpen(false)
   }
 
@@ -122,7 +132,7 @@ const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
             </S.Content>
           ) : (
             <S.Content>
-              {!error ? (
+              {!metaMaskError ? (
                 <WalletConnecting
                   provider={provider}
                   isConnected={isConnected}
@@ -131,7 +141,7 @@ const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
               ) : (
                 <ModalConnectError
                   provider={provider}
-                  error={error}
+                  metaMaskError={metaMaskError}
                   handleCloseModal={handleCloseModal}
                   handleConnect={handleConnect}
                   cleanError={cleanError}

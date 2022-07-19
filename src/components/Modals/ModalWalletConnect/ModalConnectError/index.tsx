@@ -17,7 +17,7 @@ type ProviderType = {
 
 interface IWalletConnectingProps {
   provider: string;
-  error: string;
+  metaMaskError: string;
   handleCloseModal(): void;
   handleConnect(): void;
   cleanError: () => void;
@@ -25,7 +25,7 @@ interface IWalletConnectingProps {
 
 const ModalConnectError = ({
   provider,
-  error,
+  metaMaskError,
   handleCloseModal,
   handleConnect,
   cleanError
@@ -50,7 +50,7 @@ const ModalConnectError = ({
 
       <S.Text>Oops...</S.Text>
 
-      <S.TextError>{error}</S.TextError>
+      <S.TextError>{metaMaskError}</S.TextError>
 
       <S.ButtonWrapper>
         <Button
@@ -58,7 +58,8 @@ const ModalConnectError = ({
           backgroundSecondary
           fullWidth
           onClick={() => {
-            handleConnect(), cleanError()
+            handleConnect()
+            cleanError()
           }}
         />
         <Button

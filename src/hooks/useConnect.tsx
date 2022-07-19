@@ -30,7 +30,7 @@ const useConnect = () => {
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
   const router = useRouter()
   const [isConnected, setIsConnected] = React.useState(false)
-  const [error, setError] = React.useState<string | null>(null)
+  const [metaMaskError, setMetaMaskError] = React.useState<string | null>(null)
 
   const handleAccountsChanged = React.useCallback(accounts => {
     try {
@@ -78,7 +78,7 @@ const useConnect = () => {
       handleAccountsChanged(accounts)
       setIsConnected(true)
     } catch (error: any) {
-      setError(error.message)
+      setMetaMaskError(error.message)
       console.error(error)
     }
   }, [])
@@ -108,7 +108,7 @@ const useConnect = () => {
     }
 
     if (providerMetaMask !== window.ethereum) {
-      setError('Do you have multiple wallets installed?')
+      setMetaMaskError('Do you have multiple wallets installed?')
       return
     }
 
@@ -149,7 +149,7 @@ const useConnect = () => {
   }, [])
 
   function cleanError() {
-    setError(null)
+    setMetaMaskError(null)
   }
 
   return {
@@ -157,7 +157,7 @@ const useConnect = () => {
     connectToWalletConnect,
     handleDisconnected,
     isConnected,
-    error,
+    metaMaskError,
     cleanError
   }
 }
