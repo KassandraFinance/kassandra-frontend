@@ -21,12 +21,13 @@ import changeChain, { ChainDetails } from '../../../utils/changeChain'
 import waitTransaction, { MetamaskError, TransactionCallback } from '../../../utils/txWait'
 
 import Button from '../../Button'
+import ModalAlert from '../../Modals/ModalAlert'
 
 import InputTokens from './InputTokens'
 import InputBestValue from './InputBestValue'
 import TransactionSettings from './TransactionSettings'
 
-import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
+import { ToastSuccess, ToastWarning } from '../../Toastify/toast'
 
 import { Titles } from '..'
 
@@ -110,6 +111,7 @@ const Form = ({
     custom: '2.0',
     isCustom: false
   })
+  const [modalError, setModalError] = React.useState('')
 
   const [swapInAddress, setSwapInAddress] = React.useState('')
   const [swapInAmount, setSwapInAmount] = React.useState(new BigNumber(0))
@@ -836,11 +838,11 @@ const Form = ({
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
-            ToastError(`Approval of ${tokenSymbol} cancelled`)
+            setModalError(`Approval of ${tokenSymbol} cancelled`)
             return
           }
 
-          ToastError(`Failed to approve ${tokenSymbol}. Please try again later.`)
+          setModalError(`Failed to approve ${tokenSymbol}. Please try again later.`)
           return
         }
 
@@ -908,11 +910,11 @@ const Form = ({
           trackCancelBuying()
 
           if (error.code === 4001) {
-            ToastError(`Investment in ${tokenSymbol} cancelled`)
+            setModalError(`Investment in ${tokenSymbol} cancelled`)
             return
           }
 
-          ToastError(`Failed to invest in ${tokenSymbol}. Please try again later.`)
+          setModalError(`Failed to invest in ${tokenSymbol}. Please try again later.`)
           return
         }
 
@@ -936,11 +938,11 @@ const Form = ({
           trackCancelBuying()
 
           if (error.code === 4001) {
-            ToastError(`Withdrawal of ${tokenSymbol} cancelled`)
+            setModalError(`Withdrawal of ${tokenSymbol} cancelled`)
             return
           }
 
-          ToastError(`Failed to withdraw ${tokenSymbol}. Please try again later.`)
+          setModalError(`Failed to withdraw ${tokenSymbol}. Please try again later.`)
           return
         }
 
@@ -962,11 +964,11 @@ const Form = ({
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
-            ToastError(`Swap of ${tokenInSymbol} to ${tokenOutSymbol} cancelled`)
+            setModalError(`Swap of ${tokenInSymbol} to ${tokenOutSymbol} cancelled`)
             return
           }
 
-          ToastError(`Failed to swap ${tokenInSymbol} to ${tokenOutSymbol}. Please try again later.`)
+          setModalError(`Failed to swap ${tokenInSymbol} to ${tokenOutSymbol}. Please try again later.`)
           return
         }
 
@@ -1122,7 +1124,7 @@ const Form = ({
           default:
         }
       } catch (error) {
-        ToastError('Could not connect with the Blockchain!')
+        setModalError('Could not connect with the Blockchain!')
       }
     }, [tokenAddress2Index])
 
@@ -1408,6 +1410,14 @@ const Form = ({
           />
         )
       )}
+
+
+      {modalError.length > 0 &&
+       (
+        <ModalAlert errorText={modalError} setModalError={setModalError} />
+       )
+      }
+
     </S.FormContainer >
   )
 }

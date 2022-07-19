@@ -5,7 +5,7 @@ export const Backdrop = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 20;
+  z-index: 100;
 
   width: 100vw;
   height: 100vh;
@@ -28,7 +28,7 @@ export const Container = styled.div`
   backdrop-filter: blur(0.4rem);
   border-radius: 1rem;
 
-  z-index: 21;
+  z-index: 110;
 
   @media (max-width: 450px) {
     width: 90%;

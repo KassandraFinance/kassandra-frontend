@@ -10,22 +10,23 @@ import closeIcon from '../../../../public/assets/utilities/close-icon.svg'
 import * as S from './styles'
 
 interface IModalAlertProps {
-  setIsModalError: React.Dispatch<React.SetStateAction<boolean>>;
   errorText: string;
   solutionText?: string;
+  setModalError: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const ModalAlert = ({
-  setIsModalError,
+  setModalError,
   errorText,
   solutionText
 }: IModalAlertProps) => {
   function handleCloseModal() {
-    setIsModalError(false)
+    setModalError('')
   }
 
   return (
-    <S.Backdrop onClick={handleCloseModal}>
+    <>
+      <S.Backdrop onClick={handleCloseModal}></S.Backdrop>
       <S.Container>
         <S.ModalHeader>
           <S.TitleWrapper>
@@ -43,7 +44,7 @@ const ModalAlert = ({
 
           <S.ErrorHeading>Something has gone wrong</S.ErrorHeading>
 
-          <S.Text>{`[ethjs-query] while formatting outputs from RPC ‘{“value”:{“code”:-32602,“message”:“transaction could not be decoded: unsigned transactions not supported”}}’`}</S.Text>
+          <S.Text>{errorText}</S.Text>
 
           <S.SolutionHeading>Possible solution</S.SolutionHeading>
 
@@ -57,7 +58,7 @@ const ModalAlert = ({
           />
         </S.ModalBody>
       </S.Container>
-    </S.Backdrop>
+    </>
   )
 }
 
