@@ -18,12 +18,13 @@ import { useAppSelector } from '../../../../store/hooks'
 
 // import { useMatomo } from '@datapunt/matomo-tracker-react'
 import ExternalLink from '../../../ExternalLink'
-import { ToastError, ToastSuccess, ToastWarning } from '../../../Toastify/toast'
+import { ToastSuccess, ToastWarning } from '../../../Toastify/toast'
 import Options from '../Options'
 
 import { BNtoDecimal } from '../../../../utils/numerals'
 
 import Button from '../../../Button'
+import ModalAlert from '../../../Modals/ModalAlert'
 
 import arrowSelect from '../../../../../public/assets/utilities/arrow-select-down.svg'
 
@@ -54,6 +55,7 @@ const UndelegateVotingPower = ({
     })
   const [userInfoData, setUserInfoData] = React.useState<any>([])
   const [loading, setLoading] = React.useState<boolean>(true)
+  const [modalError, setModalError] = React.useState('')
 
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
@@ -129,11 +131,11 @@ const UndelegateVotingPower = ({
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
-            ToastError(`Undelegate cancelled`)
+            setModalError(`Undelegate cancelled`)
             return
           }
 
-          ToastError(`Error`)
+          setModalError(`Error`)
           return
         }
 
@@ -156,11 +158,11 @@ const UndelegateVotingPower = ({
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
-            ToastError(`Undelegate cancelled`)
+            setModalError(`Undelegate cancelled`)
             return
           }
 
-          ToastError(`Error`)
+          setModalError(`Error`)
           return
         }
 
@@ -273,6 +275,10 @@ const UndelegateVotingPower = ({
         setDelegateSelected={setUndelegateSelected}
         undelegate={true}
       />
+
+      {modalError.length > 0 && (
+        <ModalAlert errorText={modalError} setModalError={setModalError} />
+      )}
     </>
   )
 }
