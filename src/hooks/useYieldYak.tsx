@@ -19,21 +19,21 @@ const useYieldYak = () => {
       return decimalsFinal
     }
 
-    const getDepositTokensForShares = async (amount: BigNumber, address: string) => {
-      const contract = new web3.eth.Contract((YieldYak as unknown) as AbiItem, address)
-      const value = await contract.methods.getDepositTokensForShares(amount).call()
+    const convertBalanceYRTtoWrap = async (amountYRT: BigNumber, addressYRT: string) => {
+      const contract = new web3.eth.Contract((YieldYak as unknown) as AbiItem, addressYRT)
+      const value = await contract.methods.getDepositTokensForShares(amountYRT).call()
       return new BigNumber(value)
     }
 
-    const getSharesForDepositTokens = async (amount: BigNumber, address: string) => {
-      const contract = new web3.eth.Contract((YieldYak as unknown) as AbiItem, address)
-      const value = await contract.methods.getSharesForDepositTokens(amount).call()
+    const convertBalanceWrappedYRT = async (amountWrapped: BigNumber, addressYRT: string) => {
+      const contract = new web3.eth.Contract((YieldYak as unknown) as AbiItem, addressYRT)
+      const value = await contract.methods.getSharesForDepositTokens(amountWrapped).call()
       return new BigNumber(value)
     }
 
     return {
-      getDepositTokensForShares,
-      getSharesForDepositTokens,
+      convertBalanceYRTtoWrap,
+      convertBalanceWrappedYRT,
       getDecimals,
     }
   }, [])

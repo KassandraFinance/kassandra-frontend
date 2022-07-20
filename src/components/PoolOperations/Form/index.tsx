@@ -129,7 +129,7 @@ const Form = ({
   const proxy = useProxy(ProxyContract, crpPoolAddress, corePoolAddress)
   const crpPoolToken = useERC20Contract(crpPoolAddress)
   const corePool = usePoolContract(corePoolAddress)
-  const yiedlYak = useYieldYak()
+  const { convertBalanceYRTtoWrap, convertBalanceWrappedYRT } = useYieldYak()
 
   function clearInput() {
     setSwapInAmount(new BigNumber(0))
@@ -138,16 +138,6 @@ const Form = ({
     if (inputTokenRef.current !== null) {
       inputTokenRef.current.value = '0'
     }
-  }
-
-  async function convertBalanceYRTtoWrap(balanceYRT: BigNumber, addressYRT:string): Promise<BigNumber> {
-    const balanceInWrap =  await yiedlYak.getDepositTokensForShares(balanceYRT, addressYRT)
-    return balanceInWrap
-  }
-
-  async function convertBalanceWrappedYRT(balanceWrap: BigNumber, addressYRT:string): Promise<BigNumber> {
-    const balanceInYRT = await yiedlYak.getSharesForDepositTokens(balanceWrap,addressYRT)
-    return balanceInYRT
   }
 
   // calculate invest with output
@@ -186,7 +176,7 @@ const Form = ({
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         let investAmoutOutCalc: BigNumber = investAmoutOut
-        if(invertToken[swapOutAddress]) {
+        if (invertToken[swapOutAddress]) {
           investAmoutOutCalc = await convertBalanceWrappedYRT(investAmoutOut, invertToken[swapOutAddress])
         }
         const newAmountInvestIn = await corePool.calcSingleInGivenPoolOut(
@@ -198,7 +188,7 @@ const Form = ({
           poolSwapFee
         )
         let investAmoutInNormalized: BigNumber = newAmountInvestIn
-        if(invertToken[swapInAddress]) {
+        if (invertToken[swapInAddress]) {
           investAmoutInNormalized = await convertBalanceYRTtoWrap(newAmountInvestIn, invertToken[swapInAddress])
         }
         if (inputTokenRef.current && newAmountInvestIn) {
@@ -248,7 +238,7 @@ const Form = ({
           pow = pow.add(new BigNumber(1));
         }
       }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       const errorStr = error.toString()
       if (userWalletAddress.length > 0) {
@@ -516,7 +506,7 @@ const Form = ({
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
           let investAmoutInCalc: BigNumber = swapInAmount
-          if(invertToken[swapInAddress]) {
+          if (invertToken[swapInAddress]) {
             investAmoutInCalc = await convertBalanceWrappedYRT(swapInAmount, invertToken[swapInAddress])
           }
           const newSwapOutPrice = await corePool.calcPoolOutGivenSingleIn(
@@ -528,7 +518,7 @@ const Form = ({
             poolSwapFee
           )
           let investAmoutOutNormalized: BigNumber = newSwapOutPrice
-          if(invertToken[swapOutAddress]) {
+          if (invertToken[swapOutAddress]) {
             investAmoutOutNormalized = await convertBalanceYRTtoWrap(newSwapOutPrice, invertToken[swapOutAddress])
           }
           setSwapOutAmount([investAmoutOutNormalized])
@@ -572,7 +562,7 @@ const Form = ({
             pow = pow.add(new BigNumber(1));
           }
         }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         const errorStr = error.toString()
         if (userWalletAddress.length > 0) {
@@ -623,7 +613,7 @@ const Form = ({
           corePool.swapFee()
         ])
         let swapAmoutInCalc: BigNumber = swapInAmount
-        if(invertToken[swapInAddress]) {
+        if (invertToken[swapInAddress]) {
           swapAmoutInCalc = await convertBalanceWrappedYRT(swapInAmount, invertToken[swapInAddress])
         }
         const [newSwapOutAmount] = await Promise.all([
@@ -642,7 +632,7 @@ const Form = ({
 
         const swapOut = newSwapOutAmount.mul(exchangeRateIn).div(exchangeRateOut)
         let swapAmoutOutNormalized: BigNumber = swapOut
-        if(invertToken[swapOutAddress]) {
+        if (invertToken[swapOutAddress]) {
           swapAmoutOutNormalized = await convertBalanceYRTtoWrap(swapOut, invertToken[swapOutAddress])
         }
         setSwapOutAmount([swapAmoutOutNormalized])
@@ -756,7 +746,7 @@ const Form = ({
               swapOutTotalPoolBalance,
               poolExitFee
             )
-            if(mapTokenAddress) {
+            if (mapTokenAddress) {
               return await convertBalanceYRTtoWrap(withdrawAmout, mapTokenAddress)
             }
             return withdrawAmout
@@ -825,7 +815,7 @@ const Form = ({
           ),
         ])
         let withdrawAmoutOut: BigNumber = SingleSwapOutAmount
-        if(invertToken[swapOutAddress]) {
+        if (invertToken[swapOutAddress]) {
           withdrawAmoutOut = await convertBalanceYRTtoWrap(withdrawAmoutOut, invertToken[swapOutAddress])
         }
         setSwapOutAmount([withdrawAmoutOut])
