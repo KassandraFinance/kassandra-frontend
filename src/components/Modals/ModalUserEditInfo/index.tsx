@@ -138,11 +138,27 @@ const ModalUserEditInfo = ({
   }
 
   function handleImagePreview(event: FileList) {
-    if (event[0].size > 300000)
+    if (event[0].size > 300000) {
       dispatch(
-        setModalAlertText({ errorText: 'Images should be less than 300KB' })
+        setModalAlertText({
+          errorText: 'Image is bigger than 300KB.',
+          solutionText: 'Image should be less than 300KB.'
+        })
       )
-    return
+      return
+    }
+
+    const allowedFileTypes = ['image/png', 'image/jpeg', 'image/gif']
+
+    if (allowedFileTypes.indexOf(event[0].type) === -1) {
+      dispatch(
+        setModalAlertText({
+          errorText: 'Wrong image format.',
+          solutionText: 'Image should be jpg, jpeg or png.'
+        })
+      )
+      return
+    }
 
     if (event) {
       const image_as_base64 = URL.createObjectURL(event[0])
