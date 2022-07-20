@@ -111,7 +111,7 @@ const InputTokens = ({
         return
       }
       inputRef.current.value = wei2String(swapBalance)
-      setSwapAmount(swapBalance.sub(new BigNumber(1)))
+      setSwapAmount(swapBalance)
       setMaxActive(true)
     }
   }
