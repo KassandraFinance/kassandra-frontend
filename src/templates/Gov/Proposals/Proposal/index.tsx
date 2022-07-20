@@ -25,7 +25,8 @@ import waitTransaction, {
   TransactionCallback
 } from '../../../../utils/txWait'
 
-import { useAppSelector } from '../../../../store/hooks'
+import { useAppSelector, useAppDispatch } from '../../../../store/hooks'
+import { setModalAlertText } from '../../../../store/reducers/modalAlertText'
 
 import { GET_PROPOSAL } from './graphql'
 
@@ -38,7 +39,6 @@ import Breadcrumb from '../../../../components/Breadcrumb'
 import BreadcrumbItem from '../../../../components/Breadcrumb/BreadcrumbItem'
 import {
   ToastSuccess,
-  ToastError,
   ToastWarning
 } from '../../../../components/Toastify/toast'
 
@@ -136,6 +136,8 @@ const statslibColor: { [key: string]: string } = {
 }
 
 const Proposal = () => {
+  const dispatch = useAppDispatch()
+
   const [proposal, setProposal] = React.useState<IProposalProps>({
     forVotes: Big(0),
     againstVotes: Big(0),
@@ -233,7 +235,11 @@ const Proposal = () => {
   const voteCallback = React.useCallback((): TransactionCallback => {
     return async (error: MetamaskError, txHash: string) => {
       if (error) {
-        ToastError(`Failed vote. Please try again later.`)
+        dispatch(
+          setModalAlertText({
+            errorText: `Failed vote. Please try again later.`
+          })
+        )
         return
       }
 
