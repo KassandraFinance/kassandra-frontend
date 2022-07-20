@@ -64,7 +64,7 @@ const AssetsCard = ({
         <S.AssetsContainer isThreeCards={cardstakesPoolNew.length > 2}>
           {cardstakesPoolNew.map(stake => {
             return (
-              <S.AssetsHeaderContent key={stake.pid + stake.poolName}>
+              <S.AssetsHeaderContent key={stake.pid + 1 + stake.poolName}>
                 <span>
                   {stake.symbol === 'KACY' ? (
                     <Image

@@ -113,7 +113,7 @@ const Portfolio = ({
         [prod.sipAddress]: balanceProductAll
       }))
     })
-  }, [profileAddress, assetsValueInWallet, router])
+  }, [profileAddress, assetsValueInWallet, router, userWalletAddress])
 
   React.useEffect(() => {
     let tokenValueOnDolar = new Big(0)

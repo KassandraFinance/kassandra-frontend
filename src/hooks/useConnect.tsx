@@ -2,10 +2,8 @@
 import detectEthereumProvider from '@metamask/detect-provider'
 import WalletConnect from '@walletconnect/client'
 import QRCodeModal from '@walletconnect/qrcode-modal'
-import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { toChecksumAddress } from 'web3-utils'
-import { ToastError, ToastSuccess } from '../components/Toastify/toast'
 
 import { subscribeToEvents } from '../utils/walletConnect'
 
@@ -29,7 +27,8 @@ const connector = new WalletConnect({ bridge, qrcodeModal: QRCodeModal })
 const useConnect = () => {
   const dispatch = useAppDispatch()
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
-  const router = useRouter()
+  const [isConnected, setIsConnected] = React.useState(false)
+  const [metaMaskError, setMetaMaskError] = React.useState<string | null>(null)
 
   const handleAccountsChanged = React.useCallback(accounts => {
     try {
@@ -37,9 +36,6 @@ const useConnect = () => {
         dispatch(setUserWalletAddress(''))
       } else if (accounts[0] !== userWalletAddress) {
         dispatch(setUserWalletAddress(toChecksumAddress(accounts[0])))
-        if (router.asPath === '/gov/address') {
-          router.push(`/gov/address/${toChecksumAddress(accounts[0])}`)
-        }
       }
     } catch (error: any) {
       console.log(error)
@@ -75,9 +71,9 @@ const useConnect = () => {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
 
       handleAccountsChanged(accounts)
-      ToastSuccess('Connected to MetaMask.')
+      setIsConnected(true)
     } catch (error: any) {
-      ToastError(error.message)
+      setMetaMaskError(error.message)
       console.error(error)
     }
   }, [])
@@ -93,7 +89,7 @@ const useConnect = () => {
       if (connect) {
         const { accounts, chainId } = JSON.parse(connect)
         handleAccountsChanged(accounts)
-        ToastSuccess('Connected to Wallet Connect.')
+        setIsConnected(true)
         dispatch(setChainId(chainId))
         subscribeToEvents(provider, handleAccountsChanged, handleChainChanged, handleDisconnected)
       }
@@ -107,7 +103,7 @@ const useConnect = () => {
     }
 
     if (providerMetaMask !== window.ethereum) {
-      ToastError('Do you have multiple wallets installed?')
+      setMetaMaskError('Do you have multiple wallets installed?')
       return
     }
 
@@ -147,10 +143,17 @@ const useConnect = () => {
     verifyProvider()
   }, [])
 
+  function cleanError() {
+    setMetaMaskError(null)
+  }
+
   return {
     connect,
     connectToWalletConnect,
-    handleDisconnected
+    handleDisconnected,
+    isConnected,
+    metaMaskError,
+    cleanError
   }
 }
 

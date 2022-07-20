@@ -58,10 +58,15 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
     : userWalletUrl
 
   React.useEffect(() => {
-    if (!userWalletUrl) return
+    if (!walletUserString) return
 
-    fetch(`/api/profile/${userWalletUrl}`)
-      .then(res => res.json())
+    fetch(`/api/profile/${walletUserString}`)
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+        throw new Error('Something went wrong')
+      })
       .then(data => {
         const { image, ...profile } = data
 
@@ -71,7 +76,18 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
         }),
           setImageUser({ url: image, isNFT: data.isNFT })
       })
-  }, [userWalletAddress, userWalletUrl, isOpenModal])
+      .catch(error => {
+        setUserData({
+          nickname: '',
+          twitter: '',
+          website: '',
+          telegram: '',
+          discord: '',
+          description: ''
+        }),
+          setImageUser({ url: '', isNFT: false })
+      })
+  }, [isOpenModal, userWalletUrl])
 
   React.useEffect(() => {
     if (window.screen.width > 768) {
