@@ -87,17 +87,6 @@ const Form = ({
   typeWithdrawChecked,
   setIsModaWallet
 }: IFormProps) => {
-
-  const dispatch = useAppDispatch()
-  const crpPoolToken = useERC20Contract(crpPoolAddress)
-  const corePool = usePoolContract(corePoolAddress)
-  const proxy = useProxy(ProxyContract, crpPoolAddress, corePoolAddress)
-
-  const { chainId, fees, tokenAddress2Index, userWalletAddress } = useAppSelector(state => state)
-  const { poolTokens: poolTokensArray } = usePoolTokens()
-
-  const { trackBuying, trackBought, trackCancelBuying } = useMatomoEcommerce();
-
   const [walletConnect, setWalletConnect] = React.useState<string | null>(null)
   const [approvals, setApprovals] = React.useState<Approvals>({
     Withdraw: [],
@@ -133,7 +122,10 @@ const Form = ({
 
   const inputTokenRef = React.useRef<HTMLInputElement>(null)
 
+  const dispatch = useAppDispatch()
+
   const { chainId, fees, tokenAddress2Index, userWalletAddress } = useAppSelector(state => state)
+
   const { poolTokens: poolTokensArray } = usePoolTokens()
 
   const { trackBuying, trackBought, trackCancelBuying } = useMatomoEcommerce();
