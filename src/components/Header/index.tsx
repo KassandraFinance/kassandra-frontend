@@ -11,6 +11,7 @@ import DropdownInvest from '../Dropdown'
 import ModalLogOut from '../Modals/ModalLogOut'
 import ModalWalletConnect from '../Modals/ModalWalletConnect'
 import ModalSocialMediaMobile from '../Modals/ModalSocialMediaMobile'
+import ModalAlert from '../Modals/ModalAlert'
 
 import options from '../../../public/assets/utilities/options.svg'
 import kacy64 from '../../../public/assets/logos/kacy-64.svg'
@@ -33,6 +34,7 @@ const Header = () => {
   const { trackEventFunction } = useMatomoEcommerce()
 
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
+  const isError = useAppSelector(state => state.modalAlertText.errorText)
 
   return (
     <>
@@ -93,13 +95,11 @@ const Header = () => {
             linkPage={[
               {
                 name: 'Overview',
-                href: '',
-                disabled: true
+                href: '/gov'
               },
               {
                 name: 'Proposals',
-                href: '',
-                disabled: true
+                href: '/gov/proposals'
               },
               {
                 name: 'Stake',
@@ -260,6 +260,8 @@ const Header = () => {
         setModalOpen={setIsModalLogout}
         userWalletAddress={userWalletAddress}
       />
+
+      {isError && <ModalAlert />}
     </>
   )
 }
