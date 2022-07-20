@@ -25,12 +25,17 @@ export const GET_CHART = gql`
       total_value_locked(
         where: { base: "usd", timestamp_gt: $period_selected }
         orderBy: timestamp
+        first: 365
       ) {
         value
         timestamp
       }
       # hourly allocation chart
-      weights(where: { timestamp_gt: $period_selected }, orderBy: timestamp) {
+      weights(
+        where: { timestamp_gt: $period_selected }
+        orderBy: timestamp
+        first: 365
+      ) {
         timestamp
         weights {
           token {

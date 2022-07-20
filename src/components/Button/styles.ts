@@ -23,18 +23,18 @@ const wrapperModifiers = {
   claim: (theme: DefaultTheme) => css`
     height: 5.4rem;
     font-size: ${theme.font.sizes.font16};
-    padding: 19px 28px;
+    padding: 1.9rem 2.8rem;
   `,
   medium: (theme: DefaultTheme) => css`
     height: 4.4rem;
 
-    padding: 14px ${theme.spacings.space24};
+    padding: 1.4rem ${theme.spacings.space24};
     font-size: ${theme.font.sizes.font16};
   `,
   large: (theme: DefaultTheme) => css`
     height: 4.4rem;
 
-    padding: 14px ${theme.spacings.space24};
+    padding: 1.4rem ${theme.spacings.space24};
     font-size: ${theme.font.sizes.font16};
   `,
   huge: (theme: DefaultTheme) => css`
@@ -66,7 +66,7 @@ const wrapperModifiers = {
 
   disabledNoEvent: (theme: DefaultTheme) => css`
     background: ${theme.colors.darkGray};
-    border: 1px solid ${theme.colors.darkGray};
+    border: 0.1rem solid ${theme.colors.darkGray};
     color: #8b8b8b;
 
     cursor: not-allowed;
@@ -86,8 +86,8 @@ const wrapperModifiers = {
     }
 
     &:focus {
-      outline: 2px solid ${theme.colors.magenta};
-      outline-offset: 2px;
+      outline: 0.2rem solid ${theme.colors.magenta};
+      outline-offset: 0.2rem;
     }
   `,
 
@@ -102,8 +102,8 @@ const wrapperModifiers = {
     }
 
     &:focus {
-      outline: 2px solid ${theme.colors.darkBlue};
-      outline-offset: 2px;
+      outline: 0.2rem solid ${theme.colors.darkBlue};
+      outline-offset: 0.2rem;
     }
   `,
 
@@ -111,9 +111,9 @@ const wrapperModifiers = {
     border: ${`0.1rem solid ${theme.colors.cyan}`};
     background: transparent;
 
-    padding: 12.5px;
+    padding: 1.25rem;
 
-    transition: all 300ms ease-in-out;
+    transition: color 300ms ease-in-out, background 300ms ease-in-out;
 
     svg {
       path {
@@ -133,8 +133,8 @@ const wrapperModifiers = {
     }
 
     &:focus {
-      outline: 2px solid ${theme.colors.cyan};
-      outline-offset: 2px;
+      outline: 0.2rem solid ${theme.colors.cyan};
+      outline-offset: 0.2rem;
     }
   `,
 
@@ -172,15 +172,15 @@ const wrapperModifiers = {
           }
 
           &:focus {
-            outline: 2px solid ${theme.colors.darkBlue};
-            outline-offset: 2px;
+            outline: 0.2rem solid ${theme.colors.darkBlue};
+            outline-offset: 0.2rem;
           }
         `
 
       default:
         return css`
           background: ${theme.colors.darkGray};
-          border: 1px solid ${theme.colors.darkGray};
+          border: 0.1rem solid ${theme.colors.darkGray};
           color: #8b8b8b;
 
           cursor: not-allowed;
@@ -191,11 +191,8 @@ const wrapperModifiers = {
   }
 }
 
-// eslint-disable-next-line prettier/prettier
-export const Wrapper =
-  styled.button <
-  WrapperProps >
-  `
+// prettier-ignore
+export const Wrapper = styled.button<WrapperProps>`
   ${({
     theme,
     size,
