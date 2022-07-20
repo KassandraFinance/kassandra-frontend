@@ -9,9 +9,6 @@ import web3 from '../utils/web3'
 import HermesProxy from "../constants/abi/HermesProxy.json"
 
 import { TransactionCallback } from '../utils/txWait'
-import { BNtoDecimal } from '../utils/numerals'
-import Big from 'big.js'
-
 
 const useProxy = (address: string, sipAddress: string, coreAddress: string) => {
   const [contract, setContract] = React.useState(new web3.eth.Contract((HermesProxy as unknown) as AbiItem, address))
@@ -191,47 +188,18 @@ const useProxy = (address: string, sipAddress: string, coreAddress: string) => {
     }
 
     const estimatedGas = async (userWalletAddress: string, price: number, tokenIn: string, tokenAmountIn: BigNumber, minPoolAmountOut: BigNumber) => {
-      const resGasMethod = await contract.methods.joinswapExternAmountIn(sipAddress, tokenIn, new BigNumber(0), minPoolAmountOut).estimateGas({ from: userWalletAddress })
-
       const estimateGas = await web3.eth.estimateGas({
         // "value": '0x0', // Only tokens
         "data": contract.methods.joinswapExternAmountIn(sipAddress, tokenIn, new BigNumber(0), minPoolAmountOut).encodeABI(),
         "from": userWalletAddress,
         "to": address
       });
+      const gasPrice = await web3.eth.getGasPrice()      
+      
+      const fee = (Number(gasPrice) * estimateGas)  * 1.2
+      const finalGasInEther = web3.utils.fromWei(fee.toString(), 'ether');
 
-      const value1 = web3.utils.fromWei(estimateGas.toString(), 'gwei')
-
-      // console.log(estimateGas);
-
-      // web3.eth.getGasPrice()
-      //   .then(gasPrice => {
-      //     contract
-      //       .methods
-      //       .joinswapExternAmountIn(sipAddress, tokenIn, new BigNumber(0), minPoolAmountOut)
-      //       .estimateGas({ from: userWalletAddress })
-      //       .then((estimatedGas: any) => {
-      //           const txPriceWei = estimatedGas * Number(gasPrice);
-      //           const txPriceEth = web3.utils.fromWei(txPriceWei.toString(), 'ether');
-      //           const txPriceUSD = 23.5 * 1800;
-
-      //           // const value1 = BNtoDecimal(new BigNumber(estimatedGas), 2, 2, 2)
-      //           // const value2 = BNtoDecimal(new BigNumber(gasPrice), 2, 2, 2)
-      //           const value1 = BNtoDecimal(new BigNumber(web3.utils.toWei(estimatedGas.toString(), 'ether')), 18, 2, 2)
-      //           const value2 = BNtoDecimal(new BigNumber(web3.utils.toWei(gasPrice.toString(), 'ether')), 18, 2, 2)
-      //           const value3 = BNtoDecimal(new BigNumber(web3.utils.toWei(txPriceWei.toString(), 'ether')), 18, 2, 2)
-
-      //           console.log({
-      //               estimatedGas: value1, gasPrice: value2, txPriceWei: value3
-      //           });
-      //           // console.log({
-      //           //     estimatedGas: new BigNumber(estimatedGas).toString(), txPriceWei, txPriceUSD
-      //           // });
-      //       })
-      //     ;
-      // });
-
-      return value1
+      return finalGasInEther
     }
 
     return {
