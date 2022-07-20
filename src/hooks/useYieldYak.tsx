@@ -25,8 +25,15 @@ const useYieldYak = () => {
       return new BigNumber(value)
     }
 
+    const getSharesForDepositTokens = async (amount: BigNumber, address: string) => {
+      const contract = new web3.eth.Contract((YieldYak as unknown) as AbiItem, address)
+      const value = await contract.methods.getSharesForDepositTokens(amount).call()
+      return new BigNumber(value)
+    }
+
     return {
       getDepositTokensForShares,
+      getSharesForDepositTokens,
       getDecimals,
     }
   }, [])
