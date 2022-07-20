@@ -8,7 +8,8 @@ import { Staking } from '../../../../constants/tokenAddresses'
 // import { useMatomo } from '@datapunt/matomo-tracker-react'
 import useStakingContract from '../../../../hooks/useStakingContract'
 import useVotingPower from '../../../../hooks/useVotingPower'
-import { useAppSelector } from '../../../../store/hooks'
+import { useAppSelector, useAppDispatch } from '../../../../store/hooks'
+import { setModalAlertText } from '../../../../store/reducers/modalAlertText'
 
 import { BNtoDecimal } from '../../../../utils/numerals'
 import substr from '../../../../utils/substr'
@@ -21,7 +22,6 @@ import Button from '../../../Button'
 import ExternalLink from '../../../ExternalLink'
 import { ToastSuccess, ToastWarning } from '../../../Toastify/toast'
 import Options from '../Options'
-import ModalAlert from '../../../Modals/ModalAlert'
 
 import arrowSelect from '../../../../../public/assets/utilities/arrow-select-down.svg'
 import logo from '../../../../../public/assets/logos/kacy-64.svg'
@@ -51,6 +51,7 @@ const DelegateVotingPower = ({
   setCurrentModal,
   setModalOpen
 }: IDelegateVotingPowerProps) => {
+  const dispatch = useAppDispatch()
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
   const [optionsOpen, setOptionsOpen] = React.useState<boolean>(false)
   const [receiverAddress, setReceiverAddress] = React.useState<string>('')
@@ -62,7 +63,6 @@ const DelegateVotingPower = ({
   })
   const [poolData, setPoolData] = React.useState<PoolData[]>([])
   const [loading, setLoading] = React.useState<boolean>(true)
-  const [modalError, setModalError] = React.useState('')
 
   const { poolInfo, balance } = useStakingContract(Staking)
   const { delegateVote, delegateAllVotes } = useVotingPower(Staking)
@@ -110,11 +110,11 @@ const DelegateVotingPower = ({
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
-            setModalError(`Delegate cancelled`)
+            dispatch(setModalAlertText({ errorText: `Delegate cancelled` }))
             return
           }
 
-          setModalError(`Error`)
+          dispatch(setModalAlertText({ errorText: `Error` }))
           return
         }
 
@@ -137,11 +137,11 @@ const DelegateVotingPower = ({
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
-            setModalError(`Delegate cancelled`)
+            dispatch(setModalAlertText({ errorText: `Delegate cancelled` }))
             return
           }
 
-          setModalError(`Error`)
+          dispatch(setModalAlertText({ errorText: `Error` }))
           return
         }
 
@@ -169,7 +169,7 @@ const DelegateVotingPower = ({
 
   const handleDelegateAllVoting = async () => {
     if (receiverAddress === '') {
-      setModalError('Invalid address')
+      dispatch(setModalAlertText({ errorText: 'Invalid address' }))
       return
     }
 
@@ -257,10 +257,6 @@ const DelegateVotingPower = ({
         delegateSelected={delegateSelected}
         setDelegateSelected={setDelegateSelected}
       />
-
-      {modalError.length > 0 && (
-        <ModalAlert errorText={modalError} setModalError={setModalError} />
-      )}
     </>
   )
 }

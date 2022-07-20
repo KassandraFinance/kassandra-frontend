@@ -11,11 +11,12 @@ import waitTransaction, {
 
 import useStakingContract from '../../../hooks/useStakingContract'
 import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+import { useAppDispatch } from '../../../store/hooks'
+import { setModalAlertText } from '../../../store/reducers/modalAlertText'
 
 import { Staking } from '../../../constants/tokenAddresses'
 
 import Button from '../../Button'
-import ModalAlert from '../ModalAlert'
 
 import * as S from './styles'
 
@@ -40,8 +41,9 @@ const ModalRequestUnstake = ({
   userWalletAddress,
   stakedUntil
 }: IModalRequestUnstakeProps) => {
+  const dispatch = useAppDispatch()
+
   const [dateWithdraw, setDateWithdraw] = React.useState<number>(0)
-  const [modalError, setModalError] = React.useState('')
   const kacyStake = useStakingContract(Staking)
   const { trackEventFunction } = useMatomoEcommerce()
 
@@ -56,14 +58,19 @@ const ModalRequestUnstake = ({
     return async (error: MetamaskError, txHash: string) => {
       if (error) {
         if (error.code === 4001) {
-          setModalError(`Request for unstaking ${symbol} cancelled`)
+          dispatch(
+            setModalAlertText({
+              errorText: `Request for unstaking ${symbol} cancelled`
+            })
+          )
           return
         }
 
-        setModalError(
-          `Failed to request unstaking of ${symbol}. Please try again later.`
+        dispatch(
+          setModalAlertText({
+            errorText: `Failed to request unstaking of ${symbol}. Please try again later.`
+          })
         )
-
         return
       }
 
@@ -137,10 +144,6 @@ const ModalRequestUnstake = ({
           </S.ButtonContainer>
         </S.Content>
       </S.ModalContainer>
-
-      {modalError.length > 0 && (
-        <ModalAlert errorText={modalError} setModalError={setModalError} />
-      )}
     </>
   )
 }

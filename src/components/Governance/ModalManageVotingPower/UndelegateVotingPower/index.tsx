@@ -14,7 +14,8 @@ import waitTransaction, {
   TransactionCallback
 } from '../../../../utils/txWait'
 import substr from '../../../../utils/substr'
-import { useAppSelector } from '../../../../store/hooks'
+import { useAppSelector, useAppDispatch } from '../../../../store/hooks'
+import { setModalAlertText } from '../../../../store/reducers/modalAlertText'
 
 // import { useMatomo } from '@datapunt/matomo-tracker-react'
 import ExternalLink from '../../../ExternalLink'
@@ -24,7 +25,6 @@ import Options from '../Options'
 import { BNtoDecimal } from '../../../../utils/numerals'
 
 import Button from '../../../Button'
-import ModalAlert from '../../../Modals/ModalAlert'
 
 import arrowSelect from '../../../../../public/assets/utilities/arrow-select-down.svg'
 
@@ -45,6 +45,7 @@ const UndelegateVotingPower = ({
   setCurrentModal,
   setModalOpen
 }: IUndelegateVotingPowerProps) => {
+  const dispatch = useAppDispatch()
   const [optionsOpen, setOptionsOpen] = React.useState<boolean>(false)
   const [undelegateSelected, setUndelegateSelected] =
     React.useState<IDateProps>({
@@ -55,7 +56,6 @@ const UndelegateVotingPower = ({
     })
   const [userInfoData, setUserInfoData] = React.useState<any>([])
   const [loading, setLoading] = React.useState<boolean>(true)
-  const [modalError, setModalError] = React.useState('')
 
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
@@ -131,11 +131,11 @@ const UndelegateVotingPower = ({
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
-            setModalError(`Undelegate cancelled`)
+            dispatch(setModalAlertText({ errorText: `Undelegate cancelled` }))
             return
           }
 
-          setModalError(`Error`)
+          dispatch(setModalAlertText({ errorText: `Error` }))
           return
         }
 
@@ -158,11 +158,11 @@ const UndelegateVotingPower = ({
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
-            setModalError(`Undelegate cancelled`)
+            dispatch(setModalAlertText({ errorText: `Undelegate cancelled` }))
             return
           }
 
-          setModalError(`Error`)
+          dispatch(setModalAlertText({ errorText: `Error` }))
           return
         }
 
@@ -275,10 +275,6 @@ const UndelegateVotingPower = ({
         setDelegateSelected={setUndelegateSelected}
         undelegate={true}
       />
-
-      {modalError.length > 0 && (
-        <ModalAlert errorText={modalError} setModalError={setModalError} />
-      )}
     </>
   )
 }

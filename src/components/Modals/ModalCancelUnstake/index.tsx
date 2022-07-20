@@ -4,6 +4,8 @@ import { ToastSuccess, ToastWarning } from '../../Toastify/toast'
 
 import useStakingContract from '../../../hooks/useStakingContract'
 import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+import { useAppDispatch } from '../../../store/hooks'
+import { setModalAlertText } from '../../../store/reducers/modalAlertText'
 
 import waitTransaction, {
   MetamaskError,
@@ -13,7 +15,6 @@ import waitTransaction, {
 import { Staking } from '../../../constants/tokenAddresses'
 
 import Button from '../../Button'
-import ModalAlert from '../ModalAlert'
 
 import * as S from './styles'
 
@@ -32,9 +33,8 @@ const ModalCancelUnstake = ({
   staking,
   symbol
 }: IModalRequestUnstakeProps) => {
+  const dispatch = useAppDispatch()
   const kacyStake = useStakingContract(Staking)
-
-  const [modalError, setModalError] = React.useState('')
 
   const { trackEventFunction } = useMatomoEcommerce()
 
@@ -42,12 +42,18 @@ const ModalCancelUnstake = ({
     return async (error: MetamaskError, txHash: string) => {
       if (error) {
         if (error.code === 4001) {
-          setModalError(`Request for cancelling unstaking ${symbol} cancelled`)
+          dispatch(
+            setModalAlertText({
+              errorText: `Request for cancelling unstaking ${symbol} cancelled`
+            })
+          )
           return
         }
 
-        setModalError(
-          `Failed to cancel unstaking of ${symbol}. Please try again later.`
+        dispatch(
+          setModalAlertText({
+            errorText: `Failed to cancel unstaking of ${symbol}. Please try again later.`
+          })
         )
         return
       }
@@ -147,10 +153,6 @@ const ModalCancelUnstake = ({
             </a>
           </S.Link> */}
         </S.Content>
-
-        {modalError.length > 0 && (
-          <ModalAlert errorText={modalError} setModalError={setModalError} />
-        )}
       </S.ModalContainer>
     </>
   )

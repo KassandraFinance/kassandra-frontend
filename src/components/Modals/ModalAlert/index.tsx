@@ -1,6 +1,9 @@
 import Image from 'next/image'
 import React from 'react'
 
+import { useAppSelector, useAppDispatch } from '../../../store/hooks'
+import { removeModalAlertText } from '../../../store/reducers/modalAlertText'
+
 import Button from '../../Button'
 
 import errorIcon from '../../../../public/assets/notificationStatus/error.svg'
@@ -9,19 +12,15 @@ import closeIcon from '../../../../public/assets/utilities/close-icon.svg'
 
 import * as S from './styles'
 
-interface IModalAlertProps {
-  errorText: string;
-  solutionText?: string;
-  setModalError: React.Dispatch<React.SetStateAction<string>>;
-}
+const ModalAlert = () => {
+  const dispatch = useAppDispatch()
+  const errorText = useAppSelector(state => state.modalAlertText.errorText)
+  const solutionText = useAppSelector(
+    state => state.modalAlertText.solutionText
+  )
 
-const ModalAlert = ({
-  setModalError,
-  errorText,
-  solutionText = ''
-}: IModalAlertProps) => {
   function handleCloseModal() {
-    setModalError('')
+    dispatch(removeModalAlertText())
   }
 
   return (
@@ -46,11 +45,11 @@ const ModalAlert = ({
 
           <S.Text>{errorText}</S.Text>
 
-          {solutionText.length > 0 && (
+          {solutionText && (
             <>
               <S.SolutionHeading>Possible solution</S.SolutionHeading>
 
-              <S.Text>Try doing something</S.Text>
+              <S.Text>{solutionText}</S.Text>
             </>
           )}
 

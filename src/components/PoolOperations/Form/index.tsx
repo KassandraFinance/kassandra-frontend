@@ -12,7 +12,8 @@ import useERC20Contract, { ERC20 } from '../../../hooks/useERC20Contract'
 import usePoolContract from '../../../hooks/usePoolContract'
 import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
-import { useAppSelector } from '../../../store/hooks'
+import { useAppSelector, useAppDispatch } from '../../../store/hooks'
+import { setModalAlertText } from '../../../store/reducers/modalAlertText'
 
 import web3 from '../../../utils/web3'
 import { priceDollar } from '../../../utils/priceDollar'
@@ -21,7 +22,6 @@ import changeChain, { ChainDetails } from '../../../utils/changeChain'
 import waitTransaction, { MetamaskError, TransactionCallback } from '../../../utils/txWait'
 
 import Button from '../../Button'
-import ModalAlert from '../../Modals/ModalAlert'
 
 import InputTokens from './InputTokens'
 import InputBestValue from './InputBestValue'
@@ -86,6 +86,7 @@ const Form = ({
   typeWithdrawChecked,
   setIsModaWallet
 }: IFormProps) => {
+  const dispatch = useAppDispatch()
   const crpPoolToken = useERC20Contract(crpPoolAddress)
   const corePool = usePoolContract(corePoolAddress)
   const proxy = useProxy(ProxyContract, crpPoolAddress, corePoolAddress)
@@ -111,7 +112,6 @@ const Form = ({
     custom: '2.0',
     isCustom: false
   })
-  const [modalError, setModalError] = React.useState('')
 
   const [swapInAddress, setSwapInAddress] = React.useState('')
   const [swapInAmount, setSwapInAmount] = React.useState(new BigNumber(0))
@@ -838,11 +838,11 @@ const Form = ({
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
-            setModalError(`Approval of ${tokenSymbol} cancelled`)
+            dispatch(setModalAlertText({errorText: `Approval of ${tokenSymbol} cancelled`}))
             return
           }
 
-          setModalError(`Failed to approve ${tokenSymbol}. Please try again later.`)
+          dispatch(setModalAlertText({errorText: `Failed to approve ${tokenSymbol}. Please try again later.`}))
           return
         }
 
@@ -910,11 +910,11 @@ const Form = ({
           trackCancelBuying()
 
           if (error.code === 4001) {
-            setModalError(`Investment in ${tokenSymbol} cancelled`)
+            dispatch(setModalAlertText({errorText: `Investment in ${tokenSymbol} cancelled`}))
             return
           }
 
-          setModalError(`Failed to invest in ${tokenSymbol}. Please try again later.`)
+          dispatch(setModalAlertText({errorText: `Failed to invest in ${tokenSymbol}. Please try again later.`}))
           return
         }
 
@@ -938,11 +938,11 @@ const Form = ({
           trackCancelBuying()
 
           if (error.code === 4001) {
-            setModalError(`Withdrawal of ${tokenSymbol} cancelled`)
+            dispatch(setModalAlertText({errorText: `Withdrawal of ${tokenSymbol} cancelled`}))
             return
           }
 
-          setModalError(`Failed to withdraw ${tokenSymbol}. Please try again later.`)
+          dispatch(setModalAlertText({errorText: `Failed to withdraw ${tokenSymbol}. Please try again later.`}))
           return
         }
 
@@ -964,11 +964,11 @@ const Form = ({
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
-            setModalError(`Swap of ${tokenInSymbol} to ${tokenOutSymbol} cancelled`)
+            dispatch(setModalAlertText({errorText: `Swap of ${tokenInSymbol} to ${tokenOutSymbol} cancelled`}))
             return
           }
 
-          setModalError(`Failed to swap ${tokenInSymbol} to ${tokenOutSymbol}. Please try again later.`)
+          dispatch(setModalAlertText({errorText: `Failed to swap ${tokenInSymbol} to ${tokenOutSymbol}. Please try again later.`}))
           return
         }
 
@@ -1124,7 +1124,7 @@ const Form = ({
           default:
         }
       } catch (error) {
-        setModalError('Could not connect with the Blockchain!')
+        dispatch(setModalAlertText({errorText: 'Could not connect with the Blockchain!'}))
       }
     }, [tokenAddress2Index])
 
@@ -1410,14 +1410,6 @@ const Form = ({
           />
         )
       )}
-
-
-      {modalError.length > 0 &&
-       (
-        <ModalAlert errorText={modalError} setModalError={setModalError} />
-       )
-      }
-
     </S.FormContainer >
   )
 }
