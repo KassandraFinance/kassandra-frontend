@@ -105,7 +105,6 @@ const Profile = () => {
   const [cardstakesPool, setCardStakesPool] = React.useState<IKacyLpPool[]>([])
   const [myFunds, setMyFunds] = React.useState<ImyFundsType>({})
   const [hasEthereumProvider, setHasEthereumProvider] = React.useState(false)
-  const [totalInvestmented, setTotalInvestmented] = React.useState(new Big(0))
   const [totalVotingPower, setTotalVotingPower] = React.useState(
     new BigNumber(0)
   )
@@ -122,6 +121,11 @@ const Profile = () => {
   const [isSelectTab, setIsSelectTab] = React.useState<
     string | string[] | undefined
   >('portfolio')
+  const [priceInDolar, setPriceInDolar] = React.useState({
+    tokenizedFunds: new Big(0),
+    assetsToken: new Big(0),
+    totalInvestmented: new Big(0)
+  })
 
   const router = useRouter()
   const { chainId, userWalletAddress } = useAppSelector(state => state)
@@ -328,24 +332,31 @@ const Profile = () => {
       return
     }
 
-    let tokenValueOnDolar = new Big(0)
+    let tokenAmountInTokenizedFunds = new Big(0)
+    let tokenAmountInAssetsToken = new Big(0)
 
-    if (profileAddress && cardstakesPool.length > 0) {
+    if (profileAddress && cardstakesPool.length > 0 && assetsValueInWallet) {
       cardstakesPool.forEach(pool => {
-          tokenValueOnDolar = tokenValueOnDolar.add(
-          Big(
-            (assetsValueInWallet[pool.address]
-              ? pool.amount.add(assetsValueInWallet[pool.address])
-              : pool.amount
-            ).toString()
-          )
-            .mul(priceToken[pool.symbol])
-            .div(Big(10).pow(18))
-        )
+        const tokenAmount = Big(
+          (assetsValueInWallet[pool.address]
+            ? pool.amount.add(assetsValueInWallet[pool.address])
+            : pool.amount
+          ).toString()
+        ).mul(priceToken[pool.symbol]).div(Big(10).pow(18))
+
+        if (pool.address === myFunds[pool.address]) {
+          tokenAmountInAssetsToken = tokenAmountInAssetsToken.add(tokenAmount)
+        } else {
+          tokenAmountInTokenizedFunds = tokenAmountInTokenizedFunds.add(tokenAmount)
+        }
       })
     }
 
-    setTotalInvestmented(tokenValueOnDolar)
+    setPriceInDolar({
+      assetsToken: tokenAmountInTokenizedFunds,
+      tokenizedFunds: tokenAmountInAssetsToken,
+      totalInvestmented: tokenAmountInTokenizedFunds.add(tokenAmountInAssetsToken)
+    })
   }, [profileAddress, priceToken, assetsValueInWallet, data, chainId])
 
   React.useEffect(() => {
@@ -401,7 +412,7 @@ const Profile = () => {
           <>
             <S.TotalValuesCardsContainer>
               <AnyCardTotal
-                text={String(BNtoDecimal(totalInvestmented, 6, 2, 2) || 0)}
+                text={String(BNtoDecimal(priceInDolar.totalInvestmented, 6, 2, 2) || 0)}
                 TooltipText="The amount in US Dollars that this address has in investments with Kassandra. This considers tokens, funds, LP, and staked assets."
                 textTitle="HOLDINGS"
                 isDolar={true}
@@ -435,6 +446,7 @@ const Profile = () => {
                 cardstakesPool={cardstakesPool}
                 priceToken={priceToken}
                 myFunds={myFunds}
+                priceInDolar={priceInDolar}
               />
             ) : isSelectTab === tabs[1].asPathText ? (
               <AnyCard text="Coming Soon..." />

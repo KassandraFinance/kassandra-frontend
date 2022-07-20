@@ -18,8 +18,15 @@ import { useAppSelector } from '../../../store/hooks'
 
 import { products, ProductDetails } from '../../../constants/tokenAddresses'
 
-import * as S from './styles'
 import { IAssetsValueWalletProps, IKacyLpPool } from '..'
+
+import * as S from './styles'
+
+type IpriceInDolarProps = {
+  tokenizedFunds: Big,
+  assetsToken: Big,
+  totalInvestmented: Big
+}
 
 interface IProfileProps {
   profileAddress: string;
@@ -27,6 +34,7 @@ interface IProfileProps {
   cardstakesPool: IKacyLpPool[];
   priceToken: IPriceToken;
   myFunds: ImyFundsType;
+  priceInDolar: IpriceInDolarProps;
 }
 
 interface ImyFundsType {
@@ -41,25 +49,21 @@ const Portfolio = ({
   assetsValueInWallet,
   cardstakesPool,
   priceToken,
-  myFunds
+  myFunds,
+  priceInDolar
 }: IProfileProps) => {
   const router = useRouter()
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   // eslint-disable-next-line prettier/prettier
-  const [tokenizedFunds, setTokenizedFunds] = React.useState<ProductDetails[]>(
-    []
-  )
-  const [totalBalanceFunds, setTotalBalanceFunds] = React.useState<Big>(Big(0))
-  const [totalDolarInPools, setTotalDolarInPools] = React.useState(new Big(0))
+  const [tokenizedFunds, setTokenizedFunds] = React.useState<ProductDetails[]>([])
+  const [isModalWallet, setIsModalWallet] = React.useState<boolean>(false)
   const [balanceFunds, setBalanceFunds] = React.useState<IBalanceType>({})
   const [amountProdInPool, setAmountProdInPool] =
     React.useState<IAssetsValueWalletProps>({ '': new BigNumber(0) })
-  // eslint-disable-next-line prettier/prettier
   const [cardstakesPoolNew, setCardStakesPoolNew] = React.useState<
     IKacyLpPool[]
   >([])
-  const [isModalWallet, setIsModalWallet] = React.useState<boolean>(false)
 
   React.useEffect(() => {
     setCardStakesPoolNew([])
@@ -115,42 +119,20 @@ const Portfolio = ({
     })
   }, [profileAddress, assetsValueInWallet, router, userWalletAddress])
 
-  React.useEffect(() => {
-    let tokenValueOnDolar = new Big(0)
-
-    if (profileAddress && cardstakesPoolNew.length > 0) {
-      cardstakesPoolNew.forEach(pool => {
-        tokenValueOnDolar = tokenValueOnDolar.add(
-          Big(pool.amount.toString())
-            .mul(priceToken[pool.symbol])
-            .div(Big(10).pow(18))
-        )
-      })
-    }
-
-    if (tokenValueOnDolar.gt(0)) {
-      setTotalDolarInPools(tokenValueOnDolar)
-    }
-  }, [profileAddress, cardstakesPoolNew, priceToken])
-
   return (
     <>
       <S.paddingWrapper>
         <PortfolioHeading
           image={AssetsIcon}
           title="Tokenized Funds"
-          usd={BNtoDecimal(totalBalanceFunds, 6, 2, 2)}
+          usd={BNtoDecimal(priceInDolar.tokenizedFunds, 6, 2, 2)}
           tippy="The amount in US Dollars that this address holds in tokenized funds."
         />
       </S.paddingWrapper>
 
       {tokenizedFunds && tokenizedFunds[0] ? (
         <S.paddingLeftWrapper>
-          <AssetsTable
-            assets={tokenizedFunds}
-            setTotalBalance={setTotalBalanceFunds}
-            balanceFunds={balanceFunds}
-          />
+          <AssetsTable assets={tokenizedFunds} balanceFunds={balanceFunds} />
         </S.paddingLeftWrapper>
       ) : (
         <S.paddingWrapper>
@@ -171,7 +153,7 @@ const Portfolio = ({
         <PortfolioHeading
           image={StakedPoolsIcon}
           title="Assets"
-          usd={BNtoDecimal(totalDolarInPools, 6, 2, 2)}
+          usd={BNtoDecimal(priceInDolar.assetsToken, 6, 2, 2)}
           tippy="The amount in US Dollars that this address holds in KACY and liquidity tokens."
         />
       </S.paddingWrapper>

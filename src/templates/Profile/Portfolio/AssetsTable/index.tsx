@@ -36,12 +36,10 @@ export interface IParamsType {
 
 interface IAssetsTableProps {
   assets: ProductDetails[];
-  setTotalBalance: React.Dispatch<React.SetStateAction<Big>>;
   balanceFunds: IBalanceType;
 }
 
-// eslint-disable-next-line prettier/prettier
-export const AssetsTable = ({ assets, setTotalBalance, balanceFunds }: IAssetsTableProps) => {
+export const AssetsTable = ({ assets, balanceFunds }: IAssetsTableProps) => {
   const router = useRouter()
 
   const [changeDay, setChangeDay] = React.useState<IChangeType>({})
@@ -121,26 +119,6 @@ export const AssetsTable = ({ assets, setTotalBalance, balanceFunds }: IAssetsTa
       }
     )
   }, [data])
-
-  React.useEffect(() => {
-    let total = Big(0)
-
-    assets.forEach(asset => {
-      if (balanceFunds[asset.sipAddress] && price[asset.sipAddress]) {
-        if (balanceFunds[asset.sipAddress].gt(new BigNumber(0))) {
-          total = total.add(
-            Big(balanceFunds[asset.sipAddress].toString())
-              .div(Big(10).pow(18))
-              .mul(Big(price[asset.sipAddress]))
-          )
-        }
-      }
-    })
-
-    if (total.gt(0)) {
-      setTotalBalance(total)
-    }
-  }, [price, assets, balanceFunds])
 
   const Trs = assets.map((asset, index: number) => {
     return (
