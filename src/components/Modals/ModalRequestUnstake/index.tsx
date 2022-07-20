@@ -1,6 +1,6 @@
 import React from 'react'
 import BigNumber from 'bn.js'
-import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
+import { ToastSuccess, ToastWarning } from '../../Toastify/toast'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 import { dateRequestUnstake } from '../../../utils/date'
@@ -14,8 +14,10 @@ import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
 import { Staking } from '../../../constants/tokenAddresses'
 
-import * as S from './styles'
 import Button from '../../Button'
+import ModalAlert from '../ModalAlert'
+
+import * as S from './styles'
 
 interface IModalRequestUnstakeProps {
   modalOpen: boolean;
@@ -39,6 +41,7 @@ const ModalRequestUnstake = ({
   stakedUntil
 }: IModalRequestUnstakeProps) => {
   const [dateWithdraw, setDateWithdraw] = React.useState<number>(0)
+  const [modalError, setModalError] = React.useState('')
   const kacyStake = useStakingContract(Staking)
   const { trackEventFunction } = useMatomoEcommerce()
 
@@ -53,13 +56,14 @@ const ModalRequestUnstake = ({
     return async (error: MetamaskError, txHash: string) => {
       if (error) {
         if (error.code === 4001) {
-          ToastError(`Request for unstaking ${symbol} cancelled`)
+          setModalError(`Request for unstaking ${symbol} cancelled`)
           return
         }
 
-        ToastError(
+        setModalError(
           `Failed to request unstaking of ${symbol}. Please try again later.`
         )
+
         return
       }
 
@@ -133,6 +137,10 @@ const ModalRequestUnstake = ({
           </S.ButtonContainer>
         </S.Content>
       </S.ModalContainer>
+
+      {modalError.length > 0 && (
+        <ModalAlert errorText={modalError} setModalError={setModalError} />
+      )}
     </>
   )
 }
