@@ -1,12 +1,12 @@
 import React, { FormEvent } from 'react'
 import Image from 'next/image'
-import { ToastError } from '../../Toastify/toast'
 import 'tippy.js/dist/tippy.css'
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
 import web3 from '../../../utils/web3'
 
-import { useAppSelector } from '../../../store/hooks'
+import { useAppSelector, useAppDispatch } from '../../../store/hooks'
+import { setModalAlertText } from '../../../store/reducers/modalAlertText'
 
 import Button from '../../Button'
 import UserNFTs from '../../UserNFts'
@@ -43,6 +43,7 @@ const ModalUserEditInfo = ({
   setUserImage,
   setUserData
 }: IModalUserEditInfoProps) => {
+  const dispatch = useAppDispatch()
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
   const inputRefModal = React.useRef<HTMLInputElement>(null)
 
@@ -137,8 +138,27 @@ const ModalUserEditInfo = ({
   }
 
   function handleImagePreview(event: FileList) {
-    if (event[0].size > 300000)
-      return ToastError('Images should be less than 300KB')
+    if (event[0].size > 300000) {
+      dispatch(
+        setModalAlertText({
+          errorText: 'Image is bigger than 300KB.',
+          solutionText: 'Image should be less than 300KB.'
+        })
+      )
+      return
+    }
+
+    const allowedFileTypes = ['image/png', 'image/jpeg', 'image/gif']
+
+    if (allowedFileTypes.indexOf(event[0].type) === -1) {
+      dispatch(
+        setModalAlertText({
+          errorText: 'Wrong image format.',
+          solutionText: 'Image should be jpg, jpeg or png.'
+        })
+      )
+      return
+    }
 
     if (event) {
       const image_as_base64 = URL.createObjectURL(event[0])

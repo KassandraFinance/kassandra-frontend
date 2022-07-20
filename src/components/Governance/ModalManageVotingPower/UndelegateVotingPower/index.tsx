@@ -14,11 +14,12 @@ import waitTransaction, {
   TransactionCallback
 } from '../../../../utils/txWait'
 import substr from '../../../../utils/substr'
-import { useAppSelector } from '../../../../store/hooks'
+import { useAppSelector, useAppDispatch } from '../../../../store/hooks'
+import { setModalAlertText } from '../../../../store/reducers/modalAlertText'
 
 // import { useMatomo } from '@datapunt/matomo-tracker-react'
 import ExternalLink from '../../../ExternalLink'
-import { ToastError, ToastSuccess, ToastWarning } from '../../../Toastify/toast'
+import { ToastSuccess, ToastWarning } from '../../../Toastify/toast'
 import Options from '../Options'
 
 import { BNtoDecimal } from '../../../../utils/numerals'
@@ -44,6 +45,7 @@ const UndelegateVotingPower = ({
   setCurrentModal,
   setModalOpen
 }: IUndelegateVotingPowerProps) => {
+  const dispatch = useAppDispatch()
   const [optionsOpen, setOptionsOpen] = React.useState<boolean>(false)
   const [undelegateSelected, setUndelegateSelected] =
     React.useState<IDateProps>({
@@ -129,11 +131,11 @@ const UndelegateVotingPower = ({
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
-            ToastError(`Undelegate cancelled`)
+            dispatch(setModalAlertText({ errorText: `Undelegate cancelled` }))
             return
           }
 
-          ToastError(`Error`)
+          dispatch(setModalAlertText({ errorText: `Error` }))
           return
         }
 
@@ -156,11 +158,11 @@ const UndelegateVotingPower = ({
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
-            ToastError(`Undelegate cancelled`)
+            dispatch(setModalAlertText({ errorText: `Undelegate cancelled` }))
             return
           }
 
-          ToastError(`Error`)
+          dispatch(setModalAlertText({ errorText: `Error` }))
           return
         }
 
