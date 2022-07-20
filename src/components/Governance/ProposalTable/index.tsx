@@ -15,8 +15,9 @@ import { useAppSelector } from '../../../store/hooks'
 
 import { GET_PROPOSALS } from './graphql'
 
+import ModalAlert from '../../Modals/ModalAlert'
+
 import * as S from './styles'
-import { ToastError } from '../../Toastify/toast'
 
 const statsSecundaryProposalLibColor: { [key: string]: string } = {
   'voting open': '#E843C4',
@@ -56,16 +57,13 @@ export const ProposalTable = () => {
   const [proposalsList, setProposalsList] = React.useState<
     Array<IProposalsListProps>
   >([])
+  const [modalError, setModalError] = React.useState('')
 
   const networksAvailabe = [43113, 43114]
 
   React.useEffect(() => {
-    if (
-      userWalletAddress.length > 0 &&
-      chainId &&
-      !networksAvailabe.includes(chainId)
-    ) {
-      ToastError(
+    if (chainId && !networksAvailabe.includes(chainId)) {
+      setModalError(
         'Change your network to Avalanche to be able to view the proposals.'
       )
       return
@@ -186,6 +184,10 @@ export const ProposalTable = () => {
           ))}
         </tbody>
       </table>
+
+      {modalError.length > 0 && (
+        <ModalAlert errorText={modalError} setModalError={setModalError} />
+      )}
     </S.ProposalTable>
   )
 }
