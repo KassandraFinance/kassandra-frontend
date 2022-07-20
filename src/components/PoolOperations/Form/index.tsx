@@ -130,13 +130,6 @@ const Form = ({
 
   const inputTokenRef = React.useRef<HTMLInputElement>(null)
 
-  // React.useEffect(() => {
-  //   async function teste() {
-  //     corePool.estimatedGas(userWalletAddress, 20).then(response => console.log(response))
-  //   }
-  //   teste()
-  // }, [])
-
   function clearInput() {
     setSwapInAmount(new BigNumber(0))
     setSwapOutAmount([new BigNumber(0)])
@@ -469,6 +462,18 @@ const Form = ({
       return
     }
 
+    async function teste() {
+      console.log('oi');
+      
+      proxy.estimatedGas(
+        userWalletAddress,
+        20,
+        swapInAddress,
+        swapInAmount,
+        new BigNumber('0'))
+          .then((response: any) => console.log(response))
+    }
+
     const calc = async () => {
       try {
         const [
@@ -492,6 +497,10 @@ const Form = ({
             new BigNumber('0'),
             userWalletAddress
           )
+
+          teste()
+
+          console.log()
 
           setSwapOutAmount([newSwapOutAmount])
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
