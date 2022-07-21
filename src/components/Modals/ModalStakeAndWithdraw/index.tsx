@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
 import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
+import { ToastSuccess, ToastWarning } from '../../Toastify/toast'
 
 import { Kacy } from '../../../constants/tokenAddresses'
 
@@ -14,7 +14,8 @@ import waitTransaction, {
   TransactionCallback
 } from '../../../utils/txWait'
 
-import { useAppSelector } from '../../../store/hooks'
+import { useAppSelector, useAppDispatch } from '../../../store/hooks'
+import { setModalAlertText } from '../../../store/reducers/modalAlertText'
 
 import { Staking } from '../../../constants/tokenAddresses'
 import useERC20Contract from '../../../hooks/useERC20Contract'
@@ -47,8 +48,9 @@ const ModalStakeAndWithdraw = ({
   stakeTransaction,
   setStakeTransaction
 }: IModalStakeProps) => {
-  const [isAmount, setIsAmount] = React.useState<boolean>(false)
+  const dispatch = useAppDispatch()
 
+  const [isAmount, setIsAmount] = React.useState<boolean>(false)
   const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
   const [multiplier, setMultiplier] = React.useState<number>(0)
   const [amountStake, setAmountStake] = React.useState<BigNumber>(
@@ -155,11 +157,17 @@ const ModalStakeAndWithdraw = ({
         trackCancelBuying()
 
         if (error.code === 4001) {
-          ToastError(`Staking of ${symbol} cancelled`)
+          dispatch(
+            setModalAlertText({ errorText: `Staking of ${symbol} cancelled` })
+          )
           return
         }
 
-        ToastError(`Failed to stake ${symbol}. Please try again later.`)
+        dispatch(
+          setModalAlertText({
+            errorText: `Failed to stake ${symbol}. Please try again later.`
+          })
+        )
         return
       }
 
@@ -190,11 +198,17 @@ const ModalStakeAndWithdraw = ({
         trackCancelBuying()
 
         if (error.code === 4001) {
-          ToastError(`Unstaking of ${symbol} cancelled`)
+          dispatch(
+            setModalAlertText({ errorText: `Unstaking of ${symbol} cancelled` })
+          )
           return
         }
 
-        ToastError(`Failed to unstake ${symbol}. Please try again later.`)
+        dispatch(
+          setModalAlertText({
+            errorText: `Failed to unstake ${symbol}. Please try again later.`
+          })
+        )
         return
       }
 

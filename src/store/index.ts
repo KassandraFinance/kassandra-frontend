@@ -8,6 +8,7 @@ import periodSelectedReducer from './reducers/periodSelected'
 import poolImagesReducer from './reducers/poolImages'
 import tokenAddress2IndexReducer from './reducers/tokenAddress2Index'
 import performanceValuesReducer from './reducers/performanceValues'
+import modalAlertTextReducer from './reducers/modalAlertText'
 
 export const store = configureStore({
   reducer: {
@@ -18,7 +19,8 @@ export const store = configureStore({
     poolImages: poolImagesReducer,
     tokenAddress2Index: tokenAddress2IndexReducer,
     performanceValues: performanceValuesReducer,
-    periodSelected: periodSelectedReducer
+    periodSelected: periodSelectedReducer,
+    modalAlertText: modalAlertTextReducer
   }
 })
 

@@ -11,6 +11,7 @@ import DropdownInvest from '../Dropdown'
 import ModalLogOut from '../Modals/ModalLogOut'
 import ModalWalletConnect from '../Modals/ModalWalletConnect'
 import ModalSocialMediaMobile from '../Modals/ModalSocialMediaMobile'
+import ModalAlert from '../Modals/ModalAlert'
 
 import options from '../../../public/assets/utilities/options.svg'
 import kacy64 from '../../../public/assets/logos/kacy-64.svg'
@@ -33,6 +34,7 @@ const Header = () => {
   const { trackEventFunction } = useMatomoEcommerce()
 
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
+  const isError = useAppSelector(state => state.modalAlertText.errorText)
 
   return (
     <>
@@ -58,74 +60,78 @@ const Header = () => {
           <DropdownInvest
             nameOnHeader="Investors"
             linkPage={[
-              { name: 'Explore Funds', href: '/explore' },
-              { name: 'Stake/Farm', href: '/farm' },
-              { name: 'My Portfolio', href: `/profile/${userWalletAddress}` }
+              { name: 'Explore', href: '/explore' },
+              { name: 'Farm', href: '/farm' },
+              { name: 'Profile', href: `/profile/${userWalletAddress}` }
             ]}
           />
-          {/* <DropdownInvest
+          <DropdownInvest
             nameOnHeader="Managers"
             linkPage={[
               {
-                name: 'My Managed Funds',
+                name: 'Explore',
+                href: ``,
+                disabled: true
+              },
+              {
+                name: 'Create',
+                href: ``,
+                disabled: true
+              },
+              {
+                name: 'Manage',
+                href: ``,
+                disabled: true
+              },
+              {
+                name: 'Profile',
                 href: `/profile/${userWalletAddress}?tab=managed-funds`
               }
             ]}
-          /> */}
-          <S.MenuLinkDisable>
-            Managers <img src="/assets/utilities/arrow-down-thin.svg" />
-          </S.MenuLinkDisable>
-          {/* <Link href="/explore" passHref>
-            <S.MenuLink
-              onClick={() =>
-                trackEventFunction('click-on-link', 'explore', 'header')
+          />
+          <DropdownInvest
+            nameOnHeader="Governance"
+            adaptToResponsiveSize={true}
+            linkPage={[
+              {
+                name: 'Overview',
+                href: '/gov'
+              },
+              {
+                name: 'Proposals',
+                href: '/gov/proposals'
+              },
+              {
+                name: 'Stake',
+                href: `/farm`
+              },
+              {
+                name: 'Forum',
+                href: `http://gov.kassandra.finance/`,
+                newTab: true
+              },
+              {
+                name: 'Profile',
+                href: `/profile/${userWalletAddress}?tab=governance-data`
               }
-            >
-              Invest
-            </S.MenuLink>
-          </Link> */}
-          {/* <Link href="/farm" passHref>
-            <S.MenuLink
-              onClick={() =>
-                trackEventFunction('click-on-link', 'stake-farm', 'header')
-              }
-            >
-              Stake/Farm
-            </S.MenuLink>
-        </Link>*/}
-          {process.env.NEXT_PUBLIC_VOTE === '1' ||
-          process.env.NEXT_PUBLIC_VOTE === '2' ? (
+            ]}
+          />
+          <S.MenuContainer>
             <DropdownInvest
-              nameOnHeader="Governance"
-              adaptToResponsiveSize={true}
+              nameOnHeader="Learn"
               linkPage={[
                 {
-                  name: 'Overview',
-                  href: '/gov'
+                  name: 'About',
+                  href: `/about`
                 },
                 {
-                  name: 'Forum',
-                  href: `/`
-                },
-                {
-                  name: 'My Gov. Data',
-                  href: `/profile/${userWalletAddress}?tab=governance-data`
+                  name: 'Blog',
+                  href: `https://kassandrafoundation.medium.com/`,
+                  newTab: true
                 }
               ]}
             />
-          ) : (
-            <S.MenuLinkDisable>Governance</S.MenuLinkDisable>
-          )}
-          <Link href="/about" passHref>
-            <S.MenuLink
-              id="aboutMobile"
-              onClick={() =>
-                trackEventFunction('click-on-link', 'about', 'header')
-              }
-            >
-              About
-            </S.MenuLink>
-          </Link>
+          </S.MenuContainer>
           {userWalletAddress ? (
             <Button
               className="connect-wallet"
@@ -254,6 +260,8 @@ const Header = () => {
         setModalOpen={setIsModalLogout}
         userWalletAddress={userWalletAddress}
       />
+
+      {isError && <ModalAlert />}
     </>
   )
 }

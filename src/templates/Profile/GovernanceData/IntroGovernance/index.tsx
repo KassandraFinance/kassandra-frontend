@@ -34,9 +34,11 @@ const IntroGovernance = ({
   userDelegatingTotal
 }: IIntroWalletAddressProps) => {
   // eslint-disable-next-line prettier/prettier
-  const [isModalManageVotingPower, setIsModalManageVotingPower] = React.useState<boolean>(false)
+  const [isModalManageVotingPower, setIsModalManageVotingPower] =
+    React.useState<boolean>(false)
   // eslint-disable-next-line prettier/prettier
-  const [isModalWalletConnect, setIsModalWalletConnect] = React.useState<boolean>(false)
+  const [isModalWalletConnect, setIsModalWalletConnect] =
+    React.useState<boolean>(false)
   // eslint-disable-next-line prettier/prettier
   const [totalKacyStaked, setTotalKacyStaked] = React.useState<BigNumber>(
     new BigNumber(0)
@@ -71,7 +73,7 @@ const IntroGovernance = ({
           <S.AddressTotalVotingPower>
             <span className="address-total-voting-power">
               TOTAL KACY STAKED
-              <Tippy content="Voting power allows you to create and vote on proposals. To obtain voting power you need to stake your $KACY tokens.">
+              <Tippy content="The amount of KACY that this address has staked.">
                 <S.Tooltip>
                   <Image
                     src={tooltip}

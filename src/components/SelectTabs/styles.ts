@@ -20,29 +20,30 @@ interface ITabsButtonProps {
 export const TabsButton = styled.button<ITabsButtonProps>`
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 1rem;
   padding: 1.6rem;
 
   background-color: ${props =>
-    props.isActiveTab ? 'rgba(255, 255, 255, 0.1)' : 'transparent'};
+    props.isActiveTab ? 'rgba(255, 255, 255, 0.05)' : 'transparent'};
   border: 0;
   border-top-left-radius: 0.4rem;
   border-top-right-radius: 0.4rem;
   border: ${props =>
-    props.isActiveTab ? '0.1rem solid rgba(255, 255, 255, 0.1)' : 'none'};
+    props.isActiveTab
+      ? '0.1rem solid rgba(255, 255, 255, 0.08)'
+      : '0.1rem solid transparent'};
   border-bottom: none;
 
   font-family: 'Rubik', sans-serif;
   color: ${props => (props.isActiveTab ? '#ffffff' : '#c4c4c4')};
-  font-size: ${theme.font.sizes.font18};
-  font-weight: ${props =>
-    props.isActiveTab ? theme.font.weight.medium : theme.font.weight.light};
+  font-size: ${theme.font.sizes.font16};
+  font-weight: ${theme.font.weight.normal};
 
   cursor: pointer;
 
-  @media (max-width: 768px) {
-    font-weight: ${props =>
-      props.isActiveTab ? theme.font.weight.medium : theme.font.weight.light};
+  span {
+    display: flex;
+    align-items: center;
   }
 
   @media (max-width: 580px) {

@@ -21,6 +21,7 @@ export const AssetsHeaderContent = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 3rem;
+  height: 29.6rem;
 
   border-radius: 1.2rem;
   box-shadow: -1px 2px 24px 4px rgba(0, 0, 0, 0.2);

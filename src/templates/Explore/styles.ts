@@ -25,9 +25,19 @@ export const ExploreContainer = styled.div`
 export const TitleContainer = styled.div`
   margin-bottom: 4.7rem;
 `
+export const LoadingContainer = styled.div`
+  margin-top: 18rem;
+  margin-bottom: 18rem;
+`
 
-export const CardContainer = styled.div`
-  display: flex;
+interface ICardContainerProps {
+  loading: boolean;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const CardContainer = styled.div<ICardContainerProps>`
+  display: ${props => (props.loading ? 'none' : 'flex')};
+
   gap: 7.8rem;
 
   margin-top: 2.4rem;

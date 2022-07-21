@@ -11,12 +11,12 @@ import {
 } from '../../../constants/tokenAddresses'
 
 import useGovernance from '../../../hooks/useGovernance'
-import { useAppSelector } from '../../../store/hooks'
+import { useAppSelector, useAppDispatch } from '../../../store/hooks'
+import { setModalAlertText } from '../../../store/reducers/modalAlertText'
 
 import { GET_PROPOSALS } from './graphql'
 
 import * as S from './styles'
-import { ToastError } from '../../Toastify/toast'
 
 const statsSecundaryProposalLibColor: { [key: string]: string } = {
   'voting open': '#E843C4',
@@ -50,6 +50,7 @@ interface IProposalsListProps {
 }
 
 export const ProposalTable = () => {
+  const dispatch = useAppDispatch()
   const { userWalletAddress, chainId } = useAppSelector(state => state)
 
   // eslint-disable-next-line prettier/prettier
@@ -60,13 +61,12 @@ export const ProposalTable = () => {
   const networksAvailabe = [43113, 43114]
 
   React.useEffect(() => {
-    if (
-      userWalletAddress.length > 0 &&
-      chainId &&
-      !networksAvailabe.includes(chainId)
-    ) {
-      ToastError(
-        'Change your network to Avalanche to be able to view the proposals.'
+    if (chainId && !networksAvailabe.includes(chainId)) {
+      dispatch(
+        setModalAlertText({
+          errorText:
+            'Change your network to Avalanche to be able to view the proposals.'
+        })
       )
       return
     }

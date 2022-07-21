@@ -11,9 +11,11 @@ import useProxy from '../../../hooks/useProxy'
 import useERC20Contract, { ERC20 } from '../../../hooks/useERC20Contract'
 import usePoolContract from '../../../hooks/usePoolContract'
 import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
-import { usePoolTokens } from '../../../context/PoolTokensContext'
+import useYieldYak from '../../../hooks/useYieldYak'
 
-import { useAppSelector } from '../../../store/hooks'
+import { useAppSelector, useAppDispatch } from '../../../store/hooks'
+import { setModalAlertText } from '../../../store/reducers/modalAlertText'
+import { usePoolTokens } from '../../../context/PoolTokensContext'
 
 import web3 from '../../../utils/web3'
 import { priceDollar } from '../../../utils/priceDollar'
@@ -27,7 +29,7 @@ import InputTokens from './InputTokens'
 import InputBestValue from './InputBestValue'
 import TransactionSettings from './TransactionSettings'
 
-import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
+import { ToastSuccess, ToastWarning } from '../../Toastify/toast'
 
 import { Titles } from '..'
 
@@ -85,15 +87,6 @@ const Form = ({
   typeWithdrawChecked,
   setIsModaWallet
 }: IFormProps) => {
-  const crpPoolToken = useERC20Contract(crpPoolAddress)
-  const corePool = usePoolContract(corePoolAddress)
-  const proxy = useProxy(ProxyContract, crpPoolAddress, corePoolAddress)
-
-  const { chainId, fees, tokenAddress2Index, userWalletAddress } = useAppSelector(state => state)
-  const { poolTokens: poolTokensArray } = usePoolTokens()
-
-  const { trackBuying, trackBought, trackCancelBuying } = useMatomoEcommerce();
-
   const [walletConnect, setWalletConnect] = React.useState<string | null>(null)
   const [approvals, setApprovals] = React.useState<Approvals>({
     Withdraw: [],
@@ -134,6 +127,19 @@ const Form = ({
   const { trackEventFunction } = useMatomoEcommerce()
 
   const inputTokenRef = React.useRef<HTMLInputElement>(null)
+
+  const dispatch = useAppDispatch()
+
+  const { chainId, fees, tokenAddress2Index, userWalletAddress } = useAppSelector(state => state)
+
+  const { poolTokens: poolTokensArray } = usePoolTokens()
+
+  const { trackBuying, trackBought, trackCancelBuying } = useMatomoEcommerce();
+
+  const proxy = useProxy(ProxyContract, crpPoolAddress, corePoolAddress)
+  const crpPoolToken = useERC20Contract(crpPoolAddress)
+  const corePool = usePoolContract(corePoolAddress)
+  const { convertBalanceYRTtoWrap, convertBalanceWrappedYRT } = useYieldYak()
 
   function clearInput() {
     setSwapInAmount(new BigNumber(0))
@@ -179,18 +185,25 @@ const Form = ({
         }
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
+        let investAmoutOutCalc: BigNumber = investAmoutOut
+        if (invertToken[swapOutAddress]) {
+          investAmoutOutCalc = await convertBalanceWrappedYRT(investAmoutOut, invertToken[swapOutAddress])
+        }
         const newAmountInvestIn = await corePool.calcSingleInGivenPoolOut(
           swapInTotalPoolBalance,
           swapInDenormalizedWeight,
           poolSupply,
           poolTotalDenormalizedWeight,
-          investAmoutOut,
+          investAmoutOutCalc,
           poolSwapFee
         )
-
+        let investAmoutInNormalized: BigNumber = newAmountInvestIn
+        if (invertToken[swapInAddress]) {
+          investAmoutInNormalized = await convertBalanceYRTtoWrap(newAmountInvestIn, invertToken[swapInAddress])
+        }
         if (inputTokenRef.current && newAmountInvestIn) {
           inputTokenRef.current.value = BNtoDecimal(
-            newAmountInvestIn,
+            investAmoutInNormalized,
             poolTokensArray[tokenInIndex]
               ? poolTokensArray[tokenInIndex]?.decimals.toNumber()
               : 18
@@ -235,7 +248,7 @@ const Form = ({
           pow = pow.add(new BigNumber(1));
         }
       }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       const errorStr = error.toString()
       if (userWalletAddress.length > 0) {
@@ -264,23 +277,31 @@ const Form = ({
         corePool.denormalizedWeight(invertToken[swapOutAddress] ?? swapOutAddress),
         corePool.swapFee()
       ])
+      let swapAmoutOutCalc: BigNumber = swapAmountOut
+      if (invertToken[swapOutAddress]) {
+        swapAmoutOutCalc = await convertBalanceWrappedYRT(swapAmountOut, invertToken[swapOutAddress])
+      }
       const [newSwapInAmount] = await Promise.all([
         corePool.calcInGivenOut(
           swapInTotalPoolBalance,
           swapInDenormalizedWeight,
           swapOutTotalPoolBalance,
           swapOutDenormalizedWeight,
-          swapAmountOut,
+          swapAmoutOutCalc,
           poolSwapFee
         )
       ])
-
       const exchangeRateIn = await proxy.exchangeRate(corePoolAddress, invertToken[swapInAddress] ?? swapInAddress)
       const exchangeRateOut = await proxy.exchangeRate(corePoolAddress, invertToken[swapOutAddress] ?? swapOutAddress)
+
       const swapIn = newSwapInAmount.mul(exchangeRateOut).div(exchangeRateIn)
+      let swapAmoutInNormalized: BigNumber = swapIn
+      if (invertToken[swapInAddress]) {
+        swapAmoutInNormalized = await convertBalanceYRTtoWrap(swapIn, invertToken[swapInAddress])
+      }
       if (inputTokenRef.current && swapIn) {
         inputTokenRef.current.value = BNtoDecimal(
-          swapIn,
+          swapAmoutInNormalized,
           poolTokensArray[tokenInIndex]
             ? poolTokensArray[tokenInIndex]?.decimals.toNumber()
             : 18
@@ -488,8 +509,8 @@ const Form = ({
         userWalletAddress,
         swapInAddress,
         new BigNumber('0'))
-          .then((response: 
-            { 
+          .then((response:
+            {
               feeNumber: number,
               feeString: string
             }) => setGasFee(prevState => ({...prevState, feeString: response.feeString, feeNumber: response.feeNumber})))
@@ -525,17 +546,23 @@ const Form = ({
           setSwapOutAmount([newSwapOutAmount])
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
-
+          let investAmoutInCalc: BigNumber = swapInAmount
+          if (invertToken[swapInAddress]) {
+            investAmoutInCalc = await convertBalanceWrappedYRT(swapInAmount, invertToken[swapInAddress])
+          }
           const newSwapOutPrice = await corePool.calcPoolOutGivenSingleIn(
             swapInTotalPoolBalance,
             swapInDenormalizedWeight,
             poolSupply,
             poolTotalDenormalizedWeight,
-            swapInAmount,
+            investAmoutInCalc,
             poolSwapFee
           )
-
-          setSwapOutAmount([newSwapOutPrice])
+          let investAmoutOutNormalized: BigNumber = newSwapOutPrice
+          if (invertToken[swapOutAddress]) {
+            investAmoutOutNormalized = await convertBalanceYRTtoWrap(newSwapOutPrice, invertToken[swapOutAddress])
+          }
+          setSwapOutAmount([investAmoutOutNormalized])
 
           if (userWalletAddress.length > 0) {
             const errorStr = error.toString()
@@ -577,7 +604,7 @@ const Form = ({
             pow = pow.add(new BigNumber(1));
           }
         }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         const errorStr = error.toString()
         if (userWalletAddress.length > 0) {
@@ -628,14 +655,17 @@ const Form = ({
           corePool.denormalizedWeight(invertToken[swapOutAddress] ?? swapOutAddress),
           corePool.swapFee()
         ])
-
+        let swapAmoutInCalc: BigNumber = swapInAmount
+        if (invertToken[swapInAddress]) {
+          swapAmoutInCalc = await convertBalanceWrappedYRT(swapInAmount, invertToken[swapInAddress])
+        }
         const [newSwapOutAmount] = await Promise.all([
           corePool.calcOutGivenIn(
             swapInTotalPoolBalance,
             swapInDenormalizedWeight,
             swapOutTotalPoolBalance,
             swapOutDenormalizedWeight,
-            swapInAmount,
+            swapAmoutInCalc,
             poolSwapFee
           )
         ])
@@ -644,8 +674,11 @@ const Form = ({
         const exchangeRateOut = await proxy.exchangeRate(corePoolAddress, invertToken[swapOutAddress] ?? swapOutAddress)
 
         const swapOut = newSwapOutAmount.mul(exchangeRateIn).div(exchangeRateOut)
-
-        setSwapOutAmount([swapOut])
+        let swapAmoutOutNormalized: BigNumber = swapOut
+        if (invertToken[swapOutAddress]) {
+          swapAmoutOutNormalized = await convertBalanceYRTtoWrap(swapOut, invertToken[swapOutAddress])
+        }
+        setSwapOutAmount([swapAmoutOutNormalized])
         try {
           if (userWalletAddress.length > 0 && swapInAmount.gt(new BigNumber(0))) {
             await proxy.trySwapExactAmountIn(swapInAddress, swapInAmount, swapOutAddress, userWalletAddress)
@@ -750,13 +783,18 @@ const Form = ({
       if (swapOutAddress === '') {
         const newSwapOutAmount = await Promise.all(
           poolTokensArray.slice(0, -1).map(async (item: { address: string }) => {
-            const swapOutTotalPoolBalance = await corePool.balance(invertToken[item.address] ?? item.address)
-            return getWithdrawAmount(
+            const mapTokenAddress = invertToken[item.address]
+            const swapOutTotalPoolBalance = await corePool.balance(mapTokenAddress ?? item.address)
+            const withdrawAmout = getWithdrawAmount(
               poolSupply,
               swapInAmount,
               swapOutTotalPoolBalance,
               poolExitFee
             )
+            if (mapTokenAddress) {
+              return await convertBalanceYRTtoWrap(withdrawAmout, mapTokenAddress)
+            }
+            return withdrawAmout
           })
         )
 
@@ -821,7 +859,11 @@ const Form = ({
             poolExitFee
           ),
         ])
-        setSwapOutAmount([SingleSwapOutAmount])
+        let withdrawAmoutOut: BigNumber = SingleSwapOutAmount
+        if (invertToken[swapOutAddress]) {
+          withdrawAmoutOut = await convertBalanceYRTtoWrap(withdrawAmoutOut, invertToken[swapOutAddress])
+        }
+        setSwapOutAmount([withdrawAmoutOut])
       }
       catch (e) {
         if (userWalletAddress.length > 0) {
@@ -877,11 +919,11 @@ const Form = ({
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
-            ToastError(`Approval of ${tokenSymbol} cancelled`)
+            dispatch(setModalAlertText({errorText: `Approval of ${tokenSymbol} cancelled`}))
             return
           }
 
-          ToastError(`Failed to approve ${tokenSymbol}. Please try again later.`)
+          dispatch(setModalAlertText({errorText: `Failed to approve ${tokenSymbol}. Please try again later.`}))
           return
         }
 
@@ -949,11 +991,11 @@ const Form = ({
           trackCancelBuying()
 
           if (error.code === 4001) {
-            ToastError(`Investment in ${tokenSymbol} cancelled`)
+            dispatch(setModalAlertText({errorText: `Investment in ${tokenSymbol} cancelled`}))
             return
           }
 
-          ToastError(`Failed to invest in ${tokenSymbol}. Please try again later.`)
+          dispatch(setModalAlertText({errorText: `Failed to invest in ${tokenSymbol}. Please try again later.`}))
           return
         }
 
@@ -977,11 +1019,11 @@ const Form = ({
           trackCancelBuying()
 
           if (error.code === 4001) {
-            ToastError(`Withdrawal of ${tokenSymbol} cancelled`)
+            dispatch(setModalAlertText({errorText: `Withdrawal of ${tokenSymbol} cancelled`}))
             return
           }
 
-          ToastError(`Failed to withdraw ${tokenSymbol}. Please try again later.`)
+          dispatch(setModalAlertText({errorText: `Failed to withdraw ${tokenSymbol}. Please try again later.`}))
           return
         }
 
@@ -1003,11 +1045,11 @@ const Form = ({
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
-            ToastError(`Swap of ${tokenInSymbol} to ${tokenOutSymbol} cancelled`)
+            dispatch(setModalAlertText({errorText: `Swap of ${tokenInSymbol} to ${tokenOutSymbol} cancelled`}))
             return
           }
 
-          ToastError(`Failed to swap ${tokenInSymbol} to ${tokenOutSymbol}. Please try again later.`)
+          dispatch(setModalAlertText({errorText: `Failed to swap ${tokenInSymbol} to ${tokenOutSymbol}. Please try again later.`}))
           return
         }
 
@@ -1163,7 +1205,7 @@ const Form = ({
           default:
         }
       } catch (error) {
-        ToastError('Could not connect with the Blockchain!')
+        dispatch(setModalAlertText({errorText: 'Could not connect with the Blockchain!'}))
       }
     }, [tokenAddress2Index])
 

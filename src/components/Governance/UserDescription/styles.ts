@@ -93,7 +93,7 @@ interface IisSelectSeeMoreProps {
   isSelectSeeMore: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const UserProfileContent = styled.div<IisSelectSeeMoreProps>`
   display: flex;
   flex-direction: column;
@@ -200,12 +200,14 @@ export const DescriptionManagerInfo = styled.p`
   font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.light};
   line-height: 2.1rem;
+
+  white-space: pre-wrap;
 `
 interface IisSeeMoreProps {
   isSeeMore: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const ButtonSeeMore = styled.button<IisSeeMoreProps>`
   position: relative;
 
@@ -238,7 +240,7 @@ interface ISocialIconProps {
   isActiveSocial?: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const SocialIcon = styled.a<ISocialIconProps>`
   display: flex;
   align-items: center;
@@ -255,6 +257,7 @@ export const SocialIcon = styled.a<ISocialIconProps>`
   opacity: ${props => (props.isActiveSocial ? 'none' : '50%')};
 
   pointer-events: ${props => (props.isActiveSocial ? 'auto' : 'none')};
+  cursor: pointer;
 
   &:hover {
     border: 1.5px solid rgba(255, 255, 255, 0.3);

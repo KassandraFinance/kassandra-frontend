@@ -58,10 +58,15 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
     : userWalletUrl
 
   React.useEffect(() => {
-    if (!userWalletUrl) return
+    if (!walletUserString) return
 
-    fetch(`/api/profile/${userWalletUrl}`)
-      .then(res => res.json())
+    fetch(`/api/profile/${walletUserString}`)
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+        throw new Error('Something went wrong')
+      })
       .then(data => {
         const { image, ...profile } = data
 
@@ -71,7 +76,18 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
         }),
           setImageUser({ url: image, isNFT: data.isNFT })
       })
-  }, [userWalletAddress, userWalletUrl, isOpenModal])
+      .catch(error => {
+        setUserData({
+          nickname: '',
+          twitter: '',
+          website: '',
+          telegram: '',
+          discord: '',
+          description: ''
+        }),
+          setImageUser({ url: '', isNFT: false })
+      })
+  }, [isOpenModal, userWalletUrl])
 
   React.useEffect(() => {
     if (window.screen.width > 768) {
@@ -174,23 +190,24 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
             </S.UserAddressContent>
             <ul>
               <li>
-                <S.SocialIcon
-                  href={`https://discord.com/${userData.discord}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  isActiveSocial={
-                    userData.discord !== '' &&
-                    userData.discord !== undefined &&
-                    userData.discord !== null
-                  }
-                >
-                  <Image
-                    src="/assets/socialMidia/discord.svg"
-                    alt="Follow our Twitter feed"
-                    width={15}
-                    height={15}
-                  />
-                </S.SocialIcon>
+                <CopyToClipboard text={userData.discord}>
+                  <S.SocialIcon
+                    as="button"
+                    isActiveSocial={
+                      userData.discord !== '' &&
+                      userData.discord !== undefined &&
+                      userData.discord !== null
+                    }
+                    onClick={() => ToastInfo('Copy Id')}
+                  >
+                    <Image
+                      src="/assets/socialMidia/discord.svg"
+                      alt="Follow our Twitter feed"
+                      width={15}
+                      height={15}
+                    />
+                  </S.SocialIcon>
+                </CopyToClipboard>
               </li>
               <li>
                 <S.SocialIcon
@@ -213,7 +230,7 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
               </li>
               <li>
                 <S.SocialIcon
-                  href={`https://telegram.com/${userData.telegram}`}
+                  href={`https://t.me/${userData.telegram}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   isActiveSocial={
@@ -252,7 +269,7 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
             </ul>
             {isConnectWallet && (
               <S.EditInfoButton onClick={() => setIsOpenModal(true)}>
-                Edit info
+                Edit Info
                 <Image
                   src="/assets/utilities/edit-icon.svg"
                   alt="Follow our Twitter feed"
@@ -266,8 +283,8 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
         <S.BarBottom />
         <S.ManagerInfo>
           <p className="titleManagerInfo">
-            MANAGER INFO{' '}
-            <Tippy content="Lorem ipsum">
+            PROFILE DESCRIPTION{' '}
+            <Tippy content="Users may choose to add a profile description linked to their own wallet. Kassandra does not hold any responsibility for wrong information, this section does not constitute an endorsement, guarantee, warranty, or recommendation by Kassandra. All information is displayed exactly as provided by the owner of the wallet address.">
               <span>
                 <Image
                   src={infoGrayIcon}

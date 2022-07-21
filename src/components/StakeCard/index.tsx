@@ -30,11 +30,12 @@ import waitTransaction, {
   TransactionCallback
 } from '../../utils/txWait'
 
-import { useAppSelector } from '../../store/hooks'
+import { useAppSelector, useAppDispatch } from '../../store/hooks'
+import { setModalAlertText } from '../../store/reducers/modalAlertText'
 
 import 'tippy.js/dist/tippy.css'
 import Button from '../Button'
-import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
+import { ToastSuccess, ToastWarning } from '../Toastify/toast'
 import ModalRequestUnstake from '../Modals/ModalRequestUnstake'
 import ModalCancelUnstake from '../Modals/ModalCancelUnstake'
 import ModalWalletConnect from '../Modals/ModalWalletConnect'
@@ -97,6 +98,8 @@ const StakeCard = ({
   isLP,
   address
 }: IStakingProps) => {
+  const dispatch = useAppDispatch()
+
   const [isDetails, setIsDetails] = React.useState<boolean>(false)
   const [isModalStake, setIsModalStake] = React.useState<boolean>(false)
   const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
@@ -202,11 +205,17 @@ const StakeCard = ({
     return async (error: MetamaskError, txHash: string) => {
       if (error) {
         if (error.code === 4001) {
-          ToastError(`Approval of ${symbol} cancelled`)
+          dispatch(
+            setModalAlertText({ errorText: `Approval of ${symbol} cancelled` })
+          )
           return
         }
 
-        ToastError(`Failed to approve ${symbol}. Please try again later.`)
+        dispatch(
+          setModalAlertText({
+            errorText: `Failed to approve ${symbol}. Please try again later.`
+          })
+        )
         return
       }
 
@@ -225,11 +234,15 @@ const StakeCard = ({
     return async (error: MetamaskError, txHash: string) => {
       if (error) {
         if (error.code === 4001) {
-          ToastError(`Cancelled reward claim`)
+          dispatch(setModalAlertText({ errorText: `Cancelled reward claim` }))
           return
         }
 
-        ToastError(`Failed to claim your rewards. Please try again later.`)
+        dispatch(
+          setModalAlertText({
+            errorText: `Failed to claim your rewards. Please try again later.`
+          })
+        )
         return
       }
 

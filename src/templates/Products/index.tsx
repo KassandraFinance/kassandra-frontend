@@ -132,7 +132,7 @@ const Products = ({ product }: Input) => {
   const { trackProductPageView, trackEventFunction } = useMatomoEcommerce()
   const dispatch = useAppDispatch()
 
-  const yieldYak = useYieldYak()
+  const { convertBalanceYRTtoWrap, getDecimals } = useYieldYak()
 
   const { data } = useSWR([GET_INFO_POOL], query =>
     request(SUBGRAPH_URL, query, {
@@ -165,9 +165,9 @@ const Products = ({ product }: Input) => {
     const connect = localStorage.getItem('walletconnect')
 
     if (providerMetaMask || connect) {
-      const decimals: string = await yieldYak.getDecimals(token)
+      const decimals: string = await getDecimals(token)
 
-      const tokensShares = await yieldYak.getDepositTokensForShares(
+      const tokensShares = await convertBalanceYRTtoWrap(
         new BigNumber(Big(balance).mul(Big('10').pow(18)).toFixed(0, 0)),
         token
       )
@@ -494,10 +494,8 @@ const Products = ({ product }: Input) => {
               <ScrollUpButton />
               <Change crpPoolAddress={product.sipAddress} />
               <MyAsset
-                crpPoolAddress={product.sipAddress}
+                product={product}
                 price={infoPool.price}
-                symbol={product.symbol}
-                icon={product.fundIcon}
                 pid={typeof product.pid === 'undefined' ? -1 : product.pid}
                 decimals={infoPool.decimals}
               />

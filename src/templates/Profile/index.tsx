@@ -5,22 +5,23 @@ import BigNumber from 'bn.js'
 import useSWR from 'swr'
 import request from 'graphql-request'
 import Big from 'big.js'
+import { toChecksumAddress } from 'web3-utils'
 
-import useERC20Contract, { ERC20 } from '../../hooks/useERC20Contract'
+import { ERC20 } from '../../hooks/useERC20Contract'
 import useStakingContract from '../../hooks/useStakingContract'
 import usePriceLP from '../../hooks/usePriceLP'
 import { useAppSelector } from '../../store/hooks'
+import useVotingPower from '../../hooks/useVotingPower'
 
 import { GET_PROFILE } from './graphql'
 import {
   LPDaiAvax,
-  LPKacyAvaxJOE,
-  LPKacyAvaxPNG,
   products,
   Staking,
-  SUBGRAPH_URL
+  SUBGRAPH_URL,
+  chains
 } from '../../constants/tokenAddresses'
-import { allPools } from '../../constants/pools'
+import { LP_KACY_AVAX_PNG, LP_KACY_AVAX_JOE, allPools } from '../../constants/pools'
 
 import Header from '../../components/Header'
 import Breadcrumb from '../../components/Breadcrumb'
@@ -42,6 +43,14 @@ import substr from '../../utils/substr'
 import { BNtoDecimal } from '../../utils/numerals'
 
 import * as S from './styles'
+
+// eslint-disable-next-line prettier/prettier
+declare let window: {
+  ethereum: any
+  location: {
+    reload: (noCache?: boolean) => void
+  }
+}
 
 const tabs = [
   {
@@ -96,7 +105,6 @@ const Profile = () => {
   const [cardstakesPool, setCardStakesPool] = React.useState<IKacyLpPool[]>([])
   const [myFunds, setMyFunds] = React.useState<ImyFundsType>({})
   const [hasEthereumProvider, setHasEthereumProvider] = React.useState(false)
-  const [totalInvestmented, setTotalInvestmented] = React.useState(new Big(0))
   const [totalVotingPower, setTotalVotingPower] = React.useState(
     new BigNumber(0)
   )
@@ -113,15 +121,18 @@ const Profile = () => {
   const [isSelectTab, setIsSelectTab] = React.useState<
     string | string[] | undefined
   >('portfolio')
-
-  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
+  const [priceInDolar, setPriceInDolar] = React.useState({
+    tokenizedFunds: new Big(0),
+    assetsToken: new Big(0),
+    totalInvestmented: new Big(0)
+  })
 
   const router = useRouter()
+  const { chainId, userWalletAddress } = useAppSelector(state => state)
 
+  const votingPower = useVotingPower(Staking)
   const { userInfo } = useStakingContract(Staking)
-  const { getReserves } = usePriceLP()
-  const lpToken = useERC20Contract(LPKacyAvaxPNG)
-  const lpJoeToken = useERC20Contract(LPKacyAvaxJOE)
+  const { getPriceKacyAndLP } = usePriceLP()
 
   const profileAddress = router.query.profileAddress
   const isSelectQueryTab = router.query.tab
@@ -139,6 +150,9 @@ const Profile = () => {
         // userVP: walletUserString
       })
   )
+
+  const chain =
+    process.env.NEXT_PUBLIC_MASTER === '1' ? chains.avalanche : chains.fuji
 
   async function getTokenAmountInPool(pid: number) {
     try {
@@ -167,51 +181,18 @@ const Profile = () => {
     }
   }
 
-  async function handleLPtoUSD() {
-    const reservesKacyAvax = await getReserves(LPKacyAvaxPNG)
-    const reservesKacyAvaxJoe = await getReserves(LPKacyAvaxJOE)
-    const reservesDaiAvax = await getReserves(LPDaiAvax)
+  async function getLiquidityPoolPriceInDollar() {
+    const { kacyPriceInDollar, priceLP } = await getPriceKacyAndLP(LP_KACY_AVAX_PNG, LPDaiAvax, true)
+    const priceLPJoe = await getPriceKacyAndLP(LP_KACY_AVAX_JOE, LPDaiAvax, true)
 
-    let kacyReserve = reservesKacyAvax._reserve1
-    let avaxKacyReserve = reservesKacyAvax._reserve0
-    const avaxKacyReserveJoe = reservesKacyAvaxJoe._reserve0
-    let DaiReserve = reservesDaiAvax._reserve1
-    let AvaxDaiReserve = reservesDaiAvax._reserve0
-
-    if (process.env.NEXT_PUBLIC_MASTER !== '1') {
-      kacyReserve = reservesKacyAvax._reserve0
-      avaxKacyReserve = reservesKacyAvax._reserve1
-      DaiReserve = reservesDaiAvax._reserve0
-      AvaxDaiReserve = reservesDaiAvax._reserve1
-    }
-    const avaxInDollar = Big(DaiReserve).div(Big(AvaxDaiReserve))
-    const kacyInDollar = avaxInDollar.mul(Big(avaxKacyReserve).div(kacyReserve))
-    const allAVAXDollar = Big(avaxKacyReserve).mul(avaxInDollar)
-    const allAVAXDollarJoe = Big(avaxKacyReserveJoe).mul(avaxInDollar)
-    const supplyLPToken = await lpToken.totalSupply()
-    const supplyLPJoeToken = await lpJoeToken.totalSupply()
-
-    if (supplyLPToken.toString() !== '0') {
-      const LP = allAVAXDollar.mul(2).div(Big(supplyLPToken.toString()))
-
+    if (priceLP && priceLPJoe.priceLP) {
       setPriceToken(prevState => ({
         ...prevState,
-        'LP-PNG': LP
+        'LP-PNG': priceLP,
+        'LP-JOE': priceLPJoe.priceLP,
+        KACY: kacyPriceInDollar
       }))
     }
-    if (supplyLPJoeToken.toString() !== '0') {
-      const priceLPJoe = allAVAXDollarJoe
-        .mul(2)
-        .div(Big(supplyLPJoeToken.toString()))
-      setPriceToken(prevState => ({
-        ...prevState,
-        'LP-JOE': priceLPJoe
-      }))
-    }
-    setPriceToken(prevState => ({
-      ...prevState,
-      KACY: kacyInDollar
-    }))
   }
 
   async function getAmountToken() {
@@ -262,6 +243,23 @@ const Profile = () => {
     setCardStakesPool(prevState => [...prevState, kacyObject])
   }
 
+  const handleAccountChange = ((account: string[]) => {
+    const tabSelect = isSelectQueryTab ? isSelectQueryTab : 'portfolio'
+
+    router.push(
+      {
+        pathname: `/profile/${toChecksumAddress(account[0])}`,
+        query: { tab: `${tabSelect}` }
+      },
+      undefined,
+      { scroll: false, shallow: false }
+    )
+  })
+
+  React.useEffect(() => {
+    window.ethereum.on('accountsChanged', handleAccountChange)
+  }, [])
+
   React.useEffect(() => {
     const arr: string[] = []
 
@@ -300,15 +298,15 @@ const Profile = () => {
     const checkEthereumProvider = async () => {
       const provider = await detectEthereumProvider()
 
-      if (provider) {
-        setHasEthereumProvider(true)
-      } else {
+      if (!provider && !chainId) {
         setHasEthereumProvider(false)
+      } else {
+        setHasEthereumProvider(true)
       }
     }
 
     checkEthereumProvider()
-  })
+  }, [chainId])
 
   React.useEffect(() => {
     if (isSelectQueryTab) {
@@ -319,34 +317,61 @@ const Profile = () => {
   }, [router])
 
   React.useEffect(() => {
+    if (Number(chainId) !== chain.chainId) {
+      return
+    }
+
     if (profileAddress) {
       getAmountToken()
-      handleLPtoUSD()
+      getLiquidityPoolPriceInDollar()
     }
-  }, [profileAddress])
+  }, [profileAddress, chainId])
 
   React.useEffect(() => {
-    let tokenValueOnDolar = new Big(0)
+    if (Number(chainId) !== chain.chainId) {
+      return
+    }
 
-    if (profileAddress && cardstakesPool.length > 0) {
+    let tokenAmountInTokenizedFunds = new Big(0)
+    let tokenAmountInAssetsToken = new Big(0)
+
+    if (profileAddress && cardstakesPool.length > 0 && assetsValueInWallet) {
       cardstakesPool.forEach(pool => {
-        tokenValueOnDolar = tokenValueOnDolar.add(
-          Big(
-            (assetsValueInWallet[pool.address]
-              ? pool.amount.add(assetsValueInWallet[pool.address])
-              : pool.amount
-            ).toString()
-          )
-            .mul(priceToken[pool.symbol])
-            .div(Big(10).pow(18))
-        )
+        const tokenAmount = Big(
+          (assetsValueInWallet[pool.address]
+            ? pool.amount.add(assetsValueInWallet[pool.address])
+            : pool.amount
+          ).toString()
+        ).mul(priceToken[pool.symbol]).div(Big(10).pow(18))
+
+        if (pool.address === myFunds[pool.address]) {
+          tokenAmountInAssetsToken = tokenAmountInAssetsToken.add(tokenAmount)
+        } else {
+          tokenAmountInTokenizedFunds = tokenAmountInTokenizedFunds.add(tokenAmount)
+        }
       })
     }
 
-    if (tokenValueOnDolar.gt(0)) {
-      setTotalInvestmented(tokenValueOnDolar)
+    setPriceInDolar({
+      assetsToken: tokenAmountInTokenizedFunds,
+      tokenizedFunds: tokenAmountInAssetsToken,
+      totalInvestmented: tokenAmountInTokenizedFunds.add(tokenAmountInAssetsToken)
+    })
+  }, [profileAddress, priceToken, assetsValueInWallet, data, chainId])
+
+  React.useEffect(() => {
+    if (Number(chainId) !== chain.chainId) {
+      return
     }
-  }, [profileAddress, priceToken, assetsValueInWallet, data])
+
+    async function getVotingPower() {
+      const currentVotes = await votingPower.currentVotes(profileAddress)
+
+      setTotalVotingPower(currentVotes || new BigNumber(0))
+    }
+
+    getVotingPower()
+  }, [profileAddress, chainId])
 
   return (
     <>
@@ -368,32 +393,47 @@ const Profile = () => {
 
       <S.ProfileContainer>
         <UserDescription userWalletUrl={profileAddress} />
-        <S.TotalValuesCardsContainer>
-          <AnyCardTotal
-            text={String(BNtoDecimal(totalInvestmented, 6, 2, 2) || 0)}
-            TooltipText="Lorem"
-            textTitle="TOTAL INVESTMENTED"
-            isDolar={true}
+
+        {!hasEthereumProvider ? (
+          <Web3Disabled
+            textButton="Connect Wallet"
+            textHeader="You need to have a Wallet installed"
+            bodyText="Please install any Wallet to see the users profiles"
+            type="connect"
           />
-          <AnyCardTotal
-            text="0"
-            TooltipText="Lorem"
-            textTitle="TOTAL MANAGED"
+        ) : Number(chainId) !== chain.chainId ? (
+          <Web3Disabled
+            textButton={`Connect to ${chain.chainName}`}
+            textHeader="Your wallet is set to the wrong network."
+            bodyText={`Please switch to the ${chain.chainName} network to have access to user profile`}
+            type="changeChain"
           />
-          <AnyCardTotal
-            text={String(BNtoDecimal(totalVotingPower, 0, 2) || 0)}
-            TooltipText="Lorem"
-            textTitle="USER VOTING POWER"
-          />
-        </S.TotalValuesCardsContainer>
-        <SelectTabs
-          tabs={tabs}
-          isSelect={isSelectTab}
-          setIsSelect={setIsSelectTab}
-        />
-        {isSelectTab === tabs[0].asPathText ? (
+        ) : (
           <>
-            {hasEthereumProvider ? (
+            <S.TotalValuesCardsContainer>
+              <AnyCardTotal
+                text={String(BNtoDecimal(priceInDolar.totalInvestmented, 6, 2, 2) || 0)}
+                TooltipText="The amount in US Dollars that this address has in investments with Kassandra. This considers tokens, funds, LP, and staked assets."
+                textTitle="HOLDINGS"
+                isDolar={true}
+              />
+              <AnyCardTotal
+                text={`$ ${0}`}
+                TooltipText="The amount in US Dollars that this address manages in tokenized funds with Kassandra."
+                textTitle="TOTAL MANAGED"
+              />
+              <AnyCardTotal
+                text={String(BNtoDecimal(totalVotingPower, 18, 2) || 0)}
+                TooltipText="The voting power of this address. Voting power is used to vote on governance proposals, and it can be earned by staking KACY."
+                textTitle="VOTING POWER"
+              />
+            </S.TotalValuesCardsContainer>
+            <SelectTabs
+              tabs={tabs}
+              isSelect={isSelectTab}
+              setIsSelect={setIsSelectTab}
+            />
+            {isSelectTab === tabs[0].asPathText ? (
               <Portfolio
                 profileAddress={
                   typeof profileAddress === 'undefined'
@@ -406,21 +446,19 @@ const Profile = () => {
                 cardstakesPool={cardstakesPool}
                 priceToken={priceToken}
                 myFunds={myFunds}
+                priceInDolar={priceInDolar}
               />
+            ) : isSelectTab === tabs[1].asPathText ? (
+              <AnyCard text="Coming Soon..." />
+            ) : isSelectTab === tabs[2].asPathText ? (
+              <>
+                <AnyCard text="Coming Soon..." />
+                {/* <GovernanceData address={profileAddress} /> */}
+              </>
             ) : (
-              <Web3Disabled
-                textHeader="You need to have a Wallet installed"
-                bodyText="Please install any Wallet to see the users profiles"
-                type="connect"
-              />
+              <Loading marginTop={4} />
             )}
           </>
-        ) : isSelectTab === tabs[1].asPathText ? (
-          <AnyCard text="Coming Soon…" />
-        ) : isSelectTab === tabs[2].asPathText ? (
-          <GovernanceData address={profileAddress} />
-        ) : (
-          <Loading marginTop={4} />
         )}
       </S.ProfileContainer>
     </>

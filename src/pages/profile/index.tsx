@@ -1,24 +1,26 @@
 import React from 'react'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
-
-import NotFound from '../../templates/404'
-import { useAppSelector } from '../../store/hooks'
+import detectEthereumProvider from '@metamask/detect-provider'
 
 import Header from '../../components/Header'
 import Web3Disabled from '../../components/Web3Disabled'
 
 export default function Index() {
-  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
-  const router = useRouter()
+  const [hasEthereumProvider, setHasEthereumProvider] = React.useState(false)
 
   React.useEffect(() => {
-    const asPathId = router.asPath.slice(8)
+    const checkEthereumProvider = async () => {
+      const provider = await detectEthereumProvider()
 
-    if (userWalletAddress.length > 0) {
-      router.push(`/profile/${userWalletAddress}${asPathId}`)
+      if (provider) {
+        setHasEthereumProvider(true)
+      } else {
+        setHasEthereumProvider(false)
+      }
     }
-  }, [userWalletAddress])
+
+    checkEthereumProvider()
+  }, [])
 
   return (
     <>
@@ -31,20 +33,26 @@ export default function Index() {
         <meta property="og:image:height" content="506" />
         <meta property="og:url" content="https://kassandra.finance/" />
       </Head>
-      {process.env.NEXT_PUBLIC_VOTE === '1' ||
-      process.env.NEXT_PUBLIC_VOTE === '2' ? (
-        <>
-          <Header />
+
+      <>
+        <Header />
+
+        {!hasEthereumProvider ? (
+          <Web3Disabled
+            textButton="Connect Wallet"
+            textHeader="You need to have a Wallet installed"
+            bodyText="Please install any Wallet to see the users profiles"
+            type="connect"
+          />
+        ) : (
           <Web3Disabled
             textHeader="Connect Wallet"
             textButton="Connect Wallet"
             type="connect"
             bodyText="Please connect to see your profile"
           />
-        </>
-      ) : (
-        <NotFound />
-      )}
+        )}
+      </>
     </>
   )
 }

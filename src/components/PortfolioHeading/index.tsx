@@ -10,9 +10,15 @@ interface IPortfolioHeadingProps {
   image: string;
   title: string;
   usd: string;
+  tippy: string;
 }
 
-const PortfolioHeading = ({ image, title, usd }: IPortfolioHeadingProps) => {
+const PortfolioHeading = ({
+  image,
+  title,
+  usd,
+  tippy
+}: IPortfolioHeadingProps) => {
   return (
     <>
       <S.HeadingWrapper>
@@ -28,7 +34,7 @@ const PortfolioHeading = ({ image, title, usd }: IPortfolioHeadingProps) => {
           <S.Total>
             <span>Total</span>
 
-            <Tippy content="Tippy">
+            <Tippy content={tippy}>
               <S.Tooltip tabIndex={0}>
                 <Image src={infoGray} alt="Explanation" layout="responsive" />
               </S.Tooltip>
@@ -39,16 +45,6 @@ const PortfolioHeading = ({ image, title, usd }: IPortfolioHeadingProps) => {
             <S.ValueUSD>
               {usd} <span>USD</span>
             </S.ValueUSD>
-
-            {/* <S.Change change={change}>
-              <span>{change}%</span>
-              <div>
-                <Image
-                  src={change < 0 ? arrowDescend : arrowAscend}
-                  layout="responsive"
-                />
-              </div>
-            </S.Change> */}
           </S.Value>
         </S.TotalContainer>
       </S.HeadingWrapper>
