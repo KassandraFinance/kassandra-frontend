@@ -333,6 +333,7 @@ export const Flex = styled.div`
 
 export const Top = styled.div`
   display: flex;
+  align-items: flex-end;
 
   width: 100%;
 `
@@ -349,10 +350,10 @@ export const Amount = styled.div`
   display: flex;
   align-items: flex-end;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 
   .price-dolar {
     margin-top: 0.2rem;
