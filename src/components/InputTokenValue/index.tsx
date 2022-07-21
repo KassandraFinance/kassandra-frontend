@@ -18,8 +18,8 @@ interface IInputProps {
   setInputValue: React.Dispatch<React.SetStateAction<BigNumber>>;
   setMaxActive?: React.Dispatch<React.SetStateAction<boolean>>;
   disabled?: string;
-  amount: BigNumber;
-  address: string | undefined;
+  amount?: BigNumber;
+  address?: string | undefined;
 }
 
 const InputTokenValue = ({
@@ -97,7 +97,7 @@ const InputTokenValue = ({
         />
       </Tippy>
       <span className="price-dolar">
-        {address &&
+        {address && amount &&
           'USD: ' +
           BNtoDecimal(
             Big(amount.toString())
