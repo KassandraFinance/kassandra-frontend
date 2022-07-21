@@ -187,7 +187,7 @@ const useProxy = (address: string, sipAddress: string, coreAddress: string) => {
       return res
     }
 
-    const estimatedGas = async (userWalletAddress: string, price: number, tokenIn: string, tokenAmountIn: BigNumber, minPoolAmountOut: BigNumber) => {
+    const estimatedGas = async (userWalletAddress: string, tokenIn: string, minPoolAmountOut: BigNumber) => {
       const estimateGas = await web3.eth.estimateGas({
         // "value": '0x0', // Only tokens
         "data": contract.methods.joinswapExternAmountIn(sipAddress, tokenIn, new BigNumber(0), minPoolAmountOut).encodeABI(),
@@ -199,7 +199,10 @@ const useProxy = (address: string, sipAddress: string, coreAddress: string) => {
       const fee = (Number(gasPrice) * estimateGas)  * 1.3
       const finalGasInEther = web3.utils.fromWei(fee.toString(), 'ether');
 
-      return finalGasInEther
+      return { 
+        feeNumber: fee, 
+        feeString: finalGasInEther
+      }
     }
 
     return {

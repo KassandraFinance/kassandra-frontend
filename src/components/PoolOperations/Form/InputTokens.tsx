@@ -17,6 +17,12 @@ import tricrypto from '../../../../public/assets/logos/tricrypto-with-fund.svg'
 
 import * as S from './styles'
 
+interface IGasFee {
+  error: boolean;
+  feeNumber: number;
+  feeString: string;
+}
+
 interface IInputEthProps {
   title: string;
   isWithdraw?: string;
@@ -38,7 +44,7 @@ interface IInputEthProps {
   swapInAddress?: string;
   setSwapAddress: React.Dispatch<React.SetStateAction<string>>;
   calculateAmountIn?: (amoutOut: BigNumber) => Promise<void>;
-  gasFee?: any;
+  gasFee?: IGasFee;
   isError?: boolean;
 }
 
@@ -193,8 +199,9 @@ const InputTokens = ({
           <>
             {gasFee && gasFee?.error && (
               <S.Span color="amber">
-                Don’t forget the gas fees! Leave at least {gasFee.gasFee} AVAX
-                on your wallet to ensure a smooth transaction
+                Don’t forget the gas fees! Leave at least{' '}
+                {gasFee.feeString.slice(0, 8)} AVAX on your wallet to ensure a
+                smooth transaction
               </S.Span>
             )}
           </>

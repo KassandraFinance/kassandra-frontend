@@ -106,7 +106,8 @@ const Form = ({
 
   const [gasFee, setGasFee] = React.useState({
     error: false,
-    gasFee: ''
+    feeNumber: 0,
+    feeString: ''
   })
   const [isError, setIsError] = React.useState(false)
   const [errorMsg, setErrorMsg] = React.useState('')
@@ -454,7 +455,7 @@ const Form = ({
     if (title === 'Withdraw') return
 
     const avax = poolTokensArray.find(token => token.address === swapInAddress)
-    const balanceMinusFee = swapInBalance.sub(new BigNumber(Number(gasFee.gasFee)))
+    const balanceMinusFee = swapInBalance.sub(new BigNumber(Number(gasFee.feeNumber)))
 
     if (avax?.symbol === "AVAX" && swapInAmount.gt(new BigNumber(0)) && swapInAmount.lte(swapInBalance) && swapInAmount.gte(balanceMinusFee)) {
       setGasFee({ ...gasFee, error: true })
@@ -485,11 +486,13 @@ const Form = ({
     async function generateEstimatedGas() {
       proxy.estimatedGas(
         userWalletAddress,
-        20,
         swapInAddress,
-        swapInAmount,
         new BigNumber('0'))
-          .then((response: string) => setGasFee(prevState => ({...prevState, gasFee: response})))
+          .then((response: 
+            { 
+              feeNumber: number,
+              feeString: string
+            }) => setGasFee(prevState => ({...prevState, feeString: response.feeString, feeNumber: response.feeNumber})))
     }
 
     const calc = async () => {
