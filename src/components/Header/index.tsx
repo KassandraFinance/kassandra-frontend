@@ -16,6 +16,7 @@ import ModalAlert from '../Modals/ModalAlert'
 import options from '../../../public/assets/utilities/options.svg'
 import kacy64 from '../../../public/assets/logos/kacy-64.svg'
 import logoKassandra from '../../../public/assets/logos/kassandra-header.svg'
+import ModalKacy from '../Modals/ModalKacy'
 
 import * as S from './styles'
 import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
@@ -260,6 +261,8 @@ const Header = () => {
         setModalOpen={setIsModalLogout}
         userWalletAddress={userWalletAddress}
       />
+
+      <ModalKacy />
 
       {isError && <ModalAlert />}
     </>
