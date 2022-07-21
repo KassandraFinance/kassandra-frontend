@@ -43,6 +43,11 @@ export const ModalHeader = styled.div`
   background: rgba(31, 31, 31, 0.96);
   backdrop-filter: blur(0.4rem);
   border-bottom: 0.1rem solid rgba(255, 255, 255, 0.25);
+
+  @media (max-width: 500px) {
+    height: 4.8rem;
+    padding-inline: 1.6rem;
+  }
 `
 
 export const CloseBtn = styled.button`
@@ -58,12 +63,21 @@ export const HeaderTitle = styled.div`
   font-size: ${theme.font.sizes.font18};
   line-height: 100%;
   letter-spacing: 0.05em;
+
+  @media (max-width: 500px) {
+    font-size: ${theme.font.sizes.font16};
+  }
 `
+
 export const ModalBody = styled.div`
   padding: 2.4rem;
 
   background: rgba(31, 41, 55, 0.96);
   backdrop-filter: blur(0.4rem);
+
+  @media (max-width: 500px) {
+    padding: 1.6rem;
+  }
 `
 
 export const Ul = styled.ul`
@@ -74,16 +88,122 @@ export const Li = styled.li`
   display: flex;
   justify-content: space-between;
 
-  margin-bottom: 1.6rem;
-
   color: ${theme.colors.snow};
   font-weight: ${theme.font.weight.light};
   font-size: ${theme.font.sizes.font16};
   line-height: 100%;
   letter-spacing: 0.05em;
+
+  &:not(:last-of-type) {
+    margin-bottom: 1.6rem;
+  }
+
+  @media (max-width: 500px) {
+    font-size: ${theme.font.sizes.font14};
+  }
 `
 
 export const Value = styled.span`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+
+  color: ${theme.colors.snow};
   font-weight: ${theme.font.weight.bold};
   font-size: ${theme.font.sizes.font18};
+
+  span {
+    color: ${theme.colors.snow};
+    font-weight: ${theme.font.weight.light};
+    font-size: ${theme.font.sizes.font14};
+  }
+
+  @media (max-width: 500px) {
+    font-size: ${theme.font.sizes.font16};
+  }
+`
+
+export const KacyTotalContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 2.4rem;
+
+  @media (max-width: 500px) {
+    margin-bottom: 1.6rem;
+  }
+`
+
+export const ImgContainer = styled.div`
+  position: relative;
+`
+
+export const ImgWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+
+  width: 5.6rem;
+  height: 5.6rem;
+
+  background: ${theme.colors.darkPurple};
+  border-radius: 50%;
+`
+
+export const ChainIcon = styled.div`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+`
+
+export const TotalWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+`
+
+export const BodyTitle = styled.span`
+  color: ${theme.colors.snow};
+  font-weight: ${theme.font.weight.light};
+  font-size: ${theme.font.sizes.font16};
+  line-height: 100%;
+  letter-spacing: 0.15em;
+
+  @media (max-width: 500px) {
+    font-size: ${theme.font.sizes.font14};
+  }
+`
+
+export const KacyTotal = styled.span`
+  color: ${theme.colors.snow};
+  font-weight: ${theme.font.weight.bold};
+  font-size: ${theme.font.sizes.font40};
+  line-height: 100%;
+  letter-spacing: 0.05em;
+
+  @media (max-width: 500px) {
+    font-size: ${theme.font.sizes.font24};
+  }
+`
+
+export const KacyUSDTotal = styled.span`
+  color: ${theme.colors.snow};
+  font-weight: ${theme.font.weight.light};
+  font-size: ${theme.font.sizes.font16};
+  line-height: 100%;
+  letter-spacing: 0.05em;
+
+  @media (max-width: 500px) {
+    font-size: ${theme.font.sizes.font14};
+  }
+`
+
+export const Line = styled.div`
+  width: 100%;
+  height: 0.2rem;
+
+  border-radius: 0.1rem;
+  background-color: rgba(255, 255, 255, 0.15);
 `

@@ -5,6 +5,8 @@ import Button from '../../Button'
 import ModalWalletConnect from '../ModalWalletConnect'
 
 import closeIcon from '../../../../public/assets/utilities/close-icon.svg'
+import kacyIcon from '../../../../public/assets/logos/kacy-96.svg'
+import avalancheIcon from '../../../../public/assets/logos/avalanche.svg'
 
 import * as S from './styles'
 
@@ -30,6 +32,49 @@ const ModalKacy = () => {
         </S.ModalHeader>
 
         <S.ModalBody>
+          <S.KacyTotalContainer>
+            <S.ImgContainer>
+              <S.ImgWrapper>
+                <Image src={kacyIcon} width={40} height={40} />
+              </S.ImgWrapper>
+
+              <S.ChainIcon>
+                <Image src={avalancheIcon} width={20} height={20} />
+              </S.ChainIcon>
+            </S.ImgContainer>
+
+            <S.TotalWrapper>
+              <S.BodyTitle>TOTAL</S.BodyTitle>
+              <S.KacyTotal>1234567.8910</S.KacyTotal>
+              <S.KacyUSDTotal>~0.00 USD</S.KacyUSDTotal>
+            </S.TotalWrapper>
+          </S.KacyTotalContainer>
+
+          <S.Line />
+
+          <S.Ul>
+            <S.Li>
+              KACY Staked
+              <S.Value>
+                1234567.8910 <span>~0.00 USD</span>
+              </S.Value>
+            </S.Li>
+            <S.Li>
+              Unclaimed
+              <S.Value>
+                50.1234<span>~0.00 USD</span>
+              </S.Value>
+            </S.Li>
+            <S.Li>
+              Wallet
+              <S.Value>
+                50.1234<span>~0.00 USD</span>
+              </S.Value>
+            </S.Li>
+          </S.Ul>
+
+          <S.Line />
+
           <S.Ul>
             <S.Li>
               Price <S.Value>$10</S.Value>
