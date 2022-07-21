@@ -104,6 +104,10 @@ const Form = ({
 
   const [isReload, setIsReload] = React.useState<boolean>(false)
 
+  const [gasFee, setGasFee] = React.useState({
+    error: false,
+    gasFee: ''
+  })
   const [isError, setIsError] = React.useState(false)
   const [errorMsg, setErrorMsg] = React.useState('')
   const [slippage, setSlippage] = React.useState({
@@ -446,6 +450,22 @@ const Form = ({
     setSwapOutAmount(Array(tokens).fill(new BigNumber(0)))
   }, [title, swapInAddress, swapOutAddress, poolTokensArray.length])
 
+  React.useEffect(() => {
+    if (title === 'Withdraw') return
+
+    const avax = poolTokensArray.find(token => token.address === swapInAddress)
+    const balanceMinusFee = swapInBalance.sub(new BigNumber(Number(gasFee.gasFee)))
+
+    if (avax?.symbol === "AVAX" && swapInAmount.gt(new BigNumber(0)) && swapInAmount.lte(swapInBalance) && swapInAmount.gte(balanceMinusFee)) {
+      setGasFee({ ...gasFee, error: true })
+      return
+    }
+
+    console.log({balance: swapInBalance.toString(), balanceMinus: balanceMinusFee.toString()})
+
+    setGasFee({ ...gasFee, error: false })
+  }, [title, swapInAddress, swapInAmount])
+
   // calculate investment
   React.useEffect(() => {
     if (
@@ -462,16 +482,14 @@ const Form = ({
       return
     }
 
-    async function teste() {
-      console.log('oi');
-      
+    async function generateEstimatedGas() {
       proxy.estimatedGas(
         userWalletAddress,
         20,
         swapInAddress,
         swapInAmount,
         new BigNumber('0'))
-          .then((response: any) => console.log(response))
+          .then((response: string) => setGasFee(prevState => ({...prevState, gasFee: response})))
     }
 
     const calc = async () => {
@@ -498,9 +516,8 @@ const Form = ({
             userWalletAddress
           )
 
-          teste()
-
-          console.log()
+          // swapInAddress
+          generateEstimatedGas()
 
           setSwapOutAmount([newSwapOutAmount])
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -531,9 +548,8 @@ const Form = ({
             }
 
             if (swapInAmount.gt(swapInBalance) && Number(swapInAmount.toString()) > 0) {
-              setErrorMsg('This amount exceeds your balance!')
+                // setErrorMsg('This amount exceeds your balance!')
               setIsError(true)
-              // aqui
               return;
             }
           }
@@ -573,8 +589,8 @@ const Form = ({
 
     calc()
     setErrorMsg('')
-    setIsError(false)
     setSwapOutAmount(Array(poolTokensArray.length - 1).fill(new BigNumber(0)))
+    setIsError(false)
   }, [chainId, swapInAmount, swapInAddress])
 
   // calculate swap
@@ -651,7 +667,8 @@ const Form = ({
           }
 
           if (swapInAmount.gt(swapInBalance)) {
-            setErrorMsg('This amount exceeds your balance!')
+            // setErrorMsg('This amount exceeds your balance!')
+            setIsError(true)
             return;
           }
         }
@@ -664,6 +681,7 @@ const Form = ({
     calc()
     setErrorMsg('')
     setSwapOutAmount(Array(poolTokensArray.length - 1).fill(new BigNumber(0)))
+    setIsError(false)
   }, [chainId, swapInAmount, swapInAddress, swapOutAddress])
 
   // calculate withdraw
@@ -1251,6 +1269,7 @@ const Form = ({
           setSwapAddress={setSwapInAddress}
           setMaxActive={setMaxActive}
           maxActive={maxActive}
+          gasFee={gasFee}
           isError={isError}
           swapInAddress={swapInAddress}
         />

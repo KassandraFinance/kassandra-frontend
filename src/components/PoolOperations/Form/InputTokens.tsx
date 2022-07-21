@@ -38,7 +38,8 @@ interface IInputEthProps {
   swapInAddress?: string;
   setSwapAddress: React.Dispatch<React.SetStateAction<string>>;
   calculateAmountIn?: (amoutOut: BigNumber) => Promise<void>;
-  isError?: any;
+  gasFee?: any;
+  isError?: boolean;
 }
 
 const InputTokens = ({
@@ -62,6 +63,7 @@ const InputTokens = ({
   maxActive,
   calculateAmountIn,
   swapInAddress,
+  gasFee,
   isError
 }: IInputEthProps) => {
   const { trackEventFunction } = useMatomoEcommerce()
@@ -129,60 +131,75 @@ const InputTokens = ({
 
   return (
     <S.InputTokensContainer>
-      <S.Info>
-        <S.Span>{actionString}</S.Span>
-        {tokensList}
-        <S.SpanLight>
-          Balance:{' '}
-          {swapBalance > new BigNumber(-1)
-            ? BNtoDecimal(swapBalance, decimals.toNumber())
-            : '...'}
-        </S.SpanLight>
-      </S.Info>
-      <S.Amount>
-        {setSwapAmount && (
-          <S.ButtonMax
-            type="button"
-            maxActive={maxActive}
-            onClick={() => {
-              setMax()
-              trackEventFunction(
-                'click-on-maxBtn',
-                `input-in-${title}`,
-                'operations-invest'
-              )
-            }}
-          >
-            Max
-          </S.ButtonMax>
-        )}
-        {/* <S.Span total>{title === 'Output' ? 'Estimate' : 'Total'}</S.Span> */}
-        {inputRef && setSwapAmount ? (
-          <InputTokenValue
-            disabled={disabled}
-            inputRef={inputRef}
-            max={wei2String(swapBalance)}
-            decimals={decimals}
-            setInputValue={setSwapAmount}
-            setMaxActive={setMaxActive}
-            amount={swapAmount}
-            address={swapInAddress}
-          />
+      <S.Flex>
+        <S.Top>
+          <S.Info>
+            <S.Span color="white">{actionString}</S.Span>
+            {tokensList}
+            <S.SpanLight>
+              Balance:{' '}
+              {swapBalance > new BigNumber(-1)
+                ? BNtoDecimal(swapBalance, decimals.toNumber())
+                : '...'}
+            </S.SpanLight>
+          </S.Info>
+          <S.Amount>
+            {setSwapAmount && (
+              <S.ButtonMax
+                type="button"
+                maxActive={maxActive}
+                onClick={() => {
+                  setMax()
+                  trackEventFunction(
+                    'click-on-maxBtn',
+                    `input-in-${title}`,
+                    'operations-invest'
+                  )
+                }}
+              >
+                Max
+              </S.ButtonMax>
+            )}
+            {/* <S.Span total>{title === 'Output' ? 'Estimate' : 'Total'}</S.Span> */}
+            {inputRef && setSwapAmount ? (
+              <InputTokenValue
+                disabled={disabled}
+                inputRef={inputRef}
+                max={wei2String(swapBalance)}
+                decimals={decimals}
+                setInputValue={setSwapAmount}
+                setMaxActive={setMaxActive}
+                amount={swapAmount}
+                address={swapInAddress}
+              />
+            ) : (
+              <OutputTokenValue
+                disabled={isWithdraw === 'Withdraw' ? '' : disabled}
+                decimals={decimals}
+                poolTokensArray={poolTokensArray}
+                swapAmount={swapAmount}
+                swapOutAddress={swapOutAddress}
+                calculateAmountIn={calculateAmountIn}
+                setSwapOutAmount={setSwapOutAmount}
+                operation={isWithdraw ?? ''}
+                setMaxActive={setMaxActive}
+              />
+            )}
+          </S.Amount>
+        </S.Top>
+        {isError ? (
+          <S.Span color="red">This amount exceeds your balance!</S.Span>
         ) : (
-          <OutputTokenValue
-            disabled={isWithdraw === 'Withdraw' ? '' : disabled}
-            decimals={decimals}
-            poolTokensArray={poolTokensArray}
-            swapAmount={swapAmount}
-            swapOutAddress={swapOutAddress}
-            calculateAmountIn={calculateAmountIn}
-            setSwapOutAmount={setSwapOutAmount}
-            operation={isWithdraw ?? ''}
-            setMaxActive={setMaxActive}
-          />
+          <>
+            {gasFee && gasFee?.error && (
+              <S.Span color="amber">
+                Don’t forget the gas fees! Leave at least {gasFee.gasFee} AVAX
+                on your wallet to ensure a smooth transaction
+              </S.Span>
+            )}
+          </>
         )}
-      </S.Amount>
-      {isError && <span>Erro</span>}
+      </S.Flex>
     </S.InputTokensContainer>
   )
 }
