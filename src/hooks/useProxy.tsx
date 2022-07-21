@@ -194,9 +194,9 @@ const useProxy = (address: string, sipAddress: string, coreAddress: string) => {
         "from": userWalletAddress,
         "to": address
       });
-      const gasPrice = await web3.eth.getGasPrice()      
-      
-      const fee = (Number(gasPrice) * estimateGas)  * 1.2
+      const gasPrice = await web3.eth.getGasPrice()
+
+      const fee = (Number(gasPrice) * estimateGas)  * 1.3
       const finalGasInEther = web3.utils.fromWei(fee.toString(), 'ether');
 
       return finalGasInEther
