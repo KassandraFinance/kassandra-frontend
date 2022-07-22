@@ -9,7 +9,7 @@ export const Backdrop = styled.div`
   right: 0;
   z-index: 20;
 
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.6);
 `
 
 export const Container = styled.div`
