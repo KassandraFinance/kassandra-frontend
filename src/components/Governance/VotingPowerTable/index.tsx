@@ -27,7 +27,6 @@ interface IVotingPowerRankProps {
 }
 
 export const VotingPowerTable = () => {
-  // eslint-disable-next-line prettier/prettier
   const [votingPowerRank, setVotingPowerRank] = React.useState<
     Array<IVotingPowerRankProps>
   >([
