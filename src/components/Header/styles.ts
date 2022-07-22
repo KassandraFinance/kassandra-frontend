@@ -196,16 +196,18 @@ export const MenuLinkDisable = styled.a`
 `
 
 export const MenuBottom = styled.div`
-  @media (max-width: 768px) {
+  @media (max-width: 840px) {
     position: fixed;
+    right: 0;
     bottom: 0;
     left: 0;
+
     z-index: ${theme.layers.menu};
 
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    // width: 100%;
     height: 6.8rem;
     padding: 1.6rem;
 
@@ -226,7 +228,7 @@ export const MenuBottom = styled.div`
 
 export const ButtonsWrapper = styled.div`
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
 `
 
 export const OptionsContainer = styled.div`
@@ -234,7 +236,7 @@ export const OptionsContainer = styled.div`
   justify-content: space-between;
   gap: 0.8rem;
 
-  @media (min-width: 769px) {
+  @media (min-width: 841px) {
     display: none;
   }
 `
