@@ -13,10 +13,11 @@ import infoGrayIcon from '../../../../public/assets/utilities/info-gray.svg'
 import { ToastInfo } from '../../Toastify/toast'
 import ModalUserEditInfo from '../../Modals/ModalUserEditInfo'
 import NftImage from '../../NftImage'
+import ModalInfoNFT from '../../Modals/ModalInfoNFT'
 
 import * as S from './styles'
 
-type UserProps = {
+export type UserProps = {
   nickname: string,
   twitter: string,
   website: string,
@@ -334,6 +335,14 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
           imageUser={imageUser}
           setUserImage={setImageUser}
           setUserData={setUserData}
+        />
+      )}
+      {isOpenModalNft && (
+        <ModalInfoNFT
+          modalOpen={isOpenModalNft}
+          setModalOpen={setIsOpenModalNft}
+          userData={userData}
+          NftUrl={imageUser.url}
         />
       )}
     </>
