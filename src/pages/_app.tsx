@@ -5,6 +5,7 @@ import Head from 'next/head'
 import { ThemeProvider } from 'styled-components'
 import { useRouter } from 'next/router'
 import { Provider } from 'react-redux'
+import { SWRConfig } from 'swr'
 
 import GlobalStyles from '../styles/global'
 import theme from '../styles/theme'
@@ -90,7 +91,14 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
               pathName === '/' ? false : pathName === '/about' ? false : true
             }
           />
-          <Component {...pageProps} />
+          <SWRConfig
+            value={{
+              refreshInterval: 10000,
+              fetcher: url => fetch(url).then(res => res.json())
+            }}
+          >
+            <Component {...pageProps} />
+          </SWRConfig>
           {router.pathname !== '/404' && <Footer />}
         </ThemeProvider>
       </MatomoProvider>

@@ -11,11 +11,15 @@ import avalancheIcon from '../../../../../public/assets/logos/avalanche.svg'
 import * as S from './styles'
 
 interface IKacyProps {
+  price: number;
+  supply: number;
   setIsModalKacy: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Kacy = ({ setIsModalKacy }: IKacyProps) => {
+const Kacy = ({ price, supply, setIsModalKacy }: IKacyProps) => {
   const [isModalWallet, setIsModalWallet] = React.useState<boolean>(false)
+  const totalSupply = 10000000
+
   function handleCloseModal() {
     setIsModalKacy(false)
   }
@@ -77,13 +81,22 @@ const Kacy = ({ setIsModalKacy }: IKacyProps) => {
 
           <S.Ul>
             <S.Li>
-              Price <S.Value>$10</S.Value>
+              Price
+              <S.Value>
+                {price.toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: 'USD',
+                  minimumFractionDigits: 3
+                })}
+              </S.Value>
             </S.Li>
             <S.Li>
-              Circulant Supply <S.Value>1000000</S.Value>
+              Circulant Supply
+              <S.Value>{supply.toLocaleString('en-US')}</S.Value>
             </S.Li>
             <S.Li>
-              Total Supply <S.Value>1000000</S.Value>
+              Total Supply
+              <S.Value>{totalSupply.toLocaleString('en-US')}</S.Value>
             </S.Li>
           </S.Ul>
 
