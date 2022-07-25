@@ -1,10 +1,11 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 import substr from '../../utils/substr'
 import { useAppSelector } from '../../store/hooks'
+
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
 import Button from '../Button'
 import DropdownInvest from '../Dropdown'
@@ -18,7 +19,6 @@ import kacy64 from '../../../public/assets/logos/kacy-64.svg'
 import logoKassandra from '../../../public/assets/logos/kassandra-header.svg'
 
 import * as S from './styles'
-import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
 export type MenuProps = {
   username?: string
@@ -152,7 +152,11 @@ const Header = () => {
               backgroundBlack
               size="medium"
               onClick={() => {
-                trackEventFunction('open-modal', 'your-wallet', 'header')
+                trackEventFunction(
+                  'click-on-button',
+                  'connect-wallet',
+                  'header'
+                )
                 setIsModalLogout(true)
               }}
               text={substr(userWalletAddress)}
@@ -178,7 +182,11 @@ const Header = () => {
               backgroundBlack
               size="medium"
               onClick={() => {
-                trackEventFunction('open-metamask', 'connect-wallet', 'header')
+                trackEventFunction(
+                  'click-on-button',
+                  'connect-wallet',
+                  'header'
+                )
                 setIsModalWallet(true)
               }}
               text="Connect Wallet"
@@ -211,7 +219,7 @@ const Header = () => {
             backgroundBlack
             size="medium"
             onClick={() => {
-              trackEventFunction('open-modal', 'your-wallet', 'header')
+              trackEventFunction('click-on-button', 'connect-wallet', 'header')
               setIsModalLogout(true)
             }}
             text={substr(userWalletAddress)}
@@ -237,7 +245,7 @@ const Header = () => {
             backgroundBlack
             size="medium"
             onClick={() => {
-              trackEventFunction('open-metamask', 'connect-wallet', 'header')
+              trackEventFunction('click-on-button', 'connect-wallet', 'header')
               setIsModalWallet(true)
             }}
             text="Connect Wallet"
