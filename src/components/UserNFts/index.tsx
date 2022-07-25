@@ -17,6 +17,8 @@ interface IUserNFTsProps {
   inputRefModal: React.RefObject<HTMLInputElement>;
 }
 
+const chains = ['eth', 'avalanche', 'bsc', 'matic', 'fantom', 'cronos']
+
 const UserNFTs = ({
   address,
   setUserImageModal,
@@ -24,22 +26,28 @@ const UserNFTs = ({
   setIsDropdownAddNft,
   inputRefModal
 }: IUserNFTsProps) => {
-  const [nfts, setNfts] = React.useState([])
+  const [nfts, setNfts] = React.useState<any[]>([])
 
   async function getUsersNFTs() {
-    const response = await fetch(
-      `https://deep-index.moralis.io/api/v2/${address}/nft?chain=eth&format=decimal`,
-      {
-        headers: {
-          'X-API-Key':
-            'TJPvpUWJKfdL2wEwhMPj6I1npWBg2w1RoeOhuVDIY1rwNH68ZGqDQBLlTEoBUF9N'
+    const arr = []
+
+    for (let i = 0; i < chains.length; i++) {
+      const response = await fetch(
+        `https://deep-index.moralis.io/api/v2/${address}/nft?chain=${chains[i]}&format=decimal`,
+        {
+          headers: {
+            'X-API-Key':
+              'TJPvpUWJKfdL2wEwhMPj6I1npWBg2w1RoeOhuVDIY1rwNH68ZGqDQBLlTEoBUF9N'
+          }
         }
-      }
-    )
+      )
 
-    const data = await response.json()
+      const data = await response.json()
 
-    const formattedNFTs = data.result.map((nft: any) => {
+      arr.push(...data.result)
+    }
+
+    const formattedNFTs = arr?.map((nft: any) => {
       const parsedMetadata = JSON.parse(nft.metadata)
 
       if (

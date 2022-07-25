@@ -10,7 +10,6 @@ import HermesProxy from "../constants/abi/HermesProxy.json"
 
 import { TransactionCallback } from '../utils/txWait'
 
-
 const useProxy = (address: string, sipAddress: string, coreAddress: string) => {
   const [contract, setContract] = React.useState(new web3.eth.Contract((HermesProxy as unknown) as AbiItem, address))
 
@@ -188,6 +187,24 @@ const useProxy = (address: string, sipAddress: string, coreAddress: string) => {
       return res
     }
 
+    const estimatedGas = async (userWalletAddress: string, tokenIn: string, minPoolAmountOut: BigNumber) => {
+      const estimateGas = await web3.eth.estimateGas({
+        // "value": '0x0', // Only tokens
+        "data": contract.methods.joinswapExternAmountIn(sipAddress, tokenIn, new BigNumber(0), minPoolAmountOut).encodeABI(),
+        "from": userWalletAddress,
+        "to": address
+      });
+      const gasPrice = await web3.eth.getGasPrice()
+
+      const fee = (Number(gasPrice) * estimateGas)  * 1.3
+      const finalGasInEther = web3.utils.fromWei(fee.toString(), 'ether');
+
+      return { 
+        feeNumber: fee, 
+        feeString: finalGasInEther
+      }
+    }
+
     return {
       joinswapExternAmountIn,
       exitswapPoolAmountIn,
@@ -200,7 +217,9 @@ const useProxy = (address: string, sipAddress: string, coreAddress: string) => {
       tryJoinswapPoolAmountOut,
       tryExitswapPoolAmountIn,
       tryExitPool,
-      trySwapExactAmountIn
+      trySwapExactAmountIn,
+
+      estimatedGas
     }
   }, [contract])
 }

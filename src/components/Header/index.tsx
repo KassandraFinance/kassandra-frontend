@@ -95,13 +95,11 @@ const Header = () => {
             linkPage={[
               {
                 name: 'Overview',
-                href: '',
-                disabled: true
+                href: '/gov'
               },
               {
                 name: 'Proposals',
-                href: '',
-                disabled: true
+                href: '/gov/proposals'
               },
               {
                 name: 'Stake',
