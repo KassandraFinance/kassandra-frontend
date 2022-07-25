@@ -1,6 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
 
+import { useAppSelector } from '../../../../store/hooks'
+
 import Button from '../../../Button'
 import ModalWalletConnect from '../../ModalWalletConnect'
 
@@ -14,10 +16,18 @@ interface IKacyProps {
   price: number;
   supply: number;
   setIsModalKacy: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Kacy = ({ price, supply, setIsModalKacy }: IKacyProps) => {
+const Kacy = ({
+  price,
+  supply,
+  setIsModalKacy,
+  setIsOpenModal
+}: IKacyProps) => {
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
   const [isModalWallet, setIsModalWallet] = React.useState<boolean>(false)
+
   const totalSupply = 10000000
 
   function handleCloseModal() {
@@ -36,48 +46,52 @@ const Kacy = ({ price, supply, setIsModalKacy }: IKacyProps) => {
         </S.ModalHeader>
 
         <S.ModalBody>
-          <S.KacyTotalContainer>
-            <S.ImgContainer>
-              <S.ImgWrapper>
-                <Image src={kacyIcon} width={40} height={40} />
-              </S.ImgWrapper>
+          {userWalletAddress && (
+            <>
+              <S.KacyTotalContainer>
+                <S.ImgContainer>
+                  <S.ImgWrapper>
+                    <Image src={kacyIcon} width={40} height={40} />
+                  </S.ImgWrapper>
 
-              <S.ChainIcon>
-                <Image src={avalancheIcon} width={20} height={20} />
-              </S.ChainIcon>
-            </S.ImgContainer>
+                  <S.ChainIcon>
+                    <Image src={avalancheIcon} width={20} height={20} />
+                  </S.ChainIcon>
+                </S.ImgContainer>
 
-            <S.TotalWrapper>
-              <S.BodyTitle>TOTAL</S.BodyTitle>
-              <S.KacyTotal>1234567.8910</S.KacyTotal>
-              <S.KacyUSDTotal>~0.00 USD</S.KacyUSDTotal>
-            </S.TotalWrapper>
-          </S.KacyTotalContainer>
+                <S.TotalWrapper>
+                  <S.BodyTitle>TOTAL</S.BodyTitle>
+                  <S.KacyTotal>1234567.8910</S.KacyTotal>
+                  <S.KacyUSDTotal>~0.00 USD</S.KacyUSDTotal>
+                </S.TotalWrapper>
+              </S.KacyTotalContainer>
 
-          <S.Line />
+              <S.Line />
 
-          <S.Ul>
-            <S.Li>
-              KACY Staked
-              <S.Value>
-                1234567.8910 <span>~0.00 USD</span>
-              </S.Value>
-            </S.Li>
-            <S.Li>
-              Unclaimed
-              <S.Value>
-                50.1234<span>~0.00 USD</span>
-              </S.Value>
-            </S.Li>
-            <S.Li>
-              Wallet
-              <S.Value>
-                50.1234<span>~0.00 USD</span>
-              </S.Value>
-            </S.Li>
-          </S.Ul>
+              <S.Ul>
+                <S.Li>
+                  KACY Staked
+                  <S.Value>
+                    1234567.8910 <span>~0.00 USD</span>
+                  </S.Value>
+                </S.Li>
+                <S.Li>
+                  Unclaimed
+                  <S.Value>
+                    50.1234<span>~0.00 USD</span>
+                  </S.Value>
+                </S.Li>
+                <S.Li>
+                  Wallet
+                  <S.Value>
+                    50.1234<span>~0.00 USD</span>
+                  </S.Value>
+                </S.Li>
+              </S.Ul>
 
-          <S.Line />
+              <S.Line />
+            </>
+          )}
 
           <S.Ul>
             <S.Li>
@@ -100,12 +114,24 @@ const Kacy = ({ price, supply, setIsModalKacy }: IKacyProps) => {
             </S.Li>
           </S.Ul>
 
-          <Button
-            text="Connect Wallet"
-            backgroundPrimary
-            fullWidth
-            onClick={() => setIsModalWallet(true)}
-          />
+          {userWalletAddress ? (
+            <Button
+              text="Get more KACY"
+              backgroundPrimary
+              fullWidth
+              onClick={() => {
+                setIsOpenModal(true)
+                setIsModalKacy(false)
+              }}
+            />
+          ) : (
+            <Button
+              text="Connect Wallet"
+              backgroundPrimary
+              fullWidth
+              onClick={() => setIsModalWallet(true)}
+            />
+          )}
         </S.ModalBody>
       </S.Container>
 

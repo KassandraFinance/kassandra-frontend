@@ -3,6 +3,7 @@ import Image from 'next/image'
 import useSWR from 'swr'
 
 import Kacy from './Kacy'
+import ModalBuyKacy from '../../../components/Modals/ModalBuyKacy'
 
 import kacy96 from '../../../../public/assets/logos/kacy-96.svg'
 
@@ -29,6 +30,7 @@ interface IKacyMarketDataProps {
 
 const ModalKacy = () => {
   const [isModalKacy, setIsModalKacy] = React.useState(false)
+  const [isOpenModal, setIsOpenModal] = React.useState<boolean>(false)
   const [kacyMarketData, setKacyMarketData] =
     React.useState<IKacyMarketDataProps>({
       price: 0,
@@ -59,11 +61,14 @@ const ModalKacy = () => {
 
       {isModalKacy && (
         <Kacy
-          setIsModalKacy={setIsModalKacy}
           price={kacyMarketData.price}
           supply={kacyMarketData.supply}
+          setIsModalKacy={setIsModalKacy}
+          setIsOpenModal={setIsOpenModal}
         />
       )}
+
+      <ModalBuyKacy modalOpen={isOpenModal} setModalOpen={setIsOpenModal} />
     </>
   )
 }
