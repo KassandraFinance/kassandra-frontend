@@ -1,7 +1,11 @@
 import React from 'react'
 import Image from 'next/image'
+import BigNumber from 'bn.js'
+import Big from 'big.js'
 
 import { useAppSelector } from '../../../../store/hooks'
+
+import { BNtoDecimal } from '../../../../utils/numerals'
 
 import Button from '../../../Button'
 import ModalWalletConnect from '../../ModalWalletConnect'
@@ -15,6 +19,10 @@ import * as S from './styles'
 interface IKacyProps {
   price: number;
   supply: number;
+  kacyStaked: BigNumber;
+  kacyUnclaimed: BigNumber;
+  kacyWallet: BigNumber;
+  kacyTotal: BigNumber;
   setIsModalKacy: React.Dispatch<React.SetStateAction<boolean>>;
   setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -22,6 +30,10 @@ interface IKacyProps {
 const Kacy = ({
   price,
   supply,
+  kacyStaked,
+  kacyUnclaimed,
+  kacyWallet,
+  kacyTotal,
   setIsModalKacy,
   setIsOpenModal
 }: IKacyProps) => {
@@ -61,8 +73,17 @@ const Kacy = ({
 
                 <S.TotalWrapper>
                   <S.BodyTitle>TOTAL</S.BodyTitle>
-                  <S.KacyTotal>1234567.8910</S.KacyTotal>
-                  <S.KacyUSDTotal>~0.00 USD</S.KacyUSDTotal>
+                  <S.KacyTotal>{BNtoDecimal(kacyTotal, 18, 2)}</S.KacyTotal>
+                  <S.KacyUSDTotal>
+                    ~
+                    {BNtoDecimal(
+                      Big(kacyTotal.toString()).mul(price).div(Big(10).pow(18)),
+                      6,
+                      2,
+                      2
+                    )}{' '}
+                    USD
+                  </S.KacyUSDTotal>
                 </S.TotalWrapper>
               </S.KacyTotalContainer>
 
@@ -72,19 +93,55 @@ const Kacy = ({
                 <S.Li>
                   KACY Staked
                   <S.Value>
-                    1234567.8910 <span>~0.00 USD</span>
+                    {BNtoDecimal(kacyStaked, 18, 2)}
+                    <span>
+                      ~
+                      {BNtoDecimal(
+                        Big(kacyStaked.toString())
+                          .mul(price)
+                          .div(Big(10).pow(18)),
+                        6,
+                        2,
+                        2
+                      )}{' '}
+                      USD
+                    </span>
                   </S.Value>
                 </S.Li>
                 <S.Li>
                   Unclaimed
                   <S.Value>
-                    50.1234<span>~0.00 USD</span>
+                    {BNtoDecimal(kacyUnclaimed, 18, 2)}
+                    <span>
+                      ~
+                      {BNtoDecimal(
+                        Big(kacyUnclaimed.toString())
+                          .mul(price)
+                          .div(Big(10).pow(18)),
+                        6,
+                        2,
+                        2
+                      )}{' '}
+                      USD
+                    </span>
                   </S.Value>
                 </S.Li>
                 <S.Li>
                   Wallet
                   <S.Value>
-                    50.1234<span>~0.00 USD</span>
+                    {BNtoDecimal(kacyWallet, 18, 2)}
+                    <span>
+                      ~
+                      {BNtoDecimal(
+                        Big(kacyWallet.toString())
+                          .mul(price)
+                          .div(Big(10).pow(18)),
+                        6,
+                        2,
+                        2
+                      )}{' '}
+                      USD
+                    </span>
                   </S.Value>
                 </S.Li>
               </S.Ul>
