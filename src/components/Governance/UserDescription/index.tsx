@@ -37,6 +37,7 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   const [isOpenModal, setIsOpenModal] = React.useState(false)
+  const [isOpenModalNft, setIsOpenModalNft] = React.useState(false)
   const [isStateSeeMore, setIsStateSeeMore] = React.useState(false)
   const [userDescription, setUserDescription] = React.useState('')
 
@@ -111,7 +112,11 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
         <S.UserInfo>
           <S.UserInfoContent>
             {imageUser.isNFT ? (
-              <NftImage NftUrl={imageUser.url} imageSize="medium" />
+              <NftImage
+                NftUrl={imageUser.url}
+                imageSize="medium"
+                openModalNFT={setIsOpenModalNft}
+              />
             ) : imageUser.url !== undefined &&
               imageUser.url !== null &&
               imageUser.url !== '' ? (
