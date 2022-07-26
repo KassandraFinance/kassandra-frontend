@@ -8,16 +8,14 @@ export const TabsContainer = styled.div`
   margin-top: 6rem;
 
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-
-  transition: all 300ms ease-in-out;
 `
 
 interface ITabsButtonProps {
   isActiveTab?: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
-export const TabsButton = styled.button<ITabsButtonProps>`
+// prettier-ignore
+export const TabsButton =styled.button<ITabsButtonProps>`
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -38,6 +36,8 @@ export const TabsButton = styled.button<ITabsButtonProps>`
   color: ${props => (props.isActiveTab ? '#ffffff' : '#c4c4c4')};
   font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.normal};
+
+  transition: background-color 3000ms ease-in-out, border 3000ms ease-in-out, color 3000ms ease-in-out;
 
   cursor: pointer;
 
