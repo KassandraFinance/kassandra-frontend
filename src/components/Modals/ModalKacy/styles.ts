@@ -2,12 +2,13 @@ import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
 export const KacyAmount = styled.div`
-  display: flex;
-  align-items: center;
-
   .kacyAmount {
-    padding: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
     width: fit-content;
+    padding: 1.2rem;
 
     color: ${theme.colors.snow};
     font-weight: ${theme.font.weight.light};
@@ -26,12 +27,6 @@ export const KacyAmount = styled.div`
     &:hover,
     &:focus {
       border-color: ${theme.colors.amber};
-
-      svg {
-        path {
-          fill: none;
-        }
-      }
     }
   }
 `
