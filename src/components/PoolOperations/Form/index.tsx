@@ -576,7 +576,6 @@ const Form = ({
             }
 
             if (swapInAmount.gt(swapInBalance) && Number(swapInAmount.toString()) > 0) {
-                // setErrorMsg('This amount exceeds your balance!')
               setIsError(true)
               return;
             }
@@ -701,7 +700,6 @@ const Form = ({
           }
 
           if (swapInAmount.gt(swapInBalance)) {
-            // setErrorMsg('This amount exceeds your balance!')
             setIsError(true)
             return;
           }
@@ -1435,7 +1433,8 @@ const Form = ({
                 approvals[title][tokenInIndex] === Approval.Approved && (
                   swapInAmount.toString() === "0" ||
                   swapOutAmount[0].toString() === "0" ||
-                  errorMsg.length > 0
+                  errorMsg.length > 0 ||
+                  isError
                 )
               )
             }
