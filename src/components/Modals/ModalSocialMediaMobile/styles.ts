@@ -25,12 +25,6 @@ export const ModalContainer = styled.div`
   border-radius: 0.4rem;
 
   z-index: 20;
-
-  #aboutMobile {
-    @media (min-width: 540px) {
-      display: none;
-    }
-  }
 `
 
 export const SocialIcon = styled.a`

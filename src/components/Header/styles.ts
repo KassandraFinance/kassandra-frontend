@@ -64,12 +64,6 @@ export const Menu = styled.nav`
     }
   }
 
-  #aboutMobile {
-    @media (max-width: 540px) {
-      display: none;
-    }
-  }
-
   @media (max-width: 960px) {
     min-width: 58rem;
   }
@@ -80,12 +74,6 @@ export const Menu = styled.nav`
 
   @media (max-width: 540px) {
     min-width: 100%;
-  }
-
-  .connect-wallet {
-    @media (max-width: 768px) {
-      display: none;
-    }
   }
 `
 
@@ -208,26 +196,27 @@ export const MenuLinkDisable = styled.a`
 `
 
 export const MenuBottom = styled.div`
-  position: fixed;
-  bottom: 0;
-  z-index: ${theme.layers.menu};
+  @media (max-width: 840px) {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 6.8rem;
-  padding: 1.6rem;
+    z-index: ${theme.layers.menu};
 
-  background-color: ${theme.colors.darkPurple};
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // width: 100%;
+    height: 6.8rem;
+    padding: 1.6rem;
 
-  @media (min-width: 769px) {
-    display: none;
+    background-color: ${theme.colors.darkPurple};
   }
 
   .button-mobile {
-    max-width: 100%;
-    height: 3.6rem;
+    width: fit-content;
+    padding: 1.2rem;
 
     font-size: ${theme.font.sizes.font12};
 
@@ -237,25 +226,19 @@ export const MenuBottom = styled.div`
   }
 `
 
-export const KacyAmount = styled.div`
+export const ButtonsWrapper = styled.div`
   display: flex;
-  align-items: center;
-  height: 3.6rem;
-  padding: 0.6rem;
-  max-width: 100%;
-
-  border: 0.1rem solid ${theme.colors.snow};
-  border-radius: ${theme.border.radius};
-
-  img {
-    width: 2rem;
-  }
+  gap: 1rem;
 `
 
 export const OptionsContainer = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 0.8rem;
+
+  @media (min-width: 841px) {
+    display: none;
+  }
 `
 
 export const ButtonOptions = styled.button`
@@ -268,7 +251,7 @@ export const ButtonOptions = styled.button`
 `
 
 export const MenuContainer = styled.div`
-  @media (max-width: 540px) {
+  @media (max-width: 768px) {
     display: none;
   }
 `

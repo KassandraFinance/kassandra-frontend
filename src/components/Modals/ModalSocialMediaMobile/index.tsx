@@ -70,7 +70,6 @@ const ModalSocialMediaMobile = ({
           <span>Github</span>
         </S.SocialIcon>
         <S.SocialIcon
-          id="aboutMobile"
           onClick={() => {
             setModalOpen(false), router.push('/about')
           }}
