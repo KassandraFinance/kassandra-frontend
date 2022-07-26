@@ -102,7 +102,6 @@ const Form = ({
     feeNumber: 0,
     feeString: ''
   })
-  const [isError, setIsError] = React.useState(false)
   const [errorMsg, setErrorMsg] = React.useState('')
   const [slippage, setSlippage] = React.useState({
     value: '0.5',
@@ -152,6 +151,7 @@ const Form = ({
 
   // calculate invest with output
   async function calculateInvestAmountIn(investAmoutOut: BigNumber): Promise<void> {
+    setErrorMsg('')
     try {
       const [
         swapInTotalPoolBalance,
@@ -223,7 +223,7 @@ const Form = ({
             return
           }
 
-          if (swapInAmount.gt(swapInBalance) && Number(swapInAmount.toString()) > 0) {
+          if (investAmoutInNormalized.gt(swapInBalance) && Number(investAmoutInNormalized.toString()) > 0) {
             setErrorMsg('This amount exceeds your balance!')
             return;
           }
@@ -263,6 +263,7 @@ const Form = ({
 
   // calculate swap with output
   async function calculateSwapAmountIn(swapAmountOut: BigNumber): Promise<void> {
+    setErrorMsg('')
     try {
       const [
         swapInTotalPoolBalance,
@@ -296,6 +297,7 @@ const Form = ({
 
       const swapIn = newSwapInAmount.mul(exchangeRateOut).div(exchangeRateIn)
       let swapAmoutInNormalized: BigNumber = swapIn
+
       if (invertToken[swapInAddress]) {
         swapAmoutInNormalized = await convertBalanceYRTtoWrap(swapIn, invertToken[swapInAddress])
       }
@@ -308,30 +310,35 @@ const Form = ({
         ).replace(/\s/g, '')
         setPriceImpact(Big(0))
       }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      const errorStr = error.toString()
+      try {
+        if (userWalletAddress.length > 0 && swapAmoutInNormalized.gt(new BigNumber(0))) {
+          await proxy.trySwapExactAmountIn(swapInAddress, swapAmoutInNormalized, swapOutAddress, userWalletAddress)
+        }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
+        const errorStr = error.toString()
 
-      if (errorStr.search(/ERR_(BPOW_BASE_TOO_|MATH_APPROX)/) > -1) {
-        setErrorMsg('This amount is too low for the pool!')
-        return
+        if (errorStr.search(/ERR_(BPOW_BASE_TOO_|MATH_APPROX)/) > -1) {
+          setErrorMsg('This amount is too low for the pool!')
+          return
+        }
+
+        if (errorStr.search('ERR_MAX_IN_RATIO') > -1) {
+          setErrorMsg("The amount can't be more than half of what's in the pool!")
+          return
+        }
+
+        if (errorStr.search('below minimum') > -1) {
+          setErrorMsg('This amount is below minimum withdraw!')
+          return
+        }
+
+        if (swapAmoutInNormalized.gt(swapInBalance)) {
+          setErrorMsg('This amount exceeds your balance!')
+          return;
+        }
       }
-
-      if (errorStr.search('ERR_MAX_IN_RATIO') > -1) {
-        setErrorMsg("The amount can't be more than half of what's in the pool!")
-        return
-      }
-
-      if (errorStr.search('below minimum') > -1) {
-        setErrorMsg("This amount is below minimum withdraw!")
-        return
-      }
-
-      if (swapInAmount.gt(swapInBalance)) {
-        setErrorMsg('This amount exceeds your balance!')
-        return;
-      }
-
+    } catch (error) {
       ToastWarning('Could not connect with the blockchain to calculate prices.')
     }
   }
@@ -503,15 +510,14 @@ const Form = ({
     }
 
     async function generateEstimatedGas() {
-      proxy.estimatedGas(
+      const response = await proxy.estimatedGas(
         userWalletAddress,
         swapInAddress,
         new BigNumber('0'))
-          .then((response:
-            {
-              feeNumber: number,
-              feeString: string
-            }) => setGasFee(prevState => ({...prevState, feeString: response.feeString, feeNumber: response.feeNumber})))
+
+      if (response) {
+        setGasFee(prevState => ({ ...prevState, feeString: response.feeString, feeNumber: response.feeNumber }))
+      }
     }
 
     const calc = async () => {
@@ -539,7 +545,7 @@ const Form = ({
           )
 
           // swapInAddress
-          generateEstimatedGas()
+          await generateEstimatedGas()
 
           setSwapOutAmount([newSwapOutAmount])
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -576,7 +582,7 @@ const Form = ({
             }
 
             if (swapInAmount.gt(swapInBalance) && Number(swapInAmount.toString()) > 0) {
-              setIsError(true)
+              setErrorMsg('This amount exceeds your balance!')
               return;
             }
           }
@@ -617,7 +623,6 @@ const Form = ({
     calc()
     setErrorMsg('')
     setSwapOutAmount([new BigNumber(0)])
-    setIsError(false)
   }, [chainId, swapInAmount, swapInAddress])
 
   // calculate swap
@@ -695,12 +700,12 @@ const Form = ({
           }
 
           if (errorStr.search('below minimum') > -1) {
-            setErrorMsg("This amount is below minimum withdraw!")
+            setErrorMsg('This amount is below minimum withdraw!')
             return
           }
 
           if (swapInAmount.gt(swapInBalance)) {
-            setIsError(true)
+            setErrorMsg('This amount exceeds your balance!')
             return;
           }
         }
@@ -713,7 +718,6 @@ const Form = ({
     calc()
     setErrorMsg('')
     setSwapOutAmount([new BigNumber(0)])
-    setIsError(false)
   }, [chainId, swapInAmount, swapInAddress, swapOutAddress])
 
   // calculate withdraw
@@ -913,11 +917,11 @@ const Form = ({
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
-            dispatch(setModalAlertText({errorText: `Approval of ${tokenSymbol} cancelled`}))
+            dispatch(setModalAlertText({ errorText: `Approval of ${tokenSymbol} cancelled` }))
             return
           }
 
-          dispatch(setModalAlertText({errorText: `Failed to approve ${tokenSymbol}. Please try again later.`}))
+          dispatch(setModalAlertText({ errorText: `Failed to approve ${tokenSymbol}. Please try again later.` }))
           return
         }
 
@@ -985,11 +989,11 @@ const Form = ({
           trackCancelBuying()
 
           if (error.code === 4001) {
-            dispatch(setModalAlertText({errorText: `Investment in ${tokenSymbol} cancelled`}))
+            dispatch(setModalAlertText({ errorText: `Investment in ${tokenSymbol} cancelled` }))
             return
           }
 
-          dispatch(setModalAlertText({errorText: `Failed to invest in ${tokenSymbol}. Please try again later.`}))
+          dispatch(setModalAlertText({ errorText: `Failed to invest in ${tokenSymbol}. Please try again later.` }))
           return
         }
 
@@ -1013,11 +1017,11 @@ const Form = ({
           trackCancelBuying()
 
           if (error.code === 4001) {
-            dispatch(setModalAlertText({errorText: `Withdrawal of ${tokenSymbol} cancelled`}))
+            dispatch(setModalAlertText({ errorText: `Withdrawal of ${tokenSymbol} cancelled` }))
             return
           }
 
-          dispatch(setModalAlertText({errorText: `Failed to withdraw ${tokenSymbol}. Please try again later.`}))
+          dispatch(setModalAlertText({ errorText: `Failed to withdraw ${tokenSymbol}. Please try again later.` }))
           return
         }
 
@@ -1039,11 +1043,11 @@ const Form = ({
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
-            dispatch(setModalAlertText({errorText: `Swap of ${tokenInSymbol} to ${tokenOutSymbol} cancelled`}))
+            dispatch(setModalAlertText({ errorText: `Swap of ${tokenInSymbol} to ${tokenOutSymbol} cancelled` }))
             return
           }
 
-          dispatch(setModalAlertText({errorText: `Failed to swap ${tokenInSymbol} to ${tokenOutSymbol}. Please try again later.`}))
+          dispatch(setModalAlertText({ errorText: `Failed to swap ${tokenInSymbol} to ${tokenOutSymbol}. Please try again later.` }))
           return
         }
 
@@ -1199,7 +1203,7 @@ const Form = ({
           default:
         }
       } catch (error) {
-        dispatch(setModalAlertText({errorText: 'Could not connect with the Blockchain!'}))
+        dispatch(setModalAlertText({ errorText: 'Could not connect with the Blockchain!' }))
       }
     }, [tokenAddress2Index])
 
@@ -1277,42 +1281,39 @@ const Form = ({
             )
             .toString()
       } />
-
-      <S.ErrorTippy content={errorMsg} visible={errorMsg.length > 0}>
-        <InputTokens
-          clearInput={clearInput}
-          inputRef={inputTokenRef}
-          actionString={typeAction}
-          title={title}
-          decimals={poolTokensArray[tokenInIndex] ? poolTokensArray[tokenInIndex].decimals : new BigNumber(18)}
-          swapBalance={swapInBalance}
-          swapAmount={swapInAmount}
-          setSwapAmount={setSwapInAmount}
-          // Text Input
-          disabled={
-            userWalletAddress.length === 0
-              ? "Please connect your wallet by clicking the button below"
-              : chainId !== poolChain.chainId
-                ? `Please change to the ${poolChain.chainName} by clicking the button below`
-                : ""
-          }
-          // Select Input
-          poolTokens={
-            title === 'Withdraw'
-              ? [poolTokensArray[poolTokensArray.length - 1]]
-              : poolTokensArray
-                .slice(0, -1)
-                .filter((token: { address: string }) => token.address !== swapOutAddress)
-          }
-          tokenDetails={poolTokensArray[tokenInIndex]}
-          setSwapAddress={setSwapInAddress}
-          setMaxActive={setMaxActive}
-          maxActive={maxActive}
-          gasFee={gasFee}
-          isError={isError}
-          swapInAddress={swapInAddress}
-        />
-      </S.ErrorTippy>
+      <InputTokens
+        clearInput={clearInput}
+        inputRef={inputTokenRef}
+        actionString={typeAction}
+        title={title}
+        decimals={poolTokensArray[tokenInIndex] ? poolTokensArray[tokenInIndex].decimals : new BigNumber(18)}
+        swapBalance={swapInBalance}
+        swapAmount={swapInAmount}
+        setSwapAmount={setSwapInAmount}
+        // Text Input
+        disabled={
+          userWalletAddress.length === 0
+            ? "Please connect your wallet by clicking the button below"
+            : chainId !== poolChain.chainId
+              ? `Please change to the ${poolChain.chainName} by clicking the button below`
+              : ""
+        }
+        // Select Input
+        poolTokens={
+          title === 'Withdraw'
+            ? [poolTokensArray[poolTokensArray.length - 1]]
+            : poolTokensArray
+              .slice(0, -1)
+              .filter((token: { address: string }) => token.address !== swapOutAddress)
+        }
+        tokenDetails={poolTokensArray[tokenInIndex]}
+        setSwapAddress={setSwapInAddress}
+        setMaxActive={setMaxActive}
+        maxActive={maxActive}
+        gasFee={gasFee}
+        errorMsg={errorMsg}
+        swapInAddress={swapInAddress}
+      />
 
       {title === 'Swap' ?
         <Tippy content="Trade places for swap-in and swap-out token">
@@ -1433,8 +1434,7 @@ const Form = ({
                 approvals[title][tokenInIndex] === Approval.Approved && (
                   swapInAmount.toString() === "0" ||
                   swapOutAmount[0].toString() === "0" ||
-                  errorMsg.length > 0 ||
-                  isError
+                  errorMsg.length > 0
                 )
               )
             }
