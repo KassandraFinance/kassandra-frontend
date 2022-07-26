@@ -29,8 +29,7 @@ interface IGovernancesProps {
 
 export const Overview = () => {
   // eslint-disable-next-line prettier/prettier
-  const [isModalWalletConnect, setIsModalWalletConnect] =
-    React.useState<boolean>(false)
+  const [isModalWalletConnect, setIsModalWalletConnect] = React.useState<boolean>(false)
   const [yourVotingPower, setYourVotingPower] = React.useState(new BigNumber(0))
   const [governances, setGovernances] = React.useState<IGovernancesProps>({
     totalVotingPower: new BigNumber(-1),
@@ -39,8 +38,10 @@ export const Overview = () => {
 
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
-  const { data } = useSWR([GET_GOVERNANCES], query =>
-    request(SUBGRAPH_URL, query, { id: userWalletAddress })
+  const { data } = useSWR(
+    [GET_GOVERNANCES, userWalletAddress],
+    (query, userWalletAddress) =>
+      request(SUBGRAPH_URL, query, { id: userWalletAddress })
   )
 
   React.useEffect(() => {

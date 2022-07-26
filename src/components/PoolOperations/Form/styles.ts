@@ -323,6 +323,21 @@ export const InputTokensContainer = styled.div`
   border-radius: 1.6rem;
 `
 
+export const Flex = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+
+  width: 100%;
+`
+
+export const Top = styled.div`
+  display: flex;
+  align-items: flex-end;
+
+  width: 100%;
+`
+
 export const Info = styled.div`
   display: flex;
   flex-direction: column;
@@ -335,10 +350,10 @@ export const Amount = styled.div`
   display: flex;
   align-items: flex-end;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 
   .price-dolar {
     margin-top: 0.2rem;
@@ -350,15 +365,19 @@ export const Amount = styled.div`
 `
 
 interface ISpanProps {
-  total?: boolean;
+  color: 'red' | 'white' | 'amber';
+}
+
+const colors = {
+  red: '#E8372C',
+  white: '#ffffff',
+  amber: '#FFBF00'
 }
 
 // prettier-ignore
 export const Span = styled.span<ISpanProps>`
-  height: 1.7rem;
-
-  color: ${props => (props.total ? theme.colors.amber : '#fff')};
-  font-size: ${theme.font.sizes.font14};
+  color: ${({color}) => colors[color]};
+  font-size: ${theme.font.sizes.font12};
 
   @media(max-width: 380px) {
     font-size: 1.3rem;
