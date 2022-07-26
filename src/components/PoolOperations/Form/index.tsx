@@ -352,8 +352,8 @@ const Form = ({
         newSwapOutAddress = typeWithdrawChecked === 'Single_asset' ? poolTokensArray[0].address : ''
         break
       case 'Swap':
-        newSwapInAddress = poolTokensArray[0].address || ''
-        newSwapOutAddress = poolTokensArray[1].address || ''
+        newSwapInAddress = poolTokensArray[0]?.address || ''
+        newSwapOutAddress = poolTokensArray[1]?.address || ''
         break
       default:
     }
@@ -482,8 +482,6 @@ const Form = ({
       setGasFee({ ...gasFee, error: true })
       return
     }
-
-    console.log({balance: swapInBalance.toString(), balanceMinus: balanceMinusFee.toString()})
 
     setGasFee({ ...gasFee, error: false })
   }, [title, swapInAddress, swapInAmount])
@@ -619,7 +617,7 @@ const Form = ({
 
     calc()
     setErrorMsg('')
-    setSwapOutAmount(Array(poolTokensArray.length - 1).fill(new BigNumber(0)))
+    setSwapOutAmount([new BigNumber(0)])
     setIsError(false)
   }, [chainId, swapInAmount, swapInAddress])
 
@@ -716,7 +714,7 @@ const Form = ({
 
     calc()
     setErrorMsg('')
-    setSwapOutAmount(Array(poolTokensArray.length - 1).fill(new BigNumber(0)))
+    setSwapOutAmount([new BigNumber(0)])
     setIsError(false)
   }, [chainId, swapInAmount, swapInAddress, swapOutAddress])
 
@@ -728,9 +726,7 @@ const Form = ({
 
     if (chainId !== poolChain.chainId) {
       if (swapOutAddress === '') {
-        setSwapOutAmount(
-          Array(poolTokensArray.length - 1).fill(new BigNumber(0))
-        )
+        setSwapOutAmount([new BigNumber(0)])
         return
       }
 
@@ -908,7 +904,7 @@ const Form = ({
 
     calc()
     setErrorMsg('')
-    setSwapOutAmount(Array(poolTokensArray.length - 1).fill(new BigNumber(0)))
+    setSwapOutAmount([new BigNumber(0)])
   }, [chainId, swapInAmount, swapOutAddress, poolTokensArray])
 
   const tokenInIndex = tokenAddress2Index[swapInAddress]
@@ -1499,7 +1495,3 @@ const Form = ({
 }
 
 export default Form
-function tetwe(tetwe: any) {
-  throw new Error('Function not implemented.')
-}
-
