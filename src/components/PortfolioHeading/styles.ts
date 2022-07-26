@@ -128,7 +128,7 @@ export const Change = styled.div<IChangeProps>`
   align-items: center;
 
   ${({ change }) => css`
-    color: ${change < 0 ? '#E8372C' : ' #5ee66b'};
+    color: ${change < 0 ? '#EA3224' : ' #5ee66b'};
   `}
   font-weight: ${theme.font.weight.normal};
   font-size: ${theme.font.sizes.font16};
