@@ -37,7 +37,7 @@ export const TabsButton =styled.button<ITabsButtonProps>`
   font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.normal};
 
-  transition: background-color 3000ms ease-in-out, border 3000ms ease-in-out, color 3000ms ease-in-out;
+  transition: background-color 300ms ease-in-out, border 300ms ease-in-out, color 300ms ease-in-out;
 
   cursor: pointer;
 

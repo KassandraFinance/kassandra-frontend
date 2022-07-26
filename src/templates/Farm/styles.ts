@@ -2,8 +2,9 @@ import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 export const StakeFarm = styled.section`
-  max-width: 945px;
+  max-width: 1006px;
   margin: 0 auto;
+  padding-inline: 3rem;
 `
 
 export const StakeWithPowerVote = styled.div`
@@ -11,17 +12,13 @@ export const StakeWithPowerVote = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  margin: 50px 0 50px;
   @media (max-width: 960px) {
     flex-wrap: wrap;
-    margin: 50px 30px;
   }
+`
 
-  /* @media (max-width: 380px) {
-    max-width: 29.5rem;
-    width: 100%;
-    min-width: 28rem;
-  } */
+export const StakeFarmHeader = styled.div`
+  margin-bottom: 3.2rem;
 `
 
 interface INameStakeProps {

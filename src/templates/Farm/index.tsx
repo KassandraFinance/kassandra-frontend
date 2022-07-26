@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
-
 import BigNumber from 'bn.js'
 
 import { chains, Staking } from '../../constants/tokenAddresses'
@@ -16,8 +15,13 @@ import Loading from '../../components/Loading'
 import Header from '../../components/Header'
 import Breadcrumb from '../../components/Breadcrumb'
 import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
+import SelectTabs from '../../components/SelectTabs'
+
+import productBarIcon from '../../../public/assets/iconGradient/product-bar.svg'
+import stakingPoolsIcon from '../../../public/assets/iconGradient/staking-pools.svg'
 
 import * as S from './styles'
+
 import {
   poolsKacyFuji,
   poolsInvestor,
@@ -26,9 +30,25 @@ import {
   poolsFundsFuji
 } from '../../constants/pools'
 
+const tabs = [
+  {
+    asPathText: 'farm',
+    text: 'Farm Pools',
+    icon: productBarIcon
+  },
+  {
+    asPathText: 'stake',
+    text: 'Stake Pools',
+    icon: stakingPoolsIcon
+  }
+]
+
 const StakeFarm = () => {
   const [loading, setLoading] = React.useState<boolean>(true)
   const [investor, setInvestor] = React.useState([false, false])
+  const [isSelectTab, setIsSelectTab] = React.useState<
+    string | string[] | undefined
+  >('farm')
 
   const { trackCategoryPageView } = useMatomoEcommerce()
   const { balance } = useStakingContract(Staking)
@@ -106,21 +126,33 @@ const StakeFarm = () => {
       ) : (
         <>
           <S.StakeFarm>
-            <S.StakeWithPowerVote>
-              <S.NameStake>
-                <S.Name>
-                  <img
-                    src="assets/iconGradient/vote.svg"
-                    alt=""
-                    width={24}
-                    height={24}
-                  />
-                  <h1>Stake KACY</h1>
-                </S.Name>
-                <p>EARN REWARDS AND VOTING POWER</p>
-              </S.NameStake>
-              <VotingPower userWalletAddress={userWalletAddress} />
-            </S.StakeWithPowerVote>
+            <S.StakeFarmHeader>
+              <S.StakeWithPowerVote>
+                <S.NameStake>
+                  <S.Name>
+                    <img
+                      src="assets/iconGradient/stake-money-withdraw.svg"
+                      alt=""
+                      width={24}
+                      height={24}
+                    />
+                    <h1>Stake and Farm KACY</h1>
+                  </S.Name>
+                  <p>
+                    Earn rewards and voting power by staking KACY and other
+                    assets
+                  </p>
+                </S.NameStake>
+                <VotingPower userWalletAddress={userWalletAddress} />
+              </S.StakeWithPowerVote>
+
+              <SelectTabs
+                tabs={tabs}
+                isSelect={isSelectTab}
+                setIsSelect={setIsSelectTab}
+              />
+            </S.StakeFarmHeader>
+
             <S.GridStaking>
               {process.env.NEXT_PUBLIC_MASTER === '1'
                 ? poolsKacy.map(pool => (
