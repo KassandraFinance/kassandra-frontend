@@ -40,7 +40,6 @@ interface IKacyMarketDataProps {
 const ModalKacy = () => {
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
   const ERC20Contract = ERC20(poolsKacy[0].address)
-
   const { userInfo, earned } = useStakingContract(Staking)
 
   const [isModalKacy, setIsModalKacy] = React.useState(false)
@@ -86,14 +85,6 @@ const ModalKacy = () => {
       setKacyWallet(balanceToken)
     }
 
-    getKacyBalanceInWallet()
-  }, [userWalletAddress])
-
-  React.useEffect(() => {
-    if (!userWalletAddress) {
-      return
-    }
-
     async function getTokenAmountInPool(pid: number) {
       const userInfoResponse = await userInfo(pid, userWalletAddress)
 
@@ -110,14 +101,6 @@ const ModalKacy = () => {
       setKacyStaked(count)
     }
 
-    kacyTotalInPool()
-  }, [userWalletAddress])
-
-  React.useEffect(() => {
-    if (!userWalletAddress) {
-      return
-    }
-
     async function earnedKacy(pid: number) {
       const earnedResponse: BigNumber = await earned(pid, userWalletAddress)
       return earnedResponse
@@ -132,6 +115,8 @@ const ModalKacy = () => {
       setKacyUnclaimed(count)
     }
 
+    getKacyBalanceInWallet()
+    kacyTotalInPool()
     kacyEarned()
   }, [userWalletAddress])
 
