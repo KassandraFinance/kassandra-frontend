@@ -9,7 +9,7 @@ import { useAppSelector, useAppDispatch } from '../../../store/hooks'
 import { setModalAlertText } from '../../../store/reducers/modalAlertText'
 
 import Button from '../../Button'
-import UserNFTs from '../../UserNFts'
+import UserNFTs, { INftDetailsListProps } from '../../UserNFts'
 import NftImage from '../../NftImage'
 
 import * as S from './styles'
@@ -50,6 +50,8 @@ const ModalUserEditInfo = ({
   const [isStateSocialMidia, setIsStateSocialMidia] = React.useState(false)
   const [isStateManagerInfo, setIsStateManagerInfo] = React.useState(false)
   const [isDropdownAddNft, setIsDropdownAddNft] = React.useState(false)
+  const [userNftDetails, setUserNftDetails] =
+    React.useState<INftDetailsListProps>()
   const [editYourProfileInput, setEditYourProfileInput] =
     React.useState<UserEditInfoFormProps>({
       ...userData
@@ -272,6 +274,7 @@ const ModalUserEditInfo = ({
                       isDropdownAddNft={isDropdownAddNft}
                       setIsDropdownAddNft={setIsDropdownAddNft}
                       inputRefModal={inputRefModal}
+                      setUserNftDetails={setUserNftDetails}
                     />
                   </S.UserAddNftImage>
                 </span>
