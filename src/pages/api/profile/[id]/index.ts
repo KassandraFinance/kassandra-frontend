@@ -1,20 +1,21 @@
-import { Prisma } from '@prisma/client'
 import { withIronSessionApiRoute } from 'iron-session/next'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { checkAddressChecksum } from 'web3-utils'
 import { ironSessionConfig } from '../../../../config/ironSessionConfig'
 import prisma from '../../../../libs/prisma'
 
-type NftProps = {
-  contractType: string,
-  collectionName?: string,
-  symbol?: string,
-  tokenAddress?: string,
-  tokenId?: string,
-  chain?: string,
-  name?: string,
-  desciption?: string
-}
+type NftProps =
+  | {
+      contractType?: string,
+      collectionName?: string,
+      symbol?: string,
+      tokenAddress?: string,
+      tokenId?: string,
+      chain?: string,
+      nftName?: string,
+      nftDescription?: string
+    }
+  | undefined
 
 interface UserInput {
   nickname?: string;
@@ -25,7 +26,7 @@ interface UserInput {
   description?: string;
   image?: string;
   isNFT?: boolean;
-  nft?: Prisma.NftCreateInput;
+  nft: NftProps;
 }
 
 export const config = {
@@ -43,8 +44,7 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
   try {
     if (method === 'GET') {
       const user = await prisma.user.findUnique({
-        where: { walletAddress },
-        include: { nft: true }
+        where: { walletAddress }
       })
 
       if (!user) {
@@ -53,7 +53,26 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
         })
       }
 
-      return response.status(200).json(user)
+      return response.status(200).json({
+        description: user.description,
+        discord: user.discord,
+        image: user.image,
+        nickname: user.nickname,
+        telegram: user.telegram,
+        twitter: user.twitter,
+        website: user.website,
+        isNFT: user.isNFT,
+        nft: {
+          contractType: user.contractType,
+          collectionName: user.collectionName,
+          symbol: user.symbol,
+          tokenAddress: user.tokenAddress,
+          tokenId: user.tokenId,
+          chain: user.chain,
+          nftName: user.nftName,
+          nftDescription: user.nftDescription
+        }
+      })
     }
 
     if (method === 'POST') {
@@ -104,10 +123,6 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
       }
 
       if (!errors.length && checkAddressChecksum(walletAddress)) {
-        await prisma.nft.deleteMany({
-          where: { userWalletAddress: walletAddress }
-        })
-
         await prisma.user.upsert({
           where: {
             walletAddress
@@ -121,7 +136,15 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
             telegram,
             twitter,
             website,
-            isNFT
+            isNFT,
+            contractType: nft?.contractType,
+            collectionName: nft?.collectionName,
+            symbol: nft?.symbol,
+            tokenAddress: nft?.tokenAddress,
+            tokenId: nft?.tokenId,
+            chain: nft?.chain,
+            nftName: nft?.nftName,
+            nftDescription: nft?.nftDescription
           },
           update: {
             description,
@@ -131,25 +154,18 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
             telegram,
             twitter,
             website,
-            isNFT
+            isNFT,
+            contractType: nft?.contractType,
+            collectionName: nft?.collectionName,
+            symbol: nft?.symbol,
+            tokenAddress: nft?.tokenAddress,
+            tokenId: nft?.tokenId,
+            chain: nft?.chain,
+            nftName: nft?.nftName,
+            nftDescription: nft?.nftDescription
           }
         })
 
-        if (isNFT && nft) {
-          await prisma.nft.create({
-            data: {
-              chain: nft.chain,
-              contractType: nft.contractType,
-              collectionName: nft.collectionName,
-              desciption: nft.desciption,
-              name: nft.name,
-              symbol: nft.symbol,
-              tokenAddress: nft.tokenAddress,
-              tokenId: nft.tokenId,
-              userWalletAddress: walletAddress
-            }
-          })
-        }
         return response.status(201).end()
       }
 
