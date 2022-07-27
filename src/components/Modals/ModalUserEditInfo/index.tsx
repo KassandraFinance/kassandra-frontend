@@ -11,6 +11,7 @@ import { setModalAlertText } from '../../../store/reducers/modalAlertText'
 import Button from '../../Button'
 import UserNFTs, { INftDetailsListProps } from '../../UserNFts'
 import NftImage from '../../NftImage'
+import { NftDetailsProps } from '../../Governance/UserDescription'
 
 import * as S from './styles'
 
@@ -32,7 +33,8 @@ type UserEditInfoFormProps = {
   website: string,
   telegram: string,
   discord: string,
-  description: string
+  description: string,
+  nft: NftDetailsProps | undefined
 }
 
 const ModalUserEditInfo = ({
@@ -75,6 +77,19 @@ const ModalUserEditInfo = ({
     const { nickname, twitter, website, telegram, discord, description } =
       editYourProfileInput
 
+    const nftDetails = userImageModal.isNFTPreviewModal
+      ? {
+          contractType: userNftDetails?.contract_type,
+          collectionName: userNftDetails?.name,
+          symbol: userNftDetails?.symbol,
+          tokenAddress: userNftDetails?.token_address,
+          tokenId: userNftDetails?.token_id,
+          chain: userNftDetails?.chain,
+          nftName: userNftDetails?.metadata.name,
+          nftDescription: userNftDetails?.metadata.description
+        }
+      : undefined
+
     try {
       const response = await fetch('/api/nonce')
       const { nonce } = await response.json()
@@ -114,7 +129,8 @@ const ModalUserEditInfo = ({
             image: userImageModal.image_file
               ? ''
               : userImageModal.image_preview,
-            isNFT: userImageModal.isNFTPreviewModal
+            isNFT: userImageModal.isNFTPreviewModal,
+            nft: nftDetails
           })
         })
         setUserData(editYourProfileInput)

@@ -17,6 +17,17 @@ import ModalInfoNFT from '../../Modals/ModalInfoNFT'
 
 import * as S from './styles'
 
+export type NftDetailsProps = {
+  contractType?: string,
+  collectionName?: string,
+  symbol?: string,
+  tokenAddress?: string,
+  tokenId?: string,
+  chain?: string,
+  nftName?: string,
+  nftDescription?: string
+}
+
 export type UserProps = {
   nickname: string,
   twitter: string,
@@ -27,7 +38,8 @@ export type UserProps = {
   image?: {
     url: string,
     isNFT: false
-  }
+  },
+  nft: NftDetailsProps | undefined
 }
 
 interface IUserDescriptionProps {
@@ -43,14 +55,14 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
   const [userDescription, setUserDescription] = React.useState('')
 
   const [imageUser, setImageUser] = React.useState({ url: '', isNFT: false })
-
   const [userData, setUserData] = React.useState<UserProps>({
     nickname: '',
     twitter: '',
     website: '',
     telegram: '',
     discord: '',
-    description: ''
+    description: '',
+    nft: undefined
   })
 
   const isConnectWallet = userWalletAddress === userWalletUrl
@@ -85,7 +97,8 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
           website: '',
           telegram: '',
           discord: '',
-          description: ''
+          description: '',
+          nft: undefined
         }),
           setImageUser({ url: '', isNFT: false })
       })
