@@ -10,7 +10,7 @@ import { Staking, chains } from '../../../constants/tokenAddresses'
 import useStakingContract from '../../../hooks/useStakingContract'
 
 import { BNtoDecimal } from '../../../utils/numerals'
-import { formatNumber } from '../../../utils/formatNumber'
+import { abbreviateNumber } from '../../../utils/abbreviateNumber'
 
 import Kacy from './Kacy'
 import ModalBuyKacy from '../../../components/Modals/ModalBuyKacy'
@@ -145,7 +145,7 @@ const ModalKacy = () => {
           className="kacyAmount"
           text={
             userWalletAddress && Number(chainId) === chain.chainId
-              ? `${formatNumber(BNtoDecimal(kacyTotal, 18, 2))} KACY`
+              ? `${abbreviateNumber(BNtoDecimal(kacyTotal, 18, 2))} KACY`
               : 'KACY'
           }
           icon={<Image src={kacyIcon} width={13.86} height={11.86} />}
