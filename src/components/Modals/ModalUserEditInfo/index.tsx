@@ -45,10 +45,6 @@ const ModalUserEditInfo = ({
   setUserImage,
   setUserData
 }: IModalUserEditInfoProps) => {
-  const dispatch = useAppDispatch()
-  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
-  const inputRefModal = React.useRef<HTMLInputElement>(null)
-
   const [isStateSocialMidia, setIsStateSocialMidia] = React.useState(false)
   const [isStateManagerInfo, setIsStateManagerInfo] = React.useState(false)
   const [isDropdownAddNft, setIsDropdownAddNft] = React.useState(false)
@@ -63,6 +59,11 @@ const ModalUserEditInfo = ({
     image_file: '',
     isNFTPreviewModal: imageUser.isNFT
   })
+
+  const dispatch = useAppDispatch()
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
+
+  const inputRefModal = React.useRef<HTMLInputElement>(null)
 
   function handleCloseModal() {
     setModalOpen(false)
