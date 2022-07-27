@@ -287,10 +287,6 @@ const StakeCard = ({
       return
     }
 
-    if (userWalletAddress && kacyEarned.lt(new BigNumber(0))) {
-      return
-    }
-
     setIsLoading(false)
   }, [infoStaked])
 
