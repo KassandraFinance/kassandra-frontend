@@ -1,5 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
+import detectEthereumProvider from '@metamask/detect-provider'
 import BigNumber from 'bn.js'
 import useSWR from 'swr'
 import request from 'graphql-request'
@@ -104,6 +105,7 @@ const Profile = () => {
     React.useState<IAssetsValueWalletProps>({ '': new BigNumber(-1) })
   const [cardstakesPool, setCardStakesPool] = React.useState<IKacyLpPool[]>([])
   const [myFunds, setMyFunds] = React.useState<ImyFundsType>({})
+  const [hasEthereumProvider, setHasEthereumProvider] = React.useState(false)
   const [totalVotingPower, setTotalVotingPower] = React.useState(
     new BigNumber(0)
   )
@@ -293,6 +295,20 @@ const Profile = () => {
       )
     }
   }, [data, walletUserString])
+
+  React.useEffect(() => {
+    const checkEthereumProvider = async () => {
+      const provider = await detectEthereumProvider()
+
+      if (!provider && !chainId) {
+        setHasEthereumProvider(false)
+      } else {
+        setHasEthereumProvider(true)
+      }
+    }
+
+    checkEthereumProvider()
+  }, [chainId])
 
   React.useEffect(() => {
     if (isSelectQueryTab) {
