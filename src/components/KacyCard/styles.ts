@@ -232,7 +232,7 @@ export const Price = styled.div<IKacyPriceProps>`
     p {
       margin-left: 0.2rem;
 
-      color: ${props => (props.isValuePercentage ? '#5ee56b' : '#E8372C')};
+      color: ${props => (props.isValuePercentage ? '#5ee56b' : '#EA3224')};
       font-size: ${theme.font.sizes.font16};
       font-weight: ${theme.font.weight.light};
     }

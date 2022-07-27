@@ -132,7 +132,7 @@ const statslibColor: { [key: string]: string } = {
   succeeded: '#26DBDB',
   queued: '#FFBF00',
   executed: '#2CE878',
-  failed: '#E8372C',
+  failed: '#EA3224',
   canceled: '#BDBDBD'
 }
 
