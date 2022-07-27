@@ -418,7 +418,7 @@ const StakeCard = ({
                           text="Claim"
                           size="claim"
                           backgroundSecondary
-                          disabledNoEvent={kacyEarned.toString() === '0'}
+                          disabledNoEvent={kacyEarned.lte(new BigNumber(0))}
                           onClick={() =>
                             stakingContract.getReward(
                               pid,
