@@ -20,35 +20,33 @@ const Farm = () => {
   }, [])
 
   return (
-    <>
-      <S.GridStaking>
-        {process.env.NEXT_PUBLIC_MASTER === '1'
-          ? poolsFunds.map(pool => (
-              <StakeCard
-                key={pool.pid}
-                pid={pool.pid}
-                address={pool.address}
-                symbol={pool.symbol}
-                properties={{ ...pool.properties }}
-                stakeWithVotingPower={pool.stakeWithVotingPower}
-                stakeWithLockPeriod={pool.stakeWithLockPeriod}
-                isLP={pool.isLP}
-              />
-            ))
-          : poolsFundsFuji.map(pool => (
-              <StakeCard
-                key={pool.pid}
-                pid={pool.pid}
-                address={pool.address}
-                symbol={pool.symbol}
-                properties={{ ...pool.properties }}
-                stakeWithVotingPower={pool.stakeWithVotingPower}
-                stakeWithLockPeriod={pool.stakeWithLockPeriod}
-                isLP={pool.isLP}
-              />
-            ))}
-      </S.GridStaking>
-    </>
+    <S.GridStaking>
+      {process.env.NEXT_PUBLIC_MASTER === '1'
+        ? poolsFunds.map(pool => (
+            <StakeCard
+              key={pool.pid}
+              pid={pool.pid}
+              address={pool.address}
+              symbol={pool.symbol}
+              properties={{ ...pool.properties }}
+              stakeWithVotingPower={pool.stakeWithVotingPower}
+              stakeWithLockPeriod={pool.stakeWithLockPeriod}
+              isLP={pool.isLP}
+            />
+          ))
+        : poolsFundsFuji.map(pool => (
+            <StakeCard
+              key={pool.pid}
+              pid={pool.pid}
+              address={pool.address}
+              symbol={pool.symbol}
+              properties={{ ...pool.properties }}
+              stakeWithVotingPower={pool.stakeWithVotingPower}
+              stakeWithLockPeriod={pool.stakeWithLockPeriod}
+              isLP={pool.isLP}
+            />
+          ))}
+    </S.GridStaking>
   )
 }
 

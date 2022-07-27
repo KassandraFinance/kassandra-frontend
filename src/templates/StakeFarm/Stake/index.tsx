@@ -56,53 +56,47 @@ const Stake = () => {
     calc()
   }, [userWalletAddress])
   return (
-    <>
-      <>
-        <S.StakeFarm>
-          <S.GridStaking>
-            {process.env.NEXT_PUBLIC_MASTER === '1'
-              ? poolsKacy.map(pool => (
-                  <StakeCard
-                    key={pool.pid}
-                    pid={pool.pid}
-                    symbol={pool.symbol}
-                    properties={{ ...pool.properties }}
-                    stakeWithVotingPower={pool.stakeWithVotingPower}
-                    stakeWithLockPeriod={pool.stakeWithLockPeriod}
-                    isLP={pool.isLP}
-                  />
-                ))
-              : poolsKacyFuji.map(pool => (
-                  <StakeCard
-                    key={pool.pid}
-                    pid={pool.pid}
-                    symbol={pool.symbol}
-                    properties={{ ...pool.properties }}
-                    stakeWithVotingPower={pool.stakeWithVotingPower}
-                    stakeWithLockPeriod={pool.stakeWithLockPeriod}
-                    isLP={pool.isLP}
-                  />
-                ))}
-            {process.env.NEXT_PUBLIC_MASTER === '1' &&
-              poolsInvestor.map((pool, i) => {
-                if (investor[i] && pool.pid === i) {
-                  return (
-                    <StakeCard
-                      key={pool.pid}
-                      pid={pool.pid}
-                      symbol={pool.symbol}
-                      properties={{ ...pool.properties }}
-                      stakeWithVotingPower={pool.stakeWithVotingPower}
-                      stakeWithLockPeriod={pool.stakeWithLockPeriod}
-                      isLP={pool.isLP}
-                    />
-                  )
-                }
-              })}
-          </S.GridStaking>
-        </S.StakeFarm>
-      </>
-    </>
+    <S.GridStaking>
+      {process.env.NEXT_PUBLIC_MASTER === '1'
+        ? poolsKacy.map(pool => (
+            <StakeCard
+              key={pool.pid}
+              pid={pool.pid}
+              symbol={pool.symbol}
+              properties={{ ...pool.properties }}
+              stakeWithVotingPower={pool.stakeWithVotingPower}
+              stakeWithLockPeriod={pool.stakeWithLockPeriod}
+              isLP={pool.isLP}
+            />
+          ))
+        : poolsKacyFuji.map(pool => (
+            <StakeCard
+              key={pool.pid}
+              pid={pool.pid}
+              symbol={pool.symbol}
+              properties={{ ...pool.properties }}
+              stakeWithVotingPower={pool.stakeWithVotingPower}
+              stakeWithLockPeriod={pool.stakeWithLockPeriod}
+              isLP={pool.isLP}
+            />
+          ))}
+      {process.env.NEXT_PUBLIC_MASTER === '1' &&
+        poolsInvestor.map((pool, i) => {
+          if (investor[i] && pool.pid === i) {
+            return (
+              <StakeCard
+                key={pool.pid}
+                pid={pool.pid}
+                symbol={pool.symbol}
+                properties={{ ...pool.properties }}
+                stakeWithVotingPower={pool.stakeWithVotingPower}
+                stakeWithLockPeriod={pool.stakeWithLockPeriod}
+                isLP={pool.isLP}
+              />
+            )
+          }
+        })}
+    </S.GridStaking>
   )
 }
 

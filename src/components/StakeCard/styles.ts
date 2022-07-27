@@ -13,11 +13,8 @@ interface IBorderGradientProps {
   stakeWithVotingPower: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
-export const BorderGradient =
-  styled.div <
-  IBorderGradientProps >
-  `
+// prettier-ignore
+export const BorderGradient = styled.div<IBorderGradientProps>`
   position: relative;
 
   width: 29.5rem;
@@ -58,11 +55,8 @@ interface IInterBackgroundProps {
   stakeWithVotingPower: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
-export const InterBackground =
-  styled.div <
-  IInterBackgroundProps >
-  `
+// prettier-ignore
+export const InterBackground = styled.div<IInterBackgroundProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -214,11 +208,8 @@ interface IButtonContainerProps {
   stakeWithVotingPower: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
-export const ButtonContainer =
-  styled.div <
-  IButtonContainerProps >
-  `
+// prettier-ignore
+export const ButtonContainer = styled.div<IButtonContainerProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -260,11 +251,8 @@ interface IButtonDetailsProps {
   isConnect: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
-export const ButtonDetails =
-  styled.button <
-  IButtonDetailsProps >
-  `
+// prettier-ignore
+export const ButtonDetails = styled.button<IButtonDetailsProps>`
   margin-top: ${props => (props.isConnect ? '0px' : '2rem')};
   margin-bottom: 2rem;
 

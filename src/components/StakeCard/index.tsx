@@ -301,7 +301,7 @@ const StakeCard = ({
           {isLoading && (
             <div
               style={{
-                height: '30.2rem',
+                height: `${userWalletAddress ? '52.3rem' : '30.2rem'}`,
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center'
