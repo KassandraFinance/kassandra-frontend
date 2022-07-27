@@ -5,6 +5,8 @@ import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+
 import substr from '../../../utils/substr'
 import { useAppSelector } from '../../../store/hooks'
 
@@ -70,6 +72,8 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
   const walletUserString = Array.isArray(userWalletUrl)
     ? userWalletUrl[0]
     : userWalletUrl
+
+  const { trackEventFunction } = useMatomoEcommerce()
 
   React.useEffect(() => {
     if (!walletUserString) return
@@ -152,7 +156,12 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
             )}
 
             {isConnectWallet && (
-              <button onClick={() => setIsOpenModal(true)}>
+              <button
+                onClick={() => {
+                  trackEventFunction('click-on-button', 'edit-info', 'profile')
+                  setIsOpenModal(true)
+                }}
+              >
                 Edit info
                 <img
                   src="/assets/utilities/edit-icon.svg"
@@ -168,7 +177,16 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
             <S.UserAddressContent>
               {walletUserString && substr(walletUserString)}
               <CopyToClipboard text={walletUserString ? walletUserString : ''}>
-                <button onClick={() => ToastInfo('Copy address')}>
+                <button
+                  onClick={() => {
+                    trackEventFunction(
+                      'click-on-button',
+                      'copy-address',
+                      'profile'
+                    )
+                    ToastInfo('Copy address')
+                  }}
+                >
                   <svg
                     width="14"
                     height="15"
@@ -217,7 +235,14 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
                       userData.discord !== undefined &&
                       userData.discord !== null
                     }
-                    onClick={() => ToastInfo('Copy Id')}
+                    onClick={() => {
+                      trackEventFunction(
+                        'click-on-button',
+                        'copy-discord',
+                        'profile'
+                      )
+                      ToastInfo('Copy Id')
+                    }}
                   >
                     <Image
                       src="/assets/socialMidia/discord.svg"
@@ -238,6 +263,9 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
                     userData.twitter !== undefined &&
                     userData.twitter !== null
                   }
+                  onClick={() => {
+                    trackEventFunction('click-on-link', 'twitter', 'profile')
+                  }}
                 >
                   <Image
                     src="/assets/socialMidia/twitter.svg"
@@ -257,6 +285,9 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
                     userData.telegram !== undefined &&
                     userData.telegram !== null
                   }
+                  onClick={() => {
+                    trackEventFunction('click-on-link', 'telegram', 'profile')
+                  }}
                 >
                   <Image
                     src="/assets/socialMidia/telegram.svg"
@@ -276,6 +307,9 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
                     userData.website !== undefined &&
                     userData.website !== null
                   }
+                  onClick={() => {
+                    trackEventFunction('click-on-link', 'website', 'profile')
+                  }}
                 >
                   <Image
                     src="/assets/socialMidia/webpage.svg"
@@ -287,7 +321,12 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
               </li>
             </ul>
             {isConnectWallet && (
-              <S.EditInfoButton onClick={() => setIsOpenModal(true)}>
+              <S.EditInfoButton
+                onClick={() => {
+                  trackEventFunction('click-on-button', 'edit-info', 'profile')
+                  setIsOpenModal(true)
+                }}
+              >
                 Edit Info
                 <Image
                   src="/assets/utilities/edit-icon.svg"
@@ -323,6 +362,7 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
               <S.ButtonSeeMore
                 isSeeMore={isStateSeeMore}
                 onClick={() => {
+                  trackEventFunction('click-on-button', 'see-more', 'profile')
                   setIsStateSeeMore(!isStateSeeMore)
                 }}
               >

@@ -1,6 +1,10 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
 
+import { useAppSelector } from '../../store/hooks'
+
+import { chains } from '../../constants/tokenAddresses'
+
 import { ChainDetails } from '../../utils/changeChain'
 
 import ModalWalletConnect from '../Modals/ModalWalletConnect'
@@ -40,6 +44,15 @@ const HeimOperations = ({
   const [isModalHeimOperations, setIsModalHeimOperations] = React.useState<boolean>(false)
   const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
 
+  const { chainId } = useAppSelector(state => state)
+
+  const chain =
+    process.env.NEXT_PUBLIC_MASTER === '1' ? chains.avalanche : chains.fuji
+
+  function handleSetInputChecked(title: Titles) {
+    if (chain.chainId === chainId) setInputChecked(title)
+  }
+
   return (
     <div>
       {isModalHeimOperations ? (
@@ -62,7 +75,7 @@ const HeimOperations = ({
           <S.HeimOperationsContainer>
             <SelectOperatorCart
               inputChecked={inputChecked}
-              setInputChecked={setInputChecked}
+              handleSetInputChecked={handleSetInputChecked}
               typeWithdrawChecked={typeWithdrawChecked}
               setTypeWithdrawChecked={setTypeWithdrawChecked}
               setIsModaWallet={setIsModaWallet}
@@ -84,9 +97,9 @@ const HeimOperations = ({
       />
 
       {isModalWallet &&
-      (<ModalWalletConnect
-        setModalOpen={setIsModaWallet}
-      />)}
+        (<ModalWalletConnect
+          setModalOpen={setIsModaWallet}
+        />)}
     </div>
   )
 }

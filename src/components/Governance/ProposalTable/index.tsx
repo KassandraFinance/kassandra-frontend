@@ -11,8 +11,6 @@ import {
 } from '../../../constants/tokenAddresses'
 
 import useGovernance from '../../../hooks/useGovernance'
-import { useAppSelector, useAppDispatch } from '../../../store/hooks'
-import { setModalAlertText } from '../../../store/reducers/modalAlertText'
 
 import { GET_PROPOSALS } from './graphql'
 
@@ -24,15 +22,15 @@ const statsSecundaryProposalLibColor: { [key: string]: string } = {
   queued: '#FFBF00',
   pending: '#FFBF00',
   executed: '#2CE878',
-  defeated: '#E8372C',
-  expired: '#E8372C',
+  defeated: '#EA3224',
+  expired: '#EA3224',
   canceled: '#BDBDBD'
 }
 
 const statsPrimaryProposalLibColor: { [key: string]: string } = {
   active: '#E843C4',
   succeeded: '#2CE878',
-  failed: '#E8372C'
+  failed: '#EA3224'
 }
 
 interface IProposalsListProps {
@@ -50,27 +48,8 @@ interface IProposalsListProps {
 }
 
 export const ProposalTable = () => {
-  const dispatch = useAppDispatch()
-  const { userWalletAddress, chainId } = useAppSelector(state => state)
-
   // eslint-disable-next-line prettier/prettier
-  const [proposalsList, setProposalsList] = React.useState<
-    Array<IProposalsListProps>
-  >([])
-
-  const networksAvailabe = [43113, 43114]
-
-  React.useEffect(() => {
-    if (chainId && !networksAvailabe.includes(chainId)) {
-      dispatch(
-        setModalAlertText({
-          errorText:
-            'Change your network to Avalanche to be able to view the proposals.'
-        })
-      )
-      return
-    }
-  }, [chainId, userWalletAddress])
+  const [proposalsList, setProposalsList] = React.useState<Array<IProposalsListProps>>([])
 
   const secondsPerBlock =
     chains[process.env.NEXT_PUBLIC_MASTER === '1' ? 'avalanche' : 'fuji']

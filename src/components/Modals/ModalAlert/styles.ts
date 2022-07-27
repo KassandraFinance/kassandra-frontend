@@ -22,12 +22,11 @@ export const Container = styled.div`
   width: 35.5rem;
   height: auto;
 
-  background: #1f2937;
   border: 0.1rem solid rgba(255, 255, 255, 0.25);
   box-shadow: 0rem 0.4rem 6.9rem -1.7rem rgba(0, 0, 0, 0.51);
-  backdrop-filter: blur(0.4rem);
   border-radius: 1rem;
 
+  overflow: hidden;
   z-index: 110;
 
   @media (max-width: 450px) {
@@ -43,7 +42,8 @@ export const ModalHeader = styled.div`
   height: 6.5rem;
   padding-inline: 2.4rem;
 
-  background: rgba(31, 31, 31, 0.72);
+  background-color: rgba(31, 31, 31, 0.72);
+  backdrop-filter: blur(0.4rem);
   border-bottom: 0.1rem solid rgba(255, 255, 255, 0.25);
   border-radius: 1rem 1rem 0rem 0rem;
 `
@@ -68,8 +68,12 @@ export const TitleWrapper = styled.div`
 `
 
 export const ModalBody = styled.div`
-  text-align: center;
   padding: 2.4rem;
+
+  text-align: center;
+
+  background: rgba(31, 41, 55, 0.96);
+  backdrop-filter: blur(0.4rem);
 `
 
 export const ErrorHeading = styled.h4`

@@ -18,7 +18,7 @@ const messages = {
 
 interface ISelectOperatorProps {
   inputChecked: Titles;
-  setInputChecked: React.Dispatch<React.SetStateAction<Titles>>;
+  handleSetInputChecked: (title: Titles) => void;
   typeWithdrawChecked: string;
   setTypeWithdrawChecked: React.Dispatch<React.SetStateAction<string>>;
 
@@ -32,7 +32,7 @@ interface ISelectOperatorProps {
 
 const SelectOperatorCart = ({
   inputChecked,
-  setInputChecked,
+  handleSetInputChecked,
   typeWithdrawChecked,
   setTypeWithdrawChecked,
   setIsModaWallet,
@@ -53,7 +53,7 @@ const SelectOperatorCart = ({
           name="operator"
           id="Invest"
           onChange={() => {
-            setInputChecked('Invest')
+            handleSetInputChecked('Invest')
             trackEventFunction('click-on-tab', 'invest', 'operations-invest')
           }}
           checked={inputChecked === 'Invest'}
@@ -69,7 +69,7 @@ const SelectOperatorCart = ({
           name="operator"
           id="Withdraw"
           onChange={() => {
-            setInputChecked('Withdraw')
+            handleSetInputChecked('Withdraw')
             trackEventFunction('click-on-tab', 'withdraw', 'operations-invest')
           }}
           checked={inputChecked === 'Withdraw'}
@@ -87,7 +87,7 @@ const SelectOperatorCart = ({
           name="operator"
           id="Swap"
           onChange={() => {
-            setInputChecked('Swap')
+            handleSetInputChecked('Swap')
             trackEventFunction('click-on-tab', 'swap', 'operations-invest')
           }}
           checked={inputChecked === 'Swap'}
