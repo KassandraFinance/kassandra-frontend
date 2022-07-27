@@ -19,7 +19,6 @@ import {
 } from '../../../constants/pools'
 
 const Stake = () => {
-  const [loading, setLoading] = React.useState<boolean>(true)
   const [investor, setInvestor] = React.useState([false, false])
 
   const { trackCategoryPageView } = useMatomoEcommerce()
@@ -35,14 +34,6 @@ const Stake = () => {
       'Stake',
       process.env.NEXT_PUBLIC_MASTER === '1' ? 'Avalanche' : 'Fuji'
     ])
-
-    setTimeout(() => {
-      setLoading(false)
-    }, 600)
-
-    return () => {
-      clearTimeout()
-    }
   }, [])
 
   React.useEffect(() => {
