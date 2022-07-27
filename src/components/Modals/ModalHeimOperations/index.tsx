@@ -1,6 +1,10 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
 
+import { chains } from '../../../constants/tokenAddresses';
+
+import { useAppSelector } from '../../../store/hooks';
+
 import SelectOperatorCart from '../../PoolOperations/SelectOperatorCart';
 import { TitlesMobile } from '../../PoolOperations/SelectOperatorMobile';
 
@@ -51,6 +55,15 @@ const ModalCardOperations = ({
   const [inputCheckedMobile, setInputCheckedMobile] = React.useState<Titles>('Invest')
   const [typeWithdrawCheckedMobile, setTypeWithdrawCheckedMobile] = React.useState<string>('Best_value')
 
+  const { chainId } = useAppSelector(state => state)
+
+  const chain =
+    process.env.NEXT_PUBLIC_MASTER === '1' ? chains.avalanche : chains.fuji
+
+  function handleSetInputChecked(title: Titles) {
+    if (chain.chainId === chainId) setInputCheckedMobile(title)
+  }
+
   const handleCloseModalHeimOperation = () => {
     setInputChecked('Invest')
     setInputCheckedMobile('Invest')
@@ -96,7 +109,7 @@ const ModalCardOperations = ({
       >
         <SelectOperatorCart
           inputChecked={inputCheckedMobile}
-          setInputChecked={setInputCheckedMobile}
+          handleSetInputChecked={handleSetInputChecked}
           typeWithdrawChecked={typeWithdrawCheckedMobile}
           setTypeWithdrawChecked={setTypeWithdrawCheckedMobile}
 

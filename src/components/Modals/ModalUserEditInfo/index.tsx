@@ -3,6 +3,8 @@ import Image from 'next/image'
 import 'tippy.js/dist/tippy.css'
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+
 import web3 from '../../../utils/web3'
 
 import { useAppSelector, useAppDispatch } from '../../../store/hooks'
@@ -59,6 +61,8 @@ const ModalUserEditInfo = ({
     image_file: '',
     isNFTPreviewModal: imageUser.isNFT
   })
+
+  const { trackEventFunction } = useMatomoEcommerce()
 
   function handleCloseModal() {
     setModalOpen(false)
@@ -251,11 +255,25 @@ const ModalUserEditInfo = ({
                         handleImagePreview(event.target.files)
                       }
                     }}
+                    onClick={() =>
+                      trackEventFunction(
+                        'click-on-button',
+                        'add-image',
+                        'edit-modal-profile'
+                      )
+                    }
                   />
                   <S.ButtonAddNft
                     type="button"
                     isDropdownAddNft={isDropdownAddNft}
-                    onClick={() => setIsDropdownAddNft(!isDropdownAddNft)}
+                    onClick={() => {
+                      trackEventFunction(
+                        'click-on-button',
+                        'add-nft',
+                        'edit-modal-profile'
+                      )
+                      setIsDropdownAddNft(!isDropdownAddNft)
+                    }}
                   >
                     Add Image NFT
                     <Image
@@ -433,6 +451,13 @@ const ModalUserEditInfo = ({
               size="claim"
               backgroundSecondary
               fullWidth
+              onClick={() =>
+                trackEventFunction(
+                  'click-on-button',
+                  'save-edit-info',
+                  'edit-modal-profile'
+                )
+              }
             />
             <Button
               type="button"
