@@ -6,7 +6,9 @@ import Big from 'big.js'
 import { useAppSelector } from '../../../../store/hooks'
 
 import { BNtoDecimal } from '../../../../utils/numerals'
+import { chains } from '../../../../constants/tokenAddresses'
 
+import Web3Disabled from '../../../Web3Disabled'
 import Button from '../../../Button'
 import ModalWalletConnect from '../../ModalWalletConnect'
 
@@ -38,7 +40,11 @@ const Kacy = ({
   setIsOpenModal
 }: IKacyProps) => {
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
+  const chainId = useAppSelector(state => state.chainId)
+
   const [isModalWallet, setIsModalWallet] = React.useState<boolean>(false)
+  const chain =
+    process.env.NEXT_PUBLIC_MASTER === '1' ? chains.avalanche : chains.fuji
 
   const totalSupply = 10000000
 
@@ -58,95 +64,114 @@ const Kacy = ({
         </S.ModalHeader>
 
         <S.ModalBody>
-          {userWalletAddress && (
+          {Number(chainId) !== chain.chainId ? (
             <>
-              <S.KacyTotalContainer>
-                <S.ImgContainer>
-                  <S.ImgWrapper>
-                    <Image src={kacyIcon} width={40} height={40} />
-                  </S.ImgWrapper>
-
-                  <S.ChainIcon>
-                    <Image src={avalancheIcon} width={20} height={20} />
-                  </S.ChainIcon>
-                </S.ImgContainer>
-
-                <S.TotalWrapper>
-                  <S.BodyTitle>TOTAL</S.BodyTitle>
-                  <S.KacyTotal>{BNtoDecimal(kacyTotal, 18, 2)}</S.KacyTotal>
-                  <S.KacyUSDTotal>
-                    ~
-                    {BNtoDecimal(
-                      Big(kacyTotal.toString()).mul(price).div(Big(10).pow(18)),
-                      6,
-                      2,
-                      2
-                    )}{' '}
-                    USD
-                  </S.KacyUSDTotal>
-                </S.TotalWrapper>
-              </S.KacyTotalContainer>
+              <S.WebDisabledWrapper>
+                <Web3Disabled
+                  textButton={`Connect to ${chain.chainName}`}
+                  textHeader="Your wallet is set to the wrong network."
+                  bodyText={`Please switch to the ${chain.chainName} network to have access to all our staking pools`}
+                  type="changeChain"
+                />
+              </S.WebDisabledWrapper>
 
               <S.Line />
+            </>
+          ) : (
+            <>
+              {userWalletAddress && (
+                <>
+                  <S.KacyTotalContainer>
+                    <S.ImgContainer>
+                      <S.ImgWrapper>
+                        <Image src={kacyIcon} width={40} height={40} />
+                      </S.ImgWrapper>
 
-              <S.Ul>
-                <S.Li>
-                  KACY Staked
-                  <S.Value>
-                    {BNtoDecimal(kacyStaked, 18, 2)}
-                    <span>
-                      ~
-                      {BNtoDecimal(
-                        Big(kacyStaked.toString())
-                          .mul(price)
-                          .div(Big(10).pow(18)),
-                        6,
-                        2,
-                        2
-                      )}{' '}
-                      USD
-                    </span>
-                  </S.Value>
-                </S.Li>
-                <S.Li>
-                  Unclaimed
-                  <S.Value>
-                    {BNtoDecimal(kacyUnclaimed, 18, 2)}
-                    <span>
-                      ~
-                      {BNtoDecimal(
-                        Big(kacyUnclaimed.toString())
-                          .mul(price)
-                          .div(Big(10).pow(18)),
-                        6,
-                        2,
-                        2
-                      )}{' '}
-                      USD
-                    </span>
-                  </S.Value>
-                </S.Li>
-                <S.Li>
-                  Wallet
-                  <S.Value>
-                    {BNtoDecimal(kacyWallet, 18, 2)}
-                    <span>
-                      ~
-                      {BNtoDecimal(
-                        Big(kacyWallet.toString())
-                          .mul(price)
-                          .div(Big(10).pow(18)),
-                        6,
-                        2,
-                        2
-                      )}{' '}
-                      USD
-                    </span>
-                  </S.Value>
-                </S.Li>
-              </S.Ul>
+                      <S.ChainIcon>
+                        <Image src={avalancheIcon} width={20} height={20} />
+                      </S.ChainIcon>
+                    </S.ImgContainer>
 
-              <S.Line />
+                    <S.TotalWrapper>
+                      <S.BodyTitle>TOTAL</S.BodyTitle>
+                      <S.KacyTotal>{BNtoDecimal(kacyTotal, 18, 2)}</S.KacyTotal>
+                      <S.KacyUSDTotal>
+                        ~
+                        {BNtoDecimal(
+                          Big(kacyTotal.toString())
+                            .mul(price)
+                            .div(Big(10).pow(18)),
+                          6,
+                          2,
+                          2
+                        )}{' '}
+                        USD
+                      </S.KacyUSDTotal>
+                    </S.TotalWrapper>
+                  </S.KacyTotalContainer>
+
+                  <S.Line />
+
+                  <S.Ul>
+                    <S.Li>
+                      KACY Staked
+                      <S.Value>
+                        {BNtoDecimal(kacyStaked, 18, 2)}
+                        <span>
+                          ~
+                          {BNtoDecimal(
+                            Big(kacyStaked.toString())
+                              .mul(price)
+                              .div(Big(10).pow(18)),
+                            6,
+                            2,
+                            2
+                          )}{' '}
+                          USD
+                        </span>
+                      </S.Value>
+                    </S.Li>
+                    <S.Li>
+                      Unclaimed
+                      <S.Value>
+                        {BNtoDecimal(kacyUnclaimed, 18, 2)}
+                        <span>
+                          ~
+                          {BNtoDecimal(
+                            Big(kacyUnclaimed.toString())
+                              .mul(price)
+                              .div(Big(10).pow(18)),
+                            6,
+                            2,
+                            2
+                          )}{' '}
+                          USD
+                        </span>
+                      </S.Value>
+                    </S.Li>
+                    <S.Li>
+                      Wallet
+                      <S.Value>
+                        {BNtoDecimal(kacyWallet, 18, 2)}
+                        <span>
+                          ~
+                          {BNtoDecimal(
+                            Big(kacyWallet.toString())
+                              .mul(price)
+                              .div(Big(10).pow(18)),
+                            6,
+                            2,
+                            2
+                          )}{' '}
+                          USD
+                        </span>
+                      </S.Value>
+                    </S.Li>
+                  </S.Ul>
+
+                  <S.Line />
+                </>
+              )}
             </>
           )}
 

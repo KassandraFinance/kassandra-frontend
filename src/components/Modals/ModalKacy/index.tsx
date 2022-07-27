@@ -6,7 +6,7 @@ import BigNumber from 'bn.js'
 import { useAppSelector } from '../../../store/hooks'
 import { ERC20 } from '../../../hooks/useERC20Contract'
 import { poolsKacy } from '../../../constants/pools'
-import { Staking } from '../../../constants/tokenAddresses'
+import { Staking, chains } from '../../../constants/tokenAddresses'
 import useStakingContract from '../../../hooks/useStakingContract'
 
 import { BNtoDecimal } from '../../../utils/numerals'
@@ -30,6 +30,9 @@ const URL_API: { [key: number | string]: string } = {
   4: 'http://localhost:3000/api/overview'
 }
 
+const chain =
+  process.env.NEXT_PUBLIC_MASTER === '1' ? chains.avalanche : chains.fuji
+
 interface IKacyMarketDataProps {
   price: number;
   marketCap: number;
@@ -41,6 +44,7 @@ const ModalKacy = () => {
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
   const ERC20Contract = ERC20(poolsKacy[0].address)
   const { userInfo, earned } = useStakingContract(Staking)
+  const chainId = useAppSelector(state => state.chainId)
 
   const [isModalKacy, setIsModalKacy] = React.useState(false)
   const [isOpenModal, setIsOpenModal] = React.useState<boolean>(false)
@@ -77,6 +81,10 @@ const ModalKacy = () => {
 
   React.useEffect(() => {
     if (!userWalletAddress) {
+      return
+    }
+
+    if (Number(chainId) !== chain.chainId) {
       return
     }
 
@@ -118,7 +126,7 @@ const ModalKacy = () => {
     getKacyBalanceInWallet()
     kacyTotalInPool()
     kacyEarned()
-  }, [userWalletAddress])
+  }, [userWalletAddress, chainId])
 
   React.useEffect(() => {
     if (!userWalletAddress) {
@@ -136,7 +144,7 @@ const ModalKacy = () => {
         <Button
           className="kacyAmount"
           text={
-            userWalletAddress
+            userWalletAddress && Number(chainId) === chain.chainId
               ? `${formatNumber(BNtoDecimal(kacyTotal, 18, 2))} KACY`
               : 'KACY'
           }
