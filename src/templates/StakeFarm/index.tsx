@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
 import { useRouter } from 'next/router'
-import detectEthereumProvider from '@metamask/detect-provider'
 
 import { chains } from '../../constants/tokenAddresses'
 
@@ -37,7 +36,6 @@ const tabs = [
 const StakeFarm = () => {
   const router = useRouter()
 
-  const [hasEthereumProvider, setHasEthereumProvider] = React.useState(false)
   const [isSelectTab, setIsSelectTab] = React.useState<
     string | string[] | undefined
   >('farm')
@@ -55,20 +53,6 @@ const StakeFarm = () => {
     }
   }, [router])
 
-  React.useEffect(() => {
-    const checkEthereumProvider = async () => {
-      const provider = await detectEthereumProvider()
-
-      if (!provider && !chainId) {
-        setHasEthereumProvider(false)
-      } else {
-        setHasEthereumProvider(true)
-      }
-    }
-
-    checkEthereumProvider()
-  }, [chainId])
-
   return (
     <>
       <Header />
@@ -78,7 +62,7 @@ const StakeFarm = () => {
           Stake/Farm
         </BreadcrumbItem>
       </Breadcrumb>
-      {!hasEthereumProvider ? (
+      {userWalletAddress.length === 0 && Number(chainId) !== chain.chainId ? (
         <Web3Disabled
           textButton="Connect Wallet"
           textHeader="Your wallet is not connected"
