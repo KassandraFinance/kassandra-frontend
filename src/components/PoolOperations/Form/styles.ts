@@ -451,6 +451,10 @@ export const Symbol = styled.h3<ISymbolProps>`
 
     .image {
       margin-right: 0.8rem !important;
+
+      img {
+        border-radius: 50%;
+      }
     }
 
     @media(max-width: 380px) {
