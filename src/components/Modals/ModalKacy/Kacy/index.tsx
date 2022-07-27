@@ -10,7 +10,6 @@ import { chains } from '../../../../constants/tokenAddresses'
 
 import Web3Disabled from '../../../Web3Disabled'
 import Button from '../../../Button'
-import ModalWalletConnect from '../../ModalWalletConnect'
 
 import closeIcon from '../../../../../public/assets/utilities/close-icon.svg'
 import kacyIcon from '../../../../../public/assets/logos/kacy-96.svg'
@@ -27,6 +26,7 @@ interface IKacyProps {
   kacyTotal: BigNumber;
   setIsModalKacy: React.Dispatch<React.SetStateAction<boolean>>;
   setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsModalWallet: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Kacy = ({
@@ -37,12 +37,12 @@ const Kacy = ({
   kacyWallet,
   kacyTotal,
   setIsModalKacy,
-  setIsOpenModal
+  setIsOpenModal,
+  setIsModalWallet
 }: IKacyProps) => {
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
   const chainId = useAppSelector(state => state.chainId)
 
-  const [isModalWallet, setIsModalWallet] = React.useState<boolean>(false)
   const chain =
     process.env.NEXT_PUBLIC_MASTER === '1' ? chains.avalanche : chains.fuji
 
@@ -211,13 +211,14 @@ const Kacy = ({
               text="Connect Wallet"
               backgroundPrimary
               fullWidth
-              onClick={() => setIsModalWallet(true)}
+              onClick={() => {
+                setIsModalWallet(true)
+                setIsModalKacy(false)
+              }}
             />
           )}
         </S.ModalBody>
       </S.Container>
-
-      {isModalWallet && <ModalWalletConnect setModalOpen={setIsModalWallet} />}
     </>
   )
 }
