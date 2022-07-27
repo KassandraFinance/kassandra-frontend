@@ -235,10 +235,12 @@ const ModalUserEditInfo = ({
                     height={123}
                   />
                 ) : userImageModal.isNFTPreviewModal ? (
-                  <NftImage
-                    NftUrl={`${userImageModal.image_preview}`}
-                    imageSize="large"
-                  />
+                  <S.UserImage>
+                    <NftImage
+                      NftUrl={`${userImageModal.image_preview}`}
+                      imageSize="large"
+                    />
+                  </S.UserImage>
                 ) : userImageModal.image_preview !== '' &&
                   userImageModal.image_preview !== undefined ? (
                   <img
@@ -297,7 +299,7 @@ const ModalUserEditInfo = ({
                 </span>
               </S.UserImageContent>
               <S.UserNameContent>
-                <p>NICKNAME</p>
+                <S.NicknameTilte>NICKNAME</S.NicknameTilte>
                 <input
                   placeholder="Your Name"
                   onChange={event =>
