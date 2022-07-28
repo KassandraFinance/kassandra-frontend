@@ -48,7 +48,7 @@ export const Container = styled.ul`
   }
 `
 
-export const nftDetails = styled.div`
+export const NftDetails = styled.div`
   margin-left: 1.2rem;
 
   color: #ffffff;
@@ -56,7 +56,7 @@ export const nftDetails = styled.div`
   font-weight: 500;
 `
 
-export const imageContent = styled.span`
+export const ImageContent = styled.span`
   width: 5rem;
   height: 5rem;
 
@@ -97,7 +97,7 @@ export const NftContent = styled.li`
   }
 `
 
-export const noHaveNFT = styled.p`
+export const NoHaveNFT = styled.p`
   display: flex;
   justify-content: center;
 
