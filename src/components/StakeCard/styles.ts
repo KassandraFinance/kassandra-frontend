@@ -21,7 +21,7 @@ export const BorderGradient = styled.div<IBorderGradientProps>`
   max-height: 100%;
 
   background: rgba(31, 31, 31, 0.72);
-  border-radius: 0.6rem;
+  border-radius: 1.2rem;
 
   @media (max-width: 420px) {
     max-width: 100%;
@@ -38,7 +38,7 @@ export const BorderGradient = styled.div<IBorderGradientProps>`
 
     padding: 0.1rem;
 
-    border-radius: ${theme.border.radius};
+    border-radius: 1.2rem;
     background: ${props =>
       props.stakeWithVotingPower
         ? `linear-gradient(-45deg, ${theme.colors.blue} 0%, ${theme.colors.cyan} 100%)`
@@ -70,8 +70,8 @@ export const InterBackground = styled.div<IInterBackgroundProps>`
       ? 'linear-gradient(95.32deg, rgba(38, 219, 219, 0.23) 0%, rgba(12, 61, 220, 0.23) 100%)'
       : 'linear-gradient(95.32deg, rgba(232, 67, 196, 0.23) 0%, rgba(247, 150, 64, 0.23) 100%)'};
 
-  border-top-left-radius: 0.6rem;
-  border-top-right-radius: 0.6rem;
+  border-top-left-radius: 1.2rem;
+  border-top-right-radius: 1.2rem;
 `
 
 export const IntroStaking = styled.div`
