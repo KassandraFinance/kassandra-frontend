@@ -62,7 +62,7 @@ const Header = () => {
             nameOnHeader="Investors"
             linkPage={[
               { name: 'Explore', href: '/explore' },
-              { name: 'Farm', href: '/farm' },
+              { name: 'Farm', href: '/farm?tab=farm' },
               { name: 'Profile', href: `/profile/${userWalletAddress}` }
             ]}
           />
@@ -104,7 +104,7 @@ const Header = () => {
               },
               {
                 name: 'Stake',
-                href: `/farm`
+                href: `/farm?tab=stake`
               },
               {
                 name: 'Forum',
