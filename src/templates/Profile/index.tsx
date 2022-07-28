@@ -259,7 +259,9 @@ const Profile = () => {
   })
 
   React.useEffect(() => {
-    window.ethereum.on('accountsChanged', handleAccountChange)
+    if (hasEthereumProvider) {
+      window.ethereum.on('accountsChanged', handleAccountChange)
+    }
   }, [])
 
   React.useEffect(() => {

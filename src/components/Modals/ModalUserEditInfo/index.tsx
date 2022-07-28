@@ -11,8 +11,9 @@ import { useAppSelector, useAppDispatch } from '../../../store/hooks'
 import { setModalAlertText } from '../../../store/reducers/modalAlertText'
 
 import Button from '../../Button'
-import UserNFTs from '../../UserNFts'
+import UserNFTs, { INftDetailsListProps } from '../../UserNFts'
 import NftImage from '../../NftImage'
+import { NftDetailsProps } from '../../Governance/UserDescription'
 
 import * as S from './styles'
 
@@ -34,7 +35,8 @@ type UserEditInfoFormProps = {
   website: string,
   telegram: string,
   discord: string,
-  description: string
+  description: string,
+  nft: NftDetailsProps | undefined
 }
 
 const ModalUserEditInfo = ({
@@ -45,13 +47,11 @@ const ModalUserEditInfo = ({
   setUserImage,
   setUserData
 }: IModalUserEditInfoProps) => {
-  const dispatch = useAppDispatch()
-  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
-  const inputRefModal = React.useRef<HTMLInputElement>(null)
-
   const [isStateSocialMidia, setIsStateSocialMidia] = React.useState(false)
   const [isStateManagerInfo, setIsStateManagerInfo] = React.useState(false)
   const [isDropdownAddNft, setIsDropdownAddNft] = React.useState(false)
+  const [userNftDetails, setUserNftDetails] =
+    React.useState<INftDetailsListProps>()
   const [editYourProfileInput, setEditYourProfileInput] =
     React.useState<UserEditInfoFormProps>({
       ...userData
@@ -61,6 +61,11 @@ const ModalUserEditInfo = ({
     image_file: '',
     isNFTPreviewModal: imageUser.isNFT
   })
+
+  const dispatch = useAppDispatch()
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
+
+  const inputRefModal = React.useRef<HTMLInputElement>(null)
 
   const { trackEventFunction } = useMatomoEcommerce()
 
@@ -76,6 +81,19 @@ const ModalUserEditInfo = ({
     event.preventDefault()
     const { nickname, twitter, website, telegram, discord, description } =
       editYourProfileInput
+
+    const nftDetails = userImageModal.isNFTPreviewModal
+      ? {
+          contractType: userNftDetails?.contract_type,
+          collectionName: userNftDetails?.name,
+          symbol: userNftDetails?.symbol,
+          tokenAddress: userNftDetails?.token_address,
+          tokenId: userNftDetails?.token_id,
+          chain: userNftDetails?.chain,
+          nftName: userNftDetails?.metadata.name,
+          nftDescription: userNftDetails?.metadata.description
+        }
+      : undefined
 
     try {
       const response = await fetch('/api/nonce')
@@ -116,7 +134,8 @@ const ModalUserEditInfo = ({
             image: userImageModal.image_file
               ? ''
               : userImageModal.image_preview,
-            isNFT: userImageModal.isNFTPreviewModal
+            isNFT: userImageModal.isNFTPreviewModal,
+            nft: nftDetails
           })
         })
         setUserData(editYourProfileInput)
@@ -220,10 +239,12 @@ const ModalUserEditInfo = ({
                     height={123}
                   />
                 ) : userImageModal.isNFTPreviewModal ? (
-                  <NftImage
-                    NftUrl={`${userImageModal.image_preview}`}
-                    imageSize="large"
-                  />
+                  <S.UserImage>
+                    <NftImage
+                      NftUrl={`${userImageModal.image_preview}`}
+                      imageSize="large"
+                    />
+                  </S.UserImage>
                 ) : userImageModal.image_preview !== '' &&
                   userImageModal.image_preview !== undefined ? (
                   <img
@@ -290,12 +311,13 @@ const ModalUserEditInfo = ({
                       isDropdownAddNft={isDropdownAddNft}
                       setIsDropdownAddNft={setIsDropdownAddNft}
                       inputRefModal={inputRefModal}
+                      setUserNftDetails={setUserNftDetails}
                     />
                   </S.UserAddNftImage>
                 </span>
               </S.UserImageContent>
               <S.UserNameContent>
-                <p>NICKNAME</p>
+                <S.NicknameTilte>NICKNAME</S.NicknameTilte>
                 <input
                   placeholder="Your Name"
                   onChange={event =>

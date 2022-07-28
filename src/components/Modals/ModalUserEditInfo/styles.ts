@@ -104,12 +104,53 @@ export const UserProfileInfo = styled.div`
     border-radius: 100%;
   }
 
+  #InputFile {
+    display: none;
+  }
+
+  > div {
+    margin-top: 1.6rem;
+  }
+
+  input {
+    width: 32rem;
+    padding: 1.6rem;
+
+    color: #C4C4C4;
+    font-size: 1.6rem;
+    font-weight: ${theme.font.weight.light};
+
+    background: #1B1D22;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 0.8rem;
+  }
+
+  @media (max-width: 768px) {
+    margin-right: 0;
+  }
+`
+
+export const NicknameTilte = styled.p`
+  margin-bottom: 1.2rem;
+
+  color: #C4C4C4;
+  font-size: 1.4rem;
+  font-weight: ${theme.font.weight.medium};
+`
+export const UserNameContent = styled.div``
+
+export const UserImage = styled.div`
   img {
     margin-top: 1rem;
     object-fit: cover;
   }
+`
 
-  span {
+export const UserImageContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  > span {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -136,46 +177,6 @@ export const UserProfileInfo = styled.div`
       }
     }
   }
-
-  #InputFile {
-    display: none;
-  }
-
-  > div {
-    margin-top: 1.6rem;
-  }
-
-  p {
-    margin-bottom: 1.2rem;
-
-    color: #C4C4C4;
-    font-size: 1.4rem;
-    font-weight: ${theme.font.weight.medium};
-  }
-
-  input {
-    width: 32rem;
-    padding: 1.6rem;
-
-    color: #C4C4C4;
-    font-size: 1.6rem;
-    font-weight: ${theme.font.weight.light};
-
-    background: #1B1D22;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 0.8rem;
-  }
-
-  @media (max-width: 768px) {
-    margin-right: 0;
-  }
-`
-
-export const UserNameContent = styled.div``
-
-export const UserImageContent = styled.div`
-  display: flex;
-  justify-content: space-between;
 `
 interface isDropdownAddNftProps {
   isDropdownAddNft: boolean
@@ -209,6 +210,7 @@ export const ButtonAddNft = styled.button<isDropdownAddNftProps>`
   cursor: pointer;
 
   img {
+    transition: transform 400ms ease;
     ${props =>
       props.isDropdownAddNft ? `transform: rotate(180deg)` : `transform: rotate(0)`}
   }
