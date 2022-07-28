@@ -259,7 +259,9 @@ const Profile = () => {
   })
 
   React.useEffect(() => {
-    window.ethereum.on('accountsChanged', handleAccountChange)
+    if (hasEthereumProvider) {
+      window.ethereum.on('accountsChanged', handleAccountChange)
+    }
   }, [])
 
   React.useEffect(() => {
@@ -396,7 +398,7 @@ const Profile = () => {
       <S.ProfileContainer>
         <UserDescription userWalletUrl={profileAddress} />
 
-        {!hasEthereumProvider ? (
+        {userWalletAddress.length === 0 && Number(chainId) !== chain.chainId ? (
           <Web3Disabled
             textButton="Connect Wallet"
             textHeader="You need to have a Wallet installed"

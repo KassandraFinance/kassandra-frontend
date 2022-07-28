@@ -27,8 +27,19 @@ model User {
   description   String?
   image         String?
   isNFT         Boolean? @default(false) @map("is_nft")
-  createdAt     DateTime @default(now()) @map("created_at")
-  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  contractType   String? @map("contract_type")
+  collectionName String? @map("collection_name")
+  symbol         String?
+  tokenAddress   String? @map("token_address")
+  tokenId        String? @map("token_id")
+  chain          String?
+  nftName        String? @map("nft_name")
+  nftDescription String? @map("nft_description")
+
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+  nftContractType String?
 
   @@map("users")
 }
