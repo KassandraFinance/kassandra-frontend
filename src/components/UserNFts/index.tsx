@@ -183,12 +183,14 @@ const UserNFTs = ({
                         key={nft.token_address + nft.token_id + nft.token_hash}
                         onClick={() => handleClickNft(nft)}
                       >
-                        <img
-                          src={nft?.metadata?.image}
-                          alt="NFT images"
-                          loading="lazy"
-                        />
-                        <div>
+                        <S.imageContent>
+                          <img
+                            src={nft?.metadata?.image}
+                            alt="NFT images"
+                            loading="lazy"
+                          />
+                        </S.imageContent>
+                        <S.nftDetails>
                           <p>{nft?.metadata?.name}</p>
                           <span>
                             <Image
@@ -199,7 +201,7 @@ const UserNFTs = ({
                             />
                             <strong>{nft.chain}</strong>
                           </span>
-                        </div>
+                        </S.nftDetails>
                       </S.NftContent>
                     )
                 )}
