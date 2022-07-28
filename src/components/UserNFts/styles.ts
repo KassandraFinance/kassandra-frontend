@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components'
+import theme from '../../styles/theme'
 
 export const Backdrop = styled.div`
   position: fixed;
@@ -33,6 +34,7 @@ export const Container = styled.ul`
   padding-top: 0.2rem;
 
   background-color: #1b1d22;
+  border: 0.1rem solid #ffffff10;
 
   overflow: auto;
   z-index: 25;
@@ -46,6 +48,23 @@ export const Container = styled.ul`
   }
 `
 
+export const NftDetails = styled.div`
+  margin-left: 1.2rem;
+
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 500;
+`
+
+export const ImageContent = styled.span`
+  width: 5rem;
+  height: 5rem;
+
+  > img {
+    object-fit: cover;
+  }
+`
+
 export const NftContent = styled.li`
   display: flex;
   align-items: center;
@@ -55,13 +74,6 @@ export const NftContent = styled.li`
 
   transition: 0.2s;
   cursor: pointer;
-
-  > img {
-    margin-top: 0;
-
-    min-height: 5rem;
-    min-width: 5rem;
-  }
 
   &:hover {
     background-color: #c4c4c410;
@@ -76,14 +88,6 @@ export const NftContent = styled.li`
     align-items: center;
   }
 
-  div {
-    margin-left: 1.2rem;
-
-    color: #ffffff;
-    font-size: 1.4rem;
-    font-weight: 500;
-  }
-
   strong {
     margin-left: 0.4rem;
 
@@ -93,12 +97,16 @@ export const NftContent = styled.li`
   }
 `
 
-export const noHaveNFT = styled.p`
+export const NoHaveNFT = styled.p`
   display: flex;
   justify-content: center;
 
   width: 17rem;
   padding: 2rem;
+
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: ${theme.font.weight.normal};
 `
 const pulse = keyframes`
   0% { transform: scale(1); }
@@ -112,6 +120,12 @@ export const LoadingContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 1rem 1rem;
+
+  h2 {
+    color: #ffffff;
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
 `
 
 export const ImageLoadingPulse = styled.div`
