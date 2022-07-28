@@ -29,7 +29,7 @@ export const Title = styled.h1`
   text-transform: uppercase;
   text-align: center;
 
-  @media (max-width: 670px) {
+  @media (max-width: 693px) {
     height: 1.6rem;
 
     font-size: ${theme.font.sizes.font14};
@@ -50,7 +50,7 @@ export const SubTitle = styled.div`
   line-height: 7.2rem;
   text-align: center;
 
-  @media (max-width: 670px) {
+  @media (max-width: 693px) {
     font-size: ${theme.font.sizes.font40};
     line-height: ${theme.font.sizes.font40};
   }
@@ -70,48 +70,54 @@ export const Text = styled.div`
   position: absolute;
   top: -20rem;
   transform: rotateX(-90deg);
+
   opacity: 0;
 
   animation-timing-function: ease;
 
+  white-space: nowrap;
+
   &:nth-child(1) {
-    left: 2.7rem;
+    left: 6rem;
 
     color: #ffbf00;
     animation: rollDown 10s forwards infinite;
 
-    @media (max-width: 670px) {
-      left: 1.6rem;
+    @media (max-width: 693px) {
+      left: 3.7rem;
       animation: rollDown670 10s forwards infinite;
     }
 
-    @media (max-width: 413px) {
-      left: 0.8rem;
+    @media (max-width: 435px) {
+      left: 1.85rem;
     }
   }
 
   &:nth-child(2) {
-    left: 4.5rem;
-
     color: #26dbdb;
     animation: rollDown2 10s forwards infinite;
 
-    @media (max-width: 670px) {
-      left: 2.7rem;
+    @media (max-width: 693px) {
       animation: rollDown2670 10s forwards infinite;
     }
 
-    @media (max-width: 413px) {
-      left: 1.3rem;
+    @media (max-width: 435px) {
     }
   }
 
   &:nth-child(3) {
+    left: 3.3rem;
+
     color: #e843c4;
     animation: rollDown3 10s forwards infinite;
 
-    @media (max-width: 670px) {
+    @media (max-width: 693px) {
+      left: 2rem;
       animation: rollDown3670 10s forwards infinite;
+    }
+
+    @media (max-width: 435px) {
+      left: 1.05rem;
     }
   }
 
