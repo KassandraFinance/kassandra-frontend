@@ -6,9 +6,10 @@ export const TitleContainer = styled.div`
 
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 2.4rem;
 
-  width: 106.5rem;
+  max-width: 106.5rem;
   padding-inline: 2.4rem;
 
   @media (max-width: 576px) {
@@ -18,7 +19,7 @@ export const TitleContainer = styled.div`
 
 export const Title = styled.h1`
   height: 2rem;
-  padding-inline: 2.4rem;
+  width: fit-content;
 
   color: ${theme.colors.snow};
   font-weight: ${theme.font.weight.light};
@@ -34,7 +35,7 @@ export const Title = styled.h1`
 
     font-size: ${theme.font.sizes.font14};
     line-height: ${theme.font.sizes.font16};
-    letter-spacing: 0.2em;
+    letter-spacing: 0.3em;
   }
 `
 
