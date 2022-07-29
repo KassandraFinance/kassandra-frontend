@@ -456,8 +456,7 @@ const Profile = () => {
               <AnyCard text="Coming Soon..." />
             ) : isSelectTab === tabs[2].asPathText ? (
               <>
-                <AnyCard text="Coming Soon..." />
-                {/* <GovernanceData address={profileAddress} /> */}
+                <GovernanceData address={profileAddress} />
               </>
             ) : (
               <Loading marginTop={4} />
