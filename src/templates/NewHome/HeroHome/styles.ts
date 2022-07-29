@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import theme from '../../../styles/theme'
 
 export const Container = styled.section`
   display: flex;
@@ -9,6 +8,11 @@ export const Container = styled.section`
   gap: 3.2rem;
 
   height: 100vh;
+  padding-inline: 2.4rem;
+
+  @media (max-width: 576px) {
+    padding-inline: 1.6rem;
+  }
 
   .btn {
     flex-direction: row-reverse;

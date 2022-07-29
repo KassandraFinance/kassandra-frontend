@@ -3,6 +3,7 @@ import router from 'next/router'
 
 import HeroText from './HeroText'
 import Button from '../../../components/Button'
+import DaoData from './DaoData'
 
 import * as S from './styles'
 
@@ -45,6 +46,8 @@ const HeroHome = () => {
         backgroundPrimary
         onClick={() => router.push('/explore')}
       />
+
+      <DaoData />
     </S.Container>
   )
 }
