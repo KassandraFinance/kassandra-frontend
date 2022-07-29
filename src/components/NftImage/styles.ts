@@ -10,6 +10,7 @@ const imageSizes = {
     flex-direction: column;
     min-height: 9rem;
     min-width: 9rem;
+    cursor: pointer;
 
     img {
       object-fit: cover;

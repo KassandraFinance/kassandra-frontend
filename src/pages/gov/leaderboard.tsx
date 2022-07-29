@@ -1,17 +1,27 @@
 import React from 'react'
+import Head from 'next/head'
 
-import Header from '../../components/Header'
-import TitleSection from '../../components/TitleSection'
+import { useAppSelector } from '../../store/hooks'
+
+import { chains } from '../../constants/tokenAddresses'
+
 import VotingPowerTable from '../../components/Governance/VotingPowerTable'
-import Breadcrumb from '../../components/Breadcrumb'
 import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
+import TitleSection from '../../components/TitleSection'
+import Web3Disabled from '../../components/Web3Disabled'
+import Breadcrumb from '../../components/Breadcrumb'
+import Header from '../../components/Header'
 
 import votingPower from '../../../public/assets/iconGradient/voting-power-rank.svg'
 
 import * as S from '../../templates/Gov/Proposals/styles'
-import Head from 'next/head'
 
 const Leaderboard = () => {
+  const { chainId } = useAppSelector(state => state)
+
+  const chain =
+    process.env.NEXT_PUBLIC_MASTER === '1' ? chains.avalanche : chains.fuji
+
   return (
     <>
       <Head>
@@ -31,12 +41,26 @@ const Leaderboard = () => {
           Voting Power Leaderboard
         </BreadcrumbItem>
       </Breadcrumb>
-      <S.VoteContent>
-        <S.VotingPowerLeaderboard>
-          <TitleSection image={votingPower} title="Voting Power Leaderboard" />
-          <VotingPowerTable />
-        </S.VotingPowerLeaderboard>
-      </S.VoteContent>
+      {Number(chainId) !== chain.chainId ? (
+        <Web3Disabled
+          textButton={`Connect to ${chain.chainName}`}
+          textHeader="Your wallet is set to the wrong network."
+          bodyText={`Please switch to the ${chain.chainName} network to have access to governance`}
+          type="changeChain"
+        />
+      ) : (
+        <>
+          <S.VoteContent>
+            <S.VotingPowerLeaderboard>
+              <TitleSection
+                image={votingPower}
+                title="Voting Power Leaderboard"
+              />
+              <VotingPowerTable />
+            </S.VotingPowerLeaderboard>
+          </S.VoteContent>
+        </>
+      )}
     </>
   )
 }

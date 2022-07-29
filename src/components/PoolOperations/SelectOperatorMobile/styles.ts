@@ -19,8 +19,8 @@ export const HeimOperationContainerMobile = styled.div`
     display: none;
   }
 
-  @media (min-width: 770px) {
-    bottom: 20px;
+  @media (min-width: 840px) {
+    bottom: 2rem;
   }
 `
 
@@ -41,7 +41,7 @@ interface ILabelMobileProps {
   selectedMobile: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const LabelMobile = styled.label<ILabelMobileProps>`
   display: flex;
   align-items: center;

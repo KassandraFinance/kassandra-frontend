@@ -12,6 +12,7 @@ import useStakingContract from '../../hooks/useStakingContract'
 import usePriceLP from '../../hooks/usePriceLP'
 import { useAppSelector } from '../../store/hooks'
 import useVotingPower from '../../hooks/useVotingPower'
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
 import { GET_PROFILE } from './graphql'
 import {
@@ -133,6 +134,7 @@ const Profile = () => {
   const votingPower = useVotingPower(Staking)
   const { userInfo } = useStakingContract(Staking)
   const { getPriceKacyAndLP } = usePriceLP()
+  const { trackEventFunction } = useMatomoEcommerce()
 
   const profileAddress = router.query.profileAddress
   const isSelectQueryTab = router.query.tab
@@ -257,7 +259,9 @@ const Profile = () => {
   })
 
   React.useEffect(() => {
-    window.ethereum.on('accountsChanged', handleAccountChange)
+    if (hasEthereumProvider) {
+      window.ethereum.on('accountsChanged', handleAccountChange)
+    }
   }, [])
 
   React.useEffect(() => {
@@ -394,7 +398,7 @@ const Profile = () => {
       <S.ProfileContainer>
         <UserDescription userWalletUrl={profileAddress} />
 
-        {!hasEthereumProvider ? (
+        {userWalletAddress.length === 0 && Number(chainId) !== chain.chainId ? (
           <Web3Disabled
             textButton="Connect Wallet"
             textHeader="You need to have a Wallet installed"
@@ -452,8 +456,7 @@ const Profile = () => {
               <AnyCard text="Coming Soon..." />
             ) : isSelectTab === tabs[2].asPathText ? (
               <>
-                <AnyCard text="Coming Soon..." />
-                {/* <GovernanceData address={profileAddress} /> */}
+                <GovernanceData address={profileAddress} />
               </>
             ) : (
               <Loading marginTop={4} />

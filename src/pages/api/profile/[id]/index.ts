@@ -4,6 +4,19 @@ import { checkAddressChecksum } from 'web3-utils'
 import { ironSessionConfig } from '../../../../config/ironSessionConfig'
 import prisma from '../../../../libs/prisma'
 
+type NftProps =
+  | {
+      contractType?: string,
+      collectionName?: string,
+      symbol?: string,
+      tokenAddress?: string,
+      tokenId?: string,
+      chain?: string,
+      nftName?: string,
+      nftDescription?: string
+    }
+  | undefined
+
 interface UserInput {
   nickname?: string;
   twitter?: string;
@@ -13,6 +26,7 @@ interface UserInput {
   description?: string;
   image?: string;
   isNFT?: boolean;
+  nft: NftProps;
 }
 
 export const config = {
@@ -29,7 +43,9 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
 
   try {
     if (method === 'GET') {
-      const user = await prisma.user.findUnique({ where: { walletAddress } })
+      const user = await prisma.user.findUnique({
+        where: { walletAddress }
+      })
 
       if (!user) {
         return response.status(404).json({
@@ -37,7 +53,26 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
         })
       }
 
-      return response.status(200).json(user)
+      return response.status(200).json({
+        description: user.description,
+        discord: user.discord,
+        image: user.image,
+        nickname: user.nickname,
+        telegram: user.telegram,
+        twitter: user.twitter,
+        website: user.website,
+        isNFT: user.isNFT,
+        nft: {
+          contractType: user.contractType,
+          collectionName: user.collectionName,
+          symbol: user.symbol,
+          tokenAddress: user.tokenAddress,
+          tokenId: user.tokenId,
+          chain: user.chain,
+          nftName: user.nftName,
+          nftDescription: user.nftDescription
+        }
+      })
     }
 
     if (method === 'POST') {
@@ -49,7 +84,8 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
         telegram,
         twitter,
         website,
-        isNFT
+        isNFT,
+        nft
       }: UserInput = request.body
 
       if (
@@ -100,7 +136,15 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
             telegram,
             twitter,
             website,
-            isNFT
+            isNFT,
+            contractType: nft?.contractType,
+            collectionName: nft?.collectionName,
+            symbol: nft?.symbol,
+            tokenAddress: nft?.tokenAddress,
+            tokenId: nft?.tokenId,
+            chain: nft?.chain,
+            nftName: nft?.nftName,
+            nftDescription: nft?.nftDescription
           },
           update: {
             description,
@@ -110,7 +154,15 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
             telegram,
             twitter,
             website,
-            isNFT
+            isNFT,
+            contractType: nft?.contractType,
+            collectionName: nft?.collectionName,
+            symbol: nft?.symbol,
+            tokenAddress: nft?.tokenAddress,
+            tokenId: nft?.tokenId,
+            chain: nft?.chain,
+            nftName: nft?.nftName,
+            nftDescription: nft?.nftDescription
           }
         })
 

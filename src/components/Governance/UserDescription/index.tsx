@@ -5,6 +5,8 @@ import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+
 import substr from '../../../utils/substr'
 import { useAppSelector } from '../../../store/hooks'
 
@@ -13,10 +15,22 @@ import infoGrayIcon from '../../../../public/assets/utilities/info-gray.svg'
 import { ToastInfo } from '../../Toastify/toast'
 import ModalUserEditInfo from '../../Modals/ModalUserEditInfo'
 import NftImage from '../../NftImage'
+import ModalInfoNFT from '../../Modals/ModalInfoNFT'
 
 import * as S from './styles'
 
-type UserProps = {
+export type NftDetailsProps = {
+  contractType?: string,
+  collectionName?: string,
+  symbol?: string,
+  tokenAddress?: string,
+  tokenId?: string,
+  chain?: string,
+  nftName?: string,
+  nftDescription?: string
+}
+
+export type UserProps = {
   nickname: string,
   twitter: string,
   website: string,
@@ -26,7 +40,8 @@ type UserProps = {
   image?: {
     url: string,
     isNFT: false
-  }
+  },
+  nft: NftDetailsProps | undefined
 }
 
 interface IUserDescriptionProps {
@@ -37,18 +52,19 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   const [isOpenModal, setIsOpenModal] = React.useState(false)
+  const [isOpenModalNft, setIsOpenModalNft] = React.useState(false)
   const [isStateSeeMore, setIsStateSeeMore] = React.useState(false)
   const [userDescription, setUserDescription] = React.useState('')
 
   const [imageUser, setImageUser] = React.useState({ url: '', isNFT: false })
-
   const [userData, setUserData] = React.useState<UserProps>({
     nickname: '',
     twitter: '',
     website: '',
     telegram: '',
     discord: '',
-    description: ''
+    description: '',
+    nft: undefined
   })
 
   const isConnectWallet = userWalletAddress === userWalletUrl
@@ -56,6 +72,8 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
   const walletUserString = Array.isArray(userWalletUrl)
     ? userWalletUrl[0]
     : userWalletUrl
+
+  const { trackEventFunction } = useMatomoEcommerce()
 
   React.useEffect(() => {
     if (!walletUserString) return
@@ -83,7 +101,8 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
           website: '',
           telegram: '',
           discord: '',
-          description: ''
+          description: '',
+          nft: undefined
         }),
           setImageUser({ url: '', isNFT: false })
       })
@@ -111,7 +130,11 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
         <S.UserInfo>
           <S.UserInfoContent>
             {imageUser.isNFT ? (
-              <NftImage NftUrl={imageUser.url} imageSize="medium" />
+              <NftImage
+                NftUrl={imageUser.url}
+                imageSize="medium"
+                openModalNFT={setIsOpenModalNft}
+              />
             ) : imageUser.url !== undefined &&
               imageUser.url !== null &&
               imageUser.url !== '' ? (
@@ -133,7 +156,12 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
             )}
 
             {isConnectWallet && (
-              <button onClick={() => setIsOpenModal(true)}>
+              <button
+                onClick={() => {
+                  trackEventFunction('click-on-button', 'edit-info', 'profile')
+                  setIsOpenModal(true)
+                }}
+              >
                 Edit info
                 <img
                   src="/assets/utilities/edit-icon.svg"
@@ -149,7 +177,16 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
             <S.UserAddressContent>
               {walletUserString && substr(walletUserString)}
               <CopyToClipboard text={walletUserString ? walletUserString : ''}>
-                <button onClick={() => ToastInfo('Copy address')}>
+                <button
+                  onClick={() => {
+                    trackEventFunction(
+                      'click-on-button',
+                      'copy-address',
+                      'profile'
+                    )
+                    ToastInfo('Copy address')
+                  }}
+                >
                   <svg
                     width="14"
                     height="15"
@@ -198,7 +235,14 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
                       userData.discord !== undefined &&
                       userData.discord !== null
                     }
-                    onClick={() => ToastInfo('Copy Id')}
+                    onClick={() => {
+                      trackEventFunction(
+                        'click-on-button',
+                        'copy-discord',
+                        'profile'
+                      )
+                      ToastInfo('Copy Id')
+                    }}
                   >
                     <Image
                       src="/assets/socialMidia/discord.svg"
@@ -219,6 +263,9 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
                     userData.twitter !== undefined &&
                     userData.twitter !== null
                   }
+                  onClick={() => {
+                    trackEventFunction('click-on-link', 'twitter', 'profile')
+                  }}
                 >
                   <Image
                     src="/assets/socialMidia/twitter.svg"
@@ -238,6 +285,9 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
                     userData.telegram !== undefined &&
                     userData.telegram !== null
                   }
+                  onClick={() => {
+                    trackEventFunction('click-on-link', 'telegram', 'profile')
+                  }}
                 >
                   <Image
                     src="/assets/socialMidia/telegram.svg"
@@ -257,6 +307,9 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
                     userData.website !== undefined &&
                     userData.website !== null
                   }
+                  onClick={() => {
+                    trackEventFunction('click-on-link', 'website', 'profile')
+                  }}
                 >
                   <Image
                     src="/assets/socialMidia/webpage.svg"
@@ -268,7 +321,12 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
               </li>
             </ul>
             {isConnectWallet && (
-              <S.EditInfoButton onClick={() => setIsOpenModal(true)}>
+              <S.EditInfoButton
+                onClick={() => {
+                  trackEventFunction('click-on-button', 'edit-info', 'profile')
+                  setIsOpenModal(true)
+                }}
+              >
                 Edit Info
                 <Image
                   src="/assets/utilities/edit-icon.svg"
@@ -304,6 +362,7 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
               <S.ButtonSeeMore
                 isSeeMore={isStateSeeMore}
                 onClick={() => {
+                  trackEventFunction('click-on-button', 'see-more', 'profile')
                   setIsStateSeeMore(!isStateSeeMore)
                 }}
               >
@@ -329,6 +388,14 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
           imageUser={imageUser}
           setUserImage={setImageUser}
           setUserData={setUserData}
+        />
+      )}
+      {isOpenModalNft && (
+        <ModalInfoNFT
+          modalOpen={isOpenModalNft}
+          setModalOpen={setIsOpenModalNft}
+          userData={userData}
+          NftUrl={imageUser.url}
         />
       )}
     </>
