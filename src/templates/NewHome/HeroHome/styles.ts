@@ -9,4 +9,8 @@ export const Container = styled.section`
   gap: 3.2rem;
 
   height: 100vh;
+
+  .btn {
+    flex-direction: row-reverse;
+  }
 `
