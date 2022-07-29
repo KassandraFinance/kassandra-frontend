@@ -26,13 +26,8 @@ const mockData = [
 const DaoData = () => {
   return (
     <S.Container>
-      {mockData.map((item, index: number) => (
-        <DaoCard
-          key={item.title}
-          value={item.value}
-          title={item.title}
-          index={index}
-        />
+      {mockData.map(item => (
+        <DaoCard key={item.title} value={item.value} title={item.title} />
       ))}
     </S.Container>
   )

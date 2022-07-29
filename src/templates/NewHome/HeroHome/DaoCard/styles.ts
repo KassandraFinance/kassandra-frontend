@@ -1,9 +1,5 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import theme from '../../../../styles/theme'
-
-interface IDaoCardContainerProps {
-  index: number;
-}
 
 export const DaoCardContainer = styled.div`
   position: relative;
@@ -21,14 +17,18 @@ export const DaoCardContainer = styled.div`
   background: rgba(255, 255, 255, 0.04);
   border-radius: 1.72222rem;
   border: 0.1rem solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(7px);
+  backdrop-filter: blur(0.55rem);
   opacity: 0;
 
   animation-timing-function: ease;
-  animation: staggered 0.7s forwards;
-  ${({ index }: IDaoCardContainerProps) => css`
-    animation-delay: ${index + 1}s;
-  `}
+  animation: staggered 1s forwards;
+  animation-delay: 1s;
+
+  @supports not (
+    (backdrop-filter: blur(3rem)) or (-webkit-backdrop-filter: blur(3rem))
+  ) {
+    background: rgba(31, 41, 55, 0.6);
+  }
 
   @media (max-width: 693px) {
     height: fit-content;

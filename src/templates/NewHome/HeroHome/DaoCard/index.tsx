@@ -5,12 +5,11 @@ import * as S from './styles'
 interface IDaoCardProps {
   value: number;
   title: string;
-  index: number;
 }
 
-const DaoCard = ({ value, title, index }: IDaoCardProps) => {
+const DaoCard = ({ value, title }: IDaoCardProps) => {
   return (
-    <S.DaoCardContainer index={index}>
+    <S.DaoCardContainer>
       <S.Value>${value}</S.Value>
 
       <S.Title>{title}</S.Title>

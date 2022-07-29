@@ -107,12 +107,12 @@ const GlobalStyles: GlobalStyleComponent<
       font-family: 'Rubik', sans-serif;
       color: #fcfcfc;
 
-      ${selectBackground
+      /* ${selectBackground
         ? `background-image: url('/assets/images/background-products.png');
         background-repeat: repeat-y;
         background-size: cover;
         background-position-x: center;`
-        : ''}
+        : ''} */
     }
   `}
   ul, ol {

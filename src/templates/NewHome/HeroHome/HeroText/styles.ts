@@ -44,6 +44,7 @@ export const SubTitle = styled.div`
   font-size: clamp(${theme.font.sizes.font40}, 9vw, 6.4rem);
   line-height: 7.2rem;
   text-align: center;
+  text-shadow: 0rem 0.2rem 3rem rgba(0, 0, 0, 0.7);
 
   @media (max-width: 693px) {
     font-size: ${theme.font.sizes.font40};

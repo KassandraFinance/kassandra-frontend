@@ -1,6 +1,7 @@
 import React from 'react'
 import router from 'next/router'
 
+import HeroBackGround from './HeroBackGround'
 import HeroText from './HeroText'
 import Button from '../../../components/Button'
 import DaoData from './DaoData'
@@ -10,6 +11,8 @@ import * as S from './styles'
 const HeroHome = () => {
   return (
     <S.Container>
+      <HeroBackGround />
+
       <HeroText />
 
       <Button
