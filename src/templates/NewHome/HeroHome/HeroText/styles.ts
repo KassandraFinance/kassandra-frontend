@@ -71,26 +71,31 @@ export const Text = styled.div`
   position: absolute;
   top: -10rem;
 
+  width: 29.486rem;
+
+  text-align: right;
+
   transform: rotateX(-90deg);
   opacity: 0;
-
   animation-timing-function: ease;
 
   white-space: nowrap;
 
-  &:nth-child(1) {
-    left: 6rem;
+  @media (max-width: 693px) {
+    top: -3.3rem;
+    width: 18.428rem;
+  }
 
+  @media (max-width: 435px) {
+    text-align: center;
+  }
+
+  &:nth-child(1) {
     color: #ffbf00;
     animation: rollDown 10s forwards infinite;
 
     @media (max-width: 693px) {
-      left: 3.7rem;
       animation: rollDown670 10s forwards infinite;
-    }
-
-    @media (max-width: 435px) {
-      left: 1.85rem;
     }
   }
 
@@ -101,24 +106,14 @@ export const Text = styled.div`
     @media (max-width: 693px) {
       animation: rollDown2670 10s forwards infinite;
     }
-
-    @media (max-width: 435px) {
-    }
   }
 
   &:nth-child(3) {
-    left: 3.3rem;
-
     color: #e843c4;
     animation: rollDown3 10s forwards infinite;
 
     @media (max-width: 693px) {
-      left: 2rem;
       animation: rollDown3670 10s forwards infinite;
-    }
-
-    @media (max-width: 435px) {
-      left: 1.05rem;
     }
   }
 
