@@ -9,24 +9,18 @@ export const TitleContainer = styled.div`
   align-items: center;
   gap: 2.4rem;
 
-  max-width: 106.5rem;
-  padding-inline: 2.4rem;
-
-  @media (max-width: 576px) {
-    padding-inline: 1.6rem;
-  }
+  max-width: 106rem;
 `
 
 export const Title = styled.h1`
-  height: 2rem;
   width: fit-content;
+  height: 2rem;
 
   color: ${theme.colors.snow};
   font-weight: ${theme.font.weight.light};
   font-size: ${theme.font.sizes.font16};
   line-height: ${theme.font.sizes.font20};
   letter-spacing: 0.4em;
-
   text-transform: uppercase;
   text-align: center;
 
@@ -47,7 +41,7 @@ export const SubTitle = styled.div`
   position: relative;
 
   font-weight: ${theme.font.weight.black};
-  font-size: 6.4rem;
+  font-size: clamp(${theme.font.sizes.font40}, 9vw, 6.4rem);
   line-height: 7.2rem;
   text-align: center;
 
@@ -67,22 +61,23 @@ export const VisibilityHidden = styled.span`
 `
 
 export const Text = styled.div`
-  display: inline-block;
   position: absolute;
   top: -10rem;
+
+  display: inline-block;
 
   width: 29.486rem;
 
   text-align: right;
 
-  transform: rotateX(-90deg);
   opacity: 0;
+  transform: rotateX(-30deg);
   animation-timing-function: ease;
-
   white-space: nowrap;
 
   @media (max-width: 693px) {
     top: -3.3rem;
+
     width: 18.428rem;
   }
 
@@ -91,7 +86,8 @@ export const Text = styled.div`
   }
 
   &:nth-child(1) {
-    color: #ffbf00;
+    color: ${theme.colors.amber};
+
     animation: rollDown 10s forwards infinite;
 
     @media (max-width: 693px) {
@@ -100,7 +96,8 @@ export const Text = styled.div`
   }
 
   &:nth-child(2) {
-    color: #26dbdb;
+    color: ${theme.colors.cyan};
+
     animation: rollDown2 10s forwards infinite;
 
     @media (max-width: 693px) {
@@ -109,7 +106,8 @@ export const Text = styled.div`
   }
 
   &:nth-child(3) {
-    color: #e843c4;
+    color: ${theme.colors.magenta};
+
     animation: rollDown3 10s forwards infinite;
 
     @media (max-width: 693px) {
