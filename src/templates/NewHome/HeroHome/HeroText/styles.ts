@@ -69,9 +69,9 @@ export const VisibilityHidden = styled.span`
 export const Text = styled.div`
   display: inline-block;
   position: absolute;
-  top: -20rem;
-  transform: rotateX(-90deg);
+  top: -10rem;
 
+  transform: rotateX(-90deg);
   opacity: 0;
 
   animation-timing-function: ease;
@@ -125,7 +125,8 @@ export const Text = styled.div`
   @keyframes rollDown {
     0% {
       top: -10rem;
-      transform: rotateX(-90deg);
+      transform: rotateX(30deg);
+      opacity: 0;
     }
     11% {
       top: -5.8rem;
@@ -147,7 +148,8 @@ export const Text = styled.div`
   @keyframes rollDown2 {
     33% {
       top: -10rem;
-      transform: rotateX(-90deg);
+      transform: rotateX(30deg);
+      opacity: 0;
     }
     44% {
       top: -5.8rem;
@@ -169,7 +171,8 @@ export const Text = styled.div`
   @keyframes rollDown3 {
     66% {
       top: -10rem;
-      transform: rotateX(-90deg);
+      transform: rotateX(30deg);
+      opacity: 0;
     }
     77% {
       top: -5.8rem;
@@ -190,8 +193,9 @@ export const Text = styled.div`
 
   @keyframes rollDown670 {
     0% {
-      top: -7rem;
-      transform: rotateX(-90deg);
+      top: -5rem;
+      transform: rotateX(30deg);
+      opacity: 0;
     }
     11% {
       top: -3.3rem;
@@ -212,8 +216,9 @@ export const Text = styled.div`
 
   @keyframes rollDown2670 {
     33% {
-      top: -7rem;
-      transform: rotateX(-90deg);
+      top: -5rem;
+      transform: rotateX(30deg);
+      opacity: 0;
     }
     44% {
       top: -3.3rem;
@@ -234,8 +239,9 @@ export const Text = styled.div`
 
   @keyframes rollDown3670 {
     66% {
-      top: -7rem;
-      transform: rotateX(-90deg);
+      top: -5rem;
+      transform: rotateX(30deg);
+      opacity: 0;
     }
     77% {
       top: -3.3rem;
