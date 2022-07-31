@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 import iconPower from '../../../../public/assets/iconGradient/voting-power-rank.svg'
 
-import Partner, { PartnerData } from '../../../components/Products/Partner'
+import Partner, { PartnerData } from '../../../components/Partner'
 
 import * as S from './styles'
 
