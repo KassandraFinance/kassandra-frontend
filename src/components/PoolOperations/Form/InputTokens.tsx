@@ -8,7 +8,7 @@ import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
 import InputTokenValue from '../InputTokenValue'
 import OutputTokenValue from '../OutputTokenValue'
-import SelectInput from '../../SelectInput'
+import SelectInput from '../SelectInput'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 
