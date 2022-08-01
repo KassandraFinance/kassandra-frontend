@@ -1,14 +1,19 @@
 import React from 'react'
 
 import HeroHome from './HeroHome'
+import InvestorsSection from './InvestorsSection'
 
 import * as S from './styles'
 
 const NewHome = () => {
   return (
-    <S.Container>
+    <>
       <HeroHome />
-    </S.Container>
+
+      <S.Container>
+        <InvestorsSection />
+      </S.Container>
+    </>
   )
 }
 

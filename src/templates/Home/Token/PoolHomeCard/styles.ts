@@ -9,19 +9,18 @@ export const CardWrapper = styled.div`
   align-items: center;
 
   max-width: 100rem;
-  margin: 7rem auto;
   gap: 7rem;
 
   z-index: 10;
 
   @media (max-width: 960px) {
     flex-direction: column;
+    gap: 6.4rem;
   }
 
-  @media (max-width: 960px) {
-    margin-top: 7rem;
-    margin-right: 0;
-    margin-left: 0;
+  @media (max-width: 576px) {
+    align-items: flex-start;
+    width: 100%;
   }
 `
 
@@ -131,7 +130,7 @@ interface INameAndSymbolProps {
   isTricrypto: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const NameAndSymbol = styled.div<INameAndSymbolProps>`
   display: flex;
   align-items: center;
@@ -314,23 +313,7 @@ export const BarChartWrapper = styled.div`
 `
 
 export const Info = styled.div`
-  /* padding-left: 9rem; */
-  padding-right: 2rem;
-
-  &:first-child {
-    padding-right: 9rem;
-    padding-left: 2rem;
-  }
-
-  @media (max-width: 1060px) {
-    padding-left: 4rem;
-    padding-right: 1rem;
-
-    &:first-child {
-      padding-right: 4rem;
-      padding-left: 1rem;
-    }
-  }
+  width: 39.1rem;
 
   @media (max-width: 960px) {
     max-width: 49rem;
@@ -345,43 +328,56 @@ export const Info = styled.div`
   }
 
   h2 {
-    font-size: 3.2rem;
+    margin-bottom: 2.4rem;
+
+    color: #ffffff;
     font-weight: ${theme.font.weight.bold};
+    font-size: ${theme.font.sizes.font32};
+    line-height: 3.5rem;
     text-align: left;
 
-    @media (max-width: 500px) {
-      font-size: 2.4rem;
-      font-weight: ${theme.font.weight.bold};
+    @media (max-width: 960px) {
+      text-align: center;
+    }
+
+    @media (max-width: 576px) {
+      text-align: left;
     }
   }
 
   h4 {
-    margin-bottom: 1.6rem;
+    margin-bottom: 0.8rem;
 
     color: #ffbf00;
-    font-size: 1.4rem;
     font-weight: ${theme.font.weight.normal};
-    line-height: 1.6rem;
-    letter-spacing: 0.6rem;
+    font-size: ${theme.font.sizes.font12};
+    line-height: ${theme.font.sizes.font12};
+    letter-spacing: 0.3em;
     text-align: left;
     text-transform: uppercase;
 
-    @media (max-width: 400px) {
-      font-size: 1.2rem;
-      letter-spacing: 0.4rem;
+    @media (max-width: 960px) {
+      text-align: center;
+    }
+
+    @media (max-width: 576px) {
+      text-align: left;
     }
   }
 
-  span {
-    margin-top: 2.4rem;
-
-    font-size: ${theme.font.sizes.font16};
+  p {
+    color: #ffffff;
     font-weight: ${theme.font.weight.light};
+    font-size: ${theme.font.sizes.font16};
     line-height: 2.4rem;
     text-align: left;
 
-    @media (max-width: 500px) {
-      font-size: ${theme.font.sizes.font14};
+    @media (max-width: 960px) {
+      text-align: center;
+    }
+
+    @media (max-width: 576px) {
+      text-align: left;
     }
   }
 `
@@ -389,37 +385,28 @@ export const Info = styled.div`
 export const InfoList = styled.ul`
   display: flex;
   flex-direction: column;
+  gap: 2rem;
 
   margin-top: 2.4rem;
-  gap: 2rem;
+
+  @media (max-width: 960px) {
+    align-items: center;
+  }
+
+  @media (max-width: 576px) {
+    align-items: flex-start;
+  }
 
   li {
     display: flex;
     align-items: center;
     gap: 1rem;
 
-    font-size: 1.2rem;
-    font-weight: ${theme.font.weight.light};
+    font-size: ${theme.font.sizes.font12};
+    font-weight: ${theme.font.weight.normal};
     line-height: 1.2rem;
-    letter-spacing: 0.21rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     text-align: left;
-
-    /* :not(:last-child) {
-      @media (max-width: 400px) {
-        .image {
-          margin-top: -15px;
-        }
-      }
-    } */
-
-    @media (max-width: 400px) {
-      line-height: 1.6rem;
-
-      .image {
-        min-width: 2rem;
-        height: 2rem;
-      }
-    }
   }
 `
