@@ -3,10 +3,10 @@ import BigNumber from 'bn.js'
 import Big from 'big.js'
 import Tippy from '@tippyjs/react'
 
-import { ITokenDetails } from '../../context/PoolTokensContext';
+import { ITokenDetails } from '../../../context/PoolTokensContext';
 
-import { BNtoDecimal } from '../../utils/numerals';
-import { priceDollar } from '../../utils/priceDollar';
+import { BNtoDecimal } from '../../../utils/numerals';
+import { priceDollar } from '../../../utils/priceDollar';
 
 import * as S from './styles'
 

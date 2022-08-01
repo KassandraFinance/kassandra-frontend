@@ -1,7 +1,7 @@
 import { ChainDetails } from '../utils/changeChain'
 
-import { PartnerData } from '../components/Products/Partner'
-import partners from '../components/Products/Partner/list'
+import { PartnerData } from '../components/Partner'
+import partners from '../components/Partner/list'
 
 import ahypeIcon from '../../public/assets/logos/ahype.svg'
 import tricryptoIcon from '../../public/assets/logos/tricrypto.svg'
