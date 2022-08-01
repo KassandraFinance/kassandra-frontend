@@ -2,6 +2,7 @@ import React from 'react'
 
 import HeroHome from './HeroHome'
 import InvestorsSection from './InvestorsSection'
+import WavyLine from '../../components/WavyLine'
 
 import * as S from './styles'
 
@@ -13,6 +14,8 @@ const NewHome = () => {
       <S.Container>
         <InvestorsSection />
       </S.Container>
+
+      <WavyLine />
     </>
   )
 }
