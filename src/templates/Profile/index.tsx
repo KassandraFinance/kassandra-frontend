@@ -185,15 +185,23 @@ const Profile = () => {
 
   async function getLiquidityPoolPriceInDollar() {
     const { kacyPriceInDollar, priceLP } = await getPriceKacyAndLP(LP_KACY_AVAX_PNG, LPDaiAvax, true)
-    const priceLPJoe = await getPriceKacyAndLP(LP_KACY_AVAX_JOE, LPDaiAvax, true)
-
-    if (priceLP && priceLPJoe.priceLP) {
+    if (priceLP) {
       setPriceToken(prevState => ({
         ...prevState,
         'LP-PNG': priceLP,
-        'LP-JOE': priceLPJoe.priceLP,
         KACY: kacyPriceInDollar
       }))
+    }
+
+    if (priceLP && chains.avalanche.chainId === chainId) {
+      const priceLPJoe = await getPriceKacyAndLP(LP_KACY_AVAX_JOE, LPDaiAvax, true)
+
+      if (priceLPJoe.priceLP) {
+        setPriceToken(prevState => ({
+          ...prevState,
+          'LP-JOE': priceLPJoe.priceLP,
+        }))
+      }
     }
   }
 
