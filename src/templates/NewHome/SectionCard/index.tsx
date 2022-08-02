@@ -1,32 +1,44 @@
 import React from 'react'
-import Image from 'next/image'
+import Image, { StaticImageData } from 'next/image'
 
 import Button from '../../../components/Button'
 
-import investorImg from '../../../../public/assets/images/investor.png'
-
 import * as S from './styles'
 
-const SectionCard = () => {
+interface ISectionCardProps {
+  number: string;
+  title: string;
+  color: string;
+  subtitle: string;
+  text: string;
+  btnText: string;
+  img: StaticImageData;
+}
+
+const SectionCard = ({
+  number,
+  title,
+  color,
+  subtitle,
+  text,
+  btnText,
+  img
+}: ISectionCardProps) => {
   return (
     <S.Container>
       <S.TextContainer>
-        <S.Title>
-          01
-          <S.Line /> investors
+        <S.Title color={color}>
+          {number}
+          <S.Line color={color} /> {title}
         </S.Title>
 
-        <S.SubTitle>Buy one token to follow strategies that fit you</S.SubTitle>
+        <S.SubTitle>{subtitle}</S.SubTitle>
 
-        <S.Text>
-          Take advantage of social trading to increase your diversification. By
-          buying a single token, you delegate funds to trusted managers that
-          will work to improve your gains and reduce your risks.
-        </S.Text>
+        <S.Text>{text}</S.Text>
 
         <Button
           className="btn"
-          text="Become an investor"
+          text={btnText}
           icon={
             <svg
               width="18"
@@ -59,7 +71,7 @@ const SectionCard = () => {
         />
       </S.TextContainer>
 
-      <Image src={investorImg} />
+      <Image src={img} />
     </S.Container>
   )
 }

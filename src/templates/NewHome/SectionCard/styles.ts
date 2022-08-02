@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import theme from '../../../styles/theme'
 
 export const Container = styled.article`
@@ -40,37 +40,49 @@ export const TextContainer = styled.div`
   }
 `
 
+interface ITitleProps {
+  color: string;
+}
+
 export const Title = styled.h3`
-  display: flex;
-  align-items: center;
+  ${({ color }: ITitleProps) => css`
+    display: flex;
+    align-items: center;
 
-  margin-bottom: 1.6rem;
+    margin-bottom: 1.6rem;
 
-  color: ${theme.colors.amber};
-  font-weight: ${theme.font.weight.light};
-  font-size: ${theme.font.sizes.font16};
-  line-height: ${theme.font.sizes.font20};
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
+    color: ${color};
+    font-weight: ${theme.font.weight.light};
+    font-size: ${theme.font.sizes.font16};
+    line-height: ${theme.font.sizes.font20};
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
 
-  @media (max-width: 992px) {
-    justify-content: center;
-  }
+    @media (max-width: 992px) {
+      justify-content: center;
+    }
 
-  @media (max-width: 576px) {
-    font-size: ${theme.font.sizes.font14};
-    line-height: ${theme.font.sizes.font16};
-  }
+    @media (max-width: 576px) {
+      font-size: ${theme.font.sizes.font14};
+      line-height: ${theme.font.sizes.font16};
+    }
+  `}
 `
 
-export const Line = styled.div`
-  width: 6.4rem;
-  height: 0.1rem;
-  margin-right: 1.9rem;
-  margin-left: 1.6rem;
+interface ILineProps {
+  color: string;
+}
 
-  background: ${theme.colors.amber};
-  border-radius: 0.4rem;
+export const Line = styled.div`
+  ${({ color }: ILineProps) => css`
+    width: 6.4rem;
+    height: 0.1rem;
+    margin-right: 1.9rem;
+    margin-left: 1.6rem;
+
+    background-color: ${color};
+    border-radius: 0.4rem;
+  `}
 `
 
 export const SubTitle = styled.h4`
