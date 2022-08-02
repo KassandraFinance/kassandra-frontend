@@ -7,6 +7,9 @@ import Big from 'big.js'
 import BigNumber from 'bn.js'
 import ReactMarkdown from 'react-markdown'
 
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
+
 import {
   chains,
   GovernorAlpha,
@@ -48,6 +51,7 @@ import proposalInfoIcon from '../../../../../public/assets/iconGradient/info-gra
 import proposalCompleteIcon from '../../../../../public/assets/statusProposal/proposal-complete.svg'
 import proposalWaitingIcon from '../../../../../public/assets/statusProposal/proposal-waiting.svg'
 import proposalStatusHistory from '../../../../../public/assets/iconGradient/timer-grandient.svg'
+import infoGrayIcon from '../../../../../public/assets/utilities/info-gray.svg'
 
 import * as S from './styles'
 
@@ -778,12 +782,21 @@ const Proposal = () => {
                           )}
                         </S.DataWrapper>
                         <S.DataWrapper>
-                          <S.TextKey>Quorum</S.TextKey>
+                          <S.Quorum>
+                            <S.TextKey>Quorum</S.TextKey>
+                            <Tippy content="Quorum is the minimal amount of votes that a proposal needs to have to be valid. Proposals that don’t achieve the quorum will fail.">
+                              <S.Tooltip tabIndex={0}>
+                                <Image
+                                  src={infoGrayIcon}
+                                  alt="Explanation"
+                                  width={14}
+                                  height={14}
+                                />
+                              </S.Tooltip>
+                            </Tippy>
+                          </S.Quorum>
                           <S.TextValue>
-                            {proposal.votingPower.lt(Big(proposal.quorum))
-                              ? BNtoDecimal(proposal.votingPower, 0, 2)
-                              : BNtoDecimal(Big(proposal.forVotes), 0, 2)}{' '}
-                            / {BNtoDecimal(Big(proposal.quorum), 0, 2)}
+                            {BNtoDecimal(Big(proposal.quorum), 0, 2)}
                           </S.TextValue>
                         </S.DataWrapper>
                         <S.DataWrapper>
