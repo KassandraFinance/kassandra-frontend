@@ -1,4 +1,13 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+
+const lineColor = {
+  color1: () => css`
+    background: url(./assets/images/wave-line1.svg);
+  `,
+  color2: () => css`
+    background: url(./assets/images/wave-line2.svg);
+  `
+}
 
 export const Container = styled.div`
   width: 100%;
@@ -9,8 +18,15 @@ export const Container = styled.div`
   overflow-x: hidden;
 `
 
+interface IWaveProps {
+  color: 'color1' | 'color2';
+}
+
 export const Wave = styled.div`
-  background: url(./assets/images/wave-line1.svg);
+  ${({ color }: IWaveProps) => css`
+    ${lineColor[color]}
+  `}
+
   background-position: bottom;
 
   width: 777.3rem;

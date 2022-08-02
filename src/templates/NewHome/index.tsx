@@ -17,11 +17,14 @@ const NewHome = () => {
         <InvestorsSection />
       </S.Container>
 
-      <WavyLine />
+      <WavyLine color="color1" />
 
       <S.Container>
         <ManagerSection />
       </S.Container>
+
+      <WavyLine color="color2" />
+
       <S.Container>
         <DaoSection />
       </S.Container>
