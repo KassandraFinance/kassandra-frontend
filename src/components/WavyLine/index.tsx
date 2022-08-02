@@ -8,9 +8,9 @@ interface IWavyLineProps {
 
 const WavyLine = ({ color }: IWavyLineProps) => {
   return (
-    <S.Container>
+    <S.WaveContainer>
       <S.Wave color={color} />
-    </S.Container>
+    </S.WaveContainer>
   )
 }
 

@@ -9,7 +9,7 @@ const lineColor = {
   `
 }
 
-export const Container = styled.div`
+export const WaveContainer = styled.div`
   width: 100%;
   height: fit-content;
   margin-top: 20.1rem;
