@@ -28,7 +28,7 @@ export const OverViewLinks = styled.div`
   flex-direction: row;
   justify-content: space-between;
 
-  max-width: 41rem;
+  max-width: 35.8rem;
   margin-top: 1.6rem;
   margin-bottom: 10rem;
 

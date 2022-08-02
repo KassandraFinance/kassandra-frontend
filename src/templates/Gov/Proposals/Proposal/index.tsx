@@ -341,7 +341,7 @@ const Proposal = () => {
       const { endBlock, startBlock, created, canceled, executed, queued, eta } =
         data.proposal[0]
       const defeated =
-        proposal.forVotes <= proposal.againstVotes ||
+        Number(proposal.forVotes) <= Number(proposal.againstVotes) ||
         Number(proposal.forVotes) < Number(proposal.quorum)
       const votingClosed =
         (Number(endBlock) - Number(startBlock)) * 2 + Number(created)
