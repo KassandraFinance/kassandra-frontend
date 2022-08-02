@@ -4,6 +4,7 @@ import HeroHome from './HeroHome'
 import InvestorsSection from './InvestorsSection'
 import WavyLine from '../../components/WavyLine'
 import ManagerSection from './ManagerSection'
+import DaoSection from './DaoSection'
 
 import * as S from './styles'
 
@@ -20,6 +21,9 @@ const NewHome = () => {
 
       <S.Container>
         <ManagerSection />
+      </S.Container>
+      <S.Container>
+        <DaoSection />
       </S.Container>
     </>
   )
