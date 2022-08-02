@@ -3,18 +3,18 @@ import router from 'next/router'
 import useSWR from 'swr'
 import BigNumber from 'bn.js'
 import { request } from 'graphql-request'
-import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
-import { GET_MODALVOTES } from './graphql'
 import { SUBGRAPH_URL } from '../../../constants/tokenAddresses'
 
-import Button from '../../Button'
-
-import substr from '../../../utils/substr'
 import { BNtoDecimal } from '../../../utils/numerals'
 import { checkVoteButton } from '../../../utils/checkVoteButton'
 
 import { IUserVotedProps } from '../../../templates/Gov/Proposals/Proposal'
+
+import { GET_MODALVOTES } from './graphql'
+
+import Button from '../../Button'
+import ImageProfile from '../ImageProfile'
 
 import * as S from './styles'
 
@@ -144,11 +144,12 @@ const ModalVotes = ({
                   className={lastItem ? `last-item` : ``}
                 >
                   <S.UserName>
-                    <Jazzicon
-                      diameter={18}
-                      seed={jsNumberForAddress(user.voter.id)}
+                    <ImageProfile 
+                      address={user.voter.id} 
+                      diameter={18} 
+                      hasAddress={true} 
+                      isLink={true} 
                     />
-                    {substr(user.voter.id)}
                   </S.UserName>
                   <S.UserVote>{BNtoDecimal(user.votingPower, 0, 2)}</S.UserVote>
                 </S.UserData>

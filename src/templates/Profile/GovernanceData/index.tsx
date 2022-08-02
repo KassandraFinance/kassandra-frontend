@@ -181,7 +181,7 @@ const GovernanceData = ({ address }: IGovernanceDataProps) => {
         <S.TitleAndLinkContent>
           <TitleSection image={proposals} title="Voting History" />
           <S.LinkForum
-            href="https://t.me/KassandraDAO"
+            href="https://gov.kassandra.finance/"
             target="_blank"
             rel="noopener noreferrer"
           >

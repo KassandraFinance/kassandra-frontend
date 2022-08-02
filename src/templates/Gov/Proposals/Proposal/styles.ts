@@ -374,6 +374,17 @@ export const DescriptionText = styled.td`
     letter-spacing: 0.08rem;
   }
 `
+
+export const Tooltip = styled.div`
+  position: relative;
+  padding: 0.1rem;
+
+  left: 0.4rem;
+  bottom: 0.2rem;
+
+  z-index: 99;
+`
+
 export const InfoTable = styled.table`
   width: 100%;
   height: max-content;
@@ -428,6 +439,11 @@ export const DataWrapper = styled.div`
     margin-top: 1.6rem;
   }
 `
+
+export const Quorum = styled.div`
+  display: flex;
+`
+
 export const TextKey = styled.span`
   font-size: ${theme.font.sizes.font12};
   font-weight: ${theme.font.weight.medium};
@@ -504,7 +520,7 @@ export const DetailsSubTitle = styled.p`
   }
 
   @media (min-width: 1024px) {
-    font-size: ${theme.font.sizes.font18};
+    font-size: ${theme.font.sizes.font16};
     line-height: 2.08rem;
     letter-spacing: 0.08rem;
   }
@@ -524,7 +540,7 @@ export const DetailsText = styled.span`
   }
 
   @media (min-width: 1024px) {
-    font-size: ${theme.font.sizes.font18};
+    font-size: ${theme.font.sizes.font16};
     line-height: 2.08rem;
     letter-spacing: 0.08rem;
   }
@@ -566,7 +582,7 @@ export const LinkTargetSnowTrace = styled.a`
     }
 
     @media (min-width: 1024px) {
-      font-size: ${theme.font.sizes.font18};
+      font-size: ${theme.font.sizes.font16};
       line-height: 2.08rem;
       letter-spacing: 0.08rem;
     }
