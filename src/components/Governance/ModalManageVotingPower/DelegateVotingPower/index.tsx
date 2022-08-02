@@ -67,6 +67,9 @@ const DelegateVotingPower = ({
   const { poolInfo, balance } = useStakingContract(Staking)
   const { delegateVote, delegateAllVotes } = useVotingPower(Staking)
 
+  const regex = /^0x[a-fA-F0-9]{40}$/g
+  const walletRegex: RegExpExecArray | null = regex.exec(receiverAddress)
+
   const handlePoolInfo = async () => {
     const [poolInfoOne, poolInfoTwo, poolInfoThree] = await Promise.all([
       poolInfo(process.env.NEXT_PUBLIC_MASTER === '1' ? 2 : 0),
@@ -168,7 +171,7 @@ const DelegateVotingPower = ({
   }
 
   const handleDelegateAllVoting = async () => {
-    if (receiverAddress === '') {
+    if (!walletRegex) {
       dispatch(setModalAlertText({ errorText: 'Invalid address' }))
       return
     }
@@ -236,9 +239,7 @@ const DelegateVotingPower = ({
             size="large"
             fullWidth
             backgroundSecondary
-            disabledNoEvent={
-              delegateSelected.nameToken === '' || receiverAddress === ''
-            }
+            disabledNoEvent={walletRegex === null}
             text="Delegate Votes"
             onClick={handleDelegateVotes}
           />

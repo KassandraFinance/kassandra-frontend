@@ -76,7 +76,7 @@ const MyAsset = ({ product, price, pid, decimals }: IMyAssetProps) => {
     setBalance(balanceToken)
   }
 
-  async function handleLPtoUSD() {
+  async function getLiquidityPoolPriceInDollar() {
     const { kacyPriceInDollar } = await getPriceKacyAndLP(
       LP_KACY_AVAX_PNG,
       LPDaiAvax,
@@ -151,7 +151,7 @@ const MyAsset = ({ product, price, pid, decimals }: IMyAssetProps) => {
 
   React.useEffect(() => {
     if (userWalletAddress !== '') {
-      handleLPtoUSD()
+      getLiquidityPoolPriceInDollar()
     }
   }, [price, userWalletAddress])
 
