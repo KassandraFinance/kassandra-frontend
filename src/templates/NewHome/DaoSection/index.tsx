@@ -20,7 +20,12 @@ const DaoSection = () => {
         img={daoImg}
       />
 
-      <HomeHeading title="kassandra ecosystem" color="#E843C4" />
+      <HomeHeading
+        title="kassandra ecosystem"
+        color="#E843C4"
+        subTitle="Connecting investors and managers to build smart descentralized ETFs"
+        text="Help grow Kassandra with new investment products, keep our protocol healthy with flowing revenue and commit your tokens to the DAO to get voting rights."
+      />
     </S.Container>
   )
 }

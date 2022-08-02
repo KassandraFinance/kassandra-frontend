@@ -7,7 +7,11 @@ export const Container = styled.div`
   align-items: center;
   gap: 2.4rem;
 
+  max-width: 66.8rem;
+  margin: 0 auto;
+
   @media (max-width: 576px) {
+    width: 100%;
     align-items: flex-start;
   }
 `
@@ -41,9 +45,38 @@ export const Line = styled.div`
   ${({ color }: ILineProps) => css`
     width: 9.8rem;
     height: 0.1rem;
-    margin-bottom: 5.6rem;
 
     background-color: ${color};
     border-radius: 0.4rem;
+
+    @media (max-width: 576px) {
+      margin-bottom: 2.4rem;
+    }
   `}
+`
+
+export const Subtitle = styled.h4`
+  color: ${theme.colors.snow};
+  font-weight: ${theme.font.weight.bold};
+  font-size: ${theme.font.sizes.font32};
+  line-height: 3.5rem;
+  text-align: center;
+
+  @media (max-width: 576px) {
+    font-size: ${theme.font.sizes.font24};
+    line-height: ${theme.font.sizes.font32};
+    text-align: left;
+  }
+`
+
+export const Text = styled.p`
+  color: #ffffff;
+  font-weight: ${theme.font.weight.light};
+  font-size: ${theme.font.sizes.font16};
+  line-height: ${theme.font.sizes.font24};
+  text-align: center;
+
+  @media (max-width: 576px) {
+    text-align: left;
+  }
 `

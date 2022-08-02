@@ -20,7 +20,12 @@ const ManagerSection = () => {
         img={managerImg}
       />
 
-      <HomeHeading title="kassandra for managers" color="#26DBDB" />
+      <HomeHeading
+        title="kassandra for managers"
+        color="#26DBDB"
+        subTitle="Rebalance your portfolios automagically and get paid to manage them"
+        text="Gone are the days of having to pay fees to rebalance your portfolio. By incentivizing arbitrage, we use traders to do it while collecting fees for you."
+      />
     </S.Container>
   )
 }
