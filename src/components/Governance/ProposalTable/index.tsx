@@ -136,7 +136,7 @@ export const ProposalTable = () => {
                     </S.StatusProposal>
 
                     <S.TimeFrame>
-                      {proposal.state[1]} ends {proposal.timeToEndProposal}
+                      {proposal.state[1]} in {proposal.timeToEndProposal}
                     </S.TimeFrame>
 
                     <S.StateMutability

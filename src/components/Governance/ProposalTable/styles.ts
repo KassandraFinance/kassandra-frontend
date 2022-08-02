@@ -205,7 +205,6 @@ export const TimeFrame = styled.p`
   line-height: 100%;
   font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.light};
-  text-transform: capitalize;
 
   @media (max-width: 768px) {
     margin-left: 1.6rem;
