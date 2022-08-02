@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
 import Big from 'big.js'
@@ -18,12 +17,11 @@ import {
 import useGovernance from '../../../../hooks/useGovernance'
 import useVotingPower from '../../../../hooks/useVotingPower'
 
-import substr from '../../../../utils/substr'
-import { BNtoDecimal } from '../../../../utils/numerals'
 import waitTransaction, {
   MetamaskError,
   TransactionCallback
 } from '../../../../utils/txWait'
+import { BNtoDecimal } from '../../../../utils/numerals'
 
 import { useAppSelector, useAppDispatch } from '../../../../store/hooks'
 import { setModalAlertText } from '../../../../store/reducers/modalAlertText'
@@ -38,6 +36,7 @@ import VotingPower from '../../../../components/VotingPower'
 import Breadcrumb from '../../../../components/Breadcrumb'
 import BreadcrumbItem from '../../../../components/Breadcrumb/BreadcrumbItem'
 import Web3Disabled from '../../../../components/Web3Disabled'
+import ImageProfile from '../../../../components/Governance/ImageProfile'
 import {
   ToastSuccess,
   ToastWarning
@@ -651,12 +650,12 @@ const Proposal = () => {
                     />
                     <S.ProposeAuthorCard>
                       <p>Proposed by</p>
-                      <Jazzicon
+                      <ImageProfile
+                        address={proposal.proposer}
                         diameter={32}
-                        seed={jsNumberForAddress(proposal.proposer)}
+                        hasAddress={true}
+                        isLink={true}
                       />
-
-                      <span>{substr(`${proposal.proposer}`)}</span>
                     </S.ProposeAuthorCard>
                   </S.TitleAndAuthor>
                   <S.VotingPower>
@@ -683,11 +682,12 @@ const Proposal = () => {
                     </S.VotingPower>
                     <S.ProposeAuthorCard>
                       <p>Proposed by</p>
-                      <Jazzicon
+                      <ImageProfile
+                        address={proposal.proposer}
                         diameter={24}
-                        seed={jsNumberForAddress(proposal.proposer)}
+                        hasAddress={true}
+                        isLink={true}
                       />
-                      <span>{substr(`${proposal.proposer}`)}</span>
                     </S.ProposeAuthorCard>
                   </S.CardTitleWrapper>
                 </S.TitleWrapper>
@@ -821,7 +821,7 @@ const Proposal = () => {
                   </S.Table>
 
                   <S.LinkForum
-                    href="https://t.me/KassandraDAO"
+                    href="https://gov.kassandra.finance/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
