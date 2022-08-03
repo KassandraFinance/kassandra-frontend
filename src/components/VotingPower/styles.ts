@@ -40,7 +40,8 @@ export const YourVotingPower = styled.div`
     align-items: center;
 
     color: #fcfcfc;
-    font-size: ${theme.font.sizes.font14};
+    /* font-size: ${theme.font.sizes.font14}; */
+    font-size: 1.3rem;
     line-height: 1.6rem;
     font-weight: ${theme.font.weight.medium};
     text-transform: uppercase;

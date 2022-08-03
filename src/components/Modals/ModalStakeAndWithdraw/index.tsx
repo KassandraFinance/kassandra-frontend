@@ -23,7 +23,7 @@ import useStakingContract from '../../../hooks/useStakingContract'
 import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
 import Button from '../../Button'
-import InputTokenValue from '../../InputTokenValue'
+import InputTokenValue from '../../PoolOperations/InputTokenValue'
 
 import * as S from './styles'
 

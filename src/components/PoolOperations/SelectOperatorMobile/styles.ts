@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
-export const HeimOperationContainerMobile = styled.div`
+export const PoolOperationsContainerMobile = styled.div`
   background-color: #151117;
 
   display: flex;

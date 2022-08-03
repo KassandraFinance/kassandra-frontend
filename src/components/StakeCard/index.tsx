@@ -163,7 +163,7 @@ const StakeCard = ({
     setStakeTransaction(transaction)
   }
 
-  async function handleLPtoUSD() {
+  async function getLiquidityPoolPriceInDollar() {
     const addressProviderReserves = isLP && address ? address : LP_KACY_AVAX_PNG
 
     const { kacyPriceInDollar, priceLP } = await getPriceKacyAndLP(
@@ -260,7 +260,7 @@ const StakeCard = ({
   }, [])
 
   React.useEffect(() => {
-    handleLPtoUSD()
+    getLiquidityPoolPriceInDollar()
   }, [infoStaked.stakingToken, pid, data])
 
   React.useEffect(() => {

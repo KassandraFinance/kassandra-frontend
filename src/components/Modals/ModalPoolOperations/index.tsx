@@ -64,7 +64,7 @@ const ModalCardOperations = ({
     if (chain.chainId === chainId) setInputCheckedMobile(title)
   }
 
-  const handleCloseModalHeimOperation = () => {
+  const handleCloseModalPoolOperations = () => {
     setInputChecked('Invest')
     setInputCheckedMobile('Invest')
     setInputCheckedBarMobile('Disable')
@@ -101,7 +101,7 @@ const ModalCardOperations = ({
     <>
       <Backdrop
         style={{ display: modalOpen ? 'block' : 'none' }}
-        onClick={() => handleCloseModalHeimOperation()}
+        onClick={() => handleCloseModalPoolOperations()}
       />
 
       <CardOperationsContainerModal

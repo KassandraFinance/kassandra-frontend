@@ -12,12 +12,12 @@ import ProposalTable from '../../../components/Governance/ProposalTable'
 import ProposalOverview from '../../../components/Governance/ProposalOverview'
 import Breadcrumb from '../../../components/Breadcrumb'
 import BreadcrumbItem from '../../../components/Breadcrumb/BreadcrumbItem'
+import Web3Disabled from '../../../components/Web3Disabled'
 
 import proposals from '../../../../public/assets/iconGradient/details.svg'
 import externalLink from '../../../../public/assets/utilities/external-link.svg'
 
 import * as S from './styles'
-import Web3Disabled from '../../../components/Web3Disabled'
 
 const AllProposals = () => {
   const { chainId } = useAppSelector(state => state)
@@ -59,7 +59,10 @@ const AllProposals = () => {
                     isMobile={true}
                   />
                 </S.VotingPowerContent>
-                <ExternalLink hrefNext="/farm" text="Manage Delegation" />
+                <ExternalLink
+                  hrefNext={`/profile/${userWalletAddress}`}
+                  text="Manage Delegation"
+                />
               </S.Title>
               <ProposalOverview />
             </S.GovernanceProposalsContent>
@@ -71,7 +74,7 @@ const AllProposals = () => {
                   text="Velit lacus vel porta purus"
                 />
                 <S.LinkForum
-                  href="https://t.me/KassandraDAO"
+                  href="https://gov.kassandra.finance/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

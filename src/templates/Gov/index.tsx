@@ -23,7 +23,7 @@ import externalLink from '../../../public/assets/utilities/external-link.svg'
 import * as S from './styles'
 
 const Gov = () => {
-  const { chainId } = useAppSelector(state => state)
+  const { chainId, userWalletAddress } = useAppSelector(state => state)
 
   const chain =
     process.env.NEXT_PUBLIC_MASTER === '1' ? chains.avalanche : chains.fuji
@@ -47,24 +47,19 @@ const Gov = () => {
           />
         ) : (
           <>
-            <TitleSection
-              image={overview}
-              title="Overview"
-              text="texto asdsad sadsadsa"
-            />
+            <TitleSection image={overview} title="Overview" />
             <Overview />
             <S.OverViewLinks>
               <ExternalLink hrefNext="/farm" text="Obtain more" />
-              <ExternalLink hrefNext="/farm" text="Manage Delegation" />
+              <ExternalLink
+                hrefNext={`/profile/${userWalletAddress}`}
+                text="Manage Delegation"
+              />
             </S.OverViewLinks>
             <S.TitleAndLinkContent>
-              <TitleSection
-                image={proposals}
-                title="Recent Proposals"
-                text="texto asdsad sadsadsa"
-              />
+              <TitleSection image={proposals} title="Recent Proposals" />
               <S.LinkForum
-                href="https://t.me/KassandraDAO"
+                href="https://gov.kassandra.finance/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -79,8 +74,7 @@ const Gov = () => {
             />
             <TitleSection
               image={votingPower}
-              title="Voting Power Rank"
-              text="texto asdsad sadsadsa"
+              title="Voting Power Leaderboard"
             />
             <VotingPowerTable />
             <ExternalLink
