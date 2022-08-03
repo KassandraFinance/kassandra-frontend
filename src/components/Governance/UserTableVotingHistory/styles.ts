@@ -176,15 +176,15 @@ export const TextProposal = styled.p`
 //   display: flex;
 // `
 
-interface IStatusProposalColor {
-  statusColor: string;
+interface ITypeVote {
+  voteColor: string;
 }
 
 // prettier-ignore
-export const StatusProposal = styled.span<IStatusProposalColor>`
+export const TypeVote = styled.span<ITypeVote>`
   grid-area: c;
 
-  color: ${({ statusColor }) => statusColor};
+  color: ${({ voteColor }) => voteColor};
   line-height: 100%;
   font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.medium};
@@ -227,8 +227,12 @@ export const TimeFrame = styled.p`
   }
 `
 
+interface IStateMutability {
+  statusColor: string;
+}
+
 // prettier-ignore
-export const StateMutability = styled.span<IStatusProposalColor>`
+export const StateMutability = styled.span<IStateMutability>`
   grid-area: e;
   display: flex;
   align-items: center;

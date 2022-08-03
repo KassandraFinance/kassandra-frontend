@@ -34,6 +34,7 @@ const statsPrimaryProposalLibColor: { [key: string]: string } = {
 interface IProposalsTableProps {
   id: string;
   number: number;
+  support: boolean;
   targets: [];
   values: [];
   signatures: [];
@@ -43,6 +44,7 @@ interface IProposalsTableProps {
 }
 
 interface IProposalsListProps {
+  support: boolean;
   proposal: IProposalsTableProps;
 }
 
@@ -73,6 +75,7 @@ export const UserTableVotingHistory = ({
     const proposals = votes.map((props: IProposalsListProps) =>
       governance.stateProposals(props.proposal.number).then(res => {
         props.proposal.state = res
+        props.proposal.support = props.support
         return props.proposal
       })
     )
@@ -133,15 +136,11 @@ export const UserTableVotingHistory = ({
                           {getTitleProposal(proposal.description)}
                         </S.TextProposal>
 
-                        <S.StatusProposal
-                          statusColor={
-                            statsPrimaryProposalLibColor[
-                              proposal.state[0].toLowerCase()
-                            ]
-                          }
+                        <S.TypeVote
+                          voteColor={proposal.support ? '#2CE878' : '#EA3224'}
                         >
-                          {proposal.state[0]}
-                        </S.StatusProposal>
+                          {proposal.support ? 'Voted for' : 'Voted against'}
+                        </S.TypeVote>
 
                         <S.TimeFrame>
                           Ends in N days
