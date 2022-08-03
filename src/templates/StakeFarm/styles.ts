@@ -2,9 +2,12 @@ import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 export const StakeFarm = styled.section`
-  max-width: 100.6rem;
+  max-width: 114rem;
   margin: 0 auto;
-  padding-inline: 3rem;
+
+  @media (max-width: 1200px) {
+    padding: 0 3rem;
+  }
 `
 
 export const StakeFarmHeader = styled.div`
