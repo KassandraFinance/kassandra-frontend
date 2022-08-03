@@ -11,9 +11,11 @@ const HeroText = () => {
         <S.SubTitle>
           <S.TextBox>
             <S.Text>Create</S.Text>
+
             <S.Text>
               <span>Invest in</span>
             </S.Text>
+
             <S.Text>Manage</S.Text>
           </S.TextBox>
           <S.VisibilityHidden>Invest in</S.VisibilityHidden> tokenized
