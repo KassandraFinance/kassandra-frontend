@@ -3,17 +3,16 @@ import Link from 'next/link'
 import Big from 'big.js'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
-import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
 import { SUBGRAPH_URL } from '../../../constants/tokenAddresses'
 
 import { BNtoDecimal } from '../../../utils/numerals'
-import substr from '../../../utils/substr'
+
+import ImageProfile from '../ImageProfile'
 
 import { GET_USERS } from './graphql'
 
 import * as S from './styles'
-import NftImage from '../../NftImage'
 
 interface IVotingPowerRankProps {
   address: string;
@@ -115,24 +114,12 @@ export const VotingPowerTable = () => {
                 <S.Tr>
                   <S.Td className="rank">{index + 1}</S.Td>
                   <S.Td className="user">
-                    {item.image ? (
-                      item.isNFT ? (
-                        <NftImage NftUrl={item.image} imageSize="small" />
-                      ) : (
-                        <img className="user-image" src={item.image} alt="" />
-                      )
-                    ) : (
-                      <Jazzicon
-                        diameter={24}
-                        seed={jsNumberForAddress(item.address)}
-                      />
-                    )}
-
-                    {item.name ? (
-                      <span>{item.name}</span>
-                    ) : (
-                      <span>{substr(item.address)}</span>
-                    )}
+                    <ImageProfile
+                      address={item.address}
+                      diameter={24}
+                      hasAddress={true}
+                      isLink={false}
+                    />
                   </S.Td>
                   <S.Td className="vote-power">
                     {BNtoDecimal(item.votingPower, 0, 2)}

@@ -9,7 +9,7 @@ export const ProposalOverview = styled.div`
   align-items: flex-start;
 
   max-width: 44rem;
-  padding: ${theme.spacings.space24};
+  padding: 2.5rem ${theme.spacings.space24};
 
   background-color: rgba(255, 255, 255, 0.04);
   border-radius: 2rem;

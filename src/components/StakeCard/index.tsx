@@ -40,6 +40,7 @@ import ModalRequestUnstake from '../Modals/ModalRequestUnstake'
 import ModalCancelUnstake from '../Modals/ModalCancelUnstake'
 import ModalWalletConnect from '../Modals/ModalWalletConnect'
 import ModalStakeAndWithdraw from '../Modals/ModalStakeAndWithdraw'
+import Loading from '../Loading'
 
 import Details from './Details'
 import YourStake from './YourStake'
@@ -100,6 +101,7 @@ const StakeCard = ({
 }: IStakingProps) => {
   const dispatch = useAppDispatch()
 
+  const [isLoading, setIsLoading] = React.useState<boolean>(true)
   const [isDetails, setIsDetails] = React.useState<boolean>(false)
   const [isModalStake, setIsModalStake] = React.useState<boolean>(false)
   const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
@@ -161,7 +163,7 @@ const StakeCard = ({
     setStakeTransaction(transaction)
   }
 
-  async function handleLPtoUSD() {
+  async function getLiquidityPoolPriceInDollar() {
     const addressProviderReserves = isLP && address ? address : LP_KACY_AVAX_PNG
 
     const { kacyPriceInDollar, priceLP } = await getPriceKacyAndLP(
@@ -258,7 +260,7 @@ const StakeCard = ({
   }, [])
 
   React.useEffect(() => {
-    handleLPtoUSD()
+    getLiquidityPoolPriceInDollar()
   }, [infoStaked.stakingToken, pid, data])
 
   React.useEffect(() => {
@@ -280,11 +282,31 @@ const StakeCard = ({
       stakingContract.lockUntil(pid, userWalletAddress).then(setLockPeriod)
   }, [userWalletAddress, infoStaked.stakingToken])
 
+  React.useEffect(() => {
+    if (infoStaked.apr.lt(new BigNumber(0))) {
+      return
+    }
+
+    setIsLoading(false)
+  }, [infoStaked])
+
   return (
     <>
       <div>
         <S.BorderGradient stakeWithVotingPower={!stakeWithVotingPower}>
-          <S.StakeCard>
+          {isLoading && (
+            <div
+              style={{
+                height: `${userWalletAddress ? '52.3rem' : '30.2rem'}`,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              <Loading marginTop={0} />
+            </div>
+          )}
+          <S.StakeCard style={{ display: `${isLoading ? 'none' : 'block'}` }}>
             <S.InterBackground stakeWithVotingPower={!stakeWithVotingPower}>
               <img
                 src={properties.logo.src}
@@ -396,7 +418,7 @@ const StakeCard = ({
                           text="Claim"
                           size="claim"
                           backgroundSecondary
-                          disabledNoEvent={kacyEarned.toString() === '0'}
+                          disabledNoEvent={kacyEarned.lte(new BigNumber(0))}
                           onClick={() =>
                             stakingContract.getReward(
                               pid,

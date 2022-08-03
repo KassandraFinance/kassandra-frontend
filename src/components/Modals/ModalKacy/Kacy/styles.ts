@@ -80,6 +80,18 @@ export const ModalBody = styled.div`
   }
 `
 
+export const WebDisabledWrapper = styled.div`
+  section {
+    height: fit-content;
+    padding: 0;
+    margin-bottom: 2.4rem;
+
+    @media (max-width: 500px) {
+      margin-bottom: 1.6rem;
+    }
+  }
+`
+
 export const Ul = styled.ul`
   padding-block: 1.6rem;
 `

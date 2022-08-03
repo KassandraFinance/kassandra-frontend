@@ -22,15 +22,15 @@ const statsSecundaryProposalLibColor: { [key: string]: string } = {
   queued: '#FFBF00',
   pending: '#FFBF00',
   executed: '#2CE878',
-  defeated: '#E8372C',
-  expired: '#E8372C',
+  defeated: '#EA3224',
+  expired: '#EA3224',
   canceled: '#BDBDBD'
 }
 
 const statsPrimaryProposalLibColor: { [key: string]: string } = {
   active: '#E843C4',
   succeeded: '#2CE878',
-  failed: '#E8372C'
+  failed: '#EA3224'
 }
 
 interface IProposalsListProps {
@@ -136,7 +136,7 @@ export const ProposalTable = () => {
                     </S.StatusProposal>
 
                     <S.TimeFrame>
-                      {proposal.state[1]} ends {proposal.timeToEndProposal}
+                      {proposal.state[1]} in {proposal.timeToEndProposal}
                     </S.TimeFrame>
 
                     <S.StateMutability

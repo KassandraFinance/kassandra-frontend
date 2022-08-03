@@ -1,19 +1,5 @@
 import styled, { css } from 'styled-components'
 import theme from '../../../styles/theme'
-import Tippy from '@tippyjs/react'
-
-export const ErrorTippy = styled(Tippy)`
-  margin-bottom: -1.5rem;
-
-  background-color: rgba(31, 31, 31, 0.82);
-  border: 0.1rem solid #e8372c;
-  border-bottom: 0.3rem solid #e8372c;
-
-  &[data-placement^='top'] > .tippy-arrow::before {
-    margin-bottom: -0.1rem;
-    border-top-color: #e8372c;
-  }
-`
 
 // ========== FORM ==========
 export const FormContainer = styled.form`
@@ -369,7 +355,7 @@ interface ISpanProps {
 }
 
 const colors = {
-  red: '#E8372C',
+  red: '#EA3224',
   white: '#ffffff',
   amber: '#FFBF00'
 }
@@ -415,7 +401,7 @@ export const PriceImpactWrapper = styled.span<IPriceImpactWrapperProps>`
   height: 1.7rem;
 
   ${( {  price }) => css`
-    color: ${price <= 1 ? '#5EE56B' : price <= 2 ? '#bdbdbd' : price <= 5 ?'orange' : '#E8372C'};
+    color: ${price <= 1 ? '#5EE56B' : price <= 2 ? '#bdbdbd' : price <= 5 ?'orange' : '#EA3224'};
   `}
 
   font-size: ${theme.font.sizes.font14};
@@ -451,6 +437,10 @@ export const Symbol = styled.h3<ISymbolProps>`
 
     .image {
       margin-right: 0.8rem !important;
+
+      img {
+        border-radius: 50%;
+      }
     }
 
     @media(max-width: 380px) {

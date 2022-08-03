@@ -133,14 +133,14 @@ export const ProgressBar = styled.progress<IVoteBarProps>`
       if (props.VotingState === 'For') {
         return '#2CE878'
       } else {
-        return '#E8372C'
+        return '#EA3224'
       }
     }};;
     background: ${props => {
       if (props.VotingState === 'For') {
         return '#2CE878'
       } else {
-        return '#E8372C'
+        return '#EA3224'
       }
     }};
   }
@@ -151,14 +151,14 @@ export const ProgressBar = styled.progress<IVoteBarProps>`
       if (props.VotingState === 'For') {
         return '#2CE878'
       } else {
-        return '#E8372C'
+        return '#EA3224'
       }
     }};;
     background: ${props => {
       if (props.VotingState === 'For') {
         return '#2CE878'
       } else {
-        return '#E8372C'
+        return '#EA3224'
       }
     }};
   }

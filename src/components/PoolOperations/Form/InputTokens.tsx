@@ -6,9 +6,9 @@ import { ITokenDetails } from '../../../context/PoolTokensContext'
 
 import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
-import InputTokenValue from '../../InputTokenValue'
-import OutputTokenValue from '../../OutputTokenValue/OutputTokenValue'
-import SelectInput from '../../SelectInput'
+import InputTokenValue from '../InputTokenValue'
+import OutputTokenValue from '../OutputTokenValue'
+import SelectInput from '../SelectInput'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 
@@ -45,7 +45,7 @@ interface IInputEthProps {
   setSwapAddress: React.Dispatch<React.SetStateAction<string>>;
   calculateAmountIn?: (amoutOut: BigNumber) => Promise<void>;
   gasFee?: IGasFee;
-  isError?: boolean;
+  errorMsg?: string;
 }
 
 const InputTokens = ({
@@ -70,7 +70,7 @@ const InputTokens = ({
   calculateAmountIn,
   swapInAddress,
   gasFee,
-  isError
+  errorMsg = ''
 }: IInputEthProps) => {
   const { trackEventFunction } = useMatomoEcommerce()
 
@@ -193,8 +193,8 @@ const InputTokens = ({
             )}
           </S.Amount>
         </S.Top>
-        {isError ? (
-          <S.Span color="red">This amount exceeds your balance!</S.Span>
+        {errorMsg !== '' ? (
+          <S.Span color="red">{errorMsg}</S.Span>
         ) : (
           <>
             {gasFee && gasFee?.error && (

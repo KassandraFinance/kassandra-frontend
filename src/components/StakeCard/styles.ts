@@ -13,18 +13,15 @@ interface IBorderGradientProps {
   stakeWithVotingPower: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
-export const BorderGradient =
-  styled.div <
-  IBorderGradientProps >
-  `
+// prettier-ignore
+export const BorderGradient = styled.div<IBorderGradientProps>`
   position: relative;
 
   width: 29.5rem;
   max-height: 100%;
 
   background: rgba(31, 31, 31, 0.72);
-  border-radius: 0.6rem;
+  border-radius: 1.2rem;
 
   @media (max-width: 420px) {
     max-width: 100%;
@@ -41,7 +38,7 @@ export const BorderGradient =
 
     padding: 0.1rem;
 
-    border-radius: ${theme.border.radius};
+    border-radius: 1.2rem;
     background: ${props =>
       props.stakeWithVotingPower
         ? `linear-gradient(-45deg, ${theme.colors.blue} 0%, ${theme.colors.cyan} 100%)`
@@ -58,11 +55,8 @@ interface IInterBackgroundProps {
   stakeWithVotingPower: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
-export const InterBackground =
-  styled.div <
-  IInterBackgroundProps >
-  `
+// prettier-ignore
+export const InterBackground = styled.div<IInterBackgroundProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -76,8 +70,8 @@ export const InterBackground =
       ? 'linear-gradient(95.32deg, rgba(38, 219, 219, 0.23) 0%, rgba(12, 61, 220, 0.23) 100%)'
       : 'linear-gradient(95.32deg, rgba(232, 67, 196, 0.23) 0%, rgba(247, 150, 64, 0.23) 100%)'};
 
-  border-top-left-radius: 0.6rem;
-  border-top-right-radius: 0.6rem;
+  border-top-left-radius: 1.2rem;
+  border-top-right-radius: 1.2rem;
 `
 
 export const IntroStaking = styled.div`
@@ -214,11 +208,8 @@ interface IButtonContainerProps {
   stakeWithVotingPower: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
-export const ButtonContainer =
-  styled.div <
-  IButtonContainerProps >
-  `
+// prettier-ignore
+export const ButtonContainer = styled.div<IButtonContainerProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -260,11 +251,8 @@ interface IButtonDetailsProps {
   isConnect: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
-export const ButtonDetails =
-  styled.button <
-  IButtonDetailsProps >
-  `
+// prettier-ignore
+export const ButtonDetails = styled.button<IButtonDetailsProps>`
   margin-top: ${props => (props.isConnect ? '0px' : '2rem')};
   margin-bottom: 2rem;
 

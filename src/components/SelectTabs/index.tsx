@@ -26,16 +26,14 @@ const SelectTabs = ({ tabs, isSelect, setIsSelect }: ISelectTabsProps) => {
   function handleClickTab(tabSelect: string) {
     setIsSelect(tabSelect)
 
-    if (router.asPath.substr(0, 8) === '/profile') {
-      router.push(
-        {
-          pathname: `/profile/${router.query.profileAddress}`,
-          query: { tab: `${tabSelect}` }
-        },
-        undefined,
-        { scroll: false }
-      )
-    }
+    router.push(
+      {
+        pathname: `${router.pathname}`,
+        query: { ...router.query, tab: `${tabSelect}` }
+      },
+      undefined,
+      { scroll: false }
+    )
   }
 
   return (
