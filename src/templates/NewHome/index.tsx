@@ -6,6 +6,7 @@ import WavyLine from '../../components/WavyLine'
 import ManagerSection from './ManagerSection'
 import DaoSection from './DaoSection'
 import KacySection from './KacySection'
+import LatestNews from './LatestNews'
 
 import * as S from './styles'
 
@@ -31,6 +32,8 @@ const NewHome = () => {
 
         <KacySection />
       </S.Container>
+
+      <LatestNews />
     </>
   )
 }
