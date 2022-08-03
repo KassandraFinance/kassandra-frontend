@@ -1,29 +1,83 @@
 import React from 'react'
+import useSWR from 'swr'
+
 import Button from '../../../../components/Button'
 import KacyCardData from '../KacyCardData'
 
 import * as S from './styles'
 
-const kacyMockData = [
-  {
-    value: '$0.50',
-    title: 'Price'
-  },
-  {
-    value: '$12,95923',
-    title: 'Market Cap'
-  },
-  {
-    value: '12,95923',
-    title: 'Total Supply'
-  },
-  {
-    value: '12,95923',
-    title: 'Circ. Supply'
-  }
-]
+type KacyMarketDataType = {
+  value: string,
+  title: string
+}
+
+const URL_API: { [key: number | string]: string } = {
+  1: 'https://kassandra.finance/api/overview',
+  2: 'https://alpha.kassandra.finance/api/overview',
+  3: 'https://demo.kassandra.finance/api/overview',
+  4: 'http://localhost:3000/api/overview'
+}
 
 const KacyData = () => {
+  const [kacyMarketData, setKacyMarketData] = React.useState<
+    KacyMarketDataType[]
+  >([
+    {
+      value: '0',
+      title: 'Price'
+    },
+    {
+      value: '0',
+      title: 'Market Cap'
+    },
+    {
+      value: '10000000',
+      title: 'Total Supply'
+    },
+    {
+      value: '0',
+      title: 'Circ. Supply'
+    }
+  ])
+
+  const { data } = useSWR(URL_API[process.env.NEXT_PUBLIC_URL_API || 4])
+
+  React.useEffect(() => {
+    if (data) {
+      const price = data.kacyPrice.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2
+      })
+      const marketCap = data.marketCap.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0
+      })
+      const totalSup = (10000000).toLocaleString('en-US')
+      const circSup = data.supply.toLocaleString('en-US')
+
+      setKacyMarketData([
+        {
+          value: price,
+          title: 'Price'
+        },
+        {
+          value: marketCap,
+          title: 'Market Cap'
+        },
+        {
+          value: totalSup,
+          title: 'Total Supply'
+        },
+        {
+          value: circSup,
+          title: 'Circ. Supply'
+        }
+      ])
+    }
+  }, [data])
+
   return (
     <S.KacyDataContainer>
       <S.Title>
@@ -37,7 +91,7 @@ const KacyData = () => {
       </S.Text>
 
       <S.KacyDataCardContainer>
-        {kacyMockData.map(item => {
+        {kacyMarketData.map(item => {
           return (
             <KacyCardData
               key={item.title}
