@@ -128,7 +128,7 @@ const FundCard = ({ fund }: IFundProps) => {
 
   React.useEffect(() => {
     const arrChangePrice = []
-    if (data?.now[0].close) {
+    if (data?.now[0]?.close) {
       const changeDay = calcChange(data.now[0].close, data.day[0]?.close)
 
       arrChangePrice[0] = changeDay
@@ -139,8 +139,8 @@ const FundCard = ({ fund }: IFundProps) => {
 
   React.useEffect(() => {
     if (data) {
-      setPoolInfo(data.pool.underlying_assets)
-      setPoolPrice(Number(data.pool.price_usd).toFixed(2))
+      setPoolInfo(data.pool?.underlying_assets)
+      setPoolPrice(Number(data.pool?.price_usd).toFixed(2))
     }
   }, [data])
 

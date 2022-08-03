@@ -7,6 +7,8 @@ export const PartnersContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
+  margin-bottom: 27rem;
+
   background: url('/assets/images/blur-divisor-investor.png');
   background-repeat: no-repeat;
   background-size: cover;
@@ -14,23 +16,24 @@ export const PartnersContainer = styled.div`
 
   /* margin-top: 47.1rem; */
   h1 {
-    margin-top: 47.1rem;
+    margin-top: 42.6rem;
     margin-bottom: 5.6rem;
+
     font-size: 4.8rem;
     font-weight: 900;
     line-height: 5.28rem;
+  }
+
+  @media (max-width: 680px) {
+    h1 {
+      margin-top: 30.8rem;
+    }
   }
 `
 
 export const PartnerContent = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-
-  img {
-    /* margin: 0 auto 2.4rem;
-  /* max-width: 34.2rem; */
-    /* max-height: 10.8rem; */
-  }
 
   @media (max-width: 560px) {
     grid-template-columns: 18rem 18rem;

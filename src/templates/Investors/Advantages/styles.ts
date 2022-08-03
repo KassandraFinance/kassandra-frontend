@@ -22,6 +22,10 @@ export const Managers = styled.div`
     font-weight: 300;
   }
 
+  @media (max-width: 780px) {
+    margin-top: 20rem;
+  }
+
   @media (max-width: 680px) {
     padding: 0 1.3rem;
     align-items: left;
@@ -35,7 +39,6 @@ export const Managers = styled.div`
 
 export const Schema = styled.div`
   max-width: 102.8rem;
-  min-height: 27.8rem;
 
   margin-top: 4.8rem;
 
@@ -52,7 +55,7 @@ export const DescriptionSafety = styled.div`
   align-items: center;
   justify-content: flex-start;
 
-  @media (max-width: 1050px) {
+  @media (max-width: 1180px) {
     justify-content: center;
   }
 `
@@ -80,7 +83,7 @@ export const DescriptionSafetyContent = styled.div`
     font-weight: 300;
   }
 
-  @media (max-width: 1050px) {
+  @media (max-width: 1180px) {
     min-width: 64.3rem;
 
     align-items: center;
@@ -129,31 +132,34 @@ export const DescriptionSafetyContent = styled.div`
 `
 
 export const ImageFundSafety = styled.div`
-  width: 929px;
-  height: 516px;
-
   display: flex;
   align-items: center;
   justify-content: center;
 
-  img {
+  width: 645px;
+  height: 756px;
+
+  @media (max-width: 1180px) {
+    max-width: 645px;
+    max-height: 756px;
     width: 100%;
+    height: 100%;
+
+    img {
+      width: 100%;
+    }
   }
 
-  @media (max-width: 1050px) {
-    width: 50%;
+  @media (max-width: 680px) {
   }
 `
 
 export const FundSafety = styled.div`
-  max-width: 1028px;
-
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  margin-top: 30.8rem;
+  margin-top: 20.6rem;
 
-  @media (max-width: 1050px) {
+  @media (max-width: 1180px) {
     width: 100%;
 
     flex-direction: column;
@@ -167,18 +173,17 @@ export const FundSafety = styled.div`
 `
 
 export const Rebalance = styled.div`
-  width: 1028px;
-
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  margin-top: 17rem;
-  margin-bottom: -30.8rem;
+  gap: 17.7rem;
 
-  @media (max-width: 1050px) {
+  @media (max-width: 1180px) {
     width: 100%;
 
     flex-direction: column-reverse;
+    justify-content: center;
+
+    gap: 0;
   }
 
   @media (max-width: 680px) {
@@ -237,6 +242,8 @@ export const BenefitsContainer = styled.div`
     align-items: left;
     text-align: left;
 
+    margin-top: 1.2rem;
+
     span {
       font-size: 1.4rem;
     }
@@ -254,6 +261,7 @@ export const BeneficitImage = styled.div`
 
   background: rgba(252, 252, 252, 0.05);
   border: 1px solid rgba(252, 252, 252, 0.15);
+
   @media (max-width: 580px) {
     width: 10rem;
     height: 10rem;
@@ -318,16 +326,22 @@ export const Span = styled.span`
 `
 
 export const ImageRebalance = styled.div`
-  width: 100%;
+  width: 48.5rem;
+  height: 55.3rem;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  img {
-    width: 100%;
-  }
 
-  @media (max-width: 1050px) {
-    width: 50%;
+  @media (max-width: 1180px) {
+    max-width: 48.5rem;
+    max-height: 55.3rem;
+    width: 100%;
+    height: 100%;
+
+    img {
+      width: 100%;
+    }
   }
 `
 
@@ -338,8 +352,13 @@ export const DescriptionRebalance = styled.div`
   align-items: center;
   justify-content: flex-end;
 
-  @media (max-width: 1050px) {
+  @media (max-width: 1180px) {
     justify-content: center;
+  }
+
+  @media (max-width: 580px) {
+    justify-content: center;
+    margin-top: 0;
   }
 `
 
@@ -366,7 +385,7 @@ export const DescriptionRebalanceContent = styled.div`
     font-weight: 300;
   }
 
-  @media (max-width: 1050px) {
+  @media (max-width: 1180px) {
     min-width: 64.3rem;
 
     align-items: center;
@@ -404,5 +423,133 @@ export const DescriptionRebalanceContent = styled.div`
       font-size: 1.4rem;
       line-height: 2.4rem;
     }
+  }
+`
+
+export const DescriptionAutonomy = styled.div`
+  max-width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  @media (max-width: 1180px) {
+    justify-content: center;
+  }
+`
+
+export const DescriptionAutonomyContent = styled.div`
+  width: 39.2rem;
+
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    margin-top: 1.6rem;
+    margin-bottom: 2.4rem;
+
+    font-weight: 700;
+    font-size: 3.2rem;
+    line-height: 3.52rem;
+  }
+
+  span:last-child {
+    max-width: 31.7rem;
+
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    font-weight: 300;
+  }
+
+  @media (max-width: 1180px) {
+    min-width: 64.3rem;
+
+    align-items: center;
+
+    h1 {
+      width: 100%;
+
+      text-align: center;
+    }
+
+    span:last-child {
+      max-width: 64.3rem;
+
+      text-align: center;
+      font-size: 1.6rem;
+      line-height: 2.4rem;
+      font-weight: 300;
+    }
+  }
+
+  @media (max-width: 680px) {
+    min-width: 100%;
+
+    align-items: flex-start;
+
+    h1 {
+      width: 100%;
+
+      text-align: left;
+      font-size: 2.4rem;
+      line-height: 3.2rem;
+    }
+
+    span:last-child {
+      text-align: center;
+      font-size: 1.6rem;
+      line-height: 2.4rem;
+    }
+
+    span:last-child {
+      text-align: left;
+      font-size: 1.4rem;
+      line-height: 2.4rem;
+    }
+  }
+`
+
+export const ImageFundAutonomy = styled.div`
+  width: 678px;
+  height: 516px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 1180px) {
+    max-width: 645px;
+    max-height: 756px;
+    width: 100%;
+    height: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 680px) {
+    margin-top: 0;
+  }
+`
+
+export const FundAutonomy = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 5.4rem;
+
+  @media (max-width: 1180px) {
+    width: 100%;
+
+    flex-direction: column;
+    gap: 0;
+  }
+
+  @media (max-width: 680px) {
+    width: 100%;
+
+    padding: 0 1.3rem;
+    margin-top: 0;
   }
 `

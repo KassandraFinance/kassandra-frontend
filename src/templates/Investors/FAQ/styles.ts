@@ -3,6 +3,8 @@ import theme from '../../../styles/theme'
 
 export const Container = styled.section`
   max-width: 75rem;
+  width: 100%;
+
   margin: 0 auto 15rem;
   padding: 0 3.2rem;
   display: flex;

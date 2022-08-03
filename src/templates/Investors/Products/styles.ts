@@ -23,6 +23,10 @@ export const Products = styled.div`
     line-height: 2.4rem;
   }
 
+  @media (max-width: 780px) {
+    margin-top: 7.6rem;
+  }
+
   @media (max-width: 690px) {
     h1 {
       font-size: 2.4rem;

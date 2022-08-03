@@ -5,8 +5,19 @@ export const InvestorsContainer = styled.section`
   flex-direction: column;
   align-items: center;
 
-  background: url('/assets/images/background-investors-1920px.webp');
+  background: url('/assets/images/bg-investors-1920.png'),
+    url('/assets/images/bg-investors-1920.png');
   background-repeat: no-repeat;
-  background-size: 100vw 100%;
+  background-size: auto;
   background-position: left top;
+
+  @media (max-width: 768px) {
+    background: url('/assets/images/bg-investors-768.png'),
+      url('/assets/images/bg-investors-768.png');
+  }
+
+  @media (max-width: 360px) {
+    background: url('/assets/images/bg-investors-360.webp'),
+      url('/assets/images/bg-investors-360.png');
+  }
 `

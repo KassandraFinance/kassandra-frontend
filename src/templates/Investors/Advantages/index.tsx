@@ -51,9 +51,9 @@ const Advantages = () => {
           </S.DescriptionRebalanceContent>
         </S.DescriptionRebalance>
       </S.Rebalance>
-      <S.FundSafety>
-        <S.DescriptionSafety>
-          <S.DescriptionSafetyContent>
+      <S.FundAutonomy>
+        <S.DescriptionAutonomy>
+          <S.DescriptionAutonomyContent>
             <S.Span>HIGH AUTONOMY</S.Span>
             <h1>Move your funds in and out, whenever you want.</h1>
             <span>
@@ -61,12 +61,12 @@ const Advantages = () => {
               remanage your investments around at a moments notice and no lock
               periods inside funds.
             </span>
-          </S.DescriptionSafetyContent>
-        </S.DescriptionSafety>
-        <S.ImageFundSafety>
+          </S.DescriptionAutonomyContent>
+        </S.DescriptionAutonomy>
+        <S.ImageFundAutonomy>
           <img src="/assets/images/high-autonomy.png" />
-        </S.ImageFundSafety>
-      </S.FundSafety>
+        </S.ImageFundAutonomy>
+      </S.FundAutonomy>
       <S.BenefitsContainer>
         <h1>No compromise: Have everything you want.</h1>
         <span>
