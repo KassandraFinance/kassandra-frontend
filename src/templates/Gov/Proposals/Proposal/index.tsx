@@ -659,6 +659,7 @@ const Proposal = () => {
                         diameter={32}
                         hasAddress={true}
                         isLink={true}
+                        tab="?tab=governance-data"
                       />
                     </S.ProposeAuthorCard>
                   </S.TitleAndAuthor>
@@ -691,6 +692,7 @@ const Proposal = () => {
                         diameter={24}
                         hasAddress={true}
                         isLink={true}
+                        tab="?tab=governance-data"
                       />
                     </S.ProposeAuthorCard>
                   </S.CardTitleWrapper>

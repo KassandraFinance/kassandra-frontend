@@ -144,6 +144,7 @@ export const OwnAndReceivedTable = ({
                               hasAddress={true}
                               isLink={true}
                               fontSize={14}
+                              tab="?tab=governance-data"
                             />
                           </>
                         )
@@ -155,6 +156,7 @@ export const OwnAndReceivedTable = ({
                             hasAddress={true}
                             isLink={true}
                             fontSize={14}
+                            tab="?tab=governance-data"
                           />
                         </>
                       )}
