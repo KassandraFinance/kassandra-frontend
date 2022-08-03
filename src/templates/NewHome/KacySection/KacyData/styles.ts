@@ -72,6 +72,14 @@ export const BtnWrapper = styled.div`
 
   button {
     width: 23.1rem;
+
+    &:last-of-type {
+      border-color: #fff;
+
+      &:hover {
+        background-color: #fff;
+      }
+    }
   }
 
   @media (max-width: 992px) {
