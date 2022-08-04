@@ -1,11 +1,28 @@
 import styled, { css } from 'styled-components'
 
 export const Wrapper = styled.main`
-  /* background-color: #151117;
-  background-image: url('/assets/images/background-token.png');
-  background-repeat: repeat-y;
-  background-size: cover;
-  background-position-x: center; */
+  background-color: #151117;
+  background: url('/assets/images/1920-dao-bg.png'),
+    url('/assets/images/1920-dao-bg.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: left top;
+
+  @media (max-width: 820px) {
+    background: url('/assets/images/768px-dao-bg.png'),
+      url('/assets/images/768px-dao-bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left top;
+  }
+
+  @media (max-width: 560px) {
+    background: url('/assets/images/360px-dao-bg.png'),
+      url('/assets/images/360px-dao-bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left top;
+  }
 `
 
 export const Hero = styled.section`
@@ -22,9 +39,11 @@ export const Hero = styled.section`
   padding: 0 1.6rem;
   padding-top: 10rem;
 
-  background-image: url('/assets/images/hero-token-holder-2.png');
+  background-image: url('/assets/images/hero-token-holder.png');
   background-position: center;
   background-repeat: no-repeat;
+  background-blend-mode: color-dodge;
+  background-color: #151117;
 
   @media (max-width: 560px) {
     background-position: 55% 53%;
