@@ -38,7 +38,7 @@ export const Timelock = process.env.NEXT_PUBLIC_MASTER === '1' ?
   '0xB8897C7f08D085Ded52A938785Df63C79BBE9c25'
 
 export const GovernorAlpha = process.env.NEXT_PUBLIC_MASTER === '1' ?
-  ''
+  '0xA216238A775bA525D6868372afaB11E7922D5cd7'
   :
   '0x2B6C46b9552B6Fa36DD097b6527ba20fdDB3FfD5'
 

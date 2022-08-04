@@ -186,25 +186,6 @@ export const CardWrapper = styled.div`
     grid-gap: 3.2rem;
   }
 `
-export const ProposalTitleWrapper = styled.div`
-  display: flex;
-
-  h1 {
-    font-size: ${theme.font.sizes.font18};
-    font-weight: ${theme.font.weight.medium};
-    margin-left: 0.8rem;
-
-    @media (min-width: 768px) {
-      font-size: ${theme.font.sizes.font24};
-      margin-left: 1.6rem;
-    }
-
-    @media (min-width: 1024px) {
-      font-size: ${theme.font.sizes.font32};
-      margin-left: 2rem;
-    }
-  }
-`
 
 export const DescriptionTable = styled.section`
   width: 100%;
