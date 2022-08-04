@@ -136,12 +136,12 @@ export const ImageFundSafety = styled.div`
   align-items: center;
   justify-content: center;
 
-  width: 645px;
-  height: 756px;
+  width: 64.5rem;
+  height: 75.6rem;
 
   @media (max-width: 1180px) {
-    max-width: 645px;
-    max-height: 756px;
+    max-width: 64.5rem;
+    max-height: 75.6rem;
     width: 100%;
     height: 100%;
 
@@ -260,7 +260,7 @@ export const BeneficitImage = styled.div`
   border-radius: 50%;
 
   background: rgba(252, 252, 252, 0.05);
-  border: 1px solid rgba(252, 252, 252, 0.15);
+  border: 0.1rem solid rgba(252, 252, 252, 0.15);
 
   @media (max-width: 580px) {
     width: 10rem;
@@ -510,16 +510,16 @@ export const DescriptionAutonomyContent = styled.div`
 `
 
 export const ImageFundAutonomy = styled.div`
-  width: 678px;
-  height: 516px;
+  width: 67.8rem;
+  height: 51.6rem;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   @media (max-width: 1180px) {
-    max-width: 645px;
-    max-height: 756px;
+    max-width: 64.5rem;
+    max-height: 75.6rem;
     width: 100%;
     height: 100%;
 

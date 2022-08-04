@@ -7,7 +7,7 @@ export const Card = styled.div`
 
   border-radius: 1.2rem;
   background: rgba(31, 31, 31, 0.72);
-  box-shadow: 0px 0.4rem 6.9rem -1.7rem rgba(0, 0, 0, 0, 51);
+  box-shadow: 0 0.4rem 6.9rem -1.7rem rgba(0, 0, 0, 0, 51);
 `
 
 interface CardHeaderProps {

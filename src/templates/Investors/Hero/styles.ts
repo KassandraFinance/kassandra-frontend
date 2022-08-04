@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const Hero = styled.div`
-  max-width: 1020px;
-  height: 744px;
+  max-width: 102rem;
+  height: 74.4rem;
 
   display: flex;
   flex-direction: column;
@@ -89,7 +89,7 @@ export const Title = styled.div`
 `
 
 export const Description = styled.div`
-  max-width: 579px;
+  max-width: 57.9rem;
 
   margin-top: 2.4rem;
   margin-bottom: 2.4rem;
