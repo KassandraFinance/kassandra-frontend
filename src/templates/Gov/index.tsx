@@ -52,7 +52,7 @@ const Gov = () => {
             <S.OverViewLinks>
               <ExternalLink hrefNext="/farm" text="Obtain more" />
               <ExternalLink
-                hrefNext={`/profile/${userWalletAddress}`}
+                hrefNext={`/profile/${userWalletAddress}?tab=governance-data`}
                 text="Manage Delegation"
               />
             </S.OverViewLinks>
