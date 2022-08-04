@@ -8,6 +8,9 @@ import { GovernorAlpha, SUBGRAPH_URL } from '../../../constants/tokenAddresses'
 
 import useGovernance from '../../../hooks/useGovernance'
 
+import web3 from '../../../utils/web3'
+import { dateRequestUnstake } from '../../../utils/date'
+
 import AnyCard from '../../AnyCard'
 
 import { GET_PROPOSALS } from './graphql'
@@ -25,11 +28,11 @@ const statsSecundaryProposalLibColor: { [key: string]: string } = {
   canceled: '#BDBDBD'
 }
 
-const statsPrimaryProposalLibColor: { [key: string]: string } = {
-  active: '#E843C4',
-  succeeded: '#2CE878',
-  failed: '#EA3224'
-}
+// const statsPrimaryProposalLibColor: { [key: string]: string } = {
+//   active: '#E843C4',
+//   succeeded: '#2CE878',
+//   failed: '#EA3224'
+// }
 
 interface IProposalsTableProps {
   id: string;
@@ -40,6 +43,7 @@ interface IProposalsTableProps {
   signatures: [];
   startBlock: string;
   description: string;
+  timestamp: any;
   state: any[];
 }
 
@@ -53,15 +57,15 @@ interface IUserTableProps {
   userWalletAddress: string | string[] | undefined;
 }
 
+const endblockProposal = [0, 1, 3, 4]
+
 // eslint-disable-next-line prettier/prettier
 export const UserTableVotingHistory = ({
   userAddressUrl,
   userWalletAddress
 }: IUserTableProps) => {
   // eslint-disable-next-line prettier/prettier
-  const [proposalsList, setProposalsList] = React.useState<
-    IProposalsTableProps[]
-  >([])
+  const [proposalsList, setProposalsList] = React.useState<IProposalsTableProps[]>([])
 
   const { data } = useSWR([GET_PROPOSALS], query =>
     request(SUBGRAPH_URL, query, {
@@ -72,13 +76,23 @@ export const UserTableVotingHistory = ({
   const governance = useGovernance(GovernorAlpha)
 
   async function handleAddStateOnProposal(votes: IProposalsListProps[]) {
-    const proposals = votes.map((props: IProposalsListProps) =>
-      governance.stateProposals(props.proposal.number).then(res => {
-        props.proposal.state = res
-        props.proposal.support = props.support
-        return props.proposal
-      })
-    )
+    const proposals = votes.map((props: IProposalsListProps) => {
+      return governance
+        .stateProposals(props.proposal.number)
+        .then(currentState => {
+          web3.eth
+            .getBlock(
+              endblockProposal.indexOf(currentState[3]) !== -1
+                ? `${Number(props.proposal.startBlock) + 2 + 40320}`
+                : props.proposal.startBlock
+            )
+            .then(res => (props.proposal.timestamp = res.timestamp))
+            .catch(e => console.log(e))
+          props.proposal.state = currentState
+          props.proposal.support = props.support
+          return props.proposal
+        })
+    })
 
     const proposalComplete = await Promise.all(proposals)
 
@@ -143,8 +157,15 @@ export const UserTableVotingHistory = ({
                         </S.TypeVote>
 
                         <S.TimeFrame>
-                          Ends in N days
-                          {/* End in {dateRequestUnstake(item.timestamp * 1000)} */}
+                          {`${
+                            endblockProposal.indexOf(proposal.state[3]) === -1
+                              ? `Created in ${dateRequestUnstake(
+                                  proposal.timestamp * 1000
+                                )}`
+                              : `${proposal.state[1]} in ${dateRequestUnstake(
+                                  proposal.timestamp * 1000
+                                )}`
+                          }`}
                         </S.TimeFrame>
 
                         <S.StateMutability
