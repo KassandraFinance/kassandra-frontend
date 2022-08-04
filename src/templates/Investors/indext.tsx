@@ -1,4 +1,4 @@
-import Header from '../../components/Header'
+import Header from '../../components/Header/newHeader'
 import FAQ from './FAQ'
 import Hero from './Hero'
 import Products from './Products'

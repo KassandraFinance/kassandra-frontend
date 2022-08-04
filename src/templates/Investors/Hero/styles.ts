@@ -94,3 +94,11 @@ export const Description = styled.div`
   margin-top: 2.4rem;
   margin-bottom: 2.4rem;
 `
+
+export const ScrollContainer = styled.div`
+  margin-top: 15rem;
+
+  @media (max-width: 680px) {
+    display: none;
+  }
+`

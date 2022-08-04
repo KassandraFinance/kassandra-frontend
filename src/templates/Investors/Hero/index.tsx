@@ -1,4 +1,5 @@
 import Button from '../../../components/Button'
+import Scroll from '../../../components/Scroll'
 
 import * as S from './styles'
 
@@ -27,6 +28,9 @@ const Hero = () => {
         text="Start Investing"
         icon={<img src="/assets/utilities/go-to-page.svg" alt="go to page" />}
       />
+      <S.ScrollContainer>
+        <Scroll />
+      </S.ScrollContainer>
     </S.Hero>
   )
 }

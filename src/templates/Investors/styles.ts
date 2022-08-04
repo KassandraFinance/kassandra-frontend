@@ -5,14 +5,14 @@ export const InvestorsContainer = styled.section`
   flex-direction: column;
   align-items: center;
 
-  background: url('/assets/images/bg-investors-1920.png'),
+  background: url('/assets/images/bg-investors-1920.webp'),
     url('/assets/images/bg-investors-1920.png');
   background-repeat: no-repeat;
   background-size: auto;
-  background-position: left top;
+  background-position: top left;
 
   @media (max-width: 768px) {
-    background: url('/assets/images/bg-investors-768.png'),
+    background: url('/assets/images/bg-investors-768.webp'),
       url('/assets/images/bg-investors-768.png');
   }
 

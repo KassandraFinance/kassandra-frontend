@@ -11,12 +11,11 @@ export const PartnersContainer = styled.div`
 
   background: url('/assets/images/blur-divisor-investor.png');
   background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center bottom;
+  background-size: contain;
+  background-position: center top;
 
-  /* margin-top: 47.1rem; */
   h1 {
-    margin-top: 42.6rem;
+    margin-top: 47.1rem;
     margin-bottom: 5.6rem;
 
     font-size: 4.8rem;
