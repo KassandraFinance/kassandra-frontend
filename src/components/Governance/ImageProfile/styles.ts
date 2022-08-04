@@ -17,6 +17,8 @@ export const Image = styled.div<IImageProps>`
   font-weight: ${theme.font.weight.light};
   letter-spacing: 0.5px;
 
+  cursor: pointer;
+
   @media (max-width: 960px) {
     line-height: ${theme.font.sizes.font16};
     font-size: ${theme.font.sizes.font16};

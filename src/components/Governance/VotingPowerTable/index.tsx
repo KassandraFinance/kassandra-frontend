@@ -110,7 +110,10 @@ export const VotingPowerTable = () => {
         <tbody>
           {votingPowerRank &&
             votingPowerRank.map((item, index) => (
-              <Link key={item.address} href={`/profile/${item.address}`}>
+              <Link
+                key={item.address}
+                href={`/profile/${item.address}?tab=governance-data`}
+              >
                 <S.Tr>
                   <S.Td className="rank">{index + 1}</S.Td>
                   <S.Td className="user">

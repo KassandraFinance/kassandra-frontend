@@ -48,11 +48,7 @@ const AllProposals = () => {
           <>
             <S.GovernanceProposalsContent>
               <S.Title>
-                <TitleSection
-                  image={proposals}
-                  title="Governance Proposals"
-                  text="Velit lacus vel porta purus"
-                />
+                <TitleSection image={proposals} title="Governance Proposals" />
                 <S.VotingPowerContent>
                   <VotingPower
                     userWalletAddress={userWalletAddress}
@@ -60,7 +56,7 @@ const AllProposals = () => {
                   />
                 </S.VotingPowerContent>
                 <ExternalLink
-                  hrefNext={`/profile/${userWalletAddress}`}
+                  hrefNext={`/profile/${userWalletAddress}?tab=governance-data`}
                   text="Manage Delegation"
                 />
               </S.Title>
@@ -68,11 +64,7 @@ const AllProposals = () => {
             </S.GovernanceProposalsContent>
             <S.AllProposalsContent>
               <S.TitleAndLinkContent>
-                <TitleSection
-                  image={proposals}
-                  title="All Proposals"
-                  text="Velit lacus vel porta purus"
-                />
+                <TitleSection image={proposals} title="All Proposals" />
                 <S.LinkForum
                   href="https://gov.kassandra.finance/"
                   target="_blank"
