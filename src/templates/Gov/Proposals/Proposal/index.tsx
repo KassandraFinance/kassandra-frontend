@@ -17,14 +17,14 @@ import {
   SUBGRAPH_URL
 } from '../../../../constants/tokenAddresses'
 
-import useGovernance from '../../../../hooks/useGovernance'
-import useVotingPower from '../../../../hooks/useVotingPower'
-
 import waitTransaction, {
   MetamaskError,
   TransactionCallback
 } from '../../../../utils/txWait'
 import { BNtoDecimal } from '../../../../utils/numerals'
+
+import useGovernance from '../../../../hooks/useGovernance'
+import useVotingPower from '../../../../hooks/useVotingPower'
 
 import { useAppSelector, useAppDispatch } from '../../../../store/hooks'
 import { setModalAlertText } from '../../../../store/reducers/modalAlertText'
@@ -748,10 +748,7 @@ const Proposal = () => {
               </S.VoteCardWrapper>
             </S.VoteContent>
             <S.ProposalInfo>
-              <S.ProposalTitleWrapper>
-                <Image src={proposalInfoIcon} width={24} height={24} />
-                <h1>Proposal Info</h1>
-              </S.ProposalTitleWrapper>
+              <TitleSection image={proposalInfoIcon} title="Proposal Info" />
               <S.CardWrapper>
                 <S.DescriptionTable>
                   <S.DescriptionProposal>
@@ -846,10 +843,7 @@ const Proposal = () => {
                 </S.InfoTable>
               </S.CardWrapper>
               <S.ProposalDetails>
-                <S.ProposalTitleWrapper>
-                  <Image src={proposalDetailsIcon} width={24} height={24} />
-                  <h1>Details</h1>
-                </S.ProposalTitleWrapper>
+                <TitleSection image={proposalDetailsIcon} title="Details" />
                 <S.DescriptionTable>
                   {new Array(3).fill(null).map((_, index) => {
                     if (
@@ -929,11 +923,10 @@ const Proposal = () => {
                 </S.DescriptionTable>
               </S.ProposalDetails>
               <S.ProposalStatus>
-                <S.ProposalTitleWrapper>
-                  <Image src={proposalStatusHistory} width={24} height={24} />
-                  <h1>Proposal Status History</h1>
-                </S.ProposalTitleWrapper>
-
+                <TitleSection
+                  image={proposalStatusHistory}
+                  title="Proposal Status History"
+                />
                 <S.Steps>
                   {dataStatus.map((step, index) => (
                     <React.Fragment key={index}>
