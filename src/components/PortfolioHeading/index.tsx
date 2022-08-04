@@ -2,6 +2,8 @@ import React from 'react'
 import Image from 'next/image'
 import Tippy from '@tippyjs/react'
 
+import TitleSection from '../TitleSection'
+
 import infoGray from '../../../public/assets/utilities/info-gray.svg'
 
 import * as S from './styles'
@@ -22,13 +24,7 @@ const PortfolioHeading = ({
   return (
     <>
       <S.HeadingWrapper>
-        <S.Heading>
-          <S.ImageWrapper>
-            <Image src={image} alt="" width={20} height={20} />
-          </S.ImageWrapper>
-
-          <S.H2>{title}</S.H2>
-        </S.Heading>
+        <TitleSection image={image} title={title} />
 
         <S.TotalContainer>
           <S.Total>

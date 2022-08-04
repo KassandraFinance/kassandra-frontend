@@ -19,36 +19,6 @@ export const HeadingWrapper = styled.div`
   }
 `
 
-export const Heading = styled.div`
-  height: 3.2rem;
-
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-`
-
-export const H2 = styled.h2`
-  font-weight: ${theme.font.weight.medium};
-  font-size: ${theme.font.sizes.font24};
-  line-height: 3.2rem;
-
-  color: #ffffff;
-  @media (max-width: 540px) {
-    font-size: ${theme.font.sizes.font18};
-    line-height: 20px;
-  }
-`
-
-export const ImageWrapper = styled.div`
-  width: 2rem;
-  height: 2rem;
-
-  @media (max-width: 540px) {
-    width: 1.2rem;
-    height: 1.2rem;
-  }
-`
-
 export const TotalContainer = styled.div`
   width: 37.2rem;
   height: 4.8rem;
