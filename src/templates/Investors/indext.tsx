@@ -6,6 +6,7 @@ import Advantages from './Advantages'
 import Partners from './Partners'
 
 import * as S from './styles'
+import Contribute from '../TokenHolder/Contribute'
 
 const Investors = () => {
   return (
@@ -17,6 +18,7 @@ const Investors = () => {
         <Advantages />
         <Partners />
         <FAQ />
+        <Contribute />
       </S.InvestorsContainer>
     </>
   )
