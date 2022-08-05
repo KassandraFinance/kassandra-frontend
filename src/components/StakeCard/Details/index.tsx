@@ -4,7 +4,7 @@ import React from 'react'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 
-import { Kacy, chains, Staking } from '../../../constants/tokenAddresses'
+import { chains, Staking } from '../../../constants/tokenAddresses'
 
 import useStakingContract from '../../../hooks/useStakingContract'
 import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
@@ -33,6 +33,7 @@ interface IDetailsProps {
   symbol: string;
   poolPrice: Big;
   kacyPrice: Big;
+  link: string;
 }
 
 const Details = ({
@@ -43,7 +44,8 @@ const Details = ({
   decimals,
   symbol,
   poolPrice,
-  kacyPrice
+  kacyPrice,
+  link
 }: IDetailsProps) => {
   const [depositedAmount, setDepositedAmount] = React.useState<BigNumber>(
     new BigNumber(-1)
@@ -138,30 +140,7 @@ const Details = ({
           }
           text="See contract"
         />
-        {symbol === 'LP-PNG' && (
-          <ExternalLink
-            hrefLink={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
-            text="Get LP-PNG"
-          />
-        )}
-        {symbol === 'LP-JOE' && (
-          <ExternalLink
-            hrefLink={`https://traderjoexyz.com/pool/AVAX/${Kacy}`}
-            text="Get LP-JOE"
-          />
-        )}
-        {symbol === 'KACY' && (
-          <ExternalLink
-            hrefLink={`https://app.pangolin.exchange/#/swap?outputCurrency=${Kacy}`}
-            text="Buy $KACY"
-          />
-        )}
-        {symbol === 'aHYPE' && (
-          <ExternalLink hrefNext="/explore/ahype" text="Buy $aHYPE" />
-        )}
-        {symbol === 'K3C' && (
-          <ExternalLink hrefNext="/explore/k3c" text="Buy $K3C" />
-        )}
+        <ExternalLink hrefLink={link} text={`Get ${symbol}`} />
       </S.Info>
       <S.AddToken
         type="button"

@@ -552,6 +552,7 @@ const StakeCard = ({
                     symbol={symbol}
                     poolPrice={poolPrice}
                     kacyPrice={kacyPrice}
+                    link={properties.link ?? ''}
                   />
                 )}
               </S.ButtonContainer>
@@ -570,6 +571,7 @@ const StakeCard = ({
           symbol={symbol}
           stakeTransaction={stakeTransaction}
           setStakeTransaction={setStakeTransaction}
+          link={properties.link ?? ''}
         />
       )}
       {isModalCancelUnstake && (
