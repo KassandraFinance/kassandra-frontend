@@ -4,32 +4,57 @@ import theme from '../../../../styles/theme'
 export const NewsCard = styled.article`
   min-width: 39.2rem;
   max-width: 39.2rem;
+  margin: 0 auto;
 
   border: 0.1rem solid rgba(255, 255, 255, 0.08);
   border-radius: 1rem;
 
-  @media (max-width: 576px) {
+  @media (max-width: 840px) {
     min-width: 32.8rem;
-    max-width: 39.2rem;
+    max-width: 32.8rem;
   }
 `
 
 export const NewsCardHeader = styled.div`
-  height: 17.2rem;
+  width: 39rem;
+  height: 19.6rem;
 
   background: #d9d9d9;
   border-radius: 1rem 1rem 0rem 0rem;
+  overflow: hidden;
+
+  img {
+    width: 39.2rem;
+    height: auto;
+  }
+
+  @media (max-width: 840px) {
+    width: 32.6rem;
+    height: 16.4rem;
+
+    img {
+      width: 32.8rem;
+    }
+  }
 `
 
 export const NewsCardBody = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  justify-content: space-between;
+
+  height: 23.6rem;
 
   padding: 2.4rem;
 
   background: rgba(255, 255, 255, 0.05);
   border-radius: 0rem 0rem 1rem 1rem;
+`
+
+export const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 `
 
 export const Title = styled.h6`
@@ -46,6 +71,8 @@ export const Title = styled.h6`
 `
 
 export const Text = styled.p`
+  height: 5.4rem;
+
   color: ${theme.colors.snow};
   font-weight: ${theme.font.weight.light};
   font-size: ${theme.font.sizes.font14};
@@ -58,12 +85,15 @@ export const Text = styled.p`
   }
 `
 
-export const BtnWrapper = styled.div`
+export const BtnWrapper = styled.a`
+  text-decoration: none;
   button {
     border-color: #fff;
 
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: #fff;
+      outline: #fff;
     }
   }
 `

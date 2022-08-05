@@ -1,28 +1,34 @@
-import Image from 'next/image'
 import React from 'react'
 
 import Button from '../../../../components/Button'
 
-import img from '../../../../../public/assets/images/twitter-post.png'
-
 import * as S from './styles'
 
-const NewsCard = () => {
+interface INewsCardProps {
+  thumbnail: string;
+  title: string;
+  description: string;
+  link: string;
+}
+
+const NewsCard = ({ thumbnail, title, description, link }: INewsCardProps) => {
+  const subText =
+    description.replace(/<\/?[^>]+(>|$)/g, '').substring(0, 100) + ' ...'
+
   return (
     <S.NewsCard>
       <S.NewsCardHeader>
-        <Image src={img} />
+        <img src={thumbnail} />
       </S.NewsCardHeader>
+
       <S.NewsCardBody>
-        <S.Title>TryCrypto has launched</S.Title>
+        <S.TextWrapper>
+          <S.Title>{title}</S.Title>
 
-        <S.Text>
-          Praesent quam amet interdum etiam. Facilisis iaculis at arcu id in.
-          Fringilla vitae sit est aliquam sit. Odio at est sagittis ipsum.
-          Mattis vivamus ipsum elit vitae.
-        </S.Text>
+          <S.Text>{subText}</S.Text>
+        </S.TextWrapper>
 
-        <S.BtnWrapper>
+        <S.BtnWrapper href={link} target="_blank" rel="noopener noreferrer">
           <Button text="Read more" backgroundBlack />
         </S.BtnWrapper>
       </S.NewsCardBody>
