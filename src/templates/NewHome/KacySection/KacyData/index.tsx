@@ -44,18 +44,18 @@ const KacyData = () => {
 
   React.useEffect(() => {
     if (data) {
-      const price = data.kacyPrice.toLocaleString('en-US', {
+      const price = data.kacyPrice?.toLocaleString('en-US', {
         style: 'currency',
         currency: 'USD',
         minimumFractionDigits: 2
       })
-      const marketCap = data.marketCap.toLocaleString('en-US', {
+      const marketCap = data.marketCap?.toLocaleString('en-US', {
         style: 'currency',
         currency: 'USD',
         minimumFractionDigits: 0
       })
       const totalSup = (10000000).toLocaleString('en-US')
-      const circSup = data.supply.toLocaleString('en-US')
+      const circSup = data.supply?.toLocaleString('en-US')
 
       setKacyMarketData([
         {
