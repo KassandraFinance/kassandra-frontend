@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
 
   .scroll-anchor {
     display: inline-block;
+    text-decoration: none;
   }
 
   .icon-scroll {
