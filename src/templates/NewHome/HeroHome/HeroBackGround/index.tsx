@@ -5,8 +5,9 @@ import * as S from './styles'
 const HeroBackGround = () => {
   return (
     <>
-      <S.Sun></S.Sun>
-      <S.Grid></S.Grid>
+      <S.Sun />
+      <S.Grid />
+      <S.LightHero />
     </>
   )
 }

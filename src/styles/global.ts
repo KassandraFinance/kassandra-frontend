@@ -107,6 +107,8 @@ const GlobalStyles: GlobalStyleComponent<
       font-family: 'Rubik', sans-serif;
       color: #fcfcfc;
 
+      overflow-x: hidden;
+
       /* ${selectBackground
         ? `background-image: url('/assets/images/background-products.png');
         background-repeat: repeat-y;

@@ -7,6 +7,8 @@ export const Container = styled.div`
   margin: 0 auto;
   padding-inline: 2.4rem;
 
+  overflow-x: hidden;
+
   @media (max-width: 576px) {
     padding-inline: 1.6rem;
   }
