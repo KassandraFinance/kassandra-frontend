@@ -1407,9 +1407,9 @@
     "@types/react" "*"
 
 "@types/react-slick@^0.23.8":
-  version "0.23.8"
-  resolved "https://registry.yarnpkg.com/@types/react-slick/-/react-slick-0.23.8.tgz#91654e657158da57f082c7b213e20756d3a37502"
-  integrity sha512-SfzSg++/3uyftVZaCgHpW+2fnJFsyJEQ/YdsuqfOWQ5lqUYV/gY/UwAnkw4qksCj5jalto/T5rKXJ8zeFldQeA==
+  version "0.23.10"
+  resolved "https://registry.yarnpkg.com/@types/react-slick/-/react-slick-0.23.10.tgz#56126e6e4e95cdce7771535b2811c2c1931a7caa"
+  integrity sha512-ZiqdencANDZy6sWOWJ54LDvebuXFEhDlHtXU9FFipQR2BcYU2QJxZhvJPW6YK7cocibUiNn+YvDTbt1HtCIBVA==
   dependencies:
     "@types/react" "*"
 
@@ -6792,6 +6792,13 @@ raw-body@2.4.3:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
+react-alice-carousel@^2.6.4:
+  version "2.6.4"
+  resolved "https://registry.yarnpkg.com/react-alice-carousel/-/react-alice-carousel-2.6.4.tgz#c04694bce8b7e0b6b295af1f4c32167707c48529"
+  integrity sha512-G2RTX8SVuqkif3n3qEF9yd1NOqdM8S8SmB7yZ1hiUMMgmgyA+h7HJGTnIbblmU7h7AtaZQ4V6qhJJKxJC0lacQ==
+  dependencies:
+    vanilla-swipe "^2.2.0"
+
 react-copy-to-clipboard@^5.0.4:
   version "5.0.4"
   resolved "https://registry.yarnpkg.com/react-copy-to-clipboard/-/react-copy-to-clipboard-5.0.4.tgz#42ec519b03eb9413b118af92d1780c403a5f19bf"
@@ -8125,6 +8132,11 @@ v8-to-istanbul@^9.0.0:
     "@jridgewell/trace-mapping" "^0.3.7"
     "@types/istanbul-lib-coverage" "^2.0.1"
     convert-source-map "^1.6.0"
+
+vanilla-swipe@^2.2.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/vanilla-swipe/-/vanilla-swipe-2.4.0.tgz#fb26199d26e0a5b26e240b3b19fc4a60110b1dce"
+  integrity sha512-EdZdBWhPQvKz8DWHRXEHxsbJnU5wWKXrXblOV9ENElDnEK3tPkrBlAYK1pgPeuUb8k2DPQEK3tFi6W4cMZgUAg==
 
 varint@^5.0.0:
   version "5.0.2"
