@@ -6,9 +6,9 @@ export const Grid = styled.div`
   width: 100%;
   height: 100vh;
 
-  background-image: url('./assets/images/grid-desktop.png');
+  background-image: url('./assets/images/grid-desktop-blur.png');
   background-repeat: no-repeat;
-  background-position: bottom;
+  background-position: top 6.7rem center;
 
   opacity: 0;
 
@@ -35,7 +35,7 @@ export const Sun = styled.div`
 
   background-image: url('./assets/images/sun.png');
   background-repeat: no-repeat;
-  background-position: center bottom 13.8rem;
+  background-position: center top 6.2rem;
 
   opacity: 0;
 
