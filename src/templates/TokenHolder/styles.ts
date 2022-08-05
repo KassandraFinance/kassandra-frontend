@@ -39,10 +39,10 @@ export const Hero = styled.section`
   padding: 0 1.6rem;
   padding-top: 10rem;
 
-  background-image: url('/assets/images/hero-token-holder.png');
+  background-image: url('/assets/images/hero-token-holder-2.png');
   background-position: center;
   background-repeat: no-repeat;
-  background-blend-mode: color-dodge;
+  /* background-blend-mode: color-dodge; */
   background-color: #151117;
 
   @media (max-width: 560px) {
