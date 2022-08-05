@@ -8,6 +8,7 @@ export const NewsCard = styled.article`
 
   border: 0.1rem solid rgba(255, 255, 255, 0.08);
   border-radius: 1rem;
+  overflow: hidden;
 
   @media (max-width: 840px) {
     min-width: 32.8rem;
@@ -20,8 +21,6 @@ export const NewsCardHeader = styled.div`
   height: 19.6rem;
 
   background: #d9d9d9;
-  border-radius: 1rem 1rem 0rem 0rem;
-  overflow: hidden;
 
   img {
     width: 39.2rem;
@@ -48,7 +47,6 @@ export const NewsCardBody = styled.div`
   padding: 2.4rem;
 
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 0rem 0rem 1rem 1rem;
 `
 
 export const TextWrapper = styled.div`
