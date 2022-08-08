@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
-export const LatestNewsContainer = styled.section``
+export const LatestNewsContainer = styled.section`
+  position: relative;
+`
 
 export const NewsCardContainer = styled.div`
   max-width: 124rem;
@@ -39,5 +41,17 @@ export const NewsCardContainer = styled.div`
     &:hover {
       background-color: ${theme.colors.snow};
     }
+  }
+`
+
+export const ImgTabletWrapper = styled.div`
+  position: absolute;
+
+  display: none;
+
+  @media (min-width: 576px) and (max-width: 960px) {
+    left: 0;
+    bottom: -20rem;
+    display: block;
   }
 `

@@ -64,3 +64,27 @@ export const ImgWrapper2 = styled.div`
     display: block;
   }
 `
+
+export const ImgTabletWrapper1 = styled.div`
+  position: absolute;
+
+  display: none;
+
+  @media (min-width: 576px) and (max-width: 960px) {
+    right: 0;
+    bottom: -45rem;
+    display: block;
+  }
+`
+
+export const ImgTabletWrapper2 = styled.div`
+  position: absolute;
+
+  display: none;
+
+  @media (min-width: 576px) and (max-width: 960px) {
+    right: 0;
+    bottom: -60rem;
+    display: block;
+  }
+`

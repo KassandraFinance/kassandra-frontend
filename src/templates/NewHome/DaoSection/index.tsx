@@ -10,6 +10,8 @@ import assetsDistributionIcon from '../../../../public/assets/iconGradient/asset
 import feeCoinIcon from '../../../../public/assets/iconGradient/fee-coin.svg'
 import voteIcon from '../../../../public/assets/iconGradient/vote.svg'
 import light5 from '../../../../public/assets/images/backgroundHome/light-mobile5.png'
+import lightTable8 from '../../../../public/assets/images/backgroundHome/light-tablet8.png'
+import lightTable9 from '../../../../public/assets/images/backgroundHome/light-tablet9.png'
 
 import * as S from './styles'
 
@@ -23,6 +25,14 @@ const DaoSection = () => {
       <S.ImgWrapper2>
         <Image src={light5} />
       </S.ImgWrapper2>
+
+      <S.ImgTabletWrapper1>
+        <Image src={lightTable8} />
+      </S.ImgTabletWrapper1>
+
+      <S.ImgTabletWrapper2>
+        <Image src={lightTable9} />
+      </S.ImgTabletWrapper2>
 
       <SectionCard
         number="03"

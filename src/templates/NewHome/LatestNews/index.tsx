@@ -1,10 +1,13 @@
 import React from 'react'
+import Image from 'next/image'
+import useSWR from 'swr'
 import AliceCarousel from 'react-alice-carousel'
 import 'react-alice-carousel/lib/alice-carousel.css'
-import useSWR from 'swr'
 
 import LatestNewsHeader from './LatestNewsHeader'
 import NewsCard from './NewsCard'
+
+import lightTable10 from '../../../../public/assets/images/backgroundHome/light-tablet10.png'
 
 import * as S from './styles'
 
@@ -60,6 +63,10 @@ const LatestNews = () => {
 
   return (
     <S.LatestNewsContainer>
+      <S.ImgTabletWrapper>
+        <Image src={lightTable10} />
+      </S.ImgTabletWrapper>
+
       <LatestNewsHeader />
 
       <S.NewsCardContainer>

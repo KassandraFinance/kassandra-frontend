@@ -18,3 +18,15 @@ export const Container = styled.section`
     flex-direction: row-reverse;
   }
 `
+
+export const ImgWrapper = styled.div`
+  position: absolute;
+
+  display: none;
+
+  @media (min-width: 576px) and (max-width: 991px) {
+    right: 0;
+    bottom: -45rem;
+    display: block;
+  }
+`

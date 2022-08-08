@@ -45,3 +45,15 @@ export const ImgWrapper2 = styled.div`
     display: block;
   }
 `
+
+export const ImgTabletWrapper = styled.div`
+  position: absolute;
+
+  display: none;
+
+  @media (min-width: 576px) and (max-width: 960px) {
+    left: 0;
+    bottom: 0;
+    display: block;
+  }
+`

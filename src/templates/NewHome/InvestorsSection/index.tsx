@@ -10,6 +10,7 @@ import PoolHomeCard from '../../Home/Token/PoolHomeCard'
 import investorImg from '../../../../public/assets/images/investor.png'
 import light1 from '../../../../public/assets/images/backgroundHome/light-mobile1.png'
 import light2 from '../../../../public/assets/images/backgroundHome/light-mobile2.png'
+import lightTable4 from '../../../../public/assets/images/backgroundHome/light-tablet4.png'
 
 import * as S from './styles'
 
@@ -23,6 +24,10 @@ const InvestorsSection = () => {
       <S.ImgWrapper2>
         <Image src={light2} />
       </S.ImgWrapper2>
+
+      <S.ImgTabletWrapper>
+        <Image src={lightTable4} />
+      </S.ImgTabletWrapper>
 
       <SectionCard
         number="01"
