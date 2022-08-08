@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 
 import SectionCard from '../SectionCard'
 import HomeHeading from '../HomeHeading'
@@ -8,6 +9,7 @@ import managerImg from '../../../../public/assets/images/kassandra-head.png'
 import practicalIcon from '../../../../public/assets/iconGradient/practical.svg'
 import simpleIcon from '../../../../public/assets/iconGradient/simple.svg'
 import inexpensiveIcon from '../../../../public/assets/iconGradient/inexpensive.svg'
+import light4 from '../../../../public/assets/images/backgroundHome/light-mobile4.png'
 
 import * as S from './styles'
 
@@ -32,6 +34,10 @@ const ManagerCardData = [
 const ManagerSection = () => {
   return (
     <S.Container>
+      <S.ImgWrapper>
+        <Image src={light4} />
+      </S.ImgWrapper>
+
       <SectionCard
         number="02"
         title="Managers"

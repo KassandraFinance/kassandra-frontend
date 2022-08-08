@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 
 import { products } from '../../../constants/tokenAddresses'
 
@@ -7,12 +8,22 @@ import SectionCard from '../SectionCard'
 import PoolHomeCard from '../../Home/Token/PoolHomeCard'
 
 import investorImg from '../../../../public/assets/images/investor.png'
+import light1 from '../../../../public/assets/images/backgroundHome/light-mobile1.png'
+import light2 from '../../../../public/assets/images/backgroundHome/light-mobile2.png'
 
 import * as S from './styles'
 
 const InvestorsSection = () => {
   return (
     <S.Container>
+      <S.ImgWrapper1>
+        <Image src={light1} />
+      </S.ImgWrapper1>
+
+      <S.ImgWrapper2>
+        <Image src={light2} />
+      </S.ImgWrapper2>
+
       <SectionCard
         number="01"
         title="investors"

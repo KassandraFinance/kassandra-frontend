@@ -1,10 +1,13 @@
 import styled from 'styled-components'
 
 export const KacySectionContainer = styled.section`
+  position: relative;
+
   display: flex;
   align-items: center;
   gap: 8rem;
 
+  padding-inline: 2.4rem;
   margin-top: 31.8rem;
   margin-bottom: 15.9rem;
 
@@ -17,7 +20,20 @@ export const KacySectionContainer = styled.section`
   }
 
   @media (max-width: 576px) {
+    padding-inline: 1.6rem;
     margin-top: 12.4rem;
     margin-bottom: 0;
+  }
+`
+
+export const ImgWrapper = styled.div`
+  position: absolute;
+
+  display: none;
+
+  @media (max-width: 576px) {
+    top: -15rem;
+    right: 0;
+    display: block;
   }
 `

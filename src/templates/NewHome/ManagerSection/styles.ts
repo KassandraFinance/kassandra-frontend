@@ -1,6 +1,14 @@
 import styled from 'styled-components'
 
-export const Container = styled.section``
+export const Container = styled.section`
+  position: relative;
+
+  padding-inline: 2.4rem;
+
+  @media (max-width: 576px) {
+    padding-inline: 1.6rem;
+  }
+`
 
 export const ManagerCardContainer = styled.div`
   display: flex;
@@ -13,5 +21,17 @@ export const ManagerCardContainer = styled.div`
   @media (max-width: 992px) {
     flex-direction: column;
     gap: 3.2rem;
+  }
+`
+
+export const ImgWrapper = styled.div`
+  position: absolute;
+
+  display: none;
+
+  @media (max-width: 576px) {
+    right: 0;
+    bottom: -20rem;
+    display: block;
   }
 `

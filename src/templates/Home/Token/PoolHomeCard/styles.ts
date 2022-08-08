@@ -408,5 +408,9 @@ export const InfoList = styled.ul`
     letter-spacing: 0.22em;
     text-transform: uppercase;
     text-align: left;
+
+    @media (max-width: 576px) {
+      font-size: 1.1rem;
+    }
   }
 `

@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 
 import HeroHome from './HeroHome'
 import InvestorsSection from './InvestorsSection'
@@ -7,6 +8,8 @@ import ManagerSection from './ManagerSection'
 import DaoSection from './DaoSection'
 import KacySection from './KacySection'
 import LatestNews from './LatestNews'
+
+import light3 from '../../../public/assets/images/backgroundHome/light-mobile3.png'
 
 import * as S from './styles'
 
@@ -19,7 +22,13 @@ const NewHome = () => {
         <InvestorsSection />
       </S.Container>
 
-      <WavyLine color="color1" />
+      <S.WavyOneWrapper>
+        <S.ImgWrapper>
+          <Image src={light3} />
+        </S.ImgWrapper>
+
+        <WavyLine color="color1" />
+      </S.WavyOneWrapper>
 
       <S.Container>
         <ManagerSection />

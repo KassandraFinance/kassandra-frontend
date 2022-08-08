@@ -1,6 +1,14 @@
 import styled from 'styled-components'
 
-export const Container = styled.section``
+export const Container = styled.section`
+  position: relative;
+
+  padding-inline: 2.4rem;
+
+  @media (max-width: 576px) {
+    padding-inline: 1.6rem;
+  }
+`
 
 export const DaoCardContainer = styled.div`
   display: flex;
@@ -30,5 +38,29 @@ export const Line = styled.div`
   @media (max-width: 992px) {
     width: 6.6rem;
     height: 0.2rem;
+  }
+`
+
+export const ImgWrapper1 = styled.div`
+  position: absolute;
+
+  display: none;
+
+  @media (max-width: 576px) {
+    left: 0;
+    top: 7rem;
+    display: block;
+  }
+`
+
+export const ImgWrapper2 = styled.div`
+  position: absolute;
+
+  display: none;
+
+  @media (max-width: 576px) {
+    left: 0;
+    top: 35rem;
+    display: block;
   }
 `

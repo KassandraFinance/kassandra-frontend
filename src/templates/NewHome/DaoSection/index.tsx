@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 
 import SectionCard from '../SectionCard'
 import HomeHeading from '../HomeHeading'
@@ -8,12 +9,21 @@ import daoImg from '../../../../public/assets/images/dao.png'
 import assetsDistributionIcon from '../../../../public/assets/iconGradient/assets-distribution.svg'
 import feeCoinIcon from '../../../../public/assets/iconGradient/fee-coin.svg'
 import voteIcon from '../../../../public/assets/iconGradient/vote.svg'
+import light5 from '../../../../public/assets/images/backgroundHome/light-mobile5.png'
 
 import * as S from './styles'
 
 const DaoSection = () => {
   return (
     <S.Container>
+      <S.ImgWrapper1>
+        <Image src={light5} />
+      </S.ImgWrapper1>
+
+      <S.ImgWrapper2>
+        <Image src={light5} />
+      </S.ImgWrapper2>
+
       <SectionCard
         number="03"
         title="DAO"
