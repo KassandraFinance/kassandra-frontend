@@ -8,6 +8,12 @@ export const Wrapper = styled.section`
   margin: 0 auto;
   padding: 0 1.6rem;
 
+  .button {
+    flex-direction: row-reverse;
+    gap: 0.8rem;
+    margin: 0 auto;
+  }
+
   .flex {
     display: flex;
     margin-top: 5rem;
