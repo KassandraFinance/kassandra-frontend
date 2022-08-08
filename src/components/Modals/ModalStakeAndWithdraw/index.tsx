@@ -3,10 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
 import { ToastSuccess, ToastWarning } from '../../Toastify/toast'
-
-import { Kacy } from '../../../constants/tokenAddresses'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 import waitTransaction, {
@@ -36,6 +33,7 @@ interface IModalStakeProps {
   symbol: string;
   stakeTransaction: string;
   setStakeTransaction: React.Dispatch<React.SetStateAction<string>>;
+  link: string;
 }
 
 const ModalStakeAndWithdraw = ({
@@ -46,7 +44,8 @@ const ModalStakeAndWithdraw = ({
   productCategories,
   symbol,
   stakeTransaction,
-  setStakeTransaction
+  setStakeTransaction,
+  link
 }: IModalStakeProps) => {
   const dispatch = useAppDispatch()
 
@@ -72,7 +71,6 @@ const ModalStakeAndWithdraw = ({
     const kacyAmount = percentage.mul(balance).div(new BigNumber(100))
 
     if (inputRef.current !== null) {
-      // eslint-disable-next-line prettier/prettier
       inputRef.current.value = BNtoDecimal(kacyAmount, 18).replace(
         /\u00A0/g,
         ''
@@ -346,13 +344,12 @@ const ModalStakeAndWithdraw = ({
               Confirm
             </S.ConfirmButton>
 
-            {symbol === 'KACY' && (
+            <Link href={link} passHref>
               <Button
                 as="a"
                 backgroundBlack
                 fullWidth
-                text="Get KACY"
-                href={`https://app.pangolin.exchange/#/swap?outputCurrency=${Kacy}`}
+                text={`Get ${symbol}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => {
@@ -360,32 +357,7 @@ const ModalStakeAndWithdraw = ({
                   setStakeTransaction('')
                 }}
               />
-            )}
-            {symbol === 'aHYPE' && (
-              <Link href="/explore/ahype" passHref>
-                <Button backgroundBlack fullWidth text="Get aHYPE" />
-              </Link>
-            )}
-            {symbol === 'K3C' && (
-              <Link href="/explore/k3c" passHref>
-                <Button backgroundBlack fullWidth text="Get K3C" />
-              </Link>
-            )}
-            {symbol === 'LP-PNG' && (
-              <Button
-                as="a"
-                backgroundBlack
-                fullWidth
-                text="Get LP-PNG"
-                href={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => {
-                  setModalOpen(false)
-                  setStakeTransaction('')
-                }}
-              />
-            )}
+            </Link>
           </S.Main>
         </S.BackgroundBlack>
       </S.BorderGradient>
