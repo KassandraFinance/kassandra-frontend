@@ -1,23 +1,16 @@
 import React from 'react'
 import router from 'next/router'
-import Image from 'next/image'
 
 import HeroBackGround from './HeroBackGround'
 import HeroText from './HeroText'
 import Button from '../../../components/Button'
 import DaoData from './DaoData'
 
-import lightTable3 from '../../../../public/assets/images/backgroundHome/light-tablet3.png'
-
 import * as S from './styles'
 
 const HeroHome = () => {
   return (
     <S.Container>
-      <S.ImgWrapper>
-        <Image src={lightTable3} />
-      </S.ImgWrapper>
-
       <HeroBackGround />
 
       <HeroText />

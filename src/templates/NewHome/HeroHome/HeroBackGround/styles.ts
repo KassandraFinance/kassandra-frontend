@@ -60,15 +60,6 @@ export const LightHero = styled.div`
 
   opacity: 0;
 
-  @media (min-width: 992px) {
-    width: 192rem;
-
-    background-image: url('./assets/images/backgroundHome/light-desktop1.png'),
-      url('./assets/images/backgroundHome/light-desktop2.png');
-    background-repeat: no-repeat;
-    background-position: top left, top right;
-  }
-
   @media (min-width: 576px) and (max-width: 991px) {
     width: 100%;
 
@@ -89,5 +80,17 @@ export const LightHero = styled.div`
     100% {
       opacity: 1;
     }
+  }
+`
+
+export const ImgWrapper = styled.div`
+  position: absolute;
+
+  display: none;
+
+  @media (min-width: 576px) and (max-width: 991px) {
+    right: 0;
+    bottom: -45rem;
+    display: block;
   }
 `

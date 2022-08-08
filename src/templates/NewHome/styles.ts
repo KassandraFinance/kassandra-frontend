@@ -1,5 +1,16 @@
 import styled from 'styled-components'
 
+export const HomeBackgroundContainer = styled.div`
+  width: 100%;
+
+  @media (min-width: 991px) {
+    background-image: url('./assets/images/backgroundHome/background-home-hero.png'),
+      url('./assets/images/backgroundHome/background-home-body.png');
+    background-repeat: no-repeat;
+    background-position: top center;
+  }
+`
+
 export const Container = styled.div`
   position: relative;
 

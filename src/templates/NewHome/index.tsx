@@ -18,7 +18,7 @@ import * as S from './styles'
 
 const NewHome = () => {
   return (
-    <>
+    <S.HomeBackgroundContainer>
       <HeroHome />
 
       <S.Container>
@@ -60,7 +60,7 @@ const NewHome = () => {
       </S.Container>
 
       <LatestNews />
-    </>
+    </S.HomeBackgroundContainer>
   )
 }
 

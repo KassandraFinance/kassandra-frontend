@@ -39,8 +39,9 @@ export const SubTitleWrapper = styled.div`
 
 export const SubTitle = styled.div`
   position: relative;
+  max-width: 101.67rem;
 
-  font-weight: ${theme.font.weight.black};
+  font-weight: 900;
   font-size: clamp(${theme.font.sizes.font40}, 9vw, 6.4rem);
   line-height: 7.2rem;
   text-align: center;
