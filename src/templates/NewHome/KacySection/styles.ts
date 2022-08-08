@@ -33,7 +33,7 @@ export const ImgWrapper = styled.div`
 
   @media (max-width: 576px) {
     top: -15rem;
-    right: 0;
+    left: 0;
     display: block;
   }
 `
