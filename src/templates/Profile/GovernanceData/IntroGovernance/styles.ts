@@ -116,10 +116,9 @@ export const AddressTotalVotingPower = styled.div`
 
   .address-total-voting-power {
     display: flex;
-    margin-bottom: 0.7rem;
 
     color: ${theme.colors.grayDisabled};
-    line-height: ${theme.font.sizes.font20};
+    line-height: ${theme.font.sizes.font16};
     font-size: ${theme.font.sizes.font14};
     font-weight: ${theme.font.weight.medium};
 
@@ -140,6 +139,8 @@ export const AddressTotalVotingPower = styled.div`
   }
 
   .value-total-voting-power {
+    margin-top: 1rem;
+
     color: ${theme.colors.snow};
     line-height: ${theme.font.sizes.font32};
     font-size: ${theme.font.sizes.font32};
@@ -158,16 +159,15 @@ export const AddressTotalVotingPower = styled.div`
 export const Tooltip = styled.div`
   position: relative;
 
-  margin-top: -0.01rem;
   margin-left: 0.8rem;
   padding: 0.01rem;
-  height: 2.2rem;
+  height: 1.75rem;
 
   z-index: 20;
 `
 
 export const ReceivedAndOwnedVotingPower = styled.div`
-  font-weight: ${theme.font.weight.medium};
+  line-height: ${theme.font.sizes.font16};
   font-size: ${theme.font.sizes.font14};
   font-weight: ${theme.font.weight.medium};
   text-transform: uppercase;
@@ -191,6 +191,11 @@ export const OwnedVotingPower = styled.div`
   justify-content: space-between;
 
   margin-bottom: 1.2rem;
+`
+
+export const TextAndTooltip = styled.div`
+  display: flex;
+  align-items: center;
 `
 
 export const ReceivedVotingPower = styled.div`
