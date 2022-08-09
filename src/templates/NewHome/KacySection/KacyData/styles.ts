@@ -79,7 +79,16 @@ export const BtnWrapper = styled.div`
       &:hover {
         background-color: #fff;
       }
+
+      &:focus {
+        outline: #fff;
+        background-color: #fff;
+      }
     }
+  }
+
+  a {
+    text-decoration: none;
   }
 
   @media (max-width: 992px) {
