@@ -1,6 +1,6 @@
 import Tippy from '@tippyjs/react'
 import Image from 'next/image'
-import infoGrayIcon from '../../../../public/assets/utilities/info-gray.svg'
+import tooltip from '../../../../public/assets/utilities/tooltip.svg'
 import * as S from './styles'
 
 interface IAnyCardProps {
@@ -18,12 +18,7 @@ const AnyCardTotal = ({ textTitle, text, TooltipText, isDolar }: IAnyCardProps) 
         {textTitle}
         <Tippy content={TooltipText}>
           <span>
-            <Image
-              src={infoGrayIcon}
-              alt="Explanation"
-              width={16}
-              height={16}
-            />
+            <Image src={tooltip} alt="Explanation" width={16} height={16} />
           </span>
         </Tippy>
       </span>
