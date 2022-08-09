@@ -5,6 +5,7 @@ import HeroBackGround from './HeroBackGround'
 import HeroText from './HeroText'
 import Button from '../../../components/Button'
 import DaoData from './DaoData'
+import Scroll from '../../../components/Scroll'
 
 import * as S from './styles'
 
@@ -51,6 +52,10 @@ const HeroHome = () => {
       />
 
       <DaoData />
+
+      <S.ScroolContainer>
+        <Scroll />
+      </S.ScroolContainer>
     </S.Container>
   )
 }

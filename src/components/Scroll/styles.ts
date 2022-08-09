@@ -1,11 +1,13 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-
   .scroll-anchor {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    /* display: inline-block; */
     text-decoration: none;
   }
 

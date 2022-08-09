@@ -1,6 +1,5 @@
 import React from 'react'
 import Image from 'next/image'
-import { useInView } from 'react-intersection-observer'
 
 import { products } from '../../../constants/tokenAddresses'
 
@@ -16,12 +15,6 @@ import lightTable4 from '../../../../public/assets/images/backgroundHome/light-t
 import * as S from './styles'
 
 const InvestorsSection = () => {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0,
-    rootMargin: '25px 0px'
-  })
-
   return (
     <S.Container>
       <S.ImgWrapper1>
@@ -52,11 +45,10 @@ that will work to improve your gains and reduce your risks."
 
       <HomeHeading title="Foundation-curated Products" color="#FFBF00" />
 
-      <S.PoolCardContainer ref={ref}>
-        {inView &&
-          products.map(product => (
-            <PoolHomeCard key={product.symbol} pool={product} />
-          ))}
+      <S.PoolCardContainer>
+        {products.map(product => (
+          <PoolHomeCard key={product.symbol} pool={product} />
+        ))}
       </S.PoolCardContainer>
     </S.Container>
   )

@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 export const Container = styled.section`
+  position: relative;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,4 +19,11 @@ export const Container = styled.section`
   .btn {
     flex-direction: row-reverse;
   }
+`
+
+export const ScroolContainer = styled.div`
+  position: absolute;
+  bottom: 2rem;
+  right: 50%;
+  transform: translateX(50%);
 `
