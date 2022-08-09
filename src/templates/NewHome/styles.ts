@@ -11,6 +11,13 @@ export const HomeBackgroundContainer = styled.div`
   }
 `
 
+export const HeaderWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+`
+
 export const Container = styled.div`
   position: relative;
 
