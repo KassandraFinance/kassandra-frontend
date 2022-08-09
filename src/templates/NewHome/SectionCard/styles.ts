@@ -35,6 +35,10 @@ export const TextContainer = styled.div`
     align-items: flex-start;
   }
 
+  a {
+    text-decoration: none;
+  }
+
   .btn {
     flex-direction: row-reverse;
   }

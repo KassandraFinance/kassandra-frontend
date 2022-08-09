@@ -46,6 +46,7 @@ that fit you"
 By buying a single token, you delegate funds to trusted managers
 that will work to improve your gains and reduce your risks."
         btnText="Become an investor"
+        link="/investors"
         img={investorImg}
       />
 

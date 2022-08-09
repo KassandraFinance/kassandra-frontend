@@ -45,6 +45,7 @@ const ManagerSection = () => {
         subtitle="Tokenize your portfolio  in an one-stop-shop and earn money with it"
         text="Become a pillar of decentralized asset management and earn additional income whenever someone invests in your tokenized portfolios. Manage, track, evaluate in one place with no extra fees."
         btnText="Become a Manager"
+        link="/managers"
         img={managerImg}
       />
 
