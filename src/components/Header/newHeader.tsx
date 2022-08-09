@@ -46,11 +46,11 @@ const Header = () => {
           <Link href="/investors" passHref>
             <S.MenuLink active={pathName === '/investors'}>Invest</S.MenuLink>
           </Link>
-          <Link href="/manager" passHref>
-            <S.MenuLink active={pathName === '/manager'}>Manager</S.MenuLink>
+          <Link href="/managers" passHref>
+            <S.MenuLink active={pathName === '/managers'}>Manager</S.MenuLink>
           </Link>
-          <Link href="/dao" passHref>
-            <S.MenuLink active={pathName === '/dao'}>DAO</S.MenuLink>
+          <Link href="/token-holder" passHref>
+            <S.MenuLink active={pathName === '/token-holder'}>DAO</S.MenuLink>
           </Link>
           <Link href="/fundation" passHref>
             <S.MenuLink active={pathName === '/fundation'}>
