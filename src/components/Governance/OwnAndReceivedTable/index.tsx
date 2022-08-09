@@ -2,17 +2,15 @@ import React from 'react'
 import Image from 'next/image'
 import useSWR from 'swr'
 import Big from 'big.js'
-import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
 import { BNtoDecimal } from '../../../utils/numerals'
-import substr from '../../../utils/substr'
 
 import { useAppSelector } from '../../../store/hooks'
 
 import AnyCard from '../../AnyCard'
+import ImageProfile from '../ImageProfile'
 
 import avax from '../../../../public/assets/logos/kacy-stake.svg'
-import NftImage from '../../NftImage'
 
 import * as S from './styles'
 
@@ -140,60 +138,31 @@ export const OwnAndReceivedTable = ({
                           ''
                         ) : (
                           <>
-                            {item.image ? (
-                              item.isNFT ? (
-                                <NftImage
-                                  NftUrl={item.image}
-                                  imageSize="small"
-                                />
-                              ) : (
-                                <Image
-                                  src={item.image}
-                                  width={24}
-                                  height={24}
-                                  alt=""
-                                />
-                              )
-                            ) : (
-                              <Jazzicon
-                                diameter={24}
-                                seed={jsNumberForAddress(item.to.id)}
-                              />
-                            )}
+                            <ImageProfile
+                              address={item.to.id}
+                              diameter={24}
+                              hasAddress={true}
+                              isLink={true}
+                              fontSize={14}
+                              tab="?tab=governance-data"
+                            />
                           </>
                         )
                       ) : (
                         <>
-                          {item.image ? (
-                            item.isNFT ? (
-                              <NftImage NftUrl={item.image} imageSize="small" />
-                            ) : (
-                              <Image
-                                src={item.image}
-                                width={24}
-                                height={24}
-                                alt=""
-                              />
-                            )
-                          ) : (
-                            <Jazzicon
-                              diameter={24}
-                              seed={jsNumberForAddress(item.from.id)}
-                            />
-                          )}
+                          <ImageProfile
+                            address={item.from.id}
+                            diameter={24}
+                            hasAddress={true}
+                            isLink={true}
+                            fontSize={14}
+                            tab="?tab=governance-data"
+                          />
                         </>
                       )}
-                      <span>
-                        {isDelegationTable
-                          ? item.to.id === userAddressUrl
-                            ? 'self'
-                            : item.name
-                            ? item.name
-                            : substr(item.to.id)
-                          : item.name
-                          ? item.name
-                          : substr(item.from?.id)}
-                      </span>
+                      {isDelegationTable && item.to.id === userAddressUrl && (
+                        <span>self</span>
+                      )}
                     </S.Td>
                     <S.Td className="staked">
                       <p>

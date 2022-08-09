@@ -12,12 +12,12 @@ import ProposalTable from '../../../components/Governance/ProposalTable'
 import ProposalOverview from '../../../components/Governance/ProposalOverview'
 import Breadcrumb from '../../../components/Breadcrumb'
 import BreadcrumbItem from '../../../components/Breadcrumb/BreadcrumbItem'
+import Web3Disabled from '../../../components/Web3Disabled'
 
 import proposals from '../../../../public/assets/iconGradient/details.svg'
 import externalLink from '../../../../public/assets/utilities/external-link.svg'
 
 import * as S from './styles'
-import Web3Disabled from '../../../components/Web3Disabled'
 
 const AllProposals = () => {
   const { chainId } = useAppSelector(state => state)
@@ -48,30 +48,25 @@ const AllProposals = () => {
           <>
             <S.GovernanceProposalsContent>
               <S.Title>
-                <TitleSection
-                  image={proposals}
-                  title="Governance Proposals"
-                  text="Velit lacus vel porta purus"
-                />
+                <TitleSection image={proposals} title="Governance Proposals" />
                 <S.VotingPowerContent>
                   <VotingPower
                     userWalletAddress={userWalletAddress}
                     isMobile={true}
                   />
                 </S.VotingPowerContent>
-                <ExternalLink hrefNext="/farm" text="Manage Delegation" />
+                <ExternalLink
+                  hrefNext={`/profile/${userWalletAddress}?tab=governance-data`}
+                  text="Manage Delegation"
+                />
               </S.Title>
               <ProposalOverview />
             </S.GovernanceProposalsContent>
             <S.AllProposalsContent>
               <S.TitleAndLinkContent>
-                <TitleSection
-                  image={proposals}
-                  title="All Proposals"
-                  text="Velit lacus vel porta purus"
-                />
+                <TitleSection image={proposals} title="All Proposals" />
                 <S.LinkForum
-                  href="https://t.me/KassandraDAO"
+                  href="https://gov.kassandra.finance/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

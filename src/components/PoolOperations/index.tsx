@@ -8,7 +8,7 @@ import { chains } from '../../constants/tokenAddresses'
 import { ChainDetails } from '../../utils/changeChain'
 
 import ModalWalletConnect from '../Modals/ModalWalletConnect'
-import ModalHeimOperations from '../Modals/ModalHeimOperations'
+import ModalPoolOperations from '../Modals/ModalPoolOperations'
 import SelectOperatorCart from './SelectOperatorCart'
 import SelectOperatorMobile, { TitlesMobile } from './SelectOperatorMobile'
 
@@ -30,7 +30,7 @@ const messages = {
   Swap: 'Swap from'
 }
 
-const HeimOperations = ({
+const PoolOperations = ({
   poolChain,
   poolSymbol,
   crpPoolAddress,
@@ -41,7 +41,7 @@ const HeimOperations = ({
   const [inputCheckedBarMobile, setInputCheckedBarMobile] = React.useState<TitlesMobile>('Disable')
   const [typeWithdrawChecked, setTypeWithdrawChecked] = React.useState<string>('Best_value')
 
-  const [isModalHeimOperations, setIsModalHeimOperations] = React.useState<boolean>(false)
+  const [isModalPoolOperations, setIsModalPoolOperations] = React.useState<boolean>(false)
   const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
 
   const { chainId } = useAppSelector(state => state)
@@ -55,13 +55,13 @@ const HeimOperations = ({
 
   return (
     <div>
-      {isModalHeimOperations ? (
-        <ModalHeimOperations
+      {isModalPoolOperations ? (
+        <ModalPoolOperations
           setInputChecked={setInputChecked}
           inputCheckedBarMobile={inputCheckedBarMobile}
           setInputCheckedBarMobile={setInputCheckedBarMobile}
-          modalOpen={isModalHeimOperations}
-          setModalOpen={setIsModalHeimOperations}
+          modalOpen={isModalPoolOperations}
+          setModalOpen={setIsModalPoolOperations}
           setIsModaWallet={setIsModaWallet}
 
           poolChain={poolChain}
@@ -72,7 +72,7 @@ const HeimOperations = ({
         />
       ) : (
         <>
-          <S.HeimOperationsContainer>
+          <S.PoolOperationsContainer>
             <SelectOperatorCart
               inputChecked={inputChecked}
               handleSetInputChecked={handleSetInputChecked}
@@ -86,14 +86,14 @@ const HeimOperations = ({
               corePoolAddress={corePoolAddress}
               productCategories={productCategories}
             />
-          </S.HeimOperationsContainer>
+          </S.PoolOperationsContainer>
         </>
       )}
 
       <SelectOperatorMobile
         inputCheckedBarMobile={inputCheckedBarMobile}
         setInputCheckedBarMobile={setInputCheckedBarMobile}
-        setModalOpen={setIsModalHeimOperations}
+        setModalOpen={setIsModalPoolOperations}
       />
 
       {isModalWallet &&
@@ -104,4 +104,4 @@ const HeimOperations = ({
   )
 }
 
-export default HeimOperations
+export default PoolOperations

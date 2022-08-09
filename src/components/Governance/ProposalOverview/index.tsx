@@ -80,7 +80,7 @@ const ProposalOverview = () => {
       ) : (
         <>
           <S.Status>
-            <h3>Proposal Overview</h3>
+            <h3>Proposals Overview</h3>
             {stateProposalsList.map((ProposalState, index) => (
               <S.ProposalStateList
                 key={ProposalState.stateProposal + index}

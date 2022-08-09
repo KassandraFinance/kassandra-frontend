@@ -15,10 +15,22 @@ import infoGrayIcon from '../../../../public/assets/utilities/info-gray.svg'
 import { ToastInfo } from '../../Toastify/toast'
 import ModalUserEditInfo from '../../Modals/ModalUserEditInfo'
 import NftImage from '../../NftImage'
+import ModalInfoNFT from '../../Modals/ModalInfoNFT'
 
 import * as S from './styles'
 
-type UserProps = {
+export type NftDetailsProps = {
+  contractType?: string,
+  collectionName?: string,
+  symbol?: string,
+  tokenAddress?: string,
+  tokenId?: string,
+  chain?: string,
+  nftName?: string,
+  nftDescription?: string
+}
+
+export type UserProps = {
   nickname: string,
   twitter: string,
   website: string,
@@ -28,7 +40,8 @@ type UserProps = {
   image?: {
     url: string,
     isNFT: false
-  }
+  },
+  nft: NftDetailsProps | undefined
 }
 
 interface IUserDescriptionProps {
@@ -39,18 +52,19 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   const [isOpenModal, setIsOpenModal] = React.useState(false)
+  const [isOpenModalNft, setIsOpenModalNft] = React.useState(false)
   const [isStateSeeMore, setIsStateSeeMore] = React.useState(false)
   const [userDescription, setUserDescription] = React.useState('')
 
   const [imageUser, setImageUser] = React.useState({ url: '', isNFT: false })
-
   const [userData, setUserData] = React.useState<UserProps>({
     nickname: '',
     twitter: '',
     website: '',
     telegram: '',
     discord: '',
-    description: ''
+    description: '',
+    nft: undefined
   })
 
   const isConnectWallet = userWalletAddress === userWalletUrl
@@ -87,7 +101,8 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
           website: '',
           telegram: '',
           discord: '',
-          description: ''
+          description: '',
+          nft: undefined
         }),
           setImageUser({ url: '', isNFT: false })
       })
@@ -115,7 +130,11 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
         <S.UserInfo>
           <S.UserInfoContent>
             {imageUser.isNFT ? (
-              <NftImage NftUrl={imageUser.url} imageSize="medium" />
+              <NftImage
+                NftUrl={imageUser.url}
+                imageSize="medium"
+                openModalNFT={setIsOpenModalNft}
+              />
             ) : imageUser.url !== undefined &&
               imageUser.url !== null &&
               imageUser.url !== '' ? (
@@ -369,6 +388,14 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
           imageUser={imageUser}
           setUserImage={setImageUser}
           setUserData={setUserData}
+        />
+      )}
+      {isOpenModalNft && (
+        <ModalInfoNFT
+          modalOpen={isOpenModalNft}
+          setModalOpen={setIsOpenModalNft}
+          userData={userData}
+          NftUrl={imageUser.url}
         />
       )}
     </>

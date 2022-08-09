@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Farm from './../templates/Farm'
+import StakeFarm from '../templates/StakeFarm'
 
 export default function Index() {
   return (
@@ -13,7 +13,7 @@ export default function Index() {
         <meta property="og:image:height" content="506" />
         <meta property="og:url" content="https://kassandra.finance/" />
       </Head>
-      <Farm />
+      <StakeFarm />
     </>
   )
 }

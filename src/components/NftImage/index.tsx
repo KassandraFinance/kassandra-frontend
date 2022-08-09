@@ -5,9 +5,10 @@ import * as S from './styles'
 interface INftImageProps {
   NftUrl: string;
   imageSize: 'medium' | 'large' | 'small';
+  openModalNFT?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const NftImage = ({ NftUrl, imageSize }: INftImageProps) => {
+const NftImage = ({ NftUrl, imageSize, openModalNFT }: INftImageProps) => {
   if (imageSize === 'small') {
     return (
       <S.NftImageContainer imageSize={imageSize}>
@@ -36,7 +37,7 @@ const NftImage = ({ NftUrl, imageSize }: INftImageProps) => {
     <>
       <S.NftImageContainer imageSize={imageSize}>
         {imageSize === 'medium' ? (
-          <>
+          <span onClick={() => openModalNFT && openModalNFT(true)}>
             <img src={NftUrl} alt="User NFT image" height="72" width="72" />
             <svg
               width="72"
@@ -52,7 +53,7 @@ const NftImage = ({ NftUrl, imageSize }: INftImageProps) => {
                 />
               </clipPath>
             </svg>
-          </>
+          </span>
         ) : (
           <>
             <img src={NftUrl} alt="User NFT image" height="125" width="125" />

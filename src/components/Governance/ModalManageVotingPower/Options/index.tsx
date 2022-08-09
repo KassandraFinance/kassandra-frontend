@@ -1,9 +1,10 @@
 import Image from 'next/image'
-import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
 import substr from '../../../../utils/substr'
 
 import { IDateProps } from '../DelegateVotingPower'
+
+import ImageProfile from '../../ImageProfile'
 
 import logo from '../../../../../public/assets/logos/kacy-64.svg'
 
@@ -58,9 +59,11 @@ const Options = ({
               >
                 <S.Name>
                   {undelegate ? (
-                    <Jazzicon
+                    <ImageProfile
+                      address={item.nameToken}
                       diameter={24}
-                      seed={jsNumberForAddress(item.nameToken)}
+                      hasAddress={false}
+                      isLink={false}
                     />
                   ) : (
                     <Image src={logo} width={24} height={24} alt="" />

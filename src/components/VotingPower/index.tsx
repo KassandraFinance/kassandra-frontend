@@ -50,7 +50,7 @@ const VotingPower = ({
         <span>
           {yourVotingPowerInProposal === undefined
             ? 'your voting power'
-            : 'Locked voting power'}
+            : 'Snapshot voting power'}
           {yourVotingPowerInProposal === undefined ? (
             <Tippy content="Voting power allows you to create and vote on proposals. To obtain voting power you need to stake your $KACY tokens.">
               <S.Tooltip tabIndex={0}>
@@ -63,7 +63,7 @@ const VotingPower = ({
               </S.Tooltip>
             </Tippy>
           ) : (
-            <Tippy content="Amount of voting power locked from your address to vote on this proposal. This voting power is relative to the block in which the proposal was published.">
+            <Tippy content="Amount of voting power snapshoted from your address to vote on this proposal. This voting power is relative to the block in which the proposal was published.">
               <S.Tooltip tabIndex={0}>
                 <Image
                   src={infoGrayIcon}
@@ -85,7 +85,7 @@ const VotingPower = ({
         <span>
           {yourVotingPowerInProposal === undefined
             ? 'total voting power'
-            : 'your voting power'}
+            : 'actual voting power'}
 
           {yourVotingPowerInProposal === undefined ? (
             <Tippy content="This is the total voting power across all participants of the Kassandra Decentralized Autonomous Organization in this blockchain.">
@@ -99,7 +99,7 @@ const VotingPower = ({
               </S.Tooltip>
             </Tippy>
           ) : (
-            <Tippy content="Voting power allows you to create and vote on proposals. To obtain voting power you need to stake your $KACY tokens.">
+            <Tippy content="This is your actual voting power, it may differ from the snapshot voting power if you earned or lost voting power since the proposal was created.">
               <S.Tooltip tabIndex={0}>
                 <Image
                   src={infoGrayIcon}
