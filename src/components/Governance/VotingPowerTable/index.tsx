@@ -8,9 +8,9 @@ import { SUBGRAPH_URL } from '../../../constants/tokenAddresses'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 
-import ImageProfile from '../ImageProfile'
+import { GET_INFO_USERS } from './graphql'
 
-import { GET_USERS } from './graphql'
+import ImageProfile from '../ImageProfile'
 
 import * as S from './styles'
 
@@ -25,7 +25,12 @@ interface IVotingPowerRankProps {
   isNFT?: boolean;
 }
 
-export const VotingPowerTable = () => {
+interface IVotingPowerProps {
+  skip?: number;
+  take: number;
+}
+
+export const VotingPowerTable = ({ skip = 0, take }: IVotingPowerProps) => {
   const [votingPowerRank, setVotingPowerRank] = React.useState<
     Array<IVotingPowerRankProps>
   >([
@@ -40,10 +45,24 @@ export const VotingPowerTable = () => {
     }
   ])
 
-  const { data } = useSWR([GET_USERS], query => request(SUBGRAPH_URL, query))
+  const { data } = useSWR([GET_INFO_USERS, skip, take], (query, skip, take) =>
+    request(SUBGRAPH_URL, query, { skip, take })
+  )
 
   React.useEffect(() => {
     ;(async () => {
+      setVotingPowerRank([
+        {
+          address: '',
+          votingPower: Big(0),
+          voteWeight: '0',
+          votes: 0,
+          proposalsCreated: 0,
+          name: '',
+          image: ''
+        }
+      ])
+
       if (data) {
         const users = data.users.map(
           async (user: {
@@ -92,7 +111,7 @@ export const VotingPowerTable = () => {
         setVotingPowerRank(await Promise.all(users))
       }
     })()
-  }, [data])
+  }, [data, skip])
 
   return (
     <S.VotingPowerTable>
@@ -115,7 +134,7 @@ export const VotingPowerTable = () => {
                 href={`/profile/${item.address}?tab=governance-data`}
               >
                 <S.Tr>
-                  <S.Td className="rank">{index + 1}</S.Td>
+                  <S.Td className="rank">{index + 1 + skip}</S.Td>
                   <S.Td className="user">
                     <ImageProfile
                       address={item.address}

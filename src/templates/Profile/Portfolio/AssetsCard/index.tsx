@@ -9,7 +9,7 @@ import AnyCard from '../../../../components/AnyCard'
 import { BNtoDecimal } from '../../../../utils/numerals'
 import { useAppSelector } from '../../../../store/hooks'
 
-import infoGray from '../../../../../public/assets/utilities/info-gray.svg'
+import tooltip from '../../../../../public/assets/utilities/tooltip.svg'
 
 import * as S from './styles'
 
@@ -86,7 +86,7 @@ const AssetsCard = ({
                     <Tippy content="This address total KACY balance, accounting wallet holdings, and stake.">
                       <S.Tooltip tabIndex={0}>
                         <Image
-                          src={infoGray}
+                          src={tooltip}
                           alt="Explanation"
                           layout="responsive"
                         />
