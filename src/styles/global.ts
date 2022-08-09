@@ -109,12 +109,12 @@ const GlobalStyles: GlobalStyleComponent<
 
       overflow-x: hidden;
 
-      /* ${selectBackground
+      ${selectBackground
         ? `background-image: url('/assets/images/background-products.png');
         background-repeat: repeat-y;
         background-size: cover;
         background-position-x: center;`
-        : ''} */
+        : ''}
     }
   `}
   ul, ol {
