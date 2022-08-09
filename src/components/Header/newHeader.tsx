@@ -1,15 +1,16 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
 import Button from '../Button'
 
-import kacy64 from '../../../public/assets/logos/kacy-64.svg'
+import kacy96 from '../../../public/assets/logos/kacy-96.svg'
 import logoKassandra from '../../../public/assets/logos/kassandra-header.svg'
 
-import * as S from './styles'
+import * as S from './newStylesHeader'
 
 export type MenuProps = {
   username?: string
@@ -17,6 +18,9 @@ export type MenuProps = {
 
 const Header = () => {
   const { trackEventFunction } = useMatomoEcommerce()
+
+  const router = useRouter()
+  const pathName = router.pathname
 
   return (
     <>
@@ -29,27 +33,29 @@ const Header = () => {
           </Link>
           <Link href="/" passHref>
             <a className="logo-ipad">
-              <Image src={kacy64} width={64} height={64} alt="Kassandra" />
+              <Image src={kacy96} width={64} height={64} alt="Kassandra" />
+            </a>
+          </Link>
+          <Link href="/" passHref>
+            <a className="logo-mobile">
+              <Image src={kacy96} width={35} height={35} alt="Kassandra" />
             </a>
           </Link>
         </S.LogoWrapper>
         <S.Menu>
-          <Link href="/" passHref>
-            <a className="logo-mobile">
-              <Image src={kacy64} width={64} height={64} alt="Kassandra" />
-            </a>
-          </Link>
           <Link href="/investors" passHref>
-            <S.MenuLink>Invest</S.MenuLink>
+            <S.MenuLink active={pathName === '/investors'}>Invest</S.MenuLink>
           </Link>
-          <Link href="/" passHref>
-            <S.MenuLink>Manager</S.MenuLink>
+          <Link href="/manager" passHref>
+            <S.MenuLink active={pathName === '/manager'}>Manager</S.MenuLink>
           </Link>
-          <Link href="/" passHref>
-            <S.MenuLink>DAO</S.MenuLink>
+          <Link href="/dao" passHref>
+            <S.MenuLink active={pathName === '/dao'}>DAO</S.MenuLink>
           </Link>
-          <Link href="/" passHref>
-            <S.MenuLink>Fundation</S.MenuLink>
+          <Link href="/fundation" passHref>
+            <S.MenuLink active={pathName === '/fundation'}>
+              Fundation
+            </S.MenuLink>
           </Link>
           <S.MenuBottom>
             <S.ButtonsWrapper>

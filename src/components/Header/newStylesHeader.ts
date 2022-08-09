@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import theme from '../../styles/theme'
 
 export const Wrapper = styled.div`
@@ -13,13 +13,11 @@ export const Wrapper = styled.div`
   height: 11rem;
 
   z-index: ${theme.layers.menu};
-  @media (max-width: 1200px) {
-    padding: 0 3rem;
-  }
+  padding-inline: 2.4rem;
 
-  @media (max-width: 540px) {
+  @media (max-width: 576px) {
     height: 8rem;
-    padding: 0 1.6rem;
+    padding-inline: 1.6rem;
   }
 `
 
@@ -44,14 +42,6 @@ export const LogoWrapper = styled.div`
     }
   }
 
-  cursor: pointer;
-`
-
-export const Menu = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
   .logo-mobile {
     width: 4.6rem;
     margin-right: -0.8rem;
@@ -64,65 +54,72 @@ export const Menu = styled.nav`
     }
   }
 
-  @media (max-width: 960px) {
-    min-width: 58rem;
-  }
+  cursor: pointer;
+`
 
-  @media (max-width: 768px) {
-    min-width: 42rem;
-  }
+export const Menu = styled.nav`
+  display: flex;
+  justify-content: flex-end;
+  gap: 3.2rem;
 
-  @media (max-width: 540px) {
-    min-width: 100%;
+  @media (max-width: 992px) {
+    gap: 2.4rem;
   }
 `
+
+interface IMenuLinkProps {
+  active: boolean;
+}
 
 export const MenuLink = styled.a`
   position: relative;
 
-  margin-right: 2.4rem;
   padding-top: 1.2rem;
   padding-bottom: 1.3rem;
 
   color: ${theme.colors.snow};
   font-size: ${theme.font.sizes.font16};
-  font-weight: ${theme.font.weight.light};
   text-decoration: none;
   text-align: center;
 
   outline: none;
 
-  &:hover,
-  &:focus-within {
-    &::after {
-      content: '';
-      position: absolute;
+  ${({ active }: IMenuLinkProps) => css`
+    font-weight: ${active
+      ? theme.font.weight.semibold
+      : theme.font.weight.light};
+  `}
 
-      display: block;
-      height: 0.3rem;
-      margin-top: 1.2rem;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
 
-      background-color: ${theme.colors.cyan};
-      border-radius: 0.3rem;
+    left: 50%;
+    width: 0;
+    height: 0.3rem;
 
-      animation: hoverAnimation 0.2s forwards;
-    }
+    background-color: ${theme.colors.cyan};
+    border-radius: 0.15rem;
+    box-shadow: 0 0 0.6rem ${theme.colors.cyan};
 
-    @keyframes hoverAnimation {
-      from {
-        width: 0;
-        left: 50%;
-      }
-      to {
-        width: 100%;
-        left: 0;
-      }
-    }
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+    transition-property: width left;
+
+    ${({ active }: IMenuLinkProps) => css`
+      left: ${active ? '0' : '50%'};
+      width: ${active ? '100%' : '0'};
+    `}
   }
 
-  @media (max-width: 540px) {
+  &:hover::after {
+    left: 0%;
+    width: 100%;
+  }
+
+  @media (max-width: 576px) {
     font-size: ${theme.font.sizes.font14};
-    margin-right: 0;
   }
 `
 
@@ -140,30 +137,27 @@ export const MenuLinkDisable = styled.a`
   text-align: center;
 
   cursor: not-allowed;
-  &:hover {
-    &::after {
-      content: '';
-      position: absolute;
 
-      display: block;
-      height: 0.3rem;
-      margin-top: 1.2rem;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
 
-      background-color: ${theme.colors.grayDisabled};
-      border-radius: 0.3rem;
+    left: 50%;
+    width: 0;
+    height: 0.3rem;
 
-      animation: hoverAnimation 0.3s forwards;
-    }
-    @keyframes hoverAnimation {
-      from {
-        width: 0;
-        left: 50%;
-      }
-      to {
-        width: 100%;
-        left: 0;
-      }
-    }
+    background-color: ${theme.colors.grayDisabled};
+    border-radius: 0.15rem;
+
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+    transition-property: width left;
+  }
+
+  &:hover::after {
+    left: 0%;
+    width: 100%;
   }
 
   @media (max-width: 768px) {
