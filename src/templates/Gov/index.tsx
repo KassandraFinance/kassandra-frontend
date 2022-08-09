@@ -28,13 +28,15 @@ const Gov = () => {
   const chain =
     process.env.NEXT_PUBLIC_MASTER === '1' ? chains.avalanche : chains.fuji
 
+  const take = 5
+
   return (
     <>
       <Header />
       <Breadcrumb>
         <BreadcrumbItem href="/">Home</BreadcrumbItem>
         <BreadcrumbItem href="/gov" isLastPage>
-          Vote
+          Governance
         </BreadcrumbItem>
       </Breadcrumb>
       <S.VoteContent>
@@ -67,7 +69,7 @@ const Gov = () => {
                 <Image src={externalLink} alt="" />
               </S.LinkForum>
             </S.TitleAndLinkContent>
-            <ProposalTable />
+            <ProposalTable take={take} />
             <ExternalLink
               hrefNext="/gov/proposals"
               text="Check more proposals"
@@ -76,7 +78,7 @@ const Gov = () => {
               image={votingPower}
               title="Voting Power Leaderboard"
             />
-            <VotingPowerTable />
+            <VotingPowerTable take={take} />
             <ExternalLink
               hrefNext="/gov/leaderboard"
               text="Check leaderboard"
