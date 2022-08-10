@@ -103,5 +103,9 @@ export const BtnWrapper = styled.div`
     button {
       width: 100%;
     }
+
+    a {
+      width: 100%;
+    }
   }
 `
