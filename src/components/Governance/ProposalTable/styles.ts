@@ -139,8 +139,8 @@ export const Td = styled.td`
       padding: 2.4rem 3.2rem;
 
       background-color: ${theme.colors.darkPurple};
-      border-top: 0.1px solid ${theme.colors.grayDisabled};
-      border-bottom: 0.1px solid ${theme.colors.grayDisabled};
+      border-top: 0.1rem solid ${theme.colors.grayDisabled};
+      border-bottom: 0.1rem solid ${theme.colors.grayDisabled};
 
       @media (max-width: 768px) {
         padding: 2.4rem;
