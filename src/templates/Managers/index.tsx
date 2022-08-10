@@ -1,10 +1,11 @@
-import AllocationsInexpensive from './AllocationsInexpensive'
-import ChangeAllocations from './ChangeAllocations'
-import CreateFund from './CreateFunds'
-import FundManager from './FundManager'
-import HeroManager from './Hero'
-import ManagersInterface from './ManagersInterface'
 import Header from '../../components/Header/newHeader'
+import HeroManager from './Hero'
+import FundManager from './FundManager'
+import ChangeAllocations from './ChangeAllocations'
+import AllocationsInexpensive from './AllocationsInexpensive'
+import ManagersInterface from './ManagersInterface'
+import CreateFund from './CreateFunds'
+import Contribute from '../TokenHolder/Contribute'
 
 import * as S from './styles'
 
@@ -23,6 +24,7 @@ const Managers = () => (
           <ManagersInterface />
           <AllocationsInexpensive />
           <CreateFund />
+          <Contribute />
         </S.ManagerContent>
       </S.ManagerContainer>
     </S.ManagerMainContainer>
