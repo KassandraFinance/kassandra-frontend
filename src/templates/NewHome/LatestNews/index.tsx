@@ -43,7 +43,7 @@ const LatestNews = () => {
     1250: { items: 3 }
   }
 
-  const items = mediumPosts.map(post => {
+  const cards = mediumPosts.map(post => {
     return (
       <NewsCard
         key={post.title}
@@ -75,7 +75,7 @@ const LatestNews = () => {
             mouseTracking
             infinite
             disableButtonsControls
-            items={items}
+            items={cards}
             responsive={responsive}
           />
         )}
