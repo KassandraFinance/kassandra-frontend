@@ -143,7 +143,10 @@ const IntroGovernance = ({
                 }
                 onClick={() => setIsModalManageVotingPower(true)}
               />
-              <ExternalLink text="Obtain Voting Power" hrefNext="#" />
+              <ExternalLink
+                text="Obtain Voting Power"
+                hrefNext="/farm?tab=stake"
+              />
             </S.ManageDelegation>
           </S.AllVotingPowerCard>
         </S.VotingPowerContent>

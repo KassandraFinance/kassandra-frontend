@@ -52,7 +52,7 @@ const Gov = () => {
             <TitleSection image={overview} title="Overview" />
             <Overview />
             <S.OverViewLinks>
-              <ExternalLink hrefNext="/farm" text="Obtain more" />
+              <ExternalLink hrefNext="farm?tab=stake" text="Obtain more" />
               <ExternalLink
                 hrefNext={`/profile/${userWalletAddress}?tab=governance-data`}
                 text="Manage Delegation"
