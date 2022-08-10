@@ -52,7 +52,7 @@ export const Title = styled.h5`
 `
 
 export const SubTitle = styled.span`
-  color: #ffffff;
+  color: ${theme.colors.white};
   font-weight: ${theme.font.weight.medium};
   font-size: ${theme.font.sizes.font20};
   line-height: 110%;
@@ -65,7 +65,7 @@ export const SubTitle = styled.span`
 `
 
 export const Text = styled.p`
-  color: #ffffff;
+  color: ${theme.colors.white};
   font-weight: ${theme.font.weight.light};
   font-size: ${theme.font.sizes.font16};
   line-height: ${theme.font.sizes.font24};

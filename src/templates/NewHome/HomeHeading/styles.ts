@@ -70,7 +70,7 @@ export const Subtitle = styled.h4`
 `
 
 export const Text = styled.p`
-  color: #ffffff;
+  color: ${theme.colors.white};
   font-weight: ${theme.font.weight.light};
   font-size: ${theme.font.sizes.font16};
   line-height: ${theme.font.sizes.font24};

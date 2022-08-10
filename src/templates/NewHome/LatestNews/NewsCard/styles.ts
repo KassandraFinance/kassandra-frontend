@@ -86,12 +86,12 @@ export const Text = styled.p`
 export const BtnWrapper = styled.a`
   text-decoration: none;
   button {
-    border-color: #fff;
+    border-color: ${theme.colors.white};
 
     &:hover,
     &:focus {
-      background-color: #fff;
-      outline: #fff;
+      background-color: ${theme.colors.white};
+      outline: ${theme.colors.white};
     }
   }
 `

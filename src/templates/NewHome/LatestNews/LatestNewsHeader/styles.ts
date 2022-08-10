@@ -26,7 +26,7 @@ export const LatestNewsHeadingWrapper = styled.div`
 export const LatestNewsHeading = styled.h5`
   margin-top: 0.5rem;
 
-  color: #ffffff;
+  color: ${theme.colors.white};
   font-weight: ${theme.font.weight.bold};
   font-size: ${theme.font.sizes.font32};
   line-height: 3.5rem;

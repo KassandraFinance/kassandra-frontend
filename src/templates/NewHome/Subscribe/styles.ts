@@ -45,7 +45,7 @@ export const TextWrapper = styled.div`
 export const Title = styled.h4`
   margin-bottom: 2.4rem;
 
-  color: #ffffff;
+  color: ${theme.colors.white};
   font-weight: ${theme.font.weight.black};
   font-size: ${theme.font.sizes.font48};
   line-height: 5rem;
@@ -68,7 +68,7 @@ export const Title = styled.h4`
 export const Text = styled.p`
   margin-bottom: 3.2rem;
 
-  color: #ffffff;
+  color: ${theme.colors.white};
   font-weight: ${theme.font.weight.light};
   font-size: ${theme.font.sizes.font16};
   line-height: ${theme.font.sizes.font24};

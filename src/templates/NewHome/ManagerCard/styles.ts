@@ -18,7 +18,7 @@ export const ManagerCardWapper = styled.div`
   );
   backdrop-filter: blur(1.86574rem);
 
-  border: 1px solid
+  border: 0.1rem solid
     linear-gradient(
       180deg,
       rgba(255, 255, 255, 0.5) 0%,
@@ -84,7 +84,7 @@ export const Title = styled.h5`
 `
 
 export const Text = styled.p`
-  color: #ffffff;
+  color: ${theme.colors.white};
   font-weight: ${theme.font.weight.light};
   font-size: ${theme.font.sizes.font16};
   line-height: ${theme.font.sizes.font24};

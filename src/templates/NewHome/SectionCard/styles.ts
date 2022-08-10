@@ -93,7 +93,7 @@ export const SubTitle = styled.h4`
   width: 55rem;
   margin-bottom: 2.4rem;
 
-  color: #ffffff;
+  color: ${theme.colors.white};
   font-weight: ${theme.font.weight.black};
   font-size: ${theme.font.sizes.font48};
   line-height: 5rem;
@@ -116,7 +116,7 @@ export const Text = styled.p`
   width: 47.7rem;
   margin-bottom: 3.2rem;
 
-  color: #ffffff;
+  color: ${theme.colors.white};
   font-weight: ${theme.font.weight.light};
   font-size: ${theme.font.sizes.font16};
   line-height: ${theme.font.sizes.font24};

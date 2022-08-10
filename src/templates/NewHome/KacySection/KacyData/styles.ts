@@ -13,7 +13,7 @@ export const KacyDataContainer = styled.div`
 `
 
 export const Title = styled.h5`
-  color: #ffffff;
+  color: ${theme.colors.white};
   font-weight: ${theme.font.weight.bold};
   font-size: ${theme.font.sizes.font32};
   line-height: 3.5rem;
@@ -30,7 +30,7 @@ export const Title = styled.h5`
 `
 
 export const Text = styled.p`
-  color: #ffffff;
+  color: ${theme.colors.white};
   font-weight: ${theme.font.weight.light};
   font-size: ${theme.font.sizes.font16};
   line-height: ${theme.font.sizes.font24};
@@ -74,15 +74,15 @@ export const BtnWrapper = styled.div`
     width: 23.1rem;
 
     &:last-of-type {
-      border-color: #fff;
+      border-color: ${theme.colors.white};
 
       &:hover {
-        background-color: #fff;
+        background-color: ${theme.colors.white};
       }
 
       &:focus {
-        outline: #fff;
-        background-color: #fff;
+        outline: ${theme.colors.white};
+        background-color: ${theme.colors.white};
       }
     }
   }
