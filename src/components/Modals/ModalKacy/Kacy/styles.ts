@@ -59,7 +59,7 @@ export const CloseBtn = styled.button`
 
 export const HeaderTitle = styled.div`
   color: ${theme.colors.snow};
-  font-weight: ${theme.font.weight.bold};
+  font-weight: ${theme.font.weight.medium};
   font-size: ${theme.font.sizes.font18};
   line-height: 100%;
   letter-spacing: 0.05em;
@@ -122,7 +122,7 @@ export const Value = styled.span`
   gap: 0.4rem;
 
   color: ${theme.colors.snow};
-  font-weight: ${theme.font.weight.bold};
+  font-weight: ${theme.font.weight.medium};
   font-size: ${theme.font.sizes.font18};
 
   span {
@@ -189,9 +189,11 @@ export const BodyTitle = styled.span`
 `
 
 export const KacyTotal = styled.span`
+  margin-top: 0.4rem;
+
   color: ${theme.colors.snow};
-  font-weight: ${theme.font.weight.bold};
-  font-size: ${theme.font.sizes.font40};
+  font-weight: ${theme.font.weight.medium};
+  font-size: ${theme.font.sizes.font32};
   line-height: 100%;
   letter-spacing: 0.05em;
 
