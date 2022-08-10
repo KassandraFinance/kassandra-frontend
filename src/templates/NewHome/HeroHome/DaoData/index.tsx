@@ -3,10 +3,10 @@ import useSWR from 'swr'
 import { request } from 'graphql-request'
 import Big from 'big.js'
 
-import DaoCard from '../DaoCard'
-
 import { SUBGRAPH_URL, products } from '../../../../constants/tokenAddresses'
 import { GET_DAO_DATA } from './graphql'
+
+import DaoCard from '../DaoCard'
 
 import * as S from './styles'
 
@@ -29,11 +29,12 @@ const DaoData = () => {
       title: 'withdraw fee'
     }
   ])
-  const ids = products.map(product => product.sipAddress)
 
-  const { data } = useSWR([GET_DAO_DATA, ids], (query, ids) =>
+  const sipAddresses = products.map(product => product.sipAddress)
+
+  const { data } = useSWR([GET_DAO_DATA, sipAddresses], (query, sipAddresses) =>
     request(SUBGRAPH_URL, query, {
-      ids: ids,
+      ids: sipAddresses,
       day: Math.trunc(Date.now() / 1000 - 60 * 60 * 24)
     })
   )
