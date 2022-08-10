@@ -16,7 +16,7 @@ interface IMediumPost {
   categories: string[];
   content: string;
   description: string;
-  enclosure: {};
+  enclosure: object;
   guid: string;
   link: string;
   pubDate: string;
