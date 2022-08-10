@@ -6,11 +6,8 @@ import * as S from './styles'
 const HeroManager = () => (
   <>
     <S.HeroContainer>
+      <S.ImageContent />
       <S.HeroContent>
-        <S.ImageContent>
-          <img src="/assets/images/manager-hero.svg" alt="" />
-        </S.ImageContent>
-
         <S.ManagerNumberPage>
           <p>02</p>
           <span />

@@ -4,11 +4,16 @@ import CreateFund from './CreateFunds'
 import FundManager from './FundManager'
 import HeroManager from './Hero'
 import ManagersInterface from './ManagersInterface'
+import Header from '../../components/Header/newHeader'
 
 import * as S from './styles'
 
 const Managers = () => (
   <>
+    <S.HeaderContainer>
+      <Header />
+    </S.HeaderContainer>
+
     <S.ManagerMainContainer>
       <S.ManagerContainer>
         <S.ManagerContent>

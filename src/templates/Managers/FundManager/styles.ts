@@ -6,7 +6,6 @@ export const FundManagerContainer = styled.section`
   flex-direction: column;
   padding-left: 6rem;
   padding-right: 6rem;
-  margin-top: 7rem;
 
   @media (max-width: 500px) {
     margin-top: -10rem;

@@ -33,3 +33,10 @@ export const ManagerContent = styled.div`
     gap: 18rem;
   }
 `
+
+export const HeaderContainer = styled.div`
+  position: absolute;
+  top: 0;
+
+  width: 100%;
+`

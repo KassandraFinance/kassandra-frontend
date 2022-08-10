@@ -2,20 +2,17 @@ import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
 export const HeroContainer = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 
-  /* height: 74.4rem; */
+  height: 100vh;
   width: 100%;
 
   padding-left: 6rem;
   padding-right: 6rem;
-
-  @media (max-width: 600px) {
-    height: 50rem;
-  }
 
   @media (max-width: 500px) {
     padding-right: 2rem;
@@ -29,40 +26,36 @@ export const HeroContent = styled.div`
   flex-direction: column;
   justify-content: center;
   max-width: 87.8rem;
-  height: 74.4rem;
 
   z-index: 10;
 `
 
 export const ScrollContainer = styled.div`
-  @media (max-width: 768px) {
-    display: none;
-  }
+  position: absolute;
+  bottom: 1rem;
 `
 
 export const ImageContent = styled.span`
   position: absolute;
-  /* margin-top: 10rem; */
+  bottom: 0;
 
-  img {
-    width: 81.1rem;
-    height: 81.1rem;
+  background-image: url('/assets/images/manager-hero.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  height: calc(100vh - 4rem);
+  width: 100%;
 
-    @media (max-width: 872px) {
-      width: 100%;
-      height: 100%;
-    }
+  @media (max-width: 768px) {
+    height: 100vh;
+    background-position: top 1rem left 2rem;
   }
-
-  @media (max-width: 700px) {
-    margin-top: -12rem;
+  @media (max-width: 600px) {
+    background-position: top 6rem left 2rem;
   }
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  z-index: -1;
+  @media (max-width: 400px) {
+    background-position: top 9rem left 2rem;
+  }
 
   animation: fadeInHero ease 3s;
   -webkit-animation: fadeInHero ease 3s;
