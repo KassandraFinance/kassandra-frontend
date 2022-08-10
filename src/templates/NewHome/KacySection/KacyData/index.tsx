@@ -11,13 +11,6 @@ type KacyMarketDataType = {
   title: string
 }
 
-const URL_API: { [key: number | string]: string } = {
-  1: 'https://kassandra.finance/api/overview',
-  2: 'https://alpha.kassandra.finance/api/overview',
-  3: 'https://demo.kassandra.finance/api/overview',
-  4: 'http://localhost:3000/api/overview'
-}
-
 const KacyData = () => {
   const [kacyMarketData, setKacyMarketData] = React.useState<
     KacyMarketDataType[]
@@ -40,7 +33,7 @@ const KacyData = () => {
     }
   ])
 
-  const { data } = useSWR(URL_API[process.env.NEXT_PUBLIC_URL_API || 4])
+  const { data } = useSWR('/api/overview')
 
   React.useEffect(() => {
     if (data) {
