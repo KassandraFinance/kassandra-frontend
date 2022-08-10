@@ -46,7 +46,7 @@ export const NewsCardBody = styled.div`
 
   padding: 2.4rem;
 
-  background: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.05);
 `
 
 export const TextWrapper = styled.div`
