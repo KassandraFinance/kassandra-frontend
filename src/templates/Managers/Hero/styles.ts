@@ -14,9 +14,9 @@ export const HeroContainer = styled.div`
   padding-left: 6rem;
   padding-right: 6rem;
 
-  @media (max-width: 500px) {
-    padding-right: 2rem;
-    padding-left: 2rem;
+  @media (max-width: 576px) {
+    padding-right: 1.6rem;
+    padding-left: 1.6rem;
   }
 `
 export const HeroContent = styled.div`
@@ -48,13 +48,7 @@ export const ImageContent = styled.span`
 
   @media (max-width: 768px) {
     height: 100vh;
-    background-position: top 1rem left 2rem;
-  }
-  @media (max-width: 600px) {
-    background-position: top 6rem left 2rem;
-  }
-  @media (max-width: 400px) {
-    background-position: top 9rem left 2rem;
+    background-position: 50% 35%;
   }
 
   animation: fadeInHero ease 3s;
