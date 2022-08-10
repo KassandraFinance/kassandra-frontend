@@ -33,14 +33,9 @@ export const HeroContent = styled.div`
   z-index: 10;
 `
 
-export const test = styled.div`
-  position: relative;
-
-  > div {
-    position: absolute;
-    bottom: -25rem;
-    right: -3rem;
-  }
+export const ScrollContainer = styled.div`
+  position: absolute;
+  bottom: -25rem;
 
   @media (max-width: 768px) {
     display: none;

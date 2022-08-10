@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 
 import token96 from '../../../public/assets/logos/kacy-96.svg'
-import ethLogo from '../../../public/assets/eth-logo.svg'
+import ethLogo from '../../../public/assets/logos/eth-logo.svg'
 import AVAXLogo from '../../../public/assets/logos/avalanche.svg'
 import bscLogo from '../../../public/assets/logos/bsc.svg'
 import cronosLogo from '../../../public/assets/logos/cronos.svg'

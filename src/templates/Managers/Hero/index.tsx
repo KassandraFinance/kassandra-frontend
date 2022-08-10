@@ -1,5 +1,6 @@
 import Button from '../../../components/Button'
-// import Scroll from '../../../components/Scroll'
+import Scroll from '../../../components/Scroll'
+
 import * as S from './styles'
 
 const HeroManager = () => (
@@ -37,9 +38,9 @@ const HeroManager = () => (
           />
         </S.HeroDescription>
       </S.HeroContent>
-      {/* <S.test>
+      <S.ScrollContainer>
         <Scroll />
-      </S.test> */}
+      </S.ScrollContainer>
     </S.HeroContainer>
   </>
 )
