@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
+export const DaoData = styled.div`
   position: relative;
 
   display: grid;

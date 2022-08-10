@@ -90,7 +90,7 @@ const DaoData = () => {
   }, [data])
 
   return (
-    <S.Container>
+    <S.DaoData>
       {daoData.map(item => (
         <DaoCard
           key={item.title}
@@ -98,7 +98,7 @@ const DaoData = () => {
           title={item.title}
         />
       ))}
-    </S.Container>
+    </S.DaoData>
   )
 }
 
