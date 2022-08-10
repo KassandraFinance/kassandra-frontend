@@ -9,7 +9,7 @@ import ManagerSection from './ManagerSection'
 import DaoSection from './DaoSection'
 import KacySection from './KacySection'
 import LatestNews from './LatestNews'
-import Contribute from '../TokenHolder/Contribute'
+import Subscribe from './Subscribe'
 
 import light3 from '../../../public/assets/images/backgroundHome/light-mobile3.png'
 import lightTable5 from '../../../public/assets/images/backgroundHome/light-tablet5.png'
@@ -67,7 +67,7 @@ const NewHome = () => {
 
       <LatestNews />
 
-      <Contribute />
+      <Subscribe />
     </S.HomeBackgroundContainer>
   )
 }
