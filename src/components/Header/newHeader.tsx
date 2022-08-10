@@ -33,12 +33,7 @@ const Header = () => {
           </Link>
           <Link href="/" passHref>
             <a className="logo-ipad">
-              <Image src={kacy96} width={64} height={64} alt="Kassandra" />
-            </a>
-          </Link>
-          <Link href="/" passHref>
-            <a className="logo-mobile">
-              <Image src={kacy96} width={35} height={35} alt="Kassandra" />
+              <Image src={kacy96} width={27} height={24} alt="Kassandra" />
             </a>
           </Link>
         </S.LogoWrapper>

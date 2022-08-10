@@ -9,14 +9,17 @@ export const Wrapper = styled.div`
   align-items: center;
 
   margin: 0 auto;
+  margin-top: 3.2rem;
   max-width: 114rem;
-  height: 11rem;
 
   z-index: ${theme.layers.menu};
   padding-inline: 2.4rem;
 
+  @media (max-width: 960px) {
+    margin-top: 2.4rem;
+  }
+
   @media (max-width: 576px) {
-    height: 8rem;
     padding-inline: 1.6rem;
   }
 `
@@ -29,28 +32,8 @@ export const LogoWrapper = styled.div`
   }
 
   .logo-ipad {
-    > img {
-      width: 7rem;
-    }
-
     @media (min-width: 961px) {
       display: none;
-    }
-
-    @media (max-width: 539px) {
-      display: none;
-    }
-  }
-
-  .logo-mobile {
-    width: 4.6rem;
-    margin-right: -0.8rem;
-
-    @media (min-width: 541px) {
-      display: none;
-    }
-    @media (max-width: 360px) {
-      width: 4.2rem;
     }
   }
 
@@ -60,6 +43,7 @@ export const LogoWrapper = styled.div`
 export const Menu = styled.nav`
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   gap: 3.2rem;
 
   @media (max-width: 992px) {
@@ -73,9 +57,6 @@ interface IMenuLinkProps {
 
 export const MenuLink = styled.a`
   position: relative;
-
-  padding-top: 1.2rem;
-  padding-bottom: 1.3rem;
 
   color: ${theme.colors.snow};
   font-size: ${theme.font.sizes.font16};
@@ -93,14 +74,14 @@ export const MenuLink = styled.a`
   &::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -1rem;
 
     left: 50%;
     width: 0;
-    height: 0.3rem;
+    height: 0.2rem;
 
     background-color: ${theme.colors.cyan};
-    border-radius: 0.15rem;
+    border-radius: 0.1rem;
     box-shadow: 0 0 0.6rem ${theme.colors.cyan};
 
     transition-duration: 300ms;
@@ -123,74 +104,74 @@ export const MenuLink = styled.a`
   }
 `
 
-export const MenuLinkDisable = styled.a`
-  position: relative;
+// export const MenuLinkDisable = styled.a`
+//   position: relative;
 
-  margin-right: 4.2rem;
-  padding-top: 1.2rem;
-  padding-bottom: 1.3rem;
+//   margin-right: 4.2rem;
+//   padding-top: 1.2rem;
+//   padding-bottom: 1.3rem;
 
-  color: ${theme.colors.grayDisabled};
-  font-size: ${theme.font.sizes.font16};
-  font-weight: ${theme.font.weight.light};
-  text-decoration: none;
-  text-align: center;
+//   color: ${theme.colors.grayDisabled};
+//   font-size: ${theme.font.sizes.font16};
+//   font-weight: ${theme.font.weight.light};
+//   text-decoration: none;
+//   text-align: center;
 
-  cursor: not-allowed;
+//   cursor: not-allowed;
 
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
+//   &::after {
+//     content: '';
+//     position: absolute;
+//     bottom: 0;
 
-    left: 50%;
-    width: 0;
-    height: 0.3rem;
+//     left: 50%;
+//     width: 0;
+//     height: 0.3rem;
 
-    background-color: ${theme.colors.grayDisabled};
-    border-radius: 0.15rem;
+//     background-color: ${theme.colors.grayDisabled};
+//     border-radius: 0.15rem;
 
-    transition-duration: 300ms;
-    transition-timing-function: ease-in-out;
-    transition-property: width left;
-  }
+//     transition-duration: 300ms;
+//     transition-timing-function: ease-in-out;
+//     transition-property: width left;
+//   }
 
-  &:hover::after {
-    left: 0%;
-    width: 100%;
-  }
+//   &:hover::after {
+//     left: 0%;
+//     width: 100%;
+//   }
 
-  @media (max-width: 768px) {
-    margin-right: 3.2rem;
-  }
+//   @media (max-width: 768px) {
+//     margin-right: 3.2rem;
+//   }
 
-  @media (max-width: 541px) {
-    margin-right: 2rem;
-    font-size: ${theme.font.sizes.font14};
-  }
+//   @media (max-width: 541px) {
+//     margin-right: 2rem;
+//     font-size: ${theme.font.sizes.font14};
+//   }
 
-  @media (max-width: 360px) {
-    margin-right: 1.4rem;
-    font-size: ${theme.font.sizes.font12};
-  }
+//   @media (max-width: 360px) {
+//     margin-right: 1.4rem;
+//     font-size: ${theme.font.sizes.font12};
+//   }
 
-  img {
-    position: absolute;
-    right: -2rem;
-    top: 1.8rem;
+//   img {
+//     position: absolute;
+//     right: -2rem;
+//     top: 1.8rem;
 
-    @media (max-width: 540px) {
-      right: -1.6rem;
-      top: 1.7rem;
-    }
-    @media (max-width: 360px) {
-      top: 1.6rem;
-    }
-  }
-`
+//     @media (max-width: 540px) {
+//       right: -1.6rem;
+//       top: 1.7rem;
+//     }
+//     @media (max-width: 360px) {
+//       top: 1.6rem;
+//     }
+//   }
+// `
 
 export const MenuBottom = styled.div`
-  @media (max-width: 840px) {
+  @media (max-width: 576px) {
     position: fixed;
     right: 0;
     bottom: 0;
