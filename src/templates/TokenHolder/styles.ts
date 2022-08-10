@@ -32,22 +32,29 @@ export const Hero = styled.section`
 
   width: 100%;
   max-width: 102rem;
-  height: 67.2rem;
+  height: 57.2rem;
 
   margin: 0 auto;
   margin-top: 18rem;
   padding: 0 1.6rem;
   padding-top: 10rem;
 
-  background-image: url('/assets/images/hero-token-holder-2.png');
-  background-position: center;
+  background-image: url('/assets/images/hero-token-holder.png');
+  /* background-position: center; */
   background-repeat: no-repeat;
+  background-size: cover;
   /* background-blend-mode: color-dodge; */
   background-color: #151117;
 
   @media (max-width: 560px) {
     background-position: 55% 53%;
     background-size: 180%;
+  }
+
+  .button {
+    flex-direction: row-reverse;
+    gap: 0.8rem;
+    margin: 0 auto;
   }
 `
 
@@ -152,13 +159,13 @@ export const Heading =
 const displayModifiers = {
   '1': () => css`
     font-weight: 900;
-    font-size: 64px;
-    line-height: 72px;
+    font-size: 6.4rem;
+    line-height: 7.2rem;
   `,
   '2': () => css`
     font-weight: 900;
-    font-size: 48px;
-    line-height: 53px;
+    font-size: 4.8rem;
+    line-height: 5.3rem;
   `
 }
 
@@ -313,4 +320,8 @@ export const SubHeading = styled.h3`
   letter-spacing: 0.02em;
 
   color: #ffffff;
+`
+
+export const ScrollWrapper = styled.div`
+  margin: 3rem 0;
 `

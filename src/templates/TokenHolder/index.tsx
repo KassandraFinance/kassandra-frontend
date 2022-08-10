@@ -1,4 +1,5 @@
-import Scroll from '../../components/Scroll'
+import Image from 'next/image'
+
 import CommunityTenets from './CommunityTenets'
 import Contribute from './Contribute'
 import FlowingRevenue from './FlowingRevenue'
@@ -6,6 +7,9 @@ import Governance from './Governance'
 import LockVote from './LockVote'
 import Scarcity from './Scarcity'
 import Tokenomics from './Tokenomics'
+
+import Button from '../../components/Button'
+import Scroll from '../../components/Scroll'
 
 import * as S from './styles'
 
@@ -28,10 +32,20 @@ const TokenHolder = () => {
             the pie, the better your slice.
           </S.Description>
         </S.HeroText>
-        <S.Button>Start Buying Kacy</S.Button>
+        <Button
+          className="button"
+          size="huge"
+          icon={
+            <Image src="/assets/iconGradient/kacy.svg" width={18} height={18} />
+          }
+          backgroundPrimary
+          text="Start Buying Kacy"
+        />
       </S.Hero>
 
-      <Scroll />
+      <S.ScrollWrapper>
+        <Scroll />
+      </S.ScrollWrapper>
 
       <CommunityTenets />
       <Governance />
