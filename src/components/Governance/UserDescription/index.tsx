@@ -10,7 +10,7 @@ import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 import substr from '../../../utils/substr'
 import { useAppSelector } from '../../../store/hooks'
 
-import infoGrayIcon from '../../../../public/assets/utilities/info-gray.svg'
+import tooltip from '../../../../public/assets/utilities/tooltip.svg'
 
 import { ToastInfo } from '../../Toastify/toast'
 import ModalUserEditInfo from '../../Modals/ModalUserEditInfo'
@@ -344,12 +344,7 @@ const UserDescription = ({ userWalletUrl }: IUserDescriptionProps) => {
             PROFILE DESCRIPTION{' '}
             <Tippy content="Users may choose to add a profile description linked to their own wallet. Kassandra does not hold any responsibility for wrong information, this section does not constitute an endorsement, guarantee, warranty, or recommendation by Kassandra. All information is displayed exactly as provided by the owner of the wallet address.">
               <span>
-                <Image
-                  src={infoGrayIcon}
-                  alt="Explanation"
-                  width={16}
-                  height={16}
-                />
+                <Image src={tooltip} alt="Explanation" width={16} height={16} />
               </span>
             </Tippy>
           </p>

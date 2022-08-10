@@ -56,7 +56,7 @@ const ImageProfile = ({
   return (
     <S.Image
       fontSize={fontSize}
-      onClick={() => router.push(`/profile/${address}${tab}`)}
+      onClick={() => isLink && router.push(`/profile/${address}${tab}`)}
     >
       {dataImageProfile.name !== '' ? (
         dataImageProfile.isNFT ? (

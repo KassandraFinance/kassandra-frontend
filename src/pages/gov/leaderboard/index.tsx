@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-import Proposals from '../../../templates/Gov/Proposals'
+import Leaderboard from '../../../templates/Gov/Leaderboard'
 
 export default function Index() {
   return (
@@ -14,7 +14,7 @@ export default function Index() {
         <meta property="og:image:height" content="506" />
         <meta property="og:url" content="https://kassandra.finance/" />
       </Head>
-      <Proposals />
+      <Leaderboard />
     </>
   )
 }

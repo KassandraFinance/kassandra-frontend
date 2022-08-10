@@ -54,34 +54,56 @@ export const OwnAndReceivedTable = ({
 
   const { data } = useSWR(URL_API[process.env.NEXT_PUBLIC_URL_API || 4])
 
+  const isMasterBranch = process.env.NEXT_PUBLIC_MASTER === '1' ? true : false
+
   function handleCheckValuePool(pool: string) {
-    if (pool === '0') {
-      return 'No'
-    } else if (pool === '1') {
-      return '15'
+    if (isMasterBranch) {
+      switch (pool) {
+        case '2':
+          return 'No withdraw delay'
+        case '3':
+          return '15 withdraw delay'
+        case '4':
+          return '45 withdraw delay'
+        default:
+          return 'Vesting Pool'
+      }
     } else {
-      return '45'
+      switch (pool) {
+        case '0':
+          return 'No withdraw delay'
+        case '1':
+          return '15 withdraw delay'
+        case '2':
+          return '45 withdraw delay'
+        default:
+          break
+      }
     }
   }
 
   function handleCheckValuePoolPerVP(pool: string) {
-    const isMasterBranch = process.env.NEXT_PUBLIC_MASTER === '1' ? true : false
-
     if (isMasterBranch) {
-      if (pool === '0') {
-        return '1'
-      } else if (pool === '1') {
-        return '2'
-      } else {
-        return '3'
+      switch (pool) {
+        case '2':
+          return '1'
+        case '3':
+          return '2'
+        case '4':
+          return '3'
+        default:
+          return '1'
       }
     } else {
-      if (pool === '0') {
-        return '1'
-      } else if (pool === '1') {
-        return '3'
-      } else {
-        return '5'
+      switch (pool) {
+        case '0':
+          return '1'
+        case '1':
+          return '2'
+        case '2':
+          return '3'
+        default:
+          break
       }
     }
   }
@@ -127,9 +149,7 @@ export const OwnAndReceivedTable = ({
                       <Image src={avax} width={32} height={32} alt="" />
                       <div>
                         <p>KACY</p>
-                        <span>
-                          {handleCheckValuePool(item.pool)} withdraw delay
-                        </span>
+                        <span>{handleCheckValuePool(item.pool)}</span>
                       </div>
                     </S.Td>
                     <S.Td className="delegating-to">

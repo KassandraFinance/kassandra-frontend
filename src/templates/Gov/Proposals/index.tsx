@@ -1,37 +1,54 @@
 import React from 'react'
 import Image from 'next/image'
+import useSWR from 'swr'
+import { request } from 'graphql-request'
 
-import { chains } from '../../../constants/tokenAddresses'
+import { chains, SUBGRAPH_URL } from '../../../constants/tokenAddresses'
 import { useAppSelector } from '../../../store/hooks'
+
+import { GET_ALL_PROPOSALS } from './graphql'
 
 import Header from '../../../components/Header'
 import TitleSection from '../../../components/TitleSection'
+import Breadcrumb from '../../../components/Breadcrumb'
+import BreadcrumbItem from '../../../components/Breadcrumb/BreadcrumbItem'
 import VotingPower from '../../../components/VotingPower'
 import ExternalLink from '../../../components/ExternalLink'
 import ProposalTable from '../../../components/Governance/ProposalTable'
 import ProposalOverview from '../../../components/Governance/ProposalOverview'
-import Breadcrumb from '../../../components/Breadcrumb'
-import BreadcrumbItem from '../../../components/Breadcrumb/BreadcrumbItem'
 import Web3Disabled from '../../../components/Web3Disabled'
+import Pagination from '../../../components/Pagination'
 
 import proposals from '../../../../public/assets/iconGradient/details.svg'
 import externalLink from '../../../../public/assets/utilities/external-link.svg'
 
 import * as S from './styles'
 
-const AllProposals = () => {
+const Proposals = () => {
   const { chainId } = useAppSelector(state => state)
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
   const chain =
     process.env.NEXT_PUBLIC_MASTER === '1' ? chains.avalanche : chains.fuji
 
+  const [skip, setSkip] = React.useState<number>(0)
+
+  const take = 10
+
+  function handlePageClick(data: { selected: number }, take: number) {
+    setSkip(data.selected * take)
+  }
+
+  const { data: allProposals } = useSWR([GET_ALL_PROPOSALS], query =>
+    request(SUBGRAPH_URL, query)
+  )
+
   return (
     <>
       <Header />
       <Breadcrumb>
         <BreadcrumbItem href="/">Home</BreadcrumbItem>
-        <BreadcrumbItem href="/gov">Vote</BreadcrumbItem>
+        <BreadcrumbItem href="/gov">Governance</BreadcrumbItem>
         <BreadcrumbItem href="/gov/proposals" isLastPage>
           Governance Proposals
         </BreadcrumbItem>
@@ -74,13 +91,19 @@ const AllProposals = () => {
                   <Image src={externalLink} alt="" />
                 </S.LinkForum>
               </S.TitleAndLinkContent>
-              <ProposalTable />
+              <ProposalTable skip={skip} take={take} />
             </S.AllProposalsContent>
           </>
         )}
+        <Pagination
+          take={take}
+          skip={skip}
+          totalItems={allProposals?.proposals && allProposals?.proposals.length}
+          handlePageClick={handlePageClick}
+        />
       </S.VoteContent>
     </>
   )
 }
 
-export default AllProposals
+export default Proposals

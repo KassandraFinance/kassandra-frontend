@@ -4,7 +4,7 @@ import Tippy from '@tippyjs/react'
 
 import TitleSection from '../TitleSection'
 
-import infoGray from '../../../public/assets/utilities/info-gray.svg'
+import tooltip from '../../../public/assets/utilities/tooltip.svg'
 
 import * as S from './styles'
 
@@ -32,7 +32,7 @@ const PortfolioHeading = ({
 
             <Tippy content={tippy}>
               <S.Tooltip tabIndex={0}>
-                <Image src={infoGray} alt="Explanation" layout="responsive" />
+                <Image src={tooltip} alt="Explanation" layout="responsive" />
               </S.Tooltip>
             </Tippy>
           </S.Total>

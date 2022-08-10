@@ -51,7 +51,7 @@ import proposalInfoIcon from '../../../../../public/assets/iconGradient/info-gra
 import proposalCompleteIcon from '../../../../../public/assets/statusProposal/proposal-complete.svg'
 import proposalWaitingIcon from '../../../../../public/assets/statusProposal/proposal-waiting.svg'
 import proposalStatusHistory from '../../../../../public/assets/iconGradient/timer-grandient.svg'
-import infoGrayIcon from '../../../../../public/assets/utilities/info-gray.svg'
+import tooltip from '../../../../../public/assets/utilities/tooltip.svg'
 
 import * as S from './styles'
 
@@ -630,7 +630,7 @@ const Proposal = () => {
         <Header />
         <Breadcrumb>
           <BreadcrumbItem href="/">Home</BreadcrumbItem>
-          <BreadcrumbItem href="/gov">Vote</BreadcrumbItem>
+          <BreadcrumbItem href="/gov">Governance</BreadcrumbItem>
           <BreadcrumbItem href={router.asPath} isLastPage>
             Proposal {router.query.proposal}
           </BreadcrumbItem>
@@ -786,7 +786,7 @@ const Proposal = () => {
                             <Tippy content="Quorum is the minimal amount of votes that a proposal needs to have to be valid. Proposals that don’t achieve the quorum will fail.">
                               <S.Tooltip tabIndex={0}>
                                 <Image
-                                  src={infoGrayIcon}
+                                  src={tooltip}
                                   alt="Explanation"
                                   width={14}
                                   height={14}

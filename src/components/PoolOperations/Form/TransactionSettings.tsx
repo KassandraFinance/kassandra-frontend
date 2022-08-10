@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
-import infoGray from '../../../../public/assets/utilities/info-gray.svg'
+import tooltip from '../../../../public/assets/utilities/tooltip.svg'
 import gearButton from '../../../../public/assets/icons/gear-button.svg'
 
 import * as S from './styles'
@@ -47,7 +47,7 @@ const TransactionSettings = ({
         Slippage tolerance
         <Tippy content="Slippage allows you to configure how much the price can change against you. Slippages larger than 1% could allow a bad actor to purposely run a transaction before you just so you pay the maximum slippage, this is called frontrunning.">
           <span tabIndex={0}>
-            <Image src={infoGray} alt="Explanation" width={16} height={16} />
+            <Image src={tooltip} alt="Explanation" width={16} height={16} />
           </span>
         </Tippy>
       </label>
