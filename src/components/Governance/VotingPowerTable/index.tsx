@@ -3,17 +3,16 @@ import Link from 'next/link'
 import Big from 'big.js'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
-import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
 import { SUBGRAPH_URL } from '../../../constants/tokenAddresses'
 
 import { BNtoDecimal } from '../../../utils/numerals'
-import substr from '../../../utils/substr'
 
-import { GET_USERS } from './graphql'
+import { GET_INFO_USERS } from './graphql'
+
+import ImageProfile from '../ImageProfile'
 
 import * as S from './styles'
-import NftImage from '../../NftImage'
 
 interface IVotingPowerRankProps {
   address: string;
@@ -26,7 +25,12 @@ interface IVotingPowerRankProps {
   isNFT?: boolean;
 }
 
-export const VotingPowerTable = () => {
+interface IVotingPowerProps {
+  skip?: number;
+  take: number;
+}
+
+export const VotingPowerTable = ({ skip = 0, take }: IVotingPowerProps) => {
   const [votingPowerRank, setVotingPowerRank] = React.useState<
     Array<IVotingPowerRankProps>
   >([
@@ -41,10 +45,24 @@ export const VotingPowerTable = () => {
     }
   ])
 
-  const { data } = useSWR([GET_USERS], query => request(SUBGRAPH_URL, query))
+  const { data } = useSWR([GET_INFO_USERS, skip, take], (query, skip, take) =>
+    request(SUBGRAPH_URL, query, { skip, take })
+  )
 
   React.useEffect(() => {
     ;(async () => {
+      setVotingPowerRank([
+        {
+          address: '',
+          votingPower: Big(0),
+          voteWeight: '0',
+          votes: 0,
+          proposalsCreated: 0,
+          name: '',
+          image: ''
+        }
+      ])
+
       if (data) {
         const users = data.users.map(
           async (user: {
@@ -93,7 +111,7 @@ export const VotingPowerTable = () => {
         setVotingPowerRank(await Promise.all(users))
       }
     })()
-  }, [data])
+  }, [data, skip])
 
   return (
     <S.VotingPowerTable>
@@ -111,28 +129,19 @@ export const VotingPowerTable = () => {
         <tbody>
           {votingPowerRank &&
             votingPowerRank.map((item, index) => (
-              <Link key={item.address} href={`/profile/${item.address}`}>
+              <Link
+                key={item.address}
+                href={`/profile/${item.address}?tab=governance-data`}
+              >
                 <S.Tr>
-                  <S.Td className="rank">{index + 1}</S.Td>
+                  <S.Td className="rank">{index + 1 + skip}</S.Td>
                   <S.Td className="user">
-                    {item.image ? (
-                      item.isNFT ? (
-                        <NftImage NftUrl={item.image} imageSize="small" />
-                      ) : (
-                        <img className="user-image" src={item.image} alt="" />
-                      )
-                    ) : (
-                      <Jazzicon
-                        diameter={24}
-                        seed={jsNumberForAddress(item.address)}
-                      />
-                    )}
-
-                    {item.name ? (
-                      <span>{item.name}</span>
-                    ) : (
-                      <span>{substr(item.address)}</span>
-                    )}
+                    <ImageProfile
+                      address={item.address}
+                      diameter={24}
+                      hasAddress={true}
+                      isLink={false}
+                    />
                   </S.Td>
                   <S.Td className="vote-power">
                     {BNtoDecimal(item.votingPower, 0, 2)}

@@ -23,10 +23,12 @@ import externalLink from '../../../public/assets/utilities/external-link.svg'
 import * as S from './styles'
 
 const Gov = () => {
-  const { chainId } = useAppSelector(state => state)
+  const { chainId, userWalletAddress } = useAppSelector(state => state)
 
   const chain =
     process.env.NEXT_PUBLIC_MASTER === '1' ? chains.avalanche : chains.fuji
+
+  const take = 5
 
   return (
     <>
@@ -34,7 +36,7 @@ const Gov = () => {
       <Breadcrumb>
         <BreadcrumbItem href="/">Home</BreadcrumbItem>
         <BreadcrumbItem href="/gov" isLastPage>
-          Vote
+          Governance
         </BreadcrumbItem>
       </Breadcrumb>
       <S.VoteContent>
@@ -47,24 +49,19 @@ const Gov = () => {
           />
         ) : (
           <>
-            <TitleSection
-              image={overview}
-              title="Overview"
-              text="texto asdsad sadsadsa"
-            />
+            <TitleSection image={overview} title="Overview" />
             <Overview />
             <S.OverViewLinks>
-              <ExternalLink hrefNext="/farm" text="Obtain more" />
-              <ExternalLink hrefNext="/farm" text="Manage Delegation" />
+              <ExternalLink hrefNext="farm?tab=stake" text="Obtain more" />
+              <ExternalLink
+                hrefNext={`/profile/${userWalletAddress}?tab=governance-data`}
+                text="Manage Delegation"
+              />
             </S.OverViewLinks>
             <S.TitleAndLinkContent>
-              <TitleSection
-                image={proposals}
-                title="Recent Proposals"
-                text="texto asdsad sadsadsa"
-              />
+              <TitleSection image={proposals} title="Recent Proposals" />
               <S.LinkForum
-                href="https://t.me/KassandraDAO"
+                href="https://gov.kassandra.finance/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -72,17 +69,16 @@ const Gov = () => {
                 <Image src={externalLink} alt="" />
               </S.LinkForum>
             </S.TitleAndLinkContent>
-            <ProposalTable />
+            <ProposalTable take={take} />
             <ExternalLink
               hrefNext="/gov/proposals"
               text="Check more proposals"
             />
             <TitleSection
               image={votingPower}
-              title="Voting Power Rank"
-              text="texto asdsad sadsadsa"
+              title="Voting Power Leaderboard"
             />
-            <VotingPowerTable />
+            <VotingPowerTable take={take} />
             <ExternalLink
               hrefNext="/gov/leaderboard"
               text="Check leaderboard"

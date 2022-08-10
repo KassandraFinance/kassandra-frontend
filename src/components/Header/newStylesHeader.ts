@@ -1,0 +1,236 @@
+import styled from 'styled-components'
+import theme from '../../styles/theme'
+
+export const Wrapper = styled.div`
+  position: relative;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 0 auto;
+  max-width: 114rem;
+  height: 11rem;
+
+  z-index: ${theme.layers.menu};
+  @media (max-width: 1200px) {
+    padding: 0 3rem;
+  }
+
+  @media (max-width: 540px) {
+    height: 8rem;
+    padding: 0 1.6rem;
+  }
+`
+
+export const LogoWrapper = styled.div`
+  .logo-desktop {
+    @media (max-width: 960px) {
+      display: none;
+    }
+  }
+
+  .logo-ipad {
+    > img {
+      width: 7rem;
+    }
+
+    @media (min-width: 961px) {
+      display: none;
+    }
+
+    @media (max-width: 539px) {
+      display: none;
+    }
+  }
+
+  cursor: pointer;
+`
+
+export const Menu = styled.nav`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo-mobile {
+    width: 4.6rem;
+    margin-right: -0.8rem;
+
+    @media (min-width: 541px) {
+      display: none;
+    }
+    @media (max-width: 360px) {
+      width: 4.2rem;
+    }
+  }
+
+  @media (max-width: 960px) {
+    min-width: 58rem;
+  }
+
+  @media (max-width: 768px) {
+    min-width: 42rem;
+  }
+
+  @media (max-width: 540px) {
+    min-width: 100%;
+  }
+`
+
+export const MenuLink = styled.a`
+  position: relative;
+
+  margin-right: 2.4rem;
+  padding-top: 1.2rem;
+  padding-bottom: 1.3rem;
+
+  color: ${theme.colors.snow};
+  font-size: ${theme.font.sizes.font16};
+  font-weight: ${theme.font.weight.light};
+  text-decoration: none;
+  text-align: center;
+
+  outline: none;
+
+  &:hover,
+  &:focus-within {
+    &::after {
+      content: '';
+      position: absolute;
+
+      display: block;
+      height: 0.3rem;
+      margin-top: 1.2rem;
+
+      background-color: ${theme.colors.cyan};
+      border-radius: 0.3rem;
+
+      animation: hoverAnimation 0.2s forwards;
+    }
+
+    @keyframes hoverAnimation {
+      from {
+        width: 0;
+        left: 50%;
+      }
+      to {
+        width: 100%;
+        left: 0;
+      }
+    }
+  }
+
+  @media (max-width: 540px) {
+    font-size: ${theme.font.sizes.font14};
+    margin-right: 0;
+  }
+`
+
+export const MenuLinkDisable = styled.a`
+  position: relative;
+
+  margin-right: 4.2rem;
+  padding-top: 1.2rem;
+  padding-bottom: 1.3rem;
+
+  color: ${theme.colors.grayDisabled};
+  font-size: ${theme.font.sizes.font16};
+  font-weight: ${theme.font.weight.light};
+  text-decoration: none;
+  text-align: center;
+
+  cursor: not-allowed;
+  &:hover {
+    &::after {
+      content: '';
+      position: absolute;
+
+      display: block;
+      height: 0.3rem;
+      margin-top: 1.2rem;
+
+      background-color: ${theme.colors.grayDisabled};
+      border-radius: 0.3rem;
+
+      animation: hoverAnimation 0.3s forwards;
+    }
+    @keyframes hoverAnimation {
+      from {
+        width: 0;
+        left: 50%;
+      }
+      to {
+        width: 100%;
+        left: 0;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    margin-right: 3.2rem;
+  }
+
+  @media (max-width: 541px) {
+    margin-right: 2rem;
+    font-size: ${theme.font.sizes.font14};
+  }
+
+  @media (max-width: 360px) {
+    margin-right: 1.4rem;
+    font-size: ${theme.font.sizes.font12};
+  }
+
+  img {
+    position: absolute;
+    right: -2rem;
+    top: 1.8rem;
+
+    @media (max-width: 540px) {
+      right: -1.6rem;
+      top: 1.7rem;
+    }
+    @media (max-width: 360px) {
+      top: 1.6rem;
+    }
+  }
+`
+
+export const MenuBottom = styled.div`
+  @media (max-width: 840px) {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    z-index: ${theme.layers.menu};
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 6.8rem;
+    padding: 1.6rem;
+
+    background-color: ${theme.colors.darkPurple};
+  }
+
+  .button-mobile {
+    width: fit-content;
+    padding: 1.2rem;
+
+    font-size: ${theme.font.sizes.font12};
+
+    img {
+      width: 1.6rem;
+    }
+  }
+`
+
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  gap: 1rem;
+
+  a {
+    min-width: 12.5rem;
+    min-height: 3.8rem;
+  }
+`

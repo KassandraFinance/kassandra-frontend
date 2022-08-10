@@ -47,7 +47,12 @@ interface IProposalsListProps {
   timeToEndProposal: string;
 }
 
-export const ProposalTable = () => {
+interface IProposalTableProps {
+  skip?: number;
+  take: number;
+}
+
+export const ProposalTable = ({ skip = 0, take }: IProposalTableProps) => {
   // eslint-disable-next-line prettier/prettier
   const [proposalsList, setProposalsList] = React.useState<Array<IProposalsListProps>>([])
 
@@ -55,8 +60,8 @@ export const ProposalTable = () => {
     chains[process.env.NEXT_PUBLIC_MASTER === '1' ? 'avalanche' : 'fuji']
       .secondsPerBlock
 
-  const { data } = useSWR([GET_PROPOSALS], query =>
-    request(SUBGRAPH_URL, query)
+  const { data } = useSWR([GET_PROPOSALS, skip, take], (query, skip, take) =>
+    request(SUBGRAPH_URL, query, { skip, take })
   )
 
   const governance = useGovernance(GovernorAlpha)
@@ -136,7 +141,7 @@ export const ProposalTable = () => {
                     </S.StatusProposal>
 
                     <S.TimeFrame>
-                      {proposal.state[1]} ends {proposal.timeToEndProposal}
+                      {proposal.state[1]} in {proposal.timeToEndProposal}
                     </S.TimeFrame>
 
                     <S.StateMutability

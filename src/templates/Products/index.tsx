@@ -37,7 +37,7 @@ import ScrollUpButton from '../../components/ScrollUpButton'
 import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
 import PoweredBy from './PoweredBy'
 
-import infoGray from '../../../public/assets/utilities/info-gray.svg'
+import tooltip from '../../../public/assets/utilities/tooltip.svg'
 
 import { GET_INFO_POOL } from './graphql'
 
@@ -431,7 +431,7 @@ const Products = ({ product }: Input) => {
                     <Tippy content="The Total Value Locked is the amount invested inside the pool, or simply the total value of all tokens inside the pool combined.">
                       <S.Tooltip tabIndex={0}>
                         <Image
-                          src={infoGray}
+                          src={tooltip}
                           alt="Explanation"
                           height={16}
                           width={16}
@@ -447,7 +447,7 @@ const Products = ({ product }: Input) => {
                     <Tippy content="Total volume of transactions in the last 24 hours. This includes new investments, withdrawals, token swaps and token transfers, which include swaps in decentralized exchanges.">
                       <S.Tooltip tabIndex={0}>
                         <Image
-                          src={infoGray}
+                          src={tooltip}
                           alt="Explanation"
                           height={16}
                           width={16}
@@ -463,7 +463,7 @@ const Products = ({ product }: Input) => {
                     <Tippy content="Amount of fees collected in the last 24 hours when people swap tokens inside the pool. This fee is paid to all investors of the pool.">
                       <S.Tooltip tabIndex={0}>
                         <Image
-                          src={infoGray}
+                          src={tooltip}
                           alt="Explanation"
                           height={16}
                           width={16}
@@ -479,7 +479,7 @@ const Products = ({ product }: Input) => {
                     <Tippy content="Amount of fees collected in the last 24 hours when people withdraw from the strategy. This fee is paid to the Kassandra Decentralized Autonomous Organization.">
                       <S.Tooltip tabIndex={0}>
                         <Image
-                          src={infoGray}
+                          src={tooltip}
                           alt="Explanation"
                           height={16}
                           width={16}

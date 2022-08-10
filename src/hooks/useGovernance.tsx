@@ -15,14 +15,14 @@ import queued from '../../public/assets/notificationStatus/queued.svg'
 import votingOpen from '../../public/assets/notificationStatus/voting-open.svg'
 
 const valuesStateProposal = [
-  ["Active", "Pending", queued],
-  ["Active", "Voting Open", votingOpen],
-  ["Failed", "Canceled", cancelled],
-  ["Failed", "Defeated", failed],
-  ["Succeeded", "Succeeded", approved],
-  ["Succeeded", "Queued", queued],
-  ["Failed", "Expired", failed],
-  ["Succeeded", "Executed", executed]
+  ["Active", "Pending", queued, 0],
+  ["Active", "Voting Open", votingOpen, 1],
+  ["Failed", "Canceled", cancelled, 2],
+  ["Failed", "Defeated", failed, 3],
+  ["Succeeded", "Succeeded", approved, 4],
+  ["Succeeded", "Queued", queued, 5],
+  ["Failed", "Expired", failed, 6],
+  ["Succeeded", "Executed", executed, 7]
 ]
 
 const useGovernance = (address: string) => {

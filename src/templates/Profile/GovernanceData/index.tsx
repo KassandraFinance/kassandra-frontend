@@ -18,7 +18,7 @@ import UserTableVotingHistory from '../../../components/Governance/UserTableVoti
 
 import proposals from '../../../../public/assets/iconGradient/details.svg'
 import votingPoweRrank from '../../../../public/assets/iconGradient/voting-power-rank.svg'
-import stakingPools from '../../../../public/assets/iconGradient/staking-pools.svg'
+import ownedPower from '../../../../public/assets/iconGradient/owned-power.svg'
 
 import externalLink from '../../../../public/assets/utilities/external-link.svg'
 
@@ -153,8 +153,8 @@ const GovernanceData = ({ address }: IGovernanceDataProps) => {
 
         {/* Owned Voting Power */}
         <TitleSection
-          image={stakingPools}
-          title="Staking Pools"
+          image={ownedPower}
+          title="Owned Voting Power"
           marginTop={64}
         />
 
@@ -181,7 +181,7 @@ const GovernanceData = ({ address }: IGovernanceDataProps) => {
         <S.TitleAndLinkContent>
           <TitleSection image={proposals} title="Voting History" />
           <S.LinkForum
-            href="https://t.me/KassandraDAO"
+            href="https://gov.kassandra.finance/"
             target="_blank"
             rel="noopener noreferrer"
           >

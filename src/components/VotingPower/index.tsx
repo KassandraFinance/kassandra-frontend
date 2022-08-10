@@ -13,7 +13,7 @@ import { SUBGRAPH_URL } from '../../constants/tokenAddresses'
 
 import { BNtoDecimal } from '../../utils/numerals'
 
-import infoGrayIcon from '../../../public/assets/utilities/info-gray.svg'
+import tooltip from '../../../public/assets/utilities/tooltip.svg'
 
 import * as S from './styles'
 
@@ -50,27 +50,17 @@ const VotingPower = ({
         <span>
           {yourVotingPowerInProposal === undefined
             ? 'your voting power'
-            : 'Locked voting power'}
+            : 'Snapshot voting power'}
           {yourVotingPowerInProposal === undefined ? (
             <Tippy content="Voting power allows you to create and vote on proposals. To obtain voting power you need to stake your $KACY tokens.">
               <S.Tooltip tabIndex={0}>
-                <Image
-                  src={infoGrayIcon}
-                  alt="Explanation"
-                  width={14}
-                  height={14}
-                />
+                <Image src={tooltip} alt="Explanation" width={14} height={14} />
               </S.Tooltip>
             </Tippy>
           ) : (
-            <Tippy content="Amount of voting power locked from your address to vote on this proposal. This voting power is relative to the block in which the proposal was published.">
+            <Tippy content="Amount of voting power snapshoted from your address to vote on this proposal. This voting power is relative to the block in which the proposal was published.">
               <S.Tooltip tabIndex={0}>
-                <Image
-                  src={infoGrayIcon}
-                  alt="Explanation"
-                  width={14}
-                  height={14}
-                />
+                <Image src={tooltip} alt="Explanation" width={14} height={14} />
               </S.Tooltip>
             </Tippy>
           )}
@@ -85,28 +75,18 @@ const VotingPower = ({
         <span>
           {yourVotingPowerInProposal === undefined
             ? 'total voting power'
-            : 'your voting power'}
+            : 'actual voting power'}
 
           {yourVotingPowerInProposal === undefined ? (
             <Tippy content="This is the total voting power across all participants of the Kassandra Decentralized Autonomous Organization in this blockchain.">
               <S.Tooltip tabIndex={0}>
-                <Image
-                  src={infoGrayIcon}
-                  alt="Explanation"
-                  width={14}
-                  height={14}
-                />
+                <Image src={tooltip} alt="Explanation" width={14} height={14} />
               </S.Tooltip>
             </Tippy>
           ) : (
-            <Tippy content="Voting power allows you to create and vote on proposals. To obtain voting power you need to stake your $KACY tokens.">
+            <Tippy content="This is your actual voting power, it may differ from the snapshot voting power if you earned or lost voting power since the proposal was created.">
               <S.Tooltip tabIndex={0}>
-                <Image
-                  src={infoGrayIcon}
-                  alt="Explanation"
-                  width={14}
-                  height={14}
-                />
+                <Image src={tooltip} alt="Explanation" width={14} height={14} />
               </S.Tooltip>
             </Tippy>
           )}

@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import React from 'react'
 import detectEthereumProvider from '@metamask/detect-provider'
 import WalletConnect from '@walletconnect/client'
 import QRCodeModal from '@walletconnect/qrcode-modal'
-import React, { useEffect } from 'react'
 import { toChecksumAddress } from 'web3-utils'
 
 import { subscribeToEvents } from '../utils/walletConnect'
