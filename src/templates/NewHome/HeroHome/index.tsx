@@ -11,7 +11,7 @@ import * as S from './styles'
 
 const HeroHome = () => {
   return (
-    <S.Container>
+    <S.Hero>
       <HeroBackGround />
 
       <HeroText />
@@ -56,7 +56,7 @@ const HeroHome = () => {
       <S.ScroolContainer>
         <Scroll />
       </S.ScroolContainer>
-    </S.Container>
+    </S.Hero>
   )
 }
 
