@@ -7,7 +7,7 @@ export const HeroContainer = styled.div`
   align-items: center;
   flex-direction: column;
 
-  height: 100vh;
+  /* height: 74.4rem; */
   width: 100%;
 
   padding-left: 6rem;
@@ -29,14 +29,12 @@ export const HeroContent = styled.div`
   flex-direction: column;
   justify-content: center;
   max-width: 87.8rem;
+  height: 74.4rem;
 
   z-index: 10;
 `
 
 export const ScrollContainer = styled.div`
-  position: absolute;
-  bottom: -25rem;
-
   @media (max-width: 768px) {
     display: none;
   }
@@ -44,7 +42,7 @@ export const ScrollContainer = styled.div`
 
 export const ImageContent = styled.span`
   position: absolute;
-  margin-top: 10rem;
+  /* margin-top: 10rem; */
 
   img {
     width: 81.1rem;
