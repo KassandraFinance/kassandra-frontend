@@ -1,3 +1,4 @@
+import AllocationsInexpensive from './AllocationsInexpensive'
 import ChangeAllocations from './ChangeAllocations'
 import FundManager from './FundManager'
 import HeroManager from './Hero'
@@ -13,6 +14,7 @@ const Managers = () => (
           <FundManager />
           <ChangeAllocations />
           <ManagersInterface />
+          <AllocationsInexpensive />
         </S.ManagerContent>
       </S.ManagerContainer>
     </S.ManagerMainContainer>
