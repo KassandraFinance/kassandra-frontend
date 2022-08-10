@@ -1,6 +1,7 @@
 import ChangeAllocations from './ChangeAllocations'
 import FundManager from './FundManager'
 import HeroManager from './Hero'
+import ManagersInterface from './ManagersInterface'
 import * as S from './styles'
 
 const Managers = () => (
@@ -11,6 +12,7 @@ const Managers = () => (
           <HeroManager />
           <FundManager />
           <ChangeAllocations />
+          <ManagersInterface />
         </S.ManagerContent>
       </S.ManagerContainer>
     </S.ManagerMainContainer>
