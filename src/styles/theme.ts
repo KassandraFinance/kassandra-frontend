@@ -40,7 +40,8 @@ export default {
     amber: '#FFBF00',
     snow: '#FCFCFC',
     red: '#EA3224',
-    green: '#5EE56B'
+    green: '#5EE56B',
+    white: '#ffffff'
   },
   spacings: {
     space8: '0.8rem',
