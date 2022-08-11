@@ -8,15 +8,17 @@ import * as S from './styles'
 
 const Foundation = () => {
   return (
-    <S.Foundation>
+    <>
       <S.HeaderWrapper>
         <Header />
       </S.HeaderWrapper>
 
       <Hero />
 
-      <About />
-    </S.Foundation>
+      <S.Foundation>
+        <About />
+      </S.Foundation>
+    </>
   )
 }
 

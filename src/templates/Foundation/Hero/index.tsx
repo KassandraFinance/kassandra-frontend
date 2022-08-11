@@ -7,21 +7,23 @@ import * as S from './styles'
 
 const Hero = () => {
   return (
-    <S.Hero>
-      <S.HeroText>
-        <S.Title>Kassandra foundation</S.Title>
+    <S.HeroBackground>
+      <S.Hero>
+        <S.HeroText>
+          <S.Title>Kassandra foundation</S.Title>
 
-        <S.SubTitle>
-          DeFi enthusiasts building the future of asset management
-        </S.SubTitle>
+          <S.SubTitle>
+            DeFi enthusiasts building the future of asset management
+          </S.SubTitle>
 
-        <Social />
-      </S.HeroText>
+          <Social />
+        </S.HeroText>
 
-      <S.ScroolContainer>
-        <Scroll />
-      </S.ScroolContainer>
-    </S.Hero>
+        <S.ScroolContainer>
+          <Scroll />
+        </S.ScroolContainer>
+      </S.Hero>
+    </S.HeroBackground>
   )
 }
 

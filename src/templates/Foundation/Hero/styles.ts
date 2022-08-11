@@ -1,12 +1,20 @@
 import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
+export const HeroBackground = styled.div`
+  background-image: url('./assets/images/background-foundation-hero.png');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+`
+
 export const Hero = styled.section`
   position: relative;
 
   display: flex;
   align-items: center;
 
+  max-width: 110.8rem;
+  margin: 0 auto;
   height: 100vh;
   padding-inline: 2.4rem;
   margin-bottom: 13.5rem;
