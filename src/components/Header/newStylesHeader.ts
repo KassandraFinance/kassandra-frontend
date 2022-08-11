@@ -15,7 +15,7 @@ export const Wrapper = styled.div`
   z-index: ${theme.layers.menu};
   padding-inline: 2.4rem;
 
-  @media (max-width: 960px) {
+  @media (max-width: 992px) {
     margin-top: 2.4rem;
   }
 
@@ -26,13 +26,13 @@ export const Wrapper = styled.div`
 
 export const LogoWrapper = styled.div`
   .logo-desktop {
-    @media (max-width: 960px) {
+    @media (max-width: 992px) {
       display: none;
     }
   }
 
   .logo-ipad {
-    @media (min-width: 961px) {
+    @media (min-width: 991px) {
       display: none;
     }
   }
