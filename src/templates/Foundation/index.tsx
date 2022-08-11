@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Header from '../../components/Header/newHeader'
+import About from './About'
 import Hero from './Hero'
 
 import * as S from './styles'
@@ -13,6 +14,8 @@ const Foundation = () => {
       </S.HeaderWrapper>
 
       <Hero />
+
+      <About />
     </S.Foundation>
   )
 }
