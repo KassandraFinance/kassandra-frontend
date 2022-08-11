@@ -22,7 +22,7 @@ const Pagination = ({ take, totalItems, handlePageClick }: IPaginationProp) => {
   }
 
   return (
-    <S.PaginateContainer>
+    <S.PaginateContainer totalItems={totalItems < 30}>
       <ReactPaginate
         breakLabel="..."
         nextLabel=">"
