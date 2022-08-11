@@ -58,38 +58,19 @@ const Header = () => {
               <Image src={kacy64} width={64} height={64} alt="Kassandra" />
             </a>
           </Link>
-          <DropdownInvest
-            nameOnHeader="Investors"
-            linkPage={[
-              { name: 'Explore', href: '/explore' },
-              { name: 'Farm', href: '/farm?tab=farm' },
-              { name: 'Profile', href: `/profile/${userWalletAddress}` }
-            ]}
-          />
-          <DropdownInvest
-            nameOnHeader="Managers"
-            linkPage={[
-              {
-                name: 'Explore',
-                href: ``,
-                disabled: true
-              },
-              {
-                name: 'Create',
-                href: ``,
-                disabled: true
-              },
-              {
-                name: 'Manage',
-                href: ``,
-                disabled: true
-              },
-              {
-                name: 'Profile',
-                href: `/profile/${userWalletAddress}?tab=managed-funds`
-              }
-            ]}
-          />
+          <Link href="/explore">
+            <S.MenuLink>Invest</S.MenuLink>
+          </Link>
+          <S.MenuLink
+            onClick={() => alert('Criar o modal Join the waiting list')}
+          >
+            Create
+          </S.MenuLink>
+          <S.MenuLink
+            onClick={() => alert('Criar o modal Join the waiting list')}
+          >
+            Manage
+          </S.MenuLink>
           <DropdownInvest
             nameOnHeader="Governance"
             adaptToResponsiveSize={true}
@@ -103,17 +84,13 @@ const Header = () => {
                 href: '/gov/proposals'
               },
               {
-                name: 'Stake',
-                href: `/farm?tab=stake`
+                name: 'Leaderboard ',
+                href: '/gov/leaderboard'
               },
               {
                 name: 'Forum',
-                href: `http://gov.kassandra.finance/`,
+                href: 'https://gov.kassandra.finance/',
                 newTab: true
-              },
-              {
-                name: 'Profile',
-                href: `/profile/${userWalletAddress}?tab=governance-data`
               }
             ]}
           />
@@ -122,8 +99,20 @@ const Header = () => {
               nameOnHeader="Learn"
               linkPage={[
                 {
-                  name: 'About',
-                  href: `/about`
+                  name: 'Investors',
+                  href: 'https://kassandra.finance/investors'
+                },
+                {
+                  name: 'Managers',
+                  href: 'https://kassandra.finance/managers'
+                },
+                {
+                  name: 'DAO',
+                  href: 'https://kassandra.finance/dao'
+                },
+                {
+                  name: 'Foundation',
+                  href: 'https://kassandra.finance/foundation'
                 },
                 {
                   name: 'Blog',
