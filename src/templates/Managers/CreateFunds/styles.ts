@@ -5,7 +5,6 @@ export const CreateFundContainer = styled.section`
   display: flex;
   flex-direction: column;
   gap: 6rem;
-  margin-bottom: 9rem;
   padding-left: 6rem;
   padding-right: 6rem;
 

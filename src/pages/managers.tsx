@@ -6,8 +6,6 @@ import Managers from '../templates/Managers'
 export default function Index() {
   return (
     <>
-      <Header />
-
       <Head>
         <meta
           property="og:image"

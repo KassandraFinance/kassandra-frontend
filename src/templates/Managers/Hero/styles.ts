@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
 export const HeroContainer = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,13 +14,9 @@ export const HeroContainer = styled.div`
   padding-left: 6rem;
   padding-right: 6rem;
 
-  @media (max-width: 600px) {
-    height: 50rem;
-  }
-
-  @media (max-width: 500px) {
-    padding-right: 2rem;
-    padding-left: 2rem;
+  @media (max-width: 576px) {
+    padding-right: 1.6rem;
+    padding-left: 1.6rem;
   }
 `
 export const HeroContent = styled.div`
@@ -33,43 +30,26 @@ export const HeroContent = styled.div`
   z-index: 10;
 `
 
-export const test = styled.div`
-  position: relative;
-
-  > div {
-    position: absolute;
-    bottom: -25rem;
-    right: -3rem;
-  }
-
-  @media (max-width: 768px) {
-    display: none;
-  }
+export const ScrollContainer = styled.div`
+  position: absolute;
+  bottom: 1rem;
 `
 
 export const ImageContent = styled.span`
   position: absolute;
-  margin-top: 10rem;
+  bottom: 0;
 
-  img {
-    width: 81.1rem;
-    height: 81.1rem;
+  background-image: url('/assets/images/manager-hero.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  height: calc(100vh - 4rem);
+  width: 100%;
 
-    @media (max-width: 872px) {
-      width: 100%;
-      height: 100%;
-    }
+  @media (max-width: 768px) {
+    height: 100vh;
+    background-position: 50% 35%;
   }
-
-  @media (max-width: 700px) {
-    margin-top: -12rem;
-  }
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  z-index: -1;
 
   animation: fadeInHero ease 3s;
   -webkit-animation: fadeInHero ease 3s;

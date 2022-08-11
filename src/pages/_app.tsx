@@ -92,7 +92,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
               pathName === '/home' ||
               pathName === '/about' ||
               pathName === '/investors' ||
-              pathName === './managers' ||
+              pathName === '/managers' ||
               pathName === '/token-holder'
                 ? false
                 : true

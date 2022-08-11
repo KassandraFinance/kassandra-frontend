@@ -1,15 +1,13 @@
 import Button from '../../../components/Button'
-// import Scroll from '../../../components/Scroll'
+import Scroll from '../../../components/Scroll'
+
 import * as S from './styles'
 
 const HeroManager = () => (
   <>
     <S.HeroContainer>
+      <S.ImageContent />
       <S.HeroContent>
-        <S.ImageContent>
-          <img src="/assets/images/manager-hero.svg" alt="" />
-        </S.ImageContent>
-
         <S.ManagerNumberPage>
           <p>02</p>
           <span />
@@ -37,9 +35,9 @@ const HeroManager = () => (
           />
         </S.HeroDescription>
       </S.HeroContent>
-      {/* <S.test>
+      <S.ScrollContainer>
         <Scroll />
-      </S.test> */}
+      </S.ScrollContainer>
     </S.HeroContainer>
   </>
 )
