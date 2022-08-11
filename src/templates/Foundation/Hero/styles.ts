@@ -2,9 +2,18 @@ import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
 export const HeroBackground = styled.div`
-  background-image: url('./assets/images/background-foundation-hero.png');
+  background-image: url('./assets/images/background-foundation-mobile-hero.png');
   background-repeat: no-repeat;
-  background-position: center top;
+  background-position: center bottom;
+
+  @media (min-width: 576px) {
+    background-image: url('./assets/images/background-foundation-tablet-hero.png');
+  }
+
+  @media (min-width: 992px) {
+    background-image: url('./assets/images/background-foundation-hero.png');
+    background-position: center top;
+  }
 `
 
 export const Hero = styled.section`
@@ -21,6 +30,8 @@ export const Hero = styled.section`
 
   @media (max-width: 992px) {
     justify-content: center;
+
+    margin-bottom: 0;
   }
 
   @media (max-width: 576px) {
@@ -30,7 +41,7 @@ export const Hero = styled.section`
 
 export const HeroText = styled.div`
   width: 54.5rem;
-  margin-left: 10.6rem;
+  margin-bottom: 20rem;
 
   @media (max-width: 992px) {
     margin-left: 0;
