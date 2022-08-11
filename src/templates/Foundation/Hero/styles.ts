@@ -4,7 +4,7 @@ import theme from '../../../styles/theme'
 export const HeroBackground = styled.div`
   background-image: url('./assets/images/background-foundation-hero.png');
   background-repeat: no-repeat;
-  background-position: center bottom;
+  background-position: center top;
 `
 
 export const Hero = styled.section`
