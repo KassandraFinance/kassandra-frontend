@@ -31,7 +31,7 @@ export const Hero = styled.section`
   @media (max-width: 992px) {
     justify-content: center;
 
-    margin-bottom: 0;
+    margin-bottom: 10rem;
   }
 
   @media (max-width: 576px) {
