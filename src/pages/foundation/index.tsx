@@ -15,7 +15,7 @@ export default function Index() {
         <meta property="og:image:height" content="506" />
         <meta property="og:url" content="https://kassandra.finance/" />
 
-        <title>Kassandra Foundation Page</title>
+        <title>Kassandra Foundation</title>
       </Head>
 
       <Foundation />

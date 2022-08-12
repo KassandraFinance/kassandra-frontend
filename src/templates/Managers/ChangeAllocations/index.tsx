@@ -110,22 +110,13 @@ const ChangeAllocations = () => {
         return
       }
       start > endValue ? start -= 1 : start += 1
-      valueRef.current.innerHTML = String(start)
+      if (valueRef.current) {
+        valueRef.current.innerHTML = String(start)
+      }
     }, duration)
   }
 
   React.useEffect(() => {
-    // setInterval(() => {
-    //   setIsActiveHand(true)
-    //   console.log('ttt')
-
-    //   const generateRamdomPorcentage = generateRandomGroup()
-    //   setTokenn(generateRamdomPorcentage)
-    // }, 5000)
-
-    // setInterval(() => {
-    //   setIsActiveHand(false)
-    // }, 2000)
     setTimeout(() => {
       setIsActiveHand(true)
 

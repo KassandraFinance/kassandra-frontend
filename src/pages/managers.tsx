@@ -14,6 +14,7 @@ export default function Index() {
         <meta property="og:image:width" content="1012" />
         <meta property="og:image:height" content="506" />
         <meta property="og:url" content="https://kassandra.finance/" />
+        <title>Kassandra for Managers</title>
       </Head>
       <Managers />
     </>

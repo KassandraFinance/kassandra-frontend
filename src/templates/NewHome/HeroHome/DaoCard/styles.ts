@@ -11,11 +11,11 @@ export const DaoCardContainer = styled.div`
   gap: 1.2rem;
 
   max-width: 28.6rem;
-  height: 13.6rem;
-  padding: 3.2rem;
+  padding-block: 2.4rem;
+  padding-inline: 3.2rem;
 
   background: rgba(255, 255, 255, 0.04);
-  border-radius: 1.72222rem;
+  border-radius: 0.8rem;
   border: 0.1rem solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(0.55rem);
   opacity: 0;
@@ -52,7 +52,7 @@ export const Value = styled.span`
 
   color: ${theme.colors.snow};
   font-weight: ${theme.font.weight.normal};
-  font-size: clamp(${theme.font.sizes.font20}, 5vw, ${theme.font.sizes.font40});
+  font-size: ${theme.font.sizes.font32};
   line-height: 100%;
   letter-spacing: 0.05em;
 `
@@ -62,12 +62,13 @@ export const Title = styled.span`
 
   color: ${theme.colors.magenta};
   font-weight: ${theme.font.weight.normal};
-  font-size: clamp(
-    ${theme.font.sizes.font12},
-    2.5vw,
-    ${theme.font.sizes.font14}
-  );
+  font-size: ${theme.font.sizes.font12};
   line-height: ${theme.font.sizes.font16};
   letter-spacing: 0.21em;
   text-transform: uppercase;
+
+  @media (max-width: 992px) {
+    font-size: 1.1rem;
+    letter-spacing: 0.13em;
+  }
 `

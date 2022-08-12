@@ -6,7 +6,7 @@ import Advantages from './Advantages'
 import Partners from './Partners'
 
 import * as S from './styles'
-import Contribute from '../TokenHolder/Contribute'
+import Contribute from '../DAO/Contribute'
 
 const Investors = () => {
   return (
