@@ -5,7 +5,7 @@ export const InstitutionalContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 10rem;
+  margin-top: 20rem;
 `
 
 export const TitleContainer = styled.div`
@@ -24,10 +24,6 @@ export const TitleContainer = styled.div`
     letter-spacing: 0.4em;
     text-transform: uppercase;
     text-align: center;
-
-    /* @media (max-width: 500px) {
-      text-align: start;
-    } */
   }
 
   h3 {
@@ -37,6 +33,11 @@ export const TitleContainer = styled.div`
     font-size: ${theme.font.sizes.font32};
     font-weight: ${theme.font.weight.bold};
     text-align: center;
+    line-height: 3.2rem;
+
+    @media (max-width: 576px) {
+      font-size: ${theme.font.sizes.font24};
+    }
   }
 
   p {
@@ -44,10 +45,16 @@ export const TitleContainer = styled.div`
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.light};
     text-align: center;
+    line-height: 2.4rem;
+
+    @media (max-width: 576px) {
+      font-size: ${theme.font.sizes.font14};
+    }
   }
 
   @media (max-width: 500px) {
     align-items: flex-start;
+
     h2,
     h3,
     p {
@@ -60,11 +67,7 @@ export const ImageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 8.4rem;
-
-  @media (max-width: 992px) {
-    margin-top: 4rem;
-  }
+  margin-top: 3rem;
 `
 
 export const ImageContent = styled.div`
@@ -100,6 +103,8 @@ export const ImageContent = styled.div`
 export const InstitutionalCardList = styled.div`
   display: flex;
   gap: 7rem;
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
 
   @media (max-width: 992px) {
     gap: 4rem;
@@ -107,15 +112,10 @@ export const InstitutionalCardList = styled.div`
   @media (max-width: 820px) {
     gap: 3rem;
   }
-
   @media (max-width: 690px) {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    width: 50rem;
-  }
-  @media (max-width: 500px) {
-    width: 40rem;
   }
 `
 
@@ -135,6 +135,7 @@ export const InstitutionalCardContainer = styled.div`
 
   @media (max-width: 690px) {
     margin-top: 0;
+
     > span {
       display: none;
     }
@@ -154,14 +155,16 @@ export const InstitutionalCard = styled.div`
     rgba(255, 255, 255, 0) 100%
   );
   border-radius: 1.8rem;
+
   @media (max-width: 992px) {
     width: 23rem;
     padding: 1rem;
   }
   @media (max-width: 820px) {
     width: 20rem;
+    margin-bottom: 3.4rem;
   }
-  @media (max-width: 500px) {
+  @media (max-width: 690px) {
     width: 25rem;
   }
 
@@ -176,6 +179,11 @@ export const InstitutionalCard = styled.div`
     @media (max-width: 992px) {
       font-size: ${theme.font.sizes.font14};
     }
+
+    @media (max-width: 690px) {
+      font-size: ${theme.font.sizes.font16};
+      margin-bottom: 1rem;
+    }
   }
 
   p {
@@ -189,6 +197,9 @@ export const InstitutionalCard = styled.div`
 
     @media (max-width: 992px) {
       font-size: ${theme.font.sizes.font12};
+    }
+    @media (max-width: 690px) {
+      font-size: ${theme.font.sizes.font14};
     }
   }
 `
@@ -207,6 +218,9 @@ export const CardTitle = styled.strong<ICardTitleProps>`
 
   @media (max-width: 992px) {
     font-size: 1rem;
+  }
+  @media (max-width: 690px) {
+    font-size: ${theme.font.sizes.font14};
   }
 `
 
