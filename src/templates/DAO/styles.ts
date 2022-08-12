@@ -58,6 +58,13 @@ export const Hero = styled.section`
   }
 `
 
+export const HeaderWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+`
+
 export const HeroText = styled.div`
   display: flex;
   flex-direction: column;

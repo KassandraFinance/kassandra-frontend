@@ -7,7 +7,7 @@ import Hero from './Hero'
 import About from './About'
 import GitHubStats from './GitHubStats'
 import ProjectRoadmap from './ProjectRoadmap'
-import Contribute from '../TokenHolder/Contribute'
+import Contribute from '../DAO/Contribute'
 
 import * as S from './styles'
 
