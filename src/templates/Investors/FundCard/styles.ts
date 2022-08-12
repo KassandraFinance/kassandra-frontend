@@ -3,8 +3,8 @@ import theme from '../../../styles/theme'
 
 export const Card = styled.div`
   width: 31.8rem;
-  height: 42rem;
 
+  padding-bottom: 3.2rem;
   border-radius: 1.2rem;
   background: rgba(31, 31, 31, 0.72);
   box-shadow: 0 0.4rem 6.9rem -1.7rem rgba(0, 0, 0, 0, 51);

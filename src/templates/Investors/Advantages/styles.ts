@@ -23,6 +23,7 @@ export const Managers = styled.div`
   }
 
   @media (max-width: 992px) {
+    padding: 2.4rem;
     margin-top: 20rem;
   }
 
