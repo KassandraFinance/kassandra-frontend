@@ -170,6 +170,7 @@ const CreateFund = () => {
               >
                 <Button
                   as="a"
+                  target="_blank"
                   backgroundSecondary
                   size="huge"
                   text="Create my own fund"
