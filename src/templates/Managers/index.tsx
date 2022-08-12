@@ -24,10 +24,10 @@ const Managers = () => (
           <ManagersInterface />
           <AllocationsInexpensive />
           <CreateFund />
-          <Contribute />
         </S.ManagerContent>
       </S.ManagerContainer>
     </S.ManagerMainContainer>
+    <Contribute />
   </>
 )
 
