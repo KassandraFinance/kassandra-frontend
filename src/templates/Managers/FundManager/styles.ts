@@ -19,8 +19,6 @@ export const FundManagerContainer = styled.section`
     font-size: ${theme.font.sizes.font48};
     text-align: center;
 
-    opacity: 0;
-
     @media (max-width: 650px) {
       font-weight: ${theme.font.weight.bold};
       font-size: ${theme.font.sizes.font32};
@@ -56,29 +54,12 @@ export const FundManagerContainer = styled.section`
       font-size: ${theme.font.sizes.font16};
     }
 
-    opacity: 0;
-
     animation: fadeInFundManager ease 3s both;
     -webkit-animation: fadeInFundManager ease 3s both;
     -moz-animation: fadeInFundManager ease 3s both;
     -o-animation: fadeInFundManager ease 3s both;
     -ms-animation: fadeInFundManager ease 3s both;
   }
-`
-
-export const ImageContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  opacity: 0;
-
-  animation: fadeInFundManager ease 3s both;
-  -webkit-animation: fadeInFundManager ease 3s both;
-  -moz-animation: fadeInFundManager ease 3s both;
-  -o-animation: fadeInFundManager ease 3s both;
-  -ms-animation: fadeInFundManager ease 3s both;
-  animation-delay: 1.4s;
 
   @keyframes fadeInFundManager {
     0% {
@@ -118,6 +99,78 @@ export const ImageContent = styled.div`
 
   @-ms-keyframes fadeInFundManager {
     0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+`
+
+export const ImageContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  animation: fadeInFundManagerImg ease 4s both;
+  -webkit-animation: fadeInFundManagerImg ease 4s both;
+  -moz-animation: fadeInFundManagerImg ease 4s both;
+  -o-animation: fadeInFundManagerImg ease 4s both;
+  -ms-animation: fadeInFundManagerImg ease 4s both;
+
+  @keyframes fadeInFundManagerImg {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-moz-keyframes fadeInFundManagerImg {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-webkit-keyframes fadeInFundManagerImg {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-o-keyframes fadeInFundManagerImg {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-ms-keyframes fadeInFundManagerImg {
+    0% {
+      opacity: 0;
+    }
+    50% {
       opacity: 0;
     }
     100% {
