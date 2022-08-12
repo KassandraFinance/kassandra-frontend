@@ -43,7 +43,7 @@ const About = () => {
             <S.BulletPoint>
               <Image src={incentivosIcon} width={68} height={68} />
 
-              <S.BulletPointTitle>Incentivos alinhados</S.BulletPointTitle>
+              <S.BulletPointTitle>Data Oriented</S.BulletPointTitle>
             </S.BulletPoint>
 
             <S.BulletPointLine />

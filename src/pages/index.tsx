@@ -7,6 +7,11 @@ export default function home() {
     <>
       <Head>
         <meta
+          name="description"
+          content="Manage, tokenized
+          investment funds effortlessly"
+        />
+        <meta
           property="og:image"
           content="https://kassandra.finance/kacy-og.png"
         />
