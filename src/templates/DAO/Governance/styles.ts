@@ -89,21 +89,14 @@ export const Text = styled.div`
 `
 
 export const Image = styled.div`
-  position: relative;
-
-  max-width: 54rem;
-  height: 44.1rem;
   margin: 0 auto;
 
-  background: linear-gradient(
-    180deg,
-    #d9d9d9 50%,
-    rgba(217, 217, 217, 0.1) 99.03%
-  );
-  border-radius: 6.18868px;
-
   img {
-    max-width: 100%;
+    max-width: 54rem;
+
+    @media (max-width: 600px) {
+      width: 100%;
+    }
   }
 
   @media (max-width: 550px) {

@@ -35,7 +35,6 @@ const Governance = () => {
         />
       </S.Text>
       <S.Image>
-        {/* <Image src="/assets/images/proposal-img.png" layout="fill" /> */}
         <img src="/assets/images/proposal-img.png" />
       </S.Image>
     </S.Wrapper>
