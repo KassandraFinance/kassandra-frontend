@@ -83,129 +83,142 @@ const LockPoolCard = ({
     }
   )
 
-  async function getLiquidityPoolPriceInDollar() {
-    const addressProviderReserves = isLP && address ? address : LP_KACY_AVAX_PNG
+  // async function getLiquidityPoolPriceInDollar() {
+  //   const addressProviderReserves = isLP && address ? address : LP_KACY_AVAX_PNG
 
-    const { kacyPriceInDollar, priceLP } = await getPriceKacyAndLP(
-      addressProviderReserves,
-      LPDaiAvax,
-      isLP
-    )
-    setKacyPrice(kacyPriceInDollar)
+  //   const { kacyPriceInDollar, priceLP } = await getPriceKacyAndLP(
+  //     addressProviderReserves,
+  //     LPDaiAvax,
+  //     isLP
+  //   )
+  //   setKacyPrice(kacyPriceInDollar)
 
-    if (isLP && priceLP) {
-      setPoolPrice(priceLP)
-      return
-    }
+  //   if (isLP && priceLP) {
+  //     setPoolPrice(priceLP)
+  //     return
+  //   }
 
-    if (data) {
-      setPoolPrice(Big(data?.pool?.price_usd || -1))
-      return
-    }
+  //   if (data) {
+  //     setPoolPrice(Big(data?.pool?.price_usd || -1))
+  //     return
+  //   }
 
-    setPoolPrice(kacyPriceInDollar)
-  }
-
-  const getYourStake = React.useCallback(async () => {
-    const poolInfoResponse = await stakingContract.poolInfo(pid)
-    if (!poolInfoResponse.withdrawDelay) {
-      return
-    }
-
-    const kacyRewards = new BigNumber(poolInfoResponse.rewardRate).mul(
-      new BigNumber(86400)
-    )
-    const totalStaked = new BigNumber(poolInfoResponse.depositedAmount)
-    const apr =
-      poolInfoResponse.depositedAmount.toString() !== '0' &&
-      kacyPrice.gt('-1') &&
-      (poolPrice || Big(0)).gt('-1')
-        ? new BigNumber(
-            Big(kacyRewards.toString())
-              .mul('365')
-              .mul('100')
-              .mul(kacyPrice)
-              .div(
-                (poolPrice || Big(1)).mul(
-                  Big(poolInfoResponse.depositedAmount.toString())
-                )
-              )
-              .toFixed(0)
-          )
-        : new BigNumber(-1)
-
-    const startDate = getDate(
-      Number(poolInfoResponse.periodFinish) -
-        Number(poolInfoResponse.rewardsDuration)
-    )
-    const endDate = getDate(Number(poolInfoResponse.periodFinish))
-
-    const timestampNow = new Date().getTime()
-    const periodFinish: any = new Date(
-      Number(poolInfoResponse.periodFinish) * 1000
-    )
-
-    let balance = new BigNumber('0')
-    let withdrawableResponse = false
-    let unstakeResponse = false
-    let yourDailyKacyReward = new BigNumber(0)
-
-    if (userWalletAddress.length > 0) {
-      balance = await stakingContract.balance(pid, userWalletAddress)
-      withdrawableResponse = await stakingContract.withdrawable(
-        pid,
-        userWalletAddress
-      )
-      unstakeResponse = await stakingContract.unstaking(pid, userWalletAddress)
-
-      if (balance.gt(new BigNumber('0'))) {
-        yourDailyKacyReward = kacyRewards
-          .mul(balance)
-          .div(new BigNumber(totalStaked))
-      }
-    }
-
-    setInfoStaked({
-      yourStake: balance,
-      withdrawable: withdrawableResponse,
-      votingMultiplier: poolInfoResponse.votingMultiplier,
-      startDate,
-      endDate,
-      kacyRewards,
-      yourDailyKacyReward,
-      withdrawDelay: poolInfoResponse.withdrawDelay,
-      totalStaked,
-      hasExpired: periodFinish < timestampNow,
-      unstake: unstakeResponse,
-      apr,
-      stakingToken: poolInfoResponse.stakingToken,
-      vestingPeriod: poolInfoResponse.vestingPeriod,
-      lockPeriod: poolInfoResponse.lockPeriod
-    })
-  }, [userWalletAddress, poolPrice, kacyPrice])
+  //   setPoolPrice(kacyPriceInDollar)
+  // }
 
   React.useEffect(() => {
+    async function getYourStake() {
+      const poolInfoResponse = await stakingContract.poolInfo(pid)
+
+      // if (!poolInfoResponse.withdrawDelay) return
+
+      // console.log(pid)
+      console.log(poolInfoResponse)
+    }
+
     getYourStake()
-    const interval = setInterval(getYourStake, 6000)
+  }, [pid])
 
-    return () => clearInterval(interval)
-  }, [getYourStake])
+  // const getYourStake = React.useCallback(async () => {
+  //   const poolInfoResponse = await stakingContract.poolInfo(pid)
+  //   if (!poolInfoResponse.withdrawDelay) {
+  //     return
+  //   }
 
-  React.useEffect(() => {
-    getLiquidityPoolPriceInDollar()
-  }, [infoStaked.stakingToken, pid, data])
+  //   const kacyRewards = new BigNumber(poolInfoResponse.rewardRate).mul(
+  //     new BigNumber(86400)
+  //   )
+  //   const totalStaked = new BigNumber(poolInfoResponse.depositedAmount)
+  //   const apr =
+  //     poolInfoResponse.depositedAmount.toString() !== '0' &&
+  //     kacyPrice.gt('-1') &&
+  //     (poolPrice || Big(0)).gt('-1')
+  //       ? new BigNumber(
+  //           Big(kacyRewards.toString())
+  //             .mul('365')
+  //             .mul('100')
+  //             .mul(kacyPrice)
+  //             .div(
+  //               (poolPrice || Big(1)).mul(
+  //                 Big(poolInfoResponse.depositedAmount.toString())
+  //               )
+  //             )
+  //             .toFixed(0)
+  //         )
+  //       : new BigNumber(-1)
 
-  React.useEffect(() => {
-    const delegateInfo = async () => {
-      const delegate = await stakingContract.userInfo(pid, userWalletAddress)
-      setDelegateTo(delegate.delegatee)
-    }
-    if (userWalletAddress) {
-      delegateInfo()
-    }
-  }, [])
+  //   const startDate = getDate(
+  //     Number(poolInfoResponse.periodFinish) -
+  //       Number(poolInfoResponse.rewardsDuration)
+  //   )
+  //   const endDate = getDate(Number(poolInfoResponse.periodFinish))
 
-  console.log(infoStaked)
+  //   const timestampNow = new Date().getTime()
+  //   const periodFinish: any = new Date(
+  //     Number(poolInfoResponse.periodFinish) * 1000
+  //   )
+
+  //   let balance = new BigNumber('0')
+  //   let withdrawableResponse = false
+  //   let unstakeResponse = false
+  //   let yourDailyKacyReward = new BigNumber(0)
+
+  //   if (userWalletAddress.length > 0) {
+  //     balance = await stakingContract.balance(pid, userWalletAddress)
+  //     withdrawableResponse = await stakingContract.withdrawable(
+  //       pid,
+  //       userWalletAddress
+  //     )
+  //     unstakeResponse = await stakingContract.unstaking(pid, userWalletAddress)
+
+  //     if (balance.gt(new BigNumber('0'))) {
+  //       yourDailyKacyReward = kacyRewards
+  //         .mul(balance)
+  //         .div(new BigNumber(totalStaked))
+  //     }
+  //   }
+
+  //   setInfoStaked({
+  //     yourStake: balance,
+  //     withdrawable: withdrawableResponse,
+  //     votingMultiplier: poolInfoResponse.votingMultiplier,
+  //     startDate,
+  //     endDate,
+  //     kacyRewards,
+  //     yourDailyKacyReward,
+  //     withdrawDelay: poolInfoResponse.withdrawDelay,
+  //     totalStaked,
+  //     hasExpired: periodFinish < timestampNow,
+  //     unstake: unstakeResponse,
+  //     apr,
+  //     stakingToken: poolInfoResponse.stakingToken,
+  //     vestingPeriod: poolInfoResponse.vestingPeriod,
+  //     lockPeriod: poolInfoResponse.lockPeriod
+  //   })
+  // }, [userWalletAddress, poolPrice, kacyPrice])
+
+  // React.useEffect(() => {
+  //   getYourStake()
+  //   const interval = setInterval(getYourStake, 6000)
+
+  //   return () => clearInterval(interval)
+  // }, [getYourStake])
+
+  // React.useEffect(() => {
+  //   getLiquidityPoolPriceInDollar()
+  // }, [infoStaked.stakingToken, pid, data])
+
+  // React.useEffect(() => {
+  //   const delegateInfo = async () => {
+  //     const delegate = await stakingContract.userInfo(pid, userWalletAddress)
+  //     setDelegateTo(delegate.delegatee)
+  //   }
+  //   if (userWalletAddress) {
+  //     delegateInfo()
+  //   }
+  // }, [])
+
+  // console.log(infoStaked)
 
   return (
     <S.LockPool>
