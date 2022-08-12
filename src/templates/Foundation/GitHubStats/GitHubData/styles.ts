@@ -2,7 +2,12 @@ import styled from 'styled-components'
 
 import theme from '../../../../styles/theme'
 
-export const GitHubStats = styled.div`
+interface IGitHubProps {
+  isCurrentYar: boolean;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const GitHubStats = styled.div<IGitHubProps>`
   width: 53rem;
 
   .title {
@@ -20,13 +25,16 @@ export const GitHubStats = styled.div`
 
   .data {
     display: flex;
-    justify-content: space-around;
-
+    justify-content: ${({ isCurrentYar }) =>
+      isCurrentYar ? 'space-between' : 'flex-end'} ;
+    padding: 0 3.2rem;
     border-top: solid 0.1rem #ffbf00;
+
     .stat {
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
 
       span {
         margin-top: 2.4rem;
@@ -48,10 +56,14 @@ export const GitHubStats = styled.div`
 
   @media (max-width: 992px) {
     width: 100%;
+    .data {
+      padding: 0 4.05rem;
+    }
   }
 
   @media (max-width: 576px) {
     .data {
+      padding: 0 2.15rem;
       .stat {
         span {
           font-size: ${theme.font.sizes.font32};

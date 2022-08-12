@@ -1,25 +1,46 @@
 import * as S from './styles'
 
-const GitHubData = () => {
+interface GitHubDataProps {
+  yar: number;
+  commits: {
+    lastYar: number,
+    currentYar: number,
+    lastWeek: number,
+    lastMonth: number
+  };
+}
+
+const GitHubData = ({ commits, yar }: GitHubDataProps) => {
+  const isCurrentYar = new Date().getFullYear() === yar
+
   return (
-    <S.GitHubStats>
+    <S.GitHubStats isCurrentYar={isCurrentYar}>
       <div className="title">
         <span>COMMITS</span>
-        <span>2022</span>
+        <span>{yar}</span>
       </div>
       <div className="data">
-        <div className="stat">
-          <span>23</span>
-          <p>WEEKLY</p>
-        </div>
-        <div className="stat">
-          <span>80</span>
-          <p>MONTHLY</p>
-        </div>
-        <div className="stat">
-          <span>1049</span>
-          <p>TOTAL</p>
-        </div>
+        {isCurrentYar ? (
+          <>
+            <div className="stat">
+              <span>{commits.lastWeek}</span>
+              <p>WEEKLY</p>
+            </div>
+            <div className="stat">
+              <span>{commits.lastMonth}</span>
+              <p>MONTHLY</p>
+            </div>
+            <div className="stat">
+              <span>{commits.currentYar}</span>
+              <p>TOTAL</p>
+            </div>
+          </>
+        ) : (
+          <div className="stat">
+            <span>{commits.lastYar}</span>
+            <p>TOTAL</p>
+          </div>
+        )}
       </div>
     </S.GitHubStats>
   )
