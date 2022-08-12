@@ -8,6 +8,8 @@ import About from './About'
 import GitHubStats from './GitHubStats'
 import ProjectRoadmap from './ProjectRoadmap'
 import Contribute from '../DAO/Contribute'
+import Institutional from './Institutional'
+import Team from './Team'
 
 import * as S from './styles'
 
@@ -25,6 +27,9 @@ const Foundation = () => {
       </S.Foundation>
 
       <WavyLine color="color1" />
+
+      <Institutional />
+      <Team />
 
       <GitHubStats />
 
