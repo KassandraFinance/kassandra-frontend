@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
-
+import Link from 'next/link'
 import BigNumber from 'bn.js'
 import Big from 'big.js'
 
@@ -204,9 +204,14 @@ const YourStake = ({
           </S.Info>
           <S.Info>
             <span>Delegated To</span>
-            <span>
-              {delegateTo === userWalletAddress ? 'Self' : substr(delegateTo)}
-            </span>
+            {delegateTo === userWalletAddress ||
+            delegateTo === '0x0000000000000000000000000000000000000000' ? (
+              <span>Self</span>
+            ) : (
+              <Link href={`/profile/${delegateTo}?tab=governance-data`}>
+                {substr(delegateTo)}
+              </Link>
+            )}
           </S.Info>
         </>
       )}

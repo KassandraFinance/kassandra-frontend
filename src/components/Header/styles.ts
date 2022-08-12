@@ -91,6 +91,7 @@ export const MenuLink = styled.a`
   text-align: center;
 
   outline: none;
+  cursor: pointer;
 
   &:hover,
   &:focus-within {

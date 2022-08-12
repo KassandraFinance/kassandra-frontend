@@ -4,6 +4,7 @@ export const Wrapper = styled.section`
   max-width: 112rem;
   padding: 0 1.6rem;
   margin: 4rem auto;
+  margin-top: 20rem;
 
   position: relative;
 

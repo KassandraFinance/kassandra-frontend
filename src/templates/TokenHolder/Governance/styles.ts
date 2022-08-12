@@ -10,7 +10,7 @@ export const Wrapper = styled.section`
   max-width: 112rem;
 
   @media (min-width: 860px) {
-    margin: 12rem auto;
+    margin: 18rem auto;
     padding: 0 1.6rem;
 
     /* align-items: center;
@@ -19,6 +19,11 @@ export const Wrapper = styled.section`
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
+  }
+
+  .button {
+    flex-direction: row-reverse;
+    gap: 0.8rem;
   }
 `
 

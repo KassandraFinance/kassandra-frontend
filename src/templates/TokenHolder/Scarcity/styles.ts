@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.section`
-  margin: 0 1.6rem;
+  margin-top: 10rem;
+  margin-left: 1.6rem;
+  margin-right: 1.6rem;
 
   h2 {
     margin-bottom: 2.4rem;

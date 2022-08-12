@@ -81,9 +81,10 @@ export const Button =
   justify-content: center;
   gap: 0.8rem;
   padding: 1.2rem 2.4rem;
-
+  
   height: 4.8rem;
 
+  cursor: pointer;
   border-radius: 0.4rem;
   background-color: ${({ variant }) => colors[variant]};
   border: 1px solid ${({ variant }) => colors[variant]};
