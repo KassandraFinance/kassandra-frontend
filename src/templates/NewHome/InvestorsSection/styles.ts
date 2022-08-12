@@ -13,7 +13,13 @@ export const Container = styled.section`
 export const PoolCardContainer = styled.div`
   display: flex;
   flex-direction: column-reverse;
-  gap: 8rem;
+  gap: 15rem;
+
+  margin-top: 3.2rem;
+
+  @media (max-width: 962px) {
+    margin-top: 0;
+  }
 
   @media (min-width: 960px) {
     > div:nth-child(odd) {
