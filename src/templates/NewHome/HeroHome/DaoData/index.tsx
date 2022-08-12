@@ -34,8 +34,7 @@ const DaoData = () => {
 
   const { data } = useSWR([GET_DAO_DATA, sipAddresses], (query, sipAddresses) =>
     request(SUBGRAPH_URL, query, {
-      ids: sipAddresses,
-      day: Math.trunc(Date.now() / 1000 - 60 * 60 * 24)
+      ids: sipAddresses
     })
   )
 
