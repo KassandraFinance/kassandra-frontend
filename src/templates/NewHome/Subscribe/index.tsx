@@ -5,12 +5,13 @@ import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
 import { ToastSuccess } from '../../../components/Toastify/toast'
 
+import TextField from '../../../components/TextField'
+
 import emailIcon from '../../../../public/assets/icons/email.svg'
 import logoSkew from '../../../../public/assets/images/logo-big-skew.png'
 import arrowIcon from '../../../../public/assets/utilities/foward-arrow.svg'
 
 import * as S from './styles'
-import TextField from '../../../components/TextField'
 
 interface IFormSignUpParams {
   name?: string;
@@ -39,61 +40,64 @@ const Subscribe = () => {
   }
 
   return (
-    <S.Subscribe>
-      <S.TextWrapper>
-        <S.Title>Be on the frontlines of our development</S.Title>
+    <S.SubscribeContainer>
+      <S.SubscribeBacground />
+      <S.Subscribe>
+        <S.TextWrapper>
+          <S.Title>Be on the frontlines of our development</S.Title>
 
-        <S.Text>
-          Subscribe to our newsletter to get early information and special
-          calls.
-        </S.Text>
+          <S.Text>
+            Subscribe to our newsletter to get early information and special
+            calls.
+          </S.Text>
 
-        <iframe
-          title="a"
-          name="hiddenFrame"
-          width="0"
-          height="0"
-          style={{ display: 'none' }}
-        />
+          <iframe
+            title="a"
+            name="hiddenFrame"
+            width="0"
+            height="0"
+            style={{ display: 'none' }}
+          />
 
-        <S.Form
-          action="https://heimdall.land/subscribe/heim"
-          method="POST"
-          target="hiddenFrame"
-          onSubmit={handleSubmit}
-        >
-          <TextField hidden name="user" value="Gem Hunter" />
+          <S.Form
+            action="https://heimdall.land/subscribe/heim"
+            method="POST"
+            target="hiddenFrame"
+            onSubmit={handleSubmit}
+          >
+            <TextField hidden name="user" value="Gem Hunter" />
 
-          <S.InputWrapper>
-            <S.Input
-              name="email"
-              type="email"
-              required
-              minLength={1}
-              value={formState.email ? formState.email : ''}
-              onChange={e =>
-                onChangeFormParam({
-                  key: 'email',
-                  value: e.target.value
-                })
-              }
-            />
+            <S.InputWrapper>
+              <S.Input
+                name="email"
+                type="email"
+                required
+                minLength={1}
+                value={formState.email ? formState.email : ''}
+                onChange={e =>
+                  onChangeFormParam({
+                    key: 'email',
+                    value: e.target.value
+                  })
+                }
+              />
 
-            <S.InputTextWrapper>
-              <Image src={emailIcon} width={17.5} height={12.5} />
+              <S.InputTextWrapper>
+                <Image src={emailIcon} width={17.5} height={12.5} />
 
-              <span>Email</span>
-            </S.InputTextWrapper>
+                <span>Email</span>
+              </S.InputTextWrapper>
 
-            <S.InputBtn type="submit">
-              <Image src={arrowIcon} />
-            </S.InputBtn>
-          </S.InputWrapper>
-        </S.Form>
-      </S.TextWrapper>
+              <S.InputBtn type="submit">
+                <Image src={arrowIcon} />
+              </S.InputBtn>
+            </S.InputWrapper>
+          </S.Form>
+        </S.TextWrapper>
 
-      <Image src={logoSkew} />
-    </S.Subscribe>
+        <Image src={logoSkew} />
+      </S.Subscribe>
+    </S.SubscribeContainer>
   )
 }
 

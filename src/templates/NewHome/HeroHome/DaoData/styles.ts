@@ -5,15 +5,12 @@ export const DaoData = styled.div`
 
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 3.2rem;
+  gap: 2rem;
 
   margin-top: 3.2rem;
 
-  @media (max-width: 1295px) {
+  @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 693px) {
     gap: 1.6rem;
   }
 `

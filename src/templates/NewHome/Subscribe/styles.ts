@@ -1,6 +1,33 @@
 import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
+export const SubscribeContainer = styled.div`
+  position: relative;
+`
+
+export const SubscribeBacground = styled.div`
+  position: absolute;
+  bottom: -50rem;
+  left: 0;
+  right: 0;
+
+  max-width: 192rem;
+  height: 149rem;
+
+  background-image: url('./assets/images/backgroundHome/background-quase-footer.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: center center;
+
+  @media (max-width: 992px) {
+    bottom: -70rem;
+
+    height: 203.6rem;
+
+    background-image: url('./assets/images/backgroundHome/background-quase-footer-90deg.png');
+  }
+`
+
 export const Subscribe = styled.section`
   display: flex;
   align-items: center;

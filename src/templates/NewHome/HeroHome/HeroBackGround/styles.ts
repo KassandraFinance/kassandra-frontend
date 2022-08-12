@@ -6,7 +6,7 @@ export const Grid = styled.div`
   width: 100%;
   height: 100vh;
 
-  background-image: url('./assets/images/grid-desktop-blur.png');
+  background-image: url('./assets/images/grid-desktop.png');
   background-repeat: no-repeat;
   background-position: top 6.7rem center;
 

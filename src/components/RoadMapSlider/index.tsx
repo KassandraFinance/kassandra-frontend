@@ -1,10 +1,8 @@
 import React from 'react'
-import Image from 'next/image'
 
 import Slider, { SliderSettings } from '../../components/Slider'
 import RoadMapCard from './RoadMapCard'
 
-import pinIcon from '../../../public/assets/iconGradient/road-map.svg'
 import { icons, colors, SlickArrowLeft, SlickArrowRight } from './assets'
 
 import * as S from './styles'
@@ -60,9 +58,6 @@ const RoadMapSlider = () => {
   return (
     <S.Wrapper>
       <S.TitleAndIcon>
-        <S.Icon>
-          <Image src={pinIcon} alt="" />
-        </S.Icon>
         <S.Title>Project Roadmap</S.Title>
       </S.TitleAndIcon>
       <S.Divider />
@@ -84,24 +79,6 @@ const RoadMapSlider = () => {
 
 const arrCard = [
   {
-    date: '2022 - Q2',
-    icon: icons.soon,
-    color: colors.soon,
-    title: '2nd Cycle ',
-    items: [
-      {
-        title: 'Governance & DAO',
-        text: ['Vote and take a share of Kassandra profits']
-      },
-      {
-        title: 'Tricrypto Social Index',
-        text: [
-          'Bitcoin, Ethereum, and stablecoins, magically working towards better returns'
-        ]
-      }
-    ]
-  },
-  {
     date: '2022 - Q3',
     icon: icons.next,
     color: colors.next,
@@ -116,6 +93,24 @@ const arrCard = [
       {
         title: 'Multichain',
         text: ['Time to jump into other blockchains']
+      }
+    ]
+  },
+  {
+    date: '2022 - Q2',
+    icon: icons.soon,
+    color: colors.soon,
+    title: '2nd Cycle ',
+    items: [
+      {
+        title: 'Governance & DAO',
+        text: ['Vote and take a share of Kassandra profits']
+      },
+      {
+        title: 'Tricrypto Social Index',
+        text: [
+          'Bitcoin, Ethereum, and stablecoins, magically working towards better returns'
+        ]
       }
     ]
   },

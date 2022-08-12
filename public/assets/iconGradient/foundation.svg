@@ -1,0 +1,15 @@
+<svg width="48" height="47" viewBox="0 0 48 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M48 33.168V26.3112C48 26.3111 47.9999 26.311 47.9999 26.311H47.9998C47.9998 26.311 47.9997 26.311 47.9997 26.311L24.9923 13.1639C24.3774 12.8126 23.6226 12.8126 23.0077 13.1639L0.000288009 26.311C0.000258789 26.311 0.000225962 26.311 0.000192308 26.311H0.000142143C6.47673e-05 26.311 1.59828e-06 26.3111 0 26.3112V33.168C1.59815e-06 33.1681 6.56211e-05 33.1682 0.00014405 33.1682H0.000194945C0.000229058 33.1682 0.000262581 33.1682 0.0002922 33.1682L23.0077 46.3153C23.6226 46.6667 24.3774 46.6667 24.9923 46.3153L47.9997 33.1682C47.9997 33.1682 47.9998 33.1682 47.9998 33.1682H47.9999C47.9999 33.1682 48 33.1681 48 33.168Z" fill="url(#paint0_linear_3996_41887)"/>
+<rect width="27.642" height="27.642" rx="2" transform="matrix(0.868243 0.496139 -0.868243 0.496139 24 8.57129)" fill="white" fill-opacity="0.15"/>
+<rect y="0.248069" width="27.142" height="27.142" rx="1.75" transform="matrix(0.868243 0.496139 -0.868243 0.496139 24.2154 8.69628)" stroke="white" stroke-opacity="0.08" stroke-width="0.5"/>
+<rect width="27.642" height="27.642" rx="2" transform="matrix(0.868243 0.496139 -0.868243 0.496139 24 4.28613)" fill="white" fill-opacity="0.15"/>
+<rect y="0.248069" width="27.142" height="27.142" rx="1.75" transform="matrix(0.868243 0.496139 -0.868243 0.496139 24.2154 4.41113)" stroke="white" stroke-opacity="0.08" stroke-width="0.5"/>
+<rect width="27.642" height="27.642" rx="2" transform="matrix(0.868243 0.496139 -0.868243 0.496139 24 0)" fill="white" fill-opacity="0.15"/>
+<rect y="0.248069" width="27.142" height="27.142" rx="1.75" transform="matrix(0.868243 0.496139 -0.868243 0.496139 24.2154 0.124993)" stroke="white" stroke-opacity="0.08" stroke-width="0.5"/>
+<defs>
+<linearGradient id="paint0_linear_3996_41887" x1="23.9942" y1="46.5857" x2="23.9942" y2="12.9038" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FFBF00"/>
+<stop offset="1" stop-color="#E843C4"/>
+</linearGradient>
+</defs>
+</svg>

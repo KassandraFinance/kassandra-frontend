@@ -132,9 +132,9 @@ export const Icon = styled.div`
   }
 `
 export const Title = styled.h1`
-  font-size: ${theme.font.sizes.font40};
+  font-size: ${theme.font.sizes.font32};
   font-weight: ${theme.font.weight.bold};
-  line-height: 114%;
+  line-height: 110%;
   @media (max-width: 920px) {
     font-size: ${theme.font.sizes.font32};
   }
@@ -144,12 +144,11 @@ export const Title = styled.h1`
 `
 export const Divider = styled.div`
   max-width: 10rem;
-  height: 0.3rem;
+  height: 0.1rem;
+  margin: 2.4rem auto 5.6rem;
+  border-radius: 0.05rem;
+
   background: linear-gradient(99.25deg, #e843c4 0%, #ffbf00 100%, #ffbf00 100%);
-  margin: 2.4rem auto 9.7rem;
-  @media (max-width: 920px) {
-    margin: 2.4rem auto 5.6rem;
-  }
 `
 
 export const SlickArrowButton = styled.button`

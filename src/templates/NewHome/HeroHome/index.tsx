@@ -47,6 +47,7 @@ const HeroHome = () => {
             />
           </svg>
         }
+        size="huge"
         backgroundPrimary
         onClick={() => router.push('/explore')}
       />

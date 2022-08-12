@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { abbreviateNumber } from '../../../../utils/abbreviateNumber'
+
 import * as S from './styles'
 
 interface IDaoCardProps {
@@ -10,13 +12,7 @@ interface IDaoCardProps {
 const DaoCard = ({ value, title }: IDaoCardProps) => {
   return (
     <S.DaoCardContainer>
-      <S.Value>
-        {parseFloat(value).toLocaleString('en-US', {
-          style: 'currency',
-          currency: 'USD',
-          minimumFractionDigits: 2
-        })}
-      </S.Value>
+      <S.Value>${abbreviateNumber(value)}</S.Value>
 
       <S.Title>{title}</S.Title>
     </S.DaoCardContainer>
