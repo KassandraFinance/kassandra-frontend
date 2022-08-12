@@ -9,8 +9,8 @@ const FundManager = () => (
     <S.FundManagerContainer>
       <h1>It’s easy to tokenize your portfolio and become a fund manager</h1>
       <p>
-        Select tokens straight from your wallet and start making money with
-        fees!
+        Select tokens straight from your wallet, create your own tokenized
+        ERC-20 standard investment fund, and start making money with fees!
       </p>
       <S.ImageContent>
         <span>
@@ -23,7 +23,7 @@ const FundManager = () => (
           />
         </span>
         <S.ImageDescription>
-          <p>CHOSEN TOKENS</p>
+          <p>SELECTED TOKENS</p>
           <span />
           <p>
             KASSANDRA <br /> PROTOCOL
