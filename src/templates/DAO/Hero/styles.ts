@@ -42,8 +42,6 @@ export const ImageContent = styled.div`
     background-position: 50% 35%;
   }
 
-  opacity: 0;
-
   animation-timing-function: ease;
   animation: daoImgAnimation 1s forwards;
 
@@ -67,13 +65,14 @@ export const HeroContent = styled.div`
 
   z-index: 10;
 
-  opacity: 0;
-
   animation-timing-function: ease;
-  animation: daoImgAnimation 1s forwards 1s;
+  animation: daoTexAnimation 2s forwards;
 
-  @keyframes daoImgAnimation {
+  @keyframes daoTexAnimation {
     0% {
+      opacity: 0;
+    }
+    50% {
       opacity: 0;
     }
     100% {
@@ -159,13 +158,14 @@ export const ScrollContainer = styled.div`
   right: 50%;
   transform: translateX(50%);
 
-  opacity: 0;
-
   animation-timing-function: ease;
-  animation: daoImgAnimation 1s forwards 1s;
+  animation: daoTexAnimation 2s forwards;
 
-  @keyframes daoImgAnimation {
+  @keyframes daoTexAnimation {
     0% {
+      opacity: 0;
+    }
+    50% {
       opacity: 0;
     }
     100% {
