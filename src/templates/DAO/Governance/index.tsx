@@ -10,7 +10,7 @@ const Governance = () => {
         <Caption color="magenta">GOVERNANCE</Caption>
         <Heading as="h2" level="2">
           Gather your friends and use voting power to take matters into your
-          hands.
+          hands
         </Heading>
         <Description>
           Don’t like something? Change it. Direct where Kassandra Foundation
@@ -19,6 +19,7 @@ const Governance = () => {
           the final say.
         </Description>
         <Button
+          as="a"
           className="button"
           icon={
             <Image
@@ -28,12 +29,13 @@ const Governance = () => {
             />
           }
           backgroundSecondary
-          text="Start Discuss Your Idea"
+          text="Explore Governance"
           size="large"
+          href="https://app.kassandra.finance/gov"
         />
       </S.Text>
       <S.Image>
-        <Image src="/assets/images/proposal-img.png" layout="fill" />
+        <img src="/assets/images/proposal-img.png" />
       </S.Image>
     </S.Wrapper>
   )

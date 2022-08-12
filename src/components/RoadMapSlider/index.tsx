@@ -1,10 +1,8 @@
 import React from 'react'
-import Image from 'next/image'
 
 import Slider, { SliderSettings } from '../../components/Slider'
 import RoadMapCard from './RoadMapCard'
 
-import pinIcon from '../../../public/assets/iconGradient/road-map.svg'
 import { icons, colors, SlickArrowLeft, SlickArrowRight } from './assets'
 
 import * as S from './styles'

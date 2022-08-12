@@ -36,7 +36,7 @@ export const Row1 = styled.div`
     gap: 7rem;
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 920px) {
     flex-direction: column-reverse;
   }
 `

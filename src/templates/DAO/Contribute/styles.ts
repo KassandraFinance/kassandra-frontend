@@ -1,5 +1,32 @@
 import styled from 'styled-components'
 
+export const ContributeContainer = styled.div`
+  position: relative;
+`
+
+export const ContributeBacground = styled.div`
+  position: absolute;
+  bottom: -50rem;
+  left: 0;
+  right: 0;
+
+  max-width: 192rem;
+  height: 149rem;
+
+  background-image: url('./assets/images/backgroundHome/background-quase-footer.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: center center;
+  z-index: -1;
+  @media (max-width: 992px) {
+    bottom: -70rem;
+
+    height: 203.6rem;
+
+    background-image: url('./assets/images/backgroundHome/background-quase-footer-90deg.png');
+  }
+`
+
 export const Wrapper = styled.section`
   display: flex;
   align-items: center;
@@ -10,7 +37,7 @@ export const Wrapper = styled.section`
   margin-left: auto;
   margin-right: auto;
   margin-top: 23rem;
-  margin-bottom: 31.5rem;
+  margin-bottom: 18rem;
 
   padding: 0 1.6rem;
 
@@ -72,18 +99,15 @@ interface ButtonProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const Button =
-  styled.button <
-  ButtonProps >
-  `
+export const Button = styled.a<ButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
   padding: 1.2rem 2.4rem;
-  
-  height: 4.8rem;
 
+  height: 4.8rem;
+  text-decoration: none;
   cursor: pointer;
   border-radius: 0.4rem;
   background-color: ${({ variant }) => colors[variant]};

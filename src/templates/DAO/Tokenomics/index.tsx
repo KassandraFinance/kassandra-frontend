@@ -1,8 +1,75 @@
+import React from 'react'
 import Image from 'next/image'
+import useSWR from 'swr'
+
 import { Caption, Description, Display, Heading } from '../styles'
 import * as S from './styles'
 
+type KacyMarketDataType = {
+  value: string,
+  title: string
+}
+
 const Tokenomics = () => {
+  // eslint-disable-next-line prettier/prettier
+  const [kacyMarketData, setKacyMarketData] = React.useState<KacyMarketDataType[]
+  >([
+    {
+      value: '0',
+      title: 'Price'
+    },
+    {
+      value: '0',
+      title: 'Market Cap'
+    },
+    {
+      value: '10000000',
+      title: 'Total Supply'
+    },
+    {
+      value: '0',
+      title: 'Circ. Supply'
+    }
+  ])
+
+  const { data } = useSWR('/api/overview')
+
+  React.useEffect(() => {
+    if (data) {
+      const price = data.kacyPrice?.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2
+      })
+      const marketCap = data.marketCap?.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0
+      })
+      const totalSup = (10000000).toLocaleString('en-US')
+      const circSup = data.supply?.toLocaleString('en-US')
+
+      setKacyMarketData([
+        {
+          value: price,
+          title: 'Price'
+        },
+        {
+          value: marketCap,
+          title: 'Market Cap'
+        },
+        {
+          value: totalSup,
+          title: 'Total Supply'
+        },
+        {
+          value: circSup,
+          title: 'Circ. Supply'
+        }
+      ])
+    }
+  }, [data])
+
   return (
     <S.Wrapper>
       <S.Title>
@@ -22,22 +89,16 @@ const Tokenomics = () => {
             <Image src="/assets/images/kassandra-circle.png" layout="fill" />
           </S.KassandraImageWrapper>
           <S.Values>
-            <S.Value>
-              <Caption color="magenta">Price</Caption>
-              <Heading level="3">$12,95923</Heading>
-            </S.Value>
-            <S.Value>
-              <Caption color="magenta">Market Cap</Caption>
-              <Heading level="3">$12,95923</Heading>
-            </S.Value>
-            <S.Value>
-              <Caption color="magenta">Circulating Supply</Caption>
-              <Heading level="3">$12,95923</Heading>
-            </S.Value>
-            <S.Value>
-              <Caption color="magenta">Total Supply</Caption>
-              <Heading level="3">$12,95923</Heading>
-            </S.Value>
+            {kacyMarketData.map((item: { value: string, title: string }) => {
+              return (
+                <>
+                  <S.Value>
+                    <Caption color="magenta">{item.title}</Caption>
+                    <Heading level="3">{item.value}</Heading>
+                  </S.Value>
+                </>
+              )
+            })}
           </S.Values>
         </S.Row1>
         <S.Row2>

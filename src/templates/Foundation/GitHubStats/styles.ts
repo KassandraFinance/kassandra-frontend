@@ -14,14 +14,15 @@ export const GitHubStatsWrapper = styled.section`
     letter-spacing: 0.4em;
     color: #ffbf00;
   }
+`
 
-  hr {
-    width: 9.8rem;
+export const Divider = styled.div`
+  width: 9.8rem;
+  height: 0.1rem;
+  margin-top: 2.4rem;
 
-    margin-top: 2.4rem;
-
-    color: #ffbf00;
-  }
+  background: #ffbf00;
+  border-radius: 0.05rem;
 `
 
 export const GitHubStatsContent = styled.div`
@@ -170,6 +171,27 @@ export const ArticlesData = styled.div`
     letter-spacing: 0.22em;
     font-weight: ${theme.font.weight.normal};
     color: #ffbf00;
+  }
+
+  a {
+    color: #ffbf00;
+
+    svg {
+      path {
+        stroke: #ffbf00;
+      }
+    }
+
+    &:hover {
+      color: ${theme.colors.amber};
+      .icon {
+        > svg {
+          path {
+            stroke: ${theme.colors.amber};
+          }
+        }
+      }
+    }
   }
 
   @media (max-width: 992px) {
