@@ -1,10 +1,13 @@
 import React from 'react'
 
 import Header from '../../components/Header/newHeader'
+import WavyLine from '../../components/WavyLine'
+
 import Hero from './Hero'
 import About from './About'
 import GitHubStats from './GitHubStats'
-import WavyLine from '../../components/WavyLine'
+import ProjectRoadmap from './ProjectRoadmap'
+import Contribute from '../TokenHolder/Contribute'
 
 import * as S from './styles'
 
@@ -26,6 +29,10 @@ const Foundation = () => {
       <GitHubStats />
 
       <WavyLine color="color2" />
+
+      <ProjectRoadmap />
+
+      <Contribute />
     </>
   )
 }
