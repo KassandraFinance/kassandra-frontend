@@ -41,6 +41,20 @@ export const ImageContent = styled.div`
     height: 100vh;
     background-position: 50% 35%;
   }
+
+  opacity: 0;
+
+  animation-timing-function: ease;
+  animation: daoImgAnimation 1s forwards;
+
+  @keyframes daoImgAnimation {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 `
 
 export const HeroContent = styled.div`
@@ -52,6 +66,20 @@ export const HeroContent = styled.div`
   max-width: 87.8rem;
 
   z-index: 10;
+
+  opacity: 0;
+
+  animation-timing-function: ease;
+  animation: daoImgAnimation 1s forwards 1s;
+
+  @keyframes daoImgAnimation {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 `
 
 export const ManagerNumberPage = styled.span`
@@ -130,4 +158,18 @@ export const ScrollContainer = styled.div`
   bottom: 2rem;
   right: 50%;
   transform: translateX(50%);
+
+  opacity: 0;
+
+  animation-timing-function: ease;
+  animation: daoImgAnimation 1s forwards 1s;
+
+  @keyframes daoImgAnimation {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 `
