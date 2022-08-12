@@ -76,7 +76,7 @@ const FlowingRevenue = () => {
           <span>
             <strong>{BNtoDecimal(allWithdrawFee, 18, 2)}</strong> USD
           </span>
-          <small>Accumulated Withdraw Fees since 2022.</small>
+          <small>Accumulated Withdraw Fees since 2022</small>
         </S.Data>
       </S.HeroMobile>
       <S.Hero>
@@ -84,7 +84,7 @@ const FlowingRevenue = () => {
           <span>
             <strong>{BNtoDecimal(allWithdrawFee, 18, 2)}</strong> USD
           </span>
-          <small>Accumulated Withdraw Fees since 2022.</small>
+          <small>Accumulated Withdraw Fees since 2022</small>
         </S.Data>
       </S.Hero>
     </S.Wrapper>
