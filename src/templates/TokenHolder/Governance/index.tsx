@@ -18,7 +18,19 @@ const Governance = () => {
           be able to change curated funds. Nothing is absolute; community has
           the final say.
         </Description>
-        <Button backgroundSecondary text="Start Discuss Your Idea" />
+        <Button
+          className="button"
+          icon={
+            <Image
+              src="/assets/icons/arrow-right-circle.svg"
+              width={18}
+              height={18}
+            />
+          }
+          backgroundSecondary
+          text="Start Discuss Your Idea"
+          size="large"
+        />
       </S.Text>
       <S.Image>
         <Image src="/assets/images/proposal-img.png" layout="fill" />

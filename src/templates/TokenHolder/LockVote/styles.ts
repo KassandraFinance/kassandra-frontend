@@ -2,11 +2,17 @@ import styled from 'styled-components'
 import { Button } from '../styles'
 
 export const Wrapper = styled.section`
-  max-width: 118rem;
+  max-width: 96rem;
   width: 100%;
 
   margin: 0 auto;
   padding: 0 1.6rem;
+
+  .button {
+    flex-direction: row-reverse;
+    gap: 0.8rem;
+    margin: 0 auto;
+  }
 
   .flex {
     display: flex;

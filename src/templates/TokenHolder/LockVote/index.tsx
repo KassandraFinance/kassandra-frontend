@@ -1,8 +1,10 @@
 import Image from 'next/image'
-import { Button, Description, Heading } from '../styles'
+import React from 'react'
+import Button from '../../../components/Button'
+import { Description, Heading } from '../styles'
 import * as S from './styles'
-
-// /assets/images/right-connector.svg
+import { poolsFunds, poolsFundsFuji } from '../../../constants/pools'
+import LockPoolCard from './LockPoolCard'
 
 const LockVote = () => {
   return (
@@ -18,138 +20,32 @@ const LockVote = () => {
       </S.Header>
       <div className="flex">
         <S.LockPoolContainer>
-          <S.LockPool>
-            <div className="logo">
-              <Image src="/assets/logos/kacy-logo-rounded.svg" layout="fill" />
-            </div>
-            <S.LockPoolInfo>
-              <S.LockPoolTop>
-                <Heading as="h3" level="3">
-                  No Lock Pool
-                </Heading>
-                <S.Info>
-                  <strong>132,94%</strong>
-                  <span>
-                    APR{' '}
-                    <Image
-                      src="/assets/utilities/warning-blue.svg"
-                      width={18}
-                      height={18}
-                    />
-                  </span>
-                </S.Info>
-              </S.LockPoolTop>
-              <S.Hr />
-              <S.LockPoolBottom>
-                <span>
-                  VOTING POWER <strong>1</strong>/ $KACY
-                </span>
-                <div>
-                  <Heading className="heading" as="h4" level="5">
-                    WITHDRAW DELAY
-                  </Heading>
-                  <strong>0</strong>
-                  <Heading className="heading" as="h4" level="5">
-                    DAYS
-                  </Heading>
-                  <Image
-                    className="warning-gray-icon"
-                    src="/assets/utilities/warning-gray.svg"
-                    width={18}
-                    height={18}
-                  />
-                </div>
-              </S.LockPoolBottom>
-            </S.LockPoolInfo>
-          </S.LockPool>
-          <S.LockPool>
-            <div className="logo">
-              <Image src="/assets/logos/kacy-logo-rounded.svg" layout="fill" />
-            </div>
-            <S.LockPoolInfo>
-              <S.LockPoolTop>
-                <Heading as="h3" level="3">
-                  No Lock Pool
-                </Heading>
-                <S.Info>
-                  <strong>132,94%</strong>
-                  <span>
-                    APR{' '}
-                    <Image
-                      src="/assets/utilities/warning-blue.svg"
-                      width={18}
-                      height={18}
-                    />
-                  </span>
-                </S.Info>
-              </S.LockPoolTop>
-              <S.Hr />
-              <S.LockPoolBottom>
-                <span>
-                  VOTING POWER <strong>1</strong>/ $KACY
-                </span>
-                <div>
-                  <Heading className="heading" as="h4" level="5">
-                    WITHDRAW DELAY
-                  </Heading>
-                  <strong>0</strong>
-                  <Heading className="heading" as="h4" level="5">
-                    DAYS
-                  </Heading>
-                  <Image
-                    className="warning-gray-icon"
-                    src="/assets/utilities/warning-gray.svg"
-                    width={18}
-                    height={18}
-                  />
-                </div>
-              </S.LockPoolBottom>
-            </S.LockPoolInfo>
-          </S.LockPool>
-          <S.LockPool>
-            <div className="logo">
-              <Image src="/assets/logos/kacy-logo-rounded.svg" layout="fill" />
-            </div>
-            <S.LockPoolInfo>
-              <S.LockPoolTop>
-                <Heading as="h3" level="3">
-                  No Lock Pool
-                </Heading>
-                <S.Info>
-                  <strong>132,94%</strong>
-                  <span>
-                    APR{' '}
-                    <Image
-                      src="/assets/utilities/warning-blue.svg"
-                      width={18}
-                      height={18}
-                    />
-                  </span>
-                </S.Info>
-              </S.LockPoolTop>
-              <S.Hr />
-              <S.LockPoolBottom>
-                <span>
-                  VOTING POWER <strong>1</strong>/ $KACY
-                </span>
-                <div>
-                  <Heading className="heading" as="h4" level="5">
-                    WITHDRAW DELAY
-                  </Heading>
-                  <strong>0</strong>
-                  <Heading className="heading" as="h4" level="5">
-                    DAYS
-                  </Heading>
-                  <Image
-                    className="warning-gray-icon"
-                    src="/assets/utilities/warning-gray.svg"
-                    width={18}
-                    height={18}
-                  />
-                </div>
-              </S.LockPoolBottom>
-            </S.LockPoolInfo>
-          </S.LockPool>
+          {process.env.NEXT_PUBLIC_MASTER === '1'
+            ? poolsFunds.map(pool => (
+                <LockPoolCard
+                  key={pool.pid}
+                  pid={pool.pid}
+                  address={pool.address}
+                  symbol={pool.symbol}
+                  properties={{ ...pool.properties }}
+                  stakeWithVotingPower={pool.stakeWithVotingPower}
+                  stakeWithLockPeriod={pool.stakeWithLockPeriod}
+                  isLP={pool.isLP}
+                />
+              ))
+            : poolsFundsFuji.map(pool => (
+                <LockPoolCard
+                  key={pool.pid}
+                  pid={pool.pid}
+                  address={pool.address}
+                  symbol={pool.symbol}
+                  properties={{ ...pool.properties }}
+                  stakeWithVotingPower={pool.stakeWithVotingPower}
+                  stakeWithLockPeriod={pool.stakeWithLockPeriod}
+                  isLP={pool.isLP}
+                />
+              ))}
+
           <S.Desc>
             <div className="arrow-curved-down">
               <Image src="/assets/images/arrow-curved-down.svg" layout="fill" />
@@ -162,7 +58,19 @@ const LockVote = () => {
               to receive your tokens.
             </strong>
           </S.Desc>
-          <S.ButtonKacy>Let Me Stake Some KACY</S.ButtonKacy>
+          <Button
+            className="button"
+            size="huge"
+            icon={
+              <Image
+                src="/assets/iconGradient/kacy.svg"
+                width={18}
+                height={18}
+              />
+            }
+            backgroundPrimary
+            text="Start Buying Kacy"
+          />
         </S.LockPoolContainer>
         <S.LockPoolMobileContainer>
           <S.LockPoolMobile>

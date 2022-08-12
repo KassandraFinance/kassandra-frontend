@@ -17,7 +17,6 @@ export const Title = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 2.4rem;
 `
 
 export const Container = styled.div`
