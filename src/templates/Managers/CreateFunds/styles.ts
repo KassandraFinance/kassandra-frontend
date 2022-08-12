@@ -20,7 +20,7 @@ export const CreateFundContainer = styled.section`
     font-size: ${theme.font.sizes.font48};
     text-align: center;
 
-    @media (max-width: 960px) {
+    @media (max-width: 1050px) {
       text-align: center;
     }
 
@@ -113,11 +113,14 @@ interface INumberButtonProps {
 export const DescriptionContainer = styled.div<INumberButtonProps>`
   width: 42rem;
 
-  @media (max-width: 960px) {
+  @media (max-width: 1050px) {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
+  }
+  @media (max-width: 500px) {
+    align-items: flex-start;
   }
 
   > span {
@@ -127,17 +130,21 @@ export const DescriptionContainer = styled.div<INumberButtonProps>`
     letter-spacing: 0.3em;
     text-align: center;
 
-    @media (max-width: 960px) {
+    @media (max-width: 1050px) {
       font-size: ${theme.font.sizes.font14};
     }
 
     @media (max-width: 500px) {
       width: 100%;
       text-align: left;
+      font-size: ${theme.font.sizes.font12};
     }
   }
 
   > h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 7.5rem;
     width: 42rem;
     margin-top: 1.6rem;
@@ -152,23 +159,29 @@ export const DescriptionContainer = styled.div<INumberButtonProps>`
         : `assetAnimm ease 0.4s both;
       `};
 
-    @media (max-width: 960px) {
-      width: 100%;
+    @media (max-width: 1050px) {
+      /* width: 100%; */
       text-align: center;
     }
 
     @media (max-width: 500px) {
-      display: flex;
-      align-items: center;
       font-size: ${theme.font.sizes.font24};
+      align-items: flex-start;
+      justify-content: flex-start;
+      height: 6rem;
+      width: 32rem;
       text-align: left;
     }
   }
 
   > p {
-    height: 6rem;
+    /* height: 6rem; */
     width: 42rem;
-    margin-top: 2.4rem;
+    height: 8rem;
+    margin-top: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     color: #ffffff;
     font-weight: ${theme.font.weight.light};
@@ -180,7 +193,7 @@ export const DescriptionContainer = styled.div<INumberButtonProps>`
         : `assetAnimm ease 0.4s both;
       `};
 
-    @media (max-width: 960px) {
+    @media (max-width: 1050px) {
       text-align: center;
     }
 
@@ -216,7 +229,7 @@ export const NumberButtonsContainer = styled.div`
   gap: 1.2rem;
   margin-bottom: 2.4rem;
 
-  @media (max-width: 960px) {
+  @media (max-width: 1050px) {
     position: absolute;
     bottom: -8rem;
 
@@ -264,7 +277,7 @@ export const ButtonsContainer = styled.div`
   align-items: center;
   margin-top: 2.4rem;
 
-  @media (max-width: 960px) {
+  @media (max-width: 1050px) {
     width: 100%;
     justify-content: center;
   }
