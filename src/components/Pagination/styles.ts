@@ -1,7 +1,12 @@
 import styled from 'styled-components'
 import theme from '../../styles/theme'
 
-export const PaginateContainer = styled.div`
+interface IPaginateContainerProps {
+  totalItems: boolean;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const PaginateContainer = styled.div<IPaginateContainerProps>`
   display: flex;
   align-items: center;
 
@@ -20,7 +25,7 @@ export const PaginateContainer = styled.div`
     justify-content: space-evenly;
     align-items: center;
 
-    width: 50rem;
+    width: ${props => (props.totalItems ? '30rem' : '50rem')};
     margin: 0 auto;
     padding: 0;
 
@@ -52,7 +57,7 @@ export const PaginateContainer = styled.div`
       background-color: ${theme.colors.snow};
       border: 0.2rem solid ${theme.colors.snow};
       border-radius: 1rem;
-      box-shadow: 0rem 1rem 3rem rgba(250, 250, 250, 0.5);
+      box-shadow: 0rem 0.1rem 2rem rgba(250, 250, 250, 0.3);
 
       cursor: pointer;
     }
@@ -85,7 +90,7 @@ export const PaginateContainer = styled.div`
       background-color: ${theme.colors.snow};
       border: 0.2rem solid ${theme.colors.snow};
       border-radius: 1rem;
-      box-shadow: 0rem 1rem 3rem rgba(250, 250, 250, 0.5);
+      box-shadow: 0rem 0.1rem 2rem rgba(250, 250, 250, 0.3);
 
       cursor: pointer;
     }

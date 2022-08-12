@@ -44,8 +44,8 @@ const Header = () => {
           <Link href="/managers" passHref>
             <S.MenuLink active={pathName === '/managers'}>Manager</S.MenuLink>
           </Link>
-          <Link href="/token-holder" passHref>
-            <S.MenuLink active={pathName === '/token-holder'}>DAO</S.MenuLink>
+          <Link href="/dao" passHref>
+            <S.MenuLink active={pathName === '/dao'}>DAO</S.MenuLink>
           </Link>
           <Link href="/foundation" passHref>
             <S.MenuLink active={pathName === '/foundation'}>

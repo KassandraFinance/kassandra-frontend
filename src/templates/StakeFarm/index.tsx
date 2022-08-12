@@ -24,14 +24,14 @@ import * as S from './styles'
 
 const tabs = [
   {
-    asPathText: 'farm',
-    text: 'Farm Pools',
-    icon: productBarIcon
-  },
-  {
     asPathText: 'stake',
     text: 'Stake Pools',
     icon: stakingPoolsIcon
+  },
+  {
+    asPathText: 'farm',
+    text: 'Farm Pools',
+    icon: productBarIcon
   }
 ]
 
@@ -85,7 +85,7 @@ const StakeFarm = () => {
               <S.StakeWithPowerVote>
                 <TitleSection
                   image={stakeMoneyWithdraw}
-                  title="Farm and Stake KACY"
+                  title="Stake and Farm KACY"
                   text="Earn rewards and voting power by staking KACY and other assets"
                 />
                 <VotingPower userWalletAddress={userWalletAddress} />
