@@ -1,10 +1,12 @@
 import Image from 'next/image'
 import React from 'react'
+import { poolsKacy, poolsKacyFuji } from '../../../constants/pools'
+
 import Button from '../../../components/Button'
+import LockPoolCard from './LockPoolCard'
+
 import { Description, Heading } from '../styles'
 import * as S from './styles'
-import { poolsFunds, poolsFundsFuji } from '../../../constants/pools'
-import LockPoolCard from './LockPoolCard'
 
 const LockVote = () => {
   return (
@@ -21,7 +23,7 @@ const LockVote = () => {
       <div className="flex">
         <S.LockPoolContainer>
           {process.env.NEXT_PUBLIC_MASTER === '1'
-            ? poolsFunds.map(pool => (
+            ? poolsKacy.map(pool => (
                 <LockPoolCard
                   key={pool.pid}
                   pid={pool.pid}
@@ -33,7 +35,7 @@ const LockVote = () => {
                   isLP={pool.isLP}
                 />
               ))
-            : poolsFundsFuji.map(pool => (
+            : poolsKacyFuji.map(pool => (
                 <LockPoolCard
                   key={pool.pid}
                   pid={pool.pid}
