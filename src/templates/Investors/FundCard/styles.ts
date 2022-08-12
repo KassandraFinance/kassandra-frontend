@@ -51,14 +51,14 @@ interface INameAndSymbolProps {
 export const NameAndSymbol = styled.div<INameAndSymbolProps>`
   max-width: 22rem;
   margin-left: 3.2rem;
-
   h1 {
-    font-size: 3.2rem;
-    line-height: 3.52rem;
+    font-size: 2.5rem;
+    line-height: 2.5rem;
     font-weight: 700;
   }
 
   p {
+    text-transform: Uppercase;
     margin-top: 0.8rem;
 
     font-size: 1.2rem;
@@ -66,7 +66,7 @@ export const NameAndSymbol = styled.div<INameAndSymbolProps>`
     font-weight: 400;
     color: #C4C4C4;
 
-    strong {
+    span {
       color: #FFFFFF;
     }
   }
@@ -139,7 +139,7 @@ export const CardFooter = styled.div`
   max-width: 25.4rem;
   margin-left: 3.2rem;
 
-  button {
+  a {
     width: 100%;
     height: 4.8rem;
   }
