@@ -146,6 +146,7 @@ export const Divider = styled.div`
   max-width: 10rem;
   height: 0.1rem;
   margin: 2.4rem auto 5.6rem;
+  border-radius: 0.05rem;
 
   background: linear-gradient(99.25deg, #e843c4 0%, #ffbf00 100%, #ffbf00 100%);
 `
