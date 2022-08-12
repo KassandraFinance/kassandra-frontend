@@ -17,14 +17,14 @@ import {
   SUBGRAPH_URL
 } from '../../../../constants/tokenAddresses'
 
-import useGovernance from '../../../../hooks/useGovernance'
-import useVotingPower from '../../../../hooks/useVotingPower'
-
 import waitTransaction, {
   MetamaskError,
   TransactionCallback
 } from '../../../../utils/txWait'
 import { BNtoDecimal } from '../../../../utils/numerals'
+
+import useGovernance from '../../../../hooks/useGovernance'
+import useVotingPower from '../../../../hooks/useVotingPower'
 
 import { useAppSelector, useAppDispatch } from '../../../../store/hooks'
 import { setModalAlertText } from '../../../../store/reducers/modalAlertText'
@@ -51,7 +51,7 @@ import proposalInfoIcon from '../../../../../public/assets/iconGradient/info-gra
 import proposalCompleteIcon from '../../../../../public/assets/statusProposal/proposal-complete.svg'
 import proposalWaitingIcon from '../../../../../public/assets/statusProposal/proposal-waiting.svg'
 import proposalStatusHistory from '../../../../../public/assets/iconGradient/timer-grandient.svg'
-import infoGrayIcon from '../../../../../public/assets/utilities/info-gray.svg'
+import tooltip from '../../../../../public/assets/utilities/tooltip.svg'
 
 import * as S from './styles'
 
@@ -630,7 +630,7 @@ const Proposal = () => {
         <Header />
         <Breadcrumb>
           <BreadcrumbItem href="/">Home</BreadcrumbItem>
-          <BreadcrumbItem href="/gov">Vote</BreadcrumbItem>
+          <BreadcrumbItem href="/gov">Governance</BreadcrumbItem>
           <BreadcrumbItem href={router.asPath} isLastPage>
             Proposal {router.query.proposal}
           </BreadcrumbItem>
@@ -659,6 +659,7 @@ const Proposal = () => {
                         diameter={32}
                         hasAddress={true}
                         isLink={true}
+                        tab="?tab=governance-data"
                       />
                     </S.ProposeAuthorCard>
                   </S.TitleAndAuthor>
@@ -691,6 +692,7 @@ const Proposal = () => {
                         diameter={24}
                         hasAddress={true}
                         isLink={true}
+                        tab="?tab=governance-data"
                       />
                     </S.ProposeAuthorCard>
                   </S.CardTitleWrapper>
@@ -746,10 +748,7 @@ const Proposal = () => {
               </S.VoteCardWrapper>
             </S.VoteContent>
             <S.ProposalInfo>
-              <S.ProposalTitleWrapper>
-                <Image src={proposalInfoIcon} width={24} height={24} />
-                <h1>Proposal Info</h1>
-              </S.ProposalTitleWrapper>
+              <TitleSection image={proposalInfoIcon} title="Proposal Info" />
               <S.CardWrapper>
                 <S.DescriptionTable>
                   <S.DescriptionProposal>
@@ -787,7 +786,7 @@ const Proposal = () => {
                             <Tippy content="Quorum is the minimal amount of votes that a proposal needs to have to be valid. Proposals that don’t achieve the quorum will fail.">
                               <S.Tooltip tabIndex={0}>
                                 <Image
-                                  src={infoGrayIcon}
+                                  src={tooltip}
                                   alt="Explanation"
                                   width={14}
                                   height={14}
@@ -844,10 +843,7 @@ const Proposal = () => {
                 </S.InfoTable>
               </S.CardWrapper>
               <S.ProposalDetails>
-                <S.ProposalTitleWrapper>
-                  <Image src={proposalDetailsIcon} width={24} height={24} />
-                  <h1>Details</h1>
-                </S.ProposalTitleWrapper>
+                <TitleSection image={proposalDetailsIcon} title="Details" />
                 <S.DescriptionTable>
                   {new Array(3).fill(null).map((_, index) => {
                     if (
@@ -927,11 +923,10 @@ const Proposal = () => {
                 </S.DescriptionTable>
               </S.ProposalDetails>
               <S.ProposalStatus>
-                <S.ProposalTitleWrapper>
-                  <Image src={proposalStatusHistory} width={24} height={24} />
-                  <h1>Proposal Status History</h1>
-                </S.ProposalTitleWrapper>
-
+                <TitleSection
+                  image={proposalStatusHistory}
+                  title="Proposal Status History"
+                />
                 <S.Steps>
                   {dataStatus.map((step, index) => (
                     <React.Fragment key={index}>

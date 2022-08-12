@@ -12,24 +12,26 @@ import Header from '../../components/Header'
 import Breadcrumb from '../../components/Breadcrumb'
 import BreadcrumbItem from '../../components/Breadcrumb/BreadcrumbItem'
 import SelectTabs from '../../components/SelectTabs'
+import TitleSection from '../../components/TitleSection'
 import Farm from './Farm'
 import Stake from './Stake'
 
 import productBarIcon from '../../../public/assets/iconGradient/product-bar.svg'
 import stakingPoolsIcon from '../../../public/assets/iconGradient/staking-pools.svg'
+import stakeMoneyWithdraw from '../../../public/assets/iconGradient/stake-money-withdraw.svg'
 
 import * as S from './styles'
 
 const tabs = [
   {
-    asPathText: 'farm',
-    text: 'Farm Pools',
-    icon: productBarIcon
-  },
-  {
     asPathText: 'stake',
     text: 'Stake Pools',
     icon: stakingPoolsIcon
+  },
+  {
+    asPathText: 'farm',
+    text: 'Farm Pools',
+    icon: productBarIcon
   }
 ]
 
@@ -81,21 +83,11 @@ const StakeFarm = () => {
           <S.StakeFarm>
             <S.StakeFarmHeader>
               <S.StakeWithPowerVote>
-                <S.NameStake>
-                  <S.Name>
-                    <img
-                      src="assets/iconGradient/stake-money-withdraw.svg"
-                      alt=""
-                      width={24}
-                      height={24}
-                    />
-                    <h1>Stake and Farm KACY</h1>
-                  </S.Name>
-                  <p>
-                    Earn rewards and voting power by staking KACY and other
-                    assets
-                  </p>
-                </S.NameStake>
+                <TitleSection
+                  image={stakeMoneyWithdraw}
+                  title="Stake and Farm KACY"
+                  text="Earn rewards and voting power by staking KACY and other assets"
+                />
                 <VotingPower userWalletAddress={userWalletAddress} />
               </S.StakeWithPowerVote>
 

@@ -1,4 +1,5 @@
 import Head from 'next/head'
+
 import Proposals from '../../../templates/Gov/Proposals'
 
 export default function Index() {

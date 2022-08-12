@@ -145,10 +145,11 @@ const ModalVotes = ({
                 >
                   <S.UserName>
                     <ImageProfile 
-                      address={user.voter.id} 
-                      diameter={18} 
-                      hasAddress={true} 
-                      isLink={true} 
+                      address={user.voter.id}
+                      diameter={18}
+                      hasAddress={true}
+                      isLink={true}
+                      tab="?tab=governance-data"
                     />
                   </S.UserName>
                   <S.UserVote>{BNtoDecimal(user.votingPower, 0, 2)}</S.UserVote>

@@ -1,11 +1,14 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-
   .scroll-anchor {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    /* display: inline-block; */
+    text-decoration: none;
   }
 
   .icon-scroll {
@@ -14,6 +17,8 @@ export const Wrapper = styled.div`
     border: 0.2rem solid white;
     border-radius: 1.2rem;
     margin: 0px auto;
+
+    position: relative;
   }
 
   .circle-wrap {
@@ -25,44 +30,6 @@ export const Wrapper = styled.div`
     margin-top: 0.6rem;
   }
 
-  #dot-design {
-    position: relative;
-    text-align: center;
-    padding: 0;
-    height: 3.4rem;
-    width: 5rem;
-    padding-top: 0 !important;
-    margin: 0 auto;
-  }
-
-  #dot-design:before {
-    content: '';
-    position: absolute;
-    top: 0.9rem;
-    left: 1.9rem;
-    height: 0.2rem;
-    width: 0.6rem;
-    background: white;
-    -webkit-transform: skew(0deg, 6deg);
-    -moz-transform: skew(0deg, 6deg);
-    -ms-transform: skew(0deg, 6deg);
-    -o-transform: skew(0deg, 6deg);
-    transform: skew(0deg, 40deg);
-  }
-  #dot-design:after {
-    content: '';
-    position: absolute;
-    top: 0.8rem;
-    right: 1.9rem;
-    height: 0.2rem;
-    width: 0.6rem;
-    background: white;
-    -webkit-transform: skew(0deg, -6deg);
-    -moz-transform: skew(0deg, -6deg);
-    -ms-transform: skew(0deg, -6deg);
-    -o-transform: skew(0deg, -6deg);
-    transform: skew(0deg, -40deg);
-  }
   .icon-scroll > * {
     position: absolute;
     display: block;
@@ -70,7 +37,7 @@ export const Wrapper = styled.div`
     left: 50%;
     width: 0.5rem;
     height: 1rem;
-    margin: 2rem 0 0 -2px;
+    /* margin: 2rem 0 0 -2px; */
     background: white;
     border-radius: 0.6rem;
     animation: ani-mouse 2.5s linear infinite;
@@ -90,7 +57,7 @@ export const Wrapper = styled.div`
   @keyframes ani-mouse {
     0% {
       opacity: 1;
-      top: 30%;
+      top: 0.5rem;
     }
     15% {
       opacity: 1;

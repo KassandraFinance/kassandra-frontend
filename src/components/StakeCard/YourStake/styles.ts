@@ -31,6 +31,20 @@ export const Info = styled.div`
   span:last-child {
     font-weight: ${theme.font.weight.medium};
   }
+
+  a {
+    color: ${theme.colors.snow};
+    text-decoration: none;
+
+    font-weight: ${theme.font.weight.light};
+    font-size: ${theme.font.sizes.font14};
+    line-height: ${theme.font.sizes.font14};
+    transition: 300ms;
+
+    :hover {
+      color: ${theme.colors.cyan} !important;
+    }
+  }
 `
 
 export const Stake = styled.div`

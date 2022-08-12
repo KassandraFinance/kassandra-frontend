@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
 import substr from '../../../utils/substr'
@@ -14,6 +15,7 @@ interface IImageProfileProps {
   hasAddress: boolean;
   isLink: boolean;
   fontSize?: number;
+  tab?: string;
 }
 
 const ImageProfile = ({
@@ -21,13 +23,16 @@ const ImageProfile = ({
   diameter,
   hasAddress,
   isLink,
-  fontSize
+  fontSize,
+  tab
 }: IImageProfileProps) => {
   const [dataImageProfile, setDataImageProfile] = React.useState({
     name: '',
     image: '',
     isNFT: false
   })
+
+  const router = useRouter()
 
   async function getImageAndNickname() {
     const response = await fetch(`/api/profile/${address}`)
@@ -49,7 +54,10 @@ const ImageProfile = ({
   }, [address])
 
   return (
-    <S.Image fontSize={fontSize}>
+    <S.Image
+      fontSize={fontSize}
+      onClick={() => isLink && router.push(`/profile/${address}${tab}`)}
+    >
       {dataImageProfile.name !== '' ? (
         dataImageProfile.isNFT ? (
           <NftImage NftUrl={dataImageProfile.image} imageSize="small" />
@@ -62,12 +70,14 @@ const ImageProfile = ({
       {hasAddress ? (
         dataImageProfile.name ? (
           isLink ? (
-            <Link href={`/profile/${address}`}>{dataImageProfile.name}</Link>
+            <Link href={`/profile/${address}${tab}`}>
+              {dataImageProfile.name}
+            </Link>
           ) : (
             <span>{dataImageProfile.name}</span>
           )
         ) : isLink ? (
-          <Link href={`/profile/${address}`}>{substr(address)}</Link>
+          <Link href={`/profile/${address}${tab}`}>{substr(address)}</Link>
         ) : (
           <span>{substr(address)}</span>
         )

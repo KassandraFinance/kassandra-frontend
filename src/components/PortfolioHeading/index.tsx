@@ -2,7 +2,9 @@ import React from 'react'
 import Image from 'next/image'
 import Tippy from '@tippyjs/react'
 
-import infoGray from '../../../public/assets/utilities/info-gray.svg'
+import TitleSection from '../TitleSection'
+
+import tooltip from '../../../public/assets/utilities/tooltip.svg'
 
 import * as S from './styles'
 
@@ -22,13 +24,7 @@ const PortfolioHeading = ({
   return (
     <>
       <S.HeadingWrapper>
-        <S.Heading>
-          <S.ImageWrapper>
-            <Image src={image} alt="" width={20} height={20} />
-          </S.ImageWrapper>
-
-          <S.H2>{title}</S.H2>
-        </S.Heading>
+        <TitleSection image={image} title={title} />
 
         <S.TotalContainer>
           <S.Total>
@@ -36,7 +32,7 @@ const PortfolioHeading = ({
 
             <Tippy content={tippy}>
               <S.Tooltip tabIndex={0}>
-                <Image src={infoGray} alt="Explanation" layout="responsive" />
+                <Image src={tooltip} alt="Explanation" layout="responsive" />
               </S.Tooltip>
             </Tippy>
           </S.Total>

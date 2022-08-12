@@ -17,16 +17,11 @@ export const Title = styled.div<ITitleProps>`
 
   h1 {
     line-height: ${theme.font.sizes.font32};
-    font-size: ${theme.font.sizes.font32};
+    font-size: ${theme.font.sizes.font24};
     font-weight: ${theme.font.weight.medium};
 
-    @media (max-width: 960px) {
-      line-height: ${theme.font.sizes.font24};
-      font-size: ${theme.font.sizes.font24};
-    }
-
     @media (max-width: 700px) {
-      line-height: ${theme.font.sizes.font18};
+      line-height: ${theme.font.sizes.font20};
       font-size: ${theme.font.sizes.font18};
     }
   }
@@ -38,12 +33,8 @@ export const Title = styled.div<ITitleProps>`
     font-weight: ${theme.font.weight.normal};
     text-transform: uppercase;
 
-    margin-top: 1.2rem;
-    margin-left: 4.3rem;
-
-    @media (max-width: 960px) {
-      font-size: ${theme.font.sizes.font14};
-    }
+    margin-top: 0.2rem;
+    margin-left: 4.5rem;
 
     @media (max-width: 700px) {
       font-size: ${theme.font.sizes.font12};

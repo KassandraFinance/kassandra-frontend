@@ -84,7 +84,7 @@ export interface IKacyLpPool {
       }
     },
     title?: string,
-    linkLp?: string
+    link?: string
   };
   amount: BigNumber;
 }

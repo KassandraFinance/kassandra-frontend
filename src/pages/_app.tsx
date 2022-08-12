@@ -88,9 +88,12 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
           <Toastify />
           <GlobalStyles
             selectBackground={
-              pathName === '/' || pathName === '/token-holder'
-                ? false
-                : pathName === '/about'
+              pathName === '/' ||
+              pathName === '/home' ||
+              pathName === '/about' ||
+              pathName === '/investors' ||
+              pathName === '/managers' ||
+              pathName === '/token-holder'
                 ? false
                 : true
             }

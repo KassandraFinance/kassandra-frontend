@@ -48,7 +48,7 @@ import WithdrawDate from './WithdrawDate'
 import KacyEarned from './KacyEarned'
 
 import infoCyanIcon from '../../../public/assets/notificationStatus/info.svg'
-import infoGrayIcon from '../../../public/assets/utilities/info-gray.svg'
+import tooltip from '../../../public/assets/utilities/tooltip.svg'
 
 import * as S from './styles'
 
@@ -375,7 +375,7 @@ const StakeCard = ({
                     <Tippy content="To redeem your assets you will have to first request a withdrawal and wait this amount of time to be able to redeem your assets. You will stop receiving rewards during this period and your voting power multiplier will be reduced to 1.">
                       <S.TooltipAPR tabIndex={0}>
                         <Image
-                          src={infoGrayIcon}
+                          src={tooltip}
                           alt="Explanation"
                           width={16}
                           height={16}
@@ -552,6 +552,7 @@ const StakeCard = ({
                     symbol={symbol}
                     poolPrice={poolPrice}
                     kacyPrice={kacyPrice}
+                    link={properties.link ?? ''}
                   />
                 )}
               </S.ButtonContainer>
@@ -570,6 +571,7 @@ const StakeCard = ({
           symbol={symbol}
           stakeTransaction={stakeTransaction}
           setStakeTransaction={setStakeTransaction}
+          link={properties.link ?? ''}
         />
       )}
       {isModalCancelUnstake && (
