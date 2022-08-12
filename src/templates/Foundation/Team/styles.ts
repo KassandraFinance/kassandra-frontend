@@ -6,6 +6,7 @@ export const OurTeamContainer = styled.section`
   flex-direction: column;
   align-items: center;
   margin-top: 10rem;
+  margin-bottom: 16rem;
 `
 
 export const TitleContainer = styled.div`
@@ -60,19 +61,24 @@ export const TeamCardList = styled.div`
   padding-right: 3.6rem;
   margin-top: 8rem;
 
-  //576
-  @media (max-width: 992px) {
-    width: 90rem;
+  @media (max-width: 1100px) {
+    width: 100rem;
   }
 
-  @media (max-width: 780px) {
-    width: 70rem;
+  @media (max-width: 992px) {
+    width: 100%;
   }
 
   @media (max-width: 576px) {
-    width: 50rem;
     padding-left: 1.6rem;
     padding-right: 1.6rem;
+    margin-top: 4rem;
+  }
+
+  @media (max-width: 400px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
   }
 
   img {
