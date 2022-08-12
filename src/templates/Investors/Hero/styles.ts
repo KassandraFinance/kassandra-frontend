@@ -19,6 +19,12 @@ export const Hero = styled.div`
     font-size: 4.8rem;
     line-height: 5.3rem;
     font-weight: 900;
+
+    animation: fadeInHeroInvestors ease 3s both;
+    -webkit-animation: fadeInHeroInvestors ease 3s both;
+    -moz-animation: fadeInHeroInvestors ease 3s both;
+    -o-animation: fadeInHeroInvestors ease 3s both;
+    -ms-animation: fadeInHeroInvestors ease 3s both;
   }
 
   span {
@@ -32,6 +38,12 @@ export const Hero = styled.div`
     height: 4.8rem;
 
     border-radius: 0.4rem;
+
+    animation: fadeInHeroInvestors ease 3s both;
+    -webkit-animation: fadeInHeroInvestors ease 3s both;
+    -moz-animation: fadeInHeroInvestors ease 3s both;
+    -o-animation: fadeInHeroInvestors ease 3s both;
+    -ms-animation: fadeInHeroInvestors ease 3s both;
   }
 
   @media (max-width: 992px) {
@@ -75,6 +87,66 @@ export const Hero = styled.div`
       display: none;
     }
   }
+
+  @keyframes fadeInHeroInvestors {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-moz-keyframes fadeInHeroInvestors {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-webkit-keyframes fadeInHeroInvestors {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-o-keyframes fadeInHeroInvestors {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-ms-keyframes fadeInHeroInvestors {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 `
 
 export const BackgroundImage = styled.div`
@@ -88,6 +160,57 @@ export const BackgroundImage = styled.div`
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
+
+  animation: fadeInHeroInvestorsImg ease 2s;
+  -webkit-animation: fadeInHeroInvestorsImg ease 2s;
+  -moz-animation: fadeInHeroInvestorsImg ease 2s;
+  -o-animation: fadeInHeroInvestorsImg ease 2s;
+  -ms-animation: fadeInHeroInvestorsImg ease 2s;
+
+  @keyframes fadeInHeroInvestorsImg {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-moz-keyframes fadeInHeroInvestorsImg {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-webkit-keyframes fadeInHeroInvestorsImg {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-o-keyframes fadeInHeroInvestorsImg {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-ms-keyframes fadeInHeroInvestorsImg {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 `
 
 export const Title = styled.div`
@@ -117,6 +240,11 @@ export const Title = styled.div`
   @media (max-width: 820px) {
     /* margin-top: 18rem; */
   }
+  animation: fadeInHeroInvestors ease 3s both;
+  -webkit-animation: fadeInHeroInvestors ease 3s both;
+  -moz-animation: fadeInHeroInvestors ease 3s both;
+  -o-animation: fadeInHeroInvestors ease 3s both;
+  -ms-animation: fadeInHeroInvestors ease 3s both;
 `
 
 export const Description = styled.div`
@@ -124,6 +252,12 @@ export const Description = styled.div`
 
   margin-top: 2.4rem;
   margin-bottom: 2.4rem;
+
+  animation: fadeInHeroInvestors ease 3s both;
+  -webkit-animation: fadeInHeroInvestors ease 3s both;
+  -moz-animation: fadeInHeroInvestors ease 3s both;
+  -o-animation: fadeInHeroInvestors ease 3s both;
+  -ms-animation: fadeInHeroInvestors ease 3s both;
 `
 
 export const ScroolContainer = styled.div`
