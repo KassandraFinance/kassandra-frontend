@@ -15,7 +15,7 @@ const Team = () => {
       <S.TeamCardList>
         <TeamCard
           name="Kevin Voigt"
-          role="CTO"
+          role="PROJECT LEAD"
           image="assets/team/kevin.png"
           social={{
             github: 'https://github.com/Baruel',
@@ -24,7 +24,7 @@ const Team = () => {
         />
         <TeamCard
           name="Hamilton Haskel"
-          role="CFO"
+          role="FINANCE LEAD"
           image="assets/team/hamilton.png"
           social={{
             linkedin: 'https://linkedin.com/in/hamilton-haskel-3585b477'
@@ -32,7 +32,7 @@ const Team = () => {
         />
         <TeamCard
           name="André Zanghelini"
-          role="SOLIDITY ENGINEER"
+          role="TECHNOLOGY LEAD"
           image="assets/team/andre.png"
           social={{
             github: 'https://github.com/an-dz',
@@ -58,7 +58,7 @@ const Team = () => {
         />
         <TeamCard
           name="Jony Reis"
-          role="FRONT-END WEB3 DEVELOPER"
+          role="FRONTEND DEVELOPER"
           image="assets/team/jony.png"
           social={{
             github: 'https://github.com/jonyreis',
@@ -67,38 +67,38 @@ const Team = () => {
         />
         <TeamCard
           name="Edmar Alencar"
-          role="FRONT-END DEV"
+          role="FRONTEND DEVELOPER"
           image="assets/team/edmar.png"
           social={{
-            github: 'https://github.com/jonyreis'
-            // linkedin: 'https://www.linkedin.com/in/jonyreis/'
+            github: 'https://github.com/edmaaralencar',
+            linkedin: 'https://www.linkedin.com/in/edmar-alencar-72a9a1207/'
           }}
         />
         <TeamCard
           name="Tiago Caitano"
-          role="FRONT-END DEV"
+          role="FRONTEND DEVELOPER"
           image="assets/team/tiago.png"
           social={{
-            github: 'https://github.com/jonyreis'
-            // linkedin: 'https://www.linkedin.com/in/jonyreis/'
+            github: 'https://github.com/Tiago138',
+            linkedin: 'https://www.linkedin.com/in/tiago-neves-caitano/'
           }}
         />
         <TeamCard
           name="Christian Daniel"
-          role="FRONT-END DEV"
+          role="FRONTEND DEVELOPER"
           image="assets/team/christian.png"
           social={{
-            github: 'https://github.com/jonyreis'
-            // linkedin: 'https://www.linkedin.com/in/jonyreis/'
+            github: 'https://github.com/ChristanDaniel',
+            linkedin: 'https://www.linkedin.com/in/christian-daniel-841921210/'
           }}
         />
         <TeamCard
           name="Guilherme Corrêa"
-          role="BACK-END DEV"
+          role="BACKEND DEVELOPER"
           image="assets/team/guilherme.png"
           social={{
-            github: 'https://github.com/jonyreis'
-            // linkedin: 'https://www.linkedin.com/in/jonyreis/'
+            github: 'https://github.com/guilherme-correa-s',
+            linkedin: 'https://www.linkedin.com/in/guilherme-correa-s/'
           }}
         />
         <TeamCard
@@ -113,9 +113,7 @@ const Team = () => {
           name="Felipe Gabriel"
           role="QUANTITATIVE ANALYST"
           image="assets/team/felipe.png"
-          social={{
-            linkedin: 'https://www.linkedin.com/in/pedro-jung-tavares-b53021a4/'
-          }}
+          social={{}}
         />
         <TeamCard
           name="Ricardo Werneck"
