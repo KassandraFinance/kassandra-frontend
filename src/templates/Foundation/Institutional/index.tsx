@@ -39,7 +39,10 @@ const Institutional = () => {
               investment baskets that are permissionless, non-custodial and
               actively managed, yet monetary efficient.
             </p>
-            <ExternalLink text="Learn more" />
+            <ExternalLink
+              text="Learn more"
+              hrefLink="https://medium.com/@kassandrafoundation/kassandra-protocol-d9cb71c02b02"
+            />
           </S.InstitutionalCard>
 
           <S.InstitutionalCardContainer>
@@ -62,7 +65,10 @@ const Institutional = () => {
                 represented by the KACY token holders, and earns management fees
                 over all the Kassandra investment funds.
               </p>
-              <ExternalLink text="Learn more" />
+              <ExternalLink
+                text="Learn more"
+                hrefLink="https://medium.com/@kassandrafoundation/kassandra-dao-token-8bc046d55a00"
+              />
             </S.InstitutionalCard>
           </S.InstitutionalCardContainer>
 
@@ -83,7 +89,10 @@ const Institutional = () => {
               purpose of promoting and developing Kassandra in both
               technological and marketing aspects.
             </p>
-            <ExternalLink text="Learn more" />
+            <ExternalLink
+              text="Learn more"
+              hrefLink="https://medium.com/@kassandrafoundation/kassandra-foundation-team-4f46bf13c887"
+            />
           </S.InstitutionalCard>
         </S.InstitutionalCardList>
       </S.ImageContainer>
