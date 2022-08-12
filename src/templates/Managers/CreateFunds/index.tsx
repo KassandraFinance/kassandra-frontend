@@ -25,9 +25,9 @@ const managerFundsArray = [
   },
   {
     id: 2,
-    title: 'Investors freely invest in your strategy',
+    title: 'Earn when someone invests with you',
     paragraph:
-      'Your investment fund is listed on our community interface, allowing investors to easily invest in your tokenized portfolios.',
+      'Your investment fund is listed on our community interface, allowing investors to invest in your tokenized portfolios easily, and investors pay you every time someone does it.',
     image: '/assets/images/create-funds-two.svg'
   },
   {
@@ -46,14 +46,14 @@ const managerFundsArray = [
   },
   {
     id: 5,
-    title: 'Earn money for each withdrawal',
+    title: 'The protocol earns from withdrawals',
     paragraph:
-      'Whenever money is withdrawn from your fund, a fee is collected and you get a piece of the cake.',
+      'You earn when someone deposits on your strategy, the protocol earns when someone withdraw from it. Everyone gets a piece, everyone is happy.',
     image: '/assets/images/create-funds-five.svg'
   },
   {
     id: 6,
-    title: 'Here are the gears under the hood',
+    title: 'This is Kassandra for fund managers',
     paragraph:
       'This is how our system integrates different actors to provide a seamless experience for fund managers.',
     image: '/assets/images/create-funds-six.svg'
@@ -107,7 +107,7 @@ const CreateFund = () => {
   return (
     <>
       <S.CreateFundContainer>
-        <h1>Here’s how its gonna go</h1>
+        <h1>Here are the gears under the hood</h1>
         <S.CreateFundContent>
           <S.DescriptionContainer isActiveButton={isActiveImage}>
             <S.NumberButtonsContainer>
@@ -164,7 +164,10 @@ const CreateFund = () => {
             <h2>{createManagerFunds.title}</h2>
             <p>{createManagerFunds.paragraph}</p>
             <S.ButtonsContainer>
-              <Link href="#" passHref>
+              <Link
+                href="https://3j2bd7x9okh.typeform.com/to/bBnYwVOD"
+                passHref
+              >
                 <Button
                   as="a"
                   backgroundSecondary
