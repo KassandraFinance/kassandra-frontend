@@ -91,7 +91,6 @@ export const Text = styled.div`
 export const Image = styled.div`
   position: relative;
 
-  width: 100%;
   max-width: 54rem;
   height: 44.1rem;
   margin: 0 auto;
@@ -102,6 +101,10 @@ export const Image = styled.div`
     rgba(217, 217, 217, 0.1) 99.03%
   );
   border-radius: 6.18868px;
+
+  img {
+    max-width: 100%;
+  }
 
   @media (max-width: 550px) {
     width: 100%;

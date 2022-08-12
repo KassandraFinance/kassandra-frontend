@@ -27,7 +27,7 @@ const CommunityTenets = () => {
           </S.IconWrapper>
           <S.CommunityTenetText>
             <S.Caption color="amber">Create</S.Caption>
-            <S.SubHeading>Build the future</S.SubHeading>
+            <S.SubHeading>Create Build the future</S.SubHeading>
             <Description>
               Create innovative dETFs, aid Foundation in the creation of curated
               funds and commit ideas to our governance.
@@ -44,11 +44,11 @@ const CommunityTenets = () => {
             />
           </S.IconWrapper>
           <S.CommunityTenetText>
-            <S.Caption color="amber">Create</S.Caption>
-            <S.SubHeading>Build the future</S.SubHeading>
+            <S.Caption color="cyan">Maintain</S.Caption>
+            <S.SubHeading>Oil the gears</S.SubHeading>
             <Description>
-              Create innovative dETFs, aid Foundation in the creation of curated
-              funds and commit ideas to our governance.
+              Help building events, marketing initiatives, design creation,
+              coding and whatever else there is demand for.
             </Description>
           </S.CommunityTenetText>
         </S.CommunityTenet>
@@ -63,11 +63,12 @@ const CommunityTenets = () => {
             />
           </S.IconWrapper>
           <S.CommunityTenetText>
-            <S.Caption color="amber">Create</S.Caption>
-            <S.SubHeading>Build the future</S.SubHeading>
+            <S.Caption color="magenta">Rewards</S.Caption>
+            <S.SubHeading>Get your share</S.SubHeading>
             <Description>
-              Create innovative dETFs, aid Foundation in the creation of curated
-              funds and commit ideas to our governance.
+              Reap the benefits of being part of our community by earning
+              protocol revenue from governance and occasional community
+              bounties.
             </Description>
           </S.CommunityTenetText>
         </S.CommunityTenet>

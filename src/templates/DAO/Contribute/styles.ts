@@ -17,7 +17,7 @@ export const ContributeBacground = styled.div`
   background-repeat: no-repeat;
   background-size: auto;
   background-position: center center;
-
+  z-index: -1;
   @media (max-width: 992px) {
     bottom: -70rem;
 
@@ -99,10 +99,7 @@ interface ButtonProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const Button =
-  styled.button <
-  ButtonProps >
-  `
+export const Button = styled.a<ButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -110,7 +107,7 @@ export const Button =
   padding: 1.2rem 2.4rem;
 
   height: 4.8rem;
-
+  text-decoration: none;
   cursor: pointer;
   border-radius: 0.4rem;
   background-color: ${({ variant }) => colors[variant]};
