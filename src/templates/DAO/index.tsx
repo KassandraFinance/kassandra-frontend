@@ -17,10 +17,10 @@ import * as S from './styles'
 const TokenHolder = () => {
   return (
     <>
-      <S.HeaderWrapper>
-        <Header />
-      </S.HeaderWrapper>
       <S.Wrapper>
+        <S.HeaderWrapper>
+          <Header />
+        </S.HeaderWrapper>
         <S.Hero>
           <S.HeroText>
             <S.Dao>
