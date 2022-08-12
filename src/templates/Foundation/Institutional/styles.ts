@@ -12,6 +12,8 @@ export const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
 
   h2 {
     margin-bottom: 1.5rem;
@@ -22,6 +24,10 @@ export const TitleContainer = styled.div`
     letter-spacing: 0.4em;
     text-transform: uppercase;
     text-align: center;
+
+    /* @media (max-width: 500px) {
+      text-align: start;
+    } */
   }
 
   h3 {
@@ -39,6 +45,15 @@ export const TitleContainer = styled.div`
     font-weight: ${theme.font.weight.light};
     text-align: center;
   }
+
+  @media (max-width: 500px) {
+    align-items: flex-start;
+    h2,
+    h3,
+    p {
+      text-align: start;
+    }
+  }
 `
 
 export const ImageContainer = styled.div`
@@ -46,25 +61,38 @@ export const ImageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 8.4rem;
+
+  @media (max-width: 992px) {
+    margin-top: 4rem;
+  }
 `
 
 export const ImageContent = styled.div`
   display: flex;
-  /* align-items: flex-end; */
   justify-content: center;
   width: 100%;
-  margin-right: 0.4rem;
-  /* gap: 2rem; */
+  padding: 2rem;
 
   img {
     margin-top: 8rem;
+    margin-bottom: -2rem;
 
-    width: 74.5rem;
+    width: 72rem;
     height: 17.3rem;
 
     @media (max-width: 992px) {
-      width: 61rem;
+      width: 54.8rem;
       height: 17.3rem;
+      margin-bottom: -3rem;
+    }
+
+    @media (max-width: 820px) {
+      width: 46.5rem;
+      margin-bottom: -4rem;
+    }
+
+    @media (max-width: 690px) {
+      display: none;
     }
   }
 `
@@ -72,31 +100,53 @@ export const ImageContent = styled.div`
 export const InstitutionalCardList = styled.div`
   display: flex;
   gap: 7rem;
+
+  @media (max-width: 992px) {
+    gap: 4rem;
+  }
+  @media (max-width: 820px) {
+    gap: 3rem;
+  }
+
+  @media (max-width: 690px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 50rem;
+  }
+  @media (max-width: 500px) {
+    width: 40rem;
+  }
 `
 
 export const InstitutionalCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 1rem;
+
+  @media (max-width: 992px) {
+    margin-top: -1rem;
+  }
+
+  span {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (max-width: 690px) {
+    margin-top: 0;
+    > span {
+      display: none;
+    }
+  }
 `
 
 export const InstitutionalCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2.4rem;
   width: 28.5rem;
-
-  @media (max-width: 992px) {
-    width: 23rem;
-    padding: 1rem;
-  }
-  /* @media (max-width: 768px) {
-    width: 20rem;
-  }
-  @media (max-width: 576px) {
-    width: 20rem;
-  } */
+  padding: 2.4rem;
 
   background: linear-gradient(
     180deg,
@@ -104,8 +154,18 @@ export const InstitutionalCard = styled.div`
     rgba(255, 255, 255, 0) 100%
   );
   border-radius: 1.8rem;
+  @media (max-width: 992px) {
+    width: 23rem;
+    padding: 1rem;
+  }
+  @media (max-width: 820px) {
+    width: 20rem;
+  }
+  @media (max-width: 500px) {
+    width: 25rem;
+  }
 
-  span {
+  > span {
     margin-bottom: 2.4rem;
 
     color: #ffffff;
@@ -119,6 +179,8 @@ export const InstitutionalCard = styled.div`
   }
 
   p {
+    margin-bottom: 1.6rem;
+
     color: #ffffff;
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.light};
@@ -128,21 +190,6 @@ export const InstitutionalCard = styled.div`
     @media (max-width: 992px) {
       font-size: ${theme.font.sizes.font12};
     }
-  }
-
-  a {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    margin-top: 1.6rem;
-
-    font-family: 'Rubik';
-    color: #fcfcfc;
-    font-size: ${theme.font.sizes.font16};
-    font-weight: ${theme.font.weight.light};
-    text-decoration: none;
-
-    cursor: pointer;
   }
 `
 
@@ -177,8 +224,10 @@ export const IconContent = styled.div`
   @media (max-width: 992px) {
     width: 5rem;
     height: 5rem;
+
+    img {
+      width: 3.8rem;
+      height: 2.8rem;
+    }
   }
 `
-
-// export const test = styled.div``
-// export const test = styled.div``

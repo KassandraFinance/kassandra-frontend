@@ -1,15 +1,9 @@
 import React from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
 
-import GoToPage from '../../../../public/assets/utilities/go-to-page.svg'
-import protocol from '../../../../public/assets/iconGradient/protocol.svg'
-import dao from '../../../../public/assets/iconGradient/dao.svg'
-import foundation from '../../../../public/assets/iconGradient/foundation.svg'
-import kacyAbout from '../../../../public/assets/iconGradient/kacy-about.svg'
+import ExternalLink from '../../../components/ExternalLink'
+
 import ArrowUp from '../../../../public/assets/iconGradient/arrow-up.svg'
-// import ArrowLeft from '../../../../public/assets/iconGradient/arrow-left.svg'
-// import ArrowRight from '../../../../public/assets/iconGradient/arrow-right.svg'
 
 import * as S from './styles'
 
@@ -24,14 +18,18 @@ const Institutional = () => {
       <S.ImageContainer>
         <S.ImageContent>
           <span>
-            {/* <Image src="assets/iconGradient/test.svg" alt="" /> */}
             <img src="assets/iconGradient/Institutional.svg" alt="" />
           </span>
         </S.ImageContent>
         <S.InstitutionalCardList>
           <S.InstitutionalCard>
             <S.IconContent>
-              <Image src={protocol} alt="" height={34} width={43} />
+              <img
+                src="assets/iconGradient/protocol.svg"
+                alt=""
+                height={34}
+                width={43}
+              />
             </S.IconContent>
             <S.CardTitle color="#ffbf00">PROTOCOL</S.CardTitle>
             <span>Technology</span>
@@ -41,18 +39,21 @@ const Institutional = () => {
               investment baskets that are permissionless, non-custodial and
               actively managed, yet monetary efficient.
             </p>
-            <Link href="#" passHref>
-              <a>
-                Learn more <Image src={GoToPage} alt="" />
-              </a>
-            </Link>
+            <ExternalLink text="Learn more" />
           </S.InstitutionalCard>
 
           <S.InstitutionalCardContainer>
-            <Image src={ArrowUp} alt="" />
+            <span>
+              <Image src={ArrowUp} alt="" />
+            </span>
             <S.InstitutionalCard>
               <S.IconContent>
-                <Image src={dao} alt="" height={34} width={43} />
+                <img
+                  src="assets/iconGradient/dao.svg"
+                  alt=""
+                  height={34}
+                  width={43}
+                />
               </S.IconContent>
               <S.CardTitle color="#26dbdb">DAO</S.CardTitle>
               <span>Organization</span>
@@ -61,17 +62,18 @@ const Institutional = () => {
                 represented by the KACY token holders, and earns management fees
                 over all the Kassandra investment funds.
               </p>
-              <Link href="#" passHref>
-                <a>
-                  Learn more <Image src={GoToPage} alt="" />
-                </a>
-              </Link>
+              <ExternalLink text="Learn more" />
             </S.InstitutionalCard>
           </S.InstitutionalCardContainer>
 
           <S.InstitutionalCard>
             <S.IconContent>
-              <Image src={foundation} alt="" height={34} width={43} />
+              <img
+                src="assets/iconGradient/foundation.svg"
+                alt=""
+                height={34}
+                width={43}
+              />
             </S.IconContent>
             <S.CardTitle color="#e843c4">FOUNDATION</S.CardTitle>
             <span>Forefathers</span>
@@ -81,11 +83,7 @@ const Institutional = () => {
               purpose of promoting and developing Kassandra in both
               technological and marketing aspects.
             </p>
-            <Link href="#" passHref>
-              <a>
-                Learn more <Image src={GoToPage} alt="" />
-              </a>
-            </Link>
+            <ExternalLink text="Learn more" />
           </S.InstitutionalCard>
         </S.InstitutionalCardList>
       </S.ImageContainer>
