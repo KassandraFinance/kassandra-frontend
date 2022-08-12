@@ -6,14 +6,13 @@ import * as S from './styles'
 const Hero = () => {
   return (
     <S.Hero>
+      <S.BackgroundImage />
       <S.Title>
         <span>01</span>
         <hr />
         <span>INVESTORS</span>
       </S.Title>
-      <h1>
-        Diversify with simple steps through trustworthy managers and strategies.
-      </h1>
+      <h1>Diversify with simple steps through managers and strategies</h1>
       <S.Description>
         <span>
           Social trading made safe: Know who is delegating your money, split
@@ -27,10 +26,12 @@ const Hero = () => {
         size="large"
         text="Start Investing"
         icon={<img src="/assets/utilities/go-to-page.svg" alt="go to page" />}
+        as="a"
+        href="https://app.kassandra.finance/explore"
       />
-      <S.ScrollContainer>
+      <S.ScroolContainer>
         <Scroll />
-      </S.ScrollContainer>
+      </S.ScroolContainer>
     </S.Hero>
   )
 }

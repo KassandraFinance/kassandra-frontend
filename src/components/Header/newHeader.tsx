@@ -39,10 +39,12 @@ const Header = () => {
         </S.LogoWrapper>
         <S.Menu>
           <Link href="/investors" passHref>
-            <S.MenuLink active={pathName === '/investors'}>Invest</S.MenuLink>
+            <S.MenuLink active={pathName === '/investors'}>
+              Investors
+            </S.MenuLink>
           </Link>
           <Link href="/managers" passHref>
-            <S.MenuLink active={pathName === '/managers'}>Manager</S.MenuLink>
+            <S.MenuLink active={pathName === '/managers'}>Managers</S.MenuLink>
           </Link>
           <Link href="/dao" passHref>
             <S.MenuLink active={pathName === '/dao'}>DAO</S.MenuLink>
