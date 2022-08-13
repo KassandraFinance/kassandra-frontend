@@ -1,14 +1,13 @@
 import styled, { css } from 'styled-components'
 
-export const Wrapper = styled.main`
-  background-color: #151117;
+export const Wrapper = styled.div`
   background: url('/assets/images/1920-dao-bg.png'),
     url('/assets/images/1920-dao-bg.png');
   background-repeat: no-repeat;
   background-size: auto;
   background-position: left top;
 
-  @media (max-width: 820px) {
+  @media (max-width: 992px) {
     background: url('/assets/images/768px-dao-bg.png'),
       url('/assets/images/768px-dao-bg.png');
     background-repeat: no-repeat;
@@ -16,7 +15,7 @@ export const Wrapper = styled.main`
     background-position: left top;
   }
 
-  @media (max-width: 560px) {
+  @media (max-width: 576px) {
     background: url('/assets/images/360px-dao-bg.png'),
       url('/assets/images/360px-dao-bg.png');
     background-repeat: no-repeat;
@@ -25,97 +24,11 @@ export const Wrapper = styled.main`
   }
 `
 
-export const Hero = styled.section`
-  display: flex;
-  flex-direction: column;
-  gap: 3.2rem;
-
-  width: 100%;
-  max-width: 102rem;
-  height: 57.2rem;
-
-  margin: 0 auto;
-  margin-top: 18rem;
-  padding: 0 1.6rem;
-  padding-top: 10rem;
-
-  background-image: url('/assets/images/hero-token-holder.png');
-  /* background-position: center; */
-  background-repeat: no-repeat;
-  background-size: cover;
-  /* background-blend-mode: color-dodge; */
-  background-color: #151117;
-
-  @media (max-width: 560px) {
-    background-position: 55% 53%;
-    background-size: 180%;
-  }
-
-  .button {
-    flex-direction: row-reverse;
-    gap: 0.8rem;
-    margin: 0 auto;
-  }
-`
-
 export const HeaderWrapper = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-`
-
-export const HeroText = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  h1 {
-    max-width: 63rem;
-
-    @media (max-width: 500px) {
-      text-align: left;
-      font-size: 2.4rem;
-      line-height: 3.2rem;
-    }
-  }
-
-  p {
-    max-width: 60rem;
-
-    @media (max-width: 500px) {
-      text-align: left;
-      font-size: 1.4rem;
-      line-height: 2.4rem;
-    }
-  }
-`
-
-export const Dao = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.6rem;
-
-  margin-bottom: 1.6rem;
-
-  @media (max-width: 500px) {
-    justify-content: flex-start;
-  }
-
-  div {
-    height: 1px;
-    width: 64px;
-    background-color: ${({ theme }) => theme.colors.magenta};
-  }
-
-  span {
-    color: ${({ theme }) => theme.colors.magenta};
-    font-weight: ${({ theme }) => theme.font.weight.light};
-    font-size: 1.6rem;
-    line-height: 2rem;
-    letter-spacing: 0.4rem;
-  }
 `
 
 const headingModifiers = {
@@ -330,5 +243,8 @@ export const SubHeading = styled.h3`
 `
 
 export const ScrollWrapper = styled.div`
-  margin: 3rem 0;
+  position: absolute;
+  bottom: 2rem;
+  right: 50%;
+  transform: translateX(50%);
 `

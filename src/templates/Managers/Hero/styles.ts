@@ -51,11 +51,56 @@ export const ImageContent = styled.span`
     background-position: 50% 35%;
   }
 
-  animation: fadeInHero ease 3s;
-  -webkit-animation: fadeInHero ease 3s;
-  -moz-animation: fadeInHero ease 3s;
-  -o-animation: fadeInHero ease 3s;
-  -ms-animation: fadeInHero ease 3s;
+  animation: fadeInHeroImg ease 2s;
+  -webkit-animation: fadeInHeroImg ease 2s;
+  -moz-animation: fadeInHeroImg ease 2s;
+  -o-animation: fadeInHeroImg ease 2s;
+  -ms-animation: fadeInHeroImg ease 2s;
+
+  @keyframes fadeInHeroImg {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-moz-keyframes fadeInHeroImg {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-webkit-keyframes fadeInHeroImg {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-o-keyframes fadeInHeroImg {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @-ms-keyframes fadeInHeroImg {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 `
 export const ManagerNumberPage = styled.span`
   display: flex;
@@ -63,14 +108,11 @@ export const ManagerNumberPage = styled.span`
   align-items: center;
   gap: 1.6rem;
 
-  opacity: 0;
-
-  animation: fadeInHero ease 3s both;
-  -webkit-animation: fadeInHero ease 3s both;
-  -moz-animation: fadeInHero ease 3s both;
-  -o-animation: fadeInHero ease 3s both;
-  -ms-animation: fadeInHero ease 3s both;
-  animation-delay: 1.4s;
+  animation: fadeInHero ease 3.5s both;
+  -webkit-animation: fadeInHero ease 3.5s both;
+  -moz-animation: fadeInHero ease 3.5s both;
+  -o-animation: fadeInHero ease 3.5s both;
+  -ms-animation: fadeInHero ease 3.5s both;
 
   > p {
     color: #26dbdb;
@@ -98,17 +140,17 @@ export const HeroDescription = styled.div`
   flex-direction: column;
   margin-top: 1.6rem;
 
-  opacity: 0;
-
-  animation: fadeInHero ease 3s both;
-  -webkit-animation: fadeInHero ease 3s both;
-  -moz-animation: fadeInHero ease 3s both;
-  -o-animation: fadeInHero ease 3s both;
-  -ms-animation: fadeInHero ease 3s both;
-  animation-delay: 1.4s;
+  animation: fadeInHero ease 3.5s both;
+  -webkit-animation: fadeInHero ease 3.5s both;
+  -moz-animation: fadeInHero ease 3.5s both;
+  -o-animation: fadeInHero ease 3.5s both;
+  -ms-animation: fadeInHero ease 3.5s both;
 
   @keyframes fadeInHero {
     0% {
+      opacity: 0;
+    }
+    50% {
       opacity: 0;
     }
     100% {
@@ -120,6 +162,9 @@ export const HeroDescription = styled.div`
     0% {
       opacity: 0;
     }
+    50% {
+      opacity: 0;
+    }
     100% {
       opacity: 1;
     }
@@ -127,6 +172,9 @@ export const HeroDescription = styled.div`
 
   @-webkit-keyframes fadeInHero {
     0% {
+      opacity: 0;
+    }
+    50% {
       opacity: 0;
     }
     100% {
@@ -138,6 +186,9 @@ export const HeroDescription = styled.div`
     0% {
       opacity: 0;
     }
+    50% {
+      opacity: 0;
+    }
     100% {
       opacity: 1;
     }
@@ -145,6 +196,9 @@ export const HeroDescription = styled.div`
 
   @-ms-keyframes fadeInHero {
     0% {
+      opacity: 0;
+    }
+    50% {
       opacity: 0;
     }
     100% {
@@ -186,7 +240,7 @@ export const HeroDescription = styled.div`
     }
   }
 
-  button {
+  a {
     margin-top: 3.2rem;
   }
 `

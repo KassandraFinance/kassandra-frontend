@@ -1,8 +1,8 @@
 import React from 'react'
 
-import trustlessIcon from '../../../../public/assets/iconGradient/trustless-permisionless.svg'
-import flexibleIcon from '../../../../public/assets/iconGradient/flexible-customizable.svg'
-import incentivosIcon from '../../../../public/assets/iconGradient/incentivos-alinhados.svg'
+import padlockIcon from '../../../../public/assets/iconGradient/padlock.svg'
+import switchbladeIcon from '../../../../public/assets/iconGradient/switchblade.svg'
+import GroupSocialIcon from '../../../../public/assets/iconGradient/group-social.svg'
 
 import * as S from './styles'
 import Image from 'next/image'
@@ -21,7 +21,7 @@ const About = () => {
         <S.BulletPoints>
           <S.BulletPointWrapper>
             <S.BulletPoint>
-              <Image src={trustlessIcon} width={68} height={68} />
+              <Image src={padlockIcon} width={68} height={68} />
 
               <S.BulletPointTitle>Trustless & Permisionless</S.BulletPointTitle>
             </S.BulletPoint>
@@ -31,7 +31,7 @@ const About = () => {
 
           <S.BulletPointWrapper>
             <S.BulletPoint>
-              <Image src={flexibleIcon} width={68} height={68} />
+              <Image src={switchbladeIcon} width={68} height={68} />
 
               <S.BulletPointTitle>Flexible & Customizable</S.BulletPointTitle>
             </S.BulletPoint>
@@ -41,9 +41,9 @@ const About = () => {
 
           <S.BulletPointWrapper>
             <S.BulletPoint>
-              <Image src={incentivosIcon} width={68} height={68} />
+              <Image src={GroupSocialIcon} width={68} height={68} />
 
-              <S.BulletPointTitle>Incentivos alinhados</S.BulletPointTitle>
+              <S.BulletPointTitle>Aligned Interests</S.BulletPointTitle>
             </S.BulletPoint>
 
             <S.BulletPointLine />

@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Button from '../../../components/Button'
 import Scroll from '../../../components/Scroll'
 
@@ -20,19 +21,23 @@ const HeroManager = () => (
             smart investment funds, earning additional income when people invest
             in them
           </p>
-          <Button
-            text="Create your fund"
-            size="medium"
-            backgroundPrimary
-            icon={
-              <img
-                src="/assets/utilities/go-to-page.svg"
-                alt=""
-                width={16}
-                height={16}
-              />
-            }
-          />
+          <Link href="https://3j2bd7x9okh.typeform.com/to/bBnYwVOD" passHref>
+            <Button
+              as="a"
+              target="_blank"
+              text="Create your fund"
+              size="medium"
+              backgroundPrimary
+              icon={
+                <img
+                  src="/assets/utilities/go-to-page.svg"
+                  alt=""
+                  width={16}
+                  height={16}
+                />
+              }
+            />
+          </Link>
         </S.HeroDescription>
       </S.HeroContent>
       <S.ScrollContainer>

@@ -19,6 +19,8 @@ export const SubscribeBacground = styled.div`
   background-size: auto;
   background-position: center center;
 
+  z-index: -10;
+
   @media (max-width: 992px) {
     bottom: -70rem;
 

@@ -21,11 +21,21 @@ const Contribute = () => {
             a stake in all of our protocol fees.
           </p>
           <S.ButtonContainer>
-            <S.Button variant="telegram">
+            <S.Button
+              variant="telegram"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://t.me/KassandraDAO"
+            >
               <Image src="/assets/icons/telegram.svg" width={18} height={13} />
               <span>Join Our Telegram</span>
             </S.Button>
-            <S.Button variant="discord">
+            <S.Button
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="discord"
+              href="https://discord.com/invite/fAqpbP6tFw"
+            >
               <Image src="/assets/icons/discord.svg" width={18} height={13} />
               <span>Join Our Discord</span>
             </S.Button>

@@ -15,6 +15,11 @@ export default function Index() {
         <meta property="og:image:height" content="506" />
         <meta property="og:url" content="https://kassandra.finance/" />
 
+        <meta
+          name="description"
+          content="DeFi enthusiasts building the future of asset management. Kassandra is a decentralized autonomous organization that governs a structure that allows the creation and managing of tokenized investment funds, bringing a new class of investment products to the DeFi investors."
+        />
+
         <title>Kassandra Foundation</title>
       </Head>
 

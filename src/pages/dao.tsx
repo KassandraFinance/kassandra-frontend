@@ -14,6 +14,11 @@ export default function Index() {
         <meta property="og:image:height" content="506" />
         <meta property="og:url" content="https://kassandra.finance/" />
 
+        <meta
+          name="description"
+          content="Invest in KACY, earn protocol fees and participate in our governance. Earn rewards and voting power to build, invest and contribute to Kassandra. Help maintain the DAO while gaining a stake in all of our protocol fees."
+        />
+
         <title>Kassandra DAO</title>
       </Head>
 
