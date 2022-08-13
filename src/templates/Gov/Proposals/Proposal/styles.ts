@@ -186,25 +186,6 @@ export const CardWrapper = styled.div`
     grid-gap: 3.2rem;
   }
 `
-export const ProposalTitleWrapper = styled.div`
-  display: flex;
-
-  h1 {
-    font-size: ${theme.font.sizes.font18};
-    font-weight: ${theme.font.weight.medium};
-    margin-left: 0.8rem;
-
-    @media (min-width: 768px) {
-      font-size: ${theme.font.sizes.font24};
-      margin-left: 1.6rem;
-    }
-
-    @media (min-width: 1024px) {
-      font-size: ${theme.font.sizes.font32};
-      margin-left: 2rem;
-    }
-  }
-`
 
 export const DescriptionTable = styled.section`
   width: 100%;
@@ -374,6 +355,15 @@ export const DescriptionText = styled.td`
     letter-spacing: 0.08rem;
   }
 `
+
+export const Tooltip = styled.div`
+  position: relative;
+
+  left: 0.4rem;
+
+  z-index: 99;
+`
+
 export const InfoTable = styled.table`
   width: 100%;
   height: max-content;
@@ -418,20 +408,32 @@ export const TableInfoWrapper = styled.div`
 `
 export const DataWrapper = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
   margin-top: 1.2rem;
 
-  line-height: 1.2rem;
+  line-height: 100%;
   color: #c4c4c4;
 
   &:first-child {
     margin-top: 1.6rem;
   }
 `
+
+export const Quorum = styled.div`
+  display: flex;
+  align-items: center;
+
+  img {
+    max-width: 14px;
+  }
+`
+
 export const TextKey = styled.span`
   font-size: ${theme.font.sizes.font12};
   font-weight: ${theme.font.weight.medium};
   letter-spacing: 0.06rem;
+  line-height: 100%;
 
   @media (min-width: 768px) {
     font-size: ${theme.font.sizes.font14};
@@ -444,10 +446,11 @@ export const TextValue = styled.span`
   font-weight: ${theme.font.weight.medium};
   color: #fcfcfc;
   letter-spacing: 0.06rem;
+  line-height: 100%;
 
   @media (min-width: 768px) {
     font-size: ${theme.font.sizes.font14};
-    line-height: 1.56rem;
+    line-height: 100%;
     letter-spacing: 0.07rem;
   }
 `
@@ -504,7 +507,7 @@ export const DetailsSubTitle = styled.p`
   }
 
   @media (min-width: 1024px) {
-    font-size: ${theme.font.sizes.font18};
+    font-size: ${theme.font.sizes.font16};
     line-height: 2.08rem;
     letter-spacing: 0.08rem;
   }
@@ -524,7 +527,7 @@ export const DetailsText = styled.span`
   }
 
   @media (min-width: 1024px) {
-    font-size: ${theme.font.sizes.font18};
+    font-size: ${theme.font.sizes.font16};
     line-height: 2.08rem;
     letter-spacing: 0.08rem;
   }
@@ -566,7 +569,7 @@ export const LinkTargetSnowTrace = styled.a`
     }
 
     @media (min-width: 1024px) {
-      font-size: ${theme.font.sizes.font18};
+      font-size: ${theme.font.sizes.font16};
       line-height: 2.08rem;
       letter-spacing: 0.08rem;
     }

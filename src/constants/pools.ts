@@ -9,7 +9,7 @@ interface PoolDetails {
       }
     },
     title?: string,
-    linkLp?: string
+    link?: string
   };
   stakeWithVotingPower: boolean;
   stakeWithLockPeriod: boolean;
@@ -27,7 +27,7 @@ export const LP_KACY_AVAX_PNG =
     ? '0x1938cE0E14dD71caab96F52dF3F49b1D1DAF8861'
     : '0xbaa8b0d2AA6415d5b4077C1FA06b3507577FBCd7'
 
-const LP_KACY_AVAX_JOE = '0xc45893e0ee426a643e54829ee8c697995e5980ed'
+export const LP_KACY_AVAX_JOE = '0xc45893e0ee426a643e54829ee8c697995e5980ed'
 
 export const AHYPE_ADDRESS =
   process.env.NEXT_PUBLIC_MASTER === '1'
@@ -43,7 +43,8 @@ const kacyInvestor1: PoolDetails = {
     logo: {
       src: '/assets/logos/kacy-stake.svg',
       style: { width: '5.8rem' }
-    }
+    },
+    link: `https://app.pangolin.exchange/#/swap?outputCurrency=${KACY_ADDRESS}`
   },
   stakeWithVotingPower: true,
   stakeWithLockPeriod: true,
@@ -73,7 +74,8 @@ const kacy1x: PoolDetails = {
     logo: {
       src: '/assets/logos/kacy-stake.svg',
       style: { width: '5.8rem' }
-    }
+    },
+    link: `https://legacy.pangolin.exchange/#/swap?outputCurrency=${KACY_ADDRESS}`
   },
   stakeWithVotingPower: true,
   stakeWithLockPeriod: false,
@@ -88,7 +90,8 @@ const kacy2x: PoolDetails = {
     logo: {
       src: '/assets/logos/kacy-stake.svg',
       style: { width: '5.8rem' }
-    }
+    },
+    link: `https://legacy.pangolin.exchange/#/swap?outputCurrency=${KACY_ADDRESS}`
   },
   stakeWithVotingPower: true,
   stakeWithLockPeriod: false,
@@ -103,7 +106,8 @@ const kacy3x: PoolDetails = {
     logo: {
       src: '/assets/logos/kacy-stake.svg',
       style: { width: '5.8rem' }
-    }
+    },
+    link: `https://legacy.pangolin.exchange/#/swap?outputCurrency=${KACY_ADDRESS}`
   },
   stakeWithVotingPower: true,
   stakeWithLockPeriod: false,
@@ -120,7 +124,7 @@ const lpPNG: PoolDetails = {
       style: { width: '14.4rem' }
     },
     title: '$KACY-AVAX PNG LP',
-    linkLp: `https://app.pangolin.exchange/#/add/AVAX/${KACY_ADDRESS}`
+    link: `https://legacy.pangolin.exchange/#/add/AVAX/${KACY_ADDRESS}`
   },
   stakeWithVotingPower: false,
   stakeWithLockPeriod: false,
@@ -137,7 +141,7 @@ const lpJoe: PoolDetails = {
       style: { width: '14.4rem' }
     },
     title: '$KACY-AVAX JOE LP',
-    linkLp: `https://traderjoexyz.com/pool/AVAX/${KACY_ADDRESS}`
+    link: `https://traderjoexyz.com/pool/AVAX/${KACY_ADDRESS}`
   },
   stakeWithVotingPower: false,
   stakeWithLockPeriod: false,
@@ -154,7 +158,7 @@ const ahype: PoolDetails = {
       style: { width: '5.8rem' }
     },
     title: '$aHYPE',
-    linkLp: '/explore/ahype'
+    link: '/explore/ahype'
   },
   stakeWithVotingPower: false,
   stakeWithLockPeriod: false,
@@ -171,7 +175,7 @@ const tricrypto: PoolDetails = {
       style: { width: '5.8rem' }
     },
     title: '$K3C',
-    linkLp: '/explore/k3c'
+    link: '/explore/k3c'
   },
   stakeWithVotingPower: false,
   stakeWithLockPeriod: false,
@@ -184,4 +188,14 @@ export const poolsInvestor = [kacyInvestor1, kacyInvestor2]
 export const poolsFunds = [lpPNG, lpJoe, ahype, tricrypto]
 export const poolsKacyFuji = [kacy1x, kacy2x, kacy3x]
 export const poolsFundsFuji = [lpPNG, ahype]
-export const allPools = [kacy1x, kacy2x, kacy3x, lpPNG, lpJoe, ahype, tricrypto]
+export const allPools = [
+  kacy1x,
+  kacy2x,
+  kacy3x,
+  lpPNG,
+  lpJoe,
+  ahype,
+  tricrypto,
+  kacyInvestor1,
+  kacyInvestor2
+]

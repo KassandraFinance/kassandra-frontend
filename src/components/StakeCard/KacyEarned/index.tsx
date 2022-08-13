@@ -28,11 +28,17 @@ const KacyEarned = ({
 }: IKacyEarnedProps) => {
   const { earned } = useStakingContract(Staking)
 
+  async function getKacyEaned() {
+    const earnedResponse: BigNumber = await earned(pid, userWalletAddress)
+    setKacyEarned(earnedResponse)
+  }
+
   React.useEffect(() => {
     const interval = setInterval(async () => {
-      const earnedResponse: BigNumber = await earned(pid, userWalletAddress)
-      setKacyEarned(earnedResponse)
+      getKacyEaned()
     }, 6000)
+
+    getKacyEaned()
 
     return () => clearInterval(interval)
   }, [])

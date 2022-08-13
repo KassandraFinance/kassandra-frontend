@@ -172,7 +172,7 @@ interface IChangeProps {
 // prettier-ignore
 export const Change = styled.div<IChangeProps>`
   ${({ change }) => css`
-    color: ${change < 0 ? '#E8372C' : ' #5ee66b'};
+    color: ${change < 0 ? '#EA3224' : ' #5ee66b'};
   `}
 `
 

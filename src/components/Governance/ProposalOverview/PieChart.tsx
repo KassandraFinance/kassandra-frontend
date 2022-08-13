@@ -23,7 +23,7 @@ const Chart = ({ proposalData, proposalTotal }: ProposalDataProps) => {
   const handleCheckChartColor = (ProspData: IStateProposalListProps) => {
     switch (ProspData.stateProposal) {
       case 'Failed':
-        return '#E8372C'
+        return '#EA3224'
       case 'Active':
         return '#E843C4'
       case 'Succeeded':

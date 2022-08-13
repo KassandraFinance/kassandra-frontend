@@ -1,29 +1,27 @@
 import React from 'react'
 import Image from 'next/image'
-
 import BigNumber from 'bn.js'
-import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
 import { Staking } from '../../../../constants/tokenAddresses'
-
-import useStakingContract from '../../../../hooks/useStakingContract'
-import useVotingPower from '../../../../hooks/useVotingPower'
 
 import waitTransaction, {
   MetamaskError,
   TransactionCallback
 } from '../../../../utils/txWait'
 import substr from '../../../../utils/substr'
-import { useAppSelector } from '../../../../store/hooks'
-
-// import { useMatomo } from '@datapunt/matomo-tracker-react'
-import ExternalLink from '../../../ExternalLink'
-import { ToastError, ToastSuccess, ToastWarning } from '../../../Toastify/toast'
-import Options from '../Options'
-
 import { BNtoDecimal } from '../../../../utils/numerals'
 
+import useStakingContract from '../../../../hooks/useStakingContract'
+import useVotingPower from '../../../../hooks/useVotingPower'
+
+import { useAppSelector, useAppDispatch } from '../../../../store/hooks'
+import { setModalAlertText } from '../../../../store/reducers/modalAlertText'
+
+import { ToastSuccess, ToastWarning } from '../../../Toastify/toast'
+import ExternalLink from '../../../ExternalLink'
+import ImageProfile from '../../ImageProfile'
 import Button from '../../../Button'
+import Options from '../Options'
 
 import arrowSelect from '../../../../../public/assets/utilities/arrow-select-down.svg'
 
@@ -44,6 +42,7 @@ const UndelegateVotingPower = ({
   setCurrentModal,
   setModalOpen
 }: IUndelegateVotingPowerProps) => {
+  const dispatch = useAppDispatch()
   const [optionsOpen, setOptionsOpen] = React.useState<boolean>(false)
   const [undelegateSelected, setUndelegateSelected] =
     React.useState<IDateProps>({
@@ -129,11 +128,11 @@ const UndelegateVotingPower = ({
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
-            ToastError(`Undelegate cancelled`)
+            dispatch(setModalAlertText({ errorText: `Undelegate cancelled` }))
             return
           }
 
-          ToastError(`Error`)
+          dispatch(setModalAlertText({ errorText: `Error` }))
           return
         }
 
@@ -156,11 +155,11 @@ const UndelegateVotingPower = ({
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
-            ToastError(`Undelegate cancelled`)
+            dispatch(setModalAlertText({ errorText: `Undelegate cancelled` }))
             return
           }
 
-          ToastError(`Error`)
+          dispatch(setModalAlertText({ errorText: `Error` }))
           return
         }
 
@@ -211,9 +210,11 @@ const UndelegateVotingPower = ({
           <S.Selected onClick={() => setOptionsOpen(!optionsOpen)}>
             <S.Option>
               <S.Name>
-                <Jazzicon
+                <ImageProfile
+                  address={undelegateSelected.nameToken}
                   diameter={24}
-                  seed={jsNumberForAddress(undelegateSelected.nameToken)}
+                  hasAddress={false}
+                  isLink={false}
                 />
                 <S.WithdrawDelay>
                   <p>{substr(undelegateSelected.nameToken)}</p>

@@ -5,10 +5,10 @@ import BigNumber from 'bn.js'
 
 import { Staking } from '../../../../constants/tokenAddresses'
 
-// import { useMatomo } from '@datapunt/matomo-tracker-react'
 import useStakingContract from '../../../../hooks/useStakingContract'
 import useVotingPower from '../../../../hooks/useVotingPower'
-import { useAppSelector } from '../../../../store/hooks'
+import { useAppSelector, useAppDispatch } from '../../../../store/hooks'
+import { setModalAlertText } from '../../../../store/reducers/modalAlertText'
 
 import { BNtoDecimal } from '../../../../utils/numerals'
 import substr from '../../../../utils/substr'
@@ -19,7 +19,7 @@ import waitTransaction, {
 
 import Button from '../../../Button'
 import ExternalLink from '../../../ExternalLink'
-import { ToastError, ToastSuccess, ToastWarning } from '../../../Toastify/toast'
+import { ToastSuccess, ToastWarning } from '../../../Toastify/toast'
 import Options from '../Options'
 
 import arrowSelect from '../../../../../public/assets/utilities/arrow-select-down.svg'
@@ -50,6 +50,7 @@ const DelegateVotingPower = ({
   setCurrentModal,
   setModalOpen
 }: IDelegateVotingPowerProps) => {
+  const dispatch = useAppDispatch()
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
   const [optionsOpen, setOptionsOpen] = React.useState<boolean>(false)
   const [receiverAddress, setReceiverAddress] = React.useState<string>('')
@@ -61,9 +62,13 @@ const DelegateVotingPower = ({
   })
   const [poolData, setPoolData] = React.useState<PoolData[]>([])
   const [loading, setLoading] = React.useState<boolean>(true)
+  const [errorMsg, setErrorMsg] = React.useState<boolean>(false)
 
   const { poolInfo, balance } = useStakingContract(Staking)
   const { delegateVote, delegateAllVotes } = useVotingPower(Staking)
+
+  const regex = /^0x[a-fA-F0-9]{40}$/g
+  const walletRegex: RegExpExecArray | null = regex.exec(receiverAddress)
 
   const handlePoolInfo = async () => {
     const [poolInfoOne, poolInfoTwo, poolInfoThree] = await Promise.all([
@@ -99,6 +104,34 @@ const DelegateVotingPower = ({
     setLoading(false)
   }
 
+  const handleDelegateVotes = async () => {
+    await delegateVote(
+      delegateSelected?.pid,
+      receiverAddress,
+      delegateCallback(receiverAddress)
+    )
+  }
+
+  const handleDelegateAllVoting = async () => {
+    if (!walletRegex) {
+      dispatch(setModalAlertText({ errorText: 'Invalid address' }))
+      return
+    }
+
+    await delegateAllVotes(
+      receiverAddress,
+      delegateAllCallback(receiverAddress)
+    )
+  }
+
+  React.useEffect(() => {
+    if (!walletRegex && receiverAddress !== '') {
+      setErrorMsg(true)
+      return
+    }
+    setErrorMsg(false)
+  }, [receiverAddress])
+
   React.useEffect(() => {
     handlePoolInfo()
   }, [setModalOpen, setCurrentModal])
@@ -108,11 +141,11 @@ const DelegateVotingPower = ({
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
-            ToastError(`Delegate cancelled`)
+            dispatch(setModalAlertText({ errorText: `Delegate cancelled` }))
             return
           }
 
-          ToastError(`Error`)
+          dispatch(setModalAlertText({ errorText: `Error` }))
           return
         }
 
@@ -135,11 +168,11 @@ const DelegateVotingPower = ({
       return async (error: MetamaskError, txHash: string) => {
         if (error) {
           if (error.code === 4001) {
-            ToastError(`Delegate cancelled`)
+            dispatch(setModalAlertText({ errorText: `Delegate cancelled` }))
             return
           }
 
-          ToastError(`Error`)
+          dispatch(setModalAlertText({ errorText: `Error` }))
           return
         }
 
@@ -156,26 +189,6 @@ const DelegateVotingPower = ({
     },
     []
   )
-
-  const handleDelegateVotes = async () => {
-    await delegateVote(
-      delegateSelected?.pid,
-      receiverAddress,
-      delegateCallback(receiverAddress)
-    )
-  }
-
-  const handleDelegateAllVoting = async () => {
-    if (receiverAddress === '') {
-      ToastError('Invalid address')
-      return
-    }
-
-    await delegateAllVotes(
-      receiverAddress,
-      delegateAllCallback(receiverAddress)
-    )
-  }
 
   return (
     <>
@@ -218,10 +231,12 @@ const DelegateVotingPower = ({
         )}
         <span>Select the address you wish to delegate the voting power</span>
         <S.Input
+          error={errorMsg}
           placeholder="Enter a 0x address"
           value={receiverAddress}
           onChange={event => setReceiverAddress(event.target.value)}
         />
+        <S.Error error={errorMsg}>Invalid address</S.Error>
         <S.ButtonContainer>
           <Button
             size="large"
@@ -234,9 +249,7 @@ const DelegateVotingPower = ({
             size="large"
             fullWidth
             backgroundSecondary
-            disabledNoEvent={
-              delegateSelected.nameToken === '' || receiverAddress === ''
-            }
+            disabledNoEvent={walletRegex === null}
             text="Delegate Votes"
             onClick={handleDelegateVotes}
           />

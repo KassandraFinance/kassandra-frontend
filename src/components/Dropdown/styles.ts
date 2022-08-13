@@ -41,7 +41,7 @@ export const DropButton = styled.button`
   position: relative;
 
   display: inline-block;
-  margin-right: 4.2rem;
+  margin-right: 3.8rem;
   padding-top: 1.2rem;
   padding-bottom: 1.3rem;
 

@@ -212,7 +212,7 @@ const FundCard = ({ product }: IFundCardProps) => {
                     <span
                       style={{
                         color:
-                          parseFloat(changeWeek[1]) >= 0 ? '#5EE56B' : '#E8372C'
+                          parseFloat(changeWeek[1]) >= 0 ? '#5EE56B' : '#EA3224'
                       }}
                     >
                       {changeWeek[1]}%
@@ -235,7 +235,7 @@ const FundCard = ({ product }: IFundCardProps) => {
                     <span
                       style={{
                         color:
-                          parseFloat(changeWeek[0]) >= 0 ? '#5EE56B' : '#E8372C'
+                          parseFloat(changeWeek[0]) >= 0 ? '#5EE56B' : '#EA3224'
                       }}
                     >
                       {changeWeek[0]}%

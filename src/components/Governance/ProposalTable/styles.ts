@@ -139,8 +139,8 @@ export const Td = styled.td`
       padding: 2.4rem 3.2rem;
 
       background-color: ${theme.colors.darkPurple};
-      border-top: 0.1px solid ${theme.colors.grayDisabled};
-      border-bottom: 0.1px solid ${theme.colors.grayDisabled};
+      border-top: 0.1rem solid ${theme.colors.grayDisabled};
+      border-bottom: 0.1rem solid ${theme.colors.grayDisabled};
 
       @media (max-width: 768px) {
         padding: 2.4rem;
@@ -205,7 +205,6 @@ export const TimeFrame = styled.p`
   line-height: 100%;
   font-size: ${theme.font.sizes.font16};
   font-weight: ${theme.font.weight.light};
-  text-transform: capitalize;
 
   @media (max-width: 768px) {
     margin-left: 1.6rem;

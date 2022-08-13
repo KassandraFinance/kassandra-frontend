@@ -3,10 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
-import { ToastSuccess, ToastError, ToastWarning } from '../../Toastify/toast'
-
-import { Kacy } from '../../../constants/tokenAddresses'
+import { ToastSuccess, ToastWarning } from '../../Toastify/toast'
 
 import { BNtoDecimal } from '../../../utils/numerals'
 import waitTransaction, {
@@ -14,7 +11,8 @@ import waitTransaction, {
   TransactionCallback
 } from '../../../utils/txWait'
 
-import { useAppSelector } from '../../../store/hooks'
+import { useAppSelector, useAppDispatch } from '../../../store/hooks'
+import { setModalAlertText } from '../../../store/reducers/modalAlertText'
 
 import { Staking } from '../../../constants/tokenAddresses'
 import useERC20Contract from '../../../hooks/useERC20Contract'
@@ -22,7 +20,7 @@ import useStakingContract from '../../../hooks/useStakingContract'
 import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
 import Button from '../../Button'
-import InputTokenValue from '../../InputTokenValue'
+import InputTokenValue from '../../PoolOperations/InputTokenValue'
 
 import * as S from './styles'
 
@@ -35,6 +33,7 @@ interface IModalStakeProps {
   symbol: string;
   stakeTransaction: string;
   setStakeTransaction: React.Dispatch<React.SetStateAction<string>>;
+  link: string;
 }
 
 const ModalStakeAndWithdraw = ({
@@ -45,10 +44,12 @@ const ModalStakeAndWithdraw = ({
   productCategories,
   symbol,
   stakeTransaction,
-  setStakeTransaction
+  setStakeTransaction,
+  link
 }: IModalStakeProps) => {
-  const [isAmount, setIsAmount] = React.useState<boolean>(false)
+  const dispatch = useAppDispatch()
 
+  const [isAmount, setIsAmount] = React.useState<boolean>(false)
   const [balance, setBalance] = React.useState<BigNumber>(new BigNumber(0))
   const [multiplier, setMultiplier] = React.useState<number>(0)
   const [amountStake, setAmountStake] = React.useState<BigNumber>(
@@ -70,7 +71,6 @@ const ModalStakeAndWithdraw = ({
     const kacyAmount = percentage.mul(balance).div(new BigNumber(100))
 
     if (inputRef.current !== null) {
-      // eslint-disable-next-line prettier/prettier
       inputRef.current.value = BNtoDecimal(kacyAmount, 18).replace(
         /\u00A0/g,
         ''
@@ -155,11 +155,17 @@ const ModalStakeAndWithdraw = ({
         trackCancelBuying()
 
         if (error.code === 4001) {
-          ToastError(`Staking of ${symbol} cancelled`)
+          dispatch(
+            setModalAlertText({ errorText: `Staking of ${symbol} cancelled` })
+          )
           return
         }
 
-        ToastError(`Failed to stake ${symbol}. Please try again later.`)
+        dispatch(
+          setModalAlertText({
+            errorText: `Failed to stake ${symbol}. Please try again later.`
+          })
+        )
         return
       }
 
@@ -190,11 +196,17 @@ const ModalStakeAndWithdraw = ({
         trackCancelBuying()
 
         if (error.code === 4001) {
-          ToastError(`Unstaking of ${symbol} cancelled`)
+          dispatch(
+            setModalAlertText({ errorText: `Unstaking of ${symbol} cancelled` })
+          )
           return
         }
 
-        ToastError(`Failed to unstake ${symbol}. Please try again later.`)
+        dispatch(
+          setModalAlertText({
+            errorText: `Failed to unstake ${symbol}. Please try again later.`
+          })
+        )
         return
       }
 
@@ -332,13 +344,12 @@ const ModalStakeAndWithdraw = ({
               Confirm
             </S.ConfirmButton>
 
-            {symbol === 'KACY' && (
+            <Link href={link} passHref>
               <Button
                 as="a"
                 backgroundBlack
                 fullWidth
-                text="Get KACY"
-                href={`https://app.pangolin.exchange/#/swap?outputCurrency=${Kacy}`}
+                text={`Get ${symbol}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => {
@@ -346,32 +357,7 @@ const ModalStakeAndWithdraw = ({
                   setStakeTransaction('')
                 }}
               />
-            )}
-            {symbol === 'aHYPE' && (
-              <Link href="/explore/ahype" passHref>
-                <Button backgroundBlack fullWidth text="Get aHYPE" />
-              </Link>
-            )}
-            {symbol === 'K3C' && (
-              <Link href="/explore/k3c" passHref>
-                <Button backgroundBlack fullWidth text="Get K3C" />
-              </Link>
-            )}
-            {symbol === 'LP-PNG' && (
-              <Button
-                as="a"
-                backgroundBlack
-                fullWidth
-                text="Get LP-PNG"
-                href={`https://app.pangolin.exchange/#/add/AVAX/${Kacy}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => {
-                  setModalOpen(false)
-                  setStakeTransaction('')
-                }}
-              />
-            )}
+            </Link>
           </S.Main>
         </S.BackgroundBlack>
       </S.BorderGradient>

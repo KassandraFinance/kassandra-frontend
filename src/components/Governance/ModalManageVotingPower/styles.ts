@@ -18,8 +18,7 @@ interface IModalContainerProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const ModalContainer = styled.div<IModalContainerProps>
-  `
+export const ModalContainer = styled.div<IModalContainerProps>`
   position: fixed;
   top: 50%;
   left: 50%;
@@ -116,8 +115,7 @@ interface ISelectProps {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const Select = styled.button<ISelectProps>
-  `
+export const Select = styled.button<ISelectProps>`
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -141,7 +139,24 @@ export const Select = styled.button<ISelectProps>
   }
 `
 
-export const Input = styled.input`
+interface IError {
+  error: boolean;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const Error = styled.span<IError>`
+  visibility: ${props => (props.error ? 'visible' : 'hidden')};
+  color: ${theme.colors.red};
+  margin-top: 8px !important;
+  margin-bottom: 0 !important;
+`
+
+interface IInput {
+  error: boolean;
+}
+
+// eslint-disable-next-line prettier/prettier
+export const Input = styled.input<IInput>`
   width: 100%;
   height: 4.6rem;
   padding: ${theme.spacings.space16};
@@ -153,7 +168,8 @@ export const Input = styled.input`
   letter-spacing: 0.05em;
 
   background-color: #ffffff15;
-  border: 1px solid #ffffff15;
+  border: 1px solid;
+  border-color: ${props => (props.error ? theme.colors.red : '#ffffff15')};
 
   @media (max-width: 440px) {
     font-size: ${theme.font.sizes.font12};
@@ -168,7 +184,8 @@ export const Input = styled.input`
   }
 
   &:focus {
-    outline: 1px solid ${theme.colors.snow};
+    outline: 1px solid ${props =>
+      props.error ? theme.colors.red : theme.colors.snow};
   }
 `
 
@@ -176,7 +193,7 @@ export const ButtonContainer = styled.div`
   width: 100%;
   display: flex;
   gap: 1.6rem;
-  margin-top: ${theme.spacings.space40};
+  margin-top: ${theme.spacings.space18};
   margin-bottom: ${theme.spacings.space24};
 
   @media (max-width: 440px) {

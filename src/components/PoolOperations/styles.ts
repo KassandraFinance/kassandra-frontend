@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 // eslint-disable-next-line prettier/prettier
-export const HeimOperationsContainer = styled.div`
+export const PoolOperationsContainer = styled.div`
   position: -webkit-sticky;
   position: sticky;
   top: 0.8rem;

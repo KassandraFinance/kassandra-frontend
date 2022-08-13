@@ -1,8 +1,13 @@
 import { gql } from 'graphql-request'
 
 export const GET_PROPOSALS = gql`
-  query {
-    proposals(orderDirection: desc, orderBy: number, first: 5) {
+  query ($skip: Int!, $take: Int!) {
+    proposals(
+      orderDirection: desc
+      orderBy: number
+      first: $take
+      skip: $skip
+    ) {
       id
       number
       targets

@@ -1,16 +1,19 @@
 import React, { FormEvent } from 'react'
 import Image from 'next/image'
-import { ToastError } from '../../Toastify/toast'
 import 'tippy.js/dist/tippy.css'
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+
 import web3 from '../../../utils/web3'
 
-import { useAppSelector } from '../../../store/hooks'
+import { useAppSelector, useAppDispatch } from '../../../store/hooks'
+import { setModalAlertText } from '../../../store/reducers/modalAlertText'
 
 import Button from '../../Button'
-import UserNFTs from '../../UserNFts'
+import UserNFTs, { INftDetailsListProps } from '../../UserNFts'
 import NftImage from '../../NftImage'
+import { NftDetailsProps } from '../../Governance/UserDescription'
 
 import * as S from './styles'
 
@@ -32,7 +35,8 @@ type UserEditInfoFormProps = {
   website: string,
   telegram: string,
   discord: string,
-  description: string
+  description: string,
+  nft: NftDetailsProps | undefined
 }
 
 const ModalUserEditInfo = ({
@@ -43,12 +47,11 @@ const ModalUserEditInfo = ({
   setUserImage,
   setUserData
 }: IModalUserEditInfoProps) => {
-  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
-  const inputRefModal = React.useRef<HTMLInputElement>(null)
-
   const [isStateSocialMidia, setIsStateSocialMidia] = React.useState(false)
   const [isStateManagerInfo, setIsStateManagerInfo] = React.useState(false)
   const [isDropdownAddNft, setIsDropdownAddNft] = React.useState(false)
+  const [userNftDetails, setUserNftDetails] =
+    React.useState<INftDetailsListProps>()
   const [editYourProfileInput, setEditYourProfileInput] =
     React.useState<UserEditInfoFormProps>({
       ...userData
@@ -58,6 +61,13 @@ const ModalUserEditInfo = ({
     image_file: '',
     isNFTPreviewModal: imageUser.isNFT
   })
+
+  const dispatch = useAppDispatch()
+  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
+
+  const inputRefModal = React.useRef<HTMLInputElement>(null)
+
+  const { trackEventFunction } = useMatomoEcommerce()
 
   function handleCloseModal() {
     setModalOpen(false)
@@ -71,6 +81,19 @@ const ModalUserEditInfo = ({
     event.preventDefault()
     const { nickname, twitter, website, telegram, discord, description } =
       editYourProfileInput
+
+    const nftDetails = userImageModal.isNFTPreviewModal
+      ? {
+          contractType: userNftDetails?.contract_type,
+          collectionName: userNftDetails?.name,
+          symbol: userNftDetails?.symbol,
+          tokenAddress: userNftDetails?.token_address,
+          tokenId: userNftDetails?.token_id,
+          chain: userNftDetails?.chain,
+          nftName: userNftDetails?.metadata.name,
+          nftDescription: userNftDetails?.metadata.description
+        }
+      : undefined
 
     try {
       const response = await fetch('/api/nonce')
@@ -111,7 +134,8 @@ const ModalUserEditInfo = ({
             image: userImageModal.image_file
               ? ''
               : userImageModal.image_preview,
-            isNFT: userImageModal.isNFTPreviewModal
+            isNFT: userImageModal.isNFTPreviewModal,
+            nft: nftDetails
           })
         })
         setUserData(editYourProfileInput)
@@ -137,8 +161,27 @@ const ModalUserEditInfo = ({
   }
 
   function handleImagePreview(event: FileList) {
-    if (event[0].size > 300000)
-      return ToastError('Images should be less than 300KB')
+    if (event[0].size > 300000) {
+      dispatch(
+        setModalAlertText({
+          errorText: 'Image is bigger than 300KB.',
+          solutionText: 'Image should be less than 300KB.'
+        })
+      )
+      return
+    }
+
+    const allowedFileTypes = ['image/png', 'image/jpeg', 'image/gif']
+
+    if (allowedFileTypes.indexOf(event[0].type) === -1) {
+      dispatch(
+        setModalAlertText({
+          errorText: 'Wrong image format.',
+          solutionText: 'Image should be jpg, jpeg or png.'
+        })
+      )
+      return
+    }
 
     if (event) {
       const image_as_base64 = URL.createObjectURL(event[0])
@@ -196,10 +239,12 @@ const ModalUserEditInfo = ({
                     height={123}
                   />
                 ) : userImageModal.isNFTPreviewModal ? (
-                  <NftImage
-                    NftUrl={`${userImageModal.image_preview}`}
-                    imageSize="large"
-                  />
+                  <S.UserImage>
+                    <NftImage
+                      NftUrl={`${userImageModal.image_preview}`}
+                      imageSize="large"
+                    />
+                  </S.UserImage>
                 ) : userImageModal.image_preview !== '' &&
                   userImageModal.image_preview !== undefined ? (
                   <img
@@ -231,11 +276,25 @@ const ModalUserEditInfo = ({
                         handleImagePreview(event.target.files)
                       }
                     }}
+                    onClick={() =>
+                      trackEventFunction(
+                        'click-on-button',
+                        'add-image',
+                        'edit-modal-profile'
+                      )
+                    }
                   />
                   <S.ButtonAddNft
                     type="button"
                     isDropdownAddNft={isDropdownAddNft}
-                    onClick={() => setIsDropdownAddNft(!isDropdownAddNft)}
+                    onClick={() => {
+                      trackEventFunction(
+                        'click-on-button',
+                        'add-nft',
+                        'edit-modal-profile'
+                      )
+                      setIsDropdownAddNft(!isDropdownAddNft)
+                    }}
                   >
                     Add Image NFT
                     <Image
@@ -252,12 +311,13 @@ const ModalUserEditInfo = ({
                       isDropdownAddNft={isDropdownAddNft}
                       setIsDropdownAddNft={setIsDropdownAddNft}
                       inputRefModal={inputRefModal}
+                      setUserNftDetails={setUserNftDetails}
                     />
                   </S.UserAddNftImage>
                 </span>
               </S.UserImageContent>
               <S.UserNameContent>
-                <p>NICKNAME</p>
+                <S.NicknameTilte>NICKNAME</S.NicknameTilte>
                 <input
                   placeholder="Your Name"
                   onChange={event =>
@@ -413,6 +473,13 @@ const ModalUserEditInfo = ({
               size="claim"
               backgroundSecondary
               fullWidth
+              onClick={() =>
+                trackEventFunction(
+                  'click-on-button',
+                  'save-edit-info',
+                  'edit-modal-profile'
+                )
+              }
             />
             <Button
               type="button"

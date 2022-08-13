@@ -11,12 +11,10 @@ import {
 } from '../../../constants/tokenAddresses'
 
 import useGovernance from '../../../hooks/useGovernance'
-import { useAppSelector } from '../../../store/hooks'
 
 import { GET_PROPOSALS } from './graphql'
 
 import * as S from './styles'
-import { ToastError } from '../../Toastify/toast'
 
 const statsSecundaryProposalLibColor: { [key: string]: string } = {
   'voting open': '#E843C4',
@@ -24,15 +22,15 @@ const statsSecundaryProposalLibColor: { [key: string]: string } = {
   queued: '#FFBF00',
   pending: '#FFBF00',
   executed: '#2CE878',
-  defeated: '#E8372C',
-  expired: '#E8372C',
+  defeated: '#EA3224',
+  expired: '#EA3224',
   canceled: '#BDBDBD'
 }
 
 const statsPrimaryProposalLibColor: { [key: string]: string } = {
   active: '#E843C4',
   succeeded: '#2CE878',
-  failed: '#E8372C'
+  failed: '#EA3224'
 }
 
 interface IProposalsListProps {
@@ -49,35 +47,21 @@ interface IProposalsListProps {
   timeToEndProposal: string;
 }
 
-export const ProposalTable = () => {
-  const { userWalletAddress, chainId } = useAppSelector(state => state)
+interface IProposalTableProps {
+  skip?: number;
+  take: number;
+}
 
+export const ProposalTable = ({ skip = 0, take }: IProposalTableProps) => {
   // eslint-disable-next-line prettier/prettier
-  const [proposalsList, setProposalsList] = React.useState<
-    Array<IProposalsListProps>
-  >([])
-
-  const networksAvailabe = [43113, 43114]
-
-  React.useEffect(() => {
-    if (
-      userWalletAddress.length > 0 &&
-      chainId &&
-      !networksAvailabe.includes(chainId)
-    ) {
-      ToastError(
-        'Change your network to Avalanche to be able to view the proposals.'
-      )
-      return
-    }
-  }, [chainId, userWalletAddress])
+  const [proposalsList, setProposalsList] = React.useState<Array<IProposalsListProps>>([])
 
   const secondsPerBlock =
     chains[process.env.NEXT_PUBLIC_MASTER === '1' ? 'avalanche' : 'fuji']
       .secondsPerBlock
 
-  const { data } = useSWR([GET_PROPOSALS], query =>
-    request(SUBGRAPH_URL, query)
+  const { data } = useSWR([GET_PROPOSALS, skip, take], (query, skip, take) =>
+    request(SUBGRAPH_URL, query, { skip, take })
   )
 
   const governance = useGovernance(GovernorAlpha)
@@ -157,7 +141,7 @@ export const ProposalTable = () => {
                     </S.StatusProposal>
 
                     <S.TimeFrame>
-                      {proposal.state[1]} ends {proposal.timeToEndProposal}
+                      {proposal.state[1]} in {proposal.timeToEndProposal}
                     </S.TimeFrame>
 
                     <S.StateMutability

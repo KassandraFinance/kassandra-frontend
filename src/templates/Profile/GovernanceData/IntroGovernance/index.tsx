@@ -71,8 +71,10 @@ const IntroGovernance = ({
       <S.IntroWalletAddress>
         <S.VotingPowerContent>
           <S.AddressTotalVotingPower>
-            <span className="address-total-voting-power">
-              TOTAL KACY STAKED
+            <S.TextAndTooltip>
+              <span className="address-total-voting-power">
+                TOTAL KACY STAKED
+              </span>
               <Tippy content="The amount of KACY that this address has staked.">
                 <S.Tooltip>
                   <Image
@@ -83,7 +85,7 @@ const IntroGovernance = ({
                   />
                 </S.Tooltip>
               </Tippy>
-            </span>
+            </S.TextAndTooltip>
             {address || userWalletAddress ? (
               <span className="value-total-voting-power">
                 {BNtoDecimal(new BigNumber(totalKacyStaked), 18, 2)}
@@ -101,7 +103,19 @@ const IntroGovernance = ({
           <S.AllVotingPowerCard>
             <S.ReceivedAndOwnedVotingPower>
               <S.OwnedVotingPower>
-                <span className="gray-color">Owned Voting Power</span>
+                <S.TextAndTooltip>
+                  <span className="gray-color">Owned Voting Power</span>
+                  <Tippy content="Self delegated voting power">
+                    <S.Tooltip>
+                      <Image
+                        src={tooltip}
+                        alt="Explanation"
+                        width={16}
+                        height={16}
+                      />
+                    </S.Tooltip>
+                  </Tippy>
+                </S.TextAndTooltip>
                 <span className="bold">
                   {userDelegatingTotal
                     ? BNtoDecimal(userDelegatingTotal, 18, 2)
@@ -129,7 +143,10 @@ const IntroGovernance = ({
                 }
                 onClick={() => setIsModalManageVotingPower(true)}
               />
-              <ExternalLink text="Obtain Voting Power" hrefNext="#" />
+              <ExternalLink
+                text="Obtain Voting Power"
+                hrefNext="/farm?tab=stake"
+              />
             </S.ManageDelegation>
           </S.AllVotingPowerCard>
         </S.VotingPowerContent>

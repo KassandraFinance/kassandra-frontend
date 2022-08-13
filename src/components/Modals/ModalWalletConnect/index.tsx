@@ -3,6 +3,7 @@ import detectEthereumProvider from '@metamask/detect-provider'
 
 import { useRouter } from 'next/router'
 import useConnect from '../../../hooks/useConnect'
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 import { useAppSelector } from '../../../store/hooks'
 
 import Tippy from '@tippyjs/react'
@@ -26,11 +27,12 @@ const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
     cleanError
   } = useConnect()
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
+  const { trackEventFunction } = useMatomoEcommerce()
 
   const router = useRouter()
   const [hasEthereumProvider, setHasEthereumProvider] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
-  const [provider, serProvider] = React.useState('')
+  const [provider, setProvider] = React.useState('')
 
   function handleCloseModal() {
     const pahtName = router.pathname
@@ -103,7 +105,12 @@ const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
                   type="button"
                   onClick={() => {
                     if (hasEthereumProvider) {
-                      serProvider('metamask')
+                      trackEventFunction(
+                        'click-on-button',
+                        'metamask',
+                        'header-modal-connect'
+                      )
+                      setProvider('metamask')
                       setLoading(true)
                       connect()
                     }
@@ -119,7 +126,12 @@ const ModalWalletConnect = ({ setModalOpen }: IModalWalletConnect) => {
               <S.WrapperIconsBackGround
                 type="button"
                 onClick={() => {
-                  serProvider('walletConnect')
+                  trackEventFunction(
+                    'click-on-button',
+                    'wallet-connect',
+                    'header-modal-connect'
+                  )
+                  setProvider('walletConnect')
                   setLoading(true)
                   connectToWalletConnect()
                 }}

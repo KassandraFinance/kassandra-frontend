@@ -7,23 +7,22 @@ import request from 'graphql-request'
 import Big from 'big.js'
 import { toChecksumAddress } from 'web3-utils'
 
-import useERC20Contract, { ERC20 } from '../../hooks/useERC20Contract'
+import { ERC20 } from '../../hooks/useERC20Contract'
 import useStakingContract from '../../hooks/useStakingContract'
 import usePriceLP from '../../hooks/usePriceLP'
 import { useAppSelector } from '../../store/hooks'
 import useVotingPower from '../../hooks/useVotingPower'
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
 import { GET_PROFILE } from './graphql'
 import {
   LPDaiAvax,
-  LPKacyAvaxJOE,
-  LPKacyAvaxPNG,
   products,
   Staking,
   SUBGRAPH_URL,
   chains
 } from '../../constants/tokenAddresses'
-import { allPools } from '../../constants/pools'
+import { LP_KACY_AVAX_PNG, LP_KACY_AVAX_JOE, allPools } from '../../constants/pools'
 
 import Header from '../../components/Header'
 import Breadcrumb from '../../components/Breadcrumb'
@@ -85,7 +84,7 @@ export interface IKacyLpPool {
       }
     },
     title?: string,
-    linkLp?: string
+    link?: string
   };
   amount: BigNumber;
 }
@@ -107,7 +106,6 @@ const Profile = () => {
   const [cardstakesPool, setCardStakesPool] = React.useState<IKacyLpPool[]>([])
   const [myFunds, setMyFunds] = React.useState<ImyFundsType>({})
   const [hasEthereumProvider, setHasEthereumProvider] = React.useState(false)
-  const [totalInvestmented, setTotalInvestmented] = React.useState(new Big(0))
   const [totalVotingPower, setTotalVotingPower] = React.useState(
     new BigNumber(0)
   )
@@ -124,16 +122,19 @@ const Profile = () => {
   const [isSelectTab, setIsSelectTab] = React.useState<
     string | string[] | undefined
   >('portfolio')
-  const votingPower = useVotingPower(Staking)
-
-  const { chainId, userWalletAddress } = useAppSelector(state => state)
+  const [priceInDolar, setPriceInDolar] = React.useState({
+    tokenizedFunds: new Big(0),
+    assetsToken: new Big(0),
+    totalInvestmented: new Big(0)
+  })
 
   const router = useRouter()
+  const { chainId, userWalletAddress } = useAppSelector(state => state)
 
+  const votingPower = useVotingPower(Staking)
   const { userInfo } = useStakingContract(Staking)
-  const { getReserves } = usePriceLP()
-  const lpToken = useERC20Contract(LPKacyAvaxPNG)
-  const lpJoeToken = useERC20Contract(LPKacyAvaxJOE)
+  const { getPriceKacyAndLP } = usePriceLP()
+  const { trackEventFunction } = useMatomoEcommerce()
 
   const profileAddress = router.query.profileAddress
   const isSelectQueryTab = router.query.tab
@@ -182,51 +183,26 @@ const Profile = () => {
     }
   }
 
-  async function handleLPtoUSD() {
-    const reservesKacyAvax = await getReserves(LPKacyAvaxPNG)
-    const reservesKacyAvaxJoe = await getReserves(LPKacyAvaxJOE)
-    const reservesDaiAvax = await getReserves(LPDaiAvax)
-
-    let kacyReserve = reservesKacyAvax._reserve1
-    let avaxKacyReserve = reservesKacyAvax._reserve0
-    const avaxKacyReserveJoe = reservesKacyAvaxJoe._reserve0
-    let DaiReserve = reservesDaiAvax._reserve1
-    let AvaxDaiReserve = reservesDaiAvax._reserve0
-
-    if (process.env.NEXT_PUBLIC_MASTER !== '1') {
-      kacyReserve = reservesKacyAvax._reserve0
-      avaxKacyReserve = reservesKacyAvax._reserve1
-      DaiReserve = reservesDaiAvax._reserve0
-      AvaxDaiReserve = reservesDaiAvax._reserve1
-    }
-    const avaxInDollar = Big(DaiReserve).div(Big(AvaxDaiReserve))
-    const kacyInDollar = avaxInDollar.mul(Big(avaxKacyReserve).div(kacyReserve))
-    const allAVAXDollar = Big(avaxKacyReserve).mul(avaxInDollar)
-    const allAVAXDollarJoe = Big(avaxKacyReserveJoe).mul(avaxInDollar)
-    const supplyLPToken = await lpToken.totalSupply()
-    const supplyLPJoeToken = await lpJoeToken.totalSupply()
-
-    if (supplyLPToken.toString() !== '0') {
-      const LP = allAVAXDollar.mul(2).div(Big(supplyLPToken.toString()))
-
+  async function getLiquidityPoolPriceInDollar() {
+    const { kacyPriceInDollar, priceLP } = await getPriceKacyAndLP(LP_KACY_AVAX_PNG, LPDaiAvax, true)
+    if (priceLP) {
       setPriceToken(prevState => ({
         ...prevState,
-        'LP-PNG': LP
+        'LP-PNG': priceLP,
+        KACY: kacyPriceInDollar
       }))
     }
-    if (supplyLPJoeToken.toString() !== '0') {
-      const priceLPJoe = allAVAXDollarJoe
-        .mul(2)
-        .div(Big(supplyLPJoeToken.toString()))
-      setPriceToken(prevState => ({
-        ...prevState,
-        'LP-JOE': priceLPJoe
-      }))
+
+    if (priceLP && chains.avalanche.chainId === chainId) {
+      const priceLPJoe = await getPriceKacyAndLP(LP_KACY_AVAX_JOE, LPDaiAvax, true)
+
+      if (priceLPJoe.priceLP) {
+        setPriceToken(prevState => ({
+          ...prevState,
+          'LP-JOE': priceLPJoe.priceLP,
+        }))
+      }
     }
-    setPriceToken(prevState => ({
-      ...prevState,
-      KACY: kacyInDollar
-    }))
   }
 
   async function getAmountToken() {
@@ -291,7 +267,9 @@ const Profile = () => {
   })
 
   React.useEffect(() => {
-    window.ethereum.on('accountsChanged', handleAccountChange)
+    if (hasEthereumProvider) {
+      window.ethereum.on('accountsChanged', handleAccountChange)
+    }
   }, [])
 
   React.useEffect(() => {
@@ -357,7 +335,7 @@ const Profile = () => {
 
     if (profileAddress) {
       getAmountToken()
-      handleLPtoUSD()
+      getLiquidityPoolPriceInDollar()
     }
   }, [profileAddress, chainId])
 
@@ -366,25 +344,32 @@ const Profile = () => {
       return
     }
 
-    let tokenValueOnDolar = new Big(0)
+    let tokenAmountInTokenizedFunds = new Big(0)
+    let tokenAmountInAssetsToken = new Big(0)
 
-    if (profileAddress && cardstakesPool.length > 0) {
+    if (profileAddress && cardstakesPool.length > 0 && assetsValueInWallet) {
       cardstakesPool.forEach(pool => {
-        tokenValueOnDolar = tokenValueOnDolar.add(
-          Big(
-            (assetsValueInWallet[pool.address]
-              ? pool.amount.add(assetsValueInWallet[pool.address])
-              : pool.amount
-            ).toString()
-          )
-            .mul(priceToken[pool.symbol])
-            .div(Big(10).pow(18))
-        )
+        const tokenAmount = Big(
+          (assetsValueInWallet[pool.address]
+            ? pool.amount.add(assetsValueInWallet[pool.address])
+            : pool.amount
+          ).toString()
+        ).mul(priceToken[pool.symbol]).div(Big(10).pow(18))
+
+        if (pool.address === myFunds[pool.address]) {
+          tokenAmountInAssetsToken = tokenAmountInAssetsToken.add(tokenAmount)
+        } else {
+          tokenAmountInTokenizedFunds = tokenAmountInTokenizedFunds.add(tokenAmount)
+        }
       })
     }
 
-    setTotalInvestmented(tokenValueOnDolar)
-  }, [profileAddress, priceToken, assetsValueInWallet, data, chainId, userWalletAddress])
+    setPriceInDolar({
+      assetsToken: tokenAmountInTokenizedFunds,
+      tokenizedFunds: tokenAmountInAssetsToken,
+      totalInvestmented: tokenAmountInTokenizedFunds.add(tokenAmountInAssetsToken)
+    })
+  }, [profileAddress, priceToken, assetsValueInWallet, data, chainId])
 
   React.useEffect(() => {
     if (Number(chainId) !== chain.chainId) {
@@ -421,7 +406,7 @@ const Profile = () => {
       <S.ProfileContainer>
         <UserDescription userWalletUrl={profileAddress} />
 
-        {!hasEthereumProvider ? (
+        {userWalletAddress.length === 0 && Number(chainId) !== chain.chainId ? (
           <Web3Disabled
             textButton="Connect Wallet"
             textHeader="You need to have a Wallet installed"
@@ -439,7 +424,7 @@ const Profile = () => {
           <>
             <S.TotalValuesCardsContainer>
               <AnyCardTotal
-                text={String(BNtoDecimal(totalInvestmented, 6, 2, 2) || 0)}
+                text={String(BNtoDecimal(priceInDolar.totalInvestmented, 6, 2, 2) || 0)}
                 TooltipText="The amount in US Dollars that this address has in investments with Kassandra. This considers tokens, funds, LP, and staked assets."
                 textTitle="HOLDINGS"
                 isDolar={true}
@@ -473,13 +458,13 @@ const Profile = () => {
                 cardstakesPool={cardstakesPool}
                 priceToken={priceToken}
                 myFunds={myFunds}
+                priceInDolar={priceInDolar}
               />
             ) : isSelectTab === tabs[1].asPathText ? (
               <AnyCard text="Coming Soon..." />
             ) : isSelectTab === tabs[2].asPathText ? (
               <>
-                <AnyCard text="Coming Soon..." />
-                {/* <GovernanceData address={profileAddress} /> */}
+                <GovernanceData address={profileAddress} />
               </>
             ) : (
               <Loading marginTop={4} />

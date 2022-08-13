@@ -163,7 +163,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
           </S.TextWrapper>
           <S.TokenInfo>
             <S.Price isValuePercentage={kacyMarketData.kacyPercentage > 0}>
-              <span>USD {kacyMarketData.price.toFixed(2)}</span>
+              <span>USD {kacyMarketData.price?.toFixed(2)}</span>
               <div>
                 <Image
                   src={
@@ -175,7 +175,7 @@ const KacyCard = ({ kacyMarketData }: IKacyCardProps) => {
                   width={14}
                   height={14}
                 />
-                <p>{kacyMarketData.kacyPercentage.toFixed(2)}%</p>
+                <p>{kacyMarketData.kacyPercentage?.toFixed(2)}%</p>
               </div>
             </S.Price>
           </S.TokenInfo>

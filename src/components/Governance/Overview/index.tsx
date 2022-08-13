@@ -29,18 +29,19 @@ interface IGovernancesProps {
 
 export const Overview = () => {
   // eslint-disable-next-line prettier/prettier
-  const [isModalWalletConnect, setIsModalWalletConnect] =
-    React.useState<boolean>(false)
+  const [isModalWalletConnect, setIsModalWalletConnect] = React.useState<boolean>(false)
   const [yourVotingPower, setYourVotingPower] = React.useState(new BigNumber(0))
   const [governances, setGovernances] = React.useState<IGovernancesProps>({
-    totalVotingPower: new BigNumber(-1),
+    totalVotingPower: new BigNumber(0),
     votingAddresses: 0
   })
 
   const userWalletAddress = useAppSelector(state => state.userWalletAddress)
 
-  const { data } = useSWR([GET_GOVERNANCES], query =>
-    request(SUBGRAPH_URL, query, { id: userWalletAddress })
+  const { data } = useSWR(
+    [GET_GOVERNANCES, userWalletAddress],
+    (query, userWalletAddress) =>
+      request(SUBGRAPH_URL, query, { id: userWalletAddress })
   )
 
   React.useEffect(() => {
@@ -85,7 +86,7 @@ export const Overview = () => {
           <S.VotingDataCard>
             <S.TextVoting>
               TOTAL VOTING POWER
-              <Tippy content="Voting power allows you to create and vote on proposals. To obtain voting power you need to stake your $KACY tokens.">
+              <Tippy content="This is the total voting power across all participants of the Kassandra Decentralized Autonomous Organization in this blockchain.">
                 <S.Tooltip>
                   <Image
                     src={tooltip}

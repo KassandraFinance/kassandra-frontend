@@ -30,7 +30,7 @@ const SelectOperatorMobile = ({
 
   return (
     <>
-      <S.HeimOperationContainerMobile>
+      <S.PoolOperationsContainerMobile>
         <S.SelectOperatorMobile>
           <S.InputMobile
             type="radio"
@@ -86,7 +86,7 @@ const SelectOperatorMobile = ({
             Swap
           </S.LabelMobile>
         </S.SelectOperatorMobile>
-      </S.HeimOperationContainerMobile>
+      </S.PoolOperationsContainerMobile>
     </>
   )
 }

@@ -1,19 +1,5 @@
 import styled, { css } from 'styled-components'
 import theme from '../../../styles/theme'
-import Tippy from '@tippyjs/react'
-
-export const ErrorTippy = styled(Tippy)`
-  margin-bottom: -1.5rem;
-
-  background-color: rgba(31, 31, 31, 0.82);
-  border: 0.1rem solid #e8372c;
-  border-bottom: 0.3rem solid #e8372c;
-
-  &[data-placement^='top'] > .tippy-arrow::before {
-    margin-bottom: -0.1rem;
-    border-top-color: #e8372c;
-  }
-`
 
 // ========== FORM ==========
 export const FormContainer = styled.form`
@@ -323,6 +309,21 @@ export const InputTokensContainer = styled.div`
   border-radius: 1.6rem;
 `
 
+export const Flex = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+
+  width: 100%;
+`
+
+export const Top = styled.div`
+  display: flex;
+  align-items: flex-end;
+
+  width: 100%;
+`
+
 export const Info = styled.div`
   display: flex;
   flex-direction: column;
@@ -335,10 +336,10 @@ export const Amount = styled.div`
   display: flex;
   align-items: flex-end;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 
   .price-dolar {
     margin-top: 0.2rem;
@@ -350,15 +351,19 @@ export const Amount = styled.div`
 `
 
 interface ISpanProps {
-  total?: boolean;
+  color: 'red' | 'white' | 'amber';
+}
+
+const colors = {
+  red: '#EA3224',
+  white: '#ffffff',
+  amber: '#FFBF00'
 }
 
 // prettier-ignore
 export const Span = styled.span<ISpanProps>`
-  height: 1.7rem;
-
-  color: ${props => (props.total ? theme.colors.amber : '#fff')};
-  font-size: ${theme.font.sizes.font14};
+  color: ${({color}) => colors[color]};
+  font-size: ${theme.font.sizes.font12};
 
   @media(max-width: 380px) {
     font-size: 1.3rem;
@@ -396,7 +401,7 @@ export const PriceImpactWrapper = styled.span<IPriceImpactWrapperProps>`
   height: 1.7rem;
 
   ${( {  price }) => css`
-    color: ${price <= 1 ? '#5EE56B' : price <= 2 ? '#bdbdbd' : price <= 5 ?'orange' : '#E8372C'};
+    color: ${price <= 1 ? '#5EE56B' : price <= 2 ? '#bdbdbd' : price <= 5 ?'orange' : '#EA3224'};
   `}
 
   font-size: ${theme.font.sizes.font14};
@@ -432,6 +437,10 @@ export const Symbol = styled.h3<ISymbolProps>`
 
     .image {
       margin-right: 0.8rem !important;
+
+      img {
+        border-radius: 50%;
+      }
     }
 
     @media(max-width: 380px) {

@@ -30,15 +30,17 @@ import waitTransaction, {
   TransactionCallback
 } from '../../utils/txWait'
 
-import { useAppSelector } from '../../store/hooks'
+import { useAppSelector, useAppDispatch } from '../../store/hooks'
+import { setModalAlertText } from '../../store/reducers/modalAlertText'
 
 import 'tippy.js/dist/tippy.css'
 import Button from '../Button'
-import { ToastSuccess, ToastError, ToastWarning } from '../Toastify/toast'
+import { ToastSuccess, ToastWarning } from '../Toastify/toast'
 import ModalRequestUnstake from '../Modals/ModalRequestUnstake'
 import ModalCancelUnstake from '../Modals/ModalCancelUnstake'
 import ModalWalletConnect from '../Modals/ModalWalletConnect'
 import ModalStakeAndWithdraw from '../Modals/ModalStakeAndWithdraw'
+import Loading from '../Loading'
 
 import Details from './Details'
 import YourStake from './YourStake'
@@ -46,7 +48,7 @@ import WithdrawDate from './WithdrawDate'
 import KacyEarned from './KacyEarned'
 
 import infoCyanIcon from '../../../public/assets/notificationStatus/info.svg'
-import infoGrayIcon from '../../../public/assets/utilities/info-gray.svg'
+import tooltip from '../../../public/assets/utilities/tooltip.svg'
 
 import * as S from './styles'
 
@@ -97,6 +99,9 @@ const StakeCard = ({
   isLP,
   address
 }: IStakingProps) => {
+  const dispatch = useAppDispatch()
+
+  const [isLoading, setIsLoading] = React.useState<boolean>(true)
   const [isDetails, setIsDetails] = React.useState<boolean>(false)
   const [isModalStake, setIsModalStake] = React.useState<boolean>(false)
   const [isModalWallet, setIsModaWallet] = React.useState<boolean>(false)
@@ -158,7 +163,7 @@ const StakeCard = ({
     setStakeTransaction(transaction)
   }
 
-  async function handleLPtoUSD() {
+  async function getLiquidityPoolPriceInDollar() {
     const addressProviderReserves = isLP && address ? address : LP_KACY_AVAX_PNG
 
     const { kacyPriceInDollar, priceLP } = await getPriceKacyAndLP(
@@ -202,11 +207,17 @@ const StakeCard = ({
     return async (error: MetamaskError, txHash: string) => {
       if (error) {
         if (error.code === 4001) {
-          ToastError(`Approval of ${symbol} cancelled`)
+          dispatch(
+            setModalAlertText({ errorText: `Approval of ${symbol} cancelled` })
+          )
           return
         }
 
-        ToastError(`Failed to approve ${symbol}. Please try again later.`)
+        dispatch(
+          setModalAlertText({
+            errorText: `Failed to approve ${symbol}. Please try again later.`
+          })
+        )
         return
       }
 
@@ -225,11 +236,15 @@ const StakeCard = ({
     return async (error: MetamaskError, txHash: string) => {
       if (error) {
         if (error.code === 4001) {
-          ToastError(`Cancelled reward claim`)
+          dispatch(setModalAlertText({ errorText: `Cancelled reward claim` }))
           return
         }
 
-        ToastError(`Failed to claim your rewards. Please try again later.`)
+        dispatch(
+          setModalAlertText({
+            errorText: `Failed to claim your rewards. Please try again later.`
+          })
+        )
         return
       }
 
@@ -245,7 +260,7 @@ const StakeCard = ({
   }, [])
 
   React.useEffect(() => {
-    handleLPtoUSD()
+    getLiquidityPoolPriceInDollar()
   }, [infoStaked.stakingToken, pid, data])
 
   React.useEffect(() => {
@@ -267,11 +282,31 @@ const StakeCard = ({
       stakingContract.lockUntil(pid, userWalletAddress).then(setLockPeriod)
   }, [userWalletAddress, infoStaked.stakingToken])
 
+  React.useEffect(() => {
+    if (infoStaked.apr.lt(new BigNumber(0))) {
+      return
+    }
+
+    setIsLoading(false)
+  }, [infoStaked])
+
   return (
     <>
       <div>
         <S.BorderGradient stakeWithVotingPower={!stakeWithVotingPower}>
-          <S.StakeCard>
+          {isLoading && (
+            <div
+              style={{
+                height: `${userWalletAddress ? '52.3rem' : '30.2rem'}`,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              <Loading marginTop={0} />
+            </div>
+          )}
+          <S.StakeCard style={{ display: `${isLoading ? 'none' : 'block'}` }}>
             <S.InterBackground stakeWithVotingPower={!stakeWithVotingPower}>
               <img
                 src={properties.logo.src}
@@ -340,7 +375,7 @@ const StakeCard = ({
                     <Tippy content="To redeem your assets you will have to first request a withdrawal and wait this amount of time to be able to redeem your assets. You will stop receiving rewards during this period and your voting power multiplier will be reduced to 1.">
                       <S.TooltipAPR tabIndex={0}>
                         <Image
-                          src={infoGrayIcon}
+                          src={tooltip}
                           alt="Explanation"
                           width={16}
                           height={16}
@@ -383,7 +418,7 @@ const StakeCard = ({
                           text="Claim"
                           size="claim"
                           backgroundSecondary
-                          disabledNoEvent={kacyEarned.toString() === '0'}
+                          disabledNoEvent={kacyEarned.lte(new BigNumber(0))}
                           onClick={() =>
                             stakingContract.getReward(
                               pid,
@@ -517,6 +552,7 @@ const StakeCard = ({
                     symbol={symbol}
                     poolPrice={poolPrice}
                     kacyPrice={kacyPrice}
+                    link={properties.link ?? ''}
                   />
                 )}
               </S.ButtonContainer>
@@ -535,6 +571,7 @@ const StakeCard = ({
           symbol={symbol}
           stakeTransaction={stakeTransaction}
           setStakeTransaction={setStakeTransaction}
+          link={properties.link ?? ''}
         />
       )}
       {isModalCancelUnstake && (

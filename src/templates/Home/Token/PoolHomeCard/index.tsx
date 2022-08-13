@@ -288,7 +288,7 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
             ? 'The safest assets yield farming for you'
             : 'Automagically invest on strong communities'}
         </h2>
-        <span>{pool.fundSummary}</span>
+        <p>{pool.fundSummary}</p>
         <S.InfoList>
           <li>
             <div className="image">
