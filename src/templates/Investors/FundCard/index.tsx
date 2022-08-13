@@ -194,7 +194,8 @@ const FundCard = ({ fund }: IFundProps) => {
         >
           <h1>{fund.name}</h1>
           <p>
-            by {fund.fundBy} <strong> on avalanche network </strong>{' '}
+            by {fund.fundBy} <br />
+            <span> on avalanche network </span>
           </p>
         </S.NameAndSymbol>
       </S.TextWrapper>
@@ -249,20 +250,20 @@ const FundCard = ({ fund }: IFundProps) => {
         </BarChart>
       </S.BarChartWrapper>
       <S.CardFooter>
-        <Link href={`/explore/${fund.symbol.toLowerCase()}`}>
-          <Button
-            onClick={() =>
-              trackEventFunction(
-                'click-button',
-                `buy-${fund.symbol.toLowerCase()}`,
-                `${fund.symbol.toLowerCase()}-card`
-              )
-            }
-            backgroundPrimary
-            size="claim"
-            text={`Buy $${fund.symbol}`}
-          />
-        </Link>
+        <Button
+          onClick={() =>
+            trackEventFunction(
+              'click-button',
+              `buy-${fund.symbol.toLowerCase()}`,
+              `${fund.symbol.toLowerCase()}-card`
+            )
+          }
+          backgroundPrimary
+          size="claim"
+          text={`Buy $${fund.symbol}`}
+          as="a"
+          href={`https://app.kassandra.finance/explore/${fund.symbol.toLowerCase()}`}
+        />
       </S.CardFooter>
     </S.Card>
   )

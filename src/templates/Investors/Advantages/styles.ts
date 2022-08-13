@@ -22,18 +22,23 @@ export const Managers = styled.div`
     font-weight: 300;
   }
 
-  @media (max-width: 780px) {
+  @media (max-width: 992px) {
+    padding: 2.4rem;
     margin-top: 20rem;
   }
 
-  @media (max-width: 680px) {
-    padding: 0 1.3rem;
+  @media (max-width: 576px) {
+    padding: 0 1.6rem;
     align-items: left;
     text-align: left;
 
     span {
       font-size: 1.4rem;
     }
+  }
+
+  @media (max-width: 576px) {
+    display: none;
   }
 `
 
@@ -42,9 +47,92 @@ export const Schema = styled.div`
 
   margin-top: 4.8rem;
 
+  /* margin-left: auto;
+  margin-right: auto; */
+
+  padding: 0 2.4rem;
+
   img {
     width: 100%;
     height: 100%;
+  }
+
+  .connecting {
+    display: flex;
+    justify-content: space-between;
+
+    text-align: center;
+
+    .description-connecting {
+      max-width: 180px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      /* gap: 1.2rem; */
+
+      span {
+        margin-top: 3.2rem;
+
+        color: #f79640;
+        font-size: 12px;
+        line-height: 12px;
+        font-weight: 400;
+        letter-spacing: 0.3em;
+      }
+
+      p {
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 17.15px;
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    max-width: 72rem;
+    max-height: 217.68px;
+
+    img {
+      max-height: 114.16px;
+    }
+    .test {
+      min-width: 72rem;
+      min-height: 217.68px;
+    }
+
+    .connecting {
+      .description-connecting {
+        max-width: 126.07px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.2rem;
+
+        span {
+          margin-top: 2.1rem;
+
+          color: #f79640;
+          font-size: 12px;
+          line-height: 12px;
+          font-weight: 400;
+          letter-spacing: 0.3em;
+        }
+
+        p {
+          max-width: 126.07px;
+          font-weight: 300;
+          font-size: 14px;
+          line-height: 17.15px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 576px) {
+    display: none;
   }
 `
 
@@ -225,20 +313,22 @@ export const BenefitsContainer = styled.div`
   }
 
   span {
+    margin-top: 2.4rem;
     font-size: 1.6rem;
     line-height: 2.4rem;
     font-weight: 300;
   }
 
-  @media (max-width: 780px) {
+  @media (max-width: 992px) {
+    padding: 0 2.4rem;
     h1,
     > span {
       max-width: 66.8rem;
     }
   }
 
-  @media (max-width: 680px) {
-    padding: 0 1.3rem;
+  @media (max-width: 576px) {
+    padding: 0 1.6rem;
     align-items: left;
     text-align: left;
 

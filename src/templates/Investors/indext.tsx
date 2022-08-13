@@ -11,15 +11,17 @@ import Contribute from '../DAO/Contribute'
 const Investors = () => {
   return (
     <>
-      <Header />
+      <S.HeaderWrapper>
+        <Header />
+      </S.HeaderWrapper>
       <S.InvestorsContainer>
         <Hero />
         <Products />
         <Advantages />
         <Partners />
-        <FAQ />
-        <Contribute />
+        {/* <FAQ /> */}
       </S.InvestorsContainer>
+      <Contribute />
     </>
   )
 }

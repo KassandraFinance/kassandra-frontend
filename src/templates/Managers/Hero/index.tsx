@@ -24,6 +24,7 @@ const HeroManager = () => (
           <Link href="https://3j2bd7x9okh.typeform.com/to/bBnYwVOD" passHref>
             <Button
               as="a"
+              target="_blank"
               text="Create your fund"
               size="medium"
               backgroundPrimary

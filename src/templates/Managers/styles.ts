@@ -32,10 +32,6 @@ export const ManagerContent = styled.div`
   @media (max-width: 600px) {
     gap: 18rem;
   }
-
-  > section:last-of-type {
-    margin-top: 0;
-  }
 `
 
 export const HeaderContainer = styled.div`

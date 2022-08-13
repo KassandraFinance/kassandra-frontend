@@ -7,8 +7,6 @@ export const PartnersContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
-  margin-bottom: 27rem;
-
   background: url('/assets/images/blur-divisor-investor.png');
   background-repeat: no-repeat;
   background-size: contain;

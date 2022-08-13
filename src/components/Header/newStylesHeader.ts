@@ -192,7 +192,11 @@ export const MenuBottom = styled.div`
     width: fit-content;
     padding: 1.2rem;
 
-    font-size: ${theme.font.sizes.font12};
+    font-size: ${theme.font.sizes.font14};
+
+    :hover {
+      font-weight: ${theme.font.weight.medium};
+    }
 
     img {
       width: 1.6rem;
@@ -208,4 +212,23 @@ export const ButtonsWrapper = styled.div`
     min-width: 12.5rem;
     min-height: 3.8rem;
   }
+`
+
+export const OptionsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+
+  @media (min-width: 841px) {
+    display: none;
+  }
+`
+
+export const ButtonOptions = styled.button`
+  width: 3.2rem;
+  height: 3.2rem;
+
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
 `
