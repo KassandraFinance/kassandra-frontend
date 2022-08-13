@@ -17,6 +17,7 @@ const HeroHome = () => {
       <HeroText />
 
       <Button
+        as="a"
         className="btn"
         text="Start Investing"
         icon={
@@ -49,7 +50,8 @@ const HeroHome = () => {
         }
         size="huge"
         backgroundPrimary
-        onClick={() => router.push('/explore')}
+        // onClick={() => router.push('/explore')}
+        href="https://app.kassandra.finance/explore"
       />
 
       <DaoData />
