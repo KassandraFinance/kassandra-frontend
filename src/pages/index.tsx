@@ -18,6 +18,12 @@ export default function home() {
         <meta property="og:image:width" content="1012" />
         <meta property="og:image:height" content="506" />
         <meta property="og:url" content="https://kassandra.finance/" />
+
+        <meta
+          name="description"
+          content="Create, Manage and invest in tokenized investment funds effortlessly."
+        />
+
         <title>Kassandra Finance</title>
       </Head>
       <NewHome />

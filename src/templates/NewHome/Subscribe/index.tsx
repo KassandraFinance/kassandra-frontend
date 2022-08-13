@@ -42,6 +42,7 @@ const Subscribe = () => {
   return (
     <S.SubscribeContainer>
       <S.SubscribeBacground />
+
       <S.Subscribe>
         <S.TextWrapper>
           <S.Title>Be on the frontlines of our development</S.Title>
