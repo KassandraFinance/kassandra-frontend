@@ -37,11 +37,7 @@ const CommunityTenets = () => {
         <S.Vr />
         <S.CommunityTenet>
           <S.IconWrapper>
-            <Image
-              src="/assets/iconGradient/hammer.svg"
-              width={50}
-              height={41}
-            />
+            <Image src="/assets/iconGradient/gear.svg" width={50} height={41} />
           </S.IconWrapper>
           <S.CommunityTenetText>
             <S.Caption color="cyan">Maintain</S.Caption>
@@ -57,7 +53,7 @@ const CommunityTenets = () => {
         <S.CommunityTenet>
           <S.IconWrapper>
             <Image
-              src="/assets/iconGradient/hammer.svg"
+              src="/assets/iconGradient/assets-distribution.svg"
               width={50}
               height={41}
             />

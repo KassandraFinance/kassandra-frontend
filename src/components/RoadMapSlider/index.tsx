@@ -97,24 +97,6 @@ const arrCard = [
     ]
   },
   {
-    date: '2022 - Q2',
-    icon: icons.soon,
-    color: colors.soon,
-    title: '2nd Cycle ',
-    items: [
-      {
-        title: 'Governance & DAO',
-        text: ['Vote and take a share of Kassandra profits']
-      },
-      {
-        title: 'Tricrypto Social Index',
-        text: [
-          'Bitcoin, Ethereum, and stablecoins, magically working towards better returns'
-        ]
-      }
-    ]
-  },
-  {
     date: '2022 - Q1',
     title: '1st Cycle ',
     icon: icons.done,
@@ -133,6 +115,24 @@ const arrCard = [
       {
         title: 'Stake & Farm',
         text: ['Earn staking KACY and other assets']
+      }
+    ]
+  },
+  {
+    date: '2022 - Q2',
+    icon: icons.soon,
+    color: colors.soon,
+    title: '2nd Cycle ',
+    items: [
+      {
+        title: 'Governance & DAO',
+        text: ['Vote and take a share of Kassandra profits']
+      },
+      {
+        title: 'Tricrypto Social Index',
+        text: [
+          'Bitcoin, Ethereum, and stablecoins, magically working towards better returns'
+        ]
       }
     ]
   }
