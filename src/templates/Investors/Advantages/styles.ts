@@ -84,6 +84,7 @@ export const Schema = styled.div`
       }
 
       p {
+        margin-top: 1.2rem;
         font-weight: 300;
         font-size: 14px;
         line-height: 17.15px;
