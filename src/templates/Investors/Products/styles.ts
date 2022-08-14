@@ -207,6 +207,18 @@ export const Topic = styled.div`
     font-size: 1.6rem;
     line-height: 2.4rem;
     font-weight: 300;
+
+    a {
+      color: #fcfcfc;
+      font-size: 1.6rem;
+      line-height: 2.4rem;
+      font-weight: 300;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #26dbdb;
+    }
   }
 
   @media (max-width: 680px) {

@@ -67,7 +67,10 @@ const Products = () => {
               <span>CERTIK AUDIT</span>
               <p>
                 Our protocol was thoroughly audited by Certik, and you can
-                verify this information here.
+                verify this information{' '}
+                <a href="https://www.certik.com/projects/kassandra-finance">
+                  here.
+                </a>
               </p>
             </S.Topic>
           </S.Detail>
