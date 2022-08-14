@@ -14,7 +14,7 @@ export const Hero = styled.div`
   text-align: center;
 
   h1 {
-    /* margin-top: 1.6rem; */
+    margin-top: 1.6rem;
 
     font-size: 4.8rem;
     line-height: 5.3rem;
@@ -63,8 +63,9 @@ export const Hero = styled.div`
   }
 
   @media (max-width: 576px) {
-    /* height: 48.4rem; */
-    width: 32.3rem;
+    padding-right: 1.6rem;
+    padding-left: 1.6rem;
+    /* width: 32.3rem; */
 
     background-size: 160%;
     background-position: center 130%;
@@ -80,11 +81,10 @@ export const Hero = styled.div`
       line-height: 1.6rem;
       font-weight: 300;
     }
-  }
 
-  @media (max-width: 400px) {
-    a {
-      display: none;
+    > a {
+      max-width: 19.2rem;
+      max-height: 4.4rem;
     }
   }
 
