@@ -50,7 +50,7 @@ export const Menu = styled.nav`
   gap: 3.2rem;
 
   @media (max-width: 992px) {
-    gap: 2.4rem;
+    gap: 1.6rem;
   }
 `
 
