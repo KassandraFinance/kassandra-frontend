@@ -42,24 +42,22 @@ export const HeroBackground = styled.div`
     background-position: center top;
   }
 
-  animation-name: elastic;
+  animation-name: elasticFoundation;
   animation-duration: 2.5s;
   animation-fill-mode: forwards;
   animation-timing-function: ease-out;
 
-  @keyframes elastic {
+  @keyframes elasticFoundation {
     0% {
       transform: scale(1.5);
     }
     20% {
       transform: scale(1.5);
     }
-    50.04% {
-      transform: scale(0.87);
+    50% {
+      transform: scale(1.1);
     }
-    80.93% {
-      transform: scale(1.04);
-    }
+
     100.00% {
       transform: scale(1);
     }
