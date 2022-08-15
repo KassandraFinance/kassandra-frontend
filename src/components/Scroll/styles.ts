@@ -7,7 +7,6 @@ export const Wrapper = styled.div`
     align-content: center;
     justify-content: center;
     align-items: center;
-    /* display: inline-block; */
     text-decoration: none;
   }
 
@@ -33,11 +32,10 @@ export const Wrapper = styled.div`
   .icon-scroll > * {
     position: absolute;
     display: block;
-    top: 35%;
+    top: 15%;
     left: 50%;
     width: 0.5rem;
     height: 1rem;
-    /* margin: 2rem 0 0 -2px; */
     background: white;
     border-radius: 0.6rem;
     animation: ani-mouse 2.5s linear infinite;
@@ -57,19 +55,19 @@ export const Wrapper = styled.div`
   @keyframes ani-mouse {
     0% {
       opacity: 1;
-      top: 0.5rem;
+      top: 0rem;
     }
     15% {
       opacity: 1;
-      top: 32%;
+      top: 16%;
     }
     50% {
       opacity: 0;
-      top: 30%;
+      top: 18%;
     }
     100% {
       opacity: 0;
-      top: 32%;
+      top: 16%;
     }
   }
 `

@@ -1,4 +1,3 @@
-import Header from '../../components/Header/newHeader'
 import FAQ from './FAQ'
 import Hero from './Hero'
 import Products from './Products'
@@ -11,9 +10,6 @@ import Contribute from '../DAO/Contribute'
 const Investors = () => {
   return (
     <>
-      <S.HeaderWrapper>
-        <Header />
-      </S.HeaderWrapper>
       <S.InvestorsContainer>
         <Hero />
         <Products />

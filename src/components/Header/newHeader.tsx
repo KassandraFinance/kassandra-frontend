@@ -14,10 +14,6 @@ import options from '../../../public/assets/utilities/options.svg'
 
 import * as S from './newStylesHeader'
 
-export type MenuProps = {
-  username?: string
-}
-
 const Header = () => {
   const { trackEventFunction } = useMatomoEcommerce()
   const [isOpenModal, setIsOpenModal] = React.useState(false)

@@ -12,6 +12,7 @@ import theme from '../styles/theme'
 
 import { store } from '../store'
 
+import Header from '../components/Header/newHeader'
 import Footer from '../components/Footer'
 import Toastify from '../components/Toastify'
 
@@ -92,6 +93,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
               fetcher: url => fetch(url).then(res => res.json())
             }}
           >
+            <Header />
             <Component {...pageProps} />
           </SWRConfig>
           {router.pathname !== '/404' && <Footer />}

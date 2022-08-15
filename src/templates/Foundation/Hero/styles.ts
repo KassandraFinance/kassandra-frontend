@@ -1,7 +1,34 @@
 import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
+export const HeroContainer = styled.div`
+  position: relative;
+
+  height: 100vh;
+  width: 100%;
+
+  overflow: hidden;
+
+  @keyframes heroContentFadeIn {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+`
+
 export const HeroBackground = styled.div`
+  position: absolute;
+  bottom: 0;
+
+  width: 100%;
+  height: 100vh;
+
   background-image: url('./assets/images/background-foundation-mobile-hero.png');
   background-repeat: no-repeat;
   background-position: center bottom;
@@ -15,54 +42,24 @@ export const HeroBackground = styled.div`
     background-position: center top;
   }
 
-  animation: FoundationHeroImg ease 3s;
-  -webkit-animation: FoundationHeroImg ease 3s;
-  -moz-animation: FoundationHeroImg ease 3s;
-  -o-animation: FoundationHeroImg ease 3s;
-  -ms-animation: FoundationHeroImg ease 3s;
+  animation-name: elasticFoundation;
+  animation-duration: 2.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
 
-  @keyframes FoundationHeroImg {
+  @keyframes elasticFoundation {
     0% {
-      opacity: 0;
+      transform: scale(1.5);
     }
-    100% {
-      opacity: 1;
+    20% {
+      transform: scale(1.5);
     }
-  }
+    50% {
+      transform: scale(1.1);
+    }
 
-  @-moz-keyframes FoundationHeroImg {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-webkit-keyframes FoundationHeroImg {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-o-keyframes FoundationHeroImg {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-ms-keyframes FoundationHeroImg {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
+    100.00% {
+      transform: scale(1);
     }
   }
 `
@@ -88,6 +85,11 @@ export const Hero = styled.section`
   @media (max-width: 576px) {
     padding-inline: 1.6rem;
   }
+
+  animation-name: heroContentFadeIn;
+  animation-duration: 2.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
 `
 
 export const HeroText = styled.div`
@@ -98,72 +100,6 @@ export const HeroText = styled.div`
     margin-left: 0;
 
     text-align: center;
-  }
-
-  animation: FoundationHero ease 3s both;
-  -webkit-animation: FoundationHero ease 3s both;
-  -moz-animation: FoundationHero ease 3s both;
-  -o-animation: FoundationHero ease 3s both;
-  -ms-animation: FoundationHero ease 3s both;
-
-  @keyframes FoundationHero {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-moz-keyframes FoundationHero {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-webkit-keyframes FoundationHero {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-o-keyframes FoundationHero {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-ms-keyframes FoundationHero {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
   }
 `
 

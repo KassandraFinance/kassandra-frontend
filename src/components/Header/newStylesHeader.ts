@@ -2,7 +2,10 @@ import styled, { css } from 'styled-components'
 import theme from '../../styles/theme'
 
 export const Wrapper = styled.div`
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 
   display: flex;
   justify-content: space-between;
@@ -47,7 +50,7 @@ export const Menu = styled.nav`
   gap: 3.2rem;
 
   @media (max-width: 992px) {
-    gap: 2.4rem;
+    gap: 1.6rem;
   }
 `
 
@@ -219,7 +222,7 @@ export const OptionsContainer = styled.div`
   justify-content: space-between;
   gap: 0.8rem;
 
-  @media (min-width: 841px) {
+  @media (min-width: 576px) {
     display: none;
   }
 `

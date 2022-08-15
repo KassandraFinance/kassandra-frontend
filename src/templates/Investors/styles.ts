@@ -1,12 +1,5 @@
 import styled from 'styled-components'
 
-export const HeaderWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-`
-
 export const InvestorsContainer = styled.section`
   display: flex;
   flex-direction: column;
