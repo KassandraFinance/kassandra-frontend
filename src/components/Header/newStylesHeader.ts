@@ -222,7 +222,7 @@ export const OptionsContainer = styled.div`
   justify-content: space-between;
   gap: 0.8rem;
 
-  @media (min-width: 841px) {
+  @media (min-width: 576px) {
     display: none;
   }
 `
