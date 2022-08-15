@@ -14,6 +14,8 @@ export const HeroContainer = styled.div`
 
   padding-inline: 2.4rem;
 
+  overflow: hidden;
+
   .button {
     flex-direction: row-reverse;
     gap: 0.8rem;
@@ -23,6 +25,18 @@ export const HeroContainer = styled.div`
 
   @media (max-width: 576px) {
     padding-inline: 1.6rem;
+  }
+
+  @keyframes heroContentFadeIn {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 `
 
@@ -42,15 +56,26 @@ export const ImageContent = styled.div`
     background-position: 50% 35%;
   }
 
-  animation-timing-function: ease;
-  animation: daoImgAnimation 1s forwards;
+  animation-name: elastic;
+  animation-duration: 2.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
 
-  @keyframes daoImgAnimation {
+  @keyframes elastic {
     0% {
-      opacity: 0;
+      transform: scale(1.5);
     }
-    100% {
-      opacity: 1;
+    20% {
+      transform: scale(1.5);
+    }
+    50.04% {
+      transform: scale(0.87);
+    }
+    80.93% {
+      transform: scale(1.04);
+    }
+    100.00% {
+      transform: scale(1);
     }
   }
 `
@@ -65,20 +90,10 @@ export const HeroContent = styled.div`
 
   z-index: 10;
 
-  animation-timing-function: ease;
-  animation: daoTexAnimation 2s forwards;
-
-  @keyframes daoTexAnimation {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
+  animation-name: heroContentFadeIn;
+  animation-duration: 2.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
 `
 
 export const ManagerNumberPage = styled.span`
@@ -158,18 +173,8 @@ export const ScrollContainer = styled.div`
   right: 50%;
   transform: translateX(50%);
 
-  animation-timing-function: ease;
-  animation: daoTexAnimation 2s forwards;
-
-  @keyframes daoTexAnimation {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
+  animation-name: heroContentFadeIn;
+  animation-duration: 2.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
 `

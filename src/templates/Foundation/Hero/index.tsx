@@ -7,7 +7,8 @@ import * as S from './styles'
 
 const Hero = () => {
   return (
-    <S.HeroBackground>
+    <S.HeroContainer>
+      <S.HeroBackground />
       <S.Hero>
         <S.HeroText>
           <S.Title>Kassandra foundation</S.Title>
@@ -23,7 +24,7 @@ const Hero = () => {
           <Scroll />
         </S.ScroolContainer>
       </S.Hero>
-    </S.HeroBackground>
+    </S.HeroContainer>
   )
 }
 
