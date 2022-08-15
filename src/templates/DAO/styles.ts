@@ -24,13 +24,6 @@ export const Wrapper = styled.div`
   }
 `
 
-export const HeaderWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-`
-
 const headingModifiers = {
   '1': () => css`
     font-size: 4.8rem;

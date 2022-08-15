@@ -1,6 +1,5 @@
 import React from 'react'
 
-import Header from '../../components/Header/newHeader'
 import WavyLine from '../../components/WavyLine'
 
 import Hero from './Hero'
@@ -16,10 +15,6 @@ import * as S from './styles'
 const Foundation = () => {
   return (
     <>
-      <S.HeaderWrapper>
-        <Header />
-      </S.HeaderWrapper>
-
       <Hero />
 
       <S.Foundation>

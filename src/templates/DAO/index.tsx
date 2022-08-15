@@ -1,5 +1,3 @@
-import Header from '../../components/Header/newHeader'
-
 import Hero from './Hero'
 import CommunityTenets from './CommunityTenets'
 import FlowingRevenue from './FlowingRevenue'
@@ -15,10 +13,6 @@ const TokenHolder = () => {
   return (
     <>
       <S.Wrapper>
-        <S.HeaderWrapper>
-          <Header />
-        </S.HeaderWrapper>
-
         <Hero />
 
         <CommunityTenets />

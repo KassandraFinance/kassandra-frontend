@@ -2,7 +2,10 @@ import styled, { css } from 'styled-components'
 import theme from '../../styles/theme'
 
 export const Wrapper = styled.div`
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 
   display: flex;
   justify-content: space-between;

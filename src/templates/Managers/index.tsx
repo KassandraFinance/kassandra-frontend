@@ -1,4 +1,3 @@
-import Header from '../../components/Header/newHeader'
 import HeroManager from './Hero'
 import FundManager from './FundManager'
 import ChangeAllocations from './ChangeAllocations'
@@ -11,10 +10,6 @@ import * as S from './styles'
 
 const Managers = () => (
   <>
-    <S.HeaderContainer>
-      <Header />
-    </S.HeaderContainer>
-
     <S.ManagerMainContainer>
       <S.ManagerContainer>
         <S.ManagerContent>
