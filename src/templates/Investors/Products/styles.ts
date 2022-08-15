@@ -7,6 +7,7 @@ export const Products = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 30.7rem;
+  padding: 0 2.4rem;
 
   > h1 {
     font-size: 4.8rem;
@@ -23,11 +24,16 @@ export const Products = styled.div`
     line-height: 2.4rem;
   }
 
-  @media (max-width: 780px) {
+  @media (max-width: 992px) {
+    padding-right: 2.4rem;
+    padding-left: 2.4rem;
     margin-top: 7.6rem;
   }
 
-  @media (max-width: 690px) {
+  @media (max-width: 576px) {
+    padding-right: 1.6rem;
+    padding-left: 1.6rem;
+
     h1 {
       font-size: 2.4rem;
       line-height: 3.2rem;
@@ -101,12 +107,12 @@ export const DescriptionProtocol = styled.div`
   }
 
   @media (max-width: 1080px) {
-    min-width: 64.2rem;
+    max-width: 64.2rem;
     align-items: center;
     text-align: center;
   }
 
-  @media (max-width: 680px) {
+  @media (max-width: 576px) {
     min-width: 33.1rem;
 
     align-items: flex-start;
@@ -152,8 +158,8 @@ export const Detail = styled.div`
   border-radius: 1.7rem;
 
   @media (max-width: 680px) {
-    width: 33.1rem;
-    height: 15.6rem;
+    /* width: 33.1rem;
+    height: 15.6rem; */
 
     align-items: flex-start;
     padding-top: 2rem;
@@ -201,6 +207,18 @@ export const Topic = styled.div`
     font-size: 1.6rem;
     line-height: 2.4rem;
     font-weight: 300;
+
+    a {
+      color: #fcfcfc;
+      font-size: 1.6rem;
+      line-height: 2.4rem;
+      font-weight: 300;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #26dbdb;
+    }
   }
 
   @media (max-width: 680px) {
