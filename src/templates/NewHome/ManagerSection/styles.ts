@@ -29,6 +29,8 @@ export const ImgWrapper = styled.div`
 
   display: none;
 
+  z-index: -1;
+
   @media (max-width: 576px) {
     right: 0;
     bottom: -20rem;

@@ -31,6 +31,8 @@ export const ImgWrapper = styled.div`
 
   display: none;
 
+  z-index: -1;
+
   @media (max-width: 576px) {
     top: -15rem;
     left: 0;

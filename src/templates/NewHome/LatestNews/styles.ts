@@ -49,6 +49,8 @@ export const ImgTabletWrapper = styled.div`
 
   display: none;
 
+  z-index: -1;
+
   @media (min-width: 576px) and (max-width: 960px) {
     left: 0;
     bottom: -20rem;

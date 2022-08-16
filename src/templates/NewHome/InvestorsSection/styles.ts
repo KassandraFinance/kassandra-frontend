@@ -33,6 +33,8 @@ export const ImgWrapper1 = styled.div`
 
   display: none;
 
+  z-index: -1;
+
   @media (max-width: 576px) {
     top: 55rem;
     left: 0;
@@ -45,6 +47,8 @@ export const ImgWrapper2 = styled.div`
 
   display: none;
 
+  z-index: -1;
+
   @media (max-width: 576px) {
     top: 80rem;
     right: 0;
@@ -56,6 +60,8 @@ export const ImgTabletWrapper = styled.div`
   position: absolute;
 
   display: none;
+
+  z-index: -1;
 
   @media (min-width: 576px) and (max-width: 960px) {
     left: 0;

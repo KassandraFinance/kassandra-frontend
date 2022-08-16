@@ -27,6 +27,8 @@ export const ImgWrapper = styled.div`
 
   display: none;
 
+  z-index: -1;
+
   @media (max-width: 576px) {
     right: 0;
     bottom: -15rem;
@@ -38,6 +40,8 @@ export const ImgTabletWrapper1 = styled.div`
   position: absolute;
 
   display: none;
+
+  z-index: -1;
 
   @media (min-width: 576px) and (max-width: 960px) {
     right: 0;
@@ -51,6 +55,8 @@ export const ImgTabletWrapper2 = styled.div`
 
   display: none;
 
+  z-index: -1;
+
   @media (min-width: 576px) and (max-width: 960px) {
     left: 0;
     bottom: -10rem;
@@ -62,6 +68,8 @@ export const ImgTabletWrapper3 = styled.div`
   position: absolute;
 
   display: none;
+
+  z-index: -1;
 
   @media (min-width: 576px) and (max-width: 960px) {
     left: 0;
