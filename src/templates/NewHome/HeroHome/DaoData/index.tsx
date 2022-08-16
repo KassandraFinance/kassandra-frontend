@@ -40,37 +40,34 @@ const DaoData = () => {
 
   React.useEffect(() => {
     if (data) {
-      const arrData = data.pools
+      const arrData = data.factory
+      console.log(arrData)
 
       let swapFees = Big(0)
       let withdrawFees = Big(0)
       let volume = Big(0)
-      let tvl = Big(0)
-      for (const data of arrData) {
-        tvl = tvl.add(Big(data.total_value_locked_usd))
 
-        swapFees = swapFees.add(
-          data.swap.reduce((acc: Big, current: { volume_usd: string }) => {
-            return Big(current.volume_usd).add(acc)
-          }, 0)
-        )
+      swapFees = swapFees.add(
+        arrData.swap.reduce((acc: Big, current: { volume_usd: string }) => {
+          return Big(current.volume_usd).add(acc)
+        }, 0)
+      )
 
-        withdrawFees = withdrawFees.add(
-          data.withdraw.reduce((acc: Big, current: { volume_usd: string }) => {
-            return Big(current.volume_usd).add(acc)
-          }, 0)
-        )
+      withdrawFees = withdrawFees.add(
+        arrData.withdraw.reduce((acc: Big, current: { volume_usd: string }) => {
+          return Big(current.volume_usd).add(acc)
+        }, 0)
+      )
 
-        volume = volume.add(
-          data.volumes.reduce((acc: Big, current: { volume_usd: string }) => {
-            return Big(current.volume_usd).add(acc)
-          }, 0)
-        )
-      }
+      volume = volume.add(
+        arrData.volumes.reduce((acc: Big, current: { volume_usd: string }) => {
+          return Big(current.volume_usd).add(acc)
+        }, 0)
+      )
 
       setDaoData([
         {
-          value: tvl,
+          value: Big(arrData.total_value_locked_usd),
           title: 'TVL'
         },
         {
