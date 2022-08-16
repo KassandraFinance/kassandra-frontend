@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 
-import Header from '../../components/Header/newHeader'
 import HeroHome from './HeroHome'
 import InvestorsSection from './InvestorsSection'
 import WavyLine from '../../components/WavyLine'
@@ -21,10 +20,6 @@ import * as S from './styles'
 const NewHome = () => {
   return (
     <S.HomeBackgroundContainer>
-      <S.HeaderWrapper>
-        <Header />
-      </S.HeaderWrapper>
-
       <HeroHome />
 
       <S.Container>

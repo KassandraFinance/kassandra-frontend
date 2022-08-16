@@ -4,7 +4,6 @@ export const Hero = styled.div`
   height: 100vh;
   max-width: 102rem;
   position: relative;
-  /* height: 74.4rem; */
 
   display: flex;
   flex-direction: column;
@@ -13,18 +12,19 @@ export const Hero = styled.div`
 
   text-align: center;
 
+  overflow: hidden;
+
   h1 {
-    /* margin-top: 1.6rem; */
+    margin-top: 1.6rem;
 
     font-size: 4.8rem;
     line-height: 5.3rem;
     font-weight: 900;
 
-    animation: fadeInHeroInvestors ease 3s both;
-    -webkit-animation: fadeInHeroInvestors ease 3s both;
-    -moz-animation: fadeInHeroInvestors ease 3s both;
-    -o-animation: fadeInHeroInvestors ease 3s both;
-    -ms-animation: fadeInHeroInvestors ease 3s both;
+    animation-name: heroContentFadeIn;
+    animation-duration: 2.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
   }
 
   span {
@@ -39,11 +39,10 @@ export const Hero = styled.div`
 
     border-radius: 0.4rem;
 
-    animation: fadeInHeroInvestors ease 3s both;
-    -webkit-animation: fadeInHeroInvestors ease 3s both;
-    -moz-animation: fadeInHeroInvestors ease 3s both;
-    -o-animation: fadeInHeroInvestors ease 3s both;
-    -ms-animation: fadeInHeroInvestors ease 3s both;
+    animation-name: heroContentFadeIn;
+    animation-duration: 2.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
   }
 
   @media (max-width: 992px) {
@@ -63,8 +62,8 @@ export const Hero = styled.div`
   }
 
   @media (max-width: 576px) {
-    /* height: 48.4rem; */
-    width: 32.3rem;
+    padding-right: 1.6rem;
+    padding-left: 1.6rem;
 
     background-size: 160%;
     background-position: center 130%;
@@ -80,63 +79,14 @@ export const Hero = styled.div`
       line-height: 1.6rem;
       font-weight: 300;
     }
-  }
 
-  @media (max-width: 400px) {
-    a {
-      display: none;
-    }
-  }
-
-  @keyframes fadeInHeroInvestors {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
+    > a {
+      max-width: 19.2rem;
+      max-height: 4.4rem;
     }
   }
 
-  @-moz-keyframes fadeInHeroInvestors {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-webkit-keyframes fadeInHeroInvestors {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-o-keyframes fadeInHeroInvestors {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-ms-keyframes fadeInHeroInvestors {
+  @keyframes heroContentFadeIn {
     0% {
       opacity: 0;
     }
@@ -161,54 +111,32 @@ export const BackgroundImage = styled.div`
   background-size: contain;
   background-position: center center;
 
-  animation: fadeInHeroInvestorsImg ease 2s;
-  -webkit-animation: fadeInHeroInvestorsImg ease 2s;
-  -moz-animation: fadeInHeroInvestorsImg ease 2s;
-  -o-animation: fadeInHeroInvestorsImg ease 2s;
-  -ms-animation: fadeInHeroInvestorsImg ease 2s;
+  animation-name: elastic;
+  animation-duration: 2.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
 
-  @keyframes fadeInHeroInvestorsImg {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
+  @media (max-width: 576px) {
+    background-size: 100%;
+    width: 100vw;
+    height: 100vh;
   }
 
-  @-moz-keyframes fadeInHeroInvestorsImg {
+  @keyframes elastic {
     0% {
-      opacity: 0;
+      transform: scale(1.5);
     }
-    100% {
-      opacity: 1;
+    20% {
+      transform: scale(1.5);
     }
-  }
-
-  @-webkit-keyframes fadeInHeroInvestorsImg {
-    0% {
-      opacity: 0;
+    50.04% {
+      transform: scale(0.87);
     }
-    100% {
-      opacity: 1;
+    80.93% {
+      transform: scale(1.04);
     }
-  }
-
-  @-o-keyframes fadeInHeroInvestorsImg {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-ms-keyframes fadeInHeroInvestorsImg {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
+    100.00% {
+      transform: scale(1);
     }
   }
 `
@@ -216,8 +144,7 @@ export const BackgroundImage = styled.div`
 export const Title = styled.div`
   display: flex;
   align-items: center;
-  /* margin-top: 20.6rem; */
-  opacity: 0;
+
   span {
     color: #ffbf00;
     letter-spacing: 0.4em;
@@ -233,18 +160,10 @@ export const Title = styled.div`
     border: none;
   }
 
-  @media (max-width: 580px) {
-    /* margin-top: 13rem; */
-  }
-
-  @media (max-width: 820px) {
-    /* margin-top: 18rem; */
-  }
-  animation: fadeInHeroInvestors ease 3s both;
-  -webkit-animation: fadeInHeroInvestors ease 3s both;
-  -moz-animation: fadeInHeroInvestors ease 3s both;
-  -o-animation: fadeInHeroInvestors ease 3s both;
-  -ms-animation: fadeInHeroInvestors ease 3s both;
+  animation-name: heroContentFadeIn;
+  animation-duration: 2.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
 `
 
 export const Description = styled.div`
@@ -253,11 +172,10 @@ export const Description = styled.div`
   margin-top: 2.4rem;
   margin-bottom: 2.4rem;
 
-  animation: fadeInHeroInvestors ease 3s both;
-  -webkit-animation: fadeInHeroInvestors ease 3s both;
-  -moz-animation: fadeInHeroInvestors ease 3s both;
-  -o-animation: fadeInHeroInvestors ease 3s both;
-  -ms-animation: fadeInHeroInvestors ease 3s both;
+  animation-name: heroContentFadeIn;
+  animation-duration: 2.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
 `
 
 export const ScroolContainer = styled.div`
@@ -265,4 +183,9 @@ export const ScroolContainer = styled.div`
   bottom: 2rem;
   right: 50%;
   transform: translateX(50%);
+
+  animation-name: heroContentFadeIn;
+  animation-duration: 2.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
 `

@@ -14,9 +14,23 @@ export const HeroContainer = styled.div`
   padding-left: 6rem;
   padding-right: 6rem;
 
+  overflow: hidden;
+
   @media (max-width: 576px) {
     padding-right: 1.6rem;
     padding-left: 1.6rem;
+  }
+
+  @keyframes heroContentFadeIn {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 `
 export const HeroContent = styled.div`
@@ -28,11 +42,23 @@ export const HeroContent = styled.div`
   max-width: 87.8rem;
 
   z-index: 10;
+
+  animation-name: heroContentFadeIn;
+  animation-duration: 2.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
 `
 
 export const ScrollContainer = styled.div`
   position: absolute;
-  bottom: 1rem;
+  bottom: 2rem;
+  right: 50%;
+  transform: translateX(50%);
+
+  animation-name: heroContentFadeIn;
+  animation-duration: 2.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
 `
 
 export const ImageContent = styled.span`
@@ -46,59 +72,31 @@ export const ImageContent = styled.span`
   height: calc(100vh - 4rem);
   width: 100%;
 
+  animation-name: elastic;
+  animation-duration: 2.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+
   @media (max-width: 768px) {
     height: 100vh;
     background-position: 50% 35%;
   }
 
-  animation: fadeInHeroImg ease 2s;
-  -webkit-animation: fadeInHeroImg ease 2s;
-  -moz-animation: fadeInHeroImg ease 2s;
-  -o-animation: fadeInHeroImg ease 2s;
-  -ms-animation: fadeInHeroImg ease 2s;
-
-  @keyframes fadeInHeroImg {
+  @keyframes elastic {
     0% {
-      opacity: 0;
+      transform: scale(1.5);
     }
-    100% {
-      opacity: 1;
+    20% {
+      transform: scale(1.5);
     }
-  }
-
-  @-moz-keyframes fadeInHeroImg {
-    0% {
-      opacity: 0;
+    50.04% {
+      transform: scale(0.87);
     }
-    100% {
-      opacity: 1;
+    80.93% {
+      transform: scale(1.04);
     }
-  }
-
-  @-webkit-keyframes fadeInHeroImg {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-o-keyframes fadeInHeroImg {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-ms-keyframes fadeInHeroImg {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
+    100.00% {
+      transform: scale(1);
     }
   }
 `
@@ -107,12 +105,6 @@ export const ManagerNumberPage = styled.span`
   justify-content: center;
   align-items: center;
   gap: 1.6rem;
-
-  animation: fadeInHero ease 3.5s both;
-  -webkit-animation: fadeInHero ease 3.5s both;
-  -moz-animation: fadeInHero ease 3.5s both;
-  -o-animation: fadeInHero ease 3.5s both;
-  -ms-animation: fadeInHero ease 3.5s both;
 
   > p {
     color: #26dbdb;
@@ -139,72 +131,6 @@ export const HeroDescription = styled.div`
   align-items: center;
   flex-direction: column;
   margin-top: 1.6rem;
-
-  animation: fadeInHero ease 3.5s both;
-  -webkit-animation: fadeInHero ease 3.5s both;
-  -moz-animation: fadeInHero ease 3.5s both;
-  -o-animation: fadeInHero ease 3.5s both;
-  -ms-animation: fadeInHero ease 3.5s both;
-
-  @keyframes fadeInHero {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-moz-keyframes fadeInHero {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-webkit-keyframes fadeInHero {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-o-keyframes fadeInHero {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-ms-keyframes fadeInHero {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
 
   > h1 {
     color: #ffffff;
