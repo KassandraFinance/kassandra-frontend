@@ -41,7 +41,6 @@ const DaoData = () => {
   React.useEffect(() => {
     if (data) {
       const arrData = data.factory
-      console.log(arrData)
 
       let swapFees = Big(0)
       let withdrawFees = Big(0)

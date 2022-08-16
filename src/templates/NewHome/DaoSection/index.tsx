@@ -38,7 +38,7 @@ const DaoSection = () => {
         number="03"
         title="DAO"
         color="#E843C4"
-        subtitle="Invest in KACY, earn protocol fees and participate in our governance"
+        subtitle="Get KACY, earn protocol fees and participate in our governance"
         text="Earn rewards and voting power to build, invest and contribute to Kassandra. Help maintain the DAO while gaining a stake in all of our protocol fees."
         btnText="Governance 101"
         link="/dao"
