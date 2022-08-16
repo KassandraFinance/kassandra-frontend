@@ -22,11 +22,11 @@ const DaoData = () => {
     },
     {
       value: Big(0),
-      title: 'Swap fee'
+      title: 'Swap fees'
     },
     {
       value: Big(0),
-      title: 'withdraw fee'
+      title: 'withdraw fees'
     }
   ])
 
@@ -79,11 +79,11 @@ const DaoData = () => {
         },
         {
           value: swapFees,
-          title: 'Swap fee'
+          title: 'Swap fees'
         },
         {
           value: withdrawFees,
-          title: 'withdraw fee'
+          title: 'withdraw fees'
         }
       ])
     }

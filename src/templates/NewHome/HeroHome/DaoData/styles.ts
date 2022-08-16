@@ -9,8 +9,11 @@ export const DaoData = styled.div`
 
   margin-top: 3.2rem;
 
+  @media (max-width: 992px) {
+    gap: 1.6rem;
+  }
+
   @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.6rem;
   }
 `

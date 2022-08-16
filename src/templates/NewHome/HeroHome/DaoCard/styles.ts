@@ -30,7 +30,12 @@ export const DaoCardContainer = styled.div`
     background: rgba(31, 41, 55, 0.6);
   }
 
-  @media (max-width: 693px) {
+  @media (max-width: 992px) {
+    padding-block: 2.2rem;
+    padding-inline: 3rem;
+  }
+
+  @media (max-width: 768px) {
     height: fit-content;
     padding: 1.6rem;
   }
