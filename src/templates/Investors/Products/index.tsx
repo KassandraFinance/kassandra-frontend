@@ -14,7 +14,7 @@ const Products = () => {
   return (
     <S.Products>
       <h1>Start exploring KassandraDAO</h1>
-      <span>Here are some index funds created by us...</span>
+      <span>Here are some index funds created by us:</span>
       <S.FundsCards>
         {products.map(product => (
           <FundCard key={product.symbol} fund={product} />
