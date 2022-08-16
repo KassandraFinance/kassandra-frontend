@@ -49,7 +49,7 @@ const DaoSection = () => {
         title="kassandra ecosystem"
         color="#E843C4"
         subTitle="Connecting investors and managers to build decentralized ETFs"
-        text="Help grow Kassandra with new investment products, keep our protocol healthy with flowing revenue and commit your tokens to the DAO to get voting rights."
+        text="Help Kassandra grow: Stake your tokens to get voting rights, help with new investment products and keep the protocol healthy."
       />
 
       <S.DaoCardContainer>
