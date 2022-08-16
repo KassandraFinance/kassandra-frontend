@@ -295,7 +295,7 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
               <Image src={arrowRight} width={20} height={20} />
             </div>
             {pool.symbol !== 'aHYPE'
-              ? 'Consistent gains with blue chips'
+              ? 'Have a consistent bluechip strategy'
               : 'EASY EXPOSURE TO THE HOTTEST ASSETS'}
           </li>
           <li>
