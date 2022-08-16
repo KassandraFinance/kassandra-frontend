@@ -1,8 +1,8 @@
 import Image from 'next/image'
 
-import { Heading } from '../styles'
+import { Heading } from '../../templates/DAO/styles'
 
-import logoSkew from '../../../../public/assets/images/logo-big-skew.png'
+import logoSkew from '../../../public/assets/images/logo-big-skew.png'
 
 import * as S from './styles'
 

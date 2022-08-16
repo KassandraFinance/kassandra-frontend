@@ -4,7 +4,7 @@ import ChangeAllocations from './ChangeAllocations'
 import AllocationsInexpensive from './AllocationsInexpensive'
 import ManagersInterface from './ManagersInterface'
 import CreateFund from './CreateFunds'
-import Contribute from '../DAO/Contribute'
+import Contribute from '../../components/Contribute'
 
 import * as S from './styles'
 

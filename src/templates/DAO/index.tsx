@@ -5,7 +5,7 @@ import Governance from './Governance'
 import LockVote from './LockVote'
 import Scarcity from './Scarcity'
 import Tokenomics from './Tokenomics'
-import Contribute from './Contribute'
+import Contribute from '../../components/Contribute'
 
 import * as S from './styles'
 
