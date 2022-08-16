@@ -12,7 +12,7 @@ const Hero = () => {
         <hr />
         <span>INVESTORS</span>
       </S.Title>
-      <h1>Diversify with simple steps through managers and strategies</h1>
+      <h1>Diversify with simple steps through managers and their strategies</h1>
       <S.Description>
         <span>
           Social trading made safe: know who is delegating your money, split
