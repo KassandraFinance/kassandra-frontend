@@ -34,7 +34,7 @@ const KacyOverview = ({ kacyMarketData }: IKacyOverviewProps) => {
         <S.TokenInfo>
           <S.Values>
             <p>PRICE</p>
-            <span>${kacyMarketData.price.toFixed(2)}</span>
+            <span>${kacyMarketData.price?.toFixed(2)}</span>
           </S.Values>
           <S.Values>
             <p>MARKET CAP</p>

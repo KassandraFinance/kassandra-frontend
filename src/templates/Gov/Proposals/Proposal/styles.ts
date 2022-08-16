@@ -358,10 +358,8 @@ export const DescriptionText = styled.td`
 
 export const Tooltip = styled.div`
   position: relative;
-  padding: 0.1rem;
 
   left: 0.4rem;
-  bottom: 0.2rem;
 
   z-index: 99;
 `
@@ -410,10 +408,11 @@ export const TableInfoWrapper = styled.div`
 `
 export const DataWrapper = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
   margin-top: 1.2rem;
 
-  line-height: 1.2rem;
+  line-height: 100%;
   color: #c4c4c4;
 
   &:first-child {
@@ -423,12 +422,18 @@ export const DataWrapper = styled.div`
 
 export const Quorum = styled.div`
   display: flex;
+  align-items: center;
+
+  img {
+    max-width: 14px;
+  }
 `
 
 export const TextKey = styled.span`
   font-size: ${theme.font.sizes.font12};
   font-weight: ${theme.font.weight.medium};
   letter-spacing: 0.06rem;
+  line-height: 100%;
 
   @media (min-width: 768px) {
     font-size: ${theme.font.sizes.font14};
@@ -441,10 +446,11 @@ export const TextValue = styled.span`
   font-weight: ${theme.font.weight.medium};
   color: #fcfcfc;
   letter-spacing: 0.06rem;
+  line-height: 100%;
 
   @media (min-width: 768px) {
     font-size: ${theme.font.sizes.font14};
-    line-height: 1.56rem;
+    line-height: 100%;
     letter-spacing: 0.07rem;
   }
 `

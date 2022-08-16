@@ -17,23 +17,29 @@ export const Managers = styled.div`
   }
 
   span {
+    margin-top: 2.4rem;
     font-size: 1.6rem;
     line-height: 2.4rem;
     font-weight: 300;
   }
 
-  @media (max-width: 780px) {
+  @media (max-width: 992px) {
+    padding: 2.4rem;
     margin-top: 20rem;
   }
 
-  @media (max-width: 680px) {
-    padding: 0 1.3rem;
+  @media (max-width: 576px) {
+    padding: 0 1.6rem;
     align-items: left;
     text-align: left;
 
     span {
       font-size: 1.4rem;
     }
+  }
+
+  @media (max-width: 576px) {
+    display: none;
   }
 `
 
@@ -42,9 +48,93 @@ export const Schema = styled.div`
 
   margin-top: 4.8rem;
 
+  /* margin-left: auto;
+  margin-right: auto; */
+
+  padding: 0 2.4rem;
+
   img {
     width: 100%;
     height: 100%;
+  }
+
+  .connecting {
+    display: flex;
+    justify-content: space-between;
+
+    text-align: center;
+
+    .description-connecting {
+      max-width: 180px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      /* gap: 1.2rem; */
+
+      span {
+        margin-top: 3.2rem;
+
+        color: #f79640;
+        font-size: 12px;
+        line-height: 12px;
+        font-weight: 400;
+        letter-spacing: 0.3em;
+      }
+
+      p {
+        margin-top: 1.2rem;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 17.15px;
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    max-width: 72rem;
+    max-height: 217.68px;
+
+    img {
+      max-height: 114.16px;
+    }
+    .test {
+      min-width: 72rem;
+      min-height: 217.68px;
+    }
+
+    .connecting {
+      .description-connecting {
+        max-width: 126.07px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.2rem;
+
+        span {
+          margin-top: 2.1rem;
+
+          color: #f79640;
+          font-size: 12px;
+          line-height: 12px;
+          font-weight: 400;
+          letter-spacing: 0.3em;
+        }
+
+        p {
+          max-width: 126.07px;
+          font-weight: 300;
+          font-size: 14px;
+          line-height: 17.15px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 576px) {
+    display: none;
   }
 `
 
@@ -55,7 +145,7 @@ export const DescriptionSafety = styled.div`
   align-items: center;
   justify-content: flex-start;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 992px) {
     justify-content: center;
   }
 `
@@ -83,8 +173,8 @@ export const DescriptionSafetyContent = styled.div`
     font-weight: 300;
   }
 
-  @media (max-width: 1180px) {
-    min-width: 64.3rem;
+  @media (max-width: 992px) {
+    max-width: 64.3rem;
 
     align-items: center;
 
@@ -104,7 +194,7 @@ export const DescriptionSafetyContent = styled.div`
     }
   }
 
-  @media (max-width: 680px) {
+  @media (max-width: 576px) {
     min-width: 100%;
 
     align-items: flex-start;
@@ -139,7 +229,7 @@ export const ImageFundSafety = styled.div`
   width: 64.5rem;
   height: 75.6rem;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 992px) {
     max-width: 64.5rem;
     max-height: 75.6rem;
     width: 100%;
@@ -158,17 +248,18 @@ export const FundSafety = styled.div`
   display: flex;
   align-items: center;
   margin-top: 20.6rem;
+  padding: 0 2.4rem;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 992px) {
     width: 100%;
 
     flex-direction: column;
   }
 
-  @media (max-width: 680px) {
+  @media (max-width: 576px) {
     width: 100%;
 
-    padding: 0 1.3rem;
+    padding: 0 1.6rem;
   }
 `
 
@@ -176,8 +267,9 @@ export const Rebalance = styled.div`
   display: flex;
   align-items: center;
   gap: 17.7rem;
+  padding: 0 2.4rem;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 992px) {
     width: 100%;
 
     flex-direction: column-reverse;
@@ -186,17 +278,17 @@ export const Rebalance = styled.div`
     gap: 0;
   }
 
-  @media (max-width: 680px) {
+  @media (max-width: 576px) {
     width: 100%;
 
-    padding: 0 1.3rem;
+    padding: 0 1.6rem;
   }
 `
 
 export const BenefitsImagesContainer = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-around;
-  gap: 18.7rem;
   margin-top: 4.8rem;
 
   @media (max-width: 780px) {
@@ -211,6 +303,7 @@ export const BenefitsImagesContainer = styled.div`
 `
 
 export const BenefitsContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -225,20 +318,23 @@ export const BenefitsContainer = styled.div`
   }
 
   span {
+    margin-top: 2.4rem;
     font-size: 1.6rem;
     line-height: 2.4rem;
     font-weight: 300;
   }
 
-  @media (max-width: 780px) {
+  @media (max-width: 992px) {
+    padding: 0 2.4rem;
+
     h1,
     > span {
       max-width: 66.8rem;
     }
   }
 
-  @media (max-width: 680px) {
-    padding: 0 1.3rem;
+  @media (max-width: 576px) {
+    padding: 0 1.6rem;
     align-items: left;
     text-align: left;
 
@@ -333,7 +429,7 @@ export const ImageRebalance = styled.div`
   align-items: center;
   justify-content: center;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 992px) {
     max-width: 48.5rem;
     max-height: 55.3rem;
     width: 100%;
@@ -352,7 +448,7 @@ export const DescriptionRebalance = styled.div`
   align-items: center;
   justify-content: flex-end;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 992px) {
     justify-content: center;
   }
 
@@ -385,8 +481,8 @@ export const DescriptionRebalanceContent = styled.div`
     font-weight: 300;
   }
 
-  @media (max-width: 1180px) {
-    min-width: 64.3rem;
+  @media (max-width: 992px) {
+    max-width: 64.3rem;
 
     align-items: center;
 
@@ -405,7 +501,7 @@ export const DescriptionRebalanceContent = styled.div`
     }
   }
 
-  @media (max-width: 680px) {
+  @media (max-width: 576px) {
     min-width: 100%;
 
     align-items: flex-start;
@@ -433,13 +529,13 @@ export const DescriptionAutonomy = styled.div`
   align-items: center;
   justify-content: flex-start;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 992px) {
     justify-content: center;
   }
 `
 
 export const DescriptionAutonomyContent = styled.div`
-  width: 39.2rem;
+  max-width: 39.2rem;
 
   display: flex;
   flex-direction: column;
@@ -461,8 +557,8 @@ export const DescriptionAutonomyContent = styled.div`
     font-weight: 300;
   }
 
-  @media (max-width: 1180px) {
-    min-width: 64.3rem;
+  @media (max-width: 992px) {
+    max-width: 64.3rem;
 
     align-items: center;
 
@@ -482,7 +578,7 @@ export const DescriptionAutonomyContent = styled.div`
     }
   }
 
-  @media (max-width: 680px) {
+  @media (max-width: 576px) {
     min-width: 100%;
 
     align-items: flex-start;
@@ -510,14 +606,14 @@ export const DescriptionAutonomyContent = styled.div`
 `
 
 export const ImageFundAutonomy = styled.div`
-  width: 67.8rem;
-  height: 51.6rem;
+  max-width: 67.8rem;
+  max-height: 51.6rem;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 992px) {
     max-width: 64.5rem;
     max-height: 75.6rem;
     width: 100%;
@@ -538,18 +634,19 @@ export const FundAutonomy = styled.div`
   align-items: center;
   justify-content: space-around;
   gap: 5.4rem;
+  padding: 0 2.4rem;
 
-  @media (max-width: 1180px) {
+  @media (max-width: 992px) {
     width: 100%;
 
     flex-direction: column;
     gap: 0;
   }
 
-  @media (max-width: 680px) {
+  @media (max-width: 576px) {
     width: 100%;
 
-    padding: 0 1.3rem;
+    padding: 0 1.6rem;
     margin-top: 0;
   }
 `

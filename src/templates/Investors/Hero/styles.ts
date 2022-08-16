@@ -1,19 +1,18 @@
 import styled from 'styled-components'
 
 export const Hero = styled.div`
+  height: 100vh;
   max-width: 102rem;
-  height: 74.4rem;
+  position: relative;
 
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
   text-align: center;
 
-  background: url('/assets/images/hero-investor.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center bottom;
+  overflow: hidden;
 
   h1 {
     margin-top: 1.6rem;
@@ -21,6 +20,11 @@ export const Hero = styled.div`
     font-size: 4.8rem;
     line-height: 5.3rem;
     font-weight: 900;
+
+    animation-name: heroContentFadeIn;
+    animation-duration: 2.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
   }
 
   span {
@@ -34,9 +38,36 @@ export const Hero = styled.div`
     height: 4.8rem;
 
     border-radius: 0.4rem;
+
+    animation-name: heroContentFadeIn;
+    animation-duration: 2.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
   }
 
-  @media (max-width: 690px) {
+  @media (max-width: 992px) {
+    padding: 0 2.4rem;
+
+    h1 {
+      font-size: 4.8rem;
+      line-height: 5.28rem;
+      font-weight: 900;
+    }
+
+    span {
+      font-size: 1.4rem;
+      line-height: 1.6rem;
+      font-weight: 300;
+    }
+  }
+
+  @media (max-width: 576px) {
+    padding-right: 1.6rem;
+    padding-left: 1.6rem;
+
+    background-size: 160%;
+    background-position: center 130%;
+
     h1 {
       font-size: 2.4rem;
       line-height: 3.2rem;
@@ -48,21 +79,71 @@ export const Hero = styled.div`
       line-height: 1.6rem;
       font-weight: 300;
     }
+
+    > a {
+      max-width: 19.2rem;
+      max-height: 4.4rem;
+    }
   }
 
-  @media (max-width: 580px) {
-    height: 48.4rem;
-    width: 32.3rem;
+  @keyframes heroContentFadeIn {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+`
 
-    background-size: 160%;
-    background-position: center 130%;
+export const BackgroundImage = styled.div`
+  position: absolute;
+  z-index: -1;
+
+  width: 100%;
+  height: calc(100vh - 10rem);
+  bottom: 0;
+  background: url('/assets/images/hero-investor.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+
+  animation-name: elastic;
+  animation-duration: 2.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+
+  @media (max-width: 576px) {
+    background-size: 100%;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  @keyframes elastic {
+    0% {
+      transform: scale(1.5);
+    }
+    20% {
+      transform: scale(1.5);
+    }
+    50.04% {
+      transform: scale(0.87);
+    }
+    80.93% {
+      transform: scale(1.04);
+    }
+    100.00% {
+      transform: scale(1);
+    }
   }
 `
 
 export const Title = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 20.6rem;
 
   span {
     color: #ffbf00;
@@ -79,13 +160,10 @@ export const Title = styled.div`
     border: none;
   }
 
-  @media (max-width: 580px) {
-    margin-top: 13rem;
-  }
-
-  @media (max-width: 820px) {
-    margin-top: 18rem;
-  }
+  animation-name: heroContentFadeIn;
+  animation-duration: 2.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
 `
 
 export const Description = styled.div`
@@ -93,12 +171,21 @@ export const Description = styled.div`
 
   margin-top: 2.4rem;
   margin-bottom: 2.4rem;
+
+  animation-name: heroContentFadeIn;
+  animation-duration: 2.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
 `
 
-export const ScrollContainer = styled.div`
-  margin-top: 15rem;
+export const ScroolContainer = styled.div`
+  position: absolute;
+  bottom: 2rem;
+  right: 50%;
+  transform: translateX(50%);
 
-  @media (max-width: 680px) {
-    display: none;
-  }
+  animation-name: heroContentFadeIn;
+  animation-duration: 2.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
 `

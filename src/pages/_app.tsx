@@ -12,6 +12,7 @@ import theme from '../styles/theme'
 
 import { store } from '../store'
 
+import Header from '../components/Header/newHeader'
 import Footer from '../components/Footer'
 import Toastify from '../components/Toastify'
 
@@ -32,7 +33,6 @@ const instance = createInstance({
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter()
-  const pathName = router.pathname
 
   return (
     <Provider store={store}>
@@ -86,17 +86,14 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
           /> */}
           </Head>
           <Toastify />
-          <GlobalStyles
-            selectBackground={
-              pathName === '/' ? false : pathName === '/about' ? false : true
-            }
-          />
+          <GlobalStyles />
           <SWRConfig
             value={{
               refreshInterval: 10000,
               fetcher: url => fetch(url).then(res => res.json())
             }}
           >
+            <Header />
             <Component {...pageProps} />
           </SWRConfig>
           {router.pathname !== '/404' && <Footer />}

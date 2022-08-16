@@ -48,7 +48,7 @@ const wrapperModifiers = {
   withIcon: (theme: DefaultTheme) => css`
     img {
       width: 1.6rem;
-      margin-left: ${theme.spacings.space8};
+      //margin-left: ${theme.spacings.space8};
       order: 1;
       & + span {
         margin-right: ${theme.spacings.space16};
@@ -57,7 +57,7 @@ const wrapperModifiers = {
     svg {
       width: 1.6rem;
       order: 0;
-      margin-right: ${theme.spacings.space8};
+      //margin-right: ${theme.spacings.space8};
       & + span {
         margin-left: ${theme.spacings.space16};
       }
@@ -215,6 +215,7 @@ export const Wrapper = styled.button<WrapperProps>`
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    gap: 0.8rem;
 
     position: relative;
     padding: ${theme.spacings.space8};

@@ -1,13 +1,11 @@
 import {
   createGlobalStyle,
-  css,
   DefaultTheme,
   GlobalStyleComponent
 } from 'styled-components'
 
 type GlobalStylesProps = {
-  removeBg?: boolean,
-  selectBackground?: boolean
+  removeBg?: boolean
 }
 
 const GlobalStyles: GlobalStyleComponent<
@@ -97,24 +95,19 @@ const GlobalStyles: GlobalStyleComponent<
     min-height: 100%;
   }
 
-  ${({ selectBackground }) => css`
-    html {
-      font-size: 62.5%;
-    }
 
-    body {
-      background-color: #151117;
-      font-family: 'Rubik', sans-serif;
-      color: #fcfcfc;
+  html {
+    font-size: 62.5%;
+  }
 
-      ${selectBackground
-        ? `background-image: url('/assets/images/background-products.png');
-        background-repeat: repeat-y;
-        background-size: cover;
-        background-position-x: center;`
-        : ''}
-    }
-  `}
+  body {
+    background-color: #151117;
+    font-family: 'Rubik', sans-serif;
+    color: #fcfcfc;
+
+    overflow-x: hidden;
+  }
+
   ul, ol {
     list-style: none;
   }

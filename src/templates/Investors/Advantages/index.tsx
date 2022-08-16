@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import schemaManager from '../../../../public/assets/images/schema-manager.svg'
+import schemaManager from '../../../../public/assets/images/schema-managers.svg'
 
 import * as S from './styles'
 
@@ -11,12 +11,35 @@ const Advantages = () => {
         <h1>Connecting investors and managers in a seamless fashion</h1>
         <span>
           Managers are compensated for each investor in their funds while users
-          safely surf the waves of the market.
+          safely surf the waves of the market
         </span>
-        <S.Schema>
-          <Image src={schemaManager} />
-        </S.Schema>
       </S.Managers>
+      <S.Schema>
+        <Image src={schemaManager} />
+        <div className="connecting">
+          <div className="description-connecting">
+            <span>Investors</span>
+            <p>
+              Investing in a dynamic community of social traders and managers.
+            </p>
+          </div>
+          <div className="description-connecting">
+            <span>Protocol</span>
+            <p>
+              Automated processes that save money and make managing dETFs
+              easier.
+            </p>
+          </div>
+          <div className="description-connecting">
+            <span>Manager</span>
+            <p>
+              Developing smart strategies with exclusive tools and intuitive
+              interface.
+            </p>
+          </div>
+        </div>
+      </S.Schema>
+
       <S.FundSafety>
         <S.DescriptionSafety>
           <S.DescriptionSafetyContent>
@@ -42,7 +65,7 @@ const Advantages = () => {
         <S.DescriptionRebalance>
           <S.DescriptionRebalanceContent>
             <S.Span>SMOOTH TRANSACTIONS</S.Span>
-            <h1>Avoid big losses that come with abrupt allocation changes.</h1>
+            <h1>Avoid big losses that come with abrupt allocation changes</h1>
             <span>
               Allocations can only change so much in a calculated period. Token
               exchanges are carried out gradually, avoiding large losses of
@@ -55,7 +78,7 @@ const Advantages = () => {
         <S.DescriptionAutonomy>
           <S.DescriptionAutonomyContent>
             <S.Span>HIGH AUTONOMY</S.Span>
-            <h1>Move your funds in and out, whenever you want.</h1>
+            <h1>Move your funds in and out, whenever you want</h1>
             <span>
               Your funds will never be held hostage. Have complete freedom to
               remanage your investments around at a moments notice and no lock
@@ -68,7 +91,7 @@ const Advantages = () => {
         </S.ImageFundAutonomy>
       </S.FundAutonomy>
       <S.BenefitsContainer>
-        <h1>No compromise: Have everything you want.</h1>
+        <h1>No compromise, have everything you want</h1>
         <span>
           All features you need to invest in successful funds, diversify your
           holdings, and follow relevant managers are here.
