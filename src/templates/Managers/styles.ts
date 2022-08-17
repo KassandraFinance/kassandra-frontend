@@ -1,20 +1,29 @@
 import styled from 'styled-components'
 
 export const ManagerMainContainer = styled.section`
-  background: url('/assets/images/Manager-bg-desktop.webp'),
-    url('/assets/images/Manager-bg-desktop.png');
+  background-image: url('/assets/images/Manager-bg-desktop.png');
+  background-image: image-set(
+    url('/assets/images/Manager-bg-desktop.webp') 1x,
+    url('/assets/images/Manager-bg-desktop.png') 1x
+  );
   background-repeat: no-repeat;
   background-size: fixed;
   background-position: 50% 10%;
 
   @media (max-width: 768px) {
-    background: url('/assets/images/Manager-bg-tablet.webp'),
-      url('/assets/images/Manager-bg-tablet.png');
+    background-image: url('/assets/images/Manager-bg-tablet.png');
+    background-image: image-set(
+      url('/assets/images/Manager-bg-tablet.webp') 1x,
+      url('/assets/images/Manager-bg-tablet.png') 1x
+    );
   }
 
   @media (max-width: 360px) {
-    background: url('/assets/images/Manager-bg-mobile.webp'),
-      url('/assets/images/Manager-bg-mobile.png');
+    background-image: url('/assets/images/Manager-bg-mobile.png');
+    background-image: image-set(
+      url('/assets/images/Manager-bg-mobile.webp') 1x,
+      url('/assets/images/Manager-bg-mobile.png') 1x
+    );
   }
 `
 
