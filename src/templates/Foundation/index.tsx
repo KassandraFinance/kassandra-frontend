@@ -24,6 +24,7 @@ const Foundation = () => {
       <WavyLine color="color1" />
 
       <Institutional />
+
       <Team />
 
       <GitHubStats />
@@ -32,7 +33,10 @@ const Foundation = () => {
 
       <ProjectRoadmap />
 
-      <Contribute />
+      <Contribute
+        title="Connect with our team to learn and build together"
+        text="Accumulate $KACY by investing and contributing to Kassandra and earn a stake in all of our protocol fees."
+      />
     </>
   )
 }

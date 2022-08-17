@@ -22,7 +22,11 @@ const Managers = () => (
         </S.ManagerContent>
       </S.ManagerContainer>
     </S.ManagerMainContainer>
-    <Contribute />
+
+    <Contribute
+      title="Reach out to start building your first strategy"
+      text="Get onboarded to our protocol and begin your money management journey with KassandraDAO"
+    />
   </>
 )
 

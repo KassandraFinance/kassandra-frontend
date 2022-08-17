@@ -17,7 +17,11 @@ const Investors = () => {
         <Partners />
         {/* <FAQ /> */}
       </S.InvestorsContainer>
-      <Contribute />
+
+      <Contribute
+        title="Invest in your favorite funds and get KACY"
+        text="Accumulate $KACY and earn a stake in all of our protocol fees."
+      />
     </>
   )
 }
