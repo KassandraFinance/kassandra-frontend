@@ -12,7 +12,7 @@ import theme from '../styles/theme'
 
 import { store } from '../store'
 
-import Header from '../components/Header/newHeader'
+import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Toastify from '../components/Toastify'
 
