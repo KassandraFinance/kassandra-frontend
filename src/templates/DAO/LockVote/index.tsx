@@ -1,33 +1,14 @@
 import Image from 'next/image'
 import React from 'react'
-// import { poolsKacy, poolsKacyFuji } from '../../../constants/pools'
+
+import { poolsKacy, poolsKacyFuji } from '../../../constants/pools'
 
 import Button from '../../../components/Button'
 import LockPoolCard from './LockPoolCard'
 
 import { Description, Heading } from '../styles'
-import * as S from './styles'
 
-const poolsKacy = [
-  {
-    type: 'No Lock Pool',
-    withdrawDelay: '0 day',
-    apr: '32',
-    multiplier: '1'
-  },
-  {
-    type: '15-Day Lock Pool',
-    withdrawDelay: '15 days',
-    apr: '54',
-    multiplier: '2'
-  },
-  {
-    type: '45-Day Lock Pool',
-    withdrawDelay: '45 days',
-    apr: '75',
-    multiplier: '3'
-  }
-]
+import * as S from './styles'
 
 const LockVote = () => {
   return (
@@ -46,31 +27,17 @@ const LockVote = () => {
           {process.env.NEXT_PUBLIC_MASTER === '1'
             ? poolsKacy.map(pool => (
                 <LockPoolCard
-                  key={pool.type}
-                  type={pool.type}
-                  withdrawDelay={pool.withdrawDelay}
-                  apr={pool.apr}
-                  multiplier={pool.multiplier}
+                  key={pool.pid}
+                  pid={pool.pid}
+                  address={pool.address}
                 />
               ))
-            : poolsKacy.map(pool => (
+            : poolsKacyFuji.map(pool => (
                 <LockPoolCard
-                  key={pool.type}
-                  type={pool.type}
-                  withdrawDelay={pool.withdrawDelay}
-                  apr={pool.apr}
-                  multiplier={pool.multiplier}
+                  key={pool.pid}
+                  pid={pool.pid}
+                  address={pool.address}
                 />
-                // <LockPoolCard
-                //   key={pool.pid}
-                //   pid={pool.pid}
-                //   address={pool.address}
-                //   symbol={pool.symbol}
-                //   properties={{ ...pool.properties }}
-                //   stakeWithVotingPower={pool.stakeWithVotingPower}
-                //   stakeWithLockPeriod={pool.stakeWithLockPeriod}
-                //   isLP={pool.isLP}
-                // />
               ))}
 
           <S.Desc>
@@ -101,7 +68,7 @@ const LockVote = () => {
             href="https://app.kassandra.finance/farm?tab=stake"
           />
         </S.LockPoolContainer>
-        <S.LockPoolMobileContainer>
+        {/* <S.LockPoolMobileContainer>
           {poolsKacy.map(pool => (
             <S.LockPoolMobile key={pool.type}>
               <S.HeaderMobile>
@@ -145,7 +112,7 @@ const LockVote = () => {
               </S.Items>
             </S.LockPoolMobile>
           ))}
-        </S.LockPoolMobileContainer>
+        </S.LockPoolMobileContainer> */}
         <S.Connector>
           <Image src="/assets/images/right-connector.svg" layout="fill" />
         </S.Connector>

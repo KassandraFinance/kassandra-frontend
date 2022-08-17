@@ -4,148 +4,126 @@ import request from 'graphql-request'
 import useSWR from 'swr'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
+import { AbiItem } from "web3-utils"
 
+import web3 from '../../../../utils/web3'
+import { BNtoDecimal } from '../../../../utils/numerals'
+
+import StakingABI from "../../../../constants/abi/Staking.json"
 import { LP_KACY_AVAX_PNG } from '../../../../constants/pools'
 import {
   LPDaiAvax,
   Staking,
   SUBGRAPH_URL
 } from '../../../../constants/tokenAddresses'
-import usePriceLP from '../../../../hooks/usePriceLP'
-import useStakingContract from '../../../../hooks/useStakingContract'
 
+import usePriceLP from '../../../../hooks/usePriceLP'
 import { useAppSelector } from '../../../../store/hooks'
 
-import { BNtoDecimal } from '../../../../utils/numerals'
 
 import { GET_INFO_POOL } from '../graphql'
 
 import { Heading } from '../../styles'
+
 import * as S from './styles'
 
 interface ILockPoolCardProps {
   pid: number;
-  symbol: string;
-  properties: {
-    logo: {
-      src: string,
-      style: {
-        width: string
-      }
-    },
-    addressProviderReserves?: string,
-    title?: string,
-    link?: string
-  };
-  stakeWithVotingPower: boolean;
-  stakeWithLockPeriod: boolean;
-  isLP: boolean;
   address?: string;
 }
 
-// interface IInfoStaked {
-//   votingMultiplier: string;
-//   withdrawDelay: number;
-//   hasExpired: boolean;
-//   apr: BigNumber;
-// }
-
 interface IInfoStaked {
-  type: string;
-  withdrawDelay: string;
-  apr: string;
-  multiplier: string;
+  votingMultiplier: string;
+  withdrawDelay: number;
+  hasExpired: boolean;
+  apr: BigNumber;
 }
 
+
 const LockPoolCard = ({
-  type,
-  withdrawDelay,
-  apr,
-  multiplier
-}: IInfoStaked) => {
-  // const [infoStaked, setInfoStaked] = React.useState<IInfoStaked>({
-  //   votingMultiplier: '',
-  //   withdrawDelay: 0,
-  //   hasExpired: false,
-  //   apr: new BigNumber(-1)
-  // })
-  // const [kacyPrice, setKacyPrice] = React.useState<Big>(Big(-1))
-  // const [poolPrice, setPoolPrice] = React.useState<Big>(Big(-1))
-  // const { getPriceKacyAndLP } = usePriceLP()
-  // const { userWalletAddress } = useAppSelector(state => state)
+  pid,
+  address
+}: ILockPoolCardProps) => {
+  const [infoStaked, setInfoStaked] = React.useState<IInfoStaked>({
+    votingMultiplier: '',
+    withdrawDelay: 0,
+    hasExpired: false,
+    apr: new BigNumber(-1)
+  })
+  const [kacyPrice, setKacyPrice] = React.useState<Big>(Big(-1))
+  const [poolPrice, setPoolPrice] = React.useState<Big>(Big(-1))
 
-  // const stakingContract = useStakingContract(Staking)
+  const { getPriceKacyAndLP } = usePriceLP()
+  const { userWalletAddress } = useAppSelector(state => state)
 
-  // const { data } = useSWR(
-  //   [GET_INFO_POOL, address],
-  //   (query, id) => request(SUBGRAPH_URL, query, { id }),
-  //   {
-  //     refreshInterval: 10000
-  //   }
-  // )
+  web3.setProvider('https://api.avax.network/ext/bc/C/rpc')
 
-  // async function getLiquidityPoolPriceInDollar() {
-  //   const { kacyPriceInDollar } = await getPriceKacyAndLP(
-  //     LP_KACY_AVAX_PNG,
-  //     LPDaiAvax,
-  //     false
-  //   )
+  // eslint-disable-next-line prettier/prettier
+  const stakingContract = new web3.eth.Contract((StakingABI as unknown) as AbiItem, Staking)
 
-  //   setKacyPrice(kacyPriceInDollar)
-  //   setPoolPrice(kacyPriceInDollar)
-  // }
+  const { data } = useSWR(
+    [GET_INFO_POOL, address], (query, id) => request(SUBGRAPH_URL, query, { id }),
+    {
+      refreshInterval: 10000
+    }
+  )
 
-  // const getYourStake = React.useCallback(async () => {
-  //   const poolInfoResponse = await stakingContract.poolInfo(pid)
-  //   if (!poolInfoResponse.withdrawDelay) {
-  //     return
-  //   }
+  async function getLiquidityPoolPriceInDollar() {
+    const { kacyPriceInDollar } = await getPriceKacyAndLP(
+      LP_KACY_AVAX_PNG,
+      LPDaiAvax,
+      false
+    )
 
-  //   const kacyRewards = new BigNumber(poolInfoResponse.rewardRate).mul(
-  //     new BigNumber(86400)
-  //   )
+    setKacyPrice(kacyPriceInDollar)
+    setPoolPrice(kacyPriceInDollar)
+  }
 
-  //   const apr =
-  //     poolInfoResponse.depositedAmount.toString() !== '0' &&
-  //     kacyPrice.gt('-1') &&
-  //     (poolPrice || Big(0)).gt('-1')
-  //       ? new BigNumber(
-  //           Big(kacyRewards.toString())
-  //             .mul('365')
-  //             .mul('100')
-  //             .mul(kacyPrice)
-  //             .div(
-  //               (poolPrice || Big(1)).mul(
-  //                 Big(poolInfoResponse.depositedAmount.toString())
-  //               )
-  //             )
-  //             .toFixed(0)
-  //         )
-  //       : new BigNumber(-1)
+  const getAPR = React.useCallback(async () => {
+    const poolInfoResponse = await stakingContract.methods.poolInfo(pid).call()
+    if (!poolInfoResponse.withdrawDelay) {
+      return
+    }
 
-  //   const timestampNow = new Date().getTime()
-  //   const periodFinish: any = new Date(
-  //     Number(poolInfoResponse.periodFinish) * 1000
-  //   )
+    const kacyRewards = new BigNumber(poolInfoResponse.rewardRate).mul(
+      new BigNumber(86400)
+    )
 
-  //   setInfoStaked({
-  //     votingMultiplier: poolInfoResponse.votingMultiplier,
-  //     withdrawDelay: Number(poolInfoResponse.withdrawDelay),
-  //     hasExpired: periodFinish < timestampNow,
-  //     apr
-  //   })
-  // }, [userWalletAddress, poolPrice, kacyPrice])
+    const apr =
+      poolInfoResponse.depositedAmount.toString() !== '0' &&
+      kacyPrice.gt('-1') &&
+      (poolPrice || Big(0)).gt('-1')
+        ? new BigNumber(
+            Big(kacyRewards.toString())
+              .mul('365')
+              .mul('100')
+              .mul(kacyPrice)
+              .div(
+                (poolPrice || Big(1)).mul(
+                  Big(poolInfoResponse.depositedAmount.toString())
+                )
+              )
+              .toFixed(0)
+          )
+        : new BigNumber(-1)
 
-  // React.useEffect(() => {
-  //   getYourStake()
-  //   const interval = setInterval(getYourStake, 6000)
+    const timestampNow = new Date().getTime()
+    const periodFinish: any = new Date(
+      Number(poolInfoResponse.periodFinish) * 1000
+    )
 
-  //   return () => clearInterval(interval)
-  // }, [getYourStake])
+    setInfoStaked({
+      votingMultiplier: poolInfoResponse.votingMultiplier,
+      withdrawDelay: Number(poolInfoResponse.withdrawDelay),
+      hasExpired: periodFinish < timestampNow,
+      apr
+    })
+  }, [userWalletAddress, poolPrice, kacyPrice, data])
 
-  // React.useEffect(() => {
-  //   getLiquidityPoolPriceInDollar()
-  // }, [pid, data])
+  React.useEffect(() => {
+    getLiquidityPoolPriceInDollar()
+    getAPR()
+  }, [pid, data])
 
   return (
     <S.LockPool>
@@ -155,22 +133,21 @@ const LockPoolCard = ({
       <S.LockPoolInfo>
         <S.LockPoolTop>
           <Heading as="h3" level="3">
-            {/* {pid === 2
+            {pid === 2
               ? 'No Lock Pool'
               : infoStaked.withdrawDelay / 60 / 60 / 24 < 1
               ? infoStaked.withdrawDelay / 60 + '-Day Lock Pool'
-              : infoStaked.withdrawDelay / 60 / 60 / 24 + '-Day Lock Pool'} */}
-            {type}
+              : infoStaked.withdrawDelay / 60 / 60 / 24 + '-Day Lock Pool'}
           </Heading>
           <S.Info>
             <strong>
-              {/* {' '}
+              {' '}
               {infoStaked.apr.lt(new BigNumber(0))
                 ? '...'
                 : infoStaked.hasExpired
                 ? 0
-                : BNtoDecimal(infoStaked.apr, 0)} */}
-              {apr}%
+                : BNtoDecimal(infoStaked.apr, 0)}
+              %
             </strong>
             <span>
               APR{' '}
@@ -187,8 +164,7 @@ const LockPoolCard = ({
           <span>
             VOTING POWER{' '}
             <strong>
-              {multiplier}
-              {/* {infoStaked.votingMultiplier || '...'} */}
+              {infoStaked.votingMultiplier || '...'}
             </strong>
             / $KACY
           </span>
@@ -197,15 +173,14 @@ const LockPoolCard = ({
               WITHDRAW DELAY
             </Heading>
             <strong>
-              {withdrawDelay}
-              {/* {infoStaked.withdrawDelay === 0
+              {infoStaked.withdrawDelay === 0
                 ? '0'
                 : infoStaked.withdrawDelay / 60 / 60 / 24 < 1
                 ? infoStaked.withdrawDelay / 60
-                : infoStaked.withdrawDelay / 60 / 60 / 24} */}
+                : infoStaked.withdrawDelay / 60 / 60 / 24}
             </strong>
             <Heading className="heading" as="h4" level="5">
-              {/* {infoStaked.withdrawDelay / 60 / 60 / 24 < 1 ? ' day' : ' days'} */}
+              {infoStaked.withdrawDelay / 60 / 60 / 24 < 1 ? ' day' : ' days'}
             </Heading>
             <Image
               className="warning-gray-icon"
