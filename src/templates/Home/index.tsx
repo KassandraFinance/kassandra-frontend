@@ -7,7 +7,7 @@ import ClassProducts from './ClassProducts'
 import Hero from './Hero'
 import KassandraArchitecture from './KassandraArchitecture'
 import Products from './Products'
-import Token from './Token'
+import Token from '../NewHome/Token'
 
 // import CountdownBanner from '../../components/CountdownBanner'
 import KacyCard from '../../components/KacyCard'

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
-import theme from '../../../../styles/theme'
+import theme from '../../../styles/theme'
 
-import * as ButtonStyles from '../../../../components/Button/styles'
+import * as ButtonStyles from '../../../components/Button/styles'
 
 export const CardWrapper = styled.div`
   display: flex;

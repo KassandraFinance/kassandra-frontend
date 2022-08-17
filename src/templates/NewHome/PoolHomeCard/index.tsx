@@ -3,24 +3,22 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import useSWR from 'swr'
-import useMatomoEcommerce from '../../../../hooks/useMatomoEcommerce'
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
-import Button from '../../../../components/Button'
+import { GET_INFO_POOL } from '../../Home/graphql'
+import { ProductDetails, SUBGRAPH_URL } from '../../../constants/tokenAddresses'
+
+import Button from '../../../components/Button'
 import { BarChart, XAxis, YAxis, Bar } from 'recharts'
-import ExternalLink from '../../../../components/ExternalLink'
+import ExternalLink from '../../../components/ExternalLink'
 import TokenIcons from '../TokenIcons'
 
-import * as S from './styles'
-import arrowRight from '../../../../../public/assets/icons/arrow-yellow-right.svg'
-import arrowAscend from '../../../../../public/assets/notificationStatus/arrow-ascend.svg'
-import arrowDescend from '../../../../../public/assets/notificationStatus/arrow-descend.svg'
+import arrowRight from '../../../../public/assets/icons/arrow-yellow-right.svg'
+import arrowAscend from '../../../../public/assets/notificationStatus/arrow-ascend.svg'
+import arrowDescend from '../../../../public/assets/notificationStatus/arrow-descend.svg'
 
-import {
-  ProductDetails,
-  SUBGRAPH_URL
-} from '../../../../constants/tokenAddresses'
 import request from 'graphql-request'
-import { GET_INFO_POOL } from '../../graphql'
+import * as S from './styles'
 
 const dictionary: { [key: string]: string } = {
   0: '#E8983D',

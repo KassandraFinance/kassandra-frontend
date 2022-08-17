@@ -5,7 +5,7 @@ import { products } from '../../../constants/tokenAddresses'
 
 import HomeHeading from '../HomeHeading'
 import SectionCard from '../SectionCard'
-import PoolHomeCard from '../../Home/Token/PoolHomeCard'
+import PoolHomeCard from '../PoolHomeCard'
 
 import investorImg from '../../../../public/assets/images/investor.png'
 import light1 from '../../../../public/assets/images/backgroundHome/light-mobile1.png'
