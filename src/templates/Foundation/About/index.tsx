@@ -1,11 +1,11 @@
 import React from 'react'
+import Image from 'next/image'
 
-import padlockIcon from '../../../../public/assets/iconGradient/padlock.svg'
-import switchbladeIcon from '../../../../public/assets/iconGradient/switchblade.svg'
-import GroupSocialIcon from '../../../../public/assets/iconGradient/group-social.svg'
+import padlockIcon from '../../../../public/assets/iconGradient/padlock.png'
+import switchbladeIcon from '../../../../public/assets/iconGradient/switchblade.png'
+import GroupSocialIcon from '../../../../public/assets/iconGradient/group-social.png'
 
 import * as S from './styles'
-import Image from 'next/image'
 
 const About = () => {
   return (
