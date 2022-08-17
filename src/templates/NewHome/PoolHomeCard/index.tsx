@@ -5,7 +5,7 @@ import Image from 'next/image'
 import useSWR from 'swr'
 import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
-import { GET_INFO_POOL } from '../../Home/graphql'
+import { GET_INFO_POOL } from './graphql'
 import { ProductDetails, SUBGRAPH_URL } from '../../../constants/tokenAddresses'
 
 import Button from '../../../components/Button'
