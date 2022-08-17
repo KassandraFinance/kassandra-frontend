@@ -60,7 +60,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
             {/* <meta property="og:url" content="https://kassandra.finance/" /> */}
             <meta
               property="og:title"
-              content="Kassandra - Decentralized Funds"
+              content="Kassandra DAO - Tokenized investment funds"
             />
             {/* <meta
             property="og:image:alt"
