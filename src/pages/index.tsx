@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-import NewHome from '../templates/NewHome'
+import Home from '../templates/Home'
 
 export default function home() {
   return (
@@ -26,7 +26,8 @@ export default function home() {
 
         <title>Kassandra Finance</title>
       </Head>
-      <NewHome />
+
+      <Home />
     </>
   )
 }

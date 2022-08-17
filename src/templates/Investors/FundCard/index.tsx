@@ -13,7 +13,7 @@ import arrowAscend from '../../../../public/assets/notificationStatus/arrow-asce
 import arrowDescend from '../../../../public/assets/notificationStatus/arrow-descend.svg'
 
 import { Bar, BarChart, XAxis, YAxis } from 'recharts'
-import TokenIcons from '../../NewHome/TokenIcons'
+import TokenIcons from '../../Home/TokenIcons'
 import Button from '../../../components/Button'
 
 import * as S from './styles'
