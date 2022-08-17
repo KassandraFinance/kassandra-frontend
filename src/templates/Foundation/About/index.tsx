@@ -12,10 +12,10 @@ const About = () => {
     <S.About>
       <S.TextContainer>
         <S.Text>
-          Kassandra is a decentralized autonomous organization that governs a
-          structure that allows the creation and managing of tokenized
-          investment funds, bringing a new class of investment products to the
-          DeFi investors.
+          Kassandra is an decentralized autonomous organization of decentralized
+          finance that governs a protocol that allows the creation and
+          management of tokenized investment funds, bringing a new class of
+          products to managers and investors.
         </S.Text>
 
         <S.BulletPoints>
