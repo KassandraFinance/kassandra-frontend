@@ -209,21 +209,19 @@ export const MenuBottom = styled.div`
 
 export const ButtonsWrapper = styled.div`
   display: flex;
+  align-items: center;
   gap: 1rem;
 
   a {
     min-width: 12.5rem;
     min-height: 3.8rem;
   }
-`
 
-export const OptionsContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 0.8rem;
+  @media (max-width: 576px) {
+    flex-direction: row-reverse;
+    justify-content: space-between;
 
-  @media (min-width: 576px) {
-    display: none;
+    width: 100%;
   }
 `
 
@@ -232,6 +230,14 @@ export const ButtonOptions = styled.button`
   height: 3.2rem;
 
   background-color: rgba(255, 255, 255, 0.1);
-  border: none;
+  border: 0.1rem solid rgba(255, 255, 255, 0);
   border-radius: 50%;
+
+  transition: border 300ms ease-in-out;
+
+  cursor: pointer;
+
+  &:hover {
+    border: 0.1rem solid rgba(255, 255, 255, 0.8);
+  }
 `
