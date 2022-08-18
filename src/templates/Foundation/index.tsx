@@ -14,7 +14,7 @@ import * as S from './styles'
 
 const Foundation = () => {
   return (
-    <S.Foundation>
+    <S.FoundationConatiner>
       <Hero />
 
       <S.Foundation>
@@ -37,7 +37,7 @@ const Foundation = () => {
         title="Connect with our team to learn and build together"
         text="Accumulate $KACY by investing and contributing to Kassandra and earn a stake in all of our protocol fees."
       />
-    </S.Foundation>
+    </S.FoundationConatiner>
   )
 }
 
