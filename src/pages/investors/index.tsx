@@ -22,6 +22,7 @@ export default function Index() {
 
         <title>Kassandra for Investors</title>
       </Head>
+
       <Investors />
     </>
   )

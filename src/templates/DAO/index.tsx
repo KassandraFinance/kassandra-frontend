@@ -11,23 +11,21 @@ import * as S from './styles'
 
 const TokenHolder = () => {
   return (
-    <>
-      <S.Wrapper>
-        <Hero />
+    <S.Wrapper>
+      <Hero />
 
-        <CommunityTenets />
-        <Governance />
-        <Scarcity />
-        <FlowingRevenue />
-        <LockVote />
-        <Tokenomics />
+      <CommunityTenets />
+      <Governance />
+      <Scarcity />
+      <FlowingRevenue />
+      <LockVote />
+      <Tokenomics />
 
-        <Contribute
-          title="Find out how you can contribute"
-          text="Accumulate $KACY by investing and contributing to Kassandra and earn a stake in all of our protocol fees."
-        />
-      </S.Wrapper>
-    </>
+      <Contribute
+        title="Find out how you can contribute"
+        text="Accumulate $KACY by investing and contributing to Kassandra and earn a stake in all of our protocol fees."
+      />
+    </S.Wrapper>
   )
 }
 
