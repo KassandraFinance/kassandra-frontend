@@ -12,8 +12,8 @@ const Institutional = () => {
     <S.InstitutionalContainer>
       <S.TitleContainer>
         <h2>What is Kassandra Foundation?</h2>
-        <h3>A community bringing investors, managers and builders together.</h3>
-        <p>And to achieve this, we have three pillars</p>
+        <h3>A community bringing investors, managers and builders together</h3>
+        <p>And to achieve this, we have three pillars:</p>
       </S.TitleContainer>
       <S.ImageContainer>
         <S.ImageContent>

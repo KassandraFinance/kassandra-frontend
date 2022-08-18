@@ -1,21 +1,21 @@
 import React from 'react'
+import Image from 'next/image'
 
-import padlockIcon from '../../../../public/assets/iconGradient/padlock.svg'
-import switchbladeIcon from '../../../../public/assets/iconGradient/switchblade.svg'
-import GroupSocialIcon from '../../../../public/assets/iconGradient/group-social.svg'
+import padlockIcon from '../../../../public/assets/iconGradient/padlock.png'
+import switchbladeIcon from '../../../../public/assets/iconGradient/switchblade.png'
+import GroupSocialIcon from '../../../../public/assets/iconGradient/group-social.png'
 
 import * as S from './styles'
-import Image from 'next/image'
 
 const About = () => {
   return (
     <S.About>
       <S.TextContainer>
         <S.Text>
-          Kassandra is a decentralized autonomous organization that governs a
-          structure that allows the creation and managing of tokenized
-          investment funds, bringing a new class of investment products to the
-          DeFi investors.
+          Kassandra is an decentralized autonomous organization of decentralized
+          finance that governs a protocol that allows the creation and
+          management of tokenized investment funds, bringing a new class of
+          products to managers and investors.
         </S.Text>
 
         <S.BulletPoints>

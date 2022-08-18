@@ -12,7 +12,7 @@ import theme from '../styles/theme'
 
 import { store } from '../store'
 
-import Header from '../components/Header/newHeader'
+import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Toastify from '../components/Toastify'
 
@@ -60,7 +60,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
             {/* <meta property="og:url" content="https://kassandra.finance/" /> */}
             <meta
               property="og:title"
-              content="Kassandra - Decentralized Funds"
+              content="Kassandra DAO - Tokenized investment funds"
             />
             {/* <meta
             property="og:image:alt"

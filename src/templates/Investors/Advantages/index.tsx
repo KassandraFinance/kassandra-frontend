@@ -69,7 +69,7 @@ const Advantages = () => {
             <span>
               Allocations can only change so much in a calculated period. Token
               exchanges are carried out gradually, avoiding large losses of
-              funds to rebalance the strategies.
+              funds while rebalancing strategies.
             </span>
           </S.DescriptionRebalanceContent>
         </S.DescriptionRebalance>

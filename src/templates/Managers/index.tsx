@@ -4,7 +4,7 @@ import ChangeAllocations from './ChangeAllocations'
 import AllocationsInexpensive from './AllocationsInexpensive'
 import ManagersInterface from './ManagersInterface'
 import CreateFund from './CreateFunds'
-import Contribute from '../DAO/Contribute'
+import Contribute from '../../components/Contribute'
 
 import * as S from './styles'
 
@@ -22,7 +22,11 @@ const Managers = () => (
         </S.ManagerContent>
       </S.ManagerContainer>
     </S.ManagerMainContainer>
-    <Contribute />
+
+    <Contribute
+      title="Reach out to start building your first strategy"
+      text="Get onboarded to our protocol and begin your money management journey with KassandraDAO"
+    />
   </>
 )
 

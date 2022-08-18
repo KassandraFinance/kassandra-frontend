@@ -6,15 +6,15 @@ import Hero from './Hero'
 import About from './About'
 import GitHubStats from './GitHubStats'
 import ProjectRoadmap from './ProjectRoadmap'
-import Contribute from '../DAO/Contribute'
 import Institutional from './Institutional'
 import Team from './Team'
+import Contribute from '../../components/Contribute'
 
 import * as S from './styles'
 
 const Foundation = () => {
   return (
-    <>
+    <S.FoundationConatiner>
       <Hero />
 
       <S.Foundation>
@@ -24,6 +24,7 @@ const Foundation = () => {
       <WavyLine color="color1" />
 
       <Institutional />
+
       <Team />
 
       <GitHubStats />
@@ -32,8 +33,11 @@ const Foundation = () => {
 
       <ProjectRoadmap />
 
-      <Contribute />
-    </>
+      <Contribute
+        title="Connect with our team to learn and build together"
+        text="Accumulate $KACY by investing and contributing to Kassandra and earn a stake in all of our protocol fees."
+      />
+    </S.FoundationConatiner>
   )
 }
 
