@@ -226,6 +226,8 @@ export const ButtonsWrapper = styled.div`
 `
 
 export const ButtonOptions = styled.button`
+  display: none;
+
   width: 3.2rem;
   height: 3.2rem;
 
@@ -239,5 +241,9 @@ export const ButtonOptions = styled.button`
 
   &:hover {
     border: 0.1rem solid rgba(255, 255, 255, 0.8);
+  }
+
+  @media (max-width: 576px) {
+    display: block;
   }
 `
