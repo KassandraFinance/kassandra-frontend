@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import theme from '../../styles/theme'
 
 export const ContributeContainer = styled.div`
   position: relative;
@@ -71,6 +72,20 @@ export const Text = styled.div`
     margin-top: 2.4rem;
     margin-bottom: 3.2rem;
     font-size: 1.6rem;
+  }
+
+  h3 {
+    color: #ffffff;
+    font-size: ${theme.font.sizes.font48};
+    font-weight: ${theme.font.weight.black};
+    line-height: 5rem;
+
+    @media (max-width: 480px) {
+      font-size: ${theme.font.sizes.font24};
+      font-weight: ${theme.font.weight.bold};
+      line-height: 3.2rem;
+      text-align: left;
+    }
   }
 `
 

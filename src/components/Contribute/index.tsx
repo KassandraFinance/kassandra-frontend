@@ -1,7 +1,5 @@
 import Image from 'next/image'
 
-import { Heading } from '../../templates/DAO/styles'
-
 import logoSkew from '../../../public/assets/images/logo-big-skew.png'
 
 import * as S from './styles'
@@ -13,9 +11,7 @@ const Contribute = () => {
 
       <S.Wrapper>
         <S.Text>
-          <Heading as="h2" level="1">
-            Find out how you can contribute
-          </Heading>
+          <h3>Find out how you can contribute</h3>
           <p>
             Accumulate $KACY by investing and contributing to Kassandra and earn
             a stake in all of our protocol fees.
