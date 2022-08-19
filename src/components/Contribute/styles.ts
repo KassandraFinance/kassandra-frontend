@@ -105,20 +105,6 @@ export const Text = styled.p`
     letter-spacing: 0.05em;
     text-align: left;
   }
-
-  h3 {
-    color: #ffffff;
-    font-size: ${theme.font.sizes.font48};
-    font-weight: ${theme.font.weight.black};
-    line-height: 5rem;
-
-    @media (max-width: 480px) {
-      font-size: ${theme.font.sizes.font24};
-      font-weight: ${theme.font.weight.bold};
-      line-height: 3.2rem;
-      text-align: left;
-    }
-  }
 `
 
 export const ButtonContainer = styled.div`
