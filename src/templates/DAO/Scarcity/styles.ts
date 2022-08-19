@@ -19,18 +19,18 @@ export const ImageWrapper = styled.div`
   width: 100%;
   max-width: 120rem;
 
-  height: 70rem;
+  img {
+    width: 100%;
+  }
 
   @media (max-width: 800px) {
     margin-top: 4rem;
     max-width: 83rem;
-    height: 45rem;
   }
 
   @media (max-width: 550px) {
     margin-top: 1.8rem;
     max-width: 42.5rem;
-    height: 30rem;
   }
 `
 

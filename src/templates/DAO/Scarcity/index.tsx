@@ -1,5 +1,3 @@
-import Image from 'next/image'
-
 import * as S from './styles'
 
 const Scarcity = () => {
@@ -11,7 +9,7 @@ const Scarcity = () => {
         tokens as part of its portfolio.
       </S.ScarcityDescription>
       <S.ImageWrapper>
-        <Image src="/assets/images/scarcity.svg" layout="fill" />
+        <img src="/assets/images/scarcity.svg" />
       </S.ImageWrapper>
     </S.Wrapper>
   )
