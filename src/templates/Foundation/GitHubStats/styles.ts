@@ -116,7 +116,7 @@ export const ArticlesContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 16.5rem;
+  gap: 11.5rem;
 
   margin-top: 13.3rem;
 
@@ -143,7 +143,7 @@ export const ArticlesContent = styled.div`
 `
 
 export const ArticlesData = styled.div`
-  max-width: 47.2rem;
+  max-width: 52rem;
 
   display: flex;
   flex-direction: column;
