@@ -80,8 +80,8 @@ const RoadMapSlider = () => {
 const arrCard = [
   {
     date: '2022 - Q3',
-    icon: icons.next,
-    color: colors.next,
+    icon: icons.soon,
+    color: colors.soon,
     title: '3rd Cycle ',
     items: [
       {
@@ -120,8 +120,8 @@ const arrCard = [
   },
   {
     date: '2022 - Q2',
-    icon: icons.soon,
-    color: colors.soon,
+    icon: icons.done,
+    color: colors.done,
     title: '2nd Cycle ',
     items: [
       {

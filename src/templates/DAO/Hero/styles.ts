@@ -134,13 +134,14 @@ export const HeroDescription = styled.div`
     font-size: ${theme.font.sizes.font48};
     text-align: center;
 
-    @media (max-width: 650px) {
-      font-weight: ${theme.font.weight.bold};
+    @media (max-width: 768px) {
       font-size: ${theme.font.sizes.font32};
+      font-weight: ${theme.font.weight.bold};
     }
 
-    @media (max-width: 400px) {
+    @media (max-width: 576px) {
       font-size: ${theme.font.sizes.font24};
+      line-height: 3.2rem;
     }
   }
 

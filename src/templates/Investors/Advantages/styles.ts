@@ -340,6 +340,12 @@ export const BenefitsContainer = styled.div`
 
     margin-top: 1.2rem;
 
+    h1 {
+      font-weight: 700;
+      font-size: 2.4rem;
+      line-height: 3.2rem;
+    }
+
     span {
       font-size: 1.4rem;
     }

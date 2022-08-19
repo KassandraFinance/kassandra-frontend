@@ -1,38 +1,79 @@
 import styled from 'styled-components'
 
-export const Background = styled.div`
-  background: url('/assets/images/latest-background.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-`
-export const BackgroundSubscribe = styled.div`
-  max-width: 96rem;
-  margin: 0 auto 17rem;
+export const HomeBackgroundContainer = styled.div`
+  width: 100%;
 
-  padding-top: 4rem;
-  padding-left: 6rem;
-  padding-bottom: 0;
-  padding-right: 6rem;
-
-  background: #2114261f;
-  border: 1px solid #ffffff21;
-  border-radius: 1rem;
-
-  @media (max-width: 768px) {
-    display: none;
+  @media (min-width: 991px) {
+    background-image: url('./assets/images/backgroundHome/background-home-hero.png'),
+      url('./assets/images/backgroundHome/background-home-body.png');
+    background-repeat: no-repeat;
+    background-position: top center;
   }
 `
-export const BackgoundCountDown = styled.div`
-  padding: 10rem 10rem;
 
-  background: url('/assets/images/background-countdown.svg');
-  background-repeat: no-repeat;
-  background-size: auto;
-  background-position: center;
+export const Container = styled.div`
+  position: relative;
 
-  @media (max-width: 768px) {
-    padding: 0;
-    background: none;
+  max-width: 110.8rem;
+  margin: 0 auto;
+`
+
+export const WavyOneWrapper = styled.div`
+  position: relative;
+`
+
+export const ImgWrapper = styled.div`
+  position: absolute;
+
+  display: none;
+
+  z-index: -1;
+
+  @media (max-width: 576px) {
+    right: 0;
+    bottom: -15rem;
+    display: block;
+  }
+`
+
+export const ImgTabletWrapper1 = styled.div`
+  position: absolute;
+
+  display: none;
+
+  z-index: -1;
+
+  @media (min-width: 576px) and (max-width: 960px) {
+    right: 0;
+    bottom: -30rem;
+    display: block;
+  }
+`
+
+export const ImgTabletWrapper2 = styled.div`
+  position: absolute;
+
+  display: none;
+
+  z-index: -1;
+
+  @media (min-width: 576px) and (max-width: 960px) {
+    left: 0;
+    bottom: -10rem;
+    display: block;
+  }
+`
+
+export const ImgTabletWrapper3 = styled.div`
+  position: absolute;
+
+  display: none;
+
+  z-index: -1;
+
+  @media (min-width: 576px) and (max-width: 960px) {
+    left: 0;
+    bottom: -30rem;
+    display: block;
   }
 `

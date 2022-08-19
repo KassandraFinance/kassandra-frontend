@@ -88,7 +88,7 @@ const GitHubStats = () => {
   return (
     <>
       <S.GitHubStatsWrapper>
-        <h1>GitHub Stats</h1>
+        <h1>Team Stats</h1>
         <S.Divider />
         <S.GitHubStatsContent>
           <S.GitHub>
@@ -96,7 +96,7 @@ const GitHubStats = () => {
               <img src="/assets/socialMidia/github.svg" alt="logo github" />
               <span>GITHUB</span>
             </div>
-            <h1>Welcome to open-source world</h1>
+            <h1>Welcome to the open-source world</h1>
             <p>
               Our team is always hard at work, updating our product daily in
               order to stay at the cutting edge of DeFi.
@@ -113,7 +113,7 @@ const GitHubStats = () => {
         </S.GitHubStatsContent>
         <S.ArticlesContent>
           <S.ArticlesData>
-            <h1>Safety and Numbers</h1>
+            <h1>Track our development</h1>
             <ExternalLink
               hrefLink="https://kassandrafoundation.medium.com/welcome-to-august-kassandra-newsletter-5-ef7bb65655ac"
               text="Latest article"

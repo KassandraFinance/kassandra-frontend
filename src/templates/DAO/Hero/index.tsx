@@ -25,8 +25,8 @@ const Hero = () => {
             <h1>It’s our community, make your voice heard</h1>
             <p>
               Shape Kassandra into what you believe in. Propose, vote and
-              contribute where its needed. Help the community flourish: the
-              bigger the pie, the better your slice.
+              contribute where its needed. Help the community flourish.
+              Remember: the bigger the pie, the better your slice.
             </p>
 
             <Button

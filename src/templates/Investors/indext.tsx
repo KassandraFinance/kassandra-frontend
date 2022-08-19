@@ -3,9 +3,9 @@ import Hero from './Hero'
 import Products from './Products'
 import Advantages from './Advantages'
 import Partners from './Partners'
+import Contribute from '../../components/Contribute'
 
 import * as S from './styles'
-import Contribute from '../DAO/Contribute'
 
 const Investors = () => {
   return (
@@ -17,7 +17,11 @@ const Investors = () => {
         <Partners />
         {/* <FAQ /> */}
       </S.InvestorsContainer>
-      <Contribute />
+
+      <Contribute
+        title="Invest in your favorite funds and get KACY"
+        text="Accumulate $KACY and earn a stake in all of our protocol fees."
+      />
     </>
   )
 }

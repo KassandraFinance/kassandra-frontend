@@ -1,86 +1,70 @@
 import React from 'react'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
-import useSWR from 'swr'
-import Big from 'big.js'
+import Image from 'next/image'
 
-import ClassProducts from './ClassProducts'
-import Hero from './Hero'
-import KassandraArchitecture from './KassandraArchitecture'
-import Products from './Products'
-import Token from './Token'
+import HeroHome from './HeroHome'
+import InvestorsSection from './InvestorsSection'
+import WavyLine from '../../components/WavyLine'
+import ManagerSection from './ManagerSection'
+import DaoSection from './DaoSection'
+import KacySection from './KacySection'
+import LatestNews from './LatestNews'
+import Subscribe from './Subscribe'
 
-// import CountdownBanner from '../../components/CountdownBanner'
-import KacyCard from '../../components/KacyCard'
-import SubscribeBanner from '../../components/SubscribeBanner'
-import RoadMapSlider from '../../components/RoadMapSlider'
-import ScrollUpButton from '../../components/ScrollUpButton'
-import KacyOverview from '../../components/KacyOverview'
+import light3 from '../../../public/assets/images/backgroundHome/light-mobile3.png'
+import lightTable5 from '../../../public/assets/images/backgroundHome/light-tablet5.png'
+import lightTable6 from '../../../public/assets/images/backgroundHome/light-tablet6.png'
+import lightTable7 from '../../../public/assets/images/backgroundHome/light-tablet7.png'
 
 import * as S from './styles'
 
-const poolPlatform =
-  process.env.NEXT_PUBLIC_MASTER === '1' ? 'Avalanche' : 'Fuji'
-
-const URL_API: { [key: number | string]: string } = {
-  1: 'https://kassandra.finance/api/overview',
-  2: 'https://alpha.kassandra.finance/api/overview',
-  3: 'https://demo.kassandra.finance/api/overview',
-  4: 'http://localhost:3000/api/overview'
-}
-
-interface IKacyMarketDataProps {
-  price: number;
-  marketCap: Big;
-  supply: Big;
-  kacyPercentage: number;
-}
-
-const Home = () => {
-  const { trackPageView } = useMatomo()
-  // eslint-disable-next-line prettier/prettier
-  const [kacyMarketData, setKacyMarketData] =
-    React.useState<IKacyMarketDataProps>({
-      price: 0,
-      marketCap: Big(0),
-      supply: Big(0),
-      kacyPercentage: 0
-    })
-
-  const { data } = useSWR(URL_API[process.env.NEXT_PUBLIC_URL_API || 4])
-
-  React.useEffect(() => {
-    if (data) {
-      setKacyMarketData({
-        price: data.kacyPrice,
-        marketCap: Big(data.marketCap),
-        supply: Big(data.supply),
-        kacyPercentage: data.kacyPercentage
-      })
-    }
-  }, [poolPlatform, data])
-
-  // Track page view
-  React.useEffect(() => {
-    trackPageView({})
-  }, [trackPageView])
-
+const NewHome = () => {
   return (
-    <>
-      <Hero />
-      <S.Background>
-        <ScrollUpButton />
-        <Token />
-        <Products />
-        <ClassProducts />
-        <KacyCard kacyMarketData={kacyMarketData} />
-        <KassandraArchitecture />
-        <RoadMapSlider />
-        <KacyOverview kacyMarketData={kacyMarketData} />
-        {/* <CountdownBanner /> */}
-        <SubscribeBanner />
-      </S.Background>
-    </>
+    <S.HomeBackgroundContainer>
+      <HeroHome />
+
+      <S.Container>
+        <InvestorsSection />
+      </S.Container>
+
+      <S.WavyOneWrapper>
+        <S.ImgWrapper>
+          <Image src={light3} />
+        </S.ImgWrapper>
+
+        <S.ImgTabletWrapper1>
+          <Image src={lightTable5} />
+        </S.ImgTabletWrapper1>
+
+        <WavyLine color="color1" />
+      </S.WavyOneWrapper>
+
+      <S.Container>
+        <ManagerSection />
+      </S.Container>
+
+      <S.WavyOneWrapper>
+        <S.ImgTabletWrapper2>
+          <Image src={lightTable6} />
+        </S.ImgTabletWrapper2>
+
+        <S.ImgTabletWrapper3>
+          <Image src={lightTable7} />
+        </S.ImgTabletWrapper3>
+
+        <WavyLine color="color2" />
+      </S.WavyOneWrapper>
+
+      <S.Container>
+        <DaoSection />
+
+        <KacySection />
+      </S.Container>
+
+      <LatestNews />
+
+      <Subscribe />
+    </S.HomeBackgroundContainer>
   )
 }
 
-export default Home
+export default NewHome
