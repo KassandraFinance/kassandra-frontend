@@ -18,7 +18,7 @@ const ManagersInterface = () => (
         <h1>An innovative, intuitive interface for managers</h1>
         <p>
           Easily create your fund, track your metrics, change allocations and
-          tokens in an intuitive interface. Built by managers for managers.™
+          tokens in an easy-to-use interface.
         </p>
       </S.DescriptionContainer>
     </S.ManagersInterfaceContainer>

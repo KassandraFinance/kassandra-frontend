@@ -26,6 +26,14 @@ export const PartnersContainer = styled.div`
       margin-top: 30.8rem;
     }
   }
+
+  @media (max-width: 576px) {
+    h1 {
+      font-weight: 900;
+      font-size: 4rem;
+      line-height: 4rem;
+    }
+  }
 `
 
 export const PartnerContent = styled.div`

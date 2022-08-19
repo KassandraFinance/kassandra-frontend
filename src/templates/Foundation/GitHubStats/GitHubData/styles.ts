@@ -6,7 +6,7 @@ interface IGitHubProps {
   isCurrentYar: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const GitHubStats = styled.div<IGitHubProps>`
   width: 53rem;
 
@@ -26,7 +26,7 @@ export const GitHubStats = styled.div<IGitHubProps>`
   .data {
     display: flex;
     justify-content: ${({ isCurrentYar }) =>
-      isCurrentYar ? 'space-between' : 'flex-end'} ;
+      isCurrentYar ? 'space-between' : 'center'} ;
     padding: 0 3.2rem;
     border-top: solid 0.1rem #ffbf00;
 

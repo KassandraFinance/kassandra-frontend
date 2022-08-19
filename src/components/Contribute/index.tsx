@@ -4,18 +4,22 @@ import logoSkew from '../../../public/assets/images/logo-big-skew.png'
 
 import * as S from './styles'
 
-const Contribute = () => {
+interface IContributeProps {
+  title: string;
+  text: string;
+}
+
+const Contribute = ({ title, text }: IContributeProps) => {
   return (
     <S.ContributeContainer>
       <S.ContributeBacground />
 
       <S.Wrapper>
-        <S.Text>
-          <h3>Find out how you can contribute</h3>
-          <p>
-            Accumulate $KACY by investing and contributing to Kassandra and earn
-            a stake in all of our protocol fees.
-          </p>
+        <S.TextWrapper>
+          <S.ContributeHeading>{title}</S.ContributeHeading>
+
+          <S.Text>{text}</S.Text>
+
           <S.ButtonContainer>
             <S.Button
               variant="telegram"
@@ -26,6 +30,7 @@ const Contribute = () => {
               <Image src="/assets/icons/telegram.svg" width={18} height={13} />
               <span>Join Our Telegram</span>
             </S.Button>
+
             <S.Button
               target="_blank"
               rel="noopener noreferrer"
@@ -36,10 +41,9 @@ const Contribute = () => {
               <span>Join Our Discord</span>
             </S.Button>
           </S.ButtonContainer>
-        </S.Text>
-        <S.LogoWrapper>
-          <Image src={logoSkew} />
-        </S.LogoWrapper>
+        </S.TextWrapper>
+
+        <Image src={logoSkew} />
       </S.Wrapper>
     </S.ContributeContainer>
   )

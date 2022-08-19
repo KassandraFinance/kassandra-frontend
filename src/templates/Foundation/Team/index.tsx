@@ -113,7 +113,10 @@ const Team = () => {
           name="Felipe Gabriel"
           role="QUANTITATIVE ANALYST"
           image="assets/team/felipe.png"
-          social={{}}
+          social={{
+            github: 'https://github.com/FG-SC',
+            linkedin: 'https://www.linkedin.com/in/felipe-gabriel0/'
+          }}
         />
         <TeamCard
           name="Ricardo Werneck"

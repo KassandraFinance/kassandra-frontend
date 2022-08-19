@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import schemaManager from '../../../../public/assets/images/schema-managers.svg'
+import schemaManager from '../../../../public/assets/images/schema-managers.png'
 
 import * as S from './styles'
 

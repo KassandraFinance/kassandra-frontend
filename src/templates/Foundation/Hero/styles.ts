@@ -9,6 +9,12 @@ export const HeroContainer = styled.div`
 
   overflow: hidden;
 
+  margin-bottom: 13.5rem;
+
+  @media (max-width: 992px) {
+    margin-bottom: 10rem;
+  }
+
   @keyframes heroContentFadeIn {
     0% {
       opacity: 0;
@@ -74,12 +80,9 @@ export const Hero = styled.section`
   margin: 0 auto;
   height: 100vh;
   padding-inline: 2.4rem;
-  margin-bottom: 13.5rem;
 
   @media (max-width: 992px) {
     justify-content: center;
-
-    margin-bottom: 10rem;
   }
 
   @media (max-width: 576px) {

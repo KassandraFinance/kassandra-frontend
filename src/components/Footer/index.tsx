@@ -163,6 +163,27 @@ const Footer = () => {
                   />
                 </S.SocialIcon>
               </li>
+              <li>
+                <S.SocialIcon
+                  href="http://gov.kassandra.finance/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() =>
+                    trackEventFunction(
+                      'click-on-link',
+                      'media-social',
+                      'footer'
+                    )
+                  }
+                >
+                  <img
+                    src="/assets/socialMidia/discourse.svg"
+                    alt="Follow our Discourse"
+                    width="20"
+                    height="20"
+                  />
+                </S.SocialIcon>
+              </li>
             </ul>
             <S.Certified>
               <a
@@ -261,6 +282,23 @@ const Footer = () => {
                 <img
                   src="/assets/socialMidia/twitter.svg"
                   alt="Follow our Twitter feed"
+                  width="20"
+                  height="20"
+                />
+              </S.SocialIcon>
+            </li>
+            <li>
+              <S.SocialIcon
+                href="http://gov.kassandra.finance/"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  trackEventFunction('click-on-link', 'media-social', 'footer')
+                }
+              >
+                <img
+                  src="/assets/socialMidia/discourse.svg"
+                  alt="Follow our Discourse"
                   width="20"
                   height="20"
                 />

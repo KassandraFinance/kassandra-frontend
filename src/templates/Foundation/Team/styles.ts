@@ -42,12 +42,13 @@ export const Title = styled.h2`
   font-weight: ${theme.font.weight.bold};
   line-height: 114%;
 
-  @media (max-width: 810px) {
+  @media (max-width: 992px) {
     font-size: ${theme.font.sizes.font32};
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 576px) {
     font-size: ${theme.font.sizes.font24};
+    line-height: 3.2rem;
   }
 `
 
