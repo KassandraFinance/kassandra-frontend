@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import theme from '../../../styles/theme'
 
 export const Wrapper = styled.section`
   max-width: 141.5rem;
@@ -20,16 +21,27 @@ export const Header = styled.header`
   max-width: 51.2rem;
   margin: 0 auto;
 
-  text-align: center;
+  h2 {
+    color: #ffffff;
+    font-weight: ${theme.font.weight.bold};
+    font-size: ${theme.font.sizes.font32};
+    text-align: center;
 
-  @media (max-width: 560px) {
-    font-size: 2.4rem;
-    text-align: left;
+    @media (max-width: 576px) {
+      text-align: left;
+      font-size: ${theme.font.sizes.font24};
+    }
   }
 
   p {
-    @media (max-width: 560px) {
-      font-size: 1.4rem;
+    color: #ffffff;
+    font-weight: ${theme.font.weight.normal};
+    font-size: ${theme.font.sizes.font16};
+    line-height: 2.4rem;
+    text-align: center;
+
+    @media (max-width: 576px) {
+      font-size: ${theme.font.sizes.font14};
       text-align: left;
     }
   }
@@ -97,12 +109,12 @@ export const CardText = styled.div`
   h5 {
     font-size: 1.67rem;
     line-height: 1.49rem;
-    font-weight: 500;
+    font-weight: ${theme.font.weight.medium};
   }
 
   p {
     font-size: 1.11rem;
-    font-weight: 300;
+    font-weight: ${theme.font.weight.light};
     line-height: 1.49rem;
   }
 `
@@ -122,7 +134,6 @@ export const Data = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-
   margin-bottom: 2.4rem;
 
   text-align: center;
@@ -137,8 +148,8 @@ export const Data = styled.div`
 
   span {
     font-size: 7.2rem;
+    font-weight: ${theme.font.weight.light};
     line-height: 7.2rem;
-    font-weight: ${({ theme }) => theme.font.weight.light};
 
     @media (max-width: 840px) {
       font-size: 4.19rem;
@@ -151,13 +162,13 @@ export const Data = styled.div`
     }
 
     strong {
-      font-weight: ${({ theme }) => theme.font.weight.black};
+      font-weight: ${theme.font.weight.black};
     }
   }
 
   small {
-    color: ${({ theme }) => theme.colors.amber};
-    font-size: 1.6rem;
+    color: ${theme.colors.amber};
+    font-size: ${theme.font.sizes.font16};
     line-height: 1.6rem;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -169,7 +180,7 @@ export const Data = styled.div`
 
     @media (max-width: 560px) {
       font-size: 1rem;
-      line-height: 1rem;
+      line-height: 1.6rem;
     }
   }
 `
