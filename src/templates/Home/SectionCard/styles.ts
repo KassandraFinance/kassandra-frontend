@@ -106,6 +106,7 @@ export const SubTitle = styled.h4`
   }
 
   @media (max-width: 576px) {
+    font-weight: ${theme.font.weight.bold};
     font-size: ${theme.font.sizes.font24};
     line-height: ${theme.font.sizes.font32};
     text-align: left;

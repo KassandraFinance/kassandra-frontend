@@ -26,6 +26,7 @@ export const CreateFundContainer = styled.section`
 
     @media (max-width: 500px) {
       width: 100%;
+      font-weight: 700;
       font-size: ${theme.font.sizes.font24};
       text-align: left;
     }
@@ -109,7 +110,7 @@ interface INumberButtonProps {
   isActiveImage?: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const DescriptionContainer = styled.div<INumberButtonProps>`
   width: 42rem;
 
@@ -144,7 +145,7 @@ export const DescriptionContainer = styled.div<INumberButtonProps>`
   > h2 {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     height: 7.5rem;
     width: 42rem;
     margin-top: 1.6rem;
@@ -153,13 +154,15 @@ export const DescriptionContainer = styled.div<INumberButtonProps>`
     font-weight: ${theme.font.weight.bold};
     font-size: ${theme.font.sizes.font32};
 
+
     animation: ${props =>
       props.isActiveButton
-        ? `assetAnim ease 1s both;`
-        : `assetAnimm ease 0.4s both;
+      ? `assetAnim ease 1s both;`
+      : `assetAnimm ease 0.4s both;
       `};
 
     @media (max-width: 1050px) {
+      justify-content: center;
       /* width: 100%; */
       text-align: center;
     }
@@ -247,7 +250,7 @@ interface INumberButtonProps {
   isActiveButton?: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const NumberButton = styled.button<INumberButtonProps>`
   display: flex;
   align-items: center;
@@ -331,7 +334,7 @@ interface IisActiveImageProps {
   isActiveImage: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const CreateFundsImageContainer = styled.div<IisActiveImageProps>`
   position: relative;
 

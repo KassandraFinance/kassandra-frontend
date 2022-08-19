@@ -13,6 +13,7 @@ export const GitHubStatsWrapper = styled.section`
     line-height: 2rem;
     letter-spacing: 0.4em;
     color: #ffbf00;
+    text-transform: uppercase;
   }
 `
 
