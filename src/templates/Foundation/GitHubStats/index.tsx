@@ -88,7 +88,7 @@ const GitHubStats = () => {
   return (
     <>
       <S.GitHubStatsWrapper>
-        <h1>GitHub Stats</h1>
+        <h1>Team Stats</h1>
         <S.Divider />
         <S.GitHubStatsContent>
           <S.GitHub>
