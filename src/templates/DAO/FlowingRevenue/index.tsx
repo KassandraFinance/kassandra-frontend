@@ -10,7 +10,6 @@ import { BNtoDecimal } from '../../../utils/numerals'
 
 import { GET_WITHDRAW_FEE } from './graphql'
 
-import { Description, Heading } from '../styles'
 import * as S from './styles'
 
 const FlowingRevenue = () => {
@@ -46,18 +45,16 @@ const FlowingRevenue = () => {
   return (
     <S.Wrapper>
       <S.Header>
-        <Heading as="h2" level="2">
-          DAO’s Flowing Revenue{' '}
-        </Heading>
-        <Description>
+        <h2>DAO’s Flowing Revenue </h2>
+        <p>
           A 3% fee is charged when investment tokens are redeemed to aid the
           {" DAO's"} innovation and development fund.
-        </Description>
+        </p>
       </S.Header>
       <S.HeroMobile>
         <S.ImageWrapper>
           <Image
-            src="/assets/images/background-flowing-revenue-mobile.png"
+            src="/assets/images/background-flowing-revenue-mobile.svg"
             layout="fill"
           />
         </S.ImageWrapper>

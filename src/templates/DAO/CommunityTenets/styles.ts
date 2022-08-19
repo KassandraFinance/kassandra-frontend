@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import theme from '../../../styles/theme'
 
 export const Wrapper = styled.section`
   max-width: 112rem;
@@ -18,9 +19,6 @@ export const Wrapper = styled.section`
 
     margin-right: 7rem;
 
-    /* left: 12rem;
-    bottom: 6.5rem; */
-
     @media (max-width: 1060px) {
       width: 60rem;
     }
@@ -38,6 +36,35 @@ export const Wrapper = styled.section`
     @media (max-width: 750px) {
       display: none;
     }
+  }
+`
+
+export const Title = styled.h1`
+  color: #ffffff;
+  font-weight: ${theme.font.weight.black};
+  font-size: ${theme.font.sizes.font48};
+  text-align: center;
+  line-height: 5.3rem;
+
+  @media (max-width: 576px) {
+    text-align: left;
+    font-size: ${theme.font.sizes.font24};
+    font-weight: ${theme.font.weight.bold};
+    line-height: 2.4rem;
+  }
+`
+
+export const Description = styled.p`
+  margin-top: 2.4rem;
+
+  color: #ffffff;
+  font-weight: ${theme.font.weight.light};
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  text-align: center;
+
+  @media (max-width: 576px) {
+    text-align: left;
   }
 `
 
@@ -125,6 +152,11 @@ export const IconWrapper = styled.div`
   @media (max-width: 870px) {
     width: 4.5rem;
     height: 4.5rem;
+
+    img {
+      width: 3rem;
+      height: 3rem;
+    }
   }
 `
 
@@ -133,18 +165,19 @@ interface Caption {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const Caption =
-  styled.span <
-  Caption >
-  `
+export const Caption = styled.span<Caption>`
   ${({ theme, color }) => css`
     color: ${!!color && theme.colors[color]}};
 
     font-size: 1.4rem;
-    font-weight: 300;
+    font-weight: ${theme.font.weight.normal};
     line-height: 1.6rem;
     letter-spacing: 0.22rem;
     text-transform: uppercase;
+
+    @media (max-width: 576px) {
+      font-size: 1.2rem;
+    }
   `}
 `
 
@@ -166,14 +199,25 @@ export const CommunityTenetText = styled.div`
 `
 
 export const SubHeading = styled.h3`
-  font-weight: 500;
-  font-size: 2rem;
+  color: #ffffff;
+  font-size: ${theme.font.sizes.font20};
+  font-weight: ${theme.font.weight.medium};
   line-height: 110%;
   letter-spacing: 0.02rem;
-  color: #ffffff;
 
   @media (max-width: 870px) {
     font-size: 1.6rem;
     line-height: 1.8rem;
+  }
+`
+
+export const SubDescription = styled.h3`
+  color: #ffffff;
+  font-size: ${theme.font.sizes.font16};
+  font-weight: ${theme.font.weight.light};
+  line-height: 2rem;
+
+  @media (max-width: 576px) {
+    font-size: ${theme.font.sizes.font14};
   }
 `
