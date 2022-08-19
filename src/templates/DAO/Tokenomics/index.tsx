@@ -2,7 +2,6 @@ import React from 'react'
 import Image from 'next/image'
 import useSWR from 'swr'
 
-import { Caption, Description, Display, Heading } from '../styles'
 import * as S from './styles'
 
 type KacyMarketDataType = {
@@ -73,33 +72,31 @@ const Tokenomics = () => {
   return (
     <S.Wrapper>
       <S.Title>
-        <Display as="h2" level="2">
-          Tokenomics
-        </Display>
-        <Description>
+        <h2>Tokenomics</h2>
+        <p>
           With a total supply of 10.000.000 that is only avaiable through the
           staking, locking and farming of KACY, we have crafted a sustainable
           approach to inflation while keeping rewards for our early contributors
           high.
-        </Description>
+        </p>
       </S.Title>
       <S.Container>
         <S.Row1>
           <S.KassandraImageWrapper>
-            <Image src="/assets/images/kassandra-circle.png" layout="fill" />
+            <Image src="/assets/images/kassandra-circle.svg" layout="fill" />
           </S.KassandraImageWrapper>
-          <S.Values>
+          <S.ValuesContainer>
             {kacyMarketData.map((item: { value: string, title: string }) => {
               return (
                 <>
-                  <S.Value>
-                    <Caption color="magenta">{item.title}</Caption>
-                    <Heading level="3">{item.value}</Heading>
-                  </S.Value>
+                  <S.ValueContent>
+                    <p>{item.title}</p>
+                    <span>{item.value}</span>
+                  </S.ValueContent>
                 </>
               )
             })}
-          </S.Values>
+          </S.ValuesContainer>
         </S.Row1>
         <S.Row2>
           <S.Info>
@@ -114,14 +111,14 @@ const Tokenomics = () => {
           </S.Info>
           <S.PieChartImageWrapper>
             <Image
-              src="/assets/images/chart-pie-token-holder.png"
+              src="/assets/images/chart-pie-token-holder.svg"
               layout="fill"
             />
           </S.PieChartImageWrapper>
         </S.Row2>
         <S.Row3>
           <S.BarChartImageWrapper>
-            <Image src="/assets/images/tokenomics-chart-2.png" layout="fill" />
+            <Image src="/assets/images/tokenomics-chart-2.svg" layout="fill" />
           </S.BarChartImageWrapper>
           <S.Info>
             <span>Release schedule</span>
