@@ -29,14 +29,13 @@ export const Title = styled.div`
 
   h2 {
     color: #ffffff;
-    font-weight: ${theme.font.weight.black};
+    font-weight: ${theme.font.weight.bold};
     font-size: ${theme.font.sizes.font48};
     text-align: center;
 
     @media (max-width: 576px) {
       text-align: left;
       font-size: ${theme.font.sizes.font24};
-      font-weight: ${theme.font.weight.bold};
     }
   }
 
