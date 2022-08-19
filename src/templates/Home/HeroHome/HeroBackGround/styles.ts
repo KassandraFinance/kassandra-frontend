@@ -15,6 +15,14 @@ export const Grid = styled.div`
   animation-timing-function: ease;
   animation: gridAnimation 1s forwards;
 
+  @media (max-height: 768px) {
+    background-position: top -7rem center;
+  }
+
+  @media (max-height: 915px) and (max-width: 576px) {
+    background-position: top -3rem center;
+  }
+
   @keyframes gridAnimation {
     0% {
       top: -2rem;
@@ -43,6 +51,14 @@ export const Sun = styled.div`
   animation: sunAnimation 1s forwards;
 
   animation-delay: 1s;
+
+  @media (max-height: 768px) {
+    background-position: top -7.5rem center;
+  }
+
+  @media (max-height: 915px) and (max-width: 576px) {
+    background-position: top -3.5rem center;
+  }
 
   @keyframes sunAnimation {
     0% {

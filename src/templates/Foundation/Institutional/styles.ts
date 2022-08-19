@@ -74,6 +74,7 @@ export const ImageContent = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  //height: 17.3rem;
   padding: 2rem;
 
   img {
@@ -85,13 +86,13 @@ export const ImageContent = styled.div`
 
     @media (max-width: 992px) {
       width: 54.8rem;
-      height: 17.3rem;
-      margin-bottom: -3rem;
+      height: auto;
+      margin-bottom: -1rem;
     }
 
     @media (max-width: 820px) {
       width: 46.5rem;
-      margin-bottom: -4rem;
+      margin-bottom: -1rem;
     }
 
     @media (max-width: 690px) {
@@ -208,7 +209,10 @@ interface ICardTitleProps {
   color: string;
 }
 // eslint-disable-next-line prettier/prettier
-export const CardTitle = styled.strong<ICardTitleProps>`
+export const CardTitle =
+  styled.strong <
+  ICardTitleProps >
+  `
   margin-bottom: 1.6rem;
 
   color: ${props => props.color};
