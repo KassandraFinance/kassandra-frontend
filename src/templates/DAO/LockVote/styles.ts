@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import theme from '../../../styles/theme'
 import { Button } from '../styles'
 
 export const Wrapper = styled.section`
@@ -29,26 +30,34 @@ export const Header = styled.header`
   flex-direction: column;
   gap: 2.4rem;
 
-  max-width: 51.2rem;
+  max-width: 60rem;
   margin: 0 auto;
 
   text-align: center;
 
-  @media (max-width: 760px) {
-    text-align: left;
-    margin: 0;
-  }
-
   p {
-    @media (max-width: 760px) {
+    color: #ffffff;
+    font-weight: ${theme.font.weight.normal};
+    font-size: ${theme.font.sizes.font16};
+    line-height: 2.4rem;
+    text-align: center;
+
+    @media (max-width: 560px) {
       text-align: left;
-      font-size: 1.4rem;
+      font-size: ${theme.font.sizes.font14};
+      font-weight: ${theme.font.weight.light};
     }
   }
 
-  h2 {
-    @media (max-width: 760px) {
-      font-size: 2.4rem;
+  h3 {
+    color: #ffffff;
+    font-size: ${theme.font.sizes.font32};
+    font-weight: ${theme.font.weight.bold};
+    text-align: center;
+
+    @media (max-width: 560px) {
+      font-size: ${theme.font.sizes.font24};
+      text-align: left;
     }
   }
 `
@@ -189,10 +198,26 @@ export const Connector = styled.div`
   height: 60rem;
   width: 7.4rem;
   margin-left: -2rem;
-  margin-top: 9rem;
+  margin-top: 8.5rem;
 
   @media (max-width: 760px) {
     display: none;
+  }
+`
+
+export const LockPoolContent = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  > div:nth-child(3) {
+    margin-top: 6.5rem;
+  }
+  > div:nth-child(5) {
+    margin-top: 5.8rem;
+  }
+
+  @media (max-width: 760px) {
+    gap: 7.2rem;
   }
 `
 
@@ -200,32 +225,33 @@ export const Desc = styled.p`
   max-width: 72.6rem;
   margin: 0 auto;
 
-  text-align: center;
-  font-size: 2.4rem;
-  font-weight: 300;
+  font-size: ${theme.font.sizes.font24};
+  font-weight: ${theme.font.weight.light};
   line-height: 3.2rem;
+  text-align: center;
 
   strong {
-    font-weight: 500;
     color: #ffffff;
+    font-weight: ${theme.font.weight.medium};
   }
 
-  @media (max-width: 820px) {
-    font-size: 1.8rem;
+  @media (max-width: 840px) {
+    font-size: ${theme.font.sizes.font18};
+    max-width: 62.6rem;
   }
 
   @media (max-width: 660px) {
     max-width: 49.6rem;
   }
 
-  /* @media (max-width: 760px) {
-    margin: 0;
-  } */
+  @media (max-width: 760px) {
+    margin-top: -5.6rem;
+  }
 
   @media (max-width: 560px) {
     text-align: left;
     font-size: 1.4rem;
-    margin: 0;
+    margin-top: -5.6rem;
   }
 
   .arrow-curved-down {
@@ -247,83 +273,5 @@ export const ButtonKacy = styled(Button)`
 
   @media (max-width: 768px) {
     display: none;
-  }
-`
-
-export const LockPoolMobileContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 6.4rem;
-
-  @media (min-width: 760px) {
-    display: none;
-  }
-`
-
-export const LockPoolMobile = styled.div``
-
-export const HeaderMobile = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  h4 {
-    font-size: 2.4rem;
-    line-height: 2.5rem;
-    font-weight: 500;
-  }
-`
-
-export const Items = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
-
-  margin-top: 1.9rem;
-`
-
-export const Item = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  &:nth-child(2) {
-    span {
-      color: #c4c4c4;
-    }
-
-    span {
-      strong {
-      }
-    }
-  }
-
-  &:nth-child(3) {
-    span {
-      color: #c4c4c4;
-      font-weight: 500;
-
-      &:first-child {
-        border-bottom: 0.2rem solid #ffbf00;
-      }
-    }
-  }
-
-  span {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-
-    color: ${({ theme }) => theme.colors.cyan};
-    font-size: 2rem;
-    font-weight: 300;
-    line-height: 2.4rem;
-  }
-
-  strong {
-    font-size: 2.4rem;
-    line-height: 2.5rem;
-    font-weight: 500;
-    color: #ffffff;
   }
 `

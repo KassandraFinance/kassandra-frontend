@@ -5,6 +5,8 @@ import useSWR from 'swr'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
 import { AbiItem } from "web3-utils"
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
 
 import web3 from '../../../../utils/web3'
 import { BNtoDecimal } from '../../../../utils/numerals'
@@ -22,8 +24,6 @@ import { useAppSelector } from '../../../../store/hooks'
 
 
 import { GET_INFO_POOL } from '../graphql'
-
-import { Heading } from '../../styles'
 
 import * as S from './styles'
 
@@ -126,72 +126,137 @@ const LockPoolCard = ({
   }, [pid, data])
 
   return (
-    <S.LockPool>
-      <div className="logo">
-        <Image src="/assets/logos/kacy-logo-rounded.svg" layout="fill" />
-      </div>
-      <S.LockPoolInfo>
-        <S.LockPoolTop>
-          <Heading as="h3" level="3">
+    <>
+      <S.LockPool>
+        <div className="logo">
+          <Image src="/assets/logos/kacy-logo-rounded.svg" layout="fill" />
+        </div>
+        <S.LockPoolInfo>
+          <S.LockPoolTop>
+            <S.titleLockPool>
+              {pid === 2
+                ? 'No Lock Pool'
+                : infoStaked.withdrawDelay / 60 / 60 / 24 < 1
+                ? infoStaked.withdrawDelay / 60 + '-Day Lock Pool'
+                : infoStaked.withdrawDelay / 60 / 60 / 24 + '-Day Lock Pool'}
+            </S.titleLockPool>
+            <S.Info>
+              <strong>
+                {' '}
+                {infoStaked.apr.lt(new BigNumber(0))
+                  ? '...'
+                  : infoStaked.hasExpired
+                  ? 0
+                  : BNtoDecimal(infoStaked.apr, 0)}
+                %
+              </strong>
+              <span>
+                APR{' '}
+                <Tippy content="The Annual Percentage Rate is the yearly rate earned not taking compounding into account">
+                  <S.TooltipAPR tabIndex={0}>
+                    <Image
+                      src="/assets/utilities/info-blue.svg"
+                      alt="Explanation"
+                      width={19}
+                      height={19}
+                    />
+                  </S.TooltipAPR>
+                </Tippy>
+              </span>
+            </S.Info>
+          </S.LockPoolTop>
+          <S.Hr />
+          <S.LockPoolBottom>
+            <span>
+              VOTING POWER{' '}
+              <strong>
+                {infoStaked.votingMultiplier || '...'}
+              </strong>
+              / $KACY
+            </span>
+            <div>
+              <span>
+                WITHDRAW DELAY
+                <strong>
+                  {infoStaked.withdrawDelay === 0
+                    ? '0'
+                    : infoStaked.withdrawDelay / 60 / 60 / 24 < 1
+                    ? infoStaked.withdrawDelay / 60
+                    : infoStaked.withdrawDelay / 60 / 60 / 24}
+                </strong>
+              </span>
+              <span>
+                {infoStaked.withdrawDelay / 60 / 60 / 24 < 1 ? ' day' : ' days'}
+              </span>
+            </div>
+          </S.LockPoolBottom>
+        </S.LockPoolInfo>
+      </S.LockPool>
+
+      {/* separação do LockPool desktop e mobile */}
+
+      <S.LockPoolMobileContainer>
+        <S.LockPoolMobile>
+          <S.HeaderMobile>
+            <S.titleLockPool>
             {pid === 2
               ? 'No Lock Pool'
               : infoStaked.withdrawDelay / 60 / 60 / 24 < 1
               ? infoStaked.withdrawDelay / 60 + '-Day Lock Pool'
               : infoStaked.withdrawDelay / 60 / 60 / 24 + '-Day Lock Pool'}
-          </Heading>
-          <S.Info>
-            <strong>
-              {' '}
-              {infoStaked.apr.lt(new BigNumber(0))
-                ? '...'
-                : infoStaked.hasExpired
-                ? 0
-                : BNtoDecimal(infoStaked.apr, 0)}
-              %
-            </strong>
-            <span>
-              APR{' '}
-              <Image
-                src="/assets/utilities/warning-blue.svg"
-                width={18}
-                height={18}
-              />
-            </span>
-          </S.Info>
-        </S.LockPoolTop>
-        <S.Hr />
-        <S.LockPoolBottom>
-          <span>
-            VOTING POWER{' '}
-            <strong>
-              {infoStaked.votingMultiplier || '...'}
-            </strong>
-            / $KACY
-          </span>
-          <div>
-            <Heading className="heading" as="h4" level="5">
-              WITHDRAW DELAY
-            </Heading>
-            <strong>
-              {infoStaked.withdrawDelay === 0
-                ? '0'
-                : infoStaked.withdrawDelay / 60 / 60 / 24 < 1
-                ? infoStaked.withdrawDelay / 60
-                : infoStaked.withdrawDelay / 60 / 60 / 24}
-            </strong>
-            <Heading className="heading" as="h4" level="5">
-              {infoStaked.withdrawDelay / 60 / 60 / 24 < 1 ? ' day' : ' days'}
-            </Heading>
+            </S.titleLockPool>
             <Image
-              className="warning-gray-icon"
-              src="/assets/utilities/warning-gray.svg"
-              width={18}
-              height={18}
+              src="/assets/logos/kacy-logo-rounded.svg"
+              width={48}
+              height={48}
             />
-          </div>
-        </S.LockPoolBottom>
-      </S.LockPoolInfo>
-    </S.LockPool>
+          </S.HeaderMobile>
+          <S.Hr />
+          <S.Items>
+            <S.Item>
+              <span>
+                APR
+                <Image
+                  src="/assets/utilities/info-blue.svg"
+                  width={18}
+                  height={18}
+                />
+              </span>
+              <strong>
+                {infoStaked.apr.lt(new BigNumber(0))
+                  ? '...'
+                  : infoStaked.hasExpired
+                  ? 0
+                  : BNtoDecimal(infoStaked.apr, 0)}%
+                </strong>
+            </S.Item>
+            <S.Item>
+              <span>VOTING POWER</span>
+              <span>
+                <strong>{infoStaked.votingMultiplier || '...'}</strong> / $KACY
+              </span>
+            </S.Item>
+            <S.Item>
+              <span>WITHDRAW DELAY</span>
+              <span>
+                <strong>
+                  {infoStaked.withdrawDelay === 0
+                    ? '0'
+                    : infoStaked.withdrawDelay / 60 / 60 / 24 < 1
+                    ? infoStaked.withdrawDelay / 60
+                    : infoStaked.withdrawDelay / 60 / 60 / 24}
+                  </strong>
+                <Image
+                  src="/assets/utilities/warning-gray.svg"
+                  width={18}
+                  height={18}
+                />
+              </span>
+            </S.Item>
+          </S.Items>
+        </S.LockPoolMobile>
+      </S.LockPoolMobileContainer>
+    </>
   )
 }
 
