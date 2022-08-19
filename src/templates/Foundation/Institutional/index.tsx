@@ -18,7 +18,7 @@ const Institutional = () => {
       <S.ImageContainer>
         <S.ImageContent>
           <span>
-            <img src="assets/iconGradient/Institutional.svg" alt="" />
+            <img src="assets/iconGradient/Institutional.png" alt="" />
           </span>
         </S.ImageContent>
         <S.InstitutionalCardList>
