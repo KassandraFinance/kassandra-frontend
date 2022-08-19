@@ -17,9 +17,8 @@ const HeroManager = () => (
         <S.HeroDescription>
           <h1>Earn money managing funds in a uniquely innovative hub</h1>
           <p>
-            Be part of a community of skilled fund managers and help us create
-            smart investment funds, earning additional income when people invest
-            in them
+            Be part of a community of skilled managers creating smart investment
+            funds and get paid for it
           </p>
           <Link href="https://3j2bd7x9okh.typeform.com/to/bBnYwVOD" passHref>
             <Button

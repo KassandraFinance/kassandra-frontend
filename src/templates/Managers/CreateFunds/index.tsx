@@ -18,42 +18,42 @@ interface IManagerText {
 const managerFundsArray = [
   {
     id: 1,
-    title: 'You create a new Index Fund',
+    title: 'Create an index fund',
     paragraph:
-      'Through a easy interface, you can create your own index token that will work as an Automated Maker Maket, following allocations percentages.',
+      'Create your own index token that will work as its own Automated Market Maker, following allocations percentages automatically.',
     image: '/assets/images/create-funds-one.svg'
   },
   {
     id: 2,
-    title: 'Earn when someone invests with you',
+    title: 'Get paid when people invest in it',
     paragraph:
-      'Your investment fund is listed on our community interface, allowing investors to invest in your tokenized portfolios easily, and investors pay you every time someone does it.',
+      'Your investment fund is listed on our community interface, allowing users to discover and invest in your tokenized portfolios easily.',
     image: '/assets/images/create-funds-two.svg'
   },
   {
     id: 3,
-    title: 'You can change asset allocations 24/7',
+    title: 'Change asset allocations 24/7',
     paragraph:
-      'You get to change percentages of tokens in your fund whenever you want, and all of your investors will automagically follow you.',
+      'There is no such thing as a closed market. Your allocations are changed whenever you want them to.',
     image: '/assets/images/create-funds-three.svg'
   },
   {
     id: 4,
     title: 'Traders keep your strategy working',
     paragraph:
-      'Arbitreurs are encouraged to balance your portfolio with minimal artificial price inflations and deflations while paying swap fees to all investors.',
+      'Arbitrageurs are encouraged to balance your portfolio with minimal artificial price inflations and deflations while paying swap fees to all investors.',
     image: '/assets/images/create-funds-four.svg'
   },
   {
     id: 5,
-    title: 'The protocol earns from withdrawals',
+    title: 'Withdraw fees help support the DAO',
     paragraph:
-      'You earn when someone deposits on your strategy, the protocol earns when someone withdraw from it. Everyone gets a piece, everyone is happy.',
+      'You earn when there’s a deposit, we earn when there’s a withdraw. Everyone gets a piece.',
     image: '/assets/images/create-funds-five.svg'
   },
   {
     id: 6,
-    title: 'This is Kassandra for fund managers',
+    title: 'Repeat, forever.',
     paragraph:
       'This is how our system integrates different actors to provide a seamless experience for fund managers.',
     image: '/assets/images/create-funds-six.svg'
@@ -62,7 +62,8 @@ const managerFundsArray = [
 
 const CreateFund = () => {
   // eslint-disable-next-line prettier/prettier
-  const [createManagerFunds, setCreateManagerFunds] = React.useState<IManagerText>(managerFundsArray[0])
+  const [createManagerFunds, setCreateManagerFunds] =
+    React.useState<IManagerText>(managerFundsArray[0])
   const [clickButton, setclickButton] = React.useState<number>(1)
   const [isActiveImage, setIsActiveImage] = React.useState(true)
 

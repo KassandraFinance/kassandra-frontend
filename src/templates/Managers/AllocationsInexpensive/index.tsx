@@ -13,9 +13,9 @@ const AllocationsInexpensive = () => (
           for it
         </h1>
         <p>
-          Token weights are kept balanced by incentivizing traders to do it for
-          you. Avoid front-running by not making market transactions while
-          earning sweet swap fees instead of paying to keep it balanced.
+          Token weights are kept balanced by arbitraging traders. This means you
+          avoid front-running while earning swap fees instead of paying
+          rebalancing fees.
         </p>
       </S.DescriptionContainer>
       <S.ImageContainer>
