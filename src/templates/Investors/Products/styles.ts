@@ -119,6 +119,12 @@ export const DescriptionProtocol = styled.div`
 
     text-align: left;
 
+    h1 {
+      font-weight: 700;
+      font-size: 2.4rem;
+      line-height: 3.2rem;
+    }
+
     span {
       font-size: 1.4rem;
       letter-spacing: 0.05em;
