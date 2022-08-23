@@ -1,4 +1,4 @@
-import FAQ from './FAQ'
+// import FAQ from './FAQ'
 import Hero from './Hero'
 import Products from './Products'
 import Advantages from './Advantages'

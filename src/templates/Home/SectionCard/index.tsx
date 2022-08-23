@@ -44,6 +44,7 @@ const SectionCard = ({
             <Button
               className="btn"
               text={btnText}
+              size="huge"
               icon={
                 <svg
                   width="18"

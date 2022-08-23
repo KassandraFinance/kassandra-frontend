@@ -262,7 +262,7 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
                 )
               }
               backgroundPrimary
-              size="claim"
+              size="huge"
               text={`Buy $${pool.symbol}`}
             />
           </Link>
