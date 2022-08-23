@@ -32,9 +32,9 @@ const Contribute = ({ title, text }: IContributeProps) => {
             </S.Button>
 
             <S.Button
+              variant="discord"
               target="_blank"
               rel="noopener noreferrer"
-              variant="discord"
               href="https://discord.com/invite/fAqpbP6tFw"
             >
               <Image src="/assets/icons/discord.svg" width={18} height={13} />

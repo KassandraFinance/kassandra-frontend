@@ -16,7 +16,10 @@ export const Wrapper = styled.div`
   max-width: 114rem;
 
   z-index: ${theme.layers.menu};
-  padding-inline: 2.4rem;
+
+  @media (max-width: 1200px) {
+    padding-inline: 3rem;
+  }
 
   @media (max-width: 992px) {
     margin-top: 2.4rem;
@@ -107,72 +110,6 @@ export const MenuLink = styled.a`
   }
 `
 
-// export const MenuLinkDisable = styled.a`
-//   position: relative;
-
-//   margin-right: 4.2rem;
-//   padding-top: 1.2rem;
-//   padding-bottom: 1.3rem;
-
-//   color: ${theme.colors.grayDisabled};
-//   font-size: ${theme.font.sizes.font16};
-//   font-weight: ${theme.font.weight.light};
-//   text-decoration: none;
-//   text-align: center;
-
-//   cursor: not-allowed;
-
-//   &::after {
-//     content: '';
-//     position: absolute;
-//     bottom: 0;
-
-//     left: 50%;
-//     width: 0;
-//     height: 0.3rem;
-
-//     background-color: ${theme.colors.grayDisabled};
-//     border-radius: 0.15rem;
-
-//     transition-duration: 300ms;
-//     transition-timing-function: ease-in-out;
-//     transition-property: width left;
-//   }
-
-//   &:hover::after {
-//     left: 0%;
-//     width: 100%;
-//   }
-
-//   @media (max-width: 768px) {
-//     margin-right: 3.2rem;
-//   }
-
-//   @media (max-width: 541px) {
-//     margin-right: 2rem;
-//     font-size: ${theme.font.sizes.font14};
-//   }
-
-//   @media (max-width: 360px) {
-//     margin-right: 1.4rem;
-//     font-size: ${theme.font.sizes.font12};
-//   }
-
-//   img {
-//     position: absolute;
-//     right: -2rem;
-//     top: 1.8rem;
-
-//     @media (max-width: 540px) {
-//       right: -1.6rem;
-//       top: 1.7rem;
-//     }
-//     @media (max-width: 360px) {
-//       top: 1.6rem;
-//     }
-//   }
-// `
-
 export const MenuBottom = styled.div`
   @media (max-width: 576px) {
     position: fixed;
@@ -193,16 +130,34 @@ export const MenuBottom = styled.div`
 
   .button-mobile {
     width: fit-content;
-    padding: 1.2rem;
+    padding: 1.2rem 2.4rem;
 
     font-size: ${theme.font.sizes.font14};
-
-    :hover {
-      font-weight: ${theme.font.weight.medium};
-    }
+    font-weight: 400;
 
     img {
       width: 1.6rem;
+    }
+  }
+
+  .button-mobile {
+    border: 0.1rem solid ${theme.colors.snow};
+    width: fit-content;
+    padding: 1.2rem 2.4rem;
+
+    font-size: ${theme.font.sizes.font14};
+    font-weight: 400;
+
+    transition: 300ms;
+
+    &:hover,
+    &:focus {
+      border-color: ${theme.colors.snow};
+      background-color: ${theme.colors.snow};
+
+      color: ${theme.colors.darkPurple};
+      /* outline-color: ${theme.colors.snow}; */
+      outline: none;
     }
   }
 `

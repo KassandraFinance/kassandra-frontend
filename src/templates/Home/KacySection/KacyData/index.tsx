@@ -101,6 +101,7 @@ const KacyData = () => {
 
         <S.BtnWrapper>
           <Button
+            size="huge"
             text="Buy $KACY"
             backgroundPrimary
             onClick={() => {
@@ -114,6 +115,7 @@ const KacyData = () => {
             rel="noopener noreferrer"
           >
             <Button
+              size="huge"
               text="Join Our Discord"
               icon={
                 <svg

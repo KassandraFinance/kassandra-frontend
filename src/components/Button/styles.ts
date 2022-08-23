@@ -38,9 +38,10 @@ const wrapperModifiers = {
     font-size: ${theme.font.sizes.font16};
   `,
   huge: (theme: DefaultTheme) => css`
-    height: 5rem;
+    height: 4.8rem;
     font-size: ${theme.font.sizes.font16};
-    padding: ${theme.spacings.space24} ${theme.spacings.space48};
+    line-height: ${theme.font.sizes.font16};
+    padding: ${theme.spacings.space16} ${theme.spacings.space32};
   `,
   fullWidth: () => css`
     width: 100%;
@@ -48,7 +49,6 @@ const wrapperModifiers = {
   withIcon: (theme: DefaultTheme) => css`
     img {
       width: 1.6rem;
-      //margin-left: ${theme.spacings.space8};
       order: 1;
       & + span {
         margin-right: ${theme.spacings.space16};
@@ -57,7 +57,6 @@ const wrapperModifiers = {
     svg {
       width: 1.6rem;
       order: 0;
-      //margin-right: ${theme.spacings.space8};
       & + span {
         margin-left: ${theme.spacings.space16};
       }
@@ -125,6 +124,7 @@ const wrapperModifiers = {
     &:focus {
       color: ${theme.colors.darkPurple};
       background: ${theme.colors.cyan};
+
       svg {
         path {
           fill: ${theme.colors.darkPurple};

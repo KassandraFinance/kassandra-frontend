@@ -285,25 +285,8 @@ export const Rebalance = styled.div`
   }
 `
 
-export const BenefitsImagesContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  margin-top: 4.8rem;
-
-  @media (max-width: 780px) {
-    gap: 8.3rem;
-  }
-
-  @media (max-width: 580px) {
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-`
-
 export const BenefitsContainer = styled.div`
-  width: 100%;
+  max-width: 114rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -349,6 +332,23 @@ export const BenefitsContainer = styled.div`
     span {
       font-size: 1.4rem;
     }
+  }
+`
+
+export const BenefitsImagesContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4.8rem;
+
+  @media (max-width: 780px) {
+    gap: 8.3rem;
+  }
+
+  @media (max-width: 580px) {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
   }
 `
 

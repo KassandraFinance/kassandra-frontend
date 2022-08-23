@@ -272,7 +272,7 @@ export const CardFooter = styled.div`
     justify-items: center;
 
     color: ${theme.colors.snow};
-    font-size: ${theme.font.sizes.font14};
+    font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.light};
     text-decoration: none;
 

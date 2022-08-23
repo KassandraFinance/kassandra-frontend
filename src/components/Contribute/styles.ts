@@ -137,7 +137,7 @@ export const Button = styled.a<ButtonProps>`
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
-  padding: 1.2rem 2.4rem;
+  padding: 1.6rem 3.2rem;
 
   height: 4.8rem;
   text-decoration: none;

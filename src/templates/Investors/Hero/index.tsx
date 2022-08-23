@@ -23,7 +23,7 @@ const Hero = () => {
       <Button
         className="start-investing"
         backgroundPrimary
-        size="large"
+        size="huge"
         text="Start Investing"
         icon={<img src="/assets/utilities/go-to-page.svg" alt="go to page" />}
         as="a"

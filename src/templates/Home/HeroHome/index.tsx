@@ -50,7 +50,6 @@ const HeroHome = () => {
         }
         size="huge"
         backgroundPrimary
-        // onClick={() => router.push('/explore')}
         href="https://app.kassandra.finance/explore"
       />
 

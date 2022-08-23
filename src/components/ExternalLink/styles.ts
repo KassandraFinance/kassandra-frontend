@@ -29,8 +29,6 @@ export const Link = styled.a`
     height: 1.6rem;
 
     svg {
-      //margin-left: 10px;
-
       path {
         transition: stroke ease-in-out 0.15s;
       }

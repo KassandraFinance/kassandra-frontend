@@ -25,7 +25,7 @@ const HeroManager = () => (
               as="a"
               target="_blank"
               text="Create your fund"
-              size="medium"
+              size="huge"
               backgroundPrimary
               icon={
                 <img

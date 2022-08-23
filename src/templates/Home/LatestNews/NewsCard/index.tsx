@@ -29,7 +29,7 @@ const NewsCard = ({ thumbnail, title, description, link }: INewsCardProps) => {
         </S.TextWrapper>
 
         <S.BtnWrapper href={link} target="_blank" rel="noopener noreferrer">
-          <Button text="Read more" backgroundBlack />
+          <Button size="huge" text="Read more" backgroundBlack />
         </S.BtnWrapper>
       </S.NewsCardBody>
     </S.NewsCard>

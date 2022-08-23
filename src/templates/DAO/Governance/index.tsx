@@ -31,7 +31,7 @@ const Governance = () => {
             }
             backgroundSecondary
             text="Explore Governance"
-            size="large"
+            size="huge"
             href="https://app.kassandra.finance/gov"
           />
         </span>
