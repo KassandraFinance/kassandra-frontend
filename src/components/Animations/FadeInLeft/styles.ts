@@ -8,10 +8,9 @@ interface IFadeInLeftContainerProps {
 export const FadeInLeftContainer = styled.div`
   ${({ invert }: IFadeInLeftContainerProps) =>
     css`
-      opacity: 1;
+      opacity: 0;
       transform: translateX(${invert});
     `}
-  opacity: 0;
 
   transition-duration: 600ms;
   transition-timing-function: ease-in-out;
