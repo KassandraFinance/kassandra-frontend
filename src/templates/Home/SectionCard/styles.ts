@@ -21,7 +21,22 @@ export const Container = styled.article`
   }
 `
 
+interface ITextContainerProps {
+  inView: boolean;
+}
+
 export const TextContainer = styled.div`
+  opacity: 0;
+  transform: translateX(-20px);
+
+  a {
+    text-decoration: none;
+  }
+
+  .btn {
+    flex-direction: row-reverse;
+  }
+
   @media (max-width: 992px) {
     display: flex;
     flex-direction: column;
@@ -35,13 +50,16 @@ export const TextContainer = styled.div`
     align-items: flex-start;
   }
 
-  a {
-    text-decoration: none;
-  }
+  ${({ inView }: ITextContainerProps) =>
+    inView &&
+    css`
+      opacity: 1;
+      transform: translateX(0);
+    `}
 
-  .btn {
-    flex-direction: row-reverse;
-  }
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+  transition-property: opacity transform;
 `
 
 interface ITitleProps {
@@ -131,4 +149,24 @@ export const Text = styled.p`
     font-size: ${theme.font.sizes.font14};
     text-align: left;
   }
+`
+
+interface IImgWrapperProps {
+  inView: boolean;
+}
+
+export const ImgWrapper = styled.div`
+  opacity: 0;
+  transform: translateX(-20px);
+
+  ${({ inView }: IImgWrapperProps) =>
+    inView &&
+    css`
+      opacity: 1;
+      transform: translateX(0);
+    `}
+
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+  transition-property: opacity transform;
 `
