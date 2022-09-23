@@ -1,11 +1,15 @@
-import { request } from 'graphql-request'
 import React from 'react'
 import useSWR from 'swr'
-import ExternalLink from '../../../components/ExternalLink'
-import GitHubData from './GitHubData'
+import { request } from 'graphql-request'
+
 import { GET_DATA_GITHUB } from './graphql'
 
+import ExternalLink from '../../../components/ExternalLink'
+import GitHubData from './GitHubData'
+import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
+
 import * as S from './styles'
+import FadeIn from '../../../components/Animations/FadeIn'
 
 const GitHubStats = () => {
   const GIT_HUB_TOKEN = process.env.NEXT_PUBLIC_GIT_HUB_TOKEN
@@ -86,10 +90,16 @@ const GitHubStats = () => {
   }, [data])
 
   return (
-    <>
-      <S.GitHubStatsWrapper>
-        <h1>Team Stats</h1>
-        <S.Divider />
+    <S.GitHubStatsWrapper>
+      <FadeIn threshold={0.5}>
+        <S.GitHubStatsTitleWrapper>
+          <h1>Team Stats</h1>
+
+          <S.Divider />
+        </S.GitHubStatsTitleWrapper>
+      </FadeIn>
+
+      <FadeInHorizontal threshold={0.5}>
         <S.GitHubStatsContent>
           <S.GitHub>
             <div className="logoGitHub">
@@ -111,6 +121,9 @@ const GitHubStats = () => {
             <GitHubData commits={commits} yar={currentYar - 1} />
           </S.GitHubStatsData>
         </S.GitHubStatsContent>
+      </FadeInHorizontal>
+
+      <FadeInHorizontal threshold={0.5}>
         <S.ArticlesContent>
           <S.ArticlesData>
             <h1>Track our development</h1>
@@ -138,8 +151,8 @@ const GitHubStats = () => {
             />
           </S.Medium>
         </S.ArticlesContent>
-      </S.GitHubStatsWrapper>
-    </>
+      </FadeInHorizontal>
+    </S.GitHubStatsWrapper>
   )
 }
 

@@ -6,6 +6,12 @@ export const GitHubStatsWrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+`
+
+export const GitHubStatsTitleWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   > h1 {
     font-size: ${theme.font.sizes.font16};
