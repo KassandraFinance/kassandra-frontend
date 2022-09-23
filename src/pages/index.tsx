@@ -1,78 +1,25 @@
 import React from 'react'
-import Big from 'big.js'
-
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
+import Big from 'big.js'
 
 import { useAppDispatch } from '../store/hooks'
-import { setDaoInfo } from '../store/reducers/daoInfoSlice'
+import { setDaoInfo, IDaoInfo } from '../store/reducers/daoInfoSlice'
 
 import { SUBGRAPH_URL, products } from '../constants/tokenAddresses'
 
 import Home from '../templates/Home'
 
 interface IHomePageProps {
-  daoInfo: {
-    factory: {
-      swap: [{ volume_usd: string }],
-      total_value_locked_usd: string,
-      volumes: [],
-      withdraw: []
-    }
-  };
+  daoInfo: IDaoInfo;
 }
 
-export default function HomePage({ daoInfo }) {
+export default function HomePage({ daoInfo }: IHomePageProps) {
   const dispatch = useAppDispatch()
 
   React.useEffect(() => {
     if (daoInfo) {
-      const arrData = daoInfo.factory
-
-      let swapFees = Big(0)
-      let withdrawFees = Big(0)
-      let volume = Big(0)
-
-      swapFees = swapFees.add(
-        arrData.swap.reduce((acc: Big, current: { volume_usd: string }) => {
-          return Big(current.volume_usd).add(acc)
-        }, 0)
-      )
-
-      withdrawFees = withdrawFees.add(
-        arrData.withdraw.reduce((acc: Big, current: { volume_usd: string }) => {
-          return Big(current.volume_usd).add(acc)
-        }, 0)
-      )
-
-      volume = volume.add(
-        arrData.volumes.reduce((acc: Big, current: { volume_usd: string }) => {
-          return Big(current.volume_usd).add(acc)
-        }, 0)
-      )
-
-      dispatch(
-        setDaoInfo({
-          daoInfo: [
-            {
-              value: Big(arrData.total_value_locked_usd).toString(),
-              title: 'TVL'
-            },
-            {
-              value: volume.toString(),
-              title: 'volume'
-            },
-            {
-              value: swapFees.toString(),
-              title: 'Swap fees'
-            },
-            {
-              value: withdrawFees.toString(),
-              title: 'withdraw fees'
-            }
-          ]
-        })
-      )
+      dispatch(setDaoInfo(daoInfo))
     }
   }, [daoInfo])
 
@@ -136,9 +83,54 @@ export const getStaticProps: GetStaticProps = async () => {
     })
   }).then(res => res.json())
 
+  const arrData = response.data.factory
+
+  let swapFees = Big(0)
+  let withdrawFees = Big(0)
+  let volume = Big(0)
+
+  swapFees = swapFees.add(
+    arrData.swap.reduce((acc: Big, current: { volume_usd: string }) => {
+      return Big(current.volume_usd).add(acc)
+    }, 0)
+  )
+
+  withdrawFees = withdrawFees.add(
+    arrData.withdraw.reduce((acc: Big, current: { volume_usd: string }) => {
+      return Big(current.volume_usd).add(acc)
+    }, 0)
+  )
+
+  volume = volume.add(
+    arrData.volumes.reduce((acc: Big, current: { volume_usd: string }) => {
+      return Big(current.volume_usd).add(acc)
+    }, 0)
+  )
+
+  const daoInfo = {
+    daoInfo: [
+      {
+        value: Big(arrData.total_value_locked_usd).toString(),
+        title: 'TVL'
+      },
+      {
+        value: volume.toString(),
+        title: 'volume'
+      },
+      {
+        value: swapFees.toString(),
+        title: 'Swap fees'
+      },
+      {
+        value: withdrawFees.toString(),
+        title: 'withdraw fees'
+      }
+    ]
+  }
+
   return {
     props: {
-      daoInfo: response.data,
+      daoInfo: daoInfo,
       revalidate: 300
     }
   }
