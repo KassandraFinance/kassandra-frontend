@@ -2,11 +2,6 @@ import styled from 'styled-components'
 
 export const PartnersContainer = styled.div`
   width: 100%;
-
-  /* display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5.6rem; */
 `
 
 export const PartnersTitleWrapper = styled.div`
@@ -46,11 +41,15 @@ export const PartnersTitleWrapper = styled.div`
 export const PartnerContent = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
 
+  max-width: 1028px;
+  margin-inline: auto;
   margin-top: 5.6rem;
 
   @media (max-width: 560px) {
-    grid-template-columns: 18rem 18rem;
+    grid-template-columns: 1fr 1fr;
 
     > div:last-child {
       grid-column: 1 / 3;
