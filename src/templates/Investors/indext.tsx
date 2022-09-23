@@ -12,9 +12,13 @@ const Investors = () => {
     <>
       <S.InvestorsContainer>
         <Hero />
+
         <Products />
+
         <Advantages />
+
         <Partners />
+
         {/* <FAQ /> */}
       </S.InvestorsContainer>
 
