@@ -14,10 +14,15 @@ const Managers = () => (
       <S.ManagerContainer>
         <S.ManagerContent>
           <HeroManager />
+
           <FundManager />
+
           <ChangeAllocations />
+
           <ManagersInterface />
+
           <AllocationsInexpensive />
+
           <CreateFund />
         </S.ManagerContent>
       </S.ManagerContainer>

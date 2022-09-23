@@ -80,89 +80,11 @@ export const DescriptionContainer = styled.div`
       text-align: left;
     }
   }
-
-  animation: fadeInChangeAllocations ease 3s both;
-  -webkit-animation: fadeInChangeAllocations ease 3s both;
-  -moz-animation: fadeInChangeAllocations ease 3s both;
-  -o-animation: fadeInChangeAllocations ease 3s both;
-  -ms-animation: fadeInChangeAllocations ease 3s both;
-
-  @keyframes fadeInChangeAllocations {
-    0% {
-      transform: translateX(-8rem);
-      opacity: 0;
-    }
-    70% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateX(0);
-    }
-  }
-
-  @-moz-keyframes fadeInChangeAllocations {
-    0% {
-      transform: translateX(-8rem);
-      opacity: 0;
-    }
-    70% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateX(0);
-    }
-  }
-
-  @-webkit-keyframes fadeInChangeAllocations {
-    0% {
-      transform: translateX(-8rem);
-      opacity: 0;
-    }
-    70% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateX(0);
-    }
-  }
-
-  @-o-keyframes fadeInChangeAllocations {
-    0% {
-      transform: translateX(-8rem);
-      opacity: 0;
-    }
-    70% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateX(0);
-    }
-  }
-
-  @-ms-keyframes fadeInChangeAllocations {
-    0% {
-      transform: translateX(-8rem);
-      opacity: 0;
-    }
-    70% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateX(0);
-    }
-  }
 `
 
 export const GridContainer = styled.div`
   position: relative;
   width: 100%;
-
-  animation: fadeInChangeAllocations ease 3s both;
-  -webkit-animation: fadeInChangeAllocations ease 3s both;
-  -moz-animation: fadeInChangeAllocations ease 3s both;
-  -o-animation: fadeInChangeAllocations ease 3s both;
-  -ms-animation: fadeInChangeAllocations ease 3s both;
-  animation-delay: 1.5s;
 
   @media (max-width: 1000px) {
     width: 46rem;
@@ -216,7 +138,7 @@ interface IChangeButtonProps {
   isActiveHand: boolean;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const ChangeButtonContent = styled.div<IChangeButtonProps>`
   position: relative;
 
@@ -339,7 +261,7 @@ interface ITokenProps {
   TokenColor?: string;
 }
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const BarContainer = styled.div<ITokenProps>`
   display: flex;
   align-items: center;
@@ -402,7 +324,7 @@ export const BarContainer = styled.div<ITokenProps>`
   }
 `
 
-// eslint-disable-next-line prettier/prettier
+// prettier-ignore
 export const TokenBar = styled.div<ITokenProps>`
   height: 2rem;
   width: calc(${props => props.TokenValue}rem/2);

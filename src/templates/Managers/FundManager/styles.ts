@@ -12,7 +12,9 @@ export const FundManagerContainer = styled.section`
     padding-right: 2rem;
     padding-left: 2rem;
   }
+`
 
+export const TittleWrapper = styled.div`
   > h1 {
     color: #ffffff;
     font-weight: ${theme.font.weight.black};
@@ -28,12 +30,6 @@ export const FundManagerContainer = styled.section`
       font-weight: ${theme.font.weight.bold};
       font-size: ${theme.font.sizes.font24};
     }
-
-    animation: fadeInFundManager ease 3s both;
-    -webkit-animation: fadeInFundManager ease 3s both;
-    -moz-animation: fadeInFundManager ease 3s both;
-    -o-animation: fadeInFundManager ease 3s both;
-    -ms-animation: fadeInFundManager ease 3s both;
   }
 
   > p {
@@ -53,57 +49,6 @@ export const FundManagerContainer = styled.section`
     @media (max-width: 450px) {
       font-size: ${theme.font.sizes.font16};
     }
-
-    animation: fadeInFundManager ease 3s both;
-    -webkit-animation: fadeInFundManager ease 3s both;
-    -moz-animation: fadeInFundManager ease 3s both;
-    -o-animation: fadeInFundManager ease 3s both;
-    -ms-animation: fadeInFundManager ease 3s both;
-  }
-
-  @keyframes fadeInFundManager {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-moz-keyframes fadeInFundManager {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-webkit-keyframes fadeInFundManager {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-o-keyframes fadeInFundManager {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-ms-keyframes fadeInFundManager {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
   }
 `
 
@@ -111,72 +56,6 @@ export const ImageContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  animation: fadeInFundManagerImg ease 4s both;
-  -webkit-animation: fadeInFundManagerImg ease 4s both;
-  -moz-animation: fadeInFundManagerImg ease 4s both;
-  -o-animation: fadeInFundManagerImg ease 4s both;
-  -ms-animation: fadeInFundManagerImg ease 4s both;
-
-  @keyframes fadeInFundManagerImg {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-moz-keyframes fadeInFundManagerImg {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-webkit-keyframes fadeInFundManagerImg {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-o-keyframes fadeInFundManagerImg {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-ms-keyframes fadeInFundManagerImg {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
 `
 
 export const ImageDescription = styled.div`

@@ -1,10 +1,13 @@
 import Image from 'next/image'
+
+import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
+
 import allocationsInexpensive from '../../../../public/assets/images/allocations-inexpensive.svg'
 
 import * as S from './styles'
 
 const AllocationsInexpensive = () => (
-  <>
+  <FadeInHorizontal threshold={0.5}>
     <S.AllocationsInexpensiveContainer>
       <S.DescriptionContainer>
         <span>INEXPENSIVE</span>
@@ -22,7 +25,7 @@ const AllocationsInexpensive = () => (
         <Image src={allocationsInexpensive} alt="" width={460} height={350} />
       </S.ImageContainer>
     </S.AllocationsInexpensiveContainer>
-  </>
+  </FadeInHorizontal>
 )
 
 export default AllocationsInexpensive
