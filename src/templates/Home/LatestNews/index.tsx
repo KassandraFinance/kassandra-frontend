@@ -50,6 +50,7 @@ const LatestNews = () => {
         key={post.title}
         thumbnail={post.thumbnail}
         title={post.title}
+        pubDate={post.pubDate}
         description={post.content}
         link={post.link}
       />
