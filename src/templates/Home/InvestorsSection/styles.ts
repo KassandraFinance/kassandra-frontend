@@ -23,7 +23,9 @@ export const PoolCardContainer = styled.div`
 
   @media (min-width: 960px) {
     > div:nth-child(odd) {
-      flex-direction: row-reverse;
+      div {
+        flex-direction: row-reverse;
+      }
     }
   }
 `
