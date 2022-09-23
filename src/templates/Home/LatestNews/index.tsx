@@ -6,6 +6,7 @@ import 'react-alice-carousel/lib/alice-carousel.css'
 
 import LatestNewsHeader from './LatestNewsHeader'
 import NewsCard from './NewsCard'
+import FadeIn from '../../../components/Animations/FadeIn'
 
 import lightTable10 from '../../../../public/assets/images/backgroundHome/light-tablet10.png'
 
@@ -67,19 +68,23 @@ const LatestNews = () => {
         <Image src={lightTable10} />
       </S.ImgTabletWrapper>
 
-      <LatestNewsHeader />
+      <FadeIn threshold={0.5}>
+        <LatestNewsHeader />
+      </FadeIn>
 
-      <S.NewsCardContainer>
-        {data && (
-          <AliceCarousel
-            mouseTracking
-            infinite
-            disableButtonsControls
-            items={cards}
-            responsive={responsive}
-          />
-        )}
-      </S.NewsCardContainer>
+      <FadeIn threshold={0.5}>
+        <S.NewsCardContainer>
+          {data && (
+            <AliceCarousel
+              mouseTracking
+              infinite
+              disableButtonsControls
+              items={cards}
+              responsive={responsive}
+            />
+          )}
+        </S.NewsCardContainer>
+      </FadeIn>
     </S.LatestNewsContainer>
   )
 }
