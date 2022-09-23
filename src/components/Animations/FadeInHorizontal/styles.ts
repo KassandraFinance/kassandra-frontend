@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components'
 
-interface IFadeInLeftContainerProps {
+interface IFadeInHorizontalContainerProps {
   inView: boolean;
   invert: string;
 }
 
-export const FadeInLeftContainer = styled.div`
-  ${({ invert }: IFadeInLeftContainerProps) =>
+export const FadeInHorizontalContainer = styled.div`
+  ${({ invert }: IFadeInHorizontalContainerProps) =>
     css`
       opacity: 0;
       transform: translateX(${invert});
@@ -16,7 +16,7 @@ export const FadeInLeftContainer = styled.div`
   transition-timing-function: ease-in-out;
   transition-property: opacity transform;
 
-  ${({ inView }: IFadeInLeftContainerProps) =>
+  ${({ inView }: IFadeInHorizontalContainerProps) =>
     inView &&
     css`
       opacity: 1;
