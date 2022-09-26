@@ -7,13 +7,22 @@ import * as S from './styles'
 interface INewsCardProps {
   thumbnail: string;
   title: string;
+  pubDate: string;
   description: string;
   link: string;
 }
 
-const NewsCard = ({ thumbnail, title, description, link }: INewsCardProps) => {
+const NewsCard = ({
+  thumbnail,
+  title,
+  pubDate,
+  description,
+  link
+}: INewsCardProps) => {
   const subText =
     description.replace(/<\/?[^>]+(>|$)/g, '').substring(0, 100) + ' ...'
+
+  const date = new Date(pubDate)
 
   return (
     <S.NewsCard>
@@ -23,7 +32,11 @@ const NewsCard = ({ thumbnail, title, description, link }: INewsCardProps) => {
 
       <S.NewsCardBody>
         <S.TextWrapper>
-          <S.Title>{title}</S.Title>
+          <S.TitleWrapper>
+            <S.Title>{title}</S.Title>
+
+            <S.PubDate>{date.toLocaleDateString('en-US')}</S.PubDate>
+          </S.TitleWrapper>
 
           <S.Text>{subText}</S.Text>
         </S.TextWrapper>

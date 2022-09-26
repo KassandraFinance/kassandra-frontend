@@ -1,17 +1,25 @@
 import Image from 'next/image'
 
+import FadeIn from '../../../components/Animations/FadeIn'
+
 import ManagerFunds from '../../../../public/assets/images/manager-funds.svg'
 
 import * as S from './styles'
 
 const FundManager = () => (
-  <>
-    <S.FundManagerContainer>
-      <h1>It’s easy to tokenize your portfolio and become a fund manager</h1>
-      <p>
-        Select tokens straight from your wallet, create your own tokenized
-        ERC-20 standard investment fund, and start making money with fees!
-      </p>
+  <S.FundManagerContainer>
+    <FadeIn threshold={0.5}>
+      <S.TittleWrapper>
+        <h1>It’s easy to tokenize your portfolio and become a fund manager</h1>
+
+        <p>
+          Select tokens straight from your wallet, create your own tokenized
+          ERC-20 standard investment fund, and start making money with fees!
+        </p>
+      </S.TittleWrapper>
+    </FadeIn>
+
+    <FadeIn threshold={0.5}>
       <S.ImageContent>
         <span>
           <Image
@@ -32,8 +40,8 @@ const FundManager = () => (
           <p>INDEX FUND</p>
         </S.ImageDescription>
       </S.ImageContent>
-    </S.FundManagerContainer>
-  </>
+    </FadeIn>
+  </S.FundManagerContainer>
 )
 
 export default FundManager

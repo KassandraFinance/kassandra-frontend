@@ -2,35 +2,38 @@ import styled from 'styled-components'
 
 export const PartnersContainer = styled.div`
   width: 100%;
+`
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+export const PartnersTitleWrapper = styled.div`
+  position: relative;
+  height: 37.6rem;
 
   background: url('/assets/images/blur-divisor-investor.png');
   background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center top;
+  background-position: bottom center;
+  background-size: 137.8rem 37.6rem;
 
-  h1 {
-    margin-top: 47.1rem;
-    margin-bottom: 5.6rem;
+  div {
+    position: absolute;
+    bottom: 0;
 
-    font-size: 4.8rem;
-    font-weight: 700;
-    line-height: 5.28rem;
-  }
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  @media (max-width: 680px) {
+    width: 100%;
+
     h1 {
-      margin-top: 30.8rem;
+      font-size: 4.8rem;
+      font-weight: 700;
+      line-height: 5.28rem;
     }
-  }
 
-  @media (max-width: 576px) {
-    h1 {
-      font-size: 4rem;
-      line-height: 4rem;
+    @media (max-width: 576px) {
+      h1 {
+        font-size: 4rem;
+        line-height: 4rem;
+      }
     }
   }
 `
@@ -38,11 +41,17 @@ export const PartnersContainer = styled.div`
 export const PartnerContent = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+
+  max-width: 1028px;
+  margin-inline: auto;
+  margin-top: 5.6rem;
 
   @media (max-width: 560px) {
-    grid-template-columns: 18rem 18rem;
+    grid-template-columns: 1fr 1fr;
 
-    a:last-child {
+    > div:last-child {
       grid-column: 1 / 3;
       grid-row: 5 / 6;
 
@@ -50,9 +59,11 @@ export const PartnerContent = styled.div`
       align-items: center;
       justify-content: center;
 
-      img {
-        max-width: 18rem;
-        max-height: 5.84rem;
+      a:last-child {
+        img {
+          max-width: 18rem;
+          max-height: 5.84rem;
+        }
       }
     }
   }

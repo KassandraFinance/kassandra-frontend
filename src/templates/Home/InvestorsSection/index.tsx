@@ -7,7 +7,7 @@ import HomeHeading from '../HomeHeading'
 import SectionCard from '../SectionCard'
 import PoolHomeCard from '../PoolHomeCard'
 import FadeIn from '../../../components/Animations/FadeIn'
-import FadeInLeft from '../../../components/Animations/FadeInLeft'
+import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
 
 import investorImg from '../../../../public/assets/images/investor.png'
 import light1 from '../../../../public/assets/images/backgroundHome/light-mobile1.png'
@@ -59,9 +59,13 @@ that will work to improve your gains and reduce your risks."
           }
 
           return (
-            <FadeInLeft key={product.symbol} threshold={0.5} invert={invert}>
+            <FadeInHorizontal
+              key={product.symbol}
+              threshold={0.5}
+              invert={invert}
+            >
               <PoolHomeCard pool={product} />
-            </FadeInLeft>
+            </FadeInHorizontal>
           )
         })}
       </S.PoolCardContainer>

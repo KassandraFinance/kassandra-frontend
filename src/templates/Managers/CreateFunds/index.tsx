@@ -2,9 +2,10 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import arrowWhite from '../../../../public/assets/utilities/arrow-white.svg'
-
 import Button from '../../../components/Button'
+import FadeIn from '../../../components/Animations/FadeIn'
+
+import arrowWhite from '../../../../public/assets/utilities/arrow-white.svg'
 
 import * as S from './styles'
 
@@ -106,7 +107,7 @@ const CreateFund = () => {
   }
 
   return (
-    <>
+    <FadeIn threshold={0.5}>
       <S.CreateFundContainer>
         <h1>Here are the gears under the hood</h1>
         <S.CreateFundContent>
@@ -204,7 +205,7 @@ const CreateFund = () => {
           </S.CreateFundsImageContainer>
         </S.CreateFundContent>
       </S.CreateFundContainer>
-    </>
+    </FadeIn>
   )
 }
 

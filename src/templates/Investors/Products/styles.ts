@@ -9,6 +9,23 @@ export const Products = styled.div`
   margin-top: 30.7rem;
   padding: 0 2.4rem;
 
+  @media (max-width: 992px) {
+    padding-right: 2.4rem;
+    padding-left: 2.4rem;
+    margin-top: 7.6rem;
+  }
+
+  @media (max-width: 576px) {
+    padding-right: 1.6rem;
+    padding-left: 1.6rem;
+  }
+`
+
+export const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   > h1 {
     font-size: 4.8rem;
     line-height: 5.3rem;
@@ -24,16 +41,7 @@ export const Products = styled.div`
     line-height: 2.4rem;
   }
 
-  @media (max-width: 992px) {
-    padding-right: 2.4rem;
-    padding-left: 2.4rem;
-    margin-top: 7.6rem;
-  }
-
   @media (max-width: 576px) {
-    padding-right: 1.6rem;
-    padding-left: 1.6rem;
-
     h1 {
       font-size: 2.4rem;
       line-height: 3.2rem;

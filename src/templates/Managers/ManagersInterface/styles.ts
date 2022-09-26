@@ -24,12 +24,6 @@ export const ManagersInterfaceContainer = styled.section`
 export const DescriptionContainer = styled.div`
   width: 44rem;
 
-  animation: fadeInManagerInterface ease 3s both;
-  -webkit-animation: fadeInManagerInterface ease 3s both;
-  -moz-animation: fadeInManagerInterface ease 3s both;
-  -o-animation: fadeInManagerInterface ease 3s both;
-  -ms-animation: fadeInManagerInterface ease 3s both;
-
   @media (max-width: 1000px) {
     display: flex;
     flex-direction: column;
@@ -88,76 +82,4 @@ export const DescriptionContainer = styled.div`
   }
 `
 
-export const ImageContainer = styled.div`
-  animation: fadeInManagerInterface ease 3s both;
-  -webkit-animation: fadeInManagerInterface ease 3s both;
-  -moz-animation: fadeInManagerInterface ease 3s both;
-  -o-animation: fadeInManagerInterface ease 3s both;
-  -ms-animation: fadeInManagerInterface ease 3s both;
-  animation-delay: 1.4s;
-
-  @keyframes fadeInManagerInterface {
-    0% {
-      transform: translateX(-8rem);
-      opacity: 0;
-    }
-    70% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateX(0);
-    }
-  }
-
-  @-moz-keyframes fadeInManagerInterface {
-    0% {
-      transform: translateX(-8rem);
-      opacity: 0;
-    }
-    70% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateX(0);
-    }
-  }
-
-  @-webkit-keyframes fadeInManagerInterface {
-    0% {
-      transform: translateX(-8rem);
-      opacity: 0;
-    }
-    70% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateX(0);
-    }
-  }
-
-  @-o-keyframes fadeInManagerInterface {
-    0% {
-      transform: translateX(-8rem);
-      opacity: 0;
-    }
-    70% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateX(0);
-    }
-  }
-
-  @-ms-keyframes fadeInManagerInterface {
-    0% {
-      transform: translateX(-8rem);
-      opacity: 0;
-    }
-    70% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateX(0);
-    }
-  }
-`
+export const ImageContainer = styled.div``

@@ -3,7 +3,7 @@ import Image, { StaticImageData } from 'next/image'
 import Link from 'next/link'
 
 import Button from '../../../components/Button'
-import FadeInLeft from '../../../components/Animations/FadeInLeft'
+import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
 
 import * as S from './styles'
 
@@ -30,7 +30,7 @@ const SectionCard = ({
 }: ISectionCardProps) => {
   return (
     <S.Container>
-      <FadeInLeft threshold={0.5}>
+      <FadeInHorizontal threshold={0.5}>
         <S.TextContainer>
           <S.Title color={color}>
             {number}
@@ -80,11 +80,11 @@ const SectionCard = ({
             </a>
           </Link>
         </S.TextContainer>
-      </FadeInLeft>
+      </FadeInHorizontal>
 
-      <FadeInLeft threshold={0.5}>
+      <FadeInHorizontal threshold={0.5}>
         <Image src={img} />
-      </FadeInLeft>
+      </FadeInHorizontal>
     </S.Container>
   )
 }

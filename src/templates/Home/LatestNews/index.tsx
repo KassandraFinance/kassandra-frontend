@@ -4,6 +4,8 @@ import useSWR from 'swr'
 import AliceCarousel from 'react-alice-carousel'
 import 'react-alice-carousel/lib/alice-carousel.css'
 
+import { MEDIUM_FEED_URL } from '../../../constants/tokenAddresses'
+
 import LatestNewsHeader from './LatestNewsHeader'
 import NewsCard from './NewsCard'
 import FadeIn from '../../../components/Animations/FadeIn'
@@ -25,9 +27,6 @@ interface IMediumPost {
   title: string;
 }
 
-const API_URL =
-  'https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@kassandrafoundation'
-
 const LatestNews = () => {
   const [mediumPosts, setMediumPosts] = React.useState<IMediumPost[]>([])
 
@@ -36,7 +35,7 @@ const LatestNews = () => {
     return res.json()
   }
 
-  const { data } = useSWR(API_URL, fetcher)
+  const { data } = useSWR(MEDIUM_FEED_URL, fetcher)
 
   const responsive = {
     0: { items: 1 },
@@ -50,6 +49,7 @@ const LatestNews = () => {
         key={post.title}
         thumbnail={post.thumbnail}
         title={post.title}
+        pubDate={post.pubDate}
         description={post.content}
         link={post.link}
       />

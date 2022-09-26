@@ -41,8 +41,9 @@ export const NewsCardBody = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 2.4rem;
 
-  height: 23.6rem;
+  height: 26.8rem;
 
   padding: 2.4rem;
 
@@ -55,7 +56,11 @@ export const TextWrapper = styled.div`
   gap: 1.2rem;
 `
 
+export const TitleWrapper = styled.div``
+
 export const Title = styled.h6`
+  margin-bottom: 0.4rem;
+
   color: ${theme.colors.snow};
   font-weight: ${theme.font.weight.medium};
   font-size: ${theme.font.sizes.font20};
@@ -66,6 +71,15 @@ export const Title = styled.h6`
     font-size: ${theme.font.sizes.font16};
     line-height: ${theme.font.sizes.font18};
   }
+`
+
+export const PubDate = styled.span`
+  display: block;
+
+  color: ${theme.colors.white};
+  font-weight: ${theme.font.weight.light};
+  font-size: ${theme.font.sizes.font12};
+  line-height: 100%;
 `
 
 export const Text = styled.p`

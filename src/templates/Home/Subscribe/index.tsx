@@ -6,7 +6,7 @@ import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 import { ToastSuccess } from '../../../components/Toastify/toast'
 
 import TextField from '../../../components/TextField'
-import FadeInLeft from '../../../components/Animations/FadeInLeft'
+import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
 
 import emailIcon from '../../../../public/assets/icons/email.svg'
 import logoSkew from '../../../../public/assets/images/logo-big-skew.png'
@@ -44,7 +44,7 @@ const Subscribe = () => {
     <S.SubscribeContainer>
       <S.SubscribeBacground />
 
-      <FadeInLeft threshold={0.5}>
+      <FadeInHorizontal threshold={0.5}>
         <S.Subscribe>
           <S.TextWrapper>
             <S.Title>Be on the frontlines of our development</S.Title>
@@ -100,7 +100,7 @@ const Subscribe = () => {
 
           <Image src={logoSkew} />
         </S.Subscribe>
-      </FadeInLeft>
+      </FadeInHorizontal>
     </S.SubscribeContainer>
   )
 }

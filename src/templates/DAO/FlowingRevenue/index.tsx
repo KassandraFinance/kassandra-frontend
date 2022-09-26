@@ -10,6 +10,8 @@ import { BNtoDecimal } from '../../../utils/numerals'
 
 import { GET_WITHDRAW_FEE } from './graphql'
 
+import FadeIn from '../../../components/Animations/FadeIn'
+
 import * as S from './styles'
 
 const FlowingRevenue = () => {
@@ -44,46 +46,54 @@ const FlowingRevenue = () => {
 
   return (
     <S.Wrapper>
-      <S.Header>
-        <h2>DAO’s Flowing Revenue </h2>
-        <p>
-          A 3% fee is charged when investment tokens are redeemed to aid the
-          {" DAO's"} innovation and development fund.
-        </p>
-      </S.Header>
-      <S.HeroMobile>
-        <S.ImageWrapper>
-          <Image
-            src="/assets/images/background-flowing-revenue-mobile.svg"
-            layout="fill"
-          />
-        </S.ImageWrapper>
-        <S.Card>
-          <Image
-            src="/assets/iconGradient/lamp.svg"
-            width={33.47}
-            height={28.97}
-          />
-          <S.CardText>
-            <h5>{"DAO's"}</h5>
-            <p>Development Fund Innovation</p>
-          </S.CardText>
-        </S.Card>
-        <S.Data>
-          <span>
-            <strong>{BNtoDecimal(allWithdrawFee, 18, 2)}</strong> USD
-          </span>
-          <small>Accumulated Withdraw Fees since 2022</small>
-        </S.Data>
-      </S.HeroMobile>
-      <S.Hero>
-        <S.Data>
-          <span>
-            <strong>{BNtoDecimal(allWithdrawFee, 18, 2)}</strong> USD
-          </span>
-          <small>Accumulated Withdraw Fees since 2022</small>
-        </S.Data>
-      </S.Hero>
+      <FadeIn threshold={0.5}>
+        <S.Header>
+          <h2>DAO’s Flowing Revenue </h2>
+          <p>
+            A 3% fee is charged when investment tokens are redeemed to aid the
+            {" DAO's"} innovation and development fund.
+          </p>
+        </S.Header>
+      </FadeIn>
+
+      <FadeIn threshold={0.5}>
+        <S.HeroMobile>
+          <S.ImageWrapper>
+            <Image
+              src="/assets/images/background-flowing-revenue-mobile.svg"
+              layout="fill"
+            />
+          </S.ImageWrapper>
+          <S.Card>
+            <Image
+              src="/assets/iconGradient/lamp.svg"
+              width={33.47}
+              height={28.97}
+            />
+            <S.CardText>
+              <h5>{"DAO's"}</h5>
+              <p>Development Fund Innovation</p>
+            </S.CardText>
+          </S.Card>
+          <S.Data>
+            <span>
+              <strong>{BNtoDecimal(allWithdrawFee, 18, 2)}</strong> USD
+            </span>
+            <small>Accumulated Withdraw Fees since 2022</small>
+          </S.Data>
+        </S.HeroMobile>
+      </FadeIn>
+
+      <FadeIn threshold={0.5}>
+        <S.Hero>
+          <S.Data>
+            <span>
+              <strong>{BNtoDecimal(allWithdrawFee, 18, 2)}</strong> USD
+            </span>
+            <small>Accumulated Withdraw Fees since 2022</small>
+          </S.Data>
+        </S.Hero>
+      </FadeIn>
     </S.Wrapper>
   )
 }

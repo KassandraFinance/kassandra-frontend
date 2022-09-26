@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components'
 
-interface IFadeInDownContainerProps {
+interface IFadeInVerticalContainerProps {
   inView: boolean;
 }
 
-export const FadeInDownContainer = styled.div`
+export const FadeInVerticalContainer = styled.div`
   opacity: 0;
   transform: translateY(-20px);
 
@@ -12,7 +12,7 @@ export const FadeInDownContainer = styled.div`
   transition-timing-function: ease-in-out;
   transition-property: opacity transform;
 
-  ${({ inView }: IFadeInDownContainerProps) =>
+  ${({ inView }: IFadeInVerticalContainerProps) =>
     inView &&
     css`
       opacity: 1;

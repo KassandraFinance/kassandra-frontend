@@ -3,21 +3,21 @@ import { useInView } from 'react-intersection-observer'
 
 import * as S from './styles'
 
-interface IFadeInDownProps {
+interface IFadeInVerticalProps {
   children: JSX.Element[] | JSX.Element;
   threshold?: number;
 }
 
-const FadeInDown = ({ children, threshold = 0 }: IFadeInDownProps) => {
+const FadeInVertical = ({ children, threshold = 0 }: IFadeInVerticalProps) => {
   const { ref, inView } = useInView({
     threshold: threshold
   })
 
   return (
-    <S.FadeInDownContainer ref={ref} inView={inView}>
+    <S.FadeInVerticalContainer ref={ref} inView={inView}>
       {children}
-    </S.FadeInDownContainer>
+    </S.FadeInVerticalContainer>
   )
 }
 
-export default FadeInDown
+export default FadeInVertical
