@@ -15,10 +15,15 @@ const TokenHolder = () => {
       <Hero />
 
       <CommunityTenets />
+
       <Governance />
+
       <Scarcity />
+
       <FlowingRevenue />
+
       <LockVote />
+
       <Tokenomics />
 
       <Contribute
