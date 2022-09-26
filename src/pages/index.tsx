@@ -130,8 +130,8 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      daoInfo: daoInfo,
-      revalidate: 300
-    }
+      daoInfo: daoInfo
+    },
+    revalidate: 300
   }
 }
