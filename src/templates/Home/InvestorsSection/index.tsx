@@ -6,6 +6,8 @@ import { products } from '../../../constants/tokenAddresses'
 import HomeHeading from '../HomeHeading'
 import SectionCard from '../SectionCard'
 import PoolHomeCard from '../PoolHomeCard'
+import FadeIn from '../../../components/Animations/FadeIn'
+import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
 
 import investorImg from '../../../../public/assets/images/investor.png'
 import light1 from '../../../../public/assets/images/backgroundHome/light-mobile1.png'
@@ -43,12 +45,29 @@ that will work to improve your gains and reduce your risks."
         img={investorImg}
       />
 
-      <HomeHeading title="Foundation-curated Products" color="#FFBF00" />
+      <FadeIn threshold={1}>
+        <HomeHeading title="Foundation-curated Products" color="#FFBF00" />
+      </FadeIn>
 
       <S.PoolCardContainer>
-        {products.map(product => (
-          <PoolHomeCard key={product.symbol} pool={product} />
-        ))}
+        {products.map((product, index) => {
+          let invert = false
+          if (index % 2 === 0) {
+            invert = false
+          } else {
+            invert = true
+          }
+
+          return (
+            <FadeInHorizontal
+              key={product.symbol}
+              threshold={0.5}
+              invert={invert}
+            >
+              <PoolHomeCard pool={product} />
+            </FadeInHorizontal>
+          )
+        })}
       </S.PoolCardContainer>
     </S.Container>
   )

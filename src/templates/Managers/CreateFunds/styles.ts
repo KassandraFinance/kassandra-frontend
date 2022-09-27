@@ -8,12 +8,6 @@ export const CreateFundContainer = styled.section`
   padding-left: 6rem;
   padding-right: 6rem;
 
-  animation: fadeInCreateFunds ease 3s;
-  -webkit-animation: fadeInCreateFunds ease 3s;
-  -moz-animation: fadeInCreateFunds ease 3s;
-  -o-animation: fadeInCreateFunds ease 3s;
-  -ms-animation: fadeInCreateFunds ease 3s;
-
   > h1 {
     color: #ffffff;
     font-weight: ${theme.font.weight.black};
@@ -41,51 +35,6 @@ export const CreateFundContainer = styled.section`
     padding-right: 2rem;
     padding-left: 2rem;
     gap: 2rem;
-  }
-
-  @keyframes fadeInCreateFunds {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-moz-keyframes fadeInCreateFunds {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-webkit-keyframes fadeInCreateFunds {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-o-keyframes fadeInCreateFunds {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @-ms-keyframes fadeInCreateFunds {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
   }
 `
 

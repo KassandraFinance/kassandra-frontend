@@ -5,6 +5,8 @@ export const InvestorsContainer = styled.section`
   flex-direction: column;
   align-items: center;
 
+  overflow-x: hidden;
+
   background-image: url('/assets/images/bg-investors-1920.png');
   background-image: image-set(
     url('/assets/images/bg-investors-1920.webp') 1x,

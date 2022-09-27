@@ -1,17 +1,21 @@
 import React from 'react'
 
 import TeamCard from './TeamCard'
+import FadeIn from '../../../components/Animations/FadeIn'
 
 import * as S from './styles'
 
 const Team = () => {
   return (
     <S.OurTeamContainer>
-      <S.TitleContainer>
-        <S.TitlePurple>who is Kassandra Foundation?</S.TitlePurple>
-        <S.Divider />
-        <S.Title>Meet Our Team</S.Title>
-      </S.TitleContainer>
+      <FadeIn threshold={0.5}>
+        <S.TitleContainer>
+          <S.TitlePurple>who is Kassandra Foundation?</S.TitlePurple>
+          <S.Divider />
+          <S.Title>Meet Our Team</S.Title>
+        </S.TitleContainer>
+      </FadeIn>
+
       <S.TeamCardList>
         <TeamCard
           name="Kevin Voigt"

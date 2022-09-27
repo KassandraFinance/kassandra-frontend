@@ -12,8 +12,6 @@ export const Hero = styled.div`
 
   text-align: center;
 
-  overflow: hidden;
-
   h1 {
     margin-top: 1.6rem;
 

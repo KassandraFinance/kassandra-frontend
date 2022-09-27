@@ -1,6 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
 
+import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
+
 import Grid from '../../../../public/assets/images/grid.svg'
 
 import * as S from './styles'
@@ -139,8 +141,8 @@ const ChangeAllocations = () => {
   }, [tokenn])
 
   return (
-    <>
       <S.ChangeAllocationsContainer>
+        <FadeInHorizontal threshold={0.5}>
         <S.DescriptionContainer>
           <span>PRACTICAL</span>
           <h1>Set new pool allocations with one single transaction</h1>
@@ -150,6 +152,9 @@ const ChangeAllocations = () => {
             withdrawals or price changes, we’ve got you covered.
           </p>
         </S.DescriptionContainer>
+        </FadeInHorizontal>
+
+        <FadeInHorizontal threshold={0.5}>
         <S.GridContainer>
           <span>
             <Image src={Grid} alt="" width={464} height={350} />
@@ -196,8 +201,8 @@ const ChangeAllocations = () => {
             </span>
           </S.ChangeButtonContent>
         </S.GridContainer>
+        </FadeInHorizontal>
       </S.ChangeAllocationsContainer>
-    </>
   )
 }
 

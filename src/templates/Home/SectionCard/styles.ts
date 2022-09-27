@@ -22,6 +22,14 @@ export const Container = styled.article`
 `
 
 export const TextContainer = styled.div`
+  a {
+    text-decoration: none;
+  }
+
+  .btn {
+    flex-direction: row-reverse;
+  }
+
   @media (max-width: 992px) {
     display: flex;
     flex-direction: column;
@@ -33,14 +41,6 @@ export const TextContainer = styled.div`
 
   @media (max-width: 576px) {
     align-items: flex-start;
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-  .btn {
-    flex-direction: row-reverse;
   }
 `
 

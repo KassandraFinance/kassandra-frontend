@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 
 import KacyData from './KacyData'
+import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
 
 import kacyCircle from '../../../../public/assets/images/kacy-circle.png'
 import light7 from '../../../../public/assets/images/backgroundHome/light-mobile7.png'
@@ -15,9 +16,13 @@ const KacySection = () => {
         <Image src={light7} />
       </S.ImgWrapper>
 
-      <Image src={kacyCircle} />
+      <FadeInHorizontal threshold={0.5} invert>
+        <Image src={kacyCircle} />
+      </FadeInHorizontal>
 
-      <KacyData />
+      <FadeInHorizontal threshold={0.5} invert>
+        <KacyData />
+      </FadeInHorizontal>
     </S.KacySectionContainer>
   )
 }

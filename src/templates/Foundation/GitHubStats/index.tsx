@@ -1,11 +1,29 @@
-import { request } from 'graphql-request'
 import React from 'react'
 import useSWR from 'swr'
+import { request } from 'graphql-request'
+
+import { GET_DATA_GITHUB } from './graphql'
+import { MEDIUM_FEED_URL } from '../../../constants/tokenAddresses'
+
 import ExternalLink from '../../../components/ExternalLink'
 import GitHubData from './GitHubData'
-import { GET_DATA_GITHUB } from './graphql'
+import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
+import FadeIn from '../../../components/Animations/FadeIn'
 
 import * as S from './styles'
+
+interface IMediumPost {
+  author: string;
+  categories: string[];
+  content: string;
+  description: string;
+  enclosure: object;
+  guid: string;
+  link: string;
+  pubDate: string;
+  thumbnail: string;
+  title: string;
+}
 
 const GitHubStats = () => {
   const GIT_HUB_TOKEN = process.env.NEXT_PUBLIC_GIT_HUB_TOKEN
@@ -34,6 +52,7 @@ const GitHubStats = () => {
     lastWeek: 0,
     lastMonth: 0
   })
+  const [mediumPosts, setMediumPosts] = React.useState<IMediumPost[]>([])
 
   const { data } = useSWR([GET_DATA_GITHUB, GIT_HUB_TOKEN], query =>
     request(
@@ -48,6 +67,13 @@ const GitHubStats = () => {
       { Authorization: `token ${GIT_HUB_TOKEN}` }
     )
   )
+
+  const fetcher = async (url: string) => {
+    const res = await fetch(url)
+    return res.json()
+  }
+
+  const { data: data2 } = useSWR(MEDIUM_FEED_URL, fetcher)
 
   interface ICommitData {
     nodes: { object: { history: { totalCount: number } } }[];
@@ -85,11 +111,23 @@ const GitHubStats = () => {
     }
   }, [data])
 
+  React.useEffect(() => {
+    if (data2) {
+      setMediumPosts(data2.items)
+    }
+  }, [data2])
+
   return (
-    <>
-      <S.GitHubStatsWrapper>
-        <h1>Team Stats</h1>
-        <S.Divider />
+    <S.GitHubStatsWrapper>
+      <FadeIn threshold={0.5}>
+        <S.GitHubStatsTitleWrapper>
+          <h1>Team Stats</h1>
+
+          <S.Divider />
+        </S.GitHubStatsTitleWrapper>
+      </FadeIn>
+
+      <FadeInHorizontal threshold={0.5}>
         <S.GitHubStatsContent>
           <S.GitHub>
             <div className="logoGitHub">
@@ -111,14 +149,17 @@ const GitHubStats = () => {
             <GitHubData commits={commits} yar={currentYar - 1} />
           </S.GitHubStatsData>
         </S.GitHubStatsContent>
+      </FadeInHorizontal>
+
+      <FadeInHorizontal threshold={0.5}>
         <S.ArticlesContent>
           <S.ArticlesData>
             <h1>Track our development</h1>
             <ExternalLink
-              hrefLink="https://kassandrafoundation.medium.com/welcome-to-august-kassandra-newsletter-5-ef7bb65655ac"
+              hrefLink={mediumPosts[0]?.link}
               text="Latest article"
             />
-            <span className="totalArticles">16</span>
+            <span className="totalArticles">19</span>
             <p>Total Articles (2022)</p>
           </S.ArticlesData>
           <S.Medium>
@@ -138,8 +179,8 @@ const GitHubStats = () => {
             />
           </S.Medium>
         </S.ArticlesContent>
-      </S.GitHubStatsWrapper>
-    </>
+      </FadeInHorizontal>
+    </S.GitHubStatsWrapper>
   )
 }
 

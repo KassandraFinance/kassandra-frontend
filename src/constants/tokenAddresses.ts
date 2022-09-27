@@ -78,6 +78,8 @@ export const SUBGRAPH_URL = `https://graph.kassandra.finance/subgraphs/name/${pr
   :
   'KassandraFuji'}`
 
+export const MEDIUM_FEED_URL = 'https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@kassandrafoundation'
+
 
 export const chains: { [key: string]: ChainDetails } = {
   avalanche: {
