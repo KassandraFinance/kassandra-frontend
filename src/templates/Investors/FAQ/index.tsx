@@ -16,7 +16,7 @@ const FAQ = () => {
       </S.Title>
       <QuestionCard
         question="What is KassandraDAO?"
-        answer="Kassandra is an autonomous organization that connects users and investors by governing tokenized investment funds that are easy to create and invest in."
+        answer="Kassandra is an autonomous organization that connects users and investors by governing tokenized index funds that are easy to create and invest in."
       />
       <QuestionCard
         question="How does KACY acquire value?"
