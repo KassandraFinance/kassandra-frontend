@@ -41,7 +41,7 @@ export default function HomePage({ daoInfo }: IHomePageProps) {
 
         <meta
           name="description"
-          content="Create, Manage and invest in tokenized investment funds effortlessly."
+          content="Create, Manage and invest in tokenized index funds effortlessly."
         />
 
         <title>Kassandra Finance</title>

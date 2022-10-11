@@ -17,7 +17,7 @@ const About = () => {
           <S.Text>
             Kassandra is an decentralized autonomous organization of
             decentralized finance that governs a protocol that allows the
-            creation and management of tokenized investment funds, bringing a
+            creation and management of tokenized index funds, bringing a
             new class of products to managers and investors.
           </S.Text>
 

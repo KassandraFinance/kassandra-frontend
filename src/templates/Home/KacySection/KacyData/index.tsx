@@ -78,7 +78,7 @@ const KacyData = () => {
     <>
       <S.KacyDataContainer>
         <S.Title>
-          Be part of the cutting edge of tokenized investment funds.
+          Be part of the cutting edge of tokenized index funds.
         </S.Title>
 
         <S.Text>
