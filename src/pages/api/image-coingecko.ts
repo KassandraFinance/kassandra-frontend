@@ -7,13 +7,6 @@ type IImagesProps = {
   [key: string]: string
 }
 
-type IInfoTokenProps = {
-  [key: string]: {
-    image: string,
-    change: number,
-    price: number
-  }
-}
 export default async (request: NextApiRequest, response: NextApiResponse) => {
   try {
     await NextCors(request, response, {
@@ -29,7 +22,6 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
     }
 
     const images: IImagesProps = {}
-    const infoToken: IInfoTokenProps = {}
 
     await Promise.all(
       request.query['tokenAddress'].split(',').map(async item => {
@@ -40,27 +32,19 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
         Object.assign(images, {
           [item]: responseImageCoingeckoJson.image?.small
         })
-        Object.assign(infoToken, {
-          [item]: {
-            change: Number(
-              responseImageCoingeckoJson.market_data
-                ?.price_change_percentage_24h || 0
-            ),
-            price: responseImageCoingeckoJson.market_data?.current_price.usd,
-            image: responseImageCoingeckoJson.image?.small
-          }
-        })
         return
       })
     )
 
-    response.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate')
+    throw new Error()
 
-    if (!infoToken || !images) {
+    response.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate')
+
+    if (!images) {
       return response.json({})
     }
 
-    response.json({ infoToken, images })
+    response.json({ images })
   } catch (error) {
     response.json({
       error
