@@ -155,8 +155,10 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
       }&tokenAddress=${arrayAddressPool}`
       const res = await fetch(URL)
       const data = await res.json()
-      setTokenImages(data.images)
+
+      setTokenImages(data.images ?? {})
     }
+
     getCoingecko()
   }, [poolInfo, poolPlatform])
 

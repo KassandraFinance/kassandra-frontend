@@ -26,7 +26,7 @@ export const GitHubStats = styled.div<IGitHubProps>`
   .data {
     display: flex;
     justify-content: ${({ isCurrentYar }) =>
-      isCurrentYar ? 'space-between' : 'center'} ;
+      isCurrentYar ? 'space-between' : 'right'} ;
     padding: 0 3.2rem;
     border-top: solid 0.1rem #ffbf00;
 
