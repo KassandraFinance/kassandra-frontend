@@ -29,10 +29,10 @@ const GitHubStats = () => {
   const GIT_HUB_TOKEN = process.env.NEXT_PUBLIC_GIT_HUB_TOKEN
   const currentYar = new Date().getFullYear()
   const dateInitLastYar = new Date(
-    `${currentYar - 1}-01-01 00:00`
+    `${currentYar - 1}/01/01 00:00`
   ).toISOString()
   const dateInitCurrentYarn = new Date(
-    `${currentYar}-01-01 00:00`
+    `${currentYar}/01/01 00:00`
   ).toISOString()
   const dateLastWeek = new Date(
     Math.trunc(Date.now() - 60 * 60 * 24 * 7 * 1000)
