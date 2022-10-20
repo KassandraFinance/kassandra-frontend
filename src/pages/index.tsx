@@ -83,26 +83,26 @@ export const getStaticProps: GetStaticProps = async () => {
     })
   }).then(res => res.json())
 
-  const arrData = response.data.factory
+  const arrData = response?.data?.factory
 
   let swapFees = Big(0)
   let withdrawFees = Big(0)
   let volume = Big(0)
 
   swapFees = swapFees.add(
-    arrData.swap.reduce((acc: Big, current: { volume_usd: string }) => {
+    arrData?.swap.reduce((acc: Big, current: { volume_usd: string }) => {
       return Big(current.volume_usd).add(acc)
     }, 0)
   )
 
   withdrawFees = withdrawFees.add(
-    arrData.withdraw.reduce((acc: Big, current: { volume_usd: string }) => {
+    arrData?.withdraw.reduce((acc: Big, current: { volume_usd: string }) => {
       return Big(current.volume_usd).add(acc)
     }, 0)
   )
 
   volume = volume.add(
-    arrData.volumes.reduce((acc: Big, current: { volume_usd: string }) => {
+    arrData?.volumes.reduce((acc: Big, current: { volume_usd: string }) => {
       return Big(current.volume_usd).add(acc)
     }, 0)
   )
