@@ -1,6 +1,6 @@
 import * as S from './styles'
 
-const Scroll = () => {
+const ScrollAnimation = () => {
   return (
     <S.Wrapper>
       <div className="scroll-anchor">
@@ -13,4 +13,4 @@ const Scroll = () => {
   )
 }
 
-export default Scroll
+export default ScrollAnimation

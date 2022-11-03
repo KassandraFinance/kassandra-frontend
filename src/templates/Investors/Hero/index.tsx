@@ -1,5 +1,5 @@
 import Button from '../../../components/Button'
-import Scroll from '../../../components/Scroll'
+import ScrollAnimation from '../../../components/ScrollAnimation'
 
 import * as S from './styles'
 
@@ -30,7 +30,7 @@ const Hero = () => {
         href="https://app.kassandra.finance/explore"
       />
       <S.ScroolContainer>
-        <Scroll />
+        <ScrollAnimation />
       </S.ScroolContainer>
     </S.Hero>
   )

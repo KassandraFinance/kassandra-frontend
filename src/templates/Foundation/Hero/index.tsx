@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Social from './Social'
-import Scroll from '../../../components/Scroll'
+import ScrollAnimation from '../../../components/ScrollAnimation'
 
 import * as S from './styles'
 
@@ -21,7 +21,7 @@ const Hero = () => {
         </S.HeroText>
 
         <S.ScroolContainer>
-          <Scroll />
+          <ScrollAnimation />
         </S.ScroolContainer>
       </S.Hero>
     </S.HeroContainer>

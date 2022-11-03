@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Button from '../../../components/Button'
-import Scroll from '../../../components/Scroll'
+import ScrollAnimation from '../../../components/ScrollAnimation'
 
 import * as S from './styles'
 
@@ -40,7 +40,7 @@ const HeroManager = () => (
         </S.HeroDescription>
       </S.HeroContent>
       <S.ScrollContainer>
-        <Scroll />
+        <ScrollAnimation />
       </S.ScrollContainer>
     </S.HeroContainer>
   </>
