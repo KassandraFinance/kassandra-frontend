@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Products = styled.div`
+export const Products = styled.section`
   width: 100%;
 
   display: flex;
