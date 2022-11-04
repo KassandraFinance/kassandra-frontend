@@ -20,9 +20,7 @@ const Hero = () => {
           <Social />
         </S.HeroText>
 
-        <S.ScroolContainer>
-          <ScrollAnimation />
-        </S.ScroolContainer>
+        <ScrollAnimation />
       </S.Hero>
     </S.HeroContainer>
   )

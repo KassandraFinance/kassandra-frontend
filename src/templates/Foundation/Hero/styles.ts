@@ -147,10 +147,3 @@ export const SubTitle = styled.h2`
     line-height: ${theme.font.sizes.font32};
   }
 `
-
-export const ScroolContainer = styled.div`
-  position: absolute;
-  bottom: 2rem;
-  right: 50%;
-  transform: translateX(50%);
-`

@@ -167,15 +167,3 @@ export const HeroDescription = styled.div`
     margin-top: 3.2rem;
   }
 `
-
-export const ScrollContainer = styled.div`
-  position: absolute;
-  bottom: 2rem;
-  right: 50%;
-  transform: translateX(50%);
-
-  animation-name: heroContentFadeIn;
-  animation-duration: 2.5s;
-  animation-fill-mode: forwards;
-  animation-timing-function: ease-out;
-`

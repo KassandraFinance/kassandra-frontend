@@ -52,9 +52,7 @@ const HeroHome = () => {
 
       <DaoData />
 
-      <S.ScroolContainer>
-        <ScrollAnimation />
-      </S.ScroolContainer>
+      <ScrollAnimation />
     </S.Hero>
   )
 }

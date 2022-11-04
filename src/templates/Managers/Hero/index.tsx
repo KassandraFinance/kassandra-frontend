@@ -39,9 +39,7 @@ const HeroManager = () => (
           </Link>
         </S.HeroDescription>
       </S.HeroContent>
-      <S.ScrollContainer>
-        <ScrollAnimation />
-      </S.ScrollContainer>
+      <ScrollAnimation />
     </S.HeroContainer>
   </>
 )

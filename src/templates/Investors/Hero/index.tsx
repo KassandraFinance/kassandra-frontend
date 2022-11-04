@@ -29,9 +29,7 @@ const Hero = () => {
         as="a"
         href="https://app.kassandra.finance/explore"
       />
-      <S.ScroolContainer>
-        <ScrollAnimation />
-      </S.ScroolContainer>
+      <ScrollAnimation />
     </S.Hero>
   )
 }

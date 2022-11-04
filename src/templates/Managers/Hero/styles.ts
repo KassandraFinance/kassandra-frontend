@@ -49,18 +49,6 @@ export const HeroContent = styled.div`
   animation-timing-function: ease-out;
 `
 
-export const ScrollContainer = styled.div`
-  position: absolute;
-  bottom: 2rem;
-  right: 50%;
-  transform: translateX(50%);
-
-  animation-name: heroContentFadeIn;
-  animation-duration: 2.5s;
-  animation-fill-mode: forwards;
-  animation-timing-function: ease-out;
-`
-
 export const ImageContent = styled.span`
   position: absolute;
   bottom: 0;

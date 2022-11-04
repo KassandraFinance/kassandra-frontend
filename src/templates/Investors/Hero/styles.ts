@@ -175,15 +175,3 @@ export const Description = styled.div`
   animation-fill-mode: forwards;
   animation-timing-function: ease-out;
 `
-
-export const ScroolContainer = styled.div`
-  position: absolute;
-  bottom: 2rem;
-  right: 50%;
-  transform: translateX(50%);
-
-  animation-name: heroContentFadeIn;
-  animation-duration: 2.5s;
-  animation-fill-mode: forwards;
-  animation-timing-function: ease-out;
-`

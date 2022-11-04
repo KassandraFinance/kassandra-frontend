@@ -48,9 +48,7 @@ const Hero = () => {
           </S.HeroDescription>
         </S.HeroContent>
 
-        <S.ScrollContainer>
-          <ScrollAnimation />
-        </S.ScrollContainer>
+        <ScrollAnimation />
       </S.HeroContainer>
 
       <ModalBuyKacy modalOpen={isOpenModal} setModalOpen={setIsOpenModal} />
