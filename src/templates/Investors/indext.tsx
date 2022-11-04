@@ -10,7 +10,7 @@ import * as S from './styles'
 const Investors = () => {
   return (
     <>
-      <S.InvestorsContainer>
+      <S.Investors>
         <Hero />
 
         <Products />
@@ -20,7 +20,7 @@ const Investors = () => {
         <Partners />
 
         {/* <FAQ /> */}
-      </S.InvestorsContainer>
+      </S.Investors>
 
       <Contribute
         title="Invest in your favorite funds and get KACY"

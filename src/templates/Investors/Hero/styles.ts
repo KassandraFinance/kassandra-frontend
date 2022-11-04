@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Hero = styled.div`
+export const Hero = styled.section`
   height: 100vh;
   max-width: 102rem;
   position: relative;
@@ -169,18 +169,6 @@ export const Description = styled.div`
 
   margin-top: 2.4rem;
   margin-bottom: 2.4rem;
-
-  animation-name: heroContentFadeIn;
-  animation-duration: 2.5s;
-  animation-fill-mode: forwards;
-  animation-timing-function: ease-out;
-`
-
-export const ScroolContainer = styled.div`
-  position: absolute;
-  bottom: 2rem;
-  right: 50%;
-  transform: translateX(50%);
 
   animation-name: heroContentFadeIn;
   animation-duration: 2.5s;

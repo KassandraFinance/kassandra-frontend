@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 
 import Button from '../../../components/Button'
-import Scroll from '../../../components/Scroll'
+import ScrollAnimation from '../../../components/ScrollAnimation'
 import ModalBuyKacy from '../../../components/Modals/ModalBuyKacy'
 
 import * as S from './styles'
@@ -48,9 +48,7 @@ const Hero = () => {
           </S.HeroDescription>
         </S.HeroContent>
 
-        <S.ScrollContainer>
-          <Scroll />
-        </S.ScrollContainer>
+        <ScrollAnimation />
       </S.HeroContainer>
 
       <ModalBuyKacy modalOpen={isOpenModal} setModalOpen={setIsOpenModal} />

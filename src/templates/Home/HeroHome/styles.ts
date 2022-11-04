@@ -20,10 +20,3 @@ export const Hero = styled.section`
     flex-direction: row-reverse;
   }
 `
-
-export const ScroolContainer = styled.div`
-  position: absolute;
-  bottom: 2rem;
-  right: 50%;
-  transform: translateX(50%);
-`
