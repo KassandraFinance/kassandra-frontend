@@ -10,6 +10,14 @@ export const Container = styled.div`
   max-width: 66.8rem;
   margin: 0 auto;
 
+  P {
+    text-align: center;
+
+    @media (max-width: 576px) {
+      text-align: left;
+    }
+  }
+
   @media (max-width: 576px) {
     width: 100%;
     align-items: flex-start;
@@ -65,18 +73,6 @@ export const Subtitle = styled.h4`
   @media (max-width: 576px) {
     font-size: ${theme.font.sizes.font24};
     line-height: ${theme.font.sizes.font32};
-    text-align: left;
-  }
-`
-
-export const Text = styled.p`
-  color: ${theme.colors.white};
-  font-weight: ${theme.font.weight.light};
-  font-size: ${theme.font.sizes.font16};
-  line-height: ${theme.font.sizes.font24};
-  text-align: center;
-
-  @media (max-width: 576px) {
     text-align: left;
   }
 `

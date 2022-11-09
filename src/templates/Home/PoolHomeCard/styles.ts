@@ -366,10 +366,6 @@ export const Info = styled.div`
   }
 
   p {
-    color: #ffffff;
-    font-weight: ${theme.font.weight.light};
-    font-size: ${theme.font.sizes.font16};
-    line-height: 2.4rem;
     text-align: left;
 
     @media (max-width: 960px) {

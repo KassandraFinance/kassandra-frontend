@@ -1,6 +1,8 @@
 import React from 'react'
 import Image, { StaticImageData } from 'next/image'
 
+import Paragraph from '../../../components/Paragraph'
+
 import * as S from './styles'
 
 interface IManagerCardProps {
@@ -19,7 +21,7 @@ const ManagerCard = ({ icon, title, text }: IManagerCardProps) => {
       <S.TextWrapper>
         <S.Title>{title}</S.Title>
 
-        <S.Text>{text}</S.Text>
+        <Paragraph text={text} />
       </S.TextWrapper>
     </S.ManagerCardWapper>
   )

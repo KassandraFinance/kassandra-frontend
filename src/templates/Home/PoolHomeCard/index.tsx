@@ -12,6 +12,7 @@ import Button from '../../../components/Button'
 import { BarChart, XAxis, YAxis, Bar } from 'recharts'
 import ExternalLink from '../../../components/ExternalLink'
 import TokenIcons from '../TokenIcons'
+import Paragraph from '../../../components/Paragraph'
 
 import arrowRight from '../../../../public/assets/icons/arrow-yellow-right.svg'
 import arrowAscend from '../../../../public/assets/notificationStatus/arrow-ascend.svg'
@@ -288,7 +289,7 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
             ? 'The safest assets yield farming for you'
             : 'Automagically invest in strong communities'}
         </h2>
-        <p>{pool.fundSummary}</p>
+        <Paragraph text={pool.fundSummary ? pool.fundSummary : ''} />
         <S.InfoList>
           <li>
             <div className="image">

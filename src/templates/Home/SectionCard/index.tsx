@@ -4,6 +4,8 @@ import Link from 'next/link'
 
 import Button from '../../../components/Button'
 import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
+import Paragraph from '../../../components/Paragraph'
+import Subtitle from '../../../components/Subtitle'
 
 import * as S from './styles'
 
@@ -37,9 +39,8 @@ const SectionCard = ({
             <S.Line color={color} /> {title}
           </S.Title>
 
-          <S.SubTitle>{subtitle}</S.SubTitle>
-
-          <S.Text>{text}</S.Text>
+          <Subtitle text={subtitle} />
+          <Paragraph text={text} />
 
           <Link href={link} passHref>
             <a>

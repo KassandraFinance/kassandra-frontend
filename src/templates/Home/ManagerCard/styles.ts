@@ -64,6 +64,19 @@ export const TextWrapper = styled.div`
   align-items: center;
   gap: 1.2rem;
 
+  > p {
+    text-align: center;
+
+    @media (max-width: 992px) {
+      text-align: left;
+    }
+
+    @media (max-width: 576px) {
+      font-size: ${theme.font.sizes.font14};
+      letter-spacing: 0.05em;
+    }
+  }
+
   @media (max-width: 992px) {
     align-items: flex-start;
     width: 100%;
@@ -80,22 +93,5 @@ export const Title = styled.h5`
 
   @media (max-width: 576px) {
     letter-spacing: 0.22em;
-  }
-`
-
-export const Text = styled.p`
-  color: ${theme.colors.white};
-  font-weight: ${theme.font.weight.light};
-  font-size: ${theme.font.sizes.font16};
-  line-height: ${theme.font.sizes.font24};
-  text-align: center;
-
-  @media (max-width: 992px) {
-    text-align: left;
-  }
-
-  @media (max-width: 576px) {
-    font-size: ${theme.font.sizes.font14};
-    letter-spacing: 0.05em;
   }
 `
