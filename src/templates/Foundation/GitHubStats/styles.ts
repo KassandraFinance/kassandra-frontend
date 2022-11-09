@@ -100,10 +100,6 @@ export const GitHub = styled.div`
 
   p {
     margin-bottom: 3.2rem;
-
-    font-size: ${theme.font.sizes.font16};
-    line-height: 2.4rem;
-    font-weight: ${theme.font.weight.light};
   }
 
   @media (max-width: 992px) {
@@ -265,10 +261,6 @@ export const Medium = styled.div`
   }
 
   p {
-    font-size: ${theme.font.sizes.font16};
-    line-height: 2.4rem;
-    font-weight: ${theme.font.weight.light};
-
     margin-bottom: 3.2rem;
   }
 

@@ -3,6 +3,7 @@ import Image from 'next/image'
 
 import ExternalLink from '../../../components/ExternalLink'
 import FadeInVertical from '../../../components/Animations/FadeInVertical'
+import Paragraph from '../../../components/Paragraph'
 
 import ArrowUp from '../../../../public/assets/iconGradient/arrow-up.svg'
 
@@ -17,7 +18,7 @@ const Institutional = () => {
           <h3>
             A community bringing investors, managers and builders together
           </h3>
-          <p>And to achieve this, we have three pillars:</p>
+          <Paragraph text="And to achieve this, we have three pillars:" />
         </S.TitleContainer>
       </FadeInVertical>
 
@@ -40,12 +41,13 @@ const Institutional = () => {
               </S.IconContent>
               <S.CardTitle color="#ffbf00">PROTOCOL</S.CardTitle>
               <span>Technology</span>
-              <p>
-                The Kassandra Protocol is the core technology that allows the
+              <Paragraph
+                text="The Kassandra Protocol is the core technology that allows the
                 DAO to deploy investment products. It allows building tokenized
                 investment baskets that are permissionless, non-custodial and
-                actively managed, yet monetary efficient.
-              </p>
+                actively managed, yet monetary efficient."
+              />
+
               <ExternalLink
                 text="Learn more"
                 hrefLink="https://medium.com/@kassandrafoundation/kassandra-protocol-d9cb71c02b02"
@@ -67,11 +69,11 @@ const Institutional = () => {
                 </S.IconContent>
                 <S.CardTitle color="#26dbdb">DAO</S.CardTitle>
                 <span>Organization</span>
-                <p>
-                  The Kassandra DAO is the only owner of the Kassandra Protocol,
+                <Paragraph
+                  text="The Kassandra DAO is the only owner of the Kassandra Protocol,
                   represented by the KACY token holders, and earns management
-                  fees over all the Kassandra investment funds.
-                </p>
+                  fees over all the Kassandra investment funds."
+                />
                 <ExternalLink
                   text="Learn more"
                   hrefLink="https://medium.com/@kassandrafoundation/kassandra-dao-token-8bc046d55a00"
@@ -90,12 +92,12 @@ const Institutional = () => {
               </S.IconContent>
               <S.CardTitle color="#e843c4">FOUNDATION</S.CardTitle>
               <span>Forefathers</span>
-              <p>
-                The Kassandra Foundation is the entity funded by token sale
+              <Paragraph
+                text="The Kassandra Foundation is the entity funded by token sale
                 events, run by the core team of Kassandra founders, with the
                 purpose of promoting and developing Kassandra in both
-                technological and marketing aspects.
-              </p>
+                technological and marketing aspects."
+              />
               <ExternalLink
                 text="Learn more"
                 hrefLink="https://medium.com/@kassandrafoundation/kassandra-foundation-team-4f46bf13c887"
