@@ -1,6 +1,7 @@
 import Image from 'next/image'
 
 import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
+import Paragraph from '../../../components/Paragraph'
 
 import * as S from './styles'
 
@@ -19,10 +20,11 @@ const ManagersInterface = () => (
       <S.DescriptionContainer>
         <span>SIMPLE</span>
         <h1>An innovative, intuitive interface for managers</h1>
-        <p>
-          Easily create your fund, track your metrics, change allocations and
-          tokens in an easy-to-use interface.
-        </p>
+
+        <Paragraph
+          text="Easily create your fund, track your metrics, change allocations and
+          tokens in an easy-to-use interface."
+        />
       </S.DescriptionContainer>
     </S.ManagersInterfaceContainer>
   </FadeInHorizontal>

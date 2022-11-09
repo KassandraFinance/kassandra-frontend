@@ -135,10 +135,6 @@ export const DescriptionContainer = styled.div<INumberButtonProps>`
     align-items: center;
     justify-content: center;
 
-    color: #ffffff;
-    font-weight: ${theme.font.weight.light};
-    font-size: ${theme.font.sizes.font16};
-
     animation: ${props =>
       props.isActiveButton
         ? `assetAnim ease 1s both;`
@@ -153,8 +149,6 @@ export const DescriptionContainer = styled.div<INumberButtonProps>`
       width: 100%;
       margin-top: 0;
 
-      font-size: ${theme.font.sizes.font14};
-      line-height: 2.4rem;
       text-align: left;
     }
   }

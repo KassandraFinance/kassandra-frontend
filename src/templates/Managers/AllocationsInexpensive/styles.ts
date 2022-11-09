@@ -72,17 +72,10 @@ export const DescriptionContainer = styled.div`
   > p {
     margin-top: 2.4rem;
 
-    color: #ffffff;
-    font-weight: ${theme.font.weight.light};
-    font-size: ${theme.font.sizes.font16};
-
     @media (max-width: 1000px) {
       text-align: center;
     }
-
     @media (max-width: 500px) {
-      font-size: ${theme.font.sizes.font14};
-      line-height: 2.4rem;
       text-align: left;
     }
   }
