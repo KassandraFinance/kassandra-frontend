@@ -69,6 +69,20 @@ export const TextWrapper = styled.div`
     align-items: flex-start;
     width: 100%;
   }
+
+  p {
+    margin-bottom: 3.2rem;
+    text-align: left;
+
+    @media (max-width: 992px) {
+      text-align: center;
+    }
+
+    @media (max-width: 576px) {
+      letter-spacing: 0.05em;
+      text-align: left;
+    }
+  }
 `
 
 export const Title = styled.h4`
@@ -90,27 +104,6 @@ export const Title = styled.h4`
     font-weight: ${theme.font.weight.bold};
     font-size: ${theme.font.sizes.font24};
     line-height: ${theme.font.sizes.font32};
-    text-align: left;
-  }
-`
-
-export const Text = styled.p`
-  margin-bottom: 3.2rem;
-
-  color: ${theme.colors.white};
-  font-weight: ${theme.font.weight.light};
-  font-size: ${theme.font.sizes.font16};
-  line-height: ${theme.font.sizes.font24};
-  text-align: left;
-
-  @media (max-width: 992px) {
-    text-align: center;
-  }
-
-  @media (max-width: 576px) {
-    font-size: ${theme.font.sizes.font14};
-    line-height: ${theme.font.sizes.font24};
-    letter-spacing: 0.05em;
     text-align: left;
   }
 `
