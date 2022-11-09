@@ -62,6 +62,20 @@ export const TextWrapper = styled.div`
   @media (max-width: 992px) {
     gap: 2.4rem;
   }
+
+  > p {
+    line-height: 155%;
+
+    @media (max-width: 992px) {
+      margin-bottom: 0.8rem;
+      text-align: center;
+    }
+
+    @media (max-width: 576px) {
+      letter-spacing: 0.05em;
+      text-align: left;
+    }
+  }
 `
 
 export const ContributeHeading = styled.h5`
@@ -80,29 +94,6 @@ export const ContributeHeading = styled.h5`
     font-weight: ${theme.font.weight.bold};
     font-size: ${theme.font.sizes.font24};
     line-height: ${theme.font.sizes.font32};
-    text-align: left;
-  }
-`
-
-export const Text = styled.p`
-  color: ${theme.colors.white};
-  font-weight: 300;
-  font-size: ${theme.font.sizes.font16};
-  line-height: 155%;
-
-  @media (max-width: 992px) {
-    margin-bottom: 0.8rem;
-
-    font-weight: ${theme.font.weight.normal};
-    line-height: ${theme.font.sizes.font24};
-    text-align: center;
-  }
-
-  @media (max-width: 576px) {
-    font-weight: ${theme.font.weight.light};
-    font-size: ${theme.font.sizes.font14};
-    line-height: ${theme.font.sizes.font24};
-    letter-spacing: 0.05em;
     text-align: left;
   }
 `
