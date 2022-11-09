@@ -10,8 +10,10 @@ type ISectionSubtitleProps = {
   as?: React.ElementType<ParagraphType | SpanType>
 } & HTMLAttributes<HTMLParagraphElement | HTMLSpanElement>
 
-const Paragraph = ({ text, as }: ISectionSubtitleProps) => (
-  <S.Paragraph as={as}>{text}</S.Paragraph>
+const Paragraph = ({ text, as, ...props }: ISectionSubtitleProps) => (
+  <S.Paragraph as={as} {...props}>
+    {text}
+  </S.Paragraph>
 )
 
 export default Paragraph

@@ -9,8 +9,10 @@ export type ISubtitleProps = {
   as?: React.ElementType<HeadingType>
 } & HeadingType
 
-const Subtitle = ({ text, as }: ISubtitleProps) => (
-  <S.Subtitle as={as}>{text}</S.Subtitle>
+const Subtitle = ({ text, as, ...props }: ISubtitleProps) => (
+  <S.Subtitle as={as} {...props}>
+    {text}
+  </S.Subtitle>
 )
 
 export default Subtitle
