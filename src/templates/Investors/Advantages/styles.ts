@@ -16,11 +16,8 @@ export const Managers = styled.div`
     line-height: 3.52rem;
   }
 
-  span {
+  > P {
     margin-top: 2.4rem;
-    font-size: 1.6rem;
-    line-height: 2.4rem;
-    font-weight: 300;
   }
 
   @media (max-width: 992px) {
@@ -32,10 +29,6 @@ export const Managers = styled.div`
     padding: 0 1.6rem;
     align-items: left;
     text-align: left;
-
-    span {
-      font-size: 1.4rem;
-    }
   }
 
   @media (max-width: 576px) {
@@ -165,12 +158,8 @@ export const DescriptionSafetyContent = styled.div`
     line-height: 3.52rem;
   }
 
-  span:last-child {
+  > P {
     max-width: 31.7rem;
-
-    font-size: 1.6rem;
-    line-height: 2.4rem;
-    font-weight: 300;
   }
 
   @media (max-width: 992px) {
@@ -184,13 +173,10 @@ export const DescriptionSafetyContent = styled.div`
       text-align: center;
     }
 
-    span:last-child {
+    > P {
       max-width: 64.3rem;
 
       text-align: center;
-      font-size: 1.6rem;
-      line-height: 2.4rem;
-      font-weight: 300;
     }
   }
 
@@ -207,16 +193,12 @@ export const DescriptionSafetyContent = styled.div`
       line-height: 3.2rem;
     }
 
-    span:last-child {
+    > P {
       text-align: center;
-      font-size: 1.6rem;
-      line-height: 2.4rem;
     }
 
-    span:last-child {
+    > P {
       text-align: left;
-      font-size: 1.4rem;
-      line-height: 2.4rem;
     }
   }
 `
@@ -321,16 +303,13 @@ export const BeneficitsTitleWrapper = styled.div`
     line-height: 3.52rem;
   }
 
-  span {
+  P {
     margin-top: 2.4rem;
-    font-size: 1.6rem;
-    line-height: 2.4rem;
-    font-weight: 300;
   }
 
   @media (max-width: 992px) {
     h1,
-    > span {
+    > P {
       max-width: 66.8rem;
     }
   }
@@ -343,10 +322,6 @@ export const BeneficitsTitleWrapper = styled.div`
       font-weight: 700;
       font-size: 2.4rem;
       line-height: 3.2rem;
-    }
-
-    span {
-      font-size: 1.4rem;
     }
   }
 `
@@ -496,12 +471,8 @@ export const DescriptionRebalanceContent = styled.div`
     line-height: 3.52rem;
   }
 
-  span:last-child {
+  > P {
     max-width: 31.7rem;
-
-    font-size: 1.6rem;
-    line-height: 2.4rem;
-    font-weight: 300;
   }
 
   @media (max-width: 992px) {
@@ -514,13 +485,10 @@ export const DescriptionRebalanceContent = styled.div`
       text-align: center;
     }
 
-    span:last-child {
+    > P {
       max-width: 64.3rem;
 
       text-align: center;
-      font-size: 1.6rem;
-      line-height: 2.4rem;
-      font-weight: 300;
     }
   }
 
@@ -537,10 +505,8 @@ export const DescriptionRebalanceContent = styled.div`
       line-height: 3.2rem;
     }
 
-    span:last-child {
+    > P {
       text-align: left;
-      font-size: 1.4rem;
-      line-height: 2.4rem;
     }
   }
 `
@@ -572,12 +538,8 @@ export const DescriptionAutonomyContent = styled.div`
     line-height: 3.52rem;
   }
 
-  span:last-child {
+  > P {
     max-width: 31.7rem;
-
-    font-size: 1.6rem;
-    line-height: 2.4rem;
-    font-weight: 300;
   }
 
   @media (max-width: 992px) {
@@ -591,13 +553,10 @@ export const DescriptionAutonomyContent = styled.div`
       text-align: center;
     }
 
-    span:last-child {
+    > P {
       max-width: 64.3rem;
 
       text-align: center;
-      font-size: 1.6rem;
-      line-height: 2.4rem;
-      font-weight: 300;
     }
   }
 
@@ -614,16 +573,8 @@ export const DescriptionAutonomyContent = styled.div`
       line-height: 3.2rem;
     }
 
-    span:last-child {
-      text-align: center;
-      font-size: 1.6rem;
-      line-height: 2.4rem;
-    }
-
-    span:last-child {
+    > P {
       text-align: left;
-      font-size: 1.4rem;
-      line-height: 2.4rem;
     }
   }
 `

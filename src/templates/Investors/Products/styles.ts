@@ -89,17 +89,11 @@ export const DescriptionProtocol = styled.div`
   flex-direction: column;
   justify-content: center;
 
-  > span:first-child {
+  > p:first-child {
     margin-bottom: 0;
   }
 
   max-width: 32rem;
-
-  span {
-    font-size: 1.6rem;
-    line-height: 2.4rem;
-    font-weight: 300;
-  }
 
   h1 {
     margin-top: 1.6rem;
@@ -133,8 +127,7 @@ export const DescriptionProtocol = styled.div`
       line-height: 3.2rem;
     }
 
-    span {
-      font-size: 1.4rem;
+    p {
       letter-spacing: 0.05em;
     }
   }
