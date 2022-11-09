@@ -1,5 +1,6 @@
 // import FAQ from './FAQ'
-import Hero from './Hero'
+import Hero from '../../components/Hero'
+import Button from '../../components/Button'
 import Products from './Products'
 import Advantages from './Advantages'
 import Partners from './Partners'
@@ -11,8 +12,29 @@ const Investors = () => {
   return (
     <>
       <S.Investors>
-        <Hero />
-
+        <Hero
+          titleNumber="01"
+          title="investors"
+          titleColor="#ffbf00"
+          subTitle="Diversify with simple steps through managers and their strategies"
+          description="Social trading made safe: know who is delegating your money, split your
+        exposure and change strategies anytime to save money or scale in
+        positions."
+          backgroundImg="/assets/images/hero-investor.png"
+          backgroundImgHight="calc(100vh - 10rem)"
+        >
+          <Button
+            className="start-investing"
+            backgroundPrimary
+            size="huge"
+            text="Start Investing"
+            icon={
+              <img src="/assets/utilities/go-to-page.svg" alt="go to page" />
+            }
+            as="a"
+            href="https://app.kassandra.finance/explore"
+          />
+        </Hero>
         <Products />
 
         <Advantages />

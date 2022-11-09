@@ -35,6 +35,7 @@ export const ManagerContainer = styled.div`
 export const ManagerContent = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 25rem;
   width: 100%;
 
