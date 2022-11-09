@@ -54,17 +54,16 @@ export const Title = styled.h1`
   }
 `
 
-export const Description = styled.p`
-  margin-top: 2.4rem;
+export const TextWrapper = styled.div`
+  p {
+    margin-top: 2.4rem;
 
-  color: #ffffff;
-  font-weight: ${theme.font.weight.light};
-  font-size: 1.6rem;
-  line-height: 2.4rem;
-  text-align: center;
+    line-height: 2.4rem;
+    text-align: center;
 
-  @media (max-width: 576px) {
-    text-align: left;
+    @media (max-width: 576px) {
+      text-align: left;
+    }
   }
 `
 

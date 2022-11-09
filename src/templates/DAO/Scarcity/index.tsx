@@ -1,4 +1,5 @@
 import FadeIn from '../../../components/Animations/FadeIn'
+import Paragraph from '../../../components/Paragraph'
 
 import * as S from './styles'
 
@@ -7,10 +8,10 @@ const Scarcity = () => {
     <S.Wrapper>
       <FadeIn threshold={0.5}>
         <S.ScarcityTitle>KACY’s Programmed Scarcity</S.ScarcityTitle>
-        <S.ScarcityDescription>
-          Every new investment product on Kassandra must hold at least 5% of
-          KACY tokens as part of its portfolio.
-        </S.ScarcityDescription>
+        <Paragraph
+          text="Every new investment product on Kassandra must hold at least 5% of
+          KACY tokens as part of its portfolio."
+        />
       </FadeIn>
 
       <FadeIn threshold={0.5}>

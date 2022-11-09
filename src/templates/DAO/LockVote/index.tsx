@@ -5,6 +5,7 @@ import { poolsKacy, poolsKacyFuji } from '../../../constants/pools'
 import Button from '../../../components/Button'
 import LockPoolCard from './LockPoolCard'
 import FadeInVertical from '../../../components/Animations/FadeInVertical'
+import Paragraph from '../../../components/Paragraph'
 
 import * as S from './styles'
 
@@ -14,10 +15,10 @@ const LockVote = () => {
       <FadeInVertical threshold={0.5}>
         <S.Header>
           <h3>KACY’s LockVote Feature</h3>
-          <p>
-            To vote on proposals, choose between different staking options. The
-            more time you lock your tokens for, the more voting power you get.
-          </p>
+          <Paragraph
+            text="To vote on proposals, choose between different staking options. The
+            more time you lock your tokens for, the more voting power you get."
+          />
         </S.Header>
       </FadeInVertical>
 

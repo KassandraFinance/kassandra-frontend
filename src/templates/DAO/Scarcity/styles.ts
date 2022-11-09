@@ -10,6 +10,15 @@ export const Wrapper = styled.section`
     padding-left: 1.6rem;
     padding-right: 1.6rem;
   }
+
+  p {
+    margin-top: 2.4rem;
+    text-align: center;
+
+    @media (max-width: 576px) {
+      text-align: left;
+    }
+  }
 `
 
 export const ImageWrapper = styled.div`
@@ -44,21 +53,5 @@ export const ScarcityTitle = styled.h1`
     text-align: left;
     font-size: ${theme.font.sizes.font24};
     line-height: 3.2rem;
-  }
-`
-
-export const ScarcityDescription = styled.p`
-  margin-top: 2.4rem;
-
-  color: #ffffff;
-  font-weight: ${theme.font.weight.normal};
-  font-size: ${theme.font.sizes.font16};
-  line-height: 2.4rem;
-  text-align: center;
-
-  @media (max-width: 576px) {
-    font-size: ${theme.font.sizes.font14};
-    font-weight: ${theme.font.weight.light};
-    text-align: left;
   }
 `

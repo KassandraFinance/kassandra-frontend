@@ -34,14 +34,9 @@ export const Header = styled.header`
   }
 
   p {
-    color: #ffffff;
-    font-weight: ${theme.font.weight.normal};
-    font-size: ${theme.font.sizes.font16};
-    line-height: 2.4rem;
     text-align: center;
 
     @media (max-width: 576px) {
-      font-size: ${theme.font.sizes.font14};
       text-align: left;
     }
   }
