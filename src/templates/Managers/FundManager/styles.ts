@@ -15,21 +15,8 @@ export const FundManagerContainer = styled.section`
 `
 
 export const TittleWrapper = styled.div`
-  > h1 {
-    color: #ffffff;
-    font-weight: ${theme.font.weight.black};
-    font-size: ${theme.font.sizes.font48};
+  > h2 {
     text-align: center;
-
-    @media (max-width: 650px) {
-      font-weight: ${theme.font.weight.bold};
-      font-size: ${theme.font.sizes.font32};
-    }
-
-    @media (max-width: 450px) {
-      font-weight: ${theme.font.weight.bold};
-      font-size: ${theme.font.sizes.font24};
-    }
   }
 
   > p {

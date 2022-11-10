@@ -2,6 +2,7 @@ import Image from 'next/image'
 
 import FadeIn from '../../../components/Animations/FadeIn'
 import Paragraph from '../../../components/Paragraph'
+import Subtitle from '../../../components/Subtitle'
 
 import ManagerFunds from '../../../../public/assets/images/manager-funds.svg'
 
@@ -11,7 +12,8 @@ const FundManager = () => (
   <S.FundManagerContainer>
     <FadeIn threshold={0.5}>
       <S.TittleWrapper>
-        <h1>It’s easy to tokenize your portfolio and become a fund manager</h1>
+        <Subtitle text="It’s easy to tokenize your portfolio and become a fund manager" />
+
         <Paragraph
           text="Select tokens straight from your wallet, create your own tokenized
           ERC-20 standard investment fund, and start making money with fees!"

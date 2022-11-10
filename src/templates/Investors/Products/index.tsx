@@ -7,21 +7,22 @@ import ExternalLink from '../../../components/ExternalLink'
 import FadeInVertical from '../../../components/Animations/FadeInVertical'
 import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
 import Paragraph from '../../../components/Paragraph'
+import SectionSubtitle from '../../../components/SectionSubtitle'
+import Subtitle from '../../../components/Subtitle'
 
 import certik from '../../../../public/assets/iconGradient/certik.svg'
 import lock from '../../../../public/assets/iconGradient/lock.svg'
 import walletLock from '../../../../public/assets/iconGradient/wallet-lock.svg'
 
 import * as S from './styles'
-import SectionSubtitle from '../../../components/SectionSubtitle'
 
 const Products = () => {
   return (
     <S.Products>
       <FadeInVertical threshold={0.5}>
         <S.TitleWrapper>
-          <h1>Start exploring KassandraDAO</h1>
-          <span>Here are some index funds created by us:</span>
+          <Subtitle text="Start exploring KassandraDAO" />
+          <Paragraph text="Here are some index funds created by us:" />
         </S.TitleWrapper>
       </FadeInVertical>
 

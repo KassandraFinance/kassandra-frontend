@@ -26,19 +26,12 @@ export const TitleWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 
-  > h1 {
-    font-size: 4.8rem;
-    line-height: 5.3rem;
-    font-weight: 900;
+  > h2 {
     text-align: center;
   }
 
-  > span {
+  > p {
     margin-top: 2.4rem;
-
-    color: #ffffff;
-    font-size: 1.6rem;
-    line-height: 2.4rem;
   }
 
   @media (max-width: 576px) {
