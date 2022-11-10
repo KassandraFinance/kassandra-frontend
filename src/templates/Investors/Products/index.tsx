@@ -13,6 +13,7 @@ import lock from '../../../../public/assets/iconGradient/lock.svg'
 import walletLock from '../../../../public/assets/iconGradient/wallet-lock.svg'
 
 import * as S from './styles'
+import SectionSubtitle from '../../../components/SectionSubtitle'
 
 const Products = () => {
   return (
@@ -36,7 +37,7 @@ const Products = () => {
         <FadeInHorizontal threshold={0.5}>
           <S.DescriptionProtocol>
             <S.Span>PROTOCOL SAFETY</S.Span>
-            <h1>Make the most of your money while keeping it safe</h1>
+            <SectionSubtitle text="Make the most of your money while keeping it safe" />
             <Paragraph
               text="This is how we ensure that user funds are always protected. All
               infrastructure is governed by up-to-date smart contracts and

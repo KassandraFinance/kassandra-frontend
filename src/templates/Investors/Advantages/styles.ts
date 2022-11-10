@@ -10,10 +10,6 @@ export const Managers = styled.div`
 
   h1 {
     max-width: 66.8rem;
-
-    font-weight: 700;
-    font-size: 3.2rem;
-    line-height: 3.52rem;
   }
 
   > P {
@@ -149,13 +145,9 @@ export const DescriptionSafetyContent = styled.div`
   display: flex;
   flex-direction: column;
 
-  h1 {
+  h3 {
     margin-top: 1.6rem;
     margin-bottom: 2.4rem;
-
-    font-weight: 700;
-    font-size: 3.2rem;
-    line-height: 3.52rem;
   }
 
   > P {
@@ -167,9 +159,8 @@ export const DescriptionSafetyContent = styled.div`
 
     align-items: center;
 
-    h1 {
+    h3 {
       width: 100%;
-
       text-align: center;
     }
 
@@ -185,16 +176,9 @@ export const DescriptionSafetyContent = styled.div`
 
     align-items: flex-start;
 
-    h1 {
-      width: 100%;
-
+    h3 {
       text-align: left;
-      font-size: 2.4rem;
-      line-height: 3.2rem;
-    }
-
-    > P {
-      text-align: center;
+      width: 100%;
     }
 
     > P {
@@ -296,11 +280,8 @@ export const BeneficitsTitleWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 
-  h1 {
+  h3 {
     max-width: 68.8rem;
-    font-weight: 700;
-    font-size: 3.2rem;
-    line-height: 3.52rem;
   }
 
   P {
@@ -308,7 +289,7 @@ export const BeneficitsTitleWrapper = styled.div`
   }
 
   @media (max-width: 992px) {
-    h1,
+    h3,
     > P {
       max-width: 66.8rem;
     }
@@ -317,12 +298,6 @@ export const BeneficitsTitleWrapper = styled.div`
   @media (max-width: 576px) {
     align-items: left;
     text-align: left;
-
-    h1 {
-      font-weight: 700;
-      font-size: 2.4rem;
-      line-height: 3.2rem;
-    }
   }
 `
 
@@ -462,13 +437,9 @@ export const DescriptionRebalanceContent = styled.div`
 
   flex-direction: column;
 
-  h1 {
+  h3 {
     margin-top: 1.6rem;
     margin-bottom: 2.4rem;
-
-    font-weight: 700;
-    font-size: 3.2rem;
-    line-height: 3.52rem;
   }
 
   > P {
@@ -480,7 +451,7 @@ export const DescriptionRebalanceContent = styled.div`
 
     align-items: center;
 
-    h1 {
+    h3 {
       width: 100%;
       text-align: center;
     }
@@ -497,12 +468,9 @@ export const DescriptionRebalanceContent = styled.div`
 
     align-items: flex-start;
 
-    h1 {
+    h3 {
       width: 100%;
       text-align: left;
-
-      font-size: 2.4rem;
-      line-height: 3.2rem;
     }
 
     > P {
@@ -529,13 +497,9 @@ export const DescriptionAutonomyContent = styled.div`
   display: flex;
   flex-direction: column;
 
-  h1 {
+  h3 {
     margin-top: 1.6rem;
     margin-bottom: 2.4rem;
-
-    font-weight: 700;
-    font-size: 3.2rem;
-    line-height: 3.52rem;
   }
 
   > P {
@@ -547,7 +511,7 @@ export const DescriptionAutonomyContent = styled.div`
 
     align-items: center;
 
-    h1 {
+    h3 {
       width: 100%;
 
       text-align: center;
@@ -565,12 +529,9 @@ export const DescriptionAutonomyContent = styled.div`
 
     align-items: flex-start;
 
-    h1 {
+    h3 {
       width: 100%;
-
       text-align: left;
-      font-size: 2.4rem;
-      line-height: 3.2rem;
     }
 
     > P {

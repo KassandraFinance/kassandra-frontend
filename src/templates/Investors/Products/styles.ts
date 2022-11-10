@@ -95,13 +95,9 @@ export const DescriptionProtocol = styled.div`
 
   max-width: 32rem;
 
-  h1 {
+  h3 {
     margin-top: 1.6rem;
     margin-bottom: 2.4rem;
-
-    font-size: 3.2rem;
-    line-height: 3.5rem;
-    font-weight: 700;
   }
 
   a {

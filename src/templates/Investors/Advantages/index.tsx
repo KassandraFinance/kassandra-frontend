@@ -4,6 +4,7 @@ import FadeIn from '../../../components/Animations/FadeIn'
 import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
 import FadeInVertical from '../../../components/Animations/FadeInVertical'
 import Paragraph from '../../../components/Paragraph'
+import SectionSubtitle from '../../../components/SectionSubtitle'
 
 import schemaManager from '../../../../public/assets/images/schema-managers.png'
 
@@ -14,7 +15,7 @@ const Advantages = () => {
     <>
       <FadeIn threshold={0.5}>
         <S.Managers>
-          <h1>Connecting investors and managers in a seamless fashion</h1>
+          <SectionSubtitle text="Connecting investors and managers in a seamless fashion" />
 
           <Paragraph
             text="Managers are compensated for each investor in their funds while
@@ -57,10 +58,10 @@ const Advantages = () => {
             <S.DescriptionSafety>
               <S.DescriptionSafetyContent>
                 <S.Span>FUND SAFETY</S.Span>
-                <h1>
-                  Managers can only trade tokens whitelisted by our governance
-                  protocol.
-                </h1>
+                <SectionSubtitle
+                  text="Managers can only trade tokens whitelisted by our governance
+                  protocol."
+                />
                 <Paragraph
                   text="Users can utilize our forum to debate and vote on which tokens
                   should or shouldn’t be invested/traded inside KassandraDAO."
@@ -83,9 +84,7 @@ const Advantages = () => {
             <S.DescriptionRebalance>
               <S.DescriptionRebalanceContent>
                 <S.Span>SMOOTH TRANSACTIONS</S.Span>
-                <h1>
-                  Avoid big losses that come with abrupt allocation changes
-                </h1>
+                <SectionSubtitle text="Avoid big losses that come with abrupt allocation changes" />
                 <Paragraph
                   text="Allocations can only change so much in a calculated period.
                   Token exchanges are carried out gradually, avoiding large
@@ -101,7 +100,7 @@ const Advantages = () => {
             <S.DescriptionAutonomy>
               <S.DescriptionAutonomyContent>
                 <S.Span>HIGH AUTONOMY</S.Span>
-                <h1>Move your funds in and out, whenever you want</h1>
+                <SectionSubtitle text="Move your funds in and out, whenever you want" />
                 <Paragraph
                   text="Your funds will never be held hostage. Have complete freedom
                   to remanage your investments around at a moments notice and no
@@ -120,7 +119,7 @@ const Advantages = () => {
       <S.BenefitsContainer>
         <FadeInVertical threshold={0.5}>
           <S.BeneficitsTitleWrapper>
-            <h1>No compromise, have everything you want</h1>
+            <SectionSubtitle text="No compromise, have everything you want" />
 
             <Paragraph
               text="All features you need to invest in successful funds, diversify
