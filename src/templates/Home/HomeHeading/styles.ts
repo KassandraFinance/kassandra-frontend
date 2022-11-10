@@ -18,6 +18,14 @@ export const Container = styled.div`
     }
   }
 
+  h4 {
+    text-align: center;
+
+    @media (max-width: 576px) {
+      text-align: left;
+    }
+  }
+
   @media (max-width: 576px) {
     width: 100%;
     align-items: flex-start;
@@ -61,18 +69,4 @@ export const Line = styled.div`
       margin-bottom: 2.4rem;
     }
   `}
-`
-
-export const Subtitle = styled.h4`
-  color: ${theme.colors.snow};
-  font-weight: ${theme.font.weight.bold};
-  font-size: ${theme.font.sizes.font32};
-  line-height: 3.5rem;
-  text-align: center;
-
-  @media (max-width: 576px) {
-    font-size: ${theme.font.sizes.font24};
-    line-height: ${theme.font.sizes.font32};
-    text-align: left;
-  }
 `

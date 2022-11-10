@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Paragraph from '../../../components/Paragraph'
+import SectionSubtitle from '../../../components/SectionSubtitle'
 
 import * as S from './styles'
 
@@ -23,7 +24,7 @@ const HomeHeading = ({
 
       <S.Line color={color} />
 
-      {subTitle.length > 0 && <S.Subtitle>{subTitle}</S.Subtitle>}
+      {subTitle.length > 0 && <SectionSubtitle text={subTitle} as="h4" />}
 
       <Paragraph text={text} />
     </S.Container>

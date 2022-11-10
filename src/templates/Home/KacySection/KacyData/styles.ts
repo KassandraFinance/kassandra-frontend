@@ -8,24 +8,16 @@ export const KacyDataContainer = styled.div`
 
   max-width: 56.2rem;
 
-  @media (max-width: 992px) {
-  }
-`
-
-export const Title = styled.h5`
-  color: ${theme.colors.white};
-  font-weight: ${theme.font.weight.bold};
-  font-size: ${theme.font.sizes.font32};
-  line-height: 3.5rem;
-
-  @media (max-width: 992px) {
-    text-align: center;
+  h5 {
+    @media (max-width: 992px) {
+      text-align: center;
+    }
+    @media (max-width: 576px) {
+      text-align: left;
+    }
   }
 
-  @media (max-width: 576px) {
-    font-size: ${theme.font.sizes.font24};
-    line-height: ${theme.font.sizes.font32};
-    text-align: left;
+  @media (max-width: 992px) {
   }
 `
 
