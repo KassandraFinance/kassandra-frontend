@@ -8,7 +8,7 @@ export const Subtitle = styled.h2`
     line-height: 5rem;
 
     @media (max-width: 992px) {
-      font-size: ${theme.font.sizes.font36};
+      font-size: ${theme.font.sizes.font40};
       line-height: ${theme.font.sizes.font40};
     }
 
