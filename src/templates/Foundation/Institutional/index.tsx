@@ -3,6 +3,7 @@ import Image from 'next/image'
 
 import ExternalLink from '../../../components/ExternalLink'
 import FadeInVertical from '../../../components/Animations/FadeInVertical'
+import SectionSubtitle from '../../../components/SectionSubtitle'
 import Paragraph from '../../../components/Paragraph'
 
 import ArrowUp from '../../../../public/assets/iconGradient/arrow-up.svg'
@@ -15,9 +16,7 @@ const Institutional = () => {
       <FadeInVertical threshold={0.5}>
         <S.TitleContainer>
           <h2>What is Kassandra Foundation?</h2>
-          <h3>
-            A community bringing investors, managers and builders together
-          </h3>
+          <SectionSubtitle text="A community bringing investors, managers and builders together" />
           <Paragraph text="And to achieve this, we have three pillars:" />
         </S.TitleContainer>
       </FadeInVertical>

@@ -20,7 +20,7 @@ export const TitleContainer = styled.div`
   }
 `
 
-export const TitlePurple = styled.h3`
+export const TitlePurple = styled.h2`
   color: #e843c4;
   font-size: ${theme.font.sizes.font14};
   font-weight: ${theme.font.weight.normal};
@@ -35,21 +35,6 @@ export const Divider = styled.div`
   margin-bottom: 2.4rem;
 
   background: linear-gradient(99.25deg, #e843c4 0%, #ffbf00 100%, #ffbf00 100%);
-`
-
-export const Title = styled.h2`
-  font-size: ${theme.font.sizes.font40};
-  font-weight: ${theme.font.weight.bold};
-  line-height: 114%;
-
-  @media (max-width: 992px) {
-    font-size: ${theme.font.sizes.font32};
-  }
-
-  @media (max-width: 576px) {
-    font-size: ${theme.font.sizes.font24};
-    line-height: 3.2rem;
-  }
 `
 
 export const TeamCardList = styled.div`

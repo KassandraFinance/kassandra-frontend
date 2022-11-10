@@ -2,6 +2,7 @@ import React from 'react'
 
 import TeamCard from './TeamCard'
 import FadeIn from '../../../components/Animations/FadeIn'
+import SectionSubtitle from '../../../components/SectionSubtitle'
 
 import * as S from './styles'
 
@@ -12,7 +13,7 @@ const Team = () => {
         <S.TitleContainer>
           <S.TitlePurple>who is Kassandra Foundation?</S.TitlePurple>
           <S.Divider />
-          <S.Title>Meet Our Team</S.Title>
+          <SectionSubtitle text="Meet Our Team" />
         </S.TitleContainer>
       </FadeIn>
 
