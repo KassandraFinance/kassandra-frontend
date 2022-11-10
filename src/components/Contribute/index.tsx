@@ -2,6 +2,7 @@ import Image from 'next/image'
 
 import FadeInHorizontal from '../Animations/FadeInHorizontal'
 import Paragraph from '../Paragraph'
+import Subtitle from '../Subtitle'
 
 import logoSkew from '../../../public/assets/images/logo-big-skew.png'
 
@@ -20,8 +21,7 @@ const Contribute = ({ title, text }: IContributeProps) => {
       <FadeInHorizontal threshold={0.5}>
         <S.Wrapper>
           <S.TextWrapper>
-            <S.ContributeHeading>{title}</S.ContributeHeading>
-
+            <Subtitle text={title} as="h5" />
             <Paragraph text={text} />
 
             <S.ButtonContainer>

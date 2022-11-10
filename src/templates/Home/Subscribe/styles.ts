@@ -70,7 +70,18 @@ export const TextWrapper = styled.div`
     width: 100%;
   }
 
-  p {
+  > h4 {
+    margin-bottom: 2.4rem;
+
+    @media (max-width: 992px) {
+      text-align: center;
+    }
+    @media (max-width: 576px) {
+      text-align: left;
+    }
+  }
+
+  > p {
     margin-bottom: 3.2rem;
     text-align: left;
 

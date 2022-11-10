@@ -63,6 +63,15 @@ export const TextWrapper = styled.div`
     gap: 2.4rem;
   }
 
+  > h5 {
+    @media (max-width: 992px) {
+      text-align: center;
+    }
+    @media (max-width: 576px) {
+      text-align: left;
+    }
+  }
+
   > p {
     line-height: 155%;
 
@@ -75,26 +84,6 @@ export const TextWrapper = styled.div`
       letter-spacing: 0.05em;
       text-align: left;
     }
-  }
-`
-
-export const ContributeHeading = styled.h5`
-  color: ${theme.colors.white};
-  font-weight: ${theme.font.weight.black};
-  font-size: ${theme.font.sizes.font48};
-  line-height: 5rem;
-
-  @media (max-width: 992px) {
-    font-size: ${theme.font.sizes.font36};
-    line-height: ${theme.font.sizes.font40};
-    text-align: center;
-  }
-
-  @media (max-width: 576px) {
-    font-weight: ${theme.font.weight.bold};
-    font-size: ${theme.font.sizes.font24};
-    line-height: ${theme.font.sizes.font32};
-    text-align: left;
   }
 `
 
