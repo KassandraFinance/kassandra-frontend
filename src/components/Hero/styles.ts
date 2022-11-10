@@ -64,6 +64,19 @@ export const TextContainer = styled.div`
     animation-duration: 2.5s;
     animation-fill-mode: forwards;
     animation-timing-function: ease-out;
+
+    > p {
+      max-width: 57.9rem;
+
+      margin-top: 2.4rem;
+      margin-bottom: 2.4rem;
+    }
+
+    h2 {
+      margin-top: 1.6rem;
+
+      text-align: center;
+    }
   `}
 `
 
@@ -83,6 +96,7 @@ export const Title = styled.h1<ITitleProps>`
       font-size: ${theme.font.sizes.font16};
       line-height: ${theme.font.sizes.font24};
       letter-spacing: 0.4em;
+      text-transform: Uppercase;
 
       @media (max-width: 992px) {
         font-weight: ${theme.font.weight.light};
@@ -99,42 +113,6 @@ export const Title = styled.h1<ITitleProps>`
       margin-right: 1.9rem;
       background-color: ${color};
       border: none;
-    }
-  `}
-`
-
-export const SubTitle = styled.h2`
-  ${({ theme }) => css`
-    margin-top: 1.6rem;
-
-    font-weight: ${theme.font.weight.black};
-    font-size: ${theme.font.sizes.font48};
-    line-height: 5.3rem;
-    text-align: center;
-
-    @media (max-width: 576px) {
-      font-weight: ${theme.font.weight.bold};
-      font-size: ${theme.font.sizes.font24};
-      line-height: ${theme.font.sizes.font32};
-    }
-  `}
-`
-
-export const Description = styled.p`
-  ${({ theme }) => css`
-    max-width: 57.9rem;
-
-    margin-top: 2.4rem;
-    margin-bottom: 2.4rem;
-
-    color: ${theme.colors.white};
-    font-size: ${theme.font.sizes.font16};
-    line-height: ${theme.font.sizes.font24};
-
-    @media (max-width: 992px) {
-      font-weight: ${theme.font.weight.light};
-      font-size: ${theme.font.sizes.font14};
-      line-height: ${theme.font.sizes.font16};
     }
   `}
 `

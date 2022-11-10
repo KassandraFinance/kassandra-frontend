@@ -1,4 +1,6 @@
 import ScrollAnimation from '../ScrollAnimation'
+import Paragraph from '../Paragraph'
+import Subtitle from '../Subtitle'
 
 import * as S from './styles'
 
@@ -37,9 +39,8 @@ const Hero = ({
           <span>{title}</span>
         </S.Title>
 
-        <S.SubTitle>{subTitle}</S.SubTitle>
-
-        <S.Description>{description}</S.Description>
+        <Subtitle text={subTitle} as="h2" />
+        <Paragraph text={description} fontWeight={400} />
 
         {children}
       </S.TextContainer>
