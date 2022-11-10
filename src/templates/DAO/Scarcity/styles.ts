@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import theme from '../../../styles/theme'
 
 export const Wrapper = styled.section`
   margin-top: 10rem;
@@ -13,6 +12,14 @@ export const Wrapper = styled.section`
 
   p {
     margin-top: 2.4rem;
+    text-align: center;
+
+    @media (max-width: 576px) {
+      text-align: left;
+    }
+  }
+
+  h3 {
     text-align: center;
 
     @media (max-width: 576px) {
@@ -40,18 +47,5 @@ export const ImageWrapper = styled.div`
   @media (max-width: 550px) {
     margin-top: 1.8rem;
     max-width: 42.5rem;
-  }
-`
-
-export const ScarcityTitle = styled.h1`
-  color: #ffffff;
-  font-weight: ${theme.font.weight.bold};
-  font-size: ${theme.font.sizes.font32};
-  text-align: center;
-
-  @media (max-width: 576px) {
-    text-align: left;
-    font-size: ${theme.font.sizes.font24};
-    line-height: 3.2rem;
   }
 `

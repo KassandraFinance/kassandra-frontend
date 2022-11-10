@@ -44,13 +44,9 @@ export const Header = styled.header`
   }
 
   h3 {
-    color: #ffffff;
-    font-size: ${theme.font.sizes.font32};
-    font-weight: ${theme.font.weight.bold};
     text-align: center;
 
     @media (max-width: 560px) {
-      font-size: ${theme.font.sizes.font24};
       text-align: left;
     }
   }
