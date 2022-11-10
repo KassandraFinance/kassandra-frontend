@@ -31,4 +31,11 @@ export const Investors = styled.main`
       url('/assets/images/bg-investors-360.png') 1x
     );
   }
+
+  .start-investing {
+    width: 19.4rem;
+    height: 4.8rem;
+
+    border-radius: 0.4rem;
+  }
 `

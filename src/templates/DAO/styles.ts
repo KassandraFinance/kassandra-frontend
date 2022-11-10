@@ -22,6 +22,16 @@ export const Wrapper = styled.div`
     background-size: cover;
     background-position: left top;
   }
+
+  .button {
+    flex-direction: row-reverse;
+    gap: 0.8rem;
+  }
+`
+
+export const HeroWrapper = styled.div`
+  display: flex;
+  justify-content: center;
 `
 
 export const Button = styled.a`
