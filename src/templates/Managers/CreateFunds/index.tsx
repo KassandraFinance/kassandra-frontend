@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Button from '../../../components/Button'
 import FadeIn from '../../../components/Animations/FadeIn'
 import Paragraph from '../../../components/Paragraph'
+import SectionSubtitle from '../../../components/SectionSubtitle'
 
 import arrowWhite from '../../../../public/assets/utilities/arrow-white.svg'
 
@@ -164,7 +165,7 @@ const CreateFund = () => {
               </S.NumberButton>
             </S.NumberButtonsContainer>
             <span>HOW IT WORKS</span>
-            <h2>{createManagerFunds.title}</h2>
+            <SectionSubtitle text={createManagerFunds.title} />
             <Paragraph text={createManagerFunds.paragraph} />
             <S.ButtonsContainer>
               <Link

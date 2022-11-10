@@ -2,6 +2,7 @@ import Image from 'next/image'
 
 import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
 import Paragraph from '../../../components/Paragraph'
+import SectionSubtitle from '../../../components/SectionSubtitle'
 
 import allocationsInexpensive from '../../../../public/assets/images/allocations-inexpensive.svg'
 
@@ -12,10 +13,10 @@ const AllocationsInexpensive = () => (
     <S.AllocationsInexpensiveContainer>
       <S.DescriptionContainer>
         <span>INEXPENSIVE</span>
-        <h1>
-          Your target allocations are always followed, and you don’t have to pay
-          for it
-        </h1>
+        <SectionSubtitle
+          text="Your target allocations are always followed, and you don’t have to pay
+          for it"
+        />
         <Paragraph
           text="Token weights are kept balanced by arbitraging traders. This means you
           avoid front-running while earning swap fees instead of paying

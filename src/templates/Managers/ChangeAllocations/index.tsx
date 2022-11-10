@@ -3,6 +3,7 @@ import Image from 'next/image'
 
 import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
 import Paragraph from '../../../components/Paragraph'
+import SectionSubtitle from '../../../components/SectionSubtitle'
 
 import Grid from '../../../../public/assets/images/grid.svg'
 
@@ -146,7 +147,7 @@ const ChangeAllocations = () => {
         <FadeInHorizontal threshold={0.5}>
         <S.DescriptionContainer>
           <span>PRACTICAL</span>
-          <h1>Set new pool allocations with one single transaction</h1>
+          <SectionSubtitle text="Set new pool allocations with one single transaction" />
 
           <Paragraph
             text="With Kassandra, you change allocation percentages instead of making

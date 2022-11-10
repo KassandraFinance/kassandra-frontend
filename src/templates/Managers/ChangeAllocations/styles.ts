@@ -46,20 +46,14 @@ export const DescriptionContainer = styled.div`
     }
   }
 
-  > h1 {
+  > h3 {
     margin-top: 1.6rem;
-
-    color: #ffffff;
-    font-weight: ${theme.font.weight.bold};
-    font-size: ${theme.font.sizes.font32};
 
     @media (max-width: 1000px) {
       text-align: center;
     }
-
     @media (max-width: 500px) {
       text-align: left;
-      font-size: ${theme.font.sizes.font24};
     }
   }
 
