@@ -24,6 +24,10 @@ export const ManagersInterfaceContainer = styled.section`
 export const DescriptionContainer = styled.div`
   width: 44rem;
 
+  @media (min-width: 992px) {
+    margin-left: 10rem;
+  }
+
   @media (max-width: 1000px) {
     display: flex;
     flex-direction: column;

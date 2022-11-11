@@ -23,6 +23,9 @@ export const AllocationsInexpensiveContainer = styled.section`
 export const DescriptionContainer = styled.div`
   width: 44rem;
 
+  @media (min-width: 992px) {
+    margin-right: 10rem;
+  }
   animation: fadeInAllocations ease 3s both;
   -webkit-animation: fadeInAllocations ease 3s both;
   -moz-animation: fadeInAllocations ease 3s both;
