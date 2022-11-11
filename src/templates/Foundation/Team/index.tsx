@@ -71,15 +71,6 @@ const Team = () => {
           }}
         />
         <TeamCard
-          name="Edmar Alencar"
-          role="FRONTEND DEVELOPER"
-          image="assets/team/edmar.png"
-          social={{
-            github: 'https://github.com/edmaaralencar',
-            linkedin: 'https://www.linkedin.com/in/edmar-alencar-72a9a1207/'
-          }}
-        />
-        <TeamCard
           name="Tiago Caitano"
           role="FRONTEND DEVELOPER"
           image="assets/team/tiago.png"
@@ -107,39 +98,11 @@ const Team = () => {
           }}
         />
         <TeamCard
-          name="Pedro Jung"
-          role="QUANTITATIVE ANALYST"
-          image="assets/team/jung.png"
-          social={{
-            linkedin: 'https://www.linkedin.com/in/pedro-jung-tavares-b53021a4/'
-          }}
-        />
-        <TeamCard
-          name="Felipe Gabriel"
-          role="QUANTITATIVE ANALYST"
-          image="assets/team/felipe.png"
-          social={{
-            github: 'https://github.com/FG-SC',
-            linkedin: 'https://www.linkedin.com/in/felipe-gabriel0/'
-          }}
-        />
-        <TeamCard
           name="Ricardo Werneck"
           role="COMMUNITY MANAGER"
           image="assets/team/ricardo.png"
           social={{
             linkedin: 'https://www.linkedin.com/in/ricardo-werneck-a94b0a15b/'
-          }}
-          isLastCard
-        />
-
-        <TeamCard
-          name="Jorge Filho"
-          role="BUSINESS DEVELOPMENT"
-          image="assets/team/jorge.png"
-          social={{
-            linkedin: 'https://www.linkedin.com/in/jorge-filho-35020018b/',
-            twitter: 'https://twitter.com/AkademiaHash'
           }}
           isLastCard
         />
