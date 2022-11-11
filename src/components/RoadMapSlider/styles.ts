@@ -131,17 +131,7 @@ export const Icon = styled.div`
     max-width: 100%;
   }
 `
-export const Title = styled.h1`
-  font-size: ${theme.font.sizes.font32};
-  font-weight: ${theme.font.weight.bold};
-  line-height: 110%;
-  @media (max-width: 920px) {
-    font-size: ${theme.font.sizes.font32};
-  }
-  @media (max-width: 570px) {
-    font-size: ${theme.font.sizes.font24};
-  }
-`
+
 export const Divider = styled.div`
   max-width: 10rem;
   height: 0.1rem;

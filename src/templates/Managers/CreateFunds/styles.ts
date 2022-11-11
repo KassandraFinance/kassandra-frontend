@@ -91,18 +91,13 @@ export const DescriptionContainer = styled.div<INumberButtonProps>`
     }
   }
 
-  > h2 {
+  > h3 {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     height: 7.5rem;
     width: 42rem;
     margin-top: 1.6rem;
-
-    color: #ffffff;
-    font-weight: ${theme.font.weight.bold};
-    font-size: ${theme.font.sizes.font32};
-
 
     animation: ${props =>
       props.isActiveButton
@@ -112,12 +107,10 @@ export const DescriptionContainer = styled.div<INumberButtonProps>`
 
     @media (max-width: 1050px) {
       justify-content: center;
-      /* width: 100%; */
       text-align: center;
     }
 
     @media (max-width: 500px) {
-      font-size: ${theme.font.sizes.font24};
       align-items: flex-start;
       justify-content: flex-start;
       height: 6rem;
@@ -127,17 +120,12 @@ export const DescriptionContainer = styled.div<INumberButtonProps>`
   }
 
   > p {
-    /* height: 6rem; */
     width: 42rem;
     height: 8rem;
     margin-top: 1.2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    color: #ffffff;
-    font-weight: ${theme.font.weight.light};
-    font-size: ${theme.font.sizes.font16};
 
     animation: ${props =>
       props.isActiveButton
@@ -153,8 +141,6 @@ export const DescriptionContainer = styled.div<INumberButtonProps>`
       width: 100%;
       margin-top: 0;
 
-      font-size: ${theme.font.sizes.font14};
-      line-height: 2.4rem;
       text-align: left;
     }
   }

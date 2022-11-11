@@ -21,27 +21,18 @@ export const Header = styled.header`
   max-width: 51.2rem;
   margin: 0 auto;
 
-  h2 {
-    color: #ffffff;
-    font-weight: ${theme.font.weight.bold};
-    font-size: ${theme.font.sizes.font32};
+  h3 {
     text-align: center;
 
     @media (max-width: 576px) {
       text-align: left;
-      font-size: ${theme.font.sizes.font24};
     }
   }
 
   p {
-    color: #ffffff;
-    font-weight: ${theme.font.weight.normal};
-    font-size: ${theme.font.sizes.font16};
-    line-height: 2.4rem;
     text-align: center;
 
     @media (max-width: 576px) {
-      font-size: ${theme.font.sizes.font14};
       text-align: left;
     }
   }

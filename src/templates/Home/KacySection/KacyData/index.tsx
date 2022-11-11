@@ -2,6 +2,7 @@ import React from 'react'
 import useSWR from 'swr'
 
 import Button from '../../../../components/Button'
+import SectionSubtitle from '../../../../components/SectionSubtitle'
 import KacyCardData from '../KacyCardData'
 
 import * as S from './styles'
@@ -77,7 +78,10 @@ const KacyData = ({ setIsOpenModal }: IKacyDataProps) => {
 
   return (
     <S.KacyDataContainer>
-      <S.Title>Be part of the cutting edge of tokenized index funds.</S.Title>
+      <SectionSubtitle
+        text="Be part of the cutting edge of tokenized index funds."
+        as="h5"
+      />
 
       <S.Text>
         Our governance token allows you to create portfolios, support your

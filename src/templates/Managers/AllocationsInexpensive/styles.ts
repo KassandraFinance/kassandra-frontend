@@ -23,6 +23,9 @@ export const AllocationsInexpensiveContainer = styled.section`
 export const DescriptionContainer = styled.div`
   width: 44rem;
 
+  @media (min-width: 992px) {
+    margin-right: 10rem;
+  }
   animation: fadeInAllocations ease 3s both;
   -webkit-animation: fadeInAllocations ease 3s both;
   -moz-animation: fadeInAllocations ease 3s both;
@@ -52,19 +55,13 @@ export const DescriptionContainer = styled.div`
     }
   }
 
-  > h1 {
+  > h3 {
     margin-top: 1.6rem;
-
-    color: #ffffff;
-    font-weight: ${theme.font.weight.bold};
-    font-size: ${theme.font.sizes.font32};
 
     @media (max-width: 1000px) {
       text-align: center;
     }
-
     @media (max-width: 500px) {
-      font-size: ${theme.font.sizes.font24};
       text-align: left;
     }
   }
@@ -72,17 +69,10 @@ export const DescriptionContainer = styled.div`
   > p {
     margin-top: 2.4rem;
 
-    color: #ffffff;
-    font-weight: ${theme.font.weight.light};
-    font-size: ${theme.font.sizes.font16};
-
     @media (max-width: 1000px) {
       text-align: center;
     }
-
     @media (max-width: 500px) {
-      font-size: ${theme.font.sizes.font14};
-      line-height: 2.4rem;
       text-align: left;
     }
   }

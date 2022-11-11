@@ -9,6 +9,7 @@ import ExternalLink from '../../../components/ExternalLink'
 import GitHubData from './GitHubData'
 import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
 import FadeIn from '../../../components/Animations/FadeIn'
+import Paragraph from '../../../components/Paragraph'
 
 import * as S from './styles'
 
@@ -135,10 +136,10 @@ const GitHubStats = () => {
               <span>GITHUB</span>
             </div>
             <h1>Welcome to the open-source world</h1>
-            <p>
-              Our team is always hard at work, updating our product daily in
-              order to stay at the cutting edge of DeFi.
-            </p>
+            <Paragraph
+              text="Our team is always hard at work, updating our product daily in
+              order to stay at the cutting edge of DeFi."
+            />
             <ExternalLink
               hrefLink="https://github.com/KassandraFinance"
               text="Check out our gitHub"
@@ -168,11 +169,11 @@ const GitHubStats = () => {
               <span>MEDIUM</span>
             </div>
             <h1>Behind-the-scenes updates</h1>
-            <p>
-              Know what has been going on behind the scenes, have early access
+            <Paragraph
+              text="Know what has been going on behind the scenes, have early access
               to sneak peeks and beta-test new features before everyone by
-              signing to our newsletter.
-            </p>
+              signing to our newsletter."
+            />
             <ExternalLink
               hrefLink="https://kassandrafoundation.medium.com/"
               text="Read more at our medium"

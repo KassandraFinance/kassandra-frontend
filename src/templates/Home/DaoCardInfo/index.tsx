@@ -1,6 +1,8 @@
 import React from 'react'
 import Image, { StaticImageData } from 'next/image'
 
+import Paragraph from '../../../components/Paragraph'
+
 import * as S from './styles'
 
 interface IDaoCardInfoProps {
@@ -32,7 +34,7 @@ const DaoCardInfo = ({
         </S.TitleWrapper>
       </S.TitleContainer>
 
-      <S.Text>{text}</S.Text>
+      <Paragraph text={text} />
     </S.DaoCardWrapper>
   )
 }

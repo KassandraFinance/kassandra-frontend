@@ -12,6 +12,8 @@ import Button from '../../../components/Button'
 import { BarChart, XAxis, YAxis, Bar } from 'recharts'
 import ExternalLink from '../../../components/ExternalLink'
 import TokenIcons from '../TokenIcons'
+import Paragraph from '../../../components/Paragraph'
+import SectionSubtitle from '../../../components/SectionSubtitle'
 
 import arrowRight from '../../../../public/assets/icons/arrow-yellow-right.svg'
 import arrowAscend from '../../../../public/assets/notificationStatus/arrow-ascend.svg'
@@ -283,12 +285,15 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
       </S.Card>
       <S.Info>
         <h4>{pool.symbol !== 'aHYPE' ? 'New Product' : ''}</h4>
-        <h2>
-          {pool.symbol !== 'aHYPE'
-            ? 'The safest assets yield farming for you'
-            : 'Automagically invest in strong communities'}
-        </h2>
-        <p>{pool.fundSummary}</p>
+        <SectionSubtitle
+          text={
+            pool.symbol !== 'aHYPE'
+              ? 'The safest assets yield farming for you'
+              : 'Automagically invest in strong communities'
+          }
+          as="h2"
+        />
+        <Paragraph text={pool.fundSummary ? pool.fundSummary : ''} />
         <S.InfoList>
           <li>
             <div className="image">

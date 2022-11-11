@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import theme from '../../../styles/theme'
 
 export const Wrapper = styled.section`
   margin-top: 10rem;
@@ -9,6 +8,23 @@ export const Wrapper = styled.section`
   @media (max-width: 576px) {
     padding-left: 1.6rem;
     padding-right: 1.6rem;
+  }
+
+  p {
+    margin-top: 2.4rem;
+    text-align: center;
+
+    @media (max-width: 576px) {
+      text-align: left;
+    }
+  }
+
+  h3 {
+    text-align: center;
+
+    @media (max-width: 576px) {
+      text-align: left;
+    }
   }
 `
 
@@ -31,34 +47,5 @@ export const ImageWrapper = styled.div`
   @media (max-width: 550px) {
     margin-top: 1.8rem;
     max-width: 42.5rem;
-  }
-`
-
-export const ScarcityTitle = styled.h1`
-  color: #ffffff;
-  font-weight: ${theme.font.weight.bold};
-  font-size: ${theme.font.sizes.font32};
-  text-align: center;
-
-  @media (max-width: 576px) {
-    text-align: left;
-    font-size: ${theme.font.sizes.font24};
-    line-height: 3.2rem;
-  }
-`
-
-export const ScarcityDescription = styled.p`
-  margin-top: 2.4rem;
-
-  color: #ffffff;
-  font-weight: ${theme.font.weight.normal};
-  font-size: ${theme.font.sizes.font16};
-  line-height: 2.4rem;
-  text-align: center;
-
-  @media (max-width: 576px) {
-    font-size: ${theme.font.sizes.font14};
-    font-weight: ${theme.font.weight.light};
-    text-align: left;
   }
 `

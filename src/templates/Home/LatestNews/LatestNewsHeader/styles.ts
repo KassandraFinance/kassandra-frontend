@@ -21,20 +21,10 @@ export const LatestNewsHeadingWrapper = styled.div`
   gap: 2.4rem;
 
   width: 100%;
-`
 
-export const LatestNewsHeading = styled.h5`
-  margin-top: 0.5rem;
-
-  color: ${theme.colors.white};
-  font-weight: ${theme.font.weight.bold};
-  font-size: ${theme.font.sizes.font32};
-  line-height: 3.5rem;
-  text-align: center;
-
-  @media (max-width: 576px) {
-    font-size: ${theme.font.sizes.font20};
-    line-height: ${theme.font.sizes.font20};
+  h5 {
+    margin-top: 0.5rem;
+    text-align: center;
   }
 `
 

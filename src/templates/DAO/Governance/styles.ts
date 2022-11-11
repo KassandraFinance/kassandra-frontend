@@ -81,39 +81,26 @@ export const Text = styled.div`
     padding-right: 2rem;
   }
 
-  h2 {
+  h3 {
     margin-top: 1.6rem;
-
-    color: #ffffff;
-    font-size: ${theme.font.sizes.font32};
-    font-weight: ${theme.font.weight.bold};
     text-align: left;
 
     @media (max-width: 1050px) {
       text-align: center;
     }
-
     @media (max-width: 576px) {
       text-align: left;
-      font-size: ${theme.font.sizes.font24};
     }
   }
 
   p {
     margin-top: 2.4rem;
-
-    color: #ffffff;
-    font-weight: ${theme.font.weight.light};
-    font-size: ${theme.font.sizes.font16};
-    line-height: 2.4rem;
     text-align: left;
 
     @media (max-width: 1050px) {
       text-align: center;
     }
     @media (max-width: 576px) {
-      font-size: ${theme.font.sizes.font14};
-      font-weight: ${theme.font.weight.light};
       text-align: left;
     }
   }

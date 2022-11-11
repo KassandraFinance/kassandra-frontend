@@ -2,6 +2,8 @@ import Image from 'next/image'
 
 import Button from '../../../components/Button'
 import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
+import Paragraph from '../../../components/Paragraph'
+import SectionSubtitle from '../../../components/SectionSubtitle'
 
 import * as S from './styles'
 
@@ -11,15 +13,15 @@ const Governance = () => {
       <FadeInHorizontal threshold={0.5}>
         <S.Text>
           <S.SeasonTitle>GOVERNANCE</S.SeasonTitle>
-          <h2>
-            Gather your friends and use voting power to take matters into your
-            hands.
-          </h2>
-          <p>
-            Don’t like something? Change it. Direct where Kassandra Foundation
+          <SectionSubtitle
+            text="Gather your friends and use voting power to take matters into your
+            hands."
+          />
+          <Paragraph
+            text="Don’t like something? Change it. Direct where Kassandra Foundation
             will allocate funds, such as development and innovation. Change
-            curated funds. Nothing is absolute; the community has the final say.
-          </p>
+            curated funds. Nothing is absolute; the community has the final say."
+          />
           <span id="buttonContainer">
             <Button
               as="a"

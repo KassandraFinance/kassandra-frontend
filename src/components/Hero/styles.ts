@@ -64,77 +64,18 @@ export const TextContainer = styled.div`
     animation-duration: 2.5s;
     animation-fill-mode: forwards;
     animation-timing-function: ease-out;
-  `}
-`
 
-interface ITitleProps {
-  color: string;
-}
+    > p {
+      max-width: 57.9rem;
 
-// prettier-ignore
-export const Title = styled.h1<ITitleProps>`
-  ${({ theme, color }) => css`
-    display: flex;
-    align-items: center;
-
-    span {
-      color: ${color};
-      font-weight: ${theme.font.weight.normal};
-      font-size: ${theme.font.sizes.font16};
-      line-height: ${theme.font.sizes.font24};
-      letter-spacing: 0.4em;
-
-      @media (max-width: 992px) {
-        font-weight: ${theme.font.weight.light};
-        font-size: ${theme.font.sizes.font14};
-        line-height: ${theme.font.sizes.font16};
-      }
+      margin-top: 2.4rem;
+      margin-bottom: 2.4rem;
     }
 
-    hr {
-      width: 6.4rem;
-      height: 0.1rem;
+    h2 {
+      margin-top: 1.6rem;
 
-      margin-left: 1.6rem;
-      margin-right: 1.9rem;
-      background-color: ${color};
-      border: none;
-    }
-  `}
-`
-
-export const SubTitle = styled.h2`
-  ${({ theme }) => css`
-    margin-top: 1.6rem;
-
-    font-weight: ${theme.font.weight.black};
-    font-size: ${theme.font.sizes.font48};
-    line-height: 5.3rem;
-    text-align: center;
-
-    @media (max-width: 576px) {
-      font-weight: ${theme.font.weight.bold};
-      font-size: ${theme.font.sizes.font24};
-      line-height: ${theme.font.sizes.font32};
-    }
-  `}
-`
-
-export const Description = styled.p`
-  ${({ theme }) => css`
-    max-width: 57.9rem;
-
-    margin-top: 2.4rem;
-    margin-bottom: 2.4rem;
-
-    color: ${theme.colors.white};
-    font-size: ${theme.font.sizes.font16};
-    line-height: ${theme.font.sizes.font24};
-
-    @media (max-width: 992px) {
-      font-weight: ${theme.font.weight.light};
-      font-size: ${theme.font.sizes.font14};
-      line-height: ${theme.font.sizes.font16};
+      text-align: center;
     }
   `}
 `

@@ -24,28 +24,23 @@ export const TextContainer = styled.div`
 
     margin-bottom: 8.8rem;
   }
-`
 
-export const Text = styled.p`
-  width: 45rem;
-  margin-bottom: 4.3rem;
+  > p {
+    width: 45rem;
+    margin-bottom: 4.3rem;
 
-  color: ${theme.colors.white};
-  font-weight: ${theme.font.weight.light};
-  font-size: ${theme.font.sizes.font16};
-  line-height: ${theme.font.sizes.font24};
+    @media (max-width: 992px) {
+      width: clamp(52.2rem, 90%, 59.6rem);
+      margin-bottom: 0;
+    }
 
-  @media (max-width: 992px) {
-    width: clamp(52.2rem, 90%, 59.6rem);
-    margin-bottom: 0;
-  }
+    @media (max-width: 576px) {
+      width: 100%;
+      padding-inline: 2.4rem;
 
-  @media (max-width: 576px) {
-    width: 100%;
-    padding-inline: 2.4rem;
-
-    font-size: ${theme.font.sizes.font14};
-    letter-spacing: 0.05em;
+      font-size: ${theme.font.sizes.font14};
+      letter-spacing: 0.05em;
+    }
   }
 `
 
@@ -143,16 +138,4 @@ export const CardTitle = styled.h4`
   line-height: 100%;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-`
-
-export const CardText = styled.p`
-  color: ${theme.colors.white};
-  font-weight: ${theme.font.weight.light};
-  font-size: ${theme.font.sizes.font16};
-  line-height: ${theme.font.sizes.font24};
-
-  @media (max-width: 576px) {
-    font-size: ${theme.font.sizes.font14};
-    letter-spacing: 0.05em;
-  }
 `

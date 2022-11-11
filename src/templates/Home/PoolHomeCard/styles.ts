@@ -329,17 +329,11 @@ export const Info = styled.div`
 
   h2 {
     margin-bottom: 2.4rem;
-
-    color: #ffffff;
-    font-weight: ${theme.font.weight.bold};
-    font-size: ${theme.font.sizes.font32};
-    line-height: 3.5rem;
     text-align: left;
 
     @media (max-width: 960px) {
       text-align: center;
     }
-
     @media (max-width: 576px) {
       text-align: left;
     }
@@ -366,10 +360,6 @@ export const Info = styled.div`
   }
 
   p {
-    color: #ffffff;
-    font-weight: ${theme.font.weight.light};
-    font-size: ${theme.font.sizes.font16};
-    line-height: 2.4rem;
     text-align: left;
 
     @media (max-width: 960px) {

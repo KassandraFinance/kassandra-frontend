@@ -2,6 +2,7 @@ import React from 'react'
 
 import Slider, { SliderSettings } from '../../components/Slider'
 import RoadMapCard from './RoadMapCard'
+import SectionSubtitle from '../SectionSubtitle'
 
 import { icons, colors, SlickArrowLeft, SlickArrowRight } from './assets'
 
@@ -58,7 +59,7 @@ const RoadMapSlider = () => {
   return (
     <S.Wrapper>
       <S.TitleAndIcon>
-        <S.Title>Project Roadmap</S.Title>
+        <SectionSubtitle text="Project Roadmap" />
       </S.TitleAndIcon>
       <S.Divider />
       <Slider settings={settings}>

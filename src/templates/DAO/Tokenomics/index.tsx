@@ -4,6 +4,7 @@ import useSWR from 'swr'
 
 import FadeIn from '../../../components/Animations/FadeIn'
 import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
+import Paragraph from '../../../components/Paragraph'
 
 import * as S from './styles'
 
@@ -78,12 +79,12 @@ const Tokenomics = () => {
       <FadeIn threshold={0.5}>
         <S.Title>
           <h2>Tokenomics</h2>
-          <p>
-            With a total supply of 10.000.000 that is only avaiable through the
+          <Paragraph
+            text="With a total supply of 10.000.000 that is only avaiable through the
             staking, locking and farming of KACY, we have crafted a sustainable
             approach to inflation while keeping rewards for our early
-            contributors high.
-          </p>
+            contributors high."
+          />
         </S.Title>
       </FadeIn>
 
@@ -114,12 +115,13 @@ const Tokenomics = () => {
             <S.Info>
               <span>Distribution</span>
               <h3>Fair and community driven token distribuition</h3>
-              <p>
-                To create a fully decentralized organization with a
+
+              <Paragraph
+                text="To create a fully decentralized organization with a
                 well-distributed token, we chose to have a big part of the total
                 supply (50%) slowly available through rewards to people that
-                engage and help Kassandra in the early stages.
-              </p>
+                engage and help Kassandra in the early stages."
+              />
             </S.Info>
             <S.PieChartImageWrapper>
               <Image
@@ -141,11 +143,12 @@ const Tokenomics = () => {
             <S.Info>
               <span>Release schedule</span>
               <h3>Slow inflation</h3>
-              <p>
-                Through the vesting of private sales, seed sales, team tokens
+
+              <Paragraph
+                text="Through the vesting of private sales, seed sales, team tokens
                 and foundation reserves, we have created a slowly-inflating
-                token that rewards early hodlers without punishing new ones.
-              </p>
+                token that rewards early hodlers without punishing new ones."
+              />
             </S.Info>
           </S.Row3>
         </FadeInHorizontal>

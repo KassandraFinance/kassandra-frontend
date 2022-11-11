@@ -3,6 +3,8 @@ import Image from 'next/image'
 import FadeIn from '../../../components/Animations/FadeIn'
 import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
 import FadeInVertical from '../../../components/Animations/FadeInVertical'
+import Paragraph from '../../../components/Paragraph'
+import SectionSubtitle from '../../../components/SectionSubtitle'
 
 import schemaManager from '../../../../public/assets/images/schema-managers.png'
 
@@ -13,11 +15,12 @@ const Advantages = () => {
     <>
       <FadeIn threshold={0.5}>
         <S.Managers>
-          <h1>Connecting investors and managers in a seamless fashion</h1>
-          <span>
-            Managers are compensated for each investor in their funds while
-            users safely surf the waves of the market
-          </span>
+          <SectionSubtitle text="Connecting investors and managers in a seamless fashion" />
+
+          <Paragraph
+            text="Managers are compensated for each investor in their funds while
+            users safely surf the waves of the market"
+          />
         </S.Managers>
       </FadeIn>
 
@@ -55,14 +58,14 @@ const Advantages = () => {
             <S.DescriptionSafety>
               <S.DescriptionSafetyContent>
                 <S.Span>FUND SAFETY</S.Span>
-                <h1>
-                  Managers can only trade tokens whitelisted by our governance
-                  protocol.
-                </h1>
-                <span>
-                  Users can utilize our forum to debate and vote on which tokens
-                  should or shouldn’t be invested/traded inside KassandraDAO.
-                </span>
+                <SectionSubtitle
+                  text="Managers can only trade tokens whitelisted by our governance
+                  protocol."
+                />
+                <Paragraph
+                  text="Users can utilize our forum to debate and vote on which tokens
+                  should or shouldn’t be invested/traded inside KassandraDAO."
+                />
               </S.DescriptionSafetyContent>
             </S.DescriptionSafety>
 
@@ -81,14 +84,12 @@ const Advantages = () => {
             <S.DescriptionRebalance>
               <S.DescriptionRebalanceContent>
                 <S.Span>SMOOTH TRANSACTIONS</S.Span>
-                <h1>
-                  Avoid big losses that come with abrupt allocation changes
-                </h1>
-                <span>
-                  Allocations can only change so much in a calculated period.
+                <SectionSubtitle text="Avoid big losses that come with abrupt allocation changes" />
+                <Paragraph
+                  text="Allocations can only change so much in a calculated period.
                   Token exchanges are carried out gradually, avoiding large
-                  losses of funds while rebalancing strategies.
-                </span>
+                  losses of funds while rebalancing strategies."
+                />
               </S.DescriptionRebalanceContent>
             </S.DescriptionRebalance>
           </S.Rebalance>
@@ -99,12 +100,12 @@ const Advantages = () => {
             <S.DescriptionAutonomy>
               <S.DescriptionAutonomyContent>
                 <S.Span>HIGH AUTONOMY</S.Span>
-                <h1>Move your funds in and out, whenever you want</h1>
-                <span>
-                  Your funds will never be held hostage. Have complete freedom
+                <SectionSubtitle text="Move your funds in and out, whenever you want" />
+                <Paragraph
+                  text="Your funds will never be held hostage. Have complete freedom
                   to remanage your investments around at a moments notice and no
-                  lock periods inside funds.
-                </span>
+                  lock periods inside funds."
+                />
               </S.DescriptionAutonomyContent>
             </S.DescriptionAutonomy>
 
@@ -118,12 +119,12 @@ const Advantages = () => {
       <S.BenefitsContainer>
         <FadeInVertical threshold={0.5}>
           <S.BeneficitsTitleWrapper>
-            <h1>No compromise, have everything you want</h1>
+            <SectionSubtitle text="No compromise, have everything you want" />
 
-            <span>
-              All features you need to invest in successful funds, diversify
-              your holdings, and follow relevant managers are here.
-            </span>
+            <Paragraph
+              text="All features you need to invest in successful funds, diversify
+              your holdings, and follow relevant managers are here."
+            />
           </S.BeneficitsTitleWrapper>
         </FadeInVertical>
 
