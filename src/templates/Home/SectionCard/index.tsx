@@ -8,6 +8,7 @@ import Paragraph from '../../../components/Paragraph'
 import Subtitle from '../../../components/Subtitle'
 
 import * as S from './styles'
+import SectionTitle from '../../../components/SectionTitle'
 
 interface ISectionCardProps {
   number: string;
@@ -34,12 +35,14 @@ const SectionCard = ({
     <S.Container>
       <FadeInHorizontal threshold={0.5}>
         <S.TextContainer>
-          <S.Title color={color}>
-            {number}
-            <S.Line color={color} /> {title}
-          </S.Title>
+          <SectionTitle
+            title={title}
+            titleColor={color}
+            titleNumber={number}
+            as="h2"
+          />
 
-          <Subtitle text={subtitle} />
+          <Subtitle text={subtitle} as="h3" />
           <Paragraph text={text} />
 
           <Link href={link} passHref>

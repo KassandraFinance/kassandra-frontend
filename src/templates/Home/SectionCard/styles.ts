@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import theme from '../../../styles/theme'
 
 export const Container = styled.article`
   display: flex;
@@ -23,6 +22,10 @@ export const Container = styled.article`
 
 export const TextContainer = styled.div`
   > h2 {
+    margin-bottom: 1.6rem;
+  }
+
+  > h3 {
     width: 55rem;
     margin-bottom: 2.4rem;
 
@@ -66,35 +69,6 @@ export const TextContainer = styled.div`
   @media (max-width: 576px) {
     align-items: flex-start;
   }
-`
-
-interface ITitleProps {
-  color: string;
-}
-
-export const Title = styled.h3`
-  ${({ color }: ITitleProps) => css`
-    display: flex;
-    align-items: center;
-
-    margin-bottom: 1.6rem;
-
-    color: ${color};
-    font-weight: ${theme.font.weight.light};
-    font-size: ${theme.font.sizes.font16};
-    line-height: ${theme.font.sizes.font20};
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-
-    @media (max-width: 992px) {
-      justify-content: center;
-    }
-
-    @media (max-width: 576px) {
-      font-size: ${theme.font.sizes.font14};
-      line-height: ${theme.font.sizes.font16};
-    }
-  `}
 `
 
 interface ILineProps {
