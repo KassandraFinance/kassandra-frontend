@@ -3,10 +3,13 @@ import HeroText from './HeroText'
 import Button from '../../../components/Button'
 import DaoData from './DaoData'
 import ScrollAnimation from '../../../components/ScrollAnimation'
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
 import * as S from './styles'
 
 const HeroHome = () => {
+  const { trackEventFunction } = useMatomoEcommerce()
+
   return (
     <S.Hero>
       <HeroBackGround />
@@ -48,6 +51,9 @@ const HeroHome = () => {
         size="huge"
         backgroundPrimary
         href="https://app.kassandra.finance/explore"
+        onClick={() =>
+          trackEventFunction('click-on-button', 'lauch-app', 'section-home')
+        }
       />
 
       <DaoData />

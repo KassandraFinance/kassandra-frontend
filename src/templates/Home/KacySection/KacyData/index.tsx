@@ -1,6 +1,8 @@
 import React from 'react'
 import useSWR from 'swr'
 
+import useMatomoEcommerce from '../../../../hooks/useMatomoEcommerce'
+
 import Button from '../../../../components/Button'
 import SectionSubtitle from '../../../../components/SectionSubtitle'
 import KacyCardData from '../KacyCardData'
@@ -38,6 +40,7 @@ const KacyData = ({ setIsOpenModal }: IKacyDataProps) => {
     }
   ])
 
+  const { trackEventFunction } = useMatomoEcommerce()
   const { data } = useSWR('/api/overview')
 
   React.useEffect(() => {
@@ -108,6 +111,7 @@ const KacyData = ({ setIsOpenModal }: IKacyDataProps) => {
           backgroundPrimary
           onClick={() => {
             setIsOpenModal(true)
+            trackEventFunction('click-on-button', 'buy-kacy', 'section-home')
           }}
         />
 
@@ -134,6 +138,13 @@ const KacyData = ({ setIsOpenModal }: IKacyDataProps) => {
               </svg>
             }
             backgroundBlack
+            onClick={() =>
+              trackEventFunction(
+                'click-on-link',
+                'join-our-discord',
+                'section-home'
+              )
+            }
           />
         </a>
       </S.BtnWrapper>

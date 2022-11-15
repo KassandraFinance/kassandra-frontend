@@ -2,13 +2,15 @@ import React from 'react'
 import Image, { StaticImageData } from 'next/image'
 import Link from 'next/link'
 
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+
 import Button from '../../../components/Button'
 import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
 import Paragraph from '../../../components/Paragraph'
+import SectionTitle from '../../../components/SectionTitle'
 import Subtitle from '../../../components/Subtitle'
 
 import * as S from './styles'
-import SectionTitle from '../../../components/SectionTitle'
 
 interface ISectionCardProps {
   number: string;
@@ -31,6 +33,8 @@ const SectionCard = ({
   link,
   img
 }: ISectionCardProps) => {
+  const { trackEventFunction } = useMatomoEcommerce()
+
   return (
     <S.Container>
       <FadeInHorizontal threshold={0.5}>
@@ -80,6 +84,13 @@ const SectionCard = ({
                   </svg>
                 }
                 backgroundSecondary
+                onClick={() =>
+                  trackEventFunction(
+                    'click-on-button',
+                    `${btnText}`,
+                    'section-home'
+                  )
+                }
               />
             </a>
           </Link>
