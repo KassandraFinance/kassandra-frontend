@@ -1,6 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
 
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+
 import ExternalLink from '../../../components/ExternalLink'
 import FadeInVertical from '../../../components/Animations/FadeInVertical'
 import SectionSubtitle from '../../../components/SectionSubtitle'
@@ -11,6 +13,8 @@ import ArrowUp from '../../../../public/assets/iconGradient/arrow-up.svg'
 import * as S from './styles'
 
 const Institutional = () => {
+  const { trackEventFunction } = useMatomoEcommerce()
+
   return (
     <S.InstitutionalContainer>
       <FadeInVertical threshold={0.5}>
@@ -50,6 +54,13 @@ const Institutional = () => {
               <ExternalLink
                 text="Learn more"
                 hrefLink="https://medium.com/@kassandrafoundation/kassandra-protocol-d9cb71c02b02"
+                onClick={() =>
+                  trackEventFunction(
+                    'click-on-link',
+                    'protocol-learn-more',
+                    `section-foundation`
+                  )
+                }
               />
             </S.InstitutionalCard>
 
@@ -76,6 +87,13 @@ const Institutional = () => {
                 <ExternalLink
                   text="Learn more"
                   hrefLink="https://medium.com/@kassandrafoundation/kassandra-dao-token-8bc046d55a00"
+                  onClick={() =>
+                    trackEventFunction(
+                      'click-on-link',
+                      'dao-learn-more',
+                      `section-foundation`
+                    )
+                  }
                 />
               </S.InstitutionalCard>
             </S.InstitutionalCardContainer>
@@ -100,6 +118,13 @@ const Institutional = () => {
               <ExternalLink
                 text="Learn more"
                 hrefLink="https://medium.com/@kassandrafoundation/kassandra-foundation-team-4f46bf13c887"
+                onClick={() =>
+                  trackEventFunction(
+                    'click-on-link',
+                    'foundation-learn-more',
+                    `section-foundation`
+                  )
+                }
               />
             </S.InstitutionalCard>
           </S.InstitutionalCardList>

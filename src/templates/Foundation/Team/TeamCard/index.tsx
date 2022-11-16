@@ -1,5 +1,7 @@
 import React from 'react'
 
+import useMatomoEcommerce from '../../../../hooks/useMatomoEcommerce'
+
 import FadeIn from '../../../../components/Animations/FadeIn'
 
 import * as S from './styles'
@@ -22,39 +24,79 @@ const TeamCard = ({
   image,
   social,
   isLastCard = false
-}: ITeamCardProps) => (
-  <FadeIn threshold={0.5}>
-    <S.TeamCardContainer isLastCard={isLastCard}>
-      <S.Image>
-        <img src={image} alt="" />
-      </S.Image>
-      <S.Name>{name}</S.Name>
-      <S.Role>{role}</S.Role>
-      <S.CardDivider />
-      <S.Social>
-        {social.github ? (
-          <S.SocialIcon>
-            <a href={social.github} target="_blank" rel="noreferrer">
-              <img src="assets/socialMidia/github.svg" alt="GitHub" />
-            </a>
-          </S.SocialIcon>
-        ) : null}
-        {social.twitter ? (
-          <S.SocialIcon>
-            <a href={social.twitter} target="_blank" rel="noreferrer">
-              <img src="assets/socialMidia/twitter.svg" alt="Twitter" />
-            </a>
-          </S.SocialIcon>
-        ) : null}
-        {social.linkedin ? (
-          <S.SocialIcon>
-            <a href={social.linkedin} target="_blank" rel="noreferrer">
-              <img src="assets/socialMidia/linkedin-gray.svg" alt="LinkedIn" />
-            </a>
-          </S.SocialIcon>
-        ) : null}
-      </S.Social>
-    </S.TeamCardContainer>
-  </FadeIn>
-)
+}: ITeamCardProps) => {
+  const { trackEventFunction } = useMatomoEcommerce()
+
+  return (
+    <FadeIn threshold={0.5}>
+      <S.TeamCardContainer isLastCard={isLastCard}>
+        <S.Image>
+          <img src={image} alt="" />
+        </S.Image>
+        <S.Name>{name}</S.Name>
+        <S.Role>{role}</S.Role>
+        <S.CardDivider />
+        <S.Social>
+          {social.github ? (
+            <S.SocialIcon>
+              <a
+                href={social.github}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() =>
+                  trackEventFunction(
+                    'click-on-link',
+                    `social-github-${name}`,
+                    'section-foundation'
+                  )
+                }
+              >
+                <img src="assets/socialMidia/github.svg" alt="GitHub" />
+              </a>
+            </S.SocialIcon>
+          ) : null}
+          {social.twitter ? (
+            <S.SocialIcon>
+              <a
+                href={social.twitter}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() =>
+                  trackEventFunction(
+                    'click-on-link',
+                    `social-twitter-${name}`,
+                    'section-foundation'
+                  )
+                }
+              >
+                <img src="assets/socialMidia/twitter.svg" alt="Twitter" />
+              </a>
+            </S.SocialIcon>
+          ) : null}
+          {social.linkedin ? (
+            <S.SocialIcon>
+              <a
+                href={social.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() =>
+                  trackEventFunction(
+                    'click-on-link',
+                    `social-linkedin-${name}`,
+                    'section-foundation'
+                  )
+                }
+              >
+                <img
+                  src="assets/socialMidia/linkedin-gray.svg"
+                  alt="LinkedIn"
+                />
+              </a>
+            </S.SocialIcon>
+          ) : null}
+        </S.Social>
+      </S.TeamCardContainer>
+    </FadeIn>
+  )
+}
 export default TeamCard
