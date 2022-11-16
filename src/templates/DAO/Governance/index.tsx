@@ -1,5 +1,7 @@
 import Image from 'next/image'
 
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+
 import Button from '../../../components/Button'
 import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
 import Paragraph from '../../../components/Paragraph'
@@ -8,6 +10,8 @@ import SectionSubtitle from '../../../components/SectionSubtitle'
 import * as S from './styles'
 
 const Governance = () => {
+  const { trackEventFunction } = useMatomoEcommerce()
+
   return (
     <S.Wrapper>
       <FadeInHorizontal threshold={0.5}>
@@ -37,6 +41,13 @@ const Governance = () => {
               text="Explore Governance"
               size="huge"
               href="https://app.kassandra.finance/gov"
+              onClick={() =>
+                trackEventFunction(
+                  'click-on-button',
+                  'explore-governance',
+                  `section-dao`
+                )
+              }
             />
           </span>
         </S.Text>
