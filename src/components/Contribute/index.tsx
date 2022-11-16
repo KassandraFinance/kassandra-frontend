@@ -1,5 +1,7 @@
 import Image from 'next/image'
 
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
+
 import FadeInHorizontal from '../Animations/FadeInHorizontal'
 import Paragraph from '../Paragraph'
 import Subtitle from '../Subtitle'
@@ -14,6 +16,8 @@ interface IContributeProps {
 }
 
 const Contribute = ({ title, text }: IContributeProps) => {
+  const { trackEventFunction } = useMatomoEcommerce()
+
   return (
     <S.ContributeContainer>
       <S.ContributeBacground />
@@ -30,6 +34,13 @@ const Contribute = ({ title, text }: IContributeProps) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://t.me/KassandraDAO"
+                onClick={() =>
+                  trackEventFunction(
+                    'click-on-button',
+                    'join-our-telegram',
+                    'section-contribute'
+                  )
+                }
               >
                 <Image
                   src="/assets/icons/telegram.svg"
@@ -44,6 +55,13 @@ const Contribute = ({ title, text }: IContributeProps) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://discord.com/invite/fAqpbP6tFw"
+                onClick={() =>
+                  trackEventFunction(
+                    'click-on-button',
+                    'join-our-discord',
+                    'section-contribute'
+                  )
+                }
               >
                 <Image src="/assets/icons/discord.svg" width={18} height={13} />
                 <span>Join Our Discord</span>
