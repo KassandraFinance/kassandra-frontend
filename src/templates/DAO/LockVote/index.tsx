@@ -78,9 +78,9 @@ const LockVote = () => {
               href="https://app.kassandra.finance/farm?tab=stake"
               onClick={() =>
                 trackEventFunction(
-                  'click-on-button',
-                  'stake-kacy',
-                  `section-dao`
+                  'click-on-link',
+                  'stake-page',
+                  'section-dao'
                 )
               }
             />

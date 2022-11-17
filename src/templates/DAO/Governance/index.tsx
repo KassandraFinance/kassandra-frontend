@@ -43,7 +43,7 @@ const Governance = () => {
               href="https://app.kassandra.finance/gov"
               onClick={() =>
                 trackEventFunction(
-                  'click-on-button',
+                  'click-on-link',
                   'explore-governance',
                   `section-dao`
                 )
