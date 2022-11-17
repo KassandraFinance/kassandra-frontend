@@ -2,6 +2,8 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+
 import * as S from './styles'
 
 interface IModalBuyKacyProps {
@@ -10,6 +12,8 @@ interface IModalBuyKacyProps {
 }
 
 const ModalBuyKacy = ({ modalOpen, setModalOpen }: IModalBuyKacyProps) => {
+  const { trackEventFunction } = useMatomoEcommerce()
+
   function handleCloseModal() {
     setModalOpen(false)
   }
@@ -39,11 +43,16 @@ const ModalBuyKacy = ({ modalOpen, setModalOpen }: IModalBuyKacyProps) => {
           >
             <S.ButtonModalBuyKacy
               target="_blank"
-              onClick={() =>
+              onClick={() =>{
                 setTimeout(() => {
                   setModalOpen(false)
                 }, 1000)
-              }
+                trackEventFunction(
+                  'click-on-link',
+                  'trader-joe-exchange',
+                  'buy-kacy-modal'
+                )
+              }}
             >
               <span id="ImageContent">
                 <Image
@@ -62,11 +71,16 @@ const ModalBuyKacy = ({ modalOpen, setModalOpen }: IModalBuyKacyProps) => {
           >
             <S.ButtonModalBuyKacy
               target="_blank"
-              onClick={() =>
+              onClick={() =>{
                 setTimeout(() => {
                   setModalOpen(false)
                 }, 1000)
-              }
+                trackEventFunction(
+                  'click-on-link',
+                  'pangolin-exchange',
+                  'buy-kacy-modal'
+                )
+              }}
             >
               <span id="ImageContent">
                 <Image
