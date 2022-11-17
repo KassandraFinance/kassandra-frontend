@@ -43,7 +43,7 @@ const ModalBuyKacy = ({ modalOpen, setModalOpen }: IModalBuyKacyProps) => {
           >
             <S.ButtonModalBuyKacy
               target="_blank"
-              onClick={() =>{
+              onClick={() => {
                 setTimeout(() => {
                   setModalOpen(false)
                 }, 1000)
@@ -71,7 +71,7 @@ const ModalBuyKacy = ({ modalOpen, setModalOpen }: IModalBuyKacyProps) => {
           >
             <S.ButtonModalBuyKacy
               target="_blank"
-              onClick={() =>{
+              onClick={() => {
                 setTimeout(() => {
                   setModalOpen(false)
                 }, 1000)
