@@ -1,4 +1,7 @@
 import React from 'react'
+import Image from 'next/image'
+
+import useMatomoEcommerce from '../../../../hooks/useMatomoEcommerce'
 
 import discordIcon from '../../../../../public/assets/socialMidia/discord.svg'
 import telegramIcon from '../../../../../public/assets/socialMidia/telegram.svg'
@@ -8,7 +11,6 @@ import twitterIcon from '../../../../../public/assets/socialMidia/twitter.svg'
 import discourseIcon from '../../../../../public/assets/socialMidia/discourse.svg'
 
 import * as S from './styles'
-import Image from 'next/image'
 
 type LinkType = {
   name: string,
@@ -50,11 +52,22 @@ const links: LinkType[] = [
 ]
 
 const Social = () => {
+  const { trackEventFunction } = useMatomoEcommerce()
+
   return (
     <S.Social>
       {links.map(link => {
         return (
-          <S.Li key={link.name}>
+          <S.Li
+            key={link.name}
+            onClick={() =>
+              trackEventFunction(
+                'click-on-link',
+                `${link.name}`,
+                'hero-foundation'
+              )
+            }
+          >
             <S.Link href={link.link} target="_blank" rel="noopener noreferrer">
               <Image src={link.icon} />
             </S.Link>

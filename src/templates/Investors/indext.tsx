@@ -1,4 +1,6 @@
 // import FAQ from './FAQ'
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
+
 import Hero from '../../components/Hero'
 import Button from '../../components/Button'
 import Products from './Products'
@@ -9,6 +11,8 @@ import Contribute from '../../components/Contribute'
 import * as S from './styles'
 
 const Investors = () => {
+  const { trackEventFunction } = useMatomoEcommerce()
+
   return (
     <>
       <S.Investors>
@@ -33,6 +37,13 @@ const Investors = () => {
             }
             as="a"
             href="https://app.kassandra.finance/explore"
+            onClick={() =>
+              trackEventFunction(
+                'click-on-button',
+                'start-investing',
+                `section-investors`
+              )
+            }
           />
         </Hero>
         <Products />

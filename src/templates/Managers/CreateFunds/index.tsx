@@ -2,6 +2,8 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+
 import Button from '../../../components/Button'
 import FadeIn from '../../../components/Animations/FadeIn'
 import Paragraph from '../../../components/Paragraph'
@@ -70,6 +72,14 @@ const CreateFund = () => {
   const [clickButton, setclickButton] = React.useState<number>(1)
   const [isActiveImage, setIsActiveImage] = React.useState(true)
 
+  const { trackEventFunction } = useMatomoEcommerce()
+
+  function handleClickNumber(number: number) {
+    setclickButton(number)
+    handleChangeItens(number)
+    trackEventFunction('click-on-button', `slide-${number}`, 'section-managers')
+  }
+
   function handleChangeItens(buttonNumber: number) {
     if (buttonNumber === clickButton) return
     setIsActiveImage(false)
@@ -116,49 +126,37 @@ const CreateFund = () => {
           <S.DescriptionContainer isActiveButton={isActiveImage}>
             <S.NumberButtonsContainer>
               <S.NumberButton
-                onClick={() => {
-                  setclickButton(1), handleChangeItens(1)
-                }}
+                onClick={() => handleClickNumber(1)}
                 isActiveButton={clickButton === 1}
               >
                 1
               </S.NumberButton>
               <S.NumberButton
-                onClick={() => {
-                  setclickButton(2), handleChangeItens(2)
-                }}
+                onClick={() => handleClickNumber(2)}
                 isActiveButton={clickButton === 2}
               >
                 2
               </S.NumberButton>
               <S.NumberButton
-                onClick={() => {
-                  setclickButton(3), handleChangeItens(3)
-                }}
+                onClick={() => handleClickNumber(3)}
                 isActiveButton={clickButton === 3}
               >
                 3
               </S.NumberButton>
               <S.NumberButton
-                onClick={() => {
-                  setclickButton(4), handleChangeItens(4)
-                }}
+                onClick={() => handleClickNumber(4)}
                 isActiveButton={clickButton === 4}
               >
                 4
               </S.NumberButton>
               <S.NumberButton
-                onClick={() => {
-                  setclickButton(5), handleChangeItens(5)
-                }}
+                onClick={() => handleClickNumber(5)}
                 isActiveButton={clickButton === 5}
               >
                 5
               </S.NumberButton>
               <S.NumberButton
-                onClick={() => {
-                  setclickButton(6), handleChangeItens(6)
-                }}
+                onClick={() => handleClickNumber(6)}
                 isActiveButton={clickButton === 6}
               >
                 6
@@ -178,6 +176,13 @@ const CreateFund = () => {
                   backgroundSecondary
                   size="huge"
                   text="Create my own fund"
+                  onClick={() =>
+                    trackEventFunction(
+                      'click-on-button',
+                      'create-my-own-fund',
+                      `section-Managers`
+                    )
+                  }
                   icon={
                     <img
                       src="/assets/utilities/go-to-page.svg"
@@ -189,12 +194,28 @@ const CreateFund = () => {
                 />
               </Link>
               <S.ButtonsContent>
-                <button onClick={() => handleClickRight(clickButton)}>
+                <button
+                  onClick={() => {
+                    handleClickRight(clickButton)
+                    trackEventFunction(
+                      'click-on-button',
+                      'back-slide',
+                      `section-managers`
+                    )
+                  }}
+                >
                   <Image src={arrowWhite} alt="" width={9} height={16} />
                 </button>
                 <button
                   id="arrowRight"
-                  onClick={() => handleClickLeft(clickButton)}
+                  onClick={() => {
+                    handleClickLeft(clickButton)
+                    trackEventFunction(
+                      'click-on-button',
+                      'next-slide',
+                      `section-managers`
+                    )
+                  }}
                 >
                   <Image src={arrowWhite} alt="" width={9} height={16} />
                 </button>

@@ -253,9 +253,9 @@ const FundCard = ({ fund }: IFundProps) => {
         <Button
           onClick={() =>
             trackEventFunction(
-              'click-button',
+              'click-on-button',
               `buy-${fund.symbol.toLowerCase()}`,
-              `${fund.symbol.toLowerCase()}-card`
+              `pool-card-investors`
             )
           }
           backgroundPrimary

@@ -260,9 +260,9 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
             <Button
               onClick={() =>
                 trackEventFunction(
-                  'click-button',
+                  'click-on-button',
                   `buy-${pool.symbol.toLowerCase()}`,
-                  `${pool.symbol.toLowerCase()}-card`
+                  `pool-card-home`
                 )
               }
               backgroundPrimary
@@ -275,7 +275,7 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
               trackEventFunction(
                 'click-on-link',
                 'learn-more',
-                `${pool.symbol.toLowerCase()}-card`
+                `pool-card-home`
               )
             }
             hrefLink={pool.fundLink}

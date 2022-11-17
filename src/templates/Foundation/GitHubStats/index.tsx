@@ -2,6 +2,8 @@ import React from 'react'
 import useSWR from 'swr'
 import { request } from 'graphql-request'
 
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+
 import { GET_DATA_GITHUB } from './graphql'
 import { MEDIUM_FEED_URL } from '../../../constants/tokenAddresses'
 
@@ -68,6 +70,8 @@ const GitHubStats = () => {
       { Authorization: `token ${GIT_HUB_TOKEN}` }
     )
   )
+
+  const { trackEventFunction } = useMatomoEcommerce()
 
   const fetcher = async (url: string) => {
     const res = await fetch(url)
@@ -143,6 +147,13 @@ const GitHubStats = () => {
             <ExternalLink
               hrefLink="https://github.com/KassandraFinance"
               text="Check out our gitHub"
+              onClick={() =>
+                trackEventFunction(
+                  'click-on-link',
+                  'check-out-our-gitHub',
+                  'section-foundation'
+                )
+              }
             />
           </S.GitHub>
           <S.GitHubStatsData>
@@ -177,6 +188,13 @@ const GitHubStats = () => {
             <ExternalLink
               hrefLink="https://kassandrafoundation.medium.com/"
               text="Read more at our medium"
+              onClick={() =>
+                trackEventFunction(
+                  'click-on-link',
+                  'read-more-at-our-medium',
+                  'section-foundation'
+                )
+              }
             />
           </S.Medium>
         </S.ArticlesContent>

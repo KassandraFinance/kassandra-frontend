@@ -1,6 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
 
+import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
+
 import Hero from '../../components/Hero'
 import CommunityTenets from './CommunityTenets'
 import FlowingRevenue from './FlowingRevenue'
@@ -16,6 +18,8 @@ import * as S from './styles'
 
 const TokenHolder = () => {
   const [isOpenModal, setIsOpenModal] = React.useState<boolean>(false)
+
+  const { trackEventFunction } = useMatomoEcommerce()
 
   return (
     <S.Wrapper>
@@ -43,6 +47,7 @@ const TokenHolder = () => {
             text="Buy KACY"
             onClick={() => {
               setIsOpenModal(true)
+              trackEventFunction('click-on-button', 'open-modal-buy-kacy', `section-dao`)
             }}
           />
         </Hero>
