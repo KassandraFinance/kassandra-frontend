@@ -64,7 +64,7 @@ const Social = () => {
               trackEventFunction(
                 'click-on-link',
                 `${link.name}`,
-                `hero-foundation`
+                'hero-foundation'
               )
             }
           >

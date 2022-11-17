@@ -46,8 +46,8 @@ const TeamCard = ({
                 onClick={() =>
                   trackEventFunction(
                     'click-on-link',
-                    `social-github-${name}`,
-                    'section-foundation'
+                    `github-${name}`,
+                    'section-team'
                   )
                 }
               >
@@ -64,8 +64,8 @@ const TeamCard = ({
                 onClick={() =>
                   trackEventFunction(
                     'click-on-link',
-                    `social-twitter-${name}`,
-                    'section-foundation'
+                    `twitter-${name}`,
+                    'section-team'
                   )
                 }
               >
@@ -82,8 +82,8 @@ const TeamCard = ({
                 onClick={() =>
                   trackEventFunction(
                     'click-on-link',
-                    `social-linkedin-${name}`,
-                    'section-foundation'
+                    `linkedin-${name}`,
+                    'section-team'
                   )
                 }
               >

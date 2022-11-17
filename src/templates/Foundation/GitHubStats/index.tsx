@@ -191,7 +191,7 @@ const GitHubStats = () => {
               onClick={() =>
                 trackEventFunction(
                   'click-on-link',
-                  'Read-more-at-our-medium',
+                  'read-more-at-our-medium',
                   'section-foundation'
                 )
               }
