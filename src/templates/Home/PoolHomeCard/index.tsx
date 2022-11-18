@@ -274,7 +274,7 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
             onClick={() =>
               trackEventFunction(
                 'click-on-link',
-                'learn-more',
+                `learn-more-${pool.symbol}`,
                 `pool-card-home`
               )
             }
