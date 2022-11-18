@@ -6,6 +6,9 @@ import FundCard from '../FundCard'
 import ExternalLink from '../../../components/ExternalLink'
 import FadeInVertical from '../../../components/Animations/FadeInVertical'
 import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
+import Paragraph from '../../../components/Paragraph'
+import SectionSubtitle from '../../../components/SectionSubtitle'
+import Subtitle from '../../../components/Subtitle'
 
 import certik from '../../../../public/assets/iconGradient/certik.svg'
 import lock from '../../../../public/assets/iconGradient/lock.svg'
@@ -18,8 +21,8 @@ const Products = () => {
     <S.Products>
       <FadeInVertical threshold={0.5}>
         <S.TitleWrapper>
-          <h1>Start exploring KassandraDAO</h1>
-          <span>Here are some index funds created by us:</span>
+          <Subtitle text="Start exploring KassandraDAO" />
+          <Paragraph text="Here are some index funds created by us:" />
         </S.TitleWrapper>
       </FadeInVertical>
 
@@ -35,12 +38,12 @@ const Products = () => {
         <FadeInHorizontal threshold={0.5}>
           <S.DescriptionProtocol>
             <S.Span>PROTOCOL SAFETY</S.Span>
-            <h1>Make the most of your money while keeping it safe</h1>
-            <span>
-              This is how we ensure that user funds are always protected. All
+            <SectionSubtitle text="Make the most of your money while keeping it safe" />
+            <Paragraph
+              text="This is how we ensure that user funds are always protected. All
               infrastructure is governed by up-to-date smart contracts and
-              audited by trusted players in the space.
-            </span>
+              audited by trusted players in the space."
+            />
             <ExternalLink
               hrefLink="https://kassandrafoundation.medium.com/how-kassandra-works-ac50630601f6"
               text="Learn more"
@@ -56,10 +59,10 @@ const Products = () => {
               </S.Icon>
               <S.Topic>
                 <span>NON CUSTODIAL</span>
-                <p>
-                  Your assets never leave your wallet. You’re always in control
-                  of your funds and you can pull them out anytime.
-                </p>
+                <Paragraph
+                  text="Your assets never leave your wallet. You’re always in control
+                  of your funds and you can pull them out anytime."
+                />
               </S.Topic>
             </S.Detail>
             <S.Detail>
@@ -68,10 +71,10 @@ const Products = () => {
               </S.Icon>
               <S.Topic>
                 <span>PERMISSIONLESS</span>
-                <p>
-                  Invest when you want and how you want it. Transactions are
-                  fast, automatic and in your complete control.
-                </p>
+                <Paragraph
+                  text="Invest when you want and how you want it. Transactions are
+                  fast, automatic and in your complete control."
+                />
               </S.Topic>
             </S.Detail>
             <S.Detail>

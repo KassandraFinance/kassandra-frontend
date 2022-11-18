@@ -11,6 +11,8 @@ import { BNtoDecimal } from '../../../utils/numerals'
 import { GET_WITHDRAW_FEE } from './graphql'
 
 import FadeIn from '../../../components/Animations/FadeIn'
+import Paragraph from '../../../components/Paragraph'
+import SectionSubtitle from '../../../components/SectionSubtitle'
 
 import * as S from './styles'
 
@@ -48,11 +50,11 @@ const FlowingRevenue = () => {
     <S.Wrapper>
       <FadeIn threshold={0.5}>
         <S.Header>
-          <h2>DAO’s Flowing Revenue </h2>
-          <p>
-            A 3% fee is charged when investment tokens are redeemed to aid the
-            {" DAO's"} innovation and development fund.
-          </p>
+          <SectionSubtitle text="DAO’s Flowing Revenue" />
+          <Paragraph
+            text="A 3% fee is charged when investment tokens are redeemed to aid the
+            DAO's innovation and development fund."
+          />
         </S.Header>
       </FadeIn>
 

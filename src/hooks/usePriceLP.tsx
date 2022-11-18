@@ -1,24 +1,22 @@
+import Big from "big.js"
 import { AbiItem } from "web3-utils"
 
-import web3 from '../utils/web3'
 import PriceLP from "../constants/abi/PriceLP.json"
-import Big from "big.js"
+import web3 from '../utils/web3'
+
 import { ERC20 } from "./useERC20Contract"
-import { useAppSelector } from "../store/hooks"
 
 const usePriceLP = () => {
-  const userWalletAddress = useAppSelector(state => state.userWalletAddress)
-
   const getContract = (address: string) => {
     // eslint-disable-next-line prettier/prettier
     const contract = new web3.eth.Contract((PriceLP.abi as unknown) as AbiItem, address)
     return contract
   }
 
-//maxPriorityFeePerGas: null, maxFeePerGas: null 1,500000031  [0] some((element: string) => element === 'PurchaseExecuted')  gas: 270804, gasPrice: 1500000031
+  //maxPriorityFeePerGas: null, maxFeePerGas: null 1,500000031  [0] some((element: string) => element === 'PurchaseExecuted')  gas: 270804, gasPrice: 1500000031
   const getReserves = async (addressPriceLP: string) => {
     const contract = getContract(addressPriceLP)
-    const value = await contract.methods.getReserves().call({ from: userWalletAddress })
+    const value = await contract.methods.getReserves().call()
     return value
   }
 

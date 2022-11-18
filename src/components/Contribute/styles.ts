@@ -62,48 +62,28 @@ export const TextWrapper = styled.div`
   @media (max-width: 992px) {
     gap: 2.4rem;
   }
-`
 
-export const ContributeHeading = styled.h5`
-  color: ${theme.colors.white};
-  font-weight: ${theme.font.weight.black};
-  font-size: ${theme.font.sizes.font48};
-  line-height: 5rem;
-
-  @media (max-width: 992px) {
-    font-size: ${theme.font.sizes.font36};
-    line-height: ${theme.font.sizes.font40};
-    text-align: center;
+  > h5 {
+    @media (max-width: 992px) {
+      text-align: center;
+    }
+    @media (max-width: 576px) {
+      text-align: left;
+    }
   }
 
-  @media (max-width: 576px) {
-    font-weight: ${theme.font.weight.bold};
-    font-size: ${theme.font.sizes.font24};
-    line-height: ${theme.font.sizes.font32};
-    text-align: left;
-  }
-`
+  > p {
+    line-height: 155%;
 
-export const Text = styled.p`
-  color: ${theme.colors.white};
-  font-weight: 300;
-  font-size: ${theme.font.sizes.font16};
-  line-height: 155%;
+    @media (max-width: 992px) {
+      margin-bottom: 0.8rem;
+      text-align: center;
+    }
 
-  @media (max-width: 992px) {
-    margin-bottom: 0.8rem;
-
-    font-weight: ${theme.font.weight.normal};
-    line-height: ${theme.font.sizes.font24};
-    text-align: center;
-  }
-
-  @media (max-width: 576px) {
-    font-weight: ${theme.font.weight.light};
-    font-size: ${theme.font.sizes.font14};
-    line-height: ${theme.font.sizes.font24};
-    letter-spacing: 0.05em;
-    text-align: left;
+    @media (max-width: 576px) {
+      letter-spacing: 0.05em;
+      text-align: left;
+    }
   }
 `
 

@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 
 import FadeInVertical from '../../../components/Animations/FadeInVertical'
+import Paragraph from '../../../components/Paragraph'
 
 import padlockIcon from '../../../../public/assets/iconGradient/padlock.png'
 import switchbladeIcon from '../../../../public/assets/iconGradient/switchblade.png'
@@ -14,12 +15,12 @@ const About = () => {
     <S.About>
       <FadeInVertical threshold={0.5}>
         <S.TextContainer>
-          <S.Text>
-            Kassandra is an decentralized autonomous organization of
+          <Paragraph
+            text="Kassandra is an decentralized autonomous organization of
             decentralized finance that governs a protocol that allows the
-            creation and management of tokenized index funds, bringing a
-            new class of products to managers and investors.
-          </S.Text>
+            creation and management of tokenized index funds, bringing a new
+            class of products to managers and investors."
+          />
 
           <S.BulletPoints>
             <S.BulletPointWrapper>
@@ -62,22 +63,22 @@ const About = () => {
           <S.CardWrapper>
             <S.CardTitle>vision</S.CardTitle>
 
-            <S.CardText>
-              Asset management is one of the smallest sectors of DeFi while
+            <Paragraph
+              text="Asset management is one of the smallest sectors of DeFi while
               being a trillion-dollar industry in TradFi. Traditional
               investments are streamlined and facilitated, why not do the same
-              in DeFi?
-            </S.CardText>
+              in DeFi?"
+            />
           </S.CardWrapper>
 
           <S.CardWrapper>
             <S.CardTitle>mission</S.CardTitle>
 
-            <S.CardText>
-              A future in which there’ll be seamless integration between
+            <Paragraph
+              text="A future in which there’ll be seamless integration between
               investors looking for exposure in the cryptosphere and DeFi
-              experts who’ll guide them while both make money.
-            </S.CardText>
+              experts who’ll guide them while both make money."
+            />
           </S.CardWrapper>
         </S.CardContainer>
       </FadeInVertical>

@@ -20,8 +20,6 @@ import {
 } from '../../../../constants/tokenAddresses'
 
 import usePriceLP from '../../../../hooks/usePriceLP'
-import { useAppSelector } from '../../../../store/hooks'
-
 
 import { GET_INFO_POOL } from '../graphql'
 
@@ -54,7 +52,6 @@ const LockPoolCard = ({
   const [poolPrice, setPoolPrice] = React.useState<Big>(Big(-1))
 
   const { getPriceKacyAndLP } = usePriceLP()
-  const { userWalletAddress } = useAppSelector(state => state)
 
   web3.setProvider('https://api.avax.network/ext/bc/C/rpc')
 
@@ -118,7 +115,7 @@ const LockPoolCard = ({
       hasExpired: periodFinish < timestampNow,
       apr
     })
-  }, [userWalletAddress, poolPrice, kacyPrice, data])
+  }, [poolPrice, kacyPrice, data])
 
   React.useEffect(() => {
     getLiquidityPoolPriceInDollar()

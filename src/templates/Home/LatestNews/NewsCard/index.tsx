@@ -1,5 +1,7 @@
 import React from 'react'
 
+import useMatomoEcommerce from '../../../../hooks/useMatomoEcommerce'
+
 import Button from '../../../../components/Button'
 
 import * as S from './styles'
@@ -19,6 +21,8 @@ const NewsCard = ({
   description,
   link
 }: INewsCardProps) => {
+  const { trackEventFunction } = useMatomoEcommerce()
+
   const subText =
     description.replace(/<\/?[^>]+(>|$)/g, '').substring(0, 100) + ' ...'
 
@@ -42,7 +46,18 @@ const NewsCard = ({
         </S.TextWrapper>
 
         <S.BtnWrapper href={link} target="_blank" rel="noopener noreferrer">
-          <Button size="huge" text="Read more" backgroundBlack />
+          <Button
+            size="huge"
+            text="Read more"
+            backgroundBlack
+            onClick={() =>
+              trackEventFunction(
+                'click-on-link',
+                `medium-posts-${date.toLocaleDateString('en-US')}`,
+                'latest-news'
+              )
+            }
+          />
         </S.BtnWrapper>
       </S.NewsCardBody>
     </S.NewsCard>

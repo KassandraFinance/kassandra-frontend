@@ -39,19 +39,43 @@ const Header = () => {
 
       <S.Menu>
         <Link href="/investors" passHref>
-          <S.MenuLink active={pathName === '/investors'}>Investors</S.MenuLink>
+          <S.MenuLink
+            active={pathName === '/investors'}
+            onClick={() =>
+              trackEventFunction('click-on-link', 'Investors', 'header')
+            }
+          >
+            Investors
+          </S.MenuLink>
         </Link>
 
         <Link href="/managers" passHref>
-          <S.MenuLink active={pathName === '/managers'}>Managers</S.MenuLink>
+          <S.MenuLink
+            active={pathName === '/managers'}
+            onClick={() =>
+              trackEventFunction('click-on-link', 'Managers', 'header')
+            }
+          >
+            Managers
+          </S.MenuLink>
         </Link>
 
         <Link href="/dao" passHref>
-          <S.MenuLink active={pathName === '/dao'}>DAO</S.MenuLink>
+          <S.MenuLink
+            active={pathName === '/dao'}
+            onClick={() => trackEventFunction('click-on-link', 'Dao', 'header')}
+          >
+            DAO
+          </S.MenuLink>
         </Link>
 
         <Link href="/foundation" passHref>
-          <S.MenuLink active={pathName === '/foundation'}>
+          <S.MenuLink
+            active={pathName === '/foundation'}
+            onClick={() =>
+              trackEventFunction('click-on-link', 'Foundation', 'header')
+            }
+          >
             Foundation
           </S.MenuLink>
         </Link>

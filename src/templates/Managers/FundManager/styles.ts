@@ -15,39 +15,19 @@ export const FundManagerContainer = styled.section`
 `
 
 export const TittleWrapper = styled.div`
-  > h1 {
-    color: #ffffff;
-    font-weight: ${theme.font.weight.black};
-    font-size: ${theme.font.sizes.font48};
+  > h2 {
     text-align: center;
-
-    @media (max-width: 650px) {
-      font-weight: ${theme.font.weight.bold};
-      font-size: ${theme.font.sizes.font32};
-    }
-
-    @media (max-width: 450px) {
-      font-weight: ${theme.font.weight.bold};
-      font-size: ${theme.font.sizes.font24};
-    }
   }
 
   > p {
     margin-top: 2.4rem;
     margin-bottom: 8rem;
 
-    color: #ffffff;
-    font-weight: ${theme.font.weight.light};
-    font-size: ${theme.font.sizes.font16};
     text-align: center;
 
     @media (max-width: 650px) {
       letter-spacing: 0.05em;
       line-height: 2.4rem;
-    }
-
-    @media (max-width: 450px) {
-      font-size: ${theme.font.sizes.font16};
     }
   }
 `

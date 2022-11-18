@@ -1,23 +1,29 @@
 import Image from 'next/image'
 
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+
 import { poolsKacy, poolsKacyFuji } from '../../../constants/pools'
 
 import Button from '../../../components/Button'
 import LockPoolCard from './LockPoolCard'
 import FadeInVertical from '../../../components/Animations/FadeInVertical'
+import SectionSubtitle from '../../../components/SectionSubtitle'
+import Paragraph from '../../../components/Paragraph'
 
 import * as S from './styles'
 
 const LockVote = () => {
+  const { trackEventFunction } = useMatomoEcommerce()
+
   return (
     <S.Wrapper>
       <FadeInVertical threshold={0.5}>
         <S.Header>
-          <h3>KACY’s LockVote Feature</h3>
-          <p>
-            To vote on proposals, choose between different staking options. The
-            more time you lock your tokens for, the more voting power you get.
-          </p>
+          <SectionSubtitle text="KACY’s LockVote Feature" />
+          <Paragraph
+            text="To vote on proposals, choose between different staking options. The
+            more time you lock your tokens for, the more voting power you get."
+          />
         </S.Header>
       </FadeInVertical>
 
@@ -70,6 +76,13 @@ const LockVote = () => {
               backgroundPrimary
               text="Stake KACY"
               href="https://app.kassandra.finance/farm?tab=stake"
+              onClick={() =>
+                trackEventFunction(
+                  'click-on-link',
+                  'stake-page',
+                  'section-dao'
+                )
+              }
             />
           </S.LockPoolContainer>
           <S.Connector>

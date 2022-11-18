@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const InvestorsContainer = styled.section`
+export const Investors = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,5 +30,12 @@ export const InvestorsContainer = styled.section`
       url('/assets/images/bg-investors-360.webp') 1x,
       url('/assets/images/bg-investors-360.png') 1x
     );
+  }
+
+  .start-investing {
+    width: 19.4rem;
+    height: 4.8rem;
+
+    border-radius: 0.4rem;
   }
 `

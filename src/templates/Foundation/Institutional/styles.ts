@@ -28,28 +28,11 @@ export const TitleContainer = styled.div`
 
   h3 {
     margin-bottom: 2.4rem;
-
-    color: #ffffff;
-    font-size: ${theme.font.sizes.font32};
-    font-weight: ${theme.font.weight.bold};
     text-align: center;
-    line-height: 3.2rem;
-
-    @media (max-width: 576px) {
-      font-size: ${theme.font.sizes.font24};
-    }
   }
 
   p {
-    color: #ffffff;
-    font-size: ${theme.font.sizes.font16};
-    font-weight: ${theme.font.weight.light};
     text-align: center;
-    line-height: 2.4rem;
-
-    @media (max-width: 576px) {
-      font-size: ${theme.font.sizes.font14};
-    }
   }
 
   @media (max-width: 500px) {
@@ -189,11 +172,6 @@ export const InstitutionalCard = styled.div`
 
   p {
     margin-bottom: 1.6rem;
-
-    color: #ffffff;
-    font-size: ${theme.font.sizes.font16};
-    font-weight: ${theme.font.weight.light};
-    line-height: 2.4rem;
     text-align: center;
 
     @media (max-width: 992px) {

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import theme from '../../styles/theme'
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.header`
   position: absolute;
   top: 0;
   left: 0;
@@ -13,13 +13,10 @@ export const Wrapper = styled.div`
 
   margin: 0 auto;
   margin-top: 3.2rem;
-  max-width: 114rem;
+  max-width: 118.8rem;
+  padding-inline: 2.4rem;
 
   z-index: ${theme.layers.menu};
-
-  @media (max-width: 1200px) {
-    padding-inline: 3rem;
-  }
 
   @media (max-width: 992px) {
     margin-top: 2.4rem;

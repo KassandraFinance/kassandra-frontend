@@ -2,8 +2,13 @@ import React from 'react'
 import Image, { StaticImageData } from 'next/image'
 import Link from 'next/link'
 
+import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+
 import Button from '../../../components/Button'
 import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
+import Paragraph from '../../../components/Paragraph'
+import SectionTitle from '../../../components/SectionTitle'
+import Subtitle from '../../../components/Subtitle'
 
 import * as S from './styles'
 
@@ -28,18 +33,21 @@ const SectionCard = ({
   link,
   img
 }: ISectionCardProps) => {
+  const { trackEventFunction } = useMatomoEcommerce()
+
   return (
     <S.Container>
       <FadeInHorizontal threshold={0.5}>
         <S.TextContainer>
-          <S.Title color={color}>
-            {number}
-            <S.Line color={color} /> {title}
-          </S.Title>
+          <SectionTitle
+            title={title}
+            titleColor={color}
+            titleNumber={number}
+            as="h2"
+          />
 
-          <S.SubTitle>{subtitle}</S.SubTitle>
-
-          <S.Text>{text}</S.Text>
+          <Subtitle text={subtitle} as="h3" />
+          <Paragraph text={text} />
 
           <Link href={link} passHref>
             <a>
@@ -76,6 +84,13 @@ const SectionCard = ({
                   </svg>
                 }
                 backgroundSecondary
+                onClick={() =>
+                  trackEventFunction(
+                    'click-on-button',
+                    `${btnText}`,
+                    'section-home'
+                  )
+                }
               />
             </a>
           </Link>

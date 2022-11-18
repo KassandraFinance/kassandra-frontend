@@ -39,32 +39,23 @@ export const Wrapper = styled.section`
   }
 `
 
-export const Title = styled.h1`
-  color: #ffffff;
-  font-weight: ${theme.font.weight.black};
-  font-size: ${theme.font.sizes.font48};
-  text-align: center;
-  line-height: 5.3rem;
+export const TextWrapper = styled.div`
+  p {
+    margin-top: 2.4rem;
 
-  @media (max-width: 576px) {
-    text-align: left;
-    font-size: ${theme.font.sizes.font24};
-    font-weight: ${theme.font.weight.bold};
     line-height: 2.4rem;
+    text-align: center;
+
+    @media (max-width: 576px) {
+      text-align: left;
+    }
   }
-`
 
-export const Description = styled.p`
-  margin-top: 2.4rem;
-
-  color: #ffffff;
-  font-weight: ${theme.font.weight.light};
-  font-size: 1.6rem;
-  line-height: 2.4rem;
-  text-align: center;
-
-  @media (max-width: 576px) {
-    text-align: left;
+  h2 {
+    text-align: center;
+    @media (max-width: 576px) {
+      text-align: left;
+    }
   }
 `
 

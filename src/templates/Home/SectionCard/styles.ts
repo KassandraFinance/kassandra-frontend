@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import theme from '../../../styles/theme'
 
 export const Container = styled.article`
   display: flex;
@@ -22,6 +21,34 @@ export const Container = styled.article`
 `
 
 export const TextContainer = styled.div`
+  > h2 {
+    margin-bottom: 1.6rem;
+  }
+
+  > h3 {
+    width: 55rem;
+    margin-bottom: 2.4rem;
+
+    @media (max-width: 992px) {
+      width: 100%;
+      text-align: center;
+    }
+    @media (max-width: 576px) {
+      text-align: left;
+    }
+  }
+
+  > p {
+    width: 47.7rem;
+    margin-bottom: 3.2rem;
+    @media (max-width: 992px) {
+      text-align: center;
+      width: 100%;
+    }
+    @media (max-width: 576px) {
+      text-align: left;
+    }
+  }
   a {
     text-decoration: none;
   }
@@ -44,35 +71,6 @@ export const TextContainer = styled.div`
   }
 `
 
-interface ITitleProps {
-  color: string;
-}
-
-export const Title = styled.h3`
-  ${({ color }: ITitleProps) => css`
-    display: flex;
-    align-items: center;
-
-    margin-bottom: 1.6rem;
-
-    color: ${color};
-    font-weight: ${theme.font.weight.light};
-    font-size: ${theme.font.sizes.font16};
-    line-height: ${theme.font.sizes.font20};
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-
-    @media (max-width: 992px) {
-      justify-content: center;
-    }
-
-    @media (max-width: 576px) {
-      font-size: ${theme.font.sizes.font14};
-      line-height: ${theme.font.sizes.font16};
-    }
-  `}
-`
-
 interface ILineProps {
   color: string;
 }
@@ -87,48 +85,4 @@ export const Line = styled.div`
     background-color: ${color};
     border-radius: 0.4rem;
   `}
-`
-
-export const SubTitle = styled.h4`
-  width: 55rem;
-  margin-bottom: 2.4rem;
-
-  color: ${theme.colors.white};
-  font-weight: ${theme.font.weight.black};
-  font-size: ${theme.font.sizes.font48};
-  line-height: 5rem;
-
-  @media (max-width: 992px) {
-    width: 100%;
-    font-size: ${theme.font.sizes.font36};
-    line-height: ${theme.font.sizes.font40};
-    text-align: center;
-  }
-
-  @media (max-width: 576px) {
-    font-weight: ${theme.font.weight.bold};
-    font-size: ${theme.font.sizes.font24};
-    line-height: ${theme.font.sizes.font32};
-    text-align: left;
-  }
-`
-
-export const Text = styled.p`
-  width: 47.7rem;
-  margin-bottom: 3.2rem;
-
-  color: ${theme.colors.white};
-  font-weight: ${theme.font.weight.light};
-  font-size: ${theme.font.sizes.font16};
-  line-height: ${theme.font.sizes.font24};
-
-  @media (max-width: 992px) {
-    text-align: center;
-    width: 100%;
-  }
-
-  @media (max-width: 576px) {
-    font-size: ${theme.font.sizes.font14};
-    text-align: left;
-  }
 `

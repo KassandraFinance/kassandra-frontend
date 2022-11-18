@@ -1,6 +1,8 @@
 import Image from 'next/image'
 
 import FadeIn from '../../../components/Animations/FadeIn'
+import Paragraph from '../../../components/Paragraph'
+import Subtitle from '../../../components/Subtitle'
 
 import * as S from './styles'
 
@@ -8,12 +10,13 @@ const CommunityTenets = () => {
   return (
     <S.Wrapper>
       <FadeIn threshold={0.5}>
-        <S.Title>Create, maintain and get paid</S.Title>
-
-        <S.Description>
-          These are our three community tenets to ensure a healthy, functioning
-          DAO.
-        </S.Description>
+        <S.TextWrapper>
+          <Subtitle text="Create, maintain and get paid" as="h2" />
+          <Paragraph
+            text="These are our three community tenets to ensure a healthy, functioning
+            DAO."
+          />
+        </S.TextWrapper>
       </FadeIn>
 
       <FadeIn threshold={0.5}>

@@ -10,8 +10,6 @@ export const ManagerMainContainer = styled.section`
   background-size: fixed;
   background-position: 50% 10%;
 
-  overflow-x: hidden;
-
   @media (max-width: 768px) {
     background-image: url('/assets/images/Manager-bg-tablet.png');
     background-image: image-set(
@@ -37,6 +35,7 @@ export const ManagerContainer = styled.div`
 export const ManagerContent = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 25rem;
   width: 100%;
 

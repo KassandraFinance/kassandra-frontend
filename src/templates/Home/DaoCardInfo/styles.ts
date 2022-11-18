@@ -8,6 +8,12 @@ export const DaoCardWrapper = styled.div`
 
   width: 27.6rem;
 
+  > P {
+    @media (max-width: 576px) {
+      letter-spacing: 0.05em;
+    }
+  }
+
   @media (max-width: 992px) {
     width: 51rem;
   }
@@ -61,18 +67,5 @@ export const SubTitle = styled.span`
   @media (max-width: 576px) {
     font-size: ${theme.font.sizes.font16};
     line-height: ${theme.font.sizes.font18};
-  }
-`
-
-export const Text = styled.p`
-  color: ${theme.colors.white};
-  font-weight: ${theme.font.weight.light};
-  font-size: ${theme.font.sizes.font16};
-  line-height: ${theme.font.sizes.font24};
-
-  @media (max-width: 576px) {
-    font-size: ${theme.font.sizes.font14};
-    line-height: ${theme.font.sizes.font24};
-    letter-spacing: 0.05em;
   }
 `

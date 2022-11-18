@@ -7,6 +7,8 @@ import { ToastSuccess } from '../../../components/Toastify/toast'
 
 import TextField from '../../../components/TextField'
 import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
+import Paragraph from '../../../components/Paragraph'
+import Subtitle from '../../../components/Subtitle'
 
 import emailIcon from '../../../../public/assets/icons/email.svg'
 import logoSkew from '../../../../public/assets/images/logo-big-skew.png'
@@ -47,12 +49,11 @@ const Subscribe = () => {
       <FadeInHorizontal threshold={0.5}>
         <S.Subscribe>
           <S.TextWrapper>
-            <S.Title>Be on the frontlines of our development</S.Title>
-
-            <S.Text>
-              Subscribe to our newsletter to get early information and special
-              calls.
-            </S.Text>
+            <Subtitle text="Be on the frontlines of our development" as="h4" />
+            <Paragraph
+              text="Subscribe to our newsletter to get early information and special
+              calls."
+            />
 
             <iframe
               title="a"

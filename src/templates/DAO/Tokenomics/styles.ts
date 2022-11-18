@@ -41,17 +41,10 @@ export const Title = styled.div`
 
   P {
     margin-top: 2.4rem;
-
-    color: #ffffff;
-    font-weight: ${theme.font.weight.normal};
-    font-size: ${theme.font.sizes.font16};
-    line-height: 2.4rem;
     text-align: center;
 
     @media (max-width: 576px) {
       text-align: left;
-      font-size: ${theme.font.sizes.font14};
-      font-weight: ${theme.font.weight.light};
     }
   }
 `
@@ -187,14 +180,7 @@ export const Info = styled.div`
   }
 
   p {
-    color: #ffffff;
-    font-size: ${theme.font.sizes.font16};
-    font-weight: ${theme.font.weight.light};
     line-height: 155%;
-
-    @media (max-width: 576px) {
-      font-size: ${theme.font.sizes.font14};
-    }
   }
 `
 

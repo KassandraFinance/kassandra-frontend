@@ -1,6 +1,20 @@
 import styled from 'styled-components'
 
-export const Wrapper = styled.div`
+export const ScrollContainer = styled.div`
+  position: absolute;
+  bottom: 2rem;
+  right: 50%;
+  transform: translateX(50%);
+
+  animation-name: scrollFadeIn;
+  animation-duration: 2.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+
+  @media (max-width: 576px) {
+    bottom: 7.6rem;
+  }
+
   .scroll-anchor {
     display: flex;
     flex-direction: column;
@@ -50,6 +64,18 @@ export const Wrapper = styled.div`
     text-transform: uppercase;
     color: #ffffff;
     font-size: 1.4rem;
+  }
+
+  @keyframes scrollFadeIn {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 
   @keyframes ani-mouse {

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Products = styled.div`
+export const Products = styled.section`
   width: 100%;
 
   display: flex;
@@ -26,19 +26,12 @@ export const TitleWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 
-  > h1 {
-    font-size: 4.8rem;
-    line-height: 5.3rem;
-    font-weight: 900;
+  > h2 {
     text-align: center;
   }
 
-  > span {
+  > p {
     margin-top: 2.4rem;
-
-    color: #ffffff;
-    font-size: 1.6rem;
-    line-height: 2.4rem;
   }
 
   @media (max-width: 576px) {
@@ -89,25 +82,15 @@ export const DescriptionProtocol = styled.div`
   flex-direction: column;
   justify-content: center;
 
-  > span:first-child {
+  > p:first-child {
     margin-bottom: 0;
   }
 
   max-width: 32rem;
 
-  span {
-    font-size: 1.6rem;
-    line-height: 2.4rem;
-    font-weight: 300;
-  }
-
-  h1 {
+  h3 {
     margin-top: 1.6rem;
     margin-bottom: 2.4rem;
-
-    font-size: 3.2rem;
-    line-height: 3.5rem;
-    font-weight: 700;
   }
 
   a {
@@ -133,8 +116,7 @@ export const DescriptionProtocol = styled.div`
       line-height: 3.2rem;
     }
 
-    span {
-      font-size: 1.4rem;
+    p {
       letter-spacing: 0.05em;
     }
   }
