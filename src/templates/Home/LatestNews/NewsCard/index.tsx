@@ -51,7 +51,11 @@ const NewsCard = ({
             text="Read more"
             backgroundBlack
             onClick={() =>
-              trackEventFunction('click-on-link', 'medium-posts', 'latest-news')
+              trackEventFunction(
+                'click-on-link',
+                `medium-posts-${date.toLocaleDateString('en-US')}`,
+                'latest-news'
+              )
             }
           />
         </S.BtnWrapper>

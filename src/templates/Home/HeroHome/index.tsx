@@ -52,7 +52,7 @@ const HeroHome = () => {
         backgroundPrimary
         href="https://app.kassandra.finance/explore"
         onClick={() =>
-          trackEventFunction('click-on-button', 'lauch-app', 'section-home')
+          trackEventFunction('click-on-button', 'start-investing', 'hero-home')
         }
       />
 
