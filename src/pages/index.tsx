@@ -65,15 +65,9 @@ export const getStaticProps: GetStaticProps = async () => {
       query ($ids: [ID!]!) {
         factory(id: "0x958c051B55a173e393af696EcB4C4FF3D6C13930") {
           total_value_locked_usd
-          withdraw: fees(where: { period: 604800, type: "exit" }, first: 1000) {
-            volume_usd
-          }
-          swap: fees(where: { period: 604800, type: "swap" }, first: 1000) {
-            volume_usd
-          }
-          volumes(where: { period: 604800 }, first: 1000) {
-            volume_usd
-          }
+          total_volume_usd
+          total_fees_swap_usd
+          total_fees_exit_usd
         }
       }
       `,
@@ -85,28 +79,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const arrData = response?.data?.factory
 
-  let swapFees = Big(0)
-  let withdrawFees = Big(0)
-  let volume = Big(0)
-
-  swapFees = swapFees.add(
-    arrData?.swap.reduce((acc: Big, current: { volume_usd: string }) => {
-      return Big(current.volume_usd).add(acc)
-    }, 0)
-  )
-
-  withdrawFees = withdrawFees.add(
-    arrData?.withdraw.reduce((acc: Big, current: { volume_usd: string }) => {
-      return Big(current.volume_usd).add(acc)
-    }, 0)
-  )
-
-  volume = volume.add(
-    arrData?.volumes.reduce((acc: Big, current: { volume_usd: string }) => {
-      return Big(current.volume_usd).add(acc)
-    }, 0)
-  )
-
   const daoInfo = {
     daoInfo: [
       {
@@ -114,15 +86,15 @@ export const getStaticProps: GetStaticProps = async () => {
         title: 'TVL'
       },
       {
-        value: volume.toString(),
+        value: Big(arrData.total_volume_usd).toString(),
         title: 'volume'
       },
       {
-        value: swapFees.toString(),
+        value: Big(arrData.total_fees_swap_usd).toString(),
         title: 'Swap fees'
       },
       {
-        value: withdrawFees.toString(),
+        value: Big(arrData.total_fees_exit_usd).toString(),
         title: 'withdraw fees'
       }
     ]
