@@ -22,6 +22,8 @@ export const NewsCardHeader = styled.div`
 
   background: #d9d9d9;
 
+  overflow: hidden;
+
   img {
     width: 39.2rem;
     height: auto;
