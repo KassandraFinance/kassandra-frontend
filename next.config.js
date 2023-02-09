@@ -21,13 +21,13 @@ module.exports = {
         permanent: true
       },
       {
-        source: '/explore',
-        destination: 'https://app.kassandra.finance/explore',
+        source: '/',
+        destination: 'https://app.kassandra.finance',
         permanent: true
       },
       {
-        source: '/explore/:slug',
-        destination: 'https://app.kassandra.finance/explore/:slug',
+        source: '/pool/:slug',
+        destination: 'https://app.kassandra.finance/pool/:slug',
         permanent: true
       },
       {

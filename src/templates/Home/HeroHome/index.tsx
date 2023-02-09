@@ -50,7 +50,7 @@ const HeroHome = () => {
         }
         size="huge"
         backgroundPrimary
-        href="https://app.kassandra.finance/explore"
+        href="https://app.kassandra.finance"
         onClick={() =>
           trackEventFunction('click-on-button', 'start-investing', 'hero-home')
         }
