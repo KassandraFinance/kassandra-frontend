@@ -262,7 +262,7 @@ const FundCard = ({ fund }: IFundProps) => {
           size="claim"
           text={`Buy $${fund.symbol}`}
           as="a"
-          href={`https://app.kassandra.finance/explore/${fund.symbol.toLowerCase()}`}
+          href={`https://app.kassandra.finance/pool/${fund.sipAddress}`}
         />
       </S.CardFooter>
     </S.Card>

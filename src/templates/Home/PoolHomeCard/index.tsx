@@ -256,7 +256,7 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
           </BarChart>
         </S.BarChartWrapper>
         <S.CardFooter>
-          <Link href={`/explore/${pool.symbol.toLowerCase()}`}>
+          <Link href={`/pool/${pool.sipAddress}`}>
             <Button
               onClick={() =>
                 trackEventFunction(

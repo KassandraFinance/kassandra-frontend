@@ -77,11 +77,7 @@ const LockVote = () => {
               text="Stake KACY"
               href="https://app.kassandra.finance/farm?tab=stake"
               onClick={() =>
-                trackEventFunction(
-                  'click-on-link',
-                  'stake-page',
-                  'section-dao'
-                )
+                trackEventFunction('click-on-link', 'stake-page', 'section-dao')
               }
             />
           </S.LockPoolContainer>

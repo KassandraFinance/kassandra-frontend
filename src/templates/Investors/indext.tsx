@@ -36,7 +36,7 @@ const Investors = () => {
               <img src="/assets/utilities/go-to-page.svg" alt="go to page" />
             }
             as="a"
-            href="https://app.kassandra.finance/explore"
+            href="https://app.kassandra.finance"
             onClick={() =>
               trackEventFunction(
                 'click-on-button',
