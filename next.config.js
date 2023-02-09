@@ -21,7 +21,7 @@ module.exports = {
         permanent: true
       },
       {
-        source: '',
+        source: '/',
         destination: 'https://app.kassandra.finance',
         permanent: true
       },
