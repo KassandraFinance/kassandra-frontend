@@ -21,11 +21,6 @@ module.exports = {
         permanent: true
       },
       {
-        source: '/',
-        destination: 'https://app.kassandra.finance',
-        permanent: true
-      },
-      {
         source: '/pool/:slug',
         destination: 'https://app.kassandra.finance/pool/:slug',
         permanent: true
