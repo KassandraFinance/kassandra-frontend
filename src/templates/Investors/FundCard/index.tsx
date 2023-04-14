@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
 
 import useSWR from 'swr'
@@ -7,7 +6,10 @@ import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
 import request from 'graphql-request'
 import { GET_INFO_POOL } from '../graphql'
-import { ProductDetails, SUBGRAPH_URL } from '../../../constants/tokenAddresses'
+import {
+  BACKEND_KASSANDRA,
+  ProductDetails
+} from '../../../constants/tokenAddresses'
 
 import arrowAscend from '../../../../public/assets/notificationStatus/arrow-ascend.svg'
 import arrowDescend from '../../../../public/assets/notificationStatus/arrow-descend.svg'
@@ -42,39 +44,6 @@ const dictionary: { [key: string]: string } = {
   20: '#d4e442b0'
 }
 
-const addressChanger: { [key: string]: string } = {
-  '0xd00ae08403B9bbb9124bB305C09058E32C39A48c':
-    '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7', // WAVAX
-  '0xe401e9Ce0E354Ad9092a63eE1dFA3168bB83F3DA':
-    '0x8729438EB15e2C8B576fCc6AeCdA6A148776C0F5', // QI
-  '0xf22f05168508749fa42eDBddE10CB323D87c201d':
-    '0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd', // JOE
-  '0x83080D4b5fC60e22dFFA8d14AD3BB41Dde48F199':
-    '0x60781C2586D68229fde47564546784ab3fACA982', // PNG
-  '0xBA1C32241Ac77b97C8573c3dbFDe4e1e2A8fc0DF':
-    '0x59414b3089ce2AF0010e7523Dea7E2b35d776ec7', // YAK
-  '0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb':
-    '0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb', // KACY
-  '0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E':
-    '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab', // WETH
-  '0xFA17fb53da4c837594127b73fFd09fdb15f42C49':
-    '0xd586e7f844cea2f87f50152665bcbc2c279d8d70', //DAI
-  '0xbbcED92AC9B958F88A501725f080c0360007e858':
-    '0x50b7545627a5162f82a992c33b87adc75187b218' //WBTC
-}
-
-interface Networks {
-  Ropsten: string;
-  Avalanche: string;
-  Fuji: string;
-}
-
-const network2coingeckoID: Networks = {
-  Ropsten: 'ethereum',
-  Avalanche: 'avalanche',
-  Fuji: 'avalanche'
-}
-
 type ITokenInfoProps = {
   id: string,
   balance_in_pool: string,
@@ -82,7 +51,11 @@ type ITokenInfoProps = {
   name: string,
   symbol: string,
   allocation: number,
-  price: number
+  price: number,
+  logo: string,
+  wraps: {
+    logo: string
+  }
 }
 
 interface IPoolInfoProps {
@@ -102,23 +75,17 @@ const FundCard = ({ fund }: IFundProps) => {
     return calc ? calc.toFixed(2) : '0'
   }
 
-  const poolPlatform =
-    process.env.NEXT_PUBLIC_MASTER === '1' ? 'Avalanche' : 'Fuji'
-
   const [change, setChange] = React.useState<string[]>([])
   const [poolPrice, setPoolPrice] = React.useState<string>('')
   const [poolObject, setPoolObject] = React.useState<{ [key: string]: number }>(
     {}
   )
   const [poolInfo, setPoolInfo] = React.useState<IPoolInfoProps[]>([])
-  const [tokenImages, setTokenImages] = React.useState<{
-    [key: string]: string
-  }>({})
 
   const day = Math.trunc(Date.now() / 1000 - 60 * 60 * 24)
   const { data } = useSWR(
     [GET_INFO_POOL, fund.sipAddress],
-    (query, id) => request(SUBGRAPH_URL, query, { id, day }),
+    (query, id) => request(BACKEND_KASSANDRA, query, { id, day }),
     {
       refreshInterval: 10000
     }
@@ -127,38 +94,20 @@ const FundCard = ({ fund }: IFundProps) => {
   const { trackEventFunction } = useMatomoEcommerce()
 
   React.useEffect(() => {
-    const arrChangePrice = []
-    if (data?.now[0]?.close) {
-      const changeDay = calcChange(data.now[0].close, data.day[0]?.close)
+    if (data?.pool) {
+      setPoolInfo(data.pool?.underlying_assets)
+      setPoolPrice(Number(data.pool?.price_usd).toFixed(2))
 
+      const changeDay = calcChange(
+        data.pool.now[0]?.close,
+        data.pool.day[0]?.close
+      )
+      const arrChangePrice = []
       arrChangePrice[0] = changeDay
 
       setChange(arrChangePrice)
     }
   }, [data])
-
-  React.useEffect(() => {
-    if (data) {
-      setPoolInfo(data.pool?.underlying_assets)
-      setPoolPrice(Number(data.pool?.price_usd).toFixed(2))
-    }
-  }, [data])
-
-  React.useEffect(() => {
-    const arrayAddressPool = poolInfo
-      .slice(0, poolInfo.length >= 5 ? 5 : poolInfo.length)
-      .map(asset => addressChanger[asset.token.id] || asset.token.id)
-
-    const getCoingecko = async () => {
-      const URL = `/api/image-coingecko?poolinfo=${
-        network2coingeckoID[fund.platform]
-      }&tokenAddress=${arrayAddressPool}`
-      const res = await fetch(URL)
-      const data = await res.json()
-      setTokenImages(data.images ?? {})
-    }
-    getCoingecko()
-  }, [poolInfo, poolPlatform])
 
   const getPercentage = (weight: number) => {
     return Number((weight * 100).toFixed(2))
@@ -213,7 +162,7 @@ const FundCard = ({ fund }: IFundProps) => {
           </div>
         </S.Price>
         <S.TokensSymbols>
-          <TokenIcons poolInfo={poolInfo} images={tokenImages} />
+          <TokenIcons poolInfo={poolInfo} />
           {poolInfo.length > 5 && <span>+{poolInfo.length - 5}</span>}
         </S.TokensSymbols>
       </S.TokenInfo>
