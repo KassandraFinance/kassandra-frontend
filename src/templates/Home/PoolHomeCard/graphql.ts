@@ -17,29 +17,33 @@ export const GET_INFO_POOL = gql`
         # token information
         token {
           id
+          logo
           name
           decimals
           symbol
           price_usd
+          wraps {
+            logo
+          }
         }
       }
-    }
-    now: candles(
-      where: { base: "usd", period: 3600, pool: $id }
-      orderBy: timestamp
-      orderDirection: desc
-      first: 1
-    ) {
-      timestamp
-      close
-    }
-    day: candles(
-      where: { base: "usd", period: 3600, timestamp_gt: $day, pool: $id }
-      orderBy: timestamp
-      first: 1
-    ) {
-      timestamp
-      close
+      now: price_candles(
+        where: { base: "usd", period: 3600 }
+        orderBy: timestamp
+        orderDirection: desc
+        first: 1
+      ) {
+        timestamp
+        close
+      }
+      day: price_candles(
+        where: { base: "usd", period: 3600, timestamp_gt: $day }
+        orderBy: timestamp
+        first: 1
+      ) {
+        timestamp
+        close
+      }
     }
   }
 `

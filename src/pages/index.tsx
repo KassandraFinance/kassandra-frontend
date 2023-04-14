@@ -6,7 +6,7 @@ import Big from 'big.js'
 import { useAppDispatch } from '../store/hooks'
 import { setDaoInfo, IDaoInfo } from '../store/reducers/daoInfoSlice'
 
-import { SUBGRAPH_URL, products } from '../constants/tokenAddresses'
+import { SUBGRAPH_URL } from '../constants/tokenAddresses'
 
 import Home from '../templates/Home'
 
@@ -53,8 +53,6 @@ export default function HomePage({ daoInfo }: IHomePageProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const sipAddresses = products.map(product => product.sipAddress)
-
   const response = await fetch(SUBGRAPH_URL, {
     method: 'POST',
     headers: {
@@ -62,7 +60,7 @@ export const getStaticProps: GetStaticProps = async () => {
     },
     body: JSON.stringify({
       query: `
-      query ($ids: [ID!]!) {
+      query {
         factory(id: "0x958c051B55a173e393af696EcB4C4FF3D6C13930") {
           total_value_locked_usd
           total_volume_usd
@@ -70,10 +68,7 @@ export const getStaticProps: GetStaticProps = async () => {
           total_fees_exit_usd
         }
       }
-      `,
-      variables: {
-        ids: sipAddresses
-      }
+      `
     })
   }).then(res => res.json())
 

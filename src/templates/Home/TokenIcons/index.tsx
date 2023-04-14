@@ -12,7 +12,11 @@ type ITokenInfoProps = {
   name: string,
   symbol: string,
   allocation: number,
-  price: number
+  price: number,
+  logo: string,
+  wraps?: {
+    logo: string
+  }
 }
 
 interface IPoolInfoProps {
@@ -23,20 +27,10 @@ interface IPoolInfoProps {
 }
 
 interface TokenIconsProps {
-  images: { [key: string]: string };
   poolInfo: IPoolInfoProps[];
 }
 
-const addressChanger: { [key: string]: string } = {
-  '0xe28Ad9Fa07fDA82abab2E0C86c64A19D452b160E':
-    '0x49d5c2bdffac6ce2bfdb6640f4f80f226bc10bab', // WETH
-  '0xFA17fb53da4c837594127b73fFd09fdb15f42C49':
-    '0xd586e7f844cea2f87f50152665bcbc2c279d8d70', //DAI
-  '0xbbcED92AC9B958F88A501725f080c0360007e858':
-    '0x50b7545627a5162f82a992c33b87adc75187b218' //WBTC
-}
-
-const TokenIcons = ({ images, poolInfo }: TokenIconsProps) => {
+const TokenIcons = ({ poolInfo }: TokenIconsProps) => {
   return (
     <S.Container>
       {poolInfo
@@ -45,17 +39,12 @@ const TokenIcons = ({ images, poolInfo }: TokenIconsProps) => {
           <S.ImageWrapper
             key={index}
             className={
-              images[addressChanger[asset.token.id] ?? asset.token.id]
-                ? ''
-                : 'svg-none'
+              asset.token.wraps?.logo ?? asset.token.logo ? '' : 'svg-none'
             }
             index={index}
           >
             <Image
-              src={
-                images[addressChanger[asset.token.id] ?? asset.token.id] ||
-                none.src
-              }
+              src={(asset.token.wraps?.logo ?? asset.token.logo) || none.src}
               alt=""
               width={18}
               height={18}

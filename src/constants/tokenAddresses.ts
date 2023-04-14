@@ -11,6 +11,8 @@ export const LPDaiAvax = process.env.NEXT_PUBLIC_MASTER === '1' ?
   :
   '0xe64b1772a9e28E694FEc27Bc7901f88855252E9F'
 
+export const BACKEND_KASSANDRA = "https://backend.kassandra.finance"
+
 export const LPKacyAvaxPNG = process.env.NEXT_PUBLIC_MASTER === '1' ?
   '0x1938cE0E14dD71caab96F52dF3F49b1D1DAF8861'
   :
