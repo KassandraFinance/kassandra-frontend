@@ -21,7 +21,7 @@ const Investors = () => {
           title="investors"
           titleColor="#ffbf00"
           subTitle="Diversify with simple steps through managers and their strategies"
-          description="Social trading made safe: know who is delegating your money, split your
+          description="Social trading made safe: know who you are delegating your money to, split your
         exposure and change strategies anytime to save money or scale in
         positions."
           backgroundImg="/assets/images/hero-investor.png"

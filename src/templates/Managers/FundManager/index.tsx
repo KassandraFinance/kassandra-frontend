@@ -12,11 +12,11 @@ const FundManager = () => (
   <S.FundManagerContainer>
     <FadeIn threshold={0.5}>
       <S.TittleWrapper>
-        <Subtitle text="It’s easy to tokenize your portfolio and become a fund manager" />
+        <Subtitle text="It’s easy to tokenize your portfolio and become an asset manager" />
 
         <Paragraph
           text="Select tokens straight from your wallet, create your own tokenized
-          ERC-20 standard investment fund, and start making money with fees!"
+          ERC-20 standard crypto portfolio, and start making money with fees!"
         />
       </S.TittleWrapper>
     </FadeIn>
@@ -39,7 +39,7 @@ const FundManager = () => (
             KASSANDRA <br /> PROTOCOL
           </p>
           <span />
-          <p>INDEX FUND</p>
+          <p>MANAGED POOL</p>
         </S.ImageDescription>
       </S.ImageContent>
     </FadeIn>

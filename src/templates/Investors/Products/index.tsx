@@ -22,7 +22,7 @@ const Products = () => {
       <FadeInVertical threshold={0.5}>
         <S.TitleWrapper>
           <Subtitle text="Start exploring KassandraDAO" />
-          <Paragraph text="Here are some index funds created by us:" />
+          <Paragraph text="Here are some featured tokenized portfolios and strategies created using Kassandra:" />
         </S.TitleWrapper>
       </FadeInVertical>
 

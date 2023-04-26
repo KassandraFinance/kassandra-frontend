@@ -37,8 +37,8 @@ const Advantages = () => {
             <div className="description-connecting">
               <span>Protocol</span>
               <p>
-                Automated processes that save money and make managing dETFs
-                easier.
+                Automated processes that save money and and make decentralized
+                asset management easier.
               </p>
             </div>
             <div className="description-connecting">

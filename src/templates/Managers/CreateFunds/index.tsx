@@ -23,7 +23,7 @@ interface IManagerText {
 const managerFundsArray = [
   {
     id: 1,
-    title: 'Create an index fund',
+    title: 'Create a managed pool',
     paragraph:
       'Create your own index token that will work as its own Automated Market Maker, following allocations percentages automatically.',
     image: '/assets/images/create-funds-one.svg'
@@ -175,7 +175,7 @@ const CreateFund = () => {
                   target="_blank"
                   backgroundSecondary
                   size="huge"
-                  text="Create my own fund"
+                  text="Create a managed pool"
                   onClick={() =>
                     trackEventFunction(
                       'click-on-button',
