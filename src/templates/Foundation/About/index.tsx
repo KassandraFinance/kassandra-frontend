@@ -18,7 +18,7 @@ const About = () => {
           <Paragraph
             text="Kassandra is an decentralized autonomous organization of
             decentralized finance that governs a protocol that allows the
-            creation and management of tokenized index funds, bringing a new
+            creation and management of tokenized crypto portfolios, bringing a new
             class of products to managers and investors."
           />
 
