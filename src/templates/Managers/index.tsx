@@ -23,7 +23,7 @@ const Managers = () => {
               titleNumber="02"
               title="manager"
               titleColor="#26dbdb"
-              subTitle="Earn money managing funds in a uniquely innovative hub"
+              subTitle="Earn money managing assets in a uniquely innovative hub"
               description="Be part of a community of skilled managers creating smart investment
             funds and get paid for it"
               backgroundImg="/assets/images/manager-hero.svg"
@@ -33,7 +33,7 @@ const Managers = () => {
                 as="a"
                 href="https://3j2bd7x9okh.typeform.com/to/bBnYwVOD"
                 target="_blank"
-                text="Create your fund"
+                text="Create your Pool"
                 size="huge"
                 backgroundPrimary
                 onClick={() =>

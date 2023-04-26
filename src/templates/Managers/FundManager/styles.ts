@@ -69,7 +69,6 @@ export const ImageDescription = styled.div`
   }
 
   P {
-    margin-right: 2rem;
     @media (max-width: 1050px) {
       margin-right: 0;
     }
