@@ -69,9 +69,8 @@ const CommunityTenets = () => {
               <S.Caption color="magenta">Rewards</S.Caption>
               <S.SubHeading>Get your share</S.SubHeading>
               <S.SubDescription>
-                Reap the benefits of being part of our community by earning
-                protocol revenue from governance and occasional community
-                bounties.
+                Reap the benefits of being part of our community by receiving
+                KACY from governance and occasional community bounties.
               </S.SubDescription>
             </S.CommunityTenetText>
           </S.CommunityTenet>

@@ -45,15 +45,6 @@ const Team = () => {
           }}
         />
         <TeamCard
-          name="Antônio Farias"
-          role="PRODUCT MANAGER"
-          image="assets/team/tony.png"
-          social={{
-            linkedin: 'https://www.linkedin.com/in/tonifarias/',
-            twitter: 'https://twitter.com/tonifariasjr'
-          }}
-        />
-        <TeamCard
           name="Arthur Stofella"
           role="PRODUCT DESIGNER"
           image="assets/team/toffa.png"

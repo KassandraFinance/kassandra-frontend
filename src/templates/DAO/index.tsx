@@ -57,8 +57,6 @@ const TokenHolder = () => {
 
       <Governance />
 
-      <Scarcity />
-
       <FlowingRevenue />
 
       <LockVote />
