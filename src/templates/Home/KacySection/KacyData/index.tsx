@@ -82,14 +82,14 @@ const KacyData = ({ setIsOpenModal }: IKacyDataProps) => {
   return (
     <S.KacyDataContainer>
       <SectionSubtitle
-        text="Be part of the cutting edge of tokenized index funds."
+        text="Be part of the cutting edge of tokenized crypto portfolios."
         as="h5"
       />
 
       <S.Text>
-        Our governance token allows you to create portfolios, support your
-        favorite strategies, integrate with partners and vote on issues that
-        matter to you.
+        Our governance token allows you to shape the future of Kassandra,
+        support your favorite strategies, integrate with partners, and vote on
+        issues that matter to you.
       </S.Text>
 
       <S.KacyDataCardContainer>

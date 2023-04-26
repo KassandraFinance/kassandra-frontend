@@ -39,53 +39,55 @@ const DaoSection = () => {
         number="03"
         title="DAO"
         color="#E843C4"
-        subtitle="Get KACY, earn protocol fees and participate in our governance"
-        text="Acquire voting power to build, invest and contribute to Kassandra. Help maintain the DAO and gain a stake in all of our protocol fees."
+        subtitle="Get KACY and participate in our governance to build the future"
+        text="Acquire voting power to build, invest and contribute to Kassandra. Help maintain the DAO and join us in the future of decentralized asset management."
         btnText="Governance 101"
         link="/dao"
         img={daoImg}
       />
 
-      <FadeIn threshold={0.5}>
-        <HomeHeading
-          title="kassandra ecosystem"
-          color="#E843C4"
-          subTitle="Connecting investors and managers to build decentralized ETFs"
-          text="Help Kassandra grow: Stake your tokens to get voting rights, help with new investment products and keep the protocol healthy."
-        />
-      </FadeIn>
-
-      <FadeIn threshold={0.5}>
-        <S.DaoCardContainer>
-          <DaoCardInfo
-            icon={assetsDistributionIcon}
-            title="5% Holding Rule"
-            color="#FFBF00"
-            subtilte="Growing KACY’s value"
-            text="Every new investment product on Kassandra must hold at least 5% of KACY tokens as part of its portfolio."
-          />
-
-          <S.Line />
-
-          <DaoCardInfo
-            icon={feeCoinIcon}
-            title="3% redeem fee"
+      {/*
+        <FadeIn threshold={0.5}>
+          <HomeHeading
+            title="kassandra ecosystem"
             color="#E843C4"
-            subtilte="DAO Flowing revenue"
-            text="A 3% fee is charged when investment tokens are redeemed to aid the DAO's innovation and development fund."
+            subTitle="Connecting investors and managers to build decentralized ETFs"
+            text="Help Kassandra grow: Stake your tokens to get voting rights, help with new investment products and keep the protocol healthy."
           />
+        </FadeIn>
 
-          <S.Line />
+        <FadeIn threshold={0.5}>
+          <S.DaoCardContainer>
+            <DaoCardInfo
+              icon={assetsDistributionIcon}
+              title="5% Holding Rule"
+              color="#FFBF00"
+              subtilte="Growing KACY’s value"
+              text="Every new investment product on Kassandra must hold at least 5% of KACY tokens as part of its portfolio."
+            />
 
-          <DaoCardInfo
-            icon={voteIcon}
-            title="vote lock"
-            color="#26DBDB"
-            subtilte="Making KACY scarce"
-            text="To vote on proposals, holders choose to lock tokens for distinct time periods to earn more voting power."
-          />
-        </S.DaoCardContainer>
-      </FadeIn>
+            <S.Line />
+
+            <DaoCardInfo
+              icon={feeCoinIcon}
+              title="3% redeem fee"
+              color="#E843C4"
+              subtilte="DAO Flowing revenue"
+              text="A 3% fee is charged when investment tokens are redeemed to aid the DAO's innovation and development fund."
+            />
+
+            <S.Line />
+
+            <DaoCardInfo
+              icon={voteIcon}
+              title="vote lock"
+              color="#26DBDB"
+              subtilte="Making KACY scarce"
+              text="To vote on proposals, holders choose to lock tokens for distinct time periods to earn more voting power."
+            />
+          </S.DaoCardContainer>
+        </FadeIn>
+      */}
     </S.Container>
   )
 }

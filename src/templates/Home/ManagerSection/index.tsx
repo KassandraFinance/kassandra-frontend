@@ -23,7 +23,7 @@ const ManagerCardData = [
   {
     icon: simpleIcon,
     title: 'Simple',
-    text: 'Easily create your fund, track your metrics, change allocations and tokens in an intuitive interface.'
+    text: 'Easily create your managed pool, track your metrics, change allocations and tokens in an intuitive interface.'
   },
   {
     icon: inexpensiveIcon,

@@ -28,8 +28,7 @@ export default function HomePage({ daoInfo }: IHomePageProps) {
       <Head>
         <meta
           name="description"
-          content="Manage, tokenized
-          investment funds effortlessly"
+          content="Manage, tokenized crypto portfolios effortlessly"
         />
         <meta
           property="og:image"
@@ -41,7 +40,7 @@ export default function HomePage({ daoInfo }: IHomePageProps) {
 
         <meta
           name="description"
-          content="Create, Manage and invest in tokenized index funds effortlessly."
+          content="Create, Manage and invest in tokenized crypto portfolios effortlessly."
         />
 
         <title>Kassandra Finance</title>
@@ -90,7 +89,7 @@ export const getStaticProps: GetStaticProps = async () => {
       },
       {
         value: Big(arrData.total_fees_exit_usd).toString(),
-        title: 'withdraw fees'
+        title: 'PROTOCOL FEES'
       }
     ]
   }
