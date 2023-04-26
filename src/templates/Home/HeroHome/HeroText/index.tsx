@@ -21,7 +21,7 @@ const HeroText = () => {
           <S.VisibilityHidden>Invest in</S.VisibilityHidden> tokenized
         </S.SubTitle>
 
-        <S.SubTitle>index funds</S.SubTitle>
+        <S.SubTitle>crypto portfolios</S.SubTitle>
       </S.SubTitleWrapper>
     </S.TitleContainer>
   )

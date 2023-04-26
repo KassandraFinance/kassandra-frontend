@@ -37,16 +37,14 @@ const InvestorsSection = () => {
         color="#FFBF00"
         subtitle="Buy one token to follow strategies
 that fit you"
-        text="Take advantage of social trading to increase your diversification.
-By buying a single token, you delegate funds to trusted managers
-that will work to improve your gains and reduce your risks."
+        text="Take advantage of social trading to increase your diversification. By buying a single token, you gain exposure to up to 50 tokens and strategies that can improve your gains and reduce your risks."
         btnText="Become an investor"
         link="/investors"
         img={investorImg}
       />
 
       <FadeIn threshold={1}>
-        <HomeHeading title="Foundation-curated Products" color="#FFBF00" />
+        <HomeHeading title="Featured Portfolios" color="#FFBF00" />
       </FadeIn>
 
       <S.PoolCardContainer>
