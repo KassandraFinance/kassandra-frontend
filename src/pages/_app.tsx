@@ -6,6 +6,7 @@ import { ThemeProvider } from 'styled-components'
 import { useRouter } from 'next/router'
 import { Provider } from 'react-redux'
 import { SWRConfig } from 'swr'
+import { clarity } from 'react-microsoft-clarity'
 
 import GlobalStyles from '../styles/global'
 import theme from '../styles/theme'
@@ -34,6 +35,12 @@ const instance = createInstance({
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter()
 
+  React.useEffect(() => {
+    process.env.NEXT_PUBLIC_NODE_ENV === 'development'
+      ? ''
+      : clarity.init(process.env.NEXT_PUBLIC_CLARITY || '')
+  }, [])
+
   return (
     <Provider store={store}>
       <MatomoProvider value={instance}>
@@ -57,33 +64,10 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
             />
             <meta property="og:site_name" content="Kassandra" />
             <meta property="og:type" content="website" />
-            {/* <meta property="og:url" content="https://kassandra.finance/" /> */}
             <meta
               property="og:title"
               content="Kassandra DAO - Tokenized index funds"
             />
-            {/* <meta
-            property="og:image:alt"
-            content="Welcome to Kassandra DAO - Tokenized data-driven investment funds"
-          />
-          <meta
-            property="og:image"
-            content="https://kassandra.finance/favicon.svg"
-          />
-          <meta property="og:image:width" content="300" />
-          <meta property="og:image:height" content="300" />
-          <meta property="og:image:alt" content="Kassandra" />
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:site" content="@dao_kassandra" />
-          <meta name="twitter:title" content="Kassandra" />
-          <meta
-            name="twitter:image"
-            content="https://kassandra.finance/kacy-og.png"
-          />
-          <meta
-            name="twitter:image:alt"
-            content="Welcome to Kassandra DAO - Tokenized data-driven investment funds"
-          /> */}
           </Head>
           <Toastify />
           <GlobalStyles />
