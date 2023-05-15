@@ -1,20 +1,20 @@
 interface PoolDetails {
-  pid: number;
-  symbol: string;
+  pid: number
+  symbol: string
   properties: {
     logo: {
-      src: string,
+      src: string
       style: {
         width: string
       }
-    },
-    title?: string,
+    }
+    title?: string
     link?: string
-  };
-  stakeWithVotingPower: boolean;
-  stakeWithLockPeriod: boolean;
-  address: string;
-  isLP: boolean;
+  }
+  stakeWithVotingPower: boolean
+  stakeWithLockPeriod: boolean
+  address: string
+  isLP: boolean
 }
 
 const KACY_ADDRESS =

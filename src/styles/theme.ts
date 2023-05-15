@@ -52,7 +52,6 @@ export default {
     space40: '4.0rem',
     space48: '4.8rem',
     space56: '5.6rem'
-
   },
   layers: {
     base: 10,

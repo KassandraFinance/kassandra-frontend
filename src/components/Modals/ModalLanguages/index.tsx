@@ -6,8 +6,8 @@ import usa from '../../../public/assets/flags/usa.svg'
 import * as S from './styles'
 
 interface IModalLanguagesProps {
-  modalOpen: boolean;
-  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  modalOpen: boolean
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const ModalLanguages = ({ modalOpen, setModalOpen }: IModalLanguagesProps) => {

@@ -27,7 +27,7 @@ export const QuestionText = styled.p`
 `
 
 interface IOpen {
-  isOpen: boolean;
+  isOpen: boolean
 }
 
 // eslint-disable-next-line prettier/prettier

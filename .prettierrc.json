@@ -2,7 +2,7 @@
   "semi": false,
   "singleQuote": true,
   "arrowParens": "avoid",
-  "parser": "flow",
+  "parser": "typescript",
   "bracketSpacing": true,
   "trailingComma": "none",
   "endOfLine": "auto"

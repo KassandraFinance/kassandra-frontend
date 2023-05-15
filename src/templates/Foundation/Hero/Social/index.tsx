@@ -13,8 +13,8 @@ import discourseIcon from '../../../../../public/assets/socialMidia/discourse.sv
 import * as S from './styles'
 
 type LinkType = {
-  name: string,
-  link: string,
+  name: string
+  link: string
   icon: string
 }
 

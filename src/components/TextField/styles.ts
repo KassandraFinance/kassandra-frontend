@@ -105,7 +105,7 @@ const wrapperModifiers = {
 }
 
 // eslint-disable-next-line prettier/prettier
-export const Wrapper = styled.div<WrapperProps >`
+export const Wrapper = styled.div<WrapperProps>`
   ${({ theme, error, disabled }) => css`
     ${error && wrapperModifiers.error()}
     ${disabled && wrapperModifiers.disabled(theme)}

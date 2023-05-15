@@ -5,7 +5,7 @@ import * as S from './styles'
 export type SliderSettings = Settings
 
 export type SliderProps = {
-  children: React.ReactNode,
+  children: React.ReactNode
   settings: SliderSettings
 }
 

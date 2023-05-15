@@ -13,14 +13,14 @@ import Subtitle from '../../../components/Subtitle'
 import * as S from './styles'
 
 interface ISectionCardProps {
-  number: string;
-  title: string;
-  color: string;
-  subtitle: string;
-  text: string;
-  btnText: string;
-  link: string;
-  img: StaticImageData;
+  number: string
+  title: string
+  color: string
+  subtitle: string
+  text: string
+  btnText: string
+  link: string
+  img: StaticImageData
 }
 
 const SectionCard = ({

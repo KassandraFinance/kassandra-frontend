@@ -3,13 +3,13 @@ import Image, { StaticImageData } from 'next/image'
 import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
 export interface PartnerData {
-  href: string;
+  href: string
   image: {
-    src: StaticImageData,
-    width: number,
+    src: StaticImageData
+    width: number
     height: number
-  };
-  name: string;
+  }
+  name: string
 }
 
 const Partner = ({ href, image, name }: PartnerData) => {

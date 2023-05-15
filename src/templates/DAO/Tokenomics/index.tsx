@@ -9,7 +9,7 @@ import Paragraph from '../../../components/Paragraph'
 import * as S from './styles'
 
 type KacyMarketDataType = {
-  value: string,
+  value: string
   title: string
 }
 
@@ -96,7 +96,7 @@ const Tokenomics = () => {
             </S.KassandraImageWrapper>
 
             <S.ValuesContainer>
-              {kacyMarketData.map((item: { value: string, title: string }) => {
+              {kacyMarketData.map((item: { value: string; title: string }) => {
                 return (
                   <>
                     <S.ValueContent>

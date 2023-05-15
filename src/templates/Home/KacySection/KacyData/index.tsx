@@ -10,12 +10,12 @@ import KacyCardData from '../KacyCardData'
 import * as S from './styles'
 
 type KacyMarketDataType = {
-  value: string,
+  value: string
   title: string
 }
 
 interface IKacyDataProps {
-  setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const KacyData = ({ setIsOpenModal }: IKacyDataProps) => {

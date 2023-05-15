@@ -72,7 +72,7 @@ export const TextContainer = styled.div`
 `
 
 interface ILineProps {
-  color: string;
+  color: string
 }
 
 export const Line = styled.div`

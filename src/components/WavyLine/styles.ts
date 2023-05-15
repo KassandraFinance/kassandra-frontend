@@ -19,7 +19,7 @@ export const WaveContainer = styled.div`
 `
 
 interface IWaveProps {
-  color: 'color1' | 'color2';
+  color: 'color1' | 'color2'
 }
 
 export const Wave = styled.div`

@@ -41,7 +41,7 @@ export const Card = styled.div`
 `
 
 interface CardHeaderProps {
-  isTricrypto?: boolean;
+  isTricrypto?: boolean
 }
 // prettier-ignore
 export const CardHeader = styled.div<CardHeaderProps>`
@@ -127,7 +127,7 @@ export const TextWrapper = styled.div`
 `
 
 interface INameAndSymbolProps {
-  isTricrypto: boolean;
+  isTricrypto: boolean
 }
 
 // prettier-ignore
@@ -174,7 +174,7 @@ export const TokenInfo = styled.div`
 `
 
 export interface IPriceProps {
-  change: number;
+  change: number
 }
 
 // prettier-ignore

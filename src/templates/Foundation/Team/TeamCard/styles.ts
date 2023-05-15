@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import theme from '../../../../styles/theme'
 
 interface CardProps {
-  isLastCard: boolean;
+  isLastCard: boolean
 }
 
 // eslint-disable-next-line prettier/prettier

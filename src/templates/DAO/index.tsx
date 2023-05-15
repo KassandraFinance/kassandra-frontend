@@ -47,7 +47,11 @@ const TokenHolder = () => {
             text="Buy KACY"
             onClick={() => {
               setIsOpenModal(true)
-              trackEventFunction('click-on-button', 'open-modal-buy-kacy', `section-dao`)
+              trackEventFunction(
+                'click-on-button',
+                'open-modal-buy-kacy',
+                `section-dao`
+              )
             }}
           />
         </Hero>

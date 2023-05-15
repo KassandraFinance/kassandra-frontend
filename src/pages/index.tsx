@@ -11,7 +11,7 @@ import { BACKEND_KASSANDRA } from '../constants/tokenAddresses'
 import Home from '../templates/Home'
 
 interface IHomePageProps {
-  daoInfo: IDaoInfo;
+  daoInfo: IDaoInfo
 }
 
 export default function HomePage({ daoInfo }: IHomePageProps) {
@@ -72,9 +72,9 @@ export const getStaticProps: GetStaticProps = async () => {
   }).then(res => res.json())
 
   type FactoryType = {
-    total_value_locked_usd: Big,
-    total_volume_usd: Big,
-    total_fees_swap_usd: Big,
+    total_value_locked_usd: Big
+    total_volume_usd: Big
+    total_fees_swap_usd: Big
     total_fees_exit_usd: Big
   }
 

@@ -1,13 +1,13 @@
 import * as S from './styles'
 
 interface GitHubDataProps {
-  yar: number;
+  yar: number
   commits: {
-    lastYar: number,
-    currentYar: number,
-    lastWeek: number,
+    lastYar: number
+    currentYar: number
+    lastWeek: number
     lastMonth: number
-  };
+  }
 }
 
 const GitHubData = ({ commits, yar }: GitHubDataProps) => {

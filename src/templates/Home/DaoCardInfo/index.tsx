@@ -6,11 +6,11 @@ import Paragraph from '../../../components/Paragraph'
 import * as S from './styles'
 
 interface IDaoCardInfoProps {
-  icon: StaticImageData;
-  title: string;
-  color: string;
-  subtilte: string;
-  text: string;
+  icon: StaticImageData
+  title: string
+  color: string
+  subtilte: string
+  text: string
 }
 
 const DaoCardInfo = ({

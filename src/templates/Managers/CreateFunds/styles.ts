@@ -56,7 +56,7 @@ export const CreateFundContent = styled.div`
 `
 
 interface INumberButtonProps {
-  isActiveImage?: boolean;
+  isActiveImage?: boolean
 }
 
 // prettier-ignore
@@ -182,7 +182,7 @@ export const NumberButtonsContainer = styled.div`
   }
 `
 interface INumberButtonProps {
-  isActiveButton?: boolean;
+  isActiveButton?: boolean
 }
 
 // prettier-ignore
@@ -266,7 +266,7 @@ export const ButtonsContent = styled.div`
   }
 `
 interface IisActiveImageProps {
-  isActiveImage: boolean;
+  isActiveImage: boolean
 }
 
 // prettier-ignore

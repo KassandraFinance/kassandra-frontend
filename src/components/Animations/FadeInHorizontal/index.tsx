@@ -4,9 +4,9 @@ import { useInView } from 'react-intersection-observer'
 import * as S from './styles'
 
 interface IFadeInHorizontalProps {
-  children: JSX.Element[] | JSX.Element;
-  threshold?: number;
-  invert?: boolean;
+  children: JSX.Element[] | JSX.Element
+  threshold?: number
+  invert?: boolean
 }
 
 const FadeInHorizontal = ({

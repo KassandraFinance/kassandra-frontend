@@ -3,9 +3,9 @@ import React from 'react'
 import { NotificationContainer, MessageContainer } from './styles'
 
 interface IStyledToastContentProps {
-  type: string;
-  title: string;
-  message: string;
+  type: string
+  title: string
+  message: string
 }
 
 const StyledToastContent = ({

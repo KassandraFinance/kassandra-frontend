@@ -14,10 +14,10 @@ import arrowWhite from '../../../../public/assets/utilities/arrow-white.svg'
 import * as S from './styles'
 
 interface IManagerText {
-  id: number;
-  title: string;
-  paragraph: string;
-  image: string;
+  id: number
+  title: string
+  paragraph: string
+  image: string
 }
 
 const managerFundsArray = [

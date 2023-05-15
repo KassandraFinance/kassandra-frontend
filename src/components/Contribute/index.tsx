@@ -11,8 +11,8 @@ import logoSkew from '../../../public/assets/images/logo-big-skew.png'
 import * as S from './styles'
 
 interface IContributeProps {
-  title: string;
-  text: string;
+  title: string
+  text: string
 }
 
 const Contribute = ({ title, text }: IContributeProps) => {

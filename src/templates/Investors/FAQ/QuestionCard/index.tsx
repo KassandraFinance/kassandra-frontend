@@ -4,10 +4,10 @@ import useMatomoEcommerce from '../../../../hooks/useMatomoEcommerce'
 import * as S from './styles'
 
 interface QuestionCardProps {
-  question: string;
-  answer: string;
-  link?: string;
-  linkText?: string;
+  question: string
+  answer: string
+  link?: string
+  linkText?: string
 }
 
 const QuestionCard = ({

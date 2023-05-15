@@ -5,7 +5,7 @@ import * as S from './styles'
 type HeadingType = HTMLAttributes<HTMLHeadingElement>
 
 export type ISectionSubtitleProps = {
-  text: string,
+  text: string
   as?: React.ElementType<HeadingType>
 } & HeadingType
 

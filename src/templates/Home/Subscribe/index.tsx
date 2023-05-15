@@ -17,13 +17,13 @@ import arrowIcon from '../../../../public/assets/utilities/foward-arrow.svg'
 import * as S from './styles'
 
 interface IFormSignUpParams {
-  name?: string;
-  email?: string;
+  name?: string
+  email?: string
 }
 
 interface IOnChangeFormParam {
-  key: string;
-  value: string;
+  key: string
+  value: string
 }
 
 const Subscribe = () => {
