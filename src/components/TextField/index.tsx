@@ -5,13 +5,13 @@ import { useState, InputHTMLAttributes } from 'react'
 import * as S from './styles'
 
 export type TextFieldProps = {
-  onInput?: (value: string) => void,
-  label?: string,
-  initialValue?: string,
-  icon?: JSX.Element,
-  iconPosition?: 'left' | 'right',
-  disabled?: boolean,
-  disabledNoEvent?: boolean,
+  onInput?: (value: string) => void
+  label?: string
+  initialValue?: string
+  icon?: JSX.Element
+  iconPosition?: 'left' | 'right'
+  disabled?: boolean
+  disabledNoEvent?: boolean
   error?: string
 } & Omit<InputHTMLAttributes<HTMLInputElement>, 'onInput'>
 

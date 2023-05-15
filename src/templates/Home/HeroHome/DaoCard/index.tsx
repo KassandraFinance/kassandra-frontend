@@ -5,8 +5,8 @@ import { abbreviateNumber } from '../../../../utils/abbreviateNumber'
 import * as S from './styles'
 
 interface IDaoCardProps {
-  value: string;
-  title: string;
+  value: string
+  title: string
 }
 
 const DaoCard = ({ value, title }: IDaoCardProps) => {

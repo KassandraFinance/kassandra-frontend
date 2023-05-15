@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 interface IFadeInVerticalContainerProps {
-  inView: boolean;
+  inView: boolean
 }
 
 export const FadeInVerticalContainer = styled.div`

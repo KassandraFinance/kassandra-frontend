@@ -15,16 +15,16 @@ import lightTable10 from '../../../../public/assets/images/backgroundHome/light-
 import * as S from './styles'
 
 interface IMediumPost {
-  author: string;
-  categories: string[];
-  content: string;
-  description: string;
-  enclosure: object;
-  guid: string;
-  link: string;
-  pubDate: string;
-  thumbnail: string;
-  title: string;
+  author: string
+  categories: string[]
+  content: string
+  description: string
+  enclosure: object
+  guid: string
+  link: string
+  pubDate: string
+  thumbnail: string
+  title: string
 }
 
 const LatestNews = () => {

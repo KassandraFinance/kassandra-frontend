@@ -7,11 +7,11 @@ import Button from '../../../../components/Button'
 import * as S from './styles'
 
 interface INewsCardProps {
-  thumbnail: string;
-  title: string;
-  pubDate: string;
-  description: string;
-  link: string;
+  thumbnail: string
+  title: string
+  pubDate: string
+  description: string
+  link: string
 }
 
 const NewsCard = ({

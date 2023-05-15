@@ -108,7 +108,7 @@ const colors = {
 }
 
 interface ButtonProps {
-  variant: 'discord' | 'telegram';
+  variant: 'discord' | 'telegram'
 }
 
 // prettier-ignore

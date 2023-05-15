@@ -1,9 +1,9 @@
 import * as S from './styles'
 
 interface Colors {
-  done: string;
-  soon: string;
-  next: string;
+  done: string
+  soon: string
+  next: string
 }
 
 export const colors: Colors = {
@@ -13,9 +13,9 @@ export const colors: Colors = {
 }
 
 interface Icons {
-  done: JSX.Element;
-  soon: JSX.Element;
-  next: JSX.Element;
+  done: JSX.Element
+  soon: JSX.Element
+  next: JSX.Element
 }
 
 export const icons: Icons = {

@@ -3,8 +3,8 @@ import React from 'react'
 import * as S from './styles'
 
 interface IKacySectionProps {
-  value: string;
-  title: string;
+  value: string
+  title: string
 }
 
 const KacyCardData = ({ value, title }: IKacySectionProps) => {

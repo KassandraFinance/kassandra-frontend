@@ -3,16 +3,16 @@ import React from 'react'
 import * as S from './styles'
 
 type CardItem = {
-  title: string,
+  title: string
   text: string[]
 }
 
 export type RoadMapCardProps = {
-  color: string,
-  date: string,
-  title: string,
-  items: CardItem[],
-  icon: JSX.Element,
+  color: string
+  date: string
+  title: string
+  items: CardItem[]
+  icon: JSX.Element
   invisible?: boolean
 }
 

@@ -3,22 +3,22 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 export interface IDaoInfo {
   daoInfo: [
     {
-      value: string,
+      value: string
       title: 'TVL'
     },
     {
-      value: string,
+      value: string
       title: 'volume'
     },
     {
-      value: string,
+      value: string
       title: 'Swap fees'
     },
     {
-      value: string,
+      value: string
       title: 'withdraw fees'
     }
-  ];
+  ]
 }
 
 const initialState: IDaoInfo = {

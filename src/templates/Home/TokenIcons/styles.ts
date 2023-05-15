@@ -6,7 +6,7 @@ export const Container = styled.div`
   justify-content: flex-end;
 `
 interface IWrapperProps {
-  index: number;
+  index: number
 }
 
 // prettier-ignore

@@ -184,13 +184,10 @@ export const InstitutionalCard = styled.div`
 `
 
 interface ICardTitleProps {
-  color: string;
+  color: string
 }
 // eslint-disable-next-line prettier/prettier
-export const CardTitle =
-  styled.strong <
-  ICardTitleProps >
-  `
+export const CardTitle = styled.strong<ICardTitleProps>`
   margin-bottom: 1.6rem;
 
   color: ${props => props.color};

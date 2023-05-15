@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import theme from '../../../../styles/theme'
 
 interface IGitHubProps {
-  isCurrentYar: boolean;
+  isCurrentYar: boolean
 }
 
 // prettier-ignore

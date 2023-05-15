@@ -4,10 +4,10 @@ import Link from 'next/link'
 import * as S from './styles'
 
 interface IExternalLinkProps {
-  onClick?: React.MouseEventHandler;
-  hrefNext?: string;
-  hrefLink?: string;
-  text: string;
+  onClick?: React.MouseEventHandler
+  hrefNext?: string
+  hrefLink?: string
+  text: string
 }
 
 const ExternalLink = ({

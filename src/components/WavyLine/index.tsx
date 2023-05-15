@@ -3,7 +3,7 @@ import React from 'react'
 import * as S from './styles'
 
 interface IWavyLineProps {
-  color: 'color1' | 'color2';
+  color: 'color1' | 'color2'
 }
 
 const WavyLine = ({ color }: IWavyLineProps) => {

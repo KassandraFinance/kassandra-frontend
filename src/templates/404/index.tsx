@@ -4,8 +4,8 @@ import Button from '../../components/Button'
 import * as S from './styles'
 
 interface INotFoundProps {
-  text?: string;
-  contact?: string;
+  text?: string
+  contact?: string
 }
 
 const NotFound = ({ text, contact }: INotFoundProps) => (

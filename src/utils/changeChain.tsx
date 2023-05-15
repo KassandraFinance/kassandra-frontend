@@ -1,25 +1,25 @@
 interface CurrencyDetails {
-  name: string;
-  symbol: string;
-  decimals: number;
+  name: string
+  symbol: string
+  decimals: number
 }
 
 export interface ChainDetails {
-  chainId: number;
-  chainIdHex: string;
-  chainName: string;
-  nativeCurrency: CurrencyDetails;
-  rpcUrls: [string];
-  blockExplorerUrls: [string];
-  secondsPerBlock: number;
-  wrapped: string;
+  chainId: number
+  chainIdHex: string
+  chainName: string
+  nativeCurrency: CurrencyDetails
+  rpcUrls: [string]
+  blockExplorerUrls: [string]
+  secondsPerBlock: number
+  wrapped: string
 }
 
 // eslint-disable-next-line prettier/prettier
 declare let window: {
   ethereum: {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    request: (input: { method: string, params: [any] }) => void
+    request: (input: { method: string; params: [any] }) => void
   }
 }
 

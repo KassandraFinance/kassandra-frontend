@@ -39,7 +39,7 @@ export const TitleWrapper = styled.div`
 `
 
 interface ITitleProps {
-  color: string;
+  color: string
 }
 
 export const Title = styled.h5`

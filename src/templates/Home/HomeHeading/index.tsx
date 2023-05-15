@@ -6,10 +6,10 @@ import SectionSubtitle from '../../../components/SectionSubtitle'
 import * as S from './styles'
 
 interface IHomeHeadingProps {
-  title: string;
-  color: string;
-  subTitle?: string;
-  text?: string;
+  title: string
+  color: string
+  subTitle?: string
+  text?: string
 }
 
 const HomeHeading = ({

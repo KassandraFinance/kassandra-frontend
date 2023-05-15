@@ -55,7 +55,7 @@ export const Menu = styled.nav`
 `
 
 interface IMenuLinkProps {
-  active: boolean;
+  active: boolean
 }
 
 export const MenuLink = styled.a`

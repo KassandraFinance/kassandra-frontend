@@ -11,7 +11,7 @@ export const Card = styled.div`
 `
 
 interface CardHeaderProps {
-  isTricrypto?: boolean;
+  isTricrypto?: boolean
 }
 // prettier-ignore
 export const CardHeader = styled.div<CardHeaderProps>`
@@ -44,7 +44,7 @@ export const TextWrapper = styled.div`
 `
 
 interface INameAndSymbolProps {
-  isTricrypto: boolean;
+  isTricrypto: boolean
 }
 
 // eslint-disable-next-line prettier/prettier
@@ -62,12 +62,12 @@ export const NameAndSymbol = styled.div<INameAndSymbolProps>`
     margin-top: 0.8rem;
 
     font-size: 1.2rem;
-    line-height:1.46rem;
+    line-height: 1.46rem;
     font-weight: 400;
-    color: #C4C4C4;
+    color: #c4c4c4;
 
     span {
-      color: #FFFFFF;
+      color: #ffffff;
     }
   }
 `
@@ -83,7 +83,7 @@ export const TokenInfo = styled.div`
 `
 
 export interface IPriceProps {
-  change: number;
+  change: number
 }
 
 // prettier-ignore

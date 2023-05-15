@@ -33,7 +33,7 @@ export const Container = styled.div`
 `
 
 interface ITitleProps {
-  color: string;
+  color: string
 }
 
 export const Title = styled.h3`
@@ -54,7 +54,7 @@ export const Title = styled.h3`
 `
 
 interface ILineProps {
-  color: string;
+  color: string
 }
 
 export const Line = styled.div`

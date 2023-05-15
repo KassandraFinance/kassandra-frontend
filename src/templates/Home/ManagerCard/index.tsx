@@ -6,9 +6,9 @@ import Paragraph from '../../../components/Paragraph'
 import * as S from './styles'
 
 interface IManagerCardProps {
-  icon: StaticImageData;
-  title: string;
-  text: string;
+  icon: StaticImageData
+  title: string
+  text: string
 }
 
 const ManagerCard = ({ icon, title, text }: IManagerCardProps) => {

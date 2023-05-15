@@ -10,7 +10,7 @@ import github from '../../../../public/assets/socialMidia/github.svg'
 import * as S from './styles'
 
 interface IModalSocialMediaMobileProps {
-  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const ModalSocialMediaMobile = ({

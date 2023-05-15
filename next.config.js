@@ -1,7 +1,11 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['assets.coingecko.com', 'cdn-images-1.medium.com', 'tokens.1inch.io']
+    domains: [
+      'assets.coingecko.com',
+      'cdn-images-1.medium.com',
+      'tokens.1inch.io'
+    ]
   },
   async redirects() {
     return [
