@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components'
 
 interface IFadeInHorizontalContainerProps {
-  inView: boolean;
-  invert: string;
+  inView: boolean
+  invert: string
 }
 
 export const FadeInHorizontalContainer = styled.div`

@@ -14,7 +14,7 @@ export const Backdrop = styled.div`
 `
 
 interface IModalContainerProps {
-  modalOpen: boolean;
+  modalOpen: boolean
 }
 
 // prettier-ignore

@@ -50,24 +50,24 @@ const dictionary: { [key: string]: string } = {
 }
 
 type ITokenInfoProps = {
-  id: string,
-  balance_in_pool: string,
-  address: string,
-  name: string,
-  symbol: string,
-  allocation: number,
-  price: number,
-  logo: string,
+  id: string
+  balance_in_pool: string
+  address: string
+  name: string
+  symbol: string
+  allocation: number
+  price: number
+  logo: string
   wraps: {
     logo: string
   }
 }
 
 interface IPoolInfoProps {
-  balance: string;
-  token: ITokenInfoProps;
-  weight_goal_normalized: string;
-  weight_normalized: string;
+  balance: string
+  token: ITokenInfoProps
+  weight_goal_normalized: string
+  weight_normalized: string
 }
 
 type IPoolProps = {

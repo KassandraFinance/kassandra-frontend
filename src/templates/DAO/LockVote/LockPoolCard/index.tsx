@@ -4,14 +4,14 @@ import request from 'graphql-request'
 import useSWR from 'swr'
 import Big from 'big.js'
 import BigNumber from 'bn.js'
-import { AbiItem } from "web3-utils"
+import { AbiItem } from 'web3-utils'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
 import web3 from '../../../../utils/web3'
 import { BNtoDecimal } from '../../../../utils/numerals'
 
-import StakingABI from "../../../../constants/abi/Staking.json"
+import StakingABI from '../../../../constants/abi/Staking.json'
 import { LP_KACY_AVAX_PNG } from '../../../../constants/pools'
 import {
   LPDaiAvax,
@@ -26,22 +26,18 @@ import { GET_INFO_POOL } from '../graphql'
 import * as S from './styles'
 
 interface ILockPoolCardProps {
-  pid: number;
-  address?: string;
+  pid: number
+  address?: string
 }
 
 interface IInfoStaked {
-  votingMultiplier: string;
-  withdrawDelay: number;
-  hasExpired: boolean;
-  apr: BigNumber;
+  votingMultiplier: string
+  withdrawDelay: number
+  hasExpired: boolean
+  apr: BigNumber
 }
 
-
-const LockPoolCard = ({
-  pid,
-  address
-}: ILockPoolCardProps) => {
+const LockPoolCard = ({ pid, address }: ILockPoolCardProps) => {
   const [infoStaked, setInfoStaked] = React.useState<IInfoStaked>({
     votingMultiplier: '',
     withdrawDelay: 0,
@@ -56,10 +52,14 @@ const LockPoolCard = ({
   web3.setProvider('https://api.avax.network/ext/bc/C/rpc')
 
   // eslint-disable-next-line prettier/prettier
-  const stakingContract = new web3.eth.Contract((StakingABI as unknown) as AbiItem, Staking)
+  const stakingContract = new web3.eth.Contract(
+    StakingABI as unknown as AbiItem,
+    Staking
+  )
 
   const { data } = useSWR(
-    [GET_INFO_POOL, address], (query, id) => request(SUBGRAPH_URL, query, { id }),
+    [GET_INFO_POOL, address],
+    (query, id) => request(SUBGRAPH_URL, query, { id }),
     {
       refreshInterval: 10000
     }
@@ -166,10 +166,7 @@ const LockPoolCard = ({
           <S.LockPoolBottom>
             <span>
               VOTING POWER{' '}
-              <strong>
-                {infoStaked.votingMultiplier || '...'}
-              </strong>
-              / $KACY
+              <strong>{infoStaked.votingMultiplier || '...'}</strong>/ $KACY
             </span>
             <div>
               <span>
@@ -196,11 +193,11 @@ const LockPoolCard = ({
         <S.LockPoolMobile>
           <S.HeaderMobile>
             <S.titleLockPool>
-            {pid === 2
-              ? 'No Lock Pool'
-              : infoStaked.withdrawDelay / 60 / 60 / 24 < 1
-              ? infoStaked.withdrawDelay / 60 + '-Day Lock Pool'
-              : infoStaked.withdrawDelay / 60 / 60 / 24 + '-Day Lock Pool'}
+              {pid === 2
+                ? 'No Lock Pool'
+                : infoStaked.withdrawDelay / 60 / 60 / 24 < 1
+                ? infoStaked.withdrawDelay / 60 + '-Day Lock Pool'
+                : infoStaked.withdrawDelay / 60 / 60 / 24 + '-Day Lock Pool'}
             </S.titleLockPool>
             <Image
               src="/assets/logos/kacy-logo-rounded.svg"
@@ -224,8 +221,9 @@ const LockPoolCard = ({
                   ? '...'
                   : infoStaked.hasExpired
                   ? 0
-                  : BNtoDecimal(infoStaked.apr, 0)}%
-                </strong>
+                  : BNtoDecimal(infoStaked.apr, 0)}
+                %
+              </strong>
             </S.Item>
             <S.Item>
               <span>VOTING POWER</span>
@@ -242,7 +240,7 @@ const LockPoolCard = ({
                     : infoStaked.withdrawDelay / 60 / 60 / 24 < 1
                     ? infoStaked.withdrawDelay / 60
                     : infoStaked.withdrawDelay / 60 / 60 / 24}
-                  </strong>
+                </strong>
                 <Image
                   src="/assets/utilities/warning-gray.svg"
                   width={18}

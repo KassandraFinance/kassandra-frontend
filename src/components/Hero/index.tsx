@@ -6,14 +6,14 @@ import SectionTitle from '../SectionTitle'
 import * as S from './styles'
 
 interface IHeroProps {
-  titleNumber: string;
-  title: string;
-  titleColor: string;
-  subTitle: string;
-  description: string;
-  backgroundImg: string;
-  backgroundImgHight: string;
-  children: JSX.Element;
+  titleNumber: string
+  title: string
+  titleColor: string
+  subTitle: string
+  description: string
+  backgroundImg: string
+  backgroundImgHight: string
+  children: JSX.Element
 }
 
 const Hero = ({

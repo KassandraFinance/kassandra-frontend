@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 interface IParagraphProps {
-  fontWeight: number;
+  fontWeight: number
 }
 
 // eslint-disable-next-line prettier/prettier

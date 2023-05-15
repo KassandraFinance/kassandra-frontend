@@ -152,7 +152,7 @@ export const IconWrapper = styled.div`
 `
 
 interface Caption {
-  color?: 'amber' | 'cyan' | 'magenta';
+  color?: 'amber' | 'cyan' | 'magenta'
 }
 
 // eslint-disable-next-line prettier/prettier

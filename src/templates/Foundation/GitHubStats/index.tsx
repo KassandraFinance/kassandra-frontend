@@ -16,16 +16,16 @@ import Paragraph from '../../../components/Paragraph'
 import * as S from './styles'
 
 interface IMediumPost {
-  author: string;
-  categories: string[];
-  content: string;
-  description: string;
-  enclosure: object;
-  guid: string;
-  link: string;
-  pubDate: string;
-  thumbnail: string;
-  title: string;
+  author: string
+  categories: string[]
+  content: string
+  description: string
+  enclosure: object
+  guid: string
+  link: string
+  pubDate: string
+  thumbnail: string
+  title: string
 }
 
 const GitHubStats = () => {
@@ -45,9 +45,9 @@ const GitHubStats = () => {
   ).toISOString()
 
   const [commits, setCommits] = React.useState<{
-    lastYar: number,
-    currentYar: number,
-    lastWeek: number,
+    lastYar: number
+    currentYar: number
+    lastWeek: number
     lastMonth: number
   }>({
     lastYar: 0,
@@ -81,7 +81,7 @@ const GitHubStats = () => {
   const { data: data2 } = useSWR(MEDIUM_FEED_URL, fetcher)
 
   interface ICommitData {
-    nodes: { object: { history: { totalCount: number } } }[];
+    nodes: { object: { history: { totalCount: number } } }[]
   }
 
   function accTotalCommit(repositories: ICommitData) {

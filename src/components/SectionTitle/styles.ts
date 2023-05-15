@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 interface ITitleProps {
-  color: string;
+  color: string
 }
 // eslint-disable-next-line prettier/prettier
 export const SectionTitle = styled.h1<ITitleProps>`

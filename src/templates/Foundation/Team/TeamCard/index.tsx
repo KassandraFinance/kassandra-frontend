@@ -7,15 +7,15 @@ import FadeIn from '../../../../components/Animations/FadeIn'
 import * as S from './styles'
 
 interface ITeamCardProps {
-  name: string;
-  role: string;
-  image: string;
+  name: string
+  role: string
+  image: string
   social: {
-    github?: string,
-    linkedin?: string,
+    github?: string
+    linkedin?: string
     twitter?: string
-  };
-  isLastCard?: boolean;
+  }
+  isLastCard?: boolean
 }
 
 const TeamCard = ({

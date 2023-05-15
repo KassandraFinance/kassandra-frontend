@@ -18,8 +18,8 @@ export const Hero = styled.div`
 `
 
 interface IBackgroundImageProps {
-  backgroundImg: string;
-  backgroundImgHight: string;
+  backgroundImg: string
+  backgroundImgHight: string
 }
 
 // prettier-ignore

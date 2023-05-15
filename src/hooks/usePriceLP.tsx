@@ -1,15 +1,18 @@
-import Big from "big.js"
-import { AbiItem } from "web3-utils"
+import Big from 'big.js'
+import { AbiItem } from 'web3-utils'
 
-import PriceLP from "../constants/abi/PriceLP.json"
+import PriceLP from '../constants/abi/PriceLP.json'
 import web3 from '../utils/web3'
 
-import { ERC20 } from "./useERC20Contract"
+import { ERC20 } from './useERC20Contract'
 
 const usePriceLP = () => {
   const getContract = (address: string) => {
     // eslint-disable-next-line prettier/prettier
-    const contract = new web3.eth.Contract((PriceLP.abi as unknown) as AbiItem, address)
+    const contract = new web3.eth.Contract(
+      PriceLP.abi as unknown as AbiItem,
+      address
+    )
     return contract
   }
 
@@ -20,7 +23,11 @@ const usePriceLP = () => {
     return value
   }
 
-  const getPriceKacyAndLP = async (addressKacyAvax: string, addressDaiAvax: string, getPriceLP: boolean) => {
+  const getPriceKacyAndLP = async (
+    addressKacyAvax: string,
+    addressDaiAvax: string,
+    getPriceLP: boolean
+  ) => {
     const reservesKacyAvax = await getReserves(addressKacyAvax)
 
     const reservesDaiAvax = await getReserves(addressDaiAvax)
@@ -38,9 +45,11 @@ const usePriceLP = () => {
     }
 
     const avaxInDollar = Big(daiReserve).div(Big(avaxReserve))
-    const kacyPriceInDollar = avaxInDollar.mul(Big(avaxKacyReserve).div(kacyReserve))
+    const kacyPriceInDollar = avaxInDollar.mul(
+      Big(avaxKacyReserve).div(kacyReserve)
+    )
 
-    if(getPriceLP) {
+    if (getPriceLP) {
       const ERC20Contract = ERC20(addressKacyAvax)
 
       const totalAvaxInDollars = Big(avaxKacyReserve).mul(avaxInDollar)
@@ -48,7 +57,9 @@ const usePriceLP = () => {
       const supplyLPToken = await ERC20Contract.totalSupply()
 
       if (supplyLPToken.toString() !== '0') {
-        const priceLP = totalAvaxInDollars.mul(2).div(Big(supplyLPToken.toString()))
+        const priceLP = totalAvaxInDollars
+          .mul(2)
+          .div(Big(supplyLPToken.toString()))
         return { kacyPriceInDollar, priceLP }
       }
     }

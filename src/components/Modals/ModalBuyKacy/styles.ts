@@ -25,7 +25,7 @@ export const Backdrop = styled.div`
 `
 
 interface IModalBuyKacyProps {
-  modalOpen: boolean;
+  modalOpen: boolean
 }
 
 // prettier-ignore

@@ -123,7 +123,7 @@ export const TokenContainer = styled.div`
 `
 
 interface IChangeButtonProps {
-  isActiveHand: boolean;
+  isActiveHand: boolean
 }
 
 // prettier-ignore
@@ -245,8 +245,8 @@ export const ChangeButton = styled.div`
 `
 
 interface ITokenProps {
-  TokenValue?: number;
-  TokenColor?: string;
+  TokenValue?: number
+  TokenColor?: string
 }
 
 // prettier-ignore

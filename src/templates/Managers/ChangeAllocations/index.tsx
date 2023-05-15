@@ -27,19 +27,19 @@ const Tokens = {
     logo: '/assets/logos/avax.png',
     color: 'rgba(224, 29, 181, 1)'
   },
-  [TOKEN_KEY.BITCOIN] :{
+  [TOKEN_KEY.BITCOIN]: {
     logo: '/assets/logos/bitcon.svg',
     color: 'rgba(38, 219, 219, 1)'
   },
-  [TOKEN_KEY.YIELDYAK] :{
+  [TOKEN_KEY.YIELDYAK]: {
     logo: '/assets/logos/yieldyak.svg',
     color: 'rgba(12, 61, 220, 1)'
   },
-  [TOKEN_KEY.ETH] :{
+  [TOKEN_KEY.ETH]: {
     logo: '/assets/logos/eth-logo.svg',
     color: 'rgba(133, 145, 208, 1)'
   },
-  [TOKEN_KEY.DAI] :{
+  [TOKEN_KEY.DAI]: {
     logo: '/assets/logos/dai.png',
     color: 'rgba(248, 153, 61, 1)'
   }
@@ -87,15 +87,17 @@ const ChangeAllocations = () => {
       [TOKEN_KEY.DAI]: 0
     }
 
-    const groupKeys = Object.keys(groupPercentage);
-    let usedPercentage = 0;
+    const groupKeys = Object.keys(groupPercentage)
+    let usedPercentage = 0
 
     groupKeys.map((tokenKey, index) => {
-      if(groupKeys.length === index + 1) {
+      if (groupKeys.length === index + 1) {
         // eslint-disable-next-line prettier/prettier
         groupPercentage[tokenKey as TOKEN_KEY] = maxPercentagee - usedPercentage
       } else {
-        groupPercentage[tokenKey as TOKEN_KEY] = getRandomPercentage(usedPercentage + (groupKeys.length - index))
+        groupPercentage[tokenKey as TOKEN_KEY] = getRandomPercentage(
+          usedPercentage + (groupKeys.length - index)
+        )
       }
       usedPercentage += groupPercentage[tokenKey as TOKEN_KEY]
     })
@@ -113,7 +115,7 @@ const ChangeAllocations = () => {
         clearInterval(counter)
         return
       }
-      start > endValue ? start -= 1 : start += 1
+      start > endValue ? (start -= 1) : (start += 1)
       if (valueRef.current) {
         valueRef.current.innerHTML = String(start)
       }
@@ -126,11 +128,11 @@ const ChangeAllocations = () => {
 
       const generateRamdomPorcentage = generateRandomGroup()
       setTokenn(generateRamdomPorcentage)
-    }, 5000);
+    }, 5000)
 
     setTimeout(() => {
       setIsActiveHand(false)
-    }, 2000);
+    }, 2000)
   }, [tokenn])
 
   React.useEffect(() => {
@@ -143,8 +145,8 @@ const ChangeAllocations = () => {
   }, [tokenn])
 
   return (
-      <S.ChangeAllocationsContainer>
-        <FadeInHorizontal threshold={0.5}>
+    <S.ChangeAllocationsContainer>
+      <FadeInHorizontal threshold={0.5}>
         <S.DescriptionContainer>
           <span>PRACTICAL</span>
           <SectionSubtitle text="Set new pool allocations with one single transaction" />
@@ -155,42 +157,90 @@ const ChangeAllocations = () => {
             withdrawals or price changes, we’ve got you covered."
           />
         </S.DescriptionContainer>
-        </FadeInHorizontal>
+      </FadeInHorizontal>
 
-        <FadeInHorizontal threshold={0.5}>
+      <FadeInHorizontal threshold={0.5}>
         <S.GridContainer>
           <span>
             <Image src={Grid} alt="" width={464} height={350} />
           </span>
           <S.TokenContainer>
             <S.BarContainer>
-              <img src={Tokens[TOKEN_KEY.KACY].logo} alt="" width={24} height={24} />
-              <S.TokenBar TokenValue={tokenn[TOKEN_KEY.KACY]} TokenColor={Tokens[TOKEN_KEY.KACY].color} />
+              <img
+                src={Tokens[TOKEN_KEY.KACY].logo}
+                alt=""
+                width={24}
+                height={24}
+              />
+              <S.TokenBar
+                TokenValue={tokenn[TOKEN_KEY.KACY]}
+                TokenColor={Tokens[TOKEN_KEY.KACY].color}
+              />
               <p ref={kacyRef}>{kacyRef.current?.innerHTML}</p>
             </S.BarContainer>
             <S.BarContainer>
-              <img src={Tokens[TOKEN_KEY.AVAX].logo} alt="" width={24} height={24} />
-              <S.TokenBar  TokenValue={tokenn[TOKEN_KEY.AVAX]}  TokenColor={Tokens[TOKEN_KEY.AVAX].color} />
+              <img
+                src={Tokens[TOKEN_KEY.AVAX].logo}
+                alt=""
+                width={24}
+                height={24}
+              />
+              <S.TokenBar
+                TokenValue={tokenn[TOKEN_KEY.AVAX]}
+                TokenColor={Tokens[TOKEN_KEY.AVAX].color}
+              />
               <p ref={avaxRef}>{avaxRef.current?.innerHTML}</p>
             </S.BarContainer>
             <S.BarContainer>
-              <img src={Tokens[TOKEN_KEY.BITCOIN].logo} alt="" width={24} height={24} />
-              <S.TokenBar  TokenValue={tokenn[TOKEN_KEY.BITCOIN]} TokenColor={Tokens[TOKEN_KEY.BITCOIN].color} />
+              <img
+                src={Tokens[TOKEN_KEY.BITCOIN].logo}
+                alt=""
+                width={24}
+                height={24}
+              />
+              <S.TokenBar
+                TokenValue={tokenn[TOKEN_KEY.BITCOIN]}
+                TokenColor={Tokens[TOKEN_KEY.BITCOIN].color}
+              />
               <p ref={bitconRef}>{bitconRef.current?.innerHTML}</p>
             </S.BarContainer>
             <S.BarContainer>
-              <img src={Tokens[TOKEN_KEY.YIELDYAK].logo} alt="" width={24} height={24} />
-              <S.TokenBar TokenValue={tokenn[TOKEN_KEY.YIELDYAK]} TokenColor={Tokens[TOKEN_KEY.YIELDYAK].color} />
+              <img
+                src={Tokens[TOKEN_KEY.YIELDYAK].logo}
+                alt=""
+                width={24}
+                height={24}
+              />
+              <S.TokenBar
+                TokenValue={tokenn[TOKEN_KEY.YIELDYAK]}
+                TokenColor={Tokens[TOKEN_KEY.YIELDYAK].color}
+              />
               <p ref={yiledyakRef}>{yiledyakRef.current?.innerHTML}</p>
             </S.BarContainer>
-            <S.BarContainer >
-              <img src={Tokens[TOKEN_KEY.ETH].logo} alt="" width={24} height={24} />
-              <S.TokenBar TokenValue={tokenn[TOKEN_KEY.ETH]} TokenColor={Tokens[TOKEN_KEY.ETH].color} />
+            <S.BarContainer>
+              <img
+                src={Tokens[TOKEN_KEY.ETH].logo}
+                alt=""
+                width={24}
+                height={24}
+              />
+              <S.TokenBar
+                TokenValue={tokenn[TOKEN_KEY.ETH]}
+                TokenColor={Tokens[TOKEN_KEY.ETH].color}
+              />
               <p ref={ethRef}>{ethRef.current?.innerHTML}</p>
             </S.BarContainer>
             <S.BarContainer>
-              <img src={Tokens[TOKEN_KEY.DAI].logo} alt="" width={24} height={24} />
-              <S.TokenBar TokenValue={tokenn[TOKEN_KEY.DAI]} TokenColor={Tokens[TOKEN_KEY.DAI].color} />
+              <img
+                src={Tokens[TOKEN_KEY.DAI].logo}
+                alt=""
+                width={24}
+                height={24}
+              />
+              <S.TokenBar
+                TokenValue={tokenn[TOKEN_KEY.DAI]}
+                TokenColor={Tokens[TOKEN_KEY.DAI].color}
+              />
               <p ref={daiRef}>{daiRef.current?.innerHTML}</p>
             </S.BarContainer>
           </S.TokenContainer>
@@ -204,8 +254,8 @@ const ChangeAllocations = () => {
             </span>
           </S.ChangeButtonContent>
         </S.GridContainer>
-        </FadeInHorizontal>
-      </S.ChangeAllocationsContainer>
+      </FadeInHorizontal>
+    </S.ChangeAllocationsContainer>
   )
 }
 

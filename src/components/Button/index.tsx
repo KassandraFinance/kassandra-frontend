@@ -7,18 +7,18 @@ type ButtonTypes =
   | ButtonHTMLAttributes<HTMLButtonElement>
 
 export type ButtonProps = {
-  size?: 'small' | 'claim' | 'medium' | 'large' | 'huge',
-  fullWidth?: boolean,
-  backgroundPrimary?: boolean,
-  backgroundSecondary?: boolean,
-  backgroundBlack?: boolean,
+  size?: 'small' | 'claim' | 'medium' | 'large' | 'huge'
+  fullWidth?: boolean
+  backgroundPrimary?: boolean
+  backgroundSecondary?: boolean
+  backgroundBlack?: boolean
   backgroundVote?: {
-    voteState: 'against' | 'favor' | 'vote-open' | 'disable',
+    voteState: 'against' | 'favor' | 'vote-open' | 'disable'
     type: string
-  },
-  disabledNoEvent?: boolean,
-  icon?: JSX.Element,
-  as?: React.ElementType,
+  }
+  disabledNoEvent?: boolean
+  icon?: JSX.Element
+  as?: React.ElementType
   text?: string
 } & ButtonTypes
 
