@@ -49,7 +49,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
             <title>Kassandra</title>
             <meta
               name="description"
-              content="Tokenized data-driven investment funds"
+              content="Create, Manage and invest in tokenized crypto portfolios effortlessly."
             />
             <link rel="preconnect" href="https://fonts.gstatic.com" />
             <link
@@ -64,10 +64,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
             />
             <meta property="og:site_name" content="Kassandra" />
             <meta property="og:type" content="website" />
-            <meta
-              property="og:title"
-              content="Kassandra DAO - Tokenized index funds"
-            />
+            <meta property="og:title" content="Kassandra DAO" />
           </Head>
           <Toastify />
           <GlobalStyles />
