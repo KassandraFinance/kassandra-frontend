@@ -6,20 +6,26 @@ export default function Index() {
   return (
     <>
       <Head>
-        <meta
-          property="og:image"
-          content="https://kassandra.finance/kacy-og.png"
-        />
-        <meta property="og:image:width" content="1012" />
-        <meta property="og:image:height" content="506" />
-        <meta property="og:url" content="https://kassandra.finance/dao" />
-
+        {/* Primary Meta Tags */}
+        <title>Kassandra DAO</title>
         <meta
           name="description"
-          content="Invest in KACY, earn protocol fees and participate in our governance. Earn rewards and voting power to build, invest and contribute to Kassandra. Help maintain the DAO while gaining a stake in all of our protocol fees."
+          content="Invest in KACY, earn protocol fees and participate in our governance. Earn rewards and voting power to propose, vote and contribute to Kassandra. Help the community flourish and maintain the DAO while gaining a share in all of our protocol fees."
         />
 
-        <title>Kassandra DAO</title>
+        {/* Open Graph / Facebook */}
+        <meta property="og:url" content="https://kassandra.finance/dao" />
+        <meta
+          property="og:description"
+          content="Invest in KACY, earn protocol fees and participate in our governance. Earn rewards and voting power to propose, vote and contribute to Kassandra. Help the community flourish and maintain the DAO while gaining a share in all of our protocol fees."
+        />
+
+        {/* Twitter */}
+        <meta property="twitter:url" content="https://kassandra.finance/dao" />
+        <meta
+          property="twitter:description"
+          content="Invest in KACY, earn protocol fees and participate in our governance. Earn rewards and voting power to propose, vote and contribute to Kassandra. Help the community flourish and maintain the DAO while gaining a share in all of our protocol fees."
+        />
       </Head>
 
       <DAO />

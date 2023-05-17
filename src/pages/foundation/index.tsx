@@ -7,23 +7,33 @@ export default function Index() {
   return (
     <>
       <Head>
+        {/* Primary Meta Tags */}
+        <title>Kassandra Foundation</title>
         <meta
-          property="og:image"
-          content="https://kassandra.finance/kacy-og.png"
+          name="description"
+          content="DeFi enthusiasts building the future of asset management. Kassandra is a decentralized autonomous organization that governs a structure that allows the creation and managing of tokenized crypto portfolios, bringing a new class of investment products to the DeFi investors."
         />
-        <meta property="og:image:width" content="1012" />
-        <meta property="og:image:height" content="506" />
+
+        {/* Open Graph / Facebook */}
         <meta
           property="og:url"
           content="https://kassandra.finance/foundation"
         />
-
+        <meta property="og:title" content="Kassandra DAO" />
         <meta
-          name="description"
-          content="DeFi enthusiasts building the future of asset management. Kassandra is a decentralized autonomous organization that governs a structure that allows the creation and managing of tokenized index funds, bringing a new class of investment products to the DeFi investors."
+          property="og:description"
+          content="DeFi enthusiasts building the future of asset management. Kassandra is a decentralized autonomous organization that governs a structure that allows the creation and managing of tokenized crypto portfolios, bringing a new class of investment products to the DeFi investors."
         />
 
-        <title>Kassandra Foundation</title>
+        {/* Twitter */}
+        <meta
+          property="twitter:url"
+          content="https://kassandra.finance/foundation"
+        />
+        <meta
+          property="twitter:description"
+          content="DeFi enthusiasts building the future of asset management. Kassandra is a decentralized autonomous organization that governs a structure that allows the creation and managing of tokenized crypto portfolios, bringing a new class of investment products to the DeFi investors."
+        />
       </Head>
 
       <Foundation />
