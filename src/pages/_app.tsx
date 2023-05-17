@@ -46,14 +46,41 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
       <MatomoProvider value={instance}>
         <ThemeProvider theme={theme}>
           <Head>
-            <title>Kassandra</title>
+            {/* Primary Meta Tags */}
             <meta
-              name="description"
-              content="Tokenized data-driven investment funds"
+              name="title"
+              content="Kassandra DAO - Tokenized crypto portfolios"
             />
+
+            {/* Open Graph / Facebook */}
+            <meta property="og:type" content="website" />
+            <meta
+              property="og:title"
+              content="Kassandra DAO - Tokenized crypto portfolios"
+            />
+            <meta
+              property="og:image"
+              content="https://kassandra.finance/kacy-og.png"
+            />
+            <meta property="og:site_name" content="Kassandra" />
+            <meta property="og:image:width" content="1012" />
+            <meta property="og:image:height" content="506" />
+
+            {/* Twitter */}
+            <meta property="twitter:card" content="summary_large_image" />
+            <meta
+              property="twitter:title"
+              content="Kassandra DAO - Tokenized crypto portfolios"
+            />
+            <meta
+              property="twitter:image"
+              content="https://kassandra.finance/kacy-og.png"
+            />
+            <meta property="twitter:site" content="@dao_kassandra" />
+
             <link rel="preconnect" href="https://fonts.gstatic.com" />
             <link
-              href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&amp;display=swap"
+              href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;800;900&amp;display=swap"
               rel="stylesheet"
             />
             <link rel="icon" href="/favicon.ico" />
@@ -61,12 +88,6 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
               rel="icon"
               href="https://kassandra.finance/favicon.svg"
               sizes="any"
-            />
-            <meta property="og:site_name" content="Kassandra" />
-            <meta property="og:type" content="website" />
-            <meta
-              property="og:title"
-              content="Kassandra DAO - Tokenized index funds"
             />
           </Head>
           <Toastify />

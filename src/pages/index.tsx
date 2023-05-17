@@ -26,24 +26,26 @@ export default function HomePage({ daoInfo }: IHomePageProps) {
   return (
     <>
       <Head>
-        <meta
-          name="description"
-          content="Manage, tokenized crypto portfolios effortlessly"
-        />
-        <meta
-          property="og:image"
-          content="https://kassandra.finance/kacy-og.png"
-        />
-        <meta property="og:image:width" content="1012" />
-        <meta property="og:image:height" content="506" />
-        <meta property="og:url" content="https://kassandra.finance/" />
-
-        <meta
-          name="description"
-          content="Create, Manage and invest in tokenized crypto portfolios effortlessly."
-        />
-
+        {/* Primary Meta Tags */}
         <title>Kassandra Finance</title>
+        <meta
+          name="description"
+          content="Create, manage and invest in tokenized crypto portfolios."
+        />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:url" content="https://kassandra.finance/" />
+        <meta
+          property="og:description"
+          content="Create, manage and invest in tokenized crypto portfolios."
+        />
+
+        {/* Twitter */}
+        <meta property="twitter:url" content="https://kassandra.finance/" />
+        <meta
+          property="twitter:description"
+          content="Create, manage and invest in tokenized crypto portfolios."
+        />
       </Head>
 
       <Home />

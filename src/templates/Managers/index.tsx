@@ -24,8 +24,7 @@ const Managers = () => {
               title="manager"
               titleColor="#26dbdb"
               subTitle="Earn money managing assets in a uniquely innovative hub"
-              description="Be part of a community of skilled managers creating smart investment
-            funds and get paid for it"
+              description="Be part of a community of skilled managers creating smart managed pools and get paid for it"
               backgroundImg="/assets/images/manager-hero.svg"
               backgroundImgHight="calc(100vh - 7.6rem)"
             >
