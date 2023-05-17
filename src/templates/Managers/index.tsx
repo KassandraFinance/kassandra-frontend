@@ -30,7 +30,7 @@ const Managers = () => {
             >
               <Button
                 as="a"
-                href="https://3j2bd7x9okh.typeform.com/to/bBnYwVOD"
+                href="https://app.kassandra.finance/manage"
                 target="_blank"
                 text="Create your Pool"
                 size="huge"
