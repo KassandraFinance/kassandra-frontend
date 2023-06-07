@@ -166,10 +166,7 @@ const CreateFund = () => {
             <SectionSubtitle text={createManagerFunds.title} />
             <Paragraph text={createManagerFunds.paragraph} />
             <S.ButtonsContainer>
-              <Link
-                href="https://3j2bd7x9okh.typeform.com/to/bBnYwVOD"
-                passHref
-              >
+              <Link href="https://app.kassandra.finance/manage" passHref>
                 <Button
                   as="a"
                   target="_blank"
