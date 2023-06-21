@@ -13,7 +13,7 @@
     "@datapunt/matomo-tracker-react": "^0.5.1",
     "@reduxjs/toolkit": "^1.8.3",
     "@tippyjs/react": "^4.2.6",
-    "@types/big.js": "^6.1.2",
+    "@types/big.js": "^6.1.6",
     "@types/node": "^15.0.2",
     "@types/react": "^17.0.5",
     "@types/react-scroll": "^1.8.3",
