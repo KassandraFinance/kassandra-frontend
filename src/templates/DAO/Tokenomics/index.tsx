@@ -98,12 +98,10 @@ const Tokenomics = () => {
             <S.ValuesContainer>
               {kacyMarketData.map((item: { value: string; title: string }) => {
                 return (
-                  <>
-                    <S.ValueContent>
-                      <p>{item.title}</p>
-                      <span>{item.value}</span>
-                    </S.ValueContent>
-                  </>
+                  <S.ValueContent key={item.title}>
+                    <p>{item.title}</p>
+                    <span>{item.value}</span>
+                  </S.ValueContent>
                 )
               })}
             </S.ValuesContainer>
