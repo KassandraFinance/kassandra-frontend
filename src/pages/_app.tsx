@@ -78,11 +78,6 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
             />
             <meta property="twitter:site" content="@dao_kassandra" />
 
-            <link rel="preconnect" href="https://fonts.gstatic.com" />
-            <link
-              href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;800;900&amp;display=swap"
-              rel="stylesheet"
-            />
             <link rel="icon" href="/favicon.ico" />
             <link
               rel="icon"
