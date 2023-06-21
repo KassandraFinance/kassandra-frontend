@@ -1,25 +1,22 @@
 import Big from 'big.js'
-import { AbiItem } from 'web3-utils'
+import { JsonRpcProvider, Contract } from 'ethers'
 
 import PriceLP from '../constants/abi/PriceLP.json'
-import web3 from '../utils/web3'
 
 import { ERC20 } from './useERC20Contract'
+import { networks } from '../constants/tokenAddresses'
 
 const usePriceLP = () => {
+  const provider = new JsonRpcProvider(networks[43114].rpc)
+
   const getContract = (address: string) => {
-    // eslint-disable-next-line prettier/prettier
-    const contract = new web3.eth.Contract(
-      PriceLP.abi as unknown as AbiItem,
-      address
-    )
+    const contract = new Contract(address, PriceLP.abi, provider)
     return contract
   }
 
-  //maxPriorityFeePerGas: null, maxFeePerGas: null 1,500000031  [0] some((element: string) => element === 'PurchaseExecuted')  gas: 270804, gasPrice: 1500000031
   const getReserves = async (addressPriceLP: string) => {
     const contract = getContract(addressPriceLP)
-    const value = await contract.methods.getReserves().call()
+    const value = await contract.getReserves()
     return value
   }
 
@@ -50,7 +47,7 @@ const usePriceLP = () => {
     )
 
     if (getPriceLP) {
-      const ERC20Contract = ERC20(addressKacyAvax)
+      const ERC20Contract = await ERC20(addressKacyAvax, networks[43114].rpc)
 
       const totalAvaxInDollars = Big(avaxKacyReserve).mul(avaxInDollar)
 
