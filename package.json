@@ -34,25 +34,25 @@
     "react-toastify": "^7.0.4",
     "recharts": "^2.1.6",
     "styled-components": "^5.3.0",
-    "swr": "^1.2.2",
-    "typescript": "^4.3.5"
+    "swr": "^1.2.2"
   },
   "devDependencies": {
-    "@types/react-slick": "^0.23.8",
-    "@typescript-eslint/eslint-plugin": "^5.2.0",
-    "@typescript-eslint/parser": "^4.23.0",
+    "@types/react-slick": "^0.23.10",
+    "@typescript-eslint/eslint-plugin": "^5.60.0",
+    "@typescript-eslint/parser": "^5.60.0",
     "babel-plugin-styled-components": "^1.13.2",
-    "eslint": "^7.31.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-next": "^11.0.1",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-import-resolver-typescript": "^2.4.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-react": "^7.23.2",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "git-commit-msg-linter": "^3.1.0",
-    "prettier": "^2.3.0"
+    "eslint": "^8.43.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-next": "^13.4.6",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-typescript": "^3.5.5",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "git-commit-msg-linter": "^5.0.4",
+    "prettier": "^2.8.8",
+    "typescript": "^5.1.3"
   }
 }
