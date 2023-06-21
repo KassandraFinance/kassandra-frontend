@@ -48,6 +48,7 @@ export const ProxyContract =
     ? '0x84f154A845784Ca37Ae962504250a618EB4859dc'
     : '0x97e33051B09092C1301A90b964a74cA51C0b068B'
 
+export const KacyPoligon = '0x366e293A5CF90A0458D9fF9f3f92234dA598F62e'
 export interface Networks {
   Ropsten: string
   Avalanche: string
@@ -232,3 +233,105 @@ const tricrypto: ProductDetails =
       }
 
 export const products = [ahype, tricrypto]
+
+type CurrencyDetails = {
+  name: string
+  symbol: string
+  decimals: number
+  address: string
+}
+
+type NetworkType = Record<
+  number,
+  {
+    chainName: string
+    chainId: number
+    kacyAddress?: string
+    rpc: string
+    coingecko: string
+    whiteList: string
+    factory: string
+    stakingContract?: string
+    privateInvestor: string
+    nativeCurrency: CurrencyDetails
+    blockExplorer: string
+    kacyOFT: string
+  }
+>
+
+export const networks: NetworkType = {
+  '5': {
+    chainName: 'Goerli Test Network',
+    chainId: 5,
+    rpc: 'https://rpc.ankr.com/eth_goerli',
+    blockExplorer: 'https://goerli.etherscan.io',
+    coingecko: 'polygon-pos',
+    whiteList: '0xe119DE3b0FDab34e9CE490FDAa562e6457126A57',
+    factory: '0x9E3feC2E3AEc12572242dd1376BEd5E1F5bb8200',
+    privateInvestor: '0xC8d8AeDBeDd1973b383D6f330C66D653F7DF11D6',
+    kacyOFT: '',
+    nativeCurrency: {
+      address: '0xffb99f4a02712c909d8f7cc44e67c87ea1e71e83',
+      name: 'Goerli Test Token', //Ether
+      symbol: 'ETH',
+      decimals: 18
+    }
+  },
+  '137': {
+    chainName: 'Polygon',
+    chainId: 137,
+    rpc: 'https://rpc.ankr.com/polygon',
+    kacyAddress: KacyPoligon,
+    blockExplorer: 'https://polygonscan.com',
+    coingecko: 'polygon-pos',
+    whiteList: '0xfe7AeA0E15F34aCa30285E64C529b1B2a074F531',
+    // factory: '0x290272D39BA3Fa0Fb2a683fC88290A9d55a1023d', // factory test
+    factory: '0x228885c9d0440Ae640B88fBeE31522CC6a59Fd2F',
+    privateInvestor: '0xa356Dc5260Ca76b4113CD7251906ffb57629b985',
+    kacyOFT: '0x366e293a5cf90a0458d9ff9f3f92234da598f62e',
+    stakingContract: '0xd530f3ce79c9eb03e59dce89a7504dd41d4899bb',
+    nativeCurrency: {
+      address: '0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270',
+      name: 'Matic Token',
+      symbol: 'MATIC',
+      decimals: 18
+    }
+  },
+  '43114': {
+    chainId: 43114,
+    chainName: 'Avalanche',
+    rpc: 'https://api.avax.network/ext/bc/C/rpc',
+    kacyAddress: Kacy,
+    blockExplorer: 'https://snowtrace.io',
+    coingecko: 'avalanche',
+    whiteList: '',
+    factory: '',
+    privateInvestor: '0x',
+    kacyOFT: '0x366e293a5cf90a0458d9ff9f3f92234da598f62e',
+    stakingContract: '0xfddc1956d88a34fcB0671508Fa3d5aaC73b2a031',
+    nativeCurrency: {
+      address: '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
+      name: 'Avalanche',
+      symbol: 'AVAX',
+      decimals: 18
+    }
+  },
+  '43113': {
+    chainId: 43113,
+    chainName: 'Avalanche',
+    rpc: 'https://api.avax-test.network/ext/C/rpc',
+    kacyAddress: Kacy,
+    blockExplorer: 'https://testnet.snowtrace.io',
+    coingecko: 'avalanche',
+    whiteList: '',
+    factory: '',
+    privateInvestor: '',
+    kacyOFT: '0x366e293a5cf90a0458d9ff9f3f92234da598f62e',
+    nativeCurrency: {
+      address: '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
+      name: 'Avalanche',
+      symbol: 'AVAX',
+      decimals: 18
+    }
+  }
+}
