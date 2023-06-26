@@ -1,17 +1,15 @@
-import React from 'react'
-
-import { useAppSelector } from '../../../../store/hooks'
+import { useDaoInfo } from '@/hooks/query/useDaoInfo'
 
 import DaoCard from '../DaoCard'
 
 import * as S from './styles'
 
 const DaoData = () => {
-  const daoData = useAppSelector(state => state.daoInfo.daoInfo)
+  const { data } = useDaoInfo()
 
   return (
     <S.DaoData>
-      {daoData.map(item => (
+      {data?.daoInfo?.map(item => (
         <DaoCard key={item.title} value={item.value} title={item.title} />
       ))}
     </S.DaoData>

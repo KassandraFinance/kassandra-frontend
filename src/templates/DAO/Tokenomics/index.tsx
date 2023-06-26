@@ -1,10 +1,11 @@
 import React from 'react'
 import Image from 'next/image'
-import useSWR from 'swr'
 
-import FadeIn from '../../../components/Animations/FadeIn'
-import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
-import Paragraph from '../../../components/Paragraph'
+import { useKacyData } from '@/hooks/query/useKacyData'
+
+import FadeIn from '@/components/Animations/FadeIn'
+import FadeInHorizontal from '@/components/Animations/FadeInHorizontal'
+import Paragraph from '@/components/Paragraph'
 
 import * as S from './styles'
 
@@ -14,7 +15,6 @@ type KacyMarketDataType = {
 }
 
 const Tokenomics = () => {
-  // eslint-disable-next-line prettier/prettier
   const [kacyMarketData, setKacyMarketData] = React.useState<
     KacyMarketDataType[]
   >([
@@ -36,7 +36,7 @@ const Tokenomics = () => {
     }
   ])
 
-  const { data } = useSWR('/api/overview')
+  const { data } = useKacyData()
 
   React.useEffect(() => {
     if (data) {

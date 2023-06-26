@@ -1,4 +1,3 @@
-import React from 'react'
 import Image, { StaticImageData } from 'next/image'
 
 import Paragraph from '../../../components/Paragraph'
