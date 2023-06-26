@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "jest --watch",
-    "test:coverage": "jest --coverage",
+    "prepare": "husky install",
     "codegen": "graphql-codegen",
     "codegen:watch": "graphql-codegen --watch"
   },
@@ -58,6 +57,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "git-commit-msg-linter": "^5.0.4",
+    "husky": "^8.0.3",
     "prettier": "^2.8.8",
     "typescript": "^5.1.3"
   }
