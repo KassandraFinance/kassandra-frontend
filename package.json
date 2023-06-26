@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "test": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "codegen": "graphql-codegen",
+    "codegen:watch": "graphql-codegen --watch"
   },
   "dependencies": {
     "@datapunt/matomo-tracker-react": "^0.5.1",
@@ -36,6 +38,12 @@
     "swr": "^1.2.2"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "4.0.1",
+    "@graphql-codegen/client-preset": "4.0.1",
+    "@graphql-codegen/introspection": "4.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-graphql-request": "^5.0.0",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
     "@styled/typescript-styled-plugin": "^1.0.0",
     "@tanstack/eslint-plugin-query": "^4.29.9",
     "@typescript-eslint/eslint-plugin": "^5.60.0",
