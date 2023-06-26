@@ -1,4 +1,5 @@
 import React from 'react'
+import Head from 'next/head'
 import { AppProps } from 'next/app'
 import { MatomoProvider, createInstance } from '@datapunt/matomo-tracker-react'
 import Head from 'next/head'
@@ -7,6 +8,11 @@ import { useRouter } from 'next/router'
 import { Provider } from 'react-redux'
 import { SWRConfig } from 'swr'
 import { clarity } from 'react-microsoft-clarity'
+import {
+  Hydrate,
+  QueryClient,
+  QueryClientProvider
+} from '@tanstack/react-query'
 
 import GlobalStyles from '../styles/global'
 import theme from '../styles/theme'
@@ -33,6 +39,7 @@ const instance = createInstance({
 })
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
+  const [queryClient] = React.useState(() => new QueryClient())
   const router = useRouter()
 
   React.useEffect(() => {
@@ -42,7 +49,8 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   }, [])
 
   return (
-    <Provider store={store}>
+    <QueryClientProvider client={queryClient}>
+      <Hydrate state={pageProps.dehydratedState}>
       <MatomoProvider value={instance}>
         <ThemeProvider theme={theme}>
           <Head>
@@ -99,7 +107,8 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
           {router.pathname !== '/404' && <Footer />}
         </ThemeProvider>
       </MatomoProvider>
-    </Provider>
+      </Hydrate>
+    </QueryClientProvider>
   )
 }
 
