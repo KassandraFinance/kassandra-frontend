@@ -23,6 +23,11 @@
         "name": "@styled/typescript-styled-plugin"
       }
     ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@assets/*": ["./public/assets/*"]
+    }
   },
   "include": [
     "next-env.d.ts",
