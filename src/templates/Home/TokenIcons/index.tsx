@@ -1,56 +1,46 @@
 import Image from 'next/image'
 import React from 'react'
 
+import { usePoolInfo } from '@/hooks/query/usePoolInfo'
+
 import none from '../../../../public/assets/icons/coming-soon.svg'
 
 import * as S from './styles'
 
-type ITokenInfoProps = {
-  id: string
-  balance_in_pool: string
-  address: string
-  name: string
-  symbol: string
-  allocation: number
-  price: number
-  logo: string
-  wraps?: {
-    logo: string
-  }
-}
-
-interface IPoolInfoProps {
-  balance: string
-  token: ITokenInfoProps
-  weight_goal_normalized: string
-  weight_normalized: string
-}
-
 interface TokenIconsProps {
-  poolInfo: IPoolInfoProps[]
+  id: string
+  day: number
 }
 
-const TokenIcons = ({ poolInfo }: TokenIconsProps) => {
+const TokenIcons = ({ id, day }: TokenIconsProps) => {
+  const { data } = usePoolInfo({ id: id, day: day })
+
   return (
     <S.Container>
-      {poolInfo
-        .slice(0, poolInfo.length >= 5 ? 5 : poolInfo.length)
-        .map((asset, index) => (
-          <S.ImageWrapper
-            key={index}
-            className={
-              asset.token.wraps?.logo ?? asset.token.logo ? '' : 'svg-none'
-            }
-            index={index}
-          >
-            <Image
-              src={(asset.token.wraps?.logo ?? asset.token.logo) || none.src}
-              alt=""
-              width={18}
-              height={18}
-            />
-          </S.ImageWrapper>
-        ))}
+      {data &&
+        data.underlying_assets
+          .slice(
+            0,
+            data.underlying_assets.length >= 5
+              ? 5
+              : data.underlying_assets.length
+          )
+          .map((asset, index) => (
+            <S.ImageWrapper
+              key={index}
+              className={
+                asset.token.wraps?.logo ?? asset.token.logo ? '' : 'svg-none'
+              }
+              index={index}
+            >
+              <Image
+                src={(asset.token.wraps?.logo ?? asset.token.logo) || none.src}
+                alt=""
+                width={18}
+                height={18}
+              />
+            </S.ImageWrapper>
+          ))}
     </S.Container>
   )
 }

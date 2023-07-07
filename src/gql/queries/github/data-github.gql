@@ -1,6 +1,4 @@
-import { gql } from 'graphql-request'
-export const GET_DATA_GITHUB = gql`
-  query (
+  query dataGithub(
     $dateInitLastYar: GitTimestamp
     $dateInitCurrentYarn: GitTimestamp
     $dateLastWeek: GitTimestamp
@@ -66,4 +64,3 @@ export const GET_DATA_GITHUB = gql`
       }
     }
   }
-`

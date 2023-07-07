@@ -2,14 +2,10 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import useSWR from 'swr'
 import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+import { usePoolInfo } from '@/hooks/query/usePoolInfo'
 
-import { GET_INFO_POOL } from './graphql'
-import {
-  BACKEND_KASSANDRA,
-  ProductDetails
-} from '../../../constants/tokenAddresses'
+import { ProductDetails } from '../../../constants/tokenAddresses'
 
 import Button from '../../../components/Button'
 import { BarChart, XAxis, YAxis, Bar } from 'recharts'
@@ -22,7 +18,6 @@ import arrowRight from '../../../../public/assets/icons/arrow-yellow-right.svg'
 import arrowAscend from '../../../../public/assets/notificationStatus/arrow-ascend.svg'
 import arrowDescend from '../../../../public/assets/notificationStatus/arrow-descend.svg'
 
-import request from 'graphql-request'
 import * as S from './styles'
 
 const dictionary: { [key: string]: string } = {
@@ -49,27 +44,6 @@ const dictionary: { [key: string]: string } = {
   20: '#d4e442b0'
 }
 
-type ITokenInfoProps = {
-  id: string
-  balance_in_pool: string
-  address: string
-  name: string
-  symbol: string
-  allocation: number
-  price: number
-  logo: string
-  wraps: {
-    logo: string
-  }
-}
-
-interface IPoolInfoProps {
-  balance: string
-  token: ITokenInfoProps
-  weight_goal_normalized: string
-  weight_normalized: string
-}
-
 type IPoolProps = {
   pool: ProductDetails
 }
@@ -85,31 +59,22 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
   const [poolObject, setPoolObject] = React.useState<{ [key: string]: number }>(
     {}
   )
-  const [poolInfo, setPoolInfo] = React.useState<IPoolInfoProps[]>([])
 
   const day = Math.trunc(Date.now() / 1000 - 60 * 60 * 24)
-  const { data } = useSWR(
-    [GET_INFO_POOL, pool.sipAddress],
-    (query, id) => request(BACKEND_KASSANDRA, query, { id, day }),
-    {
-      refreshInterval: 10000
-    }
-  )
+
+  const { data } = usePoolInfo({ id: pool.sipAddress, day: day })
 
   React.useEffect(() => {
-    if (data?.pool) {
-      setPoolInfo(data.pool.underlying_assets)
-      setPoolPrice(Number(data.pool.price_usd).toFixed(2))
-
-      const changeDay = calcChange(
-        data.pool.now[0]?.close,
-        data.pool.day[0]?.close
-      )
-      const arrChangePrice = []
-      arrChangePrice[0] = changeDay
-
-      setChange(arrChangePrice)
+    if (!data) {
+      return
     }
+    setPoolPrice(Number(data.price_usd).toFixed(2))
+
+    const changeDay = calcChange(data.now[0]?.close, data.day[0]?.close)
+    const arrChangePrice = []
+    arrChangePrice[0] = changeDay
+
+    setChange(arrChangePrice)
   }, [data])
 
   const getPercentage = (weight: number) => {
@@ -117,8 +82,12 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
   }
 
   React.useEffect(() => {
-    if (poolInfo.length > 0) {
-      const pool = poolInfo.map(item => {
+    if (!data) {
+      return
+    }
+
+    if (data?.underlying_assets.length > 0) {
+      const pool = data.underlying_assets.map(item => {
         return {
           [item.token.id]: getPercentage(Number(item.weight_normalized))
         }
@@ -126,7 +95,7 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
       const poolData = Object.assign({}, ...pool)
       setPoolObject(poolData)
     }
-  }, [poolInfo])
+  }, [data])
 
   const { trackEventFunction } = useMatomoEcommerce()
 
@@ -167,8 +136,10 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
             </div>
           </S.Price>
           <S.TokensSymbols>
-            <TokenIcons poolInfo={poolInfo} />
-            {poolInfo.length > 5 && <span>+{poolInfo.length - 5} MORE</span>}
+            <TokenIcons id={pool.sipAddress} day={day} />
+            {data && data?.underlying_assets.length > 5 && (
+              <span>+{data?.underlying_assets.length - 5} MORE</span>
+            )}
           </S.TokensSymbols>
         </S.TokenInfo>
         <S.BarChartWrapper>
@@ -191,7 +162,7 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
             <XAxis type="number" domain={[0, 100]} hide />
             <YAxis type="category" hide dataKey="pool" />
 
-            {poolInfo.map((item, index) => {
+            {data?.underlying_assets.map((item, index) => {
               return (
                 <Bar
                   key={item.token.id}

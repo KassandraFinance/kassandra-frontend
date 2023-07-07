@@ -11,55 +11,13 @@ type GlobalStylesProps = {
 const GlobalStyles: GlobalStyleComponent<
   GlobalStylesProps,
   DefaultTheme
-> = createGlobalStyle`
-  @font-face{
-  font-family: 'Rubik';
-    font-style: normal;
-    font-weight: 300;
-    src: local(''),
-    url('../fonts/rubik-v14-latin-300.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-  }
-  /* rubik-regular - latin */
-  @font-face {
-    font-family: 'Rubik';
-    font-style: normal;
-    font-weight: 400;
-
-    src: local(''),
-    url('../fonts/rubik-v14-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-  }
-  /* rubik-500 - latin */
-  @font-face {
-    font-family: 'Rubik';
-    font-style: normal;
-    font-weight: 500;
-    src: local(''),
-    url('../fonts/rubik-v14-latin-500.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-  }
-  /* rubik-600 - latin */
-  @font-face {
-    font-family: 'Rubik';
-    font-style: normal;
-    font-weight: 600;
-    src: local(''),
-    url('../fonts/rubik-v14-latin-600.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-  }
-  @font-face {
-  font-family: 'Rubik';
-  font-style: normal;
-  font-weight: 900;
-  src: local(''),
-  url('../fonts/rubik-v14-latin-900.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-  url('../fonts/rubik-v14-latin-900.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
+> = createGlobalStyle` 
    * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
-
 
     &::before,
     &::after {

@@ -1,49 +1,68 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable @typescript-eslint/no-empty-function */
 import React from 'react'
-import BigNumber from 'bn.js'
-
-import { AbiItem } from 'web3-utils'
-import { Contract } from 'web3-eth-contract'
-
-import web3 from '../utils/web3'
+import { JsonRpcProvider, Contract } from 'ethers'
 
 import ERC20ABI from '../constants/abi/ERC20.json'
+import { networks } from '../constants/tokenAddresses'
 
 function ERC20Contract(contract: Contract) {
-  const totalSupply = async (): Promise<BigNumber> => {
-    try {
-      const supply: string = await contract.methods.totalSupply().call()
-      return new BigNumber(supply)
-    } catch (e) {
-      return new BigNumber(0)
-    }
+  // Read
+  const name = async (): Promise<string> => {
+    const value = await contract.name()
+    return value
+  }
+
+  const symbol = async (): Promise<string> => {
+    const value = await contract.symbol()
+    return value
+  }
+
+  const decimals = async (): Promise<bigint> => {
+    const value = await contract.decimals()
+    return value
+  }
+
+  const allowance = async (
+    contractAddress: string,
+    userWalletAddress: string
+  ): Promise<string> => {
+    const value = await contract.allowance(userWalletAddress, contractAddress)
+
+    return value
+  }
+
+  const balance = async (userAddress: string): Promise<string> => {
+    const value = await contract.balanceOf(userAddress)
+    return value
+  }
+
+  const totalSupply = async (): Promise<string> => {
+    const value: string = await contract.totalSupply()
+    return value
   }
 
   return {
+    name,
+    symbol,
+    decimals,
+    allowance,
+    balance,
     totalSupply
   }
 }
 
-const useERC20Contract = (address: string) => {
-  const [contract, setContract] = React.useState(
-    new web3.eth.Contract(ERC20ABI as unknown as AbiItem, address)
-  )
-
-  React.useEffect(() => {
-    setContract(new web3.eth.Contract(ERC20ABI as unknown as AbiItem, address))
-  }, [address])
+const useERC20Contract = (address: string, rpcURL = networks[137].rpc) => {
+  const provider = new JsonRpcProvider(rpcURL)
+  const contract = new Contract(address, ERC20ABI, provider)
 
   return React.useMemo(() => {
     return ERC20Contract(contract)
   }, [contract])
 }
 
-export const ERC20 = (address: string) => {
-  const contract = new web3.eth.Contract(
-    ERC20ABI as unknown as AbiItem,
-    address
-  )
+export const ERC20 = async (address: string, rpcUrl = networks[137].rpc) => {
+  const provider = new JsonRpcProvider(rpcUrl)
+  const contract = new Contract(address, ERC20ABI, provider)
+
   return ERC20Contract(contract)
 }
 

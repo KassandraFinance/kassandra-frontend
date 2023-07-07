@@ -1,4 +1,3 @@
-// import FAQ from './FAQ'
 import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
 import Hero from '../../components/Hero'
@@ -51,8 +50,6 @@ const Investors = () => {
         <Advantages />
 
         <Partners />
-
-        {/* <FAQ /> */}
       </S.Investors>
 
       <Contribute
