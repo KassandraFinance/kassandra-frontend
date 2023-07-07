@@ -10,6 +10,7 @@ import {
   QueryClient,
   QueryClientProvider
 } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import GlobalStyles from '../styles/global'
 import theme from '../styles/theme'
@@ -46,6 +47,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
+        <ReactQueryDevtools />
         <MatomoProvider value={instance}>
           <ThemeProvider theme={theme}>
             <Head>

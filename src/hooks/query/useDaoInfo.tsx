@@ -5,7 +5,7 @@ import { kassandraClient } from '@/graphQLClients'
 
 export const fetchDaoInfo = async () => {
   return kassandraClient.DaoInfo().then(res => {
-    const r = res.factories
+    const r = res.kassandras
     const sum = r?.reduce(
       (acc, factory) => {
         return {
