@@ -62,7 +62,7 @@ export const getStaticProps: GetStaticProps = async () => {
     body: JSON.stringify({
       query: `
       query {
-        factories(where: {id_in: ["0x958c051B55a173e393af696EcB4C4FF3D6C13930", "1370x228885c9d0440Ae640B88fBeE31522CC6a59Fd2F"]}) {
+        kassandras {
           total_value_locked_usd
           total_volume_usd
           total_fees_swap_usd
@@ -73,26 +73,26 @@ export const getStaticProps: GetStaticProps = async () => {
     })
   }).then(res => res.json())
 
-  type FactoryType = {
+  type KassandraType = {
     total_value_locked_usd: Big
     total_volume_usd: Big
     total_fees_swap_usd: Big
     total_fees_exit_usd: Big
   }
 
-  const arrData = response?.data?.factories
+  const arrData = response?.data?.kassandras
   const sum = arrData?.reduce(
-    (acc: FactoryType, factory: FactoryType) => {
+    (acc: KassandraType, kassandra: KassandraType) => {
       return {
         total_value_locked_usd: acc.total_value_locked_usd.add(
-          factory.total_value_locked_usd
+          kassandra.total_value_locked_usd
         ),
-        total_volume_usd: acc.total_volume_usd.add(factory.total_volume_usd),
+        total_volume_usd: acc.total_volume_usd.add(kassandra.total_volume_usd),
         total_fees_swap_usd: acc.total_fees_swap_usd.add(
-          factory.total_fees_swap_usd
+          kassandra.total_fees_swap_usd
         ),
         total_fees_exit_usd: acc.total_fees_exit_usd.add(
-          factory.total_fees_exit_usd
+          kassandra.total_fees_exit_usd
         )
       }
     },
