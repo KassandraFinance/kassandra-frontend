@@ -1,16 +1,15 @@
 import React from 'react'
 import Image from 'next/image'
-import useSWR from 'swr'
 import AliceCarousel from 'react-alice-carousel'
 import 'react-alice-carousel/lib/alice-carousel.css'
 
-import { MEDIUM_FEED_URL } from '../../../constants/tokenAddresses'
+import { useMedium } from '@/hooks/query/useMedium'
 
 import LatestNewsHeader from './LatestNewsHeader'
 import NewsCard from './NewsCard'
-import FadeIn from '../../../components/Animations/FadeIn'
+import FadeIn from '@/components/Animations/FadeIn'
 
-import lightTable10 from '../../../../public/assets/images/backgroundHome/light-tablet10.png'
+import lightTable10 from '@assets/images/backgroundHome/light-tablet10.png'
 
 import * as S from './styles'
 
@@ -28,14 +27,7 @@ interface IMediumPost {
 }
 
 const LatestNews = () => {
-  const [mediumPosts, setMediumPosts] = React.useState<IMediumPost[]>([])
-
-  const fetcher = async (url: string) => {
-    const res = await fetch(url)
-    return res.json()
-  }
-
-  const { data } = useSWR(MEDIUM_FEED_URL, fetcher)
+  const { data: mediumData } = useMedium()
 
   const responsive = {
     0: { items: 1 },
@@ -43,7 +35,7 @@ const LatestNews = () => {
     1250: { items: 3 }
   }
 
-  const cards = mediumPosts.map(post => {
+  const cards = mediumData?.items?.map((post: IMediumPost) => {
     return (
       <NewsCard
         key={post.title}
@@ -55,12 +47,6 @@ const LatestNews = () => {
       />
     )
   })
-
-  React.useEffect(() => {
-    if (data) {
-      setMediumPosts(data.items)
-    }
-  }, [data])
 
   return (
     <S.LatestNewsContainer>
@@ -74,7 +60,7 @@ const LatestNews = () => {
 
       <FadeIn threshold={0.5}>
         <S.NewsCardContainer>
-          {data && (
+          {mediumData && (
             <AliceCarousel
               mouseTracking
               infinite

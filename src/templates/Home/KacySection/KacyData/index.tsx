@@ -1,10 +1,10 @@
 import React from 'react'
-import useSWR from 'swr'
 
-import useMatomoEcommerce from '../../../../hooks/useMatomoEcommerce'
+import useMatomoEcommerce from '@/hooks/useMatomoEcommerce'
+import { useKacyData } from '@/hooks/query/useKacyData'
 
-import Button from '../../../../components/Button'
-import SectionSubtitle from '../../../../components/SectionSubtitle'
+import Button from '@/components/Button'
+import SectionSubtitle from '@/components/SectionSubtitle'
 import KacyCardData from '../KacyCardData'
 
 import * as S from './styles'
@@ -41,7 +41,7 @@ const KacyData = ({ setIsOpenModal }: IKacyDataProps) => {
   ])
 
   const { trackEventFunction } = useMatomoEcommerce()
-  const { data } = useSWR('/api/overview')
+  const { data } = useKacyData()
 
   React.useEffect(() => {
     if (data) {

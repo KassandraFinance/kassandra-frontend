@@ -1,0 +1,4 @@
+{
+    "schema": "https://backend.kassandra.finance/",
+    "documents": "src/**/*.{graphql,js,ts,jsx,tsx}"
+}

@@ -1,14 +1,11 @@
 import React from 'react'
 import Image from 'next/image'
-import useSWR from 'swr'
-import { request } from 'graphql-request'
 import Big from 'big.js'
 
-import { SUBGRAPH_URL, products } from '../../../constants/tokenAddresses'
+import { usePoolInfo } from '@/hooks/query/useWithdrawFee'
+import { products } from '../../../constants/tokenAddresses'
 
 import { BNtoDecimal } from '../../../utils/numerals'
-
-import { GET_WITHDRAW_FEE } from './graphql'
 
 import FadeIn from '../../../components/Animations/FadeIn'
 import Paragraph from '../../../components/Paragraph'
@@ -20,30 +17,23 @@ const FlowingRevenue = () => {
   const [allWithdrawFee, setAllWithdrawFees] = React.useState<Big>(new Big(0))
   const sipAddresses = products.map(product => product.sipAddress)
 
-  const { data } = useSWR(
-    [GET_WITHDRAW_FEE, sipAddresses],
-    (query, sipAddresses) =>
-      request(SUBGRAPH_URL, query, {
-        ids: sipAddresses
-      })
-  )
+  const { data } = usePoolInfo({ ids: sipAddresses })
 
   React.useEffect(() => {
-    if (data) {
-      const arrData = data.pools
-
-      let withdrawFees = Big(0)
-
-      for (const data of arrData) {
-        withdrawFees = withdrawFees.add(
-          data.withdraw.reduce((acc: Big, current: { volume_usd: string }) => {
-            return Big(current.volume_usd).add(acc)
-          }, 0)
-        )
-      }
-
-      setAllWithdrawFees(withdrawFees)
+    if (!data) {
+      return
     }
+    const arrData = data
+
+    let withdrawFees = Big(0)
+
+    for (const data of arrData) {
+      for (const fee of data.withdraw) {
+        withdrawFees = withdrawFees.add(Big(fee.volume_usd))
+      }
+    }
+
+    setAllWithdrawFees(withdrawFees)
   }, [data])
 
   return (
