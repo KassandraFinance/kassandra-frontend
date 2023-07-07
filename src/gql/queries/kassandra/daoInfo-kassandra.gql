@@ -1,5 +1,5 @@
 query DaoInfo {
-  factories(where: {id_in: ["0x958c051B55a173e393af696EcB4C4FF3D6C13930", "1370x228885c9d0440Ae640B88fBeE31522CC6a59Fd2F"]}) {
+  kassandras {
     total_value_locked_usd
     total_volume_usd
     total_fees_swap_usd
