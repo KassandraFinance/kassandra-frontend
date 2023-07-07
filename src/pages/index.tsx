@@ -41,7 +41,10 @@ export default function HomePage() {
 export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchQuery(['dao-info'], fetchDaoInfo)
+  await queryClient.prefetchQuery({
+    queryKey: ['dao-info'],
+    queryFn: () => fetchDaoInfo()
+  })
 
   return {
     props: {
