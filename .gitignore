@@ -42,4 +42,4 @@ ngrok.exe
 *:Zone.Identifier
 *.Identifier
 
-graphql.config.json
+schema.docs.graphql

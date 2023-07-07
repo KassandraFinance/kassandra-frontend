@@ -6,12 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "prepare": "husky install",
+    "codegen": "graphql-codegen",
+    "codegen:watch": "graphql-codegen --watch"
   },
   "dependencies": {
     "@datapunt/matomo-tracker-react": "^0.5.1",
-    "@reduxjs/toolkit": "^1.8.3",
+    "@tanstack/react-query": "^4.29.15",
     "@tippyjs/react": "^4.2.6",
     "@types/big.js": "^6.1.6",
     "@types/node": "^15.0.2",
@@ -20,8 +21,8 @@
     "@types/styled-components": "^5.1.11",
     "big.js": "^6.2.1",
     "ethers": "^6.6.0",
-    "graphql": "^16.0.1",
-    "graphql-request": "^3.6.1",
+    "graphql": "^16.7.1",
+    "graphql-request": "^6.1.0",
     "next": "^12.1.0",
     "nextjs-cors": "^2.1.0",
     "react": "^17.0.2",
@@ -29,13 +30,19 @@
     "react-dom": "^17.0.2",
     "react-intersection-observer": "^9.4.0",
     "react-microsoft-clarity": "^1.2.0",
-    "react-redux": "^8.0.2",
     "react-toastify": "^7.0.4",
     "recharts": "^2.1.6",
-    "styled-components": "^5.3.0",
-    "swr": "^1.2.2"
+    "styled-components": "^5.3.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "4.0.1",
+    "@graphql-codegen/client-preset": "4.0.1",
+    "@graphql-codegen/introspection": "4.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-graphql-request": "^5.0.0",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
+    "@styled/typescript-styled-plugin": "^1.0.0",
+    "@tanstack/eslint-plugin-query": "^4.29.9",
     "@typescript-eslint/eslint-plugin": "^5.60.0",
     "@typescript-eslint/parser": "^5.60.0",
     "babel-plugin-styled-components": "^1.13.2",
@@ -50,6 +57,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "git-commit-msg-linter": "^5.0.4",
+    "husky": "^8.0.3",
     "prettier": "^2.8.8",
     "typescript": "^5.1.3"
   }

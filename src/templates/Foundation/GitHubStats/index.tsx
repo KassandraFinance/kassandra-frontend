@@ -1,35 +1,18 @@
 import React from 'react'
-import useSWR from 'swr'
-import { request } from 'graphql-request'
 
-import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+import useMatomoEcommerce from '@/hooks/useMatomoEcommerce'
+import { useGithubData } from '@/hooks/query/useGithubData'
+import { useMedium } from '@/hooks/query/useMedium'
 
-import { GET_DATA_GITHUB } from './graphql'
-import { MEDIUM_FEED_URL } from '../../../constants/tokenAddresses'
-
-import ExternalLink from '../../../components/ExternalLink'
 import GitHubData from './GitHubData'
-import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
-import FadeIn from '../../../components/Animations/FadeIn'
-import Paragraph from '../../../components/Paragraph'
+import ExternalLink from '@/components/ExternalLink'
+import FadeInHorizontal from '@/components/Animations/FadeInHorizontal'
+import FadeIn from '@/components/Animations/FadeIn'
+import Paragraph from '@/components/Paragraph'
 
 import * as S from './styles'
 
-interface IMediumPost {
-  author: string
-  categories: string[]
-  content: string
-  description: string
-  enclosure: object
-  guid: string
-  link: string
-  pubDate: string
-  thumbnail: string
-  title: string
-}
-
 const GitHubStats = () => {
-  const GIT_HUB_TOKEN = process.env.NEXT_PUBLIC_GIT_HUB_TOKEN
   const currentYar = new Date().getFullYear()
   const dateInitLastYar = new Date(
     `${currentYar - 1}/01/01 00:00`
@@ -55,48 +38,55 @@ const GitHubStats = () => {
     lastWeek: 0,
     lastMonth: 0
   })
-  const [mediumPosts, setMediumPosts] = React.useState<IMediumPost[]>([])
 
-  const { data } = useSWR([GET_DATA_GITHUB, GIT_HUB_TOKEN], query =>
-    request(
-      'https://api.github.com/graphql',
-      query,
-      {
-        dateInitLastYar,
-        dateInitCurrentYarn,
-        dateLastWeek,
-        dateLastMonth
-      },
-      { Authorization: `token ${GIT_HUB_TOKEN}` }
-    )
-  )
+  const { data } = useGithubData({
+    dateLastWeek,
+    dateLastMonth,
+    dateInitLastYar,
+    dateInitCurrentYarn
+  })
+
+  const { data: mediumData } = useMedium()
 
   const { trackEventFunction } = useMatomoEcommerce()
 
-  const fetcher = async (url: string) => {
-    const res = await fetch(url)
-    return res.json()
-  }
-
-  const { data: data2 } = useSWR(MEDIUM_FEED_URL, fetcher)
-
-  interface ICommitData {
-    nodes: { object: { history: { totalCount: number } } }[]
-  }
-
-  function accTotalCommit(repositories: ICommitData) {
-    return repositories.nodes?.reduce(
-      (
-        previousValue: number,
-        currentValue: { object: { history: { totalCount: number } } }
-      ) => {
-        const currentTotalCommits = currentValue.object?.history?.totalCount
+  function accTotalCommit(
+    repositories:
+      | {
+          __typename?: 'RepositoryConnection' | undefined
+          nodes?:
+            | ({
+                __typename?: 'Repository' | undefined
+                name: string
+                object?:
+                  | { __typename?: 'Blob' | undefined }
+                  | {
+                      __typename?: 'Commit' | undefined
+                      history: {
+                        __typename?: 'CommitHistoryConnection' | undefined
+                        totalCount: number
+                      }
+                    }
+                  | { __typename?: 'Tag' | undefined }
+                  | { __typename?: 'Tree' | undefined }
+                  | null
+                  | undefined
+              } | null)[]
+            | null
+            | undefined
+        }
+      | undefined
+  ) {
+    return (
+      repositories?.nodes?.reduce((previousValue, currentValue) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        const currentTotalCommits = currentValue?.object?.history?.totalCount
         if (currentTotalCommits) {
           return currentTotalCommits + previousValue
         }
         return previousValue
-      },
-      0
+      }, 0) || 0
     )
   }
 
@@ -115,12 +105,6 @@ const GitHubStats = () => {
       })
     }
   }, [data])
-
-  React.useEffect(() => {
-    if (data2) {
-      setMediumPosts(data2.items)
-    }
-  }, [data2])
 
   return (
     <S.GitHubStatsWrapper>
@@ -168,7 +152,7 @@ const GitHubStats = () => {
           <S.ArticlesData>
             <h1>Track our development</h1>
             <ExternalLink
-              hrefLink={mediumPosts[0]?.link}
+              hrefLink={mediumData?.items[0]?.link}
               text="Latest article"
             />
             <span className="totalArticles">19</span>
