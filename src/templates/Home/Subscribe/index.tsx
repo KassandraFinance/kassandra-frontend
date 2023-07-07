@@ -64,7 +64,7 @@ const Subscribe = () => {
             />
 
             <S.Form
-              action="https://heimdall.land/subscribe/heim"
+              action="/api/subscribe"
               method="POST"
               target="hiddenFrame"
               onSubmit={handleSubmit}
