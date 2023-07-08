@@ -11,12 +11,13 @@ const isValidEmail = (email: string): boolean => {
 
 export default async (request: NextApiRequest, response: NextApiResponse) => {
   await NextCors(request, response, {
-    methods: ['POST'],
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     origin: 'https://kassandra.finance',
     optionsSuccessStatus: 200
   })
 
   const method = request.method ?? ''
+
   try {
     if (method === 'POST') {
       const { email } = request.body as { email: string }
