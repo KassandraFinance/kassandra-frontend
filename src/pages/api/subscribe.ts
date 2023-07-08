@@ -9,7 +9,10 @@ const isValidEmail = (email: string): boolean => {
   return regex.test(email)
 }
 
-export default async (request: NextApiRequest, response: NextApiResponse) => {
+export default async function handler(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
   await NextCors(request, response, {
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     origin: 'https://kassandra.finance',
@@ -22,15 +25,13 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
     if (method === 'POST') {
       const { email } = request.body as { email: string }
       if (!email || email.length > 100 || !isValidEmail(email))
-        return response.status(400).json({ message: 'Invalid Email' })
+        return response.status(400).end()
 
       await prisma.subscribe.create({
         data: { email: email.toLowerCase() }
       })
 
-      return response
-        .status(201)
-        .json({ message: `'${email}' has been successfully subscribed` })
+      return response.status(201).end()
     }
 
     return response
@@ -39,6 +40,6 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
       .end(`Method ${method} Not Allowed`)
   } catch (error) {
     console.log(error)
-    return response.status(500).json({ message: 'Internal Server Error' })
+    return response.status(500).end()
   }
 }
