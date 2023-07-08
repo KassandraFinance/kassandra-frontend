@@ -17,7 +17,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
   })
 
   const method = request.method ?? ''
-  console.log(method)
+
   try {
     if (method === 'POST') {
       const { email } = request.body as { email: string }
