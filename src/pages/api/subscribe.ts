@@ -1,4 +1,4 @@
-import prisma from '@/lib/prisma'
+import { prisma } from '../../libs/prisma/index'
 import { NextApiRequest, NextApiResponse } from 'next'
 import NextCors from 'nextjs-cors'
 
@@ -10,15 +10,16 @@ const isValidEmail = (email: string): boolean => {
 }
 
 export default async (request: NextApiRequest, response: NextApiResponse) => {
-  // await NextCors(request, response, {
-  //   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-  //   origin: 'https://beta.kassandra.finance',
-  //   optionsSuccessStatus: 200
-  // })
-
-  const method = request.method ?? ''
-
   try {
+    console.log('init request')
+    await NextCors(request, response, {
+      methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+      origin: 'https://kassandra.finance',
+      optionsSuccessStatus: 200
+    })
+
+    const method = request.method ?? ''
+
     if (method === 'POST') {
       const { email } = request.body as { email: string }
       if (!email || email.length > 100 || !isValidEmail(email))
@@ -43,13 +44,12 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
         .json({ message: 'The email has been subscribed' })
     }
 
-    return (
-      response
-        .status(405)
-        // .setHeader('Allow', ['POST'])
-        .json({ message: `Method ${method} Not Allowed` })
-    )
+    return response
+      .status(405)
+      .setHeader('Allow', ['POST'])
+      .json({ message: `Method ${method} Not Allowed` })
   } catch (error) {
+    console.log(error)
     return response.status(500).json({ message: 'Internal Server Error' })
   }
 }
