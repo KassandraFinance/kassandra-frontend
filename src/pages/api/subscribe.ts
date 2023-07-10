@@ -2,12 +2,12 @@ import prisma from '@/lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
 import NextCors from 'nextjs-cors'
 
-// const isValidEmail = (email: string): boolean => {
-//   const regex =
-//     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+const isValidEmail = (email: string): boolean => {
+  const regex =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
-//   return regex.test(email)
-// }
+  return regex.test(email)
+}
 
 const URL_COINGECKO = 'https://api.coingecko.com/api/v3'
 
@@ -19,6 +19,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
       origin: 'https://kassandra.finance',
       optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
     })
+    isValidEmail('email@')
 
     const urlPriceKacyOnCoingecko = `${URL_COINGECKO}/coins/kassandra?localization=false&tickers=false&community_data=false`
 
