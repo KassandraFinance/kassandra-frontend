@@ -9,15 +9,12 @@ const isValidEmail = (email: string): boolean => {
   return regex.test(email)
 }
 
-export default async function handler(
-  request: NextApiRequest,
-  response: NextApiResponse
-) {
-  await NextCors(request, response, {
-    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-    origin: 'https://beta.kassandra.finance',
-    optionsSuccessStatus: 200
-  })
+export default async (request: NextApiRequest, response: NextApiResponse) => {
+  // await NextCors(request, response, {
+  //   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  //   origin: 'https://beta.kassandra.finance',
+  //   optionsSuccessStatus: 200
+  // })
 
   const method = request.method ?? ''
 
@@ -46,10 +43,12 @@ export default async function handler(
         .json({ message: 'The email has been subscribed' })
     }
 
-    return response
-      .status(405)
-      .setHeader('Allow', ['POST'])
-      .json(`Method ${method} Not Allowed`)
+    return (
+      response
+        .status(405)
+        // .setHeader('Allow', ['POST'])
+        .json({ message: `Method ${method} Not Allowed` })
+    )
   } catch (error) {
     return response.status(500).json({ message: 'Internal Server Error' })
   }
