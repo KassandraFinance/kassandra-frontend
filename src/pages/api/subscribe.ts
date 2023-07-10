@@ -1,5 +1,5 @@
-// import { prisma } from '../../libs/prisma'
-import { PrismaClient } from '@prisma/client'
+import prisma from '../../libs/prisma'
+// import { PrismaClient } from '@prisma/client'
 import { NextApiRequest, NextApiResponse } from 'next'
 import NextCors from 'nextjs-cors'
 
@@ -21,7 +21,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
       optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
     })
     isValidEmail('email@')
-    const prisma = new PrismaClient()
+    // const prisma = new PrismaClient()
     await prisma.subscribe.create({
       data: { email: 'g@kassandra.finance' }
     })
