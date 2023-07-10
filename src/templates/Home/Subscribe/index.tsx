@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
-import { ToastSuccess } from '../../../components/Toastify/toast'
+import { ToastError, ToastSuccess } from '../../../components/Toastify/toast'
 
 import TextField from '../../../components/TextField'
 import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
@@ -34,7 +34,26 @@ const Subscribe = () => {
     setFormState({ ...formState, [key]: value })
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    const response = await fetch('/api/subscribe', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(formState)
+    })
+
+    if (response.status !== 201) {
+      const message =
+        response.status === 400
+          ? 'Email already subscribed'
+          : 'Subscription failed, please try again later'
+      ToastError(message)
+      return
+    }
+
     ToastSuccess('Successfully subscribed')
     trackEventFunction('click-on-button', 'send-email', 'subscribe-email')
     setTimeout(() => {
@@ -63,12 +82,7 @@ const Subscribe = () => {
               style={{ display: 'none' }}
             />
 
-            <S.Form
-              action="/api/subscribe"
-              method="POST"
-              target="hiddenFrame"
-              onSubmit={handleSubmit}
-            >
+            <S.Form target="hiddenFrame" onSubmit={handleSubmit}>
               <TextField hidden name="user" value="Gem Hunter" />
 
               <S.InputWrapper>

@@ -1,4 +1,4 @@
-import prisma from '@/lib/prisma'
+import { prisma } from '../../libs/prisma/index'
 import { NextApiRequest, NextApiResponse } from 'next'
 import NextCors from 'nextjs-cors'
 
@@ -9,37 +9,47 @@ const isValidEmail = (email: string): boolean => {
   return regex.test(email)
 }
 
-export default async function handler(
-  request: NextApiRequest,
-  response: NextApiResponse
-) {
-  await NextCors(request, response, {
-    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-    origin: 'https://kassandra.finance',
-    optionsSuccessStatus: 200
-  })
-
-  const method = request.method ?? ''
-
+export default async (request: NextApiRequest, response: NextApiResponse) => {
   try {
+    console.log('init request')
+    await NextCors(request, response, {
+      methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+      origin: 'https://kassandra.finance',
+      optionsSuccessStatus: 200
+    })
+
+    const method = request.method ?? ''
+
     if (method === 'POST') {
       const { email } = request.body as { email: string }
       if (!email || email.length > 100 || !isValidEmail(email))
-        return response.status(400).end()
+        return response.status(400).json({ message: 'Invalid email' })
+
+      const emailExists = await prisma.subscribe.findUnique({
+        where: { email: email.toLowerCase() }
+      })
+
+      if (emailExists) {
+        return response
+          .status(400)
+          .json({ message: 'Email already subscribed' })
+      }
 
       await prisma.subscribe.create({
         data: { email: email.toLowerCase() }
       })
 
-      return response.status(201).end()
+      return response
+        .status(201)
+        .json({ message: 'The email has been subscribed' })
     }
 
     return response
       .status(405)
       .setHeader('Allow', ['POST'])
-      .end(`Method ${method} Not Allowed`)
+      .json({ message: `Method ${method} Not Allowed` })
   } catch (error) {
     console.log(error)
-    return response.status(500).end()
+    return response.status(500).json({ message: 'Internal Server Error' })
   }
 }
