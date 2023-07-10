@@ -9,14 +9,14 @@ const isValidEmail = (email: string): boolean => {
   return regex.test(email)
 }
 
-const prisma = new PrismaClient()
-
 export default async (request: NextApiRequest, response: NextApiResponse) => {
   await NextCors(request, response, {
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     origin: 'https://kassandra.finance',
     optionsSuccessStatus: 200
   })
+
+  const prisma = new PrismaClient()
 
   const method = request.method ?? ''
 
