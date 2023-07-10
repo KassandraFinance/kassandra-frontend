@@ -25,21 +25,32 @@ export default async function handler(
     if (method === 'POST') {
       const { email } = request.body as { email: string }
       if (!email || email.length > 100 || !isValidEmail(email))
-        return response.status(400).end()
+        return response.status(400).json({ message: 'Invalid email' })
+
+      const emailExists = await prisma.subscribe.findUnique({
+        where: { email }
+      })
+
+      if (emailExists) {
+        return response
+          .status(400)
+          .json({ message: 'Email already subscribed' })
+      }
 
       await prisma.subscribe.create({
         data: { email: email.toLowerCase() }
       })
 
-      return response.status(201).end()
+      return response
+        .status(201)
+        .json({ message: 'The email has been subscribed' })
     }
 
     return response
       .status(405)
       .setHeader('Allow', ['POST'])
-      .end(`Method ${method} Not Allowed`)
+      .json(`Method ${method} Not Allowed`)
   } catch (error) {
-    console.log(error)
-    return response.status(500).end()
+    return response.status(500).json({ message: 'Internal Server Error' })
   }
 }
