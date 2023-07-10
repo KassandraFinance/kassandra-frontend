@@ -28,7 +28,7 @@ export default async function handler(
         return response.status(400).json({ message: 'Invalid email' })
 
       const emailExists = await prisma.subscribe.findUnique({
-        where: { email }
+        where: { email: email.toLowerCase() }
       })
 
       if (emailExists) {
