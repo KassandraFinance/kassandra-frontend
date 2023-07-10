@@ -12,6 +12,7 @@ const isValidEmail = (email: string): boolean => {
 
 export default async (request: NextApiRequest, response: NextApiResponse) => {
   try {
+    console.log('init request')
     await NextCors(request, response, {
       methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
       origin: 'https://kassandra.finance',
@@ -53,6 +54,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
         .json({ message: `Method ${method} Not Allowed` })
     )
   } catch (error) {
+    console.log(error)
     return response.status(500).json({ message: 'Internal Server Error' })
   }
 }
