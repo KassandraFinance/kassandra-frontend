@@ -10,16 +10,17 @@ const isValidEmail = (email: string): boolean => {
 }
 
 export default async (request: NextApiRequest, response: NextApiResponse) => {
-  await NextCors(request, response, {
-    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-    origin: 'https://kassandra.finance',
-    optionsSuccessStatus: 200
-  })
-
-  const method = request.method ?? ''
-
   try {
+    await NextCors(request, response, {
+      methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+      origin: 'https://kassandra.finance',
+      optionsSuccessStatus: 200
+    })
+
+    const method = request.method ?? ''
+
     const prisma = new PrismaClient()
+
     if (method === 'POST') {
       const { email } = request.body as { email: string }
       if (!email || email.length > 100 || !isValidEmail(email))
