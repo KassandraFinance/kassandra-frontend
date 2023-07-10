@@ -15,7 +15,7 @@ export default async function handler(
 ) {
   await NextCors(request, response, {
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-    origin: 'https://kassandra.finance',
+    origin: 'https://beta.kassandra.finance',
     optionsSuccessStatus: 200
   })
 
