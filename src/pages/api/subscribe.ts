@@ -1,4 +1,3 @@
-// import { PrismaClient } from '@prisma/client'
 import { prisma } from '../../libs/prisma/index'
 import { NextApiRequest, NextApiResponse } from 'next'
 import NextCors from 'nextjs-cors'
@@ -20,8 +19,6 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
     })
 
     const method = request.method ?? ''
-
-    // const prisma = new PrismaClient()
 
     if (method === 'POST') {
       const { email } = request.body as { email: string }
@@ -47,59 +44,12 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
         .json({ message: 'The email has been subscribed' })
     }
 
-    return (
-      response
-        .status(405)
-        // .setHeader('Allow', ['POST'])
-        .json({ message: `Method ${method} Not Allowed` })
-    )
+    return response
+      .status(405)
+      .setHeader('Allow', ['POST'])
+      .json({ message: `Method ${method} Not Allowed` })
   } catch (error) {
     console.log(error)
     return response.status(500).json({ message: 'Internal Server Error' })
   }
 }
-
-// export default async (request: NextApiRequest, response: NextApiResponse) => {
-//   // await NextCors(request, response, {
-//   //   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-//   //   origin: 'https://beta.kassandra.finance',
-//   //   optionsSuccessStatus: 200
-//   // })
-
-//   const method = request.method ?? ''
-
-//   try {
-//     if (method === 'POST') {
-//       const { email } = request.body as { email: string }
-//       if (!email || email.length > 100 || !isValidEmail(email))
-//         return response.status(400).json({ message: 'Invalid email' })
-
-//       const emailExists = await prisma.subscribe.findUnique({
-//         where: { email: email.toLowerCase() }
-//       })
-
-//       if (emailExists) {
-//         return response
-//           .status(400)
-//           .json({ message: 'Email already subscribed' })
-//       }
-
-//       await prisma.subscribe.create({
-//         data: { email: email.toLowerCase() }
-//       })
-
-//       return response
-//         .status(201)
-//         .json({ message: 'The email has been subscribed' })
-//     }
-
-//     return (
-//       response
-//         .status(405)
-//         // .setHeader('Allow', ['POST'])
-//         .json({ message: `Method ${method} Not Allowed` })
-//     )
-//   } catch (error) {
-//     return response.status(500).json({ message: 'Internal Server Error' })
-//   }
-// }
