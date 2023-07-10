@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client'
-// import prisma from '../../libs/prisma/index'
+// import { PrismaClient } from '@prisma/client'
+import { prisma } from '../../libs/prisma/index'
 import { NextApiRequest, NextApiResponse } from 'next'
 import NextCors from 'nextjs-cors'
 
@@ -20,7 +20,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
 
     const method = request.method ?? ''
 
-    const prisma = new PrismaClient()
+    // const prisma = new PrismaClient()
 
     if (method === 'POST') {
       const { email } = request.body as { email: string }
