@@ -1,4 +1,4 @@
-import prisma from '../../libs/prisma'
+import { prisma } from '../../libs/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
 import NextCors from 'nextjs-cors'
 
