@@ -21,9 +21,9 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
     })
     isValidEmail('email@')
 
-    await prisma.subscribe.create({
-      data: { email: 'g@kassandra.finance' }
-    })
+    // await prisma.subscribe.create({
+    //   data: { email: 'g@kassandra.finance' }
+    // })
 
     const urlPriceKacyOnCoingecko = `${URL_COINGECKO}/coins/kassandra?localization=false&tickers=false&community_data=false`
 
