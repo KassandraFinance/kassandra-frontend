@@ -33,7 +33,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
         body: JSON.stringify({
           email: email.toLowerCase(),
           updateEnabled: false,
-          ext_id: process.env.BREVO_ID
+          listIds: [Number(process.env.BREVO_ID)]
         })
       })
 
