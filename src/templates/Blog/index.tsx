@@ -1,6 +1,8 @@
+import Head from 'next/head'
+
 import Button from '@/components/Button'
 import Hero from '@/components/Hero'
-import Head from 'next/head'
+import { Tag } from '@/components/Blog/Tag'
 
 const Blog = () => {
   return (
@@ -35,6 +37,9 @@ const Blog = () => {
           href="https://www.kassandra.finance/blog"
         />
       </Hero>
+      <Tag variant="primary" shape="rounded" size="medium">
+        Tag
+      </Tag>
     </>
   )
 }
