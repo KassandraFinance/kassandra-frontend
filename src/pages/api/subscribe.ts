@@ -1,4 +1,3 @@
-import { prisma } from '../../libs/prisma/index'
 import { NextApiRequest, NextApiResponse } from 'next'
 import NextCors from 'nextjs-cors'
 
@@ -11,7 +10,6 @@ const isValidEmail = (email: string): boolean => {
 
 export default async (request: NextApiRequest, response: NextApiResponse) => {
   try {
-    console.log('init request')
     await NextCors(request, response, {
       methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
       origin: 'https://kassandra.finance',
@@ -25,19 +23,25 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
       if (!email || email.length > 100 || !isValidEmail(email))
         return response.status(400).json({ message: 'Invalid email' })
 
-      const emailExists = await prisma.subscribe.findUnique({
-        where: { email: email.toLowerCase() }
+      const res = await fetch('https://api.brevo.com/v3/contacts', {
+        method,
+        headers: {
+          'content-type': 'application/json',
+          'api-key': process.env.BREVO_API_KEY ?? '',
+          accept: 'application/json'
+        },
+        body: JSON.stringify({
+          email: email.toLowerCase(),
+          updateEnabled: false,
+          listIds: [Number(process.env.BREVO_ID)]
+        })
       })
 
-      if (emailExists) {
+      if (res.status !== 201) {
         return response
           .status(400)
           .json({ message: 'Email already subscribed' })
       }
-
-      await prisma.subscribe.create({
-        data: { email: email.toLowerCase() }
-      })
 
       return response
         .status(201)
