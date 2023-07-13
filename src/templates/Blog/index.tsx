@@ -1,9 +1,10 @@
-import Authors from '@/components/Authors'
+import Authors from '@/components/Blog/Authors'
 import AppliedFilters from '@/components/Blog/AppliedFilters'
 import ArticleCard from '@/components/Blog/ArticleCard'
 import { Tag } from '@/components/Blog/Tag'
 import IconButton from '@/components/IconButton'
 import { DiscordIcon } from '@/Icons'
+import ArticleList from '@/components/Blog/ArticleList'
 
 const Blog = () => {
   return (
@@ -71,6 +72,38 @@ const Blog = () => {
           }}
         />
       </div>
+      <ArticleList
+        post={{
+          banner: {
+            alternativeText: 'A',
+            url: 'https://github.com/nicholascostadev.png'
+          },
+          highlighted: false,
+          id: 'test',
+          isPRO: false,
+          publishedAt: '2021-08-01T00:00:00.000Z',
+          readingDifficulty: {
+            difficultyName: 'Easy'
+          },
+          readTimeInMinutes: 1,
+          slug: 'test',
+          title: 'Test',
+          writers: [
+            {
+              id: 'nicholas',
+              name: 'Nicholas',
+              profilePicture: {
+                url: 'https://github.com/nicholascostadev.png',
+                alternativeText: 'testing'
+              }
+            }
+          ],
+          summary: 'dasdasdasdasda',
+          tags: [{ name: 'Testing' }]
+        }}
+        borderShadow="true"
+        isUserPRO={false}
+      />
       <div style={{ display: 'flex', alignItems: 'center', gap: '1.6rem' }}>
         <AppliedFilters
           filters={[
