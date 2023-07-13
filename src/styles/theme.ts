@@ -185,6 +185,13 @@ const size = {
   desktop: '1300px'
 } as const
 
+export const breakpoints = {
+  mobile: 576,
+  tabletSmall: 768,
+  tabletLarge: 992,
+  desktop: 1300
+} as const
+
 export const device = {
   mobile: `(max-width: ${size.mobile})`,
   tabletSmall: `(max-width: ${size.tabletSmall})`,
