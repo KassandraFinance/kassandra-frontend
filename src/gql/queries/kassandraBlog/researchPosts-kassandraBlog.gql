@@ -1,0 +1,116 @@
+query ResearchPosts(
+  $pagination: PaginationArg
+  $tags: [String]
+  $coins: [String]
+  $isPRO: Boolean
+  $difficultyNames: [String]
+  $tab: String
+) {
+  posts(
+    pagination: $pagination
+    filters: {
+      tags: { name: { in: $tags } }
+      isPRO: { eq: $isPRO }
+      readingDifficulty: { difficultyName: { in: $difficultyNames } },
+      tabs: { tabName: { in: [$tab] }}
+      coins: { coinGeckoID: { in: $coins } }
+    }
+    sort: "publishedAt:desc"
+  ) {
+    meta {
+      pagination {
+        total
+        pageCount
+      }
+    }
+    data {
+      id
+      attributes {
+        slug
+        title
+        readingDifficulty {
+          data {
+            attributes {
+              difficultyName
+            }
+          }
+        }
+        tags {
+          data {
+            attributes {
+              name
+            }
+          }
+        }
+        summary
+        publishedAt
+        banner {
+          data {
+            attributes {
+              url
+              alternativeText
+            }
+          }
+        }
+        readTimeInMinutes
+        writers {
+          data {
+            id
+            attributes {
+              name
+              profilePicture {
+                data {
+                  attributes {
+                    url
+                    alternativeText
+                  }
+                }
+              }
+            }
+          }
+        }
+        highlighted
+        isPRO
+      }
+    }
+  }
+  readingDifficulties {
+    data {
+      attributes {
+        difficultyName
+      }
+    }
+  }
+  tags {
+    data {
+      attributes {
+        name
+      }
+    }
+  }
+  tabs {
+    data {
+      attributes {
+        tabName
+        position
+      }
+    }
+  }
+  coins {
+    data {
+      attributes {
+        image {
+          data {
+            attributes {
+              alternativeText
+              url
+            }
+          }
+        }
+        coinGeckoID
+        name
+        symbol
+      }
+    }
+  }
+}

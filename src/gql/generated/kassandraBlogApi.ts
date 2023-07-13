@@ -1634,7 +1634,124 @@ export type WriterRelationResponseCollection = {
   data: Array<WriterEntity>;
 };
 
+export type ResearchPostsQueryVariables = Exact<{
+  pagination?: InputMaybe<PaginationArg>;
+  tags?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
+  coins?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
+  isPRO?: InputMaybe<Scalars['Boolean']['input']>;
+  difficultyNames?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
+  tab?: InputMaybe<Scalars['String']['input']>;
+}>;
 
+
+export type ResearchPostsQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', meta: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', total: number, pageCount: number } }, data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', slug: string, title: string, summary: string, publishedAt?: any | null, readTimeInMinutes: number, highlighted: boolean, isPRO: boolean, readingDifficulty?: { __typename?: 'ReadingDifficultyEntityResponse', data?: { __typename?: 'ReadingDifficultyEntity', attributes?: { __typename?: 'ReadingDifficulty', difficultyName: string } | null } | null } | null, tags?: { __typename?: 'TagRelationResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', name: string } | null }> } | null, banner: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null }, writers?: { __typename?: 'WriterRelationResponseCollection', data: Array<{ __typename?: 'WriterEntity', id?: string | null, attributes?: { __typename?: 'Writer', name: string, profilePicture: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } } | null }> } | null } | null }> } | null, readingDifficulties?: { __typename?: 'ReadingDifficultyEntityResponseCollection', data: Array<{ __typename?: 'ReadingDifficultyEntity', attributes?: { __typename?: 'ReadingDifficulty', difficultyName: string } | null }> } | null, tags?: { __typename?: 'TagEntityResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', name: string } | null }> } | null, tabs?: { __typename?: 'TabEntityResponseCollection', data: Array<{ __typename?: 'TabEntity', attributes?: { __typename?: 'Tab', tabName: string, position: number } | null }> } | null, coins?: { __typename?: 'CoinEntityResponseCollection', data: Array<{ __typename?: 'CoinEntity', attributes?: { __typename?: 'Coin', coinGeckoID: string, name: string, symbol: string, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', alternativeText?: string | null, url: string } | null } | null } } | null }> } | null };
+
+
+export const ResearchPostsDocument = gql`
+    query ResearchPosts($pagination: PaginationArg, $tags: [String], $coins: [String], $isPRO: Boolean, $difficultyNames: [String], $tab: String) {
+  posts(
+    pagination: $pagination
+    filters: {tags: {name: {in: $tags}}, isPRO: {eq: $isPRO}, readingDifficulty: {difficultyName: {in: $difficultyNames}}, tabs: {tabName: {in: [$tab]}}, coins: {coinGeckoID: {in: $coins}}}
+    sort: "publishedAt:desc"
+  ) {
+    meta {
+      pagination {
+        total
+        pageCount
+      }
+    }
+    data {
+      id
+      attributes {
+        slug
+        title
+        readingDifficulty {
+          data {
+            attributes {
+              difficultyName
+            }
+          }
+        }
+        tags {
+          data {
+            attributes {
+              name
+            }
+          }
+        }
+        summary
+        publishedAt
+        banner {
+          data {
+            attributes {
+              url
+              alternativeText
+            }
+          }
+        }
+        readTimeInMinutes
+        writers {
+          data {
+            id
+            attributes {
+              name
+              profilePicture {
+                data {
+                  attributes {
+                    url
+                    alternativeText
+                  }
+                }
+              }
+            }
+          }
+        }
+        highlighted
+        isPRO
+      }
+    }
+  }
+  readingDifficulties {
+    data {
+      attributes {
+        difficultyName
+      }
+    }
+  }
+  tags {
+    data {
+      attributes {
+        name
+      }
+    }
+  }
+  tabs {
+    data {
+      attributes {
+        tabName
+        position
+      }
+    }
+  }
+  coins {
+    data {
+      attributes {
+        image {
+          data {
+            attributes {
+              alternativeText
+              url
+            }
+          }
+        }
+        coinGeckoID
+        name
+        symbol
+      }
+    }
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -1643,7 +1760,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-
+    ResearchPosts(variables?: ResearchPostsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ResearchPostsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ResearchPostsQuery>(ResearchPostsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ResearchPosts', 'query');
+    }
   };
 }
 export type Sdk = ReturnType<typeof getSdk>;
