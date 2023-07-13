@@ -4,7 +4,8 @@ module.exports = {
     domains: [
       'assets.coingecko.com',
       'cdn-images-1.medium.com',
-      'tokens.1inch.io'
+      'tokens.1inch.io',
+      'github.com'
     ]
   },
   async redirects() {

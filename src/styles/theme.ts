@@ -178,6 +178,20 @@ const theme = {
   }
 } as const
 
+const size = {
+  mobile: '576px',
+  tabletSmall: '768px',
+  tabletLarge: '992px',
+  desktop: '1300px'
+} as const
+
+export const device = {
+  mobile: `(max-width: ${size.mobile})`,
+  tabletSmall: `(max-width: ${size.tabletSmall})`,
+  tabletLarge: `(max-width: ${size.tabletLarge})`,
+  desktop: `(max-width: ${size.desktop})`
+} as const
+
 export default theme
 
 export type ThemeType = typeof theme

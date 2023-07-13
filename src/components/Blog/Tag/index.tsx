@@ -1,8 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
 
-import type { SVGFuncElement } from '@/types/svg'
-
 import * as S from './styles'
 
 export type TagVariants =
@@ -31,7 +29,7 @@ interface ITagProps extends React.HTMLAttributes<any> {
   href?: string
   isExternalLink?: boolean
   capitalization?: TagCapitalizations
-  leftIcon?: SVGFuncElement
+  leftIcon?: JSX.Element
   children?: React.ReactNode
 }
 
@@ -52,8 +50,6 @@ export const Tag = React.forwardRef<any, ITagProps>(
     },
     ref
   ) => {
-    const LeftIcon = leftIcon
-
     if (href && !isExternalLink && !asLabel) {
       return (
         <Link href={href} passHref>
@@ -66,7 +62,7 @@ export const Tag = React.forwardRef<any, ITagProps>(
             as="a"
             {...rest}
           >
-            {LeftIcon && <LeftIcon />}
+            {leftIcon}
             {children}
           </S.Tag>
         </Link>
@@ -85,7 +81,7 @@ export const Tag = React.forwardRef<any, ITagProps>(
           rel="noopener noreferrer"
           {...rest}
         >
-          {LeftIcon && <LeftIcon />}
+          {leftIcon}
           {children}
         </S.Tag>
       )
@@ -101,7 +97,7 @@ export const Tag = React.forwardRef<any, ITagProps>(
         as={asLabel ? 'label' : 'button'}
         {...rest}
       >
-        {LeftIcon && <LeftIcon />}
+        {leftIcon}
         {children}
       </S.Tag>
     )
