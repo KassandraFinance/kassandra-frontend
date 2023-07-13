@@ -115,7 +115,7 @@ export const TextTitlePlusMarketing = styled.div`
       justify-content: space-between;
       align-items: center;
 
-      color: ${theme.colors.neutral50};
+      color: ${theme.colors.snow};
       font: ${theme.font.text.textXs300};
       letter-spacing: 0.048rem;
     }
@@ -165,7 +165,7 @@ export const AuthorPlusIcons = styled.div`
     align-items: center;
 
     .text-footer {
-      color: ${theme.colors.neutral50};
+      color: ${theme.colors.snow};
       font: ${theme.font.text.textXs300};
       letter-spacing: 0.048rem;
     }
