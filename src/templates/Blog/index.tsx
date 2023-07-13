@@ -1,4 +1,5 @@
 import Authors from '@/components/Authors'
+import AppliedFilters from '@/components/Blog/AppliedFilters'
 import ArticleCard from '@/components/Blog/ArticleCard'
 import { Tag } from '@/components/Blog/Tag'
 import IconButton from '@/components/IconButton'
@@ -67,6 +68,30 @@ const Blog = () => {
             ],
             summary: 'dasdasdasdasda',
             tags: [{ name: 'Testing' }]
+          }}
+        />
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1.6rem' }}>
+        <AppliedFilters
+          filters={[
+            {
+              value: 'a',
+              filterId: 'filter-id',
+              initiallyHiddenText: "Filter's name",
+              type: 'tag'
+            },
+            {
+              value: 'a',
+              filterId: 'filter-id',
+              initiallyHiddenText: "Filter's name",
+              type: 'tag'
+            }
+          ]}
+          onClearAllFilters={() => {
+            return
+          }}
+          onFilterRemove={() => {
+            return
           }}
         />
       </div>
