@@ -36,6 +36,18 @@ const config: CodegenConfig = {
       config: {
         enumsAsTypes: true
       }
+    },
+    './src/gql/generated/kassandraBlogApi.ts': {
+      schema: 'https://strapi-kassandra-production.up.railway.app/graphql',
+      documents: ['./src/gql/queries/heimdall/**/*-kassandraBlog.gql'],
+      plugins: [
+        'typescript',
+        'typescript-operations',
+        'typescript-graphql-request'
+      ],
+      config: {
+        enumsAsTypes: true
+      }
     }
   }
 }
