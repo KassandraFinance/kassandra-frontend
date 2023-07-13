@@ -39,7 +39,7 @@ const config: CodegenConfig = {
     },
     './src/gql/generated/kassandraBlogApi.ts': {
       schema: 'https://strapi-kassandra-production.up.railway.app/graphql',
-      documents: ['./src/gql/queries/heimdall/**/*-kassandraBlog.gql'],
+      documents: ['./src/gql/queries/kassandraBlog/**/*-kassandraBlog.gql'],
       plugins: [
         'typescript',
         'typescript-operations',
