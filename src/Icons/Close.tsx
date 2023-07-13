@@ -1,6 +1,13 @@
-export const CloseIcon = () => {
+import type { SvgProps } from '.'
+
+export const CloseIcon = (props: SvgProps) => {
   return (
-    <svg viewBox="0 0 12 12" fill="#FCFCFC" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      viewBox="0 0 12 12"
+      fill="#FCFCFC"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <path
         d="M0.266799 1.55502C-0.088933 1.19929 -0.0889332 0.622532 0.266799 0.266799C0.622531 -0.0889331 1.19929 -0.0889331 1.55502 0.266799L11.7332 10.445C12.0889 10.8007 12.0889 11.3774 11.7332 11.7332C11.3774 12.0889 10.8007 12.0889 10.445 11.7332L0.266799 1.55502Z"
         fill="inherit"

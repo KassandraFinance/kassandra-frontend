@@ -1,6 +1,13 @@
-export const RedditIcon = () => {
+import type { SvgProps } from '.'
+
+export const RedditIcon = (props: SvgProps) => {
   return (
-    <svg viewBox="0 0 57 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      viewBox="0 0 57 56"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <path
         opacity="0.1"
         fillRule="evenodd"

@@ -5,6 +5,7 @@ import { Tag } from '@/components/Blog/Tag'
 import IconButton from '@/components/IconButton'
 import { DiscordIcon } from '@/Icons'
 import ArticleList from '@/components/Blog/ArticleList'
+import Button from '@/components/Blog/Button'
 
 const Blog = () => {
   return (
@@ -128,6 +129,9 @@ const Blog = () => {
           }}
         />
       </div>
+      <Button variant="primary" size="medium" hasRightChevron>
+        Hello World
+      </Button>
     </div>
   )
 }
