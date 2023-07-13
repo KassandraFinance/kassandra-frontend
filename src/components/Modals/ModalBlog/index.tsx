@@ -4,7 +4,7 @@ import * as RadixModal from '@radix-ui/react-dialog'
 
 import type { SVGFuncElement } from '@/types/svg'
 
-import { CloseIcon } from '@/Icons/close'
+import { CloseIcon } from '@/Icons/Close'
 
 import * as S from './styles'
 
