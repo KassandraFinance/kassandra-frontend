@@ -4,7 +4,6 @@ import { PostDataType } from '@/store/reducers/postsSlice'
 
 import useMatomo from '@/hooks/useMatomo'
 import { publishedAtToHumanReadable } from '@/utils/date'
-import { LockerIcon } from '@/Icons/Locker'
 
 import { Tag } from '../Tag'
 
@@ -12,10 +11,9 @@ import * as S from './styles'
 
 interface IArticleCardProps {
   post: PostDataType
-  isUserPRO?: boolean
 }
 
-const ArticleCard = ({ post, isUserPRO }: IArticleCardProps) => {
+const ArticleCard = ({ post }: IArticleCardProps) => {
   const { trackEvent } = useMatomo()
 
   const readingDifficulty = {
@@ -46,7 +44,6 @@ const ArticleCard = ({ post, isUserPRO }: IArticleCardProps) => {
               shape="rounded"
               size="medium"
               className="pro-tag"
-              leftIcon={isUserPRO ? undefined : <LockerIcon />}
               asLabel
             >
               Pro

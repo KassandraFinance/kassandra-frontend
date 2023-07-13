@@ -6,7 +6,6 @@ import { PostDataType } from '@/store/reducers/postsSlice'
 
 import { publishedAtToHumanReadable } from '@/utils/date'
 
-import { LockerIcon } from '@/Icons/Locker'
 import { Tag } from '@/components/Blog/Tag'
 
 import * as S from './styles'
@@ -16,15 +15,13 @@ interface IArticleListProps {
   borderShadow: 'true' | 'false'
   tabletView?: boolean
   imageLeft?: 'true' | 'false'
-  isUserPRO?: boolean
 }
 
 const ArticleList = ({
   post,
   borderShadow,
   tabletView,
-  imageLeft,
-  isUserPRO
+  imageLeft
 }: IArticleListProps) => {
   const { trackEvent } = useMatomo()
 
@@ -52,7 +49,6 @@ const ArticleList = ({
                   shape="square"
                   size="medium"
                   className="pro-tag"
-                  leftIcon={isUserPRO ? undefined : <LockerIcon />}
                 >
                   Pro
                 </Tag>
@@ -78,7 +74,6 @@ const ArticleList = ({
                     shape="square"
                     size="medium"
                     className="pro-tag-mobile"
-                    leftIcon={isUserPRO ? undefined : <LockerIcon />}
                   >
                     Pro
                   </Tag>
@@ -119,7 +114,6 @@ const ArticleList = ({
                   shape="square"
                   size="large"
                   className="pro-tag"
-                  leftIcon={isUserPRO ? undefined : <LockerIcon />}
                 >
                   Pro
                 </Tag>

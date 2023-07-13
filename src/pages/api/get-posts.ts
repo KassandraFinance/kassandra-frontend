@@ -16,10 +16,6 @@ const requestSchema = z.object({
     .default('')
     .transform(val => val.split(','))
     .transform(val => (val.length <= 1 && val[0] === '' ? [] : val)),
-  isPRO: z
-    .union([z.literal('true'), z.literal('undefined')])
-    .optional()
-    .transform(value => (value === 'true' ? true : undefined)),
   page: z.coerce
     .number()
     .min(1, 'Page has to be higher than or equal to 1')
@@ -54,12 +50,11 @@ export default async function handler(
   }
 
   try {
-    const { tags, coins, isPRO, page, perPage, readingDifficulties, tab } =
+    const { tags, coins, page, perPage, readingDifficulties, tab } =
       requestSchema.parse(request.query)
 
     response.status(200).json(
       await getPosts({
-        isPRO,
         page,
         perPage,
         readingDifficulties,
