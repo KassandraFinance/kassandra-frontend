@@ -1,3 +1,5 @@
+import { env } from '@/env.mjs'
+
 interface PoolDetails {
   pid: number
   symbol: string
@@ -18,19 +20,19 @@ interface PoolDetails {
 }
 
 const KACY_ADDRESS =
-  process.env.NEXT_PUBLIC_MASTER === '1'
+  env.NEXT_PUBLIC_MASTER === '1'
     ? '0xf32398dae246C5f672B52A54e9B413dFFcAe1A44'
     : '0x1d7C6846F033e593b4f3f21C39573bb1b41D43Cb'
 
 export const LP_KACY_AVAX_PNG =
-  process.env.NEXT_PUBLIC_MASTER === '1'
+  env.NEXT_PUBLIC_MASTER === '1'
     ? '0x1938cE0E14dD71caab96F52dF3F49b1D1DAF8861'
     : '0xbaa8b0d2AA6415d5b4077C1FA06b3507577FBCd7'
 
 export const LP_KACY_AVAX_JOE = '0xc45893e0ee426a643e54829ee8c697995e5980ed'
 
 export const AHYPE_ADDRESS =
-  process.env.NEXT_PUBLIC_MASTER === '1'
+  env.NEXT_PUBLIC_MASTER === '1'
     ? '0x38918142779e2CD1189cBd9e932723C968363D1E'
     : '0xE34A2935B04e9c879f5bDd022b97D7Cf2F1Dde1d'
 
@@ -68,7 +70,7 @@ const kacyInvestor2: PoolDetails = {
 }
 
 const kacy1x: PoolDetails = {
-  pid: process.env.NEXT_PUBLIC_MASTER === '1' ? 2 : 0,
+  pid: env.NEXT_PUBLIC_MASTER === '1' ? 2 : 0,
   symbol: 'KACY',
   properties: {
     logo: {
@@ -84,7 +86,7 @@ const kacy1x: PoolDetails = {
 }
 
 const kacy2x: PoolDetails = {
-  pid: process.env.NEXT_PUBLIC_MASTER === '1' ? 3 : 1,
+  pid: env.NEXT_PUBLIC_MASTER === '1' ? 3 : 1,
   symbol: 'KACY',
   properties: {
     logo: {
@@ -100,7 +102,7 @@ const kacy2x: PoolDetails = {
 }
 
 const kacy3x: PoolDetails = {
-  pid: process.env.NEXT_PUBLIC_MASTER === '1' ? 4 : 2,
+  pid: env.NEXT_PUBLIC_MASTER === '1' ? 4 : 2,
   symbol: 'KACY',
   properties: {
     logo: {
@@ -150,7 +152,7 @@ const lpJoe: PoolDetails = {
 }
 
 const ahype: PoolDetails = {
-  pid: process.env.NEXT_PUBLIC_MASTER === '1' ? 6 : 4,
+  pid: env.NEXT_PUBLIC_MASTER === '1' ? 6 : 4,
   symbol: 'aHYPE',
   properties: {
     logo: {

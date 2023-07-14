@@ -18,13 +18,12 @@ import theme from '../styles/theme'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Toastify from '../components/Toastify'
+import { env } from '@/env.mjs'
 
 const matomoUrl = 'https://stats.kassandra.finance'
 
 const instance = createInstance({
-  disabled:
-    process.env.NODE_ENV === 'development' ||
-    process.env.NEXT_PUBLIC_MASTER !== '1',
+  disabled: env.NODE_ENV === 'development' || env.NEXT_PUBLIC_MASTER !== '1',
   urlBase: matomoUrl,
   siteId: 6,
   trackerUrl: `${matomoUrl}/api.php`,
@@ -39,9 +38,9 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter()
 
   React.useEffect(() => {
-    process.env.NEXT_PUBLIC_NODE_ENV === 'development'
+    env.NEXT_PUBLIC_NODE_ENV === 'development'
       ? ''
-      : clarity.init(process.env.NEXT_PUBLIC_CLARITY || '')
+      : clarity.init(env.NEXT_PUBLIC_CLARITY || '')
   }, [])
 
   return (

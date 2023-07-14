@@ -11,6 +11,7 @@ import SectionSubtitle from '../../../components/SectionSubtitle'
 import Paragraph from '../../../components/Paragraph'
 
 import * as S from './styles'
+import { env } from '@/env.mjs'
 
 const LockVote = () => {
   const { trackEventFunction } = useMatomoEcommerce()
@@ -31,7 +32,7 @@ const LockVote = () => {
         <div className="flex">
           <S.LockPoolContainer>
             <S.LockPoolContent>
-              {process.env.NEXT_PUBLIC_MASTER === '1'
+              {env.NEXT_PUBLIC_MASTER === '1'
                 ? poolsKacy.map(pool => (
                     <LockPoolCard
                       key={pool.pid}
