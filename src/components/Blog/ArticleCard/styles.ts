@@ -43,7 +43,7 @@ export const ArticleCard = styled.div`
     transition: box-shadow ${theme.transition.default};
 
     :hover {
-      box-shadow: 0 0.5rem 1.5rem rgba(252, 252, 252, 0.2);
+      box-shadow: 0rem 0.1rem 2rem rgba(250, 250, 250, 0.08);
 
       transition: box-shadow ${theme.transition.default};
     }

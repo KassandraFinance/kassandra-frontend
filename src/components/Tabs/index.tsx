@@ -1,5 +1,4 @@
 import React from 'react'
-import Image, { StaticImageData } from 'next/image'
 import { useRouter } from 'next/router'
 
 import * as S from './styles'
@@ -7,8 +6,6 @@ import * as S from './styles'
 type tabs = {
   text: string
   asPathText: string
-  icon?: StaticImageData
-  svg?: JSX.Element
 }
 
 interface ISelectTabsProps {
@@ -39,18 +36,6 @@ export const Tabs = ({ tabs }: ISelectTabsProps) => {
           }}
           isActiveTab={item.asPathText === router.query?.tab}
         >
-          <span>
-            {item.svg ? (
-              item.svg
-            ) : (
-              <Image
-                src={item?.icon || ''}
-                width={16}
-                height={16}
-                layout="fixed"
-              />
-            )}
-          </span>
           {item.text}
         </S.TabsButton>
       ))}

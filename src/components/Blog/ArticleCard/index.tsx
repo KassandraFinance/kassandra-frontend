@@ -17,8 +17,8 @@ const ArticleCard = ({ post }: IArticleCardProps) => {
   const { trackEvent } = useMatomo()
 
   const readingDifficulty = {
-    Beginner: 'green',
-    Intermediate: 'purple',
+    Beginner: 'blue',
+    Intermediate: 'yellow',
     Advanced: 'red'
   } as const
 
@@ -26,7 +26,7 @@ const ArticleCard = ({ post }: IArticleCardProps) => {
   const otherTags = post.tags.slice(1)
 
   return (
-    <Link href={`/research/${post.slug}`} passHref>
+    <Link href={`/blog/${post.slug}`} passHref>
       <S.ArticleLink
         aria-labelledby={post.slug}
         onClick={() =>
@@ -60,7 +60,7 @@ const ArticleCard = ({ post }: IArticleCardProps) => {
                     readingDifficulty[
                       post.readingDifficulty
                         ?.difficultyName as keyof typeof readingDifficulty
-                    ] ?? 'tertiary'
+                    ] ?? 'purple'
                   }
                   shape="square"
                   size="small"
@@ -73,7 +73,7 @@ const ArticleCard = ({ post }: IArticleCardProps) => {
 
               {firstTag && (
                 <Tag
-                  variant={'tertiary'}
+                  variant="purple"
                   shape="square"
                   size="small"
                   className="tags"
@@ -84,7 +84,7 @@ const ArticleCard = ({ post }: IArticleCardProps) => {
               )}
               {otherTags.length > 0 && (
                 <Tag
-                  variant="tertiary"
+                  variant="gray"
                   shape="rounded"
                   size="small"
                   className="number-tags"

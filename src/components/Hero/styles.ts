@@ -17,6 +17,14 @@ export const Hero = styled.div`
   `}
 `
 
+export const LightImageWrapper = styled.div`
+  position: absolute;
+  bottom: -550px;
+  left: -120px;
+
+  z-index: 0;
+`
+
 interface IBackgroundImageProps {
   backgroundImg: string
   backgroundImgHight: string

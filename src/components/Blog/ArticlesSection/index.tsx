@@ -1,5 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 import { z } from 'zod'
 
 import type { PostDataType } from '@/store/reducers/postsSlice'
@@ -19,14 +20,15 @@ import ArticleList from '../ArticleList'
 import ArticleCard from '../ArticleCard'
 import ArticlesFilterModal from '../ArticlesFilterModal'
 import MobileButtonGroup from '../MobileButtonGroup'
+import { Loading } from '../Loading'
 
 import Button from '@/components/Button'
 import { ModalRoot, ModalTrigger } from '@/components/Modals/ModalBlog'
 import { Tabs } from '@/components/Tabs'
+import Pagination from '@/components/Pagination'
 
 import { GridIcon } from '@/Icons/Grid'
 import { ListIcon } from '@/Icons/List'
-import { ChevronIcon } from '@/Icons'
 import * as S from './styles'
 
 export type Filter = {
@@ -53,7 +55,6 @@ const ArticlesSection = ({
     state => state.articlesFilter
   )
 
-  const [isDropdownOpen, setIsDropdownOpen] = React.useState(false)
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [selectedFilters, setSelectedFilters] = React.useState<Filter>({
     coins,
@@ -87,9 +88,9 @@ const ArticlesSection = ({
     tab
   })
 
-  // const totalResults = !isError
-  //   ? filteredPosts?.postsStats?.total ?? posts?.length
-  //   : posts?.length
+  const totalResults = !isError
+    ? filteredPosts?.postsStats?.total ?? posts?.length
+    : posts?.length
 
   const resetPage = React.useCallback(() => {
     setPage(1)
@@ -264,6 +265,23 @@ const ArticlesSection = ({
     )
   }
 
+  const handlePageClick = (data: { selected: number }) => {
+    router.push(
+      {
+        query: {
+          ...router.query,
+          page: data.selected + 1
+        }
+      },
+      undefined,
+      {
+        shallow: true
+      }
+    )
+    window.scrollTo(0, 0)
+    return
+  }
+
   React.useEffect(() => {
     if (!router.isReady) return
 
@@ -308,12 +326,7 @@ const ArticlesSection = ({
         <Tabs
           tabs={tabs.map(tab => ({
             asPathText: tab,
-            text: tab,
-            icon: {
-              src: '/assets/icons/bar-graph.svg',
-              height: 16,
-              width: 16
-            }
+            text: tab
           }))}
         />
       </S.TabsWrapper>
@@ -343,22 +356,13 @@ const ArticlesSection = ({
               />
             </ModalRoot>
           </div>
-          <S.MobileHidden>
+          <S.ButtonGroupWrapper>
             <MobileButtonGroup
               options={views}
               selectedOption={selectedView}
               leftIcon={selectedView === 'card' ? <GridIcon /> : <ListIcon />}
-              isDropdownOpen={isDropdownOpen}
-              setIsDropdownOpen={setIsDropdownOpen}
-              rightIcon={
-                <ChevronIcon
-                  style={{
-                    transform: isDropdownOpen
-                      ? 'rotate(-270deg)'
-                      : 'rotate(-90deg)'
-                  }}
-                />
-              }
+              withDropdownIndicator
+              size="large"
             >
               {views
                 .filter(view => view.value !== selectedView)
@@ -374,11 +378,11 @@ const ArticlesSection = ({
                   </MobileButtonGroup.Item>
                 ))}
             </MobileButtonGroup>
-          </S.MobileHidden>
+          </S.ButtonGroupWrapper>
         </S.ArticlesMainContainerHeader>
 
-        <S.TagsContainer>
-          {isFetching && 'Loading...'}
+        <S.TagsContainer hidden={totalFiltersApplied.length === 0}>
+          {isFetching && <Loading height={85} />}
           <AppliedFilters
             filters={[
               ...tags.map(tag => ({
@@ -438,16 +442,33 @@ const ArticlesSection = ({
             })}
         </S.ArticlesContainer>
       </S.ArticlesMainContent>
-      {/* <S.PaginationWrapper>
+      <S.PaginationWrapper>
         <Pagination
-          itemsPerPage={20}
           page={page - 1}
-          onPageChange={onPageChange}
-          totalResults={
+          totalItems={
             filteredPosts ? filteredPosts.postsStats.total : totalResults ?? 1
           }
+          handlePageClick={handlePageClick}
+          skip={0}
+          take={20}
         />
-      </S.PaginationWrapper> */}
+      </S.PaginationWrapper>
+
+      <S.LeftLightImageWrapper>
+        <Image
+          src="/assets/images/blue-background-left-bottom.svg"
+          height={822.502}
+          width={752.648}
+        />
+      </S.LeftLightImageWrapper>
+
+      <S.RightLightImageWrapper>
+        <Image
+          src="/assets/images/blue-background-right-bottom.svg"
+          height={822.502}
+          width={752.648}
+        />
+      </S.RightLightImageWrapper>
     </S.ArticlesSection>
   )
 }

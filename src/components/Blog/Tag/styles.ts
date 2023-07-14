@@ -43,92 +43,93 @@ const sizes: SizesProps = {
 }
 
 const variants: VariantProps = {
-  primary: theme => css`
-    color: ${theme.colors.white};
-
-    background-color: ${theme.colors.primary50};
-
-    svg {
-      fill: ${theme.colors.white};
-    }
-  `,
-  secondary: theme => css`
-    color: ${theme.colors.white};
-
-    background-color: ${theme.colors.dark10};
-
-    svg {
-      fill: ${theme.colors.white};
-    }
-  `,
-  tertiary: theme => css`
-    color: ${theme.colors.neutral50};
-
-    background-color: ${theme.colors.neutral95};
-
-    svg {
-      fill: ${theme.colors.neutral50};
-    }
-  `,
-  green: theme => css`
-    color: ${theme.colors.green50};
-
-    background-color: ${theme.colors.green95};
-
-    svg {
-      fill: ${theme.colors.green50};
-    }
-  `,
   purple: theme => css`
-    color: ${theme.colors.purple60};
+    color: ${theme.colors.magenta};
 
-    background-color: ${theme.colors.purple95};
+    border: 1px solid rgba(232, 67, 196, 0.7);
+    background: rgba(232, 67, 196, 0.15);
 
     svg {
-      fill: ${theme.colors.purple60};
+      fill: ${theme.colors.magenta};
     }
   `,
-  lightBlue: theme => css`
-    color: ${theme.colors.primary30};
+  yellow: theme => css`
+    color: ${theme.colors.white};
 
-    background-color: ${theme.colors.primary95};
+    background: rgba(255, 191, 0, 0.15);
+    border: 1px solid rgba(255, 191, 0, 0.7);
 
     svg {
-      fill: ${theme.colors.primary30};
+      fill: rgba(255, 191, 0, 0.7);
     }
   `,
-  red: theme => css`
-    color: ${theme.colors.red50};
+  blue: theme => css`
+    color: ${theme.colors.cyan};
 
-    background-color: ${theme.colors.red95};
+    background: rgba(38, 219, 219, 0.15);
+    border: 1px solid rgba(38, 219, 219, 0.7);
 
     svg {
-      fill: ${theme.colors.red50};
+      fill: ${theme.colors.cyan};
     }
   `,
-  orange: theme => css`
-    color: ${theme.colors.orange50};
+  red: () => css`
+    color: #e8372c;
 
-    background-color: ${theme.colors.orange95};
+    background: rgba(232, 55, 44, 0.15);
+    border: 1px solid rgba(232, 55, 44, 0.7);
 
     svg {
-      fill: ${theme.colors.orange50};
+      fill: #e8372c;
     }
   `,
-  darkOrange: theme => css`
-    color: ${theme.colors.orange95};
+  green: () => css`
+    color: #2ce878;
 
-    background-color: ${theme.colors.orange50};
+    background: rgba(44, 232, 120, 0.15);
+    border: 1px solid rgba(44, 232, 120, 0.7);
 
     svg {
-      fill: ${theme.colors.orange95};
+      fill: #2ce878;
+    }
+  `,
+  purpleGradient: () => css`
+    color: #2ce878;
+
+    background: rgba(232, 67, 196, 0.15);
+    border: 1px solid;
+    border-image: linear-gradient(134deg, #0c3ddc 0%, #e843c4 100%);
+
+    svg {
+      fill: #2ce878;
+    }
+  `,
+  rainbow: () => css`
+    color: #2ce878;
+
+    background: rgba(232, 67, 196, 0.15);
+    border: 1px solid;
+    border-image: linear-gradient(90deg, #e843c4 0%, #ffbf00 100%);
+
+    svg {
+      fill: #2ce878;
+    }
+  `,
+  gray: theme => css`
+    color: ${theme.colors.snow};
+
+    background: rgba(143, 143, 143, 0.15);
+    border: 1px solid rgba(189, 189, 189, 0.7);
+
+    svg {
+      fill: ${theme.colors.snow};
     }
   `
 }
 
 const shapes: ShapeProps = {
   square: css`
-    border-radius: 8px;
+    border-radius: 4px;
   `,
   rounded: css`
     border-radius: 99999999px;
@@ -142,111 +143,108 @@ const buttonStyles = css`
 `
 
 const buttonVariantStyles: VariantProps = {
-  primary: theme => css`
+  purple: () => css`
     &:hover:not(:disabled),
     &:focus-visible:not(:disabled) {
-      color: ${theme.colors.primary30};
+      color: #1b1d22;
 
-      background-color: ${theme.colors.primary95};
+      background-color: #e843c4;
+      border: 1px solid #e843c4;
 
       svg {
-        fill: ${theme.colors.primary30};
+        fill: #1b1d22;
       }
     }
   `,
-  secondary: theme => css`
+  yellow: () => css`
     &:hover:not(:disabled),
     &:focus-visible:not(:disabled) {
-      color: ${theme.colors.neutral98};
+      color: #1b1d22;
 
-      background-color: ${theme.colors.neutral50};
+      background-color: #ffbf00;
+      border: 1px solid #ffbf00;
 
       svg {
-        fill: ${theme.colors.neutral98};
+        fill: #1b1d22;
       }
     }
   `,
-  tertiary: theme => css`
+  blue: () => css`
     &:hover:not(:disabled),
     &:focus-visible:not(:disabled) {
-      color: ${theme.colors.neutral95};
+      color: #1b1d22;
 
-      background-color: ${theme.colors.neutral30};
+      background-color: #26dbdb;
+      border: 1px solid #26dbdb;
 
       svg {
-        fill: ${theme.colors.neutral95};
+        fill: #1b1d22;
       }
     }
   `,
-  green: theme => css`
+  red: () => css`
     &:hover:not(:disabled),
     &:focus-visible:not(:disabled) {
-      color: ${theme.colors.green95};
+      color: #1b1d22;
 
-      background-color: ${theme.colors.green50};
+      background-color: #e8372c;
+      border: 1px solid #e8372c;
 
       svg {
-        fill: ${theme.colors.green95};
+        fill: #1b1d22;
       }
     }
   `,
-  purple: theme => css`
+  green: () => css`
     &:hover:not(:disabled),
     &:focus-visible:not(:disabled) {
-      color: ${theme.colors.purple95};
+      color: #1b1d22;
 
-      background-color: ${theme.colors.purple60};
+      background-color: #2ce878;
+      border: 1px solid #e8372c;
 
       svg {
-        fill: ${theme.colors.purple95};
+        fill: #1b1d22;
       }
     }
   `,
-  lightBlue: theme => css`
+  purpleGradient: theme => css`
     &:hover:not(:disabled),
     &:focus-visible:not(:disabled) {
-      color: ${theme.colors.white};
+      color: ${theme.colors.snow};
 
-      background-color: ${theme.colors.primary50};
+      background: linear-gradient(134deg, #0c3ddc 0%, #e843c4 100%);
+      border: 1px solid;
+      border-image: linear-gradient(134deg, #0c3ddc 0%, #e843c4 100%);
 
       svg {
-        fill: ${theme.colors.white};
+        fill: ${theme.colors.snow};
       }
     }
   `,
-  red: theme => css`
+  rainbow: theme => css`
     &:hover:not(:disabled),
     &:focus-visible:not(:disabled) {
-      color: ${theme.colors.red95};
+      color: ${theme.colors.magenta};
 
-      background-color: ${theme.colors.red50};
+      background: linear-gradient(90deg, #e843c4 0%, #ffbf00 100%);
+      border: 1px solid #e843c4;
 
       svg {
-        fill: ${theme.colors.red95};
+        fill: ${theme.colors.magenta};
       }
     }
   `,
-  orange: theme => css`
+  gray: theme => css`
     &:hover:not(:disabled),
     &:focus-visible:not(:disabled) {
-      color: ${theme.colors.orange95};
+      color: #1b1d22;
 
-      background-color: ${theme.colors.orange50};
-
-      svg {
-        fill: ${theme.colors.orange95};
-      }
-    }
-  `,
-  darkOrange: theme => css`
-    &:hover:not(:disabled),
-    &:focus-visible:not(:disabled) {
-      color: ${theme.colors.orange50};
-
-      background-color: ${theme.colors.orange95};
+      background: ${theme.colors.grayDisabled};
+      border: 1px solid ${theme.colors.grayDisabled};
 
       svg {
-        fill: ${theme.colors.orange50};
+        fill: #1b1d22;
       }
     }
   `

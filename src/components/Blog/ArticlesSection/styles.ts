@@ -1,9 +1,36 @@
 import styled, { css } from 'styled-components'
 import { device } from '@/styles/theme'
 
-export const ArticlesSection = styled.div``
+export const ArticlesSection = styled.div`
+  position: relative;
+`
 
-export const ArticlesMainContent = styled.main`
+export const LeftLightImageWrapper = styled.div`
+  position: absolute;
+  bottom: -240px;
+  left: 0px;
+
+  z-index: -1;
+
+  @media ${device.mobile} {
+    display: none;
+  }
+`
+
+export const RightLightImageWrapper = styled.div`
+  position: absolute;
+  bottom: -320px;
+  right: -120px;
+
+  z-index: -1;
+
+  @media ${device.mobile} {
+    bottom: -320px;
+    right: -120px;
+  }
+`
+
+export const ArticlesMainContent = styled.div`
   max-width: 192rem;
   margin-inline: auto;
   padding-inline: 6.4rem;
@@ -77,22 +104,28 @@ export const ToggleViewButtonsContainerMobile = styled.div`
   }
 `
 
-export const TagsContainer = styled.div`
-  display: flex;
-  gap: 1.6rem;
-  align-items: center;
-  overflow-x: auto;
+type TagsContainerProps = {
+  hidden?: boolean
+}
 
-  width: 100%;
-  height: 4rem;
-  padding-bottom: 1.6rem;
+export const TagsContainer = styled.div<TagsContainerProps>`
+  ${({ hidden }) => css`
+    display: ${hidden ? 'none' : 'flex'};
+    gap: 1.6rem;
+    align-items: center;
+    overflow-x: auto;
 
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-  scrollbar-width: none; /* Firefox */
+    width: 100%;
+    height: 4rem;
+    padding-bottom: 1.6rem;
 
-  &::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
-  }
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+
+    &::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
+    }
+  `}
 `
 interface ArticlesContainerProps {
   isGrid?: boolean
@@ -135,10 +168,8 @@ export const PaginationWrapper = styled.div`
   padding-inline: 6.4rem;
 `
 
-export const MobileHidden = styled.div`
-  @media ${device.mobile} {
-    display: none;
-  }
+export const ButtonGroupWrapper = styled.div`
+  height: 100%;
 `
 
 export const TabsWrapper = styled.div`

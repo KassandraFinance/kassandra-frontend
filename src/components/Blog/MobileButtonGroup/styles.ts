@@ -5,33 +5,44 @@ import type { ButtonGroupSize, ButtonGroupVariant } from '.'
 import { device, ThemeType } from '@/styles/theme'
 import type { ThemingHelper } from '@/types/themingHelper'
 
-type SizeVariants = ThemingHelper<ButtonGroupSize, [ThemeType]>
+type SizeVariants = ThemingHelper<ButtonGroupSize>
 type ButtonGroupVariants = ThemingHelper<
   ButtonGroupVariant,
   [ThemeType, boolean, boolean]
 >
 
 export const sizeVariant: SizeVariants = {
-  small: () => css`
+  small: css`
     padding: 0.8rem 1.6rem;
-
-    font-size: 1.4rem;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 100%; /* 1.4rem */
-    letter-spacing: 0.048rem;
+    span {
+      font-size: 1.4rem;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 100%; /* 1.4rem */
+      letter-spacing: 0.048rem;
+    }
   `,
-  medium: theme => css`
+  medium: css`
     padding: 1rem 2rem;
 
-    font: ${theme.font.text.textSm500};
-    letter-spacing: 0.048rem;
+    span {
+      font-size: 1.4rem;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 100%; /* 1.4rem */
+      letter-spacing: 0.048rem;
+    }
   `,
-  large: theme => css`
-    padding: 1.2rem;
+  large: css`
+    padding: 1.3rem 1.2rem;
 
-    font: ${theme.font.text.textSm500};
-    letter-spacing: 0.048rem;
+    span {
+      font-size: 1.4rem;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 100%; /* 1.4rem */
+      letter-spacing: 0.048rem;
+    }
   `
 }
 
@@ -281,7 +292,7 @@ export const MobileButtonGroupItem = styled.button<IMobileButtonGroupItemProps>`
       ? css`
           padding: 1.2rem 2.4rem;
         `
-      : sizeVariant[size](theme)};
+      : sizeVariant[size]};
     ${buttonGroupVariants[variant](theme, isSelected, svgStroke)};
     border: ${isSelected ? `1px solid ${theme.colors.snow}` : 'none'};
     border-bottom: ${isDropdownOpen

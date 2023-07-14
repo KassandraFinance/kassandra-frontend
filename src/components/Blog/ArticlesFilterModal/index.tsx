@@ -21,6 +21,7 @@ import { SearchIcon } from '@/Icons'
 import type { SVGFuncElement } from '@/types/svg'
 
 import * as S from './styles'
+import { Loading } from '../Loading'
 
 interface IArticlesFilterModalProps {
   title: string
@@ -134,7 +135,7 @@ const ArticlesFilterModal = ({
               onChange={e => setSearch(e.target.value)}
             />
           </S.SearchInputWrapper>
-          {isLoading && 'Loading...'}
+          {isLoading && <Loading height={85} />}
 
           <ul>
             {researchCoinsResponse?.coins?.map(coin => (

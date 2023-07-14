@@ -3,8 +3,8 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 
 import type { SVGFuncElement } from '@/types/svg'
 
-import * as S from './styles'
 import { ChevronIcon } from '@/Icons'
+import * as S from './styles'
 
 export type ButtonGroupVariant = 'primary' | 'secondary'
 export type ButtonGroupSize = 'small' | 'medium' | 'large'
@@ -26,8 +26,7 @@ interface IMobileButtonGroupTest<T extends Option[]>
   size?: ButtonGroupSize
   leftIcon?: JSX.Element
   rightIcon?: JSX.Element
-  isDropdownOpen: boolean
-  setIsDropdownOpen: React.Dispatch<React.SetStateAction<boolean>>
+  withDropdownIndicator?: boolean
 }
 
 const MobileButtonGroup = <T extends Option[]>({
@@ -38,10 +37,10 @@ const MobileButtonGroup = <T extends Option[]>({
   size = 'large',
   leftIcon,
   rightIcon,
-  isDropdownOpen,
-  setIsDropdownOpen,
+  withDropdownIndicator,
   ...rest
 }: IMobileButtonGroupTest<T>) => {
+  const [isDropdownOpen, setIsDropdownOpen] = React.useState(false)
   const buttonGroupContainerRef = React.useRef<HTMLDivElement>(null)
 
   const selectedOptionsValuesIndex = options.findIndex(
@@ -71,6 +70,16 @@ const MobileButtonGroup = <T extends Option[]>({
             <span>
               {options[selectedOptionsValuesIndex]?.text ?? options[0].text}
             </span>
+            {withDropdownIndicator && (
+              <ChevronIcon
+                className="dropdown-indicator"
+                style={{
+                  transform: isDropdownOpen
+                    ? 'rotate(-270deg)'
+                    : 'rotate(-90deg)'
+                }}
+              />
+            )}
             {rightIcon}
           </S.MobileButtonGroupItem>
         </DropdownMenu.Trigger>
