@@ -38,17 +38,6 @@ const ArticleCard = ({ post }: IArticleCardProps) => {
         }
       >
         <S.ArticleCard>
-          {post.isPRO ? (
-            <Tag
-              variant="primary"
-              shape="rounded"
-              size="medium"
-              className="pro-tag"
-              asLabel
-            >
-              Pro
-            </Tag>
-          ) : null}
           <S.BannerImage
             className="post-img"
             src={post.banner.url}

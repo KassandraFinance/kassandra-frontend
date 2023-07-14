@@ -18,16 +18,16 @@ import AppliedFilters from '../AppliedFilters'
 import ArticleList from '../ArticleList'
 import ArticleCard from '../ArticleCard'
 import ArticlesFilterModal from '../ArticlesFilterModal'
+import MobileButtonGroup from '../MobileButtonGroup'
 
 import Button from '@/components/Button'
 import { ModalRoot, ModalTrigger } from '@/components/Modals/ModalBlog'
 import { Tabs } from '@/components/Tabs'
 
-import * as S from './styles'
 import { GridIcon } from '@/Icons/Grid'
 import { ListIcon } from '@/Icons/List'
-import MobileButtonGroup from '../MobileButtonGroup'
 import { ChevronIcon } from '@/Icons'
+import * as S from './styles'
 
 export type Filter = {
   coins: string[]

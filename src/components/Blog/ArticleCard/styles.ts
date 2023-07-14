@@ -36,14 +36,14 @@ export const ArticleCard = styled.div`
 
     border-radius: 8px;
 
-    background-color: rgb(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background-color: rgba(252, 252, 252, 0.05);
+    border: 1px solid rgba(252, 252, 252, 0.08);
     box-shadow: 0 0.5rem 1.5rem rgb(0 61 132 / 0.06);
 
     transition: box-shadow ${theme.transition.default};
 
     :hover {
-      box-shadow: 0 0.5rem 1.5rem rgb(0 61 132 / 0.2);
+      box-shadow: 0 0.5rem 1.5rem rgba(252, 252, 252, 0.2);
 
       transition: box-shadow ${theme.transition.default};
     }
@@ -69,7 +69,11 @@ export const ArticleTitle = styled.p`
     overflow: hidden;
 
     color: ${theme.colors.snow};
-    font: ${theme.font.text.textLg700};
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.8rem;
+    letter-spacing: 0.08rem;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -88,11 +92,12 @@ export const Tags = styled.div`
 `
 
 export const ArticleDate = styled.span`
-  ${({ theme }) => css`
-    padding-bottom: 0.8rem;
+  padding-bottom: 0.8rem;
 
-    color: ${theme.colors.snow};
-    font: ${theme.font.text.textXs300};
-    letter-spacing: 0.048rem;
-  `}
+  color: rgba(252, 252, 252, 0.5);
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.4rem;
+  text-transform: uppercase;
 `
