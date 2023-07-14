@@ -11,7 +11,7 @@ import SectionSubtitle from '../../../components/SectionSubtitle'
 import Paragraph from '../../../components/Paragraph'
 
 import * as S from './styles'
-import { env } from '@/env.mjs'
+import { env } from '@/env'
 
 const LockVote = () => {
   const { trackEventFunction } = useMatomoEcommerce()

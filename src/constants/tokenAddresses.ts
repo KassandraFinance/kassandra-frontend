@@ -5,7 +5,7 @@ import partners from '../components/Partner/list'
 
 import ahypeIcon from '../../public/assets/logos/ahype.svg'
 import tricryptoIcon from '../../public/assets/logos/tricrypto.svg'
-import { env } from '@/env.mjs'
+import { env } from '@/env'
 
 export const LPDaiAvax =
   env.NEXT_PUBLIC_MASTER === '1'

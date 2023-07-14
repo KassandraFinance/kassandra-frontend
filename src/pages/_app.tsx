@@ -18,12 +18,14 @@ import theme from '../styles/theme'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Toastify from '../components/Toastify'
-import { env } from '@/env.mjs'
+import { env } from '@/env'
 
 const matomoUrl = 'https://stats.kassandra.finance'
 
 const instance = createInstance({
-  disabled: env.NODE_ENV === 'development' || env.NEXT_PUBLIC_MASTER !== '1',
+  disabled:
+    env.NEXT_PUBLIC_NODE_ENV === 'development' ||
+    env.NEXT_PUBLIC_MASTER !== '1',
   urlBase: matomoUrl,
   siteId: 6,
   trackerUrl: `${matomoUrl}/api.php`,

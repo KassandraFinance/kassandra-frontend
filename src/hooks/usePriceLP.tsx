@@ -5,7 +5,7 @@ import PriceLP from '../constants/abi/PriceLP.json'
 
 import { ERC20 } from './useERC20Contract'
 import { networks } from '../constants/tokenAddresses'
-import { env } from '@/env.mjs'
+import { env } from '@/env'
 
 const usePriceLP = () => {
   const provider = new JsonRpcProvider(networks[43114].rpc)
