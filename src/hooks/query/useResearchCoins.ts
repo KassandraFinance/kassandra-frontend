@@ -18,7 +18,7 @@ const fetchResearchCoins = async ({
   urlSearchParams.set('query', query ?? '')
 
   const response = await fetch(
-    `${baseURL}/api/research/get-coins?${urlSearchParams.toString()}`
+    `${baseURL}/api/get-coins?${urlSearchParams.toString()}`
   )
 
   const data = await response.json()

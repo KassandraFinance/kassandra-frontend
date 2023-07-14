@@ -20,26 +20,21 @@ const checkboxSizes: CheckboxSizes = {
 
 const checkboxVariants: CheckboxVariants = {
   primary: theme => css`
-    background-color: ${theme.colors.white};
+    background-color: transparent;
 
     &[data-state='unchecked']:disabled {
       border-color: ${theme.colors.neutral80};
-
-      background-color: ${theme.colors.white};
 
       cursor: not-allowed;
     }
 
     &[data-state='unchecked']:hover:not(:disabled) {
-      border-color: ${theme.colors.primary50};
-
-      background-color: ${theme.colors.primary95};
+      border-color: ${theme.colors.white};
     }
 
     &[data-state='checked'] {
-      border-color: ${theme.colors.primary50};
+      border-color: ${theme.colors.white};
 
-      background-color: ${theme.colors.primary50};
       outline: none;
 
       svg {
@@ -48,16 +43,13 @@ const checkboxVariants: CheckboxVariants = {
     }
 
     &[data-state='unchecked']:focus-visible:not(:disabled) {
-      border-color: ${theme.colors.primary50};
+      border-color: ${theme.colors.magenta};
 
-      background-color: ${theme.colors.primary95};
       outline: none;
     }
 
     &[data-state='checked']:disabled {
       border-color: ${theme.colors.neutral80};
-
-      background-color: ${theme.colors.neutral80};
 
       cursor: not-allowed;
     }
@@ -120,7 +112,7 @@ export const Checkbox = styled(RadixCheckbox.Root)<CheckboxProps>`
 
     ${checkboxSizes[size]}
     ${checkboxVariants[variant](theme)}
-    border: 2px solid ${theme.colors.neutral50};
+    border: 2px solid ${theme.colors.white};
     border-radius: 4px;
 
     cursor: pointer;
@@ -140,10 +132,11 @@ export const CheckboxIndicator = styled(RadixCheckbox.Indicator)`
     align-items: center;
 
     color: ${theme.colors.white};
+    background-color: ${theme.colors.white};
+    border-radius: 2px;
 
-    svg {
-      width: 1.2rem;
-      height: 1.2rem;
-    }
+    width: 1.4rem;
+    height: 1.4rem;
+    transition: all ${theme.transition.default};
   `}
 `

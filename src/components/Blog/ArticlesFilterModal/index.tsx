@@ -8,12 +8,10 @@ import { useResearchCoins } from '@/hooks/query/useResearchCoins'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { FilterType, updateFilters } from '@/store/reducers/articlesFilterSlice'
 
-import Button from '../Button'
 import Modal, {
   ModalContentWrapper,
   ModalFooter
 } from '@/components/Modals/ModalBlog'
-import TextField from '@/components/TextField'
 import { Checkbox } from '../Checkbox'
 import { Filter } from '../ArticlesSection'
 
@@ -22,6 +20,8 @@ import type { SVGFuncElement } from '@/types/svg'
 
 import * as S from './styles'
 import { Loading } from '../Loading'
+import Button from '@/components/Button'
+import Input from '../Input'
 
 interface IArticlesFilterModalProps {
   title: string
@@ -88,7 +88,6 @@ const ArticlesFilterModal = ({
             {readingDifficulties.map(difficulty => (
               <S.FilterItem key={difficulty}>
                 <S.ItemLabel>
-                  {difficulty}
                   <Checkbox
                     checked={selectedFilters.readingDifficulties.includes(
                       difficulty
@@ -98,6 +97,7 @@ const ArticlesFilterModal = ({
                     }
                     label={difficulty}
                   />
+                  {difficulty}
                 </S.ItemLabel>
               </S.FilterItem>
             ))}
@@ -111,12 +111,12 @@ const ArticlesFilterModal = ({
             {tags.map(tag => (
               <S.FilterItem key={tag}>
                 <S.ItemLabel>
-                  {tag}
                   <Checkbox
                     checked={selectedFilters.tags.includes(tag)}
                     toggleChecked={() => handleUpdateFilter('tags', tag)}
                     label={tag}
                   />
+                  {tag}
                 </S.ItemLabel>
               </S.FilterItem>
             ))}
@@ -127,10 +127,11 @@ const ArticlesFilterModal = ({
           <S.FilterSectionTitle>Coins</S.FilterSectionTitle>
 
           <S.SearchInputWrapper>
-            <TextField
+            <SearchIcon width={16} height={16} />
+            <Input
+              variant="outlined"
+              size="medium"
               type="text"
-              icon={<SearchIcon />}
-              iconPosition="left"
               placeholder="Search"
               onChange={e => setSearch(e.target.value)}
             />
@@ -141,6 +142,13 @@ const ArticlesFilterModal = ({
             {researchCoinsResponse?.coins?.map(coin => (
               <S.CoinItem key={coin.coinGeckoID}>
                 <S.ItemLabel>
+                  <Checkbox
+                    checked={selectedFilters.coins.includes(coin.coinGeckoID)}
+                    toggleChecked={() =>
+                      handleUpdateFilter('coins', coin.coinGeckoID)
+                    }
+                    label={coin.name}
+                  />
                   <Image
                     src={coin.image.url}
                     alt={coin.image.alternativeText}
@@ -150,13 +158,6 @@ const ArticlesFilterModal = ({
                   <S.NameContainer>
                     {coin.name} <span>{coin.symbol}</span>
                   </S.NameContainer>
-                  <Checkbox
-                    checked={selectedFilters.coins.includes(coin.coinGeckoID)}
-                    toggleChecked={() =>
-                      handleUpdateFilter('coins', coin.coinGeckoID)
-                    }
-                    label={coin.name}
-                  />
                 </S.ItemLabel>
               </S.CoinItem>
             ))}
@@ -164,12 +165,18 @@ const ArticlesFilterModal = ({
         </S.ModalSection>
       </ModalContentWrapper>
       <ModalFooter>
-        <Button variant="tertiary" size="medium" onClick={handleResetDefaults}>
-          Default
-        </Button>
-        <Button variant="primary" size="medium" onClick={handleApply}>
-          Apply
-        </Button>
+        <Button
+          backgroundBlack
+          onClick={handleResetDefaults}
+          text="Default"
+          className="variant-white"
+        />
+        <Button
+          backgroundSecondary
+          onClick={handleApply}
+          text="Apply"
+          className="with-blue-border"
+        />
       </ModalFooter>
     </Modal>
   )

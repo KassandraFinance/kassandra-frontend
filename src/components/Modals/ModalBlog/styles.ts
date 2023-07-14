@@ -34,6 +34,8 @@ export const ModalContent = styled(Content)`
     max-height: 92%;
 
     transform: translate(-50%, -50%);
+    background-color: rgba(31, 31, 31, 0.95);
+    border-radius: 8px;
 
     &[data-state='open'] {
       animation: ${contentShow} 200ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -81,19 +83,24 @@ export const ModalTitle = styled(Title)`
   ${({ theme }) => css`
     display: flex;
     gap: 0.8rem;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
     padding: 2rem 2.4rem;
-    border: 1px solid ${theme.colors.neutral95};
-    border-bottom: 0;
-    border-radius: 8px 8px 0 0;
+    border: 1px solid rgba(31, 31, 31, 0.95);
+    border-bottom: 1px solid ${theme.colors.gray};
+    margin-bottom: 1.6rem;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 
-    color: ${theme.colors.dark10};
-    font-size: ${theme.font.sizes.font20};
-    line-height: 3.2rem;
+    color: ${theme.colors.snow};
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 100%; /* 1.8rem */
+    letter-spacing: 0.09rem;
 
-    background-color: ${theme.colors.white};
+    background-color: rgba(31, 31, 31, 0.95);
 
     svg {
       width: 2.4rem;
@@ -118,14 +125,14 @@ export const ModalContentWrapper = styled.div`
     overflow: auto;
 
     max-height: 54rem;
-    border: 1px solid ${theme.colors.neutral95};
+    border: 1px solid rgba(31, 31, 31, 0.95);
     border-bottom: none;
 
     color: ${theme.colors.neutral30};
     font-size: 1.6rem;
     line-height: 2.4rem;
 
-    background-color: ${theme.colors.white};
+    background-color: rgba(31, 31, 31, 0.95);
   `}
 `
 
@@ -137,17 +144,51 @@ export const ModalFooter = styled.div`
     align-items: center;
 
     padding: 2.4rem 1.6rem;
-    border: 1px solid ${theme.colors.neutral95};
+    border: 1px solid rgba(31, 31, 31, 0.95);
     border-radius: 0 0 8px 8px;
 
-    background-color: ${theme.colors.white};
+    background-color: rgba(31, 31, 31, 0.95);
 
     > * {
       flex: 1 1 0%;
+      padding-inline: 0 !important;
     }
 
     @media ${device.mobile} {
       border-radius: 0;
+    }
+
+    .variant-white {
+      border: 0.1rem solid ${theme.colors.snow};
+      width: fit-content;
+      padding: 1.2rem 2.4rem;
+
+      font-size: ${theme.font.sizes.font14};
+      font-weight: 400;
+
+      transition: 300ms;
+
+      img {
+        width: 1.6rem;
+      }
+
+      &:hover,
+      &:focus {
+        border-color: ${theme.colors.snow};
+        background-color: ${theme.colors.snow};
+
+        color: ${theme.colors.darkPurple};
+        /* outline-color: ${theme.colors.snow}; */
+        outline: none;
+      }
+    }
+
+    .with-blue-border {
+      border: 1px solid rgb(12, 61, 220);
+
+      &:hover {
+        border-color: #11319a;
+      }
     }
   `}
 `
@@ -155,8 +196,8 @@ export const ModalFooter = styled.div`
 export const ModalCloseButton = styled(Close)`
   ${({ theme }) => css`
     position: fixed;
-    top: 2.55rem;
-    right: 2.3rem;
+    top: 2.25rem;
+    right: 2.4rem;
 
     border: none;
 
@@ -167,12 +208,12 @@ export const ModalCloseButton = styled(Close)`
     cursor: pointer;
 
     svg {
-      width: 2.4rem;
-      height: 2.4rem;
+      width: 1.6rem;
+      height: 1.6rem;
 
       line-height: 0;
 
-      fill: ${theme.colors.dark10};
+      fill: ${theme.colors.snow};
     }
   `}
 `

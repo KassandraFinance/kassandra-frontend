@@ -9,19 +9,20 @@ export const ModalSection = styled.div`
     &:not(:last-child) {
       margin-bottom: 1.6rem;
       padding-bottom: 1.6rem;
-      border-bottom: 1px solid ${theme.colors.neutral95};
+      border-bottom: 1px solid ${theme.colors.gray};
     }
   `}
 `
 
 export const FilterSectionTitle = styled.h5`
   ${({ theme }) => css`
-    padding: 1rem 1.6rem;
+    padding: 0.8rem 2.4rem;
 
-    color: ${theme.colors.dark10};
-    font-weight: ${theme.font.weight.normal};
-    font-size: 1.6rem;
-    line-height: 2.4rem;
+    color: ${theme.colors.snow};
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 1.8rem; /* 128.571% */
   `}
 `
 
@@ -31,28 +32,28 @@ export const ItemLabel = styled.label`
   ${({ theme }) => css`
     display: flex;
     flex: 1 1 0%;
-    gap: 1.6rem;
-    justify-content: space-between;
+    gap: 1.2rem;
+    justify-content: flex-start;
     align-items: center;
 
-    padding: 1.2rem 1.6rem;
+    padding: 1.2rem 2.4rem;
 
-    color: ${theme.colors.neutral30};
-    font-weight: ${theme.font.weight.light};
+    color: ${theme.colors.white};
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 100%; /* 1.6rem */
 
     cursor: pointer;
 
     transition: ${theme.transition.default};
 
-    &:hover,
-    &:focus-within {
-      color: ${theme.colors.primary50};
-
-      background-color: ${theme.colors.primary95};
-    }
-
     image {
       border-radius: 999999px;
+    }
+
+    &:hover {
+      background-color: ${theme.colors.darkPurple};
     }
   `}
 `
@@ -108,6 +109,12 @@ export const SearchInput = styled.input`
 `
 export const NameContainer = styled.div`
   flex: 1 1 0%;
+
+  color: #6f7f90;
+
+  span {
+    color: #434c56;
+  }
 `
 
 export const ProWrapper = styled.label`
@@ -188,8 +195,8 @@ export const SearchInputWrapper = styled.div`
   position: relative;
 
   max-width: 100%;
-  margin-bottom: 0.8rem;
-  padding-inline: 1.6rem;
+  margin-block: 0.8rem 1.6rem;
+  padding-inline: 2.4rem;
 
   > input {
     max-width: 100%;

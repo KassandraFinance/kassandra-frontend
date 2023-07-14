@@ -53,18 +53,6 @@ export const ArticlesMainContainerHeader = styled.div`
     padding-block: 1.6rem;
 
     .button-mobile {
-      width: fit-content;
-      padding: 1.2rem 2.4rem;
-
-      font-size: ${theme.font.sizes.font14};
-      font-weight: 400;
-
-      img {
-        width: 1.6rem;
-      }
-    }
-
-    .button-mobile {
       border: 0.1rem solid ${theme.colors.snow};
       width: fit-content;
       padding: 1.2rem 2.4rem;
@@ -73,6 +61,10 @@ export const ArticlesMainContainerHeader = styled.div`
       font-weight: 400;
 
       transition: 300ms;
+
+      img {
+        width: 1.6rem;
+      }
 
       &:hover,
       &:focus {

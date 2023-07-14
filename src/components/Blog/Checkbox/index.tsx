@@ -1,4 +1,3 @@
-import { CheckIcon } from '@/Icons'
 import * as S from './styles'
 
 export type CheckBoxSize = 'small' | 'medium'
@@ -36,9 +35,7 @@ export const Checkbox = ({
       variant={variant}
       className="checkbox"
     >
-      <S.CheckboxIndicator>
-        <CheckIcon />
-      </S.CheckboxIndicator>
+      <S.CheckboxIndicator></S.CheckboxIndicator>
     </S.Checkbox>
   )
 }
