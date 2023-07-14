@@ -1,4 +1,7 @@
-module.exports = {
+import './src/env.mjs'
+
+/** @type {import("next").NextConfig} */
+const config = {
   reactStrictMode: true,
   images: {
     domains: [
@@ -47,3 +50,5 @@ module.exports = {
     ]
   }
 }
+
+export default config

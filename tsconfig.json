@@ -33,7 +33,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "__test__/api/profile/.test.ts", "__test__/api/profile/[id].test.js", "src/env.ts"  ],
+, "__test__/api/profile/.test.ts", "__test__/api/profile/[id].test.js", "src/env.mjs"  ],
   "exclude": [
     "node_modules",
     "__test__"

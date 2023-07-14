@@ -1,4 +1,4 @@
-import { env } from '@/env'
+import { env } from '@/env.mjs'
 import { NextApiRequest, NextApiResponse } from 'next'
 import NextCors from 'nextjs-cors'
 

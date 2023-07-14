@@ -3,7 +3,7 @@ import { z } from 'zod'
 
 export const env = createEnv({
   client: {
-    NEXT_PUBLIC_MASTER: z.string().default('1'),
+    NEXT_PUBLIC_MASTER: z.string().default('0'),
     NEXT_PUBLIC_GIT_HUB_TOKEN: z.string(),
     NEXT_PUBLIC_NODE_ENV: z.string().default('development'),
     NEXT_PUBLIC_CLARITY: z.string().default('')
