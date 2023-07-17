@@ -1634,6 +1634,13 @@ export type WriterRelationResponseCollection = {
   data: Array<WriterEntity>;
 };
 
+export type ResearchCoinsQueryVariables = Exact<{
+  query?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type ResearchCoinsQuery = { __typename?: 'Query', coins?: { __typename?: 'CoinEntityResponseCollection', data: Array<{ __typename?: 'CoinEntity', attributes?: { __typename?: 'Coin', name: string, symbol: string, coinGeckoID: string, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } } | null }> } | null };
+
 export type ResearchPostsQueryVariables = Exact<{
   pagination?: InputMaybe<PaginationArg>;
   tags?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
@@ -1646,7 +1653,35 @@ export type ResearchPostsQueryVariables = Exact<{
 
 export type ResearchPostsQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', meta: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', total: number, pageCount: number } }, data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', slug: string, title: string, summary: string, publishedAt?: any | null, readTimeInMinutes: number, highlighted: boolean, isPRO: boolean, readingDifficulty?: { __typename?: 'ReadingDifficultyEntityResponse', data?: { __typename?: 'ReadingDifficultyEntity', attributes?: { __typename?: 'ReadingDifficulty', difficultyName: string } | null } | null } | null, tags?: { __typename?: 'TagRelationResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', name: string } | null }> } | null, banner: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null }, writers?: { __typename?: 'WriterRelationResponseCollection', data: Array<{ __typename?: 'WriterEntity', id?: string | null, attributes?: { __typename?: 'Writer', name: string, profilePicture: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } } | null }> } | null } | null }> } | null, readingDifficulties?: { __typename?: 'ReadingDifficultyEntityResponseCollection', data: Array<{ __typename?: 'ReadingDifficultyEntity', attributes?: { __typename?: 'ReadingDifficulty', difficultyName: string } | null }> } | null, tags?: { __typename?: 'TagEntityResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', name: string } | null }> } | null, tabs?: { __typename?: 'TabEntityResponseCollection', data: Array<{ __typename?: 'TabEntity', attributes?: { __typename?: 'Tab', tabName: string, position: number } | null }> } | null, coins?: { __typename?: 'CoinEntityResponseCollection', data: Array<{ __typename?: 'CoinEntity', attributes?: { __typename?: 'Coin', coinGeckoID: string, name: string, symbol: string, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', alternativeText?: string | null, url: string } | null } | null } } | null }> } | null };
 
+export type ResearchTabsQueryVariables = Exact<{ [key: string]: never; }>;
 
+
+export type ResearchTabsQuery = { __typename?: 'Query', tabs?: { __typename?: 'TabEntityResponseCollection', data: Array<{ __typename?: 'TabEntity', attributes?: { __typename?: 'Tab', tabName: string, position: number } | null }> } | null };
+
+
+export const ResearchCoinsDocument = gql`
+    query ResearchCoins($query: String) {
+  coins(
+    filters: {or: [{coinGeckoID: {containsi: $query}}, {name: {containsi: $query}}, {symbol: {containsi: $query}}]}
+  ) {
+    data {
+      attributes {
+        name
+        symbol
+        coinGeckoID
+        image {
+          data {
+            attributes {
+              url
+              alternativeText
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
 export const ResearchPostsDocument = gql`
     query ResearchPosts($pagination: PaginationArg, $tags: [String], $coins: [String], $isPRO: Boolean, $difficultyNames: [String], $tab: String) {
   posts(
@@ -1752,6 +1787,18 @@ export const ResearchPostsDocument = gql`
   }
 }
     `;
+export const ResearchTabsDocument = gql`
+    query ResearchTabs {
+  tabs {
+    data {
+      attributes {
+        tabName
+        position
+      }
+    }
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -1760,8 +1807,14 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    ResearchCoins(variables?: ResearchCoinsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ResearchCoinsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ResearchCoinsQuery>(ResearchCoinsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ResearchCoins', 'query');
+    },
     ResearchPosts(variables?: ResearchPostsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ResearchPostsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ResearchPostsQuery>(ResearchPostsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ResearchPosts', 'query');
+    },
+    ResearchTabs(variables?: ResearchTabsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ResearchTabsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ResearchTabsQuery>(ResearchTabsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ResearchTabs', 'query');
     }
   };
 }

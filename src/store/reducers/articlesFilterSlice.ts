@@ -3,22 +3,16 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 interface IFilterState {
   tags: string[]
   coins: string[]
-  isPRO: boolean
   readingDifficulties: string[]
 }
 
 export const initialArticlesFilter: IFilterState = {
   tags: [],
   coins: [],
-  isPRO: false,
   readingDifficulties: []
 }
 
-type BooleanKeys<T> = {
-  [K in keyof T]: T[K] extends boolean ? K : never
-}[keyof T]
-
-export type FilterType = 'coins' | 'tags' | 'readingDifficulties' | 'isPRO'
+export type FilterType = 'coins' | 'tags' | 'readingDifficulties'
 
 type RemoveFilterActionPayload = {
   type: FilterType
@@ -29,22 +23,11 @@ const articlesFilterSlice = createSlice({
   name: 'articlesFilter',
   initialState: initialArticlesFilter,
   reducers: {
-    changeIsPro: (state, action: PayloadAction<boolean>) => {
-      state.isPRO = action.payload
-    },
     updateFilters: (state, action: PayloadAction<IFilterState>) => {
       return action.payload
     },
     removeFilter: (state, action: PayloadAction<RemoveFilterActionPayload>) => {
-      if (typeof action.payload.value === 'boolean') {
-        state[action.payload.type as BooleanKeys<IFilterState>] = false
-        return
-      }
-
-      const type = action.payload.type as Exclude<
-        FilterType,
-        BooleanKeys<IFilterState>
-      >
+      const type = action.payload.type
 
       state[type] = state[type].filter(
         filter => filter !== action.payload.value
@@ -56,7 +39,7 @@ const articlesFilterSlice = createSlice({
   }
 })
 
-export const { updateFilters, removeFilter, changeIsPro, resetFilters } =
+export const { updateFilters, removeFilter, resetFilters } =
   articlesFilterSlice.actions
 
 export default articlesFilterSlice.reducer

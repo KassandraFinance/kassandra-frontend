@@ -6,9 +6,6 @@ import { PostDataType } from '@/store/reducers/postsSlice'
 
 import { publishedAtToHumanReadable } from '@/utils/date'
 
-import { LockerIcon } from '@/Icons/Locker'
-import { Tag } from '@/components/Blog/Tag'
-
 import * as S from './styles'
 
 interface IArticleListProps {
@@ -16,20 +13,18 @@ interface IArticleListProps {
   borderShadow: 'true' | 'false'
   tabletView?: boolean
   imageLeft?: 'true' | 'false'
-  isUserPRO?: boolean
 }
 
 const ArticleList = ({
   post,
   borderShadow,
   tabletView,
-  imageLeft,
-  isUserPRO
+  imageLeft
 }: IArticleListProps) => {
   const { trackEvent } = useMatomo()
 
   return (
-    <Link href={'/research/' + post.slug} passHref aria-labelledby={post.slug}>
+    <Link href={`/blog/${post.slug}`} passHref aria-labelledby={post.slug}>
       <S.ArticleList>
         <S.Content
           borderShadow={borderShadow}
@@ -45,18 +40,6 @@ const ArticleList = ({
         >
           {imageLeft && (
             <S.ImageContainer>
-              {post.isPRO ? (
-                <Tag
-                  asLabel
-                  variant="primary"
-                  shape="square"
-                  size="medium"
-                  className="pro-tag"
-                  leftIcon={isUserPRO ? undefined : <LockerIcon />}
-                >
-                  Pro
-                </Tag>
-              ) : null}
               <Image
                 objectPosition="left"
                 className="post-img"
@@ -71,18 +54,6 @@ const ArticleList = ({
               <span className="text-details">
                 {publishedAtToHumanReadable(post.publishedAt)}・
                 {post.readTimeInMinutes} min read
-                {post.isPRO ? (
-                  <Tag
-                    asLabel
-                    variant="primary"
-                    shape="square"
-                    size="medium"
-                    className="pro-tag-mobile"
-                    leftIcon={isUserPRO ? undefined : <LockerIcon />}
-                  >
-                    Pro
-                  </Tag>
-                ) : null}
               </span>
 
               <p className="text-title" id={post.slug}>
@@ -112,18 +83,6 @@ const ArticleList = ({
           </S.TextContainer>
           {!imageLeft && (
             <S.ImageContainer tabletView={tabletView}>
-              {post.isPRO ? (
-                <Tag
-                  asLabel
-                  variant="primary"
-                  shape="square"
-                  size="large"
-                  className="pro-tag"
-                  leftIcon={isUserPRO ? undefined : <LockerIcon />}
-                >
-                  Pro
-                </Tag>
-              ) : null}
               <Image
                 className="post-img"
                 src={post.banner.url}

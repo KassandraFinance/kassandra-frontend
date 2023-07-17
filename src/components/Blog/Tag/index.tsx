@@ -4,15 +4,14 @@ import Link from 'next/link'
 import * as S from './styles'
 
 export type TagVariants =
-  | 'primary'
-  | 'secondary'
-  | 'tertiary'
+  | 'yellow'
+  | 'blue'
+  | 'red'
   | 'green'
   | 'purple'
-  | 'lightBlue'
-  | 'red'
-  | 'orange'
-  | 'darkOrange'
+  | 'purpleGradient'
+  | 'rainbow'
+  | 'gray'
 export type TagShapes = 'square' | 'rounded'
 export type TagSizes = 'small' | 'medium' | 'large'
 export type TagCapitalizations = 'uppercase' | 'lowercase' | 'capitalize'
@@ -37,9 +36,9 @@ interface ITagProps extends React.HTMLAttributes<any> {
 export const Tag = React.forwardRef<any, ITagProps>(
   (
     {
-      variant,
-      shape,
-      size,
+      variant = 'purple',
+      shape = 'square',
+      size = 'medium',
       asLabel,
       href,
       isExternalLink,
