@@ -1,8 +1,19 @@
+import ArticlesSection from '@/components/Blog/ArticlesSection'
 import Button from '@/components/Button'
 import Hero from '@/components/Hero'
 import { useSyncResearchFilters } from '@/hooks/useSyncResearchFilters'
+import { PostDataType } from '@/store/reducers/postsSlice'
 
-const Blog = () => {
+interface IBlogProps {
+  posts?: PostDataType[]
+  postsStats?: {
+    pageCount: number
+    total: number
+  }
+  tabs: string[]
+}
+
+const Blog = ({ posts, postsStats, tabs }: IBlogProps) => {
   useSyncResearchFilters()
 
   return (
@@ -23,6 +34,7 @@ const Blog = () => {
           href="https://www.kassandra.finance/blog"
         />
       </Hero>
+      <ArticlesSection postsStats={postsStats} posts={posts} tabs={tabs} />
     </>
   )
 }

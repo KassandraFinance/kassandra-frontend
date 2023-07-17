@@ -1,17 +1,18 @@
-import Lottie from 'lottie-light-react'
+import React from 'react'
+import Image from 'next/image'
 
-import heimdallLoadingAnimation from '@/lottieAnimations/heimdall-loading.json'
+import token96 from '@/../public/assets/logos/kacy-96.svg'
 
-type LoadingProps = React.CSSProperties
+import * as S from './styles'
 
-export const Loading = ({ height, width }: LoadingProps) => {
-  return (
-    <Lottie
-      animationData={heimdallLoadingAnimation}
-      style={{
-        height,
-        width
-      }}
-    />
-  )
+interface ILoadingProps {
+  marginTop?: number
 }
+
+export const Loading = ({ marginTop }: ILoadingProps) => (
+  <S.ImgLoading marginTop={marginTop ?? 0}>
+    <S.AnimatedImg>
+      <Image src={token96} alt="Loading" width={32} height={32} />
+    </S.AnimatedImg>
+  </S.ImgLoading>
+)

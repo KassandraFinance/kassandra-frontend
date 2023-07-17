@@ -30,7 +30,6 @@ export const InputWrapper = styled.div`
   }
 `
 
-// eslint-disable-next-line prettier/prettier
 export const Input = styled.input<IconPositionProps>`
   ${({ theme, iconPosition }) => css`
     color: ${theme.colors.snow};
@@ -57,7 +56,6 @@ export const Label = styled.label`
   }
 `
 
-// eslint-disable-next-line prettier/prettier
 export const Icon = styled.button<IconPositionProps>`
   ${({ iconPosition }) => css`
     display: flex;

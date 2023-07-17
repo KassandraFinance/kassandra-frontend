@@ -17,7 +17,6 @@ type UseResearchPostsProps = {
   tags: string[]
   coins: string[]
   readingDifficulties: string[]
-  isPRO: boolean
   posts?: PostDataType[]
   postsStats?: {
     pageCount: number
@@ -31,7 +30,6 @@ type FetchResearchPosts = {
   tags: string[]
   coins: string[]
   readingDifficulties: string[]
-  isPRO: boolean
   baseURL?: string
   tab?: string
 }
@@ -41,7 +39,6 @@ export const fetchResearchPosts = async ({
   tags,
   coins,
   readingDifficulties,
-  isPRO,
   baseURL = '',
   tab
 }: FetchResearchPosts) => {
@@ -49,7 +46,6 @@ export const fetchResearchPosts = async ({
   urlSearchParams.set('page', String(page))
   urlSearchParams.set('tags', tags.join(','))
   urlSearchParams.set('coins', coins.join(','))
-  urlSearchParams.set('isPRO', String(isPRO ? true : undefined))
   urlSearchParams.set('readingDifficulties', readingDifficulties.join(','))
   urlSearchParams.set('tab', String(tab ?? undefined))
 
@@ -70,7 +66,6 @@ export const useResearchPosts = ({
   tags,
   coins,
   readingDifficulties,
-  isPRO,
   posts,
   postsStats,
   tab
@@ -78,22 +73,13 @@ export const useResearchPosts = ({
   const dispatch = useAppDispatch()
 
   return useQuery({
-    queryKey: [
-      'posts',
-      page,
-      tags,
-      coins,
-      readingDifficulties,
-      tab,
-      { isPro: isPRO ? true : undefined }
-    ],
+    queryKey: ['posts', page, tags, coins, readingDifficulties, tab],
     queryFn: async () => {
       return await fetchResearchPosts({
         page,
         tags,
         coins,
         readingDifficulties,
-        isPRO,
         tab
       })
     },

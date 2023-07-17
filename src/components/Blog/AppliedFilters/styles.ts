@@ -9,7 +9,7 @@ export const AppliedFilters = styled.div`
 
   width: 100%;
   min-width: max-content;
-  height: 100%;
+  min-height: max-content;
 
   @media ${device.mobile} {
     gap: 0.8rem;

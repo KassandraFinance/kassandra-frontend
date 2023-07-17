@@ -4,7 +4,6 @@ import { PostDataType } from '@/store/reducers/postsSlice'
 
 import useMatomo from '@/hooks/useMatomo'
 import { publishedAtToHumanReadable } from '@/utils/date'
-import { LockerIcon } from '@/Icons/Locker'
 
 import { Tag } from '../Tag'
 
@@ -12,15 +11,14 @@ import * as S from './styles'
 
 interface IArticleCardProps {
   post: PostDataType
-  isUserPRO?: boolean
 }
 
-const ArticleCard = ({ post, isUserPRO }: IArticleCardProps) => {
+const ArticleCard = ({ post }: IArticleCardProps) => {
   const { trackEvent } = useMatomo()
 
   const readingDifficulty = {
-    Beginner: 'green',
-    Intermediate: 'purple',
+    Beginner: 'blue',
+    Intermediate: 'yellow',
     Advanced: 'red'
   } as const
 
@@ -28,7 +26,7 @@ const ArticleCard = ({ post, isUserPRO }: IArticleCardProps) => {
   const otherTags = post.tags.slice(1)
 
   return (
-    <Link href={`/research/${post.slug}`} passHref>
+    <Link href={`/blog/${post.slug}`} passHref>
       <S.ArticleLink
         aria-labelledby={post.slug}
         onClick={() =>
@@ -40,18 +38,6 @@ const ArticleCard = ({ post, isUserPRO }: IArticleCardProps) => {
         }
       >
         <S.ArticleCard>
-          {post.isPRO ? (
-            <Tag
-              variant="primary"
-              shape="rounded"
-              size="medium"
-              className="pro-tag"
-              leftIcon={isUserPRO ? undefined : <LockerIcon />}
-              asLabel
-            >
-              Pro
-            </Tag>
-          ) : null}
           <S.BannerImage
             className="post-img"
             src={post.banner.url}
@@ -74,7 +60,7 @@ const ArticleCard = ({ post, isUserPRO }: IArticleCardProps) => {
                     readingDifficulty[
                       post.readingDifficulty
                         ?.difficultyName as keyof typeof readingDifficulty
-                    ] ?? 'tertiary'
+                    ] ?? 'purple'
                   }
                   shape="square"
                   size="small"
@@ -87,7 +73,7 @@ const ArticleCard = ({ post, isUserPRO }: IArticleCardProps) => {
 
               {firstTag && (
                 <Tag
-                  variant={'tertiary'}
+                  variant="purple"
                   shape="square"
                   size="small"
                   className="tags"
@@ -98,7 +84,7 @@ const ArticleCard = ({ post, isUserPRO }: IArticleCardProps) => {
               )}
               {otherTags.length > 0 && (
                 <Tag
-                  variant="tertiary"
+                  variant="gray"
                   shape="rounded"
                   size="small"
                   className="number-tags"

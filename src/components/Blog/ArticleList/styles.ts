@@ -50,7 +50,7 @@ export const Content = styled.div<IContentProps>`
     &:hover {
       box-shadow: ${borderShadow !== 'true'
         ? null
-        : '0px 5px 15px rgba(0, 61, 132, 0.2);'};
+        : '0rem 0.1rem 2rem rgba(250, 250, 250, 0.08);'};
 
       cursor: pointer;
 

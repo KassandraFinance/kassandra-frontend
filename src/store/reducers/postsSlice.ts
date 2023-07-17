@@ -9,7 +9,6 @@ export type PostDataType = {
   }
   summary: string
   publishedAt: string
-  isPRO: boolean
   highlighted: boolean
   slug: string
   readTimeInMinutes: number
@@ -84,7 +83,6 @@ const initialState: PostState = {
     tags: [],
     summary: '',
     publishedAt: '',
-    isPRO: true,
     highlighted: true,
     slug: ''
   }

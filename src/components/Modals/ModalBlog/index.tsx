@@ -52,9 +52,9 @@ const ModalBlog = ({
         onCloseAutoFocus={onCloseAutoFocus}
         onOpenAutoFocus={onCloseAutoFocus}
       >
-        {Icon && (
+        {title && (
           <ModalTitle>
-            <Icon /> {title}
+            {Icon && <Icon />} {title}
           </ModalTitle>
         )}
         {image && (
