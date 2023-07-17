@@ -32,16 +32,12 @@ export const RightLightImageWrapper = styled.div`
 `
 
 export const ArticlesMainContent = styled.div`
-  max-width: 192rem;
+  max-width: 120rem;
   margin-inline: auto;
-  padding-inline: 6.4rem;
+  padding-inline: 3rem;
 
-  @media ${device.tabletLarge} {
-    padding-inline: 3.2rem;
-  }
-
-  @media ${device.mobile} {
-    padding-inline: 1.6rem;
+  @media (min-width: 1600px) {
+    max-width: 114rem;
   }
 `
 
@@ -82,6 +78,10 @@ export const ArticlesMainContainerHeader = styled.div`
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 1.6rem;
+
+      > div > button {
+        width: 100% !important;
+      }
     }
   `}
 `
@@ -166,13 +166,11 @@ export const ButtonGroupWrapper = styled.div`
 `
 
 export const TabsWrapper = styled.div`
-  padding-inline: 6.4rem;
+  max-width: 120rem;
+  margin-inline: auto;
+  padding-inline: 3rem;
 
-  @media ${device.tabletLarge} {
-    padding-inline: 3.2rem;
-  }
-
-  @media ${device.mobile} {
-    padding-inline: 1.6rem;
+  @media (min-width: 1600px) {
+    max-width: 114rem;
   }
 `
