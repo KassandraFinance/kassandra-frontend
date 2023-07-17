@@ -77,7 +77,7 @@ export const TextContainer = styled.div<ITextContainerProps>`
     gap: 1.6rem;
     justify-content: ${tabletView ? 'flex-start' : 'center'};
 
-    width: 90rem;
+   ${tabletView ? '' : {width: '90rem'}} 
     padding-inline: 3.2rem;
     padding-block: 1.6rem;
 

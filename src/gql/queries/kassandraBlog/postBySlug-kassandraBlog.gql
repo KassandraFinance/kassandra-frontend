@@ -1,0 +1,178 @@
+query PostBySlug($slug: String!) {
+  postBySlug(slug: $slug) {
+      data {
+        id
+        attributes {
+          slug
+          title
+          summary
+          readTimeInMinutes
+          publishedAt
+          sendInBlueListId
+          isPRO
+          amountOfTitles
+          banner {
+            data {
+              attributes {
+                url
+                alternativeText
+              }
+            }
+          }
+          content
+          readingDifficulty {
+            data {
+              attributes {
+                difficultyName
+              }
+            }
+          }
+          tags {
+            data {
+              attributes {
+                name
+              }
+            }
+          }
+          tabs {
+            data {
+              attributes {
+                tabName
+              }
+            }
+          }
+          coins {
+            data {
+              id
+              attributes {
+                coinGeckoID
+                symbol
+                image {
+                  data {
+                    attributes {
+                      url
+                      alternativeText
+                    }
+                  }
+                }
+              }
+            }
+          }
+          recommendedPosts {
+            data {
+              id
+              attributes {
+                title
+                summary
+                slug
+                readTimeInMinutes
+                publishedAt
+                isPRO
+                readingDifficulty {
+                  data {
+                    attributes {
+                      difficultyName
+                    }
+                  }
+                }
+                banner {
+                  data {
+                    attributes {
+                      url
+                      alternativeText
+                    }
+                  }
+                }
+                writers {
+                  data {
+                    id
+                    attributes {
+                      name
+                      profilePicture {
+                        data {
+                          attributes {
+                            url
+                            alternativeText
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          writers {
+            data {
+              id
+              attributes {
+                biography
+                name
+                socials {
+                  data {
+                    attributes {
+                      link
+                      type
+                      username
+                    }
+                  }
+                }
+                profilePicture {
+                  data {
+                    attributes {
+                      url
+                      alternativeText
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    posts {
+      data {
+        id
+        attributes {
+          title
+          summary
+          slug
+          readTimeInMinutes
+          publishedAt
+          isPRO
+          readingDifficulty {
+            data {
+              attributes {
+                difficultyName
+              }
+            }
+          }
+          banner {
+            data {
+              attributes {
+                url
+                alternativeText
+              }
+            }
+          }
+          writers {
+            data {
+              id
+              attributes {
+                name
+                profilePicture {
+                  data {
+                    attributes {
+                      url
+                      alternativeText
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }

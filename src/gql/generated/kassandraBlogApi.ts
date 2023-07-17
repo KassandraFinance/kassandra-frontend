@@ -1634,6 +1634,13 @@ export type WriterRelationResponseCollection = {
   data: Array<WriterEntity>;
 };
 
+export type PostBySlugQueryVariables = Exact<{
+  slug: Scalars['String']['input'];
+}>;
+
+
+export type PostBySlugQuery = { __typename?: 'Query', postBySlug?: { __typename?: 'PostEntityResponse', data?: { __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', slug: string, title: string, summary: string, readTimeInMinutes: number, publishedAt?: any | null, sendInBlueListId: number, isPRO: boolean, amountOfTitles: number, content?: string | null, banner: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null }, readingDifficulty?: { __typename?: 'ReadingDifficultyEntityResponse', data?: { __typename?: 'ReadingDifficultyEntity', attributes?: { __typename?: 'ReadingDifficulty', difficultyName: string } | null } | null } | null, tags?: { __typename?: 'TagRelationResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', name: string } | null }> } | null, tabs?: { __typename?: 'TabRelationResponseCollection', data: Array<{ __typename?: 'TabEntity', attributes?: { __typename?: 'Tab', tabName: string } | null }> } | null, coins?: { __typename?: 'CoinRelationResponseCollection', data: Array<{ __typename?: 'CoinEntity', id?: string | null, attributes?: { __typename?: 'Coin', coinGeckoID: string, symbol: string, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } } | null }> } | null, recommendedPosts?: { __typename?: 'PostRelationResponseCollection', data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', title: string, summary: string, slug: string, readTimeInMinutes: number, publishedAt?: any | null, isPRO: boolean, readingDifficulty?: { __typename?: 'ReadingDifficultyEntityResponse', data?: { __typename?: 'ReadingDifficultyEntity', attributes?: { __typename?: 'ReadingDifficulty', difficultyName: string } | null } | null } | null, banner: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null }, writers?: { __typename?: 'WriterRelationResponseCollection', data: Array<{ __typename?: 'WriterEntity', id?: string | null, attributes?: { __typename?: 'Writer', name: string, profilePicture: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } } | null }> } | null } | null }> } | null, writers?: { __typename?: 'WriterRelationResponseCollection', data: Array<{ __typename?: 'WriterEntity', id?: string | null, attributes?: { __typename?: 'Writer', biography: string, name: string, socials?: { __typename?: 'SocialRelationResponseCollection', data: Array<{ __typename?: 'SocialEntity', attributes?: { __typename?: 'Social', link: string, type: Enum_Social_Type, username: string } | null }> } | null, profilePicture: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } } | null }> } | null } | null } | null } | null, posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', title: string, summary: string, slug: string, readTimeInMinutes: number, publishedAt?: any | null, isPRO: boolean, readingDifficulty?: { __typename?: 'ReadingDifficultyEntityResponse', data?: { __typename?: 'ReadingDifficultyEntity', attributes?: { __typename?: 'ReadingDifficulty', difficultyName: string } | null } | null } | null, banner: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null }, writers?: { __typename?: 'WriterRelationResponseCollection', data: Array<{ __typename?: 'WriterEntity', id?: string | null, attributes?: { __typename?: 'Writer', name: string, profilePicture: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } } | null }> } | null } | null }> } | null };
+
 export type ResearchCoinsQueryVariables = Exact<{
   query?: InputMaybe<Scalars['String']['input']>;
 }>;
@@ -1659,6 +1666,186 @@ export type ResearchTabsQueryVariables = Exact<{ [key: string]: never; }>;
 export type ResearchTabsQuery = { __typename?: 'Query', tabs?: { __typename?: 'TabEntityResponseCollection', data: Array<{ __typename?: 'TabEntity', attributes?: { __typename?: 'Tab', tabName: string, position: number } | null }> } | null };
 
 
+export const PostBySlugDocument = gql`
+    query PostBySlug($slug: String!) {
+  postBySlug(slug: $slug) {
+    data {
+      id
+      attributes {
+        slug
+        title
+        summary
+        readTimeInMinutes
+        publishedAt
+        sendInBlueListId
+        isPRO
+        amountOfTitles
+        banner {
+          data {
+            attributes {
+              url
+              alternativeText
+            }
+          }
+        }
+        content
+        readingDifficulty {
+          data {
+            attributes {
+              difficultyName
+            }
+          }
+        }
+        tags {
+          data {
+            attributes {
+              name
+            }
+          }
+        }
+        tabs {
+          data {
+            attributes {
+              tabName
+            }
+          }
+        }
+        coins {
+          data {
+            id
+            attributes {
+              coinGeckoID
+              symbol
+              image {
+                data {
+                  attributes {
+                    url
+                    alternativeText
+                  }
+                }
+              }
+            }
+          }
+        }
+        recommendedPosts {
+          data {
+            id
+            attributes {
+              title
+              summary
+              slug
+              readTimeInMinutes
+              publishedAt
+              isPRO
+              readingDifficulty {
+                data {
+                  attributes {
+                    difficultyName
+                  }
+                }
+              }
+              banner {
+                data {
+                  attributes {
+                    url
+                    alternativeText
+                  }
+                }
+              }
+              writers {
+                data {
+                  id
+                  attributes {
+                    name
+                    profilePicture {
+                      data {
+                        attributes {
+                          url
+                          alternativeText
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        writers {
+          data {
+            id
+            attributes {
+              biography
+              name
+              socials {
+                data {
+                  attributes {
+                    link
+                    type
+                    username
+                  }
+                }
+              }
+              profilePicture {
+                data {
+                  attributes {
+                    url
+                    alternativeText
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  posts {
+    data {
+      id
+      attributes {
+        title
+        summary
+        slug
+        readTimeInMinutes
+        publishedAt
+        isPRO
+        readingDifficulty {
+          data {
+            attributes {
+              difficultyName
+            }
+          }
+        }
+        banner {
+          data {
+            attributes {
+              url
+              alternativeText
+            }
+          }
+        }
+        writers {
+          data {
+            id
+            attributes {
+              name
+              profilePicture {
+                data {
+                  attributes {
+                    url
+                    alternativeText
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
 export const ResearchCoinsDocument = gql`
     query ResearchCoins($query: String) {
   coins(
@@ -1807,6 +1994,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    PostBySlug(variables: PostBySlugQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PostBySlugQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<PostBySlugQuery>(PostBySlugDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'PostBySlug', 'query');
+    },
     ResearchCoins(variables?: ResearchCoinsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ResearchCoinsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ResearchCoinsQuery>(ResearchCoinsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ResearchCoins', 'query');
     },

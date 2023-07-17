@@ -63,7 +63,7 @@ const theme = {
     snow: '#FCFCFC',
     red: '#EA3224',
     green: '#5EE56B',
-    white: '#ffffff',
+    white: '#FCFCFC',
     // Blog Colors
     primary10: '#001833',
     primary20: '#003066',
