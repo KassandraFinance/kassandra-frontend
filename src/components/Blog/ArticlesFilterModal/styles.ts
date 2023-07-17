@@ -2,16 +2,14 @@ import styled, { css } from 'styled-components'
 import * as RadixSwitch from '@radix-ui/react-switch'
 
 export const ModalSection = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    &:not(:last-child) {
-      margin-bottom: 1.6rem;
-      padding-bottom: 1.6rem;
-      border-bottom: 1px solid ${theme.colors.gray};
-    }
-  `}
+  &:not(:last-child) {
+    margin-bottom: 1.6rem;
+    padding-bottom: 1.6rem;
+    border-bottom: 1px solid rgba(252, 252, 252, 0.08);
+  }
 `
 
 export const FilterSectionTitle = styled.h5`
@@ -52,8 +50,13 @@ export const ItemLabel = styled.label`
       border-radius: 999999px;
     }
 
-    &:hover {
+    &:hover,
+    &:has(> button[role='checkbox']:focus-visible) {
       background-color: ${theme.colors.darkPurple};
+
+      > button[role='checkbox'][data-state='unchecked'] {
+        border-color: ${theme.colors.magenta};
+      }
     }
   `}
 `
@@ -108,13 +111,15 @@ export const SearchInput = styled.input`
   `}
 `
 export const NameContainer = styled.div`
-  flex: 1 1 0%;
+  ${({ theme }) => css`
+    flex: 1 1 0%;
 
-  color: #6f7f90;
+    color: ${theme.colors.grayDisabled};
 
-  span {
-    color: #434c56;
-  }
+    span {
+      color: ${theme.colors.snow};
+    }
+  `}
 `
 
 export const ProWrapper = styled.label`
@@ -198,7 +203,7 @@ export const SearchInputWrapper = styled.div`
   margin-block: 0.8rem 1.6rem;
   padding-inline: 2.4rem;
 
-  > input {
+  input {
     max-width: 100%;
     margin-inline: 0 !important;
     margin-left: 0 !important;

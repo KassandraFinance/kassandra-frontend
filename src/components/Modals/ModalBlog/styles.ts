@@ -34,7 +34,8 @@ export const ModalContent = styled(Content)`
     max-height: 92%;
 
     transform: translate(-50%, -50%);
-    background-color: rgba(31, 31, 31, 0.95);
+    background: linear-gradient(134deg, #1b1d22 19.37%, #333437 100%);
+
     border-radius: 8px;
 
     &[data-state='open'] {
@@ -87,8 +88,8 @@ export const ModalTitle = styled(Title)`
     align-items: center;
 
     padding: 2rem 2.4rem;
-    border: 1px solid rgba(31, 31, 31, 0.95);
-    border-bottom: 1px solid ${theme.colors.gray};
+    border: 1px solid rgba(31, 31, 31, 0.72);
+    border-bottom-color: rgba(252, 252, 252, 0.08);
     margin-bottom: 1.6rem;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -99,8 +100,6 @@ export const ModalTitle = styled(Title)`
     font-weight: 500;
     line-height: 100%; /* 1.8rem */
     letter-spacing: 0.09rem;
-
-    background-color: rgba(31, 31, 31, 0.95);
 
     svg {
       width: 2.4rem;
@@ -126,13 +125,12 @@ export const ModalContentWrapper = styled.div`
 
     max-height: 54rem;
     border: 1px solid rgba(31, 31, 31, 0.95);
+    border-top: none;
     border-bottom: none;
 
     color: ${theme.colors.neutral30};
     font-size: 1.6rem;
     line-height: 2.4rem;
-
-    background-color: rgba(31, 31, 31, 0.95);
   `}
 `
 
@@ -145,9 +143,8 @@ export const ModalFooter = styled.div`
 
     padding: 2.4rem 1.6rem;
     border: 1px solid rgba(31, 31, 31, 0.95);
+    border-top: 1px solid rgba(252, 252, 252, 0.08);
     border-radius: 0 0 8px 8px;
-
-    background-color: rgba(31, 31, 31, 0.95);
 
     > * {
       flex: 1 1 0%;
@@ -196,8 +193,9 @@ export const ModalFooter = styled.div`
 export const ModalCloseButton = styled(Close)`
   ${({ theme }) => css`
     position: fixed;
-    top: 2.25rem;
-    right: 2.4rem;
+    top: 1.75rem;
+    right: 2rem;
+    padding: 0.5rem;
 
     border: none;
 

@@ -12,16 +12,16 @@ import Modal, {
   ModalContentWrapper,
   ModalFooter
 } from '@/components/Modals/ModalBlog'
+import Button from '@/components/Button'
 import { Checkbox } from '../Checkbox'
 import { Filter } from '../ArticlesSection'
+import { Loading } from '../Loading'
+import Input from '../Input'
 
 import { SearchIcon } from '@/Icons'
 import type { SVGFuncElement } from '@/types/svg'
 
 import * as S from './styles'
-import { Loading } from '../Loading'
-import Button from '@/components/Button'
-import Input from '../Input'
 
 interface IArticlesFilterModalProps {
   title: string
@@ -127,13 +127,13 @@ const ArticlesFilterModal = ({
           <S.FilterSectionTitle>Coins</S.FilterSectionTitle>
 
           <S.SearchInputWrapper>
-            <SearchIcon width={16} height={16} />
+            <SearchIcon width={24} height={24} />
             <Input
-              variant="outlined"
-              size="medium"
+              name="search"
               type="text"
               placeholder="Search"
               onChange={e => setSearch(e.target.value)}
+              value={search}
             />
           </S.SearchInputWrapper>
           {isLoading && <Loading height={85} />}
@@ -168,7 +168,7 @@ const ArticlesFilterModal = ({
         <Button
           backgroundBlack
           onClick={handleResetDefaults}
-          text="Default"
+          text="Remove Filters"
           className="variant-white"
         />
         <Button

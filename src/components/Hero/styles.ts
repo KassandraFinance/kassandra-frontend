@@ -1,3 +1,4 @@
+import { device } from '@/styles/theme'
 import styled, { css, keyframes } from 'styled-components'
 
 export const Hero = styled.div`
@@ -23,6 +24,10 @@ export const LightImageWrapper = styled.div`
   left: -120px;
 
   z-index: 0;
+
+  @media ${device.mobile} {
+    display: none;
+  }
 `
 
 interface IBackgroundImageProps {

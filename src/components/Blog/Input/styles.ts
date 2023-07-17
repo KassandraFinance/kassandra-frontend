@@ -1,170 +1,130 @@
-import { ThemingHelper } from '@/types/themingHelper'
 import styled, { css } from 'styled-components'
 
-import type { InputRoundness, InputSize, InputVariant } from '.'
-import type { ThemeType } from '@/styles/theme'
+export const InputText = styled.div`
+  ${() => css``}
+`
 
-type InputSizeVariants = ThemingHelper<InputSize, [ThemeType]>
-type InputVariants = ThemingHelper<
-  InputVariant,
-  [ThemeType, boolean | undefined]
->
-type InputRoundnessVariants = ThemingHelper<InputRoundness>
-
-const inputSizes: InputSizeVariants = {
-  xSmall: theme => css`
-    height: 2.4rem;
-    padding-inline: 0.8rem;
-
-    font: ${theme.font.text.textXs300};
-    letter-spacing: 0.048rem;
-  `,
-  small: theme => css`
-    height: 3.2rem;
-    padding-inline: 1.2rem;
-
-    font: ${theme.font.text.textBase300};
-    letter-spacing: 0.048rem;
-  `,
-  medium: theme => css`
-    height: 4rem;
-    padding-inline: 1.6rem;
-
-    font: ${theme.font.text.textBase300};
-    letter-spacing: 0.048rem;
-  `,
-  large: theme => css`
-    height: 4.8rem;
-    padding-inline: 1.6rem;
-
-    font: ${theme.font.text.textLg300};
-    letter-spacing: 0.048rem;
-  `
-}
-
-const inputRoundness: InputRoundnessVariants = {
-  sharp: css`
-    border-radius: 0;
-  `,
-  small: css`
-    border-radius: 6px;
-  `,
-  medium: css`
-    border-radius: 8px;
-  `,
-  large: css`
-    border-radius: 8px;
-  `
-}
-
-const inputVariants: InputVariants = {
-  outlined: (theme, error) => css`
-    color: ${theme.colors.snow};
-
-    background-color: transparent;
-
-    ${error
-      ? `border: 2px solid ${theme.colors.red50}`
-      : `border: 2px solid ${theme.colors.gray}`};
-
-    &:disabled {
-      border: 2px solid transparent;
-
-      color: ${theme.colors.neutral50};
-
-      background-color: transparent;
-
-      opacity: 0.4;
-    }
-
-    &:focus-visible {
-      border: 2px solid ${error ? theme.colors.red : theme.colors.magenta};
-    }
-  `,
-  filled: (theme, error) => css`
-    color: ${theme.colors.snow};
-
-    background-color: transparent;
-
-    ${error
-      ? `border: 2px solid ${theme.colors.red50}`
-      : `border: 2px solid transparent`};
-
-    &:disabled {
-      border: 2px solid transparent;
-
-      color: ${theme.colors.neutral50};
-
-      background-color: transparent;
-
-      opacity: 0.4;
-    }
-
-    &:focus-visible {
-      border: 2px solid ${theme.colors.magenta};
-    }
-  `,
-  underlined: (theme, error) => css`
-    padding-inline: 0;
-    border: none;
-    ${error
-      ? `border-bottom: 2px solid ${theme.colors.red50}`
-      : `border-bottom: 1px solid ${theme.colors.neutral80}`};
-
-    &:disabled {
-      border-bottom: 2px solid ${theme.colors.neutral80};
-
-      color: ${theme.colors.neutral50};
-
-      opacity: 0.4;
-    }
-
-    &:focus-visible {
-      border-bottom: 2px solid
-        ${error ? theme.colors.red50 : theme.colors.primary50};
-    }
-  `
-}
-
-const BaseInput = styled.input`
+export const Label = styled.label`
   ${({ theme }) => css`
+    display: block;
+
+    margin-bottom: 0.8rem;
+
+    color: #c4c4c4;
+    font-weight: ${theme.font.weight.normal};
+    font-size: ${theme.font.sizes.font12};
+    line-height: ${theme.font.sizes.font14};
+    text-transform: uppercase;
+  `}
+`
+
+export const InputContainer = styled.div`
+  ${() => css`
     position: relative;
+  `}
+`
 
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-
+export const Input = styled.input`
+  ${({ theme }) => css`
     width: 100%;
+    height: 4.8rem;
+    padding: 1.6rem;
+    border: 1px solid rgb(255 255 255 / 0.15);
+    border-radius: 8px;
 
-    color: ${theme.colors.neutral30};
+    color: ${theme.colors.grayDisabled};
+    font-weight: ${theme.font.weight.light};
+    font-style: normal;
+    font-size: ${theme.font.sizes.font16};
+    font-family: Rubik;
+    line-height: 100%;
+    letter-spacing: normal;
 
-    background-color: ${theme.colors.white};
+    background: #1b1d22;
+    outline: none;
 
-    &::placeholder {
-      color: ${theme.colors.gray};
+    transition-timing-function: ease-in-out;
+    transition-duration: 300ms;
+    transition-property: border;
+
+    &:valid:not([value='']) {
+      border: 1px solid ${theme.colors.green};
     }
 
-    &:disabled {
-      cursor: not-allowed;
+    &:invalid:not([value='']) {
+      border: 1px solid ${theme.colors.red};
     }
 
-    &:focus-visible:not(:disabled) {
-      outline: none;
+    &:read-only {
+      background-color: transparent;
+    }
+
+    ::-webkit-inner-spin-button,
+    ::-webkit-outer-spin-button {
+      margin: 0;
+      appearance: none;
     }
   `}
 `
 
-interface IInputProps {
-  variantSize: InputSize
-  variant: InputVariant
-  rounded: InputRoundness
-  error?: boolean
-}
+export const PlaceholderWrapper = styled.span`
+  ${() => css`
+    position: absolute;
+    top: 0;
+    left: 0;
 
-export const Input = styled(BaseInput)<IInputProps>`
-  ${({ theme, variantSize, variant, rounded, error }) => css`
-    ${inputRoundness[rounded]}
-    ${inputSizes[variantSize](theme)}
-    ${inputVariants[variant](theme, error)}
+    display: inline-block;
+    padding-left: 2rem;
+
+    height: 4.8rem;
+    border: 1px solid rgb(255 255 255 / 0);
+
+    opacity: 1;
+    pointer-events: none;
+
+    transition-timing-function: ease-in-out;
+    transition-duration: 300ms;
+    transition-property: opacity;
+
+    ${Input}:not([value='']) ~ &,
+    ${Input}:focus ~ & {
+      opacity: 0;
+    }
+  `}
+`
+
+export const Placeholder = styled.span`
+  ${({ theme }) => css`
+    display: inline-block;
+
+    height: 4.8rem;
+    padding: 1.6rem;
+
+    color: ${theme.colors.grayDisabled};
+    font-weight: ${theme.font.weight.light};
+    font-size: ${theme.font.sizes.font16};
+    line-height: 100%;
+    letter-spacing: normal;
+  `}
+`
+
+export const Error = styled.p`
+  ${({ theme }) => css`
+    display: none;
+
+    margin-top: 0.8rem;
+
+    color: ${theme.colors.red};
+    font-weight: ${theme.font.weight.light};
+    font-size: ${theme.font.sizes.font14};
+    line-height: 100%;
+
+    transition-timing-function: ease-in-out;
+    transition-duration: 300ms;
+    transition-property: opacity;
+
+    ${Input}:invalid:not([value='']) ~ & {
+      display: block;
+    }
   `}
 `

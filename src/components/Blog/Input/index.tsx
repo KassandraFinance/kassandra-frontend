@@ -1,47 +1,63 @@
-import React from 'react'
-import type { InputHTMLAttributes } from 'react'
-
 import * as S from './styles'
 
-export type InputSize = 'xSmall' | 'small' | 'medium' | 'large'
-export type InputVariant = 'outlined' | 'filled' | 'underlined'
-export type InputRoundness = 'sharp' | 'small' | 'medium' | 'large'
-
-interface IInputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
-  size?: InputSize
-  variant?: InputVariant
-  rounded?: InputRoundness
-  error?: boolean
-  disabled?: boolean
+interface IInputTextProps {
+  form?: string
+  name: string
+  type: string
+  value: string
+  required?: boolean
+  placeholder: string
+  minLength?: number
+  maxLength?: number
+  label?: string
+  error?: string
+  readonly?: boolean
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const Input = React.forwardRef<HTMLInputElement, IInputProps>(
-  (
-    {
-      size = 'medium',
-      variant = 'outlined',
-      rounded = 'medium',
-      disabled,
-      error,
-      ...props
-    },
-    ref
-  ) => {
-    return (
-      <S.Input
-        variantSize={size}
-        variant={variant}
-        rounded={rounded}
-        error={error}
-        disabled={!!disabled}
-        ref={ref}
-        {...props}
-      />
-    )
-  }
-)
+const InputText = ({
+  form = undefined,
+  name,
+  type,
+  value,
+  required = false,
+  placeholder,
+  minLength,
+  maxLength,
+  label,
+  error,
+  readonly = false,
+  onChange
+}: IInputTextProps) => {
+  return (
+    <S.InputText>
+      {label && <S.Label htmlFor={name}>{label}</S.Label>}
 
-Input.displayName = 'Input'
+      <S.InputContainer>
+        <S.Input
+          form={form}
+          id={name}
+          name={name}
+          type={type}
+          value={value ? value : ''}
+          required={required}
+          onChange={onChange}
+          minLength={minLength}
+          maxLength={maxLength}
+          min={minLength}
+          max={maxLength}
+          step={0.1}
+          readOnly={readonly}
+        />
 
-export default Input
+        <S.PlaceholderWrapper>
+          <S.Placeholder>{placeholder}</S.Placeholder>
+        </S.PlaceholderWrapper>
+
+        <S.Error>{error}</S.Error>
+      </S.InputContainer>
+    </S.InputText>
+  )
+}
+
+export default InputText

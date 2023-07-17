@@ -3,6 +3,7 @@ import { device } from '@/styles/theme'
 
 export const ArticlesSection = styled.div`
   position: relative;
+  /* overflow-x: hidden; */
 `
 
 export const LeftLightImageWrapper = styled.div`
@@ -20,13 +21,13 @@ export const LeftLightImageWrapper = styled.div`
 export const RightLightImageWrapper = styled.div`
   position: absolute;
   bottom: -320px;
-  right: -120px;
+  right: 0px;
 
   z-index: -1;
 
   @media ${device.mobile} {
     bottom: -320px;
-    right: -120px;
+    right: 0px;
   }
 `
 
