@@ -10,17 +10,12 @@ import {
 
 import Authors, { SocialIconType } from './Authors'
 import TitleBar from './TitleBar'
-import IconButton from '../IconButton'
 import Button from '../Button'
 import { Tag } from '../Blog/Tag'
 
 import { getVariantByDifficulty } from '@/templates/Article'
 
 import { useSectionTitleObserver } from '@/hooks/useSectionTitleObserver'
-
-import ChevronLeft from '@assets/icons/chevron-left.svg'
-import TwitterIcon from '@assets/socialMidia/twitter.svg'
-import ShareIcon from '@assets/icons/share-alt.svg'
 
 import * as S from './styles'
 
@@ -171,10 +166,10 @@ const RightSidebar = ({
                   key={`post-title-${index}`}
                   shallow={true}
                   href={titleHref(slugTitle)}
-                  onClick={e => {
-                    handleSidebarButton(e, titleHref(slugTitle))
-                  }}
-                  className="topics-buttons"
+                  // className="topics-buttons"
+                  // onClick={e => {
+                  //   handleSidebarButton(e, titleHref(slugTitle))
+                  // }}
                 >
                   <p
                     className={`post-title ${
