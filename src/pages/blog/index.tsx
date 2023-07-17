@@ -1,6 +1,7 @@
 import Head from 'next/head'
 
 import Blog from '@/templates/Blog'
+import Article from '@/templates/Article'
 
 const Index = () => {
   return (
@@ -18,7 +19,7 @@ const Index = () => {
         <meta property="twitter:url" content="https://kassandra.finance/blog" />
         <meta property="twitter:description" content="A Blog" />
       </Head>
-      <Blog />
+      <Article />
     </>
   )
 }

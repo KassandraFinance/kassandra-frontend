@@ -5,7 +5,8 @@ module.exports = {
       'assets.coingecko.com',
       'cdn-images-1.medium.com',
       'tokens.1inch.io',
-      'github.com'
+      'github.com',
+      'pub-4e527f88aa294361b4cde90de69d965d.r2.dev'
     ]
   },
   async redirects() {
