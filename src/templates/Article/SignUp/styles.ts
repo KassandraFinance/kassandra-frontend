@@ -34,7 +34,7 @@ export const SignUpInput = styled.div`
     gap: 0.8rem;
 
     padding-bottom: 4rem;
-    border-bottom: 1px solid ${theme.colors.grey5};
+    border-bottom: 1px solid ${theme.colors.gray};
     margin-bottom: 5rem;
 
     transition: color ${theme.transition.default};
