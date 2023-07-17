@@ -29,7 +29,7 @@ const checkboxVariants: CheckboxVariants = {
     }
 
     &[data-state='unchecked']:hover:not(:disabled) {
-      border-color: ${theme.colors.white};
+      border-color: ${theme.colors.magenta};
     }
 
     &[data-state='checked'] {

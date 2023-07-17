@@ -382,7 +382,7 @@ const ArticlesSection = ({
         </S.ArticlesMainContainerHeader>
 
         <S.TagsContainer hidden={totalFiltersApplied.length === 0}>
-          {isFetching && <Loading height={85} />}
+          {isFetching && <Loading />}
           <AppliedFilters
             filters={[
               ...tags.map(tag => ({

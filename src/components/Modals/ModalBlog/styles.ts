@@ -90,6 +90,7 @@ export const ModalTitle = styled(Title)`
     padding: 2rem 2.4rem;
     border: 1px solid rgba(31, 31, 31, 0.72);
     border-bottom-color: rgba(252, 252, 252, 0.08);
+    background-color: rgba(31, 31, 31, 0.72);
     margin-bottom: 1.6rem;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;

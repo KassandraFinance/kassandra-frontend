@@ -13,10 +13,10 @@ import Modal, {
   ModalFooter
 } from '@/components/Modals/ModalBlog'
 import Button from '@/components/Button'
-import { Checkbox } from '../Checkbox'
 import { Filter } from '../ArticlesSection'
 import { Loading } from '../Loading'
 import Input from '../Input'
+import OldCheckbox from '@/components/Checkbox'
 
 import { SearchIcon } from '@/Icons'
 import type { SVGFuncElement } from '@/types/svg'
@@ -88,16 +88,16 @@ const ArticlesFilterModal = ({
             {readingDifficulties.map(difficulty => (
               <S.FilterItem key={difficulty}>
                 <S.ItemLabel>
-                  <Checkbox
+                  <OldCheckbox
+                    name={difficulty}
                     checked={selectedFilters.readingDifficulties.includes(
                       difficulty
                     )}
-                    toggleChecked={() =>
+                    onChange={() =>
                       handleUpdateFilter('readingDifficulties', difficulty)
                     }
                     label={difficulty}
                   />
-                  {difficulty}
                 </S.ItemLabel>
               </S.FilterItem>
             ))}
@@ -111,12 +111,12 @@ const ArticlesFilterModal = ({
             {tags.map(tag => (
               <S.FilterItem key={tag}>
                 <S.ItemLabel>
-                  <Checkbox
+                  <OldCheckbox
+                    name={tag}
                     checked={selectedFilters.tags.includes(tag)}
-                    toggleChecked={() => handleUpdateFilter('tags', tag)}
+                    onChange={() => handleUpdateFilter('tags', tag)}
                     label={tag}
                   />
-                  {tag}
                 </S.ItemLabel>
               </S.FilterItem>
             ))}
@@ -136,18 +136,20 @@ const ArticlesFilterModal = ({
               value={search}
             />
           </S.SearchInputWrapper>
-          {isLoading && <Loading height={85} />}
+          {isLoading && <Loading />}
 
           <ul>
             {researchCoinsResponse?.coins?.map(coin => (
               <S.CoinItem key={coin.coinGeckoID}>
                 <S.ItemLabel>
-                  <Checkbox
+                  <OldCheckbox
+                    name={coin.coinGeckoID}
                     checked={selectedFilters.coins.includes(coin.coinGeckoID)}
-                    toggleChecked={() =>
+                    onChange={() =>
                       handleUpdateFilter('coins', coin.coinGeckoID)
                     }
                     label={coin.name}
+                    showLabel={false}
                   />
                   <Image
                     src={coin.image.url}

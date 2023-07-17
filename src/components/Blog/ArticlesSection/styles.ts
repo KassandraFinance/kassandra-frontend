@@ -109,7 +109,7 @@ export const TagsContainer = styled.div<TagsContainerProps>`
     overflow-x: auto;
 
     width: 100%;
-    height: 4rem;
+    min-height: 4rem;
     padding-bottom: 1.6rem;
 
     -ms-overflow-style: none; /* Internet Explorer 10+ */

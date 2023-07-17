@@ -52,11 +52,11 @@ export const ItemLabel = styled.label`
 
     &:hover,
     &:has(> button[role='checkbox']:focus-visible) {
-      background-color: ${theme.colors.darkPurple};
+      /* background-color: ${theme.colors.darkPurple}; */
 
-      > button[role='checkbox'][data-state='unchecked'] {
+      /* > button[role='checkbox'][data-state='unchecked'] {
         border-color: ${theme.colors.magenta};
-      }
+      } */
     }
   `}
 `
