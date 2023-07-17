@@ -1,17 +1,23 @@
-const regXHeader = /(?<flag>#{1,6})\s+(?<content>.+)/g
+import * as cheerio from 'cheerio'
+import GithubSlugger from 'github-slugger'
 
-export const getHeadingsFromMarkdown = (postMD: string) =>
-  Array.from(postMD.matchAll(regXHeader)).map(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ({ groups: { flag, content } }: any) => ({
-      heading: `h${flag.length}`,
-      content
-    })
-    // eslint-disable-next-line prettier/prettier
-  ) as {
-    heading: string
+export const getHeadingsFromMarkdown = (postHTML: string) => {
+  const $ = cheerio.load(postHTML)
+  const slugger = new GithubSlugger()
+  const h2s: {
+    id: string
     content: string
-  }[]
+  }[] = []
+
+  $('h2').each((i, element) => {
+    h2s.push({
+      id: slugger.slug($(element).text()),
+      content: $(element).text()
+    })
+  })
+
+  return h2s
+}
 
 export const getSlugByTitle = (title: string) => {
   return title

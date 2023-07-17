@@ -50,8 +50,6 @@ export const buttonGroupVariants: ButtonGroupVariants = {
   primary: (theme, isSelected, svgStroke) => css`
     color: ${theme.colors.white};
 
-    background-color: transparent;
-
     cursor: pointer;
 
     transition: ${theme.transition.default};
@@ -203,6 +201,12 @@ export const MobileButtonGroupContainer = styled.div`
   border-radius: 4px;
 
   box-shadow: 0 0.5rem 1.5rem rgb(0 61 132 / 0.06);
+
+  &:has(div[data-state='open']) {
+    div button {
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
 `
 
 export const DropdownMenuContent = styled(DropdownMenu.Content)`
@@ -285,6 +289,7 @@ export const MobileButtonGroupItem = styled.button<IMobileButtonGroupItemProps>`
     align-items: center;
 
     width: 100%;
+    background: transparent;
 
     /* the highest width possible from the options(idk how to do it dynamically) */
     min-width: 13.3rem;
@@ -295,6 +300,7 @@ export const MobileButtonGroupItem = styled.button<IMobileButtonGroupItemProps>`
       : sizeVariant[size]};
     ${buttonGroupVariants[variant](theme, isSelected, svgStroke)};
     border: ${isSelected ? `1px solid ${theme.colors.snow}` : 'none'};
+    backdrop-filter: blur(240px);
     border-bottom: ${isDropdownOpen
       ? 'none'
       : isSelected
@@ -324,6 +330,10 @@ export const MobileButtonGroupItem = styled.button<IMobileButtonGroupItemProps>`
         transition: ${theme.transition.default};
         transition-property: fill, stroke;
       }
+    }
+
+    &[data-state='open'] {
+      background: rgba(255, 255, 255, 0.05) !important;
     }
 
     &:disabled {

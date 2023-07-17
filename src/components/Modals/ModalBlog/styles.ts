@@ -163,6 +163,7 @@ export const ModalFooter = styled.div`
 
       font-size: ${theme.font.sizes.font14};
       font-weight: 400;
+      border-radius: 4px;
 
       transition: 300ms;
 

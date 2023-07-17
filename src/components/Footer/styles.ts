@@ -1,14 +1,24 @@
-import styled from 'styled-components'
-import theme from '../../styles/theme'
+import styled, { css } from 'styled-components'
+import theme, { device } from '../../styles/theme'
 
-export const Footer = styled.footer`
+interface IFooterProps {
+  variant?: 'default' | 'blog-post'
+}
+
+export const Footer = styled.footer<IFooterProps>`
   max-width: 120rem;
   margin: 0 auto;
   padding: 4rem 3rem;
+  position: relative;
+  z-index: 10000;
 
   color: ${theme.colors.snow};
 
   @media (min-width: 1600px) {
+    max-width: 114rem;
+  }
+
+  @media ${device.tabletLarge} {
     max-width: 114rem;
   }
 
@@ -91,10 +101,6 @@ export const LowerContainerMobile = styled.div`
     justify-content: center;
     margin-bottom: 1.6rem;
 
-    li {
-      flex: 1 0 4.8rem;
-    }
-
     @media (max-width: 400px) {
       padding: 1rem;
       margin: auto;
@@ -114,10 +120,6 @@ export const LowerContainer = styled.div`
   ul {
     display: flex;
     justify-content: flex-end;
-
-    li {
-      flex: 1 0 4.8rem;
-    }
   }
 `
 export const Certified = styled.div`
@@ -164,6 +166,11 @@ export const LowerLeft = styled.div`
 export const LowerRight = styled.div`
   display: flex;
   flex-direction: column;
+
+  ul {
+    display: flex;
+    gap: 1.6rem;
+  }
 `
 
 export const SocialIcon = styled.a`

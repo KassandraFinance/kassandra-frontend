@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { device } from '../../../styles/theme'
+import { device } from '@/styles/theme'
 
 export const TitleBar = styled.button`
   ${({ theme }) => css`
@@ -13,26 +13,34 @@ export const TitleBar = styled.button`
 
     width: 100%;
     border: none;
+    height: 6.4rem;
 
-    background-color: ${theme.colors.white};
-    box-shadow: 0 0.5rem 1.5rem rgb(0 61 132 / 0.06);
+    background: #151117;
 
     opacity: 0;
     cursor: pointer;
     pointer-events: none;
 
     .title {
-      color: ${theme.colors.primary50};
-      font-weight: ${theme.font.weight.medium};
-      font-size: ${theme.font.sizes.font16};
-      line-height: 2.4rem;
+      color: ${theme.colors.snow};
+      leading-trim: both;
+      text-edge: cap;
+      font-size: 1.6rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 2.4rem; /* 150% */
+      letter-spacing: 0.032rem;
     }
 
     .content {
-      color: ${theme.colors.primary50};
-      font-weight: ${theme.font.weight.light};
-      font-size: ${theme.font.sizes.font12};
-      line-height: 2.4rem;
+      color: rgba(252, 252, 252, 0.8);
+      leading-trim: both;
+      text-edge: cap;
+      font-size: 1.2rem;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 1.6rem; /* 133.333% */
+      letter-spacing: 0.036rem;
     }
 
     @media ${device.tabletLarge} {
@@ -48,12 +56,8 @@ export const TitleBarTextWrapper = styled.div`
   align-items: center;
 
   width: 100%;
-  padding-inline: 3.2rem;
+  padding-inline: 2.4rem;
   padding-block: 0.8rem;
-
-  @media ${device.mobile} {
-    padding-inline: 1.6rem;
-  }
 `
 
 export const TitleBarText = styled.div`
@@ -79,7 +83,6 @@ interface ITitleBarButtonProps {
   rotated: boolean
 }
 
-// eslint-disable-next-line prettier/prettier
 export const TitleBarButton = styled.div<ITitleBarButtonProps>`
   ${({ theme, rotated }) => css`
     display: flex;
@@ -88,7 +91,6 @@ export const TitleBarButton = styled.div<ITitleBarButtonProps>`
 
     border: none;
 
-    background-color: transparent;
     outline: none;
 
     svg {
@@ -99,7 +101,7 @@ export const TitleBarButton = styled.div<ITitleBarButtonProps>`
 
       transition: rotate ${theme.transition.default};
 
-      rotate: ${rotated ? '180deg' : '0'};
+      rotate: ${rotated ? '0' : '180deg'};
     }
   `}
 `

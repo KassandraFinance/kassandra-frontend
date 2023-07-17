@@ -60,6 +60,7 @@ export const ArticlesMainContainerHeader = styled.div`
 
       font-size: ${theme.font.sizes.font14};
       font-weight: 400;
+      border-radius: 4px;
 
       transition: 300ms;
 
@@ -106,7 +107,7 @@ export const TagsContainer = styled.div<TagsContainerProps>`
     display: ${hidden ? 'none' : 'flex'};
     gap: 1.6rem;
     align-items: center;
-    overflow-x: auto;
+    /* overflow-x: auto; */
 
     width: 100%;
     min-height: 4rem;

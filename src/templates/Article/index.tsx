@@ -5,17 +5,18 @@ import { breakpoints } from '@/styles/theme'
 import useMatomo from '@/hooks/useMatomo'
 import { useWindowSize } from '@/hooks/useWindowSize'
 
-import RightSidebar from 'src/components/RightSidebar'
-import { SocialIconType } from 'src/components/RightSidebar/Authors'
+import { SocialIconType } from '@/components/Blog/Authors'
+import RightSidebar from '@/components/RightSidebar'
+import SignUp from './SignUp'
 
 import Recommended from './Recommended'
+import ImageModal, { ImageModalRoot } from './ImageModal'
 import { ArticleHeader } from './ArticleHeader'
 import { Content } from './Content'
 import { ProgressBar } from './ProgressBar'
-import ImageModal, { ImageModalRoot } from './ImageModal'
 
 import * as S from './styles'
-import SignUp from './SignUp'
+import Image from 'next/image'
 
 export const getVariantByDifficulty = (difficulty: string) => {
   switch (difficulty) {
@@ -140,7 +141,7 @@ const Article = ({ post, posts, isUserPRO }: IArticleProps) => {
   ) => {
     e.preventDefault()
     if (slug) {
-      document.querySelector(slug)?.scrollIntoView({
+      document.querySelector(`#${slug}`)?.scrollIntoView({
         behavior: 'smooth'
       })
     }
@@ -181,18 +182,13 @@ const Article = ({ post, posts, isUserPRO }: IArticleProps) => {
           }
         }}
       />
+
       <S.Article>
         <ProgressBar
           markdownContainerRef={markdownContainerRef}
           headerContentRef={headerContentRef}
         />
-        <RightSidebar
-          post={post}
-          handleSidebarButton={handleSidebarButton}
-          isContentShowing={isContentShowing}
-          handleArticlePageClick={handleArticlePageClick}
-          notAllowedToRead={notAllowedToRead}
-        />
+
         <S.Content isContentShowing={isContentShowing}>
           {post && (
             <>
@@ -226,6 +222,13 @@ const Article = ({ post, posts, isUserPRO }: IArticleProps) => {
             }
           />
         </S.Content>
+        <RightSidebar
+          post={post}
+          handleSidebarButton={handleSidebarButton}
+          isContentShowing={isContentShowing}
+          handleArticlePageClick={handleArticlePageClick}
+          notAllowedToRead={notAllowedToRead}
+        />
       </S.Article>
     </ImageModalRoot>
   )

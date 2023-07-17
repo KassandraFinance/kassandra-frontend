@@ -41,7 +41,5 @@ export default async (chain: ChainDetails) => {
         // handle "add" error
       }
     }
-    // handle other "switch" errors
-    console.log(error)
   }
 }

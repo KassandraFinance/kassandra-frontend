@@ -1,5 +1,4 @@
-import Chevron from '@assets/icons/chevron-up.svg'
-
+import { ChevronIcon } from '@/Icons'
 import * as S from './styles'
 
 interface ITitleBarProps {
@@ -25,7 +24,7 @@ const TitleBar = ({
         </S.TitleBarText>
 
         <S.TitleBarButton rotated={isContentShowing}>
-          {/* <Chevron width={24} height={24} /> */}
+          <ChevronIcon width={24} height={24} />
         </S.TitleBarButton>
       </S.TitleBarTextWrapper>
     </S.TitleBar>

@@ -2,36 +2,25 @@ import styled, { css, keyframes } from 'styled-components'
 import { device } from '../../styles/theme'
 
 export const Article = styled.article`
+  max-width: 120rem;
+  margin-inline: auto;
   position: relative;
 
   display: flex;
   justify-content: center;
+  align-items: flex-start;
 
-  padding-bottom: 45rem;
   margin-top: 8rem;
-
-  @media (max-width: 1440px) {
-    padding-inline: 0.8rem;
-    padding-bottom: 75rem;
-  }
+  padding-left: 3.2rem;
 
   @media ${device.tabletLarge} {
+    padding-left: 0;
     position: relative;
     top: 7rem;
     bottom: 0;
     z-index: 1;
 
     overflow-y: auto;
-
-    padding-bottom: 75rem;
-  }
-
-  @media ${device.tabletSmall} {
-    padding-bottom: 112rem;
-  }
-
-  @media ${device.mobile} {
-    padding-bottom: 115rem;
   }
 `
 
@@ -48,7 +37,7 @@ export const ArticleProgressBar = styled.div`
       width: 100%;
       height: 0.4rem;
 
-      background-color: ${theme.colors.neutral80};
+      background-color: ${theme.colors.neutral30};
     }
 
     .progress-fill {
@@ -60,7 +49,7 @@ export const ArticleProgressBar = styled.div`
       height: 0.4rem;
       margin-top: 0;
 
-      background-color: ${theme.colors.primary50};
+      background-color: ${theme.colors.amber};
     }
 
     @media ${device.tabletLarge} {
@@ -89,16 +78,16 @@ const fadeInAnimation = css`
 
 export const Content = styled.div<IContentProps>`
   ${({ isContentShowing }) => css`
-    width: min(75.8rem, 100%);
-    margin-right: 38rem;
-
+    padding-right: 6.4rem;
+    margin-left: auto;
     @media ${device.tabletLarge} {
+      width: 100%;
       display: block;
       overflow-y: ${!isContentShowing ? 'hidden' : 'auto'};
 
       max-width: auto;
       margin-right: 0;
-      padding-inline: 3.2rem;
+      padding-inline: 2.4rem;
 
       ${isContentShowing ? fadeInAnimation : null};
       transition-duration: ${isContentShowing ? '0.3s' : '0'};
@@ -139,10 +128,10 @@ export const Main = styled.div`
         color: ${theme.colors.white};
         font: ${theme.font.text.text3xl};
         letter-spacing: -0.016rem;
-        scroll-margin-top: 1.6rem;
+        scroll-margin-top: 12.8rem;
 
         @media ${device.tabletLarge} {
-          scroll-margin-top: 14rem;
+          scroll-margin-top: 18rem;
         }
       }
 
@@ -228,4 +217,28 @@ export const Main = styled.div`
       }
     }
   `}
+`
+
+export const PostTopLeftLight = styled.div`
+  position: absolute;
+  top: 570px;
+  left: 0px;
+
+  z-index: -1;
+
+  @media ${device.tabletLarge} {
+    display: none;
+  }
+`
+
+export const PostBottomLeftLight = styled.div`
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+
+  z-index: -1;
+
+  @media ${device.tabletLarge} {
+    display: none;
+  }
 `

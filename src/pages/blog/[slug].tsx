@@ -6,8 +6,9 @@ import { flattenObj } from '@/utils/strapiResponseTransformer'
 import { strapiClient } from '@/graphQLClients'
 
 import Article from '@/templates/Article'
-
-import { SocialIconType } from '@/components/RightSidebar/Authors'
+import { SocialIconType } from '@/components/Blog/Authors'
+import * as S from '@/templates/Article/styles'
+import Image from 'next/image'
 
 interface IPost {
   id: string
@@ -101,7 +102,7 @@ const ArticlePage = ({ post, posts, isUserPRO }: IArticleProps) => {
         {/* Open Graph  Meta Tags  */}
         <meta
           property="og:url"
-          content={`https://heimdall.land/research/${post.slug}`}
+          content={`https://heimdall.land/blog/${post.slug}`}
           key="og:url"
         />
         <meta property="og:title" content={post.title} key="og:title" />
@@ -115,7 +116,7 @@ const ArticlePage = ({ post, posts, isUserPRO }: IArticleProps) => {
         {/* Twitter Meta Tags  */}
         <meta
           property="twitter:url"
-          content={`https://heimdall.land/research/${post.slug}`}
+          content={`https://heimdall.land/blog/${post.slug}`}
           key="twitter:url"
         />
         <meta
@@ -130,6 +131,21 @@ const ArticlePage = ({ post, posts, isUserPRO }: IArticleProps) => {
         />
         <meta name="twitter:image" content={post.banner.url} />
       </Head>
+      <S.PostTopLeftLight>
+        <Image
+          src="/assets/images/backgroundBlog/post-left-top-light.svg"
+          height={823}
+          width={753}
+        />
+      </S.PostTopLeftLight>
+
+      <S.PostBottomLeftLight>
+        <Image
+          src="/assets/images/backgroundBlog/post-left-bottom-light.svg"
+          height={823}
+          width={753}
+        />
+      </S.PostBottomLeftLight>
       <Article post={post} posts={posts} isUserPRO={isUserPRO} />
     </>
   )

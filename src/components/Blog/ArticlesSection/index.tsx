@@ -124,32 +124,6 @@ const ArticlesSection = ({
     )
   }
 
-  // const onPageChange = async (page: number) => {
-  //   router.push(
-  //     {
-  //       query: {
-  //         ...router.query,
-  //         page: page + 1
-  //       }
-  //     },
-  //     undefined,
-  //     {
-  //       shallow: true
-  //     }
-  //   )
-  //   window.scrollTo(0, 0)
-  // }
-
-  // const handleSelectViewOption = (viewOption: ViewOption) => {
-  //   setSelectedView(viewOption)
-
-  //   trackEvent({
-  //     category: 'select-view',
-  //     action: 'click-on-button',
-  //     name: viewOption
-  //   })
-  // }
-
   const handleResetFilter = () => {
     setSelectedFilters(initialArticlesFilter)
   }
@@ -381,7 +355,7 @@ const ArticlesSection = ({
           </S.ButtonGroupWrapper>
         </S.ArticlesMainContainerHeader>
 
-        <S.TagsContainer hidden={totalFiltersApplied.length === 0}>
+        <S.TagsContainer>
           {isFetching && <Loading />}
           <AppliedFilters
             filters={[

@@ -22,7 +22,7 @@ const Header = () => {
   const pathName = router.pathname
 
   return (
-    <S.Wrapper id="top">
+    <S.Wrapper id="top" data-fixed={router.pathname.startsWith('/blog')}>
       <S.LogoWrapper>
         <Link href="/" passHref>
           <a className="logo-desktop">
