@@ -15,17 +15,18 @@ import { ProgressBar } from './ProgressBar'
 import ImageModal, { ImageModalRoot } from './ImageModal'
 
 import * as S from './styles'
+import SignUp from './SignUp'
 
 export const getVariantByDifficulty = (difficulty: string) => {
   switch (difficulty) {
     case 'Beginner':
-      return 'green'
+      return 'blue'
     case 'Intermediate':
       return 'purple'
     case 'Advanced':
       return 'red'
     default:
-      return 'tertiary'
+      return 'gray'
   }
 }
 
@@ -212,6 +213,8 @@ const Article = ({ post, posts, isUserPRO }: IArticleProps) => {
               </S.Main>
             </>
           )}
+
+          <SignUp />
 
           <Recommended
             posts={posts}

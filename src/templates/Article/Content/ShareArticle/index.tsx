@@ -1,10 +1,9 @@
 import { useRouter } from 'next/router'
 
-import Button from 'src/components/Button'
-
-import TwitterIcon from '@assets/socials/twitter.svg'
+import Button from '@/components/Blog/Button'
 
 import * as S from '../styles'
+import { TwitterIcon } from '@/Icons'
 
 type ShareArticleProps = {
   handleArticlePageClick: (path: string) => void
@@ -31,6 +30,8 @@ export const ShareArticle = ({
     <S.ShareArticle>
       <p>Liked the Article?</p>
       <Button
+        leftIcon={TwitterIcon}
+        variant="tertiary"
         className="share-btn"
         size="medium"
         onClick={handleClick}

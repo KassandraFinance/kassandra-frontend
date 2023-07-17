@@ -204,7 +204,7 @@ const RightSidebar = ({
               <S.Tags>
                 {post?.isPRO && (
                   <Tag
-                    variant="primary"
+                    variant="purple"
                     size="small"
                     shape="rounded"
                     capitalization="capitalize"
@@ -231,7 +231,7 @@ const RightSidebar = ({
                 {post?.tags.map(tag => (
                   <Tag
                     key={tag.name}
-                    variant="tertiary"
+                    variant="gray"
                     size="small"
                     shape="rounded"
                     capitalization="capitalize"

@@ -1,9 +1,9 @@
-import Button from 'src/components/Button'
 import { IPost } from '..'
 
 import ArticleList from '@/components/Blog/ArticleList'
 
 import * as S from './styles'
+import Button from '@/components/Blog/Button'
 
 interface IRecommendedProps {
   posts?: IPost[]
@@ -38,6 +38,7 @@ const Recommended = ({
       </S.RecommendedContent>
 
       <Button
+        variant="ghost"
         size="large"
         className="readmore-btn"
         href="/blog"

@@ -42,7 +42,7 @@ export const ArticleHeader = ({
         </Button>
       </S.GoBackWrapper>
       <S.BackTags>
-        {router.isFallback && <Loading height={150} />}
+        {router.isFallback && <Loading />}
 
         <ImageModalTrigger
           tabIndex={0}
@@ -99,7 +99,7 @@ export const ArticleHeader = ({
       <S.Tags>
         {post?.isPRO && (
           <S.StyledTag
-            variant="primary"
+            variant="blue"
             size="large"
             shape="rounded"
             capitalization="capitalize"
@@ -130,7 +130,7 @@ export const ArticleHeader = ({
         {post?.tags.map(tag => (
           <S.StyledTag
             key={tag.name}
-            variant="tertiary"
+            variant="red"
             size="large"
             shape="rounded"
             capitalization="capitalize"
