@@ -21,9 +21,9 @@ export type TagCapitalizations = 'uppercase' | 'lowercase' | 'capitalize'
 // not the ideal solution but it works for now.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 interface ITagProps extends React.HTMLAttributes<any> {
-  variant: TagVariants
-  shape: TagShapes
-  size: TagSizes
+  variant?: TagVariants
+  shape?: TagShapes
+  size?: TagSizes
   asLabel?: boolean
   href?: string
   isExternalLink?: boolean

@@ -35,12 +35,13 @@ export const ItemLabel = styled.label`
     align-items: center;
 
     padding: 1.2rem 2.4rem;
+    margin-block: 2px;
 
     color: ${theme.colors.white};
     font-size: 1.6rem;
     font-style: normal;
     font-weight: 300;
-    line-height: 100%; /* 1.6rem */
+    line-height: 100%;
 
     cursor: pointer;
 
@@ -50,13 +51,8 @@ export const ItemLabel = styled.label`
       border-radius: 999999px;
     }
 
-    &:hover,
-    &:has(> button[role='checkbox']:focus-visible) {
-      /* background-color: ${theme.colors.darkPurple}; */
-
-      /* > button[role='checkbox'][data-state='unchecked'] {
-        border-color: ${theme.colors.magenta};
-      } */
+    &:has(input[type='checkbox']:focus-visible) {
+      outline: 1px solid ${theme.colors.magenta};
     }
   `}
 `

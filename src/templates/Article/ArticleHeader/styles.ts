@@ -11,21 +11,21 @@ export const GoBackWrapper = styled.div`
     align-items: flex-start;
 
     .back-button {
-      color: ${theme.colors.neutral30};
+      color: ${theme.colors.snow};
       font: ${theme.font.text.textBase300};
 
       svg {
         path {
-          fill: ${theme.colors.neutral30};
+          fill: ${theme.colors.neutral40};
         }
       }
 
       &:hover {
-        color: ${theme.colors.primary50};
+        color: ${theme.colors.snow};
 
         svg {
           path {
-            fill: ${theme.colors.primary50};
+            fill: ${theme.colors.snow};
           }
         }
       }

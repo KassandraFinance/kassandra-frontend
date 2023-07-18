@@ -256,6 +256,8 @@ export const Tag = styled.button<ITagProps>`
     justify-content: center;
     align-items: center;
 
+    text-decoration: none;
+
     border: 0;
 
     line-height: 1.6rem;

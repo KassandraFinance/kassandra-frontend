@@ -18,6 +18,8 @@ import {
 } from '@/store/reducers/postsSlice'
 import { useDispatch } from 'react-redux'
 
+import * as S from '@/templates/Blog/styles'
+
 interface IndexProps {
   posts?: PostDataType[]
   tags?: string[]
@@ -73,6 +75,7 @@ const Index = ({
         <meta property="twitter:url" content="https://kassandra.finance/blog" />
         <meta property="twitter:description" content="A Blog" />
       </Head>
+      <S.Background />
       <Blog posts={posts} postsStats={postsStats} tabs={tabs ?? []} />
     </>
   )

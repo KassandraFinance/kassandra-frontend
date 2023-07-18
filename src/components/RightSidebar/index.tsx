@@ -4,18 +4,23 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 
 import {
-  getHeadingsFromMarkdown,
+  getHeadingsFromMarkdown as getHeadingsFromHTML,
   getSlugByTitle
 } from '@/utils/markdownContentRegex'
 
-import Authors, { SocialIconType } from './Authors'
 import TitleBar from './TitleBar'
+import Authors, { SocialIconType } from '../Blog/Authors'
+import BlogButton from '../Blog/Button'
 import Button from '../Button'
+import IconButton from '../IconButton'
 import { Tag } from '../Blog/Tag'
 
 import { getVariantByDifficulty } from '@/templates/Article'
 
 import { useSectionTitleObserver } from '@/hooks/useSectionTitleObserver'
+
+import { ChevronIcon, TwitterIcon } from '@/Icons'
+import { ShareExternalIcon } from '@/Icons/ShareExternal'
 
 import * as S from './styles'
 
@@ -87,26 +92,19 @@ const RightSidebar = ({
   const router = useRouter()
 
   const allArticlesTab = 'All Articles'
-  const limitPostTitlesForNonPro = 5
 
   const postContent = React.useMemo(() => post?.content ?? '', [post?.content])
 
-  const headings = getHeadingsFromMarkdown(postContent)
+  const headings = React.useMemo(
+    () => getHeadingsFromHTML(postContent),
+    [postContent]
+  )
 
   const itemIds = React.useMemo(
     () => headings.map(h => getSlugByTitle(h.content)),
     [headings]
   )
   const activeId = useSectionTitleObserver({ itemIds, heading: 'H2' })
-
-  const postTitles = notAllowedToRead
-    ? getHeadingsFromMarkdown(post?.content ?? '')
-        .slice(0, limitPostTitlesForNonPro)
-        .concat({
-          content: '...',
-          heading: '...'
-        })
-    : getHeadingsFromMarkdown(post?.content ?? '')
 
   const shareUrl = `https://kassandra.finance${router.asPath}`
   const customMessage = `Check out this post, ${post?.title}, made by @Kassandra:`
@@ -138,11 +136,15 @@ const RightSidebar = ({
 
   const coins = React.useMemo(() => post?.coins, [post?.coins])
 
-  const titleHref = (slug: string) =>
-    !notAllowedToRead ? `#${slug}` : '#locked'
-
   return (
     <S.RightSidebar isContentShowing={isContentShowing}>
+      {/* <S.RightSidebarLight>
+        <Image
+          src="/assets/images/backgroundBlog/post-right-pink-light.svg"
+          height={823}
+          width={753}
+        />
+      </S.RightSidebarLight> */}
       <TitleBar
         postTitle={post?.title ?? ''}
         handleSidebarButton={handleSidebarButton}
@@ -151,38 +153,43 @@ const RightSidebar = ({
       <S.RightSidebarWrapper isContentShowing={isContentShowing}>
         <S.Content>
           <S.GoBackWrapper>
-            <Button className="back-button" size="medium" href="/blog">
-              Back to Blog
-            </Button>
+            <BlogButton
+              variant="ghost"
+              className="back-button"
+              size="medium"
+              href="/blog"
+              leftIcon={<ChevronIcon style={{ transform: 'rotate(90deg)' }} />}
+            >
+              Back to blog
+            </BlogButton>
           </S.GoBackWrapper>
           <S.PostsContent notAllowed={notAllowedToRead}>
-            {postTitles.map((title, index) => {
-              if (title.heading !== 'h2') return
-
-              const slugTitle = getSlugByTitle(title.content)
-
+            {headings.map((title, index) => {
               return (
                 <Link
                   key={`post-title-${index}`}
                   shallow={true}
-                  href={titleHref(slugTitle)}
+                  href={`#${title.id}`}
                   // className="topics-buttons"
                   // onClick={e => {
-                  //   handleSidebarButton(e, titleHref(slugTitle))
+                  //   handleSidebarButton(e, title.id)
                   // }}
                 >
-                  <p
+                  <a
+                    onClick={e => {
+                      handleSidebarButton(e, title.id)
+                    }}
                     className={`post-title ${
-                      slugTitle === activeId ? 'active' : ''
+                      title.id === activeId ? 'active' : ''
                     }`}
                   >
-                    {slugTitle === activeId ? (
+                    {title.id === activeId ? (
                       <span className="bulletpoint">•</span>
                     ) : (
                       <span className="bulletpoint disabled">•</span>
                     )}{' '}
                     {title.content.replace(/\*\*/g, '')}
-                  </p>
+                  </a>
                 </Link>
               )
             })}
@@ -201,7 +208,6 @@ const RightSidebar = ({
                   <Tag
                     variant="purple"
                     size="small"
-                    shape="rounded"
                     capitalization="capitalize"
                     onClick={handleTagClick}
                     href={`/research?tab=${allArticlesTab}&isPRO=true`}
@@ -215,7 +221,6 @@ const RightSidebar = ({
                       post.readingDifficulty.difficultyName
                     )}
                     size="small"
-                    shape="rounded"
                     capitalization="capitalize"
                     onClick={handleTagClick}
                     href={`/research?tab=${allArticlesTab}&readingDifficulties=${post.readingDifficulty.difficultyName}`}
@@ -228,7 +233,6 @@ const RightSidebar = ({
                     key={tag.name}
                     variant="gray"
                     size="small"
-                    shape="rounded"
                     capitalization="capitalize"
                     onClick={handleTagClick}
                     href={`/research?tab=${allArticlesTab}&tags=${tag.name}`}
@@ -264,8 +268,8 @@ const RightSidebar = ({
             <S.ShareContent>
               <S.SectionTitle>Share</S.SectionTitle>
               <S.Buttons>
-                {/* <IconButton
-                  icon={ShareIcon}
+                <IconButton
+                  icon={<ShareExternalIcon />}
                   onClick={() => {
                     handleShareButton()
                     handleArticlePageClick('share-mobile')
@@ -274,12 +278,12 @@ const RightSidebar = ({
                 />
 
                 <IconButton
-                  icon={TwitterIcon}
+                  icon={<TwitterIcon />}
                   onClick={() => handleArticlePageClick('twittershare-mobile')}
                   disabled={isSharing}
                   isExternalLink
                   href={`https://twitter.com/share?url=${shareUrl}`}
-                /> */}
+                />
               </S.Buttons>
             </S.ShareContent>
           </S.LinksContent>

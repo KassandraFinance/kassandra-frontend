@@ -3,7 +3,6 @@ import { device } from '@/styles/theme'
 
 export const ArticlesSection = styled.div`
   position: relative;
-  /* overflow-x: hidden; */
 `
 
 export const LeftLightImageWrapper = styled.div`
@@ -32,13 +31,9 @@ export const RightLightImageWrapper = styled.div`
 `
 
 export const ArticlesMainContent = styled.div`
-  max-width: 120rem;
+  max-width: 118.8rem;
+  padding-inline: 2.4rem;
   margin-inline: auto;
-  padding-inline: 3rem;
-
-  @media (min-width: 1600px) {
-    max-width: 114rem;
-  }
 `
 
 export const ArticlesMainContainerHeader = styled.div`
@@ -56,6 +51,7 @@ export const ArticlesMainContainerHeader = styled.div`
 
       font-size: ${theme.font.sizes.font14};
       font-weight: 400;
+      border-radius: 4px;
 
       transition: 300ms;
 
@@ -79,8 +75,14 @@ export const ArticlesMainContainerHeader = styled.div`
       grid-template-columns: repeat(2, 1fr);
       gap: 1.6rem;
 
-      > div > button {
-        width: 100% !important;
+      .button-mobile {
+        width: 100%;
+      }
+
+      > div {
+        > div {
+          width: 100%;
+        }
       }
     }
   `}
@@ -106,7 +108,7 @@ export const TagsContainer = styled.div<TagsContainerProps>`
     display: ${hidden ? 'none' : 'flex'};
     gap: 1.6rem;
     align-items: center;
-    overflow-x: auto;
+    /* overflow-x: auto; */
 
     width: 100%;
     min-height: 4rem;
@@ -166,11 +168,7 @@ export const ButtonGroupWrapper = styled.div`
 `
 
 export const TabsWrapper = styled.div`
-  max-width: 120rem;
+  max-width: 118.8rem;
+  padding-inline: 2.4rem;
   margin-inline: auto;
-  padding-inline: 3rem;
-
-  @media (min-width: 1600px) {
-    max-width: 114rem;
-  }
 `

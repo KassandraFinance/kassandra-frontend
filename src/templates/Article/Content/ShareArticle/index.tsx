@@ -2,8 +2,9 @@ import { useRouter } from 'next/router'
 
 import Button from '@/components/Blog/Button'
 
-import * as S from '../styles'
 import { TwitterIcon } from '@/Icons'
+
+import * as S from '../styles'
 
 type ShareArticleProps = {
   handleArticlePageClick: (path: string) => void
@@ -30,7 +31,7 @@ export const ShareArticle = ({
     <S.ShareArticle>
       <p>Liked the Article?</p>
       <Button
-        leftIcon={TwitterIcon}
+        leftIcon={<TwitterIcon />}
         variant="tertiary"
         className="share-btn"
         size="medium"

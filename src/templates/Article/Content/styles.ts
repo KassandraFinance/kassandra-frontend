@@ -17,6 +17,7 @@ export const LockedContent = styled.div<ILockedContentProps>`
     margin-bottom: 4rem;
     padding-bottom: 8rem;
     border-bottom: 2px solid ${theme.colors.neutral95};
+    paddin-right: 6.4rem;
 
     ::after {
       content: '';
