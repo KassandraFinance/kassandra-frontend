@@ -56,7 +56,7 @@ export const Header = styled.header`
     }
 
     h1 {
-      color: ${theme.colors.white};
+      color: ${theme.colors.snow};
       font-size: 3.2rem;
       font-style: normal;
       font-weight: 700;
@@ -64,7 +64,7 @@ export const Header = styled.header`
     }
 
     p {
-      color: ${theme.colors.white};
+      color: ${theme.colors.snow};
       font-size: 1.6rem;
       font-style: normal;
       font-weight: 400;

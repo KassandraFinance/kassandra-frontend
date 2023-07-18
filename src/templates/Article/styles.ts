@@ -7,12 +7,10 @@ export const Article = styled.article`
   display: flex;
   justify-content: center;
 
-  padding-bottom: 45rem;
   margin-top: 8rem;
 
   @media (max-width: 1440px) {
     padding-inline: 0.8rem;
-    padding-bottom: 75rem;
   }
 
   @media ${device.tabletLarge} {
@@ -22,16 +20,6 @@ export const Article = styled.article`
     z-index: 1;
 
     overflow-y: auto;
-
-    padding-bottom: 75rem;
-  }
-
-  @media ${device.tabletSmall} {
-    padding-bottom: 112rem;
-  }
-
-  @media ${device.mobile} {
-    padding-bottom: 115rem;
   }
 `
 
@@ -136,7 +124,7 @@ export const Main = styled.div`
       }
 
       h2 {
-        color: ${theme.colors.white};
+        color: ${theme.colors.snow};
         font: ${theme.font.text.text3xl};
         letter-spacing: -0.016rem;
         scroll-margin-top: 1.6rem;
@@ -147,17 +135,17 @@ export const Main = styled.div`
       }
 
       h3 {
-        color: ${theme.colors.white};
+        color: ${theme.colors.snow};
         font: ${theme.font.text.text2xl};
       }
 
       h4 {
-        color: ${theme.colors.white};
+        color: ${theme.colors.snow};
         font: ${theme.font.text.textLg500};
       }
 
       p {
-        color: ${theme.colors.white};
+        color: ${theme.colors.snow};
         font: ${theme.font.text.textBase300};
         letter-spacing: 0.032rem;
       }
@@ -167,7 +155,7 @@ export const Main = styled.div`
         margin-left: 1rem;
         padding-left: 2rem;
 
-        color: ${theme.colors.white};
+        color: ${theme.colors.snow};
         font-weight: ${theme.font.weight.light};
         font-size: ${theme.font.sizes.font18};
         line-height: 3.2rem;
