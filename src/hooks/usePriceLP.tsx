@@ -5,6 +5,7 @@ import PriceLP from '../constants/abi/PriceLP.json'
 
 import { ERC20 } from './useERC20Contract'
 import { networks } from '../constants/tokenAddresses'
+import { env } from '@/env.mjs'
 
 const usePriceLP = () => {
   const provider = new JsonRpcProvider(networks[43114].rpc)
@@ -34,7 +35,7 @@ const usePriceLP = () => {
     let kacyReserve = reservesKacyAvax._reserve1
     let avaxKacyReserve = reservesKacyAvax._reserve0
 
-    if (process.env.NEXT_PUBLIC_MASTER !== '1') {
+    if (env.NEXT_PUBLIC_MASTER !== '1') {
       daiReserve = reservesDaiAvax._reserve0
       avaxReserve = reservesDaiAvax._reserve1
       kacyReserve = reservesKacyAvax._reserve0

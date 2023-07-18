@@ -1,4 +1,6 @@
-module.exports = {
+import './src/env.mjs'
+
+const config = {
   reactStrictMode: true,
   images: {
     domains: [
@@ -49,3 +51,5 @@ module.exports = {
     ]
   }
 }
+
+export default config
