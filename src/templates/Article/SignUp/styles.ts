@@ -6,23 +6,31 @@ export const SignUp = styled.div``
 export const SignUpContent = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 3.2rem;
+  gap: 2.4rem;
 `
 
 export const SignUpHeader = styled.div`
   ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+
     h4 {
       font-weight: ${theme.font.weight.bold};
       font-size: ${theme.font.sizes.font20};
-      line-height: 3.2rem;
-      color: ${theme.colors.dark95};
+      color: ${theme.colors.snow};
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: 0.04rem;
     }
 
     p {
       font-weight: ${theme.font.weight.light};
       font-size: ${theme.font.sizes.font16};
       line-height: 2.4em;
-      color: ${theme.colors.dark95};
+      color: ${theme.colors.snow};
+      font-style: normal;
+      letter-spacing: 0.032rem;
     }
   `}
 `
@@ -31,7 +39,7 @@ export const SignUpInput = styled.div`
   ${({ theme }) => css`
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 2.4rem;
 
     padding-bottom: 4rem;
     border-bottom: 1px solid ${theme.colors.gray};
@@ -42,11 +50,14 @@ export const SignUpInput = styled.div`
     p {
       font-weight: ${theme.font.weight.light};
       font-size: ${theme.font.sizes.font12};
-      color: ${theme.colors.dark95};
-      line-height: 2.4em;
+      color: ${theme.colors.snow};
+      font-style: normal;
+      line-height: 1.6rem;
+      letter-spacing: 0.036rem;
 
       a {
         text-decoration: underline;
+        color: ${theme.colors.snow};
       }
     }
   `}
@@ -55,27 +66,28 @@ export const SignUpInput = styled.div`
 export const Input = styled.div`
   ${({ theme }) => css`
     display: flex;
+    position: relative;
+    flex-direction: column;
     gap: 1.6rem;
+    justify-content: center;
 
     input {
-      height: 6rem;
-      width: 100%;
-      padding: 1.8rem 2rem;
+      height: 6.4rem;
 
       background-color: ${theme.colors.snow};
-      border-radius: 8px;
-      border: none;
 
       font-weight: ${theme.font.weight.light};
       font-size: ${theme.font.sizes.font16};
       line-height: 2.4em;
-
-      ::placeholder {
-        color: rgba(31, 31, 31, 0.5);
-      }
     }
 
     .input-btn {
+      bottom: 0;
+      top: 0;
+      border: none;
+      background: none;
+      position: absolute;
+      right: 0;
       font-size: 1.4rem;
       font-style: normal;
       font-weight: 500;
@@ -83,7 +95,8 @@ export const Input = styled.div`
       letter-spacing: 0.042rem;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-end;
+      padding-right: 1.6rem;
 
       @media ${device.mobile} {
         height: 6rem;

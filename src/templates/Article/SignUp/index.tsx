@@ -1,19 +1,22 @@
-import Button from '@/components/Blog/Button'
-import { MailIcon } from '@/Icons/Mail'
-
 import useSubscribe from '@/hooks/useSubscribe'
 
+import Input from '@/components/Blog/Input'
+import { RightArrowIcon } from '@/Icons/RightArrow'
+
 import * as S from './styles'
+import React from 'react'
 
 const SignUp = () => {
+  const [inputText, setInputText] = React.useState('')
   const { handleSubmitWithToast } = useSubscribe()
 
   return (
     <S.SignUp>
       <S.SignUpContent
-        onSubmit={event =>
-          handleSubmitWithToast({ event, sendInBlueListId: 'general' })
-        }
+        // onSubmit={event =>
+        //   handleSubmitWithToast({ event, sendInBlueListId: 'general' })
+        // }
+        onSubmit={() => console.log('submitted')}
       >
         <S.SignUpHeader>
           <h4>Sign up to keep up with the latest articles</h4>
@@ -24,10 +27,16 @@ const SignUp = () => {
         </S.SignUpHeader>
         <S.SignUpInput>
           <S.Input>
-            <input placeholder="degen@crypto.xyz" type="email" name="email" />
-            <Button className="input-btn" variant="primary" size="large">
-              Subscribe
-            </Button>
+            <Input
+              value={inputText}
+              onChange={e => setInputText(e.target.value)}
+              placeholder={'Enter your Email to Subscribe'}
+              type="email"
+              name="email"
+            />
+            <button type="submit" className="input-btn">
+              <RightArrowIcon />
+            </button>
           </S.Input>
           <p>
             By signing up, you will create a Heimdall account if you don’t
