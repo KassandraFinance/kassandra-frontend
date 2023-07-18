@@ -1,9 +1,9 @@
 import { IPost } from '..'
 
 import ArticleList from '@/components/Blog/ArticleList'
+import Button from '@/components/Blog/Button'
 
 import * as S from './styles'
-import Button from '@/components/Blog/Button'
 
 interface IRecommendedProps {
   posts?: IPost[]
@@ -42,6 +42,8 @@ const Recommended = ({
         size="large"
         className="readmore-btn"
         href="/blog"
+        isBlue
+        hasRightChevron
         onClick={() => handleArticlePageClick('readmore-btn', 'DeFi')}
       >
         Read more from DeFi

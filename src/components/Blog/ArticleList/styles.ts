@@ -33,7 +33,6 @@ export const Content = styled.div<IContentProps>`
   ${({ borderShadow, imageLeft, theme, tabletView }) => css`
     display: flex;
     justify-content: ${imageLeft ? 'flex-start' : 'space-between'};
-
     min-height: 22.4rem;
     max-height: fit-content;
     border: ${borderShadow !== 'true'
@@ -77,7 +76,7 @@ export const TextContainer = styled.div<ITextContainerProps>`
     gap: 1.6rem;
     justify-content: ${tabletView ? 'flex-start' : 'center'};
 
-   ${tabletView ? '' : {width: '90rem'}} 
+    width: ${tabletView ? '100%' : '90rem'};
     padding-inline: 3.2rem;
     padding-block: 1.6rem;
 

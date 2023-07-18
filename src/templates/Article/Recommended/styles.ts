@@ -5,18 +5,12 @@ export const Recommended = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2.4rem;
-    align-items: flex-start;
+    align-items: center;
 
     padding-bottom: 6.4rem;
 
     .readmore-btn {
-      color: ${theme.colors.primary50};
-
-      svg {
-        path {
-          fill: ${theme.colors.primary50};
-        }
-      }
+      text-decoration: none;
     }
   `}
 `
@@ -26,6 +20,7 @@ export const RecommendedContent = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2.4rem;
+    width: 100%;
 
     .recommended-title {
       color: ${theme.colors.white};
