@@ -3,6 +3,7 @@ import Image from 'next/image'
 import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
 import { poolsKacy, poolsKacyFuji } from '../../../constants/pools'
+import { env } from '@/env.mjs'
 
 import Button from '../../../components/Button'
 import LockPoolCard from './LockPoolCard'
@@ -31,7 +32,7 @@ const LockVote = () => {
         <div className="flex">
           <S.LockPoolContainer>
             <S.LockPoolContent>
-              {process.env.NEXT_PUBLIC_MASTER === '1'
+              {env.NEXT_PUBLIC_MASTER === '1'
                 ? poolsKacy.map(pool => (
                     <LockPoolCard
                       key={pool.pid}
