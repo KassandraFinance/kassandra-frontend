@@ -14,7 +14,11 @@ export const Wrapper = styled.header`
   margin: 0 auto;
   padding-block: 3.2rem;
   max-width: 118.8rem;
-  background-color: #151117;
+
+  background: transparent;
+  &[data-fixed='true'] {
+    background: #151117;
+  }
   padding-inline: 2.4rem;
 
   z-index: ${theme.layers.menu};

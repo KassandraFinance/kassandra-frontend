@@ -3,7 +3,6 @@ import { device } from '@/styles/theme'
 
 export const ArticlesSection = styled.div`
   position: relative;
-  /* overflow-x: hidden; */
 `
 
 export const LeftLightImageWrapper = styled.div`
@@ -32,17 +31,9 @@ export const RightLightImageWrapper = styled.div`
 `
 
 export const ArticlesMainContent = styled.div`
-  max-width: 192rem;
+  max-width: 118.8rem;
+  padding-inline: 2.4rem;
   margin-inline: auto;
-  padding-inline: 6.4rem;
-
-  @media ${device.tabletLarge} {
-    padding-inline: 3.2rem;
-  }
-
-  @media ${device.mobile} {
-    padding-inline: 1.6rem;
-  }
 `
 
 export const ArticlesMainContainerHeader = styled.div`
@@ -83,6 +74,16 @@ export const ArticlesMainContainerHeader = styled.div`
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 1.6rem;
+
+      .button-mobile {
+        width: 100%;
+      }
+
+      > div {
+        > div {
+          width: 100%;
+        }
+      }
     }
   `}
 `
@@ -167,13 +168,7 @@ export const ButtonGroupWrapper = styled.div`
 `
 
 export const TabsWrapper = styled.div`
-  padding-inline: 6.4rem;
-
-  @media ${device.tabletLarge} {
-    padding-inline: 3.2rem;
-  }
-
-  @media ${device.mobile} {
-    padding-inline: 1.6rem;
-  }
+  max-width: 118.8rem;
+  padding-inline: 2.4rem;
+  margin-inline: auto;
 `

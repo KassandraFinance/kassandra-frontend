@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from 'styled-components'
-import { device } from '../../styles/theme'
+import { device } from '@/styles/theme'
 
 interface IRightSidebarProps {
   isContentShowing: boolean
@@ -45,12 +45,16 @@ export const RightSidebar = styled.aside<IRightSidebarProps>`
       margin-top: 0;
       padding-top: 14.8rem;
       overflow-y: auto;
-      max-height: calc(100vh - var(--header-height));
+      max-height: calc(100vh);
 
       background-color: ${isContentShowing ? 'transparent' : '#151117'};
       box-shadow: none;
 
       pointer-events: ${isContentShowing ? 'none' : 'all'};
+    }
+
+    @media ${device.mobile} {
+      max-height: calc(100vh - 68px);
     }
   `}
 `

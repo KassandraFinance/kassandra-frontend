@@ -64,6 +64,7 @@ const GlobalStyles: GlobalStyleComponent<
 
   html {
     font-size: 62.5%;
+    position: relative;
   }
 
   body {

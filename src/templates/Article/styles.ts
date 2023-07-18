@@ -2,7 +2,8 @@ import styled, { css, keyframes } from 'styled-components'
 import { device } from '../../styles/theme'
 
 export const Article = styled.article`
-  max-width: 120rem;
+  max-width: 118.8rem;
+  width: 100%;
   margin-inline: auto;
   position: relative;
 
@@ -11,7 +12,7 @@ export const Article = styled.article`
   align-items: flex-start;
 
   margin-top: 8rem;
-  padding-left: 3.2rem;
+  padding-inline: 2.4rem;
 
   @media ${device.tabletLarge} {
     padding-left: 0;
@@ -237,6 +238,60 @@ export const PostBottomLeftLight = styled.div`
   left: 0px;
 
   z-index: -1;
+
+  @media ${device.tabletLarge} {
+    display: none;
+  }
+`
+
+export const PostMiddleLeftLight = styled.div`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0px;
+
+  z-index: -1;
+
+  @media ${device.tabletLarge} {
+    display: none;
+  }
+`
+
+export const PostMiddleRightLight = styled.div`
+  position: absolute;
+  top: 15%;
+  right: 0px;
+
+  z-index: -1;
+
+  @media ${device.tabletLarge} {
+    display: none;
+  }
+`
+
+export const PostMiddleBottomRightLight = styled.div`
+  position: absolute;
+  bottom: 5%;
+  right: 0px;
+
+  z-index: -1;
+
+  @media ${device.tabletLarge} {
+    display: none;
+  }
+`
+
+export const Background = styled.div`
+  position: absolute;
+  top: var(--header-height);
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+
+  z-index: -1;
+
+  background-image: url('/assets/images/backgroundBlog/background.svg');
+  background-size: contain;
 
   @media ${device.tabletLarge} {
     display: none;

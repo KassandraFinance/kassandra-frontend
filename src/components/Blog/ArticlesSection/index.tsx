@@ -1,6 +1,5 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
 import { z } from 'zod'
 
 import type { PostDataType } from '@/store/reducers/postsSlice'
@@ -19,16 +18,14 @@ import AppliedFilters from '../AppliedFilters'
 import ArticleList from '../ArticleList'
 import ArticleCard from '../ArticleCard'
 import ArticlesFilterModal from '../ArticlesFilterModal'
-import MobileButtonGroup from '../MobileButtonGroup'
 import { Loading } from '../Loading'
 
 import Button from '@/components/Button'
 import { ModalRoot, ModalTrigger } from '@/components/Modals/ModalBlog'
 import { Tabs } from '@/components/Tabs'
 import Pagination from '@/components/Pagination'
+import ViewButtonGroup from '@/components/ViewButtonGroup'
 
-import { GridIcon } from '@/Icons/Grid'
-import { ListIcon } from '@/Icons/List'
 import * as S from './styles'
 
 export type Filter = {
@@ -95,34 +92,6 @@ const ArticlesSection = ({
   const resetPage = React.useCallback(() => {
     setPage(1)
   }, [setPage])
-
-  const views = [
-    {
-      value: 'card',
-      text: 'Card View',
-      disabled: selectedView === 'card'
-    },
-    {
-      value: 'list',
-      text: 'List View',
-      disabled: selectedView === 'list'
-    }
-  ]
-
-  const handleSelectView = (view: string) => {
-    router.push(
-      {
-        query: {
-          ...router.query,
-          view
-        }
-      },
-      undefined,
-      {
-        shallow: true
-      }
-    )
-  }
 
   const handleResetFilter = () => {
     setSelectedFilters(initialArticlesFilter)
@@ -294,6 +263,21 @@ const ArticlesSection = ({
     ...readingDifficulties
   ].filter(filter => filter !== '')
 
+  const handleSelectView = (view: string) => {
+    router.push(
+      {
+        query: {
+          ...router.query,
+          view
+        }
+      },
+      undefined,
+      {
+        shallow: true
+      }
+    )
+  }
+
   return (
     <S.ArticlesSection>
       <S.TabsWrapper>
@@ -331,27 +315,7 @@ const ArticlesSection = ({
             </ModalRoot>
           </div>
           <S.ButtonGroupWrapper>
-            <MobileButtonGroup
-              options={views}
-              selectedOption={selectedView}
-              leftIcon={selectedView === 'card' ? <GridIcon /> : <ListIcon />}
-              withDropdownIndicator
-              size="large"
-            >
-              {views
-                .filter(view => view.value !== selectedView)
-                .map(view => (
-                  <MobileButtonGroup.Item
-                    key={view.value}
-                    onClick={() => handleSelectView(view.value)}
-                    leftIcon={
-                      view.value === 'card' ? <GridIcon /> : <ListIcon />
-                    }
-                  >
-                    {view.text}
-                  </MobileButtonGroup.Item>
-                ))}
-            </MobileButtonGroup>
+            <ViewButtonGroup setView={handleSelectView} view={selectedView} />
           </S.ButtonGroupWrapper>
         </S.ArticlesMainContainerHeader>
 
@@ -427,22 +391,6 @@ const ArticlesSection = ({
           take={20}
         />
       </S.PaginationWrapper>
-
-      <S.LeftLightImageWrapper>
-        <Image
-          src="/assets/images/blue-background-left-bottom.svg"
-          height={822.502}
-          width={752.648}
-        />
-      </S.LeftLightImageWrapper>
-
-      <S.RightLightImageWrapper>
-        <Image
-          src="/assets/images/blue-background-right-bottom.svg"
-          height={822.502}
-          width={752.648}
-        />
-      </S.RightLightImageWrapper>
     </S.ArticlesSection>
   )
 }

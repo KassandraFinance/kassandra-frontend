@@ -1,26 +1,18 @@
-import styled, { css } from 'styled-components'
-import theme, { device } from '../../styles/theme'
+import styled from 'styled-components'
+import theme from '../../styles/theme'
 
 interface IFooterProps {
   variant?: 'default' | 'blog-post'
 }
 
 export const Footer = styled.footer<IFooterProps>`
-  max-width: 120rem;
+  max-width: 118.8rem;
   margin: 0 auto;
-  padding: 4rem 3rem;
+  padding: 4rem 2.4rem;
   position: relative;
   z-index: 10000;
 
   color: ${theme.colors.snow};
-
-  @media (min-width: 1600px) {
-    max-width: 114rem;
-  }
-
-  @media ${device.tabletLarge} {
-    max-width: 114rem;
-  }
 
   @media (max-width: 770px) {
     margin-bottom: 4rem;
