@@ -11,7 +11,8 @@ export const env = createEnv({
   server: {
     NODE_ENV: z.string().default('development'),
     BREVO_API_KEY: z.string(),
-    BREVO_ID: z.string()
+    BREVO_ID: z.string(),
+    STRAPI_API_KEY: z.string()
   },
   runtimeEnv: {
     NEXT_PUBLIC_GIT_HUB_TOKEN: process.env.NEXT_PUBLIC_GIT_HUB_TOKEN,
@@ -20,6 +21,7 @@ export const env = createEnv({
     NEXT_PUBLIC_NODE_ENV: process.env.NEXT_PUBLIC_NODE_ENV,
     NEXT_PUBLIC_CLARITY: process.env.NEXT_PUBLIC_CLARITY,
     BREVO_API_KEY: process.env.BREVO_API_KEY,
-    BREVO_ID: process.env.BREVO_ID
+    BREVO_ID: process.env.BREVO_ID,
+    STRAPI_API_KEY: process.env.STRAPI_API_KEY
   }
 })

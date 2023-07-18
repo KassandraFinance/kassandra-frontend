@@ -24,7 +24,7 @@ export const kassandraBlogApi = new GraphQLClient(
       Authorization: `Bearer ${
         typeof window !== 'undefined'
           ? 'TRIED_TO_ACCESS_SERVER_VARIABLES'
-          : process.env.STRAPI_API_KEY
+          : env.STRAPI_API_KEY
       }`
     },
     fetch: (input: RequestInfo | URL, init?: RequestInit | undefined) => {
