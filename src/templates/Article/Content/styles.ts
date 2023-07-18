@@ -58,7 +58,7 @@ export const ShareArticle = styled.div`
     border-bottom: 1px solid ${theme.colors.neutral95};
 
     p {
-      color: ${theme.colors.white};
+      color: ${theme.colors.snow};
       font-weight: ${theme.font.weight.medium};
       font-size: ${theme.font.sizes.font16};
       line-height: 2.4rem;
