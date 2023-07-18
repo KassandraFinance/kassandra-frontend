@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { env } from '@/env.mjs'
 import NextCors from 'nextjs-cors'
 
 const isValidEmail = (email: string): boolean => {
@@ -27,13 +28,13 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
         method,
         headers: {
           'content-type': 'application/json',
-          'api-key': process.env.BREVO_API_KEY ?? '',
+          'api-key': env.BREVO_API_KEY ?? '',
           accept: 'application/json'
         },
         body: JSON.stringify({
           email: email.toLowerCase(),
           updateEnabled: false,
-          listIds: [Number(process.env.BREVO_ID)]
+          listIds: [Number(env.BREVO_ID)]
         })
       })
 
