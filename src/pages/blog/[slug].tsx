@@ -6,8 +6,9 @@ import { flattenObj } from '@/utils/strapiResponseTransformer'
 import { strapiClient } from '@/graphQLClients'
 
 import Article from '@/templates/Article'
+import { SocialIconType } from '@/components/Blog/Authors'
 
-import { SocialIconType } from '@/components/RightSidebar/Authors'
+import * as S from '@/templates/Article/styles'
 
 interface IPost {
   id: string
@@ -101,7 +102,7 @@ const ArticlePage = ({ post, posts, isUserPRO }: IArticleProps) => {
         {/* Open Graph  Meta Tags  */}
         <meta
           property="og:url"
-          content={`https://heimdall.land/research/${post.slug}`}
+          content={`https://heimdall.land/blog/${post.slug}`}
           key="og:url"
         />
         <meta property="og:title" content={post.title} key="og:title" />
@@ -115,7 +116,7 @@ const ArticlePage = ({ post, posts, isUserPRO }: IArticleProps) => {
         {/* Twitter Meta Tags  */}
         <meta
           property="twitter:url"
-          content={`https://heimdall.land/research/${post.slug}`}
+          content={`https://heimdall.land/blog/${post.slug}`}
           key="twitter:url"
         />
         <meta
@@ -130,6 +131,8 @@ const ArticlePage = ({ post, posts, isUserPRO }: IArticleProps) => {
         />
         <meta name="twitter:image" content={post.banner.url} />
       </Head>
+
+      <S.Background />
       <Article post={post} posts={posts} isUserPRO={isUserPRO} />
     </>
   )

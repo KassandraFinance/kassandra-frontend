@@ -50,7 +50,11 @@ const GlobalStyles: GlobalStyleComponent<
   }
 
   :root {
-    --default-font-sans: 'Rubik', -apple-system, Roboto, 'Open Sans', sans-serif
+    --default-font-sans: 'Rubik', -apple-system, Roboto, 'Open Sans', sans-serif;
+    --header-height: 101px;
+    @media (max-width: 576px) {
+      --header-height: 91px;
+    }
   }
 
   html, body, #root {
@@ -60,6 +64,7 @@ const GlobalStyles: GlobalStyleComponent<
 
   html {
     font-size: 62.5%;
+    position: relative;
   }
 
   body {

@@ -1,11 +1,11 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
-// import ChevronLeft from '@assets/arrows/chevron-left.svg'
+import { ChevronIcon } from '@/Icons'
 
 import { ImageModalTrigger } from '../ImageModal'
 
-import Button from '@/components/Button'
+import BlogButton from '@/components/Blog/Button'
 import { Loading } from '@/components/Blog/Loading'
 import { HandleSelectImageProps, IPost, getVariantByDifficulty } from '..'
 
@@ -31,15 +31,15 @@ export const ArticleHeader = ({
   return (
     <S.Header ref={headerContentRef}>
       <S.GoBackWrapper>
-        <Button
+        <BlogButton
+          variant="ghost"
           className="back-button"
-          // leftIcon={ChevronLeft}
-          // variant="ghost"
           size="medium"
-          href="/research"
+          href="/blog"
+          leftIcon={<ChevronIcon style={{ transform: 'rotate(90deg)' }} />}
         >
-          Back to Research
-        </Button>
+          Back to blog
+        </BlogButton>
       </S.GoBackWrapper>
       <S.BackTags>
         {router.isFallback && <Loading />}
@@ -101,7 +101,6 @@ export const ArticleHeader = ({
           <S.StyledTag
             variant="blue"
             size="large"
-            shape="rounded"
             capitalization="capitalize"
             onClick={() => {
               handleArticlePageClick('Pro')
@@ -117,7 +116,6 @@ export const ArticleHeader = ({
               post.readingDifficulty.difficultyName
             )}
             size="large"
-            shape="rounded"
             capitalization="capitalize"
             onClick={() =>
               handleArticlePageClick(post?.readingDifficulty.difficultyName)
@@ -131,8 +129,7 @@ export const ArticleHeader = ({
           <S.StyledTag
             key={tag.name}
             variant="red"
-            size="large"
-            shape="rounded"
+            size="medium"
             capitalization="capitalize"
             onClick={() => handleArticlePageClick(tag.name)}
             href={`/research?tab=${allArticlesTab}&tags=${tag.name}`}

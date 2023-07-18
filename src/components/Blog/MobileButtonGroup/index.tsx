@@ -74,9 +74,7 @@ const MobileButtonGroup = <T extends Option[]>({
               <ChevronIcon
                 className="dropdown-indicator"
                 style={{
-                  transform: isDropdownOpen
-                    ? 'rotate(-270deg)'
-                    : 'rotate(-90deg)'
+                  transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0)'
                 }}
               />
             )}

@@ -5,6 +5,7 @@ import IconButton from '@/components/IconButton'
 import { DiscordIcon, GithubIcon, RedditIcon, TwitterIcon } from '@/Icons'
 
 import * as S from './styles'
+
 const socialIconByName = {
   TWITTER: TwitterIcon,
   DISCORD: DiscordIcon,

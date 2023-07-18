@@ -3,7 +3,7 @@ import React from 'react'
 
 import Overlay from '@/components/Overlay'
 
-import arrowDownThin from '@/../public/assets/utilities/arrow-down-thin.svg'
+import arrowDownThin from '@assets/utilities/arrow-down-thin.svg'
 
 import * as S from './styles'
 

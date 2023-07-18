@@ -83,7 +83,7 @@ const buttonVariants: ButtonVariantsType = {
   ghost: (isLink, isBlue) => css`
     border: none;
 
-    color: ${isLink || isBlue ? theme.colors.primary50 : theme.colors.dark10};
+    color: ${isLink || isBlue ? theme.colors.primary50 : theme.colors.snow};
 
     background-color: transparent;
 
@@ -252,17 +252,17 @@ interface IButtonWrapperProps {
 }
 
 export const ButtonWrapper = styled.button<IButtonWrapperProps>`
-  ${({ variant, size, isLink, isBlue, theme }) => css`
+  ${({ variant, size, isLink = false, isBlue = false, theme }) => css`
     display: flex;
     gap: ${size === 'small' ? '0.4rem' : '0.8rem'};
     justify-content: center;
     align-items: center;
-
+    text-decoration: none;
     box-sizing: border-box;
     border-radius: 8px;
 
     font-weight: ${theme.font.weight.medium};
-    ${buttonVariants[variant](isLink ?? false, isBlue ?? false)}
+    ${buttonVariants[variant](isLink, isBlue)}
     ${buttonSizes[size](variant)}
 
 

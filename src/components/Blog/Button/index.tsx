@@ -1,7 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
 
-import type { SVGFuncElement } from '@/types/svg'
 import { ChevronIcon } from '@/Icons'
 
 import * as S from './styles'
@@ -19,8 +18,8 @@ interface IButtonProps extends React.HTMLAttributes<any> {
   size: ButtonSizes
   href?: string
   isExternalLink?: boolean
-  leftIcon?: SVGFuncElement
-  rightIcon?: SVGFuncElement
+  leftIcon?: JSX.Element
+  rightIcon?: JSX.Element
   hasRightChevron?: boolean
   disabled?: boolean
   // this prop is used for ghost buttons that should be blue
@@ -45,8 +44,6 @@ const Button = React.forwardRef<any, IButtonProps>(
     ref
   ) => {
     const isLink = !!href && rest.variant === 'ghost'
-    const LeftIcon = leftIcon
-    const RightIcon = rightIcon
 
     if (href && !isExternalLink) {
       return (
@@ -59,9 +56,9 @@ const Button = React.forwardRef<any, IButtonProps>(
             ref={ref}
             as="a"
           >
-            {LeftIcon && <LeftIcon />}
+            {leftIcon}
             {children}
-            {RightIcon && <RightIcon />}
+            {rightIcon}
             {hasRightChevron && <ChevronIcon className="chevron" />}
           </S.ButtonWrapper>
         </Link>
@@ -81,9 +78,9 @@ const Button = React.forwardRef<any, IButtonProps>(
           target="_blank"
           rel="noopener noreferrer"
         >
-          {LeftIcon && <LeftIcon />}
+          {leftIcon}
           {children}
-          {RightIcon && <RightIcon />}
+          {rightIcon}
           {hasRightChevron && <ChevronIcon className="chevron" />}
         </S.ButtonWrapper>
       )
@@ -98,9 +95,9 @@ const Button = React.forwardRef<any, IButtonProps>(
         ref={ref}
         type={type ?? 'button'}
       >
-        {LeftIcon && <LeftIcon />}
+        {leftIcon}
         {children}
-        {RightIcon && <RightIcon />}
+        {rightIcon}
         {hasRightChevron && <ChevronIcon className="chevron" />}
       </S.ButtonWrapper>
     )

@@ -12,18 +12,25 @@ export const Wrapper = styled.header`
   align-items: center;
 
   margin: 0 auto;
-  margin-top: 3.2rem;
+  padding-block: 3.2rem;
   max-width: 118.8rem;
+
+  background: transparent;
+  &[data-fixed='true'] {
+    background: #151117;
+  }
   padding-inline: 2.4rem;
 
   z-index: ${theme.layers.menu};
 
   @media (max-width: 992px) {
-    margin-top: 2.4rem;
+    &[data-fixed='true'] {
+      position: fixed;
+    }
   }
 
-  @media (max-width: 576px) {
-    padding-inline: 1.6rem;
+  @media (max-width: 992px) {
+    height: var(--header-height);
   }
 `
 
