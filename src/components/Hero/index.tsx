@@ -4,6 +4,7 @@ import Subtitle from '../Subtitle'
 import SectionTitle from '../SectionTitle'
 
 import * as S from './styles'
+import Image from 'next/image'
 
 interface IHeroProps {
   titleNumber: string
@@ -11,8 +12,8 @@ interface IHeroProps {
   titleColor: string
   subTitle: string
   description: string
-  backgroundImg: string
-  backgroundImgHight: string
+  backgroundImg?: string
+  backgroundImgHight?: string
   children: JSX.Element
 }
 
@@ -28,10 +29,12 @@ const Hero = ({
 }: IHeroProps) => {
   return (
     <S.Hero>
-      <S.BackgroundImage
-        backgroundImg={backgroundImg}
-        backgroundImgHight={backgroundImgHight}
-      />
+      {backgroundImg && backgroundImgHight && (
+        <S.BackgroundImage
+          backgroundImg={backgroundImg}
+          backgroundImgHight={backgroundImgHight}
+        />
+      )}
 
       <S.TextContainer>
         <SectionTitle
@@ -47,6 +50,14 @@ const Hero = ({
       </S.TextContainer>
 
       <ScrollAnimation />
+
+      <S.LightImageWrapper>
+        <Image
+          src="/assets/images/yellow-background-blog.svg"
+          height={822.502}
+          width={752.648}
+        />
+      </S.LightImageWrapper>
     </S.Hero>
   )
 }

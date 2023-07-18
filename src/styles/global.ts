@@ -11,7 +11,7 @@ type GlobalStylesProps = {
 const GlobalStyles: GlobalStyleComponent<
   GlobalStylesProps,
   DefaultTheme
-> = createGlobalStyle` 
+> = createGlobalStyle`
    * {
     margin: 0;
     padding: 0;
@@ -47,6 +47,10 @@ const GlobalStyles: GlobalStyleComponent<
     &:hover {
       background-color: rgba(255, 255, 255, 0.3);
     }
+  }
+
+  :root {
+    --default-font-sans: 'Rubik', -apple-system, Roboto, 'Open Sans', sans-serif
   }
 
   html, body, #root {

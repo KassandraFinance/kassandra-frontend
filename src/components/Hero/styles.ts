@@ -1,3 +1,4 @@
+import { device } from '@/styles/theme'
 import styled, { css, keyframes } from 'styled-components'
 
 export const Hero = styled.div`
@@ -15,6 +16,18 @@ export const Hero = styled.div`
       padding-inline: 1.6rem;
     }
   `}
+`
+
+export const LightImageWrapper = styled.div`
+  position: absolute;
+  bottom: -550px;
+  left: -120px;
+
+  z-index: 0;
+
+  @media ${device.mobile} {
+    display: none;
+  }
 `
 
 interface IBackgroundImageProps {

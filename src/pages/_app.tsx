@@ -1,5 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
+import { Provider } from 'react-redux'
 import { AppProps } from 'next/app'
 import { MatomoProvider, createInstance } from '@datapunt/matomo-tracker-react'
 import { ThemeProvider } from 'styled-components'
@@ -19,6 +20,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Toastify from '../components/Toastify'
 import { env } from '@/env.mjs'
+import { store } from '@/store/store'
 
 const matomoUrl = 'https://stats.kassandra.finance'
 
@@ -47,58 +49,60 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        <ReactQueryDevtools />
-        <MatomoProvider value={instance}>
-          <ThemeProvider theme={theme}>
-            <Head>
-              {/* Primary Meta Tags */}
-              <meta
-                name="title"
-                content="Kassandra DAO - Tokenized crypto portfolios"
-              />
+      <Provider store={store}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <ReactQueryDevtools />
+          <MatomoProvider value={instance}>
+            <ThemeProvider theme={theme}>
+              <Head>
+                {/* Primary Meta Tags */}
+                <meta
+                  name="title"
+                  content="Kassandra DAO - Tokenized crypto portfolios"
+                />
 
-              {/* Open Graph / Facebook */}
-              <meta property="og:type" content="website" />
-              <meta
-                property="og:title"
-                content="Kassandra DAO - Tokenized crypto portfolios"
-              />
-              <meta
-                property="og:image"
-                content="https://kassandra.finance/kacy-og.png"
-              />
-              <meta property="og:site_name" content="Kassandra" />
-              <meta property="og:image:width" content="1012" />
-              <meta property="og:image:height" content="506" />
+                {/* Open Graph / Facebook */}
+                <meta property="og:type" content="website" />
+                <meta
+                  property="og:title"
+                  content="Kassandra DAO - Tokenized crypto portfolios"
+                />
+                <meta
+                  property="og:image"
+                  content="https://kassandra.finance/kacy-og.png"
+                />
+                <meta property="og:site_name" content="Kassandra" />
+                <meta property="og:image:width" content="1012" />
+                <meta property="og:image:height" content="506" />
 
-              {/* Twitter */}
-              <meta property="twitter:card" content="summary_large_image" />
-              <meta
-                property="twitter:title"
-                content="Kassandra DAO - Tokenized crypto portfolios"
-              />
-              <meta
-                property="twitter:image"
-                content="https://kassandra.finance/kacy-og.png"
-              />
-              <meta property="twitter:site" content="@dao_kassandra" />
+                {/* Twitter */}
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta
+                  property="twitter:title"
+                  content="Kassandra DAO - Tokenized crypto portfolios"
+                />
+                <meta
+                  property="twitter:image"
+                  content="https://kassandra.finance/kacy-og.png"
+                />
+                <meta property="twitter:site" content="@dao_kassandra" />
 
-              <link rel="icon" href="/favicon.ico" />
-              <link
-                rel="icon"
-                href="https://kassandra.finance/favicon.svg"
-                sizes="any"
-              />
-            </Head>
-            <Toastify />
-            <GlobalStyles />
-            <Header />
-            <Component {...pageProps} />
-            {router.pathname !== '/404' && <Footer />}
-          </ThemeProvider>
-        </MatomoProvider>
-      </Hydrate>
+                <link rel="icon" href="/favicon.ico" />
+                <link
+                  rel="icon"
+                  href="https://kassandra.finance/favicon.svg"
+                  sizes="any"
+                />
+              </Head>
+              <Toastify />
+              <GlobalStyles />
+              <Header />
+              <Component {...pageProps} />
+              {router.pathname !== '/404' && <Footer />}
+            </ThemeProvider>
+          </MatomoProvider>
+        </Hydrate>
+      </Provider>
     </QueryClientProvider>
   )
 }

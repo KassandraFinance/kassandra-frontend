@@ -80,6 +80,17 @@ const Header = () => {
           </S.MenuLink>
         </Link>
 
+        <Link href="/blog" passHref>
+          <S.MenuLink
+            active={pathName === '/blog'}
+            onClick={() =>
+              trackEventFunction('click-on-link', 'Blog', 'header')
+            }
+          >
+            Blog
+          </S.MenuLink>
+        </Link>
+
         <S.MenuBottom>
           <S.ButtonsWrapper>
             <S.ButtonOptions onClick={() => setIsOpenModal(true)}>
