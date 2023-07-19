@@ -1,0 +1,10 @@
+query ResearchTabs {
+  tabs {
+    data {
+      attributes {
+        tabName
+        position
+      }
+    }
+  }
+}

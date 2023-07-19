@@ -22,7 +22,7 @@ const Header = () => {
   const pathName = router.pathname
 
   return (
-    <S.Wrapper id="top">
+    <S.Wrapper id="top" data-fixed={router.pathname === '/blog/[slug]'}>
       <S.LogoWrapper>
         <Link href="/" passHref>
           <a className="logo-desktop">
@@ -77,6 +77,17 @@ const Header = () => {
             }
           >
             Foundation
+          </S.MenuLink>
+        </Link>
+
+        <Link href="/blog" passHref>
+          <S.MenuLink
+            active={pathName === '/blog'}
+            onClick={() =>
+              trackEventFunction('click-on-link', 'Blog', 'header')
+            }
+          >
+            Blog
           </S.MenuLink>
         </Link>
 

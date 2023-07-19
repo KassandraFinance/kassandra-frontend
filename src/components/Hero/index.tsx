@@ -11,8 +11,8 @@ interface IHeroProps {
   titleColor: string
   subTitle: string
   description: string
-  backgroundImg: string
-  backgroundImgHight: string
+  backgroundImg?: string
+  backgroundImgHight?: string
   children: JSX.Element
 }
 
@@ -28,10 +28,12 @@ const Hero = ({
 }: IHeroProps) => {
   return (
     <S.Hero>
-      <S.BackgroundImage
-        backgroundImg={backgroundImg}
-        backgroundImgHight={backgroundImgHight}
-      />
+      {backgroundImg && backgroundImgHight && (
+        <S.BackgroundImage
+          backgroundImg={backgroundImg}
+          backgroundImgHight={backgroundImgHight}
+        />
+      )}
 
       <S.TextContainer>
         <SectionTitle

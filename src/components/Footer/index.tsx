@@ -5,6 +5,7 @@ import * as S from './styles'
 
 const Footer = () => {
   const { trackEventFunction } = useMatomoEcommerce()
+
   return (
     <S.Footer>
       <S.Container>
