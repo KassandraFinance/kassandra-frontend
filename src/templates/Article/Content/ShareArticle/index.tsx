@@ -38,7 +38,7 @@ export const ShareArticle = ({
         onClick={handleClick}
         data-size="large"
       >
-        SHARE
+        Share
       </Button>
     </S.ShareArticle>
   )

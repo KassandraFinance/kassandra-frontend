@@ -2,6 +2,7 @@ import { IPost } from '..'
 
 import ArticleList from '@/components/Blog/ArticleList'
 import Button from '@/components/Blog/Button'
+import { CircledArrowIcon } from '@/Icons/CircledArrow'
 
 import * as S from './styles'
 
@@ -42,11 +43,9 @@ const Recommended = ({
         size="large"
         className="readmore-btn"
         href="/blog"
-        isBlue
-        hasRightChevron
         onClick={() => handleArticlePageClick('readmore-btn', 'DeFi')}
       >
-        Read more from DeFi
+        Read more from DeFi <CircledArrowIcon />
       </Button>
     </S.Recommended>
   )
