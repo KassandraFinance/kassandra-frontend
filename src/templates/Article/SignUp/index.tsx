@@ -1,10 +1,10 @@
+import React from 'react'
 import useSubscribe from '@/hooks/useSubscribe'
 
 import Input from '@/components/Blog/Input'
 import { RightArrowIcon } from '@/Icons/RightArrow'
 
 import * as S from './styles'
-import React from 'react'
 
 const SignUp = () => {
   const [inputText, setInputText] = React.useState('')
@@ -13,10 +13,9 @@ const SignUp = () => {
   return (
     <S.SignUp>
       <S.SignUpContent
-        // onSubmit={event =>
-        //   handleSubmitWithToast({ event, sendInBlueListId: 'general' })
-        // }
-        onSubmit={() => console.log('submitted')}
+        onSubmit={event =>
+          handleSubmitWithToast({ event, sendInBlueListId: 'general' })
+        }
       >
         <S.SignUpHeader>
           <h4>Sign up to keep up with the latest articles</h4>
@@ -34,6 +33,7 @@ const SignUp = () => {
               type="email"
               name="email"
             />
+
             <button type="submit" className="input-btn">
               <RightArrowIcon />
             </button>

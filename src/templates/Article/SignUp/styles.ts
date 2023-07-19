@@ -72,9 +72,9 @@ export const Input = styled.div`
     justify-content: center;
 
     input {
-      height: 6.4rem;
-
       background-color: ${theme.colors.snow};
+      color: ${theme.colors.darkPurple};
+      border: 1px solid rgba(255, 255, 255, 0.15);
 
       font-weight: ${theme.font.weight.light};
       font-size: ${theme.font.sizes.font16};
@@ -97,14 +97,36 @@ export const Input = styled.div`
       align-items: center;
       justify-content: flex-end;
       padding-right: 1.6rem;
+      cursor: pointer;
+
+      svg {
+        path {
+          stroke: ${theme.colors.darkPurple};
+        }
+      }
 
       @media ${device.mobile} {
         height: 6rem;
       }
     }
 
-    @media ${device.mobile} {
-      flex-direction: column;
+    .mail-icon {
+      position: absolute;
+      display: flex;
+      align-items: center;
+
+      left: 1.6rem;
+
+      bottom: 0;
+      top: 0;
+
+      svg {
+        width: 1.6rem;
+        height: 1.6rem;
+        path {
+          fill: ${theme.colors.darkPurple};
+        }
+      }
     }
   `}
 `

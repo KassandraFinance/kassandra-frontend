@@ -16,7 +16,6 @@ import { Content } from './Content'
 import { ProgressBar } from './ProgressBar'
 
 import * as S from './styles'
-import Image from 'next/image'
 
 export const getVariantByDifficulty = (difficulty: string) => {
   switch (difficulty) {

@@ -112,8 +112,6 @@ export const Error = styled.p`
   ${({ theme }) => css`
     display: none;
 
-    margin-top: 0.8rem;
-
     color: ${theme.colors.red};
     font-weight: ${theme.font.weight.light};
     font-size: ${theme.font.sizes.font14};
