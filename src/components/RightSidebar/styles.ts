@@ -7,6 +7,7 @@ interface IRightSidebarProps {
 
 export const RightSidebar = styled.aside<IRightSidebarProps>`
   ${({ theme, isContentShowing }) => css`
+    min-width: 28.6rem;
     max-width: min(38rem, 100%);
     width: 100%;
     position: sticky;
