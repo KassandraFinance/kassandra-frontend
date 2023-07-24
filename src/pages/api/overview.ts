@@ -1,7 +1,31 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import NextCors from 'nextjs-cors'
 
-const URL_COINGECKO = 'https://api.coingecko.com/api/v3'
+async function getInfoTokens(coingeckoId: string) {
+  const resInfoToken = await fetch(process.env.HEIMDALL_API ?? '', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `BearerInternal ${process.env.HEIMDALL_API_KEY}`
+    },
+    body: JSON.stringify({
+      query: `
+        query MarketCoin($marketCoinId: String!) {
+          marketCoin(marketCoinID: $marketCoinId) {
+            price
+            marketCap
+            circulatingSupply
+            pricePercentageChangeIn24h
+          }
+        }
+      `,
+      variables: {
+        marketCoinId: coingeckoId
+      }
+    })
+  })
+  return (await resInfoToken.json()).data?.marketCoin
+}
 
 export default async (request: NextApiRequest, response: NextApiResponse) => {
   try {
@@ -12,19 +36,19 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
       optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
     })
 
-    const urlPriceKacyOnCoingecko = `${URL_COINGECKO}/coins/kassandra?localization=false&tickers=false&community_data=false`
+    const requestAddress = Array.isArray(request.query.address)
+      ? request.query.address.toString()
+      : request.query.address
 
-    const responseKacyPrice = await fetch(urlPriceKacyOnCoingecko)
-    const responseKacyPriceJson = await responseKacyPrice.json()
-    const kacy = responseKacyPriceJson.market_data
+    const tokenInfo = await getInfoTokens(requestAddress)
 
     response.setHeader('Cache-Control', 's-maxage=30, stale-while-revalidate')
 
     response.json({
-      kacyPrice: kacy.current_price.usd,
-      supply: kacy.circulating_supply,
-      marketCap: kacy.market_cap.usd,
-      kacyPercentage: kacy.price_change_percentage_24h
+      tokenPrice: tokenInfo.price,
+      marketCap: tokenInfo.marketCap,
+      supply: parseInt(tokenInfo.circulatingSupply),
+      tokenPercentage: tokenInfo.pricePercentageChangeIn24h
     })
   } catch (error) {
     response.json({
