@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 
 export const fetchKacyData = async () => {
-  const res = await fetch('/api/overview?address=kassandra').then(res =>
+  const res = await fetch('/api/overview?coingeckoId=kassandra').then(res =>
     res.json()
   )
 

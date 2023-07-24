@@ -36,9 +36,9 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
       optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
     })
 
-    const requestAddress = Array.isArray(request.query.address)
-      ? request.query.address.toString()
-      : request.query.address
+    const requestAddress = Array.isArray(request.query.coingeckoId)
+      ? request.query.coingeckoId.toString()
+      : request.query.coingeckoId
 
     const tokenInfo = await getInfoTokens(requestAddress)
 
