@@ -60,6 +60,21 @@ const Header = () => {
           </S.MenuLink>
         </Link>
 
+        <Link href="/incentives-program" passHref>
+          <S.MenuLink
+            active={pathName === '/incentives-program'}
+            onClick={() =>
+              trackEventFunction(
+                'click-on-link',
+                'incentives-program',
+                'header'
+              )
+            }
+          >
+            Incentives Program
+          </S.MenuLink>
+        </Link>
+
         <Link href="/dao" passHref>
           <S.MenuLink
             active={pathName === '/dao'}
