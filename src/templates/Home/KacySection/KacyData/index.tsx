@@ -45,7 +45,7 @@ const KacyData = ({ setIsOpenModal }: IKacyDataProps) => {
 
   React.useEffect(() => {
     if (data) {
-      const price = data.kacyPrice?.toLocaleString('en-US', {
+      const price = data.tokenPrice?.toLocaleString('en-US', {
         style: 'currency',
         currency: 'USD',
         minimumFractionDigits: 2
