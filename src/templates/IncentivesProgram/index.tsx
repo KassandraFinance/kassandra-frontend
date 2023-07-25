@@ -1,5 +1,19 @@
+import Hero from './Hero'
+
+import * as S from './styles'
+
 const IncentivesProgram = () => {
-  return <h1>Incentives Program</h1>
+  return (
+    <S.IncentivesProgram>
+      <S.IncentivesProgramWrapper>
+        <Hero />
+
+        <S.VideoWrapper>
+          <div>Video</div>
+        </S.VideoWrapper>
+      </S.IncentivesProgramWrapper>
+    </S.IncentivesProgram>
+  )
 }
 
 export default IncentivesProgram
