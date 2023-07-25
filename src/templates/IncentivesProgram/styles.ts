@@ -12,17 +12,9 @@ export const IncentivesProgramWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  `}
-`
 
-export const VideoWrapper = styled.div`
-  ${() => css`
-    padding-block: 8rem;
-
-    div {
-      width: 102.8rem;
-      height: 53.6rem;
-      background: #ccc;
+    @media (max-width: 576px) {
+      padding-inline: 1.6rem;
     }
   `}
 `
