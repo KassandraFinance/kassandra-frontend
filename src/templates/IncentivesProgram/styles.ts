@@ -18,15 +18,3 @@ export const IncentivesProgramWrapper = styled.div`
     }
   `}
 `
-
-export const VideoWrapper = styled.div`
-  ${() => css`
-    padding-block: 8rem;
-
-    div {
-      width: 102.8rem;
-      height: 53.6rem;
-      background: #ccc;
-    }
-  `}
-`
