@@ -13,7 +13,7 @@ export const Question = styled.div`
 
 type QuestionProps = { background: string }
 
-export const QuestionText = styled.p<QuestionProps>`
+export const QuestionText = styled.div<QuestionProps>`
   ${({ theme, background }) => css`
     font-size: ${theme.font.sizes.font16};
     font-weight: ${theme.font.weight.medium};

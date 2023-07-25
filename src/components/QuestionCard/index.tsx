@@ -37,7 +37,7 @@ const QuestionCard = ({
           )
         }}
       >
-        {question}
+        <p>{question}</p>
         <S.IconWrapper>
           {isOpen ? (
             <FAQminus width="16" height="16" />
