@@ -12,6 +12,10 @@ export const IncentivesProgramWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 576px) {
+      padding-inline: 1.6rem;
+    }
   `}
 `
 

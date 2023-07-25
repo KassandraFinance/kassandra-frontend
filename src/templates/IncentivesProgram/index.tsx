@@ -1,4 +1,5 @@
 import Hero from './Hero'
+import Questions from './Questions'
 
 import * as S from './styles'
 
@@ -11,6 +12,7 @@ const IncentivesProgram = () => {
         <S.VideoWrapper>
           <div>Video</div>
         </S.VideoWrapper>
+        <Questions />
       </S.IncentivesProgramWrapper>
     </S.IncentivesProgram>
   )
