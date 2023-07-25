@@ -38,6 +38,13 @@ export const QuestionsWidget = styled.div`
     border-radius: 20px;
     overflow: hidden;
 
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    ::-webkit-scrollbar {
+      width: 0px;
+    }
+
     @media (max-width: 576px) {
       width: 38.2rem;
       height: 40.8rem;
