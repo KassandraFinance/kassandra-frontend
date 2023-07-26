@@ -15,7 +15,7 @@ const QuestionsAndAnswers = () => {
           <S.Hr />
         </S.QuestionsAndAnswersHeader>
       </FadeInVertical>
-      <FadeInVertical threshold={0.4}>
+      <FadeInVertical threshold={0.1}>
         <FAQ />
       </FadeInVertical>
     </S.QuestionsAndAnswers>
