@@ -1,5 +1,7 @@
 import Hero from './Hero'
+import JoinIncentiveProgram from './JoinIncentiveProgram'
 import Questions from './Questions'
+import QuestionsAndAnswers from './QuestionsAndAnswers'
 import VideoSection from './VideoSection'
 
 import * as S from './styles'
@@ -11,6 +13,8 @@ const IncentivesProgram = () => {
         <Hero />
         <VideoSection />
         <Questions />
+        <QuestionsAndAnswers />
+        <JoinIncentiveProgram />
       </S.IncentivesProgramWrapper>
     </S.IncentivesProgram>
   )
