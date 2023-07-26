@@ -3,6 +3,7 @@ import JoinIncentiveProgram from './JoinIncentiveProgram'
 import Questions from './Questions'
 import QuestionsAndAnswers from './QuestionsAndAnswers'
 import VideoSection from './VideoSection'
+import FeaturedManager from './FeaturedManager'
 
 import * as S from './styles'
 
@@ -12,6 +13,7 @@ const IncentivesProgram = () => {
       <S.IncentivesProgramWrapper>
         <Hero />
         <VideoSection />
+        <FeaturedManager />
         <Questions />
         <QuestionsAndAnswers />
         <JoinIncentiveProgram />

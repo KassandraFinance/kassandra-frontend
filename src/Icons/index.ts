@@ -7,5 +7,6 @@ export { CloseIcon } from './Close'
 export { LockerIcon } from './Locker'
 export { SearchIcon } from './Search'
 export { CheckIcon } from './Check'
+export { LineGradient } from './lineGradient'
 
 export type SvgProps = React.SVGProps<SVGSVGElement>
