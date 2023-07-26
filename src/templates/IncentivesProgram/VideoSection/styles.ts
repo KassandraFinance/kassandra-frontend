@@ -1,3 +1,4 @@
+import { FadeInContainer } from '@/components/Animations/FadeIn/styles'
 import styled, { css } from 'styled-components'
 
 export const VideoSection = styled.div`
@@ -6,6 +7,12 @@ export const VideoSection = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
+    ${FadeInContainer} {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   `}
 `
 

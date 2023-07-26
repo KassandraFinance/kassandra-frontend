@@ -1,18 +1,24 @@
 import Paragraph from '@/components/Paragraph'
+import FadeIn from '@/components/Animations/FadeIn'
+import SectionSubtitle from '@/components/SectionSubtitle'
 
 import * as S from './styles'
-import SectionSubtitle from '@/components/SectionSubtitle'
+
+const YOUTUBE_LINK_INCENTIVE_PROGRAM =
+  'https://www.youtube.com/embed/Bfm3Ms2cTg0'
 
 const VideoSection = () => {
   return (
     <S.VideoSection>
-      <S.VideoWrapper>
-        <iframe
-          title="video"
-          src="https://www.youtube.com/embed/Bfm3Ms2cTg0"
-          allowFullScreen
-        />
-      </S.VideoWrapper>
+      <FadeIn threshold={0.2}>
+        <S.VideoWrapper>
+          <iframe
+            title="video"
+            src={YOUTUBE_LINK_INCENTIVE_PROGRAM}
+            allowFullScreen
+          />
+        </S.VideoWrapper>
+      </FadeIn>
 
       <S.TextWrapper>
         <SectionSubtitle text="Empower Our Community" />

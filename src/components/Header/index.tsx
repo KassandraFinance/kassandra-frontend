@@ -95,7 +95,7 @@ const Header = () => {
           </S.MenuLink>
         </Link>
 
-        <Link href="/blog" passHref>
+        {/* <Link href="/blog" passHref>
           <S.MenuLink
             active={pathName === '/blog'}
             onClick={() =>
@@ -104,7 +104,7 @@ const Header = () => {
           >
             Blog
           </S.MenuLink>
-        </Link>
+        </Link> */}
 
         <S.MenuBottom>
           <S.ButtonsWrapper>
