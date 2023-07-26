@@ -3,6 +3,7 @@ import Paragraph from '@/components/Paragraph'
 import SectionSubtitle from '@/components/SectionSubtitle'
 import FadeIn from '@/components/Animations/FadeIn'
 import FadeInVertical from '@/components/Animations/FadeInVertical'
+import Button from '@/components/Button'
 
 import { LineGradient } from '@/Icons'
 
@@ -44,18 +45,28 @@ const FeaturedManager = () => {
       </FadeIn>
 
       <FadeInVertical threshold={0.4}>
-        <S.FeaturedCardWrapper>
-          {dataFeature.map(item => {
-            return (
-              <FeaturedCard
-                key={item.cardNumber}
-                cardNumber={item.cardNumber}
-                paragraph={item.paragraph}
-                title={item.title}
-              />
-            )
-          })}
-        </S.FeaturedCardWrapper>
+        <S.FeaturedCardContainer>
+          <S.FeaturedCardWrapper>
+            {dataFeature.map(item => {
+              return (
+                <FeaturedCard
+                  key={item.cardNumber}
+                  cardNumber={item.cardNumber}
+                  paragraph={item.paragraph}
+                  title={item.title}
+                />
+              )
+            })}
+          </S.FeaturedCardWrapper>
+          <Button
+            className="get-started"
+            backgroundPrimary
+            text="Get Started"
+            as="a"
+            href="https://tally.so/r/3XrKdz"
+            target="_blank"
+          />
+        </S.FeaturedCardContainer>
       </FadeInVertical>
     </S.FeaturedManager>
   )

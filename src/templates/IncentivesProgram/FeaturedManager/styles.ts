@@ -13,7 +13,7 @@ export const FeaturedManager = styled.div`
     padding-inline: 2.4rem;
 
     @media (max-width: 576px) {
-      padding-inline: 1.6rem;
+      padding-inline: 0;
     }
   `}
 `
@@ -73,6 +73,22 @@ export const FeaturedManagerTitleWrapper = styled.div`
       -webkit-mask: linear-gradient(#fff 0 0) padding-box,
         linear-gradient(#fff 0 0);
       -webkit-mask-composite: destination-out;
+    }
+  `}
+`
+
+export const FeaturedCardContainer = styled.div`
+  ${() => css`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8rem;
+
+    .get-started {
+      width: 18.2rem;
+      height: 4rem;
+      margin-top: 8rem;
     }
   `}
 `

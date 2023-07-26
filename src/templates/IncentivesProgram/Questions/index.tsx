@@ -24,7 +24,7 @@ const Questions = () => {
     <S.Questions>
       <FadeInVertical threshold={0.4}>
         <S.QuestionsText>
-          <Subtitle text="Got a Questions?" />
+          <Subtitle text="Got a Question?" />
           <Paragraph text="We understand the importance of personalized support in bringing your pool to success. Book a meeting with our team to discuss your ideas, address any questions or concerns, and receive guidance throughout the process." />
         </S.QuestionsText>
       </FadeInVertical>
