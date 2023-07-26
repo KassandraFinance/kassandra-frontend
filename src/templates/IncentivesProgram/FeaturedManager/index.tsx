@@ -1,6 +1,8 @@
 import FeaturedCard from './FeaturedCard'
 import Paragraph from '@/components/Paragraph'
 import SectionSubtitle from '@/components/SectionSubtitle'
+import FadeIn from '@/components/Animations/FadeIn'
+import FadeInVertical from '@/components/Animations/FadeInVertical'
 
 import { LineGradient } from '@/Icons'
 
@@ -30,27 +32,31 @@ const dataFeature = [
 const FeaturedManager = () => {
   return (
     <S.FeaturedManager>
-      <S.Line>
-        <LineGradient width={2} height={300} />
-      </S.Line>
+      <FadeIn threshold={0.4}>
+        <S.Line>
+          <LineGradient width={2} height={300} />
+        </S.Line>
 
-      <S.FeaturedManagerTitleWrapper>
-        <SectionSubtitle text="Become a Featured Manager" />
-        <Paragraph text="It's easy to unleash your pool's potential with our 3-step program, empowering you to create a more innovative, better tailored, and highly lucrative tokenized portfolio." />
-      </S.FeaturedManagerTitleWrapper>
+        <S.FeaturedManagerTitleWrapper>
+          <SectionSubtitle text="Become a Featured Manager" />
+          <Paragraph text="It's easy to unleash your pool's potential with our 3-step program, empowering you to create a more innovative, better tailored, and highly lucrative tokenized portfolio." />
+        </S.FeaturedManagerTitleWrapper>
+      </FadeIn>
 
-      <S.FeaturedCardWrapper>
-        {dataFeature.map(item => {
-          return (
-            <FeaturedCard
-              key={item.cardNumber}
-              cardNumber={item.cardNumber}
-              paragraph={item.paragraph}
-              title={item.title}
-            />
-          )
-        })}
-      </S.FeaturedCardWrapper>
+      <FadeInVertical threshold={0.4}>
+        <S.FeaturedCardWrapper>
+          {dataFeature.map(item => {
+            return (
+              <FeaturedCard
+                key={item.cardNumber}
+                cardNumber={item.cardNumber}
+                paragraph={item.paragraph}
+                title={item.title}
+              />
+            )
+          })}
+        </S.FeaturedCardWrapper>
+      </FadeInVertical>
     </S.FeaturedManager>
   )
 }

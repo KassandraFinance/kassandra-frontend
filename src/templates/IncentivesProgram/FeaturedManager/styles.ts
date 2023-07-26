@@ -22,19 +22,12 @@ export const Line = styled.div`
   ${() => css`
     position: absolute;
     top: -29.8rem;
+    right: 50%;
 
     height: 36rem;
     width: 0.5rem;
 
     z-index: -1;
-
-    /* background: linear-gradient(
-      178.58deg,
-      rgba(0, 0, 0, 0) 30.85%,
-      #e843c4 63.4%,
-      #0029b0 97.58%
-    );
-    box-shadow: ; */
   `}
 `
 
