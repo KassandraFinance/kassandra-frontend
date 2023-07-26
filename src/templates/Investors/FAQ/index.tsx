@@ -1,6 +1,6 @@
 import React from 'react'
 
-import QuestionCard from './QuestionCard'
+import QuestionCard from '@/components/QuestionCard'
 
 import * as S from './styles'
 

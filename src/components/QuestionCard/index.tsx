@@ -1,11 +1,14 @@
 import React from 'react'
-import useMatomoEcommerce from '../../../../hooks/useMatomoEcommerce'
+import useMatomoEcommerce from '@/hooks/useMatomoEcommerce'
 
 import * as S from './styles'
+import { FAQminus } from '@/Icons/FAQminus'
+import { FAQmore } from '@/Icons/FAQmore'
 
 interface QuestionCardProps {
   question: string
   answer: string
+  background?: string
   link?: string
   linkText?: string
 }
@@ -13,6 +16,7 @@ interface QuestionCardProps {
 const QuestionCard = ({
   question,
   answer,
+  background = 'linear-gradient(134deg, #333437 0%, #1B1D22 100%)',
   link,
   linkText
 }: QuestionCardProps) => {
@@ -23,6 +27,7 @@ const QuestionCard = ({
   return (
     <S.Question>
       <S.QuestionText
+        background={background}
         onClick={() => {
           setIsOpen(!isOpen)
           trackEventFunction(
@@ -32,12 +37,14 @@ const QuestionCard = ({
           )
         }}
       >
-        {question}
-        {isOpen ? (
-          <img src="assets/iconGradient/FAQ-minus.svg" />
-        ) : (
-          <img src="assets/iconGradient/FAQ-more.svg" />
-        )}
+        <p>{question}</p>
+        <S.IconWrapper>
+          {isOpen ? (
+            <FAQminus width="16" height="16" />
+          ) : (
+            <FAQmore width="16" height="16" />
+          )}
+        </S.IconWrapper>
       </S.QuestionText>
       <S.Answer isOpen={isOpen}>
         <S.AnswerText>

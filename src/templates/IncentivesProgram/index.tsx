@@ -1,4 +1,7 @@
 import Hero from './Hero'
+import JoinIncentiveProgram from './JoinIncentiveProgram'
+import Questions from './Questions'
+import QuestionsAndAnswers from './QuestionsAndAnswers'
 import VideoSection from './VideoSection'
 import FeaturedManager from './FeaturedManager'
 
@@ -11,6 +14,9 @@ const IncentivesProgram = () => {
         <Hero />
         <VideoSection />
         <FeaturedManager />
+        <Questions />
+        <QuestionsAndAnswers />
+        <JoinIncentiveProgram />
       </S.IncentivesProgramWrapper>
     </S.IncentivesProgram>
   )
