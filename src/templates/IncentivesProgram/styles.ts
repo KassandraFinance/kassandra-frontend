@@ -4,7 +4,7 @@ export const IncentivesProgram = styled.main``
 
 export const IncentivesProgramWrapper = styled.div`
   ${() => css`
-    max-width: 114rem;
+    max-width: 144rem;
     margin: 0 auto;
     margin-top: 10.8rem;
 
