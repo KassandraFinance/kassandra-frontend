@@ -17,6 +17,10 @@ export const HeroWrapper = styled.div`
 
     .heroButton {
       margin-top: 3.2rem;
+
+      @media (max-width: 576px) {
+        width: 100%;
+      }
     }
 
     @media (max-width: 992px) {
@@ -24,7 +28,7 @@ export const HeroWrapper = styled.div`
     }
 
     @media (max-width: 576px) {
-      padding-inline: 1.6rem;
+      padding-inline: 0;
     }
   `}
 `

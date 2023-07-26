@@ -13,7 +13,7 @@ export const FeaturedManager = styled.div`
     padding-inline: 2.4rem;
 
     @media (max-width: 576px) {
-      padding-inline: 1.6rem;
+      padding-inline: 0;
     }
   `}
 `

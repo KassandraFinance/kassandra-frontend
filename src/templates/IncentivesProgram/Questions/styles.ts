@@ -14,7 +14,7 @@ export const Questions = styled.div`
     }
 
     @media (max-width: 576px) {
-      margin-top: 2rem;
+      margin-top: 20rem;
       gap: 4rem;
     }
   `}
@@ -46,7 +46,8 @@ export const QuestionsWidget = styled.div`
     }
 
     @media (max-width: 576px) {
-      width: 38.2rem;
+      /* width: 38.2rem; */
+      width: 100%;
       height: 40.8rem;
     }
   `}
