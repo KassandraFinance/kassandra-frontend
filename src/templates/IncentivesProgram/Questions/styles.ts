@@ -6,12 +6,8 @@ export const Questions = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 24.8rem;
+    margin-top: 24rem;
     gap: 8rem;
-
-    @media (max-width: 992px) {
-      margin-top: 16rem;
-    }
 
     @media (max-width: 576px) {
       margin-top: 20rem;

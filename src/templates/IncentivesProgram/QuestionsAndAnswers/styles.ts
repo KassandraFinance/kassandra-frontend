@@ -9,11 +9,11 @@ export const QuestionsAndAnswers = styled.div`
     gap: 4rem;
 
     @media (max-width: 992px) {
-      margin-top: 16rem;
       padding-inline: 8.6rem;
     }
 
     @media (max-width: 576px) {
+      margin-top: 16rem;
       padding-inline: 0;
     }
   `}

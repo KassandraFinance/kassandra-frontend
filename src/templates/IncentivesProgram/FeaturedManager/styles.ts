@@ -77,6 +77,22 @@ export const FeaturedManagerTitleWrapper = styled.div`
   `}
 `
 
+export const FeaturedCardContainer = styled.div`
+  ${() => css`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8rem;
+
+    .get-started {
+      width: 18.2rem;
+      height: 4rem;
+      margin-top: 8rem;
+    }
+  `}
+`
+
 export const FeaturedCardWrapper = styled.div`
   ${() => css`
     display: grid;

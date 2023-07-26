@@ -18,7 +18,7 @@ const Hero = () => {
       <Button
         className="heroButton"
         as="a"
-        href="https://app.kassandra.finance/manage"
+        href="https://tally.so/r/3XrKdz"
         target="_blank"
         text="Submit your idea"
         size="huge"
