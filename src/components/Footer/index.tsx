@@ -1,5 +1,8 @@
 import React from 'react'
+
 import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
+
+import SocialMidia from '../SocialMidia'
 
 import * as S from './styles'
 
@@ -202,110 +205,8 @@ const Footer = () => {
           </S.LowerRight>
         </S.LowerContainer>
         <S.LowerContainerMobile>
-          <ul>
-            <li>
-              <S.SocialIcon
-                href="https://discord.com/invite/2uGEvqNnuq"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() =>
-                  trackEventFunction('click-on-link', 'media-social', 'footer')
-                }
-              >
-                <img
-                  src="/assets/socialMidia/discord.svg"
-                  alt="Join our Discord community"
-                  width="20"
-                  height="20"
-                />
-              </S.SocialIcon>
-            </li>
-            <li>
-              <S.SocialIcon
-                href="https://t.me/KassandraDAO"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() =>
-                  trackEventFunction('click-on-link', 'media-social', 'footer')
-                }
-              >
-                <img
-                  src="/assets/socialMidia/telegram.svg"
-                  alt="Join our Telegram group"
-                  width="20"
-                  height="20"
-                />
-              </S.SocialIcon>
-            </li>
-            <li>
-              <S.SocialIcon
-                href="https://github.com/KassandraFinance"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() =>
-                  trackEventFunction('click-on-link', 'media-social', 'footer')
-                }
-              >
-                <img
-                  src="/assets/socialMidia/github.svg"
-                  alt="Access our GitHub repository"
-                  width="20"
-                  height="20"
-                />
-              </S.SocialIcon>
-            </li>
-            <li>
-              <S.SocialIcon
-                href="https://kassandrafoundation.medium.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() =>
-                  trackEventFunction('click-on-link', 'media-social', 'footer')
-                }
-              >
-                <img
-                  src="/assets/socialMidia/medium.svg"
-                  alt="Read our Medium blog"
-                  width="20"
-                  height="20"
-                />
-              </S.SocialIcon>
-            </li>
-            <li>
-              <S.SocialIcon
-                href="https://twitter.com/dao_kassandra"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() =>
-                  trackEventFunction('click-on-link', 'media-social', 'footer')
-                }
-              >
-                <img
-                  src="/assets/socialMidia/twitter.svg"
-                  alt="Follow our Twitter feed"
-                  width="20"
-                  height="20"
-                />
-              </S.SocialIcon>
-            </li>
-            <li>
-              <S.SocialIcon
-                href="http://gov.kassandra.finance/"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() =>
-                  trackEventFunction('click-on-link', 'media-social', 'footer')
-                }
-              >
-                <img
-                  src="/assets/socialMidia/discourse.svg"
-                  alt="Follow our Discourse"
-                  width="20"
-                  height="20"
-                />
-              </S.SocialIcon>
-            </li>
-          </ul>
+          <SocialMidia />
+
           <S.LowerLeft>
             <img
               src="/assets/images/kassandra-footer.svg"

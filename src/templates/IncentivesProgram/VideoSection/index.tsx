@@ -5,7 +5,7 @@ import SectionSubtitle from '@/components/SectionSubtitle'
 import * as S from './styles'
 
 const YOUTUBE_LINK_INCENTIVE_PROGRAM =
-  'https://www.youtube.com/embed/Bfm3Ms2cTg0'
+  'https://www.youtube.com/embed/VwZ9fr6DVxg'
 
 const VideoSection = () => {
   return (
