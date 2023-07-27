@@ -162,8 +162,8 @@ const Footer = () => {
                   <img
                     src="/assets/socialMidia/twitter.svg"
                     alt="Follow our Twitter feed"
-                    width="20"
-                    height="20"
+                    width="18"
+                    height="18"
                   />
                 </S.SocialIcon>
               </li>
@@ -185,6 +185,27 @@ const Footer = () => {
                     alt="Follow our Discourse"
                     width="20"
                     height="20"
+                  />
+                </S.SocialIcon>
+              </li>
+              <li>
+                <S.SocialIcon
+                  href="https://kassandra-1.gitbook.io/kassandras-onboarding-docs/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() =>
+                    trackEventFunction(
+                      'click-on-link',
+                      'media-social',
+                      'footer'
+                    )
+                  }
+                >
+                  <img
+                    src="/assets/logos/gitbook.svg"
+                    alt="Read our GitBook"
+                    width="24"
+                    height="24"
                   />
                 </S.SocialIcon>
               </li>
