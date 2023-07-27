@@ -5,24 +5,43 @@ import { useRouter } from 'next/router'
 
 import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
+import Nav from './Nav'
 import Button from '../Button'
-import ModalSocialMediaMobile from '../Modals/ModalSocialMediaMobile'
 
 import kacy96 from '../../../public/assets/logos/kacy-96.svg'
 import logoKassandra from '../../../public/assets/logos/kassandra-header.svg'
-import options from '../../../public/assets/utilities/options.svg'
 
 import * as S from './styles'
 
 const Header = () => {
   const { trackEventFunction } = useMatomoEcommerce()
-  const [isOpenModal, setIsOpenModal] = React.useState(false)
+  const [isShowMenu, setIsShowMenu] = React.useState(false)
+  const [showOverlay, setShowOverlay] = React.useState(false)
 
   const router = useRouter()
-  const pathName = router.pathname
+
+  function handleHamburgerMenu() {
+    const width = window.innerWidth
+    if (width > 768) {
+      return
+    }
+
+    setIsShowMenu(!isShowMenu)
+    setShowOverlay(true)
+    const userDashBoardButton = document.getElementById(
+      'userDashBoardButton'
+    )?.style
+    if (userDashBoardButton) {
+      if (isShowMenu) {
+        userDashBoardButton.zIndex = '1021'
+      } else {
+        userDashBoardButton.zIndex = '0'
+      }
+    }
+  }
 
   return (
-    <S.Wrapper id="top">
+    <S.Wrapper id="top" data-fixed={router.pathname === '/blog/[slug]'}>
       <S.LogoWrapper>
         <Link href="/" passHref>
           <a className="logo-desktop">
@@ -37,72 +56,40 @@ const Header = () => {
         </Link>
       </S.LogoWrapper>
 
-      <S.Menu>
-        <Link href="/investors" passHref>
-          <S.MenuLink
-            active={pathName === '/investors'}
-            onClick={() =>
-              trackEventFunction('click-on-link', 'Investors', 'header')
-            }
-          >
-            Investors
-          </S.MenuLink>
-        </Link>
+      <S.MenuWrapper>
+        <S.HamburgerButton
+          onClick={() => {
+            setIsShowMenu(!isShowMenu)
+            setShowOverlay(true)
+          }}
+        >
+          <S.HamburgerMenu isShowMenu={isShowMenu}>
+            <div></div>
+            <div></div>
+            <div></div>
+          </S.HamburgerMenu>
+        </S.HamburgerButton>
 
-        <Link href="/managers" passHref>
-          <S.MenuLink
-            active={pathName === '/managers'}
-            onClick={() =>
-              trackEventFunction('click-on-link', 'Managers', 'header')
-            }
-          >
-            Managers
-          </S.MenuLink>
-        </Link>
+        <Nav
+          isShowMenu={isShowMenu}
+          showOverlay={showOverlay}
+          setIsShowMenu={handleHamburgerMenu}
+          setShowOverlay={setShowOverlay}
+        />
 
-        <Link href="/dao" passHref>
-          <S.MenuLink
-            active={pathName === '/dao'}
-            onClick={() => trackEventFunction('click-on-link', 'Dao', 'header')}
-          >
-            DAO
-          </S.MenuLink>
-        </Link>
-
-        <Link href="/foundation" passHref>
-          <S.MenuLink
-            active={pathName === '/foundation'}
-            onClick={() =>
-              trackEventFunction('click-on-link', 'Foundation', 'header')
-            }
-          >
-            Foundation
-          </S.MenuLink>
-        </Link>
-
-        <S.MenuBottom>
-          <S.ButtonsWrapper>
-            <S.ButtonOptions onClick={() => setIsOpenModal(true)}>
-              <Image src={options} alt="options" />
-            </S.ButtonOptions>
-
-            <Button
-              href="https://app.kassandra.finance"
-              className="button-mobile"
-              as="a"
-              backgroundBlack
-              onClick={() => {
-                trackEventFunction('open-app', 'lauch-app', 'header')
-              }}
-              text="Launch App"
-            />
-          </S.ButtonsWrapper>
-
-          {isOpenModal && (
-            <ModalSocialMediaMobile setModalOpen={setIsOpenModal} />
-          )}
-        </S.MenuBottom>
-      </S.Menu>
+        <S.ButtonsWrapper>
+          <Button
+            as="a"
+            backgroundBlack
+            text="Launch App"
+            className="button-mobile"
+            href="https://app.kassandra.finance"
+            onClick={() => {
+              trackEventFunction('open-app', 'lauch-app', 'header')
+            }}
+          />
+        </S.ButtonsWrapper>
+      </S.MenuWrapper>
     </S.Wrapper>
   )
 }

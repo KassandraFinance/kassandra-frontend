@@ -1,0 +1,27 @@
+query ResearchCoins($query: String) {
+  coins(
+    filters: {
+      or: [
+        { coinGeckoID: { containsi: $query } }
+        { name: { containsi: $query } }
+        { symbol: { containsi: $query } }
+      ]
+    }
+  ) {
+    data {
+      attributes {
+        name
+        symbol
+        coinGeckoID
+        image {
+          data {
+            attributes {
+              url
+              alternativeText
+            }
+          }
+        }
+      }
+    }
+  }
+}

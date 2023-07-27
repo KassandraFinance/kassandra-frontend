@@ -1,8 +1,10 @@
 import Image from 'next/image'
 
 import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+import { useKacyData } from '@/hooks/query/useKacyData'
 
 import { poolsKacy, poolsKacyFuji } from '../../../constants/pools'
+import { env } from '@/env.mjs'
 
 import Button from '../../../components/Button'
 import LockPoolCard from './LockPoolCard'
@@ -14,6 +16,8 @@ import * as S from './styles'
 
 const LockVote = () => {
   const { trackEventFunction } = useMatomoEcommerce()
+
+  const { data } = useKacyData()
 
   return (
     <S.Wrapper>
@@ -31,12 +35,13 @@ const LockVote = () => {
         <div className="flex">
           <S.LockPoolContainer>
             <S.LockPoolContent>
-              {process.env.NEXT_PUBLIC_MASTER === '1'
+              {env.NEXT_PUBLIC_MASTER === '1'
                 ? poolsKacy.map(pool => (
                     <LockPoolCard
                       key={pool.pid}
                       pid={pool.pid}
                       address={pool.address}
+                      kacyData={data}
                     />
                   ))
                 : poolsKacyFuji.map(pool => (
@@ -44,6 +49,7 @@ const LockVote = () => {
                       key={pool.pid}
                       pid={pool.pid}
                       address={pool.address}
+                      kacyData={data}
                     />
                   ))}
             </S.LockPoolContent>

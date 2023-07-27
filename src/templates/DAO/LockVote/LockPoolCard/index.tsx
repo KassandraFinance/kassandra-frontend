@@ -5,23 +5,13 @@ import Big from 'big.js'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
+import StakingABI from '../../../../constants/abi/Staking.json'
+import { Staking, networks } from '../../../../constants/tokenAddresses'
+
+import { handleCalcAPR } from '@/utils/calculateApr'
 import { BNtoDecimal } from '../../../../utils/numerals'
 
-import usePriceLP from '../../../../hooks/usePriceLP'
-import StakingABI from '../../../../constants/abi/Staking.json'
-import { LP_KACY_AVAX_PNG } from '../../../../constants/pools'
-import {
-  LPDaiAvax,
-  Staking,
-  networks
-} from '../../../../constants/tokenAddresses'
-
 import * as S from './styles'
-
-interface ILockPoolCardProps {
-  pid: number
-  address?: string
-}
 
 interface IInfoStaked {
   votingMultiplier: string
@@ -29,79 +19,66 @@ interface IInfoStaked {
   hasExpired: boolean
   apr: Big
 }
+interface IkacyDataProps {
+  tokenPrice: number
+  marketCap: number
+  supply: number
+  tokenPercentage: number
+}
 
-const LockPoolCard = ({ pid }: ILockPoolCardProps) => {
+interface ILockPoolCardProps {
+  pid: number
+  address?: string
+  kacyData: IkacyDataProps
+}
+
+Big.RM = 0
+
+const LockPoolCard = ({ pid, kacyData }: ILockPoolCardProps) => {
   const [infoStaked, setInfoStaked] = React.useState<IInfoStaked>({
     votingMultiplier: '',
     withdrawDelay: 0,
     hasExpired: false,
     apr: Big(-1)
   })
-  const [kacyPrice, setKacyPrice] = React.useState<Big>(Big(-1))
-  const [poolPrice, setPoolPrice] = React.useState<Big>(Big(-1))
-
-  const { getPriceKacyAndLP } = usePriceLP()
 
   const provider = new JsonRpcProvider(networks[43114].rpc)
   const stakingContract = new Contract(Staking, StakingABI, provider)
 
-  async function getLiquidityPoolPriceInDollar() {
-    const { kacyPriceInDollar } = await getPriceKacyAndLP(
-      LP_KACY_AVAX_PNG,
-      LPDaiAvax,
-      false
-    )
-
-    setKacyPrice(kacyPriceInDollar)
-    setPoolPrice(kacyPriceInDollar)
-  }
-
   const getAPR = React.useCallback(async () => {
-    const poolInfoResponse = await stakingContract.poolInfo(pid)
-    if (Big(poolInfoResponse.withdrawDelay?.toString()).lt(0)) {
+    if (!kacyData) return
+
+    const poolInfoRes = await stakingContract.poolInfo(pid)
+    if (Big(poolInfoRes.withdrawDelay?.toString()).lt(0)) {
       return
     }
 
-    const kacyRewards = Big(poolInfoResponse.rewardRate.toString()).mul(
-      Big(86400)
-    )
+    const totalStaked = Big(poolInfoRes.depositedAmount.toString())
+    const kacyRewards = Big(poolInfoRes.rewardRate.toString()).mul(Big(86400))
 
-    const apr = Big(poolInfoResponse.depositedAmount.toString()).gt(0)
-      ? Big(kacyRewards.toString())
-          .mul('365')
-          .mul('100')
-          .mul(kacyPrice)
-          .div(poolPrice.mul(Big(poolInfoResponse.depositedAmount.toString())))
-      : Big(-1)
+    const apr = handleCalcAPR({
+      kacyPrice: Big(kacyData.tokenPrice),
+      poolPrice: Big(kacyData.tokenPrice),
+      rewardRate: kacyRewards,
+      totalDeposit: totalStaked
+    })
 
     const timestampNow = new Date().getTime()
-    const periodFinish: any = new Date(
-      Number(poolInfoResponse.periodFinish) * 1000
-    )
+    const periodFinish = new Date(
+      Number(poolInfoRes.periodFinish) * 1000
+    ).getTime()
 
     setInfoStaked({
-      votingMultiplier: poolInfoResponse.votingMultiplier.toString(),
-      withdrawDelay: Number(poolInfoResponse.withdrawDelay),
+      apr,
       hasExpired: periodFinish < timestampNow,
-      apr
+      withdrawDelay: Number(poolInfoRes.withdrawDelay),
+      votingMultiplier: poolInfoRes.votingMultiplier.toString()
     })
-  }, [poolPrice, kacyPrice])
+  }, [kacyData])
 
   React.useEffect(() => {
-    getLiquidityPoolPriceInDollar()
-  }, [])
-
-  React.useEffect(() => {
-    if (kacyPrice.lt(0)) {
-      return
-    }
-
-    if (poolPrice.lt(0)) {
-      return
-    }
-
     getAPR()
-  }, [pid, poolPrice, kacyPrice])
+  }, [pid, kacyData])
 
   return (
     <>
