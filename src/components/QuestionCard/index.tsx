@@ -47,14 +47,12 @@ const QuestionCard = ({
         </S.IconWrapper>
       </S.QuestionText>
       <S.Answer isOpen={isOpen}>
-        <S.AnswerText>
-          {answer}
-          {
-            <a href={link} target="_blank" rel="noreferrer">
-              {linkText}
-            </a>
-          }
-        </S.AnswerText>
+        <S.Answer isOpen={isOpen}>
+          <S.AnswerText dangerouslySetInnerHTML={{ __html: answer }} />
+          <a href={link} target="_blank" rel="noreferrer">
+            {linkText}
+          </a>
+        </S.Answer>
       </S.Answer>
     </S.Question>
   )

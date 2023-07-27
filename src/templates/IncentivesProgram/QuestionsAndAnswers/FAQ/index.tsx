@@ -36,7 +36,7 @@ const FAQ = () => {
       />
       <QuestionCard
         question="Is there any training or support available for the managers that in the program?"
-        answer="In addition to our comprehensive knowledge base documentation designed to assist new investors and managers at Kassandra, we offer personalized support through scheduled calls for one-on-one guidance. You can also join Kassandra's Discord community to directly connect with our team and fellow community members who are enthusiastic about providing assistance and support."
+        answer="In addition to our <a href='https://kassandra-1.gitbook.io/kassandras-onboarding-docs/' target='_blank' rel='noreferrer'>comprehensive knowledge base documentation</a> designed to assist new investors and managers at Kassandra, we offer personalized support through scheduled calls for one-on-one guidance. You can also <a href='https://discord.gg/fAqpbP6tFw' target='_blank' rel='noreferrer'>join Kassandra's Discord community</a> to directly connect with our team and fellow community members who are enthusiastic about providing assistance and support."
       />
       <QuestionCard
         question="What is deadline for submitting pools suggestions?"

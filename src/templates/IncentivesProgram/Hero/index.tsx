@@ -20,7 +20,7 @@ const Hero = () => {
         as="a"
         href="https://tally.so/r/3XrKdz"
         target="_blank"
-        text="Submit your idea"
+        text="Submit Your Idea"
         size="huge"
         backgroundPrimary
         onClick={() =>
