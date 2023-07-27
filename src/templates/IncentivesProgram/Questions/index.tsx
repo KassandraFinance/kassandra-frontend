@@ -31,7 +31,7 @@ const Questions = () => {
       <FadeInVertical threshold={0.4}>
         <S.QuestionsWidget
           className="calendly-inline-widget"
-          data-url="https://calendly.com/guilhermescorrea20/30min"
+          data-url="https://calendly.com/kevin-kassandra/30min"
         />
       </FadeInVertical>
     </S.Questions>
