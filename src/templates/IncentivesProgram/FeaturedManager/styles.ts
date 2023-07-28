@@ -64,7 +64,6 @@ export const FeaturedManagerTitleWrapper = styled.div`
       right: 0;
       bottom: 0;
 
-      mask-composite: exclude;
       border-radius: 0.8rem;
       border: 0.2rem solid transparent;
       background: linear-gradient(93.84deg, #e843c4 0.12%, #0c3ddc 100%)
@@ -73,6 +72,7 @@ export const FeaturedManagerTitleWrapper = styled.div`
       -webkit-mask: linear-gradient(#fff 0 0) padding-box,
         linear-gradient(#fff 0 0);
       -webkit-mask-composite: destination-out;
+      mask-composite: exclude;
     }
   `}
 `
