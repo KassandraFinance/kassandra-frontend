@@ -1,11 +1,16 @@
+import useMatomo from '@/hooks/useMatomo'
+import useMatomoEcommerce from '@/hooks/useMatomoEcommerce'
+
 import Button from '@/components/Button'
 import Paragraph from '@/components/Paragraph'
-import useMatomoEcommerce from '@/hooks/useMatomoEcommerce'
 
 import * as S from './styles'
 
 const Hero = () => {
   const { trackEventFunction } = useMatomoEcommerce()
+  useMatomo({
+    trackPageView: true
+  })
 
   return (
     <S.HeroWrapper>
@@ -26,8 +31,8 @@ const Hero = () => {
         onClick={() =>
           trackEventFunction(
             'click-on-button',
-            'Submit your idea',
-            `section-Incentives-program`
+            'Submit Your Idea',
+            `Hero-Incentives-program`
           )
         }
       />
