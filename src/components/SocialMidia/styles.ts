@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const SocialMidia = styled.ul`
-  ${({ theme }) => css`
+  ${() => css`
     display: flex;
     gap: 1.4rem;
   `}
@@ -20,10 +20,6 @@ export const SocialMidiaContent = styled.a`
     border: 1px solid rgba(255, 255, 255, 0);
 
     transition: border ${theme.transition.default};
-
-    /* img {
-      padding: 0.5rem;
-    } */
 
     &:hover {
       border: 1px solid rgba(255, 255, 255, 0.3);

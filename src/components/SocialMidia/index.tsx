@@ -109,6 +109,23 @@ const SocialMidia = () => {
           />
         </S.SocialMidiaContent>
       </li>
+      <li>
+        <S.SocialMidiaContent
+          href="https://kassandra-1.gitbook.io/kassandras-onboarding-docs/"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() =>
+            trackEventFunction('click-on-link', 'media-social', 'footer')
+          }
+        >
+          <img
+            src="/assets/logos/gitbook.svg"
+            alt="Read our GitBook"
+            width="24"
+            height="24"
+          />
+        </S.SocialMidiaContent>
+      </li>
     </S.SocialMidia>
   )
 }

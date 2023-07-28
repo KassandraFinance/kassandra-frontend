@@ -6,7 +6,7 @@ export const FeaturedCard = styled.div`
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     padding-block: 3.2rem;
     padding-inline: 2.4rem;
