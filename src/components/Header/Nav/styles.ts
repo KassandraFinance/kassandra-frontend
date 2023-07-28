@@ -1,3 +1,4 @@
+import { SocialMidia } from '@/components/SocialMidia/styles'
 import styled, { css } from 'styled-components'
 
 interface IMenuProps {
@@ -8,7 +9,7 @@ export const NavWrapper = styled.div<IMenuProps>`
     display: flex;
 
     transition-timing-function: ease-in-out;
-    transition-duration: 750ms;
+    transition-duration: 450ms;
     transition-property: left;
 
     @media (max-width: 768px) {
@@ -25,11 +26,15 @@ export const NavWrapper = styled.div<IMenuProps>`
       overflow-y: auto;
 
       width: 29.7rem;
-      height: 100vh;
+      /* height: 100vh; */
 
       background: linear-gradient(164.99deg, #1b1d22 19.85%, #333437 116.33%);
 
       isolation: isolate;
+
+      @media (max-width: 576px) {
+        width: 28rem;
+      }
     }
   `}
 
@@ -155,40 +160,23 @@ export const MenuLink = styled.a<IMenuLinkProps>`
 export const NavFooter = styled.div`
   display: none;
 
+  ${SocialMidia} {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: space-between;
+    width: 100%;
+  }
+
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
-    padding: 1.6rem;
+    width: 100%;
     gap: 2.4rem;
   }
-`
 
-export const Certified = styled.div`
-  ${({ theme }) => css`
-    max-width: 100%;
-    margin: 1.6rem auto 0;
-
-    a {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-
-      color: ${theme.colors.snow};
-      text-decoration: none;
-    }
-
-    span {
-      margin-right: 0.6rem;
-
-      font-size: ${theme.font.sizes.font14};
-      font-weight: ${theme.font.weight.bold};
-      letter-spacing: 0.07rem;
-    }
-
-    img {
-      margin-right: 1.6rem;
-    }
-  `}
+  @media (max-width: 576px) {
+    padding: 2.4rem;
+  }
 `
 
 export const ImageWrapper = styled.div`
