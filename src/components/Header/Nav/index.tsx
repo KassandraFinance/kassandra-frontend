@@ -94,9 +94,10 @@ const Nav = ({
               <Link href={item.route} passHref key={item.route}>
                 <S.MenuLink
                   active={router.asPath === item.route}
-                  onClick={() =>
+                  onClick={() => {
+                    handleClose()
                     trackEventFunction('click-on-link', item.name, 'header')
-                  }
+                  }}
                 >
                   {item.name}
                 </S.MenuLink>
