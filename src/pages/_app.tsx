@@ -100,7 +100,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
               <GlobalStyles />
               <EventBanner
                 text="Take your pool to the next level. Kassandra’s Managers Incentive Program is now live!"
-                link="https://tally.so/r/3XrKdz"
+                link="/incentives-program"
               >
                 <Header />
               </EventBanner>

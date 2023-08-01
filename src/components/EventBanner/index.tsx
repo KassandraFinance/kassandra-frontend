@@ -16,7 +16,7 @@ const EventBanner = ({ text, link, children }: IEventBannerProps) => {
     <S.EventBanner isShowBanner={isShowBanner}>
       <S.EventBannerContent>
         <Link href={link} passHref>
-          <S.BannerLink target="_blank">{text}</S.BannerLink>
+          <S.BannerLink>{text}</S.BannerLink>
         </Link>
 
         <img
