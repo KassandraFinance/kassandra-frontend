@@ -11,6 +11,7 @@ export const FeaturedCard = styled.div`
     padding-block: 3.2rem;
     padding-inline: 2.4rem;
     gap: 2.4rem;
+    border-radius: 0.8rem;
 
     background: linear-gradient(
       180deg,
@@ -26,8 +27,9 @@ export const FeaturedCard = styled.div`
       left: 0;
       right: 0;
       bottom: 0;
+
       border-radius: 0.8rem;
-      border: 0.2rem solid transparent;
+      border: 0.1rem solid transparent;
       background: linear-gradient(93.84deg, #e843c4 0.12%, #0c3ddc 100%)
         border-box;
       -webkit-mask: linear-gradient(#fff 0 0) padding-box,

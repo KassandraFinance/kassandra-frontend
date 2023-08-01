@@ -32,7 +32,7 @@ export const VideoWrapper = styled.div`
 
     background: linear-gradient(93.84deg, #e843c4 0.12%, #0c3ddc 100%);
     border-radius: 0.4rem;
-    padding: 0.2rem;
+    padding: 0.1rem;
 
     width: 1028px;
     height: 536px;
