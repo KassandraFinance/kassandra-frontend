@@ -19,6 +19,8 @@ import theme from '../styles/theme'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Toastify from '../components/Toastify'
+import EventBanner from '@/components/EventBanner'
+
 import { store } from '@/store/store'
 import { env } from '@/env.mjs'
 
@@ -96,7 +98,13 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
               </Head>
               <Toastify />
               <GlobalStyles />
-              <Header />
+              <EventBanner
+                text="Take your pool to the next level. Kassandra’s Managers Incentive Program is now live!"
+                link="https://tally.so/r/3XrKdz"
+              >
+                <Header />
+              </EventBanner>
+              {/* <Header /> */}
               <Component {...pageProps} />
               {router.pathname !== '/404' && <Footer />}
             </ThemeProvider>
