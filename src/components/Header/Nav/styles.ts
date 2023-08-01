@@ -26,7 +26,6 @@ export const NavWrapper = styled.div<IMenuProps>`
       overflow-y: auto;
 
       width: 29.7rem;
-      /* height: 100vh; */
 
       background: linear-gradient(164.99deg, #1b1d22 19.85%, #333437 116.33%);
 
@@ -170,12 +169,9 @@ export const NavFooter = styled.div`
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
+    padding: 2.4rem;
     width: 100%;
     gap: 2.4rem;
-  }
-
-  @media (max-width: 576px) {
-    padding: 2.4rem;
   }
 `
 
