@@ -2,7 +2,13 @@ import Image from 'next/image'
 
 import IconButton from '@/components/IconButton'
 
-import { DiscordIcon, GithubIcon, RedditIcon, TwitterIcon } from '@/Icons'
+import {
+  DiscordIcon,
+  GithubIcon,
+  RedditIcon,
+  TwitterIcon,
+  InstagramIcon
+} from '@/Icons'
 
 import * as S from './styles'
 
@@ -10,7 +16,8 @@ const socialIconByName = {
   TWITTER: TwitterIcon,
   DISCORD: DiscordIcon,
   REDDIT: RedditIcon,
-  GITHUB: GithubIcon
+  GITHUB: GithubIcon,
+  INSTAGRAM: InstagramIcon
 }
 
 export type SocialIconType = keyof typeof socialIconByName

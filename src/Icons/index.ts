@@ -1,5 +1,6 @@
 export { DiscordIcon } from './Discord'
 export { GithubIcon } from './Github'
+export { InstagramIcon } from './Instagram'
 export { TwitterIcon } from './Twitter'
 export { RedditIcon } from './Reddit'
 export { ChevronIcon } from './Chevron'
