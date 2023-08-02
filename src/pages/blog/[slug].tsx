@@ -9,7 +9,6 @@ import Article from '@/templates/Article'
 import { SocialIconType } from '@/components/Blog/Authors'
 
 import * as S from '@/templates/Article/styles'
-import NotFound from '@/templates/404'
 
 interface IPost {
   id: string
@@ -95,48 +94,47 @@ const ArticlePage = ({ post, posts, isUserPRO }: IArticleProps) => {
   }, [])
 
   return (
-    // <>
-    //   <Head>
-    //     <title>{post.title}</title>
-    //     <meta name="description" content={post.summary} />
+    <>
+      <Head>
+        <title>{post.title}</title>
+        <meta name="description" content={post.summary} />
 
-    //     {/* Open Graph  Meta Tags  */}
-    //     <meta
-    //       property="og:url"
-    //       content={`https://heimdall.land/blog/${post.slug}`}
-    //       key="og:url"
-    //     />
-    //     <meta property="og:title" content={post.title} key="og:title" />
-    //     <meta
-    //       property="og:description"
-    //       content={post.summary}
-    //       key="og:description"
-    //     />
-    //     <meta property="og:image" content={post.banner.url} />
+        {/* Open Graph  Meta Tags  */}
+        <meta
+          property="og:url"
+          content={`https://heimdall.land/blog/${post.slug}`}
+          key="og:url"
+        />
+        <meta property="og:title" content={post.title} key="og:title" />
+        <meta
+          property="og:description"
+          content={post.summary}
+          key="og:description"
+        />
+        <meta property="og:image" content={post.banner.url} />
 
-    //     {/* Twitter Meta Tags  */}
-    //     <meta
-    //       property="twitter:url"
-    //       content={`https://heimdall.land/blog/${post.slug}`}
-    //       key="twitter:url"
-    //     />
-    //     <meta
-    //       property="twitter:title"
-    //       content={post.title}
-    //       key="twitter:title"
-    //     />
-    //     <meta
-    //       property="twitter:description"
-    //       content={post.summary}
-    //       key="titter:description"
-    //     />
-    //     <meta name="twitter:image" content={post.banner.url} />
-    //   </Head>
+        {/* Twitter Meta Tags  */}
+        <meta
+          property="twitter:url"
+          content={`https://heimdall.land/blog/${post.slug}`}
+          key="twitter:url"
+        />
+        <meta
+          property="twitter:title"
+          content={post.title}
+          key="twitter:title"
+        />
+        <meta
+          property="twitter:description"
+          content={post.summary}
+          key="titter:description"
+        />
+        <meta name="twitter:image" content={post.banner.url} />
+      </Head>
 
-    //   <S.Background />
-    //   <Article post={post} posts={posts} isUserPRO={isUserPRO} />
-    // </>
-    <NotFound />
+      <S.Background />
+      <Article post={post} posts={posts} isUserPRO={isUserPRO} />
+    </>
   )
 }
 

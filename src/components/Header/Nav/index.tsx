@@ -40,11 +40,11 @@ const HeaderLinks = [
   {
     route: '/foundation',
     name: 'Foundation'
+  },
+  {
+    route: '/blog',
+    name: 'Blog'
   }
-  // {
-  //   route: '/blog',
-  //   name: 'Blog'
-  // }
 ]
 
 const Nav = ({
