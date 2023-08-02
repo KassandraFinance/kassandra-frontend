@@ -21,7 +21,7 @@ export const FeaturedManager = styled.div`
 export const Line = styled.div`
   ${() => css`
     position: absolute;
-    top: -29.8rem;
+    top: -29.9rem;
     right: 50%;
 
     height: 36rem;
@@ -65,7 +65,7 @@ export const FeaturedManagerTitleWrapper = styled.div`
       bottom: 0;
 
       border-radius: 0.8rem;
-      border: 0.2rem solid transparent;
+      border: 0.1rem solid transparent;
       background: linear-gradient(93.84deg, #e843c4 0.12%, #0c3ddc 100%)
         border-box;
 
