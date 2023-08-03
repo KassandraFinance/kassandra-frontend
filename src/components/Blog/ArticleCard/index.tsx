@@ -16,12 +16,6 @@ interface IArticleCardProps {
 const ArticleCard = ({ post }: IArticleCardProps) => {
   const { trackEvent } = useMatomo()
 
-  const readingDifficulty = {
-    Beginner: 'blue',
-    Intermediate: 'yellow',
-    Advanced: 'red'
-  } as const
-
   const firstTag = post.tags[0]?.name
   const otherTags = post.tags.slice(1)
 
@@ -54,7 +48,7 @@ const ArticleCard = ({ post }: IArticleCardProps) => {
             <S.ArticleTitle id={post.slug}>{post.title}</S.ArticleTitle>
 
             <S.Tags>
-              {post.readingDifficulty?.difficultyName ? (
+              {/* {post.readingDifficulty?.difficultyName ? (
                 <Tag
                   variant={
                     readingDifficulty[
@@ -69,7 +63,7 @@ const ArticleCard = ({ post }: IArticleCardProps) => {
                 >
                   {post.readingDifficulty.difficultyName}
                 </Tag>
-              ) : null}
+              ) : null} */}
 
               {firstTag && (
                 <Tag

@@ -3,7 +3,6 @@ query ResearchPosts(
   $tags: [String]
   $coins: [String]
   $isPRO: Boolean
-  $difficultyNames: [String]
   $tab: String
 ) {
   posts(
@@ -11,7 +10,6 @@ query ResearchPosts(
     filters: {
       tags: { name: { in: $tags } }
       isPRO: { eq: $isPRO }
-      readingDifficulty: { difficultyName: { in: $difficultyNames } },
       tabs: { tabName: { in: [$tab] }}
       coins: { coinGeckoID: { in: $coins } }
     }
@@ -28,13 +26,6 @@ query ResearchPosts(
       attributes {
         slug
         title
-        readingDifficulty {
-          data {
-            attributes {
-              difficultyName
-            }
-          }
-        }
         tags {
           data {
             attributes {
@@ -71,13 +62,6 @@ query ResearchPosts(
         }
         highlighted
         isPRO
-      }
-    }
-  }
-  readingDifficulties {
-    data {
-      attributes {
-        difficultyName
       }
     }
   }

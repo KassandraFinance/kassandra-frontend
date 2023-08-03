@@ -110,7 +110,7 @@ export const ArticleHeader = ({
             Pro
           </S.StyledTag>
         )}
-        {post?.readingDifficulty && (
+        {/* {post?.readingDifficulty && (
           <S.StyledTag
             variant={getVariantByDifficulty(
               post.readingDifficulty.difficultyName
@@ -124,7 +124,7 @@ export const ArticleHeader = ({
           >
             {post?.readingDifficulty.difficultyName}
           </S.StyledTag>
-        )}
+        )} */}
         {post?.tags.map(tag => (
           <S.StyledTag
             key={tag.name}

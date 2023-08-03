@@ -20,13 +20,6 @@ query PostBySlug($slug: String!) {
             }
           }
           content
-          readingDifficulty {
-            data {
-              attributes {
-                difficultyName
-              }
-            }
-          }
           tags {
             data {
               attributes {
@@ -68,13 +61,6 @@ query PostBySlug($slug: String!) {
                 readTimeInMinutes
                 publishedAt
                 isPRO
-                readingDifficulty {
-                  data {
-                    attributes {
-                      difficultyName
-                    }
-                  }
-                }
                 banner {
                   data {
                     attributes {
@@ -141,13 +127,6 @@ query PostBySlug($slug: String!) {
           readTimeInMinutes
           publishedAt
           isPRO
-          readingDifficulty {
-            data {
-              attributes {
-                difficultyName
-              }
-            }
-          }
           banner {
             data {
               attributes {

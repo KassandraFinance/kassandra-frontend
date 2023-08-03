@@ -6,7 +6,6 @@ type GetPostsProps = {
   isPRO?: boolean
   page: number
   perPage: number
-  readingDifficulties: string[]
   tags: string[]
   coins: string[]
   tab?: string
@@ -16,14 +15,11 @@ export const getPosts = async ({
   isPRO,
   page,
   perPage,
-  readingDifficulties,
   tags,
   coins,
   tab
 }: GetPostsProps) => {
   const data = await strapiClient.ResearchPosts({
-    difficultyNames:
-      readingDifficulties.length > 0 ? readingDifficulties : undefined,
     isPRO: isPRO ?? undefined,
     tags: tags.length > 0 ? tags : undefined,
     pagination: { page, pageSize: perPage },
@@ -41,9 +37,6 @@ export const getPosts = async ({
       symbol: string
     }[]
   >(data.coins)
-  const flatReadingDifficulties = flattenObj<{ difficultyName: string }[]>(
-    data.readingDifficulties
-  )
   const flatTabs = flattenObj<{ tabName: string; position: number }[]>(
     data.tabs
   )
@@ -52,7 +45,6 @@ export const getPosts = async ({
     posts: flatPosts,
     tags: flatTags.map(val => val.name),
     coins: flatCoins,
-    readingDifficulties: flatReadingDifficulties.map(val => val.difficultyName),
     tabs: flatTabs
       .sort((a, b) => a.position - b.position)
       .map(val => val.tabName),

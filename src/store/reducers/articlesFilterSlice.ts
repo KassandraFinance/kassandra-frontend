@@ -3,16 +3,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 interface IFilterState {
   tags: string[]
   coins: string[]
-  readingDifficulties: string[]
 }
 
 export const initialArticlesFilter: IFilterState = {
   tags: [],
-  coins: [],
-  readingDifficulties: []
+  coins: []
 }
 
-export type FilterType = 'coins' | 'tags' | 'readingDifficulties'
+export type FilterType = 'coins' | 'tags'
 
 type RemoveFilterActionPayload = {
   type: FilterType

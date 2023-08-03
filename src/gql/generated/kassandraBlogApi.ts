@@ -236,7 +236,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type GenericMorph = Coin | ComponentSharedMetaSocial | ComponentSharedSeo | I18NLocale | Post | ReadingDifficulty | Social | Tab | Tag | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Writer;
+export type GenericMorph = Coin | ComponentSharedMetaSocial | ComponentSharedSeo | I18NLocale | Post | Social | Tab | Tag | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Writer;
 
 export type I18NLocale = {
   __typename?: 'I18NLocale';
@@ -352,7 +352,6 @@ export type Mutation = {
   changePassword?: Maybe<UsersPermissionsLoginPayload>;
   createCoin?: Maybe<CoinEntityResponse>;
   createPost?: Maybe<PostEntityResponse>;
-  createReadingDifficulty?: Maybe<ReadingDifficultyEntityResponse>;
   createSocial?: Maybe<SocialEntityResponse>;
   createTab?: Maybe<TabEntityResponse>;
   createTag?: Maybe<TagEntityResponse>;
@@ -365,7 +364,6 @@ export type Mutation = {
   createWriter?: Maybe<WriterEntityResponse>;
   deleteCoin?: Maybe<CoinEntityResponse>;
   deletePost?: Maybe<PostEntityResponse>;
-  deleteReadingDifficulty?: Maybe<ReadingDifficultyEntityResponse>;
   deleteSocial?: Maybe<SocialEntityResponse>;
   deleteTab?: Maybe<TabEntityResponse>;
   deleteTag?: Maybe<TagEntityResponse>;
@@ -390,7 +388,6 @@ export type Mutation = {
   updateCoin?: Maybe<CoinEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
   updatePost?: Maybe<PostEntityResponse>;
-  updateReadingDifficulty?: Maybe<ReadingDifficultyEntityResponse>;
   updateSocial?: Maybe<SocialEntityResponse>;
   updateTab?: Maybe<TabEntityResponse>;
   updateTag?: Maybe<TagEntityResponse>;
@@ -419,11 +416,6 @@ export type MutationCreateCoinArgs = {
 
 export type MutationCreatePostArgs = {
   data: PostInput;
-};
-
-
-export type MutationCreateReadingDifficultyArgs = {
-  data: ReadingDifficultyInput;
 };
 
 
@@ -473,11 +465,6 @@ export type MutationDeleteCoinArgs = {
 
 
 export type MutationDeletePostArgs = {
-  id: Scalars['ID']['input'];
-};
-
-
-export type MutationDeleteReadingDifficultyArgs = {
   id: Scalars['ID']['input'];
 };
 
@@ -580,12 +567,6 @@ export type MutationUpdatePostArgs = {
 };
 
 
-export type MutationUpdateReadingDifficultyArgs = {
-  data: ReadingDifficultyInput;
-  id: Scalars['ID']['input'];
-};
-
-
 export type MutationUpdateSocialArgs = {
   data: SocialInput;
   id: Scalars['ID']['input'];
@@ -668,7 +649,6 @@ export type Post = {
   isPRO: Scalars['Boolean']['output'];
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   readTimeInMinutes: Scalars['Int']['output'];
-  readingDifficulty?: Maybe<ReadingDifficultyEntityResponse>;
   recommendedPosts?: Maybe<PostRelationResponseCollection>;
   sendInBlueListId: Scalars['Int']['output'];
   seo?: Maybe<ComponentSharedSeo>;
@@ -750,7 +730,6 @@ export type PostFiltersInput = {
   or?: InputMaybe<Array<InputMaybe<PostFiltersInput>>>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
   readTimeInMinutes?: InputMaybe<IntFilterInput>;
-  readingDifficulty?: InputMaybe<ReadingDifficultyFiltersInput>;
   recommendedPosts?: InputMaybe<PostFiltersInput>;
   sendInBlueListId?: InputMaybe<IntFilterInput>;
   seo?: InputMaybe<ComponentSharedSeoFiltersInput>;
@@ -772,7 +751,6 @@ export type PostInput = {
   isPRO?: InputMaybe<Scalars['Boolean']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   readTimeInMinutes?: InputMaybe<Scalars['Int']['input']>;
-  readingDifficulty?: InputMaybe<Scalars['ID']['input']>;
   recommendedPosts?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   sendInBlueListId?: InputMaybe<Scalars['Int']['input']>;
   seo?: InputMaybe<ComponentSharedSeoInput>;
@@ -803,8 +781,6 @@ export type Query = {
   post?: Maybe<PostEntityResponse>;
   postBySlug?: Maybe<PostEntityResponse>;
   posts?: Maybe<PostEntityResponseCollection>;
-  readingDifficulties?: Maybe<ReadingDifficultyEntityResponseCollection>;
-  readingDifficulty?: Maybe<ReadingDifficultyEntityResponse>;
   social?: Maybe<SocialEntityResponse>;
   socials?: Maybe<SocialEntityResponseCollection>;
   tab?: Maybe<TabEntityResponse>;
@@ -864,18 +840,6 @@ export type QueryPostsArgs = {
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type QueryReadingDifficultiesArgs = {
-  filters?: InputMaybe<ReadingDifficultyFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type QueryReadingDifficultyArgs = {
-  id?: InputMaybe<Scalars['ID']['input']>;
 };
 
 
@@ -975,55 +939,6 @@ export type QueryWritersArgs = {
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-export type ReadingDifficulty = {
-  __typename?: 'ReadingDifficulty';
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  difficultyName: Scalars['String']['output'];
-  posts?: Maybe<PostRelationResponseCollection>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-
-export type ReadingDifficultyPostsArgs = {
-  filters?: InputMaybe<PostFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-export type ReadingDifficultyEntity = {
-  __typename?: 'ReadingDifficultyEntity';
-  attributes?: Maybe<ReadingDifficulty>;
-  id?: Maybe<Scalars['ID']['output']>;
-};
-
-export type ReadingDifficultyEntityResponse = {
-  __typename?: 'ReadingDifficultyEntityResponse';
-  data?: Maybe<ReadingDifficultyEntity>;
-};
-
-export type ReadingDifficultyEntityResponseCollection = {
-  __typename?: 'ReadingDifficultyEntityResponseCollection';
-  data: Array<ReadingDifficultyEntity>;
-  meta: ResponseCollectionMeta;
-};
-
-export type ReadingDifficultyFiltersInput = {
-  and?: InputMaybe<Array<InputMaybe<ReadingDifficultyFiltersInput>>>;
-  createdAt?: InputMaybe<DateTimeFilterInput>;
-  difficultyName?: InputMaybe<StringFilterInput>;
-  id?: InputMaybe<IdFilterInput>;
-  not?: InputMaybe<ReadingDifficultyFiltersInput>;
-  or?: InputMaybe<Array<InputMaybe<ReadingDifficultyFiltersInput>>>;
-  posts?: InputMaybe<PostFiltersInput>;
-  updatedAt?: InputMaybe<DateTimeFilterInput>;
-};
-
-export type ReadingDifficultyInput = {
-  difficultyName?: InputMaybe<Scalars['String']['input']>;
-  posts?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
 };
 
 export type ResponseCollectionMeta = {
@@ -1639,7 +1554,7 @@ export type PostBySlugQueryVariables = Exact<{
 }>;
 
 
-export type PostBySlugQuery = { __typename?: 'Query', postBySlug?: { __typename?: 'PostEntityResponse', data?: { __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', slug: string, title: string, summary: string, readTimeInMinutes: number, publishedAt?: any | null, sendInBlueListId: number, isPRO: boolean, amountOfTitles: number, content?: string | null, banner: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null }, readingDifficulty?: { __typename?: 'ReadingDifficultyEntityResponse', data?: { __typename?: 'ReadingDifficultyEntity', attributes?: { __typename?: 'ReadingDifficulty', difficultyName: string } | null } | null } | null, tags?: { __typename?: 'TagRelationResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', name: string } | null }> } | null, tabs?: { __typename?: 'TabRelationResponseCollection', data: Array<{ __typename?: 'TabEntity', attributes?: { __typename?: 'Tab', tabName: string } | null }> } | null, coins?: { __typename?: 'CoinRelationResponseCollection', data: Array<{ __typename?: 'CoinEntity', id?: string | null, attributes?: { __typename?: 'Coin', coinGeckoID: string, symbol: string, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } } | null }> } | null, recommendedPosts?: { __typename?: 'PostRelationResponseCollection', data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', title: string, summary: string, slug: string, readTimeInMinutes: number, publishedAt?: any | null, isPRO: boolean, readingDifficulty?: { __typename?: 'ReadingDifficultyEntityResponse', data?: { __typename?: 'ReadingDifficultyEntity', attributes?: { __typename?: 'ReadingDifficulty', difficultyName: string } | null } | null } | null, banner: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null }, writers?: { __typename?: 'WriterRelationResponseCollection', data: Array<{ __typename?: 'WriterEntity', id?: string | null, attributes?: { __typename?: 'Writer', name: string, profilePicture: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } } | null }> } | null } | null }> } | null, writers?: { __typename?: 'WriterRelationResponseCollection', data: Array<{ __typename?: 'WriterEntity', id?: string | null, attributes?: { __typename?: 'Writer', biography: string, name: string, socials?: { __typename?: 'SocialRelationResponseCollection', data: Array<{ __typename?: 'SocialEntity', attributes?: { __typename?: 'Social', link: string, type: Enum_Social_Type, username: string } | null }> } | null, profilePicture: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } } | null }> } | null } | null } | null } | null, posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', title: string, summary: string, slug: string, readTimeInMinutes: number, publishedAt?: any | null, isPRO: boolean, readingDifficulty?: { __typename?: 'ReadingDifficultyEntityResponse', data?: { __typename?: 'ReadingDifficultyEntity', attributes?: { __typename?: 'ReadingDifficulty', difficultyName: string } | null } | null } | null, banner: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null }, writers?: { __typename?: 'WriterRelationResponseCollection', data: Array<{ __typename?: 'WriterEntity', id?: string | null, attributes?: { __typename?: 'Writer', name: string, profilePicture: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } } | null }> } | null } | null }> } | null };
+export type PostBySlugQuery = { __typename?: 'Query', postBySlug?: { __typename?: 'PostEntityResponse', data?: { __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', slug: string, title: string, summary: string, readTimeInMinutes: number, publishedAt?: any | null, sendInBlueListId: number, isPRO: boolean, amountOfTitles: number, content?: string | null, banner: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null }, tags?: { __typename?: 'TagRelationResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', name: string } | null }> } | null, tabs?: { __typename?: 'TabRelationResponseCollection', data: Array<{ __typename?: 'TabEntity', attributes?: { __typename?: 'Tab', tabName: string } | null }> } | null, coins?: { __typename?: 'CoinRelationResponseCollection', data: Array<{ __typename?: 'CoinEntity', id?: string | null, attributes?: { __typename?: 'Coin', coinGeckoID: string, symbol: string, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } } | null }> } | null, recommendedPosts?: { __typename?: 'PostRelationResponseCollection', data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', title: string, summary: string, slug: string, readTimeInMinutes: number, publishedAt?: any | null, isPRO: boolean, banner: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null }, writers?: { __typename?: 'WriterRelationResponseCollection', data: Array<{ __typename?: 'WriterEntity', id?: string | null, attributes?: { __typename?: 'Writer', name: string, profilePicture: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } } | null }> } | null } | null }> } | null, writers?: { __typename?: 'WriterRelationResponseCollection', data: Array<{ __typename?: 'WriterEntity', id?: string | null, attributes?: { __typename?: 'Writer', biography: string, name: string, socials?: { __typename?: 'SocialRelationResponseCollection', data: Array<{ __typename?: 'SocialEntity', attributes?: { __typename?: 'Social', link: string, type: Enum_Social_Type, username: string } | null }> } | null, profilePicture: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } } | null }> } | null } | null } | null } | null, posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', title: string, summary: string, slug: string, readTimeInMinutes: number, publishedAt?: any | null, isPRO: boolean, banner: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null }, writers?: { __typename?: 'WriterRelationResponseCollection', data: Array<{ __typename?: 'WriterEntity', id?: string | null, attributes?: { __typename?: 'Writer', name: string, profilePicture: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } } | null }> } | null } | null }> } | null };
 
 export type ResearchCoinsQueryVariables = Exact<{
   query?: InputMaybe<Scalars['String']['input']>;
@@ -1653,12 +1568,11 @@ export type ResearchPostsQueryVariables = Exact<{
   tags?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
   coins?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
   isPRO?: InputMaybe<Scalars['Boolean']['input']>;
-  difficultyNames?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>> | InputMaybe<Scalars['String']['input']>>;
   tab?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type ResearchPostsQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', meta: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', total: number, pageCount: number } }, data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', slug: string, title: string, summary: string, publishedAt?: any | null, readTimeInMinutes: number, highlighted: boolean, isPRO: boolean, readingDifficulty?: { __typename?: 'ReadingDifficultyEntityResponse', data?: { __typename?: 'ReadingDifficultyEntity', attributes?: { __typename?: 'ReadingDifficulty', difficultyName: string } | null } | null } | null, tags?: { __typename?: 'TagRelationResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', name: string } | null }> } | null, banner: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null }, writers?: { __typename?: 'WriterRelationResponseCollection', data: Array<{ __typename?: 'WriterEntity', id?: string | null, attributes?: { __typename?: 'Writer', name: string, profilePicture: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } } | null }> } | null } | null }> } | null, readingDifficulties?: { __typename?: 'ReadingDifficultyEntityResponseCollection', data: Array<{ __typename?: 'ReadingDifficultyEntity', attributes?: { __typename?: 'ReadingDifficulty', difficultyName: string } | null }> } | null, tags?: { __typename?: 'TagEntityResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', name: string } | null }> } | null, tabs?: { __typename?: 'TabEntityResponseCollection', data: Array<{ __typename?: 'TabEntity', attributes?: { __typename?: 'Tab', tabName: string, position: number } | null }> } | null, coins?: { __typename?: 'CoinEntityResponseCollection', data: Array<{ __typename?: 'CoinEntity', attributes?: { __typename?: 'Coin', coinGeckoID: string, name: string, symbol: string, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', alternativeText?: string | null, url: string } | null } | null } } | null }> } | null };
+export type ResearchPostsQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', meta: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', total: number, pageCount: number } }, data: Array<{ __typename?: 'PostEntity', id?: string | null, attributes?: { __typename?: 'Post', slug: string, title: string, summary: string, publishedAt?: any | null, readTimeInMinutes: number, highlighted: boolean, isPRO: boolean, tags?: { __typename?: 'TagRelationResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', name: string } | null }> } | null, banner: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null }, writers?: { __typename?: 'WriterRelationResponseCollection', data: Array<{ __typename?: 'WriterEntity', id?: string | null, attributes?: { __typename?: 'Writer', name: string, profilePicture: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } } | null }> } | null } | null }> } | null, tags?: { __typename?: 'TagEntityResponseCollection', data: Array<{ __typename?: 'TagEntity', attributes?: { __typename?: 'Tag', name: string } | null }> } | null, tabs?: { __typename?: 'TabEntityResponseCollection', data: Array<{ __typename?: 'TabEntity', attributes?: { __typename?: 'Tab', tabName: string, position: number } | null }> } | null, coins?: { __typename?: 'CoinEntityResponseCollection', data: Array<{ __typename?: 'CoinEntity', attributes?: { __typename?: 'Coin', coinGeckoID: string, name: string, symbol: string, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', alternativeText?: string | null, url: string } | null } | null } } | null }> } | null };
 
 export type ResearchTabsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1689,13 +1603,6 @@ export const PostBySlugDocument = gql`
           }
         }
         content
-        readingDifficulty {
-          data {
-            attributes {
-              difficultyName
-            }
-          }
-        }
         tags {
           data {
             attributes {
@@ -1737,13 +1644,6 @@ export const PostBySlugDocument = gql`
               readTimeInMinutes
               publishedAt
               isPRO
-              readingDifficulty {
-                data {
-                  attributes {
-                    difficultyName
-                  }
-                }
-              }
               banner {
                 data {
                   attributes {
@@ -1810,13 +1710,6 @@ export const PostBySlugDocument = gql`
         readTimeInMinutes
         publishedAt
         isPRO
-        readingDifficulty {
-          data {
-            attributes {
-              difficultyName
-            }
-          }
-        }
         banner {
           data {
             attributes {
@@ -1870,10 +1763,10 @@ export const ResearchCoinsDocument = gql`
 }
     `;
 export const ResearchPostsDocument = gql`
-    query ResearchPosts($pagination: PaginationArg, $tags: [String], $coins: [String], $isPRO: Boolean, $difficultyNames: [String], $tab: String) {
+    query ResearchPosts($pagination: PaginationArg, $tags: [String], $coins: [String], $isPRO: Boolean, $tab: String) {
   posts(
     pagination: $pagination
-    filters: {tags: {name: {in: $tags}}, isPRO: {eq: $isPRO}, readingDifficulty: {difficultyName: {in: $difficultyNames}}, tabs: {tabName: {in: [$tab]}}, coins: {coinGeckoID: {in: $coins}}}
+    filters: {tags: {name: {in: $tags}}, isPRO: {eq: $isPRO}, tabs: {tabName: {in: [$tab]}}, coins: {coinGeckoID: {in: $coins}}}
     sort: "publishedAt:desc"
   ) {
     meta {
@@ -1887,13 +1780,6 @@ export const ResearchPostsDocument = gql`
       attributes {
         slug
         title
-        readingDifficulty {
-          data {
-            attributes {
-              difficultyName
-            }
-          }
-        }
         tags {
           data {
             attributes {
@@ -1930,13 +1816,6 @@ export const ResearchPostsDocument = gql`
         }
         highlighted
         isPRO
-      }
-    }
-  }
-  readingDifficulties {
-    data {
-      attributes {
-        difficultyName
       }
     }
   }

@@ -20,9 +20,6 @@ export type PostDataType = {
       alternativeText?: string
     }
   }[]
-  readingDifficulty: {
-    difficultyName: string
-  }
   tags: {
     name: string
   }[]
@@ -30,10 +27,6 @@ export type PostDataType = {
 
 export type TagsDataType = {
   name: string
-}
-
-export type ReadingDifficultyDataType = {
-  difficultyName: string
 }
 
 type PostsStats = {
@@ -57,7 +50,6 @@ type PostState = {
   coins: Coin[]
   postsStats: PostsStats
   highlightedPost: PostDataType
-  readingDifficulties: string[]
   tabs: string[]
 }
 
@@ -66,7 +58,6 @@ const initialState: PostState = {
   tags: [],
   coins: [],
   postsStats: { pageCount: 0, total: 0 },
-  readingDifficulties: [],
   tabs: [],
   highlightedPost: {
     id: '',
@@ -76,9 +67,6 @@ const initialState: PostState = {
       alternativeText: ''
     },
     readTimeInMinutes: 0,
-    readingDifficulty: {
-      difficultyName: ''
-    },
     writers: [],
     tags: [],
     summary: '',
@@ -107,9 +95,6 @@ const postsSlice = createSlice({
     setHighlightedPost: (state, action: PayloadAction<PostDataType>) => {
       state.highlightedPost = action.payload
     },
-    setReadingDifficulties: (state, action: PayloadAction<string[]>) => {
-      state.readingDifficulties = action.payload
-    },
     setTabs: (state, action: PayloadAction<string[]>) => {
       state.tabs = action.payload
     }
@@ -122,7 +107,6 @@ export const {
   setCoins,
   setPostsStats,
   setHighlightedPost,
-  setReadingDifficulties,
   setTabs
 } = postsSlice.actions
 

@@ -27,12 +27,6 @@ const requestSchema = z.object({
     .max(20, 'Page has to be lower than or equal to 20')
     .optional()
     .default(20),
-  readingDifficulties: z
-    .string()
-    .optional()
-    .default('')
-    .transform(val => val.split(','))
-    .transform(val => (val.length <= 1 && val[0] === '' ? [] : val)),
   tab: z
     .string()
     .optional()
@@ -50,14 +44,14 @@ export default async function handler(
   }
 
   try {
-    const { tags, coins, page, perPage, readingDifficulties, tab } =
-      requestSchema.parse(request.query)
+    const { tags, coins, page, perPage, tab } = requestSchema.parse(
+      request.query
+    )
 
     response.status(200).json(
       await getPosts({
         page,
         perPage,
-        readingDifficulties,
         tags,
         coins,
         tab

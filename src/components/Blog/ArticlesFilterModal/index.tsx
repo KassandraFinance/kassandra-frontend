@@ -50,9 +50,7 @@ const ArticlesFilterModal = ({
 
   const dispatch = useAppDispatch()
   const tags = useAppSelector(store => store.posts.tags)
-  const readingDifficulties = useAppSelector(
-    store => store.posts.readingDifficulties
-  )
+
   const Icon = icon
 
   const handleApply = () => {
@@ -60,7 +58,6 @@ const ArticlesFilterModal = ({
       {
         query: {
           ...router.query,
-          readingDifficulties: selectedFilters.readingDifficulties.join(','),
           tags: selectedFilters.tags.join(','),
           coins: selectedFilters.coins.join(',')
         }
@@ -81,7 +78,7 @@ const ArticlesFilterModal = ({
   return (
     <Modal title={title} icon={Icon}>
       <ModalContentWrapper>
-        <S.ModalSection>
+        {/* <S.ModalSection>
           <S.FilterSectionTitle>Difficulty</S.FilterSectionTitle>
 
           <ul>
@@ -102,7 +99,7 @@ const ArticlesFilterModal = ({
               </S.FilterItem>
             ))}
           </ul>
-        </S.ModalSection>
+        </S.ModalSection> */}
 
         <S.ModalSection>
           <S.FilterSectionTitle>Tags</S.FilterSectionTitle>
@@ -137,8 +134,8 @@ const ArticlesFilterModal = ({
             />
           </S.SearchInputWrapper>
           {isLoading && <Loading />}
-
           <ul>
+            {console.log(researchCoinsResponse?.coins)}
             {researchCoinsResponse?.coins?.map(coin => (
               <S.CoinItem key={coin.coinGeckoID}>
                 <S.ItemLabel>
@@ -146,19 +143,19 @@ const ArticlesFilterModal = ({
                     name={coin.coinGeckoID}
                     checked={selectedFilters.coins.includes(coin.coinGeckoID)}
                     onChange={() =>
-                      handleUpdateFilter('coins', coin.coinGeckoID)
+                      handleUpdateFilter('coins', coin?.coinGeckoID)
                     }
-                    label={coin.name}
+                    label={coin?.name}
                     showLabel={false}
                   />
-                  <Image
-                    src={coin.image.url}
-                    alt={coin.image.alternativeText}
+                  <img
+                    src={coin?.image?.url ?? '/assets/icons/coming-soon.svg'}
+                    alt={coin?.image?.alternativeText}
                     height={24}
                     width={24}
                   />
                   <S.NameContainer>
-                    {coin.name} <span>{coin.symbol}</span>
+                    {coin?.name} <span>{coin?.symbol}</span>
                   </S.NameContainer>
                 </S.ItemLabel>
               </S.CoinItem>

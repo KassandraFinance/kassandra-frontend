@@ -12,7 +12,6 @@ import {
   setCoins,
   setPosts,
   setPostsStats,
-  setReadingDifficulties,
   setTabs,
   setTags
 } from '@/store/reducers/postsSlice'
@@ -37,17 +36,9 @@ interface IndexProps {
     pageCount: number
     total: number
   }
-  readingDifficulties?: string[]
 }
 
-const Index = ({
-  posts,
-  tags,
-  coins,
-  tabs,
-  postsStats,
-  readingDifficulties
-}: IndexProps) => {
+const Index = ({ posts, tags, coins, tabs, postsStats }: IndexProps) => {
   const dispatch = useDispatch()
 
   React.useEffect(() => {
@@ -56,9 +47,7 @@ const Index = ({
     if (coins) dispatch(setCoins(coins))
     if (tabs) dispatch(setTabs(tabs))
     if (postsStats) dispatch(setPostsStats(postsStats))
-    if (readingDifficulties)
-      dispatch(setReadingDifficulties(readingDifficulties))
-  }, [dispatch, posts, tags, coins, postsStats, readingDifficulties, tabs])
+  }, [dispatch, posts, tags, coins, postsStats, tabs])
 
   return (
     <>
@@ -95,7 +84,6 @@ export const getStaticProps: GetStaticProps = async () => {
     const posts = await getPosts({
       isPRO: false,
       page: 1,
-      readingDifficulties: [],
       tags: [],
       coins: [],
       perPage: 20,
@@ -116,7 +104,6 @@ export const getStaticProps: GetStaticProps = async () => {
           pageCount: 0,
           total: 0
         },
-        readingDifficulties: posts.readingDifficulties,
         tabs: posts.tabs
       }
     }
