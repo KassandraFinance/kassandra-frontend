@@ -14,6 +14,30 @@ export const ProgressBar = ({
   const [scrollProgress, setScrollProgress] = React.useState(0)
   const [totalScroll, setTotalScroll] = React.useState(0)
 
+  function handleEventBanner(totalScroll: number) {
+    const headerStyle = document.getElementById('top')?.style
+    const titleBarStyle = document.getElementById('titleBar')?.style
+
+    const isActiveEventBanner =
+      document.getElementById('event-banner')?.getAttribute('data-fixed') ??
+      false
+    console.log('headerStyle', headerStyle)
+    console.log(
+      'totalScroll',
+      totalScroll < 100 && isActiveEventBanner === 'true'
+    )
+
+    if (headerStyle && titleBarStyle) {
+      if (totalScroll < 100 && isActiveEventBanner === 'true') {
+        headerStyle.top = '5.6rem'
+        titleBarStyle.top = '14rem'
+      } else {
+        headerStyle.top = '0'
+        titleBarStyle.top = '9.1rem'
+      }
+    }
+  }
+
   React.useEffect(() => {
     const onScroll = () => {
       const markdownContentHeight =
@@ -36,8 +60,15 @@ export const ProgressBar = ({
 
       setTotalScroll(totScroll)
       setScrollProgress(progress)
+
+      const hasEventBanner = document.getElementById('event-banner')
+      const clientWidth = document.documentElement.clientWidth
+      if (hasEventBanner && clientWidth < 576) {
+        handleEventBanner(totScroll)
+      }
     }
     window.addEventListener('scroll', onScroll)
+
     return () => {
       window.removeEventListener('scroll', onScroll)
     }

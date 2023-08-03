@@ -16,7 +16,7 @@ const TitleBar = ({
   isContentShowing
 }: ITitleBarProps) => {
   return (
-    <S.TitleBar onClick={handleSidebarButton}>
+    <S.TitleBar id="titleBar" onClick={handleSidebarButton}>
       <S.TitleBarTextWrapper>
         <S.TitleBarText>
           <p className="title">{postTitle}</p>
