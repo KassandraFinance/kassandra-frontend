@@ -737,6 +737,7 @@ export type Chain = {
   nativeTokenDecimals?: Maybe<Scalars['Int']['output']>;
   nativeTokenName?: Maybe<Scalars['String']['output']>;
   nativeTokenSymbol?: Maybe<Scalars['String']['output']>;
+  pool_count: Scalars['Int']['output'];
   rpcUrls?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   secondsPerBlock?: Maybe<Scalars['Int']['output']>;
 };
@@ -752,10 +753,19 @@ export type Chain_Filter = {
   id_lte?: InputMaybe<Scalars['ID']['input']>;
   id_not?: InputMaybe<Scalars['ID']['input']>;
   id_not_in?: InputMaybe<Array<Scalars['ID']['input']>>;
+  pool_count?: InputMaybe<Scalars['Int']['input']>;
+  pool_count_gt?: InputMaybe<Scalars['Int']['input']>;
+  pool_count_gte?: InputMaybe<Scalars['Int']['input']>;
+  pool_count_in?: InputMaybe<Array<Scalars['Int']['input']>>;
+  pool_count_lt?: InputMaybe<Scalars['Int']['input']>;
+  pool_count_lte?: InputMaybe<Scalars['Int']['input']>;
+  pool_count_not?: InputMaybe<Scalars['Int']['input']>;
+  pool_count_not_in?: InputMaybe<Array<Scalars['Int']['input']>>;
 };
 
 export type Chain_OrderBy =
-  | 'id';
+  | 'id'
+  | 'pool_count';
 
 /**
  * Fee volume per type for 1h, 1d and 7d periods (1d periods are not 24h volume as they are based from 00:00 UTC)
@@ -1207,7 +1217,7 @@ export type Investor_OrderBy =
   | 'wallet';
 
 /**
- * Helper object to keep track of the AUM fee that goes to Kassandra
+ * General data about the whole Kassandra
  *
  */
 export type Kassandra = {
@@ -1242,7 +1252,7 @@ export type Kassandra = {
 
 
 /**
- * Helper object to keep track of the AUM fee that goes to Kassandra
+ * General data about the whole Kassandra
  *
  */
 export type KassandraFeesArgs = {
@@ -1255,7 +1265,7 @@ export type KassandraFeesArgs = {
 
 
 /**
- * Helper object to keep track of the AUM fee that goes to Kassandra
+ * General data about the whole Kassandra
  *
  */
 export type KassandraVolumesArgs = {
@@ -1647,7 +1657,7 @@ export type Pool = {
   brokers: Array<Broker>;
   chain?: Maybe<Chain>;
   chainId?: Maybe<Scalars['Int']['output']>;
-  chain_id: Scalars['Int']['output'];
+  chain_id?: Maybe<Scalars['Int']['output']>;
   /**
    * Controller contract that controls the vault
    *

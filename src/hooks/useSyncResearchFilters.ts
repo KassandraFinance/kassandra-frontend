@@ -24,14 +24,11 @@ export const useSyncResearchFilters = () => {
     const getInitialStateFromUrl = () => {
       let tags: string[] = []
       let coins: string[] = []
-      let readingDifficulties: string[] = []
       let isPRO = false
 
       const tagsResult = urlArrayValidator.safeParse(router.query?.tags)
       const coinsResult = urlArrayValidator.safeParse(router.query?.coins)
-      const readingDifficultiesResult = urlArrayValidator.safeParse(
-        router.query?.readingDifficulties
-      )
+
       const isPROResult = z
         .string()
         .refine(val => val === 'true')
@@ -45,10 +42,6 @@ export const useSyncResearchFilters = () => {
         coins = coinsResult.data
       }
 
-      if (readingDifficultiesResult.success) {
-        readingDifficulties = readingDifficultiesResult.data
-      }
-
       if (isPROResult.success) {
         isPRO = isPROResult.data
       }
@@ -56,7 +49,6 @@ export const useSyncResearchFilters = () => {
       return {
         tags,
         coins,
-        readingDifficulties,
         isPRO
       }
     }

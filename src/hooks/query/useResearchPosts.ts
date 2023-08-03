@@ -5,7 +5,6 @@ import { useQuery } from '@tanstack/react-query'
 type QueryReturn = {
   posts: PostDataType[]
   tags: string[]
-  readingDifficulties: string[]
   postsStats: {
     pageCount: number
     total: number
@@ -16,7 +15,6 @@ type UseResearchPostsProps = {
   page: number
   tags: string[]
   coins: string[]
-  readingDifficulties: string[]
   posts?: PostDataType[]
   postsStats?: {
     pageCount: number
@@ -29,7 +27,6 @@ type FetchResearchPosts = {
   page: number
   tags: string[]
   coins: string[]
-  readingDifficulties: string[]
   baseURL?: string
   tab?: string
 }
@@ -38,7 +35,6 @@ export const fetchResearchPosts = async ({
   page,
   tags,
   coins,
-  readingDifficulties,
   baseURL = '',
   tab
 }: FetchResearchPosts) => {
@@ -46,7 +42,6 @@ export const fetchResearchPosts = async ({
   urlSearchParams.set('page', String(page))
   urlSearchParams.set('tags', tags.join(','))
   urlSearchParams.set('coins', coins.join(','))
-  urlSearchParams.set('readingDifficulties', readingDifficulties.join(','))
   urlSearchParams.set('tab', String(tab ?? undefined))
 
   const response = await fetch(
@@ -65,7 +60,6 @@ export const useResearchPosts = ({
   page,
   tags,
   coins,
-  readingDifficulties,
   posts,
   postsStats,
   tab
@@ -73,13 +67,12 @@ export const useResearchPosts = ({
   const dispatch = useAppDispatch()
 
   return useQuery({
-    queryKey: ['posts', page, tags, coins, readingDifficulties, tab],
+    queryKey: ['posts', page, tags, coins, tab],
     queryFn: async () => {
       return await fetchResearchPosts({
         page,
         tags,
         coins,
-        readingDifficulties,
         tab
       })
     },
@@ -93,7 +86,6 @@ export const useResearchPosts = ({
         ? {
             posts,
             postsStats,
-            readingDifficulties: [],
             tags: []
           }
         : undefined

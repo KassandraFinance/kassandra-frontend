@@ -31,7 +31,6 @@ import * as S from './styles'
 export type Filter = {
   coins: string[]
   tags: string[]
-  readingDifficulties: string[]
 }
 
 interface IArticlesSectionProps {
@@ -48,15 +47,12 @@ const ArticlesSection = ({
   postsStats,
   tabs
 }: IArticlesSectionProps) => {
-  const { coins, tags, readingDifficulties } = useAppSelector(
-    state => state.articlesFilter
-  )
+  const { coins, tags } = useAppSelector(state => state.articlesFilter)
 
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [selectedFilters, setSelectedFilters] = React.useState<Filter>({
     coins,
-    tags,
-    readingDifficulties
+    tags
   })
 
   const [page, setPage] = React.useState(1)
@@ -79,7 +75,6 @@ const ArticlesSection = ({
     page,
     tags,
     coins,
-    readingDifficulties,
     posts,
     postsStats,
     tab
@@ -101,20 +96,17 @@ const ArticlesSection = ({
     setIsModalOpen(isOpen)
     setSelectedFilters({
       coins,
-      tags,
-      readingDifficulties
+      tags
     })
   }
 
   const handleRemoveFilter = (type: FilterType, value: string) => {
     const removeFilterFromQuery = (type: FilterType, value: string) => {
-      const queryReadingDifficulties = String(router.query?.readingDifficulties)
       const queryTags = String(router.query?.tags)
       const queryIsPRO = String(router.query?.isPRO)
       const queryCoins = String(router.query?.coins)
 
       const arrayQueryFilters = {
-        readingDifficulties: queryReadingDifficulties.split(','),
         tags: queryTags.split(','),
         coins: queryCoins.split(',')
       }
@@ -134,8 +126,6 @@ const ArticlesSection = ({
         {
           query: {
             ...router.query,
-            readingDifficulties:
-              arrayQueryFilters.readingDifficulties.join(','),
             tags: arrayQueryFilters.tags.join(','),
             coins: arrayQueryFilters.coins.join(','),
             isPRO: newIsPro,
@@ -257,11 +247,9 @@ const ArticlesSection = ({
     resetPage()
   }, [resetPage, router, tab, tabValidator, tabs])
 
-  const totalFiltersApplied = [
-    ...coins,
-    ...tags,
-    ...readingDifficulties
-  ].filter(filter => filter !== '')
+  const totalFiltersApplied = [...coins, ...tags].filter(
+    filter => filter !== ''
+  )
 
   const handleSelectView = (view: string) => {
     router.push(
@@ -330,10 +318,6 @@ const ArticlesSection = ({
               ...coins.map(coin => ({
                 type: 'coins',
                 value: coin
-              })),
-              ...readingDifficulties.map(difficulty => ({
-                type: 'readingDifficulties',
-                value: difficulty
               }))
             ]}
             onFilterRemove={({ type, value }) => {

@@ -47,8 +47,8 @@ export const ItemLabel = styled.label`
 
     transition: ${theme.transition.default};
 
-    image {
-      border-radius: 999999px;
+    img {
+      border-radius: 50%;
     }
 
     &:has(input[type='checkbox']:focus-visible) {

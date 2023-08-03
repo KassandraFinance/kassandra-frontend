@@ -34,9 +34,6 @@ interface IPost {
   highlighted: boolean
   slug: string
   readTimeInMinutes: number
-  readingDifficulty: {
-    difficultyName: string
-  }
   content: string
   coins: {
     id: string
@@ -215,7 +212,7 @@ const RightSidebar = ({
                     Pro
                   </Tag>
                 )}
-                {post?.readingDifficulty && (
+                {/* {post?.readingDifficulty && (
                   <Tag
                     variant={getVariantByDifficulty(
                       post.readingDifficulty.difficultyName
@@ -227,7 +224,7 @@ const RightSidebar = ({
                   >
                     {post?.readingDifficulty.difficultyName}
                   </Tag>
-                )}
+                )} */}
                 {post?.tags.map(tag => (
                   <Tag
                     key={tag.name}

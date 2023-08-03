@@ -66,9 +66,6 @@ export interface IPost {
       username: string
     }[]
   }[]
-  readingDifficulty: {
-    difficultyName: string
-  }
   tags: {
     name: string
   }[]
@@ -85,9 +82,6 @@ export interface IPost {
     readTimeInMinutes: string
     publishedAt: string
     isPRO: boolean
-    readingDifficulty: {
-      difficultyName: string
-    }[]
     banner: {
       url: string
     }
