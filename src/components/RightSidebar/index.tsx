@@ -103,7 +103,7 @@ const RightSidebar = ({
   )
   const activeId = useSectionTitleObserver({ itemIds, heading: 'H2' })
 
-  const shareUrl = `https://kassandra.finance${router.asPath}`
+  const shareUrl = `${document.location.origin}/${router.asPath}`
   const customMessage = `Check out this post, ${post?.title}, made by @Kassandra:`
 
   const handleShareButton = async () => {
