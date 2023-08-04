@@ -85,6 +85,7 @@ const RightSidebar = ({
   notAllowedToRead
 }: IRightSidebarProps) => {
   const [isSharing, setIsSharing] = React.useState(false)
+  const [shareUrl, setShareUrl] = React.useState('')
 
   const router = useRouter()
 
@@ -103,7 +104,10 @@ const RightSidebar = ({
   )
   const activeId = useSectionTitleObserver({ itemIds, heading: 'H2' })
 
-  const shareUrl = `${document.location.origin}${router.asPath}`
+  React.useEffect(() => {
+    setShareUrl(`${document?.location.origin}${router.asPath}`)
+  }, [])
+
   const customMessage = `Check out this post, ${post?.title}, made by @dao_kassandra:`
 
   const handleShareButton = async () => {
