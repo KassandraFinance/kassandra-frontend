@@ -26,7 +26,7 @@ export const ArticleHeader = ({
 }: ArticleHeaderProps) => {
   const router = useRouter()
 
-  const allArticlesTab = 'All Articles'
+  const allArticlesTab = 'Latest+Articles'
 
   return (
     <S.Header ref={headerContentRef}>
@@ -105,7 +105,7 @@ export const ArticleHeader = ({
             onClick={() => {
               handleArticlePageClick('Pro')
             }}
-            href={`/research?tab=${allArticlesTab}&isPRO=true`}
+            href={`/blog?tab=${allArticlesTab}&isPRO=true`}
           >
             Pro
           </S.StyledTag>
@@ -132,7 +132,7 @@ export const ArticleHeader = ({
             size="medium"
             capitalization="capitalize"
             onClick={() => handleArticlePageClick(tag.name)}
-            href={`/research?tab=${allArticlesTab}&tags=${tag.name}`}
+            href={`/blog?tab=${allArticlesTab}&tags=${tag.name}`}
           >
             {tag.name}
           </S.StyledTag>

@@ -88,7 +88,7 @@ const RightSidebar = ({
 
   const router = useRouter()
 
-  const allArticlesTab = 'All Articles'
+  const allArticlesTab = 'Latest+Articles'
 
   const postContent = React.useMemo(() => post?.content ?? '', [post?.content])
 
@@ -207,7 +207,7 @@ const RightSidebar = ({
                     size="small"
                     capitalization="capitalize"
                     onClick={handleTagClick}
-                    href={`/research?tab=${allArticlesTab}&isPRO=true`}
+                    href={`/blog?tab=${allArticlesTab}&isPRO=true`}
                   >
                     Pro
                   </Tag>
@@ -232,7 +232,7 @@ const RightSidebar = ({
                     size="small"
                     capitalization="capitalize"
                     onClick={handleTagClick}
-                    href={`/research?tab=${allArticlesTab}&tags=${tag.name}`}
+                    href={`/blog?tab=${allArticlesTab}&tags=${tag.name}`}
                   >
                     {tag.name}
                   </Tag>
