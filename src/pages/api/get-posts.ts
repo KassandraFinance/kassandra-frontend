@@ -24,9 +24,9 @@ const requestSchema = z.object({
   perPage: z.coerce
     .number()
     .min(1, 'Page has to be higher than or equal to 1')
-    .max(20, 'Page has to be lower than or equal to 20')
+    .max(24, 'Page has to be lower than or equal to 24')
     .optional()
-    .default(20),
+    .default(24),
   tab: z
     .string()
     .optional()

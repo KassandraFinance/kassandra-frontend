@@ -372,7 +372,7 @@ const ArticlesSection = ({
           }
           handlePageClick={handlePageClick}
           skip={0}
-          take={20}
+          take={24}
         />
       </S.PaginationWrapper>
     </S.ArticlesSection>
