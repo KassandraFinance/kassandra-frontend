@@ -96,7 +96,7 @@ const ArticlePage = ({ post, posts, isUserPRO }: IArticleProps) => {
         {/* Open Graph  Meta Tags  */}
         <meta
           property="og:url"
-          content={`${document.location.origin}/blog/${post.slug}`}
+          content={`https://kassandra.finance/blog/${post.slug}`}
           key="og:url"
         />
         <meta property="og:title" content={post.title} key="og:title" />
@@ -111,7 +111,7 @@ const ArticlePage = ({ post, posts, isUserPRO }: IArticleProps) => {
         <meta property="twitter:card" content="summary_large_image" />
         <meta
           property="twitter:url"
-          content={`${document.location.origin}/blog/${post.slug}`}
+          content={`https://kassandra.finance/blog/${post.slug}`}
           key="twitter:url"
         />
         <meta
