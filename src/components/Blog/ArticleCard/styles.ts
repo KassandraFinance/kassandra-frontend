@@ -35,6 +35,7 @@ export const ArticleCard = styled.div`
     overflow: hidden;
 
     border-radius: 8px;
+    height: 100%;
 
     background-color: rgba(252, 252, 252, 0.05);
     border: 1px solid rgba(252, 252, 252, 0.08);
