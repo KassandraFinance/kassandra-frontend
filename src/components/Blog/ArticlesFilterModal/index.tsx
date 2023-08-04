@@ -135,7 +135,6 @@ const ArticlesFilterModal = ({
           </S.SearchInputWrapper>
           {isLoading && <Loading />}
           <ul>
-            {console.log(researchCoinsResponse?.coins)}
             {researchCoinsResponse?.coins?.map(coin => (
               <S.CoinItem key={coin.coinGeckoID}>
                 <S.ItemLabel>
