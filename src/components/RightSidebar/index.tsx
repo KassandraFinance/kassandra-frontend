@@ -103,7 +103,7 @@ const RightSidebar = ({
   )
   const activeId = useSectionTitleObserver({ itemIds, heading: 'H2' })
 
-  const shareUrl = `${document.location.origin}/${router.asPath}`
+  const shareUrl = `${document.location.origin}${router.asPath}`
   const customMessage = `Check out this post, ${post?.title}, made by @dao_kassandra:`
 
   const handleShareButton = async () => {

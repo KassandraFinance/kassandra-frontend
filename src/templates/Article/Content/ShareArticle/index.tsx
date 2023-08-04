@@ -17,7 +17,7 @@ export const ShareArticle = ({
 }: ShareArticleProps) => {
   const router = useRouter()
 
-  const shareUrl = `${document.location.origin}/${router.asPath}`
+  const shareUrl = `${document.location.origin}${router.asPath}`
   const customMessage = `Check out this article, ${postTitle}, made by @dao_kassandra:`
 
   const handleClick = () => {
