@@ -8,6 +8,7 @@ import Document, {
 } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 import GlobalStyle from '../styles/global'
+import Script from 'next/script'
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -49,6 +50,11 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          <Script src="/tagAnalytics.js" defer></Script>
+          <Script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-KSGNHK2NH5"
+          ></Script>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             rel="preconnect"
