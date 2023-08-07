@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
+import useMatomo from '@/hooks/useMatomo'
 
 import Nav from './Nav'
 import Button from '../Button'
@@ -14,7 +14,7 @@ import logoKassandra from '../../../public/assets/logos/kassandra-header.svg'
 import * as S from './styles'
 
 const Header = () => {
-  const { trackEventFunction } = useMatomoEcommerce()
+  const { trackEvent } = useMatomo()
   const [isShowMenu, setIsShowMenu] = React.useState(false)
   const [showOverlay, setShowOverlay] = React.useState(false)
 
@@ -44,13 +44,31 @@ const Header = () => {
     <S.Wrapper id="top" data-fixed={router.pathname === '/blog/[slug]'}>
       <S.LogoWrapper>
         <Link href="/" passHref>
-          <a className="logo-desktop">
+          <a
+            onClick={() => {
+              trackEvent({
+                category: 'header',
+                action: 'click-on-logo-desktop',
+                name: 'Kassandra'
+              })
+            }}
+            className="logo-desktop"
+          >
             <Image src={logoKassandra} alt="Kassandra" />
           </a>
         </Link>
 
         <Link href="/" passHref>
-          <a className="logo-ipad">
+          <a
+            onClick={() => {
+              trackEvent({
+                category: 'header',
+                action: 'click-on-logo-ipad',
+                name: 'Kassandra'
+              })
+            }}
+            className="logo-ipad"
+          >
             <Image src={kacy96} width={27} height={24} alt="Kassandra" />
           </a>
         </Link>
@@ -85,7 +103,11 @@ const Header = () => {
             className="button-mobile"
             href="https://app.kassandra.finance"
             onClick={() => {
-              trackEventFunction('open-app', 'lauch-app', 'header')
+              trackEvent({
+                category: 'header',
+                action: 'click-on-button-header',
+                name: 'Launch App'
+              })
             }}
           />
         </S.ButtonsWrapper>

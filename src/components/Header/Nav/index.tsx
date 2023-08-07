@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+import useMatomo from '@/hooks/useMatomo'
 
 import Overlay from '../../Overlay'
 import SocialMidia from '@/components/SocialMidia'
@@ -53,7 +53,7 @@ const Nav = ({
   setIsShowMenu,
   setShowOverlay
 }: INavProps) => {
-  const { trackEventFunction } = useMatomoEcommerce()
+  const { trackEvent } = useMatomo()
 
   const router = useRouter()
 
@@ -81,7 +81,11 @@ const Nav = ({
             <S.MenuLink
               active={false}
               onClick={() => {
-                trackEventFunction('click-on-link', 'home-page', 'header')
+                trackEvent({
+                  category: 'header',
+                  action: 'click-on-logo',
+                  name: 'Kassandra'
+                })
                 handleClose()
               }}
             >
@@ -96,7 +100,11 @@ const Nav = ({
                   active={router.asPath === item.route}
                   onClick={() => {
                     handleClose()
-                    trackEventFunction('click-on-link', item.name, 'header')
+                    trackEvent({
+                      category: 'header',
+                      action: 'click-on-link',
+                      name: item.name
+                    })
                   }}
                 >
                   {item.name}

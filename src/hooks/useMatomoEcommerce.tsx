@@ -1,5 +1,6 @@
 import { useCallback } from 'react'
-import { useMatomo } from '@datapunt/matomo-tracker-react'
+// import { useMatomo } from '@j/matomo-tracker-react'
+import { useMatomo } from '@jonkoops/matomo-tracker-react'
 
 function useMatomoEcommerce() {
   const { pushInstruction, trackPageView, trackEvent } = useMatomo()

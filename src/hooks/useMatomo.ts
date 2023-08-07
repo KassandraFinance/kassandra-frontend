@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useMatomo as rawUseMatomo } from '@datapunt/matomo-tracker-react'
+import { useMatomo as rawUseMatomo } from '@jonkoops/matomo-tracker-react'
 
 type TrackPageViewOptions = {
   documentTitle?: string
