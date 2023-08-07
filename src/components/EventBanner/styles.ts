@@ -29,9 +29,10 @@ export const EventBanner = styled.div<IEventBannerProps>`
   ${({ isBlog }) =>
     isBlog &&
     css`
-      @media (max-width: 576px) {
+      @media (max-width: 992px) {
         position: sticky;
         position: -webkit-sticky;
+        height: 6.4rem;
       }
     `}
 

@@ -20,12 +20,33 @@ const EventBanner = ({
   const [isShowBanner, setIsShowBanner] = React.useState(true)
   const router = useRouter()
 
+  React.useEffect(() => {
+    const clientWidth = document.documentElement.clientWidth
+    if (router.route !== '/blog/[slug]' || clientWidth > 992) return
+
+    const titleBarStyle = document.getElementById('titleBar')?.style
+    const progressBackdrop = document.getElementById('progress-backdrop')?.style
+    const progressFill = document.getElementById('progress-fill')?.style
+
+    if (titleBarStyle && progressBackdrop && progressFill) {
+      if (isShowBanner) {
+        progressFill.top = '20rem'
+        progressBackdrop.top = '20rem'
+        titleBarStyle.top = '14rem'
+      } else {
+        titleBarStyle.top = '9.1rem'
+        progressFill.top = '15.5rem'
+        progressBackdrop.top = '15.5rem'
+      }
+    }
+  }, [isShowBanner, router.route])
+
   return (
     <S.EventBanner
       id="event-banner"
       data-fixed={isShowBanner}
       isShowBanner={isShowBanner}
-      isBlog={router.asPath === 'Blog'}
+      isBlog={router.route === '/blog/[slug]'}
     >
       <S.EventBannerContent>
         <Link href={link} passHref>

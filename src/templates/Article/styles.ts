@@ -29,7 +29,7 @@ export const ArticleProgressBar = styled.div`
   ${({ theme }) => css`
     transition: opacity ${theme.transition.default};
 
-    .progress-backdrop {
+    #progress-backdrop {
       position: fixed;
       top: 0;
       left: 0;
@@ -41,7 +41,7 @@ export const ArticleProgressBar = styled.div`
       background-color: ${theme.colors.neutral30};
     }
 
-    .progress-fill {
+    #progress-fill {
       position: fixed;
       top: 0;
       left: 0;
@@ -54,8 +54,8 @@ export const ArticleProgressBar = styled.div`
     }
 
     @media ${device.tabletLarge} {
-      .progress-backdrop,
-      .progress-fill {
+      #progress-backdrop,
+      #progress-fill {
         top: calc(var(--header-height) + 6.4rem);
 
         opacity: 1;
