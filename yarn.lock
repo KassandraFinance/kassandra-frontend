@@ -640,18 +640,6 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
-"@datapunt/matomo-tracker-js@^0.5.1":
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@datapunt/matomo-tracker-js/-/matomo-tracker-js-0.5.1.tgz#92a746ffa421f91b3a59fefce707d45ca22be96b"
-  integrity sha512-9/MW9vt/BA5Db7tO6LqCeQKtuvBNjyq51faF3AzUmPMlYsJCnASIxcut3VqJKiribhUoey7aYbPIYuj9x4DLPA==
-
-"@datapunt/matomo-tracker-react@^0.5.1":
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@datapunt/matomo-tracker-react/-/matomo-tracker-react-0.5.1.tgz#d7a4e62b23610eab2b7513d4df41d500291aaa53"
-  integrity sha512-lrNYM9hFL6XK0VAdtMb7MwZrLWhaAconx4c7gOGAMvoWuoVm+ZZIYFuKtfYdYMeBf0avxWtmKRwjZEg7T8jV2A==
-  dependencies:
-    "@datapunt/matomo-tracker-js" "^0.5.1"
-
 "@emmetio/abbreviation@^2.3.3":
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/@emmetio/abbreviation/-/abbreviation-2.3.3.tgz#ed2b88fe37b972292d6026c7c540aaf887cecb6e"
@@ -1290,6 +1278,18 @@
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
+
+"@jonkoops/matomo-tracker-react@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@jonkoops/matomo-tracker-react/-/matomo-tracker-react-0.7.0.tgz#08a337005bd095148f7cad5ec1dff69b8fd64d7b"
+  integrity sha512-3iwG/QM1T6KokU/NZNCkhOccIkhaNnO1+0bTv2JsLbsS7u7hWxpio20gfBjCRd/9N1AMiGidvytG2FK9tu7WFw==
+  dependencies:
+    "@jonkoops/matomo-tracker" "^0.7.0"
+
+"@jonkoops/matomo-tracker@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@jonkoops/matomo-tracker/-/matomo-tracker-0.7.0.tgz#38bd15352cd6a2115eb863a9ba582a1c0f52fc32"
+  integrity sha512-ppCXiDaVytTQOP6hNZIBwjUph5IrGgDoQw4IF5sBoA3PBpMAc5tWtPExbVWTR5pJWpTcp11dv2M83n9pm7LpeQ==
 
 "@jridgewell/gen-mapping@^0.3.0", "@jridgewell/gen-mapping@^0.3.2":
   version "0.3.3"
