@@ -17,7 +17,8 @@ interface IRecommendedProps {
 const Recommended = ({
   posts,
   currentPostId,
-  handleArticlePageClick
+  handleArticlePageClick,
+  currentPostTab
 }: IRecommendedProps) => {
   const recommendedPosts = (posts || [])
     .filter(post => post.id !== (currentPostId ?? ''))
@@ -42,10 +43,12 @@ const Recommended = ({
         variant="ghost"
         size="large"
         className="readmore-btn"
-        href="/blog"
-        onClick={() => handleArticlePageClick('readmore-btn', 'DeFi')}
+        href={`/blog?tab=${currentPostTab?.replace(' ', '+')}`}
+        onClick={() =>
+          handleArticlePageClick('readmore-btn', `${currentPostTab}`)
+        }
       >
-        Read more from DeFi <CircledArrowIcon />
+        Read more from {currentPostTab} <CircledArrowIcon />
       </Button>
     </S.Recommended>
   )

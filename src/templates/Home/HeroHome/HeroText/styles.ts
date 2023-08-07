@@ -10,6 +10,11 @@ export const TitleContainer = styled.div`
   gap: 2.4rem;
 
   max-width: 106rem;
+
+  @media (max-height: 800px) {
+    margin-top: 8rem;
+    gap: 1rem;
+  }
 `
 
 export const Title = styled.h1`

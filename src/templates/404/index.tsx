@@ -10,7 +10,6 @@ interface INotFoundProps {
 
 const NotFound = ({ text, contact }: INotFoundProps) => (
   <>
-    <Header />
     <S.Wrapper>
       {contact ? (
         <>

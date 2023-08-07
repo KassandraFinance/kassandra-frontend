@@ -57,8 +57,8 @@ const LockPoolCard = ({ pid, kacyData }: ILockPoolCardProps) => {
     const kacyRewards = Big(poolInfoRes.rewardRate.toString()).mul(Big(86400))
 
     const apr = handleCalcAPR({
-      kacyPrice: Big(kacyData.tokenPrice),
-      poolPrice: Big(kacyData.tokenPrice),
+      kacyPrice: Big(kacyData?.tokenPrice ?? 0),
+      poolPrice: Big(kacyData?.tokenPrice ?? 0),
       rewardRate: kacyRewards,
       totalDeposit: totalStaked
     })
