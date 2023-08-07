@@ -3,6 +3,7 @@ import { Wrapper } from '../Header/styles'
 
 interface IEventBannerProps {
   isShowBanner: boolean
+  isBlog: boolean
 }
 
 export const EventBanner = styled.div<IEventBannerProps>`
@@ -22,18 +23,24 @@ export const EventBanner = styled.div<IEventBannerProps>`
     ${Wrapper} {
       top: 5.6rem;
       transition: top 600ms ease-in-out;
-
-      @media (max-width: 576px) {
-        top: 6.6rem;
-      }
     }
   `}
+
+  ${({ isBlog }) =>
+    isBlog &&
+    css`
+      @media (max-width: 992px) {
+        position: sticky;
+        position: -webkit-sticky;
+        height: 6.4rem;
+      }
+    `}
 
   ${({ isShowBanner }) =>
     !isShowBanner &&
     css`
       ${Wrapper} {
-        top: 0;
+        top: 0 !important;
       }
 
       ${EventBannerContent} {
@@ -54,6 +61,10 @@ export const EventBannerContent = styled.div`
     margin-inline: 2.4rem;
     padding-block: 1.6rem;
 
+    .textMobile {
+      display: none;
+    }
+
     > img {
       margin-left: 1.6rem;
       cursor: pointer;
@@ -61,6 +72,15 @@ export const EventBannerContent = styled.div`
 
     @media (max-width: 768px) {
       padding-block: 0.8rem;
+    }
+
+    @media (max-width: 576px) {
+      .textDesktop {
+        display: none;
+      }
+      .textMobile {
+        display: block;
+      }
     }
   `}
 `

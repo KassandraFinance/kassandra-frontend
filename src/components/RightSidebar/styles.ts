@@ -15,7 +15,6 @@ export const RightSidebar = styled.aside<IRightSidebarProps>`
     flex-direction: column;
     top: 0;
     right: 0;
-    z-index: 10;
     flex: 1 1 70%;
     padding-top: 4.8rem;
     height: 100vh;

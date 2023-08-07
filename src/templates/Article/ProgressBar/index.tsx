@@ -38,6 +38,7 @@ export const ProgressBar = ({
       setScrollProgress(progress)
     }
     window.addEventListener('scroll', onScroll)
+
     return () => {
       window.removeEventListener('scroll', onScroll)
     }
@@ -45,9 +46,9 @@ export const ProgressBar = ({
 
   return (
     <S.ArticleProgressBar style={{ opacity: `${totalScroll === 0 ? 0 : 1}` }}>
-      <span className="progress-backdrop" />
+      <span id="progress-backdrop" />
       <span
-        className="progress-fill"
+        id="progress-fill"
         style={{
           width: `${scrollProgress * 100 > 100 ? 100 : scrollProgress * 100}%`
         }}
