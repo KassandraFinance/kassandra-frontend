@@ -1,8 +1,9 @@
 import React from 'react'
 import Image, { StaticImageData } from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
-import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+import useMatomo from '@/hooks/useMatomo'
 
 import Button from '../../../components/Button'
 import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
@@ -33,7 +34,8 @@ const SectionCard = ({
   link,
   img
 }: ISectionCardProps) => {
-  const { trackEventFunction } = useMatomoEcommerce()
+  const { trackEvent } = useMatomo()
+  const router = useRouter()
 
   return (
     <S.Container>
@@ -85,11 +87,11 @@ const SectionCard = ({
                 }
                 backgroundSecondary
                 onClick={() =>
-                  trackEventFunction(
-                    'click-on-button',
-                    `${btnText}`,
-                    'section-home'
-                  )
+                  trackEvent({
+                    category: router.pathname,
+                    action: `click-on-button | Buy one token | ${router.pathname}`,
+                    name: `${btnText}`
+                  })
                 }
               />
             </a>

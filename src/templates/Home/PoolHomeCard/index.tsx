@@ -1,8 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
-import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+import useMatomo from '@/hooks/useMatomo'
 import { usePoolInfo } from '@/hooks/query/usePoolInfo'
 
 import { ProductDetails } from '../../../constants/tokenAddresses'
@@ -60,6 +61,9 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
     {}
   )
 
+  const { trackEvent } = useMatomo()
+  const router = useRouter()
+
   const day = Math.trunc(Date.now() / 1000 - 60 * 60 * 24)
 
   const { data } = usePoolInfo({ id: pool.sipAddress, day: day })
@@ -96,8 +100,6 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
       setPoolObject(poolData)
     }
   }, [data])
-
-  const { trackEventFunction } = useMatomoEcommerce()
 
   return (
     <S.CardWrapper>
@@ -178,11 +180,11 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
           <Link href={`/pool/${pool.sipAddress}`}>
             <Button
               onClick={() =>
-                trackEventFunction(
-                  'click-on-button',
-                  `buy-${pool.symbol.toLowerCase()}`,
-                  `pool-card-home`
-                )
+                trackEvent({
+                  category: router.pathname,
+                  action: `click-on-button | FEATURED PORTFOLIOS | ${router.pathname}`,
+                  name: 'Buy $${pool.symbol}'
+                })
               }
               backgroundPrimary
               size="huge"
@@ -191,11 +193,11 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
           </Link>
           <ExternalLink
             onClick={() =>
-              trackEventFunction(
-                'click-on-link',
-                `learn-more-${pool.symbol}`,
-                `pool-card-home`
-              )
+              trackEvent({
+                category: router.pathname,
+                action: `click-on-link | FEATURED PORTFOLIOS | ${router.pathname}`,
+                name: `Learn more - ${pool.symbol}`
+              })
             }
             hrefLink={pool.fundLink}
             text="Learn more"

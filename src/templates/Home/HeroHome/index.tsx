@@ -1,14 +1,20 @@
+import { useRouter } from 'next/router'
+
+import useMatomo from '@/hooks/useMatomo'
+
+import ScrollAnimation from '../../../components/ScrollAnimation'
+import Button from '../../../components/Button'
 import HeroBackGround from './HeroBackGround'
 import HeroText from './HeroText'
-import Button from '../../../components/Button'
 import DaoData from './DaoData'
-import ScrollAnimation from '../../../components/ScrollAnimation'
-import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 
 import * as S from './styles'
 
 const HeroHome = () => {
-  const { trackEventFunction } = useMatomoEcommerce()
+  const router = useRouter()
+  const { trackEvent } = useMatomo({
+    trackPageView: true
+  })
 
   return (
     <S.Hero>
@@ -52,7 +58,11 @@ const HeroHome = () => {
         backgroundPrimary
         href="https://app.kassandra.finance"
         onClick={() =>
-          trackEventFunction('click-on-button', 'start-investing', 'hero-home')
+          trackEvent({
+            category: router.pathname,
+            action: `click-on-link | Hero-Home | ${router.pathname}`,
+            name: 'Start Investing'
+          })
         }
       />
 
