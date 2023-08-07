@@ -16,16 +16,15 @@ export const Background = styled.div`
 
 export const Wrapper = styled.div`
   display: flex;
-  padding: 0 3.2rem;
-  max-width: 79rem;
-  margin: 15.9rem auto 0;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  @media (max-width: 960px) {
-    height: 50vh;
-  }
+  padding: 0 3.2rem;
+  max-width: 79rem;
+  margin: 0 auto;
+  height: 100vh;
+
   @media (max-height: 720px) {
     margin: 7rem auto 0;
   }
