@@ -64,7 +64,9 @@ const Index = ({ posts, tags, coins, tabs, postsStats }: IndexProps) => {
         <meta property="twitter:url" content="https://kassandra.finance/blog" />
         <meta property="twitter:description" content="A Blog" />
       </Head>
+
       <S.Background />
+      <S.HeroBackground />
       <Blog posts={posts} postsStats={postsStats} tabs={tabs ?? []} />
     </>
   )
