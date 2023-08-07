@@ -17,6 +17,7 @@ export const RightSidebar = styled.aside<IRightSidebarProps>`
     right: 0;
     flex: 1 1 70%;
     padding-top: 4.8rem;
+    height: 100vh;
 
     overflow-y: auto;
 

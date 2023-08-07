@@ -17,8 +17,12 @@ export const ShareArticle = ({
 }: ShareArticleProps) => {
   const router = useRouter()
 
-  const shareUrl = `https://kassandra.finance${router.asPath}`
-  const customMessage = `Check out this article, ${postTitle}, made by @Kassandra:`
+  let shareUrl = ''
+  if (typeof window === 'object') {
+    shareUrl = `${document?.location.origin}${router.asPath}`
+  }
+
+  const customMessage = `Check out this article, ${postTitle}, made by @dao_kassandra:`
 
   const handleClick = () => {
     const twitterUrl = `https://twitter.com/intent/tweet?text=${customMessage}&url=${shareUrl}`

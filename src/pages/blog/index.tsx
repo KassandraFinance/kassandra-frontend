@@ -88,7 +88,7 @@ export const getStaticProps: GetStaticProps = async () => {
       page: 1,
       tags: [],
       coins: [],
-      perPage: 20,
+      perPage: 24,
       tab: tab ?? undefined
     })
 

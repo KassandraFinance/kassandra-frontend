@@ -85,10 +85,11 @@ const RightSidebar = ({
   notAllowedToRead
 }: IRightSidebarProps) => {
   const [isSharing, setIsSharing] = React.useState(false)
+  const [shareUrl, setShareUrl] = React.useState('')
 
   const router = useRouter()
 
-  const allArticlesTab = 'All Articles'
+  const allArticlesTab = 'Latest+Articles'
 
   const postContent = React.useMemo(() => post?.content ?? '', [post?.content])
 
@@ -103,8 +104,11 @@ const RightSidebar = ({
   )
   const activeId = useSectionTitleObserver({ itemIds, heading: 'H2' })
 
-  const shareUrl = `https://kassandra.finance${router.asPath}`
-  const customMessage = `Check out this post, ${post?.title}, made by @Kassandra:`
+  React.useEffect(() => {
+    setShareUrl(`${document?.location.origin}${router.asPath}`)
+  }, [])
+
+  const customMessage = `Check out this post, ${post?.title}, made by @dao_kassandra:`
 
   const handleShareButton = async () => {
     if (navigator.share) {
@@ -207,7 +211,7 @@ const RightSidebar = ({
                     size="small"
                     capitalization="capitalize"
                     onClick={handleTagClick}
-                    href={`/research?tab=${allArticlesTab}&isPRO=true`}
+                    href={`/blog?tab=${allArticlesTab}&isPRO=true`}
                   >
                     Pro
                   </Tag>
@@ -232,7 +236,7 @@ const RightSidebar = ({
                     size="small"
                     capitalization="capitalize"
                     onClick={handleTagClick}
-                    href={`/research?tab=${allArticlesTab}&tags=${tag.name}`}
+                    href={`/blog?tab=${allArticlesTab}&tags=${tag.name}`}
                   >
                     {tag.name}
                   </Tag>
