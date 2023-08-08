@@ -1,9 +1,12 @@
 import React from 'react'
-import useMatomoEcommerce from '@/hooks/useMatomoEcommerce'
+import { useRouter } from 'next/router'
 
-import * as S from './styles'
+import useMatomo from '@/hooks/useMatomo'
+
 import { FAQminus } from '@/Icons/FAQminus'
 import { FAQmore } from '@/Icons/FAQmore'
+
+import * as S from './styles'
 
 interface QuestionCardProps {
   question: string
@@ -22,7 +25,8 @@ const QuestionCard = ({
 }: QuestionCardProps) => {
   const [isOpen, setIsOpen] = React.useState(false)
 
-  const { trackEventFunction } = useMatomoEcommerce()
+  const { trackEvent } = useMatomo()
+  const router = useRouter()
 
   return (
     <S.Question>
@@ -30,11 +34,11 @@ const QuestionCard = ({
         background={background}
         onClick={() => {
           setIsOpen(!isOpen)
-          trackEventFunction(
-            'click-on-button',
-            'frequently-asked-questions',
-            'faq'
-          )
+          trackEvent({
+            category: router.pathname,
+            action: `click-on-button | frequently-asked-questions | ${router.pathname}`,
+            name: 'faq-question'
+          })
         }}
       >
         <p>{question}</p>

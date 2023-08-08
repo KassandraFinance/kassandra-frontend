@@ -1,9 +1,13 @@
+import { useRouter } from 'next/router'
+
+import useMatomo from '@/hooks/useMatomo'
+
 import FeaturedCard from './FeaturedCard'
 import Paragraph from '@/components/Paragraph'
 import SectionSubtitle from '@/components/SectionSubtitle'
 import FadeIn from '@/components/Animations/FadeIn'
-import FadeInVertical from '@/components/Animations/FadeInVertical'
 import Button from '@/components/Button'
+import FadeInVertical from '@/components/Animations/FadeInVertical'
 
 import { LineGradient } from '@/Icons'
 
@@ -31,6 +35,9 @@ const dataFeature = [
 ]
 
 const FeaturedManager = () => {
+  const { trackEvent } = useMatomo()
+  const router = useRouter()
+
   return (
     <S.FeaturedManager>
       <FadeIn threshold={0.4}>
@@ -65,6 +72,13 @@ const FeaturedManager = () => {
             as="a"
             href="https://tally.so/r/3XrKdz"
             target="_blank"
+            onClick={() => {
+              trackEvent({
+                category: router.pathname,
+                action: `click-on-button | FeaturedManager | ${router.pathname}`,
+                name: 'Get Started'
+              })
+            }}
           />
         </S.FeaturedCardContainer>
       </FadeInVertical>
