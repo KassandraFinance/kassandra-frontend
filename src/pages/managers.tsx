@@ -7,17 +7,19 @@ export default function Index() {
     <>
       <Head>
         {/* Primary Meta Tags */}
-        <title>Kassandra for Managers</title>
+        <title>
+          Kassandra for Managers - Create your own tokenized crypto portfolio
+        </title>
         <meta
           name="description"
-          content="Tokenize your portfolio in an one-stop-shop and earn money with it. Become a pillar of decentralized asset management and earn additional income whenever someone invests in your portfolios. Manage, track, and evaluate in one place with no extra fees."
+          content="Start your own investment pool with tokenized crypto portfolios in an intuitive interface made by traders for traders."
         />
 
         {/* Open Graph / Facebook */}
         <meta property="og:url" content="https://kassandra.finance/managers" />
         <meta
           property="og:description"
-          content="Tokenize your portfolio in an one-stop-shop and earn money with it. Become a pillar of decentralized asset management and earn additional income whenever someone invests in your portfolios. Manage, track, and evaluate in one place with no extra fees."
+          content="Start your own investment pool with tokenized crypto portfolios in an intuitive interface made by traders for traders."
         />
 
         {/* Twitter */}
@@ -27,7 +29,7 @@ export default function Index() {
         />
         <meta
           property="twitter:description"
-          content="Tokenize your portfolio in an one-stop-shop and earn money with it. Become a pillar of decentralized asset management and earn additional income whenever someone invests in your portfolios. Manage, track, and evaluate in one place with no extra fees."
+          content="Start your own investment pool with tokenized crypto portfolios in an intuitive interface made by traders for traders."
         />
       </Head>
       <Managers />
