@@ -5,17 +5,39 @@ import useSubscribe from '@/hooks/useSubscribe'
 import Input from '@/components/Blog/Input'
 import { RightArrowIcon } from '@/Icons/RightArrow'
 
+import { ToastError, ToastSuccess } from '@/components/Toastify/toast'
+
 import * as S from './styles'
 
 const SignUp = () => {
   const [inputText, setInputText] = React.useState('')
   const { handleSubmitWithToast } = useSubscribe()
 
+  function handleSuccess() {
+    ToastSuccess('Successfully subscribed')
+
+    setTimeout(() => {
+      setInputText('')
+    }, 1000)
+  }
+
+  function handleFail(error: Error) {
+    ToastError(error?.message ?? 'Unknown error')
+
+    setTimeout(() => {
+      setInputText('')
+    }, 1000)
+  }
+
   return (
     <S.SignUp>
       <S.SignUpContent
         onSubmit={event =>
-          handleSubmitWithToast({ event, sendInBlueListId: 'general' })
+          handleSubmitWithToast({
+            event,
+            onError: handleFail,
+            onSuccess: handleSuccess
+          })
         }
       >
         <S.SignUpHeader>
@@ -39,14 +61,6 @@ const SignUp = () => {
               <RightArrowIcon />
             </button>
           </S.Input>
-          <p>
-            By signing up, you will create a Heimdall account if you don’t
-            already have one. Review our{' '}
-            <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">
-              Privacy Policy
-            </a>{' '}
-            for more information about our privacy practices.{' '}
-          </p>
         </S.SignUpInput>
       </S.SignUpContent>
     </S.SignUp>

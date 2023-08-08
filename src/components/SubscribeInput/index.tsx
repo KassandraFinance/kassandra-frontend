@@ -1,9 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
-import useMatomo from '@/hooks/useMatomo'
 
-import TextField from '../TextField'
+import useSubscribe from '@/hooks/useSubscribe'
+
 import { ToastError, ToastSuccess } from '../Toastify/toast'
 
 import emailIcon from '../../../public/assets/icons/email.svg'
@@ -11,83 +10,46 @@ import arrowIcon from '../../../public/assets/utilities/foward-arrow.svg'
 
 import * as S from './styles'
 
-interface IFormSignUpParams {
-  name?: string
-  email?: string
-}
-
-interface IOnChangeFormParam {
-  key: string
-  value: string
-}
-
 const SubscribeInput = () => {
-  const [formState, setFormState] = React.useState<IFormSignUpParams>({})
+  const [formState, setFormState] = React.useState('')
 
-  const { trackEvent } = useMatomo()
-  const router = useRouter()
+  const { handleSubmitWithToast } = useSubscribe()
 
-  const onChangeFormParam = ({ key, value }: IOnChangeFormParam) => {
-    setFormState({ ...formState, [key]: value })
+  function handleSuccess() {
+    ToastSuccess('Successfully subscribed')
+
+    setTimeout(() => {
+      setFormState('')
+    }, 1000)
   }
 
-  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  function handleFail(error: Error) {
+    ToastError(error?.message ?? 'Unknown error')
 
-    const response = await fetch('/api/subscribe', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify(formState)
-    })
-
-    if (response.status !== 201) {
-      const message =
-        response.status === 400
-          ? 'Email already subscribed'
-          : 'Subscription failed, please try again later'
-      ToastError(message)
-      return
-    }
-
-    ToastSuccess('Successfully subscribed')
-    trackEvent({
-      category: router.pathname,
-      action: `subscribe | SubscribeInput | ${router.pathname}`,
-      name: `${formState.email}`
-    })
     setTimeout(() => {
-      setFormState({ email: '' })
+      setFormState('')
     }, 1000)
   }
 
   return (
     <S.SubscribeInput>
-      <iframe
-        title="a"
-        name="hiddenFrame"
-        width="0"
-        height="0"
-        style={{ display: 'none' }}
-      />
-
-      <S.Form target="hiddenFrame" onSubmit={handleSubmit}>
-        <TextField hidden name="user" value="Gem Hunter" />
-
+      <S.Form
+        onSubmit={event =>
+          handleSubmitWithToast({
+            event,
+            onError: handleFail,
+            onSuccess: handleSuccess
+          })
+        }
+      >
         <S.InputWrapper>
           <S.Input
             name="email"
             type="email"
             required
             minLength={1}
-            value={formState.email ? formState.email : ''}
-            onChange={e =>
-              onChangeFormParam({
-                key: 'email',
-                value: e.target.value
-              })
-            }
+            value={formState}
+            onChange={event => setFormState(event?.target.value)}
           />
 
           <S.InputTextWrapper>
