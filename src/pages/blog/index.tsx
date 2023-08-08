@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react'
 import Head from 'next/head'
 
@@ -53,16 +54,28 @@ const Index = ({ posts, tags, coins, tabs, postsStats }: IndexProps) => {
     <>
       <Head>
         {/* Primary Meta Tags */}
-        <title>Kassandra Blog</title>
-        <meta name="description" content="It's a me, a Blog(io)" />
+        <title>Kassandra Blog - Keep up with Kassandra's news</title>
+        <meta
+          name="description"
+          content="Inform yourself about Kassandra’s resources, including available tokens, pool strategies, their performance, and general research material for DeFi players.
+"
+        />
 
         {/* Open Graph / Facebook */}
         <meta property="og:url" content="https://kassandra.finance/blog" />
-        <meta property="og:description" content="A Blog" />
+        <meta
+          property="og:description"
+          content="Inform yourself about Kassandra’s resources, including available tokens, pool strategies, their performance, and general research material for DeFi players.
+"
+        />
 
         {/* Twitter */}
         <meta property="twitter:url" content="https://kassandra.finance/blog" />
-        <meta property="twitter:description" content="A Blog" />
+        <meta
+          property="twitter:description"
+          content="Inform yourself about Kassandra’s resources, including available tokens, pool strategies, their performance, and general research material for DeFi players.
+"
+        />
       </Head>
 
       <S.Background />
