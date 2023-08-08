@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
+import useMatomo from '@/hooks/useMatomo'
+
 import { ChevronIcon } from '@/Icons'
 
 import { ImageModalTrigger } from '../ImageModal'
@@ -24,6 +26,7 @@ export const ArticleHeader = ({
   headerContentRef,
   handleArticlePageClick
 }: ArticleHeaderProps) => {
+  const { trackEvent } = useMatomo({ trackPageView: true })
   const router = useRouter()
 
   const allArticlesTab = 'Latest+Articles'
@@ -37,6 +40,13 @@ export const ArticleHeader = ({
           size="medium"
           href="/blog"
           leftIcon={<ChevronIcon style={{ transform: 'rotate(90deg)' }} />}
+          onClick={() =>
+            trackEvent({
+              category: router.pathname,
+              action: `click-on-button | ArticleHeader | ${router.pathname}`,
+              name: 'Back to blog'
+            })
+          }
         >
           Back to blog
         </BlogButton>
@@ -46,7 +56,7 @@ export const ArticleHeader = ({
 
         <ImageModalTrigger
           tabIndex={0}
-          onClick={event =>
+          onClick={event => {
             handleSelectImage({
               event,
               imageData: {
@@ -54,7 +64,12 @@ export const ArticleHeader = ({
                 alt: post?.banner.alternativeText
               }
             })
-          }
+            trackEvent({
+              category: router.pathname,
+              action: `click-on-image | ArticleHeader | ${router.pathname}`,
+              name: 'Image modal'
+            })
+          }}
         >
           <Image
             src={post?.banner.url ?? ''}
@@ -131,7 +146,9 @@ export const ArticleHeader = ({
             variant="red"
             size="medium"
             capitalization="capitalize"
-            onClick={() => handleArticlePageClick(tag.name)}
+            onClick={() => {
+              handleArticlePageClick(tag.name)
+            }}
             href={`/blog?tab=${allArticlesTab}&tags=${tag.name}`}
           >
             {tag.name}

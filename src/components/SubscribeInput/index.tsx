@@ -1,6 +1,8 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 import Image from 'next/image'
-import useMatomoEcommerce from '@/hooks/useMatomoEcommerce'
+
+import useMatomo from '@/hooks/useMatomo'
 
 import TextField from '../TextField'
 import { ToastError, ToastSuccess } from '../Toastify/toast'
@@ -21,7 +23,8 @@ interface IOnChangeFormParam {
 }
 
 const SubscribeInput = () => {
-  const { trackEventFunction } = useMatomoEcommerce()
+  const { trackEvent } = useMatomo({ trackPageView: true })
+  const router = useRouter()
   const [formState, setFormState] = React.useState<IFormSignUpParams>({})
 
   const onChangeFormParam = ({ key, value }: IOnChangeFormParam) => {
@@ -49,7 +52,11 @@ const SubscribeInput = () => {
     }
 
     ToastSuccess('Successfully subscribed')
-    trackEventFunction('click-on-button', 'send-email', 'subscribe-email')
+    trackEvent({
+      category: router.pathname,
+      action: `click-on-submit | hero | ${router.pathname}`,
+      name: 'Email'
+    })
     setTimeout(() => {
       setFormState({ email: '' })
     }, 1000)

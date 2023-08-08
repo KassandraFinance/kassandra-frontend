@@ -1,4 +1,7 @@
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+
+import useMatomo from '@/hooks/useMatomo'
 
 import IconButton from '@/components/IconButton'
 
@@ -39,6 +42,9 @@ interface IAuthorsProps {
 }
 
 const Authors = ({ writers }: IAuthorsProps) => {
+  const { trackEvent } = useMatomo()
+  const router = useRouter()
+
   return (
     <S.AuthorsContainer>
       {writers.map(writer => (
@@ -56,6 +62,13 @@ const Authors = ({ writers }: IAuthorsProps) => {
                       href={social.link}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() =>
+                        trackEvent({
+                          category: router.pathname,
+                          action: `click-on-link | Authors | ${router.pathname}`,
+                          name: social.username
+                        })
+                      }
                     >
                       @{social.username}
                     </a>
@@ -73,6 +86,13 @@ const Authors = ({ writers }: IAuthorsProps) => {
                   key={social.type}
                   href={social.link}
                   isExternalLink
+                  onClick={() =>
+                    trackEvent({
+                      category: router.pathname,
+                      action: `click-on-link | Authors | ${router.pathname}`,
+                      name: `${social.type} ${social.username}`
+                    })
+                  }
                 />
               )
             })}

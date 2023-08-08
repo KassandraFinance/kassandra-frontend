@@ -1,5 +1,8 @@
 import React from 'react'
+import { useRouter } from 'next/router'
+
 import useSubscribe from '@/hooks/useSubscribe'
+import useMatomo from '@/hooks/useMatomo'
 
 import Input from '@/components/Blog/Input'
 import { RightArrowIcon } from '@/Icons/RightArrow'
@@ -7,6 +10,9 @@ import { RightArrowIcon } from '@/Icons/RightArrow'
 import * as S from './styles'
 
 const SignUp = () => {
+  const { trackEvent } = useMatomo()
+  const router = useRouter()
+
   const [inputText, setInputText] = React.useState('')
   const { handleSubmitWithToast } = useSubscribe()
 
@@ -41,7 +47,18 @@ const SignUp = () => {
           <p>
             By signing up, you will create a Heimdall account if you don’t
             already have one. Review our{' '}
-            <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">
+            <a
+              href="/privacy-policy"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() =>
+                trackEvent({
+                  category: router.pathname,
+                  action: `click-on-link | SignUp | ${router.pathname}`,
+                  name: 'Privacy Policy'
+                })
+              }
+            >
               Privacy Policy
             </a>{' '}
             for more information about our privacy practices.{' '}
