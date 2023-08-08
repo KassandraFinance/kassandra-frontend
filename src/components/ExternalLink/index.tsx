@@ -1,5 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import useMatomo from '@/hooks/useMatomo'
 
 import * as S from './styles'
 
@@ -16,11 +18,23 @@ const ExternalLink = ({
   hrefLink,
   text
 }: IExternalLinkProps) => {
+  const { trackEvent } = useMatomo()
+  const router = useRouter()
+
   return (
     <>
       {hrefNext ? (
         <Link href={hrefNext}>
-          <S.Link onClick={onClick}>
+          <S.Link
+            onClick={() => {
+              onClick
+              trackEvent({
+                category: router.pathname,
+                action: `click-on-link | ExternalLink-${hrefNext} | ${router.pathname}`,
+                name: text
+              })
+            }}
+          >
             <span>{text}</span>
             <span className="icon">
               <svg
@@ -54,7 +68,14 @@ const ExternalLink = ({
         </Link>
       ) : (
         <S.Link
-          onClick={onClick}
+          onClick={() => {
+            onClick
+            trackEvent({
+              category: router.pathname,
+              action: `click-on-link | ExternalLink-${hrefLink} | ${router.pathname}`,
+              name: text
+            })
+          }}
           href={hrefLink}
           target="_blank"
           rel="noopener noreferrer"

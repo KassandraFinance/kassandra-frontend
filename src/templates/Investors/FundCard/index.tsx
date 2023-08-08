@@ -1,7 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+import useMatomo from '@/hooks/useMatomo'
 
-import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
 import { usePoolInfo } from '@/hooks/query/usePoolInfo'
 
 import { ProductDetails } from '../../../constants/tokenAddresses'
@@ -53,12 +54,11 @@ const FundCard = ({ fund }: IFundProps) => {
   const [poolObject, setPoolObject] = React.useState<{ [key: string]: number }>(
     {}
   )
-
+  const { trackEvent } = useMatomo()
+  const router = useRouter()
   const day = Math.trunc(Date.now() / 1000 - 60 * 60 * 24)
 
   const { data } = usePoolInfo({ id: fund.sipAddress, day: day })
-
-  const { trackEventFunction } = useMatomoEcommerce()
 
   const getPercentage = (weight: number) => {
     return Number((weight * 100).toFixed(2))
@@ -165,11 +165,11 @@ const FundCard = ({ fund }: IFundProps) => {
       <S.CardFooter>
         <Button
           onClick={() =>
-            trackEventFunction(
-              'click-on-button',
-              `buy-${fund.symbol.toLowerCase()}`,
-              `pool-card-investors`
-            )
+            trackEvent({
+              category: router.pathname,
+              action: `click-on-button | Start exploring KassandraDAO | ${router.pathname}`,
+              name: `Buy $${fund.symbol}`
+            })
           }
           backgroundPrimary
           size="claim"
