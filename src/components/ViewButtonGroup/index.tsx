@@ -1,4 +1,7 @@
 import React from 'react'
+import { useRouter } from 'next/router'
+
+import useMatomo from '@/hooks/useMatomo'
 
 import * as S from './styles'
 import { GridIcon } from '@/Icons/Grid'
@@ -10,6 +13,9 @@ type ButtonGroupProps = {
 }
 
 const ViewButtonGroup = ({ setView, view }: ButtonGroupProps) => {
+  const { trackEvent } = useMatomo()
+  const router = useRouter()
+
   return (
     <S.ViewButtonGroup>
       <S.RadiosContainer>
@@ -20,7 +26,14 @@ const ViewButtonGroup = ({ setView, view }: ButtonGroupProps) => {
             id="card"
             hidden
             checked={view === 'card'}
-            onChange={() => setView('card')}
+            onChange={() => {
+              setView('card')
+              trackEvent({
+                category: router.pathname,
+                action: `click-on-button | ViewButtonGroup | ${router.pathname}`,
+                name: 'Card View'
+              })
+            }}
             defaultChecked
           />
           <GridIcon height={24} width={24} />
@@ -34,7 +47,14 @@ const ViewButtonGroup = ({ setView, view }: ButtonGroupProps) => {
             id="list"
             hidden
             checked={view === 'list'}
-            onChange={() => setView('list')}
+            onChange={() => {
+              setView('list')
+              trackEvent({
+                category: router.pathname,
+                action: `click-on-button | ViewButtonGroup | ${router.pathname}`,
+                name: 'List View'
+              })
+            }}
           />
           <ListIcon height={24} width={24} />
           <span>

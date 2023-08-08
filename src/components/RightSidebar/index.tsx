@@ -3,6 +3,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
+import useMatomo from '@/hooks/useMatomo'
+
 import {
   getHeadingsFromMarkdown as getHeadingsFromHTML,
   getSlugByTitle
@@ -14,8 +16,6 @@ import BlogButton from '../Blog/Button'
 import Button from '../Button'
 import IconButton from '../IconButton'
 import { Tag } from '../Blog/Tag'
-
-import { getVariantByDifficulty } from '@/templates/Article'
 
 import { useSectionTitleObserver } from '@/hooks/useSectionTitleObserver'
 
@@ -87,6 +87,7 @@ const RightSidebar = ({
   const [isSharing, setIsSharing] = React.useState(false)
   const [shareUrl, setShareUrl] = React.useState('')
 
+  const { trackEvent } = useMatomo()
   const router = useRouter()
 
   const allArticlesTab = 'Latest+Articles'
@@ -131,8 +132,12 @@ const RightSidebar = ({
     }
   }
 
-  const handleTagClick = () => {
-    handleArticlePageClick('share-sidebar/mobile')
+  const handleTagClick = (tag: string) => {
+    trackEvent({
+      category: router.pathname,
+      action: `click-on-tag | RightSidebar | ${router.pathname}`,
+      name: tag
+    })
   }
 
   const coins = React.useMemo(() => post?.coins, [post?.coins])
@@ -160,6 +165,13 @@ const RightSidebar = ({
               size="medium"
               href="/blog"
               leftIcon={<ChevronIcon style={{ transform: 'rotate(90deg)' }} />}
+              onClick={() => {
+                trackEvent({
+                  category: router.pathname,
+                  action: `click-on-button | RightSidebar | ${router.pathname}`,
+                  name: 'Back to blog'
+                })
+              }}
             >
               Back to blog
             </BlogButton>
@@ -179,6 +191,11 @@ const RightSidebar = ({
                   <a
                     onClick={e => {
                       handleSidebarButton(e, title.id)
+                      trackEvent({
+                        category: router.pathname,
+                        action: `click-on-link | RightSidebar | ${router.pathname}`,
+                        name: title.content
+                      })
                     }}
                     className={`post-title ${
                       title.id === activeId ? 'active' : ''
@@ -195,7 +212,18 @@ const RightSidebar = ({
               )
             })}
             {notAllowedToRead ? (
-              <Button size="medium" className="unlock-btn" href="#locked">
+              <Button
+                size="medium"
+                className="unlock-btn"
+                href="#locked"
+                onClick={() =>
+                  trackEvent({
+                    category: router.pathname,
+                    action: `click-on-link | RightSidebar | ${router.pathname}`,
+                    name: 'Get pro to unlock'
+                  })
+                }
+              >
                 Get pro to unlock
               </Button>
             ) : null}
@@ -210,7 +238,7 @@ const RightSidebar = ({
                     variant="purple"
                     size="small"
                     capitalization="capitalize"
-                    onClick={handleTagClick}
+                    onClick={() => handleTagClick('Pro')}
                     href={`/blog?tab=${allArticlesTab}&isPRO=true`}
                   >
                     Pro
@@ -235,7 +263,7 @@ const RightSidebar = ({
                     variant="gray"
                     size="small"
                     capitalization="capitalize"
-                    onClick={handleTagClick}
+                    onClick={() => handleTagClick(tag.name)}
                     href={`/blog?tab=${allArticlesTab}&tags=${tag.name}`}
                   >
                     {tag.name}
@@ -253,6 +281,13 @@ const RightSidebar = ({
                       href={`https://www.coingecko.com/pt/moedas/${coin.coinGeckoID}`}
                       target="_blank"
                       rel="noreferrer"
+                      onClick={() =>
+                        trackEvent({
+                          category: router.pathname,
+                          action: `click-on-link | RightSidebar | ${router.pathname}`,
+                          name: coin.coinGeckoID
+                        })
+                      }
                     >
                       <Image
                         src={coin.image.url}

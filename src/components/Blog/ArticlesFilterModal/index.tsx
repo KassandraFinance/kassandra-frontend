@@ -1,7 +1,7 @@
 import React from 'react'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useDebounce } from 'use-debounce'
+import useMatomo from '@/hooks/useMatomo'
 
 import { useResearchCoins } from '@/hooks/query/useResearchCoins'
 
@@ -40,6 +40,7 @@ const ArticlesFilterModal = ({
   handleResetFilter,
   handleUpdateFilter
 }: IArticlesFilterModalProps) => {
+  const { trackEvent } = useMatomo()
   const router = useRouter()
   const [search, setSearch] = React.useState('')
   const [debouncedSearch] = useDebounce(search, 300)
@@ -68,11 +69,26 @@ const ArticlesFilterModal = ({
       }
     )
     dispatch(updateFilters(selectedFilters))
+
+    trackEvent({
+      category: router.pathname,
+      action: `click-on-button | ArticlesFilterModal | ${selectedFilters.tags.join(
+        ','
+      )} | ${selectedFilters.coins.join(',')} | ${router.pathname}`,
+      name: 'Apply'
+    })
+
     closeModal()
   }
 
   const handleResetDefaults = () => {
     handleResetFilter()
+
+    trackEvent({
+      category: router.pathname,
+      action: `click-on-button | ArticlesFilterModal | ${router.pathname}`,
+      name: 'Remove Filters'
+    })
   }
 
   return (

@@ -2,6 +2,8 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import { z } from 'zod'
 
+import useMatomo from '@/hooks/useMatomo'
+
 import type { PostDataType } from '@/store/reducers/postsSlice'
 import {
   FilterType,
@@ -47,6 +49,7 @@ const ArticlesSection = ({
   postsStats,
   tabs
 }: IArticlesSectionProps) => {
+  const { trackEvent } = useMatomo()
   const { coins, tags } = useAppSelector(state => state.articlesFilter)
 
   const [isModalOpen, setIsModalOpen] = React.useState(false)
@@ -212,6 +215,11 @@ const ArticlesSection = ({
       }
     )
     window.scrollTo(0, 0)
+    trackEvent({
+      category: router.pathname,
+      action: `click-on-button | pagination | ${router.pathname}`,
+      name: (data.selected + 1).toString()
+    })
     return
   }
 
@@ -290,6 +298,13 @@ const ArticlesSection = ({
                   }`}
                   className="button-mobile"
                   backgroundBlack
+                  onClick={() =>
+                    trackEvent({
+                      category: router.pathname,
+                      action: `click-on-button | ArticlesSection | ${router.pathname}`,
+                      name: 'Filter'
+                    })
+                  }
                 />
               </ModalTrigger>
 

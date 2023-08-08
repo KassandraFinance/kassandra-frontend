@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react'
+
 import useSubscribe from '@/hooks/useSubscribe'
 
 import Input from '@/components/Blog/Input'
