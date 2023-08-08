@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react'
 import useSubscribe from '@/hooks/useSubscribe'
 
@@ -18,10 +19,10 @@ const SignUp = () => {
         }
       >
         <S.SignUpHeader>
-          <h4>Sign up to keep up with the latest articles</h4>
+          <h4>Keep up with Kassandra's news</h4>
           <p>
-            Want to get some emails every time we drop something new? Sign right
-            on up.
+            Subscribe to receive information about Kassandra's resources and
+            cutting-edge DeFi insights for managers and investors.
           </p>
         </S.SignUpHeader>
         <S.SignUpInput>

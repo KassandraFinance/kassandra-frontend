@@ -29,10 +29,7 @@ const Blog = ({ posts, postsStats, tabs }: IBlogProps) => {
           <SectionTitle title="blog" titleColor="#26DBDB" titleNumber="04" />
 
           <S.TextWrapper>
-            <Subtitle
-              text="Keep in touch with our latest innovations"
-              as="h2"
-            />
+            <Subtitle text="Keep in touch with our DeFi materials" as="h2" />
             <Paragraph
               text="Inform yourself about Kassandra’s resources, including available tokens, pool strategies, their performance, and general research material for DeFi players."
               fontWeight={400}
