@@ -1,6 +1,6 @@
 import Image from 'next/image'
-
-import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+import { useRouter } from 'next/router'
+import useMatomo from '@/hooks/useMatomo'
 
 import FadeIn from '../../../components/Animations/FadeIn'
 
@@ -17,7 +17,8 @@ import traderJoe from '../../../../public/assets/logos/trader-joe.svg'
 import * as S from './styles'
 
 const Partners = () => {
-  const { trackEventFunction } = useMatomoEcommerce()
+  const { trackEvent } = useMatomo()
+  const router = useRouter()
 
   return (
     <S.PartnersContainer>
@@ -36,7 +37,11 @@ const Partners = () => {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() =>
-              trackEventFunction('click-on-link', 'avalanche', 'partners')
+              trackEvent({
+                category: router.pathname,
+                action: `click-on-link | Partners | ${router.pathname}`,
+                name: 'avalanche'
+              })
             }
           >
             <Image src={avalanche} alt="Avalanche" />
@@ -49,7 +54,11 @@ const Partners = () => {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() =>
-              trackEventFunction('click-on-link', 'heimdall', 'partners')
+              trackEvent({
+                category: router.pathname,
+                action: `click-on-link | Partners | ${router.pathname}`,
+                name: 'heimdall'
+              })
             }
           >
             <Image src={heimdall} alt="Heimdall" />
@@ -62,7 +71,11 @@ const Partners = () => {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() =>
-              trackEventFunction('click-on-link', 'api3', 'partners')
+              trackEvent({
+                category: router.pathname,
+                action: `click-on-link | Partners | ${router.pathname}`,
+                name: 'heimdall'
+              })
             }
           >
             <Image src={api3} alt="API3" />
@@ -75,7 +88,11 @@ const Partners = () => {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() =>
-              trackEventFunction('click-on-link', 'transfero', 'partners')
+              trackEvent({
+                category: router.pathname,
+                action: `click-on-link | Partners | ${router.pathname}`,
+                name: 'transfero'
+              })
             }
           >
             <Image src={transfero} alt="Transfero" />
@@ -88,7 +105,11 @@ const Partners = () => {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() =>
-              trackEventFunction('click-on-link', 'shinedao', 'partners')
+              trackEvent({
+                category: router.pathname,
+                action: `click-on-link | Partners | ${router.pathname}`,
+                name: 'shinedao'
+              })
             }
           >
             <Image src={shineDAO} alt="" />
@@ -101,7 +122,11 @@ const Partners = () => {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() =>
-              trackEventFunction('click-on-link', 'penguin-finance', 'partners')
+              trackEvent({
+                category: router.pathname,
+                action: `click-on-link | Partners | ${router.pathname}`,
+                name: 'penguin-finance'
+              })
             }
           >
             <Image src={penguinFinance} alt="Penguin Finance" />
@@ -114,7 +139,11 @@ const Partners = () => {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() =>
-              trackEventFunction('click-on-link', 'yield-yak', 'partners')
+              trackEvent({
+                category: router.pathname,
+                action: `click-on-link | Partners | ${router.pathname}`,
+                name: 'yield-yak'
+              })
             }
           >
             <Image src={yieldYak} alt="Yield Yak" />
@@ -127,7 +156,11 @@ const Partners = () => {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() =>
-              trackEventFunction('click-on-link', 'pangolin', 'partners')
+              trackEvent({
+                category: router.pathname,
+                action: `click-on-link | Partners | ${router.pathname}`,
+                name: 'pangolin'
+              })
             }
           >
             <Image src={pangolin} alt="Pangolin" />
@@ -140,7 +173,11 @@ const Partners = () => {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() =>
-              trackEventFunction('click-on-link', 'trader-joe', 'partners')
+              trackEvent({
+                category: router.pathname,
+                action: `click-on-link | Partners | ${router.pathname}`,
+                name: 'trader-joe'
+              })
             }
           >
             <Image src={traderJoe} alt="Trader Joe" />

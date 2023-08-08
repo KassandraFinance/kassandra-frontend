@@ -89,7 +89,7 @@ const SectionCard = ({
                 onClick={() =>
                   trackEvent({
                     category: router.pathname,
-                    action: `click-on-button | Buy one token | ${router.pathname}`,
+                    action: `click-on-button | ${number}-${title} | ${router.pathname}`,
                     name: `${btnText}`
                   })
                 }

@@ -1,28 +1,21 @@
+import { useRouter } from 'next/router'
 import { z } from 'zod'
 
 import useMatomo from './useMatomo'
 import { useAddEmailToList } from './mutations/useAddEmailToList'
 
-export const commonSendInBlueListIds = {
-  general: 8,
-  waitingList: 12
-}
-
-export type CommonSendInBlueListIds = keyof typeof commonSendInBlueListIds
-
 type HandleSubmitWithToastProps = {
   event: React.FormEvent<Element>
-  sendInBlueListId: number | CommonSendInBlueListIds
   onSuccess?: () => void
-  onError?: (error: unknown) => void
+  onError?: (error: Error) => void
 }
 
 function useSubscribe() {
   const { trackEvent } = useMatomo()
-
+  const router = useRouter()
   function handleEventMatomo(category: string, name: string) {
     trackEvent({
-      category: category,
+      category: router.pathname,
       action: `${category}-${name}`,
       name: name
     })
@@ -32,7 +25,6 @@ function useSubscribe() {
 
   async function handleSubmitWithToast({
     event,
-    sendInBlueListId,
     onSuccess,
     onError
   }: HandleSubmitWithToastProps) {
@@ -51,26 +43,18 @@ function useSubscribe() {
 
     const email = eventResult.data.target[0].value
 
-    function sendError(error: unknown) {
+    function sendError(error: Error) {
       if (onError) onError(error)
     }
 
     handleEventMatomo('subscribe', email)
 
-    await mutateAsync(
-      { sendInBlueListId, email },
-      {
-        onSuccess,
-        onError: error => {
-          if (error instanceof Error) {
-            sendError(error)
-            return
-          }
-
-          sendError('Unknown error')
-        }
+    await mutateAsync(email, {
+      onSuccess,
+      onError: error => {
+        sendError(error as Error)
       }
-    )
+    })
   }
 
   return {

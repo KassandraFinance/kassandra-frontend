@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import Head from 'next/head'
 
 import IncentivesProgram from '@/templates/IncentivesProgram'
@@ -7,24 +8,24 @@ export default function Index() {
     <>
       <Head>
         {/* Primary Meta Tags */}
-        <title>Kassandra DAO</title>
+        <title>Kassandra's Managers Incentive Program</title>
         <meta
           name="description"
-          content="Invest in KACY, earn protocol fees and participate in our governance. Earn rewards and voting power to propose, vote and contribute to Kassandra. Help the community flourish and maintain the DAO while gaining a share in all of our protocol fees."
+          content="Stand out as an incentivized manager, elevate your profits, and enjoy exclusive benefits, including highlighted placement for your portfolio, active marketing support from our team, and staking rewards for your investors in our native KACY token."
         />
 
         {/* Open Graph / Facebook */}
         <meta property="og:url" content="https://kassandra.finance/dao" />
         <meta
           property="og:description"
-          content="Invest in KACY, earn protocol fees and participate in our governance. Earn rewards and voting power to propose, vote and contribute to Kassandra. Help the community flourish and maintain the DAO while gaining a share in all of our protocol fees."
+          content="Stand out as an incentivized manager, elevate your profits, and enjoy exclusive benefits, including highlighted placement for your portfolio, active marketing support from our team, and staking rewards for your investors in our native KACY token."
         />
 
         {/* Twitter */}
         <meta property="twitter:url" content="https://kassandra.finance/dao" />
         <meta
           property="twitter:description"
-          content="Invest in KACY, earn protocol fees and participate in our governance. Earn rewards and voting power to propose, vote and contribute to Kassandra. Help the community flourish and maintain the DAO while gaining a share in all of our protocol fees."
+          content="Stand out as an incentivized manager, elevate your profits, and enjoy exclusive benefits, including highlighted placement for your portfolio, active marketing support from our team, and staking rewards for your investors in our native KACY token."
         />
       </Head>
 

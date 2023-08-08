@@ -1,6 +1,6 @@
 import React from 'react'
-
-import useMatomoEcommerce from '../../../../hooks/useMatomoEcommerce'
+import { useRouter } from 'next/router'
+import useMatomo from '@/hooks/useMatomo'
 
 import Button from '../../../../components/Button'
 
@@ -21,7 +21,8 @@ const NewsCard = ({
   description,
   link
 }: INewsCardProps) => {
-  const { trackEventFunction } = useMatomoEcommerce()
+  const { trackEvent } = useMatomo()
+  const router = useRouter()
 
   const subText =
     description.replace(/<\/?[^>]+(>|$)/g, '').substring(0, 100) + ' ...'
@@ -51,11 +52,13 @@ const NewsCard = ({
             text="Read more"
             backgroundBlack
             onClick={() =>
-              trackEventFunction(
-                'click-on-link',
-                `medium-posts-${date.toLocaleDateString('en-US')}`,
-                'latest-news'
-              )
+              trackEvent({
+                category: router.pathname,
+                action: `click-on-link | Latest News | ${router.pathname}`,
+                name: `Read more - medium-posts-${date.toLocaleDateString(
+                  'en-US'
+                )}`
+              })
             }
           />
         </S.BtnWrapper>

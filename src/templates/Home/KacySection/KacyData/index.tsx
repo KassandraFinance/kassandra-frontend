@@ -1,6 +1,7 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 
-import useMatomoEcommerce from '@/hooks/useMatomoEcommerce'
+import useMatomo from '@/hooks/useMatomo'
 import { useKacyData } from '@/hooks/query/useKacyData'
 
 import Button from '@/components/Button'
@@ -40,7 +41,8 @@ const KacyData = ({ setIsOpenModal }: IKacyDataProps) => {
     }
   ])
 
-  const { trackEventFunction } = useMatomoEcommerce()
+  const { trackEvent } = useMatomo()
+  const router = useRouter()
   const { data } = useKacyData()
 
   React.useEffect(() => {
@@ -111,7 +113,11 @@ const KacyData = ({ setIsOpenModal }: IKacyDataProps) => {
           backgroundPrimary
           onClick={() => {
             setIsOpenModal(true)
-            trackEventFunction('click-on-button', 'buy-kacy', 'section-home')
+            trackEvent({
+              category: router.pathname,
+              action: `click-on-button | Be part of the  | ${router.pathname}`,
+              name: 'Buy $KACY'
+            })
           }}
         />
 
@@ -139,11 +145,11 @@ const KacyData = ({ setIsOpenModal }: IKacyDataProps) => {
             }
             backgroundBlack
             onClick={() =>
-              trackEventFunction(
-                'click-on-link',
-                'join-our-discord',
-                'section-home'
-              )
+              trackEvent({
+                category: router.pathname,
+                action: `click-on-button | Be part of the  | ${router.pathname}`,
+                name: 'Join Our Discord'
+              })
             }
           />
         </a>

@@ -12,24 +12,27 @@ export default function HomePage() {
     <>
       <Head>
         {/* Primary Meta Tags */}
-        <title>Kassandra Finance</title>
+        <title>
+          Kassandra Finance - Tokenized crypto portfolios for investors and
+          managers
+        </title>
         <meta
           name="description"
-          content="Create, manage and invest in tokenized crypto portfolios."
+          content="A DeFi platform that empowers users to manage crypto assets and create tokenized portfolios, while providing investors with opportunities to invest in curated pools."
         />
 
         {/* Open Graph / Facebook */}
         <meta property="og:url" content="https://kassandra.finance/" />
         <meta
           property="og:description"
-          content="Create, manage and invest in tokenized crypto portfolios."
+          content="A DeFi platform that empowers users to manage crypto assets and create tokenized portfolios, while providing investors with opportunities to invest in curated pools."
         />
 
         {/* Twitter */}
         <meta property="twitter:url" content="https://kassandra.finance/" />
         <meta
           property="twitter:description"
-          content="Create, manage and invest in tokenized crypto portfolios."
+          content="A DeFi platform that empowers users to manage crypto assets and create tokenized portfolios, while providing investors with opportunities to invest in curated pools."
         />
       </Head>
 

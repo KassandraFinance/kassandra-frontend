@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-
+import useMatomo from '@/hooks/useMatomo'
 import * as S from './styles'
 
 interface IEventBannerProps {
@@ -18,6 +18,7 @@ const EventBanner = ({
   children
 }: IEventBannerProps) => {
   const [isShowBanner, setIsShowBanner] = React.useState(true)
+  const { trackEvent } = useMatomo()
   const router = useRouter()
 
   React.useEffect(() => {
@@ -50,10 +51,32 @@ const EventBanner = ({
     >
       <S.EventBannerContent>
         <Link href={link} passHref>
-          <S.BannerLink className="textDesktop">{text}</S.BannerLink>
+          <S.BannerLink
+            className="textDesktop"
+            onClick={() =>
+              trackEvent({
+                category: router.pathname,
+                action: `click-on-link | EventBanner | ${router.pathname}`,
+                name: 'Take your pool to the next level.'
+              })
+            }
+          >
+            {text}
+          </S.BannerLink>
         </Link>
         <Link href={link} passHref>
-          <S.BannerLink className="textMobile">{textMobile}</S.BannerLink>
+          <S.BannerLink
+            className="textMobile"
+            onClick={() =>
+              trackEvent({
+                category: router.pathname,
+                action: `click-on-link | EventBanner | ${router.pathname}`,
+                name: "Kassandra's Managers Incentive Program is noew live."
+              })
+            }
+          >
+            {textMobile}
+          </S.BannerLink>
         </Link>
 
         <img

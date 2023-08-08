@@ -7,10 +7,13 @@ export default function Index() {
     <>
       <Head>
         {/* Primary Meta Tags */}
-        <title>Kassandra Foundation</title>
+        <title>
+          Kassandra Foundation - Building the future of decentralized asset
+          management
+        </title>
         <meta
           name="description"
-          content="DeFi enthusiasts building the future of asset management. Kassandra is a decentralized autonomous organization that governs a structure that allows the creation and managing of tokenized crypto portfolios, bringing a new class of investment products to the DeFi investors."
+          content="Kassandra is a DeFi DAO that governs a protocol enabling the creation and management of tokenized crypto portfolios, bringing a new class of products to managers and investors."
         />
 
         {/* Open Graph / Facebook */}
@@ -21,7 +24,7 @@ export default function Index() {
         <meta property="og:title" content="Kassandra DAO" />
         <meta
           property="og:description"
-          content="DeFi enthusiasts building the future of asset management. Kassandra is a decentralized autonomous organization that governs a structure that allows the creation and managing of tokenized crypto portfolios, bringing a new class of investment products to the DeFi investors."
+          content="Kassandra is a DeFi DAO that governs a protocol enabling the creation and management of tokenized crypto portfolios, bringing a new class of products to managers and investors."
         />
 
         {/* Twitter */}
@@ -31,7 +34,7 @@ export default function Index() {
         />
         <meta
           property="twitter:description"
-          content="DeFi enthusiasts building the future of asset management. Kassandra is a decentralized autonomous organization that governs a structure that allows the creation and managing of tokenized crypto portfolios, bringing a new class of investment products to the DeFi investors."
+          content="Kassandra is a DeFi DAO that governs a protocol enabling the creation and management of tokenized crypto portfolios, bringing a new class of products to managers and investors."
         />
       </Head>
 

@@ -8,17 +8,20 @@ export default function Index() {
     <>
       <Head>
         {/* Primary Meta Tags */}
-        <title>Kassandra for Investors</title>
+        <title>
+          Kassandra for Investors - Diversify your crypto portfolio through
+          managed pools
+        </title>
         <meta
           name="description"
-          content="Buy one token to follow strategies that fit you. Take advantage of social trading to increase your diversification. By buying a single token, you delegate funds to trusted managers that will work to improve your gains and reduce your risks."
+          content="Investing with Kassandra grants you exposure to up to 50 different tokens curated in multiple tokenized crypto portfolios."
         />
 
         {/* Open Graph / Facebook */}
         <meta property="og:url" content="https://kassandra.finance/investors" />
         <meta
           property="og:description"
-          content="Buy one token to follow strategies that fit you. Take advantage of social trading to increase your diversification. By buying a single token, you delegate funds to trusted managers that will work to improve your gains and reduce your risks."
+          content="Investing with Kassandra grants you exposure to up to 50 different tokens curated in multiple tokenized crypto portfolios."
         />
 
         {/* Twitter */}
@@ -28,7 +31,7 @@ export default function Index() {
         />
         <meta
           property="twitter:description"
-          content="Buy one token to follow strategies that fit you. Take advantage of social trading to increase your diversification. By buying a single token, you delegate funds to trusted managers that will work to improve your gains and reduce your risks."
+          content="Investing with Kassandra grants you exposure to up to 50 different tokens curated in multiple tokenized crypto portfolios."
         />
       </Head>
 

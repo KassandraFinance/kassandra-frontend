@@ -1,4 +1,5 @@
-import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
+import { useRouter } from 'next/router'
+import useMatomo from '@/hooks/useMatomo'
 
 import Hero from '../../components/Hero'
 import Button from '../../components/Button'
@@ -10,7 +11,10 @@ import Contribute from '../../components/Contribute'
 import * as S from './styles'
 
 const Investors = () => {
-  const { trackEventFunction } = useMatomoEcommerce()
+  const { trackEvent } = useMatomo({
+    trackPageView: true
+  })
+  const router = useRouter()
 
   return (
     <>
@@ -37,11 +41,11 @@ const Investors = () => {
             as="a"
             href="https://app.kassandra.finance"
             onClick={() =>
-              trackEventFunction(
-                'click-on-button',
-                'start-investing',
-                `section-investors`
-              )
+              trackEvent({
+                category: router.pathname,
+                action: `click-on-button | Hero-Investors | ${router.pathname}`,
+                name: 'Start Investing'
+              })
             }
           />
         </Hero>

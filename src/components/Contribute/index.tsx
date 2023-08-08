@@ -1,6 +1,6 @@
 import Image from 'next/image'
-
-import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
+import { useRouter } from 'next/router'
+import useMatomo from '@/hooks/useMatomo'
 
 import FadeInHorizontal from '../Animations/FadeInHorizontal'
 import Paragraph from '../Paragraph'
@@ -16,7 +16,8 @@ interface IContributeProps {
 }
 
 const Contribute = ({ title, text }: IContributeProps) => {
-  const { trackEventFunction } = useMatomoEcommerce()
+  const { trackEvent } = useMatomo()
+  const router = useRouter()
 
   return (
     <S.ContributeContainer>
@@ -35,11 +36,11 @@ const Contribute = ({ title, text }: IContributeProps) => {
                 rel="noopener noreferrer"
                 href="https://t.me/KassandraDAO"
                 onClick={() =>
-                  trackEventFunction(
-                    'click-on-button',
-                    'join-our-telegram',
-                    'section-contribute'
-                  )
+                  trackEvent({
+                    category: router.pathname,
+                    action: `click-on-button | Contribute component | ${router.pathname}`,
+                    name: 'Join Our Telegram'
+                  })
                 }
               >
                 <Image
@@ -56,11 +57,11 @@ const Contribute = ({ title, text }: IContributeProps) => {
                 rel="noopener noreferrer"
                 href="https://discord.com/invite/fAqpbP6tFw"
                 onClick={() =>
-                  trackEventFunction(
-                    'click-on-button',
-                    'join-our-discord',
-                    'section-contribute'
-                  )
+                  trackEvent({
+                    category: router.pathname,
+                    action: `click-on-button | Contribute component | ${router.pathname}`,
+                    name: 'Join Our Discord'
+                  })
                 }
               >
                 <Image src="/assets/icons/discord.svg" width={18} height={13} />

@@ -1,13 +1,14 @@
 import React from 'react'
-
-import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
+import { useRouter } from 'next/router'
+import useMatomo from '@/hooks/useMatomo'
 
 import SocialMidia from '../SocialMidia'
 
 import * as S from './styles'
 
 const Footer = () => {
-  const { trackEventFunction } = useMatomoEcommerce()
+  const { trackEvent } = useMatomo()
+  const router = useRouter()
 
   return (
     <S.Footer>
@@ -68,11 +69,11 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() =>
-                    trackEventFunction(
-                      'click-on-link',
-                      'media-social',
-                      'footer'
-                    )
+                    trackEvent({
+                      category: router.pathname,
+                      action: `click-on-link | Footer | ${router.pathname}`,
+                      name: 'discord'
+                    })
                   }
                 >
                   <img
@@ -89,11 +90,11 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() =>
-                    trackEventFunction(
-                      'click-on-link',
-                      'media-social',
-                      'footer'
-                    )
+                    trackEvent({
+                      category: router.pathname,
+                      action: `click-on-link | Footer | ${router.pathname}`,
+                      name: 'telegram'
+                    })
                   }
                 >
                   <img
@@ -110,11 +111,11 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() =>
-                    trackEventFunction(
-                      'click-on-link',
-                      'media-social',
-                      'footer'
-                    )
+                    trackEvent({
+                      category: router.pathname,
+                      action: `click-on-link | Footer | ${router.pathname}`,
+                      name: 'github'
+                    })
                   }
                 >
                   <img
@@ -131,11 +132,11 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() =>
-                    trackEventFunction(
-                      'click-on-link',
-                      'media-social',
-                      'footer'
-                    )
+                    trackEvent({
+                      category: router.pathname,
+                      action: `click-on-link | Footer | ${router.pathname}`,
+                      name: 'medium'
+                    })
                   }
                 >
                   <img
@@ -152,11 +153,11 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() =>
-                    trackEventFunction(
-                      'click-on-link',
-                      'media-social',
-                      'footer'
-                    )
+                    trackEvent({
+                      category: router.pathname,
+                      action: `click-on-link | Footer | ${router.pathname}`,
+                      name: 'twitter'
+                    })
                   }
                 >
                   <img
@@ -173,11 +174,11 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() =>
-                    trackEventFunction(
-                      'click-on-link',
-                      'media-social',
-                      'footer'
-                    )
+                    trackEvent({
+                      category: router.pathname,
+                      action: `click-on-link | Footer | ${router.pathname}`,
+                      name: 'discourse'
+                    })
                   }
                 >
                   <img
@@ -194,11 +195,11 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() =>
-                    trackEventFunction(
-                      'click-on-link',
-                      'media-social',
-                      'footer'
-                    )
+                    trackEvent({
+                      category: router.pathname,
+                      action: `click-on-link | Footer | ${router.pathname}`,
+                      name: 'gitbook'
+                    })
                   }
                 >
                   <img
@@ -216,7 +217,11 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() =>
-                  trackEventFunction('click-on-link', 'certik-audit', 'footer')
+                  trackEvent({
+                    category: router.pathname,
+                    action: `click-on-link | Footer | ${router.pathname}`,
+                    name: 'certik-desktop'
+                  })
                 }
               >
                 <span>Audited By</span>
@@ -243,7 +248,11 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() =>
-                trackEventFunction('click-on-link', 'certik-audit', 'footer')
+                trackEvent({
+                  category: router.pathname,
+                  action: `click-on-link | Footer | ${router.pathname}`,
+                  name: 'certik-mobile'
+                })
               }
             >
               <span>Audited By</span>
