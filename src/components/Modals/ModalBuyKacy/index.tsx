@@ -1,8 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
-import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+import useMatomo from '@/hooks/useMatomo'
 
 import * as S from './styles'
 
@@ -12,7 +13,8 @@ interface IModalBuyKacyProps {
 }
 
 const ModalBuyKacy = ({ modalOpen, setModalOpen }: IModalBuyKacyProps) => {
-  const { trackEventFunction } = useMatomoEcommerce()
+  const { trackEvent } = useMatomo()
+  const router = useRouter()
 
   function handleCloseModal() {
     setModalOpen(false)
@@ -47,11 +49,11 @@ const ModalBuyKacy = ({ modalOpen, setModalOpen }: IModalBuyKacyProps) => {
                 setTimeout(() => {
                   setModalOpen(false)
                 }, 1000)
-                trackEventFunction(
-                  'click-on-link',
-                  'trader-joe-exchange',
-                  'buy-kacy-modal'
-                )
+                trackEvent({
+                  category: router.pathname,
+                  action: `click-on-link | ModalBuyKacy | ${router.pathname}`,
+                  name: 'trader-joe-exchange'
+                })
               }}
             >
               <span id="ImageContent">
@@ -75,11 +77,11 @@ const ModalBuyKacy = ({ modalOpen, setModalOpen }: IModalBuyKacyProps) => {
                 setTimeout(() => {
                   setModalOpen(false)
                 }, 1000)
-                trackEventFunction(
-                  'click-on-link',
-                  'pangolin-exchange',
-                  'buy-kacy-modal'
-                )
+                trackEvent({
+                  category: router.pathname,
+                  action: `click-on-link | ModalBuyKacy | ${router.pathname}`,
+                  name: 'pangolin-exchange'
+                })
               }}
             >
               <span id="ImageContent">
