@@ -42,10 +42,11 @@ const SignUp = () => {
         }
       >
         <S.SignUpHeader>
-          <h4>Keep up with Kassandra's news</h4>
+          <h4>Subscribe to our newsletter</h4>
           <p>
-            Subscribe to receive information about Kassandra's resources and
-            cutting-edge DeFi insights for managers and investors.
+            Keep up with Kassandra’s resources, including available tokens, pool
+            strategies, their performance, and in-depth research material for
+            DeFi players.
           </p>
         </S.SignUpHeader>
         <S.SignUpInput>
