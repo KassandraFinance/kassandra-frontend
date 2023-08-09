@@ -24,17 +24,18 @@ import EventBanner from '@/components/EventBanner'
 import { store } from '@/store/store'
 import { env } from '@/env.mjs'
 
-const matomoUrl = 'https://stats.kassandra.finance'
+const matomoUrl = 'https://stats.heimdall.land'
 
 const instance = createInstance({
   disabled:
     env.NEXT_PUBLIC_NODE_ENV === 'development' ||
     env.NEXT_PUBLIC_MASTER !== '1',
   urlBase: matomoUrl,
-  siteId: 7,
+  siteId: 6,
   trackerUrl: `${matomoUrl}/api.php`,
   srcUrl: `${matomoUrl}/api.js`,
   configurations: {
+    setSecureCookie: true,
     setRequestMethod: 'POST'
   }
 })
