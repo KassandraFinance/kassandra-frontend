@@ -1,7 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
-import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+import useMatomo from '@/hooks/useMatomo'
 
 import ExternalLink from '../../../components/ExternalLink'
 import FadeInVertical from '../../../components/Animations/FadeInVertical'
@@ -13,7 +14,8 @@ import ArrowUp from '../../../../public/assets/iconGradient/arrow-up.svg'
 import * as S from './styles'
 
 const Institutional = () => {
-  const { trackEventFunction } = useMatomoEcommerce()
+  const { trackEvent } = useMatomo()
+  const router = useRouter()
 
   return (
     <S.InstitutionalContainer>
@@ -55,11 +57,11 @@ const Institutional = () => {
                 text="Learn more"
                 hrefLink="https://medium.com/@kassandrafoundation/kassandra-protocol-d9cb71c02b02"
                 onClick={() =>
-                  trackEventFunction(
-                    'click-on-link',
-                    'protocol-learn-more',
-                    `section-foundation`
-                  )
+                  trackEvent({
+                    category: router.pathname,
+                    action: `click-on-link | Institutional-protocol-card | ${router.pathname}`,
+                    name: 'Learn more'
+                  })
                 }
               />
             </S.InstitutionalCard>
@@ -88,11 +90,11 @@ const Institutional = () => {
                   text="Learn more"
                   hrefLink="https://medium.com/@kassandrafoundation/kassandra-dao-token-8bc046d55a00"
                   onClick={() =>
-                    trackEventFunction(
-                      'click-on-link',
-                      'dao-learn-more',
-                      `section-foundation`
-                    )
+                    trackEvent({
+                      category: router.pathname,
+                      action: `click-on-link | Institutional-dao-card | ${router.pathname}`,
+                      name: 'Learn more'
+                    })
                   }
                 />
               </S.InstitutionalCard>
@@ -119,11 +121,11 @@ const Institutional = () => {
                 text="Learn more"
                 hrefLink="https://medium.com/@kassandrafoundation/kassandra-foundation-team-4f46bf13c887"
                 onClick={() =>
-                  trackEventFunction(
-                    'click-on-link',
-                    'foundation-learn-more',
-                    `section-foundation`
-                  )
+                  trackEvent({
+                    category: router.pathname,
+                    action: `click-on-link | Institutional-foundation-card | ${router.pathname}`,
+                    name: 'Learn more'
+                  })
                 }
               />
             </S.InstitutionalCard>

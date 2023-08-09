@@ -1,5 +1,7 @@
 import React from 'react'
+// import { useRouter } from 'next/router'
 
+// import useMatomo from '@/hooks/useMatomo'
 // import Slider, { SliderSettings } from '../../components/Slider'
 // import RoadMapCard from './RoadMapCard'
 import SectionSubtitle from '../SectionSubtitle'
@@ -7,10 +9,11 @@ import SectionSubtitle from '../SectionSubtitle'
 // import { icons, colors, SlickArrowLeft, SlickArrowRight } from './assets'
 
 import * as S from './styles'
-// import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
 
 const RoadMapSlider = () => {
-  // const { trackEventFunction } = useMatomoEcommerce()
+  // cconst { trackEvent } = useMatomo()
+  // const router = useRouter()
+
   // const settings: SliderSettings = {
   //   arrows: true,
   //   slidesToShow: 2.3,
@@ -43,14 +46,22 @@ const RoadMapSlider = () => {
   //   prevArrow: (
   //     <SlickArrowLeft
   //       onClick={() => {
-  //         trackEventFunction('click-on-button', 'view-roadmap', 'roadmap-card')
+  //         trackEvent({
+  //           category: router.pathname,
+  //           action: `click-on-button | RoadMapSlider | ${router.pathname}`,
+  //           name: `Slick Arrow Right`
+  //         })
   //       }}
   //     />
   //   ),
   //   nextArrow: (
   //     <SlickArrowRight
   //       onClick={() => {
-  //         trackEventFunction('click-on-button', 'view-roadmap', 'roadmap-card')
+  //         trackEvent({
+  //           category: router.pathname,
+  //           action: `click-on-button | RoadMapSlider | ${router.pathname}`,
+  //           name: `Slick Arrow Left`
+  //         })
   //       }}
   //     />
   //   )
