@@ -1,4 +1,5 @@
-import useMatomoEcommerce from '../../hooks/useMatomoEcommerce'
+import { useRouter } from 'next/router'
+import useMatomo from '@/hooks/useMatomo'
 
 import Hero from '../../components/Hero'
 import FundManager from './FundManager'
@@ -12,7 +13,10 @@ import Button from '../../components/Button'
 import * as S from './styles'
 
 const Managers = () => {
-  const { trackEventFunction } = useMatomoEcommerce()
+  const { trackEvent } = useMatomo({
+    trackPageView: true
+  })
+  const router = useRouter()
 
   return (
     <>
@@ -36,11 +40,11 @@ const Managers = () => {
                 size="huge"
                 backgroundPrimary
                 onClick={() =>
-                  trackEventFunction(
-                    'click-on-button',
-                    'create-your-fund',
-                    `section-managers`
-                  )
+                  trackEvent({
+                    category: router.pathname,
+                    action: `click-on-button | Home-Managers | ${router.pathname}`,
+                    name: 'Create your Pool'
+                  })
                 }
                 icon={
                   <img
