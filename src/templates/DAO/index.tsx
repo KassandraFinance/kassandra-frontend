@@ -13,13 +13,10 @@ import Scarcity from './Scarcity'
 import Tokenomics from './Tokenomics'
 import Contribute from '../../components/Contribute'
 import Button from '../../components/Button'
-import ModalBuyKacy from '../../components/Modals/ModalBuyKacy'
 
 import * as S from './styles'
 
 const TokenHolder = () => {
-  const [isOpenModal, setIsOpenModal] = React.useState<boolean>(false)
-
   const { trackEvent } = useMatomo()
   const router = useRouter()
 
@@ -37,7 +34,12 @@ const TokenHolder = () => {
         >
           <Button
             className="button"
+            as="a"
+            href="https://app.pangolin.exchange/#/swap?outputCurrency=0xf32398dae246C5f672B52A54e9B413dFFcAe1A44"
+            target="_blank"
+            text="Buy KACY"
             size="huge"
+            backgroundPrimary
             icon={
               <Image
                 src="/assets/iconGradient/kacy.svg"
@@ -45,16 +47,13 @@ const TokenHolder = () => {
                 height={18}
               />
             }
-            backgroundPrimary
-            text="Buy KACY"
-            onClick={() => {
-              setIsOpenModal(true)
+            onClick={() =>
               trackEvent({
                 category: router.pathname,
-                action: `click-on-button | open-modal-buy-kacy | ${router.pathname}`,
+                action: `click-on-button | Hero-DAO | ${router.pathname}`,
                 name: 'Buy KACY'
               })
-            }}
+            }
           />
         </Hero>
       </S.HeroWrapper>
@@ -73,8 +72,6 @@ const TokenHolder = () => {
         title="Find out how you can contribute"
         text="Accumulate $KACY by investing and contributing to Kassandra and earn a stake in all of our protocol fees."
       />
-
-      <ModalBuyKacy modalOpen={isOpenModal} setModalOpen={setIsOpenModal} />
     </S.Wrapper>
   )
 }
