@@ -31,7 +31,7 @@ const instance = createInstance({
     env.NEXT_PUBLIC_NODE_ENV === 'development' ||
     env.NEXT_PUBLIC_MASTER !== '1',
   urlBase: matomoUrl,
-  siteId: 6,
+  siteId: 7,
   trackerUrl: `${matomoUrl}/api.php`,
   srcUrl: `${matomoUrl}/api.js`,
   configurations: {
