@@ -1,9 +1,12 @@
-import useMatomoEcommerce from '@/hooks/useMatomoEcommerce'
+import { useRouter } from 'next/router'
+
+import useMatomo from '@/hooks/useMatomo'
 
 import * as S from './styles'
 
 const SocialMidia = () => {
-  const { trackEventFunction } = useMatomoEcommerce()
+  const { trackEvent } = useMatomo()
+  const router = useRouter()
 
   return (
     <S.SocialMidia>
@@ -13,7 +16,11 @@ const SocialMidia = () => {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() =>
-            trackEventFunction('click-on-link', 'media-social', 'footer')
+            trackEvent({
+              category: router.pathname,
+              action: `click-on-link | SocialMidia | ${router.pathname}`,
+              name: 'discord'
+            })
           }
         >
           <img
@@ -30,7 +37,11 @@ const SocialMidia = () => {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() =>
-            trackEventFunction('click-on-link', 'media-social', 'footer')
+            trackEvent({
+              category: router.pathname,
+              action: `click-on-link | SocialMidia | ${router.pathname}`,
+              name: 'telegram'
+            })
           }
         >
           <img
@@ -47,7 +58,11 @@ const SocialMidia = () => {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() =>
-            trackEventFunction('click-on-link', 'media-social', 'footer')
+            trackEvent({
+              category: router.pathname,
+              action: `click-on-link | SocialMidia | ${router.pathname}`,
+              name: 'github'
+            })
           }
         >
           <img
@@ -64,7 +79,11 @@ const SocialMidia = () => {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() =>
-            trackEventFunction('click-on-link', 'media-social', 'footer')
+            trackEvent({
+              category: router.pathname,
+              action: `click-on-link | SocialMidia | ${router.pathname}`,
+              name: 'medium'
+            })
           }
         >
           <img
@@ -81,7 +100,11 @@ const SocialMidia = () => {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() =>
-            trackEventFunction('click-on-link', 'media-social', 'footer')
+            trackEvent({
+              category: router.pathname,
+              action: `click-on-link | SocialMidia | ${router.pathname}`,
+              name: 'twitter'
+            })
           }
         >
           <img
@@ -98,7 +121,11 @@ const SocialMidia = () => {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() =>
-            trackEventFunction('click-on-link', 'media-social', 'footer')
+            trackEvent({
+              category: router.pathname,
+              action: `click-on-link | SocialMidia | ${router.pathname}`,
+              name: 'discourse'
+            })
           }
         >
           <img
@@ -115,7 +142,11 @@ const SocialMidia = () => {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() =>
-            trackEventFunction('click-on-link', 'media-social', 'footer')
+            trackEvent({
+              category: router.pathname,
+              action: `click-on-link | SocialMidia | ${router.pathname}`,
+              name: 'gitbook'
+            })
           }
         >
           <img

@@ -1,8 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
-import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+import useMatomo from '@/hooks/useMatomo'
 
 import Button from '../../../components/Button'
 import FadeIn from '../../../components/Animations/FadeIn'
@@ -72,12 +73,17 @@ const CreateFund = () => {
   const [clickButton, setclickButton] = React.useState<number>(1)
   const [isActiveImage, setIsActiveImage] = React.useState(true)
 
-  const { trackEventFunction } = useMatomoEcommerce()
+  const { trackEvent } = useMatomo()
+  const router = useRouter()
 
   function handleClickNumber(number: number) {
     setclickButton(number)
     handleChangeItens(number)
-    trackEventFunction('click-on-button', `slide-${number}`, 'section-managers')
+    trackEvent({
+      category: router.pathname,
+      action: `click-on-button | CreateFund | ${router.pathname}`,
+      name: `slide-${number}`
+    })
   }
 
   function handleChangeItens(buttonNumber: number) {
@@ -174,11 +180,11 @@ const CreateFund = () => {
                   size="huge"
                   text="Create a managed pool"
                   onClick={() =>
-                    trackEventFunction(
-                      'click-on-button',
-                      'create-my-own-fund',
-                      `section-Managers`
-                    )
+                    trackEvent({
+                      category: router.pathname,
+                      action: `click-on-button | CreateFund | ${router.pathname}`,
+                      name: 'Create a managed pool'
+                    })
                   }
                   icon={
                     <img
@@ -194,11 +200,11 @@ const CreateFund = () => {
                 <button
                   onClick={() => {
                     handleClickRight(clickButton)
-                    trackEventFunction(
-                      'click-on-button',
-                      'back-slide',
-                      `section-managers`
-                    )
+                    trackEvent({
+                      category: router.pathname,
+                      action: `click-on-button | CreateFund | ${router.pathname}`,
+                      name: 'back-slide'
+                    })
                   }}
                 >
                   <Image src={arrowWhite} alt="" width={9} height={16} />
@@ -207,11 +213,11 @@ const CreateFund = () => {
                   id="arrowRight"
                   onClick={() => {
                     handleClickLeft(clickButton)
-                    trackEventFunction(
-                      'click-on-button',
-                      'next-slide',
-                      `section-managers`
-                    )
+                    trackEvent({
+                      category: router.pathname,
+                      action: `click-on-button | CreateFund | ${router.pathname}`,
+                      name: 'next-slide'
+                    })
                   }}
                 >
                   <Image src={arrowWhite} alt="" width={9} height={16} />

@@ -1,6 +1,7 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 
-import useMatomoEcommerce from '../../../../hooks/useMatomoEcommerce'
+import useMatomo from '@/hooks/useMatomo'
 
 import FadeIn from '../../../../components/Animations/FadeIn'
 
@@ -25,7 +26,8 @@ const TeamCard = ({
   social,
   isLastCard = false
 }: ITeamCardProps) => {
-  const { trackEventFunction } = useMatomoEcommerce()
+  const { trackEvent } = useMatomo()
+  const router = useRouter()
 
   return (
     <FadeIn threshold={0.5}>
@@ -44,11 +46,11 @@ const TeamCard = ({
                 target="_blank"
                 rel="noreferrer"
                 onClick={() =>
-                  trackEventFunction(
-                    'click-on-link',
-                    `github-${name}`,
-                    'section-team'
-                  )
+                  trackEvent({
+                    category: router.pathname,
+                    action: `click-on-link | TeamCard | ${router.pathname}`,
+                    name: `github-${name}`
+                  })
                 }
               >
                 <img src="assets/socialMidia/github.svg" alt="GitHub" />
@@ -62,11 +64,11 @@ const TeamCard = ({
                 target="_blank"
                 rel="noreferrer"
                 onClick={() =>
-                  trackEventFunction(
-                    'click-on-link',
-                    `twitter-${name}`,
-                    'section-team'
-                  )
+                  trackEvent({
+                    category: router.pathname,
+                    action: `click-on-link | TeamCard | ${router.pathname}`,
+                    name: `twitter-${name}`
+                  })
                 }
               >
                 <img src="assets/socialMidia/twitter.svg" alt="Twitter" />
@@ -80,11 +82,11 @@ const TeamCard = ({
                 target="_blank"
                 rel="noreferrer"
                 onClick={() =>
-                  trackEventFunction(
-                    'click-on-link',
-                    `linkedin-${name}`,
-                    'section-team'
-                  )
+                  trackEvent({
+                    category: router.pathname,
+                    action: `click-on-link | TeamCard | ${router.pathname}`,
+                    name: `linkedin-${name}`
+                  })
                 }
               >
                 <img
