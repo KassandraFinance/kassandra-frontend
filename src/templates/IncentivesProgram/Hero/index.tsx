@@ -1,5 +1,6 @@
+import { useRouter } from 'next/router'
+
 import useMatomo from '@/hooks/useMatomo'
-import useMatomoEcommerce from '@/hooks/useMatomoEcommerce'
 
 import Button from '@/components/Button'
 import Paragraph from '@/components/Paragraph'
@@ -7,10 +8,8 @@ import Paragraph from '@/components/Paragraph'
 import * as S from './styles'
 
 const Hero = () => {
-  const { trackEventFunction } = useMatomoEcommerce()
-  useMatomo({
-    trackPageView: true
-  })
+  const { trackEvent } = useMatomo()
+  const router = useRouter()
 
   return (
     <S.HeroWrapper>
@@ -29,11 +28,11 @@ const Hero = () => {
         size="huge"
         backgroundPrimary
         onClick={() =>
-          trackEventFunction(
-            'click-on-button',
-            'Submit Your Idea',
-            `Hero-Incentives-program`
-          )
+          trackEvent({
+            category: router.pathname,
+            action: `click-on-button | Hero-Incentives-program | ${router.pathname}`,
+            name: 'Submit Your Idea'
+          })
         }
       />
     </S.HeroWrapper>

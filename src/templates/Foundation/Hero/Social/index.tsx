@@ -1,7 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
-import useMatomoEcommerce from '../../../../hooks/useMatomoEcommerce'
+import useMatomo from '@/hooks/useMatomo'
 
 import discordIcon from '../../../../../public/assets/socialMidia/discord.svg'
 import telegramIcon from '../../../../../public/assets/socialMidia/telegram.svg'
@@ -52,7 +53,8 @@ const links: LinkType[] = [
 ]
 
 const Social = () => {
-  const { trackEventFunction } = useMatomoEcommerce()
+  const { trackEvent } = useMatomo()
+  const router = useRouter()
 
   return (
     <S.Social>
@@ -61,11 +63,11 @@ const Social = () => {
           <S.Li
             key={link.name}
             onClick={() =>
-              trackEventFunction(
-                'click-on-link',
-                `${link.name}`,
-                'hero-foundation'
-              )
+              trackEvent({
+                category: router.pathname,
+                action: `click-on-link | social-link-hero | ${router.pathname}`,
+                name: `${link.name}`
+              })
             }
           >
             <S.Link href={link.link} target="_blank" rel="noopener noreferrer">

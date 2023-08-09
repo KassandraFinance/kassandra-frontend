@@ -1,6 +1,7 @@
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
-import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+import useMatomo from '@/hooks/useMatomo'
 
 import Button from '../../../components/Button'
 import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
@@ -10,7 +11,8 @@ import SectionSubtitle from '../../../components/SectionSubtitle'
 import * as S from './styles'
 
 const Governance = () => {
-  const { trackEventFunction } = useMatomoEcommerce()
+  const { trackEvent } = useMatomo()
+  const router = useRouter()
 
   return (
     <S.Wrapper>
@@ -42,11 +44,11 @@ const Governance = () => {
               size="huge"
               href="https://app.kassandra.finance/gov"
               onClick={() =>
-                trackEventFunction(
-                  'click-on-link',
-                  'explore-governance',
-                  `section-dao`
-                )
+                trackEvent({
+                  category: router.pathname,
+                  action: `click-on-link | Governance | ${router.pathname}`,
+                  name: 'Explore Governance'
+                })
               }
             />
           </span>

@@ -1,6 +1,7 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 
-import useMatomoEcommerce from '@/hooks/useMatomoEcommerce'
+import useMatomo from '@/hooks/useMatomo'
 import { useGithubData } from '@/hooks/query/useGithubData'
 import { useMedium } from '@/hooks/query/useMedium'
 
@@ -48,7 +49,8 @@ const GitHubStats = () => {
 
   const { data: mediumData } = useMedium()
 
-  const { trackEventFunction } = useMatomoEcommerce()
+  const { trackEvent } = useMatomo()
+  const router = useRouter()
 
   function accTotalCommit(
     repositories:
@@ -132,11 +134,11 @@ const GitHubStats = () => {
               hrefLink="https://github.com/KassandraFinance"
               text="Check out our gitHub"
               onClick={() =>
-                trackEventFunction(
-                  'click-on-link',
-                  'check-out-our-gitHub',
-                  'section-foundation'
-                )
+                trackEvent({
+                  category: router.pathname,
+                  action: `click-on-link | GitHubData | ${router.pathname}`,
+                  name: 'Check out our gitHub'
+                })
               }
             />
           </S.GitHub>
@@ -173,11 +175,11 @@ const GitHubStats = () => {
               hrefLink="https://kassandrafoundation.medium.com/"
               text="Read more at our medium"
               onClick={() =>
-                trackEventFunction(
-                  'click-on-link',
-                  'read-more-at-our-medium',
-                  'section-foundation'
-                )
+                trackEvent({
+                  category: router.pathname,
+                  action: `click-on-link | GitHubData | ${router.pathname}`,
+                  name: 'Read more at our medium'
+                })
               }
             />
           </S.Medium>

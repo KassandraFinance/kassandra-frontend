@@ -1,6 +1,7 @@
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
-import useMatomoEcommerce from '../../../hooks/useMatomoEcommerce'
+import useMatomo from '@/hooks/useMatomo'
 import { useKacyData } from '@/hooks/query/useKacyData'
 
 import { poolsKacy, poolsKacyFuji } from '../../../constants/pools'
@@ -15,9 +16,9 @@ import Paragraph from '../../../components/Paragraph'
 import * as S from './styles'
 
 const LockVote = () => {
-  const { trackEventFunction } = useMatomoEcommerce()
-
+  const router = useRouter()
   const { data } = useKacyData()
+  const { trackEvent } = useMatomo()
 
   return (
     <S.Wrapper>
@@ -83,7 +84,11 @@ const LockVote = () => {
               text="Stake KACY"
               href="https://app.kassandra.finance/farm?tab=stake"
               onClick={() =>
-                trackEventFunction('click-on-link', 'stake-page', 'section-dao')
+                trackEvent({
+                  category: router.pathname,
+                  action: `click-on-link | LockVote | ${router.pathname}`,
+                  name: 'Stake KACY'
+                })
               }
             />
           </S.LockPoolContainer>
