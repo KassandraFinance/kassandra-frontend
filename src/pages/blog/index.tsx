@@ -120,7 +120,8 @@ export const getStaticProps: GetStaticProps = async () => {
           total: 0
         },
         tabs: posts.tabs
-      }
+      },
+      revalidate: 60 * 60
     }
   } catch (err) {
     return {
