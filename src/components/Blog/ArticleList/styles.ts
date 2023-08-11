@@ -3,12 +3,13 @@ import Image from 'next/image'
 import styled, { css } from 'styled-components'
 import { device } from '@/styles/theme'
 
-export const ArticleList = styled.article`
+export const ArticleList = styled.a`
   ${({ theme }) => css`
     max-width: 192rem;
     border-radius: 8px;
 
     background-color: rgba(252, 252, 252, 0.08);
+    text-decoration: none;
 
     .post-img {
       transition: scale ${theme.transition.default};
