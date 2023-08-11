@@ -289,8 +289,8 @@ const RightSidebar = ({
                         })
                       }
                     >
-                      <Image
-                        src={coin.image.url}
+                      <img
+                        src={coin?.image?.url ?? ''}
                         className="coin-image"
                         width={40}
                         height={40}
