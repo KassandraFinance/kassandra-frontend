@@ -1579,6 +1579,11 @@ export type ResearchTabsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ResearchTabsQuery = { __typename?: 'Query', tabs?: { __typename?: 'TabEntityResponseCollection', data: Array<{ __typename?: 'TabEntity', attributes?: { __typename?: 'Tab', tabName: string, position: number } | null }> } | null };
 
+export type SitemapPostsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SitemapPostsQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', attributes?: { __typename?: 'Post', slug: string } | null }> } | null };
+
 
 export const PostBySlugDocument = gql`
     query PostBySlug($slug: String!) {
@@ -1865,6 +1870,17 @@ export const ResearchTabsDocument = gql`
   }
 }
     `;
+export const SitemapPostsDocument = gql`
+    query SitemapPosts {
+  posts(pagination: {pageSize: 10000000}) {
+    data {
+      attributes {
+        slug
+      }
+    }
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -1884,6 +1900,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     ResearchTabs(variables?: ResearchTabsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ResearchTabsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ResearchTabsQuery>(ResearchTabsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ResearchTabs', 'query');
+    },
+    SitemapPosts(variables?: SitemapPostsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<SitemapPostsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<SitemapPostsQuery>(SitemapPostsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'SitemapPosts', 'query');
     }
   };
 }
