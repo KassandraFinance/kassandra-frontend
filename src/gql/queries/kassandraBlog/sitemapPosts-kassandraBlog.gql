@@ -1,0 +1,9 @@
+query SitemapPosts{
+  posts(pagination: { pageSize: 10000000 }) {
+    data {
+      attributes {
+        slug
+      }
+    }
+  }
+}
