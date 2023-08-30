@@ -13,15 +13,15 @@ export const Wrapper = styled.header`
 
   margin: 0 auto;
   padding-block: 3.2rem;
-  max-width: 118.8rem;
+  max-width: 124rem;
+  padding-inline: 2.4rem;
 
   background: transparent;
+  z-index: ${theme.layers.menu};
+
   &[data-fixed='true'] {
     background: #151117;
   }
-  padding-inline: 2.4rem;
-
-  z-index: ${theme.layers.menu};
 
   @media (max-width: 992px) {
     &[data-fixed='true'] {
@@ -53,35 +53,70 @@ export const LogoWrapper = styled.div`
 export const ButtonsWrapper = styled.div`
   display: flex;
   align-items: center;
+
+  .button-mobile {
+    border: 0.1rem solid ${theme.colors.snow};
+    width: fit-content;
+    width: 12.8rem;
+    padding: 1.2rem 2.4rem;
+
+    font-size: ${theme.font.sizes.font14};
+    font-weight: 400;
+
+    transition: 300ms;
+
+    &:hover,
+    &:focus {
+      border-color: ${theme.colors.snow};
+      background-color: ${theme.colors.snow};
+
+      color: ${theme.colors.darkPurple};
+      outline: none;
+    }
+
+    @media (max-width: 992px) {
+      margin-right: 2rem;
+    }
+  }
+`
+
+export const NavWrapper = styled.div`
+  ${() => css`
+    display: none;
+
+    @media (max-width: 992px) {
+      display: block;
+    }
+  `}
 `
 
 export const MenuWrapper = styled.div`
   ${() => css`
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
     gap: 2rem;
 
-    @media (max-width: 768px) {
+    @media (max-width: 992px) {
       flex-direction: row-reverse;
+      justify-content: flex-start;
+      gap: 0;
     }
+  `}
+`
 
-    .button-mobile {
-      border: 0.1rem solid ${theme.colors.snow};
-      width: fit-content;
-      padding: 1.2rem 2.4rem;
+export const NavegationLinkWrapper = styled.div`
+  ${() => css`
+    position: relative;
 
-      font-size: ${theme.font.sizes.font14};
-      font-weight: 400;
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    width: 100%;
 
-      transition: 300ms;
-
-      &:hover,
-      &:focus {
-        border-color: ${theme.colors.snow};
-        background-color: ${theme.colors.snow};
-
-        color: ${theme.colors.darkPurple};
-        outline: none;
-      }
+    @media (max-width: 992px) {
+      display: none;
     }
   `}
 `
@@ -92,9 +127,7 @@ export const HamburgerButton = styled.button`
 
     display: none;
 
-    @media (max-width: 768px) {
-      z-index: 1050;
-
+    @media (max-width: 992px) {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -117,9 +150,7 @@ interface IHambuergerMenuProps {
 
 export const HamburgerMenu = styled.div<IHambuergerMenuProps>`
   ${() => css`
-    @media (max-width: 768px) {
-      position: absolute;
-
+    @media (max-width: 992px) {
       width: 1.2rem;
       height: 1.2rem;
 

@@ -74,6 +74,7 @@ const NavSectionButton = ({ linkInfo, onClickLink }: ILinksInfoCardProps) => {
           return (
             <LinkCard
               key={link.text}
+              sectionName={linkInfo.sectionName}
               linkInfo={link}
               onClick={() => {
                 onClickLink && onClickLink()

@@ -3,10 +3,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
+import { headerLinkInfo } from './constant'
+
 import useMatomo from '@/hooks/useMatomo'
 
-import Nav from './Nav'
 import Button from '../Button'
+import NavMenuMobile from './NavMenuMobile'
+import NavSectionButton from './NavSectionButton'
 
 import kacy96 from '../../../public/assets/logos/kacy-96.svg'
 import logoKassandra from '../../../public/assets/logos/kassandra-header.svg'
@@ -14,30 +17,13 @@ import logoKassandra from '../../../public/assets/logos/kassandra-header.svg'
 import * as S from './styles'
 
 const Header = () => {
-  const { trackEvent } = useMatomo()
   const [isShowMenu, setIsShowMenu] = React.useState(false)
-  const [showOverlay, setShowOverlay] = React.useState(false)
 
+  const { trackEvent } = useMatomo()
   const router = useRouter()
 
   function handleHamburgerMenu() {
-    const width = window.innerWidth
-    if (width > 768) {
-      return
-    }
-
     setIsShowMenu(!isShowMenu)
-    setShowOverlay(true)
-    const userDashBoardButton = document.getElementById(
-      'userDashBoardButton'
-    )?.style
-    if (userDashBoardButton) {
-      if (isShowMenu) {
-        userDashBoardButton.zIndex = '1021'
-      } else {
-        userDashBoardButton.zIndex = '0'
-      }
-    }
   }
 
   return (
@@ -47,9 +33,9 @@ const Header = () => {
           <a
             onClick={() => {
               trackEvent({
-                category: 'header',
-                action: 'click-on-logo-desktop',
-                name: 'Kassandra'
+                category: router.pathname,
+                action: `click-on-link | Header | ${router.pathname}`,
+                name: 'logo-desktop'
               })
             }}
             className="logo-desktop"
@@ -62,9 +48,9 @@ const Header = () => {
           <a
             onClick={() => {
               trackEvent({
-                category: 'header',
-                action: 'click-on-logo-ipad',
-                name: 'Kassandra'
+                category: router.pathname,
+                action: `click-on-link | Header | ${router.pathname}`,
+                name: 'logo-ipad'
               })
             }}
             className="logo-ipad"
@@ -75,10 +61,32 @@ const Header = () => {
       </S.LogoWrapper>
 
       <S.MenuWrapper>
+        <S.NavWrapper>
+          <NavMenuMobile
+            isShowMenu={isShowMenu}
+            setIsShowMenu={handleHamburgerMenu}
+          />
+        </S.NavWrapper>
+
+        <S.NavegationLinkWrapper>
+          {headerLinkInfo.map(linkInfo => {
+            return (
+              <NavSectionButton
+                key={linkInfo.sectionName}
+                linkInfo={linkInfo}
+              />
+            )
+          })}
+        </S.NavegationLinkWrapper>
+
         <S.HamburgerButton
           onClick={() => {
             setIsShowMenu(!isShowMenu)
-            setShowOverlay(true)
+            trackEvent({
+              category: router.pathname,
+              action: `click-on-button | Header | ${router.pathname}`,
+              name: 'open-NavMenuMobile'
+            })
           }}
         >
           <S.HamburgerMenu isShowMenu={isShowMenu}>
@@ -87,13 +95,6 @@ const Header = () => {
             <div></div>
           </S.HamburgerMenu>
         </S.HamburgerButton>
-
-        <Nav
-          isShowMenu={isShowMenu}
-          showOverlay={showOverlay}
-          setIsShowMenu={handleHamburgerMenu}
-          setShowOverlay={setShowOverlay}
-        />
 
         <S.ButtonsWrapper>
           <Button
