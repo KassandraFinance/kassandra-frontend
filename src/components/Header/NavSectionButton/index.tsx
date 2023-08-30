@@ -33,8 +33,6 @@ const NavSectionButton = ({ linkInfo, onClickLink }: ILinksInfoCardProps) => {
       action: `${typeAction} | Header | ${router.pathname}`,
       name: linkInfo.sectionName
     })
-
-    setIsOpen(!openCard)
   }
 
   return (
@@ -43,14 +41,20 @@ const NavSectionButton = ({ linkInfo, onClickLink }: ILinksInfoCardProps) => {
         <Link href={linkInfo.route} passHref>
           <S.NavegationLinkButton
             as="a"
-            onClick={() => handleClickButtonHeader('click-on-link')}
+            onClick={() => {
+              handleClickButtonHeader('click-on-link')
+              onClickLink && onClickLink()
+            }}
           >
             {linkInfo.sectionName}
           </S.NavegationLinkButton>
         </Link>
       ) : (
         <S.NavegationLinkButton
-          onClick={() => handleClickButtonHeader('click-on-button')}
+          onClick={() => {
+            handleClickButtonHeader('click-on-button')
+            setIsOpen(!openCard)
+          }}
           isActive={openCard}
         >
           {linkInfo.sectionName}
