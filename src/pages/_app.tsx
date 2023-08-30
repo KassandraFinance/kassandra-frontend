@@ -17,7 +17,7 @@ import GlobalStyles from '../styles/global'
 import theme from '../styles/theme'
 
 import Header from '../components/Header'
-import NewFooter from '@/components/NewFooter'
+import Footer from '@/components/Footer'
 import Toastify from '../components/Toastify'
 import EventBanner from '@/components/EventBanner'
 
@@ -108,7 +108,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
               </EventBanner>
               {/* <Header /> */}
               <Component {...pageProps} />
-              {router.pathname !== '/404' && <NewFooter />}
+              {router.pathname !== '/404' && <Footer />}
             </ThemeProvider>
           </MatomoProvider>
         </Hydrate>
