@@ -1549,6 +1549,11 @@ export type WriterRelationResponseCollection = {
   data: Array<WriterEntity>;
 };
 
+export type LastBlogPostQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LastBlogPostQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', attributes?: { __typename?: 'Post', slug: string } | null }> } | null };
+
 export type PostBySlugQueryVariables = Exact<{
   slug: Scalars['String']['input'];
 }>;
@@ -1585,6 +1590,17 @@ export type SitemapPostsQueryVariables = Exact<{ [key: string]: never; }>;
 export type SitemapPostsQuery = { __typename?: 'Query', posts?: { __typename?: 'PostEntityResponseCollection', data: Array<{ __typename?: 'PostEntity', attributes?: { __typename?: 'Post', slug: string } | null }> } | null };
 
 
+export const LastBlogPostDocument = gql`
+    query LastBlogPost {
+  posts(pagination: {limit: 1}, sort: "publishedAt:DESC") {
+    data {
+      attributes {
+        slug
+      }
+    }
+  }
+}
+    `;
 export const PostBySlugDocument = gql`
     query PostBySlug($slug: String!) {
   postBySlug(slug: $slug) {
@@ -1889,6 +1905,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    LastBlogPost(variables?: LastBlogPostQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<LastBlogPostQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<LastBlogPostQuery>(LastBlogPostDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'LastBlogPost', 'query');
+    },
     PostBySlug(variables: PostBySlugQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PostBySlugQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<PostBySlugQuery>(PostBySlugDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'PostBySlug', 'query');
     },

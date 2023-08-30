@@ -56,9 +56,9 @@ export const EventBannerContent = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 114rem;
+    width: 124rem;
     margin-top: 0;
-    margin-inline: 2.4rem;
+    padding-inline: 2.4rem;
     padding-block: 1.6rem;
 
     .textMobile {
