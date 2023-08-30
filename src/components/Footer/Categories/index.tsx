@@ -101,19 +101,21 @@ const Categories = () => {
 
         <S.CategorieValueContainer>
           {PRODUCT.map(item => (
-            <Link key={item.name} href={item.href} passHref>
-              <a
-                onClick={() =>
-                  trackEvent({
-                    category: router.pathname,
-                    action: `click-on-link | Footer | ${router.pathname}`,
-                    name: item.name
-                  })
-                }
-              >
-                <S.CategorieValue>{item.name}</S.CategorieValue>
-              </a>
-            </Link>
+            <li key={item.name}>
+              <Link href={item.href} passHref>
+                <S.CategorieValue
+                  onClick={() =>
+                    trackEvent({
+                      category: router.pathname,
+                      action: `click-on-link | Footer | ${router.pathname}`,
+                      name: item.name
+                    })
+                  }
+                >
+                  {item.name}
+                </S.CategorieValue>
+              </Link>
+            </li>
           ))}
         </S.CategorieValueContainer>
       </S.Categorie>
@@ -124,8 +126,51 @@ const Categories = () => {
         <S.CategorieValueContainer>
           {COMMUNITY.map(item =>
             item.isExterno ? (
-              <a
-                key={item.name}
+              <li key={item.name}>
+                <S.CategorieValue
+                  key={item.name}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() =>
+                    trackEvent({
+                      category: router.pathname,
+                      action: `click-on-link | Footer | ${router.pathname}`,
+                      name: item.name
+                    })
+                  }
+                >
+                  {item.name}
+                </S.CategorieValue>
+              </li>
+            ) : (
+              <li key={item.name}>
+                <Link href={item.href} passHref>
+                  <S.CategorieValue
+                    onClick={() =>
+                      trackEvent({
+                        category: router.pathname,
+                        action: `click-on-link | Footer | ${router.pathname}`,
+                        name: item.name
+                      })
+                    }
+                  >
+                    {item.name}
+                  </S.CategorieValue>
+                </Link>
+              </li>
+            )
+          )}
+        </S.CategorieValueContainer>
+      </S.Categorie>
+
+      <S.Categorie>
+        <S.CategorieTitle>Resources</S.CategorieTitle>
+
+        <S.CategorieValueContainer>
+          {RESOURCES.map(item => (
+            <li key={item.name}>
+              <S.CategorieValue
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -137,47 +182,9 @@ const Categories = () => {
                   })
                 }
               >
-                <S.CategorieValue key={item.name}>{item.name}</S.CategorieValue>
-              </a>
-            ) : (
-              <Link key={item.name} href={item.href} passHref>
-                <a
-                  onClick={() =>
-                    trackEvent({
-                      category: router.pathname,
-                      action: `click-on-link | Footer | ${router.pathname}`,
-                      name: item.name
-                    })
-                  }
-                >
-                  <S.CategorieValue>{item.name}</S.CategorieValue>
-                </a>
-              </Link>
-            )
-          )}
-        </S.CategorieValueContainer>
-      </S.Categorie>
-
-      <S.Categorie>
-        <S.CategorieTitle>Resources</S.CategorieTitle>
-
-        <S.CategorieValueContainer>
-          {RESOURCES.map(item => (
-            <a
-              key={item.name}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() =>
-                trackEvent({
-                  category: router.pathname,
-                  action: `click-on-link | Footer | ${router.pathname}`,
-                  name: item.name
-                })
-              }
-            >
-              <S.CategorieValue>{item.name}</S.CategorieValue>
-            </a>
+                {item.name}
+              </S.CategorieValue>
+            </li>
           ))}
         </S.CategorieValueContainer>
       </S.Categorie>
@@ -187,19 +194,21 @@ const Categories = () => {
 
         <S.CategorieValueContainer>
           {ABOUT.map(item => (
-            <Link key={item.name} href={item.href} passHref>
-              <a
-                onClick={() =>
-                  trackEvent({
-                    category: router.pathname,
-                    action: `click-on-link | Footer | ${router.pathname}`,
-                    name: item.name
-                  })
-                }
-              >
-                <S.CategorieValue>{item.name}</S.CategorieValue>
-              </a>
-            </Link>
+            <li key={item.name}>
+              <Link href={item.href} passHref>
+                <S.CategorieValue
+                  onClick={() =>
+                    trackEvent({
+                      category: router.pathname,
+                      action: `click-on-link | Footer | ${router.pathname}`,
+                      name: item.name
+                    })
+                  }
+                >
+                  {item.name}
+                </S.CategorieValue>
+              </Link>
+            </li>
           ))}
         </S.CategorieValueContainer>
       </S.Categorie>

@@ -9,13 +9,14 @@ interface IManagerCardProps {
   icon: StaticImageData
   title: string
   text: string
+  alt: string
 }
 
-const ManagerCard = ({ icon, title, text }: IManagerCardProps) => {
+const ManagerCard = ({ icon, title, text, alt }: IManagerCardProps) => {
   return (
     <S.ManagerCardWapper>
       <S.IconWapper>
-        <Image src={icon} />
+        <Image src={icon} alt={alt} />
       </S.IconWapper>
 
       <S.TextWrapper>

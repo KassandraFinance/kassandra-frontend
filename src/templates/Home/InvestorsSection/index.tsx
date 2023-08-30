@@ -20,15 +20,15 @@ const InvestorsSection = () => {
   return (
     <S.Container>
       <S.ImgWrapper1>
-        <Image src={light1} />
+        <Image src={light1} alt="Ball of light" />
       </S.ImgWrapper1>
 
       <S.ImgWrapper2>
-        <Image src={light2} />
+        <Image src={light2} alt="Ball of light" />
       </S.ImgWrapper2>
 
       <S.ImgTabletWrapper>
-        <Image src={lightTable4} />
+        <Image src={lightTable4} alt="Ball of light" />
       </S.ImgTabletWrapper>
 
       <SectionCard
@@ -41,6 +41,7 @@ that fit you"
         btnText="Become an investor"
         link="/investors"
         img={investorImg}
+        alt="A person from the back"
       />
 
       <FadeIn threshold={1}>

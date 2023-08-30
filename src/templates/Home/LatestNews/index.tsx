@@ -51,7 +51,7 @@ const LatestNews = () => {
   return (
     <S.LatestNewsContainer>
       <S.ImgTabletWrapper>
-        <Image src={lightTable10} />
+        <Image src={lightTable10} alt="Ball of light" />
       </S.ImgTabletWrapper>
 
       <FadeIn threshold={0.5}>

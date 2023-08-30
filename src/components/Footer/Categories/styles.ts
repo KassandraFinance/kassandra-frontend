@@ -52,7 +52,7 @@ export const CategorieValueContainer = styled.ul`
   `}
 `
 
-export const CategorieValue = styled.ul`
+export const CategorieValue = styled.a`
   ${() => css`
     width: fit-content;
 
