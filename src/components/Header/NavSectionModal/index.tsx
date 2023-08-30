@@ -76,7 +76,8 @@ const NavSectionModal = ({
                   action: `click-on-link | Header-${linkInfo.sectionName} | ${router.pathname}`,
                   name: 'Acess Post'
                 })
-                onClick
+
+                onClick()
               }}
             />
           )}
