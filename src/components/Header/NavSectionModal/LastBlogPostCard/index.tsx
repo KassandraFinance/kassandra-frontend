@@ -22,7 +22,7 @@ const LastBlogPostCard = ({ onClick }: ILastBlogPostCardProps) => {
           <Button
             as="a"
             backgroundBlack
-            text="Acess Post"
+            text="Access Post"
             className="button-mobile"
             onClick={onClick}
           />
