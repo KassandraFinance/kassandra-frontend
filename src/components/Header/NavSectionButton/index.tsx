@@ -40,6 +40,7 @@ const NavSectionButton = ({ linkInfo, onClickLink }: ILinksInfoCardProps) => {
       {linkInfo.route ? (
         <Link href={linkInfo.route} passHref>
           <S.NavegationLinkButton
+            isActive={openCard}
             as="a"
             onClick={() => {
               handleClickButtonHeader('click-on-link')
@@ -58,7 +59,7 @@ const NavSectionButton = ({ linkInfo, onClickLink }: ILinksInfoCardProps) => {
           isActive={openCard}
         >
           {linkInfo.sectionName}
-          <ArrowDownIcon />
+          <ArrowDownIcon stroke="#FCFCFC" />
         </S.NavegationLinkButton>
       )}
 
