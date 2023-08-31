@@ -53,8 +53,7 @@ const incentivesProgram = {
 
 const forum = {
   text: 'Forum',
-  description:
-    'What the KACY token is, how it works, and ways to benefit from it',
+  description: 'Shape Kassandra into what you believe in',
   route: 'https://gov.kassandra.finance/',
   Icon: ProtocolGradientIcon
 }
