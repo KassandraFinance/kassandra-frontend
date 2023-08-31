@@ -36,13 +36,13 @@ export const Wrapper = styled.header`
 
 export const LogoWrapper = styled.div`
   .logo-desktop {
-    @media (max-width: 992px) {
+    @media (max-width: 576px) {
       display: none;
     }
   }
 
   .logo-ipad {
-    @media (min-width: 991px) {
+    @media (min-width: 577px) {
       display: none;
     }
   }
@@ -57,7 +57,7 @@ export const ButtonsWrapper = styled.div`
   .button-mobile {
     border: 0.1rem solid ${theme.colors.snow};
     width: fit-content;
-    width: 12.8rem;
+    width: 13rem;
     padding: 1.2rem 2.4rem;
 
     font-size: ${theme.font.sizes.font14};

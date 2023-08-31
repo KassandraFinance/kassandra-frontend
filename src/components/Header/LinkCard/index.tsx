@@ -16,6 +16,7 @@ interface ILinkCardProps {
 
 const LinkCard = ({ linkInfo, sectionName, onClick }: ILinkCardProps) => {
   const { Icon, description, text, route } = linkInfo
+  const isExternalLink = route.includes('https://')
 
   const router = useRouter()
   const { trackEvent } = useMatomo()
@@ -32,7 +33,10 @@ const LinkCard = ({ linkInfo, sectionName, onClick }: ILinkCardProps) => {
 
   return (
     <Link href={route} key={text} passHref>
-      <S.CardLinkWrapper onClick={handleClickLink}>
+      <S.CardLinkWrapper
+        onClick={handleClickLink}
+        target={isExternalLink ? '_blank' : '_self'}
+      >
         <S.IconContent>
           <Icon />
         </S.IconContent>

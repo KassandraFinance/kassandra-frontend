@@ -15,6 +15,7 @@ export const CardLinkWrapper = styled.a`
     padding-inline: 2.4rem;
     padding-block: 1.6rem;
     border-radius: 4px;
+    width: 35rem;
 
     transition-duration: 300ms;
     transition-timing-function: ease-in-out;
@@ -25,6 +26,10 @@ export const CardLinkWrapper = styled.a`
     &:hover,
     &:focus {
       background: rgba(252, 252, 252, 0.05);
+    }
+
+    @media (max-width: 992px) {
+      width: 100%;
     }
   `}
 `

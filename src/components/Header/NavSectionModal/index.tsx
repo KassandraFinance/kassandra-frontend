@@ -31,6 +31,22 @@ const NavSectionModal = ({
   const linkHeight = 98
   const paddingHeight = isResources ? 64 + lastBlogPostCardHeight : 64
 
+  React.useEffect(() => {
+    if (!isOpenCard) return
+
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClick()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyPress)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress)
+    }
+  }, [isOpenCard])
+
   return (
     <>
       {isOpenCard && <Overlay isOpen={isOpenCard} onClick={onClick} />}
@@ -46,11 +62,11 @@ const NavSectionModal = ({
           </S.CardTitleWrapper>
 
           {isResources && (
-            <div>
+            <S.FollowUsWrapper>
               <S.FollowUs>Follow us</S.FollowUs>
 
               <SocialMidia />
-            </div>
+            </S.FollowUsWrapper>
           )}
         </S.SideLeft>
 
