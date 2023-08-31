@@ -67,7 +67,6 @@ const managerFundsArray = [
 ]
 
 const CreateFund = () => {
-  // eslint-disable-next-line prettier/prettier
   const [createManagerFunds, setCreateManagerFunds] =
     React.useState<IManagerText>(managerFundsArray[0])
   const [clickButton, setclickButton] = React.useState<number>(1)
@@ -169,7 +168,7 @@ const CreateFund = () => {
               </S.NumberButton>
             </S.NumberButtonsContainer>
             <span>HOW IT WORKS</span>
-            <SectionSubtitle text={createManagerFunds.title} />
+            <SectionSubtitle text={createManagerFunds.title} as="h2" />
             <Paragraph text={createManagerFunds.paragraph} />
             <S.ButtonsContainer>
               <Link href="https://app.kassandra.finance/manage" passHref>
@@ -206,6 +205,7 @@ const CreateFund = () => {
                       name: 'back-slide'
                     })
                   }}
+                  aria-label="Previous"
                 >
                   <Image src={arrowWhite} alt="" width={9} height={16} />
                 </button>
@@ -219,6 +219,7 @@ const CreateFund = () => {
                       name: 'next-slide'
                     })
                   }}
+                  aria-label="Next"
                 >
                   <Image src={arrowWhite} alt="" width={9} height={16} />
                 </button>
