@@ -1,7 +1,7 @@
 {
     "name": "Kassandra Homepage",
     "short_name": "Kassandra Home",
-    "start_url": "https://kassandra.finance",
+    "start_url": "https://www.kassandra.finance",
     "theme_color": "#211426",
     "background_color": "#211426",
     "display": "standalone",
