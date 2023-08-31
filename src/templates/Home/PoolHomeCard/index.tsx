@@ -205,7 +205,7 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
         </S.CardFooter>
       </S.Card>
       <S.Info>
-        <h4>{pool.symbol !== 'aHYPE' ? 'New Product' : ''}</h4>
+        <span>{pool.symbol !== 'aHYPE' ? 'New Product' : ''}</span>
         <SectionSubtitle
           text={
             pool.symbol !== 'aHYPE'
@@ -218,7 +218,12 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
         <S.InfoList>
           <li>
             <div className="image">
-              <Image src={arrowRight} width={20} height={20} />
+              <Image
+                src={arrowRight}
+                width={20}
+                height={20}
+                alt="Arrow right"
+              />
             </div>
             {pool.symbol !== 'aHYPE'
               ? 'Have a consistent bluechip strategy'
@@ -226,7 +231,12 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
           </li>
           <li>
             <div className="image">
-              <Image src={arrowRight} width={20} height={20} />
+              <Image
+                src={arrowRight}
+                width={20}
+                height={20}
+                alt="Arrow right"
+              />
             </div>
             {pool.symbol !== 'aHYPE'
               ? 'Hedge your exposure'
@@ -234,7 +244,12 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
           </li>
           <li>
             <div className="image">
-              <Image src={arrowRight} width={20} height={20} />
+              <Image
+                src={arrowRight}
+                width={20}
+                height={20}
+                alt="Arrow right"
+              />
             </div>
             {pool.symbol !== 'aHYPE' ? 'Improve your hodl' : 'HIGH VOLATILITY'}
           </li>

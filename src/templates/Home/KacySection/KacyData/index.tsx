@@ -85,7 +85,7 @@ const KacyData = ({ setIsOpenModal }: IKacyDataProps) => {
     <S.KacyDataContainer>
       <SectionSubtitle
         text="Be part of the cutting edge of tokenized crypto portfolios."
-        as="h5"
+        as="h4"
       />
 
       <S.Text>

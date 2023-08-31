@@ -43,7 +43,12 @@ const NavegationMenuMobile = ({ isShowMenu, setIsShowMenu }: INavProps) => {
           >
             <Link href="/" passHref>
               <a>
-                <Image src={kacyIcon} width={28} height={28} />
+                <Image
+                  src={kacyIcon}
+                  width={28}
+                  height={28}
+                  alt="Kassandra logo"
+                />
               </a>
             </Link>
 

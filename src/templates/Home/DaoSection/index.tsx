@@ -13,19 +13,19 @@ const DaoSection = () => {
   return (
     <S.Container>
       <S.ImgWrapper1>
-        <Image src={light5} />
+        <Image src={light5} alt="Ball of light" />
       </S.ImgWrapper1>
 
       <S.ImgWrapper2>
-        <Image src={light5} />
+        <Image src={light5} alt="Ball of light" />
       </S.ImgWrapper2>
 
       <S.ImgTabletWrapper1>
-        <Image src={lightTable8} />
+        <Image src={lightTable8} alt="Ball of light" />
       </S.ImgTabletWrapper1>
 
       <S.ImgTabletWrapper2>
-        <Image src={lightTable9} />
+        <Image src={lightTable9} alt="Ball of light" />
       </S.ImgTabletWrapper2>
 
       <SectionCard
@@ -37,6 +37,7 @@ const DaoSection = () => {
         btnText="Governance 101"
         link="/dao"
         img={daoImg}
+        alt="A group of people in the VIP area"
       />
     </S.Container>
   )

@@ -10,7 +10,7 @@ const LatestNewsHeader = () => {
   return (
     <S.LatestNewsHeader>
       <S.LatestNewsHeadingWrapper>
-        <Image src={roadMapIcon} />
+        <Image src={roadMapIcon} alt="Road map icon" />
 
         <SectionSubtitle text="Latest News" as="h5" />
 

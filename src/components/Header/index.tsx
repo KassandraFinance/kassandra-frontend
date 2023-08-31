@@ -88,6 +88,7 @@ const Header = () => {
               name: 'open-NavMenuMobile'
             })
           }}
+          aria-label="Hamburger Menu"
         >
           <S.HamburgerMenu isShowMenu={isShowMenu}>
             <div></div>

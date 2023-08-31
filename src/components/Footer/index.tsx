@@ -19,7 +19,7 @@ const Footer = () => {
       <S.Wrapper>
         <S.FooterLeft>
           <S.LogoContainer>
-            <Image src={kassandraLogo} />
+            <Image src={kassandraLogo} alt="White kassandra logo" />
 
             <S.Info>© 2021-{new Date().getFullYear()} Kassandra.</S.Info>
           </S.LogoContainer>
@@ -38,7 +38,7 @@ const Footer = () => {
               }
             >
               <S.Certik>Audited by</S.Certik>
-              <Image src={certikLogo} />
+              <Image src={certikLogo} alt="Certik logo" />
             </S.CertikLink>
 
             <SocialMedia />

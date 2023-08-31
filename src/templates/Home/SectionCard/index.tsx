@@ -22,6 +22,7 @@ interface ISectionCardProps {
   btnText: string
   link: string
   img: StaticImageData
+  alt: string
 }
 
 const SectionCard = ({
@@ -32,7 +33,8 @@ const SectionCard = ({
   text,
   btnText,
   link,
-  img
+  img,
+  alt
 }: ISectionCardProps) => {
   const { trackEvent } = useMatomo()
   const router = useRouter()
@@ -100,7 +102,7 @@ const SectionCard = ({
       </FadeInHorizontal>
 
       <FadeInHorizontal threshold={0.5}>
-        <Image src={img} />
+        <Image src={img} alt={alt} />
       </FadeInHorizontal>
     </S.Container>
   )

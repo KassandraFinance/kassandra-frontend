@@ -27,7 +27,7 @@ const Subscribe = () => {
             <SubscribeInput />
           </S.TextWrapper>
 
-          <Image src={logoSkew} />
+          <Image src={logoSkew} alt="Kacy logo skewed with light" />
         </S.Subscribe>
       </FadeInHorizontal>
     </S.SubscribeContainer>
