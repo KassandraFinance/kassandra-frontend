@@ -1,4 +1,6 @@
 import styled, { css } from 'styled-components'
+import { CardLinkWrapper } from '../LinkCard/styles'
+import { SocialMidiaContent } from '@/components/SocialMidia/styles'
 
 interface ICardWrapperProps {
   openCard: boolean
@@ -9,11 +11,10 @@ export const NavSectionModalWrapper = styled.div<ICardWrapperProps>`
   ${() => css`
     position: absolute;
     top: 6rem;
-    right: 0;
+    left: -6rem;
 
     display: flex;
-    gap: 8rem;
-    width: 86.7rem;
+    gap: 3.2rem;
     max-height: 0;
 
     opacity: 0;
@@ -21,7 +22,12 @@ export const NavSectionModalWrapper = styled.div<ICardWrapperProps>`
     border-radius: 4px;
     border: 0.1rem solid rgba(252, 252, 252, 0.05);
     background: linear-gradient(164.99deg, #1b1d22 19.85%, #333437 116.33%);
-    box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.2);
+
+    -webkit-box-shadow: 0px -2px 51px 10px rgba(0, 0, 0, 0.47);
+    -moz-box-shadow: 0px -2px 51px 10px rgba(0, 0, 0, 0.47);
+    box-shadow: 0px -2px 51px 10px rgba(0, 0, 0, 0.47);
+
+    z-index: -1;
 
     overflow: hidden;
 
@@ -29,12 +35,22 @@ export const NavSectionModalWrapper = styled.div<ICardWrapperProps>`
     transition-timing-function: ease-in-out;
     transition-property: max-height opacity;
 
-    @media (max-width: 1080px) {
-      right: -8rem;
+    @media (max-width: 1600px) {
+      left: auto;
+      right: 0;
+    }
+
+    @media (max-width: 1200px) {
+      right: -4rem;
     }
 
     @media (max-width: 992px) {
       display: none;
+    }
+
+    ${SocialMidiaContent} + ${CardLinkWrapper} {
+      pointer-events: none;
+      z-index: -1;
     }
   `}
 
@@ -62,18 +78,33 @@ export const SideLeft = styled.div`
     justify-content: space-between;
   `}
 `
+export const FollowUsWrapper = styled.div`
+  ${() => css`
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  `}
+`
+
 export const FollowUs = styled.p`
   ${({ theme }) => css`
-    color: ${theme.colors.cyan};
-    font-size: ${theme.font.sizes.font16};
-    font-weight: ${theme.font.weight.light};
+    color: ${theme.colors.white};
+    font-size: ${theme.font.sizes.font12};
+    font-weight: ${theme.font.weight.normal};
     line-height: 2.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
   `}
 `
 
 export const CardTitleWrapper = styled.div`
   ${({ theme }) => css`
     text-align: start;
+    width: 27.6rem;
+
+    @media (max-width: 992px) {
+      width: 100%;
+    }
 
     p {
       margin-bottom: 0.8rem;
@@ -96,38 +127,3 @@ export const Line = styled.div`
     background: #ffffff15;
   `}
 `
-
-// export const CardBlogPost = styled.div`
-//   ${({ theme }) => css`
-//     position: relative;
-
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: space-between;
-//     height: 18.6rem;
-//     width: 100%;
-
-//     margin-top: 1.6rem;
-//     padding: 2rem 2.5rem;
-//     border-radius: 4px;
-
-//     background-image: url('/assets/images/header-blog-background.png');
-//     background-repeat: no-repeat;
-//     background-size: contain;
-//     background-position: center center;
-
-//     overflow: hidden;
-
-//     p {
-//       width: 25rem;
-//       color: ${theme.colors.white};
-//       font-size: ${theme.font.sizes.font32};
-//       font-weight: ${theme.font.weight.bold};
-
-//       background-image: linear-gradient(90deg, #e843c4 0%, #ffbf00 100%);
-//       background-clip: text;
-//       -webkit-background-clip: text;
-//       -webkit-text-fill-color: transparent;
-//     }
-//   `}
-// `
