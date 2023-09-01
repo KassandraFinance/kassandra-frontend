@@ -21,7 +21,7 @@ const VideoSection = () => {
       </FadeIn>
 
       <S.TextWrapper>
-        <SectionSubtitle text="Empower Our Community" />
+        <SectionSubtitle text="Empower Our Community" as="h2" />
         <Paragraph text="Kassandra’s Manager Incentive Program is about fostering collaboration, encouraging community participation, and ultimately, elevating Kassandra as the go-to DeFi platform for managers and investors." />
       </S.TextWrapper>
     </S.VideoSection>

@@ -92,7 +92,11 @@ const Tokenomics = () => {
         <FadeInHorizontal threshold={0.5} invert>
           <S.Row1>
             <S.KassandraImageWrapper>
-              <Image src="/assets/images/kassandra-circle.svg" layout="fill" />
+              <Image
+                src="/assets/images/kassandra-circle.svg"
+                alt="Kassandra logo with circles"
+                layout="fill"
+              />
             </S.KassandraImageWrapper>
 
             <S.ValuesContainer>
@@ -124,6 +128,7 @@ const Tokenomics = () => {
             <S.PieChartImageWrapper>
               <Image
                 src="/assets/images/chart-pie-token-holder.svg"
+                alt="Pie chart"
                 layout="fill"
               />
             </S.PieChartImageWrapper>
@@ -135,6 +140,7 @@ const Tokenomics = () => {
             <S.BarChartImageWrapper>
               <Image
                 src="/assets/images/tokenomics-chart-2.svg"
+                alt="Area chart"
                 layout="fill"
               />
             </S.BarChartImageWrapper>

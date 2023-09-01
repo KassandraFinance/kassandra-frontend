@@ -51,6 +51,7 @@ const SubscribeInput = () => {
             value={formState}
             onChange={event => setFormState(event?.target.value)}
             aria-label="Email"
+            autoComplete="off"
           />
 
           <S.InputTextWrapper>

@@ -112,7 +112,7 @@ const Partners = () => {
               })
             }
           >
-            <Image src={shineDAO} alt="" />
+            <Image src={shineDAO} alt="ShineDao" />
           </a>
         </FadeIn>
 
