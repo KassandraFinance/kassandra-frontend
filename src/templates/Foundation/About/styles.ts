@@ -129,7 +129,7 @@ export const CardWrapper = styled.article`
   }
 `
 
-export const CardTitle = styled.h4`
+export const CardTitle = styled.h3`
   margin-bottom: 1rem;
 
   color: #c4c4c4;

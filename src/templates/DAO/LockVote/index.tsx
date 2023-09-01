@@ -59,6 +59,7 @@ const LockVote = () => {
                 <Image
                   src="/assets/images/arrow-curved-down.svg"
                   layout="fill"
+                  alt="Arrow curved down"
                 />
               </div>
               Once you unstake your tokens from a lock pool, your funds will go
@@ -78,6 +79,7 @@ const LockVote = () => {
                   src="/assets/iconGradient/kacy.svg"
                   width={18}
                   height={18}
+                  alt="Kacy logo"
                 />
               }
               backgroundPrimary
@@ -93,7 +95,11 @@ const LockVote = () => {
             />
           </S.LockPoolContainer>
           <S.Connector>
-            <Image src="/assets/images/right-connector.svg" layout="fill" />
+            <Image
+              src="/assets/images/right-connector.svg"
+              alt="Right connector"
+              layout="fill"
+            />
           </S.Connector>
         </div>
       </FadeInVertical>

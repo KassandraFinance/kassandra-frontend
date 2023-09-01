@@ -25,7 +25,12 @@ const About = () => {
           <S.BulletPoints>
             <S.BulletPointWrapper>
               <S.BulletPoint>
-                <Image src={padlockIcon} width={68} height={68} />
+                <Image
+                  src={padlockIcon}
+                  width={68}
+                  height={68}
+                  alt="Open lock"
+                />
 
                 <S.BulletPointTitle>
                   Trustless & Permisionless
@@ -37,7 +42,12 @@ const About = () => {
 
             <S.BulletPointWrapper>
               <S.BulletPoint>
-                <Image src={switchbladeIcon} width={68} height={68} />
+                <Image
+                  src={switchbladeIcon}
+                  alt="Switchblade"
+                  width={68}
+                  height={68}
+                />
 
                 <S.BulletPointTitle>Flexible & Customizable</S.BulletPointTitle>
               </S.BulletPoint>
@@ -47,7 +57,12 @@ const About = () => {
 
             <S.BulletPointWrapper>
               <S.BulletPoint>
-                <Image src={GroupSocialIcon} width={68} height={68} />
+                <Image
+                  src={GroupSocialIcon}
+                  alt="Group of people"
+                  width={68}
+                  height={68}
+                />
 
                 <S.BulletPointTitle>Aligned Interests</S.BulletPointTitle>
               </S.BulletPoint>

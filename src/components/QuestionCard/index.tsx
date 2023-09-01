@@ -53,9 +53,11 @@ const QuestionCard = ({
       <S.Answer isOpen={isOpen}>
         <S.Answer isOpen={isOpen}>
           <S.AnswerText dangerouslySetInnerHTML={{ __html: answer }} />
-          <a href={link} target="_blank" rel="noreferrer">
-            {linkText}
-          </a>
+          {link ? (
+            <a href={link} target="_blank" rel="noreferrer">
+              {linkText}
+            </a>
+          ) : null}
         </S.Answer>
       </S.Answer>
     </S.Question>

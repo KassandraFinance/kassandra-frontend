@@ -45,6 +45,7 @@ const TokenHolder = () => {
                 src="/assets/iconGradient/kacy.svg"
                 width={18}
                 height={18}
+                alt="Kacy logo"
               />
             }
             onClick={() =>
