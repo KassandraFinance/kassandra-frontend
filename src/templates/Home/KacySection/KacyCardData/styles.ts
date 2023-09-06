@@ -18,7 +18,7 @@ export const KacyValue = styled.span`
   line-height: 2.5rem;
 `
 
-export const Title = styled.h6`
+export const Title = styled.h5`
   color: ${theme.colors.magenta};
   font-weight: ${theme.font.weight.normal};
   font-size: ${theme.font.sizes.font12};

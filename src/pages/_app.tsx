@@ -17,7 +17,7 @@ import GlobalStyles from '../styles/global'
 import theme from '../styles/theme'
 
 import Header from '../components/Header'
-import Footer from '../components/Footer'
+import Footer from '@/components/Footer'
 import Toastify from '../components/Toastify'
 import EventBanner from '@/components/EventBanner'
 

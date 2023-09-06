@@ -38,7 +38,10 @@ const Products = () => {
         <FadeInHorizontal threshold={0.5}>
           <S.DescriptionProtocol>
             <S.Span>PROTOCOL SAFETY</S.Span>
-            <SectionSubtitle text="Make the most of your money while keeping it safe" />
+            <SectionSubtitle
+              text="Make the most of your money while keeping it safe"
+              as="h2"
+            />
             <Paragraph
               text="This is how we ensure that user funds are always protected. All
               infrastructure is governed by up-to-date smart contracts and
@@ -55,7 +58,7 @@ const Products = () => {
           <S.DetailsProtocol>
             <S.Detail>
               <S.Icon>
-                <Image src={walletLock} />
+                <Image src={walletLock} alt="Wallet" />
               </S.Icon>
               <S.Topic>
                 <span>NON CUSTODIAL</span>
@@ -67,7 +70,7 @@ const Products = () => {
             </S.Detail>
             <S.Detail>
               <S.Icon>
-                <Image src={lock} />
+                <Image src={lock} alt="Lock" />
               </S.Icon>
               <S.Topic>
                 <span>PERMISSIONLESS</span>
@@ -79,7 +82,7 @@ const Products = () => {
             </S.Detail>
             <S.Detail>
               <S.Icon>
-                <Image src={certik} />
+                <Image src={certik} alt="Certik" />
               </S.Icon>
               <S.Topic>
                 <span>CERTIK AUDIT</span>

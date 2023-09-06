@@ -1,0 +1,9 @@
+query LastBlogPost{
+  posts(pagination: { limit: 1 }, sort: "publishedAt:DESC") {
+    data {
+      attributes {
+        slug
+      }
+    }
+  }
+}

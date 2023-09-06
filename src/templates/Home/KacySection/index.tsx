@@ -16,11 +16,11 @@ const KacySection = () => {
   return (
     <S.KacySectionContainer>
       <S.ImgWrapper>
-        <Image src={light7} />
+        <Image src={light7} alt="Ball of light" />
       </S.ImgWrapper>
 
       <FadeInHorizontal threshold={0.5} invert>
-        <Image src={kacyCircle} />
+        <Image src={kacyCircle} alt="Kacy logo with circles" />
       </FadeInHorizontal>
 
       <FadeInHorizontal threshold={0.5} invert>

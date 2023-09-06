@@ -37,6 +37,7 @@ const Governance = () => {
                   src="/assets/icons/arrow-right-circle.svg"
                   width={18}
                   height={18}
+                  alt="Arrow right circle"
                 />
               }
               backgroundSecondary
@@ -57,7 +58,10 @@ const Governance = () => {
 
       <FadeInHorizontal threshold={0.5}>
         <S.Image>
-          <img src="/assets/images/proposal-img.png" />
+          <img
+            src="/assets/images/proposal-img.png"
+            alt="Image showing the page of a proposal"
+          />
           <span />
         </S.Image>
       </FadeInHorizontal>

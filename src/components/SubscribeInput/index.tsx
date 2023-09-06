@@ -50,16 +50,23 @@ const SubscribeInput = () => {
             minLength={1}
             value={formState}
             onChange={event => setFormState(event?.target.value)}
+            aria-label="Email"
+            autoComplete="off"
           />
 
           <S.InputTextWrapper>
-            <Image src={emailIcon} width={17.5} height={12.5} />
+            <Image
+              src={emailIcon}
+              width={17.5}
+              height={12.5}
+              alt="Letter envelope"
+            />
 
             <span>Email</span>
           </S.InputTextWrapper>
 
           <S.InputBtn type="submit">
-            <Image src={arrowIcon} />
+            <Image src={arrowIcon} alt="Arrow right" />
           </S.InputBtn>
         </S.InputWrapper>
       </S.Form>

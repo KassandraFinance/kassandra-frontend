@@ -28,11 +28,11 @@ const NewHome = () => {
 
       <S.WavyOneWrapper>
         <S.ImgWrapper>
-          <Image src={light3} />
+          <Image src={light3} alt="Ball of light" />
         </S.ImgWrapper>
 
         <S.ImgTabletWrapper1>
-          <Image src={lightTable5} />
+          <Image src={lightTable5} alt="Ball of light" />
         </S.ImgTabletWrapper1>
 
         <WavyLine color="color1" />
@@ -44,11 +44,11 @@ const NewHome = () => {
 
       <S.WavyOneWrapper>
         <S.ImgTabletWrapper2>
-          <Image src={lightTable6} />
+          <Image src={lightTable6} alt="Ball of light" />
         </S.ImgTabletWrapper2>
 
         <S.ImgTabletWrapper3>
-          <Image src={lightTable7} />
+          <Image src={lightTable7} alt="Ball of light" />
         </S.ImgTabletWrapper3>
 
         <WavyLine color="color2" />

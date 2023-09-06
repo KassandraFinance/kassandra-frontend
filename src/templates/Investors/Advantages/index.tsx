@@ -26,7 +26,10 @@ const Advantages = () => {
 
       <FadeIn threshold={0.5}>
         <S.Schema>
-          <Image src={schemaManager} />
+          <Image
+            src={schemaManager}
+            alt="Image showing how kassandra connects managers and investors"
+          />
           <div className="connecting">
             <div className="description-connecting">
               <span>Investors</span>
@@ -70,7 +73,10 @@ const Advantages = () => {
             </S.DescriptionSafety>
 
             <S.ImageFundSafety>
-              <img src="/assets/images/fund-safety.png" />
+              <img
+                src="/assets/images/fund-safety.png"
+                alt="Image showing how white list works"
+              />
             </S.ImageFundSafety>
           </S.FundSafety>
         </FadeInHorizontal>
@@ -78,7 +84,10 @@ const Advantages = () => {
         <FadeInHorizontal threshold={0.5} invert>
           <S.Rebalance>
             <S.ImageRebalance>
-              <img src="/assets/images/grafic-rebalance.png" />
+              <img
+                src="/assets/images/grafic-rebalance.png"
+                alt="A chart showing the rebalancing mecamins"
+              />
             </S.ImageRebalance>
 
             <S.DescriptionRebalance>
@@ -110,7 +119,10 @@ const Advantages = () => {
             </S.DescriptionAutonomy>
 
             <S.ImageFundAutonomy>
-              <img src="/assets/images/high-autonomy.png" />
+              <img
+                src="/assets/images/high-autonomy.png"
+                alt="Image showing the autonomy of the platform"
+              />
             </S.ImageFundAutonomy>
           </S.FundAutonomy>
         </FadeInHorizontal>
@@ -137,6 +149,7 @@ const Advantages = () => {
                   src={'/assets/iconGradient/team-worker.svg'}
                   width={72}
                   height={72}
+                  alt="Image showing a group of people"
                 />
               </S.BeneficitImage>
               <span>DELEGATION</span>
@@ -151,6 +164,7 @@ const Advantages = () => {
                   src={'/assets/iconGradient/gauge-chart.svg'}
                   width={74}
                   height={43}
+                  alt="Gauge chart"
                 />
               </S.BeneficitImage>
               <span>RISK REDUCTION</span>
@@ -165,6 +179,7 @@ const Advantages = () => {
                   src={'/assets/iconGradient/nodos.svg'}
                   width={76}
                   height={64}
+                  alt="Network"
                 />
               </S.BeneficitImage>
               <span>NETWORK</span>

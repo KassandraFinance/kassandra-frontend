@@ -9,7 +9,7 @@ const HeroBackGround = () => {
   return (
     <>
       <S.ImgWrapper>
-        <Image src={lightTable3} />
+        <Image src={lightTable3} alt="Ball of light" />
       </S.ImgWrapper>
 
       <S.Sun />

@@ -339,7 +339,7 @@ export const Info = styled.div`
     }
   }
 
-  h4 {
+  > span {
     margin-bottom: 0.8rem;
 
     color: #ffbf00;

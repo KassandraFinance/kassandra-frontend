@@ -22,7 +22,11 @@ const CommunityTenets = () => {
       <FadeIn threshold={0.5}>
         <S.Container>
           <div className="connector">
-            <Image src="/assets/images/arrow-gradient.png" layout="fill" />
+            <Image
+              src="/assets/images/arrow-gradient.png"
+              layout="fill"
+              alt="Arrow gradient"
+            />
           </div>
           <S.CommunityTenet>
             <S.IconWrapper>
@@ -30,6 +34,7 @@ const CommunityTenets = () => {
                 src="/assets/iconGradient/hammer.svg"
                 width={50}
                 height={41}
+                alt="Hammer"
               />
             </S.IconWrapper>
             <S.CommunityTenetText>
@@ -44,7 +49,12 @@ const CommunityTenets = () => {
           <S.Vr />
           <S.CommunityTenet>
             <S.IconWrapper>
-              <img src="/assets/iconGradient/gear.svg" width={50} height={41} />
+              <img
+                src="/assets/iconGradient/gear.svg"
+                alt="Gear"
+                width={50}
+                height={41}
+              />
             </S.IconWrapper>
             <S.CommunityTenetText>
               <S.Caption color="cyan">Maintain</S.Caption>
@@ -63,6 +73,7 @@ const CommunityTenets = () => {
                 src="/assets/iconGradient/assets-distribution.svg"
                 width={50}
                 height={41}
+                alt="Pie chart"
               />
             </S.IconWrapper>
             <S.CommunityTenetText>

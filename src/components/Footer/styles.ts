@@ -1,194 +1,92 @@
-import styled from 'styled-components'
-import theme from '../../styles/theme'
+import styled, { css } from 'styled-components'
 
-interface IFooterProps {
-  variant?: 'default' | 'blog-post'
-}
+export const Footer = styled.div`
+  ${() => css`
+    max-width: 124rem;
+    margin: 0 auto;
 
-export const Footer = styled.footer<IFooterProps>`
-  max-width: 118.8rem;
-  margin: 0 auto;
-  padding: 4rem 2.4rem;
-  position: relative;
-  z-index: 10000;
+    @media (max-width: 1200px) {
+      padding: 0 3rem;
+    }
 
-  color: ${theme.colors.snow};
-
-  @media (max-width: 770px) {
-    margin-bottom: 4rem;
-  }
-
-  @media (max-width: 400px) {
-    margin-bottom: 6rem;
-  }
+    @media (max-width: 960px) {
+      padding: 0 1.6rem;
+      margin-bottom: 6.34rem;
+    }
+  `}
 `
-export const Container = styled.div``
 
-export const UpperContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 1.6rem;
-
-  padding: 8rem 0;
-  max-width: 69rem;
-
-  @media (max-width: 740px) {
+export const Wrapper = styled.div`
+  ${() => css`
+    display: grid;
+    grid-template-columns: 40rem 1fr;
+    align-items: start;
     width: 100%;
-    padding: 4rem 5rem;
-  }
+    gap: 8rem;
 
-  @media (max-width: 400px) {
-    width: 100%;
-    padding: 0;
-  }
-
-  li {
-    @media (max-width: 740px) {
-      text-align: top;
+    @media (max-width: 991.98px) {
+      grid-template-columns: 1fr;
+      gap: 1.6rem;
     }
-    margin: 1.5rem 0;
-  }
-  h4 {
-    margin-bottom: 0.8rem;
 
-    font-size: 2rem;
-    font-weight: 500;
-    @media (max-width: 740px) {
-      font-size: ${theme.font.sizes.font16};
+    @media (max-width: 575.98px) {
+      gap: 8rem;
     }
-  }
-  a {
-    color: ${theme.colors.snow};
-    font-size: ${theme.font.sizes.font14};
-    font-weight: ${theme.font.weight.light};
-    text-decoration: none;
-
-    @media (max-width: 710px) {
-      font-size: ${theme.font.sizes.font12};
-    }
-  }
+  `}
 `
-export const LowerContainerMobile = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  align-items: center;
 
-  width: 100%;
-  margin-top: 3rem;
-  padding: 3.5rem 5rem;
-
-  text-align: center;
-
-  @media (min-width: 740px) {
-    display: none;
-  }
-
-  @media (max-width: 400px) {
-    padding: 0;
-  }
-
-  ul {
+export const FooterLeft = styled.div`
+  ${() => css`
     display: flex;
-    justify-content: center;
-    margin-bottom: 1.6rem;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2.8rem;
+    height: 100%;
 
-    @media (max-width: 400px) {
-      padding: 1rem;
-      margin: auto;
+    @media (max-width: 991.98px) {
+      order: 1;
     }
-  }
+  `}
 `
-export const LowerContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 7rem 0;
 
-  @media (max-width: 740px) {
-    display: none;
-  }
-
-  ul {
+export const LogoContainer = styled.div`
+  ${() => css`
     display: flex;
-    justify-content: flex-end;
-  }
-`
-export const Certified = styled.div`
-  max-width: 100%;
-  margin: 1.6rem auto 0;
-
-  a {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-
-    color: ${theme.colors.snow};
-    text-decoration: none;
-  }
-
-  span {
-    margin-right: 0.6rem;
-
-    font-size: ${theme.font.sizes.font14};
-    font-weight: ${theme.font.weight.bold};
-    letter-spacing: 0.07rem;
-  }
-
-  img {
-    margin-right: 1.6rem;
-  }
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2.4rem;
+  `}
 `
 
-export const LowerLeft = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  img {
-    width: 100%;
-    margin-bottom: 2.8rem;
-  }
-
-  span {
-    font-size: 1.6rem;
+export const Info = styled.span`
+  ${() => css`
+    color: var(--snow, #fcfcfc);
+    font-size: 1.6909rem;
+    font-style: normal;
     font-weight: 300;
-  }
+    line-height: 1.9023rem; /* 112.5% */
+  `}
 `
 
-export const LowerRight = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  ul {
-    display: flex;
-    gap: 1.6rem;
-  }
+export const CertikLink = styled.a`
+  ${() =>
+    css`
+      display: flex;
+      align-items: center;
+      gap: 0.8571rem;
+      text-decoration: none;
+    `}
 `
 
-export const SocialIcon = styled.a`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 3.2rem;
-  width: 3.2rem;
-
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0);
-
-  transition: border ${theme.transition.default};
-
-  /* img {
-    padding: 0.5rem;
-  } */
-
-  &:hover {
-    border: 1px solid rgba(255, 255, 255, 0.3);
-  }
-`
-
-export const Divider = styled.div`
-  background-color: transparent;
-  /* border-top: 1px solid rgba(255, 255, 255, 0.14); */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+export const Certik = styled.span`
+  ${() => css`
+    color: var(--snow, #fcfcfc);
+    text-align: center;
+    font-family: Rubik;
+    font-size: 1.7143rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%; /* 2.0571rem */
+    letter-spacing: 0.0857rem;
+  `}
 `

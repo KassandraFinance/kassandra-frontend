@@ -26,7 +26,7 @@ const Contribute = ({ title, text }: IContributeProps) => {
       <FadeInHorizontal threshold={0.5}>
         <S.Wrapper>
           <S.TextWrapper>
-            <Subtitle text={title} as="h5" />
+            <Subtitle text={title} as="h2" />
             <Paragraph text={text} />
 
             <S.ButtonContainer>
@@ -47,6 +47,7 @@ const Contribute = ({ title, text }: IContributeProps) => {
                   src="/assets/icons/telegram.svg"
                   width={18}
                   height={13}
+                  alt="Telegram"
                 />
                 <span>Join Our Telegram</span>
               </S.Button>
@@ -64,13 +65,18 @@ const Contribute = ({ title, text }: IContributeProps) => {
                   })
                 }
               >
-                <Image src="/assets/icons/discord.svg" width={18} height={13} />
+                <Image
+                  src="/assets/icons/discord.svg"
+                  width={18}
+                  height={13}
+                  alt="Discord"
+                />
                 <span>Join Our Discord</span>
               </S.Button>
             </S.ButtonContainer>
           </S.TextWrapper>
 
-          <Image src={logoSkew} />
+          <Image src={logoSkew} alt="Kacy logo skewed with light" />
         </S.Wrapper>
       </FadeInHorizontal>
     </S.ContributeContainer>

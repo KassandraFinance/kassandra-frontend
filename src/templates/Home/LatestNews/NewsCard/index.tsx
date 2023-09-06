@@ -32,7 +32,7 @@ const NewsCard = ({
   return (
     <S.NewsCard>
       <S.NewsCardHeader>
-        <img src={thumbnail} />
+        <img src={thumbnail} alt="News cover" />
       </S.NewsCardHeader>
 
       <S.NewsCardBody>

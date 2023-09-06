@@ -54,6 +54,7 @@ const FlowingRevenue = () => {
             <Image
               src="/assets/images/background-flowing-revenue-mobile.svg"
               layout="fill"
+              alt="Flowing revenue"
             />
           </S.ImageWrapper>
           <S.Card>
@@ -61,6 +62,7 @@ const FlowingRevenue = () => {
               src="/assets/iconGradient/lamp.svg"
               width={33.47}
               height={28.97}
+              alt="Lamp"
             />
             <S.CardText>
               <h5>{"DAO's"}</h5>

@@ -17,38 +17,45 @@ type LinkType = {
   name: string
   link: string
   icon: string
+  alt: string
 }
 
 const links: LinkType[] = [
   {
     name: 'Discord',
     link: 'https://discord.gg/fAqpbP6tFw',
-    icon: discordIcon
+    icon: discordIcon,
+    alt: 'Discord logo'
   },
   {
     name: 'Telegram',
     link: 'https://t.me/KassandraDAO',
-    icon: telegramIcon
+    icon: telegramIcon,
+    alt: 'Telegram logo'
   },
   {
     name: 'GitHub',
     link: 'https://github.com/KassandraFinance',
-    icon: githubIcon
+    icon: githubIcon,
+    alt: 'GitHub logo'
   },
   {
     name: 'Medium',
     link: 'https://kassandrafoundation.medium.com/',
-    icon: mediumIcon
+    icon: mediumIcon,
+    alt: 'Medium logo'
   },
   {
     name: 'Twitter',
     link: 'https://twitter.com/dao_kassandra',
-    icon: twitterIcon
+    icon: twitterIcon,
+    alt: 'Twitter logo'
   },
   {
     name: 'Discourse',
     link: 'http://gov.kassandra.finance/',
-    icon: discourseIcon
+    icon: discourseIcon,
+    alt: 'Discourse logo'
   }
 ]
 
@@ -71,7 +78,7 @@ const Social = () => {
             }
           >
             <S.Link href={link.link} target="_blank" rel="noopener noreferrer">
-              <Image src={link.icon} />
+              <Image src={link.icon} alt={link.alt} />
             </S.Link>
           </S.Li>
         )

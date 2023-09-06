@@ -84,7 +84,11 @@ const LockPoolCard = ({ pid, kacyData }: ILockPoolCardProps) => {
     <>
       <S.LockPool>
         <div className="logo">
-          <Image src="/assets/logos/kacy-logo-rounded.svg" layout="fill" />
+          <Image
+            src="/assets/logos/kacy-logo-rounded.svg"
+            alt="Kacy logo rounded"
+            layout="fill"
+          />
         </div>
         <S.LockPoolInfo>
           <S.LockPoolTop>

@@ -65,6 +65,7 @@ const theme = {
     red: '#EA3224',
     green: '#5EE56B',
     white: '#FFF',
+    darkText: '#8c8c8c',
     // Blog Colors
     primary10: '#001833',
     primary20: '#003066',
