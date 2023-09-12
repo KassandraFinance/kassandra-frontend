@@ -6,6 +6,18 @@ export const HomeBackgroundContainer = styled.div`
   @media (min-width: 991px) {
     background-image: url('./assets/images/backgroundHome/background-home-hero.png'),
       url('./assets/images/backgroundHome/background-home-body.png');
+    background-image: image-set(
+        url('./assets/images/backgroundHome/background-home-hero.webp')
+          type('image/webp'),
+        url('./assets/images/backgroundHome/background-home-hero.png')
+          type('image/png')
+      ),
+      image-set(
+        url('./assets/images/backgroundHome/background-home-body.webp')
+          type('image/webp'),
+        url('./assets/images/backgroundHome/background-home-body.png')
+          type('image/png')
+      );
     background-repeat: no-repeat;
     background-position: top center;
   }
