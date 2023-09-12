@@ -52,7 +52,6 @@ const LatestNews = () => {
   return (
     <InView>
       {({ inView, ref }) => {
-        console.log(inView)
         return (
           <S.LatestNewsContainer ref={ref}>
             <S.ImgTabletWrapper>
