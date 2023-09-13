@@ -59,7 +59,6 @@ interface INumberButtonProps {
   isActiveImage?: boolean
 }
 
-// prettier-ignore
 export const DescriptionContainer = styled.div<INumberButtonProps>`
   width: 42rem;
 
@@ -101,8 +100,8 @@ export const DescriptionContainer = styled.div<INumberButtonProps>`
 
     animation: ${props =>
       props.isActiveButton
-      ? `assetAnim ease 1s both;`
-      : `assetAnimm ease 0.4s both;
+        ? `assetAnim ease 1s both;`
+        : `assetAnimm ease 0.4s both;
       `};
 
     @media (max-width: 1050px) {
@@ -185,7 +184,6 @@ interface INumberButtonProps {
   isActiveButton?: boolean
 }
 
-// prettier-ignore
 export const NumberButton = styled.button<INumberButtonProps>`
   display: flex;
   align-items: center;
@@ -197,7 +195,7 @@ export const NumberButton = styled.button<INumberButtonProps>`
 
   color: ${props => (props.isActiveButton ? `#FFFFFF` : `#8F8F8F`)};
   font-size: ${theme.font.sizes.font20};
-  font-weight:${props =>
+  font-weight: ${props =>
     props.isActiveButton ? theme.font.weight.medium : theme.font.weight.light};
 
   background-color: rgba(255, 255, 255, 0.05);
@@ -269,14 +267,12 @@ interface IisActiveImageProps {
   isActiveImage: boolean
 }
 
-// prettier-ignore
 export const CreateFundsImageContainer = styled.div<IisActiveImageProps>`
   position: relative;
 
   display: flex;
   height: 52rem;
   width: 52rem;
-
 
   @media (max-width: 600px) {
     width: 100%;
@@ -312,82 +308,4 @@ export const CreateFundsImageContainer = styled.div<IisActiveImageProps>`
     position: absolute;
     top: 0;
   }
-/*
-  #asdasd {
-    ${props =>
-      props.isActiveImage
-        ? `
-        animation: assetAnim ease 3s both;
-        -webkit-animation: assetAnim ease 3s both;
-        // animation-timing-function: cubic-bezier(0.03, 0.7, 0.43, 1.3);
-
-        @keyframes assetAnim {
-          0% {
-            opacity: 0;
-          }
-          100% {
-            opacity: 1;
-          }
-        }
-    `
-        : `
-        animation: assetAnimm ease 0.4s both;
-        -webkit-animation: assetAnimm ease 0.4s both;
-        // animation-timing-function: cubic-bezier(0.03, 0.7, 0.43, 1.3);
-        @keyframes assetAnimm {
-          0% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0.5;
-          }
-          100% {
-            opacity: 0;
-          }
-        }
-    `}
-  } */
 `
-// interface IisActiveImageProps {
-//   isActiveImage: boolean;
-// }
-// // eslint-disable-next-line prettier/prettier
-// export const ImageTest = styled.span<IisActiveImageProps>`
-//   /* img {} */
-
-// `
-
-// interface ICreateFundsImageProps {
-//   isActiveImage: boolean;
-// }
-
-// // eslint-disable-next-line prettier/prettier
-// export const CreateFundsImageContent = styled.div`
-//   /* display: ${props => (props.isActiveImage ? `flex` : `hidden`)}; */
-
-//   img {
-//     /* opacity: ${props => (props.isActiveImage ? `1` : `0`)}; */
-
-//     animation: assetAnim ease 4s both;
-//     -webkit-animation: assetAnim ease 4s both;
-//     /* animation-timing-function: cubic-bezier(0.03, 0.7, 0.43, 1.3); */
-//     /* animation-duration: 4s; */
-
-//     @keyframes assetAnim {
-//       0% {
-//         opacity: 0;
-//       }
-//       100% {
-//         opacity: 1;
-//       }
-//     }
-//   }
-// `
-
-// export const test = styled.div``
-// export const test = styled.div``
-// export const test = styled.div``
-// export const test = styled.div``
-// export const test = styled.div``
-// export const test = styled.div``
-// export const test = styled.div``

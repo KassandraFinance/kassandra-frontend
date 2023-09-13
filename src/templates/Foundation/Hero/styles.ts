@@ -36,15 +36,31 @@ export const HeroBackground = styled.div`
   height: 100vh;
 
   background-image: url('./assets/images/background-foundation-mobile-hero.png');
+  background-image: image-set(
+    url('./assets/images/background-foundation-mobile-hero.webp')
+      type('image/webp'),
+    url('./assets/images/background-foundation-mobile-hero.png')
+      type('image/png')
+  );
   background-repeat: no-repeat;
   background-position: center bottom;
 
   @media (min-width: 576px) {
     background-image: url('./assets/images/background-foundation-tablet-hero.png');
+    background-image: image-set(
+      url('./assets/images/background-foundation-tablet-hero.webp')
+        type('image/webp'),
+      url('./assets/images/background-foundation-tablet-hero.png')
+        type('image/png')
+    );
   }
 
   @media (min-width: 992px) {
     background-image: url('./assets/images/background-foundation-hero.png');
+    background-image: image-set(
+      url('./assets/images/background-foundation-hero.webp') type('image/webp'),
+      url('./assets/images/background-foundation-hero.png') type('image/png')
+    );
     background-position: center top;
   }
 

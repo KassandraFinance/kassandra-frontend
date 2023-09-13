@@ -5,7 +5,6 @@ interface CardProps {
   isLastCard: boolean
 }
 
-// eslint-disable-next-line prettier/prettier
 export const TeamCardContainer = styled.div<CardProps>`
   display: flex;
   flex-direction: column;
