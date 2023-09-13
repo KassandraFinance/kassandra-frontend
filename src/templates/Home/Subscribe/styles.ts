@@ -15,6 +15,12 @@ export const SubscribeBacground = styled.div`
   height: 149rem;
 
   background-image: url('./assets/images/backgroundHome/background-quase-footer.png');
+  background-image: image-set(
+    url('./assets/images/backgroundHome/background-quase-footer.webp')
+      type('image/webp'),
+    url('./assets/images/backgroundHome/background-quase-footer.png')
+      type('image/png')
+  );
   background-repeat: no-repeat;
   background-size: auto;
   background-position: center center;
@@ -27,6 +33,12 @@ export const SubscribeBacground = styled.div`
     height: 203.6rem;
 
     background-image: url('./assets/images/backgroundHome/background-quase-footer-90deg.png');
+    background-image: image-set(
+      url('./assets/images/backgroundHome/background-quase-footer-90deg.png')
+        type('image/webp'),
+      url('./assets/images/backgroundHome/background-quase-footer-90deg.png')
+        type('image/png')
+    );
   }
 `
 

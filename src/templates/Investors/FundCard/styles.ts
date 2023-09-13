@@ -13,7 +13,7 @@ export const Card = styled.div`
 interface CardHeaderProps {
   isTricrypto?: boolean
 }
-// prettier-ignore
+
 export const CardHeader = styled.div<CardHeaderProps>`
   max-width: 100%;
   height: 10rem;
@@ -22,8 +22,8 @@ export const CardHeader = styled.div<CardHeaderProps>`
 
   background-image: ${({ isTricrypto }) =>
     isTricrypto
-    ? css`url('assets/images/background-k3c.png')`
-    : css`url('assets/images/background-ahype.png')`};
+      ? css`url('assets/images/background-k3c.png')`
+      : css`url('assets/images/background-ahype.png')`};
   background-color: #190e1d;
   background-repeat: no-repeat;
   background-position: right 20% bottom;
@@ -47,7 +47,6 @@ interface INameAndSymbolProps {
   isTricrypto: boolean
 }
 
-// eslint-disable-next-line prettier/prettier
 export const NameAndSymbol = styled.div<INameAndSymbolProps>`
   max-width: 22rem;
   margin-left: 3.2rem;
@@ -86,7 +85,6 @@ export interface IPriceProps {
   change: number
 }
 
-// prettier-ignore
 export const Price = styled.div<IPriceProps>`
   display: flex;
   max-width: 25.4rem;

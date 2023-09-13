@@ -9,8 +9,8 @@ export const Investors = styled.main`
 
   background-image: url('/assets/images/bg-investors-1920.png');
   background-image: image-set(
-    url('/assets/images/bg-investors-1920.webp') 1x,
-    url('/assets/images/bg-investors-1920.png') 1x
+    url('/assets/images/bg-investors-1920.webp') type('image/webp'),
+    url('/assets/images/bg-investors-1920.png') type('image/png')
   );
   background-repeat: no-repeat;
   background-size: auto;
@@ -19,16 +19,16 @@ export const Investors = styled.main`
   @media (max-width: 768px) {
     background-image: url('/assets/images/bg-investors-768.png');
     background-image: image-set(
-      url('/assets/images/bg-investors-768.webp') 1x,
-      url('/assets/images/bg-investors-768.png') 1x
+      url('/assets/images/bg-investors-768.webp') type('image/webp'),
+      url('/assets/images/bg-investors-768.png') type('image/png')
     );
   }
 
   @media (max-width: 360px) {
     background-image: url('/assets/images/bg-investors-360.png');
     background-image: image-set(
-      url('/assets/images/bg-investors-360.webp') 1x,
-      url('/assets/images/bg-investors-360.png') 1x
+      url('/assets/images/bg-investors-360.webp') type('image/webp'),
+      url('/assets/images/bg-investors-360.png') type('image/png')
     );
   }
 

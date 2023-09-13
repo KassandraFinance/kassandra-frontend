@@ -4,6 +4,7 @@ export const Footer = styled.div`
   ${() => css`
     max-width: 124rem;
     margin: 0 auto;
+    margin-bottom: 5rem;
 
     @media (max-width: 1200px) {
       padding: 0 3rem;

@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import AliceCarousel from 'react-alice-carousel'
 import 'react-alice-carousel/lib/alice-carousel.css'
+import { InView } from 'react-intersection-observer'
 
 import { useMedium } from '@/hooks/query/useMedium'
 
@@ -49,29 +50,39 @@ const LatestNews = () => {
   })
 
   return (
-    <S.LatestNewsContainer>
-      <S.ImgTabletWrapper>
-        <Image src={lightTable10} alt="Ball of light" />
-      </S.ImgTabletWrapper>
+    <InView>
+      {({ inView, ref }) => {
+        return (
+          <S.LatestNewsContainer ref={ref}>
+            <S.ImgTabletWrapper>
+              <Image src={lightTable10} alt="Ball of light" />
+            </S.ImgTabletWrapper>
 
-      <FadeIn threshold={0.5}>
-        <LatestNewsHeader />
-      </FadeIn>
+            <FadeIn threshold={0.5}>
+              <LatestNewsHeader />
+            </FadeIn>
 
-      <FadeIn threshold={0.5}>
-        <S.NewsCardContainer>
-          {mediumData && (
-            <AliceCarousel
-              mouseTracking
-              infinite
-              disableButtonsControls
-              items={cards}
-              responsive={responsive}
-            />
-          )}
-        </S.NewsCardContainer>
-      </FadeIn>
-    </S.LatestNewsContainer>
+            {inView ? (
+              <FadeIn threshold={0.5}>
+                <S.NewsCardContainer>
+                  {mediumData && (
+                    <AliceCarousel
+                      mouseTracking
+                      infinite
+                      disableButtonsControls
+                      items={cards}
+                      responsive={responsive}
+                    />
+                  )}
+                </S.NewsCardContainer>
+              </FadeIn>
+            ) : (
+              <div style={{ height: '514px' }}></div>
+            )}
+          </S.LatestNewsContainer>
+        )
+      }}
+    </InView>
   )
 }
 
