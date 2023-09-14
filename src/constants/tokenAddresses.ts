@@ -253,7 +253,7 @@ export const FeaturedProductDetails = [
       'Surf the sturdiest tides on arbitrum',
       'protocols of High resilience'
     ],
-    foundedBy: 'on POLYGON network',
+    foundedBy: 'on ARBITRUM network',
     externalLink:
       'https://medium.com/@kassandrafoundation/kassandra-new-featured-pools-89634fedbbe3'
   },
@@ -267,7 +267,7 @@ export const FeaturedProductDetails = [
       'Hedge your exposure',
       'Improve your hodl'
     ],
-    foundedBy: 'on ARBITRUM network',
+    foundedBy: 'on POLYGON network',
     externalLink:
       'https://medium.com/@kassandrafoundation/kassandra-new-featured-pools-89634fedbbe3'
   }
