@@ -6,6 +6,8 @@ query PoolInfo($id: ID!, $day: Int!) {
     decimals
     symbol
     price_usd
+    logo
+    founded_by
     # pool token information
     underlying_assets(orderBy: weight_normalized, orderDirection: desc) {
       balance # token balance in pool
@@ -18,7 +20,6 @@ query PoolInfo($id: ID!, $day: Int!) {
         name
         decimals
         symbol
-        price_usd
         wraps {
           logo
         }
@@ -40,6 +41,18 @@ query PoolInfo($id: ID!, $day: Int!) {
     ) {
       timestamp
       close
+    }
+    weight_goals(orderBy: end_timestamp, orderDirection: desc, first: 2) {
+      start_timestamp
+      end_timestamp
+      weights(orderBy: weight_normalized, orderDirection: desc) {
+        asset {
+          token {
+            id
+          }
+        }
+        weight_normalized
+      }
     }
   }
 }
