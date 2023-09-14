@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { products } from '../../../constants/tokenAddresses'
+import { FeaturedProductDetails } from '../../../constants/tokenAddresses'
 
 import FundCard from '../FundCard'
 import ExternalLink from '../../../components/ExternalLink'
@@ -27,9 +27,9 @@ const Products = () => {
       </FadeInVertical>
 
       <S.FundsCards>
-        {products.map(product => (
-          <FadeInVertical key={product.symbol} threshold={0.5}>
-            <FundCard fund={product} />
+        {FeaturedProductDetails.map(product => (
+          <FadeInVertical key={product.id} threshold={0.5}>
+            <FundCard product={product} />
           </FadeInVertical>
         ))}
       </S.FundsCards>

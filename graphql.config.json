@@ -1,4 +1,4 @@
 {
-    "schema": ["https://backend.kassandra.finance/", "https://strapi-kassandra-production.up.railway.app/graphql"],
+    "schema": ["https://graph.kassandra.finance/subgraphs/name/Kassandra", "https://strapi-kassandra-production.up.railway.app/graphql"],
     "documents": "src/**/*.{graphql,js,ts,jsx,tsx}"
 }

@@ -5,7 +5,7 @@ const config: CodegenConfig = {
   // hooks: { afterAllFileWrite: ['eslint --fix'] },
   generates: {
     './src/gql/generated/kassandraApi.ts': {
-      schema: 'https://backend.kassandra.finance',
+      schema: 'https://graph.kassandra.finance/subgraphs/name/Kassandra',
       documents: ['./src/gql/queries/kassandra/**/*-kassandra.gql'],
       plugins: [
         'typescript',
@@ -13,7 +13,12 @@ const config: CodegenConfig = {
         'typescript-graphql-request'
       ],
       config: {
-        enumsAsTypes: true
+        enumsAsTypes: true,
+        scalars: {
+          BigDecimal: 'string',
+          BigInt: 'string',
+          Bytes: 'string'
+        }
       }
     },
     // './src/gql/generated/githubApi.ts': {
