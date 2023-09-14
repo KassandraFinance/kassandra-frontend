@@ -34,8 +34,8 @@ export const TextWrapper = styled.div`
 `
 
 export const NameAndSymbol = styled.div`
-  max-width: 22rem;
   margin-left: 3.2rem;
+  width: 100%;
 
   h1 {
     font-size: 2.5rem;
@@ -51,6 +51,7 @@ export const NameAndSymbol = styled.div`
     line-height: 1.46rem;
     font-weight: 400;
     color: #c4c4c4;
+    width: 100%;
 
     span {
       color: #ffffff;
