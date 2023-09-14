@@ -155,7 +155,6 @@ interface Caption {
   color?: 'amber' | 'cyan' | 'magenta'
 }
 
-// eslint-disable-next-line prettier/prettier
 export const Caption = styled.span<Caption>`
   ${({ theme, color }) => css`
     color: ${!!color && theme.colors[color]}};

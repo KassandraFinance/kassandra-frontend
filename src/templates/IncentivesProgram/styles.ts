@@ -31,6 +31,7 @@ interface IBackgroundBallProps {
   right?: number
   deg?: number
 }
+
 export const BackgroundBall = styled.div<IBackgroundBallProps>`
   ${({ deg = 93.84 }) => css`
     position: absolute;

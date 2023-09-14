@@ -37,9 +37,6 @@ export const Schema = styled.div`
 
   margin-top: 4.8rem;
 
-  /* margin-left: auto;
-  margin-right: auto; */
-
   padding: 0 2.4rem;
 
   img {
@@ -188,16 +185,10 @@ export const DescriptionSafetyContent = styled.div`
 `
 
 export const ImageFundSafety = styled.div`
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
-
   width: 64.5rem;
   height: 75.6rem;
 
   @media (max-width: 992px) {
-    /* max-width: 64.5rem;
-    max-height: 75.6rem; */
     width: 100%;
     height: auto;
 
@@ -397,13 +388,7 @@ export const ImageRebalance = styled.div`
   width: 48.5rem;
   height: 55.3rem;
 
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
-
   @media (max-width: 992px) {
-    /* max-width: 48.5rem;
-    max-height: 55.3rem; */
     width: 100%;
     height: auto;
 
@@ -544,13 +529,7 @@ export const ImageFundAutonomy = styled.div`
   max-width: 67.8rem;
   max-height: 51.6rem;
 
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
-
   @media (max-width: 992px) {
-    /* max-width: 64.5rem;
-    max-height: 75.6rem; */
     width: 100%;
     height: auto;
 

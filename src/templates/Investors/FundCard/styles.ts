@@ -73,7 +73,6 @@ export interface IPriceProps {
   change: number
 }
 
-// prettier-ignore
 export const Price = styled.div<IPriceProps>`
   display: flex;
   max-width: 25.4rem;

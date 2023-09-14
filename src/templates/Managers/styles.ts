@@ -3,8 +3,8 @@ import styled from 'styled-components'
 export const ManagerMainContainer = styled.section`
   background-image: url('/assets/images/Manager-bg-desktop.png');
   background-image: image-set(
-    url('/assets/images/Manager-bg-desktop.webp') 1x,
-    url('/assets/images/Manager-bg-desktop.png') 1x
+    url('/assets/images/Manager-bg-desktop.webp') type('image/webp'),
+    url('/assets/images/Manager-bg-desktop.png') type('image/png')
   );
   background-repeat: no-repeat;
   background-size: fixed;
@@ -13,16 +13,16 @@ export const ManagerMainContainer = styled.section`
   @media (max-width: 768px) {
     background-image: url('/assets/images/Manager-bg-tablet.png');
     background-image: image-set(
-      url('/assets/images/Manager-bg-tablet.webp') 1x,
-      url('/assets/images/Manager-bg-tablet.png') 1x
+      url('/assets/images/Manager-bg-tablet.webp') type('image/webp'),
+      url('/assets/images/Manager-bg-tablet.png') type('image/png')
     );
   }
 
   @media (max-width: 360px) {
     background-image: url('/assets/images/Manager-bg-mobile.png');
     background-image: image-set(
-      url('/assets/images/Manager-bg-mobile.webp') 1x,
-      url('/assets/images/Manager-bg-mobile.png') 1x
+      url('/assets/images/Manager-bg-mobile.webp') type('image/webp'),
+      url('/assets/images/Manager-bg-mobile.png') type('image/png')
     );
   }
 `

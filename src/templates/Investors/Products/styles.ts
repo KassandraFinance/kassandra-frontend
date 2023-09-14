@@ -154,9 +154,6 @@ export const Detail = styled.div`
   border-radius: 1.7rem;
 
   @media (max-width: 680px) {
-    /* width: 33.1rem;
-    height: 15.6rem; */
-
     align-items: flex-start;
     padding-top: 2rem;
     padding-left: 2rem;

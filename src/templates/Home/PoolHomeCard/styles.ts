@@ -43,7 +43,7 @@ export const Card = styled.div`
 interface CardHeaderProps {
   isTricrypto?: boolean
 }
-// prettier-ignore
+
 export const CardHeader = styled.div<CardHeaderProps>`
   max-width: 100%;
   height: 10rem;
@@ -164,7 +164,6 @@ export interface IPriceProps {
   change: number
 }
 
-// prettier-ignore
 export const Price = styled.div<IPriceProps>`
   display: flex;
   align-items: center;
