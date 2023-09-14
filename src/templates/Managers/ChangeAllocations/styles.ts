@@ -126,7 +126,6 @@ interface IChangeButtonProps {
   isActiveHand: boolean
 }
 
-// prettier-ignore
 export const ChangeButtonContent = styled.div<IChangeButtonProps>`
   position: relative;
 
@@ -142,7 +141,7 @@ export const ChangeButtonContent = styled.div<IChangeButtonProps>`
     font-weight: ${theme.font.weight.light};
     font-size: ${theme.font.sizes.font20};
 
-    background-color:  transparent;
+    background-color: transparent;
     border: 0.1rem solid #ffffff;
     border-radius: 0.7rem;
 
@@ -167,7 +166,7 @@ export const ChangeButtonContent = styled.div<IChangeButtonProps>`
       }
       50% {
         color: #000;
-        background-color:  #fcfcfc;
+        background-color: #fcfcfc;
         transform: scale(0.9);
       }
       100% {
@@ -207,7 +206,7 @@ export const ChangeButtonContent = styled.div<IChangeButtonProps>`
     padding-top: 2rem;
     margin-right: 2rem;
 
-    color: #2CE878;
+    color: #2ce878;
     font-weight: ${theme.font.weight.medium};
     font-size: ${theme.font.sizes.font24};
     text-align: center;
@@ -227,7 +226,7 @@ export const ChangeButtonContent = styled.div<IChangeButtonProps>`
     @keyframes numberTranslate {
       0% {
         transform: translateX(0);
-        opacity: 1
+        opacity: 1;
       }
       70% {
         opacity: 0;
@@ -249,7 +248,6 @@ interface ITokenProps {
   TokenColor?: string
 }
 
-// prettier-ignore
 export const BarContainer = styled.div<ITokenProps>`
   display: flex;
   align-items: center;
@@ -312,10 +310,9 @@ export const BarContainer = styled.div<ITokenProps>`
   }
 `
 
-// prettier-ignore
 export const TokenBar = styled.div<ITokenProps>`
   height: 2rem;
-  width: calc(${props => props.TokenValue}rem/2);
+  width: calc(${props => props.TokenValue}rem / 2);
 
   background-color: ${props => props.TokenColor};
   border-radius: 0.3rem;
@@ -326,11 +323,11 @@ export const TokenBar = styled.div<ITokenProps>`
   -moz-animation: show-bar-one 1.2s 0.1s;
 
   @media (max-width: 500px) {
-    width: calc(${props => props.TokenValue}rem/2.5);
+    width: calc(${props => props.TokenValue}rem / 2.5);
     height: 1.6rem;
   }
   @media (max-width: 400px) {
-    width: calc(${props => props.TokenValue}rem/3.5);
+    width: calc(${props => props.TokenValue}rem / 3.5);
   }
   @media (max-width: 350px) {
     width: ${props => props.TokenValue};

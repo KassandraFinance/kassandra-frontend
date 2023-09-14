@@ -6,8 +6,6 @@ import { useRouter } from 'next/router'
 import useMatomo from '@/hooks/useMatomo'
 import { usePoolInfo } from '@/hooks/query/usePoolInfo'
 
-import { ProductDetails } from '../../../constants/tokenAddresses'
-
 import Button from '../../../components/Button'
 import { BarChart, XAxis, YAxis, Bar } from 'recharts'
 import ExternalLink from '../../../components/ExternalLink'
@@ -20,8 +18,9 @@ import arrowAscend from '../../../../public/assets/notificationStatus/arrow-asce
 import arrowDescend from '../../../../public/assets/notificationStatus/arrow-descend.svg'
 
 import * as S from './styles'
+import { IFeaturedProductDetailsProps } from '@/constants/tokenAddresses'
 
-const dictionary: { [key: string]: string } = {
+const dictionary: Record<string, string> = {
   0: '#E8983D',
   1: '#63698C',
   2: '#B7372D',
@@ -45,103 +44,121 @@ const dictionary: { [key: string]: string } = {
   20: '#d4e442b0'
 }
 
-type IPoolProps = {
-  pool: ProductDetails
+interface IPoolHomeCardProps {
+  product: IFeaturedProductDetailsProps
 }
 
-const PoolHomeCard = ({ pool }: IPoolProps) => {
+interface IProductInfoProps {
+  logo?: string | null
+  symbol: string
+  name: string
+  founded_by?: string
+  price_usd: string
+  changeDay: string
+  underlying_assets: {
+    token: {
+      id: string
+    }
+  }[]
+  poolTokenList: Record<string, number>
+}
+
+const PoolHomeCard = ({ product }: IPoolHomeCardProps) => {
+  const [productInfo, setProductInfo] = React.useState<IProductInfoProps>({
+    symbol: '',
+    name: '',
+    founded_by: '',
+    price_usd: '',
+    changeDay: '',
+    underlying_assets: [],
+    poolTokenList: {}
+  })
+
+  const router = useRouter()
+  const { trackEvent } = useMatomo()
+
+  const day = Math.trunc(Date.now() / 1000 - 60 * 60 * 24)
+  const { data } = usePoolInfo({ id: product.id, day: day })
+
   function calcChange(newPrice: number, oldPrice: number) {
     const calc = ((newPrice - oldPrice) / oldPrice) * 100
     return calc ? calc.toFixed(2) : '0'
   }
-
-  const [change, setChange] = React.useState<string[]>([])
-  const [poolPrice, setPoolPrice] = React.useState<string>('')
-  const [poolObject, setPoolObject] = React.useState<{ [key: string]: number }>(
-    {}
-  )
-
-  const { trackEvent } = useMatomo()
-  const router = useRouter()
-
-  const day = Math.trunc(Date.now() / 1000 - 60 * 60 * 24)
-
-  const { data } = usePoolInfo({ id: pool.sipAddress, day: day })
-
-  React.useEffect(() => {
-    if (!data) {
-      return
-    }
-    setPoolPrice(Number(data.price_usd).toFixed(2))
-
-    const changeDay = calcChange(data.now[0]?.close, data.day[0]?.close)
-    const arrChangePrice = []
-    arrChangePrice[0] = changeDay
-
-    setChange(arrChangePrice)
-  }, [data])
-
-  const getPercentage = (weight: number) => {
+  function getPercentage(weight: number) {
     return Number((weight * 100).toFixed(2))
   }
 
   React.useEffect(() => {
-    if (!data) {
-      return
-    }
+    if (!data || data?.underlying_assets.length === 0) return
 
-    if (data?.underlying_assets.length > 0) {
-      const pool = data.underlying_assets.map(item => {
-        return {
-          [item.token.id]: getPercentage(Number(item.weight_normalized))
-        }
-      })
-      const poolData = Object.assign({}, ...pool)
-      setPoolObject(poolData)
-    }
+    const pool = data.underlying_assets.map(item => {
+      return {
+        [item.token.id]: getPercentage(Number(item.weight_normalized))
+      }
+    })
+    const poolTokenList = Object.assign({}, ...pool)
+
+    const changeDay = calcChange(
+      parseFloat(data.now[0]?.close),
+      parseFloat(data.day[0]?.close)
+    )
+
+    setProductInfo({
+      founded_by: data?.founded_by ?? '',
+      logo: data.logo,
+      name: data.name,
+      price_usd: parseFloat(data.price_usd).toFixed(2),
+      symbol: data.symbol,
+      underlying_assets: data.underlying_assets,
+      poolTokenList,
+      changeDay
+    })
   }, [data])
 
   return (
     <S.CardWrapper>
       <S.Card>
-        <S.CardHeader isTricrypto={pool.symbol === 'K3C'}>
+        <S.CardHeader>
           <S.ImageWrapper>
             <Image
-              src={pool.fundIcon}
-              alt={`${pool.symbol} token logo`}
+              src={productInfo?.logo ?? '/assets/icons/coming-soon.svg'}
+              alt={`${productInfo?.symbol} token logo`}
               width={96}
               height={96}
             />
           </S.ImageWrapper>
         </S.CardHeader>
         <S.TextWrapper>
-          <S.NameAndSymbol
-            isTricrypto={pool.name === 'Kassandra Tricrypto Index'}
-          >
-            <h1>{pool.name}</h1>
+          <S.NameAndSymbol>
+            <h1>{productInfo.name}</h1>
           </S.NameAndSymbol>
           <p>
-            by {pool.fundBy} <strong> on avalanche network </strong>{' '}
+            by {productInfo.founded_by} <span>{product?.foundedBy}</span>
           </p>
         </S.TextWrapper>
         <S.TokenInfo>
-          <S.Price change={Number(change)}>
-            <span>USD {poolPrice}</span>
+          <S.Price change={Number(productInfo?.changeDay ?? 0)}>
+            <span>USD {productInfo.price_usd}</span>
             <div>
               <Image
-                src={Number(change) >= 0 ? arrowAscend : arrowDescend}
+                src={
+                  Number(productInfo.changeDay) >= 0
+                    ? arrowAscend
+                    : arrowDescend
+                }
                 alt="token Price Arrow pool Tricryoto"
                 width={13}
                 height={13}
               />
-              <p>{change}%</p>
+              <p>{productInfo.changeDay}%</p>
             </div>
           </S.Price>
           <S.TokensSymbols>
-            <TokenIcons id={pool.sipAddress} day={day} />
-            {data && data?.underlying_assets.length > 5 && (
-              <span>+{data?.underlying_assets.length - 5} MORE</span>
-            )}
+            <TokenIcons id={product.id} day={day} />
+            {productInfo.underlying_assets &&
+              productInfo.underlying_assets.length > 5 && (
+                <span>+{productInfo.underlying_assets.length - 5} MORE</span>
+              )}
           </S.TokensSymbols>
         </S.TokenInfo>
         <S.BarChartWrapper>
@@ -155,7 +172,7 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
               maxWidth: '100%',
               borderRadius: '10px'
             }}
-            data={[{ name: 'pool', ...poolObject }]}
+            data={[{ name: 'pool', ...productInfo.poolTokenList }]}
             layout="vertical"
             margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
             width={400}
@@ -177,7 +194,7 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
           </BarChart>
         </S.BarChartWrapper>
         <S.CardFooter>
-          <Link href={`/pool/${pool.sipAddress}`}>
+          <Link href={`/pool/${product.id}`}>
             <Button
               onClick={() =>
                 trackEvent({
@@ -188,7 +205,7 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
               }
               backgroundPrimary
               size="huge"
-              text={`Buy $${pool.symbol}`}
+              text={`Buy $${productInfo.symbol}`}
             />
           </Link>
           <ExternalLink
@@ -196,63 +213,33 @@ const PoolHomeCard = ({ pool }: IPoolProps) => {
               trackEvent({
                 category: router.pathname,
                 action: `click-on-link | FEATURED PORTFOLIOS | ${router.pathname}`,
-                name: `Learn more - ${pool.symbol}`
+                name: `Learn more - ${productInfo.symbol}`
               })
             }
-            hrefLink={pool.fundLink}
+            hrefLink={product?.externalLink}
             text="Learn more"
           />
         </S.CardFooter>
       </S.Card>
       <S.Info>
-        <span>{pool.symbol !== 'aHYPE' ? 'New Product' : ''}</span>
-        <SectionSubtitle
-          text={
-            pool.symbol !== 'aHYPE'
-              ? 'The safest assets yield farming for you'
-              : 'Automagically invest in strong communities'
-          }
-          as="h2"
-        />
-        <Paragraph text={pool.fundSummary ? pool.fundSummary : ''} />
+        <SectionSubtitle text={product.title} as="h2" />
+        <Paragraph text={product.description} />
         <S.InfoList>
-          <li>
-            <div className="image">
-              <Image
-                src={arrowRight}
-                width={20}
-                height={20}
-                alt="Arrow right"
-              />
-            </div>
-            {pool.symbol !== 'aHYPE'
-              ? 'Have a consistent bluechip strategy'
-              : 'EASY EXPOSURE TO THE HOTTEST ASSETS'}
-          </li>
-          <li>
-            <div className="image">
-              <Image
-                src={arrowRight}
-                width={20}
-                height={20}
-                alt="Arrow right"
-              />
-            </div>
-            {pool.symbol !== 'aHYPE'
-              ? 'Hedge your exposure'
-              : 'SURFING THE TIDES OF HYPE ON AVALANCHE'}
-          </li>
-          <li>
-            <div className="image">
-              <Image
-                src={arrowRight}
-                width={20}
-                height={20}
-                alt="Arrow right"
-              />
-            </div>
-            {pool.symbol !== 'aHYPE' ? 'Improve your hodl' : 'HIGH VOLATILITY'}
-          </li>
+          {product.infoList.map(info => {
+            return (
+              <li key={info}>
+                <div className="image">
+                  <Image
+                    src={arrowRight}
+                    width={20}
+                    height={20}
+                    alt="Arrow right"
+                  />
+                </div>
+                {info}
+              </li>
+            )
+          })}
         </S.InfoList>
       </S.Info>
     </S.CardWrapper>

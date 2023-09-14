@@ -1,11 +1,11 @@
 import { GraphQLClient } from 'graphql-request'
-import { BACKEND_KASSANDRA } from './constants/tokenAddresses'
+import { SUBGRAPH_URL } from './constants/tokenAddresses'
 import { getSdk as getSdkKassandra } from './gql/generated/kassandraApi'
 import { getSdk as getSdkGithub } from './gql/generated/githubApi'
 import { getSdk as getSdkKassandraBlog } from './gql/generated/kassandraBlogApi'
 import { env } from '@/env.mjs'
 
-export const kassandraApi = new GraphQLClient(BACKEND_KASSANDRA)
+export const kassandraApi = new GraphQLClient(SUBGRAPH_URL)
 export const kassandraClient = getSdkKassandra(kassandraApi)
 
 const GIT_HUB_TOKEN = env.NEXT_PUBLIC_GIT_HUB_TOKEN

@@ -43,19 +43,13 @@ export const Card = styled.div`
 interface CardHeaderProps {
   isTricrypto?: boolean
 }
-// prettier-ignore
+
 export const CardHeader = styled.div<CardHeaderProps>`
   max-width: 100%;
   height: 10rem;
   z-index: -9;
 
-  background-image: ${({ isTricrypto }) =>
-    isTricrypto
-      ? css`url('assets/images/background-k3c.png')`
-      : css`url('assets/images/background-ahype.png')`};
   background-color: #190e1d;
-  background-repeat: no-repeat;
-  background-position: right 20% bottom;
 
   border-top-left-radius: 1.2rem;
   border-top-right-radius: 1.2rem;
@@ -126,19 +120,12 @@ export const TextWrapper = styled.div`
   }
 `
 
-interface INameAndSymbolProps {
-  isTricrypto: boolean
-}
-
-// prettier-ignore
-export const NameAndSymbol = styled.div<INameAndSymbolProps>`
+export const NameAndSymbol = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
 
   h1 {
-    ${({ isTricrypto }) => isTricrypto && `max-width: 32rem;`}
-
     margin: 0;
 
     font-size: ${theme.font.sizes.font32};
@@ -177,7 +164,6 @@ export interface IPriceProps {
   change: number
 }
 
-// prettier-ignore
 export const Price = styled.div<IPriceProps>`
   display: flex;
   align-items: center;
@@ -334,26 +320,6 @@ export const Info = styled.div`
     @media (max-width: 960px) {
       text-align: center;
     }
-    @media (max-width: 576px) {
-      text-align: left;
-    }
-  }
-
-  > span {
-    margin-bottom: 0.8rem;
-
-    color: #ffbf00;
-    font-weight: ${theme.font.weight.normal};
-    font-size: ${theme.font.sizes.font12};
-    line-height: ${theme.font.sizes.font12};
-    letter-spacing: 0.3em;
-    text-align: left;
-    text-transform: uppercase;
-
-    @media (max-width: 960px) {
-      text-align: center;
-    }
-
     @media (max-width: 576px) {
       text-align: left;
     }

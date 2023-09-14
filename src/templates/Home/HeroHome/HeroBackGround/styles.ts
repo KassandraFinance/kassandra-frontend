@@ -7,6 +7,10 @@ export const Grid = styled.div`
   height: 100vh;
 
   background-image: url('./assets/images/grid-desktop.png');
+  background-image: image-set(
+    url('./assets/images/grid-desktop.webp') type('image/webp'),
+    url('./assets/images/grid-desktop.png') type('image/png')
+  );
   background-repeat: no-repeat;
   background-position: top 6.7rem center;
 
@@ -42,6 +46,10 @@ export const Sun = styled.div`
   height: 100vh;
 
   background-image: url('./assets/images/sun.png');
+  background-image: image-set(
+    url('./assets/images/sun.webp') type('image/webp'),
+    url('./assets/images/sun.png') type('image/png')
+  );
   background-repeat: no-repeat;
   background-position: center top 6.2rem;
 
@@ -80,6 +88,11 @@ export const LightHero = styled.div`
     width: 100%;
 
     background-image: url('./assets/images/backgroundHome/light-tablet2.png');
+    background-image: image-set(
+      url('./assets/images/backgroundHome/light-tablet2.webp')
+        type('image/webp'),
+      url('./assets/images/backgroundHome/light-tablet2.png') type('image/png')
+    );
     background-repeat: no-repeat;
     background-position: top right;
   }

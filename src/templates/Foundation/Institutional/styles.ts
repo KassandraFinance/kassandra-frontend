@@ -57,7 +57,6 @@ export const ImageContent = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  //height: 17.3rem;
   padding: 2rem;
 
   img {
@@ -186,7 +185,7 @@ export const InstitutionalCard = styled.div`
 interface ICardTitleProps {
   color: string
 }
-// eslint-disable-next-line prettier/prettier
+
 export const CardTitle = styled.strong<ICardTitleProps>`
   margin-bottom: 1.6rem;
 

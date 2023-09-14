@@ -76,11 +76,8 @@ export interface ProductDetails {
 
 export type ProductSymbols = keyof typeof products
 
-export const SUBGRAPH_URL = `https://graph.kassandra.finance/subgraphs/name/${
-  env.NEXT_PUBLIC_MASTER === '1'
-    ? 'KassandraAvalanche'
-    : 'KassandraFuji'
-}`
+export const SUBGRAPH_URL =
+  'https://graph.kassandra.finance/subgraphs/name/Kassandra'
 
 export const MEDIUM_FEED_URL =
   'https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@kassandrafoundation'
@@ -234,6 +231,47 @@ const tricrypto: ProductDetails =
       }
 
 export const products = [ahype, tricrypto]
+
+export type IFeaturedProductDetailsProps = {
+  id: string
+  title: string
+  description: string
+  infoList: string[]
+  foundedBy?: string
+  externalLink?: string
+}
+
+export const FeaturedProductDetails = [
+  {
+    id: '421610xf69d5e7c0eb43127d5874121867fb763f2967dbb0001000000000000000004b0',
+    title:
+      'Stay ahead of the curve with Arbitrum’s all-star protocols ranked by TVL',
+    description:
+      '$aECO reflects the performance of a portfolio composed of the leading protocols on Arbitrum’s network, determined by their Total Value Locked (TVL).',
+    infoList: [
+      'Easy exposure to the strongest assets',
+      'Surf the sturdiest tides on arbitrum',
+      'protocols of High resilience'
+    ],
+    foundedBy: 'on POLYGON network',
+    externalLink:
+      'https://medium.com/@kassandrafoundation/kassandra-new-featured-pools-89634fedbbe3'
+  },
+  {
+    id: '1370x107cb7c6d67ad745c50d7d4627335c1c6a684003000100000000000000000c37',
+    title: 'Yield farming with the safest crypto assets for your investment',
+    description:
+      '$DEFI represents a yield-earning portfolio composed of UNI, LDO, MKR, AAVE, SNX, RPL, FXS, CRV, and COMP, offering exposure to the growth and development of the leading DeFi protocols based on Market Cap.',
+    infoList: [
+      'HAVE A CONSISTENT BLUECHIP STRATEGY',
+      'Hedge your exposure',
+      'Improve your hodl'
+    ],
+    foundedBy: 'on ARBITRUM network',
+    externalLink:
+      'https://medium.com/@kassandrafoundation/kassandra-new-featured-pools-89634fedbbe3'
+  }
+]
 
 type CurrencyDetails = {
   name: string

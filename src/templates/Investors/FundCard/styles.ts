@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
 export const Card = styled.div`
@@ -10,23 +10,13 @@ export const Card = styled.div`
   box-shadow: 0 0.4rem 6.9rem -1.7rem rgba(0, 0, 0, 0, 51);
 `
 
-interface CardHeaderProps {
-  isTricrypto?: boolean
-}
-// prettier-ignore
-export const CardHeader = styled.div<CardHeaderProps>`
+export const CardHeader = styled.div`
   max-width: 100%;
   height: 10rem;
 
   z-index: -9;
 
-  background-image: ${({ isTricrypto }) =>
-    isTricrypto
-    ? css`url('assets/images/background-k3c.png')`
-    : css`url('assets/images/background-ahype.png')`};
   background-color: #190e1d;
-  background-repeat: no-repeat;
-  background-position: right 20% bottom;
 
   border-top-left-radius: 1.2rem;
   border-top-right-radius: 1.2rem;
@@ -43,14 +33,10 @@ export const TextWrapper = styled.div`
   margin-top: 5.25rem;
 `
 
-interface INameAndSymbolProps {
-  isTricrypto: boolean
-}
-
-// eslint-disable-next-line prettier/prettier
-export const NameAndSymbol = styled.div<INameAndSymbolProps>`
-  max-width: 22rem;
+export const NameAndSymbol = styled.div`
   margin-left: 3.2rem;
+  width: 100%;
+
   h1 {
     font-size: 2.5rem;
     line-height: 2.5rem;
@@ -65,6 +51,7 @@ export const NameAndSymbol = styled.div<INameAndSymbolProps>`
     line-height: 1.46rem;
     font-weight: 400;
     color: #c4c4c4;
+    width: 100%;
 
     span {
       color: #ffffff;
@@ -86,7 +73,6 @@ export interface IPriceProps {
   change: number
 }
 
-// prettier-ignore
 export const Price = styled.div<IPriceProps>`
   display: flex;
   max-width: 25.4rem;

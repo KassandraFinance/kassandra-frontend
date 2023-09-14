@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-import { products } from '../../../constants/tokenAddresses'
+import { FeaturedProductDetails } from '../../../constants/tokenAddresses'
 
 import HomeHeading from '../HomeHeading'
 import SectionCard from '../SectionCard'
@@ -49,7 +49,7 @@ that fit you"
       </FadeIn>
 
       <S.PoolCardContainer>
-        {products.map((product, index) => {
+        {FeaturedProductDetails.map((product, index) => {
           let invert = false
           if (index % 2 === 0) {
             invert = false
@@ -58,12 +58,8 @@ that fit you"
           }
 
           return (
-            <FadeInHorizontal
-              key={product.symbol}
-              threshold={0.5}
-              invert={invert}
-            >
-              <PoolHomeCard pool={product} />
+            <FadeInHorizontal key={product.id} threshold={0.5} invert={invert}>
+              <PoolHomeCard product={product} />
             </FadeInHorizontal>
           )
         })}

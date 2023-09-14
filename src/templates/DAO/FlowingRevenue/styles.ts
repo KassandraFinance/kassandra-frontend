@@ -42,6 +42,10 @@ export const Hero = styled.div`
   position: relative;
   height: 60.5rem;
   background-image: url('/assets/images/background-flowing-revenue.png');
+  background-image: image-set(
+    url('/assets/images/background-flowing-revenue.webp') type('image/webp'),
+    url('/assets/images/background-flowing-revenue.png') type('image/png')
+  );
   background-position: center;
   background-size: contain;
   max-width: 114rem;
