@@ -25,7 +25,10 @@ export const ShareArticle = ({
   const customMessage = `Check out this article, ${postTitle}, made by @dao_kassandra:`
 
   const handleClick = () => {
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${customMessage}&url=${shareUrl}`
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${customMessage.replace(
+      '#',
+      ''
+    )}&url=${shareUrl}`
 
     window.open(twitterUrl, '_blank')
     handleArticlePageClick('article-share')
