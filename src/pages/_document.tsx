@@ -50,11 +50,12 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <Script src="/tagAnalytics.js" defer></Script>
           <Script
             async
             src="https://www.googletagmanager.com/gtag/js?id=G-KSGNHK2NH5"
           ></Script>
+          <Script src="/tagAnalytics.js"></Script>
+
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             rel="preconnect"
