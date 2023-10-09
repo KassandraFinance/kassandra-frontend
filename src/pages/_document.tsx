@@ -50,11 +50,21 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <Script
+          {/* <Script
             async
             src="https://www.googletagmanager.com/gtag/js?id=G-KSGNHK2NH5"
           ></Script>
-          <Script src="/tagAnalytics.js"></Script>
+          <Script src="/tagAnalytics.js"></Script> */}
+          <Script src="https://www.googletagmanager.com/gtag/js?id=G-KSGNHK2NH5" />
+          <Script id="google-analytics">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-KSGNHK2NH5');
+            `}
+          </Script>
 
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
