@@ -1,5 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
+import Script from 'next/script'
 import { Provider } from 'react-redux'
 import { AppProps } from 'next/app'
 import { MatomoProvider, createInstance } from '@jonkoops/matomo-tracker-react'
@@ -57,6 +58,10 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
           <ReactQueryDevtools />
           <MatomoProvider value={instance}>
             <ThemeProvider theme={theme}>
+              <Script
+                src={`https://www.googletagmanager.com/gtag/js?id=G-KSGNHK2NH5`}
+              />
+              <Script id="google-analytics" src="/tagAnalytics.js" defer />
               <Head>
                 {/* Primary Meta Tags */}
                 <meta
