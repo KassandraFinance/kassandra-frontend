@@ -2,6 +2,8 @@ import styled, { css } from 'styled-components'
 
 export const Card = styled.div`
   ${() => css`
+    position: relative;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,13 +11,37 @@ export const Card = styled.div`
     padding: 4.6rem;
 
     background-color: #1d1221;
+    background-image: url('/assets/images/background-card.png');
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center center;
     border-radius: 16px;
 
     overflow: hidden;
+    z-index: 2;
+
+    &::after {
+      content: '';
+
+      position: absolute;
+      bottom: -3rem;
+
+      height: 100%;
+      width: 100%;
+
+      background-image: url('/assets/images/gradient-line-card.png');
+      background-repeat: no-repeat;
+      background-size: auto;
+      background-position: center center;
+
+      z-index: 1;
+    }
 
     .btn-link {
       min-width: 16rem;
       max-width: 24rem;
+
+      z-index: 3;
     }
   `}
 `
@@ -23,11 +49,11 @@ export const Card = styled.div`
 export const paragraph = styled.span`
   ${({ theme }) => css`
     margin-bottom: 2.4rem;
+    z-index: 3;
 
     font-size: ${theme.font.sizes.font32};
     font-weight: ${theme.font.weight.medium};
     line-height: 3.2rem;
-    letter-spacing: 1.6px;
     text-align: center;
     text-decoration: none;
   `}
