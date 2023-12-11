@@ -13,7 +13,7 @@ interface ICardProps {
 const Card = ({ buttonText, href, title }: ICardProps) => {
   return (
     <S.Card>
-      <S.paragraph>{title}</S.paragraph>
+      <S.Title className="title-card">{title}</S.Title>
 
       <Link href={href} passHref>
         <a target="_blank">

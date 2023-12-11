@@ -43,10 +43,14 @@ export const Card = styled.div`
 
       z-index: 3;
     }
+
+    @media (max-width: 576px) {
+      padding: 3.2rem;
+    }
   `}
 `
 
-export const paragraph = styled.span`
+export const Title = styled.span`
   ${({ theme }) => css`
     margin-bottom: 2.4rem;
     z-index: 3;
@@ -56,5 +60,9 @@ export const paragraph = styled.span`
     line-height: 3.2rem;
     text-align: center;
     text-decoration: none;
+
+    @media (max-width: 576px) {
+      font-size: ${theme.font.sizes.font24};
+    }
   `}
 `

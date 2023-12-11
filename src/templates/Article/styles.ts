@@ -194,6 +194,15 @@ export const Main = styled.div`
         padding: 4rem;
       }
 
+      .title-card {
+        font-size: ${theme.font.sizes.font32};
+        font-weight: ${theme.font.weight.medium};
+
+        @media (max-width: 576px) {
+          font-size: ${theme.font.sizes.font24};
+        }
+      }
+
       @media ${device.mobile} {
         h2 {
           font: ${theme.font.text.text2xl};
