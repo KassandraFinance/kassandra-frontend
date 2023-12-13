@@ -12,7 +12,14 @@ export const getEmbedLink = (props: Record<string, unknown>) => {
   return
 }
 
-export const handleParseKassandraPoolLink = (link: string) => {
+type ResponsePoolLink = {
+  cardText: string
+  link: string
+}
+
+export const handleParseKassandraPoolLink = (
+  link: string
+): ResponsePoolLink | undefined => {
   const domain = 'https://app.kassandra.finance/pool/'
   const query = '?card='
 
@@ -24,7 +31,7 @@ export const handleParseKassandraPoolLink = (link: string) => {
 
     return {
       cardText,
-      link: query + path.slice(0, indexCard)
+      link: domain + path.slice(0, indexCard)
     }
   }
 }

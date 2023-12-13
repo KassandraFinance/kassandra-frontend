@@ -27,18 +27,21 @@ export const MarkdownContent = memo(
         rehypePlugins={[rehypeRaw, rehypeSlug]}
         components={{
           a: ({ ...props }) => {
-            const value = handleParseKassandraPoolLink(props?.href ?? '')
-            if (value) {
-              return (
-                <Card
-                  href={value.link}
-                  buttonText={(props?.children[0] as string) ?? 'Access Now'}
-                  title={
-                    value?.cardText ??
-                    'Insights from a Crypto Portfolios Managers'
-                  }
-                />
-              )
+            if (props?.href) {
+              const value = handleParseKassandraPoolLink(props.href)
+
+              if (value) {
+                return (
+                  <Card
+                    href={value.link}
+                    buttonText={(props?.children[0] as string) ?? 'Access Now'}
+                    title={
+                      value.cardText ||
+                      'Insights from a Crypto Portfolios Managers'
+                    }
+                  />
+                )
+              }
             }
 
             return <a target="_blank" {...props} />
