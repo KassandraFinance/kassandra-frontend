@@ -20,7 +20,7 @@ type ResponsePoolLink = {
 export const handleParseKassandraPoolLink = (
   link: string
 ): ResponsePoolLink | undefined => {
-  const domain = 'https://app.kassandra.finance/pool/'
+  const domain = 'https://app.kassandra.finance/'
   const query = '?card='
 
   const path = link.slice(domain.length)
