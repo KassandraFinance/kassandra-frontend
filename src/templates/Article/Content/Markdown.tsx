@@ -1,11 +1,19 @@
-import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
-import { ImageModalTrigger } from '../ImageModal'
+import { memo } from 'react'
 import rehypeRaw from 'rehype-raw'
 import rehypeSlug from 'rehype-slug'
-import { HandleSelectImageProps } from '..'
-import { getEmbedLink, isTwitterUrl, isYoutubeUrl } from '../embedHandlers'
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
 import { TwitterEmbed, YouTubeEmbed } from 'react-social-media-embed'
-import { memo } from 'react'
+
+import { ImageModalTrigger } from '../ImageModal'
+import { HandleSelectImageProps } from '..'
+import {
+  getEmbedLink,
+  handleParseKassandraPoolLink,
+  isTwitterUrl,
+  isYoutubeUrl
+} from '../embedHandlers'
+
+import Card from '@/components/Card'
 
 type MarkdownProps = {
   content: string
@@ -18,7 +26,26 @@ export const MarkdownContent = memo(
       <ReactMarkdown
         rehypePlugins={[rehypeRaw, rehypeSlug]}
         components={{
-          a: ({ ...props }) => <a target="_blank" {...props} />,
+          a: ({ ...props }) => {
+            if (props?.href) {
+              const value = handleParseKassandraPoolLink(props.href)
+
+              if (value) {
+                return (
+                  <Card
+                    href={value.link}
+                    buttonText={(props?.children[0] as string) ?? 'Access Now'}
+                    title={
+                      value.cardText ||
+                      'Insights from a Crypto Portfolios Managers'
+                    }
+                  />
+                )
+              }
+            }
+
+            return <a target="_blank" {...props} />
+          },
           blockquote: ({ children, ...props }) => (
             <span className="content-quote" {...props}>
               {children}
