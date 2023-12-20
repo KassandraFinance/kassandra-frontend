@@ -12,6 +12,30 @@ export const getEmbedLink = (props: Record<string, unknown>) => {
   return
 }
 
+type ResponsePoolLink = {
+  cardText: string
+  link: string
+}
+
+export const handleParseKassandraPoolLink = (
+  link: string
+): ResponsePoolLink | undefined => {
+  const domain = 'https://app.kassandra.finance/'
+  const query = '?card='
+
+  const path = link.slice(domain.length)
+  const indexCard = path.indexOf(query)
+
+  if (indexCard !== -1) {
+    const cardText = path.slice(indexCard + query.length)
+
+    return {
+      cardText,
+      link: domain + path.slice(0, indexCard)
+    }
+  }
+}
+
 export const isTwitterUrl = (link: string) =>
   link.startsWith('https://twitter.com/')
 
