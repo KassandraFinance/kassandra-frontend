@@ -5,6 +5,7 @@ export const Grid = styled.div`
 
   width: 100%;
   height: 100vh;
+  margin-top: -4rem;
 
   background-image: url('./assets/images/grid-desktop.png');
   background-image: image-set(
@@ -44,6 +45,7 @@ export const Sun = styled.div`
 
   width: 100%;
   height: 100vh;
+  margin-top: -4rem;
 
   background-image: url('./assets/images/sun.png');
   background-image: image-set(
@@ -119,7 +121,7 @@ export const ImgWrapper = styled.div`
 
   @media (min-width: 576px) and (max-width: 991px) {
     right: 0;
-    bottom: -45rem;
+    bottom: -55rem;
     display: block;
   }
 `
