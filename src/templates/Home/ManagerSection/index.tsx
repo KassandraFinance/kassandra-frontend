@@ -42,7 +42,7 @@ const ManagerSection = () => {
         <Image src={light4} alt="Ball of light" />
       </S.ImgWrapper>
 
-      <SectionCard
+      {/* <SectionCard
         number="02"
         title="Managers"
         color="#26DBDB"
@@ -52,7 +52,7 @@ const ManagerSection = () => {
         link="/managers"
         img={managerImg}
         alt="greek statue head with purple neon light crown"
-      />
+      /> */}
 
       <FadeInVertical threshold={0.5}>
         <HomeHeading

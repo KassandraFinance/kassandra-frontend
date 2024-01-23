@@ -28,7 +28,7 @@ const DaoSection = () => {
         <Image src={lightTable9} alt="Ball of light" />
       </S.ImgTabletWrapper2>
 
-      <SectionCard
+      {/* <SectionCard
         number="03"
         title="DAO"
         color="#E843C4"
@@ -38,7 +38,7 @@ const DaoSection = () => {
         link="/dao"
         img={daoImg}
         alt="A group of people in the VIP area"
-      />
+      /> */}
     </S.Container>
   )
 }
