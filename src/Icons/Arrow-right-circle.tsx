@@ -1,4 +1,4 @@
-import type { SvgProps } from '.'
+import type { SvgProps } from './'
 
 export const ArrowRightCircle = (props: SvgProps) => {
   return (

@@ -6,7 +6,7 @@ import { ArrowRightCircle } from '@/Icons/Arrow-right-circle'
 
 import * as S from './styles'
 
-type ICallToActionEndPageProps = {
+interface ICallToActionEndPageProps {
   text: string
   buttonText: string
   href: string
