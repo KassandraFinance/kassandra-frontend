@@ -1,73 +1,63 @@
 import styled, { css } from 'styled-components'
 
-export const Container = styled.article`
+type Container = {
+  reverseLayout: boolean
+}
+export const Container = styled.article<Container>`
   display: flex;
   align-items: center;
-
-  margin-top: 23.2rem;
-  margin-bottom: 11.241rem;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  gap: 3.2rem;
 
   @media (max-width: 992px) {
     flex-direction: column;
-
-    margin-top: 15rem;
-    margin-bottom: 13.7rem;
   }
 
-  @media (max-width: 576px) {
-    margin-top: 4.8rem;
-    margin-bottom: 5.6rem;
-  }
+  ${({ reverseLayout }) =>
+    reverseLayout &&
+    css`
+      flex-direction: row-reverse;
+    `}
 `
 
 export const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
   > h2 {
     margin-bottom: 1.6rem;
   }
 
   > h3 {
-    width: 55rem;
+    max-width: 55rem;
     margin-bottom: 2.4rem;
-
-    @media (max-width: 992px) {
-      width: 100%;
-      text-align: center;
-    }
-    @media (max-width: 576px) {
-      text-align: left;
-    }
   }
 
   > p {
-    width: 47.7rem;
+    max-width: 47.7rem;
     margin-bottom: 3.2rem;
-    @media (max-width: 992px) {
-      text-align: center;
-      width: 100%;
-    }
-    @media (max-width: 576px) {
-      text-align: left;
-    }
   }
+
   a {
     text-decoration: none;
   }
 
-  .btn {
-    flex-direction: row-reverse;
-  }
-
   @media (max-width: 992px) {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    max-width: 64.4rem;
-  }
-
-  @media (max-width: 576px) {
+    justify-content: flex-start;
     align-items: flex-start;
+    width: 100%;
+
+    a {
+      width: 100%;
+    }
+
+    h3,
+    p {
+      max-width: 100%;
+      text-align: left;
+    }
   }
 `
 
@@ -84,5 +74,29 @@ export const Line = styled.div`
 
     background-color: ${color};
     border-radius: 0.4rem;
+  `}
+`
+
+export const ButtonWrapper = styled.div`
+  ${() => css`
+    display: flex;
+    gap: 3.2rem;
+
+    .btn {
+      flex-direction: row-reverse;
+    }
+
+    @media (max-width: 992px) {
+      width: 100%;
+
+      .btn {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 576px) {
+      flex-direction: column;
+      gap: 1.6rem;
+    }
   `}
 `

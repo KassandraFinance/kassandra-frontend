@@ -4,6 +4,7 @@ export const SocialMedia = styled.ul`
   ${() => css`
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 2rem;
   `}
 `
