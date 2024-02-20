@@ -1,3 +1,4 @@
+import { withSentryConfig } from '@sentry/nextjs'
 import './src/env.mjs'
 
 const config = {
@@ -53,4 +54,19 @@ const config = {
   }
 }
 
-export default config
+export default withSentryConfig(
+  config,
+  {
+    silent: true,
+    org: process.env.SENTRY_ORG,
+    project: process.env.SENTRY_PROJECT
+  },
+  {
+    widenClientFileUpload: true,
+    transpileClientSDK: true,
+    tunnelRoute: '/monitoring',
+    hideSourceMaps: true,
+    disableLogger: true,
+    automaticVercelMonitors: true
+  }
+)
