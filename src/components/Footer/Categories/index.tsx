@@ -79,6 +79,11 @@ const ABOUT: CategorieType[] = [
     name: 'About Us',
     href: '/foundation',
     isExterno: false
+  },
+  {
+    name: 'Feedbacks',
+    href: 'https://discord.com/channels/837046033095327765/928754125129265252',
+    isExterno: true
   }
 ]
 
