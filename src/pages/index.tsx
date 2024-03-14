@@ -22,6 +22,10 @@ export default function HomePage() {
         />
 
         {/* Open Graph / Facebook */}
+        <meta
+          property="og:image"
+          content="https://kassandra.finance/kacy-og.png"
+        />
         <meta property="og:url" content="https://kassandra.finance/" />
         <meta
           property="og:description"
