@@ -1,30 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import NextCors from 'nextjs-cors'
 
-async function getInfoTokens(coingeckoId: string) {
-  const resInfoToken = await fetch(process.env.HEIMDALL_API ?? '', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `BearerInternal ${process.env.HEIMDALL_API_KEY}`
-    },
-    body: JSON.stringify({
-      query: `
-        query MarketCoin($marketCoinId: String!) {
-          marketCoin(marketCoinID: $marketCoinId) {
-            price
-            marketCap
-            circulatingSupply
-            pricePercentageChangeIn24h
-          }
-        }
-      `,
-      variables: {
-        marketCoinId: coingeckoId
-      }
-    })
-  })
-  return (await resInfoToken.json()).data?.marketCoin
+export const COINGECKO_API = 'https://pro-api.coingecko.com/api/v3/'
+
+async function getInfoToken(coingeckoId: string) {
+  const resInfoTokens = await fetch(
+    `${COINGECKO_API}coins/markets?vs_currency=usd&ids=${coingeckoId}&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=24h%2C7d&locale=en&x_cg_pro_api_key=${process.env.NEXT_PUBLIC_COINGECKO}`
+  )
+
+  const res = await resInfoTokens.json()
+  return res[0]
 }
 
 export default async (request: NextApiRequest, response: NextApiResponse) => {
@@ -40,15 +25,15 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
       ? request.query.coingeckoId.toString()
       : request.query.coingeckoId
 
-    const tokenInfo = await getInfoTokens(requestAddress)
+    const tokenInfo = await getInfoToken(requestAddress)
 
     response.setHeader('Cache-Control', 's-maxage=30, stale-while-revalidate')
 
     response.json({
-      tokenPrice: tokenInfo.price,
-      marketCap: tokenInfo.marketCap,
-      supply: parseInt(tokenInfo.circulatingSupply),
-      tokenPercentage: tokenInfo.pricePercentageChangeIn24h
+      tokenPrice: tokenInfo.current_price,
+      marketCap: tokenInfo.market_cap,
+      supply: parseInt(tokenInfo.circulating_supply),
+      tokenPercentage: tokenInfo.price_change_percentage_24h
     })
   } catch (error) {
     response.json({
