@@ -1,12 +1,15 @@
 import { useRouter } from 'next/router'
-import useMatomo from '@/hooks/useMatomo'
+import Link from 'next/link'
 
+import useMatomo from '@/hooks/useMatomo'
 import Hero from '../../components/Hero'
 import Button from '../../components/Button'
 import Products from './Products'
 import Advantages from './Advantages'
 import Partners from './Partners'
 import Contribute from '../../components/Contribute'
+import NewButton from '@/components/NewButton'
+import CallToActionEndPage from '@/components/CallToActionEndPage'
 
 import * as S from './styles'
 
@@ -56,10 +59,18 @@ const Investors = () => {
         <Partners />
       </S.Investors>
 
-      <Contribute
-        title="Invest in your favorite funds and get KACY"
-        text="Accumulate $KACY and earn a stake in all of our protocol fees."
-      />
+      <S.CallToActionEndPageContainer>
+        <CallToActionEndPage text="Ready to join?">
+          <S.ButtonWrapper>
+            <Link href="/" passHref>
+              <NewButton as="a" text="Join Now" background="primary" />
+            </Link>
+            <Link href="/" passHref>
+              <NewButton as="a" text="Get Started" background="white" />
+            </Link>
+          </S.ButtonWrapper>
+        </CallToActionEndPage>
+      </S.CallToActionEndPageContainer>
     </>
   )
 }

@@ -1,12 +1,16 @@
 import React from 'react'
+import Link from 'next/link'
 
 import HeroHome from './HeroHome'
+import NewButton from '@/components/NewButton'
 import WavyLine from '../../components/WavyLine'
 import DaoAssetManagement from './DaoAssetManagement'
 import PartnersMarquee from '@/components/PartnersMarquee'
 import CallToActionEndPage from '@/components/CallToActionEndPage'
 import FadeInVertical from '@/components/Animations/FadeInVertical'
 import InvestorsAndManagerSection from './InvestorsAndManagerSection'
+
+import { ArrowRightCircle } from '@/Icons/Arrow-right-circle'
 
 import * as S from './styles'
 
@@ -29,11 +33,16 @@ const NewHome = () => {
 
       <FadeInVertical threshold={0.5}>
         <S.CallToActionEndPageContainer>
-          <CallToActionEndPage
-            text="Want to be Part of DeFi’s Future?"
-            buttonText="Join The Community"
-            href="/"
-          />
+          <CallToActionEndPage text="Want to be Part of DeFi’s Future?">
+            <Link href="/" passHref>
+              <NewButton
+                as="a"
+                text="Join The Community"
+                background="primary"
+                icon={<ArrowRightCircle />}
+              />
+            </Link>
+          </CallToActionEndPage>
         </S.CallToActionEndPageContainer>
       </FadeInVertical>
 
