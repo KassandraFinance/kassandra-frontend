@@ -6,7 +6,7 @@ import NewButton, { IBackgroudProps } from '../NewButton'
 
 import * as S from './styles'
 
-type Buttontype = {
+type ButtonType = {
   text: string
   href: string
   type: IBackgroudProps
@@ -14,14 +14,14 @@ type Buttontype = {
 interface ISectionTransparentCardProps {
   title: string
   paragraph: string
-  firstbutton?: Buttontype
-  secondButton?: Buttontype
+  firstButton?: ButtonType
+  secondButton?: ButtonType
 }
 
 const SectionTransparentCard = ({
   title,
   paragraph,
-  firstbutton,
+  firstButton,
   secondButton
 }: ISectionTransparentCardProps) => (
   <S.SectionTransparentCard>
@@ -29,12 +29,12 @@ const SectionTransparentCard = ({
     <Paragraph text={paragraph} />
 
     <S.ButtonWrapper>
-      {firstbutton && (
-        <Link href={firstbutton.href} passHref>
+      {firstButton && (
+        <Link href={firstButton.href} passHref>
           <NewButton
             as="a"
-            text={firstbutton.text}
-            background={firstbutton.type}
+            text={firstButton.text}
+            background={firstButton.type}
             className="card-button"
           />
         </Link>
