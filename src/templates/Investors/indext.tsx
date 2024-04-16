@@ -4,11 +4,11 @@ import Link from 'next/link'
 import useMatomo from '@/hooks/useMatomo'
 import Hero from '../../components/Hero'
 import Button from '../../components/Button'
-import Products from './Products'
 import Advantages from './Advantages'
 import Partners from './Partners'
-import Contribute from '../../components/Contribute'
+import FadeIn from '@/components/Animations/FadeIn'
 import NewButton from '@/components/NewButton'
+import FAQ from './FAQ'
 import CallToActionEndPage from '@/components/CallToActionEndPage'
 
 import * as S from './styles'
@@ -52,11 +52,14 @@ const Investors = () => {
             }
           />
         </Hero>
-        <Products />
 
         <Advantages />
 
         <Partners />
+
+        <FadeIn threshold={0.5}>
+          <FAQ />
+        </FadeIn>
       </S.Investors>
 
       <S.CallToActionEndPageContainer>
