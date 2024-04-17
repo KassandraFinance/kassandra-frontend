@@ -82,6 +82,23 @@ const backgroundVariants = {
       border: 1px solid rgb(255 255 255 / 0.3);
     }
   `,
+  ghost: () => css`
+    padding: 0;
+    border: 0.07rem solid #fcfcfc;
+    border-radius: 4px;
+    color: #fcfcfc;
+
+    line-height: 1.6rem;
+
+    background: transparent;
+
+    transition: border 300ms ease-in-out;
+
+    &:hover,
+    &:focus {
+      border: 1px solid rgb(255 255 255 / 0.3);
+    }
+  `,
   white: (theme: DefaultTheme) => css`
     border: 0.1rem solid ${theme.colors.snow};
 
@@ -197,6 +214,7 @@ export const Wrapper = styled.button<IWrapperProps>`
     justify-content: center;
     align-items: center;
     gap: 0.8rem;
+    white-space: nowrap;
 
     position: relative;
 

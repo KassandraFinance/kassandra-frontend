@@ -6,6 +6,8 @@ export const Footer = styled.div`
     margin: 0 auto;
     margin-bottom: 5rem;
 
+    background-color: transparent;
+
     @media (max-width: 1200px) {
       padding: 0 3rem;
     }

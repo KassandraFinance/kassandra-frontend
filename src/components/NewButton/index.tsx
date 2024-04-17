@@ -12,6 +12,7 @@ export type IBackgroudProps =
   | 'black'
   | 'white'
   | 'transparent'
+  | 'ghost'
 
 export type ButtonProps = {
   text?: string
