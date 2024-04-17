@@ -15,7 +15,13 @@ export function NewsletterSmallSection({ title, text }: SmallSectionProps) {
           <S.H3>{title}</S.H3>
           <S.Text>{text}</S.Text>
         </S.SmallSectionText>
-        <NewButton background="ghost" text="Read More" size="large" />
+        <NewButton
+          background="ghost"
+          text="Read More"
+          size="large"
+          fullWidth
+          className="ghostButton"
+        />
       </S.SmallSectionContent>
     </S.SmallSection>
   )

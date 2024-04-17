@@ -18,6 +18,10 @@ export const BigSectionContent = styled.div`
   flex-direction: column;
   gap: 3.2rem;
   padding: 3.2rem;
+
+  .ghostButton {
+    max-width: 12.5rem;
+  }
 `
 
 export const BigSectionImage = styled.div`

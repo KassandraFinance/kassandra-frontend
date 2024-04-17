@@ -14,7 +14,13 @@ export function NewsletterBigSection({ title, text }: BigSectionProps) {
           <S.H3>{title}</S.H3>
           <S.Text>{text}</S.Text>
         </S.BigSectionText>
-        <NewButton background="ghost" text="Read More" size="large" />
+        <NewButton
+          background="ghost"
+          text="Read More"
+          size="large"
+          fullWidth
+          className="ghostButton"
+        />
       </S.BigSectionContent>
       <S.BigSectionImage />
     </S.BigSection>

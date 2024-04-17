@@ -84,8 +84,6 @@ const backgroundVariants = {
     }
   `,
   ghost: () => css`
-    width: 100%;
-    max-width: 12.5rem;
     padding: 0;
     border: 0.07rem solid #fcfcfc;
     border-radius: 4px;

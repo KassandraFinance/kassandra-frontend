@@ -14,6 +14,10 @@ export const SmallSection = styled.div`
   flex-direction: column;
   gap: 3.2rem;
   background: rgba(252, 252, 252, 0.04);
+
+  .ghostButton {
+    max-width: 12.5rem;
+  }
 `
 
 export const SmallSectionContent = styled.div`
