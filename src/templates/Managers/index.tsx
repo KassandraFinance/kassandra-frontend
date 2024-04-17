@@ -1,14 +1,20 @@
 import { useRouter } from 'next/router'
 import useMatomo from '@/hooks/useMatomo'
+import Link from 'next/link'
 
 import Hero from '../../components/Hero'
+import NewButton from '@/components/NewButton'
 import FundManager from './FundManager'
 import ChangeAllocations from './ChangeAllocations'
 import AllocationsInexpensive from './AllocationsInexpensive'
 import ManagersInterface from './ManagersInterface'
 import CreateFund from './CreateFunds'
-import Contribute from '../../components/Contribute'
 import Button from '../../components/Button'
+import SectionTransparentCard from '@/components/SectionTransparentCard'
+import CallToActionEndPage from '@/components/CallToActionEndPage'
+import FadeInVertical from '@/components/Animations/FadeInVertical'
+
+import { ArrowRightCircle } from '@/Icons/Arrow-right-circle'
 
 import * as S from './styles'
 
@@ -64,15 +70,42 @@ const Managers = () => {
 
             <AllocationsInexpensive />
 
+            <S.SectionTransparentCardContainer>
+              <FadeInVertical threshold={0.5}>
+                <SectionTransparentCard
+                  title="Get onboarded"
+                  paragraph="Kassandra has a ready documentation to answer all your doubts. You can also enter our discord community to discuss your ideas and get supported."
+                  firstButton={{
+                    text: 'Read our Documentacion',
+                    type: 'primary',
+                    href: '/'
+                  }}
+                  secondButton={{
+                    text: 'Enter Kassandra Community',
+                    type: 'white',
+                    href: '/'
+                  }}
+                />
+              </FadeInVertical>
+            </S.SectionTransparentCardContainer>
+
             <CreateFund />
           </S.ManagerContent>
         </S.ManagerContainer>
       </S.ManagerMainContainer>
 
-      <Contribute
-        title="Reach out to start building your first strategy"
-        text="Get onboarded to our protocol and begin your money management journey with KassandraDAO"
-      />
+      <S.CallToActionEndPageContainer>
+        <CallToActionEndPage text="The Mangers Incentive Program">
+          <Link href="/" passHref>
+            <NewButton
+              as="a"
+              text="learn More"
+              background="primary"
+              icon={<ArrowRightCircle />}
+            />
+          </Link>
+        </CallToActionEndPage>
+      </S.CallToActionEndPageContainer>
     </>
   )
 }

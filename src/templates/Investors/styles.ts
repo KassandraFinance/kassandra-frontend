@@ -39,3 +39,17 @@ export const Investors = styled.main`
     border-radius: 0.4rem;
   }
 `
+
+export const CallToActionEndPageContainer = styled.div`
+  max-width: 30rem;
+  margin: 0 auto;
+  margin-bottom: 26rem;
+  width: 100%;
+`
+export const ButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 1.6rem;
+`

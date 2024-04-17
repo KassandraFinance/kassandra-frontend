@@ -5,6 +5,7 @@ import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
 import FadeInVertical from '../../../components/Animations/FadeInVertical'
 import Paragraph from '../../../components/Paragraph'
 import SectionSubtitle from '../../../components/SectionSubtitle'
+import Protocol from './Protocol'
 
 import schemaManager from '../../../../public/assets/images/schema-managers.png'
 
@@ -54,6 +55,8 @@ const Advantages = () => {
           </div>
         </S.Schema>
       </FadeIn>
+
+      <Protocol />
 
       <S.DescriptionContainer>
         <FadeInHorizontal threshold={0.5}>

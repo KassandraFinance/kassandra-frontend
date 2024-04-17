@@ -69,7 +69,6 @@ const backgroundVariants = {
     }
   `,
   transparent: () => css`
-    width: 100%;
     padding: 0;
     border: 1px solid transparent;
     border-radius: 4px;
