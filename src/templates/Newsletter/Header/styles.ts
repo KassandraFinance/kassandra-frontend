@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import { headerSize } from '@/styles/theme'
+import { device } from '@/styles/theme'
 
 export const Wrapper = styled.div`
   margin-top: calc(${headerSize.desktop} + 8.3rem);
@@ -10,6 +11,14 @@ export const Wrapper = styled.div`
   padding-block: 8rem;
   text-align: center;
   width: 100%;
+
+  @media ${device.tabletLarge} {
+    padding-inline: 2.4rem;
+  }
+
+  @media ${device.mobile} {
+    padding-inline: 1.6rem;
+  }
 `
 
 export const Content = styled.div`
