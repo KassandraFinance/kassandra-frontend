@@ -13,7 +13,7 @@ import * as S from './styles'
 
 const Foundation = () => {
   return (
-    <S.FoundationConatiner>
+    <S.FoundationContainer>
       <Hero />
 
       <S.Foundation>
@@ -46,7 +46,7 @@ const Foundation = () => {
       <LatestNews />
 
       <CallToActionEndPage text="Join Our Community" socialsButtons />
-    </S.FoundationConatiner>
+    </S.FoundationContainer>
   )
 }
 
