@@ -34,10 +34,14 @@ const LatestNews = () => {
   }
 
   const cards = mediumData?.items?.map((post: IMediumPost) => {
+    const regex = /<img[^>]+src="([^">]+)"/
+    const match = post?.description?.match(regex)
+    const thumbnail = match ? match[1] : ''
+
     return (
       <NewsCard
         key={post.title}
-        thumbnail={post.thumbnail}
+        thumbnail={thumbnail}
         title={post.title}
         pubDate={post.pubDate}
         description={post.content}
