@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { device } from '@/styles/theme'
 
 export const Wrapper = styled.div`
   display: flex;
@@ -6,6 +7,7 @@ export const Wrapper = styled.div`
   gap: 4rem;
   max-width: 124rem;
   margin-inline: auto;
+  padding: 2.4rem;
 `
 
 export const TitleWrapper = styled.div`
@@ -54,6 +56,14 @@ export const SmallSectionWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 3.2rem;
+
+  @media ${device.tabletLarge} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media ${device.mobile} {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `
 
 export const H2 = styled.h2`
