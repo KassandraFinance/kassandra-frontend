@@ -4,7 +4,7 @@ export const Footer = styled.div`
   ${() => css`
     max-width: 124rem;
     margin: 0 auto;
-    margin-bottom: 5rem;
+    margin-block: 5rem;
 
     background-color: transparent;
 
