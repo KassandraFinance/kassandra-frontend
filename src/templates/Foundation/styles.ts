@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const FoundationConatiner = styled.div`
+export const FoundationContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24rem;
