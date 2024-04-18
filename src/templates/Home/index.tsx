@@ -33,16 +33,15 @@ const NewHome = () => {
 
       <FadeInVertical threshold={0.5}>
         <S.CallToActionEndPageContainer>
-          <CallToActionEndPage text="Want to be Part of DeFi’s Future?">
-            <Link href="/" passHref>
-              <NewButton
-                as="a"
-                text="Join The Community"
-                background="primary"
-                icon={<ArrowRightCircle />}
-              />
-            </Link>
-          </CallToActionEndPage>
+          <CallToActionEndPage
+            text="Want to be Part of DeFi’s Future?"
+            firstButton={{
+              href: '/',
+              text: 'Join The Community',
+              type: 'primary',
+              icon: <ArrowRightCircle />
+            }}
+          />
         </S.CallToActionEndPageContainer>
       </FadeInVertical>
 

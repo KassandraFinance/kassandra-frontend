@@ -5,18 +5,7 @@ export const PartnersContainer = styled.div`
 `
 
 export const PartnersTitleWrapper = styled.div`
-  position: relative;
-  height: 37.6rem;
-
-  background: url('/assets/images/blur-divisor-investor.png');
-  background-repeat: no-repeat;
-  background-position: bottom center;
-  background-size: 137.8rem 37.6rem;
-
   div {
-    position: absolute;
-    bottom: 0;
-
     display: flex;
     justify-content: center;
     align-items: center;

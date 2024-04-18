@@ -40,7 +40,12 @@ const Header = () => {
             }}
             className="logo-desktop"
           >
-            <Image src={logoKassandra} alt="Kassandra" />
+            <Image
+              src={logoKassandra}
+              alt="Kassandra logo"
+              width={186}
+              height={36}
+            />
           </a>
         </Link>
 
