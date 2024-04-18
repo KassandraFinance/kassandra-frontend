@@ -21,8 +21,9 @@ export const BackgroundBall = styled.div<IBackgroundBallProps>`
     height: 70rem;
 
     border-radius: 50%;
-    filter: blur(20rem);
 
+    filter: blur(20rem);
+    pointer-events: none;
     z-index: -1;
   `}
 
