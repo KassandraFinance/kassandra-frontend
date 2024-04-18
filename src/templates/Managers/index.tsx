@@ -1,9 +1,7 @@
 import { useRouter } from 'next/router'
 import useMatomo from '@/hooks/useMatomo'
-import Link from 'next/link'
 
 import Hero from '../../components/Hero'
-import NewButton from '@/components/NewButton'
 import FundManager from './FundManager'
 import ChangeAllocations from './ChangeAllocations'
 import AllocationsInexpensive from './AllocationsInexpensive'
@@ -95,16 +93,15 @@ const Managers = () => {
       </S.ManagerMainContainer>
 
       <S.CallToActionEndPageContainer>
-        <CallToActionEndPage text="The Mangers Incentive Program">
-          <Link href="/" passHref>
-            <NewButton
-              as="a"
-              text="learn More"
-              background="primary"
-              icon={<ArrowRightCircle />}
-            />
-          </Link>
-        </CallToActionEndPage>
+        <CallToActionEndPage
+          text="The Mangers Incentive Program"
+          firstButton={{
+            text: 'learn More',
+            type: 'primary',
+            href: '/',
+            icon: <ArrowRightCircle />
+          }}
+        ></CallToActionEndPage>
       </S.CallToActionEndPageContainer>
     </>
   )

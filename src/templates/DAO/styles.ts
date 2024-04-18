@@ -1,36 +1,8 @@
+import { CallToActionEndPage } from '@/components/CallToActionEndPage/styles'
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
-  background-image: url('/assets/images/1920-dao-bg.png');
-  background-image: image-set(
-    url('/assets/images/1920-dao-bg.webp') type('image/webp'),
-    url('/assets/images/1920-dao-bg.png') type('image/png')
-  );
-  background-repeat: no-repeat;
-  background-size: auto;
-  background-position: left top;
-
-  @media (max-width: 992px) {
-    background: url('/assets/images/768px-dao-bg.png');
-    background-image: image-set(
-      url('/assets/images/768px-dao-bg.webp') type('image/webp'),
-      url('/assets/images/768px-dao-bg.png') type('image/png')
-    );
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: left top;
-  }
-
-  @media (max-width: 576px) {
-    background: url('/assets/images/360px-dao-bg.png');
-    background-image: image-set(
-      url('/assets/images/360px-dao-bg.webp') type('image/webp'),
-      url('/assets/images/360px-dao-bg.png') type('image/png')
-    );
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: left top;
-  }
+  position: relative;
 
   .button {
     flex-direction: row-reverse;
@@ -57,4 +29,13 @@ export const Button = styled.a`
   border-radius: 0.4rem;
   font-size: 1.6rem;
   cursor: pointer;
+`
+
+export const CallToActionEndPageContainer = styled.div`
+  margin: 26rem 26rem;
+  ${CallToActionEndPage} {
+    p {
+      max-width: 32rem;
+    }
+  }
 `

@@ -9,10 +9,9 @@ import CommunityTenets from './CommunityTenets'
 import FlowingRevenue from './FlowingRevenue'
 import Governance from './Governance'
 import LockVote from './LockVote'
-import Scarcity from './Scarcity'
-import Tokenomics from './Tokenomics'
-import Contribute from '../../components/Contribute'
 import Button from '../../components/Button'
+import CallToActionEndPage from '@/components/CallToActionEndPage'
+import BackgroundBall from '@/components/BackgroundBall'
 
 import * as S from './styles'
 
@@ -58,21 +57,88 @@ const TokenHolder = () => {
           />
         </Hero>
       </S.HeroWrapper>
+      <BackgroundBall
+        linearGradient={{
+          colors: ['#E843C433']
+        }}
+        position={{
+          top: 80,
+          right: -50
+        }}
+      />
+
+      <BackgroundBall
+        linearGradient={{
+          colors: ['#F7964033']
+        }}
+        position={{
+          top: 80,
+          left: 2
+        }}
+      />
 
       <CommunityTenets />
 
       <Governance />
-
+      <BackgroundBall
+        linearGradient={{
+          colors: ['#E843C433'],
+          deg: 50
+        }}
+        position={{
+          top: 170,
+          left: 2
+        }}
+      />
+      <BackgroundBall
+        linearGradient={{
+          colors: ['#E843C433', '#E843C400'],
+          deg: -50
+        }}
+        position={{
+          top: 220,
+          right: -50
+        }}
+      />
       <FlowingRevenue />
+      <BackgroundBall
+        linearGradient={{
+          colors: ['#F7964033']
+        }}
+        position={{
+          top: 320,
+          left: 10
+        }}
+      />
 
+      <BackgroundBall
+        linearGradient={{
+          colors: ['#E843C433', '#E843C400']
+        }}
+        position={{
+          top: 420,
+          right: -10
+        }}
+      />
+
+      <BackgroundBall
+        linearGradient={{
+          colors: ['#F7964033', '#E843C433'],
+          porcentage: ['60', '100']
+        }}
+        position={{
+          top: 460,
+          left: -10
+        }}
+      />
       <LockVote />
 
-      <Tokenomics />
-
-      <Contribute
-        title="Find out how you can contribute"
-        text="Accumulate $KACY by investing and contributing to Kassandra and earn a stake in all of our protocol fees."
-      />
+      <S.CallToActionEndPageContainer>
+        <CallToActionEndPage
+          text="Find Out How You Can Contribute"
+          socialsButtons
+        />
+      </S.CallToActionEndPageContainer>
     </S.Wrapper>
   )
 }

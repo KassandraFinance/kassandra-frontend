@@ -53,3 +53,7 @@ export const ButtonWrapper = styled.div`
   width: 100%;
   gap: 1.6rem;
 `
+
+export const PartnersWrapper = styled.div`
+  margin-top: 24rem;
+`

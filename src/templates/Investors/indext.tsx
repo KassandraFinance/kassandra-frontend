@@ -1,13 +1,11 @@
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 
 import useMatomo from '@/hooks/useMatomo'
 import Hero from '../../components/Hero'
 import Button from '../../components/Button'
 import Advantages from './Advantages'
-import Partners from './Partners'
+import Partners from '../../components/Partners'
 import FadeIn from '@/components/Animations/FadeIn'
-import NewButton from '@/components/NewButton'
 import FAQ from './FAQ'
 import CallToActionEndPage from '@/components/CallToActionEndPage'
 
@@ -55,7 +53,9 @@ const Investors = () => {
 
         <Advantages />
 
-        <Partners />
+        <S.PartnersWrapper>
+          <Partners />
+        </S.PartnersWrapper>
 
         <FadeIn threshold={0.5}>
           <FAQ />
@@ -63,16 +63,19 @@ const Investors = () => {
       </S.Investors>
 
       <S.CallToActionEndPageContainer>
-        <CallToActionEndPage text="Ready to join?">
-          <S.ButtonWrapper>
-            <Link href="/" passHref>
-              <NewButton as="a" text="Join Now" background="primary" />
-            </Link>
-            <Link href="/" passHref>
-              <NewButton as="a" text="Get Started" background="white" />
-            </Link>
-          </S.ButtonWrapper>
-        </CallToActionEndPage>
+        <CallToActionEndPage
+          text="Ready to join?"
+          firstButton={{
+            href: '/',
+            text: 'Join Now',
+            type: 'primary'
+          }}
+          secondButton={{
+            href: '/',
+            text: 'Get Started',
+            type: 'white'
+          }}
+        />
       </S.CallToActionEndPageContainer>
     </>
   )

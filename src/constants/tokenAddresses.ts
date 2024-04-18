@@ -79,6 +79,8 @@ export type ProductSymbols = keyof typeof products
 export const SUBGRAPH_URL =
   'https://graph.kassandra.finance/subgraphs/name/Kassandra'
 
+export const URL_KASSANDRA_TELEGRAM = 'https://t.me/KassandraDAO'
+export const URL_KASSANDRA_DISCORD = 'https://discord.com/invite/fAqpbP6tFw'
 export const MEDIUM_FEED_URL =
   'https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@kassandrafoundation'
 
