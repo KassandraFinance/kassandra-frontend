@@ -36,7 +36,7 @@ const NewHome = () => {
           <CallToActionEndPage
             text="Want to be Part of DeFi’s Future?"
             firstButton={{
-              href: '/',
+              href: '/community',
               text: 'Join The Community',
               type: 'primary',
               icon: <ArrowRightCircle />

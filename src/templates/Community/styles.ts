@@ -109,33 +109,20 @@ export const IconWrapper = styled.a`
   height: 9.2rem;
   width: 9.2rem;
 
-  &:hover {
-    border: 1px solid transparent;
-    transition: all 300ms ease-in-out;
-  }
-
-  &:hover::after {
+  &:hover::before {
     content: '';
     position: absolute;
-    background: linear-gradient(
-      90deg,
-      rgba(232, 67, 196, 0.04) 0%,
-      rgba(255, 191, 0, 0.04) 100%
-    );
-    top: -2px;
-    left: -2px;
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    border-radius: 0.8rem;
-    border: 1px solid;
-    border-image-slice: 1;
-    border-image-source: linear-gradient(
-      90deg,
-      rgba(232, 67, 196, 1),
-      rgba(255, 191, 0, 1)
-    );
-    z-index: -1;
-    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    border: 0.1rem solid transparent;
+    background: linear-gradient(90deg, #e843c4 0%, #ffbf00 100%) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
   }
 `
 
