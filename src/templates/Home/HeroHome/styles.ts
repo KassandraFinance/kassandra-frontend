@@ -70,7 +70,7 @@ export const ImageWrapper = styled.div`
     position: relative;
     margin-top: 8rem;
     animation: fade-in 1.5s ease-in-out;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.75);
 
     img {
       position: relative;

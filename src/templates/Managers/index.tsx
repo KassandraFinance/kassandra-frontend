@@ -40,14 +40,14 @@ const Managers = () => {
                 as="a"
                 href="https://app.kassandra.finance/manage"
                 target="_blank"
-                text="Create your Pool"
+                text="Create your Portfolio"
                 size="huge"
                 backgroundPrimary
                 onClick={() =>
                   trackEvent({
                     category: router.pathname,
                     action: `click-on-button | Home-Managers | ${router.pathname}`,
-                    name: 'Create your Pool'
+                    name: 'Create your Portfolio'
                   })
                 }
                 icon={
@@ -76,12 +76,12 @@ const Managers = () => {
                   firstButton={{
                     text: 'Read our Documentacion',
                     type: 'primary',
-                    href: '/'
+                    href: 'https://kassandra-1.gitbook.io/kassandras-onboarding-docs'
                   }}
                   secondButton={{
                     text: 'Enter Kassandra Community',
                     type: 'white',
-                    href: '/'
+                    href: '/community'
                   }}
                 />
               </FadeInVertical>
@@ -94,11 +94,11 @@ const Managers = () => {
 
       <S.CallToActionEndPageContainer>
         <CallToActionEndPage
-          text="The Mangers Incentive Program"
+          text="The Managers Incentive Program"
           firstButton={{
-            text: 'learn More',
+            text: 'Learn More',
             type: 'primary',
-            href: '/',
+            href: 'https://app.kassandra.finance/manage',
             icon: <ArrowRightCircle />
           }}
         ></CallToActionEndPage>

@@ -17,8 +17,10 @@ const HeroText = () => {
             </S.Text>
 
             <S.Text>Manage</S.Text>
+            <S.Text>Earn with</S.Text>
+            <S.Text>Share</S.Text>
           </S.TextBox>
-          <S.VisibilityHidden>Invest in</S.VisibilityHidden> tokenized
+          <S.VisibilityHidden>Earn with</S.VisibilityHidden> tokenized
         </S.SubTitle>
 
         <S.SubTitle>crypto portfolios</S.SubTitle>

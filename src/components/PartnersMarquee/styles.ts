@@ -15,5 +15,9 @@ export const PartnersMarquee = styled.h2`
     img {
       margin-left: 8rem;
     }
+
+    .balancer {
+      height: 30px;
+    }
   `}
 `
