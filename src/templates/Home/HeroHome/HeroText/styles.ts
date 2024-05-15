@@ -95,30 +95,50 @@ export const Text = styled.div`
   &:nth-child(1) {
     color: ${theme.colors.amber};
 
-    animation: rollDown 10s forwards infinite;
+    animation: rollDown 15s forwards infinite;
 
     @media (max-width: 693px) {
-      animation: rollDown670 10s forwards infinite;
+      animation: rollDown670 15s forwards infinite;
     }
   }
 
   &:nth-child(2) {
     color: ${theme.colors.cyan};
 
-    animation: rollDown2 10s forwards infinite;
+    animation: rollDown2 15s forwards infinite;
 
     @media (max-width: 693px) {
-      animation: rollDown2670 10s forwards infinite;
+      animation: rollDown2670 15s forwards infinite;
     }
   }
 
   &:nth-child(3) {
     color: ${theme.colors.magenta};
 
-    animation: rollDown3 10s forwards infinite;
+    animation: rollDown3 15s forwards infinite;
 
     @media (max-width: 693px) {
-      animation: rollDown3670 10s forwards infinite;
+      animation: rollDown3670 15s forwards infinite;
+    }
+  }
+
+  &:nth-child(4) {
+    color: ${theme.colors.cyan};
+
+    animation: rollDown4 15s forwards infinite;
+
+    @media (max-width: 693px) {
+      animation: rollDown4670 15s forwards infinite;
+    }
+  }
+
+  &:nth-child(5) {
+    color: ${theme.colors.amber};
+
+    animation: rollDown5 15s forwards infinite;
+
+    @media (max-width: 693px) {
+      animation: rollDown5670 15s forwards infinite;
     }
   }
 
@@ -128,17 +148,17 @@ export const Text = styled.div`
       transform: rotateX(30deg);
       opacity: 0;
     }
-    11% {
+    5% {
       top: -5.8rem;
       transform: rotateX(0deg);
       opacity: 1;
     }
-    22% {
+    10% {
       top: -5.8rem;
       transform: rotateX(0deg);
       opacity: 1;
     }
-    33% {
+    15% {
       top: -1.6rem;
       transform: rotateX(30deg);
       opacity: 0;
@@ -146,22 +166,22 @@ export const Text = styled.div`
   }
 
   @keyframes rollDown2 {
-    33% {
+    20% {
       top: -10rem;
       transform: rotateX(30deg);
       opacity: 0;
     }
-    44% {
+    25% {
       top: -5.8rem;
       transform: rotateX(0deg);
       opacity: 1;
     }
-    55% {
+    30% {
       top: -5.8rem;
       transform: rotateX(0deg);
       opacity: 1;
     }
-    66% {
+    35% {
       top: -1.6rem;
       transform: rotateX(30deg);
       opacity: 0;
@@ -169,22 +189,68 @@ export const Text = styled.div`
   }
 
   @keyframes rollDown3 {
-    66% {
+    40% {
       top: -10rem;
       transform: rotateX(30deg);
       opacity: 0;
     }
-    77% {
+    45% {
       top: -5.8rem;
       transform: rotateX(0deg);
       opacity: 1;
     }
-    88% {
+    50% {
       top: -5.8rem;
       transform: rotateX(0deg);
       opacity: 1;
     }
-    99% {
+    55% {
+      top: -1.6rem;
+      transform: rotateX(30deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes rollDown4 {
+    60% {
+      top: -10rem;
+      transform: rotateX(30deg);
+      opacity: 0;
+    }
+    65% {
+      top: -5.8rem;
+      transform: rotateX(0deg);
+      opacity: 1;
+    }
+    70% {
+      top: -5.8rem;
+      transform: rotateX(0deg);
+      opacity: 1;
+    }
+    75% {
+      top: -1.6rem;
+      transform: rotateX(30deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes rollDown5 {
+    80% {
+      top: -10rem;
+      transform: rotateX(30deg);
+      opacity: 0;
+    }
+    85% {
+      top: -5.8rem;
+      transform: rotateX(0deg);
+      opacity: 1;
+    }
+    90% {
+      top: -5.8rem;
+      transform: rotateX(0deg);
+      opacity: 1;
+    }
+    95% {
       top: -1.6rem;
       transform: rotateX(30deg);
       opacity: 0;
@@ -197,17 +263,17 @@ export const Text = styled.div`
       transform: rotateX(30deg);
       opacity: 0;
     }
-    11% {
+    5% {
       top: -3.3rem;
       transform: rotateX(0deg);
       opacity: 1;
     }
-    22% {
+    10% {
       top: -3.3rem;
       transform: rotateX(0deg);
       opacity: 1;
     }
-    33% {
+    15% {
       top: -1.6rem;
       transform: rotateX(30deg);
       opacity: 0;
@@ -215,22 +281,22 @@ export const Text = styled.div`
   }
 
   @keyframes rollDown2670 {
-    33% {
+    20% {
       top: -5rem;
       transform: rotateX(30deg);
       opacity: 0;
     }
-    44% {
+    25% {
       top: -3.3rem;
       transform: rotateX(0deg);
       opacity: 1;
     }
-    55% {
+    30% {
       top: -3.3rem;
       transform: rotateX(0deg);
       opacity: 1;
     }
-    66% {
+    35% {
       top: -1.6rem;
       transform: rotateX(30deg);
       opacity: 0;
@@ -238,22 +304,68 @@ export const Text = styled.div`
   }
 
   @keyframes rollDown3670 {
-    66% {
+    40% {
       top: -5rem;
       transform: rotateX(30deg);
       opacity: 0;
     }
-    77% {
+    45% {
       top: -3.3rem;
       transform: rotateX(0deg);
       opacity: 1;
     }
-    88% {
+    50% {
       top: -3.3rem;
       transform: rotateX(0deg);
       opacity: 1;
     }
-    99% {
+    55% {
+      top: -1.6rem;
+      transform: rotateX(30deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes rollDown4670 {
+    60% {
+      top: -5rem;
+      transform: rotateX(30deg);
+      opacity: 0;
+    }
+    65% {
+      top: -3.3rem;
+      transform: rotateX(0deg);
+      opacity: 1;
+    }
+    70% {
+      top: -3.3rem;
+      transform: rotateX(0deg);
+      opacity: 1;
+    }
+    75% {
+      top: -1.6rem;
+      transform: rotateX(30deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes rollDown5670 {
+    80% {
+      top: -5rem;
+      transform: rotateX(30deg);
+      opacity: 0;
+    }
+    85% {
+      top: -3.3rem;
+      transform: rotateX(0deg);
+      opacity: 1;
+    }
+    90% {
+      top: -3.3rem;
+      transform: rotateX(0deg);
+      opacity: 1;
+    }
+    95% {
       top: -1.6rem;
       transform: rotateX(30deg);
       opacity: 0;

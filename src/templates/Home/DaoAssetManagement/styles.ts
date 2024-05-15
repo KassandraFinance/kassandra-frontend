@@ -67,6 +67,16 @@ export const TextWrapper = styled.div`
   `}
 `
 
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  gap: 1.6rem;
+
+  @media (max-width: 670px) {
+    flex-direction: column;
+    gap: 0;
+  }
+`
+
 export const CardsWrapper = styled.div`
   ${() => css`
     display: grid;

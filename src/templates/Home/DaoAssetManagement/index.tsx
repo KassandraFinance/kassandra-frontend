@@ -6,9 +6,11 @@ import Paragraph from '../../../components/Paragraph'
 import TransparentCard from '@/components/TransparentCard'
 import FadeInVertical from '@/components/Animations/FadeInVertical'
 import FadeInHorizontal from '@/components/Animations/FadeInHorizontal'
-
-import { CommunityGradientIcon } from '@/Icons/CommunityGradient'
-
+import { CompliantGrandient } from '@/Icons/CompliantGradient'
+import { HandshakeGradient } from '@/Icons/HandshakeGradient'
+import { InfrastructureGradient } from '@/Icons/InfrastructureGradient'
+import { CustodyGradient } from '@/Icons/CustodyGradient'
+import { FundAdminGradient } from '@/Icons/FundAdminGradient'
 import * as S from './styles'
 
 const DaoAssetManagement = () => {
@@ -17,37 +19,37 @@ const DaoAssetManagement = () => {
       <S.CardsWrapper>
         <FadeInVertical threshold={0.4}>
           <TransparentCard
-            title="Compliant"
-            logo={<CommunityGradientIcon />}
-            description="Kassandra is a DAO asset management platform that allows simplified access to tokenized portfolios."
+            title="Safety"
+            logo={<CompliantGrandient />}
+            description="Kassandra has audited smart contracts and has been working with decentralized technology for over three years, enabling managers, investors, and brokers to work with decentralized tokenized portfolios."
           />
         </FadeInVertical>
         <FadeInVertical threshold={0.7}>
           <TransparentCard
-            title="Transparency"
-            logo={<CommunityGradientIcon />}
-            description="Kassandra is a DAO asset management platform that allows simplified access to tokenized portfolios."
+            title="Brokering"
+            logo={<HandshakeGradient />}
+            description="Earn deposit fees for sharing tokenized portfolios and attract more investors to your decentralized portfolio."
           />
         </FadeInVertical>
         <FadeInVertical threshold={0.7}>
           <TransparentCard
             title="Infrastructure"
-            logo={<CommunityGradientIcon />}
-            description="Kassandra is a DAO asset management platform that allows simplified access to tokenized portfolios."
+            logo={<InfrastructureGradient />}
+            description="With low slippage investment and automatic rebalancing, your decentralized portfolio can be available 24/7."
           />
         </FadeInVertical>
         <FadeInVertical threshold={1}>
           <TransparentCard
             title="Custody"
-            logo={<CommunityGradientIcon />}
-            description="Kassandra is a DAO asset management platform that allows simplified access to tokenized portfolios."
+            logo={<CustodyGradient />}
+            description="All assets invested on the Kassandra platform stay in audited smart contracts, and only the investor can remove these assets. This feature makes Kassandra Platform an autocustodial system for decentralized portfolios."
           />
         </FadeInVertical>
         <FadeInVertical threshold={1}>
           <TransparentCard
             title="Fund Admin"
-            logo={<CommunityGradientIcon />}
-            description="Kassandra is a DAO asset management platform"
+            logo={<FundAdminGradient />}
+            description="You can change the weight, add, and remove assets from your portfolio without complications."
           />
         </FadeInVertical>
       </S.CardsWrapper>
@@ -55,17 +57,30 @@ const DaoAssetManagement = () => {
       <FadeInHorizontal threshold={0.5}>
         <S.TextWrapper>
           <Subtitle text="Simplifying Tokenized Portfolios Interaction" />
-          <Paragraph text="Kassandra is a DAO asset management platform that allows simplified access to tokenized portfolios, providing the apparatus needed to create and manage tokenized crypto portfolios while connecting these managers to investors eager to diversify their investment." />
+          <Paragraph text="With Kassandra, you can create a decentralized portfolio with an easy-to-use interface, eliminating all complexities associated with managing crypto assets. We have developed a decentralized platform with similar characteristics to hedge funds and ETFs, but decentralized. With a user-friendly interface, you can easily share these portfolios with family and friends and earn." />
 
-          <Link href="https://app.kassandra.finance/" passHref>
-            <NewButton
-              background="primary"
-              className="btn"
-              text="See our Thematic Investment"
-              fullWidth
-              as="a"
-            />
-          </Link>
+          <S.ButtonsWrapper>
+            <Link href="https://app.kassandra.finance/" passHref>
+              <NewButton
+                background="primary"
+                className="btn"
+                text="See our Portfolios"
+                fullWidth
+                as="a"
+              />
+            </Link>
+
+            <Link href="https://app.kassandra.finance/manage" passHref>
+              <NewButton
+                size="medium"
+                background="white"
+                className="btn"
+                text="Create your Portfolio"
+                fullWidth
+                as="a"
+              />
+            </Link>
+          </S.ButtonsWrapper>
         </S.TextWrapper>
       </FadeInHorizontal>
     </S.InteractionDao>

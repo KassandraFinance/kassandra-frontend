@@ -69,10 +69,27 @@ export const ImageWrapper = styled.div`
   ${() => css`
     position: relative;
     margin-top: 8rem;
+    animation: fade-in 1.5s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.75);
 
     img {
       position: relative;
       z-index: 10;
+    }
+
+    background: linear-gradient(
+      178.27deg,
+      rgba(21, 17, 23, 0) 1.46%,
+      #151117 80.19%
+    );
+
+    @keyframes fade-in {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
     }
   `}
 `

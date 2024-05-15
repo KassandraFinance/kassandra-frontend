@@ -15,49 +15,49 @@ const socialMedias = [
   {
     type: 'Discord',
     icon: DiscordIcon,
-    url: 'url-here',
+    url: 'https://discord.com/invite/fAqpbP6tFw',
     text: 'Enter the Kassandra Server'
   },
   {
     type: 'X',
     icon: XIcon,
-    url: 'url-here',
+    url: 'https://twitter.com/dao_kassandra',
     text: 'Follow @dao_kassandra'
   },
   {
     type: 'Telegram',
     icon: TelegramIcon,
-    url: 'url-here',
+    url: 'https://t.me/KassandraDAO',
     text: 'Join Kassandra Group'
   },
   {
     type: 'Github',
     icon: GithubIcon,
-    url: 'url-here',
+    url: 'https://github.com/KassandraFinance',
     text: 'Watch Kassandra Development'
   },
   {
     type: 'Mailing List',
     icon: MailIcon,
-    url: 'url-here',
+    url: '/blog',
     text: "Don't miss Kassandra's News"
   },
   {
     type: 'Medium',
     icon: MediumIcon,
-    url: 'url-here',
+    url: 'https://kassandrafoundation.medium.com/',
     text: 'Development Logs'
   },
   {
     type: 'Forum',
     icon: ForumIcon,
-    url: 'url-here',
+    url: 'https://gov.kassandra.finance/',
     text: 'Shape Kassandra your way'
   },
   {
     type: 'Documentation',
     icon: DocumentIcon,
-    url: 'url-here',
+    url: 'https://kassandra-1.gitbook.io/kassandras-onboarding-docs',
     text: 'Get onboarded on Kassandra'
   }
 ]
@@ -68,7 +68,7 @@ export function CommunityTemplate() {
       <S.ContentWrapper>
         <S.TextWrapper>
           <S.H1>Join the Kassandra Community</S.H1>
-          <S.Text>Something here to support the title above</S.Text>
+          <S.Text>Join the future of decentralized asset management</S.Text>
         </S.TextWrapper>
 
         <S.LinksWrapper>
@@ -76,7 +76,12 @@ export function CommunityTemplate() {
             const Icon = socialMedia.icon
             return (
               <S.Link key={socialMedia.type}>
-                <S.IconWrapper key={socialMedia.type} href={socialMedia.url}>
+                <S.IconWrapper
+                  key={socialMedia.type}
+                  href={socialMedia.url}
+                  target="_blank"
+                  rel="noreferrer nofollow"
+                >
                   <Icon fill="#FCFCFC" />
                 </S.IconWrapper>
                 <S.LinkContent>

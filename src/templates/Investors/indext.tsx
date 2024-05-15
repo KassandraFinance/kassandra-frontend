@@ -66,14 +66,9 @@ const Investors = () => {
         <CallToActionEndPage
           text="Ready to join?"
           firstButton={{
-            href: '/',
+            href: 'https://app.kassandra.finance/',
             text: 'Join Now',
             type: 'primary'
-          }}
-          secondButton={{
-            href: '/',
-            text: 'Get Started',
-            type: 'white'
           }}
         />
       </S.CallToActionEndPageContainer>

@@ -8,6 +8,7 @@ import ArbitrumLogo from '../../../public/assets/logos/partners/arbitrum.png'
 import PangolinLogo from '../../../public/assets/logos/partners/pangolin.png'
 import AvalancheLogo from '../../../public/assets/logos/partners/avalanche.png'
 import TransferoLogo from '../../../public/assets/logos/partners/transfero.png'
+import BalancerLogo from '../../../public/assets/logos/partners/balancer.png'
 
 import * as S from './styles'
 
@@ -19,7 +20,8 @@ const partnersList = [
   { name: 'yak', logo: YakLogo },
   { name: 'transfero', logo: TransferoLogo },
   { name: '1inch', logo: OneinchLogo },
-  { name: 'notus', logo: NotusLogo }
+  { name: 'notus', logo: NotusLogo },
+  { name: 'balancer', logo: BalancerLogo }
 ]
 
 const PartnersMarquee = () => {
@@ -28,6 +30,7 @@ const PartnersMarquee = () => {
       <Marquee autoFill>
         {partnersList.map(partner => (
           <img
+            className={partner.name === 'balancer' ? 'balancer' : undefined}
             src={partner.logo.src}
             alt={`${partner.name} partner logo`}
             key={partner.name}
