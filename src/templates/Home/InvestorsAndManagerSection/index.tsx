@@ -33,7 +33,7 @@ const InvestorsAndManagerSection = () => {
           title="Managers"
           color="#FFBF00"
           subtitle="For Managers"
-          text='With an easy-to-use interface, you can manage portfolios by simply choosing the composition and percentage allocation without complications. With Kassandra, you can create incentives to build a community around your portfolio, by splitting your deposit fee with brokers through our "Share & Earn" feature'
+          text='With an easy-to-use interface, you can manage portfolios by simply choosing the composition and percentage allocation without complications. With Kassandra, you can create incentives to build a community around your portfolio, by splitting your deposit fee with brokers through our "Share & Earn" feature.'
           img={kassandraHeadImg}
           alt="A person from the back"
           links={{
