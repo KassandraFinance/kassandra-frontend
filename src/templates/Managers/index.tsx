@@ -74,7 +74,7 @@ const Managers = () => {
                   title="Get onboarded"
                   paragraph="Kassandra has a ready documentation to answer all your doubts. You can also enter our discord community to discuss your ideas and get supported."
                   firstButton={{
-                    text: 'Read our Documentacion',
+                    text: 'Read our Documentation',
                     type: 'primary',
                     href: 'https://kassandra-1.gitbook.io/kassandras-onboarding-docs'
                   }}
