@@ -38,6 +38,7 @@ const theme = {
       textLg500: '500 1.8rem/2.2rem var(--default-font-sans)',
       textLg700: '700 1.8rem/2.4rem var(--default-font-sans)',
       textBase300: '300 1.6rem/2.4rem var(--default-font-sans)',
+      textBase400: '400 1.6rem/2.4rem var(--default-font-sans)',
       textBase500: '500 1.6rem/2.4rem var(--default-font-sans)',
       textBase700: '700 1.6rem/2rem var(--default-font-sans)',
       textSm300: '300 1.4rem/2.4rem var(--default-font-sans)',
@@ -199,6 +200,10 @@ export const device = {
   tabletSmall: `(max-width: ${size.tabletSmall})`,
   tabletLarge: `(max-width: ${size.tabletLarge})`,
   desktop: `(max-width: ${size.desktop})`
+} as const
+
+export const headerSize = {
+  desktop: '10.8rem'
 } as const
 
 export default theme

@@ -1,19 +1,16 @@
 import React from 'react'
-import Image from 'next/image'
+import Link from 'next/link'
 
 import HeroHome from './HeroHome'
-import InvestorsSection from './InvestorsSection'
+import NewButton from '@/components/NewButton'
 import WavyLine from '../../components/WavyLine'
-import ManagerSection from './ManagerSection'
-import DaoSection from './DaoSection'
-import KacySection from './KacySection'
-import LatestNews from './LatestNews'
-import Subscribe from './Subscribe'
+import DaoAssetManagement from './DaoAssetManagement'
+import PartnersMarquee from '@/components/PartnersMarquee'
+import CallToActionEndPage from '@/components/CallToActionEndPage'
+import FadeInVertical from '@/components/Animations/FadeInVertical'
+import InvestorsAndManagerSection from './InvestorsAndManagerSection'
 
-import light3 from '../../../public/assets/images/backgroundHome/light-mobile3.png'
-import lightTable5 from '../../../public/assets/images/backgroundHome/light-tablet5.png'
-import lightTable6 from '../../../public/assets/images/backgroundHome/light-tablet6.png'
-import lightTable7 from '../../../public/assets/images/backgroundHome/light-tablet7.png'
+import { ArrowRightCircle } from '@/Icons/Arrow-right-circle'
 
 import * as S from './styles'
 
@@ -22,47 +19,33 @@ const NewHome = () => {
     <S.HomeBackgroundContainer>
       <HeroHome />
 
-      <S.Container>
-        <InvestorsSection />
-      </S.Container>
+      <PartnersMarquee />
 
-      <S.WavyOneWrapper>
-        <S.ImgWrapper>
-          <Image src={light3} alt="Ball of light" />
-        </S.ImgWrapper>
+      <S.SectionContainer>
+        <DaoAssetManagement />
+      </S.SectionContainer>
 
-        <S.ImgTabletWrapper1>
-          <Image src={lightTable5} alt="Ball of light" />
-        </S.ImgTabletWrapper1>
+      <WavyLine color="color1" />
 
-        <WavyLine color="color1" />
-      </S.WavyOneWrapper>
+      <S.SectionContainer>
+        <InvestorsAndManagerSection />
+      </S.SectionContainer>
 
-      <S.Container>
-        <ManagerSection />
-      </S.Container>
+      <FadeInVertical threshold={0.5}>
+        <S.CallToActionEndPageContainer>
+          <CallToActionEndPage
+            text="Want to be Part of DeFi’s Future?"
+            firstButton={{
+              href: '/community',
+              text: 'Join The Community',
+              type: 'primary',
+              icon: <ArrowRightCircle />
+            }}
+          />
+        </S.CallToActionEndPageContainer>
+      </FadeInVertical>
 
-      <S.WavyOneWrapper>
-        <S.ImgTabletWrapper2>
-          <Image src={lightTable6} alt="Ball of light" />
-        </S.ImgTabletWrapper2>
-
-        <S.ImgTabletWrapper3>
-          <Image src={lightTable7} alt="Ball of light" />
-        </S.ImgTabletWrapper3>
-
-        <WavyLine color="color2" />
-      </S.WavyOneWrapper>
-
-      <S.Container>
-        <DaoSection />
-
-        <KacySection />
-      </S.Container>
-
-      <LatestNews />
-
-      <Subscribe />
+      <WavyLine color="color1" />
     </S.HomeBackgroundContainer>
   )
 }

@@ -1,12 +1,13 @@
 import { useRouter } from 'next/router'
-import useMatomo from '@/hooks/useMatomo'
 
+import useMatomo from '@/hooks/useMatomo'
 import Hero from '../../components/Hero'
 import Button from '../../components/Button'
-import Products from './Products'
 import Advantages from './Advantages'
-import Partners from './Partners'
-import Contribute from '../../components/Contribute'
+import Partners from '../../components/Partners'
+import FadeIn from '@/components/Animations/FadeIn'
+import FAQ from './FAQ'
+import CallToActionEndPage from '@/components/CallToActionEndPage'
 
 import * as S from './styles'
 
@@ -49,17 +50,28 @@ const Investors = () => {
             }
           />
         </Hero>
-        <Products />
 
         <Advantages />
 
-        <Partners />
+        <S.PartnersWrapper>
+          <Partners />
+        </S.PartnersWrapper>
+
+        <FadeIn threshold={0.5}>
+          <FAQ />
+        </FadeIn>
       </S.Investors>
 
-      <Contribute
-        title="Invest in your favorite funds and get KACY"
-        text="Accumulate $KACY and earn a stake in all of our protocol fees."
-      />
+      <S.CallToActionEndPageContainer>
+        <CallToActionEndPage
+          text="Ready to join?"
+          firstButton={{
+            href: 'https://app.kassandra.finance/',
+            text: 'Join Now',
+            type: 'primary'
+          }}
+        />
+      </S.CallToActionEndPageContainer>
     </>
   )
 }

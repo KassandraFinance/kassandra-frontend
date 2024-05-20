@@ -1,16 +1,13 @@
 import React from 'react'
-import Image from 'next/image'
 import AliceCarousel from 'react-alice-carousel'
 import 'react-alice-carousel/lib/alice-carousel.css'
 import { InView } from 'react-intersection-observer'
 
 import { useMedium } from '@/hooks/query/useMedium'
 
-import LatestNewsHeader from './LatestNewsHeader'
 import NewsCard from './NewsCard'
 import FadeIn from '@/components/Animations/FadeIn'
-
-import lightTable10 from '@assets/images/backgroundHome/light-tablet10.png'
+import Subtitle from '@/components/Subtitle'
 
 import * as S from './styles'
 
@@ -58,12 +55,10 @@ const LatestNews = () => {
       {({ inView, ref }) => {
         return (
           <S.LatestNewsContainer ref={ref}>
-            <S.ImgTabletWrapper>
-              <Image src={lightTable10} alt="Ball of light" />
-            </S.ImgTabletWrapper>
-
             <FadeIn threshold={0.5}>
-              <LatestNewsHeader />
+              <S.SubTitleContainer>
+                <Subtitle text="Read About Kassandra’s Updates" />
+              </S.SubTitleContainer>
             </FadeIn>
 
             {inView ? (

@@ -12,8 +12,8 @@ const lineColor = {
 export const WaveContainer = styled.div`
   width: 100%;
   height: fit-content;
-  margin-top: 20.1rem;
-  margin-bottom: 13.1rem;
+  margin-top: 12rem;
+  margin-bottom: 12rem;
 
   overflow-x: hidden;
 `

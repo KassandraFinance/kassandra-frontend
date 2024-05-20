@@ -9,5 +9,11 @@ export { LockerIcon } from './Locker'
 export { SearchIcon } from './Search'
 export { CheckIcon } from './Check'
 export { LineGradient } from './lineGradient'
+export { TelegramIcon } from './Telegram'
+export { XIcon } from './X'
+export { MediumIcon } from './Medium'
+export { MailIcon } from './Mail'
+export { ForumIcon } from './Forum'
+export { DocumentIcon } from './Document'
 
 export type SvgProps = React.SVGProps<SVGSVGElement>

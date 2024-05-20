@@ -39,19 +39,15 @@ interface IOpen {
 }
 
 export const Answer = styled.div<IOpen>`
-  margin: ${props => (props.isOpen ? '2.4rem 2.4rem 0' : '0 2.4rem 0')};
-  max-height: ${props => (props.isOpen ? 'auto' : '0')};
-  overflow: hidden;
-  display: flex;
-  transition: all 0.3s ease-in-out;
-`
-export const AnswerText = styled.p`
-  ${({ theme }) => css`
-    position: relative;
-    font-size: ${theme.font.sizes.font16};
-    font-weight: ${theme.font.weight.light};
-    line-height: 180%;
-    color: #ffffff;
+  ${({ theme, isOpen }) => css`
+    margin: ${isOpen ? '2.4rem 2.4rem 0' : '0 2.4rem 0'};
+    max-height: ${isOpen ? 'auto' : '0'};
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.3s ease-in-out;
+
     a {
       text-decoration: underline;
       position: relative;
@@ -62,6 +58,15 @@ export const AnswerText = styled.p`
         color: ${theme.colors.cyan};
       }
     }
+  `}
+`
+export const AnswerText = styled.p`
+  ${({ theme }) => css`
+    position: relative;
+    font-size: ${theme.font.sizes.font16};
+    font-weight: ${theme.font.weight.light};
+    line-height: 180%;
+    color: #ffffff;
   `}
 `
 

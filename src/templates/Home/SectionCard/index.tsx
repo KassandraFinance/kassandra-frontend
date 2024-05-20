@@ -1,17 +1,23 @@
 import React from 'react'
-import Image, { StaticImageData } from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import Image, { StaticImageData } from 'next/image'
 
 import useMatomo from '@/hooks/useMatomo'
 
-import Button from '../../../components/Button'
-import FadeInHorizontal from '../../../components/Animations/FadeInHorizontal'
+import NewButton from '@/components/NewButton'
 import Paragraph from '../../../components/Paragraph'
 import SectionTitle from '../../../components/SectionTitle'
 import Subtitle from '../../../components/Subtitle'
 
+import { ArrowRightCircle } from '@/Icons/Arrow-right-circle'
+
 import * as S from './styles'
+
+type Links = {
+  getStarted: string
+  learnMore: string
+}
 
 interface ISectionCardProps {
   number: string
@@ -19,10 +25,10 @@ interface ISectionCardProps {
   color: string
   subtitle: string
   text: string
-  btnText: string
-  link: string
+  links: Links
   img: StaticImageData
   alt: string
+  reverseLayout?: boolean
 }
 
 const SectionCard = ({
@@ -31,79 +37,65 @@ const SectionCard = ({
   color,
   subtitle,
   text,
-  btnText,
-  link,
+  links,
   img,
-  alt
+  alt,
+  reverseLayout = false
 }: ISectionCardProps) => {
   const { trackEvent } = useMatomo()
   const router = useRouter()
 
   return (
-    <S.Container>
-      <FadeInHorizontal threshold={0.5}>
-        <S.TextContainer>
-          <SectionTitle
-            title={title}
-            titleColor={color}
-            titleNumber={number}
-            as="h2"
-          />
+    <S.Container reverseLayout={reverseLayout}>
+      <S.TextContainer>
+        <SectionTitle
+          title={title}
+          titleColor={color}
+          titleNumber={number}
+          as="h2"
+        />
 
-          <Subtitle text={subtitle} as="h3" />
-          <Paragraph text={text} />
+        <Subtitle text={subtitle} as="h3" />
+        <Paragraph text={text} />
 
-          <Link href={link} passHref>
-            <a>
-              <Button
-                className="btn"
-                text={btnText}
-                size="huge"
-                icon={
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z"
-                      stroke="#F1F0F1"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M9 12.2L12.2 8.99999L9 5.79999"
-                      stroke="#F1F0F1"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M5.7998 9H12.1998"
-                      stroke="#F1F0F1"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                }
-                backgroundSecondary
-                onClick={() =>
-                  trackEvent({
-                    category: router.pathname,
-                    action: `click-on-button | ${number}-${title} | ${router.pathname}`,
-                    name: `${btnText}`
-                  })
-                }
-              />
-            </a>
+        <S.ButtonWrapper>
+          <Link href={links.getStarted} passHref>
+            <NewButton
+              className="btn"
+              as="a"
+              text="Get Started"
+              size="huge"
+              background="secondary"
+              onClick={() =>
+                trackEvent({
+                  category: router.pathname,
+                  action: `click-on-button | ${number}-${title} | ${router.pathname}`,
+                  name: 'Get Started'
+                })
+              }
+            />
           </Link>
-        </S.TextContainer>
-      </FadeInHorizontal>
 
-      <FadeInHorizontal threshold={0.5}>
-        <Image src={img} alt={alt} />
-      </FadeInHorizontal>
+          <Link href={links.learnMore} passHref>
+            <NewButton
+              as="a"
+              size="large"
+              text="Learn More"
+              background="white"
+              icon={<ArrowRightCircle />}
+              onClick={() =>
+                trackEvent({
+                  category: router.pathname,
+                  action: `click-on-button | ${number}-${title} | ${router.pathname}`,
+                  name: 'Learn More'
+                })
+              }
+            />
+          </Link>
+        </S.ButtonWrapper>
+      </S.TextContainer>
+
+      <Image src={img} alt={alt} />
     </S.Container>
   )
 }

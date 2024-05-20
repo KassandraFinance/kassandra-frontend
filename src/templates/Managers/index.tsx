@@ -7,8 +7,12 @@ import ChangeAllocations from './ChangeAllocations'
 import AllocationsInexpensive from './AllocationsInexpensive'
 import ManagersInterface from './ManagersInterface'
 import CreateFund from './CreateFunds'
-import Contribute from '../../components/Contribute'
 import Button from '../../components/Button'
+import SectionTransparentCard from '@/components/SectionTransparentCard'
+import CallToActionEndPage from '@/components/CallToActionEndPage'
+import FadeInVertical from '@/components/Animations/FadeInVertical'
+
+import { ArrowRightCircle } from '@/Icons/Arrow-right-circle'
 
 import * as S from './styles'
 
@@ -36,14 +40,14 @@ const Managers = () => {
                 as="a"
                 href="https://app.kassandra.finance/manage"
                 target="_blank"
-                text="Create your Pool"
+                text="Create your Portfolio"
                 size="huge"
                 backgroundPrimary
                 onClick={() =>
                   trackEvent({
                     category: router.pathname,
                     action: `click-on-button | Home-Managers | ${router.pathname}`,
-                    name: 'Create your Pool'
+                    name: 'Create your Portfolio'
                   })
                 }
                 icon={
@@ -64,15 +68,41 @@ const Managers = () => {
 
             <AllocationsInexpensive />
 
+            <S.SectionTransparentCardContainer>
+              <FadeInVertical threshold={0.5}>
+                <SectionTransparentCard
+                  title="Get onboarded"
+                  paragraph="Kassandra has a ready documentation to answer all your doubts. You can also enter our discord community to discuss your ideas and get supported."
+                  firstButton={{
+                    text: 'Read our Documentation',
+                    type: 'primary',
+                    href: 'https://kassandra-1.gitbook.io/kassandras-onboarding-docs'
+                  }}
+                  secondButton={{
+                    text: 'Enter Kassandra Community',
+                    type: 'white',
+                    href: '/community'
+                  }}
+                />
+              </FadeInVertical>
+            </S.SectionTransparentCardContainer>
+
             <CreateFund />
           </S.ManagerContent>
         </S.ManagerContainer>
       </S.ManagerMainContainer>
 
-      <Contribute
-        title="Reach out to start building your first strategy"
-        text="Get onboarded to our protocol and begin your money management journey with KassandraDAO"
-      />
+      <S.CallToActionEndPageContainer>
+        <CallToActionEndPage
+          text="The Managers Incentive Program"
+          firstButton={{
+            text: 'Learn More',
+            type: 'primary',
+            href: 'https://app.kassandra.finance/manage',
+            icon: <ArrowRightCircle />
+          }}
+        ></CallToActionEndPage>
+      </S.CallToActionEndPageContainer>
     </>
   )
 }

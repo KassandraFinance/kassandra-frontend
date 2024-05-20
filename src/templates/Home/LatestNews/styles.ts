@@ -2,7 +2,9 @@ import styled from 'styled-components'
 import theme from '../../../styles/theme'
 
 export const LatestNewsContainer = styled.section`
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `
 
 export const NewsCardContainer = styled.div`
@@ -56,4 +58,8 @@ export const ImgTabletWrapper = styled.div`
     bottom: -20rem;
     display: block;
   }
+`
+
+export const SubTitleContainer = styled.div`
+  text-align: center;
 `

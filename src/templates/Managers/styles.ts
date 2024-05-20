@@ -43,3 +43,21 @@ export const ManagerContent = styled.div`
     gap: 18rem;
   }
 `
+
+export const SectionTransparentCardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-inline: 2.4rem;
+
+  @media (max-width: 576px) {
+    padding-inline: 1.6rem;
+  }
+`
+
+export const CallToActionEndPageContainer = styled.div`
+  max-width: 30rem;
+  margin: 0 auto;
+  margin-top: 20rem;
+  margin-bottom: 20rem;
+`
